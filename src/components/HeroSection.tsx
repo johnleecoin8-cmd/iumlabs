@@ -1,9 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, TrendingUp, Users, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { useMouseGlow } from "@/hooks/useMouseGlow";
 import AnimatedText from "./AnimatedText";
 import ScrambleText from "./ScrambleText";
 import { useParallax } from "@/hooks/useParallax";
+import dashboardMockup from "@/assets/dashboard-mockup.png";
 
 const HeroSection = () => {
   const { ref: glowRef, position, isHovering } = useMouseGlow();
@@ -143,68 +144,27 @@ const HeroSection = () => {
             </div>
           </div>
 
-          {/* Right Content - Floating Cards */}
-          <div className="relative hidden lg:block h-[500px]">
-            {/* Main Card */}
-            <div className="absolute top-8 left-8 w-72 glass-card-hover p-6 animate-float card-3d">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                  <TrendingUp className="w-5 h-5 text-primary-foreground" />
+          {/* Right Content - Dashboard Mockup */}
+          <div className="relative hidden lg:block">
+            <div className="relative animate-float">
+              {/* Glow effect behind image */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 via-accent/20 to-gradient-pink/30 rounded-3xl blur-2xl opacity-60" />
+              
+              {/* Main dashboard image */}
+              <div className="relative glass-card p-2 rounded-2xl overflow-hidden">
+                <img 
+                  src={dashboardMockup} 
+                  alt="Web3 Marketing Analytics Dashboard" 
+                  className="rounded-xl w-full h-auto shadow-2xl"
+                />
+                
+                {/* Floating badges */}
+                <div className="absolute -top-3 -right-3 glass-card px-4 py-2 rounded-full animate-bounce-slow">
+                  <span className="text-sm font-semibold text-gradient">Live Data</span>
                 </div>
-                <div>
-                  <p className="text-sm font-medium">Campaign ROI</p>
-                  <p className="text-xs text-muted-foreground">Last 30 days</p>
-                </div>
-              </div>
-              <div className="text-3xl font-bold text-gradient mb-2">+847%</div>
-              <div className="h-16 bg-gradient-to-r from-primary/20 to-accent/20 rounded-lg flex items-end gap-1 p-2">
-                {[40, 65, 45, 80, 55, 90, 70, 95].map((h, i) => (
-                  <div 
-                    key={i} 
-                    className="flex-1 bg-gradient-to-t from-primary to-accent rounded-sm animate-bar-grow"
-                    style={{ 
-                      height: `${h}%`, 
-                      animationDelay: `${1500 + i * 100}ms`,
-                      transformOrigin: 'bottom'
-                    }}
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Secondary Card */}
-            <div className="absolute top-48 right-4 w-64 glass-card-hover p-5 animate-float-delayed card-3d">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-gradient-pink to-gradient-orange flex items-center justify-center">
-                  <Users className="w-4 h-4 text-primary-foreground" />
-                </div>
-                <div>
-                  <p className="text-sm font-medium">Community Growth</p>
-                </div>
-              </div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-2xl font-bold">52.4K</span>
-                <span className="text-sm text-green-400 animate-pulse">+12.5%</span>
-              </div>
-              <p className="text-xs text-muted-foreground mt-1">Active members this week</p>
-            </div>
-
-            {/* Tertiary Card */}
-            <div className="absolute bottom-12 left-16 w-56 glass-card-hover p-4 animate-float card-3d" style={{ animationDelay: '-1.5s' }}>
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-gradient-cyan to-primary flex items-center justify-center">
-                  <Zap className="w-4 h-4 text-primary-foreground" />
-                </div>
-                <p className="text-sm font-medium">Quick Stats</p>
-              </div>
-              <div className="grid grid-cols-2 gap-2 text-center">
-                <div className="bg-secondary/50 rounded-lg p-2">
-                  <p className="text-lg font-bold">200+</p>
-                  <p className="text-xs text-muted-foreground">Projects</p>
-                </div>
-                <div className="bg-secondary/50 rounded-lg p-2">
-                  <p className="text-lg font-bold">$500M</p>
-                  <p className="text-xs text-muted-foreground">Raised</p>
+                
+                <div className="absolute -bottom-3 -left-3 glass-card px-4 py-2 rounded-full">
+                  <span className="text-sm font-medium text-green-400">+847% ROI</span>
                 </div>
               </div>
             </div>

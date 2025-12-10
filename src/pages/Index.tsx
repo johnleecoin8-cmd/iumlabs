@@ -6,7 +6,6 @@ import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
-import CustomCursor from "@/components/CustomCursor";
 import PageIntro from "@/components/PageIntro";
 
 const Index = () => {
@@ -20,9 +19,6 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       {/* Page Intro Animation */}
       {!introComplete && <PageIntro onComplete={handleIntroComplete} />}
-      
-      {/* Custom Cursor */}
-      <CustomCursor />
       
       {/* Noise texture overlay */}
       <div className="noise-overlay" />
