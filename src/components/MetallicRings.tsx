@@ -88,9 +88,9 @@ function CryptoBridgeHero() {
 
 const MetallicRings = () => {
   return (
-    <div className="w-full h-full min-h-[400px]">
+    <div className="w-full h-full min-h-[500px]">
       <Canvas
-        camera={{ position: [0, 0, 6], fov: 45 }}
+        camera={{ position: [0, 0, 5], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
         style={{ background: 'transparent' }}
       >
