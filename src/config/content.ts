@@ -447,3 +447,18 @@ export const projectsPage = {
 export const intro = {
   tagline: "Web3 마케팅 에이전시",
 };
+
+// =====================================================
+// Special Offer 컨택트 폼
+// =====================================================
+export const specialOffer = {
+  title: "CONTACT US TO GET A SPECIAL OFFER",
+  emailPlaceholder: "Email",
+  namePlaceholder: "Name",
+  commentsPlaceholder: "Comments",
+  buttonText: "SEND",
+  successTitle: "문의가 접수되었습니다!",
+  successMessage: "빠른 시일 내에 연락드리겠습니다.",
+  errorTitle: "전송 실패",
+  errorMessage: "문의 접수에 실패했습니다. 다시 시도해주세요.",
+};

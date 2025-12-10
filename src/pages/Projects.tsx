@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PortfolioSection from "@/components/PortfolioSection";
 import CTASection from "@/components/CTASection";
+import SpecialOfferForm from "@/components/SpecialOfferForm";
 import PageTransition from "@/components/PageTransition";
 import { projectsPage } from "@/config/content";
 
@@ -23,6 +24,7 @@ const Projects = () => {
 
         <PortfolioSection />
         <CTASection />
+        <SpecialOfferForm />
         <Footer />
       </PageTransition>
     </div>
