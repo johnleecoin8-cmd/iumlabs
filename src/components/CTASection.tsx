@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Link } from "react-router-dom";
+import { cta, brand } from "@/config/content";
 
 const CTASection = () => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
@@ -39,44 +41,47 @@ const CTASection = () => {
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-8">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                <span className="text-sm font-medium text-primary">Free Consultation Available</span>
+                <span className="text-sm font-medium text-primary">{cta.badge}</span>
               </div>
 
               {/* Heading */}
               <h2 className="text-display-md md:text-display-lg mb-6">
-                Ready to launch
+                {cta.headline.line1}
                 <br />
-                <span className="text-gradient">your project?</span>
+                <span className="text-gradient">{cta.headline.highlight}</span>
               </h2>
 
               <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
-                Get a free consultation with our Web3 marketing experts and discover 
-                how we can help you succeed in the Korean market.
+                {cta.description}
               </p>
 
               {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-                <Button variant="gradient" size="lg">
-                  Schedule a Call
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
-                <Button variant="glass" size="lg">
-                  Send a Message
-                </Button>
+                <Link to="/contact">
+                  <Button variant="gradient" size="lg">
+                    {cta.buttons.primary}
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
+                </Link>
+                <Link to="/contact">
+                  <Button variant="glass" size="lg">
+                    {cta.buttons.secondary}
+                  </Button>
+                </Link>
               </div>
 
               {/* Contact Info */}
               <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
-                <a href="mailto:hello@cryptobridge.kr" className="hover:text-primary transition-colors">
-                  hello@cryptobridge.kr
+                <a href={`mailto:${brand.email}`} className="hover:text-primary transition-colors">
+                  {brand.email}
+                </a>
+                <span className="hidden md:inline text-border">·</span>
+                <a href={brand.telegramLink} className="hover:text-primary transition-colors">
+                  {cta.contactLinks.telegram}
                 </a>
                 <span className="hidden md:inline text-border">·</span>
                 <a href="#" className="hover:text-primary transition-colors">
-                  Telegram
-                </a>
-                <span className="hidden md:inline text-border">·</span>
-                <a href="#" className="hover:text-primary transition-colors">
-                  KakaoTalk
+                  {cta.contactLinks.kakao}
                 </a>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { brand, intro } from '@/config/content';
 
 interface PageIntroProps {
   onComplete: () => void;
@@ -105,7 +106,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
           
           {/* Brand text with stagger */}
           <div className="flex gap-1 text-3xl font-bold">
-            {'CryptoBridge'.split('').map((char, i) => (
+            {brand.name.split('').map((char, i) => (
               <span
                 key={i}
                 className="inline-block animate-letter-pop"
@@ -118,7 +119,7 @@ const PageIntro = ({ onComplete }: PageIntroProps) => {
           
           {/* Tagline */}
           <p className="text-muted-foreground mt-2 animate-fade-up delay-500">
-            Web3 Marketing Agency
+            {intro.tagline}
           </p>
         </div>
       </div>

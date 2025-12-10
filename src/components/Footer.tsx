@@ -1,17 +1,5 @@
-const footerLinks = {
-  services: [
-    { name: "Web3 Marketing", href: "#" },
-    { name: "NFT Marketing", href: "#" },
-    { name: "DeFi Marketing", href: "#" },
-    { name: "Exchange Listing", href: "#" },
-  ],
-  company: [
-    { name: "About", href: "#" },
-    { name: "Case Studies", href: "#" },
-    { name: "Blog", href: "#" },
-    { name: "Contact", href: "#" },
-  ],
-};
+import { Link } from "react-router-dom";
+import { footer, brand } from "@/config/content";
 
 const Footer = () => {
   return (
@@ -23,18 +11,17 @@ const Footer = () => {
         <div className="grid md:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="md:col-span-2">
-            <a href="/" className="inline-block mb-4">
+            <Link to="/" className="inline-block mb-4">
               <span className="text-xl font-semibold tracking-tight text-gradient">
-                CryptoBridge
+                {brand.name}
               </span>
-            </a>
+            </Link>
             <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
-              Korea's leading Web3 marketing agency. We help blockchain projects 
-              succeed with strategic marketing and deep local expertise.
+              {brand.description}
             </p>
             {/* Social links */}
             <div className="flex items-center gap-4 mt-6">
-              {["Twitter", "Telegram", "Discord"].map((social) => (
+              {footer.social.map((social) => (
                 <a
                   key={social}
                   href="#"
@@ -48,16 +35,16 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h4 className="font-medium text-sm mb-4 text-foreground">Services</h4>
+            <h4 className="font-medium text-sm mb-4 text-foreground">{footer.servicesTitle}</h4>
             <ul className="space-y-3">
-              {footerLinks.services.map((link) => (
+              {footer.services.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -65,16 +52,16 @@ const Footer = () => {
 
           {/* Company */}
           <div>
-            <h4 className="font-medium text-sm mb-4 text-foreground">Company</h4>
+            <h4 className="font-medium text-sm mb-4 text-foreground">{footer.companyTitle}</h4>
             <ul className="space-y-3">
-              {footerLinks.company.map((link) => (
+              {footer.company.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
+                  <Link
+                    to={link.href}
                     className="text-muted-foreground hover:text-primary transition-colors text-sm"
                   >
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -84,14 +71,14 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2024 CryptoBridge Korea
+            {brand.copyright}
           </p>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
             <a href="#" className="hover:text-primary transition-colors">
-              Privacy
+              {footer.legal.privacy}
             </a>
             <a href="#" className="hover:text-primary transition-colors">
-              Terms
+              {footer.legal.terms}
             </a>
           </div>
         </div>

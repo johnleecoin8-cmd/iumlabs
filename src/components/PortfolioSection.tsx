@@ -1,53 +1,32 @@
 import { ArrowUpRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useTilt } from "@/hooks/useTilt";
+import { Link } from "react-router-dom";
 import portfolioMetaverse from "@/assets/portfolio-metaverse.png";
 import portfolioDefi from "@/assets/portfolio-defi.png";
 import portfolioDao from "@/assets/portfolio-dao.png";
 import portfolioGamefi from "@/assets/portfolio-gamefi.png";
+import { portfolio } from "@/config/content";
 
-const projects = [
-  {
-    name: "MetaVerse Korea",
-    category: "NFT",
-    raised: "$12M",
-    description: "Leading Korean metaverse platform with virtual real estate and social features.",
-    gradient: "from-primary to-accent",
-    glowColor: "primary",
-    image: portfolioMetaverse,
-  },
-  {
-    name: "KimchiSwap",
-    category: "DeFi",
-    raised: "$8.5M",
-    description: "Korea's premier DEX with innovative AMM and yield farming protocols.",
-    gradient: "from-gradient-cyan to-primary",
-    glowColor: "gradient-cyan",
-    image: portfolioDefi,
-  },
-  {
-    name: "SeoulDAO",
-    category: "Web3",
-    raised: "$15M",
-    description: "Decentralized autonomous organization for Korean Web3 ecosystem development.",
-    gradient: "from-gradient-pink to-gradient-orange",
-    glowColor: "gradient-pink",
-    image: portfolioDao,
-  },
-  {
-    name: "K-Play",
-    category: "GameFi",
-    raised: "$20M",
-    description: "Play-to-earn gaming platform featuring top Korean game IPs.",
-    gradient: "from-gradient-orange to-gradient-pink",
-    glowColor: "gradient-orange",
-    image: portfolioGamefi,
-  },
+const imageMap: Record<string, string> = {
+  "metaverse-korea": portfolioMetaverse,
+  "kimchiswap": portfolioDefi,
+  "seoul-dao": portfolioDao,
+  "k-play": portfolioGamefi,
+};
+
+const gradients = [
+  { gradient: "from-primary to-accent", glow: "primary" },
+  { gradient: "from-gradient-cyan to-primary", glow: "gradient-cyan" },
+  { gradient: "from-gradient-pink to-gradient-orange", glow: "gradient-pink" },
+  { gradient: "from-gradient-orange to-gradient-pink", glow: "gradient-orange" },
 ];
 
-const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
+const ProjectCard = ({ project, index }: { project: typeof portfolio.projects[0]; index: number }) => {
   const tilt = useTilt({ max: 12, scale: 1.03 });
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { gradient } = gradients[index % gradients.length];
+  const image = imageMap[project.id] || portfolioMetaverse;
 
   return (
     <div
@@ -63,17 +42,17 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
         className="group relative cursor-pointer overflow-hidden rounded-2xl"
       >
         {/* Outer glow effect - visible on hover */}
-        <div className={`absolute -inset-2 bg-gradient-to-r ${project.gradient} rounded-3xl opacity-0 blur-xl transition-all duration-500 group-hover:opacity-60 group-hover:blur-2xl group-hover:-inset-4`} />
+        <div className={`absolute -inset-2 bg-gradient-to-r ${gradient} rounded-3xl opacity-0 blur-xl transition-all duration-500 group-hover:opacity-60 group-hover:blur-2xl group-hover:-inset-4`} />
         
         {/* Card container */}
         <div className="relative glass-card-hover overflow-hidden">
           {/* Project Image with enhanced hover */}
           <div className="relative h-56 overflow-hidden">
             {/* Image glow layer */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-30 transition-opacity duration-500 z-10`} />
+            <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-30 transition-opacity duration-500 z-10`} />
             
             <img 
-              src={project.image} 
+              src={image} 
               alt={project.name}
               className="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
             />
@@ -87,13 +66,13 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
             <div className={`absolute inset-0 bg-gradient-to-t from-card via-card/60 to-transparent opacity-90 z-10`} />
             
             {/* Category Badge - positioned on image */}
-            <div className={`absolute top-4 left-4 z-30 inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r ${project.gradient} text-sm backdrop-blur-sm shadow-lg transition-transform duration-300 group-hover:scale-110`}>
+            <div className={`absolute top-4 left-4 z-30 inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r ${gradient} text-sm backdrop-blur-sm shadow-lg transition-transform duration-300 group-hover:scale-110`}>
               <span className="text-primary-foreground font-medium">{project.category}</span>
             </div>
             
             {/* Floating stats badge */}
             <div className="absolute top-4 right-4 z-30 glass-card px-3 py-1.5 rounded-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-              <span className="text-xs font-medium text-green-400">● Active</span>
+              <span className="text-xs font-medium text-green-400">{portfolio.activeLabel}</span>
             </div>
           </div>
           
@@ -118,13 +97,13 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
             <div className="flex items-center justify-between">
               <div>
                 <div className="text-xs text-muted-foreground mb-1">
-                  Funds Raised
+                  {portfolio.fundsRaised}
                 </div>
                 <div className="text-xl font-semibold text-gradient">
                   {project.raised}
                 </div>
               </div>
-              <div className={`w-12 h-12 rounded-full glass-card flex items-center justify-center group-hover:bg-gradient-to-br ${project.gradient} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
+              <div className={`w-12 h-12 rounded-full glass-card flex items-center justify-center group-hover:bg-gradient-to-br ${gradient} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
                 <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
               </div>
             </div>
@@ -137,6 +116,9 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
 
 const PortfolioSection = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.3 });
+
+  // Parse headline with highlight
+  const headlineParts = portfolio.headline.split(/<highlight>|<\/highlight>/);
 
   return (
     <section id="portfolio" className="py-32 relative">
@@ -154,25 +136,25 @@ const PortfolioSection = () => {
         >
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
-              <span className="text-sm font-medium text-primary">Our Work</span>
+              <span className="text-sm font-medium text-primary">{portfolio.badge}</span>
             </div>
             <h2 className="text-display-md md:text-display-lg">
-              Featured <span className="text-gradient">Projects</span>
+              {headlineParts[0]}<span className="text-gradient">{headlineParts[1]}</span>{headlineParts[2]}
             </h2>
           </div>
-          <a
-            href="#"
+          <Link
+            to="/projects"
             className="inline-flex items-center gap-2 text-primary text-sm font-medium hover:gap-3 transition-all group"
           >
-            View All
+            {portfolio.viewAll}
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </a>
+          </Link>
         </div>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard key={project.name} project={project} index={index} />
+          {portfolio.projects.map((project, index) => (
+            <ProjectCard key={project.id} project={project} index={index} />
           ))}
         </div>
       </div>

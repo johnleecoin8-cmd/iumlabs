@@ -2,13 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-
-const navLinks = [
-  { name: "Services", href: "/services" },
-  { name: "Projects", href: "/projects" },
-  { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
-];
+import { navigation, brand } from "@/config/content";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,13 +15,13 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center">
             <span className="text-xl font-semibold tracking-tight text-gradient">
-              CryptoBridge
+              {brand.name}
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {navigation.links.map((link) => (
               <Link
                 key={link.name}
                 to={link.href}
@@ -44,7 +38,7 @@ const Navbar = () => {
           <div className="hidden md:block">
             <Link to="/contact">
               <Button variant="gradient" size="sm">
-                Get Started
+                {navigation.ctaButton}
               </Button>
             </Link>
           </div>
@@ -62,7 +56,7 @@ const Navbar = () => {
         {isOpen && (
           <div className="md:hidden py-4 border-t border-border/30 animate-fade-in">
             <div className="flex flex-col gap-2">
-              {navLinks.map((link) => (
+              {navigation.links.map((link) => (
                 <Link
                   key={link.name}
                   to={link.href}
@@ -79,7 +73,7 @@ const Navbar = () => {
               <div className="pt-4 px-4">
                 <Link to="/contact" onClick={() => setIsOpen(false)}>
                   <Button variant="gradient" size="sm" className="w-full">
-                    Get Started
+                    {navigation.ctaButton}
                   </Button>
                 </Link>
               </div>

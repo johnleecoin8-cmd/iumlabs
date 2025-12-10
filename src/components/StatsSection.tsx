@@ -1,59 +1,17 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
 import { AreaChart, Area, ResponsiveContainer, BarChart, Bar } from "recharts";
+import { stats as statsContent } from "@/config/content";
 
-const stats = [
-  { 
-    value: 200, 
-    label: "Projects Launched", 
-    suffix: "+",
-    chartType: "area",
-    chartData: [
-      { value: 30 }, { value: 45 }, { value: 60 }, { value: 80 }, { value: 95 }, { value: 120 }, { value: 150 }, { value: 180 }, { value: 200 }
-    ],
-    color: "var(--primary)"
-  },
-  { 
-    value: 500, 
-    label: "Funds Raised", 
-    prefix: "$", 
-    suffix: "M+",
-    chartType: "bar",
-    chartData: [
-      { value: 50 }, { value: 100 }, { value: 180 }, { value: 250 }, { value: 320 }, { value: 400 }, { value: 450 }, { value: 480 }, { value: 500 }
-    ],
-    color: "var(--accent)"
-  },
-  { 
-    value: 50, 
-    label: "Exchange Partners", 
-    suffix: "+",
-    chartType: "area",
-    chartData: [
-      { value: 5 }, { value: 12 }, { value: 18 }, { value: 25 }, { value: 32 }, { value: 38 }, { value: 42 }, { value: 47 }, { value: 50 }
-    ],
-    color: "var(--gradient-cyan)"
-  },
-  { 
-    value: 5, 
-    label: "Community Reach", 
-    suffix: "M+",
-    chartType: "bar",
-    chartData: [
-      { value: 0.5 }, { value: 1 }, { value: 1.5 }, { value: 2.2 }, { value: 2.8 }, { value: 3.5 }, { value: 4 }, { value: 4.5 }, { value: 5 }
-    ],
-    color: "var(--gradient-pink)"
-  },
+const chartDataSets = [
+  [{ value: 30 }, { value: 45 }, { value: 60 }, { value: 80 }, { value: 95 }, { value: 120 }, { value: 150 }, { value: 180 }, { value: 200 }],
+  [{ value: 50 }, { value: 100 }, { value: 180 }, { value: 250 }, { value: 320 }, { value: 400 }, { value: 450 }, { value: 480 }, { value: 500 }],
+  [{ value: 5 }, { value: 12 }, { value: 18 }, { value: 25 }, { value: 32 }, { value: 38 }, { value: 42 }, { value: 47 }, { value: 50 }],
+  [{ value: 0.5 }, { value: 1 }, { value: 1.5 }, { value: 2.2 }, { value: 2.8 }, { value: 3.5 }, { value: 4 }, { value: 4.5 }, { value: 5 }],
 ];
 
-const partners = [
-  "Binance",
-  "Upbit",
-  "Bithumb",
-  "Coinone",
-  "CoinMarketCap",
-  "CoinGecko",
-];
+const chartTypes = ["area", "bar", "area", "bar"];
+const colors = ["primary", "accent", "gradient-cyan", "gradient-pink"];
 
 const MiniChart = ({ data, type, color, isVisible }: { 
   data: { value: number }[]; 
@@ -68,14 +26,14 @@ const MiniChart = ({ data, type, color, isVisible }: {
           <AreaChart data={data}>
             <defs>
               <linearGradient id={`gradient-${color}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={`hsl(${color})`} stopOpacity={0.6} />
-                <stop offset="100%" stopColor={`hsl(${color})`} stopOpacity={0} />
+                <stop offset="0%" stopColor={`hsl(var(--${color}))`} stopOpacity={0.6} />
+                <stop offset="100%" stopColor={`hsl(var(--${color}))`} stopOpacity={0} />
               </linearGradient>
             </defs>
             <Area
               type="monotone"
               dataKey="value"
-              stroke={`hsl(${color})`}
+              stroke={`hsl(var(--${color}))`}
               strokeWidth={2}
               fill={`url(#gradient-${color})`}
               animationDuration={2000}
@@ -86,8 +44,8 @@ const MiniChart = ({ data, type, color, isVisible }: {
           <BarChart data={data}>
             <defs>
               <linearGradient id={`bar-gradient-${color}`} x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor={`hsl(${color})`} stopOpacity={0.8} />
-                <stop offset="100%" stopColor={`hsl(${color})`} stopOpacity={0.3} />
+                <stop offset="0%" stopColor={`hsl(var(--${color}))`} stopOpacity={0.8} />
+                <stop offset="100%" stopColor={`hsl(var(--${color}))`} stopOpacity={0.3} />
               </linearGradient>
             </defs>
             <Bar
@@ -104,7 +62,14 @@ const MiniChart = ({ data, type, color, isVisible }: {
   );
 };
 
-const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0]; index: number; isVisible: boolean }) => {
+const StatCard = ({ stat, index, isVisible, chartData, chartType, color }: { 
+  stat: typeof statsContent.items[0]; 
+  index: number; 
+  isVisible: boolean;
+  chartData: { value: number }[];
+  chartType: string;
+  color: string;
+}) => {
   const displayValue = useCountUp({
     end: stat.value,
     duration: 2000,
@@ -126,9 +91,9 @@ const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0]; index: nu
         {stat.label}
       </div>
       <MiniChart 
-        data={stat.chartData} 
-        type={stat.chartType} 
-        color={stat.color.replace('var(--', '').replace(')', '')}
+        data={chartData} 
+        type={chartType} 
+        color={color}
         isVisible={isVisible}
       />
     </div>
@@ -155,12 +120,15 @@ const StatsSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Stats Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
-          {stats.map((stat, index) => (
+          {statsContent.items.map((stat, index) => (
             <StatCard 
               key={stat.label} 
               stat={stat} 
               index={index} 
-              isVisible={isVisible} 
+              isVisible={isVisible}
+              chartData={chartDataSets[index]}
+              chartType={chartTypes[index]}
+              color={colors[index]}
             />
           ))}
         </div>
@@ -168,13 +136,13 @@ const StatsSection = () => {
         {/* Partners - Marquee */}
         <div className="text-center">
           <p className={`text-muted-foreground text-sm mb-10 scroll-animate ${isVisible ? 'is-visible' : ''}`} style={{ transitionDelay: '400ms' }}>
-            Trusted by leading platforms
+            {statsContent.partnersLabel}
           </p>
           
           {/* Marquee Container */}
           <div className="marquee">
             <div className="marquee-content">
-              {[...partners, ...partners].map((partner, index) => (
+              {[...statsContent.partners, ...statsContent.partners].map((partner, index) => (
                 <div
                   key={`${partner}-${index}`}
                   className="text-2xl font-semibold text-muted-foreground/30 hover:text-gradient transition-all duration-300 cursor-pointer whitespace-nowrap"
@@ -184,7 +152,7 @@ const StatsSection = () => {
               ))}
             </div>
             <div className="marquee-content" aria-hidden="true">
-              {[...partners, ...partners].map((partner, index) => (
+              {[...statsContent.partners, ...statsContent.partners].map((partner, index) => (
                 <div
                   key={`${partner}-dup-${index}`}
                   className="text-2xl font-semibold text-muted-foreground/30 hover:text-gradient transition-all duration-300 cursor-pointer whitespace-nowrap"
