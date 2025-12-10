@@ -1,100 +1,83 @@
-import { lazy, Suspense } from "react";
-import { ArrowRight, Mail, Send } from "lucide-react";
+import { ArrowRight, Mail, Send, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
-import { cta, brand } from "@/config/content";
-
-const MetallicElement = lazy(() => import("@/components/MetallicElement"));
 
 const CTASection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-32 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-card/30 to-background" />
-      
-      {/* Dot pattern */}
-      <div 
-        className="absolute inset-0 opacity-30"
-        style={{
-          backgroundImage: `radial-gradient(circle, hsl(var(--muted-foreground) / 0.3) 1px, transparent 1px)`,
-          backgroundSize: '24px 24px'
-        }}
-      />
-      
-      {/* 3D Element - Left side */}
-      <div className="absolute left-10 top-1/2 -translate-y-1/2 w-[250px] h-[250px] opacity-30 pointer-events-none hidden lg:block">
-        <Suspense fallback={null}>
-          <MetallicElement variant="bridge" className="opacity-50" />
-        </Suspense>
-      </div>
-
-      {/* 3D Element - Right side */}
-      <div className="absolute right-10 top-1/2 -translate-y-1/2 w-[250px] h-[250px] opacity-30 pointer-events-none hidden lg:block">
-        <Suspense fallback={null}>
-          <MetallicElement variant="double" className="opacity-40" />
-        </Suspense>
+    <section ref={ref} className="py-24 md:py-32 relative overflow-hidden">
+      {/* Background with gradient */}
+      <div className="absolute inset-0">
+        <div 
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(ellipse 80% 60% at 50% 100%, hsl(var(--gradient-red) / 0.15) 0%, transparent 50%),
+              linear-gradient(to bottom, transparent 0%, hsl(var(--card) / 0.5) 100%)
+            `,
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Number */}
-        <div className={`text-center mb-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <span className="text-primary font-mono text-sm tracking-wider">06.</span>
-        </div>
-        
         <div className={`max-w-4xl mx-auto text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-8">
-            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm font-medium text-primary">{cta.badge}</span>
-          </div>
+          <span className="text-primary font-mono text-sm tracking-wider mb-6 block">04. LET'S TALK</span>
 
           {/* Headline */}
-          <h2 className="text-4xl md:text-6xl tracking-tight mb-6">
-            <span className="font-serif italic text-muted-foreground">{cta.headline.line1}</span>
+          <h2 className="text-4xl md:text-6xl lg:text-7xl tracking-tight mb-6">
+            <span className="font-sans font-bold text-foreground">Ready to Enter</span>
             <br />
-            <span className="font-sans font-bold text-foreground">{cta.headline.highlight}</span>
+            <span className="font-serif italic text-gradient">Korea's Market?</span>
           </h2>
 
           {/* Description */}
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-            {cta.description}
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+            Let's discuss how we can help your Web3 project succeed in one of the world's most active crypto markets.
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
             <Link to="/contact">
-              <Button className="rounded-full bg-primary hover:bg-primary/90 px-8 group">
-                {cta.buttons.primary}
+              <Button size="lg" className="rounded-full bg-primary hover:bg-primary/90 px-8 py-6 text-base group">
+                Book a Consultation
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
-            <Link to="/contact">
-              <Button className="rounded-full bg-primary/10 border border-primary/20 text-primary hover:bg-primary/20 px-8">
-                {cta.buttons.secondary}
+            <a href="https://t.me/cryptobridgekorea" target="_blank" rel="noopener noreferrer">
+              <Button size="lg" variant="outline" className="rounded-full border-border/50 px-8 py-6 text-base hover:bg-card">
+                <Send className="w-4 h-4 mr-2" />
+                Message on Telegram
               </Button>
-            </Link>
+            </a>
           </div>
 
-          {/* Contact Links */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-sm">
+          {/* Contact Info Cards */}
+          <div className="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
             <a 
-              href={`mailto:${brand.email}`}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border/30 text-muted-foreground hover:text-primary hover:border-primary/30 transition-all"
+              href="mailto:CryptoBridgekoea@gmail.com"
+              className="flex items-center justify-center gap-3 p-4 rounded-xl bg-card/50 border border-border/30 text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all group"
             >
-              <Mail className="w-4 h-4" />
-              <span>{brand.email}</span>
+              <Mail className="w-5 h-5 text-primary" />
+              <span className="text-sm">Email Us</span>
             </a>
             <a 
-              href={brand.telegramLink}
+              href="https://t.me/cryptobridgekorea"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-card/50 border border-border/30 text-muted-foreground hover:text-primary hover:border-primary/30 transition-all"
+              className="flex items-center justify-center gap-3 p-4 rounded-xl bg-card/50 border border-border/30 text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all group"
             >
-              <Send className="w-4 h-4" />
-              <span>{cta.contactLinks.telegram}</span>
+              <Send className="w-5 h-5 text-primary" />
+              <span className="text-sm">Telegram</span>
+            </a>
+            <a 
+              href="tel:01039699699"
+              className="flex items-center justify-center gap-3 p-4 rounded-xl bg-card/50 border border-border/30 text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all group"
+            >
+              <Phone className="w-5 h-5 text-primary" />
+              <span className="text-sm">Call Us</span>
             </a>
           </div>
         </div>
