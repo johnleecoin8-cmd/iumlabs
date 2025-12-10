@@ -9,6 +9,7 @@ const services = [
     description: "Comprehensive marketing strategies for blockchain projects, including community building, PR, and influencer campaigns.",
     size: "large",
     gradient: "from-primary to-accent",
+    iconAnimation: "icon-float",
   },
   {
     icon: Image,
@@ -16,6 +17,7 @@ const services = [
     description: "End-to-end NFT launch services from artwork strategy to marketplace listing and community engagement.",
     size: "medium",
     gradient: "from-gradient-pink to-gradient-orange",
+    iconAnimation: "icon-bounce",
   },
   {
     icon: Coins,
@@ -23,6 +25,7 @@ const services = [
     description: "Specialized marketing for DeFi protocols including liquidity programs, yield farming campaigns, and TVL growth.",
     size: "medium",
     gradient: "from-gradient-cyan to-primary",
+    iconAnimation: "icon-spin",
   },
   {
     icon: Gamepad2,
@@ -30,6 +33,7 @@ const services = [
     description: "Gaming-focused marketing strategies for play-to-earn and GameFi projects targeting the Korean gaming market.",
     size: "small",
     gradient: "from-gradient-orange to-gradient-pink",
+    iconAnimation: "icon-shake",
   },
   {
     icon: ListChecks,
@@ -37,6 +41,7 @@ const services = [
     description: "Professional assistance with Korean and international exchange listings including documentation and negotiations.",
     size: "small",
     gradient: "from-primary to-gradient-cyan",
+    iconAnimation: "icon-pulse",
   },
   {
     icon: Users,
@@ -44,6 +49,7 @@ const services = [
     description: "Strategic consulting for tokenomics, go-to-market strategy, and regulatory compliance in the Korean market.",
     size: "large",
     gradient: "from-accent to-gradient-pink",
+    iconAnimation: "icon-wave",
   },
 ];
 
@@ -66,10 +72,10 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           service.size === "large" ? "lg:col-span-1 lg:row-span-1" : ""
         }`}
       >
-        {/* Icon with gradient background */}
+        {/* Icon with gradient background and animation */}
         <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} p-0.5 mb-6`}>
-          <div className="w-full h-full rounded-2xl bg-card flex items-center justify-center group-hover:bg-transparent transition-colors duration-300">
-            <service.icon className="w-6 h-6 text-foreground group-hover:text-primary-foreground transition-colors duration-300" />
+          <div className="w-full h-full rounded-2xl bg-card flex items-center justify-center group-hover:bg-transparent transition-colors duration-300 overflow-hidden">
+            <service.icon className={`w-6 h-6 text-foreground group-hover:text-primary-foreground transition-colors duration-300 group-hover:${service.iconAnimation}`} />
           </div>
         </div>
 
