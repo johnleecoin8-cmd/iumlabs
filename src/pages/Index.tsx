@@ -1,9 +1,9 @@
 import { useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
+import AnnouncementBar from "@/components/AnnouncementBar";
 import HeroSection from "@/components/HeroSection";
 import StatsSection from "@/components/StatsSection";
 import ServicesSection from "@/components/ServicesSection";
-import PortfolioSection from "@/components/PortfolioSection";
 import PressSection from "@/components/PressSection";
 import CaseStudiesSection from "@/components/CaseStudiesSection";
 import PricingSection from "@/components/PricingSection";
@@ -25,8 +25,8 @@ const Index = () => {
       {/* Page Intro Animation */}
       {!introComplete && <PageIntro onComplete={handleIntroComplete} />}
       
-      {/* Noise texture overlay */}
-      <div className="noise-overlay" />
+      {/* Announcement Bar */}
+      {introComplete && <AnnouncementBar />}
       
       <Navbar />
       <main className={`transition-opacity duration-500 ${introComplete ? 'opacity-100' : 'opacity-0'}`}>
