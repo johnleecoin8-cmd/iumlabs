@@ -1,8 +1,7 @@
 import { useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
-import AnnouncementBar from "@/components/AnnouncementBar";
 import HeroSection from "@/components/HeroSection";
-import StatsSection from "@/components/StatsSection";
+import TrustSection from "@/components/TrustSection";
 import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import InsightsSection from "@/components/InsightsSection";
@@ -22,13 +21,10 @@ const Index = () => {
       {/* Page Intro Animation */}
       {!introComplete && <PageIntro onComplete={handleIntroComplete} />}
       
-      {/* Announcement Bar */}
-      {introComplete && <AnnouncementBar />}
-      
       <Navbar />
       <main className={`transition-opacity duration-500 ${introComplete ? 'opacity-100' : 'opacity-0'}`}>
         <HeroSection />
-        <StatsSection />
+        <TrustSection />
         <ServicesSection />
         <PortfolioSection />
         <InsightsSection />
