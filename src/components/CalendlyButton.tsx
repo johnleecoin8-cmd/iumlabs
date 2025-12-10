@@ -26,29 +26,29 @@ const CalendlyButton = ({
       <DialogTrigger asChild>
         <Button variant={variant} size={size} className={className}>
           <Calendar className="w-4 h-4 mr-2" />
-          무료 상담 예약
+          Book Free Consultation
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px] h-[700px] p-0">
         <DialogHeader className="p-6 pb-0">
-          <DialogTitle>무료 상담 예약</DialogTitle>
+          <DialogTitle>Book Free Consultation</DialogTitle>
         </DialogHeader>
         <div className="flex-1 p-6">
           {/* Calendly placeholder - replace with actual embed */}
           <div className="w-full h-full bg-muted/50 rounded-lg flex flex-col items-center justify-center text-center p-8">
             <Calendar className="w-16 h-16 text-primary mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Calendly 연동 준비중</h3>
+            <h3 className="text-xl font-semibold mb-2">Calendly Integration Coming Soon</h3>
             <p className="text-muted-foreground mb-6">
-              Calendly URL을 설정하면 여기에 예약 캘린더가 표시됩니다.
+              Once you set a Calendly URL, the booking calendar will appear here.
             </p>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <p>현재는 아래 방법으로 상담을 예약해주세요:</p>
+              <p>For now, please book via:</p>
               <div className="flex gap-4 justify-center mt-4">
                 <a 
                   href="mailto:team@cryptobridge.kr" 
                   className="text-primary hover:underline"
                 >
-                  이메일 문의
+                  Email Us
                 </a>
                 <a 
                   href="https://t.me/cryptobridge_kr" 
@@ -56,7 +56,7 @@ const CalendlyButton = ({
                   rel="noopener noreferrer"
                   className="text-primary hover:underline"
                 >
-                  텔레그램 문의
+                  Telegram
                 </a>
               </div>
             </div>
