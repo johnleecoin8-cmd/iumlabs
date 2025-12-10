@@ -124,7 +124,7 @@ const StatsSection = () => {
       {/* 3D Element - Left side */}
       <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[300px] h-[300px] opacity-40 pointer-events-none hidden lg:block">
         <Suspense fallback={null}>
-          <MetallicElement variant="ring" />
+          <MetallicElement variant="mini" className="opacity-60" />
         </Suspense>
       </div>
 
@@ -135,6 +135,11 @@ const StatsSection = () => {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="container mx-auto px-4 relative z-10">
+        {/* Section Number */}
+        <div className={`mb-6 scroll-animate ${isVisible ? 'is-visible' : ''}`}>
+          <span className="text-primary font-mono text-sm tracking-wider">01.</span>
+        </div>
+        
         {/* Section Header */}
         <div className={`text-center mb-16 scroll-animate ${isVisible ? 'is-visible' : ''}`}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-6">

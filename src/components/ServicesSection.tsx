@@ -154,6 +154,11 @@ const ServicesSection = () => {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
+        {/* Section Number */}
+        <div className={`mb-6 scroll-animate ${headerVisible ? 'is-visible' : ''}`}>
+          <span className="text-primary font-mono text-sm tracking-wider">02.</span>
+        </div>
+
         {/* Section Header */}
         <div 
           ref={headerRef}
