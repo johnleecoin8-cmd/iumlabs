@@ -1,22 +1,37 @@
+import { useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ServicesSection from "@/components/ServicesSection";
 import StatsSection from "@/components/StatsSection";
+import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
+import CustomCursor from "@/components/CustomCursor";
+import PageIntro from "@/components/PageIntro";
 
 const Index = () => {
+  const [introComplete, setIntroComplete] = useState(false);
+
+  const handleIntroComplete = useCallback(() => {
+    setIntroComplete(true);
+  }, []);
+
   return (
-    <div className="min-h-screen">
-      {/* Noise texture overlay for premium feel */}
+    <div className="min-h-screen bg-background">
+      {/* Page Intro Animation */}
+      {!introComplete && <PageIntro onComplete={handleIntroComplete} />}
+      
+      {/* Custom Cursor */}
+      <CustomCursor />
+      
+      {/* Noise texture overlay */}
       <div className="noise-overlay" />
       
       <Navbar />
-      <main>
+      <main className={`transition-opacity duration-500 ${introComplete ? 'opacity-100' : 'opacity-0'}`}>
         <HeroSection />
-        <ServicesSection />
         <StatsSection />
+        <ServicesSection />
         <PortfolioSection />
         <CTASection />
       </main>
