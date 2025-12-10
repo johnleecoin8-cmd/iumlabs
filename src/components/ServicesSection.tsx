@@ -1,4 +1,6 @@
 import { Blocks, Coins, Gamepad2, Image, ListChecks, Users } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useTilt } from "@/hooks/useTilt";
 
 const services = [
   {
@@ -45,7 +47,53 @@ const services = [
   },
 ];
 
+const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
+  const tilt = useTilt({ max: 10, scale: 1.02 });
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+
+  return (
+    <div
+      ref={ref}
+      className={`scroll-animate ${isVisible ? 'is-visible' : ''}`}
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
+      <div
+        ref={tilt.ref}
+        onMouseMove={tilt.onMouseMove}
+        onMouseLeave={tilt.onMouseLeave}
+        style={tilt.style}
+        className={`group glass-card-hover p-8 h-full ${
+          service.size === "large" ? "lg:col-span-1 lg:row-span-1" : ""
+        }`}
+      >
+        {/* Icon with gradient background */}
+        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} p-0.5 mb-6`}>
+          <div className="w-full h-full rounded-2xl bg-card flex items-center justify-center group-hover:bg-transparent transition-colors duration-300">
+            <service.icon className="w-6 h-6 text-foreground group-hover:text-primary-foreground transition-colors duration-300" />
+          </div>
+        </div>
+
+        {/* Content */}
+        <h3 className="text-xl font-semibold mb-3 group-hover:text-gradient transition-all duration-300">
+          {service.title}
+        </h3>
+        <p className="text-muted-foreground leading-relaxed">
+          {service.description}
+        </p>
+
+        {/* Hover indicator */}
+        <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground group-hover:text-primary transition-colors">
+          <span>Learn more</span>
+          <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ServicesSection = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.3 });
+
   return (
     <section id="services" className="py-32 relative">
       {/* Background gradient */}
@@ -56,7 +104,10 @@ const ServicesSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-20">
+        <div 
+          ref={headerRef}
+          className={`text-center mb-20 scroll-animate ${headerVisible ? 'is-visible' : ''}`}
+        >
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
             <span className="text-sm font-medium text-primary">What We Do</span>
           </div>
@@ -68,33 +119,7 @@ const ServicesSection = () => {
         {/* Bento Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
-            <div
-              key={service.title}
-              className={`group glass-card-hover p-8 ${
-                service.size === "large" ? "lg:col-span-1 lg:row-span-1" : ""
-              }`}
-            >
-              {/* Icon with gradient background */}
-              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${service.gradient} p-0.5 mb-6`}>
-                <div className="w-full h-full rounded-2xl bg-card flex items-center justify-center group-hover:bg-transparent transition-colors duration-300">
-                  <service.icon className="w-6 h-6 text-foreground group-hover:text-primary-foreground transition-colors duration-300" />
-                </div>
-              </div>
-
-              {/* Content */}
-              <h3 className="text-xl font-semibold mb-3 group-hover:text-gradient transition-all duration-300">
-                {service.title}
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                {service.description}
-              </p>
-
-              {/* Hover indicator */}
-              <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground group-hover:text-primary transition-colors">
-                <span>Learn more</span>
-                <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-              </div>
-            </div>
+            <ServiceCard key={service.title} service={service} index={index} />
           ))}
         </div>
       </div>
