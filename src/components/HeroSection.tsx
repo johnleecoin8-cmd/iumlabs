@@ -5,6 +5,7 @@ import AnimatedText from "./AnimatedText";
 import ScrambleText from "./ScrambleText";
 import { useParallax } from "@/hooks/useParallax";
 import dashboardMockup from "@/assets/dashboard-mockup.png";
+import { hero } from "@/config/content";
 
 const HeroSection = () => {
   const { ref: glowRef, position, isHovering } = useMouseGlow();
@@ -99,24 +100,24 @@ const HeroSection = () => {
             {/* Overline Badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8 animate-fade-up">
               <span className="w-2 h-2 rounded-full bg-gradient-to-r from-primary to-accent animate-pulse" />
-              <span className="text-sm font-medium text-muted-foreground">Web3 Marketing Agency</span>
+              <span className="text-sm font-medium text-muted-foreground">{hero.badge}</span>
             </div>
 
             {/* Main Headline with letter animations */}
             <h1 className="text-display-lg md:text-display-xl mb-6">
               <AnimatedText 
-                text="Launch your" 
+                text={hero.headline.line1} 
                 animation="letter-slide"
                 delay={300}
                 staggerDelay={40}
               />
               <br />
               <span className="text-gradient">
-                <ScrambleText text="Web3 project" delay={800} />
+                <ScrambleText text={hero.headline.highlight} delay={800} />
               </span>
               <br />
               <AnimatedText 
-                text="in Korea." 
+                text={hero.headline.line2} 
                 animation="letter-slide"
                 delay={1200}
                 staggerDelay={40}
@@ -125,21 +126,20 @@ const HeroSection = () => {
 
             {/* Subtitle */}
             <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-10 animate-fade-up delay-500 leading-relaxed">
-              We help blockchain projects succeed with strategic marketing, 
-              community building, and deep local expertise.
+              {hero.description}
             </p>
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 animate-fade-up delay-700">
               <Button variant="gradient" size="lg" className="group relative overflow-hidden">
                 <span className="relative z-10 flex items-center gap-2">
-                  Start a Project
+                  {hero.buttons.primary}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary bg-[length:200%_100%] animate-gradient-shift opacity-0 group-hover:opacity-100 transition-opacity" />
               </Button>
               <Button variant="glass" size="lg" className="magnetic-btn">
-                View Our Work
+                {hero.buttons.secondary}
               </Button>
             </div>
           </div>
@@ -154,7 +154,7 @@ const HeroSection = () => {
               <div className="relative glass-card p-2 rounded-2xl overflow-hidden transition-all duration-500 group-hover/mockup:scale-105 group-hover/mockup:shadow-[0_0_80px_rgba(167,139,250,0.4)]">
                 <img 
                   src={dashboardMockup} 
-                  alt="Web3 Marketing Analytics Dashboard" 
+                  alt="Web3 마케팅 분석 대시보드" 
                   className="rounded-xl w-full h-auto shadow-2xl transition-transform duration-500 group-hover/mockup:scale-[1.02]"
                 />
                 
@@ -165,11 +165,11 @@ const HeroSection = () => {
                 
                 {/* Floating badges */}
                 <div className="absolute -top-3 -right-3 glass-card px-4 py-2 rounded-full animate-bounce-slow group-hover/mockup:scale-110 transition-transform">
-                  <span className="text-sm font-semibold text-gradient">Live Data</span>
+                  <span className="text-sm font-semibold text-gradient">{hero.badges.liveData}</span>
                 </div>
                 
                 <div className="absolute -bottom-3 -left-3 glass-card px-4 py-2 rounded-full group-hover/mockup:scale-110 transition-transform">
-                  <span className="text-sm font-medium text-green-400">+847% ROI</span>
+                  <span className="text-sm font-medium text-green-400">{hero.badges.roi}</span>
                 </div>
               </div>
             </div>
