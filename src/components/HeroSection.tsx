@@ -146,24 +146,29 @@ const HeroSection = () => {
 
           {/* Right Content - Dashboard Mockup */}
           <div className="relative hidden lg:block">
-            <div className="relative animate-float">
-              {/* Glow effect behind image */}
-              <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 via-accent/20 to-gradient-pink/30 rounded-3xl blur-2xl opacity-60" />
+            <div className="relative animate-float group/mockup">
+              {/* Glow effect behind image - intensifies on hover */}
+              <div className="absolute -inset-4 bg-gradient-to-r from-primary/30 via-accent/20 to-gradient-pink/30 rounded-3xl blur-2xl opacity-60 transition-all duration-500 group-hover/mockup:opacity-100 group-hover/mockup:blur-3xl group-hover/mockup:-inset-8 group-hover/mockup:from-primary/50 group-hover/mockup:via-accent/40 group-hover/mockup:to-gradient-pink/50" />
               
               {/* Main dashboard image */}
-              <div className="relative glass-card p-2 rounded-2xl overflow-hidden">
+              <div className="relative glass-card p-2 rounded-2xl overflow-hidden transition-all duration-500 group-hover/mockup:scale-105 group-hover/mockup:shadow-[0_0_80px_rgba(167,139,250,0.4)]">
                 <img 
                   src={dashboardMockup} 
                   alt="Web3 Marketing Analytics Dashboard" 
-                  className="rounded-xl w-full h-auto shadow-2xl"
+                  className="rounded-xl w-full h-auto shadow-2xl transition-transform duration-500 group-hover/mockup:scale-[1.02]"
                 />
                 
+                {/* Shine effect on hover */}
+                <div className="absolute inset-0 opacity-0 group-hover/mockup:opacity-100 transition-opacity duration-700 pointer-events-none rounded-xl overflow-hidden">
+                  <div className="absolute inset-0 translate-x-[-100%] group-hover/mockup:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12" />
+                </div>
+                
                 {/* Floating badges */}
-                <div className="absolute -top-3 -right-3 glass-card px-4 py-2 rounded-full animate-bounce-slow">
+                <div className="absolute -top-3 -right-3 glass-card px-4 py-2 rounded-full animate-bounce-slow group-hover/mockup:scale-110 transition-transform">
                   <span className="text-sm font-semibold text-gradient">Live Data</span>
                 </div>
                 
-                <div className="absolute -bottom-3 -left-3 glass-card px-4 py-2 rounded-full">
+                <div className="absolute -bottom-3 -left-3 glass-card px-4 py-2 rounded-full group-hover/mockup:scale-110 transition-transform">
                   <span className="text-sm font-medium text-green-400">+847% ROI</span>
                 </div>
               </div>
