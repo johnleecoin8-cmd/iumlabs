@@ -25,16 +25,16 @@ const CTASection = () => {
       />
       
       {/* 3D Element - Left side */}
-      <div className="absolute left-10 top-1/2 -translate-y-1/2 w-[250px] h-[250px] opacity-30 pointer-events-none hidden lg:block">
+      <div className="absolute left-10 top-1/2 -translate-y-1/2 w-[280px] h-[280px] opacity-40 pointer-events-none hidden lg:block">
         <Suspense fallback={null}>
           <MetallicElement variant="double" />
         </Suspense>
       </div>
 
       {/* 3D Element - Right side */}
-      <div className="absolute right-10 top-1/2 -translate-y-1/2 w-[250px] h-[250px] opacity-30 pointer-events-none hidden lg:block">
+      <div className="absolute right-10 top-1/2 -translate-y-1/2 w-[280px] h-[280px] opacity-40 pointer-events-none hidden lg:block">
         <Suspense fallback={null}>
-          <MetallicElement variant="ring" />
+          <MetallicElement variant="mini" />
         </Suspense>
       </div>
 
