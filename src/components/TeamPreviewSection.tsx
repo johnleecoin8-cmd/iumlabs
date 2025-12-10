@@ -20,18 +20,6 @@ const TeamPreviewSection = () => {
     ref,
     isVisible
   } = useScrollAnimation();
-  return <section ref={ref} className="py-32 px-4 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-card/30" />
-        {/* Dot pattern */}
-        <div className="absolute inset-0 opacity-30" style={{
-        backgroundImage: `radial-gradient(circle, hsl(var(--muted-foreground) / 0.3) 1px, transparent 1px)`,
-        backgroundSize: '24px 24px'
-      }} />
-      </div>
-
-      
-    </section>;
+  return;
 };
 export default TeamPreviewSection;
