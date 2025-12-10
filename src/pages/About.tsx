@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
+import SpecialOfferForm from "@/components/SpecialOfferForm";
 import PageTransition from "@/components/PageTransition";
 import { Users, Target, Zap, Globe, Linkedin, Twitter } from "lucide-react";
 import { about, images } from "@/config/content";
@@ -94,6 +95,7 @@ const About = () => {
         </section>
 
         <CTASection />
+        <SpecialOfferForm />
         <Footer />
       </PageTransition>
     </div>

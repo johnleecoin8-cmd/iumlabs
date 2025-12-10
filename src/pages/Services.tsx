@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ServicesSection from "@/components/ServicesSection";
 import CTASection from "@/components/CTASection";
+import SpecialOfferForm from "@/components/SpecialOfferForm";
 import PageTransition from "@/components/PageTransition";
 import { servicesPage } from "@/config/content";
 
@@ -23,6 +24,7 @@ const Services = () => {
 
         <ServicesSection />
         <CTASection />
+        <SpecialOfferForm />
         <Footer />
       </PageTransition>
     </div>

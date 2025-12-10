@@ -5,6 +5,7 @@ import StatsSection from "@/components/StatsSection";
 import ServicesSection from "@/components/ServicesSection";
 import PortfolioSection from "@/components/PortfolioSection";
 import CTASection from "@/components/CTASection";
+import SpecialOfferForm from "@/components/SpecialOfferForm";
 import Footer from "@/components/Footer";
 import PageIntro from "@/components/PageIntro";
 
@@ -30,6 +31,7 @@ const Index = () => {
         <ServicesSection />
         <PortfolioSection />
         <CTASection />
+        <SpecialOfferForm />
       </main>
       <Footer />
     </div>
