@@ -1,32 +1,22 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
-import { ArrowRight, Linkedin, Twitter } from "lucide-react";
+import { ArrowRight, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const teamMembers = [
   {
-    name: "James Lee",
-    role: "Co-Founder & CEO",
+    name: "James",
+    role: "Co-Founder",
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    description: "10+ years in blockchain & fintech. Former Binance Korea.",
-    linkedin: "#",
-    twitter: "#",
+    description: "Ex-Lead of Korea from Kucoin, Ex-VC from Outlierventures",
+    linkedin: "https://www.linkedin.com/in/james-l-13a998251/",
   },
   {
-    name: "David Kim",
-    role: "Co-Founder & CMO",
+    name: "David",
+    role: "Co-Founder",
     avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-    description: "Led marketing for 50+ Web3 projects. Ex-Samsung.",
+    description: "Ex-Head of Business Development from Binance, Ex-Analyst from 21 shares",
     linkedin: "#",
-    twitter: "#",
-  },
-  {
-    name: "Emily Park",
-    role: "Head of Community",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop&crop=face",
-    description: "Built communities of 1M+ members. Discord expert.",
-    linkedin: "#",
-    twitter: "#",
   },
 ];
 
@@ -48,7 +38,7 @@ const TeamPreviewSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
+        <div className="grid md:grid-cols-2 gap-8 mb-12 max-w-3xl mx-auto">
           {teamMembers.map((member, index) => (
             <div
               key={index}
@@ -71,11 +61,8 @@ const TeamPreviewSection = () => {
               <p className="text-muted-foreground text-sm mb-4">{member.description}</p>
 
               <div className="flex justify-center gap-3">
-                <a href={member.linkedin} className="text-muted-foreground hover:text-primary transition-colors">
+                <a href={member.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
                   <Linkedin className="w-5 h-5" />
-                </a>
-                <a href={member.twitter} className="text-muted-foreground hover:text-primary transition-colors">
-                  <Twitter className="w-5 h-5" />
                 </a>
               </div>
             </div>
