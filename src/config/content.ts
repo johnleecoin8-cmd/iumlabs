@@ -74,6 +74,7 @@ export const navigation = {
   links: [
     { name: "서비스", href: "/services" },
     { name: "프로젝트", href: "/projects" },
+    { name: "블로그", href: "/blog" },
     { name: "회사 소개", href: "/about" },
     { name: "문의하기", href: "/contact" },
   ],
@@ -312,14 +313,14 @@ export const footer = {
   companyTitle: "회사",
   services: [
     { name: "Web3 마케팅", href: "/services" },
-    { name: "NFT 마케팅", href: "/services" },
-    { name: "DeFi 마케팅", href: "/services" },
-    { name: "거래소 리스팅", href: "/services" },
+    { name: "NFT 마케팅", href: "/services/nft" },
+    { name: "DeFi 마케팅", href: "/services/defi" },
+    { name: "GameFi 마케팅", href: "/services/gamefi" },
   ],
   company: [
     { name: "회사 소개", href: "/about" },
     { name: "케이스 스터디", href: "/projects" },
-    { name: "블로그", href: "#" },
+    { name: "블로그", href: "/blog" },
     { name: "문의하기", href: "/contact" },
   ],
   social: ["LinkedIn", "Telegram", "Twitter"],

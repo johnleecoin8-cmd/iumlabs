@@ -8,6 +8,10 @@ import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Blog from "./pages/Blog";
+import NFTService from "./pages/NFTService";
+import DeFiService from "./pages/DeFiService";
+import GameFiService from "./pages/GameFiService";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,9 +25,13 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/services" element={<Services />} />
+          <Route path="/services/nft" element={<NFTService />} />
+          <Route path="/services/defi" element={<DeFiService />} />
+          <Route path="/services/gamefi" element={<GameFiService />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/blog" element={<Blog />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
