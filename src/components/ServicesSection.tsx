@@ -5,89 +5,67 @@ const services = [
     icon: Blocks,
     title: "Web3 Marketing",
     description: "Comprehensive marketing strategies for blockchain projects, including community building, PR, and influencer campaigns.",
-    features: ["Community Management", "PR & Media", "KOL Partnerships"],
   },
   {
     icon: Image,
     title: "NFT Marketing",
     description: "End-to-end NFT launch services from artwork strategy to marketplace listing and community engagement.",
-    features: ["Launch Strategy", "Marketplace Listing", "Community Building"],
   },
   {
     icon: Coins,
     title: "DeFi Marketing",
     description: "Specialized marketing for DeFi protocols including liquidity programs, yield farming campaigns, and TVL growth.",
-    features: ["TVL Growth", "Liquidity Campaigns", "Protocol Marketing"],
   },
   {
     icon: Gamepad2,
-    title: "GameFi / P2E",
+    title: "GameFi",
     description: "Gaming-focused marketing strategies for play-to-earn and GameFi projects targeting the Korean gaming market.",
-    features: ["Player Acquisition", "Guild Partnerships", "Esports Marketing"],
   },
   {
     icon: ListChecks,
     title: "Exchange Listing",
     description: "Professional assistance with Korean and international exchange listings including documentation and negotiations.",
-    features: ["CEX Listings", "DEX Listings", "Market Making"],
   },
   {
     icon: Users,
-    title: "Advisory Services",
+    title: "Advisory",
     description: "Strategic consulting for tokenomics, go-to-market strategy, and regulatory compliance in the Korean market.",
-    features: ["Tokenomics", "Legal Advisory", "Market Entry"],
   },
 ];
 
 const ServicesSection = () => {
   return (
-    <section id="services" className="py-24 relative">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/30 to-transparent" />
-      
-      <div className="container mx-auto px-4 relative z-10">
+    <section id="services" className="py-32">
+      <div className="container mx-auto px-4">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tight mb-4">
-            <span className="text-gradient">Our Services</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Full-spectrum Web3 marketing services tailored for the Korean and Asian markets
+        <div className="text-center mb-20">
+          <p className="text-primary text-sm font-medium tracking-wide mb-4">
+            What We Do
           </p>
+          <h2 className="text-display-md md:text-display-lg max-w-3xl mx-auto">
+            Full-service Web3 marketing for the Korean market.
+          </h2>
         </div>
 
         {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <div
               key={service.title}
-              className="group card-gradient rounded-xl p-6 hover:border-primary/50 transition-all duration-500 hover:-translate-y-2"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className="group p-8 rounded-2xl bg-secondary/50 hover:bg-secondary transition-all duration-300"
             >
               {/* Icon */}
-              <div className="w-14 h-14 rounded-lg bg-primary/10 flex items-center justify-center mb-5 group-hover:bg-primary/20 transition-colors">
-                <service.icon className="w-7 h-7 text-primary" />
+              <div className="w-12 h-12 rounded-xl bg-foreground/5 flex items-center justify-center mb-6 group-hover:bg-primary/10 transition-colors">
+                <service.icon className="w-6 h-6 text-foreground group-hover:text-primary transition-colors" />
               </div>
 
               {/* Content */}
-              <h3 className="font-display text-xl font-bold uppercase tracking-wide mb-3 group-hover:text-primary transition-colors">
+              <h3 className="text-xl font-semibold mb-3">
                 {service.title}
               </h3>
-              <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed">
                 {service.description}
               </p>
-
-              {/* Features */}
-              <div className="flex flex-wrap gap-2">
-                {service.features.map((feature) => (
-                  <span
-                    key={feature}
-                    className="text-xs px-3 py-1 rounded-full bg-muted text-muted-foreground"
-                  >
-                    {feature}
-                  </span>
-                ))}
-              </div>
             </div>
           ))}
         </div>
