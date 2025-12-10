@@ -122,9 +122,9 @@ const StatsSection = () => {
       </div>
 
       {/* 3D Element - Left side */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[300px] h-[300px] opacity-40 pointer-events-none hidden lg:block">
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[300px] h-[300px] opacity-50 pointer-events-none hidden lg:block">
         <Suspense fallback={null}>
-          <MetallicElement variant="ring" />
+          <MetallicElement variant="mini" />
         </Suspense>
       </div>
 

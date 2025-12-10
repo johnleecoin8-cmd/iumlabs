@@ -1,83 +1,86 @@
 import { Canvas, useFrame } from '@react-three/fiber';
-import { MeshTransmissionMaterial, Environment, Float } from '@react-three/drei';
+import { Environment, Float } from '@react-three/drei';
 import { useRef, Suspense } from 'react';
 import * as THREE from 'three';
 
-function TorusKnot() {
-  const meshRef = useRef<THREE.Mesh>(null);
-  
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.1;
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.15;
-    }
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={1}>
-      <mesh ref={meshRef} scale={1.8}>
-        <torusKnotGeometry args={[1, 0.35, 128, 32]} />
-        <MeshTransmissionMaterial
-          backside
-          samples={16}
-          thickness={0.5}
-          chromaticAberration={0.5}
-          anisotropy={0.3}
-          distortion={0.2}
-          distortionScale={0.3}
-          temporalDistortion={0.1}
-          iridescence={1}
-          iridescenceIOR={1}
-          iridescenceThicknessRange={[0, 1400]}
-          color="#c0c0c0"
-          roughness={0.1}
-          metalness={0.9}
-        />
-      </mesh>
-    </Float>
-  );
-}
-
-function InterlockingRings() {
-  const group1Ref = useRef<THREE.Group>(null);
-  const group2Ref = useRef<THREE.Group>(null);
+function CryptoBridgeHero() {
+  const groupRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
     const t = state.clock.elapsedTime;
-    if (group1Ref.current) {
-      group1Ref.current.rotation.x = Math.sin(t * 0.3) * 0.2;
-      group1Ref.current.rotation.y = t * 0.1;
-    }
-    if (group2Ref.current) {
-      group2Ref.current.rotation.x = Math.cos(t * 0.3) * 0.2 + Math.PI / 2;
-      group2Ref.current.rotation.y = -t * 0.1;
+    if (groupRef.current) {
+      groupRef.current.rotation.y = Math.sin(t * 0.15) * 0.5;
+      groupRef.current.rotation.x = Math.cos(t * 0.1) * 0.15;
+      groupRef.current.rotation.z = Math.sin(t * 0.08) * 0.1;
     }
   });
 
-  const ringMaterial = (
-    <meshStandardMaterial
-      color="#d4d4d4"
-      metalness={0.95}
-      roughness={0.05}
-      envMapIntensity={1.5}
-    />
-  );
+  // Primary brand color - crimson red
+  const primaryColor = "#dc2626";
+  const primaryColorLight = "#ef4444";
+  const primaryColorDark = "#b91c1c";
+  const accentColor = "#f87171";
 
   return (
-    <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.8}>
-      <group scale={2}>
-        <group ref={group1Ref}>
-          <mesh>
-            <torusGeometry args={[1, 0.15, 32, 100]} />
-            {ringMaterial}
-          </mesh>
-        </group>
-        <group ref={group2Ref} position={[0.3, 0, 0]}>
-          <mesh>
-            <torusGeometry args={[0.8, 0.12, 32, 100]} />
-            {ringMaterial}
-          </mesh>
-        </group>
+    <Float speed={1} rotationIntensity={0.15} floatIntensity={0.5}>
+      <group ref={groupRef} scale={2.2}>
+        {/* Main large bridge arch */}
+        <mesh rotation={[0, 0, 0]}>
+          <torusGeometry args={[1.3, 0.12, 48, 128, Math.PI]} />
+          <meshStandardMaterial
+            color={primaryColor}
+            metalness={0.95}
+            roughness={0.05}
+            envMapIntensity={2.5}
+          />
+        </mesh>
+        
+        {/* Secondary arch - tilted */}
+        <mesh rotation={[0.4, 0.3, 0.15]} position={[0.15, -0.05, 0.25]}>
+          <torusGeometry args={[1.0, 0.1, 48, 128, Math.PI]} />
+          <meshStandardMaterial
+            color={primaryColorLight}
+            metalness={0.95}
+            roughness={0.05}
+            envMapIntensity={2.5}
+          />
+        </mesh>
+        
+        {/* Third arch - opposite tilt */}
+        <mesh rotation={[-0.3, -0.4, -0.1]} position={[-0.15, 0.05, -0.25]}>
+          <torusGeometry args={[0.8, 0.08, 48, 128, Math.PI]} />
+          <meshStandardMaterial
+            color={primaryColorDark}
+            metalness={0.95}
+            roughness={0.05}
+            envMapIntensity={2.5}
+          />
+        </mesh>
+
+        {/* Small accent arch */}
+        <mesh rotation={[0.6, 0.1, 0.3]} position={[0.3, 0.2, 0.1]}>
+          <torusGeometry args={[0.5, 0.05, 32, 64, Math.PI]} />
+          <meshStandardMaterial
+            color={accentColor}
+            metalness={0.95}
+            roughness={0.05}
+            envMapIntensity={2}
+          />
+        </mesh>
+
+        {/* Connecting ring elements */}
+        <mesh position={[0.9, -0.4, 0]} rotation={[Math.PI / 2, 0, 0.4]}>
+          <torusGeometry args={[0.15, 0.04, 24, 64]} />
+          <meshStandardMaterial color={primaryColor} metalness={0.95} roughness={0.05} />
+        </mesh>
+        <mesh position={[-0.9, -0.4, 0]} rotation={[Math.PI / 2, 0, -0.4]}>
+          <torusGeometry args={[0.15, 0.04, 24, 64]} />
+          <meshStandardMaterial color={primaryColor} metalness={0.95} roughness={0.05} />
+        </mesh>
+        <mesh position={[0, 0.5, 0.3]} rotation={[0.5, 0, 0]}>
+          <torusGeometry args={[0.1, 0.03, 16, 32]} />
+          <meshStandardMaterial color={primaryColorLight} metalness={0.95} roughness={0.05} />
+        </mesh>
       </group>
     </Float>
   );
@@ -93,9 +96,10 @@ const MetallicRings = () => {
       >
         <Suspense fallback={null}>
           <ambientLight intensity={0.5} />
-          <directionalLight position={[10, 10, 5]} intensity={1} />
-          <pointLight position={[-10, -10, -5]} intensity={0.5} color="#ff6b6b" />
-          <InterlockingRings />
+          <directionalLight position={[10, 10, 5]} intensity={1.2} />
+          <pointLight position={[-10, -10, -5]} intensity={0.6} color="#dc2626" />
+          <pointLight position={[5, 5, 5]} intensity={0.4} color="#ffffff" />
+          <CryptoBridgeHero />
           <Environment preset="city" />
         </Suspense>
       </Canvas>
