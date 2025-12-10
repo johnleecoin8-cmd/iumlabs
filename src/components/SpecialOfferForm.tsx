@@ -17,8 +17,8 @@ import {
 } from "@/components/ui/form";
 
 const formSchema = z.object({
-  email: z.string().email({ message: "올바른 이메일을 입력해주세요" }),
-  name: z.string().min(1, { message: "이름을 입력해주세요" }).max(100),
+  email: z.string().email({ message: "Please enter a valid email" }),
+  name: z.string().min(1, { message: "Please enter your name" }).max(100),
   comments: z.string().max(1000).optional(),
 });
 
@@ -65,84 +65,104 @@ const SpecialOfferForm = () => {
   };
 
   return (
-    <section className="relative py-20 px-4 overflow-hidden">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-purple-600 to-blue-600" />
+    <section className="relative py-32 px-4 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-card/50" />
       
-      {/* Noise overlay */}
-      <div className="absolute inset-0 opacity-20 mix-blend-overlay bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIGJhc2VGcmVxdWVuY3k9Ii43NSIgc3RpdGNoVGlsZXM9InN0aXRjaCIgdHlwZT0iZnJhY3RhbE5vaXNlIi8+PGZlQ29sb3JNYXRyaXggdHlwZT0ic2F0dXJhdGUiIHZhbHVlcz0iMCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNhKSIvPjwvc3ZnPg==')]" />
+      {/* Dot pattern */}
+      <div 
+        className="absolute inset-0 opacity-30"
+        style={{
+          backgroundImage: `radial-gradient(circle, hsl(var(--muted-foreground) / 0.3) 1px, transparent 1px)`,
+          backgroundSize: '24px 24px'
+        }}
+      />
+
+      {/* Top border gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
       
       <div className="container mx-auto max-w-2xl relative z-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-10 tracking-wide">
-          {specialOffer.title}
-        </h2>
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-6">
+            <span className="text-sm font-medium text-primary">Get Started</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl tracking-tight mb-4">
+            <span className="font-serif italic text-muted-foreground">Let's</span>{" "}
+            <span className="font-sans font-bold text-foreground">Connect</span>
+          </h2>
+          <p className="text-muted-foreground">
+            {specialOffer.title}
+          </p>
+        </div>
         
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder={specialOffer.emailPlaceholder}
-                      {...field}
-                      className="bg-transparent border-white/40 text-white placeholder:text-white/60 h-12 focus:border-white focus-visible:ring-0 focus-visible:ring-offset-0"
-                    />
-                  </FormControl>
-                  <FormMessage className="text-white/80" />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder={specialOffer.namePlaceholder}
-                      {...field}
-                      className="bg-transparent border-white/40 text-white placeholder:text-white/60 h-12 focus:border-white focus-visible:ring-0 focus-visible:ring-offset-0"
-                    />
-                  </FormControl>
-                  <FormMessage className="text-white/80" />
-                </FormItem>
-              )}
-            />
-            
-            <FormField
-              control={form.control}
-              name="comments"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea
-                      placeholder={specialOffer.commentsPlaceholder}
-                      {...field}
-                      rows={4}
-                      className="bg-transparent border-white/40 text-white placeholder:text-white/60 resize-none focus:border-white focus-visible:ring-0 focus-visible:ring-offset-0"
-                    />
-                  </FormControl>
-                  <FormMessage className="text-white/80" />
-                </FormItem>
-              )}
-            />
-            
-            <div className="flex justify-center pt-2">
-              <Button
-                type="submit"
-                disabled={isSubmitting}
-                variant="outline"
-                className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-purple-600 px-10 py-6 text-lg font-semibold tracking-wider transition-all duration-300"
-              >
-                {isSubmitting ? "전송 중..." : specialOffer.buttonText}
-              </Button>
-            </div>
-          </form>
-        </Form>
+        <div className="p-8 rounded-3xl border border-border/30 bg-card/30 backdrop-blur-sm">
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+              <FormField
+                control={form.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder={specialOffer.emailPlaceholder}
+                        {...field}
+                        className="bg-background/50 border-border/50 text-foreground placeholder:text-muted-foreground h-12 rounded-xl focus:border-primary focus-visible:ring-0 focus-visible:ring-offset-0"
+                      />
+                    </FormControl>
+                    <FormMessage className="text-destructive" />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="name"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        placeholder={specialOffer.namePlaceholder}
+                        {...field}
+                        className="bg-background/50 border-border/50 text-foreground placeholder:text-muted-foreground h-12 rounded-xl focus:border-primary focus-visible:ring-0 focus-visible:ring-offset-0"
+                      />
+                    </FormControl>
+                    <FormMessage className="text-destructive" />
+                  </FormItem>
+                )}
+              />
+              
+              <FormField
+                control={form.control}
+                name="comments"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Textarea
+                        placeholder={specialOffer.commentsPlaceholder}
+                        {...field}
+                        rows={4}
+                        className="bg-background/50 border-border/50 text-foreground placeholder:text-muted-foreground resize-none rounded-xl focus:border-primary focus-visible:ring-0 focus-visible:ring-offset-0"
+                      />
+                    </FormControl>
+                    <FormMessage className="text-destructive" />
+                  </FormItem>
+                )}
+              />
+              
+              <div className="flex justify-center pt-4">
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="rounded-full bg-primary hover:bg-primary/90 px-12 py-6 text-base font-medium"
+                >
+                  {isSubmitting ? "Sending..." : specialOffer.buttonText}
+                </Button>
+              </div>
+            </form>
+          </Form>
+        </div>
       </div>
     </section>
   );

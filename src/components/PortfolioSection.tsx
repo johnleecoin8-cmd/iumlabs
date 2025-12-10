@@ -15,17 +15,9 @@ const imageMap: Record<string, string> = {
   "k-play": portfolioGamefi,
 };
 
-const gradients = [
-  { gradient: "from-primary to-accent", glow: "primary" },
-  { gradient: "from-gradient-cyan to-primary", glow: "gradient-cyan" },
-  { gradient: "from-gradient-pink to-gradient-orange", glow: "gradient-pink" },
-  { gradient: "from-gradient-orange to-gradient-pink", glow: "gradient-orange" },
-];
-
 const ProjectCard = ({ project, index }: { project: typeof portfolio.projects[0]; index: number }) => {
-  const tilt = useTilt({ max: 12, scale: 1.03 });
+  const tilt = useTilt({ max: 8, scale: 1.02 });
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
-  const { gradient } = gradients[index % gradients.length];
   const image = imageMap[project.id] || portfolioMetaverse;
 
   return (
@@ -39,73 +31,46 @@ const ProjectCard = ({ project, index }: { project: typeof portfolio.projects[0]
         onMouseMove={tilt.onMouseMove}
         onMouseLeave={tilt.onMouseLeave}
         style={tilt.style}
-        className="group relative cursor-pointer overflow-hidden rounded-2xl"
+        className="group relative cursor-pointer overflow-hidden rounded-3xl border border-border/30 bg-card/30 backdrop-blur-sm hover:border-primary/30 transition-all duration-500"
       >
-        {/* Outer glow effect - visible on hover */}
-        <div className={`absolute -inset-2 bg-gradient-to-r ${gradient} rounded-3xl opacity-0 blur-xl transition-all duration-500 group-hover:opacity-60 group-hover:blur-2xl group-hover:-inset-4`} />
-        
-        {/* Card container */}
-        <div className="relative glass-card-hover overflow-hidden">
-          {/* Project Image with enhanced hover */}
-          <div className="relative h-56 overflow-hidden">
-            {/* Image glow layer */}
-            <div className={`absolute inset-0 bg-gradient-to-br ${gradient} opacity-0 group-hover:opacity-30 transition-opacity duration-500 z-10`} />
-            
-            <img 
-              src={image} 
-              alt={project.name}
-              className="w-full h-full object-cover transition-all duration-700 group-hover:scale-125 group-hover:rotate-2"
-            />
-            
-            {/* Shine sweep effect */}
-            <div className="absolute inset-0 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none overflow-hidden">
-              <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12" />
-            </div>
-            
-            {/* Gradient overlay */}
-            <div className={`absolute inset-0 bg-gradient-to-t from-card via-card/60 to-transparent opacity-90 z-10`} />
-            
-            {/* Category Badge - positioned on image */}
-            <div className={`absolute top-4 left-4 z-30 inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r ${gradient} text-sm backdrop-blur-sm shadow-lg transition-transform duration-300 group-hover:scale-110`}>
-              <span className="text-primary-foreground font-medium">{project.category}</span>
-            </div>
-            
-            {/* Floating stats badge */}
-            <div className="absolute top-4 right-4 z-30 glass-card px-3 py-1.5 rounded-full opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-              <span className="text-xs font-medium text-green-400">{portfolio.activeLabel}</span>
-            </div>
-          </div>
-          
-          {/* Glare effect */}
-          <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-20"
-            style={{
-              background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.05) 45%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 55%, transparent 60%)',
-            }}
+        {/* Project Image */}
+        <div className="relative h-56 overflow-hidden">
+          <img 
+            src={image} 
+            alt={project.name}
+            className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
           />
+          
+          {/* Gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/60 to-transparent" />
+          
+          {/* Category Badge */}
+          <div className="absolute top-4 left-4 z-10 inline-flex items-center px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20">
+            <span className="text-sm font-medium text-primary">{project.category}</span>
+          </div>
+        </div>
 
-          {/* Content */}
-          <div className="relative p-6 z-20">
-            <h3 className="text-2xl font-semibold mb-3 group-hover:text-gradient transition-all duration-300">
-              {project.name}
-            </h3>
-            <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-2">
-              {project.description}
-            </p>
+        {/* Content */}
+        <div className="relative p-6">
+          <h3 className="text-2xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
+            {project.name}
+          </h3>
+          <p className="text-muted-foreground mb-6 leading-relaxed line-clamp-2 text-sm">
+            {project.description}
+          </p>
 
-            {/* Stats */}
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="text-xs text-muted-foreground mb-1">
-                  {portfolio.fundsRaised}
-                </div>
-                <div className="text-xl font-semibold text-gradient">
-                  {project.raised}
-                </div>
+          {/* Stats */}
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-xs text-muted-foreground mb-1">
+                {portfolio.fundsRaised}
               </div>
-              <div className={`w-12 h-12 rounded-full glass-card flex items-center justify-center group-hover:bg-gradient-to-br ${gradient} transition-all duration-300 group-hover:scale-110 group-hover:shadow-lg`}>
-                <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+              <div className="text-xl font-bold text-foreground">
+                {project.raised}
               </div>
+            </div>
+            <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-300">
+              <ArrowUpRight className="w-5 h-5 text-primary group-hover:text-primary-foreground transition-colors" />
             </div>
           </div>
         </div>
@@ -117,15 +82,18 @@ const ProjectCard = ({ project, index }: { project: typeof portfolio.projects[0]
 const PortfolioSection = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.3 });
 
-  // Parse headline with highlight
-  const headlineParts = portfolio.headline.split(/<highlight>|<\/highlight>/);
-
   return (
     <section id="portfolio" className="py-32 relative">
       {/* Background effects */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="gradient-blob gradient-blob-pink w-[400px] h-[400px] top-20 right-0 opacity-20" />
-        <div className="gradient-blob gradient-blob-orange w-[300px] h-[300px] bottom-20 left-0 opacity-20" />
+        {/* Dot pattern */}
+        <div 
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: `radial-gradient(circle, hsl(var(--muted-foreground) / 0.3) 1px, transparent 1px)`,
+            backgroundSize: '24px 24px'
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -135,16 +103,17 @@ const PortfolioSection = () => {
           className={`flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6 scroll-animate ${headerVisible ? 'is-visible' : ''}`}
         >
           <div>
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-6">
               <span className="text-sm font-medium text-primary">{portfolio.badge}</span>
             </div>
-            <h2 className="text-display-md md:text-display-lg">
-              {headlineParts[0]}<span className="text-gradient">{headlineParts[1]}</span>{headlineParts[2]}
+            <h2 className="text-4xl md:text-6xl tracking-tight">
+              <span className="font-serif italic text-muted-foreground">Featured</span>{" "}
+              <span className="font-sans font-bold text-foreground">Projects</span>
             </h2>
           </div>
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 text-primary text-sm font-medium hover:gap-3 transition-all group"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium hover:bg-primary/20 transition-all group"
           >
             {portfolio.viewAll}
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
