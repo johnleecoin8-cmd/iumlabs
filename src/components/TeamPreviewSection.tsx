@@ -39,6 +39,11 @@ const TeamPreviewSection = () => {
       </div>
 
       <div className="container mx-auto max-w-6xl relative z-10">
+        {/* Section Number */}
+        <div className={`text-center mb-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <span className="text-primary font-mono text-sm tracking-wider">05.</span>
+        </div>
+
         <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-6">
             <span className="text-sm font-medium text-primary">Our Team</span>

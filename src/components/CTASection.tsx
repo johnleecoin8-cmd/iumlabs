@@ -27,18 +27,23 @@ const CTASection = () => {
       {/* 3D Element - Left side */}
       <div className="absolute left-10 top-1/2 -translate-y-1/2 w-[250px] h-[250px] opacity-30 pointer-events-none hidden lg:block">
         <Suspense fallback={null}>
-          <MetallicElement variant="double" />
+          <MetallicElement variant="bridge" className="opacity-50" />
         </Suspense>
       </div>
 
       {/* 3D Element - Right side */}
       <div className="absolute right-10 top-1/2 -translate-y-1/2 w-[250px] h-[250px] opacity-30 pointer-events-none hidden lg:block">
         <Suspense fallback={null}>
-          <MetallicElement variant="ring" />
+          <MetallicElement variant="double" className="opacity-40" />
         </Suspense>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
+        {/* Section Number */}
+        <div className={`text-center mb-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <span className="text-primary font-mono text-sm tracking-wider">06.</span>
+        </div>
+        
         <div className={`max-w-4xl mx-auto text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-8">
