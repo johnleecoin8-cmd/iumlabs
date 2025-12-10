@@ -6,7 +6,7 @@ import { Users, Target, Zap, Globe, Linkedin, Twitter } from "lucide-react";
 import { about, images } from "@/config/content";
 
 const iconMap = [Target, Zap, Users, Globe];
-const teamImages = [images.team.member1, images.team.member2, images.team.member3, images.team.member4];
+const teamImages = [images.team.james, images.team.david];
 
 const About = () => {
   const parseHighlight = (text: string) => {
@@ -52,7 +52,7 @@ const About = () => {
         <section className="py-20 px-4 bg-secondary/20">
           <div className="container mx-auto max-w-6xl">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">{parseHighlight(about.valuesTitle)}</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto">
               {about.values.map((value, index) => {
                 const Icon = iconMap[index];
                 return (

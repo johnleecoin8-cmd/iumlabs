@@ -11,14 +11,15 @@
 // 브랜드 정보
 // =====================================================
 export const brand = {
-  name: "CryptoBridge",
+  name: "CryptoBridge Korea",
   tagline: "Web3 마케팅 에이전시",
   description: "한국 최고의 Web3 전문 마케팅 에이전시. 블록체인 프로젝트의 성공적인 런칭과 성장을 지원합니다.",
-  email: "hello@cryptobridge.kr",
-  phone: "+82 2-1234-5678",
-  address: "서울시 강남구 테헤란로 123, 크립토타워 15층",
+  email: "contact@cryptobridge.kr",
+  phone: "010 3969 9699",
+  address: "OFFICE 11B, Gangnam-daero 373, Gangnam, Seoul, South Korea",
   telegram: "@CryptoBridgeKR",
   telegramLink: "https://t.me/CryptoBridgeKR",
+  linkedin: "https://www.linkedin.com/company/cryptobridge",
   copyright: `© ${new Date().getFullYear()} CryptoBridge Korea`,
 };
 
@@ -54,10 +55,8 @@ export const images = {
    * 배경: 깔끔한 단색 배경 권장
    */
   team: {
-    member1: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
-    member2: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=300&h=300&fit=crop&crop=face",
-    member3: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
-    member4: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=300&h=300&fit=crop&crop=face",
+    james: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=300&fit=crop&crop=face",
+    david: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face",
   },
 
   /**
@@ -323,7 +322,7 @@ export const footer = {
     { name: "블로그", href: "#" },
     { name: "문의하기", href: "/contact" },
   ],
-  social: ["Twitter", "Telegram", "Discord"],
+  social: ["LinkedIn", "Telegram", "Twitter"],
   legal: {
     privacy: "개인정보처리방침",
     terms: "이용약관",
@@ -372,24 +371,14 @@ export const about = {
   teamTitle: "Our <highlight>Team</highlight>",
   team: [
     {
-      name: "김민수",
-      role: "CEO & Founder",
-      description: "10년+ 디지털 마케팅 경력, 전 삼성전자 마케팅 팀장",
+      name: "James",
+      role: "Co-Founder",
+      description: "Web3 전략 및 비즈니스 개발 전문가",
     },
     {
-      name: "이지은",
-      role: "Head of Strategy",
-      description: "Web3 전문가, 50+ DeFi/NFT 프로젝트 컨설팅",
-    },
-    {
-      name: "박준혁",
-      role: "Creative Director",
-      description: "브랜딩 전문가, 글로벌 에이전시 출신",
-    },
-    {
-      name: "최서연",
-      role: "Community Lead",
-      description: "100만+ 커뮤니티 성장 경험, KOL 네트워크 전문",
+      name: "David",
+      role: "Co-Founder",
+      description: "블록체인 마케팅 및 커뮤니티 성장 전문가",
     },
   ],
 };
