@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Blocks, Coins, Gamepad2, Image, ListChecks, Users, ArrowRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useTilt } from "@/hooks/useTilt";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { services as servicesContent } from "@/config/content";
+
+const serviceRoutes: Record<string, string> = {
+  "nft-marketing": "/services/nft",
+  "defi-marketing": "/services/defi",
+  "gamefi": "/services/gamefi",
+};
 
 const iconMap = {
   "web3-marketing": Blocks,
