@@ -1,8 +1,11 @@
+import { lazy, Suspense } from "react";
 import { ArrowRight, Mail, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { cta, brand } from "@/config/content";
+
+const MetallicElement = lazy(() => import("@/components/MetallicElement"));
 
 const CTASection = () => {
   const { ref, isVisible } = useScrollAnimation();
@@ -21,10 +24,18 @@ const CTASection = () => {
         }}
       />
       
-      {/* Geometric decorations */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/4 -left-20 w-40 h-40 border border-primary/10 rounded-full" />
-        <div className="absolute bottom-1/4 -right-20 w-60 h-60 border border-primary/10 rounded-full" />
+      {/* 3D Element - Left side */}
+      <div className="absolute left-10 top-1/2 -translate-y-1/2 w-[250px] h-[250px] opacity-30 pointer-events-none hidden lg:block">
+        <Suspense fallback={null}>
+          <MetallicElement variant="double" />
+        </Suspense>
+      </div>
+
+      {/* 3D Element - Right side */}
+      <div className="absolute right-10 top-1/2 -translate-y-1/2 w-[250px] h-[250px] opacity-30 pointer-events-none hidden lg:block">
+        <Suspense fallback={null}>
+          <MetallicElement variant="ring" />
+        </Suspense>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">

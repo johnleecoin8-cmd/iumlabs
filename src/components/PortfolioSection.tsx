@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useTilt } from "@/hooks/useTilt";
@@ -7,6 +8,8 @@ import portfolioDefi from "@/assets/portfolio-defi.png";
 import portfolioDao from "@/assets/portfolio-dao.png";
 import portfolioGamefi from "@/assets/portfolio-gamefi.png";
 import { portfolio } from "@/config/content";
+
+const MetallicElement = lazy(() => import("@/components/MetallicElement"));
 
 const imageMap: Record<string, string> = {
   "metaverse-korea": portfolioMetaverse,
@@ -94,6 +97,13 @@ const PortfolioSection = () => {
             backgroundSize: '24px 24px'
           }}
         />
+      </div>
+
+      {/* 3D Element - Right side */}
+      <div className="absolute right-0 top-1/3 w-[350px] h-[350px] opacity-30 pointer-events-none hidden lg:block">
+        <Suspense fallback={null}>
+          <MetallicElement variant="bridge" />
+        </Suspense>
       </div>
 
       <div className="container mx-auto px-4 relative z-10">

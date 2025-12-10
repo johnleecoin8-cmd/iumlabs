@@ -1,7 +1,10 @@
+import { lazy, Suspense } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
 import { AreaChart, Area, ResponsiveContainer, BarChart, Bar } from "recharts";
 import { stats as statsContent } from "@/config/content";
+
+const MetallicElement = lazy(() => import("@/components/MetallicElement"));
 
 const chartDataSets = [
   [{ value: 30 }, { value: 45 }, { value: 60 }, { value: 80 }, { value: 95 }, { value: 120 }, { value: 150 }, { value: 180 }, { value: 200 }],
@@ -116,6 +119,13 @@ const StatsSection = () => {
             backgroundSize: '24px 24px'
           }}
         />
+      </div>
+
+      {/* 3D Element - Left side */}
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[300px] h-[300px] opacity-40 pointer-events-none hidden lg:block">
+        <Suspense fallback={null}>
+          <MetallicElement variant="ring" />
+        </Suspense>
       </div>
 
       {/* Top border gradient */}
