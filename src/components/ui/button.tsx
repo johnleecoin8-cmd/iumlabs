@@ -11,15 +11,19 @@ const buttonVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-border bg-transparent text-foreground hover:bg-muted",
+        outline: "border border-border bg-transparent text-foreground hover:bg-secondary",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-muted hover:text-foreground",
+        ghost: "hover:bg-secondary hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        // Apple-style variants
+        // Legacy Apple-style variants
         filled: "bg-foreground text-background hover:bg-foreground/90",
         "filled-blue": "bg-primary text-primary-foreground hover:bg-primary/90",
-        "ghost-dark": "bg-transparent text-foreground border border-foreground/20 hover:bg-foreground/5",
+        "ghost-dark": "bg-transparent text-foreground border border-border hover:bg-secondary",
         "text-link": "text-primary hover:text-primary/80 p-0 h-auto font-normal",
+        // New Stripe/Linear style variants
+        gradient: "bg-gradient-to-r from-primary via-accent to-gradient-pink text-primary-foreground hover:opacity-90 hover:shadow-lg hover:shadow-primary/25 transition-all",
+        glow: "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/50 transition-all",
+        glass: "bg-secondary/50 backdrop-blur-xl border border-border/50 text-foreground hover:bg-secondary/70 hover:border-primary/30",
       },
       size: {
         default: "h-11 px-6 py-2",

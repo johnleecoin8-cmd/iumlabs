@@ -50,6 +50,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Stripe gradient colors
+        "gradient-purple": "hsl(var(--gradient-purple))",
+        "gradient-pink": "hsl(var(--gradient-pink))",
+        "gradient-orange": "hsl(var(--gradient-orange))",
+        "gradient-cyan": "hsl(var(--gradient-cyan))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -74,10 +79,35 @@ export default {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { opacity: "0.5", transform: "scale(1)" },
+          "50%": { opacity: "0.8", transform: "scale(1.05)" },
+        },
+        "gradient-shift": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "float": "float 6s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 4s ease-in-out infinite",
+        "gradient-shift": "gradient-shift 8s ease-in-out infinite",
+        "shimmer": "shimmer 2s linear infinite",
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-stripe": "linear-gradient(135deg, hsl(var(--gradient-purple)), hsl(var(--gradient-pink)), hsl(var(--gradient-orange)))",
+        "gradient-stripe-soft": "linear-gradient(135deg, hsl(var(--gradient-purple) / 0.3), hsl(var(--gradient-pink) / 0.3), hsl(var(--gradient-orange) / 0.3))",
       },
     },
   },
