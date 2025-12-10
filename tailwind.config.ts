@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        sans: ['Space Grotesk', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -50,11 +50,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Stripe gradient colors
-        "gradient-purple": "hsl(var(--gradient-purple))",
-        "gradient-pink": "hsl(var(--gradient-pink))",
+        // Red gradient colors
+        "gradient-red": "hsl(var(--gradient-red))",
+        "gradient-crimson": "hsl(var(--gradient-crimson))",
         "gradient-orange": "hsl(var(--gradient-orange))",
-        "gradient-cyan": "hsl(var(--gradient-cyan))",
+        "gradient-gold": "hsl(var(--gradient-gold))",
       },
       borderRadius: {
         lg: "var(--radius)",

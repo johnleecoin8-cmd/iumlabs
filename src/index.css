@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,48 +6,50 @@
 
 @layer base {
   :root {
-    /* Dark theme as default - Linear style */
-    --background: 240 6% 4%;
+    /* Crowdcreate-inspired Dark Red Theme */
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
 
-    --card: 240 5% 7%;
+    --card: 0 0% 7%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 240 5% 7%;
+    --popover: 0 0% 7%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 250 89% 74%;
+    /* Crimson Red Primary */
+    --primary: 0 72% 51%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 5% 12%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 98%;
 
-    --muted: 240 5% 15%;
-    --muted-foreground: 240 5% 55%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 0 0% 55%;
 
-    --accent: 280 80% 65%;
+    /* Gold/Orange Accent */
+    --accent: 38 92% 50%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 5% 18%;
-    --input: 240 5% 18%;
-    --ring: 250 89% 74%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 72% 51%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
-    /* Stripe-style gradient colors */
-    --gradient-purple: 250 89% 74%;
-    --gradient-pink: 330 80% 65%;
-    --gradient-orange: 25 95% 65%;
-    --gradient-cyan: 185 80% 60%;
+    /* Red gradient colors */
+    --gradient-red: 0 72% 51%;
+    --gradient-crimson: 348 83% 47%;
+    --gradient-orange: 25 95% 53%;
+    --gradient-gold: 38 92% 50%;
 
     /* Custom design tokens */
-    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.4);
-    --shadow-large: 0 8px 40px rgba(0, 0, 0, 0.5);
-    --shadow-glow: 0 0 60px rgba(167, 139, 250, 0.3);
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.5);
+    --shadow-large: 0 8px 40px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 60px rgba(220, 38, 38, 0.3);
   }
 
   .light {
@@ -60,7 +62,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 7%;
 
-    --primary: 250 89% 60%;
+    --primary: 0 72% 45%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 0 0% 96%;
@@ -69,7 +71,7 @@
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 280 80% 55%;
+    --accent: 38 92% 50%;
     --accent-foreground: 0 0% 7%;
 
     --destructive: 0 84% 60%;
@@ -77,7 +79,7 @@
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 250 89% 60%;
+    --ring: 0 72% 45%;
   }
 }
 
@@ -91,18 +93,19 @@
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 }
 
 @layer components {
-  /* Stripe-style gradient text */
+  /* Bold Red gradient text */
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(
       135deg,
-      hsl(var(--gradient-purple)) 0%,
-      hsl(var(--gradient-pink)) 50%,
+      hsl(var(--gradient-red)) 0%,
+      hsl(var(--gradient-crimson)) 50%,
       hsl(var(--gradient-orange)) 100%
     );
   }
@@ -111,9 +114,26 @@
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(
       135deg,
-      hsl(var(--gradient-purple)) 0%,
-      hsl(var(--gradient-cyan)) 100%
+      hsl(var(--gradient-red)) 0%,
+      hsl(var(--gradient-gold)) 100%
     );
+  }
+
+  /* Solid card style - less glassmorphism */
+  .glass-card {
+    @apply bg-card border border-border/30 rounded-xl;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300;
+  }
+
+  .glass-card-hover:hover {
+    @apply border-primary/50;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.5),
+      0 0 40px rgba(220, 38, 38, 0.15);
   }
 
   /* Glassmorphism card */

@@ -5,25 +5,23 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
         default: "bg-primary text-primary-foreground hover:bg-primary/90",
         destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-border bg-transparent text-foreground hover:bg-secondary",
+        outline: "border border-border bg-transparent text-foreground hover:bg-secondary hover:border-foreground/30",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-secondary hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        // Legacy Apple-style variants
+        // Solid button variants
         filled: "bg-foreground text-background hover:bg-foreground/90",
-        "filled-blue": "bg-primary text-primary-foreground hover:bg-primary/90",
-        "ghost-dark": "bg-transparent text-foreground border border-border hover:bg-secondary",
-        "text-link": "text-primary hover:text-primary/80 p-0 h-auto font-normal",
-        // New Stripe/Linear style variants
-        gradient: "bg-gradient-to-r from-primary via-accent to-gradient-pink text-primary-foreground hover:opacity-90 hover:shadow-lg hover:shadow-primary/25 transition-all",
-        glow: "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/50 transition-all",
-        glass: "bg-secondary/50 backdrop-blur-xl border border-border/50 text-foreground hover:bg-secondary/70 hover:border-primary/30",
+        "filled-primary": "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30",
+        // Glass/transparent variant
+        glass: "bg-card/50 backdrop-blur-sm border border-border/50 text-foreground hover:bg-card/70 hover:border-primary/30",
+        // Red gradient variant
+        gradient: "bg-gradient-to-r from-primary to-gradient-crimson text-primary-foreground hover:opacity-90 hover:shadow-lg hover:shadow-primary/30",
       },
       size: {
         default: "h-11 px-6 py-2",
