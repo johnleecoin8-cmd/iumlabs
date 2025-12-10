@@ -1,15 +1,46 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight, TrendingUp, Users, Zap } from "lucide-react";
+import { useMouseGlow } from "@/hooks/useMouseGlow";
 
 const HeroSection = () => {
+  const { ref: glowRef, position, isHovering } = useMouseGlow();
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+    <section 
+      ref={glowRef}
+      className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden"
+    >
+      {/* Mouse-tracking gradient glow */}
+      <div 
+        className="pointer-events-none absolute inset-0 transition-opacity duration-500"
+        style={{
+          background: `radial-gradient(800px circle at ${position.x}% ${position.y}%, rgba(167, 139, 250, 0.15), transparent 40%)`,
+          opacity: isHovering ? 1 : 0.5,
+        }}
+      />
+
       {/* Gradient Blobs - Stripe style */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="gradient-blob gradient-blob-purple w-[600px] h-[600px] -top-40 -left-20 animate-pulse-glow" />
         <div className="gradient-blob gradient-blob-pink w-[500px] h-[500px] top-1/4 right-0 animate-pulse-glow" style={{ animationDelay: '-2s' }} />
         <div className="gradient-blob gradient-blob-orange w-[400px] h-[400px] bottom-20 left-1/4 animate-pulse-glow" style={{ animationDelay: '-4s' }} />
         <div className="gradient-blob gradient-blob-cyan w-[300px] h-[300px] bottom-40 right-1/4 animate-pulse-glow opacity-40" style={{ animationDelay: '-1s' }} />
+      </div>
+
+      {/* Animated particles/stars */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-primary/40 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 2}s`,
+            }}
+          />
+        ))}
       </div>
 
       {/* Grid Pattern Overlay */}
@@ -77,8 +108,8 @@ const HeroSection = () => {
                 {[40, 65, 45, 80, 55, 90, 70, 95].map((h, i) => (
                   <div 
                     key={i} 
-                    className="flex-1 bg-gradient-to-t from-primary to-accent rounded-sm"
-                    style={{ height: `${h}%` }}
+                    className="flex-1 bg-gradient-to-t from-primary to-accent rounded-sm animate-fade-up"
+                    style={{ height: `${h}%`, animationDelay: `${i * 100}ms` }}
                   />
                 ))}
               </div>

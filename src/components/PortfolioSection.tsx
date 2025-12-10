@@ -1,4 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useTilt } from "@/hooks/useTilt";
 
 const projects = [
   {
@@ -35,7 +37,69 @@ const projects = [
   },
 ];
 
+const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
+  const tilt = useTilt({ max: 8, scale: 1.02 });
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+
+  return (
+    <div
+      ref={ref}
+      className={`scroll-animate ${isVisible ? 'is-visible' : ''}`}
+      style={{ transitionDelay: `${index * 150}ms` }}
+    >
+      <div
+        ref={tilt.ref}
+        onMouseMove={tilt.onMouseMove}
+        onMouseLeave={tilt.onMouseLeave}
+        style={tilt.style}
+        className="group relative glass-card-hover p-8 cursor-pointer overflow-hidden h-full"
+      >
+        {/* Gradient overlay on hover */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
+        
+        {/* Glare effect */}
+        <div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: 'linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.03) 45%, rgba(255,255,255,0.05) 50%, rgba(255,255,255,0.03) 55%, transparent 60%)',
+          }}
+        />
+        
+        {/* Category Badge */}
+        <div className={`inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r ${project.gradient} bg-opacity-10 text-sm mb-4`}>
+          <span className="text-foreground/80">{project.category}</span>
+        </div>
+
+        {/* Content */}
+        <h3 className="text-2xl font-semibold mb-3 group-hover:text-gradient transition-all duration-300">
+          {project.name}
+        </h3>
+        <p className="text-muted-foreground mb-6 leading-relaxed">
+          {project.description}
+        </p>
+
+        {/* Stats */}
+        <div className="flex items-center justify-between">
+          <div>
+            <div className="text-xs text-muted-foreground mb-1">
+              Funds Raised
+            </div>
+            <div className="text-xl font-semibold text-gradient">
+              {project.raised}
+            </div>
+          </div>
+          <div className={`w-12 h-12 rounded-full glass-card flex items-center justify-center group-hover:bg-gradient-to-br ${project.gradient} transition-all duration-300`}>
+            <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const PortfolioSection = () => {
+  const { ref: headerRef, isVisible: headerVisible } = useScrollAnimation({ threshold: 0.3 });
+
   return (
     <section id="portfolio" className="py-32 relative">
       {/* Background effects */}
@@ -46,7 +110,10 @@ const PortfolioSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6">
+        <div 
+          ref={headerRef}
+          className={`flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6 scroll-animate ${headerVisible ? 'is-visible' : ''}`}
+        >
           <div>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
               <span className="text-sm font-medium text-primary">Our Work</span>
@@ -66,42 +133,8 @@ const PortfolioSection = () => {
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 gap-6">
-          {projects.map((project) => (
-            <div
-              key={project.name}
-              className="group relative glass-card-hover p-8 cursor-pointer overflow-hidden"
-            >
-              {/* Gradient overlay on hover */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-500`} />
-              
-              {/* Category Badge */}
-              <div className={`inline-flex items-center px-3 py-1.5 rounded-full bg-gradient-to-r ${project.gradient} bg-opacity-10 text-sm mb-4`}>
-                <span className="text-foreground/80">{project.category}</span>
-              </div>
-
-              {/* Content */}
-              <h3 className="text-2xl font-semibold mb-3 group-hover:text-gradient transition-all duration-300">
-                {project.name}
-              </h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                {project.description}
-              </p>
-
-              {/* Stats */}
-              <div className="flex items-center justify-between">
-                <div>
-                  <div className="text-xs text-muted-foreground mb-1">
-                    Funds Raised
-                  </div>
-                  <div className="text-xl font-semibold text-gradient">
-                    {project.raised}
-                  </div>
-                </div>
-                <div className={`w-12 h-12 rounded-full glass-card flex items-center justify-center group-hover:bg-gradient-to-br ${project.gradient} transition-all duration-300`}>
-                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
-                </div>
-              </div>
-            </div>
+          {projects.map((project, index) => (
+            <ProjectCard key={project.name} project={project} index={index} />
           ))}
         </div>
       </div>

@@ -1,7 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const CTASection = () => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+
   return (
     <section id="contact" className="py-32 relative overflow-hidden">
       {/* Background gradient */}
@@ -23,7 +26,10 @@ const CTASection = () => {
       />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto">
+        <div 
+          ref={ref}
+          className={`max-w-4xl mx-auto scroll-animate ${isVisible ? 'is-visible' : ''}`}
+        >
           {/* Glass card container */}
           <div className="glass-card p-12 md:p-16 text-center relative overflow-hidden">
             {/* Inner gradient glow */}
