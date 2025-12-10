@@ -179,10 +179,10 @@ const HeroSection = () => {
               <div className="text-center p-8">
                 <Play className="w-16 h-16 text-primary mx-auto mb-4" />
                 <p className="text-muted-foreground">
-                  YouTube 영상 URL을 설정하면 여기에 영상이 재생됩니다
+                  Add a YouTube video URL to play here
                 </p>
                 <p className="text-sm text-muted-foreground mt-2">
-                  예: https://www.youtube.com/embed/VIDEO_ID
+                  Example: https://www.youtube.com/embed/VIDEO_ID
                 </p>
               </div>
             </div>
