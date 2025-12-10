@@ -1,73 +1,45 @@
-import { Send, Twitter, MessageCircle, Github } from "lucide-react";
-
 const footerLinks = {
   services: [
     { name: "Web3 Marketing", href: "#" },
     { name: "NFT Marketing", href: "#" },
     { name: "DeFi Marketing", href: "#" },
-    { name: "GameFi Marketing", href: "#" },
     { name: "Exchange Listing", href: "#" },
   ],
   company: [
-    { name: "About Us", href: "#" },
+    { name: "About", href: "#" },
     { name: "Case Studies", href: "#" },
     { name: "Blog", href: "#" },
-    { name: "Careers", href: "#" },
     { name: "Contact", href: "#" },
-  ],
-  social: [
-    { name: "Twitter", icon: Twitter, href: "#" },
-    { name: "Telegram", icon: Send, href: "#" },
-    { name: "Discord", icon: MessageCircle, href: "#" },
-    { name: "GitHub", icon: Github, href: "#" },
   ],
 };
 
 const Footer = () => {
   return (
-    <footer className="border-t border-border/50 bg-card/30">
-      <div className="container mx-auto px-4 py-16">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+    <footer className="border-t border-border">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid md:grid-cols-4 gap-12">
           {/* Brand */}
-          <div className="lg:col-span-2">
-            <a href="/" className="inline-block mb-6">
-              <span className="text-2xl font-display font-bold text-gradient">
-                CRYPTOBRIDGE
-              </span>
-              <span className="text-xs font-display text-muted-foreground tracking-widest ml-2">
-                KOREA
+          <div className="md:col-span-2">
+            <a href="/" className="inline-block mb-4">
+              <span className="text-xl font-semibold tracking-tight">
+                CryptoBridge
               </span>
             </a>
-            <p className="text-muted-foreground max-w-md mb-6 leading-relaxed">
+            <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
               Korea's leading Web3 marketing agency. We help blockchain projects 
-              succeed in the Korean and global markets with comprehensive marketing 
-              strategies and deep local expertise.
+              succeed with strategic marketing and deep local expertise.
             </p>
-            {/* Social Links */}
-            <div className="flex items-center gap-4">
-              {footerLinks.social.map((social) => (
-                <a
-                  key={social.name}
-                  href={social.href}
-                  className="w-10 h-10 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-colors"
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
           </div>
 
           {/* Services */}
           <div>
-            <h4 className="font-display font-bold uppercase tracking-wider text-sm mb-6">
-              Services
-            </h4>
+            <h4 className="font-medium text-sm mb-4">Services</h4>
             <ul className="space-y-3">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                   >
                     {link.name}
                   </a>
@@ -78,15 +50,13 @@ const Footer = () => {
 
           {/* Company */}
           <div>
-            <h4 className="font-display font-bold uppercase tracking-wider text-sm mb-6">
-              Company
-            </h4>
+            <h4 className="font-medium text-sm mb-4">Company</h4>
             <ul className="space-y-3">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
+                    className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                   >
                     {link.name}
                   </a>
@@ -97,16 +67,16 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © 2024 CryptoBridge Korea. All rights reserved.
+            © 2024 CryptoBridge Korea
           </p>
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <a href="#" className="hover:text-primary transition-colors">
-              Privacy Policy
+            <a href="#" className="hover:text-foreground transition-colors">
+              Privacy
             </a>
-            <a href="#" className="hover:text-primary transition-colors">
-              Terms of Service
+            <a href="#" className="hover:text-foreground transition-colors">
+              Terms
             </a>
           </div>
         </div>

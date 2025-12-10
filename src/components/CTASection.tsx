@@ -1,59 +1,41 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Mail, MessageCircle, Send } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 const CTASection = () => {
   return (
-    <section id="contact" className="py-24 relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[200px]" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-secondary/20 rounded-full blur-[150px]" />
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
+    <section id="contact" className="py-32 bg-gradient-to-b from-background to-secondary/30">
+      <div className="container mx-auto px-4">
+        <div className="max-w-3xl mx-auto text-center">
           {/* Heading */}
-          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight mb-6">
-            <span className="text-foreground">Ready to</span>
+          <h2 className="text-display-md md:text-display-lg mb-6">
+            Ready to launch
             <br />
-            <span className="text-gradient glow-text">Launch Your Project?</span>
+            <span className="text-gradient">your project?</span>
           </h2>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
             Get a free consultation with our Web3 marketing experts and discover 
-            how we can help you succeed in the Korean and global crypto markets.
+            how we can help you succeed in the Korean market.
           </p>
 
           {/* CTA Button */}
-          <Button variant="hero" size="xl" className="mb-12">
-            Schedule Free Consultation
-            <ArrowRight className="w-5 h-5" />
+          <Button variant="filled" size="lg">
+            Schedule a Call
+            <ArrowRight className="w-4 h-4" />
           </Button>
 
-          {/* Contact Methods */}
-          <div className="flex flex-wrap items-center justify-center gap-6 text-muted-foreground">
-            <a
-              href="mailto:contact@cryptobridge.kr"
-              className="flex items-center gap-2 hover:text-primary transition-colors"
-            >
-              <Mail className="w-5 h-5" />
-              <span className="font-medium">contact@cryptobridge.kr</span>
+          {/* Contact Info */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
+            <a href="mailto:hello@cryptobridge.kr" className="hover:text-foreground transition-colors">
+              hello@cryptobridge.kr
             </a>
-            <span className="hidden md:inline text-border">|</span>
-            <a
-              href="#"
-              className="flex items-center gap-2 hover:text-primary transition-colors"
-            >
-              <Send className="w-5 h-5" />
-              <span className="font-medium">Telegram</span>
+            <span className="hidden md:inline">·</span>
+            <a href="#" className="hover:text-foreground transition-colors">
+              Telegram
             </a>
-            <span className="hidden md:inline text-border">|</span>
-            <a
-              href="#"
-              className="flex items-center gap-2 hover:text-primary transition-colors"
-            >
-              <MessageCircle className="w-5 h-5" />
-              <span className="font-medium">KakaoTalk</span>
+            <span className="hidden md:inline">·</span>
+            <a href="#" className="hover:text-foreground transition-colors">
+              KakaoTalk
             </a>
           </div>
         </div>

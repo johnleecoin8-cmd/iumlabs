@@ -29,41 +29,41 @@ const projects = [
 
 const PortfolioSection = () => {
   return (
-    <section id="portfolio" className="py-24 relative">
+    <section id="portfolio" className="py-32">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-16 gap-6">
           <div>
-            <h2 className="font-display text-4xl md:text-6xl font-bold uppercase tracking-tight mb-4">
-              <span className="text-gradient">Featured Projects</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-xl">
-              A selection of successful Web3 projects we've helped launch and grow
+            <p className="text-primary text-sm font-medium tracking-wide mb-4">
+              Our Work
             </p>
+            <h2 className="text-display-md md:text-display-lg">
+              Featured Projects
+            </h2>
           </div>
           <a
             href="#"
-            className="inline-flex items-center gap-2 text-primary font-display uppercase tracking-wider text-sm hover:gap-4 transition-all"
+            className="inline-flex items-center gap-2 text-primary text-sm font-medium hover:gap-3 transition-all"
           >
-            View All Projects
+            View All
             <ArrowUpRight className="w-4 h-4" />
           </a>
         </div>
 
         {/* Projects Grid */}
         <div className="grid md:grid-cols-2 gap-6">
-          {projects.map((project, index) => (
+          {projects.map((project) => (
             <div
               key={project.name}
-              className="group relative card-gradient rounded-xl p-8 overflow-hidden hover:border-primary/50 transition-all duration-500 cursor-pointer"
+              className="group relative p-8 rounded-2xl bg-secondary/50 hover:bg-secondary transition-all duration-300 cursor-pointer"
             >
               {/* Category Badge */}
-              <div className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-display uppercase tracking-wider mb-4">
+              <div className="inline-block px-3 py-1 rounded-full bg-foreground/5 text-sm mb-4">
                 {project.category}
               </div>
 
               {/* Content */}
-              <h3 className="font-display text-2xl md:text-3xl font-bold uppercase mb-3 group-hover:text-primary transition-colors">
+              <h3 className="text-2xl font-semibold mb-3 group-hover:text-primary transition-colors">
                 {project.name}
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
@@ -73,20 +73,17 @@ const PortfolioSection = () => {
               {/* Stats */}
               <div className="flex items-center justify-between">
                 <div>
-                  <div className="text-xs text-muted-foreground uppercase tracking-wider mb-1">
+                  <div className="text-xs text-muted-foreground mb-1">
                     Funds Raised
                   </div>
-                  <div className="text-2xl font-display font-bold text-gradient">
+                  <div className="text-xl font-semibold">
                     {project.raised}
                   </div>
                 </div>
-                <div className="w-12 h-12 rounded-full border border-border flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all">
-                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary-foreground transition-colors" />
+                <div className="w-10 h-10 rounded-full border border-border flex items-center justify-center group-hover:bg-foreground group-hover:border-foreground transition-all">
+                  <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-background transition-colors" />
                 </div>
               </div>
-
-              {/* Hover Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             </div>
           ))}
         </div>
