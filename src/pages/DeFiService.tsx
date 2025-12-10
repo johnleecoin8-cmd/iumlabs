@@ -4,7 +4,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageTransition from "@/components/PageTransition";
 import FAQSection from "@/components/FAQSection";
-import SpecialOfferForm from "@/components/SpecialOfferForm";
 import CalendlyButton from "@/components/CalendlyButton";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
@@ -115,7 +114,6 @@ const DeFiService = () => {
         </section>
 
         <FAQSection />
-        <SpecialOfferForm />
         <Footer />
       </PageTransition>
     </div>
