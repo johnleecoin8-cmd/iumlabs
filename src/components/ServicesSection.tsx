@@ -22,24 +22,14 @@ const iconMap = {
   "advisory": Users,
 };
 
-const gradients = [
-  "from-primary to-accent",
-  "from-gradient-pink to-gradient-orange",
-  "from-gradient-cyan to-primary",
-  "from-gradient-orange to-gradient-pink",
-  "from-primary to-gradient-cyan",
-  "from-accent to-gradient-pink",
-];
-
 const ServiceCard = ({ service, index, onOpenModal }: { 
   service: typeof servicesContent.items[0]; 
   index: number;
   onOpenModal: () => void;
 }) => {
-  const tilt = useTilt({ max: 10, scale: 1.02 });
+  const tilt = useTilt({ max: 8, scale: 1.02 });
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
   const Icon = iconMap[service.id as keyof typeof iconMap] || Blocks;
-  const gradient = gradients[index % gradients.length];
 
   return (
     <div
@@ -53,27 +43,25 @@ const ServiceCard = ({ service, index, onOpenModal }: {
         onMouseLeave={tilt.onMouseLeave}
         style={tilt.style}
         onClick={onOpenModal}
-        className="group glass-card-hover p-8 h-full cursor-pointer"
+        className="group p-8 h-full cursor-pointer rounded-3xl border border-border/30 bg-card/30 backdrop-blur-sm hover:border-primary/30 hover:bg-card/50 transition-all duration-500"
       >
-        {/* Icon with gradient background and animation */}
-        <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${gradient} p-0.5 mb-6`}>
-          <div className="w-full h-full rounded-2xl bg-card flex items-center justify-center group-hover:bg-transparent transition-colors duration-300 overflow-hidden">
-            <Icon className="w-6 h-6 text-foreground group-hover:text-primary-foreground transition-colors duration-300" />
-          </div>
+        {/* Icon */}
+        <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+          <Icon className="w-6 h-6 text-primary" />
         </div>
 
         {/* Content */}
-        <h3 className="text-xl font-semibold mb-3 group-hover:text-gradient transition-all duration-300">
+        <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
           {service.title}
         </h3>
-        <p className="text-muted-foreground leading-relaxed">
+        <p className="text-muted-foreground leading-relaxed text-sm">
           {service.description}
         </p>
 
         {/* Hover indicator */}
         <div className="mt-6 flex items-center gap-2 text-sm text-muted-foreground group-hover:text-primary transition-colors">
           <span>{servicesContent.learnMore}</span>
-          <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+          <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
         </div>
       </div>
     </div>
@@ -93,18 +81,15 @@ const ServiceModal = ({
 }) => {
   if (!service) return null;
   const Icon = iconMap[service.id as keyof typeof iconMap] || Blocks;
-  const gradient = gradients[index % gradients.length];
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl glass-card border-border/50 bg-card/95 backdrop-blur-xl">
+      <DialogContent className="max-w-2xl rounded-3xl border border-border/50 bg-card/95 backdrop-blur-xl">
         <DialogHeader>
-          <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${gradient} p-0.5 mb-4`}>
-            <div className="w-full h-full rounded-2xl bg-card flex items-center justify-center">
-              <Icon className="w-8 h-8 text-foreground" />
-            </div>
+          <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-4">
+            <Icon className="w-8 h-8 text-primary" />
           </div>
-          <DialogTitle className="text-2xl font-bold text-gradient">{service.title}</DialogTitle>
+          <DialogTitle className="text-2xl font-bold text-foreground">{service.title}</DialogTitle>
           <DialogDescription className="text-muted-foreground text-base leading-relaxed mt-2">
             {service.fullDescription}
           </DialogDescription>
@@ -116,9 +101,9 @@ const ServiceModal = ({
             {service.features.map((feature, idx) => (
               <div 
                 key={idx}
-                className="flex items-center gap-3 p-3 rounded-lg bg-secondary/30 border border-border/30"
+                className="flex items-center gap-3 p-3 rounded-xl bg-card/50 border border-border/30"
               >
-                <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${gradient}`} />
+                <div className="w-2 h-2 rounded-full bg-primary" />
                 <span className="text-sm text-foreground/80">{feature}</span>
               </div>
             ))}
@@ -126,11 +111,11 @@ const ServiceModal = ({
         </div>
 
         <div className="mt-8 flex gap-4">
-          <Button variant="gradient" className="flex-1 group">
+          <Button className="flex-1 rounded-full bg-primary hover:bg-primary/90 group">
             {servicesContent.modal.getStarted}
             <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
           </Button>
-          <Button variant="glass" onClick={onClose}>
+          <Button variant="outline" onClick={onClose} className="rounded-full border-border/50 hover:bg-card">
             {servicesContent.modal.close}
           </Button>
         </div>
@@ -154,15 +139,18 @@ const ServicesSection = () => {
     setTimeout(() => setSelectedServiceIndex(null), 200);
   };
 
-  // Parse headline with highlight
-  const headlineParts = servicesContent.headline.split(/<highlight>|<\/highlight>/);
-
   return (
     <section id="services" className="py-32 relative">
-      {/* Background gradient */}
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="gradient-blob gradient-blob-purple w-[500px] h-[500px] top-0 right-0 opacity-30" />
-        <div className="gradient-blob gradient-blob-cyan w-[400px] h-[400px] bottom-0 left-0 opacity-20" />
+        {/* Dot pattern */}
+        <div 
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: `radial-gradient(circle, hsl(var(--muted-foreground) / 0.3) 1px, transparent 1px)`,
+            backgroundSize: '24px 24px'
+          }}
+        />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
@@ -171,11 +159,12 @@ const ServicesSection = () => {
           ref={headerRef}
           className={`text-center mb-20 scroll-animate ${headerVisible ? 'is-visible' : ''}`}
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-6">
             <span className="text-sm font-medium text-primary">{servicesContent.badge}</span>
           </div>
-          <h2 className="text-display-md md:text-display-lg max-w-3xl mx-auto">
-            {headlineParts[0]}<span className="text-gradient">{headlineParts[1]}</span>{headlineParts[2]}
+          <h2 className="text-4xl md:text-6xl tracking-tight max-w-3xl mx-auto">
+            <span className="font-serif italic text-muted-foreground">Comprehensive</span>{" "}
+            <span className="font-sans font-bold text-foreground">Web3 Solutions</span>
           </h2>
         </div>
 

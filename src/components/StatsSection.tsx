@@ -81,10 +81,10 @@ const StatCard = ({ stat, index, isVisible, chartData, chartType, color }: {
 
   return (
     <div 
-      className={`text-center glass-card p-6 hover:border-primary/30 transition-all duration-500 scroll-animate group ${isVisible ? 'is-visible' : ''}`}
+      className={`text-center p-8 rounded-3xl border border-border/30 bg-card/30 backdrop-blur-sm hover:border-primary/30 transition-all duration-500 scroll-animate group ${isVisible ? 'is-visible' : ''}`}
       style={{ transitionDelay: `${index * 100}ms` }}
     >
-      <div className="text-4xl md:text-5xl font-bold mb-2 text-gradient">
+      <div className="text-4xl md:text-5xl font-bold mb-2 text-foreground">
         {displayValue}
       </div>
       <div className="text-sm text-muted-foreground mb-2">
@@ -107,8 +107,15 @@ const StatsSection = () => {
     <section ref={ref} className="py-32 relative overflow-hidden">
       {/* Background effects */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-secondary/20 to-background" />
-        <div className="gradient-blob gradient-blob-purple w-[600px] h-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-card/20 to-background" />
+        {/* Dot pattern */}
+        <div 
+          className="absolute inset-0 opacity-30"
+          style={{
+            backgroundImage: `radial-gradient(circle, hsl(var(--muted-foreground) / 0.3) 1px, transparent 1px)`,
+            backgroundSize: '24px 24px'
+          }}
+        />
       </div>
 
       {/* Top border gradient */}
@@ -118,8 +125,19 @@ const StatsSection = () => {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="container mx-auto px-4 relative z-10">
+        {/* Section Header */}
+        <div className={`text-center mb-16 scroll-animate ${isVisible ? 'is-visible' : ''}`}>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 backdrop-blur-sm border border-primary/20 mb-6">
+            <span className="text-sm font-medium text-primary">Our Track Record</span>
+          </div>
+          <h2 className="text-4xl md:text-6xl tracking-tight">
+            <span className="font-serif italic text-muted-foreground">Proven</span>{" "}
+            <span className="font-sans font-bold text-foreground">Results</span>
+          </h2>
+        </div>
+
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-24">
           {statsContent.items.map((stat, index) => (
             <StatCard 
               key={stat.label} 
@@ -145,7 +163,7 @@ const StatsSection = () => {
               {[...statsContent.partners, ...statsContent.partners].map((partner, index) => (
                 <div
                   key={`${partner}-${index}`}
-                  className="text-2xl font-semibold text-muted-foreground/30 hover:text-gradient transition-all duration-300 cursor-pointer whitespace-nowrap"
+                  className="text-2xl font-semibold text-muted-foreground/30 hover:text-foreground transition-all duration-300 cursor-pointer whitespace-nowrap"
                 >
                   {partner}
                 </div>
@@ -155,7 +173,7 @@ const StatsSection = () => {
               {[...statsContent.partners, ...statsContent.partners].map((partner, index) => (
                 <div
                   key={`${partner}-dup-${index}`}
-                  className="text-2xl font-semibold text-muted-foreground/30 hover:text-gradient transition-all duration-300 cursor-pointer whitespace-nowrap"
+                  className="text-2xl font-semibold text-muted-foreground/30 hover:text-foreground transition-all duration-300 cursor-pointer whitespace-nowrap"
                 >
                   {partner}
                 </div>
