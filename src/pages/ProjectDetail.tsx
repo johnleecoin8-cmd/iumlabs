@@ -571,61 +571,56 @@ const ProjectDetail = () => {
         </div>
       </div>
 
-      {/* Metrics + Scope Section Combined - Rounded Card Style */}
-      <section className="bg-slate-200 py-8 md:py-12">
-        <div className="container mx-auto max-w-6xl px-4 md:px-8">
-          <div className="rounded-2xl overflow-hidden shadow-xl">
-            {/* Metrics Grid - Smaller, Compact */}
-            <div className="flex flex-col md:flex-row">
-              {project.metrics.map((metric, index) => (
-                <div 
-                  key={index} 
-                  className={`flex-1 bg-slate-100 p-5 md:p-6 flex flex-col justify-between min-h-[120px] md:min-h-[140px]
-                    ${index < project.metrics.length - 1 ? 'border-b md:border-b-0 md:border-r border-slate-300' : ''}
-                    ${index === 0 ? 'rounded-tl-2xl' : ''}
-                    ${index === project.metrics.length - 1 ? 'rounded-tr-2xl' : ''}`}
-                >
-                  <div>
-                    <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-1 tracking-tight">
-                      {metric.value}
-                    </p>
-                    <p className="text-primary text-xs md:text-sm font-medium uppercase tracking-wide">
-                      {metric.label}
-                    </p>
-                  </div>
-                  <span className="text-slate-400 text-xs mt-3">0{index + 1}.</span>
-                </div>
+      {/* Metrics + Scope Section Combined - Full Width with Depth */}
+      <section className="relative">
+        {/* Metrics Grid - Compact with subtle shadows */}
+        <div className="flex flex-col md:flex-row border-b border-slate-200">
+          {project.metrics.map((metric, index) => (
+            <div 
+              key={index} 
+              className={`flex-1 bg-gradient-to-b from-slate-50 to-slate-100 p-5 md:p-6 flex flex-col justify-between min-h-[120px] md:min-h-[140px] relative
+                ${index < project.metrics.length - 1 ? 'border-b md:border-b-0 md:border-r border-slate-200' : ''}
+                shadow-[inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(0,0,0,0.03)]`}
+            >
+              <div>
+                <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-1 tracking-tight">
+                  {metric.value}
+                </p>
+                <p className="text-primary text-xs md:text-sm font-medium uppercase tracking-wide">
+                  {metric.label}
+                </p>
+              </div>
+              <span className="text-slate-400 text-xs mt-3">0{index + 1}.</span>
+            </div>
+          ))}
+        </div>
+
+        {/* 3-Card Layout - Full Width with Depth */}
+        <div className="grid grid-cols-1 lg:grid-cols-3">
+          {/* Card 1 - Scope of Work */}
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-5 md:p-6 min-h-[140px] flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
+            <span className="text-slate-500 text-xs uppercase tracking-widest mb-3 block">Scope of Work</span>
+            <div className="space-y-0.5">
+              {project.shortServices.map((service, index) => (
+                <p key={index} className="text-white text-lg md:text-xl font-light leading-tight">{service}</p>
               ))}
             </div>
+          </div>
 
-            {/* 3-Card Clean Layout - Smaller */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 border-t border-slate-300">
-              {/* Card 1 - Scope of Work */}
-              <div className="bg-slate-900 p-5 md:p-6 min-h-[140px] flex flex-col justify-between rounded-bl-2xl">
-                <span className="text-slate-500 text-xs uppercase tracking-widest mb-3 block">Scope of Work</span>
-                <div className="space-y-0.5">
-                  {project.shortServices.map((service, index) => (
-                    <p key={index} className="text-white text-lg md:text-xl font-light leading-tight">{service}</p>
-                  ))}
-                </div>
-              </div>
+          {/* Card 2 - Overview */}
+          <div className="bg-gradient-to-b from-white to-slate-50 p-5 md:p-6 min-h-[140px] flex flex-col justify-between border-x border-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.02)]">
+            <span className="text-slate-400 text-xs uppercase tracking-widest mb-3 block">Overview</span>
+            <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+              {project.description}
+            </p>
+          </div>
 
-              {/* Card 2 - Overview */}
-              <div className="bg-white p-5 md:p-6 min-h-[140px] flex flex-col justify-between border-x border-slate-200">
-                <span className="text-slate-400 text-xs uppercase tracking-widest mb-3 block">Overview</span>
-                <p className="text-slate-700 text-sm md:text-base leading-relaxed">
-                  {project.description}
-                </p>
-              </div>
-
-              {/* Card 3 - What We Did */}
-              <div className="bg-slate-50 p-5 md:p-6 min-h-[140px] flex flex-col justify-between rounded-br-2xl">
-                <span className="text-slate-400 text-xs uppercase tracking-widest mb-3 block">What We Did</span>
-                <p className="text-slate-700 text-sm md:text-base leading-relaxed">
-                  {project.strategy.slice(0, 2).join('. ')}.
-                </p>
-              </div>
-            </div>
+          {/* Card 3 - What We Did */}
+          <div className="bg-gradient-to-br from-slate-100 to-slate-50 p-5 md:p-6 min-h-[140px] flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(0,0,0,0.03)]">
+            <span className="text-slate-400 text-xs uppercase tracking-widest mb-3 block">What We Did</span>
+            <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+              {project.strategy.slice(0, 2).join('. ')}.
+            </p>
           </div>
         </div>
       </section>
