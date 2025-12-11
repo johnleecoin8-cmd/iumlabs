@@ -280,15 +280,16 @@ const CasesSection = () => {
         </div>
 
         {/* Cases Grid - 3x3 */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {cases.map((caseItem, index) => (
             <Link
               key={caseItem.name}
               to={`/projects/${caseItem.slug}`}
+              className="group"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <TiltCard
-                className={`group relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle} cursor-pointer`}
+                className={`relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle} cursor-pointer mb-4`}
                 max={12}
                 scale={1.03}
                 speed={300}
@@ -327,7 +328,27 @@ const CasesSection = () => {
                     <ArrowUpRight className="w-5 h-5 text-white" />
                   </div>
                 </div>
+
+                {/* Category Badge */}
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider">
+                    {caseItem.category}
+                  </span>
+                </div>
               </TiltCard>
+
+              {/* Content Below Card - Same as /projects page */}
+              <div>
+                <h4 className="text-lg font-medium text-[hsl(0,0%,15%)] mb-2">{caseItem.name}</h4>
+                <p className="text-sm text-[hsl(0,0%,40%)] mb-3 line-clamp-2">
+                  {caseItem.result}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="text-xs px-2 py-1 bg-[hsl(0,0%,90%)] border border-[hsl(0,0%,85%)] rounded-full text-[hsl(0,0%,40%)]">
+                    {caseItem.category}
+                  </span>
+                </div>
+              </div>
             </Link>
           ))}
         </div>
