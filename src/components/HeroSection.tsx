@@ -48,14 +48,13 @@ const HeroSection = () => {
 
   return (
     <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background - Seoul Bridge Night */}
-      <div className="absolute inset-0">
+      {/* Background - Seoul Bridge Night with Ken Burns Effect */}
+      <div className="absolute inset-0 overflow-hidden">
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
           style={{ 
             backgroundImage: `url(${seoulBridgeNight})`,
             filter: "brightness(0.35)",
-            transform: `translateY(${scrollY * 0.15}px) scale(1.1)`
           }}
         />
         

@@ -105,6 +105,11 @@ export default {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        "kenburns": {
+          "0%": { transform: "scale(1) translate(0, 0)" },
+          "50%": { transform: "scale(1.15) translate(-2%, -1%)" },
+          "100%": { transform: "scale(1) translate(0, 0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -115,6 +120,7 @@ export default {
         "scale-in": "scale-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
         "slide-up": "slide-up 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
         "marquee": "marquee 20s linear infinite",
+        "kenburns": "kenburns 25s ease-in-out infinite",
       },
       transitionTimingFunction: {
         "smooth": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
