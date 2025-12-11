@@ -100,24 +100,24 @@ const testimonials = [
   },
 ];
 
-// Orbital tags - each with unique orbit properties
+// Orbital tags - planets orbiting the central sun
 const orbitalTags = [
-  { label: "Responsible", orbitRadius: 280, duration: 25, startAngle: 0, color: "bg-orange-400 text-white" },
-  { label: "Creative", orbitRadius: 320, duration: 30, startAngle: 40, color: "bg-yellow-400 text-black" },
-  { label: "Innovation-Oriented", orbitRadius: 360, duration: 35, startAngle: 80, color: "bg-amber-300 text-black" },
-  { label: "Resourceful", orbitRadius: 250, duration: 22, startAngle: 120, color: "bg-red-400 text-white" },
-  { label: "Strategic", orbitRadius: 400, duration: 40, startAngle: 160, color: "bg-orange-300 text-black" },
-  { label: "Trusted", orbitRadius: 300, duration: 28, startAngle: 200, color: "bg-yellow-300 text-black" },
-  { label: "Attention to Detail", orbitRadius: 340, duration: 32, startAngle: 240, color: "bg-amber-400 text-black" },
-  { label: "Innovative", orbitRadius: 380, duration: 38, startAngle: 280, color: "bg-orange-500 text-white" },
-  { label: "Result-Driven Mindset", orbitRadius: 420, duration: 45, startAngle: 320, color: "bg-yellow-500 text-black" },
+  { label: "Responsible", orbitRadius: 140, duration: 20, startAngle: 0, color: "bg-orange-400 text-white" },
+  { label: "Creative", orbitRadius: 180, duration: 26, startAngle: 40, color: "bg-yellow-400 text-black" },
+  { label: "Innovation", orbitRadius: 220, duration: 32, startAngle: 80, color: "bg-amber-300 text-black" },
+  { label: "Resourceful", orbitRadius: 260, duration: 38, startAngle: 120, color: "bg-red-400 text-white" },
+  { label: "Strategic", orbitRadius: 300, duration: 44, startAngle: 160, color: "bg-orange-300 text-black" },
+  { label: "Trusted", orbitRadius: 340, duration: 50, startAngle: 200, color: "bg-yellow-300 text-black" },
+  { label: "Detail-Oriented", orbitRadius: 380, duration: 56, startAngle: 240, color: "bg-amber-400 text-black" },
+  { label: "Innovative", orbitRadius: 420, duration: 62, startAngle: 280, color: "bg-orange-500 text-white" },
+  { label: "Result-Driven", orbitRadius: 460, duration: 68, startAngle: 320, color: "bg-yellow-500 text-black" },
 ];
 
 // Mobile tags (simplified)
 const mobileFloatingTags = [
-  { label: "Trusted", top: "15%", left: "5%", color: "bg-yellow-300 text-black" },
-  { label: "Creative", top: "20%", right: "5%", color: "bg-yellow-400 text-black" },
-  { label: "Strategic", bottom: "25%", left: "5%", color: "bg-orange-300 text-black" },
+  { label: "Trusted", top: "18%", left: "5%", color: "bg-yellow-300 text-black" },
+  { label: "Creative", top: "22%", right: "5%", color: "bg-yellow-400 text-black" },
+  { label: "Strategic", bottom: "28%", left: "5%", color: "bg-orange-300 text-black" },
 ];
 
 const Services = () => {
@@ -165,62 +165,66 @@ const Services = () => {
           <Planet3D type="sun" className="opacity-60" />
         </div>
         
-        {/* Orbital Tags System - Desktop */}
-        <div className="absolute inset-0 hidden sm:flex items-center justify-center pointer-events-none" style={{ perspective: '1000px' }}>
-          {/* Orbit lines (optional visual guides) */}
-          {[250, 300, 350, 400].map((radius, i) => (
-            <div
-              key={`orbit-line-${i}`}
-              className="absolute rounded-full border border-white/5"
-              style={{
-                width: radius * 2,
-                height: radius * 2,
-                transform: 'rotateX(60deg)',
-              }}
-            />
-          ))}
-          
-          {/* Orbiting tags */}
-          {orbitalTags.map((tag, index) => (
-            <div
-              key={`orbit-${tag.label}-${index}`}
-              className="absolute"
-              style={{
-                width: tag.orbitRadius * 2,
-                height: tag.orbitRadius * 2,
-                animation: `orbit ${tag.duration}s linear infinite`,
-                animationDelay: `-${(tag.startAngle / 360) * tag.duration}s`,
-                transformStyle: 'preserve-3d',
-              }}
-            >
-              <span
-                className={`absolute px-4 py-2 rounded-md text-sm font-medium shadow-lg whitespace-nowrap ${tag.color}`}
+        {/* Orbital Tags System - Desktop: Tags orbit around the central sun */}
+        <div className="absolute inset-0 hidden lg:flex items-center justify-center pointer-events-none overflow-hidden">
+          {/* Central orbit container - this is the "sun" position */}
+          <div className="relative" style={{ width: '1px', height: '1px' }}>
+            {/* Orbit path lines (visual guides) */}
+            {[140, 220, 300, 380, 460].map((radius, i) => (
+              <div
+                key={`orbit-path-${i}`}
+                className="absolute rounded-full border border-white/[0.03]"
                 style={{
+                  width: radius * 2,
+                  height: radius * 2,
                   top: '50%',
-                  left: '100%',
+                  left: '50%',
                   transform: 'translate(-50%, -50%)',
-                  animation: `counter-orbit ${tag.duration}s linear infinite`,
+                }}
+              />
+            ))}
+            
+            {/* Orbiting tags - each rotates around the central point */}
+            {orbitalTags.map((tag, index) => (
+              <div
+                key={`orbit-wrapper-${index}`}
+                className="absolute top-1/2 left-1/2"
+                style={{
+                  width: 0,
+                  height: 0,
+                  animation: `orbit ${tag.duration}s linear infinite`,
                   animationDelay: `-${(tag.startAngle / 360) * tag.duration}s`,
                 }}
               >
-                {tag.label}
-              </span>
-            </div>
-          ))}
+                {/* The tag itself, positioned at orbit radius distance from center */}
+                <span
+                  className={`absolute px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap ${tag.color}`}
+                  style={{
+                    left: `${tag.orbitRadius}px`,
+                    top: '-10px',
+                    animation: `counter-orbit ${tag.duration}s linear infinite`,
+                    animationDelay: `-${(tag.startAngle / 360) * tag.duration}s`,
+                  }}
+                >
+                  {tag.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Mobile floating tags - simplified */}
-        <div className="sm:hidden">
+        {/* Mobile floating tags - simplified static version */}
+        <div className="lg:hidden">
           {mobileFloatingTags.map((tag, index) => (
             <span
-              key={`mobile-${tag.label}-${index}`}
-              className={`absolute animate-float px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
+              key={`mobile-${index}`}
+              className={`absolute animate-float px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg ${tag.color}`}
               style={{
                 top: tag.top,
                 left: tag.left,
                 right: tag.right,
                 bottom: tag.bottom,
-                animationDelay: `${index * 0.3}s`,
+                animationDelay: `${index * 0.4}s`,
               }}
             >
               {tag.label}
