@@ -1,182 +1,129 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, CornerDownRight } from "lucide-react";
-import { useEffect, useState } from "react";
-import networkAbstract from "@/assets/network-abstract.jpg";
+import { ArrowUpRight } from "lucide-react";
+
+// Import logos
+import bnbLogo from "@/assets/logos/bnb.svg";
+import kucoinLogo from "@/assets/logos/kucoin.svg";
+import polygonLogo from "@/assets/logos/polygon.svg";
+import ondoLogo from "@/assets/logos/ondo.svg";
+import peaqLogo from "@/assets/logos/peaq.png";
+import storyLogo from "@/assets/logos/story-protocol.png";
+import megaethLogo from "@/assets/logos/megaeth.png";
+import triaLogo from "@/assets/logos/tria.png";
+import bybitLogo from "@/assets/logos/bybit.png";
 
 const cases = [
   {
-    id: 1,
-    name: "DeFi Protocol",
-    category: "DeFi",
-    gradient: "case-gradient-polkadot",
-    logo: "https://cryptologos.cc/logos/polkadot-new-dot-logo.svg",
-    result: "+340% Korean Trading Volume",
+    name: "BNB Chain",
+    logo: bnbLogo,
+    gradient: "bg-gradient-to-br from-[#F3BA2F] to-[#C99100]",
+    slug: "bnb-chain",
   },
   {
-    id: 2,
-    name: "Layer 1 Network",
-    category: "Infrastructure",
-    gradient: "case-gradient-cardano",
-    logo: "https://cryptologos.cc/logos/cardano-ada-logo.svg",
-    logoStyle: "brightness-0",
-    result: "50K+ Korean Holders",
+    name: "KuCoin",
+    logo: kucoinLogo,
+    gradient: "bg-gradient-to-br from-[#23AF91] to-[#1A7F6A]",
+    slug: "kucoin",
   },
   {
-    id: 3,
-    name: "Web3 Platform",
-    category: "Infrastructure",
-    gradient: "case-gradient-icp",
-    logo: "https://cryptologos.cc/logos/internet-computer-icp-logo.svg",
-    result: "$2M Korean TVL in 30 Days",
+    name: "Polygon",
+    logo: polygonLogo,
+    gradient: "bg-gradient-to-br from-[#8247E5] to-[#5A2D9C]",
+    slug: "polygon",
   },
   {
-    id: 4,
-    name: "Move Ecosystem",
-    category: "Layer 1",
-    gradient: "case-gradient-aptos",
-    logo: "https://cryptologos.cc/logos/aptos-apt-logo.svg",
-    logoStyle: "brightness-0",
-    result: "100K+ Korean Users",
+    name: "Ondo Finance",
+    logo: ondoLogo,
+    gradient: "bg-gradient-to-br from-[#1E3A5F] to-[#0D1B2A]",
+    slug: "ondo",
   },
   {
-    id: 5,
-    name: "Smart Contract Platform",
-    category: "Layer 1",
-    gradient: "case-gradient-near",
-    logo: "https://cryptologos.cc/logos/near-protocol-near-logo.svg",
-    result: "5K+ Korean Developers",
+    name: "Peaq",
+    logo: peaqLogo,
+    gradient: "bg-gradient-to-br from-[#00D4AA] to-[#00A080]",
+    slug: "peaq",
   },
   {
-    id: 6,
-    name: "Payment Network",
-    category: "Infrastructure",
-    gradient: "case-gradient-xrp",
-    logo: "https://cryptologos.cc/logos/xrp-xrp-logo.svg",
-    result: "#1 Korean Remittance",
+    name: "Story Protocol",
+    logo: storyLogo,
+    gradient: "bg-gradient-to-br from-[#FF6B6B] to-[#C92A2A]",
+    slug: "story-protocol",
   },
-];
-
-const floatingTags = [
-  { label: "DeFi", top: "8%", left: "5%" },
-  { label: "Layer 1", top: "15%", right: "8%" },
-  { label: "GameFi", bottom: "30%", left: "3%" },
-  { label: "Infrastructure", top: "40%", right: "4%" },
-  { label: "NFT", bottom: "20%", right: "10%" },
+  {
+    name: "MegaETH",
+    logo: megaethLogo,
+    gradient: "bg-gradient-to-br from-[#627EEA] to-[#3C4DBB]",
+    slug: "megaeth",
+  },
+  {
+    name: "Tria",
+    logo: triaLogo,
+    gradient: "bg-gradient-to-br from-[#FF9500] to-[#CC7700]",
+    slug: "tria",
+  },
+  {
+    name: "Bybit",
+    logo: bybitLogo,
+    gradient: "bg-gradient-to-br from-[#F7A600] to-[#C48400]",
+    slug: "bybit",
+  },
 ];
 
 const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1 relative overflow-hidden">
-      {/* Parallax Background */}
-      <div 
-        className="absolute inset-0 z-0"
-        style={{ transform: `translateY(${scrollY * 0.08}px)` }}
-      >
-        <img 
-          src={networkAbstract}
-          alt=""
-          className="w-full h-[120%] object-cover opacity-15"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
-      </div>
-
-      {/* Floating Tags */}
-      {floatingTags.map((tag, index) => (
-        <span
-          key={tag.label}
-          className="lunar-tag-dark absolute animate-float text-xs hidden lg:block z-10"
-          style={{
-            top: tag.top,
-            left: tag.left,
-            right: tag.right,
-            bottom: tag.bottom,
-            animationDelay: `${index * 0.4}s`,
-          }}
-        >
-          {tag.label}
-        </span>
-      ))}
-
-      <div className="container mx-auto max-w-7xl relative z-10">
+    <div ref={ref} className="py-24 px-4 flex-1 bg-[hsl(0,0%,96%)]">
+      <div className="container mx-auto max-w-7xl">
         {/* Header */}
-        <div className={`flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          <div>
-            <span className="section-header mb-4">Our Work</span>
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-foreground">
-              Featured <span className="serif-italic">Cases</span>
-            </h2>
+        <div className={`flex items-center justify-between mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="flex items-center gap-4">
+            <span className="number-badge text-[hsl(0,0%,40%)]">200+ Clients</span>
           </div>
-          <Link 
-            to="/projects" 
-            className="bracket-link group link-hover"
-          >
-            <CornerDownRight className="w-4 h-4" />
-            <span>All Cases</span>
-          </Link>
+          
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-center text-[hsl(0,0%,8%)]">
+            Featured <span className="serif-italic">Cases</span>
+          </h2>
+          
+          <div className="text-[hsl(0,0%,60%)] text-2xl font-light">///</div>
         </div>
 
-        {/* Cases Grid - 3x2 Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Cases Grid - 3x3 */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {cases.map((caseItem, index) => (
             <Link
-              key={caseItem.id}
-              to={`/projects/${caseItem.id}`}
-              className={`case-card group relative aspect-[4/5] rounded-3xl ${caseItem.gradient} p-6 flex flex-col justify-between overflow-hidden ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-              }`}
-              style={{ 
-                transition: 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                transitionDelay: `${index * 80}ms` 
-              }}
+              key={caseItem.name}
+              to={`/projects/${caseItem.slug}`}
+              className={`group relative aspect-[4/3] rounded-2xl overflow-hidden ${caseItem.gradient} transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl`}
+              style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Arrow Icon - Top Right */}
-              <div className="flex items-start justify-end">
-                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  <ArrowUpRight className="w-5 h-5 text-white" />
-                </div>
-              </div>
-
-              {/* Center - Logo */}
-              <div className="flex items-center justify-center flex-1">
-                <img 
-                  src={caseItem.logo} 
+              {/* Logo centered */}
+              <div className="absolute inset-0 flex items-center justify-center p-8">
+                <img
+                  src={caseItem.logo}
                   alt={caseItem.name}
-                  className={`w-28 h-28 md:w-32 md:h-32 object-contain ${caseItem.logoStyle || 'brightness-0 invert'} opacity-90 transition-transform duration-300 ease-smooth group-hover:scale-110`}
+                  className="max-w-[60%] max-h-[60%] object-contain filter brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity"
                 />
               </div>
 
-              {/* Bottom - Info (shows on hover) */}
-              <div className="transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-smooth">
-                <span className="text-xs text-white/70 uppercase tracking-wider block mb-1">
-                  {caseItem.category}
-                </span>
-                <p className="text-lg font-medium text-white">{caseItem.result}</p>
-              </div>
-
-              {/* Category Badge - Always visible */}
-              <div className="absolute top-6 left-6">
-                <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider">
-                  {caseItem.category}
-                </span>
+              {/* Hover overlay with arrow */}
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-end justify-end p-6">
+                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-4 group-hover:translate-y-0">
+                  <ArrowUpRight className="w-5 h-5 text-white" />
+                </div>
               </div>
             </Link>
           ))}
         </div>
 
-        {/* Mobile: View All Link */}
-        <div className={`mt-12 text-center transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.5s' }}>
-          <Link to="/projects" className="lunar-btn hover-glow">
-            View All Cases
+        {/* View All Button */}
+        <div className={`flex justify-center mt-12 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <Link
+            to="/projects"
+            className="lunar-btn-outline border-[hsl(0,0%,20%)] text-[hsl(0,0%,20%)] hover:bg-[hsl(0,0%,20%)] hover:text-white"
+          >
+            <span>View All Cases</span>
             <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>

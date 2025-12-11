@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Calendar, Send, Mail } from "lucide-react";
+import { ArrowUpRight, Calendar, Send, Mail, ArrowUp } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 
 const brandConfig = {
@@ -13,7 +13,20 @@ const brandConfig = {
 
 const navLinks = navigation.links.map(link => ({ to: link.href, label: link.name }));
 
+const guides = [
+  { title: "Korean Crypto Market Guide 2024", downloads: "2.5K" },
+  { title: "KOL Marketing Playbook", downloads: "1.8K" },
+  { title: "Exchange Listing Checklist", downloads: "3.2K" },
+  { title: "Community Building Guide", downloads: "1.5K" },
+  { title: "PR & Media Strategy", downloads: "2.1K" },
+  { title: "Regulatory Compliance Guide", downloads: "1.9K" },
+];
+
 const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="bg-[hsl(0,0%,4%)] text-white">
       {/* Top Section - Have a Project? */}
@@ -79,7 +92,7 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Section - 3 Column Layout */}
+      {/* Middle Section - 3 Column Layout */}
       <div className="container mx-auto px-6 py-12">
         <div className="grid md:grid-cols-3 gap-12">
           {/* Column 1 - About Us */}
@@ -170,23 +183,56 @@ const Footer = () => {
         {/* Dotted Line */}
         <div className="dotted-line-dark my-12" />
 
-        {/* Copyright Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-              <div className="w-4 h-4 bg-[hsl(0,0%,4%)] rounded-sm"></div>
-            </div>
-            <span className="text-lg font-semibold">{brandConfig.name}</span>
-          </Link>
-
-          {/* Copyright & Links */}
-          <div className="flex items-center gap-6 text-sm text-white/50">
-            <span>© {new Date().getFullYear()} {brandConfig.name}</span>
-            <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+        {/* Guides Carousel */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-6">
+            <h4 className="text-sm text-white/50 uppercase tracking-wider">free guides</h4>
+            <Link to="/blog" className="text-sm text-white/50 hover:text-white transition-colors flex items-center gap-1">
+              View All <ArrowUpRight className="w-3 h-3" />
+            </Link>
+          </div>
+          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
+            {guides.map((guide) => (
+              <div
+                key={guide.title}
+                className="flex-shrink-0 w-[200px] p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors cursor-pointer group"
+              >
+                <p className="text-xs text-white/40 mb-2">{guide.downloads} downloads</p>
+                <p className="text-sm text-white/80 group-hover:text-white transition-colors line-clamp-2">
+                  {guide.title}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
+
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          {/* Left - Office & Copyright */}
+          <div className="flex flex-col md:flex-row items-center gap-4 text-sm text-white/50">
+            <span>{brandConfig.office}</span>
+            <span className="hidden md:block">•</span>
+            <span>© {new Date().getFullYear()} {brandConfig.name}</span>
+          </div>
+
+          {/* Right - Back to Top */}
+          <button
+            onClick={scrollToTop}
+            className="flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors group"
+          >
+            <span>back to top</span>
+            <ArrowUp className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+          </button>
+        </div>
+      </div>
+
+      {/* Giant Brand Name */}
+      <div className="container mx-auto px-6 pb-12 overflow-hidden">
+        <h2 className="text-[6rem] md:text-[10rem] lg:text-[14rem] font-light leading-none tracking-tight text-center">
+          <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.15)' }}>
+            {brandConfig.name}
+          </span>
+        </h2>
       </div>
     </footer>
   );
