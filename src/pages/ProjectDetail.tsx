@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, ExternalLink, CheckCircle } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, CheckCircle, Image } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useEffect, useState } from "react";
@@ -27,7 +27,7 @@ const projectsData: Record<string, {
   strategy: string[];
   results: { metric: string; value: string }[];
   services: string[];
-  testimonial?: { quote: string; author: string; role: string };
+  gallery: { title: string; description: string }[];
 }> = {
   "bnb-chain": {
     name: "BNB Chain",
@@ -50,7 +50,13 @@ const projectsData: Record<string, {
       { metric: "Local Partnerships", value: "25+" },
       { metric: "Media Mentions", value: "500+" }
     ],
-    services: ["KOL Marketing", "Community Management", "Event Planning", "PR & Media Relations"]
+    services: ["KOL Marketing", "Community Management", "Event Planning", "PR & Media Relations"],
+    gallery: [
+      { title: "Seoul Launch Event", description: "Exclusive networking event with 500+ attendees" },
+      { title: "KOL Campaign", description: "Collaboration with 50+ Korean crypto influencers" },
+      { title: "Community Meetup", description: "Monthly community gatherings in major cities" },
+      { title: "Media Coverage", description: "Featured in top Korean crypto publications" }
+    ]
   },
   "kucoin": {
     name: "KuCoin",
@@ -74,11 +80,12 @@ const projectsData: Record<string, {
       { metric: "Customer Satisfaction", value: "4.8/5" }
     ],
     services: ["User Acquisition", "Community Building", "Ambassador Program", "Localization"],
-    testimonial: {
-      quote: "CryptoBridge helped us understand the Korean market and connect with users in ways we couldn't have done alone.",
-      author: "Johnny Lyu",
-      role: "CEO, KuCoin"
-    }
+    gallery: [
+      { title: "Trading Competition", description: "Korean-exclusive trading event with $100K prizes" },
+      { title: "Ambassador Program", description: "Network of 100+ Korean crypto leaders" },
+      { title: "Tutorial Series", description: "Localized video guides for Korean traders" },
+      { title: "Partnership Announcement", description: "Major Korean project listing events" }
+    ]
   },
   "polygon": {
     name: "Polygon",
@@ -101,7 +108,13 @@ const projectsData: Record<string, {
       { metric: "Developer Workshop Attendees", value: "500+" },
       { metric: "Grant Applications", value: "80+" }
     ],
-    services: ["Developer Relations", "DeFi Marketing", "Event Management", "Grant Program Support"]
+    services: ["Developer Relations", "DeFi Marketing", "Event Management", "Grant Program Support"],
+    gallery: [
+      { title: "Developer Hackathon", description: "48-hour building event in Seoul" },
+      { title: "Workshop Series", description: "Technical deep-dives for Korean developers" },
+      { title: "DeFi Integration", description: "Launch events with Korean DeFi protocols" },
+      { title: "Core Team Meetup", description: "AMA sessions with Polygon founders" }
+    ]
   },
   "ondo": {
     name: "Ondo Finance",
@@ -124,7 +137,13 @@ const projectsData: Record<string, {
       { metric: "Institutional Inquiries", value: "50+" },
       { metric: "Media Coverage Reach", value: "5M+" }
     ],
-    services: ["Institutional Relations", "Content Marketing", "Community Growth", "PR Strategy"]
+    services: ["Institutional Relations", "Content Marketing", "Community Growth", "PR Strategy"],
+    gallery: [
+      { title: "RWA Seminar", description: "Educational events for institutional investors" },
+      { title: "Research Reports", description: "In-depth Korean market analysis" },
+      { title: "Community Education", description: "Weekly AMA sessions and content" },
+      { title: "Media Features", description: "Coverage in major Korean financial outlets" }
+    ]
   },
   "peaq": {
     name: "Peaq",
@@ -147,7 +166,13 @@ const projectsData: Record<string, {
       { metric: "Partnership Agreements", value: "10+" },
       { metric: "Community Engagement Rate", value: "35%" }
     ],
-    services: ["Brand Positioning", "Developer Relations", "Partnership Development", "Community Building"]
+    services: ["Brand Positioning", "Developer Relations", "Partnership Development", "Community Building"],
+    gallery: [
+      { title: "DePIN Summit", description: "Korea's first DePIN-focused conference" },
+      { title: "IoT Partnership", description: "Collaboration with Korean tech companies" },
+      { title: "Developer Workshop", description: "Building on Peaq infrastructure" },
+      { title: "Use Case Demo", description: "Real-world DePIN applications showcase" }
+    ]
   },
   "story-protocol": {
     name: "Story Protocol",
@@ -170,7 +195,13 @@ const projectsData: Record<string, {
       { metric: "Ambassador Network", value: "50+" },
       { metric: "Platform Content Created", value: "10K+" }
     ],
-    services: ["Creator Relations", "Platform Marketing", "Ambassador Program", "Content Strategy"]
+    services: ["Creator Relations", "Platform Marketing", "Ambassador Program", "Content Strategy"],
+    gallery: [
+      { title: "Creator Workshop", description: "Hands-on IP tokenization training" },
+      { title: "Webtoon Partnership", description: "Collaboration with Korean webtoon artists" },
+      { title: "Music IP Launch", description: "K-pop artist IP tokenization event" },
+      { title: "Success Stories", description: "Creator testimonial campaigns" }
+    ]
   },
   "megaeth": {
     name: "MegaETH",
@@ -193,7 +224,13 @@ const projectsData: Record<string, {
       { metric: "Testnet Participants", value: "5K+" },
       { metric: "Media Impressions", value: "2M+" }
     ],
-    services: ["Pre-Launch Marketing", "Community Building", "Testnet Campaigns", "Media Relations"]
+    services: ["Pre-Launch Marketing", "Community Building", "Testnet Campaigns", "Media Relations"],
+    gallery: [
+      { title: "Pre-Launch Campaign", description: "Hype-building social media strategy" },
+      { title: "Testnet Program", description: "Korean user incentive campaign" },
+      { title: "Community AMA", description: "Live Q&A with the MegaETH team" },
+      { title: "Media Coverage", description: "Feature articles in crypto publications" }
+    ]
   },
   "tria": {
     name: "Tria",
@@ -216,7 +253,13 @@ const projectsData: Record<string, {
       { metric: "dApp Integrations", value: "20+" },
       { metric: "User Retention Rate", value: "65%" }
     ],
-    services: ["User Acquisition", "Product Marketing", "Partnership Development", "Customer Support"]
+    services: ["User Acquisition", "Product Marketing", "Partnership Development", "Customer Support"],
+    gallery: [
+      { title: "Launch Campaign", description: "Korean market entry promotion" },
+      { title: "Tutorial Series", description: "Step-by-step wallet guides" },
+      { title: "dApp Integration", description: "Partnership with Korean apps" },
+      { title: "Referral Program", description: "User growth incentive campaign" }
+    ]
   },
   "bybit": {
     name: "Bybit",
@@ -240,11 +283,12 @@ const projectsData: Record<string, {
       { metric: "Brand Awareness Lift", value: "+45%" }
     ],
     services: ["Market Entry Strategy", "User Acquisition", "VIP Relations", "Brand Marketing"],
-    testimonial: {
-      quote: "CryptoBridge's deep understanding of Korean traders was instrumental in our market success.",
-      author: "Ben Zhou",
-      role: "Co-founder & CEO, Bybit"
-    }
+    gallery: [
+      { title: "Trading Campaign", description: "Zero-fee promotion launch event" },
+      { title: "VIP Program", description: "Exclusive benefits for whale traders" },
+      { title: "Esports Partnership", description: "Korean gaming community sponsorship" },
+      { title: "Brand Campaign", description: "Major marketing push in Korea" }
+    ]
   }
 };
 
@@ -388,10 +432,49 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Services Used */}
+      {/* Gallery Section */}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto max-w-6xl px-4">
           <span className="number-badge text-muted-foreground mb-4 block">[ 04 ]</span>
+          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-12">
+            Campaign <span className="serif-italic">Highlights</span>
+          </h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {project.gallery.map((item, index) => (
+              <div 
+                key={index} 
+                className={`relative aspect-video rounded-2xl overflow-hidden ${project.bgStyle} group`}
+              >
+                {/* Placeholder pattern */}
+                <div className="absolute inset-0 opacity-20">
+                  <div className="w-full h-full" style={{
+                    backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 40px)'
+                  }} />
+                </div>
+                
+                {/* Icon */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-full bg-white/10 flex items-center justify-center group-hover:scale-110 transition-transform">
+                    <Image className="w-8 h-8 text-white/60" />
+                  </div>
+                </div>
+                
+                {/* Content overlay */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/60 to-transparent">
+                  <h3 className="text-white font-semibold text-lg mb-1">{item.title}</h3>
+                  <p className="text-white/70 text-sm">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Services Used */}
+      <section className="py-24 bg-background">
+        <div className="container mx-auto max-w-6xl px-4">
+          <span className="number-badge text-muted-foreground mb-4 block">[ 05 ]</span>
           <h2 className="text-4xl md:text-5xl font-light text-foreground mb-12">
             Services <span className="serif-italic">Used</span>
           </h2>
@@ -405,19 +488,6 @@ const ProjectDetail = () => {
           </div>
         </div>
       </section>
-
-      {/* Testimonial */}
-      {project.testimonial && (
-        <section className="py-24 bg-background">
-          <div className="container mx-auto max-w-4xl px-4 text-center">
-            <p className="text-2xl md:text-3xl text-foreground leading-relaxed mb-8 serif-italic">
-              "{project.testimonial.quote}"
-            </p>
-            <p className="text-foreground font-semibold">{project.testimonial.author}</p>
-            <p className="text-muted-foreground">{project.testimonial.role}</p>
-          </div>
-        </section>
-      )}
 
       {/* Next Project */}
       <section className={`py-24 ${nextProject.bgStyle}`}>
