@@ -3,6 +3,17 @@ import { useEffect, useState } from "react";
 import CalendlyButton from "./CalendlyButton";
 import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
 
+// Import client logos
+import bnbLogo from "@/assets/logos/bnb.svg";
+import kucoinLogo from "@/assets/logos/kucoin.svg";
+import polygonLogo from "@/assets/logos/polygon.svg";
+import ondoLogo from "@/assets/logos/ondo.svg";
+import bybitLogo from "@/assets/logos/bybit.png";
+import peaqLogo from "@/assets/logos/peaq.png";
+import storyProtocolLogo from "@/assets/logos/story-protocol.png";
+import megaethLogo from "@/assets/logos/megaeth.png";
+import triaLogo from "@/assets/logos/tria.png";
+
 const serviceTags = [
   { label: "PR", position: "top-[20%] left-[6%]" },
   { label: "Social Media Marketing", position: "top-[15%] right-[10%]" },
@@ -13,15 +24,15 @@ const serviceTags = [
 ];
 
 const clientLogos = [
-  { name: "BNB", logo: "https://cryptologos.cc/logos/bnb-bnb-logo.svg" },
-  { name: "KuCoin", logo: "https://cryptologos.cc/logos/kucoin-token-kcs-logo.svg" },
-  { name: "Polygon", logo: "https://cryptologos.cc/logos/polygon-matic-logo.svg" },
-  { name: "Ondo Finance", logo: "https://cryptologos.cc/logos/ondo-finance-ondo-logo.svg" },
-  { name: "Bybit", logo: "https://cryptologos.cc/logos/bybit-byb-logo.svg" },
-  { name: "Peaq", logo: "https://s2.coinmarketcap.com/static/img/coins/64x64/21034.png" },
-  { name: "Story Protocol", logo: "https://s2.coinmarketcap.com/static/img/coins/64x64/35934.png" },
-  { name: "MegaETH", logo: "https://s2.coinmarketcap.com/static/img/coins/64x64/33498.png" },
-  { name: "Tria", logo: "https://s2.coinmarketcap.com/static/img/coins/64x64/28596.png" },
+  { name: "BNB", logo: bnbLogo },
+  { name: "KuCoin", logo: kucoinLogo },
+  { name: "Polygon", logo: polygonLogo },
+  { name: "Ondo Finance", logo: ondoLogo },
+  { name: "Bybit", logo: bybitLogo },
+  { name: "Peaq", logo: peaqLogo },
+  { name: "Story Protocol", logo: storyProtocolLogo },
+  { name: "MegaETH", logo: megaethLogo },
+  { name: "Tria", logo: triaLogo },
 ];
 
 const HeroSection = () => {
