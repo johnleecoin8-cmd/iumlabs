@@ -100,16 +100,24 @@ const testimonials = [
   },
 ];
 
-const floatingTags = [
-  { label: "Responsible", top: "22%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-orange-400 text-white" },
-  { label: "Creative", top: "32%", left: "22%", mobileTop: "15%", mobileRight: "3%", color: "bg-yellow-400 text-black" },
-  { label: "Innovation-Oriented", top: "42%", left: "2%", mobileTop: "75%", mobileLeft: "3%", color: "bg-amber-300 text-black" },
-  { label: "Resourceful", top: "48%", left: "28%", mobileBottom: "18%", mobileRight: "3%", color: "bg-red-400 text-white" },
-  { label: "Strategic", bottom: "28%", left: "25%", mobileBottom: "10%", mobileLeft: "3%", color: "bg-orange-300 text-black" },
-  { label: "Trusted", top: "20%", right: "15%", color: "bg-yellow-300 text-black" },
-  { label: "Attention to Detail", top: "30%", right: "5%", color: "bg-amber-400 text-black" },
-  { label: "Innovative", top: "48%", right: "8%", color: "bg-orange-500 text-white" },
-  { label: "Result-Driven Mindset", bottom: "22%", right: "18%", color: "bg-yellow-500 text-black" },
+// Orbital tags - each with unique orbit properties
+const orbitalTags = [
+  { label: "Responsible", orbitRadius: 280, duration: 25, startAngle: 0, color: "bg-orange-400 text-white" },
+  { label: "Creative", orbitRadius: 320, duration: 30, startAngle: 40, color: "bg-yellow-400 text-black" },
+  { label: "Innovation-Oriented", orbitRadius: 360, duration: 35, startAngle: 80, color: "bg-amber-300 text-black" },
+  { label: "Resourceful", orbitRadius: 250, duration: 22, startAngle: 120, color: "bg-red-400 text-white" },
+  { label: "Strategic", orbitRadius: 400, duration: 40, startAngle: 160, color: "bg-orange-300 text-black" },
+  { label: "Trusted", orbitRadius: 300, duration: 28, startAngle: 200, color: "bg-yellow-300 text-black" },
+  { label: "Attention to Detail", orbitRadius: 340, duration: 32, startAngle: 240, color: "bg-amber-400 text-black" },
+  { label: "Innovative", orbitRadius: 380, duration: 38, startAngle: 280, color: "bg-orange-500 text-white" },
+  { label: "Result-Driven Mindset", orbitRadius: 420, duration: 45, startAngle: 320, color: "bg-yellow-500 text-black" },
+];
+
+// Mobile tags (simplified)
+const mobileFloatingTags = [
+  { label: "Trusted", top: "15%", left: "5%", color: "bg-yellow-300 text-black" },
+  { label: "Creative", top: "20%", right: "5%", color: "bg-yellow-400 text-black" },
+  { label: "Strategic", bottom: "25%", left: "5%", color: "bg-orange-300 text-black" },
 ];
 
 const Services = () => {
@@ -157,34 +165,61 @@ const Services = () => {
           <Planet3D type="sun" className="opacity-60" />
         </div>
         
-        {/* Floating Tags with Parallax - Colorful */}
-        <div>
-          {floatingTags.map((tag, index) => (
+        {/* Orbital Tags System - Desktop */}
+        <div className="absolute inset-0 hidden sm:flex items-center justify-center pointer-events-none" style={{ perspective: '1000px' }}>
+          {/* Orbit lines (optional visual guides) */}
+          {[250, 300, 350, 400].map((radius, i) => (
+            <div
+              key={`orbit-line-${i}`}
+              className="absolute rounded-full border border-white/5"
+              style={{
+                width: radius * 2,
+                height: radius * 2,
+                transform: 'rotateX(60deg)',
+              }}
+            />
+          ))}
+          
+          {/* Orbiting tags */}
+          {orbitalTags.map((tag, index) => (
+            <div
+              key={`orbit-${tag.label}-${index}`}
+              className="absolute"
+              style={{
+                width: tag.orbitRadius * 2,
+                height: tag.orbitRadius * 2,
+                animation: `orbit ${tag.duration}s linear infinite`,
+                animationDelay: `-${(tag.startAngle / 360) * tag.duration}s`,
+                transformStyle: 'preserve-3d',
+              }}
+            >
+              <span
+                className={`absolute px-4 py-2 rounded-md text-sm font-medium shadow-lg whitespace-nowrap ${tag.color}`}
+                style={{
+                  top: '50%',
+                  left: '100%',
+                  transform: 'translate(-50%, -50%)',
+                  animation: `counter-orbit ${tag.duration}s linear infinite`,
+                  animationDelay: `-${(tag.startAngle / 360) * tag.duration}s`,
+                }}
+              >
+                {tag.label}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile floating tags - simplified */}
+        <div className="sm:hidden">
+          {mobileFloatingTags.map((tag, index) => (
             <span
-              key={`${tag.label}-${index}`}
-              className={`absolute animate-float hidden sm:block px-4 py-2 rounded-md text-sm font-medium shadow-lg ${tag.color}`}
+              key={`mobile-${tag.label}-${index}`}
+              className={`absolute animate-float px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
               style={{
                 top: tag.top,
                 left: tag.left,
                 right: tag.right,
                 bottom: tag.bottom,
-                animationDelay: `${index * 0.3}s`,
-                transform: `translateY(${scrollY * 0.05}px)`,
-              }}
-            >
-              {tag.label}
-            </span>
-          ))}
-          {/* Mobile floating tags */}
-          {floatingTags.slice(0, 4).map((tag, index) => (
-            <span
-              key={`mobile-${tag.label}-${index}`}
-              className={`absolute animate-float sm:hidden px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
-              style={{
-                top: tag.mobileTop,
-                left: tag.mobileLeft,
-                right: tag.mobileRight,
-                bottom: tag.mobileBottom,
                 animationDelay: `${index * 0.3}s`,
               }}
             >

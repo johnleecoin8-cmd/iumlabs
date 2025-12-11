@@ -73,6 +73,14 @@ export default {
         "display-sm": ["2rem", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600" }],
       },
       keyframes: {
+        orbit: {
+          '0%': { transform: 'rotateX(60deg) rotateZ(0deg)' },
+          '100%': { transform: 'rotateX(60deg) rotateZ(360deg)' },
+        },
+        'counter-orbit': {
+          '0%': { transform: 'translate(-50%, -50%) rotateZ(0deg)' },
+          '100%': { transform: 'translate(-50%, -50%) rotateZ(-360deg)' },
+        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -125,6 +133,8 @@ export default {
         },
       },
       animation: {
+        orbit: 'orbit 30s linear infinite',
+        'counter-orbit': 'counter-orbit 30s linear infinite',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "float": "float 4s ease-in-out infinite",
