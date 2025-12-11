@@ -2,8 +2,10 @@ import { useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import TrustSection from "@/components/TrustSection";
+import AboutSection from "@/components/AboutSection";
+import CasesSection from "@/components/CasesSection";
 import ServicesSection from "@/components/ServicesSection";
-import PortfolioSection from "@/components/PortfolioSection";
+import TeamSection from "@/components/TeamSection";
 import InsightsSection from "@/components/InsightsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -25,8 +27,10 @@ const Index = () => {
       <main className={`transition-opacity duration-500 ${introComplete ? 'opacity-100' : 'opacity-0'}`}>
         <HeroSection />
         <TrustSection />
+        <AboutSection />
+        <CasesSection />
         <ServicesSection />
-        <PortfolioSection />
+        <TeamSection />
         <InsightsSection />
         <CTASection />
       </main>
