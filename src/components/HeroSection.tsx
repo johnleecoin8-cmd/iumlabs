@@ -96,40 +96,40 @@ const HeroSection = () => {
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </p>
 
-          {/* CTA Button - Gradient Style with Pulse */}
+          {/* CTA Button - Pill Shape with Subtle Glow */}
           <div className="opacity-0 animate-fade-up stagger-3 mt-6 sm:mt-8 relative">
-            {/* Pulse ring effect */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 animate-pulse opacity-40 blur-xl scale-110" />
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 animate-ping opacity-20" style={{ animationDuration: '2s' }} />
+            {/* Subtle breathing glow effect */}
+            <div 
+              className="absolute inset-0 rounded-full bg-gradient-to-r from-blue-500/30 to-cyan-400/30 blur-2xl scale-125"
+              style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}
+            />
             
-            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 text-white text-base sm:text-lg px-10 sm:px-14 py-5 sm:py-6 rounded-2xl font-bold shadow-[0_20px_50px_rgba(59,130,246,0.4)] hover:shadow-[0_25px_60px_rgba(59,130,246,0.6)] transition-all duration-500 hover:scale-[1.02] border border-white/20">
+            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 text-white text-base sm:text-lg px-12 sm:px-16 py-4 sm:py-5 rounded-full font-semibold shadow-[0_8px_32px_rgba(59,130,246,0.35)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.5)] transition-all duration-500 hover:scale-[1.03] border border-white/10">
               {/* Animated shine sweep */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
               
-              <div className="relative flex items-center gap-4">
+              <div className="relative flex items-center gap-3">
                 {/* Bridge Icon */}
-                <div className="relative">
-                  <svg 
-                    className="w-7 h-7 sm:w-8 sm:h-8 text-white group-hover:scale-110 transition-transform duration-300" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M2 18h20" />
-                    <path d="M5 18V9" />
-                    <path d="M19 18V9" />
-                    <path d="M5 9c0 0 3.5-5 7-5s7 5 7 5" />
-                    <path d="M8 18v-5" />
-                    <path d="M16 18v-5" />
-                    <path d="M5 13h14" />
-                  </svg>
-                </div>
-                <span className="relative tracking-tight drop-shadow-sm">Book a Free Consultation</span>
                 <svg 
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:translate-x-1.5 transition-all duration-300" 
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-white/90 group-hover:text-white transition-colors duration-300" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M2 18h20" />
+                  <path d="M5 18V9" />
+                  <path d="M19 18V9" />
+                  <path d="M5 9c0 0 3.5-5 7-5s7 5 7 5" />
+                  <path d="M8 18v-5" />
+                  <path d="M16 18v-5" />
+                  <path d="M5 13h14" />
+                </svg>
+                <span className="relative">Book a Free Consultation</span>
+                <svg 
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-white/80 group-hover:translate-x-1 group-hover:text-white transition-all duration-300" 
                   viewBox="0 0 24 24" 
                   fill="none" 
                   stroke="currentColor" 
