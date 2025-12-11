@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
+import Planet3D from "@/components/Planet3D";
 import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
 
 interface BlogPost {
@@ -351,6 +352,9 @@ const Blog = () => {
           
           {/* Dark overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+          
+          {/* 3D Nebula Effect */}
+          <Planet3D type="nebula" className="opacity-50" />
         </div>
         
         {/* Floating Tags with Parallax - Colorful */}
