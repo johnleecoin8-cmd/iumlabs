@@ -9,6 +9,7 @@ const insights = [
     title: "How to Enter Korea's Web3 Market in 2025",
     category: "Guide",
     image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=400&h=300&fit=crop",
+    color: "bg-red-100 text-red-700",
   },
   {
     id: 2,
@@ -16,6 +17,7 @@ const insights = [
     title: "Korean KOL Marketing: Complete Strategy Guide",
     category: "Strategy",
     image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop",
+    color: "bg-blue-100 text-blue-700",
   },
   {
     id: 3,
@@ -23,6 +25,7 @@ const insights = [
     title: "VASP Compliance Guide for Foreign Projects",
     category: "Regulatory",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+    color: "bg-green-100 text-green-700",
   },
 ];
 
@@ -30,13 +33,13 @@ const InsightsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-24 md:py-32 relative">
+    <section ref={ref} className="py-24 md:py-32 relative bg-muted/30">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className={`flex flex-col md:flex-row md:items-end md:justify-between mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div>
-            <span className="text-primary font-mono text-sm tracking-wider mb-4 block">BLOG</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+            <span className="text-sm font-medium text-orange-600 tracking-wider mb-4 block">BLOG</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-foreground">
               Latest Insights
             </h2>
             <p className="text-muted-foreground max-w-lg">
@@ -56,12 +59,7 @@ const InsightsSection = () => {
           </div>
         </div>
 
-        {/* Recent News Label */}
-        <div className={`flex items-center gap-2 mb-8 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <span className="text-sm text-muted-foreground">↓ Recent News</span>
-        </div>
-
-        {/* Blog Cards - Lunar Strategy style */}
+        {/* Blog Cards */}
         <div className="grid md:grid-cols-3 gap-6">
           {insights.map((article, index) => (
             <article
@@ -72,14 +70,14 @@ const InsightsSection = () => {
               style={{ transitionDelay: `${150 + index * 100}ms` }}
             >
               {/* Thumbnail */}
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-card border border-border/30 group-hover:border-primary/30 transition-all">
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-card border border-border group-hover:shadow-lg transition-all">
                 <img 
                   src={article.image} 
                   alt={article.title}
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
                 />
                 {/* Category Badge */}
-                <div className="absolute top-4 left-4 px-3 py-1 bg-background/80 backdrop-blur-sm text-xs font-medium rounded-full">
+                <div className={`absolute top-4 left-4 px-3 py-1 ${article.color} text-xs font-medium rounded-full`}>
                   {article.category}
                 </div>
               </div>

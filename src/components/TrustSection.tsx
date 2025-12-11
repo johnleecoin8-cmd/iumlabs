@@ -17,10 +17,10 @@ const TrustSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-12 border-y border-border/20">
+    <section ref={ref} className="py-12 border-y border-border bg-muted/20">
       <div className="container mx-auto px-4">
         <div className={`transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          {/* Simple marquee of client names - Lunar Strategy style */}
+          {/* Simple marquee of client names */}
           <div className="marquee">
             <div className="marquee-content">
               {[...clientLogos, ...clientLogos].map((client, index) => (
@@ -29,7 +29,7 @@ const TrustSection = () => {
                   href={client.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 text-sm font-medium text-muted-foreground/50 hover:text-foreground transition-colors tracking-wide"
+                  className="px-8 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors tracking-wide"
                   title={client.name}
                 >
                   {client.name}
@@ -43,7 +43,7 @@ const TrustSection = () => {
                   href={client.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 text-sm font-medium text-muted-foreground/50 hover:text-foreground transition-colors tracking-wide"
+                  className="px-8 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors tracking-wide"
                   title={client.name}
                 >
                   {client.name}

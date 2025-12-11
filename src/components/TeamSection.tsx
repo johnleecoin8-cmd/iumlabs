@@ -13,6 +13,8 @@ const team = [
     image: images.team.james,
     linkedin: "https://www.linkedin.com/in/james-l-13a998251/",
     telegram: "https://t.me/cryptobridgekorea",
+    color: "border-red-200 hover:border-red-400",
+    iconHover: "hover:bg-red-100 hover:text-red-600",
   },
   {
     name: "David",
@@ -24,6 +26,8 @@ const team = [
     image: images.team.david,
     linkedin: "https://www.linkedin.com/company/cryptobridge",
     telegram: "https://t.me/cryptobridgekorea",
+    color: "border-blue-200 hover:border-blue-400",
+    iconHover: "hover:bg-blue-100 hover:text-blue-600",
   },
 ];
 
@@ -32,16 +36,13 @@ const TeamSection = () => {
 
   return (
     <section ref={ref} className="py-24 md:py-32 relative">
-      {/* Background */}
-      <div className="absolute inset-0 bg-card/30" />
-
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-block px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full text-sm text-primary mb-6">
+          <span className="inline-block px-4 py-1.5 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-6">
             Team of 2 People
           </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
             Our Team
           </h2>
         </div>
@@ -51,13 +52,13 @@ const TeamSection = () => {
           {team.map((member, index) => (
             <div
               key={member.name}
-              className={`flex-1 max-w-sm w-full p-8 rounded-2xl bg-card border border-border/30 text-center transition-all duration-700 ${
+              className={`flex-1 max-w-sm w-full p-8 rounded-2xl bg-card border-2 ${member.color} text-center transition-all duration-300 shadow-sm hover:shadow-md ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               {/* Photo */}
-              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 ring-4 ring-border/30">
+              <div className="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 ring-4 ring-muted">
                 <img 
                   src={member.image} 
                   alt={member.name}
@@ -82,7 +83,7 @@ const TeamSection = () => {
                   href={member.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-card border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                  className={`w-10 h-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground ${member.iconHover} transition-all`}
                 >
                   <Linkedin className="w-5 h-5" />
                 </a>
@@ -90,7 +91,7 @@ const TeamSection = () => {
                   href={member.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-card border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                  className={`w-10 h-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground ${member.iconHover} transition-all`}
                 >
                   <Send className="w-5 h-5" />
                 </a>

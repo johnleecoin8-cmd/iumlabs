@@ -5,7 +5,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
-// Numbered service cards - Lunar Strategy style
+// Services with diverse colors
 const services = [
   {
     id: "kol-marketing",
@@ -13,10 +13,14 @@ const services = [
     icon: Megaphone,
     title: "KOL & Influence Network",
     description: "Direct trust building with Korea's top crypto influencers across Twitter, YouTube, and local platforms.",
-    fullDescription: "Partner with Korea's top crypto influencers to amplify your project's reach. We manage relationships with 100+ verified KOLs across Twitter, YouTube, and Korean platforms.",
+    fullDescription: "Partner with Korea's top crypto influencers to amplify your project's reach.",
     features: ["Tier 1-3 KOL Selection", "Campaign Strategy", "Content Coordination", "Performance Analytics"],
     stat: "100+",
     statLabel: "Verified KOLs",
+    color: "red",
+    iconBg: "bg-red-100 text-red-600",
+    cardBorder: "hover:border-red-300",
+    numberColor: "text-red-200",
   },
   {
     id: "community-building",
@@ -24,10 +28,14 @@ const services = [
     icon: Users,
     title: "Community Growth",
     description: "Full setup and management of Korean Telegram, Discord, and KakaoTalk channels.",
-    fullDescription: "Build a thriving Korean community from scratch or enhance your existing presence. We handle everything from setup to 24/7 moderation in Korean.",
+    fullDescription: "Build a thriving Korean community from scratch or enhance your existing presence.",
     features: ["Platform Setup", "Korean Moderation", "Engagement Programs", "AMA Sessions"],
     stat: "500K+",
     statLabel: "Members Managed",
+    color: "blue",
+    iconBg: "bg-blue-100 text-blue-600",
+    cardBorder: "hover:border-blue-300",
+    numberColor: "text-blue-200",
   },
   {
     id: "pr-media",
@@ -35,10 +43,14 @@ const services = [
     icon: Globe,
     title: "PR & Media Relations",
     description: "Tier-1 Korean crypto media placements, press releases, and exclusive interview opportunities.",
-    fullDescription: "Secure coverage in leading Korean crypto publications and mainstream media. From press releases to exclusive interviews, we handle your Korean media strategy.",
+    fullDescription: "Secure coverage in leading Korean crypto publications and mainstream media.",
     features: ["Press Release Distribution", "Media Interviews", "News Coverage", "Crisis Management"],
     stat: "50+",
     statLabel: "Publications",
+    color: "green",
+    iconBg: "bg-green-100 text-green-600",
+    cardBorder: "hover:border-green-300",
+    numberColor: "text-green-200",
   },
   {
     id: "gtm-strategy",
@@ -46,10 +58,14 @@ const services = [
     icon: TrendingUp,
     title: "Go-To-Market Strategy",
     description: "Data-driven launch planning tailored for the unique Korean market dynamics.",
-    fullDescription: "Launch successfully in Korea with data-driven strategies that account for local market dynamics, competitive landscape, and user behavior patterns.",
+    fullDescription: "Launch successfully in Korea with data-driven strategies.",
     features: ["Market Research", "Competitor Analysis", "Launch Planning", "Growth Roadmap"],
     stat: "30+",
     statLabel: "Launches",
+    color: "purple",
+    iconBg: "bg-purple-100 text-purple-600",
+    cardBorder: "hover:border-purple-300",
+    numberColor: "text-purple-200",
   },
   {
     id: "vasp-compliance",
@@ -57,10 +73,14 @@ const services = [
     icon: Shield,
     title: "VASP & Compliance",
     description: "Navigate Korean regulations and secure the licenses you need to operate legally.",
-    fullDescription: "Get compliant in Korea's regulated crypto market. We guide you through VASP registration, AML/KYC requirements, and ongoing compliance obligations.",
+    fullDescription: "Get compliant in Korea's regulated crypto market.",
     features: ["VASP Registration", "Compliance Consulting", "Legal Partnership", "Ongoing Support"],
     stat: "100%",
     statLabel: "Success Rate",
+    color: "orange",
+    iconBg: "bg-orange-100 text-orange-600",
+    cardBorder: "hover:border-orange-300",
+    numberColor: "text-orange-200",
   },
   {
     id: "events",
@@ -68,10 +88,14 @@ const services = [
     icon: Zap,
     title: "Events & Conferences",
     description: "From Korea Blockchain Week to exclusive meetups — presence at major Korean events.",
-    fullDescription: "Make an impact at major Korean blockchain events or host your own. We manage everything from booth setup to VIP networking events.",
+    fullDescription: "Make an impact at major Korean blockchain events or host your own.",
     features: ["Event Planning", "Booth Management", "Speaker Placement", "Networking Events"],
     stat: "20+",
     statLabel: "Events/Year",
+    color: "teal",
+    iconBg: "bg-teal-100 text-teal-600",
+    cardBorder: "hover:border-teal-300",
+    numberColor: "text-teal-200",
   },
 ];
 
@@ -85,10 +109,10 @@ const ServicesSection = () => {
         {/* Header */}
         <div className={`flex flex-col md:flex-row md:items-end md:justify-between mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div>
-            <span className="text-primary font-mono text-sm tracking-wider mb-4 block">OUR SERVICES</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
+            <span className="text-sm font-medium text-green-600 tracking-wider mb-4 block">OUR SERVICES</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
               Full-Service Web3<br />
-              <span className="text-primary">Marketing</span>
+              <span className="text-gradient">Marketing</span>
             </h2>
           </div>
           <Link 
@@ -100,28 +124,28 @@ const ServicesSection = () => {
           </Link>
         </div>
 
-        {/* Services Grid - Numbered Cards */}
+        {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <div
               key={service.id}
               onClick={() => setSelectedService(service)}
-              className={`group p-6 rounded-2xl bg-card/50 border border-border/30 hover:border-primary/40 cursor-pointer transition-all duration-500 ${
+              className={`group p-6 rounded-2xl bg-card border border-border ${service.cardBorder} cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${100 + index * 50}ms` }}
             >
               {/* Number + Arrow */}
               <div className="flex items-center justify-between mb-6">
-                <span className="text-4xl font-bold text-primary/20 group-hover:text-primary/40 transition-colors">
+                <span className={`text-4xl font-bold ${service.numberColor}`}>
                   {service.number}
                 </span>
-                <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
               </div>
 
               {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
-                <service.icon className="w-6 h-6 text-primary" />
+              <div className={`w-12 h-12 rounded-xl ${service.iconBg} flex items-center justify-center mb-4`}>
+                <service.icon className="w-6 h-6" />
               </div>
 
               {/* Content */}
@@ -138,15 +162,15 @@ const ServicesSection = () => {
 
       {/* Service Detail Modal */}
       <Dialog open={!!selectedService} onOpenChange={() => setSelectedService(null)}>
-        <DialogContent className="max-w-lg rounded-2xl border border-border/50 bg-card/95 backdrop-blur-xl">
+        <DialogContent className="max-w-lg rounded-2xl border border-border bg-card">
           {selectedService && (
             <>
               <DialogHeader>
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                    <selectedService.icon className="w-6 h-6 text-primary" />
+                  <div className={`w-12 h-12 rounded-xl ${selectedService.iconBg} flex items-center justify-center`}>
+                    <selectedService.icon className="w-6 h-6" />
                   </div>
-                  <span className="text-4xl font-bold text-primary/30">{selectedService.number}</span>
+                  <span className={`text-4xl font-bold ${selectedService.numberColor}`}>{selectedService.number}</span>
                 </div>
                 <DialogTitle className="text-xl font-bold text-foreground">{selectedService.title}</DialogTitle>
                 <DialogDescription className="text-muted-foreground leading-relaxed mt-2">
@@ -155,7 +179,7 @@ const ServicesSection = () => {
               </DialogHeader>
               
               {/* Stat */}
-              <div className="flex items-baseline gap-2 mt-4 p-4 rounded-xl bg-primary/5 border border-primary/10">
+              <div className="flex items-baseline gap-2 mt-4 p-4 rounded-xl bg-muted">
                 <span className="text-3xl font-bold text-primary">{selectedService.stat}</span>
                 <span className="text-sm text-muted-foreground">{selectedService.statLabel}</span>
               </div>
@@ -178,7 +202,7 @@ const ServicesSection = () => {
 
               <div className="mt-6 flex gap-3">
                 <Link to="/contact" className="flex-1">
-                  <Button className="w-full rounded-full bg-primary hover:bg-primary/90">
+                  <Button className="w-full rounded-full bg-primary hover:bg-primary/90 shadow-md">
                     Get Started
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>

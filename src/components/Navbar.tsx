@@ -9,7 +9,7 @@ const Navbar = () => {
   const location = useLocation();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-xl border-b border-border/30">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
@@ -43,9 +43,8 @@ const Navbar = () => {
             {/* Book a Meeting */}
             <Link to="/contact">
               <Button 
-                variant="outline" 
                 size="sm" 
-                className="hidden md:flex items-center gap-2 rounded-full border-border/50 hover:bg-primary hover:text-primary-foreground hover:border-primary transition-all"
+                className="hidden md:flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book a Meeting</span>
@@ -54,7 +53,7 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <button
-              className="p-2 text-foreground hover:bg-card rounded-lg transition-colors"
+              className="p-2 text-foreground hover:bg-muted rounded-lg transition-colors"
               onClick={() => setIsOpen(!isOpen)}
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -81,7 +80,6 @@ const Navbar = () => {
                         : "text-foreground"
                     }`}
                     onClick={() => setIsOpen(false)}
-                    style={{ animationDelay: `${index * 50}ms` }}
                   >
                     {link.name}
                   </Link>
@@ -124,7 +122,7 @@ const Navbar = () => {
                   <Link to="/contact" onClick={() => setIsOpen(false)}>
                     <Button 
                       size="lg" 
-                      className="rounded-full bg-primary hover:bg-primary/90 px-8"
+                      className="rounded-full bg-primary hover:bg-primary/90 px-8 shadow-lg"
                     >
                       <Calendar className="w-4 h-4 mr-2" />
                       Book a Meeting

@@ -61,7 +61,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="border-t border-border/30 bg-card/30">
+    <footer className="border-t border-border bg-muted/30">
       <div className="container mx-auto px-4 py-16 md:py-24">
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Left - Office Info */}
@@ -100,7 +100,7 @@ const Footer = () => {
                 href={brand.telegramLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-blue-500 hover:bg-blue-100 hover:border-blue-200 transition-all"
               >
                 <Send className="w-4 h-4" />
               </a>
@@ -108,7 +108,7 @@ const Footer = () => {
                 href={brand.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                className="w-10 h-10 rounded-full bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-blue-600 hover:bg-blue-100 hover:border-blue-200 transition-all"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
@@ -125,7 +125,7 @@ const Footer = () => {
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
-                  className="bg-background/50 border-border/50 rounded-lg"
+                  className="bg-card border-border rounded-lg"
                 />
                 <Input
                   type="email"
@@ -133,7 +133,7 @@ const Footer = () => {
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
-                  className="bg-background/50 border-border/50 rounded-lg"
+                  className="bg-card border-border rounded-lg"
                 />
               </div>
               <div className="grid sm:grid-cols-2 gap-4">
@@ -141,13 +141,13 @@ const Footer = () => {
                   placeholder="Company"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="bg-background/50 border-border/50 rounded-lg"
+                  className="bg-card border-border rounded-lg"
                 />
                 <Input
                   placeholder="Website"
                   value={formData.website}
                   onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                  className="bg-background/50 border-border/50 rounded-lg"
+                  className="bg-card border-border rounded-lg"
                 />
               </div>
               <Textarea
@@ -155,7 +155,7 @@ const Footer = () => {
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                 rows={4}
-                className="bg-background/50 border-border/50 rounded-lg resize-none"
+                className="bg-card border-border rounded-lg resize-none"
               />
 
               {/* Budget Selection */}
@@ -180,7 +180,7 @@ const Footer = () => {
               <Button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="rounded-full bg-primary hover:bg-primary/90 group mt-2"
+                className="rounded-full bg-primary hover:bg-primary/90 group mt-2 shadow-md"
               >
                 {isSubmitting ? "Sending..." : "Submit"}
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
@@ -190,7 +190,7 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-16 pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             {brand.copyright}
           </p>
