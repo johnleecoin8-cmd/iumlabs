@@ -3,26 +3,21 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, Clock, Globe } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
 import Planet3D from "@/components/Planet3D";
+import TeamContactCard from "@/components/TeamContactCard";
 import marsSurface from "@/assets/backgrounds/mars-surface.jpg";
 
 const budgetOptions = [
-  "$5K - $10K",
-  "$10K - $25K",
-  "$25K - $50K",
+  "< $5K",
+  "$5K - $15K",
+  "$15K - $30K",
+  "$30K - $50K",
   "$50K+",
-];
-
-const contactInfo = [
-  { icon: Mail, label: "Email", value: brand.email, link: `mailto:${brand.email}` },
-  { icon: Phone, label: "Phone", value: brand.phone, link: `tel:${brand.phone.replace(/\s/g, '')}` },
-  { icon: Send, label: "Telegram", value: brand.telegram, link: brand.telegramLink },
-  { icon: MapPin, label: "Office", value: brand.address, link: "#" },
 ];
 
 const floatingTags = [
@@ -36,6 +31,25 @@ const floatingTags = [
   { label: "Get Started", bottom: "25%", right: "18%", color: "bg-red-300 text-black" },
 ];
 
+const teamMembers = [
+  {
+    name: "James",
+    role: "Co-Founder",
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
+    telegram: "https://t.me/cryptobridgekorea",
+    linkedin: "https://www.linkedin.com/in/james-l-13a998251/",
+    email: "james@cryptobridgekorea.com",
+  },
+  {
+    name: "David",
+    role: "Co-Founder",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
+    telegram: "https://t.me/cryptobridgekorea",
+    linkedin: "https://www.linkedin.com/company/cryptobridge",
+    email: "david@cryptobridgekorea.com",
+  },
+];
+
 const Contact = () => {
   const { toast } = useToast();
   const [scrollY, setScrollY] = useState(0);
@@ -43,6 +57,7 @@ const Contact = () => {
     name: "",
     email: "",
     company: "",
+    website: "",
     message: "",
     budget: "",
   });
@@ -60,18 +75,16 @@ const Contact = () => {
 
     setIsSubmitting(true);
     try {
-      // Save to database
       const { error } = await supabase
         .from('contact_submissions')
         .insert({
           name: formData.name,
           email: formData.email,
-          comments: `Company: ${formData.company}\nBudget: ${formData.budget}\n\n${formData.message}`,
+          comments: `Company: ${formData.company}\nWebsite: ${formData.website}\nBudget: ${formData.budget}\n\n${formData.message}`,
         });
 
       if (error) throw error;
 
-      // Send email notification (don't block on this)
       supabase.functions.invoke('send-contact-notification', {
         body: {
           name: formData.name,
@@ -86,7 +99,7 @@ const Contact = () => {
         title: "Message sent!",
         description: "We'll get back to you within 24 hours.",
       });
-      setFormData({ name: "", email: "", company: "", message: "", budget: "" });
+      setFormData({ name: "", email: "", company: "", website: "", message: "", budget: "" });
     } catch (error) {
       toast({
         title: "Failed to send",
@@ -114,7 +127,7 @@ const Contact = () => {
             }}
           />
           
-          {/* Aurora light overlay - Mars red/orange theme */}
+          {/* Aurora light overlay */}
           <div className="absolute inset-0 animate-aurora">
             <div className="absolute inset-0 bg-gradient-to-tr from-red-600/30 via-transparent to-orange-500/20" />
             <div className="absolute inset-0 bg-gradient-to-bl from-rose-600/25 via-transparent to-amber-500/15" />
@@ -132,7 +145,7 @@ const Contact = () => {
           <Planet3D type="mars" className="opacity-60" />
         </div>
         
-        {/* Floating Tags with Parallax - Colorful */}
+        {/* Floating Tags */}
         <div>
           {floatingTags.map((tag, index) => (
             <span
@@ -166,7 +179,7 @@ const Contact = () => {
           ))}
         </div>
 
-        {/* Content with Stagger Animation */}
+        {/* Content */}
         <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
           <div className="mb-16">
             <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Contact ]</span>
@@ -175,40 +188,11 @@ const Contact = () => {
             </h1>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-16 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-            {/* Left - Description */}
-            <div>
-              <p className="text-lg text-white/60 mb-8">
-                Tell us about your project and we'll explain how we can help you succeed in Korea.
-              </p>
-              <CalendlyButton className="lunar-btn">
-                <Calendar className="w-4 h-4" />
-                <span>Book a Meeting</span>
-              </CalendlyButton>
-            </div>
-
-            {/* Right - Contact Links */}
-            <div className="space-y-0">
-              {contactInfo.map((info, index) => (
-                <a 
-                  key={info.label}
-                  href={info.link}
-                  target={info.link.startsWith('http') ? '_blank' : undefined}
-                  rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="flex items-center justify-between py-4 border-b border-white/10 group hover:border-white/30 transition-colors opacity-0 animate-fade-up"
-                  style={{ animationDelay: `${0.5 + index * 0.1}s`, animationFillMode: 'forwards' }}
-                >
-                  <div className="flex items-center gap-3">
-                    <info.icon className="w-4 h-4 text-white/50" />
-                    <span className="text-white/50 text-sm">{info.label}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-white">{info.value}</span>
-                    <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-white transition-colors" />
-                  </div>
-                </a>
-              ))}
-            </div>
+          <div className="pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+            <p className="text-lg text-white/60 max-w-2xl">
+              We work closely with founders to accelerate their growth in the Korean market. 
+              Reach out directly to our team or fill out the form below.
+            </p>
           </div>
         </div>
 
@@ -219,92 +203,203 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form Section - Mars Theme */}
-      <section className="section-mars-light py-24 px-4">
-        <div className="container mx-auto max-w-3xl relative z-10">
-          <div className="bg-white/80 backdrop-blur-sm border border-rose-200/30 rounded-3xl p-8 md:p-12 shadow-xl">
-            <div className="mb-8">
-              <span className="text-sm text-[hsl(var(--light-fg),0.4)] mb-4 block">[ Send a Message ]</span>
-              <h2 className="text-3xl font-light text-[hsl(var(--light-fg))]">
-                Tell us about your <span className="serif-italic">project</span>
-              </h2>
-            </div>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Name *</label>
-                  <Input
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                    className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary text-[hsl(var(--light-fg))]"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Email *</label>
-                  <Input
-                    type="email"
-                    placeholder="you@company.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                    className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary text-[hsl(var(--light-fg))]"
-                  />
-                </div>
-              </div>
-
+      {/* Contact Section - 2 Column Layout */}
+      <section className="section-mars-dark py-24 px-4">
+        <div className="container mx-auto max-w-7xl relative z-10">
+          <div className="grid lg:grid-cols-2 gap-16">
+            {/* Left Column - Team & Info */}
+            <div className="space-y-10">
+              {/* Team Contact Cards */}
               <div>
-                <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Company</label>
-                <Input
-                  placeholder="Your company or project"
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary text-[hsl(var(--light-fg))]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-3">Budget Range</label>
-                <div className="flex flex-wrap gap-2">
-                  {budgetOptions.map((option) => (
-                    <button
-                      key={option}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, budget: option })}
-                      className={`px-4 py-2 rounded-full text-sm border transition-all ${
-                        formData.budget === option
-                          ? 'bg-primary text-white border-primary'
-                          : 'bg-transparent border-[hsl(var(--light-fg),0.15)] text-[hsl(var(--light-fg))] hover:border-primary'
-                      }`}
-                    >
-                      {option}
-                    </button>
+                <span className="text-white/40 text-sm font-mono mb-6 block">[ Direct Contact ]</span>
+                <h2 className="text-3xl font-light text-white mb-8">
+                  Talk directly with our <span className="serif-italic text-primary">founders</span>
+                </h2>
+                <div className="space-y-4">
+                  {teamMembers.map((member) => (
+                    <TeamContactCard key={member.name} {...member} />
                   ))}
                 </div>
               </div>
 
-              <div>
-                <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Message</label>
-                <Textarea
-                  placeholder="Tell us about your project and goals for the Korean market..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={5}
-                  className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary resize-none text-[hsl(var(--light-fg))]"
-                />
+              {/* Open Hours */}
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <Clock className="w-5 h-5 text-primary" />
+                  <h3 className="text-white font-medium">Open Hours</h3>
+                </div>
+                <div className="space-y-2 text-white/60">
+                  <div className="flex justify-between">
+                    <span>Monday - Friday</span>
+                    <span className="text-white">9:00 AM - 6:00 PM KST</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Saturday - Sunday</span>
+                    <span className="text-white/40">Closed</span>
+                  </div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-white/10">
+                  <div className="flex items-center gap-2 text-sm text-white/50">
+                    <Globe className="w-4 h-4" />
+                    <span>Seoul, South Korea (GMT+9)</span>
+                  </div>
+                </div>
               </div>
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="lunar-btn w-full"
-              >
-                <Send className="w-4 h-4" />
-                <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
-              </button>
-            </form>
+              {/* Office Info */}
+              <div className="space-y-4">
+                <span className="text-white/40 text-sm font-mono block">[ Office ]</span>
+                <a 
+                  href="https://maps.google.com/?q=11B+Gangnam-daero+373+Gangnam+Seoul"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-start gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors group"
+                >
+                  <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-white">{brand.address}</p>
+                    <span className="text-sm text-white/40 group-hover:text-primary transition-colors">View on Map →</span>
+                  </div>
+                </a>
+              </div>
+
+              {/* Prefer Not to Fill Form */}
+              <div className="bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-2xl p-6">
+                <h3 className="text-white font-medium mb-4">Prefer not to fill out a form?</h3>
+                <div className="space-y-3">
+                  <a 
+                    href={`mailto:${brand.email}`}
+                    className="flex items-center gap-3 text-white/70 hover:text-white transition-colors"
+                  >
+                    <Mail className="w-4 h-4 text-primary" />
+                    <span>{brand.email}</span>
+                  </a>
+                  <a 
+                    href={brand.telegramLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 text-white/70 hover:text-white transition-colors"
+                  >
+                    <Send className="w-4 h-4 text-primary" />
+                    <span>{brand.telegram}</span>
+                  </a>
+                  <a 
+                    href={`tel:${brand.phone.replace(/\s/g, '')}`}
+                    className="flex items-center gap-3 text-white/70 hover:text-white transition-colors"
+                  >
+                    <Phone className="w-4 h-4 text-primary" />
+                    <span>{brand.phone}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Contact Form */}
+            <div>
+              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-10">
+                <div className="mb-8">
+                  <span className="text-white/40 text-sm font-mono mb-4 block">[ Contact Form ]</span>
+                  <h2 className="text-3xl font-light text-white">
+                    Tell us about your <span className="serif-italic text-primary">project</span>
+                  </h2>
+                </div>
+                
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm text-white/50 mb-2">Name *</label>
+                      <Input
+                        placeholder="Your name"
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        required
+                        className="rounded-xl bg-white/5 border-white/10 focus:border-primary text-white placeholder:text-white/30"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm text-white/50 mb-2">Email *</label>
+                      <Input
+                        type="email"
+                        placeholder="you@company.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        required
+                        className="rounded-xl bg-white/5 border-white/10 focus:border-primary text-white placeholder:text-white/30"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm text-white/50 mb-2">Company</label>
+                      <Input
+                        placeholder="Your company"
+                        value={formData.company}
+                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                        className="rounded-xl bg-white/5 border-white/10 focus:border-primary text-white placeholder:text-white/30"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm text-white/50 mb-2">Website</label>
+                      <Input
+                        placeholder="https://yourproject.com"
+                        value={formData.website}
+                        onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                        className="rounded-xl bg-white/5 border-white/10 focus:border-primary text-white placeholder:text-white/30"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm text-white/50 mb-3">Budget Range</label>
+                    <div className="flex flex-wrap gap-2">
+                      {budgetOptions.map((option) => (
+                        <button
+                          key={option}
+                          type="button"
+                          onClick={() => setFormData({ ...formData, budget: option })}
+                          className={`px-4 py-2 rounded-full text-sm border transition-all ${
+                            formData.budget === option
+                              ? 'bg-primary text-white border-primary'
+                              : 'bg-transparent border-white/20 text-white/70 hover:border-primary hover:text-white'
+                          }`}
+                        >
+                          {option}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm text-white/50 mb-2">Project Description *</label>
+                    <Textarea
+                      placeholder="Tell us about your project, goals, and timeline..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      rows={6}
+                      required
+                      className="rounded-xl bg-white/5 border-white/10 focus:border-primary resize-none text-white placeholder:text-white/30"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="lunar-btn w-full"
+                  >
+                    <Send className="w-4 h-4" />
+                    <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
+                  </button>
+
+                  <p className="text-center text-white/40 text-sm">
+                    Or{" "}
+                    <CalendlyButton className="text-primary hover:underline inline">
+                      book a call directly
+                    </CalendlyButton>
+                  </p>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </section>
