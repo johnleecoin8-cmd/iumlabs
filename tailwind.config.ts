@@ -110,6 +110,16 @@ export default {
           "50%": { transform: "scale(1.15) translate(-2%, -1%)" },
           "100%": { transform: "scale(1) translate(0, 0)" },
         },
+        "light-sweep": {
+          "0%": { opacity: "0", transform: "translateX(-100%) rotate(-45deg)" },
+          "50%": { opacity: "0.3" },
+          "100%": { opacity: "0", transform: "translateX(100%) rotate(-45deg)" },
+        },
+        "aurora": {
+          "0%, 100%": { opacity: "0.15", transform: "translateX(0) scale(1)" },
+          "33%": { opacity: "0.25", transform: "translateX(5%) scale(1.05)" },
+          "66%": { opacity: "0.2", transform: "translateX(-3%) scale(1.02)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -121,6 +131,8 @@ export default {
         "slide-up": "slide-up 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
         "marquee": "marquee 20s linear infinite",
         "kenburns": "kenburns 25s ease-in-out infinite",
+        "light-sweep": "light-sweep 8s ease-in-out infinite",
+        "aurora": "aurora 12s ease-in-out infinite",
       },
       transitionTimingFunction: {
         "smooth": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
