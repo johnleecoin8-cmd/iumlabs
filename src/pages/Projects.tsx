@@ -290,8 +290,8 @@ const Projects = () => {
           {/* Stats Row */}
           <div className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
+              <div key={index} className="stat-card-enhanced">
+                <div className="text-3xl md:text-4xl font-bold gradient-text-saturn mb-2">{stat.value}</div>
                 <div className="text-sm text-white/50">{stat.label}</div>
               </div>
             ))}
@@ -319,8 +319,8 @@ const Projects = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
                   selectedCategory === category
-                    ? 'bg-primary text-white'
-                    : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
+                    ? 'btn-primary-glow'
+                    : 'btn-ghost-dark'
                 }`}
               >
                 {category}

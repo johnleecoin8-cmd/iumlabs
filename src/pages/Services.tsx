@@ -403,33 +403,35 @@ const Services = () => {
                   href={testimonial.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`block bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 group cursor-pointer h-full transition-all duration-500 ${
+                  className={`block testimonial-card-premium cursor-pointer h-full ${
                     testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                   }`}
                   style={{ transitionDelay: `${index * 150}ms` }}
                 >
-                  {/* Quote Icon with Animation */}
-                  <Quote className="w-10 h-10 text-amber-400/30 mb-6 quote-icon-animated" />
+                  {/* Quote Icon Enhanced */}
+                  <div className="quote-icon-enhanced">
+                    <Quote className="w-5 h-5" />
+                  </div>
                   
                   {/* Content */}
-                  <p className="text-white/70 text-lg leading-relaxed mb-8">
+                  <p className="text-white/70 text-lg leading-relaxed mb-8 mt-4">
                     "{testimonial.content}"
                   </p>
 
-                  {/* Rating */}
-                  <div className="flex items-center gap-1 mb-6">
+                  {/* Rating Enhanced */}
+                  <div className="rating-stars-enhanced mb-6">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400 transition-transform group-hover:scale-110" style={{ transitionDelay: `${i * 50}ms` }} />
+                      <Star key={i} className="transition-transform group-hover:scale-110" style={{ transitionDelay: `${i * 50}ms` }} />
                     ))}
                   </div>
 
-                  {/* Author with Avatar Ring */}
+                  {/* Author with Avatar Ring Enhanced */}
                   <div className="flex items-center gap-4">
-                    <div className="avatar-ring">
+                    <div className="avatar-ring-enhanced">
                       <img
                         src={testimonial.avatar}
                         alt={testimonial.name}
-                        className="w-14 h-14 rounded-full object-cover border-2 border-white/20"
+                        className="w-14 h-14 object-cover"
                       />
                     </div>
                     <div>
@@ -440,7 +442,7 @@ const Services = () => {
 
                   {/* Source */}
                   <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">
-                    <span className="text-xs text-amber-400 uppercase tracking-wider font-medium">
+                    <span className="tag-pill-enhanced">
                       Reviewed on {testimonial.source}
                     </span>
                     <ExternalLink className="w-4 h-4 text-white/30 group-hover:text-amber-400 transition-colors" />

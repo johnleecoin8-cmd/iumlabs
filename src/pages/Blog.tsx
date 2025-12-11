@@ -373,8 +373,8 @@ const Blog = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
                   selectedCategory === category
-                    ? 'bg-primary text-white'
-                    : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
+                    ? 'btn-primary-glow'
+                    : 'btn-ghost-dark'
                 }`}
               >
                 {category}
@@ -384,9 +384,9 @@ const Blog = () => {
 
           {/* Recent News Header */}
           <div className="mb-8">
-            <span className="text-white/40 text-sm font-mono mb-4 block">[ Recent News ]</span>
+            <span className="section-number-badge mb-4">Recent News</span>
             <h2 className="text-2xl font-light text-white">
-              All <span className="serif-italic text-primary">Articles</span>
+              All <span className="serif-italic gradient-text-nebula">Articles</span>
             </h2>
           </div>
 
