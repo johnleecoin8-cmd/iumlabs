@@ -1,20 +1,12 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
-import { Linkedin, Send, Calendar, Mail, Users, Award, Target } from "lucide-react";
+import { Linkedin, Send, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { images } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
 import Planet3D from "@/components/Planet3D";
-import TeamContactCard from "@/components/TeamContactCard";
-import TrustBadge from "@/components/TrustBadge";
-import ClientLogoMarquee from "@/components/ClientLogoMarquee";
-import SectionBackground from "@/components/SectionBackground";
-import FloatingSectionElements from "@/components/FloatingSectionElements";
-import GiantSectionTitle from "@/components/GiantSectionTitle";
-import GlowCard from "@/components/GlowCard";
 import earthSpace from "@/assets/backgrounds/earth-space.jpg";
 
 const stats = [
@@ -59,17 +51,11 @@ const About = () => {
   const { ref, isVisible } = useScrollAnimation();
   const [scrollY, setScrollY] = useState(0);
 
-  // Throttled scroll handler for performance
-  const handleScroll = useCallback(() => {
-    requestAnimationFrame(() => {
-      setScrollY(window.scrollY);
-    });
-  }, []);
-
   useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
@@ -177,25 +163,9 @@ const About = () => {
         </div>
       </section>
 
-      {/* Mission Section - Earth Theme with Enhanced Background */}
-      <section ref={ref} className="section-earth-light py-24 px-4 relative">
-        {/* Dynamic Background Effects */}
-        <SectionBackground type="gradient-mesh" theme="earth" intensity={0.5} />
-        <SectionBackground type="glow-orbs" theme="earth" intensity={0.3} />
-        
-        {/* Floating Elements */}
-        <FloatingSectionElements
-          scrollY={scrollY}
-          parallaxMultiplier={0.025}
-          elements={[
-            { type: "icon", content: <Target className="w-5 h-5" />, position: { top: "12%", left: "3%" }, color: "bg-blue-100/80 text-blue-600" },
-            { type: "icon", content: <Award className="w-5 h-5" />, position: { top: "35%", right: "4%" }, color: "bg-cyan-100/80 text-cyan-600" },
-            { type: "tag", content: "Mission", position: { top: "20%", right: "12%" }, color: "bg-sky-50/90 text-sky-700" },
-            { type: "tag", content: "Vision", position: { bottom: "30%", left: "5%" }, color: "bg-blue-50/90 text-blue-700" },
-          ]}
-        />
-        
-        <div className="container mx-auto max-w-7xl relative z-10">
+      {/* Mission Section - Light Theme */}
+      <section ref={ref} className="section-light py-24 px-4">
+        <div className="container mx-auto max-w-7xl">
           <div className={`grid lg:grid-cols-2 gap-16 items-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {/* Left - Image */}
             <div className="relative">
@@ -210,9 +180,9 @@ const About = () => {
 
             {/* Right - Content */}
             <div>
-              <span className="section-number-badge mb-4">01</span>
+              <span className="text-sm text-[hsl(var(--light-fg),0.4)] mb-4 block">[ 01 ]</span>
               <h2 className="text-4xl md:text-5xl font-light text-[hsl(var(--light-fg))] mb-6">
-                Our <span className="serif-italic gradient-text-earth">Mission</span>
+                Our <span className="serif-italic">Mission</span>
               </h2>
               <div className="space-y-6 text-[hsl(var(--light-fg),0.6)] text-lg leading-relaxed">
                 <p>
@@ -227,66 +197,34 @@ const About = () => {
         </div>
       </section>
 
-      {/* Trust Section - Client Logos */}
-      <section className="section-earth-light py-16 px-4">
-        <div className="container mx-auto max-w-7xl relative z-10">
-          <div className="text-center mb-8">
-            <h3 className="text-lg font-medium text-[hsl(var(--light-fg),0.6)]">Trusted by Leading Web3 Projects</h3>
+      {/* Team Section - Light Theme with Giant Typography */}
+      <section className="section-light py-24 px-4">
+        <div className="container mx-auto max-w-7xl">
+          {/* Giant Header */}
+          <div className="mb-20">
+            <h2 className="text-[15vw] md:text-[150px] lg:text-[180px] font-light leading-[0.85] tracking-tight text-[hsl(var(--light-fg))]">
+              Our <span className="serif-italic">Team</span>
+            </h2>
+            <div className="mt-8">
+              <span className="px-4 py-2 rounded-full border border-[hsl(var(--light-fg),0.15)] text-sm text-[hsl(var(--light-fg),0.6)]">
+                [ Team of {team.length} People ]
+              </span>
+            </div>
           </div>
-          <ClientLogoMarquee />
-          
-          {/* Trust Badges */}
-          <div className="mt-12 flex flex-wrap justify-center gap-4">
-            <TrustBadge type="trustpilot" rating={5} reviewCount="50+" link="https://trustpilot.com" />
-            <TrustBadge type="google" rating={5} reviewCount="40+" link="https://google.com" />
-            <TrustBadge type="clutch" rating={5} reviewCount="30+" link="https://clutch.co" />
-          </div>
-        </div>
-      </section>
 
-      {/* Team Section - Earth Dark Theme with Enhanced Background */}
-      <section className="section-earth-dark py-24 px-4 relative">
-        {/* Dynamic Background Effects */}
-        <SectionBackground type="stars" theme="earth" intensity={0.7} />
-        <SectionBackground type="aurora" theme="earth" intensity={0.4} />
-        <SectionBackground type="particles" theme="earth" intensity={0.3} />
-        
-        {/* Floating Elements */}
-        <FloatingSectionElements
-          scrollY={scrollY}
-          parallaxMultiplier={0.035}
-          elements={[
-            { type: "icon", content: <Users className="w-5 h-5" />, position: { top: "8%", left: "4%" }, color: "bg-cyan-500/20 text-cyan-400" },
-            { type: "tag", content: "Founded 2023", position: { top: "15%", right: "8%" }, color: "bg-blue-500/20 text-blue-300" },
-            { type: "tag", content: "200+ Projects", position: { bottom: "25%", left: "3%" }, color: "bg-teal-500/20 text-teal-300" },
-            { type: "shape", content: "◎", position: { top: "40%", right: "3%" }, color: "text-cyan-400", size: "lg" },
-          ]}
-        />
-        
-        <div className="container mx-auto max-w-7xl relative z-10">
-          {/* Giant Section Title */}
-          <GiantSectionTitle
-            title="Our Team"
-            accentWord="Team"
-            size="2xl"
-            theme="dark"
-            badge={`[ Team of ${team.length} People ]`}
-          />
-
-          {/* Team Grid - Large Photos */}
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-16">
+          {/* Team Grid */}
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
             {team.map((member, index) => (
               <div
                 key={member.name}
-                className={`group contain-layout ${index === 1 ? 'md:mt-24' : ''}`}
+                className={`group ${index === 1 ? 'md:mt-24' : ''}`}
               >
                 {/* Image with Blue Overlay */}
-                <div className="relative aspect-[3/4] rounded-3xl overflow-hidden mb-6 img-zoom">
+                <div className="relative aspect-[3/4] rounded-3xl overflow-hidden mb-6">
                   <img 
                     src={member.image} 
                     alt={member.name}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 gpu-accelerated"
-                    loading="lazy"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                   />
                   <div className="team-photo-overlay" />
                   
@@ -297,7 +235,6 @@ const About = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-primary transition-colors"
-                      aria-label={`${member.name}'s LinkedIn`}
                     >
                       <Linkedin className="w-5 h-5" />
                     </a>
@@ -306,7 +243,6 @@ const About = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-primary transition-colors"
-                      aria-label={`${member.name}'s Telegram`}
                     >
                       <Send className="w-5 h-5" />
                     </a>
@@ -315,40 +251,15 @@ const About = () => {
 
                 {/* Content */}
                 <div>
-                  <p className="text-cyan-400 text-sm font-medium mb-1">{member.role}</p>
-                  <h3 className="text-3xl md:text-4xl font-medium text-white mb-3">{member.name}</h3>
-                  <p className="text-white/60 text-base leading-relaxed">{member.background}</p>
+                  <p className="text-primary text-sm font-medium mb-1">{member.role}</p>
+                  <h3 className="text-3xl md:text-4xl font-medium text-[hsl(var(--light-fg))] mb-3">{member.name}</h3>
+                  <p className="text-[hsl(var(--light-fg),0.6)] text-base leading-relaxed">{member.background}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="dotted-line-dark my-16" />
-
-          {/* Team Contact Cards - Quick Access */}
-          <div className="mt-16">
-            <h3 className="text-2xl font-medium text-white mb-8">Get in Touch Directly</h3>
-            <div className="grid sm:grid-cols-2 gap-6 max-w-2xl">
-              <TeamContactCard
-                name="James"
-                role="Co-Founder"
-                image={images.team.james || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face"}
-                telegram="https://t.me/cryptobridgekorea"
-                linkedin="https://www.linkedin.com/in/james-l-13a998251/"
-                email="info@cryptobridgekorea.com"
-              />
-              <TeamContactCard
-                name="David"
-                role="Co-Founder"
-                image={images.team.david || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face"}
-                telegram="https://t.me/cryptobridgekorea"
-                linkedin="https://www.linkedin.com/company/cryptobridge"
-                email="info@cryptobridgekorea.com"
-              />
-            </div>
-          </div>
-
-          <div className="dotted-line-dark mt-24" />
+          <div className="dotted-line-light mt-24" />
         </div>
       </section>
 

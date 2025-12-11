@@ -1,7 +1,7 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { useState } from "react";
+import TiltCard from "@/components/TiltCard";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -11,14 +11,6 @@ import ondoLogo from "@/assets/logos/ondo.svg";
 import peaqLogo from "@/assets/logos/peaq.png";
 import storyLogo from "@/assets/logos/story-protocol.png";
 
-// Import campaign images
-import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
-import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
-import polygonHackathon from "@/assets/campaigns/polygon-hackathon.jpg";
-import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
-import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
-import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
-
 const cases = [
   {
     name: "BNB Chain",
@@ -26,9 +18,8 @@ const cases = [
     slug: "bnb-chain",
     result: "+340% Korean Trading Volume",
     category: "Infrastructure",
-    image: bnbEvent,
-    gradient: "from-[#F0B90B] via-[#F8D33A] to-[#FFA500]",
-    overlayColor: "bg-gradient-to-br from-[#F0B90B]/80 via-[#F8D33A]/60 to-[#FFA500]/80",
+    bgStyle: "bg-gradient-to-br from-[#F3BA2F] via-[#F0B90B] to-[#C99100]",
+    decorations: "bnb",
   },
   {
     name: "KuCoin",
@@ -36,9 +27,8 @@ const cases = [
     slug: "kucoin",
     result: "50K+ New Korean Users",
     category: "Exchange",
-    image: kucoinCampaign,
-    gradient: "from-[#23AF91] via-[#2DC9A3] to-[#00E8B5]",
-    overlayColor: "bg-gradient-to-br from-[#23AF91]/80 via-[#2DC9A3]/60 to-[#00E8B5]/80",
+    bgStyle: "bg-gradient-to-br from-[#23AF91] via-[#1A9B7F] to-[#147A63]",
+    decorations: "kucoin",
   },
   {
     name: "Polygon",
@@ -46,9 +36,8 @@ const cases = [
     slug: "polygon",
     result: "$2M Korean TVL in 30 Days",
     category: "Layer 2",
-    image: polygonHackathon,
-    gradient: "from-[#8247E5] via-[#A06EFF] to-[#7B3FE4]",
-    overlayColor: "bg-gradient-to-br from-[#8247E5]/80 via-[#A06EFF]/60 to-[#7B3FE4]/80",
+    bgStyle: "bg-gradient-to-br from-[#8247E5] via-[#7B3FE4] to-[#5A2D9C]",
+    decorations: "polygon",
   },
   {
     name: "Ondo Finance",
@@ -56,9 +45,8 @@ const cases = [
     slug: "ondo",
     result: "100K+ Korean Community",
     category: "RWA",
-    image: ondoSeminar,
-    gradient: "from-[#0052FF] via-[#3377FF] to-[#6699FF]",
-    overlayColor: "bg-gradient-to-br from-[#0052FF]/80 via-[#3377FF]/60 to-[#6699FF]/80",
+    bgStyle: "bg-gradient-to-br from-[#0A1628] via-[#1E3A5F] to-[#0D1B2A]",
+    decorations: "ondo",
   },
   {
     name: "Peaq",
@@ -66,9 +54,8 @@ const cases = [
     slug: "peaq",
     result: "#1 DePIN in Korea",
     category: "DePIN",
-    image: peaqSummit,
-    gradient: "from-[#00FF9D] via-[#00D68F] to-[#00B377]",
-    overlayColor: "bg-gradient-to-br from-[#00FF9D]/80 via-[#00D68F]/60 to-[#00B377]/80",
+    bgStyle: "bg-gradient-to-br from-[#00E5A0] via-[#00D4AA] to-[#00A080]",
+    decorations: "peaq",
   },
   {
     name: "Story Protocol",
@@ -76,117 +63,113 @@ const cases = [
     slug: "story-protocol",
     result: "5K+ Korean Creators",
     category: "IP Protocol",
-    image: storyWorkshop,
-    gradient: "from-[#FF6B4A] via-[#FF8E6E] to-[#FF4757]",
-    overlayColor: "bg-gradient-to-br from-[#FF6B4A]/80 via-[#FF8E6E]/60 to-[#FF4757]/80",
+    bgStyle: "bg-gradient-to-br from-[#FF6B6B] via-[#E5484D] to-[#C92A2A]",
+    decorations: "story",
   },
 ];
 
-interface CaseCardProps {
-  caseItem: typeof cases[0];
-  index: number;
-}
-
-const CaseCard = ({ caseItem, index }: CaseCardProps) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
-    setMousePosition({ x, y });
-  };
-
-  const rotateX = isHovered ? (mousePosition.y - 0.5) * -25 : 0;
-  const rotateY = isHovered ? (mousePosition.x - 0.5) * 25 : 0;
-  const scale = isHovered ? 1.05 : 1;
-
-  return (
-    <Link
-      to={`/projects/${caseItem.slug}`}
-      className="group block"
-      style={{ animationDelay: `${index * 100}ms` }}
-    >
-      <div
-        className="relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-out"
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => {
-          setIsHovered(false);
-          setMousePosition({ x: 0.5, y: 0.5 });
-        }}
-        style={{
-          transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`,
-          transformStyle: 'preserve-3d',
-          boxShadow: isHovered 
-            ? '0 50px 100px -20px rgba(0,0,0,0.5), 0 30px 60px -30px rgba(0,0,0,0.5)' 
-            : '0 10px 30px -10px rgba(0,0,0,0.3)',
-        }}
-      >
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out"
-          style={{ 
-            backgroundImage: `url(${caseItem.image})`,
-            transform: isHovered ? 'scale(1.15)' : 'scale(1)',
-          }}
-        />
-        
-        {/* Color Overlay */}
-        <div className={`absolute inset-0 ${caseItem.overlayColor} mix-blend-multiply transition-opacity duration-500 ${isHovered ? 'opacity-70' : 'opacity-90'}`} />
-        
-        {/* Gradient Mesh */}
-        <div className={`absolute inset-0 bg-gradient-to-br ${caseItem.gradient} opacity-40`} />
-        
-        {/* Animated Shine Effect */}
-        <div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-          style={{
-            background: `radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(255,255,255,0.3) 0%, transparent 50%)`,
-          }}
-        />
-
-        {/* Logo and Name */}
-        <div 
-          className="absolute top-6 left-6 flex items-center gap-3 z-10"
-          style={{ transform: 'translateZ(40px)' }}
-        >
-          <div className="w-14 h-14 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl border border-white/30">
-            <img src={caseItem.logo} alt={caseItem.name} className="w-10 h-10 object-contain drop-shadow-2xl" />
+// Unique decorative elements for each card
+const CardDecorations = ({ type }: { type: string }) => {
+  switch (type) {
+    case "bnb":
+      return (
+        <>
+          <div className="absolute inset-0 opacity-20">
+            <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <pattern id="hexagons" width="20" height="17.32" patternUnits="userSpaceOnUse">
+                  <polygon points="10,0 20,5 20,15 10,17.32 0,15 0,5" fill="none" stroke="white" strokeWidth="0.5" />
+                </pattern>
+              </defs>
+              <rect width="100" height="100" fill="url(#hexagons)" />
+            </svg>
           </div>
-          <span className="text-white text-2xl font-bold drop-shadow-2xl tracking-tight">{caseItem.name}</span>
-        </div>
-
-        {/* Category Badge */}
-        <div 
-          className="absolute top-6 right-6 z-10"
-          style={{ transform: 'translateZ(30px)' }}
-        >
-          <span className="px-3 py-1.5 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-medium border border-white/30">
-            {caseItem.category}
-          </span>
-        </div>
-
-        {/* Bottom Result - Always visible */}
-        <div 
-          className="absolute bottom-0 left-0 right-0 p-6 z-10"
-          style={{ transform: 'translateZ(50px)' }}
-        >
-          <div className="bg-black/40 backdrop-blur-md rounded-xl p-4 border border-white/10 transition-all duration-500 group-hover:bg-black/60">
-            <p className="text-white text-lg font-bold tracking-tight">{caseItem.result}</p>
-            <div className="flex items-center gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-              <span className="text-white/80 text-sm">View Case Study</span>
-              <ArrowUpRight className="w-4 h-4 text-white/80" />
-            </div>
+          <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-radial from-yellow-200/40 to-transparent blur-2xl" />
+          <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full border-2 border-white/20" />
+          <div className="absolute top-20 left-20 w-4 h-4 rotate-45 bg-white/30" />
+        </>
+      );
+    case "kucoin":
+      return (
+        <>
+          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M0,50 Q25,30 50,50 T100,50" stroke="white" strokeWidth="0.5" fill="none" />
+            <path d="M0,60 Q25,40 50,60 T100,60" stroke="white" strokeWidth="0.5" fill="none" />
+            <path d="M0,70 Q25,50 50,70 T100,70" stroke="white" strokeWidth="0.5" fill="none" />
+          </svg>
+          <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-gradient-to-t from-emerald-300/30 to-transparent" />
+          <div className="absolute top-8 right-8 grid grid-cols-4 gap-2 opacity-30">
+            {[...Array(16)].map((_, i) => (
+              <div key={i} className="w-1.5 h-1.5 rounded-full bg-white" />
+            ))}
           </div>
-        </div>
-
-        {/* Corner Accent */}
-        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
-      </div>
-    </Link>
-  );
+          <div className="absolute bottom-16 left-8 w-20 h-20 rounded-full border border-dashed border-white/30" />
+        </>
+      );
+    case "polygon":
+      return (
+        <>
+          <div className="absolute top-10 right-10 w-16 h-16 rotate-45 border-2 border-white/30" />
+          <div className="absolute bottom-20 left-16 w-12 h-12 rotate-45 bg-white/10" />
+          <div className="absolute top-1/2 right-1/4 w-8 h-8 rotate-45 border border-purple-300/50" />
+          <div className="absolute -top-10 left-1/3 w-40 h-40 rounded-full bg-purple-400/30 blur-3xl" />
+          <svg className="absolute bottom-0 left-0 w-full h-24 opacity-20" viewBox="0 0 100 30" preserveAspectRatio="none">
+            <polygon points="0,30 10,0 20,30" fill="white" />
+            <polygon points="30,30 40,10 50,30" fill="white" />
+            <polygon points="60,30 70,5 80,30" fill="white" />
+          </svg>
+        </>
+      );
+    case "ondo":
+      return (
+        <>
+          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M0,80 L20,70 L40,75 L60,50 L80,55 L100,30" stroke="#3B82F6" strokeWidth="1" fill="none" />
+            <path d="M0,90 L20,85 L40,88 L60,70 L80,72 L100,50" stroke="#60A5FA" strokeWidth="0.5" fill="none" />
+          </svg>
+          <div className="absolute inset-0 opacity-10">
+            <div className="w-full h-full" style={{ 
+              backgroundImage: 'linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.3) 1px, transparent 1px)',
+              backgroundSize: '20px 20px'
+            }} />
+          </div>
+          <div className="absolute top-1/4 right-1/4 w-3 h-3 rounded-full bg-blue-400 shadow-lg shadow-blue-500/50" />
+          <div className="absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-blue-300" />
+          <div className="absolute bottom-1/3 right-1/3 w-4 h-4 rounded-full border-2 border-blue-400/50" />
+        </>
+      );
+    case "peaq":
+      return (
+        <>
+          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100">
+            <circle cx="20" cy="30" r="3" fill="#00FF9D" />
+            <circle cx="80" cy="20" r="2" fill="#00FF9D" />
+            <circle cx="60" cy="70" r="4" fill="#00FF9D" />
+            <circle cx="30" cy="80" r="2" fill="#00FF9D" />
+            <line x1="20" y1="30" x2="80" y2="20" stroke="#00FF9D" strokeWidth="0.5" />
+            <line x1="20" y1="30" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
+            <line x1="60" y1="70" x2="30" y2="80" stroke="#00FF9D" strokeWidth="0.5" />
+            <line x1="80" y1="20" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
+          </svg>
+          <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-green-300/40 to-transparent" />
+          <div className="absolute top-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-300/30 to-transparent" />
+          <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full bg-green-400/20 blur-3xl" />
+        </>
+      );
+    case "story":
+      return (
+        <>
+          <div className="absolute top-8 right-8 w-20 h-28 bg-white/10 rounded-sm transform rotate-6" />
+          <div className="absolute top-10 right-10 w-20 h-28 bg-white/15 rounded-sm transform rotate-3" />
+          <div className="absolute bottom-10 left-10 w-24 h-24 rounded-full bg-gradient-to-r from-red-300/40 to-pink-300/30" />
+          <div className="absolute top-1/3 left-1/4 w-6 h-6 rounded-full bg-red-200/50" />
+          <div className="absolute bottom-1/4 right-0 w-1/2 h-px bg-white/20" />
+          <div className="absolute bottom-1/4 right-0 w-1/3 h-px bg-white/20 translate-y-3" />
+        </>
+      );
+    default:
+      return null;
+  }
 };
 
 const CasesSection = () => {
@@ -208,10 +191,71 @@ const CasesSection = () => {
           <div className="text-[hsl(0,0%,60%)] text-2xl font-light hidden md:block">///</div>
         </div>
 
-        {/* Cases Grid - 3x2 */}
+        {/* Cases Grid - 3x3 */}
         <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {cases.map((caseItem, index) => (
-            <CaseCard key={caseItem.name} caseItem={caseItem} index={index} />
+            <Link
+              key={caseItem.name}
+              to={`/projects/${caseItem.slug}`}
+              className="group"
+              style={{ animationDelay: `${index * 100}ms` }}
+            >
+              <TiltCard
+                className={`relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle} cursor-pointer mb-4`}
+                max={12}
+                scale={1.03}
+                speed={300}
+              >
+                {/* Unique Decorations */}
+                <CardDecorations type={caseItem.decorations} />
+
+                {/* Content - Logo Centered */}
+                <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
+                  <img
+                    src={caseItem.logo}
+                    alt={caseItem.name}
+                    className="w-20 h-20 md:w-24 md:h-24 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-lg"
+                  />
+                </div>
+
+                {/* Bottom Info - Result */}
+                <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-white text-sm font-semibold text-center">
+                    {caseItem.result}
+                  </p>
+                  <p className="text-white/70 text-xs text-center mt-1 uppercase tracking-wider">
+                    {caseItem.category}
+                  </p>
+                </div>
+
+                {/* Hover Arrow */}
+                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                  <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <ArrowUpRight className="w-5 h-5 text-white" />
+                  </div>
+                </div>
+
+                {/* Category Badge */}
+                <div className="absolute top-4 left-4">
+                  <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider">
+                    {caseItem.category}
+                  </span>
+                </div>
+              </TiltCard>
+
+              {/* Content Below Card - Same as /projects page */}
+              <div>
+                <h4 className="text-lg font-medium text-[hsl(0,0%,15%)] mb-2">{caseItem.name}</h4>
+                <p className="text-sm text-[hsl(0,0%,40%)] mb-3 line-clamp-2">
+                  {caseItem.result}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="text-xs px-2 py-1 bg-[hsl(0,0%,90%)] border border-[hsl(0,0%,85%)] rounded-full text-[hsl(0,0%,40%)]">
+                    {caseItem.category}
+                  </span>
+                </div>
+              </div>
+            </Link>
           ))}
         </div>
 

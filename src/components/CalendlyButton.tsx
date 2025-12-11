@@ -8,7 +8,6 @@ interface CalendlyButtonProps {
   className?: string;
   calendlyUrl?: string;
   children?: React.ReactNode;
-  onClick?: () => void;
 }
 
 const CalendlyButton = ({ 
@@ -16,8 +15,7 @@ const CalendlyButton = ({
   size = "default",
   className = "",
   calendlyUrl = "https://calendly.com/cryptobridgekorea/30min",
-  children,
-  onClick
+  children
 }: CalendlyButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -42,8 +40,6 @@ const CalendlyButton = ({
       // Fallback: open in new tab
       window.open(calendlyUrl, '_blank');
     }
-    // Call additional onClick handler if provided
-    onClick?.();
   };
 
   return (

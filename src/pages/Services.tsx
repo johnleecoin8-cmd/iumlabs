@@ -1,19 +1,13 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, Calendar, Star, Quote, Shield, ExternalLink, Mail, Send, Phone, Lightbulb, Rocket, Target, Globe } from "lucide-react";
+import { ArrowRight, Calendar, Star, Quote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useRevealAnimation, useStaggeredReveal } from "@/hooks/useRevealAnimation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
 import Planet3D from "@/components/Planet3D";
-import TeamContactCard from "@/components/TeamContactCard";
-import ClientLogoMarquee from "@/components/ClientLogoMarquee";
-import SectionBackground from "@/components/SectionBackground";
-import FloatingSectionElements from "@/components/FloatingSectionElements";
-import GiantSectionTitle from "@/components/GiantSectionTitle";
-import GlowCard from "@/components/GlowCard";
-import { brand } from "@/config/content";
 import sunCorona from "@/assets/backgrounds/sun-corona.jpg";
+
 // Service images
 import kolNetworkImg from "@/assets/services/kol-network.jpg";
 import communityGrowthImg from "@/assets/services/community-growth.jpg";
@@ -87,7 +81,6 @@ const testimonials = [
     content: "CryptoBridge helped us raise $12M and build a community of 50K+ members in just 3 months. Their understanding of the Korean market is unmatched.",
     rating: 5,
     source: "Trustpilot",
-    link: "https://www.trustpilot.com",
   },
   {
     name: "Sarah Kim",
@@ -96,7 +89,6 @@ const testimonials = [
     content: "The team's DeFi expertise and KOL network helped us achieve $100M TVL within the first month of launch. Highly recommend!",
     rating: 5,
     source: "Ethos",
-    link: "https://www.ethos.io",
   },
   {
     name: "Michael Park",
@@ -105,7 +97,6 @@ const testimonials = [
     content: "Professional, responsive, and results-driven. They know exactly how to position Web3 projects for the Korean audience.",
     rating: 5,
     source: "Trustpilot",
-    link: "https://www.trustpilot.com",
   },
 ];
 
@@ -121,29 +112,9 @@ const floatingTags = [
   { label: "Result-Driven Mindset", bottom: "22%", right: "18%", color: "bg-yellow-500 text-black" },
 ];
 
-const teamMembers = [
-  {
-    name: "James",
-    role: "Co-Founder",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
-    telegram: "https://t.me/cryptobridgekorea",
-    linkedin: "https://www.linkedin.com/in/james-l-13a998251/",
-    email: "james@cryptobridgekorea.com",
-  },
-  {
-    name: "David",
-    role: "Co-Founder",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
-    telegram: "https://t.me/cryptobridgekorea",
-    linkedin: "https://www.linkedin.com/company/cryptobridge",
-    email: "david@cryptobridgekorea.com",
-  },
-];
-
 const Services = () => {
   const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation();
   const { ref: testimonialsRef, isVisible: testimonialsVisible } = useScrollAnimation();
-  const { ref: contactRef, isVisible: contactVisible } = useScrollAnimation();
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -153,7 +124,7 @@ const Services = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background" id="main-content">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
       {/* Hero - Full Screen with Ken Burns Background */}
@@ -249,32 +220,14 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services List - Sun Theme with Enhanced Background */}
-      <section ref={servicesRef} className="section-sun-light py-24 relative">
-        {/* Dynamic Background Effects */}
-        <SectionBackground type="gradient-mesh" theme="sun" intensity={0.6} />
-        <SectionBackground type="glow-orbs" theme="sun" intensity={0.4} />
-        
-        {/* Floating Elements */}
-        <FloatingSectionElements
-          scrollY={scrollY}
-          parallaxMultiplier={0.03}
-          elements={[
-            { type: "icon", content: <Lightbulb className="w-5 h-5" />, position: { top: "10%", left: "3%" }, color: "bg-amber-100/80 text-amber-600" },
-            { type: "icon", content: <Rocket className="w-5 h-5" />, position: { top: "30%", right: "4%" }, color: "bg-orange-100/80 text-orange-600" },
-            { type: "icon", content: <Target className="w-5 h-5" />, position: { bottom: "25%", left: "5%" }, color: "bg-yellow-100/80 text-yellow-600" },
-            { type: "tag", content: "Growth", position: { top: "20%", right: "10%" }, color: "bg-amber-50/90 text-amber-700" },
-            { type: "tag", content: "Strategy", position: { bottom: "35%", right: "3%" }, color: "bg-orange-50/90 text-orange-700" },
-            { type: "tag", content: "Results", position: { top: "50%", left: "2%" }, color: "bg-yellow-50/90 text-yellow-700" },
-          ]}
-        />
-        
-        <div className="container mx-auto max-w-7xl px-4 relative z-10">
+      {/* Services List - Lunar Strategy Style */}
+      <section ref={servicesRef} className="bg-[hsl(0,0%,96%)] py-24">
+        <div className="container mx-auto max-w-7xl px-4">
           {services.map((service, index) => (
             <div
               key={service.id}
-              className={`group py-12 reveal-up ${
-                servicesVisible ? 'is-revealed' : ''
+              className={`group py-12 transition-all duration-700 ${
+                servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
@@ -282,13 +235,13 @@ const Services = () => {
               <div className="dotted-line-light mb-12" />
               
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                {/* Image with Enhanced Container */}
+                {/* Image */}
                 <div className="lg:col-span-4">
-                  <div className="img-container-enhanced aspect-[4/3] card-shine">
+                  <div className="relative overflow-hidden rounded-2xl aspect-[4/3]">
                     <img 
                       src={service.image} 
                       alt={service.title}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                   </div>
@@ -306,9 +259,9 @@ const Services = () => {
                         <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-[hsl(0,0%,8%)] group-hover:text-primary transition-colors duration-300">
                           {service.title}
                         </h3>
-                        <CalendlyButton className="hidden md:flex shrink-0 items-center gap-2 text-sm text-[hsl(0,0%,40%)] hover:text-primary transition-colors group/link">
+                        <CalendlyButton className="hidden md:flex shrink-0 items-center gap-2 text-sm text-[hsl(0,0%,40%)] hover:text-primary transition-colors">
                           <span>Learn more</span>
-                          <ArrowRight className="w-4 h-4 group-hover/link:translate-x-2 transition-transform" />
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                         </CalendlyButton>
                       </div>
                       
@@ -340,216 +293,77 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Testimonials Section - with Enhanced Background */}
-      <section ref={testimonialsRef} className="section-sun-dark py-24 relative">
-        {/* Dynamic Background Effects */}
-        <SectionBackground type="stars" theme="sun" intensity={0.8} />
-        <SectionBackground type="aurora" theme="sun" intensity={0.5} />
-        <SectionBackground type="glow-orbs" theme="sun" intensity={0.3} />
-        
-        {/* Floating Elements */}
-        <FloatingSectionElements
-          scrollY={scrollY}
-          parallaxMultiplier={0.04}
-          elements={[
-            { type: "icon", content: <Star className="w-5 h-5 fill-current" />, position: { top: "12%", left: "5%" }, color: "bg-amber-500/20 text-amber-400", delay: 0 },
-            { type: "icon", content: <Quote className="w-5 h-5" />, position: { top: "18%", right: "8%" }, color: "bg-yellow-500/20 text-yellow-400", delay: 0.5 },
-            { type: "shape", content: "★", position: { top: "45%", left: "2%" }, color: "text-amber-400", size: "lg", delay: 1 },
-            { type: "tag", content: "5★ Rated", position: { bottom: "20%", right: "5%" }, color: "bg-amber-500/20 text-amber-300", delay: 1.5 },
-            { type: "shape", content: "✦", position: { bottom: "30%", left: "8%" }, color: "text-yellow-400", size: "md", delay: 2 },
-          ]}
-        />
-        
-        <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          {/* Giant Section Title */}
-          <GiantSectionTitle
-            title="+250 Satisfied Clients"
-            accentWord="Satisfied"
-            size="xl"
-            theme="dark"
-            subtitle="[ Testimonials ]"
-          />
-          
-          {/* Trust Badges */}
-          <div className="flex items-center gap-4 mb-12">
-            <a 
-              href="https://www.trustpilot.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-[#00b67a]/20 border border-[#00b67a]/30 rounded-xl hover:bg-[#00b67a]/30 transition-colors"
-            >
-              <Shield className="w-5 h-5 text-[#00b67a]" />
-              <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 text-[#00b67a] fill-[#00b67a]" />
-                ))}
-              </div>
-              <span className="text-white text-sm font-medium">Trustpilot</span>
-              <ExternalLink className="w-3 h-3 text-white/50" />
-            </a>
+      {/* Testimonials Section */}
+      <section ref={testimonialsRef} className="bg-[hsl(0,0%,96%)] py-24">
+        <div className="container mx-auto max-w-7xl px-4">
+          {/* Header */}
+          <div className={`flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 transition-all duration-700 ${
+            testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <div>
+              <span className="text-[hsl(0,0%,40%)] text-sm font-mono mb-4 block">[ Testimonials ]</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-[hsl(0,0%,8%)]">
+                +250 <span className="serif-italic text-primary">Satisfied</span> Clients
+              </h2>
+            </div>
+            <div className="flex gap-2">
+              <span className="text-4xl">✌️</span>
+              <span className="text-4xl">✌️</span>
+              <span className="text-4xl">✌️</span>
+            </div>
           </div>
 
-          {/* Testimonials Grid with GlowCard */}
+          {/* Testimonials Grid */}
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((testimonial, index) => (
-              <GlowCard
+              <div
                 key={index}
-                className="rounded-2xl"
-                glowColor="hsl(45, 100%, 50%)"
-                intensity="medium"
-                tiltEnabled={true}
-                hoverScale={1.02}
+                className={`bg-white rounded-2xl p-8 border border-[hsl(0,0%,90%)] hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${
+                  testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
               >
-                <a
-                  href={testimonial.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`block testimonial-card-premium cursor-pointer h-full ${
-                    testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                  }`}
-                  style={{ transitionDelay: `${index * 150}ms` }}
-                >
-                  {/* Quote Icon Enhanced */}
-                  <div className="quote-icon-enhanced">
-                    <Quote className="w-5 h-5" />
-                  </div>
-                  
-                  {/* Content */}
-                  <p className="text-white/70 text-lg leading-relaxed mb-8 mt-4">
-                    "{testimonial.content}"
-                  </p>
+                {/* Quote Icon */}
+                <Quote className="w-10 h-10 text-primary/20 mb-6" />
+                
+                {/* Content */}
+                <p className="text-[hsl(0,0%,30%)] text-lg leading-relaxed mb-8">
+                  "{testimonial.content}"
+                </p>
 
-                  {/* Rating Enhanced */}
-                  <div className="rating-stars-enhanced mb-6">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="transition-transform group-hover:scale-110" style={{ transitionDelay: `${i * 50}ms` }} />
-                    ))}
-                  </div>
+                {/* Rating */}
+                <div className="flex items-center gap-1 mb-6">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                  ))}
+                </div>
 
-                  {/* Author with Avatar Ring Enhanced */}
-                  <div className="flex items-center gap-4">
-                    <div className="avatar-ring-enhanced">
-                      <img
-                        src={testimonial.avatar}
-                        alt={testimonial.name}
-                        className="w-14 h-14 object-cover"
-                      />
-                    </div>
-                    <div>
-                      <div className="font-medium text-white">{testimonial.name}</div>
-                      <div className="text-sm text-white/50">{testimonial.role}</div>
-                    </div>
+                {/* Author */}
+                <div className="flex items-center gap-4">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-14 h-14 rounded-full object-cover border-2 border-[hsl(0,0%,90%)]"
+                  />
+                  <div>
+                    <div className="font-medium text-[hsl(0,0%,8%)]">{testimonial.name}</div>
+                    <div className="text-sm text-[hsl(0,0%,50%)]">{testimonial.role}</div>
                   </div>
+                </div>
 
-                  {/* Source */}
-                  <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">
-                    <span className="tag-pill-enhanced">
-                      Reviewed on {testimonial.source}
-                    </span>
-                    <ExternalLink className="w-4 h-4 text-white/30 group-hover:text-amber-400 transition-colors" />
-                  </div>
-                </a>
-              </GlowCard>
+                {/* Source */}
+                <div className="mt-6 pt-6 border-t border-[hsl(0,0%,90%)]">
+                  <span className="text-xs text-primary uppercase tracking-wider font-medium">
+                    Reviewed on {testimonial.source}
+                  </span>
+                </div>
+              </div>
             ))}
           </div>
-
-          {/* See All Reviews */}
-          <div className="mt-12 text-center">
-            <a 
-              href="https://www.trustpilot.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-white/60 hover:text-amber-400 transition-colors"
-            >
-              <span>See all reviews</span>
-              <ArrowRight className="w-4 h-4" />
-            </a>
-          </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section ref={contactRef} className="section-sun-light py-24">
-        <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <div className={`grid lg:grid-cols-2 gap-16 transition-all duration-700 ${
-            contactVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
-            {/* Left - Info */}
-            <div>
-              <span className="text-[hsl(0,0%,40%)] text-sm font-mono mb-4 block">[ Get in Touch ]</span>
-              <h2 className="text-4xl md:text-5xl font-light text-[hsl(0,0%,8%)] mb-6">
-                Ready to grow in <span className="serif-italic text-primary">Korea</span>?
-              </h2>
-              <p className="text-[hsl(0,0%,40%)] text-lg mb-8 max-w-md">
-                Talk directly with our founders and get a customized strategy for your project.
-              </p>
-
-              {/* Team Cards */}
-              <div className="space-y-4 mb-8">
-                {teamMembers.map((member) => (
-                  <div 
-                    key={member.name}
-                    className="bg-[hsl(0,0%,8%)] rounded-2xl p-6"
-                  >
-                    <TeamContactCard {...member} />
-                  </div>
-                ))}
-              </div>
-
-              {/* Direct Contact */}
-              <div className="space-y-3">
-                <a 
-                  href={`mailto:${brand.email}`}
-                  className="flex items-center gap-3 text-[hsl(0,0%,40%)] hover:text-primary transition-colors"
-                >
-                  <Mail className="w-4 h-4" />
-                  <span>{brand.email}</span>
-                </a>
-                <a 
-                  href={brand.telegramLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 text-[hsl(0,0%,40%)] hover:text-primary transition-colors"
-                >
-                  <Send className="w-4 h-4" />
-                  <span>{brand.telegram}</span>
-                </a>
-                <a 
-                  href={`tel:${brand.phone.replace(/\s/g, '')}`}
-                  className="flex items-center gap-3 text-[hsl(0,0%,40%)] hover:text-primary transition-colors"
-                >
-                  <Phone className="w-4 h-4" />
-                  <span>{brand.phone}</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Right - CTA */}
-            <div className="flex items-center">
-              <div className="bg-gradient-to-br from-primary to-primary/80 rounded-3xl p-10 text-white w-full">
-                <h3 className="text-3xl font-light mb-4">
-                  Book a <span className="serif-italic">Free</span> Consultation
-                </h3>
-                <p className="text-white/80 mb-8">
-                  Get a 30-minute strategy session with our team. We'll analyze your project and provide actionable insights for the Korean market.
-                </p>
-                <CalendlyButton className="w-full bg-white text-primary hover:bg-white/90 py-4 px-8 rounded-xl font-medium flex items-center justify-center gap-2 transition-colors">
-                  <Calendar className="w-5 h-5" />
-                  <span>Schedule a Call</span>
-                </CalendlyButton>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Client Logos Section */}
-      <section className="bg-background py-16 px-4 border-t border-white/10">
-        <div className="container mx-auto max-w-7xl">
-          <ClientLogoMarquee variant="dark" speed="slow" showLabel={true} />
-        </div>
-      </section>
-
+      <CTASection />
       <Footer />
     </div>
   );
