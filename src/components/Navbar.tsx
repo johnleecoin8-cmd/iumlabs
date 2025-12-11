@@ -20,22 +20,22 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Main Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/30">
+      {/* Main Navbar - Transparent on dark hero */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent">
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <span className="text-lg font-bold text-foreground">{brandConfig.name}</span>
+              <span className="text-lg font-bold text-white">{brandConfig.name}</span>
               <span className="w-2 h-2 bg-primary rounded-sm"></span>
             </Link>
 
             {/* Center - Email */}
             <div className="hidden lg:flex items-center">
-              <span className="text-muted-foreground text-sm">e-mail:</span>
+              <span className="text-white/60 text-sm">e-mail:</span>
               <a 
                 href={`mailto:${brandConfig.email}`} 
-                className="ml-2 text-foreground text-sm hover:text-primary transition-colors"
+                className="ml-2 text-white text-sm hover:text-primary transition-colors"
               >
                 {brandConfig.email}
               </a>
@@ -46,7 +46,7 @@ const Navbar = () => {
             {/* Live Chat Button */}
               <button
                 onClick={() => setIsLiveChatOpen(true)}
-                className="hidden md:flex items-center gap-2 lunar-btn-outline text-sm"
+                className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 text-white/80 text-sm font-medium transition-all hover:border-white/50 hover:text-white"
               >
                 <Volume2 className="w-4 h-4" />
                 <span>Start Live Chat</span>
@@ -66,7 +66,7 @@ const Navbar = () => {
               {/* Menu Button */}
               <button
                 onClick={() => setIsMenuOpen(true)}
-                className="flex items-center gap-2 lunar-btn-outline text-sm"
+                className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 text-white/80 text-sm font-medium transition-all hover:border-white/50 hover:text-white"
               >
                 <span className="hidden sm:inline">menu</span>
                 <Menu className="w-4 h-4" />
