@@ -70,13 +70,13 @@ const HeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Giant impact typography */}
-          <h1 className="text-[11vw] sm:text-[9vw] md:text-[8vw] lg:text-[7vw] font-extralight leading-[0.85] tracking-[-0.03em] mb-8 sm:mb-10 opacity-0 animate-fade-up">
-            <span className="text-white block">Your</span>
-            <span className="serif-italic text-white/90 font-normal"> Web 3.0</span>
+          {/* Main Headline - Lunar Strategy mixed typography */}
+          <h1 className="text-[12vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10 opacity-0 animate-fade-up">
+            <span className="text-white font-bold">Your </span>
+            <span className="font-serif italic text-white font-medium">Web 3.0</span>
             <br />
-            <span className="text-white">Marketing</span>
-            <span className="serif-italic text-white/90 font-normal"> Agency</span>
+            <span className="font-serif italic text-white font-medium">Marketing </span>
+            <span className="text-white font-bold">Agency</span>
           </h1>
 
           {/* Subtext - Larger and more prominent */}
