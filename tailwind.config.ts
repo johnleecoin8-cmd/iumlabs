@@ -83,28 +83,37 @@ export default {
         },
         "float": {
           "0%, 100%": { transform: "translateY(0px)" },
-          "50%": { transform: "translateY(-20px)" },
+          "50%": { transform: "translateY(-12px)" },
         },
-        "pulse-glow": {
-          "0%, 100%": { opacity: "0.5", transform: "scale(1)" },
-          "50%": { opacity: "0.8", transform: "scale(1.05)" },
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(24px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
-        "gradient-shift": {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
         },
-        "shimmer": {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
+        "scale-in": {
+          from: { opacity: "0", transform: "scale(0.95)" },
+          to: { opacity: "1", transform: "scale(1)" },
+        },
+        "slide-up": {
+          from: { opacity: "0", transform: "translateY(16px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "float": "float 6s ease-in-out infinite",
-        "pulse-glow": "pulse-glow 4s ease-in-out infinite",
-        "gradient-shift": "gradient-shift 8s ease-in-out infinite",
-        "shimmer": "shimmer 2s linear infinite",
+        "float": "float 4s ease-in-out infinite",
+        "fade-up": "fade-up 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+        "fade-in": "fade-in 0.4s ease-out forwards",
+        "scale-in": "scale-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+        "slide-up": "slide-up 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
+      },
+      transitionTimingFunction: {
+        "smooth": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
+        "bounce": "cubic-bezier(0.34, 1.56, 0.64, 1)",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -72,7 +72,7 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 pt-32 pb-16 relative z-10">
         <div className="max-w-6xl mx-auto text-center">
           {/* Main Headline - Clean, Large Typography */}
-          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-light leading-[0.9] tracking-tight mb-8">
+          <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-[10rem] font-light leading-[0.9] tracking-tight mb-8 opacity-0 animate-fade-up">
             <span className="text-white">Your </span>
             <span className="serif-italic text-white">Bridge</span>
             <br />
@@ -81,22 +81,24 @@ const HeroSection = () => {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-12">
+          <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-12 opacity-0 animate-fade-up stagger-2">
             Since 2023, we've connected <span className="text-primary font-medium">200+</span> global Web3 projects 
             with the Korean crypto market through strategic marketing and community building.
           </p>
 
           {/* CTA Button - Clean Blue */}
-          <CalendlyButton className="lunar-btn text-lg px-8 py-4">
-            <Calendar className="w-5 h-5" />
-            <span>Book a Free Consultation</span>
-          </CalendlyButton>
+          <div className="opacity-0 animate-fade-up stagger-3">
+            <CalendlyButton className="lunar-btn text-lg px-8 py-4 hover-glow">
+              <Calendar className="w-5 h-5" />
+              <span>Book a Free Consultation</span>
+            </CalendlyButton>
+          </div>
         </div>
       </div>
 
-      {/* Client Logo Marquee - Clean style */}
-      <div className="relative z-10 border-t border-white/10 py-8 mt-auto overflow-hidden">
-        <div className="flex items-center logo-marquee">
+      {/* Client Logo Marquee - Clean style with pause on hover */}
+      <div className="marquee-container relative z-10 border-t border-white/10 py-8 mt-auto overflow-hidden">
+        <div className="flex items-center logo-marquee-slow">
           {[...clientLogos, ...clientLogos].map((client, index) => (
             <div 
               key={index} 
@@ -105,7 +107,7 @@ const HeroSection = () => {
               <img 
                 src={client.logo} 
                 alt={client.name} 
-                className="h-10 w-auto opacity-40 hover:opacity-70 transition-opacity grayscale brightness-200"
+                className="h-10 w-auto opacity-40 hover:opacity-70 transition-opacity duration-300 grayscale brightness-200 hover:scale-110 transform"
               />
             </div>
           ))}
@@ -113,7 +115,7 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
         <ChevronDown className="w-6 h-6 text-white/40 animate-bounce" />
       </div>
     </section>

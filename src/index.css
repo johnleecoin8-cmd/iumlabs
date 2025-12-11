@@ -369,25 +369,29 @@
   }
 }
 
-/* Floating Animation */
+/* ============================================
+   PHASE 8: ANIMATION & INTERACTION SYSTEM
+   ============================================ */
+
+/* Floating Animation - Gentle */
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px) rotate(0deg);
+    transform: translateY(0px);
   }
   50% {
-    transform: translateY(-15px) rotate(2deg);
+    transform: translateY(-12px);
   }
 }
 
 .animate-float {
-  animation: float 5s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
 }
 
 /* Fade Up Animation */
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(24px);
   }
   to {
     opacity: 1;
@@ -396,7 +400,88 @@
 }
 
 .animate-fade-up {
-  animation: fadeUp 0.6s ease-out forwards;
+  animation: fadeUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Fade In Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+/* Scale In Animation */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Slide In Left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Slide In Right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Stagger Animation Delays */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.4s; }
+
+/* Initial state for staggered animations */
+.stagger-item {
+  opacity: 0;
+}
+
+.stagger-item.is-visible {
+  animation: fadeUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 /* Hide Scrollbar */
@@ -416,22 +501,162 @@
   background-clip: text;
 }
 
+/* ============================================
+   HOVER EFFECTS - STANDARDIZED
+   ============================================ */
+
+/* Standard Card Hover */
+.hover-lift {
+  @apply transition-all duration-300;
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px hsl(0 0% 0% / 0.25);
+}
+
+/* Subtle Hover */
+.hover-subtle {
+  @apply transition-all duration-200;
+}
+
+.hover-subtle:hover {
+  transform: translateY(-2px);
+}
+
+/* Scale Hover */
+.hover-scale {
+  @apply transition-transform duration-200;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+/* Glow Hover - Blue */
+.hover-glow {
+  @apply transition-all duration-300;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px hsl(217 91% 60% / 0.2);
+}
+
 /* Arrow hover effect for cases */
 .case-card {
   @apply relative overflow-hidden transition-all duration-300;
 }
 
 .case-card .arrow-icon {
-  @apply absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 opacity-0;
+  @apply absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 translate-y-2;
   background: hsl(var(--dark-fg));
   color: hsl(var(--dark-bg));
 }
 
 .case-card:hover .arrow-icon {
-  @apply opacity-100;
+  @apply opacity-100 translate-y-0;
 }
 
 .case-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px hsl(0 0% 0% / 0.35);
+}
+
+/* Blog/Service Card Hover */
+.card-hover {
+  @apply transition-all duration-300;
+  border: 1px solid transparent;
+}
+
+.card-hover:hover {
+  border-color: hsl(var(--primary) / 0.2);
   transform: translateY(-4px);
-  box-shadow: 0 10px 40px hsl(0 0% 0% / 0.3);
+  box-shadow: 0 8px 32px hsl(0 0% 0% / 0.1);
+}
+
+/* Link Hover Underline */
+.link-hover {
+  @apply relative;
+}
+
+.link-hover::after {
+  content: '';
+  @apply absolute bottom-0 left-0 w-0 h-px transition-all duration-300;
+  background: hsl(var(--primary));
+}
+
+.link-hover:hover::after {
+  @apply w-full;
+}
+
+/* ============================================
+   SMOOTH TRANSITIONS
+   ============================================ */
+
+/* Fast */
+.transition-fast {
+  transition: all 0.15s ease-out;
+}
+
+/* Normal */
+.transition-normal {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Slow */
+.transition-slow {
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ============================================
+   MARQUEE ANIMATIONS
+   ============================================ */
+
+/* Slow Marquee for logos */
+.logo-marquee-slow {
+  animation: marquee 40s linear infinite;
+}
+
+/* Fast Marquee */
+.logo-marquee-fast {
+  animation: marquee 20s linear infinite;
+}
+
+/* Pause on hover */
+.marquee-container:hover .logo-marquee,
+.marquee-container:hover .logo-marquee-slow,
+.marquee-container:hover .logo-marquee-fast {
+  animation-play-state: paused;
+}
+
+/* ============================================
+   FOCUS STATES - ACCESSIBILITY
+   ============================================ */
+
+.focus-ring {
+  @apply outline-none;
+}
+
+.focus-ring:focus-visible {
+  @apply ring-2 ring-primary ring-offset-2 ring-offset-background;
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .logo-marquee,
+  .logo-marquee-slow,
+  .logo-marquee-fast {
+    animation: none !important;
+  }
 }

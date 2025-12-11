@@ -62,7 +62,7 @@ const CasesSection = () => {
     <section ref={ref} className="py-24 px-4 bg-background">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
-        <div className={`flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <div>
             <span className="section-header mb-4">Our Work</span>
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-foreground">
@@ -71,7 +71,7 @@ const CasesSection = () => {
           </div>
           <Link 
             to="/projects" 
-            className="bracket-link group"
+            className="bracket-link group link-hover"
           >
             <CornerDownRight className="w-4 h-4" />
             <span>All Cases</span>
@@ -84,10 +84,13 @@ const CasesSection = () => {
             <Link
               key={caseItem.id}
               to={`/projects/${caseItem.id}`}
-              className={`case-card group relative aspect-[4/5] rounded-3xl ${caseItem.gradient} p-6 flex flex-col justify-between overflow-hidden transition-all duration-500 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              className={`case-card group relative aspect-[4/5] rounded-3xl ${caseItem.gradient} p-6 flex flex-col justify-between overflow-hidden ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
               }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              style={{ 
+                transition: 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                transitionDelay: `${index * 80}ms` 
+              }}
             >
               {/* Arrow Icon - Top Right */}
               <div className="flex items-start justify-end">
@@ -101,12 +104,12 @@ const CasesSection = () => {
                 <img 
                   src={caseItem.logo} 
                   alt={caseItem.name}
-                  className={`w-28 h-28 md:w-32 md:h-32 object-contain ${caseItem.logoStyle || 'brightness-0 invert'} opacity-90 transition-transform duration-300 group-hover:scale-110`}
+                  className={`w-28 h-28 md:w-32 md:h-32 object-contain ${caseItem.logoStyle || 'brightness-0 invert'} opacity-90 transition-transform duration-300 ease-smooth group-hover:scale-110`}
                 />
               </div>
 
               {/* Bottom - Info (shows on hover) */}
-              <div className="transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
+              <div className="transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-smooth">
                 <span className="text-xs text-white/70 uppercase tracking-wider block mb-1">
                   {caseItem.category}
                 </span>
@@ -124,8 +127,8 @@ const CasesSection = () => {
         </div>
 
         {/* Mobile: View All Link */}
-        <div className="mt-12 text-center">
-          <Link to="/projects" className="lunar-btn">
+        <div className={`mt-12 text-center transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.5s' }}>
+          <Link to="/projects" className="lunar-btn hover-glow">
             View All Cases
             <ArrowUpRight className="w-4 h-4" />
           </Link>
