@@ -1,101 +1,50 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Megaphone, Users, Globe, TrendingUp, Shield, Zap, ArrowRight, ArrowUpRight } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { X, ArrowUpRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
-// Services with diverse colors
 const services = [
   {
-    id: "kol-marketing",
     number: "01",
-    icon: Megaphone,
-    title: "KOL & Influence Network",
-    description: "Direct trust building with Korea's top crypto influencers across Twitter, YouTube, and local platforms.",
-    fullDescription: "Partner with Korea's top crypto influencers to amplify your project's reach.",
-    features: ["Tier 1-3 KOL Selection", "Campaign Strategy", "Content Coordination", "Performance Analytics"],
-    stat: "100+",
-    statLabel: "Verified KOLs",
-    color: "red",
-    iconBg: "bg-red-100 text-red-600",
-    cardBorder: "hover:border-red-300",
-    numberColor: "text-red-200",
+    title: "KOL Marketing",
+    shortDesc: "Korean influencer partnerships",
+    fullDesc: "Access our network of 1,000+ Korean crypto influencers across YouTube, Twitter, and Telegram. We handle everything from selection to campaign management.",
+    features: ["Influencer matching", "Campaign management", "Performance tracking", "Content creation"],
   },
   {
-    id: "community-building",
     number: "02",
-    icon: Users,
-    title: "Community Growth",
-    description: "Full setup and management of Korean Telegram, Discord, and KakaoTalk channels.",
-    fullDescription: "Build a thriving Korean community from scratch or enhance your existing presence.",
-    features: ["Platform Setup", "Korean Moderation", "Engagement Programs", "AMA Sessions"],
-    stat: "500K+",
-    statLabel: "Members Managed",
-    color: "blue",
-    iconBg: "bg-blue-100 text-blue-600",
-    cardBorder: "hover:border-blue-300",
-    numberColor: "text-blue-200",
+    title: "Community Building",
+    shortDesc: "Korean community growth",
+    fullDesc: "Build and manage thriving Korean communities on KakaoTalk, Telegram, and Discord with native-speaking moderators and engagement strategies.",
+    features: ["Community setup", "24/7 moderation", "Event management", "Growth strategies"],
   },
   {
-    id: "pr-media",
     number: "03",
-    icon: Globe,
-    title: "PR & Media Relations",
-    description: "Tier-1 Korean crypto media placements, press releases, and exclusive interview opportunities.",
-    fullDescription: "Secure coverage in leading Korean crypto publications and mainstream media.",
-    features: ["Press Release Distribution", "Media Interviews", "News Coverage", "Crisis Management"],
-    stat: "50+",
-    statLabel: "Publications",
-    color: "green",
-    iconBg: "bg-green-100 text-green-600",
-    cardBorder: "hover:border-green-300",
-    numberColor: "text-green-200",
+    title: "PR & Media",
+    shortDesc: "Korean press coverage",
+    fullDesc: "Get featured in top Korean crypto media outlets including Block Media, Coindesk Korea, and mainstream publications.",
+    features: ["Press releases", "Media outreach", "Interview coordination", "Crisis management"],
   },
   {
-    id: "gtm-strategy",
     number: "04",
-    icon: TrendingUp,
-    title: "Go-To-Market Strategy",
-    description: "Data-driven launch planning tailored for the unique Korean market dynamics.",
-    fullDescription: "Launch successfully in Korea with data-driven strategies.",
-    features: ["Market Research", "Competitor Analysis", "Launch Planning", "Growth Roadmap"],
-    stat: "30+",
-    statLabel: "Launches",
-    color: "purple",
-    iconBg: "bg-purple-100 text-purple-600",
-    cardBorder: "hover:border-purple-300",
-    numberColor: "text-purple-200",
+    title: "Social Media",
+    shortDesc: "Korean social management",
+    fullDesc: "Full-service Korean social media management across Twitter, Naver Blog, and Korean-specific platforms with localized content.",
+    features: ["Content creation", "Account management", "Engagement growth", "Analytics reporting"],
   },
   {
-    id: "vasp-compliance",
     number: "05",
-    icon: Shield,
-    title: "VASP & Compliance",
-    description: "Navigate Korean regulations and secure the licenses you need to operate legally.",
-    fullDescription: "Get compliant in Korea's regulated crypto market.",
-    features: ["VASP Registration", "Compliance Consulting", "Legal Partnership", "Ongoing Support"],
-    stat: "100%",
-    statLabel: "Success Rate",
-    color: "orange",
-    iconBg: "bg-orange-100 text-orange-600",
-    cardBorder: "hover:border-orange-300",
-    numberColor: "text-orange-200",
+    title: "Go-To-Market",
+    shortDesc: "Korea launch strategy",
+    fullDesc: "Comprehensive market entry strategy including localization, partnerships, exchange listings, and launch campaigns.",
+    features: ["Market research", "Localization", "Partnership development", "Launch execution"],
   },
   {
-    id: "events",
     number: "06",
-    icon: Zap,
-    title: "Events & Conferences",
-    description: "From Korea Blockchain Week to exclusive meetups — presence at major Korean events.",
-    fullDescription: "Make an impact at major Korean blockchain events or host your own.",
-    features: ["Event Planning", "Booth Management", "Speaker Placement", "Networking Events"],
-    stat: "20+",
-    statLabel: "Events/Year",
-    color: "teal",
-    iconBg: "bg-teal-100 text-teal-600",
-    cardBorder: "hover:border-teal-300",
-    numberColor: "text-teal-200",
+    title: "Event Marketing",
+    shortDesc: "Korean event presence",
+    fullDesc: "Maximize your presence at Korean blockchain events including Korea Blockchain Week, Upbit Conference, and community meetups.",
+    features: ["Event planning", "Speaker opportunities", "Booth management", "Side event organization"],
   },
 ];
 
@@ -104,118 +53,109 @@ const ServicesSection = () => {
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
 
   return (
-    <section ref={ref} className="py-24 md:py-32 relative">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className={`flex flex-col md:flex-row md:items-end md:justify-between mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div>
-            <span className="text-sm font-medium text-green-600 tracking-wider mb-4 block">OUR SERVICES</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
-              Full-Service Web3<br />
-              <span className="text-gradient">Marketing</span>
-            </h2>
-          </div>
-          <Link 
-            to="/services" 
-            className="mt-6 md:mt-0 inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-          >
-            <span className="font-medium">All Services</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </Link>
-        </div>
-
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
-            <div
-              key={service.id}
-              onClick={() => setSelectedService(service)}
-              className={`group p-6 rounded-2xl bg-card border border-border ${service.cardBorder} cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${100 + index * 50}ms` }}
-            >
-              {/* Number + Arrow */}
-              <div className="flex items-center justify-between mb-6">
-                <span className={`text-4xl font-bold ${service.numberColor}`}>
-                  {service.number}
-                </span>
-                <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
-              </div>
-
-              {/* Icon */}
-              <div className={`w-12 h-12 rounded-xl ${service.iconBg} flex items-center justify-center mb-4`}>
-                <service.icon className="w-6 h-6" />
-              </div>
-
-              {/* Content */}
-              <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                {service.title}
-              </h3>
-              <p className="text-sm text-muted-foreground line-clamp-3">
-                {service.description}
-              </p>
+    <>
+      <section ref={ref} className="py-24 px-6 bg-background border-t border-border/30">
+        <div className="container mx-auto max-w-7xl">
+          {/* Section Header */}
+          <div className="flex items-center justify-between mb-16">
+            <div className="flex items-center gap-4">
+              <span className="text-muted-foreground text-sm">02</span>
+              <h2 className="text-2xl font-bold text-foreground">Services</h2>
             </div>
-          ))}
-        </div>
-      </div>
+            <Link 
+              to="/services" 
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
+            >
+              <span>View All</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
 
-      {/* Service Detail Modal */}
-      <Dialog open={!!selectedService} onOpenChange={() => setSelectedService(null)}>
-        <DialogContent className="max-w-lg rounded-2xl border border-border bg-card">
-          {selectedService && (
-            <>
-              <DialogHeader>
-                <div className="flex items-center gap-4 mb-4">
-                  <div className={`w-12 h-12 rounded-xl ${selectedService.iconBg} flex items-center justify-center`}>
-                    <selectedService.icon className="w-6 h-6" />
+          {/* Services List */}
+          <div className="space-y-0">
+            {services.map((service, index) => (
+              <div
+                key={index}
+                className={`group cursor-pointer transition-all duration-500 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+                onClick={() => setSelectedService(service)}
+              >
+                {/* Top border */}
+                {index === 0 && <div className="border-t border-border/30" />}
+                
+                <div className="flex items-center justify-between py-8 border-b border-border/30 group-hover:border-foreground/30 transition-colors">
+                  <div className="flex items-center gap-8">
+                    <span className="text-muted-foreground text-sm w-8">{service.number}</span>
+                    <h3 className="text-2xl md:text-3xl font-medium text-foreground group-hover:text-primary transition-colors">
+                      {service.title}
+                    </h3>
                   </div>
-                  <span className={`text-4xl font-bold ${selectedService.numberColor}`}>{selectedService.number}</span>
-                </div>
-                <DialogTitle className="text-xl font-bold text-foreground">{selectedService.title}</DialogTitle>
-                <DialogDescription className="text-muted-foreground leading-relaxed mt-2">
-                  {selectedService.fullDescription}
-                </DialogDescription>
-              </DialogHeader>
-              
-              {/* Stat */}
-              <div className="flex items-baseline gap-2 mt-4 p-4 rounded-xl bg-muted">
-                <span className="text-3xl font-bold text-primary">{selectedService.stat}</span>
-                <span className="text-sm text-muted-foreground">{selectedService.statLabel}</span>
-              </div>
-              
-              {/* Features */}
-              <div className="mt-6">
-                <h4 className="text-sm font-semibold text-foreground mb-3">What's Included</h4>
-                <div className="grid grid-cols-2 gap-2">
-                  {selectedService.features.map((feature, idx) => (
-                    <div 
-                      key={idx}
-                      className="flex items-center gap-2 text-sm text-muted-foreground"
-                    >
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                      {feature}
-                    </div>
-                  ))}
+                  <div className="flex items-center gap-6">
+                    <span className="text-muted-foreground text-sm hidden md:block">
+                      {service.shortDesc}
+                    </span>
+                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </div>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-              <div className="mt-6 flex gap-3">
-                <Link to="/contact" className="flex-1">
-                  <Button className="w-full rounded-full bg-primary hover:bg-primary/90 shadow-md">
-                    Get Started
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
-                </Link>
-                <Button variant="outline" onClick={() => setSelectedService(null)} className="rounded-full">
-                  Close
-                </Button>
+      {/* Service Modal */}
+      {selectedService && (
+        <div 
+          className="fixed inset-0 z-[100] bg-background/95 backdrop-blur-sm flex items-center justify-center p-6"
+          onClick={() => setSelectedService(null)}
+        >
+          <div 
+            className="bg-card border border-border rounded-2xl max-w-2xl w-full p-8 md:p-12 relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setSelectedService(null)}
+              className="absolute top-6 right-6 text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            <span className="text-primary text-sm mb-4 block">{selectedService.number}</span>
+            <h3 className="text-3xl md:text-4xl font-bold text-foreground mb-6">
+              {selectedService.title}
+            </h3>
+            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
+              {selectedService.fullDesc}
+            </p>
+
+            <div className="space-y-3">
+              <span className="text-sm text-muted-foreground uppercase tracking-wider">What's included</span>
+              <div className="flex flex-wrap gap-2">
+                {selectedService.features.map((feature, i) => (
+                  <span key={i} className="lunar-tag text-xs">
+                    {feature}
+                  </span>
+                ))}
               </div>
-            </>
-          )}
-        </DialogContent>
-      </Dialog>
-    </section>
+            </div>
+
+            <div className="mt-10 pt-8 border-t border-border/30">
+              <a
+                href="https://calendly.com/cryptobridgekorea"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="lunar-btn inline-flex items-center gap-2"
+              >
+                <span>Get Started</span>
+                <ArrowUpRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

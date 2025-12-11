@@ -1,140 +1,177 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Menu, X, Send, Calendar, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Menu, X, Volume2, Calendar } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 
+const brandConfig = {
+  name: brand.name,
+  email: brand.email,
+  telegram: brand.telegramLink,
+  linkedin: brand.linkedin,
+  office: brand.address,
+};
+
+const navLinks = navigation.links.map(link => ({ to: link.href, label: link.name }));
+
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-xl border-b border-border">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <Link to="/" className="flex items-center">
-            <span className="text-lg md:text-xl font-bold tracking-tight text-foreground">
-              {brand.name}
-            </span>
-          </Link>
+    <>
+      {/* Main Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/30">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link to="/" className="flex items-center gap-2">
+              <span className="text-lg font-bold text-foreground">{brandConfig.name}</span>
+              <span className="w-2 h-2 bg-primary rounded-sm"></span>
+            </Link>
 
-          {/* Center - Email (Desktop) */}
-          <div className="hidden lg:flex items-center gap-2 text-sm text-muted-foreground">
-            <Mail className="w-4 h-4" />
-            <a href={`mailto:${brand.email}`} className="hover:text-foreground transition-colors">
-              {brand.email}
-            </a>
-          </div>
+            {/* Center - Email */}
+            <div className="hidden lg:flex items-center">
+              <span className="text-muted-foreground text-sm">e-mail:</span>
+              <a 
+                href={`mailto:${brandConfig.email}`} 
+                className="ml-2 text-foreground text-sm hover:text-primary transition-colors"
+              >
+                {brandConfig.email}
+              </a>
+            </div>
 
-          {/* Right Side Actions */}
-          <div className="flex items-center gap-3">
-            {/* Live Chat - Telegram */}
-            <a 
-              href={brand.telegramLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-            >
-              <Send className="w-4 h-4" />
-              <span>Live Chat</span>
-            </a>
+            {/* Right side buttons */}
+            <div className="flex items-center gap-3">
+              {/* Live Chat Button */}
+              <a
+                href={brandConfig.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:flex items-center gap-2 lunar-btn-outline text-sm"
+              >
+                <Volume2 className="w-4 h-4" />
+                <span>Start Live Chat</span>
+              </a>
 
-            {/* Book a Meeting */}
-            <Link to="/contact">
-              <Button 
-                size="sm" 
-                className="hidden md:flex items-center gap-2 rounded-full bg-primary hover:bg-primary/90 text-primary-foreground shadow-md"
+              {/* Book a Meeting Button */}
+              <a
+                href="https://calendly.com/cryptobridgekorea"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:flex items-center gap-2 lunar-btn text-sm"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book a Meeting</span>
-              </Button>
-            </Link>
+              </a>
 
-            {/* Mobile Menu Button */}
+              {/* Menu Button */}
+              <button
+                onClick={() => setIsMenuOpen(true)}
+                className="flex items-center gap-2 lunar-btn-outline text-sm"
+              >
+                <span className="hidden sm:inline">menu</span>
+                <Menu className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Full Screen Menu */}
+      <div
+        className={`fixed inset-0 z-[100] bg-background transition-all duration-500 ${
+          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        }`}
+      >
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+              <span className="text-lg font-bold text-foreground">{brandConfig.name}</span>
+              <span className="w-2 h-2 bg-primary rounded-sm"></span>
+            </Link>
+            
             <button
-              className="p-2 text-foreground hover:bg-muted rounded-lg transition-colors"
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsMenuOpen(false)}
+              className="flex items-center gap-2 lunar-btn-outline text-sm"
             >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
+              <span>close</span>
+              <X className="w-4 h-4" />
             </button>
           </div>
         </div>
-      </div>
 
-      {/* Full Screen Menu */}
-      {isOpen && (
-        <div className="fixed inset-0 top-16 md:top-20 bg-background z-40 animate-fade-in">
-          <div className="container mx-auto px-4 py-12">
-            <div className="grid md:grid-cols-2 gap-12">
-              {/* Navigation Links */}
-              <div className="space-y-2">
-                <p className="text-xs text-muted-foreground uppercase tracking-wider mb-6">Navigation</p>
-                {navigation.links.map((link, index) => (
+        <div className="container mx-auto px-6 pt-20">
+          <div className="grid md:grid-cols-2 gap-16">
+            {/* Navigation Links */}
+            <div>
+              <span className="text-muted-foreground text-sm uppercase tracking-widest mb-8 block">Navigation</span>
+              <nav className="space-y-4">
+                {navLinks.map((link) => (
                   <Link
-                    key={link.name}
-                    to={link.href}
-                    className={`block text-3xl md:text-5xl font-bold py-2 transition-colors hover:text-primary ${
-                      location.pathname === link.href
-                        ? "text-primary"
-                        : "text-foreground"
-                    }`}
-                    onClick={() => setIsOpen(false)}
+                    key={link.to}
+                    to={link.to}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="block text-5xl md:text-7xl font-bold text-foreground hover:text-primary transition-colors"
                   >
-                    {link.name}
+                    {link.label}
                   </Link>
                 ))}
+              </nav>
+            </div>
+
+            {/* Contact Info */}
+            <div className="space-y-12">
+              <div>
+                <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Get in touch</span>
+                <a 
+                  href={`mailto:${brandConfig.email}`}
+                  className="text-2xl text-foreground hover:text-primary transition-colors"
+                >
+                  {brandConfig.email}
+                </a>
               </div>
 
-              {/* Contact Info */}
-              <div className="space-y-8">
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-4">Get in Touch</p>
-                  <a 
-                    href={`mailto:${brand.email}`}
-                    className="text-lg text-foreground hover:text-primary transition-colors"
-                  >
-                    {brand.email}
-                  </a>
-                </div>
+              <div>
+                <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Telegram</span>
+                <a 
+                  href={brandConfig.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-2xl text-foreground hover:text-primary transition-colors"
+                >
+                  @cryptobridgekorea
+                </a>
+              </div>
 
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-4">Telegram</p>
-                  <a 
-                    href={brand.telegramLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-lg text-foreground hover:text-primary transition-colors"
-                  >
-                    {brand.telegram}
-                  </a>
-                </div>
+              <div>
+                <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Office</span>
+                <p className="text-xl text-muted-foreground">
+                  {brandConfig.office}
+                </p>
+              </div>
 
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-4">Office</p>
-                  <p className="text-lg text-muted-foreground">
-                    {brand.address}
-                  </p>
-                </div>
-
-                {/* CTA in Menu */}
-                <div className="pt-8">
-                  <Link to="/contact" onClick={() => setIsOpen(false)}>
-                    <Button 
-                      size="lg" 
-                      className="rounded-full bg-primary hover:bg-primary/90 px-8 shadow-lg"
-                    >
-                      <Calendar className="w-4 h-4 mr-2" />
-                      Book a Meeting
-                    </Button>
-                  </Link>
-                </div>
+              <div className="flex gap-4 pt-8">
+                <a
+                  href={brandConfig.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="lunar-btn-outline text-sm"
+                >
+                  Telegram
+                </a>
+                <a
+                  href={brandConfig.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="lunar-btn-outline text-sm"
+                >
+                  LinkedIn
+                </a>
               </div>
             </div>
           </div>
         </div>
-      )}
-    </nav>
+      </div>
+    </>
   );
 };
 

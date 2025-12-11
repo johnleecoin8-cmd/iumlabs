@@ -1,143 +1,100 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useRef } from "react";
-import { images } from "@/config/content";
+import { ArrowUpRight } from "lucide-react";
 
 const cases = [
   {
-    id: "metaverse-korea",
-    name: "Metaverse Korea",
-    category: "NFT / Metaverse",
-    description: "Full Korean market entry including KOL campaigns, community setup, and PR coverage.",
-    result: "$12M Raised",
-    image: images.portfolio.metaverse,
-    color: "bg-purple-100 text-purple-700",
-    borderColor: "border-purple-200",
+    id: 1,
+    name: "DeFi Protocol",
+    gradient: "case-gradient-pink",
+    logo: "DeFi",
   },
   {
-    id: "kimchiswap",
-    name: "KimchiSwap",
-    category: "DeFi",
-    description: "Community growth from 0 to 50K Korean users with targeted influencer marketing.",
-    result: "$8.5M TVL",
-    image: images.portfolio.defi,
-    color: "bg-blue-100 text-blue-700",
-    borderColor: "border-blue-200",
+    id: 2,
+    name: "NFT Marketplace",
+    gradient: "case-gradient-orange",
+    logo: "NFT",
   },
   {
-    id: "seoul-dao",
-    name: "Seoul DAO",
-    category: "DAO / Governance",
-    description: "Event management at Korea Blockchain Week and ongoing community operations.",
-    result: "15K Members",
-    image: images.portfolio.dao,
-    color: "bg-green-100 text-green-700",
-    borderColor: "border-green-200",
+    id: 3,
+    name: "Layer 2 Solution",
+    gradient: "case-gradient-blue particles-bg",
+    logo: "L2",
   },
   {
-    id: "k-play",
-    name: "K-Play Games",
-    category: "GameFi",
-    description: "Gaming influencer campaigns and partnership with top Korean gaming guilds.",
-    result: "$20M Raised",
-    image: images.portfolio.gamefi,
-    color: "bg-orange-100 text-orange-700",
-    borderColor: "border-orange-200",
+    id: 4,
+    name: "GameFi Project",
+    gradient: "case-gradient-purple",
+    logo: "GameFi",
+  },
+  {
+    id: 5,
+    name: "DAO Platform",
+    gradient: "case-gradient-teal",
+    logo: "DAO",
+  },
+  {
+    id: 6,
+    name: "Infrastructure",
+    gradient: "case-gradient-green",
+    logo: "Infra",
   },
 ];
 
 const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const scroll = (direction: 'left' | 'right') => {
-    if (scrollRef.current) {
-      const scrollAmount = 400;
-      scrollRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
-    }
-  };
 
   return (
-    <section ref={ref} className="py-24 md:py-32 relative overflow-hidden bg-muted/30">
-      <div className="container mx-auto px-4 relative z-10">
-        {/* Header */}
-        <div className={`flex items-end justify-between mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div>
-            <span className="text-sm font-medium text-purple-600 tracking-wider mb-4 block">FEATURED CASES</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
-              Our Work
-            </h2>
+    <section ref={ref} className="bg-background">
+      {/* Section Header */}
+      <div className="container mx-auto px-6 py-12">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <span className="text-muted-foreground text-sm">01</span>
+            <h2 className="text-2xl font-bold text-foreground">Cases</h2>
           </div>
-          
-          <div className="hidden md:flex items-center gap-4">
-            <button 
-              onClick={() => scroll('left')}
-              className="w-12 h-12 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary transition-all shadow-sm"
-            >
-              <ArrowRight className="w-5 h-5 rotate-180" />
-            </button>
-            <button 
-              onClick={() => scroll('right')}
-              className="w-12 h-12 rounded-full border border-border bg-card flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-primary transition-all shadow-sm"
-            >
-              <ArrowRight className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        {/* Horizontal Scroll Cases */}
-        <div 
-          ref={scrollRef}
-          className={`flex gap-6 overflow-x-auto scrollbar-hide pb-4 -mx-4 px-4 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
-          style={{ scrollSnapType: 'x mandatory' }}
-        >
-          {cases.map((caseItem) => (
-            <div
-              key={caseItem.id}
-              className="flex-shrink-0 w-[320px] md:w-[380px] group cursor-pointer"
-              style={{ scrollSnapAlign: 'start' }}
-            >
-              {/* Image */}
-              <div className={`relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-card border ${caseItem.borderColor} group-hover:shadow-lg transition-all`}>
-                <img 
-                  src={caseItem.image} 
-                  alt={caseItem.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
-                />
-                {/* Result Badge */}
-                <div className={`absolute bottom-4 left-4 px-3 py-1.5 ${caseItem.color} text-sm font-medium rounded-full`}>
-                  {caseItem.result}
-                </div>
-              </div>
-
-              {/* Content */}
-              <div>
-                <span className={`text-xs font-medium ${caseItem.color} px-2 py-1 rounded-full`}>{caseItem.category}</span>
-                <h3 className="text-xl font-semibold text-foreground mt-2 mb-2 group-hover:text-primary transition-colors">
-                  {caseItem.name}
-                </h3>
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                  {caseItem.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* View All Link */}
-        <div className={`mt-10 text-center transition-all duration-700 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <Link 
-            to="/projects"
-            className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
+            to="/projects" 
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-sm"
           >
-            <span>View All Cases</span>
+            <span>View All</span>
             <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
+      </div>
+
+      {/* 3x2 Full Color Grid */}
+      <div 
+        className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 transition-all duration-700 ${
+          isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        {cases.map((item, index) => (
+          <Link
+            key={item.id}
+            to="/projects"
+            className={`${item.gradient} aspect-[4/3] flex items-center justify-center group relative overflow-hidden transition-all duration-500`}
+            style={{ transitionDelay: `${index * 100}ms` }}
+          >
+            {/* Logo/Text */}
+            <span className="text-4xl md:text-5xl lg:text-6xl font-bold text-white/90 group-hover:scale-110 transition-transform duration-500">
+              {item.logo}
+            </span>
+
+            {/* Hover Overlay */}
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+
+            {/* Arrow on hover */}
+            <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <ArrowUpRight className="w-6 h-6 text-white" />
+            </div>
+
+            {/* Project name on hover */}
+            <div className="absolute bottom-6 left-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <span className="text-white text-sm font-medium">{item.name}</span>
+            </div>
+          </Link>
+        ))}
       </div>
     </section>
   );
