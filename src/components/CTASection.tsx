@@ -14,6 +14,13 @@ const floatingTags = [
   { label: "Start Your Journey", color: "bg-orange-400", top: "40%", left: "15%" },
 ];
 
+const budgetOptions = [
+  "$15,000 - $25,000",
+  "$25,000 - $50,000",
+  "$50,000 +",
+  "Looking to raise funds",
+];
+
 const CTASection = () => {
   const { ref, isVisible } = useScrollAnimation();
   const [formData, setFormData] = useState({
@@ -22,6 +29,7 @@ const CTASection = () => {
     company: "",
     website: "",
     message: "",
+    budget: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -33,7 +41,7 @@ const CTASection = () => {
       const { error } = await supabase.from("contact_submissions").insert({
         name: formData.name,
         email: formData.email,
-        comments: `Company: ${formData.company}\nWebsite: ${formData.website}\n\n${formData.message}`,
+        comments: `Company: ${formData.company}\nWebsite: ${formData.website}\nBudget: ${formData.budget}\n\n${formData.message}`,
       });
 
       if (error) throw error;
@@ -44,13 +52,13 @@ const CTASection = () => {
           name: formData.name,
           email: formData.email,
           company: formData.company,
-          budget: formData.website,
+          budget: formData.budget,
           message: formData.message,
         },
       }).catch(console.error);
 
       toast.success("Message sent successfully! We'll get back to you soon.");
-      setFormData({ name: "", email: "", company: "", website: "", message: "" });
+      setFormData({ name: "", email: "", company: "", website: "", message: "", budget: "" });
     } catch {
       toast.error("Failed to send message. Please try again.");
     } finally {
@@ -191,6 +199,26 @@ const CTASection = () => {
                       className="w-full bg-transparent border-b border-white/20 pb-2 text-white focus:border-primary outline-none transition-colors"
                       placeholder="https://..."
                     />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-white/50 text-sm mb-3">ESTIMATED BUDGET</label>
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                    {budgetOptions.map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        onClick={() => setFormData({ ...formData, budget: option })}
+                        className={`px-4 py-3 rounded-lg text-sm border transition-all ${
+                          formData.budget === option
+                            ? 'bg-primary text-white border-primary'
+                            : 'bg-transparent border-white/20 text-white/70 hover:border-white/40'
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
                   </div>
                 </div>
 

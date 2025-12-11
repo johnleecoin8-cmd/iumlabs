@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CTASection from "@/components/CTASection";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
@@ -456,6 +457,7 @@ const Blog = () => {
         </div>
       </section>
 
+      <CTASection />
       <Footer />
     </div>
   );
