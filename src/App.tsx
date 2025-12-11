@@ -10,12 +10,12 @@ import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
-import Blog from "./pages/Blog";
+import Research from "./pages/Research";
+import ResearchDetail from "./pages/ResearchDetail";
 import NFTService from "./pages/NFTService";
 import DeFiService from "./pages/DeFiService";
 import GameFiService from "./pages/GameFiService";
 import NotFound from "./pages/NotFound";
-
 const queryClient = new QueryClient();
 
 // Page transition wrapper
@@ -51,7 +51,8 @@ const AppRoutes = () => {
         <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/blog" element={<Blog />} />
+        <Route path="/research" element={<Research />} />
+        <Route path="/research/:slug" element={<ResearchDetail />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
