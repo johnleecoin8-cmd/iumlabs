@@ -647,40 +647,50 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Our Approach - Strategy & Results Combined */}
-      <section className="py-16 bg-slate-50">
+      {/* Our Approach - Lunar Strategy Style 2-Column */}
+      <section className="py-20 bg-slate-100">
         <div className="container mx-auto max-w-6xl px-4">
-          <span className="text-slate-400 text-sm tracking-wider mb-4 block">01.</span>
-          <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-8">
+          <span className="text-slate-400 text-sm tracking-wider mb-6 block">01.</span>
+          <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-12">
             Our <span className="serif-italic">Approach</span>
           </h2>
 
-          {/* Services Tags */}
-          <div className="flex flex-wrap gap-3 mb-8">
-            {project.services.map((service, index) => (
-              <span key={index} className="px-4 py-2 rounded-full border border-slate-300 text-slate-700 text-sm">
-                {service}
-              </span>
-            ))}
-          </div>
-          
-          {/* Two Column Layout */}
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Strategy Column */}
-            <div>
-              <h3 className="text-lg font-semibold text-slate-800 mb-4 uppercase tracking-wider">Strategy</h3>
-              <div className="space-y-3">
-                {project.strategy.map((item, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-white border border-slate-200 shadow-sm">
-                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <p className="text-slate-700 text-sm">{item}</p>
-                  </div>
+          {/* Lunar Strategy 2-Column Layout */}
+          <div className="grid lg:grid-cols-2 gap-0 border border-slate-200 bg-white">
+            {/* Left Column - Scope of Work */}
+            <div className="p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-slate-200">
+              <div className="space-y-3 mb-8">
+                {project.services.map((service, index) => (
+                  <p key={index} className="text-slate-800 text-lg">{service}</p>
                 ))}
               </div>
+              <a href="#" className="text-primary hover:underline text-sm inline-flex items-center gap-1">
+                Scope of Work <ArrowUpRight className="w-3 h-3" />
+              </a>
             </div>
 
-            {/* Results Column with Animation */}
-            <ResultsGrid results={project.results} bgStyle={project.bgStyle} />
+            {/* Right Column - Overview & What We Did */}
+            <div className="flex flex-col">
+              {/* Overview */}
+              <div className="p-8 lg:p-12 border-b border-slate-200">
+                <p className="text-slate-700 text-lg leading-relaxed mb-4">
+                  {project.description} {project.challenge.split('.')[0]}.
+                </p>
+                <a href="#" className="text-primary hover:underline text-sm inline-flex items-center gap-1">
+                  Overview <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </div>
+
+              {/* What We Did */}
+              <div className="p-8 lg:p-12">
+                <p className="text-slate-700 text-lg leading-relaxed mb-4">
+                  {project.strategy.slice(0, 2).join('. ')}.
+                </p>
+                <a href="#" className="text-primary hover:underline text-sm inline-flex items-center gap-1">
+                  What We Did <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
