@@ -79,11 +79,11 @@ const stats = [
 ];
 
 const floatingTags = [
-  { label: "DeFi", top: "15%", left: "7%" },
-  { label: "Layer 1", top: "30%", right: "9%" },
-  { label: "GameFi", top: "50%", left: "5%" },
-  { label: "NFT", bottom: "35%", right: "7%" },
-  { label: "Infrastructure", bottom: "18%", left: "12%" },
+  { label: "DeFi", top: "15%", left: "5%", mobileTop: "12%", mobileLeft: "3%" },
+  { label: "Layer 1", top: "30%", right: "7%", mobileTop: "15%", mobileRight: "3%" },
+  { label: "GameFi", top: "50%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
+  { label: "NFT", bottom: "32%", right: "5%", mobileBottom: "18%", mobileRight: "3%" },
+  { label: "Infrastructure", bottom: "16%", left: "8%", mobileBottom: "10%", mobileLeft: "3%" },
 ];
 
 const Projects = () => {
@@ -115,17 +115,33 @@ const Projects = () => {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
         
-        {/* Floating Tags - Desktop only */}
-        <div className="hidden lg:block">
+        {/* Floating Tags - Responsive */}
+        <div>
           {floatingTags.map((tag, index) => (
             <span
               key={tag.label}
-              className="lunar-tag-dark absolute animate-float"
+              className="lunar-tag-dark absolute animate-float hidden sm:block"
               style={{
                 top: tag.top,
                 left: tag.left,
                 right: tag.right,
                 bottom: tag.bottom,
+                animationDelay: `${index * 0.5}s`,
+              }}
+            >
+              {tag.label}
+            </span>
+          ))}
+          {/* Mobile floating tags */}
+          {floatingTags.slice(0, 3).map((tag, index) => (
+            <span
+              key={`mobile-${tag.label}`}
+              className="lunar-tag-dark absolute animate-float sm:hidden"
+              style={{
+                top: tag.mobileTop,
+                left: tag.mobileLeft,
+                right: tag.mobileRight,
+                bottom: tag.mobileBottom,
                 animationDelay: `${index * 0.5}s`,
               }}
             >

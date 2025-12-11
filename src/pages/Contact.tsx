@@ -25,10 +25,10 @@ const contactInfo = [
 ];
 
 const floatingTags = [
-  { label: "Let's Connect", top: "18%", left: "8%" },
-  { label: "24/7 Support", top: "32%", right: "10%" },
-  { label: "Seoul Office", top: "52%", left: "5%" },
-  { label: "Global Reach", bottom: "32%", right: "8%" },
+  { label: "Let's Connect", top: "18%", left: "6%", mobileTop: "12%", mobileLeft: "3%" },
+  { label: "24/7 Support", top: "32%", right: "8%", mobileTop: "15%", mobileRight: "3%" },
+  { label: "Seoul Office", top: "52%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
+  { label: "Global Reach", bottom: "30%", right: "6%", mobileBottom: "18%", mobileRight: "3%" },
 ];
 
 const Contact = () => {
@@ -100,17 +100,33 @@ const Contact = () => {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
         
-        {/* Floating Tags - Desktop only */}
-        <div className="hidden lg:block">
+        {/* Floating Tags - Responsive */}
+        <div>
           {floatingTags.map((tag, index) => (
             <span
               key={tag.label}
-              className="lunar-tag-dark absolute animate-float"
+              className="lunar-tag-dark absolute animate-float hidden sm:block"
               style={{
                 top: tag.top,
                 left: tag.left,
                 right: tag.right,
                 bottom: tag.bottom,
+                animationDelay: `${index * 0.5}s`,
+              }}
+            >
+              {tag.label}
+            </span>
+          ))}
+          {/* Mobile floating tags */}
+          {floatingTags.slice(0, 3).map((tag, index) => (
+            <span
+              key={`mobile-${tag.label}`}
+              className="lunar-tag-dark absolute animate-float sm:hidden"
+              style={{
+                top: tag.mobileTop,
+                left: tag.mobileLeft,
+                right: tag.mobileRight,
+                bottom: tag.mobileBottom,
                 animationDelay: `${index * 0.5}s`,
               }}
             >
