@@ -112,7 +112,7 @@ const HeroSection = () => {
                 style={{ animation: 'spin 3s linear infinite' }}
               />
               
-              <CalendlyButton className="relative flex items-center bg-slate-900/95 text-white text-base sm:text-lg rounded-[10px] font-semibold shadow-[0_8px_32px_rgba(59,130,246,0.25)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.4)] transition-all duration-500 hover:scale-[1.02] overflow-hidden">
+              <CalendlyButton className="relative flex items-center bg-white/10 backdrop-blur-xl text-white text-base sm:text-lg rounded-[10px] font-semibold shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.3)] hover:bg-white/15 transition-all duration-500 hover:scale-[1.02] overflow-hidden">
                 {/* Left accent bar */}
                 <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-500 via-cyan-400 to-blue-600" />
                 
