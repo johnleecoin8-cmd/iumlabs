@@ -101,6 +101,26 @@
   html {
     scroll-behavior: smooth;
   }
+  
+  /* GPU Acceleration for animated elements */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+  
+  /* Optimize animations with contain */
+  .contain-layout {
+    contain: layout;
+  }
+  
+  .contain-paint {
+    contain: paint;
+  }
+  
+  .contain-strict {
+    contain: strict;
+  }
 }
 
 @layer components {
@@ -520,14 +540,17 @@
     @apply font-serif italic;
   }
 
-  /* Logo Marquee Animation */
+  /* Logo Marquee Animation - GPU Optimized */
   .logo-marquee {
     animation: marquee 30s linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+    transform: translateZ(0);
   }
   
   @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-50%, 0, 0); }
   }
 
   /* Case Card Gradients - Lunar Strategy Diverse Colors */
@@ -626,36 +649,40 @@
 
 /* ============================================
    PHASE 8: ANIMATION & INTERACTION SYSTEM
+   - GPU Accelerated & Performance Optimized
    ============================================ */
 
-/* Floating Animation - Gentle */
+/* Floating Animation - GPU Optimized */
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translate3d(0, 0, 0);
   }
   50% {
-    transform: translateY(-12px);
+    transform: translate3d(0, -12px, 0);
   }
 }
 
 .animate-float {
   animation: float 4s ease-in-out infinite;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
-/* Fade Up Animation */
+/* Fade Up Animation - GPU Optimized */
 @keyframes fadeUp {
   from {
     opacity: 0;
-    transform: translateY(24px);
+    transform: translate3d(0, 24px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-fade-up {
   animation: fadeUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  will-change: opacity, transform;
 }
 
 /* Fade In Animation */
@@ -670,54 +697,58 @@
 
 .animate-fade-in {
   animation: fadeIn 0.4s ease-out forwards;
+  will-change: opacity;
 }
 
-/* Scale In Animation */
+/* Scale In Animation - GPU Optimized */
 @keyframes scaleIn {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale3d(0.95, 0.95, 1);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: scale3d(1, 1, 1);
   }
 }
 
 .animate-scale-in {
   animation: scaleIn 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  will-change: opacity, transform;
 }
 
-/* Slide In Left */
+/* Slide In Left - GPU Optimized */
 @keyframes slideInLeft {
   from {
     opacity: 0;
-    transform: translateX(-20px);
+    transform: translate3d(-20px, 0, 0);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-slide-in-left {
   animation: slideInLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  will-change: opacity, transform;
 }
 
-/* Slide In Right */
+/* Slide In Right - GPU Optimized */
 @keyframes slideInRight {
   from {
     opacity: 0;
-    transform: translateX(20px);
+    transform: translate3d(20px, 0, 0);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-slide-in-right {
   animation: slideInRight 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  will-change: opacity, transform;
 }
 
 /* Stagger Animation Delays */
@@ -733,10 +764,16 @@
 /* Initial state for staggered animations */
 .stagger-item {
   opacity: 0;
+  will-change: opacity, transform;
 }
 
 .stagger-item.is-visible {
   animation: fadeUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Remove will-change after animation completes */
+.animation-complete {
+  will-change: auto;
 }
 
 /* Hide Scrollbar */

@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
-import { Linkedin, Send, Calendar } from "lucide-react";
+import { Linkedin, Send, Calendar, Mail } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { images } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
 import Planet3D from "@/components/Planet3D";
+import TeamContactCard from "@/components/TeamContactCard";
+import TrustBadge from "@/components/TrustBadge";
+import ClientLogoMarquee from "@/components/ClientLogoMarquee";
 import earthSpace from "@/assets/backgrounds/earth-space.jpg";
 
 const stats = [
@@ -51,11 +54,17 @@ const About = () => {
   const { ref, isVisible } = useScrollAnimation();
   const [scrollY, setScrollY] = useState(0);
 
+  // Throttled scroll handler for performance
+  const handleScroll = useCallback(() => {
+    requestAnimationFrame(() => {
+      setScrollY(window.scrollY);
+    });
+  }, []);
+
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -197,12 +206,29 @@ const About = () => {
         </div>
       </section>
 
+      {/* Trust Section - Client Logos */}
+      <section className="section-earth-light py-16 px-4">
+        <div className="container mx-auto max-w-7xl relative z-10">
+          <div className="text-center mb-8">
+            <h3 className="text-lg font-medium text-[hsl(var(--light-fg),0.6)]">Trusted by Leading Web3 Projects</h3>
+          </div>
+          <ClientLogoMarquee />
+          
+          {/* Trust Badges */}
+          <div className="mt-12 flex flex-wrap justify-center gap-4">
+            <TrustBadge type="trustpilot" rating={5} reviewCount="50+" link="https://trustpilot.com" />
+            <TrustBadge type="google" rating={5} reviewCount="40+" link="https://google.com" />
+            <TrustBadge type="clutch" rating={5} reviewCount="30+" link="https://clutch.co" />
+          </div>
+        </div>
+      </section>
+
       {/* Team Section - Earth Dark Theme with Stars */}
       <section className="section-earth-dark section-stars py-24 px-4">
         <div className="container mx-auto max-w-7xl relative z-10">
           {/* Giant Header */}
           <div className="mb-20">
-            <h2 className="text-[15vw] md:text-[150px] lg:text-[180px] font-light leading-[0.85] tracking-tight text-white">
+            <h2 className="text-[15vw] md:text-[150px] lg:text-[180px] font-light leading-[0.85] tracking-tight text-white gpu-accelerated">
               Our <span className="serif-italic text-cyan-400">Team</span>
             </h2>
             <div className="mt-8">
@@ -212,19 +238,20 @@ const About = () => {
             </div>
           </div>
 
-          {/* Team Grid */}
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12">
+          {/* Team Grid - Large Photos */}
+          <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-16">
             {team.map((member, index) => (
               <div
                 key={member.name}
-                className={`group ${index === 1 ? 'md:mt-24' : ''}`}
+                className={`group contain-layout ${index === 1 ? 'md:mt-24' : ''}`}
               >
                 {/* Image with Blue Overlay */}
-                <div className="relative aspect-[3/4] rounded-3xl overflow-hidden mb-6">
+                <div className="relative aspect-[3/4] rounded-3xl overflow-hidden mb-6 img-zoom">
                   <img 
                     src={member.image} 
                     alt={member.name}
-                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 gpu-accelerated"
+                    loading="lazy"
                   />
                   <div className="team-photo-overlay" />
                   
@@ -235,6 +262,7 @@ const About = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-primary transition-colors"
+                      aria-label={`${member.name}'s LinkedIn`}
                     >
                       <Linkedin className="w-5 h-5" />
                     </a>
@@ -243,6 +271,7 @@ const About = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white hover:bg-white hover:text-primary transition-colors"
+                      aria-label={`${member.name}'s Telegram`}
                     >
                       <Send className="w-5 h-5" />
                     </a>
@@ -257,6 +286,31 @@ const About = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="dotted-line-dark my-16" />
+
+          {/* Team Contact Cards - Quick Access */}
+          <div className="mt-16">
+            <h3 className="text-2xl font-medium text-white mb-8">Get in Touch Directly</h3>
+            <div className="grid sm:grid-cols-2 gap-6 max-w-2xl">
+              <TeamContactCard
+                name="James"
+                role="Co-Founder"
+                image={images.team.james || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=500&fit=crop&crop=face"}
+                telegram="https://t.me/cryptobridgekorea"
+                linkedin="https://www.linkedin.com/in/james-l-13a998251/"
+                email="info@cryptobridgekorea.com"
+              />
+              <TeamContactCard
+                name="David"
+                role="Co-Founder"
+                image={images.team.david || "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=500&fit=crop&crop=face"}
+                telegram="https://t.me/cryptobridgekorea"
+                linkedin="https://www.linkedin.com/company/cryptobridge"
+                email="info@cryptobridgekorea.com"
+              />
+            </div>
           </div>
 
           <div className="dotted-line-dark mt-24" />
