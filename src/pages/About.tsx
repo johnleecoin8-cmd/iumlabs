@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
@@ -5,6 +6,7 @@ import { Linkedin, Send, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { images } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
+import seoulSkyline from "@/assets/seoul-skyline.jpg";
 
 const stats = [
   { value: "200+", label: "Projects Launched" },
@@ -32,16 +34,64 @@ const team = [
   },
 ];
 
+const floatingTags = [
+  { label: "Since 2023", top: "15%", left: "8%" },
+  { label: "200+ Projects", top: "25%", right: "12%" },
+  { label: "Korea Experts", top: "55%", left: "5%" },
+  { label: "Ex-Binance", bottom: "35%", right: "8%" },
+  { label: "Ex-KuCoin", bottom: "20%", left: "15%" },
+];
+
 const About = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Dark Section with Giant Typography */}
-      <section className="section-dark pt-32 pb-24 px-4">
-        <div className="container mx-auto max-w-7xl">
+      {/* Hero - Full Screen with Parallax Background */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background Image with Parallax */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-100"
+          style={{ 
+            backgroundImage: `url(${seoulSkyline})`,
+            filter: "brightness(0.25) grayscale(0.4)",
+            transform: `translateY(${scrollY * 0.3}px) scale(1.1)`
+          }}
+        />
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+        
+        {/* Floating Tags - Desktop only */}
+        <div className="hidden lg:block">
+          {floatingTags.map((tag, index) => (
+            <span
+              key={tag.label}
+              className="lunar-tag-dark absolute animate-float"
+              style={{
+                top: tag.top,
+                left: tag.left,
+                right: tag.right,
+                bottom: tag.bottom,
+                animationDelay: `${index * 0.5}s`,
+              }}
+            >
+              {tag.label}
+            </span>
+          ))}
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
           <div className="mb-16">
             <span className="text-sm text-white/50 mb-4 block">[ About Us ]</span>
             <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight">
@@ -68,6 +118,12 @@ const About = () => {
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/30">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
         </div>
       </section>
 

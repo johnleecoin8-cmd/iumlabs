@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { 
   Megaphone, 
   Users, 
@@ -15,6 +15,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
+import networkAbstract from "@/assets/network-abstract.jpg";
 
 const services = [
   {
@@ -85,17 +86,65 @@ const services = [
   },
 ];
 
+const floatingTags = [
+  { label: "KOL Network", top: "18%", left: "6%" },
+  { label: "Community", top: "28%", right: "10%" },
+  { label: "PR & Media", top: "50%", left: "4%" },
+  { label: "Exchange", bottom: "38%", right: "6%" },
+  { label: "VASP", bottom: "22%", left: "12%" },
+];
+
 const Services = () => {
   const { ref, isVisible } = useScrollAnimation();
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Dark Section with Giant Typography */}
-      <section className="section-dark pt-32 pb-24 px-4">
-        <div className="container mx-auto max-w-7xl">
+      {/* Hero - Full Screen with Parallax Background */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background Image with Parallax */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-100"
+          style={{ 
+            backgroundImage: `url(${networkAbstract})`,
+            filter: "brightness(0.35) saturate(1.2)",
+            transform: `translateY(${scrollY * 0.3}px) scale(1.1)`
+          }}
+        />
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.4)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+        
+        {/* Floating Tags - Desktop only */}
+        <div className="hidden lg:block">
+          {floatingTags.map((tag, index) => (
+            <span
+              key={tag.label}
+              className="lunar-tag-dark absolute animate-float"
+              style={{
+                top: tag.top,
+                left: tag.left,
+                right: tag.right,
+                bottom: tag.bottom,
+                animationDelay: `${index * 0.5}s`,
+              }}
+            >
+              {tag.label}
+            </span>
+          ))}
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
           <div className="mb-16">
             <span className="text-sm text-white/50 mb-4 block">[ Our Services ]</span>
             <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight">
@@ -112,6 +161,12 @@ const Services = () => {
               <span>Book a Consultation</span>
             </CalendlyButton>
           </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/30">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
         </div>
       </section>
 
