@@ -1,15 +1,5 @@
 import { useState, useEffect } from "react";
-import { 
-  Megaphone, 
-  Users, 
-  Globe, 
-  TrendingUp, 
-  Shield, 
-  Zap, 
-  ArrowRight,
-  X,
-  Calendar
-} from "lucide-react";
+import { ArrowRight, Calendar, Star, Quote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -17,72 +7,95 @@ import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
 import networkAbstract from "@/assets/network-abstract.jpg";
 
+// Service images
+import kolNetworkImg from "@/assets/services/kol-network.jpg";
+import communityGrowthImg from "@/assets/services/community-growth.jpg";
+import prMediaImg from "@/assets/services/pr-media.jpg";
+import gtmStrategyImg from "@/assets/services/gtm-strategy.jpg";
+import vaspComplianceImg from "@/assets/services/vasp-compliance.jpg";
+import eventsImg from "@/assets/services/events.jpg";
+
 const services = [
   {
     id: "kol-marketing",
     number: "01",
-    icon: Megaphone,
     title: "KOL & Influence Network",
-    description: "Direct trust building with Korea's top crypto influencers across Twitter, YouTube, and local platforms.",
-    fullDescription: "Partner with Korea's top crypto influencers to amplify your project's reach. We manage relationships with 1,000+ verified KOLs across Twitter, YouTube, and Korean platforms like Naver.",
-    features: ["Tier 1-3 KOL Selection", "Campaign Strategy & Management", "Content Coordination", "Performance Analytics & ROI Tracking"],
+    description: "Partner with Korea's top crypto influencers to amplify your project's reach. We manage relationships with 1,000+ verified KOLs across Twitter, YouTube, and Korean platforms like Naver.",
+    image: kolNetworkImg,
     stat: "1,000+",
     statLabel: "Verified KOLs",
   },
   {
     id: "community-building",
     number: "02",
-    icon: Users,
     title: "Community Growth",
-    description: "Full setup and management of Korean Telegram, Discord, and KakaoTalk channels.",
-    fullDescription: "Build a thriving Korean community from scratch or enhance your existing presence. We handle everything from platform setup to 24/7 Korean moderation.",
-    features: ["Platform Setup & Branding", "24/7 Korean Moderation", "Engagement Programs & Events", "AMA Sessions & Live Support"],
+    description: "Build a thriving Korean community from scratch or enhance your existing presence. We handle everything from platform setup to 24/7 Korean moderation across Telegram, Discord, and KakaoTalk.",
+    image: communityGrowthImg,
     stat: "500K+",
     statLabel: "Members Managed",
   },
   {
     id: "pr-media",
     number: "03",
-    icon: Globe,
     title: "PR & Media Relations",
-    description: "Tier-1 Korean crypto media placements, press releases, and exclusive interview opportunities.",
-    fullDescription: "Secure coverage in leading Korean crypto publications and mainstream media. From press releases to exclusive interviews, we handle your complete Korean media strategy.",
-    features: ["Press Release Distribution", "Media Interviews & Features", "News Coverage & Articles", "Crisis Management"],
+    description: "Secure coverage in leading Korean crypto publications and mainstream media. From press releases to exclusive interviews, we handle your complete Korean media strategy.",
+    image: prMediaImg,
     stat: "50+",
     statLabel: "Publications",
   },
   {
     id: "gtm-strategy",
     number: "04",
-    icon: TrendingUp,
     title: "Go-To-Market Strategy",
-    description: "Data-driven launch planning tailored for the unique Korean market dynamics.",
-    fullDescription: "Launch successfully in Korea with data-driven strategies that account for local market dynamics, competitive landscape, and user behavior patterns.",
-    features: ["Market Research & Analysis", "Competitor Landscape Study", "Launch Planning & Execution", "Growth Roadmap Development"],
+    description: "Launch successfully in Korea with data-driven strategies that account for local market dynamics, competitive landscape, and user behavior patterns.",
+    image: gtmStrategyImg,
     stat: "200+",
     statLabel: "Successful Launches",
   },
   {
     id: "vasp-compliance",
     number: "05",
-    icon: Shield,
     title: "VASP & Compliance",
-    description: "Navigate Korean regulations and secure the licenses you need to operate legally.",
-    fullDescription: "Get compliant in Korea's regulated crypto market. We guide you through VASP registration, AML/KYC requirements, and ongoing compliance obligations.",
-    features: ["VASP Registration Support", "Compliance Consulting", "Legal Partnership Network", "Ongoing Regulatory Support"],
+    description: "Get compliant in Korea's regulated crypto market. We guide you through VASP registration, AML/KYC requirements, and ongoing compliance obligations.",
+    image: vaspComplianceImg,
     stat: "100%",
     statLabel: "Success Rate",
   },
   {
     id: "events",
     number: "06",
-    icon: Zap,
     title: "Events & Conferences",
-    description: "From Korea Blockchain Week to exclusive meetups — presence at major Korean events.",
-    fullDescription: "Make an impact at major Korean blockchain events or host your own. We manage everything from booth setup to VIP networking events and speaker placements.",
-    features: ["Event Planning & Logistics", "Booth Design & Management", "Speaker Placement", "VIP Networking Events"],
+    description: "Make an impact at major Korean blockchain events or host your own. We manage everything from booth setup to VIP networking events and speaker placements.",
+    image: eventsImg,
     stat: "20+",
     statLabel: "Events Per Year",
+  },
+];
+
+const testimonials = [
+  {
+    name: "Alex Chen",
+    role: "CEO, MetaVerse Korea",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+    content: "CryptoBridge helped us raise $12M and build a community of 50K+ members in just 3 months. Their understanding of the Korean market is unmatched.",
+    rating: 5,
+    source: "Trustpilot",
+  },
+  {
+    name: "Sarah Kim",
+    role: "Founder, KimchiSwap",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+    content: "The team's DeFi expertise and KOL network helped us achieve $100M TVL within the first month of launch. Highly recommend!",
+    rating: 5,
+    source: "Ethos",
+  },
+  {
+    name: "Michael Park",
+    role: "CMO, Seoul DAO",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+    content: "Professional, responsive, and results-driven. They know exactly how to position Web3 projects for the Korean audience.",
+    rating: 5,
+    source: "Trustpilot",
   },
 ];
 
@@ -95,9 +108,8 @@ const floatingTags = [
 ];
 
 const Services = () => {
-  const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation();
-  const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
-  const [modalAnimating, setModalAnimating] = useState(false);
+  const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation();
+  const { ref: testimonialsRef, isVisible: testimonialsVisible } = useScrollAnimation();
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -105,16 +117,6 @@ const Services = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const openModal = (service: typeof services[0]) => {
-    setSelectedService(service);
-    setTimeout(() => setModalAnimating(true), 10);
-  };
-
-  const closeModal = () => {
-    setModalAnimating(false);
-    setTimeout(() => setSelectedService(null), 300);
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -210,113 +212,151 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services Grid - Light Theme */}
-      <section ref={gridRef} className="section-light py-24 px-4">
-        <div className="container mx-auto max-w-7xl">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => {
-              const IconComponent = service.icon;
-              return (
-                <div
-                  key={service.id}
-                  onClick={() => openModal(service)}
-                  className={`group bg-white border border-[hsl(var(--light-fg),0.1)] rounded-2xl p-8 cursor-pointer hover:border-primary/30 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${
-                    gridVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                  }`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  {/* Number Badge + Icon */}
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-sm text-[hsl(var(--light-fg),0.4)]">[ {service.number} ]</span>
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
-                      <IconComponent className="w-5 h-5" />
+      {/* Services List - Lunar Strategy Style */}
+      <section ref={servicesRef} className="bg-[hsl(0,0%,96%)] py-24">
+        <div className="container mx-auto max-w-7xl px-4">
+          {services.map((service, index) => (
+            <div
+              key={service.id}
+              className={`group py-12 transition-all duration-700 ${
+                servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              {/* Dotted Line */}
+              <div className="dotted-line-light mb-12" />
+              
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                {/* Image */}
+                <div className="lg:col-span-4">
+                  <div className="relative overflow-hidden rounded-2xl aspect-[4/3]">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="lg:col-span-8">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
+                    {/* Number */}
+                    <span className="text-[hsl(0,0%,40%)] text-sm font-mono">[ {service.number} ]</span>
+                    
+                    {/* Title + Learn More */}
+                    <div className="flex-1 md:pl-8">
+                      <div className="flex items-start justify-between gap-4 mb-4">
+                        <h3 className="text-2xl md:text-3xl lg:text-4xl font-medium text-[hsl(0,0%,8%)] group-hover:text-primary transition-colors duration-300">
+                          {service.title}
+                        </h3>
+                        <CalendlyButton className="hidden md:flex shrink-0 items-center gap-2 text-sm text-[hsl(0,0%,40%)] hover:text-primary transition-colors">
+                          <span>Learn more</span>
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </CalendlyButton>
+                      </div>
+                      
+                      {/* Description */}
+                      <p className="text-[hsl(0,0%,40%)] text-base md:text-lg leading-relaxed mb-6 max-w-2xl">
+                        {service.description}
+                      </p>
+
+                      {/* Stat */}
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-4xl md:text-5xl font-bold text-primary">{service.stat}</span>
+                        <span className="text-[hsl(0,0%,40%)] text-sm">{service.statLabel}</span>
+                      </div>
+
+                      {/* Mobile Learn More */}
+                      <CalendlyButton className="md:hidden mt-6 flex items-center gap-2 text-sm text-[hsl(0,0%,40%)] hover:text-primary transition-colors">
+                        <span>Learn more</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </CalendlyButton>
                     </div>
                   </div>
-
-                  {/* Title */}
-                  <h3 className="text-xl font-medium text-[hsl(var(--light-fg))] mb-3 group-hover:text-primary transition-colors">
-                    {service.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-[hsl(var(--light-fg),0.6)] text-sm mb-6">
-                    {service.description}
-                  </p>
-
-                  {/* Stat */}
-                  <div className="flex items-baseline gap-2 mb-6 pt-6 border-t border-[hsl(var(--light-fg),0.1)]">
-                    <span className="text-3xl font-bold text-primary">{service.stat}</span>
-                    <span className="text-sm text-[hsl(var(--light-fg),0.5)]">{service.statLabel}</span>
-                  </div>
-
-                  {/* Learn More */}
-                  <button className="inline-flex items-center gap-2 text-sm text-[hsl(var(--light-fg),0.5)] group-hover:text-primary transition-colors">
-                    <span>Learn more</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
                 </div>
-              );
-            })}
+              </div>
+            </div>
+          ))}
+          
+          {/* Last Dotted Line */}
+          <div className="dotted-line-light mt-12" />
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section ref={testimonialsRef} className="bg-[hsl(0,0%,96%)] py-24">
+        <div className="container mx-auto max-w-7xl px-4">
+          {/* Header */}
+          <div className={`flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 transition-all duration-700 ${
+            testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <div>
+              <span className="text-[hsl(0,0%,40%)] text-sm font-mono mb-4 block">[ Testimonials ]</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-[hsl(0,0%,8%)]">
+                +250 <span className="serif-italic text-primary">Satisfied</span> Clients
+              </h2>
+            </div>
+            <div className="flex gap-2">
+              <span className="text-4xl">✌️</span>
+              <span className="text-4xl">✌️</span>
+              <span className="text-4xl">✌️</span>
+            </div>
+          </div>
+
+          {/* Testimonials Grid */}
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className={`bg-white rounded-2xl p-8 border border-[hsl(0,0%,90%)] hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${
+                  testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
+                {/* Quote Icon */}
+                <Quote className="w-10 h-10 text-primary/20 mb-6" />
+                
+                {/* Content */}
+                <p className="text-[hsl(0,0%,30%)] text-lg leading-relaxed mb-8">
+                  "{testimonial.content}"
+                </p>
+
+                {/* Rating */}
+                <div className="flex items-center gap-1 mb-6">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                  ))}
+                </div>
+
+                {/* Author */}
+                <div className="flex items-center gap-4">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-14 h-14 rounded-full object-cover border-2 border-[hsl(0,0%,90%)]"
+                  />
+                  <div>
+                    <div className="font-medium text-[hsl(0,0%,8%)]">{testimonial.name}</div>
+                    <div className="text-sm text-[hsl(0,0%,50%)]">{testimonial.role}</div>
+                  </div>
+                </div>
+
+                {/* Source */}
+                <div className="mt-6 pt-6 border-t border-[hsl(0,0%,90%)]">
+                  <span className="text-xs text-primary uppercase tracking-wider font-medium">
+                    Reviewed on {testimonial.source}
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <CTASection />
       <Footer />
-
-      {/* Service Modal */}
-      {selectedService && (
-        <div 
-          className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ${
-            modalAnimating ? 'bg-black/50 backdrop-blur-sm' : 'bg-black/0'
-          }`}
-          onClick={closeModal}
-        >
-          <div 
-            className={`bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl transition-all duration-300 ${
-              modalAnimating ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8'
-            }`}
-            onClick={e => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between mb-6">
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                <selectedService.icon className="w-6 h-6" />
-              </div>
-              <button 
-                onClick={closeModal}
-                className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
-              >
-                <X className="w-5 h-5 text-gray-600" />
-              </button>
-            </div>
-
-            <h3 className="text-2xl font-medium text-gray-900 mb-2">{selectedService.title}</h3>
-            
-            <div className="flex items-baseline gap-2 mb-4">
-              <span className="text-3xl font-bold text-primary">{selectedService.stat}</span>
-              <span className="text-gray-500">{selectedService.statLabel}</span>
-            </div>
-
-            <p className="text-gray-600 mb-6">{selectedService.fullDescription}</p>
-
-            <div className="mb-8">
-              <h4 className="text-sm font-medium text-gray-900 mb-3">What's included:</h4>
-              <ul className="space-y-2">
-                {selectedService.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <CalendlyButton className="lunar-btn w-full">
-              Get Started
-            </CalendlyButton>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
