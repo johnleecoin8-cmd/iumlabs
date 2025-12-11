@@ -20,9 +20,9 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Main Navbar - Black with white/blue/red accents */}
+      {/* Main Navbar - Clean dark style */}
       <nav className="fixed top-3 left-3 right-3 z-50">
-        <div className="flex items-stretch rounded-2xl border border-[hsl(180,100%,50%,0.15)] bg-[hsl(0,0%,2%,0.95)] backdrop-blur-md overflow-hidden shadow-[0_0_30px_hsl(180,100%,50%,0.05)]">
+        <div className="flex items-stretch rounded-2xl border border-white/10 bg-[hsl(0,0%,4%,0.95)] backdrop-blur-md overflow-hidden">
           {/* Logo Section */}
           <Link to="/" className="flex items-center gap-2 px-6 py-4 border-r border-white/10">
             <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
@@ -44,10 +44,10 @@ const Navbar = () => {
 
           {/* Right side buttons - Each with border separator */}
           <div className="flex items-stretch">
-            {/* Live Chat Button - Neon Cyan */}
+            {/* Live Chat Button - Clean Blue */}
             <button
               onClick={() => setIsLiveChatOpen(true)}
-              className="hidden md:flex items-center gap-2 px-5 py-4 bg-[hsl(180,100%,50%)] text-black text-sm font-medium transition-all hover:shadow-[0_0_20px_hsl(180,100%,50%,0.5)] border-r border-white/10"
+              className="hidden md:flex items-center gap-2 px-5 py-4 bg-primary text-white text-sm font-medium transition-all hover:bg-primary/90 border-r border-white/10"
             >
               <Send className="w-4 h-4" />
               <span>Start Live Chat</span>
