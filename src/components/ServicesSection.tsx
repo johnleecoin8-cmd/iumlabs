@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import constellationSpace from "@/assets/constellation-space.jpg";
 
 const services = [
   {
@@ -37,27 +38,52 @@ const services = [
 ];
 
 const floatingTags = [
-  { label: "Go-To-Market Strategy", position: "top-[5%] left-[15%]" },
-  { label: "Influencer Strategy", position: "top-[35%] left-[30%]" },
-  { label: "Social Media Marketing", position: "top-[15%] right-[5%]" },
-  { label: "KOL Marketing", position: "top-[55%] right-[20%]" },
-  { label: "PR", position: "top-[45%] right-[8%]" },
+  { label: "Go-To-Market Strategy", top: "5%", left: "15%" },
+  { label: "Influencer Strategy", top: "35%", left: "8%" },
+  { label: "Social Media Marketing", top: "15%", right: "5%" },
+  { label: "KOL Marketing", top: "55%", right: "10%" },
+  { label: "PR", top: "45%", right: "3%" },
 ];
 
 const ServicesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
   const [activeService, setActiveService] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div ref={ref} className="py-0 relative overflow-hidden flex-1">
       {/* Hero Typography Section */}
       <div className="relative min-h-[70vh] flex items-center justify-center px-4 py-24">
+        {/* Parallax Background */}
+        <div 
+          className="absolute inset-0 z-0"
+          style={{ transform: `translateY(${scrollY * 0.05}px)` }}
+        >
+          <img 
+            src={constellationSpace}
+            alt=""
+            className="w-full h-[120%] object-cover opacity-20"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+        </div>
+
         {/* Floating Service Tags */}
         {floatingTags.map((tag, index) => (
           <div
             key={index}
-            className={`absolute ${tag.position} hidden lg:block animate-float z-10`}
-            style={{ animationDelay: `${index * 0.4}s` }}
+            className="absolute hidden lg:block animate-float z-10"
+            style={{ 
+              top: tag.top,
+              left: tag.left,
+              right: tag.right,
+              animationDelay: `${index * 0.4}s` 
+            }}
           >
             <span className="lunar-tag-dark text-xs whitespace-nowrap">
               {tag.label}
@@ -66,7 +92,7 @@ const ServicesSection = () => {
         ))}
 
         {/* Giant Typography */}
-        <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+        <div className={`text-center transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
           <h2 className="text-[12vw] md:text-[15vw] lg:text-[18vw] font-light leading-[0.85] tracking-tight text-white">
             Our<span className="serif-italic">Services</span>
           </h2>

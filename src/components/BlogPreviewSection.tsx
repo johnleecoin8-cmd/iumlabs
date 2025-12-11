@@ -1,6 +1,7 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const blogPosts = [
   {
@@ -32,12 +33,53 @@ const blogPosts = [
   },
 ];
 
+const floatingTags = [
+  { label: "Market Insights", top: "12%", right: "8%" },
+  { label: "KOL Marketing", top: "22%", left: "5%" },
+  { label: "Web3 Trends", bottom: "30%", right: "5%" },
+  { label: "Korean Market", bottom: "18%", left: "10%" },
+];
+
 const BlogPreviewSection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div ref={ref} className="py-32 px-4 relative overflow-hidden flex-1">
-      <div className="container mx-auto max-w-7xl">
+      {/* Gradient Mesh Background with Parallax */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{ transform: `translateY(${scrollY * 0.04}px)` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-tl from-primary/5 via-transparent to-primary/8" />
+        <div className="absolute top-1/3 right-1/4 w-72 h-72 bg-primary/8 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
+      </div>
+
+      {/* Floating Tags */}
+      {floatingTags.map((tag, index) => (
+        <span
+          key={tag.label}
+          className="px-3 py-1.5 rounded-full border border-[hsl(var(--light-fg),0.2)] text-[hsl(var(--light-fg),0.5)] text-xs absolute animate-float hidden lg:block z-10"
+          style={{
+            top: tag.top,
+            left: tag.left,
+            right: tag.right,
+            bottom: tag.bottom,
+            animationDelay: `${index * 0.5}s`,
+          }}
+        >
+          {tag.label}
+        </span>
+      ))}
+
+      <div className="container mx-auto max-w-7xl relative z-10">
         {/* Giant Typography Header - Lunar Strategy Style */}
         <div className={`mb-16 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <h2 className="text-[15vw] md:text-[180px] lg:text-[220px] font-light leading-[0.85] tracking-tight text-[hsl(var(--light-fg))]">

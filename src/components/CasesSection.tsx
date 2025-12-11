@@ -1,6 +1,8 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, CornerDownRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import networkAbstract from "@/assets/network-abstract.jpg";
 
 const cases = [
   {
@@ -55,12 +57,57 @@ const cases = [
   },
 ];
 
+const floatingTags = [
+  { label: "DeFi", top: "8%", left: "5%" },
+  { label: "Layer 1", top: "15%", right: "8%" },
+  { label: "GameFi", bottom: "30%", left: "3%" },
+  { label: "Infrastructure", top: "40%", right: "4%" },
+  { label: "NFT", bottom: "20%", right: "10%" },
+];
+
 const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1">
-      <div className="container mx-auto max-w-7xl">
+    <div ref={ref} className="py-24 px-4 flex-1 relative overflow-hidden">
+      {/* Parallax Background */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{ transform: `translateY(${scrollY * 0.08}px)` }}
+      >
+        <img 
+          src={networkAbstract}
+          alt=""
+          className="w-full h-[120%] object-cover opacity-15"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
+      </div>
+
+      {/* Floating Tags */}
+      {floatingTags.map((tag, index) => (
+        <span
+          key={tag.label}
+          className="lunar-tag-dark absolute animate-float text-xs hidden lg:block z-10"
+          style={{
+            top: tag.top,
+            left: tag.left,
+            right: tag.right,
+            bottom: tag.bottom,
+            animationDelay: `${index * 0.4}s`,
+          }}
+        >
+          {tag.label}
+        </span>
+      ))}
+
+      <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header */}
         <div className={`flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <div>

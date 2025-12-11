@@ -1,10 +1,11 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Calendar, Mail, Send, Phone, MapPin } from "lucide-react";
+import { Calendar, Mail, Send, MapPin } from "lucide-react";
 import { brand } from "@/config/content";
 import CalendlyButton from "./CalendlyButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
 
 const brandConfig = {
   email: brand.email,
@@ -20,8 +21,16 @@ const budgetOptions = [
   "Looking to raise funds",
 ];
 
+const floatingTags = [
+  { label: "30 min Free Call", top: "8%", left: "5%" },
+  { label: "Flexible Scheduling", top: "15%", right: "8%" },
+  { label: "Ask Us Anything", bottom: "20%", left: "3%" },
+  { label: "Korean Market Entry", bottom: "12%", right: "5%" },
+];
+
 const CTASection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [scrollY, setScrollY] = useState(0);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -31,6 +40,12 @@ const CTASection = () => {
     budget: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,18 +70,41 @@ const CTASection = () => {
   };
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1">
-      <div className="container mx-auto max-w-6xl">
+    <div ref={ref} className="py-24 px-4 flex-1 relative overflow-hidden">
+      {/* Parallax Background */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{ transform: `translateY(${scrollY * 0.08}px)` }}
+      >
+        <img 
+          src={seoulBridgeNight}
+          alt=""
+          className="w-full h-[120%] object-cover opacity-20"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/90 to-background/70" />
+      </div>
+
+      {/* Floating Tags */}
+      {floatingTags.map((tag, index) => (
+        <span
+          key={tag.label}
+          className="lunar-tag-dark absolute animate-float text-xs hidden lg:block z-10"
+          style={{
+            top: tag.top,
+            left: tag.left,
+            right: tag.right,
+            bottom: tag.bottom,
+            animationDelay: `${index * 0.5}s`,
+          }}
+        >
+          {tag.label}
+        </span>
+      ))}
+
+      <div className="container mx-auto max-w-6xl relative z-10">
         {/* Header */}
         <div className={`mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Feature Tags */}
-          <div className="flex flex-wrap gap-3 mb-8">
-            <span className="lunar-tag-dark">30 min Free Call</span>
-            <span className="lunar-tag-dark">Flexible Scheduling</span>
-            <span className="lunar-tag-dark">Ask Us Anything</span>
-          </div>
-
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-[hsl(var(--dark-fg))]">
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-light leading-tight mb-6 text-[hsl(var(--dark-fg))]">
             Start Your <span className="serif-italic">Journey</span>
             <br />
             Let's Talk <span className="serif-italic">Strategy</span>
@@ -129,7 +167,7 @@ const CTASection = () => {
           </div>
 
           {/* Right - Contact Form */}
-          <div className="bg-card/50 border border-border/50 rounded-2xl p-8">
+          <div className="bg-card/50 border border-border/50 rounded-2xl p-8 backdrop-blur-sm">
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Name & Email Row */}
               <div className="grid sm:grid-cols-2 gap-4">

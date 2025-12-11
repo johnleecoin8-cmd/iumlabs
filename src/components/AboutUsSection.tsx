@@ -2,13 +2,59 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Calendar, Trophy, Clock } from "lucide-react";
 import { images } from "@/config/content";
 import CalendlyButton from "./CalendlyButton";
+import { useEffect, useState } from "react";
+import seoulSkyline from "@/assets/seoul-skyline.jpg";
+
+const floatingTags = [
+  { label: "Since 2023", top: "10%", left: "5%" },
+  { label: "$500M+ Marketed", top: "20%", right: "8%" },
+  { label: "Korea Experts", bottom: "25%", left: "3%" },
+  { label: "200+ Projects", bottom: "15%", right: "5%" },
+];
 
 const AboutUsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1">
-      <div className="container mx-auto max-w-6xl">
+    <div ref={ref} className="py-24 px-4 flex-1 relative overflow-hidden">
+      {/* Parallax Background */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+      >
+        <img 
+          src={seoulSkyline}
+          alt=""
+          className="w-full h-[120%] object-cover opacity-10 grayscale"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background" />
+      </div>
+
+      {/* Floating Tags */}
+      {floatingTags.map((tag, index) => (
+        <span
+          key={tag.label}
+          className="lunar-tag-dark absolute animate-float text-xs hidden lg:block z-10"
+          style={{
+            top: tag.top,
+            left: tag.left,
+            right: tag.right,
+            bottom: tag.bottom,
+            animationDelay: `${index * 0.5}s`,
+          }}
+        >
+          {tag.label}
+        </span>
+      ))}
+
+      <div className="container mx-auto max-w-6xl relative z-10">
         <div className={`grid lg:grid-cols-2 gap-16 items-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Left - Team Photos */}
           <div className="relative">
