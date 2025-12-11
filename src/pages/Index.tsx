@@ -4,7 +4,6 @@ import AboutUsSection from "@/components/AboutUsSection";
 import CasesSection from "@/components/CasesSection";
 import ServicesSection from "@/components/ServicesSection";
 import TeamSection from "@/components/TeamSection";
-import GuidesSection from "@/components/GuidesSection";
 import BlogPreviewSection from "@/components/BlogPreviewSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -23,11 +22,11 @@ const Index = () => {
         <HeroSection />
       </main>
       
-      <section className="screen-2 scroll-reveal" id="about">
+      <section className="scroll-reveal" id="about" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
         <AboutUsSection />
       </section>
       
-      <section className="screen-3 scroll-reveal" id="cases">
+      <section className="scroll-reveal" id="cases" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
         <CasesSection />
       </section>
       
@@ -35,15 +34,11 @@ const Index = () => {
         <ServicesSection />
       </section>
       
-      <section className="screen-5 scroll-reveal" id="team">
+      <section className="scroll-reveal" id="team" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
         <TeamSection />
       </section>
       
-      <section className="screen-6 scroll-reveal" id="guides">
-        <GuidesSection />
-      </section>
-      
-      <section className="screen-7 scroll-reveal" id="blog">
+      <section className="scroll-reveal" id="blog" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
         <BlogPreviewSection />
       </section>
       
