@@ -12,10 +12,10 @@ import Planet3D from "@/components/Planet3D";
 import marsSurface from "@/assets/backgrounds/mars-surface.jpg";
 
 const budgetOptions = [
-  "$5K - $10K",
-  "$10K - $25K",
-  "$25K - $50K",
-  "$50K+",
+  "$15,000 - $25,000",
+  "$25,000 - $50,000",
+  "$50,000 +",
+  "Looking to raise funds",
 ];
 
 const contactInfo = [
