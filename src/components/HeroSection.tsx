@@ -1,4 +1,4 @@
-import { Calendar, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import CalendlyButton from "./CalendlyButton";
 import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
@@ -96,11 +96,43 @@ const HeroSection = () => {
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </p>
 
-          {/* CTA Button - Larger */}
+          {/* CTA Button - Bridge Logo Style */}
           <div className="opacity-0 animate-fade-up stagger-3 mt-6 sm:mt-8">
-            <CalendlyButton className="lunar-btn text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-5 hover-glow">
-              <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span>Book a Free Consultation</span>
+            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-primary-foreground text-base sm:text-lg px-8 sm:px-12 py-4 sm:py-5 rounded-full font-semibold shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-500 hover:scale-105 border border-white/20">
+              {/* Animated shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              
+              {/* Bridge Icon SVG */}
+              <div className="relative flex items-center gap-3">
+                <svg 
+                  className="w-6 h-6 sm:w-7 sm:h-7 group-hover:scale-110 transition-transform duration-300" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {/* Bridge structure */}
+                  <path d="M3 18h18" />
+                  <path d="M6 18V8" />
+                  <path d="M18 18V8" />
+                  <path d="M6 8c0 0 3-4 6-4s6 4 6 4" />
+                  <path d="M9 18v-6" />
+                  <path d="M15 18v-6" />
+                  <path d="M6 12h12" />
+                </svg>
+                <span className="relative">Start Your Bridge</span>
+                <svg 
+                  className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.5"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
             </CalendlyButton>
           </div>
         </div>
