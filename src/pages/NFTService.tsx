@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Palette, Users, Megaphone, BarChart3, Check, Calendar, ArrowRight } from "lucide-react";
+import { Palette, Users, Megaphone, BarChart3, Check, Calendar, ArrowRight, Quote } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -46,6 +46,21 @@ const nftFeatures = [
   "Secondary Market Promotion",
 ];
 
+const testimonials = [
+  {
+    quote: "Our PFP collection sold out in under 2 hours thanks to CryptoBridge's Korean community strategy.",
+    author: "Founder",
+    company: "Top 10 NFT Collection",
+    metric: "10K Sold",
+  },
+  {
+    quote: "They built us a 50K+ member Korean Discord community that remains highly engaged to this day.",
+    author: "Community Lead",
+    company: "NFT Gaming Project",
+    metric: "50K Members",
+  },
+];
+
 const floatingTags = [
   { label: "PFP Collection", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%" },
   { label: "Whitelist", top: "28%", right: "8%", mobileTop: "15%", mobileRight: "3%" },
@@ -56,6 +71,7 @@ const floatingTags = [
 const NFTService = () => {
   const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation();
   const { ref: featuresRef, isVisible: featuresVisible } = useScrollAnimation();
+  const { ref: testimonialsRef, isVisible: testimonialsVisible } = useScrollAnimation();
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -207,6 +223,40 @@ const NFTService = () => {
               <span>Get Started</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials - Light Theme */}
+      <section ref={testimonialsRef} className="section-light py-24 px-4">
+        <div className="container mx-auto max-w-5xl">
+          <div className={`mb-12 transition-all duration-700 ${testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <span className="text-sm text-[hsl(var(--light-fg),0.4)] mb-4 block">[ Client Success ]</span>
+            <h2 className="text-4xl md:text-5xl font-light text-[hsl(var(--light-fg))]">
+              What Our <span className="serif-italic text-primary">Clients</span> Say
+            </h2>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <div 
+                key={index}
+                className={`relative bg-white border border-[hsl(var(--light-fg),0.1)] rounded-2xl p-8 transition-all duration-500 ${
+                  testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+                style={{ transitionDelay: `${300 + index * 150}ms` }}
+              >
+                <Quote className="absolute top-6 right-6 w-8 h-8 text-primary/20" />
+                <div className="mb-6">
+                  <span className="text-3xl font-bold text-primary">{testimonial.metric}</span>
+                </div>
+                <p className="text-[hsl(var(--light-fg),0.7)] mb-6 italic">"{testimonial.quote}"</p>
+                <div className="pt-4 border-t border-[hsl(var(--light-fg),0.1)]">
+                  <p className="font-medium text-[hsl(var(--light-fg))]">{testimonial.author}</p>
+                  <p className="text-sm text-[hsl(var(--light-fg),0.5)]">{testimonial.company}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>

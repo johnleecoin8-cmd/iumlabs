@@ -95,8 +95,9 @@ const floatingTags = [
 ];
 
 const Services = () => {
-  const { ref, isVisible } = useScrollAnimation();
+  const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation();
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
+  const [modalAnimating, setModalAnimating] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -104,6 +105,16 @@ const Services = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const openModal = (service: typeof services[0]) => {
+    setSelectedService(service);
+    setTimeout(() => setModalAnimating(true), 10);
+  };
+
+  const closeModal = () => {
+    setModalAnimating(false);
+    setTimeout(() => setSelectedService(null), 300);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -187,7 +198,7 @@ const Services = () => {
       </section>
 
       {/* Services Grid - Light Theme */}
-      <section ref={ref} className="section-light py-24 px-4">
+      <section ref={gridRef} className="section-light py-24 px-4">
         <div className="container mx-auto max-w-7xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => {
@@ -195,16 +206,16 @@ const Services = () => {
               return (
                 <div
                   key={service.id}
-                  onClick={() => setSelectedService(service)}
-                  className={`group bg-white border border-[hsl(var(--light-fg),0.1)] rounded-2xl p-8 cursor-pointer hover:border-primary/30 hover:shadow-xl transition-all duration-500 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  onClick={() => openModal(service)}
+                  className={`group bg-white border border-[hsl(var(--light-fg),0.1)] rounded-2xl p-8 cursor-pointer hover:border-primary/30 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${
+                    gridVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   {/* Number Badge + Icon */}
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-sm text-[hsl(var(--light-fg),0.4)]">[ {service.number} ]</span>
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
                       <IconComponent className="w-5 h-5" />
                     </div>
                   </div>
@@ -243,11 +254,15 @@ const Services = () => {
       {/* Service Modal */}
       {selectedService && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
-          onClick={() => setSelectedService(null)}
+          className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ${
+            modalAnimating ? 'bg-black/50 backdrop-blur-sm' : 'bg-black/0'
+          }`}
+          onClick={closeModal}
         >
           <div 
-            className="bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl"
+            className={`bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl transition-all duration-300 ${
+              modalAnimating ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8'
+            }`}
             onClick={e => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-6">
@@ -255,7 +270,7 @@ const Services = () => {
                 <selectedService.icon className="w-6 h-6" />
               </div>
               <button 
-                onClick={() => setSelectedService(null)}
+                onClick={closeModal}
                 className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
               >
                 <X className="w-5 h-5 text-gray-600" />
