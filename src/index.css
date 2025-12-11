@@ -338,6 +338,29 @@
     animation: shimmer 2s linear infinite;
   }
 
+  /* Icon bounce and rotate animation for service cards */
+  .animate-icon-bounce {
+    animation: icon-bounce-rotate 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  @keyframes icon-bounce-rotate {
+    0% {
+      transform: scale(1) rotate(0deg);
+    }
+    25% {
+      transform: scale(1.2) rotate(-10deg);
+    }
+    50% {
+      transform: scale(0.9) rotate(10deg);
+    }
+    75% {
+      transform: scale(1.1) rotate(-5deg);
+    }
+    100% {
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
   /* New animations for enhanced visuals */
   .animate-letter-pop {
     animation: letter-pop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;

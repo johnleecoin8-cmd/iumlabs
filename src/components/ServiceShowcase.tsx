@@ -38,14 +38,14 @@ const ServiceShowcase = ({ onLearnMore, isVisible }: ServiceShowcaseProps) => {
     resize();
     window.addEventListener("resize", resize);
 
-    // Create particles
-    for (let i = 0; i < 50; i++) {
+    // Create more particles for denser network
+    for (let i = 0; i < 80; i++) {
       particles.push({
         x: Math.random() * canvas.offsetWidth,
         y: Math.random() * canvas.offsetHeight,
-        vx: (Math.random() - 0.5) * 0.5,
-        vy: (Math.random() - 0.5) * 0.5,
-        size: Math.random() * 2 + 1,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: (Math.random() - 0.5) * 0.8,
+        size: Math.random() * 3 + 1,
       });
     }
 
@@ -55,14 +55,19 @@ const ServiceShowcase = ({ onLearnMore, isVisible }: ServiceShowcaseProps) => {
 
       // Update and draw particles
       particles.forEach((p, i) => {
-        // Mouse attraction
+        // Enhanced mouse attraction - faster response
         const dx = mousePos.x - p.x;
         const dy = mousePos.y - p.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          p.vx += dx * 0.0001;
-          p.vy += dy * 0.0001;
+        if (dist < 200) {
+          const force = (200 - dist) / 200;
+          p.vx += dx * 0.0008 * force;
+          p.vy += dy * 0.0008 * force;
         }
+        
+        // Add some friction
+        p.vx *= 0.99;
+        p.vy *= 0.99;
 
         p.x += p.vx;
         p.y += p.vy;
@@ -78,15 +83,16 @@ const ServiceShowcase = ({ onLearnMore, isVisible }: ServiceShowcaseProps) => {
         ctx.globalAlpha = 0.6;
         ctx.fill();
 
-        // Draw connections
+        // Draw connections with increased range
         particles.slice(i + 1).forEach((p2) => {
           const d = Math.sqrt((p.x - p2.x) ** 2 + (p.y - p2.y) ** 2);
-          if (d < 100) {
+          if (d < 120) {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.strokeStyle = "hsl(0, 72%, 51%)";
-            ctx.globalAlpha = 0.1 * (1 - d / 100);
+            ctx.globalAlpha = 0.15 * (1 - d / 120);
+            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         });
@@ -127,9 +133,9 @@ const ServiceShowcase = ({ onLearnMore, isVisible }: ServiceShowcaseProps) => {
           <span className="text-sm font-medium text-primary">Most Popular Service</span>
         </div>
 
-        {/* Icon */}
-        <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/30 to-orange-500/20 flex items-center justify-center mb-8 transform hover:scale-110 hover:rotate-3 transition-all duration-300">
-          <Megaphone className="w-10 h-10 text-foreground" />
+        {/* Icon with bounce animation on hover */}
+        <div className="group/icon w-20 h-20 rounded-2xl bg-gradient-to-br from-primary/30 to-orange-500/20 flex items-center justify-center mb-8 transform hover:scale-110 transition-all duration-300">
+          <Megaphone className="w-10 h-10 text-foreground group-hover/icon:animate-icon-bounce" />
         </div>
 
         {/* Title */}
