@@ -96,17 +96,21 @@ const HeroSection = () => {
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </p>
 
-          {/* CTA Button - Premium Style */}
-          <div className="opacity-0 animate-fade-up stagger-3 mt-6 sm:mt-8">
-            <CalendlyButton className="group relative overflow-hidden bg-white text-slate-900 text-base sm:text-lg px-10 sm:px-14 py-5 sm:py-6 rounded-2xl font-bold shadow-[0_20px_50px_rgba(255,255,255,0.15)] hover:shadow-[0_25px_60px_rgba(255,255,255,0.25)] transition-all duration-500 hover:scale-[1.02] border-2 border-white/90">
-              {/* Animated gradient border effect */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary via-blue-400 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl" />
+          {/* CTA Button - Gradient Style with Pulse */}
+          <div className="opacity-0 animate-fade-up stagger-3 mt-6 sm:mt-8 relative">
+            {/* Pulse ring effect */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 animate-pulse opacity-40 blur-xl scale-110" />
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 animate-ping opacity-20" style={{ animationDuration: '2s' }} />
+            
+            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 text-white text-base sm:text-lg px-10 sm:px-14 py-5 sm:py-6 rounded-2xl font-bold shadow-[0_20px_50px_rgba(59,130,246,0.4)] hover:shadow-[0_25px_60px_rgba(59,130,246,0.6)] transition-all duration-500 hover:scale-[1.02] border border-white/20">
+              {/* Animated shine sweep */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               
               <div className="relative flex items-center gap-4">
                 {/* Bridge Icon */}
                 <div className="relative">
                   <svg 
-                    className="w-7 h-7 sm:w-8 sm:h-8 text-primary group-hover:text-blue-600 transition-colors duration-300" 
+                    className="w-7 h-7 sm:w-8 sm:h-8 text-white group-hover:scale-110 transition-transform duration-300" 
                     viewBox="0 0 24 24" 
                     fill="none" 
                     stroke="currentColor" 
@@ -123,9 +127,9 @@ const HeroSection = () => {
                     <path d="M5 13h14" />
                   </svg>
                 </div>
-                <span className="relative tracking-tight">Book a Free Consultation</span>
+                <span className="relative tracking-tight drop-shadow-sm">Book a Free Consultation</span>
                 <svg 
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-primary group-hover:translate-x-1.5 group-hover:text-blue-600 transition-all duration-300" 
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:translate-x-1.5 transition-all duration-300" 
                   viewBox="0 0 24 24" 
                   fill="none" 
                   stroke="currentColor" 
