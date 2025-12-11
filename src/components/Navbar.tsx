@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Volume2, Calendar } from "lucide-react";
+import { Menu, X, Send, Calendar } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
 
@@ -26,16 +26,18 @@ const Navbar = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <span className="text-lg font-bold text-white">{brandConfig.name}</span>
-              <span className="w-2 h-2 bg-primary rounded-sm"></span>
+              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                <div className="w-4 h-4 bg-background rounded-sm"></div>
+              </div>
+              <span className="text-lg font-semibold text-white">{brandConfig.name}</span>
             </Link>
 
             {/* Center - Email */}
-            <div className="hidden lg:flex items-center">
-              <span className="text-white/60 text-sm">e-mail:</span>
+            <div className="hidden lg:flex items-center border border-white/20 rounded-full px-6 py-2">
+              <span className="text-white/50 text-sm">e-mail</span>
               <a 
                 href={`mailto:${brandConfig.email}`} 
-                className="ml-2 text-white text-sm hover:text-primary transition-colors"
+                className="ml-3 text-white text-sm hover:text-primary transition-colors"
               >
                 {brandConfig.email}
               </a>
@@ -43,33 +45,33 @@ const Navbar = () => {
 
             {/* Right side buttons */}
             <div className="flex items-center gap-3">
-            {/* Live Chat Button */}
+              {/* Live Chat Button - Blue with Telegram icon */}
               <button
                 onClick={() => setIsLiveChatOpen(true)}
-                className="hidden md:flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 text-white/80 text-sm font-medium transition-all hover:border-white/50 hover:text-white"
+                className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-white text-sm font-medium transition-all hover:bg-primary/90"
               >
-                <Volume2 className="w-4 h-4" />
+                <Send className="w-4 h-4" />
                 <span>Start Live Chat</span>
               </button>
 
-              {/* Book a Meeting Button */}
+              {/* Book a Meeting Button - Dark outlined */}
               <a
                 href="https://calendly.com/cryptobridgekorea"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hidden md:flex items-center gap-2 lunar-btn text-sm"
+                className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 bg-background/80 text-white text-sm font-medium transition-all hover:bg-background"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book a Meeting</span>
               </a>
 
-              {/* Menu Button */}
+              {/* Menu Button - Dark pill */}
               <button
                 onClick={() => setIsMenuOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/30 text-white/80 text-sm font-medium transition-all hover:border-white/50 hover:text-white"
+                className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-zinc-800 text-white text-sm font-medium transition-all hover:bg-zinc-700"
               >
                 <span className="hidden sm:inline">menu</span>
-                <Menu className="w-4 h-4" />
+                <Menu className="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -85,16 +87,18 @@ const Navbar = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-              <span className="text-lg font-bold text-foreground">{brandConfig.name}</span>
-              <span className="w-2 h-2 bg-primary rounded-sm"></span>
+              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                <div className="w-4 h-4 bg-background rounded-sm"></div>
+              </div>
+              <span className="text-lg font-semibold text-white">{brandConfig.name}</span>
             </Link>
             
             <button
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-2 lunar-btn-outline text-sm"
+              className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-zinc-800 text-white text-sm font-medium transition-all hover:bg-zinc-700"
             >
               <span>close</span>
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -154,7 +158,7 @@ const Navbar = () => {
                   href={brandConfig.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="lunar-btn-outline text-sm"
+                  className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
                 >
                   Telegram
                 </a>
@@ -162,7 +166,7 @@ const Navbar = () => {
                   href={brandConfig.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="lunar-btn-outline text-sm"
+                  className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
                 >
                   LinkedIn
                 </a>
