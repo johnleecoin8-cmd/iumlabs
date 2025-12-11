@@ -73,17 +73,15 @@ const HeroSection = () => {
           {/* Main Headline - Adjusted size to fit viewport */}
           <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-[0.9] tracking-tight mb-6 sm:mb-8 opacity-0 animate-fade-up">
             <span className="text-white">Your</span>
-            <span className="serif-italic text-white"> Crypto</span>
+            <span className="serif-italic text-white"> Web 3.0</span>
             <br />
-            <span className="text-white">Ecosystem</span>
-            <span className="serif-italic text-white"> Growth</span>
-            <br />
-            <span className="text-white">Agency</span>
+            <span className="text-white">Marketing</span>
+            <span className="serif-italic text-white"> Agency</span>
           </h1>
 
           {/* Subtext - Lunar Strategy style */}
           <p className="text-base sm:text-lg text-white/60 max-w-xl mx-auto mb-8 opacity-0 animate-fade-up stagger-2">
-            Since 2023, we've worked together with <span className="text-white font-medium">200+ ecosystems</span> and projects in the Korean Crypto space.
+            We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </p>
 
           {/* CTA Button */}
