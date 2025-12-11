@@ -56,22 +56,34 @@ const About = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Full Screen with Parallax Background */}
+      {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background Image with Parallax */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-100"
-          style={{ 
-            backgroundImage: `url(${seoulSkyline})`,
-            filter: "brightness(0.25) grayscale(0.4)",
-            transform: `translateY(${scrollY * 0.3}px) scale(1.1)`
-          }}
-        />
+        {/* Background with Ken Burns */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div 
+            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
+            style={{ 
+              backgroundImage: `url(${seoulSkyline})`,
+              filter: "brightness(0.35) grayscale(0.4)",
+            }}
+          />
+          
+          {/* Aurora light overlay */}
+          <div className="absolute inset-0 animate-aurora">
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-cyan-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/10 via-transparent to-blue-500/10" />
+          </div>
+          
+          {/* Light sweep effect */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-light-sweep" />
+          </div>
+          
+          {/* Dark overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+        </div>
         
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
-        
-        {/* Floating Tags - Responsive */}
+        {/* Floating Tags with Parallax */}
         <div>
           {floatingTags.map((tag, index) => (
             <span
@@ -83,12 +95,13 @@ const About = () => {
                 right: tag.right,
                 bottom: tag.bottom,
                 animationDelay: `${index * 0.5}s`,
+                transform: `translateY(${scrollY * 0.08}px)`,
               }}
             >
               {tag.label}
             </span>
           ))}
-          {/* Mobile floating tags - repositioned */}
+          {/* Mobile floating tags */}
           {floatingTags.slice(0, 3).map((tag, index) => (
             <span
               key={`mobile-${tag.label}`}
@@ -106,16 +119,16 @@ const About = () => {
           ))}
         </div>
 
-        {/* Content */}
+        {/* Content with Stagger Animation */}
         <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
           <div className="mb-16">
-            <span className="text-sm text-white/50 mb-4 block">[ About Us ]</span>
-            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight">
+            <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ About Us ]</span>
+            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
               Ab<span className="serif-italic text-primary">o</span>ut
             </h1>
           </div>
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
             <p className="text-lg text-white/60 max-w-xl">
               We're a Korea-based Web3 marketing agency. Since 2023, we've been the trusted partner for blockchain projects entering the Korean market.
             </p>
@@ -126,7 +139,7 @@ const About = () => {
           </div>
 
           {/* Stats Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 border-t border-white/10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
