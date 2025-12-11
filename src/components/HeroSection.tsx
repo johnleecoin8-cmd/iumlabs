@@ -1,4 +1,5 @@
 import { Calendar, ChevronDown } from "lucide-react";
+import { useEffect, useState } from "react";
 import CalendlyButton from "./CalendlyButton";
 import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
 
@@ -23,22 +24,58 @@ const clientLogos = [
 ];
 
 const HeroSection = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <section className="section-dark relative min-h-screen flex flex-col justify-center overflow-hidden">
-      {/* Background - Seoul Bridge Night Image */}
+      {/* Background - Seoul Bridge Night Image with Parallax */}
       <div className="absolute inset-0">
-        {/* Bridge background image */}
+        {/* Bridge background image with parallax */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
           style={{ 
             backgroundImage: `url(${seoulBridgeNight})`,
-            filter: "brightness(0.25) grayscale(0.3)"
+            filter: "brightness(0.25) grayscale(0.3)",
+            transform: `translateY(${scrollY * 0.3}px) scale(1.1)`
           }}
         />
         {/* Dark overlay gradient for text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220,20%,6%,0.7)] via-[hsl(220,20%,6%,0.3)] to-[hsl(220,20%,6%,0.8)]" />
+        
+        {/* Glowing Data Flow Lines Animation */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {/* Line 1 */}
+          <div className="absolute bottom-[35%] left-0 right-0 h-[2px] overflow-hidden">
+            <div className="data-flow-line h-full w-full bg-gradient-to-r from-transparent via-[hsl(217,91%,60%,0.8)] to-transparent" 
+                 style={{ animationDelay: "0s" }} />
+          </div>
+          {/* Line 2 */}
+          <div className="absolute bottom-[38%] left-0 right-0 h-[1px] overflow-hidden">
+            <div className="data-flow-line h-full w-full bg-gradient-to-r from-transparent via-[hsl(190,80%,60%,0.6)] to-transparent"
+                 style={{ animationDelay: "1.5s" }} />
+          </div>
+          {/* Line 3 */}
+          <div className="absolute bottom-[32%] left-0 right-0 h-[1px] overflow-hidden">
+            <div className="data-flow-line h-full w-full bg-gradient-to-r from-transparent via-[hsl(270,70%,60%,0.5)] to-transparent"
+                 style={{ animationDelay: "3s" }} />
+          </div>
+          {/* Vertical glow particles */}
+          <div className="absolute bottom-[30%] left-[20%] w-1 h-20 bg-gradient-to-t from-transparent via-[hsl(217,91%,60%,0.4)] to-transparent animate-pulse" />
+          <div className="absolute bottom-[30%] left-[40%] w-1 h-16 bg-gradient-to-t from-transparent via-[hsl(190,80%,60%,0.3)] to-transparent animate-pulse" style={{ animationDelay: "0.5s" }} />
+          <div className="absolute bottom-[30%] left-[60%] w-1 h-24 bg-gradient-to-t from-transparent via-[hsl(217,91%,60%,0.5)] to-transparent animate-pulse" style={{ animationDelay: "1s" }} />
+          <div className="absolute bottom-[30%] left-[80%] w-1 h-12 bg-gradient-to-t from-transparent via-[hsl(270,70%,60%,0.4)] to-transparent animate-pulse" style={{ animationDelay: "1.5s" }} />
+        </div>
+        
         {/* Subtle glow effect on bridge */}
-        <div className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-gradient-radial from-[hsl(217,91%,60%,0.08)] via-transparent to-transparent blur-3xl" />
+        <div className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-gradient-radial from-[hsl(217,91%,60%,0.1)] via-transparent to-transparent blur-3xl" />
       </div>
 
       {/* Floating Service Tags */}
@@ -46,7 +83,10 @@ const HeroSection = () => {
         <div
           key={index}
           className={`absolute ${tag.position} hidden lg:block animate-float z-10`}
-          style={{ animationDelay: `${index * 0.5}s` }}
+          style={{ 
+            animationDelay: `${index * 0.5}s`,
+            transform: `translateY(${scrollY * 0.1}px)`
+          }}
         >
           <span className={`service-tag service-tag-${tag.color}`}>
             {tag.label}
