@@ -2,14 +2,14 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const clientLogos = [
   { name: "BNB Chain", url: "https://bnbchain.org", logo: "https://cryptologos.cc/logos/bnb-bnb-logo.svg" },
-  { name: "Peaq", url: "https://www.peaq.network", logo: "https://s2.coinmarketcap.com/static/img/coins/200x200/21440.png" },
+  { name: "Peaq", url: "https://www.peaq.network", logo: "https://cdn.prod.website-files.com/66475ee97bcbe587a63b28c9/668f98a27bf3cb87584a950f_media-kit-logo.avif" },
   { name: "Story Protocol", url: "https://www.story.foundation", logo: "https://cdn.sp-assets.net/images/brandkit/symbol.svg" },
   { name: "zkPass", url: "https://zkpass.org", logo: "https://s2.coinmarketcap.com/static/img/coins/200x200/28883.png" },
-  { name: "Falcon Finance", url: "https://falcon.finance", logo: "https://pbs.twimg.com/profile_images/1907055587992961026/cQLCR2n0_400x400.jpg" },
+  { name: "Falcon Finance", url: "https://falcon.finance", logo: "https://s2.coinmarketcap.com/static/img/coins/200x200/35533.png" },
   { name: "Ondo Finance", url: "https://ondo.finance", logo: "https://s2.coinmarketcap.com/static/img/coins/200x200/21159.png" },
   { name: "MegaETH", url: "https://megaeth.systems", logo: "https://www.megaeth.com/assets/img/brand-kit/logo-1.svg" },
   { name: "Bybit", url: "https://www.bybit.com", logo: "https://s2.coinmarketcap.com/static/img/exchanges/200x200/521.png" },
-  { name: "Abstract", url: "https://abs.xyz", logo: "https://pbs.twimg.com/profile_images/1879227015043588096/ZayrZyEZ_400x400.jpg" },
+  { name: "Abstract", url: "https://abs.xyz", logo: "https://seeklogo.com/images/A/abstract-chain-logo-0B4FB9FEB4-seeklogo.com.png" },
   { name: "KuCoin", url: "https://www.kucoin.com", logo: "https://s2.coinmarketcap.com/static/img/exchanges/200x200/311.png" },
 ];
 
