@@ -38,6 +38,17 @@ const CTASection = () => {
 
       if (error) throw error;
 
+      // Send email notification
+      supabase.functions.invoke('send-contact-notification', {
+        body: {
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          budget: formData.website,
+          message: formData.message,
+        },
+      }).catch(console.error);
+
       toast.success("Message sent successfully! We'll get back to you soon.");
       setFormData({ name: "", email: "", company: "", website: "", message: "" });
     } catch {
