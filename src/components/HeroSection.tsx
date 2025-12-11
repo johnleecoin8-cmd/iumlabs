@@ -13,14 +13,15 @@ const serviceTags = [
 ];
 
 const clientLogos = [
-  { name: "Solana", logo: "https://cryptologos.cc/logos/solana-sol-logo.svg" },
-  { name: "Polygon", logo: "https://cryptologos.cc/logos/polygon-matic-logo.svg" },
-  { name: "Chainlink", logo: "https://cryptologos.cc/logos/chainlink-link-logo.svg" },
-  { name: "Avalanche", logo: "https://cryptologos.cc/logos/avalanche-avax-logo.svg" },
-  { name: "Arbitrum", logo: "https://cryptologos.cc/logos/arbitrum-arb-logo.svg" },
-  { name: "Optimism", logo: "https://cryptologos.cc/logos/optimism-ethereum-op-logo.svg" },
-  { name: "Binance", logo: "https://cryptologos.cc/logos/binance-coin-bnb-logo.svg" },
+  { name: "Peaq", logo: "https://cryptologos.cc/logos/peaq-peaq-logo.svg" },
+  { name: "BNB", logo: "https://cryptologos.cc/logos/bnb-bnb-logo.svg" },
   { name: "KuCoin", logo: "https://cryptologos.cc/logos/kucoin-token-kcs-logo.svg" },
+  { name: "Polygon", logo: "https://cryptologos.cc/logos/polygon-matic-logo.svg" },
+  { name: "Story Protocol", logo: "https://assets.coingecko.com/coins/images/51396/standard/story_logo.jpg" },
+  { name: "MegaETH", logo: "https://pbs.twimg.com/profile_images/1768883498681511936/F_CxcIg6_400x400.jpg" },
+  { name: "Tria", logo: "https://pbs.twimg.com/profile_images/1741842954348580864/s_fEuDEr_400x400.jpg" },
+  { name: "Ondo Finance", logo: "https://cryptologos.cc/logos/ondo-finance-ondo-logo.svg" },
+  { name: "Bybit", logo: "https://cryptologos.cc/logos/bybit-byb-logo.svg" },
 ];
 
 const HeroSection = () => {
