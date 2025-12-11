@@ -54,7 +54,8 @@ const floatingTags = [
 ];
 
 const GameFiService = () => {
-  const { ref, isVisible } = useScrollAnimation();
+  const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation();
+  const { ref: featuresRef, isVisible: featuresVisible } = useScrollAnimation();
   const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
@@ -144,7 +145,7 @@ const GameFiService = () => {
       </section>
 
       {/* Services Grid - Light Theme */}
-      <section ref={ref} className="section-light py-24 px-4">
+      <section ref={servicesRef} className="section-light py-24 px-4">
         <div className="container mx-auto max-w-7xl">
           <div className="grid md:grid-cols-2 gap-8">
             {gamefiServices.map((service, index) => {
@@ -152,14 +153,14 @@ const GameFiService = () => {
               return (
                 <div
                   key={service.number}
-                  className={`group bg-white border border-[hsl(var(--light-fg),0.1)] rounded-2xl p-8 hover:border-primary/30 hover:shadow-xl transition-all duration-500 ${
-                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  className={`group bg-white border border-[hsl(var(--light-fg),0.1)] rounded-2xl p-8 hover:border-primary/30 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${
+                    servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                   }`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
+                  style={{ transitionDelay: `${index * 150}ms` }}
                 >
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-sm text-[hsl(var(--light-fg),0.4)]">[ {service.number} ]</span>
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-300">
                       <IconComponent className="w-5 h-5" />
                     </div>
                   </div>
@@ -177,9 +178,9 @@ const GameFiService = () => {
       </section>
 
       {/* Features - Dark Theme */}
-      <section className="section-dark py-24 px-4">
+      <section ref={featuresRef} className="section-dark py-24 px-4">
         <div className="container mx-auto max-w-5xl">
-          <div className="mb-12">
+          <div className={`mb-12 transition-all duration-700 ${featuresVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <span className="text-sm text-white/50 mb-4 block">[ What's Included ]</span>
             <h2 className="text-4xl md:text-5xl font-light text-white">
               GameFi Marketing <span className="serif-italic">Services</span>
@@ -190,7 +191,10 @@ const GameFiService = () => {
             {gamefiFeatures.map((feature, index) => (
               <div 
                 key={index}
-                className="flex items-center gap-4 p-4 border border-white/10 rounded-xl hover:border-white/20 transition-colors"
+                className={`flex items-center gap-4 p-4 border border-white/10 rounded-xl hover:border-primary/40 hover:bg-white/5 transition-all duration-500 ${
+                  featuresVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'
+                }`}
+                style={{ transitionDelay: `${300 + index * 100}ms` }}
               >
                 <Check className="w-5 h-5 text-primary flex-shrink-0" />
                 <span className="text-white/80">{feature}</span>
@@ -198,7 +202,7 @@ const GameFiService = () => {
             ))}
           </div>
           
-          <div className="mt-12 flex justify-center">
+          <div className={`mt-12 flex justify-center transition-all duration-700 ${featuresVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: '800ms' }}>
             <Link to="/contact" className="lunar-btn-outline group">
               <span>Get Started</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
