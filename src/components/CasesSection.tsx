@@ -4,15 +4,12 @@ import { ArrowUpRight } from "lucide-react";
 import TiltCard from "@/components/TiltCard";
 
 // Import logos
-import bnbLogo from "@/assets/logos/bnb.svg";
-import kucoinLogo from "@/assets/logos/kucoin.svg";
+import bnbLogo from "@/assets/logos/bnb.png";
+import kucoinLogo from "@/assets/logos/kucoin.png";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import peaqLogo from "@/assets/logos/peaq.png";
 import storyLogo from "@/assets/logos/story-protocol.png";
-import megaethLogo from "@/assets/logos/megaeth.png";
-import triaLogo from "@/assets/logos/tria.png";
-import bybitLogo from "@/assets/logos/bybit.png";
 
 const cases = [
   {
@@ -68,33 +65,6 @@ const cases = [
     category: "IP Protocol",
     bgStyle: "bg-gradient-to-br from-[#FF6B6B] via-[#E5484D] to-[#C92A2A]",
     decorations: "story",
-  },
-  {
-    name: "MegaETH",
-    logo: megaethLogo,
-    slug: "megaeth",
-    result: "+500% Korean Engagement",
-    category: "Layer 2",
-    bgStyle: "bg-gradient-to-br from-[#1a1a2e] via-[#3C4DBB] to-[#627EEA]",
-    decorations: "megaeth",
-  },
-  {
-    name: "Tria",
-    logo: triaLogo,
-    slug: "tria",
-    result: "30K+ Korean Wallets",
-    category: "Wallet",
-    bgStyle: "bg-gradient-to-br from-[#FF9500] via-[#FFB347] to-[#FF7F00]",
-    decorations: "tria",
-  },
-  {
-    name: "Bybit",
-    logo: bybitLogo,
-    slug: "bybit",
-    result: "#2 Korean Exchange Traffic",
-    category: "Exchange",
-    bgStyle: "bg-gradient-to-br from-[#F7A600] via-[#FFB800] to-[#E69500]",
-    decorations: "bybit",
   },
 ];
 
@@ -195,64 +165,6 @@ const CardDecorations = ({ type }: { type: string }) => {
           <div className="absolute top-1/3 left-1/4 w-6 h-6 rounded-full bg-red-200/50" />
           <div className="absolute bottom-1/4 right-0 w-1/2 h-px bg-white/20" />
           <div className="absolute bottom-1/4 right-0 w-1/3 h-px bg-white/20 translate-y-3" />
-        </>
-      );
-    case "megaeth":
-      return (
-        <>
-          <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-blue-400/60 via-transparent to-transparent transform -rotate-2" />
-          <div className="absolute top-1/3 left-0 w-3/4 h-px bg-gradient-to-r from-blue-300/40 via-transparent to-transparent" />
-          <div className="absolute top-2/5 left-0 w-1/2 h-px bg-gradient-to-r from-blue-200/30 via-transparent to-transparent transform rotate-1" />
-          <div className="absolute -top-20 right-0 w-60 h-60 bg-gradient-to-bl from-blue-400/40 to-transparent blur-2xl" />
-          <div className="absolute bottom-0 right-0 w-1/2 h-full opacity-20" style={{
-            backgroundImage: 'repeating-linear-gradient(-45deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px)'
-          }} />
-          <div className="absolute bottom-20 right-20 w-12 h-2 bg-blue-400/50 rounded-full blur-sm" />
-        </>
-      );
-    case "tria":
-      return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100">
-            {[...Array(12)].map((_, i) => (
-              <line
-                key={i}
-                x1="50"
-                y1="50"
-                x2={50 + 45 * Math.cos((i * 30 * Math.PI) / 180)}
-                y2={50 + 45 * Math.sin((i * 30 * Math.PI) / 180)}
-                stroke="white"
-                strokeWidth="0.5"
-              />
-            ))}
-          </svg>
-          <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-gradient-to-t from-orange-300/40 to-amber-200/20" />
-          <div className="absolute top-10 right-16 w-12 h-12 rounded-full border-2 border-white/30" />
-          <div className="absolute top-1/2 left-10 w-6 h-6 bg-white/20 rounded-full" />
-        </>
-      );
-    case "bybit":
-      return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,90 L30,70 L50,75 L70,40 L100,20" stroke="#FFD700" strokeWidth="2" fill="none" />
-            <path d="M0,90 L30,70 L50,75 L70,40 L100,20 L100,100 L0,100 Z" fill="url(#goldGradient)" />
-            <defs>
-              <linearGradient id="goldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="rgba(255,215,0,0.3)" />
-                <stop offset="100%" stopColor="transparent" />
-              </linearGradient>
-            </defs>
-          </svg>
-          <div className="absolute inset-0 opacity-10">
-            <div className="w-full h-full" style={{ 
-              backgroundImage: 'linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)',
-              backgroundSize: '25px 25px'
-            }} />
-          </div>
-          <div className="absolute top-10 right-20 w-2 h-2 bg-yellow-200 rounded-full shadow-lg shadow-yellow-300/50" />
-          <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-amber-200 rounded-full shadow-lg shadow-amber-300/50" />
-          <div className="absolute bottom-1/4 left-1/3 w-1.5 h-1.5 bg-yellow-100 rounded-full" />
         </>
       );
     default:
