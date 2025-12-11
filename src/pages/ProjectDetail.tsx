@@ -503,16 +503,16 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Strategy & Services Section */}
-      <section className="py-24 bg-muted/30">
+      {/* Our Approach - Strategy & Results Combined */}
+      <section className="py-16 bg-muted/30">
         <div className="container mx-auto max-w-6xl px-4">
           <span className="number-badge text-muted-foreground mb-4 block">[ 01 ]</span>
           <h2 className="text-4xl md:text-5xl font-light text-foreground mb-8">
-            Our <span className="serif-italic">Strategy</span>
+            Our <span className="serif-italic">Approach</span>
           </h2>
 
           {/* Services Tags */}
-          <div className="flex flex-wrap gap-3 mb-12">
+          <div className="flex flex-wrap gap-3 mb-8">
             {project.services.map((service, index) => (
               <span key={index} className="lunar-tag-light">
                 {service}
@@ -520,49 +520,53 @@ const ProjectDetail = () => {
             ))}
           </div>
           
-          <div className="grid md:grid-cols-2 gap-6">
-            {project.strategy.map((item, index) => (
-              <div key={index} className="flex items-start gap-4 p-6 rounded-xl bg-background border border-border/50">
-                <CheckCircle className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
-                <p className="text-foreground">{item}</p>
+          {/* Two Column Layout */}
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Strategy Column */}
+            <div>
+              <h3 className="text-lg font-semibold text-foreground mb-4 uppercase tracking-wider">Strategy</h3>
+              <div className="space-y-3">
+                {project.strategy.map((item, index) => (
+                  <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-background border border-border/50">
+                    <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <p className="text-foreground text-sm">{item}</p>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            {/* Results Column */}
+            <div>
+              <h3 className="text-lg font-semibold text-foreground mb-4 uppercase tracking-wider">Results</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {project.results.map((result, index) => (
+                  <div key={index} className={`p-4 rounded-lg ${project.bgStyle}`}>
+                    <p className="text-2xl md:text-3xl font-bold text-white mb-1">{result.value}</p>
+                    <p className="text-white/80 text-xs">{result.metric}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Results Section */}
-      <section className="py-24 bg-background">
+      {/* Gallery Section - Horizontal Scroll */}
+      <section className="py-16 bg-background">
         <div className="container mx-auto max-w-6xl px-4">
           <span className="number-badge text-muted-foreground mb-4 block">[ 02 ]</span>
-          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-12">
-            The <span className="serif-italic">Results</span>
-          </h2>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {project.results.map((result, index) => (
-              <div key={index} className={`p-6 rounded-xl ${project.bgStyle}`}>
-                <p className="text-3xl md:text-4xl font-bold text-white mb-2">{result.value}</p>
-                <p className="text-white/80 text-sm">{result.metric}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Gallery Section */}
-      <section className="py-24 bg-muted/30">
-        <div className="container mx-auto max-w-6xl px-4">
-          <span className="number-badge text-muted-foreground mb-4 block">[ 03 ]</span>
-          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-12">
+          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-8">
             Campaign <span className="serif-italic">Highlights</span>
           </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        </div>
+        
+        {/* Horizontal Scroll Container */}
+        <div className="overflow-x-auto scrollbar-hide">
+          <div className="flex gap-4 px-4 pb-4" style={{ width: 'max-content' }}>
             {project.gallery.map((item, index) => (
               <div 
                 key={index} 
-                className="relative aspect-video rounded-2xl overflow-hidden group cursor-pointer"
+                className="relative w-72 md:w-80 aspect-[4/3] rounded-xl overflow-hidden group cursor-pointer flex-shrink-0"
                 onClick={() => openLightbox(index)}
               >
                 <img
@@ -575,14 +579,14 @@ const ProjectDetail = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
                 
                 {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="text-white font-semibold text-lg mb-1">{item.title}</h3>
-                  <p className="text-white/70 text-sm">{item.description}</p>
+                <div className="absolute bottom-0 left-0 right-0 p-4">
+                  <h3 className="text-white font-semibold text-sm mb-1">{item.title}</h3>
+                  <p className="text-white/70 text-xs line-clamp-2">{item.description}</p>
                 </div>
 
                 {/* Expand Icon */}
-                <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowUpRight className="w-5 h-5 text-white" />
+                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ArrowUpRight className="w-4 h-4 text-white" />
                 </div>
               </div>
             ))}
@@ -590,24 +594,53 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-
-      {/* Next Project */}
-      <section className={`py-24 ${nextProject.bgStyle}`}>
+      {/* Next Project - Enhanced */}
+      <section className="py-16 bg-muted/30">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-            <div>
-              <p className="text-white/70 text-sm uppercase tracking-wider mb-2">Next Project</p>
-              <h3 className="text-4xl md:text-5xl font-bold text-white">{nextProject.name}</h3>
-              <p className="text-white/80 mt-2">{nextProject.category}</p>
+          <p className="text-muted-foreground text-sm uppercase tracking-wider mb-6">Next Project</p>
+          
+          <Link 
+            to={`/projects/${nextSlug}`}
+            className="block group"
+          >
+            <div className="grid md:grid-cols-2 gap-6 items-center">
+              {/* Preview Image */}
+              <div className={`relative aspect-[16/10] rounded-2xl overflow-hidden ${nextProject.bgStyle}`}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <img
+                    src={nextProject.logo}
+                    alt={nextProject.name}
+                    className="w-24 h-24 object-contain filter brightness-0 invert opacity-90 group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                {/* Hover Arrow */}
+                <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ArrowUpRight className="w-5 h-5 text-white" />
+                </div>
+              </div>
+
+              {/* Project Info */}
+              <div>
+                <span className="text-xs uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">
+                  {nextProject.category}
+                </span>
+                <h3 className="text-3xl md:text-4xl font-bold text-foreground mt-3 mb-2 group-hover:text-primary transition-colors">
+                  {nextProject.name}
+                </h3>
+                <p className="text-muted-foreground mb-4">{nextProject.result}</p>
+                
+                {/* Key Metrics Preview */}
+                <div className="flex gap-4">
+                  {nextProject.metrics.slice(0, 2).map((metric, index) => (
+                    <div key={index} className="text-left">
+                      <p className="text-lg font-bold text-foreground">{metric.value}</p>
+                      <p className="text-xs text-muted-foreground">{metric.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-            <Link
-              to={`/projects/${nextSlug}`}
-              className="flex items-center gap-3 px-8 py-4 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
-            >
-              <span>View Project</span>
-              <ArrowUpRight className="w-5 h-5" />
-            </Link>
-          </div>
+          </Link>
         </div>
       </section>
 
