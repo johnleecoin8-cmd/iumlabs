@@ -25,20 +25,20 @@ const TeamSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1 bg-[hsl(0,0%,96%)] relative overflow-hidden min-h-screen">
+    <div ref={ref} className="py-24 px-4 flex-1 bg-[hsl(0,0%,6%)] relative overflow-hidden min-h-screen">
       <div className="container mx-auto max-w-7xl relative">
         {/* Header */}
         <div className={`flex items-center justify-between mb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="number-badge text-[hsl(0,0%,40%)]">Team of 2 People</span>
+          <span className="number-badge text-white/50">Team of 2 People</span>
         </div>
 
         {/* Giant Typography - Centered */}
         <div className={`text-center mb-20 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-light leading-none tracking-tight">
-            <span className="text-transparent bg-clip-text" style={{ WebkitTextStroke: '2px hsl(0 0% 20%)' }}>
+            <span className="text-transparent bg-clip-text" style={{ WebkitTextStroke: '2px hsl(0 0% 40%)' }}>
               Our
             </span>
-            <span className="serif-italic text-transparent bg-clip-text ml-4" style={{ WebkitTextStroke: '2px hsl(0 0% 20%)' }}>
+            <span className="serif-italic text-transparent bg-clip-text ml-4" style={{ WebkitTextStroke: '2px hsl(0 0% 40%)' }}>
               Team
             </span>
           </h2>
@@ -48,7 +48,7 @@ const TeamSection = () => {
         <div className={`relative h-[600px] md:h-[500px] transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* James Card - Left */}
           <div className="absolute left-0 md:left-[5%] top-0 w-[280px] md:w-[320px] group">
-            <div className="relative rounded-2xl overflow-hidden shadow-xl bg-white">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl bg-[hsl(0,0%,10%)] border border-white/10">
               {/* Photo */}
               <div className="relative h-[350px] md:h-[400px]">
                 <img
@@ -83,15 +83,15 @@ const TeamSection = () => {
               {/* Info */}
               <div className="p-4">
                 <p className="text-primary text-sm font-medium mb-1">{team[0].role}</p>
-                <h3 className="text-xl font-semibold text-[hsl(0,0%,8%)] mb-2">{team[0].name}</h3>
-                <p className="text-xs text-[hsl(0,0%,50%)] leading-relaxed">{team[0].background}</p>
+                <h3 className="text-xl font-semibold text-white mb-2">{team[0].name}</h3>
+                <p className="text-xs text-white/50 leading-relaxed">{team[0].background}</p>
               </div>
             </div>
           </div>
 
           {/* David Card - Right */}
           <div className="absolute right-0 md:right-[5%] top-20 md:top-10 w-[280px] md:w-[320px] group">
-            <div className="relative rounded-2xl overflow-hidden shadow-xl bg-white">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl bg-[hsl(0,0%,10%)] border border-white/10">
               {/* Photo */}
               <div className="relative h-[350px] md:h-[400px]">
                 <img
@@ -126,8 +126,8 @@ const TeamSection = () => {
               {/* Info */}
               <div className="p-4">
                 <p className="text-primary text-sm font-medium mb-1">{team[1].role}</p>
-                <h3 className="text-xl font-semibold text-[hsl(0,0%,8%)] mb-2">{team[1].name}</h3>
-                <p className="text-xs text-[hsl(0,0%,50%)] leading-relaxed">{team[1].background}</p>
+                <h3 className="text-xl font-semibold text-white mb-2">{team[1].name}</h3>
+                <p className="text-xs text-white/50 leading-relaxed">{team[1].background}</p>
               </div>
             </div>
           </div>

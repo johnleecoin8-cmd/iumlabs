@@ -52,9 +52,9 @@
     --dark-bg: 0 0% 4%;
     --dark-fg: 0 0% 100%;
 
-    /* Light section variables (for Team, Blog) */
-    --light-bg: 0 0% 96%;
-    --light-fg: 0 0% 8%;
+    /* Light section variables - Now also dark for full dark theme */
+    --light-bg: 0 0% 6%;
+    --light-fg: 0 0% 95%;
 
     /* Lunar Strategy Blue */
     --lunar-blue: 217 91% 60%;
