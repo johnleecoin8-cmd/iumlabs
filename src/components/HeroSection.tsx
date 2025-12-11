@@ -81,8 +81,13 @@ const HeroSection = () => {
             <span className="text-white">Agency</span>
           </h1>
 
+          {/* Subtext - Lunar Strategy style */}
+          <p className="text-base sm:text-lg text-white/60 max-w-xl mx-auto mb-8 opacity-0 animate-fade-up stagger-2">
+            Since 2023, we've worked together with <span className="text-white font-medium">200+ ecosystems</span> and projects in the Korean Crypto space.
+          </p>
+
           {/* CTA Button */}
-          <div className="opacity-0 animate-fade-up stagger-2 mt-6 sm:mt-10">
+          <div className="opacity-0 animate-fade-up stagger-3 mt-4 sm:mt-6">
             <CalendlyButton className="lunar-btn text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 hover-glow">
               <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
               <span>Book a Free Consultation</span>
