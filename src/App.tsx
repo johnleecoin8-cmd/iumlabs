@@ -8,7 +8,6 @@ import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
-import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Research from "./pages/Research";
 import ResearchDetail from "./pages/ResearchDetail";
@@ -49,7 +48,6 @@ const AppRoutes = () => {
         <Route path="/services/gamefi" element={<GameFiService />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
-        <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/research" element={<Research />} />
         <Route path="/research/:slug" element={<ResearchDetail />} />

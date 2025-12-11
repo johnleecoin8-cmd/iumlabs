@@ -46,7 +46,6 @@ export const navigation = {
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
     { name: "Research", href: "/research" },
-    { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ],
   ctaButton: "Get Started",
@@ -285,9 +284,8 @@ export const footer = {
     { name: "GameFi Marketing", href: "/services/gamefi" },
   ],
   company: [
-    { name: "About Us", href: "/about" },
     { name: "Case Studies", href: "/projects" },
-    { name: "Blog", href: "/blog" },
+    { name: "Research", href: "/research" },
     { name: "Contact", href: "/contact" },
   ],
   social: ["LinkedIn", "Telegram", "Twitter"],
