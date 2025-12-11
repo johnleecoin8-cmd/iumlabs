@@ -1137,6 +1137,293 @@
 }
 
 /* ============================================
+   PHASE 1-2: SECTION BACKGROUND ANIMATIONS
+   ============================================ */
+
+/* Gradient Mesh Animation */
+@keyframes gradient-mesh {
+  0%, 100% { 
+    background-position: 0% 50%; 
+    transform: scale(1);
+  }
+  25% {
+    background-position: 50% 0%;
+  }
+  50% { 
+    background-position: 100% 50%;
+    transform: scale(1.02);
+  }
+  75% {
+    background-position: 50% 100%;
+  }
+}
+
+.animate-gradient-mesh {
+  animation: gradient-mesh 20s ease-in-out infinite;
+}
+
+/* Star Twinkle Animation */
+@keyframes twinkle {
+  0%, 100% { 
+    opacity: 0.3; 
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.3);
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Aurora Background Animation */
+@keyframes aurora-bg {
+  0%, 100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateX(2%) translateY(-1%) rotate(0.5deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-1%) translateY(2%) rotate(-0.5deg);
+    opacity: 0.9;
+  }
+  75% {
+    transform: translateX(-2%) translateY(-1%) rotate(0.5deg);
+    opacity: 1;
+  }
+}
+
+.animate-aurora-bg {
+  animation: aurora-bg 15s ease-in-out infinite;
+}
+
+/* Particle Float Animation */
+@keyframes particle-float {
+  0%, 100% { 
+    transform: translateY(0) translateX(0) rotate(0deg);
+    opacity: 0.1;
+  }
+  25% { 
+    transform: translateY(-30px) translateX(15px) rotate(90deg);
+    opacity: 0.2;
+  }
+  50% { 
+    transform: translateY(-10px) translateX(30px) rotate(180deg);
+    opacity: 0.15;
+  }
+  75% { 
+    transform: translateY(20px) translateX(15px) rotate(270deg);
+    opacity: 0.2;
+  }
+}
+
+.animate-particle-float {
+  animation: particle-float 12s ease-in-out infinite;
+}
+
+/* Glow Pulse Animation */
+@keyframes glow-pulse {
+  0%, 100% { 
+    opacity: 0.15;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% { 
+    opacity: 0.25;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 6s ease-in-out infinite;
+}
+
+/* Slow Float for Section Elements */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotate(2deg);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+/* Shine Sweep Animation */
+@keyframes shine-sweep {
+  0% { 
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% { 
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+.animate-shine-sweep {
+  animation: shine-sweep 3s ease-in-out infinite;
+}
+
+/* Enhanced Card Glow */
+.card-glow {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-glow::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, 
+    hsl(var(--primary) / 0.3) 0%, 
+    transparent 50%, 
+    hsl(var(--primary) / 0.2) 100%
+  );
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: -1;
+  filter: blur(8px);
+}
+
+.card-glow:hover::before {
+  opacity: 1;
+}
+
+.card-glow:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 10px 40px hsl(var(--primary) / 0.15),
+    0 0 60px hsl(var(--primary) / 0.1);
+}
+
+/* Service Card Enhanced Hover */
+.service-card-enhanced {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.service-card-enhanced::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(var(--primary) / 0.05),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.service-card-enhanced:hover::after {
+  left: 100%;
+}
+
+.service-card-enhanced:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 
+    0 20px 50px hsl(0 0% 0% / 0.2),
+    0 0 40px hsl(var(--primary) / 0.1);
+}
+
+/* Testimonial Card Enhanced */
+.testimonial-card-enhanced {
+  position: relative;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.testimonial-card-enhanced::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, 
+    transparent 0%,
+    hsl(45 100% 50% / 0.3) 50%,
+    transparent 100%
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.testimonial-card-enhanced:hover::before {
+  opacity: 1;
+}
+
+.testimonial-card-enhanced:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 25px 60px hsl(0 0% 0% / 0.25),
+    0 0 30px hsl(45 100% 50% / 0.1);
+}
+
+/* Project Card 3D Depth */
+.project-card-3d {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+.project-card-3d:hover {
+  transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+  box-shadow: 
+    0 30px 60px hsl(0 0% 0% / 0.3),
+    0 0 40px hsl(var(--primary) / 0.15);
+}
+
+/* Section Divider Animated */
+.section-divider-animated {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    hsl(var(--border)) 20%,
+    hsl(var(--border)) 80%,
+    transparent 100%
+  );
+  overflow: hidden;
+}
+
+.section-divider-animated::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent,
+    hsl(var(--primary) / 0.5),
+    transparent
+  );
+  animation: divider-sweep 4s ease-in-out infinite;
+}
+
+@keyframes divider-sweep {
+  0%, 100% { left: -50%; }
+  50% { left: 100%; }
+}
+
+/* ============================================
    PHASE 8: RESPONSIVE OPTIMIZATIONS
    ============================================ */
 

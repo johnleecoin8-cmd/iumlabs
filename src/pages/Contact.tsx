@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, Clock, Globe } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, Clock, Globe, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
@@ -12,6 +12,8 @@ import Planet3D from "@/components/Planet3D";
 import TeamContactCard from "@/components/TeamContactCard";
 import TrustBadge from "@/components/TrustBadge";
 import ClientLogoMarquee from "@/components/ClientLogoMarquee";
+import SectionBackground from "@/components/SectionBackground";
+import FloatingSectionElements from "@/components/FloatingSectionElements";
 import marsSurface from "@/assets/backgrounds/mars-surface.jpg";
 
 const budgetOptions = [
@@ -205,8 +207,27 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Section - 2 Column Layout */}
-      <section className="section-mars-dark py-24 px-4">
+      {/* Contact Section - 2 Column Layout with Enhanced Background */}
+      <section className="section-mars-dark py-24 px-4 relative">
+        {/* Dynamic Background Effects */}
+        <SectionBackground type="glow-orbs" theme="mars" intensity={0.5} />
+        <SectionBackground type="particles" theme="mars" intensity={0.4} />
+        <SectionBackground type="grid" theme="mars" intensity={0.3} />
+        
+        {/* Floating Elements */}
+        <FloatingSectionElements
+          scrollY={scrollY}
+          parallaxMultiplier={0.03}
+          elements={[
+            { type: "icon", content: <Mail className="w-5 h-5" />, position: { top: "10%", left: "4%" }, color: "bg-red-500/20 text-red-400" },
+            { type: "icon", content: <Phone className="w-5 h-5" />, position: { top: "30%", right: "3%" }, color: "bg-orange-500/20 text-orange-400" },
+            { type: "icon", content: <Globe className="w-5 h-5" />, position: { bottom: "35%", left: "5%" }, color: "bg-amber-500/20 text-amber-400" },
+            { type: "icon", content: <MessageCircle className="w-5 h-5" />, position: { bottom: "20%", right: "6%" }, color: "bg-rose-500/20 text-rose-400" },
+            { type: "tag", content: "24/7", position: { top: "22%", right: "10%" }, color: "bg-red-500/20 text-red-300" },
+            { type: "tag", content: "Seoul", position: { bottom: "28%", right: "4%" }, color: "bg-orange-500/20 text-orange-300" },
+          ]}
+        />
+        
         <div className="container mx-auto max-w-7xl relative z-10">
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Left Column - Team & Info */}

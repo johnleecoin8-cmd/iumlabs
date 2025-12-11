@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, Calendar, Star, Quote, Shield, ExternalLink, Mail, Send, Phone } from "lucide-react";
+import { ArrowRight, Calendar, Star, Quote, Shield, ExternalLink, Mail, Send, Phone, Lightbulb, Rocket, Target, Globe } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -7,9 +7,10 @@ import CalendlyButton from "@/components/CalendlyButton";
 import Planet3D from "@/components/Planet3D";
 import TeamContactCard from "@/components/TeamContactCard";
 import ClientLogoMarquee from "@/components/ClientLogoMarquee";
+import SectionBackground from "@/components/SectionBackground";
+import FloatingSectionElements from "@/components/FloatingSectionElements";
 import { brand } from "@/config/content";
 import sunCorona from "@/assets/backgrounds/sun-corona.jpg";
-
 // Service images
 import kolNetworkImg from "@/assets/services/kol-network.jpg";
 import communityGrowthImg from "@/assets/services/community-growth.jpg";
@@ -245,8 +246,26 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services List - Sun Theme */}
-      <section ref={servicesRef} className="section-sun-light py-24">
+      {/* Services List - Sun Theme with Enhanced Background */}
+      <section ref={servicesRef} className="section-sun-light py-24 relative">
+        {/* Dynamic Background Effects */}
+        <SectionBackground type="gradient-mesh" theme="sun" intensity={0.6} />
+        <SectionBackground type="glow-orbs" theme="sun" intensity={0.4} />
+        
+        {/* Floating Elements */}
+        <FloatingSectionElements
+          scrollY={scrollY}
+          parallaxMultiplier={0.03}
+          elements={[
+            { type: "icon", content: <Lightbulb className="w-5 h-5" />, position: { top: "10%", left: "3%" }, color: "bg-amber-100/80 text-amber-600" },
+            { type: "icon", content: <Rocket className="w-5 h-5" />, position: { top: "30%", right: "4%" }, color: "bg-orange-100/80 text-orange-600" },
+            { type: "icon", content: <Target className="w-5 h-5" />, position: { bottom: "25%", left: "5%" }, color: "bg-yellow-100/80 text-yellow-600" },
+            { type: "tag", content: "Growth", position: { top: "20%", right: "10%" }, color: "bg-amber-50/90 text-amber-700" },
+            { type: "tag", content: "Strategy", position: { bottom: "35%", right: "3%" }, color: "bg-orange-50/90 text-orange-700" },
+            { type: "tag", content: "Results", position: { top: "50%", left: "2%" }, color: "bg-yellow-50/90 text-yellow-700" },
+          ]}
+        />
+        
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
           {services.map((service, index) => (
             <div
@@ -318,8 +337,26 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Testimonials Section - with Trust Badges */}
-      <section ref={testimonialsRef} className="section-sun-dark section-stars py-24">
+      {/* Testimonials Section - with Enhanced Background */}
+      <section ref={testimonialsRef} className="section-sun-dark py-24 relative">
+        {/* Dynamic Background Effects */}
+        <SectionBackground type="stars" theme="sun" intensity={0.8} />
+        <SectionBackground type="aurora" theme="sun" intensity={0.5} />
+        <SectionBackground type="glow-orbs" theme="sun" intensity={0.3} />
+        
+        {/* Floating Elements */}
+        <FloatingSectionElements
+          scrollY={scrollY}
+          parallaxMultiplier={0.04}
+          elements={[
+            { type: "icon", content: <Star className="w-5 h-5 fill-current" />, position: { top: "12%", left: "5%" }, color: "bg-amber-500/20 text-amber-400", delay: 0 },
+            { type: "icon", content: <Quote className="w-5 h-5" />, position: { top: "18%", right: "8%" }, color: "bg-yellow-500/20 text-yellow-400", delay: 0.5 },
+            { type: "shape", content: "★", position: { top: "45%", left: "2%" }, color: "text-amber-400", size: "lg", delay: 1 },
+            { type: "tag", content: "5★ Rated", position: { bottom: "20%", right: "5%" }, color: "bg-amber-500/20 text-amber-300", delay: 1.5 },
+            { type: "shape", content: "✦", position: { bottom: "30%", left: "8%" }, color: "text-yellow-400", size: "md", delay: 2 },
+          ]}
+        />
+        
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
           {/* Header with Trust Badges */}
           <div className={`flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 transition-all duration-700 ${

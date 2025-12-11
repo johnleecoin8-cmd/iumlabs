@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
-import { Linkedin, Send, Calendar, Mail } from "lucide-react";
+import { Linkedin, Send, Calendar, Mail, Users, Award, Target } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { images } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
@@ -10,6 +10,8 @@ import Planet3D from "@/components/Planet3D";
 import TeamContactCard from "@/components/TeamContactCard";
 import TrustBadge from "@/components/TrustBadge";
 import ClientLogoMarquee from "@/components/ClientLogoMarquee";
+import SectionBackground from "@/components/SectionBackground";
+import FloatingSectionElements from "@/components/FloatingSectionElements";
 import earthSpace from "@/assets/backgrounds/earth-space.jpg";
 
 const stats = [
@@ -172,8 +174,24 @@ const About = () => {
         </div>
       </section>
 
-      {/* Mission Section - Earth Theme */}
-      <section ref={ref} className="section-earth-light py-24 px-4">
+      {/* Mission Section - Earth Theme with Enhanced Background */}
+      <section ref={ref} className="section-earth-light py-24 px-4 relative">
+        {/* Dynamic Background Effects */}
+        <SectionBackground type="gradient-mesh" theme="earth" intensity={0.5} />
+        <SectionBackground type="glow-orbs" theme="earth" intensity={0.3} />
+        
+        {/* Floating Elements */}
+        <FloatingSectionElements
+          scrollY={scrollY}
+          parallaxMultiplier={0.025}
+          elements={[
+            { type: "icon", content: <Target className="w-5 h-5" />, position: { top: "12%", left: "3%" }, color: "bg-blue-100/80 text-blue-600" },
+            { type: "icon", content: <Award className="w-5 h-5" />, position: { top: "35%", right: "4%" }, color: "bg-cyan-100/80 text-cyan-600" },
+            { type: "tag", content: "Mission", position: { top: "20%", right: "12%" }, color: "bg-sky-50/90 text-sky-700" },
+            { type: "tag", content: "Vision", position: { bottom: "30%", left: "5%" }, color: "bg-blue-50/90 text-blue-700" },
+          ]}
+        />
+        
         <div className="container mx-auto max-w-7xl relative z-10">
           <div className={`grid lg:grid-cols-2 gap-16 items-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {/* Left - Image */}
@@ -223,8 +241,25 @@ const About = () => {
         </div>
       </section>
 
-      {/* Team Section - Earth Dark Theme with Stars */}
-      <section className="section-earth-dark section-stars py-24 px-4">
+      {/* Team Section - Earth Dark Theme with Enhanced Background */}
+      <section className="section-earth-dark py-24 px-4 relative">
+        {/* Dynamic Background Effects */}
+        <SectionBackground type="stars" theme="earth" intensity={0.7} />
+        <SectionBackground type="aurora" theme="earth" intensity={0.4} />
+        <SectionBackground type="particles" theme="earth" intensity={0.3} />
+        
+        {/* Floating Elements */}
+        <FloatingSectionElements
+          scrollY={scrollY}
+          parallaxMultiplier={0.035}
+          elements={[
+            { type: "icon", content: <Users className="w-5 h-5" />, position: { top: "8%", left: "4%" }, color: "bg-cyan-500/20 text-cyan-400" },
+            { type: "tag", content: "Founded 2023", position: { top: "15%", right: "8%" }, color: "bg-blue-500/20 text-blue-300" },
+            { type: "tag", content: "200+ Projects", position: { bottom: "25%", left: "3%" }, color: "bg-teal-500/20 text-teal-300" },
+            { type: "shape", content: "◎", position: { top: "40%", right: "3%" }, color: "text-cyan-400", size: "lg" },
+          ]}
+        />
+        
         <div className="container mx-auto max-w-7xl relative z-10">
           {/* Giant Header */}
           <div className="mb-20">

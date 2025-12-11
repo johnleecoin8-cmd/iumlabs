@@ -4,10 +4,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import TiltCard from "@/components/TiltCard";
-import { ArrowUpRight, Calendar, Star, Quote, Filter } from "lucide-react";
+import { ArrowUpRight, Calendar, Star, Quote, Filter, Layers, Zap, Trophy } from "lucide-react";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
 import Planet3D from "@/components/Planet3D";
+import SectionBackground from "@/components/SectionBackground";
+import FloatingSectionElements from "@/components/FloatingSectionElements";
 import saturnRings from "@/assets/backgrounds/saturn-rings.jpg";
 
 // Import logos
@@ -326,8 +328,27 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Projects Grid - Saturn Theme */}
-      <section ref={ref} className="section-saturn-dark section-stars py-16 px-4">
+      {/* Projects Grid - Saturn Theme with Enhanced Background */}
+      <section ref={ref} className="section-saturn-dark py-16 px-4 relative">
+        {/* Dynamic Background Effects */}
+        <SectionBackground type="stars" theme="saturn" intensity={0.7} />
+        <SectionBackground type="aurora" theme="saturn" intensity={0.4} />
+        <SectionBackground type="particles" theme="saturn" intensity={0.5} />
+        
+        {/* Floating Elements */}
+        <FloatingSectionElements
+          scrollY={scrollY}
+          parallaxMultiplier={0.03}
+          elements={[
+            { type: "icon", content: <Layers className="w-5 h-5" />, position: { top: "8%", left: "3%" }, color: "bg-purple-500/20 text-purple-400" },
+            { type: "icon", content: <Zap className="w-5 h-5" />, position: { top: "25%", right: "4%" }, color: "bg-pink-500/20 text-pink-400" },
+            { type: "icon", content: <Trophy className="w-5 h-5" />, position: { bottom: "30%", left: "5%" }, color: "bg-fuchsia-500/20 text-fuchsia-400" },
+            { type: "tag", content: "200+", position: { top: "15%", right: "10%" }, color: "bg-purple-500/20 text-purple-300" },
+            { type: "tag", content: "Success", position: { bottom: "20%", right: "3%" }, color: "bg-pink-500/20 text-pink-300" },
+            { type: "shape", content: "◆", position: { top: "45%", left: "2%" }, color: "text-violet-400", size: "lg" },
+          ]}
+        />
+        
         <div className="container mx-auto max-w-7xl relative z-10">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCases.map((caseItem, index) => (
