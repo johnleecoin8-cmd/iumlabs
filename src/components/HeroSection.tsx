@@ -4,8 +4,8 @@ import CalendlyButton from "./CalendlyButton";
 import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
 
 // Import client logos
-import bnbLogo from "@/assets/logos/bnb.svg";
-import kucoinLogo from "@/assets/logos/kucoin.svg";
+import bnbLogo from "@/assets/logos/bnb.png";
+import kucoinLogo from "@/assets/logos/kucoin.png";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
