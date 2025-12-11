@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
-import seoulHanriverTwilight from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
+import sunCorona from "@/assets/backgrounds/sun-corona.jpg";
 
 // Service images
 import kolNetworkImg from "@/assets/services/kol-network.jpg";
@@ -100,15 +100,15 @@ const testimonials = [
 ];
 
 const floatingTags = [
-  { label: "Responsible", top: "22%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-rose-400 text-white" },
-  { label: "Creative", top: "32%", left: "22%", mobileTop: "15%", mobileRight: "3%", color: "bg-amber-400 text-black" },
-  { label: "Innovation-Oriented", top: "42%", left: "2%", mobileTop: "75%", mobileLeft: "3%", color: "bg-white text-black border border-black" },
-  { label: "Resourceful", top: "48%", left: "28%", mobileBottom: "18%", mobileRight: "3%", color: "bg-orange-400 text-white" },
-  { label: "Strategic", bottom: "28%", left: "25%", mobileBottom: "10%", mobileLeft: "3%", color: "bg-sky-400 text-black" },
-  { label: "Responsible", top: "20%", right: "15%", color: "bg-white text-black border border-black" },
-  { label: "Attention to Detail", top: "30%", right: "5%", color: "bg-lime-400 text-black" },
-  { label: "Innovative", top: "48%", right: "8%", color: "bg-teal-400 text-black" },
-  { label: "Result-Driven Mindset", bottom: "22%", right: "18%", color: "bg-emerald-500 text-white" },
+  { label: "Responsible", top: "22%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-orange-400 text-white" },
+  { label: "Creative", top: "32%", left: "22%", mobileTop: "15%", mobileRight: "3%", color: "bg-yellow-400 text-black" },
+  { label: "Innovation-Oriented", top: "42%", left: "2%", mobileTop: "75%", mobileLeft: "3%", color: "bg-amber-300 text-black" },
+  { label: "Resourceful", top: "48%", left: "28%", mobileBottom: "18%", mobileRight: "3%", color: "bg-red-400 text-white" },
+  { label: "Strategic", bottom: "28%", left: "25%", mobileBottom: "10%", mobileLeft: "3%", color: "bg-orange-300 text-black" },
+  { label: "Trusted", top: "20%", right: "15%", color: "bg-yellow-300 text-black" },
+  { label: "Attention to Detail", top: "30%", right: "5%", color: "bg-amber-400 text-black" },
+  { label: "Innovative", top: "48%", right: "8%", color: "bg-orange-500 text-white" },
+  { label: "Result-Driven Mindset", bottom: "22%", right: "18%", color: "bg-yellow-500 text-black" },
 ];
 
 const Services = () => {
@@ -128,20 +128,20 @@ const Services = () => {
       
       {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Seoul Hanriver Twilight */}
+        {/* Background - Sun Corona */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${seoulHanriverTwilight})`,
-              filter: "brightness(0.5) saturate(1.2)",
+              backgroundImage: `url(${sunCorona})`,
+              filter: "brightness(0.6) saturate(1.3)",
             }}
           />
           
-          {/* Aurora light overlay - Twilight theme */}
+          {/* Aurora light overlay - Solar/Gold theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/25 via-transparent to-rose-500/15" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600/20 via-transparent to-amber-500/10" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-orange-600/30 via-transparent to-yellow-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-amber-600/25 via-transparent to-red-500/15" />
           </div>
           
           {/* Light sweep effect */}

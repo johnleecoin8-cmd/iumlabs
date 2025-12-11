@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
-import koreaPalaceModern from "@/assets/backgrounds/korea-palace-modern.jpg";
+import marsSurface from "@/assets/backgrounds/mars-surface.jpg";
 
 const budgetOptions = [
   "$5K - $10K",
@@ -25,14 +25,14 @@ const contactInfo = [
 ];
 
 const floatingTags = [
-  { label: "Let's Connect", top: "20%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-rose-400 text-white" },
-  { label: "24/7 Support", top: "30%", left: "22%", mobileTop: "15%", mobileRight: "3%", color: "bg-amber-300 text-black" },
-  { label: "Seoul Office", top: "48%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-white text-black" },
-  { label: "Fast Response", top: "52%", left: "26%", color: "bg-orange-400 text-white" },
-  { label: "Global Reach", top: "18%", right: "12%", color: "bg-emerald-400 text-black" },
-  { label: "Partnership", top: "32%", right: "5%", color: "bg-white text-black border border-black" },
-  { label: "Consultation", top: "50%", right: "10%", color: "bg-pink-400 text-white" },
-  { label: "Get Started", bottom: "25%", right: "18%", color: "bg-teal-400 text-black" },
+  { label: "Let's Connect", top: "20%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-red-400 text-white" },
+  { label: "24/7 Support", top: "30%", left: "22%", mobileTop: "15%", mobileRight: "3%", color: "bg-orange-400 text-black" },
+  { label: "Seoul Office", top: "48%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-amber-400 text-black" },
+  { label: "Fast Response", top: "52%", left: "26%", color: "bg-red-500 text-white" },
+  { label: "Global Reach", top: "18%", right: "12%", color: "bg-orange-300 text-black" },
+  { label: "Partnership", top: "32%", right: "5%", color: "bg-rose-400 text-white" },
+  { label: "Consultation", top: "50%", right: "10%", color: "bg-amber-500 text-black" },
+  { label: "Get Started", bottom: "25%", right: "18%", color: "bg-red-300 text-black" },
 ];
 
 const Contact = () => {
@@ -103,20 +103,20 @@ const Contact = () => {
       
       {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Korea Palace Modern */}
+        {/* Background - Mars Surface */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${koreaPalaceModern})`,
-              filter: "brightness(0.45) saturate(1.2)",
+              backgroundImage: `url(${marsSurface})`,
+              filter: "brightness(0.6) saturate(1.3)",
             }}
           />
           
-          {/* Aurora light overlay - Warm sunset theme */}
+          {/* Aurora light overlay - Mars red/orange theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-rose-600/25 via-transparent to-amber-500/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-orange-600/15 via-transparent to-pink-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-red-600/30 via-transparent to-orange-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-rose-600/25 via-transparent to-amber-500/15" />
           </div>
           
           {/* Light sweep effect */}

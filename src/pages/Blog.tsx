@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
-import seoulDdpNight from "@/assets/backgrounds/seoul-ddp-night.jpg";
+import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
 
 interface BlogPost {
   id: string;
@@ -75,14 +75,14 @@ const blogPosts: BlogPost[] = [
 const categories = ["All", "Guide", "Strategy", "Events", "Exchange"];
 
 const floatingTags = [
-  { label: "Insights", top: "20%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-fuchsia-400 text-white" },
+  { label: "Insights", top: "20%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-pink-400 text-white" },
   { label: "Guides", top: "32%", left: "20%", mobileTop: "15%", mobileRight: "3%", color: "bg-cyan-400 text-black" },
-  { label: "Strategy", top: "50%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-white text-black" },
-  { label: "Research", top: "52%", left: "24%", color: "bg-violet-400 text-white" },
-  { label: "Analysis", top: "18%", right: "12%", color: "bg-lime-400 text-black" },
-  { label: "Reports", top: "32%", right: "5%", color: "bg-white text-black border border-black" },
-  { label: "News", top: "50%", right: "10%", color: "bg-amber-400 text-black" },
-  { label: "Trends", bottom: "28%", right: "16%", color: "bg-rose-400 text-white" },
+  { label: "Strategy", top: "50%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-purple-400 text-white" },
+  { label: "Research", top: "52%", left: "24%", color: "bg-fuchsia-400 text-white" },
+  { label: "Analysis", top: "18%", right: "12%", color: "bg-cyan-300 text-black" },
+  { label: "Reports", top: "32%", right: "5%", color: "bg-pink-300 text-black" },
+  { label: "News", top: "50%", right: "10%", color: "bg-purple-300 text-black" },
+  { label: "Trends", bottom: "28%", right: "16%", color: "bg-fuchsia-500 text-white" },
 ];
 
 // Card style components
@@ -328,20 +328,20 @@ const Blog = () => {
       
       {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Seoul DDP Night */}
+        {/* Background - Cosmic Nebula */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${seoulDdpNight})`,
-              filter: "brightness(0.5) saturate(1.2)",
+              backgroundImage: `url(${cosmicNebula})`,
+              filter: "brightness(0.6) saturate(1.3)",
             }}
           />
           
-          {/* Aurora light overlay - Futuristic theme */}
+          {/* Aurora light overlay - Nebula pink/purple/cyan theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-fuchsia-600/20 via-transparent to-cyan-500/15" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-violet-600/15 via-transparent to-blue-500/10" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-pink-600/25 via-transparent to-cyan-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/20 via-transparent to-fuchsia-500/15" />
           </div>
           
           {/* Light sweep effect */}
