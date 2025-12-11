@@ -34,7 +34,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "CryptoBridge <onboarding@resend.dev>",
+        from: "CryptoBridge <noreply@fvroka.resend.app>",
         to: ["james@cryptobridgekorea.com"],
         subject: `New Contact Form Submission from ${name}`,
         html: `
@@ -91,7 +91,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "CryptoBridge Korea <onboarding@resend.dev>",
+        from: "CryptoBridge Korea <noreply@fvroka.resend.app>",
         to: [email],
         subject: "We received your inquiry - CryptoBridge Korea",
         html: `
