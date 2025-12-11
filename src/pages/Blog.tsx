@@ -1,10 +1,11 @@
-import { useState } from "react";
-import { ArrowRight, ArrowUpRight, Calendar, Clock } from "lucide-react";
+import { useState, useEffect } from "react";
+import { ArrowRight, ArrowUpRight, Calendar } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
+import constellationSpace from "@/assets/constellation-space.jpg";
 
 interface BlogPost {
   id: string;
@@ -82,9 +83,23 @@ const blogPosts: BlogPost[] = [
 
 const categories = ["All", "Guide", "Strategy", "Regulatory", "Community", "Events", "Exchange"];
 
+const floatingTags = [
+  { label: "Insights", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%" },
+  { label: "Guides", top: "30%", right: "7%", mobileTop: "15%", mobileRight: "3%" },
+  { label: "Strategy", top: "52%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
+  { label: "Research", bottom: "28%", right: "6%", mobileBottom: "18%", mobileRight: "3%" },
+];
+
 const Blog = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const { ref, isVisible } = useScrollAnimation();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const filteredPosts = selectedCategory === "All" 
     ? blogPosts 
@@ -94,17 +109,79 @@ const Blog = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Dark Section with Giant Typography */}
-      <section className="section-dark pt-32 pb-24 px-4">
-        <div className="container mx-auto max-w-7xl">
+      {/* Hero - Full Screen with Ken Burns Background */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background with Ken Burns */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div 
+            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
+            style={{ 
+              backgroundImage: `url(${constellationSpace})`,
+              filter: "brightness(0.4) saturate(1.1)",
+            }}
+          />
+          
+          {/* Aurora light overlay */}
+          <div className="absolute inset-0 animate-aurora">
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-cyan-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/10 via-transparent to-blue-500/10" />
+          </div>
+          
+          {/* Light sweep effect */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-light-sweep" />
+          </div>
+          
+          {/* Dark overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+        </div>
+        
+        {/* Floating Tags with Parallax */}
+        <div>
+          {floatingTags.map((tag, index) => (
+            <span
+              key={tag.label}
+              className="lunar-tag-dark absolute animate-float hidden sm:block"
+              style={{
+                top: tag.top,
+                left: tag.left,
+                right: tag.right,
+                bottom: tag.bottom,
+                animationDelay: `${index * 0.5}s`,
+                transform: `translateY(${scrollY * 0.08}px)`,
+              }}
+            >
+              {tag.label}
+            </span>
+          ))}
+          {/* Mobile floating tags */}
+          {floatingTags.slice(0, 3).map((tag, index) => (
+            <span
+              key={`mobile-${tag.label}`}
+              className="lunar-tag-dark absolute animate-float sm:hidden"
+              style={{
+                top: tag.mobileTop,
+                left: tag.mobileLeft,
+                right: tag.mobileRight,
+                bottom: tag.mobileBottom,
+                animationDelay: `${index * 0.5}s`,
+              }}
+            >
+              {tag.label}
+            </span>
+          ))}
+        </div>
+
+        {/* Content with Stagger Animation */}
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
           <div className="mb-16">
-            <span className="text-sm text-white/50 mb-4 block">[ Blog ]</span>
-            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight">
+            <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Blog ]</span>
+            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
               Bl<span className="serif-italic text-primary">o</span>g
             </h1>
           </div>
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
             <p className="text-lg text-white/60 max-w-xl">
               Marketing strategies, guides, and insights for succeeding in Korea's Web3 market.
             </p>
@@ -113,6 +190,12 @@ const Blog = () => {
               <span>Book a Consultation</span>
             </CalendlyButton>
           </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/30">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
         </div>
       </section>
 

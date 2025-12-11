@@ -120,22 +120,34 @@ const Services = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Full Screen with Parallax Background */}
+      {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background Image with Parallax */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-100"
-          style={{ 
-            backgroundImage: `url(${networkAbstract})`,
-            filter: "brightness(0.35) saturate(1.2)",
-            transform: `translateY(${scrollY * 0.3}px) scale(1.1)`
-          }}
-        />
+        {/* Background with Ken Burns */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div 
+            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
+            style={{ 
+              backgroundImage: `url(${networkAbstract})`,
+              filter: "brightness(0.35) saturate(1.2)",
+            }}
+          />
+          
+          {/* Aurora light overlay */}
+          <div className="absolute inset-0 animate-aurora">
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-cyan-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/10 via-transparent to-blue-500/10" />
+          </div>
+          
+          {/* Light sweep effect */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-light-sweep" />
+          </div>
+          
+          {/* Dark overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.4)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+        </div>
         
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.4)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
-        
-        {/* Floating Tags - Responsive */}
+        {/* Floating Tags with Parallax */}
         <div>
           {floatingTags.map((tag, index) => (
             <span
@@ -147,6 +159,7 @@ const Services = () => {
                 right: tag.right,
                 bottom: tag.bottom,
                 animationDelay: `${index * 0.5}s`,
+                transform: `translateY(${scrollY * 0.08}px)`,
               }}
             >
               {tag.label}
@@ -170,16 +183,16 @@ const Services = () => {
           ))}
         </div>
 
-        {/* Content */}
+        {/* Content with Stagger Animation */}
         <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
           <div className="mb-16">
-            <span className="text-sm text-white/50 mb-4 block">[ Our Services ]</span>
-            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight">
+            <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Our Services ]</span>
+            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
               Ser<span className="serif-italic text-primary">v</span>ices
             </h1>
           </div>
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
             <p className="text-lg text-white/60 max-w-xl">
               Everything you need to successfully enter and grow in Korea's vibrant crypto market.
             </p>

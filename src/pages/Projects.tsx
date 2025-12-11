@@ -269,22 +269,34 @@ const Projects = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Full Screen with Parallax Background */}
+      {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background Image with Parallax */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-100"
-          style={{ 
-            backgroundImage: `url(${constellationSpace})`,
-            filter: "brightness(0.4) saturate(1.1)",
-            transform: `translateY(${scrollY * 0.3}px) scale(1.1)`
-          }}
-        />
+        {/* Background with Ken Burns */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div 
+            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
+            style={{ 
+              backgroundImage: `url(${constellationSpace})`,
+              filter: "brightness(0.4) saturate(1.1)",
+            }}
+          />
+          
+          {/* Aurora light overlay */}
+          <div className="absolute inset-0 animate-aurora">
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-cyan-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/10 via-transparent to-blue-500/10" />
+          </div>
+          
+          {/* Light sweep effect */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-light-sweep" />
+          </div>
+          
+          {/* Dark overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+        </div>
         
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
-        
-        {/* Floating Tags - Responsive */}
+        {/* Floating Tags with Parallax */}
         <div>
           {floatingTags.map((tag, index) => (
             <span
@@ -296,6 +308,7 @@ const Projects = () => {
                 right: tag.right,
                 bottom: tag.bottom,
                 animationDelay: `${index * 0.5}s`,
+                transform: `translateY(${scrollY * 0.08}px)`,
               }}
             >
               {tag.label}
@@ -319,16 +332,16 @@ const Projects = () => {
           ))}
         </div>
 
-        {/* Content */}
+        {/* Content with Stagger Animation */}
         <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
           <div className="mb-16">
-            <span className="text-sm text-white/50 mb-4 block">[ Our Work ]</span>
-            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight">
+            <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Our Work ]</span>
+            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
               Ca<span className="serif-italic text-primary">s</span>es
             </h1>
           </div>
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
             <p className="text-lg text-white/60 max-w-xl">
               Explore our portfolio of successful Web3 projects launched in the Korean market.
             </p>
@@ -339,7 +352,7 @@ const Projects = () => {
           </div>
 
           {/* Stats Row */}
-          <div className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/10">
+          <div className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
                 <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
@@ -418,19 +431,14 @@ const Projects = () => {
                   </div>
                 </TiltCard>
 
-                {/* Content Below Card */}
-                <div>
-                  <h3 className="text-lg font-medium text-foreground mb-2">{caseItem.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                {/* Text Below Card */}
+                <div className="px-2">
+                  <h3 className="text-xl font-medium text-white mb-1 group-hover:text-primary transition-colors">
+                    {caseItem.name}
+                  </h3>
+                  <p className="text-white/50 text-sm line-clamp-2">
                     {caseItem.description}
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    {caseItem.services.map((service) => (
-                      <span key={service} className="text-xs px-2 py-1 bg-muted/50 border border-border/50 rounded-full text-muted-foreground">
-                        {service}
-                      </span>
-                    ))}
-                  </div>
                 </div>
               </Link>
             ))}
