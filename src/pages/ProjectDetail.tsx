@@ -4,47 +4,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Lightbox from "@/components/Lightbox";
 import { useEffect, useState, useRef } from "react";
-
-// Animated Counter Component
-const AnimatedCounter = ({ value, isVisible }: { value: string; isVisible: boolean }) => {
-  const [displayValue, setDisplayValue] = useState(value);
-  
-  useEffect(() => {
-    if (!isVisible) return;
-    
-    // Extract number and prefix/suffix
-    const match = value.match(/^([^\d]*)(\d+(?:\.\d+)?)([^\d]*)$/);
-    if (!match) {
-      setDisplayValue(value);
-      return;
-    }
-    
-    const [, prefix, numStr, suffix] = match;
-    const targetNum = parseFloat(numStr);
-    const duration = 1500;
-    const startTime = Date.now();
-    
-    const animate = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      const currentNum = Math.floor(targetNum * easeOut);
-      
-      setDisplayValue(`${prefix}${currentNum.toLocaleString()}${suffix}`);
-      
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        setDisplayValue(value);
-      }
-    };
-    
-    requestAnimationFrame(animate);
-  }, [isVisible, value]);
-  
-  return <>{displayValue}</>;
-};
-
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
@@ -194,7 +153,7 @@ const projectsData: Record<string, {
       { metric: "Grant Applications", value: "80+" }
     ],
     services: ["Developer Relations", "DeFi Marketing", "Event Management", "Grant Program Support"],
-    shortServices: ["DevRel", "Events"],
+    shortServices: ["KOLs", "Dev Relations", "Events"],
     gallery: [
       { src: polygonHackathonImg, title: "Developer Hackathon", description: "48-hour building event at Seoul Startup Hub" },
       { src: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop", title: "Workshop Series", description: "Technical deep-dives for Korean developers" },
@@ -612,60 +571,63 @@ const ProjectDetail = () => {
         </div>
       </div>
 
-      {/* Metrics + Scope Section Combined */}
+      {/* Metrics + Scope Section Combined - Lunar Strategy Style */}
       <section className="bg-slate-100">
-        <div className="container mx-auto max-w-6xl px-4">
-          {/* Metrics Grid - Box Style */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border border-slate-200">
-            {project.metrics.map((metric, index) => (
-              <div 
-                key={index} 
-                className={`bg-slate-200/50 p-6 md:p-8 ${index < 3 ? 'border-r border-slate-200' : ''} ${index < 2 ? 'border-b md:border-b-0 border-slate-200' : ''}`}
-              >
-                <p className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-2">
-                  <AnimatedCounter value={metric.value} isVisible={true} />
+        {/* Metrics Grid - Full Width with Clear Borders */}
+        <div className="flex flex-col md:flex-row border-b border-slate-300">
+          {project.metrics.map((metric, index) => (
+            <div 
+              key={index} 
+              className={`flex-1 bg-slate-100 p-8 md:p-10 lg:p-12 flex flex-col justify-between min-h-[180px] md:min-h-[220px]
+                ${index < project.metrics.length - 1 ? 'border-b md:border-b-0 md:border-r border-slate-300' : ''}`}
+            >
+              <div>
+                <p className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 mb-2 tracking-tight">
+                  {metric.value}
                 </p>
-                <p className="text-primary text-sm font-medium mb-6">{metric.label}</p>
-                <span className="text-slate-400 text-xs">0{index + 1}.</span>
+                <p className="text-primary text-sm md:text-base font-medium uppercase tracking-wide">
+                  {metric.label}
+                </p>
               </div>
-            ))}
+              <span className="text-slate-400 text-sm mt-6">0{index + 1}.</span>
+            </div>
+          ))}
+        </div>
+
+        {/* 2-Column Layout - Scope & Overview */}
+        <div className="flex flex-col lg:flex-row">
+          {/* Left Column - Scope of Work */}
+          <div className="lg:w-1/3 p-8 md:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-slate-300 bg-white flex flex-col justify-between min-h-[280px]">
+            <div className="space-y-2">
+              {project.shortServices.map((service, index) => (
+                <p key={index} className="text-slate-900 text-3xl md:text-4xl lg:text-5xl font-light leading-tight">{service}</p>
+              ))}
+            </div>
+            <a href="#scope" className="text-primary hover:underline text-sm inline-flex items-center gap-1 mt-8">
+              Scope of Work <ArrowUpRight className="w-3 h-3" />
+            </a>
           </div>
 
-          {/* Lunar Strategy 2-Column Layout */}
-          <div className="grid lg:grid-cols-2 gap-0 border-x border-b border-slate-200 bg-white">
-            {/* Left Column - Scope of Work (Short Keywords) */}
-            <div className="p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-slate-200">
-              <div className="space-y-3 mb-8">
-                {project.shortServices.map((service, index) => (
-                  <p key={index} className="text-slate-900 text-2xl md:text-3xl font-light">{service}</p>
-                ))}
-              </div>
-              <a href="#" className="text-primary hover:underline text-sm inline-flex items-center gap-1">
-                Scope of Work <ArrowUpRight className="w-3 h-3" />
+          {/* Right Column - Overview & What We Did */}
+          <div className="lg:w-2/3 flex flex-col">
+            {/* Overview */}
+            <div className="p-8 md:p-10 lg:p-12 border-b border-slate-300 bg-white flex-1">
+              <p className="text-slate-700 text-lg md:text-xl leading-relaxed mb-6">
+                {project.description} {project.challenge.split('.')[0]}.
+              </p>
+              <a href="#overview" className="text-primary hover:underline text-sm inline-flex items-center gap-1">
+                Overview <ArrowUpRight className="w-3 h-3" />
               </a>
             </div>
 
-            {/* Right Column - Overview & What We Did */}
-            <div className="flex flex-col">
-              {/* Overview */}
-              <div className="p-8 lg:p-12 border-b border-slate-200">
-                <p className="text-slate-700 text-lg leading-relaxed mb-4">
-                  {project.description} {project.challenge.split('.')[0]}.
-                </p>
-                <a href="#" className="text-primary hover:underline text-sm inline-flex items-center gap-1">
-                  Overview <ArrowUpRight className="w-3 h-3" />
-                </a>
-              </div>
-
-              {/* What We Did */}
-              <div className="p-8 lg:p-12">
-                <p className="text-slate-700 text-lg leading-relaxed mb-4">
-                  {project.strategy.slice(0, 2).join('. ')}.
-                </p>
-                <a href="#" className="text-primary hover:underline text-sm inline-flex items-center gap-1">
-                  What We Did <ArrowUpRight className="w-3 h-3" />
-                </a>
-              </div>
+            {/* What We Did */}
+            <div className="p-8 md:p-10 lg:p-12 bg-white flex-1">
+              <p className="text-slate-700 text-lg md:text-xl leading-relaxed mb-6">
+                {project.strategy.slice(0, 2).join('. ')}.
+              </p>
+              <a href="#what-we-did" className="text-primary hover:underline text-sm inline-flex items-center gap-1">
+                What We Did <ArrowUpRight className="w-3 h-3" />
+              </a>
             </div>
           </div>
         </div>
