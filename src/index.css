@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,84 +6,59 @@
 
 @layer base {
   :root {
-    /* Light Theme - Clean White Background */
-    --background: 0 0% 100%;
-    --foreground: 220 20% 10%;
-
-    --card: 220 20% 98%;
-    --card-foreground: 220 20% 10%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
-
-    /* Primary - Vibrant Red */
-    --primary: 0 84% 60%;
+    /* Lunar Strategy Dark Theme */
+    --background: 220 20% 6%;
+    --foreground: 0 0% 98%;
+    
+    --card: 220 20% 10%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 220 20% 8%;
+    --popover-foreground: 0 0% 98%;
+    
+    /* Blue CTA - Lunar Strategy style */
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 220 20% 10%;
-
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 10% 45%;
-
-    /* Accent - Electric Blue */
+    
+    --secondary: 220 20% 15%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 10% 55%;
+    
     --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
-
+    
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 220 14% 90%;
-    --input: 220 14% 90%;
-    --ring: 0 84% 60%;
-
-    --radius: 0.75rem;
-
-    /* Diverse Color Palette */
-    --color-red: 0 84% 60%;
-    --color-orange: 25 95% 53%;
-    --color-yellow: 45 93% 47%;
-    --color-green: 142 71% 45%;
-    --color-teal: 173 80% 40%;
-    --color-blue: 217 91% 60%;
-    --color-indigo: 239 84% 67%;
-    --color-purple: 270 70% 60%;
-    --color-pink: 330 81% 60%;
-
-    /* Shadows */
-    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.06);
-    --shadow-medium: 0 4px 20px rgba(0, 0, 0, 0.08);
-    --shadow-large: 0 8px 40px rgba(0, 0, 0, 0.12);
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 217 91% 60%;
+    
+    --radius: 0.5rem;
   }
 
   .dark {
     --background: 220 20% 6%;
     --foreground: 0 0% 98%;
-
     --card: 220 20% 10%;
     --card-foreground: 0 0% 98%;
-
-    --popover: 220 20% 10%;
+    --popover: 220 20% 8%;
     --popover-foreground: 0 0% 98%;
-
-    --primary: 0 84% 60%;
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 220 14% 14%;
+    --secondary: 220 20% 15%;
     --secondary-foreground: 0 0% 98%;
-
-    --muted: 220 14% 18%;
+    --muted: 220 20% 15%;
     --muted-foreground: 220 10% 55%;
-
     --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
-
     --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 220 14% 18%;
-    --input: 220 14% 18%;
-    --ring: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 20% 18%;
+    --input: 220 20% 18%;
+    --ring: 217 91% 60%;
   }
 }
 
@@ -91,272 +66,135 @@
   * {
     @apply border-border;
   }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
 
   html {
     scroll-behavior: smooth;
   }
-
-  body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  }
 }
 
 @layer components {
-  /* Gradient text with diverse colors */
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(
-      135deg,
-      hsl(var(--color-red)) 0%,
-      hsl(var(--color-orange)) 50%,
-      hsl(var(--color-pink)) 100%
-    );
+  /* Lunar Strategy Tag Style - White outline only */
+  .lunar-tag {
+    @apply px-4 py-2 rounded-full border border-foreground/30 text-foreground/80 text-sm font-medium;
+    background: transparent;
   }
 
-  .text-gradient-blue {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(
-      135deg,
-      hsl(var(--color-blue)) 0%,
-      hsl(var(--color-indigo)) 100%
-    );
+  /* Lunar Strategy Button - Blue pill */
+  .lunar-btn {
+    @apply px-6 py-3 rounded-full bg-primary text-primary-foreground font-medium transition-all hover:bg-primary/90;
   }
 
-  .text-gradient-green {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(
-      135deg,
-      hsl(var(--color-green)) 0%,
-      hsl(var(--color-teal)) 100%
-    );
+  .lunar-btn-outline {
+    @apply px-4 py-2 rounded-full border border-foreground/30 text-foreground/80 font-medium transition-all hover:border-foreground/50 hover:text-foreground;
   }
 
-  .text-gradient-purple {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(
-      135deg,
-      hsl(var(--color-purple)) 0%,
-      hsl(var(--color-pink)) 100%
-    );
+  /* Bracket style link */
+  .bracket-link {
+    @apply text-primary font-medium;
+  }
+  
+  .bracket-link::before {
+    content: '[ ';
+  }
+  
+  .bracket-link::after {
+    content: ' ]';
   }
 
-  /* Card styles */
-  .glass-card {
-    @apply bg-card border border-border rounded-2xl;
-    box-shadow: var(--shadow-medium);
+  /* Number badge - bracket style */
+  .number-badge {
+    @apply text-foreground/50 font-medium;
+  }
+  
+  .number-badge::before {
+    content: '[ ';
+  }
+  
+  .number-badge::after {
+    content: ' ]';
   }
 
-  .glass-card-hover {
-    @apply glass-card transition-all duration-300;
+  /* Dotted separator */
+  .dotted-line {
+    border-bottom: 1px dashed hsl(var(--foreground) / 0.15);
   }
 
-  .glass-card-hover:hover {
-    @apply border-primary/30;
-    box-shadow: var(--shadow-large);
-    transform: translateY(-2px);
+  /* Serif italic style */
+  .serif-italic {
+    font-family: 'Playfair Display', Georgia, serif;
+    @apply italic;
   }
 
-  /* Color-coded cards */
-  .card-red {
-    @apply border-l-4;
-    border-left-color: hsl(var(--color-red));
+  /* Logo marquee */
+  .logo-marquee {
+    @apply flex gap-16 items-center;
+    animation: marquee 40s linear infinite;
   }
 
-  .card-blue {
-    @apply border-l-4;
-    border-left-color: hsl(var(--color-blue));
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 
-  .card-green {
-    @apply border-l-4;
-    border-left-color: hsl(var(--color-green));
+  /* Case card gradients */
+  .case-gradient-pink {
+    background: linear-gradient(135deg, hsl(330 80% 50%) 0%, hsl(350 75% 40%) 100%);
+  }
+  
+  .case-gradient-orange {
+    background: linear-gradient(135deg, hsl(25 95% 50%) 0%, hsl(40 90% 45%) 100%);
+  }
+  
+  .case-gradient-blue {
+    background: linear-gradient(135deg, hsl(220 80% 30%) 0%, hsl(240 70% 20%) 100%);
+  }
+  
+  .case-gradient-purple {
+    background: linear-gradient(135deg, hsl(270 60% 45%) 0%, hsl(290 50% 35%) 100%);
+  }
+  
+  .case-gradient-teal {
+    background: linear-gradient(135deg, hsl(175 60% 30%) 0%, hsl(190 50% 25%) 100%);
+  }
+  
+  .case-gradient-green {
+    background: linear-gradient(135deg, hsl(145 60% 30%) 0%, hsl(160 50% 25%) 100%);
   }
 
-  .card-purple {
-    @apply border-l-4;
-    border-left-color: hsl(var(--color-purple));
-  }
-
-  .card-orange {
-    @apply border-l-4;
-    border-left-color: hsl(var(--color-orange));
-  }
-
-  .card-teal {
-    @apply border-l-4;
-    border-left-color: hsl(var(--color-teal));
-  }
-
-  /* Badge colors */
-  .badge-red {
-    @apply bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400;
-  }
-
-  .badge-blue {
-    @apply bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400;
-  }
-
-  .badge-green {
-    @apply bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400;
-  }
-
-  .badge-purple {
-    @apply bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400;
-  }
-
-  .badge-orange {
-    @apply bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400;
-  }
-
-  .badge-teal {
-    @apply bg-teal-100 text-teal-700 dark:bg-teal-900/30 dark:text-teal-400;
-  }
-
-  /* Icon containers with colors */
-  .icon-red {
-    @apply bg-red-100 text-red-600 dark:bg-red-900/30 dark:text-red-400;
-  }
-
-  .icon-blue {
-    @apply bg-blue-100 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400;
-  }
-
-  .icon-green {
-    @apply bg-green-100 text-green-600 dark:bg-green-900/30 dark:text-green-400;
-  }
-
-  .icon-purple {
-    @apply bg-purple-100 text-purple-600 dark:bg-purple-900/30 dark:text-purple-400;
-  }
-
-  .icon-orange {
-    @apply bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400;
-  }
-
-  .icon-teal {
-    @apply bg-teal-100 text-teal-600 dark:bg-teal-900/30 dark:text-teal-400;
-  }
-
-  .section-dark {
-    @apply bg-foreground text-background;
-  }
-
-  .section-dark .text-muted-foreground {
-    @apply text-background/60;
-  }
-
-  .nav-link {
-    @apply relative text-muted-foreground transition-colors duration-300 hover:text-foreground;
-  }
-
-  .nav-link::after {
-    content: '';
-    @apply absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 rounded-full;
-  }
-
-  .nav-link:hover::after {
-    @apply w-full;
-  }
-
-  /* Marquee animation */
-  .marquee {
-    display: flex;
-    overflow: hidden;
-    user-select: none;
-    gap: 3rem;
-  }
-
-  .marquee-content {
-    display: flex;
-    gap: 3rem;
-    animation: marquee 30s linear infinite;
-    flex-shrink: 0;
-  }
-
-  .marquee:hover .marquee-content {
-    animation-play-state: paused;
-  }
-
-  /* Scroll animation base */
-  .scroll-animate {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), 
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .scroll-animate.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-100%);
+  /* Particles effect */
+  .particles-bg {
+    background-image: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.08) 1px, transparent 1px),
+                      radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 1px, transparent 1px),
+                      radial-gradient(circle at 40% 40%, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 80px 80px, 120px 120px, 160px 160px;
   }
 }
 
 @layer utilities {
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+  }
+
   .animate-fade-up {
     animation: fade-up 0.8s ease-out forwards;
     opacity: 0;
   }
 
-  .animate-fade-in {
-    animation: fade-in 0.6s ease-out forwards;
-    opacity: 0;
-  }
-
-  .animate-scale-in {
-    animation: scale-in 0.5s ease-out forwards;
-  }
-
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-
   @keyframes fade-up {
-    from { 
-      opacity: 0; 
-      transform: translateY(30px); 
-    }
-    to { 
-      opacity: 1; 
-      transform: translateY(0); 
-    }
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-
-  @keyframes scale-in {
-    from { 
-      opacity: 0; 
-      transform: scale(0.95); 
-    }
-    to { 
-      opacity: 1; 
-      transform: scale(1); 
-    }
-  }
-
-  @keyframes float {
-    0%, 100% { 
-      transform: translateY(0px); 
-    }
-    50% { 
-      transform: translateY(-15px); 
-    }
-  }
-
-  /* Hide scrollbar */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;

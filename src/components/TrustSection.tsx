@@ -9,47 +9,42 @@ const clientLogos = [
   { name: "Ondo Finance", url: "https://ondo.finance" },
   { name: "MegaETH", url: "https://megaeth.systems" },
   { name: "Bybit", url: "https://www.bybit.com" },
-  { name: "Abstract", url: "https://abs.xyz" },
-  { name: "KuCoin", url: "https://www.kucoin.com" },
 ];
 
 const TrustSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-12 border-y border-border bg-muted/20">
-      <div className="container mx-auto px-4">
-        <div className={`transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          {/* Simple marquee of client names */}
-          <div className="marquee">
-            <div className="marquee-content">
-              {[...clientLogos, ...clientLogos].map((client, index) => (
-                <a 
-                  key={index}
-                  href={client.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors tracking-wide"
-                  title={client.name}
-                >
-                  {client.name}
-                </a>
-              ))}
-            </div>
-            <div className="marquee-content" aria-hidden="true">
-              {[...clientLogos, ...clientLogos].map((client, index) => (
-                <a 
-                  key={index}
-                  href={client.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 text-sm font-semibold text-muted-foreground hover:text-foreground transition-colors tracking-wide"
-                  title={client.name}
-                >
-                  {client.name}
-                </a>
-              ))}
-            </div>
+    <section ref={ref} className="py-6 border-y border-border/30 bg-background overflow-hidden">
+      <div 
+        className={`transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
+      >
+        <div className="flex whitespace-nowrap">
+          <div className="logo-marquee">
+            {[...clientLogos, ...clientLogos].map((client, index) => (
+              <a
+                key={index}
+                href={client.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground/40 hover:text-foreground/70 transition-colors text-sm font-medium tracking-wide uppercase"
+              >
+                {client.name}
+              </a>
+            ))}
+          </div>
+          <div className="logo-marquee" aria-hidden="true">
+            {[...clientLogos, ...clientLogos].map((client, index) => (
+              <a
+                key={index}
+                href={client.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground/40 hover:text-foreground/70 transition-colors text-sm font-medium tracking-wide uppercase"
+              >
+                {client.name}
+              </a>
+            ))}
           </div>
         </div>
       </div>

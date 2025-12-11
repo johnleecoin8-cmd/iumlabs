@@ -1,39 +1,22 @@
-import { useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import TrustSection from "@/components/TrustSection";
-import AboutSection from "@/components/AboutSection";
 import CasesSection from "@/components/CasesSection";
+import ProcessSection from "@/components/ProcessSection";
 import ServicesSection from "@/components/ServicesSection";
-import TeamSection from "@/components/TeamSection";
-import InsightsSection from "@/components/InsightsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
-import PageIntro from "@/components/PageIntro";
 
 const Index = () => {
-  const [introComplete, setIntroComplete] = useState(false);
-
-  const handleIntroComplete = useCallback(() => {
-    setIntroComplete(true);
-  }, []);
-
   return (
     <div className="min-h-screen bg-background">
-      {/* Page Intro Animation */}
-      {!introComplete && <PageIntro onComplete={handleIntroComplete} />}
-      
       <Navbar />
-      <main className={`transition-opacity duration-500 ${introComplete ? 'opacity-100' : 'opacity-0'}`}>
-        <HeroSection />
-        <TrustSection />
-        <AboutSection />
-        <CasesSection />
-        <ServicesSection />
-        <TeamSection />
-        <InsightsSection />
-        <CTASection />
-      </main>
+      <HeroSection />
+      <TrustSection />
+      <CasesSection />
+      <ProcessSection />
+      <ServicesSection />
+      <CTASection />
       <Footer />
     </div>
   );
