@@ -96,37 +96,25 @@ const HeroSection = () => {
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </p>
 
-          {/* CTA Button - Angular with Animated Border */}
+          {/* CTA Button - Gradient Style with Pulse */}
           <div className="opacity-0 animate-fade-up stagger-3 mt-6 sm:mt-8 relative">
-            {/* Subtle glow */}
-            <div 
-              className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/20 to-cyan-400/20 blur-2xl scale-110"
-              style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }}
-            />
+            {/* Pulse ring effect */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 animate-pulse opacity-40 blur-xl scale-110" />
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 to-cyan-400 animate-ping opacity-20" style={{ animationDuration: '2s' }} />
             
-            {/* Animated gradient border wrapper */}
-            <div className="relative p-[2px] rounded-xl overflow-hidden group">
-              {/* Rotating gradient border */}
-              <div 
-                className="absolute inset-0 bg-[conic-gradient(from_0deg,#3b82f6,#06b6d4,#8b5cf6,#ec4899,#3b82f6)]"
-                style={{ animation: 'spin 3s linear infinite' }}
-              />
+            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 text-white text-base sm:text-lg px-10 sm:px-14 py-5 sm:py-6 rounded-2xl font-bold shadow-[0_20px_50px_rgba(59,130,246,0.4)] hover:shadow-[0_25px_60px_rgba(59,130,246,0.6)] transition-all duration-500 hover:scale-[1.02] border border-white/20">
+              {/* Animated shine sweep */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               
-              <CalendlyButton className="relative flex items-center bg-white/10 backdrop-blur-xl text-white text-base sm:text-lg rounded-[10px] font-semibold shadow-[0_8px_32px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.1)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.3)] hover:bg-white/15 transition-all duration-500 hover:scale-[1.02] overflow-hidden">
-                {/* Left accent bar */}
-                <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-blue-500 via-cyan-400 to-blue-600" />
-                
-                {/* Animated shine sweep */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out" />
-                
-                <div className="relative flex items-center gap-3 px-10 sm:px-14 py-4 sm:py-5 pl-8 sm:pl-10">
-                  {/* Bridge Icon */}
+              <div className="relative flex items-center gap-4">
+                {/* Bridge Icon */}
+                <div className="relative">
                   <svg 
-                    className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-400 group-hover:text-cyan-300 transition-colors duration-300" 
+                    className="w-7 h-7 sm:w-8 sm:h-8 text-white group-hover:scale-110 transition-transform duration-300" 
                     viewBox="0 0 24 24" 
                     fill="none" 
                     stroke="currentColor" 
-                    strokeWidth="2"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   >
@@ -138,22 +126,22 @@ const HeroSection = () => {
                     <path d="M16 18v-5" />
                     <path d="M5 13h14" />
                   </svg>
-                  <span className="relative text-white/95">Book a Free Consultation</span>
-                  <svg 
-                    className="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 group-hover:translate-x-1 group-hover:text-blue-300 transition-all duration-300" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="M12 5l7 7-7 7" />
-                  </svg>
                 </div>
-              </CalendlyButton>
-            </div>
+                <span className="relative tracking-tight drop-shadow-sm">Book a Free Consultation</span>
+                <svg 
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:translate-x-1.5 transition-all duration-300" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M5 12h14" />
+                  <path d="M12 5l7 7-7 7" />
+                </svg>
+              </div>
+            </CalendlyButton>
           </div>
         </div>
       </div>
