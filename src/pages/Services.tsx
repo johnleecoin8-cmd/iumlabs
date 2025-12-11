@@ -220,9 +220,9 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Services List - Lunar Strategy Style */}
-      <section ref={servicesRef} className="bg-[hsl(0,0%,96%)] py-24">
-        <div className="container mx-auto max-w-7xl px-4">
+      {/* Services List - Sun Theme */}
+      <section ref={servicesRef} className="section-sun-light py-24">
+        <div className="container mx-auto max-w-7xl px-4 relative z-10">
           {services.map((service, index) => (
             <div
               key={service.id}
@@ -293,17 +293,17 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section ref={testimonialsRef} className="bg-[hsl(0,0%,96%)] py-24">
-        <div className="container mx-auto max-w-7xl px-4">
+      {/* Testimonials Section - Sun Theme with Stars */}
+      <section ref={testimonialsRef} className="section-sun-dark section-stars py-24">
+        <div className="container mx-auto max-w-7xl px-4 relative z-10">
           {/* Header */}
           <div className={`flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 transition-all duration-700 ${
             testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             <div>
-              <span className="text-[hsl(0,0%,40%)] text-sm font-mono mb-4 block">[ Testimonials ]</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-[hsl(0,0%,8%)]">
-                +250 <span className="serif-italic text-primary">Satisfied</span> Clients
+              <span className="text-white/40 text-sm font-mono mb-4 block">[ Testimonials ]</span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white">
+                +250 <span className="serif-italic text-amber-400">Satisfied</span> Clients
               </h2>
             </div>
             <div className="flex gap-2">
@@ -318,23 +318,23 @@ const Services = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className={`bg-white rounded-2xl p-8 border border-[hsl(0,0%,90%)] hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${
+                className={`bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-amber-400/30 hover:-translate-y-2 transition-all duration-500 ${
                   testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 {/* Quote Icon */}
-                <Quote className="w-10 h-10 text-primary/20 mb-6" />
+                <Quote className="w-10 h-10 text-amber-400/30 mb-6" />
                 
                 {/* Content */}
-                <p className="text-[hsl(0,0%,30%)] text-lg leading-relaxed mb-8">
+                <p className="text-white/70 text-lg leading-relaxed mb-8">
                   "{testimonial.content}"
                 </p>
 
                 {/* Rating */}
                 <div className="flex items-center gap-1 mb-6">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-yellow-400" />
+                    <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400" />
                   ))}
                 </div>
 
@@ -343,17 +343,17 @@ const Services = () => {
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-[hsl(0,0%,90%)]"
+                    className="w-14 h-14 rounded-full object-cover border-2 border-white/20"
                   />
                   <div>
-                    <div className="font-medium text-[hsl(0,0%,8%)]">{testimonial.name}</div>
-                    <div className="text-sm text-[hsl(0,0%,50%)]">{testimonial.role}</div>
+                    <div className="font-medium text-white">{testimonial.name}</div>
+                    <div className="text-sm text-white/50">{testimonial.role}</div>
                   </div>
                 </div>
 
                 {/* Source */}
-                <div className="mt-6 pt-6 border-t border-[hsl(0,0%,90%)]">
-                  <span className="text-xs text-primary uppercase tracking-wider font-medium">
+                <div className="mt-6 pt-6 border-t border-white/10">
+                  <span className="text-xs text-amber-400 uppercase tracking-wider font-medium">
                     Reviewed on {testimonial.source}
                   </span>
                 </div>

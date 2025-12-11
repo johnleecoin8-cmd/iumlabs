@@ -418,9 +418,9 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Blog Grid - Dark Theme Magazine Style */}
-      <section ref={ref} className="bg-background py-24 px-4">
-        <div className="container mx-auto max-w-7xl">
+      {/* Blog Grid - Nebula Theme */}
+      <section ref={ref} className="section-nebula-dark section-stars py-24 px-4">
+        <div className="container mx-auto max-w-7xl relative z-10">
           {/* Categories Filter */}
           <div className="flex flex-wrap gap-3 mb-12">
             {categories.map((category) => (
@@ -429,8 +429,8 @@ const Blog = () => {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
                   selectedCategory === category
-                    ? "bg-primary text-white border-primary"
-                    : "bg-transparent text-white/60 border-white/20 hover:border-primary hover:text-primary"
+                    ? "bg-fuchsia-500 text-white border-fuchsia-500"
+                    : "bg-transparent text-white/60 border-white/20 hover:border-fuchsia-400 hover:text-fuchsia-400"
                 }`}
               >
                 {category}

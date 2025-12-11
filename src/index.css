@@ -189,6 +189,188 @@
     color: hsl(var(--light-fg));
   }
 
+  /* ============================================
+     PLANETARY THEMED SECTIONS
+     ============================================ */
+
+  /* Sun Theme (Services) - Orange/Gold/Amber */
+  .section-sun-light {
+    position: relative;
+    background: linear-gradient(180deg, hsl(45, 100%, 97%) 0%, hsl(40, 80%, 96%) 100%);
+    color: hsl(var(--light-fg));
+    overflow: hidden;
+  }
+  .section-sun-light::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, hsl(35, 100%, 60%, 0.08) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  .section-sun-dark {
+    position: relative;
+    background: linear-gradient(180deg, hsl(0, 0%, 4%) 0%, hsl(25, 30%, 6%) 100%);
+    color: hsl(var(--dark-fg));
+    overflow: hidden;
+  }
+  .section-sun-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top right, hsl(30, 100%, 50%, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Saturn Theme (Projects) - Purple/Pink/Violet */
+  .section-saturn-light {
+    position: relative;
+    background: linear-gradient(180deg, hsl(270, 50%, 97%) 0%, hsl(280, 40%, 96%) 100%);
+    color: hsl(var(--light-fg));
+    overflow: hidden;
+  }
+  .section-saturn-light::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, hsl(280, 80%, 65%, 0.08) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  .section-saturn-dark {
+    position: relative;
+    background: linear-gradient(180deg, hsl(0, 0%, 4%) 0%, hsl(280, 30%, 6%) 100%);
+    color: hsl(var(--dark-fg));
+    overflow: hidden;
+  }
+  .section-saturn-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top left, hsl(280, 80%, 50%, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Earth Theme (About) - Blue/Cyan/Sky */
+  .section-earth-light {
+    position: relative;
+    background: linear-gradient(180deg, hsl(200, 60%, 97%) 0%, hsl(195, 50%, 96%) 100%);
+    color: hsl(var(--light-fg));
+    overflow: hidden;
+  }
+  .section-earth-light::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, hsl(200, 90%, 55%, 0.08) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  .section-earth-dark {
+    position: relative;
+    background: linear-gradient(180deg, hsl(0, 0%, 4%) 0%, hsl(210, 40%, 6%) 100%);
+    color: hsl(var(--dark-fg));
+    overflow: hidden;
+  }
+  .section-earth-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at bottom left, hsl(200, 90%, 50%, 0.05) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Mars Theme (Contact) - Red/Orange/Rose */
+  .section-mars-light {
+    position: relative;
+    background: linear-gradient(180deg, hsl(15, 70%, 97%) 0%, hsl(10, 60%, 96%) 100%);
+    color: hsl(var(--light-fg));
+    overflow: hidden;
+  }
+  .section-mars-light::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(180deg, hsl(10, 90%, 55%, 0.08) 0%, transparent 100%);
+    pointer-events: none;
+  }
+  .section-mars-dark {
+    position: relative;
+    background: linear-gradient(180deg, hsl(0, 0%, 4%) 0%, hsl(10, 40%, 6%) 100%);
+    color: hsl(var(--dark-fg));
+    overflow: hidden;
+  }
+  .section-mars-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top center, hsl(10, 90%, 45%, 0.06) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  /* Nebula Theme (Blog) - Pink/Purple/Cyan */
+  .section-nebula-light {
+    position: relative;
+    background: linear-gradient(180deg, hsl(300, 40%, 97%) 0%, hsl(320, 35%, 96%) 100%);
+    color: hsl(var(--light-fg));
+    overflow: hidden;
+  }
+  .section-nebula-light::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(135deg, hsl(320, 80%, 60%, 0.06) 0%, hsl(200, 80%, 60%, 0.06) 100%);
+    pointer-events: none;
+  }
+  .section-nebula-dark {
+    position: relative;
+    background: linear-gradient(180deg, hsl(0, 0%, 4%) 0%, hsl(300, 30%, 6%) 100%);
+    color: hsl(var(--dark-fg));
+    overflow: hidden;
+  }
+  .section-nebula-dark::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, hsl(300, 70%, 50%, 0.04) 0%, transparent 60%),
+                radial-gradient(ellipse at top right, hsl(180, 70%, 50%, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Floating stars animation for dark sections */
+  .section-stars::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(1px 1px at 20px 30px, hsl(0, 0%, 100%, 0.3), transparent),
+      radial-gradient(1px 1px at 40px 70px, hsl(0, 0%, 100%, 0.2), transparent),
+      radial-gradient(1px 1px at 50px 160px, hsl(0, 0%, 100%, 0.3), transparent),
+      radial-gradient(1px 1px at 90px 40px, hsl(0, 0%, 100%, 0.2), transparent),
+      radial-gradient(1px 1px at 130px 80px, hsl(0, 0%, 100%, 0.3), transparent),
+      radial-gradient(1px 1px at 160px 120px, hsl(0, 0%, 100%, 0.2), transparent);
+    background-size: 200px 200px;
+    animation: twinkle 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
   /* Lunar Strategy Tags - Dark variant (white outline only, NO glow) */
   .lunar-tag-dark {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300;
