@@ -12,6 +12,8 @@ import TrustBadge from "@/components/TrustBadge";
 import ClientLogoMarquee from "@/components/ClientLogoMarquee";
 import SectionBackground from "@/components/SectionBackground";
 import FloatingSectionElements from "@/components/FloatingSectionElements";
+import GiantSectionTitle from "@/components/GiantSectionTitle";
+import GlowCard from "@/components/GlowCard";
 import earthSpace from "@/assets/backgrounds/earth-space.jpg";
 
 const stats = [
@@ -261,17 +263,14 @@ const About = () => {
         />
         
         <div className="container mx-auto max-w-7xl relative z-10">
-          {/* Giant Header */}
-          <div className="mb-20">
-            <h2 className="text-[15vw] md:text-[150px] lg:text-[180px] font-light leading-[0.85] tracking-tight text-white gpu-accelerated">
-              Our <span className="serif-italic text-cyan-400">Team</span>
-            </h2>
-            <div className="mt-8">
-              <span className="px-4 py-2 rounded-full border border-white/15 text-sm text-white/60">
-                [ Team of {team.length} People ]
-              </span>
-            </div>
-          </div>
+          {/* Giant Section Title */}
+          <GiantSectionTitle
+            title="Our Team"
+            accentWord="Team"
+            size="2xl"
+            theme="dark"
+            badge={`[ Team of ${team.length} People ]`}
+          />
 
           {/* Team Grid - Large Photos */}
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 mb-16">

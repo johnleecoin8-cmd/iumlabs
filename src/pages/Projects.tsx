@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import Planet3D from "@/components/Planet3D";
 import SectionBackground from "@/components/SectionBackground";
 import FloatingSectionElements from "@/components/FloatingSectionElements";
+import GiantSectionTitle from "@/components/GiantSectionTitle";
+import GlowCard from "@/components/GlowCard";
 import saturnRings from "@/assets/backgrounds/saturn-rings.jpg";
 
 // Import logos

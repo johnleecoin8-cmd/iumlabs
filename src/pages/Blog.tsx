@@ -10,6 +10,8 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import SectionBackground from "@/components/SectionBackground";
 import FloatingSectionElements from "@/components/FloatingSectionElements";
+import GiantSectionTitle from "@/components/GiantSectionTitle";
+import GlowCard from "@/components/GlowCard";
 import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
 
 interface BlogPost {
@@ -335,21 +337,27 @@ const Blog = () => {
         />
         
         <div className="container mx-auto max-w-7xl relative z-10">
-          <div className={`mb-10 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
-            <span className="text-white/40 text-sm font-mono mb-4 block">[ Top Articles ]</span>
-            <h2 className="text-3xl md:text-4xl font-light text-white">
-              Featured <span className="serif-italic text-primary">Guides</span>
-            </h2>
-          </div>
+          {/* Giant Section Title */}
+          <GiantSectionTitle
+            title="Featured Guides"
+            accentWord="Guides"
+            size="xl"
+            theme="dark"
+            subtitle="[ Top Articles ]"
+          />
 
-          {/* Featured Grid */}
-          <div className={`grid md:grid-cols-2 gap-6 transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-          }`}>
-            {featuredPosts[0] && <FeaturedCard post={featuredPosts[0]} large />}
-            {featuredPosts[1] && <FeaturedCard post={featuredPosts[1]} large />}
+          {/* Featured Grid with GlowCard */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {featuredPosts[0] && (
+              <GlowCard className="rounded-3xl" glowColor="hsl(280, 70%, 55%)" intensity="medium">
+                <FeaturedCard post={featuredPosts[0]} large />
+              </GlowCard>
+            )}
+            {featuredPosts[1] && (
+              <GlowCard className="rounded-3xl" glowColor="hsl(200, 70%, 50%)" intensity="medium">
+                <FeaturedCard post={featuredPosts[1]} large />
+              </GlowCard>
+            )}
           </div>
         </div>
       </section>
