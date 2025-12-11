@@ -7,7 +7,7 @@ import TiltCard from "@/components/TiltCard";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
-import constellationSpace from "@/assets/constellation-space.jpg";
+import moonBackground from "@/assets/moon-background.jpg";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -248,11 +248,15 @@ const stats = [
 ];
 
 const floatingTags = [
-  { label: "DeFi", top: "15%", left: "5%", mobileTop: "12%", mobileLeft: "3%" },
-  { label: "Layer 1", top: "30%", right: "7%", mobileTop: "15%", mobileRight: "3%" },
-  { label: "GameFi", top: "50%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
-  { label: "NFT", bottom: "32%", right: "5%", mobileBottom: "18%", mobileRight: "3%" },
-  { label: "Infrastructure", bottom: "16%", left: "8%", mobileBottom: "10%", mobileLeft: "3%" },
+  { label: "DeFi", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-pink-400 text-white" },
+  { label: "Layer 1", top: "30%", left: "18%", mobileTop: "15%", mobileRight: "3%", color: "bg-yellow-400 text-black" },
+  { label: "GameFi", top: "48%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-white text-black border border-black" },
+  { label: "NFT", top: "52%", left: "22%", color: "bg-orange-400 text-white" },
+  { label: "Infrastructure", top: "16%", right: "12%", color: "bg-white text-black border border-black" },
+  { label: "Exchange", top: "30%", right: "5%", color: "bg-yellow-400 text-black" },
+  { label: "Layer 2", top: "48%", right: "8%", color: "bg-green-400 text-black" },
+  { label: "DePIN", bottom: "28%", right: "15%", color: "bg-green-500 text-white" },
+  { label: "RWA", bottom: "32%", left: "12%", color: "bg-cyan-400 text-black" },
 ];
 
 const Projects = () => {
@@ -271,60 +275,56 @@ const Projects = () => {
       
       {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background with Ken Burns */}
-        <div className="absolute inset-0 overflow-hidden">
+        {/* Background - Vibrant Blue with Moon */}
+        <div className="absolute inset-0 overflow-hidden bg-[hsl(220,90%,55%)]">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${constellationSpace})`,
-              filter: "brightness(0.4) saturate(1.1)",
+              backgroundImage: `url(${moonBackground})`,
+              filter: "brightness(0.9) saturate(1.2)",
+              mixBlendMode: "overlay",
             }}
           />
           
           {/* Aurora light overlay */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-cyan-500/15" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/10 via-transparent to-blue-500/10" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/30 via-transparent to-cyan-400/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600/20 via-transparent to-blue-400/10" />
           </div>
           
           {/* Light sweep effect */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-light-sweep" />
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-light-sweep" />
           </div>
-          
-          {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
         </div>
         
-        {/* Floating Tags with Parallax */}
+        {/* Floating Tags with Parallax - Colorful */}
         <div>
           {floatingTags.map((tag, index) => (
             <span
-              key={tag.label}
-              className="lunar-tag-dark absolute animate-float hidden sm:block"
+              key={`${tag.label}-${index}`}
+              className={`absolute animate-float hidden sm:block px-4 py-2 rounded-md text-sm font-medium shadow-lg ${tag.color}`}
               style={{
                 top: tag.top,
                 left: tag.left,
                 right: tag.right,
                 bottom: tag.bottom,
-                animationDelay: `${index * 0.5}s`,
-                transform: `translateY(${scrollY * 0.08}px)`,
+                animationDelay: `${index * 0.3}s`,
+                transform: `translateY(${scrollY * 0.05}px)`,
               }}
             >
               {tag.label}
             </span>
           ))}
-          {/* Mobile floating tags */}
-          {floatingTags.slice(0, 3).map((tag, index) => (
+          {floatingTags.slice(0, 4).map((tag, index) => (
             <span
-              key={`mobile-${tag.label}`}
-              className="lunar-tag-dark absolute animate-float sm:hidden"
+              key={`mobile-${tag.label}-${index}`}
+              className={`absolute animate-float sm:hidden px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
               style={{
                 top: tag.mobileTop,
                 left: tag.mobileLeft,
                 right: tag.mobileRight,
-                bottom: tag.mobileBottom,
-                animationDelay: `${index * 0.5}s`,
+                animationDelay: `${index * 0.3}s`,
               }}
             >
               {tag.label}
