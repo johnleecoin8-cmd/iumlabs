@@ -60,8 +60,19 @@ const CTASection = () => {
 
   return (
     <div ref={ref} className="flex-1">
-      {/* Blue CTA Section */}
+      {/* Blue CTA Section with Aurora */}
       <div className="relative bg-primary py-24 px-4 overflow-hidden">
+        {/* Aurora overlay */}
+        <div className="absolute inset-0 animate-aurora pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-tr from-cyan-400/30 via-transparent to-blue-300/20" />
+          <div className="absolute inset-0 bg-gradient-to-bl from-blue-300/20 via-transparent to-cyan-400/10" />
+        </div>
+        
+        {/* Light sweep effect */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-light-sweep" />
+        </div>
+        
         {/* Floating Tags */}
         {floatingTags.map((tag, index) => (
           <span
@@ -93,9 +104,15 @@ const CTASection = () => {
         </div>
       </div>
 
-      {/* Contact Form Section */}
-      <div className="bg-[hsl(0,0%,4%)] py-24 px-4">
-        <div className={`container mx-auto max-w-6xl transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      {/* Contact Form Section with Aurora */}
+      <div className="relative bg-[hsl(0,0%,4%)] py-24 px-4 overflow-hidden">
+        {/* Aurora overlay for dark section */}
+        <div className="absolute inset-0 animate-aurora pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/10 via-transparent to-cyan-500/5" />
+          <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/5 via-transparent to-blue-500/5" />
+        </div>
+        
+        <div className={`container mx-auto max-w-6xl relative z-10 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Left - Office Image & Address */}
             <div>
