@@ -571,55 +571,61 @@ const ProjectDetail = () => {
         </div>
       </div>
 
-      {/* Metrics + Scope Section Combined - Lunar Strategy Style */}
-      <section className="bg-slate-100">
-        {/* Metrics Grid - Full Width with Clear Borders */}
-        <div className="flex flex-col md:flex-row border-b border-slate-300">
-          {project.metrics.map((metric, index) => (
-            <div 
-              key={index} 
-              className={`flex-1 bg-slate-100 p-8 md:p-10 lg:p-12 flex flex-col justify-between min-h-[180px] md:min-h-[220px]
-                ${index < project.metrics.length - 1 ? 'border-b md:border-b-0 md:border-r border-slate-300' : ''}`}
-            >
-              <div>
-                <p className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-slate-900 mb-2 tracking-tight">
-                  {metric.value}
-                </p>
-                <p className="text-primary text-sm md:text-base font-medium uppercase tracking-wide">
-                  {metric.label}
-                </p>
-              </div>
-              <span className="text-slate-400 text-sm mt-6">0{index + 1}.</span>
-            </div>
-          ))}
-        </div>
-
-        {/* 3-Card Clean Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3">
-          {/* Card 1 - Scope of Work */}
-          <div className="bg-slate-900 p-6 md:p-8 min-h-[200px] flex flex-col justify-between">
-            <span className="text-slate-500 text-xs uppercase tracking-widest mb-4 block">Scope of Work</span>
-            <div className="space-y-1">
-              {project.shortServices.map((service, index) => (
-                <p key={index} className="text-white text-2xl md:text-3xl font-light leading-tight">{service}</p>
+      {/* Metrics + Scope Section Combined - Rounded Card Style */}
+      <section className="bg-slate-200 py-8 md:py-12">
+        <div className="container mx-auto max-w-6xl px-4 md:px-8">
+          <div className="rounded-2xl overflow-hidden shadow-xl">
+            {/* Metrics Grid - Smaller, Compact */}
+            <div className="flex flex-col md:flex-row">
+              {project.metrics.map((metric, index) => (
+                <div 
+                  key={index} 
+                  className={`flex-1 bg-slate-100 p-5 md:p-6 flex flex-col justify-between min-h-[120px] md:min-h-[140px]
+                    ${index < project.metrics.length - 1 ? 'border-b md:border-b-0 md:border-r border-slate-300' : ''}
+                    ${index === 0 ? 'rounded-tl-2xl' : ''}
+                    ${index === project.metrics.length - 1 ? 'rounded-tr-2xl' : ''}`}
+                >
+                  <div>
+                    <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-1 tracking-tight">
+                      {metric.value}
+                    </p>
+                    <p className="text-primary text-xs md:text-sm font-medium uppercase tracking-wide">
+                      {metric.label}
+                    </p>
+                  </div>
+                  <span className="text-slate-400 text-xs mt-3">0{index + 1}.</span>
+                </div>
               ))}
             </div>
-          </div>
 
-          {/* Card 2 - Overview */}
-          <div className="bg-white p-6 md:p-8 min-h-[200px] flex flex-col justify-between border-x border-slate-200">
-            <span className="text-slate-400 text-xs uppercase tracking-widest mb-4 block">Overview</span>
-            <p className="text-slate-700 text-base md:text-lg leading-relaxed">
-              {project.description}
-            </p>
-          </div>
+            {/* 3-Card Clean Layout - Smaller */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 border-t border-slate-300">
+              {/* Card 1 - Scope of Work */}
+              <div className="bg-slate-900 p-5 md:p-6 min-h-[140px] flex flex-col justify-between rounded-bl-2xl">
+                <span className="text-slate-500 text-xs uppercase tracking-widest mb-3 block">Scope of Work</span>
+                <div className="space-y-0.5">
+                  {project.shortServices.map((service, index) => (
+                    <p key={index} className="text-white text-lg md:text-xl font-light leading-tight">{service}</p>
+                  ))}
+                </div>
+              </div>
 
-          {/* Card 3 - What We Did */}
-          <div className="bg-slate-50 p-6 md:p-8 min-h-[200px] flex flex-col justify-between">
-            <span className="text-slate-400 text-xs uppercase tracking-widest mb-4 block">What We Did</span>
-            <p className="text-slate-700 text-base md:text-lg leading-relaxed">
-              {project.strategy.slice(0, 2).join('. ')}.
-            </p>
+              {/* Card 2 - Overview */}
+              <div className="bg-white p-5 md:p-6 min-h-[140px] flex flex-col justify-between border-x border-slate-200">
+                <span className="text-slate-400 text-xs uppercase tracking-widest mb-3 block">Overview</span>
+                <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+                  {project.description}
+                </p>
+              </div>
+
+              {/* Card 3 - What We Did */}
+              <div className="bg-slate-50 p-5 md:p-6 min-h-[140px] flex flex-col justify-between rounded-br-2xl">
+                <span className="text-slate-400 text-xs uppercase tracking-widest mb-3 block">What We Did</span>
+                <p className="text-slate-700 text-sm md:text-base leading-relaxed">
+                  {project.strategy.slice(0, 2).join('. ')}.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
