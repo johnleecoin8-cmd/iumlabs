@@ -1,16 +1,16 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const clientLogos = [
-  { name: "Solana", url: "https://solana.com", logo: "https://cryptologos.cc/logos/solana-sol-logo.svg" },
-  { name: "Polkadot", url: "https://polkadot.network", logo: "https://cryptologos.cc/logos/polkadot-new-dot-logo.svg" },
-  { name: "Cosmos", url: "https://cosmos.network", logo: "https://cryptologos.cc/logos/cosmos-atom-logo.svg" },
-  { name: "Near", url: "https://near.org", logo: "https://cryptologos.cc/logos/near-protocol-near-logo.svg" },
-  { name: "Avalanche", url: "https://avax.network", logo: "https://cryptologos.cc/logos/avalanche-avax-logo.svg" },
-  { name: "Arbitrum", url: "https://arbitrum.io", logo: "https://cryptologos.cc/logos/arbitrum-arb-logo.svg" },
-  { name: "Optimism", url: "https://optimism.io", logo: "https://cryptologos.cc/logos/optimism-ethereum-op-logo.svg" },
-  { name: "Polygon", url: "https://polygon.technology", logo: "https://cryptologos.cc/logos/polygon-matic-logo.svg" },
   { name: "BNB Chain", url: "https://bnbchain.org", logo: "https://cryptologos.cc/logos/bnb-bnb-logo.svg" },
-  { name: "Base", url: "https://base.org", logo: "https://avatars.githubusercontent.com/u/108554348?s=200&v=4" },
+  { name: "Peaq", url: "https://www.peaq.network", logo: "https://assets.coingecko.com/coins/images/29870/large/peaq-logo.png" },
+  { name: "Story Protocol", url: "https://www.story.foundation", logo: "https://assets.coingecko.com/coins/images/51999/large/story_protocol.jpg" },
+  { name: "zkPass", url: "https://zkpass.org", logo: "https://assets.coingecko.com/coins/images/38263/large/zkpass.png" },
+  { name: "Falcon", url: "https://falcon.finance", logo: "https://pbs.twimg.com/profile_images/1907055587992961026/cQLCR2n0_400x400.jpg" },
+  { name: "Ondo", url: "https://ondo.finance", logo: "https://cryptologos.cc/logos/ondo-finance-ondo-logo.svg" },
+  { name: "MegaETH", url: "https://megaeth.systems", logo: "https://pbs.twimg.com/profile_images/1803473821882028032/x6E8AIAU_400x400.jpg" },
+  { name: "Bybit", url: "https://www.bybit.com", logo: "https://cryptologos.cc/logos/bybit-bit-logo.svg" },
+  { name: "Abstract", url: "https://abs.xyz", logo: "https://pbs.twimg.com/profile_images/1879227015043588096/ZayrZyEZ_400x400.jpg" },
+  { name: "KuCoin", url: "https://www.kucoin.com", logo: "https://cryptologos.cc/logos/kucoin-token-kcs-logo.svg" },
 ];
 
 const mediaLogos = [
