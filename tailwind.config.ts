@@ -51,13 +51,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Neon colors
-        neon: {
-          cyan: "hsl(var(--neon-cyan))",
-          purple: "hsl(var(--neon-purple))",
-          pink: "hsl(var(--neon-pink))",
-          green: "hsl(var(--neon-green))",
-          blue: "hsl(var(--neon-blue))",
+        // Lunar Strategy colors
+        lunar: {
+          blue: "hsl(217 91% 60%)",
+          dark: "hsl(0 0% 4%)",
+          light: "hsl(0 0% 96%)",
         },
       },
       borderRadius: {
@@ -110,8 +108,6 @@ export default {
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-stripe": "linear-gradient(135deg, hsl(var(--gradient-purple)), hsl(var(--gradient-pink)), hsl(var(--gradient-orange)))",
-        "gradient-stripe-soft": "linear-gradient(135deg, hsl(var(--gradient-purple) / 0.3), hsl(var(--gradient-pink) / 0.3), hsl(var(--gradient-orange) / 0.3))",
       },
     },
   },
