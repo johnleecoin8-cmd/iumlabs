@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import { images } from "@/config/content";
 import { ArrowUpRight } from "lucide-react";
+import CalendlyButton from "@/components/CalendlyButton";
 
 const projects = [
   {
@@ -14,8 +15,7 @@ const projects = [
     result: "$12M Raised",
     image: images.portfolio.metaverse,
     services: ["KOL Marketing", "Community Building", "PR & Media"],
-    color: "bg-purple-100 text-purple-700",
-    borderColor: "border-purple-200 hover:border-purple-400",
+    gradient: "from-purple-600 via-pink-500 to-red-500",
   },
   {
     id: "kimchiswap",
@@ -25,8 +25,7 @@ const projects = [
     result: "$8.5M TVL",
     image: images.portfolio.defi,
     services: ["Community Growth", "KOL Marketing", "Event Management"],
-    color: "bg-blue-100 text-blue-700",
-    borderColor: "border-blue-200 hover:border-blue-400",
+    gradient: "from-blue-600 via-cyan-500 to-teal-500",
   },
   {
     id: "seoul-dao",
@@ -36,8 +35,7 @@ const projects = [
     result: "15K Members",
     image: images.portfolio.dao,
     services: ["Events", "Community Building", "PR & Media"],
-    color: "bg-green-100 text-green-700",
-    borderColor: "border-green-200 hover:border-green-400",
+    gradient: "from-green-600 via-emerald-500 to-teal-500",
   },
   {
     id: "k-play",
@@ -47,8 +45,7 @@ const projects = [
     result: "$20M Raised",
     image: images.portfolio.gamefi,
     services: ["KOL Marketing", "Community Growth", "GTM Strategy"],
-    color: "bg-orange-100 text-orange-700",
-    borderColor: "border-orange-200 hover:border-orange-400",
+    gradient: "from-orange-600 via-amber-500 to-yellow-500",
   },
   {
     id: "defi-protocol-x",
@@ -58,8 +55,7 @@ const projects = [
     result: "$45M TVL",
     image: images.portfolio.defi,
     services: ["GTM Strategy", "Exchange Listing", "PR & Media"],
-    color: "bg-teal-100 text-teal-700",
-    borderColor: "border-teal-200 hover:border-teal-400",
+    gradient: "from-indigo-600 via-purple-500 to-pink-500",
   },
   {
     id: "nft-collection-y",
@@ -69,8 +65,7 @@ const projects = [
     result: "10K Minted",
     image: images.portfolio.metaverse,
     services: ["KOL Marketing", "Community Building", "Events"],
-    color: "bg-pink-100 text-pink-700",
-    borderColor: "border-pink-200 hover:border-pink-400",
+    gradient: "from-rose-600 via-pink-500 to-fuchsia-500",
   },
 ];
 
@@ -83,21 +78,52 @@ const Projects = () => {
       
       {/* Hero */}
       <section className="pt-32 pb-20 px-4">
-        <div className="container mx-auto max-w-4xl text-center">
-          <span className="text-sm font-medium text-purple-600 tracking-wider mb-4 block">CASE STUDIES</span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
-            Our <span className="text-gradient">Work</span>
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Explore our portfolio of successful Web3 projects launched in the Korean market.
-          </p>
+        <div className="container mx-auto max-w-5xl">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            {/* Left - What */}
+            <div>
+              <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-foreground mb-8">
+                Cases
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                Explore our portfolio of successful Web3 projects launched in the Korean market. Real results, real growth.
+              </p>
+              <CalendlyButton 
+                variant="outline" 
+                className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              >
+                [ book a meeting ]
+              </CalendlyButton>
+            </div>
+
+            {/* Right - Stats */}
+            <div className="space-y-6">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+                Results
+              </h2>
+              <div className="space-y-4">
+                <div className="flex items-baseline justify-between py-4 border-b border-dashed border-border/50">
+                  <span className="text-muted-foreground">Total Funds Raised</span>
+                  <span className="text-3xl font-bold text-foreground">[ $100M+ ]</span>
+                </div>
+                <div className="flex items-baseline justify-between py-4 border-b border-dashed border-border/50">
+                  <span className="text-muted-foreground">Projects Launched</span>
+                  <span className="text-3xl font-bold text-foreground">[ 50+ ]</span>
+                </div>
+                <div className="flex items-baseline justify-between py-4 border-b border-dashed border-border/50">
+                  <span className="text-muted-foreground">Community Members</span>
+                  <span className="text-3xl font-bold text-foreground">[ 500K+ ]</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Projects Grid */}
-      <section ref={ref} className="py-16 px-4">
+      <section ref={ref} className="py-16 px-4 border-t border-border/30">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, index) => (
               <div
                 key={project.id}
@@ -106,29 +132,30 @@ const Projects = () => {
                 }`}
                 style={{ transitionDelay: `${100 + index * 100}ms` }}
               >
-                {/* Image */}
-                <div className={`relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-card border-2 ${project.borderColor} group-hover:shadow-lg transition-all`}>
+                {/* Image with gradient overlay */}
+                <div className={`relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-gradient-to-br ${project.gradient}`}>
+                  <div className="absolute inset-0 bg-black/20" />
                   <img 
                     src={project.image} 
                     alt={project.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+                    className="w-full h-full object-cover mix-blend-overlay opacity-50 group-hover:scale-105 transition-all duration-500"
                   />
                   {/* Result Badge */}
-                  <div className={`absolute bottom-4 left-4 px-3 py-1.5 ${project.color} text-sm font-medium rounded-full`}>
+                  <div className="absolute bottom-4 left-4 px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium rounded-full">
                     {project.result}
                   </div>
                   {/* Arrow */}
-                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-                    <ArrowUpRight className="w-5 h-5" />
+                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                    <ArrowUpRight className="w-5 h-5 text-white" />
                   </div>
                 </div>
 
                 {/* Content */}
                 <div>
-                  <span className={`text-xs font-medium ${project.color} px-2 py-1 rounded-full`}>
+                  <span className="text-xs font-mono text-primary px-2 py-1 border border-primary/30 rounded-full">
                     {project.category}
                   </span>
-                  <h3 className="text-xl font-semibold text-foreground mt-2 mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-xl font-semibold text-foreground mt-3 mb-2 group-hover:text-primary transition-colors">
                     {project.name}
                   </h3>
                   <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
@@ -138,7 +165,7 @@ const Projects = () => {
                   {/* Services Tags */}
                   <div className="flex flex-wrap gap-2">
                     {project.services.map((service) => (
-                      <span key={service} className="text-xs px-2 py-1 bg-muted rounded-full text-muted-foreground">
+                      <span key={service} className="text-xs px-2 py-1 bg-muted/50 border border-border/50 rounded-full text-muted-foreground">
                         {service}
                       </span>
                     ))}

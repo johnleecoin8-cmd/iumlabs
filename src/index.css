@@ -4,6 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Calendly popup widget styles */
+.calendly-overlay {
+  z-index: 99999 !important;
+}
+.calendly-popup {
+  z-index: 99999 !important;
+}
+
 @layer base {
   :root {
     /* Lunar Strategy Dark Theme */
