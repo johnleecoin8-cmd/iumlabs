@@ -105,12 +105,12 @@ const HeroSection = () => {
           {[...clientLogos, ...clientLogos].map((client, index) => (
             <div 
               key={index} 
-              className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-3 sm:px-5 py-2 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+              className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
             >
               <img 
                 src={client.logo} 
                 alt={client.name} 
-                className="h-4 w-4 sm:h-6 sm:w-6 object-contain brightness-0 invert opacity-80"
+                className="h-5 w-5 sm:h-7 sm:w-7 object-contain brightness-0 invert opacity-80 flex-shrink-0"
               />
               <span className="text-white/70 text-xs sm:text-sm font-medium whitespace-nowrap">
                 {client.name}
