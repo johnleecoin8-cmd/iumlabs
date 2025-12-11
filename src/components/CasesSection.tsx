@@ -214,7 +214,7 @@ const CasesSection = () => {
                   <img
                     src={caseItem.logo}
                     alt={caseItem.name}
-                    className="w-20 h-20 md:w-24 md:h-24 object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-300"
+                    className="w-20 h-20 md:w-24 md:h-24 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-lg"
                   />
                 </div>
 
