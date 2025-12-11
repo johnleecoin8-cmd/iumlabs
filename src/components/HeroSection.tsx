@@ -69,25 +69,25 @@ const HeroSection = () => {
 
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
-        <div className="max-w-6xl mx-auto text-center">
-          {/* Main Headline - Adjusted size to fit viewport */}
-          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light leading-[0.9] tracking-tight mb-6 sm:mb-8 opacity-0 animate-fade-up">
-            <span className="text-white">Your</span>
-            <span className="serif-italic text-white"> Web 3.0</span>
+        <div className="max-w-7xl mx-auto text-center">
+          {/* Main Headline - Giant impact typography */}
+          <h1 className="text-[11vw] sm:text-[9vw] md:text-[8vw] lg:text-[7vw] font-extralight leading-[0.85] tracking-[-0.03em] mb-8 sm:mb-10 opacity-0 animate-fade-up">
+            <span className="text-white block">Your</span>
+            <span className="serif-italic text-white/90 font-normal"> Web 3.0</span>
             <br />
             <span className="text-white">Marketing</span>
-            <span className="serif-italic text-white"> Agency</span>
+            <span className="serif-italic text-white/90 font-normal"> Agency</span>
           </h1>
 
-          {/* Subtext - Lunar Strategy style */}
-          <p className="text-base sm:text-lg text-white/60 max-w-xl mx-auto mb-8 opacity-0 animate-fade-up stagger-2">
+          {/* Subtext - Larger and more prominent */}
+          <p className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-10 opacity-0 animate-fade-up stagger-2 font-light tracking-wide">
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </p>
 
-          {/* CTA Button */}
-          <div className="opacity-0 animate-fade-up stagger-3 mt-4 sm:mt-6">
-            <CalendlyButton className="lunar-btn text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 hover-glow">
-              <Calendar className="w-4 h-4 sm:w-5 sm:h-5" />
+          {/* CTA Button - Larger */}
+          <div className="opacity-0 animate-fade-up stagger-3 mt-6 sm:mt-8">
+            <CalendlyButton className="lunar-btn text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-5 hover-glow">
+              <Calendar className="w-5 h-5 sm:w-6 sm:h-6" />
               <span>Book a Free Consultation</span>
             </CalendlyButton>
           </div>
