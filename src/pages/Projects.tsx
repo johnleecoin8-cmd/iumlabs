@@ -7,7 +7,7 @@ import TiltCard from "@/components/TiltCard";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
-import seoulTechFuture from "@/assets/backgrounds/seoul-tech-future.jpg";
+import saturnRings from "@/assets/backgrounds/saturn-rings.jpg";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -248,15 +248,15 @@ const stats = [
 ];
 
 const floatingTags = [
-  { label: "DeFi", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-violet-400 text-white" },
-  { label: "Layer 1", top: "30%", left: "18%", mobileTop: "15%", mobileRight: "3%", color: "bg-cyan-400 text-black" },
+  { label: "DeFi", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-purple-400 text-white" },
+  { label: "Layer 1", top: "30%", left: "18%", mobileTop: "15%", mobileRight: "3%", color: "bg-pink-400 text-white" },
   { label: "GameFi", top: "48%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-fuchsia-400 text-white" },
-  { label: "NFT", top: "52%", left: "22%", color: "bg-amber-400 text-black" },
-  { label: "Infrastructure", top: "16%", right: "12%", color: "bg-emerald-400 text-black" },
-  { label: "Exchange", top: "30%", right: "5%", color: "bg-white text-black" },
-  { label: "Layer 2", top: "48%", right: "8%", color: "bg-blue-400 text-white" },
-  { label: "DePIN", bottom: "28%", right: "15%", color: "bg-lime-400 text-black" },
-  { label: "RWA", bottom: "32%", left: "12%", color: "bg-rose-400 text-white" },
+  { label: "NFT", top: "52%", left: "22%", color: "bg-violet-300 text-black" },
+  { label: "Infrastructure", top: "16%", right: "12%", color: "bg-purple-300 text-black" },
+  { label: "Exchange", top: "30%", right: "5%", color: "bg-pink-300 text-black" },
+  { label: "Layer 2", top: "48%", right: "8%", color: "bg-fuchsia-300 text-black" },
+  { label: "DePIN", bottom: "28%", right: "15%", color: "bg-violet-500 text-white" },
+  { label: "RWA", bottom: "32%", left: "12%", color: "bg-pink-500 text-white" },
 ];
 
 const Projects = () => {
@@ -275,20 +275,20 @@ const Projects = () => {
       
       {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Seoul Tech Future */}
+        {/* Background - Saturn Rings */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${seoulTechFuture})`,
-              filter: "brightness(0.5) saturate(1.2)",
+              backgroundImage: `url(${saturnRings})`,
+              filter: "brightness(0.7) saturate(1.2)",
             }}
           />
           
-          {/* Aurora light overlay - Cyberpunk theme */}
+          {/* Aurora light overlay - Saturn purple/pink theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/25 via-transparent to-cyan-500/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-fuchsia-600/15 via-transparent to-blue-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/30 via-transparent to-pink-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-violet-600/25 via-transparent to-fuchsia-500/15" />
           </div>
           
           {/* Light sweep effect */}
