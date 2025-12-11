@@ -14,77 +14,79 @@
 
 @layer base {
   :root {
-    /* Light theme (default) - Lunar Strategy style */
-    --background: 0 0% 96%;
-    --foreground: 220 20% 10%;
+    /* Dark theme - Black background with white/blue/red accents */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
     
-    --card: 0 0% 100%;
-    --card-foreground: 220 20% 10%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 220 20% 10%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 98%;
     
+    /* Blue primary */
     --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 220 20% 10%;
+    /* Red accent */
+    --secondary: 0 72% 51%;
+    --secondary-foreground: 0 0% 100%;
     
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 8% 46%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
     
-    --accent: 217 91% 60%;
+    --accent: 0 72% 51%;
     --accent-foreground: 0 0% 100%;
     
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
     --ring: 217 91% 60%;
     
     --radius: 0.5rem;
 
     /* Dark section variables */
-    --dark-bg: 220 20% 6%;
+    --dark-bg: 0 0% 2%;
     --dark-fg: 0 0% 100%;
 
-    /* Service tag colors */
-    --tag-pink: 330 80% 65%;
-    --tag-green: 142 70% 45%;
-    --tag-yellow: 45 93% 58%;
-    --tag-orange: 25 95% 53%;
+    /* Service tag colors - Blue, Red, White variations */
     --tag-blue: 217 91% 60%;
+    --tag-red: 0 72% 51%;
+    --tag-white: 0 0% 100%;
+    --tag-cyan: 190 80% 50%;
+    --tag-pink: 330 80% 60%;
     --tag-purple: 270 70% 60%;
   }
 
   .dark {
-    --background: 220 20% 6%;
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     
-    --card: 220 20% 10%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 220 20% 10%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
     
     --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 220 14% 15%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 0 72% 51%;
+    --secondary-foreground: 0 0% 100%;
     
-    --muted: 220 14% 15%;
-    --muted-foreground: 220 8% 65%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
     
-    --accent: 217 91% 60%;
+    --accent: 0 72% 51%;
     --accent-foreground: 0 0% 100%;
     
-    --destructive: 0 62% 30%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 220 13% 20%;
-    --input: 220 13% 20%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
     --ring: 217 91% 60%;
   }
 }
@@ -129,44 +131,59 @@
     color: hsl(var(--foreground) / 0.7);
   }
 
-  /* Service Tags with Colors */
+  /* Service Tags with Colors - Blue/Red/White theme */
   .service-tag {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300 cursor-pointer;
   }
   
-  .service-tag-pink {
-    background: hsl(var(--tag-pink) / 0.15);
-    border-color: hsl(var(--tag-pink) / 0.4);
-    color: hsl(var(--tag-pink));
-  }
-  
-  .service-tag-green {
-    background: hsl(var(--tag-green) / 0.15);
-    border-color: hsl(var(--tag-green) / 0.4);
-    color: hsl(var(--tag-green));
-  }
-  
-  .service-tag-yellow {
-    background: hsl(var(--tag-yellow) / 0.15);
-    border-color: hsl(var(--tag-yellow) / 0.4);
-    color: hsl(var(--tag-yellow));
-  }
-  
-  .service-tag-orange {
-    background: hsl(var(--tag-orange) / 0.15);
-    border-color: hsl(var(--tag-orange) / 0.4);
-    color: hsl(var(--tag-orange));
-  }
-
   .service-tag-blue {
     background: hsl(var(--tag-blue) / 0.15);
-    border-color: hsl(var(--tag-blue) / 0.4);
+    border-color: hsl(var(--tag-blue) / 0.5);
     color: hsl(var(--tag-blue));
+  }
+  
+  .service-tag-blue:hover {
+    background: hsl(var(--tag-blue) / 0.25);
+    border-color: hsl(var(--tag-blue));
+  }
+  
+  .service-tag-red {
+    background: hsl(var(--tag-red) / 0.15);
+    border-color: hsl(var(--tag-red) / 0.5);
+    color: hsl(var(--tag-red));
+  }
+  
+  .service-tag-red:hover {
+    background: hsl(var(--tag-red) / 0.25);
+    border-color: hsl(var(--tag-red));
+  }
+  
+  .service-tag-white {
+    background: hsl(var(--tag-white) / 0.1);
+    border-color: hsl(var(--tag-white) / 0.3);
+    color: hsl(var(--tag-white) / 0.9);
+  }
+  
+  .service-tag-white:hover {
+    background: hsl(var(--tag-white) / 0.15);
+    border-color: hsl(var(--tag-white) / 0.5);
+  }
+
+  .service-tag-cyan {
+    background: hsl(var(--tag-cyan) / 0.15);
+    border-color: hsl(var(--tag-cyan) / 0.5);
+    color: hsl(var(--tag-cyan));
+  }
+
+  .service-tag-pink {
+    background: hsl(var(--tag-pink) / 0.15);
+    border-color: hsl(var(--tag-pink) / 0.5);
+    color: hsl(var(--tag-pink));
   }
 
   .service-tag-purple {
     background: hsl(var(--tag-purple) / 0.15);
-    border-color: hsl(var(--tag-purple) / 0.4);
+    border-color: hsl(var(--tag-purple) / 0.5);
     color: hsl(var(--tag-purple));
   }
 
@@ -301,33 +318,52 @@
     }
   }
 
-  /* Case Card Gradients */
+  /* Case Card Gradients - Blue/Red Theme */
   .case-gradient-blue {
-    background: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 45%));
+    background: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 40%));
   }
   
-  .case-gradient-purple {
-    background: linear-gradient(135deg, hsl(270 70% 60%), hsl(270 70% 45%));
+  .case-gradient-red {
+    background: linear-gradient(135deg, hsl(0 72% 51%), hsl(0 72% 38%));
   }
   
-  .case-gradient-green {
-    background: linear-gradient(135deg, hsl(142 70% 45%), hsl(142 70% 35%));
-  }
-  
-  .case-gradient-orange {
-    background: linear-gradient(135deg, hsl(25 95% 53%), hsl(25 95% 43%));
-  }
-  
-  .case-gradient-pink {
-    background: linear-gradient(135deg, hsl(330 80% 65%), hsl(330 80% 50%));
-  }
-  
-  .case-gradient-cyan {
-    background: linear-gradient(135deg, hsl(190 80% 50%), hsl(190 80% 40%));
+  .case-gradient-white {
+    background: linear-gradient(135deg, hsl(0 0% 30%), hsl(0 0% 20%));
   }
 
-  .case-gradient-teal {
-    background: linear-gradient(135deg, hsl(175 60% 40%), hsl(175 60% 30%));
+  /* Service Icon Container */
+  .service-icon {
+    @apply w-12 h-12 rounded-xl flex items-center justify-center;
+  }
+
+  .service-icon-blue {
+    background: hsl(var(--tag-blue) / 0.15);
+    color: hsl(var(--tag-blue));
+  }
+
+  .service-icon-red {
+    background: hsl(var(--tag-red) / 0.15);
+    color: hsl(var(--tag-red));
+  }
+
+  .service-icon-white {
+    background: hsl(var(--tag-white) / 0.1);
+    color: hsl(var(--tag-white));
+  }
+
+  .service-icon-cyan {
+    background: hsl(var(--tag-cyan) / 0.15);
+    color: hsl(var(--tag-cyan));
+  }
+
+  .service-icon-pink {
+    background: hsl(var(--tag-pink) / 0.15);
+    color: hsl(var(--tag-pink));
+  }
+
+  .service-icon-purple {
+    background: hsl(var(--tag-purple) / 0.15);
+    color: hsl(var(--tag-purple));
   }
 
   /* Award Badge */
@@ -336,41 +372,6 @@
     background: hsl(var(--primary) / 0.1);
     color: hsl(var(--primary));
     border: 1px solid hsl(var(--primary) / 0.3);
-  }
-
-  /* Service Icon Container */
-  .service-icon {
-    @apply w-12 h-12 rounded-xl flex items-center justify-center;
-  }
-
-  .service-icon-pink {
-    background: hsl(var(--tag-pink) / 0.15);
-    color: hsl(var(--tag-pink));
-  }
-
-  .service-icon-green {
-    background: hsl(var(--tag-green) / 0.15);
-    color: hsl(var(--tag-green));
-  }
-
-  .service-icon-yellow {
-    background: hsl(var(--tag-yellow) / 0.15);
-    color: hsl(var(--tag-yellow));
-  }
-
-  .service-icon-orange {
-    background: hsl(var(--tag-orange) / 0.15);
-    color: hsl(var(--tag-orange));
-  }
-
-  .service-icon-blue {
-    background: hsl(var(--tag-blue) / 0.15);
-    color: hsl(var(--tag-blue));
-  }
-
-  .service-icon-purple {
-    background: hsl(var(--tag-purple) / 0.15);
-    color: hsl(var(--tag-purple));
   }
 
   /* Video Call UI Styles */

@@ -20,9 +20,9 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Main Navbar - Lunar Strategy Style with Borders */}
+      {/* Main Navbar - Black with white/blue/red accents */}
       <nav className="fixed top-3 left-3 right-3 z-50">
-        <div className="flex items-stretch rounded-2xl border border-white/10 bg-[hsl(220,20%,6%,0.9)] backdrop-blur-md overflow-hidden">
+        <div className="flex items-stretch rounded-2xl border border-white/10 bg-[hsl(0,0%,4%,0.95)] backdrop-blur-md overflow-hidden">
           {/* Logo Section */}
           <Link to="/" className="flex items-center gap-2 px-6 py-4 border-r border-white/10">
             <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">

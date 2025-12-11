@@ -4,12 +4,12 @@ import CalendlyButton from "./CalendlyButton";
 import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
 
 const serviceTags = [
-  { label: "PR", position: "top-[18%] left-[8%]", color: "pink" },
-  { label: "Social Media", position: "top-[12%] right-[15%]", color: "blue" },
-  { label: "KOL Marketing", position: "top-[40%] left-[3%]", color: "green" },
-  { label: "Community", position: "bottom-[30%] right-[6%]", color: "purple" },
-  { label: "Go-To-Market", position: "bottom-[15%] left-[12%]", color: "orange" },
-  { label: "Events", position: "top-[55%] right-[10%]", color: "yellow" },
+  { label: "PR", position: "top-[18%] left-[8%]", color: "blue" },
+  { label: "Social Media", position: "top-[12%] right-[15%]", color: "red" },
+  { label: "KOL Marketing", position: "top-[40%] left-[3%]", color: "white" },
+  { label: "Community", position: "bottom-[30%] right-[6%]", color: "blue" },
+  { label: "Go-To-Market", position: "bottom-[15%] left-[12%]", color: "red" },
+  { label: "Events", position: "top-[55%] right-[10%]", color: "white" },
 ];
 
 const clientLogos = [
@@ -43,39 +43,39 @@ const HeroSection = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat scale-110"
           style={{ 
             backgroundImage: `url(${seoulBridgeNight})`,
-            filter: "brightness(0.25) grayscale(0.3)",
+            filter: "brightness(0.2) grayscale(0.4)",
             transform: `translateY(${scrollY * 0.3}px) scale(1.1)`
           }}
         />
         {/* Dark overlay gradient for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220,20%,6%,0.7)] via-[hsl(220,20%,6%,0.3)] to-[hsl(220,20%,6%,0.8)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,2%,0.8)] via-[hsl(0,0%,2%,0.4)] to-[hsl(0,0%,2%,0.9)]" />
         
-        {/* Glowing Data Flow Lines Animation */}
+        {/* Glowing Data Flow Lines Animation - Blue and Red */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {/* Line 1 */}
+          {/* Blue Line */}
           <div className="absolute bottom-[35%] left-0 right-0 h-[2px] overflow-hidden">
             <div className="data-flow-line h-full w-full bg-gradient-to-r from-transparent via-[hsl(217,91%,60%,0.8)] to-transparent" 
                  style={{ animationDelay: "0s" }} />
           </div>
-          {/* Line 2 */}
+          {/* Red Line */}
           <div className="absolute bottom-[38%] left-0 right-0 h-[1px] overflow-hidden">
-            <div className="data-flow-line h-full w-full bg-gradient-to-r from-transparent via-[hsl(190,80%,60%,0.6)] to-transparent"
+            <div className="data-flow-line h-full w-full bg-gradient-to-r from-transparent via-[hsl(0,72%,51%,0.7)] to-transparent"
                  style={{ animationDelay: "1.5s" }} />
           </div>
-          {/* Line 3 */}
+          {/* White Line */}
           <div className="absolute bottom-[32%] left-0 right-0 h-[1px] overflow-hidden">
-            <div className="data-flow-line h-full w-full bg-gradient-to-r from-transparent via-[hsl(270,70%,60%,0.5)] to-transparent"
+            <div className="data-flow-line h-full w-full bg-gradient-to-r from-transparent via-[hsl(0,0%,100%,0.4)] to-transparent"
                  style={{ animationDelay: "3s" }} />
           </div>
-          {/* Vertical glow particles */}
-          <div className="absolute bottom-[30%] left-[20%] w-1 h-20 bg-gradient-to-t from-transparent via-[hsl(217,91%,60%,0.4)] to-transparent animate-pulse" />
-          <div className="absolute bottom-[30%] left-[40%] w-1 h-16 bg-gradient-to-t from-transparent via-[hsl(190,80%,60%,0.3)] to-transparent animate-pulse" style={{ animationDelay: "0.5s" }} />
+          {/* Vertical glow particles - Blue and Red */}
+          <div className="absolute bottom-[30%] left-[20%] w-1 h-20 bg-gradient-to-t from-transparent via-[hsl(217,91%,60%,0.5)] to-transparent animate-pulse" />
+          <div className="absolute bottom-[30%] left-[40%] w-1 h-16 bg-gradient-to-t from-transparent via-[hsl(0,72%,51%,0.4)] to-transparent animate-pulse" style={{ animationDelay: "0.5s" }} />
           <div className="absolute bottom-[30%] left-[60%] w-1 h-24 bg-gradient-to-t from-transparent via-[hsl(217,91%,60%,0.5)] to-transparent animate-pulse" style={{ animationDelay: "1s" }} />
-          <div className="absolute bottom-[30%] left-[80%] w-1 h-12 bg-gradient-to-t from-transparent via-[hsl(270,70%,60%,0.4)] to-transparent animate-pulse" style={{ animationDelay: "1.5s" }} />
+          <div className="absolute bottom-[30%] left-[80%] w-1 h-12 bg-gradient-to-t from-transparent via-[hsl(0,72%,51%,0.4)] to-transparent animate-pulse" style={{ animationDelay: "1.5s" }} />
         </div>
         
-        {/* Subtle glow effect on bridge */}
-        <div className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-gradient-radial from-[hsl(217,91%,60%,0.1)] via-transparent to-transparent blur-3xl" />
+        {/* Subtle glow effect on bridge - Blue and Red */}
+        <div className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-gradient-radial from-[hsl(217,91%,60%,0.08)] via-[hsl(0,72%,51%,0.04)] to-transparent blur-3xl" />
       </div>
 
       {/* Floating Service Tags */}
