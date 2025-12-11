@@ -15,26 +15,33 @@ const TrustSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-8 border-y border-border/30 bg-background overflow-hidden">
+    <section ref={ref} className="py-12 border-y border-border bg-muted/30 overflow-hidden">
       <div 
         className={`transition-opacity duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'}`}
       >
+        {/* Header */}
+        <div className="container mx-auto px-6 mb-8">
+          <p className="text-center text-muted-foreground text-sm uppercase tracking-wider">
+            Trusted by Leading Web3 Projects
+          </p>
+        </div>
+
         {/* Gradient overlays */}
         <div className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-muted/30 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-muted/30 to-transparent z-10 pointer-events-none" />
           
           <div className="flex whitespace-nowrap">
             <div className="logo-marquee">
               {[...clients, ...clients].map((client, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-center mx-8 shrink-0"
+                  className="flex items-center justify-center mx-10 shrink-0"
                 >
                   <img 
                     src={client.logo} 
                     alt={client.name}
-                    className="h-8 w-auto object-contain opacity-40 hover:opacity-80 transition-opacity brightness-0 invert"
+                    className="h-10 w-auto object-contain opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
                   />
                 </div>
               ))}
@@ -43,12 +50,12 @@ const TrustSection = () => {
               {[...clients, ...clients].map((client, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-center mx-8 shrink-0"
+                  className="flex items-center justify-center mx-10 shrink-0"
                 >
                   <img 
                     src={client.logo} 
                     alt={client.name}
-                    className="h-8 w-auto object-contain opacity-40 hover:opacity-80 transition-opacity brightness-0 invert"
+                    className="h-10 w-auto object-contain opacity-50 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
                   />
                 </div>
               ))}

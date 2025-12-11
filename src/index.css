@@ -14,25 +14,25 @@
 
 @layer base {
   :root {
-    /* Lunar Strategy Dark Theme */
-    --background: 220 20% 6%;
-    --foreground: 0 0% 98%;
+    /* Lunar Strategy Light Theme - White Background */
+    --background: 0 0% 100%;
+    --foreground: 220 20% 6%;
     
-    --card: 220 20% 10%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 98%;
+    --card-foreground: 220 20% 6%;
     
-    --popover: 220 20% 8%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 6%;
     
     /* Blue CTA - Lunar Strategy style */
     --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 220 20% 15%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 220 14% 96%;
+    --secondary-foreground: 220 20% 6%;
     
-    --muted: 220 20% 15%;
-    --muted-foreground: 220 10% 55%;
+    --muted: 220 14% 96%;
+    --muted-foreground: 220 10% 45%;
     
     --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
@@ -40,11 +40,15 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 220 20% 18%;
-    --input: 220 20% 18%;
+    --border: 220 14% 90%;
+    --input: 220 14% 90%;
     --ring: 217 91% 60%;
     
     --radius: 0.5rem;
+
+    /* Dark section variants */
+    --dark-bg: 220 20% 6%;
+    --dark-fg: 0 0% 98%;
   }
 
   .dark {
@@ -86,9 +90,35 @@
 }
 
 @layer components {
-  /* Lunar Strategy Tag Style - White outline only */
+  /* Dark Section - For Hero, CTA */
+  .section-dark {
+    background: hsl(var(--dark-bg));
+    color: hsl(var(--dark-fg));
+  }
+
+  .section-dark .text-foreground {
+    color: hsl(var(--dark-fg));
+  }
+
+  .section-dark .text-muted-foreground {
+    color: hsl(var(--dark-fg) / 0.6);
+  }
+
+  .section-dark .border-border {
+    border-color: hsl(var(--dark-fg) / 0.15);
+  }
+
+  /* Lunar Strategy Tag Style - For light backgrounds */
   .lunar-tag {
-    @apply px-4 py-2 rounded-full border border-foreground/30 text-foreground/80 text-sm font-medium;
+    @apply px-4 py-2 rounded-full border border-foreground/20 text-foreground/70 text-sm font-medium;
+    background: transparent;
+  }
+
+  /* Tag for dark sections */
+  .lunar-tag-dark {
+    @apply px-4 py-2 rounded-full border text-sm font-medium;
+    border-color: hsl(var(--dark-fg) / 0.3);
+    color: hsl(var(--dark-fg) / 0.8);
     background: transparent;
   }
 
@@ -116,7 +146,7 @@
 
   /* Number badge - bracket style */
   .number-badge {
-    @apply text-foreground/50 font-medium;
+    @apply text-muted-foreground font-medium;
   }
   
   .number-badge::before {
@@ -130,6 +160,10 @@
   /* Dotted separator */
   .dotted-line {
     border-bottom: 1px dashed hsl(var(--foreground) / 0.15);
+  }
+
+  .dotted-line-dark {
+    border-bottom: 1px dashed hsl(var(--dark-fg) / 0.15);
   }
 
   /* Serif italic style */
@@ -159,19 +193,19 @@
   }
   
   .case-gradient-blue {
-    background: linear-gradient(135deg, hsl(220 80% 30%) 0%, hsl(240 70% 20%) 100%);
+    background: linear-gradient(135deg, hsl(220 80% 50%) 0%, hsl(240 70% 40%) 100%);
   }
   
   .case-gradient-purple {
-    background: linear-gradient(135deg, hsl(270 60% 45%) 0%, hsl(290 50% 35%) 100%);
+    background: linear-gradient(135deg, hsl(270 60% 55%) 0%, hsl(290 50% 45%) 100%);
   }
   
   .case-gradient-teal {
-    background: linear-gradient(135deg, hsl(175 60% 30%) 0%, hsl(190 50% 25%) 100%);
+    background: linear-gradient(135deg, hsl(175 60% 40%) 0%, hsl(190 50% 35%) 100%);
   }
   
   .case-gradient-green {
-    background: linear-gradient(135deg, hsl(145 60% 30%) 0%, hsl(160 50% 25%) 100%);
+    background: linear-gradient(135deg, hsl(145 60% 40%) 0%, hsl(160 50% 35%) 100%);
   }
 
   /* Particles effect */
@@ -180,6 +214,16 @@
                       radial-gradient(circle at 80% 20%, rgba(255,255,255,0.08) 1px, transparent 1px),
                       radial-gradient(circle at 40% 40%, rgba(255,255,255,0.04) 1px, transparent 1px);
     background-size: 80px 80px, 120px 120px, 160px 160px;
+  }
+
+  /* Award badge style */
+  .award-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-50 text-amber-700 text-sm font-medium;
+  }
+
+  /* Service icon container */
+  .service-icon {
+    @apply w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary;
   }
 }
 
@@ -210,5 +254,11 @@
   
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(var(--primary)), hsl(270 60% 55%));
   }
 }
