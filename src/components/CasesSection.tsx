@@ -176,19 +176,19 @@ const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1 bg-[hsl(0,0%,96%)]">
+    <div ref={ref} className="py-24 px-4 flex-1 bg-[hsl(0,0%,4%)]">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className={`flex flex-col md:flex-row items-start md:items-center justify-between mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="flex items-center gap-4 mb-4 md:mb-0">
-            <span className="number-badge text-[hsl(0,0%,40%)]">200+ Clients</span>
+            <span className="number-badge text-white/50">200+ Clients</span>
           </div>
           
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-center text-[hsl(0,0%,8%)] flex-1">
-            Featured <span className="serif-italic">Cases</span>
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-center text-white flex-1">
+            Featured <span className="serif-italic text-primary">Cases</span>
           </h2>
           
-          <div className="text-[hsl(0,0%,60%)] text-2xl font-light hidden md:block">///</div>
+          <div className="text-white/30 text-2xl font-light hidden md:block">///</div>
         </div>
 
         {/* Cases Grid - 3x3 */}
@@ -245,12 +245,12 @@ const CasesSection = () => {
 
               {/* Content Below Card - Same as /projects page */}
               <div>
-                <h4 className="text-lg font-medium text-[hsl(0,0%,15%)] mb-2">{caseItem.name}</h4>
-                <p className="text-sm text-[hsl(0,0%,40%)] mb-3 line-clamp-2">
+                <h4 className="text-lg font-medium text-white mb-2">{caseItem.name}</h4>
+                <p className="text-sm text-white/50 mb-3 line-clamp-2">
                   {caseItem.result}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="text-xs px-2 py-1 bg-[hsl(0,0%,90%)] border border-[hsl(0,0%,85%)] rounded-full text-[hsl(0,0%,40%)]">
+                  <span className="text-xs px-2 py-1 bg-white/10 border border-white/10 rounded-full text-white/60">
                     {caseItem.category}
                   </span>
                 </div>
@@ -263,7 +263,7 @@ const CasesSection = () => {
         <div className={`flex justify-center mt-12 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <Link
             to="/projects"
-            className="lunar-btn-outline border-[hsl(0,0%,20%)] text-[hsl(0,0%,20%)] hover:bg-[hsl(0,0%,20%)] hover:text-white"
+            className="lunar-btn"
           >
             <span>View All Cases</span>
             <ArrowUpRight className="w-4 h-4" />
