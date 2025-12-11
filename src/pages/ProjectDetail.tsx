@@ -629,67 +629,70 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Gallery Section - Horizontal Scroll with Arrows */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <span className="text-slate-400 text-sm tracking-wider mb-4 block">01.</span>
-              <h2 className="text-4xl md:text-5xl font-light text-slate-900">
-                Campaign <span className="serif-italic">Highlights</span>
-              </h2>
-            </div>
-            {/* Navigation Arrows */}
-            <div className="hidden md:flex gap-2">
-              <button
-                onClick={() => scrollGallery('left')}
-                className="w-12 h-12 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors"
-              >
-                <ChevronLeft className="w-6 h-6 text-slate-700" />
-              </button>
-              <button
-                onClick={() => scrollGallery('right')}
-                className="w-12 h-12 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors"
-              >
-                <ChevronRight className="w-6 h-6 text-slate-700" />
-              </button>
-            </div>
+      {/* Gallery Section - Dark/Light Contrast */}
+      <section className="grid grid-cols-1 md:grid-cols-[400px_1fr]">
+        {/* Left - Title & Navigation (Dark) */}
+        <div className="bg-slate-900 p-10 md:p-12 flex flex-col justify-between min-h-[300px] md:min-h-[400px]">
+          <div>
+            <span className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-6 block">Gallery</span>
+            <h2 className="text-white text-3xl md:text-4xl font-light leading-tight">
+              Campaign<br />
+              <span className="italic text-slate-400">Highlights</span>
+            </h2>
+          </div>
+          
+          {/* Navigation Arrows */}
+          <div className="flex gap-3 mt-8">
+            <button
+              onClick={() => scrollGallery('left')}
+              className="w-12 h-12 rounded-full border border-slate-700 hover:border-slate-500 hover:bg-slate-800 flex items-center justify-center transition-all"
+            >
+              <ChevronLeft className="w-5 h-5 text-slate-400" />
+            </button>
+            <button
+              onClick={() => scrollGallery('right')}
+              className="w-12 h-12 rounded-full border border-slate-700 hover:border-slate-500 hover:bg-slate-800 flex items-center justify-center transition-all"
+            >
+              <ChevronRight className="w-5 h-5 text-slate-400" />
+            </button>
           </div>
         </div>
-        
-        {/* Horizontal Scroll Container */}
-        <div 
-          ref={galleryRef}
-          className="overflow-x-auto scrollbar-hide scroll-smooth"
-        >
-          <div className="flex gap-4 px-4 pb-4" style={{ width: 'max-content' }}>
-            {project.gallery.map((item, index) => (
-              <div 
-                key={index} 
-                className="relative w-72 md:w-80 aspect-[4/3] rounded-xl overflow-hidden group cursor-pointer flex-shrink-0"
-                onClick={() => openLightbox(index)}
-              >
-                <img
-                  src={item.src}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                
-                {/* Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-80 group-hover:opacity-100 transition-opacity" />
-                
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <h3 className="text-white font-semibold text-sm mb-1">{item.title}</h3>
-                  <p className="text-white/70 text-xs line-clamp-2">{item.description}</p>
-                </div>
 
-                {/* Expand Icon */}
-                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowUpRight className="w-4 h-4 text-white" />
+        {/* Right - Gallery Images (Light) */}
+        <div className="bg-slate-100 p-6 md:p-8 overflow-hidden">
+          <div 
+            ref={galleryRef}
+            className="overflow-x-auto scrollbar-hide scroll-smooth -mr-6 md:-mr-8"
+          >
+            <div className="flex gap-4 pr-6 md:pr-8" style={{ width: 'max-content' }}>
+              {project.gallery.map((item, index) => (
+                <div 
+                  key={index} 
+                  className="relative w-64 md:w-72 aspect-[4/3] overflow-hidden group cursor-pointer flex-shrink-0"
+                  onClick={() => openLightbox(index)}
+                >
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+                  {/* Content */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="text-white font-medium text-sm mb-1">{item.title}</h3>
+                    <p className="text-white/70 text-xs line-clamp-2">{item.description}</p>
+                  </div>
+
+                  {/* Expand Icon */}
+                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowUpRight className="w-4 h-4 text-slate-900" />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
