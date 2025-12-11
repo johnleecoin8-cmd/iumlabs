@@ -10,12 +10,19 @@ import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
 import Planet3D from "@/components/Planet3D";
 import marsSurface from "@/assets/backgrounds/mars-surface.jpg";
+import seoulSkyline from "@/assets/seoul-skyline.jpg";
 
 const budgetOptions = [
   "$15,000 - $25,000",
   "$25,000 - $50,000",
   "$50,000 +",
   "Looking to raise funds",
+];
+
+const contactDetails = [
+  { label: "office:", value: brand.address },
+  { label: "e-mail:", value: brand.email, link: `mailto:${brand.email}` },
+  { label: "telegram:", value: brand.telegram, link: brand.telegramLink },
 ];
 
 const contactInfo = [
@@ -43,6 +50,7 @@ const Contact = () => {
     name: "",
     email: "",
     company: "",
+    website: "",
     message: "",
     budget: "",
   });
@@ -66,7 +74,7 @@ const Contact = () => {
         .insert({
           name: formData.name,
           email: formData.email,
-          comments: `Company: ${formData.company}\nBudget: ${formData.budget}\n\n${formData.message}`,
+          comments: `Company: ${formData.company}\nWebsite: ${formData.website}\nBudget: ${formData.budget}\n\n${formData.message}`,
         });
 
       if (error) throw error;
@@ -86,7 +94,7 @@ const Contact = () => {
         title: "Message sent!",
         description: "We'll get back to you within 24 hours.",
       });
-      setFormData({ name: "", email: "", company: "", message: "", budget: "" });
+      setFormData({ name: "", email: "", company: "", website: "", message: "", budget: "" });
     } catch (error) {
       toast({
         title: "Failed to send",
@@ -219,92 +227,141 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form Section - Light Theme */}
-      <section className="section-light py-24 px-4">
-        <div className="container mx-auto max-w-3xl">
-          <div className="bg-white border border-[hsl(var(--light-fg),0.1)] rounded-3xl p-8 md:p-12">
-            <div className="mb-8">
-              <span className="text-sm text-[hsl(var(--light-fg),0.4)] mb-4 block">[ Send a Message ]</span>
-              <h2 className="text-3xl font-light text-[hsl(var(--light-fg))]">
-                Tell us about your <span className="serif-italic">project</span>
-              </h2>
+      {/* Contact Form Section - Dark Theme 2-Column */}
+      <section className="bg-background py-24 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+            {/* Left Column - Image & Contact Info */}
+            <div className="space-y-8">
+              {/* Seoul Skyline Image */}
+              <div className="rounded-xl overflow-hidden">
+                <img 
+                  src={seoulSkyline} 
+                  alt="Seoul Skyline" 
+                  className="w-full h-64 sm:h-80 object-cover"
+                />
+              </div>
+              
+              {/* Contact Details */}
+              <div className="space-y-6">
+                {contactDetails.map((detail, index) => (
+                  <div key={index}>
+                    <span className="text-sm text-white/40 block mb-1">{detail.label}</span>
+                    {detail.link ? (
+                      <a 
+                        href={detail.link}
+                        target={detail.link.startsWith('http') ? '_blank' : undefined}
+                        rel={detail.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="text-white text-lg hover:text-primary transition-colors"
+                      >
+                        {detail.value}
+                      </a>
+                    ) : (
+                      <p className="text-white text-lg">{detail.value}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
             </div>
-            
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid sm:grid-cols-2 gap-4">
+
+            {/* Right Column - Form */}
+            <div>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Name & Email Row */}
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Name</label>
+                    <input
+                      type="text"
+                      placeholder="Your name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      required
+                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-primary focus:outline-none transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">E-mail</label>
+                    <input
+                      type="email"
+                      placeholder="your@email.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      required
+                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-primary focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* Company Name & Website Row */}
+                <div className="grid sm:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Name</label>
+                    <input
+                      type="text"
+                      placeholder="Company name"
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-primary focus:outline-none transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Website</label>
+                    <input
+                      type="url"
+                      placeholder="https://..."
+                      value={formData.website}
+                      onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-primary focus:outline-none transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* Estimated Budget */}
                 <div>
-                  <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Name *</label>
-                  <Input
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                    className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary text-[hsl(var(--light-fg))]"
+                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-4">Estimated Budget</label>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {budgetOptions.map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        onClick={() => setFormData({ ...formData, budget: option })}
+                        className={`px-4 py-3 rounded-lg text-sm border transition-all text-center ${
+                          formData.budget === option
+                            ? 'bg-white/10 border-primary text-white'
+                            : 'bg-transparent border-white/20 text-white/60 hover:border-white/40 hover:text-white'
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Project Description */}
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Tell Us About Your Project</label>
+                  <textarea
+                    placeholder="Describe your project and goals..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    rows={4}
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-primary focus:outline-none transition-colors resize-none"
                   />
                 </div>
-                <div>
-                  <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Email *</label>
-                  <Input
-                    type="email"
-                    placeholder="you@company.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                    className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary text-[hsl(var(--light-fg))]"
-                  />
+
+                {/* Submit Button */}
+                <div className="pt-4">
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-medium transition-all disabled:opacity-50"
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </button>
                 </div>
-              </div>
-
-              <div>
-                <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Company</label>
-                <Input
-                  placeholder="Your company or project"
-                  value={formData.company}
-                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary text-[hsl(var(--light-fg))]"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-3">Budget Range</label>
-                <div className="flex flex-wrap gap-2">
-                  {budgetOptions.map((option) => (
-                    <button
-                      key={option}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, budget: option })}
-                      className={`px-4 py-2 rounded-full text-sm border transition-all ${
-                        formData.budget === option
-                          ? 'bg-primary text-white border-primary'
-                          : 'bg-transparent border-[hsl(var(--light-fg),0.15)] text-[hsl(var(--light-fg))] hover:border-primary'
-                      }`}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Message</label>
-                <Textarea
-                  placeholder="Tell us about your project and goals for the Korean market..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={5}
-                  className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary resize-none text-[hsl(var(--light-fg))]"
-                />
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="lunar-btn w-full"
-              >
-                <Send className="w-4 h-4" />
-                <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
-              </button>
-            </form>
+              </form>
+            </div>
           </div>
         </div>
       </section>
