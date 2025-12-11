@@ -18,8 +18,7 @@ const cases = [
     slug: "bnb-chain",
     result: "+340% Korean Trading Volume",
     category: "Infrastructure",
-    bgStyle: "bg-gradient-to-br from-[#F3BA2F] via-[#F0B90B] to-[#C99100]",
-    decorations: "bnb",
+    decorationType: "bnb",
   },
   {
     name: "KuCoin",
@@ -27,8 +26,7 @@ const cases = [
     slug: "kucoin",
     result: "50K+ New Korean Users",
     category: "Exchange",
-    bgStyle: "bg-gradient-to-br from-[#23AF91] via-[#1A9B7F] to-[#147A63]",
-    decorations: "kucoin",
+    decorationType: "kucoin",
   },
   {
     name: "Polygon",
@@ -36,8 +34,7 @@ const cases = [
     slug: "polygon",
     result: "$2M Korean TVL in 30 Days",
     category: "Layer 2",
-    bgStyle: "bg-gradient-to-br from-[#8247E5] via-[#7B3FE4] to-[#5A2D9C]",
-    decorations: "polygon",
+    decorationType: "polygon",
   },
   {
     name: "Ondo Finance",
@@ -45,8 +42,7 @@ const cases = [
     slug: "ondo",
     result: "100K+ Korean Community",
     category: "RWA",
-    bgStyle: "bg-gradient-to-br from-[#0A1628] via-[#1E3A5F] to-[#0D1B2A]",
-    decorations: "ondo",
+    decorationType: "ondo",
   },
   {
     name: "Peaq",
@@ -54,8 +50,7 @@ const cases = [
     slug: "peaq",
     result: "#1 DePIN in Korea",
     category: "DePIN",
-    bgStyle: "bg-gradient-to-br from-[#00E5A0] via-[#00D4AA] to-[#00A080]",
-    decorations: "peaq",
+    decorationType: "peaq",
   },
   {
     name: "Story Protocol",
@@ -63,110 +58,165 @@ const cases = [
     slug: "story-protocol",
     result: "5K+ Korean Creators",
     category: "IP Protocol",
-    bgStyle: "bg-gradient-to-br from-[#FF6B6B] via-[#E5484D] to-[#C92A2A]",
-    decorations: "story",
+    decorationType: "story",
   },
 ];
 
-// Unique decorative elements for each card
-const CardDecorations = ({ type }: { type: string }) => {
+// Vibrant card styles inspired by Lunar Strategy
+const CardContent = ({ type, logo, name }: { type: string; logo: string; name: string }) => {
   switch (type) {
     case "bnb":
+      // Hot pink/magenta like Polkadot
       return (
-        <>
-          <div className="absolute inset-0 opacity-20">
-            <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <pattern id="hexagons" width="20" height="17.32" patternUnits="userSpaceOnUse">
-                  <polygon points="10,0 20,5 20,15 10,17.32 0,15 0,5" fill="none" stroke="white" strokeWidth="0.5" />
-                </pattern>
-              </defs>
-              <rect width="100" height="100" fill="url(#hexagons)" />
-            </svg>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#E91E8C] via-[#FF2DAF] to-[#9B1FE8] overflow-hidden">
+          {/* Large decorative circles */}
+          <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#FF1493]/60 blur-sm" />
+          <div className="absolute bottom-10 left-10 w-40 h-40 rounded-full bg-[#FF69B4]/50" />
+          <div className="absolute bottom-32 left-32 w-24 h-24 rounded-full bg-[#C71585]/70" />
+          <div className="absolute top-20 right-10 w-16 h-16 rounded-full bg-white/20" />
+          {/* Dot pattern */}
+          <div className="absolute inset-0 opacity-30" style={{
+            backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
+            backgroundSize: '20px 20px'
+          }} />
+          {/* Logo */}
+          <div className="absolute top-6 left-6 flex items-center gap-3 z-10">
+            <img src={logo} alt={name} className="w-12 h-12 object-contain drop-shadow-2xl" />
+            <span className="text-white text-2xl font-bold drop-shadow-lg">{name}</span>
           </div>
-          <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-radial from-yellow-200/40 to-transparent blur-2xl" />
-          <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full border-2 border-white/20" />
-          <div className="absolute top-20 left-20 w-4 h-4 rotate-45 bg-white/30" />
-        </>
+        </div>
       );
+    
     case "kucoin":
+      // Soft gradient like Cardano
       return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,50 Q25,30 50,50 T100,50" stroke="white" strokeWidth="0.5" fill="none" />
-            <path d="M0,60 Q25,40 50,60 T100,60" stroke="white" strokeWidth="0.5" fill="none" />
-            <path d="M0,70 Q25,50 50,70 T100,70" stroke="white" strokeWidth="0.5" fill="none" />
-          </svg>
-          <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-gradient-to-t from-emerald-300/30 to-transparent" />
-          <div className="absolute top-8 right-8 grid grid-cols-4 gap-2 opacity-30">
-            {[...Array(16)].map((_, i) => (
-              <div key={i} className="w-1.5 h-1.5 rounded-full bg-white" />
-            ))}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#E8F4F8] via-[#FFF5E6] to-[#FFE4D6] overflow-hidden">
+          {/* Warm sun-like center */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-radial from-[#FF9D5C]/70 via-[#FFBE82]/50 to-transparent" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-gradient-radial from-[#FFB366]/60 to-transparent" />
+          {/* Dot pattern */}
+          <div className="absolute inset-0 opacity-20" style={{
+            backgroundImage: 'radial-gradient(circle, #666 0.5px, transparent 0.5px)',
+            backgroundSize: '12px 12px'
+          }} />
+          {/* Logo */}
+          <div className="absolute top-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
+            <img src={logo} alt={name} className="w-10 h-10 object-contain" />
+            <span className="text-slate-700 text-xl font-semibold tracking-wider uppercase">{name}</span>
           </div>
-          <div className="absolute bottom-16 left-8 w-20 h-20 rounded-full border border-dashed border-white/30" />
-        </>
+        </div>
       );
+    
     case "polygon":
+      // Dark blue with scattered elements like Internet Computer
       return (
-        <>
-          <div className="absolute top-10 right-10 w-16 h-16 rotate-45 border-2 border-white/30" />
-          <div className="absolute bottom-20 left-16 w-12 h-12 rotate-45 bg-white/10" />
-          <div className="absolute top-1/2 right-1/4 w-8 h-8 rotate-45 border border-purple-300/50" />
-          <div className="absolute -top-10 left-1/3 w-40 h-40 rounded-full bg-purple-400/30 blur-3xl" />
-          <svg className="absolute bottom-0 left-0 w-full h-24 opacity-20" viewBox="0 0 100 30" preserveAspectRatio="none">
-            <polygon points="0,30 10,0 20,30" fill="white" />
-            <polygon points="30,30 40,10 50,30" fill="white" />
-            <polygon points="60,30 70,5 80,30" fill="white" />
-          </svg>
-        </>
-      );
-    case "ondo":
-      return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,80 L20,70 L40,75 L60,50 L80,55 L100,30" stroke="#3B82F6" strokeWidth="1" fill="none" />
-            <path d="M0,90 L20,85 L40,88 L60,70 L80,72 L100,50" stroke="#60A5FA" strokeWidth="0.5" fill="none" />
-          </svg>
-          <div className="absolute inset-0 opacity-10">
-            <div className="w-full h-full" style={{ 
-              backgroundImage: 'linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.3) 1px, transparent 1px)',
-              backgroundSize: '20px 20px'
-            }} />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0D1B3E] via-[#1A2B5C] to-[#0A1628] overflow-hidden">
+          {/* Scattered colorful elements */}
+          <div className="absolute top-1/4 left-1/4 w-2 h-8 bg-cyan-400 rotate-45 opacity-80" />
+          <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-pink-500 rotate-12" />
+          <div className="absolute bottom-1/4 left-1/3 w-2 h-6 bg-orange-400 -rotate-45 opacity-70" />
+          <div className="absolute top-2/3 right-1/3 w-4 h-1 bg-purple-400 rotate-90" />
+          <div className="absolute bottom-1/3 right-1/5 w-2 h-2 bg-blue-400 rounded-full" />
+          <div className="absolute top-1/2 left-1/5 w-1 h-4 bg-green-400 rotate-30 opacity-60" />
+          {/* More scattered particles */}
+          {[...Array(15)].map((_, i) => (
+            <div 
+              key={i} 
+              className="absolute w-1 h-1 rounded-full"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                backgroundColor: ['#06B6D4', '#EC4899', '#F97316', '#8B5CF6', '#10B981'][i % 5],
+                opacity: 0.6 + Math.random() * 0.4,
+              }}
+            />
+          ))}
+          {/* Logo */}
+          <div className="absolute top-6 right-6 flex items-center gap-3 z-10">
+            <div className="w-10 h-10 flex items-center justify-center">
+              <svg viewBox="0 0 38 33" className="w-10 h-10 text-white">
+                <path fill="currentColor" d="M19 0l19 33H0L19 0zm0 8L8 27h22L19 8z"/>
+              </svg>
+            </div>
+            <span className="text-white text-xl font-bold">{name}</span>
           </div>
-          <div className="absolute top-1/4 right-1/4 w-3 h-3 rounded-full bg-blue-400 shadow-lg shadow-blue-500/50" />
-          <div className="absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-blue-300" />
-          <div className="absolute bottom-1/3 right-1/3 w-4 h-4 rounded-full border-2 border-blue-400/50" />
-        </>
+        </div>
       );
+    
+    case "ondo":
+      // Black with chrome 3D sphere like MultiversX
+      return (
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#1A1A1A] to-[#000000] overflow-hidden">
+          {/* Chrome 3D sphere effect */}
+          <div className="absolute bottom-0 left-0 w-48 h-48">
+            <div className="absolute inset-0 rounded-full bg-gradient-conic from-pink-500 via-purple-600 via-blue-500 via-teal-400 via-yellow-400 to-pink-500 blur-md opacity-80" 
+                 style={{ transform: 'perspective(400px) rotateX(20deg)' }} />
+            <div className="absolute inset-4 rounded-full bg-gradient-to-br from-slate-300 via-slate-500 to-slate-800"
+                 style={{ transform: 'perspective(400px) rotateX(20deg)' }} />
+            <div className="absolute inset-8 rounded-full bg-gradient-to-tr from-white/40 to-transparent opacity-60" />
+          </div>
+          {/* Ambient glow */}
+          <div className="absolute bottom-0 left-0 w-64 h-32 bg-gradient-to-t from-purple-500/20 via-blue-500/10 to-transparent blur-2xl" />
+          {/* Logo */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
+            <span className="text-white text-3xl font-light tracking-wider">
+              Ondo<span className="text-cyan-400 align-super text-sm">Finance</span>
+            </span>
+          </div>
+        </div>
+      );
+    
     case "peaq":
+      // Green with dot pattern like Aethir
       return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100">
-            <circle cx="20" cy="30" r="3" fill="#00FF9D" />
-            <circle cx="80" cy="20" r="2" fill="#00FF9D" />
-            <circle cx="60" cy="70" r="4" fill="#00FF9D" />
-            <circle cx="30" cy="80" r="2" fill="#00FF9D" />
-            <line x1="20" y1="30" x2="80" y2="20" stroke="#00FF9D" strokeWidth="0.5" />
-            <line x1="20" y1="30" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
-            <line x1="60" y1="70" x2="30" y2="80" stroke="#00FF9D" strokeWidth="0.5" />
-            <line x1="80" y1="20" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
-          </svg>
-          <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-green-300/40 to-transparent" />
-          <div className="absolute top-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-300/30 to-transparent" />
-          <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full bg-green-400/20 blur-3xl" />
-        </>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4A7C59] via-[#5D8A68] to-[#3D6B4A] overflow-hidden">
+          {/* Dot grid pattern */}
+          <div className="absolute inset-0 opacity-30" style={{
+            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.5) 2px, transparent 2px)',
+            backgroundSize: '24px 24px'
+          }} />
+          {/* Gradient overlay top */}
+          <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-[#3A6B4A]/50 to-transparent" />
+          {/* Small accent dots */}
+          <div className="absolute top-1/4 left-1/3 w-3 h-3 rounded-full bg-[#00FF9D]/60" />
+          <div className="absolute bottom-1/3 right-1/4 w-2 h-2 rounded-full bg-white/40" />
+          {/* Logo */}
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+            <div className="text-[#C5FF4A] font-bold text-3xl tracking-tight">
+              <span className="inline-block transform -skew-x-6">▲</span>
+            </div>
+            <span className="text-white text-3xl font-bold">{name}</span>
+            <span className="text-white/50 text-xs align-super">™</span>
+          </div>
+        </div>
       );
+    
     case "story":
+      // Coral/orange gradient with stripes
       return (
-        <>
-          <div className="absolute top-8 right-8 w-20 h-28 bg-white/10 rounded-sm transform rotate-6" />
-          <div className="absolute top-10 right-10 w-20 h-28 bg-white/15 rounded-sm transform rotate-3" />
-          <div className="absolute bottom-10 left-10 w-24 h-24 rounded-full bg-gradient-to-r from-red-300/40 to-pink-300/30" />
-          <div className="absolute top-1/3 left-1/4 w-6 h-6 rounded-full bg-red-200/50" />
-          <div className="absolute bottom-1/4 right-0 w-1/2 h-px bg-white/20" />
-          <div className="absolute bottom-1/4 right-0 w-1/3 h-px bg-white/20 translate-y-3" />
-        </>
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B4A] via-[#FF7F5C] to-[#FF8E6E] overflow-hidden">
+          {/* Vertical stripes */}
+          <div className="absolute inset-0 opacity-20" style={{
+            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(255,255,255,0.3) 8px, rgba(255,255,255,0.3) 10px)',
+          }} />
+          {/* Dark section at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-[#1A2B5C] to-transparent" />
+          {/* Abstract icon */}
+          <div className="absolute bottom-12 right-12 w-20 h-20 opacity-80">
+            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-4 bg-white/90 rounded-sm" />
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-8 h-10 bg-white/80 rounded-sm" />
+          </div>
+          {/* Small dots scattered */}
+          <div className="absolute top-1/4 right-1/4 w-2 h-2 rounded-full bg-white/60" />
+          <div className="absolute top-1/3 left-1/4 w-1.5 h-1.5 rounded-full bg-[#1A2B5C]/40" />
+          {/* Logo */}
+          <div className="absolute top-6 left-6 flex items-center gap-3 z-10">
+            <img src={logo} alt={name} className="w-10 h-10 object-contain drop-shadow-lg" />
+            <span className="text-white text-xl font-semibold drop-shadow-md">{name}</span>
+          </div>
+        </div>
       );
+    
     default:
       return null;
   }
@@ -191,8 +241,8 @@ const CasesSection = () => {
           <div className="text-[hsl(0,0%,60%)] text-2xl font-light hidden md:block">///</div>
         </div>
 
-        {/* Cases Grid - 3x3 */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        {/* Cases Grid - 3x2 */}
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {cases.map((caseItem, index) => (
             <Link
               key={caseItem.name}
@@ -201,60 +251,30 @@ const CasesSection = () => {
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <TiltCard
-                className={`relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle} cursor-pointer mb-4`}
-                max={12}
-                scale={1.03}
-                speed={300}
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-500"
+                max={8}
+                scale={1.02}
+                speed={400}
               >
-                {/* Unique Decorations */}
-                <CardDecorations type={caseItem.decorations} />
+                {/* Card Content */}
+                <CardContent type={caseItem.decorationType} logo={caseItem.logo} name={caseItem.name} />
 
-                {/* Content - Logo Centered */}
-                <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
-                  <img
-                    src={caseItem.logo}
-                    alt={caseItem.name}
-                    className="w-20 h-20 md:w-24 md:h-24 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-lg"
-                  />
-                </div>
-
-                {/* Bottom Info - Result */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-white text-sm font-semibold text-center">
-                    {caseItem.result}
-                  </p>
-                  <p className="text-white/70 text-xs text-center mt-1 uppercase tracking-wider">
-                    {caseItem.category}
-                  </p>
-                </div>
+                {/* Hover Overlay */}
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 z-20" />
 
                 {/* Hover Arrow */}
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <ArrowUpRight className="w-5 h-5 text-white" />
+                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-30">
+                  <div className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
+                    <ArrowUpRight className="w-5 h-5 text-slate-800" />
                   </div>
                 </div>
 
-                {/* Category Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider">
-                    {caseItem.category}
-                  </span>
+                {/* Bottom Result (shows on hover) */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
+                  <p className="text-white text-sm font-semibold">{caseItem.result}</p>
+                  <p className="text-white/70 text-xs mt-1">{caseItem.category}</p>
                 </div>
               </TiltCard>
-
-              {/* Content Below Card - Same as /projects page */}
-              <div>
-                <h4 className="text-lg font-medium text-[hsl(0,0%,15%)] mb-2">{caseItem.name}</h4>
-                <p className="text-sm text-[hsl(0,0%,40%)] mb-3 line-clamp-2">
-                  {caseItem.result}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="text-xs px-2 py-1 bg-[hsl(0,0%,90%)] border border-[hsl(0,0%,85%)] rounded-full text-[hsl(0,0%,40%)]">
-                    {caseItem.category}
-                  </span>
-                </div>
-              </div>
             </Link>
           ))}
         </div>
