@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowUpRight, Calendar, Mail, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowUpRight, Calendar, Mail, ChevronLeft, ChevronRight, BookOpen, TrendingUp, Lightbulb } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import Planet3D from "@/components/Planet3D";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
+import SectionBackground from "@/components/SectionBackground";
+import FloatingSectionElements from "@/components/FloatingSectionElements";
 import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
 
 interface BlogPost {
@@ -313,9 +315,26 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Top Articles Section */}
-      <section ref={ref} className="bg-background py-16 px-4">
-        <div className="container mx-auto max-w-7xl">
+      {/* Top Articles Section with Enhanced Background */}
+      <section ref={ref} className="bg-background py-16 px-4 relative">
+        {/* Dynamic Background Effects */}
+        <SectionBackground type="gradient-mesh" theme="nebula" intensity={0.4} />
+        <SectionBackground type="glow-orbs" theme="nebula" intensity={0.3} />
+        
+        {/* Floating Elements */}
+        <FloatingSectionElements
+          scrollY={scrollY}
+          parallaxMultiplier={0.03}
+          elements={[
+            { type: "icon", content: <BookOpen className="w-5 h-5" />, position: { top: "10%", left: "3%" }, color: "bg-pink-500/20 text-pink-400" },
+            { type: "icon", content: <TrendingUp className="w-5 h-5" />, position: { top: "25%", right: "4%" }, color: "bg-cyan-500/20 text-cyan-400" },
+            { type: "icon", content: <Lightbulb className="w-5 h-5" />, position: { bottom: "30%", left: "5%" }, color: "bg-purple-500/20 text-purple-400" },
+            { type: "tag", content: "Insights", position: { top: "18%", right: "10%" }, color: "bg-fuchsia-500/20 text-fuchsia-300" },
+            { type: "tag", content: "Guides", position: { bottom: "20%", right: "3%" }, color: "bg-cyan-500/20 text-cyan-300" },
+          ]}
+        />
+        
+        <div className="container mx-auto max-w-7xl relative z-10">
           <div className={`mb-10 transition-all duration-700 ${
             isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
