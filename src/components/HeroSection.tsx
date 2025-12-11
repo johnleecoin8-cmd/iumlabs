@@ -1,7 +1,7 @@
 import { Calendar, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import CalendlyButton from "./CalendlyButton";
-import moonBackground from "@/assets/moon-background.jpg";
+import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
 
 const serviceTags = [
   { label: "PR", position: "top-[20%] left-[6%]" },
@@ -36,19 +36,19 @@ const HeroSection = () => {
 
   return (
     <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background - Moon/Planet Image */}
+      {/* Background - Seoul Bridge Night */}
       <div className="absolute inset-0">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ 
-            backgroundImage: `url(${moonBackground})`,
-            filter: "brightness(0.3) grayscale(0.5)",
-            transform: `translateY(${scrollY * 0.2}px) scale(1.1)`
+            backgroundImage: `url(${seoulBridgeNight})`,
+            filter: "brightness(0.35)",
+            transform: `translateY(${scrollY * 0.15}px) scale(1.1)`
           }}
         />
         
         {/* Dark overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.4)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
       {/* Floating Service Tags - Desktop only */}
