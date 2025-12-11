@@ -1,10 +1,25 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, ChevronDown, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronDown, Search, Calendar } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import CalendlyButton from "@/components/CalendlyButton";
+import Planet3D from "@/components/Planet3D";
+import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
+
+// Blog thumbnail images
+import ecosystemGrowthImg from "@/assets/blog/ecosystem-growth-2025.jpg";
+import aiAgentsDefiImg from "@/assets/blog/ai-agents-defi.jpg";
+import avoidFloppedTgeImg from "@/assets/blog/avoid-flopped-tge.jpg";
+import communityGrowthAiImg from "@/assets/blog/community-growth-ai.jpg";
+import nftEvolutionImg from "@/assets/blog/nft-evolution.jpg";
+import cryptoMarketingBearImg from "@/assets/blog/crypto-marketing-bear.jpg";
+import kolMarketingImg from "@/assets/blog/kol-marketing.jpg";
+import kaitoMindshareImg from "@/assets/blog/kaito-mindshare.jpg";
 
 // Blog posts data
 const blogPosts = [
@@ -12,7 +27,7 @@ const blogPosts = [
     id: "1",
     slug: "korean-crypto-market-2024",
     title: "The State of Ecosystem Growth in 2025: Key Insights from the CryptoBridge Research Report",
-    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=500&fit=crop",
+    image: ecosystemGrowthImg,
     date: "Dec 11, 2024",
     featured: true,
   },
@@ -20,58 +35,78 @@ const blogPosts = [
     id: "2",
     slug: "ai-agents-defi",
     title: "AI Agents & DeFi: The DeFAI Future Powering Finance in 2025 & Beyond!",
-    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop",
+    image: aiAgentsDefiImg,
     date: "Dec 10, 2024",
   },
   {
     id: "3",
     slug: "avoid-flopped-tge",
     title: "How to Avoid a Flopped TGE: Building a Solid Foundation for Success",
-    image: "https://images.unsplash.com/photo-1642104704074-907c0698cbd9?w=800&h=500&fit=crop",
+    image: avoidFloppedTgeImg,
     date: "Dec 8, 2024",
   },
   {
     id: "4",
     slug: "community-growth-ai",
     title: "How to Grow Your Community in the Age of AI in 2025",
-    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=500&fit=crop",
+    image: communityGrowthAiImg,
     date: "Dec 5, 2024",
   },
   {
     id: "5",
     slug: "nft-evolution",
     title: "The Evolution of NFTs: From PFPs in 2021 to Nodes and Memberships in 2025",
-    image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=800&h=500&fit=crop",
+    image: nftEvolutionImg,
     date: "Nov 28, 2024",
   },
   {
     id: "6",
     slug: "crypto-marketing-bear-market",
     title: "Top 5 Steps To Rejuvenate Your Crypto Marketing In Bear Market in 2025",
-    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=500&fit=crop",
+    image: cryptoMarketingBearImg,
     date: "Nov 25, 2024",
   },
   {
     id: "7",
     slug: "kol-marketing-strategy",
     title: "The Strategic Role of KOLs in Crypto Marketing: How Top Agencies Drive Success",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
+    image: kolMarketingImg,
     date: "Nov 20, 2024",
   },
   {
     id: "8",
     slug: "kaito-mindshare",
     title: "Top 5 Strategies to Dominate Kaito Mindshare Before TGE",
-    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=500&fit=crop",
+    image: kaitoMindshareImg,
     date: "Nov 15, 2024",
   },
+];
+
+const floatingTags = [
+  { label: "Insights", top: "20%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-pink-400 text-white" },
+  { label: "Guides", top: "32%", left: "20%", mobileTop: "15%", mobileRight: "3%", color: "bg-cyan-400 text-black" },
+  { label: "Strategy", top: "50%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-purple-400 text-white" },
+  { label: "Research", top: "52%", left: "24%", color: "bg-fuchsia-400 text-white" },
+  { label: "Analysis", top: "18%", right: "12%", color: "bg-cyan-300 text-black" },
+  { label: "Reports", top: "32%", right: "5%", color: "bg-pink-300 text-black" },
+  { label: "News", top: "50%", right: "10%", color: "bg-purple-300 text-black" },
+  { label: "Trends", bottom: "28%", right: "16%", color: "bg-fuchsia-500 text-white" },
 ];
 
 const Blog = () => {
   const [featuredIndex, setFeaturedIndex] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [scrollY, setScrollY] = useState(0);
+  const [newsletterData, setNewsletterData] = useState({ name: "", email: "" });
+  const [isSubscribing, setIsSubscribing] = useState(false);
   const postsPerPage = 8;
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const featuredPost = blogPosts[featuredIndex];
   const sidebarPosts = blogPosts.slice(0, 6);
@@ -91,34 +126,131 @@ const Blog = () => {
     setFeaturedIndex((prev) => (prev - 1 + blogPosts.length) % blogPosts.length);
   };
 
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newsletterData.email) {
+      toast.error("Please enter your email address");
+      return;
+    }
+
+    setIsSubscribing(true);
+    try {
+      const { error } = await supabase
+        .from("newsletter_subscribers")
+        .insert({
+          name: newsletterData.name,
+          email: newsletterData.email,
+        });
+
+      if (error) {
+        if (error.code === "23505") {
+          toast.error("This email is already subscribed!");
+        } else {
+          throw error;
+        }
+      } else {
+        toast.success("Successfully subscribed to newsletter!");
+        setNewsletterData({ name: "", email: "" });
+      }
+    } catch (error) {
+      toast.error("Failed to subscribe. Please try again.");
+    } finally {
+      setIsSubscribing(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero Section - Blue Background with Moon */}
-      <section className="relative bg-primary min-h-[70vh] flex items-end overflow-hidden">
-        {/* Moon Image */}
-        <div className="absolute right-0 top-0 bottom-0 w-1/2 lg:w-2/5">
+      {/* Hero Section - Planetary Style with Nebula */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background - Cosmic Nebula */}
+        <div className="absolute inset-0 overflow-hidden">
           <div 
-            className="absolute inset-0 bg-cover bg-left"
-            style={{
-              backgroundImage: `url(https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?w=1200&h=1200&fit=crop)`,
-              filter: "brightness(0.9) contrast(1.1)",
+            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
+            style={{ 
+              backgroundImage: `url(${cosmicNebula})`,
+              filter: "brightness(0.6) saturate(1.3)",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/50 to-transparent" />
+          
+          {/* Aurora light overlay - Nebula pink/purple/cyan theme */}
+          <div className="absolute inset-0 animate-aurora">
+            <div className="absolute inset-0 bg-gradient-to-tr from-pink-600/25 via-transparent to-cyan-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/20 via-transparent to-fuchsia-500/15" />
+          </div>
+          
+          {/* Light sweep effect */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
+          </div>
+          
+          {/* Dark overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+          
+          {/* 3D Nebula Effect */}
+          <Planet3D type="nebula" className="opacity-50" />
+        </div>
+        
+        {/* Floating Tags with Parallax */}
+        <div>
+          {floatingTags.map((tag, index) => (
+            <span
+              key={`${tag.label}-${index}`}
+              className={`absolute animate-float hidden sm:block px-4 py-2 rounded-md text-sm font-medium shadow-lg ${tag.color}`}
+              style={{
+                top: tag.top,
+                left: tag.left,
+                right: tag.right,
+                bottom: tag.bottom,
+                animationDelay: `${index * 0.3}s`,
+                transform: `translateY(${scrollY * 0.05}px)`,
+              }}
+            >
+              {tag.label}
+            </span>
+          ))}
+          {floatingTags.slice(0, 4).map((tag, index) => (
+            <span
+              key={`mobile-${tag.label}-${index}`}
+              className={`absolute animate-float sm:hidden px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
+              style={{
+                top: tag.mobileTop,
+                left: tag.mobileLeft,
+                right: tag.mobileRight,
+                animationDelay: `${index * 0.3}s`,
+              }}
+            >
+              {tag.label}
+            </span>
+          ))}
         </div>
 
-        {/* Content */}
-        <div className="container mx-auto max-w-7xl px-4 relative z-10 pb-24 pt-40">
-          <h1 className="text-[20vw] md:text-[200px] lg:text-[280px] font-light text-white leading-[0.8] tracking-tight">
-            Bl<span className="serif-italic">o</span>g
-          </h1>
+        {/* Content with Stagger Animation */}
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
+          <div className="mb-16">
+            <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Blog ]</span>
+            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
+              Bl<span className="serif-italic text-primary">o</span>g
+            </h1>
+          </div>
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+            <p className="text-lg text-white/60 max-w-xl">
+              Insights, guides, and research on Web3 marketing in the Korean market.
+            </p>
+            <CalendlyButton className="lunar-btn">
+              <Calendar className="w-4 h-4" />
+              <span>Book a Consultation</span>
+            </CalendlyButton>
+          </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 right-8 text-white/60">
-          <ChevronDown className="w-8 h-8 animate-bounce" />
+        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/30">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
         </div>
       </section>
 
@@ -171,7 +303,7 @@ const Blog = () => {
           {/* Sidebar - Right Side */}
           <div className="lg:w-1/3 bg-white p-6 lg:p-8">
             <div className="space-y-0">
-              {sidebarPosts.map((post, index) => (
+              {sidebarPosts.map((post) => (
                 <Link 
                   key={post.id}
                   to={`/blog/${post.slug}`}
@@ -285,21 +417,30 @@ const Blog = () => {
 
         {/* Newsletter Form */}
         <div className="container mx-auto max-w-5xl px-4">
-          <div className="flex flex-col md:flex-row gap-4">
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col md:flex-row gap-4">
             <Input
               type="text"
               placeholder="name"
+              value={newsletterData.name}
+              onChange={(e) => setNewsletterData({ ...newsletterData, name: e.target.value })}
               className="flex-1 bg-[hsl(0,0%,92%)] border-0 rounded-2xl h-16 px-6 text-lg text-[hsl(0,0%,10%)]"
             />
             <Input
               type="email"
               placeholder="e-mail"
+              value={newsletterData.email}
+              onChange={(e) => setNewsletterData({ ...newsletterData, email: e.target.value })}
+              required
               className="flex-1 bg-[hsl(0,0%,92%)] border-0 rounded-2xl h-16 px-6 text-lg text-[hsl(0,0%,10%)]"
             />
-            <button className="bg-[hsl(0,0%,15%)] text-white px-12 h-16 rounded-2xl text-lg font-medium hover:bg-[hsl(0,0%,20%)] transition-colors">
-              Subscribe
+            <button 
+              type="submit"
+              disabled={isSubscribing}
+              className="bg-[hsl(0,0%,15%)] text-white px-12 h-16 rounded-2xl text-lg font-medium hover:bg-[hsl(0,0%,20%)] transition-colors disabled:opacity-50"
+            >
+              {isSubscribing ? "Subscribing..." : "Subscribe"}
             </button>
-          </div>
+          </form>
         </div>
       </section>
 
