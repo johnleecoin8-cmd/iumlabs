@@ -1,12 +1,24 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 
 const clientLogos = [
-  "SOLANA", "POLKADOT", "COSMOS", "NEAR", "AVALANCHE", 
-  "ARBITRUM", "OPTIMISM", "POLYGON", "BNB CHAIN", "BASE"
+  { name: "Solana", url: "https://solana.com", logo: "https://cryptologos.cc/logos/solana-sol-logo.svg" },
+  { name: "Polkadot", url: "https://polkadot.network", logo: "https://cryptologos.cc/logos/polkadot-new-dot-logo.svg" },
+  { name: "Cosmos", url: "https://cosmos.network", logo: "https://cryptologos.cc/logos/cosmos-atom-logo.svg" },
+  { name: "Near", url: "https://near.org", logo: "https://cryptologos.cc/logos/near-protocol-near-logo.svg" },
+  { name: "Avalanche", url: "https://avax.network", logo: "https://cryptologos.cc/logos/avalanche-avax-logo.svg" },
+  { name: "Arbitrum", url: "https://arbitrum.io", logo: "https://cryptologos.cc/logos/arbitrum-arb-logo.svg" },
+  { name: "Optimism", url: "https://optimism.io", logo: "https://cryptologos.cc/logos/optimism-ethereum-op-logo.svg" },
+  { name: "Polygon", url: "https://polygon.technology", logo: "https://cryptologos.cc/logos/polygon-matic-logo.svg" },
+  { name: "BNB Chain", url: "https://bnbchain.org", logo: "https://cryptologos.cc/logos/bnb-bnb-logo.svg" },
+  { name: "Base", url: "https://base.org", logo: "https://avatars.githubusercontent.com/u/108554348?s=200&v=4" },
 ];
 
 const mediaLogos = [
-  "CoinDesk", "Cointelegraph", "The Block", "Decrypt", "Forbes"
+  { name: "CoinDesk", url: "https://coindesk.com", logo: "https://www.coindesk.com/resizer/fJ-PnHZDQBhShtBQNaZI-ut_xCo=/144x32/downloads.coindesk.com/arc/failsafe/feeds/coindesk-logo.png" },
+  { name: "Cointelegraph", url: "https://cointelegraph.com", logo: "https://images.cointelegraph.com/cdn-cgi/image/format=auto,onerror=redirect,quality=90,width=180/https://cointelegraph.com/assets/images/CT_logo_white.svg" },
+  { name: "The Block", url: "https://theblock.co", logo: "https://www.theblock.co/static/img/logo-white.svg" },
+  { name: "Decrypt", url: "https://decrypt.co", logo: "https://decrypt.co/wp-content/themes/flavor/flavor/images/og-img/decrypt-logo-white.svg" },
+  { name: "Forbes", url: "https://forbes.com", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Forbes_logo.svg/200px-Forbes_logo.svg.png" },
 ];
 
 const TrustSection = () => {
@@ -22,23 +34,39 @@ const TrustSection = () => {
           </p>
           <div className="marquee">
             <div className="marquee-content">
-              {[...clientLogos, ...clientLogos].map((logo, index) => (
-                <span 
-                  key={index} 
-                  className="text-lg md:text-xl font-bold tracking-wider text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors whitespace-nowrap"
+              {[...clientLogos, ...clientLogos].map((client, index) => (
+                <a 
+                  key={index}
+                  href={client.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center h-8 w-24 md:w-32 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0"
+                  title={client.name}
                 >
-                  {logo}
-                </span>
+                  <img 
+                    src={client.logo} 
+                    alt={client.name} 
+                    className="h-6 md:h-8 w-auto object-contain invert"
+                  />
+                </a>
               ))}
             </div>
             <div className="marquee-content" aria-hidden="true">
-              {[...clientLogos, ...clientLogos].map((logo, index) => (
-                <span 
-                  key={index} 
-                  className="text-lg md:text-xl font-bold tracking-wider text-muted-foreground/40 hover:text-muted-foreground/70 transition-colors whitespace-nowrap"
+              {[...clientLogos, ...clientLogos].map((client, index) => (
+                <a 
+                  key={index}
+                  href={client.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center h-8 w-24 md:w-32 opacity-40 hover:opacity-80 transition-opacity grayscale hover:grayscale-0"
+                  title={client.name}
                 >
-                  {logo}
-                </span>
+                  <img 
+                    src={client.logo} 
+                    alt={client.name} 
+                    className="h-6 md:h-8 w-auto object-contain invert"
+                  />
+                </a>
               ))}
             </div>
           </div>
@@ -50,13 +78,21 @@ const TrustSection = () => {
             As Featured In
           </p>
           <div className="flex items-center justify-center gap-8 md:gap-12 flex-wrap">
-            {mediaLogos.map((logo) => (
-              <span 
-                key={logo} 
-                className="text-sm md:text-base font-medium tracking-wider text-muted-foreground/50 hover:text-muted-foreground transition-colors"
+            {mediaLogos.map((media) => (
+              <a 
+                key={media.name}
+                href={media.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center h-6 md:h-8 opacity-50 hover:opacity-100 transition-opacity"
+                title={media.name}
               >
-                {logo}
-              </span>
+                <img 
+                  src={media.logo} 
+                  alt={media.name} 
+                  className="h-5 md:h-6 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+                />
+              </a>
             ))}
           </div>
         </div>
