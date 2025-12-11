@@ -57,34 +57,34 @@ const BlogPreviewSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1 bg-[hsl(0,0%,4%)]">
+    <div ref={ref} className="py-24 px-4 flex-1">
       <div className="container mx-auto max-w-7xl">
         {/* Header Row */}
         <div className={`grid lg:grid-cols-2 gap-8 mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Left - Title */}
-          <h2 className="text-6xl md:text-7xl lg:text-8xl font-light text-white">
+          <h2 className="text-6xl md:text-7xl lg:text-8xl font-light text-[#1a1a1a]">
             <span className="serif-italic">Blog</span>
           </h2>
           
           {/* Right - Description */}
-          <p className="text-lg text-white/50 leading-relaxed self-end">
+          <p className="text-lg text-[#1a1a1a]/60 leading-relaxed self-end">
             Our blog is a dedicated channel for insights into Korean crypto marketing, 
             regulatory updates, and proven strategies for Web3 projects entering Korea.
           </p>
         </div>
 
         {/* Sub-header Row */}
-        <div className={`flex items-center justify-between mb-8 pb-4 border-b border-white/10 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="flex items-center gap-2 text-sm text-white/50">
+        <div className={`flex items-center justify-between mb-8 pb-4 border-b border-[#1a1a1a]/10 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className="flex items-center gap-2 text-sm text-[#1a1a1a]/50">
             <span>↓</span>
             <span>Recent News</span>
           </div>
           
           <div className="flex items-center gap-4">
-            <span className="text-sm text-white/40">+10 articles</span>
+            <span className="text-sm text-[#1a1a1a]/40">+10 articles</span>
             <Link
-              to="/blog"
-              className="lunar-btn text-sm"
+              to="/research"
+              className="px-4 py-2 rounded-full border border-[#1a1a1a]/20 text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white transition-colors text-sm"
             >
               all articles
             </Link>
@@ -96,12 +96,12 @@ const BlogPreviewSection = () => {
           {blogPosts.map((post, index) => (
             <Link
               key={post.slug}
-              to={`/blog/${post.slug}`}
+              to={`/research/${post.slug}`}
               className="group"
               style={{ animationDelay: `${index * 50}ms` }}
             >
               {/* Image */}
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4">
+              <div className="relative aspect-[4/3] rounded-xl overflow-hidden mb-4 bg-[#1a1a1a]/5">
                 <img
                   src={post.image}
                   alt={post.title}
@@ -110,16 +110,16 @@ const BlogPreviewSection = () => {
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                   <div className="w-10 h-10 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ArrowUpRight className="w-5 h-5 text-[hsl(0,0%,20%)]" />
+                    <ArrowUpRight className="w-5 h-5 text-[#1a1a1a]" />
                   </div>
                 </div>
               </div>
               
               {/* Date */}
-              <p className="text-xs text-white/40 mb-2">{post.date}</p>
+              <p className="text-xs text-[#1a1a1a]/40 mb-2">{post.date}</p>
               
               {/* Title */}
-              <h3 className="text-sm font-medium text-white/90 leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+              <h3 className="text-sm font-medium text-[#1a1a1a]/90 leading-snug line-clamp-2 group-hover:text-blue-600 transition-colors">
                 {post.title}
               </h3>
             </Link>

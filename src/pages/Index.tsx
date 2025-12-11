@@ -34,11 +34,11 @@ const Index = () => {
         <ServicesSection />
       </section>
       
-      <section className="scroll-reveal" id="team" style={{ backgroundColor: 'hsl(0 0% 6%)' }}>
+      <section className="scroll-reveal" id="team" style={{ backgroundColor: '#F5F3EF' }}>
         <TeamSection />
       </section>
       
-      <section className="scroll-reveal" id="blog" style={{ backgroundColor: 'hsl(0 0% 4%)' }}>
+      <section className="scroll-reveal" id="blog" style={{ backgroundColor: '#FAFAFA' }}>
         <BlogPreviewSection />
       </section>
       
