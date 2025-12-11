@@ -1,9 +1,88 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, CheckCircle } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Lightbox from "@/components/Lightbox";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+
+// Animated Counter Component
+const AnimatedCounter = ({ value, isVisible }: { value: string; isVisible: boolean }) => {
+  const [displayValue, setDisplayValue] = useState(value);
+  
+  useEffect(() => {
+    if (!isVisible) return;
+    
+    // Extract number and prefix/suffix
+    const match = value.match(/^([^\d]*)(\d+(?:\.\d+)?)([^\d]*)$/);
+    if (!match) {
+      setDisplayValue(value);
+      return;
+    }
+    
+    const [, prefix, numStr, suffix] = match;
+    const targetNum = parseFloat(numStr);
+    const duration = 1500;
+    const startTime = Date.now();
+    
+    const animate = () => {
+      const elapsed = Date.now() - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      const currentNum = Math.floor(targetNum * easeOut);
+      
+      setDisplayValue(`${prefix}${currentNum.toLocaleString()}${suffix}`);
+      
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        setDisplayValue(value);
+      }
+    };
+    
+    requestAnimationFrame(animate);
+  }, [isVisible, value]);
+  
+  return <>{displayValue}</>;
+};
+
+// Results Grid with Animation
+const ResultsGrid = ({ results, bgStyle }: { results: { metric: string; value: string }[]; bgStyle: string }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref}>
+      <h3 className="text-lg font-semibold text-slate-800 mb-4 uppercase tracking-wider">Results</h3>
+      <div className="grid grid-cols-2 gap-3">
+        {results.map((result, index) => (
+          <div key={index} className={`p-4 rounded-lg ${bgStyle}`}>
+            <p className="text-2xl md:text-3xl font-bold text-white mb-1">
+              <AnimatedCounter value={result.value} isVisible={isVisible} />
+            </p>
+            <p className="text-white/80 text-xs">{result.metric}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -427,6 +506,17 @@ const ProjectDetail = () => {
   const currentIndex = allSlugs.indexOf(slug || "");
   const nextSlug = allSlugs[(currentIndex + 1) % allSlugs.length];
   const nextProject = projectsData[nextSlug];
+  const galleryRef = useRef<HTMLDivElement>(null);
+
+  const scrollGallery = (direction: 'left' | 'right') => {
+    if (galleryRef.current) {
+      const scrollAmount = 320;
+      galleryRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -504,17 +594,17 @@ const ProjectDetail = () => {
       </section>
 
       {/* Our Approach - Strategy & Results Combined */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-16 bg-slate-50">
         <div className="container mx-auto max-w-6xl px-4">
-          <span className="number-badge text-muted-foreground mb-4 block">[ 01 ]</span>
-          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-8">
+          <span className="number-badge text-slate-500 mb-4 block">[ 01 ]</span>
+          <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-8">
             Our <span className="serif-italic">Approach</span>
           </h2>
 
           {/* Services Tags */}
           <div className="flex flex-wrap gap-3 mb-8">
             {project.services.map((service, index) => (
-              <span key={index} className="lunar-tag-light">
+              <span key={index} className="px-4 py-2 rounded-full border border-slate-300 text-slate-700 text-sm">
                 {service}
               </span>
             ))}
@@ -524,44 +614,56 @@ const ProjectDetail = () => {
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Strategy Column */}
             <div>
-              <h3 className="text-lg font-semibold text-foreground mb-4 uppercase tracking-wider">Strategy</h3>
+              <h3 className="text-lg font-semibold text-slate-800 mb-4 uppercase tracking-wider">Strategy</h3>
               <div className="space-y-3">
                 {project.strategy.map((item, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-background border border-border/50">
+                  <div key={index} className="flex items-start gap-3 p-4 rounded-lg bg-white border border-slate-200 shadow-sm">
                     <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                    <p className="text-foreground text-sm">{item}</p>
+                    <p className="text-slate-700 text-sm">{item}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            {/* Results Column */}
-            <div>
-              <h3 className="text-lg font-semibold text-foreground mb-4 uppercase tracking-wider">Results</h3>
-              <div className="grid grid-cols-2 gap-3">
-                {project.results.map((result, index) => (
-                  <div key={index} className={`p-4 rounded-lg ${project.bgStyle}`}>
-                    <p className="text-2xl md:text-3xl font-bold text-white mb-1">{result.value}</p>
-                    <p className="text-white/80 text-xs">{result.metric}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Results Column with Animation */}
+            <ResultsGrid results={project.results} bgStyle={project.bgStyle} />
           </div>
         </div>
       </section>
 
-      {/* Gallery Section - Horizontal Scroll */}
-      <section className="py-16 bg-background">
+      {/* Gallery Section - Horizontal Scroll with Arrows */}
+      <section className="py-16 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
-          <span className="number-badge text-muted-foreground mb-4 block">[ 02 ]</span>
-          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-8">
-            Campaign <span className="serif-italic">Highlights</span>
-          </h2>
+          <div className="flex items-center justify-between mb-8">
+            <div>
+              <span className="number-badge text-slate-500 mb-4 block">[ 02 ]</span>
+              <h2 className="text-4xl md:text-5xl font-light text-slate-900">
+                Campaign <span className="serif-italic">Highlights</span>
+              </h2>
+            </div>
+            {/* Navigation Arrows */}
+            <div className="hidden md:flex gap-2">
+              <button
+                onClick={() => scrollGallery('left')}
+                className="w-12 h-12 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors"
+              >
+                <ChevronLeft className="w-6 h-6 text-slate-700" />
+              </button>
+              <button
+                onClick={() => scrollGallery('right')}
+                className="w-12 h-12 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center transition-colors"
+              >
+                <ChevronRight className="w-6 h-6 text-slate-700" />
+              </button>
+            </div>
+          </div>
         </div>
         
         {/* Horizontal Scroll Container */}
-        <div className="overflow-x-auto scrollbar-hide">
+        <div 
+          ref={galleryRef}
+          className="overflow-x-auto scrollbar-hide scroll-smooth"
+        >
           <div className="flex gap-4 px-4 pb-4" style={{ width: 'max-content' }}>
             {project.gallery.map((item, index) => (
               <div 
@@ -595,9 +697,9 @@ const ProjectDetail = () => {
       </section>
 
       {/* Next Project - Enhanced */}
-      <section className="py-16 bg-muted/30">
+      <section className="py-16 bg-slate-50">
         <div className="container mx-auto max-w-6xl px-4">
-          <p className="text-muted-foreground text-sm uppercase tracking-wider mb-6">Next Project</p>
+          <p className="text-slate-500 text-sm uppercase tracking-wider mb-6">Next Project</p>
           
           <Link 
             to={`/projects/${nextSlug}`}
@@ -624,17 +726,17 @@ const ProjectDetail = () => {
                 <span className="text-xs uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">
                   {nextProject.category}
                 </span>
-                <h3 className="text-3xl md:text-4xl font-bold text-foreground mt-3 mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mt-3 mb-2 group-hover:text-primary transition-colors">
                   {nextProject.name}
                 </h3>
-                <p className="text-muted-foreground mb-4">{nextProject.result}</p>
+                <p className="text-slate-600 mb-4">{nextProject.result}</p>
                 
                 {/* Key Metrics Preview */}
                 <div className="flex gap-4">
                   {nextProject.metrics.slice(0, 2).map((metric, index) => (
                     <div key={index} className="text-left">
-                      <p className="text-lg font-bold text-foreground">{metric.value}</p>
-                      <p className="text-xs text-muted-foreground">{metric.label}</p>
+                      <p className="text-lg font-bold text-slate-900">{metric.value}</p>
+                      <p className="text-xs text-slate-500">{metric.label}</p>
                     </div>
                   ))}
                 </div>
