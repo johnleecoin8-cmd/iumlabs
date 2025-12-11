@@ -1,209 +1,159 @@
 import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
-import { 
-  Megaphone, 
-  Users, 
-  TrendingUp, 
-  Calendar, 
-  Building2, 
-  Globe,
-  ArrowRight,
-  X
-} from "lucide-react";
-import CalendlyButton from "./CalendlyButton";
+import { ArrowRight } from "lucide-react";
 
 const services = [
   {
     number: "01",
-    title: "KOL Marketing",
-    shortDesc: "Connect with 1,000+ Korean crypto influencers",
-    fullDesc: "Leverage our extensive network of over 1,000 Korean crypto influencers and opinion leaders to amplify your project's reach in the Korean market.",
-    features: ["Influencer matching", "Campaign management", "Performance tracking", "Content strategy"],
-    icon: Megaphone,
-    color: "pink",
+    title: "Go-To-Market Strategy",
+    description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus in the Korean market.",
   },
   {
     number: "02",
-    title: "Community Building",
-    shortDesc: "Build engaged Korean communities",
-    fullDesc: "Establish and grow vibrant Korean communities across KakaoTalk, Telegram, and Discord with native community managers.",
-    features: ["KakaoTalk management", "Telegram growth", "Discord setup", "24/7 moderation"],
-    icon: Users,
-    color: "green",
+    title: "Community Management",
+    description: "Complete KakaoTalk, Telegram, and Discord community infrastructure to build sticky, scalable and self-sustaining growth.",
   },
   {
     number: "03",
-    title: "PR & Media",
-    shortDesc: "Featured in top Korean crypto media",
-    fullDesc: "Get your project featured in leading Korean crypto publications and mainstream media outlets.",
-    features: ["Press releases", "Media outreach", "Interview coordination", "Crisis management"],
-    icon: TrendingUp,
-    color: "blue",
+    title: "Social Media Marketing",
+    description: "Content strategy and execution on Korean platforms to grow visibility and engage with your ecosystem in real time.",
   },
   {
     number: "04",
-    title: "Events & Conferences",
-    shortDesc: "Korea Blockchain Week & beyond",
-    fullDesc: "Strategic presence at major Korean blockchain events including Korea Blockchain Week, side events, and exclusive meetups.",
-    features: ["Event sponsorship", "Speaking slots", "Booth design", "Networking events"],
-    icon: Calendar,
-    color: "orange",
+    title: "Influencer Strategy",
+    description: "Influencer campaigns powered by top Korean crypto voices aligned with your message and goals.",
   },
   {
     number: "05",
-    title: "Exchange Listing",
-    shortDesc: "Navigate Korean exchange listings",
-    fullDesc: "Expert guidance through the complex Korean exchange listing process including VASP compliance and regulatory requirements.",
-    features: ["Exchange introductions", "VASP compliance", "Due diligence prep", "Listing strategy"],
-    icon: Building2,
-    color: "purple",
+    title: "KOL Marketing",
+    description: "Targeted campaigns through a 1,000+ creator network designed to drive awareness and traction across Korean Crypto.",
   },
   {
     number: "06",
-    title: "Go-To-Market",
-    shortDesc: "Complete market entry strategy",
-    fullDesc: "Comprehensive go-to-market strategy tailored for the Korean crypto market, from initial research to full market penetration.",
-    features: ["Market research", "Competitor analysis", "Launch planning", "Growth strategy"],
-    icon: Globe,
-    color: "yellow",
+    title: "PR & Media Relations",
+    description: "Narrative development and media placements to get your story published and seen in the right Korean publications.",
   },
 ];
 
-const serviceTags = [
-  { label: "All Services", color: "blue" },
-  { label: "Marketing", color: "pink" },
-  { label: "Community", color: "green" },
-  { label: "Events", color: "orange" },
-  { label: "Institutional", color: "purple" },
+const floatingTags = [
+  { label: "Go-To-Market Strategy", position: "top-[5%] left-[15%]" },
+  { label: "Influencer Strategy", position: "top-[35%] left-[30%]" },
+  { label: "Social Media Marketing", position: "top-[15%] right-[5%]" },
+  { label: "KOL Marketing", position: "top-[55%] right-[20%]" },
+  { label: "PR", position: "top-[45%] right-[8%]" },
 ];
 
 const ServicesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
-  const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
+  const [activeService, setActiveService] = useState(0);
 
   return (
-    <section ref={ref} className="py-24 px-4 bg-card/30">
-      <div className="container mx-auto max-w-6xl">
-        {/* Header */}
-        <div className={`mb-12 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-light text-foreground mb-4">
-                Our <span className="serif-italic">Services</span>
-              </h2>
-              <p className="text-muted-foreground max-w-xl">
-                Comprehensive Web3 marketing solutions tailored for the Korean market
-              </p>
-            </div>
-
-            {/* Service Tags Navigation */}
-            <div className="flex flex-wrap gap-2">
-              {serviceTags.map((tag) => (
-                <button
-                  key={tag.label}
-                  className={`service-tag service-tag-${tag.color} transition-fast`}
-                >
-                  {tag.label}
-                </button>
-              ))}
-            </div>
+    <section ref={ref} className="section-dark py-0 relative overflow-hidden">
+      {/* Hero Typography Section */}
+      <div className="relative min-h-[70vh] flex items-center justify-center px-4 py-24">
+        {/* Floating Service Tags */}
+        {floatingTags.map((tag, index) => (
+          <div
+            key={index}
+            className={`absolute ${tag.position} hidden lg:block animate-float z-10`}
+            style={{ animationDelay: `${index * 0.4}s` }}
+          >
+            <span className="lunar-tag-dark text-xs whitespace-nowrap">
+              {tag.label}
+            </span>
           </div>
-        </div>
+        ))}
 
-        {/* Services Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => {
-            const IconComponent = service.icon;
-            return (
-              <div
-                key={service.number}
-                onClick={() => setSelectedService(service)}
-                className={`group bg-card border border-border/50 rounded-2xl p-6 cursor-pointer card-hover ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
-                }`}
-                style={{ 
-                  transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                  transitionDelay: `${index * 80}ms` 
-                }}
-              >
-                {/* Number Badge + Icon */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="number-badge">{service.number}</span>
-                  <div className={`service-icon service-icon-${service.color}`}>
-                    <IconComponent className="w-5 h-5" />
-                  </div>
-                </div>
-
-                {/* Title */}
-                <h3 className="text-xl font-medium text-foreground mb-2 group-hover:text-primary transition-colors duration-200">
-                  {service.title}
-                </h3>
-
-                {/* Short Description */}
-                <p className="text-muted-foreground text-sm mb-4">
-                  {service.shortDesc}
-                </p>
-
-                {/* Learn More Link */}
-                <button className="inline-flex items-center gap-2 text-sm text-muted-foreground group-hover:text-primary transition-colors duration-200">
-                  <span>Learn more</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
-                </button>
-              </div>
-            );
-          })}
+        {/* Giant Typography */}
+        <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+          <h2 className="text-[12vw] md:text-[15vw] lg:text-[18vw] font-light leading-[0.85] tracking-tight text-white">
+            Our<span className="serif-italic">Services</span>
+          </h2>
         </div>
       </div>
 
-      {/* Service Modal */}
-      {selectedService && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/20 backdrop-blur-sm animate-fade-in"
-          onClick={() => setSelectedService(null)}
-        >
-          <div 
-            className="bg-card border border-border rounded-2xl p-8 max-w-lg w-full shadow-2xl animate-scale-in"
-            onClick={e => e.stopPropagation()}
+      {/* Dotted Line Separator */}
+      <div className="dotted-line-dark mx-6" />
+
+      {/* Services List */}
+      <div className="container mx-auto max-w-6xl px-4 py-16">
+        {services.map((service, index) => (
+          <div
+            key={service.number}
+            className={`group border-b border-white/10 last:border-b-0 transition-all duration-500 ${
+              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            }`}
+            style={{ transitionDelay: `${index * 100}ms` }}
+            onMouseEnter={() => setActiveService(index)}
           >
-            <div className="flex items-center justify-between mb-6">
-              <div className={`service-icon service-icon-${selectedService.color}`}>
-                <selectedService.icon className="w-6 h-6" />
+            <div className="grid grid-cols-12 gap-4 py-8 md:py-12 items-start">
+              {/* Number */}
+              <div className="col-span-2 md:col-span-1">
+                <span className="text-white/40 text-sm font-mono">[ {service.number} ]</span>
               </div>
-              <button 
-                onClick={() => setSelectedService(null)}
-                className="w-8 h-8 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors duration-200"
-              >
-                <X className="w-4 h-4" />
-              </button>
+
+              {/* Content */}
+              <div className="col-span-10 md:col-span-7">
+                <h3 className="text-2xl md:text-3xl font-medium text-white mb-3 group-hover:text-primary transition-colors duration-300">
+                  {service.title}
+                </h3>
+                <p className="text-white/50 text-base leading-relaxed max-w-xl">
+                  {service.description}
+                </p>
+
+                {/* Learn More Link */}
+                <Link 
+                  to="/services"
+                  className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 border border-dashed border-primary/50 rounded text-primary text-sm hover:bg-primary/10 hover:border-primary transition-all duration-300"
+                >
+                  <span>Learn more</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+
+              {/* Abstract Graphic - Desktop Only */}
+              <div className="hidden md:flex col-span-4 items-center justify-end">
+                <div className={`relative w-48 h-32 transition-all duration-500 ${activeService === index ? 'opacity-100 scale-100' : 'opacity-30 scale-95'}`}>
+                  {/* Abstract shapes */}
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-16 bg-white/10 rounded-sm" />
+                  <div 
+                    className="absolute bottom-4 left-1/2 w-12 h-20 border-4 border-primary rounded-bl-none"
+                    style={{ 
+                      borderTop: 'none', 
+                      borderRight: 'none',
+                      transform: 'translateX(20%)'
+                    }}
+                  />
+                  <div 
+                    className="absolute top-0 right-8 w-8 h-12 border-4 border-primary"
+                    style={{ 
+                      borderBottom: 'none', 
+                      borderLeft: 'none'
+                    }}
+                  />
+                </div>
+              </div>
             </div>
-
-            <h3 className="text-2xl font-medium text-foreground mb-4">
-              {selectedService.title}
-            </h3>
-
-            <p className="text-muted-foreground mb-6">
-              {selectedService.fullDesc}
-            </p>
-
-            <div className="mb-8">
-              <h4 className="text-sm font-medium text-foreground mb-3">What's included:</h4>
-              <ul className="space-y-2">
-                {selectedService.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <CalendlyButton className="lunar-btn w-full hover-glow">
-              Get Started
-            </CalendlyButton>
           </div>
+        ))}
+      </div>
+
+      {/* Bottom CTA */}
+      <div className={`container mx-auto max-w-6xl px-4 pb-24 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.6s' }}>
+        <div className="flex items-center justify-between py-8 border-t border-white/10">
+          <p className="text-white/40 text-sm">
+            Ready to grow in the Korean market?
+          </p>
+          <Link 
+            to="/services"
+            className="bracket-link text-white/60 hover:text-white"
+          >
+            <span>View All Services</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
-      )}
+      </div>
     </section>
   );
 };
