@@ -1,5 +1,6 @@
 import { Calendar, ChevronDown } from "lucide-react";
 import CalendlyButton from "./CalendlyButton";
+import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
 
 const serviceTags = [
   { label: "PR", position: "top-[18%] left-[8%]", color: "pink" },
@@ -24,23 +25,20 @@ const clientLogos = [
 const HeroSection = () => {
   return (
     <section className="section-dark relative min-h-screen flex flex-col justify-center overflow-hidden">
-      {/* Background - Moon/Space Image */}
+      {/* Background - Seoul Bridge Night Image */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220,20%,6%)] via-[hsl(220,20%,8%)] to-[hsl(220,20%,6%)]" />
-        {/* Moon glow effect */}
-        <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full bg-gradient-radial from-[hsl(217,91%,60%,0.1)] via-[hsl(270,70%,60%,0.05)] to-transparent blur-3xl" />
-        <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] rounded-full bg-gradient-radial from-[hsl(190,80%,50%,0.05)] via-transparent to-transparent blur-2xl" />
-        {/* Stars effect */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-[10%] left-[20%] w-1 h-1 bg-[hsl(0,0%,100%)] rounded-full" />
-          <div className="absolute top-[15%] right-[30%] w-0.5 h-0.5 bg-[hsl(0,0%,100%,0.8)] rounded-full" />
-          <div className="absolute top-[25%] left-[40%] w-1 h-1 bg-[hsl(0,0%,100%)] rounded-full" />
-          <div className="absolute top-[35%] right-[20%] w-0.5 h-0.5 bg-[hsl(0,0%,100%,0.6)] rounded-full" />
-          <div className="absolute top-[45%] left-[15%] w-1 h-1 bg-[hsl(0,0%,100%,0.7)] rounded-full" />
-          <div className="absolute bottom-[30%] right-[40%] w-0.5 h-0.5 bg-[hsl(0,0%,100%)] rounded-full" />
-          <div className="absolute bottom-[20%] left-[30%] w-1 h-1 bg-[hsl(0,0%,100%,0.8)] rounded-full" />
-          <div className="absolute bottom-[40%] right-[15%] w-0.5 h-0.5 bg-[hsl(0,0%,100%,0.5)] rounded-full" />
-        </div>
+        {/* Bridge background image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: `url(${seoulBridgeNight})`,
+            filter: "brightness(0.25) grayscale(0.3)"
+          }}
+        />
+        {/* Dark overlay gradient for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(220,20%,6%,0.7)] via-[hsl(220,20%,6%,0.3)] to-[hsl(220,20%,6%,0.8)]" />
+        {/* Subtle glow effect on bridge */}
+        <div className="absolute bottom-1/3 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-gradient-radial from-[hsl(217,91%,60%,0.08)] via-transparent to-transparent blur-3xl" />
       </div>
 
       {/* Floating Service Tags */}
