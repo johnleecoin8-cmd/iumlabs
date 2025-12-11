@@ -536,12 +536,24 @@ const ProjectDetail = () => {
         onNavigate={setLightboxIndex}
       />
       
-      {/* Hero Section */}
-      <section className={`relative min-h-[60vh] ${project.bgStyle} overflow-hidden`}>
+      {/* Hero Section - Lunar Strategy Style */}
+      <section className={`relative min-h-[70vh] ${project.bgStyle} overflow-hidden`}>
         {/* Parallax Effect */}
         <div 
           className="absolute inset-0 bg-black/20"
           style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+        />
+        
+        {/* Grid Pattern Overlay */}
+        <div 
+          className="absolute inset-0 opacity-[0.15] pointer-events-none"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px'
+          }}
         />
         
         {/* Content */}
@@ -566,8 +578,8 @@ const ProjectDetail = () => {
               <span className="text-white/70 text-sm uppercase tracking-wider mb-2 block">
                 {project.category}
               </span>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-3">
-                {project.name}
+              <h1 className="text-5xl md:text-7xl font-light text-white mb-3">
+                <span className="serif-italic">{project.name}</span>
               </h1>
               <p className="text-lg md:text-xl text-white/90 max-w-2xl">
                 {project.description}
@@ -591,12 +603,17 @@ const ProjectDetail = () => {
             <p className="text-white/90 leading-relaxed">{project.challenge}</p>
           </div>
         </div>
+
+        {/* Year Indicator - Bottom Left */}
+        <div className="absolute bottom-6 left-6 z-10">
+          <p className="text-white/50 text-xs uppercase tracking-widest">year: 2024</p>
+        </div>
       </section>
 
       {/* Our Approach - Strategy & Results Combined */}
       <section className="py-16 bg-slate-50">
         <div className="container mx-auto max-w-6xl px-4">
-          <span className="number-badge text-slate-500 mb-4 block">[ 01 ]</span>
+          <span className="text-slate-400 text-sm tracking-wider mb-4 block">01.</span>
           <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-8">
             Our <span className="serif-italic">Approach</span>
           </h2>
@@ -636,7 +653,7 @@ const ProjectDetail = () => {
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <span className="number-badge text-slate-500 mb-4 block">[ 02 ]</span>
+              <span className="text-slate-400 text-sm tracking-wider mb-4 block">02.</span>
               <h2 className="text-4xl md:text-5xl font-light text-slate-900">
                 Campaign <span className="serif-italic">Highlights</span>
               </h2>
