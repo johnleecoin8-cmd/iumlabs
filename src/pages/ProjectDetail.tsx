@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, CheckCircle, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, CheckCircle } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Lightbox from "@/components/Lightbox";
@@ -457,13 +457,22 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Strategy Section */}
+      {/* Strategy & Services Section */}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto max-w-6xl px-4">
           <span className="number-badge text-muted-foreground mb-4 block">[ 02 ]</span>
-          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-12">
+          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-8">
             Our <span className="serif-italic">Strategy</span>
           </h2>
+
+          {/* Services Tags */}
+          <div className="flex flex-wrap gap-3 mb-12">
+            {project.services.map((service, index) => (
+              <span key={index} className="lunar-tag-light">
+                {service}
+              </span>
+            ))}
+          </div>
           
           <div className="grid md:grid-cols-2 gap-6">
             {project.strategy.map((item, index) => (
@@ -535,66 +544,6 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Related News Section */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto max-w-6xl px-4">
-          <span className="number-badge text-muted-foreground mb-4 block">[ 05 ]</span>
-          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-12">
-            Related <span className="serif-italic">Coverage</span>
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-6">
-            {project.news.map((article, index) => (
-              <a
-                key={index}
-                href={article.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block bg-muted/30 rounded-2xl overflow-hidden border border-border/50 hover:border-primary/50 transition-colors"
-              >
-                <div className="aspect-[16/10] overflow-hidden">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </div>
-                <div className="p-5">
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-xs text-primary font-medium">{article.source}</span>
-                    <span className="text-xs text-muted-foreground">{article.date}</span>
-                  </div>
-                  <h3 className="text-foreground font-medium mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                    {article.title}
-                  </h3>
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground group-hover:text-primary transition-colors">
-                    <span>Read Article</span>
-                    <ExternalLink className="w-4 h-4" />
-                  </div>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services Used */}
-      <section className="py-24 bg-muted/30">
-        <div className="container mx-auto max-w-6xl px-4">
-          <span className="number-badge text-muted-foreground mb-4 block">[ 06 ]</span>
-          <h2 className="text-4xl md:text-5xl font-light text-foreground mb-12">
-            Services <span className="serif-italic">Used</span>
-          </h2>
-          
-          <div className="flex flex-wrap gap-4">
-            {project.services.map((service, index) => (
-              <span key={index} className="lunar-tag-light">
-                {service}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Next Project */}
       <section className={`py-24 ${nextProject.bgStyle}`}>
