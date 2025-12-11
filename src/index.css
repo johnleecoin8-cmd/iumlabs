@@ -104,6 +104,66 @@
 }
 
 @layer components {
+  /* ============================================
+     Screen-based Section System (Lunar Strategy Style)
+     ============================================ */
+  .screen-1,
+  .screen-2,
+  .screen-3,
+  .screen-4,
+  .screen-5,
+  .screen-6,
+  .screen-7,
+  .screen-8 {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Dark screens */
+  .screen-1 {
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
+  }
+
+  .screen-2 {
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
+  }
+
+  .screen-3 {
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
+  }
+
+  .screen-4 {
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
+  }
+
+  /* Light screens (Lunar Strategy alternating pattern) */
+  .screen-5 {
+    background-color: hsl(0 0% 96%);
+    color: hsl(0 0% 8%);
+  }
+
+  .screen-6 {
+    background-color: hsl(0 0% 96%);
+    color: hsl(0 0% 8%);
+  }
+
+  .screen-7 {
+    background-color: hsl(0 0% 96%);
+    color: hsl(0 0% 8%);
+  }
+
+  /* Back to dark for CTA */
+  .screen-8 {
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
+  }
+
   /* Dark section styling */
   .section-dark {
     background-color: hsl(var(--dark-bg));

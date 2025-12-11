@@ -59,7 +59,7 @@ const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-24 px-4 bg-background">
+    <div ref={ref} className="py-24 px-4 flex-1">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className={`flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
@@ -134,7 +134,7 @@ const CasesSection = () => {
           </Link>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

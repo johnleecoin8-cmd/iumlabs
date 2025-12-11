@@ -35,7 +35,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="section-dark relative h-screen flex flex-col justify-between overflow-hidden">
+    <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background - Moon/Planet Image */}
       <div className="absolute inset-0">
         <div 
@@ -127,7 +127,7 @@ const HeroSection = () => {
         <span className="text-white/40 text-xs sm:text-sm font-medium">scroll</span>
         <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
       </div>
-    </section>
+    </div>
   );
 };
 

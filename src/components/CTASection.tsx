@@ -55,7 +55,7 @@ const CTASection = () => {
   };
 
   return (
-    <section ref={ref} className="section-dark py-24 px-4">
+    <div ref={ref} className="py-24 px-4 flex-1">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
         <div className={`mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -231,7 +231,7 @@ const CTASection = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
