@@ -1,55 +1,55 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, CornerDownRight } from "lucide-react";
 
 const cases = [
   {
     id: 1,
     name: "DeFi Protocol",
     category: "DeFi",
-    gradient: "case-gradient-pink",
-    logo: "DeFi",
-    result: "+450% Community Growth",
+    gradient: "case-gradient-blue",
+    logo: "https://cryptologos.cc/logos/uniswap-uni-logo.svg",
+    result: "+340% Korean Trading Volume",
   },
   {
     id: 2,
     name: "NFT Marketplace",
     category: "NFT",
-    gradient: "case-gradient-orange",
-    logo: "NFT",
-    result: "+$2.5M Trading Volume",
+    gradient: "case-gradient-purple",
+    logo: "https://cryptologos.cc/logos/apecoin-ape-logo.svg",
+    result: "50K+ Korean Holders",
   },
   {
     id: 3,
-    name: "Layer 2 Solution",
+    name: "Layer 2 Network",
     category: "Infrastructure",
-    gradient: "case-gradient-blue particles-bg",
-    logo: "L2",
-    result: "+120K Korean Users",
+    gradient: "case-gradient-cyan",
+    logo: "https://cryptologos.cc/logos/arbitrum-arb-logo.svg",
+    result: "$2M Korean TVL in 30 Days",
   },
   {
     id: 4,
     name: "GameFi Project",
-    category: "Gaming",
-    gradient: "case-gradient-purple",
-    logo: "GameFi",
-    result: "+85% DAU Increase",
+    category: "GameFi",
+    gradient: "case-gradient-orange",
+    logo: "https://cryptologos.cc/logos/axie-infinity-axs-logo.svg",
+    result: "100K+ Korean Players",
   },
   {
     id: 5,
     name: "DAO Platform",
     category: "DAO",
-    gradient: "case-gradient-teal",
-    logo: "DAO",
-    result: "+15K Token Holders",
+    gradient: "case-gradient-green",
+    logo: "https://cryptologos.cc/logos/maker-mkr-logo.svg",
+    result: "5K+ Korean DAO Members",
   },
   {
     id: 6,
-    name: "Infrastructure",
-    category: "Infra",
-    gradient: "case-gradient-green",
-    logo: "Infra",
-    result: "+300% Brand Awareness",
+    name: "Metaverse World",
+    category: "Metaverse",
+    gradient: "case-gradient-pink",
+    logo: "https://cryptologos.cc/logos/decentraland-mana-logo.svg",
+    result: "#1 Korean Metaverse Project",
   },
 ];
 
@@ -57,70 +57,69 @@ const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-20 bg-background">
-      {/* Section Header */}
-      <div className="container mx-auto px-6 mb-12">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-              Featured Cases <span className="text-muted-foreground">///</span>
+    <section ref={ref} className="py-24 px-4 bg-background">
+      <div className="container mx-auto max-w-7xl">
+        {/* Header */}
+        <div className={`flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div>
+            <h2 className="text-4xl md:text-5xl font-light text-foreground">
+              Featured Cases <span className="text-muted-foreground">//</span>
             </h2>
           </div>
           <Link 
             to="/projects" 
-            className="hidden md:flex items-center gap-2 text-foreground hover:text-primary transition-colors font-medium"
+            className="bracket-link group"
           >
+            <CornerDownRight className="w-4 h-4" />
             <span>All Cases</span>
-            <ArrowUpRight className="w-4 h-4" />
           </Link>
         </div>
-      </div>
 
-      {/* Cases Grid */}
-      <div className="container mx-auto px-6">
-        <div 
-          className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 ${
-            isVisible ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          {cases.map((item, index) => (
-            <Link
-              key={item.id}
-              to="/projects"
-              className={`${item.gradient} aspect-[4/3] rounded-2xl flex flex-col justify-between p-6 group relative overflow-hidden transition-all duration-500 hover:scale-[1.02] hover:shadow-xl`}
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              {/* Category Tag */}
-              <div className="flex items-start justify-between">
-                <span className="px-3 py-1 rounded-full bg-white/20 text-white text-xs font-medium backdrop-blur-sm">
-                  {item.category}
-                </span>
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-0 translate-x-4">
-                  <ArrowUpRight className="w-5 h-5 text-white" />
+        {/* Cases Horizontal Scroll */}
+        <div className="overflow-x-auto scrollbar-hide -mx-4 px-4">
+          <div className="flex gap-6" style={{ minWidth: 'max-content' }}>
+            {cases.map((caseItem, index) => (
+              <Link
+                key={caseItem.id}
+                to={`/projects/${caseItem.id}`}
+                className={`case-card group flex-shrink-0 w-[320px] aspect-[4/5] rounded-2xl ${caseItem.gradient} p-6 flex flex-col justify-between transition-all duration-500 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                {/* Top - Category */}
+                <div className="flex items-center justify-between">
+                  <span className="text-xs text-[hsl(var(--dark-fg))] opacity-70 uppercase tracking-wider">
+                    {caseItem.category}
+                  </span>
+                  <div className="arrow-icon">
+                    <ArrowUpRight className="w-4 h-4" />
+                  </div>
                 </div>
-              </div>
 
-              {/* Logo/Text */}
-              <div>
-                <span className="text-4xl md:text-5xl font-bold text-white/90 group-hover:text-white transition-colors">
-                  {item.logo}
-                </span>
-                <p className="text-white/70 text-sm mt-2 group-hover:text-white/90 transition-colors">
-                  {item.result}
-                </p>
-              </div>
-            </Link>
-          ))}
+                {/* Center - Logo */}
+                <div className="flex items-center justify-center flex-1">
+                  <img 
+                    src={caseItem.logo} 
+                    alt={caseItem.name}
+                    className="w-24 h-24 object-contain brightness-0 invert opacity-90"
+                  />
+                </div>
+
+                {/* Bottom - Result */}
+                <div>
+                  <p className="text-sm text-[hsl(var(--dark-fg))] opacity-70 mb-1">{caseItem.name}</p>
+                  <p className="text-lg font-medium text-[hsl(var(--dark-fg))]">{caseItem.result}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
 
-        {/* Mobile View All */}
-        <div className="mt-8 md:hidden text-center">
-          <Link 
-            to="/projects" 
-            className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors font-medium"
-          >
-            <span>View All Cases</span>
-            <ArrowUpRight className="w-4 h-4" />
+        {/* Mobile: View All Link */}
+        <div className="mt-8 text-center md:hidden">
+          <Link to="/projects" className="lunar-btn-outline">
+            View All Cases
           </Link>
         </div>
       </div>

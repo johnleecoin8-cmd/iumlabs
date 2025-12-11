@@ -1,6 +1,7 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Calendar, ArrowUpRight, Video, Clock, CheckCircle } from "lucide-react";
+import { Calendar, Mail, Send, Phone, Video, Mic, MonitorOff } from "lucide-react";
 import { brand } from "@/config/content";
+import CalendlyButton from "./CalendlyButton";
 
 const brandConfig = {
   email: brand.email,
@@ -12,145 +13,132 @@ const CTASection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="section-dark py-24 md:py-32">
-      <div className="container mx-auto px-6">
-        <div 
-          className={`grid lg:grid-cols-2 gap-12 items-center transition-all duration-700 ${
-            isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}
-        >
-          {/* Left Column - Content */}
-          <div className="text-center lg:text-left">
-            {/* Badge */}
-            <span className="inline-block px-4 py-2 rounded-full border border-[hsl(var(--dark-fg)/0.2)] text-[hsl(var(--dark-fg)/0.7)] text-sm font-medium mb-8">
-              Let's Connect ///
-            </span>
-
-            {/* Main Headline */}
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[hsl(var(--dark-fg))] leading-tight mb-6">
+    <section ref={ref} className="section-dark py-24 px-4">
+      <div className="container mx-auto max-w-6xl">
+        <div className={`grid lg:grid-cols-2 gap-16 items-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          {/* Left - Content */}
+          <div>
+            <h2 className="text-4xl md:text-6xl font-light leading-tight mb-6 text-[hsl(var(--dark-fg))]">
               Let's Talk
               <br />
               <span className="serif-italic">Strategy</span>
             </h2>
 
-            {/* Subtitle */}
-            <p className="text-[hsl(var(--dark-fg)/0.6)] text-lg max-w-lg mb-10">
-              Schedule a free 30-minute call to discuss your project's 
-              Korean market entry strategy with our team.
+            <p className="text-[hsl(var(--dark-fg))] opacity-60 text-lg mb-8 max-w-md">
+              Ready to expand into the Korean crypto market? Book a free strategy 
+              call with our founders to discuss your project.
             </p>
 
-            {/* Features */}
-            <div className="flex flex-wrap gap-4 mb-10 justify-center lg:justify-start">
-              <div className="flex items-center gap-2 text-[hsl(var(--dark-fg)/0.7)]">
-                <CheckCircle className="w-4 h-4 text-primary" />
-                <span className="text-sm">30min Free Call</span>
-              </div>
-              <div className="flex items-center gap-2 text-[hsl(var(--dark-fg)/0.7)]">
-                <CheckCircle className="w-4 h-4 text-primary" />
-                <span className="text-sm">Flexible Scheduling</span>
-              </div>
-              <div className="flex items-center gap-2 text-[hsl(var(--dark-fg)/0.7)]">
-                <CheckCircle className="w-4 h-4 text-primary" />
-                <span className="text-sm">No Commitment</span>
-              </div>
+            {/* Feature Tags */}
+            <div className="flex flex-wrap gap-3 mb-8">
+              <span className="lunar-tag-dark">30min Free Call</span>
+              <span className="lunar-tag-dark">Flexible Scheduling</span>
+              <span className="lunar-tag-dark">No Commitment</span>
             </div>
 
             {/* CTA Button */}
-            <a
-              href="https://calendly.com/cryptobridgekorea"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="lunar-btn inline-flex items-center gap-3 text-lg px-10 py-5"
-            >
+            <CalendlyButton className="lunar-btn text-lg px-8 py-4 mb-8">
               <Calendar className="w-5 h-5" />
               <span>Book a Meeting</span>
-            </a>
+            </CalendlyButton>
+
+            {/* Contact Options */}
+            <div className="flex flex-wrap gap-4">
+              <a 
+                href={`mailto:${brandConfig.email}`}
+                className="flex items-center gap-2 text-[hsl(var(--dark-fg))] opacity-60 hover:opacity-100 transition-opacity"
+              >
+                <Mail className="w-4 h-4" />
+                <span className="text-sm">Email</span>
+              </a>
+              <a 
+                href={brandConfig.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-[hsl(var(--dark-fg))] opacity-60 hover:opacity-100 transition-opacity"
+              >
+                <Send className="w-4 h-4" />
+                <span className="text-sm">Telegram</span>
+              </a>
+              <a 
+                href={brandConfig.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-[hsl(var(--dark-fg))] opacity-60 hover:opacity-100 transition-opacity"
+              >
+                <Phone className="w-4 h-4" />
+                <span className="text-sm">LinkedIn</span>
+              </a>
+            </div>
           </div>
 
-          {/* Right Column - Calendly Preview UI */}
+          {/* Right - Video Call UI Mock */}
           <div className="relative">
-            {/* Mockup Card - Video Call Style */}
-            <div className="bg-[hsl(220,20%,12%)] rounded-3xl border border-[hsl(var(--dark-fg)/0.1)] p-6 shadow-2xl">
-              {/* Window Controls */}
-              <div className="flex items-center gap-2 mb-6">
-                <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <div className="w-3 h-3 rounded-full bg-green-500/80" />
+            <div className="video-call-frame p-4">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-4 px-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 rounded-full bg-[hsl(142,70%,45%)]" />
+                  <span className="text-xs text-[hsl(var(--dark-fg))] opacity-60">Strategy Call</span>
+                </div>
+                <span className="text-xs text-[hsl(var(--dark-fg))] opacity-40">30:00</span>
               </div>
 
-              {/* Video Preview Area */}
-              <div className="aspect-video bg-[hsl(220,20%,8%)] rounded-2xl mb-6 flex items-center justify-center relative overflow-hidden">
-                {/* Gradient Background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-purple-500/20" />
-                
-                {/* Video Icon */}
-                <div className="relative z-10 flex flex-col items-center gap-4">
-                  <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center">
-                    <Video className="w-10 h-10 text-primary" />
+              {/* Main Video Area */}
+              <div className="grid grid-cols-2 gap-3 mb-4">
+                {/* James */}
+                <div className="video-participant aspect-video">
+                  <img 
+                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=face"
+                    alt="James"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-2 left-2 bg-[hsl(var(--dark-bg))] opacity-80 backdrop-blur-sm rounded px-2 py-1">
+                    <span className="text-xs text-[hsl(var(--dark-fg))]">James</span>
                   </div>
-                  <p className="text-[hsl(var(--dark-fg)/0.5)] text-sm">Strategy Call Preview</p>
+                </div>
+
+                {/* David */}
+                <div className="video-participant aspect-video">
+                  <img 
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=300&fit=crop&crop=face"
+                    alt="David"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-2 left-2 bg-[hsl(var(--dark-bg))] opacity-80 backdrop-blur-sm rounded px-2 py-1">
+                    <span className="text-xs text-[hsl(var(--dark-fg))]">David</span>
+                  </div>
                 </div>
               </div>
 
-              {/* Meeting Info */}
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                      <span className="text-primary font-bold text-sm">CB</span>
-                    </div>
-                    <div>
-                      <p className="text-[hsl(var(--dark-fg))] font-medium">CryptoBridge Korea</p>
-                      <p className="text-[hsl(var(--dark-fg)/0.5)] text-sm">Web3 Strategy Call</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 text-[hsl(var(--dark-fg)/0.5)]">
-                    <Clock className="w-4 h-4" />
-                    <span className="text-sm">30 min</span>
-                  </div>
+              {/* You - Placeholder */}
+              <div className="video-participant aspect-[21/9] flex items-center justify-center mb-4">
+                <div className="text-center">
+                  <Video className="w-8 h-8 text-[hsl(var(--dark-fg))] opacity-30 mx-auto mb-2" />
+                  <span className="text-sm text-[hsl(var(--dark-fg))] opacity-40">Your video here</span>
                 </div>
+              </div>
 
-                {/* Time Slots Preview */}
-                <div className="grid grid-cols-3 gap-2">
-                  <div className="px-3 py-2 rounded-lg bg-[hsl(220,20%,8%)] text-center text-[hsl(var(--dark-fg)/0.6)] text-sm">
-                    10:00 AM
-                  </div>
-                  <div className="px-3 py-2 rounded-lg bg-primary/20 text-center text-primary text-sm border border-primary/30">
-                    2:00 PM
-                  </div>
-                  <div className="px-3 py-2 rounded-lg bg-[hsl(220,20%,8%)] text-center text-[hsl(var(--dark-fg)/0.6)] text-sm">
-                    4:00 PM
-                  </div>
-                </div>
+              {/* Controls */}
+              <div className="flex items-center justify-center gap-4">
+                <button className="w-10 h-10 rounded-full bg-[hsl(var(--dark-fg))] opacity-10 flex items-center justify-center hover:opacity-20 transition-opacity">
+                  <Mic className="w-4 h-4 text-[hsl(var(--dark-fg))]" />
+                </button>
+                <button className="w-10 h-10 rounded-full bg-[hsl(var(--dark-fg))] opacity-10 flex items-center justify-center hover:opacity-20 transition-opacity">
+                  <Video className="w-4 h-4 text-[hsl(var(--dark-fg))]" />
+                </button>
+                <button className="w-12 h-12 rounded-full bg-[hsl(0,84%,60%)] flex items-center justify-center hover:bg-[hsl(0,84%,50%)] transition-colors">
+                  <Phone className="w-5 h-5 text-[hsl(var(--dark-fg))] rotate-[135deg]" />
+                </button>
+                <button className="w-10 h-10 rounded-full bg-[hsl(var(--dark-fg))] opacity-10 flex items-center justify-center hover:opacity-20 transition-opacity">
+                  <MonitorOff className="w-4 h-4 text-[hsl(var(--dark-fg))]" />
+                </button>
               </div>
             </div>
 
-            {/* Floating Contact Options */}
-            <div className="absolute -bottom-4 -left-4 bg-[hsl(var(--dark-bg))] border border-[hsl(var(--dark-fg)/0.1)] rounded-xl p-4 shadow-xl">
-              <div className="flex items-center gap-3">
-                <a 
-                  href={`mailto:${brandConfig.email}`}
-                  className="w-10 h-10 rounded-full bg-[hsl(220,20%,12%)] flex items-center justify-center text-[hsl(var(--dark-fg)/0.6)] hover:text-primary hover:bg-primary/10 transition-all"
-                >
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-                <a 
-                  href={brandConfig.telegram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[hsl(220,20%,12%)] flex items-center justify-center text-[hsl(var(--dark-fg)/0.6)] hover:text-primary hover:bg-primary/10 transition-all"
-                >
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-                <a 
-                  href={brandConfig.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full bg-[hsl(220,20%,12%)] flex items-center justify-center text-[hsl(var(--dark-fg)/0.6)] hover:text-primary hover:bg-primary/10 transition-all"
-                >
-                  <ArrowUpRight className="w-4 h-4" />
-                </a>
-              </div>
+            {/* Floating Labels */}
+            <div className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-3 py-1.5 rounded-full text-xs font-medium">
+              Free Strategy Call
             </div>
           </div>
         </div>
