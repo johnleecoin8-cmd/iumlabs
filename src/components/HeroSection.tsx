@@ -1,7 +1,9 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ArrowRight, Send } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import CalendlyButton from "./CalendlyButton";
 import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
+import { useCountUp } from "@/hooks/useCountUp";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -35,15 +37,30 @@ const clientLogos = [
   { name: "Tria", logo: triaLogo },
 ];
 
+const stats = [
+  { value: 200, label: "Projects Launched", suffix: "+" },
+  { value: 500, label: "Funds Raised", prefix: "$", suffix: "M+" },
+  { value: 50, label: "Exchange Partners", suffix: "+" },
+  { value: 5, label: "Community Reach", suffix: "M+" },
+];
+
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    // Trigger count-up animation after component mounts
+    const timer = setTimeout(() => setIsVisible(true), 800);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
@@ -106,6 +123,43 @@ const HeroSection = () => {
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </p>
 
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-up stagger-3">
+            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 text-white text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-5 rounded-xl font-semibold shadow-[0_15px_40px_rgba(59,130,246,0.35)] hover:shadow-[0_20px_50px_rgba(59,130,246,0.5)] transition-all duration-500 hover:scale-[1.02] border border-white/20">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              <span className="relative flex items-center gap-3">
+                Book a Free Consultation
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </CalendlyButton>
+            
+            <Link 
+              to="/contact"
+              className="group flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-xl border border-white/20 text-white font-medium hover:bg-white/5 hover:border-white/30 transition-all duration-300"
+            >
+              <Send className="w-5 h-5" />
+              Send Message
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Stats Section */}
+      <div className="relative z-10 py-8 sm:py-10">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+            {stats.map((stat, index) => (
+              <StatItem 
+                key={index}
+                value={stat.value}
+                label={stat.label}
+                prefix={stat.prefix}
+                suffix={stat.suffix}
+                isVisible={isVisible}
+                delay={index * 100}
+              />
+            ))}
+          </div>
         </div>
       </div>
 
@@ -139,6 +193,44 @@ const HeroSection = () => {
       <div className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3 opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
         <span className="text-white/40 text-xs sm:text-sm font-medium">scroll</span>
         <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
+      </div>
+    </div>
+  );
+};
+
+// Stat Item Component with Count-Up Animation
+const StatItem = ({ 
+  value, 
+  label, 
+  prefix = "", 
+  suffix = "",
+  isVisible,
+  delay 
+}: { 
+  value: number; 
+  label: string; 
+  prefix?: string; 
+  suffix?: string;
+  isVisible: boolean;
+  delay: number;
+}) => {
+  const count = useCountUp({
+    end: value,
+    isVisible,
+    delay,
+    duration: 2000,
+  });
+  
+  return (
+    <div 
+      className="text-center opacity-0 animate-fade-up"
+      style={{ animationDelay: `${delay + 600}ms`, animationFillMode: 'forwards' }}
+    >
+      <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">
+        {prefix}{count}{suffix}
+      </div>
+      <div className="text-sm sm:text-base text-white/50 font-light">
+        {label}
       </div>
     </div>
   );
