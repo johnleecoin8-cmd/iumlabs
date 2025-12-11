@@ -595,42 +595,36 @@ const ProjectDetail = () => {
           ))}
         </div>
 
-        {/* Process Flow - 01, 02, 03 */}
-        <div className="grid grid-cols-1 md:grid-cols-3">
-          {/* Step 01 - The Challenge */}
-          <div className="relative p-8 md:p-12 bg-white border-b md:border-b-0 md:border-r border-slate-200 overflow-hidden">
-            <span className="absolute top-4 right-4 md:top-6 md:right-6 text-6xl md:text-8xl font-bold text-slate-100 select-none">01</span>
-            <div className="relative z-10">
-              <h3 className="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4 font-medium">The Challenge</h3>
-              <p className="text-slate-700 leading-relaxed text-sm md:text-base">{project.challenge}</p>
-            </div>
+        {/* 2-Column High Contrast Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Left - THE CHALLENGE (Dark) */}
+          <div className="bg-slate-900 p-10 md:p-16 flex flex-col justify-center min-h-[320px]">
+            <span className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-6">The Challenge</span>
+            <p className="text-white text-xl md:text-2xl lg:text-3xl font-light leading-relaxed">
+              {project.challenge}
+            </p>
           </div>
 
-          {/* Step 02 - Our Approach */}
-          <div className="relative p-8 md:p-12 bg-slate-50 border-b md:border-b-0 md:border-r border-slate-200 overflow-hidden">
-            <span className="absolute top-4 right-4 md:top-6 md:right-6 text-6xl md:text-8xl font-bold text-slate-200 select-none">02</span>
-            <div className="relative z-10">
-              <h3 className="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4 font-medium">Our Approach</h3>
-              <ul className="space-y-2">
-                {project.shortServices.map((service, i) => (
-                  <li key={i} className="text-slate-700 text-sm md:text-base flex items-start gap-2">
-                    <span className="text-slate-400 mt-1">—</span>
-                    {service}
-                  </li>
-                ))}
-              </ul>
+          {/* Right - THE APPROACH (Light) */}
+          <div className="bg-slate-50 p-10 md:p-16 flex flex-col justify-center min-h-[320px]">
+            <span className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">What We Did</span>
+            
+            {/* Services List */}
+            <div className="space-y-3 mb-8">
+              {project.shortServices.map((service, i) => (
+                <div key={i} className="text-slate-800 text-lg md:text-xl font-medium">
+                  {service}
+                </div>
+              ))}
             </div>
-          </div>
 
-          {/* Step 03 - The Result */}
-          <div className="relative p-8 md:p-12 bg-white overflow-hidden">
-            <span className="absolute top-4 right-4 md:top-6 md:right-6 text-6xl md:text-8xl font-bold text-slate-100 select-none">03</span>
-            <div className="relative z-10">
-              <h3 className="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4 font-medium">The Result</h3>
-              <p className="text-slate-700 leading-relaxed text-sm md:text-base">
-                <span className="font-semibold text-slate-900">{project.results[0].value}</span> {project.results[0].metric}
-              </p>
-            </div>
+            {/* Divider */}
+            <div className="border-t border-slate-300 my-6" />
+
+            {/* Result Quote */}
+            <p className="text-slate-600 text-sm md:text-base italic leading-relaxed">
+              "{project.strategy[0]}"
+            </p>
           </div>
         </div>
       </section>
