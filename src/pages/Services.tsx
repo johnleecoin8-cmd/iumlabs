@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import CalendlyButton from "@/components/CalendlyButton";
 import Planet3D from "@/components/Planet3D";
 import TeamContactCard from "@/components/TeamContactCard";
+import ClientLogoMarquee from "@/components/ClientLogoMarquee";
 import { brand } from "@/config/content";
 import sunCorona from "@/assets/backgrounds/sun-corona.jpg";
 
@@ -148,7 +149,7 @@ const Services = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" id="main-content">
       <Navbar />
       
       {/* Hero - Full Screen with Ken Burns Background */}
@@ -490,6 +491,13 @@ const Services = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Client Logos Section */}
+      <section className="bg-background py-16 px-4 border-t border-white/10">
+        <div className="container mx-auto max-w-7xl">
+          <ClientLogoMarquee variant="dark" speed="slow" showLabel={true} />
         </div>
       </section>
 

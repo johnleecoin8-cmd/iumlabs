@@ -219,7 +219,7 @@ const Blog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" id="main-content">
       <Navbar />
       
       {/* Hero - Full Screen with Ken Burns Background */}

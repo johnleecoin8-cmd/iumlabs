@@ -62,6 +62,14 @@ const AppRoutes = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
+      {/* Skip Link for Accessibility */}
+      <a 
+        href="#main-content" 
+        className="skip-link"
+        tabIndex={0}
+      >
+        Skip to main content
+      </a>
       <Toaster />
       <Sonner />
       <BrowserRouter>
