@@ -167,50 +167,47 @@ const Services = () => {
         
         {/* Orbital Tags System - Desktop: Tags orbit around the central sun */}
         <div className="absolute inset-0 hidden lg:flex items-center justify-center pointer-events-none overflow-hidden">
-          {/* Central orbit container - this is the "sun" position */}
-          <div className="relative" style={{ width: '1px', height: '1px' }}>
-            {/* Orbit path lines (visual guides) */}
-            {[140, 220, 300, 380, 460].map((radius, i) => (
-              <div
-                key={`orbit-path-${i}`}
-                className="absolute rounded-full border border-white/[0.03]"
+          {/* Orbit path lines (visual guides) */}
+          {[140, 220, 300, 380, 460].map((radius, i) => (
+            <div
+              key={`orbit-path-${i}`}
+              className="absolute rounded-full border border-white/[0.04]"
+              style={{
+                width: radius * 2,
+                height: radius * 2,
+              }}
+            />
+          ))}
+          
+          {/* Orbiting tags - each rotates around the screen center */}
+          {orbitalTags.map((tag, index) => (
+            <div
+              key={`orbit-wrapper-${index}`}
+              className="orbit-wrapper"
+              style={{
+                width: tag.orbitRadius * 2,
+                height: tag.orbitRadius * 2,
+                marginLeft: -tag.orbitRadius,
+                marginTop: -tag.orbitRadius,
+                animation: `orbit ${tag.duration}s linear infinite`,
+                animationDelay: `-${(tag.startAngle / 360) * tag.duration}s`,
+              }}
+            >
+              {/* The tag positioned at the edge of the orbit circle */}
+              <span
+                className={`orbit-tag px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg ${tag.color}`}
                 style={{
-                  width: radius * 2,
-                  height: radius * 2,
                   top: '50%',
-                  left: '50%',
-                  transform: 'translate(-50%, -50%)',
-                }}
-              />
-            ))}
-            
-            {/* Orbiting tags - each rotates around the central point */}
-            {orbitalTags.map((tag, index) => (
-              <div
-                key={`orbit-wrapper-${index}`}
-                className="absolute top-1/2 left-1/2"
-                style={{
-                  width: 0,
-                  height: 0,
-                  animation: `orbit ${tag.duration}s linear infinite`,
+                  right: 0,
+                  transform: 'translateY(-50%)',
+                  animation: `counter-orbit ${tag.duration}s linear infinite`,
                   animationDelay: `-${(tag.startAngle / 360) * tag.duration}s`,
                 }}
               >
-                {/* The tag itself, positioned at orbit radius distance from center */}
-                <span
-                  className={`absolute px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg whitespace-nowrap ${tag.color}`}
-                  style={{
-                    left: `${tag.orbitRadius}px`,
-                    top: '-10px',
-                    animation: `counter-orbit ${tag.duration}s linear infinite`,
-                    animationDelay: `-${(tag.startAngle / 360) * tag.duration}s`,
-                  }}
-                >
-                  {tag.label}
-                </span>
-              </div>
-            ))}
-          </div>
+                {tag.label}
+              </span>
+            </div>
+          ))}
         </div>
 
         {/* Mobile floating tags - simplified static version */}
