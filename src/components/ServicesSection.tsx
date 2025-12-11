@@ -4,6 +4,7 @@ import { Megaphone, Users, Globe, TrendingUp, Shield, Zap, ArrowRight, ArrowUpRi
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import TiltCard from "@/components/TiltCard";
 
 const services = [
   {
@@ -131,9 +132,11 @@ const ServicesSection = () => {
         {/* Bento Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {/* Featured Card - KOL Marketing */}
-          <div
+          <TiltCard
             onClick={() => setSelectedService(featuredService)}
-            className={`animated-border-featured group md:col-span-2 lg:col-span-2 lg:row-span-2 relative p-8 md:p-10 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm transition-all duration-500 cursor-pointer overflow-hidden ${
+            max={6}
+            scale={1.01}
+            className={`animated-border-featured group md:col-span-2 lg:col-span-2 lg:row-span-2 relative p-8 md:p-10 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm cursor-pointer overflow-hidden ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
@@ -141,7 +144,7 @@ const ServicesSection = () => {
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px] group-hover:bg-primary/20 transition-colors duration-500" />
             
-            <div className="relative z-10">
+            <div className="relative z-10" style={{ transform: 'translateZ(40px)' }}>
               {/* Badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
                 <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
@@ -149,7 +152,7 @@ const ServicesSection = () => {
               </div>
 
               {/* Icon */}
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${featuredService.color} flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${featuredService.color} flex items-center justify-center mb-8 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`} style={{ transform: 'translateZ(60px)' }}>
                 <featuredService.icon className="w-8 h-8 text-foreground" />
               </div>
 
@@ -162,7 +165,7 @@ const ServicesSection = () => {
               </p>
 
               {/* Stats */}
-              <div className="flex items-baseline gap-2 mb-8">
+              <div className="flex items-baseline gap-2 mb-8" style={{ transform: 'translateZ(30px)' }}>
                 <span className="text-5xl md:text-6xl font-bold text-primary">{featuredService.stat}</span>
                 <span className="text-muted-foreground text-sm">{featuredService.statLabel}</span>
               </div>
@@ -182,20 +185,22 @@ const ServicesSection = () => {
               </div>
 
               {/* Arrow indicator */}
-              <div className="absolute bottom-8 right-8 md:bottom-10 md:right-10">
+              <div className="absolute bottom-8 right-8 md:bottom-10 md:right-10" style={{ transform: 'translateZ(50px)' }}>
                 <div className="w-12 h-12 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
                   <ArrowUpRight className="w-5 h-5 text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
               </div>
             </div>
-          </div>
+          </TiltCard>
 
           {/* Other Service Cards */}
           {otherServices.map((service, index) => (
-            <div
+            <TiltCard
               key={service.id}
               onClick={() => setSelectedService(service)}
-              className={`animated-border-card animated-border-${service.id} group relative p-6 md:p-8 bg-card/50 backdrop-blur-sm transition-all duration-500 cursor-pointer overflow-hidden ${
+              max={12}
+              scale={1.03}
+              className={`animated-border-card animated-border-${service.id} group relative p-6 md:p-8 bg-card/50 backdrop-blur-sm cursor-pointer overflow-hidden ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${(index + 1) * 100}ms` }}
@@ -206,17 +211,17 @@ const ServicesSection = () => {
               <div className="relative z-10">
                 {/* Icon & Stat Row */}
                 <div className="flex items-start justify-between mb-6">
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`} style={{ transform: 'translateZ(40px)' }}>
                     <service.icon className="w-6 h-6 text-foreground" />
                   </div>
-                  <div className="text-right">
+                  <div className="text-right" style={{ transform: 'translateZ(30px)' }}>
                     <div className="text-2xl font-bold text-foreground">{service.stat}</div>
                     <div className="text-xs text-muted-foreground">{service.statLabel}</div>
                   </div>
                 </div>
 
                 {/* Content */}
-                <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-lg font-bold text-foreground mb-2 group-hover:text-primary transition-colors" style={{ transform: 'translateZ(20px)' }}>
                   {service.title}
                 </h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
@@ -224,12 +229,12 @@ const ServicesSection = () => {
                 </p>
 
                 {/* Arrow indicator */}
-                <div className="mt-6 flex items-center text-sm text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1">
+                <div className="mt-6 flex items-center text-sm text-primary opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1" style={{ transform: 'translateZ(25px)' }}>
                   <span className="font-medium">Learn more</span>
                   <ArrowRight className="w-4 h-4 ml-1" />
                 </div>
               </div>
-            </div>
+            </TiltCard>
           ))}
         </div>
       </div>
