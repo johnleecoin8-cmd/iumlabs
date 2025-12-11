@@ -14,7 +14,7 @@ const Index = () => {
   useScrollReveal();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" id="main-content">
       <Navbar />
       <SectionIndicator />
       

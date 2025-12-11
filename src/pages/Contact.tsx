@@ -10,6 +10,8 @@ import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
 import Planet3D from "@/components/Planet3D";
 import TeamContactCard from "@/components/TeamContactCard";
+import TrustBadge from "@/components/TrustBadge";
+import ClientLogoMarquee from "@/components/ClientLogoMarquee";
 import marsSurface from "@/assets/backgrounds/mars-surface.jpg";
 
 const budgetOptions = [
@@ -112,7 +114,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background" id="main-content">
       <Navbar />
       
       {/* Hero - Full Screen with Ken Burns Background */}
@@ -401,6 +403,20 @@ const Contact = () => {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Trust Section */}
+      <section className="bg-background py-16 px-4 border-t border-white/10">
+        <div className="container mx-auto max-w-7xl">
+          {/* Trust Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
+            <TrustBadge type="trustpilot" rating={5} reviewCount="50+" link="https://www.trustpilot.com" />
+            <TrustBadge type="clutch" rating={5} reviewCount="25+" link="https://clutch.co" />
+          </div>
+          
+          {/* Client Logos */}
+          <ClientLogoMarquee variant="dark" speed="slow" showLabel={true} />
         </div>
       </section>
 

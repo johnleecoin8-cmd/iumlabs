@@ -925,6 +925,241 @@
   @apply ring-2 ring-primary ring-offset-2 ring-offset-background;
 }
 
+/* Skip Link for Accessibility */
+.skip-link {
+  @apply absolute -top-10 left-0 bg-primary text-primary-foreground px-4 py-2 z-[9999] transition-all;
+}
+
+.skip-link:focus {
+  @apply top-0;
+}
+
+/* ============================================
+   PHASE 5: ENHANCED MICRO-INTERACTIONS
+   ============================================ */
+
+/* Button Loading State */
+.btn-loading {
+  @apply relative pointer-events-none;
+}
+
+.btn-loading::after {
+  content: '';
+  @apply absolute inset-0 flex items-center justify-center;
+  background: inherit;
+  border-radius: inherit;
+}
+
+.btn-loading::before {
+  content: '';
+  @apply absolute w-5 h-5 border-2 border-white/30 border-t-white rounded-full z-10;
+  animation: spin 0.8s linear infinite;
+  left: calc(50% - 10px);
+  top: calc(50% - 10px);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Form Input Focus Glow */
+.input-glow:focus {
+  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.1);
+}
+
+/* Form Success Animation */
+@keyframes successPulse {
+  0% { box-shadow: 0 0 0 0 hsl(142, 76%, 36%, 0.4); }
+  70% { box-shadow: 0 0 0 10px hsl(142, 76%, 36%, 0); }
+  100% { box-shadow: 0 0 0 0 hsl(142, 76%, 36%, 0); }
+}
+
+.input-success {
+  animation: successPulse 0.5s ease-out;
+}
+
+/* Card Shine Effect on Hover */
+.card-shine {
+  @apply relative overflow-hidden;
+}
+
+.card-shine::before {
+  content: '';
+  @apply absolute inset-0 -translate-x-full;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsl(0 0% 100% / 0.1),
+    transparent
+  );
+  transition: transform 0.6s ease;
+}
+
+.card-shine:hover::before {
+  transform: translateX(100%);
+}
+
+/* Image Zoom on Hover */
+.img-zoom {
+  @apply overflow-hidden;
+}
+
+.img-zoom img {
+  @apply transition-transform duration-700 ease-out;
+}
+
+.img-zoom:hover img {
+  transform: scale(1.1);
+}
+
+/* Service Card Enhanced Hover */
+.service-card-hover {
+  @apply relative transition-all duration-500;
+}
+
+.service-card-hover::before {
+  content: '';
+  @apply absolute inset-0 opacity-0 transition-opacity duration-500 rounded-2xl;
+  background: linear-gradient(180deg, transparent 0%, hsl(var(--primary) / 0.05) 100%);
+}
+
+.service-card-hover:hover::before {
+  @apply opacity-100;
+}
+
+.service-card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px hsl(0 0% 0% / 0.15);
+}
+
+/* Arrow Slide Animation */
+.arrow-slide {
+  @apply transition-transform duration-300;
+}
+
+.group:hover .arrow-slide {
+  transform: translateX(4px);
+}
+
+/* Border Gradient Animation */
+@keyframes borderGradient {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.border-gradient-animate {
+  @apply relative;
+}
+
+.border-gradient-animate::before {
+  content: '';
+  @apply absolute inset-0 rounded-2xl p-px;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--primary)),
+    hsl(280, 80%, 60%),
+    hsl(var(--primary))
+  );
+  background-size: 200% 100%;
+  animation: borderGradient 3s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.border-gradient-animate:hover::before {
+  opacity: 1;
+}
+
+/* Testimonial Card Hover */
+.testimonial-card {
+  @apply transition-all duration-500;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 24px 64px hsl(0 0% 0% / 0.2);
+}
+
+/* Filter Button Active State */
+.filter-btn {
+  @apply relative overflow-hidden transition-all duration-300;
+}
+
+.filter-btn::after {
+  content: '';
+  @apply absolute inset-0 bg-primary opacity-0 transition-opacity duration-300;
+  z-index: -1;
+}
+
+.filter-btn.active::after {
+  @apply opacity-100;
+}
+
+/* ============================================
+   PHASE 8: RESPONSIVE OPTIMIZATIONS
+   ============================================ */
+
+/* Mobile Touch Target Size */
+@media (max-width: 768px) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Larger tap areas for mobile */
+  button, a, [role="button"] {
+    min-height: 44px;
+  }
+  
+  /* Stack layouts on mobile */
+  .responsive-stack {
+    @apply flex-col;
+  }
+  
+  /* Reduce spacing on mobile */
+  .mobile-compact {
+    @apply py-12;
+  }
+  
+  /* Full width on mobile */
+  .mobile-full {
+    @apply w-full;
+  }
+}
+
+/* Tablet Breakpoint Adjustments */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tablet-2col {
+    @apply grid-cols-2;
+  }
+  
+  .tablet-stack {
+    @apply flex-col;
+  }
+}
+
+/* Large Screen Optimizations */
+@media (min-width: 1280px) {
+  .xl-container {
+    max-width: 1400px;
+  }
+}
+
+/* Safe Area Support for Notched Devices */
+@supports (padding: max(0px)) {
+  .safe-area-bottom {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+  
+  .safe-area-top {
+    padding-top: max(1rem, env(safe-area-inset-top));
+  }
+}
+
 /* ============================================
    REDUCED MOTION SUPPORT
    ============================================ */
@@ -946,5 +1181,51 @@
   
   .page-transition {
     transition: none !important;
+  }
+
+  .card-shine::before {
+    display: none;
+  }
+}
+
+/* ============================================
+   HIGH CONTRAST MODE SUPPORT
+   ============================================ */
+
+@media (prefers-contrast: high) {
+  .lunar-btn {
+    border: 2px solid currentColor;
+  }
+  
+  .lunar-tag-dark,
+  .lunar-tag-light {
+    border-width: 2px;
+  }
+  
+  .dotted-line,
+  .dotted-line-dark,
+  .dotted-line-light {
+    background-image: none;
+    background-color: currentColor;
+    height: 2px;
+  }
+}
+
+/* ============================================
+   PRINT STYLES
+   ============================================ */
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  .print-break {
+    page-break-before: always;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
   }
 }
