@@ -43,6 +43,7 @@ export const images = {
 // =====================================================
 export const navigation = {
   links: [
+    { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
     { name: "Research", href: "/research" },
