@@ -1,5 +1,5 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, ArrowUpRight, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Lightbox from "@/components/Lightbox";
@@ -43,45 +43,6 @@ const AnimatedCounter = ({ value, isVisible }: { value: string; isVisible: boole
   }, [isVisible, value]);
   
   return <>{displayValue}</>;
-};
-
-// Results Grid with Animation
-const ResultsGrid = ({ results, bgStyle }: { results: { metric: string; value: string }[]; bgStyle: string }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div ref={ref}>
-      <h3 className="text-lg font-semibold text-slate-800 mb-4 uppercase tracking-wider">Results</h3>
-      <div className="grid grid-cols-2 gap-3">
-        {results.map((result, index) => (
-          <div key={index} className={`p-4 rounded-lg ${bgStyle}`}>
-            <p className="text-2xl md:text-3xl font-bold text-white mb-1">
-              <AnimatedCounter value={result.value} isVisible={isVisible} />
-            </p>
-            <p className="text-white/80 text-xs">{result.metric}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
 };
 
 // Import logos
@@ -630,33 +591,24 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Lunar Strategy Style Metrics Section */}
-      <section className="py-12 bg-background border-b border-border">
+      {/* Metrics + Scope Section Combined */}
+      <section className="bg-slate-100">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 py-12 border-b border-slate-200">
             {project.metrics.map((metric, index) => (
               <div key={index} className="text-center md:text-left">
-                <p className="text-3xl md:text-5xl font-bold text-foreground mb-1">
+                <p className="text-3xl md:text-5xl font-bold text-slate-900 mb-1">
                   <AnimatedCounter value={metric.value} isVisible={true} />
                 </p>
-                <p className="text-muted-foreground text-sm mb-2">{metric.label}</p>
-                <span className="text-muted-foreground/50 text-xs">0{index + 1}.</span>
+                <p className="text-slate-600 text-sm mb-2">{metric.label}</p>
+                <span className="text-slate-400 text-xs">0{index + 1}.</span>
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Our Approach - Lunar Strategy Style 2-Column */}
-      <section className="py-20 bg-slate-100">
-        <div className="container mx-auto max-w-6xl px-4">
-          <span className="text-slate-400 text-sm tracking-wider mb-6 block">01.</span>
-          <h2 className="text-4xl md:text-5xl font-light text-slate-900 mb-12">
-            Our <span className="serif-italic">Approach</span>
-          </h2>
 
           {/* Lunar Strategy 2-Column Layout */}
-          <div className="grid lg:grid-cols-2 gap-0 border border-slate-200 bg-white">
+          <div className="grid lg:grid-cols-2 gap-0 border-x border-b border-slate-200 bg-white">
             {/* Left Column - Scope of Work */}
             <div className="p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-slate-200">
               <div className="space-y-3 mb-8">
@@ -700,7 +652,7 @@ const ProjectDetail = () => {
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <span className="text-slate-400 text-sm tracking-wider mb-4 block">02.</span>
+              <span className="text-slate-400 text-sm tracking-wider mb-4 block">01.</span>
               <h2 className="text-4xl md:text-5xl font-light text-slate-900">
                 Campaign <span className="serif-italic">Highlights</span>
               </h2>
