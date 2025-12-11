@@ -80,6 +80,7 @@ const projectsData: Record<string, {
   strategy: string[];
   results: { metric: string; value: string }[];
   services: string[];
+  shortServices: string[];
   gallery: { src: string; title: string; description: string }[];
   news: { title: string; source: string; date: string; url: string; image: string }[];
 }> = {
@@ -111,6 +112,7 @@ const projectsData: Record<string, {
       { metric: "Media Mentions", value: "500+" }
     ],
     services: ["KOL Marketing", "Community Management", "Event Planning", "PR & Media Relations"],
+    shortServices: ["KOLs", "PR", "Events"],
     gallery: [
       { src: bnbEventImg, title: "Seoul Launch Event", description: "Exclusive networking event with 500+ attendees at COEX Convention Center" },
       { src: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&h=600&fit=crop", title: "KOL Campaign", description: "Collaboration with 50+ Korean crypto influencers across YouTube and Twitter" },
@@ -151,6 +153,7 @@ const projectsData: Record<string, {
       { metric: "Customer Satisfaction", value: "4.8/5" }
     ],
     services: ["User Acquisition", "Community Building", "Ambassador Program", "Localization"],
+    shortServices: ["KOLs", "Community"],
     gallery: [
       { src: kucoinCampaignImg, title: "Trading Competition", description: "Korean-exclusive trading event with $100K prizes" },
       { src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop", title: "Ambassador Program", description: "Network of 100+ Korean crypto leaders and influencers" },
@@ -191,6 +194,7 @@ const projectsData: Record<string, {
       { metric: "Grant Applications", value: "80+" }
     ],
     services: ["Developer Relations", "DeFi Marketing", "Event Management", "Grant Program Support"],
+    shortServices: ["DevRel", "Events"],
     gallery: [
       { src: polygonHackathonImg, title: "Developer Hackathon", description: "48-hour building event at Seoul Startup Hub" },
       { src: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop", title: "Workshop Series", description: "Technical deep-dives for Korean developers" },
@@ -231,6 +235,7 @@ const projectsData: Record<string, {
       { metric: "Media Coverage Reach", value: "5M+" }
     ],
     services: ["Institutional Relations", "Content Marketing", "Community Growth", "PR Strategy"],
+    shortServices: ["KOLs", "PR"],
     gallery: [
       { src: ondoSeminarImg, title: "RWA Seminar", description: "Educational events for institutional investors at Korea Finance Center" },
       { src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop", title: "Research Reports", description: "In-depth Korean market analysis and RWA outlook" },
@@ -271,6 +276,7 @@ const projectsData: Record<string, {
       { metric: "Community Engagement Rate", value: "35%" }
     ],
     services: ["Brand Positioning", "Developer Relations", "Partnership Development", "Community Building"],
+    shortServices: ["PR", "Events", "DevRel"],
     gallery: [
       { src: peaqSummitImg, title: "DePIN Summit", description: "Korea's first DePIN-focused conference at Gangnam" },
       { src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop", title: "IoT Partnership", description: "Collaboration with Korean tech companies" },
@@ -311,6 +317,7 @@ const projectsData: Record<string, {
       { metric: "Platform Content Created", value: "10K+" }
     ],
     services: ["Creator Relations", "Platform Marketing", "Ambassador Program", "Content Strategy"],
+    shortServices: ["KOLs", "Content"],
     gallery: [
       { src: storyWorkshopImg, title: "Creator Workshop", description: "Hands-on IP tokenization training for Korean artists" },
       { src: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=600&fit=crop", title: "Webtoon Partnership", description: "Collaboration with Korean webtoon artists and platforms" },
@@ -351,6 +358,7 @@ const projectsData: Record<string, {
       { metric: "Media Impressions", value: "2M+" }
     ],
     services: ["Pre-Launch Marketing", "Community Building", "Testnet Campaigns", "Media Relations"],
+    shortServices: ["KOLs", "PR", "Community"],
     gallery: [
       { src: megaethLaunchImg, title: "Pre-Launch Campaign", description: "Hype-building social media strategy and teasers" },
       { src: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop", title: "Testnet Program", description: "Korean user incentive campaign with rewards" },
@@ -391,6 +399,7 @@ const projectsData: Record<string, {
       { metric: "User Retention Rate", value: "65%" }
     ],
     services: ["User Acquisition", "Product Marketing", "Partnership Development", "Customer Support"],
+    shortServices: ["KOLs", "Community"],
     gallery: [
       { src: triaLaunchImg, title: "Launch Campaign", description: "Korean market entry promotion with incentives" },
       { src: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop", title: "Tutorial Series", description: "Step-by-step wallet guides in Korean" },
@@ -431,6 +440,7 @@ const projectsData: Record<string, {
       { metric: "Brand Awareness Lift", value: "+45%" }
     ],
     services: ["Market Entry Strategy", "User Acquisition", "VIP Relations", "Brand Marketing"],
+    shortServices: ["KOLs", "PR", "VIP"],
     gallery: [
       { src: bybitCompetitionImg, title: "Trading Campaign", description: "Zero-fee promotion launch with massive reach" },
       { src: "https://images.unsplash.com/photo-1560472355-536de3962603?w=800&h=600&fit=crop", title: "VIP Program", description: "Exclusive benefits for high-volume traders" },
@@ -591,17 +601,31 @@ const ProjectDetail = () => {
         </div>
       </section>
 
+      {/* Key Result Marquee */}
+      <div className="bg-[#c8f547] py-3 overflow-hidden">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {[...Array(10)].map((_, i) => (
+            <span key={i} className="mx-8 text-black text-sm font-medium uppercase tracking-wider">
+              key result • key result • key result
+            </span>
+          ))}
+        </div>
+      </div>
+
       {/* Metrics + Scope Section Combined */}
       <section className="bg-slate-100">
         <div className="container mx-auto max-w-6xl px-4">
-          {/* Metrics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 py-12 border-b border-slate-200">
+          {/* Metrics Grid - Box Style */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-0 border border-slate-200">
             {project.metrics.map((metric, index) => (
-              <div key={index} className="text-center md:text-left">
-                <p className="text-3xl md:text-5xl font-bold text-slate-900 mb-1">
+              <div 
+                key={index} 
+                className={`bg-slate-200/50 p-6 md:p-8 ${index < 3 ? 'border-r border-slate-200' : ''} ${index < 2 ? 'border-b md:border-b-0 border-slate-200' : ''}`}
+              >
+                <p className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-2">
                   <AnimatedCounter value={metric.value} isVisible={true} />
                 </p>
-                <p className="text-slate-600 text-sm mb-2">{metric.label}</p>
+                <p className="text-primary text-sm font-medium mb-6">{metric.label}</p>
                 <span className="text-slate-400 text-xs">0{index + 1}.</span>
               </div>
             ))}
@@ -609,11 +633,11 @@ const ProjectDetail = () => {
 
           {/* Lunar Strategy 2-Column Layout */}
           <div className="grid lg:grid-cols-2 gap-0 border-x border-b border-slate-200 bg-white">
-            {/* Left Column - Scope of Work */}
+            {/* Left Column - Scope of Work (Short Keywords) */}
             <div className="p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-slate-200">
               <div className="space-y-3 mb-8">
-                {project.services.map((service, index) => (
-                  <p key={index} className="text-slate-800 text-lg">{service}</p>
+                {project.shortServices.map((service, index) => (
+                  <p key={index} className="text-slate-900 text-2xl md:text-3xl font-light">{service}</p>
                 ))}
               </div>
               <a href="#" className="text-primary hover:underline text-sm inline-flex items-center gap-1">
@@ -712,51 +736,22 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Next Project - Enhanced */}
-      <section className="py-16 bg-slate-50">
+      {/* Next Project - Minimal Text Style */}
+      <section className="py-20 bg-slate-50 border-t border-slate-200">
         <div className="container mx-auto max-w-6xl px-4">
-          <p className="text-slate-500 text-sm uppercase tracking-wider mb-6">Next Project</p>
-          
           <Link 
             to={`/projects/${nextSlug}`}
             className="block group"
           >
-            <div className="grid md:grid-cols-2 gap-6 items-center">
-              {/* Preview Image */}
-              <div className={`relative aspect-[16/10] rounded-2xl overflow-hidden ${nextProject.bgStyle}`}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <img
-                    src={nextProject.logo}
-                    alt={nextProject.name}
-                    className="w-24 h-24 object-contain filter brightness-0 invert opacity-90 group-hover:scale-110 transition-transform duration-300"
-                  />
-                </div>
-                {/* Hover Arrow */}
-                <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                  <ArrowUpRight className="w-5 h-5 text-white" />
-                </div>
-              </div>
-
-              {/* Project Info */}
+            <p className="text-slate-400 text-sm uppercase tracking-wider mb-4">Next Project</p>
+            <div className="flex items-center justify-between">
               <div>
-                <span className="text-xs uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">
-                  {nextProject.category}
-                </span>
-                <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mt-3 mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-4xl md:text-6xl lg:text-7xl font-light text-slate-900 group-hover:text-primary transition-colors duration-300 mb-2">
                   {nextProject.name}
                 </h3>
-                <p className="text-slate-600 mb-4">{nextProject.result}</p>
-                
-                {/* Key Metrics Preview */}
-                <div className="flex gap-4">
-                  {nextProject.metrics.slice(0, 2).map((metric, index) => (
-                    <div key={index} className="text-left">
-                      <p className="text-lg font-bold text-slate-900">{metric.value}</p>
-                      <p className="text-xs text-slate-500">{metric.label}</p>
-                    </div>
-                  ))}
-                </div>
+                <p className="text-slate-500 text-lg">{nextProject.result}</p>
               </div>
+              <ArrowUpRight className="w-10 h-10 md:w-14 md:h-14 text-slate-300 group-hover:text-primary group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300" />
             </div>
           </Link>
         </div>
