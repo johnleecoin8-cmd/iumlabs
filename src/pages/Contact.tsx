@@ -3,7 +3,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, Users, Globe, Megaphone, Shield } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
@@ -43,9 +44,34 @@ const floatingTags = [
   { label: "Get Started", bottom: "25%", right: "18%", color: "bg-red-300 text-black" },
 ];
 
+const serviceHighlights = [
+  { 
+    icon: Globe, 
+    title: "Korean Market Entry", 
+    description: "Strategic guidance for entering and thriving in the Korean Web3 ecosystem" 
+  },
+  { 
+    icon: Users, 
+    title: "Community Growth", 
+    description: "Build and engage a loyal Korean community for your project" 
+  },
+  { 
+    icon: Megaphone, 
+    title: "KOL Marketing", 
+    description: "Connect with top Korean influencers and thought leaders" 
+  },
+  { 
+    icon: Shield, 
+    title: "VASP Compliance", 
+    description: "Navigate Korean regulations with our compliance expertise" 
+  },
+];
+
 const Contact = () => {
   const { toast } = useToast();
   const [scrollY, setScrollY] = useState(0);
+  const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation({ threshold: 0.2 });
+  const { ref: formRef, isVisible: formVisible } = useScrollAnimation({ threshold: 0.15 });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -227,12 +253,49 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form Section - Dark Theme 2-Column */}
-      <section className="bg-background py-24 px-4">
+      {/* Services Highlight Section */}
+      <section 
+        ref={servicesRef as React.RefObject<HTMLElement>}
+        className="bg-background/95 py-20 px-4 border-y border-white/5"
+      >
         <div className="container mx-auto max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+          <div className={`text-center mb-12 transition-all duration-700 ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+            <span className="text-sm text-white/40 mb-3 block">[ Our Services ]</span>
+            <h2 className="text-3xl md:text-4xl font-light text-white">
+              How we can <span className="serif-italic text-primary">help</span>
+            </h2>
+          </div>
+          
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {serviceHighlights.map((service, index) => (
+              <div 
+                key={index}
+                className={`group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 transition-all duration-500 ${
+                  servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: `${index * 100 + 200}ms` }}
+              >
+                <service.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
+                <h3 className="text-lg font-medium text-white mb-2">{service.title}</h3>
+                <p className="text-sm text-white/50">{service.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section - Dark Theme 2-Column */}
+      <section 
+        ref={formRef as React.RefObject<HTMLElement>}
+        className="bg-background py-24 px-4"
+      >
+        <div className="container mx-auto max-w-6xl">
+          <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 transition-all duration-700 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {/* Left Column - Image & Contact Info */}
-            <div className="space-y-8">
+            <div 
+              className="space-y-8 transition-all duration-700"
+              style={{ transitionDelay: '150ms' }}
+            >
               {/* Seoul Skyline Image */}
               <div className="rounded-xl overflow-hidden">
                 <img 
@@ -245,7 +308,11 @@ const Contact = () => {
               {/* Contact Details */}
               <div className="space-y-6">
                 {contactDetails.map((detail, index) => (
-                  <div key={index}>
+                  <div 
+                    key={index}
+                    className={`transition-all duration-500 ${formVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
+                    style={{ transitionDelay: `${index * 100 + 300}ms` }}
+                  >
                     <span className="text-sm text-white/40 block mb-1">{detail.label}</span>
                     {detail.link ? (
                       <a 
@@ -265,7 +332,10 @@ const Contact = () => {
             </div>
 
             {/* Right Column - Form */}
-            <div>
+            <div 
+              className={`transition-all duration-700 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              style={{ transitionDelay: '300ms' }}
+            >
               <form onSubmit={handleSubmit} className="space-y-6">
                 {/* Name & Email Row */}
                 <div className="grid sm:grid-cols-2 gap-6">
