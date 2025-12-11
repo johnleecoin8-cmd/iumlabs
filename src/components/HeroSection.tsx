@@ -106,15 +106,14 @@ const HeroSection = () => {
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </p>
 
-          {/* CTA Button - Gradient Style with Pulse */}
+          {/* CTA Button - Gradient Style with subtle glow */}
           <div className="opacity-0 animate-fade-up stagger-3 mt-6 sm:mt-8 relative">
-            {/* Subtle pulse glow effect */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/60 to-cyan-400/60 opacity-20 blur-2xl scale-105" style={{ animation: 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400/40 to-cyan-300/40 opacity-15 blur-xl" style={{ animation: 'pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite', animationDelay: '1s' }} />
+            {/* Very subtle glow effect */}
+            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/30 to-cyan-400/30 opacity-10 blur-2xl scale-105" style={{ animation: 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
             
             <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 text-white text-base sm:text-lg px-10 sm:px-14 py-5 sm:py-6 rounded-2xl font-bold shadow-[0_20px_50px_rgba(59,130,246,0.4)] hover:shadow-[0_25px_60px_rgba(59,130,246,0.6)] transition-all duration-500 hover:scale-[1.02] border border-white/20">
-              {/* Animated shine sweep */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              {/* Subtle shine sweep on hover only */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
               
               <div className="relative flex items-center gap-4">
                 {/* Bridge Icon */}
