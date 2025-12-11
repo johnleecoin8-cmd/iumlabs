@@ -13,15 +13,15 @@ const serviceTags = [
 ];
 
 const clientLogos = [
-  { name: "Peaq", logo: "https://cryptologos.cc/logos/peaq-peaq-logo.svg" },
   { name: "BNB", logo: "https://cryptologos.cc/logos/bnb-bnb-logo.svg" },
   { name: "KuCoin", logo: "https://cryptologos.cc/logos/kucoin-token-kcs-logo.svg" },
   { name: "Polygon", logo: "https://cryptologos.cc/logos/polygon-matic-logo.svg" },
-  { name: "Story Protocol", logo: "https://assets.coingecko.com/coins/images/51396/standard/story_logo.jpg" },
-  { name: "MegaETH", logo: "https://pbs.twimg.com/profile_images/1768883498681511936/F_CxcIg6_400x400.jpg" },
-  { name: "Tria", logo: "https://pbs.twimg.com/profile_images/1741842954348580864/s_fEuDEr_400x400.jpg" },
   { name: "Ondo Finance", logo: "https://cryptologos.cc/logos/ondo-finance-ondo-logo.svg" },
   { name: "Bybit", logo: "https://cryptologos.cc/logos/bybit-byb-logo.svg" },
+  { name: "Peaq", logo: "https://s2.coinmarketcap.com/static/img/coins/64x64/21034.png" },
+  { name: "Story Protocol", logo: "https://s2.coinmarketcap.com/static/img/coins/64x64/35934.png" },
+  { name: "MegaETH", logo: "https://s2.coinmarketcap.com/static/img/coins/64x64/33498.png" },
+  { name: "Tria", logo: "https://s2.coinmarketcap.com/static/img/coins/64x64/28596.png" },
 ];
 
 const HeroSection = () => {
