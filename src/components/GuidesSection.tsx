@@ -1,6 +1,7 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Download, FileText, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const guides = [
   {
@@ -29,12 +30,53 @@ const stats = [
   { value: "4.8+", label: "Average rating" },
 ];
 
+const floatingTags = [
+  { label: "Free Download", top: "10%", right: "8%" },
+  { label: "5,400+ Downloads", top: "20%", left: "5%" },
+  { label: "Expert Guides", bottom: "25%", right: "5%" },
+  { label: "Korean Market", bottom: "15%", left: "8%" },
+];
+
 const GuidesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1">
-      <div className="container mx-auto max-w-6xl">
+    <div ref={ref} className="py-24 px-4 flex-1 relative overflow-hidden">
+      {/* Parallax Background */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{ transform: `translateY(${scrollY * 0.05}px)` }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-primary/5" />
+        <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-bl from-primary/10 to-transparent blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-gradient-to-tr from-primary/8 to-transparent blur-2xl" />
+      </div>
+
+      {/* Floating Tags */}
+      {floatingTags.map((tag, index) => (
+        <span
+          key={tag.label}
+          className="lunar-tag-dark absolute animate-float text-xs hidden lg:block z-10"
+          style={{
+            top: tag.top,
+            left: tag.left,
+            right: tag.right,
+            bottom: tag.bottom,
+            animationDelay: `${index * 0.5}s`,
+          }}
+        >
+          {tag.label}
+        </span>
+      ))}
+
+      <div className="container mx-auto max-w-6xl relative z-10">
         {/* Header */}
         <div className={`mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
