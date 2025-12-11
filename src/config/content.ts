@@ -11,7 +11,7 @@ export const brand = {
   name: "CryptoBridge Korea",
   tagline: "Web3 Marketing Agency",
   description: "Korea's leading Web3 marketing agency. We help blockchain projects launch and grow successfully.",
-  email: "CryptoBridgekoea@gmail.com",
+  email: "info@cryptobridgekorea.com",
   phone: "010 3969 9699",
   address: "OFFICE 11B, Gangnam-daero 373, Gangnam, Seoul, South Korea",
   telegram: "@cryptobridgekorea",
