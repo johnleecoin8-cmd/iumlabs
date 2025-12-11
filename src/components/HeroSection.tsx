@@ -106,52 +106,6 @@ const HeroSection = () => {
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </p>
 
-          {/* CTA Button - Gradient Style with subtle glow */}
-          <div className="opacity-0 animate-fade-up stagger-3 mt-6 sm:mt-8 relative">
-            {/* Very subtle glow effect */}
-            <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/30 to-cyan-400/30 opacity-10 blur-2xl scale-105" style={{ animation: 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite' }} />
-            
-            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 text-white text-base sm:text-lg px-10 sm:px-14 py-5 sm:py-6 rounded-2xl font-bold shadow-[0_20px_50px_rgba(59,130,246,0.4)] hover:shadow-[0_25px_60px_rgba(59,130,246,0.6)] transition-all duration-500 hover:scale-[1.02] border border-white/20">
-              {/* Subtle shine sweep on hover only */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-              
-              <div className="relative flex items-center gap-4">
-                {/* Bridge Icon */}
-                <div className="relative">
-                  <svg 
-                    className="w-7 h-7 sm:w-8 sm:h-8 text-white group-hover:scale-110 transition-transform duration-300" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M2 18h20" />
-                    <path d="M5 18V9" />
-                    <path d="M19 18V9" />
-                    <path d="M5 9c0 0 3.5-5 7-5s7 5 7 5" />
-                    <path d="M8 18v-5" />
-                    <path d="M16 18v-5" />
-                    <path d="M5 13h14" />
-                  </svg>
-                </div>
-                <span className="relative tracking-tight drop-shadow-sm">Book a Free Consultation</span>
-                <svg 
-                  className="w-5 h-5 sm:w-6 sm:h-6 text-white group-hover:translate-x-1.5 transition-all duration-300" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M5 12h14" />
-                  <path d="M12 5l7 7-7 7" />
-                </svg>
-              </div>
-            </CalendlyButton>
-          </div>
         </div>
       </div>
 
