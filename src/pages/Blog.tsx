@@ -4,9 +4,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import CalendlyButton from "@/components/CalendlyButton";
+import { Link } from "react-router-dom";
 
 interface BlogPost {
   id: string;
+  slug: string;
   title: string;
   excerpt: string;
   category: string;
@@ -18,6 +20,7 @@ interface BlogPost {
 const blogPosts: BlogPost[] = [
   {
     id: "1",
+    slug: "korean-crypto-market-2024",
     title: "How to Enter Korea's Web3 Market in 2025",
     excerpt: "A comprehensive guide for global Web3 projects looking to establish a presence in the Korean crypto market.",
     category: "Guide",
@@ -27,6 +30,7 @@ const blogPosts: BlogPost[] = [
   },
   {
     id: "2",
+    slug: "top-korean-kols",
     title: "Korean KOL Marketing: Complete Strategy Guide",
     excerpt: "Learn how to effectively partner with Korean crypto influencers and measure campaign ROI.",
     category: "Strategy",
@@ -36,6 +40,7 @@ const blogPosts: BlogPost[] = [
   },
   {
     id: "3",
+    slug: "vasp-compliance",
     title: "VASP Compliance Guide for Foreign Projects",
     excerpt: "Navigate Korean crypto regulations and understand what's required to operate legally.",
     category: "Regulatory",
@@ -45,6 +50,7 @@ const blogPosts: BlogPost[] = [
   },
   {
     id: "4",
+    slug: "community-building",
     title: "Building Korean Crypto Communities",
     excerpt: "Best practices for Telegram, Discord, and KakaoTalk community management in Korea.",
     category: "Community",
@@ -54,6 +60,7 @@ const blogPosts: BlogPost[] = [
   },
   {
     id: "5",
+    slug: "korea-blockchain-week",
     title: "Korea Blockchain Week: Event Guide",
     excerpt: "How to maximize your presence at Korea's biggest blockchain event.",
     category: "Events",
@@ -63,6 +70,7 @@ const blogPosts: BlogPost[] = [
   },
   {
     id: "6",
+    slug: "exchange-listing",
     title: "Korean Exchange Listing Strategies",
     excerpt: "Tips for successful listings on major Korean exchanges like Upbit, Bithumb, and Coinone.",
     category: "Exchange",
@@ -83,34 +91,31 @@ const Blog = () => {
     : blogPosts.filter(post => post.category === selectedCategory);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero */}
-      <section className="pt-32 pb-16 px-4">
-        <div className="container mx-auto max-w-5xl">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            {/* Left - What */}
+      {/* Hero - Dark Section */}
+      <section className="section-dark pt-32 pb-24 px-4">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left */}
             <div>
-              <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-foreground mb-8">
-                Blog
+              <span className="number-badge text-[hsl(var(--dark-fg))] opacity-60 mb-4 inline-block">Blog</span>
+              <h1 className="text-5xl md:text-7xl font-light text-[hsl(var(--dark-fg))] leading-tight mb-6">
+                Latest <span className="serif-italic">Insights</span>
               </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+              <p className="text-lg text-[hsl(var(--dark-fg))] opacity-60 mb-8 max-w-lg">
                 Marketing strategies, guides, and insights for succeeding in Korea's Web3 market.
               </p>
-              <CalendlyButton 
-                variant="outline" 
-                className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
-              >
-                [ book a meeting ]
+              <CalendlyButton className="lunar-btn">
+                <Calendar className="w-4 h-4" />
+                <span>Book a Consultation</span>
               </CalendlyButton>
             </div>
 
             {/* Right - Categories */}
-            <div className="space-y-6">
-              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
-                Topics
-              </h2>
+            <div>
+              <h2 className="text-2xl font-light text-[hsl(var(--dark-fg))] mb-6">Topics</h2>
               <div className="flex flex-wrap gap-2">
                 {categories.map((category) => (
                   <button
@@ -119,7 +124,7 @@ const Blog = () => {
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
                       selectedCategory === category
                         ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-transparent text-muted-foreground border-border/50 hover:border-primary/50 hover:text-foreground"
+                        : "bg-transparent text-[hsl(var(--dark-fg))] opacity-60 border-[hsl(var(--dark-fg))] border-opacity-30 hover:opacity-100"
                     }`}
                   >
                     {category}
@@ -131,25 +136,26 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Blog Grid */}
-      <section ref={ref} className="py-12 px-4 border-t border-border/30">
+      {/* Blog Grid - Light */}
+      <section ref={ref} className="py-24 px-4 bg-background">
         <div className="container mx-auto max-w-6xl">
           <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {filteredPosts.map((post, index) => (
-              <article 
+              <Link 
                 key={post.id}
-                className="group cursor-pointer"
+                to={`/blog/${post.slug}`}
+                className="group"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Image */}
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-card/50 border border-border/50 group-hover:border-primary/30 transition-all">
+                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-4 bg-card border border-border/50 group-hover:border-primary/50 transition-all">
                   <img 
                     src={post.image} 
                     alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 text-primary">
+                    <span className="text-xs px-3 py-1 rounded-full bg-card/90 backdrop-blur-sm border border-border/50 text-primary font-medium">
                       {post.category}
                     </span>
                   </div>
@@ -168,7 +174,7 @@ const Blog = () => {
                     </span>
                   </div>
 
-                  <h2 className="text-lg font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                  <h2 className="text-lg font-medium text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
                     {post.title}
                   </h2>
 
@@ -176,12 +182,12 @@ const Blog = () => {
                     {post.excerpt}
                   </p>
 
-                  <span className="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:gap-3 transition-all">
+                  <span className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground group-hover:text-primary group-hover:gap-3 transition-all">
                     Read More
                     <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
