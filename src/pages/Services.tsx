@@ -166,48 +166,72 @@ const Services = () => {
         </div>
         
         {/* Orbital Tags System - Desktop: Tags orbit around the central sun */}
-        <div className="absolute inset-0 hidden lg:flex items-center justify-center pointer-events-none overflow-hidden">
-          {/* Orbit path lines (visual guides) */}
-          {[140, 220, 300, 380, 460].map((radius, i) => (
-            <div
-              key={`orbit-path-${i}`}
-              className="absolute rounded-full border border-white/[0.04]"
-              style={{
-                width: radius * 2,
-                height: radius * 2,
-              }}
-            />
-          ))}
-          
-          {/* Orbiting tags - each rotates around the screen center */}
-          {orbitalTags.map((tag, index) => (
-            <div
-              key={`orbit-wrapper-${index}`}
-              className="orbit-wrapper"
-              style={{
-                width: tag.orbitRadius * 2,
-                height: tag.orbitRadius * 2,
-                marginLeft: -tag.orbitRadius,
-                marginTop: -tag.orbitRadius,
-                animation: `orbit ${tag.duration}s linear infinite`,
-                animationDelay: `-${(tag.startAngle / 360) * tag.duration}s`,
-              }}
-            >
-              {/* The tag positioned at the edge of the orbit circle */}
-              <span
-                className={`orbit-tag px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg ${tag.color}`}
+        <div 
+          className="absolute inset-0 hidden lg:flex items-center justify-center pointer-events-none overflow-hidden"
+          style={{
+            perspective: '1200px',
+            perspectiveOrigin: 'center center',
+          }}
+        >
+          {/* 3D tilted orbital plane */}
+          <div
+            className="relative"
+            style={{
+              transformStyle: 'preserve-3d',
+              transform: 'rotateX(65deg) rotateZ(-15deg)',
+            }}
+          >
+            {/* Orbit path lines with glow effect */}
+            {[140, 220, 300, 380, 460].map((radius, i) => (
+              <div
+                key={`orbit-path-${i}`}
+                className="absolute rounded-full"
                 style={{
-                  top: '50%',
-                  right: 0,
-                  transform: 'translateY(-50%)',
-                  animation: `counter-orbit ${tag.duration}s linear infinite`,
+                  width: radius * 2,
+                  height: radius * 2,
+                  left: -radius,
+                  top: -radius,
+                  border: '1px solid rgba(255, 180, 100, 0.15)',
+                  boxShadow: `
+                    0 0 ${10 + i * 3}px rgba(255, 150, 50, 0.1),
+                    inset 0 0 ${8 + i * 2}px rgba(255, 180, 100, 0.05)
+                  `,
+                }}
+              />
+            ))}
+            
+            {/* Orbiting tags - each rotates around the screen center */}
+            {orbitalTags.map((tag, index) => (
+              <div
+                key={`orbit-wrapper-${index}`}
+                className="orbit-wrapper"
+                style={{
+                  width: tag.orbitRadius * 2,
+                  height: tag.orbitRadius * 2,
+                  marginLeft: -tag.orbitRadius,
+                  marginTop: -tag.orbitRadius,
+                  animation: `orbit ${tag.duration}s linear infinite`,
                   animationDelay: `-${(tag.startAngle / 360) * tag.duration}s`,
+                  transformStyle: 'preserve-3d',
                 }}
               >
-                {tag.label}
-              </span>
-            </div>
-          ))}
+                {/* The tag positioned at the edge of the orbit circle */}
+                <span
+                  className={`orbit-tag px-3 py-1.5 rounded-full text-xs font-semibold shadow-lg ${tag.color}`}
+                  style={{
+                    top: '50%',
+                    right: 0,
+                    transform: 'translateY(-50%) rotateX(-65deg) rotateZ(15deg)',
+                    animation: `counter-orbit ${tag.duration}s linear infinite`,
+                    animationDelay: `-${(tag.startAngle / 360) * tag.duration}s`,
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.3), 0 0 15px rgba(255, 200, 100, 0.2)',
+                  }}
+                >
+                  {tag.label}
+                </span>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Mobile floating tags - simplified static version */}
