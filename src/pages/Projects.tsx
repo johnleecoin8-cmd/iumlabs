@@ -3,74 +3,243 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
+import TiltCard from "@/components/TiltCard";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import CalendlyButton from "@/components/CalendlyButton";
+import { Link } from "react-router-dom";
 import constellationSpace from "@/assets/constellation-space.jpg";
 
-const projects = [
+// Import logos
+import bnbLogo from "@/assets/logos/bnb.svg";
+import kucoinLogo from "@/assets/logos/kucoin.svg";
+import polygonLogo from "@/assets/logos/polygon.svg";
+import ondoLogo from "@/assets/logos/ondo.svg";
+import peaqLogo from "@/assets/logos/peaq.png";
+import storyLogo from "@/assets/logos/story-protocol.png";
+import megaethLogo from "@/assets/logos/megaeth.png";
+import triaLogo from "@/assets/logos/tria.png";
+import bybitLogo from "@/assets/logos/bybit.png";
+
+const cases = [
   {
-    id: 1,
-    name: "DeFi Protocol",
-    category: "DeFi",
-    gradient: "case-gradient-polkadot",
-    logo: "https://cryptologos.cc/logos/polkadot-new-dot-logo.svg",
+    name: "BNB Chain",
+    logo: bnbLogo,
+    slug: "bnb-chain",
     result: "+340% Korean Trading Volume",
+    category: "Infrastructure",
+    bgStyle: "bg-gradient-to-br from-[#F3BA2F] via-[#F0B90B] to-[#C99100]",
+    decorations: "bnb",
     description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage.",
     services: ["KOL Marketing", "Community Building", "PR & Media"],
   },
   {
-    id: 2,
-    name: "Layer 1 Network",
-    category: "Infrastructure",
-    gradient: "case-gradient-cardano",
-    logo: "https://cryptologos.cc/logos/cardano-ada-logo.svg",
-    logoStyle: "brightness-0",
-    result: "50K+ Korean Holders",
-    description: "Successful market launch with Korean artist collaborations and celebrity KOL partnerships.",
-    services: ["KOL Marketing", "Community Growth", "Events"],
+    name: "KuCoin",
+    logo: kucoinLogo,
+    slug: "kucoin",
+    result: "50K+ New Korean Users",
+    category: "Exchange",
+    bgStyle: "bg-gradient-to-br from-[#23AF91] via-[#1A9B7F] to-[#147A63]",
+    decorations: "kucoin",
+    description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships.",
+    services: ["User Acquisition", "Ambassador Program", "Localization"],
   },
   {
-    id: 3,
-    name: "Web3 Platform",
-    category: "Infrastructure",
-    gradient: "case-gradient-icp",
-    logo: "https://cryptologos.cc/logos/internet-computer-icp-logo.svg",
+    name: "Polygon",
+    logo: polygonLogo,
+    slug: "polygon",
     result: "$2M Korean TVL in 30 Days",
-    description: "Community growth from 0 to 50K Korean users with targeted influencer marketing and AMA sessions.",
-    services: ["Community Growth", "KOL Marketing", "Event Management"],
+    category: "Layer 2",
+    bgStyle: "bg-gradient-to-br from-[#8247E5] via-[#7B3FE4] to-[#5A2D9C]",
+    decorations: "polygon",
+    description: "Community growth from 0 to 50K Korean users with targeted developer relations and DeFi marketing.",
+    services: ["Developer Relations", "DeFi Marketing", "Event Management"],
   },
   {
-    id: 4,
-    name: "Move Ecosystem",
-    category: "Layer 1",
-    gradient: "case-gradient-aptos",
-    logo: "https://cryptologos.cc/logos/aptos-apt-logo.svg",
-    logoStyle: "brightness-0",
-    result: "100K+ Korean Users",
-    description: "Gaming influencer campaigns and partnership with top Korean gaming guilds.",
-    services: ["KOL Marketing", "Community Growth", "GTM Strategy"],
+    name: "Ondo Finance",
+    logo: ondoLogo,
+    slug: "ondo",
+    result: "100K+ Korean Community",
+    category: "RWA",
+    bgStyle: "bg-gradient-to-br from-[#0A1628] via-[#1E3A5F] to-[#0D1B2A]",
+    decorations: "ondo",
+    description: "RWA education campaign targeting both retail and institutional Korean investors.",
+    services: ["Institutional Relations", "Content Marketing", "PR Strategy"],
   },
   {
-    id: 5,
-    name: "Smart Contract Platform",
-    category: "Layer 1",
-    gradient: "case-gradient-near",
-    logo: "https://cryptologos.cc/logos/near-protocol-near-logo.svg",
-    result: "5K+ Korean Developers",
-    description: "Event management at Korea Blockchain Week and ongoing community operations.",
-    services: ["Events", "Community Building", "PR & Media"],
+    name: "Peaq",
+    logo: peaqLogo,
+    slug: "peaq",
+    result: "#1 DePIN in Korea",
+    category: "DePIN",
+    bgStyle: "bg-gradient-to-br from-[#00E5A0] via-[#00D4AA] to-[#00A080]",
+    decorations: "peaq",
+    description: "Established thought leadership in DePIN space with IoT partnerships and developer community.",
+    services: ["Brand Positioning", "Developer Relations", "Partnership Development"],
   },
   {
-    id: 6,
-    name: "Payment Network",
-    category: "Infrastructure",
-    gradient: "case-gradient-xrp",
-    logo: "https://cryptologos.cc/logos/xrp-xrp-logo.svg",
-    result: "#1 Korean Remittance",
-    description: "TVL growth campaign with targeted yield farming promotions and strategic exchange listings.",
-    services: ["GTM Strategy", "Exchange Listing", "PR & Media"],
+    name: "Story Protocol",
+    logo: storyLogo,
+    slug: "story-protocol",
+    result: "5K+ Korean Creators",
+    category: "IP Protocol",
+    bgStyle: "bg-gradient-to-br from-[#FF6B6B] via-[#E5484D] to-[#C92A2A]",
+    decorations: "story",
+    description: "Korean content creator onboarding for IP tokenization platform targeting webtoon and music artists.",
+    services: ["Creator Relations", "Platform Marketing", "Ambassador Program"],
+  },
+  {
+    name: "MegaETH",
+    logo: megaethLogo,
+    slug: "megaeth",
+    result: "+500% Korean Engagement",
+    category: "Layer 2",
+    bgStyle: "bg-gradient-to-br from-[#1a1a2e] via-[#3C4DBB] to-[#627EEA]",
+    decorations: "megaeth",
+    description: "Pre-launch hype building and community engagement ahead of mainnet launch.",
+    services: ["Pre-Launch Marketing", "Community Building", "Media Relations"],
+  },
+  {
+    name: "Tria",
+    logo: triaLogo,
+    slug: "tria",
+    result: "30K+ Korean Wallets",
+    category: "Wallet",
+    bgStyle: "bg-gradient-to-br from-[#FF9500] via-[#FFB347] to-[#FF7F00]",
+    decorations: "tria",
+    description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users.",
+    services: ["User Acquisition", "Product Marketing", "Partnership Development"],
+  },
+  {
+    name: "Bybit",
+    logo: bybitLogo,
+    slug: "bybit",
+    result: "#2 Korean Exchange Traffic",
+    category: "Exchange",
+    bgStyle: "bg-gradient-to-br from-[#F7A600] via-[#FFB800] to-[#E69500]",
+    decorations: "bybit",
+    description: "Multi-channel user acquisition and VIP program for Korean high-volume traders.",
+    services: ["Market Entry Strategy", "User Acquisition", "VIP Relations"],
   },
 ];
+
+// Unique decorative elements for each card
+const CardDecorations = ({ type }: { type: string }) => {
+  switch (type) {
+    case "bnb":
+      return (
+        <>
+          <div className="absolute inset-0 opacity-20">
+            <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <pattern id="hexagons-projects" width="20" height="17.32" patternUnits="userSpaceOnUse">
+                  <polygon points="10,0 20,5 20,15 10,17.32 0,15 0,5" fill="none" stroke="white" strokeWidth="0.5" />
+                </pattern>
+              </defs>
+              <rect width="100" height="100" fill="url(#hexagons-projects)" />
+            </svg>
+          </div>
+          <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-radial from-yellow-200/40 to-transparent blur-2xl" />
+        </>
+      );
+    case "kucoin":
+      return (
+        <>
+          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M0,50 Q25,30 50,50 T100,50" stroke="white" strokeWidth="0.5" fill="none" />
+            <path d="M0,60 Q25,40 50,60 T100,60" stroke="white" strokeWidth="0.5" fill="none" />
+          </svg>
+          <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-gradient-to-t from-emerald-300/30 to-transparent" />
+        </>
+      );
+    case "polygon":
+      return (
+        <>
+          <div className="absolute top-10 right-10 w-16 h-16 rotate-45 border-2 border-white/30" />
+          <div className="absolute bottom-20 left-16 w-12 h-12 rotate-45 bg-white/10" />
+          <div className="absolute -top-10 left-1/3 w-40 h-40 rounded-full bg-purple-400/30 blur-3xl" />
+        </>
+      );
+    case "ondo":
+      return (
+        <>
+          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M0,80 L20,70 L40,75 L60,50 L80,55 L100,30" stroke="#3B82F6" strokeWidth="1" fill="none" />
+          </svg>
+          <div className="absolute inset-0 opacity-10">
+            <div className="w-full h-full" style={{ 
+              backgroundImage: 'linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.3) 1px, transparent 1px)',
+              backgroundSize: '20px 20px'
+            }} />
+          </div>
+        </>
+      );
+    case "peaq":
+      return (
+        <>
+          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100">
+            <circle cx="20" cy="30" r="3" fill="#00FF9D" />
+            <circle cx="80" cy="20" r="2" fill="#00FF9D" />
+            <circle cx="60" cy="70" r="4" fill="#00FF9D" />
+            <line x1="20" y1="30" x2="80" y2="20" stroke="#00FF9D" strokeWidth="0.5" />
+            <line x1="20" y1="30" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
+          </svg>
+          <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full bg-green-400/20 blur-3xl" />
+        </>
+      );
+    case "story":
+      return (
+        <>
+          <div className="absolute top-8 right-8 w-20 h-28 bg-white/10 rounded-sm transform rotate-6" />
+          <div className="absolute top-10 right-10 w-20 h-28 bg-white/15 rounded-sm transform rotate-3" />
+          <div className="absolute bottom-10 left-10 w-24 h-24 rounded-full bg-gradient-to-r from-red-300/40 to-pink-300/30" />
+        </>
+      );
+    case "megaeth":
+      return (
+        <>
+          <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-blue-400/60 via-transparent to-transparent transform -rotate-2" />
+          <div className="absolute top-1/3 left-0 w-3/4 h-px bg-gradient-to-r from-blue-300/40 via-transparent to-transparent" />
+          <div className="absolute -top-20 right-0 w-60 h-60 bg-gradient-to-bl from-blue-400/40 to-transparent blur-2xl" />
+        </>
+      );
+    case "tria":
+      return (
+        <>
+          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100">
+            {[...Array(12)].map((_, i) => (
+              <line
+                key={i}
+                x1="50"
+                y1="50"
+                x2={50 + 45 * Math.cos((i * 30 * Math.PI) / 180)}
+                y2={50 + 45 * Math.sin((i * 30 * Math.PI) / 180)}
+                stroke="white"
+                strokeWidth="0.5"
+              />
+            ))}
+          </svg>
+          <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-gradient-to-t from-orange-300/40 to-amber-200/20" />
+        </>
+      );
+    case "bybit":
+      return (
+        <>
+          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M0,90 L30,70 L50,75 L70,40 L100,20" stroke="#FFD700" strokeWidth="2" fill="none" />
+            <path d="M0,90 L30,70 L50,75 L70,40 L100,20 L100,100 L0,100 Z" fill="url(#goldGradient-projects)" />
+            <defs>
+              <linearGradient id="goldGradient-projects" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stopColor="rgba(255,215,0,0.3)" />
+                <stop offset="100%" stopColor="transparent" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </>
+      );
+    default:
+      return null;
+  }
+};
 
 const stats = [
   { value: "$500M+", label: "Total Value Marketed" },
@@ -191,60 +360,79 @@ const Projects = () => {
       <section ref={ref} className="py-24 px-4 bg-background">
         <div className="container mx-auto max-w-7xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {projects.map((project, index) => (
-              <div
-                key={project.id}
+            {cases.map((caseItem, index) => (
+              <Link
+                key={caseItem.name}
+                to={`/projects/${caseItem.slug}`}
                 className={`group cursor-pointer transition-all duration-500 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                {/* Card with gradient */}
-                <div className={`case-card ${project.gradient} aspect-[4/5] rounded-3xl p-6 flex flex-col justify-between mb-4 relative overflow-hidden`}>
-                  {/* Arrow Icon */}
-                  <div className="flex items-start justify-end">
-                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                <TiltCard
+                  className={`relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle} mb-4`}
+                  max={12}
+                  scale={1.03}
+                  speed={300}
+                >
+                  {/* Unique Decorations */}
+                  <CardDecorations type={caseItem.decorations} />
+
+                  {/* Content */}
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-10">
+                    {/* Logo */}
+                    <img
+                      src={caseItem.logo}
+                      alt={caseItem.name}
+                      className="w-16 h-16 md:w-20 md:h-20 object-contain filter brightness-0 invert mb-4 group-hover:scale-110 transition-transform duration-300"
+                    />
+                    
+                    {/* Project Name */}
+                    <h3 className="text-white text-2xl md:text-3xl font-bold text-center tracking-tight drop-shadow-lg">
+                      {caseItem.name}
+                    </h3>
+                  </div>
+
+                  {/* Bottom Info - Result */}
+                  <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p className="text-white text-sm font-semibold text-center">
+                      {caseItem.result}
+                    </p>
+                    <p className="text-white/70 text-xs text-center mt-1 uppercase tracking-wider">
+                      {caseItem.category}
+                    </p>
+                  </div>
+
+                  {/* Hover Arrow */}
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
                       <ArrowUpRight className="w-5 h-5 text-white" />
                     </div>
                   </div>
 
-                  {/* Center - Logo */}
-                  <div className="flex items-center justify-center flex-1">
-                    <img 
-                      src={project.logo} 
-                      alt={project.name}
-                      className={`w-24 h-24 object-contain ${project.logoStyle || 'brightness-0 invert'} opacity-90 transition-transform duration-300 group-hover:scale-110`}
-                    />
-                  </div>
-
-                  {/* Bottom - Result (on hover) */}
-                  <div className="transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
-                    <p className="text-lg font-medium text-white">{project.result}</p>
-                  </div>
-
                   {/* Category Badge */}
-                  <div className="absolute top-6 left-6">
+                  <div className="absolute top-4 left-4">
                     <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider">
-                      {project.category}
+                      {caseItem.category}
                     </span>
                   </div>
-                </div>
+                </TiltCard>
 
                 {/* Content Below Card */}
                 <div>
-                  <h3 className="text-lg font-medium text-foreground mb-2">{project.name}</h3>
+                  <h3 className="text-lg font-medium text-foreground mb-2">{caseItem.name}</h3>
                   <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
-                    {project.description}
+                    {caseItem.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {project.services.map((service) => (
+                    {caseItem.services.map((service) => (
                       <span key={service} className="text-xs px-2 py-1 bg-muted/50 border border-border/50 rounded-full text-muted-foreground">
                         {service}
                       </span>
                     ))}
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
