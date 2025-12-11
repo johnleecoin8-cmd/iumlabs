@@ -703,6 +703,35 @@
 }
 
 /* ============================================
+   PAGE TRANSITIONS
+   ============================================ */
+
+.page-transition {
+  transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.page-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   MOBILE FLOATING TAGS
+   ============================================ */
+
+@media (max-width: 1023px) {
+  .lunar-tag-dark {
+    @apply text-[10px] px-2 py-1;
+  }
+}
+
+/* ============================================
    FOCUS STATES - ACCESSIBILITY
    ============================================ */
 
@@ -731,5 +760,9 @@
   .logo-marquee-slow,
   .logo-marquee-fast {
     animation: none !important;
+  }
+  
+  .page-transition {
+    transition: none !important;
   }
 }
