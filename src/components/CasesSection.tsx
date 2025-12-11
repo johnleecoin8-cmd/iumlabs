@@ -297,19 +297,13 @@ const CasesSection = () => {
                 {/* Unique Decorations */}
                 <CardDecorations type={caseItem.decorations} />
 
-                {/* Content */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-10">
-                  {/* Logo */}
+                {/* Content - Logo Centered */}
+                <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
                   <img
                     src={caseItem.logo}
                     alt={caseItem.name}
-                    className="w-16 h-16 md:w-20 md:h-20 object-contain filter brightness-0 invert mb-4 group-hover:scale-110 transition-transform duration-300"
+                    className="w-20 h-20 md:w-24 md:h-24 object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-300"
                   />
-                  
-                  {/* Project Name */}
-                  <h3 className="text-white text-2xl md:text-3xl font-bold text-center tracking-tight drop-shadow-lg">
-                    {caseItem.name}
-                  </h3>
                 </div>
 
                 {/* Bottom Info - Result */}
