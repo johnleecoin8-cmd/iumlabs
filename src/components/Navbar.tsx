@@ -20,60 +20,58 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Main Navbar - Transparent on dark hero */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-transparent">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                <div className="w-4 h-4 bg-background rounded-sm"></div>
-              </div>
-              <span className="text-lg font-semibold text-white">{brandConfig.name}</span>
-            </Link>
-
-            {/* Center - Email */}
-            <div className="hidden lg:flex items-center border border-white/20 rounded-full px-6 py-2">
-              <span className="text-white/50 text-sm">e-mail</span>
-              <a 
-                href={`mailto:${brandConfig.email}`} 
-                className="ml-3 text-white text-sm hover:text-primary transition-colors"
-              >
-                {brandConfig.email}
-              </a>
+      {/* Main Navbar - Lunar Strategy Style with Borders */}
+      <nav className="fixed top-3 left-3 right-3 z-50">
+        <div className="flex items-stretch rounded-2xl border border-white/10 bg-[hsl(220,20%,6%,0.9)] backdrop-blur-md overflow-hidden">
+          {/* Logo Section */}
+          <Link to="/" className="flex items-center gap-2 px-6 py-4 border-r border-white/10">
+            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+              <div className="w-4 h-4 bg-background rounded-sm"></div>
             </div>
+            <span className="text-lg font-semibold text-white">{brandConfig.name}</span>
+          </Link>
 
-            {/* Right side buttons */}
-            <div className="flex items-center gap-3">
-              {/* Live Chat Button - Blue with Telegram icon */}
-              <button
-                onClick={() => setIsLiveChatOpen(true)}
-                className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-white text-sm font-medium transition-all hover:bg-primary/90"
-              >
-                <Send className="w-4 h-4" />
-                <span>Start Live Chat</span>
-              </button>
+          {/* Center - Email (with flex-1 to take remaining space) */}
+          <div className="hidden lg:flex flex-1 items-center justify-center px-6 border-r border-white/10">
+            <span className="text-white/50 text-sm">e-mail</span>
+            <a 
+              href={`mailto:${brandConfig.email}`} 
+              className="ml-3 text-white text-sm hover:text-primary transition-colors"
+            >
+              {brandConfig.email}
+            </a>
+          </div>
 
-              {/* Book a Meeting Button - Dark outlined */}
-              <a
-                href="https://calendly.com/cryptobridgekorea"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/20 bg-background/80 text-white text-sm font-medium transition-all hover:bg-background"
-              >
-                <Calendar className="w-4 h-4" />
-                <span>Book a Meeting</span>
-              </a>
+          {/* Right side buttons - Each with border separator */}
+          <div className="flex items-stretch">
+            {/* Live Chat Button - Blue with Telegram icon */}
+            <button
+              onClick={() => setIsLiveChatOpen(true)}
+              className="hidden md:flex items-center gap-2 px-5 py-4 bg-primary text-white text-sm font-medium transition-all hover:bg-primary/90 border-r border-white/10"
+            >
+              <Send className="w-4 h-4" />
+              <span>Start Live Chat</span>
+            </button>
 
-              {/* Menu Button - Dark pill */}
-              <button
-                onClick={() => setIsMenuOpen(true)}
-                className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-zinc-800 text-white text-sm font-medium transition-all hover:bg-zinc-700"
-              >
-                <span className="hidden sm:inline">menu</span>
-                <Menu className="w-5 h-5" />
-              </button>
-            </div>
+            {/* Book a Meeting Button */}
+            <a
+              href="https://calendly.com/cryptobridgekorea"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden md:flex items-center gap-2 px-5 py-4 text-white text-sm font-medium transition-all hover:bg-white/5 border-r border-white/10"
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Book a Meeting</span>
+            </a>
+
+            {/* Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(true)}
+              className="flex items-center gap-3 px-5 py-4 text-white text-sm font-medium transition-all hover:bg-white/5"
+            >
+              <span className="hidden sm:inline">menu</span>
+              <Menu className="w-5 h-5" />
+            </button>
           </div>
         </div>
       </nav>

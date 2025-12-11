@@ -278,6 +278,29 @@
     100% { transform: translateX(-50%); }
   }
 
+  /* Data Flow Line Animation */
+  .data-flow-line {
+    animation: dataFlow 4s ease-in-out infinite;
+    transform: translateX(-100%);
+  }
+  
+  @keyframes dataFlow {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    20% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+
   /* Case Card Gradients */
   .case-gradient-blue {
     background: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 45%));
