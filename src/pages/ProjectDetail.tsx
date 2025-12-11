@@ -712,31 +712,54 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Next Project - Lunar Strategy Minimal Style */}
-      <section className="bg-background border-t border-border">
-        <Link 
-          to={`/projects/${nextSlug}`}
-          className="block group"
-        >
-          <div className="container mx-auto max-w-6xl px-4 py-20 md:py-32">
-            <div className="flex items-end justify-between">
-              <div>
-                <p className="text-muted-foreground text-sm uppercase tracking-wider mb-4">Next Project</p>
-                <h2 className="text-4xl md:text-6xl lg:text-7xl font-light text-foreground group-hover:text-primary transition-colors duration-300">
-                  <span className="serif-italic">{nextProject.name}</span>
-                </h2>
+      {/* Next Project - Enhanced */}
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto max-w-6xl px-4">
+          <p className="text-slate-500 text-sm uppercase tracking-wider mb-6">Next Project</p>
+          
+          <Link 
+            to={`/projects/${nextSlug}`}
+            className="block group"
+          >
+            <div className="grid md:grid-cols-2 gap-6 items-center">
+              {/* Preview Image */}
+              <div className={`relative aspect-[16/10] rounded-2xl overflow-hidden ${nextProject.bgStyle}`}>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <img
+                    src={nextProject.logo}
+                    alt={nextProject.name}
+                    className="w-24 h-24 object-contain filter brightness-0 invert opacity-90 group-hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+                {/* Hover Arrow */}
+                <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ArrowUpRight className="w-5 h-5 text-white" />
+                </div>
               </div>
-              
-              {/* Arrow */}
-              <div className="hidden md:flex items-center gap-4">
-                <span className="text-muted-foreground text-sm">{nextProject.category}</span>
-                <div className="w-14 h-14 rounded-full border border-border flex items-center justify-center group-hover:bg-primary group-hover:border-primary transition-all duration-300">
-                  <ArrowUpRight className="w-6 h-6 text-foreground group-hover:text-primary-foreground transition-colors" />
+
+              {/* Project Info */}
+              <div>
+                <span className="text-xs uppercase tracking-wider text-primary bg-primary/10 px-3 py-1 rounded-full">
+                  {nextProject.category}
+                </span>
+                <h3 className="text-3xl md:text-4xl font-bold text-slate-900 mt-3 mb-2 group-hover:text-primary transition-colors">
+                  {nextProject.name}
+                </h3>
+                <p className="text-slate-600 mb-4">{nextProject.result}</p>
+                
+                {/* Key Metrics Preview */}
+                <div className="flex gap-4">
+                  {nextProject.metrics.slice(0, 2).map((metric, index) => (
+                    <div key={index} className="text-left">
+                      <p className="text-lg font-bold text-slate-900">{metric.value}</p>
+                      <p className="text-xs text-slate-500">{metric.label}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
-          </div>
-        </Link>
+          </Link>
+        </div>
       </section>
 
       <Footer />
