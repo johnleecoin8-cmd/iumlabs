@@ -57,6 +57,32 @@ export default {
           dark: "hsl(0 0% 4%)",
           light: "hsl(0 0% 96%)",
         },
+        // Planetary theme colors
+        sun: {
+          primary: "hsl(35 100% 60%)",
+          secondary: "hsl(45 100% 50%)",
+          light: "hsl(45 100% 97%)",
+        },
+        saturn: {
+          primary: "hsl(280 80% 60%)",
+          secondary: "hsl(300 70% 50%)",
+          light: "hsl(280 50% 97%)",
+        },
+        earth: {
+          primary: "hsl(200 90% 55%)",
+          secondary: "hsl(180 80% 45%)",
+          light: "hsl(200 60% 97%)",
+        },
+        mars: {
+          primary: "hsl(15 90% 55%)",
+          secondary: "hsl(0 80% 50%)",
+          light: "hsl(15 70% 97%)",
+        },
+        nebula: {
+          primary: "hsl(300 70% 60%)",
+          secondary: "hsl(200 80% 55%)",
+          light: "hsl(300 40% 97%)",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

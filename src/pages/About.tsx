@@ -209,9 +209,9 @@ const About = () => {
 
             {/* Right - Content */}
             <div>
-              <span className="text-sm text-[hsl(var(--light-fg),0.4)] mb-4 block">[ 01 ]</span>
+              <span className="section-number-badge mb-4">01</span>
               <h2 className="text-4xl md:text-5xl font-light text-[hsl(var(--light-fg))] mb-6">
-                Our <span className="serif-italic">Mission</span>
+                Our <span className="serif-italic gradient-text-earth">Mission</span>
               </h2>
               <div className="space-y-6 text-[hsl(var(--light-fg),0.6)] text-lg leading-relaxed">
                 <p>

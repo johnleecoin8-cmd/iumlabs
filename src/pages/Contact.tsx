@@ -245,10 +245,12 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Open Hours */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+              {/* Open Hours - Glass Card */}
+              <div className="glass-card-dark p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <Clock className="w-5 h-5 text-primary" />
+                  <div className="w-10 h-10 rounded-full bg-mars-primary/20 flex items-center justify-center">
+                    <Clock className="w-5 h-5 text-mars-primary" />
+                  </div>
                   <h3 className="text-white font-medium">Open Hours</h3>
                 </div>
                 <div className="space-y-2 text-white/60">
@@ -262,8 +264,8 @@ const Contact = () => {
                   </div>
                 </div>
                 <div className="mt-4 pt-4 border-t border-white/10">
-                  <div className="flex items-center gap-2 text-sm text-white/50">
-                    <Globe className="w-4 h-4" />
+                  <div className="tag-pill-enhanced">
+                    <Globe className="w-3 h-3" />
                     <span>Seoul, South Korea (GMT+9)</span>
                   </div>
                 </div>
@@ -319,11 +321,11 @@ const Contact = () => {
 
             {/* Right Column - Contact Form */}
             <div>
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-3xl p-8 md:p-10">
+              <div className="glass-card-dark p-8 md:p-10">
                 <div className="mb-8">
-                  <span className="text-white/40 text-sm font-mono mb-4 block">[ Contact Form ]</span>
+                  <span className="section-number-badge mb-4">Contact Form</span>
                   <h2 className="text-3xl font-light text-white">
-                    Tell us about your <span className="serif-italic text-primary">project</span>
+                    Tell us about your <span className="serif-italic gradient-text-mars">project</span>
                   </h2>
                 </div>
                 
