@@ -13,14 +13,6 @@ const brandConfig = {
 
 const navLinks = navigation.links.map(link => ({ to: link.href, label: link.name }));
 
-const guides = [
-  { title: "Korean Crypto Market Guide 2024", downloads: "2.5K" },
-  { title: "KOL Marketing Playbook", downloads: "1.8K" },
-  { title: "Exchange Listing Checklist", downloads: "3.2K" },
-  { title: "Community Building Guide", downloads: "1.5K" },
-  { title: "PR & Media Strategy", downloads: "2.1K" },
-  { title: "Regulatory Compliance Guide", downloads: "1.9K" },
-];
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -180,31 +172,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Dotted Line */}
-        <div className="dotted-line-dark my-12" />
-
-        {/* Guides Carousel */}
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-6">
-            <h4 className="text-sm text-white/50 uppercase tracking-wider">free guides</h4>
-            <Link to="/blog" className="text-sm text-white/50 hover:text-white transition-colors flex items-center gap-1">
-              View All <ArrowUpRight className="w-3 h-3" />
-            </Link>
-          </div>
-          <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide">
-            {guides.map((guide) => (
-              <div
-                key={guide.title}
-                className="flex-shrink-0 w-[200px] p-4 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-colors cursor-pointer group"
-              >
-                <p className="text-xs text-white/40 mb-2">{guide.downloads} downloads</p>
-                <p className="text-sm text-white/80 group-hover:text-white transition-colors line-clamp-2">
-                  {guide.title}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* Bottom Bar */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
