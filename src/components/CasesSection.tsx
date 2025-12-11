@@ -1,7 +1,7 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import TiltCard from "@/components/TiltCard";
+import { useState } from "react";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -11,6 +11,14 @@ import ondoLogo from "@/assets/logos/ondo.svg";
 import peaqLogo from "@/assets/logos/peaq.png";
 import storyLogo from "@/assets/logos/story-protocol.png";
 
+// Import campaign images
+import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
+import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
+import polygonHackathon from "@/assets/campaigns/polygon-hackathon.jpg";
+import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
+import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
+import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
+
 const cases = [
   {
     name: "BNB Chain",
@@ -18,7 +26,9 @@ const cases = [
     slug: "bnb-chain",
     result: "+340% Korean Trading Volume",
     category: "Infrastructure",
-    decorationType: "bnb",
+    image: bnbEvent,
+    gradient: "from-[#F0B90B] via-[#F8D33A] to-[#FFA500]",
+    overlayColor: "bg-gradient-to-br from-[#F0B90B]/80 via-[#F8D33A]/60 to-[#FFA500]/80",
   },
   {
     name: "KuCoin",
@@ -26,7 +36,9 @@ const cases = [
     slug: "kucoin",
     result: "50K+ New Korean Users",
     category: "Exchange",
-    decorationType: "kucoin",
+    image: kucoinCampaign,
+    gradient: "from-[#23AF91] via-[#2DC9A3] to-[#00E8B5]",
+    overlayColor: "bg-gradient-to-br from-[#23AF91]/80 via-[#2DC9A3]/60 to-[#00E8B5]/80",
   },
   {
     name: "Polygon",
@@ -34,7 +46,9 @@ const cases = [
     slug: "polygon",
     result: "$2M Korean TVL in 30 Days",
     category: "Layer 2",
-    decorationType: "polygon",
+    image: polygonHackathon,
+    gradient: "from-[#8247E5] via-[#A06EFF] to-[#7B3FE4]",
+    overlayColor: "bg-gradient-to-br from-[#8247E5]/80 via-[#A06EFF]/60 to-[#7B3FE4]/80",
   },
   {
     name: "Ondo Finance",
@@ -42,7 +56,9 @@ const cases = [
     slug: "ondo",
     result: "100K+ Korean Community",
     category: "RWA",
-    decorationType: "ondo",
+    image: ondoSeminar,
+    gradient: "from-[#0052FF] via-[#3377FF] to-[#6699FF]",
+    overlayColor: "bg-gradient-to-br from-[#0052FF]/80 via-[#3377FF]/60 to-[#6699FF]/80",
   },
   {
     name: "Peaq",
@@ -50,7 +66,9 @@ const cases = [
     slug: "peaq",
     result: "#1 DePIN in Korea",
     category: "DePIN",
-    decorationType: "peaq",
+    image: peaqSummit,
+    gradient: "from-[#00FF9D] via-[#00D68F] to-[#00B377]",
+    overlayColor: "bg-gradient-to-br from-[#00FF9D]/80 via-[#00D68F]/60 to-[#00B377]/80",
   },
   {
     name: "Story Protocol",
@@ -58,168 +76,117 @@ const cases = [
     slug: "story-protocol",
     result: "5K+ Korean Creators",
     category: "IP Protocol",
-    decorationType: "story",
+    image: storyWorkshop,
+    gradient: "from-[#FF6B4A] via-[#FF8E6E] to-[#FF4757]",
+    overlayColor: "bg-gradient-to-br from-[#FF6B4A]/80 via-[#FF8E6E]/60 to-[#FF4757]/80",
   },
 ];
 
-// Vibrant card styles inspired by Lunar Strategy
-const CardContent = ({ type, logo, name }: { type: string; logo: string; name: string }) => {
-  switch (type) {
-    case "bnb":
-      // Hot pink/magenta like Polkadot
-      return (
-        <div className="absolute inset-0 bg-gradient-to-br from-[#E91E8C] via-[#FF2DAF] to-[#9B1FE8] overflow-hidden">
-          {/* Large decorative circles */}
-          <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-[#FF1493]/60 blur-sm" />
-          <div className="absolute bottom-10 left-10 w-40 h-40 rounded-full bg-[#FF69B4]/50" />
-          <div className="absolute bottom-32 left-32 w-24 h-24 rounded-full bg-[#C71585]/70" />
-          <div className="absolute top-20 right-10 w-16 h-16 rounded-full bg-white/20" />
-          {/* Dot pattern */}
-          <div className="absolute inset-0 opacity-30" style={{
-            backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
-            backgroundSize: '20px 20px'
-          }} />
-          {/* Logo */}
-          <div className="absolute top-6 left-6 flex items-center gap-3 z-10">
-            <img src={logo} alt={name} className="w-12 h-12 object-contain drop-shadow-2xl" />
-            <span className="text-white text-2xl font-bold drop-shadow-lg">{name}</span>
+interface CaseCardProps {
+  caseItem: typeof cases[0];
+  index: number;
+}
+
+const CaseCard = ({ caseItem, index }: CaseCardProps) => {
+  const [mousePosition, setMousePosition] = useState({ x: 0.5, y: 0.5 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    setMousePosition({ x, y });
+  };
+
+  const rotateX = isHovered ? (mousePosition.y - 0.5) * -25 : 0;
+  const rotateY = isHovered ? (mousePosition.x - 0.5) * 25 : 0;
+  const scale = isHovered ? 1.05 : 1;
+
+  return (
+    <Link
+      to={`/projects/${caseItem.slug}`}
+      className="group block"
+      style={{ animationDelay: `${index * 100}ms` }}
+    >
+      <div
+        className="relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer transition-all duration-500 ease-out"
+        onMouseMove={handleMouseMove}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => {
+          setIsHovered(false);
+          setMousePosition({ x: 0.5, y: 0.5 });
+        }}
+        style={{
+          transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${scale})`,
+          transformStyle: 'preserve-3d',
+          boxShadow: isHovered 
+            ? '0 50px 100px -20px rgba(0,0,0,0.5), 0 30px 60px -30px rgba(0,0,0,0.5)' 
+            : '0 10px 30px -10px rgba(0,0,0,0.3)',
+        }}
+      >
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out"
+          style={{ 
+            backgroundImage: `url(${caseItem.image})`,
+            transform: isHovered ? 'scale(1.15)' : 'scale(1)',
+          }}
+        />
+        
+        {/* Color Overlay */}
+        <div className={`absolute inset-0 ${caseItem.overlayColor} mix-blend-multiply transition-opacity duration-500 ${isHovered ? 'opacity-70' : 'opacity-90'}`} />
+        
+        {/* Gradient Mesh */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${caseItem.gradient} opacity-40`} />
+        
+        {/* Animated Shine Effect */}
+        <div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={{
+            background: `radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(255,255,255,0.3) 0%, transparent 50%)`,
+          }}
+        />
+
+        {/* Logo and Name */}
+        <div 
+          className="absolute top-6 left-6 flex items-center gap-3 z-10"
+          style={{ transform: 'translateZ(40px)' }}
+        >
+          <div className="w-14 h-14 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center shadow-2xl border border-white/30">
+            <img src={caseItem.logo} alt={caseItem.name} className="w-10 h-10 object-contain drop-shadow-2xl" />
           </div>
+          <span className="text-white text-2xl font-bold drop-shadow-2xl tracking-tight">{caseItem.name}</span>
         </div>
-      );
-    
-    case "kucoin":
-      // Soft gradient like Cardano
-      return (
-        <div className="absolute inset-0 bg-gradient-to-br from-[#E8F4F8] via-[#FFF5E6] to-[#FFE4D6] overflow-hidden">
-          {/* Warm sun-like center */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 rounded-full bg-gradient-radial from-[#FF9D5C]/70 via-[#FFBE82]/50 to-transparent" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-gradient-radial from-[#FFB366]/60 to-transparent" />
-          {/* Dot pattern */}
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: 'radial-gradient(circle, #666 0.5px, transparent 0.5px)',
-            backgroundSize: '12px 12px'
-          }} />
-          {/* Logo */}
-          <div className="absolute top-6 left-1/2 -translate-x-1/2 flex items-center gap-3 z-10">
-            <img src={logo} alt={name} className="w-10 h-10 object-contain" />
-            <span className="text-slate-700 text-xl font-semibold tracking-wider uppercase">{name}</span>
-          </div>
+
+        {/* Category Badge */}
+        <div 
+          className="absolute top-6 right-6 z-10"
+          style={{ transform: 'translateZ(30px)' }}
+        >
+          <span className="px-3 py-1.5 bg-white/20 backdrop-blur-md rounded-full text-white text-xs font-medium border border-white/30">
+            {caseItem.category}
+          </span>
         </div>
-      );
-    
-    case "polygon":
-      // Dark blue with scattered elements like Internet Computer
-      return (
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0D1B3E] via-[#1A2B5C] to-[#0A1628] overflow-hidden">
-          {/* Scattered colorful elements */}
-          <div className="absolute top-1/4 left-1/4 w-2 h-8 bg-cyan-400 rotate-45 opacity-80" />
-          <div className="absolute top-1/3 right-1/4 w-3 h-3 bg-pink-500 rotate-12" />
-          <div className="absolute bottom-1/4 left-1/3 w-2 h-6 bg-orange-400 -rotate-45 opacity-70" />
-          <div className="absolute top-2/3 right-1/3 w-4 h-1 bg-purple-400 rotate-90" />
-          <div className="absolute bottom-1/3 right-1/5 w-2 h-2 bg-blue-400 rounded-full" />
-          <div className="absolute top-1/2 left-1/5 w-1 h-4 bg-green-400 rotate-30 opacity-60" />
-          {/* More scattered particles */}
-          {[...Array(15)].map((_, i) => (
-            <div 
-              key={i} 
-              className="absolute w-1 h-1 rounded-full"
-              style={{
-                top: `${Math.random() * 100}%`,
-                left: `${Math.random() * 100}%`,
-                backgroundColor: ['#06B6D4', '#EC4899', '#F97316', '#8B5CF6', '#10B981'][i % 5],
-                opacity: 0.6 + Math.random() * 0.4,
-              }}
-            />
-          ))}
-          {/* Logo */}
-          <div className="absolute top-6 right-6 flex items-center gap-3 z-10">
-            <div className="w-10 h-10 flex items-center justify-center">
-              <svg viewBox="0 0 38 33" className="w-10 h-10 text-white">
-                <path fill="currentColor" d="M19 0l19 33H0L19 0zm0 8L8 27h22L19 8z"/>
-              </svg>
+
+        {/* Bottom Result - Always visible */}
+        <div 
+          className="absolute bottom-0 left-0 right-0 p-6 z-10"
+          style={{ transform: 'translateZ(50px)' }}
+        >
+          <div className="bg-black/40 backdrop-blur-md rounded-xl p-4 border border-white/10 transition-all duration-500 group-hover:bg-black/60">
+            <p className="text-white text-lg font-bold tracking-tight">{caseItem.result}</p>
+            <div className="flex items-center gap-2 mt-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+              <span className="text-white/80 text-sm">View Case Study</span>
+              <ArrowUpRight className="w-4 h-4 text-white/80" />
             </div>
-            <span className="text-white text-xl font-bold">{name}</span>
           </div>
         </div>
-      );
-    
-    case "ondo":
-      // Black with chrome 3D sphere like MultiversX
-      return (
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0A0A0A] via-[#1A1A1A] to-[#000000] overflow-hidden">
-          {/* Chrome 3D sphere effect */}
-          <div className="absolute bottom-0 left-0 w-48 h-48">
-            <div className="absolute inset-0 rounded-full bg-gradient-conic from-pink-500 via-purple-600 via-blue-500 via-teal-400 via-yellow-400 to-pink-500 blur-md opacity-80" 
-                 style={{ transform: 'perspective(400px) rotateX(20deg)' }} />
-            <div className="absolute inset-4 rounded-full bg-gradient-to-br from-slate-300 via-slate-500 to-slate-800"
-                 style={{ transform: 'perspective(400px) rotateX(20deg)' }} />
-            <div className="absolute inset-8 rounded-full bg-gradient-to-tr from-white/40 to-transparent opacity-60" />
-          </div>
-          {/* Ambient glow */}
-          <div className="absolute bottom-0 left-0 w-64 h-32 bg-gradient-to-t from-purple-500/20 via-blue-500/10 to-transparent blur-2xl" />
-          {/* Logo */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-            <span className="text-white text-3xl font-light tracking-wider">
-              Ondo<span className="text-cyan-400 align-super text-sm">Finance</span>
-            </span>
-          </div>
-        </div>
-      );
-    
-    case "peaq":
-      // Green with dot pattern like Aethir
-      return (
-        <div className="absolute inset-0 bg-gradient-to-br from-[#4A7C59] via-[#5D8A68] to-[#3D6B4A] overflow-hidden">
-          {/* Dot grid pattern */}
-          <div className="absolute inset-0 opacity-30" style={{
-            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.5) 2px, transparent 2px)',
-            backgroundSize: '24px 24px'
-          }} />
-          {/* Gradient overlay top */}
-          <div className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-[#3A6B4A]/50 to-transparent" />
-          {/* Small accent dots */}
-          <div className="absolute top-1/4 left-1/3 w-3 h-3 rounded-full bg-[#00FF9D]/60" />
-          <div className="absolute bottom-1/3 right-1/4 w-2 h-2 rounded-full bg-white/40" />
-          {/* Logo */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
-            <div className="text-[#C5FF4A] font-bold text-3xl tracking-tight">
-              <span className="inline-block transform -skew-x-6">▲</span>
-            </div>
-            <span className="text-white text-3xl font-bold">{name}</span>
-            <span className="text-white/50 text-xs align-super">™</span>
-          </div>
-        </div>
-      );
-    
-    case "story":
-      // Coral/orange gradient with stripes
-      return (
-        <div className="absolute inset-0 bg-gradient-to-br from-[#FF6B4A] via-[#FF7F5C] to-[#FF8E6E] overflow-hidden">
-          {/* Vertical stripes */}
-          <div className="absolute inset-0 opacity-20" style={{
-            backgroundImage: 'repeating-linear-gradient(90deg, transparent, transparent 8px, rgba(255,255,255,0.3) 8px, rgba(255,255,255,0.3) 10px)',
-          }} />
-          {/* Dark section at bottom */}
-          <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-[#1A2B5C] to-transparent" />
-          {/* Abstract icon */}
-          <div className="absolute bottom-12 right-12 w-20 h-20 opacity-80">
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-4 bg-white/90 rounded-sm" />
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-8 h-10 bg-white/80 rounded-sm" />
-          </div>
-          {/* Small dots scattered */}
-          <div className="absolute top-1/4 right-1/4 w-2 h-2 rounded-full bg-white/60" />
-          <div className="absolute top-1/3 left-1/4 w-1.5 h-1.5 rounded-full bg-[#1A2B5C]/40" />
-          {/* Logo */}
-          <div className="absolute top-6 left-6 flex items-center gap-3 z-10">
-            <img src={logo} alt={name} className="w-10 h-10 object-contain drop-shadow-lg" />
-            <span className="text-white text-xl font-semibold drop-shadow-md">{name}</span>
-          </div>
-        </div>
-      );
-    
-    default:
-      return null;
-  }
+
+        {/* Corner Accent */}
+        <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-700" />
+      </div>
+    </Link>
+  );
 };
 
 const CasesSection = () => {
@@ -242,40 +209,9 @@ const CasesSection = () => {
         </div>
 
         {/* Cases Grid - 3x2 */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {cases.map((caseItem, index) => (
-            <Link
-              key={caseItem.name}
-              to={`/projects/${caseItem.slug}`}
-              className="group"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <TiltCard
-                className="relative aspect-[4/3] rounded-2xl overflow-hidden cursor-pointer shadow-lg hover:shadow-2xl transition-shadow duration-500"
-                max={8}
-                scale={1.02}
-                speed={400}
-              >
-                {/* Card Content */}
-                <CardContent type={caseItem.decorationType} logo={caseItem.logo} name={caseItem.name} />
-
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 z-20" />
-
-                {/* Hover Arrow */}
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 z-30">
-                  <div className="w-10 h-10 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                    <ArrowUpRight className="w-5 h-5 text-slate-800" />
-                  </div>
-                </div>
-
-                {/* Bottom Result (shows on hover) */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 z-20">
-                  <p className="text-white text-sm font-semibold">{caseItem.result}</p>
-                  <p className="text-white/70 text-xs mt-1">{caseItem.category}</p>
-                </div>
-              </TiltCard>
-            </Link>
+            <CaseCard key={caseItem.name} caseItem={caseItem} index={index} />
           ))}
         </div>
 
