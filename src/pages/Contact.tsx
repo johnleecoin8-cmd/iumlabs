@@ -270,14 +270,20 @@ const Contact = () => {
             {serviceHighlights.map((service, index) => (
               <div 
                 key={index}
-                className={`group p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 transition-all duration-500 ${
+                className={`group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 overflow-hidden transition-all duration-500 ${
                   servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ transitionDelay: `${index * 100 + 200}ms` }}
               >
-                <service.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
-                <h3 className="text-lg font-medium text-white mb-2">{service.title}</h3>
-                <p className="text-sm text-white/50">{service.description}</p>
+                {/* Hover gradient background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-blue-500/10 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                
+                <div className="relative z-10">
+                  <service.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform duration-300" />
+                  <h3 className="text-lg font-medium text-white mb-2">{service.title}</h3>
+                  <p className="text-sm text-white/50 group-hover:text-white/70 transition-colors duration-300">{service.description}</p>
+                </div>
               </div>
             ))}
           </div>
