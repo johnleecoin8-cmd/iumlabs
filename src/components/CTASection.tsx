@@ -1,84 +1,126 @@
-import { ArrowRight, Mail, Send, Phone } from "lucide-react";
+import { ArrowRight, Calendar, Clock, MessageCircle, Linkedin, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
+import { images } from "@/config/content";
+
+const benefits = [
+  { icon: Clock, text: "30 min Free Call" },
+  { icon: Calendar, text: "Flexible Scheduling" },
+  { icon: MessageCircle, text: "Ask Us Anything" },
+];
+
+const founders = [
+  {
+    name: "James",
+    role: "Co-Founder",
+    image: images.team.james,
+    telegram: "https://t.me/cryptobridgekorea",
+    linkedin: "https://www.linkedin.com/in/james-l-13a998251/",
+  },
+  {
+    name: "David",
+    role: "Co-Founder",
+    image: images.team.david,
+    telegram: "https://t.me/cryptobridgekorea",
+    linkedin: "https://www.linkedin.com/company/cryptobridge",
+  },
+];
 
 const CTASection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
     <section ref={ref} className="py-24 md:py-32 relative overflow-hidden">
-      {/* Background with gradient */}
+      {/* Background */}
       <div className="absolute inset-0">
         <div 
           className="absolute inset-0"
           style={{
-            background: `
-              radial-gradient(ellipse 80% 60% at 50% 100%, hsl(var(--gradient-red) / 0.15) 0%, transparent 50%),
-              linear-gradient(to bottom, transparent 0%, hsl(var(--card) / 0.5) 100%)
-            `,
+            background: `radial-gradient(ellipse 80% 50% at 50% 100%, hsl(var(--primary) / 0.1) 0%, transparent 60%)`,
           }}
         />
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className={`max-w-4xl mx-auto text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Badge */}
-          <span className="text-primary font-mono text-sm tracking-wider mb-6 block">04. LET'S TALK</span>
+          {/* Benefits Row */}
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 mb-10">
+            {benefits.map((benefit, index) => (
+              <div key={index} className="flex items-center gap-2 text-sm text-muted-foreground">
+                <benefit.icon className="w-4 h-4 text-primary" />
+                <span>{benefit.text}</span>
+              </div>
+            ))}
+          </div>
 
           {/* Headline */}
-          <h2 className="text-4xl md:text-6xl lg:text-7xl tracking-tight mb-6">
-            <span className="font-sans font-bold text-foreground">Ready to Enter</span>
-            <br />
-            <span className="font-serif italic text-gradient">Korea's Market?</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6">
+            Let's Talk <span className="text-primary">Strategy</span>
           </h2>
 
           {/* Description */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-            Let's discuss how we can help your Web3 project succeed in one of the world's most active crypto markets.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
+            We'll get to the point. You explain what you're building and we'll explain how we'd support it in Korea.
           </p>
 
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <Link to="/contact">
-              <Button size="lg" className="rounded-full bg-primary hover:bg-primary/90 px-8 py-6 text-base group">
-                Book a Consultation
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-            <a href="https://t.me/cryptobridgekorea" target="_blank" rel="noopener noreferrer">
-              <Button size="lg" variant="outline" className="rounded-full border-border/50 px-8 py-6 text-base hover:bg-card">
-                <Send className="w-4 h-4 mr-2" />
-                Message on Telegram
-              </Button>
-            </a>
-          </div>
+          {/* CTA Button */}
+          <Link to="/contact">
+            <Button 
+              size="lg" 
+              className="rounded-full bg-primary hover:bg-primary/90 px-10 py-7 text-base group"
+            >
+              Book a Meeting
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
 
-          {/* Contact Info Cards */}
-          <div className="grid sm:grid-cols-3 gap-4 max-w-3xl mx-auto">
-            <a 
-              href="mailto:CryptoBridgekoea@gmail.com"
-              className="flex items-center justify-center gap-3 p-4 rounded-xl bg-card/50 border border-border/30 text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all group"
-            >
-              <Mail className="w-5 h-5 text-primary" />
-              <span className="text-sm">Email Us</span>
-            </a>
-            <a 
-              href="https://t.me/cryptobridgekorea"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center gap-3 p-4 rounded-xl bg-card/50 border border-border/30 text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all group"
-            >
-              <Send className="w-5 h-5 text-primary" />
-              <span className="text-sm">Telegram</span>
-            </a>
-            <a 
-              href="tel:01039699699"
-              className="flex items-center justify-center gap-3 p-4 rounded-xl bg-card/50 border border-border/30 text-muted-foreground hover:text-foreground hover:border-primary/30 transition-all group"
-            >
-              <Phone className="w-5 h-5 text-primary" />
-              <span className="text-sm">Call Us</span>
-            </a>
+          {/* Founder Cards */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-16">
+            {founders.map((founder, index) => (
+              <div
+                key={founder.name}
+                className={`flex items-center gap-4 p-4 pr-8 rounded-full bg-card/50 border border-border/30 transition-all duration-500 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+                }`}
+                style={{ transitionDelay: `${300 + index * 100}ms` }}
+              >
+                {/* Photo */}
+                <div className="w-14 h-14 rounded-full overflow-hidden ring-2 ring-border/30">
+                  <img 
+                    src={founder.image} 
+                    alt={founder.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Info */}
+                <div className="text-left">
+                  <h4 className="font-semibold text-foreground">{founder.name}</h4>
+                  <p className="text-xs text-muted-foreground">{founder.role}</p>
+                </div>
+
+                {/* Social */}
+                <div className="flex items-center gap-2 ml-4">
+                  <a 
+                    href={founder.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                  <a 
+                    href={founder.telegram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-8 h-8 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+                  >
+                    <Send className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

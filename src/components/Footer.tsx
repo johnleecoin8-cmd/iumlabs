@@ -1,75 +1,196 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import { footer, brand } from "@/config/content";
+import { Send, Linkedin, ArrowRight } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
+import { brand, footer } from "@/config/content";
+
+const budgetOptions = [
+  { value: "5k-15k", label: "$5,000 - $15,000" },
+  { value: "15k-30k", label: "$15,000 - $30,000" },
+  { value: "30k+", label: "$30,000+" },
+];
 
 const Footer = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    company: "",
+    website: "",
+    message: "",
+    budget: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.name || !formData.email) return;
+
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase
+        .from('contact_submissions')
+        .insert({
+          name: formData.name,
+          email: formData.email,
+          comments: `Company: ${formData.company}\nWebsite: ${formData.website}\nBudget: ${formData.budget}\n\n${formData.message}`,
+        });
+
+      if (error) throw error;
+
+      toast({
+        title: "Message sent!",
+        description: "We'll get back to you within 24 hours.",
+      });
+      setFormData({ name: "", email: "", company: "", website: "", message: "", budget: "" });
+    } catch (error) {
+      toast({
+        title: "Failed to send",
+        description: "Please try again or contact us directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <footer className="border-t border-border/30 relative">
-      {/* Top gradient line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-      
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-4 gap-12">
-          {/* Brand */}
-          <div className="md:col-span-2">
-            <Link to="/" className="inline-block mb-4">
-              <span className="text-xl font-semibold tracking-tight text-gradient">
-                {brand.name}
-              </span>
-            </Link>
-            <p className="text-muted-foreground text-sm max-w-sm leading-relaxed">
-              {brand.description}
-            </p>
-            {/* Social links */}
-            <div className="flex items-center gap-4 mt-6">
-              {footer.social.map((social) => (
-                <a
-                  key={social}
-                  href="#"
-                  className="w-10 h-10 rounded-lg glass-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/30 transition-all text-xs font-medium"
-                >
-                  {social[0]}
-                </a>
-              ))}
+    <footer className="border-t border-border/30 bg-card/30">
+      <div className="container mx-auto px-4 py-16 md:py-24">
+        <div className="grid lg:grid-cols-2 gap-16">
+          {/* Left - Office Info */}
+          <div>
+            <div className="mb-12">
+              <span className="text-xs text-muted-foreground uppercase tracking-wider mb-4 block">OFFICE</span>
+              <Link to="/" className="inline-block mb-6">
+                <span className="text-2xl font-bold text-foreground">
+                  {brand.name}
+                </span>
+              </Link>
+              <p className="text-muted-foreground leading-relaxed max-w-sm">
+                {brand.address}
+              </p>
+            </div>
+
+            {/* Contact Info */}
+            <div className="space-y-4 mb-12">
+              <a 
+                href={`mailto:${brand.email}`}
+                className="block text-foreground hover:text-primary transition-colors"
+              >
+                {brand.email}
+              </a>
+              <a 
+                href={`tel:${brand.phone.replace(/\s/g, '')}`}
+                className="block text-foreground hover:text-primary transition-colors"
+              >
+                {brand.phone}
+              </a>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-4">
+              <a
+                href={brand.telegramLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+              >
+                <Send className="w-4 h-4" />
+              </a>
+              <a
+                href={brand.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-border/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
             </div>
           </div>
 
-          {/* Services */}
+          {/* Right - Contact Form */}
           <div>
-            <h4 className="font-medium text-sm mb-4 text-foreground">{footer.servicesTitle}</h4>
-            <ul className="space-y-3">
-              {footer.services.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <span className="text-xs text-muted-foreground uppercase tracking-wider mb-6 block">CONTACT FORM</span>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid sm:grid-cols-2 gap-4">
+                <Input
+                  placeholder="Name *"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  required
+                  className="bg-background/50 border-border/50 rounded-lg"
+                />
+                <Input
+                  type="email"
+                  placeholder="Email *"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  required
+                  className="bg-background/50 border-border/50 rounded-lg"
+                />
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <Input
+                  placeholder="Company"
+                  value={formData.company}
+                  onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                  className="bg-background/50 border-border/50 rounded-lg"
+                />
+                <Input
+                  placeholder="Website"
+                  value={formData.website}
+                  onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                  className="bg-background/50 border-border/50 rounded-lg"
+                />
+              </div>
+              <Textarea
+                placeholder="Tell us about your project"
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                rows={4}
+                className="bg-background/50 border-border/50 rounded-lg resize-none"
+              />
 
-          {/* Company */}
-          <div>
-            <h4 className="font-medium text-sm mb-4 text-foreground">{footer.companyTitle}</h4>
-            <ul className="space-y-3">
-              {footer.company.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-muted-foreground hover:text-primary transition-colors text-sm"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+              {/* Budget Selection */}
+              <div className="pt-2">
+                <span className="text-sm text-muted-foreground mb-3 block">ESTIMATED BUDGET</span>
+                <RadioGroup
+                  value={formData.budget}
+                  onValueChange={(value) => setFormData({ ...formData, budget: value })}
+                  className="flex flex-wrap gap-4"
+                >
+                  {budgetOptions.map((option) => (
+                    <div key={option.value} className="flex items-center space-x-2">
+                      <RadioGroupItem value={option.value} id={option.value} />
+                      <Label htmlFor={option.value} className="text-sm text-muted-foreground cursor-pointer">
+                        {option.label}
+                      </Label>
+                    </div>
+                  ))}
+                </RadioGroup>
+              </div>
+
+              <Button 
+                type="submit" 
+                disabled={isSubmitting}
+                className="rounded-full bg-primary hover:bg-primary/90 group mt-2"
+              >
+                {isSubmitting ? "Sending..." : "Submit"}
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </form>
           </div>
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="mt-16 pt-8 border-t border-border/30 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
             {brand.copyright}
           </p>
