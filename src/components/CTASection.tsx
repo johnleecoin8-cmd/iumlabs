@@ -127,8 +127,8 @@ const CTASection = () => {
                 <button className="w-10 h-10 rounded-full bg-[hsl(var(--dark-fg))] opacity-10 flex items-center justify-center hover:opacity-20 transition-opacity">
                   <Video className="w-4 h-4 text-[hsl(var(--dark-fg))]" />
                 </button>
-                <button className="w-12 h-12 rounded-full bg-[hsl(0,84%,60%)] flex items-center justify-center hover:bg-[hsl(0,84%,50%)] transition-colors">
-                  <Phone className="w-5 h-5 text-[hsl(var(--dark-fg))] rotate-[135deg]" />
+                <button className="w-12 h-12 rounded-full bg-[hsl(265,100%,63%)] flex items-center justify-center hover:bg-[hsl(265,100%,55%)] transition-colors shadow-[0_0_20px_hsl(265,100%,63%,0.4)]">
+                  <Phone className="w-5 h-5 text-white rotate-[135deg]" />
                 </button>
                 <button className="w-10 h-10 rounded-full bg-[hsl(var(--dark-fg))] opacity-10 flex items-center justify-center hover:opacity-20 transition-opacity">
                   <MonitorOff className="w-4 h-4 text-[hsl(var(--dark-fg))]" />

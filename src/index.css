@@ -14,36 +14,37 @@
 
 @layer base {
   :root {
-    /* Dark theme - Black background with white/blue/red accents */
-    --background: 0 0% 4%;
+    /* Dark theme - Pure Black with Neon accents */
+    --background: 0 0% 2%;
     --foreground: 0 0% 98%;
     
-    --card: 0 0% 8%;
+    --card: 0 0% 6%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 8%;
+    --popover: 0 0% 6%;
     --popover-foreground: 0 0% 98%;
     
-    /* Blue primary */
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    /* Neon Cyan primary */
+    --primary: 180 100% 50%;
+    --primary-foreground: 0 0% 0%;
     
-    /* Red accent */
-    --secondary: 0 72% 51%;
+    /* Neon Purple secondary */
+    --secondary: 265 100% 63%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 55%;
     
-    --accent: 0 72% 51%;
+    /* Neon Purple accent */
+    --accent: 265 100% 63%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 217 91% 60%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 180 100% 50%;
     
     --radius: 0.5rem;
 
@@ -51,43 +52,50 @@
     --dark-bg: 0 0% 2%;
     --dark-fg: 0 0% 100%;
 
-    /* Service tag colors - Blue, Red, White variations */
-    --tag-blue: 217 91% 60%;
-    --tag-red: 0 72% 51%;
+    /* Neon Color Palette */
+    --neon-cyan: 180 100% 50%;
+    --neon-purple: 265 100% 63%;
+    --neon-pink: 300 100% 50%;
+    --neon-green: 160 100% 50%;
+    --neon-blue: 200 100% 60%;
+
+    /* Service tag colors - Neon variations */
+    --tag-blue: 200 100% 60%;
+    --tag-cyan: 180 100% 50%;
+    --tag-purple: 265 100% 63%;
+    --tag-pink: 300 100% 50%;
+    --tag-green: 160 100% 50%;
     --tag-white: 0 0% 100%;
-    --tag-cyan: 190 80% 50%;
-    --tag-pink: 330 80% 60%;
-    --tag-purple: 270 70% 60%;
   }
 
   .dark {
-    --background: 0 0% 4%;
+    --background: 0 0% 2%;
     --foreground: 0 0% 98%;
     
-    --card: 0 0% 8%;
+    --card: 0 0% 6%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 8%;
+    --popover: 0 0% 6%;
     --popover-foreground: 0 0% 98%;
     
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 180 100% 50%;
+    --primary-foreground: 0 0% 0%;
     
-    --secondary: 0 72% 51%;
+    --secondary: 265 100% 63%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 60%;
+    --muted: 0 0% 10%;
+    --muted-foreground: 0 0% 55%;
     
-    --accent: 0 72% 51%;
+    --accent: 265 100% 63%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 217 91% 60%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 180 100% 50%;
   }
 }
 
@@ -110,6 +118,49 @@
     color: hsl(var(--dark-fg));
   }
 
+  /* Neon Text Glow Effects */
+  .neon-text-cyan {
+    text-shadow: 
+      0 0 5px hsl(var(--neon-cyan)),
+      0 0 10px hsl(var(--neon-cyan)),
+      0 0 20px hsl(var(--neon-cyan) / 0.5),
+      0 0 40px hsl(var(--neon-cyan) / 0.3);
+    color: hsl(var(--neon-cyan));
+  }
+
+  .neon-text-purple {
+    text-shadow: 
+      0 0 5px hsl(var(--neon-purple)),
+      0 0 10px hsl(var(--neon-purple)),
+      0 0 20px hsl(var(--neon-purple) / 0.5),
+      0 0 40px hsl(var(--neon-purple) / 0.3);
+    color: hsl(var(--neon-purple));
+  }
+
+  .neon-text-white {
+    text-shadow: 
+      0 0 5px hsl(0 0% 100% / 0.8),
+      0 0 10px hsl(0 0% 100% / 0.5),
+      0 0 20px hsl(0 0% 100% / 0.3);
+  }
+
+  /* Neon Border Glow */
+  .neon-border-cyan {
+    box-shadow: 
+      0 0 5px hsl(var(--neon-cyan) / 0.5),
+      0 0 15px hsl(var(--neon-cyan) / 0.3),
+      inset 0 0 5px hsl(var(--neon-cyan) / 0.1);
+    border-color: hsl(var(--neon-cyan) / 0.6);
+  }
+
+  .neon-border-purple {
+    box-shadow: 
+      0 0 5px hsl(var(--neon-purple) / 0.5),
+      0 0 15px hsl(var(--neon-purple) / 0.3),
+      inset 0 0 5px hsl(var(--neon-purple) / 0.1);
+    border-color: hsl(var(--neon-purple) / 0.6);
+  }
+
   /* Lunar Strategy Tags - Dark variant (white outline) */
   .lunar-tag-dark {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300;
@@ -119,8 +170,9 @@
   }
   
   .lunar-tag-dark:hover {
-    border-color: hsl(var(--dark-fg) / 0.6);
-    color: hsl(var(--dark-fg));
+    border-color: hsl(var(--neon-cyan) / 0.6);
+    color: hsl(var(--neon-cyan));
+    box-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.2);
   }
 
   /* Lunar Strategy Tag - Light */
@@ -131,72 +183,102 @@
     color: hsl(var(--foreground) / 0.7);
   }
 
-  /* Service Tags with Colors - Blue/Red/White theme */
+  /* Service Tags with Neon Colors */
   .service-tag {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300 cursor-pointer;
   }
   
+  .service-tag-cyan {
+    background: hsl(var(--neon-cyan) / 0.1);
+    border-color: hsl(var(--neon-cyan) / 0.5);
+    color: hsl(var(--neon-cyan));
+    box-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.2);
+  }
+  
+  .service-tag-cyan:hover {
+    background: hsl(var(--neon-cyan) / 0.2);
+    border-color: hsl(var(--neon-cyan));
+    box-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.4);
+  }
+  
+  .service-tag-purple {
+    background: hsl(var(--neon-purple) / 0.1);
+    border-color: hsl(var(--neon-purple) / 0.5);
+    color: hsl(var(--neon-purple));
+    box-shadow: 0 0 10px hsl(var(--neon-purple) / 0.2);
+  }
+  
+  .service-tag-purple:hover {
+    background: hsl(var(--neon-purple) / 0.2);
+    border-color: hsl(var(--neon-purple));
+    box-shadow: 0 0 20px hsl(var(--neon-purple) / 0.4);
+  }
+
+  .service-tag-green {
+    background: hsl(var(--neon-green) / 0.1);
+    border-color: hsl(var(--neon-green) / 0.5);
+    color: hsl(var(--neon-green));
+    box-shadow: 0 0 10px hsl(var(--neon-green) / 0.2);
+  }
+  
+  .service-tag-green:hover {
+    background: hsl(var(--neon-green) / 0.2);
+    border-color: hsl(var(--neon-green));
+    box-shadow: 0 0 20px hsl(var(--neon-green) / 0.4);
+  }
+
+  .service-tag-pink {
+    background: hsl(var(--neon-pink) / 0.1);
+    border-color: hsl(var(--neon-pink) / 0.5);
+    color: hsl(var(--neon-pink));
+    box-shadow: 0 0 10px hsl(var(--neon-pink) / 0.2);
+  }
+  
+  .service-tag-pink:hover {
+    background: hsl(var(--neon-pink) / 0.2);
+    border-color: hsl(var(--neon-pink));
+    box-shadow: 0 0 20px hsl(var(--neon-pink) / 0.4);
+  }
+  
   .service-tag-blue {
-    background: hsl(var(--tag-blue) / 0.15);
-    border-color: hsl(var(--tag-blue) / 0.5);
-    color: hsl(var(--tag-blue));
+    background: hsl(var(--neon-blue) / 0.1);
+    border-color: hsl(var(--neon-blue) / 0.5);
+    color: hsl(var(--neon-blue));
+    box-shadow: 0 0 10px hsl(var(--neon-blue) / 0.2);
   }
   
   .service-tag-blue:hover {
-    background: hsl(var(--tag-blue) / 0.25);
-    border-color: hsl(var(--tag-blue));
-  }
-  
-  .service-tag-red {
-    background: hsl(var(--tag-red) / 0.15);
-    border-color: hsl(var(--tag-red) / 0.5);
-    color: hsl(var(--tag-red));
-  }
-  
-  .service-tag-red:hover {
-    background: hsl(var(--tag-red) / 0.25);
-    border-color: hsl(var(--tag-red));
+    background: hsl(var(--neon-blue) / 0.2);
+    border-color: hsl(var(--neon-blue));
+    box-shadow: 0 0 20px hsl(var(--neon-blue) / 0.4);
   }
   
   .service-tag-white {
-    background: hsl(var(--tag-white) / 0.1);
+    background: hsl(var(--tag-white) / 0.05);
     border-color: hsl(var(--tag-white) / 0.3);
     color: hsl(var(--tag-white) / 0.9);
   }
   
   .service-tag-white:hover {
-    background: hsl(var(--tag-white) / 0.15);
+    background: hsl(var(--tag-white) / 0.1);
     border-color: hsl(var(--tag-white) / 0.5);
+    box-shadow: 0 0 15px hsl(var(--tag-white) / 0.2);
   }
 
-  .service-tag-cyan {
-    background: hsl(var(--tag-cyan) / 0.15);
-    border-color: hsl(var(--tag-cyan) / 0.5);
-    color: hsl(var(--tag-cyan));
-  }
-
-  .service-tag-pink {
-    background: hsl(var(--tag-pink) / 0.15);
-    border-color: hsl(var(--tag-pink) / 0.5);
-    color: hsl(var(--tag-pink));
-  }
-
-  .service-tag-purple {
-    background: hsl(var(--tag-purple) / 0.15);
-    border-color: hsl(var(--tag-purple) / 0.5);
-    color: hsl(var(--tag-purple));
-  }
-
-  /* Lunar Strategy Blue Button */
+  /* Lunar Strategy Neon Button */
   .lunar-btn {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all duration-300;
-    background-color: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
+    background-color: hsl(var(--neon-cyan));
+    color: hsl(0 0% 0%);
+    box-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.4);
   }
   
   .lunar-btn:hover {
-    background-color: hsl(var(--primary) / 0.9);
-    transform: translateY(-1px);
+    background-color: hsl(var(--neon-cyan));
+    transform: translateY(-2px);
+    box-shadow: 
+      0 0 30px hsl(var(--neon-cyan) / 0.6),
+      0 0 60px hsl(var(--neon-cyan) / 0.3);
   }
 
   /* Lunar Strategy Outline Button */
@@ -208,8 +290,9 @@
   }
   
   .lunar-btn-outline:hover {
-    border-color: hsl(var(--foreground));
-    background: hsl(var(--foreground) / 0.05);
+    border-color: hsl(var(--neon-cyan) / 0.6);
+    color: hsl(var(--neon-cyan));
+    box-shadow: 0 0 15px hsl(var(--neon-cyan) / 0.2);
   }
 
   /* Dark outline button */
@@ -221,8 +304,9 @@
   }
   
   .lunar-btn-outline-dark:hover {
-    border-color: hsl(var(--dark-fg) / 0.6);
-    background: hsl(var(--dark-fg) / 0.1);
+    border-color: hsl(var(--neon-cyan) / 0.6);
+    color: hsl(var(--neon-cyan));
+    box-shadow: 0 0 15px hsl(var(--neon-cyan) / 0.2);
   }
 
   /* Bracket Link Style */
@@ -232,7 +316,7 @@
   }
   
   .bracket-link:hover {
-    color: hsl(var(--foreground));
+    color: hsl(var(--neon-cyan));
   }
   
   .bracket-link::before {
@@ -295,7 +379,7 @@
     100% { transform: translateX(-50%); }
   }
 
-  /* Data Flow Line Animation */
+  /* Data Flow Line Animation - Neon */
   .data-flow-line {
     animation: dataFlow 4s ease-in-out infinite;
     transform: translateX(-100%);
@@ -318,32 +402,110 @@
     }
   }
 
-  /* Case Card Gradients - Blue/Red Theme */
-  .case-gradient-blue {
-    background: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 40%));
-  }
-  
-  .case-gradient-red {
-    background: linear-gradient(135deg, hsl(0 72% 51%), hsl(0 72% 38%));
-  }
-  
-  .case-gradient-white {
-    background: linear-gradient(135deg, hsl(0 0% 30%), hsl(0 0% 20%));
+  /* Neon Pulse Animation */
+  @keyframes neonPulse {
+    0%, 100% { 
+      opacity: 0.6; 
+      filter: brightness(1);
+    }
+    50% { 
+      opacity: 1; 
+      filter: brightness(1.3);
+    }
   }
 
-  /* Service Icon Container */
+  .animate-neon-pulse {
+    animation: neonPulse 2s ease-in-out infinite;
+  }
+
+  /* Bridge Cable Animation */
+  @keyframes cableGlow {
+    0%, 100% {
+      opacity: 0.3;
+      filter: blur(1px);
+    }
+    50% {
+      opacity: 0.8;
+      filter: blur(0px);
+    }
+  }
+
+  .animate-cable-glow {
+    animation: cableGlow 3s ease-in-out infinite;
+  }
+
+  /* Water Shimmer Animation */
+  @keyframes waterShimmer {
+    0% {
+      transform: translateX(-100%) skewX(-15deg);
+    }
+    100% {
+      transform: translateX(200%) skewX(-15deg);
+    }
+  }
+
+  .animate-water-shimmer {
+    animation: waterShimmer 8s ease-in-out infinite;
+  }
+
+  /* Case Card Gradients - Neon Theme */
+  .case-gradient-cyan {
+    background: linear-gradient(135deg, hsl(180 100% 35%), hsl(200 100% 25%));
+  }
+  
+  .case-gradient-purple {
+    background: linear-gradient(135deg, hsl(265 100% 45%), hsl(285 100% 35%));
+  }
+  
+  .case-gradient-green {
+    background: linear-gradient(135deg, hsl(160 100% 35%), hsl(140 100% 25%));
+  }
+
+  .case-gradient-pink {
+    background: linear-gradient(135deg, hsl(300 100% 40%), hsl(320 100% 30%));
+  }
+
+  .case-gradient-blue {
+    background: linear-gradient(135deg, hsl(200 100% 45%), hsl(220 100% 35%));
+  }
+
+  .case-gradient-orange {
+    background: linear-gradient(135deg, hsl(30 100% 50%), hsl(15 100% 40%));
+  }
+
+  /* Service Icon Container - Neon */
   .service-icon {
-    @apply w-12 h-12 rounded-xl flex items-center justify-center;
+    @apply w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300;
+  }
+
+  .service-icon-cyan {
+    background: hsl(var(--neon-cyan) / 0.15);
+    color: hsl(var(--neon-cyan));
+    box-shadow: 0 0 15px hsl(var(--neon-cyan) / 0.2);
+  }
+
+  .service-icon-purple {
+    background: hsl(var(--neon-purple) / 0.15);
+    color: hsl(var(--neon-purple));
+    box-shadow: 0 0 15px hsl(var(--neon-purple) / 0.2);
+  }
+
+  .service-icon-green {
+    background: hsl(var(--neon-green) / 0.15);
+    color: hsl(var(--neon-green));
+    box-shadow: 0 0 15px hsl(var(--neon-green) / 0.2);
+  }
+
+  .service-icon-pink {
+    background: hsl(var(--neon-pink) / 0.15);
+    color: hsl(var(--neon-pink));
+    box-shadow: 0 0 15px hsl(var(--neon-pink) / 0.2);
   }
 
   .service-icon-blue {
-    background: hsl(var(--tag-blue) / 0.15);
-    color: hsl(var(--tag-blue));
-  }
-
-  .service-icon-red {
-    background: hsl(var(--tag-red) / 0.15);
-    color: hsl(var(--tag-red));
+    background: hsl(var(--neon-blue) / 0.15);
+    color: hsl(var(--neon-blue));
+    box-shadow: 0 0 15px hsl(var(--neon-blue) / 0.2);
   }
 
   .service-icon-white {
@@ -351,39 +513,26 @@
     color: hsl(var(--tag-white));
   }
 
-  .service-icon-cyan {
-    background: hsl(var(--tag-cyan) / 0.15);
-    color: hsl(var(--tag-cyan));
-  }
-
-  .service-icon-pink {
-    background: hsl(var(--tag-pink) / 0.15);
-    color: hsl(var(--tag-pink));
-  }
-
-  .service-icon-purple {
-    background: hsl(var(--tag-purple) / 0.15);
-    color: hsl(var(--tag-purple));
-  }
-
   /* Award Badge */
   .award-badge {
     @apply inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-full;
-    background: hsl(var(--primary) / 0.1);
-    color: hsl(var(--primary));
-    border: 1px solid hsl(var(--primary) / 0.3);
+    background: hsl(var(--neon-cyan) / 0.1);
+    color: hsl(var(--neon-cyan));
+    border: 1px solid hsl(var(--neon-cyan) / 0.3);
+    box-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.1);
   }
 
   /* Video Call UI Styles */
   .video-call-frame {
     @apply rounded-2xl overflow-hidden;
-    background: linear-gradient(180deg, hsl(220 20% 12%), hsl(220 20% 8%));
-    border: 1px solid hsl(var(--dark-fg) / 0.1);
+    background: linear-gradient(180deg, hsl(0 0% 8%), hsl(0 0% 4%));
+    border: 1px solid hsl(var(--neon-cyan) / 0.2);
+    box-shadow: 0 0 30px hsl(var(--neon-cyan) / 0.1);
   }
 
   .video-participant {
     @apply rounded-xl overflow-hidden relative;
-    background: linear-gradient(180deg, hsl(220 20% 15%), hsl(220 20% 10%));
+    background: linear-gradient(180deg, hsl(0 0% 10%), hsl(0 0% 6%));
   }
 
   /* Section Header Style */
@@ -395,6 +544,19 @@
   .section-header::before {
     content: '↓';
     @apply text-xs;
+  }
+
+  /* Neon Card Hover Effect */
+  .neon-card {
+    @apply transition-all duration-300;
+    border: 1px solid hsl(var(--border));
+  }
+
+  .neon-card:hover {
+    border-color: hsl(var(--neon-cyan) / 0.4);
+    box-shadow: 
+      0 0 20px hsl(var(--neon-cyan) / 0.1),
+      inset 0 0 20px hsl(var(--neon-cyan) / 0.02);
   }
 }
 
@@ -437,9 +599,9 @@
   display: none;
 }
 
-/* Gradient Text */
+/* Gradient Text - Neon */
 .gradient-text {
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  background: linear-gradient(135deg, hsl(var(--neon-cyan)), hsl(var(--neon-purple)));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -462,4 +624,5 @@
 
 .case-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 10px 40px hsl(var(--neon-cyan) / 0.15);
 }

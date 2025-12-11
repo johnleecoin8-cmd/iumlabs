@@ -51,11 +51,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Red gradient colors
-        "gradient-red": "hsl(var(--gradient-red))",
-        "gradient-crimson": "hsl(var(--gradient-crimson))",
-        "gradient-orange": "hsl(var(--gradient-orange))",
-        "gradient-gold": "hsl(var(--gradient-gold))",
+        // Neon colors
+        neon: {
+          cyan: "hsl(var(--neon-cyan))",
+          purple: "hsl(var(--neon-purple))",
+          pink: "hsl(var(--neon-pink))",
+          green: "hsl(var(--neon-green))",
+          blue: "hsl(var(--neon-blue))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
