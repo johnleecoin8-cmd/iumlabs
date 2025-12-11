@@ -45,7 +45,7 @@ export const navigation = {
   links: [
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
-    { name: "Blog", href: "/blog" },
+    { name: "Research", href: "/research" },
     { name: "About", href: "/about" },
     { name: "Contact", href: "/contact" },
   ],
