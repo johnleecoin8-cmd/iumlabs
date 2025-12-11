@@ -61,7 +61,7 @@ const HeroSection = () => {
             transform: `translateY(${scrollY * 0.08}px)`
           }}
         >
-          <span className="lunar-tag-dark text-xs whitespace-nowrap">
+          <span className="font-sans lunar-tag-dark text-xs whitespace-nowrap">
             {tag.label}
           </span>
         </div>
@@ -70,13 +70,13 @@ const HeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Lunar Strategy mixed typography */}
-          <h1 className="text-[12vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10 opacity-0 animate-fade-up">
-            <span className="text-white font-bold">Your </span>
-            <span className="font-serif italic text-white font-medium">Web 3.0</span>
+          {/* Main Headline - Unified Inter font with color contrast */}
+          <h1 className="font-sans text-[12vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10 opacity-0 animate-fade-up">
+            <span className="text-white">Your </span>
+            <span className="text-white/60">Web 3.0</span>
             <br />
-            <span className="font-serif italic text-white font-medium">Marketing </span>
-            <span className="text-white font-bold">Agency</span>
+            <span className="text-white/60">Marketing </span>
+            <span className="text-white">Agency</span>
           </h1>
 
           {/* Subtext - Larger and more prominent */}
