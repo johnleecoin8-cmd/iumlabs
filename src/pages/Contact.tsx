@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
-import moonBackground from "@/assets/moon-background.jpg";
+import koreaPalaceModern from "@/assets/backgrounds/korea-palace-modern.jpg";
 
 const budgetOptions = [
   "$5K - $10K",
@@ -25,14 +25,14 @@ const contactInfo = [
 ];
 
 const floatingTags = [
-  { label: "Let's Connect", top: "20%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-pink-400 text-white" },
-  { label: "24/7 Support", top: "30%", left: "22%", mobileTop: "15%", mobileRight: "3%", color: "bg-yellow-400 text-black" },
-  { label: "Seoul Office", top: "48%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-white text-black border border-black" },
+  { label: "Let's Connect", top: "20%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-rose-400 text-white" },
+  { label: "24/7 Support", top: "30%", left: "22%", mobileTop: "15%", mobileRight: "3%", color: "bg-amber-300 text-black" },
+  { label: "Seoul Office", top: "48%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-white text-black" },
   { label: "Fast Response", top: "52%", left: "26%", color: "bg-orange-400 text-white" },
-  { label: "Global Reach", top: "18%", right: "12%", color: "bg-white text-black border border-black" },
-  { label: "Partnership", top: "32%", right: "5%", color: "bg-yellow-400 text-black" },
-  { label: "Consultation", top: "50%", right: "10%", color: "bg-green-400 text-black" },
-  { label: "Get Started", bottom: "25%", right: "18%", color: "bg-green-500 text-white" },
+  { label: "Global Reach", top: "18%", right: "12%", color: "bg-emerald-400 text-black" },
+  { label: "Partnership", top: "32%", right: "5%", color: "bg-white text-black border border-black" },
+  { label: "Consultation", top: "50%", right: "10%", color: "bg-pink-400 text-white" },
+  { label: "Get Started", bottom: "25%", right: "18%", color: "bg-teal-400 text-black" },
 ];
 
 const Contact = () => {
@@ -103,27 +103,29 @@ const Contact = () => {
       
       {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Vibrant Blue with Moon */}
-        <div className="absolute inset-0 overflow-hidden bg-[hsl(220,90%,55%)]">
+        {/* Background - Korea Palace Modern */}
+        <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${moonBackground})`,
-              filter: "brightness(0.9) saturate(1.2)",
-              mixBlendMode: "overlay",
+              backgroundImage: `url(${koreaPalaceModern})`,
+              filter: "brightness(0.45) saturate(1.2)",
             }}
           />
           
-          {/* Aurora light overlay */}
+          {/* Aurora light overlay - Warm sunset theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/30 via-transparent to-cyan-400/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600/20 via-transparent to-blue-400/10" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-rose-600/25 via-transparent to-amber-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-orange-600/15 via-transparent to-pink-500/15" />
           </div>
           
           {/* Light sweep effect */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-light-sweep" />
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
           </div>
+          
+          {/* Dark overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
         </div>
         
         {/* Floating Tags with Parallax - Colorful */}
