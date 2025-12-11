@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+
 import TiltCard from "@/components/TiltCard";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import CalendlyButton from "@/components/CalendlyButton";
@@ -546,7 +546,7 @@ const Projects = () => {
         </div>
       </section>
 
-      <CTASection />
+      
       <Footer />
     </div>
   );
