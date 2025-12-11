@@ -6,6 +6,7 @@ import { Linkedin, Send, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { images } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
+import Planet3D from "@/components/Planet3D";
 import earthSpace from "@/assets/backgrounds/earth-space.jpg";
 
 const stats = [
@@ -85,6 +86,9 @@ const About = () => {
           
           {/* Dark overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+          
+          {/* 3D Planet */}
+          <Planet3D type="earth" className="opacity-60" />
         </div>
         
         {/* Floating Tags with Parallax - Colorful */}

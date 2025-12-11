@@ -7,6 +7,7 @@ import TiltCard from "@/components/TiltCard";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
+import Planet3D from "@/components/Planet3D";
 import saturnRings from "@/assets/backgrounds/saturn-rings.jpg";
 
 // Import logos
@@ -298,6 +299,9 @@ const Projects = () => {
           
           {/* Dark overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+          
+          {/* 3D Planet */}
+          <Planet3D type="saturn" className="opacity-70" />
         </div>
         
         {/* Floating Tags with Parallax - Colorful */}

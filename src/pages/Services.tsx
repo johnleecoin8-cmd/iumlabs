@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
+import Planet3D from "@/components/Planet3D";
 import sunCorona from "@/assets/backgrounds/sun-corona.jpg";
 
 // Service images
@@ -151,6 +152,9 @@ const Services = () => {
           
           {/* Dark overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+          
+          {/* 3D Planet */}
+          <Planet3D type="sun" className="opacity-60" />
         </div>
         
         {/* Floating Tags with Parallax - Colorful */}
