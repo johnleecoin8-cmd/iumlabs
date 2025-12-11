@@ -7,7 +7,7 @@ const AboutUsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="py-24 px-4 bg-background">
+    <div ref={ref} className="py-24 px-4 flex-1">
       <div className="container mx-auto max-w-6xl">
         <div className={`grid lg:grid-cols-2 gap-16 items-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Left - Team Photos */}
@@ -97,7 +97,7 @@ const AboutUsSection = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

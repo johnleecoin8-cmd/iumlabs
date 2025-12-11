@@ -25,7 +25,7 @@ const TeamSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="section-light py-32 px-4 relative overflow-hidden">
+    <div ref={ref} className="py-32 px-4 relative overflow-hidden flex-1">
       <div className="container mx-auto max-w-7xl">
         {/* Giant Typography Header */}
         <div className={`mb-20 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -101,7 +101,7 @@ const TeamSection = () => {
         {/* Decorative dotted line */}
         <div className="dotted-line-light mt-24" />
       </div>
-    </section>
+    </div>
   );
 };
 

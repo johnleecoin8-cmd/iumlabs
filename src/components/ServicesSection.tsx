@@ -49,7 +49,7 @@ const ServicesSection = () => {
   const [activeService, setActiveService] = useState(0);
 
   return (
-    <section ref={ref} className="section-dark py-0 relative overflow-hidden">
+    <div ref={ref} className="py-0 relative overflow-hidden flex-1">
       {/* Hero Typography Section */}
       <div className="relative min-h-[70vh] flex items-center justify-center px-4 py-24">
         {/* Floating Service Tags */}
@@ -154,7 +154,7 @@ const ServicesSection = () => {
           </Link>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
