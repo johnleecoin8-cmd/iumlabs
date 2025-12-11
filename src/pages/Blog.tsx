@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ArrowRight, Calendar, Clock } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Calendar, Clock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
@@ -94,51 +94,49 @@ const Blog = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Dark Section */}
+      {/* Hero - Dark Section with Giant Typography */}
       <section className="section-dark pt-32 pb-24 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left */}
-            <div>
-              <span className="number-badge text-[hsl(var(--dark-fg))] opacity-60 mb-4 inline-block">Blog</span>
-              <h1 className="text-5xl md:text-7xl font-light text-[hsl(var(--dark-fg))] leading-tight mb-6">
-                Latest <span className="serif-italic">Insights</span>
-              </h1>
-              <p className="text-lg text-[hsl(var(--dark-fg))] opacity-60 mb-8 max-w-lg">
-                Marketing strategies, guides, and insights for succeeding in Korea's Web3 market.
-              </p>
-              <CalendlyButton className="lunar-btn">
-                <Calendar className="w-4 h-4" />
-                <span>Book a Consultation</span>
-              </CalendlyButton>
-            </div>
-
-            {/* Right - Categories */}
-            <div>
-              <h2 className="text-2xl font-light text-[hsl(var(--dark-fg))] mb-6">Topics</h2>
-              <div className="flex flex-wrap gap-2">
-                {categories.map((category) => (
-                  <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
-                      selectedCategory === category
-                        ? "bg-primary text-primary-foreground border-primary"
-                        : "bg-transparent text-[hsl(var(--dark-fg))] opacity-60 border-[hsl(var(--dark-fg))] border-opacity-30 hover:opacity-100"
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
-            </div>
+        <div className="container mx-auto max-w-7xl">
+          <div className="mb-16">
+            <span className="text-sm text-white/50 mb-4 block">[ Blog ]</span>
+            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight">
+              Bl<span className="serif-italic text-primary">o</span>g
+            </h1>
+          </div>
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10">
+            <p className="text-lg text-white/60 max-w-xl">
+              Marketing strategies, guides, and insights for succeeding in Korea's Web3 market.
+            </p>
+            <CalendlyButton className="lunar-btn">
+              <Calendar className="w-4 h-4" />
+              <span>Book a Consultation</span>
+            </CalendlyButton>
           </div>
         </div>
       </section>
 
-      {/* Blog Grid - Light */}
-      <section ref={ref} className="py-24 px-4 bg-background">
-        <div className="container mx-auto max-w-6xl">
+      {/* Blog Grid - Light Theme */}
+      <section ref={ref} className="section-light py-24 px-4">
+        <div className="container mx-auto max-w-7xl">
+          {/* Categories Filter */}
+          <div className="flex flex-wrap gap-3 mb-12">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
+                  selectedCategory === category
+                    ? "bg-primary text-white border-primary"
+                    : "bg-transparent text-[hsl(var(--light-fg),0.6)] border-[hsl(var(--light-fg),0.15)] hover:border-primary hover:text-primary"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+
+          {/* Blog Grid */}
           <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {filteredPosts.map((post, index) => (
               <Link 
@@ -148,41 +146,39 @@ const Blog = () => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Image */}
-                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-4 bg-card border border-border/50 group-hover:border-primary/50 transition-all">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-5">
                   <img 
                     src={post.image} 
                     alt={post.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                  <div className="absolute top-4 left-4">
-                    <span className="text-xs px-3 py-1 rounded-full bg-card/90 backdrop-blur-sm border border-border/50 text-primary font-medium">
-                      {post.category}
-                    </span>
+                  
+                  {/* Arrow on hover */}
+                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                    <ArrowUpRight className="w-5 h-5 text-white" />
                   </div>
                 </div>
 
                 {/* Content */}
                 <div>
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {post.date}
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-xs text-primary uppercase tracking-wider font-medium">
+                      {post.category}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {post.readTime} read
+                    <span className="text-xs text-[hsl(var(--light-fg),0.4)]">
+                      {post.date}
                     </span>
                   </div>
 
-                  <h2 className="text-lg font-medium text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                  <h2 className="text-xl font-medium text-[hsl(var(--light-fg))] mb-2 group-hover:text-primary transition-colors line-clamp-2">
                     {post.title}
                   </h2>
 
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                  <p className="text-[hsl(var(--light-fg),0.6)] text-sm mb-4 line-clamp-2">
                     {post.excerpt}
                   </p>
 
-                  <span className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground group-hover:text-primary group-hover:gap-3 transition-all">
+                  <span className="inline-flex items-center gap-2 text-sm font-medium text-[hsl(var(--light-fg),0.5)] group-hover:text-primary group-hover:gap-3 transition-all">
                     Read More
                     <ArrowRight className="w-4 h-4" />
                   </span>
@@ -190,6 +186,8 @@ const Blog = () => {
               </Link>
             ))}
           </div>
+
+          <div className="dotted-line-light mt-24" />
         </div>
       </section>
 

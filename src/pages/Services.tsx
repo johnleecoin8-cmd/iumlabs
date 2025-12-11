@@ -21,7 +21,6 @@ const services = [
     id: "kol-marketing",
     number: "01",
     icon: Megaphone,
-    color: "cyan",
     title: "KOL & Influence Network",
     description: "Direct trust building with Korea's top crypto influencers across Twitter, YouTube, and local platforms.",
     fullDescription: "Partner with Korea's top crypto influencers to amplify your project's reach. We manage relationships with 1,000+ verified KOLs across Twitter, YouTube, and Korean platforms like Naver.",
@@ -33,7 +32,6 @@ const services = [
     id: "community-building",
     number: "02",
     icon: Users,
-    color: "purple",
     title: "Community Growth",
     description: "Full setup and management of Korean Telegram, Discord, and KakaoTalk channels.",
     fullDescription: "Build a thriving Korean community from scratch or enhance your existing presence. We handle everything from platform setup to 24/7 Korean moderation.",
@@ -45,7 +43,6 @@ const services = [
     id: "pr-media",
     number: "03",
     icon: Globe,
-    color: "green",
     title: "PR & Media Relations",
     description: "Tier-1 Korean crypto media placements, press releases, and exclusive interview opportunities.",
     fullDescription: "Secure coverage in leading Korean crypto publications and mainstream media. From press releases to exclusive interviews, we handle your complete Korean media strategy.",
@@ -57,7 +54,6 @@ const services = [
     id: "gtm-strategy",
     number: "04",
     icon: TrendingUp,
-    color: "cyan",
     title: "Go-To-Market Strategy",
     description: "Data-driven launch planning tailored for the unique Korean market dynamics.",
     fullDescription: "Launch successfully in Korea with data-driven strategies that account for local market dynamics, competitive landscape, and user behavior patterns.",
@@ -69,7 +65,6 @@ const services = [
     id: "vasp-compliance",
     number: "05",
     icon: Shield,
-    color: "pink",
     title: "VASP & Compliance",
     description: "Navigate Korean regulations and secure the licenses you need to operate legally.",
     fullDescription: "Get compliant in Korea's regulated crypto market. We guide you through VASP registration, AML/KYC requirements, and ongoing compliance obligations.",
@@ -81,7 +76,6 @@ const services = [
     id: "events",
     number: "06",
     icon: Zap,
-    color: "blue",
     title: "Events & Conferences",
     description: "From Korea Blockchain Week to exclusive meetups — presence at major Korean events.",
     fullDescription: "Make an impact at major Korean blockchain events or host your own. We manage everything from booth setup to VIP networking events and speaker placements.",
@@ -89,14 +83,6 @@ const services = [
     stat: "20+",
     statLabel: "Events Per Year",
   },
-];
-
-const serviceTags = [
-  { label: "All Services", color: "cyan" },
-  { label: "Marketing", color: "purple" },
-  { label: "Community", color: "green" },
-  { label: "Events", color: "pink" },
-  { label: "Institutional", color: "blue" },
 ];
 
 const Services = () => {
@@ -107,83 +93,69 @@ const Services = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Dark Section */}
+      {/* Hero - Dark Section with Giant Typography */}
       <section className="section-dark pt-32 pb-24 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left */}
-            <div>
-              <span className="number-badge text-[hsl(var(--dark-fg))] opacity-60 mb-4 inline-block">Our Services</span>
-              <h1 className="text-5xl md:text-7xl font-light text-[hsl(var(--dark-fg))] leading-tight mb-6">
-                Full-Service <span className="serif-italic">Web3</span>
-                <br />
-                Marketing
-              </h1>
-              <p className="text-lg text-[hsl(var(--dark-fg))] opacity-60 mb-8 max-w-lg">
-                Everything you need to successfully enter and grow in Korea's vibrant crypto market.
-              </p>
-              <CalendlyButton className="lunar-btn">
-                <Calendar className="w-4 h-4" />
-                <span>Book a Consultation</span>
-              </CalendlyButton>
-            </div>
-
-            {/* Right - Service Tags */}
-            <div>
-              <h2 className="text-2xl font-light text-[hsl(var(--dark-fg))] mb-6">Categories</h2>
-              <div className="flex flex-wrap gap-3">
-                {serviceTags.map((tag) => (
-                  <span key={tag.label} className={`service-tag service-tag-${tag.color}`}>
-                    {tag.label}
-                  </span>
-                ))}
-              </div>
-            </div>
+        <div className="container mx-auto max-w-7xl">
+          <div className="mb-16">
+            <span className="text-sm text-white/50 mb-4 block">[ Our Services ]</span>
+            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight">
+              Ser<span className="serif-italic text-primary">v</span>ices
+            </h1>
+          </div>
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10">
+            <p className="text-lg text-white/60 max-w-xl">
+              Everything you need to successfully enter and grow in Korea's vibrant crypto market.
+            </p>
+            <CalendlyButton className="lunar-btn">
+              <Calendar className="w-4 h-4" />
+              <span>Book a Consultation</span>
+            </CalendlyButton>
           </div>
         </div>
       </section>
 
-      {/* Services Grid - Light */}
-      <section ref={ref} className="py-24 px-4 bg-background">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Services Grid - Light Theme */}
+      <section ref={ref} className="section-light py-24 px-4">
+        <div className="container mx-auto max-w-7xl">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, index) => {
               const IconComponent = service.icon;
               return (
                 <div
                   key={service.id}
                   onClick={() => setSelectedService(service)}
-                  className={`group bg-card border border-border/50 rounded-2xl p-6 cursor-pointer hover:border-primary/50 hover:shadow-lg transition-all duration-500 ${
+                  className={`group bg-white border border-[hsl(var(--light-fg),0.1)] rounded-2xl p-8 cursor-pointer hover:border-primary/30 hover:shadow-xl transition-all duration-500 ${
                     isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   {/* Number Badge + Icon */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="number-badge">{service.number}</span>
-                    <div className={`service-icon service-icon-${service.color}`}>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-sm text-[hsl(var(--light-fg),0.4)]">[ {service.number} ]</span>
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                       <IconComponent className="w-5 h-5" />
                     </div>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-xl font-medium text-foreground mb-2 group-hover:text-primary transition-colors">
+                  <h3 className="text-xl font-medium text-[hsl(var(--light-fg))] mb-3 group-hover:text-primary transition-colors">
                     {service.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-muted-foreground text-sm mb-4">
+                  <p className="text-[hsl(var(--light-fg),0.6)] text-sm mb-6">
                     {service.description}
                   </p>
 
                   {/* Stat */}
-                  <div className="flex items-baseline gap-2 mb-4 pt-4 border-t border-border/50">
-                    <span className="text-2xl font-bold text-primary">{service.stat}</span>
-                    <span className="text-sm text-muted-foreground">{service.statLabel}</span>
+                  <div className="flex items-baseline gap-2 mb-6 pt-6 border-t border-[hsl(var(--light-fg),0.1)]">
+                    <span className="text-3xl font-bold text-primary">{service.stat}</span>
+                    <span className="text-sm text-[hsl(var(--light-fg),0.5)]">{service.statLabel}</span>
                   </div>
 
                   {/* Learn More */}
-                  <button className="inline-flex items-center gap-2 text-sm text-muted-foreground group-hover:text-primary transition-colors">
+                  <button className="inline-flex items-center gap-2 text-sm text-[hsl(var(--light-fg),0.5)] group-hover:text-primary transition-colors">
                     <span>Learn more</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </button>
@@ -200,39 +172,39 @@ const Services = () => {
       {/* Service Modal */}
       {selectedService && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/20 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
           onClick={() => setSelectedService(null)}
         >
           <div 
-            className="bg-card border border-border rounded-2xl p-8 max-w-lg w-full shadow-2xl"
+            className="bg-white rounded-3xl p-8 max-w-lg w-full shadow-2xl"
             onClick={e => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-6">
-              <div className={`service-icon service-icon-${selectedService.color}`}>
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
                 <selectedService.icon className="w-6 h-6" />
               </div>
               <button 
                 onClick={() => setSelectedService(null)}
-                className="w-8 h-8 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors"
+                className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition-colors"
               >
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5 text-gray-600" />
               </button>
             </div>
 
-            <h3 className="text-2xl font-medium text-foreground mb-2">{selectedService.title}</h3>
+            <h3 className="text-2xl font-medium text-gray-900 mb-2">{selectedService.title}</h3>
             
             <div className="flex items-baseline gap-2 mb-4">
               <span className="text-3xl font-bold text-primary">{selectedService.stat}</span>
-              <span className="text-muted-foreground">{selectedService.statLabel}</span>
+              <span className="text-gray-500">{selectedService.statLabel}</span>
             </div>
 
-            <p className="text-muted-foreground mb-6">{selectedService.fullDescription}</p>
+            <p className="text-gray-600 mb-6">{selectedService.fullDescription}</p>
 
             <div className="mb-8">
-              <h4 className="text-sm font-medium text-foreground mb-3">What's included:</h4>
+              <h4 className="text-sm font-medium text-gray-900 mb-3">What's included:</h4>
               <ul className="space-y-2">
                 {selectedService.features.map((feature, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-muted-foreground">
+                  <li key={i} className="flex items-center gap-2 text-sm text-gray-600">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                     {feature}
                   </li>

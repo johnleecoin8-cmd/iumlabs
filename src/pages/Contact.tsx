@@ -70,17 +70,20 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Dark Section */}
+      {/* Hero - Dark Section with Giant Typography */}
       <section className="section-dark pt-32 pb-24 px-4">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            {/* Left */}
+        <div className="container mx-auto max-w-7xl">
+          <div className="mb-16">
+            <span className="text-sm text-white/50 mb-4 block">[ Contact ]</span>
+            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight">
+              Let's <span className="serif-italic text-primary">Talk</span>
+            </h1>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-16 pt-8 border-t border-white/10">
+            {/* Left - Description */}
             <div>
-              <span className="number-badge text-[hsl(var(--dark-fg))] opacity-60 mb-4 inline-block">Contact</span>
-              <h1 className="text-5xl md:text-7xl font-light text-[hsl(var(--dark-fg))] leading-tight mb-6">
-                Let's <span className="serif-italic">Talk</span>
-              </h1>
-              <p className="text-lg text-[hsl(var(--dark-fg))] opacity-60 mb-8 max-w-lg">
+              <p className="text-lg text-white/60 mb-8">
                 Tell us about your project and we'll explain how we can help you succeed in Korea.
               </p>
               <CalendlyButton className="lunar-btn">
@@ -89,23 +92,23 @@ const Contact = () => {
               </CalendlyButton>
             </div>
 
-            {/* Right - Contact Info */}
-            <div className="space-y-4">
+            {/* Right - Contact Links */}
+            <div className="space-y-0">
               {contactInfo.map((info) => (
                 <a 
                   key={info.label}
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
                   rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="flex items-center justify-between py-4 border-b border-[hsl(var(--dark-fg))] opacity-20 group hover:opacity-40 transition-opacity"
+                  className="flex items-center justify-between py-4 border-b border-white/10 group hover:border-white/30 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <info.icon className="w-4 h-4 text-[hsl(var(--dark-fg))] opacity-60" />
-                    <span className="text-[hsl(var(--dark-fg))] opacity-60">{info.label}</span>
+                    <info.icon className="w-4 h-4 text-white/50" />
+                    <span className="text-white/50 text-sm">{info.label}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-sm text-[hsl(var(--dark-fg))]">{info.value}</span>
-                    <ArrowUpRight className="w-4 h-4 text-[hsl(var(--dark-fg))] opacity-0 group-hover:opacity-60 transition-opacity" />
+                    <span className="text-sm text-white">{info.value}</span>
+                    <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-white transition-colors" />
                   </div>
                 </a>
               ))}
@@ -114,13 +117,13 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form Section - Light */}
-      <section className="py-24 px-4 bg-background">
+      {/* Contact Form Section - Light Theme */}
+      <section className="section-light py-24 px-4">
         <div className="container mx-auto max-w-3xl">
-          <div className="bg-card border border-border/50 rounded-2xl p-8 md:p-12">
+          <div className="bg-white border border-[hsl(var(--light-fg),0.1)] rounded-3xl p-8 md:p-12">
             <div className="mb-8">
-              <span className="number-badge mb-4 block">Send a Message</span>
-              <h2 className="text-3xl font-light text-foreground">
+              <span className="text-sm text-[hsl(var(--light-fg),0.4)] mb-4 block">[ Send a Message ]</span>
+              <h2 className="text-3xl font-light text-[hsl(var(--light-fg))]">
                 Tell us about your <span className="serif-italic">project</span>
               </h2>
             </div>
@@ -128,40 +131,40 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-muted-foreground mb-2">Name *</label>
+                  <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Name *</label>
                   <Input
                     placeholder="Your name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    className="rounded-xl bg-background border-border/50 focus:border-primary"
+                    className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary text-[hsl(var(--light-fg))]"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm text-muted-foreground mb-2">Email *</label>
+                  <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Email *</label>
                   <Input
                     type="email"
                     placeholder="you@company.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
-                    className="rounded-xl bg-background border-border/50 focus:border-primary"
+                    className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary text-[hsl(var(--light-fg))]"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm text-muted-foreground mb-2">Company</label>
+                <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Company</label>
                 <Input
                   placeholder="Your company or project"
                   value={formData.company}
                   onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                  className="rounded-xl bg-background border-border/50 focus:border-primary"
+                  className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary text-[hsl(var(--light-fg))]"
                 />
               </div>
 
               <div>
-                <label className="block text-sm text-muted-foreground mb-3">Budget Range</label>
+                <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-3">Budget Range</label>
                 <div className="flex flex-wrap gap-2">
                   {budgetOptions.map((option) => (
                     <button
@@ -170,8 +173,8 @@ const Contact = () => {
                       onClick={() => setFormData({ ...formData, budget: option })}
                       className={`px-4 py-2 rounded-full text-sm border transition-all ${
                         formData.budget === option
-                          ? 'bg-primary text-primary-foreground border-primary'
-                          : 'bg-background border-border text-foreground hover:border-primary'
+                          ? 'bg-primary text-white border-primary'
+                          : 'bg-transparent border-[hsl(var(--light-fg),0.15)] text-[hsl(var(--light-fg))] hover:border-primary'
                       }`}
                     >
                       {option}
@@ -181,13 +184,13 @@ const Contact = () => {
               </div>
 
               <div>
-                <label className="block text-sm text-muted-foreground mb-2">Message</label>
+                <label className="block text-sm text-[hsl(var(--light-fg),0.5)] mb-2">Message</label>
                 <Textarea
                   placeholder="Tell us about your project and goals for the Korean market..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={5}
-                  className="rounded-xl bg-background border-border/50 focus:border-primary resize-none"
+                  className="rounded-xl bg-[hsl(var(--light-bg))] border-[hsl(var(--light-fg),0.1)] focus:border-primary resize-none text-[hsl(var(--light-fg))]"
                 />
               </div>
 
