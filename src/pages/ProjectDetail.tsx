@@ -95,6 +95,17 @@ import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
 import bybitLogo from "@/assets/logos/bybit.png";
 
+// Import campaign images
+import bnbEventImg from "@/assets/campaigns/bnb-event.jpg";
+import kucoinCampaignImg from "@/assets/campaigns/kucoin-campaign.jpg";
+import polygonHackathonImg from "@/assets/campaigns/polygon-hackathon.jpg";
+import ondoSeminarImg from "@/assets/campaigns/ondo-seminar.jpg";
+import peaqSummitImg from "@/assets/campaigns/peaq-summit.jpg";
+import storyWorkshopImg from "@/assets/campaigns/story-workshop.jpg";
+import megaethLaunchImg from "@/assets/campaigns/megaeth-launch.jpg";
+import triaLaunchImg from "@/assets/campaigns/tria-launch.jpg";
+import bybitCompetitionImg from "@/assets/campaigns/bybit-competition.jpg";
+
 // Project data
 const projectsData: Record<string, {
   name: string;
@@ -140,7 +151,7 @@ const projectsData: Record<string, {
     ],
     services: ["KOL Marketing", "Community Management", "Event Planning", "PR & Media Relations"],
     gallery: [
-      { src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop", title: "Seoul Launch Event", description: "Exclusive networking event with 500+ attendees at COEX Convention Center" },
+      { src: bnbEventImg, title: "Seoul Launch Event", description: "Exclusive networking event with 500+ attendees at COEX Convention Center" },
       { src: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&h=600&fit=crop", title: "KOL Campaign", description: "Collaboration with 50+ Korean crypto influencers across YouTube and Twitter" },
       { src: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=800&h=600&fit=crop", title: "Community Meetup", description: "Monthly community gatherings in Seoul, Busan, and Daegu" },
       { src: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop", title: "Media Coverage", description: "Featured in top Korean crypto publications and mainstream media" }
@@ -180,7 +191,7 @@ const projectsData: Record<string, {
     ],
     services: ["User Acquisition", "Community Building", "Ambassador Program", "Localization"],
     gallery: [
-      { src: "https://images.unsplash.com/photo-1611605698335-8b1569810432?w=800&h=600&fit=crop", title: "Trading Competition", description: "Korean-exclusive trading event with $100K prizes" },
+      { src: kucoinCampaignImg, title: "Trading Competition", description: "Korean-exclusive trading event with $100K prizes" },
       { src: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop", title: "Ambassador Program", description: "Network of 100+ Korean crypto leaders and influencers" },
       { src: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop", title: "Tutorial Series", description: "Localized video guides for Korean traders on YouTube" },
       { src: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop", title: "Partnership Announcement", description: "Major Korean project listing celebration events" }
@@ -220,7 +231,7 @@ const projectsData: Record<string, {
     ],
     services: ["Developer Relations", "DeFi Marketing", "Event Management", "Grant Program Support"],
     gallery: [
-      { src: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&h=600&fit=crop", title: "Developer Hackathon", description: "48-hour building event at Seoul Startup Hub" },
+      { src: polygonHackathonImg, title: "Developer Hackathon", description: "48-hour building event at Seoul Startup Hub" },
       { src: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop", title: "Workshop Series", description: "Technical deep-dives for Korean developers" },
       { src: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop", title: "DeFi Integration", description: "Launch events with Korean DeFi protocols" },
       { src: "https://images.unsplash.com/photo-1475721027785-f74eccf877e2?w=800&h=600&fit=crop", title: "Core Team Meetup", description: "AMA sessions with Polygon founders" }
@@ -260,7 +271,7 @@ const projectsData: Record<string, {
     ],
     services: ["Institutional Relations", "Content Marketing", "Community Growth", "PR Strategy"],
     gallery: [
-      { src: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&h=600&fit=crop", title: "RWA Seminar", description: "Educational events for institutional investors at Korea Finance Center" },
+      { src: ondoSeminarImg, title: "RWA Seminar", description: "Educational events for institutional investors at Korea Finance Center" },
       { src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop", title: "Research Reports", description: "In-depth Korean market analysis and RWA outlook" },
       { src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop", title: "Community Education", description: "Weekly AMA sessions and educational content" },
       { src: "https://images.unsplash.com/photo-1495020689067-958852a7765e?w=800&h=600&fit=crop", title: "Media Features", description: "Coverage in major Korean financial outlets" }
@@ -300,7 +311,7 @@ const projectsData: Record<string, {
     ],
     services: ["Brand Positioning", "Developer Relations", "Partnership Development", "Community Building"],
     gallery: [
-      { src: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&h=600&fit=crop", title: "DePIN Summit", description: "Korea's first DePIN-focused conference at Gangnam" },
+      { src: peaqSummitImg, title: "DePIN Summit", description: "Korea's first DePIN-focused conference at Gangnam" },
       { src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop", title: "IoT Partnership", description: "Collaboration with Korean tech companies" },
       { src: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=600&fit=crop", title: "Developer Workshop", description: "Building on Peaq infrastructure tutorials" },
       { src: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&h=600&fit=crop", title: "Use Case Demo", description: "Real-world DePIN applications showcase" }
@@ -340,7 +351,7 @@ const projectsData: Record<string, {
     ],
     services: ["Creator Relations", "Platform Marketing", "Ambassador Program", "Content Strategy"],
     gallery: [
-      { src: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&h=600&fit=crop", title: "Creator Workshop", description: "Hands-on IP tokenization training for Korean artists" },
+      { src: storyWorkshopImg, title: "Creator Workshop", description: "Hands-on IP tokenization training for Korean artists" },
       { src: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=600&fit=crop", title: "Webtoon Partnership", description: "Collaboration with Korean webtoon artists and platforms" },
       { src: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&h=600&fit=crop", title: "Music IP Launch", description: "K-pop and indie artist IP tokenization events" },
       { src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=800&h=600&fit=crop", title: "Success Stories", description: "Creator testimonial campaigns and case studies" }
@@ -380,7 +391,7 @@ const projectsData: Record<string, {
     ],
     services: ["Pre-Launch Marketing", "Community Building", "Testnet Campaigns", "Media Relations"],
     gallery: [
-      { src: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=600&fit=crop", title: "Pre-Launch Campaign", description: "Hype-building social media strategy and teasers" },
+      { src: megaethLaunchImg, title: "Pre-Launch Campaign", description: "Hype-building social media strategy and teasers" },
       { src: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop", title: "Testnet Program", description: "Korean user incentive campaign with rewards" },
       { src: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&h=600&fit=crop", title: "Community AMA", description: "Live Q&A sessions with the MegaETH team" },
       { src: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop", title: "Media Coverage", description: "Feature articles in major crypto publications" }
@@ -420,7 +431,7 @@ const projectsData: Record<string, {
     ],
     services: ["User Acquisition", "Product Marketing", "Partnership Development", "Customer Support"],
     gallery: [
-      { src: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop", title: "Launch Campaign", description: "Korean market entry promotion with incentives" },
+      { src: triaLaunchImg, title: "Launch Campaign", description: "Korean market entry promotion with incentives" },
       { src: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&h=600&fit=crop", title: "Tutorial Series", description: "Step-by-step wallet guides in Korean" },
       { src: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop", title: "dApp Integration", description: "Partnership with popular Korean dApps" },
       { src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop", title: "Referral Program", description: "User growth incentive campaign with influencers" }
@@ -460,7 +471,7 @@ const projectsData: Record<string, {
     ],
     services: ["Market Entry Strategy", "User Acquisition", "VIP Relations", "Brand Marketing"],
     gallery: [
-      { src: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=600&fit=crop", title: "Trading Campaign", description: "Zero-fee promotion launch with massive reach" },
+      { src: bybitCompetitionImg, title: "Trading Campaign", description: "Zero-fee promotion launch with massive reach" },
       { src: "https://images.unsplash.com/photo-1560472355-536de3962603?w=800&h=600&fit=crop", title: "VIP Program", description: "Exclusive benefits for high-volume traders" },
       { src: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop", title: "Esports Partnership", description: "Korean gaming community sponsorship events" },
       { src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop", title: "Brand Campaign", description: "Major marketing push across Korean channels" }
@@ -544,6 +555,11 @@ const ProjectDetail = () => {
           style={{ transform: `translateY(${scrollY * 0.1}px)` }}
         />
         
+        {/* Decorative Gradient Blurs */}
+        <div className="absolute top-20 right-10 w-96 h-96 rounded-full bg-white/10 blur-3xl animate-pulse" />
+        <div className="absolute bottom-20 left-10 w-72 h-72 rounded-full bg-white/5 blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-black/10 blur-3xl" />
+        
         {/* Grid Pattern Overlay */}
         <div 
           className="absolute inset-0 opacity-[0.15] pointer-events-none"
@@ -553,6 +569,20 @@ const ProjectDetail = () => {
               linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
             `,
             backgroundSize: '60px 60px'
+          }}
+        />
+
+        {/* Diagonal Lines Pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.05] pointer-events-none"
+          style={{
+            backgroundImage: `repeating-linear-gradient(
+              45deg,
+              transparent,
+              transparent 20px,
+              rgba(255,255,255,0.1) 20px,
+              rgba(255,255,255,0.1) 21px
+            )`
           }}
         />
         
@@ -587,18 +617,8 @@ const ProjectDetail = () => {
             </div>
           </div>
 
-          {/* Metrics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-            {project.metrics.map((metric, index) => (
-              <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3">
-                <p className="text-2xl md:text-3xl font-bold text-white">{metric.value}</p>
-                <p className="text-white/70 text-sm">{metric.label}</p>
-              </div>
-            ))}
-          </div>
-
           {/* Challenge Summary */}
-          <div className="mt-8 bg-black/20 backdrop-blur-sm rounded-xl p-5 border border-white/10">
+          <div className="mt-8 bg-black/20 backdrop-blur-sm rounded-xl p-5 border border-white/10 max-w-3xl">
             <p className="text-white/70 text-sm uppercase tracking-wider mb-2">The Challenge</p>
             <p className="text-white/90 leading-relaxed">{project.challenge}</p>
           </div>
@@ -607,6 +627,23 @@ const ProjectDetail = () => {
         {/* Year Indicator - Bottom Left */}
         <div className="absolute bottom-6 left-6 z-10">
           <p className="text-white/50 text-xs uppercase tracking-widest">year: 2024</p>
+        </div>
+      </section>
+
+      {/* Lunar Strategy Style Metrics Section */}
+      <section className="py-12 bg-background border-b border-border">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+            {project.metrics.map((metric, index) => (
+              <div key={index} className="text-center md:text-left">
+                <p className="text-3xl md:text-5xl font-bold text-foreground mb-1">
+                  <AnimatedCounter value={metric.value} isVisible={true} />
+                </p>
+                <p className="text-muted-foreground text-sm mb-2">{metric.label}</p>
+                <span className="text-muted-foreground/50 text-xs">0{index + 1}.</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
