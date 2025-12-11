@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Megaphone, Users, Globe, TrendingUp, Shield, Zap, ArrowRight, ArrowUpRight, Check } from "lucide-react";
+import { Megaphone, Users, Globe, TrendingUp, Shield, Zap, ArrowUpRight, Check } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
+import CalendlyButton from "@/components/CalendlyButton";
 
 const services = [
   {
@@ -19,9 +20,6 @@ const services = [
     features: ["Tier 1-3 KOL Selection", "Campaign Strategy & Management", "Content Coordination", "Performance Analytics & ROI Tracking"],
     stat: "100+",
     statLabel: "Verified KOLs",
-    iconBg: "bg-red-100 text-red-600",
-    cardBorder: "border-red-200 hover:border-red-400",
-    numberColor: "text-red-200",
   },
   {
     id: "community-building",
@@ -33,9 +31,6 @@ const services = [
     features: ["Platform Setup & Branding", "24/7 Korean Moderation", "Engagement Programs & Events", "AMA Sessions & Live Support"],
     stat: "500K+",
     statLabel: "Members Managed",
-    iconBg: "bg-blue-100 text-blue-600",
-    cardBorder: "border-blue-200 hover:border-blue-400",
-    numberColor: "text-blue-200",
   },
   {
     id: "pr-media",
@@ -47,9 +42,6 @@ const services = [
     features: ["Press Release Distribution", "Media Interviews & Features", "News Coverage & Articles", "Crisis Management"],
     stat: "50+",
     statLabel: "Publications",
-    iconBg: "bg-green-100 text-green-600",
-    cardBorder: "border-green-200 hover:border-green-400",
-    numberColor: "text-green-200",
   },
   {
     id: "gtm-strategy",
@@ -61,9 +53,6 @@ const services = [
     features: ["Market Research & Analysis", "Competitor Landscape Study", "Launch Planning & Execution", "Growth Roadmap Development"],
     stat: "30+",
     statLabel: "Successful Launches",
-    iconBg: "bg-purple-100 text-purple-600",
-    cardBorder: "border-purple-200 hover:border-purple-400",
-    numberColor: "text-purple-200",
   },
   {
     id: "vasp-compliance",
@@ -75,9 +64,6 @@ const services = [
     features: ["VASP Registration Support", "Compliance Consulting", "Legal Partnership Network", "Ongoing Regulatory Support"],
     stat: "100%",
     statLabel: "Success Rate",
-    iconBg: "bg-orange-100 text-orange-600",
-    cardBorder: "border-orange-200 hover:border-orange-400",
-    numberColor: "text-orange-200",
   },
   {
     id: "events",
@@ -89,9 +75,6 @@ const services = [
     features: ["Event Planning & Logistics", "Booth Design & Management", "Speaker Placement", "VIP Networking Events"],
     stat: "20+",
     statLabel: "Events Per Year",
-    iconBg: "bg-teal-100 text-teal-600",
-    cardBorder: "border-teal-200 hover:border-teal-400",
-    numberColor: "text-teal-200",
   },
 ];
 
@@ -105,46 +88,73 @@ const Services = () => {
       
       {/* Hero */}
       <section className="pt-32 pb-20 px-4">
-        <div className="container mx-auto max-w-4xl text-center">
-          <span className="text-sm font-medium text-green-600 tracking-wider mb-4 block">OUR SERVICES</span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
-            Full-Service Web3<br />
-            <span className="text-gradient">Marketing</span>
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Everything you need to successfully enter and grow in Korea's vibrant crypto market.
-          </p>
+        <div className="container mx-auto max-w-5xl">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            {/* Left - What */}
+            <div>
+              <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-foreground mb-8">
+                Services
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                Everything you need to successfully enter and grow in Korea's vibrant crypto market. Full-service Web3 marketing from strategy to execution.
+              </p>
+              <CalendlyButton 
+                variant="outline" 
+                className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
+              >
+                [ book a meeting ]
+              </CalendlyButton>
+            </div>
+
+            {/* Right - Includes */}
+            <div className="space-y-6">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+                Includes
+              </h2>
+              <div className="space-y-4">
+                {services.slice(0, 4).map((service, index) => (
+                  <div 
+                    key={service.id}
+                    className="flex items-baseline justify-between py-4 border-b border-dashed border-border/50"
+                  >
+                    <span className="text-muted-foreground">{service.title}</span>
+                    <span className="text-sm font-mono text-primary">[ {service.number} ]</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Services Grid */}
-      <section ref={ref} className="py-16 px-4">
+      <section ref={ref} className="py-16 px-4 border-t border-border/30">
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
               <div
                 key={service.id}
                 onClick={() => setSelectedService(service)}
-                className={`group p-6 rounded-2xl bg-card border-2 ${service.cardBorder} cursor-pointer transition-all duration-300 shadow-sm hover:shadow-md ${
+                className={`group p-6 rounded-2xl bg-card/50 border border-border/50 cursor-pointer transition-all duration-300 hover:border-primary/50 hover:bg-card ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ transitionDelay: `${100 + index * 50}ms` }}
               >
                 <div className="flex items-center justify-between mb-6">
-                  <span className={`text-5xl font-bold ${service.numberColor}`}>
+                  <span className="text-4xl font-mono text-muted-foreground/30">
                     {service.number}
                   </span>
-                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-foreground transition-colors" />
+                  <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
 
-                <div className={`w-14 h-14 rounded-xl ${service.iconBg} flex items-center justify-center mb-4`}>
-                  <service.icon className="w-7 h-7" />
+                <div className="w-12 h-12 rounded-xl border border-border/50 flex items-center justify-center mb-4 group-hover:border-primary/50 transition-colors">
+                  <service.icon className="w-6 h-6 text-muted-foreground group-hover:text-primary transition-colors" />
                 </div>
 
                 <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                   {service.title}
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-sm text-muted-foreground">
                   {service.description}
                 </p>
               </div>
@@ -163,10 +173,10 @@ const Services = () => {
             <>
               <DialogHeader>
                 <div className="flex items-center gap-4 mb-4">
-                  <div className={`w-14 h-14 rounded-xl ${selectedService.iconBg} flex items-center justify-center`}>
-                    <selectedService.icon className="w-7 h-7" />
+                  <div className="w-12 h-12 rounded-xl border border-border flex items-center justify-center">
+                    <selectedService.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <span className={`text-5xl font-bold ${selectedService.numberColor}`}>{selectedService.number}</span>
+                  <span className="text-4xl font-mono text-muted-foreground/30">{selectedService.number}</span>
                 </div>
                 <DialogTitle className="text-2xl font-bold text-foreground">{selectedService.title}</DialogTitle>
                 <DialogDescription className="text-muted-foreground leading-relaxed mt-2 text-base">
@@ -174,8 +184,8 @@ const Services = () => {
                 </DialogDescription>
               </DialogHeader>
               
-              <div className="flex items-baseline gap-2 mt-4 p-4 rounded-xl bg-muted">
-                <span className="text-4xl font-bold text-primary">{selectedService.stat}</span>
+              <div className="flex items-baseline gap-2 mt-4 p-4 rounded-xl bg-muted/30 border border-border/50">
+                <span className="text-3xl font-bold text-primary">{selectedService.stat}</span>
                 <span className="text-muted-foreground">{selectedService.statLabel}</span>
               </div>
               
@@ -184,8 +194,8 @@ const Services = () => {
                 <div className="space-y-3">
                   {selectedService.features.map((feature, idx) => (
                     <div key={idx} className="flex items-center gap-3">
-                      <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center">
-                        <Check className="w-3 h-3 text-green-600" />
+                      <div className="w-5 h-5 rounded-full border border-primary/50 flex items-center justify-center">
+                        <Check className="w-3 h-3 text-primary" />
                       </div>
                       <span className="text-muted-foreground">{feature}</span>
                     </div>
@@ -195,12 +205,11 @@ const Services = () => {
 
               <div className="mt-8 flex gap-3">
                 <Link to="/contact" className="flex-1">
-                  <Button className="w-full rounded-full bg-primary hover:bg-primary/90 shadow-md">
+                  <Button className="w-full rounded-full bg-primary hover:bg-primary/90">
                     Get Started
-                    <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </Link>
-                <Button variant="outline" onClick={() => setSelectedService(null)} className="rounded-full">
+                <Button variant="outline" onClick={() => setSelectedService(null)} className="rounded-full border-border">
                   Close
                 </Button>
               </div>

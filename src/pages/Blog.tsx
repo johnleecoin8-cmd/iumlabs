@@ -3,6 +3,7 @@ import { ArrowRight, Calendar, Clock } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import CalendlyButton from "@/components/CalendlyButton";
 
 interface BlogPost {
   id: string;
@@ -12,7 +13,6 @@ interface BlogPost {
   date: string;
   readTime: string;
   image: string;
-  color: string;
 }
 
 const blogPosts: BlogPost[] = [
@@ -24,7 +24,6 @@ const blogPosts: BlogPost[] = [
     date: "Dec 2024",
     readTime: "5 min",
     image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800",
-    color: "bg-red-100 text-red-700",
   },
   {
     id: "2",
@@ -34,7 +33,6 @@ const blogPosts: BlogPost[] = [
     date: "Dec 2024",
     readTime: "8 min",
     image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=800",
-    color: "bg-blue-100 text-blue-700",
   },
   {
     id: "3",
@@ -44,7 +42,6 @@ const blogPosts: BlogPost[] = [
     date: "Nov 2024",
     readTime: "6 min",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
-    color: "bg-green-100 text-green-700",
   },
   {
     id: "4",
@@ -54,7 +51,6 @@ const blogPosts: BlogPost[] = [
     date: "Nov 2024",
     readTime: "7 min",
     image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800",
-    color: "bg-purple-100 text-purple-700",
   },
   {
     id: "5",
@@ -64,7 +60,6 @@ const blogPosts: BlogPost[] = [
     date: "Oct 2024",
     readTime: "5 min",
     image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800",
-    color: "bg-orange-100 text-orange-700",
   },
   {
     id: "6",
@@ -74,7 +69,6 @@ const blogPosts: BlogPost[] = [
     date: "Oct 2024",
     readTime: "6 min",
     image: "https://images.unsplash.com/photo-1642790106117-e829e14a795f?w=800",
-    color: "bg-teal-100 text-teal-700",
   },
 ];
 
@@ -94,40 +88,51 @@ const Blog = () => {
       
       {/* Hero */}
       <section className="pt-32 pb-16 px-4">
-        <div className="container mx-auto max-w-4xl text-center">
-          <span className="text-sm font-medium text-orange-600 tracking-wider mb-4 block">BLOG</span>
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">
-            Web3 <span className="text-gradient">Insights</span>
-          </h1>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
-            Marketing strategies, guides, and insights for succeeding in Korea's Web3 market.
-          </p>
-        </div>
-      </section>
-
-      {/* Category Filter */}
-      <section className="px-4 pb-8">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-wrap justify-center gap-2">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  selectedCategory === category
-                    ? "bg-primary text-primary-foreground shadow-md"
-                    : "bg-muted text-muted-foreground hover:bg-muted/80"
-                }`}
+        <div className="container mx-auto max-w-5xl">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            {/* Left - What */}
+            <div>
+              <h1 className="text-6xl md:text-8xl font-bold tracking-tight text-foreground mb-8">
+                Blog
+              </h1>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                Marketing strategies, guides, and insights for succeeding in Korea's Web3 market.
+              </p>
+              <CalendlyButton 
+                variant="outline" 
+                className="rounded-full border-primary text-primary hover:bg-primary hover:text-primary-foreground"
               >
-                {category}
-              </button>
-            ))}
+                [ book a meeting ]
+              </CalendlyButton>
+            </div>
+
+            {/* Right - Categories */}
+            <div className="space-y-6">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground">
+                Topics
+              </h2>
+              <div className="flex flex-wrap gap-2">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
+                      selectedCategory === category
+                        ? "bg-primary text-primary-foreground border-primary"
+                        : "bg-transparent text-muted-foreground border-border/50 hover:border-primary/50 hover:text-foreground"
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Blog Grid */}
-      <section ref={ref} className="py-12 px-4">
+      <section ref={ref} className="py-12 px-4 border-t border-border/30">
         <div className="container mx-auto max-w-6xl">
           <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {filteredPosts.map((post, index) => (
@@ -137,14 +142,14 @@ const Blog = () => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Image */}
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-card border border-border group-hover:shadow-lg transition-all">
+                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden mb-4 bg-card/50 border border-border/50 group-hover:border-primary/30 transition-all">
                   <img 
                     src={post.image} 
                     alt={post.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80"
                   />
                   <div className="absolute top-4 left-4">
-                    <span className={`text-xs font-medium px-3 py-1 rounded-full ${post.color}`}>
+                    <span className="text-xs font-mono px-3 py-1 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 text-primary">
                       {post.category}
                     </span>
                   </div>
