@@ -6,7 +6,7 @@ import { Linkedin, Send, Calendar } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { images } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
-import moonBackground from "@/assets/moon-background.jpg";
+import seoulGangnamNight from "@/assets/backgrounds/seoul-gangnam-night.jpg";
 
 const stats = [
   { value: "200+", label: "Projects Launched" },
@@ -35,15 +35,15 @@ const team = [
 ];
 
 const floatingTags = [
-  { label: "Since 2023", top: "20%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-pink-400 text-white" },
-  { label: "200+ Projects", top: "28%", left: "20%", mobileTop: "15%", mobileRight: "3%", color: "bg-yellow-400 text-black" },
-  { label: "Korea Experts", top: "45%", left: "3%", mobileTop: "75%", mobileLeft: "3%", color: "bg-white text-black border border-black" },
-  { label: "Ex-Binance", top: "50%", left: "25%", mobileBottom: "18%", mobileRight: "3%", color: "bg-orange-400 text-white" },
-  { label: "Trusted", top: "18%", right: "12%", color: "bg-white text-black border border-black" },
-  { label: "Results-Driven", top: "32%", right: "5%", color: "bg-yellow-400 text-black" },
-  { label: "Ex-KuCoin", top: "52%", right: "8%", color: "bg-green-400 text-black" },
-  { label: "Strategic Partner", bottom: "25%", right: "15%", color: "bg-green-500 text-white" },
-  { label: "Industry Leaders", bottom: "30%", left: "15%", color: "bg-cyan-400 text-black" },
+  { label: "Since 2023", top: "20%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-cyan-400 text-black" },
+  { label: "200+ Projects", top: "28%", left: "20%", mobileTop: "15%", mobileRight: "3%", color: "bg-white text-black" },
+  { label: "Korea Experts", top: "45%", left: "3%", mobileTop: "75%", mobileLeft: "3%", color: "bg-amber-400 text-black" },
+  { label: "Ex-Binance", top: "50%", left: "25%", mobileBottom: "18%", mobileRight: "3%", color: "bg-rose-400 text-white" },
+  { label: "Trusted", top: "18%", right: "12%", color: "bg-emerald-400 text-black" },
+  { label: "Results-Driven", top: "32%", right: "5%", color: "bg-white text-black border border-black" },
+  { label: "Ex-KuCoin", top: "52%", right: "8%", color: "bg-teal-400 text-black" },
+  { label: "Strategic Partner", bottom: "25%", right: "15%", color: "bg-violet-400 text-white" },
+  { label: "Industry Leaders", bottom: "30%", left: "15%", color: "bg-lime-400 text-black" },
 ];
 
 const About = () => {
@@ -62,27 +62,29 @@ const About = () => {
       
       {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Vibrant Blue with Moon */}
-        <div className="absolute inset-0 overflow-hidden bg-[hsl(220,90%,55%)]">
+        {/* Background - Seoul Gangnam Night */}
+        <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${moonBackground})`,
-              filter: "brightness(0.9) saturate(1.2)",
-              mixBlendMode: "overlay",
+              backgroundImage: `url(${seoulGangnamNight})`,
+              filter: "brightness(0.5) saturate(1.3)",
             }}
           />
           
-          {/* Aurora light overlay */}
+          {/* Aurora light overlay - Cyan/Teal theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/30 via-transparent to-cyan-400/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600/20 via-transparent to-blue-400/10" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-600/30 via-transparent to-teal-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-blue-600/20 via-transparent to-emerald-500/15" />
           </div>
           
           {/* Light sweep effect */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-light-sweep" />
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
           </div>
+          
+          {/* Dark overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
         </div>
         
         {/* Floating Tags with Parallax - Colorful */}
