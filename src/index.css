@@ -14,88 +14,80 @@
 
 @layer base {
   :root {
-    /* Dark theme - Pure Black with Neon accents */
-    --background: 0 0% 2%;
+    /* Lunar Strategy Clean Color System */
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     
-    --card: 0 0% 6%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 6%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
     
-    /* Neon Cyan primary */
-    --primary: 180 100% 50%;
-    --primary-foreground: 0 0% 0%;
+    /* Clean Blue Primary */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
     
-    /* Neon Purple secondary */
-    --secondary: 265 100% 63%;
+    /* Clean Gray Secondary */
+    --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 10%;
+    --muted: 0 0% 12%;
     --muted-foreground: 0 0% 55%;
     
-    /* Neon Purple accent */
-    --accent: 265 100% 63%;
+    /* Blue Accent */
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 180 100% 50%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 217 91% 60%;
     
     --radius: 0.5rem;
 
     /* Dark section variables */
-    --dark-bg: 0 0% 2%;
+    --dark-bg: 0 0% 4%;
     --dark-fg: 0 0% 100%;
 
-    /* Neon Color Palette */
-    --neon-cyan: 180 100% 50%;
-    --neon-purple: 265 100% 63%;
-    --neon-pink: 300 100% 50%;
-    --neon-green: 160 100% 50%;
-    --neon-blue: 200 100% 60%;
+    /* Light section variables (for Team, Blog) */
+    --light-bg: 0 0% 96%;
+    --light-fg: 0 0% 8%;
 
-    /* Service tag colors - Neon variations */
-    --tag-blue: 200 100% 60%;
-    --tag-cyan: 180 100% 50%;
-    --tag-purple: 265 100% 63%;
-    --tag-pink: 300 100% 50%;
-    --tag-green: 160 100% 50%;
-    --tag-white: 0 0% 100%;
+    /* Lunar Strategy Blue */
+    --lunar-blue: 217 91% 60%;
   }
 
   .dark {
-    --background: 0 0% 2%;
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     
-    --card: 0 0% 6%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 6%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
     
-    --primary: 180 100% 50%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
     
-    --secondary: 265 100% 63%;
+    --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 10%;
+    --muted: 0 0% 12%;
     --muted-foreground: 0 0% 55%;
     
-    --accent: 265 100% 63%;
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 180 100% 50%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 217 91% 60%;
   }
 }
 
@@ -118,170 +110,65 @@
     color: hsl(var(--dark-fg));
   }
 
-  /* Neon Text Glow Effects */
-  .neon-text-cyan {
-    text-shadow: 
-      0 0 5px hsl(var(--neon-cyan)),
-      0 0 10px hsl(var(--neon-cyan)),
-      0 0 20px hsl(var(--neon-cyan) / 0.5),
-      0 0 40px hsl(var(--neon-cyan) / 0.3);
-    color: hsl(var(--neon-cyan));
+  /* Light section styling */
+  .section-light {
+    background-color: hsl(var(--light-bg));
+    color: hsl(var(--light-fg));
   }
 
-  .neon-text-purple {
-    text-shadow: 
-      0 0 5px hsl(var(--neon-purple)),
-      0 0 10px hsl(var(--neon-purple)),
-      0 0 20px hsl(var(--neon-purple) / 0.5),
-      0 0 40px hsl(var(--neon-purple) / 0.3);
-    color: hsl(var(--neon-purple));
-  }
-
-  .neon-text-white {
-    text-shadow: 
-      0 0 5px hsl(0 0% 100% / 0.8),
-      0 0 10px hsl(0 0% 100% / 0.5),
-      0 0 20px hsl(0 0% 100% / 0.3);
-  }
-
-  /* Neon Border Glow */
-  .neon-border-cyan {
-    box-shadow: 
-      0 0 5px hsl(var(--neon-cyan) / 0.5),
-      0 0 15px hsl(var(--neon-cyan) / 0.3),
-      inset 0 0 5px hsl(var(--neon-cyan) / 0.1);
-    border-color: hsl(var(--neon-cyan) / 0.6);
-  }
-
-  .neon-border-purple {
-    box-shadow: 
-      0 0 5px hsl(var(--neon-purple) / 0.5),
-      0 0 15px hsl(var(--neon-purple) / 0.3),
-      inset 0 0 5px hsl(var(--neon-purple) / 0.1);
-    border-color: hsl(var(--neon-purple) / 0.6);
-  }
-
-  /* Lunar Strategy Tags - Dark variant (white outline) */
+  /* Lunar Strategy Tags - Dark variant (white outline only, NO glow) */
   .lunar-tag-dark {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300;
     background: transparent;
-    border-color: hsl(var(--dark-fg) / 0.3);
-    color: hsl(var(--dark-fg) / 0.8);
+    border-color: hsl(0 0% 100% / 0.25);
+    color: hsl(0 0% 100% / 0.8);
   }
   
   .lunar-tag-dark:hover {
-    border-color: hsl(var(--neon-cyan) / 0.6);
-    color: hsl(var(--neon-cyan));
-    box-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.2);
+    border-color: hsl(0 0% 100% / 0.5);
+    color: hsl(0 0% 100%);
   }
 
-  /* Lunar Strategy Tag - Light */
-  .lunar-tag {
+  /* Lunar Strategy Tag - Light variant */
+  .lunar-tag-light {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300;
     background: transparent;
-    border-color: hsl(var(--foreground) / 0.2);
-    color: hsl(var(--foreground) / 0.7);
+    border-color: hsl(0 0% 0% / 0.15);
+    color: hsl(0 0% 0% / 0.7);
   }
 
-  /* Service Tags with Neon Colors */
+  .lunar-tag-light:hover {
+    border-color: hsl(0 0% 0% / 0.4);
+    color: hsl(0 0% 0%);
+  }
+
+  /* Service Tags - Clean style (no neon glow) */
   .service-tag {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300 cursor-pointer;
+    background: transparent;
+    border-color: hsl(0 0% 100% / 0.25);
+    color: hsl(0 0% 100% / 0.8);
   }
   
-  .service-tag-cyan {
-    background: hsl(var(--neon-cyan) / 0.1);
-    border-color: hsl(var(--neon-cyan) / 0.5);
-    color: hsl(var(--neon-cyan));
-    box-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.2);
-  }
-  
-  .service-tag-cyan:hover {
-    background: hsl(var(--neon-cyan) / 0.2);
-    border-color: hsl(var(--neon-cyan));
-    box-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.4);
-  }
-  
-  .service-tag-purple {
-    background: hsl(var(--neon-purple) / 0.1);
-    border-color: hsl(var(--neon-purple) / 0.5);
-    color: hsl(var(--neon-purple));
-    box-shadow: 0 0 10px hsl(var(--neon-purple) / 0.2);
-  }
-  
-  .service-tag-purple:hover {
-    background: hsl(var(--neon-purple) / 0.2);
-    border-color: hsl(var(--neon-purple));
-    box-shadow: 0 0 20px hsl(var(--neon-purple) / 0.4);
+  .service-tag:hover {
+    border-color: hsl(0 0% 100% / 0.5);
+    color: hsl(0 0% 100%);
   }
 
-  .service-tag-green {
-    background: hsl(var(--neon-green) / 0.1);
-    border-color: hsl(var(--neon-green) / 0.5);
-    color: hsl(var(--neon-green));
-    box-shadow: 0 0 10px hsl(var(--neon-green) / 0.2);
-  }
-  
-  .service-tag-green:hover {
-    background: hsl(var(--neon-green) / 0.2);
-    border-color: hsl(var(--neon-green));
-    box-shadow: 0 0 20px hsl(var(--neon-green) / 0.4);
-  }
-
-  .service-tag-pink {
-    background: hsl(var(--neon-pink) / 0.1);
-    border-color: hsl(var(--neon-pink) / 0.5);
-    color: hsl(var(--neon-pink));
-    box-shadow: 0 0 10px hsl(var(--neon-pink) / 0.2);
-  }
-  
-  .service-tag-pink:hover {
-    background: hsl(var(--neon-pink) / 0.2);
-    border-color: hsl(var(--neon-pink));
-    box-shadow: 0 0 20px hsl(var(--neon-pink) / 0.4);
-  }
-  
-  .service-tag-blue {
-    background: hsl(var(--neon-blue) / 0.1);
-    border-color: hsl(var(--neon-blue) / 0.5);
-    color: hsl(var(--neon-blue));
-    box-shadow: 0 0 10px hsl(var(--neon-blue) / 0.2);
-  }
-  
-  .service-tag-blue:hover {
-    background: hsl(var(--neon-blue) / 0.2);
-    border-color: hsl(var(--neon-blue));
-    box-shadow: 0 0 20px hsl(var(--neon-blue) / 0.4);
-  }
-  
-  .service-tag-white {
-    background: hsl(var(--tag-white) / 0.05);
-    border-color: hsl(var(--tag-white) / 0.3);
-    color: hsl(var(--tag-white) / 0.9);
-  }
-  
-  .service-tag-white:hover {
-    background: hsl(var(--tag-white) / 0.1);
-    border-color: hsl(var(--tag-white) / 0.5);
-    box-shadow: 0 0 15px hsl(var(--tag-white) / 0.2);
-  }
-
-  /* Lunar Strategy Neon Button */
+  /* Lunar Strategy Blue Button - Solid, Clean */
   .lunar-btn {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all duration-300;
-    background-color: hsl(var(--neon-cyan));
-    color: hsl(0 0% 0%);
-    box-shadow: 0 0 20px hsl(var(--neon-cyan) / 0.4);
+    background-color: hsl(217 91% 60%);
+    color: hsl(0 0% 100%);
   }
   
   .lunar-btn:hover {
-    background-color: hsl(var(--neon-cyan));
+    background-color: hsl(217 91% 55%);
     transform: translateY(-2px);
-    box-shadow: 
-      0 0 30px hsl(var(--neon-cyan) / 0.6),
-      0 0 60px hsl(var(--neon-cyan) / 0.3);
+    box-shadow: 0 4px 20px hsl(217 91% 60% / 0.3);
   }
 
-  /* Lunar Strategy Outline Button */
+  /* Lunar Strategy Outline Button - Clean */
   .lunar-btn-outline {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full border transition-all duration-300;
     background: transparent;
@@ -290,12 +177,11 @@
   }
   
   .lunar-btn-outline:hover {
-    border-color: hsl(var(--neon-cyan) / 0.6);
-    color: hsl(var(--neon-cyan));
-    box-shadow: 0 0 15px hsl(var(--neon-cyan) / 0.2);
+    border-color: hsl(0 0% 100% / 0.5);
+    background: hsl(0 0% 100% / 0.05);
   }
 
-  /* Dark outline button */
+  /* Dark outline button - Clean */
   .lunar-btn-outline-dark {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full border transition-all duration-300;
     background: transparent;
@@ -304,9 +190,8 @@
   }
   
   .lunar-btn-outline-dark:hover {
-    border-color: hsl(var(--neon-cyan) / 0.6);
-    color: hsl(var(--neon-cyan));
-    box-shadow: 0 0 15px hsl(var(--neon-cyan) / 0.2);
+    border-color: hsl(var(--dark-fg) / 0.6);
+    background: hsl(var(--dark-fg) / 0.05);
   }
 
   /* Bracket Link Style */
@@ -316,7 +201,7 @@
   }
   
   .bracket-link:hover {
-    color: hsl(var(--neon-cyan));
+    color: hsl(var(--foreground));
   }
   
   .bracket-link::before {
@@ -364,6 +249,17 @@
     );
   }
 
+  .dotted-line-light {
+    @apply w-full h-px;
+    background-image: repeating-linear-gradient(
+      to right,
+      hsl(var(--light-fg) / 0.15),
+      hsl(var(--light-fg) / 0.15) 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  }
+
   /* Serif Italic Text */
   .serif-italic {
     @apply font-serif italic;
@@ -379,155 +275,63 @@
     100% { transform: translateX(-50%); }
   }
 
-  /* Data Flow Line Animation - Neon */
-  .data-flow-line {
-    animation: dataFlow 4s ease-in-out infinite;
-    transform: translateX(-100%);
+  /* Case Card Gradients - Lunar Strategy Diverse Colors */
+  .case-gradient-polkadot {
+    background: linear-gradient(135deg, #E6007A, #9C1A6A);
   }
   
-  @keyframes dataFlow {
-    0% {
-      transform: translateX(-100%);
-      opacity: 0;
-    }
-    20% {
-      opacity: 1;
-    }
-    80% {
-      opacity: 1;
-    }
-    100% {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-  }
-
-  /* Neon Pulse Animation */
-  @keyframes neonPulse {
-    0%, 100% { 
-      opacity: 0.6; 
-      filter: brightness(1);
-    }
-    50% { 
-      opacity: 1; 
-      filter: brightness(1.3);
-    }
-  }
-
-  .animate-neon-pulse {
-    animation: neonPulse 2s ease-in-out infinite;
-  }
-
-  /* Bridge Cable Animation */
-  @keyframes cableGlow {
-    0%, 100% {
-      opacity: 0.3;
-      filter: blur(1px);
-    }
-    50% {
-      opacity: 0.8;
-      filter: blur(0px);
-    }
-  }
-
-  .animate-cable-glow {
-    animation: cableGlow 3s ease-in-out infinite;
-  }
-
-  /* Water Shimmer Animation */
-  @keyframes waterShimmer {
-    0% {
-      transform: translateX(-100%) skewX(-15deg);
-    }
-    100% {
-      transform: translateX(200%) skewX(-15deg);
-    }
-  }
-
-  .animate-water-shimmer {
-    animation: waterShimmer 8s ease-in-out infinite;
-  }
-
-  /* Case Card Gradients - Neon Theme */
-  .case-gradient-cyan {
-    background: linear-gradient(135deg, hsl(180 100% 35%), hsl(200 100% 25%));
+  .case-gradient-cardano {
+    background: linear-gradient(180deg, #E8F4FD, #C5E4F9);
   }
   
-  .case-gradient-purple {
-    background: linear-gradient(135deg, hsl(265 100% 45%), hsl(285 100% 35%));
-  }
-  
-  .case-gradient-green {
-    background: linear-gradient(135deg, hsl(160 100% 35%), hsl(140 100% 25%));
+  .case-gradient-icp {
+    background: linear-gradient(135deg, #0E0B2C 0%, #1a1040 50%, #2d1b69 100%);
   }
 
-  .case-gradient-pink {
-    background: linear-gradient(135deg, hsl(300 100% 40%), hsl(320 100% 30%));
+  .case-gradient-aptos {
+    background: linear-gradient(135deg, #2DD4BF, #06B6D4);
   }
 
-  .case-gradient-blue {
-    background: linear-gradient(135deg, hsl(200 100% 45%), hsl(220 100% 35%));
+  .case-gradient-near {
+    background: linear-gradient(135deg, #3B2667, #1a1333);
   }
 
-  .case-gradient-orange {
-    background: linear-gradient(135deg, hsl(30 100% 50%), hsl(15 100% 40%));
+  .case-gradient-xrp {
+    background: linear-gradient(135deg, #1A1A2E, #16213E);
   }
 
-  /* Service Icon Container - Neon */
+  .case-gradient-solana {
+    background: linear-gradient(135deg, #9945FF, #14F195);
+  }
+
+  .case-gradient-avalanche {
+    background: linear-gradient(135deg, #E84142, #C62828);
+  }
+
+  /* Service Icon Container - Clean */
   .service-icon {
     @apply w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300;
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
   }
 
-  .service-icon-cyan {
-    background: hsl(var(--neon-cyan) / 0.15);
-    color: hsl(var(--neon-cyan));
-    box-shadow: 0 0 15px hsl(var(--neon-cyan) / 0.2);
+  .service-icon:hover {
+    background: hsl(var(--primary) / 0.15);
   }
 
-  .service-icon-purple {
-    background: hsl(var(--neon-purple) / 0.15);
-    color: hsl(var(--neon-purple));
-    box-shadow: 0 0 15px hsl(var(--neon-purple) / 0.2);
-  }
-
-  .service-icon-green {
-    background: hsl(var(--neon-green) / 0.15);
-    color: hsl(var(--neon-green));
-    box-shadow: 0 0 15px hsl(var(--neon-green) / 0.2);
-  }
-
-  .service-icon-pink {
-    background: hsl(var(--neon-pink) / 0.15);
-    color: hsl(var(--neon-pink));
-    box-shadow: 0 0 15px hsl(var(--neon-pink) / 0.2);
-  }
-
-  .service-icon-blue {
-    background: hsl(var(--neon-blue) / 0.15);
-    color: hsl(var(--neon-blue));
-    box-shadow: 0 0 15px hsl(var(--neon-blue) / 0.2);
-  }
-
-  .service-icon-white {
-    background: hsl(var(--tag-white) / 0.1);
-    color: hsl(var(--tag-white));
-  }
-
-  /* Award Badge */
+  /* Award Badge - Clean */
   .award-badge {
     @apply inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-full;
-    background: hsl(var(--neon-cyan) / 0.1);
-    color: hsl(var(--neon-cyan));
-    border: 1px solid hsl(var(--neon-cyan) / 0.3);
-    box-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.1);
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+    border: 1px solid hsl(var(--primary) / 0.2);
   }
 
-  /* Video Call UI Styles */
+  /* Video Call UI Styles - Clean */
   .video-call-frame {
     @apply rounded-2xl overflow-hidden;
     background: linear-gradient(180deg, hsl(0 0% 8%), hsl(0 0% 4%));
-    border: 1px solid hsl(var(--neon-cyan) / 0.2);
-    box-shadow: 0 0 30px hsl(var(--neon-cyan) / 0.1);
+    border: 1px solid hsl(var(--border));
   }
 
   .video-participant {
@@ -546,17 +350,22 @@
     @apply text-xs;
   }
 
-  /* Neon Card Hover Effect */
-  .neon-card {
+  /* Clean Card Hover Effect */
+  .lunar-card {
     @apply transition-all duration-300;
     border: 1px solid hsl(var(--border));
   }
 
-  .neon-card:hover {
-    border-color: hsl(var(--neon-cyan) / 0.4);
-    box-shadow: 
-      0 0 20px hsl(var(--neon-cyan) / 0.1),
-      inset 0 0 20px hsl(var(--neon-cyan) / 0.02);
+  .lunar-card:hover {
+    border-color: hsl(var(--border) / 0.8);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px hsl(0 0% 0% / 0.3);
+  }
+
+  /* Team Photo Blue Overlay (Lunar Strategy style) */
+  .team-photo-overlay {
+    @apply absolute inset-0;
+    background: linear-gradient(to top, hsl(217 91% 50% / 0.5), transparent 60%);
   }
 }
 
@@ -599,9 +408,9 @@
   display: none;
 }
 
-/* Gradient Text - Neon */
+/* Gradient Text - Clean Blue */
 .gradient-text {
-  background: linear-gradient(135deg, hsl(var(--neon-cyan)), hsl(var(--neon-purple)));
+  background: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 75%));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -624,5 +433,5 @@
 
 .case-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 10px 40px hsl(var(--neon-cyan) / 0.15);
+  box-shadow: 0 10px 40px hsl(0 0% 0% / 0.3);
 }
