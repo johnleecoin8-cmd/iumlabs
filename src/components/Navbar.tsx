@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Volume2, Calendar } from "lucide-react";
 import { brand, navigation } from "@/config/content";
+import LiveChatModal from "./LiveChatModal";
 
 const brandConfig = {
   name: brand.name,
@@ -15,6 +16,7 @@ const navLinks = navigation.links.map(link => ({ to: link.href, label: link.name
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
 
   return (
     <>
@@ -41,16 +43,14 @@ const Navbar = () => {
 
             {/* Right side buttons */}
             <div className="flex items-center gap-3">
-              {/* Live Chat Button */}
-              <a
-                href={brandConfig.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
+            {/* Live Chat Button */}
+              <button
+                onClick={() => setIsLiveChatOpen(true)}
                 className="hidden md:flex items-center gap-2 lunar-btn-outline text-sm"
               >
                 <Volume2 className="w-4 h-4" />
                 <span>Start Live Chat</span>
-              </a>
+              </button>
 
               {/* Book a Meeting Button */}
               <a
@@ -171,6 +171,9 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+
+      {/* Live Chat Modal */}
+      <LiveChatModal isOpen={isLiveChatOpen} onClose={() => setIsLiveChatOpen(false)} />
     </>
   );
 };
