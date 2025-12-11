@@ -219,10 +219,10 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form Section - Light Theme */}
-      <section className="section-light py-24 px-4">
-        <div className="container mx-auto max-w-3xl">
-          <div className="bg-white border border-[hsl(var(--light-fg),0.1)] rounded-3xl p-8 md:p-12">
+      {/* Contact Form Section - Mars Theme */}
+      <section className="section-mars-light py-24 px-4">
+        <div className="container mx-auto max-w-3xl relative z-10">
+          <div className="bg-white/80 backdrop-blur-sm border border-rose-200/30 rounded-3xl p-8 md:p-12 shadow-xl">
             <div className="mb-8">
               <span className="text-sm text-[hsl(var(--light-fg),0.4)] mb-4 block">[ Send a Message ]</span>
               <h2 className="text-3xl font-light text-[hsl(var(--light-fg))]">

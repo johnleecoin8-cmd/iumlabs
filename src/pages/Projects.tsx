@@ -375,9 +375,9 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Projects Grid */}
-      <section ref={ref} className="py-24 px-4 bg-background">
-        <div className="container mx-auto max-w-7xl">
+      {/* Projects Grid - Saturn Theme */}
+      <section ref={ref} className="section-saturn-dark section-stars py-24 px-4">
+        <div className="container mx-auto max-w-7xl relative z-10">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cases.map((caseItem, index) => (
               <Link
