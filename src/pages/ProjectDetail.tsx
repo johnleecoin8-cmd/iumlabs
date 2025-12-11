@@ -595,32 +595,42 @@ const ProjectDetail = () => {
           ))}
         </div>
 
-        {/* 3-Card Layout - Full Width with Depth */}
-        <div className="grid grid-cols-1 lg:grid-cols-3">
-          {/* Card 1 - Scope of Work */}
-          <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-5 md:p-6 min-h-[140px] flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]">
-            <span className="text-slate-500 text-xs uppercase tracking-widest mb-3 block">Scope of Work</span>
-            <div className="space-y-0.5">
-              {project.shortServices.map((service, index) => (
-                <p key={index} className="text-white text-lg md:text-xl font-light leading-tight">{service}</p>
-              ))}
+        {/* Process Flow - 01, 02, 03 */}
+        <div className="grid grid-cols-1 md:grid-cols-3">
+          {/* Step 01 - The Challenge */}
+          <div className="relative p-8 md:p-12 bg-white border-b md:border-b-0 md:border-r border-slate-200 overflow-hidden">
+            <span className="absolute top-4 right-4 md:top-6 md:right-6 text-6xl md:text-8xl font-bold text-slate-100 select-none">01</span>
+            <div className="relative z-10">
+              <h3 className="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4 font-medium">The Challenge</h3>
+              <p className="text-slate-700 leading-relaxed text-sm md:text-base">{project.challenge}</p>
             </div>
           </div>
 
-          {/* Card 2 - Overview */}
-          <div className="bg-gradient-to-b from-white to-slate-50 p-5 md:p-6 min-h-[140px] flex flex-col justify-between border-x border-slate-200 shadow-[inset_0_1px_0_rgba(255,255,255,1),inset_0_-2px_4px_rgba(0,0,0,0.02)]">
-            <span className="text-slate-400 text-xs uppercase tracking-widest mb-3 block">Overview</span>
-            <p className="text-slate-700 text-sm md:text-base leading-relaxed">
-              {project.description}
-            </p>
+          {/* Step 02 - Our Approach */}
+          <div className="relative p-8 md:p-12 bg-slate-50 border-b md:border-b-0 md:border-r border-slate-200 overflow-hidden">
+            <span className="absolute top-4 right-4 md:top-6 md:right-6 text-6xl md:text-8xl font-bold text-slate-200 select-none">02</span>
+            <div className="relative z-10">
+              <h3 className="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4 font-medium">Our Approach</h3>
+              <ul className="space-y-2">
+                {project.shortServices.map((service, i) => (
+                  <li key={i} className="text-slate-700 text-sm md:text-base flex items-start gap-2">
+                    <span className="text-slate-400 mt-1">—</span>
+                    {service}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
-          {/* Card 3 - What We Did */}
-          <div className="bg-gradient-to-br from-slate-100 to-slate-50 p-5 md:p-6 min-h-[140px] flex flex-col justify-between shadow-[inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(0,0,0,0.03)]">
-            <span className="text-slate-400 text-xs uppercase tracking-widest mb-3 block">What We Did</span>
-            <p className="text-slate-700 text-sm md:text-base leading-relaxed">
-              {project.strategy.slice(0, 2).join('. ')}.
-            </p>
+          {/* Step 03 - The Result */}
+          <div className="relative p-8 md:p-12 bg-white overflow-hidden">
+            <span className="absolute top-4 right-4 md:top-6 md:right-6 text-6xl md:text-8xl font-bold text-slate-100 select-none">03</span>
+            <div className="relative z-10">
+              <h3 className="text-xs uppercase tracking-[0.2em] text-slate-400 mb-4 font-medium">The Result</h3>
+              <p className="text-slate-700 leading-relaxed text-sm md:text-base">
+                <span className="font-semibold text-slate-900">{project.results[0].value}</span> {project.results[0].metric}
+              </p>
+            </div>
           </div>
         </div>
       </section>
