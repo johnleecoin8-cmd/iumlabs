@@ -74,12 +74,12 @@ export default {
       },
       keyframes: {
         orbit: {
-          '0%': { transform: 'rotateX(60deg) rotateZ(0deg)' },
-          '100%': { transform: 'rotateX(60deg) rotateZ(360deg)' },
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
         },
         'counter-orbit': {
-          '0%': { transform: 'translate(-50%, -50%) rotateZ(0deg)' },
-          '100%': { transform: 'translate(-50%, -50%) rotateZ(-360deg)' },
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(-360deg)' },
         },
         "accordion-down": {
           from: { height: "0" },
