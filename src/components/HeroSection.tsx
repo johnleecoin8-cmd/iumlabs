@@ -96,41 +96,45 @@ const HeroSection = () => {
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </p>
 
-          {/* CTA Button - Bridge Logo Style */}
+          {/* CTA Button - Premium Style */}
           <div className="opacity-0 animate-fade-up stagger-3 mt-6 sm:mt-8">
-            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-primary via-primary/90 to-primary/80 text-primary-foreground text-base sm:text-lg px-8 sm:px-12 py-4 sm:py-5 rounded-full font-semibold shadow-2xl shadow-primary/30 hover:shadow-primary/50 transition-all duration-500 hover:scale-105 border border-white/20">
-              {/* Animated shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            <CalendlyButton className="group relative overflow-hidden bg-white text-slate-900 text-base sm:text-lg px-10 sm:px-14 py-5 sm:py-6 rounded-2xl font-bold shadow-[0_20px_50px_rgba(255,255,255,0.15)] hover:shadow-[0_25px_60px_rgba(255,255,255,0.25)] transition-all duration-500 hover:scale-[1.02] border-2 border-white/90">
+              {/* Animated gradient border effect */}
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary via-blue-400 to-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl" />
               
-              {/* Bridge Icon SVG */}
-              <div className="relative flex items-center gap-3">
+              <div className="relative flex items-center gap-4">
+                {/* Bridge Icon */}
+                <div className="relative">
+                  <svg 
+                    className="w-7 h-7 sm:w-8 sm:h-8 text-primary group-hover:text-blue-600 transition-colors duration-300" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M2 18h20" />
+                    <path d="M5 18V9" />
+                    <path d="M19 18V9" />
+                    <path d="M5 9c0 0 3.5-5 7-5s7 5 7 5" />
+                    <path d="M8 18v-5" />
+                    <path d="M16 18v-5" />
+                    <path d="M5 13h14" />
+                  </svg>
+                </div>
+                <span className="relative tracking-tight">Book a Free Consultation</span>
                 <svg 
-                  className="w-6 h-6 sm:w-7 sm:h-7 group-hover:scale-110 transition-transform duration-300" 
-                  viewBox="0 0 24 24" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  {/* Bridge structure */}
-                  <path d="M3 18h18" />
-                  <path d="M6 18V8" />
-                  <path d="M18 18V8" />
-                  <path d="M6 8c0 0 3-4 6-4s6 4 6 4" />
-                  <path d="M9 18v-6" />
-                  <path d="M15 18v-6" />
-                  <path d="M6 12h12" />
-                </svg>
-                <span className="relative">Start Your Bridge</span>
-                <svg 
-                  className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300" 
+                  className="w-5 h-5 sm:w-6 sm:h-6 text-primary group-hover:translate-x-1.5 group-hover:text-blue-600 transition-all duration-300" 
                   viewBox="0 0 24 24" 
                   fill="none" 
                   stroke="currentColor" 
                   strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
-                  <path d="M5 12h14M12 5l7 7-7 7" />
+                  <path d="M5 12h14" />
+                  <path d="M12 5l7 7-7 7" />
                 </svg>
               </div>
             </CalendlyButton>
