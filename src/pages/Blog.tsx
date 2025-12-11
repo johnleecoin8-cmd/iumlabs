@@ -3,6 +3,7 @@ import { ArrowUpRight, Calendar, Mail, ChevronLeft, ChevronRight, BookOpen, Tren
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
 import Planet3D from "@/components/Planet3D";

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, Clock, Globe, MessageCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";

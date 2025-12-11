@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useRevealAnimation, useStaggeredReveal } from "@/hooks/useRevealAnimation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
@@ -357,10 +358,10 @@ const Projects = () => {
               <Link
                 key={caseItem.name}
                 to={`/projects/${caseItem.slug}`}
-                className={`group cursor-pointer transition-all duration-500 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                className={`group cursor-pointer reveal-scale ripple-effect ${
+                  isVisible ? 'is-revealed' : ''
                 }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
+                style={{ transitionDelay: `${index * 80}ms` }}
               >
                 <TiltCard
                   className={`relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle}`}

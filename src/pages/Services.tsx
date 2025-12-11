@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ArrowRight, Calendar, Star, Quote, Shield, ExternalLink, Mail, Send, Phone, Lightbulb, Rocket, Target, Globe } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useRevealAnimation, useStaggeredReveal } from "@/hooks/useRevealAnimation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CalendlyButton from "@/components/CalendlyButton";
@@ -272,8 +273,8 @@ const Services = () => {
           {services.map((service, index) => (
             <div
               key={service.id}
-              className={`group py-12 transition-all duration-700 ${
-                servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+              className={`group py-12 reveal-up ${
+                servicesVisible ? 'is-revealed' : ''
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
@@ -281,13 +282,13 @@ const Services = () => {
               <div className="dotted-line-light mb-12" />
               
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                {/* Image */}
+                {/* Image with Enhanced Container */}
                 <div className="lg:col-span-4">
-                  <div className="relative overflow-hidden rounded-2xl aspect-[4/3]">
+                  <div className="img-container-enhanced aspect-[4/3] card-shine">
                     <img 
                       src={service.image} 
                       alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                   </div>
