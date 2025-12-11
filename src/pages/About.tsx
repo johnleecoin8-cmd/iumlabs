@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import { Linkedin, Send, Calendar, Mail, Users, Award, Target } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useRevealAnimation } from "@/hooks/useRevealAnimation";
 import { images } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
 import Planet3D from "@/components/Planet3D";
