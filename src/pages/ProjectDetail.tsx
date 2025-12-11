@@ -25,6 +25,7 @@ const projectsData: Record<string, {
   bgStyle: string;
   description: string;
   challenge: string;
+  metrics: { value: string; label: string }[];
   strategy: string[];
   results: { metric: string; value: string }[];
   services: string[];
@@ -39,6 +40,12 @@ const projectsData: Record<string, {
     bgStyle: "bg-gradient-to-br from-[#F3BA2F] via-[#F0B90B] to-[#C99100]",
     description: "BNB Chain sought to dramatically increase their presence in the Korean market, targeting both retail traders and institutional investors.",
     challenge: "Despite being one of the largest blockchain ecosystems globally, BNB Chain had limited brand recognition in Korea compared to local exchanges. They needed a comprehensive strategy to capture the Korean market while navigating local regulations.",
+    metrics: [
+      { value: "+340%", label: "Trading Volume" },
+      { value: "150K+", label: "Community Growth" },
+      { value: "50+", label: "KOL Partners" },
+      { value: "8 Months", label: "Campaign Period" }
+    ],
     strategy: [
       "Partnered with top Korean crypto influencers for educational content",
       "Organized exclusive community events in Seoul and Busan",
@@ -73,6 +80,12 @@ const projectsData: Record<string, {
     bgStyle: "bg-gradient-to-br from-[#23AF91] via-[#1A9B7F] to-[#147A63]",
     description: "KuCoin aimed to expand their user base in Korea and establish themselves as a trusted global exchange option for Korean traders.",
     challenge: "Competing with established Korean exchanges while building trust with Korean users who typically prefer local platforms. The challenge was to demonstrate KuCoin's unique value proposition.",
+    metrics: [
+      { value: "50K+", label: "New Users" },
+      { value: "10K+", label: "Competition Users" },
+      { value: "100+", label: "Ambassadors" },
+      { value: "6 Months", label: "Campaign Period" }
+    ],
     strategy: [
       "Created localized trading guides and tutorials",
       "Launched Korean-exclusive trading competitions",
@@ -107,6 +120,12 @@ const projectsData: Record<string, {
     bgStyle: "bg-gradient-to-br from-[#8247E5] via-[#7B3FE4] to-[#5A2D9C]",
     description: "Polygon wanted to increase adoption of their Layer 2 solution among Korean DeFi users and developers.",
     challenge: "While Polygon had strong technical credentials, Korean users were unfamiliar with Layer 2 solutions. Education and trust-building were critical.",
+    metrics: [
+      { value: "$2M", label: "TVL in 30 Days" },
+      { value: "15+", label: "dApps Launched" },
+      { value: "500+", label: "Workshop Attendees" },
+      { value: "30 Days", label: "Time to $2M" }
+    ],
     strategy: [
       "Hosted developer workshops and hackathons in Korea",
       "Created educational content explaining L2 benefits",
@@ -141,6 +160,12 @@ const projectsData: Record<string, {
     bgStyle: "bg-gradient-to-br from-[#0A1628] via-[#1E3A5F] to-[#0D1B2A]",
     description: "Ondo Finance aimed to introduce Real World Asset (RWA) tokenization to the Korean market, targeting both retail and institutional investors.",
     challenge: "RWA was a new concept for most Korean crypto investors. Building understanding and trust around tokenized securities required extensive education.",
+    metrics: [
+      { value: "100K+", label: "Community Size" },
+      { value: "1M+", label: "Content Views" },
+      { value: "50+", label: "Institutional Leads" },
+      { value: "5M+", label: "Media Reach" }
+    ],
     strategy: [
       "Produced comprehensive RWA educational content",
       "Hosted seminars with traditional finance professionals",
@@ -175,6 +200,12 @@ const projectsData: Record<string, {
     bgStyle: "bg-gradient-to-br from-[#00E5A0] via-[#00D4AA] to-[#00A080]",
     description: "Peaq aimed to become the leading DePIN (Decentralized Physical Infrastructure Network) platform in Korea.",
     challenge: "DePIN was an emerging narrative with limited awareness. Peaq needed to establish thought leadership while building a strong community.",
+    metrics: [
+      { value: "#1", label: "DePIN Position" },
+      { value: "200+", label: "Developers" },
+      { value: "10+", label: "Partnerships" },
+      { value: "35%", label: "Engagement Rate" }
+    ],
     strategy: [
       "Launched comprehensive DePIN education campaign",
       "Partnered with Korean IoT and mobility companies",
@@ -209,6 +240,12 @@ const projectsData: Record<string, {
     bgStyle: "bg-gradient-to-br from-[#FF6B6B] via-[#E5484D] to-[#C92A2A]",
     description: "Story Protocol sought to onboard Korean content creators to their IP tokenization platform, targeting webtoon artists, musicians, and digital creators.",
     challenge: "Korean creators were unfamiliar with IP tokenization and blockchain technology. Building trust and demonstrating clear value was essential.",
+    metrics: [
+      { value: "5K+", label: "Creators" },
+      { value: "2K+", label: "Workshop Users" },
+      { value: "50+", label: "Ambassadors" },
+      { value: "10K+", label: "Content Created" }
+    ],
     strategy: [
       "Partnered with major Korean content platforms",
       "Created creator-focused educational workshops",
@@ -243,6 +280,12 @@ const projectsData: Record<string, {
     bgStyle: "bg-gradient-to-br from-[#1a1a2e] via-[#3C4DBB] to-[#627EEA]",
     description: "MegaETH aimed to build strong community presence in Korea ahead of their mainnet launch.",
     challenge: "As a new L2 project, MegaETH needed to differentiate from established competitors and build early community momentum.",
+    metrics: [
+      { value: "+500%", label: "Engagement" },
+      { value: "30K+", label: "Community" },
+      { value: "5K+", label: "Testnet Users" },
+      { value: "2M+", label: "Impressions" }
+    ],
     strategy: [
       "Created hype-building pre-launch campaign",
       "Partnered with Korean DeFi protocols for launch support",
@@ -277,6 +320,12 @@ const projectsData: Record<string, {
     bgStyle: "bg-gradient-to-br from-[#FF9500] via-[#FFB347] to-[#FF7F00]",
     description: "Tria wanted to become the go-to Web3 wallet for Korean users with their simplified UX approach.",
     challenge: "Korean users had many wallet options. Tria needed to demonstrate their unique value proposition and ease of use.",
+    metrics: [
+      { value: "30K+", label: "Wallets" },
+      { value: "15K+", label: "Monthly Active" },
+      { value: "20+", label: "dApp Partners" },
+      { value: "65%", label: "Retention" }
+    ],
     strategy: [
       "Launched user acquisition campaigns with incentives",
       "Created Korean-language tutorials and guides",
@@ -311,6 +360,12 @@ const projectsData: Record<string, {
     bgStyle: "bg-gradient-to-br from-[#F7A600] via-[#FFB800] to-[#E69500]",
     description: "Bybit aimed to capture significant market share in the competitive Korean exchange landscape.",
     challenge: "Competing against dominant local exchanges required a sophisticated, multi-channel approach to user acquisition and retention.",
+    metrics: [
+      { value: "#2", label: "Market Position" },
+      { value: "+200%", label: "User Growth" },
+      { value: "500+", label: "VIP Users" },
+      { value: "+45%", label: "Brand Lift" }
+    ],
     strategy: [
       "Launched aggressive trading fee promotions",
       "Created Korean-exclusive trading products",
@@ -392,7 +447,7 @@ const ProjectDetail = () => {
       />
       
       {/* Hero Section */}
-      <section className={`relative min-h-[70vh] ${project.bgStyle} overflow-hidden`}>
+      <section className={`relative min-h-[60vh] ${project.bgStyle} overflow-hidden`}>
         {/* Parallax Effect */}
         <div 
           className="absolute inset-0 bg-black/20"
@@ -400,59 +455,50 @@ const ProjectDetail = () => {
         />
         
         {/* Content */}
-        <div className="relative z-10 container mx-auto max-w-6xl px-4 pt-32 pb-20">
+        <div className="relative z-10 container mx-auto max-w-6xl px-4 pt-28 pb-16">
           {/* Back Button */}
           <button
             onClick={() => navigate("/projects")}
-            className="flex items-center gap-2 text-white/80 hover:text-white mb-12 transition-colors"
+            className="flex items-center gap-2 text-white/80 hover:text-white mb-8 transition-colors"
           >
             <ArrowLeft className="w-5 h-5" />
             <span>Back to Projects</span>
           </button>
 
           {/* Logo & Name */}
-          <div className="flex flex-col items-start gap-6">
+          <div className="flex flex-col items-start gap-4">
             <img
               src={project.logo}
               alt={project.name}
-              className="w-24 h-24 object-contain filter brightness-0 invert"
+              className="w-20 h-20 object-contain filter brightness-0 invert"
             />
             <div>
               <span className="text-white/70 text-sm uppercase tracking-wider mb-2 block">
                 {project.category}
               </span>
-              <h1 className="text-5xl md:text-7xl font-bold text-white mb-4">
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-3">
                 {project.name}
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 max-w-2xl">
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl">
                 {project.description}
               </p>
             </div>
           </div>
 
-          {/* Key Result */}
-          <div className="mt-12 inline-block bg-white/10 backdrop-blur-sm rounded-2xl px-8 py-6">
-            <p className="text-white/70 text-sm uppercase tracking-wider mb-1">Key Result</p>
-            <p className="text-3xl md:text-4xl font-bold text-white">{project.result}</p>
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+            {project.metrics.map((metric, index) => (
+              <div key={index} className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3">
+                <p className="text-2xl md:text-3xl font-bold text-white">{metric.value}</p>
+                <p className="text-white/70 text-sm">{metric.label}</p>
+              </div>
+            ))}
           </div>
-        </div>
-      </section>
 
-      {/* Challenge Section */}
-      <section className="py-24 bg-background">
-        <div className="container mx-auto max-w-6xl px-4">
-          <div className="grid md:grid-cols-2 gap-16">
-            <div>
-              <span className="number-badge text-muted-foreground mb-4 block">[ 01 ]</span>
-              <h2 className="text-4xl md:text-5xl font-light text-foreground mb-6">
-                The <span className="serif-italic">Challenge</span>
-              </h2>
-            </div>
-            <div>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {project.challenge}
-              </p>
-            </div>
+          {/* Challenge Summary */}
+          <div className="mt-8 bg-black/20 backdrop-blur-sm rounded-xl p-5 border border-white/10">
+            <p className="text-white/70 text-sm uppercase tracking-wider mb-2">The Challenge</p>
+            <p className="text-white/90 leading-relaxed">{project.challenge}</p>
           </div>
         </div>
       </section>
@@ -460,7 +506,7 @@ const ProjectDetail = () => {
       {/* Strategy & Services Section */}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto max-w-6xl px-4">
-          <span className="number-badge text-muted-foreground mb-4 block">[ 02 ]</span>
+          <span className="number-badge text-muted-foreground mb-4 block">[ 01 ]</span>
           <h2 className="text-4xl md:text-5xl font-light text-foreground mb-8">
             Our <span className="serif-italic">Strategy</span>
           </h2>
@@ -488,7 +534,7 @@ const ProjectDetail = () => {
       {/* Results Section */}
       <section className="py-24 bg-background">
         <div className="container mx-auto max-w-6xl px-4">
-          <span className="number-badge text-muted-foreground mb-4 block">[ 03 ]</span>
+          <span className="number-badge text-muted-foreground mb-4 block">[ 02 ]</span>
           <h2 className="text-4xl md:text-5xl font-light text-foreground mb-12">
             The <span className="serif-italic">Results</span>
           </h2>
@@ -507,7 +553,7 @@ const ProjectDetail = () => {
       {/* Gallery Section */}
       <section className="py-24 bg-muted/30">
         <div className="container mx-auto max-w-6xl px-4">
-          <span className="number-badge text-muted-foreground mb-4 block">[ 04 ]</span>
+          <span className="number-badge text-muted-foreground mb-4 block">[ 03 ]</span>
           <h2 className="text-4xl md:text-5xl font-light text-foreground mb-12">
             Campaign <span className="serif-italic">Highlights</span>
           </h2>
