@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { X, ArrowLeft } from "lucide-react";
 import { brand, about, images } from "@/config/content";
 
 interface LiveChatModalProps {
@@ -34,8 +34,17 @@ const LiveChatModal = ({ isOpen, onClose }: LiveChatModalProps) => {
 
       {/* Content */}
       <div className="relative h-full flex flex-col">
+        {/* Back Button */}
+        <button
+          onClick={onClose}
+          className="absolute top-6 left-6 z-10 flex items-center gap-2 text-foreground/70 hover:text-foreground transition-colors group"
+        >
+          <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+          <span className="text-sm">Back</span>
+        </button>
+
         {/* Marquee Header */}
-        <div className="bg-muted/30 py-3 overflow-hidden border-b border-border/30">
+        <div className="bg-muted/30 py-3 overflow-hidden border-b border-border/30 mt-14">
           <div className="flex animate-marquee whitespace-nowrap">
             {Array(10).fill(null).map((_, i) => (
               <div key={i} className="flex items-center mx-4">
