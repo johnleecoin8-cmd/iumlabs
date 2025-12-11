@@ -133,12 +133,12 @@ const ServicesSection = () => {
           {/* Featured Card - KOL Marketing */}
           <div
             onClick={() => setSelectedService(featuredService)}
-            className={`group md:col-span-2 lg:col-span-2 lg:row-span-2 relative p-8 md:p-10 rounded-3xl border border-border/30 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm hover:border-primary/50 transition-all duration-500 cursor-pointer overflow-hidden ${
+            className={`animated-border-featured group md:col-span-2 lg:col-span-2 lg:row-span-2 relative p-8 md:p-10 bg-gradient-to-br from-card/80 to-card/40 backdrop-blur-sm transition-all duration-500 cursor-pointer overflow-hidden ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
             }`}
           >
             {/* Background glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/10 via-transparent to-orange-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="absolute -top-24 -right-24 w-64 h-64 bg-primary/10 rounded-full blur-[80px] group-hover:bg-primary/20 transition-colors duration-500" />
             
             <div className="relative z-10">
@@ -195,13 +195,13 @@ const ServicesSection = () => {
             <div
               key={service.id}
               onClick={() => setSelectedService(service)}
-              className={`group relative p-6 md:p-8 rounded-2xl border border-border/30 bg-card/50 backdrop-blur-sm hover:border-primary/30 transition-all duration-500 cursor-pointer overflow-hidden shadow-lg shadow-transparent ${service.glowColor} hover:shadow-2xl ${
+              className={`animated-border-card animated-border-${service.id} group relative p-6 md:p-8 bg-card/50 backdrop-blur-sm transition-all duration-500 cursor-pointer overflow-hidden ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ transitionDelay: `${(index + 1) * 100}ms` }}
             >
               {/* Hover gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-50 transition-opacity duration-500`} />
+              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-50 transition-opacity duration-500`} />
               
               <div className="relative z-10">
                 {/* Icon & Stat Row */}

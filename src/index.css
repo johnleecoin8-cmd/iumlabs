@@ -676,3 +676,154 @@
     transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   }
 }
+
+/* ============================================
+   Animated Gradient Border Cards
+   ============================================ */
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-rotate {
+  0% { --border-angle: 0deg; }
+  100% { --border-angle: 360deg; }
+}
+
+@keyframes border-glow-pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+/* Featured Card - Red/Orange/Crimson gradient */
+.animated-border-featured {
+  position: relative;
+  background: hsl(var(--card));
+  border-radius: 1.5rem;
+  isolation: isolate;
+}
+
+.animated-border-featured::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    var(--border-angle, 0deg),
+    hsl(var(--primary)),
+    hsl(var(--gradient-orange)),
+    hsl(var(--gradient-crimson)),
+    hsl(var(--primary))
+  );
+  animation: border-rotate 4s linear infinite;
+  opacity: 0.5;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+}
+
+.animated-border-featured::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: hsl(var(--card));
+  z-index: -1;
+}
+
+.animated-border-featured:hover::before {
+  opacity: 1;
+  animation: border-rotate 2s linear infinite;
+  filter: blur(4px);
+}
+
+/* Service Cards - Unique gradients per service */
+.animated-border-card {
+  position: relative;
+  background: hsl(var(--card));
+  border-radius: 1rem;
+  isolation: isolate;
+}
+
+.animated-border-card::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  background: var(--card-gradient);
+  animation: border-rotate 6s linear infinite;
+  opacity: 0.3;
+  z-index: -1;
+  transition: all 0.5s ease;
+}
+
+.animated-border-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: hsl(var(--card));
+  z-index: -1;
+}
+
+.animated-border-card:hover::before {
+  opacity: 1;
+  animation: border-rotate 2s linear infinite;
+  filter: blur(2px);
+}
+
+/* Community Building - Blue/Cyan */
+.animated-border-community-building {
+  --card-gradient: linear-gradient(
+    var(--border-angle, 0deg),
+    hsl(210, 100%, 50%),
+    hsl(190, 100%, 50%),
+    hsl(200, 100%, 60%),
+    hsl(210, 100%, 50%)
+  );
+}
+
+/* PR & Media - Purple/Pink */
+.animated-border-pr-media {
+  --card-gradient: linear-gradient(
+    var(--border-angle, 0deg),
+    hsl(280, 80%, 55%),
+    hsl(330, 80%, 55%),
+    hsl(300, 80%, 60%),
+    hsl(280, 80%, 55%)
+  );
+}
+
+/* GTM Strategy - Green/Emerald */
+.animated-border-gtm-strategy {
+  --card-gradient: linear-gradient(
+    var(--border-angle, 0deg),
+    hsl(140, 70%, 45%),
+    hsl(160, 80%, 45%),
+    hsl(150, 75%, 50%),
+    hsl(140, 70%, 45%)
+  );
+}
+
+/* VASP Acquisition - Yellow/Amber */
+.animated-border-vasp-acquisition {
+  --card-gradient: linear-gradient(
+    var(--border-angle, 0deg),
+    hsl(45, 95%, 50%),
+    hsl(35, 95%, 55%),
+    hsl(40, 95%, 55%),
+    hsl(45, 95%, 50%)
+  );
+}
+
+/* Event Management - Pink/Rose */
+.animated-border-event-management {
+  --card-gradient: linear-gradient(
+    var(--border-angle, 0deg),
+    hsl(340, 80%, 55%),
+    hsl(350, 80%, 60%),
+    hsl(0, 75%, 60%),
+    hsl(340, 80%, 55%)
+  );
+}
