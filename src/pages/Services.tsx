@@ -3,7 +3,7 @@ import { ArrowRight, Calendar, Star, Quote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+
 import CalendlyButton from "@/components/CalendlyButton";
 import Planet3D from "@/components/Planet3D";
 import sunCorona from "@/assets/backgrounds/sun-corona.jpg";
@@ -506,7 +506,7 @@ const Services = () => {
         </div>
       </section>
 
-      <CTASection />
+      
       <Footer />
     </div>
   );

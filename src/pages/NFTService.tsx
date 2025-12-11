@@ -3,7 +3,7 @@ import { Palette, Users, Megaphone, BarChart3, Check, Calendar, ArrowRight, Quot
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+
 import CalendlyButton from "@/components/CalendlyButton";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import constellationSpace from "@/assets/constellation-space.jpg";
@@ -280,7 +280,7 @@ const NFTService = () => {
         </div>
       </section>
 
-      <CTASection />
+      
       <Footer />
     </div>
   );

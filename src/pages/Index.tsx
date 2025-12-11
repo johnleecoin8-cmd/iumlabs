@@ -5,7 +5,7 @@ import CasesSection from "@/components/CasesSection";
 import ServicesSection from "@/components/ServicesSection";
 import TeamSection from "@/components/TeamSection";
 import BlogPreviewSection from "@/components/BlogPreviewSection";
-import CTASection from "@/components/CTASection";
+
 import Footer from "@/components/Footer";
 import SectionIndicator from "@/components/SectionIndicator";
 import useScrollReveal from "@/hooks/useScrollReveal";
@@ -42,9 +42,6 @@ const Index = () => {
         <BlogPreviewSection />
       </section>
       
-      <section className="screen-8 scroll-reveal" id="contact">
-        <CTASection />
-      </section>
       
       <Footer />
     </div>
