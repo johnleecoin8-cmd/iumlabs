@@ -9,7 +9,7 @@ import kucoinLogo from "@/assets/logos/kucoin.svg";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
-import peaqLogo from "@/assets/logos/peaq.png";
+import peaqLogo from "@/assets/logos/peaq.svg";
 import storyProtocolLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
