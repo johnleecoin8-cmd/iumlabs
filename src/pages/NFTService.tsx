@@ -1,121 +1,214 @@
-import { ArrowRight, Check, Palette, Users, Megaphone, BarChart3 } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Palette, Users, Megaphone, BarChart3, Check, Calendar, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PageTransition from "@/components/PageTransition";
-import FAQSection from "@/components/FAQSection";
+import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import constellationSpace from "@/assets/constellation-space.jpg";
 
 const nftServices = [
   {
+    number: "01",
     icon: Palette,
-    title: "아트 & 컬렉션 전략",
-    description: "NFT 아트워크 방향성, 로드맵 설계, 유틸리티 기획",
+    title: "Art & Collection Strategy",
+    description: "NFT artwork direction, roadmap design, utility planning",
   },
   {
+    number: "02",
     icon: Users,
-    title: "커뮤니티 빌딩",
-    description: "Discord/Twitter 셋업, 화이트리스트 관리, 커뮤니티 이벤트",
+    title: "Community Building",
+    description: "Discord/Twitter setup, whitelist management, community events",
   },
   {
+    number: "03",
     icon: Megaphone,
-    title: "인플루언서 마케팅",
-    description: "NFT/크립토 KOL 협업, 콜라보레이션, 바이럴 캠페인",
+    title: "Influencer Marketing",
+    description: "NFT/Crypto KOL collaboration, partnerships, viral campaigns",
   },
   {
+    number: "04",
     icon: BarChart3,
-    title: "민팅 & 세컨더리",
-    description: "민팅 전략, 가격 책정, 세컨더리 마켓 관리",
+    title: "Minting & Secondary",
+    description: "Minting strategy, pricing, secondary market management",
   },
 ];
 
 const nftFeatures = [
-  "화이트리스트 캠페인 기획 및 운영",
-  "Discord 서버 셋업 및 24/7 관리",
-  "Twitter Spaces & AMA 세션",
-  "크립토 미디어 PR (국내/해외)",
-  "NFT 마켓플레이스 리스팅 지원",
-  "콜라보레이션 & 파트너십",
-  "민팅 웹사이트 제작",
-  "세컨더리 마켓 프로모션",
+  "Whitelist Campaign Planning & Management",
+  "Discord Server Setup & 24/7 Management",
+  "Twitter Spaces & AMA Sessions",
+  "Crypto Media PR (Local/Global)",
+  "NFT Marketplace Listing Support",
+  "Collaborations & Partnerships",
+  "Minting Website Development",
+  "Secondary Market Promotion",
+];
+
+const floatingTags = [
+  { label: "PFP Collection", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%" },
+  { label: "Whitelist", top: "28%", right: "8%", mobileTop: "15%", mobileRight: "3%" },
+  { label: "Discord", top: "52%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
+  { label: "OpenSea", bottom: "32%", right: "6%", mobileBottom: "18%", mobileRight: "3%" },
 ];
 
 const NFTService = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background">
       <Navbar />
-      <PageTransition>
-        {/* Hero */}
-        <section className="pt-32 pb-16 px-4 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
-          <div className="container mx-auto max-w-4xl text-center relative">
-            <span className="text-sm font-medium text-primary mb-4 block tracking-wider uppercase">
-              NFT Marketing
+      
+      {/* Hero - Full Screen with Parallax Background */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background Image with Parallax */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-100"
+          style={{ 
+            backgroundImage: `url(${constellationSpace})`,
+            filter: "brightness(0.35) saturate(1.2)",
+            transform: `translateY(${scrollY * 0.3}px) scale(1.1)`
+          }}
+        />
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.4)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+        
+        {/* Floating Tags */}
+        <div>
+          {floatingTags.map((tag, index) => (
+            <span
+              key={tag.label}
+              className="lunar-tag-dark absolute animate-float hidden sm:block"
+              style={{
+                top: tag.top,
+                left: tag.left,
+                right: tag.right,
+                bottom: tag.bottom,
+                animationDelay: `${index * 0.5}s`,
+              }}
+            >
+              {tag.label}
             </span>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-gradient">NFT 마케팅</span> 전문 서비스
+          ))}
+          {floatingTags.slice(0, 3).map((tag, index) => (
+            <span
+              key={`mobile-${tag.label}`}
+              className="lunar-tag-dark absolute animate-float sm:hidden"
+              style={{
+                top: tag.mobileTop,
+                left: tag.mobileLeft,
+                right: tag.mobileRight,
+                bottom: tag.mobileBottom,
+                animationDelay: `${index * 0.5}s`,
+              }}
+            >
+              {tag.label}
+            </span>
+          ))}
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
+          <div className="mb-16">
+            <span className="text-sm text-white/50 mb-4 block">[ NFT Marketing ]</span>
+            <h1 className="text-[12vw] md:text-[120px] lg:text-[150px] font-light text-white leading-[0.85] tracking-tight">
+              NF<span className="serif-italic text-primary">T</span>s
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              성공적인 NFT 컬렉션 런칭부터 장기적인 커뮤니티 성장까지,<br />
-              NFT 프로젝트를 위한 풀서비스 마케팅 솔루션
+          </div>
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10">
+            <p className="text-lg text-white/60 max-w-xl">
+              From successful NFT collection launches to long-term community growth — full-service marketing for NFT projects.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <CalendlyButton size="lg" />
-              <Link to="/contact">
-                <button className="px-8 py-3 border border-primary/50 rounded-lg text-primary hover:bg-primary/10 transition-colors">
-                  문의하기
-                </button>
-              </Link>
-            </div>
+            <CalendlyButton className="lunar-btn">
+              <Calendar className="w-4 h-4" />
+              <span>Book a Consultation</span>
+            </CalendlyButton>
           </div>
-        </section>
+        </div>
 
-        {/* Services Grid */}
-        <section ref={ref} className="py-24 px-4">
-          <div className="container mx-auto max-w-6xl">
-            <div className={`grid md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {nftServices.map((service, index) => (
-                <div 
-                  key={index}
-                  className="glass-card border border-border/50 rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group"
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/30">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
+        </div>
+      </section>
+
+      {/* Services Grid - Light Theme */}
+      <section ref={ref} className="section-light py-24 px-4">
+        <div className="container mx-auto max-w-7xl">
+          <div className="grid md:grid-cols-2 gap-8">
+            {nftServices.map((service, index) => {
+              const IconComponent = service.icon;
+              return (
+                <div
+                  key={service.number}
+                  className={`group bg-white border border-[hsl(var(--light-fg),0.1)] rounded-2xl p-8 hover:border-primary/30 hover:shadow-xl transition-all duration-500 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  }`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <service.icon className="w-6 h-6 text-primary" />
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-sm text-[hsl(var(--light-fg),0.4)]">[ {service.number} ]</span>
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                      <IconComponent className="w-5 h-5" />
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold mb-2">{service.title}</h3>
-                  <p className="text-sm text-muted-foreground">{service.description}</p>
+                  <h3 className="text-xl font-medium text-[hsl(var(--light-fg))] mb-3 group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-[hsl(var(--light-fg),0.6)] text-sm">
+                    {service.description}
+                  </p>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Features */}
-        <section className="py-24 px-4 bg-muted/30">
-          <div className="container mx-auto max-w-4xl">
-            <h2 className="text-3xl font-bold text-center mb-12">
-              NFT 마케팅 <span className="text-gradient">상세 서비스</span>
+      {/* Features - Dark Theme */}
+      <section className="section-dark py-24 px-4">
+        <div className="container mx-auto max-w-5xl">
+          <div className="mb-12">
+            <span className="text-sm text-white/50 mb-4 block">[ What's Included ]</span>
+            <h2 className="text-4xl md:text-5xl font-light text-white">
+              NFT Marketing <span className="serif-italic">Services</span>
             </h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              {nftFeatures.map((feature, index) => (
-                <div 
-                  key={index}
-                  className="flex items-center gap-3 p-4 glass-card rounded-xl"
-                >
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span>{feature}</span>
-                </div>
-              ))}
-            </div>
           </div>
-        </section>
+          
+          <div className="grid md:grid-cols-2 gap-4">
+            {nftFeatures.map((feature, index) => (
+              <div 
+                key={index}
+                className="flex items-center gap-4 p-4 border border-white/10 rounded-xl hover:border-white/20 transition-colors"
+              >
+                <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                <span className="text-white/80">{feature}</span>
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-12 flex justify-center">
+            <Link to="/contact" className="lunar-btn-outline group">
+              <span>Get Started</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
-        <FAQSection />
-        <Footer />
-      </PageTransition>
+      <CTASection />
+      <Footer />
     </div>
   );
 };

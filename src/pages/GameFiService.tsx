@@ -1,121 +1,214 @@
-import { ArrowRight, Check, Gamepad2, Users, Trophy, Video } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Gamepad2, Video, Trophy, Users, Check, Calendar, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PageTransition from "@/components/PageTransition";
-import FAQSection from "@/components/FAQSection";
+import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import moonBackground from "@/assets/moon-background.jpg";
 
 const gamefiServices = [
   {
+    number: "01",
     icon: Gamepad2,
-    title: "게임 길드 파트너십",
-    description: "YGG, Merit Circle 등 주요 길드와의 협업 및 스칼라십 프로그램",
+    title: "Guild Partnerships",
+    description: "Collaboration with major guilds like YGG, Merit Circle and scholarship programs",
   },
   {
+    number: "02",
     icon: Video,
-    title: "스트리머 마케팅",
-    description: "게임 스트리머, 유튜버 협업, 라이브 스트리밍 이벤트",
+    title: "Streamer Marketing",
+    description: "Gaming streamer & YouTuber collaborations, live streaming events",
   },
   {
+    number: "03",
     icon: Trophy,
-    title: "e스포츠 & 대회",
-    description: "게임 토너먼트 기획, e스포츠 팀 스폰서십, 대회 운영",
+    title: "Esports & Tournaments",
+    description: "Game tournament planning, esports team sponsorship, competition management",
   },
   {
+    number: "04",
     icon: Users,
-    title: "플레이어 커뮤니티",
-    description: "게이머 커뮤니티 빌딩, 피드백 관리, 업데이트 커뮤니케이션",
+    title: "Player Community",
+    description: "Gamer community building, feedback management, update communication",
   },
 ];
 
 const gamefiFeatures = [
-  "게임 길드 파트너십 & 스칼라십",
-  "트위치/유튜브 스트리머 협업",
-  "게임 토너먼트 기획 및 운영",
-  "게임 미디어 PR",
-  "앱스토어 최적화 (ASO)",
-  "사전등록 캠페인",
-  "인게임 이벤트 기획",
-  "플레이어 리텐션 전략",
+  "Gaming Guild Partnerships & Scholarships",
+  "Twitch/YouTube Streamer Collaborations",
+  "Game Tournament Planning & Management",
+  "Gaming Media PR",
+  "App Store Optimization (ASO)",
+  "Pre-registration Campaigns",
+  "In-game Event Planning",
+  "Player Retention Strategies",
+];
+
+const floatingTags = [
+  { label: "P2E", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%" },
+  { label: "Gaming Guild", top: "28%", right: "8%", mobileTop: "15%", mobileRight: "3%" },
+  { label: "Esports", top: "52%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
+  { label: "Streaming", bottom: "32%", right: "6%", mobileBottom: "18%", mobileRight: "3%" },
 ];
 
 const GameFiService = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="min-h-screen bg-background">
       <Navbar />
-      <PageTransition>
-        {/* Hero */}
-        <section className="pt-32 pb-16 px-4 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent" />
-          <div className="container mx-auto max-w-4xl text-center relative">
-            <span className="text-sm font-medium text-primary mb-4 block tracking-wider uppercase">
-              GameFi Marketing
+      
+      {/* Hero - Full Screen with Parallax Background */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background Image with Parallax */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-100"
+          style={{ 
+            backgroundImage: `url(${moonBackground})`,
+            filter: "brightness(0.35) saturate(1.1)",
+            transform: `translateY(${scrollY * 0.3}px) scale(1.1)`
+          }}
+        />
+        
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.4)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+        
+        {/* Floating Tags */}
+        <div>
+          {floatingTags.map((tag, index) => (
+            <span
+              key={tag.label}
+              className="lunar-tag-dark absolute animate-float hidden sm:block"
+              style={{
+                top: tag.top,
+                left: tag.left,
+                right: tag.right,
+                bottom: tag.bottom,
+                animationDelay: `${index * 0.5}s`,
+              }}
+            >
+              {tag.label}
             </span>
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              <span className="text-gradient">GameFi 마케팅</span> 전문 서비스
+          ))}
+          {floatingTags.slice(0, 3).map((tag, index) => (
+            <span
+              key={`mobile-${tag.label}`}
+              className="lunar-tag-dark absolute animate-float sm:hidden"
+              style={{
+                top: tag.mobileTop,
+                left: tag.mobileLeft,
+                right: tag.mobileRight,
+                bottom: tag.mobileBottom,
+                animationDelay: `${index * 0.5}s`,
+              }}
+            >
+              {tag.label}
+            </span>
+          ))}
+        </div>
+
+        {/* Content */}
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
+          <div className="mb-16">
+            <span className="text-sm text-white/50 mb-4 block">[ GameFi Marketing ]</span>
+            <h1 className="text-[12vw] md:text-[120px] lg:text-[150px] font-light text-white leading-[0.85] tracking-tight">
+              Game<span className="serif-italic text-primary">F</span>i
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-              P2E 게임의 글로벌 런칭부터 지속적인 플레이어 확보까지,<br />
-              GameFi 프로젝트를 위한 종합 마케팅 솔루션
+          </div>
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10">
+            <p className="text-lg text-white/60 max-w-xl">
+              From P2E game global launches to continuous player acquisition — comprehensive marketing for GameFi projects.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <CalendlyButton size="lg" />
-              <Link to="/contact">
-                <button className="px-8 py-3 border border-primary/50 rounded-lg text-primary hover:bg-primary/10 transition-colors">
-                  문의하기
-                </button>
-              </Link>
-            </div>
+            <CalendlyButton className="lunar-btn">
+              <Calendar className="w-4 h-4" />
+              <span>Book a Consultation</span>
+            </CalendlyButton>
           </div>
-        </section>
+        </div>
 
-        {/* Services Grid */}
-        <section ref={ref} className="py-24 px-4">
-          <div className="container mx-auto max-w-6xl">
-            <div className={`grid md:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              {gamefiServices.map((service, index) => (
-                <div 
-                  key={index}
-                  className="glass-card border border-border/50 rounded-2xl p-6 hover:border-primary/50 transition-all duration-300 group"
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/30">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
+        </div>
+      </section>
+
+      {/* Services Grid - Light Theme */}
+      <section ref={ref} className="section-light py-24 px-4">
+        <div className="container mx-auto max-w-7xl">
+          <div className="grid md:grid-cols-2 gap-8">
+            {gamefiServices.map((service, index) => {
+              const IconComponent = service.icon;
+              return (
+                <div
+                  key={service.number}
+                  className={`group bg-white border border-[hsl(var(--light-fg),0.1)] rounded-2xl p-8 hover:border-primary/30 hover:shadow-xl transition-all duration-500 ${
+                    isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                  }`}
+                  style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                    <service.icon className="w-6 h-6 text-primary" />
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="text-sm text-[hsl(var(--light-fg),0.4)]">[ {service.number} ]</span>
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+                      <IconComponent className="w-5 h-5" />
+                    </div>
                   </div>
-                  <h3 className="text-lg font-bold mb-2">{service.title}</h3>
-                  <p className="text-sm text-muted-foreground">{service.description}</p>
+                  <h3 className="text-xl font-medium text-[hsl(var(--light-fg))] mb-3 group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-[hsl(var(--light-fg),0.6)] text-sm">
+                    {service.description}
+                  </p>
                 </div>
-              ))}
-            </div>
+              );
+            })}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Features */}
-        <section className="py-24 px-4 bg-muted/30">
-          <div className="container mx-auto max-w-4xl">
-            <h2 className="text-3xl font-bold text-center mb-12">
-              GameFi 마케팅 <span className="text-gradient">상세 서비스</span>
+      {/* Features - Dark Theme */}
+      <section className="section-dark py-24 px-4">
+        <div className="container mx-auto max-w-5xl">
+          <div className="mb-12">
+            <span className="text-sm text-white/50 mb-4 block">[ What's Included ]</span>
+            <h2 className="text-4xl md:text-5xl font-light text-white">
+              GameFi Marketing <span className="serif-italic">Services</span>
             </h2>
-            <div className="grid md:grid-cols-2 gap-4">
-              {gamefiFeatures.map((feature, index) => (
-                <div 
-                  key={index}
-                  className="flex items-center gap-3 p-4 glass-card rounded-xl"
-                >
-                  <Check className="w-5 h-5 text-primary flex-shrink-0" />
-                  <span>{feature}</span>
-                </div>
-              ))}
-            </div>
           </div>
-        </section>
+          
+          <div className="grid md:grid-cols-2 gap-4">
+            {gamefiFeatures.map((feature, index) => (
+              <div 
+                key={index}
+                className="flex items-center gap-4 p-4 border border-white/10 rounded-xl hover:border-white/20 transition-colors"
+              >
+                <Check className="w-5 h-5 text-primary flex-shrink-0" />
+                <span className="text-white/80">{feature}</span>
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-12 flex justify-center">
+            <Link to="/contact" className="lunar-btn-outline group">
+              <span>Get Started</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
 
-        <FAQSection />
-        <Footer />
-      </PageTransition>
+      <CTASection />
+      <Footer />
     </div>
   );
 };
