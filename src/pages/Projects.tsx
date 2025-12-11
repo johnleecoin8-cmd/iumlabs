@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import TiltCard from "@/components/TiltCard";
-import { ArrowUpRight, Calendar } from "lucide-react";
+import { ArrowUpRight, Calendar, Star, Quote, Filter } from "lucide-react";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
 import Planet3D from "@/components/Planet3D";
@@ -21,10 +21,24 @@ import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
 import bybitLogo from "@/assets/logos/bybit.png";
 
+// Import campaign images
+import bnbCampaign from "@/assets/campaigns/bnb-event.jpg";
+import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
+import polygonCampaign from "@/assets/campaigns/polygon-hackathon.jpg";
+import ondoCampaign from "@/assets/campaigns/ondo-seminar.jpg";
+import peaqCampaign from "@/assets/campaigns/peaq-summit.jpg";
+import storyCampaign from "@/assets/campaigns/story-workshop.jpg";
+import megaethCampaign from "@/assets/campaigns/megaeth-launch.jpg";
+import triaCampaign from "@/assets/campaigns/tria-launch.jpg";
+import bybitCampaign from "@/assets/campaigns/bybit-competition.jpg";
+
+const categories = ["All", "Infrastructure", "Exchange", "Layer 2", "RWA", "DePIN", "Wallet"];
+
 const cases = [
   {
     name: "BNB Chain",
     logo: bnbLogo,
+    image: bnbCampaign,
     slug: "bnb-chain",
     result: "+340% Korean Trading Volume",
     category: "Infrastructure",
@@ -36,6 +50,7 @@ const cases = [
   {
     name: "KuCoin",
     logo: kucoinLogo,
+    image: kucoinCampaign,
     slug: "kucoin",
     result: "50K+ New Korean Users",
     category: "Exchange",
@@ -47,6 +62,7 @@ const cases = [
   {
     name: "Polygon",
     logo: polygonLogo,
+    image: polygonCampaign,
     slug: "polygon",
     result: "$2M Korean TVL in 30 Days",
     category: "Layer 2",
@@ -58,6 +74,7 @@ const cases = [
   {
     name: "Ondo Finance",
     logo: ondoLogo,
+    image: ondoCampaign,
     slug: "ondo",
     result: "100K+ Korean Community",
     category: "RWA",
@@ -69,6 +86,7 @@ const cases = [
   {
     name: "Peaq",
     logo: peaqLogo,
+    image: peaqCampaign,
     slug: "peaq",
     result: "#1 DePIN in Korea",
     category: "DePIN",
@@ -80,9 +98,10 @@ const cases = [
   {
     name: "Story Protocol",
     logo: storyLogo,
+    image: storyCampaign,
     slug: "story-protocol",
     result: "5K+ Korean Creators",
-    category: "IP Protocol",
+    category: "Infrastructure",
     bgStyle: "bg-gradient-to-br from-[#FF6B6B] via-[#E5484D] to-[#C92A2A]",
     decorations: "story",
     description: "Korean content creator onboarding for IP tokenization platform targeting webtoon and music artists.",
@@ -91,6 +110,7 @@ const cases = [
   {
     name: "MegaETH",
     logo: megaethLogo,
+    image: megaethCampaign,
     slug: "megaeth",
     result: "+500% Korean Engagement",
     category: "Layer 2",
@@ -102,6 +122,7 @@ const cases = [
   {
     name: "Tria",
     logo: triaLogo,
+    image: triaCampaign,
     slug: "tria",
     result: "30K+ Korean Wallets",
     category: "Wallet",
@@ -113,6 +134,7 @@ const cases = [
   {
     name: "Bybit",
     logo: bybitLogo,
+    image: bybitCampaign,
     slug: "bybit",
     result: "#2 Korean Exchange Traffic",
     category: "Exchange",
@@ -123,124 +145,22 @@ const cases = [
   },
 ];
 
-// Unique decorative elements for each card
-const CardDecorations = ({ type }: { type: string }) => {
-  switch (type) {
-    case "bnb":
-      return (
-        <>
-          <div className="absolute inset-0 opacity-20">
-            <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <pattern id="hexagons-projects" width="20" height="17.32" patternUnits="userSpaceOnUse">
-                  <polygon points="10,0 20,5 20,15 10,17.32 0,15 0,5" fill="none" stroke="white" strokeWidth="0.5" />
-                </pattern>
-              </defs>
-              <rect width="100" height="100" fill="url(#hexagons-projects)" />
-            </svg>
-          </div>
-          <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-radial from-yellow-200/40 to-transparent blur-2xl" />
-        </>
-      );
-    case "kucoin":
-      return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,50 Q25,30 50,50 T100,50" stroke="white" strokeWidth="0.5" fill="none" />
-            <path d="M0,60 Q25,40 50,60 T100,60" stroke="white" strokeWidth="0.5" fill="none" />
-          </svg>
-          <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-gradient-to-t from-emerald-300/30 to-transparent" />
-        </>
-      );
-    case "polygon":
-      return (
-        <>
-          <div className="absolute top-10 right-10 w-16 h-16 rotate-45 border-2 border-white/30" />
-          <div className="absolute bottom-20 left-16 w-12 h-12 rotate-45 bg-white/10" />
-          <div className="absolute -top-10 left-1/3 w-40 h-40 rounded-full bg-purple-400/30 blur-3xl" />
-        </>
-      );
-    case "ondo":
-      return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,80 L20,70 L40,75 L60,50 L80,55 L100,30" stroke="#3B82F6" strokeWidth="1" fill="none" />
-          </svg>
-          <div className="absolute inset-0 opacity-10">
-            <div className="w-full h-full" style={{ 
-              backgroundImage: 'linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.3) 1px, transparent 1px)',
-              backgroundSize: '20px 20px'
-            }} />
-          </div>
-        </>
-      );
-    case "peaq":
-      return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100">
-            <circle cx="20" cy="30" r="3" fill="#00FF9D" />
-            <circle cx="80" cy="20" r="2" fill="#00FF9D" />
-            <circle cx="60" cy="70" r="4" fill="#00FF9D" />
-            <line x1="20" y1="30" x2="80" y2="20" stroke="#00FF9D" strokeWidth="0.5" />
-            <line x1="20" y1="30" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
-          </svg>
-          <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full bg-green-400/20 blur-3xl" />
-        </>
-      );
-    case "story":
-      return (
-        <>
-          <div className="absolute top-8 right-8 w-20 h-28 bg-white/10 rounded-sm transform rotate-6" />
-          <div className="absolute top-10 right-10 w-20 h-28 bg-white/15 rounded-sm transform rotate-3" />
-          <div className="absolute bottom-10 left-10 w-24 h-24 rounded-full bg-gradient-to-r from-red-300/40 to-pink-300/30" />
-        </>
-      );
-    case "megaeth":
-      return (
-        <>
-          <div className="absolute top-1/4 left-0 w-full h-px bg-gradient-to-r from-blue-400/60 via-transparent to-transparent transform -rotate-2" />
-          <div className="absolute top-1/3 left-0 w-3/4 h-px bg-gradient-to-r from-blue-300/40 via-transparent to-transparent" />
-          <div className="absolute -top-20 right-0 w-60 h-60 bg-gradient-to-bl from-blue-400/40 to-transparent blur-2xl" />
-        </>
-      );
-    case "tria":
-      return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100">
-            {[...Array(12)].map((_, i) => (
-              <line
-                key={i}
-                x1="50"
-                y1="50"
-                x2={50 + 45 * Math.cos((i * 30 * Math.PI) / 180)}
-                y2={50 + 45 * Math.sin((i * 30 * Math.PI) / 180)}
-                stroke="white"
-                strokeWidth="0.5"
-              />
-            ))}
-          </svg>
-          <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full bg-gradient-to-t from-orange-300/40 to-amber-200/20" />
-        </>
-      );
-    case "bybit":
-      return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,90 L30,70 L50,75 L70,40 L100,20" stroke="#FFD700" strokeWidth="2" fill="none" />
-            <path d="M0,90 L30,70 L50,75 L70,40 L100,20 L100,100 L0,100 Z" fill="url(#goldGradient-projects)" />
-            <defs>
-              <linearGradient id="goldGradient-projects" x1="0%" y1="0%" x2="0%" y2="100%">
-                <stop offset="0%" stopColor="rgba(255,215,0,0.3)" />
-                <stop offset="100%" stopColor="transparent" />
-              </linearGradient>
-            </defs>
-          </svg>
-        </>
-      );
-    default:
-      return null;
-  }
-};
+const testimonials = [
+  {
+    name: "Alex Chen",
+    role: "CEO, MetaVerse Korea",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+    content: "CryptoBridge helped us raise $12M and build a community of 50K+ members in just 3 months.",
+    rating: 5,
+  },
+  {
+    name: "Sarah Kim",
+    role: "Founder, KimchiSwap",
+    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=face",
+    content: "The team's DeFi expertise helped us achieve $100M TVL within the first month of launch.",
+    rating: 5,
+  },
+];
 
 const stats = [
   { value: "$500M+", label: "Total Value Marketed" },
@@ -262,13 +182,19 @@ const floatingTags = [
 
 const Projects = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const { ref: testimonialsRef, isVisible: testimonialsVisible } = useScrollAnimation();
   const [scrollY, setScrollY] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const filteredCases = selectedCategory === "All" 
+    ? cases 
+    : cases.filter(c => c.category === selectedCategory);
 
   return (
     <div className="min-h-screen bg-background">
@@ -375,11 +301,36 @@ const Projects = () => {
         </div>
       </section>
 
+      {/* Filter Section */}
+      <section className="bg-background py-8 px-4 sticky top-0 z-30 border-b border-white/10">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex items-center gap-4 overflow-x-auto pb-2 scrollbar-hide">
+            <div className="flex items-center gap-2 text-white/40 shrink-0">
+              <Filter className="w-4 h-4" />
+              <span className="text-sm">Filter:</span>
+            </div>
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                  selectedCategory === category
+                    ? 'bg-primary text-white'
+                    : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Projects Grid - Saturn Theme */}
-      <section ref={ref} className="section-saturn-dark section-stars py-24 px-4">
+      <section ref={ref} className="section-saturn-dark section-stars py-16 px-4">
         <div className="container mx-auto max-w-7xl relative z-10">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cases.map((caseItem, index) => (
+            {filteredCases.map((caseItem, index) => (
               <Link
                 key={caseItem.name}
                 to={`/projects/${caseItem.slug}`}
@@ -389,64 +340,122 @@ const Projects = () => {
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <TiltCard
-                  className={`relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle} mb-4`}
+                  className={`relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle}`}
                   max={12}
                   scale={1.03}
                   speed={300}
                 >
-                  {/* Unique Decorations */}
-                  <CardDecorations type={caseItem.decorations} />
+                  {/* Background Image */}
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center opacity-40 group-hover:opacity-60 group-hover:scale-110 transition-all duration-700"
+                    style={{ backgroundImage: `url(${caseItem.image})` }}
+                  />
+                  
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
                   {/* Content */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-10">
-                    {/* Logo */}
-                    <img
-                      src={caseItem.logo}
-                      alt={caseItem.name}
-                      className="w-16 h-16 md:w-20 md:h-20 object-contain filter brightness-0 invert mb-4 group-hover:scale-110 transition-transform duration-300"
-                    />
+                  <div className="absolute inset-0 flex flex-col p-6 z-10">
+                    {/* Category Badge */}
+                    <div className="flex justify-between items-start">
+                      <span className="px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-xs text-white font-medium">
+                        {caseItem.category}
+                      </span>
+                      <ArrowUpRight className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-all transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+                    </div>
                     
-                    {/* Project Name */}
-                    <h3 className="text-white text-2xl md:text-3xl font-bold text-center tracking-tight drop-shadow-lg">
-                      {caseItem.name}
-                    </h3>
-                  </div>
-
-                  {/* Bottom Info - Result */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-white text-sm font-semibold text-center">
-                      {caseItem.result}
-                    </p>
-                    <p className="text-white/70 text-xs text-center mt-1 uppercase tracking-wider">
-                      {caseItem.category}
-                    </p>
-                  </div>
-
-                  {/* Hover Arrow */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <ArrowUpRight className="w-5 h-5 text-white" />
+                    {/* Logo */}
+                    <div className="flex-1 flex items-center justify-center">
+                      <img
+                        src={caseItem.logo}
+                        alt={caseItem.name}
+                        className="h-16 md:h-20 w-auto object-contain filter brightness-0 invert drop-shadow-2xl group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                    
+                    {/* Bottom Info */}
+                    <div>
+                      <h3 className="text-white text-xl font-medium mb-2">{caseItem.name}</h3>
+                      <p className="text-white/60 text-sm mb-3 line-clamp-2">{caseItem.description}</p>
+                      
+                      {/* Service Tags */}
+                      <div className="flex flex-wrap gap-1.5 mb-3">
+                        {caseItem.services.slice(0, 3).map((service) => (
+                          <span 
+                            key={service}
+                            className="px-2 py-0.5 bg-white/10 rounded text-xs text-white/70"
+                          >
+                            {service}
+                          </span>
+                        ))}
+                      </div>
+                      
+                      {/* Result */}
+                      <div className="text-primary font-semibold">{caseItem.result}</div>
                     </div>
                   </div>
-
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider">
-                      {caseItem.category}
-                    </span>
-                  </div>
                 </TiltCard>
-
-                {/* Text Below Card */}
-                <div className="px-2">
-                  <h3 className="text-xl font-medium text-white mb-1 group-hover:text-primary transition-colors">
-                    {caseItem.name}
-                  </h3>
-                  <p className="text-white/50 text-sm line-clamp-2">
-                    {caseItem.description}
-                  </p>
-                </div>
               </Link>
+            ))}
+          </div>
+
+          {/* Empty State */}
+          {filteredCases.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-white/50 text-lg">No projects found in this category.</p>
+              <button 
+                onClick={() => setSelectedCategory("All")}
+                className="mt-4 text-primary hover:underline"
+              >
+                View all projects
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section ref={testimonialsRef} className="section-saturn-light py-24 px-4">
+        <div className="container mx-auto max-w-7xl relative z-10">
+          <div className={`mb-12 transition-all duration-700 ${
+            testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+          }`}>
+            <span className="text-[hsl(0,0%,40%)] text-sm font-mono mb-4 block">[ Client Success ]</span>
+            <h2 className="text-4xl md:text-5xl font-light text-[hsl(0,0%,8%)]">
+              What our <span className="serif-italic text-primary">clients</span> say
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={index}
+                className={`bg-white rounded-2xl p-8 shadow-lg border border-slate-100 transition-all duration-500 ${
+                  testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+                style={{ transitionDelay: `${index * 150}ms` }}
+              >
+                <Quote className="w-10 h-10 text-primary/20 mb-4" />
+                <p className="text-[hsl(0,0%,30%)] text-lg leading-relaxed mb-6">
+                  "{testimonial.content}"
+                </p>
+                <div className="flex items-center gap-1 mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-amber-400 fill-amber-400" />
+                  ))}
+                </div>
+                <div className="flex items-center gap-4">
+                  <img
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover"
+                  />
+                  <div>
+                    <div className="font-medium text-[hsl(0,0%,8%)]">{testimonial.name}</div>
+                    <div className="text-sm text-[hsl(0,0%,50%)]">{testimonial.role}</div>
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
