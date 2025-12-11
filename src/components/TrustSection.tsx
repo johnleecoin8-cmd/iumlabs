@@ -14,11 +14,12 @@ const clientLogos = [
 ];
 
 const mediaLogos = [
-  { name: "CoinDesk", url: "https://coindesk.com", logo: "https://www.coindesk.com/resizer/fJ-PnHZDQBhShtBQNaZI-ut_xCo=/144x32/downloads.coindesk.com/arc/failsafe/feeds/coindesk-logo.png" },
+  { name: "Tokenpost", url: "https://www.tokenpost.kr", logo: "https://www.tokenpost.kr/resources/images/logo-share.png" },
+  { name: "Coinness", url: "https://coinness.com", logo: "https://coinness.com/static/media/coinness-logo-white.svg" },
+  { name: "Blockmedia", url: "https://www.blockmedia.co.kr", logo: "https://www.blockmedia.co.kr/wp-content/uploads/2023/01/blockmedia_logo_white.png" },
+  { name: "Bloomingbit", url: "https://bloomingbit.io", logo: "https://bloomingbit.io/logo-white.svg" },
+  { name: "Economics", url: "https://www.etoday.co.kr", logo: "https://www.etoday.co.kr/images/logo/logo_etoday.png" },
   { name: "Cointelegraph", url: "https://cointelegraph.com", logo: "https://images.cointelegraph.com/cdn-cgi/image/format=auto,onerror=redirect,quality=90,width=180/https://cointelegraph.com/assets/images/CT_logo_white.svg" },
-  { name: "The Block", url: "https://theblock.co", logo: "https://www.theblock.co/static/img/logo-white.svg" },
-  { name: "Decrypt", url: "https://decrypt.co", logo: "https://decrypt.co/wp-content/themes/flavor/flavor/images/og-img/decrypt-logo-white.svg" },
-  { name: "Forbes", url: "https://forbes.com", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Forbes_logo.svg/200px-Forbes_logo.svg.png" },
 ];
 
 const TrustSection = () => {
