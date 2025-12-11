@@ -9,6 +9,8 @@ import TeamContactCard from "@/components/TeamContactCard";
 import ClientLogoMarquee from "@/components/ClientLogoMarquee";
 import SectionBackground from "@/components/SectionBackground";
 import FloatingSectionElements from "@/components/FloatingSectionElements";
+import GiantSectionTitle from "@/components/GiantSectionTitle";
+import GlowCard from "@/components/GlowCard";
 import { brand } from "@/config/content";
 import sunCorona from "@/assets/backgrounds/sun-corona.jpg";
 // Service images
@@ -358,86 +360,93 @@ const Services = () => {
         />
         
         <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          {/* Header with Trust Badges */}
-          <div className={`flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 transition-all duration-700 ${
-            testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          }`}>
-            <div>
-              <span className="text-white/40 text-sm font-mono mb-4 block">[ Testimonials ]</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white">
-                +250 <span className="serif-italic text-amber-400">Satisfied</span> Clients
-              </h2>
-            </div>
-            
-            {/* Trust Badges */}
-            <div className="flex items-center gap-4">
-              <a 
-                href="https://www.trustpilot.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-4 py-2 bg-[#00b67a]/20 border border-[#00b67a]/30 rounded-xl hover:bg-[#00b67a]/30 transition-colors"
-              >
-                <Shield className="w-5 h-5 text-[#00b67a]" />
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 text-[#00b67a] fill-[#00b67a]" />
-                  ))}
-                </div>
-                <span className="text-white text-sm font-medium">Trustpilot</span>
-                <ExternalLink className="w-3 h-3 text-white/50" />
-              </a>
-            </div>
+          {/* Giant Section Title */}
+          <GiantSectionTitle
+            title="+250 Satisfied Clients"
+            accentWord="Satisfied"
+            size="xl"
+            theme="dark"
+            subtitle="[ Testimonials ]"
+          />
+          
+          {/* Trust Badges */}
+          <div className="flex items-center gap-4 mb-12">
+            <a 
+              href="https://www.trustpilot.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 bg-[#00b67a]/20 border border-[#00b67a]/30 rounded-xl hover:bg-[#00b67a]/30 transition-colors"
+            >
+              <Shield className="w-5 h-5 text-[#00b67a]" />
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 text-[#00b67a] fill-[#00b67a]" />
+                ))}
+              </div>
+              <span className="text-white text-sm font-medium">Trustpilot</span>
+              <ExternalLink className="w-3 h-3 text-white/50" />
+            </a>
           </div>
 
-          {/* Testimonials Grid */}
+          {/* Testimonials Grid with GlowCard */}
           <div className="grid md:grid-cols-3 gap-6">
             {testimonials.map((testimonial, index) => (
-              <a
-                href={testimonial.link}
-                target="_blank"
-                rel="noopener noreferrer"
+              <GlowCard
                 key={index}
-                className={`bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-amber-400/30 hover:-translate-y-2 transition-all duration-500 group cursor-pointer ${
-                  testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-                }`}
-                style={{ transitionDelay: `${index * 150}ms` }}
+                className="rounded-2xl"
+                glowColor="hsl(45, 100%, 50%)"
+                intensity="medium"
+                tiltEnabled={true}
+                hoverScale={1.02}
               >
-                {/* Quote Icon */}
-                <Quote className="w-10 h-10 text-amber-400/30 mb-6" />
-                
-                {/* Content */}
-                <p className="text-white/70 text-lg leading-relaxed mb-8">
-                  "{testimonial.content}"
-                </p>
+                <a
+                  href={testimonial.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`block bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 group cursor-pointer h-full transition-all duration-500 ${
+                    testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                  }`}
+                  style={{ transitionDelay: `${index * 150}ms` }}
+                >
+                  {/* Quote Icon with Animation */}
+                  <Quote className="w-10 h-10 text-amber-400/30 mb-6 quote-icon-animated" />
+                  
+                  {/* Content */}
+                  <p className="text-white/70 text-lg leading-relaxed mb-8">
+                    "{testimonial.content}"
+                  </p>
 
-                {/* Rating */}
-                <div className="flex items-center gap-1 mb-6">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400" />
-                  ))}
-                </div>
-
-                {/* Author */}
-                <div className="flex items-center gap-4">
-                  <img
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-white/20"
-                  />
-                  <div>
-                    <div className="font-medium text-white">{testimonial.name}</div>
-                    <div className="text-sm text-white/50">{testimonial.role}</div>
+                  {/* Rating */}
+                  <div className="flex items-center gap-1 mb-6">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400 transition-transform group-hover:scale-110" style={{ transitionDelay: `${i * 50}ms` }} />
+                    ))}
                   </div>
-                </div>
 
-                {/* Source */}
-                <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">
-                  <span className="text-xs text-amber-400 uppercase tracking-wider font-medium">
-                    Reviewed on {testimonial.source}
-                  </span>
-                  <ExternalLink className="w-4 h-4 text-white/30 group-hover:text-amber-400 transition-colors" />
-                </div>
-              </a>
+                  {/* Author with Avatar Ring */}
+                  <div className="flex items-center gap-4">
+                    <div className="avatar-ring">
+                      <img
+                        src={testimonial.avatar}
+                        alt={testimonial.name}
+                        className="w-14 h-14 rounded-full object-cover border-2 border-white/20"
+                      />
+                    </div>
+                    <div>
+                      <div className="font-medium text-white">{testimonial.name}</div>
+                      <div className="text-sm text-white/50">{testimonial.role}</div>
+                    </div>
+                  </div>
+
+                  {/* Source */}
+                  <div className="mt-6 pt-6 border-t border-white/10 flex items-center justify-between">
+                    <span className="text-xs text-amber-400 uppercase tracking-wider font-medium">
+                      Reviewed on {testimonial.source}
+                    </span>
+                    <ExternalLink className="w-4 h-4 text-white/30 group-hover:text-amber-400 transition-colors" />
+                  </div>
+                </a>
+              </GlowCard>
             ))}
           </div>
 
