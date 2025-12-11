@@ -594,40 +594,74 @@ const ProjectDetail = () => {
           ))}
         </div>
 
-        {/* 2-Column Layout - Scope & Overview */}
-        <div className="flex flex-col lg:flex-row">
-          {/* Left Column - Scope of Work */}
-          <div className="lg:w-1/3 p-8 md:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-slate-300 bg-white flex flex-col justify-between min-h-[280px]">
-            <div className="space-y-2">
-              {project.shortServices.map((service, index) => (
-                <p key={index} className="text-slate-900 text-3xl md:text-4xl lg:text-5xl font-light leading-tight">{service}</p>
-              ))}
+        {/* 3-Card Creative Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
+          {/* Card 1 - Scope of Work (Dark Theme) */}
+          <div className="bg-slate-900 p-8 md:p-10 lg:p-12 min-h-[320px] flex flex-col justify-between relative overflow-hidden group">
+            {/* Decorative circles */}
+            <div className="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-all duration-700" />
+            <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-slate-700/50 rounded-full blur-2xl" />
+            
+            <div className="relative z-10">
+              <span className="text-slate-500 text-xs uppercase tracking-widest mb-6 block">Scope of Work</span>
+              <div className="space-y-1">
+                {project.shortServices.map((service, index) => (
+                  <p key={index} className="text-white text-3xl md:text-4xl lg:text-5xl font-light leading-tight">{service}</p>
+                ))}
+              </div>
             </div>
-            <a href="#scope" className="text-primary hover:underline text-sm inline-flex items-center gap-1 mt-8">
-              Scope of Work <ArrowUpRight className="w-3 h-3" />
-            </a>
+            
+            <div className="relative z-10 flex items-center gap-2 mt-8">
+              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+              <span className="text-slate-400 text-sm">Active Services</span>
+            </div>
           </div>
 
-          {/* Right Column - Overview & What We Did */}
-          <div className="lg:w-2/3 flex flex-col">
-            {/* Overview */}
-            <div className="p-8 md:p-10 lg:p-12 border-b border-slate-300 bg-white flex-1">
-              <p className="text-slate-700 text-lg md:text-xl leading-relaxed mb-6">
+          {/* Card 2 - Overview (Light with accent border) */}
+          <div className="bg-white p-8 md:p-10 lg:p-12 min-h-[320px] flex flex-col justify-between border-l border-r border-slate-200 relative">
+            {/* Top accent line */}
+            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-blue-400 to-cyan-400" />
+            
+            <div>
+              <span className="text-slate-400 text-xs uppercase tracking-widest mb-4 block">Overview</span>
+              <p className="text-slate-800 text-lg md:text-xl leading-relaxed font-light">
                 {project.description} {project.challenge.split('.')[0]}.
               </p>
-              <a href="#overview" className="text-primary hover:underline text-sm inline-flex items-center gap-1">
-                Overview <ArrowUpRight className="w-3 h-3" />
-              </a>
             </div>
+            
+            <div className="flex items-center gap-3 mt-6 pt-6 border-t border-slate-100">
+              <div className="flex -space-x-2">
+                <div className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white" />
+                <div className="w-8 h-8 rounded-full bg-slate-300 border-2 border-white" />
+                <div className="w-8 h-8 rounded-full bg-primary/20 border-2 border-white flex items-center justify-center text-xs text-primary font-medium">+</div>
+              </div>
+              <span className="text-slate-500 text-sm">Collaborative Project</span>
+            </div>
+          </div>
 
-            {/* What We Did */}
-            <div className="p-8 md:p-10 lg:p-12 bg-white flex-1">
-              <p className="text-slate-700 text-lg md:text-xl leading-relaxed mb-6">
+          {/* Card 3 - What We Did (Gradient Theme) */}
+          <div className="bg-gradient-to-br from-primary/5 via-white to-blue-50 p-8 md:p-10 lg:p-12 min-h-[320px] flex flex-col justify-between relative overflow-hidden">
+            {/* Decorative pattern */}
+            <div className="absolute top-4 right-4 grid grid-cols-3 gap-1 opacity-20">
+              {[...Array(9)].map((_, i) => (
+                <div key={i} className="w-2 h-2 bg-primary rounded-sm" />
+              ))}
+            </div>
+            
+            <div>
+              <span className="text-primary/60 text-xs uppercase tracking-widest mb-4 block">What We Did</span>
+              <p className="text-slate-800 text-lg md:text-xl leading-relaxed font-light">
                 {project.strategy.slice(0, 2).join('. ')}.
               </p>
-              <a href="#what-we-did" className="text-primary hover:underline text-sm inline-flex items-center gap-1">
-                What We Did <ArrowUpRight className="w-3 h-3" />
-              </a>
+            </div>
+            
+            <div className="flex items-center gap-2 mt-6">
+              <div className="flex gap-1">
+                {[1, 2, 3].map((i) => (
+                  <div key={i} className="w-8 h-1 bg-primary/30 rounded-full" style={{ opacity: 1 - (i * 0.2) }} />
+                ))}
+              </div>
+              <span className="text-slate-500 text-sm ml-2">Execution Complete</span>
             </div>
           </div>
         </div>
