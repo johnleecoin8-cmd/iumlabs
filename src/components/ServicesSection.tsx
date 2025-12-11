@@ -1,8 +1,6 @@
-import { useState, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import constellationSpace from "@/assets/constellation-space.jpg";
 
 const services = [
   {
@@ -38,41 +36,20 @@ const services = [
 ];
 
 const floatingTags = [
-  { label: "Go-To-Market Strategy", top: "5%", left: "15%" },
-  { label: "Influencer Strategy", top: "35%", left: "8%" },
-  { label: "Social Media Marketing", top: "15%", right: "5%" },
-  { label: "KOL Marketing", top: "55%", right: "10%" },
-  { label: "PR", top: "45%", right: "3%" },
+  { label: "Go-To-Market Strategy", top: "15%", left: "5%", color: "border-cyan-400/50 text-cyan-400" },
+  { label: "Influencer Strategy", top: "30%", left: "8%", color: "border-pink-400/50 text-pink-400" },
+  { label: "Social Media", top: "20%", right: "8%", color: "border-yellow-400/50 text-yellow-400" },
+  { label: "KOL Network", top: "45%", right: "5%", color: "border-green-400/50 text-green-400" },
+  { label: "PR & Media", bottom: "30%", left: "10%", color: "border-orange-400/50 text-orange-400" },
 ];
 
 const ServicesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
-  const [activeService, setActiveService] = useState(0);
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
-    <div ref={ref} className="py-0 relative overflow-hidden flex-1">
-      {/* Hero Typography Section */}
-      <div className="relative min-h-[70vh] flex items-center justify-center px-4 py-24">
-        {/* Parallax Background */}
-        <div 
-          className="absolute inset-0 z-0"
-          style={{ transform: `translateY(${scrollY * 0.05}px)` }}
-        >
-          <img 
-            src={constellationSpace}
-            alt=""
-            className="w-full h-[120%] object-cover opacity-20"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
-        </div>
-
+    <div ref={ref} className="relative overflow-hidden flex-1">
+      {/* Hero Typography Section - Dark */}
+      <div className="relative min-h-[60vh] flex items-center justify-center px-4 py-24 bg-[hsl(0,0%,4%)]">
         {/* Floating Service Tags */}
         {floatingTags.map((tag, index) => (
           <div
@@ -82,10 +59,11 @@ const ServicesSection = () => {
               top: tag.top,
               left: tag.left,
               right: tag.right,
+              bottom: tag.bottom,
               animationDelay: `${index * 0.4}s` 
             }}
           >
-            <span className="lunar-tag-dark text-xs whitespace-nowrap">
+            <span className={`px-4 py-2 text-xs rounded-full border bg-transparent ${tag.color}`}>
               {tag.label}
             </span>
           </div>
@@ -93,91 +71,87 @@ const ServicesSection = () => {
 
         {/* Giant Typography */}
         <div className={`text-center transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
-          <h2 className="text-[12vw] md:text-[15vw] lg:text-[18vw] font-light leading-[0.85] tracking-tight text-white">
-            Our<span className="serif-italic">Services</span>
+          <h2 className="text-[15vw] md:text-[18vw] lg:text-[20vw] font-light leading-[0.85] tracking-tight text-white">
+            Our<span className="serif-italic text-primary">Services</span>
           </h2>
+        </div>
+
+        {/* Link to All Cases */}
+        <div className="absolute bottom-8 right-8">
+          <Link 
+            to="/projects"
+            className="text-white/50 text-sm hover:text-white transition-colors flex items-center gap-2"
+          >
+            All Cases <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
 
-      {/* Dotted Line Separator */}
-      <div className="dotted-line-dark mx-6" />
+      {/* Services List - Light Background */}
+      <div className="bg-[hsl(0,0%,96%)] py-20">
+        <div className="container mx-auto max-w-6xl px-4">
+          {services.map((service, index) => (
+            <div
+              key={service.number}
+              className={`group py-10 transition-all duration-500 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              {/* Dotted Line */}
+              <div className="dotted-line-light mb-10" />
+              
+              <div className="grid grid-cols-12 gap-6 items-start">
+                {/* Number */}
+                <div className="col-span-12 md:col-span-1">
+                  <span className="text-[hsl(0,0%,40%)] text-sm font-mono">[ {service.number} ]</span>
+                </div>
 
-      {/* Services List */}
-      <div className="container mx-auto max-w-6xl px-4 py-16">
-        {services.map((service, index) => (
-          <div
-            key={service.number}
-            className={`group border-b border-white/10 last:border-b-0 transition-all duration-500 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-            style={{ transitionDelay: `${index * 100}ms` }}
-            onMouseEnter={() => setActiveService(index)}
-          >
-            <div className="grid grid-cols-12 gap-4 py-8 md:py-12 items-start">
-              {/* Number */}
-              <div className="col-span-2 md:col-span-1">
-                <span className="text-white/40 text-sm font-mono">[ {service.number} ]</span>
-              </div>
+                {/* Title */}
+                <div className="col-span-12 md:col-span-4">
+                  <h3 className="text-2xl md:text-3xl font-medium text-[hsl(0,0%,8%)] group-hover:text-primary transition-colors duration-300">
+                    {service.title}
+                  </h3>
+                </div>
 
-              {/* Content */}
-              <div className="col-span-10 md:col-span-7">
-                <h3 className="text-2xl md:text-3xl font-medium text-white mb-3 group-hover:text-primary transition-colors duration-300">
-                  {service.title}
-                </h3>
-                <p className="text-white/50 text-base leading-relaxed max-w-xl">
-                  {service.description}
-                </p>
+                {/* Description */}
+                <div className="col-span-12 md:col-span-5">
+                  <p className="text-[hsl(0,0%,40%)] text-base leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
 
-                {/* Learn More Link */}
-                <Link 
-                  to="/services"
-                  className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 border border-dashed border-primary/50 rounded text-primary text-sm hover:bg-primary/10 hover:border-primary transition-all duration-300"
-                >
-                  <span>Learn more</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-
-              {/* Abstract Graphic - Desktop Only */}
-              <div className="hidden md:flex col-span-4 items-center justify-end">
-                <div className={`relative w-48 h-32 transition-all duration-500 ${activeService === index ? 'opacity-100 scale-100' : 'opacity-30 scale-95'}`}>
-                  {/* Abstract shapes */}
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-16 h-16 bg-white/10 rounded-sm" />
-                  <div 
-                    className="absolute bottom-4 left-1/2 w-12 h-20 border-4 border-primary rounded-bl-none"
-                    style={{ 
-                      borderTop: 'none', 
-                      borderRight: 'none',
-                      transform: 'translateX(20%)'
-                    }}
-                  />
-                  <div 
-                    className="absolute top-0 right-8 w-8 h-12 border-4 border-primary"
-                    style={{ 
-                      borderBottom: 'none', 
-                      borderLeft: 'none'
-                    }}
-                  />
+                {/* Arrow */}
+                <div className="col-span-12 md:col-span-2 flex justify-end">
+                  <Link 
+                    to="/services"
+                    className="w-12 h-12 rounded-full border border-[hsl(0,0%,80%)] flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-300"
+                  >
+                    <ArrowRight className="w-5 h-5 text-[hsl(0,0%,40%)] group-hover:text-white transition-colors" />
+                  </Link>
                 </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
 
-      {/* Bottom CTA */}
-      <div className={`container mx-auto max-w-6xl px-4 pb-24 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.6s' }}>
-        <div className="flex items-center justify-between py-8 border-t border-white/10">
-          <p className="text-white/40 text-sm">
-            Ready to grow in the Korean market?
-          </p>
-          <Link 
-            to="/services"
-            className="bracket-link text-white/60 hover:text-white"
-          >
-            <span>View All Services</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
+          {/* Last Dotted Line */}
+          <div className="dotted-line-light mt-10" />
+        </div>
+
+        {/* Bottom CTA */}
+        <div className={`container mx-auto max-w-6xl px-4 pt-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.6s' }}>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <p className="text-[hsl(0,0%,40%)] text-lg">
+              Ready to grow in the Korean market?
+            </p>
+            <Link 
+              to="/services"
+              className="lunar-btn"
+            >
+              <span>View All Services</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </div>
       </div>
     </div>
