@@ -39,14 +39,14 @@ const BlogPreviewSection = () => {
     <section ref={ref} className="section-light py-32 px-4 relative overflow-hidden">
       <div className="container mx-auto max-w-7xl">
         {/* Giant Typography Header - Lunar Strategy Style */}
-        <div className={`mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`mb-16 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <h2 className="text-[15vw] md:text-[180px] lg:text-[220px] font-light leading-[0.85] tracking-tight text-[hsl(var(--light-fg))]">
             Bl<span className="serif-italic text-primary">o</span>g
           </h2>
         </div>
 
         {/* Info Bar */}
-        <div className={`flex flex-col md:flex-row md:items-center justify-between mb-12 pb-8 border-b border-[hsl(var(--light-fg),0.1)] transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`flex flex-col md:flex-row md:items-center justify-between mb-12 pb-8 border-b border-[hsl(var(--light-fg),0.1)] transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`} style={{ transitionDelay: '0.1s' }}>
           <div className="flex items-center gap-2 text-[hsl(var(--light-fg),0.5)] text-sm mb-4 md:mb-0">
             <span>↓</span>
             <span>Recent News</span>
@@ -56,7 +56,7 @@ const BlogPreviewSection = () => {
             <span className="text-[hsl(var(--light-fg),0.5)] text-sm">
               +{blogPosts.length} articles
             </span>
-            <Link to="/blog" className="flex items-center gap-2 text-[hsl(var(--light-fg))] text-sm font-medium hover:text-primary transition-colors">
+            <Link to="/blog" className="flex items-center gap-2 text-[hsl(var(--light-fg))] text-sm font-medium link-hover transition-colors duration-200">
               <span>[</span>
               <span>all articles</span>
               <span>]</span>
@@ -70,17 +70,18 @@ const BlogPreviewSection = () => {
             <Link
               key={post.slug}
               to={`/blog/${post.slug}`}
-              className={`group transition-all duration-500 ${
-                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-              }`}
-              style={{ transitionDelay: `${(index + 2) * 100}ms` }}
+              className={`group ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}
+              style={{ 
+                transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                transitionDelay: `${(index + 2) * 80}ms` 
+              }}
             >
               {/* Image */}
               <div className="aspect-[4/3] rounded-2xl overflow-hidden mb-5 relative">
                 <img
                   src={post.image}
                   alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-smooth"
                 />
                 
                 {/* Arrow Icon on Hover */}
@@ -100,7 +101,7 @@ const BlogPreviewSection = () => {
                   </span>
                 </div>
                 
-                <h3 className="text-xl font-medium text-[hsl(var(--light-fg))] mb-2 group-hover:text-primary transition-colors line-clamp-2">
+                <h3 className="text-xl font-medium text-[hsl(var(--light-fg))] mb-2 group-hover:text-primary transition-colors duration-200 line-clamp-2">
                   {post.title}
                 </h3>
                 
@@ -113,7 +114,7 @@ const BlogPreviewSection = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className="mt-16 text-center">
+        <div className={`mt-16 text-center transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: '0.5s' }}>
           <Link to="/blog" className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[hsl(var(--light-fg),0.2)] text-[hsl(var(--light-fg))] text-sm font-medium hover:bg-[hsl(var(--light-fg))] hover:text-[hsl(var(--light-bg))] transition-all duration-300">
             <span>View All Articles</span>
             <ArrowRight className="w-4 h-4" />

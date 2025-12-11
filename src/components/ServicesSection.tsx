@@ -86,7 +86,7 @@ const ServicesSection = () => {
     <section ref={ref} className="py-24 px-4 bg-card/30">
       <div className="container mx-auto max-w-6xl">
         {/* Header */}
-        <div className={`mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`mb-12 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
               <h2 className="text-4xl md:text-5xl font-light text-foreground mb-4">
@@ -102,7 +102,7 @@ const ServicesSection = () => {
               {serviceTags.map((tag) => (
                 <button
                   key={tag.label}
-                  className={`service-tag service-tag-${tag.color}`}
+                  className={`service-tag service-tag-${tag.color} transition-fast`}
                 >
                   {tag.label}
                 </button>
@@ -119,10 +119,13 @@ const ServicesSection = () => {
               <div
                 key={service.number}
                 onClick={() => setSelectedService(service)}
-                className={`group bg-card border border-border/50 rounded-2xl p-6 cursor-pointer hover:border-primary/50 hover:shadow-lg transition-all duration-500 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                className={`group bg-card border border-border/50 rounded-2xl p-6 cursor-pointer card-hover ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
                 }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
+                style={{ 
+                  transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                  transitionDelay: `${index * 80}ms` 
+                }}
               >
                 {/* Number Badge + Icon */}
                 <div className="flex items-center justify-between mb-4">
@@ -133,7 +136,7 @@ const ServicesSection = () => {
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-medium text-foreground mb-2 group-hover:text-primary transition-colors">
+                <h3 className="text-xl font-medium text-foreground mb-2 group-hover:text-primary transition-colors duration-200">
                   {service.title}
                 </h3>
 
@@ -143,9 +146,9 @@ const ServicesSection = () => {
                 </p>
 
                 {/* Learn More Link */}
-                <button className="inline-flex items-center gap-2 text-sm text-muted-foreground group-hover:text-primary transition-colors">
+                <button className="inline-flex items-center gap-2 text-sm text-muted-foreground group-hover:text-primary transition-colors duration-200">
                   <span>Learn more</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
                 </button>
               </div>
             );
@@ -156,11 +159,11 @@ const ServicesSection = () => {
       {/* Service Modal */}
       {selectedService && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/20 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-foreground/20 backdrop-blur-sm animate-fade-in"
           onClick={() => setSelectedService(null)}
         >
           <div 
-            className="bg-card border border-border rounded-2xl p-8 max-w-lg w-full shadow-2xl"
+            className="bg-card border border-border rounded-2xl p-8 max-w-lg w-full shadow-2xl animate-scale-in"
             onClick={e => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-6">
@@ -169,7 +172,7 @@ const ServicesSection = () => {
               </div>
               <button 
                 onClick={() => setSelectedService(null)}
-                className="w-8 h-8 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors"
+                className="w-8 h-8 rounded-full bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors duration-200"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -195,7 +198,7 @@ const ServicesSection = () => {
               </ul>
             </div>
 
-            <CalendlyButton className="lunar-btn w-full">
+            <CalendlyButton className="lunar-btn w-full hover-glow">
               Get Started
             </CalendlyButton>
           </div>
