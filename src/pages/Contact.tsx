@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
-import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
+import moonBackground from "@/assets/moon-background.jpg";
 
 const budgetOptions = [
   "$5K - $10K",
@@ -25,10 +25,14 @@ const contactInfo = [
 ];
 
 const floatingTags = [
-  { label: "Let's Connect", top: "18%", left: "6%", mobileTop: "12%", mobileLeft: "3%" },
-  { label: "24/7 Support", top: "32%", right: "8%", mobileTop: "15%", mobileRight: "3%" },
-  { label: "Seoul Office", top: "52%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
-  { label: "Global Reach", bottom: "30%", right: "6%", mobileBottom: "18%", mobileRight: "3%" },
+  { label: "Let's Connect", top: "20%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-pink-400 text-white" },
+  { label: "24/7 Support", top: "30%", left: "22%", mobileTop: "15%", mobileRight: "3%", color: "bg-yellow-400 text-black" },
+  { label: "Seoul Office", top: "48%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-white text-black border border-black" },
+  { label: "Fast Response", top: "52%", left: "26%", color: "bg-orange-400 text-white" },
+  { label: "Global Reach", top: "18%", right: "12%", color: "bg-white text-black border border-black" },
+  { label: "Partnership", top: "32%", right: "5%", color: "bg-yellow-400 text-black" },
+  { label: "Consultation", top: "50%", right: "10%", color: "bg-green-400 text-black" },
+  { label: "Get Started", bottom: "25%", right: "18%", color: "bg-green-500 text-white" },
 ];
 
 const Contact = () => {
@@ -99,60 +103,56 @@ const Contact = () => {
       
       {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background with Ken Burns */}
-        <div className="absolute inset-0 overflow-hidden">
+        {/* Background - Vibrant Blue with Moon */}
+        <div className="absolute inset-0 overflow-hidden bg-[hsl(220,90%,55%)]">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${seoulBridgeNight})`,
-              filter: "brightness(0.3) grayscale(0.3)",
+              backgroundImage: `url(${moonBackground})`,
+              filter: "brightness(0.9) saturate(1.2)",
+              mixBlendMode: "overlay",
             }}
           />
           
           {/* Aurora light overlay */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-cyan-500/15" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/10 via-transparent to-blue-500/10" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-500/30 via-transparent to-cyan-400/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600/20 via-transparent to-blue-400/10" />
           </div>
           
           {/* Light sweep effect */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-light-sweep" />
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-light-sweep" />
           </div>
-          
-          {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
         </div>
         
-        {/* Floating Tags with Parallax */}
+        {/* Floating Tags with Parallax - Colorful */}
         <div>
           {floatingTags.map((tag, index) => (
             <span
-              key={tag.label}
-              className="lunar-tag-dark absolute animate-float hidden sm:block"
+              key={`${tag.label}-${index}`}
+              className={`absolute animate-float hidden sm:block px-4 py-2 rounded-md text-sm font-medium shadow-lg ${tag.color}`}
               style={{
                 top: tag.top,
                 left: tag.left,
                 right: tag.right,
                 bottom: tag.bottom,
-                animationDelay: `${index * 0.5}s`,
-                transform: `translateY(${scrollY * 0.08}px)`,
+                animationDelay: `${index * 0.3}s`,
+                transform: `translateY(${scrollY * 0.05}px)`,
               }}
             >
               {tag.label}
             </span>
           ))}
-          {/* Mobile floating tags */}
-          {floatingTags.slice(0, 3).map((tag, index) => (
+          {floatingTags.slice(0, 4).map((tag, index) => (
             <span
-              key={`mobile-${tag.label}`}
-              className="lunar-tag-dark absolute animate-float sm:hidden"
+              key={`mobile-${tag.label}-${index}`}
+              className={`absolute animate-float sm:hidden px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
               style={{
                 top: tag.mobileTop,
                 left: tag.mobileLeft,
                 right: tag.mobileRight,
-                bottom: tag.mobileBottom,
-                animationDelay: `${index * 0.5}s`,
+                animationDelay: `${index * 0.3}s`,
               }}
             >
               {tag.label}
