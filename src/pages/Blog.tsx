@@ -1,459 +1,305 @@
 import { useState, useEffect } from "react";
-import { ArrowUpRight, Calendar } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronDown, Search } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
-import Planet3D from "@/components/Planet3D";
-import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
+import { Input } from "@/components/ui/input";
 
-interface BlogPost {
-  id: string;
-  slug: string;
-  title: string;
-  subtitle?: string;
-  category: string;
-  date: string;
-  style: "blue-glitch" | "dark-stats" | "white-crypto" | "blue-gradient" | "dark-bold" | "white-bold";
-}
-
-const blogPosts: BlogPost[] = [
+// Blog posts data
+const blogPosts = [
   {
     id: "1",
     slug: "korean-crypto-market-2024",
-    title: "Don't Panic!",
-    subtitle: "Marketing in Uncertain Markets: A Cycle-Tested Playbook",
-    category: "Guide",
-    date: "Dec 2024",
-    style: "blue-glitch",
+    title: "The State of Ecosystem Growth in 2025: Key Insights from the CryptoBridge Research Report",
+    image: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=800&h=500&fit=crop",
+    date: "Dec 11, 2024",
+    featured: true,
   },
   {
     id: "2",
-    slug: "top-korean-kols",
-    title: "How to Take a Project to Market in the InfoFi Era",
-    subtitle: "Created by CryptoBridge Korea",
-    category: "Strategy",
-    date: "Dec 2024",
-    style: "dark-stats",
+    slug: "ai-agents-defi",
+    title: "AI Agents & DeFi: The DeFAI Future Powering Finance in 2025 & Beyond!",
+    image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop",
+    date: "Dec 10, 2024",
   },
   {
     id: "3",
-    slug: "vasp-compliance",
-    title: "Crypto Ecosystem Growth Guide",
-    subtitle: "Created by CryptoBridge Korea",
-    category: "Guide",
-    date: "Nov 2024",
-    style: "white-crypto",
+    slug: "avoid-flopped-tge",
+    title: "How to Avoid a Flopped TGE: Building a Solid Foundation for Success",
+    image: "https://images.unsplash.com/photo-1642104704074-907c0698cbd9?w=800&h=500&fit=crop",
+    date: "Dec 8, 2024",
   },
   {
     id: "4",
-    slug: "community-building",
-    title: "The Ultimate Crypto Social Media Growth Guide",
-    subtitle: "Created by CryptoBridge Korea",
-    category: "Strategy",
-    date: "Nov 2024",
-    style: "blue-gradient",
+    slug: "community-growth-ai",
+    title: "How to Grow Your Community in the Age of AI in 2025",
+    image: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=800&h=500&fit=crop",
+    date: "Dec 5, 2024",
   },
   {
     id: "5",
-    slug: "korea-blockchain-week",
-    title: "The Ultimate Brand Playbook for Dominating Kaito Mindshare",
-    category: "Events",
-    date: "Oct 2024",
-    style: "dark-bold",
+    slug: "nft-evolution",
+    title: "The Evolution of NFTs: From PFPs in 2021 to Nodes and Memberships in 2025",
+    image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=800&h=500&fit=crop",
+    date: "Nov 28, 2024",
   },
   {
     id: "6",
-    slug: "exchange-listing",
-    title: "Founder-Led Marketing Guide ✌️",
-    category: "Exchange",
-    date: "Oct 2024",
-    style: "white-bold",
+    slug: "crypto-marketing-bear-market",
+    title: "Top 5 Steps To Rejuvenate Your Crypto Marketing In Bear Market in 2025",
+    image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=800&h=500&fit=crop",
+    date: "Nov 25, 2024",
+  },
+  {
+    id: "7",
+    slug: "kol-marketing-strategy",
+    title: "The Strategic Role of KOLs in Crypto Marketing: How Top Agencies Drive Success",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop",
+    date: "Nov 20, 2024",
+  },
+  {
+    id: "8",
+    slug: "kaito-mindshare",
+    title: "Top 5 Strategies to Dominate Kaito Mindshare Before TGE",
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&h=500&fit=crop",
+    date: "Nov 15, 2024",
   },
 ];
 
-const categories = ["All", "Guide", "Strategy", "Events", "Exchange"];
-
-const floatingTags = [
-  { label: "Insights", top: "20%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-pink-400 text-white" },
-  { label: "Guides", top: "32%", left: "20%", mobileTop: "15%", mobileRight: "3%", color: "bg-cyan-400 text-black" },
-  { label: "Strategy", top: "50%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-purple-400 text-white" },
-  { label: "Research", top: "52%", left: "24%", color: "bg-fuchsia-400 text-white" },
-  { label: "Analysis", top: "18%", right: "12%", color: "bg-cyan-300 text-black" },
-  { label: "Reports", top: "32%", right: "5%", color: "bg-pink-300 text-black" },
-  { label: "News", top: "50%", right: "10%", color: "bg-purple-300 text-black" },
-  { label: "Trends", bottom: "28%", right: "16%", color: "bg-fuchsia-500 text-white" },
-];
-
-// Card style components
-const BlueGlitchCard = ({ post }: { post: BlogPost }) => (
-  <div className="relative h-full bg-[hsl(220,90%,55%)] p-6 flex flex-col overflow-hidden group">
-    {/* Glitch overlay effect */}
-    <div className="absolute inset-0 opacity-20 mix-blend-multiply">
-      <div className="absolute top-1/3 left-0 right-0 h-32 bg-gradient-to-r from-transparent via-green-400 to-transparent transform -skew-y-12" />
-    </div>
-    
-    {/* Corner brackets */}
-    <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-white/40" />
-    <div className="absolute top-4 right-4 w-8 h-8 border-r-2 border-t-2 border-white/40" />
-    <div className="absolute bottom-4 left-4 w-8 h-8 border-l-2 border-b-2 border-white/40" />
-    <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-white/40" />
-    
-    <div className="relative z-10 flex-1">
-      <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-3 tracking-tight" style={{ fontFamily: "'Impact', 'Arial Black', sans-serif" }}>
-        {post.title}
-      </h2>
-      <p className="text-sm md:text-base font-bold text-white/90 uppercase tracking-wide">
-        {post.subtitle}
-      </p>
-    </div>
-    
-    {/* Bottom image placeholder */}
-    <div className="relative mt-auto pt-8">
-      <div className="aspect-[4/3] bg-gradient-to-b from-gray-800 to-gray-900 rounded-lg overflow-hidden relative">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center">
-            <span className="text-white text-2xl">📊</span>
-          </div>
-        </div>
-        {/* Pixel/glitch decorations */}
-        <div className="absolute top-2 left-2 w-4 h-4 bg-[hsl(220,90%,55%)]" />
-        <div className="absolute top-6 left-6 w-3 h-3 bg-[hsl(220,90%,55%)]" />
-        <div className="absolute bottom-4 right-4 w-6 h-6 bg-green-400" />
-      </div>
-    </div>
-    
-    {/* Hover arrow */}
-    <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-      <ArrowUpRight className="w-5 h-5 text-white" />
-    </div>
-  </div>
-);
-
-const DarkStatsCard = ({ post }: { post: BlogPost }) => (
-  <div className="relative h-full bg-gradient-to-br from-[#0a1628] to-[#1a2a4a] p-6 flex flex-col overflow-hidden group">
-    {/* Top section */}
-    <div className="relative z-10 mb-6">
-      <h2 className="text-3xl md:text-4xl font-light text-white leading-tight mb-2">
-        {post.title}
-      </h2>
-      <p className="text-sm text-white/50">{post.subtitle}</p>
-    </div>
-    
-    {/* Stats mockup */}
-    <div className="flex-1 flex items-center justify-center">
-      <div className="relative w-full max-w-xs">
-        {/* Central logo */}
-        <div className="flex flex-col items-center mb-6">
-          <div className="w-16 h-16 rounded-full bg-white flex items-center justify-center mb-3">
-            <span className="text-2xl font-bold text-[#0a1628]">CB</span>
-          </div>
-          <span className="text-white font-medium">CryptoBridge Korea</span>
-          <span className="text-white/50 text-sm">@CryptoBridgeKR</span>
-        </div>
-        
-        {/* Stats badges */}
-        <div className="absolute -top-2 -left-4 bg-primary/90 rounded-lg px-3 py-2">
-          <span className="text-xs text-white/70">7 Day Change</span>
-          <div className="text-lg font-bold text-white">+270</div>
-        </div>
-        <div className="absolute top-4 -right-2 bg-primary/90 rounded-lg px-3 py-2">
-          <span className="text-xs text-white/70">24h Change</span>
-          <div className="text-lg font-bold text-white">+52</div>
-        </div>
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-primary/90 rounded-lg px-3 py-2">
-          <span className="text-xs text-white/70">Mindshare</span>
-          <div className="text-lg font-bold text-white">8,175</div>
-        </div>
-      </div>
-    </div>
-    
-    {/* Hover arrow */}
-    <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-      <ArrowUpRight className="w-5 h-5 text-white" />
-    </div>
-  </div>
-);
-
-const WhiteCryptoCard = ({ post }: { post: BlogPost }) => (
-  <div className="relative h-full bg-gradient-to-br from-slate-50 to-slate-100 p-6 flex flex-col overflow-hidden group">
-    {/* Corner accent */}
-    <div className="absolute top-0 right-0 w-20 h-20 bg-primary" />
-    <div className="absolute top-4 right-4 w-4 h-8 bg-white" />
-    
-    <div className="relative z-10 flex-1">
-      <h2 className="text-3xl md:text-4xl font-light text-primary leading-tight mb-2">
-        {post.title}
-      </h2>
-      <p className="text-sm text-slate-500">{post.subtitle}</p>
-    </div>
-    
-    {/* 3D crypto coins mockup */}
-    <div className="relative mt-auto pt-8 flex justify-end">
-      <div className="relative w-48 h-48">
-        <div className="absolute top-0 left-0 w-14 h-14 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 shadow-xl flex items-center justify-center text-white font-bold">₿</div>
-        <div className="absolute top-8 right-8 w-12 h-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 shadow-xl flex items-center justify-center text-white font-bold text-sm">Ξ</div>
-        <div className="absolute bottom-4 left-8 w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 shadow-xl flex items-center justify-center text-white font-bold text-xs">◎</div>
-        <div className="absolute bottom-0 right-4 w-16 h-16 rounded-xl bg-gradient-to-br from-slate-200 to-slate-300 shadow-xl transform rotate-12" />
-      </div>
-    </div>
-    
-    {/* Hover arrow */}
-    <div className="absolute top-6 left-6 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-      <ArrowUpRight className="w-5 h-5 text-primary" />
-    </div>
-  </div>
-);
-
-const BlueGradientCard = ({ post }: { post: BlogPost }) => (
-  <div className="relative h-full bg-gradient-to-br from-[hsl(220,90%,55%)] to-[hsl(220,90%,45%)] p-6 flex flex-col overflow-hidden group">
-    {/* Logo */}
-    <div className="flex items-center gap-2 mb-6">
-      <div className="w-8 h-8 rounded bg-white/20 flex items-center justify-center">
-        <span className="text-white font-bold text-sm">CB</span>
-      </div>
-      <span className="text-white/80 text-sm">CryptoBridge Korea</span>
-    </div>
-    
-    {/* Diagonal lines */}
-    <div className="absolute top-20 right-0 w-32 h-px bg-white/20 transform rotate-45" />
-    <div className="absolute top-24 right-4 w-24 h-px bg-white/20 transform rotate-45" />
-    
-    <div className="relative z-10 flex-1">
-      <h2 className="text-2xl md:text-3xl font-light text-white leading-tight mb-2">
-        {post.title}
-      </h2>
-      <p className="text-sm text-white/60">{post.subtitle}</p>
-    </div>
-    
-    {/* 3D bar chart mockup */}
-    <div className="relative mt-auto pt-8">
-      <div className="flex items-end gap-3 h-32">
-        <div className="flex-1 bg-white/20 rounded-t-lg h-1/3 transform perspective-500" style={{ transform: "perspective(100px) rotateX(5deg)" }} />
-        <div className="flex-1 bg-white/30 rounded-t-lg h-1/2 transform perspective-500" style={{ transform: "perspective(100px) rotateX(5deg)" }} />
-        <div className="flex-1 bg-white/40 rounded-t-lg h-2/3 transform perspective-500" style={{ transform: "perspective(100px) rotateX(5deg)" }} />
-        <div className="flex-1 bg-white/50 rounded-t-lg h-full transform perspective-500" style={{ transform: "perspective(100px) rotateX(5deg)" }} />
-      </div>
-    </div>
-    
-    {/* Hover arrow */}
-    <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-      <ArrowUpRight className="w-5 h-5 text-white" />
-    </div>
-  </div>
-);
-
-const DarkBoldCard = ({ post }: { post: BlogPost }) => (
-  <div className="relative h-full bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] p-6 flex flex-col items-center justify-center overflow-hidden group">
-    {/* Logo */}
-    <div className="absolute top-6 left-6 flex items-center gap-2">
-      <div className="w-8 h-8 rounded bg-white/10 flex items-center justify-center">
-        <span className="text-white font-bold text-sm">CB</span>
-      </div>
-      <span className="text-white/60 text-sm">CryptoBridge Korea</span>
-    </div>
-    
-    <div className="relative z-10 text-center px-4">
-      <h2 className="text-2xl md:text-3xl font-black text-white leading-tight uppercase tracking-wide">
-        {post.title}
-      </h2>
-    </div>
-    
-    {/* Hover arrow */}
-    <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-      <ArrowUpRight className="w-5 h-5 text-white" />
-    </div>
-  </div>
-);
-
-const WhiteBoldCard = ({ post }: { post: BlogPost }) => (
-  <div className="relative h-full bg-gradient-to-br from-[hsl(220,90%,55%)] to-[hsl(220,90%,50%)] p-6 flex flex-col overflow-hidden group">
-    {/* Grid pattern */}
-    <div className="absolute inset-0 opacity-10" style={{ 
-      backgroundImage: "linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)",
-      backgroundSize: "20px 20px"
-    }} />
-    
-    {/* Logo */}
-    <div className="absolute top-6 right-6 flex items-center gap-2">
-      <div className="w-8 h-8 rounded bg-white/20 flex items-center justify-center">
-        <span className="text-white font-bold text-sm">CB</span>
-      </div>
-      <span className="text-white/80 text-sm">CryptoBridge Korea</span>
-    </div>
-    
-    <div className="relative z-10 flex-1 flex items-center">
-      <h2 className="text-3xl md:text-4xl font-black text-white leading-tight uppercase tracking-tight" style={{ fontFamily: "'Impact', 'Arial Black', sans-serif" }}>
-        {post.title}
-      </h2>
-    </div>
-    
-    {/* Hover arrow */}
-    <div className="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
-      <ArrowUpRight className="w-5 h-5 text-white" />
-    </div>
-  </div>
-);
-
-const BlogCard = ({ post }: { post: BlogPost }) => {
-  switch (post.style) {
-    case "blue-glitch": return <BlueGlitchCard post={post} />;
-    case "dark-stats": return <DarkStatsCard post={post} />;
-    case "white-crypto": return <WhiteCryptoCard post={post} />;
-    case "blue-gradient": return <BlueGradientCard post={post} />;
-    case "dark-bold": return <DarkBoldCard post={post} />;
-    case "white-bold": return <WhiteBoldCard post={post} />;
-    default: return <BlueGradientCard post={post} />;
-  }
-};
-
 const Blog = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const { ref, isVisible } = useScrollAnimation();
-  const [scrollY, setScrollY] = useState(0);
+  const [featuredIndex, setFeaturedIndex] = useState(0);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 8;
 
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  const featuredPost = blogPosts[featuredIndex];
+  const sidebarPosts = blogPosts.slice(0, 6);
+  
+  const filteredPosts = searchQuery 
+    ? blogPosts.filter(post => post.title.toLowerCase().includes(searchQuery.toLowerCase()))
+    : blogPosts;
 
-  const filteredPosts = selectedCategory === "All" 
-    ? blogPosts 
-    : blogPosts.filter(post => post.category === selectedCategory);
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+  const currentPosts = filteredPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
+
+  const nextFeatured = () => {
+    setFeaturedIndex((prev) => (prev + 1) % blogPosts.length);
+  };
+
+  const prevFeatured = () => {
+    setFeaturedIndex((prev) => (prev - 1 + blogPosts.length) % blogPosts.length);
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Full Screen with Ken Burns Background */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Cosmic Nebula */}
-        <div className="absolute inset-0 overflow-hidden">
+      {/* Hero Section - Blue Background with Moon */}
+      <section className="relative bg-primary min-h-[70vh] flex items-end overflow-hidden">
+        {/* Moon Image */}
+        <div className="absolute right-0 top-0 bottom-0 w-1/2 lg:w-2/5">
           <div 
-            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
-            style={{ 
-              backgroundImage: `url(${cosmicNebula})`,
-              filter: "brightness(0.6) saturate(1.3)",
+            className="absolute inset-0 bg-cover bg-left"
+            style={{
+              backgroundImage: `url(https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?w=1200&h=1200&fit=crop)`,
+              filter: "brightness(0.9) contrast(1.1)",
             }}
           />
-          
-          {/* Aurora light overlay - Nebula pink/purple/cyan theme */}
-          <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-pink-600/25 via-transparent to-cyan-500/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/20 via-transparent to-fuchsia-500/15" />
-          </div>
-          
-          {/* Light sweep effect */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
-          </div>
-          
-          {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
-          
-          {/* 3D Nebula Effect */}
-          <Planet3D type="nebula" className="opacity-50" />
-        </div>
-        
-        {/* Floating Tags with Parallax - Colorful */}
-        <div>
-          {floatingTags.map((tag, index) => (
-            <span
-              key={`${tag.label}-${index}`}
-              className={`absolute animate-float hidden sm:block px-4 py-2 rounded-md text-sm font-medium shadow-lg ${tag.color}`}
-              style={{
-                top: tag.top,
-                left: tag.left,
-                right: tag.right,
-                bottom: tag.bottom,
-                animationDelay: `${index * 0.3}s`,
-                transform: `translateY(${scrollY * 0.05}px)`,
-              }}
-            >
-              {tag.label}
-            </span>
-          ))}
-          {floatingTags.slice(0, 4).map((tag, index) => (
-            <span
-              key={`mobile-${tag.label}-${index}`}
-              className={`absolute animate-float sm:hidden px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
-              style={{
-                top: tag.mobileTop,
-                left: tag.mobileLeft,
-                right: tag.mobileRight,
-                animationDelay: `${index * 0.3}s`,
-              }}
-            >
-              {tag.label}
-            </span>
-          ))}
+          <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/50 to-transparent" />
         </div>
 
-        {/* Content with Stagger Animation */}
-        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
-          <div className="mb-16">
-            <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Blog ]</span>
-            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-              Bl<span className="serif-italic text-primary">o</span>g
-            </h1>
-          </div>
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-            <p className="text-lg text-white/60 max-w-xl">
-              Marketing strategies, guides, and insights for succeeding in Korea's Web3 market.
-            </p>
-            <CalendlyButton className="lunar-btn">
-              <Calendar className="w-4 h-4" />
-              <span>Book a Consultation</span>
-            </CalendlyButton>
-          </div>
+        {/* Content */}
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 pb-24 pt-40">
+          <h1 className="text-[20vw] md:text-[200px] lg:text-[280px] font-light text-white leading-[0.8] tracking-tight">
+            Bl<span className="serif-italic">o</span>g
+          </h1>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/30">
-          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
-          <span className="text-xs uppercase tracking-widest">Scroll</span>
+        <div className="absolute bottom-8 right-8 text-white/60">
+          <ChevronDown className="w-8 h-8 animate-bounce" />
         </div>
       </section>
 
-      {/* Blog Grid - Dark Theme Magazine Style */}
-      <section ref={ref} className="bg-background py-24 px-4">
-        <div className="container mx-auto max-w-7xl">
-          {/* Categories Filter */}
-          <div className="flex flex-wrap gap-3 mb-12">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all border ${
-                  selectedCategory === category
-                    ? "bg-primary text-white border-primary"
-                    : "bg-transparent text-white/60 border-white/20 hover:border-primary hover:text-primary"
-                }`}
+      {/* Featured Article + Sidebar */}
+      <section className="bg-[hsl(0,0%,96%)]">
+        <div className="flex flex-col lg:flex-row">
+          {/* Featured Article - Left Side */}
+          <div className="lg:w-2/3 relative">
+            <Link to={`/blog/${featuredPost.slug}`} className="block relative aspect-[16/10] lg:aspect-auto lg:h-[600px] group">
+              <img 
+                src={featuredPost.image} 
+                alt={featuredPost.title}
+                className="w-full h-full object-cover"
+              />
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              
+              {/* Logo Badge */}
+              <div className="absolute top-6 left-1/2 -translate-x-1/2 flex items-center gap-2 text-white/80">
+                <div className="w-6 h-6 rounded bg-white/20 flex items-center justify-center">
+                  <span className="text-xs font-bold">CB</span>
+                </div>
+                <span className="text-sm">CryptoBridge Korea</span>
+              </div>
+
+              {/* Navigation Arrows */}
+              <button 
+                onClick={(e) => { e.preventDefault(); prevFeatured(); }}
+                className="absolute top-6 left-6 text-white/60 hover:text-white transition-colors"
               >
-                {category}
+                <ChevronLeft className="w-6 h-6" />
               </button>
-            ))}
+              <button 
+                onClick={(e) => { e.preventDefault(); nextFeatured(); }}
+                className="absolute top-6 right-6 text-white/60 hover:text-white transition-colors"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+
+              {/* Title */}
+              <div className="absolute bottom-0 left-0 right-0 p-8 lg:p-12">
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white uppercase tracking-wide leading-tight mb-4">
+                  {featuredPost.title}
+                </h2>
+                <span className="text-white/60 text-sm">www.cryptobridgekorea.com/blog</span>
+              </div>
+            </Link>
           </div>
 
-          {/* Blog Grid - Magazine Layout */}
-          <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            {filteredPosts.map((post, index) => (
+          {/* Sidebar - Right Side */}
+          <div className="lg:w-1/3 bg-white p-6 lg:p-8">
+            <div className="space-y-0">
+              {sidebarPosts.map((post, index) => (
+                <Link 
+                  key={post.id}
+                  to={`/blog/${post.slug}`}
+                  className="flex gap-4 py-4 border-b border-[hsl(0,0%,90%)] last:border-0 group"
+                >
+                  {/* Thumbnail */}
+                  <div className="w-24 h-16 flex-shrink-0 rounded overflow-hidden">
+                    <img 
+                      src={post.image} 
+                      alt={post.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-sm font-medium text-[hsl(0,0%,10%)] leading-tight line-clamp-2 group-hover:text-primary transition-colors">
+                      {post.title}
+                    </h3>
+                    <span className="text-xs text-[hsl(0,0%,50%)] mt-1 block">{post.date}</span>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Selected Article Info */}
+      <section className="bg-white py-12 px-4">
+        <div className="container mx-auto max-w-7xl">
+          <span className="text-[hsl(0,0%,50%)] text-sm block mb-2">{featuredPost.date}</span>
+          <h2 className="text-2xl md:text-3xl font-medium text-[hsl(0,0%,10%)]">
+            {featuredPost.title}
+          </h2>
+        </div>
+      </section>
+
+      {/* Recent News Section */}
+      <section className="bg-[hsl(0,0%,96%)] py-16 px-4">
+        <div className="container mx-auto max-w-7xl">
+          {/* Header with Search */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+            <span className="text-[hsl(0,0%,10%)] text-lg">recent news</span>
+            <div className="flex items-center gap-2">
+              <div className="relative flex-1 md:w-80">
+                <Input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="bg-white border-0 rounded-full pl-4 pr-10 h-12 text-[hsl(0,0%,10%)]"
+                />
+              </div>
+              <button className="bg-primary text-white px-6 h-12 rounded-lg font-medium hover:bg-primary/90 transition-colors">
+                Search
+              </button>
+            </div>
+          </div>
+
+          {/* Blog Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {currentPosts.map((post) => (
               <Link 
                 key={post.id}
                 to={`/blog/${post.slug}`}
-                className="block rounded-2xl overflow-hidden min-h-[400px] md:min-h-[500px] transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="group"
               >
-                <BlogCard post={post} />
+                {/* Image */}
+                <div className="aspect-[4/3] rounded-xl overflow-hidden mb-4">
+                  <img 
+                    src={post.image} 
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                {/* Content */}
+                <span className="text-[hsl(0,0%,50%)] text-sm block mb-2">{post.date}</span>
+                <h3 className="text-base font-medium text-[hsl(0,0%,10%)] leading-tight group-hover:text-primary transition-colors">
+                  {post.title}
+                </h3>
               </Link>
             ))}
           </div>
 
-          <div className="dotted-line mt-24" />
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between mt-16 pt-8 border-t border-[hsl(0,0%,85%)]">
+              <span className="text-[hsl(0,0%,10%)]">{currentPage} / {totalPages}</span>
+              <button 
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="text-[hsl(0,0%,10%)] hover:text-primary transition-colors disabled:opacity-50"
+              >
+                Next Page
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* Newsletter Section */}
+      <section className="bg-[hsl(0,0%,96%)] pb-24">
+        {/* Yellow Marquee */}
+        <div className="bg-[#DAFF00] py-3 overflow-hidden mb-16">
+          <div className="animate-marquee whitespace-nowrap flex">
+            {[...Array(10)].map((_, i) => (
+              <span key={i} className="text-black font-medium mx-8">Subscribe to Our Blog</span>
+            ))}
+          </div>
+        </div>
+
+        {/* Newsletter Form */}
+        <div className="container mx-auto max-w-5xl px-4">
+          <div className="flex flex-col md:flex-row gap-4">
+            <Input
+              type="text"
+              placeholder="name"
+              className="flex-1 bg-[hsl(0,0%,92%)] border-0 rounded-2xl h-16 px-6 text-lg text-[hsl(0,0%,10%)]"
+            />
+            <Input
+              type="email"
+              placeholder="e-mail"
+              className="flex-1 bg-[hsl(0,0%,92%)] border-0 rounded-2xl h-16 px-6 text-lg text-[hsl(0,0%,10%)]"
+            />
+            <button className="bg-[hsl(0,0%,15%)] text-white px-12 h-16 rounded-2xl text-lg font-medium hover:bg-[hsl(0,0%,20%)] transition-colors">
+              Subscribe
+            </button>
+          </div>
         </div>
       </section>
 
