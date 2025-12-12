@@ -1,5 +1,6 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
 import communityImage from "@/assets/services/community-growth.jpg";
+import seoulHanriver from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
 
 const processSteps = [
   {
@@ -19,6 +20,24 @@ const processSteps = [
   },
 ];
 
+const themeConfig = {
+  backgroundImage: seoulHanriver,
+  auroraColors: {
+    primary: "from-blue-600/30",
+    secondary: "to-cyan-500/25",
+    tertiary: "from-teal-500/20",
+  },
+  accentColor: "#0891b2",
+  accentColorHover: "#0e7490",
+  floatingTags: [
+    { label: "Discord", top: "15%", left: "8%" },
+    { label: "Telegram", top: "25%", right: "12%" },
+    { label: "Moderation", top: "45%", left: "5%" },
+    { label: "AMA", top: "55%", right: "8%" },
+    { label: "24/7 Support", top: "35%", left: "15%" },
+  ],
+};
+
 const CommunityService = () => {
   return (
     <ServiceDetailLayout
@@ -31,6 +50,7 @@ const CommunityService = () => {
       processSteps={processSteps}
       aboutImage={communityImage}
       currentServiceSlug="community"
+      themeConfig={themeConfig}
     />
   );
 };

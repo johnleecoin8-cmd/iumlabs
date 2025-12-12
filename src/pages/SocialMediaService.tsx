@@ -24,6 +24,24 @@ const processSteps = [
   },
 ];
 
+const themeConfig = {
+  backgroundImage: socialMediaImage,
+  auroraColors: {
+    primary: "from-purple-600/30",
+    secondary: "to-pink-500/25",
+    tertiary: "from-fuchsia-500/20",
+  },
+  accentColor: "#a855f7",
+  accentColorHover: "#9333ea",
+  floatingTags: [
+    { label: "X/Twitter", top: "18%", left: "10%" },
+    { label: "Content", top: "28%", right: "15%" },
+    { label: "Engagement", top: "42%", left: "6%" },
+    { label: "Analytics", top: "52%", right: "10%" },
+    { label: "Viral Growth", top: "38%", left: "18%" },
+  ],
+};
+
 const SocialMediaService = () => {
   return (
     <ServiceDetailLayout
@@ -36,6 +54,7 @@ const SocialMediaService = () => {
       processSteps={processSteps}
       aboutImage={socialMediaImage}
       currentServiceSlug="social-media"
+      themeConfig={themeConfig}
     />
   );
 };
