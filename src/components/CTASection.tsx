@@ -108,6 +108,15 @@ const CTASection = () => {
               <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
             </CalendlyButton>
             <a 
+              href="https://calendly.com/cryptobridgekorea/free-audit"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-4 md:py-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold hover:scale-105 transition-all shadow-lg hover:shadow-emerald-500/30"
+            >
+              <Sparkles className="w-5 h-5" />
+              <span>Free Marketing Audit</span>
+            </a>
+            <a 
               href={`mailto:${brand.email}`}
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-4 md:py-5 rounded-2xl border-2 border-white/30 text-white font-medium hover:bg-white/10 transition-all"
             >

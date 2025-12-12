@@ -11,6 +11,7 @@ import InsightsSection from "@/components/InsightsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import SectionIndicator from "@/components/SectionIndicator";
+import FloatingContactButton from "@/components/FloatingContactButton";
 import useScrollReveal from "@/hooks/useScrollReveal";
 
 const Index = () => {
@@ -62,6 +63,7 @@ const Index = () => {
       </section>
       
       <Footer />
+      <FloatingContactButton />
     </div>
   );
 };
