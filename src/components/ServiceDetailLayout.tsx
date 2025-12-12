@@ -1,10 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Calendar, ArrowDown } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
+
+// Background
+import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
 
 // Client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -104,34 +107,76 @@ const ServiceDetailLayout = ({
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero Section - Blue Gradient */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-gradient-to-br from-[#1e3a8a] via-[#2563eb] to-[#0891b2]">
-        {/* Abstract 3D Shapes with Float Animation */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[50%] h-[70%] opacity-70 pointer-events-none hidden lg:block">
+      {/* Hero Section - Cosmic Theme */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background - Cosmic Nebula */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div 
+            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
+            style={{ 
+              backgroundImage: `url(${cosmicNebula})`,
+              filter: "brightness(0.7) saturate(1.2)",
+            }}
+          />
+          
+          {/* Aurora light overlay - Pink/Cyan cosmic theme */}
+          <div className="absolute inset-0 animate-aurora">
+            <div className="absolute inset-0 bg-gradient-to-tr from-pink-600/30 via-transparent to-cyan-500/25" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/30 via-transparent to-blue-500/20" />
+          </div>
+          
+          {/* Twinkling stars effect */}
+          <div className="absolute inset-0">
+            {[...Array(40)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 3}s`,
+                  animationDuration: `${2 + Math.random() * 2}s`,
+                  opacity: 0.3 + Math.random() * 0.7,
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* Light sweep effect */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
+          </div>
+          
+          {/* Dark overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.85)]" />
+        </div>
+
+        {/* Floating 3D Shapes with cosmic glow */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[50%] h-[70%] opacity-60 pointer-events-none hidden lg:block">
           <div className="relative w-full h-full">
-            {/* Large metallic sphere */}
+            {/* Large cosmic orb */}
             <div 
-              className="absolute top-[5%] right-[15%] w-72 h-72 rounded-full bg-gradient-to-br from-white/40 via-white/20 to-transparent backdrop-blur-sm border border-white/30 shadow-2xl animate-float"
+              className="absolute top-[5%] right-[15%] w-72 h-72 rounded-full bg-gradient-to-br from-pink-500/30 via-purple-500/20 to-transparent backdrop-blur-sm border border-pink-400/30 shadow-2xl shadow-pink-500/20 animate-float"
               style={{ animationDuration: "6s" }}
             />
-            {/* Medium rounded rectangle */}
+            {/* Medium shape */}
             <div 
-              className="absolute top-[35%] right-[5%] w-56 h-56 rounded-[40px] bg-gradient-to-tr from-cyan-200/30 via-white/25 to-transparent backdrop-blur-md border border-white/40 rotate-12 shadow-xl animate-float"
+              className="absolute top-[35%] right-[5%] w-56 h-56 rounded-[40px] bg-gradient-to-tr from-cyan-400/30 via-blue-500/20 to-transparent backdrop-blur-md border border-cyan-400/40 rotate-12 shadow-xl shadow-cyan-500/20 animate-float"
               style={{ animationDuration: "8s", animationDelay: "1s" }} 
             />
-            {/* Small accent shape */}
+            {/* Small accent */}
             <div 
-              className="absolute top-[55%] right-[30%] w-40 h-40 rounded-3xl bg-gradient-to-bl from-blue-100/35 via-white/20 to-transparent backdrop-blur-lg border border-white/30 -rotate-6 shadow-lg animate-float"
+              className="absolute top-[55%] right-[30%] w-40 h-40 rounded-3xl bg-gradient-to-bl from-purple-400/35 via-pink-400/20 to-transparent backdrop-blur-lg border border-purple-400/30 -rotate-6 shadow-lg shadow-purple-500/20 animate-float"
               style={{ animationDuration: "7s", animationDelay: "2s" }} 
             />
-            {/* Tiny floating orb */}
+            {/* Tiny orb */}
             <div 
-              className="absolute top-[15%] right-[0%] w-20 h-20 rounded-full bg-gradient-to-r from-white/50 to-white/20 border border-white/30 shadow-md animate-float"
+              className="absolute top-[15%] right-[0%] w-20 h-20 rounded-full bg-gradient-to-r from-cyan-400/50 to-pink-400/30 border border-white/30 shadow-md shadow-cyan-400/30 animate-float"
               style={{ animationDuration: "5s", animationDelay: "0.5s" }}
             />
             {/* Extra accent */}
             <div 
-              className="absolute top-[70%] right-[20%] w-16 h-16 rounded-full bg-white/30 border border-white/20 animate-float"
+              className="absolute top-[70%] right-[20%] w-16 h-16 rounded-full bg-pink-400/30 border border-pink-300/20 shadow-lg shadow-pink-400/20 animate-float"
               style={{ animationDuration: "9s", animationDelay: "3s" }}
             />
           </div>
