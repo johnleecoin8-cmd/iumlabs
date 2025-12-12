@@ -126,18 +126,19 @@ const ProcessSection = () => {
   return (
     <section ref={ref} className="py-24 px-6 bg-background border-t border-border overflow-hidden">
       <div className="container mx-auto max-w-7xl">
-        {/* Section Header */}
-        <div className={`flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          <div>
-            <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
-              Methodology
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
-              The Bridge <span className="text-primary">Method</span>
-            </h2>
-          </div>
-          <p className="text-muted-foreground max-w-md text-base md:text-lg">
-            Our proven 6-step methodology has successfully launched 200+ projects into the Korean market
+        {/* Section Header - Bold Single Word Style */}
+        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          {/* Bold Single Word */}
+          <h2 className="text-7xl md:text-8xl lg:text-9xl font-black tracking-[0.15em] text-foreground uppercase mb-6">
+            LAUNCH
+          </h2>
+          
+          {/* Horizontal Line Decoration */}
+          <div className={`w-full max-w-xl mx-auto h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent mb-6 transition-all duration-1000 delay-300 ${isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`} />
+          
+          {/* Subtitle */}
+          <p className={`text-muted-foreground text-sm md:text-base tracking-wider uppercase transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            6 steps from idea to Korean market domination
           </p>
         </div>
 
