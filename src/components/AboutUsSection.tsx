@@ -168,29 +168,38 @@ const AboutUsSection = () => {
 
         {/* As Featured In Section */}
         <div className={`mt-20 pt-16 border-t border-white/[0.06] transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <p className="text-center text-white/40 text-sm uppercase tracking-widest mb-10">
+          <p className="text-center text-white/40 text-sm uppercase tracking-widest mb-8">
             As Featured In
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16">
-            {[
-              { name: "Cointelegraph", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Cointelegraph_logo.svg/512px-Cointelegraph_logo.svg.png" },
-              { name: "CoinDesk", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/CoinDesk_logo.svg/512px-CoinDesk_logo.svg.png" },
-              { name: "BlockMedia", logo: "https://www.blockmedia.co.kr/wp-content/uploads/2020/06/blockmedia_logo.png" },
-              { name: "TokenPost", logo: "https://cdn.tokenpost.kr/uploads/2019/12/logo-1.png" },
-              { name: "Decrypt", logo: "https://decrypt.co/wp-content/themes/flavor/assets/images/favicon/decrypt-logo.svg" },
-            ].map((media, index) => (
-              <div
-                key={media.name}
-                className="relative group"
-                style={{ transitionDelay: `${index * 100 + 600}ms` }}
-              >
-                <img
-                  src={media.logo}
-                  alt={media.name}
-                  className="h-6 md:h-8 w-auto object-contain brightness-0 invert opacity-40 group-hover:opacity-80 transition-all duration-300 grayscale group-hover:grayscale-0"
-                />
-              </div>
-            ))}
+          <div className="relative overflow-hidden">
+            {/* Left fade gradient */}
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
+            {/* Right fade gradient */}
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
+            
+            <div className="flex items-center logo-marquee-slow">
+              {[
+                { name: "Cointelegraph", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Cointelegraph_logo.svg/512px-Cointelegraph_logo.svg.png" },
+                { name: "CoinDesk", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/CoinDesk_logo.svg/512px-CoinDesk_logo.svg.png" },
+                { name: "BlockMedia", logo: "https://www.blockmedia.co.kr/wp-content/uploads/2020/06/blockmedia_logo.png" },
+                { name: "TokenPost", logo: "https://cdn.tokenpost.kr/uploads/2019/12/logo-1.png" },
+                { name: "Decrypt", logo: "https://decrypt.co/wp-content/themes/flavor/assets/images/favicon/decrypt-logo.svg" },
+              ].flatMap((media, i) => [media, media]).map((media, index) => (
+                <div 
+                  key={index} 
+                  className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+                >
+                  <img 
+                    src={media.logo} 
+                    alt={media.name} 
+                    className="h-4 w-4 sm:h-5 sm:w-5 object-contain brightness-0 invert opacity-80 flex-shrink-0"
+                  />
+                  <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
+                    {media.name}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
