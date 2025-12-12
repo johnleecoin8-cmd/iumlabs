@@ -35,15 +35,7 @@ const WhyChooseUsSection = () => {
           <img 
             src={moonImage}
             alt=""
-            className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] object-cover rounded-full opacity-70"
-            style={{
-              filter: 'saturate(0.2) brightness(0.85)',
-            }}
-          />
-          <img 
-            src={moonImage}
-            alt=""
-            className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] object-cover rounded-full opacity-70"
+            className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] object-contain"
             style={{
               filter: 'saturate(0.2) brightness(0.85)',
             }}
