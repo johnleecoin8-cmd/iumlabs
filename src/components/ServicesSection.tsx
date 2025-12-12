@@ -43,6 +43,19 @@ const floatingTags = [
   { label: "PR & Media", bottom: "30%", left: "10%", color: "border-orange-400/50 text-orange-400" },
 ];
 
+const GlowingOrbs = () => (
+  <>
+    <div 
+      className="glowing-orb glowing-orb-cyan w-[450px] h-[450px] -top-40 right-20"
+      style={{ animationDelay: '0s' }}
+    />
+    <div 
+      className="glowing-orb glowing-orb-purple w-[350px] h-[350px] bottom-40 -left-20"
+      style={{ animationDelay: '-8s' }}
+    />
+  </>
+);
+
 const ServicesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
@@ -50,11 +63,31 @@ const ServicesSection = () => {
     <div ref={ref} className="relative overflow-hidden flex-1">
       {/* Hero Typography Section - Dark */}
       <div className="relative min-h-[60vh] flex items-center justify-center px-4 py-24 bg-[hsl(0,0%,4%)]">
+        {/* Glowing Orbs */}
+        <GlowingOrbs />
+
+        {/* Floating Service Tags with connection lines */}
+        <svg className="absolute inset-0 w-full h-full pointer-events-none z-0 hidden lg:block">
+          <defs>
+            <linearGradient id="service-line-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="rgba(255,255,255,0.05)" />
+              <stop offset="50%" stopColor="rgba(255,255,255,0.15)" />
+              <stop offset="100%" stopColor="rgba(255,255,255,0.05)" />
+            </linearGradient>
+          </defs>
+          {/* Connection lines to center */}
+          <line x1="8%" y1="20%" x2="50%" y2="50%" className="connection-line" stroke="url(#service-line-gradient)" />
+          <line x1="10%" y1="35%" x2="50%" y2="50%" className="connection-line" stroke="url(#service-line-gradient)" />
+          <line x1="90%" y1="25%" x2="50%" y2="50%" className="connection-line" stroke="url(#service-line-gradient)" />
+          <line x1="92%" y1="50%" x2="50%" y2="50%" className="connection-line" stroke="url(#service-line-gradient)" />
+          <line x1="12%" y1="70%" x2="50%" y2="50%" className="connection-line" stroke="url(#service-line-gradient)" />
+        </svg>
+
         {/* Floating Service Tags */}
         {floatingTags.map((tag, index) => (
           <div
             key={index}
-            className="absolute hidden lg:block animate-float z-10"
+            className="absolute hidden lg:block floating-tag z-10"
             style={{ 
               top: tag.top,
               left: tag.left,
@@ -63,7 +96,7 @@ const ServicesSection = () => {
               animationDelay: `${index * 0.4}s` 
             }}
           >
-            <span className={`px-4 py-2 text-xs rounded-full border bg-transparent ${tag.color}`}>
+            <span className={`px-4 py-2 text-xs rounded-full border bg-black/40 backdrop-blur-sm ${tag.color} glow-border`}>
               {tag.label}
             </span>
           </div>
@@ -72,7 +105,7 @@ const ServicesSection = () => {
         {/* Giant Typography */}
         <div className={`text-center transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
           <h2 className="text-[15vw] md:text-[18vw] lg:text-[20vw] font-light leading-[0.85] tracking-tight text-white">
-            Our<span className="serif-italic text-primary">Services</span>
+            Our<span className="serif-italic text-primary text-glow">Services</span>
           </h2>
         </div>
 
@@ -87,9 +120,18 @@ const ServicesSection = () => {
         </div>
       </div>
 
-      {/* Services List - Light Background */}
-      <div className="bg-[hsl(0,0%,96%)] py-20">
-        <div className="container mx-auto max-w-6xl px-4">
+      {/* Services List - Light Background with enhanced design */}
+      <div className="bg-[hsl(0,0%,96%)] py-20 relative overflow-hidden">
+        {/* Subtle orbs for light section */}
+        <div 
+          className="absolute w-[500px] h-[500px] -top-40 -right-40 rounded-full pointer-events-none"
+          style={{ 
+            background: 'radial-gradient(circle, hsl(217 91% 60% / 0.08) 0%, transparent 70%)',
+            filter: 'blur(60px)',
+          }}
+        />
+
+        <div className="container mx-auto max-w-6xl px-4 relative z-10">
           {services.map((service, index) => (
             <div
               key={service.number}
@@ -102,9 +144,9 @@ const ServicesSection = () => {
               <div className="dotted-line-light mb-10" />
               
               <div className="grid grid-cols-12 gap-6 items-start">
-                {/* Number */}
+                {/* Number with glow */}
                 <div className="col-span-12 md:col-span-1">
-                  <span className="text-[hsl(0,0%,40%)] text-sm font-mono">[ {service.number} ]</span>
+                  <span className="text-primary text-sm font-mono glass-card-light px-2 py-1 rounded">[ {service.number} ]</span>
                 </div>
 
                 {/* Title */}
@@ -121,11 +163,11 @@ const ServicesSection = () => {
                   </p>
                 </div>
 
-                {/* Arrow */}
+                {/* Arrow with enhanced hover */}
                 <div className="col-span-12 md:col-span-2 flex justify-end">
                   <Link 
                     to="/services"
-                    className="w-12 h-12 rounded-full border border-[hsl(0,0%,80%)] flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-300"
+                    className="w-12 h-12 rounded-full border border-[hsl(0,0%,80%)] flex items-center justify-center group-hover:border-primary group-hover:bg-primary group-hover:shadow-lg group-hover:shadow-primary/20 transition-all duration-300"
                   >
                     <ArrowRight className="w-5 h-5 text-[hsl(0,0%,40%)] group-hover:text-white transition-colors" />
                   </Link>
