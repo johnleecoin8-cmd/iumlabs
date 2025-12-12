@@ -32,12 +32,12 @@ const WhyChooseUsSection = () => {
           }}
           className="relative"
         >
-          {/* Subtle glow */}
-          <div 
-            className="absolute inset-0 blur-3xl opacity-30"
+          <img 
+            src={moonImage}
+            alt=""
+            className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] object-cover rounded-full opacity-70"
             style={{
-              background: 'radial-gradient(circle, rgba(150,180,255,0.4) 0%, rgba(80,120,255,0.2) 40%, transparent 70%)',
-              transform: 'scale(1.3)',
+              filter: 'saturate(0.2) brightness(0.85)',
             }}
           />
           <img 
