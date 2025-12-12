@@ -85,8 +85,6 @@ const CardDecorations = ({ type }: { type: string }) => {
             </svg>
           </div>
           <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-radial from-yellow-200/40 to-transparent blur-2xl" />
-          <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full border-2 border-white/20" />
-          <div className="absolute top-20 left-20 w-4 h-4 rotate-45 bg-white/30" />
         </>
       );
     case "kucoin":
@@ -95,15 +93,8 @@ const CardDecorations = ({ type }: { type: string }) => {
           <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d="M0,50 Q25,30 50,50 T100,50" stroke="white" strokeWidth="0.5" fill="none" />
             <path d="M0,60 Q25,40 50,60 T100,60" stroke="white" strokeWidth="0.5" fill="none" />
-            <path d="M0,70 Q25,50 50,70 T100,70" stroke="white" strokeWidth="0.5" fill="none" />
           </svg>
           <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-gradient-to-t from-emerald-300/30 to-transparent" />
-          <div className="absolute top-8 right-8 grid grid-cols-4 gap-2 opacity-30">
-            {[...Array(16)].map((_, i) => (
-              <div key={i} className="w-1.5 h-1.5 rounded-full bg-white" />
-            ))}
-          </div>
-          <div className="absolute bottom-16 left-8 w-20 h-20 rounded-full border border-dashed border-white/30" />
         </>
       );
     case "polygon":
@@ -111,13 +102,7 @@ const CardDecorations = ({ type }: { type: string }) => {
         <>
           <div className="absolute top-10 right-10 w-16 h-16 rotate-45 border-2 border-white/30" />
           <div className="absolute bottom-20 left-16 w-12 h-12 rotate-45 bg-white/10" />
-          <div className="absolute top-1/2 right-1/4 w-8 h-8 rotate-45 border border-purple-300/50" />
           <div className="absolute -top-10 left-1/3 w-40 h-40 rounded-full bg-purple-400/30 blur-3xl" />
-          <svg className="absolute bottom-0 left-0 w-full h-24 opacity-20" viewBox="0 0 100 30" preserveAspectRatio="none">
-            <polygon points="0,30 10,0 20,30" fill="white" />
-            <polygon points="30,30 40,10 50,30" fill="white" />
-            <polygon points="60,30 70,5 80,30" fill="white" />
-          </svg>
         </>
       );
     case "ondo":
@@ -125,17 +110,8 @@ const CardDecorations = ({ type }: { type: string }) => {
         <>
           <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
             <path d="M0,80 L20,70 L40,75 L60,50 L80,55 L100,30" stroke="#3B82F6" strokeWidth="1" fill="none" />
-            <path d="M0,90 L20,85 L40,88 L60,70 L80,72 L100,50" stroke="#60A5FA" strokeWidth="0.5" fill="none" />
           </svg>
-          <div className="absolute inset-0 opacity-10">
-            <div className="w-full h-full" style={{ 
-              backgroundImage: 'linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.3) 1px, transparent 1px)',
-              backgroundSize: '20px 20px'
-            }} />
-          </div>
           <div className="absolute top-1/4 right-1/4 w-3 h-3 rounded-full bg-blue-400 shadow-lg shadow-blue-500/50" />
-          <div className="absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-blue-300" />
-          <div className="absolute bottom-1/3 right-1/3 w-4 h-4 rounded-full border-2 border-blue-400/50" />
         </>
       );
     case "peaq":
@@ -145,14 +121,9 @@ const CardDecorations = ({ type }: { type: string }) => {
             <circle cx="20" cy="30" r="3" fill="#00FF9D" />
             <circle cx="80" cy="20" r="2" fill="#00FF9D" />
             <circle cx="60" cy="70" r="4" fill="#00FF9D" />
-            <circle cx="30" cy="80" r="2" fill="#00FF9D" />
             <line x1="20" y1="30" x2="80" y2="20" stroke="#00FF9D" strokeWidth="0.5" />
             <line x1="20" y1="30" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
-            <line x1="60" y1="70" x2="30" y2="80" stroke="#00FF9D" strokeWidth="0.5" />
-            <line x1="80" y1="20" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
           </svg>
-          <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-green-300/40 to-transparent" />
-          <div className="absolute top-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-300/30 to-transparent" />
           <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full bg-green-400/20 blur-3xl" />
         </>
       );
@@ -160,11 +131,7 @@ const CardDecorations = ({ type }: { type: string }) => {
       return (
         <>
           <div className="absolute top-8 right-8 w-20 h-28 bg-white/10 rounded-sm transform rotate-6" />
-          <div className="absolute top-10 right-10 w-20 h-28 bg-white/15 rounded-sm transform rotate-3" />
           <div className="absolute bottom-10 left-10 w-24 h-24 rounded-full bg-gradient-to-r from-red-300/40 to-pink-300/30" />
-          <div className="absolute top-1/3 left-1/4 w-6 h-6 rounded-full bg-red-200/50" />
-          <div className="absolute bottom-1/4 right-0 w-1/2 h-px bg-white/20" />
-          <div className="absolute bottom-1/4 right-0 w-1/3 h-px bg-white/20 translate-y-3" />
         </>
       );
     default:
@@ -176,16 +143,24 @@ const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1 bg-[hsl(0,0%,4%)]">
-      <div className="container mx-auto max-w-7xl">
+    <div ref={ref} className="py-24 px-4 flex-1 relative overflow-hidden" style={{
+      background: 'linear-gradient(135deg, #1a1040 0%, #2d1b69 40%, #1e3a5f 100%)'
+    }}>
+      {/* Ambient glow effects */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header */}
         <div className={`flex flex-col md:flex-row items-start md:items-center justify-between mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="flex items-center gap-4 mb-4 md:mb-0">
-            <span className="number-badge text-white/50">200+ Clients</span>
+            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-500/20 border border-amber-500/30 text-amber-300 text-sm font-medium">
+              200+ Clients
+            </span>
           </div>
           
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-center text-white flex-1">
-            Featured <span className="serif-italic text-primary">Cases</span>
+            Featured <span className="serif-italic text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-pink-300 to-amber-300">Cases</span>
           </h2>
           
           <div className="text-white/30 text-2xl font-light hidden md:block">///</div>
@@ -243,10 +218,10 @@ const CasesSection = () => {
                 </div>
               </TiltCard>
 
-              {/* Content Below Card - Same as /projects page */}
+              {/* Content Below Card */}
               <div>
                 <h4 className="text-lg font-medium text-white mb-2">{caseItem.name}</h4>
-                <p className="text-sm text-white/50 mb-3 line-clamp-2">
+                <p className="text-sm text-white/60 mb-3 line-clamp-2">
                   {caseItem.result}
                 </p>
                 <div className="flex flex-wrap gap-2">
@@ -263,7 +238,10 @@ const CasesSection = () => {
         <div className={`flex justify-center mt-12 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <Link
             to="/projects"
-            className="lunar-btn"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-medium transition-all duration-300 hover:scale-105"
+            style={{
+              background: 'linear-gradient(135deg, #D4AF37, #F4D03F, #D4AF37)'
+            }}
           >
             <span>View All Cases</span>
             <ArrowUpRight className="w-4 h-4" />
