@@ -158,36 +158,49 @@ const CasesSection = () => {
                 }}
               />
 
-              {/* Top Section - Category & Arrow */}
+              {/* Top Section - Category Badge with Project Color & Arrow */}
               <div className="relative z-10 p-8 flex items-center justify-between">
-                <span className="text-xs font-medium uppercase tracking-widest text-white/70 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full">
+                <span 
+                  className="text-xs font-medium uppercase tracking-widest text-white/90 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full"
+                  style={{ border: `1px solid ${project.glowColor}50` }}
+                >
                   {project.category}
                 </span>
-                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-white/20 group-hover:scale-110 group-hover:rotate-12">
+                <div 
+                  className="w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12"
+                  style={{ backgroundColor: `${project.glowColor}30`, backdropFilter: 'blur(8px)' }}
+                >
                   <ArrowUpRight className="w-5 h-5 text-white" />
                 </div>
               </div>
 
-              {/* Center - Logo */}
+              {/* Center - Logo with Project Color Glow */}
               <div className="relative z-10 flex-1 flex items-center justify-center px-8">
                 <img 
                   src={project.logo} 
                   alt={project.name}
-                  className="h-16 md:h-20 w-auto object-contain brightness-0 invert drop-shadow-2xl group-hover:scale-110 transition-all duration-500"
+                  className="h-16 md:h-20 w-auto object-contain brightness-0 invert group-hover:scale-110 transition-all duration-500"
+                  style={{ filter: `brightness(0) invert(1) drop-shadow(0 0 25px ${project.glowColor}80)` }}
                 />
               </div>
 
-              {/* Bottom Section - Stats */}
+              {/* Bottom Section - Stats with Project Color */}
               <div className="relative z-10 p-8 pt-4">
                 {/* Description - Hidden by default, shown on hover */}
                 <p className="text-sm text-white/60 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 line-clamp-2">
                   {project.description}
                 </p>
                 
-                {/* Stats Row */}
-                <div className="flex items-end justify-between border-t border-white/20 pt-4">
+                {/* Stats Row with Project Color Border */}
+                <div 
+                  className="flex items-end justify-between pt-4"
+                  style={{ borderTop: `1px solid ${project.glowColor}30` }}
+                >
                   <div>
-                    <span className={`text-3xl md:text-4xl font-bold text-white`}>
+                    <span 
+                      className="text-3xl md:text-4xl font-bold"
+                      style={{ color: project.glowColor }}
+                    >
                       {project.result}
                     </span>
                     <p className="text-sm text-white/50 mt-1">{project.resultLabel}</p>

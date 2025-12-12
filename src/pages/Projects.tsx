@@ -221,7 +221,7 @@ const Projects = () => {
           
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
             <p className="text-lg text-white/60 max-w-xl">
-              Explore our portfolio of successful Web3 projects launched in the Korean market.
+              These case studies walk through the challenge, our approach, and the outcomes across services like GTM, KOLs, PR, and social media.
             </p>
             <CalendlyButton className="lunar-btn">
               <Calendar className="w-4 h-4" />
@@ -261,7 +261,12 @@ const Projects = () => {
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
-                <div className="relative aspect-square rounded-3xl overflow-hidden mb-4 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl">
+                <div 
+                  className="relative aspect-square rounded-3xl overflow-hidden mb-4 transition-all duration-500 hover:-translate-y-2"
+                  style={{ boxShadow: `0 4px 30px ${caseItem.glowColor}20` }}
+                  onMouseEnter={(e) => e.currentTarget.style.boxShadow = `0 10px 60px ${caseItem.glowColor}50, 0 0 100px ${caseItem.glowColor}30`}
+                  onMouseLeave={(e) => e.currentTarget.style.boxShadow = `0 4px 30px ${caseItem.glowColor}20`}
+                >
                   {/* Background Image */}
                   <div 
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
@@ -271,11 +276,11 @@ const Projects = () => {
                   {/* Dark Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
                   
-                  {/* Glow Effect on Hover */}
+                  {/* Project Color Glow Effect on Hover */}
                   <div 
-                    className="absolute -inset-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
-                      boxShadow: `0 0 60px 20px ${caseItem.glowColor}40, 0 0 100px 40px ${caseItem.glowColor}20`,
+                      background: `radial-gradient(ellipse at 50% 50%, ${caseItem.glowColor}30 0%, transparent 70%)`,
                     }}
                   />
 
@@ -285,7 +290,8 @@ const Projects = () => {
                     <img
                       src={caseItem.logo}
                       alt={caseItem.name}
-                      className="w-16 h-16 md:w-20 md:h-20 object-contain filter brightness-0 invert mb-4 group-hover:scale-110 transition-transform duration-300 drop-shadow-lg"
+                      className="w-16 h-16 md:w-20 md:h-20 object-contain filter brightness-0 invert mb-4 group-hover:scale-110 transition-transform duration-300"
+                      style={{ filter: `brightness(0) invert(1) drop-shadow(0 0 20px ${caseItem.glowColor}80)` }}
                     />
                     
                     {/* Project Name */}
@@ -294,9 +300,9 @@ const Projects = () => {
                     </h3>
                   </div>
 
-                  {/* Bottom Info - Result */}
+                  {/* Bottom Info - Result with Project Color */}
                   <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-white text-sm font-semibold text-center">
+                    <p className="text-sm font-semibold text-center" style={{ color: caseItem.glowColor }}>
                       {caseItem.result}
                     </p>
                     <p className="text-white/70 text-xs text-center mt-1 uppercase tracking-wider">
@@ -304,16 +310,22 @@ const Projects = () => {
                     </p>
                   </div>
 
-                  {/* Hover Arrow */}
+                  {/* Hover Arrow with Project Color */}
                   <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                    <div 
+                      className="w-10 h-10 rounded-full flex items-center justify-center"
+                      style={{ backgroundColor: `${caseItem.glowColor}30`, backdropFilter: 'blur(8px)' }}
+                    >
                       <ArrowUpRight className="w-5 h-5 text-white" />
                     </div>
                   </div>
 
-                  {/* Category Badge */}
+                  {/* Category Badge with Project Color Border */}
                   <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider">
+                    <span 
+                      className="px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider"
+                      style={{ border: `1px solid ${caseItem.glowColor}40` }}
+                    >
                       {caseItem.category}
                     </span>
                   </div>
@@ -321,7 +333,12 @@ const Projects = () => {
 
                 {/* Text Below Card */}
                 <div className="px-2">
-                  <h3 className="text-xl font-medium text-white mb-1 group-hover:text-primary transition-colors">
+                  <h3 
+                    className="text-xl font-medium text-white mb-1 transition-colors"
+                    style={{ '--hover-color': caseItem.glowColor } as React.CSSProperties}
+                    onMouseEnter={(e) => e.currentTarget.style.color = caseItem.glowColor}
+                    onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                  >
                     {caseItem.name}
                   </h3>
                   <p className="text-white/50 text-sm line-clamp-2">
