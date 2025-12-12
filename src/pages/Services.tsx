@@ -134,26 +134,54 @@ const Services = () => {
           <Planet3D type="sun" className="opacity-60" />
         </div>
 
-        {/* Content */}
+        {/* Colorful Floating Tags */}
+        <div className="absolute inset-0 z-10 pointer-events-none hidden md:block">
+          {/* Left side tags */}
+          <div className="absolute top-[15%] left-[5%] px-4 py-2 rounded-sm bg-pink-500 text-white text-sm font-medium">
+            Responsible
+          </div>
+          <div className="absolute top-[35%] left-[8%] px-4 py-2 rounded-sm bg-yellow-400 text-black text-sm font-medium">
+            Creative
+          </div>
+          <div className="absolute top-[55%] left-[3%] px-4 py-2 rounded-sm bg-purple-500 text-white text-sm font-medium">
+            Innovation-Oriented
+          </div>
+          <div className="absolute top-[75%] left-[15%] px-4 py-2 rounded-sm bg-red-400 text-white text-sm font-medium">
+            Resourceful
+          </div>
+          <div className="absolute top-[85%] left-[5%] px-4 py-2 rounded-sm bg-cyan-400 text-black text-sm font-medium">
+            Strategic
+          </div>
+          
+          {/* Right side tags */}
+          <div className="absolute top-[12%] right-[8%] px-4 py-2 rounded-sm border border-white/60 text-white text-sm font-medium">
+            Responsible
+          </div>
+          <div className="absolute top-[28%] right-[3%] px-4 py-2 rounded-sm border border-white/60 text-white text-sm font-medium">
+            Attention to Detail
+          </div>
+          <div className="absolute top-[50%] right-[5%] px-4 py-2 rounded-sm bg-emerald-400 text-black text-sm font-medium">
+            Innovative
+          </div>
+          <div className="absolute top-[70%] right-[10%] px-4 py-2 rounded-sm bg-pink-500 text-white text-sm font-medium">
+            Result-Driven Mindset
+          </div>
+        </div>
+
+        {/* Content - Right aligned */}
         <div className="container mx-auto px-6 lg:px-16 pt-32 pb-24 relative z-10">
-          <div className="max-w-3xl">
+          <div className="flex flex-col items-end text-right">
             <h1 className="text-white mb-8">
-              <span className="block text-6xl md:text-7xl lg:text-[120px] font-light tracking-tight leading-[0.95]">
-                Our
-              </span>
-              <span className="block text-6xl md:text-7xl lg:text-[120px] font-light tracking-tight leading-[0.95]">
+              <span className="block text-7xl md:text-[120px] lg:text-[180px] font-light tracking-tight leading-[0.9]">
                 Services
               </span>
             </h1>
 
-            <p className="text-white/80 text-lg md:text-xl max-w-2xl mb-12 font-light leading-relaxed">
-              Everything you need to successfully enter and grow in Korea's vibrant crypto market.
+            <p className="text-white/80 text-lg md:text-xl max-w-2xl font-light leading-relaxed">
+              As a Web3 Marketing Agency with a focus on customer satisfaction, 
+              CryptoBridge Korea has tailor made the service offering to include 
+              services that serve to build and grow your Web3 project.
             </p>
-
-            <CalendlyButton className="inline-flex items-center gap-3 bg-[#d4ff00] hover:bg-[#c4ef00] text-black px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#d4ff00]/30">
-              <Calendar className="w-5 h-5" />
-              Book a Consultation
-            </CalendlyButton>
           </div>
         </div>
 
