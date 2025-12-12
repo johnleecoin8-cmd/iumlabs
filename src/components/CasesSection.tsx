@@ -13,49 +13,45 @@ import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
 import bybitLogo from "@/assets/logos/bybit.png";
 
+// Import background images
+import bnbBg from "@/assets/projects/bnb-bg.jpg";
+import kucoinBg from "@/assets/projects/kucoin-bg.jpg";
+import polygonBg from "@/assets/projects/polygon-bg.jpg";
+
 const featuredCases = [
   {
     name: "BNB Chain",
     logo: bnbLogo,
+    bgImage: bnbBg,
     slug: "bnb-chain",
     category: "Infrastructure",
     result: "500K+",
     resultLabel: "Community Members",
     description: "Full-service marketing campaign for Korea market entry",
-    gradient: "from-[#F3BA2F]/30 via-[#F3BA2F]/15 to-transparent",
-    bgColor: "bg-[#F3BA2F]/5",
-    borderColor: "border-[#F3BA2F]/20",
-    hoverBorder: "hover:border-[#F3BA2F]/60",
     glowColor: "#F3BA2F",
     accentColor: "text-[#F3BA2F]",
   },
   {
     name: "KuCoin",
     logo: kucoinLogo,
+    bgImage: kucoinBg,
     slug: "kucoin",
     category: "Exchange",
     result: "$2B+",
     resultLabel: "Trading Volume",
     description: "Community growth and influencer marketing strategy",
-    gradient: "from-[#23AF91]/30 via-[#23AF91]/15 to-transparent",
-    bgColor: "bg-[#23AF91]/5",
-    borderColor: "border-[#23AF91]/20",
-    hoverBorder: "hover:border-[#23AF91]/60",
     glowColor: "#23AF91",
     accentColor: "text-[#23AF91]",
   },
   {
     name: "Polygon",
     logo: polygonLogo,
+    bgImage: polygonBg,
     slug: "polygon",
     category: "Layer 2",
     result: "100+",
     resultLabel: "Dapps Onboarded",
     description: "Developer outreach and ecosystem expansion",
-    gradient: "from-[#8247E5]/30 via-[#8247E5]/15 to-transparent",
-    bgColor: "bg-[#8247E5]/5",
-    borderColor: "border-[#8247E5]/20",
-    hoverBorder: "hover:border-[#8247E5]/60",
     glowColor: "#8247E5",
     accentColor: "text-[#8247E5]",
   },
@@ -101,21 +97,27 @@ const CasesSection = () => {
             <Link
               key={index}
               to={`/projects/${project.slug}`}
-              className={`group relative overflow-hidden rounded-3xl ${project.bgColor} border ${project.borderColor} ${project.hoverBorder} min-h-[380px] flex flex-col transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${
+              className={`group relative overflow-hidden rounded-3xl min-h-[420px] flex flex-col transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ 
                 transitionDelay: `${index * 150}ms`,
               }}
             >
-              {/* Background Gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} pointer-events-none`} />
+              {/* Background Image */}
+              <div 
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                style={{ backgroundImage: `url(${project.bgImage})` }}
+              />
+              
+              {/* Dark Overlay for readability */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
               
               {/* Intense Glow Effect on Hover */}
               <div 
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
                 style={{
-                  background: `radial-gradient(ellipse at 50% 50%, ${project.glowColor}50 0%, ${project.glowColor}25 40%, transparent 70%)`,
+                  background: `radial-gradient(ellipse at 50% 50%, ${project.glowColor}40 0%, ${project.glowColor}15 40%, transparent 70%)`,
                 }}
               />
               <div 
@@ -125,54 +127,43 @@ const CasesSection = () => {
                 }}
               />
 
-              {/* Top Section - Category & Logo */}
-              <div className="relative z-10 p-8 flex-1 flex flex-col">
-                {/* Category Badge */}
-                <div className="flex items-center justify-between mb-8">
-                  <span className={`text-xs font-medium uppercase tracking-widest ${project.accentColor} opacity-80`}>
-                    {project.category}
-                  </span>
-                  <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-white/10 group-hover:scale-110 group-hover:rotate-12">
-                    <ArrowUpRight className="w-5 h-5 text-white" />
-                  </div>
-                </div>
-
-                {/* Logo - Centered and Large */}
-                <div className="flex-1 flex items-center justify-center">
-                  <img 
-                    src={project.logo} 
-                    alt={project.name}
-                    className="h-20 md:h-24 w-auto object-contain brightness-0 invert opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
-                  />
+              {/* Top Section - Category & Arrow */}
+              <div className="relative z-10 p-8 flex items-center justify-between">
+                <span className="text-xs font-medium uppercase tracking-widest text-white/70 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full">
+                  {project.category}
+                </span>
+                <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-white/20 group-hover:scale-110 group-hover:rotate-12">
+                  <ArrowUpRight className="w-5 h-5 text-white" />
                 </div>
               </div>
 
-              {/* Bottom Section - Stats & Description */}
-              <div className="relative z-10 p-8 pt-0">
+              {/* Center - Logo */}
+              <div className="relative z-10 flex-1 flex items-center justify-center px-8">
+                <img 
+                  src={project.logo} 
+                  alt={project.name}
+                  className="h-16 md:h-20 w-auto object-contain brightness-0 invert drop-shadow-2xl group-hover:scale-110 transition-all duration-500"
+                />
+              </div>
+
+              {/* Bottom Section - Stats */}
+              <div className="relative z-10 p-8 pt-4">
                 {/* Description - Hidden by default, shown on hover */}
-                <p className="text-sm text-white/50 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                <p className="text-sm text-white/60 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 line-clamp-2">
                   {project.description}
                 </p>
                 
                 {/* Stats Row */}
-                <div className="flex items-end justify-between border-t border-white/10 pt-6">
+                <div className="flex items-end justify-between border-t border-white/20 pt-4">
                   <div>
-                    <span className={`text-4xl md:text-5xl font-bold ${project.accentColor}`}>
+                    <span className={`text-3xl md:text-4xl font-bold text-white`}>
                       {project.result}
                     </span>
                     <p className="text-sm text-white/50 mt-1">{project.resultLabel}</p>
                   </div>
-                  <span className="text-lg font-semibold text-white opacity-60 group-hover:opacity-100 transition-opacity">
+                  <span className="text-base font-semibold text-white/80 group-hover:text-white transition-colors">
                     {project.name}
                   </span>
-                </div>
-              </div>
-
-              {/* View Case Study Button - Appears on Hover */}
-              <div className="absolute bottom-8 left-8 right-8 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0 z-20">
-                <div className="flex items-center justify-center gap-2 py-3 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-medium">
-                  <span>View Case Study</span>
-                  <ArrowUpRight className="w-4 h-4" />
                 </div>
               </div>
             </Link>
