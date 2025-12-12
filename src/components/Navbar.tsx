@@ -85,98 +85,108 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Full Screen Menu */}
+      {/* Backdrop Overlay */}
       <div
-        className={`fixed inset-0 z-[100] bg-background transition-all duration-500 ${
-          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+        }`}
+        onClick={() => setIsMenuOpen(false)}
+      />
+
+      {/* Side Panel Menu - 2/3 width */}
+      <div
+        className={`fixed top-0 right-0 bottom-0 w-[90%] sm:w-[75%] lg:w-[66%] z-[101] bg-background transition-transform duration-500 ease-out ${
+          isMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-              <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                <div className="w-4 h-4 bg-background rounded-sm"></div>
-              </div>
-              <span className="text-lg font-semibold text-white">{brandConfig.name}</span>
-            </Link>
-            
-            <button
-              onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-zinc-800 text-white text-sm font-medium transition-all hover:bg-zinc-700"
-            >
-              <span>close</span>
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-        </div>
-
-        <div className="container mx-auto px-6 pt-20">
-          <div className="grid md:grid-cols-2 gap-16">
-            {/* Navigation Links */}
-            <div>
-              <span className="text-muted-foreground text-sm uppercase tracking-widest mb-8 block">Navigation</span>
-              <nav className="space-y-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.to}
-                    to={link.to}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block text-5xl md:text-7xl font-bold text-foreground hover:text-primary transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
+        <div className="h-full overflow-y-auto">
+          <div className="container mx-auto px-6 py-4">
+            <div className="flex items-center justify-between">
+              <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
+                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
+                  <div className="w-4 h-4 bg-background rounded-sm"></div>
+                </div>
+                <span className="text-lg font-semibold text-white">{brandConfig.name}</span>
+              </Link>
+              
+              <button
+                onClick={() => setIsMenuOpen(false)}
+                className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-zinc-800 text-white text-sm font-medium transition-all hover:bg-zinc-700"
+              >
+                <span>close</span>
+                <X className="w-5 h-5" />
+              </button>
             </div>
+          </div>
 
-            {/* Contact Info */}
-            <div className="space-y-12">
+          <div className="container mx-auto px-6 pt-20">
+            <div className="grid md:grid-cols-2 gap-16">
+              {/* Navigation Links */}
               <div>
-                <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Get in touch</span>
-                <a 
-                  href={`mailto:${brandConfig.email}`}
-                  className="text-2xl text-foreground hover:text-primary transition-colors"
-                >
-                  {brandConfig.email}
-                </a>
+                <span className="text-muted-foreground text-sm uppercase tracking-widest mb-8 block">Navigation</span>
+                <nav className="space-y-4">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-4xl md:text-5xl lg:text-6xl font-bold text-foreground hover:text-primary transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </nav>
               </div>
 
-              <div>
-                <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Telegram</span>
-                <a 
-                  href={brandConfig.telegram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-2xl text-foreground hover:text-primary transition-colors"
-                >
-                  @cryptobridgekorea
-                </a>
-              </div>
+              {/* Contact Info */}
+              <div className="space-y-12">
+                <div>
+                  <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Get in touch</span>
+                  <a 
+                    href={`mailto:${brandConfig.email}`}
+                    className="text-xl lg:text-2xl text-foreground hover:text-primary transition-colors"
+                  >
+                    {brandConfig.email}
+                  </a>
+                </div>
 
-              <div>
-                <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Office</span>
-                <p className="text-xl text-muted-foreground">
-                  {brandConfig.office}
-                </p>
-              </div>
+                <div>
+                  <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Telegram</span>
+                  <a 
+                    href={brandConfig.telegram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xl lg:text-2xl text-foreground hover:text-primary transition-colors"
+                  >
+                    @cryptobridgekorea
+                  </a>
+                </div>
 
-              <div className="flex gap-4 pt-8">
-                <a
-                  href={brandConfig.telegram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
-                >
-                  Telegram
-                </a>
-                <a
-                  href={brandConfig.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
-                >
-                  LinkedIn
-                </a>
+                <div>
+                  <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Office</span>
+                  <p className="text-lg lg:text-xl text-muted-foreground">
+                    {brandConfig.office}
+                  </p>
+                </div>
+
+                <div className="flex gap-4 pt-8">
+                  <a
+                    href={brandConfig.telegram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+                  >
+                    Telegram
+                  </a>
+                  <a
+                    href={brandConfig.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+                  >
+                    LinkedIn
+                  </a>
+                </div>
               </div>
             </div>
           </div>
