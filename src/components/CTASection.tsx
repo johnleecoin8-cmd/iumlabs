@@ -27,8 +27,8 @@ const testimonialQuotes = [
   { text: "Exceptional local market expertise.", author: "Polygon" },
 ];
 
-// 3D Tilt Form Component
-const TiltForm = ({ 
+// Simple Form Component (no 3D tilt)
+const SimpleForm = ({ 
   children, 
   className,
   onSubmit 
@@ -37,91 +37,41 @@ const TiltForm = ({
   className?: string;
   onSubmit?: (e: React.FormEvent) => void;
 }) => {
-  const ref = useRef<HTMLFormElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [3, -3]), { stiffness: 300, damping: 30 });
-  const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-3, 3]), { stiffness: 300, damping: 30 });
-
-  const handleMouseMove = useCallback((e: MouseEvent<HTMLFormElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const xPos = (e.clientX - rect.left) / rect.width - 0.5;
-    const yPos = (e.clientY - rect.top) / rect.height - 0.5;
-    x.set(xPos);
-    y.set(yPos);
-  }, [x, y]);
-
-  const handleMouseLeave = useCallback(() => {
-    x.set(0);
-    y.set(0);
-  }, [x, y]);
-
   return (
-    <motion.form
-      ref={ref}
+    <form
       onSubmit={onSubmit}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformPerspective: 1000 }}
       className={className}
     >
       {children}
-    </motion.form>
+    </form>
   );
 };
 
-// Magnetic Button Component
-const MagneticButton = ({ 
+// Simple Button Component (no magnetic effect)
+const SimpleButton = ({ 
   children, 
   onClick, 
   isActive, 
-  className,
-  delay = 0 
+  className
 }: { 
   children: React.ReactNode; 
   onClick: () => void;
   isActive: boolean;
   className?: string;
-  delay?: number;
 }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 300, damping: 20 });
-  const springY = useSpring(y, { stiffness: 300, damping: 20 });
-
-  const handleMouseMove = (e: MouseEvent<HTMLButtonElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    x.set((e.clientX - centerX) * 0.15);
-    y.set((e.clientY - centerY) * 0.15);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   return (
-    <motion.button
+    <button
       type="button"
       onClick={onClick}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ x: springX, y: springY, transitionDelay: `${delay}ms` }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
       className={className}
     >
       {children}
-    </motion.button>
+    </button>
   );
 };
 
-// Magnetic Link Component for Hero CTAs
-const MagneticLink = ({ 
+// Simple Link Component (no magnetic effect)
+const SimpleLink = ({ 
   children, 
   href, 
   className,
@@ -134,38 +84,15 @@ const MagneticLink = ({
   target?: string;
   rel?: string;
 }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 200, damping: 15 });
-  const springY = useSpring(y, { stiffness: 200, damping: 15 });
-
-  const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    x.set((e.clientX - centerX) * 0.2);
-    y.set((e.clientY - centerY) * 0.2);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
   return (
-    <motion.a
+    <a
       href={href}
       target={target}
       rel={rel}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ x: springX, y: springY }}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
       className={className}
     >
       {children}
-    </motion.a>
+    </a>
   );
 };
 
@@ -423,42 +350,25 @@ const CTASection = () => {
             </motion.div>
 
             {/* Secondary CTA - Free Audit */}
-            <MagneticLink 
+            <SimpleLink 
               href="https://calendly.com/cryptobridgekorea/free-audit"
               target="_blank"
               rel="noopener noreferrer"
-              className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-4 md:py-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold shadow-lg hover:shadow-emerald-500/40 relative overflow-hidden"
+              className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-4 md:py-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold shadow-lg hover:shadow-emerald-500/40 relative overflow-hidden hover:scale-105 transition-all"
             >
-              <motion.div
-                animate={{ rotate: [0, 15, -15, 0] }}
-                transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-              >
-                <Sparkles className="w-5 h-5" />
-              </motion.div>
+              <Sparkles className="w-5 h-5" />
               <span>Free Marketing Audit</span>
-              {/* Animated border glow */}
-              <motion.div 
-                className="absolute inset-0 rounded-2xl"
-                animate={{ 
-                  boxShadow: [
-                    "0 0 20px rgba(16, 185, 129, 0.3)",
-                    "0 0 40px rgba(6, 182, 212, 0.4)",
-                    "0 0 20px rgba(16, 185, 129, 0.3)"
-                  ]
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            </MagneticLink>
+            </SimpleLink>
 
             {/* Tertiary CTA - Email */}
-            <MagneticLink 
+            <SimpleLink 
               href={`mailto:${brand.email}`}
               className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-4 md:py-5 rounded-2xl border-2 border-white/30 text-white font-medium hover:bg-white/10 hover:border-white/50 transition-all relative overflow-hidden"
             >
               <Mail className="w-5 h-5 group-hover:scale-110 transition-transform" />
               <span className="hidden sm:inline">Send Email</span>
               <span className="sm:hidden">Email Us</span>
-            </MagneticLink>
+            </SimpleLink>
           </motion.div>
 
           {/* Trust Indicators with animation */}
@@ -510,7 +420,7 @@ const CTASection = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                 
                 {/* Live in Seoul Badge */}
-                <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
+                <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/60 border border-white/10">
                   <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                   <span className="text-white/90 text-xs font-medium">Live in Seoul</span>
                   <span className="text-white/50 text-xs">{seoulTime}</span>
@@ -519,7 +429,7 @@ const CTASection = () => {
                 {/* Office Info */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-lg bg-primary/20 backdrop-blur-sm flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-lg bg-primary/30 flex items-center justify-center">
                       <MapPin className="w-5 h-5 text-primary" />
                     </div>
                     <div>
@@ -568,7 +478,7 @@ const CTASection = () => {
 
             {/* Right - 3D Tilt Contact Form */}
             <div className="order-1 lg:order-2 lg:-mt-8 lg:relative lg:z-20">
-              <TiltForm 
+              <SimpleForm 
                 onSubmit={handleSubmit} 
                 className="group/form space-y-4 p-5 md:p-7 rounded-2xl bg-gradient-to-br from-white/[0.06] to-white/[0.02] border border-white/[0.08] hover:border-primary/20 transition-all duration-500 relative overflow-hidden shadow-2xl shadow-black/20"
               >
@@ -642,25 +552,23 @@ const CTASection = () => {
                   </div>
                 </div>
 
-                {/* Budget Options with Magnetic Effect */}
+                {/* Budget Options */}
                 <div className="relative">
                   <label className="block text-white/50 text-xs mb-3">BUDGET *</label>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                    {budgetOptions.map((option, index) => (
-                      <MagneticButton
+                    {budgetOptions.map((option) => (
+                      <SimpleButton
                         key={option}
                         onClick={() => setFormData({ ...formData, budget: option })}
                         isActive={formData.budget === option}
-                        delay={index * 30}
                         className={`relative px-3 py-2.5 rounded-xl text-xs border transition-all duration-300 overflow-hidden ${
                           formData.budget === option
                             ? 'bg-primary text-white border-primary shadow-[0_0_20px_rgba(59,130,246,0.3)]'
                             : 'bg-transparent border-white/10 text-white/70 hover:border-primary/50 hover:bg-white/[0.05] hover:text-white'
                         }`}
                       >
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                         <span className="relative">{option}</span>
-                      </MagneticButton>
+                      </SimpleButton>
                     ))}
                   </div>
                 </div>
@@ -746,7 +654,7 @@ const CTASection = () => {
                     </div>
                   )}
                 </motion.button>
-              </TiltForm>
+              </SimpleForm>
             </div>
           </div>
         </div>
