@@ -140,8 +140,8 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Full Screen with Ken Burns Background */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+      {/* Hero - Compact with Ken Burns Background */}
+      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden">
         {/* Background - Korea Palace Modern */}
         <div className="absolute inset-0 overflow-hidden">
           <div 

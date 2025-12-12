@@ -103,8 +103,8 @@ const Services = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Full Screen with Seoul Gangnam Background */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+      {/* Hero - Compact with Seoul Gangnam Background */}
+      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden">
         {/* Background - Seoul Gangnam Night */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
