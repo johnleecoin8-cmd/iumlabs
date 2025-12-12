@@ -95,11 +95,14 @@ const Navbar = () => {
 
       {/* Top Panel Menu - slides from top */}
       <div
-        className={`fixed top-0 left-0 right-0 h-[85vh] sm:h-[75vh] lg:h-[60vh] z-[101] bg-background transition-transform duration-500 ease-out ${
+        className={`fixed top-0 left-0 right-0 h-[85vh] sm:h-[75vh] lg:h-[60vh] z-[101] bg-gradient-to-b from-background via-background to-primary/10 transition-transform duration-500 ease-out ${
           isMenuOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="h-full flex flex-col">
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-cyan-500/5 pointer-events-none" />
+        
+        <div className="h-full flex flex-col relative z-10">
           {/* Header */}
           <div className="flex-shrink-0 container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
@@ -125,14 +128,24 @@ const Navbar = () => {
             <div className="h-full grid md:grid-cols-2 gap-8 lg:gap-16 content-center">
               {/* Navigation Links */}
               <div className="flex flex-col justify-center">
-                <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-4 lg:mb-6 block">Navigation</span>
+                <span 
+                  className={`text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-4 lg:mb-6 block transition-all duration-500 ${
+                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+                  }`}
+                  style={{ transitionDelay: isMenuOpen ? "200ms" : "0ms" }}
+                >
+                  Navigation
+                </span>
                 <nav className="space-y-2 lg:space-y-3">
-                  {navLinks.map((link) => (
+                  {navLinks.map((link, index) => (
                     <Link
                       key={link.to}
                       to={link.to}
                       onClick={() => setIsMenuOpen(false)}
-                      className="block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-colors"
+                      className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-all duration-500 ${
+                        isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+                      }`}
+                      style={{ transitionDelay: isMenuOpen ? `${300 + index * 80}ms` : "0ms" }}
                     >
                       {link.label}
                     </Link>
@@ -142,7 +155,12 @@ const Navbar = () => {
 
               {/* Contact Info */}
               <div className="flex flex-col justify-center space-y-4 lg:space-y-8">
-                <div>
+                <div
+                  className={`transition-all duration-500 ${
+                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+                  }`}
+                  style={{ transitionDelay: isMenuOpen ? "500ms" : "0ms" }}
+                >
                   <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">Get in touch</span>
                   <a 
                     href={`mailto:${brandConfig.email}`}
@@ -152,7 +170,12 @@ const Navbar = () => {
                   </a>
                 </div>
 
-                <div>
+                <div
+                  className={`transition-all duration-500 ${
+                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+                  }`}
+                  style={{ transitionDelay: isMenuOpen ? "600ms" : "0ms" }}
+                >
                   <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">Telegram</span>
                   <a 
                     href={brandConfig.telegram}
@@ -164,14 +187,24 @@ const Navbar = () => {
                   </a>
                 </div>
 
-                <div>
+                <div
+                  className={`transition-all duration-500 ${
+                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+                  }`}
+                  style={{ transitionDelay: isMenuOpen ? "700ms" : "0ms" }}
+                >
                   <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">Office</span>
                   <p className="text-sm lg:text-lg text-muted-foreground">
                     {brandConfig.office}
                   </p>
                 </div>
 
-                <div className="flex gap-3 pt-2 lg:pt-4">
+                <div 
+                  className={`flex gap-3 pt-2 lg:pt-4 transition-all duration-500 ${
+                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+                  }`}
+                  style={{ transitionDelay: isMenuOpen ? "800ms" : "0ms" }}
+                >
                   <a
                     href={brandConfig.telegram}
                     target="_blank"
