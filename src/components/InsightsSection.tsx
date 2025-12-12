@@ -1,6 +1,6 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Mail } from "lucide-react";
+import { ArrowUpRight, Mail, Clock, TrendingUp } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
@@ -14,23 +14,32 @@ const insights = [
   {
     id: "ai-agents-defi",
     title: "The Rise of AI Agents in DeFi",
+    excerpt: "How autonomous AI agents are reshaping decentralized finance and creating new opportunities in the Korean market.",
     date: "Dec 10, 2024",
+    readTime: "8 min read",
     category: "Research",
     image: aiAgentsImg,
+    trending: true,
   },
   {
     id: "kaito-mindshare",
     title: "Kaito Mindshare: New Metric for Web3",
+    excerpt: "Understanding the emerging mindshare metrics and their impact on Web3 marketing strategies.",
     date: "Dec 8, 2024",
+    readTime: "6 min read",
     category: "Analysis",
     image: kaitoImg,
+    trending: false,
   },
   {
     id: "ecosystem-growth-2025",
     title: "Ecosystem Growth Strategies for 2025",
+    excerpt: "Key trends and strategies for sustainable ecosystem growth in the evolving Web3 landscape.",
     date: "Dec 5, 2024",
+    readTime: "10 min read",
     category: "Strategy",
     image: ecosystemImg,
+    trending: true,
   },
 ];
 
@@ -79,22 +88,23 @@ const InsightsSection = () => {
 
               {/* Newsletter Form */}
               <form onSubmit={handleSubscribe} className="space-y-4">
-                <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30" />
+                <div className="relative group">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30 group-focus-within:text-primary transition-colors" />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50 transition-colors"
+                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50 focus:bg-white/[0.08] transition-all duration-300"
                   />
                 </div>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-4 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
+                  className="group w-full py-4 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-all duration-300 disabled:opacity-50 relative overflow-hidden"
                 >
-                  {isSubmitting ? "Subscribing..." : "Subscribe to Newsletter"}
+                  <span className="relative z-10">{isSubmitting ? "Subscribing..." : "Subscribe to Newsletter"}</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </button>
               </form>
 
@@ -110,43 +120,64 @@ const InsightsSection = () => {
 
           {/* Right - Articles */}
           <div className="lg:col-span-8">
-            <div className="space-y-6">
+            <div className="space-y-4">
               {insights.map((article, index) => (
                 <Link
                   key={article.id}
                   to={`/research/${article.id}`}
-                  className={`group flex flex-col md:flex-row gap-6 p-4 rounded-2xl hover:bg-white/5 transition-all duration-500 ${
+                  className={`group relative flex flex-col md:flex-row gap-6 p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.05] hover:border-primary/20 transition-all duration-500 overflow-hidden ${
                     isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
                   }`}
                   style={{ transitionDelay: `${index * 150}ms` }}
                 >
+                  {/* Hover Glow */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent" />
+                  </div>
+
                   {/* Image */}
-                  <div className="md:w-48 h-32 rounded-xl overflow-hidden flex-shrink-0">
+                  <div className="relative md:w-56 h-40 rounded-xl overflow-hidden flex-shrink-0">
                     <img
                       src={article.image}
                       alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
+                    {/* Trending Badge */}
+                    {article.trending && (
+                      <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-md bg-primary/90 backdrop-blur-sm">
+                        <TrendingUp className="w-3 h-3 text-white" />
+                        <span className="text-[10px] text-white font-medium uppercase">Trending</span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 flex flex-col justify-center">
+                  <div className="flex-1 flex flex-col justify-center relative z-10">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="text-xs text-primary uppercase tracking-wider">
+                      <span className="text-xs text-primary uppercase tracking-wider font-medium px-2 py-1 rounded-md bg-primary/10">
                         {article.category}
                       </span>
-                      <span className="text-xs text-white/30">
-                        {article.date}
-                      </span>
+                      <div className="flex items-center gap-1 text-white/30">
+                        <Clock className="w-3 h-3" />
+                        <span className="text-xs">{article.readTime}</span>
+                      </div>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-primary transition-colors">
+                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-primary transition-colors mb-2">
                       {article.title}
                     </h3>
+                    <p className="text-white/50 text-sm leading-relaxed line-clamp-2">
+                      {article.excerpt}
+                    </p>
+                    <div className="mt-4 flex items-center gap-2 text-white/40 text-xs">
+                      <span>{article.date}</span>
+                    </div>
                   </div>
 
                   {/* Arrow */}
                   <div className="flex items-center">
-                    <ArrowUpRight className="w-5 h-5 text-white/30 group-hover:text-primary transition-colors" />
+                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary/20">
+                      <ArrowUpRight className="w-5 h-5 text-primary" />
+                    </div>
                   </div>
                 </Link>
               ))}
