@@ -35,6 +35,7 @@ const YapService = () => {
       whatIncludesText="We run targeted Yap campaigns by publishing briefs to our network of 600+ creators. They opt in and post aligned content that fits your story, timing, and target audience. We coordinate the rollout, monitor performance, and amplify what gains traction."
       processSteps={processSteps}
       aboutImage={eventsImage}
+      currentServiceSlug="yap"
     />
   );
 };

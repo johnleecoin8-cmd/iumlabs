@@ -35,6 +35,7 @@ const PRService = () => {
       whatIncludesText="We help you craft the right narrative and secure placements in top crypto and tech media. From article creation to journalist outreach and timing coordination, we make sure your story gets published, amplified, and seen by the right audience."
       processSteps={processSteps}
       aboutImage={prImage}
+      currentServiceSlug="pr"
     />
   );
 };

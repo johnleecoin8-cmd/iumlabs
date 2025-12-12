@@ -1,5 +1,6 @@
 import { useEffect } from "react";
-import { Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Calendar, ArrowDown } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
@@ -43,7 +44,17 @@ interface ServiceDetailLayoutProps {
     mobileBottom?: string;
   }>;
   backgroundImage?: string;
+  currentServiceSlug: string;
 }
+
+const allServices = [
+  { slug: "community", title: "Community Management", number: "01" },
+  { slug: "social-media", title: "Social Media Marketing", number: "02" },
+  { slug: "influencer", title: "Influencer Strategy", number: "03" },
+  { slug: "gtm", title: "GTM Strategy", number: "04" },
+  { slug: "yap", title: "Yap Strategy", number: "05" },
+  { slug: "pr", title: "PR & Media", number: "06" },
+];
 
 const clientLogos = [
   { src: bnbLogo, alt: "BNB Chain" },
@@ -65,7 +76,12 @@ const ServiceDetailLayout = ({
   whatIncludesText,
   processSteps,
   aboutImage,
+  currentServiceSlug,
 }: ServiceDetailLayoutProps) => {
+  // Filter out current service and get top 3
+  const otherServices = allServices
+    .filter((service) => service.slug !== currentServiceSlug)
+    .slice(0, 3);
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -295,6 +311,59 @@ const ServiceDetailLayout = ({
               ))}
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Watch Also Section */}
+      <section className="bg-white py-20 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-16">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-8 scroll-reveal">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+              Watch
+            </h2>
+            <div className="flex items-center gap-4">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+                Also
+              </h2>
+              <ArrowDown className="w-8 h-8 text-slate-400" />
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="border-b border-dashed border-slate-300 mb-4" />
+
+          {/* Service Links */}
+          {otherServices.map((service, index) => (
+            <Link
+              key={service.slug}
+              to={`/services/${service.slug}`}
+              className="block scroll-reveal"
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              <div className="py-8 border-b border-dashed border-slate-300 flex justify-between items-center group cursor-pointer hover:bg-slate-50 transition-colors duration-300 px-4 -mx-4 rounded-lg">
+                {index % 2 === 0 ? (
+                  <>
+                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 group-hover:text-[#2563eb] transition-colors duration-300 group-hover:translate-x-2 transform">
+                      {service.title}
+                    </h3>
+                    <span className="text-slate-400 text-2xl md:text-3xl font-light group-hover:text-[#2563eb] transition-colors duration-300">
+                      {service.number}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span className="text-slate-400 text-2xl md:text-3xl font-light group-hover:text-[#2563eb] transition-colors duration-300">
+                      {service.number}
+                    </span>
+                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 group-hover:text-[#2563eb] transition-colors duration-300 group-hover:-translate-x-2 transform text-right">
+                      {service.title}
+                    </h3>
+                  </>
+                )}
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 

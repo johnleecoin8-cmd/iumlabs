@@ -30,6 +30,7 @@ const CommunityService = () => {
       whatIncludesText="We provide a complete Discord infrastructure through AI integration, community training, and gamified mechanics to eliminate user confusion and build sustainable community growth."
       processSteps={processSteps}
       aboutImage={communityImage}
+      currentServiceSlug="community"
     />
   );
 };
