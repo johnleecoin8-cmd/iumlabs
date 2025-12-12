@@ -23,6 +23,7 @@ const featuredCases = [
     gradient: "from-[#F3BA2F]/20 to-[#F3BA2F]/5",
     borderColor: "border-[#F3BA2F]/30",
     hoverBorder: "hover:border-[#F3BA2F]/60",
+    glowColor: "#F3BA2F",
   },
   {
     name: "KuCoin",
@@ -33,6 +34,7 @@ const featuredCases = [
     gradient: "from-[#23AF91]/20 to-[#23AF91]/5",
     borderColor: "border-[#23AF91]/30",
     hoverBorder: "hover:border-[#23AF91]/60",
+    glowColor: "#23AF91",
   },
   {
     name: "Polygon",
@@ -43,6 +45,7 @@ const featuredCases = [
     gradient: "from-[#8247E5]/20 to-[#8247E5]/5",
     borderColor: "border-[#8247E5]/30",
     hoverBorder: "hover:border-[#8247E5]/60",
+    glowColor: "#8247E5",
   },
 ];
 
@@ -89,32 +92,49 @@ const CasesSection = () => {
               className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${project.gradient} border ${project.borderColor} ${project.hoverBorder} p-8 transition-all duration-500 hover:-translate-y-2 ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
-              style={{ transitionDelay: `${index * 150}ms` }}
+              style={{ 
+                transitionDelay: `${index * 150}ms`,
+              }}
             >
+              {/* Intense Glow Effect on Hover */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{
+                  background: `radial-gradient(ellipse at center, ${project.glowColor}40 0%, ${project.glowColor}20 30%, transparent 70%)`,
+                  filter: 'blur(40px)',
+                }}
+              />
+              <div 
+                className="absolute -inset-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl pointer-events-none"
+                style={{
+                  boxShadow: `0 0 60px 20px ${project.glowColor}30, 0 0 100px 40px ${project.glowColor}15`,
+                }}
+              />
+
               {/* Category Badge */}
-              <div className="absolute top-6 right-6">
-                <span className="text-xs text-white/40 uppercase tracking-wider">
+              <div className="absolute top-6 right-6 z-10">
+                <span className="text-xs text-white/40 uppercase tracking-wider group-hover:text-white/70 transition-colors">
                   {project.category}
                 </span>
               </div>
 
               {/* Logo */}
-              <div className="h-32 flex items-center justify-start mb-8">
+              <div className="relative z-10 h-32 flex items-center justify-start mb-8">
                 <img 
                   src={project.logo} 
                   alt={project.name}
-                  className="h-16 w-auto object-contain brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity"
+                  className="h-16 w-auto object-contain brightness-0 invert opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all duration-500"
                 />
               </div>
 
               {/* Content */}
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-2">{project.name}</h3>
-                <p className="text-white/60">{project.result}</p>
+              <div className="relative z-10">
+                <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-white transition-colors">{project.name}</h3>
+                <p className="text-white/60 group-hover:text-white/80 transition-colors">{project.result}</p>
               </div>
 
               {/* Arrow */}
-              <div className="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all group-hover:bg-white/10">
+              <div className="absolute bottom-6 right-6 z-10 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all group-hover:bg-white/10 group-hover:scale-110">
                 <ArrowUpRight className="w-5 h-5 text-white" />
               </div>
             </Link>
