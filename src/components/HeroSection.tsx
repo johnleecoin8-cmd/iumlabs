@@ -17,12 +17,12 @@ import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
 
 const serviceTags = [
-  { label: "PR", position: "top-[18%] left-[6%]" },
-  { label: "Social Media Marketing", position: "top-[12%] right-[10%]" },
-  { label: "KOL Marketing", position: "top-[38%] left-[4%]" },
-  { label: "Go-To-Market-Strategy", position: "top-[28%] right-[5%]" },
-  { label: "Influencer Strategy", position: "top-[50%] left-[10%]" },
-  { label: "Community", position: "top-[45%] right-[8%]" },
+  { label: "PR", position: "top-[12%] left-[6%]" },
+  { label: "Social Media Marketing", position: "top-[8%] right-[10%]" },
+  { label: "KOL Marketing", position: "top-[35%] left-[4%]" },
+  { label: "Go-To-Market-Strategy", position: "top-[55%] right-[5%]" },
+  { label: "Influencer Strategy", position: "top-[65%] left-[8%]" },
+  { label: "Community", position: "top-[25%] right-[8%]" },
 ];
 
 const clientLogos = [
