@@ -120,6 +120,96 @@ const MagneticButton = ({
   );
 };
 
+// Magnetic Link Component for Hero CTAs
+const MagneticLink = ({ 
+  children, 
+  href, 
+  className,
+  target,
+  rel
+}: { 
+  children: React.ReactNode; 
+  href: string;
+  className?: string;
+  target?: string;
+  rel?: string;
+}) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 200, damping: 15 });
+  const springY = useSpring(y, { stiffness: 200, damping: 15 });
+
+  const handleMouseMove = (e: MouseEvent<HTMLAnchorElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set((e.clientX - centerX) * 0.2);
+    y.set((e.clientY - centerY) * 0.2);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  return (
+    <motion.a
+      href={href}
+      target={target}
+      rel={rel}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ x: springX, y: springY }}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className={className}
+    >
+      {children}
+    </motion.a>
+  );
+};
+
+// Animated Counter Component
+const AnimatedCounter = ({ value, label }: { value: string; label: string }) => {
+  return (
+    <motion.div 
+      className="text-center px-2"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <motion.div 
+        className="text-2xl md:text-3xl font-bold text-white"
+        whileHover={{ scale: 1.1, color: "#22d3ee" }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
+        {value}
+      </motion.div>
+      <div className="text-xs md:text-sm text-white/60">{label}</div>
+    </motion.div>
+  );
+};
+
+// Floating Particle Component
+const FloatingParticle = ({ delay, size, left, top }: { delay: number; size: number; left: string; top: string }) => (
+  <motion.div
+    className="absolute rounded-full bg-white/20"
+    style={{ width: size, height: size, left, top }}
+    animate={{
+      y: [0, -30, 0],
+      opacity: [0.2, 0.6, 0.2],
+      scale: [1, 1.2, 1],
+    }}
+    transition={{
+      duration: 4,
+      delay,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+  />
+);
+
 const CTASection = () => {
   const { ref, isVisible } = useScrollAnimation();
   const [formData, setFormData] = useState({
@@ -202,9 +292,25 @@ const CTASection = () => {
       <div className="relative bg-gradient-to-br from-primary via-primary to-blue-600 py-20 md:py-32 px-4 overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          {/* Gradient Orbs */}
-          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-400/30 rounded-full blur-[120px] animate-pulse" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-300/20 rounded-full blur-[100px] animate-pulse" style={{ animationDelay: '1s' }} />
+          {/* Gradient Orbs with enhanced animation */}
+          <motion.div 
+            className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-400/30 rounded-full blur-[120px]"
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+              x: [0, 50, 0],
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+          <motion.div 
+            className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-300/20 rounded-full blur-[100px]"
+            animate={{ 
+              scale: [1, 1.3, 1],
+              opacity: [0.2, 0.4, 0.2],
+              x: [0, -30, 0],
+            }}
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          />
           
           {/* Grid Pattern */}
           <div 
@@ -214,73 +320,161 @@ const CTASection = () => {
               backgroundSize: '60px 60px',
             }}
           />
+
+          {/* Floating Particles */}
+          <FloatingParticle delay={0} size={6} left="10%" top="20%" />
+          <FloatingParticle delay={0.5} size={8} left="85%" top="15%" />
+          <FloatingParticle delay={1} size={5} left="20%" top="70%" />
+          <FloatingParticle delay={1.5} size={10} left="75%" top="60%" />
+          <FloatingParticle delay={2} size={7} left="50%" top="30%" />
+          <FloatingParticle delay={2.5} size={4} left="30%" top="85%" />
         </div>
         
-        {/* Floating Sparkles */}
-        <Sparkles className="absolute top-[15%] left-[10%] w-6 h-6 text-white/40 animate-pulse hidden md:block" />
-        <Sparkles className="absolute top-[25%] right-[15%] w-8 h-8 text-cyan-300/50 animate-pulse hidden md:block" style={{ animationDelay: '0.5s' }} />
-        <Sparkles className="absolute bottom-[30%] left-[20%] w-5 h-5 text-white/30 animate-pulse hidden md:block" style={{ animationDelay: '1s' }} />
+        {/* Floating Sparkles with enhanced animation */}
+        <motion.div
+          className="absolute top-[15%] left-[10%] hidden md:block"
+          animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+          transition={{ rotate: { duration: 20, repeat: Infinity, ease: "linear" }, scale: { duration: 3, repeat: Infinity } }}
+        >
+          <Sparkles className="w-6 h-6 text-white/40" />
+        </motion.div>
+        <motion.div
+          className="absolute top-[25%] right-[15%] hidden md:block"
+          animate={{ rotate: -360, scale: [1, 1.3, 1] }}
+          transition={{ rotate: { duration: 25, repeat: Infinity, ease: "linear" }, scale: { duration: 4, repeat: Infinity, delay: 0.5 } }}
+        >
+          <Sparkles className="w-8 h-8 text-cyan-300/50" />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-[30%] left-[20%] hidden md:block"
+          animate={{ rotate: 360, scale: [1, 1.4, 1] }}
+          transition={{ rotate: { duration: 30, repeat: Infinity, ease: "linear" }, scale: { duration: 5, repeat: Infinity, delay: 1 } }}
+        >
+          <Sparkles className="w-5 h-5 text-white/30" />
+        </motion.div>
 
         <div className={`container mx-auto max-w-5xl text-center relative z-10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 md:mb-8">
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+          {/* Badge with hover effect */}
+          <motion.div 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6 md:mb-8 cursor-default"
+            whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.15)" }}
+            transition={{ type: "spring", stiffness: 300 }}
+          >
+            <motion.div 
+              className="w-2 h-2 rounded-full bg-green-400"
+              animate={{ scale: [1, 1.3, 1], opacity: [1, 0.7, 1] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
             <span className="text-white/90 text-sm font-medium">Free 30-min Strategy Call</span>
-          </div>
+          </motion.div>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight">
+          {/* Animated Title */}
+          <motion.h2 
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             Ready to Conquer
             <br />
-            <span className="bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent">
+            <motion.span 
+              className="bg-gradient-to-r from-white via-cyan-200 to-white bg-clip-text text-transparent inline-block"
+              animate={{ 
+                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
+              }}
+              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+              style={{ backgroundSize: "200% 200%" }}
+            >
               the Korean Market?
-            </span>
-          </h2>
+            </motion.span>
+          </motion.h2>
           
-          <p className="text-base md:text-xl text-white/80 max-w-2xl mx-auto mb-8 md:mb-10 px-4">
+          <motion.p 
+            className="text-base md:text-xl text-white/80 max-w-2xl mx-auto mb-8 md:mb-10 px-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             Join 200+ Web3 projects that have successfully launched in Korea with our strategic guidance and unmatched network.
-          </p>
+          </motion.p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <CalendlyButton className="group w-full sm:w-auto bg-white text-primary hover:bg-white/90 px-6 md:px-10 py-4 md:py-5 rounded-2xl font-semibold transition-all hover:shadow-2xl hover:shadow-white/20 hover:scale-105 flex items-center justify-center gap-2">
-              <span>Book a Meeting</span>
-              <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </CalendlyButton>
-            <a 
+          {/* Magnetic CTA Buttons */}
+          <motion.div 
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            {/* Primary CTA - Book a Meeting (using CalendlyButton wrapper) */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-full sm:w-auto"
+            >
+              <CalendlyButton className="group w-full sm:w-auto bg-white text-primary hover:bg-white/90 px-6 md:px-10 py-4 md:py-5 rounded-2xl font-semibold transition-all hover:shadow-2xl hover:shadow-white/30 flex items-center justify-center gap-2 relative overflow-hidden">
+                <span className="relative z-10">Book a Meeting</span>
+                <ArrowUpRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                {/* Shine effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+              </CalendlyButton>
+            </motion.div>
+
+            {/* Secondary CTA - Free Audit */}
+            <MagneticLink 
               href="https://calendly.com/cryptobridgekorea/free-audit"
               target="_blank"
               rel="noopener noreferrer"
-              className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-4 md:py-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold hover:scale-105 transition-all shadow-lg hover:shadow-emerald-500/30"
+              className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-4 md:py-5 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold shadow-lg hover:shadow-emerald-500/40 relative overflow-hidden"
             >
-              <Sparkles className="w-5 h-5" />
+              <motion.div
+                animate={{ rotate: [0, 15, -15, 0] }}
+                transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+              >
+                <Sparkles className="w-5 h-5" />
+              </motion.div>
               <span>Free Marketing Audit</span>
-            </a>
-            <a 
+              {/* Animated border glow */}
+              <motion.div 
+                className="absolute inset-0 rounded-2xl"
+                animate={{ 
+                  boxShadow: [
+                    "0 0 20px rgba(16, 185, 129, 0.3)",
+                    "0 0 40px rgba(6, 182, 212, 0.4)",
+                    "0 0 20px rgba(16, 185, 129, 0.3)"
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </MagneticLink>
+
+            {/* Tertiary CTA - Email */}
+            <MagneticLink 
               href={`mailto:${brand.email}`}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-4 md:py-5 rounded-2xl border-2 border-white/30 text-white font-medium hover:bg-white/10 transition-all"
+              className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-4 md:py-5 rounded-2xl border-2 border-white/30 text-white font-medium hover:bg-white/10 hover:border-white/50 transition-all relative overflow-hidden"
             >
-              <Mail className="w-5 h-5" />
+              <Mail className="w-5 h-5 group-hover:scale-110 transition-transform" />
               <span className="hidden sm:inline">Send Email</span>
               <span className="sm:hidden">Email Us</span>
-            </a>
-          </div>
+            </MagneticLink>
+          </motion.div>
 
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-10 md:mt-12 pt-8 md:pt-10 border-t border-white/10">
-            <div className="text-center px-2">
-              <div className="text-2xl md:text-3xl font-bold text-white">200+</div>
-              <div className="text-xs md:text-sm text-white/60">Projects Launched</div>
-            </div>
+          {/* Trust Indicators with animation */}
+          <motion.div 
+            className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-10 md:mt-12 pt-8 md:pt-10 border-t border-white/10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
+            <AnimatedCounter value="200+" label="Projects Launched" />
             <div className="w-px h-10 bg-white/20 hidden sm:block" />
-            <div className="text-center px-2">
-              <div className="text-2xl md:text-3xl font-bold text-white">$500M+</div>
-              <div className="text-xs md:text-sm text-white/60">Funds Raised</div>
-            </div>
+            <AnimatedCounter value="$500M+" label="Funds Raised" />
             <div className="w-px h-10 bg-white/20 hidden sm:block" />
-            <div className="text-center px-2">
-              <div className="text-2xl md:text-3xl font-bold text-white">50+</div>
-              <div className="text-xs md:text-sm text-white/60">Exchange Partners</div>
-            </div>
-          </div>
+            <AnimatedCounter value="50+" label="Exchange Partners" />
+          </motion.div>
         </div>
       </div>
 
