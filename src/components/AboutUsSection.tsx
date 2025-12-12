@@ -169,7 +169,7 @@ const AboutUsSection = () => {
         {/* As Featured In Section */}
         <div className={`mt-20 pt-16 border-t border-white/[0.06] transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <p className="text-center text-white/40 text-sm uppercase tracking-widest mb-8">
-            As Featured In
+            As Featured In Media
           </p>
           <div className="relative overflow-hidden">
             {/* Left fade gradient */}
