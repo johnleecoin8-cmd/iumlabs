@@ -34,14 +34,14 @@ const contactInfo = [
 ];
 
 const floatingTags = [
-  { label: "Let's Connect", top: "20%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-red-400 text-white" },
-  { label: "24/7 Support", top: "30%", left: "22%", mobileTop: "15%", mobileRight: "3%", color: "bg-orange-400 text-black" },
-  { label: "Seoul Office", top: "48%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-amber-400 text-black" },
-  { label: "Fast Response", top: "52%", left: "26%", color: "bg-red-500 text-white" },
-  { label: "Global Reach", top: "18%", right: "12%", color: "bg-orange-300 text-black" },
-  { label: "Partnership", top: "32%", right: "5%", color: "bg-rose-400 text-white" },
-  { label: "Consultation", top: "50%", right: "10%", color: "bg-amber-500 text-black" },
-  { label: "Get Started", bottom: "25%", right: "18%", color: "bg-red-300 text-black" },
+  { label: "서울 오피스", top: "18%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-amber-400 text-black" },
+  { label: "24/7 Support", top: "28%", left: "20%", mobileTop: "15%", mobileRight: "3%", color: "bg-orange-400 text-black" },
+  { label: "강남역 미팅", top: "46%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-yellow-400 text-black" },
+  { label: "빠른 응답", top: "52%", left: "24%", color: "bg-amber-500 text-white" },
+  { label: "Global Reach", top: "16%", right: "10%", color: "bg-orange-300 text-black" },
+  { label: "Korea First", top: "30%", right: "5%", color: "bg-yellow-500 text-black" },
+  { label: "상담 예약", top: "48%", right: "10%", color: "bg-amber-300 text-black" },
+  { label: "무료 컨설팅", bottom: "24%", right: "16%", color: "bg-orange-500 text-white" },
 ];
 
 const serviceHighlights = [
