@@ -35,12 +35,11 @@ const themeConfig = {
   accentColor: "#6366f1",
   accentColorHover: "#4f46e5",
   floatingTags: [
-    { label: "서울 미디어", top: "12%", left: "8%" },
-    { label: "Press Korea", top: "24%", right: "11%" },
-    { label: "여의도 뉴스", top: "42%", left: "5%" },
+    { label: "Media", top: "12%", left: "8%" },
+    { label: "Press", top: "24%", right: "11%" },
+    { label: "Coverage", top: "42%", left: "5%" },
     { label: "Top-Tier", top: "52%", right: "9%" },
-    { label: "K-Media", top: "32%", left: "13%" },
-    { label: "Seoul PR", top: "62%", left: "9%" },
+    { label: "Announcements", top: "32%", left: "13%" },
   ],
 };
 
