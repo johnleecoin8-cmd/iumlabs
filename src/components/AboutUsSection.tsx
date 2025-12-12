@@ -1,53 +1,84 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
-import { useEffect, useState } from "react";
-import seoulSkyline from "@/assets/seoul-skyline.jpg";
+import { TrendingUp, Users, Building2, Handshake, Sparkles } from "lucide-react";
 
 const stats = [
-  { value: 200, label: "Projects Launched", suffix: "+" },
-  { value: 500, label: "Funds Raised", prefix: "$", suffix: "M+" },
-  { value: 50, label: "Exchange Partners", suffix: "+" },
-  { value: 1000, label: "KOL Network", suffix: "+" },
+  { 
+    value: 200, 
+    suffix: "+",
+    prefix: "",
+    label: "Projects Launched",
+    icon: TrendingUp,
+    description: "Successfully launched in Korea",
+    glowColor: "from-emerald-500/20 to-cyan-500/10"
+  },
+  { 
+    value: 500, 
+    suffix: "M+",
+    prefix: "$",
+    label: "Funds Raised",
+    icon: Building2,
+    description: "Total fundraising supported",
+    glowColor: "from-primary/20 to-purple-500/10"
+  },
+  { 
+    value: 50, 
+    suffix: "+",
+    prefix: "",
+    label: "Exchange Partners",
+    icon: Handshake,
+    description: "CEX & DEX partnerships",
+    glowColor: "from-cyan-500/20 to-blue-500/10"
+  },
+  { 
+    value: 1000, 
+    suffix: "+",
+    prefix: "",
+    label: "KOL Network",
+    icon: Users,
+    description: "Influencers & creators",
+    glowColor: "from-purple-500/20 to-pink-500/10"
+  },
 ];
 
-const StatCard = ({ 
-  value, 
-  label, 
-  prefix = "", 
-  suffix = "",
-  isVisible,
-  delay 
-}: { 
-  value: number; 
-  label: string; 
-  prefix?: string; 
-  suffix?: string;
-  isVisible: boolean;
-  delay: number;
-}) => {
-  const count = useCountUp({
-    end: value,
-    isVisible,
-    delay,
+const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0], index: number, isVisible: boolean }) => {
+  const formattedCount = useCountUp({
+    end: stat.value,
     duration: 2000,
+    prefix: stat.prefix,
+    suffix: stat.suffix,
+    isVisible,
   });
-  
+
   return (
-    <div 
-      className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl 
-                 hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-500
-                 opacity-0 animate-fade-up"
-      style={{ animationDelay: `${delay + 600}ms`, animationFillMode: 'forwards' }}
+    <div
+      className={`group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.06] hover:border-primary/40 transition-all duration-500 overflow-hidden hover:-translate-y-1 hover:shadow-2xl ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+      style={{ transitionDelay: `${index * 100 + 300}ms` }}
     >
-      {/* Glow effect on hover */}
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      {/* Animated gradient background */}
+      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br ${stat.glowColor}`} />
       
-      <div className="relative z-10">
-        <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">
-          {prefix}{count}{suffix}
+      {/* Shine effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+      
+      {/* Corner glow */}
+      <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+      <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+        <stat.icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-300" />
+      </div>
+      
+      <div className="mt-8 relative z-10">
+        <div className="text-3xl md:text-4xl font-bold text-white mb-1 tabular-nums group-hover:text-primary transition-colors duration-300">
+          {formattedCount}
         </div>
-        <div className="text-sm text-white/50 font-light tracking-wide">
-          {label}
+        <div className="text-white/80 font-medium text-sm mb-1">
+          {stat.label}
+        </div>
+        <div className="text-white/40 text-xs group-hover:text-white/60 transition-colors">
+          {stat.description}
         </div>
       </div>
     </div>
@@ -56,132 +87,83 @@ const StatCard = ({
 
 const AboutUsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
-    <div ref={ref} className="relative min-h-screen flex flex-col justify-center overflow-hidden py-20">
-      {/* Background - Seoul Skyline with Parallax */}
-      <div className="absolute inset-0 overflow-hidden">
+    <div ref={ref} className="relative py-32 px-4 bg-[hsl(0,0%,4%)] overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Gradient Orbs */}
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
+        
+        {/* Grid Pattern */}
         <div 
-          className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat transition-transform duration-100"
-          style={{ 
-            backgroundImage: `url(${seoulSkyline})`,
-            filter: "brightness(0.4) saturate(1.2)",
-            transform: `translateY(${scrollY * 0.05}px) scale(1.1)`,
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: '80px 80px',
           }}
         />
         
-        {/* Colorful aurora gradient overlay */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/20 via-transparent to-cyan-400/25" />
-          <div className="absolute inset-0 bg-gradient-to-bl from-violet-500/20 via-transparent to-amber-500/15" />
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/15 via-transparent to-pink-500/20" />
-        </div>
-
-        {/* Colorful floating orbs */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-cyan-500/30 to-blue-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
-        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gradient-to-br from-rose-500/25 to-orange-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
-        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-br from-violet-500/25 to-purple-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s', animationDelay: '2s' }} />
-        
-        {/* Softer dark overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background/70" />
+        {/* Diagonal lines */}
+        <div className="absolute top-20 right-[10%] w-40 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent rotate-45 hidden lg:block" />
+        <div className="absolute bottom-40 left-[15%] w-32 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent -rotate-45 hidden lg:block" />
       </div>
+      
+      {/* Floating Sparkles */}
+      <Sparkles className="absolute top-[20%] left-[8%] w-5 h-5 text-primary/40 animate-pulse hidden md:block" style={{ animationDelay: '0s' }} />
+      <Sparkles className="absolute top-[60%] right-[12%] w-6 h-6 text-cyan-400/30 animate-pulse hidden md:block" style={{ animationDelay: '1s' }} />
+      <Sparkles className="absolute bottom-[25%] left-[20%] w-4 h-4 text-purple-400/30 animate-pulse hidden md:block" style={{ animationDelay: '2s' }} />
 
-      {/* Section indicator */}
-      <div className="absolute left-4 sm:left-6 top-8 flex items-center gap-2 text-white/40 text-xs z-20">
-        <span className="number-badge">02</span>
-      </div>
-
-      {/* Main Content - Asymmetric Overlap Layout */}
-      <div className="relative z-10 container mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-16">
-          
-          {/* Left Column - Text Content */}
-          <div 
-            className={`transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
-            }`}
-          >
-            <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-[-0.02em] mb-6">
-              <span className="text-white">We Bridge </span>
-              <span className="text-white/60">Your Project</span>
-              <br />
-              <span className="text-white/60">to the </span>
-              <span className="text-primary">Korean Market</span>
-            </h2>
-
-            <p className="text-base sm:text-lg text-white/50 max-w-lg mb-8 font-light leading-relaxed">
-              Founded by veterans from <span className="text-white font-medium">Binance</span> and{" "}
-              <span className="text-white font-medium">KuCoin</span>, we deliver unmatched expertise 
-              in Korean Web3 market entry and growth strategies.
-            </p>
-          </div>
-
-          {/* Right Column - Founders Card with Overlap Effect */}
-          <div 
-            className={`relative transition-all duration-1000 delay-200 ${
-              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
-            }`}
-          >
-            {/* Background decorative card */}
-            <div className="absolute -top-4 -right-4 w-full h-full rounded-3xl bg-gradient-to-br from-primary/20 to-cyan-500/20 blur-sm" />
+      <div className="container mx-auto max-w-7xl relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Left - Content */}
+          <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+            <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-6 tracking-widest uppercase">
+              <span className="w-8 h-px bg-primary" />
+              Why Choose Us
+            </span>
             
-            {/* Main founders card */}
-            <div className="relative p-8 rounded-3xl bg-white/[0.04] border border-white/[0.1] backdrop-blur-2xl">
-              <div className="flex items-center gap-6 mb-6">
-                <div className="flex -space-x-3">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/40 to-primary/10 border-2 border-primary/50 flex items-center justify-center shadow-lg shadow-primary/20">
-                    <span className="text-primary text-xl font-bold">J</span>
-                  </div>
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500/40 to-cyan-500/10 border-2 border-cyan-500/50 flex items-center justify-center shadow-lg shadow-cyan-500/20">
-                    <span className="text-cyan-400 text-xl font-bold">D</span>
-                  </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+              We Bridge Your
+              <br />
+              Project to{" "}
+              <span className="relative">
+                <span className="text-primary">Korea</span>
+                {/* Underline effect */}
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary via-cyan-400 to-primary rounded-full opacity-60" />
+              </span>
+            </h2>
+            
+            <p className="text-lg text-white/60 mb-10 leading-relaxed max-w-lg">
+              Founded by veterans from <span className="text-white font-semibold bg-white/5 px-2 py-0.5 rounded">Binance</span> and{" "}
+              <span className="text-white font-semibold bg-white/5 px-2 py-0.5 rounded">KuCoin</span>, we deliver unmatched expertise 
+              in Korean Web3 market entry, community building, and exchange partnerships.
+            </p>
+
+            <div className="group flex items-center gap-6 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.05] hover:border-primary/30 transition-all duration-500 w-fit">
+              <div className="flex -space-x-3">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-primary/5 border-2 border-primary/40 flex items-center justify-center group-hover:scale-110 group-hover:border-primary/60 transition-all duration-500">
+                  <span className="text-primary text-base font-bold">J</span>
                 </div>
-                <div>
-                  <p className="text-white/40 text-sm mb-1">Founded by</p>
-                  <p className="text-white text-lg font-semibold">James & David</p>
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-500/30 to-cyan-500/5 border-2 border-cyan-500/40 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/60 transition-all duration-500 -ml-3">
+                  <span className="text-cyan-400 text-base font-bold">D</span>
                 </div>
               </div>
-              
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 text-white/70">
-                  <div className="w-2 h-2 rounded-full bg-primary" />
-                  <span className="text-sm">Ex-Lead of Korea at KuCoin</span>
-                </div>
-                <div className="flex items-center gap-3 text-white/70">
-                  <div className="w-2 h-2 rounded-full bg-cyan-400" />
-                  <span className="text-sm">Ex-Head of BD at Binance</span>
-                </div>
-                <div className="flex items-center gap-3 text-white/70">
-                  <div className="w-2 h-2 rounded-full bg-purple-400" />
-                  <span className="text-sm">VC Experience at Outlier Ventures</span>
-                </div>
+              <div>
+                <p className="text-white/50 text-sm mb-0.5">Founded by</p>
+                <p className="text-white font-medium">Ex-Binance & Ex-KuCoin Leaders</p>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Stats Grid - Glassmorphism Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          {stats.map((stat, index) => (
-            <StatCard 
-              key={index}
-              value={stat.value}
-              label={stat.label}
-              prefix={stat.prefix}
-              suffix={stat.suffix}
-              isVisible={isVisible}
-              delay={index * 100}
-            />
-          ))}
+          {/* Right - Stats Grid */}
+          <div className="grid grid-cols-2 gap-4">
+            {stats.map((stat, index) => (
+              <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />
+            ))}
+          </div>
         </div>
       </div>
     </div>
