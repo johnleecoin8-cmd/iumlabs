@@ -130,56 +130,32 @@ const Services = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.85)]" />
         </div>
 
-        {/* Floating Tags */}
-        <div className="absolute inset-0 z-10 hidden md:block">
-          <div 
-            className="absolute top-[12%] left-[5%] px-4 py-2 rounded-sm bg-purple-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 pointer-events-auto"
-            style={{ animationDuration: '4s', animationDelay: '0s' }}
-          >
-            Strategy
-          </div>
-          <div 
-            className="absolute top-[26%] left-[10%] px-4 py-2 rounded-sm bg-pink-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 pointer-events-auto"
-            style={{ animationDuration: '5s', animationDelay: '0.5s' }}
-          >
-            Growth
-          </div>
-          <div 
-            className="absolute top-[42%] left-[3%] px-4 py-2 rounded-sm bg-fuchsia-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300 pointer-events-auto"
-            style={{ animationDuration: '4.5s', animationDelay: '1s' }}
-          >
-            Community
-          </div>
-          <div 
-            className="absolute top-[58%] left-[8%] px-4 py-2 rounded-sm bg-violet-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 pointer-events-auto"
-            style={{ animationDuration: '5.5s', animationDelay: '1.5s' }}
-          >
-            Marketing
-          </div>
-          <div 
-            className="absolute top-[15%] right-[6%] px-4 py-2 rounded-sm bg-pink-400 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-pink-400/50 transition-all duration-300 pointer-events-auto"
-            style={{ animationDuration: '5s', animationDelay: '0.3s' }}
-          >
-            Influencers
-          </div>
-          <div 
-            className="absolute top-[30%] right-[3%] px-4 py-2 rounded-sm bg-purple-400 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-purple-400/50 transition-all duration-300 pointer-events-auto"
-            style={{ animationDuration: '4.5s', animationDelay: '0.8s' }}
-          >
-            PR & Media
-          </div>
-          <div 
-            className="absolute top-[48%] right-[8%] px-4 py-2 rounded-sm border border-white/60 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:bg-white/10 hover:border-white transition-all duration-300 pointer-events-auto"
-            style={{ animationDuration: '5.5s', animationDelay: '1.3s' }}
-          >
-            Social Media
-          </div>
-          <div 
-            className="absolute top-[64%] right-[4%] px-4 py-2 rounded-sm bg-fuchsia-400 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-fuchsia-400/50 transition-all duration-300 pointer-events-auto"
-            style={{ animationDuration: '4s', animationDelay: '1.8s' }}
-          >
-            Exchange Listings
-          </div>
+        {/* Floating Tags - lunar-tag-dark style */}
+        <div className="absolute inset-0 z-10 hidden md:block pointer-events-none">
+          {[
+            { label: "Strategy", top: "12%", left: "5%" },
+            { label: "Growth", top: "26%", left: "10%" },
+            { label: "Community", top: "42%", left: "3%" },
+            { label: "Marketing", top: "58%", left: "8%" },
+            { label: "Influencers", top: "15%", right: "6%" },
+            { label: "PR & Media", top: "30%", right: "3%" },
+            { label: "Social Media", top: "48%", right: "8%" },
+            { label: "Exchange Listings", top: "64%", right: "4%" },
+          ].map((tag, index) => (
+            <div 
+              key={tag.label}
+              className="absolute lunar-tag-dark text-xs whitespace-nowrap animate-float pointer-events-auto cursor-default hover:bg-white/10 transition-colors"
+              style={{ 
+                top: tag.top,
+                left: tag.left,
+                right: tag.right,
+                animationDuration: `${4 + index * 0.5}s`, 
+                animationDelay: `${index * 0.3}s` 
+              }}
+            >
+              {tag.label}
+            </div>
+          ))}
         </div>
 
         {/* Content - Right aligned */}

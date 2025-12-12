@@ -248,15 +248,15 @@ const stats = [
 ];
 
 const floatingTags = [
-  { label: "DeFi", top: "16%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-blue-500 text-white" },
-  { label: "Layer 1", top: "28%", left: "16%", mobileTop: "15%", mobileRight: "3%", color: "bg-cyan-400 text-black" },
-  { label: "GameFi", top: "46%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-sky-500 text-white" },
-  { label: "NFT", top: "52%", left: "20%", color: "bg-indigo-400 text-white" },
-  { label: "Infrastructure", top: "14%", right: "10%", color: "bg-teal-400 text-black" },
-  { label: "Exchange", top: "28%", right: "5%", color: "bg-blue-400 text-white" },
-  { label: "Layer 2", top: "46%", right: "8%", color: "bg-cyan-500 text-black" },
-  { label: "DePIN", bottom: "26%", right: "14%", color: "bg-sky-400 text-black" },
-  { label: "RWA", bottom: "30%", left: "10%", color: "bg-indigo-500 text-white" },
+  { label: "DeFi", top: "16%", left: "5%" },
+  { label: "Layer 1", top: "28%", left: "16%" },
+  { label: "GameFi", top: "46%", left: "4%" },
+  { label: "NFT", top: "56%", left: "12%" },
+  { label: "Infrastructure", top: "14%", right: "10%" },
+  { label: "Exchange", top: "28%", right: "5%" },
+  { label: "Layer 2", top: "46%", right: "8%" },
+  { label: "DePIN", top: "60%", right: "14%" },
+  { label: "RWA", top: "38%", left: "8%" },
 ];
 
 const Projects = () => {
@@ -300,37 +300,22 @@ const Projects = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
         </div>
         
-        {/* Floating Tags with Parallax - Colorful */}
-        <div>
+        {/* Floating Tags - lunar-tag-dark style */}
+        <div className="absolute inset-0 pointer-events-none hidden md:block">
           {floatingTags.map((tag, index) => (
-            <span
-              key={`${tag.label}-${index}`}
-              className={`absolute animate-float hidden sm:block px-4 py-2 rounded-md text-sm font-medium shadow-lg ${tag.color}`}
+            <div
+              key={tag.label}
+              className="absolute lunar-tag-dark text-xs whitespace-nowrap animate-float pointer-events-auto cursor-default hover:bg-white/10 transition-colors"
               style={{
                 top: tag.top,
                 left: tag.left,
                 right: tag.right,
-                bottom: tag.bottom,
                 animationDelay: `${index * 0.3}s`,
-                transform: `translateY(${scrollY * 0.05}px)`,
+                animationDuration: `${4 + index * 0.5}s`,
               }}
             >
               {tag.label}
-            </span>
-          ))}
-          {floatingTags.slice(0, 4).map((tag, index) => (
-            <span
-              key={`mobile-${tag.label}-${index}`}
-              className={`absolute animate-float sm:hidden px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
-              style={{
-                top: tag.mobileTop,
-                left: tag.mobileLeft,
-                right: tag.mobileRight,
-                animationDelay: `${index * 0.3}s`,
-              }}
-            >
-              {tag.label}
-            </span>
+            </div>
           ))}
         </div>
 
