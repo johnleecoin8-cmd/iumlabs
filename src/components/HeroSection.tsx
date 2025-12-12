@@ -134,7 +134,7 @@ const HeroSection = () => {
         
         {serviceTags.map((tag, index) => (
           <g key={index}>
-            {/* Connection line with electric flicker */}
+            {/* Connection line - simple gradient */}
             <line
               x1={`${tag.x}%`}
               y1={`${tag.y}%`}
@@ -143,20 +143,7 @@ const HeroSection = () => {
               stroke={`url(#line-gradient-${index})`}
               strokeWidth="1"
               filter="url(#glow)"
-              className="animate-electric-line"
-              style={{ animationDelay: `${index * 0.2}s` }}
-            />
-            {/* Secondary line for glow effect */}
-            <line
-              x1={`${tag.x}%`}
-              y1={`${tag.y}%`}
-              x2="50%"
-              y2="45%"
-              stroke="rgba(147, 197, 253, 0.3)"
-              strokeWidth="2"
-              filter="url(#electric-glow)"
-              className="animate-electric-glow-line"
-              style={{ animationDelay: `${index * 0.2 + 0.1}s` }}
+              className="opacity-60"
             />
             {/* Electric energy effect - multiple traveling pulses */}
             {[0, 1, 2].map((pulseIndex) => (
