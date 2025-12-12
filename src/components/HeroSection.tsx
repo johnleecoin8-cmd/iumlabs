@@ -18,17 +18,14 @@ import triaLogo from "@/assets/logos/tria.png";
 
 const serviceTags = [
   // Left side
-  { label: "PR", position: "top-[10%] left-[5%]" },
-  { label: "KOL Marketing", position: "top-[25%] left-[3%]" },
-  { label: "Influencer Strategy", position: "top-[40%] left-[6%]" },
-  { label: "DeFi Marketing", position: "top-[55%] left-[4%]" },
-  { label: "Exchange Listing", position: "top-[70%] left-[7%]" },
+  { label: "KOL Marketing", position: "top-[15%] left-[5%]" },
+  { label: "Community Ops", position: "top-[35%] left-[4%]" },
+  { label: "GTM Strategy", position: "top-[55%] left-[6%]" },
+  { label: "Exchange Support", position: "top-[75%] left-[5%]" },
   // Right side
-  { label: "Social Media Marketing", position: "top-[8%] right-[8%]" },
-  { label: "Community Building", position: "top-[22%] right-[5%]" },
-  { label: "Go-To-Market Strategy", position: "top-[38%] right-[6%]" },
-  { label: "NFT Marketing", position: "top-[52%] right-[4%]" },
-  { label: "GameFi", position: "top-[66%] right-[8%]" },
+  { label: "Media PR", position: "top-[18%] right-[6%]" },
+  { label: "AMA Hosting", position: "top-[42%] right-[5%]" },
+  { label: "Offline Events", position: "top-[66%] right-[7%]" },
 ];
 
 const clientLogos = [
