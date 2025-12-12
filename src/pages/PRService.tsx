@@ -1,6 +1,6 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
 import prImage from "@/assets/services/pr-media.jpg";
-import earthSpace from "@/assets/backgrounds/earth-space.jpg";
+import seoulSkyline from "@/assets/seoul-skyline.jpg";
 
 const processSteps = [
   {
@@ -26,7 +26,7 @@ const processSteps = [
 ];
 
 const themeConfig = {
-  backgroundImage: earthSpace,
+  backgroundImage: seoulSkyline,
   auroraColors: {
     primary: "from-indigo-600/30",
     secondary: "to-blue-500/25",
@@ -35,11 +35,12 @@ const themeConfig = {
   accentColor: "#6366f1",
   accentColorHover: "#4f46e5",
   floatingTags: [
-    { label: "Media", top: "15%", left: "9%" },
-    { label: "Press", top: "25%", right: "13%" },
-    { label: "Coverage", top: "45%", left: "7%" },
-    { label: "Announcements", top: "55%", right: "11%" },
-    { label: "Top-Tier", top: "35%", left: "15%" },
+    { label: "서울 미디어", top: "12%", left: "8%" },
+    { label: "Press Korea", top: "24%", right: "11%" },
+    { label: "여의도 뉴스", top: "42%", left: "5%" },
+    { label: "Top-Tier", top: "52%", right: "9%" },
+    { label: "K-Media", top: "32%", left: "13%" },
+    { label: "Seoul PR", top: "62%", left: "9%" },
   ],
 };
 

@@ -34,11 +34,12 @@ const themeConfig = {
   accentColor: "#a855f7",
   accentColorHover: "#9333ea",
   floatingTags: [
-    { label: "X/Twitter", top: "18%", left: "10%" },
-    { label: "Content", top: "28%", right: "15%" },
-    { label: "Engagement", top: "42%", left: "6%" },
-    { label: "Analytics", top: "52%", right: "10%" },
-    { label: "Viral Growth", top: "38%", left: "18%" },
+    { label: "강남 바이럴", top: "12%", left: "7%" },
+    { label: "X/Twitter", top: "24%", right: "10%" },
+    { label: "네온 콘텐츠", top: "40%", left: "5%" },
+    { label: "홍대 트렌드", top: "50%", right: "7%" },
+    { label: "K-Crypto", top: "30%", left: "14%" },
+    { label: "Seoul Viral", top: "60%", left: "8%" },
   ],
 };
 

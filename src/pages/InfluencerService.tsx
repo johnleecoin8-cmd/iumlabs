@@ -35,11 +35,12 @@ const themeConfig = {
   accentColor: "#f59e0b",
   accentColorHover: "#d97706",
   floatingTags: [
-    { label: "KOL Network", top: "16%", left: "9%" },
-    { label: "Partnerships", top: "26%", right: "14%" },
-    { label: "Campaigns", top: "44%", left: "7%" },
-    { label: "YouTube", top: "54%", right: "11%" },
-    { label: "1000+ KOLs", top: "36%", left: "16%" },
+    { label: "DDP 캠페인", top: "11%", left: "8%" },
+    { label: "1000+ KOLs", top: "23%", right: "9%" },
+    { label: "명동 인플루언서", top: "41%", left: "5%" },
+    { label: "YouTube Korea", top: "51%", right: "7%" },
+    { label: "K-Influencer", top: "31%", left: "15%" },
+    { label: "Seoul Stars", top: "61%", left: "9%" },
   ],
 };
 
