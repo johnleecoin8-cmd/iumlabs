@@ -164,40 +164,91 @@ const Projects = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Compact Lunar Strategy Style */}
-      <section className="relative pt-24 pb-16 overflow-hidden bg-primary">
-        {/* Background Image with Blue Overlay */}
+      {/* Hero - Full Screen with Ken Burns Background */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background - Seoul Hanriver Twilight */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
               backgroundImage: `url(${seoulHanriverTwilight})`,
-              filter: "grayscale(1)",
-              opacity: 0.3,
+              filter: "brightness(0.5) saturate(1.2)",
             }}
           />
-          <div className="absolute inset-0 bg-primary/90" />
+          
+          {/* Aurora light overlay - Blue/Cyan river theme */}
+          <div className="absolute inset-0 animate-aurora">
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/25 via-transparent to-cyan-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600/20 via-transparent to-sky-500/15" />
+          </div>
+          
+          {/* Light sweep effect */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
+          </div>
+          
+          {/* Dark overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+        </div>
+        
+        {/* Floating Tags - lunar-tag-dark style */}
+        <div className="absolute inset-0 pointer-events-none hidden md:block">
+          {floatingTags.map((tag, index) => (
+            <div
+              key={tag.label}
+              className="absolute lunar-tag-dark text-xs whitespace-nowrap animate-float pointer-events-auto cursor-default hover:bg-white/10 transition-colors"
+              style={{
+                top: tag.top,
+                left: tag.left,
+                right: tag.right,
+                animationDelay: `${index * 0.3}s`,
+                animationDuration: `${4 + index * 0.5}s`,
+              }}
+            >
+              {tag.label}
+            </div>
+          ))}
         </div>
 
-        {/* Content */}
-        <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <h1 className="text-[100px] md:text-[150px] lg:text-[200px] font-light text-white leading-[0.9] tracking-tight">
-            Ca<span className="serif-italic">s</span>es
-          </h1>
+        {/* Content with Stagger Animation */}
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
+          <div className="mb-16">
+            <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Our Work ]</span>
+            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
+              Ca<span className="serif-italic text-primary">s</span>es
+            </h1>
+          </div>
+          
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+            <p className="text-lg text-white/60 max-w-xl">
+              These case studies walk through the challenge, our approach, and the outcomes across services like GTM, KOLs, PR, and social media.
+            </p>
+            <CalendlyButton className="lunar-btn">
+              <Calendar className="w-4 h-4" />
+              <span>Start Your Project</span>
+            </CalendlyButton>
+          </div>
+
+          {/* Stats Row */}
+          <div className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+            {stats.map((stat, index) => (
+              <div key={index} className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
+                <div className="text-sm text-white/50">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/30">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
         </div>
       </section>
 
-      {/* Description Section - Light Background */}
-      <section className="py-12 px-4 bg-[#F5F5F5]">
-        <div className="container mx-auto max-w-7xl">
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            These case studies walk through the challenge, our approach, and the outcomes across services like GTM, KOLs, PR, and social media.
-          </p>
-        </div>
-      </section>
-
-      {/* Projects Grid - Light Background */}
-      <section ref={ref} className="py-16 px-4 bg-[#F5F5F5]">
+      {/* Projects Grid */}
+      <section ref={ref} className="py-24 px-4 bg-background">
         <div className="container mx-auto max-w-7xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cases.map((caseItem, index) => (
