@@ -14,80 +14,83 @@
 
 @layer base {
   :root {
-    /* Lunar Strategy Clean Color System */
-    --background: 0 0% 4%;
+    /* Neon Green Theme Color System */
+    --background: 0 0% 3%;
     --foreground: 0 0% 98%;
     
-    --card: 0 0% 8%;
+    --card: 0 0% 6%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 8%;
+    --popover: 0 0% 6%;
     --popover-foreground: 0 0% 98%;
     
-    /* Clean Blue Primary */
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    /* Neon Green Primary - Spotify Green */
+    --primary: 141 76% 48%;
+    --primary-foreground: 0 0% 0%;
     
     /* Clean Gray Secondary */
-    --secondary: 0 0% 15%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 12%;
+    --muted: 0 0% 10%;
     --muted-foreground: 0 0% 55%;
     
-    /* Blue Accent */
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
+    /* Neon Green Accent */
+    --accent: 141 76% 48%;
+    --accent-foreground: 0 0% 0%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 217 91% 60%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 141 76% 48%;
     
     --radius: 0.5rem;
 
+    /* Neon Green Glow */
+    --neon-glow: 141 100% 50%;
+
     /* Dark section variables */
-    --dark-bg: 0 0% 4%;
+    --dark-bg: 0 0% 3%;
     --dark-fg: 0 0% 100%;
 
-    /* Light section variables - Now also dark for full dark theme */
-    --light-bg: 0 0% 6%;
+    /* Light section variables */
+    --light-bg: 0 0% 5%;
     --light-fg: 0 0% 95%;
 
-    /* Lunar Strategy Blue */
-    --lunar-blue: 217 91% 60%;
+    /* Neon Green */
+    --neon-green: 141 76% 48%;
   }
 
   .dark {
-    --background: 0 0% 4%;
+    --background: 0 0% 3%;
     --foreground: 0 0% 98%;
     
-    --card: 0 0% 8%;
+    --card: 0 0% 6%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 8%;
+    --popover: 0 0% 6%;
     --popover-foreground: 0 0% 98%;
     
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 141 76% 48%;
+    --primary-foreground: 0 0% 0%;
     
-    --secondary: 0 0% 15%;
+    --secondary: 0 0% 12%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 12%;
+    --muted: 0 0% 10%;
     --muted-foreground: 0 0% 55%;
     
-    --accent: 217 91% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 141 76% 48%;
+    --accent-foreground: 0 0% 0%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 217 91% 60%;
+    --border: 0 0% 15%;
+    --input: 0 0% 15%;
+    --ring: 141 76% 48%;
   }
 }
 
@@ -136,44 +139,44 @@
 
   /* Dark screens */
   .screen-1 {
-    background-color: hsl(0 0% 4%);
+    background-color: hsl(0 0% 3%);
     color: hsl(0 0% 98%);
   }
 
   .screen-2 {
-    background-color: hsl(0 0% 4%);
+    background-color: hsl(0 0% 3%);
     color: hsl(0 0% 98%);
   }
 
   .screen-3 {
-    background-color: hsl(0 0% 4%);
+    background-color: hsl(0 0% 3%);
     color: hsl(0 0% 98%);
   }
 
   .screen-4 {
-    background-color: hsl(0 0% 4%);
+    background-color: hsl(0 0% 3%);
     color: hsl(0 0% 98%);
   }
 
-  /* Light screens (Lunar Strategy alternating pattern) */
+  /* Light screens - Now dark for neon theme */
   .screen-5 {
-    background-color: hsl(0 0% 96%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 5%);
+    color: hsl(0 0% 98%);
   }
 
   .screen-6 {
-    background-color: hsl(0 0% 96%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 5%);
+    color: hsl(0 0% 98%);
   }
 
   .screen-7 {
-    background-color: hsl(0 0% 96%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 5%);
+    color: hsl(0 0% 98%);
   }
 
   /* Back to dark for CTA */
   .screen-8 {
-    background-color: hsl(0 0% 4%);
+    background-color: hsl(0 0% 3%);
     color: hsl(0 0% 98%);
   }
 
@@ -189,56 +192,58 @@
     color: hsl(var(--light-fg));
   }
 
-  /* Lunar Strategy Tags - Dark variant (white outline only, NO glow) */
+  /* Neon Green Tags - Dark variant with glow */
   .lunar-tag-dark {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300;
     background: transparent;
-    border-color: hsl(0 0% 100% / 0.25);
-    color: hsl(0 0% 100% / 0.8);
+    border-color: hsl(141 76% 48% / 0.4);
+    color: hsl(141 76% 48% / 0.9);
   }
   
   .lunar-tag-dark:hover {
-    border-color: hsl(0 0% 100% / 0.5);
-    color: hsl(0 0% 100%);
+    border-color: hsl(141 76% 48%);
+    color: hsl(141 76% 48%);
+    box-shadow: 0 0 20px hsl(141 76% 48% / 0.4);
   }
 
-  /* Lunar Strategy Tag - Light variant */
+  /* Neon Green Tag - Light variant */
   .lunar-tag-light {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300;
     background: transparent;
-    border-color: hsl(0 0% 0% / 0.15);
-    color: hsl(0 0% 0% / 0.7);
+    border-color: hsl(141 76% 48% / 0.3);
+    color: hsl(141 76% 48% / 0.8);
   }
 
   .lunar-tag-light:hover {
-    border-color: hsl(0 0% 0% / 0.4);
-    color: hsl(0 0% 0%);
+    border-color: hsl(141 76% 48%);
+    color: hsl(141 76% 48%);
   }
 
-  /* Service Tags - Clean style (no neon glow) */
+  /* Service Tags - Neon Green glow */
   .service-tag {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300 cursor-pointer;
     background: transparent;
-    border-color: hsl(0 0% 100% / 0.25);
-    color: hsl(0 0% 100% / 0.8);
+    border-color: hsl(141 76% 48% / 0.4);
+    color: hsl(141 76% 48% / 0.9);
   }
   
   .service-tag:hover {
-    border-color: hsl(0 0% 100% / 0.5);
-    color: hsl(0 0% 100%);
+    border-color: hsl(141 76% 48%);
+    color: hsl(141 76% 48%);
+    box-shadow: 0 0 15px hsl(141 76% 48% / 0.3);
   }
 
-  /* Lunar Strategy Blue Button - Solid, Clean */
+  /* Neon Green Button - Solid with Glow */
   .lunar-btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all duration-300;
-    background-color: hsl(217 91% 60%);
-    color: hsl(0 0% 100%);
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold rounded-full transition-all duration-300;
+    background-color: hsl(141 76% 48%);
+    color: hsl(0 0% 0%);
   }
   
   .lunar-btn:hover {
-    background-color: hsl(217 91% 55%);
+    background-color: hsl(141 76% 55%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px hsl(217 91% 60% / 0.3);
+    box-shadow: 0 4px 30px hsl(141 76% 48% / 0.5);
   }
 
   /* Lunar Strategy Outline Button - Clean */
@@ -381,23 +386,24 @@
     background: linear-gradient(135deg, #E84142, #C62828);
   }
 
-  /* Service Icon Container - Clean */
+  /* Service Icon Container - Neon Green */
   .service-icon {
     @apply w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300;
-    background: hsl(var(--primary) / 0.1);
-    color: hsl(var(--primary));
+    background: hsl(141 76% 48% / 0.1);
+    color: hsl(141 76% 48%);
   }
 
   .service-icon:hover {
-    background: hsl(var(--primary) / 0.15);
+    background: hsl(141 76% 48% / 0.2);
+    box-shadow: 0 0 20px hsl(141 76% 48% / 0.3);
   }
 
-  /* Award Badge - Clean */
+  /* Award Badge - Neon Green */
   .award-badge {
     @apply inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-full;
-    background: hsl(var(--primary) / 0.1);
-    color: hsl(var(--primary));
-    border: 1px solid hsl(var(--primary) / 0.2);
+    background: hsl(141 76% 48% / 0.1);
+    color: hsl(141 76% 48%);
+    border: 1px solid hsl(141 76% 48% / 0.3);
   }
 
   /* Video Call UI Styles - Clean */
@@ -435,10 +441,10 @@
     box-shadow: 0 10px 40px hsl(0 0% 0% / 0.3);
   }
 
-  /* Team Photo Blue Overlay (Lunar Strategy style) */
+  /* Team Photo Neon Green Overlay */
   .team-photo-overlay {
     @apply absolute inset-0;
-    background: linear-gradient(to top, hsl(217 91% 50% / 0.5), transparent 60%);
+    background: linear-gradient(to top, hsl(141 76% 48% / 0.4), transparent 60%);
   }
 }
 

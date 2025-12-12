@@ -75,15 +75,19 @@ const HeroSection = () => {
           }}
         />
         
-        {/* Aurora light overlay */}
+        {/* Aurora light overlay - Neon Green */}
         <div className="absolute inset-0 animate-aurora">
-          <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-cyan-500/15" />
-          <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/10 via-transparent to-blue-500/10" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-emerald-500/25 via-transparent to-green-400/20" />
+          <div className="absolute inset-0 bg-gradient-to-bl from-lime-500/15 via-transparent to-emerald-600/15" />
         </div>
+        
+        {/* Neon Green glow blobs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/20 rounded-full blur-[120px] animate-aurora" />
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-green-400/15 rounded-full blur-[100px] animate-aurora" style={{ animationDelay: '2s' }} />
         
         {/* Light sweep effect */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-light-sweep" />
+          <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-emerald-400/10 to-transparent animate-light-sweep" />
         </div>
         
         {/* Dark overlay gradient */}
@@ -120,13 +124,13 @@ const HeroSection = () => {
 
           {/* Subtext - Larger and more prominent */}
           <p className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-10 opacity-0 animate-fade-up stagger-2 font-light tracking-wide">
-            We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
+            We build the bridge for your project to enter the Korean market with <span className="text-emerald-400 font-medium">Multi-channel marketing</span>.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-up stagger-3">
-            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 text-white text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-5 rounded-xl font-semibold shadow-[0_15px_40px_rgba(59,130,246,0.35)] hover:shadow-[0_20px_50px_rgba(59,130,246,0.5)] transition-all duration-500 hover:scale-[1.02] border border-white/20">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 via-green-400 to-lime-400 text-black text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-5 rounded-xl font-bold shadow-[0_15px_40px_rgba(16,185,129,0.4)] hover:shadow-[0_20px_60px_rgba(16,185,129,0.6)] transition-all duration-500 hover:scale-[1.02] border border-white/20">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               <span className="relative flex items-center gap-3">
                 Book a Free Consultation
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -135,7 +139,7 @@ const HeroSection = () => {
             
             <Link 
               to="/contact"
-              className="group flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-xl border border-white/20 text-white font-medium hover:bg-white/5 hover:border-white/30 transition-all duration-300"
+              className="group flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 rounded-xl border border-emerald-500/30 text-emerald-400 font-medium hover:bg-emerald-500/10 hover:border-emerald-400/50 transition-all duration-300"
             >
               <Send className="w-5 h-5" />
               Send Message
@@ -174,14 +178,14 @@ const HeroSection = () => {
           {[...clientLogos, ...clientLogos].map((client, index) => (
             <div 
               key={index} 
-              className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+              className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-zinc-900/80 rounded-full border border-emerald-500/20 hover:border-emerald-400/40 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300"
             >
               <img 
                 src={client.logo} 
                 alt={client.name} 
                 className="h-5 w-5 sm:h-7 sm:w-7 object-contain brightness-0 invert opacity-80 flex-shrink-0"
               />
-              <span className="text-white/70 text-xs sm:text-sm font-medium whitespace-nowrap">
+              <span className="text-emerald-400/80 text-xs sm:text-sm font-medium whitespace-nowrap">
                 {client.name}
               </span>
             </div>
@@ -226,7 +230,7 @@ const StatItem = ({
       className="text-center opacity-0 animate-fade-up"
       style={{ animationDelay: `${delay + 600}ms`, animationFillMode: 'forwards' }}
     >
-      <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">
+      <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-emerald-400 mb-2">
         {prefix}{count}{suffix}
       </div>
       <div className="text-sm sm:text-base text-white/50 font-light">

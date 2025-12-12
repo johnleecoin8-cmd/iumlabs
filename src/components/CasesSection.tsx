@@ -181,14 +181,14 @@ const CasesSection = () => {
         {/* Header */}
         <div className={`flex flex-col md:flex-row items-start md:items-center justify-between mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="flex items-center gap-4 mb-4 md:mb-0">
-            <span className="number-badge text-white/50">200+ Clients</span>
+            <span className="number-badge text-emerald-400/70">200+ Clients</span>
           </div>
           
           <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-center text-white flex-1">
-            Featured <span className="serif-italic text-primary">Cases</span>
+            Featured <span className="serif-italic text-emerald-400">Cases</span>
           </h2>
           
-          <div className="text-white/30 text-2xl font-light hidden md:block">///</div>
+          <div className="text-emerald-500/30 text-2xl font-light hidden md:block">///</div>
         </div>
 
         {/* Cases Grid - 3x3 */}
