@@ -68,64 +68,127 @@ const cases = [
   },
 ];
 
-const categoryTags = [
-  { label: "Infrastructure", color: "border-yellow-400/50 text-yellow-400" },
-  { label: "Exchange", color: "border-green-400/50 text-green-400" },
-  { label: "Layer 2", color: "border-purple-400/50 text-purple-400" },
-  { label: "RWA", color: "border-blue-400/50 text-blue-400" },
-  { label: "DePIN", color: "border-cyan-400/50 text-cyan-400" },
-];
-
-const GlowingOrbs = () => (
-  <>
-    <div 
-      className="glowing-orb glowing-orb-purple w-[350px] h-[350px] top-20 -right-20"
-      style={{ animationDelay: '0s' }}
-    />
-    <div 
-      className="glowing-orb glowing-orb-blue w-[400px] h-[400px] -bottom-20 left-20"
-      style={{ animationDelay: '-7s' }}
-    />
-    <div 
-      className="glowing-orb glowing-orb-green w-[300px] h-[300px] top-1/2 left-1/4"
-      style={{ animationDelay: '-3s' }}
-    />
-  </>
-);
+// Unique decorative elements for each card
+const CardDecorations = ({ type }: { type: string }) => {
+  switch (type) {
+    case "bnb":
+      return (
+        <>
+          <div className="absolute inset-0 opacity-20">
+            <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <pattern id="hexagons" width="20" height="17.32" patternUnits="userSpaceOnUse">
+                  <polygon points="10,0 20,5 20,15 10,17.32 0,15 0,5" fill="none" stroke="white" strokeWidth="0.5" />
+                </pattern>
+              </defs>
+              <rect width="100" height="100" fill="url(#hexagons)" />
+            </svg>
+          </div>
+          <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-radial from-yellow-200/40 to-transparent blur-2xl" />
+          <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full border-2 border-white/20" />
+          <div className="absolute top-20 left-20 w-4 h-4 rotate-45 bg-white/30" />
+        </>
+      );
+    case "kucoin":
+      return (
+        <>
+          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M0,50 Q25,30 50,50 T100,50" stroke="white" strokeWidth="0.5" fill="none" />
+            <path d="M0,60 Q25,40 50,60 T100,60" stroke="white" strokeWidth="0.5" fill="none" />
+            <path d="M0,70 Q25,50 50,70 T100,70" stroke="white" strokeWidth="0.5" fill="none" />
+          </svg>
+          <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-gradient-to-t from-emerald-300/30 to-transparent" />
+          <div className="absolute top-8 right-8 grid grid-cols-4 gap-2 opacity-30">
+            {[...Array(16)].map((_, i) => (
+              <div key={i} className="w-1.5 h-1.5 rounded-full bg-white" />
+            ))}
+          </div>
+          <div className="absolute bottom-16 left-8 w-20 h-20 rounded-full border border-dashed border-white/30" />
+        </>
+      );
+    case "polygon":
+      return (
+        <>
+          <div className="absolute top-10 right-10 w-16 h-16 rotate-45 border-2 border-white/30" />
+          <div className="absolute bottom-20 left-16 w-12 h-12 rotate-45 bg-white/10" />
+          <div className="absolute top-1/2 right-1/4 w-8 h-8 rotate-45 border border-purple-300/50" />
+          <div className="absolute -top-10 left-1/3 w-40 h-40 rounded-full bg-purple-400/30 blur-3xl" />
+          <svg className="absolute bottom-0 left-0 w-full h-24 opacity-20" viewBox="0 0 100 30" preserveAspectRatio="none">
+            <polygon points="0,30 10,0 20,30" fill="white" />
+            <polygon points="30,30 40,10 50,30" fill="white" />
+            <polygon points="60,30 70,5 80,30" fill="white" />
+          </svg>
+        </>
+      );
+    case "ondo":
+      return (
+        <>
+          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path d="M0,80 L20,70 L40,75 L60,50 L80,55 L100,30" stroke="#3B82F6" strokeWidth="1" fill="none" />
+            <path d="M0,90 L20,85 L40,88 L60,70 L80,72 L100,50" stroke="#60A5FA" strokeWidth="0.5" fill="none" />
+          </svg>
+          <div className="absolute inset-0 opacity-10">
+            <div className="w-full h-full" style={{ 
+              backgroundImage: 'linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.3) 1px, transparent 1px)',
+              backgroundSize: '20px 20px'
+            }} />
+          </div>
+          <div className="absolute top-1/4 right-1/4 w-3 h-3 rounded-full bg-blue-400 shadow-lg shadow-blue-500/50" />
+          <div className="absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-blue-300" />
+          <div className="absolute bottom-1/3 right-1/3 w-4 h-4 rounded-full border-2 border-blue-400/50" />
+        </>
+      );
+    case "peaq":
+      return (
+        <>
+          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100">
+            <circle cx="20" cy="30" r="3" fill="#00FF9D" />
+            <circle cx="80" cy="20" r="2" fill="#00FF9D" />
+            <circle cx="60" cy="70" r="4" fill="#00FF9D" />
+            <circle cx="30" cy="80" r="2" fill="#00FF9D" />
+            <line x1="20" y1="30" x2="80" y2="20" stroke="#00FF9D" strokeWidth="0.5" />
+            <line x1="20" y1="30" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
+            <line x1="60" y1="70" x2="30" y2="80" stroke="#00FF9D" strokeWidth="0.5" />
+            <line x1="80" y1="20" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
+          </svg>
+          <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-green-300/40 to-transparent" />
+          <div className="absolute top-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-300/30 to-transparent" />
+          <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full bg-green-400/20 blur-3xl" />
+        </>
+      );
+    case "story":
+      return (
+        <>
+          <div className="absolute top-8 right-8 w-20 h-28 bg-white/10 rounded-sm transform rotate-6" />
+          <div className="absolute top-10 right-10 w-20 h-28 bg-white/15 rounded-sm transform rotate-3" />
+          <div className="absolute bottom-10 left-10 w-24 h-24 rounded-full bg-gradient-to-r from-red-300/40 to-pink-300/30" />
+          <div className="absolute top-1/3 left-1/4 w-6 h-6 rounded-full bg-red-200/50" />
+          <div className="absolute bottom-1/4 right-0 w-1/2 h-px bg-white/20" />
+          <div className="absolute bottom-1/4 right-0 w-1/3 h-px bg-white/20 translate-y-3" />
+        </>
+      );
+    default:
+      return null;
+  }
+};
 
 const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1 bg-[hsl(0,0%,4%)] relative overflow-hidden">
-      {/* Glowing Orbs */}
-      <GlowingOrbs />
-
-      {/* Floating Category Tags */}
-      <div className="absolute top-8 left-0 right-0 hidden lg:flex justify-center gap-4 z-20">
-        {categoryTags.map((tag, index) => (
-          <span
-            key={tag.label}
-            className={`floating-tag px-4 py-2 text-xs rounded-full border bg-black/40 backdrop-blur-sm ${tag.color}`}
-            style={{ animationDelay: `${index * 0.3}s` }}
-          >
-            {tag.label}
-          </span>
-        ))}
-      </div>
-
-      <div className="container mx-auto max-w-7xl relative z-10">
+    <div ref={ref} className="py-24 px-4 flex-1 bg-[hsl(0,0%,96%)]">
+      <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className={`flex flex-col md:flex-row items-start md:items-center justify-between mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="flex items-center gap-4 mb-4 md:mb-0">
-            <span className="number-badge text-white/50 badge-glow glass-card px-3 py-1.5 rounded-full">200+ Clients</span>
+            <span className="number-badge text-[hsl(0,0%,40%)]">200+ Clients</span>
           </div>
           
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-center text-white flex-1">
-            Featured <span className="serif-italic text-glow">Cases</span>
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-center text-[hsl(0,0%,8%)] flex-1">
+            Featured <span className="serif-italic">Cases</span>
           </h2>
           
-          <div className="text-white/30 text-2xl font-light hidden md:block">///</div>
+          <div className="text-[hsl(0,0%,60%)] text-2xl font-light hidden md:block">///</div>
         </div>
 
         {/* Cases Grid - 3x3 */}
@@ -135,21 +198,16 @@ const CasesSection = () => {
               key={caseItem.name}
               to={`/projects/${caseItem.slug}`}
               className="group"
-              style={{ 
-                animationDelay: `${index * 100}ms`,
-                transitionDelay: `${index * 100}ms`,
-              }}
+              style={{ animationDelay: `${index * 100}ms` }}
             >
               <TiltCard
-                className={`relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle} cursor-pointer mb-4 glow-border card-shine`}
+                className={`relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle} cursor-pointer mb-4`}
                 max={12}
                 scale={1.03}
                 speed={300}
               >
-                {/* Animated glow ring */}
-                <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="absolute inset-[-2px] rounded-3xl bg-gradient-to-r from-white/20 via-white/40 to-white/20 blur-sm" />
-                </div>
+                {/* Unique Decorations */}
+                <CardDecorations type={caseItem.decorations} />
 
                 {/* Content - Logo Centered */}
                 <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
@@ -185,14 +243,14 @@ const CasesSection = () => {
                 </div>
               </TiltCard>
 
-              {/* Content Below Card */}
-              <div className={`transition-all duration-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`} style={{ transitionDelay: `${index * 150 + 200}ms` }}>
-                <h4 className="text-lg font-medium text-white mb-2">{caseItem.name}</h4>
-                <p className="text-sm text-white/50 mb-3 line-clamp-2">
+              {/* Content Below Card - Same as /projects page */}
+              <div>
+                <h4 className="text-lg font-medium text-[hsl(0,0%,15%)] mb-2">{caseItem.name}</h4>
+                <p className="text-sm text-[hsl(0,0%,40%)] mb-3 line-clamp-2">
                   {caseItem.result}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <span className="text-xs px-2 py-1 glass-card rounded-full text-white/70">
+                  <span className="text-xs px-2 py-1 bg-[hsl(0,0%,90%)] border border-[hsl(0,0%,85%)] rounded-full text-[hsl(0,0%,40%)]">
                     {caseItem.category}
                   </span>
                 </div>
@@ -202,10 +260,10 @@ const CasesSection = () => {
         </div>
 
         {/* View All Button */}
-        <div className={`flex justify-center mt-12 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className={`flex justify-center mt-12 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <Link
             to="/projects"
-            className="lunar-btn-outline border-white/30 text-white hover:bg-white/10 glow-border"
+            className="lunar-btn-outline border-[hsl(0,0%,20%)] text-[hsl(0,0%,20%)] hover:bg-[hsl(0,0%,20%)] hover:text-white"
           >
             <span>View All Cases</span>
             <ArrowUpRight className="w-4 h-4" />

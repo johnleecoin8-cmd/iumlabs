@@ -85,12 +85,11 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Half Screen Menu - Top */}
+      {/* Full Screen Menu */}
       <div
-        className={`fixed top-0 left-0 right-0 z-[100] bg-background/98 backdrop-blur-xl border-b border-white/10 transition-all duration-500 ${
-          isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
+        className={`fixed inset-0 z-[100] bg-background transition-all duration-500 ${
+          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
-        style={{ height: '50vh' }}
       >
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
@@ -111,18 +110,18 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div className="container mx-auto px-6 pt-6 h-[calc(50vh-80px)] overflow-auto">
-          <div className="grid md:grid-cols-2 gap-8">
+        <div className="container mx-auto px-6 pt-20">
+          <div className="grid md:grid-cols-2 gap-16">
             {/* Navigation Links */}
             <div>
-              <span className="text-muted-foreground text-xs uppercase tracking-widest mb-4 block">Navigation</span>
-              <nav className="space-y-2">
+              <span className="text-muted-foreground text-sm uppercase tracking-widest mb-8 block">Navigation</span>
+              <nav className="space-y-4">
                 {navLinks.map((link) => (
                   <Link
                     key={link.to}
                     to={link.to}
                     onClick={() => setIsMenuOpen(false)}
-                    className="block text-3xl md:text-4xl font-bold text-foreground hover:text-primary transition-colors"
+                    className="block text-5xl md:text-7xl font-bold text-foreground hover:text-primary transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -131,35 +130,42 @@ const Navbar = () => {
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-4">
+            <div className="space-y-12">
               <div>
-                <span className="text-muted-foreground text-xs uppercase tracking-widest mb-2 block">Get in touch</span>
+                <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Get in touch</span>
                 <a 
                   href={`mailto:${brandConfig.email}`}
-                  className="text-lg text-foreground hover:text-primary transition-colors"
+                  className="text-2xl text-foreground hover:text-primary transition-colors"
                 >
                   {brandConfig.email}
                 </a>
               </div>
 
               <div>
-                <span className="text-muted-foreground text-xs uppercase tracking-widest mb-2 block">Telegram</span>
+                <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Telegram</span>
                 <a 
                   href={brandConfig.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-lg text-foreground hover:text-primary transition-colors"
+                  className="text-2xl text-foreground hover:text-primary transition-colors"
                 >
                   @cryptobridgekorea
                 </a>
               </div>
 
-              <div className="flex gap-3 pt-2">
+              <div>
+                <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Office</span>
+                <p className="text-xl text-muted-foreground">
+                  {brandConfig.office}
+                </p>
+              </div>
+
+              <div className="flex gap-4 pt-8">
                 <a
                   href={brandConfig.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+                  className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
                 >
                   Telegram
                 </a>
@@ -167,7 +173,7 @@ const Navbar = () => {
                   href={brandConfig.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-5 py-2.5 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+                  className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
                 >
                   LinkedIn
                 </a>
@@ -176,14 +182,6 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      
-      {/* Backdrop overlay */}
-      <div 
-        className={`fixed inset-0 z-[99] bg-black/50 transition-opacity duration-500 ${
-          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
-        }`}
-        onClick={() => setIsMenuOpen(false)}
-      />
 
       {/* Live Chat Modal */}
       <LiveChatModal isOpen={isLiveChatOpen} onClose={() => setIsLiveChatOpen(false)} />

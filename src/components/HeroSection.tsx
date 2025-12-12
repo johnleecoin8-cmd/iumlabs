@@ -1,5 +1,5 @@
 import { ChevronDown, ArrowRight, Send } from "lucide-react";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import CalendlyButton from "./CalendlyButton";
 import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
@@ -17,18 +17,18 @@ import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
 
 const serviceTags = [
-  // Left side - x, y as percentages from top-left
-  { label: "PR", x: 5, y: 10, color: "#60A5FA" },
-  { label: "KOL Marketing", x: 3, y: 25, color: "#34D399" },
-  { label: "Influencer Strategy", x: 6, y: 40, color: "#F472B6" },
-  { label: "DeFi Marketing", x: 4, y: 55, color: "#FBBF24" },
-  { label: "Exchange Listing", x: 7, y: 70, color: "#A78BFA" },
-  // Right side - symmetric with left (100 - left_x - offset for text width)
-  { label: "Social Media Marketing", x: 86, y: 10, color: "#22D3EE" },
-  { label: "Community Building", x: 88, y: 25, color: "#F87171" },
-  { label: "Go-To-Market Strategy", x: 84, y: 40, color: "#4ADE80" },
-  { label: "NFT Marketing", x: 87, y: 55, color: "#FB923C" },
-  { label: "GameFi", x: 85, y: 70, color: "#818CF8" },
+  // Left side
+  { label: "PR", position: "top-[10%] left-[5%]" },
+  { label: "KOL Marketing", position: "top-[25%] left-[3%]" },
+  { label: "Influencer Strategy", position: "top-[40%] left-[6%]" },
+  { label: "DeFi Marketing", position: "top-[55%] left-[4%]" },
+  { label: "Exchange Listing", position: "top-[70%] left-[7%]" },
+  // Right side
+  { label: "Social Media Marketing", position: "top-[8%] right-[8%]" },
+  { label: "Community Building", position: "top-[22%] right-[5%]" },
+  { label: "Go-To-Market Strategy", position: "top-[38%] right-[6%]" },
+  { label: "NFT Marketing", position: "top-[52%] right-[4%]" },
+  { label: "GameFi", position: "top-[66%] right-[8%]" },
 ];
 
 const clientLogos = [
@@ -49,145 +49,6 @@ const stats = [
   { value: 50, label: "Exchange Partners", suffix: "+" },
   { value: 5, label: "Community Reach", suffix: "M+" },
 ];
-
-// Connection Line Component with enhanced animations
-const ConnectionLines = ({ tags }: { tags: typeof serviceTags }) => {
-  const centerX = 50;
-  const centerY = 45;
-
-  return (
-    <svg className="absolute inset-0 w-full h-full pointer-events-none hidden xl:block z-[5]">
-      <defs>
-        {/* Gradient for each line based on tag color */}
-        {tags.map((tag, index) => (
-          <linearGradient
-            key={`gradient-${index}`}
-            id={`line-gradient-${index}`}
-            x1="0%"
-            y1="0%"
-            x2="100%"
-            y2="100%"
-          >
-            <stop offset="0%" stopColor={`${tag.color}00`} />
-            <stop offset="30%" stopColor={`${tag.color}40`} />
-            <stop offset="50%" stopColor={`${tag.color}80`} />
-            <stop offset="70%" stopColor={`${tag.color}40`} />
-            <stop offset="100%" stopColor={`${tag.color}00`} />
-          </linearGradient>
-        ))}
-        
-        {/* Enhanced glow filter */}
-        <filter id="line-glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="3" result="blur1" />
-          <feGaussianBlur stdDeviation="6" result="blur2" />
-          <feMerge>
-            <feMergeNode in="blur2" />
-            <feMergeNode in="blur1" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-        
-        {/* Pulse animation filter */}
-        <filter id="pulse-glow" x="-100%" y="-100%" width="300%" height="300%">
-          <feGaussianBlur stdDeviation="4" result="blur" />
-          <feFlood floodColor="white" floodOpacity="0.8" />
-          <feComposite in2="blur" operator="in" />
-          <feMerge>
-            <feMergeNode />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-      
-      {tags.map((tag, index) => (
-        <g key={index}>
-          {/* Main connection line with gradient */}
-          <line
-            x1={`${tag.x}%`}
-            y1={`${tag.y}%`}
-            x2={`${centerX}%`}
-            y2={`${centerY}%`}
-            stroke={`url(#line-gradient-${index})`}
-            strokeWidth="1.5"
-            filter="url(#line-glow)"
-            className="animate-pulse"
-            style={{ 
-              animationDuration: `${3 + index * 0.2}s`,
-              animationDelay: `${index * 0.1}s`,
-            }}
-          />
-          
-          {/* Secondary glow line */}
-          <line
-            x1={`${tag.x}%`}
-            y1={`${tag.y}%`}
-            x2={`${centerX}%`}
-            y2={`${centerY}%`}
-            stroke={tag.color}
-            strokeWidth="4"
-            opacity="0.15"
-            filter="url(#line-glow)"
-          />
-          
-          {/* Animated path for traveling pulses */}
-          <path
-            id={`motion-path-${index}`}
-            d={`M ${tag.x} ${tag.y} L ${centerX} ${centerY}`}
-            fill="none"
-            stroke="none"
-          />
-          
-          {/* Multiple traveling energy pulses */}
-          {[0, 1, 2, 3].map((pulseIdx) => (
-            <g key={pulseIdx}>
-              {/* Main pulse orb */}
-              <circle r="3" fill={tag.color} filter="url(#pulse-glow)">
-                <animateMotion
-                  dur={`${4 + pulseIdx * 0.5}s`}
-                  repeatCount="indefinite"
-                  begin={`${index * 0.3 + pulseIdx * 1}s`}
-                  path={`M ${tag.x * 10} ${tag.y * 6} L ${centerX * 10} ${centerY * 6}`}
-                />
-                <animate 
-                  attributeName="opacity" 
-                  values="0;1;1;0" 
-                  dur={`${4 + pulseIdx * 0.5}s`} 
-                  repeatCount="indefinite"
-                  begin={`${index * 0.3 + pulseIdx * 1}s`}
-                />
-                <animate 
-                  attributeName="r" 
-                  values="1;3;2;1" 
-                  dur={`${4 + pulseIdx * 0.5}s`} 
-                  repeatCount="indefinite"
-                  begin={`${index * 0.3 + pulseIdx * 1}s`}
-                />
-              </circle>
-              
-              {/* Trailing spark */}
-              <circle r="1.5" fill="white" opacity="0.9" filter="url(#pulse-glow)">
-                <animateMotion
-                  dur={`${4 + pulseIdx * 0.5}s`}
-                  repeatCount="indefinite"
-                  begin={`${index * 0.3 + pulseIdx * 1 + 0.15}s`}
-                  path={`M ${tag.x * 10} ${tag.y * 6} L ${centerX * 10} ${centerY * 6}`}
-                />
-                <animate 
-                  attributeName="opacity" 
-                  values="0;0.8;0.4;0" 
-                  dur={`${4 + pulseIdx * 0.5}s`} 
-                  repeatCount="indefinite"
-                  begin={`${index * 0.3 + pulseIdx * 1 + 0.15}s`}
-                />
-              </circle>
-            </g>
-          ))}
-          
-        </g>
-      ))}
-    </svg>
-  );
-};
 
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -235,28 +96,17 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* Enhanced Connection Lines */}
-      <ConnectionLines tags={serviceTags} />
-
       {/* Floating Service Tags - Desktop only */}
       {serviceTags.map((tag, index) => (
         <div
           key={index}
-          className="absolute hidden xl:block animate-float z-10"
+          className={`absolute ${tag.position} hidden xl:block animate-float z-10`}
           style={{ 
-            left: `${tag.x}%`,
-            top: `${tag.y}%`,
             animationDelay: `${index * 0.5}s`,
             transform: `translateY(${scrollY * 0.08}px)`
           }}
         >
-          <span 
-            className="font-sans lunar-tag-dark text-xs whitespace-nowrap glow-border"
-            style={{ 
-              borderColor: `${tag.color}40`,
-              boxShadow: `0 0 20px ${tag.color}20`,
-            }}
-          >
+          <span className="font-sans lunar-tag-dark text-xs whitespace-nowrap">
             {tag.label}
           </span>
         </div>
