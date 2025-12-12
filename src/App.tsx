@@ -17,20 +17,33 @@ import GameFiService from "./pages/GameFiService";
 import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
-// Page transition wrapper
+// Page transition wrapper with smooth animations
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
-  const [isVisible, setIsVisible] = useState(false);
+  const [displayChildren, setDisplayChildren] = useState(children);
+  const [transitionStage, setTransitionStage] = useState<'enter' | 'exit'>('enter');
 
   useEffect(() => {
-    setIsVisible(false);
-    const timer = setTimeout(() => setIsVisible(true), 50);
-    return () => clearTimeout(timer);
-  }, [location.pathname]);
+    if (children !== displayChildren) {
+      setTransitionStage('exit');
+    }
+  }, [children, displayChildren]);
+
+  const handleTransitionEnd = () => {
+    if (transitionStage === 'exit') {
+      setDisplayChildren(children);
+      setTransitionStage('enter');
+      // Scroll to top on page change
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  };
 
   return (
-    <div className={`page-transition ${isVisible ? "page-visible" : "page-hidden"}`}>
-      {children}
+    <div 
+      className={`page-transition ${transitionStage === 'enter' ? 'page-enter' : 'page-exit'}`}
+      onAnimationEnd={handleTransitionEnd}
+    >
+      {displayChildren}
     </div>
   );
 };
