@@ -163,12 +163,8 @@ const CasesSection = () => {
                 </div>
               </div>
 
-              {/* Center - Logo with Project Color Glow */}
-              <div className="relative z-10 flex-1 flex items-center justify-center px-8">
-                <img src={project.logo} alt={project.name} className="h-20 md:h-28 w-auto object-contain group-hover:scale-110 transition-all duration-500" style={{
-              filter: `drop-shadow(0 0 30px ${project.glowColor}90) drop-shadow(0 0 60px ${project.glowColor}50)`
-            }} />
-              </div>
+              {/* Center - Spacer */}
+              <div className="relative z-10 flex-1" />
 
               {/* Bottom Section - Stats with Project Color */}
               <div className="relative z-10 p-8 pt-4">
