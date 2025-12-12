@@ -65,37 +65,29 @@ const HeroSection = () => {
 
   return (
     <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background - Light warm gradient with Seoul Bridge */}
+      {/* Background - Seoul Bridge Night with Ken Burns Effect */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Base warm gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#0D1321] via-[#1B2838] to-[#0D1321]" />
-        
-        {/* Seoul Bridge with higher brightness */}
         <div 
           className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
           style={{ 
             backgroundImage: `url(${seoulBridgeNight})`,
-            filter: "brightness(0.5) saturate(1.2)",
+            filter: "brightness(0.35)",
           }}
         />
         
-        {/* Warm aurora overlay */}
+        {/* Aurora light overlay */}
         <div className="absolute inset-0 animate-aurora">
-          <div className="absolute inset-0 bg-gradient-to-tr from-amber-500/15 via-transparent to-cyan-400/20" />
-          <div className="absolute inset-0 bg-gradient-to-bl from-purple-500/15 via-transparent to-blue-400/15" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-cyan-500/15" />
+          <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/10 via-transparent to-blue-500/10" />
         </div>
-        
-        {/* Ambient glow spots */}
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl" />
         
         {/* Light sweep effect */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
+          <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-light-sweep" />
         </div>
         
-        {/* Subtle vignette */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0D1321]/80" />
+        {/* Dark overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
       {/* Floating Service Tags - Desktop only */}
@@ -117,24 +109,24 @@ const HeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Gradient text with warm tones */}
+          {/* Main Headline - Unified Inter font with color contrast */}
           <h1 className="font-sans text-[12vw] sm:text-[10vw] md:text-[9vw] lg:text-[8vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10 opacity-0 animate-fade-up">
             <span className="text-white">Your </span>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-amber-200 to-amber-300">Web 3.0</span>
+            <span className="text-white/60">Web 3.0</span>
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-300 to-cyan-300">Marketing </span>
+            <span className="text-white/60">Marketing </span>
             <span className="text-white">Agency</span>
           </h1>
 
-          {/* Subtext - Warmer tone */}
-          <p className="text-lg sm:text-xl md:text-2xl text-white/60 max-w-2xl mx-auto mb-10 opacity-0 animate-fade-up stagger-2 font-light tracking-wide">
-            We build the bridge for your project to enter the Korean market with <span className="text-amber-300 font-medium">Multi-channel marketing</span>.
+          {/* Subtext - Larger and more prominent */}
+          <p className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-10 opacity-0 animate-fade-up stagger-2 font-light tracking-wide">
+            We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-0 animate-fade-up stagger-3">
-            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-400 text-[#1a1a1a] text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-5 rounded-xl font-semibold shadow-[0_15px_40px_rgba(245,158,11,0.35)] hover:shadow-[0_20px_50px_rgba(245,158,11,0.5)] transition-all duration-500 hover:scale-[1.02] border border-white/20">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+            <CalendlyButton className="group relative overflow-hidden bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-400 text-white text-base sm:text-lg px-8 sm:px-10 py-4 sm:py-5 rounded-xl font-semibold shadow-[0_15px_40px_rgba(59,130,246,0.35)] hover:shadow-[0_20px_50px_rgba(59,130,246,0.5)] transition-all duration-500 hover:scale-[1.02] border border-white/20">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
               <span className="relative flex items-center gap-3">
                 Book a Free Consultation
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -182,14 +174,14 @@ const HeroSection = () => {
           {[...clientLogos, ...clientLogos].map((client, index) => (
             <div 
               key={index} 
-              className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-5 sm:px-7 py-3 sm:py-3.5 bg-zinc-800/90 rounded-full border border-white/15 hover:border-white/30 transition-all duration-300"
+              className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
             >
               <img 
                 src={client.logo} 
                 alt={client.name} 
-                className="h-6 w-6 sm:h-8 sm:w-8 object-contain brightness-0 invert flex-shrink-0"
+                className="h-5 w-5 sm:h-7 sm:w-7 object-contain brightness-0 invert opacity-80 flex-shrink-0"
               />
-              <span className="text-white/90 text-sm sm:text-base font-medium whitespace-nowrap">
+              <span className="text-white/70 text-xs sm:text-sm font-medium whitespace-nowrap">
                 {client.name}
               </span>
             </div>
@@ -227,8 +219,6 @@ const StatItem = ({
     isVisible,
     delay,
     duration: 2000,
-    prefix,
-    suffix,
   });
   
   return (
@@ -237,7 +227,7 @@ const StatItem = ({
       style={{ animationDelay: `${delay + 600}ms`, animationFillMode: 'forwards' }}
     >
       <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">
-        {count}
+        {prefix}{count}{suffix}
       </div>
       <div className="text-sm sm:text-base text-white/50 font-light">
         {label}

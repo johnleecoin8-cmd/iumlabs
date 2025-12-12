@@ -102,11 +102,15 @@ const testimonials = [
 
 // Cluster tags - connected to central sun hub
 const clusterTags = [
-  { label: "Trusted", angle: 30, distance: 200, color: "rgba(253, 224, 71, 1)", glowColor: "rgba(253, 224, 71, 0.5)" },
-  { label: "Creative", angle: 100, distance: 220, color: "rgba(250, 204, 21, 1)", glowColor: "rgba(250, 204, 21, 0.5)" },
-  { label: "Strategic", angle: 170, distance: 190, color: "rgba(253, 186, 116, 1)", glowColor: "rgba(253, 186, 116, 0.5)" },
-  { label: "Innovative", angle: 240, distance: 210, color: "rgba(249, 115, 22, 1)", glowColor: "rgba(249, 115, 22, 0.5)" },
-  { label: "Result-Driven", angle: 310, distance: 200, color: "rgba(234, 179, 8, 1)", glowColor: "rgba(234, 179, 8, 0.5)" },
+  { label: "Responsible", angle: 0, distance: 220, color: "rgba(251, 146, 60, 1)", glowColor: "rgba(251, 146, 60, 0.6)" },
+  { label: "Creative", angle: 40, distance: 280, color: "rgba(250, 204, 21, 1)", glowColor: "rgba(250, 204, 21, 0.6)" },
+  { label: "Innovation", angle: 80, distance: 240, color: "rgba(252, 211, 77, 1)", glowColor: "rgba(252, 211, 77, 0.6)" },
+  { label: "Resourceful", angle: 120, distance: 300, color: "rgba(248, 113, 113, 1)", glowColor: "rgba(248, 113, 113, 0.6)" },
+  { label: "Strategic", angle: 160, distance: 260, color: "rgba(253, 186, 116, 1)", glowColor: "rgba(253, 186, 116, 0.6)" },
+  { label: "Trusted", angle: 200, distance: 320, color: "rgba(253, 224, 71, 1)", glowColor: "rgba(253, 224, 71, 0.6)" },
+  { label: "Detail-Oriented", angle: 240, distance: 280, color: "rgba(251, 191, 36, 1)", glowColor: "rgba(251, 191, 36, 0.6)" },
+  { label: "Innovative", angle: 280, distance: 340, color: "rgba(249, 115, 22, 1)", glowColor: "rgba(249, 115, 22, 0.6)" },
+  { label: "Result-Driven", angle: 320, distance: 300, color: "rgba(234, 179, 8, 1)", glowColor: "rgba(234, 179, 8, 0.6)" },
 ];
 
 // Mobile tags (simplified)
@@ -120,6 +124,7 @@ const Services = () => {
   const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation();
   const { ref: testimonialsRef, isVisible: testimonialsVisible } = useScrollAnimation();
   const [scrollY, setScrollY] = useState(0);
+  const [hoveredTag, setHoveredTag] = useState<number | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -139,55 +144,170 @@ const Services = () => {
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
               backgroundImage: `url(${sunCorona})`,
-              filter: "brightness(0.35) saturate(0.9)",
+              filter: "brightness(0.6) saturate(1.3)",
             }}
           />
           
-          {/* Aurora light overlay - Solar/Gold theme - reduced opacity */}
+          {/* Aurora light overlay - Solar/Gold theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-orange-600/15 via-transparent to-yellow-500/10" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-amber-600/10 via-transparent to-red-500/5" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-orange-600/30 via-transparent to-yellow-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-amber-600/25 via-transparent to-red-500/15" />
           </div>
           
           {/* Light sweep effect */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-light-sweep" />
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
           </div>
           
           {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.4)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
           
-          {/* 3D Planet - repositioned and reduced opacity */}
-          <div className="absolute right-[-15%] bottom-[-25%] w-[55%] h-[55%]">
-            <Planet3D type="sun" className="opacity-30" />
-          </div>
+          {/* 3D Planet */}
+          <Planet3D type="sun" className="opacity-60" />
         </div>
         
-        {/* Simple Floating Tags - Desktop */}
-        <div className="absolute inset-0 hidden lg:block pointer-events-none overflow-hidden">
+        {/* Cluster/Universe System - Desktop: Tags connected to central sun */}
+        <div className="absolute inset-0 hidden lg:flex items-center justify-center pointer-events-none overflow-hidden">
+          {/* SVG for connection lines and ripple effects */}
+          <svg className="absolute w-full h-full" style={{ overflow: 'visible' }}>
+            <defs>
+              {/* Gradients for each tag line */}
+              {clusterTags.map((tag, index) => (
+                <linearGradient key={`gradient-${index}`} id={`line-gradient-services-${index}`} x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor={tag.glowColor} stopOpacity="0.8" />
+                  <stop offset="50%" stopColor={tag.color} stopOpacity="0.5" />
+                  <stop offset="100%" stopColor={tag.glowColor} stopOpacity="0.2" />
+                </linearGradient>
+              ))}
+              
+              {/* Glow filter */}
+              <filter id="line-glow-services" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            
+            {/* Ripple waves from center */}
+            {[1, 2, 3].map((i) => (
+              <circle
+                key={`ripple-${i}`}
+                cx="50%"
+                cy="50%"
+                r="0"
+                fill="none"
+                stroke="rgba(255, 180, 100, 0.3)"
+                strokeWidth="1"
+                style={{
+                  animation: `ripple-expand 4s ease-out infinite`,
+                  animationDelay: `${i * 1.3}s`,
+                }}
+              />
+            ))}
+            
+            {/* Connection lines */}
+            {clusterTags.map((tag, index) => {
+              const angleRad = (tag.angle * Math.PI) / 180;
+              const endX = 50 + (tag.distance / 8) * Math.cos(angleRad);
+              const endY = 50 + (tag.distance / 8) * Math.sin(angleRad);
+              const isHovered = hoveredTag === index;
+              
+              return (
+                <g key={`line-group-${index}`}>
+                  {/* Glow line */}
+                  <line
+                    x1="50%"
+                    y1="50%"
+                    x2={`${endX}%`}
+                    y2={`${endY}%`}
+                    stroke={tag.glowColor}
+                    strokeWidth={isHovered ? "4" : "2"}
+                    filter="url(#line-glow-services)"
+                    style={{
+                      opacity: isHovered ? 1 : 0.4,
+                      transition: 'all 0.3s ease',
+                    }}
+                  />
+                  
+                  {/* Main line */}
+                  <line
+                    x1="50%"
+                    y1="50%"
+                    x2={`${endX}%`}
+                    y2={`${endY}%`}
+                    stroke={`url(#line-gradient-services-${index})`}
+                    strokeWidth={isHovered ? "2" : "1"}
+                    strokeLinecap="round"
+                    style={{
+                      opacity: isHovered ? 1 : 0.6,
+                      transition: 'all 0.3s ease',
+                    }}
+                  />
+                  
+                  {/* Animated pulse dot */}
+                  <circle
+                    r={isHovered ? "4" : "2.5"}
+                    fill={tag.color}
+                    filter="url(#line-glow-services)"
+                    style={{
+                      transition: 'r 0.3s ease',
+                    }}
+                  >
+                    <animateMotion
+                      dur={`${2 + index * 0.3}s`}
+                      repeatCount="indefinite"
+                      path={`M ${window.innerWidth / 2} ${window.innerHeight / 2} L ${window.innerWidth * endX / 100} ${window.innerHeight * endY / 100}`}
+                    />
+                  </circle>
+                </g>
+              );
+            })}
+          </svg>
+          
+          {/* Central hub glow */}
+          <div 
+            className="absolute w-24 h-24 rounded-full"
+            style={{
+              background: 'radial-gradient(circle, rgba(255, 180, 100, 0.4) 0%, rgba(255, 150, 50, 0.2) 40%, transparent 70%)',
+              animation: 'pulse-glow 3s ease-in-out infinite',
+            }}
+          />
+          
+          {/* Cluster tags */}
           {clusterTags.map((tag, index) => {
             const angleRad = (tag.angle * Math.PI) / 180;
-            const x = 50 + (tag.distance / 6) * Math.cos(angleRad);
-            const y = 50 + (tag.distance / 6) * Math.sin(angleRad);
+            const x = tag.distance * Math.cos(angleRad);
+            const y = tag.distance * Math.sin(angleRad);
+            const isHovered = hoveredTag === index;
             
             return (
               <div
-                key={`tag-${index}`}
-                className="absolute animate-float"
+                key={`cluster-tag-${index}`}
+                className="absolute pointer-events-auto cursor-pointer"
                 style={{
-                  left: `${x}%`,
-                  top: `${y}%`,
-                  transform: 'translate(-50%, -50%)',
-                  animationDelay: `${index * 0.4}s`,
+                  transform: `translate(${x}px, ${y}px) scale(${isHovered ? 1.2 : 1})`,
+                  transition: 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)',
+                  zIndex: isHovered ? 10 : 1,
                 }}
+                onMouseEnter={() => setHoveredTag(index)}
+                onMouseLeave={() => setHoveredTag(null)}
               >
                 <span
-                  className="px-4 py-2 rounded-full text-sm font-medium tracking-wide whitespace-nowrap border"
+                  className="px-4 py-2 rounded-full text-sm font-bold tracking-wide uppercase whitespace-nowrap"
                   style={{
-                    background: 'rgba(0, 0, 0, 0.5)',
-                    color: tag.color,
-                    borderColor: tag.color,
-                    boxShadow: `0 0 20px ${tag.glowColor}`,
+                    background: isHovered 
+                      ? `linear-gradient(135deg, ${tag.color}, ${tag.glowColor})`
+                      : 'rgba(0, 0, 0, 0.6)',
+                    color: isHovered ? '#000' : tag.color,
+                    border: `2px solid ${tag.color}`,
+                    boxShadow: isHovered 
+                      ? `0 0 30px ${tag.glowColor}, 0 0 60px ${tag.glowColor}`
+                      : `0 0 15px ${tag.glowColor}`,
+                    transition: 'all 0.3s ease',
+                    animation: 'float 4s ease-in-out infinite',
+                    animationDelay: `${index * 0.2}s`,
                   }}
                 >
                   {tag.label}

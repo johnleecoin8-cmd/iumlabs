@@ -25,24 +25,20 @@ const TeamSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1 relative overflow-hidden min-h-screen" style={{
-      background: 'linear-gradient(180deg, #F8F6F3 0%, #EDE8E3 100%)'
-    }}>
+    <div ref={ref} className="py-24 px-4 flex-1 relative overflow-hidden min-h-screen">
       <div className="container mx-auto max-w-7xl relative">
         {/* Header */}
         <div className={`flex items-center justify-between mb-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-100 text-purple-700 text-sm font-medium">
-            Team of 2 People
-          </span>
+          <span className="number-badge text-[#1a1a1a]/50">Team of 2 People</span>
         </div>
 
         {/* Giant Typography - Centered */}
         <div className={`text-center mb-20 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <h2 className="text-[8rem] md:text-[12rem] lg:text-[16rem] font-light leading-none tracking-tight">
-            <span className="text-transparent bg-clip-text" style={{ WebkitTextStroke: '2px rgba(26,26,26,0.2)' }}>
+            <span className="text-transparent bg-clip-text" style={{ WebkitTextStroke: '2px rgba(26,26,26,0.3)' }}>
               Our
             </span>
-            <span className="serif-italic text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-blue-600 to-purple-600 ml-4">
+            <span className="serif-italic text-transparent bg-clip-text ml-4" style={{ WebkitTextStroke: '2px rgba(26,26,26,0.3)' }}>
               Team
             </span>
           </h2>
@@ -52,7 +48,7 @@ const TeamSection = () => {
         <div className={`relative h-[600px] md:h-[500px] transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* James Card - Left */}
           <div className="absolute left-0 md:left-[5%] top-0 w-[280px] md:w-[320px] group">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-white border border-purple-200/50">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-white border border-[#1a1a1a]/10">
               {/* Photo */}
               <div className="relative h-[350px] md:h-[400px]">
                 <img
@@ -60,8 +56,8 @@ const TeamSection = () => {
                   alt={team[0].name}
                   className="w-full h-full object-cover"
                 />
-                {/* Purple-blue gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-600/60 via-blue-500/20 to-transparent" />
+                {/* Blue gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-blue-600/60 via-purple-500/20 to-transparent" />
                 
                 {/* Social Icons - Hover */}
                 <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
@@ -86,7 +82,7 @@ const TeamSection = () => {
               
               {/* Info */}
               <div className="p-4 bg-white">
-                <p className="text-purple-600 text-sm font-medium mb-1">{team[0].role}</p>
+                <p className="text-blue-600 text-sm font-medium mb-1">{team[0].role}</p>
                 <h3 className="text-xl font-semibold text-[#1a1a1a] mb-2">{team[0].name}</h3>
                 <p className="text-xs text-[#1a1a1a]/60 leading-relaxed">{team[0].background}</p>
               </div>
@@ -95,7 +91,7 @@ const TeamSection = () => {
 
           {/* David Card - Right */}
           <div className="absolute right-0 md:right-[5%] top-20 md:top-10 w-[280px] md:w-[320px] group">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-white border border-blue-200/50">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl bg-white border border-[#1a1a1a]/10">
               {/* Photo */}
               <div className="relative h-[350px] md:h-[400px]">
                 <img
@@ -103,7 +99,7 @@ const TeamSection = () => {
                   alt={team[1].name}
                   className="w-full h-full object-cover"
                 />
-                {/* Blue-purple gradient overlay */}
+                {/* Blue gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-blue-600/60 via-purple-500/20 to-transparent" />
                 
                 {/* Social Icons - Hover */}

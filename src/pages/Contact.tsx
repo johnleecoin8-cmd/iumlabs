@@ -168,8 +168,8 @@ const Contact = () => {
         </div>
 
         {/* Main CTA Content */}
-        <div className="container mx-auto max-w-6xl px-4 relative z-10 pt-24 pb-12">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="container mx-auto max-w-6xl px-4 relative z-10 pt-32 pb-16">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left - CTA Content */}
             <div>
               {/* Badge */}
@@ -193,7 +193,7 @@ const Contact = () => {
               </p>
               
               {/* Benefits List */}
-              <div className="space-y-2 mb-8 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+              <div className="space-y-3 mb-10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
                 {benefits.map((benefit, index) => (
                   <div key={index} className="flex items-center gap-3">
                     <div className="w-5 h-5 rounded-full bg-primary/20 flex items-center justify-center">
@@ -205,7 +205,7 @@ const Contact = () => {
               </div>
               
               {/* CTA Buttons */}
-              <div className="flex flex-wrap gap-3 mb-8 opacity-0 animate-fade-up" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
+              <div className="flex flex-wrap gap-4 mb-12 opacity-0 animate-fade-up" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
                 <CalendlyButton className="group relative bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-medium transition-all shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40">
                   <span className="flex items-center gap-2">
                     <Calendar className="w-5 h-5" />
@@ -241,16 +241,16 @@ const Contact = () => {
             
             {/* Right - Quick Contact Card */}
             <div className="opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
-                <div className="flex items-center gap-3 mb-4">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
+                <div className="flex items-center gap-3 mb-6">
                   <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse" />
                   <span className="text-white/60 text-sm">Usually responds within 2 hours</span>
                 </div>
                 
-                <h3 className="text-xl font-light text-white mb-1">Quick Contact</h3>
-                <p className="text-white/50 text-sm mb-5">Reach out directly or fill the form below</p>
+                <h3 className="text-2xl font-light text-white mb-2">Quick Contact</h3>
+                <p className="text-white/50 text-sm mb-8">Reach out directly or fill the form below</p>
                 
-                <div className="space-y-3">
+                <div className="space-y-4">
                   {contactInfo.map((info, index) => (
                     <a 
                       key={info.label}
@@ -272,7 +272,7 @@ const Contact = () => {
                 </div>
                 
                 {/* Stats */}
-                <div className="grid grid-cols-3 gap-3 mt-6 pt-6 border-t border-white/10">
+                <div className="grid grid-cols-3 gap-4 mt-8 pt-8 border-t border-white/10">
                   {stats.map((stat, index) => (
                     <div key={index} className="text-center">
                       <div className="text-2xl font-light text-primary">{stat.value}</div>
@@ -295,10 +295,10 @@ const Contact = () => {
       {/* Services Highlight Section */}
       <section 
         ref={servicesRef as React.RefObject<HTMLElement>}
-        className="bg-[hsl(0,0%,6%)] py-14 px-4 border-y border-white/5"
+        className="bg-[hsl(0,0%,6%)] py-20 px-4 border-y border-white/5"
       >
         <div className="container mx-auto max-w-6xl">
-          <div className={`text-center mb-8 transition-all duration-700 ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`text-center mb-12 transition-all duration-700 ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <span className="text-sm text-white/40 mb-3 block">[ Our Services ]</span>
             <h2 className="text-3xl md:text-4xl font-light text-white">
               How we can <span className="serif-italic text-primary">help</span>
@@ -331,11 +331,11 @@ const Contact = () => {
       {/* Contact Form Section */}
       <section 
         ref={formRef as React.RefObject<HTMLElement>}
-        className="bg-background py-16 px-4"
+        className="bg-background py-24 px-4"
       >
         <div className="container mx-auto max-w-6xl">
           {/* Section Header */}
-          <div className={`text-center mb-10 transition-all duration-700 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`text-center mb-16 transition-all duration-700 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <span className="text-sm text-white/40 mb-3 block">[ Get Started ]</span>
             <h2 className="text-4xl md:text-5xl font-light text-white mb-4">
               Tell us about your <span className="serif-italic text-primary">project</span>
@@ -345,7 +345,7 @@ const Contact = () => {
             </p>
           </div>
           
-          <div className={`grid lg:grid-cols-2 gap-8 lg:gap-12 transition-all duration-700 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 transition-all duration-700 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {/* Left Column - Image & Contact Info */}
             <div 
               className="space-y-8 transition-all duration-700"
