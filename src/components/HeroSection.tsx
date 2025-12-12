@@ -120,6 +120,16 @@ const HeroSection = () => {
               <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
+          {/* Electric glow filter */}
+          <filter id="electric-glow" x="-100%" y="-100%" width="300%" height="300%">
+            <feGaussianBlur stdDeviation="4" result="blur1" />
+            <feGaussianBlur stdDeviation="2" result="blur2" />
+            <feMerge>
+              <feMergeNode in="blur1" />
+              <feMergeNode in="blur2" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
         </defs>
         
         {serviceTags.map((tag, index) => (
@@ -135,24 +145,41 @@ const HeroSection = () => {
               filter="url(#glow)"
               className="opacity-60"
             />
-            {/* Animated pulse dot */}
-            <circle
-              r="2"
-              fill="rgba(255,255,255,0.6)"
-              filter="url(#glow)"
-              className="animate-pulse-dot"
-              style={{
-                animationDelay: `${index * 0.3}s`,
-              }}
-            >
-              <animateMotion
-                dur="3s"
-                repeatCount="indefinite"
-                begin={`${index * 0.3}s`}
-              >
-                <mpath href={`#path-${index}`} />
-              </animateMotion>
-            </circle>
+            {/* Electric energy effect - multiple traveling pulses */}
+            {[0, 1, 2].map((pulseIndex) => (
+              <g key={pulseIndex}>
+                {/* Electric arc glow */}
+                <circle
+                  r="1.5"
+                  className="animate-electric-pulse"
+                  style={{
+                    filter: 'url(#electric-glow)',
+                  }}
+                >
+                  <animateMotion
+                    dur="6s"
+                    repeatCount="indefinite"
+                    begin={`${index * 0.5 + pulseIndex * 2}s`}
+                  >
+                    <mpath href={`#path-${index}`} />
+                  </animateMotion>
+                </circle>
+                {/* Electric spark trail */}
+                <circle
+                  r="0.8"
+                  fill="rgba(147,197,253,0.9)"
+                  className="animate-spark"
+                >
+                  <animateMotion
+                    dur="6s"
+                    repeatCount="indefinite"
+                    begin={`${index * 0.5 + pulseIndex * 2 + 0.1}s`}
+                  >
+                    <mpath href={`#path-${index}`} />
+                  </animateMotion>
+                </circle>
+              </g>
+            ))}
             {/* Hidden path for animateMotion */}
             <path
               id={`path-${index}`}
