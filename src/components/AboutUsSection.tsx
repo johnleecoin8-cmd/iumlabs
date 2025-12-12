@@ -179,11 +179,13 @@ const AboutUsSection = () => {
             
             <div className="flex items-center logo-marquee-slow">
               {[
-                { name: "Cointelegraph", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Cointelegraph_logo.svg/512px-Cointelegraph_logo.svg.png" },
-                { name: "CoinDesk", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/CoinDesk_logo.svg/512px-CoinDesk_logo.svg.png" },
-                { name: "BlockMedia", logo: "https://www.blockmedia.co.kr/wp-content/uploads/2020/06/blockmedia_logo.png" },
-                { name: "TokenPost", logo: "https://cdn.tokenpost.kr/uploads/2019/12/logo-1.png" },
-                { name: "Decrypt", logo: "https://decrypt.co/wp-content/themes/flavor/assets/images/favicon/decrypt-logo.svg" },
+                { name: "Cointelegraph", logo: "https://cointelegraph.com/icons/logo/en.svg" },
+                { name: "CoinDesk", logo: "https://upload.wikimedia.org/wikipedia/commons/4/40/CoinDesk_logo.svg" },
+                { name: "BlockMedia", logo: "https://cdn.blockmedia.co.kr/wp-content/uploads/2024/07/Blockmedia_Logo_name.png" },
+                { name: "TokenPost", logo: "https://s1.tokenpost.com/assets/images/tokenpost_new/common_new/logo.svg" },
+                { name: "Coinness", logo: "https://event.coinness.com/awards/images/media/CoinNess.webp" },
+                { name: "Bloomingbit", logo: "https://event.coinness.com/awards/images/media/Bloomingbit.webp" },
+                { name: "The Economist", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/The_Economist_Logo.svg" },
               ].flatMap((media, i) => [media, media]).map((media, index) => (
                 <div 
                   key={index} 
