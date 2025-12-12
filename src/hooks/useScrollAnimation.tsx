@@ -7,7 +7,7 @@ interface UseScrollAnimationOptions {
 }
 
 export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
-  const { threshold = 0.1, rootMargin = '0px', triggerOnce = true } = options;
+  const { threshold = 0.05, rootMargin = '50px', triggerOnce = true } = options;
   const ref = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
@@ -18,7 +18,10 @@ export const useScrollAnimation = (options: UseScrollAnimationOptions = {}) => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true);
+          // Add slight delay for smoother feel
+          requestAnimationFrame(() => {
+            setIsVisible(true);
+          });
           if (triggerOnce) {
             observer.unobserve(element);
           }

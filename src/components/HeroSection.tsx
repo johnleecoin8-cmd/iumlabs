@@ -16,16 +16,23 @@ import storyProtocolLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
 
+// Desktop tags
 const serviceTags = [
-  // Left side
   { label: "KOL Marketing", position: "top-[15%] left-[5%]" },
   { label: "Community Operation", position: "top-[35%] left-[4%]" },
   { label: "GTM Strategy", position: "top-[55%] left-[6%]" },
   { label: "Exchange Support", position: "top-[75%] left-[5%]" },
-  // Right side
   { label: "Media & PR", position: "top-[18%] right-[6%]" },
   { label: "AMA Hosting", position: "top-[42%] right-[5%]" },
   { label: "Offline Events", position: "top-[66%] right-[7%]" },
+];
+
+// Mobile tags (fewer, repositioned for small screens)
+const mobileServiceTags = [
+  { label: "KOL", position: "top-[8%] left-[3%]" },
+  { label: "Community", position: "top-[12%] right-[3%]" },
+  { label: "Media", position: "bottom-[38%] left-[2%]" },
+  { label: "Events", position: "bottom-[42%] right-[2%]" },
 ];
 
 const clientLogos = [
@@ -88,17 +95,32 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* Floating Service Tags - Desktop only */}
+      {/* Floating Service Tags - Desktop */}
       {serviceTags.map((tag, index) => (
         <div
           key={index}
-          className={`absolute ${tag.position} hidden xl:block animate-float z-10`}
+          className={`absolute ${tag.position} hidden lg:block animate-float z-10`}
           style={{ 
             animationDelay: `${index * 0.5}s`,
             transform: `translateY(${scrollY * 0.08}px)`
           }}
         >
           <span className="font-sans lunar-tag-dark text-xs whitespace-nowrap">
+            {tag.label}
+          </span>
+        </div>
+      ))}
+
+      {/* Floating Service Tags - Mobile (smaller, fewer) */}
+      {mobileServiceTags.map((tag, index) => (
+        <div
+          key={`mobile-${index}`}
+          className={`absolute ${tag.position} lg:hidden animate-float z-10`}
+          style={{ 
+            animationDelay: `${index * 0.3}s`,
+          }}
+        >
+          <span className="font-sans px-2 py-1 text-[10px] rounded-sm border border-white/20 bg-black/50 backdrop-blur-sm text-white/80 whitespace-nowrap">
             {tag.label}
           </span>
         </div>
