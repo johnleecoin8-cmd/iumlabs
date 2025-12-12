@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
@@ -48,22 +49,26 @@ const serviceHighlights = [
   { 
     icon: Globe, 
     title: "Korean Market Entry", 
-    description: "Strategic guidance for entering and thriving in the Korean Web3 ecosystem" 
+    description: "Strategic guidance for entering and thriving in the Korean Web3 ecosystem",
+    link: "/services"
   },
   { 
     icon: Users, 
     title: "Community Growth", 
-    description: "Build and engage a loyal Korean community for your project" 
+    description: "Build and engage a loyal Korean community for your project",
+    link: "/services"
   },
   { 
     icon: Megaphone, 
     title: "KOL Marketing", 
-    description: "Connect with top Korean influencers and thought leaders" 
+    description: "Connect with top Korean influencers and thought leaders",
+    link: "/services"
   },
   { 
     icon: Shield, 
     title: "VASP Compliance", 
-    description: "Navigate Korean regulations with our compliance expertise" 
+    description: "Navigate Korean regulations with our compliance expertise",
+    link: "/services"
   },
 ];
 
@@ -268,8 +273,9 @@ const Contact = () => {
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {serviceHighlights.map((service, index) => (
-              <div 
+              <Link 
                 key={index}
+                to={service.link}
                 className={`group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 overflow-hidden transition-all duration-500 ${
                   servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
@@ -280,11 +286,14 @@ const Contact = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 <div className="relative z-10">
-                  <service.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform duration-300" />
+                  <div className="flex items-center justify-between mb-4">
+                    <service.icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
+                    <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                  </div>
                   <h3 className="text-lg font-medium text-white mb-2">{service.title}</h3>
                   <p className="text-sm text-white/50 group-hover:text-white/70 transition-colors duration-300">{service.description}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
