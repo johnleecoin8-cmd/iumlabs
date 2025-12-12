@@ -134,9 +134,9 @@
     transform: translateY(0);
   }
 
-  /* Dark screens - Hero */
+  /* Hero - Warm dark with depth */
   .screen-1 {
-    background-color: hsl(0 0% 4%);
+    background: linear-gradient(135deg, #0D1321 0%, #1B2838 50%, #0D1321 100%);
     color: hsl(0 0% 98%);
   }
 
