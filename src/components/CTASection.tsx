@@ -530,49 +530,6 @@ const CTASection = () => {
                 </div>
               </div>
 
-              {/* Strategist Profile Card - NEW */}
-              <div className="relative rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/[0.1] p-5 md:p-6 overflow-hidden group hover:border-primary/30 transition-all duration-500">
-                {/* Animated background */}
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                
-                <div className="relative">
-                  <div className="flex items-center justify-between mb-4">
-                    <p className="text-white/50 text-xs tracking-wider">YOUR DEDICATED STRATEGISTS</p>
-                    <div className="flex items-center gap-1.5 text-xs text-green-400">
-                      <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                      Available Now
-                    </div>
-                  </div>
-
-                  {/* Strategist Avatars */}
-                  <div className="flex items-center gap-4 mb-5">
-                    {strategists.map((strategist, idx) => (
-                      <div key={strategist.name} className="flex items-center gap-3">
-                        <div className={`w-12 h-12 rounded-full bg-gradient-to-br ${idx === 0 ? 'from-primary to-blue-600' : 'from-cyan-500 to-emerald-500'} flex items-center justify-center text-white font-bold text-lg shadow-lg`}>
-                          {strategist.initials}
-                        </div>
-                        <div>
-                          <p className="text-white font-medium text-sm">{strategist.name}</p>
-                          <p className="text-white/50 text-xs">{strategist.role}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Rotating Testimonial */}
-                  <motion.div 
-                    key={currentQuoteIndex}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="pt-4 border-t border-white/10"
-                  >
-                    <p className="text-white/70 text-sm italic">"{testimonialQuotes[currentQuoteIndex].text}"</p>
-                    <p className="text-primary text-xs mt-2">— {testimonialQuotes[currentQuoteIndex].author}</p>
-                  </motion.div>
-                </div>
-              </div>
-
               {/* Contact Cards */}
               <div className="grid grid-cols-2 gap-3">
                 <a 
