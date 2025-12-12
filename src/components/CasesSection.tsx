@@ -1,6 +1,7 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -20,6 +21,7 @@ import polygonBg from "@/assets/projects/polygon-bg.jpg";
 import ondoBg from "@/assets/projects/ondo-bg.jpg";
 import peaqBg from "@/assets/projects/peaq-bg.jpg";
 import storyBg from "@/assets/projects/story-bg.jpg";
+import networkAbstract from "@/assets/network-abstract.jpg";
 
 const featuredCases = [
   {
@@ -98,10 +100,45 @@ const clientLogos = [
 
 const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div ref={ref} className="py-32 px-4 bg-[hsl(0,0%,5%)]">
-      <div className="container mx-auto max-w-7xl">
+    <div ref={ref} className="relative min-h-screen py-32 overflow-hidden">
+      {/* Background - Network Abstract with Parallax */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div 
+          className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat transition-transform duration-100"
+          style={{ 
+            backgroundImage: `url(${networkAbstract})`,
+            filter: "brightness(0.2) grayscale(0.5)",
+            transform: `translateY(${scrollY * 0.03}px) scale(1.1)`,
+          }}
+        />
+        
+        {/* Aurora gradient overlay */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/15 via-transparent to-primary/10" />
+          <div className="absolute inset-0 bg-gradient-to-bl from-cyan-500/10 via-transparent to-purple-500/15" />
+        </div>
+        
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background/90" />
+      </div>
+
+      {/* Section indicator */}
+      <div className="absolute left-4 sm:left-6 top-8 flex items-center gap-2 text-white/40 text-xs z-20">
+        <span className="number-badge">03</span>
+      </div>
+
+      <div className="relative z-10 container mx-auto max-w-7xl px-4">
         {/* Header */}
         <div className={`flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div>
@@ -128,7 +165,7 @@ const CasesSection = () => {
               key={index}
               to={`/projects/${project.slug}`}
               onClick={() => window.scrollTo(0, 0)}
-              className={`group relative overflow-hidden rounded-3xl min-h-[420px] flex flex-col transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${
+              className={`group relative overflow-hidden rounded-3xl min-h-[420px] flex flex-col transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.05] ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
               style={{ 
@@ -214,7 +251,7 @@ const CasesSection = () => {
           ))}
         </div>
 
-        {/* Client Logos Marquee */}
+        {/* Client Logos */}
         <div className={`transition-all duration-700 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <p className="text-center text-white/40 text-sm mb-8 uppercase tracking-widest">
             Trusted by 200+ Web3 Projects
