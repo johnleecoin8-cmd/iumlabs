@@ -97,24 +97,24 @@ const ProcessSection = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section ref={ref} className="py-16 md:py-20 px-6 bg-background border-t border-border overflow-hidden">
+    <section ref={ref} className="py-24 px-4 bg-[hsl(0,0%,4%)] overflow-hidden">
       <div className="container mx-auto max-w-6xl">
-        {/* Section Header */}
-        <div className={`mb-10 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-primary text-sm font-medium tracking-wider">HOW WE WORK</span>
-            <div className="h-px w-12 bg-primary/50" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-            Our Process <span className="text-muted-foreground">///</span>
+        {/* Section Header - Unified Style */}
+        <div className={`mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase">
+            <span className="w-8 h-px bg-primary" />
+            How We Work
+          </span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+            Our <span className="text-primary">Process</span>
           </h2>
         </div>
 
         {/* Horizontal Stepper */}
-        <div className={`mb-6 transition-normal delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+        <div className={`mb-8 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <div className="flex items-center justify-between relative">
             {/* Progress Line */}
-            <div className="absolute top-5 left-0 right-0 h-[2px] bg-border hidden md:block" />
+            <div className="absolute top-5 left-0 right-0 h-[2px] bg-white/[0.08] hidden md:block" />
             <div 
               className="absolute top-5 left-0 h-[2px] bg-primary transition-all duration-500 hidden md:block"
               style={{ width: `${(activeStep / (steps.length - 1)) * 100}%` }}
@@ -137,21 +137,21 @@ const ProcessSection = () => {
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
                       isActive
-                        ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/30'
+                        ? 'bg-primary text-white'
                         : isPast
-                        ? 'bg-primary/80 text-primary-foreground'
-                        : 'bg-card border-2 border-border text-muted-foreground group-hover:border-primary/50'
+                        ? 'bg-primary/60 text-white'
+                        : 'bg-white/[0.03] border border-white/[0.08] text-white/40 group-hover:border-primary/40'
                     }`}
                   >
                     <IconComponent className="w-4 h-4" />
                   </div>
 
-                  {/* Step Label - Hidden on mobile, show on md+ */}
+                  {/* Step Label */}
                   <div className="hidden md:block mt-3 text-center">
-                    <span className={`text-xs font-bold block ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
+                    <span className={`text-xs font-bold block ${isActive ? 'text-primary' : 'text-white/40'}`}>
                       {step.number}
                     </span>
-                    <span className={`text-xs font-medium block ${isActive ? 'text-foreground' : 'text-muted-foreground'}`}>
+                    <span className={`text-xs font-medium block ${isActive ? 'text-white' : 'text-white/40'}`}>
                       {step.subtitle}
                     </span>
                   </div>
@@ -161,7 +161,7 @@ const ProcessSection = () => {
           </div>
         </div>
 
-        {/* Accordion Content */}
+        {/* Accordion Content - Unified Card Style */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeStep}
@@ -169,10 +169,10 @@ const ProcessSection = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="bg-card border border-border rounded-xl overflow-hidden"
+            className="rounded-2xl bg-white/[0.03] border border-white/[0.08] overflow-hidden"
           >
             {/* Header */}
-            <div className="p-5 md:p-6 border-b border-border bg-gradient-to-r from-primary/5 to-transparent">
+            <div className="p-6 border-b border-white/[0.08] bg-gradient-to-r from-primary/5 to-transparent">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                   {(() => {
@@ -183,12 +183,12 @@ const ProcessSection = () => {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-primary font-bold text-sm">{steps[activeStep].number}</span>
-                    <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                    <ChevronDown className="w-4 h-4 text-white/40" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-foreground">
+                  <h3 className="text-xl md:text-2xl font-semibold text-white">
                     {steps[activeStep].title}
                   </h3>
-                  <p className="text-muted-foreground text-sm mt-1">
+                  <p className="text-white/50 text-sm mt-1">
                     {steps[activeStep].description}
                   </p>
                 </div>
@@ -196,8 +196,8 @@ const ProcessSection = () => {
             </div>
 
             {/* Details */}
-            <div className="p-5 md:p-6">
-              <ul className="space-y-2.5">
+            <div className="p-6">
+              <ul className="space-y-3">
                 {steps[activeStep].details.map((detail, idx) => (
                   <motion.li
                     key={idx}
@@ -207,14 +207,14 @@ const ProcessSection = () => {
                     className="flex items-start gap-3"
                   >
                     <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                    <span className="text-foreground text-sm md:text-base">{detail}</span>
+                    <span className="text-white/70 text-sm md:text-base">{detail}</span>
                   </motion.li>
                 ))}
               </ul>
 
               {/* Note */}
-              <div className="mt-4 pt-4 border-t border-border/50">
-                <p className="text-xs text-muted-foreground italic">
+              <div className="mt-5 pt-5 border-t border-white/[0.06]">
+                <p className="text-xs text-white/40 italic">
                   → {steps[activeStep].note}
                 </p>
               </div>
@@ -229,7 +229,7 @@ const ProcessSection = () => {
               key={index}
               onClick={() => setActiveStep(index)}
               className={`w-2 h-2 rounded-full transition-all ${
-                index === activeStep ? 'bg-primary w-6' : 'bg-border'
+                index === activeStep ? 'bg-primary w-6' : 'bg-white/20'
               }`}
             />
           ))}

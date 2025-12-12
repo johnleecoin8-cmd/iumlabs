@@ -8,8 +8,7 @@ import {
   Mic2, 
   Newspaper, 
   Calendar,
-  ArrowUpRight,
-  X
+  ArrowUpRight
 } from "lucide-react";
 import {
   Dialog,
@@ -31,8 +30,6 @@ const services = [
       "Campaign strategy & execution"
     ],
     size: "large",
-    color: "from-primary/20 to-primary/5",
-    borderColor: "border-primary/20 hover:border-primary/40",
   },
   {
     icon: Megaphone,
@@ -46,8 +43,6 @@ const services = [
       "Sentiment analysis & reporting"
     ],
     size: "normal",
-    color: "from-blue-500/20 to-blue-500/5",
-    borderColor: "border-blue-500/20 hover:border-blue-500/40",
   },
   {
     icon: Building2,
@@ -61,8 +56,6 @@ const services = [
       "Regulatory consulting"
     ],
     size: "normal",
-    color: "from-purple-500/20 to-purple-500/5",
-    borderColor: "border-purple-500/20 hover:border-purple-500/40",
   },
   {
     icon: Newspaper,
@@ -76,8 +69,6 @@ const services = [
       "Crisis management"
     ],
     size: "normal",
-    color: "from-orange-500/20 to-orange-500/5",
-    borderColor: "border-orange-500/20 hover:border-orange-500/40",
   },
   {
     icon: Mic2,
@@ -91,8 +82,6 @@ const services = [
       "Post-AMA content creation"
     ],
     size: "normal",
-    color: "from-cyan-500/20 to-cyan-500/5",
-    borderColor: "border-cyan-500/20 hover:border-cyan-500/40",
   },
   {
     icon: Calendar,
@@ -106,8 +95,6 @@ const services = [
       "Speaker placement"
     ],
     size: "large",
-    color: "from-rose-500/20 to-rose-500/5",
-    borderColor: "border-rose-500/20 hover:border-rose-500/40",
   },
 ];
 
@@ -122,7 +109,8 @@ const ServicesSection = () => {
           {/* Left - Vertical Title */}
           <div className={`lg:col-span-3 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
             <div className="lg:sticky lg:top-32">
-              <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
+              <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase">
+                <span className="w-8 h-px bg-primary" />
                 What We Do
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
@@ -141,34 +129,37 @@ const ServicesSection = () => {
             </div>
           </div>
 
-          {/* Right - Bento Grid */}
+          {/* Right - Bento Grid with Unified Card Style */}
           <div className="lg:col-span-9">
             <div className="grid md:grid-cols-2 gap-4">
               {services.map((service, index) => (
                 <div
                   key={index}
                   onClick={() => setSelectedService(service)}
-                  className={`group relative p-8 rounded-2xl bg-gradient-to-br ${service.color} border ${service.borderColor} transition-all duration-500 hover:-translate-y-1 cursor-pointer ${
+                  className={`group relative p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/40 hover:-translate-y-1 transition-all duration-500 cursor-pointer ${
                     service.size === 'large' ? 'md:col-span-2' : ''
                   } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
+                  {/* Hover Glow */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+
                   {/* Icon */}
-                  <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-white/10 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                    <service.icon className="w-7 h-7 text-white transition-all duration-300 group-hover:scale-110 group-hover:text-primary" />
+                  <div className="relative w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110">
+                    <service.icon className="w-7 h-7 text-primary transition-all duration-300" />
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+                  <h3 className="relative text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
                     {service.title}
                   </h3>
-                  <p className="text-white/50 leading-relaxed">
+                  <p className="relative text-white/50 leading-relaxed">
                     {service.description}
                   </p>
 
                   {/* Hover Arrow */}
                   <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ArrowUpRight className="w-5 h-5 text-white/40" />
+                    <ArrowUpRight className="w-5 h-5 text-primary" />
                   </div>
                 </div>
               ))}
@@ -179,19 +170,19 @@ const ServicesSection = () => {
 
       {/* Service Detail Modal */}
       <Dialog open={!!selectedService} onOpenChange={() => setSelectedService(null)}>
-        <DialogContent className="bg-[hsl(0,0%,6%)] border-white/10 text-white max-w-lg">
+        <DialogContent className="bg-[hsl(0,0%,6%)] border-white/[0.08] text-white max-w-lg">
           <DialogHeader>
             <div className="flex items-center gap-4 mb-4">
               {selectedService && (
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${selectedService.color} flex items-center justify-center`}>
-                  <selectedService.icon className="w-7 h-7 text-white" />
+                <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                  <selectedService.icon className="w-7 h-7 text-primary" />
                 </div>
               )}
               <DialogTitle className="text-2xl font-bold">{selectedService?.title}</DialogTitle>
             </div>
           </DialogHeader>
           
-          <p className="text-white/70 leading-relaxed mb-6">
+          <p className="text-white/60 leading-relaxed mb-6">
             {selectedService?.fullDescription}
           </p>
 
@@ -199,7 +190,7 @@ const ServicesSection = () => {
             <h4 className="text-sm font-medium text-primary uppercase tracking-wider">What's Included</h4>
             <ul className="space-y-2">
               {selectedService?.features.map((feature, i) => (
-                <li key={i} className="flex items-start gap-3 text-white/60">
+                <li key={i} className="flex items-start gap-3 text-white/50">
                   <span className="text-primary mt-1">•</span>
                   {feature}
                 </li>
@@ -207,7 +198,7 @@ const ServicesSection = () => {
             </ul>
           </div>
 
-          <div className="mt-6 pt-6 border-t border-white/10">
+          <div className="mt-6 pt-6 border-t border-white/[0.08]">
             <Link 
               to="/contact"
               className="w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl transition-colors"

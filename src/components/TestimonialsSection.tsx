@@ -53,14 +53,12 @@ const TestimonialsSection = () => {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   }, []);
 
-  // Auto-slide effect
   useEffect(() => {
     if (!isAutoPlaying) return;
     const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, [isAutoPlaying, nextSlide]);
 
-  // Get visible testimonials (3 at a time on desktop)
   const getVisibleTestimonials = () => {
     const visible = [];
     for (let i = 0; i < 3; i++) {
@@ -73,18 +71,19 @@ const TestimonialsSection = () => {
   return (
     <section 
       ref={ref} 
-      className="py-32 px-4 bg-[hsl(40,20%,96%)] overflow-hidden"
+      className="py-32 px-4 bg-[hsl(0,0%,4%)] overflow-hidden"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
       <div className="container mx-auto max-w-7xl">
-        {/* Header */}
+        {/* Header - Unified Style */}
         <div className={`flex flex-col md:flex-row md:items-end md:justify-between mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div>
-            <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
+            <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase">
+              <span className="w-8 h-px bg-primary" />
               Testimonials
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[hsl(0,0%,10%)]">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
               What Our <span className="text-primary">Clients Say</span>
             </h2>
           </div>
@@ -100,7 +99,7 @@ const TestimonialsSection = () => {
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     index === currentIndex 
                       ? 'w-8 bg-primary' 
-                      : 'bg-[hsl(0,0%,70%)] hover:bg-[hsl(0,0%,50%)]'
+                      : 'bg-white/20 hover:bg-white/40'
                   }`}
                 />
               ))}
@@ -110,13 +109,13 @@ const TestimonialsSection = () => {
             <div className="flex items-center gap-2">
               <button 
                 onClick={prevSlide}
-                className="w-10 h-10 rounded-full border border-[hsl(0,0%,80%)] flex items-center justify-center text-[hsl(0,0%,40%)] hover:text-[hsl(0,0%,10%)] hover:border-[hsl(0,0%,60%)] transition-all hover:bg-white"
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-primary/40 hover:bg-white/[0.03] transition-all"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button 
                 onClick={nextSlide}
-                className="w-10 h-10 rounded-full border border-[hsl(0,0%,80%)] flex items-center justify-center text-[hsl(0,0%,40%)] hover:text-[hsl(0,0%,10%)] hover:border-[hsl(0,0%,60%)] transition-all hover:bg-white"
+                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-primary/40 hover:bg-white/[0.03] transition-all"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -124,20 +123,20 @@ const TestimonialsSection = () => {
           </div>
         </div>
 
-        {/* Testimonials Carousel */}
+        {/* Testimonials Carousel - Unified Card Style */}
         <div className={`relative transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div className="grid md:grid-cols-3 gap-6">
             {getVisibleTestimonials().map((testimonial, index) => (
               <div
                 key={`${testimonial.originalIndex}-${currentIndex}`}
-                className="group bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 animate-fade-in"
+                className="group p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/40 hover:-translate-y-2 transition-all duration-500 animate-fade-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Quote Icon */}
                 <Quote className="w-10 h-10 text-primary/20 mb-6" />
                 
                 {/* Content */}
-                <p className="text-[hsl(0,0%,30%)] leading-relaxed mb-8 text-lg">
+                <p className="text-white/60 leading-relaxed mb-8 text-lg">
                   "{testimonial.content}"
                 </p>
 
@@ -150,14 +149,14 @@ const TestimonialsSection = () => {
 
                 {/* Author */}
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="text-primary font-bold">
                       {testimonial.name.charAt(0)}
                     </span>
                   </div>
                   <div>
-                    <div className="font-semibold text-[hsl(0,0%,10%)]">{testimonial.name}</div>
-                    <div className="text-sm text-[hsl(0,0%,50%)]">
+                    <div className="font-semibold text-white">{testimonial.name}</div>
+                    <div className="text-sm text-white/40">
                       {testimonial.role}, {testimonial.company}
                     </div>
                   </div>
@@ -169,7 +168,7 @@ const TestimonialsSection = () => {
 
         {/* Auto-play indicator */}
         <div className={`mt-8 flex justify-center transition-all duration-700 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <span className="text-xs text-[hsl(0,0%,60%)]">
+          <span className="text-xs text-white/30">
             {isAutoPlaying ? 'Auto-playing • Hover to pause' : 'Paused'}
           </span>
         </div>
