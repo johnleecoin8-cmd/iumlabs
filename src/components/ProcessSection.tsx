@@ -8,8 +8,7 @@ const steps = [{
   subtitle: "Kickoff",
   icon: MessageSquare,
   description: "프로젝트 이해 및 목표 정의",
-  details: ["프로젝트 이해", "시장/타깃/체인/토큰모델 파악", "목표 정의 (Mint, Awareness, IDO, 거래량, 커뮤니티 등)"],
-  note: "Lunar Strategy, Coinbound, Blockwiz 등 공통적 단계"
+  details: ["프로젝트 이해", "시장/타깃/체인/토큰모델 파악", "목표 정의 (Mint, Awareness, IDO, 거래량, 커뮤니티 등)"]
 }, {
   number: "02",
   title: "Discovery & Research",
@@ -48,8 +47,7 @@ const steps = [{
   subtitle: "Review",
   icon: FileText,
   description: "성과 분석 및 다음 스프린트 제안",
-  details: ["KPI 달성도", "인플루언서 캠페인 퍼포먼스", "커뮤니티/트래픽 성장", "다음 Sprint 제안"],
-  note: "Lunar, Coinbound, Blockwiz 등 대부분 동일 구조"
+  details: ["KPI 달성도", "인플루언서 캠페인 퍼포먼스", "커뮤니티/트래픽 성장", "다음 Sprint 제안"]
 }];
 const ProcessSection = () => {
   const {
@@ -158,12 +156,6 @@ const ProcessSection = () => {
                   </motion.li>)}
               </ul>
 
-              {/* Note */}
-              <div className="mt-5 pt-5 border-t border-white/[0.06]">
-                <p className="text-xs text-white/40 italic">
-                  → {steps[activeStep].note}
-                </p>
-              </div>
             </div>
           </motion.div>
         </AnimatePresence>
