@@ -127,16 +127,17 @@ const ProcessSection = () => {
     <section ref={ref} className="py-24 px-6 bg-background border-t border-border overflow-hidden">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
-        <div className={`mb-8 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          <div className="flex items-center gap-3 mb-4">
-            <span className="text-primary text-sm font-medium tracking-wider">HOW WE WORK</span>
-            <div className="h-px w-12 bg-primary/50" />
+        <div className={`flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <div>
+            <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
+              Methodology
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
+              The Bridge <span className="text-primary">Method</span>
+            </h2>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-            Our Process <span className="text-muted-foreground">///</span>
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl">
-            6단계 체계적 프로세스로 200+ 프로젝트의 한국 시장 진출을 성공시켰습니다.
+          <p className="text-muted-foreground max-w-md text-base md:text-lg">
+            Our proven 6-step methodology has successfully launched 200+ projects into the Korean market
           </p>
         </div>
 
