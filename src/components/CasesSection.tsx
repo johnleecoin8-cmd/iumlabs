@@ -1,7 +1,6 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import TiltCard from "@/components/TiltCard";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -10,264 +9,137 @@ import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import peaqLogo from "@/assets/logos/peaq.png";
 import storyLogo from "@/assets/logos/story-protocol.png";
+import megaethLogo from "@/assets/logos/megaeth.png";
+import triaLogo from "@/assets/logos/tria.png";
+import bybitLogo from "@/assets/logos/bybit.png";
 
-const cases = [
+const featuredCases = [
   {
     name: "BNB Chain",
     logo: bnbLogo,
     slug: "bnb-chain",
-    result: "+340% Korean Trading Volume",
     category: "Infrastructure",
-    bgStyle: "bg-gradient-to-br from-[#F3BA2F] via-[#F0B90B] to-[#C99100]",
-    decorations: "bnb",
+    result: "500K+ Community Members",
+    gradient: "from-[#F3BA2F]/20 to-[#F3BA2F]/5",
+    borderColor: "border-[#F3BA2F]/30",
+    hoverBorder: "hover:border-[#F3BA2F]/60",
   },
   {
     name: "KuCoin",
     logo: kucoinLogo,
     slug: "kucoin",
-    result: "50K+ New Korean Users",
     category: "Exchange",
-    bgStyle: "bg-gradient-to-br from-[#23AF91] via-[#1A9B7F] to-[#147A63]",
-    decorations: "kucoin",
+    result: "$2B+ Trading Volume",
+    gradient: "from-[#23AF91]/20 to-[#23AF91]/5",
+    borderColor: "border-[#23AF91]/30",
+    hoverBorder: "hover:border-[#23AF91]/60",
   },
   {
     name: "Polygon",
     logo: polygonLogo,
     slug: "polygon",
-    result: "$2M Korean TVL in 30 Days",
     category: "Layer 2",
-    bgStyle: "bg-gradient-to-br from-[#8247E5] via-[#7B3FE4] to-[#5A2D9C]",
-    decorations: "polygon",
-  },
-  {
-    name: "Ondo Finance",
-    logo: ondoLogo,
-    slug: "ondo",
-    result: "100K+ Korean Community",
-    category: "RWA",
-    bgStyle: "bg-gradient-to-br from-[#0A1628] via-[#1E3A5F] to-[#0D1B2A]",
-    decorations: "ondo",
-  },
-  {
-    name: "Peaq",
-    logo: peaqLogo,
-    slug: "peaq",
-    result: "#1 DePIN in Korea",
-    category: "DePIN",
-    bgStyle: "bg-gradient-to-br from-[#00E5A0] via-[#00D4AA] to-[#00A080]",
-    decorations: "peaq",
-  },
-  {
-    name: "Story Protocol",
-    logo: storyLogo,
-    slug: "story-protocol",
-    result: "5K+ Korean Creators",
-    category: "IP Protocol",
-    bgStyle: "bg-gradient-to-br from-[#FF6B6B] via-[#E5484D] to-[#C92A2A]",
-    decorations: "story",
+    result: "100+ Dapps Onboarded",
+    gradient: "from-[#8247E5]/20 to-[#8247E5]/5",
+    borderColor: "border-[#8247E5]/30",
+    hoverBorder: "hover:border-[#8247E5]/60",
   },
 ];
 
-// Unique decorative elements for each card
-const CardDecorations = ({ type }: { type: string }) => {
-  switch (type) {
-    case "bnb":
-      return (
-        <>
-          <div className="absolute inset-0 opacity-20">
-            <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
-              <defs>
-                <pattern id="hexagons" width="20" height="17.32" patternUnits="userSpaceOnUse">
-                  <polygon points="10,0 20,5 20,15 10,17.32 0,15 0,5" fill="none" stroke="white" strokeWidth="0.5" />
-                </pattern>
-              </defs>
-              <rect width="100" height="100" fill="url(#hexagons)" />
-            </svg>
-          </div>
-          <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-gradient-radial from-yellow-200/40 to-transparent blur-2xl" />
-          <div className="absolute bottom-10 left-10 w-32 h-32 rounded-full border-2 border-white/20" />
-          <div className="absolute top-20 left-20 w-4 h-4 rotate-45 bg-white/30" />
-        </>
-      );
-    case "kucoin":
-      return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,50 Q25,30 50,50 T100,50" stroke="white" strokeWidth="0.5" fill="none" />
-            <path d="M0,60 Q25,40 50,60 T100,60" stroke="white" strokeWidth="0.5" fill="none" />
-            <path d="M0,70 Q25,50 50,70 T100,70" stroke="white" strokeWidth="0.5" fill="none" />
-          </svg>
-          <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full bg-gradient-to-t from-emerald-300/30 to-transparent" />
-          <div className="absolute top-8 right-8 grid grid-cols-4 gap-2 opacity-30">
-            {[...Array(16)].map((_, i) => (
-              <div key={i} className="w-1.5 h-1.5 rounded-full bg-white" />
-            ))}
-          </div>
-          <div className="absolute bottom-16 left-8 w-20 h-20 rounded-full border border-dashed border-white/30" />
-        </>
-      );
-    case "polygon":
-      return (
-        <>
-          <div className="absolute top-10 right-10 w-16 h-16 rotate-45 border-2 border-white/30" />
-          <div className="absolute bottom-20 left-16 w-12 h-12 rotate-45 bg-white/10" />
-          <div className="absolute top-1/2 right-1/4 w-8 h-8 rotate-45 border border-purple-300/50" />
-          <div className="absolute -top-10 left-1/3 w-40 h-40 rounded-full bg-purple-400/30 blur-3xl" />
-          <svg className="absolute bottom-0 left-0 w-full h-24 opacity-20" viewBox="0 0 100 30" preserveAspectRatio="none">
-            <polygon points="0,30 10,0 20,30" fill="white" />
-            <polygon points="30,30 40,10 50,30" fill="white" />
-            <polygon points="60,30 70,5 80,30" fill="white" />
-          </svg>
-        </>
-      );
-    case "ondo":
-      return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100" preserveAspectRatio="none">
-            <path d="M0,80 L20,70 L40,75 L60,50 L80,55 L100,30" stroke="#3B82F6" strokeWidth="1" fill="none" />
-            <path d="M0,90 L20,85 L40,88 L60,70 L80,72 L100,50" stroke="#60A5FA" strokeWidth="0.5" fill="none" />
-          </svg>
-          <div className="absolute inset-0 opacity-10">
-            <div className="w-full h-full" style={{ 
-              backgroundImage: 'linear-gradient(rgba(59,130,246,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(59,130,246,0.3) 1px, transparent 1px)',
-              backgroundSize: '20px 20px'
-            }} />
-          </div>
-          <div className="absolute top-1/4 right-1/4 w-3 h-3 rounded-full bg-blue-400 shadow-lg shadow-blue-500/50" />
-          <div className="absolute top-1/2 left-1/3 w-2 h-2 rounded-full bg-blue-300" />
-          <div className="absolute bottom-1/3 right-1/3 w-4 h-4 rounded-full border-2 border-blue-400/50" />
-        </>
-      );
-    case "peaq":
-      return (
-        <>
-          <svg className="absolute inset-0 w-full h-full opacity-30" viewBox="0 0 100 100">
-            <circle cx="20" cy="30" r="3" fill="#00FF9D" />
-            <circle cx="80" cy="20" r="2" fill="#00FF9D" />
-            <circle cx="60" cy="70" r="4" fill="#00FF9D" />
-            <circle cx="30" cy="80" r="2" fill="#00FF9D" />
-            <line x1="20" y1="30" x2="80" y2="20" stroke="#00FF9D" strokeWidth="0.5" />
-            <line x1="20" y1="30" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
-            <line x1="60" y1="70" x2="30" y2="80" stroke="#00FF9D" strokeWidth="0.5" />
-            <line x1="80" y1="20" x2="60" y2="70" stroke="#00FF9D" strokeWidth="0.5" />
-          </svg>
-          <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-green-300/40 to-transparent" />
-          <div className="absolute top-1/3 left-0 w-full h-px bg-gradient-to-r from-transparent via-green-300/30 to-transparent" />
-          <div className="absolute -bottom-10 -left-10 w-48 h-48 rounded-full bg-green-400/20 blur-3xl" />
-        </>
-      );
-    case "story":
-      return (
-        <>
-          <div className="absolute top-8 right-8 w-20 h-28 bg-white/10 rounded-sm transform rotate-6" />
-          <div className="absolute top-10 right-10 w-20 h-28 bg-white/15 rounded-sm transform rotate-3" />
-          <div className="absolute bottom-10 left-10 w-24 h-24 rounded-full bg-gradient-to-r from-red-300/40 to-pink-300/30" />
-          <div className="absolute top-1/3 left-1/4 w-6 h-6 rounded-full bg-red-200/50" />
-          <div className="absolute bottom-1/4 right-0 w-1/2 h-px bg-white/20" />
-          <div className="absolute bottom-1/4 right-0 w-1/3 h-px bg-white/20 translate-y-3" />
-        </>
-      );
-    default:
-      return null;
-  }
-};
+const clientLogos = [
+  { name: "Ondo", logo: ondoLogo },
+  { name: "Peaq", logo: peaqLogo },
+  { name: "Story Protocol", logo: storyLogo },
+  { name: "MegaETH", logo: megaethLogo },
+  { name: "Tria", logo: triaLogo },
+  { name: "Bybit", logo: bybitLogo },
+];
 
 const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1 bg-[hsl(0,0%,96%)]">
+    <div ref={ref} className="py-32 px-4 bg-[hsl(0,0%,5%)]">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
-        <div className={`flex flex-col md:flex-row items-start md:items-center justify-between mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="flex items-center gap-4 mb-4 md:mb-0">
-            <span className="number-badge text-[hsl(0,0%,40%)]">200+ Clients</span>
+        <div className={`flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <div>
+            <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
+              Featured Cases
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+              Success <span className="text-primary">Stories</span>
+            </h2>
           </div>
-          
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-light text-center text-[hsl(0,0%,8%)] flex-1">
-            Featured <span className="serif-italic">Cases</span>
-          </h2>
-          
-          <div className="text-[hsl(0,0%,60%)] text-2xl font-light hidden md:block">///</div>
+          <Link 
+            to="/projects" 
+            className="group flex items-center gap-2 text-white/60 hover:text-primary transition-colors"
+          >
+            View all projects
+            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+          </Link>
         </div>
 
-        {/* Cases Grid - 3x3 */}
-        <div className={`grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {cases.map((caseItem, index) => (
+        {/* Featured Cases Grid */}
+        <div className="grid md:grid-cols-3 gap-6 mb-16">
+          {featuredCases.map((project, index) => (
             <Link
-              key={caseItem.name}
-              to={`/projects/${caseItem.slug}`}
-              className="group"
-              style={{ animationDelay: `${index * 100}ms` }}
+              key={index}
+              to={`/projects/${project.slug}`}
+              className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${project.gradient} border ${project.borderColor} ${project.hoverBorder} p-8 transition-all duration-500 hover:-translate-y-2 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <TiltCard
-                className={`relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle} cursor-pointer mb-4`}
-                max={12}
-                scale={1.03}
-                speed={300}
-              >
-                {/* Unique Decorations */}
-                <CardDecorations type={caseItem.decorations} />
+              {/* Category Badge */}
+              <div className="absolute top-6 right-6">
+                <span className="text-xs text-white/40 uppercase tracking-wider">
+                  {project.category}
+                </span>
+              </div>
 
-                {/* Content - Logo Centered */}
-                <div className="absolute inset-0 flex items-center justify-center p-6 z-10">
-                  <img
-                    src={caseItem.logo}
-                    alt={caseItem.name}
-                    className="w-20 h-20 md:w-24 md:h-24 object-contain group-hover:scale-110 transition-transform duration-300 drop-shadow-lg"
-                  />
-                </div>
+              {/* Logo */}
+              <div className="h-32 flex items-center justify-start mb-8">
+                <img 
+                  src={project.logo} 
+                  alt={project.name}
+                  className="h-16 w-auto object-contain brightness-0 invert opacity-90 group-hover:opacity-100 transition-opacity"
+                />
+              </div>
 
-                {/* Bottom Info - Result */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-white text-sm font-semibold text-center">
-                    {caseItem.result}
-                  </p>
-                  <p className="text-white/70 text-xs text-center mt-1 uppercase tracking-wider">
-                    {caseItem.category}
-                  </p>
-                </div>
-
-                {/* Hover Arrow */}
-                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                    <ArrowUpRight className="w-5 h-5 text-white" />
-                  </div>
-                </div>
-
-                {/* Category Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider">
-                    {caseItem.category}
-                  </span>
-                </div>
-              </TiltCard>
-
-              {/* Content Below Card - Same as /projects page */}
+              {/* Content */}
               <div>
-                <h4 className="text-lg font-medium text-[hsl(0,0%,15%)] mb-2">{caseItem.name}</h4>
-                <p className="text-sm text-[hsl(0,0%,40%)] mb-3 line-clamp-2">
-                  {caseItem.result}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <span className="text-xs px-2 py-1 bg-[hsl(0,0%,90%)] border border-[hsl(0,0%,85%)] rounded-full text-[hsl(0,0%,40%)]">
-                    {caseItem.category}
-                  </span>
-                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">{project.name}</h3>
+                <p className="text-white/60">{project.result}</p>
+              </div>
+
+              {/* Arrow */}
+              <div className="absolute bottom-6 right-6 w-10 h-10 rounded-full bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all group-hover:bg-white/10">
+                <ArrowUpRight className="w-5 h-5 text-white" />
               </div>
             </Link>
           ))}
         </div>
 
-        {/* View All Button */}
-        <div className={`flex justify-center mt-12 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <Link
-            to="/projects"
-            className="lunar-btn-outline border-[hsl(0,0%,20%)] text-[hsl(0,0%,20%)] hover:bg-[hsl(0,0%,20%)] hover:text-white"
-          >
-            <span>View All Cases</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </Link>
+        {/* Client Logos Marquee */}
+        <div className={`transition-all duration-700 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+          <p className="text-center text-white/40 text-sm mb-8 uppercase tracking-widest">
+            Trusted by 200+ Web3 Projects
+          </p>
+          <div className="flex items-center justify-center flex-wrap gap-8 md:gap-12">
+            {clientLogos.map((client, index) => (
+              <div 
+                key={index}
+                className="opacity-40 hover:opacity-80 transition-opacity"
+              >
+                <img 
+                  src={client.logo} 
+                  alt={client.name}
+                  className="h-8 w-auto object-contain brightness-0 invert"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
