@@ -1,159 +1,239 @@
+import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { ArrowRight, Search, Map, Rocket } from "lucide-react";
-import { motion } from "framer-motion";
-
-// Import process images
-import discoveryImg from "@/assets/process/discovery-research.jpg";
-import strategyImg from "@/assets/process/strategy-planning.jpg";
-import executionImg from "@/assets/process/execution-growth.jpg";
+import { ChevronDown, MessageSquare, Search, Map, Rocket, TrendingUp, FileText } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const steps = [
   {
     number: "01",
-    title: "Discovery & Research",
-    description: "We analyze your project, competitors, and target audience in the Korean market to build a solid foundation for your launch.",
-    image: discoveryImg,
-    icon: Search,
-    highlights: ["Market Analysis", "Competitor Review", "Audience Mapping"],
+    title: "Initial Discussion",
+    subtitle: "Kickoff",
+    icon: MessageSquare,
+    description: "프로젝트 이해 및 목표 정의",
+    details: [
+      "프로젝트 이해",
+      "시장/타깃/체인/토큰모델 파악",
+      "목표 정의 (Mint, Awareness, IDO, 거래량, 커뮤니티 등)",
+    ],
+    note: "Lunar Strategy, Coinbound, Blockwiz 등 공통적 단계",
   },
   {
     number: "02",
-    title: "Strategy & Planning",
-    description: "Custom marketing roadmap with KPIs, channels, budget allocation, and KOL selection tailored to your project goals.",
-    image: strategyImg,
-    icon: Map,
-    highlights: ["Roadmap Creation", "KOL Selection", "Budget Planning"],
+    title: "Discovery & Research",
+    subtitle: "Analysis",
+    icon: Search,
+    description: "경쟁사 분석 및 시장 포지션 파악",
+    details: [
+      "경쟁사 분석",
+      "Web3 내 포지션 파악 (Narrative / Chain Fit)",
+      "커뮤니티 진단",
+      "시장 사이클·내러티브 연동",
+      "주요 인플루언서 매핑",
+    ],
+    note: "모든 Web3 마케팅의 핵심, 일반 Web2보다 비중이 큼",
   },
   {
     number: "03",
-    title: "Execution & Growth",
-    description: "Full-scale campaign deployment across Korean platforms, communities, and influencer networks with real-time optimization.",
-    image: executionImg,
+    title: "Strategy & Planning",
+    subtitle: "Design",
+    icon: Map,
+    description: "캠페인 설계 및 리소스 배분",
+    details: [
+      "캠페인 설계 (AMA, KOL, PR, 콘텐츠, 커뮤니티)",
+      "에코시스템 런칭 플랜",
+      "KPI 정의",
+      "리소스·예산 배분",
+    ],
+    note: "Web3는 채널이 다양하므로 전략설계 비중이 크다",
+  },
+  {
+    number: "04",
+    title: "Execution",
+    subtitle: "Launch",
     icon: Rocket,
-    highlights: ["Campaign Launch", "Community Building", "Performance Tracking"],
+    description: "캠페인 실행 및 유저 유입",
+    details: [
+      "인플루언서/KOL 캠페인",
+      "PR/미디어 배포",
+      "SNS 운영",
+      "Discord/Telegram 성장",
+      "이벤트/퀘스트 기반 유저 유입",
+      "상장/데이터 기반 Growth Sprint",
+    ],
+    note: "프로젝트에 따라 Execution 파트가 가장 길어짐",
+  },
+  {
+    number: "05",
+    title: "Growth Optimization",
+    subtitle: "Scale",
+    icon: TrendingUp,
+    description: "실시간 최적화 및 ROI 극대화",
+    details: [
+      "KPI 실시간 조정",
+      "콘텐츠/메시지/캠페인 튜닝",
+      "ROI 기반 예산 재배분",
+      "Narrative Riding (예: DePIN, RWA, AI 등)",
+    ],
+    note: "Web3 특유의 민첩한 어댑테이션이 중요한 단계",
+  },
+  {
+    number: "06",
+    title: "Reporting",
+    subtitle: "Review",
+    icon: FileText,
+    description: "성과 분석 및 다음 스프린트 제안",
+    details: [
+      "KPI 달성도",
+      "인플루언서 캠페인 퍼포먼스",
+      "커뮤니티/트래픽 성장",
+      "다음 Sprint 제안",
+    ],
+    note: "Lunar, Coinbound, Blockwiz 등 대부분 동일 구조",
   },
 ];
 
 const ProcessSection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section ref={ref} className="py-24 px-6 bg-background border-t border-border overflow-hidden">
-      <div className="container mx-auto max-w-7xl">
+    <section ref={ref} className="py-16 md:py-20 px-6 bg-background border-t border-border overflow-hidden">
+      <div className="container mx-auto max-w-6xl">
         {/* Section Header */}
-        <div className={`mb-16 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+        <div className={`mb-10 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <div className="flex items-center gap-3 mb-4">
             <span className="text-primary text-sm font-medium tracking-wider">HOW WE WORK</span>
             <div className="h-px w-12 bg-primary/50" />
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
             Our Process <span className="text-muted-foreground">///</span>
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl">
-            A proven methodology that has helped 200+ projects successfully 
-            enter and thrive in the Korean crypto market.
-          </p>
         </div>
 
-        {/* Steps - Enhanced Layout with Images */}
-        <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-3 md:gap-6">
-          {steps.map((step, index) => {
-            const IconComponent = step.icon;
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: index * 0.15,
-                  ease: [0.25, 0.46, 0.45, 0.94]
-                }}
-                className="group relative"
-              >
-                {/* Connector Arrow (not on last item) */}
-                {index < steps.length - 1 && (
-                  <div className="hidden md:flex absolute top-[140px] -right-3 z-20 items-center justify-center w-6 h-6 rounded-full bg-background border border-border">
-                    <ArrowRight className="w-3 h-3 text-primary" />
-                  </div>
-                )}
+        {/* Horizontal Stepper */}
+        <div className={`mb-6 transition-normal delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <div className="flex items-center justify-between relative">
+            {/* Progress Line */}
+            <div className="absolute top-5 left-0 right-0 h-[2px] bg-border hidden md:block" />
+            <div 
+              className="absolute top-5 left-0 h-[2px] bg-primary transition-all duration-500 hidden md:block"
+              style={{ width: `${(activeStep / (steps.length - 1)) * 100}%` }}
+            />
 
-                {/* Card */}
-                <div className="relative bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-[0_0_40px_rgba(59,130,246,0.1)] transition-all duration-500">
-                  {/* Image Section */}
-                  <div className="relative h-[180px] overflow-hidden">
-                    <img 
-                      src={step.image} 
-                      alt={step.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
-                    
-                    {/* Number Badge Overlay */}
-                    <div className="absolute top-4 left-4 flex items-center gap-2">
-                      <span className="px-3 py-1.5 rounded-lg bg-primary/90 text-white text-sm font-bold backdrop-blur-sm">
-                        {step.number}
-                      </span>
-                    </div>
+            {steps.map((step, index) => {
+              const IconComponent = step.icon;
+              const isActive = index === activeStep;
+              const isPast = index < activeStep;
 
-                    {/* Icon Overlay */}
-                    <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                      <IconComponent className="w-5 h-5 text-white" />
-                    </div>
+              return (
+                <button
+                  key={index}
+                  onClick={() => setActiveStep(index)}
+                  className={`relative z-10 flex flex-col items-center group transition-all duration-300 ${
+                    isActive ? 'scale-105' : 'hover:scale-105'
+                  }`}
+                >
+                  {/* Step Circle */}
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      isActive
+                        ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/30'
+                        : isPast
+                        ? 'bg-primary/80 text-primary-foreground'
+                        : 'bg-card border-2 border-border text-muted-foreground group-hover:border-primary/50'
+                    }`}
+                  >
+                    <IconComponent className="w-4 h-4" />
                   </div>
 
-                  {/* Content Section */}
-                  <div className="p-6">
-                    {/* Title */}
-                    <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-200">
-                      {step.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-muted-foreground leading-relaxed text-sm mb-4">
-                      {step.description}
-                    </p>
-
-                    {/* Highlights */}
-                    <div className="flex flex-wrap gap-2">
-                      {step.highlights.map((highlight, idx) => (
-                        <span 
-                          key={idx}
-                          className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/20"
-                        >
-                          {highlight}
-                        </span>
-                      ))}
-                    </div>
+                  {/* Step Label - Hidden on mobile, show on md+ */}
+                  <div className="hidden md:block mt-3 text-center">
+                    <span className={`text-xs font-bold block ${isActive ? 'text-primary' : 'text-muted-foreground'}`}>
+                      {step.number}
+                    </span>
+                    <span className={`text-xs font-medium block ${isActive ? 'text-foreground' : 'text-muted-foreground'}`}>
+                      {step.subtitle}
+                    </span>
                   </div>
-
-                  {/* Hover Glow Effect */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-cyan-500/5" />
-                  </div>
-                </div>
-              </motion.div>
-            );
-          })}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* CTA */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16 text-center"
-        >
-          <a
-            href="https://calendly.com/cryptobridgekorea"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-white font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] transition-all duration-300 group"
+        {/* Accordion Content */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeStep}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className="bg-card border border-border rounded-xl overflow-hidden"
           >
-            Start your journey
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </a>
-        </motion.div>
+            {/* Header */}
+            <div className="p-5 md:p-6 border-b border-border bg-gradient-to-r from-primary/5 to-transparent">
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+                  {(() => {
+                    const IconComponent = steps[activeStep].icon;
+                    return <IconComponent className="w-6 h-6 text-primary" />;
+                  })()}
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-primary font-bold text-sm">{steps[activeStep].number}</span>
+                    <ChevronDown className="w-4 h-4 text-muted-foreground" />
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-semibold text-foreground">
+                    {steps[activeStep].title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm mt-1">
+                    {steps[activeStep].description}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Details */}
+            <div className="p-5 md:p-6">
+              <ul className="space-y-2.5">
+                {steps[activeStep].details.map((detail, idx) => (
+                  <motion.li
+                    key={idx}
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: idx * 0.05 }}
+                    className="flex items-start gap-3"
+                  >
+                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
+                    <span className="text-foreground text-sm md:text-base">{detail}</span>
+                  </motion.li>
+                ))}
+              </ul>
+
+              {/* Note */}
+              <div className="mt-4 pt-4 border-t border-border/50">
+                <p className="text-xs text-muted-foreground italic">
+                  → {steps[activeStep].note}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Mobile Step Indicators */}
+        <div className="flex justify-center gap-2 mt-6 md:hidden">
+          {steps.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveStep(index)}
+              className={`w-2 h-2 rounded-full transition-all ${
+                index === activeStep ? 'bg-primary w-6' : 'bg-border'
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
