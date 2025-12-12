@@ -1,7 +1,6 @@
-import { ChevronDown, ArrowRight, Send } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import CalendlyButton from "./CalendlyButton";
+import { ChevronDown } from "lucide-react";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
 import { useCountUp } from "@/hooks/useCountUp";
 
@@ -18,13 +17,13 @@ import triaLogo from "@/assets/logos/tria.png";
 
 // Desktop tags
 const serviceTags = [
-  { label: "KOL Marketing", position: "top-[15%] left-[5%]" },
-  { label: "Community Operation", position: "top-[35%] left-[4%]" },
-  { label: "GTM Strategy", position: "top-[55%] left-[6%]" },
-  { label: "Exchange Support", position: "top-[75%] left-[5%]" },
-  { label: "Media & PR", position: "top-[18%] right-[6%]" },
-  { label: "AMA Hosting", position: "top-[42%] right-[5%]" },
-  { label: "Offline Events", position: "top-[66%] right-[7%]" },
+  { label: "KOL Marketing", position: "top-[15%] left-[5%]", depth: 0.02 },
+  { label: "Community Operation", position: "top-[35%] left-[4%]", depth: 0.03 },
+  { label: "GTM Strategy", position: "top-[55%] left-[6%]", depth: 0.025 },
+  { label: "Exchange Support", position: "top-[75%] left-[5%]", depth: 0.035 },
+  { label: "Media & PR", position: "top-[18%] right-[6%]", depth: 0.02 },
+  { label: "AMA Hosting", position: "top-[42%] right-[5%]", depth: 0.03 },
+  { label: "Offline Events", position: "top-[66%] right-[7%]", depth: 0.04 },
 ];
 
 // Mobile tags (fewer, repositioned for small screens)
@@ -57,6 +56,41 @@ const stats = [
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Mouse position for 3D parallax
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Spring physics for smooth movement
+  const springConfig = { damping: 25, stiffness: 150 };
+  const springX = useSpring(mouseX, springConfig);
+  const springY = useSpring(mouseY, springConfig);
+  
+  // Transform values for different parallax layers
+  const bgX = useTransform(springX, [-0.5, 0.5], [20, -20]);
+  const bgY = useTransform(springY, [-0.5, 0.5], [20, -20]);
+  const bgScale = useTransform(springY, [-0.5, 0.5], [1.05, 1.15]);
+  
+  const midX = useTransform(springX, [-0.5, 0.5], [30, -30]);
+  const midY = useTransform(springY, [-0.5, 0.5], [30, -30]);
+  
+  const fgX = useTransform(springX, [-0.5, 0.5], [50, -50]);
+  const fgY = useTransform(springY, [-0.5, 0.5], [50, -50]);
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  }, [mouseX, mouseY]);
+
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(0);
+    mouseY.set(0);
+  }, [mouseX, mouseY]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,41 +108,68 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background - Seoul Bridge Night with Ken Burns Effect */}
+    <div 
+      ref={containerRef}
+      onMouseMove={handleMouseMove as any}
+      onMouseLeave={handleMouseLeave}
+      className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden"
+    >
+      {/* Background Layer - Deepest parallax */}
       <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
+        <motion.div 
+          className="absolute inset-[-15%] bg-cover bg-center bg-no-repeat"
           style={{ 
             backgroundImage: `url(${seoulBridgeNight})`,
             filter: "brightness(0.35)",
+            x: bgX,
+            y: bgY,
+            scale: bgScale,
           }}
         />
         
-        {/* Aurora light overlay */}
-        <div className="absolute inset-0">
+        {/* Aurora light overlay - Mid layer */}
+        <motion.div 
+          className="absolute inset-0"
+          style={{ x: midX, y: midY }}
+        >
           <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-cyan-500/15" />
           <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/10 via-transparent to-blue-500/10" />
-        </div>
+        </motion.div>
+        
+        {/* Animated light beams */}
+        <motion.div 
+          className="absolute inset-0 pointer-events-none"
+          style={{ x: fgX, y: fgY }}
+        >
+          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px] animate-pulse" />
+          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
+        </motion.div>
         
         {/* Dark overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* Floating Service Tags - Desktop */}
+      {/* Floating Service Tags - Desktop with 3D parallax */}
       {serviceTags.map((tag, index) => (
-        <div
+        <motion.div
           key={index}
-          className={`absolute ${tag.position} hidden lg:block animate-float z-10`}
+          className={`absolute ${tag.position} hidden lg:block z-10`}
           style={{ 
-            animationDelay: `${index * 0.5}s`,
-            transform: `translateY(${scrollY * 0.08}px)`
+            x: useTransform(springX, [-0.5, 0.5], [40 * tag.depth * 100, -40 * tag.depth * 100]),
+            y: useTransform(springY, [-0.5, 0.5], [40 * tag.depth * 100, -40 * tag.depth * 100]),
           }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
         >
-          <span className="font-sans lunar-tag-dark text-xs whitespace-nowrap">
+          <motion.span 
+            className="font-sans lunar-tag-dark text-xs whitespace-nowrap"
+            animate={{ y: [0, -5, 0] }}
+            transition={{ duration: 3 + index * 0.5, repeat: Infinity, ease: "easeInOut" }}
+          >
             {tag.label}
-          </span>
-        </div>
+          </motion.span>
+        </motion.div>
       ))}
 
       {/* Floating Service Tags - Mobile (smaller, fewer) */}
@@ -126,25 +187,40 @@ const HeroSection = () => {
         </div>
       ))}
 
-      {/* Main Content - Centered */}
-      <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
+      {/* Main Content - Centered with parallax */}
+      <motion.div 
+        className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6"
+        style={{ 
+          x: useTransform(springX, [-0.5, 0.5], [10, -10]),
+          y: useTransform(springY, [-0.5, 0.5], [10, -10]),
+        }}
+      >
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Unified Inter font with color contrast */}
-          <h1 className="font-sans text-[10vw] sm:text-[8vw] md:text-[7vw] lg:text-[6vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10 opacity-0 animate-fade-up">
+          <motion.h1 
+            className="font-sans text-[10vw] sm:text-[8vw] md:text-[7vw] lg:text-[6vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             <span className="text-white">Your </span>
             <span className="text-white/60">Web 3.0</span>
             <br />
             <span className="text-white/60">Marketing </span>
             <span className="text-white">Agency</span>
-          </h1>
+          </motion.h1>
 
           {/* Subtext - Larger and more prominent */}
-          <p className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-10 opacity-0 animate-fade-up stagger-2 font-light tracking-wide">
+          <motion.p 
+            className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-10 font-light tracking-wide"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
-          </p>
-
+          </motion.p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Stats Section */}
       <div className="relative z-10 py-4 sm:py-6">
@@ -192,10 +268,15 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll Indicator - Bottom Right */}
-      <div className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3 opacity-0 animate-fade-in" style={{ animationDelay: '0.8s' }}>
+      <motion.div 
+        className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
+      >
         <span className="text-white/40 text-xs sm:text-sm font-medium">scroll</span>
         <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
-      </div>
+      </motion.div>
     </div>
   );
 };
@@ -224,9 +305,11 @@ const StatItem = ({
   });
   
   return (
-    <div 
-      className="text-center opacity-0 animate-fade-up"
-      style={{ animationDelay: `${delay + 600}ms`, animationFillMode: 'forwards' }}
+    <motion.div 
+      className="text-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
     >
       <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
         {prefix}{count}{suffix}
@@ -234,7 +317,7 @@ const StatItem = ({
       <div className="text-xs sm:text-sm text-white/50 font-light">
         {label}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -192,8 +192,10 @@ const CasesSection = () => {
                 <img 
                   src={project.logo} 
                   alt={project.name}
-                  className="h-16 md:h-20 w-auto object-contain brightness-0 invert group-hover:scale-110 transition-all duration-500"
-                  style={{ filter: `brightness(0) invert(1) drop-shadow(0 0 25px ${project.glowColor}80)` }}
+                  className="h-20 md:h-28 w-auto object-contain group-hover:scale-110 transition-all duration-500"
+                  style={{ 
+                    filter: `drop-shadow(0 0 30px ${project.glowColor}90) drop-shadow(0 0 60px ${project.glowColor}50)`,
+                  }}
                 />
               </div>
 
