@@ -24,11 +24,11 @@ const serviceTags = [
   { label: "DeFi Marketing", x: 4, y: 55, color: "#FBBF24" },
   { label: "Exchange Listing", x: 7, y: 70, color: "#A78BFA" },
   // Right side - symmetric with left (100 - left_x - offset for text width)
-  { label: "Social Media Marketing", x: 88, y: 10, color: "#22D3EE" },
-  { label: "Community Building", x: 90, y: 25, color: "#F87171" },
-  { label: "Go-To-Market Strategy", x: 86, y: 40, color: "#4ADE80" },
-  { label: "NFT Marketing", x: 89, y: 55, color: "#FB923C" },
-  { label: "GameFi", x: 87, y: 70, color: "#818CF8" },
+  { label: "Social Media Marketing", x: 86, y: 10, color: "#22D3EE" },
+  { label: "Community Building", x: 88, y: 25, color: "#F87171" },
+  { label: "Go-To-Market Strategy", x: 84, y: 40, color: "#4ADE80" },
+  { label: "NFT Marketing", x: 87, y: 55, color: "#FB923C" },
+  { label: "GameFi", x: 85, y: 70, color: "#818CF8" },
 ];
 
 const clientLogos = [
