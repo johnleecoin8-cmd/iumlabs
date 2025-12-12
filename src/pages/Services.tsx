@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
 import Planet3D from "@/components/Planet3D";
-import sunCorona from "@/assets/backgrounds/sun-corona.jpg";
+import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
 
 // Service images
 import gtmImage from "@/assets/services/gtm-strategy.jpg";
@@ -104,22 +104,39 @@ const Services = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Full Screen with Ken Burns Sun Background */}
+      {/* Hero - Full Screen with Cosmic Nebula Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Sun Corona */}
+        {/* Background - Cosmic Nebula */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${sunCorona})`,
-              filter: "brightness(0.6) saturate(1.3)",
+              backgroundImage: `url(${cosmicNebula})`,
+              filter: "brightness(0.7) saturate(1.2)",
             }}
           />
           
-          {/* Aurora light overlay - Solar/Gold theme */}
+          {/* Aurora light overlay - Pink/Cyan cosmic theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-orange-600/30 via-transparent to-yellow-500/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-amber-600/25 via-transparent to-red-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-pink-600/30 via-transparent to-cyan-500/25" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/30 via-transparent to-blue-500/20" />
+          </div>
+          
+          {/* Twinkling stars effect */}
+          <div className="absolute inset-0">
+            {[...Array(50)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 3}s`,
+                  animationDuration: `${2 + Math.random() * 2}s`,
+                  opacity: 0.3 + Math.random() * 0.7,
+                }}
+              />
+            ))}
           </div>
           
           {/* Light sweep effect */}
@@ -128,70 +145,64 @@ const Services = () => {
           </div>
           
           {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.85)]" />
           
           {/* 3D Planet */}
-          <Planet3D type="sun" className="opacity-60" />
+          <Planet3D type="sun" className="opacity-40" />
         </div>
 
-        {/* Colorful Floating Tags */}
+        {/* Colorful Floating Tags - Cosmic themed */}
         <div className="absolute inset-0 z-10 hidden md:block">
           {/* Left side tags */}
           <div 
-            className="absolute top-[15%] left-[5%] px-4 py-2 rounded-sm bg-pink-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 pointer-events-auto"
+            className="absolute top-[12%] left-[5%] px-4 py-2 rounded-sm bg-cyan-400 text-black text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-cyan-400/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '4s', animationDelay: '0s' }}
           >
-            Responsible
+            Strategy
           </div>
           <div 
-            className="absolute top-[35%] left-[8%] px-4 py-2 rounded-sm bg-yellow-400 text-black text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-yellow-400/50 transition-all duration-300 pointer-events-auto"
+            className="absolute top-[28%] left-[10%] px-4 py-2 rounded-sm bg-pink-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '5s', animationDelay: '0.5s' }}
           >
-            Creative
+            Growth
           </div>
           <div 
-            className="absolute top-[55%] left-[3%] px-4 py-2 rounded-sm bg-purple-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 pointer-events-auto"
+            className="absolute top-[45%] left-[3%] px-4 py-2 rounded-sm bg-purple-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '4.5s', animationDelay: '1s' }}
           >
-            Innovation-Oriented
+            Community
           </div>
           <div 
-            className="absolute top-[75%] left-[15%] px-4 py-2 rounded-sm bg-red-400 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-red-400/50 transition-all duration-300 pointer-events-auto"
+            className="absolute top-[60%] left-[8%] px-4 py-2 rounded-sm bg-blue-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-blue-500/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '5.5s', animationDelay: '1.5s' }}
           >
-            Resourceful
-          </div>
-          <div 
-            className="absolute top-[85%] left-[5%] px-4 py-2 rounded-sm bg-cyan-400 text-black text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-cyan-400/50 transition-all duration-300 pointer-events-auto"
-            style={{ animationDuration: '4s', animationDelay: '2s' }}
-          >
-            Strategic
+            Marketing
           </div>
           
           {/* Right side tags */}
           <div 
-            className="absolute top-[12%] right-[8%] px-4 py-2 rounded-sm border border-white/60 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:bg-white/10 hover:border-white transition-all duration-300 pointer-events-auto"
+            className="absolute top-[15%] right-[6%] px-4 py-2 rounded-sm bg-cyan-500 text-black text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '5s', animationDelay: '0.3s' }}
           >
-            Responsible
+            Influencers
           </div>
           <div 
-            className="absolute top-[28%] right-[3%] px-4 py-2 rounded-sm border border-white/60 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:bg-white/10 hover:border-white transition-all duration-300 pointer-events-auto"
+            className="absolute top-[32%] right-[3%] px-4 py-2 rounded-sm bg-pink-400 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-pink-400/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '4.5s', animationDelay: '0.8s' }}
           >
-            Attention to Detail
+            PR & Media
           </div>
           <div 
-            className="absolute top-[50%] right-[5%] px-4 py-2 rounded-sm bg-emerald-400 text-black text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-emerald-400/50 transition-all duration-300 pointer-events-auto"
+            className="absolute top-[50%] right-[8%] px-4 py-2 rounded-sm border border-white/60 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:bg-white/10 hover:border-white transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '5.5s', animationDelay: '1.3s' }}
           >
-            Innovative
+            Social Media
           </div>
           <div 
-            className="absolute top-[70%] right-[10%] px-4 py-2 rounded-sm bg-pink-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 pointer-events-auto"
+            className="absolute top-[68%] right-[4%] px-4 py-2 rounded-sm bg-purple-400 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-purple-400/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '4s', animationDelay: '1.8s' }}
           >
-            Result-Driven Mindset
+            Exchange Listings
           </div>
         </div>
 
