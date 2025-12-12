@@ -3,22 +3,6 @@ import { useCountUp } from "@/hooks/useCountUp";
 import { useEffect, useState } from "react";
 import seoulSkyline from "@/assets/seoul-skyline.jpg";
 
-// Floating tags for About section
-const floatingTags = [
-  { label: "Binance Veterans", position: "top-[15%] left-[4%]" },
-  { label: "Korea Market Expert", position: "top-[35%] left-[5%]" },
-  { label: "Since 2023", position: "top-[58%] left-[3%]" },
-  { label: "KuCoin Experience", position: "top-[18%] right-[5%]" },
-  { label: "50+ Partners", position: "top-[40%] right-[4%]" },
-  { label: "1000+ KOLs", position: "top-[62%] right-[6%]" },
-];
-
-const mobileFloatingTags = [
-  { label: "Binance", position: "top-[8%] left-[3%]" },
-  { label: "KuCoin", position: "top-[10%] right-[3%]" },
-  { label: "Korea", position: "bottom-[35%] left-[2%]" },
-];
-
 const stats = [
   { value: 200, label: "Projects Launched", suffix: "+" },
   { value: 500, label: "Funds Raised", prefix: "$", suffix: "M+" },
@@ -26,7 +10,7 @@ const stats = [
   { value: 1000, label: "KOL Network", suffix: "+" },
 ];
 
-const StatItem = ({ 
+const StatCard = ({ 
   value, 
   label, 
   prefix = "", 
@@ -50,14 +34,21 @@ const StatItem = ({
   
   return (
     <div 
-      className="text-center opacity-0 animate-fade-up"
-      style={{ animationDelay: `${delay + 400}ms`, animationFillMode: 'forwards' }}
+      className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl 
+                 hover:bg-white/[0.06] hover:border-white/[0.15] transition-all duration-500
+                 opacity-0 animate-fade-up"
+      style={{ animationDelay: `${delay + 600}ms`, animationFillMode: 'forwards' }}
     >
-      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
-        {prefix}{count}{suffix}
-      </div>
-      <div className="text-xs sm:text-sm text-white/50 font-light">
-        {label}
+      {/* Glow effect on hover */}
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/10 to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      
+      <div className="relative z-10">
+        <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">
+          {prefix}{count}{suffix}
+        </div>
+        <div className="text-sm text-white/50 font-light tracking-wide">
+          {label}
+        </div>
       </div>
     </div>
   );
@@ -77,24 +68,25 @@ const AboutUsSection = () => {
 
   return (
     <div ref={ref} className="relative min-h-screen flex flex-col justify-center overflow-hidden py-20">
-      {/* Background - Seoul Skyline with Ken Burns Effect */}
+      {/* Background - Seoul Skyline with Parallax */}
       <div className="absolute inset-0 overflow-hidden">
         <div 
-          className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
+          className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat transition-transform duration-100"
           style={{ 
             backgroundImage: `url(${seoulSkyline})`,
-            filter: "brightness(0.3) grayscale(0.3)",
+            filter: "brightness(0.25) grayscale(0.4)",
+            transform: `translateY(${scrollY * 0.05}px) scale(1.1)`,
           }}
         />
         
-        {/* Aurora light overlay */}
+        {/* Aurora gradient overlay */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/15 via-transparent to-cyan-500/10" />
-          <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/10 via-transparent to-primary/10" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-cyan-500/5" />
+          <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/5 via-transparent to-primary/10" />
         </div>
         
-        {/* Dark overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.5)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+        {/* Dark gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background/90" />
       </div>
 
       {/* Section indicator */}
@@ -102,100 +94,88 @@ const AboutUsSection = () => {
         <span className="number-badge">02</span>
       </div>
 
-      {/* Floating Tags - Desktop */}
-      {floatingTags.map((tag, index) => (
-        <div
-          key={index}
-          className={`absolute ${tag.position} hidden lg:block animate-float z-10`}
-          style={{ 
-            animationDelay: `${index * 0.4}s`,
-            transform: `translateY(${(scrollY - 500) * 0.06}px)`
-          }}
-        >
-          <span className="font-sans lunar-tag-dark text-xs whitespace-nowrap">
-            {tag.label}
-          </span>
-        </div>
-      ))}
-
-      {/* Floating Tags - Mobile */}
-      {mobileFloatingTags.map((tag, index) => (
-        <div
-          key={`mobile-${index}`}
-          className={`absolute ${tag.position} lg:hidden animate-float z-10`}
-          style={{ animationDelay: `${index * 0.3}s` }}
-        >
-          <span className="font-sans px-2 py-1 text-[10px] rounded-sm border border-white/20 bg-black/50 backdrop-blur-sm text-white/80 whitespace-nowrap">
-            {tag.label}
-          </span>
-        </div>
-      ))}
-
-      {/* Main Content - Centered */}
-      <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto text-center">
-          {/* Main Headline */}
-          <h2 
-            className={`font-sans text-[8vw] sm:text-[6vw] md:text-[5vw] lg:text-[4.5vw] font-bold leading-[0.95] tracking-[-0.02em] mb-6 sm:mb-8 transition-all duration-1000 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
-            <span className="text-white">We Bridge </span>
-            <span className="text-white/60">Your Project</span>
-            <br />
-            <span className="text-white/60">to the </span>
-            <span className="text-primary">Korean Market</span>
-          </h2>
-
-          {/* Subtext */}
-          <p 
-            className={`text-base sm:text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-10 font-light tracking-wide transition-all duration-1000 delay-200 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-            }`}
-          >
-            Founded by veterans from <span className="text-white font-medium">Binance</span> and{" "}
-            <span className="text-white font-medium">KuCoin</span>, we deliver unmatched expertise 
-            in Korean Web3 market entry.
-          </p>
-
-          {/* Founders Badge */}
+      {/* Main Content - Asymmetric Overlap Layout */}
+      <div className="relative z-10 container mx-auto px-4 sm:px-6">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center mb-16">
+          
+          {/* Left Column - Text Content */}
           <div 
-            className={`inline-flex items-center gap-4 px-5 py-3 rounded-xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm mb-12 transition-all duration-1000 delay-300 ${
-              isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+            className={`transition-all duration-1000 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-12'
             }`}
           >
-            <div className="flex -space-x-2">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary/30 to-primary/5 border-2 border-primary/40 flex items-center justify-center">
-                <span className="text-primary text-sm font-bold">J</span>
+            <h2 className="font-sans text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-[-0.02em] mb-6">
+              <span className="text-white">We Bridge </span>
+              <span className="text-white/60">Your Project</span>
+              <br />
+              <span className="text-white/60">to the </span>
+              <span className="text-primary">Korean Market</span>
+            </h2>
+
+            <p className="text-base sm:text-lg text-white/50 max-w-lg mb-8 font-light leading-relaxed">
+              Founded by veterans from <span className="text-white font-medium">Binance</span> and{" "}
+              <span className="text-white font-medium">KuCoin</span>, we deliver unmatched expertise 
+              in Korean Web3 market entry and growth strategies.
+            </p>
+          </div>
+
+          {/* Right Column - Founders Card with Overlap Effect */}
+          <div 
+            className={`relative transition-all duration-1000 delay-200 ${
+              isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
+            }`}
+          >
+            {/* Background decorative card */}
+            <div className="absolute -top-4 -right-4 w-full h-full rounded-3xl bg-gradient-to-br from-primary/20 to-cyan-500/20 blur-sm" />
+            
+            {/* Main founders card */}
+            <div className="relative p-8 rounded-3xl bg-white/[0.04] border border-white/[0.1] backdrop-blur-2xl">
+              <div className="flex items-center gap-6 mb-6">
+                <div className="flex -space-x-3">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary/40 to-primary/10 border-2 border-primary/50 flex items-center justify-center shadow-lg shadow-primary/20">
+                    <span className="text-primary text-xl font-bold">J</span>
+                  </div>
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-cyan-500/40 to-cyan-500/10 border-2 border-cyan-500/50 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                    <span className="text-cyan-400 text-xl font-bold">D</span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-white/40 text-sm mb-1">Founded by</p>
+                  <p className="text-white text-lg font-semibold">James & David</p>
+                </div>
               </div>
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500/30 to-cyan-500/5 border-2 border-cyan-500/40 flex items-center justify-center -ml-2">
-                <span className="text-cyan-400 text-sm font-bold">D</span>
+              
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-white/70">
+                  <div className="w-2 h-2 rounded-full bg-primary" />
+                  <span className="text-sm">Ex-Lead of Korea at KuCoin</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/70">
+                  <div className="w-2 h-2 rounded-full bg-cyan-400" />
+                  <span className="text-sm">Ex-Head of BD at Binance</span>
+                </div>
+                <div className="flex items-center gap-3 text-white/70">
+                  <div className="w-2 h-2 rounded-full bg-purple-400" />
+                  <span className="text-sm">VC Experience at Outlier Ventures</span>
+                </div>
               </div>
-            </div>
-            <div className="text-left">
-              <p className="text-white/40 text-xs">Founded by</p>
-              <p className="text-white text-sm font-medium">Ex-Binance & Ex-KuCoin Leaders</p>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Stats Section - Horizontal like Hero */}
-      <div className="relative z-10 py-6 border-t border-white/10">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
-            {stats.map((stat, index) => (
-              <StatItem 
-                key={index}
-                value={stat.value}
-                label={stat.label}
-                prefix={stat.prefix}
-                suffix={stat.suffix}
-                isVisible={isVisible}
-                delay={index * 100}
-              />
-            ))}
-          </div>
+        {/* Stats Grid - Glassmorphism Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          {stats.map((stat, index) => (
+            <StatCard 
+              key={index}
+              value={stat.value}
+              label={stat.label}
+              prefix={stat.prefix}
+              suffix={stat.suffix}
+              isVisible={isVisible}
+              delay={index * 100}
+            />
+          ))}
         </div>
       </div>
     </div>
