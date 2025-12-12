@@ -1,5 +1,5 @@
-import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Search, Calendar, Clock, ArrowRight, Sparkles, TrendingUp, Users, Star, Mail, BookOpen, Zap } from "lucide-react";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
@@ -7,21 +7,6 @@ import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import CalendlyButton from "@/components/CalendlyButton";
-import Planet3D from "@/components/Planet3D";
-import TiltCard from "@/components/TiltCard";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-
-// Category color system
-const categoryColors: Record<string, { bg: string; text: string; glow: string; gradient: string }> = {
-  "Market Research": { bg: "bg-blue-500/20", text: "text-blue-400", glow: "shadow-blue-500/30", gradient: "from-blue-500 to-cyan-400" },
-  "DeFi": { bg: "bg-purple-500/20", text: "text-purple-400", glow: "shadow-purple-500/30", gradient: "from-purple-500 to-pink-400" },
-  "Strategy": { bg: "bg-emerald-500/20", text: "text-emerald-400", glow: "shadow-emerald-500/30", gradient: "from-emerald-500 to-green-400" },
-  "Community": { bg: "bg-orange-500/20", text: "text-orange-400", glow: "shadow-orange-500/30", gradient: "from-orange-500 to-yellow-400" },
-  "NFT": { bg: "bg-fuchsia-500/20", text: "text-fuchsia-400", glow: "shadow-fuchsia-500/30", gradient: "from-fuchsia-500 to-rose-400" },
-  "Marketing": { bg: "bg-indigo-500/20", text: "text-indigo-400", glow: "shadow-indigo-500/30", gradient: "from-indigo-500 to-violet-400" },
-};
-import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
 
 // Research thumbnail images
 import ecosystemGrowthImg from "@/assets/blog/ecosystem-growth-2025.jpg";
@@ -2868,52 +2853,24 @@ The goal isn't to game the algorithm—it's to build genuine attention and inter
   },
 ];
 
-const floatingTags = [
-  { label: "Insights", top: "20%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-pink-400 text-white" },
-  { label: "Reports", top: "32%", left: "20%", mobileTop: "15%", mobileRight: "3%", color: "bg-cyan-400 text-black" },
-  { label: "Strategy", top: "50%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-purple-400 text-white" },
-  { label: "Research", top: "52%", left: "24%", color: "bg-fuchsia-400 text-white" },
-  { label: "Analysis", top: "18%", right: "12%", color: "bg-cyan-300 text-black" },
-  { label: "Market", top: "32%", right: "5%", color: "bg-pink-300 text-black" },
-  { label: "DeFi", top: "50%", right: "10%", color: "bg-purple-300 text-black" },
-  { label: "Trends", bottom: "28%", right: "16%", color: "bg-fuchsia-500 text-white" },
-];
-
-const categories = ["All", "Market Research", "DeFi", "Strategy", "Community", "NFT", "Marketing"];
 
 const Research = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
-  const [scrollY, setScrollY] = useState(0);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
-  const [searchFocused, setSearchFocused] = useState(false);
   const postsPerPage = 8;
-  
-  const { ref: featuredRef, isVisible: featuredVisible } = useScrollAnimation();
-  const { ref: gridRef, isVisible: gridVisible } = useScrollAnimation();
-  const { ref: newsletterRef, isVisible: newsletterVisible } = useScrollAnimation();
-
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  
-  const getCategoryStyle = (category: string) => {
-    return categoryColors[category] || { bg: "bg-white/10", text: "text-white/60", glow: "", gradient: "from-gray-500 to-gray-400" };
-  };
 
   const filteredPosts = researchPosts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
-    return matchesSearch && matchesCategory;
+    return matchesSearch;
   });
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
   const currentPosts = filteredPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage);
+  const featuredPost = researchPosts[0];
+  const recentPosts = researchPosts.slice(1, 6);
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -2949,297 +2906,148 @@ const Research = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero Section - Planetary Style */}
-      <section className="relative min-h-[50vh] flex flex-col justify-center overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div 
-            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
-            style={{ 
-              backgroundImage: `url(${cosmicNebula})`,
-              filter: "brightness(0.5) saturate(1.2)",
-            }}
-          />
-          <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-pink-600/20 via-transparent to-cyan-500/15" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/15 via-transparent to-fuchsia-500/10" />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
-          <Planet3D type="nebula" className="opacity-40" />
-        </div>
-        
-        {/* Floating Tags */}
-        <div>
-          {floatingTags.map((tag, index) => (
-            <span
-              key={`${tag.label}-${index}`}
-              className={`absolute animate-float hidden sm:block px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
-              style={{
-                top: tag.top,
-                left: tag.left,
-                right: tag.right,
-                bottom: tag.bottom,
-                animationDelay: `${index * 0.3}s`,
-                transform: `translateY(${scrollY * 0.05}px)`,
-              }}
-            >
-              {tag.label}
-            </span>
-          ))}
-        </div>
-
-        {/* Content */}
-        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-24 pb-12">
-          <div className="mb-8">
-            <span className="text-xs text-white/50 mb-3 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Research ]</span>
-            <h1 className="text-[8vw] md:text-[80px] lg:text-[100px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-              Rese<span className="serif-italic text-primary">a</span>rch
-            </h1>
-          </div>
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pt-6 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-            <p className="text-base text-white/60 max-w-xl">
-              In-depth analysis and insights on Web3 marketing, Korean market dynamics, and emerging trends.
-            </p>
-            <div className="flex items-center gap-4 text-white/40 text-sm">
-              <span>{researchPosts.length} Articles</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Filters & Search */}
-      <section className="bg-background/80 backdrop-blur-xl border-b border-white/10 relative z-40">
-        <div className="container mx-auto max-w-7xl px-4 py-6">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            {/* Categories */}
-            <div className="flex items-center gap-3 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
-              {categories.map((category) => {
-                const style = getCategoryStyle(category);
-                const isActive = selectedCategory === category;
-                return (
-                  <button
-                    key={category}
-                    onClick={() => { setSelectedCategory(category); setCurrentPage(1); }}
-                    className={`group relative px-5 py-2.5 rounded-xl text-sm font-medium whitespace-nowrap transition-all duration-300 ${
-                      isActive 
-                        ? `bg-gradient-to-r ${style.gradient} text-white shadow-lg ${style.glow} scale-105` 
-                        : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white hover:scale-105"
-                    }`}
-                  >
-                    {isActive && (
-                      <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-white/20 to-transparent opacity-50" />
-                    )}
-                    <span className="relative">{category}</span>
-                  </button>
-                );
-              })}
-            </div>
-            
-            {/* Search */}
-            <div className={`relative w-full md:w-96 transition-all duration-300 ${searchFocused ? 'scale-105' : ''}`}>
-              <div className={`absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 via-cyan-500/20 to-purple-500/20 blur-xl transition-opacity duration-300 ${searchFocused ? 'opacity-100' : 'opacity-0'}`} />
-              <div className="relative">
-                <Search className={`absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 transition-colors duration-300 ${searchFocused ? 'text-primary' : 'text-white/40'}`} />
-                <Input
-                  type="text"
-                  placeholder="Search articles..."
-                  value={searchQuery}
-                  onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-                  onFocus={() => setSearchFocused(true)}
-                  onBlur={() => setSearchFocused(false)}
-                  className="bg-white/5 backdrop-blur-sm border-white/10 rounded-2xl pl-12 pr-4 h-12 text-white placeholder:text-white/40 focus:border-primary/50 focus:bg-white/10 transition-all duration-300"
+      {/* Hero Section - 2 Column Layout */}
+      <section className="bg-[hsl(220,15%,8%)] pt-24 pb-12">
+        <div className="container mx-auto max-w-7xl px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.8fr_1fr] gap-6 lg:gap-8">
+            {/* Left - Featured Article */}
+            <Link to={`/research/${featuredPost.slug}`} className="group block">
+              <div className="relative aspect-[16/10] rounded-lg overflow-hidden bg-slate-800">
+                <img 
+                  src={featuredPost.image} 
+                  alt={featuredPost.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
+                {/* Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                
+                {/* Logo centered */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-white/80 text-xl font-bold tracking-wider">
+                    CryptoBridge
+                  </div>
+                </div>
+                
+                {/* Title at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <h2 className="text-white text-2xl md:text-3xl lg:text-4xl font-bold leading-tight group-hover:text-primary/90 transition-colors">
+                    {featuredPost.title}
+                  </h2>
+                  <p className="text-white/60 text-sm mt-3">
+                    www.cryptobridgekorea.com/research
+                  </p>
+                </div>
+              </div>
+            </Link>
+            
+            {/* Right - Recent Articles List */}
+            <div className="bg-[hsl(220,15%,10%)] rounded-lg p-4 lg:p-6">
+              <h3 className="text-white/60 text-xs uppercase tracking-wider mb-4 pb-3 border-b border-white/10">
+                Recent Articles
+              </h3>
+              <div className="space-y-0">
+                {recentPosts.map((post, index) => (
+                  <Link 
+                    key={post.id} 
+                    to={`/research/${post.slug}`}
+                    className="group flex gap-4 py-4 border-b border-white/5 last:border-b-0 hover:bg-white/5 -mx-2 px-2 rounded transition-colors"
+                  >
+                    {/* Thumbnail */}
+                    <div className="w-20 h-14 flex-shrink-0 rounded overflow-hidden bg-slate-700">
+                      <img 
+                        src={post.image} 
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      />
+                    </div>
+                    {/* Info */}
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-white text-sm font-medium leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+                        {post.title}
+                      </h4>
+                      <p className="text-white/40 text-xs mt-1.5">{post.date}</p>
+                    </div>
+                  </Link>
+                ))}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Article */}
-      {currentPage === 1 && selectedCategory === "All" && !searchQuery && (
-        <section className="bg-background py-12 relative overflow-hidden">
-          {/* Background glow */}
-          <div className="absolute top-1/2 left-1/4 w-[400px] h-[400px] bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
-          <div className="absolute top-1/2 right-1/4 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
-          
-          <div ref={featuredRef} className={`container mx-auto max-w-7xl px-4 transition-all duration-1000 ${featuredVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <TiltCard max={5} scale={1.01} className="block">
-              <Link to={`/research/${researchPosts[0].slug}`} className="group block">
-                <div className="relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl overflow-hidden transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                    {/* Image */}
-                    <div className="relative aspect-[16/9] lg:aspect-auto overflow-hidden">
-                      <img 
-                        src={researchPosts[0].image} 
-                        alt={researchPosts[0].title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-background/80 lg:block hidden" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent lg:hidden" />
-                      
-                      {/* Featured Badge */}
-                      <div className="absolute top-3 left-3 flex items-center gap-2">
-                        <span className="px-3 py-1.5 bg-primary/90 backdrop-blur-sm text-white rounded-lg text-xs font-medium flex items-center gap-1.5 shadow-lg shadow-primary/30 animate-pulse">
-                          <Sparkles className="w-3.5 h-3.5" />
-                          Featured
-                        </span>
-                        <span className="px-2.5 py-1.5 bg-white/10 backdrop-blur-sm text-white/80 rounded-lg text-xs flex items-center gap-1">
-                          <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
-                          Trending
-                        </span>
-                      </div>
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="p-5 lg:p-8 flex flex-col justify-center relative">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className={`px-3 py-1 ${getCategoryStyle(researchPosts[0].category).bg} ${getCategoryStyle(researchPosts[0].category).text} rounded-lg text-xs font-medium`}>
-                          {researchPosts[0].category}
-                        </span>
-                        <span className="text-white/50 text-xs flex items-center gap-1.5">
-                          <Clock className="w-3.5 h-3.5" />
-                          {researchPosts[0].readTime}
-                        </span>
-                      </div>
-                      
-                      <h2 className="text-xl md:text-2xl lg:text-3xl font-medium text-white leading-tight mb-4 group-hover:text-primary transition-colors duration-300">
-                        {researchPosts[0].title}
-                      </h2>
-                      
-                      <p className="text-white/60 text-sm mb-6 line-clamp-2">
-                        {researchPosts[0].excerpt}
-                      </p>
-                      
-                      <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                        <div className="flex items-center gap-3">
-                          <div className="w-9 h-9 rounded-full bg-gradient-to-br from-primary/30 to-cyan-500/30 flex items-center justify-center text-xs font-bold text-white border border-white/10">
-                            {researchPosts[0].author.split(' ').map(n => n[0]).join('')}
-                          </div>
-                          <div>
-                            <p className="text-white text-sm font-medium">{researchPosts[0].author}</p>
-                            <p className="text-white/50 text-xs">{researchPosts[0].authorRole}</p>
-                          </div>
-                        </div>
-                        <span className="hidden sm:flex items-center gap-2 text-primary text-sm font-medium group-hover:gap-3 transition-all duration-300">
-                          Read <ArrowRight className="w-4 h-4" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </TiltCard>
-          </div>
-        </section>
-      )}
-
-      {/* Article Grid */}
-      <section className="bg-[hsl(0,0%,4%)] py-12 relative">
-        {/* Subtle gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background pointer-events-none" />
-        
-        <div ref={gridRef} className={`container mx-auto max-w-7xl px-4 relative transition-all duration-1000 ${gridVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          {/* Section header */}
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-              <BookOpen className="w-5 h-5 text-primary" />
-              <h2 className="text-xl font-light text-white">
-                {selectedCategory === "All" ? "All Articles" : selectedCategory}
-              </h2>
-              <span className="px-2.5 py-0.5 bg-white/5 rounded-full text-white/50 text-xs">
-                {filteredPosts.length} articles
-              </span>
+      {/* Recent News Section - Light Background */}
+      <section className="bg-[hsl(0,0%,96%)] py-12">
+        <div className="container mx-auto max-w-7xl px-4">
+          {/* Header with Search */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-slate-200">
+            <h2 className="text-slate-800 text-sm tracking-wide">recent news</h2>
+            <div className="flex items-center gap-2">
+              <Input
+                type="text"
+                placeholder="Search..."
+                value={searchQuery}
+                onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
+                className="w-48 md:w-64 h-9 bg-white border-slate-300 rounded text-sm text-slate-800 placeholder:text-slate-400 focus:border-slate-500"
+              />
+              <button className="h-9 px-4 bg-slate-800 text-white text-sm rounded hover:bg-slate-700 transition-colors">
+                Search
+              </button>
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {currentPosts.map((post, index) => {
-              const categoryStyle = getCategoryStyle(post.category);
-              return (
-                <Link 
-                  key={post.id}
-                  to={`/research/${post.slug}`}
-                  className="group scroll-reveal"
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <div className={`relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl overflow-hidden transition-all duration-500 hover:border-white/20 hover:bg-white/10 hover:-translate-y-1 hover:shadow-lg hover:${categoryStyle.glow}`}>
-                    {/* Image with gradient overlay */}
-                    <div className="relative aspect-[16/9] overflow-hidden">
-                      <img 
-                        src={post.image} 
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                      />
-                      <div className={`absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity`} />
-                      
-                      {/* Category badge on image */}
-                      <div className="absolute top-3 left-3">
-                        <span className={`px-2.5 py-1 ${categoryStyle.bg} backdrop-blur-sm ${categoryStyle.text} rounded-md text-xs font-medium border border-white/10`}>
-                          {post.category}
-                        </span>
-                      </div>
-                      
-                      {/* New/Trending indicator */}
-                      {index === 0 && currentPage === 1 && (
-                        <div className="absolute top-3 right-3">
-                          <span className="px-2 py-0.5 bg-emerald-500/20 backdrop-blur-sm text-emerald-400 rounded-md text-xs font-medium flex items-center gap-1 animate-pulse">
-                            <Zap className="w-3 h-3" /> New
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="p-4">
-                      {/* Meta */}
-                      <div className="flex items-center gap-2 mb-3 text-white/40 text-xs">
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5" />
-                          {post.readTime}
-                        </span>
-                        <span>•</span>
-                        <span>{post.date}</span>
-                      </div>
-                      
-                      {/* Title */}
-                      <h3 className="text-base font-medium text-white leading-snug group-hover:text-primary transition-colors duration-300 mb-3 line-clamp-2">
-                        {post.title}
-                      </h3>
-                      
-                      {/* Author */}
-                      <div className="flex items-center gap-2 pt-3 border-t border-white/10">
-                        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-primary/20 to-cyan-500/20 flex items-center justify-center text-[10px] font-bold text-white/80">
-                          {post.author.split(' ').map(n => n[0]).join('')}
-                        </div>
-                        <span className="text-white/60 text-xs">{post.author}</span>
-                        <ArrowRight className="w-3.5 h-3.5 text-primary ml-auto opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
-                      </div>
-                    </div>
+          {/* 4-Column Article Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {currentPosts.map((post) => (
+              <Link 
+                key={post.id}
+                to={`/research/${post.slug}`}
+                className="group block"
+              >
+                {/* Image Card */}
+                <div className="relative aspect-[4/3] rounded-lg overflow-hidden mb-3 bg-slate-200">
+                  <img 
+                    src={post.image} 
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  {/* Overlay with text visible on image */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-3 left-3 right-3">
+                    <span className="text-white/80 text-[10px] uppercase tracking-wider">
+                      {post.category}
+                    </span>
                   </div>
-                </Link>
-              );
-            })}
+                </div>
+                
+                {/* Date */}
+                <p className="text-slate-400 text-xs mb-1.5">{post.date}</p>
+                
+                {/* Title */}
+                <h3 className="text-slate-800 text-sm font-semibold leading-snug line-clamp-2 group-hover:text-primary transition-colors">
+                  {post.title}
+                </h3>
+              </Link>
+            ))}
           </div>
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-3 mt-16">
+            <div className="flex items-center justify-center gap-2 mt-12">
               <button 
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="p-3 rounded-xl bg-white/5 text-white/60 hover:bg-white/10 hover:text-white disabled:opacity-30 transition-all hover:scale-105 disabled:hover:scale-100"
+                className="p-2 rounded bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-30 transition-all"
               >
-                <ChevronLeft className="w-5 h-5" />
+                <ChevronLeft className="w-4 h-4" />
               </button>
               {Array.from({ length: totalPages }, (_, i) => (
                 <button
                   key={i + 1}
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-12 h-12 rounded-xl text-sm font-medium transition-all ${
+                  className={`w-9 h-9 rounded text-sm font-medium transition-all ${
                     currentPage === i + 1 
-                      ? "bg-gradient-to-r from-primary to-cyan-500 text-white shadow-lg shadow-primary/30 scale-110" 
-                      : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white hover:scale-105"
+                      ? "bg-slate-800 text-white" 
+                      : "bg-white border border-slate-200 text-slate-600 hover:bg-slate-50"
                   }`}
                 >
                   {i + 1}
@@ -3248,83 +3056,41 @@ const Research = () => {
               <button 
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="p-3 rounded-xl bg-white/5 text-white/60 hover:bg-white/10 hover:text-white disabled:opacity-30 transition-all hover:scale-105 disabled:hover:scale-100"
+                className="p-2 rounded bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 disabled:opacity-30 transition-all"
               >
-                <ChevronRight className="w-5 h-5" />
+                <ChevronRight className="w-4 h-4" />
               </button>
             </div>
           )}
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      <section className="bg-background py-12 relative overflow-hidden">
-        {/* Background effects */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-gradient-to-r from-primary/20 via-cyan-500/15 to-purple-500/20 rounded-full blur-[150px] opacity-50" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-gradient-to-r from-emerald-500/15 to-primary/20 rounded-full blur-[120px] opacity-40" />
-        </div>
-        
-        <div ref={newsletterRef} className={`container mx-auto max-w-3xl px-4 relative transition-all duration-1000 ${newsletterVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="relative bg-gradient-to-br from-white/10 via-white/5 to-transparent backdrop-blur-2xl border border-white/10 rounded-2xl p-6 md:p-8 overflow-hidden">
-            {/* Decorative elements */}
-            <div className="absolute top-0 right-0 w-28 h-28 bg-gradient-to-br from-primary/20 to-transparent rounded-bl-[60px]" />
-            <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-cyan-500/20 to-transparent rounded-tr-[50px]" />
-            
-            <div className="relative z-10 text-center">
-              {/* Icon */}
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-gradient-to-br from-primary/20 to-cyan-500/20 rounded-xl mb-5 border border-white/10">
-                <Mail className="w-6 h-6 text-primary" />
-              </div>
-              
-              <h2 className="text-2xl md:text-3xl font-light text-white mb-2">
-                Stay <span className="text-primary">Ahead</span> of the Curve
-              </h2>
-              <p className="text-white/60 text-sm mb-6 max-w-md mx-auto">
-                Join 5,000+ Web3 professionals receiving our latest research and insights.
-              </p>
-              
-              <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-5">
-                <div className="relative flex-1">
-                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
-                    className="w-full bg-white/5 backdrop-blur-sm border-white/10 rounded-lg h-11 pl-10 pr-3 text-sm text-white placeholder:text-white/40 focus:border-primary/50 focus:bg-white/10 transition-all"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubscribing}
-                  className="group relative px-6 h-11 bg-gradient-to-r from-primary to-cyan-500 text-white text-sm rounded-lg font-medium overflow-hidden transition-all hover:shadow-lg hover:shadow-primary/30 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100"
-                >
-                  <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
-                  <span className="relative flex items-center gap-2">
-                    {isSubscribing ? "..." : "Subscribe"}
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </button>
-              </form>
-              
-              {/* Trust indicators */}
-              <div className="flex flex-wrap items-center justify-center gap-4 text-white/40 text-xs">
-                <div className="flex items-center gap-1.5">
-                  <Users className="w-3.5 h-3.5" />
-                  <span>5,000+ subscribers</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Star className="w-3.5 h-3.5 text-yellow-400" />
-                  <span>Weekly insights</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-primary" />
-                  <span>Exclusive research</span>
-                </div>
-              </div>
-            </div>
-          </div>
+      {/* Newsletter Section - Minimal */}
+      <section className="bg-[hsl(220,15%,8%)] py-16">
+        <div className="container mx-auto max-w-2xl px-4 text-center">
+          <h2 className="text-white text-2xl font-light mb-3">
+            Subscribe to our newsletter
+          </h2>
+          <p className="text-white/50 text-sm mb-8">
+            Get the latest research and insights delivered to your inbox.
+          </p>
+          
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
+              className="flex-1 h-11 bg-white/5 border-white/10 rounded text-white placeholder:text-white/40 focus:border-white/30"
+            />
+            <button
+              type="submit"
+              disabled={isSubscribing}
+              className="h-11 px-6 bg-white text-slate-900 text-sm font-medium rounded hover:bg-white/90 disabled:opacity-50 transition-colors"
+            >
+              {isSubscribing ? "..." : "Subscribe"}
+            </button>
+          </form>
         </div>
       </section>
 
