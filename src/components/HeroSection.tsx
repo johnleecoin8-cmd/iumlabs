@@ -17,18 +17,18 @@ import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
 
 const serviceTags = [
-  // Left side
-  { label: "PR", position: "top-[10%] left-[5%]" },
-  { label: "KOL Marketing", position: "top-[25%] left-[3%]" },
-  { label: "Influencer Strategy", position: "top-[40%] left-[6%]" },
-  { label: "DeFi Marketing", position: "top-[55%] left-[4%]" },
-  { label: "Exchange Listing", position: "top-[70%] left-[7%]" },
+  // Left side - x, y as percentages from top-left
+  { label: "PR", x: 5, y: 10 },
+  { label: "KOL Marketing", x: 3, y: 25 },
+  { label: "Influencer Strategy", x: 6, y: 40 },
+  { label: "DeFi Marketing", x: 4, y: 55 },
+  { label: "Exchange Listing", x: 7, y: 70 },
   // Right side
-  { label: "Social Media Marketing", position: "top-[8%] right-[8%]" },
-  { label: "Community Building", position: "top-[22%] right-[5%]" },
-  { label: "Go-To-Market Strategy", position: "top-[38%] right-[6%]" },
-  { label: "NFT Marketing", position: "top-[52%] right-[4%]" },
-  { label: "GameFi", position: "top-[66%] right-[8%]" },
+  { label: "Social Media Marketing", x: 92, y: 8 },
+  { label: "Community Building", x: 95, y: 22 },
+  { label: "Go-To-Market Strategy", x: 94, y: 38 },
+  { label: "NFT Marketing", x: 96, y: 52 },
+  { label: "GameFi", x: 92, y: 66 },
 ];
 
 const clientLogos = [
@@ -96,12 +96,82 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
+      {/* SVG Connection Lines - Spider Web Effect */}
+      <svg className="absolute inset-0 w-full h-full pointer-events-none hidden xl:block z-[5]">
+        <defs>
+          {serviceTags.map((_, index) => (
+            <linearGradient
+              key={`gradient-${index}`}
+              id={`line-gradient-${index}`}
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="rgba(255,255,255,0.03)" />
+              <stop offset="50%" stopColor="rgba(255,255,255,0.12)" />
+              <stop offset="100%" stopColor="rgba(255,255,255,0.03)" />
+            </linearGradient>
+          ))}
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur" />
+            <feMerge>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        
+        {serviceTags.map((tag, index) => (
+          <g key={index}>
+            {/* Connection line */}
+            <line
+              x1={`${tag.x}%`}
+              y1={`${tag.y}%`}
+              x2="50%"
+              y2="45%"
+              stroke={`url(#line-gradient-${index})`}
+              strokeWidth="1"
+              filter="url(#glow)"
+              className="opacity-60"
+            />
+            {/* Animated pulse dot */}
+            <circle
+              r="2"
+              fill="rgba(255,255,255,0.6)"
+              filter="url(#glow)"
+              className="animate-pulse-dot"
+              style={{
+                animationDelay: `${index * 0.3}s`,
+              }}
+            >
+              <animateMotion
+                dur="3s"
+                repeatCount="indefinite"
+                begin={`${index * 0.3}s`}
+              >
+                <mpath href={`#path-${index}`} />
+              </animateMotion>
+            </circle>
+            {/* Hidden path for animateMotion */}
+            <path
+              id={`path-${index}`}
+              d={`M ${tag.x * window.innerWidth / 100} ${tag.y * window.innerHeight / 100} L ${window.innerWidth / 2} ${window.innerHeight * 0.45}`}
+              fill="none"
+              stroke="none"
+            />
+          </g>
+        ))}
+      </svg>
+
       {/* Floating Service Tags - Desktop only */}
       {serviceTags.map((tag, index) => (
         <div
           key={index}
-          className={`absolute ${tag.position} hidden xl:block animate-float z-10`}
+          className="absolute hidden xl:block animate-float z-10"
           style={{ 
+            left: `${tag.x}%`,
+            top: `${tag.y}%`,
             animationDelay: `${index * 0.5}s`,
             transform: `translateY(${scrollY * 0.08}px)`
           }}

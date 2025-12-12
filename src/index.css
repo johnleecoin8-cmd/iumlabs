@@ -665,6 +665,33 @@
 }
 
 /* ============================================
+   SPIDER WEB PULSE ANIMATION
+   ============================================ */
+
+@keyframes pulse-dot-move {
+  0% {
+    opacity: 0;
+    r: 1;
+  }
+  20% {
+    opacity: 0.9;
+    r: 2.5;
+  }
+  80% {
+    opacity: 0.9;
+    r: 2.5;
+  }
+  100% {
+    opacity: 0;
+    r: 1;
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot-move 3s ease-in-out infinite;
+}
+
+/* ============================================
    SMOOTH TRANSITIONS
    ============================================ */
 
