@@ -122,18 +122,23 @@ const CTASection = () => {
           {/* Trust Indicators */}
           <div className="flex flex-wrap items-center justify-center gap-8 mt-10 md:mt-12 pt-8 md:pt-10 border-t border-white/10">
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-white">200+</div>
+              <div className="text-2xl md:text-3xl font-bold text-white">18+</div>
               <div className="text-xs md:text-sm text-white/60">Projects Launched</div>
             </div>
             <div className="w-px h-10 bg-white/20 hidden sm:block" />
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-white">$500M+</div>
-              <div className="text-xs md:text-sm text-white/60">Funds Raised</div>
+              <div className="text-2xl md:text-3xl font-bold text-white">120+</div>
+              <div className="text-xs md:text-sm text-white/60">KOL Network</div>
             </div>
             <div className="w-px h-10 bg-white/20 hidden sm:block" />
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-white">50+</div>
-              <div className="text-xs md:text-sm text-white/60">Exchange Partners</div>
+              <div className="text-2xl md:text-3xl font-bold text-white">$2.5M+</div>
+              <div className="text-xs md:text-sm text-white/60">Token Sales</div>
+            </div>
+            <div className="w-px h-10 bg-white/20 hidden sm:block" />
+            <div className="text-center">
+              <div className="text-2xl md:text-3xl font-bold text-white">38+</div>
+              <div className="text-xs md:text-sm text-white/60">AMA Hosting</div>
             </div>
           </div>
         </div>

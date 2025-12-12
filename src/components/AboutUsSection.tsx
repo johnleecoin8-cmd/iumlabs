@@ -2,7 +2,7 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
 import { TrendingUp, Users, Building2, Handshake, Sparkles } from "lucide-react";
 const stats = [{
-  value: 200,
+  value: 18,
   suffix: "+",
   prefix: "",
   label: "Projects Launched",
@@ -10,28 +10,28 @@ const stats = [{
   description: "Successfully launched in Korea",
   glowColor: "from-emerald-500/20 to-cyan-500/10"
 }, {
-  value: 500,
-  suffix: "M+",
-  prefix: "$",
-  label: "Funds Raised",
-  icon: Building2,
-  description: "Total fundraising supported",
-  glowColor: "from-primary/20 to-purple-500/10"
-}, {
-  value: 50,
-  suffix: "+",
-  prefix: "",
-  label: "Exchange Partners",
-  icon: Handshake,
-  description: "CEX & DEX partnerships",
-  glowColor: "from-cyan-500/20 to-blue-500/10"
-}, {
-  value: 1000,
+  value: 120,
   suffix: "+",
   prefix: "",
   label: "KOL Network",
   icon: Users,
   description: "Influencers & creators",
+  glowColor: "from-primary/20 to-purple-500/10"
+}, {
+  value: 2.5,
+  suffix: "M+",
+  prefix: "$",
+  label: "Token Sales",
+  icon: Building2,
+  description: "Total token sales supported",
+  glowColor: "from-cyan-500/20 to-blue-500/10"
+}, {
+  value: 38,
+  suffix: "+",
+  prefix: "",
+  label: "AMA Hosting",
+  icon: Handshake,
+  description: "AMAs hosted for projects",
   glowColor: "from-purple-500/20 to-pink-500/10"
 }];
 const StatCard = ({

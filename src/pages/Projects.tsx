@@ -133,9 +133,9 @@ const cases = [
 ];
 
 const stats = [
-  { value: "$500M+", label: "Total Value Marketed" },
-  { value: "200+", label: "Projects Launched" },
-  { value: "500K+", label: "Community Members" },
+  { value: "18+", label: "Projects Launched" },
+  { value: "120+", label: "KOL Network" },
+  { value: "$2.5M+", label: "Token Sales" },
 ];
 
 const floatingTags = [
