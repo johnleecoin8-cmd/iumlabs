@@ -8,8 +8,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import CalendlyButton from "@/components/CalendlyButton";
-import Planet3D from "@/components/Planet3D";
-import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
+import seoulDdpNight from "@/assets/backgrounds/seoul-ddp-night.jpg";
 
 // Research thumbnail images
 import ecosystemGrowthImg from "@/assets/blog/ecosystem-growth-2025.jpg";
@@ -2928,23 +2927,22 @@ const Research = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero Section - Planetary Style */}
+      {/* Hero Section - Seoul DDP Style */}
       <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden">
         {/* Background */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${cosmicNebula})`,
+              backgroundImage: `url(${seoulDdpNight})`,
               filter: "brightness(0.5) saturate(1.2)",
             }}
           />
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-pink-600/20 via-transparent to-cyan-500/15" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/15 via-transparent to-fuchsia-500/10" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-600/20 via-transparent to-blue-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-teal-600/15 via-transparent to-sky-500/10" />
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
-          <Planet3D type="nebula" className="opacity-40" />
         </div>
         
         {/* Floating Tags */}
