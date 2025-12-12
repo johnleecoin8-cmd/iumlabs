@@ -2853,9 +2853,11 @@ The goal isn't to game the algorithm—it's to build genuine attention and inter
   },
 ];
 
+const categories = ["All", "Market Research", "DeFi", "Strategy", "Community", "NFT", "Marketing"];
 
 const Research = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [activeCategory, setActiveCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
   const [newsletterEmail, setNewsletterEmail] = useState("");
   const [isSubscribing, setIsSubscribing] = useState(false);
@@ -2864,7 +2866,8 @@ const Research = () => {
   const filteredPosts = researchPosts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesSearch;
+    const matchesCategory = activeCategory === "All" || post.category === activeCategory;
+    return matchesSearch && matchesCategory;
   });
 
   const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
@@ -2978,20 +2981,39 @@ const Research = () => {
       {/* Recent News Section - Light Background */}
       <section className="bg-[hsl(0,0%,96%)] py-12">
         <div className="container mx-auto max-w-7xl px-4">
-          {/* Header with Search */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-10 pb-6 border-b border-slate-200">
-            <h2 className="text-slate-800 text-sm tracking-wide">recent news</h2>
-            <div className="flex items-center gap-2">
-              <Input
-                type="text"
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-                className="w-48 md:w-64 h-9 bg-white border-slate-300 rounded text-sm text-slate-800 placeholder:text-slate-400 focus:border-slate-500"
-              />
-              <button className="h-9 px-4 bg-slate-800 text-white text-sm rounded hover:bg-slate-700 transition-colors">
-                Search
-              </button>
+          {/* Header with Category Tabs and Search */}
+          <div className="flex flex-col gap-6 mb-10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <h2 className="text-slate-800 text-sm tracking-wide">recent news</h2>
+              <div className="flex items-center gap-2">
+                <Input
+                  type="text"
+                  placeholder="Search..."
+                  value={searchQuery}
+                  onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
+                  className="w-48 md:w-64 h-9 bg-white border-slate-300 rounded text-sm text-slate-800 placeholder:text-slate-400 focus:border-slate-500"
+                />
+                <button className="h-9 px-4 bg-slate-800 text-white text-sm rounded hover:bg-slate-700 transition-colors">
+                  Search
+                </button>
+              </div>
+            </div>
+            
+            {/* Category Tabs */}
+            <div className="flex flex-wrap gap-2 pb-4 border-b border-slate-200">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => { setActiveCategory(category); setCurrentPage(1); }}
+                  className={`px-4 py-2 text-sm transition-all rounded-full ${
+                    activeCategory === category
+                      ? "bg-slate-800 text-white"
+                      : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
             </div>
           </div>
           
