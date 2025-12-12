@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useCountUp } from "@/hooks/useCountUp";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 import TiltCard from "@/components/TiltCard";
-import { ArrowUpRight, Calendar } from "lucide-react";
+import { ArrowUpRight, Calendar, ExternalLink, Filter, Sparkles } from "lucide-react";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
 import Planet3D from "@/components/Planet3D";
@@ -32,6 +33,8 @@ const cases = [
     decorations: "bnb",
     description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage.",
     services: ["KOL Marketing", "Community Building", "PR & Media"],
+    featured: true,
+    metrics: { users: "1M+", growth: "+340%", campaigns: "25+" },
   },
   {
     name: "KuCoin",
@@ -43,6 +46,8 @@ const cases = [
     decorations: "kucoin",
     description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships.",
     services: ["User Acquisition", "Ambassador Program", "Localization"],
+    featured: true,
+    metrics: { users: "50K+", growth: "+280%", campaigns: "18+" },
   },
   {
     name: "Polygon",
@@ -54,6 +59,8 @@ const cases = [
     decorations: "polygon",
     description: "Community growth from 0 to 50K Korean users with targeted developer relations and DeFi marketing.",
     services: ["Developer Relations", "DeFi Marketing", "Event Management"],
+    featured: false,
+    metrics: { users: "50K+", growth: "+500%", campaigns: "12+" },
   },
   {
     name: "Ondo Finance",
@@ -65,6 +72,8 @@ const cases = [
     decorations: "ondo",
     description: "RWA education campaign targeting both retail and institutional Korean investors.",
     services: ["Institutional Relations", "Content Marketing", "PR Strategy"],
+    featured: false,
+    metrics: { users: "100K+", growth: "+420%", campaigns: "15+" },
   },
   {
     name: "Peaq",
@@ -76,6 +85,8 @@ const cases = [
     decorations: "peaq",
     description: "Established thought leadership in DePIN space with IoT partnerships and developer community.",
     services: ["Brand Positioning", "Developer Relations", "Partnership Development"],
+    featured: false,
+    metrics: { users: "35K+", growth: "+650%", campaigns: "10+" },
   },
   {
     name: "Story Protocol",
@@ -87,6 +98,8 @@ const cases = [
     decorations: "story",
     description: "Korean content creator onboarding for IP tokenization platform targeting webtoon and music artists.",
     services: ["Creator Relations", "Platform Marketing", "Ambassador Program"],
+    featured: false,
+    metrics: { users: "5K+", growth: "+380%", campaigns: "8+" },
   },
   {
     name: "MegaETH",
@@ -98,6 +111,8 @@ const cases = [
     decorations: "megaeth",
     description: "Pre-launch hype building and community engagement ahead of mainnet launch.",
     services: ["Pre-Launch Marketing", "Community Building", "Media Relations"],
+    featured: false,
+    metrics: { users: "80K+", growth: "+500%", campaigns: "20+" },
   },
   {
     name: "Tria",
@@ -109,6 +124,8 @@ const cases = [
     decorations: "tria",
     description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users.",
     services: ["User Acquisition", "Product Marketing", "Partnership Development"],
+    featured: false,
+    metrics: { users: "30K+", growth: "+320%", campaigns: "14+" },
   },
   {
     name: "Bybit",
@@ -120,7 +137,21 @@ const cases = [
     decorations: "bybit",
     description: "Multi-channel user acquisition and VIP program for Korean high-volume traders.",
     services: ["Market Entry Strategy", "User Acquisition", "VIP Relations"],
+    featured: false,
+    metrics: { users: "120K+", growth: "+450%", campaigns: "22+" },
   },
+];
+
+// Category filter options
+const categories = [
+  { id: "all", label: "All Projects", color: "from-purple-500 to-pink-500", bgClass: "bg-gradient-to-r from-purple-500/20 to-pink-500/20" },
+  { id: "Infrastructure", label: "Infrastructure", color: "from-yellow-500 to-orange-500", bgClass: "bg-gradient-to-r from-yellow-500/20 to-orange-500/20" },
+  { id: "Exchange", label: "Exchange", color: "from-emerald-500 to-teal-500", bgClass: "bg-gradient-to-r from-emerald-500/20 to-teal-500/20" },
+  { id: "Layer 2", label: "Layer 2", color: "from-purple-500 to-indigo-500", bgClass: "bg-gradient-to-r from-purple-500/20 to-indigo-500/20" },
+  { id: "RWA", label: "RWA", color: "from-blue-500 to-cyan-500", bgClass: "bg-gradient-to-r from-blue-500/20 to-cyan-500/20" },
+  { id: "DePIN", label: "DePIN", color: "from-green-500 to-emerald-500", bgClass: "bg-gradient-to-r from-green-500/20 to-emerald-500/20" },
+  { id: "IP Protocol", label: "IP Protocol", color: "from-red-500 to-pink-500", bgClass: "bg-gradient-to-r from-red-500/20 to-pink-500/20" },
+  { id: "Wallet", label: "Wallet", color: "from-orange-500 to-amber-500", bgClass: "bg-gradient-to-r from-orange-500/20 to-amber-500/20" },
 ];
 
 // Unique decorative elements for each card
@@ -243,9 +274,9 @@ const CardDecorations = ({ type }: { type: string }) => {
 };
 
 const stats = [
-  { value: "$500M+", label: "Total Value Marketed" },
-  { value: "200+", label: "Projects Launched" },
-  { value: "500K+", label: "Community Members" },
+  { value: 500, suffix: "M+", prefix: "$", label: "Total Value Marketed" },
+  { value: 200, suffix: "+", prefix: "", label: "Projects Launched" },
+  { value: 500, suffix: "K+", prefix: "", label: "Community Members" },
 ];
 
 // Cluster tags with polar coordinates (angle in degrees, distance in viewport units)
@@ -269,15 +300,237 @@ const mobileFloatingTags = [
   { label: "NFT", top: "78%", right: "3%", color: "bg-violet-400" },
 ];
 
+// Count-up stat component
+const StatCounter = ({ value, prefix, suffix, label, isVisible }: { value: number; prefix: string; suffix: string; label: string; isVisible: boolean }) => {
+  const count = useCountUp({ end: value, duration: 2000, isVisible, prefix, suffix });
+  return (
+    <div className="text-center">
+      <div className="text-3xl md:text-4xl font-bold text-white mb-2">
+        {count}
+      </div>
+      <div className="text-sm text-white/50">{label}</div>
+    </div>
+  );
+};
+
+// Featured Project Card Component
+const FeaturedProjectCard = ({ project, index }: { project: typeof cases[0]; index: number }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  return (
+    <Link
+      to={`/projects/${project.slug}`}
+      className="group relative block"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      <div className={`relative overflow-hidden rounded-3xl ${project.bgStyle} transition-all duration-700 ease-out ${isHovered ? 'scale-[1.02]' : 'scale-100'}`}>
+        <CardDecorations type={project.decorations} />
+        
+        {/* Featured Badge */}
+        <div className="absolute top-6 left-6 z-20">
+          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 backdrop-blur-md text-white text-sm font-medium">
+            <Sparkles className="w-4 h-4" />
+            Featured Project
+          </span>
+        </div>
+        
+        {/* Main Content Grid */}
+        <div className="relative z-10 grid md:grid-cols-2 gap-8 p-8 md:p-12 min-h-[400px]">
+          {/* Left - Logo & Title */}
+          <div className="flex flex-col justify-center">
+            <img
+              src={project.logo}
+              alt={project.name}
+              className={`w-24 h-24 md:w-32 md:h-32 object-contain filter brightness-0 invert mb-6 transition-all duration-500 ${isHovered ? 'scale-110 rotate-3' : ''}`}
+            />
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+              {project.name}
+            </h2>
+            <p className="text-white/70 text-lg max-w-md">
+              {project.description}
+            </p>
+            
+            {/* Services Tags */}
+            <div className="flex flex-wrap gap-2 mt-6">
+              {project.services.map((service) => (
+                <span key={service} className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-white/80 text-sm">
+                  {service}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          {/* Right - Metrics */}
+          <div className="flex flex-col justify-center">
+            <div className="grid grid-cols-3 gap-4">
+              <div className={`bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center transition-all duration-500 ${isHovered ? 'translate-y-[-8px]' : ''}`} style={{ transitionDelay: '0ms' }}>
+                <div className="text-3xl md:text-4xl font-bold text-white mb-2">{project.metrics.users}</div>
+                <div className="text-white/60 text-sm">Users</div>
+              </div>
+              <div className={`bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center transition-all duration-500 ${isHovered ? 'translate-y-[-8px]' : ''}`} style={{ transitionDelay: '100ms' }}>
+                <div className="text-3xl md:text-4xl font-bold text-white mb-2">{project.metrics.growth}</div>
+                <div className="text-white/60 text-sm">Growth</div>
+              </div>
+              <div className={`bg-white/10 backdrop-blur-md rounded-2xl p-6 text-center transition-all duration-500 ${isHovered ? 'translate-y-[-8px]' : ''}`} style={{ transitionDelay: '200ms' }}>
+                <div className="text-3xl md:text-4xl font-bold text-white mb-2">{project.metrics.campaigns}</div>
+                <div className="text-white/60 text-sm">Campaigns</div>
+              </div>
+            </div>
+            
+            {/* Result Highlight */}
+            <div className={`mt-6 p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 transition-all duration-500 ${isHovered ? 'bg-white/10 border-white/20' : ''}`}>
+              <div className="text-white/50 text-sm mb-2 uppercase tracking-wider">Key Result</div>
+              <div className="text-2xl md:text-3xl font-bold text-white">{project.result}</div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Hover Arrow */}
+        <div className={`absolute bottom-8 right-8 transition-all duration-500 ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'}`}>
+          <div className="flex items-center gap-3 text-white">
+            <span className="text-sm font-medium">View Case Study</span>
+            <div className="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <ArrowUpRight className="w-5 h-5" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
+  );
+};
+
+// Bento Grid Project Card
+const BentoProjectCard = ({ project, index, size = "normal" }: { project: typeof cases[0]; index: number; size?: "normal" | "large" | "wide" }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  const sizeClasses = {
+    normal: "col-span-1 row-span-1 aspect-square",
+    large: "col-span-1 md:col-span-2 row-span-1 md:row-span-2",
+    wide: "col-span-1 md:col-span-2 row-span-1",
+  };
+  
+  return (
+    <Link
+      to={`/projects/${project.slug}`}
+      className={`group block ${sizeClasses[size]}`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      style={{
+        animationDelay: `${index * 80}ms`,
+      }}
+    >
+      <TiltCard
+        className={`relative h-full rounded-3xl overflow-hidden ${project.bgStyle}`}
+        max={size === "large" ? 8 : 12}
+        scale={1.02}
+        speed={300}
+      >
+        <CardDecorations type={project.decorations} />
+        
+        {/* Default State - Logo & Name */}
+        <div className={`absolute inset-0 flex flex-col items-center justify-center p-6 z-10 transition-all duration-500 ${isHovered ? 'opacity-0 scale-90' : 'opacity-100 scale-100'}`}>
+          <img
+            src={project.logo}
+            alt={project.name}
+            className={`${size === "large" ? "w-24 h-24 md:w-32 md:h-32" : "w-16 h-16 md:w-20 md:h-20"} object-contain filter brightness-0 invert mb-4`}
+          />
+          <h3 className={`text-white ${size === "large" ? "text-3xl md:text-4xl" : "text-2xl md:text-3xl"} font-bold text-center tracking-tight drop-shadow-lg`}>
+            {project.name}
+          </h3>
+        </div>
+        
+        {/* Hover State - Full Preview */}
+        <div className={`absolute inset-0 flex flex-col justify-between p-6 z-10 bg-black/40 backdrop-blur-sm transition-all duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+          {/* Top - Category */}
+          <div className="flex items-center justify-between">
+            <span className="px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-sm text-xs text-white uppercase tracking-wider">
+              {project.category}
+            </span>
+            <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <ExternalLink className="w-4 h-4 text-white" />
+            </div>
+          </div>
+          
+          {/* Middle - Info */}
+          <div className="flex-1 flex flex-col justify-center">
+            <img
+              src={project.logo}
+              alt={project.name}
+              className="w-12 h-12 object-contain filter brightness-0 invert mb-4"
+            />
+            <h3 className="text-white text-xl md:text-2xl font-bold mb-2">{project.name}</h3>
+            <p className="text-white/70 text-sm line-clamp-2 mb-4">{project.description}</p>
+            
+            {/* Service Tags */}
+            <div className="flex flex-wrap gap-1.5">
+              {project.services.slice(0, 3).map((service) => (
+                <span key={service} className="px-2 py-1 rounded-full bg-white/10 text-white/80 text-xs">
+                  {service}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          {/* Bottom - Result */}
+          <div className="pt-4 border-t border-white/20">
+            <div className="text-white/50 text-xs mb-1 uppercase tracking-wider">Result</div>
+            <div className="text-white font-semibold">{project.result}</div>
+          </div>
+        </div>
+        
+        {/* Category Badge (always visible) */}
+        <div className={`absolute top-4 left-4 z-20 transition-all duration-300 ${isHovered ? 'opacity-0' : 'opacity-100'}`}>
+          <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider">
+            {project.category}
+          </span>
+        </div>
+      </TiltCard>
+    </Link>
+  );
+};
+
 const Projects = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const { ref: statsRef, isVisible: statsVisible } = useScrollAnimation();
   const [scrollY, setScrollY] = useState(0);
+  const [activeFilter, setActiveFilter] = useState("all");
+  const [isFilterChanging, setIsFilterChanging] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Filter projects
+  const filteredProjects = useMemo(() => {
+    if (activeFilter === "all") return cases.filter(c => !c.featured);
+    return cases.filter(c => c.category === activeFilter && !c.featured);
+  }, [activeFilter]);
+
+  // Get featured projects
+  const featuredProjects = cases.filter(c => c.featured);
+
+  // Handle filter change with animation
+  const handleFilterChange = (filterId: string) => {
+    if (filterId === activeFilter) return;
+    setIsFilterChanging(true);
+    setTimeout(() => {
+      setActiveFilter(filterId);
+      setIsFilterChanging(false);
+    }, 300);
+  };
+
+  // Get current category background
+  const currentCategoryBg = categories.find(c => c.id === activeFilter)?.bgClass || "";
+
+  // Determine bento layout sizes
+  const getBentoSize = (index: number): "normal" | "large" | "wide" => {
+    if (index === 0) return "large";
+    if (index === 3 || index === 5) return "wide";
+    return "normal";
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -451,13 +704,17 @@ const Projects = () => {
             </CalendlyButton>
           </div>
 
-          {/* Stats Row */}
-          <div className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
+          {/* Stats Row with Count-up */}
+          <div ref={statsRef} className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
             {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
-                <div className="text-sm text-white/50">{stat.label}</div>
-              </div>
+              <StatCounter
+                key={index}
+                value={stat.value}
+                prefix={stat.prefix}
+                suffix={stat.suffix}
+                label={stat.label}
+                isVisible={statsVisible}
+              />
             ))}
           </div>
         </div>
@@ -469,80 +726,94 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Projects Grid */}
-      <section ref={ref} className="py-24 px-4 bg-background">
-        <div className="container mx-auto max-w-7xl">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {cases.map((caseItem, index) => (
-              <Link
-                key={caseItem.name}
-                to={`/projects/${caseItem.slug}`}
-                className={`group cursor-pointer transition-all duration-500 ${
-                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <TiltCard
-                  className={`relative aspect-square rounded-3xl overflow-hidden ${caseItem.bgStyle} mb-4`}
-                  max={12}
-                  scale={1.03}
-                  speed={300}
-                >
-                  {/* Unique Decorations */}
-                  <CardDecorations type={caseItem.decorations} />
-
-                  {/* Content */}
-                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-10">
-                    {/* Logo */}
-                    <img
-                      src={caseItem.logo}
-                      alt={caseItem.name}
-                      className="w-16 h-16 md:w-20 md:h-20 object-contain filter brightness-0 invert mb-4 group-hover:scale-110 transition-transform duration-300"
-                    />
-                    
-                    {/* Project Name */}
-                    <h3 className="text-white text-2xl md:text-3xl font-bold text-center tracking-tight drop-shadow-lg">
-                      {caseItem.name}
-                    </h3>
-                  </div>
-
-                  {/* Bottom Info - Result */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/60 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-white text-sm font-semibold text-center">
-                      {caseItem.result}
-                    </p>
-                    <p className="text-white/70 text-xs text-center mt-1 uppercase tracking-wider">
-                      {caseItem.category}
-                    </p>
-                  </div>
-
-                  {/* Hover Arrow */}
-                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                    <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
-                      <ArrowUpRight className="w-5 h-5 text-white" />
-                    </div>
-                  </div>
-
-                  {/* Category Badge */}
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider">
-                      {caseItem.category}
-                    </span>
-                  </div>
-                </TiltCard>
-
-                {/* Text Below Card */}
-                <div className="px-2">
-                  <h3 className="text-xl font-medium text-white mb-1 group-hover:text-primary transition-colors">
-                    {caseItem.name}
-                  </h3>
-                  <p className="text-white/50 text-sm line-clamp-2">
-                    {caseItem.description}
-                  </p>
-                </div>
-              </Link>
+      {/* Featured Projects Section */}
+      <section className="py-24 px-4 bg-background relative overflow-hidden">
+        {/* Background Glow */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-[128px]" />
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-pink-500/10 rounded-full blur-[128px]" />
+        </div>
+        
+        <div className="container mx-auto max-w-7xl relative z-10">
+          <div className="flex items-center gap-4 mb-12">
+            <Sparkles className="w-6 h-6 text-primary" />
+            <h2 className="text-3xl md:text-4xl font-bold text-white">Featured Projects</h2>
+          </div>
+          
+          <div className="grid gap-8">
+            {featuredProjects.map((project, index) => (
+              <FeaturedProjectCard key={project.slug} project={project} index={index} />
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Filter & Projects Grid Section */}
+      <section ref={ref} className={`py-24 px-4 relative transition-all duration-700 ${currentCategoryBg}`}>
+        {/* Dynamic Background based on filter */}
+        <div className="absolute inset-0 bg-background/95 backdrop-blur-sm" />
+        
+        <div className="container mx-auto max-w-7xl relative z-10">
+          {/* Filter Tabs */}
+          <div className="mb-12">
+            <div className="flex items-center gap-3 mb-6">
+              <Filter className="w-5 h-5 text-white/50" />
+              <span className="text-white/50 text-sm uppercase tracking-wider">Filter by Category</span>
+            </div>
+            
+            <div className="flex flex-wrap gap-3">
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => handleFilterChange(category.id)}
+                  className={`px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                    activeFilter === category.id
+                      ? `bg-gradient-to-r ${category.color} text-white shadow-lg`
+                      : 'bg-white/5 text-white/70 hover:bg-white/10 hover:text-white border border-white/10'
+                  }`}
+                >
+                  {category.label}
+                  {activeFilter === category.id && (
+                    <span className="ml-2 px-2 py-0.5 bg-white/20 rounded-full text-xs">
+                      {category.id === "all" ? cases.filter(c => !c.featured).length : cases.filter(c => c.category === category.id && !c.featured).length}
+                    </span>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          {/* Bento Grid */}
+          <div className={`grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 transition-all duration-500 ${isFilterChanging ? 'opacity-0 scale-95' : 'opacity-100 scale-100'}`}>
+            {filteredProjects.map((project, index) => (
+              <div
+                key={project.slug}
+                className={`transition-all duration-500 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
+                }`}
+                style={{ 
+                  transitionDelay: `${index * 80}ms`,
+                }}
+              >
+                <BentoProjectCard
+                  project={project}
+                  index={index}
+                  size={getBentoSize(index)}
+                />
+              </div>
+            ))}
+          </div>
+          
+          {/* Empty State */}
+          {filteredProjects.length === 0 && !isFilterChanging && (
+            <div className="text-center py-20">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/5 flex items-center justify-center">
+                <Filter className="w-8 h-8 text-white/30" />
+              </div>
+              <h3 className="text-xl text-white/70 mb-2">No projects in this category yet</h3>
+              <p className="text-white/50">Try selecting a different category</p>
+            </div>
+          )}
         </div>
       </section>
 
