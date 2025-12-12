@@ -35,6 +35,7 @@ const InfluencerService = () => {
       whatIncludesText="We run end-to-end influencer campaigns that connect your narrative to relevant audiences through trusted Content Creators. From creator sourcing and briefing to live coordination and reporting, we handle the process and ensure every post delivers with purpose."
       processSteps={processSteps}
       aboutImage={kolImage}
+      currentServiceSlug="influencer"
     />
   );
 };

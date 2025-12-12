@@ -35,6 +35,7 @@ const SocialMediaService = () => {
       whatIncludesText="We manage your project's presence on X by building a content strategy, creating high-impact posts, and actively monitoring the ecosystem to engage, reply, and amplify the right conversations."
       processSteps={processSteps}
       aboutImage={socialMediaImage}
+      currentServiceSlug="social-media"
     />
   );
 };

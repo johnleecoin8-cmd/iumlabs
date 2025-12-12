@@ -35,6 +35,7 @@ const GTMStrategyService = () => {
       whatIncludesText="We help define your positioning, messaging, target audiences (and more) through collaborative workshops, competitor analysis, and market research, setting a clear foundation for your KOL, PR, and social campaigns."
       processSteps={processSteps}
       aboutImage={gtmStrategyImage}
+      currentServiceSlug="gtm"
     />
   );
 };
