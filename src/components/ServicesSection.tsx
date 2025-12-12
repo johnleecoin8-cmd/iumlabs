@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { 
@@ -7,14 +8,28 @@ import {
   Mic2, 
   Newspaper, 
   Calendar,
-  ArrowUpRight
+  ArrowUpRight,
+  X
 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const services = [
   {
     icon: Users,
     title: "KOL Marketing",
     description: "Access 1000+ vetted Korean crypto influencers across YouTube, Twitter, and Telegram",
+    fullDescription: "Partner with Korea's top crypto influencers to amplify your project's reach. We manage relationships with 1,000+ verified KOLs across Twitter, YouTube, and Korean platforms like Naver.",
+    features: [
+      "Access to 1,000+ vetted Korean crypto KOLs",
+      "YouTube, Twitter, Telegram, Naver coverage",
+      "Performance tracking & analytics",
+      "Campaign strategy & execution"
+    ],
     size: "large",
     color: "from-primary/20 to-primary/5",
     borderColor: "border-primary/20 hover:border-primary/40",
@@ -23,6 +38,13 @@ const services = [
     icon: Megaphone,
     title: "Community Operation",
     description: "24/7 Korean community management with native speakers",
+    fullDescription: "Build a thriving Korean community from scratch or enhance your existing presence. We handle everything from platform setup to 24/7 Korean moderation across Telegram, Discord, and KakaoTalk.",
+    features: [
+      "24/7 Korean native moderation",
+      "Telegram, Discord, KakaoTalk management",
+      "Community engagement programs",
+      "Sentiment analysis & reporting"
+    ],
     size: "normal",
     color: "from-blue-500/20 to-blue-500/5",
     borderColor: "border-blue-500/20 hover:border-blue-500/40",
@@ -31,6 +53,13 @@ const services = [
     icon: Building2,
     title: "Exchange Support",
     description: "VASP compliance and CEX/DEX listing support",
+    fullDescription: "Get compliant in Korea's regulated crypto market. We guide you through VASP registration, AML/KYC requirements, and ongoing compliance obligations.",
+    features: [
+      "VASP registration guidance",
+      "CEX & DEX listing support",
+      "AML/KYC compliance setup",
+      "Regulatory consulting"
+    ],
     size: "normal",
     color: "from-purple-500/20 to-purple-500/5",
     borderColor: "border-purple-500/20 hover:border-purple-500/40",
@@ -39,6 +68,13 @@ const services = [
     icon: Newspaper,
     title: "Media & PR",
     description: "Coverage in top Korean crypto media outlets",
+    fullDescription: "Secure coverage in leading Korean crypto publications and mainstream media. From press releases to exclusive interviews, we handle your complete Korean media strategy.",
+    features: [
+      "50+ Korean media partnerships",
+      "Press release distribution",
+      "Exclusive interview placements",
+      "Crisis management"
+    ],
     size: "normal",
     color: "from-orange-500/20 to-orange-500/5",
     borderColor: "border-orange-500/20 hover:border-orange-500/40",
@@ -47,6 +83,13 @@ const services = [
     icon: Mic2,
     title: "AMA Hosting",
     description: "Live AMAs with Korean communities",
+    fullDescription: "Engage directly with Korean crypto communities through professionally hosted AMAs. We handle everything from scheduling to live translation and community engagement.",
+    features: [
+      "Professional AMA hosting",
+      "Live Korean translation",
+      "Community Q&A management",
+      "Post-AMA content creation"
+    ],
     size: "normal",
     color: "from-cyan-500/20 to-cyan-500/5",
     borderColor: "border-cyan-500/20 hover:border-cyan-500/40",
@@ -55,6 +98,13 @@ const services = [
     icon: Calendar,
     title: "Offline Events",
     description: "Side events, meetups, and conference presence in Seoul",
+    fullDescription: "Make an impact at major Korean blockchain events or host your own. We manage everything from booth setup to VIP networking events and speaker placements.",
+    features: [
+      "Conference booth management",
+      "Side event organization",
+      "VIP networking events",
+      "Speaker placement"
+    ],
     size: "large",
     color: "from-rose-500/20 to-rose-500/5",
     borderColor: "border-rose-500/20 hover:border-rose-500/40",
@@ -63,6 +113,7 @@ const services = [
 
 const ServicesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
 
   return (
     <div ref={ref} className="py-32 px-4 bg-[hsl(0,0%,4%)]">
@@ -96,7 +147,8 @@ const ServicesSection = () => {
               {services.map((service, index) => (
                 <div
                   key={index}
-                  className={`group relative p-8 rounded-2xl bg-gradient-to-br ${service.color} border ${service.borderColor} transition-all duration-500 hover:-translate-y-1 ${
+                  onClick={() => setSelectedService(service)}
+                  className={`group relative p-8 rounded-2xl bg-gradient-to-br ${service.color} border ${service.borderColor} transition-all duration-500 hover:-translate-y-1 cursor-pointer ${
                     service.size === 'large' ? 'md:col-span-2' : ''
                   } ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                   style={{ transitionDelay: `${index * 100}ms` }}
@@ -124,6 +176,49 @@ const ServicesSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Service Detail Modal */}
+      <Dialog open={!!selectedService} onOpenChange={() => setSelectedService(null)}>
+        <DialogContent className="bg-[hsl(0,0%,6%)] border-white/10 text-white max-w-lg">
+          <DialogHeader>
+            <div className="flex items-center gap-4 mb-4">
+              {selectedService && (
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${selectedService.color} flex items-center justify-center`}>
+                  <selectedService.icon className="w-7 h-7 text-white" />
+                </div>
+              )}
+              <DialogTitle className="text-2xl font-bold">{selectedService?.title}</DialogTitle>
+            </div>
+          </DialogHeader>
+          
+          <p className="text-white/70 leading-relaxed mb-6">
+            {selectedService?.fullDescription}
+          </p>
+
+          <div className="space-y-3">
+            <h4 className="text-sm font-medium text-primary uppercase tracking-wider">What's Included</h4>
+            <ul className="space-y-2">
+              {selectedService?.features.map((feature, i) => (
+                <li key={i} className="flex items-start gap-3 text-white/60">
+                  <span className="text-primary mt-1">•</span>
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-6 pt-6 border-t border-white/10">
+            <Link 
+              to="/contact"
+              className="w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl transition-colors"
+              onClick={() => setSelectedService(null)}
+            >
+              Get Started
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
