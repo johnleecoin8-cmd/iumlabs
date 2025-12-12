@@ -219,14 +219,10 @@ const Projects = () => {
             </h1>
           </div>
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+          <div className="pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
             <p className="text-lg text-white/60 max-w-xl">
               These case studies walk through the challenge, our approach, and the outcomes across services like GTM, KOLs, PR, and social media.
             </p>
-            <CalendlyButton className="lunar-btn">
-              <Calendar className="w-4 h-4" />
-              <span>Start Your Project</span>
-            </CalendlyButton>
           </div>
 
           {/* Stats Row */}
