@@ -149,6 +149,12 @@ const ServiceDetailLayout = ({
           </div>
         </div>
 
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-28 right-8 flex flex-col items-center gap-2 text-white/50 z-20">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/40 to-transparent animate-pulse" />
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
+        </div>
+
         {/* Client Logo Marquee */}
         <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm border-t border-white/20 py-6 overflow-hidden">
           <div className="flex animate-marquee whitespace-nowrap">

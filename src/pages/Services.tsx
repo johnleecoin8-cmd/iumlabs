@@ -1,80 +1,61 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, Calendar, Star, Quote, Users, Megaphone, Building2, Mic2, Newspaper, MapPin, ArrowUpRight } from "lucide-react";
+import { ArrowRight, Calendar, Star, Quote } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
-import Planet3D from "@/components/Planet3D";
-import sunCorona from "@/assets/backgrounds/sun-corona.jpg";
 
+// Service images
+import gtmImage from "@/assets/services/gtm-strategy.jpg";
+import communityImage from "@/assets/services/community-growth.jpg";
+import socialImage from "@/assets/backgrounds/seoul-gangnam-night.jpg";
+import kolImage from "@/assets/services/kol-network.jpg";
+import yapImage from "@/assets/services/events.jpg";
+import prImage from "@/assets/services/pr-media.jpg";
 
 const services = [
   {
-    icon: Megaphone,
+    number: "01",
     title: "Go-To-Market Strategy",
     description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus.",
-    stat: "01",
-    statLabel: "Foundation",
-    size: "large",
-    color: "from-primary/20 to-primary/5",
-    borderColor: "border-primary/20 hover:border-primary/40",
+    image: gtmImage,
     link: "/services/gtm",
   },
   {
-    icon: Users,
+    number: "02",
     title: "Community Management",
     description: "Complete Discord community infrastructure to build sticky, scalable and self-sustaining growth.",
-    stat: "02",
-    statLabel: "Infrastructure",
-    size: "normal",
-    color: "from-blue-500/20 to-blue-500/5",
-    borderColor: "border-blue-500/20 hover:border-blue-500/40",
+    image: communityImage,
     link: "/services/community",
   },
   {
-    icon: Newspaper,
+    number: "03",
     title: "Social Media Marketing",
     description: "Content strategy and execution on X to grow visibility and engage with your ecosystem in real time.",
-    stat: "03",
-    statLabel: "Visibility",
-    size: "normal",
-    color: "from-purple-500/20 to-purple-500/5",
-    borderColor: "border-purple-500/20 hover:border-purple-500/40",
+    image: socialImage,
     link: "/services/social-media",
   },
   {
-    icon: Mic2,
+    number: "04",
     title: "Influencer Strategy",
     description: "Influencer campaigns powered by top crypto voices aligned with your message and goals.",
-    stat: "04",
-    statLabel: "KOL Network",
-    size: "normal",
-    color: "from-orange-500/20 to-orange-500/5",
-    borderColor: "border-orange-500/20 hover:border-orange-500/40",
+    image: kolImage,
     link: "/services/influencer",
   },
   {
-    icon: Building2,
+    number: "05",
     title: "Yap Strategy",
     description: "Targeted campaigns through a 600+ creator network designed to drive awareness and traction across Crypto X.",
-    stat: "05",
-    statLabel: "600+ Yappers",
-    size: "normal",
-    color: "from-cyan-500/20 to-cyan-500/5",
-    borderColor: "border-cyan-500/20 hover:border-cyan-500/40",
+    image: yapImage,
     link: "/services/yap",
   },
   {
-    icon: MapPin,
+    number: "06",
     title: "PR",
     description: "Narrative development and media placements to get your story published and seen in the right places.",
-    stat: "06",
-    statLabel: "Media",
-    size: "large",
-    color: "from-rose-500/20 to-rose-500/5",
-    borderColor: "border-rose-500/20 hover:border-rose-500/40",
+    image: prImage,
     link: "/services/pr",
   },
 ];
@@ -106,18 +87,6 @@ const testimonials = [
   },
 ];
 
-const floatingTags = [
-  { label: "Responsible", top: "22%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-orange-400 text-white" },
-  { label: "Creative", top: "32%", left: "22%", mobileTop: "15%", mobileRight: "3%", color: "bg-yellow-400 text-black" },
-  { label: "Innovation-Oriented", top: "42%", left: "2%", mobileTop: "75%", mobileLeft: "3%", color: "bg-amber-300 text-black" },
-  { label: "Resourceful", top: "48%", left: "28%", mobileBottom: "18%", mobileRight: "3%", color: "bg-red-400 text-white" },
-  { label: "Strategic", bottom: "28%", left: "25%", mobileBottom: "10%", mobileLeft: "3%", color: "bg-orange-300 text-black" },
-  { label: "Trusted", top: "20%", right: "15%", color: "bg-yellow-300 text-black" },
-  { label: "Attention to Detail", top: "30%", right: "5%", color: "bg-amber-400 text-black" },
-  { label: "Innovative", top: "48%", right: "8%", color: "bg-orange-500 text-white" },
-  { label: "Result-Driven Mindset", bottom: "22%", right: "18%", color: "bg-yellow-500 text-black" },
-];
-
 const Services = () => {
   const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation();
   const { ref: testimonialsRef, isVisible: testimonialsVisible } = useScrollAnimation();
@@ -133,182 +102,140 @@ const Services = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Full Screen with Ken Burns Background */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Sun Corona */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div 
-            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
-            style={{ 
-              backgroundImage: `url(${sunCorona})`,
-              filter: "brightness(0.6) saturate(1.3)",
-            }}
-          />
-          
-          {/* Aurora light overlay - Solar/Gold theme */}
-          <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-orange-600/30 via-transparent to-yellow-500/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-amber-600/25 via-transparent to-red-500/15" />
+      {/* Hero - Blue Gradient like Service Detail Pages */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-gradient-to-br from-[#1e3a8a] via-[#2563eb] to-[#0891b2]">
+        {/* Abstract 3D Shapes with Float Animation */}
+        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[50%] h-[70%] opacity-70 pointer-events-none hidden lg:block">
+          <div className="relative w-full h-full">
+            <div 
+              className="absolute top-[5%] right-[15%] w-72 h-72 rounded-full bg-gradient-to-br from-white/40 via-white/20 to-transparent backdrop-blur-sm border border-white/30 shadow-2xl animate-float"
+              style={{ animationDuration: "6s" }}
+            />
+            <div 
+              className="absolute top-[35%] right-[5%] w-56 h-56 rounded-[40px] bg-gradient-to-tr from-cyan-200/30 via-white/25 to-transparent backdrop-blur-md border border-white/40 rotate-12 shadow-xl animate-float"
+              style={{ animationDuration: "8s", animationDelay: "1s" }} 
+            />
+            <div 
+              className="absolute top-[55%] right-[30%] w-40 h-40 rounded-3xl bg-gradient-to-bl from-blue-100/35 via-white/20 to-transparent backdrop-blur-lg border border-white/30 -rotate-6 shadow-lg animate-float"
+              style={{ animationDuration: "7s", animationDelay: "2s" }} 
+            />
+            <div 
+              className="absolute top-[15%] right-[0%] w-20 h-20 rounded-full bg-gradient-to-r from-white/50 to-white/20 border border-white/30 shadow-md animate-float"
+              style={{ animationDuration: "5s", animationDelay: "0.5s" }}
+            />
           </div>
-          
-          {/* Light sweep effect */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
-          </div>
-          
-          {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
-          
-          {/* 3D Planet */}
-          <Planet3D type="sun" className="opacity-60" />
-        </div>
-        
-        {/* Floating Tags with Parallax - Colorful */}
-        <div>
-          {floatingTags.map((tag, index) => (
-            <span
-              key={`${tag.label}-${index}`}
-              className={`absolute animate-float hidden sm:block px-4 py-2 rounded-md text-sm font-medium shadow-lg ${tag.color}`}
-              style={{
-                top: tag.top,
-                left: tag.left,
-                right: tag.right,
-                bottom: tag.bottom,
-                animationDelay: `${index * 0.3}s`,
-                transform: `translateY(${scrollY * 0.05}px)`,
-              }}
-            >
-              {tag.label}
-            </span>
-          ))}
-          {/* Mobile floating tags */}
-          {floatingTags.slice(0, 4).map((tag, index) => (
-            <span
-              key={`mobile-${tag.label}-${index}`}
-              className={`absolute animate-float sm:hidden px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
-              style={{
-                top: tag.mobileTop,
-                left: tag.mobileLeft,
-                right: tag.mobileRight,
-                bottom: tag.mobileBottom,
-                animationDelay: `${index * 0.3}s`,
-              }}
-            >
-              {tag.label}
-            </span>
-          ))}
         </div>
 
-        {/* Content with Stagger Animation */}
-        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
-          <div className="mb-16">
-            <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Our Services ]</span>
-            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-              Ser<span className="serif-italic text-primary">v</span>ices
+        {/* Content */}
+        <div className="container mx-auto px-6 lg:px-16 pt-32 pb-24 relative z-10">
+          <div className="max-w-3xl">
+            <h1 className="text-white mb-8">
+              <span className="block text-6xl md:text-7xl lg:text-[120px] font-light tracking-tight leading-[0.95]">
+                Our
+              </span>
+              <span className="block text-6xl md:text-7xl lg:text-[120px] font-light tracking-tight leading-[0.95]">
+                Services
+              </span>
             </h1>
-          </div>
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-            <p className="text-lg text-white/60 max-w-xl">
+
+            <p className="text-white/80 text-lg md:text-xl max-w-2xl mb-12 font-light leading-relaxed">
               Everything you need to successfully enter and grow in Korea's vibrant crypto market.
             </p>
-            <CalendlyButton className="lunar-btn">
-              <Calendar className="w-4 h-4" />
-              <span>Book a Consultation</span>
+
+            <CalendlyButton className="inline-flex items-center gap-3 bg-[#d4ff00] hover:bg-[#c4ef00] text-black px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#d4ff00]/30">
+              <Calendar className="w-5 h-5" />
+              Book a Consultation
             </CalendlyButton>
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/30">
-          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
+        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/50 z-20">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/40 to-transparent animate-pulse" />
           <span className="text-xs uppercase tracking-widest">Scroll</span>
         </div>
       </section>
 
-      {/* Services List - Bento Grid Style */}
-      <section ref={servicesRef} className="py-32 px-4 bg-[hsl(0,0%,4%)]">
-        <div className="container mx-auto max-w-7xl">
-          <div className="grid lg:grid-cols-12 gap-12">
-            {/* Left - Vertical Title */}
-            <div className={`lg:col-span-3 transition-all duration-700 ${servicesVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-              <div className="lg:sticky lg:top-32">
-                <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
-                  What We Do
-                </span>
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                  Our <span className="text-primary">Services</span>
-                </h2>
-                <p className="text-white/50 mb-8 max-w-sm">
-                  End-to-end Web3 marketing solutions tailored for the Korean market
-                </p>
-                <Link 
-                  to="/services" 
-                  className="group inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors"
-                >
-                  Explore all services
-                  <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                </Link>
+      {/* Services List - Lunar Strategy Horizontal Layout */}
+      <section ref={servicesRef} className="bg-[#fafafa] py-24">
+        <div className="container mx-auto px-6 lg:px-16">
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+              What
+            </h2>
+            <div className="flex items-center gap-4">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+                We Do
+              </h2>
+              <div className="flex gap-1.5 ml-2">
+                <span className="w-2 h-2 rounded-full bg-slate-400" />
+                <span className="w-2 h-2 rounded-full bg-slate-400" />
+                <span className="w-2 h-2 rounded-full bg-slate-400" />
               </div>
             </div>
+          </div>
 
-            {/* Right - Bento Grid */}
-            <div className="lg:col-span-9">
-              <div className="grid md:grid-cols-2 gap-4">
-                {services.map((service, index) => (
-                  <Link
-                    key={index}
-                    to={service.link}
-                    className={`group relative p-8 rounded-2xl bg-gradient-to-br ${service.color} border ${service.borderColor} transition-all duration-500 hover:-translate-y-1 cursor-pointer ${
-                      service.size === 'large' ? 'md:col-span-2' : ''
-                    } ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-                    style={{ transitionDelay: `${index * 100}ms` }}
-                  >
-                    {/* Icon */}
-                    <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 group-hover:bg-white/10 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                      <service.icon className="w-7 h-7 text-white transition-all duration-300 group-hover:scale-110 group-hover:text-primary" />
-                    </div>
+          {/* Divider */}
+          <div className="border-b border-dashed border-slate-300 mb-12" />
 
-                    {/* Content */}
-                    <h3 className="text-xl md:text-2xl font-bold text-white mb-3">
+          {/* Service Items - Horizontal List */}
+          <div className="space-y-0">
+            {services.map((service, index) => (
+              <Link
+                key={service.number}
+                to={service.link}
+                className={`group flex flex-col lg:flex-row items-stretch gap-0 transition-all duration-500 ${
+                  servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                {/* Image */}
+                <div className="w-full lg:w-72 h-48 lg:h-auto flex-shrink-0 overflow-hidden">
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 flex flex-col lg:flex-row items-start lg:items-center justify-between py-8 lg:py-12 px-0 lg:px-12 border-b border-dashed border-slate-300">
+                  <div className="flex-1 mb-4 lg:mb-0">
+                    <h3 className="text-2xl md:text-3xl font-medium text-slate-900 mb-3 group-hover:text-[#2563eb] transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-white/50 leading-relaxed mb-6">
+                    <p className="text-slate-500 leading-relaxed max-w-xl">
                       {service.description}
                     </p>
+                  </div>
 
-                    {/* Stat Label */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-baseline gap-2">
-                        <span className="text-sm font-mono text-white/30">[ {service.stat} ]</span>
-                        <span className="text-white/40 text-sm">{service.statLabel}</span>
-                      </div>
-                      <span className="text-primary text-sm group-hover:underline">Learn more</span>
-                    </div>
-
-                    {/* Hover Arrow */}
-                    <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <ArrowUpRight className="w-5 h-5 text-white/40" />
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            </div>
+                  <div className="flex items-center gap-8">
+                    <span className="text-slate-400 font-light text-sm whitespace-nowrap">
+                      [ {service.number} ]
+                    </span>
+                    <span className="inline-flex items-center gap-2 text-slate-900 group-hover:text-[#2563eb] transition-colors">
+                      <span className="font-medium">Learn more</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section - Dark Theme */}
-      <section ref={testimonialsRef} className="bg-[hsl(0,0%,6%)] py-24">
-        <div className="container mx-auto max-w-7xl px-4">
+      {/* Testimonials Section */}
+      <section ref={testimonialsRef} className="bg-[#f5f5f5] py-24">
+        <div className="container mx-auto max-w-7xl px-6 lg:px-16">
           {/* Header */}
           <div className={`flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 transition-all duration-700 ${
             testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
           }`}>
             <div>
-              <span className="text-white/40 text-sm font-mono mb-4 block">[ Testimonials ]</span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white">
-                +250 <span className="serif-italic text-primary">Satisfied</span> Clients
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+                +250 Satisfied Clients
               </h2>
             </div>
             <div className="flex gap-2">
@@ -323,16 +250,16 @@ const Services = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className={`bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-primary/30 hover:bg-white/10 hover:-translate-y-2 transition-all duration-500 ${
+                className={`bg-white rounded-2xl p-8 border border-slate-200 hover:border-[#2563eb]/30 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${
                   testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
               >
                 {/* Quote Icon */}
-                <Quote className="w-10 h-10 text-primary/30 mb-6" />
+                <Quote className="w-10 h-10 text-[#2563eb]/30 mb-6" />
                 
                 {/* Content */}
-                <p className="text-white/70 text-lg leading-relaxed mb-8">
+                <p className="text-slate-600 text-lg leading-relaxed mb-8">
                   "{testimonial.content}"
                 </p>
 
@@ -348,17 +275,17 @@ const Services = () => {
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
-                    className="w-14 h-14 rounded-full object-cover border-2 border-white/10"
+                    className="w-14 h-14 rounded-full object-cover border-2 border-slate-100"
                   />
                   <div>
-                    <div className="font-medium text-white">{testimonial.name}</div>
-                    <div className="text-sm text-white/50">{testimonial.role}</div>
+                    <div className="font-medium text-slate-900">{testimonial.name}</div>
+                    <div className="text-sm text-slate-500">{testimonial.role}</div>
                   </div>
                 </div>
 
                 {/* Source */}
-                <div className="mt-6 pt-6 border-t border-white/10">
-                  <span className="text-xs text-primary uppercase tracking-wider font-medium">
+                <div className="mt-6 pt-6 border-t border-slate-100">
+                  <span className="text-xs text-[#2563eb] uppercase tracking-wider font-medium">
                     Reviewed on {testimonial.source}
                   </span>
                 </div>
