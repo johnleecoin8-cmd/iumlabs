@@ -85,10 +85,10 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Full Screen Menu */}
+      {/* Half Screen Menu */}
       <div
-        className={`fixed inset-0 z-[100] bg-background transition-all duration-500 ${
-          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`fixed top-0 left-0 right-0 h-[50vh] z-[100] bg-background/95 backdrop-blur-xl border-b border-white/10 transition-all duration-500 ${
+          isMenuOpen ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-full"
         }`}
       >
         <div className="container mx-auto px-6 py-4">
