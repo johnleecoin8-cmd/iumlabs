@@ -26,13 +26,25 @@ import megaethLaunchImg from "@/assets/campaigns/megaeth-launch.jpg";
 import triaLaunchImg from "@/assets/campaigns/tria-launch.jpg";
 import bybitCompetitionImg from "@/assets/campaigns/bybit-competition.jpg";
 
+// Import project background images
+import bnbBg from "@/assets/projects/bnb-bg.jpg";
+import kucoinBg from "@/assets/projects/kucoin-bg.jpg";
+import polygonBg from "@/assets/projects/polygon-bg.jpg";
+import ondoBg from "@/assets/projects/ondo-bg.jpg";
+import peaqBg from "@/assets/projects/peaq-bg.jpg";
+import storyBg from "@/assets/projects/story-bg.jpg";
+import megaethBg from "@/assets/projects/megaeth-bg.jpg";
+import triaBg from "@/assets/projects/tria-bg.jpg";
+import bybitBg from "@/assets/projects/bybit-bg.jpg";
+
 // Project data
 const projectsData: Record<string, {
   name: string;
   logo: string;
+  bgImage: string;
   category: string;
   result: string;
-  bgStyle: string;
+  glowColor: string;
   description: string;
   challenge: string;
   metrics: { value: string; label: string }[];
@@ -46,9 +58,10 @@ const projectsData: Record<string, {
   "bnb-chain": {
     name: "BNB Chain",
     logo: bnbLogo,
+    bgImage: bnbBg,
     category: "Infrastructure",
     result: "+340% Korean Trading Volume",
-    bgStyle: "bg-gradient-to-br from-[#F3BA2F] via-[#F0B90B] to-[#C99100]",
+    glowColor: "#F3BA2F",
     description: "BNB Chain sought to dramatically increase their presence in the Korean market, targeting both retail traders and institutional investors.",
     challenge: "Despite being one of the largest blockchain ecosystems globally, BNB Chain had limited brand recognition in Korea compared to local exchanges. They needed a comprehensive strategy to capture the Korean market while navigating local regulations.",
     metrics: [
@@ -87,9 +100,10 @@ const projectsData: Record<string, {
   "kucoin": {
     name: "KuCoin",
     logo: kucoinLogo,
+    bgImage: kucoinBg,
     category: "Exchange",
     result: "50K+ New Korean Users",
-    bgStyle: "bg-gradient-to-br from-[#23AF91] via-[#1A9B7F] to-[#147A63]",
+    glowColor: "#23AF91",
     description: "KuCoin aimed to expand their user base in Korea and establish themselves as a trusted global exchange option for Korean traders.",
     challenge: "Competing with established Korean exchanges while building trust with Korean users who typically prefer local platforms. The challenge was to demonstrate KuCoin's unique value proposition.",
     metrics: [
@@ -128,9 +142,10 @@ const projectsData: Record<string, {
   "polygon": {
     name: "Polygon",
     logo: polygonLogo,
+    bgImage: polygonBg,
     category: "Layer 2",
     result: "$2M Korean TVL in 30 Days",
-    bgStyle: "bg-gradient-to-br from-[#8247E5] via-[#7B3FE4] to-[#5A2D9C]",
+    glowColor: "#8247E5",
     description: "Polygon wanted to increase adoption of their Layer 2 solution among Korean DeFi users and developers.",
     challenge: "While Polygon had strong technical credentials, Korean users were unfamiliar with Layer 2 solutions. Education and trust-building were critical.",
     metrics: [
@@ -169,9 +184,10 @@ const projectsData: Record<string, {
   "ondo": {
     name: "Ondo Finance",
     logo: ondoLogo,
+    bgImage: ondoBg,
     category: "RWA",
     result: "100K+ Korean Community",
-    bgStyle: "bg-gradient-to-br from-[#0A1628] via-[#1E3A5F] to-[#0D1B2A]",
+    glowColor: "#3B82F6",
     description: "Ondo Finance aimed to introduce Real World Asset (RWA) tokenization to the Korean market, targeting both retail and institutional investors.",
     challenge: "RWA was a new concept for most Korean crypto investors. Building understanding and trust around tokenized securities required extensive education.",
     metrics: [
@@ -210,9 +226,10 @@ const projectsData: Record<string, {
   "peaq": {
     name: "Peaq",
     logo: peaqLogo,
+    bgImage: peaqBg,
     category: "DePIN",
     result: "#1 DePIN in Korea",
-    bgStyle: "bg-gradient-to-br from-[#00E5A0] via-[#00D4AA] to-[#00A080]",
+    glowColor: "#00CED1",
     description: "Peaq aimed to become the leading DePIN (Decentralized Physical Infrastructure Network) platform in Korea.",
     challenge: "DePIN was an emerging narrative with limited awareness. Peaq needed to establish thought leadership while building a strong community.",
     metrics: [
@@ -251,9 +268,10 @@ const projectsData: Record<string, {
   "story-protocol": {
     name: "Story Protocol",
     logo: storyLogo,
+    bgImage: storyBg,
     category: "IP Protocol",
     result: "5K+ Korean Creators",
-    bgStyle: "bg-gradient-to-br from-[#FF6B6B] via-[#E5484D] to-[#C92A2A]",
+    glowColor: "#FF6B9D",
     description: "Story Protocol sought to onboard Korean content creators to their IP tokenization platform, targeting webtoon artists, musicians, and digital creators.",
     challenge: "Korean creators were unfamiliar with IP tokenization and blockchain technology. Building trust and demonstrating clear value was essential.",
     metrics: [
@@ -292,9 +310,10 @@ const projectsData: Record<string, {
   "megaeth": {
     name: "MegaETH",
     logo: megaethLogo,
+    bgImage: megaethBg,
     category: "Layer 2",
     result: "+500% Korean Engagement",
-    bgStyle: "bg-gradient-to-br from-[#1a1a2e] via-[#3C4DBB] to-[#627EEA]",
+    glowColor: "#4169E1",
     description: "MegaETH aimed to build strong community presence in Korea ahead of their mainnet launch.",
     challenge: "As a new L2 project, MegaETH needed to differentiate from established competitors and build early community momentum.",
     metrics: [
@@ -333,9 +352,10 @@ const projectsData: Record<string, {
   "tria": {
     name: "Tria",
     logo: triaLogo,
+    bgImage: triaBg,
     category: "Wallet",
     result: "30K+ Korean Wallets",
-    bgStyle: "bg-gradient-to-br from-[#FF9500] via-[#FFB347] to-[#FF7F00]",
+    glowColor: "#FF7F50",
     description: "Tria wanted to become the go-to Web3 wallet for Korean users with their simplified UX approach.",
     challenge: "Korean users had many wallet options. Tria needed to demonstrate their unique value proposition and ease of use.",
     metrics: [
@@ -374,9 +394,10 @@ const projectsData: Record<string, {
   "bybit": {
     name: "Bybit",
     logo: bybitLogo,
+    bgImage: bybitBg,
     category: "Exchange",
     result: "#2 Korean Exchange Traffic",
-    bgStyle: "bg-gradient-to-br from-[#F7A600] via-[#FFB800] to-[#E69500]",
+    glowColor: "#F7931A",
     description: "Bybit aimed to capture significant market share in the competitive Korean exchange landscape.",
     challenge: "Competing against dominant local exchanges required a sophisticated, multi-channel approach to user acquisition and retention.",
     metrics: [
@@ -477,18 +498,31 @@ const ProjectDetail = () => {
         onNavigate={setLightboxIndex}
       />
       
-      {/* Hero Section - Lunar Strategy Style */}
-      <section className={`relative min-h-[70vh] ${project.bgStyle} overflow-hidden`}>
-        {/* Parallax Effect */}
+      {/* Hero Section - with Background Image */}
+      <section className="relative min-h-[70vh] overflow-hidden">
+        {/* Background Image */}
         <div 
-          className="absolute inset-0 bg-black/20"
-          style={{ transform: `translateY(${scrollY * 0.1}px)` }}
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ 
+            backgroundImage: `url(${project.bgImage})`,
+            transform: `translateY(${scrollY * 0.1}px)` 
+          }}
+        />
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-black/40" />
+        
+        {/* Glow Effect */}
+        <div 
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `radial-gradient(ellipse at 30% 50%, ${project.glowColor}30 0%, transparent 50%)`,
+          }}
         />
         
         {/* Decorative Gradient Blurs */}
         <div className="absolute top-20 right-10 w-96 h-96 rounded-full bg-white/10 blur-3xl animate-pulse" />
         <div className="absolute bottom-20 left-10 w-72 h-72 rounded-full bg-white/5 blur-3xl" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-black/10 blur-3xl" />
         
         {/* Grid Pattern Overlay */}
         <div 

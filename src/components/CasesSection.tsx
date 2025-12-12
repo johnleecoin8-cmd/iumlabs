@@ -17,6 +17,9 @@ import bybitLogo from "@/assets/logos/bybit.png";
 import bnbBg from "@/assets/projects/bnb-bg.jpg";
 import kucoinBg from "@/assets/projects/kucoin-bg.jpg";
 import polygonBg from "@/assets/projects/polygon-bg.jpg";
+import ondoBg from "@/assets/projects/ondo-bg.jpg";
+import peaqBg from "@/assets/projects/peaq-bg.jpg";
+import storyBg from "@/assets/projects/story-bg.jpg";
 
 const featuredCases = [
   {
@@ -29,7 +32,6 @@ const featuredCases = [
     resultLabel: "Community Members",
     description: "Full-service marketing campaign for Korea market entry",
     glowColor: "#F3BA2F",
-    accentColor: "text-[#F3BA2F]",
   },
   {
     name: "KuCoin",
@@ -41,7 +43,6 @@ const featuredCases = [
     resultLabel: "Trading Volume",
     description: "Community growth and influencer marketing strategy",
     glowColor: "#23AF91",
-    accentColor: "text-[#23AF91]",
   },
   {
     name: "Polygon",
@@ -53,14 +54,43 @@ const featuredCases = [
     resultLabel: "Dapps Onboarded",
     description: "Developer outreach and ecosystem expansion",
     glowColor: "#8247E5",
-    accentColor: "text-[#8247E5]",
+  },
+  {
+    name: "Ondo Finance",
+    logo: ondoLogo,
+    bgImage: ondoBg,
+    slug: "ondo",
+    category: "RWA",
+    result: "100K+",
+    resultLabel: "Korean Community",
+    description: "RWA education campaign for Korean investors",
+    glowColor: "#3B82F6",
+  },
+  {
+    name: "Peaq",
+    logo: peaqLogo,
+    bgImage: peaqBg,
+    slug: "peaq",
+    category: "DePIN",
+    result: "#1",
+    resultLabel: "DePIN in Korea",
+    description: "Thought leadership in DePIN space",
+    glowColor: "#00CED1",
+  },
+  {
+    name: "Story Protocol",
+    logo: storyLogo,
+    bgImage: storyBg,
+    slug: "story-protocol",
+    category: "IP Protocol",
+    result: "5K+",
+    resultLabel: "Korean Creators",
+    description: "Korean content creator onboarding",
+    glowColor: "#FF6B9D",
   },
 ];
 
 const clientLogos = [
-  { name: "Ondo", logo: ondoLogo },
-  { name: "Peaq", logo: peaqLogo },
-  { name: "Story Protocol", logo: storyLogo },
   { name: "MegaETH", logo: megaethLogo },
   { name: "Tria", logo: triaLogo },
   { name: "Bybit", logo: bybitLogo },
@@ -91,8 +121,8 @@ const CasesSection = () => {
           </Link>
         </div>
 
-        {/* Featured Cases Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
+        {/* Featured Cases Grid - 2 rows of 3 */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {featuredCases.map((project, index) => (
             <Link
               key={index}
