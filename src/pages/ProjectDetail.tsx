@@ -513,10 +513,10 @@ const ProjectDetail = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/60 via-transparent to-[#0A0A0A]" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/80 via-transparent to-transparent" />
         
-        {/* Neon Green Glow Blobs */}
+        {/* Project Color Glow Blobs */}
         <div 
           className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full blur-[150px] opacity-40 animate-pulse"
-          style={{ background: 'radial-gradient(circle, #1DB954 0%, transparent 70%)' }}
+          style={{ background: `radial-gradient(circle, ${project.glowColor} 0%, transparent 70%)` }}
         />
         <div 
           className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full blur-[120px] opacity-30"
@@ -528,8 +528,8 @@ const ProjectDetail = () => {
           className="absolute inset-0 opacity-[0.08] pointer-events-none"
           style={{
             backgroundImage: `
-              linear-gradient(#1DB954 1px, transparent 1px),
-              linear-gradient(90deg, #1DB954 1px, transparent 1px)
+              linear-gradient(${project.glowColor} 1px, transparent 1px),
+              linear-gradient(90deg, ${project.glowColor} 1px, transparent 1px)
             `,
             backgroundSize: '80px 80px'
           }}
@@ -540,16 +540,25 @@ const ProjectDetail = () => {
           {/* Back Button */}
           <button
             onClick={() => navigate("/projects")}
-            className="group flex items-center gap-2 text-white/60 hover:text-[#1DB954] mb-12 transition-colors"
+            className="group flex items-center gap-2 text-white/60 mb-12 transition-colors"
+            style={{ '--hover-color': project.glowColor } as React.CSSProperties}
+            onMouseEnter={(e) => e.currentTarget.style.color = project.glowColor}
+            onMouseLeave={(e) => e.currentTarget.style.color = ''}
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             <span className="text-sm uppercase tracking-wider">Back to Projects</span>
           </button>
 
           {/* Category Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1DB954]/20 border border-[#1DB954]/40 mb-6">
-            <div className="w-2 h-2 rounded-full bg-[#1DB954] animate-pulse" />
-            <span className="text-[#1DB954] text-xs uppercase tracking-widest font-medium">
+          <div 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+            style={{ 
+              backgroundColor: `${project.glowColor}20`, 
+              border: `1px solid ${project.glowColor}40` 
+            }}
+          >
+            <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: project.glowColor }} />
+            <span className="text-xs uppercase tracking-widest font-medium" style={{ color: project.glowColor }}>
               {project.category}
             </span>
           </div>
@@ -560,10 +569,14 @@ const ProjectDetail = () => {
               <img
                 src={project.logo}
                 alt={project.name}
-                className="w-24 h-24 object-contain filter brightness-0 invert drop-shadow-[0_0_30px_rgba(29,185,84,0.5)]"
+                className="w-24 h-24 object-contain filter brightness-0 invert"
+                style={{ filter: `brightness(0) invert(1) drop-shadow(0 0 30px ${project.glowColor}80)` }}
               />
               {/* Glow ring behind logo */}
-              <div className="absolute inset-0 rounded-full bg-[#1DB954]/20 blur-xl -z-10 scale-150" />
+              <div 
+                className="absolute inset-0 rounded-full blur-xl -z-10 scale-150" 
+                style={{ backgroundColor: `${project.glowColor}20` }}
+              />
             </div>
             
             <div>
@@ -577,22 +590,24 @@ const ProjectDetail = () => {
           </div>
 
           {/* Key Result Badge */}
-          <div className="mt-12 inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-black/40 backdrop-blur-sm border border-[#1DB954]/30">
+          <div 
+            className="mt-12 inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-black/40 backdrop-blur-sm"
+            style={{ border: `1px solid ${project.glowColor}30` }}
+          >
             <span className="text-white/50 text-sm uppercase tracking-wider">Key Result</span>
-            <span className="text-[#1DB954] text-2xl md:text-3xl font-bold">{project.result}</span>
+            <span className="text-2xl md:text-3xl font-bold" style={{ color: project.glowColor }}>{project.result}</span>
           </div>
         </div>
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
-          <div className="w-px h-12 bg-gradient-to-b from-[#1DB954] to-transparent animate-pulse" />
-          <span className="text-[#1DB954]/60 text-xs uppercase tracking-widest">Scroll</span>
+          <div className="w-px h-12 animate-pulse" style={{ background: `linear-gradient(to bottom, ${project.glowColor}, transparent)` }} />
+          <span className="text-xs uppercase tracking-widest" style={{ color: `${project.glowColor}60` }}>Scroll</span>
         </div>
       </section>
 
-      {/* Key Result Marquee - Neon Style */}
-      <div className="bg-[#1DB954] py-4 overflow-hidden relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1DB954] via-[#1ed760] to-[#1DB954]" />
+      {/* Key Result Marquee - Project Color Style */}
+      <div className="py-4 overflow-hidden relative" style={{ backgroundColor: project.glowColor }}>
         <div className="flex animate-marquee whitespace-nowrap relative">
           {[...Array(10)].map((_, i) => (
             <span key={i} className="mx-8 text-black text-sm font-bold uppercase tracking-widest flex items-center gap-4">
@@ -603,7 +618,7 @@ const ProjectDetail = () => {
         </div>
       </div>
 
-      {/* Metrics Section - Dark Neon Style */}
+      {/* Metrics Section - Dark Project Color Style */}
       <section className="bg-[#0A0A0A] py-16">
         <div className="container mx-auto max-w-6xl px-4">
           {/* Metrics Grid */}
@@ -611,17 +626,23 @@ const ProjectDetail = () => {
             {project.metrics.map((metric, index) => (
               <div 
                 key={index} 
-                className="group relative p-6 md:p-8 rounded-2xl bg-[#111] border border-white/10 hover:border-[#1DB954]/50 transition-all duration-300 overflow-hidden"
+                className="group relative p-6 md:p-8 rounded-2xl bg-[#111] border border-white/10 transition-all duration-300 overflow-hidden"
+                style={{ '--glow-color': project.glowColor } as React.CSSProperties}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = `${project.glowColor}50`}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
               >
                 {/* Hover Glow */}
-                <div className="absolute inset-0 bg-[#1DB954]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" 
+                  style={{ backgroundColor: `${project.glowColor}08` }}
+                />
                 <div 
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                  style={{ boxShadow: 'inset 0 0 40px rgba(29,185,84,0.1)' }}
+                  style={{ boxShadow: `inset 0 0 40px ${project.glowColor}15` }}
                 />
                 
                 <div className="relative">
-                  <p className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1DB954] mb-2 tracking-tight">
+                  <p className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 tracking-tight" style={{ color: project.glowColor }}>
                     {metric.value}
                   </p>
                   <p className="text-white/50 text-xs md:text-sm font-medium uppercase tracking-wider">
@@ -642,10 +663,13 @@ const ProjectDetail = () => {
             {/* Left - THE CHALLENGE */}
             <div className="p-8 md:p-12 rounded-3xl bg-[#111] border border-white/10 relative overflow-hidden">
               {/* Accent Line */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#1DB954] via-[#1DB954]/50 to-transparent" />
+              <div 
+                className="absolute top-0 left-0 w-full h-1" 
+                style={{ background: `linear-gradient(to right, ${project.glowColor}, ${project.glowColor}50, transparent)` }}
+              />
               
-              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#1DB954] mb-6">
-                <span className="w-6 h-px bg-[#1DB954]" />
+              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] mb-6" style={{ color: project.glowColor }}>
+                <span className="w-6 h-px" style={{ backgroundColor: project.glowColor }} />
                 The Challenge
               </span>
               <p className="text-white text-xl md:text-2xl font-light leading-relaxed">
@@ -663,11 +687,11 @@ const ProjectDetail = () => {
                 What We Did
               </span>
               
-              {/* Services List with Neon Dots */}
+              {/* Services List with Project Color Dots */}
               <div className="space-y-4 mb-8">
                 {project.services.map((service, i) => (
                   <div key={i} className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[#1DB954]" />
+                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: project.glowColor }} />
                     <span className="text-white text-lg">{service}</span>
                   </div>
                 ))}
@@ -685,18 +709,18 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Gallery Section - Dark Neon Style */}
+      {/* Gallery Section - Dark Project Color Style */}
       <section className="bg-[#0A0A0A] py-16">
         <div className="container mx-auto max-w-6xl px-4">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
             <div>
-              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#1DB954] mb-4">
-                <span className="w-6 h-px bg-[#1DB954]" />
+              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] mb-4" style={{ color: project.glowColor }}>
+                <span className="w-6 h-px" style={{ backgroundColor: project.glowColor }} />
                 Gallery
               </span>
               <h2 className="text-white text-4xl md:text-5xl font-bold">
-                Campaign <span className="text-[#1DB954]">Highlights</span>
+                Campaign <span style={{ color: project.glowColor }}>Highlights</span>
               </h2>
             </div>
             
@@ -704,15 +728,19 @@ const ProjectDetail = () => {
             <div className="flex gap-3">
               <button
                 onClick={() => scrollGallery('left')}
-                className="w-12 h-12 rounded-full border border-white/20 hover:border-[#1DB954] hover:bg-[#1DB954]/10 flex items-center justify-center transition-all group"
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group"
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.glowColor; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.backgroundColor = ''; }}
               >
-                <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-[#1DB954]" />
+                <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-white" />
               </button>
               <button
                 onClick={() => scrollGallery('right')}
-                className="w-12 h-12 rounded-full border border-white/20 hover:border-[#1DB954] hover:bg-[#1DB954]/10 flex items-center justify-center transition-all group"
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group"
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.glowColor; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.backgroundColor = ''; }}
               >
-                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-[#1DB954]" />
+                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white" />
               </button>
             </div>
           </div>
@@ -726,8 +754,10 @@ const ProjectDetail = () => {
               {project.gallery.map((item, index) => (
                 <div 
                   key={index} 
-                  className="relative w-72 md:w-80 aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0 border border-white/10 hover:border-[#1DB954]/50 transition-all"
+                  className="relative w-72 md:w-80 aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0 border border-white/10 transition-all"
                   onClick={() => openLightbox(index)}
+                  onMouseEnter={(e) => e.currentTarget.style.borderColor = `${project.glowColor}50`}
+                  onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
                 >
                   <img
                     src={item.src}
@@ -738,10 +768,10 @@ const ProjectDetail = () => {
                   {/* Overlay */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   
-                  {/* Neon border glow on hover */}
+                  {/* Project color border glow on hover */}
                   <div 
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-2xl"
-                    style={{ boxShadow: 'inset 0 0 30px rgba(29,185,84,0.3), 0 0 40px rgba(29,185,84,0.2)' }}
+                    style={{ boxShadow: `inset 0 0 30px ${project.glowColor}40, 0 0 40px ${project.glowColor}30` }}
                   />
                   
                   {/* Content */}
@@ -751,7 +781,10 @@ const ProjectDetail = () => {
                   </div>
 
                   {/* Expand Icon */}
-                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-[#1DB954] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100">
+                  <div 
+                    className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100"
+                    style={{ backgroundColor: project.glowColor }}
+                  >
                     <ArrowUpRight className="w-5 h-5 text-black" />
                   </div>
                 </div>
@@ -761,7 +794,7 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Next Project - Dark Neon Style */}
+      {/* Next Project - Dark Project Color Style */}
       <section className="py-24 bg-[#0A0A0A] border-t border-white/10">
         <div className="container mx-auto max-w-6xl px-4">
           <Link 
@@ -769,23 +802,33 @@ const ProjectDetail = () => {
             onClick={() => window.scrollTo(0, 0)}
             className="block group"
           >
-            <p className="text-[#1DB954] text-sm uppercase tracking-widest mb-6 flex items-center gap-3">
-              <span className="w-8 h-px bg-[#1DB954]" />
+            <p className="text-sm uppercase tracking-widest mb-6 flex items-center gap-3" style={{ color: nextProject.glowColor }}>
+              <span className="w-8 h-px" style={{ backgroundColor: nextProject.glowColor }} />
               Next Project
             </p>
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white group-hover:text-[#1DB954] transition-colors duration-300 mb-3">
+                <h3 
+                  className="text-5xl md:text-7xl lg:text-8xl font-bold text-white transition-colors duration-300 mb-3"
+                  onMouseEnter={(e) => e.currentTarget.style.color = nextProject.glowColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                >
                   {nextProject.name}
                 </h3>
                 <p className="text-white/50 text-xl">{nextProject.result}</p>
               </div>
               <div className="relative">
-                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-white/20 group-hover:border-[#1DB954] group-hover:bg-[#1DB954]/10 flex items-center justify-center transition-all duration-300">
-                  <ArrowUpRight className="w-8 h-8 md:w-10 md:h-10 text-white/50 group-hover:text-[#1DB954] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                <div 
+                  className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300"
+                  style={{ '--next-glow': nextProject.glowColor } as React.CSSProperties}
+                >
+                  <ArrowUpRight className="w-8 h-8 md:w-10 md:h-10 text-white/50 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
                 </div>
                 {/* Glow on hover */}
-                <div className="absolute inset-0 rounded-full bg-[#1DB954]/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
+                <div 
+                  className="absolute inset-0 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" 
+                  style={{ backgroundColor: `${nextProject.glowColor}40` }}
+                />
               </div>
             </div>
           </Link>
