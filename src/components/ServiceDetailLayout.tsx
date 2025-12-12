@@ -30,6 +30,7 @@ interface ServiceDetailLayoutProps {
   aboutText: string;
   whatIncludesText: string;
   processSteps: ProcessStep[];
+  aboutImage?: string;
   floatingTags?: Array<{
     label: string;
     top?: string;
@@ -63,6 +64,7 @@ const ServiceDetailLayout = ({
   aboutText,
   whatIncludesText,
   processSteps,
+  aboutImage,
 }: ServiceDetailLayoutProps) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -88,25 +90,34 @@ const ServiceDetailLayout = ({
 
       {/* Hero Section - Blue Gradient */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-gradient-to-br from-[#1e3a8a] via-[#2563eb] to-[#0891b2]">
-        {/* Abstract 3D Shapes */}
+        {/* Abstract 3D Shapes with Float Animation */}
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[50%] h-[70%] opacity-70 pointer-events-none hidden lg:block">
           <div className="relative w-full h-full">
             {/* Large metallic sphere */}
-            <div className="absolute top-[5%] right-[15%] w-72 h-72 rounded-full bg-gradient-to-br from-white/40 via-white/20 to-transparent backdrop-blur-sm border border-white/30 shadow-2xl" />
+            <div 
+              className="absolute top-[5%] right-[15%] w-72 h-72 rounded-full bg-gradient-to-br from-white/40 via-white/20 to-transparent backdrop-blur-sm border border-white/30 shadow-2xl animate-float"
+              style={{ animationDuration: "6s" }}
+            />
             {/* Medium rounded rectangle */}
             <div 
-              className="absolute top-[35%] right-[5%] w-56 h-56 rounded-[40px] bg-gradient-to-tr from-cyan-200/30 via-white/25 to-transparent backdrop-blur-md border border-white/40 rotate-12 shadow-xl"
-              style={{ animationDelay: "0.5s" }} 
+              className="absolute top-[35%] right-[5%] w-56 h-56 rounded-[40px] bg-gradient-to-tr from-cyan-200/30 via-white/25 to-transparent backdrop-blur-md border border-white/40 rotate-12 shadow-xl animate-float"
+              style={{ animationDuration: "8s", animationDelay: "1s" }} 
             />
             {/* Small accent shape */}
             <div 
-              className="absolute top-[55%] right-[30%] w-40 h-40 rounded-3xl bg-gradient-to-bl from-blue-100/35 via-white/20 to-transparent backdrop-blur-lg border border-white/30 -rotate-6 shadow-lg"
-              style={{ animationDelay: "1s" }} 
+              className="absolute top-[55%] right-[30%] w-40 h-40 rounded-3xl bg-gradient-to-bl from-blue-100/35 via-white/20 to-transparent backdrop-blur-lg border border-white/30 -rotate-6 shadow-lg animate-float"
+              style={{ animationDuration: "7s", animationDelay: "2s" }} 
             />
             {/* Tiny floating orb */}
-            <div className="absolute top-[15%] right-[0%] w-20 h-20 rounded-full bg-gradient-to-r from-white/50 to-white/20 border border-white/30 shadow-md" />
+            <div 
+              className="absolute top-[15%] right-[0%] w-20 h-20 rounded-full bg-gradient-to-r from-white/50 to-white/20 border border-white/30 shadow-md animate-float"
+              style={{ animationDuration: "5s", animationDelay: "0.5s" }}
+            />
             {/* Extra accent */}
-            <div className="absolute top-[70%] right-[20%] w-16 h-16 rounded-full bg-white/30 border border-white/20" />
+            <div 
+              className="absolute top-[70%] right-[20%] w-16 h-16 rounded-full bg-white/30 border border-white/20 animate-float"
+              style={{ animationDuration: "9s", animationDelay: "3s" }}
+            />
           </div>
         </div>
 
@@ -178,21 +189,37 @@ const ServiceDetailLayout = ({
 
           {/* Right Column - Image/Pattern */}
           <div className="w-full lg:w-1/2 relative min-h-[400px] lg:min-h-full">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#2563eb] via-[#3b82f6] to-[#0891b2]">
-              {/* Abstract pattern overlay */}
-              <div className="absolute inset-0 opacity-40">
-                <div className="absolute top-[15%] left-[15%] w-40 h-40 rounded-full border-2 border-white/40" />
-                <div className="absolute top-[35%] left-[45%] w-64 h-64 rounded-full border border-white/25" />
-                <div className="absolute top-[55%] left-[25%] w-28 h-28 rounded-full border-2 border-white/50" />
-                <div className="absolute top-[20%] left-[60%] w-20 h-20 rounded-full bg-white/15" />
-                <div className="absolute top-[65%] left-[55%] w-32 h-32 rounded-full border border-white/30" />
+            {aboutImage ? (
+              <div className="absolute inset-0">
+                <img 
+                  src={aboutImage} 
+                  alt="Service" 
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-br from-[#2563eb]/60 via-[#3b82f6]/40 to-[#0891b2]/60" />
+                {/* Open Hours Card */}
+                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/15 backdrop-blur-md rounded-xl px-6 py-5 border border-white/25">
+                  <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
+                  <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
+                </div>
               </div>
-              {/* Open Hours Card */}
-              <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/15 backdrop-blur-md rounded-xl px-6 py-5 border border-white/25">
-                <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
-                <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-[#2563eb] via-[#3b82f6] to-[#0891b2]">
+                {/* Abstract pattern overlay */}
+                <div className="absolute inset-0 opacity-40">
+                  <div className="absolute top-[15%] left-[15%] w-40 h-40 rounded-full border-2 border-white/40" />
+                  <div className="absolute top-[35%] left-[45%] w-64 h-64 rounded-full border border-white/25" />
+                  <div className="absolute top-[55%] left-[25%] w-28 h-28 rounded-full border-2 border-white/50" />
+                  <div className="absolute top-[20%] left-[60%] w-20 h-20 rounded-full bg-white/15" />
+                  <div className="absolute top-[65%] left-[55%] w-32 h-32 rounded-full border border-white/30" />
+                </div>
+                {/* Open Hours Card */}
+                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/15 backdrop-blur-md rounded-xl px-6 py-5 border border-white/25">
+                  <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
+                  <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </section>

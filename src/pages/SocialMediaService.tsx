@@ -1,12 +1,5 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
-import seoulSkyline from "@/assets/seoul-skyline.jpg";
-
-const floatingTags = [
-  { label: "X / Twitter", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%" },
-  { label: "Content", top: "28%", right: "8%", mobileTop: "15%", mobileRight: "3%" },
-  { label: "Engagement", top: "52%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
-  { label: "Visibility", bottom: "32%", right: "6%", mobileBottom: "18%", mobileRight: "3%" },
-];
+import socialMediaImage from "@/assets/backgrounds/seoul-gangnam-night.jpg";
 
 const processSteps = [
   {
@@ -41,8 +34,7 @@ const SocialMediaService = () => {
       aboutText="We manage your presence on X with consistent, high-impact content and real-time ecosystem awareness. Our team handles content strategy, post creation, community replies, and partner engagement while tracking sentiment and identifying opportunities to amplify momentum. It is more than posting. It is building a credible, consistent voice that grows with your project."
       whatIncludesText="We manage your project's presence on X by building a content strategy, creating high-impact posts, and actively monitoring the ecosystem to engage, reply, and amplify the right conversations."
       processSteps={processSteps}
-      floatingTags={floatingTags}
-      backgroundImage={seoulSkyline}
+      aboutImage={socialMediaImage}
     />
   );
 };

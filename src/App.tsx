@@ -11,9 +11,6 @@ import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
 import Research from "./pages/Research";
 import ResearchDetail from "./pages/ResearchDetail";
-import NFTService from "./pages/NFTService";
-import DeFiService from "./pages/DeFiService";
-import GameFiService from "./pages/GameFiService";
 import GTMStrategyService from "./pages/GTMStrategyService";
 import CommunityService from "./pages/CommunityService";
 import SocialMediaService from "./pages/SocialMediaService";
@@ -21,6 +18,7 @@ import InfluencerService from "./pages/InfluencerService";
 import YapService from "./pages/YapService";
 import PRService from "./pages/PRService";
 import NotFound from "./pages/NotFound";
+
 const queryClient = new QueryClient();
 
 // Page transition wrapper with smooth animations
@@ -62,9 +60,6 @@ const AppRoutes = () => {
       <Routes location={location}>
         <Route path="/" element={<Index />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/services/nft" element={<NFTService />} />
-        <Route path="/services/defi" element={<DeFiService />} />
-        <Route path="/services/gamefi" element={<GameFiService />} />
         <Route path="/services/gtm" element={<GTMStrategyService />} />
         <Route path="/services/community" element={<CommunityService />} />
         <Route path="/services/social-media" element={<SocialMediaService />} />

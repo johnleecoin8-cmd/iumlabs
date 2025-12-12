@@ -1,12 +1,5 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
-import constellationSpace from "@/assets/constellation-space.jpg";
-
-const floatingTags = [
-  { label: "Discord", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%" },
-  { label: "Engagement", top: "28%", right: "8%", mobileTop: "15%", mobileRight: "3%" },
-  { label: "Growth", top: "52%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
-  { label: "AI Automation", bottom: "32%", right: "6%", mobileBottom: "18%", mobileRight: "3%" },
-];
+import communityImage from "@/assets/services/community-growth.jpg";
 
 const processSteps = [
   {
@@ -36,8 +29,7 @@ const CommunityService = () => {
       aboutText="Complete Discord infrastructure transforms servers into growth engines through AI automation, gamified engagement, community training and beyond. Our team handles the setup and management while tracking metrics and identifying growth opportunities. It's more than managing chat. It's building a self-sustaining ecosystem that converts visitors into active contributors without overwhelming your team."
       whatIncludesText="We provide a complete Discord infrastructure through AI integration, community training, and gamified mechanics to eliminate user confusion and build sustainable community growth."
       processSteps={processSteps}
-      floatingTags={floatingTags}
-      backgroundImage={constellationSpace}
+      aboutImage={communityImage}
     />
   );
 };

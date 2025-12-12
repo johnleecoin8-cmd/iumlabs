@@ -1,12 +1,5 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
-import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
-
-const floatingTags = [
-  { label: "600+ Yappers", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%" },
-  { label: "Mindshare", top: "28%", right: "8%", mobileTop: "15%", mobileRight: "3%" },
-  { label: "Crypto X", top: "52%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
-  { label: "Organic Reach", bottom: "32%", right: "6%", mobileBottom: "18%", mobileRight: "3%" },
-];
+import eventsImage from "@/assets/services/events.jpg";
 
 const processSteps = [
   {
@@ -41,8 +34,7 @@ const YapService = () => {
       aboutText="Yap Circle is our curated Yapper network designed to give your project consistent Mindshare and credible exposure across X. With 600+ Yappers, we activate waves of organic content around your narrative. It's a flexible, always-on strategy that reaches deep into crypto's most active segments without relying on Kaito's expensive leaderboard campaigns."
       whatIncludesText="We run targeted Yap campaigns by publishing briefs to our network of 600+ creators. They opt in and post aligned content that fits your story, timing, and target audience. We coordinate the rollout, monitor performance, and amplify what gains traction."
       processSteps={processSteps}
-      floatingTags={floatingTags}
-      backgroundImage={seoulBridgeNight}
+      aboutImage={eventsImage}
     />
   );
 };
