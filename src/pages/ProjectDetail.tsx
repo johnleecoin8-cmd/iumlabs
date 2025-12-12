@@ -486,7 +486,7 @@ const ProjectDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
       {/* Lightbox */}
@@ -498,231 +498,261 @@ const ProjectDetail = () => {
         onNavigate={setLightboxIndex}
       />
       
-      {/* Hero Section - with Background Image */}
-      <section className="relative min-h-[70vh] overflow-hidden">
-        {/* Background Image */}
+      {/* Hero Section - Neon Green Marketing Style */}
+      <section className="relative min-h-[85vh] overflow-hidden">
+        {/* Background Image with Ken Burns */}
         <div 
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-[-10%] bg-cover bg-center animate-kenburns"
           style={{ 
             backgroundImage: `url(${project.bgImage})`,
-            transform: `translateY(${scrollY * 0.1}px)` 
+            filter: 'brightness(0.4) saturate(1.3)',
           }}
         />
         
-        {/* Dark Overlay */}
-        <div className="absolute inset-0 bg-black/40" />
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/60 via-transparent to-[#0A0A0A]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/80 via-transparent to-transparent" />
         
-        {/* Glow Effect */}
+        {/* Neon Green Glow Blobs */}
         <div 
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `radial-gradient(ellipse at 30% 50%, ${project.glowColor}30 0%, transparent 50%)`,
-          }}
+          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full blur-[150px] opacity-40 animate-pulse"
+          style={{ background: 'radial-gradient(circle, #1DB954 0%, transparent 70%)' }}
         />
-        
-        {/* Decorative Gradient Blurs */}
-        <div className="absolute top-20 right-10 w-96 h-96 rounded-full bg-white/10 blur-3xl animate-pulse" />
-        <div className="absolute bottom-20 left-10 w-72 h-72 rounded-full bg-white/5 blur-3xl" />
+        <div 
+          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full blur-[120px] opacity-30"
+          style={{ background: `radial-gradient(circle, ${project.glowColor} 0%, transparent 70%)` }}
+        />
         
         {/* Grid Pattern Overlay */}
         <div 
-          className="absolute inset-0 opacity-[0.15] pointer-events-none"
+          className="absolute inset-0 opacity-[0.08] pointer-events-none"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+              linear-gradient(#1DB954 1px, transparent 1px),
+              linear-gradient(90deg, #1DB954 1px, transparent 1px)
             `,
-            backgroundSize: '60px 60px'
-          }}
-        />
-
-        {/* Diagonal Lines Pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.05] pointer-events-none"
-          style={{
-            backgroundImage: `repeating-linear-gradient(
-              45deg,
-              transparent,
-              transparent 20px,
-              rgba(255,255,255,0.1) 20px,
-              rgba(255,255,255,0.1) 21px
-            )`
+            backgroundSize: '80px 80px'
           }}
         />
         
         {/* Content */}
-        <div className="relative z-10 container mx-auto max-w-6xl px-4 pt-28 pb-16">
+        <div className="relative z-10 container mx-auto max-w-6xl px-4 pt-32 pb-20">
           {/* Back Button */}
           <button
             onClick={() => navigate("/projects")}
-            className="flex items-center gap-2 text-white/80 hover:text-white mb-8 transition-colors"
+            className="group flex items-center gap-2 text-white/60 hover:text-[#1DB954] mb-12 transition-colors"
           >
-            <ArrowLeft className="w-5 h-5" />
-            <span>Back to Projects</span>
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            <span className="text-sm uppercase tracking-wider">Back to Projects</span>
           </button>
 
+          {/* Category Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#1DB954]/20 border border-[#1DB954]/40 mb-6">
+            <div className="w-2 h-2 rounded-full bg-[#1DB954] animate-pulse" />
+            <span className="text-[#1DB954] text-xs uppercase tracking-widest font-medium">
+              {project.category}
+            </span>
+          </div>
+
           {/* Logo & Name */}
-          <div className="flex flex-col items-start gap-4">
-            <img
-              src={project.logo}
-              alt={project.name}
-              className="w-20 h-20 object-contain filter brightness-0 invert"
-            />
+          <div className="flex flex-col items-start gap-6">
+            <div className="relative">
+              <img
+                src={project.logo}
+                alt={project.name}
+                className="w-24 h-24 object-contain filter brightness-0 invert drop-shadow-[0_0_30px_rgba(29,185,84,0.5)]"
+              />
+              {/* Glow ring behind logo */}
+              <div className="absolute inset-0 rounded-full bg-[#1DB954]/20 blur-xl -z-10 scale-150" />
+            </div>
+            
             <div>
-              <span className="text-white/70 text-sm uppercase tracking-wider mb-2 block">
-                {project.category}
-              </span>
-              <h1 className="text-5xl md:text-7xl font-light text-white mb-3">
-                <span className="serif-italic">{project.name}</span>
+              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-4 tracking-tight">
+                {project.name}
               </h1>
-              <p className="text-lg md:text-xl text-white/90 max-w-2xl">
+              <p className="text-xl md:text-2xl text-white/70 max-w-2xl leading-relaxed">
                 {project.description}
               </p>
             </div>
           </div>
 
-          {/* Challenge Summary */}
-          <div className="mt-8 bg-black/20 backdrop-blur-sm rounded-xl p-5 border border-white/10 max-w-3xl">
-            <p className="text-white/70 text-sm uppercase tracking-wider mb-2">The Challenge</p>
-            <p className="text-white/90 leading-relaxed">{project.challenge}</p>
+          {/* Key Result Badge */}
+          <div className="mt-12 inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-black/40 backdrop-blur-sm border border-[#1DB954]/30">
+            <span className="text-white/50 text-sm uppercase tracking-wider">Key Result</span>
+            <span className="text-[#1DB954] text-2xl md:text-3xl font-bold">{project.result}</span>
           </div>
         </div>
 
-        {/* Year Indicator - Bottom Left */}
-        <div className="absolute bottom-6 left-6 z-10">
-          <p className="text-white/50 text-xs uppercase tracking-widest">year: 2024</p>
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+          <div className="w-px h-12 bg-gradient-to-b from-[#1DB954] to-transparent animate-pulse" />
+          <span className="text-[#1DB954]/60 text-xs uppercase tracking-widest">Scroll</span>
         </div>
       </section>
 
-      {/* Key Result Marquee */}
-      <div className="bg-[#c8f547] py-3 overflow-hidden">
-        <div className="flex animate-marquee whitespace-nowrap">
+      {/* Key Result Marquee - Neon Style */}
+      <div className="bg-[#1DB954] py-4 overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1DB954] via-[#1ed760] to-[#1DB954]" />
+        <div className="flex animate-marquee whitespace-nowrap relative">
           {[...Array(10)].map((_, i) => (
-            <span key={i} className="mx-8 text-black text-sm font-medium uppercase tracking-wider">
-              key result • key result • key result
+            <span key={i} className="mx-8 text-black text-sm font-bold uppercase tracking-widest flex items-center gap-4">
+              <span className="w-2 h-2 rounded-full bg-black/30" />
+              {project.result}
             </span>
           ))}
         </div>
       </div>
 
-      {/* Metrics + Scope Section Combined - Full Width with Depth */}
-      <section className="relative">
-        {/* Metrics Grid - Compact with subtle shadows */}
-        <div className="flex flex-col md:flex-row border-b border-slate-200">
-          {project.metrics.map((metric, index) => (
-            <div 
-              key={index} 
-              className={`flex-1 bg-gradient-to-b from-slate-50 to-slate-100 p-5 md:p-6 flex flex-col justify-between min-h-[120px] md:min-h-[140px] relative
-                ${index < project.metrics.length - 1 ? 'border-b md:border-b-0 md:border-r border-slate-200' : ''}
-                shadow-[inset_0_1px_0_rgba(255,255,255,0.8),inset_0_-2px_4px_rgba(0,0,0,0.03)]`}
-            >
-              <div>
-                <p className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-1 tracking-tight">
-                  {metric.value}
-                </p>
-                <p className="text-primary text-xs md:text-sm font-medium uppercase tracking-wide">
-                  {metric.label}
-                </p>
-              </div>
-              <span className="text-slate-400 text-xs mt-3">0{index + 1}.</span>
-            </div>
-          ))}
-        </div>
-
-        {/* 2-Column High Contrast Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          {/* Left - THE CHALLENGE (Dark) */}
-          <div className="bg-slate-900 p-10 md:p-16 flex flex-col justify-center min-h-[320px]">
-            <span className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-6">The Challenge</span>
-            <p className="text-white text-xl md:text-2xl lg:text-3xl font-light leading-relaxed">
-              {project.challenge}
-            </p>
-          </div>
-
-          {/* Right - THE APPROACH (Light) */}
-          <div className="bg-slate-50 p-10 md:p-16 flex flex-col justify-center min-h-[320px]">
-            <span className="text-xs uppercase tracking-[0.3em] text-slate-400 mb-6">What We Did</span>
-            
-            {/* Services List */}
-            <div className="space-y-3 mb-8">
-              {project.shortServices.map((service, i) => (
-                <div key={i} className="text-slate-800 text-lg md:text-xl font-medium">
-                  {service}
+      {/* Metrics Section - Dark Neon Style */}
+      <section className="bg-[#0A0A0A] py-16">
+        <div className="container mx-auto max-w-6xl px-4">
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {project.metrics.map((metric, index) => (
+              <div 
+                key={index} 
+                className="group relative p-6 md:p-8 rounded-2xl bg-[#111] border border-white/10 hover:border-[#1DB954]/50 transition-all duration-300 overflow-hidden"
+              >
+                {/* Hover Glow */}
+                <div className="absolute inset-0 bg-[#1DB954]/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                  style={{ boxShadow: 'inset 0 0 40px rgba(29,185,84,0.1)' }}
+                />
+                
+                <div className="relative">
+                  <p className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#1DB954] mb-2 tracking-tight">
+                    {metric.value}
+                  </p>
+                  <p className="text-white/50 text-xs md:text-sm font-medium uppercase tracking-wider">
+                    {metric.label}
+                  </p>
                 </div>
-              ))}
-            </div>
-
-            {/* Divider */}
-            <div className="border-t border-slate-300 my-6" />
-
-            {/* Result Quote */}
-            <p className="text-slate-600 text-sm md:text-base italic leading-relaxed">
-              "{project.strategy[0]}"
-            </p>
+                <span className="absolute bottom-4 right-4 text-white/20 text-xs font-mono">0{index + 1}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Gallery Section - Dark/Light Contrast */}
-      <section className="grid grid-cols-1 md:grid-cols-[400px_1fr]">
-        {/* Left - Title & Navigation (Dark) */}
-        <div className="bg-slate-900 p-10 md:p-12 flex flex-col justify-between min-h-[300px] md:min-h-[400px]">
-          <div>
-            <span className="text-xs uppercase tracking-[0.3em] text-slate-500 mb-6 block">Gallery</span>
-            <h2 className="text-white text-3xl md:text-4xl font-light leading-tight">
-              Campaign<br />
-              <span className="italic text-slate-400">Highlights</span>
-            </h2>
-          </div>
-          
-          {/* Navigation Arrows */}
-          <div className="flex gap-3 mt-8">
-            <button
-              onClick={() => scrollGallery('left')}
-              className="w-12 h-12 rounded-full border border-slate-700 hover:border-slate-500 hover:bg-slate-800 flex items-center justify-center transition-all"
-            >
-              <ChevronLeft className="w-5 h-5 text-slate-400" />
-            </button>
-            <button
-              onClick={() => scrollGallery('right')}
-              className="w-12 h-12 rounded-full border border-slate-700 hover:border-slate-500 hover:bg-slate-800 flex items-center justify-center transition-all"
-            >
-              <ChevronRight className="w-5 h-5 text-slate-400" />
-            </button>
+      {/* Challenge & Approach Section - Dark Theme */}
+      <section className="bg-[#0A0A0A]">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Left - THE CHALLENGE */}
+            <div className="p-8 md:p-12 rounded-3xl bg-[#111] border border-white/10 relative overflow-hidden">
+              {/* Accent Line */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#1DB954] via-[#1DB954]/50 to-transparent" />
+              
+              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#1DB954] mb-6">
+                <span className="w-6 h-px bg-[#1DB954]" />
+                The Challenge
+              </span>
+              <p className="text-white text-xl md:text-2xl font-light leading-relaxed">
+                {project.challenge}
+              </p>
+            </div>
+
+            {/* Right - WHAT WE DID */}
+            <div className="p-8 md:p-12 rounded-3xl bg-[#111] border border-white/10 relative overflow-hidden">
+              {/* Accent Line */}
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-white/30 via-white/10 to-transparent" />
+              
+              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/50 mb-6">
+                <span className="w-6 h-px bg-white/50" />
+                What We Did
+              </span>
+              
+              {/* Services List with Neon Dots */}
+              <div className="space-y-4 mb-8">
+                {project.services.map((service, i) => (
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-[#1DB954]" />
+                    <span className="text-white text-lg">{service}</span>
+                  </div>
+                ))}
+              </div>
+
+              {/* Divider */}
+              <div className="border-t border-white/10 my-6" />
+
+              {/* Strategy Quote */}
+              <p className="text-white/60 text-sm italic leading-relaxed">
+                "{project.strategy[0]}"
+              </p>
+            </div>
           </div>
         </div>
+      </section>
 
-        {/* Right - Gallery Images (Light) */}
-        <div className="bg-slate-100 p-6 md:p-8 overflow-hidden">
+      {/* Gallery Section - Dark Neon Style */}
+      <section className="bg-[#0A0A0A] py-16">
+        <div className="container mx-auto max-w-6xl px-4">
+          {/* Header */}
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+            <div>
+              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[#1DB954] mb-4">
+                <span className="w-6 h-px bg-[#1DB954]" />
+                Gallery
+              </span>
+              <h2 className="text-white text-4xl md:text-5xl font-bold">
+                Campaign <span className="text-[#1DB954]">Highlights</span>
+              </h2>
+            </div>
+            
+            {/* Navigation Arrows */}
+            <div className="flex gap-3">
+              <button
+                onClick={() => scrollGallery('left')}
+                className="w-12 h-12 rounded-full border border-white/20 hover:border-[#1DB954] hover:bg-[#1DB954]/10 flex items-center justify-center transition-all group"
+              >
+                <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-[#1DB954]" />
+              </button>
+              <button
+                onClick={() => scrollGallery('right')}
+                className="w-12 h-12 rounded-full border border-white/20 hover:border-[#1DB954] hover:bg-[#1DB954]/10 flex items-center justify-center transition-all group"
+              >
+                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-[#1DB954]" />
+              </button>
+            </div>
+          </div>
+
+          {/* Gallery Images */}
           <div 
             ref={galleryRef}
-            className="overflow-x-auto scrollbar-hide scroll-smooth -mr-6 md:-mr-8"
+            className="overflow-x-auto scrollbar-hide scroll-smooth -mx-4 px-4"
           >
-            <div className="flex gap-4 pr-6 md:pr-8" style={{ width: 'max-content' }}>
+            <div className="flex gap-5" style={{ width: 'max-content' }}>
               {project.gallery.map((item, index) => (
                 <div 
                   key={index} 
-                  className="relative w-64 md:w-72 aspect-[4/3] overflow-hidden group cursor-pointer flex-shrink-0"
+                  className="relative w-72 md:w-80 aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0 border border-white/10 hover:border-[#1DB954]/50 transition-all"
                   onClick={() => openLightbox(index)}
                 >
                   <img
                     src={item.src}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+                  {/* Neon border glow on hover */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-2xl"
+                    style={{ boxShadow: 'inset 0 0 30px rgba(29,185,84,0.3), 0 0 40px rgba(29,185,84,0.2)' }}
+                  />
                   
                   {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <h3 className="text-white font-medium text-sm mb-1">{item.title}</h3>
-                    <p className="text-white/70 text-xs line-clamp-2">{item.description}</p>
+                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <h3 className="text-white font-semibold text-base mb-1">{item.title}</h3>
+                    <p className="text-white/60 text-sm line-clamp-2">{item.description}</p>
                   </div>
 
                   {/* Expand Icon */}
-                  <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ArrowUpRight className="w-4 h-4 text-slate-900" />
+                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-[#1DB954] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100">
+                    <ArrowUpRight className="w-5 h-5 text-black" />
                   </div>
                 </div>
               ))}
@@ -731,22 +761,32 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Next Project - Minimal Text Style */}
-      <section className="py-20 bg-slate-50 border-t border-slate-200">
+      {/* Next Project - Dark Neon Style */}
+      <section className="py-24 bg-[#0A0A0A] border-t border-white/10">
         <div className="container mx-auto max-w-6xl px-4">
           <Link 
             to={`/projects/${nextSlug}`}
+            onClick={() => window.scrollTo(0, 0)}
             className="block group"
           >
-            <p className="text-slate-400 text-sm uppercase tracking-wider mb-4">Next Project</p>
+            <p className="text-[#1DB954] text-sm uppercase tracking-widest mb-6 flex items-center gap-3">
+              <span className="w-8 h-px bg-[#1DB954]" />
+              Next Project
+            </p>
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-4xl md:text-6xl lg:text-7xl font-light text-slate-900 group-hover:text-primary transition-colors duration-300 mb-2">
+                <h3 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white group-hover:text-[#1DB954] transition-colors duration-300 mb-3">
                   {nextProject.name}
                 </h3>
-                <p className="text-slate-500 text-lg">{nextProject.result}</p>
+                <p className="text-white/50 text-xl">{nextProject.result}</p>
               </div>
-              <ArrowUpRight className="w-10 h-10 md:w-14 md:h-14 text-slate-300 group-hover:text-primary group-hover:translate-x-2 group-hover:-translate-y-2 transition-all duration-300" />
+              <div className="relative">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-white/20 group-hover:border-[#1DB954] group-hover:bg-[#1DB954]/10 flex items-center justify-center transition-all duration-300">
+                  <ArrowUpRight className="w-8 h-8 md:w-10 md:h-10 text-white/50 group-hover:text-[#1DB954] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                </div>
+                {/* Glow on hover */}
+                <div className="absolute inset-0 rounded-full bg-[#1DB954]/30 blur-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" />
+              </div>
             </div>
           </Link>
         </div>
