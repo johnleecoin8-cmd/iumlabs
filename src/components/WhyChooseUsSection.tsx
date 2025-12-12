@@ -18,7 +18,7 @@ const WhyChooseUsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#0047AB]">
+    <section className="relative min-h-screen overflow-hidden bg-[#0033FF]">
       {/* Moon at right center, mostly visible */}
       <div className="absolute top-1/2 -right-[20%] md:-right-[15%] lg:-right-[10%] -translate-y-1/2 pointer-events-none">
         <motion.div
