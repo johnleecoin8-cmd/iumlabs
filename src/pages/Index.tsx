@@ -22,11 +22,11 @@ const Index = () => {
         <HeroSection />
       </main>
       
-      <section className="scroll-reveal" id="about" style={{ backgroundColor: 'hsl(0 0% 6%)' }}>
+      <section className="scroll-reveal" id="about" style={{ backgroundColor: 'hsl(0 0% 5%)' }}>
         <AboutUsSection />
       </section>
       
-      <section className="scroll-reveal" id="cases" style={{ backgroundColor: 'hsl(0 0% 4%)' }}>
+      <section className="scroll-reveal" id="cases" style={{ backgroundColor: 'hsl(0 0% 3%)' }}>
         <CasesSection />
       </section>
       
@@ -34,11 +34,11 @@ const Index = () => {
         <ServicesSection />
       </section>
       
-      <section className="scroll-reveal" id="team" style={{ backgroundColor: '#F5F3EF' }}>
+      <section className="scroll-reveal" id="team" style={{ backgroundColor: 'hsl(0 0% 5%)' }}>
         <TeamSection />
       </section>
       
-      <section className="scroll-reveal" id="blog" style={{ backgroundColor: '#FAFAFA' }}>
+      <section className="scroll-reveal" id="blog" style={{ backgroundColor: 'hsl(0 0% 5%)' }}>
         <BlogPreviewSection />
       </section>
       

@@ -36,11 +36,11 @@ const services = [
 ];
 
 const floatingTags = [
-  { label: "Go-To-Market Strategy", top: "15%", left: "5%", color: "border-cyan-400/50 text-cyan-400" },
-  { label: "Influencer Strategy", top: "30%", left: "8%", color: "border-pink-400/50 text-pink-400" },
-  { label: "Social Media", top: "20%", right: "8%", color: "border-yellow-400/50 text-yellow-400" },
-  { label: "KOL Network", top: "45%", right: "5%", color: "border-green-400/50 text-green-400" },
-  { label: "PR & Media", bottom: "30%", left: "10%", color: "border-orange-400/50 text-orange-400" },
+  { label: "Go-To-Market Strategy", top: "15%", left: "5%", color: "border-emerald-400/50 text-emerald-400" },
+  { label: "Influencer Strategy", top: "30%", left: "8%", color: "border-green-400/50 text-green-400" },
+  { label: "Social Media", top: "20%", right: "8%", color: "border-lime-400/50 text-lime-400" },
+  { label: "KOL Network", top: "45%", right: "5%", color: "border-emerald-300/50 text-emerald-300" },
+  { label: "PR & Media", bottom: "30%", left: "10%", color: "border-green-300/50 text-green-300" },
 ];
 
 const ServicesSection = () => {
@@ -72,7 +72,7 @@ const ServicesSection = () => {
         {/* Giant Typography */}
         <div className={`text-center transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
           <h2 className="text-[15vw] md:text-[18vw] lg:text-[20vw] font-light leading-[0.85] tracking-tight text-white">
-            Our<span className="serif-italic text-primary">Services</span>
+            Our<span className="serif-italic text-emerald-400">Services</span>
           </h2>
         </div>
 
@@ -80,7 +80,7 @@ const ServicesSection = () => {
         <div className="absolute bottom-8 right-8">
           <Link 
             to="/projects"
-            className="text-white/50 text-sm hover:text-white transition-colors flex items-center gap-2"
+            className="text-emerald-400/50 text-sm hover:text-emerald-400 transition-colors flex items-center gap-2"
           >
             All Cases <ArrowRight className="w-4 h-4" />
           </Link>
@@ -104,12 +104,12 @@ const ServicesSection = () => {
               <div className="grid grid-cols-12 gap-6 items-start">
                 {/* Number */}
                 <div className="col-span-12 md:col-span-1">
-                  <span className="text-white/40 text-sm font-mono">[ {service.number} ]</span>
+                  <span className="text-emerald-400/60 text-sm font-mono">[ {service.number} ]</span>
                 </div>
 
                 {/* Title */}
                 <div className="col-span-12 md:col-span-4">
-                  <h3 className="text-2xl md:text-3xl font-medium text-white group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-2xl md:text-3xl font-medium text-white group-hover:text-emerald-400 transition-colors duration-300">
                     {service.title}
                   </h3>
                 </div>
@@ -125,9 +125,9 @@ const ServicesSection = () => {
                 <div className="col-span-12 md:col-span-2 flex justify-end">
                   <Link 
                     to="/services"
-                    className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-300"
+                    className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-emerald-400 group-hover:bg-emerald-400 transition-all duration-300"
                   >
-                    <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
+                    <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-black transition-colors" />
                   </Link>
                 </div>
               </div>

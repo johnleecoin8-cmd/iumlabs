@@ -51,11 +51,12 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Lunar Strategy colors
-        lunar: {
-          blue: "hsl(217 91% 60%)",
-          dark: "hsl(0 0% 4%)",
-          light: "hsl(0 0% 96%)",
+        // Neon Green theme colors
+        neon: {
+          green: "hsl(141 76% 48%)",
+          glow: "hsl(141 100% 50%)",
+          dark: "hsl(0 0% 3%)",
+          light: "hsl(0 0% 98%)",
         },
       },
       borderRadius: {
