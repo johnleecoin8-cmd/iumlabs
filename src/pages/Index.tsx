@@ -5,7 +5,7 @@ import CasesSection from "@/components/CasesSection";
 import ServicesSection from "@/components/ServicesSection";
 import TeamSection from "@/components/TeamSection";
 import BlogPreviewSection from "@/components/BlogPreviewSection";
-
+import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import SectionIndicator from "@/components/SectionIndicator";
 import useScrollReveal from "@/hooks/useScrollReveal";
@@ -22,11 +22,11 @@ const Index = () => {
         <HeroSection />
       </main>
       
-      <section className="scroll-reveal" id="about" style={{ backgroundColor: 'hsl(0 0% 5%)' }}>
+      <section className="scroll-reveal" id="about" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
         <AboutUsSection />
       </section>
       
-      <section className="scroll-reveal" id="cases" style={{ backgroundColor: 'hsl(0 0% 3%)' }}>
+      <section className="scroll-reveal" id="cases" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
         <CasesSection />
       </section>
       
@@ -34,14 +34,17 @@ const Index = () => {
         <ServicesSection />
       </section>
       
-      <section className="scroll-reveal" id="team" style={{ backgroundColor: 'hsl(0 0% 5%)' }}>
+      <section className="scroll-reveal" id="team" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
         <TeamSection />
       </section>
       
-      <section className="scroll-reveal" id="blog" style={{ backgroundColor: 'hsl(0 0% 5%)' }}>
+      <section className="scroll-reveal" id="blog" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
         <BlogPreviewSection />
       </section>
       
+      <section className="screen-8 scroll-reveal" id="contact">
+        <CTASection />
+      </section>
       
       <Footer />
     </div>

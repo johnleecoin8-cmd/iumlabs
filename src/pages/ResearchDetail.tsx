@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Clock, Calendar, Twitter, Linkedin, Copy, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import CTASection from "@/components/CTASection";
 import { researchPosts } from "./Research";
 import { toast } from "sonner";
 
@@ -267,7 +267,7 @@ const ResearchDetail = () => {
         </section>
       )}
 
-      
+      <CTASection />
       <Footer />
     </div>
   );

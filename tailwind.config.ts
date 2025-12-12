@@ -51,12 +51,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Neon Green theme colors
-        neon: {
-          green: "hsl(141 76% 48%)",
-          glow: "hsl(141 100% 50%)",
-          dark: "hsl(0 0% 3%)",
-          light: "hsl(0 0% 98%)",
+        // Lunar Strategy colors
+        lunar: {
+          blue: "hsl(217 91% 60%)",
+          dark: "hsl(0 0% 4%)",
+          light: "hsl(0 0% 96%)",
         },
       },
       borderRadius: {
@@ -74,14 +73,6 @@ export default {
         "display-sm": ["2rem", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600" }],
       },
       keyframes: {
-        orbit: {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
-        },
-        'counter-orbit': {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(-360deg)' },
-        },
         "accordion-down": {
           from: { height: "0" },
           to: { height: "var(--radix-accordion-content-height)" },
@@ -134,8 +125,6 @@ export default {
         },
       },
       animation: {
-        orbit: 'orbit 30s linear infinite',
-        'counter-orbit': 'counter-orbit 30s linear infinite',
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "float": "float 4s ease-in-out infinite",

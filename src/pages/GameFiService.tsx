@@ -3,7 +3,7 @@ import { Gamepad2, Video, Trophy, Users, Check, Calendar, ArrowRight, Quote } fr
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import moonBackground from "@/assets/moon-background.jpg";
@@ -280,7 +280,7 @@ const GameFiService = () => {
         </div>
       </section>
 
-      
+      <CTASection />
       <Footer />
     </div>
   );

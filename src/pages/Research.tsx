@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Search, Calendar, Clock, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import CTASection from "@/components/CTASection";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -3182,7 +3182,7 @@ const Research = () => {
         </div>
       </section>
 
-      
+      <CTASection />
       <Footer />
     </div>
   );

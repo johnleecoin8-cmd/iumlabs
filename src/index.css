@@ -14,83 +14,80 @@
 
 @layer base {
   :root {
-    /* Neon Green Theme Color System */
-    --background: 0 0% 3%;
+    /* Lunar Strategy Clean Color System */
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     
-    --card: 0 0% 6%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 6%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
     
-    /* Neon Green Primary - Spotify Green */
-    --primary: 141 76% 48%;
-    --primary-foreground: 0 0% 0%;
+    /* Clean Blue Primary */
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
     
     /* Clean Gray Secondary */
-    --secondary: 0 0% 12%;
+    --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 10%;
+    --muted: 0 0% 12%;
     --muted-foreground: 0 0% 55%;
     
-    /* Neon Green Accent */
-    --accent: 141 76% 48%;
-    --accent-foreground: 0 0% 0%;
+    /* Blue Accent */
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 141 76% 48%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 217 91% 60%;
     
     --radius: 0.5rem;
 
-    /* Neon Green Glow */
-    --neon-glow: 141 100% 50%;
-
     /* Dark section variables */
-    --dark-bg: 0 0% 3%;
+    --dark-bg: 0 0% 4%;
     --dark-fg: 0 0% 100%;
 
-    /* Light section variables */
-    --light-bg: 0 0% 5%;
-    --light-fg: 0 0% 95%;
+    /* Light section variables (for Team, Blog) */
+    --light-bg: 0 0% 96%;
+    --light-fg: 0 0% 8%;
 
-    /* Neon Green */
-    --neon-green: 141 76% 48%;
+    /* Lunar Strategy Blue */
+    --lunar-blue: 217 91% 60%;
   }
 
   .dark {
-    --background: 0 0% 3%;
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     
-    --card: 0 0% 6%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 6%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
     
-    --primary: 141 76% 48%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 100%;
     
-    --secondary: 0 0% 12%;
+    --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 10%;
+    --muted: 0 0% 12%;
     --muted-foreground: 0 0% 55%;
     
-    --accent: 141 76% 48%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
-    --ring: 141 76% 48%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 217 91% 60%;
   }
 }
 
@@ -139,44 +136,44 @@
 
   /* Dark screens */
   .screen-1 {
-    background-color: hsl(0 0% 3%);
+    background-color: hsl(0 0% 4%);
     color: hsl(0 0% 98%);
   }
 
   .screen-2 {
-    background-color: hsl(0 0% 3%);
+    background-color: hsl(0 0% 4%);
     color: hsl(0 0% 98%);
   }
 
   .screen-3 {
-    background-color: hsl(0 0% 3%);
+    background-color: hsl(0 0% 4%);
     color: hsl(0 0% 98%);
   }
 
   .screen-4 {
-    background-color: hsl(0 0% 3%);
+    background-color: hsl(0 0% 4%);
     color: hsl(0 0% 98%);
   }
 
-  /* Light screens - Now dark for neon theme */
+  /* Light screens (Lunar Strategy alternating pattern) */
   .screen-5 {
-    background-color: hsl(0 0% 5%);
-    color: hsl(0 0% 98%);
+    background-color: hsl(0 0% 96%);
+    color: hsl(0 0% 8%);
   }
 
   .screen-6 {
-    background-color: hsl(0 0% 5%);
-    color: hsl(0 0% 98%);
+    background-color: hsl(0 0% 96%);
+    color: hsl(0 0% 8%);
   }
 
   .screen-7 {
-    background-color: hsl(0 0% 5%);
-    color: hsl(0 0% 98%);
+    background-color: hsl(0 0% 96%);
+    color: hsl(0 0% 8%);
   }
 
   /* Back to dark for CTA */
   .screen-8 {
-    background-color: hsl(0 0% 3%);
+    background-color: hsl(0 0% 4%);
     color: hsl(0 0% 98%);
   }
 
@@ -192,58 +189,56 @@
     color: hsl(var(--light-fg));
   }
 
-  /* Neon Green Tags - Dark variant with glow */
+  /* Lunar Strategy Tags - Dark variant (white outline only, NO glow) */
   .lunar-tag-dark {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300;
     background: transparent;
-    border-color: hsl(141 76% 48% / 0.4);
-    color: hsl(141 76% 48% / 0.9);
+    border-color: hsl(0 0% 100% / 0.25);
+    color: hsl(0 0% 100% / 0.8);
   }
   
   .lunar-tag-dark:hover {
-    border-color: hsl(141 76% 48%);
-    color: hsl(141 76% 48%);
-    box-shadow: 0 0 20px hsl(141 76% 48% / 0.4);
+    border-color: hsl(0 0% 100% / 0.5);
+    color: hsl(0 0% 100%);
   }
 
-  /* Neon Green Tag - Light variant */
+  /* Lunar Strategy Tag - Light variant */
   .lunar-tag-light {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300;
     background: transparent;
-    border-color: hsl(141 76% 48% / 0.3);
-    color: hsl(141 76% 48% / 0.8);
+    border-color: hsl(0 0% 0% / 0.15);
+    color: hsl(0 0% 0% / 0.7);
   }
 
   .lunar-tag-light:hover {
-    border-color: hsl(141 76% 48%);
-    color: hsl(141 76% 48%);
+    border-color: hsl(0 0% 0% / 0.4);
+    color: hsl(0 0% 0%);
   }
 
-  /* Service Tags - Neon Green glow */
+  /* Service Tags - Clean style (no neon glow) */
   .service-tag {
     @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300 cursor-pointer;
     background: transparent;
-    border-color: hsl(141 76% 48% / 0.4);
-    color: hsl(141 76% 48% / 0.9);
+    border-color: hsl(0 0% 100% / 0.25);
+    color: hsl(0 0% 100% / 0.8);
   }
   
   .service-tag:hover {
-    border-color: hsl(141 76% 48%);
-    color: hsl(141 76% 48%);
-    box-shadow: 0 0 15px hsl(141 76% 48% / 0.3);
+    border-color: hsl(0 0% 100% / 0.5);
+    color: hsl(0 0% 100%);
   }
 
-  /* Neon Green Button - Solid with Glow */
+  /* Lunar Strategy Blue Button - Solid, Clean */
   .lunar-btn {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-bold rounded-full transition-all duration-300;
-    background-color: hsl(141 76% 48%);
-    color: hsl(0 0% 0%);
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all duration-300;
+    background-color: hsl(217 91% 60%);
+    color: hsl(0 0% 100%);
   }
   
   .lunar-btn:hover {
-    background-color: hsl(141 76% 55%);
+    background-color: hsl(217 91% 55%);
     transform: translateY(-2px);
-    box-shadow: 0 4px 30px hsl(141 76% 48% / 0.5);
+    box-shadow: 0 4px 20px hsl(217 91% 60% / 0.3);
   }
 
   /* Lunar Strategy Outline Button - Clean */
@@ -386,24 +381,23 @@
     background: linear-gradient(135deg, #E84142, #C62828);
   }
 
-  /* Service Icon Container - Neon Green */
+  /* Service Icon Container - Clean */
   .service-icon {
     @apply w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300;
-    background: hsl(141 76% 48% / 0.1);
-    color: hsl(141 76% 48%);
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
   }
 
   .service-icon:hover {
-    background: hsl(141 76% 48% / 0.2);
-    box-shadow: 0 0 20px hsl(141 76% 48% / 0.3);
+    background: hsl(var(--primary) / 0.15);
   }
 
-  /* Award Badge - Neon Green */
+  /* Award Badge - Clean */
   .award-badge {
     @apply inline-flex items-center gap-2 px-3 py-1.5 text-xs font-medium rounded-full;
-    background: hsl(141 76% 48% / 0.1);
-    color: hsl(141 76% 48%);
-    border: 1px solid hsl(141 76% 48% / 0.3);
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+    border: 1px solid hsl(var(--primary) / 0.2);
   }
 
   /* Video Call UI Styles - Clean */
@@ -441,10 +435,10 @@
     box-shadow: 0 10px 40px hsl(0 0% 0% / 0.3);
   }
 
-  /* Team Photo Neon Green Overlay */
+  /* Team Photo Blue Overlay (Lunar Strategy style) */
   .team-photo-overlay {
     @apply absolute inset-0;
-    background: linear-gradient(to top, hsl(141 76% 48% / 0.4), transparent 60%);
+    background: linear-gradient(to top, hsl(217 91% 50% / 0.5), transparent 60%);
   }
 }
 
@@ -770,65 +764,5 @@
   
   .page-transition {
     transition: none !important;
-  }
-}
-
-/* ============================================
-   ORBITAL ANIMATION SYSTEM
-   ============================================ */
-
-@keyframes orbit {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes counter-orbit {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
-.orbit-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform-origin: center center;
-}
-
-.orbit-tag {
-  position: absolute;
-  white-space: nowrap;
-}
-
-/* Ripple expand animation for cluster system */
-@keyframes ripple-expand {
-  0% {
-    r: 20;
-    opacity: 0.5;
-    stroke-width: 2;
-  }
-  100% {
-    r: 400;
-    opacity: 0;
-    stroke-width: 0.5;
-  }
-}
-
-/* Pulse glow for central hub */
-@keyframes pulse-glow {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.5;
-  }
-  50% {
-    transform: scale(1.4);
-    opacity: 0.9;
   }
 }

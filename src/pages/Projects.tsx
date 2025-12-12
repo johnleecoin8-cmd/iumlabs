@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import CTASection from "@/components/CTASection";
 import TiltCard from "@/components/TiltCard";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import CalendlyButton from "@/components/CalendlyButton";
@@ -248,25 +248,16 @@ const stats = [
   { value: "500K+", label: "Community Members" },
 ];
 
-// Cluster tags with polar coordinates (angle in degrees, distance in viewport units)
-const clusterTags = [
-  { label: "DeFi", angle: 0, distance: 28, color: "bg-purple-500", glowColor: "#a855f7" },
-  { label: "Layer 1", angle: 40, distance: 35, color: "bg-pink-400", glowColor: "#f472b6" },
-  { label: "GameFi", angle: 80, distance: 30, color: "bg-fuchsia-500", glowColor: "#d946ef" },
-  { label: "NFT", angle: 120, distance: 38, color: "bg-violet-400", glowColor: "#a78bfa" },
-  { label: "Infrastructure", angle: 160, distance: 32, color: "bg-purple-400", glowColor: "#c084fc" },
-  { label: "Exchange", angle: 200, distance: 36, color: "bg-pink-500", glowColor: "#ec4899" },
-  { label: "Layer 2", angle: 240, distance: 28, color: "bg-fuchsia-400", glowColor: "#e879f9" },
-  { label: "DePIN", angle: 280, distance: 34, color: "bg-violet-500", glowColor: "#8b5cf6" },
-  { label: "RWA", angle: 320, distance: 30, color: "bg-pink-400", glowColor: "#f472b6" },
-];
-
-// Mobile floating tags (simplified)
-const mobileFloatingTags = [
-  { label: "DeFi", top: "12%", left: "3%", color: "bg-purple-500" },
-  { label: "Layer 1", top: "15%", right: "3%", color: "bg-pink-400" },
-  { label: "GameFi", top: "75%", left: "3%", color: "bg-fuchsia-500" },
-  { label: "NFT", top: "78%", right: "3%", color: "bg-violet-400" },
+const floatingTags = [
+  { label: "DeFi", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-purple-400 text-white" },
+  { label: "Layer 1", top: "30%", left: "18%", mobileTop: "15%", mobileRight: "3%", color: "bg-pink-400 text-white" },
+  { label: "GameFi", top: "48%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-fuchsia-400 text-white" },
+  { label: "NFT", top: "52%", left: "22%", color: "bg-violet-300 text-black" },
+  { label: "Infrastructure", top: "16%", right: "12%", color: "bg-purple-300 text-black" },
+  { label: "Exchange", top: "30%", right: "5%", color: "bg-pink-300 text-black" },
+  { label: "Layer 2", top: "48%", right: "8%", color: "bg-fuchsia-300 text-black" },
+  { label: "DePIN", bottom: "28%", right: "15%", color: "bg-violet-500 text-white" },
+  { label: "RWA", bottom: "32%", left: "12%", color: "bg-pink-500 text-white" },
 ];
 
 const Projects = () => {
@@ -313,117 +304,32 @@ const Projects = () => {
           <Planet3D type="saturn" className="opacity-70" />
         </div>
         
-        {/* Cluster Universe System - Desktop */}
-        <div className="absolute inset-0 hidden lg:flex items-center justify-center pointer-events-none">
-          {/* SVG Connection Lines */}
-          <svg className="absolute inset-0 w-full h-full">
-            <defs>
-              {clusterTags.map((tag, index) => (
-                <linearGradient 
-                  key={`gradient-${index}`} 
-                  id={`lineGradient-${index}`}
-                  x1="0%" y1="0%" x2="100%" y2="100%"
-                >
-                  <stop offset="0%" stopColor={tag.glowColor} stopOpacity="0.8" />
-                  <stop offset="100%" stopColor={tag.glowColor} stopOpacity="0.1" />
-                </linearGradient>
-              ))}
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            
-            {/* Animated connection lines from center to each tag */}
-            {clusterTags.map((tag, index) => {
-              const centerX = 50; // percentage
-              const centerY = 50;
-              const endX = centerX + tag.distance * Math.cos(tag.angle * Math.PI / 180);
-              const endY = centerY + tag.distance * Math.sin(tag.angle * Math.PI / 180);
-              
-              return (
-                <g key={`line-${index}`}>
-                  {/* Glow line background */}
-                  <line
-                    x1={`${centerX}%`}
-                    y1={`${centerY}%`}
-                    x2={`${endX}%`}
-                    y2={`${endY}%`}
-                    stroke={tag.glowColor}
-                    strokeWidth="4"
-                    strokeOpacity="0.3"
-                    filter="url(#glow)"
-                    className="animate-pulse"
-                    style={{ animationDelay: `${index * 0.2}s` }}
-                  />
-                  {/* Main line */}
-                  <line
-                    x1={`${centerX}%`}
-                    y1={`${centerY}%`}
-                    x2={`${endX}%`}
-                    y2={`${endY}%`}
-                    stroke={`url(#lineGradient-${index})`}
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                  {/* Animated pulse dot traveling along line */}
-                  <circle r="3" fill={tag.glowColor} filter="url(#glow)">
-                    <animateMotion
-                      dur={`${2 + index * 0.3}s`}
-                      repeatCount="indefinite"
-                      path={`M${centerX * window.innerWidth / 100},${centerY * window.innerHeight / 100} L${endX * window.innerWidth / 100},${endY * window.innerHeight / 100}`}
-                    />
-                  </circle>
-                </g>
-              );
-            })}
-          </svg>
-          
-          {/* Central hub glow */}
-          <div 
-            className="absolute w-32 h-32 rounded-full animate-pulse"
-            style={{
-              background: 'radial-gradient(circle, rgba(168,85,247,0.4) 0%, rgba(236,72,153,0.2) 40%, transparent 70%)',
-              boxShadow: '0 0 60px rgba(168,85,247,0.5), 0 0 100px rgba(236,72,153,0.3)',
-            }}
-          />
-          
-          {/* Cluster Tags */}
-          {clusterTags.map((tag, index) => {
-            const x = 50 + tag.distance * Math.cos(tag.angle * Math.PI / 180);
-            const y = 50 + tag.distance * Math.sin(tag.angle * Math.PI / 180);
-            
-            return (
-              <span
-                key={`cluster-${tag.label}`}
-                className={`absolute px-4 py-2 rounded-full text-sm font-semibold text-white shadow-lg animate-float ${tag.color}`}
-                style={{
-                  left: `${x}%`,
-                  top: `${y}%`,
-                  transform: 'translate(-50%, -50%)',
-                  animationDelay: `${index * 0.3}s`,
-                  boxShadow: `0 0 20px ${tag.glowColor}50, 0 4px 15px rgba(0,0,0,0.3)`,
-                }}
-              >
-                {tag.label}
-              </span>
-            );
-          })}
-        </div>
-        
-        {/* Mobile floating tags - simplified */}
-        <div className="lg:hidden">
-          {mobileFloatingTags.map((tag, index) => (
+        {/* Floating Tags with Parallax - Colorful */}
+        <div>
+          {floatingTags.map((tag, index) => (
             <span
-              key={`mobile-${tag.label}`}
-              className={`absolute animate-float px-3 py-1.5 rounded-full text-xs font-medium text-white shadow-lg ${tag.color}`}
+              key={`${tag.label}-${index}`}
+              className={`absolute animate-float hidden sm:block px-4 py-2 rounded-md text-sm font-medium shadow-lg ${tag.color}`}
               style={{
                 top: tag.top,
                 left: tag.left,
                 right: tag.right,
+                bottom: tag.bottom,
+                animationDelay: `${index * 0.3}s`,
+                transform: `translateY(${scrollY * 0.05}px)`,
+              }}
+            >
+              {tag.label}
+            </span>
+          ))}
+          {floatingTags.slice(0, 4).map((tag, index) => (
+            <span
+              key={`mobile-${tag.label}-${index}`}
+              className={`absolute animate-float sm:hidden px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
+              style={{
+                top: tag.mobileTop,
+                left: tag.mobileLeft,
+                right: tag.mobileRight,
                 animationDelay: `${index * 0.3}s`,
               }}
             >
@@ -546,7 +452,7 @@ const Projects = () => {
         </div>
       </section>
 
-      
+      <CTASection />
       <Footer />
     </div>
   );

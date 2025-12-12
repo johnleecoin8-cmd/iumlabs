@@ -3,7 +3,7 @@ import { TrendingUp, Shield, Coins, Zap, Check, Calendar, ArrowRight, Quote } fr
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-
+import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import networkAbstract from "@/assets/network-abstract.jpg";
@@ -280,7 +280,7 @@ const DeFiService = () => {
         </div>
       </section>
 
-      
+      <CTASection />
       <Footer />
     </div>
   );
