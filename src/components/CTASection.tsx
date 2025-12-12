@@ -156,139 +156,164 @@ const CTASection = () => {
             </h3>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-10">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-10">
             {/* Left - Contact Info Cards */}
-            <div className="space-y-4">
+            <div className="space-y-4 order-2 lg:order-1">
               {/* Office Card - Full height image */}
-              <div className="group relative rounded-2xl overflow-hidden h-[200px] md:h-[240px]">
+              <div className="group relative rounded-2xl overflow-hidden h-[180px] md:h-[240px] cursor-pointer">
                 <img
                   src={seoulBridgeNight}
                   alt="Seoul Office"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent group-hover:from-black/95 transition-all duration-500" />
+                {/* Animated border on hover */}
+                <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-primary/50 transition-all duration-500" />
+                {/* Glow effect */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{ boxShadow: 'inset 0 0 60px rgba(59, 130, 246, 0.15)' }} />
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 transform group-hover:translate-y-[-4px] transition-transform duration-500">
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <div className="w-8 h-8 md:w-10 md:h-10 rounded-lg bg-primary/20 backdrop-blur-sm flex items-center justify-center group-hover:bg-primary/40 group-hover:scale-110 transition-all duration-500">
+                      <MapPin className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+                    </div>
                     <div>
-                      <p className="text-white/60 text-xs mb-1">OFFICE</p>
-                      <p className="text-white text-sm md:text-base">{brand.address}</p>
+                      <p className="text-white/60 text-xs mb-1 group-hover:text-primary/80 transition-colors">OFFICE</p>
+                      <p className="text-white text-sm md:text-base group-hover:text-white transition-colors">{brand.address}</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Contact Cards - Side by side */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-3 md:gap-4">
                 <a 
                   href={`mailto:${brand.email}`}
-                  className="group flex flex-col items-start gap-3 p-4 md:p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/30 transition-all"
+                  className="group relative flex flex-col items-start gap-2 md:gap-3 p-3 md:p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.08] hover:border-primary/40 transition-all duration-500 overflow-hidden"
                 >
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Mail className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+                  {/* Hover glow */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  <div className="relative w-9 h-9 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                    <Mail className="w-4 h-4 md:w-5 md:h-5 text-primary group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <div>
-                    <p className="text-white/50 text-xs mb-0.5">E-MAIL</p>
-                    <p className="text-white text-xs md:text-sm group-hover:text-primary transition-colors break-all">{brand.email}</p>
+                  <div className="relative">
+                    <p className="text-white/50 text-[10px] md:text-xs mb-0.5 group-hover:text-primary/70 transition-colors">E-MAIL</p>
+                    <p className="text-white text-[11px] md:text-sm group-hover:text-primary transition-colors break-all leading-tight">{brand.email}</p>
                   </div>
+                  {/* Arrow indicator */}
+                  <ArrowUpRight className="absolute top-3 right-3 w-3 h-3 md:w-4 md:h-4 text-white/20 opacity-0 group-hover:opacity-100 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                 </a>
 
                 <a 
                   href={brand.telegramLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex flex-col items-start gap-3 p-4 md:p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/30 transition-all"
+                  className="group relative flex flex-col items-start gap-2 md:gap-3 p-3 md:p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.08] hover:border-primary/40 transition-all duration-500 overflow-hidden"
                 >
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Send className="w-4 h-4 md:w-5 md:h-5 text-primary" />
+                  {/* Hover glow */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Shine effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                  <div className="relative w-9 h-9 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 group-hover:-rotate-3 transition-all duration-500">
+                    <Send className="w-4 h-4 md:w-5 md:h-5 text-primary group-hover:scale-110 transition-transform duration-300" />
                   </div>
-                  <div>
-                    <p className="text-white/50 text-xs mb-0.5">TELEGRAM</p>
-                    <p className="text-white text-xs md:text-sm group-hover:text-primary transition-colors">@cryptobridgekorea</p>
+                  <div className="relative">
+                    <p className="text-white/50 text-[10px] md:text-xs mb-0.5 group-hover:text-primary/70 transition-colors">TELEGRAM</p>
+                    <p className="text-white text-[11px] md:text-sm group-hover:text-primary transition-colors leading-tight">@cryptobridgekorea</p>
                   </div>
+                  {/* Arrow indicator */}
+                  <ArrowUpRight className="absolute top-3 right-3 w-3 h-3 md:w-4 md:h-4 text-white/20 opacity-0 group-hover:opacity-100 group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all duration-300" />
                 </a>
               </div>
             </div>
 
             {/* Right - Contact Form */}
-            <div>
-              <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8 p-5 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                  <div>
-                    <label className="block text-white/50 text-xs mb-2">NAME *</label>
+            <div className="order-1 lg:order-2">
+              <form onSubmit={handleSubmit} className="group/form space-y-5 md:space-y-6 p-4 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500 relative overflow-hidden">
+                {/* Form background glow on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-cyan-500/5 opacity-0 group-hover/form:opacity-100 transition-opacity duration-700 pointer-events-none" />
+                
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 relative">
+                  <div className="group/input">
+                    <label className="block text-white/50 text-xs mb-2 group-focus-within/input:text-primary transition-colors">NAME *</label>
                     <input
                       type="text"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       required
-                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:bg-white/[0.05] outline-none transition-all text-sm md:text-base"
+                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(59,130,246,0.15)] outline-none transition-all duration-300 text-sm md:text-base placeholder:text-white/30"
                       placeholder="Your name"
                     />
                   </div>
-                  <div>
-                    <label className="block text-white/50 text-xs mb-2">E-MAIL *</label>
+                  <div className="group/input">
+                    <label className="block text-white/50 text-xs mb-2 group-focus-within/input:text-primary transition-colors">E-MAIL *</label>
                     <input
                       type="email"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
-                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:bg-white/[0.05] outline-none transition-all text-sm md:text-base"
+                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(59,130,246,0.15)] outline-none transition-all duration-300 text-sm md:text-base placeholder:text-white/30"
                       placeholder="your@email.com"
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-                  <div>
-                    <label className="block text-white/50 text-xs mb-2">COMPANY</label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 relative">
+                  <div className="group/input">
+                    <label className="block text-white/50 text-xs mb-2 group-focus-within/input:text-primary transition-colors">COMPANY</label>
                     <input
                       type="text"
                       value={formData.company}
                       onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:bg-white/[0.05] outline-none transition-all text-sm md:text-base"
+                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(59,130,246,0.15)] outline-none transition-all duration-300 text-sm md:text-base placeholder:text-white/30"
                       placeholder="Company name"
                     />
                   </div>
-                  <div>
-                    <label className="block text-white/50 text-xs mb-2">WEBSITE</label>
+                  <div className="group/input">
+                    <label className="block text-white/50 text-xs mb-2 group-focus-within/input:text-primary transition-colors">WEBSITE</label>
                     <input
                       type="url"
                       value={formData.website}
                       onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:bg-white/[0.05] outline-none transition-all text-sm md:text-base"
+                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(59,130,246,0.15)] outline-none transition-all duration-300 text-sm md:text-base placeholder:text-white/30"
                       placeholder="https://..."
                     />
                   </div>
                 </div>
 
-                <div>
+                <div className="relative">
                   <label className="block text-white/50 text-xs mb-3">BUDGET</label>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
-                    {budgetOptions.map((option) => (
+                    {budgetOptions.map((option, index) => (
                       <button
                         key={option}
                         type="button"
                         onClick={() => setFormData({ ...formData, budget: option })}
-                        className={`px-3 md:px-4 py-2.5 md:py-3 rounded-xl text-xs md:text-sm border transition-all ${
+                        className={`group/btn relative px-3 md:px-4 py-2.5 md:py-3 rounded-xl text-xs md:text-sm border transition-all duration-300 overflow-hidden ${
                           formData.budget === option
-                            ? 'bg-primary text-white border-primary'
-                            : 'bg-transparent border-white/10 text-white/70 hover:border-white/30 hover:bg-white/[0.03]'
+                            ? 'bg-primary text-white border-primary shadow-[0_0_20px_rgba(59,130,246,0.3)]'
+                            : 'bg-transparent border-white/10 text-white/70 hover:border-primary/50 hover:bg-white/[0.05] hover:text-white'
                         }`}
+                        style={{ transitionDelay: `${index * 30}ms` }}
                       >
-                        {option}
+                        {/* Button shine effect */}
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700" />
+                        <span className="relative">{option}</span>
                       </button>
                     ))}
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-white/50 text-xs mb-2">PROJECT DETAILS *</label>
+                <div className="group/input relative">
+                  <label className="block text-white/50 text-xs mb-2 group-focus-within/input:text-primary transition-colors">PROJECT DETAILS *</label>
                   <textarea
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     required
-                    rows={4}
-                    className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:bg-white/[0.05] outline-none transition-all resize-none text-sm md:text-base"
+                    rows={3}
+                    className="w-full bg-white/[0.03] border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary focus:bg-white/[0.05] focus:shadow-[0_0_20px_rgba(59,130,246,0.15)] outline-none transition-all duration-300 resize-none text-sm md:text-base placeholder:text-white/30"
                     placeholder="Tell us about your project and goals..."
                   />
                 </div>
@@ -296,11 +321,14 @@ const CTASection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group w-full py-4 rounded-xl bg-primary text-white font-semibold hover:bg-primary/90 transition-all disabled:opacity-50 flex items-center justify-center gap-2 relative overflow-hidden"
+                  className="group/submit w-full py-3.5 md:py-4 rounded-xl bg-primary text-white font-semibold hover:bg-primary/90 hover:shadow-[0_0_40px_rgba(59,130,246,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-50 disabled:hover:scale-100 flex items-center justify-center gap-2 relative overflow-hidden"
                 >
                   <span className="relative z-10">{isSubmitting ? "Sending..." : "Send Message"}</span>
-                  <ArrowUpRight className="w-5 h-5 relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  <ArrowUpRight className="w-5 h-5 relative z-10 group-hover/submit:translate-x-1 group-hover/submit:-translate-y-1 transition-transform duration-300" />
+                  {/* Animated gradient background */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-primary bg-[length:200%_100%] animate-[shimmer_2s_linear_infinite] opacity-0 group-hover/submit:opacity-100 transition-opacity" />
+                  {/* Shine sweep */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/submit:translate-x-full transition-transform duration-700" />
                 </button>
               </form>
             </div>
