@@ -1,32 +1,79 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useCountUp } from "@/hooks/useCountUp";
 import { TrendingUp, Users, Building2, Handshake } from "lucide-react";
 
 const stats = [
   { 
-    value: "200+", 
+    value: 200, 
+    suffix: "+",
+    prefix: "",
     label: "Projects Launched",
     icon: TrendingUp,
     description: "Successfully launched in Korea"
   },
   { 
-    value: "$500M+", 
+    value: 500, 
+    suffix: "M+",
+    prefix: "$",
     label: "Funds Raised",
     icon: Building2,
     description: "Total fundraising supported"
   },
   { 
-    value: "50+", 
+    value: 50, 
+    suffix: "+",
+    prefix: "",
     label: "Exchange Partners",
     icon: Handshake,
     description: "CEX & DEX partnerships"
   },
   { 
-    value: "1000+", 
+    value: 1000, 
+    suffix: "+",
+    prefix: "",
     label: "KOL Network",
     icon: Users,
     description: "Influencers & creators"
   },
 ];
+
+const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0], index: number, isVisible: boolean }) => {
+  const formattedCount = useCountUp({
+    end: stat.value,
+    duration: 2000,
+    prefix: stat.prefix,
+    suffix: stat.suffix,
+    isVisible,
+  });
+
+  return (
+    <div
+      className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300 overflow-hidden"
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
+      {/* Glow Effect */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
+      </div>
+
+      <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+        <stat.icon className="w-5 h-5 text-primary" />
+      </div>
+      
+      <div className="mt-8 relative z-10">
+        <div className="text-3xl md:text-4xl font-bold text-white mb-1 tabular-nums">
+          {formattedCount}
+        </div>
+        <div className="text-white/80 font-medium text-sm mb-1">
+          {stat.label}
+        </div>
+        <div className="text-white/40 text-xs">
+          {stat.description}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const AboutUsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
@@ -71,27 +118,7 @@ const AboutUsSection = () => {
           {/* Right - Stats Grid */}
           <div className={`grid grid-cols-2 gap-4 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
             {stats.map((stat, index) => (
-              <div
-                key={index}
-                className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
-                <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                  <stat.icon className="w-5 h-5 text-primary" />
-                </div>
-                
-                <div className="mt-8">
-                  <div className="text-3xl md:text-4xl font-bold text-white mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-white/80 font-medium text-sm mb-1">
-                    {stat.label}
-                  </div>
-                  <div className="text-white/40 text-xs">
-                    {stat.description}
-                  </div>
-                </div>
-              </div>
+              <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />
             ))}
           </div>
         </div>
