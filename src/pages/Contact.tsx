@@ -48,26 +48,26 @@ const floatingTags = [
 const serviceHighlights = [
   { 
     icon: Globe, 
-    title: "Korean Market Entry", 
-    description: "Strategic guidance for entering and thriving in the Korean Web3 ecosystem",
-    link: "/services"
+    title: "DeFi Solutions", 
+    description: "Strategic marketing for DeFi protocols entering the Korean market",
+    link: "/services/defi"
   },
   { 
     icon: Users, 
-    title: "Community Growth", 
-    description: "Build and engage a loyal Korean community for your project",
-    link: "/services"
+    title: "NFT & Metaverse", 
+    description: "Build and engage communities around your NFT and metaverse projects",
+    link: "/services/nft"
   },
   { 
     icon: Megaphone, 
-    title: "KOL Marketing", 
-    description: "Connect with top Korean influencers and thought leaders",
-    link: "/services"
+    title: "GameFi Marketing", 
+    description: "Connect with Korean gamers and gaming communities",
+    link: "/services/gamefi"
   },
   { 
     icon: Shield, 
-    title: "VASP Compliance", 
-    description: "Navigate Korean regulations with our compliance expertise",
+    title: "All Services", 
+    description: "Explore our full range of Web3 marketing services",
     link: "/services"
   },
 ];
