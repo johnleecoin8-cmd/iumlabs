@@ -1,6 +1,7 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { ArrowRight, Search, Map, Rocket } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 
 // Import process images
 import discoveryImg from "@/assets/process/discovery-research.jpg";
@@ -36,12 +37,24 @@ const steps = [
 
 const ProcessSection = () => {
   const { ref, isVisible } = useScrollAnimation();
+  const [activeStep, setActiveStep] = useState(0);
+
+  // Auto-progress through steps
+  useEffect(() => {
+    if (!isVisible) return;
+    
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % steps.length);
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, [isVisible]);
 
   return (
     <section ref={ref} className="py-24 px-6 bg-background border-t border-border overflow-hidden">
       <div className="container mx-auto max-w-7xl">
         {/* Section Header */}
-        <div className={`mb-16 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+        <div className={`mb-8 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <div className="flex items-center gap-3 mb-4">
             <span className="text-primary text-sm font-medium tracking-wider">HOW WE WORK</span>
             <div className="h-px w-12 bg-primary/50" />
@@ -53,6 +66,56 @@ const ProcessSection = () => {
             A proven methodology that has helped 200+ projects successfully 
             enter and thrive in the Korean crypto market.
           </p>
+        </div>
+
+        {/* Progress Bar */}
+        <div className={`mb-12 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+          <div className="flex items-center justify-between mb-3">
+            {steps.map((step, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveStep(index)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
+                  activeStep === index 
+                    ? 'bg-primary text-white' 
+                    : activeStep > index 
+                      ? 'bg-primary/20 text-primary' 
+                      : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                }`}
+              >
+                <span className="text-sm font-bold">{step.number}</span>
+                <span className="hidden md:inline text-sm font-medium">{step.title.split(' ')[0]}</span>
+              </button>
+            ))}
+          </div>
+          <div className="relative h-2 bg-muted rounded-full overflow-hidden">
+            <motion.div 
+              className="absolute top-0 left-0 h-full bg-gradient-to-r from-primary via-cyan-500 to-primary rounded-full"
+              initial={{ width: '0%' }}
+              animate={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+            />
+            {/* Animated glow */}
+            <motion.div 
+              className="absolute top-0 h-full w-8 bg-gradient-to-r from-transparent via-white/50 to-transparent rounded-full"
+              animate={{ 
+                left: ['0%', `${((activeStep + 1) / steps.length) * 100 - 5}%`] 
+              }}
+              transition={{ duration: 0.5, ease: 'easeInOut' }}
+            />
+          </div>
+          <div className="flex justify-between mt-2">
+            {steps.map((_, index) => (
+              <span 
+                key={index} 
+                className={`text-xs transition-colors duration-300 ${
+                  activeStep >= index ? 'text-primary' : 'text-muted-foreground'
+                }`}
+              >
+                Step {index + 1}
+              </span>
+            ))}
+          </div>
         </div>
 
         {/* Steps - Enhanced Layout with Images */}
@@ -79,13 +142,20 @@ const ProcessSection = () => {
                 )}
 
                 {/* Card */}
-                <div className="relative bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-[0_0_40px_rgba(59,130,246,0.1)] transition-all duration-500">
+                <div className={`relative bg-card border rounded-2xl overflow-hidden transition-all duration-500 ${
+                  activeStep === index 
+                    ? 'border-primary shadow-[0_0_40px_rgba(59,130,246,0.3)] scale-[1.02]' 
+                    : 'border-border hover:border-primary/30 hover:shadow-[0_0_40px_rgba(59,130,246,0.1)]'
+                }`}>
                   {/* Image Section */}
                   <div className="relative h-[180px] overflow-hidden">
                     <img 
                       src={step.image} 
                       alt={step.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      className={`w-full h-full object-cover transition-transform duration-700 ${
+                        activeStep === index ? 'scale-125' : 'group-hover:scale-130'
+                      }`}
+                      style={{ transform: activeStep === index ? 'scale(1.25)' : undefined }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
                     
