@@ -19,11 +19,11 @@ import triaLogo from "@/assets/logos/tria.png";
 const serviceTags = [
   // Left side
   { label: "KOL Marketing", position: "top-[15%] left-[5%]" },
-  { label: "Community Ops", position: "top-[35%] left-[4%]" },
+  { label: "Community Operation", position: "top-[35%] left-[4%]" },
   { label: "GTM Strategy", position: "top-[55%] left-[6%]" },
   { label: "Exchange Support", position: "top-[75%] left-[5%]" },
   // Right side
-  { label: "Media PR", position: "top-[18%] right-[6%]" },
+  { label: "Media & PR", position: "top-[18%] right-[6%]" },
   { label: "AMA Hosting", position: "top-[42%] right-[5%]" },
   { label: "Offline Events", position: "top-[66%] right-[7%]" },
 ];
