@@ -36,11 +36,11 @@ const services = [
 ];
 
 const floatingTags = [
-  { label: "Go-To-Market Strategy", top: "15%", left: "5%", color: "border-cyan-400/50 text-cyan-400" },
-  { label: "Influencer Strategy", top: "30%", left: "8%", color: "border-pink-400/50 text-pink-400" },
-  { label: "Social Media", top: "20%", right: "8%", color: "border-yellow-400/50 text-yellow-400" },
-  { label: "KOL Network", top: "45%", right: "5%", color: "border-green-400/50 text-green-400" },
-  { label: "PR & Media", bottom: "30%", left: "10%", color: "border-orange-400/50 text-orange-400" },
+  { label: "Go-To-Market Strategy", top: "15%", left: "5%", color: "border-cyan-400/60 text-cyan-300 bg-cyan-500/10" },
+  { label: "Influencer Strategy", top: "30%", left: "8%", color: "border-pink-400/60 text-pink-300 bg-pink-500/10" },
+  { label: "Social Media", top: "20%", right: "8%", color: "border-yellow-400/60 text-yellow-300 bg-yellow-500/10" },
+  { label: "KOL Network", top: "45%", right: "5%", color: "border-green-400/60 text-green-300 bg-green-500/10" },
+  { label: "PR & Media", bottom: "30%", left: "10%", color: "border-orange-400/60 text-orange-300 bg-orange-500/10" },
 ];
 
 const ServicesSection = () => {
@@ -48,8 +48,14 @@ const ServicesSection = () => {
 
   return (
     <div ref={ref} className="relative overflow-hidden flex-1">
-      {/* Hero Typography Section - Dark */}
-      <div className="relative min-h-[60vh] flex items-center justify-center px-4 py-24 bg-[hsl(0,0%,4%)]">
+      {/* Hero Typography Section - Dark Navy */}
+      <div className="relative min-h-[60vh] flex items-center justify-center px-4 py-24" style={{
+        background: 'linear-gradient(180deg, #0A1628 0%, #0D1F3C 50%, #0A1628 100%)'
+      }}>
+        {/* Subtle glow effects */}
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl" />
+        
         {/* Floating Service Tags */}
         {floatingTags.map((tag, index) => (
           <div
@@ -63,7 +69,7 @@ const ServicesSection = () => {
               animationDelay: `${index * 0.4}s` 
             }}
           >
-            <span className={`px-4 py-2 text-xs rounded-full border bg-transparent ${tag.color}`}>
+            <span className={`px-4 py-2 text-xs rounded-full border backdrop-blur-sm ${tag.color}`}>
               {tag.label}
             </span>
           </div>
@@ -72,7 +78,7 @@ const ServicesSection = () => {
         {/* Giant Typography */}
         <div className={`text-center transition-all duration-1000 relative z-10 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
           <h2 className="text-[15vw] md:text-[18vw] lg:text-[20vw] font-light leading-[0.85] tracking-tight text-white">
-            Our<span className="serif-italic text-primary">Services</span>
+            Our<span className="serif-italic text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-400 to-cyan-300">Services</span>
           </h2>
         </div>
 
@@ -80,15 +86,15 @@ const ServicesSection = () => {
         <div className="absolute bottom-8 right-8">
           <Link 
             to="/projects"
-            className="text-white/50 text-sm hover:text-white transition-colors flex items-center gap-2"
+            className="text-white/50 text-sm hover:text-cyan-400 transition-colors flex items-center gap-2"
           >
             All Cases <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
       </div>
 
-      {/* Services List - Dark Background */}
-      <div className="bg-[hsl(0,0%,6%)] py-20">
+      {/* Services List - Slightly lighter navy */}
+      <div className="py-20" style={{ background: '#0D1F3C' }}>
         <div className="container mx-auto max-w-6xl px-4">
           {services.map((service, index) => (
             <div
@@ -99,17 +105,19 @@ const ServicesSection = () => {
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               {/* Dotted Line */}
-              <div className="dotted-line-dark mb-10" />
+              <div className="w-full h-px mb-10" style={{
+                backgroundImage: 'repeating-linear-gradient(to right, rgba(0, 212, 170, 0.3), rgba(0, 212, 170, 0.3) 4px, transparent 4px, transparent 8px)'
+              }} />
               
               <div className="grid grid-cols-12 gap-6 items-start">
                 {/* Number */}
                 <div className="col-span-12 md:col-span-1">
-                  <span className="text-white/40 text-sm font-mono">[ {service.number} ]</span>
+                  <span className="text-cyan-400/60 text-sm font-mono">[ {service.number} ]</span>
                 </div>
 
                 {/* Title */}
                 <div className="col-span-12 md:col-span-4">
-                  <h3 className="text-2xl md:text-3xl font-medium text-white group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-2xl md:text-3xl font-medium text-white group-hover:text-cyan-400 transition-colors duration-300">
                     {service.title}
                   </h3>
                 </div>
@@ -125,7 +133,7 @@ const ServicesSection = () => {
                 <div className="col-span-12 md:col-span-2 flex justify-end">
                   <Link 
                     to="/services"
-                    className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-all duration-300"
+                    className="w-12 h-12 rounded-full border border-cyan-400/30 flex items-center justify-center group-hover:border-cyan-400 group-hover:bg-cyan-400 transition-all duration-300"
                   >
                     <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
                   </Link>
@@ -135,7 +143,9 @@ const ServicesSection = () => {
           ))}
 
           {/* Last Dotted Line */}
-          <div className="dotted-line-dark mt-10" />
+          <div className="w-full h-px mt-10" style={{
+            backgroundImage: 'repeating-linear-gradient(to right, rgba(0, 212, 170, 0.3), rgba(0, 212, 170, 0.3) 4px, transparent 4px, transparent 8px)'
+          }} />
         </div>
 
         {/* Bottom CTA */}
@@ -146,7 +156,10 @@ const ServicesSection = () => {
             </p>
             <Link 
               to="/services"
-              className="lunar-btn"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full text-white font-medium transition-all duration-300 hover:scale-105"
+              style={{
+                background: 'linear-gradient(135deg, #00D4AA, #00B4D8, #00D4AA)'
+              }}
             >
               <span>View All Services</span>
               <ArrowRight className="w-4 h-4" />
