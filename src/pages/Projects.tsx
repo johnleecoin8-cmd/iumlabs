@@ -279,17 +279,13 @@ const stats = [
   { value: 500, suffix: "K+", prefix: "", label: "Community Members" },
 ];
 
-// Cluster tags with polar coordinates (angle in degrees, distance in viewport units)
+// Cluster tags - simplified to 5 tags
 const clusterTags = [
-  { label: "DeFi", angle: 0, distance: 28, color: "bg-purple-500", glowColor: "#a855f7" },
-  { label: "Layer 1", angle: 40, distance: 35, color: "bg-pink-400", glowColor: "#f472b6" },
-  { label: "GameFi", angle: 80, distance: 30, color: "bg-fuchsia-500", glowColor: "#d946ef" },
-  { label: "NFT", angle: 120, distance: 38, color: "bg-violet-400", glowColor: "#a78bfa" },
-  { label: "Infrastructure", angle: 160, distance: 32, color: "bg-purple-400", glowColor: "#c084fc" },
-  { label: "Exchange", angle: 200, distance: 36, color: "bg-pink-500", glowColor: "#ec4899" },
-  { label: "Layer 2", angle: 240, distance: 28, color: "bg-fuchsia-400", glowColor: "#e879f9" },
-  { label: "DePIN", angle: 280, distance: 34, color: "bg-violet-500", glowColor: "#8b5cf6" },
-  { label: "RWA", angle: 320, distance: 30, color: "bg-pink-400", glowColor: "#f472b6" },
+  { label: "DeFi", angle: 30, distance: 30, color: "bg-purple-500", glowColor: "#a855f7" },
+  { label: "Layer 2", angle: 100, distance: 32, color: "bg-fuchsia-400", glowColor: "#e879f9" },
+  { label: "Exchange", angle: 170, distance: 28, color: "bg-pink-500", glowColor: "#ec4899" },
+  { label: "Infrastructure", angle: 240, distance: 30, color: "bg-purple-400", glowColor: "#c084fc" },
+  { label: "RWA", angle: 310, distance: 32, color: "bg-pink-400", glowColor: "#f472b6" },
 ];
 
 // Mobile floating tags (simplified)
@@ -544,121 +540,46 @@ const Projects = () => {
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
               backgroundImage: `url(${saturnRings})`,
-              filter: "brightness(0.7) saturate(1.2)",
+              filter: "brightness(0.4) saturate(1.0)",
             }}
           />
           
-          {/* Aurora light overlay - Saturn purple/pink theme */}
+          {/* Aurora light overlay - Saturn purple/pink theme - reduced */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/30 via-transparent to-pink-500/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-violet-600/25 via-transparent to-fuchsia-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/15 via-transparent to-pink-500/10" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-violet-600/10 via-transparent to-fuchsia-500/5" />
           </div>
           
           {/* Light sweep effect */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-light-sweep" />
           </div>
           
           {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
           
-          {/* 3D Planet */}
-          <Planet3D type="saturn" className="opacity-70" />
+          {/* 3D Planet - repositioned to bottom right, smaller */}
+          <div className="absolute right-[-20%] bottom-[-30%] w-[50%] h-[50%]">
+            <Planet3D type="saturn" className="opacity-40" />
+          </div>
         </div>
         
-        {/* Cluster Universe System - Desktop */}
-        <div className="absolute inset-0 hidden lg:flex items-center justify-center pointer-events-none">
-          {/* SVG Connection Lines */}
-          <svg className="absolute inset-0 w-full h-full">
-            <defs>
-              {clusterTags.map((tag, index) => (
-                <linearGradient 
-                  key={`gradient-${index}`} 
-                  id={`lineGradient-${index}`}
-                  x1="0%" y1="0%" x2="100%" y2="100%"
-                >
-                  <stop offset="0%" stopColor={tag.glowColor} stopOpacity="0.8" />
-                  <stop offset="100%" stopColor={tag.glowColor} stopOpacity="0.1" />
-                </linearGradient>
-              ))}
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            
-            {/* Animated connection lines from center to each tag */}
-            {clusterTags.map((tag, index) => {
-              const centerX = 50; // percentage
-              const centerY = 50;
-              const endX = centerX + tag.distance * Math.cos(tag.angle * Math.PI / 180);
-              const endY = centerY + tag.distance * Math.sin(tag.angle * Math.PI / 180);
-              
-              return (
-                <g key={`line-${index}`}>
-                  {/* Glow line background */}
-                  <line
-                    x1={`${centerX}%`}
-                    y1={`${centerY}%`}
-                    x2={`${endX}%`}
-                    y2={`${endY}%`}
-                    stroke={tag.glowColor}
-                    strokeWidth="4"
-                    strokeOpacity="0.3"
-                    filter="url(#glow)"
-                    className="animate-pulse"
-                    style={{ animationDelay: `${index * 0.2}s` }}
-                  />
-                  {/* Main line */}
-                  <line
-                    x1={`${centerX}%`}
-                    y1={`${centerY}%`}
-                    x2={`${endX}%`}
-                    y2={`${endY}%`}
-                    stroke={`url(#lineGradient-${index})`}
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                  {/* Animated pulse dot traveling along line */}
-                  <circle r="3" fill={tag.glowColor} filter="url(#glow)">
-                    <animateMotion
-                      dur={`${2 + index * 0.3}s`}
-                      repeatCount="indefinite"
-                      path={`M${centerX * window.innerWidth / 100},${centerY * window.innerHeight / 100} L${endX * window.innerWidth / 100},${endY * window.innerHeight / 100}`}
-                    />
-                  </circle>
-                </g>
-              );
-            })}
-          </svg>
-          
-          {/* Central hub glow */}
-          <div 
-            className="absolute w-32 h-32 rounded-full animate-pulse"
-            style={{
-              background: 'radial-gradient(circle, rgba(168,85,247,0.4) 0%, rgba(236,72,153,0.2) 40%, transparent 70%)',
-              boxShadow: '0 0 60px rgba(168,85,247,0.5), 0 0 100px rgba(236,72,153,0.3)',
-            }}
-          />
-          
-          {/* Cluster Tags */}
+        {/* Simple Floating Tags - Desktop */}
+        <div className="absolute inset-0 hidden lg:block pointer-events-none">
           {clusterTags.map((tag, index) => {
             const x = 50 + tag.distance * Math.cos(tag.angle * Math.PI / 180);
             const y = 50 + tag.distance * Math.sin(tag.angle * Math.PI / 180);
             
             return (
               <span
-                key={`cluster-${tag.label}`}
-                className={`absolute px-4 py-2 rounded-full text-sm font-semibold text-white shadow-lg animate-float ${tag.color}`}
+                key={`tag-${index}`}
+                className={`absolute px-4 py-2 rounded-full text-sm font-medium text-white shadow-lg animate-float ${tag.color}`}
                 style={{
                   left: `${x}%`,
                   top: `${y}%`,
                   transform: 'translate(-50%, -50%)',
-                  animationDelay: `${index * 0.3}s`,
-                  boxShadow: `0 0 20px ${tag.glowColor}50, 0 4px 15px rgba(0,0,0,0.3)`,
+                  animationDelay: `${index * 0.4}s`,
+                  boxShadow: `0 0 20px ${tag.glowColor}40`,
                 }}
               >
                 {tag.label}

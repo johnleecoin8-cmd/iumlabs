@@ -174,14 +174,14 @@ const HeroSection = () => {
           {[...clientLogos, ...clientLogos].map((client, index) => (
             <div 
               key={index} 
-              className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+              className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-5 sm:px-7 py-3 sm:py-3.5 bg-zinc-800/90 rounded-full border border-white/15 hover:border-white/30 transition-all duration-300"
             >
               <img 
                 src={client.logo} 
                 alt={client.name} 
-                className="h-5 w-5 sm:h-7 sm:w-7 object-contain brightness-0 invert opacity-80 flex-shrink-0"
+                className="h-6 w-6 sm:h-8 sm:w-8 object-contain brightness-0 invert flex-shrink-0"
               />
-              <span className="text-white/70 text-xs sm:text-sm font-medium whitespace-nowrap">
+              <span className="text-white/90 text-sm sm:text-base font-medium whitespace-nowrap">
                 {client.name}
               </span>
             </div>
@@ -219,6 +219,8 @@ const StatItem = ({
     isVisible,
     delay,
     duration: 2000,
+    prefix,
+    suffix,
   });
   
   return (
@@ -227,7 +229,7 @@ const StatItem = ({
       style={{ animationDelay: `${delay + 600}ms`, animationFillMode: 'forwards' }}
     >
       <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">
-        {prefix}{count}{suffix}
+        {count}
       </div>
       <div className="text-sm sm:text-base text-white/50 font-light">
         {label}
