@@ -177,7 +177,7 @@ const AboutUsSection = () => {
             {/* Right fade gradient */}
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
             
-            <div className="flex items-center logo-marquee-slow">
+            <div className="flex items-center justify-center flex-wrap gap-3 sm:gap-4">
               {[
                 { name: "Cointelegraph", logo: "https://cointelegraph.com/icons/logo/en.svg" },
                 { name: "CoinDesk", logo: "https://upload.wikimedia.org/wikipedia/commons/4/40/CoinDesk_logo.svg" },
@@ -186,17 +186,17 @@ const AboutUsSection = () => {
                 { name: "Coinness", logo: "https://event.coinness.com/awards/images/media/CoinNess.webp" },
                 { name: "Bloomingbit", logo: "https://event.coinness.com/awards/images/media/Bloomingbit.webp" },
                 { name: "The Economist", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/The_Economist_Logo.svg" },
-              ].flatMap((media, i) => [media, media]).map((media, index) => (
+              ].map((media, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+                  className="flex items-center gap-2 sm:gap-3 px-5 sm:px-6 py-2.5 sm:py-3 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
                 >
                   <img 
                     src={media.logo} 
                     alt={media.name} 
-                    className="h-5 w-5 sm:h-6 sm:w-6 object-contain brightness-0 invert opacity-80 flex-shrink-0"
+                    className="h-6 w-6 sm:h-7 sm:w-7 object-contain brightness-0 invert opacity-80 flex-shrink-0"
                   />
-                  <span className="text-white/70 text-xs sm:text-sm font-medium whitespace-nowrap">
+                  <span className="text-white/70 text-sm sm:text-base font-medium whitespace-nowrap">
                     {media.name}
                   </span>
                 </div>
