@@ -74,19 +74,25 @@ const AboutUsSection = () => {
           className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat transition-transform duration-100"
           style={{ 
             backgroundImage: `url(${seoulSkyline})`,
-            filter: "brightness(0.25) grayscale(0.4)",
+            filter: "brightness(0.4) saturate(1.2)",
             transform: `translateY(${scrollY * 0.05}px) scale(1.1)`,
           }}
         />
         
-        {/* Aurora gradient overlay */}
+        {/* Colorful aurora gradient overlay */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-tr from-primary/10 via-transparent to-cyan-500/5" />
-          <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/5 via-transparent to-primary/10" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/20 via-transparent to-cyan-400/25" />
+          <div className="absolute inset-0 bg-gradient-to-bl from-violet-500/20 via-transparent to-amber-500/15" />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/15 via-transparent to-pink-500/20" />
         </div>
+
+        {/* Colorful floating orbs */}
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-cyan-500/30 to-blue-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s' }} />
+        <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-gradient-to-br from-rose-500/25 to-orange-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
+        <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-br from-violet-500/25 to-purple-600/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s', animationDelay: '2s' }} />
         
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/40 to-background/90" />
+        {/* Softer dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/30 to-background/70" />
       </div>
 
       {/* Section indicator */}

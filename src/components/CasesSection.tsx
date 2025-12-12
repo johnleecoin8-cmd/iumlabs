@@ -118,19 +118,25 @@ const CasesSection = () => {
           className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat transition-transform duration-100"
           style={{ 
             backgroundImage: `url(${networkAbstract})`,
-            filter: "brightness(0.2) grayscale(0.5)",
+            filter: "brightness(0.35) saturate(1.3)",
             transform: `translateY(${scrollY * 0.03}px) scale(1.1)`,
           }}
         />
         
-        {/* Aurora gradient overlay */}
+        {/* Colorful aurora gradient overlay */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/15 via-transparent to-primary/10" />
-          <div className="absolute inset-0 bg-gradient-to-bl from-cyan-500/10 via-transparent to-purple-500/15" />
+          <div className="absolute inset-0 bg-gradient-to-tr from-violet-600/25 via-transparent to-emerald-400/20" />
+          <div className="absolute inset-0 bg-gradient-to-bl from-cyan-500/20 via-transparent to-rose-500/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-indigo-600/15 via-transparent to-amber-400/15" />
         </div>
+
+        {/* Colorful floating orbs */}
+        <div className="absolute top-1/3 right-1/4 w-[500px] h-[500px] bg-gradient-to-br from-purple-500/25 to-pink-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '5s' }} />
+        <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-emerald-500/25 to-cyan-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '6s', animationDelay: '1.5s' }} />
+        <div className="absolute top-1/2 left-1/2 w-72 h-72 bg-gradient-to-br from-orange-500/20 to-yellow-500/15 rounded-full blur-3xl animate-pulse" style={{ animationDuration: '4s', animationDelay: '0.5s' }} />
         
-        {/* Dark gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/50 to-background/90" />
+        {/* Softer dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background/70" />
       </div>
 
       {/* Section indicator */}
