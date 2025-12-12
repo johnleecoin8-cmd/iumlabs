@@ -254,12 +254,14 @@ const Services = () => {
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 {/* Image */}
-                <div className="w-full lg:w-72 h-48 lg:h-auto flex-shrink-0 overflow-hidden">
+                <div className="relative w-full lg:w-72 h-48 lg:h-auto flex-shrink-0 overflow-hidden">
                   <img 
                     src={service.image} 
                     alt={service.title}
                     className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 ease-out group-hover:scale-105"
                   />
+                  {/* Blue overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/40 via-cyan-500/30 to-blue-800/50 group-hover:opacity-0 transition-opacity duration-700" />
                 </div>
 
                 {/* Content */}
