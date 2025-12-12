@@ -1,62 +1,58 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
 import { TrendingUp, Users, Building2, Handshake, Sparkles } from "lucide-react";
-
-const stats = [
-  { 
-    value: 200, 
-    suffix: "+",
-    prefix: "",
-    label: "Projects Launched",
-    icon: TrendingUp,
-    description: "Successfully launched in Korea",
-    glowColor: "from-emerald-500/20 to-cyan-500/10"
-  },
-  { 
-    value: 500, 
-    suffix: "M+",
-    prefix: "$",
-    label: "Funds Raised",
-    icon: Building2,
-    description: "Total fundraising supported",
-    glowColor: "from-primary/20 to-purple-500/10"
-  },
-  { 
-    value: 50, 
-    suffix: "+",
-    prefix: "",
-    label: "Exchange Partners",
-    icon: Handshake,
-    description: "CEX & DEX partnerships",
-    glowColor: "from-cyan-500/20 to-blue-500/10"
-  },
-  { 
-    value: 1000, 
-    suffix: "+",
-    prefix: "",
-    label: "KOL Network",
-    icon: Users,
-    description: "Influencers & creators",
-    glowColor: "from-purple-500/20 to-pink-500/10"
-  },
-];
-
-const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0], index: number, isVisible: boolean }) => {
+const stats = [{
+  value: 200,
+  suffix: "+",
+  prefix: "",
+  label: "Projects Launched",
+  icon: TrendingUp,
+  description: "Successfully launched in Korea",
+  glowColor: "from-emerald-500/20 to-cyan-500/10"
+}, {
+  value: 500,
+  suffix: "M+",
+  prefix: "$",
+  label: "Funds Raised",
+  icon: Building2,
+  description: "Total fundraising supported",
+  glowColor: "from-primary/20 to-purple-500/10"
+}, {
+  value: 50,
+  suffix: "+",
+  prefix: "",
+  label: "Exchange Partners",
+  icon: Handshake,
+  description: "CEX & DEX partnerships",
+  glowColor: "from-cyan-500/20 to-blue-500/10"
+}, {
+  value: 1000,
+  suffix: "+",
+  prefix: "",
+  label: "KOL Network",
+  icon: Users,
+  description: "Influencers & creators",
+  glowColor: "from-purple-500/20 to-pink-500/10"
+}];
+const StatCard = ({
+  stat,
+  index,
+  isVisible
+}: {
+  stat: typeof stats[0];
+  index: number;
+  isVisible: boolean;
+}) => {
   const formattedCount = useCountUp({
     end: stat.value,
     duration: 2000,
     prefix: stat.prefix,
     suffix: stat.suffix,
-    isVisible,
+    isVisible
   });
-
-  return (
-    <div
-      className={`group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.06] hover:border-primary/40 transition-all duration-500 overflow-hidden hover:-translate-y-1 hover:shadow-2xl ${
-        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-      }`}
-      style={{ transitionDelay: `${index * 100 + 300}ms` }}
-    >
+  return <div className={`group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.06] hover:border-primary/40 transition-all duration-500 overflow-hidden hover:-translate-y-1 hover:shadow-2xl ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
+    transitionDelay: `${index * 100 + 300}ms`
+  }}>
       {/* Animated gradient background */}
       <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br ${stat.glowColor}`} />
       
@@ -81,30 +77,34 @@ const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0], index: nu
           {stat.description}
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 const AboutUsSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-
-  return (
-    <div ref={ref} className="relative py-32 px-4 bg-[hsl(0,0%,4%)] overflow-hidden">
+  const {
+    ref,
+    isVisible
+  } = useScrollAnimation();
+  return <div ref={ref} className="relative px-4 bg-[hsl(0,0%,4%)] overflow-hidden py-[40px]">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Gradient Orbs */}
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] animate-pulse" style={{ animationDuration: '8s' }} />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
-        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] animate-pulse" style={{
+        animationDuration: '8s'
+      }} />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] animate-pulse" style={{
+        animationDuration: '10s',
+        animationDelay: '2s'
+      }} />
+        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[100px] animate-pulse" style={{
+        animationDuration: '12s',
+        animationDelay: '4s'
+      }} />
         
         {/* Grid Pattern */}
-        <div 
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: '80px 80px',
-          }}
-        />
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+        backgroundSize: '80px 80px'
+      }} />
         
         {/* Diagonal lines */}
         <div className="absolute top-20 right-[10%] w-40 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent rotate-45 hidden lg:block" />
@@ -112,9 +112,15 @@ const AboutUsSection = () => {
       </div>
       
       {/* Floating Sparkles */}
-      <Sparkles className="absolute top-[20%] left-[8%] w-5 h-5 text-primary/40 animate-pulse hidden md:block" style={{ animationDelay: '0s' }} />
-      <Sparkles className="absolute top-[60%] right-[12%] w-6 h-6 text-cyan-400/30 animate-pulse hidden md:block" style={{ animationDelay: '1s' }} />
-      <Sparkles className="absolute bottom-[25%] left-[20%] w-4 h-4 text-purple-400/30 animate-pulse hidden md:block" style={{ animationDelay: '2s' }} />
+      <Sparkles className="absolute top-[20%] left-[8%] w-5 h-5 text-primary/40 animate-pulse hidden md:block" style={{
+      animationDelay: '0s'
+    }} />
+      <Sparkles className="absolute top-[60%] right-[12%] w-6 h-6 text-cyan-400/30 animate-pulse hidden md:block" style={{
+      animationDelay: '1s'
+    }} />
+      <Sparkles className="absolute bottom-[25%] left-[20%] w-4 h-4 text-purple-400/30 animate-pulse hidden md:block" style={{
+      animationDelay: '2s'
+    }} />
 
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -160,9 +166,7 @@ const AboutUsSection = () => {
 
           {/* Right - Stats Grid */}
           <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat, index) => (
-              <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />
-            ))}
+            {stats.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
           </div>
         </div>
 
@@ -179,35 +183,37 @@ const AboutUsSection = () => {
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
             
             <div className="flex items-center logo-marquee-slow">
-              {[
-                { name: "Cointelegraph", logo: "https://cointelegraph.com/icons/logo/en.svg" },
-                { name: "CoinDesk", logo: "https://upload.wikimedia.org/wikipedia/commons/4/40/CoinDesk_logo.svg" },
-                { name: "BlockMedia", logo: "https://cdn.blockmedia.co.kr/wp-content/uploads/2024/07/Blockmedia_Logo_name.png" },
-                { name: "TokenPost", logo: "https://s1.tokenpost.com/assets/images/tokenpost_new/common_new/logo.svg" },
-                { name: "Coinness", logo: "https://event.coinness.com/awards/images/media/CoinNess.webp" },
-                { name: "Bloomingbit", logo: "https://event.coinness.com/awards/images/media/Bloomingbit.webp" },
-                { name: "The Economist", logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/The_Economist_Logo.svg" },
-              ].flatMap((media, i) => [media, media]).map((media, index) => (
-                <div 
-                  key={index} 
-                  className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
-                >
-                  <img 
-                    src={media.logo} 
-                    alt={media.name} 
-                    className="h-5 w-5 sm:h-6 sm:w-6 object-contain brightness-0 invert opacity-80 flex-shrink-0"
-                  />
+              {[{
+              name: "Cointelegraph",
+              logo: "https://cointelegraph.com/icons/logo/en.svg"
+            }, {
+              name: "CoinDesk",
+              logo: "https://upload.wikimedia.org/wikipedia/commons/4/40/CoinDesk_logo.svg"
+            }, {
+              name: "BlockMedia",
+              logo: "https://cdn.blockmedia.co.kr/wp-content/uploads/2024/07/Blockmedia_Logo_name.png"
+            }, {
+              name: "TokenPost",
+              logo: "https://s1.tokenpost.com/assets/images/tokenpost_new/common_new/logo.svg"
+            }, {
+              name: "Coinness",
+              logo: "https://event.coinness.com/awards/images/media/CoinNess.webp"
+            }, {
+              name: "Bloomingbit",
+              logo: "https://event.coinness.com/awards/images/media/Bloomingbit.webp"
+            }, {
+              name: "The Economist",
+              logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/The_Economist_Logo.svg"
+            }].flatMap((media, i) => [media, media]).map((media, index) => <div key={index} className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300">
+                  <img src={media.logo} alt={media.name} className="h-5 w-5 sm:h-6 sm:w-6 object-contain brightness-0 invert opacity-80 flex-shrink-0" />
                   <span className="text-white/70 text-xs sm:text-sm font-medium whitespace-nowrap">
                     {media.name}
                   </span>
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default AboutUsSection;
