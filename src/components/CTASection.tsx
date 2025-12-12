@@ -165,7 +165,7 @@ const CTASection = () => {
             </h3>
           </div>
 
-          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-6 md:gap-10">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-10">
             {/* Left - Contact Info Cards */}
             <div className="space-y-4 order-2 lg:order-1">
               {/* Office Card - Full height image */}
@@ -240,11 +240,11 @@ const CTASection = () => {
 
             {/* Right - Contact Form */}
             <div className="order-1 lg:order-2">
-              <form onSubmit={handleSubmit} className="group/form space-y-5 md:space-y-6 p-4 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500 relative overflow-hidden">
+              <form onSubmit={handleSubmit} className="group/form space-y-4 md:space-y-5 p-4 md:p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/[0.12] transition-all duration-500 relative overflow-hidden">
                 {/* Form background glow on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-cyan-500/5 opacity-0 group-hover/form:opacity-100 transition-opacity duration-700 pointer-events-none" />
                 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 relative">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 relative">
                   <div className="group/input">
                     <label className="block text-white/50 text-xs mb-2 group-focus-within/input:text-primary transition-colors">NAME *</label>
                     <input
@@ -269,7 +269,7 @@ const CTASection = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5 relative">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 relative">
                   <div className="group/input">
                     <label className="block text-white/50 text-xs mb-2 group-focus-within/input:text-primary transition-colors">COMPANY</label>
                     <input
