@@ -6,6 +6,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
+import Planet3D from "@/components/Planet3D";
+import sunCorona from "@/assets/backgrounds/sun-corona.jpg";
 
 // Service images
 import gtmImage from "@/assets/services/gtm-strategy.jpg";
@@ -102,28 +104,34 @@ const Services = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Blue Gradient like Service Detail Pages */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-gradient-to-br from-[#1e3a8a] via-[#2563eb] to-[#0891b2]">
-        {/* Abstract 3D Shapes with Float Animation */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[50%] h-[70%] opacity-70 pointer-events-none hidden lg:block">
-          <div className="relative w-full h-full">
-            <div 
-              className="absolute top-[5%] right-[15%] w-72 h-72 rounded-full bg-gradient-to-br from-white/40 via-white/20 to-transparent backdrop-blur-sm border border-white/30 shadow-2xl animate-float"
-              style={{ animationDuration: "6s" }}
-            />
-            <div 
-              className="absolute top-[35%] right-[5%] w-56 h-56 rounded-[40px] bg-gradient-to-tr from-cyan-200/30 via-white/25 to-transparent backdrop-blur-md border border-white/40 rotate-12 shadow-xl animate-float"
-              style={{ animationDuration: "8s", animationDelay: "1s" }} 
-            />
-            <div 
-              className="absolute top-[55%] right-[30%] w-40 h-40 rounded-3xl bg-gradient-to-bl from-blue-100/35 via-white/20 to-transparent backdrop-blur-lg border border-white/30 -rotate-6 shadow-lg animate-float"
-              style={{ animationDuration: "7s", animationDelay: "2s" }} 
-            />
-            <div 
-              className="absolute top-[15%] right-[0%] w-20 h-20 rounded-full bg-gradient-to-r from-white/50 to-white/20 border border-white/30 shadow-md animate-float"
-              style={{ animationDuration: "5s", animationDelay: "0.5s" }}
-            />
+      {/* Hero - Full Screen with Ken Burns Sun Background */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background - Sun Corona */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div 
+            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
+            style={{ 
+              backgroundImage: `url(${sunCorona})`,
+              filter: "brightness(0.6) saturate(1.3)",
+            }}
+          />
+          
+          {/* Aurora light overlay - Solar/Gold theme */}
+          <div className="absolute inset-0 animate-aurora">
+            <div className="absolute inset-0 bg-gradient-to-tr from-orange-600/30 via-transparent to-yellow-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-amber-600/25 via-transparent to-red-500/15" />
           </div>
+          
+          {/* Light sweep effect */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
+          </div>
+          
+          {/* Dark overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+          
+          {/* 3D Planet */}
+          <Planet3D type="sun" className="opacity-60" />
         </div>
 
         {/* Content */}
