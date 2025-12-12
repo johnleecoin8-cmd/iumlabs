@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { Users, Clock, Globe, TrendingUp, Shield, Award } from "lucide-react";
-import moonImage from '@/assets/backgrounds/moon-sphere.png';
+import realisticMoon from '@/assets/backgrounds/realistic-moon.png';
 
 const differentiators = [
   {
@@ -53,17 +53,33 @@ const WhyChooseUsSection = () => {
 
   return (
     <section ref={ref} className="relative min-h-screen overflow-hidden bg-[#0033FF] py-24 px-4">
-      {/* Moon at right center */}
-      <div className="absolute top-1/2 -right-[20%] md:-right-[15%] lg:-right-[10%] -translate-y-1/2 pointer-events-none">
+      {/* Moon at right center - Using realistic moon with glow effect */}
+      <div className="absolute top-1/2 -right-[10%] md:-right-[5%] lg:right-[0%] -translate-y-1/2 pointer-events-none">
         <motion.div
           animate={{ rotate: 360 }}
-          transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 180, repeat: Infinity, ease: "linear" }}
           className="relative"
         >
+          {/* Outer glow */}
+          <div className="absolute inset-0 bg-gradient-radial from-white/30 via-white/10 to-transparent rounded-full blur-3xl scale-110" />
+          
+          {/* Moon image with blue tint and glow */}
           <img 
-            src={moonImage}
+            src={realisticMoon}
             alt=""
-            className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] object-contain mix-blend-lighten"
+            className="w-[400px] h-[400px] md:w-[550px] md:h-[550px] lg:w-[700px] lg:h-[700px] object-cover rounded-full"
+            style={{
+              filter: "saturate(0.3) brightness(1.2) contrast(1.1)",
+              boxShadow: "0 0 100px 30px rgba(255,255,255,0.15), 0 0 200px 60px rgba(100,150,255,0.1)",
+            }}
+          />
+          
+          {/* Inner highlight overlay */}
+          <div 
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15) 0%, transparent 50%)",
+            }}
           />
         </motion.div>
       </div>

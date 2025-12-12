@@ -166,31 +166,6 @@ const AboutUsSection = () => {
           </div>
         </div>
 
-        {/* Awards & Certifications Section */}
-        <div className={`mt-16 transition-all duration-700 delay-400 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <p className="text-center text-white/40 text-sm uppercase tracking-widest mb-6">
-            Awards & Certifications
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 md:gap-4">
-            {[
-              { name: "Clutch Top Web3 Agency", badge: "⭐" },
-              { name: "BeInCrypto Partner", badge: "🏆" },
-              { name: "DappRadar Verified", badge: "✓" },
-              { name: "Binance Ecosystem", badge: "🔷" }
-            ].map((award, index) => (
-              <div
-                key={award.name}
-                className="group flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-white/[0.02] backdrop-blur-sm hover:border-primary hover:bg-primary/10 transition-all duration-300 cursor-pointer"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <span className="text-lg">{award.badge}</span>
-                <span className="text-xs font-medium text-white/70 group-hover:text-white whitespace-nowrap">
-                  {award.name}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
 
         {/* As Featured In Section */}
         <div className={`mt-12 pt-12 border-t border-white/[0.06] transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
