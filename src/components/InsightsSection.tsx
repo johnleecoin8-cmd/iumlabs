@@ -5,7 +5,6 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
-// Import blog images
 import aiAgentsImg from "@/assets/blog/ai-agents-defi.jpg";
 import kaitoImg from "@/assets/blog/kaito-mindshare.jpg";
 import ecosystemImg from "@/assets/blog/ecosystem-growth-2025.jpg";
@@ -70,13 +69,14 @@ const InsightsSection = () => {
   };
 
   return (
-    <section ref={ref} className="py-32 px-4 bg-[hsl(0,0%,5%)]">
+    <section ref={ref} className="py-32 px-4 bg-[hsl(0,0%,4%)]">
       <div className="container mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left - Newsletter */}
           <div className={`lg:col-span-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
             <div className="lg:sticky lg:top-32">
-              <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
+              <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase">
+                <span className="w-8 h-px bg-primary" />
                 Research & Insights
               </span>
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
@@ -95,7 +95,7 @@ const InsightsSection = () => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/5 border border-white/10 text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50 focus:bg-white/[0.08] transition-all duration-300"
+                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all duration-300"
                   />
                 </div>
                 <button
@@ -104,13 +104,12 @@ const InsightsSection = () => {
                   className="group w-full py-4 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-all duration-300 disabled:opacity-50 relative overflow-hidden"
                 >
                   <span className="relative z-10">{isSubmitting ? "Subscribing..." : "Subscribe to Newsletter"}</span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
                 </button>
               </form>
 
               <Link 
                 to="/research" 
-                className="group inline-flex items-center gap-2 text-white/60 hover:text-primary transition-colors mt-6"
+                className="group inline-flex items-center gap-2 text-white/50 hover:text-primary transition-colors mt-6"
               >
                 View all research
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -125,7 +124,7 @@ const InsightsSection = () => {
                 <Link
                   key={article.id}
                   to={`/research/${article.id}`}
-                  className={`group relative flex flex-col md:flex-row gap-6 p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.05] hover:border-primary/20 transition-all duration-500 overflow-hidden ${
+                  className={`group relative flex flex-col md:flex-row gap-6 p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.05] hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 overflow-hidden ${
                     isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
                   }`}
                   style={{ transitionDelay: `${index * 150}ms` }}
@@ -142,9 +141,8 @@ const InsightsSection = () => {
                       alt={article.title}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
-                    {/* Trending Badge */}
                     {article.trending && (
-                      <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-md bg-primary/90 backdrop-blur-sm">
+                      <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-md bg-primary/90">
                         <TrendingUp className="w-3 h-3 text-white" />
                         <span className="text-[10px] text-white font-medium uppercase">Trending</span>
                       </div>
@@ -175,7 +173,7 @@ const InsightsSection = () => {
 
                   {/* Arrow */}
                   <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary/20">
+                    <div className="w-10 h-10 rounded-full bg-white/[0.03] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary/20">
                       <ArrowUpRight className="w-5 h-5 text-primary" />
                     </div>
                   </div>
