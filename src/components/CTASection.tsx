@@ -165,7 +165,7 @@ const CTASection = () => {
             </h3>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-6 md:gap-10">
+          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-6 md:gap-10">
             {/* Left - Contact Info Cards */}
             <div className="space-y-4 order-2 lg:order-1">
               {/* Office Card - Full height image */}
