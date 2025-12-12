@@ -1,12 +1,5 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
-import moonBackground from "@/assets/moon-background.jpg";
-
-const floatingTags = [
-  { label: "KOL Network", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%" },
-  { label: "Crypto Voices", top: "28%", right: "8%", mobileTop: "15%", mobileRight: "3%" },
-  { label: "Mindshare", top: "52%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
-  { label: "Trust", bottom: "32%", right: "6%", mobileBottom: "18%", mobileRight: "3%" },
-];
+import kolImage from "@/assets/services/kol-network.jpg";
 
 const processSteps = [
   {
@@ -41,8 +34,7 @@ const InfluencerService = () => {
       aboutText="We activate a wide range of crypto-native influencers, from top industry voices to niche micro-KOLs, to help you get seen by the right people. Our focus is on message alignment, credible distribution, and timing that supports your launch or campaign. We work with creators who start conversations, growth, and move real mindshare."
       whatIncludesText="We run end-to-end influencer campaigns that connect your narrative to relevant audiences through trusted Content Creators. From creator sourcing and briefing to live coordination and reporting, we handle the process and ensure every post delivers with purpose."
       processSteps={processSteps}
-      floatingTags={floatingTags}
-      backgroundImage={moonBackground}
+      aboutImage={kolImage}
     />
   );
 };

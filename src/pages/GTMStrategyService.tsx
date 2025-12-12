@@ -1,12 +1,5 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
-import networkAbstract from "@/assets/network-abstract.jpg";
-
-const floatingTags = [
-  { label: "Positioning", top: "18%", left: "5%", mobileTop: "12%", mobileLeft: "3%" },
-  { label: "Narrative", top: "28%", right: "8%", mobileTop: "15%", mobileRight: "3%" },
-  { label: "Launch", top: "52%", left: "4%", mobileTop: "75%", mobileLeft: "3%" },
-  { label: "Strategy", bottom: "32%", right: "6%", mobileBottom: "18%", mobileRight: "3%" },
-];
+import gtmStrategyImage from "@/assets/services/gtm-strategy.jpg";
 
 const processSteps = [
   {
@@ -41,8 +34,7 @@ const GTMStrategyService = () => {
       aboutText="We help crypto projects launch with precision by aligning narrative, messaging, and timing across every touchpoint. Through focused workshops and research, we define your positioning, segment your audiences, and structure how your story is told across social, Content Creators, PR, and more. Whether you are preparing for a TGE, product launch, or revival, we deliver a GTM plan designed to drive traction, not just awareness."
       whatIncludesText="We help define your positioning, messaging, target audiences (and more) through collaborative workshops, competitor analysis, and market research, setting a clear foundation for your KOL, PR, and social campaigns."
       processSteps={processSteps}
-      floatingTags={floatingTags}
-      backgroundImage={networkAbstract}
+      aboutImage={gtmStrategyImage}
     />
   );
 };
