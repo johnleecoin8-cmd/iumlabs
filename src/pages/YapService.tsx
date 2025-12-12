@@ -1,5 +1,6 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
 import eventsImage from "@/assets/services/events.jpg";
+import seoulTech from "@/assets/backgrounds/seoul-tech-future.jpg";
 
 const processSteps = [
   {
@@ -24,6 +25,24 @@ const processSteps = [
   },
 ];
 
+const themeConfig = {
+  backgroundImage: seoulTech,
+  auroraColors: {
+    primary: "from-cyan-600/30",
+    secondary: "to-teal-500/25",
+    tertiary: "from-sky-500/20",
+  },
+  accentColor: "#06b6d4",
+  accentColorHover: "#0891b2",
+  floatingTags: [
+    { label: "Yappers", top: "17%", left: "10%" },
+    { label: "Mindshare", top: "27%", right: "14%" },
+    { label: "Amplification", top: "43%", left: "6%" },
+    { label: "Virality", top: "53%", right: "10%" },
+    { label: "600+ Creators", top: "37%", left: "17%" },
+  ],
+};
+
 const YapService = () => {
   return (
     <ServiceDetailLayout
@@ -36,6 +55,7 @@ const YapService = () => {
       processSteps={processSteps}
       aboutImage={eventsImage}
       currentServiceSlug="yap"
+      themeConfig={themeConfig}
     />
   );
 };

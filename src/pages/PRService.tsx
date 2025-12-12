@@ -1,5 +1,6 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
 import prImage from "@/assets/services/pr-media.jpg";
+import earthSpace from "@/assets/backgrounds/earth-space.jpg";
 
 const processSteps = [
   {
@@ -24,6 +25,24 @@ const processSteps = [
   },
 ];
 
+const themeConfig = {
+  backgroundImage: earthSpace,
+  auroraColors: {
+    primary: "from-indigo-600/30",
+    secondary: "to-blue-500/25",
+    tertiary: "from-violet-500/20",
+  },
+  accentColor: "#6366f1",
+  accentColorHover: "#4f46e5",
+  floatingTags: [
+    { label: "Media", top: "15%", left: "9%" },
+    { label: "Press", top: "25%", right: "13%" },
+    { label: "Coverage", top: "45%", left: "7%" },
+    { label: "Announcements", top: "55%", right: "11%" },
+    { label: "Top-Tier", top: "35%", left: "15%" },
+  ],
+};
+
 const PRService = () => {
   return (
     <ServiceDetailLayout
@@ -36,6 +55,7 @@ const PRService = () => {
       processSteps={processSteps}
       aboutImage={prImage}
       currentServiceSlug="pr"
+      themeConfig={themeConfig}
     />
   );
 };

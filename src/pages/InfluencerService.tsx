@@ -1,5 +1,6 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
 import kolImage from "@/assets/services/kol-network.jpg";
+import seoulDDP from "@/assets/backgrounds/seoul-ddp-night.jpg";
 
 const processSteps = [
   {
@@ -24,6 +25,24 @@ const processSteps = [
   },
 ];
 
+const themeConfig = {
+  backgroundImage: seoulDDP,
+  auroraColors: {
+    primary: "from-orange-600/30",
+    secondary: "to-amber-500/25",
+    tertiary: "from-yellow-500/20",
+  },
+  accentColor: "#f59e0b",
+  accentColorHover: "#d97706",
+  floatingTags: [
+    { label: "KOL Network", top: "16%", left: "9%" },
+    { label: "Partnerships", top: "26%", right: "14%" },
+    { label: "Campaigns", top: "44%", left: "7%" },
+    { label: "YouTube", top: "54%", right: "11%" },
+    { label: "1000+ KOLs", top: "36%", left: "16%" },
+  ],
+};
+
 const InfluencerService = () => {
   return (
     <ServiceDetailLayout
@@ -36,6 +55,7 @@ const InfluencerService = () => {
       processSteps={processSteps}
       aboutImage={kolImage}
       currentServiceSlug="influencer"
+      themeConfig={themeConfig}
     />
   );
 };

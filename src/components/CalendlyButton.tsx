@@ -8,6 +8,7 @@ interface CalendlyButtonProps {
   className?: string;
   calendlyUrl?: string;
   children?: React.ReactNode;
+  style?: React.CSSProperties;
 }
 
 const CalendlyButton = ({ 
@@ -15,7 +16,8 @@ const CalendlyButton = ({
   size = "default",
   className = "",
   calendlyUrl = "https://calendly.com/cryptobridgekorea/30min",
-  children
+  children,
+  style
 }: CalendlyButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -47,6 +49,7 @@ const CalendlyButton = ({
       variant={variant} 
       size={size} 
       className={className}
+      style={style}
       onClick={openCalendly}
     >
       {children || (

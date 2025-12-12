@@ -6,9 +6,6 @@ import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
 
-// Background
-import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
-
 // Client logos
 import bnbLogo from "@/assets/logos/bnb.png";
 import kucoinLogo from "@/assets/logos/kucoin.png";
@@ -26,6 +23,24 @@ interface ProcessStep {
   description: string;
 }
 
+interface ThemeConfig {
+  backgroundImage: string;
+  auroraColors: {
+    primary: string;
+    secondary: string;
+    tertiary?: string;
+  };
+  accentColor: string;
+  accentColorHover: string;
+  floatingTags: Array<{
+    label: string;
+    top?: string;
+    left?: string;
+    right?: string;
+    bottom?: string;
+  }>;
+}
+
 interface ServiceDetailLayoutProps {
   tagline: string;
   title: string;
@@ -35,19 +50,8 @@ interface ServiceDetailLayoutProps {
   whatIncludesText: string;
   processSteps: ProcessStep[];
   aboutImage?: string;
-  floatingTags?: Array<{
-    label: string;
-    top?: string;
-    left?: string;
-    right?: string;
-    bottom?: string;
-    mobileTop?: string;
-    mobileLeft?: string;
-    mobileRight?: string;
-    mobileBottom?: string;
-  }>;
-  backgroundImage?: string;
   currentServiceSlug: string;
+  themeConfig: ThemeConfig;
 }
 
 const allServices = [
@@ -80,11 +84,13 @@ const ServiceDetailLayout = ({
   processSteps,
   aboutImage,
   currentServiceSlug,
+  themeConfig,
 }: ServiceDetailLayoutProps) => {
   // Filter out current service and get top 3
   const otherServices = allServices
     .filter((service) => service.slug !== currentServiceSlug)
     .slice(0, 3);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -107,27 +113,29 @@ const ServiceDetailLayout = ({
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero Section - Cosmic Theme */}
+      {/* Hero Section - Service-Specific Theme */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Cosmic Nebula */}
+        {/* Background - Service-Specific Image */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${cosmicNebula})`,
-              filter: "brightness(0.7) saturate(1.2)",
+              backgroundImage: `url(${themeConfig.backgroundImage})`,
+              filter: "brightness(0.5) saturate(1.1)",
             }}
           />
           
-          {/* Aurora light overlay - Pink/Cyan cosmic theme */}
+          {/* Aurora light overlay - Service-Specific Colors */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-pink-600/30 via-transparent to-cyan-500/25" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/30 via-transparent to-blue-500/20" />
+            <div className={`absolute inset-0 bg-gradient-to-tr ${themeConfig.auroraColors.primary} via-transparent ${themeConfig.auroraColors.secondary}`} />
+            {themeConfig.auroraColors.tertiary && (
+              <div className={`absolute inset-0 bg-gradient-to-bl ${themeConfig.auroraColors.tertiary} via-transparent to-transparent`} />
+            )}
           </div>
           
           {/* Twinkling stars effect */}
           <div className="absolute inset-0">
-            {[...Array(40)].map((_, i) => (
+            {[...Array(30)].map((_, i) => (
               <div
                 key={i}
                 className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
@@ -136,50 +144,34 @@ const ServiceDetailLayout = ({
                   left: `${Math.random() * 100}%`,
                   animationDelay: `${Math.random() * 3}s`,
                   animationDuration: `${2 + Math.random() * 2}s`,
-                  opacity: 0.3 + Math.random() * 0.7,
+                  opacity: 0.2 + Math.random() * 0.5,
                 }}
               />
             ))}
           </div>
           
-          {/* Light sweep effect */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
-          </div>
-          
           {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.85)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
         </div>
 
-        {/* Floating 3D Shapes with cosmic glow */}
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-[50%] h-[70%] opacity-60 pointer-events-none hidden lg:block">
-          <div className="relative w-full h-full">
-            {/* Large cosmic orb */}
-            <div 
-              className="absolute top-[5%] right-[15%] w-72 h-72 rounded-full bg-gradient-to-br from-pink-500/30 via-purple-500/20 to-transparent backdrop-blur-sm border border-pink-400/30 shadow-2xl shadow-pink-500/20 animate-float"
-              style={{ animationDuration: "6s" }}
-            />
-            {/* Medium shape */}
-            <div 
-              className="absolute top-[35%] right-[5%] w-56 h-56 rounded-[40px] bg-gradient-to-tr from-cyan-400/30 via-blue-500/20 to-transparent backdrop-blur-md border border-cyan-400/40 rotate-12 shadow-xl shadow-cyan-500/20 animate-float"
-              style={{ animationDuration: "8s", animationDelay: "1s" }} 
-            />
-            {/* Small accent */}
-            <div 
-              className="absolute top-[55%] right-[30%] w-40 h-40 rounded-3xl bg-gradient-to-bl from-purple-400/35 via-pink-400/20 to-transparent backdrop-blur-lg border border-purple-400/30 -rotate-6 shadow-lg shadow-purple-500/20 animate-float"
-              style={{ animationDuration: "7s", animationDelay: "2s" }} 
-            />
-            {/* Tiny orb */}
-            <div 
-              className="absolute top-[15%] right-[0%] w-20 h-20 rounded-full bg-gradient-to-r from-cyan-400/50 to-pink-400/30 border border-white/30 shadow-md shadow-cyan-400/30 animate-float"
-              style={{ animationDuration: "5s", animationDelay: "0.5s" }}
-            />
-            {/* Extra accent */}
-            <div 
-              className="absolute top-[70%] right-[20%] w-16 h-16 rounded-full bg-pink-400/30 border border-pink-300/20 shadow-lg shadow-pink-400/20 animate-float"
-              style={{ animationDuration: "9s", animationDelay: "3s" }}
-            />
-          </div>
+        {/* Floating Tags - lunar-tag-dark style */}
+        <div className="absolute inset-0 pointer-events-none hidden lg:block">
+          {themeConfig.floatingTags.map((tag, index) => (
+            <div
+              key={tag.label}
+              className="absolute lunar-tag-dark text-xs whitespace-nowrap animate-float pointer-events-auto"
+              style={{
+                top: tag.top,
+                left: tag.left,
+                right: tag.right,
+                bottom: tag.bottom,
+                animationDelay: `${index * 0.5}s`,
+                animationDuration: `${4 + index * 0.5}s`,
+              }}
+            >
+              {tag.label}
+            </div>
+          ))}
         </div>
 
         {/* Content */}
@@ -202,8 +194,14 @@ const ServiceDetailLayout = ({
               {subtitle}
             </p>
 
-            {/* CTA Button - Lime/Neon */}
-            <CalendlyButton className="inline-flex items-center gap-3 bg-[#d4ff00] hover:bg-[#c4ef00] text-black px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-[#d4ff00]/30">
+            {/* CTA Button - Service Accent Color */}
+            <CalendlyButton 
+              className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              style={{ 
+                backgroundColor: themeConfig.accentColor,
+                boxShadow: `0 10px 40px ${themeConfig.accentColor}40`,
+              }}
+            >
               <Calendar className="w-5 h-5" />
               Book a Meeting
             </CalendlyButton>
@@ -247,7 +245,10 @@ const ServiceDetailLayout = ({
               <p className="text-slate-600 text-lg leading-relaxed mb-10">
                 {aboutText}
               </p>
-              <CalendlyButton className="inline-flex items-center gap-3 bg-[#2563eb] hover:bg-[#1d4ed8] text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 hover:scale-105">
+              <CalendlyButton 
+                className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 hover:scale-105"
+                style={{ backgroundColor: themeConfig.accentColor }}
+              >
                 <Calendar className="w-5 h-5" />
                 Book a Meeting
               </CalendlyButton>
@@ -263,7 +264,12 @@ const ServiceDetailLayout = ({
                   alt="Service" 
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-[#2563eb]/60 via-[#3b82f6]/40 to-[#0891b2]/60" />
+                <div 
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(135deg, ${themeConfig.accentColor}99 0%, ${themeConfig.accentColorHover}80 50%, ${themeConfig.accentColor}70 100%)`,
+                  }}
+                />
                 {/* Open Hours Card */}
                 <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/15 backdrop-blur-md rounded-xl px-6 py-5 border border-white/25">
                   <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
@@ -271,7 +277,12 @@ const ServiceDetailLayout = ({
                 </div>
               </div>
             ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-[#2563eb] via-[#3b82f6] to-[#0891b2]">
+              <div 
+                className="absolute inset-0"
+                style={{
+                  background: `linear-gradient(135deg, ${themeConfig.accentColor} 0%, ${themeConfig.accentColorHover} 100%)`,
+                }}
+              >
                 {/* Abstract pattern overlay */}
                 <div className="absolute inset-0 opacity-40">
                   <div className="absolute top-[15%] left-[15%] w-40 h-40 rounded-full border-2 border-white/40" />
@@ -304,9 +315,9 @@ const ServiceDetailLayout = ({
                 Includes
               </h2>
               <div className="flex gap-1.5 ml-2">
-                <span className="w-2 h-2 rounded-full bg-slate-400" />
-                <span className="w-2 h-2 rounded-full bg-slate-400" />
-                <span className="w-2 h-2 rounded-full bg-slate-400" />
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
               </div>
             </div>
           </div>
@@ -321,7 +332,10 @@ const ServiceDetailLayout = ({
               <p className="text-slate-600 text-lg leading-relaxed mb-8">
                 {whatIncludesText}
               </p>
-              <CalendlyButton className="inline-flex items-center text-slate-900 hover:text-[#2563eb] transition-colors group text-lg">
+              <CalendlyButton 
+                className="inline-flex items-center transition-colors group text-lg"
+                style={{ color: themeConfig.accentColor }}
+              >
                 <span className="text-slate-400 mr-2">[</span>
                 <span className="font-medium">book a meeting</span>
                 <span className="text-slate-400 ml-2">]</span>
@@ -345,8 +359,11 @@ const ServiceDetailLayout = ({
                         {step.description}
                       </p>
                     </div>
-                    <span className="text-slate-400 font-light text-sm whitespace-nowrap flex-shrink-0">
-                      [ {step.number} ]
+                    <span 
+                      className="text-sm whitespace-nowrap flex-shrink-0 px-3 py-1 rounded-full text-white font-medium"
+                      style={{ backgroundColor: themeConfig.accentColor }}
+                    >
+                      {step.number}
                     </span>
                   </div>
                   {index < processSteps.length - 1 && (
@@ -389,19 +406,36 @@ const ServiceDetailLayout = ({
               <div className="py-8 border-b border-dashed border-slate-300 flex justify-between items-center group cursor-pointer hover:bg-slate-50 transition-colors duration-300 px-4 -mx-4 rounded-lg">
                 {index % 2 === 0 ? (
                   <>
-                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 group-hover:text-[#2563eb] transition-colors duration-300 group-hover:translate-x-2 transform">
+                    <h3 
+                      className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 transition-colors duration-300 group-hover:translate-x-2 transform"
+                      style={{ color: undefined }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
+                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                    >
                       {service.title}
                     </h3>
-                    <span className="text-slate-400 text-2xl md:text-3xl font-light group-hover:text-[#2563eb] transition-colors duration-300">
+                    <span 
+                      className="text-slate-400 text-2xl md:text-3xl font-light transition-colors duration-300"
+                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
+                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                    >
                       {service.number}
                     </span>
                   </>
                 ) : (
                   <>
-                    <span className="text-slate-400 text-2xl md:text-3xl font-light group-hover:text-[#2563eb] transition-colors duration-300">
+                    <span 
+                      className="text-slate-400 text-2xl md:text-3xl font-light transition-colors duration-300"
+                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
+                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                    >
                       {service.number}
                     </span>
-                    <h3 className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 group-hover:text-[#2563eb] transition-colors duration-300 group-hover:-translate-x-2 transform text-right">
+                    <h3 
+                      className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 transition-colors duration-300 group-hover:-translate-x-2 transform text-right"
+                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
+                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                    >
                       {service.title}
                     </h3>
                   </>
