@@ -18,7 +18,7 @@ const WhyChooseUsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#3B5CFF]">
+    <section className="relative min-h-screen overflow-hidden bg-[#0047AB]">
       {/* Moon at bottom-right, larger and partially visible */}
       <div className="absolute -bottom-[30%] -right-[15%] md:-bottom-[25%] md:-right-[10%] pointer-events-none">
         <motion.div
@@ -94,17 +94,17 @@ const WhyChooseUsSection = () => {
         </motion.div>
       ))}
 
-      {/* Content - positioned more to the right/center like reference */}
+      {/* Content - positioned over the moon area */}
       <div 
         ref={ref}
-        className="relative z-10 container mx-auto px-6 min-h-screen flex items-center"
+        className="absolute inset-0 z-10 flex items-center justify-center md:justify-end"
       >
-        <div className={`max-w-3xl ml-auto mr-0 md:mr-[10%] lg:mr-[15%] text-left md:text-left transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`max-w-3xl px-6 md:pr-[8%] lg:pr-[12%] md:pl-0 text-center md:text-left transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-[6rem] font-light text-white mb-6 tracking-tight"
+            className="text-5xl md:text-7xl lg:text-[6.5rem] font-light text-white mb-6 tracking-tight"
           >
             Why Choose Us
           </motion.h2>
@@ -112,7 +112,7 @@ const WhyChooseUsSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-2xl lg:text-3xl text-white/90 font-light leading-relaxed"
+            className="text-lg md:text-xl lg:text-2xl text-white/90 font-light leading-relaxed max-w-2xl"
           >
             As a Web3 Marketing Agency with a focus on customer satisfaction, 
             CryptoBridge has tailor made the service offering to include services 
