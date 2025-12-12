@@ -19,8 +19,8 @@ const WhyChooseUsSection = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden bg-[#0047AB]">
-      {/* Moon at bottom-right, larger and partially visible */}
-      <div className="absolute -bottom-[30%] -right-[15%] md:-bottom-[25%] md:-right-[10%] pointer-events-none">
+      {/* Moon at right center, mostly visible */}
+      <div className="absolute top-1/2 -right-[20%] md:-right-[15%] lg:-right-[10%] -translate-y-1/2 pointer-events-none">
         <motion.div
           animate={{ 
             rotate: 360,
@@ -34,18 +34,18 @@ const WhyChooseUsSection = () => {
         >
           {/* Subtle glow */}
           <div 
-            className="absolute inset-0 blur-3xl opacity-40"
+            className="absolute inset-0 blur-3xl opacity-30"
             style={{
-              background: 'radial-gradient(circle, rgba(150,180,255,0.5) 0%, rgba(80,120,255,0.3) 40%, transparent 70%)',
-              transform: 'scale(1.2)',
+              background: 'radial-gradient(circle, rgba(150,180,255,0.4) 0%, rgba(80,120,255,0.2) 40%, transparent 70%)',
+              transform: 'scale(1.3)',
             }}
           />
           <img 
             src={moonImage}
             alt=""
-            className="w-[600px] h-[600px] md:w-[900px] md:h-[900px] lg:w-[1100px] lg:h-[1100px] object-cover rounded-full opacity-60"
+            className="w-[500px] h-[500px] md:w-[700px] md:h-[700px] lg:w-[900px] lg:h-[900px] object-cover rounded-full opacity-70"
             style={{
-              filter: 'saturate(0.3) brightness(0.9)',
+              filter: 'saturate(0.2) brightness(0.85)',
             }}
           />
         </motion.div>
@@ -94,17 +94,17 @@ const WhyChooseUsSection = () => {
         </motion.div>
       ))}
 
-      {/* Content - positioned over the moon area */}
+      {/* Content - positioned over the moon */}
       <div 
         ref={ref}
-        className="absolute inset-0 z-10 flex items-center justify-center md:justify-end"
+        className="absolute top-1/2 right-[5%] md:right-[10%] lg:right-[15%] -translate-y-1/2 z-10"
       >
-        <div className={`max-w-3xl px-6 md:pr-[8%] lg:pr-[12%] md:pl-0 text-center md:text-left transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+        <div className={`max-w-2xl text-right transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-5xl md:text-7xl lg:text-[6.5rem] font-light text-white mb-6 tracking-tight"
+            className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 tracking-tight"
           >
             Why Choose Us
           </motion.h2>
@@ -112,7 +112,7 @@ const WhyChooseUsSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl lg:text-2xl text-white/90 font-light leading-relaxed max-w-2xl"
+            className="text-base md:text-lg lg:text-xl text-white/90 font-light leading-relaxed"
           >
             As a Web3 Marketing Agency with a focus on customer satisfaction, 
             CryptoBridge has tailor made the service offering to include services 
