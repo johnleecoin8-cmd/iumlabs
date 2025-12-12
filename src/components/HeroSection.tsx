@@ -78,7 +78,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* Floating Service Tags - Desktop */}
+      {/* Floating Service Tags - Desktop - Unified Card Style */}
       {serviceTags.map((tag, index) => (
         <motion.div
           key={index}
@@ -87,26 +87,19 @@ const HeroSection = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
         >
-          <motion.span 
-            className="font-sans lunar-tag-dark text-xs whitespace-nowrap"
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 3 + index * 0.5, repeat: Infinity, ease: "easeInOut" }}
-          >
+          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-primary/40 hover:text-white transition-all duration-300">
             {tag.label}
-          </motion.span>
+          </span>
         </motion.div>
       ))}
 
-      {/* Floating Service Tags - Mobile (smaller, fewer) */}
+      {/* Floating Service Tags - Mobile - Unified Card Style */}
       {mobileServiceTags.map((tag, index) => (
         <div
           key={`mobile-${index}`}
-          className={`absolute ${tag.position} lg:hidden animate-float z-10`}
-          style={{ 
-            animationDelay: `${index * 0.3}s`,
-          }}
+          className={`absolute ${tag.position} lg:hidden z-10`}
         >
-          <span className="font-sans px-2 py-1 text-[10px] rounded-sm border border-white/20 bg-black/60 text-white/80 whitespace-nowrap">
+          <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-white/[0.03] border border-white/[0.08] text-white/60 whitespace-nowrap">
             {tag.label}
           </span>
         </div>
