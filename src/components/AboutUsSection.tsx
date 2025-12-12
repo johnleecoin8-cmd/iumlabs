@@ -1,6 +1,6 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
-import { TrendingUp, Users, Building2, Handshake } from "lucide-react";
+import { TrendingUp, Users, Building2, Handshake, Sparkles } from "lucide-react";
 
 const stats = [
   { 
@@ -9,7 +9,8 @@ const stats = [
     prefix: "",
     label: "Projects Launched",
     icon: TrendingUp,
-    description: "Successfully launched in Korea"
+    description: "Successfully launched in Korea",
+    glowColor: "from-emerald-500/20 to-cyan-500/10"
   },
   { 
     value: 500, 
@@ -17,7 +18,8 @@ const stats = [
     prefix: "$",
     label: "Funds Raised",
     icon: Building2,
-    description: "Total fundraising supported"
+    description: "Total fundraising supported",
+    glowColor: "from-primary/20 to-purple-500/10"
   },
   { 
     value: 50, 
@@ -25,7 +27,8 @@ const stats = [
     prefix: "",
     label: "Exchange Partners",
     icon: Handshake,
-    description: "CEX & DEX partnerships"
+    description: "CEX & DEX partnerships",
+    glowColor: "from-cyan-500/20 to-blue-500/10"
   },
   { 
     value: 1000, 
@@ -33,7 +36,8 @@ const stats = [
     prefix: "",
     label: "KOL Network",
     icon: Users,
-    description: "Influencers & creators"
+    description: "Influencers & creators",
+    glowColor: "from-purple-500/20 to-pink-500/10"
   },
 ];
 
@@ -48,26 +52,32 @@ const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0], index: nu
 
   return (
     <div
-      className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300 overflow-hidden"
-      style={{ transitionDelay: `${index * 100}ms` }}
+      className={`group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.06] hover:border-primary/40 transition-all duration-500 overflow-hidden hover:-translate-y-1 hover:shadow-2xl ${
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+      }`}
+      style={{ transitionDelay: `${index * 100 + 300}ms` }}
     >
-      {/* Glow Effect */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent" />
-      </div>
+      {/* Animated gradient background */}
+      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br ${stat.glowColor}`} />
+      
+      {/* Shine effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+      
+      {/* Corner glow */}
+      <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
-      <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
-        <stat.icon className="w-5 h-5 text-primary" />
+      <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+        <stat.icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-300" />
       </div>
       
       <div className="mt-8 relative z-10">
-        <div className="text-3xl md:text-4xl font-bold text-white mb-1 tabular-nums">
+        <div className="text-3xl md:text-4xl font-bold text-white mb-1 tabular-nums group-hover:text-primary transition-colors duration-300">
           {formattedCount}
         </div>
         <div className="text-white/80 font-medium text-sm mb-1">
           {stat.label}
         </div>
-        <div className="text-white/40 text-xs">
+        <div className="text-white/40 text-xs group-hover:text-white/60 transition-colors">
           {stat.description}
         </div>
       </div>
@@ -79,44 +89,77 @@ const AboutUsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div ref={ref} className="py-32 px-4 bg-[hsl(0,0%,4%)]">
-      <div className="container mx-auto max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+    <div ref={ref} className="relative py-32 px-4 bg-[hsl(0,0%,4%)] overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        {/* Gradient Orbs */}
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] animate-pulse" style={{ animationDuration: '8s' }} />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] animate-pulse" style={{ animationDuration: '10s', animationDelay: '2s' }} />
+        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[100px] animate-pulse" style={{ animationDuration: '12s', animationDelay: '4s' }} />
+        
+        {/* Grid Pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: '80px 80px',
+          }}
+        />
+        
+        {/* Diagonal lines */}
+        <div className="absolute top-20 right-[10%] w-40 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent rotate-45 hidden lg:block" />
+        <div className="absolute bottom-40 left-[15%] w-32 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent -rotate-45 hidden lg:block" />
+      </div>
+      
+      {/* Floating Sparkles */}
+      <Sparkles className="absolute top-[20%] left-[8%] w-5 h-5 text-primary/40 animate-pulse hidden md:block" style={{ animationDelay: '0s' }} />
+      <Sparkles className="absolute top-[60%] right-[12%] w-6 h-6 text-cyan-400/30 animate-pulse hidden md:block" style={{ animationDelay: '1s' }} />
+      <Sparkles className="absolute bottom-[25%] left-[20%] w-4 h-4 text-purple-400/30 animate-pulse hidden md:block" style={{ animationDelay: '2s' }} />
+
+      <div className="container mx-auto max-w-7xl relative z-10">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left - Content */}
           <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-            <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
+            <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-6 tracking-widest uppercase">
+              <span className="w-8 h-px bg-primary" />
               Why Choose Us
             </span>
             
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
-              We Bridge Your Project to{" "}
-              <span className="text-primary">Korea</span>
+              We Bridge Your
+              <br />
+              Project to{" "}
+              <span className="relative">
+                <span className="text-primary">Korea</span>
+                {/* Underline effect */}
+                <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary via-cyan-400 to-primary rounded-full opacity-60" />
+              </span>
             </h2>
             
-            <p className="text-lg text-white/60 mb-8 leading-relaxed max-w-lg">
-              Founded by veterans from <span className="text-white font-medium">Binance</span> and{" "}
-              <span className="text-white font-medium">KuCoin</span>, we deliver unmatched expertise 
+            <p className="text-lg text-white/60 mb-10 leading-relaxed max-w-lg">
+              Founded by veterans from <span className="text-white font-semibold bg-white/5 px-2 py-0.5 rounded">Binance</span> and{" "}
+              <span className="text-white font-semibold bg-white/5 px-2 py-0.5 rounded">KuCoin</span>, we deliver unmatched expertise 
               in Korean Web3 market entry, community building, and exchange partnerships.
             </p>
 
-            <div className="flex items-center gap-6">
+            <div className="group flex items-center gap-6 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.05] hover:border-primary/30 transition-all duration-500 w-fit">
               <div className="flex -space-x-3">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 border-2 border-primary/30 flex items-center justify-center">
-                  <span className="text-primary text-sm font-bold">J</span>
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-primary/5 border-2 border-primary/40 flex items-center justify-center group-hover:scale-110 group-hover:border-primary/60 transition-all duration-500">
+                  <span className="text-primary text-base font-bold">J</span>
                 </div>
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-500/5 border-2 border-blue-500/30 flex items-center justify-center">
-                  <span className="text-blue-400 text-sm font-bold">D</span>
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-cyan-500/30 to-cyan-500/5 border-2 border-cyan-500/40 flex items-center justify-center group-hover:scale-110 group-hover:border-cyan-500/60 transition-all duration-500 -ml-3">
+                  <span className="text-cyan-400 text-base font-bold">D</span>
                 </div>
               </div>
               <div>
-                <p className="text-white/80 text-sm">Founded by</p>
+                <p className="text-white/50 text-sm mb-0.5">Founded by</p>
                 <p className="text-white font-medium">Ex-Binance & Ex-KuCoin Leaders</p>
               </div>
             </div>
           </div>
 
           {/* Right - Stats Grid */}
-          <div className={`grid grid-cols-2 gap-4 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
+          <div className="grid grid-cols-2 gap-4">
             {stats.map((stat, index) => (
               <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />
             ))}
