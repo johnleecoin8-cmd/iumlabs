@@ -95,12 +95,13 @@ const Navbar = () => {
 
       {/* Top Panel Menu - slides from top */}
       <div
-        className={`fixed top-0 left-0 right-0 h-[90vh] sm:h-[80vh] lg:h-[66vh] z-[101] bg-background transition-transform duration-500 ease-out ${
+        className={`fixed top-0 left-0 right-0 h-[85vh] sm:h-[75vh] lg:h-[60vh] z-[101] bg-background transition-transform duration-500 ease-out ${
           isMenuOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <div className="h-full overflow-y-auto">
-          <div className="container mx-auto px-6 py-4">
+        <div className="h-full flex flex-col">
+          {/* Header */}
+          <div className="flex-shrink-0 container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
                 <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
@@ -119,18 +120,19 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="container mx-auto px-6 pt-20">
-            <div className="grid md:grid-cols-2 gap-16">
+          {/* Content - flex-1 to fill remaining space */}
+          <div className="flex-1 container mx-auto px-6 py-4 lg:py-8 overflow-y-auto">
+            <div className="h-full grid md:grid-cols-2 gap-8 lg:gap-16 content-center">
               {/* Navigation Links */}
-              <div>
-                <span className="text-muted-foreground text-sm uppercase tracking-widest mb-8 block">Navigation</span>
-                <nav className="space-y-4">
+              <div className="flex flex-col justify-center">
+                <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-4 lg:mb-6 block">Navigation</span>
+                <nav className="space-y-2 lg:space-y-3">
                   {navLinks.map((link) => (
                     <Link
                       key={link.to}
                       to={link.to}
                       onClick={() => setIsMenuOpen(false)}
-                      className="block text-4xl md:text-5xl lg:text-6xl font-bold text-foreground hover:text-primary transition-colors"
+                      className="block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -139,42 +141,42 @@ const Navbar = () => {
               </div>
 
               {/* Contact Info */}
-              <div className="space-y-12">
+              <div className="flex flex-col justify-center space-y-4 lg:space-y-8">
                 <div>
-                  <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Get in touch</span>
+                  <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">Get in touch</span>
                   <a 
                     href={`mailto:${brandConfig.email}`}
-                    className="text-xl lg:text-2xl text-foreground hover:text-primary transition-colors"
+                    className="text-base lg:text-xl text-foreground hover:text-primary transition-colors"
                   >
                     {brandConfig.email}
                   </a>
                 </div>
 
                 <div>
-                  <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Telegram</span>
+                  <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">Telegram</span>
                   <a 
                     href={brandConfig.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-xl lg:text-2xl text-foreground hover:text-primary transition-colors"
+                    className="text-base lg:text-xl text-foreground hover:text-primary transition-colors"
                   >
                     @cryptobridgekorea
                   </a>
                 </div>
 
                 <div>
-                  <span className="text-muted-foreground text-sm uppercase tracking-widest mb-4 block">Office</span>
-                  <p className="text-lg lg:text-xl text-muted-foreground">
+                  <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">Office</span>
+                  <p className="text-sm lg:text-lg text-muted-foreground">
                     {brandConfig.office}
                   </p>
                 </div>
 
-                <div className="flex gap-4 pt-8">
+                <div className="flex gap-3 pt-2 lg:pt-4">
                   <a
                     href={brandConfig.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-white/20 text-white text-xs lg:text-sm font-medium hover:bg-white/10 transition-colors"
                   >
                     Telegram
                   </a>
@@ -182,7 +184,7 @@ const Navbar = () => {
                     href={brandConfig.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 rounded-full border border-white/20 text-white text-sm font-medium hover:bg-white/10 transition-colors"
+                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-white/20 text-white text-xs lg:text-sm font-medium hover:bg-white/10 transition-colors"
                   >
                     LinkedIn
                   </a>
