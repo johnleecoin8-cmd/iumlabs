@@ -191,7 +191,7 @@
 
   /* Lunar Strategy Tags - Dark variant (white outline only, NO glow) */
   .lunar-tag-dark {
-    @apply px-4 py-2 text-sm font-medium rounded-full border transition-all duration-300;
+    @apply px-4 py-2 text-sm font-medium rounded-sm border transition-all duration-300;
     background: transparent;
     border-color: hsl(0 0% 100% / 0.25);
     color: hsl(0 0% 100% / 0.8);
