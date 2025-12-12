@@ -76,13 +76,6 @@ const ConnectionLines = ({ tags }: { tags: typeof serviceTags }) => {
           </linearGradient>
         ))}
         
-        {/* Radial gradient for center glow */}
-        <radialGradient id="center-glow" cx="50%" cy="50%" r="50%">
-          <stop offset="0%" stopColor="rgba(96, 165, 250, 0.8)" />
-          <stop offset="50%" stopColor="rgba(96, 165, 250, 0.3)" />
-          <stop offset="100%" stopColor="rgba(96, 165, 250, 0)" />
-        </radialGradient>
-        
         {/* Enhanced glow filter */}
         <filter id="line-glow" x="-50%" y="-50%" width="200%" height="200%">
           <feGaussianBlur stdDeviation="3" result="blur1" />
@@ -105,16 +98,6 @@ const ConnectionLines = ({ tags }: { tags: typeof serviceTags }) => {
           </feMerge>
         </filter>
       </defs>
-      
-      {/* Center glow effect */}
-      <circle 
-        cx={`${centerX}%`} 
-        cy={`${centerY}%`} 
-        r="80" 
-        fill="url(#center-glow)"
-        className="animate-pulse"
-        style={{ animationDuration: '3s' }}
-      />
       
       {tags.map((tag, index) => (
         <g key={index}>
@@ -200,77 +183,8 @@ const ConnectionLines = ({ tags }: { tags: typeof serviceTags }) => {
             </g>
           ))}
           
-          {/* Small node at tag position */}
-          <circle
-            cx={`${tag.x}%`}
-            cy={`${tag.y}%`}
-            r="4"
-            fill={tag.color}
-            opacity="0.6"
-            filter="url(#line-glow)"
-          >
-            <animate 
-              attributeName="r" 
-              values="3;5;3" 
-              dur="2s" 
-              repeatCount="indefinite"
-              begin={`${index * 0.2}s`}
-            />
-            <animate 
-              attributeName="opacity" 
-              values="0.4;0.8;0.4" 
-              dur="2s" 
-              repeatCount="indefinite"
-              begin={`${index * 0.2}s`}
-            />
-          </circle>
         </g>
       ))}
-      
-      {/* Center node with pulsing effect */}
-      <circle
-        cx={`${centerX}%`}
-        cy={`${centerY}%`}
-        r="8"
-        fill="rgba(96, 165, 250, 0.8)"
-        filter="url(#line-glow)"
-      >
-        <animate 
-          attributeName="r" 
-          values="6;10;6" 
-          dur="2.5s" 
-          repeatCount="indefinite"
-        />
-        <animate 
-          attributeName="opacity" 
-          values="0.6;1;0.6" 
-          dur="2.5s" 
-          repeatCount="indefinite"
-        />
-      </circle>
-      
-      {/* Outer ring pulse */}
-      <circle
-        cx={`${centerX}%`}
-        cy={`${centerY}%`}
-        r="20"
-        fill="none"
-        stroke="rgba(96, 165, 250, 0.4)"
-        strokeWidth="1"
-      >
-        <animate 
-          attributeName="r" 
-          values="15;40;15" 
-          dur="3s" 
-          repeatCount="indefinite"
-        />
-        <animate 
-          attributeName="opacity" 
-          values="0.5;0;0.5" 
-          dur="3s" 
-          repeatCount="indefinite"
-        />
-      </circle>
     </svg>
   );
 };
