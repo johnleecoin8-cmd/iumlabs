@@ -12,64 +12,70 @@ import sunCorona from "@/assets/backgrounds/sun-corona.jpg";
 
 const services = [
   {
-    icon: Users,
-    title: "KOL Marketing",
-    description: "Access 1000+ vetted Korean crypto influencers across YouTube, Twitter, and Telegram",
-    stat: "1,000+",
-    statLabel: "Verified KOLs",
+    icon: Megaphone,
+    title: "Go-To-Market Strategy",
+    description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus.",
+    stat: "01",
+    statLabel: "Foundation",
     size: "large",
     color: "from-primary/20 to-primary/5",
     borderColor: "border-primary/20 hover:border-primary/40",
+    link: "/services/gtm",
   },
   {
-    icon: Megaphone,
-    title: "Community Operation",
-    description: "24/7 Korean community management with native speakers",
-    stat: "500K+",
-    statLabel: "Members Managed",
+    icon: Users,
+    title: "Community Management",
+    description: "Complete Discord community infrastructure to build sticky, scalable and self-sustaining growth.",
+    stat: "02",
+    statLabel: "Infrastructure",
     size: "normal",
     color: "from-blue-500/20 to-blue-500/5",
     borderColor: "border-blue-500/20 hover:border-blue-500/40",
-  },
-  {
-    icon: Building2,
-    title: "Exchange Support",
-    description: "VASP compliance and CEX/DEX listing support",
-    stat: "100%",
-    statLabel: "Success Rate",
-    size: "normal",
-    color: "from-purple-500/20 to-purple-500/5",
-    borderColor: "border-purple-500/20 hover:border-purple-500/40",
+    link: "/services/community",
   },
   {
     icon: Newspaper,
-    title: "Media & PR",
-    description: "Coverage in top Korean crypto media outlets",
-    stat: "50+",
-    statLabel: "Publications",
+    title: "Social Media Marketing",
+    description: "Content strategy and execution on X to grow visibility and engage with your ecosystem in real time.",
+    stat: "03",
+    statLabel: "Visibility",
     size: "normal",
-    color: "from-orange-500/20 to-orange-500/5",
-    borderColor: "border-orange-500/20 hover:border-orange-500/40",
+    color: "from-purple-500/20 to-purple-500/5",
+    borderColor: "border-purple-500/20 hover:border-purple-500/40",
+    link: "/services/social-media",
   },
   {
     icon: Mic2,
-    title: "AMA Hosting",
-    description: "Live AMAs with Korean communities",
-    stat: "200+",
-    statLabel: "AMAs Hosted",
+    title: "Influencer Strategy",
+    description: "Influencer campaigns powered by top crypto voices aligned with your message and goals.",
+    stat: "04",
+    statLabel: "KOL Network",
+    size: "normal",
+    color: "from-orange-500/20 to-orange-500/5",
+    borderColor: "border-orange-500/20 hover:border-orange-500/40",
+    link: "/services/influencer",
+  },
+  {
+    icon: Building2,
+    title: "Yap Strategy",
+    description: "Targeted campaigns through a 600+ creator network designed to drive awareness and traction across Crypto X.",
+    stat: "05",
+    statLabel: "600+ Yappers",
     size: "normal",
     color: "from-cyan-500/20 to-cyan-500/5",
     borderColor: "border-cyan-500/20 hover:border-cyan-500/40",
+    link: "/services/yap",
   },
   {
     icon: MapPin,
-    title: "Offline Events",
-    description: "Side events, meetups, and conference presence in Seoul",
-    stat: "20+",
-    statLabel: "Events Per Year",
+    title: "PR",
+    description: "Narrative development and media placements to get your story published and seen in the right places.",
+    stat: "06",
+    statLabel: "Media",
     size: "large",
     color: "from-rose-500/20 to-rose-500/5",
     borderColor: "border-rose-500/20 hover:border-rose-500/40",
+    link: "/services/pr",
   },
 ];
 
@@ -250,9 +256,10 @@ const Services = () => {
             <div className="lg:col-span-9">
               <div className="grid md:grid-cols-2 gap-4">
                 {services.map((service, index) => (
-                  <div
+                  <Link
                     key={index}
-                    className={`group relative p-8 rounded-2xl bg-gradient-to-br ${service.color} border ${service.borderColor} transition-all duration-500 hover:-translate-y-1 ${
+                    to={service.link}
+                    className={`group relative p-8 rounded-2xl bg-gradient-to-br ${service.color} border ${service.borderColor} transition-all duration-500 hover:-translate-y-1 cursor-pointer ${
                       service.size === 'large' ? 'md:col-span-2' : ''
                     } ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
                     style={{ transitionDelay: `${index * 100}ms` }}
@@ -270,17 +277,20 @@ const Services = () => {
                       {service.description}
                     </p>
 
-                    {/* Stat */}
-                    <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-bold text-primary">{service.stat}</span>
-                      <span className="text-white/40 text-sm">{service.statLabel}</span>
+                    {/* Stat Label */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-sm font-mono text-white/30">[ {service.stat} ]</span>
+                        <span className="text-white/40 text-sm">{service.statLabel}</span>
+                      </div>
+                      <span className="text-primary text-sm group-hover:underline">Learn more</span>
                     </div>
 
                     {/* Hover Arrow */}
                     <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
                       <ArrowUpRight className="w-5 h-5 text-white/40" />
                     </div>
-                  </div>
+                  </Link>
                 ))}
               </div>
             </div>

@@ -14,6 +14,12 @@ import ResearchDetail from "./pages/ResearchDetail";
 import NFTService from "./pages/NFTService";
 import DeFiService from "./pages/DeFiService";
 import GameFiService from "./pages/GameFiService";
+import GTMStrategyService from "./pages/GTMStrategyService";
+import CommunityService from "./pages/CommunityService";
+import SocialMediaService from "./pages/SocialMediaService";
+import InfluencerService from "./pages/InfluencerService";
+import YapService from "./pages/YapService";
+import PRService from "./pages/PRService";
 import NotFound from "./pages/NotFound";
 const queryClient = new QueryClient();
 
@@ -59,6 +65,12 @@ const AppRoutes = () => {
         <Route path="/services/nft" element={<NFTService />} />
         <Route path="/services/defi" element={<DeFiService />} />
         <Route path="/services/gamefi" element={<GameFiService />} />
+        <Route path="/services/gtm" element={<GTMStrategyService />} />
+        <Route path="/services/community" element={<CommunityService />} />
+        <Route path="/services/social-media" element={<SocialMediaService />} />
+        <Route path="/services/influencer" element={<InfluencerService />} />
+        <Route path="/services/yap" element={<YapService />} />
+        <Route path="/services/pr" element={<PRService />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/contact" element={<Contact />} />
