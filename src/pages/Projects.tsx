@@ -255,6 +255,7 @@ const Projects = () => {
               <Link
                 key={caseItem.name}
                 to={`/projects/${caseItem.slug}`}
+                onClick={() => window.scrollTo(0, 0)}
                 className={`group cursor-pointer transition-all duration-500 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}

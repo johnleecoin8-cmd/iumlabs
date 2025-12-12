@@ -127,6 +127,7 @@ const CasesSection = () => {
             <Link
               key={index}
               to={`/projects/${project.slug}`}
+              onClick={() => window.scrollTo(0, 0)}
               className={`group relative overflow-hidden rounded-3xl min-h-[420px] flex flex-col transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${
                 isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
               }`}
