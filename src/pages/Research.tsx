@@ -2988,7 +2988,7 @@ const Research = () => {
       </section>
 
       {/* Filters & Search */}
-      <section className="bg-background border-b border-white/10 sticky top-16 z-40">
+      <section className="bg-background border-b border-white/10">
         <div className="container mx-auto max-w-7xl px-4 py-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Categories */}
