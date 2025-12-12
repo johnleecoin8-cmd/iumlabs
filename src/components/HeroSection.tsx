@@ -17,12 +17,18 @@ import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
 
 const serviceTags = [
-  { label: "PR", position: "top-[12%] left-[6%]" },
-  { label: "Social Media Marketing", position: "top-[8%] right-[10%]" },
-  { label: "KOL Marketing", position: "top-[35%] left-[4%]" },
-  { label: "Go-To-Market-Strategy", position: "top-[55%] right-[5%]" },
-  { label: "Influencer Strategy", position: "top-[65%] left-[8%]" },
-  { label: "Community", position: "top-[25%] right-[8%]" },
+  // Left side
+  { label: "PR", position: "top-[10%] left-[5%]" },
+  { label: "KOL Marketing", position: "top-[25%] left-[3%]" },
+  { label: "Influencer Strategy", position: "top-[40%] left-[6%]" },
+  { label: "DeFi Marketing", position: "top-[55%] left-[4%]" },
+  { label: "Exchange Listing", position: "top-[70%] left-[7%]" },
+  // Right side
+  { label: "Social Media Marketing", position: "top-[8%] right-[8%]" },
+  { label: "Community Building", position: "top-[22%] right-[5%]" },
+  { label: "Go-To-Market Strategy", position: "top-[38%] right-[6%]" },
+  { label: "NFT Marketing", position: "top-[52%] right-[4%]" },
+  { label: "GameFi", position: "top-[66%] right-[8%]" },
 ];
 
 const clientLogos = [
