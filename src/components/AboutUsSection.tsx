@@ -189,14 +189,14 @@ const AboutUsSection = () => {
               ].flatMap((media, i) => [media, media]).map((media, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+                  className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
                 >
                   <img 
                     src={media.logo} 
                     alt={media.name} 
-                    className="h-4 w-4 sm:h-5 sm:w-5 object-contain brightness-0 invert opacity-80 flex-shrink-0"
+                    className="h-5 w-5 sm:h-6 sm:w-6 object-contain brightness-0 invert opacity-80 flex-shrink-0"
                   />
-                  <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
+                  <span className="text-white/70 text-xs sm:text-sm font-medium whitespace-nowrap">
                     {media.name}
                   </span>
                 </div>
