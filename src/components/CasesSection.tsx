@@ -32,6 +32,7 @@ const featuredCases = [
     resultLabel: "Community Members",
     description: "Full-service marketing campaign for Korea market entry",
     glowColor: "#F3BA2F",
+    roiBadge: "5x ROI",
   },
   {
     name: "KuCoin",
@@ -43,6 +44,7 @@ const featuredCases = [
     resultLabel: "Trading Volume",
     description: "Community growth and influencer marketing strategy",
     glowColor: "#23AF91",
+    roiBadge: "200% Growth",
   },
   {
     name: "Polygon",
@@ -54,6 +56,7 @@ const featuredCases = [
     resultLabel: "Dapps Onboarded",
     description: "Developer outreach and ecosystem expansion",
     glowColor: "#8247E5",
+    roiBadge: "150+ Projects",
   },
   {
     name: "Ondo Finance",
@@ -65,6 +68,7 @@ const featuredCases = [
     resultLabel: "Korean Community",
     description: "RWA education campaign for Korean investors",
     glowColor: "#3B82F6",
+    roiBadge: "$50M+ TVL",
   },
   {
     name: "Peaq",
@@ -76,6 +80,7 @@ const featuredCases = [
     resultLabel: "DePIN in Korea",
     description: "Thought leadership in DePIN space",
     glowColor: "#00CED1",
+    roiBadge: "1M+ Views",
   },
   {
     name: "Story Protocol",
@@ -87,6 +92,7 @@ const featuredCases = [
     resultLabel: "Korean Creators",
     description: "Korean content creator onboarding",
     glowColor: "#FF6B9D",
+    roiBadge: "300% Growth",
   },
 ];
 
@@ -143,6 +149,13 @@ const CasesSection = () => {
               
               {/* Dark Overlay for readability */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
+              
+              {/* ROI Badge */}
+              <div className="absolute top-4 right-4 z-20">
+                <div className="px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-black text-xs font-bold shadow-lg">
+                  {project.roiBadge}
+                </div>
+              </div>
               
               {/* Intense Glow Effect on Hover */}
               <div 

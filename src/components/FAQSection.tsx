@@ -30,6 +30,22 @@ const faqs = [
   {
     question: "Do you offer Korea-specific services?",
     answer: "Yes, we specialize in Korean market entry with localized marketing across KakaoTalk, Naver Blog, Korean crypto media, and local KOL networks. We also provide Korean community management."
+  },
+  {
+    question: "What is TGE support and how can you help?",
+    answer: "TGE (Token Generation Event) support includes pre-launch marketing, community building, exchange listing strategy, KOL campaigns, and post-launch momentum. We've helped projects raise over $500M through successful TGEs."
+  },
+  {
+    question: "Do you help with tokenomics design?",
+    answer: "Yes, our Tokenomics Consulting service includes token distribution strategy, vesting schedules, utility design, and economic modeling to ensure sustainable token economics aligned with your project goals."
+  },
+  {
+    question: "What exchanges can you help list on?",
+    answer: "We have direct partnerships with major Korean exchanges (Upbit, Bithumb, Coinone) and global exchanges (Binance, KuCoin, Bybit, OKX). Our team handles the full listing process from application to launch marketing."
+  },
+  {
+    question: "How do you handle VASP compliance in Korea?",
+    answer: "We guide projects through Korea's VASP (Virtual Asset Service Provider) regulations, including compliance documentation, legal consultation, and ongoing regulatory monitoring to ensure full compliance with Korean crypto laws."
   }
 ];
 
