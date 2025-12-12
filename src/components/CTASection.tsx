@@ -156,15 +156,15 @@ const CTASection = () => {
             </h3>
           </div>
 
-          <div className="grid lg:grid-cols-5 gap-8 md:gap-12">
+          <div className="grid lg:grid-cols-2 gap-8 md:gap-10">
             {/* Left - Contact Info Cards */}
-            <div className="lg:col-span-2 space-y-4">
-              {/* Office Card */}
-              <div className="group relative rounded-2xl overflow-hidden">
+            <div className="space-y-4">
+              {/* Office Card - Full height image */}
+              <div className="group relative rounded-2xl overflow-hidden h-[200px] md:h-[240px]">
                 <img
                   src={seoulBridgeNight}
                   alt="Seoul Office"
-                  className="w-full h-[220px] md:h-[260px] object-cover group-hover:scale-105 transition-transform duration-700"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
@@ -178,18 +178,18 @@ const CTASection = () => {
                 </div>
               </div>
 
-              {/* Contact Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+              {/* Contact Cards - Side by side */}
+              <div className="grid grid-cols-2 gap-4">
                 <a 
                   href={`mailto:${brand.email}`}
-                  className="group flex items-center gap-4 p-4 md:p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/30 transition-all"
+                  className="group flex flex-col items-start gap-3 p-4 md:p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/30 transition-all"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Mail className="w-5 h-5 text-primary" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <Mail className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                   </div>
                   <div>
                     <p className="text-white/50 text-xs mb-0.5">E-MAIL</p>
-                    <p className="text-white text-sm md:text-base group-hover:text-primary transition-colors">{brand.email}</p>
+                    <p className="text-white text-xs md:text-sm group-hover:text-primary transition-colors break-all">{brand.email}</p>
                   </div>
                 </a>
 
@@ -197,21 +197,21 @@ const CTASection = () => {
                   href={brand.telegramLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-4 p-4 md:p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/30 transition-all"
+                  className="group flex flex-col items-start gap-3 p-4 md:p-5 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/30 transition-all"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <Send className="w-5 h-5 text-primary" />
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <Send className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                   </div>
                   <div>
                     <p className="text-white/50 text-xs mb-0.5">TELEGRAM</p>
-                    <p className="text-white text-sm md:text-base group-hover:text-primary transition-colors">@cryptobridgekorea</p>
+                    <p className="text-white text-xs md:text-sm group-hover:text-primary transition-colors">@cryptobridgekorea</p>
                   </div>
                 </a>
               </div>
             </div>
 
             {/* Right - Contact Form */}
-            <div className="lg:col-span-3">
+            <div>
               <form onSubmit={handleSubmit} className="space-y-6 md:space-y-8 p-5 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.06]">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                   <div>
