@@ -93,10 +93,10 @@ const Navbar = () => {
         onClick={() => setIsMenuOpen(false)}
       />
 
-      {/* Side Panel Menu - 2/3 width */}
+      {/* Top Panel Menu - slides from top */}
       <div
-        className={`fixed top-0 right-0 bottom-0 w-[90%] sm:w-[75%] lg:w-[66%] z-[101] bg-background transition-transform duration-500 ease-out ${
-          isMenuOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed top-0 left-0 right-0 h-[90vh] sm:h-[80vh] lg:h-[66vh] z-[101] bg-background transition-transform duration-500 ease-out ${
+          isMenuOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
         <div className="h-full overflow-y-auto">
