@@ -226,10 +226,10 @@ const StatItem = ({
       className="text-center opacity-0 animate-fade-up"
       style={{ animationDelay: `${delay + 600}ms`, animationFillMode: 'forwards' }}
     >
-      <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2">
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-sm sm:text-base text-white/50 font-light">
+      <div className="text-xs sm:text-sm text-white/50 font-light">
         {label}
       </div>
     </div>
