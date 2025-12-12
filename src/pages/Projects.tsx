@@ -248,15 +248,15 @@ const stats = [
 ];
 
 const floatingTags = [
-  { label: "한강 DeFi", top: "16%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-blue-500 text-white" },
-  { label: "강남 Layer 1", top: "28%", left: "16%", mobileTop: "15%", mobileRight: "3%", color: "bg-cyan-400 text-black" },
-  { label: "여의도 GameFi", top: "46%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-sky-500 text-white" },
-  { label: "NFT Korea", top: "52%", left: "20%", color: "bg-indigo-400 text-white" },
-  { label: "판교 Infrastructure", top: "14%", right: "10%", color: "bg-teal-400 text-black" },
-  { label: "서초 Exchange", top: "28%", right: "5%", color: "bg-blue-400 text-white" },
-  { label: "성수 Layer 2", top: "46%", right: "8%", color: "bg-cyan-500 text-black" },
-  { label: "DePIN Seoul", bottom: "26%", right: "14%", color: "bg-sky-400 text-black" },
-  { label: "RWA Korea", bottom: "30%", left: "10%", color: "bg-indigo-500 text-white" },
+  { label: "DeFi", top: "16%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-blue-500 text-white" },
+  { label: "Layer 1", top: "28%", left: "16%", mobileTop: "15%", mobileRight: "3%", color: "bg-cyan-400 text-black" },
+  { label: "GameFi", top: "46%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-sky-500 text-white" },
+  { label: "NFT", top: "52%", left: "20%", color: "bg-indigo-400 text-white" },
+  { label: "Infrastructure", top: "14%", right: "10%", color: "bg-teal-400 text-black" },
+  { label: "Exchange", top: "28%", right: "5%", color: "bg-blue-400 text-white" },
+  { label: "Layer 2", top: "46%", right: "8%", color: "bg-cyan-500 text-black" },
+  { label: "DePIN", bottom: "26%", right: "14%", color: "bg-sky-400 text-black" },
+  { label: "RWA", bottom: "30%", left: "10%", color: "bg-indigo-500 text-white" },
 ];
 
 const Projects = () => {

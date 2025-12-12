@@ -30,12 +30,11 @@ const themeConfig = {
   accentColor: "#0891b2",
   accentColorHover: "#0e7490",
   floatingTags: [
-    { label: "서울 커뮤니티", top: "12%", left: "6%" },
-    { label: "Discord", top: "22%", right: "8%" },
-    { label: "Telegram", top: "38%", left: "4%" },
-    { label: "한강 네트워크", top: "48%", right: "6%" },
+    { label: "Discord", top: "12%", left: "6%" },
+    { label: "Telegram", top: "22%", right: "8%" },
+    { label: "Moderation", top: "38%", left: "4%" },
+    { label: "AMA Hosting", top: "48%", right: "6%" },
     { label: "24/7 Support", top: "28%", left: "12%" },
-    { label: "Korea First", top: "58%", left: "10%" },
   ],
 };
 

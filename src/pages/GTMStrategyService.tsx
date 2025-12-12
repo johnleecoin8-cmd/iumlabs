@@ -35,12 +35,11 @@ const themeConfig = {
   accentColor: "#10b981",
   accentColorHover: "#059669",
   floatingTags: [
-    { label: "경복궁 전략", top: "13%", left: "9%" },
-    { label: "Korea Launch", top: "25%", right: "11%" },
-    { label: "한옥 포지셔닝", top: "43%", left: "6%" },
-    { label: "광화문 네러티브", top: "53%", right: "8%" },
-    { label: "Korean Market", top: "33%", left: "16%" },
-    { label: "Seoul Entry", top: "63%", left: "10%" },
+    { label: "Launch", top: "13%", left: "9%" },
+    { label: "Positioning", top: "25%", right: "11%" },
+    { label: "Strategy", top: "43%", left: "6%" },
+    { label: "Narrative", top: "53%", right: "8%" },
+    { label: "Market Entry", top: "33%", left: "16%" },
   ],
 };
 

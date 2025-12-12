@@ -35,12 +35,11 @@ const themeConfig = {
   accentColor: "#06b6d4",
   accentColorHover: "#0891b2",
   floatingTags: [
-    { label: "테헤란로 Yap", top: "14%", left: "7%" },
+    { label: "Yappers", top: "14%", left: "7%" },
     { label: "600+ Creators", top: "26%", right: "10%" },
-    { label: "판교 테크", top: "42%", left: "4%" },
+    { label: "Amplification", top: "42%", left: "4%" },
     { label: "Mindshare", top: "52%", right: "8%" },
-    { label: "K-Yappers", top: "34%", left: "14%" },
-    { label: "Viral Seoul", top: "62%", left: "11%" },
+    { label: "Virality", top: "34%", left: "14%" },
   ],
 };
 

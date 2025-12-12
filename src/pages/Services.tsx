@@ -130,20 +130,19 @@ const Services = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.85)]" />
         </div>
 
-        {/* Korea-Themed Floating Tags */}
+        {/* Floating Tags */}
         <div className="absolute inset-0 z-10 hidden md:block">
-          {/* Left side tags */}
           <div 
             className="absolute top-[12%] left-[5%] px-4 py-2 rounded-sm bg-purple-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-purple-500/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '4s', animationDelay: '0s' }}
           >
-            강남 마케팅
+            Strategy
           </div>
           <div 
             className="absolute top-[26%] left-[10%] px-4 py-2 rounded-sm bg-pink-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-pink-500/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '5s', animationDelay: '0.5s' }}
           >
-            홍대 바이럴
+            Growth
           </div>
           <div 
             className="absolute top-[42%] left-[3%] px-4 py-2 rounded-sm bg-fuchsia-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-fuchsia-500/50 transition-all duration-300 pointer-events-auto"
@@ -155,27 +154,25 @@ const Services = () => {
             className="absolute top-[58%] left-[8%] px-4 py-2 rounded-sm bg-violet-500 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-violet-500/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '5.5s', animationDelay: '1.5s' }}
           >
-            Seoul Growth
+            Marketing
           </div>
-          
-          {/* Right side tags */}
           <div 
             className="absolute top-[15%] right-[6%] px-4 py-2 rounded-sm bg-pink-400 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-pink-400/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '5s', animationDelay: '0.3s' }}
           >
-            K-Influencers
+            Influencers
           </div>
           <div 
             className="absolute top-[30%] right-[3%] px-4 py-2 rounded-sm bg-purple-400 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-purple-400/50 transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '4.5s', animationDelay: '0.8s' }}
           >
-            미디어 PR
+            PR & Media
           </div>
           <div 
             className="absolute top-[48%] right-[8%] px-4 py-2 rounded-sm border border-white/60 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:bg-white/10 hover:border-white transition-all duration-300 pointer-events-auto"
             style={{ animationDuration: '5.5s', animationDelay: '1.3s' }}
           >
-            테헤란로 전략
+            Social Media
           </div>
           <div 
             className="absolute top-[64%] right-[4%] px-4 py-2 rounded-sm bg-fuchsia-400 text-white text-sm font-medium animate-float cursor-default hover:scale-110 hover:shadow-lg hover:shadow-fuchsia-400/50 transition-all duration-300 pointer-events-auto"
