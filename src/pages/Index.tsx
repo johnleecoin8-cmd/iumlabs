@@ -3,8 +3,10 @@ import HeroSection from "@/components/HeroSection";
 import AboutUsSection from "@/components/AboutUsSection";
 import CasesSection from "@/components/CasesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
+import ProcessSection from "@/components/ProcessSection";
 import ServicesSection from "@/components/ServicesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import FAQSection from "@/components/FAQSection";
 import InsightsSection from "@/components/InsightsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -35,12 +37,20 @@ const Index = () => {
         <WhyChooseUsSection />
       </section>
       
+      <section className="scroll-reveal" id="process">
+        <ProcessSection />
+      </section>
+      
       <section className="scroll-reveal" id="services">
         <ServicesSection />
       </section>
       
       <section className="scroll-reveal" id="testimonials">
         <TestimonialsSection />
+      </section>
+      
+      <section className="scroll-reveal" id="faq">
+        <FAQSection />
       </section>
       
       <section className="scroll-reveal" id="insights">
