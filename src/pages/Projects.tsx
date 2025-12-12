@@ -7,8 +7,7 @@ import TiltCard from "@/components/TiltCard";
 import { ArrowUpRight, Calendar } from "lucide-react";
 import CalendlyButton from "@/components/CalendlyButton";
 import { Link } from "react-router-dom";
-import Planet3D from "@/components/Planet3D";
-import saturnRings from "@/assets/backgrounds/saturn-rings.jpg";
+import seoulHanriverTwilight from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -276,20 +275,20 @@ const Projects = () => {
       
       {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Saturn Rings */}
+        {/* Background - Seoul Hanriver Twilight */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${saturnRings})`,
-              filter: "brightness(0.7) saturate(1.2)",
+              backgroundImage: `url(${seoulHanriverTwilight})`,
+              filter: "brightness(0.5) saturate(1.2)",
             }}
           />
           
-          {/* Aurora light overlay - Saturn purple/pink theme */}
+          {/* Aurora light overlay - Blue/Cyan river theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/30 via-transparent to-pink-500/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-violet-600/25 via-transparent to-fuchsia-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/25 via-transparent to-cyan-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600/20 via-transparent to-sky-500/15" />
           </div>
           
           {/* Light sweep effect */}
@@ -299,9 +298,6 @@ const Projects = () => {
           
           {/* Dark overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
-          
-          {/* 3D Planet */}
-          <Planet3D type="saturn" className="opacity-70" />
         </div>
         
         {/* Floating Tags with Parallax - Colorful */}

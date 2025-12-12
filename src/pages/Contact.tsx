@@ -10,8 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
-import Planet3D from "@/components/Planet3D";
-import marsSurface from "@/assets/backgrounds/mars-surface.jpg";
+import koreaPalaceModern from "@/assets/backgrounds/korea-palace-modern.jpg";
 import seoulSkyline from "@/assets/seoul-skyline.jpg";
 
 const budgetOptions = [
@@ -143,20 +142,20 @@ const Contact = () => {
       
       {/* Hero - Full Screen with Ken Burns Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Mars Surface */}
+        {/* Background - Korea Palace Modern */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${marsSurface})`,
-              filter: "brightness(0.6) saturate(1.3)",
+              backgroundImage: `url(${koreaPalaceModern})`,
+              filter: "brightness(0.5) saturate(1.2)",
             }}
           />
           
-          {/* Aurora light overlay - Mars red/orange theme */}
+          {/* Aurora light overlay - Amber/Orange warm theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-red-600/30 via-transparent to-orange-500/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-rose-600/25 via-transparent to-amber-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-amber-600/25 via-transparent to-orange-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-yellow-600/20 via-transparent to-red-500/15" />
           </div>
           
           {/* Light sweep effect */}
@@ -166,9 +165,6 @@ const Contact = () => {
           
           {/* Dark overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
-          
-          {/* 3D Planet */}
-          <Planet3D type="mars" className="opacity-60" />
         </div>
         
         {/* Floating Tags with Parallax - Colorful */}

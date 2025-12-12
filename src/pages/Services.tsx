@@ -6,8 +6,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
-import Planet3D from "@/components/Planet3D";
-import cosmicNebula from "@/assets/backgrounds/cosmic-nebula.jpg";
+import seoulGangnamNight from "@/assets/backgrounds/seoul-gangnam-night.jpg";
 
 // Service images
 import gtmImage from "@/assets/services/gtm-strategy.jpg";
@@ -104,39 +103,22 @@ const Services = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Full Screen with Cosmic Nebula Background */}
+      {/* Hero - Full Screen with Seoul Gangnam Background */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-        {/* Background - Cosmic Nebula */}
+        {/* Background - Seoul Gangnam Night */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
-              backgroundImage: `url(${cosmicNebula})`,
-              filter: "brightness(0.7) saturate(1.2)",
+              backgroundImage: `url(${seoulGangnamNight})`,
+              filter: "brightness(0.5) saturate(1.2)",
             }}
           />
           
-          {/* Aurora light overlay - Pink/Cyan cosmic theme */}
+          {/* Aurora light overlay - Purple/Pink neon theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-pink-600/30 via-transparent to-cyan-500/25" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/30 via-transparent to-blue-500/20" />
-          </div>
-          
-          {/* Twinkling stars effect */}
-          <div className="absolute inset-0">
-            {[...Array(50)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 3}s`,
-                  animationDuration: `${2 + Math.random() * 2}s`,
-                  opacity: 0.3 + Math.random() * 0.7,
-                }}
-              />
-            ))}
+            <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/25 via-transparent to-pink-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-fuchsia-600/20 via-transparent to-violet-500/15" />
           </div>
           
           {/* Light sweep effect */}
@@ -146,9 +128,6 @@ const Services = () => {
           
           {/* Dark overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.85)]" />
-          
-          {/* 3D Planet */}
-          <Planet3D type="sun" className="opacity-40" />
         </div>
 
         {/* Colorful Floating Tags - Cosmic themed */}
