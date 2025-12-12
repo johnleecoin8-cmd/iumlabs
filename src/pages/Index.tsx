@@ -3,8 +3,8 @@ import HeroSection from "@/components/HeroSection";
 import AboutUsSection from "@/components/AboutUsSection";
 import CasesSection from "@/components/CasesSection";
 import ServicesSection from "@/components/ServicesSection";
-import TeamSection from "@/components/TeamSection";
-import BlogPreviewSection from "@/components/BlogPreviewSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import InsightsSection from "@/components/InsightsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import SectionIndicator from "@/components/SectionIndicator";
@@ -22,24 +22,24 @@ const Index = () => {
         <HeroSection />
       </main>
       
-      <section className="scroll-reveal" id="about" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
+      <section className="scroll-reveal" id="about">
         <AboutUsSection />
       </section>
       
-      <section className="scroll-reveal" id="cases" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
+      <section className="scroll-reveal" id="cases">
         <CasesSection />
       </section>
       
-      <section className="screen-4 scroll-reveal" id="services">
+      <section className="scroll-reveal" id="services">
         <ServicesSection />
       </section>
       
-      <section className="scroll-reveal" id="team" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
-        <TeamSection />
+      <section className="scroll-reveal" id="testimonials">
+        <TestimonialsSection />
       </section>
       
-      <section className="scroll-reveal" id="blog" style={{ backgroundColor: 'hsl(0 0% 96%)' }}>
-        <BlogPreviewSection />
+      <section className="scroll-reveal" id="insights">
+        <InsightsSection />
       </section>
       
       <section className="screen-8 scroll-reveal" id="contact">

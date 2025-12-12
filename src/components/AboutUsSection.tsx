@@ -1,57 +1,98 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { Clock } from "lucide-react";
-import { images } from "@/config/content";
-import CalendlyButton from "./CalendlyButton";
+import { TrendingUp, Users, Building2, Handshake } from "lucide-react";
+
+const stats = [
+  { 
+    value: "200+", 
+    label: "Projects Launched",
+    icon: TrendingUp,
+    description: "Successfully launched in Korea"
+  },
+  { 
+    value: "$500M+", 
+    label: "Funds Raised",
+    icon: Building2,
+    description: "Total fundraising supported"
+  },
+  { 
+    value: "50+", 
+    label: "Exchange Partners",
+    icon: Handshake,
+    description: "CEX & DEX partnerships"
+  },
+  { 
+    value: "1000+", 
+    label: "KOL Network",
+    icon: Users,
+    description: "Influencers & creators"
+  },
+];
 
 const AboutUsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div ref={ref} className="py-24 px-4 flex-1 bg-[hsl(0,0%,96%)]">
-      <div className="container mx-auto max-w-6xl">
-        <div className={`grid lg:grid-cols-2 gap-16 items-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+    <div ref={ref} className="py-32 px-4 bg-[hsl(0,0%,4%)]">
+      <div className="container mx-auto max-w-7xl">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
           {/* Left - Content */}
-          <div>
-            <div className="flex items-center gap-2 text-sm text-[hsl(0,0%,40%)] mb-6">
-              <span className="number-badge text-[hsl(0,0%,40%)]">About Us</span>
-            </div>
-
-            <p className="text-2xl md:text-3xl lg:text-4xl font-light leading-relaxed text-[hsl(0,0%,8%)] mb-8">
-              We're an <span className="text-primary font-medium">Award-Winning Agency</span> supporting{" "}
-              <span className="text-primary font-medium">Crypto Projects</span> since 2023.{" "}
-              <span className="text-primary font-medium">Helping 200+ Brands</span> launch in{" "}
-              <span className="serif-italic">Korea</span> with expertise from{" "}
-              <span className="text-primary font-medium">Binance</span> and{" "}
-              <span className="text-primary font-medium">KuCoin</span> veterans.{" "}
-              We specialize in <span className="text-primary font-medium">PR</span>,{" "}
-              <span className="text-primary font-medium">Social Media</span>, and{" "}
-              <span className="text-primary font-medium">Influencer Marketing</span>.
+          <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+            <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
+              Why Choose Us
+            </span>
+            
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+              We Bridge Your Project to{" "}
+              <span className="text-primary">Korea</span>
+            </h2>
+            
+            <p className="text-lg text-white/60 mb-8 leading-relaxed max-w-lg">
+              Founded by veterans from <span className="text-white font-medium">Binance</span> and{" "}
+              <span className="text-white font-medium">KuCoin</span>, we deliver unmatched expertise 
+              in Korean Web3 market entry, community building, and exchange partnerships.
             </p>
 
-            {/* CTA Row */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6">
-              <CalendlyButton className="lunar-btn">
-                <span>Book a Meeting</span>
-              </CalendlyButton>
-
-              <div className="flex items-center gap-2 text-sm text-[hsl(0,0%,40%)]">
-                <Clock className="w-4 h-4" />
-                <span>open hours: Mon-Fri 09:00 — 18:00 KST</span>
+            <div className="flex items-center gap-6">
+              <div className="flex -space-x-3">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-primary/20 to-primary/5 border-2 border-primary/30 flex items-center justify-center">
+                  <span className="text-primary text-sm font-bold">J</span>
+                </div>
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500/20 to-blue-500/5 border-2 border-blue-500/30 flex items-center justify-center">
+                  <span className="text-blue-400 text-sm font-bold">D</span>
+                </div>
+              </div>
+              <div>
+                <p className="text-white/80 text-sm">Founded by</p>
+                <p className="text-white font-medium">Ex-Binance & Ex-KuCoin Leaders</p>
               </div>
             </div>
           </div>
 
-          {/* Right - Team Photo */}
-          <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-xl">
-              <img 
-                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
-                alt="CryptoBridge Korea Team"
-                className="w-full h-[400px] lg:h-[500px] object-cover"
-              />
-              {/* Blue overlay at bottom */}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/30 via-transparent to-transparent" />
-            </div>
+          {/* Right - Stats Grid */}
+          <div className={`grid grid-cols-2 gap-4 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
+            {stats.map((stat, index) => (
+              <div
+                key={index}
+                className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                  <stat.icon className="w-5 h-5 text-primary" />
+                </div>
+                
+                <div className="mt-8">
+                  <div className="text-3xl md:text-4xl font-bold text-white mb-1">
+                    {stat.value}
+                  </div>
+                  <div className="text-white/80 font-medium text-sm mb-1">
+                    {stat.label}
+                  </div>
+                  <div className="text-white/40 text-xs">
+                    {stat.description}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
