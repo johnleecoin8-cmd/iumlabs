@@ -665,30 +665,101 @@
 }
 
 /* ============================================
-   SPIDER WEB PULSE ANIMATION
+   ELECTRIC ENERGY ANIMATION
    ============================================ */
 
-@keyframes pulse-dot-move {
+@keyframes electric-pulse {
   0% {
     opacity: 0;
-    r: 1;
+    fill: rgba(147, 197, 253, 0);
+  }
+  10% {
+    opacity: 1;
+    fill: rgba(147, 197, 253, 1);
+  }
+  15% {
+    opacity: 0.3;
+    fill: rgba(96, 165, 250, 0.5);
   }
   20% {
-    opacity: 0.9;
-    r: 2.5;
+    opacity: 1;
+    fill: rgba(191, 219, 254, 1);
+  }
+  25% {
+    opacity: 0.5;
+    fill: rgba(147, 197, 253, 0.7);
+  }
+  30% {
+    opacity: 1;
+    fill: rgba(224, 242, 254, 1);
+  }
+  50% {
+    opacity: 0.8;
+    fill: rgba(147, 197, 253, 0.9);
+  }
+  70% {
+    opacity: 1;
+    fill: rgba(191, 219, 254, 1);
+  }
+  75% {
+    opacity: 0.4;
+    fill: rgba(96, 165, 250, 0.6);
   }
   80% {
-    opacity: 0.9;
-    r: 2.5;
+    opacity: 1;
+    fill: rgba(147, 197, 253, 1);
+  }
+  90% {
+    opacity: 0.6;
+    fill: rgba(147, 197, 253, 0.8);
   }
   100% {
     opacity: 0;
-    r: 1;
+    fill: rgba(147, 197, 253, 0);
   }
 }
 
-.animate-pulse-dot {
-  animation: pulse-dot-move 3s ease-in-out infinite;
+@keyframes spark-flicker {
+  0%, 100% {
+    opacity: 0;
+    r: 0.5;
+  }
+  5% {
+    opacity: 1;
+    r: 1.2;
+  }
+  10% {
+    opacity: 0.3;
+    r: 0.6;
+  }
+  15% {
+    opacity: 1;
+    r: 1;
+  }
+  20% {
+    opacity: 0.5;
+    r: 0.8;
+  }
+  50% {
+    opacity: 0.8;
+    r: 1;
+  }
+  85% {
+    opacity: 1;
+    r: 1.2;
+  }
+  90% {
+    opacity: 0.4;
+    r: 0.7;
+  }
+}
+
+.animate-electric-pulse {
+  animation: electric-pulse 6s ease-in-out infinite;
+}
+
+.animate-spark {
+  animation: spark-flicker 6s ease-in-out infinite;
 }
 
 /* ============================================
