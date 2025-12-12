@@ -181,7 +181,7 @@ const HeroSection = () => {
             animationDelay: `${index * 0.3}s`,
           }}
         >
-          <span className="font-sans px-2 py-1 text-[10px] rounded-sm border border-white/20 bg-black/50 backdrop-blur-sm text-white/80 whitespace-nowrap">
+          <span className="font-sans px-2 py-1 text-[10px] rounded-sm border border-white/20 bg-black/60 text-white/80 whitespace-nowrap">
             {tag.label}
           </span>
         </div>
