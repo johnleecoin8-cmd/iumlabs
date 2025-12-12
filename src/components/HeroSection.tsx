@@ -145,9 +145,9 @@ const HeroSection = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="relative z-10 py-8 sm:py-10">
+      <div className="relative z-10 py-4 sm:py-6">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
             {stats.map((stat, index) => (
               <StatItem 
                 key={index}
@@ -164,24 +164,24 @@ const HeroSection = () => {
       </div>
 
       {/* Client Logo Marquee - Dark Pill Cards Style */}
-      <div className="relative z-10 border-t border-white/10 py-4 sm:py-6 overflow-hidden">
+      <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
         {/* Section indicator */}
-        <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-xs sm:text-sm z-20">
+        <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
           <span className="number-badge">01</span>
         </div>
 
-        <div className="flex items-center logo-marquee-slow ml-16 sm:ml-20">
+        <div className="flex items-center logo-marquee-slow ml-14 sm:ml-16">
           {[...clientLogos, ...clientLogos].map((client, index) => (
             <div 
               key={index} 
-              className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-6 py-2.5 sm:py-3 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+              className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
             >
               <img 
                 src={client.logo} 
                 alt={client.name} 
-                className="h-5 w-5 sm:h-7 sm:w-7 object-contain brightness-0 invert opacity-80 flex-shrink-0"
+                className="h-4 w-4 sm:h-5 sm:w-5 object-contain brightness-0 invert opacity-80 flex-shrink-0"
               />
-              <span className="text-white/70 text-xs sm:text-sm font-medium whitespace-nowrap">
+              <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
                 {client.name}
               </span>
             </div>
