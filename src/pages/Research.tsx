@@ -2856,14 +2856,14 @@ The goal isn't to game the algorithm—it's to build genuine attention and inter
 ];
 
 const floatingTags = [
-  { label: "Insights", top: "20%", left: "5%", mobileTop: "12%", mobileLeft: "3%", color: "bg-pink-400 text-white" },
-  { label: "Reports", top: "32%", left: "20%", mobileTop: "15%", mobileRight: "3%", color: "bg-cyan-400 text-black" },
-  { label: "Strategy", top: "50%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-purple-400 text-white" },
-  { label: "Research", top: "52%", left: "24%", color: "bg-fuchsia-400 text-white" },
-  { label: "Analysis", top: "18%", right: "12%", color: "bg-cyan-300 text-black" },
-  { label: "Market", top: "32%", right: "5%", color: "bg-pink-300 text-black" },
-  { label: "DeFi", top: "50%", right: "10%", color: "bg-purple-300 text-black" },
-  { label: "Trends", bottom: "28%", right: "16%", color: "bg-fuchsia-500 text-white" },
+  { label: "Insights", top: "18%", left: "5%" },
+  { label: "Reports", top: "30%", left: "18%" },
+  { label: "Strategy", top: "48%", left: "4%" },
+  { label: "Analysis", top: "58%", left: "14%" },
+  { label: "Market", top: "16%", right: "10%" },
+  { label: "DeFi", top: "30%", right: "5%" },
+  { label: "Research", top: "48%", right: "10%" },
+  { label: "Trends", top: "62%", right: "6%" },
 ];
 
 const categories = ["All", "Market Research", "DeFi", "Strategy", "Community", "NFT", "Marketing"];
@@ -2945,23 +2945,22 @@ const Research = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
         </div>
         
-        {/* Floating Tags */}
-        <div>
+        {/* Floating Tags - lunar-tag-dark style */}
+        <div className="absolute inset-0 pointer-events-none hidden md:block">
           {floatingTags.map((tag, index) => (
-            <span
-              key={`${tag.label}-${index}`}
-              className={`absolute animate-float hidden sm:block px-4 py-2 rounded-md text-sm font-medium shadow-lg ${tag.color}`}
+            <div
+              key={tag.label}
+              className="absolute lunar-tag-dark text-xs whitespace-nowrap animate-float pointer-events-auto cursor-default hover:bg-white/10 transition-colors"
               style={{
                 top: tag.top,
                 left: tag.left,
                 right: tag.right,
-                bottom: tag.bottom,
                 animationDelay: `${index * 0.3}s`,
-                transform: `translateY(${scrollY * 0.05}px)`,
+                animationDuration: `${4 + index * 0.5}s`,
               }}
             >
               {tag.label}
-            </span>
+            </div>
           ))}
         </div>
 

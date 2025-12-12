@@ -34,14 +34,14 @@ const contactInfo = [
 ];
 
 const floatingTags = [
-  { label: "Seoul Office", top: "18%", left: "6%", mobileTop: "12%", mobileLeft: "3%", color: "bg-amber-400 text-black" },
-  { label: "24/7 Support", top: "28%", left: "20%", mobileTop: "15%", mobileRight: "3%", color: "bg-orange-400 text-black" },
-  { label: "Book a Call", top: "46%", left: "4%", mobileTop: "75%", mobileLeft: "3%", color: "bg-yellow-400 text-black" },
-  { label: "Fast Response", top: "52%", left: "24%", color: "bg-amber-500 text-white" },
-  { label: "Global Reach", top: "16%", right: "10%", color: "bg-orange-300 text-black" },
-  { label: "Partnership", top: "30%", right: "5%", color: "bg-yellow-500 text-black" },
-  { label: "Consultation", top: "48%", right: "10%", color: "bg-amber-300 text-black" },
-  { label: "Get Started", top: "62%", right: "14%", color: "bg-orange-500 text-white" },
+  { label: "Seoul Office", top: "18%", left: "6%" },
+  { label: "24/7 Support", top: "28%", left: "18%" },
+  { label: "Book a Call", top: "46%", left: "4%" },
+  { label: "Fast Response", top: "56%", left: "14%" },
+  { label: "Global Reach", top: "16%", right: "10%" },
+  { label: "Partnership", top: "30%", right: "5%" },
+  { label: "Consultation", top: "48%", right: "10%" },
+  { label: "Get Started", top: "62%", right: "6%" },
 ];
 
 const serviceHighlights = [
@@ -167,36 +167,22 @@ const Contact = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
         </div>
         
-        {/* Floating Tags with Parallax - Colorful */}
-        <div>
+        {/* Floating Tags - lunar-tag-dark style */}
+        <div className="absolute inset-0 pointer-events-none hidden md:block">
           {floatingTags.map((tag, index) => (
-            <span
-              key={`${tag.label}-${index}`}
-              className={`absolute animate-float hidden sm:block px-4 py-2 rounded-md text-sm font-medium shadow-lg ${tag.color}`}
+            <div
+              key={tag.label}
+              className="absolute lunar-tag-dark text-xs whitespace-nowrap animate-float pointer-events-auto cursor-default hover:bg-white/10 transition-colors"
               style={{
                 top: tag.top,
                 left: tag.left,
                 right: tag.right,
                 animationDelay: `${index * 0.3}s`,
-                transform: `translateY(${scrollY * 0.05}px)`,
+                animationDuration: `${4 + index * 0.5}s`,
               }}
             >
               {tag.label}
-            </span>
-          ))}
-          {floatingTags.slice(0, 4).map((tag, index) => (
-            <span
-              key={`mobile-${tag.label}-${index}`}
-              className={`absolute animate-float sm:hidden px-3 py-1.5 rounded-md text-xs font-medium shadow-lg ${tag.color}`}
-              style={{
-                top: tag.mobileTop,
-                left: tag.mobileLeft,
-                right: tag.mobileRight,
-                animationDelay: `${index * 0.3}s`,
-              }}
-            >
-              {tag.label}
-            </span>
+            </div>
           ))}
         </div>
 
