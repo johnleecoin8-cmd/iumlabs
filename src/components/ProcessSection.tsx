@@ -1,192 +1,159 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import CalendlyButton from './CalendlyButton';
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { ArrowRight, Search, Map, Rocket } from "lucide-react";
+import { motion } from "framer-motion";
 
-// Process images
-import kickoffImg from '@/assets/process/kickoff-discussion.jpg';
-import discoveryImg from '@/assets/process/discovery-research.jpg';
-import strategyImg from '@/assets/process/strategy-planning.jpg';
-import executionImg from '@/assets/process/execution-growth.jpg';
-import growthImg from '@/assets/process/growth-optimization.jpg';
-import reportingImg from '@/assets/process/reporting.jpg';
+// Import process images
+import discoveryImg from "@/assets/process/discovery-research.jpg";
+import strategyImg from "@/assets/process/strategy-planning.jpg";
+import executionImg from "@/assets/process/execution-growth.jpg";
 
-interface ProcessStep {
-  number: string;
-  subtitle: string;
-  title: string;
-  description: string;
-  image: string;
-  details: string[];
-}
-
-const steps: ProcessStep[] = [
+const steps = [
   {
-    number: '01',
-    subtitle: 'Kickoff',
-    title: 'Initial Discussion',
-    description: 'Deep understanding of your project and clear goal definition.',
-    image: kickoffImg,
-    details: ['Project Understanding', 'Goal Definition', 'Market Analysis']
-  },
-  {
-    number: '02',
-    subtitle: 'Research',
-    title: 'Discovery & Research',
-    description: 'Comprehensive competitor and market analysis for optimal positioning.',
+    number: "01",
+    title: "Discovery & Research",
+    description: "We analyze your project, competitors, and target audience in the Korean market to build a solid foundation for your launch.",
     image: discoveryImg,
-    details: ['Competitor Analysis', 'Position Mapping', 'KOL Research']
+    icon: Search,
+    highlights: ["Market Analysis", "Competitor Review", "Audience Mapping"],
   },
   {
-    number: '03',
-    subtitle: 'Strategy',
-    title: 'Campaign Design',
-    description: 'Custom marketing roadmap tailored for Korean market success.',
+    number: "02",
+    title: "Strategy & Planning",
+    description: "Custom marketing roadmap with KPIs, channels, budget allocation, and KOL selection tailored to your project goals.",
     image: strategyImg,
-    details: ['Campaign Design', 'KPI Definition', 'Resource Planning']
+    icon: Map,
+    highlights: ["Roadmap Creation", "KOL Selection", "Budget Planning"],
   },
   {
-    number: '04',
-    subtitle: 'Launch',
-    title: 'Execution',
-    description: 'Full-scale deployment across all marketing channels.',
+    number: "03",
+    title: "Execution & Growth",
+    description: "Full-scale campaign deployment across Korean platforms, communities, and influencer networks with real-time optimization.",
     image: executionImg,
-    details: ['KOL Campaign', 'PR Distribution', 'Community Growth']
+    icon: Rocket,
+    highlights: ["Campaign Launch", "Community Building", "Performance Tracking"],
   },
-  {
-    number: '05',
-    subtitle: 'Optimize',
-    title: 'Growth Tuning',
-    description: 'Data-driven optimization based on real-time metrics.',
-    image: growthImg,
-    details: ['KPI Adjustment', 'ROI Optimization', 'Narrative Riding']
-  },
-  {
-    number: '06',
-    subtitle: 'Report',
-    title: 'Performance Review',
-    description: 'Comprehensive analysis and next phase recommendations.',
-    image: reportingImg,
-    details: ['KPI Report', 'Campaign Analysis', 'Next Sprint']
-  }
 ];
 
-const ProcessCard = ({ step, index }: { step: ProcessStep; index: number }) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ["start end", "end start"]
-  });
-
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.8, 1, 1, 0.8]);
-  const numberX = useTransform(scrollYProgress, [0, 0.5, 1], [-100, 0, 100]);
-
-  return (
-    <div 
-      ref={cardRef}
-      className="min-h-[70vh] flex items-center justify-center px-6 py-12"
-    >
-      <motion.div 
-        style={{ opacity, scale }}
-        className="relative w-full max-w-5xl"
-      >
-        {/* Large Background Number */}
-        <motion.div 
-          style={{ x: numberX }}
-          className="absolute -left-8 md:-left-16 lg:-left-24 top-1/2 -translate-y-1/2 pointer-events-none select-none"
-        >
-          <span className="text-[180px] md:text-[280px] lg:text-[360px] font-black text-primary/[0.07] leading-none">
-            {step.number}
-          </span>
-        </motion.div>
-
-        {/* Card Content */}
-        <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 bg-card/50 backdrop-blur-sm border border-border rounded-3xl p-8 md:p-12 overflow-hidden">
-          {/* Left - Image */}
-          <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[400px] rounded-2xl overflow-hidden">
-            <img 
-              src={step.image} 
-              alt={step.title}
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-            
-            {/* Number Badge */}
-            <div className="absolute top-4 left-4 px-4 py-2 bg-primary text-primary-foreground rounded-full text-sm font-bold">
-              Step {step.number}
-            </div>
-          </div>
-
-          {/* Right - Content */}
-          <div className="flex flex-col justify-center">
-            {/* Subtitle */}
-            <span className="text-primary text-sm font-medium uppercase tracking-widest mb-2">
-              {step.subtitle}
-            </span>
-
-            {/* Title */}
-            <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              {step.title}
-            </h3>
-
-            {/* Divider */}
-            <div className="w-16 h-1 bg-primary rounded-full mb-6" />
-
-            {/* Description */}
-            <p className="text-muted-foreground text-lg mb-8">
-              {step.description}
-            </p>
-
-            {/* Details */}
-            <ul className="space-y-3">
-              {step.details.map((detail, i) => (
-                <li key={i} className="flex items-center gap-3 text-foreground">
-                  <span className="w-2 h-2 rounded-full bg-primary flex-shrink-0" />
-                  <span className="text-base md:text-lg">{detail}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Decorative Corner */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-full" />
-        </div>
-      </motion.div>
-    </div>
-  );
-};
-
 const ProcessSection = () => {
-  const { ref, isVisible } = useScrollAnimation({ threshold: 0.1 });
+  const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="bg-background border-t border-border overflow-hidden">
-      {/* Section Header */}
-      <div className={`py-24 px-6 text-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-        <h2 className="text-7xl md:text-8xl lg:text-9xl font-black tracking-[0.15em] text-foreground uppercase mb-6">
-          LAUNCH
-        </h2>
-        <div className={`w-full max-w-xl mx-auto h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent mb-6 transition-all duration-1000 delay-300 ${isVisible ? 'scale-x-100 opacity-100' : 'scale-x-0 opacity-0'}`} />
-        <p className={`text-muted-foreground text-sm md:text-base tracking-wider uppercase transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          6 steps from idea to Korean market domination
-        </p>
-      </div>
+    <section ref={ref} className="py-24 px-6 bg-background border-t border-border overflow-hidden">
+      <div className="container mx-auto max-w-7xl">
+        {/* Section Header */}
+        <div className={`mb-16 transition-normal ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+          <div className="flex items-center gap-3 mb-4">
+            <span className="text-primary text-sm font-medium tracking-wider">HOW WE WORK</span>
+            <div className="h-px w-12 bg-primary/50" />
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
+            Our Process <span className="text-muted-foreground">///</span>
+          </h2>
+          <p className="text-muted-foreground text-lg max-w-2xl">
+            A proven methodology that has helped 200+ projects successfully 
+            enter and thrive in the Korean crypto market.
+          </p>
+        </div>
 
-      {/* Scroll Cards */}
-      <div className="relative">
-        {steps.map((step, index) => (
-          <ProcessCard key={index} step={step} index={index} />
-        ))}
-      </div>
+        {/* Steps - Enhanced Layout with Images */}
+        <div className="space-y-8 md:space-y-0 md:grid md:grid-cols-3 md:gap-6">
+          {steps.map((step, index) => {
+            const IconComponent = step.icon;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.15,
+                  ease: [0.25, 0.46, 0.45, 0.94]
+                }}
+                className="group relative"
+              >
+                {/* Connector Arrow (not on last item) */}
+                {index < steps.length - 1 && (
+                  <div className="hidden md:flex absolute top-[140px] -right-3 z-20 items-center justify-center w-6 h-6 rounded-full bg-background border border-border">
+                    <ArrowRight className="w-3 h-3 text-primary" />
+                  </div>
+                )}
 
-      {/* CTA */}
-      <div className="py-24 px-6 text-center">
-        <CalendlyButton className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground rounded-full text-lg font-semibold hover:bg-primary/90 transition-all duration-300 hover:scale-105 group">
-          Start your journey
-          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-        </CalendlyButton>
+                {/* Card */}
+                <div className="relative bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-[0_0_40px_rgba(59,130,246,0.1)] transition-all duration-500">
+                  {/* Image Section */}
+                  <div className="relative h-[180px] overflow-hidden">
+                    <img 
+                      src={step.image} 
+                      alt={step.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+                    
+                    {/* Number Badge Overlay */}
+                    <div className="absolute top-4 left-4 flex items-center gap-2">
+                      <span className="px-3 py-1.5 rounded-lg bg-primary/90 text-white text-sm font-bold backdrop-blur-sm">
+                        {step.number}
+                      </span>
+                    </div>
+
+                    {/* Icon Overlay */}
+                    <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
+                      <IconComponent className="w-5 h-5 text-white" />
+                    </div>
+                  </div>
+
+                  {/* Content Section */}
+                  <div className="p-6">
+                    {/* Title */}
+                    <h3 className="text-xl md:text-2xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors duration-200">
+                      {step.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-muted-foreground leading-relaxed text-sm mb-4">
+                      {step.description}
+                    </p>
+
+                    {/* Highlights */}
+                    <div className="flex flex-wrap gap-2">
+                      {step.highlights.map((highlight, idx) => (
+                        <span 
+                          key={idx}
+                          className="px-2.5 py-1 rounded-full bg-primary/10 text-primary text-xs font-medium border border-primary/20"
+                        >
+                          {highlight}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Hover Glow Effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-cyan-500/5" />
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* CTA */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-16 text-center"
+        >
+          <a
+            href="https://calendly.com/cryptobridgekorea"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-primary text-white font-semibold hover:shadow-[0_0_30px_rgba(59,130,246,0.4)] transition-all duration-300 group"
+          >
+            Start your journey
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </motion.div>
       </div>
     </section>
   );

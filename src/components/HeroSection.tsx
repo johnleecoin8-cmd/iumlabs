@@ -1,6 +1,6 @@
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
 import { useCountUp } from "@/hooks/useCountUp";
 
@@ -17,13 +17,13 @@ import triaLogo from "@/assets/logos/tria.png";
 
 // Desktop tags
 const serviceTags = [
-  { label: "KOL Marketing", position: "top-[15%] left-[5%]" },
-  { label: "Community Operation", position: "top-[35%] left-[4%]" },
-  { label: "GTM Strategy", position: "top-[55%] left-[6%]" },
-  { label: "Exchange Support", position: "top-[75%] left-[5%]" },
-  { label: "Media & PR", position: "top-[18%] right-[6%]" },
-  { label: "AMA Hosting", position: "top-[42%] right-[5%]" },
-  { label: "Offline Events", position: "top-[66%] right-[7%]" },
+  { label: "KOL Marketing", position: "top-[15%] left-[5%]", depth: 0.02 },
+  { label: "Community Operation", position: "top-[35%] left-[4%]", depth: 0.03 },
+  { label: "GTM Strategy", position: "top-[55%] left-[6%]", depth: 0.025 },
+  { label: "Exchange Support", position: "top-[75%] left-[5%]", depth: 0.035 },
+  { label: "Media & PR", position: "top-[18%] right-[6%]", depth: 0.02 },
+  { label: "AMA Hosting", position: "top-[42%] right-[5%]", depth: 0.03 },
+  { label: "Offline Events", position: "top-[66%] right-[7%]", depth: 0.04 },
 ];
 
 // Mobile tags (fewer, repositioned for small screens)
@@ -54,47 +54,110 @@ const stats = [
 ];
 
 const HeroSection = () => {
+  const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Mouse position for 3D parallax
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  // Spring physics for smooth movement
+  const springConfig = { damping: 25, stiffness: 150 };
+  const springX = useSpring(mouseX, springConfig);
+  const springY = useSpring(mouseY, springConfig);
+  
+  // Transform values for different parallax layers
+  const bgX = useTransform(springX, [-0.5, 0.5], [20, -20]);
+  const bgY = useTransform(springY, [-0.5, 0.5], [20, -20]);
+  const bgScale = useTransform(springY, [-0.5, 0.5], [1.05, 1.15]);
+  
+  const midX = useTransform(springX, [-0.5, 0.5], [30, -30]);
+  const midY = useTransform(springY, [-0.5, 0.5], [30, -30]);
+  
+  const fgX = useTransform(springX, [-0.5, 0.5], [50, -50]);
+  const fgY = useTransform(springY, [-0.5, 0.5], [50, -50]);
+
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  }, [mouseX, mouseY]);
+
+  const handleMouseLeave = useCallback(() => {
+    mouseX.set(0);
+    mouseY.set(0);
+  }, [mouseX, mouseY]);
 
   useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    
     // Trigger count-up animation after component mounts
     const timer = setTimeout(() => setIsVisible(true), 800);
-    return () => clearTimeout(timer);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timer);
+    };
   }, []);
 
   return (
-    <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer */}
+    <div 
+      ref={containerRef}
+      onMouseMove={handleMouseMove as any}
+      onMouseLeave={handleMouseLeave}
+      className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden"
+    >
+      {/* Background Layer - Deepest parallax */}
       <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        <motion.div 
+          className="absolute inset-[-15%] bg-cover bg-center bg-no-repeat"
           style={{ 
             backgroundImage: `url(${seoulBridgeNight})`,
             filter: "brightness(0.35)",
+            x: bgX,
+            y: bgY,
+            scale: bgScale,
           }}
         />
         
-        {/* Aurora light overlay */}
-        <div className="absolute inset-0">
+        {/* Aurora light overlay - Mid layer */}
+        <motion.div 
+          className="absolute inset-0"
+          style={{ x: midX, y: midY }}
+        >
           <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 via-transparent to-cyan-500/15" />
           <div className="absolute inset-0 bg-gradient-to-bl from-purple-600/10 via-transparent to-blue-500/10" />
-        </div>
+        </motion.div>
         
         {/* Animated light beams */}
-        <div className="absolute inset-0 pointer-events-none">
+        <motion.div 
+          className="absolute inset-0 pointer-events-none"
+          style={{ x: fgX, y: fgY }}
+        >
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-[150px] animate-pulse" />
           <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: '1s' }} />
-        </div>
+        </motion.div>
         
         {/* Dark overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* Floating Service Tags - Desktop */}
+      {/* Floating Service Tags - Desktop with 3D parallax */}
       {serviceTags.map((tag, index) => (
         <motion.div
           key={index}
           className={`absolute ${tag.position} hidden lg:block z-10`}
+          style={{ 
+            x: useTransform(springX, [-0.5, 0.5], [40 * tag.depth * 100, -40 * tag.depth * 100]),
+            y: useTransform(springY, [-0.5, 0.5], [40 * tag.depth * 100, -40 * tag.depth * 100]),
+          }}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
@@ -114,18 +177,26 @@ const HeroSection = () => {
         <div
           key={`mobile-${index}`}
           className={`absolute ${tag.position} lg:hidden animate-float z-10`}
-          style={{ animationDelay: `${index * 0.3}s` }}
+          style={{ 
+            animationDelay: `${index * 0.3}s`,
+          }}
         >
-          <span className="font-sans px-2 py-1 text-[10px] rounded-sm border border-white/20 bg-black/50 text-white/80 whitespace-nowrap">
+          <span className="font-sans px-2 py-1 text-[10px] rounded-sm border border-white/20 bg-black/50 backdrop-blur-sm text-white/80 whitespace-nowrap">
             {tag.label}
           </span>
         </div>
       ))}
 
-      {/* Main Content - Centered */}
-      <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
+      {/* Main Content - Centered with parallax */}
+      <motion.div 
+        className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6"
+        style={{ 
+          x: useTransform(springX, [-0.5, 0.5], [10, -10]),
+          y: useTransform(springY, [-0.5, 0.5], [10, -10]),
+        }}
+      >
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline */}
+          {/* Main Headline - Unified Inter font with color contrast */}
           <motion.h1 
             className="font-sans text-[10vw] sm:text-[8vw] md:text-[7vw] lg:text-[6vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10"
             initial={{ opacity: 0, y: 30 }}
@@ -139,7 +210,7 @@ const HeroSection = () => {
             <span className="text-white">Agency</span>
           </motion.h1>
 
-          {/* Subtext */}
+          {/* Subtext - Larger and more prominent */}
           <motion.p 
             className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-10 font-light tracking-wide"
             initial={{ opacity: 0, y: 20 }}
@@ -149,7 +220,7 @@ const HeroSection = () => {
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </motion.p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Stats Section */}
       <div className="relative z-10 py-4 sm:py-6">
@@ -170,8 +241,9 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Client Logo Marquee */}
+      {/* Client Logo Marquee - Dark Pill Cards Style */}
       <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
+        {/* Section indicator */}
         <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
           <span className="number-badge">01</span>
         </div>
@@ -195,7 +267,7 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll Indicator - Bottom Right */}
       <motion.div 
         className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3"
         initial={{ opacity: 0 }}
