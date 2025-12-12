@@ -1,5 +1,5 @@
 import { ChevronDown, ArrowRight, Send } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { Link } from "react-router-dom";
 import CalendlyButton from "./CalendlyButton";
 import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
@@ -18,17 +18,17 @@ import triaLogo from "@/assets/logos/tria.png";
 
 const serviceTags = [
   // Left side - x, y as percentages from top-left
-  { label: "PR", x: 5, y: 10 },
-  { label: "KOL Marketing", x: 3, y: 25 },
-  { label: "Influencer Strategy", x: 6, y: 40 },
-  { label: "DeFi Marketing", x: 4, y: 55 },
-  { label: "Exchange Listing", x: 7, y: 70 },
+  { label: "PR", x: 5, y: 10, color: "#60A5FA" },
+  { label: "KOL Marketing", x: 3, y: 25, color: "#34D399" },
+  { label: "Influencer Strategy", x: 6, y: 40, color: "#F472B6" },
+  { label: "DeFi Marketing", x: 4, y: 55, color: "#FBBF24" },
+  { label: "Exchange Listing", x: 7, y: 70, color: "#A78BFA" },
   // Right side
-  { label: "Social Media Marketing", x: 92, y: 8 },
-  { label: "Community Building", x: 95, y: 22 },
-  { label: "Go-To-Market Strategy", x: 94, y: 38 },
-  { label: "NFT Marketing", x: 96, y: 52 },
-  { label: "GameFi", x: 92, y: 66 },
+  { label: "Social Media Marketing", x: 92, y: 8, color: "#22D3EE" },
+  { label: "Community Building", x: 95, y: 22, color: "#F87171" },
+  { label: "Go-To-Market Strategy", x: 94, y: 38, color: "#4ADE80" },
+  { label: "NFT Marketing", x: 96, y: 52, color: "#FB923C" },
+  { label: "GameFi", x: 92, y: 66, color: "#818CF8" },
 ];
 
 const clientLogos = [
@@ -49,6 +49,231 @@ const stats = [
   { value: 50, label: "Exchange Partners", suffix: "+" },
   { value: 5, label: "Community Reach", suffix: "M+" },
 ];
+
+// Connection Line Component with enhanced animations
+const ConnectionLines = ({ tags }: { tags: typeof serviceTags }) => {
+  const centerX = 50;
+  const centerY = 45;
+
+  return (
+    <svg className="absolute inset-0 w-full h-full pointer-events-none hidden xl:block z-[5]">
+      <defs>
+        {/* Gradient for each line based on tag color */}
+        {tags.map((tag, index) => (
+          <linearGradient
+            key={`gradient-${index}`}
+            id={`line-gradient-${index}`}
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
+            <stop offset="0%" stopColor={`${tag.color}00`} />
+            <stop offset="30%" stopColor={`${tag.color}40`} />
+            <stop offset="50%" stopColor={`${tag.color}80`} />
+            <stop offset="70%" stopColor={`${tag.color}40`} />
+            <stop offset="100%" stopColor={`${tag.color}00`} />
+          </linearGradient>
+        ))}
+        
+        {/* Radial gradient for center glow */}
+        <radialGradient id="center-glow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="rgba(96, 165, 250, 0.8)" />
+          <stop offset="50%" stopColor="rgba(96, 165, 250, 0.3)" />
+          <stop offset="100%" stopColor="rgba(96, 165, 250, 0)" />
+        </radialGradient>
+        
+        {/* Enhanced glow filter */}
+        <filter id="line-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="blur1" />
+          <feGaussianBlur stdDeviation="6" result="blur2" />
+          <feMerge>
+            <feMergeNode in="blur2" />
+            <feMergeNode in="blur1" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+        
+        {/* Pulse animation filter */}
+        <filter id="pulse-glow" x="-100%" y="-100%" width="300%" height="300%">
+          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feFlood floodColor="white" floodOpacity="0.8" />
+          <feComposite in2="blur" operator="in" />
+          <feMerge>
+            <feMergeNode />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+      
+      {/* Center glow effect */}
+      <circle 
+        cx={`${centerX}%`} 
+        cy={`${centerY}%`} 
+        r="80" 
+        fill="url(#center-glow)"
+        className="animate-pulse"
+        style={{ animationDuration: '3s' }}
+      />
+      
+      {tags.map((tag, index) => (
+        <g key={index}>
+          {/* Main connection line with gradient */}
+          <line
+            x1={`${tag.x}%`}
+            y1={`${tag.y}%`}
+            x2={`${centerX}%`}
+            y2={`${centerY}%`}
+            stroke={`url(#line-gradient-${index})`}
+            strokeWidth="1.5"
+            filter="url(#line-glow)"
+            className="animate-pulse"
+            style={{ 
+              animationDuration: `${3 + index * 0.2}s`,
+              animationDelay: `${index * 0.1}s`,
+            }}
+          />
+          
+          {/* Secondary glow line */}
+          <line
+            x1={`${tag.x}%`}
+            y1={`${tag.y}%`}
+            x2={`${centerX}%`}
+            y2={`${centerY}%`}
+            stroke={tag.color}
+            strokeWidth="4"
+            opacity="0.15"
+            filter="url(#line-glow)"
+          />
+          
+          {/* Animated path for traveling pulses */}
+          <path
+            id={`motion-path-${index}`}
+            d={`M ${tag.x} ${tag.y} L ${centerX} ${centerY}`}
+            fill="none"
+            stroke="none"
+          />
+          
+          {/* Multiple traveling energy pulses */}
+          {[0, 1, 2, 3].map((pulseIdx) => (
+            <g key={pulseIdx}>
+              {/* Main pulse orb */}
+              <circle r="3" fill={tag.color} filter="url(#pulse-glow)">
+                <animateMotion
+                  dur={`${4 + pulseIdx * 0.5}s`}
+                  repeatCount="indefinite"
+                  begin={`${index * 0.3 + pulseIdx * 1}s`}
+                  path={`M ${tag.x * 10} ${tag.y * 6} L ${centerX * 10} ${centerY * 6}`}
+                />
+                <animate 
+                  attributeName="opacity" 
+                  values="0;1;1;0" 
+                  dur={`${4 + pulseIdx * 0.5}s`} 
+                  repeatCount="indefinite"
+                  begin={`${index * 0.3 + pulseIdx * 1}s`}
+                />
+                <animate 
+                  attributeName="r" 
+                  values="1;3;2;1" 
+                  dur={`${4 + pulseIdx * 0.5}s`} 
+                  repeatCount="indefinite"
+                  begin={`${index * 0.3 + pulseIdx * 1}s`}
+                />
+              </circle>
+              
+              {/* Trailing spark */}
+              <circle r="1.5" fill="white" opacity="0.9" filter="url(#pulse-glow)">
+                <animateMotion
+                  dur={`${4 + pulseIdx * 0.5}s`}
+                  repeatCount="indefinite"
+                  begin={`${index * 0.3 + pulseIdx * 1 + 0.15}s`}
+                  path={`M ${tag.x * 10} ${tag.y * 6} L ${centerX * 10} ${centerY * 6}`}
+                />
+                <animate 
+                  attributeName="opacity" 
+                  values="0;0.8;0.4;0" 
+                  dur={`${4 + pulseIdx * 0.5}s`} 
+                  repeatCount="indefinite"
+                  begin={`${index * 0.3 + pulseIdx * 1 + 0.15}s`}
+                />
+              </circle>
+            </g>
+          ))}
+          
+          {/* Small node at tag position */}
+          <circle
+            cx={`${tag.x}%`}
+            cy={`${tag.y}%`}
+            r="4"
+            fill={tag.color}
+            opacity="0.6"
+            filter="url(#line-glow)"
+          >
+            <animate 
+              attributeName="r" 
+              values="3;5;3" 
+              dur="2s" 
+              repeatCount="indefinite"
+              begin={`${index * 0.2}s`}
+            />
+            <animate 
+              attributeName="opacity" 
+              values="0.4;0.8;0.4" 
+              dur="2s" 
+              repeatCount="indefinite"
+              begin={`${index * 0.2}s`}
+            />
+          </circle>
+        </g>
+      ))}
+      
+      {/* Center node with pulsing effect */}
+      <circle
+        cx={`${centerX}%`}
+        cy={`${centerY}%`}
+        r="8"
+        fill="rgba(96, 165, 250, 0.8)"
+        filter="url(#line-glow)"
+      >
+        <animate 
+          attributeName="r" 
+          values="6;10;6" 
+          dur="2.5s" 
+          repeatCount="indefinite"
+        />
+        <animate 
+          attributeName="opacity" 
+          values="0.6;1;0.6" 
+          dur="2.5s" 
+          repeatCount="indefinite"
+        />
+      </circle>
+      
+      {/* Outer ring pulse */}
+      <circle
+        cx={`${centerX}%`}
+        cy={`${centerY}%`}
+        r="20"
+        fill="none"
+        stroke="rgba(96, 165, 250, 0.4)"
+        strokeWidth="1"
+      >
+        <animate 
+          attributeName="r" 
+          values="15;40;15" 
+          dur="3s" 
+          repeatCount="indefinite"
+        />
+        <animate 
+          attributeName="opacity" 
+          values="0.5;0;0.5" 
+          dur="3s" 
+          repeatCount="indefinite"
+        />
+      </circle>
+    </svg>
+  );
+};
 
 const HeroSection = () => {
   const [scrollY, setScrollY] = useState(0);
@@ -96,100 +321,8 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* SVG Connection Lines - Spider Web Effect */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none hidden xl:block z-[5]">
-        <defs>
-          {serviceTags.map((_, index) => (
-            <linearGradient
-              key={`gradient-${index}`}
-              id={`line-gradient-${index}`}
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="100%"
-            >
-              <stop offset="0%" stopColor="rgba(255,255,255,0.03)" />
-              <stop offset="50%" stopColor="rgba(255,255,255,0.12)" />
-              <stop offset="100%" stopColor="rgba(255,255,255,0.03)" />
-            </linearGradient>
-          ))}
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur" />
-            <feMerge>
-              <feMergeNode in="coloredBlur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-          {/* Electric glow filter */}
-          <filter id="electric-glow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur stdDeviation="4" result="blur1" />
-            <feGaussianBlur stdDeviation="2" result="blur2" />
-            <feMerge>
-              <feMergeNode in="blur1" />
-              <feMergeNode in="blur2" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-        </defs>
-        
-        {serviceTags.map((tag, index) => (
-          <g key={index}>
-            {/* Connection line - simple gradient */}
-            <line
-              x1={`${tag.x}%`}
-              y1={`${tag.y}%`}
-              x2="50%"
-              y2="45%"
-              stroke={`url(#line-gradient-${index})`}
-              strokeWidth="1"
-              filter="url(#glow)"
-              className="opacity-60"
-            />
-            {/* Electric energy effect - multiple traveling pulses */}
-            {[0, 1, 2].map((pulseIndex) => (
-              <g key={pulseIndex}>
-                {/* Electric arc glow */}
-                <circle
-                  r="1.5"
-                  className="animate-electric-pulse"
-                  style={{
-                    filter: 'url(#electric-glow)',
-                  }}
-                >
-                  <animateMotion
-                    dur="6s"
-                    repeatCount="indefinite"
-                    begin={`${index * 0.5 + pulseIndex * 2}s`}
-                  >
-                    <mpath href={`#path-${index}`} />
-                  </animateMotion>
-                </circle>
-                {/* Electric spark trail */}
-                <circle
-                  r="0.8"
-                  fill="rgba(147,197,253,0.9)"
-                  className="animate-spark"
-                >
-                  <animateMotion
-                    dur="6s"
-                    repeatCount="indefinite"
-                    begin={`${index * 0.5 + pulseIndex * 2 + 0.1}s`}
-                  >
-                    <mpath href={`#path-${index}`} />
-                  </animateMotion>
-                </circle>
-              </g>
-            ))}
-            {/* Hidden path for animateMotion */}
-            <path
-              id={`path-${index}`}
-              d={`M ${tag.x * window.innerWidth / 100} ${tag.y * window.innerHeight / 100} L ${window.innerWidth / 2} ${window.innerHeight * 0.45}`}
-              fill="none"
-              stroke="none"
-            />
-          </g>
-        ))}
-      </svg>
+      {/* Enhanced Connection Lines */}
+      <ConnectionLines tags={serviceTags} />
 
       {/* Floating Service Tags - Desktop only */}
       {serviceTags.map((tag, index) => (
@@ -203,7 +336,13 @@ const HeroSection = () => {
             transform: `translateY(${scrollY * 0.08}px)`
           }}
         >
-          <span className="font-sans lunar-tag-dark text-xs whitespace-nowrap">
+          <span 
+            className="font-sans lunar-tag-dark text-xs whitespace-nowrap glow-border"
+            style={{ 
+              borderColor: `${tag.color}40`,
+              boxShadow: `0 0 20px ${tag.color}20`,
+            }}
+          >
             {tag.label}
           </span>
         </div>
