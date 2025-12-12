@@ -429,3 +429,76 @@ export const specialOffer = {
   errorTitle: "Failed to send",
   errorMessage: "Failed to submit. Please try again.",
 };
+
+// =====================================================
+// Project Colors - Centralized Color System
+// =====================================================
+export const projectColors = {
+  "bnb-chain": {
+    primary: "#F3BA2F",
+    glow: "rgba(243, 186, 47, 0.5)",
+    name: "BNB Chain",
+  },
+  "kucoin": {
+    primary: "#23AF91",
+    glow: "rgba(35, 175, 145, 0.5)",
+    name: "KuCoin",
+  },
+  "polygon": {
+    primary: "#8247E5",
+    glow: "rgba(130, 71, 229, 0.5)",
+    name: "Polygon",
+  },
+  "ondo-finance": {
+    primary: "#3B82F6",
+    glow: "rgba(59, 130, 246, 0.5)",
+    name: "Ondo Finance",
+  },
+  "peaq": {
+    primary: "#00CED1",
+    glow: "rgba(0, 206, 209, 0.5)",
+    name: "Peaq",
+  },
+  "story-protocol": {
+    primary: "#FF6B9D",
+    glow: "rgba(255, 107, 157, 0.5)",
+    name: "Story Protocol",
+  },
+  "megaeth": {
+    primary: "#E040FB",
+    glow: "rgba(224, 64, 251, 0.5)",
+    name: "MegaETH",
+  },
+  "tria": {
+    primary: "#00BFFF",
+    glow: "rgba(0, 191, 255, 0.5)",
+    name: "Tria",
+  },
+  "bybit": {
+    primary: "#F7A600",
+    glow: "rgba(247, 166, 0, 0.5)",
+    name: "Bybit",
+  },
+} as const;
+
+// Helper function to get project color by slug
+export const getProjectColor = (slug: string) => {
+  return projectColors[slug as keyof typeof projectColors] || {
+    primary: "#3B82F6",
+    glow: "rgba(59, 130, 246, 0.5)",
+    name: "Unknown",
+  };
+};
+
+// =====================================================
+// Theme Colors
+// =====================================================
+export const themeColors = {
+  // Primary accent color for the site
+  primary: "#3B82F6", // Blue
+  primaryGlow: "rgba(59, 130, 246, 0.5)",
+  
+  // Neon Green (legacy, for reference)
+  neonGreen: "#1DB954",
+  neonGreenGlow: "rgba(29, 185, 84, 0.5)",
+};

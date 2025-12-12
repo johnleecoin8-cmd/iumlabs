@@ -115,10 +115,10 @@ const Services = () => {
             }}
           />
           
-          {/* Aurora light overlay - Purple/Pink neon theme */}
+        {/* Aurora light overlay - Blue theme */}
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-purple-600/25 via-transparent to-pink-500/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-fuchsia-600/20 via-transparent to-violet-500/15" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/25 via-transparent to-cyan-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-blue-500/20 via-transparent to-sky-500/15" />
           </div>
           
           {/* Light sweep effect */}
