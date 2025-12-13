@@ -21,15 +21,15 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar - Separated pill sections like Lunar Strategy */}
-      <nav className="fixed top-4 left-4 right-4 sm:top-5 sm:left-5 sm:right-5 md:top-6 md:left-6 md:right-6 z-50">
+      <nav className="fixed top-4 left-4 right-4 sm:top-4 sm:left-4 sm:right-4 md:top-5 md:left-5 md:right-5 z-50">
         <div className="flex items-center gap-2.5">
           {/* Logo Section - Separate pill */}
           <Link 
             to="/" 
             className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl border border-white/10 bg-[hsl(0,0%,4%,0.95)] backdrop-blur-md transition-all duration-300 hover:bg-white/5 hover:border-white/20 hover:scale-[1.02]"
           >
-            <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-6">
-              <div className="w-4 h-4 bg-background rounded-sm"></div>
+            <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-6">
+              <div className="w-4.5 h-4.5 bg-background rounded-sm"></div>
             </div>
             <span className="text-base font-semibold text-white">{brandConfig.name}</span>
           </Link>
