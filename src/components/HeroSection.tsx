@@ -1,7 +1,6 @@
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
 import { useCountUp } from "@/hooks/useCountUp";
 
 // Import client logos
@@ -64,26 +63,18 @@ const HeroSection = () => {
 
   return (
     <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Animated Ken Burns Effect */}
+      {/* Background Layer - Video */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div 
-          className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat"
-          style={{ 
-            backgroundImage: `url(${seoulBridgeNight})`,
-            filter: "brightness(0.35)",
-          }}
-          animate={{
-            scale: [1, 1.15, 1.1, 1.2, 1],
-            x: ["0%", "3%", "-2%", "1%", "0%"],
-            y: ["0%", "-2%", "1%", "-1%", "0%"],
-          }}
-          transition={{
-            duration: 25,
-            ease: "easeInOut",
-            repeat: Infinity,
-            repeatType: "reverse",
-          }}
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: "brightness(0.35)" }}
+        >
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+        </video>
         
         {/* Dark overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
