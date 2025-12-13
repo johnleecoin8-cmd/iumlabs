@@ -21,28 +21,29 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar - Separated pill sections like Lunar Strategy */}
+      {/* Main Navbar - White background with black text */}
       <nav className="fixed top-3 left-3 right-3 z-50">
         <div className="flex items-center gap-2">
-          {/* Logo Section - Separate pill */}
+          {/* Logo Section - White pill */}
           <Link 
             to="/" 
-            className="flex items-center gap-2 px-5 py-3 rounded-full border border-white/10 bg-[hsl(0,0%,4%,0.95)] backdrop-blur-md transition-all duration-300 hover:bg-white/5 hover:border-white/20 hover:scale-[1.02]"
+            className="flex items-center gap-2 px-5 py-3 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 hover:bg-gray-50 hover:border-gray-300 hover:scale-[1.02]"
           >
-            <div className="w-7 h-7 bg-white rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-6">
-              <div className="w-3.5 h-3.5 bg-background rounded-sm"></div>
+            <div className="w-7 h-7 bg-primary rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-6">
+              <div className="w-3.5 h-3.5 bg-white rounded-sm"></div>
             </div>
-            <span className="text-base font-semibold text-white">{brandConfig.name}</span>
+            <span className="text-base font-semibold text-gray-900">{brandConfig.name}</span>
           </Link>
 
           {/* Spacer */}
           <div className="flex-1" />
 
-          {/* Center - Email - Separate pill */}
-          <div className="hidden lg:flex items-center gap-3 px-5 py-3 rounded-full border border-white/10 bg-[hsl(0,0%,4%,0.95)] backdrop-blur-md transition-all duration-300 hover:bg-white/5 hover:border-white/20">
-            <span className="text-white/40 text-sm">e-mail</span>
+          {/* Center - Email - White pill */}
+          <div className="hidden lg:flex items-center gap-3 px-5 py-3 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 hover:bg-gray-50 hover:border-gray-300">
+            <span className="text-gray-400 text-sm">e-mail</span>
             <a 
               href={`mailto:${brandConfig.email}`} 
-              className="text-white text-sm transition-colors duration-300 hover:text-primary"
+              className="text-gray-900 text-sm transition-colors duration-300 hover:text-primary"
             >
               {brandConfig.email}
             </a>
@@ -53,30 +54,30 @@ const Navbar = () => {
 
           {/* Right side buttons - Each as separate pill */}
           <div className="flex items-center gap-2">
-            {/* Live Chat Button - Light pill with blue icon */}
+            {/* Live Chat Button - White pill with blue icon */}
             <button
               onClick={() => setIsLiveChatOpen(true)}
-              className="hidden md:flex items-center gap-2 px-5 py-3 rounded-full border border-white/10 bg-[hsl(0,0%,4%,0.95)] backdrop-blur-md text-white text-sm font-medium transition-all duration-300 hover:bg-white/5 hover:border-primary/50 hover:scale-[1.02] hover:shadow-[0_0_20px_hsl(217,91%,60%,0.2)]"
+              className="hidden md:flex items-center gap-2 px-5 py-3 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm text-gray-900 text-sm font-medium transition-all duration-300 hover:bg-gray-50 hover:border-primary/50 hover:scale-[1.02] hover:shadow-md"
             >
               <Send className="w-4 h-4 text-primary transition-transform duration-300 hover:rotate-12" />
               <span>Start Live Chat</span>
             </button>
 
-            {/* Book a Meeting Button - Light pill with blue icon */}
+            {/* Book a Meeting Button - White pill with blue icon */}
             <a
               href="https://calendly.com/cryptobridgekorea"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 px-5 py-3 rounded-full border border-white/10 bg-[hsl(0,0%,4%,0.95)] backdrop-blur-md text-white text-sm font-medium transition-all duration-300 hover:bg-white/5 hover:border-primary/50 hover:scale-[1.02] hover:shadow-[0_0_20px_hsl(217,91%,60%,0.2)]"
+              className="hidden md:flex items-center gap-2 px-5 py-3 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm text-gray-900 text-sm font-medium transition-all duration-300 hover:bg-gray-50 hover:border-primary/50 hover:scale-[1.02] hover:shadow-md"
             >
               <Calendar className="w-4 h-4 text-primary transition-transform duration-300" />
               <span>Book a Meeting</span>
             </a>
 
-            {/* Menu Button - White pill */}
+            {/* Menu Button - Blue pill */}
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="flex items-center gap-2 px-5 py-3 rounded-full bg-white text-background text-sm font-medium transition-all duration-300 hover:bg-white/90 hover:scale-[1.05] hover:shadow-[0_0_25px_hsl(0,0%,100%,0.3)]"
+              className="flex items-center gap-2 px-5 py-3 rounded-full bg-primary text-white text-sm font-medium transition-all duration-300 hover:bg-primary/90 hover:scale-[1.05] shadow-md hover:shadow-lg"
             >
               <span className="hidden sm:inline">menu</span>
               <Menu className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
