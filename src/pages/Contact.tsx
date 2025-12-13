@@ -141,8 +141,8 @@ const Contact = () => {
       <Navbar />
       
       {/* Hero - Compact with Ken Burns Background */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-white">
-      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden rounded-xl sm:rounded-2xl">
+      <main className="p-1 sm:p-1.5 md:p-2 bg-white">
+      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden rounded-2xl sm:rounded-3xl">
         {/* Background - Korea Palace Modern */}
         <div className="absolute inset-0 overflow-hidden">
           <div 

@@ -62,7 +62,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="relative h-full min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-2xl">
+    <div className="relative h-full min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
       {/* Background Layer - Video */}
       <div className="absolute inset-0 overflow-hidden">
         <video

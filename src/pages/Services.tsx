@@ -190,8 +190,8 @@ const Services = () => {
       <Navbar />
       
       {/* Hero - Matching Homepage Style with Video Background */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-white">
-      <section className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-2xl">
+      <main className="p-1 sm:p-1.5 md:p-2 bg-white">
+      <section className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
         {/* Background Layer - Video */}
         <div className="absolute inset-0 overflow-hidden">
           <video

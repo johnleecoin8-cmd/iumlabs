@@ -486,8 +486,8 @@ const ProjectDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white p-0.5 sm:p-1 md:p-2">
-      <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden">
+    <div className="min-h-screen bg-white p-1 sm:p-1.5 md:p-2">
+      <div className="min-h-screen bg-[#0A0A0A] rounded-2xl sm:rounded-3xl overflow-hidden">
         <Navbar />
       
       {/* Lightbox */}

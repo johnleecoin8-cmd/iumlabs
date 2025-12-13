@@ -2932,8 +2932,8 @@ const Research = () => {
       <Navbar />
       
       {/* Hero Section - Emerald/Green Theme with Video */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-white">
-      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden rounded-xl sm:rounded-2xl">
+      <main className="p-1 sm:p-1.5 md:p-2 bg-white">
+      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden rounded-2xl sm:rounded-3xl">
         {/* Video Background */}
         <div className="absolute inset-0 overflow-hidden">
           <video
