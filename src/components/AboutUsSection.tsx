@@ -50,30 +50,27 @@ const StatCard = ({
     suffix: stat.suffix,
     isVisible
   });
-  return <div className={`group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm hover:bg-white/[0.06] hover:border-primary/40 transition-all duration-500 overflow-hidden hover:-translate-y-1 hover:shadow-2xl ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
+  return <div className={`group relative p-6 rounded-2xl bg-white border border-gray-200 backdrop-blur-sm hover:shadow-xl hover:border-primary/40 transition-all duration-500 overflow-hidden hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
     transitionDelay: `${index * 100 + 300}ms`
   }}>
       {/* Animated gradient background */}
       <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br ${stat.glowColor}`} />
       
       {/* Shine effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
-      
-      {/* Corner glow */}
-      <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
 
       <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/30 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
         <stat.icon className="w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-300" />
       </div>
       
       <div className="mt-8 relative z-10">
-        <div className="text-3xl md:text-4xl font-bold text-white mb-1 tabular-nums group-hover:text-primary transition-colors duration-300">
+        <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-1 tabular-nums group-hover:text-primary transition-colors duration-300">
           {formattedCount}
         </div>
-        <div className="text-white/80 font-medium text-sm mb-1">
+        <div className="text-gray-700 font-medium text-sm mb-1">
           {stat.label}
         </div>
-        <div className="text-white/40 text-xs group-hover:text-white/60 transition-colors">
+        <div className="text-gray-500 text-xs group-hover:text-gray-600 transition-colors">
           {stat.description}
         </div>
       </div>
@@ -84,31 +81,23 @@ const AboutUsSection = () => {
     ref,
     isVisible
   } = useScrollAnimation();
-  return <div ref={ref} className="relative px-4 bg-[hsl(0,0%,4%)] overflow-hidden py-[40px]">
-      {/* Background Elements */}
+  return <div ref={ref} className="relative px-4 bg-[#F5F5F5] overflow-hidden py-[40px]">
+      {/* Light Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Gradient Orbs */}
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] animate-pulse" style={{
+        {/* Subtle Gradient Orbs */}
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] animate-pulse" style={{
         animationDuration: '8s'
       }} />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] animate-pulse" style={{
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" style={{
         animationDuration: '10s',
         animationDelay: '2s'
-      }} />
-        <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-purple-500/5 rounded-full blur-[100px] animate-pulse" style={{
-        animationDuration: '12s',
-        animationDelay: '4s'
       }} />
         
         {/* Grid Pattern */}
         <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)`,
         backgroundSize: '80px 80px'
       }} />
-        
-        {/* Diagonal lines */}
-        <div className="absolute top-20 right-[10%] w-40 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent rotate-45 hidden lg:block" />
-        <div className="absolute bottom-40 left-[15%] w-32 h-px bg-gradient-to-r from-transparent via-cyan-500/30 to-transparent -rotate-45 hidden lg:block" />
       </div>
       
       {/* Floating Sparkles */}
@@ -131,7 +120,7 @@ const AboutUsSection = () => {
               Why Choose Us
             </span>
             
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight">
               We Bridge Your
               <br />
               Project to{" "}
@@ -142,13 +131,13 @@ const AboutUsSection = () => {
               </span>
             </h2>
             
-            <p className="text-lg text-white/60 mb-10 leading-relaxed max-w-lg">
-              Founded by veterans from <span className="text-white font-semibold bg-white/5 px-2 py-0.5 rounded">Binance</span> and{" "}
-              <span className="text-white font-semibold bg-white/5 px-2 py-0.5 rounded">KuCoin</span>, we deliver unmatched expertise 
+            <p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-lg">
+              Founded by veterans from <span className="text-gray-900 font-semibold bg-gray-200 px-2 py-0.5 rounded">Binance</span> and{" "}
+              <span className="text-gray-900 font-semibold bg-gray-200 px-2 py-0.5 rounded">KuCoin</span>, we deliver unmatched expertise 
               in Korean Web3 market entry, community building, and exchange partnerships.
             </p>
 
-            <div className="group flex items-center gap-6 p-4 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.05] hover:border-primary/30 transition-all duration-500 w-fit">
+            <div className="group flex items-center gap-6 p-4 rounded-xl bg-white border border-gray-200 hover:shadow-lg hover:border-primary/30 transition-all duration-500 w-fit">
               <div className="flex -space-x-3">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-primary/5 border-2 border-primary/40 flex items-center justify-center group-hover:scale-110 group-hover:border-primary/60 transition-all duration-500">
                   <span className="text-primary text-base font-bold">J</span>
@@ -158,8 +147,8 @@ const AboutUsSection = () => {
                 </div>
               </div>
               <div>
-                <p className="text-white/50 text-sm mb-0.5">Founded by</p>
-                <p className="text-white font-medium">Ex-Binance & Ex-KuCoin Leaders</p>
+                <p className="text-gray-500 text-sm mb-0.5">Founded by</p>
+                <p className="text-gray-900 font-medium">Ex-Binance & Ex-KuCoin Leaders</p>
               </div>
             </div>
           </div>
@@ -172,15 +161,15 @@ const AboutUsSection = () => {
 
 
         {/* As Featured In Section */}
-        <div className={`mt-12 pt-12 border-t border-white/[0.06] transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <p className="text-center text-white/40 text-sm uppercase tracking-widest mb-8">
+        <div className={`mt-12 pt-12 border-t border-gray-200 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <p className="text-center text-gray-500 text-sm uppercase tracking-widest mb-8">
             As Featured In Media
           </p>
           <div className="relative overflow-hidden">
             {/* Left fade gradient */}
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#F5F5F5] to-transparent z-10 pointer-events-none" />
             {/* Right fade gradient */}
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#F5F5F5] to-transparent z-10 pointer-events-none" />
             
             <div className="flex items-center logo-marquee-slow">
               {[{
@@ -204,9 +193,9 @@ const AboutUsSection = () => {
             }, {
               name: "The Economist",
               logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/The_Economist_Logo.svg"
-            }].flatMap((media, i) => [media, media]).map((media, index) => <div key={index} className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300">
-                  <img src={media.logo} alt={media.name} className="h-5 w-5 sm:h-6 sm:w-6 object-contain brightness-0 invert opacity-80 flex-shrink-0" />
-                  <span className="text-white/70 text-xs sm:text-sm font-medium whitespace-nowrap">
+            }].flatMap((media, i) => [media, media]).map((media, index) => <div key={index} className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-white rounded-full border border-gray-200 hover:border-gray-300 hover:shadow-md transition-all duration-300">
+                  <img src={media.logo} alt={media.name} className="h-5 w-5 sm:h-6 sm:w-6 object-contain opacity-80 flex-shrink-0" />
+                  <span className="text-gray-700 text-xs sm:text-sm font-medium whitespace-nowrap">
                     {media.name}
                   </span>
                 </div>)}

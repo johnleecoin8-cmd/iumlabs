@@ -52,10 +52,10 @@ const WhyChooseUsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <section ref={ref} className="relative min-h-screen overflow-hidden bg-black px-4 py-[20px]">
-      {/* Colorful ambient orbs */}
-      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full bg-[#1DB954]/10 blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[#E040FB]/10 blur-[120px] pointer-events-none" />
+    <section ref={ref} className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#1a0a2e] via-[#0f0618] to-[#1a0a2e] px-4 py-[20px]">
+      {/* Purple ambient orbs */}
+      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] rounded-full bg-purple-500/20 blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[#E040FB]/15 blur-[120px] pointer-events-none" />
 
       {/* Moon at right center */}
       <div className="absolute top-1/2 -right-[10%] md:-right-[5%] lg:right-[0%] -translate-y-1/2 pointer-events-none opacity-40">

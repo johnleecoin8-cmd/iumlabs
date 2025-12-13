@@ -71,7 +71,7 @@ const TestimonialsSection = () => {
   return (
     <section 
       ref={ref} 
-      className="py-32 px-4 bg-[hsl(0,0%,4%)] overflow-hidden"
+      className="py-32 px-4 bg-[#F8F6F3] overflow-hidden"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
@@ -83,7 +83,7 @@ const TestimonialsSection = () => {
               <span className="w-8 h-px bg-primary" />
               Testimonials
             </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
               What Our <span className="text-primary">Clients Say</span>
             </h2>
           </div>
@@ -99,7 +99,7 @@ const TestimonialsSection = () => {
                   className={`w-2 h-2 rounded-full transition-all duration-300 ${
                     index === currentIndex 
                       ? 'w-8 bg-primary' 
-                      : 'bg-white/20 hover:bg-white/40'
+                      : 'bg-gray-300 hover:bg-gray-400'
                   }`}
                 />
               ))}
@@ -109,13 +109,13 @@ const TestimonialsSection = () => {
             <div className="flex items-center gap-2">
               <button 
                 onClick={prevSlide}
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-primary/40 hover:bg-white/[0.03] transition-all"
+                className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:border-primary/40 hover:bg-gray-100 transition-all"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button 
                 onClick={nextSlide}
-                className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-primary/40 hover:bg-white/[0.03] transition-all"
+                className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center text-gray-500 hover:text-gray-700 hover:border-primary/40 hover:bg-gray-100 transition-all"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -129,14 +129,14 @@ const TestimonialsSection = () => {
             {getVisibleTestimonials().map((testimonial, index) => (
               <div
                 key={`${testimonial.originalIndex}-${currentIndex}`}
-                className="group p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/40 hover:-translate-y-2 transition-all duration-500 animate-fade-in"
+                className="group p-8 rounded-2xl bg-white border border-gray-200 hover:shadow-xl hover:border-primary/40 hover:-translate-y-2 transition-all duration-500 animate-fade-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Quote Icon */}
                 <Quote className="w-10 h-10 text-primary/20 mb-6" />
                 
                 {/* Content */}
-                <p className="text-white/60 leading-relaxed mb-8 text-lg">
+                <p className="text-gray-600 leading-relaxed mb-8 text-lg">
                   "{testimonial.content}"
                 </p>
 
@@ -155,8 +155,8 @@ const TestimonialsSection = () => {
                     </span>
                   </div>
                   <div>
-                    <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-white/40">
+                    <div className="font-semibold text-gray-900">{testimonial.name}</div>
+                    <div className="text-sm text-gray-500">
                       {testimonial.role}, {testimonial.company}
                     </div>
                   </div>
@@ -168,7 +168,7 @@ const TestimonialsSection = () => {
 
         {/* Auto-play indicator */}
         <div className={`mt-8 flex justify-center transition-all duration-700 delay-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
-          <span className="text-xs text-white/30">
+          <span className="text-xs text-gray-400">
             {isAutoPlaying ? 'Auto-playing • Hover to pause' : 'Paused'}
           </span>
         </div>
