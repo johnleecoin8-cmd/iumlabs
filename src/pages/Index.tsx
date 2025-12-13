@@ -21,8 +21,10 @@ const Index = () => {
       <Navbar />
       <SectionIndicator />
       
-      <main className="screen-1 p-1 sm:p-1.5 md:p-2 bg-white" id="hero">
-        <HeroSection />
+      <main className="screen-1 p-0.5 sm:p-1 md:p-2 bg-white" id="hero">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <HeroSection />
+        </div>
       </main>
       
       <section className="scroll-reveal" id="about">
