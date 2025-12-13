@@ -141,7 +141,8 @@ const Contact = () => {
       <Navbar />
       
       {/* Hero - Compact with Ken Burns Background */}
-      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden">
+      <main className="p-2 sm:p-3 md:p-4 bg-white">
+      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden rounded-2xl sm:rounded-3xl">
         {/* Background - Korea Palace Modern */}
         <div className="absolute inset-0 overflow-hidden">
           <div 
@@ -238,6 +239,7 @@ const Contact = () => {
           <span className="text-xs uppercase tracking-widest">Scroll</span>
         </div>
       </section>
+      </main>
 
       {/* Services Highlight Section */}
       <section 
