@@ -22,44 +22,38 @@ const Navbar = () => {
     <>
       {/* Main Navbar - Separated pill sections like Lunar Strategy */}
       {/* Main Navbar - White background with black text */}
-      <nav className="fixed top-3 left-3 right-3 z-50">
-        <div className="flex items-center gap-2">
+      <nav className="fixed top-4 left-4 right-4 z-50">
+        <div className="flex items-center gap-1.5">
           {/* Logo Section - White pill */}
           <Link 
             to="/" 
-            className="flex items-center gap-2 px-5 py-3 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 hover:bg-gray-50 hover:border-gray-300 hover:scale-[1.02]"
+            className="flex items-center gap-3 px-6 py-4 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 hover:bg-gray-50 hover:border-gray-300 hover:scale-[1.02]"
           >
-            <div className="w-7 h-7 bg-primary rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-6">
-              <div className="w-3.5 h-3.5 bg-white rounded-sm"></div>
+            <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-6">
+              <div className="w-4 h-4 bg-white rounded-sm"></div>
             </div>
-            <span className="text-base font-semibold text-gray-900">{brandConfig.name}</span>
+            <span className="text-lg font-semibold text-gray-900">{brandConfig.name}</span>
           </Link>
 
-          {/* Spacer */}
-          <div className="flex-1" />
-
           {/* Center - Email - White pill */}
-          <div className="hidden lg:flex items-center gap-3 px-5 py-3 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 hover:bg-gray-50 hover:border-gray-300">
+          <div className="hidden lg:flex items-center gap-3 px-6 py-4 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 hover:bg-gray-50 hover:border-gray-300 ml-auto">
             <span className="text-gray-400 text-sm">e-mail</span>
             <a 
               href={`mailto:${brandConfig.email}`} 
-              className="text-gray-900 text-sm transition-colors duration-300 hover:text-primary"
+              className="text-gray-900 text-base font-medium transition-colors duration-300 hover:text-primary"
             >
               {brandConfig.email}
             </a>
           </div>
 
-          {/* Spacer */}
-          <div className="flex-1" />
-
           {/* Right side buttons - Each as separate pill */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 ml-auto lg:ml-0">
             {/* Live Chat Button - White pill with blue icon */}
             <button
               onClick={() => setIsLiveChatOpen(true)}
-              className="hidden md:flex items-center gap-2 px-5 py-3 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm text-gray-900 text-sm font-medium transition-all duration-300 hover:bg-gray-50 hover:border-primary/50 hover:scale-[1.02] hover:shadow-md"
+              className="hidden md:flex items-center gap-2.5 px-6 py-4 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm text-gray-900 text-base font-medium transition-all duration-300 hover:bg-gray-50 hover:border-primary/50 hover:scale-[1.02] hover:shadow-md"
             >
-              <Send className="w-4 h-4 text-primary transition-transform duration-300 hover:rotate-12" />
+              <Send className="w-5 h-5 text-primary transition-transform duration-300 hover:rotate-12" />
               <span>Start Live Chat</span>
             </button>
 
@@ -68,19 +62,19 @@ const Navbar = () => {
               href="https://calendly.com/cryptobridgekorea"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 px-5 py-3 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm text-gray-900 text-sm font-medium transition-all duration-300 hover:bg-gray-50 hover:border-primary/50 hover:scale-[1.02] hover:shadow-md"
+              className="hidden md:flex items-center gap-2.5 px-6 py-4 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm text-gray-900 text-base font-medium transition-all duration-300 hover:bg-gray-50 hover:border-primary/50 hover:scale-[1.02] hover:shadow-md"
             >
-              <Calendar className="w-4 h-4 text-primary transition-transform duration-300" />
+              <Calendar className="w-5 h-5 text-primary transition-transform duration-300" />
               <span>Book a Meeting</span>
             </a>
 
             {/* Menu Button - Blue pill */}
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="flex items-center gap-2 px-5 py-3 rounded-full bg-primary text-white text-sm font-medium transition-all duration-300 hover:bg-primary/90 hover:scale-[1.05] shadow-md hover:shadow-lg"
+              className="flex items-center gap-2.5 px-6 py-4 rounded-full bg-primary text-white text-base font-medium transition-all duration-300 hover:bg-primary/90 hover:scale-[1.05] shadow-md hover:shadow-lg"
             >
               <span className="hidden sm:inline">menu</span>
-              <Menu className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
+              <Menu className="w-6 h-6 transition-transform duration-300 group-hover:rotate-90" />
             </button>
           </div>
         </div>
