@@ -21,24 +21,21 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Main Navbar - Separated pill sections like Lunar Strategy */}
+      {/* Main Navbar - Unified bar like Lunar Strategy */}
       <nav className="fixed top-4 left-4 right-4 z-50">
-        <div className="flex items-center gap-2">
-          {/* Logo Section - Separate pill */}
+        <div className="flex items-center bg-white rounded-full border border-gray-200 shadow-sm">
+          {/* Logo Section */}
           <Link 
             to="/" 
-            className="flex items-center gap-2 px-5 py-3 rounded-full border border-black/10 bg-white backdrop-blur-md transition-all duration-300 hover:bg-gray-50 hover:border-black/20 hover:scale-[1.02]"
+            className="flex items-center gap-2 px-6 py-3 transition-all duration-300 hover:opacity-80"
           >
             <img src={logoImage} alt="CryptoBridge Logo" className="w-7 h-7 rounded-lg object-contain" />
             <span className="text-base font-semibold text-gray-900">{brandConfig.name}</span>
           </Link>
 
-          {/* Spacer */}
-          <div className="flex-1" />
-
-          {/* Center - Email - Separate pill */}
-          <div className="hidden lg:flex items-center gap-3 px-5 py-3 rounded-full border border-black/10 bg-white backdrop-blur-md transition-all duration-300 hover:bg-gray-50 hover:border-black/20">
-            <span className="text-gray-400 text-sm">e-mail</span>
+          {/* Center - Email */}
+          <div className="hidden lg:flex items-center gap-2 px-6 py-3 border-l border-gray-200">
+            <span className="text-gray-400 text-xs">e-mail</span>
             <a 
               href={`mailto:${brandConfig.email}`} 
               className="text-gray-900 text-sm transition-colors duration-300 hover:text-primary"
@@ -50,14 +47,14 @@ const Navbar = () => {
           {/* Spacer */}
           <div className="flex-1" />
 
-          {/* Right side buttons - Each as separate pill */}
-          <div className="flex items-center gap-2">
+          {/* Right side buttons */}
+          <div className="flex items-center">
             {/* Live Chat Button */}
             <button
               onClick={() => setIsLiveChatOpen(true)}
-              className="hidden md:flex items-center gap-2 px-5 py-3 rounded-full border border-black/10 bg-white backdrop-blur-md text-gray-900 text-sm font-medium transition-all duration-300 hover:bg-gray-50 hover:border-primary/50 hover:scale-[1.02] hover:shadow-[0_0_20px_hsl(217,91%,60%,0.2)]"
+              className="hidden md:flex items-center gap-2 px-5 py-3 border-l border-gray-200 text-gray-900 text-sm font-medium transition-all duration-300 hover:bg-gray-50"
             >
-              <Send className="w-4 h-4 text-primary transition-transform duration-300 hover:rotate-12" />
+              <Send className="w-4 h-4 text-primary" />
               <span>Start Live Chat</span>
             </button>
 
@@ -66,19 +63,19 @@ const Navbar = () => {
               href="https://calendly.com/cryptobridgekorea"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 px-5 py-3 rounded-full border border-black/10 bg-white backdrop-blur-md text-gray-900 text-sm font-medium transition-all duration-300 hover:bg-gray-50 hover:border-primary/50 hover:scale-[1.02] hover:shadow-[0_0_20px_hsl(217,91%,60%,0.2)]"
+              className="hidden md:flex items-center gap-2 px-5 py-3 border-l border-gray-200 text-gray-900 text-sm font-medium transition-all duration-300 hover:bg-gray-50"
             >
-              <Calendar className="w-4 h-4 text-primary transition-transform duration-300" />
+              <Calendar className="w-4 h-4 text-primary" />
               <span>Book a Meeting</span>
             </a>
 
-            {/* Menu Button - Dark pill */}
+            {/* Menu Button - Dark */}
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="flex items-center gap-2 px-5 py-3 rounded-full bg-gray-900 text-white text-sm font-medium transition-all duration-300 hover:bg-gray-800 hover:scale-[1.05] hover:shadow-lg"
+              className="flex items-center gap-2 px-5 py-2 m-1.5 rounded-full bg-gray-900 text-white text-sm font-medium transition-all duration-300 hover:bg-gray-800"
             >
               <span className="hidden sm:inline">menu</span>
-              <Menu className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
+              <Menu className="w-5 h-5" />
             </button>
           </div>
         </div>
