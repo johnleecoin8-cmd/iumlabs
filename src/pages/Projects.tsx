@@ -13,7 +13,7 @@ import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
-import peaqLogo from "@/assets/logos/peaq.png";
+import peaqLogo from "@/assets/logos/peaq.svg";
 import storyLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
@@ -286,8 +286,8 @@ const Projects = () => {
                     <img
                       src={caseItem.logo}
                       alt={caseItem.name}
-                      className="w-16 h-16 md:w-20 md:h-20 object-contain filter brightness-0 invert mb-4 group-hover:scale-110 transition-transform duration-300"
-                      style={{ filter: `brightness(0) invert(1) drop-shadow(0 0 20px ${caseItem.glowColor}80)` }}
+                      className="w-16 h-16 md:w-20 md:h-20 object-contain mb-4 group-hover:scale-110 transition-transform duration-300"
+                      style={{ filter: `drop-shadow(0 0 20px ${caseItem.glowColor}80)` }}
                     />
                     
                     {/* Project Name */}
