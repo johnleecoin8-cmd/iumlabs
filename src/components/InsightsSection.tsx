@@ -61,7 +61,7 @@ const InsightsSection = () => {
       setIsSubmitting(false);
     }
   };
-  return <section ref={ref} className="px-4 bg-[hsl(0,0%,4%)] py-[20px]">
+  return <section ref={ref} className="px-4 bg-[#FAFAFA] py-[20px]">
       <div className="container mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left - Newsletter */}
@@ -71,25 +71,25 @@ const InsightsSection = () => {
                 <span className="w-8 h-px bg-primary" />
                 Research & Insights
               </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
                 Latest <span className="text-primary">Research</span>
               </h2>
-              <p className="text-white/50 mb-8">
+              <p className="text-gray-600 mb-8">
                 Stay ahead with our market insights, research reports, and strategy guides for the Korean Web3 ecosystem.
               </p>
 
               {/* Newsletter Form */}
               <form onSubmit={handleSubscribe} className="space-y-4">
                 <div className="relative group">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30 group-focus-within:text-primary transition-colors" />
-                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all duration-300" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors" />
+                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" className="w-full pl-12 pr-4 py-4 rounded-xl bg-white border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-primary/50 focus:bg-white transition-all duration-300 shadow-sm" />
                 </div>
                 <button type="submit" disabled={isSubmitting} className="group w-full py-4 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-all duration-300 disabled:opacity-50 relative overflow-hidden">
                   <span className="relative z-10">{isSubmitting ? "Subscribing..." : "Subscribe to Newsletter"}</span>
                 </button>
               </form>
 
-              <Link to="/research" className="group inline-flex items-center gap-2 text-white/50 hover:text-primary transition-colors mt-6">
+              <Link to="/research" className="group inline-flex items-center gap-2 text-gray-500 hover:text-primary transition-colors mt-6">
                 View all research
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </Link>
@@ -99,7 +99,7 @@ const InsightsSection = () => {
           {/* Right - Articles */}
           <div className="lg:col-span-8">
             <div className="space-y-4">
-              {insights.map((article, index) => <Link key={article.id} to={`/research/${article.id}`} className={`group relative flex flex-col md:flex-row gap-6 p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.05] hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 overflow-hidden ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`} style={{
+              {insights.map((article, index) => <Link key={article.id} to={`/research/${article.id}`} className={`group relative flex flex-col md:flex-row gap-6 p-5 rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 overflow-hidden ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`} style={{
               transitionDelay: `${index * 150}ms`
             }}>
                   {/* Hover Glow */}
@@ -122,25 +122,25 @@ const InsightsSection = () => {
                       <span className="text-xs text-primary uppercase tracking-wider font-medium px-2 py-1 rounded-md bg-primary/10">
                         {article.category}
                       </span>
-                      <div className="flex items-center gap-1 text-white/30">
+                      <div className="flex items-center gap-1 text-gray-400">
                         <Clock className="w-3 h-3" />
                         <span className="text-xs">{article.readTime}</span>
                       </div>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-primary transition-colors mb-2">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors mb-2">
                       {article.title}
                     </h3>
-                    <p className="text-white/50 text-sm leading-relaxed line-clamp-2">
+                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
                       {article.excerpt}
                     </p>
-                    <div className="mt-4 flex items-center gap-2 text-white/40 text-xs">
+                    <div className="mt-4 flex items-center gap-2 text-gray-400 text-xs">
                       <span>{article.date}</span>
                     </div>
                   </div>
 
                   {/* Arrow */}
                   <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-white/[0.03] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary/20">
+                    <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary/10">
                       <ArrowUpRight className="w-5 h-5 text-primary" />
                     </div>
                   </div>

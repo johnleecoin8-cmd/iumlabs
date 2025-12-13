@@ -64,13 +64,24 @@ const HeroSection = () => {
 
   return (
     <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Static */}
+      {/* Background Layer - Animated Ken Burns Effect */}
       <div className="absolute inset-0 overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        <motion.div 
+          className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat"
           style={{ 
             backgroundImage: `url(${seoulBridgeNight})`,
             filter: "brightness(0.35)",
+          }}
+          animate={{
+            scale: [1, 1.15, 1.1, 1.2, 1],
+            x: ["0%", "3%", "-2%", "1%", "0%"],
+            y: ["0%", "-2%", "1%", "-1%", "0%"],
+          }}
+          transition={{
+            duration: 25,
+            ease: "easeInOut",
+            repeat: Infinity,
+            repeatType: "reverse",
           }}
         />
         
