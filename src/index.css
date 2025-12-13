@@ -14,14 +14,14 @@
 
 @layer base {
   :root {
-    /* Pure Black Background for Max Color Contrast */
-    --background: 0 0% 0%;
+    /* Lunar Strategy Clean Color System */
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     
-    --card: 0 0% 6%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 6%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
     
     /* Clean Blue Primary */
@@ -29,10 +29,10 @@
     --primary-foreground: 0 0% 100%;
     
     /* Clean Gray Secondary */
-    --secondary: 0 0% 12%;
+    --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 10%;
+    --muted: 0 0% 12%;
     --muted-foreground: 0 0% 55%;
     
     /* Blue Accent */
@@ -42,14 +42,14 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
     --ring: 217 91% 60%;
     
     --radius: 0.5rem;
 
     /* Dark section variables */
-    --dark-bg: 0 0% 0%;
+    --dark-bg: 0 0% 4%;
     --dark-fg: 0 0% 100%;
 
     /* Light section variables (for Team, Blog) */
@@ -58,35 +58,25 @@
 
     /* Lunar Strategy Blue */
     --lunar-blue: 217 91% 60%;
-    
-    /* Neon Color Palette */
-    --neon-green: 145 80% 42%;
-    --neon-blue: 195 100% 50%;
-    --neon-magenta: 290 90% 62%;
-    --neon-gold: 45 95% 55%;
-    --neon-pink: 340 85% 70%;
-    --neon-cyan: 175 70% 45%;
-    --neon-orange: 25 100% 60%;
-    --neon-purple: 270 75% 55%;
   }
 
   .dark {
-    --background: 0 0% 0%;
+    --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     
-    --card: 0 0% 6%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 6%;
+    --popover: 0 0% 8%;
     --popover-foreground: 0 0% 98%;
     
     --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 0 0% 12%;
+    --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 10%;
+    --muted: 0 0% 12%;
     --muted-foreground: 0 0% 55%;
     
     --accent: 217 91% 60%;
@@ -95,8 +85,8 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
     --ring: 217 91% 60%;
   }
 }

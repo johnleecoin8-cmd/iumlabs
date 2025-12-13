@@ -61,7 +61,7 @@ const InsightsSection = () => {
       setIsSubmitting(false);
     }
   };
-  return <section ref={ref} className="px-4 bg-gradient-to-br from-[#0a0f1a] to-[#0f1625] py-[20px] relative overflow-hidden">
+  return <section ref={ref} className="px-4 bg-[hsl(0,0%,4%)] py-[20px]">
       <div className="container mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left - Newsletter */}
