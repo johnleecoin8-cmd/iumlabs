@@ -38,9 +38,9 @@ const WhyChooseUsSection = () => {
     ref,
     isVisible
   } = useScrollAnimation();
-  return <section ref={ref} className="relative min-h-screen overflow-hidden bg-[hsl(0,0%,4%)] px-4 py-[20px]">
+  return <section ref={ref} className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#1a0a2e] via-[#0f0618] to-[#1a0a2e] px-4 py-[20px]">
       {/* Moon at right center */}
-      <div className="absolute top-1/2 -right-[10%] md:-right-[5%] lg:right-[0%] -translate-y-1/2 pointer-events-none opacity-40">
+      <div className="absolute top-1/2 -right-[10%] md:-right-[5%] lg:right-[0%] -translate-y-1/2 pointer-events-none opacity-50">
         <motion.div animate={{
         rotate: 360
       }} transition={{
@@ -49,10 +49,14 @@ const WhyChooseUsSection = () => {
         ease: "linear"
       }} className="relative">
           <img src={realisticMoon} alt="" className="w-[400px] h-[400px] md:w-[550px] md:h-[550px] lg:w-[700px] lg:h-[700px] object-cover rounded-full" style={{
-          filter: "saturate(0.2) brightness(0.6)"
+          filter: "saturate(0.3) brightness(0.7) hue-rotate(240deg)"
         }} />
         </motion.div>
       </div>
+      
+      {/* Purple glow effects */}
+      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-violet-500/15 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="container mx-auto max-w-7xl relative z-10">
         {/* Header - Unified Style */}
