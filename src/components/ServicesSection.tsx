@@ -52,7 +52,7 @@ const ServicesSection = () => {
     isVisible
   } = useScrollAnimation();
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
-  return <div ref={ref} className="px-4 bg-[hsl(0,0%,4%)] py-[20px]">
+  return <div ref={ref} className="px-4 bg-[#F8F8F8] py-[20px]">
       <div className="container mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left - Vertical Title */}
@@ -62,10 +62,10 @@ const ServicesSection = () => {
                 <span className="w-8 h-px bg-primary" />
                 What We Do
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
                 Our <span className="text-primary">Services</span>
               </h2>
-              <p className="text-white/50 mb-8 max-w-sm">
+              <p className="text-gray-600 mb-8 max-w-sm">
                 End-to-end Web3 marketing solutions tailored for the Korean market
               </p>
               <Link to="/services" className="group inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
@@ -78,11 +78,11 @@ const ServicesSection = () => {
           {/* Right - Bento Grid with Unified Card Style */}
           <div className="lg:col-span-9">
             <div className="grid md:grid-cols-2 gap-4">
-              {services.map((service, index) => <div key={index} onClick={() => setSelectedService(service)} className={`group relative p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/40 hover:-translate-y-1 transition-all duration-500 cursor-pointer ${service.size === 'large' ? 'md:col-span-2' : ''} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
+              {services.map((service, index) => <div key={index} onClick={() => setSelectedService(service)} className={`group relative p-8 rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-lg hover:border-primary/40 hover:-translate-y-1 transition-all duration-500 cursor-pointer ${service.size === 'large' ? 'md:col-span-2' : ''} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
               transitionDelay: `${index * 100}ms`
             }}>
                   {/* Hover Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
 
                   {/* Icon */}
                   <div className="relative w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110">
@@ -90,10 +90,10 @@ const ServicesSection = () => {
                   </div>
 
                   {/* Content */}
-                  <h3 className="relative text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                  <h3 className="relative text-xl md:text-2xl font-bold text-gray-900 mb-3 group-hover:text-primary transition-colors">
                     {service.title}
                   </h3>
-                  <p className="relative text-white/50 leading-relaxed">
+                  <p className="relative text-gray-600 leading-relaxed">
                     {service.description}
                   </p>
 
