@@ -22,15 +22,15 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar - Unified bar like Lunar Strategy */}
-      <nav className="fixed top-4 left-4 right-4 z-50">
+      <nav className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-50">
         <div className="flex items-center bg-white rounded-full border border-gray-200 shadow-sm">
           {/* Logo Section */}
           <Link 
             to="/" 
-            className="flex items-center gap-2 px-6 py-3 transition-all duration-300 hover:opacity-80"
+            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 transition-all duration-300 hover:opacity-80"
           >
-            <img src={logoImage} alt="CryptoBridge Logo" className="w-7 h-7 rounded-lg object-contain" />
-            <span className="text-base font-semibold text-gray-900">{brandConfig.name}</span>
+            <img src={logoImage} alt="CryptoBridge Logo" className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg object-contain" />
+            <span className="text-sm sm:text-base font-semibold text-gray-900">{brandConfig.name}</span>
           </Link>
 
           {/* Center - Email */}
@@ -72,10 +72,10 @@ const Navbar = () => {
             {/* Menu Button - Dark */}
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="flex items-center gap-2 px-5 py-2 m-1.5 rounded-full bg-gray-900 text-white text-sm font-medium transition-all duration-300 hover:bg-gray-800"
+              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2 m-1 sm:m-1.5 rounded-full bg-gray-900 text-white text-xs sm:text-sm font-medium transition-all duration-300 hover:bg-gray-800"
             >
               <span className="hidden sm:inline">menu</span>
-              <Menu className="w-5 h-5" />
+              <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
         </div>
