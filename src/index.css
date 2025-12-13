@@ -14,50 +14,50 @@
 
 @layer base {
   :root {
-    /* Light Theme Color System */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 8%;
+    /* Lunar Strategy Clean Color System */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
     
-    --card: 0 0% 98%;
-    --card-foreground: 0 0% 8%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 8%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 98%;
     
     /* Clean Blue Primary */
-    --primary: 217 91% 50%;
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
     
     /* Clean Gray Secondary */
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 8%;
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 55%;
     
     /* Blue Accent */
-    --accent: 217 91% 50%;
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 217 91% 50%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 217 91% 60%;
     
     --radius: 0.5rem;
 
     /* Dark section variables */
-    --dark-bg: 0 0% 8%;
+    --dark-bg: 0 0% 4%;
     --dark-fg: 0 0% 100%;
 
-    /* Light section variables */
-    --light-bg: 0 0% 98%;
+    /* Light section variables (for Team, Blog) */
+    --light-bg: 0 0% 96%;
     --light-fg: 0 0% 8%;
 
     /* Lunar Strategy Blue */
-    --lunar-blue: 217 91% 50%;
+    --lunar-blue: 217 91% 60%;
   }
 
   .dark {
@@ -134,46 +134,47 @@
     transform: translateY(0);
   }
 
-  /* Light theme screens */
+  /* Dark screens */
   .screen-1 {
-    background-color: hsl(0 0% 100%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
   }
 
   .screen-2 {
-    background-color: hsl(0 0% 98%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
   }
 
   .screen-3 {
-    background-color: hsl(0 0% 100%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
   }
 
   .screen-4 {
-    background-color: hsl(0 0% 98%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
   }
 
+  /* Light screens (Lunar Strategy alternating pattern) */
   .screen-5 {
-    background-color: hsl(0 0% 100%);
+    background-color: hsl(0 0% 96%);
     color: hsl(0 0% 8%);
   }
 
   .screen-6 {
-    background-color: hsl(0 0% 98%);
+    background-color: hsl(0 0% 96%);
     color: hsl(0 0% 8%);
   }
 
   .screen-7 {
-    background-color: hsl(0 0% 100%);
+    background-color: hsl(0 0% 96%);
     color: hsl(0 0% 8%);
   }
 
-  /* Accent dark for CTA */
+  /* Back to dark for CTA */
   .screen-8 {
-    background-color: hsl(217 91% 50%);
-    color: hsl(0 0% 100%);
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
   }
 
   /* Dark section styling */

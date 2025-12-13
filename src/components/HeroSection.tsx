@@ -63,23 +63,22 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden bg-white">
-      {/* Background Layer - Light gradient */}
+    <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
+      {/* Background Layer - Static */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-slate-50 to-slate-100" />
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: `url(${seoulBridgeNight})`,
+            filter: "brightness(0.35)",
+          }}
+        />
         
-        {/* Subtle pattern overlay */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, hsl(0 0% 0%) 1px, transparent 0)`,
-          backgroundSize: '40px 40px'
-        }} />
-        
-        {/* Gradient orbs for depth */}
-        <div className="absolute top-20 right-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px]" />
-        <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px]" />
+        {/* Dark overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* Floating Service Tags - Desktop - Light Theme */}
+      {/* Floating Service Tags - Desktop - Unified Card Style */}
       {serviceTags.map((tag, index) => (
         <motion.div
           key={index}
@@ -88,19 +87,19 @@ const HeroSection = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
         >
-          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-slate-900/5 border border-slate-200 text-slate-600 hover:bg-primary/10 hover:border-primary/40 hover:text-primary transition-all duration-300">
+          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-primary/40 hover:text-white transition-all duration-300">
             {tag.label}
           </span>
         </motion.div>
       ))}
 
-      {/* Floating Service Tags - Mobile - Light Theme */}
+      {/* Floating Service Tags - Mobile - Unified Card Style */}
       {mobileServiceTags.map((tag, index) => (
         <div
           key={`mobile-${index}`}
           className={`absolute ${tag.position} lg:hidden z-10`}
         >
-          <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-slate-900/5 border border-slate-200 text-slate-500 whitespace-nowrap">
+          <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-white/[0.03] border border-white/[0.08] text-white/60 whitespace-nowrap">
             {tag.label}
           </span>
         </div>
@@ -109,28 +108,28 @@ const HeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Light theme colors */}
+          {/* Main Headline - Unified Inter font with color contrast */}
           <motion.h1 
             className="font-sans text-[10vw] sm:text-[8vw] md:text-[7vw] lg:text-[6vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-slate-900">Your </span>
-            <span className="text-slate-400">Web 3.0</span>
+            <span className="text-white">Your </span>
+            <span className="text-white/60">Web 3.0</span>
             <br />
-            <span className="text-slate-400">Marketing </span>
-            <span className="text-slate-900">Agency</span>
+            <span className="text-white/60">Marketing </span>
+            <span className="text-white">Agency</span>
           </motion.h1>
 
-          {/* Subtext - Light theme */}
+          {/* Subtext - Larger and more prominent */}
           <motion.p 
-            className="text-lg sm:text-xl md:text-2xl text-slate-500 max-w-2xl mx-auto mb-10 font-light tracking-wide"
+            className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-10 font-light tracking-wide"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            We build the bridge for your project to enter the Korean market with <span className="text-slate-800 font-medium">Multi-channel marketing</span>.
+            We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </motion.p>
         </div>
       </div>
@@ -154,25 +153,25 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Client Logo Marquee - Light Theme */}
-      <div className="relative z-10 border-t border-slate-200 py-3 sm:py-4 overflow-hidden bg-white/80 backdrop-blur-sm">
+      {/* Client Logo Marquee - Dark Pill Cards Style */}
+      <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
         {/* Section indicator */}
-        <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-slate-400 text-[10px] sm:text-xs z-20">
-          <span className="number-badge text-slate-500">01</span>
+        <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
+          <span className="number-badge">01</span>
         </div>
 
         <div className="flex items-center logo-marquee-slow ml-14 sm:ml-16">
           {[...clientLogos, ...clientLogos].map((client, index) => (
             <div 
               key={index} 
-              className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-slate-100 rounded-full border border-slate-200 hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
+              className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
             >
               <img 
                 src={client.logo} 
                 alt={client.name} 
-                className="h-4 w-4 sm:h-5 sm:w-5 object-contain opacity-60 flex-shrink-0"
+                className="h-4 w-4 sm:h-5 sm:w-5 object-contain brightness-0 invert opacity-80 flex-shrink-0"
               />
-              <span className="text-slate-600 text-[10px] sm:text-xs font-medium whitespace-nowrap">
+              <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
                 {client.name}
               </span>
             </div>
@@ -180,15 +179,15 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator - Bottom Right - Light Theme */}
+      {/* Scroll Indicator - Bottom Right */}
       <motion.div 
         className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
       >
-        <span className="text-slate-400 text-xs sm:text-sm font-medium">scroll</span>
-        <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-slate-400 animate-bounce" />
+        <span className="text-white/40 text-xs sm:text-sm font-medium">scroll</span>
+        <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
       </motion.div>
     </div>
   );
@@ -224,10 +223,10 @@ const StatItem = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
     >
-      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-slate-900 mb-1">
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-xs sm:text-sm text-slate-500 font-light">
+      <div className="text-xs sm:text-sm text-white/50 font-light">
         {label}
       </div>
     </motion.div>
