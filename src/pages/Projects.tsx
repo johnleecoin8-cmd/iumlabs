@@ -222,7 +222,7 @@ const Projects = () => {
       <Navbar />
       
       {/* Hero - Matching Homepage Style with Video Background */}
-      <main className="p-2 sm:p-3 md:p-4 bg-white">
+      <main className="p-1 sm:p-1.5 md:p-2 bg-white">
       <section className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
         {/* Background Layer - Video */}
         <div className="absolute inset-0 overflow-hidden">
