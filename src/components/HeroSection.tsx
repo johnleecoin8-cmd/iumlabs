@@ -115,7 +115,7 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Unified Inter font with color contrast */}
           <motion.h1 
-            className="font-sans text-[8vw] sm:text-[7vw] md:text-[6vw] lg:text-[5vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10"
+            className="font-sans text-[9vw] sm:text-[8vw] md:text-[7vw] lg:text-[6vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10 mt-8 sm:mt-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
