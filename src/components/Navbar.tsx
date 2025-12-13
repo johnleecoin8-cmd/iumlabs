@@ -24,26 +24,31 @@ const Navbar = () => {
       {/* Main Navbar - White background with black text */}
       <nav className="fixed top-4 left-4 right-4 z-50">
         <div className="flex items-center gap-1.5">
-          {/* Logo Section - White pill */}
-          <Link 
-            to="/" 
-            className="flex items-center gap-3 px-6 py-4 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 hover:bg-gray-50 hover:border-gray-300 hover:scale-[1.02]"
-          >
-            <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-6">
-              <div className="w-4 h-4 bg-white rounded-sm"></div>
-            </div>
-            <span className="text-lg font-semibold text-gray-900">{brandConfig.name}</span>
-          </Link>
-
-          {/* Center - Email - White pill */}
-          <div className="hidden lg:flex items-center gap-3 px-6 py-4 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 hover:bg-gray-50 hover:border-gray-300 ml-auto">
-            <span className="text-gray-400 text-sm">e-mail</span>
-            <a 
-              href={`mailto:${brandConfig.email}`} 
-              className="text-gray-900 text-base font-medium transition-colors duration-300 hover:text-primary"
+          {/* Logo + Email Section - Combined White pill */}
+          <div className="flex items-center gap-3 px-6 py-4 rounded-full border border-gray-200 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300 hover:bg-gray-50 hover:border-gray-300">
+            <Link 
+              to="/" 
+              className="flex items-center gap-3 transition-all duration-300 hover:scale-[1.02]"
             >
-              {brandConfig.email}
-            </a>
+              <div className="w-9 h-9 bg-primary rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-6">
+                <div className="w-4 h-4 bg-white rounded-sm"></div>
+              </div>
+              <span className="text-lg font-semibold text-gray-900">{brandConfig.name}</span>
+            </Link>
+            
+            {/* Divider */}
+            <div className="hidden lg:block w-px h-6 bg-gray-300" />
+            
+            {/* Email */}
+            <div className="hidden lg:flex items-center gap-2">
+              <span className="text-gray-400 text-sm">e-mail</span>
+              <a 
+                href={`mailto:${brandConfig.email}`} 
+                className="text-gray-900 text-base font-medium transition-colors duration-300 hover:text-primary"
+              >
+                {brandConfig.email}
+              </a>
+            </div>
           </div>
 
           {/* Right side buttons - Each as separate pill */}
