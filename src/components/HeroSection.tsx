@@ -121,9 +121,9 @@ const HeroSection = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <span className="text-white">Your </span>
-            <span className="text-white/60">Web 3.0</span>
+            <span className="text-white/90">Web 3.0</span>
             <br />
-            <span className="text-white/60">Marketing </span>
+            <span className="text-white/90">Marketing </span>
             <span className="text-white">Agency</span>
           </motion.h1>
 
