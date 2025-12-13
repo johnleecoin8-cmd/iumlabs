@@ -223,7 +223,7 @@ const Projects = () => {
       
       {/* Hero - Matching Homepage Style with Video Background */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-white">
-      <section className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-2xl">
+      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden rounded-xl sm:rounded-2xl">
         {/* Background Layer - Video */}
         <div className="absolute inset-0 overflow-hidden">
           <video
