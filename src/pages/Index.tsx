@@ -5,7 +5,6 @@ import CasesSection from "@/components/CasesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ProcessSection from "@/components/ProcessSection";
 import ServicesSection from "@/components/ServicesSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import InsightsSection from "@/components/InsightsSection";
 import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
@@ -43,10 +42,6 @@ const Index = () => {
       
       <section className="scroll-reveal" id="services">
         <ServicesSection />
-      </section>
-      
-      <section className="scroll-reveal" id="testimonials">
-        <TestimonialsSection />
       </section>
       
       <section className="scroll-reveal" id="insights">
