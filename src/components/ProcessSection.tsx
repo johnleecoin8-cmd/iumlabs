@@ -69,10 +69,10 @@ const ProcessSection = () => {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section ref={ref} className="px-4 bg-black overflow-hidden py-[20px]">
-      {/* Colorful ambient orbs */}
-      <div className="absolute left-1/4 top-1/2 w-[400px] h-[400px] rounded-full bg-[#00D4FF]/10 blur-[120px] pointer-events-none" />
-      <div className="absolute right-1/4 bottom-1/4 w-[300px] h-[300px] rounded-full bg-[#E040FB]/10 blur-[100px] pointer-events-none" />
+    <section ref={ref} className="px-4 bg-[#FAFAFA] overflow-hidden py-[20px] relative">
+      {/* Light ambient orbs */}
+      <div className="absolute left-1/4 top-1/2 w-[400px] h-[400px] rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
+      <div className="absolute right-1/4 bottom-1/4 w-[300px] h-[300px] rounded-full bg-purple-400/10 blur-[100px] pointer-events-none" />
 
       <div className="container mx-auto max-w-6xl relative z-10">
         {/* Section Header - Unified Style */}
@@ -81,7 +81,7 @@ const ProcessSection = () => {
             <span className="w-8 h-px bg-primary" />
             How We Work
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
             Our <span className="bg-gradient-to-r from-[#1DB954] via-[#00D4FF] to-[#E040FB] bg-clip-text text-transparent">Process</span>
           </h2>
         </div>
@@ -90,7 +90,7 @@ const ProcessSection = () => {
         <div className={`mb-8 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <div className="flex items-center justify-between relative">
             {/* Progress Line */}
-            <div className="absolute top-5 left-0 right-0 h-[2px] bg-white/[0.08] hidden md:block" />
+            <div className="absolute top-5 left-0 right-0 h-[2px] bg-gray-300 hidden md:block" />
             <div 
               className="absolute top-5 left-0 h-[2px] transition-all duration-500 hidden md:block"
               style={{ 
@@ -114,12 +114,12 @@ const ProcessSection = () => {
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300`}
                     style={{
-                      backgroundColor: isActive ? step.color : isPast ? `${step.color}80` : 'rgba(255,255,255,0.03)',
-                      border: isActive || isPast ? 'none' : '1px solid rgba(255,255,255,0.08)',
+                      backgroundColor: isActive ? step.color : isPast ? `${step.color}80` : 'rgba(0,0,0,0.05)',
+                      border: isActive || isPast ? 'none' : '1px solid rgba(0,0,0,0.1)',
                       boxShadow: isActive ? `0 0 20px ${step.color}60` : 'none',
                     }}
                   >
-                    <IconComponent className={`w-4 h-4 ${isActive || isPast ? 'text-white' : 'text-white/40'}`} />
+                    <IconComponent className={`w-4 h-4 ${isActive || isPast ? 'text-white' : 'text-gray-500'}`} />
                   </div>
 
                   {/* Step Label */}
@@ -130,7 +130,7 @@ const ProcessSection = () => {
                     >
                       {step.number}
                     </span>
-                    <span className={`text-xs font-medium block ${isActive ? 'text-white' : 'text-white/40'}`}>
+                    <span className={`text-xs font-medium block ${isActive ? 'text-gray-900' : 'text-gray-500'}`}>
                       {step.subtitle}
                     </span>
                   </div>
@@ -148,7 +148,7 @@ const ProcessSection = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.3 }}
-            className="rounded-2xl bg-white/[0.03] border border-white/[0.08] overflow-hidden"
+            className="rounded-2xl bg-white border border-gray-200 overflow-hidden shadow-lg"
             style={{ 
               boxShadow: `0 4px 40px ${steps[activeStep].color}20`,
               borderColor: `${steps[activeStep].color}30`,
@@ -156,7 +156,7 @@ const ProcessSection = () => {
           >
             {/* Header */}
             <div 
-              className="p-6 border-b border-white/[0.08]"
+              className="p-6 border-b border-gray-100"
               style={{ background: `linear-gradient(to right, ${steps[activeStep].color}15, transparent)` }}
             >
               <div className="flex items-start gap-4">
@@ -174,12 +174,12 @@ const ProcessSection = () => {
                     <span className="font-bold text-sm" style={{ color: steps[activeStep].color }}>
                       {steps[activeStep].number}
                     </span>
-                    <ChevronDown className="w-4 h-4 text-white/40" />
+                    <ChevronDown className="w-4 h-4 text-gray-400" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-white">
+                  <h3 className="text-xl md:text-2xl font-semibold text-gray-900">
                     {steps[activeStep].title}
                   </h3>
-                  <p className="text-white/50 text-sm mt-1">
+                  <p className="text-gray-500 text-sm mt-1">
                     {steps[activeStep].description}
                   </p>
                 </div>
@@ -201,7 +201,7 @@ const ProcessSection = () => {
                       className="w-1.5 h-1.5 rounded-full mt-2 shrink-0"
                       style={{ backgroundColor: steps[activeStep].color }}
                     />
-                    <span className="text-white/70 text-sm md:text-base">{detail}</span>
+                    <span className="text-gray-700 text-sm md:text-base">{detail}</span>
                   </motion.li>
                 ))}
               </ul>

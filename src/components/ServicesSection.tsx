@@ -52,7 +52,7 @@ const ServicesSection = () => {
     isVisible
   } = useScrollAnimation();
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
-  return <div ref={ref} className="px-4 bg-[hsl(0,0%,4%)] py-[20px]">
+  return <div ref={ref} className="px-4 bg-gradient-to-br from-[#0a1a14] to-[#0d1f18] py-[20px] relative overflow-hidden">
       <div className="container mx-auto max-w-7xl">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left - Vertical Title */}
