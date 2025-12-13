@@ -21,7 +21,7 @@ const Index = () => {
       <Navbar />
       <SectionIndicator />
       
-      <main className="screen-1" id="hero">
+      <main className="screen-1 p-2 sm:p-3 md:p-4 bg-white" id="hero">
         <HeroSection />
       </main>
       
