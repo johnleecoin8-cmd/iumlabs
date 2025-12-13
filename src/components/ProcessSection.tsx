@@ -55,7 +55,7 @@ const ProcessSection = () => {
     isVisible
   } = useScrollAnimation();
   const [activeStep, setActiveStep] = useState(0);
-  return <section ref={ref} className="px-4 bg-[hsl(0,0%,4%)] overflow-hidden py-[20px]">
+  return <section ref={ref} className="px-4 bg-[#FAFAFA] overflow-hidden py-[20px]">
       <div className="container mx-auto max-w-6xl">
         {/* Section Header - Unified Style */}
         <div className={`mb-12 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
@@ -63,7 +63,7 @@ const ProcessSection = () => {
             <span className="w-8 h-px bg-primary" />
             How We Work
           </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
             Our <span className="text-primary">Process</span>
           </h2>
         </div>
@@ -72,7 +72,7 @@ const ProcessSection = () => {
         <div className={`mb-8 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
           <div className="flex items-center justify-between relative">
             {/* Progress Line */}
-            <div className="absolute top-5 left-0 right-0 h-[2px] bg-white/[0.08] hidden md:block" />
+            <div className="absolute top-5 left-0 right-0 h-[2px] bg-gray-200 hidden md:block" />
             <div className="absolute top-5 left-0 h-[2px] bg-primary transition-all duration-500 hidden md:block" style={{
             width: `${activeStep / (steps.length - 1) * 100}%`
           }} />
@@ -83,16 +83,16 @@ const ProcessSection = () => {
             const isPast = index < activeStep;
             return <button key={index} onClick={() => setActiveStep(index)} className={`relative z-10 flex flex-col items-center group transition-all duration-300 ${isActive ? 'scale-105' : 'hover:scale-105'}`}>
                   {/* Step Circle */}
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isActive ? 'bg-primary text-white' : isPast ? 'bg-primary/60 text-white' : 'bg-white/[0.03] border border-white/[0.08] text-white/40 group-hover:border-primary/40'}`}>
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isActive ? 'bg-primary text-white' : isPast ? 'bg-primary/60 text-white' : 'bg-white border border-gray-200 text-gray-400 group-hover:border-primary/40'}`}>
                     <IconComponent className="w-4 h-4" />
                   </div>
 
                   {/* Step Label */}
                   <div className="hidden md:block mt-3 text-center">
-                    <span className={`text-xs font-bold block ${isActive ? 'text-primary' : 'text-white/40'}`}>
+                    <span className={`text-xs font-bold block ${isActive ? 'text-primary' : 'text-gray-400'}`}>
                       {step.number}
                     </span>
-                    <span className={`text-xs font-medium block ${isActive ? 'text-white' : 'text-white/40'}`}>
+                    <span className={`text-xs font-medium block ${isActive ? 'text-gray-900' : 'text-gray-400'}`}>
                       {step.subtitle}
                     </span>
                   </div>
@@ -114,9 +114,9 @@ const ProcessSection = () => {
           y: -10
         }} transition={{
           duration: 0.3
-        }} className="rounded-2xl bg-white/[0.03] border border-white/[0.08] overflow-hidden">
+        }} className="rounded-2xl bg-white border border-gray-200 shadow-lg overflow-hidden">
             {/* Header */}
-            <div className="p-6 border-b border-white/[0.08] bg-gradient-to-r from-primary/5 to-transparent">
+            <div className="p-6 border-b border-gray-100 bg-gradient-to-r from-primary/5 to-transparent">
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                   {(() => {
@@ -127,12 +127,12 @@ const ProcessSection = () => {
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-1">
                     <span className="text-primary font-bold text-sm">{steps[activeStep].number}</span>
-                    <ChevronDown className="w-4 h-4 text-white/40" />
+                    <ChevronDown className="w-4 h-4 text-gray-400" />
                   </div>
-                  <h3 className="text-xl md:text-2xl font-semibold text-white">
+                  <h3 className="text-xl md:text-2xl font-semibold text-gray-900">
                     {steps[activeStep].title}
                   </h3>
-                  <p className="text-white/50 text-sm mt-1">
+                  <p className="text-gray-500 text-sm mt-1">
                     {steps[activeStep].description}
                   </p>
                 </div>
@@ -152,7 +152,7 @@ const ProcessSection = () => {
                 delay: idx * 0.05
               }} className="flex items-start gap-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 shrink-0" />
-                    <span className="text-white/70 text-sm md:text-base">{detail}</span>
+                    <span className="text-gray-700 text-sm md:text-base">{detail}</span>
                   </motion.li>)}
               </ul>
 
@@ -162,7 +162,7 @@ const ProcessSection = () => {
 
         {/* Mobile Step Indicators */}
         <div className="flex justify-center gap-2 mt-6 md:hidden">
-          {steps.map((_, index) => <button key={index} onClick={() => setActiveStep(index)} className={`w-2 h-2 rounded-full transition-all ${index === activeStep ? 'bg-primary w-6' : 'bg-white/20'}`} />)}
+          {steps.map((_, index) => <button key={index} onClick={() => setActiveStep(index)} className={`w-2 h-2 rounded-full transition-all ${index === activeStep ? 'bg-primary w-6' : 'bg-gray-300'}`} />)}
         </div>
       </div>
     </section>;

@@ -95,19 +95,19 @@ const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div ref={ref} className="bg-[hsl(0,0%,5%)] px-4 py-24">
+    <div ref={ref} className="bg-[#0033FF] px-4 py-24">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className={`flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <div>
-            <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
+            <span className="text-xs font-medium text-white/70 mb-4 block tracking-widest uppercase">
               Featured Cases
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-              Success <span className="text-primary">Stories</span>
+              Success <span className="text-white/90">Stories</span>
             </h2>
           </div>
-          <Link to="/projects" className="group flex items-center gap-2 text-white/60 hover:text-primary transition-colors">
+          <Link to="/projects" className="group flex items-center gap-2 text-white/80 hover:text-white transition-colors">
             View all projects
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </Link>
