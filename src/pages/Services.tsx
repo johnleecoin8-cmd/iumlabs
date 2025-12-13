@@ -207,6 +207,9 @@ const Services = () => {
             <source src="/videos/services-background.mp4" type="video/mp4" />
           </video>
           
+          {/* Purple/Cyan gradient overlay - Services theme */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-600/20 via-transparent to-cyan-500/15" />
+          
           {/* Dark overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
         </div>
@@ -220,7 +223,7 @@ const Services = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
           >
-            <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-primary/40 hover:text-white transition-all duration-300">
+            <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-purple-500/10 border border-purple-400/20 text-white/70 hover:bg-purple-500/20 hover:border-purple-400/40 hover:text-white transition-all duration-300">
               {tag.label}
             </span>
           </motion.div>
@@ -232,37 +235,66 @@ const Services = () => {
             key={`mobile-${index}`}
             className={`absolute ${tag.position} lg:hidden z-10`}
           >
-            <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-white/[0.03] border border-white/[0.08] text-white/60 whitespace-nowrap">
+            <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-purple-500/10 border border-purple-400/20 text-white/60 whitespace-nowrap">
               {tag.label}
             </span>
           </div>
         ))}
 
-        {/* Main Content - Centered */}
-        <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
-          <div className="max-w-7xl mx-auto text-center">
-            {/* Main Headline */}
-            <motion.h1 
-              className="font-sans text-[10vw] sm:text-[9vw] md:text-[8vw] lg:text-[7vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10 mt-16 sm:mt-20"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              <span className="text-white">Our </span>
-              <span className="text-white/90">Services</span>
-            </motion.h1>
+        {/* Main Content - Left aligned for Services */}
+        <div className="flex-1 flex items-center relative z-10 px-4 sm:px-6 lg:px-16">
+          <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left side - Text */}
+            <div>
+              {/* Main Headline */}
+              <motion.h1 
+                className="font-sans text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[6vw] font-bold leading-[0.9] tracking-[-0.02em] mb-6 sm:mb-8 mt-16 sm:mt-20"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span className="text-white">Our </span>
+                <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Services</span>
+              </motion.h1>
 
-            {/* Subtext */}
-            <motion.p 
-              className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-10 font-light tracking-wide"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              {/* Subtext */}
+              <motion.p 
+                className="text-lg sm:text-xl text-white/50 max-w-xl mb-8 font-light tracking-wide"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                As a Web3 Marketing Agency with a focus on customer satisfaction, 
+                CryptoBridge Korea delivers tailor-made services to build and grow your <span className="text-purple-300 font-medium">Web3 project</span>.
+              </motion.p>
+            </div>
+
+            {/* Right side - Service Icons Grid */}
+            <motion.div 
+              className="hidden lg:grid grid-cols-3 gap-4"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
             >
-              As a Web3 Marketing Agency with a focus on customer satisfaction, 
-              CryptoBridge Korea has tailor made the service offering to include 
-              services that serve to build and grow your <span className="text-white font-medium">Web3 project</span>.
-            </motion.p>
+              {services.slice(0, 6).map((service, index) => (
+                <Link
+                  key={service.number}
+                  to={service.link}
+                  className="group relative aspect-square rounded-2xl overflow-hidden border border-white/10 hover:border-purple-400/40 transition-all duration-300 hover:scale-105"
+                >
+                  <img 
+                    src={service.image} 
+                    alt={service.title}
+                    className="w-full h-full object-cover brightness-50 group-hover:brightness-75 transition-all duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-3">
+                    <span className="text-xs text-purple-300 font-medium">[{service.number}]</span>
+                    <p className="text-white text-sm font-medium truncate">{service.title}</p>
+                  </div>
+                </Link>
+              ))}
+            </motion.div>
           </div>
         </div>
 

@@ -239,6 +239,9 @@ const Projects = () => {
             <source src="/videos/projects-background.mp4" type="video/mp4" />
           </video>
           
+          {/* Gold/Orange gradient overlay - Projects theme */}
+          <div className="absolute inset-0 bg-gradient-to-br from-amber-500/15 via-transparent to-orange-500/10" />
+          
           {/* Dark overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
         </div>
@@ -252,7 +255,7 @@ const Projects = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
           >
-            <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-primary/40 hover:text-white transition-all duration-300">
+            <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-amber-500/10 border border-amber-400/20 text-white/70 hover:bg-amber-500/20 hover:border-amber-400/40 hover:text-white transition-all duration-300">
               {tag.label}
             </span>
           </motion.div>
@@ -264,35 +267,71 @@ const Projects = () => {
             key={`mobile-${index}`}
             className={`absolute ${tag.position} lg:hidden z-10`}
           >
-            <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-white/[0.03] border border-white/[0.08] text-white/60 whitespace-nowrap">
+            <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-amber-500/10 border border-amber-400/20 text-white/60 whitespace-nowrap">
               {tag.label}
             </span>
           </div>
         ))}
 
-        {/* Main Content - Centered */}
-        <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
-          <div className="max-w-7xl mx-auto text-center">
-            {/* Main Headline */}
-            <motion.h1 
-              className="font-sans text-[10vw] sm:text-[9vw] md:text-[8vw] lg:text-[7vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10 mt-16 sm:mt-20"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+        {/* Main Content - Right aligned with project previews on left */}
+        <div className="flex-1 flex items-center relative z-10 px-4 sm:px-6 lg:px-16">
+          <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left side - Featured Project Previews */}
+            <motion.div 
+              className="hidden lg:flex flex-col gap-4"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
             >
-              <span className="text-white">Our </span>
-              <span className="text-white/90">Projects</span>
-            </motion.h1>
+              {cases.slice(0, 3).map((project, index) => (
+                <Link
+                  key={project.slug}
+                  to={`/projects/${project.slug}`}
+                  className="group flex items-center gap-4 p-4 rounded-2xl border border-white/10 hover:border-amber-400/40 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300"
+                >
+                  <div 
+                    className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0"
+                    style={{ boxShadow: `0 0 20px ${project.glowColor}30` }}
+                  >
+                    <img 
+                      src={project.bgImage} 
+                      alt={project.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-white font-medium truncate">{project.name}</p>
+                    <p className="text-sm truncate" style={{ color: project.glowColor }}>{project.result}</p>
+                  </div>
+                  <ArrowUpRight className="w-5 h-5 text-white/40 group-hover:text-amber-400 transition-colors flex-shrink-0" />
+                </Link>
+              ))}
+              <p className="text-white/40 text-sm text-center mt-2">+{cases.length - 3} more projects below</p>
+            </motion.div>
 
-            {/* Subtext */}
-            <motion.p 
-              className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-10 font-light tracking-wide"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-            >
-              These case studies walk through the challenge, our approach, and the outcomes across services like <span className="text-white font-medium">GTM, KOLs, PR, and social media</span>.
-            </motion.p>
+            {/* Right side - Text */}
+            <div className="text-right">
+              {/* Main Headline */}
+              <motion.h1 
+                className="font-sans text-[12vw] sm:text-[10vw] md:text-[8vw] lg:text-[6vw] font-bold leading-[0.9] tracking-[-0.02em] mb-6 sm:mb-8 mt-16 sm:mt-20"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span className="text-white">Our </span>
+                <span className="bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">Projects</span>
+              </motion.h1>
+
+              {/* Subtext */}
+              <motion.p 
+                className="text-lg sm:text-xl text-white/50 max-w-xl ml-auto mb-8 font-light tracking-wide"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                These case studies walk through the challenge, our approach, and the outcomes across services like <span className="text-amber-300 font-medium">GTM, KOLs, PR, and social media</span>.
+              </motion.p>
+            </div>
           </div>
         </div>
 
