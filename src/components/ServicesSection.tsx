@@ -52,45 +52,50 @@ const ServicesSection = () => {
     isVisible
   } = useScrollAnimation();
   const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
-  return <div ref={ref} className="px-4 bg-[hsl(0,0%,4%)] py-[20px]">
-      <div className="container mx-auto max-w-7xl">
+  return <div ref={ref} className="px-4 bg-gradient-to-br from-[#0a1a14] via-[#0d1f18] to-[#0a1a14] py-[20px] relative overflow-hidden">
+      {/* Background Glow Effects */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[150px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-green-500/10 rounded-full blur-[120px]" />
+      </div>
+      
+      <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left - Vertical Title */}
           <div className={`lg:col-span-3 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
             <div className="lg:sticky lg:top-32">
-              <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase">
-                <span className="w-8 h-px bg-primary" />
+              <span className="inline-flex items-center gap-2 text-xs font-medium text-emerald-400 mb-4 tracking-widest uppercase">
+                <span className="w-8 h-px bg-emerald-400" />
                 What We Do
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
-                Our <span className="text-primary">Services</span>
+                Our <span className="text-emerald-400">Services</span>
               </h2>
               <p className="text-white/50 mb-8 max-w-sm">
                 End-to-end Web3 marketing solutions tailored for the Korean market
               </p>
-              <Link to="/services" className="group inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
+              <Link to="/services" className="group inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors">
                 Explore all services
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </Link>
             </div>
           </div>
 
-          {/* Right - Bento Grid with Unified Card Style */}
           <div className="lg:col-span-9">
             <div className="grid md:grid-cols-2 gap-4">
-              {services.map((service, index) => <div key={index} onClick={() => setSelectedService(service)} className={`group relative p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/40 hover:-translate-y-1 transition-all duration-500 cursor-pointer ${service.size === 'large' ? 'md:col-span-2' : ''} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
+              {services.map((service, index) => <div key={index} onClick={() => setSelectedService(service)} className={`group relative p-8 rounded-2xl bg-white/[0.05] border border-emerald-500/20 hover:bg-white/[0.08] hover:border-emerald-400/50 hover:-translate-y-1 transition-all duration-500 cursor-pointer ${service.size === 'large' ? 'md:col-span-2' : ''} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
               transitionDelay: `${index * 100}ms`
             }}>
                   {/* Hover Glow */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
 
                   {/* Icon */}
-                  <div className="relative w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110">
-                    <service.icon className="w-7 h-7 text-primary transition-all duration-300" />
+                  <div className="relative w-14 h-14 rounded-2xl bg-emerald-500/20 flex items-center justify-center mb-6 group-hover:bg-emerald-500/30 transition-all duration-300 group-hover:scale-110">
+                    <service.icon className="w-7 h-7 text-emerald-400 transition-all duration-300" />
                   </div>
 
                   {/* Content */}
-                  <h3 className="relative text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                  <h3 className="relative text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-emerald-400 transition-colors">
                     {service.title}
                   </h3>
                   <p className="relative text-white/50 leading-relaxed">
@@ -99,7 +104,7 @@ const ServicesSection = () => {
 
                   {/* Hover Arrow */}
                   <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ArrowUpRight className="w-5 h-5 text-primary" />
+                    <ArrowUpRight className="w-5 h-5 text-emerald-400" />
                   </div>
                 </div>)}
             </div>
