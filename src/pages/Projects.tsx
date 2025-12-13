@@ -282,13 +282,15 @@ const Projects = () => {
 
                   {/* Content */}
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-10">
-                    {/* Logo */}
-                    <img
-                      src={caseItem.logo}
-                      alt={caseItem.name}
-                      className="w-16 h-16 md:w-20 md:h-20 object-contain mb-4 group-hover:scale-110 transition-transform duration-300"
-                      style={{ filter: `drop-shadow(0 0 20px ${caseItem.glowColor}80)` }}
-                    />
+                    {/* Logo - Hide for Tria since logo is integrated in background */}
+                    {caseItem.slug !== 'tria' && (
+                      <img
+                        src={caseItem.logo}
+                        alt={caseItem.name}
+                        className="w-16 h-16 md:w-20 md:h-20 object-contain mb-4 group-hover:scale-110 transition-transform duration-300"
+                        style={{ filter: `drop-shadow(0 0 20px ${caseItem.glowColor}80)` }}
+                      />
+                    )}
                     
                     {/* Project Name */}
                     <h3 className="text-white text-2xl md:text-3xl font-bold text-center tracking-tight drop-shadow-lg">
