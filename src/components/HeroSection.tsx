@@ -72,6 +72,9 @@ const HeroSection = () => {
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: "brightness(0.35)" }}
+          onLoadedMetadata={(e) => {
+            e.currentTarget.currentTime = 0;
+          }}
         >
           <source src="/videos/hero-background.mp4" type="video/mp4" />
         </video>
