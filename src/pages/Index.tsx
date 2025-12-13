@@ -17,47 +17,60 @@ const Index = () => {
   useScrollReveal();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[hsl(0,0%,2%)]">
       <Navbar />
       <SectionIndicator />
       
-      <main className="screen-1" id="hero">
+      {/* Hero Section - Rounded corners */}
+      <main className="screen-1 mx-2 md:mx-4 rounded-3xl overflow-hidden" id="hero">
         <HeroSection />
       </main>
       
-      <section className="scroll-reveal" id="about">
+      {/* About Section */}
+      <section className="scroll-reveal mx-2 md:mx-4 mt-4 rounded-3xl overflow-hidden" id="about">
         <AboutUsSection />
       </section>
       
-      <section className="scroll-reveal" id="cases">
+      {/* Cases Section */}
+      <section className="scroll-reveal mx-2 md:mx-4 mt-4 rounded-3xl overflow-hidden" id="cases">
         <CasesSection />
       </section>
       
-      <section className="scroll-reveal" id="why-choose-us">
+      {/* Why Choose Us Section */}
+      <section className="scroll-reveal mx-2 md:mx-4 mt-4 rounded-3xl overflow-hidden" id="why-choose-us">
         <WhyChooseUsSection />
       </section>
       
-      <section className="scroll-reveal" id="process">
+      {/* Process Section */}
+      <section className="scroll-reveal mx-2 md:mx-4 mt-4 rounded-3xl overflow-hidden" id="process">
         <ProcessSection />
       </section>
       
-      <section className="scroll-reveal" id="services">
+      {/* Services Section */}
+      <section className="scroll-reveal mx-2 md:mx-4 mt-4 rounded-3xl overflow-hidden" id="services">
         <ServicesSection />
       </section>
       
-      <section className="scroll-reveal" id="testimonials">
+      {/* Testimonials Section */}
+      <section className="scroll-reveal mx-2 md:mx-4 mt-4 rounded-3xl overflow-hidden" id="testimonials">
         <TestimonialsSection />
       </section>
       
-      <section className="scroll-reveal" id="insights">
+      {/* Insights Section */}
+      <section className="scroll-reveal mx-2 md:mx-4 mt-4 rounded-3xl overflow-hidden" id="insights">
         <InsightsSection />
       </section>
       
-      <section className="screen-8 scroll-reveal" id="contact">
+      {/* CTA Section */}
+      <section className="screen-8 scroll-reveal mx-2 md:mx-4 mt-4 rounded-3xl overflow-hidden" id="contact">
         <CTASection />
       </section>
       
-      <Footer />
+      {/* Footer */}
+      <div className="mx-2 md:mx-4 mt-4 mb-4 rounded-3xl overflow-hidden">
+        <Footer />
+      </div>
+      
       <FloatingContactButton />
     </div>
   );
