@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar - Separated pill sections like Lunar Strategy */}
-      <nav className="fixed top-3 left-3 right-3 z-50">
+      <nav className="fixed top-4 left-4 right-4 z-50">
         <div className="flex items-center gap-2">
           {/* Logo Section - Separate pill */}
           <Link 
