@@ -17,47 +17,67 @@ const Index = () => {
   useScrollReveal();
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-white">
       <Navbar />
       <SectionIndicator />
       
-      <main className="screen-1 p-0.5 sm:p-1 md:p-2 bg-white" id="hero">
+      <main className="screen-1 p-0.5 sm:p-1 md:p-2" id="hero">
         <HeroSection />
       </main>
       
-      <section className="scroll-reveal" id="about">
-        <AboutUsSection />
-      </section>
+      <div className="p-0.5 sm:p-1 md:p-2" id="about">
+        <section className="scroll-reveal rounded-xl sm:rounded-2xl overflow-hidden">
+          <AboutUsSection />
+        </section>
+      </div>
       
-      <section className="scroll-reveal" id="cases">
-        <CasesSection />
-      </section>
+      <div className="p-0.5 sm:p-1 md:p-2" id="cases">
+        <section className="scroll-reveal rounded-xl sm:rounded-2xl overflow-hidden">
+          <CasesSection />
+        </section>
+      </div>
       
-      <section className="scroll-reveal" id="why-choose-us">
-        <WhyChooseUsSection />
-      </section>
+      <div className="p-0.5 sm:p-1 md:p-2" id="why-choose-us">
+        <section className="scroll-reveal rounded-xl sm:rounded-2xl overflow-hidden">
+          <WhyChooseUsSection />
+        </section>
+      </div>
       
-      <section className="scroll-reveal" id="process">
-        <ProcessSection />
-      </section>
+      <div className="p-0.5 sm:p-1 md:p-2" id="process">
+        <section className="scroll-reveal rounded-xl sm:rounded-2xl overflow-hidden">
+          <ProcessSection />
+        </section>
+      </div>
       
-      <section className="scroll-reveal" id="services">
-        <ServicesSection />
-      </section>
+      <div className="p-0.5 sm:p-1 md:p-2" id="services">
+        <section className="scroll-reveal rounded-xl sm:rounded-2xl overflow-hidden">
+          <ServicesSection />
+        </section>
+      </div>
       
-      <section className="scroll-reveal" id="testimonials">
-        <TestimonialsSection />
-      </section>
+      <div className="p-0.5 sm:p-1 md:p-2" id="testimonials">
+        <section className="scroll-reveal rounded-xl sm:rounded-2xl overflow-hidden">
+          <TestimonialsSection />
+        </section>
+      </div>
       
-      <section className="scroll-reveal" id="insights">
-        <InsightsSection />
-      </section>
+      <div className="p-0.5 sm:p-1 md:p-2" id="insights">
+        <section className="scroll-reveal rounded-xl sm:rounded-2xl overflow-hidden">
+          <InsightsSection />
+        </section>
+      </div>
       
-      <section className="screen-8 scroll-reveal" id="contact">
-        <CTASection />
-      </section>
+      <div className="p-0.5 sm:p-1 md:p-2" id="contact">
+        <section className="screen-8 scroll-reveal rounded-xl sm:rounded-2xl overflow-hidden">
+          <CTASection />
+        </section>
+      </div>
       
-      <Footer />
+      <div className="p-0.5 sm:p-1 md:p-2">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <Footer />
+        </div>
+      </div>
       <FloatingContactButton />
     </div>
   );
