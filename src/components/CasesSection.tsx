@@ -20,6 +20,8 @@ import polygonBg from "@/assets/projects/polygon-bg.jpg";
 import ondoBg from "@/assets/projects/ondo-bg.jpg";
 import peaqBg from "@/assets/projects/peaq-bg.jpg";
 import storyBg from "@/assets/projects/story-bg.jpg";
+import triaBg from "@/assets/projects/tria-bg.jpg";
+
 const featuredCases = [{
   name: "BNB Chain",
   logo: bnbLogo,
@@ -86,13 +88,22 @@ const featuredCases = [{
   description: "Korean content creator onboarding",
   glowColor: "#FF6B9D",
   roiBadge: "300% Growth"
+}, {
+  name: "Tria",
+  logo: triaLogo,
+  bgImage: triaBg,
+  slug: "tria",
+  category: "Wallet",
+  result: "50K+",
+  resultLabel: "Users Onboarded",
+  description: "Web3 wallet onboarding campaign for Korean market",
+  glowColor: "#FF6B6B",
+  roiBadge: "10x Growth"
 }];
+
 const clientLogos = [{
   name: "MegaETH",
   logo: megaethLogo
-}, {
-  name: "Tria",
-  logo: triaLogo
 }, {
   name: "Bybit",
   logo: bybitLogo
