@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 
 // Import logos
-import bnbLogo from "@/assets/logos/bnb.png";
-import kucoinLogo from "@/assets/logos/kucoin.png";
+import bnbLogo from "@/assets/logos/bnb.svg";
+import kucoinLogo from "@/assets/logos/kucoin.svg";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
-import peaqLogo from "@/assets/logos/peaq.png";
+import peaqLogo from "@/assets/logos/peaq.svg";
 import storyLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
-import triaLogo from "@/assets/logos/tria.png";
+import triaLogo from "@/assets/logos/tria-official.png";
 import bybitLogo from "@/assets/logos/bybit.png";
 
 // Import background images
@@ -22,102 +22,84 @@ import peaqBg from "@/assets/projects/peaq-bg.jpg";
 import storyBg from "@/assets/projects/story-bg.jpg";
 import triaBg from "@/assets/projects/tria-bg.jpg";
 
-const featuredCases = [{
-  name: "BNB Chain",
-  logo: bnbLogo,
-  bgImage: bnbBg,
-  slug: "bnb-chain",
-  category: "Infrastructure",
-  result: "500K+",
-  resultLabel: "Community Members",
-  description: "Full-service marketing campaign for Korea market entry",
-  glowColor: "#F3BA2F",
-  roiBadge: "5x ROI"
-}, {
-  name: "KuCoin",
-  logo: kucoinLogo,
-  bgImage: kucoinBg,
-  slug: "kucoin",
-  category: "Exchange",
-  result: "$2B+",
-  resultLabel: "Trading Volume",
-  description: "Community growth and influencer marketing strategy",
-  glowColor: "#23AF91",
-  roiBadge: "200% Growth"
-}, {
-  name: "Polygon",
-  logo: polygonLogo,
-  bgImage: polygonBg,
-  slug: "polygon",
-  category: "Layer 2",
-  result: "100+",
-  resultLabel: "Dapps Onboarded",
-  description: "Developer outreach and ecosystem expansion",
-  glowColor: "#8247E5",
-  roiBadge: "150+ Projects"
-}, {
-  name: "Ondo Finance",
-  logo: ondoLogo,
-  bgImage: ondoBg,
-  slug: "ondo",
-  category: "RWA",
-  result: "100K+",
-  resultLabel: "Korean Community",
-  description: "RWA education campaign for Korean investors",
-  glowColor: "#3B82F6",
-  roiBadge: "$50M+ TVL"
-}, {
-  name: "Peaq",
-  logo: peaqLogo,
-  bgImage: peaqBg,
-  slug: "peaq",
-  category: "DePIN",
-  result: "#1",
-  resultLabel: "DePIN in Korea",
-  description: "Thought leadership in DePIN space",
-  glowColor: "#00CED1",
-  roiBadge: "1M+ Views"
-}, {
-  name: "Story Protocol",
-  logo: storyLogo,
-  bgImage: storyBg,
-  slug: "story-protocol",
-  category: "IP Protocol",
-  result: "5K+",
-  resultLabel: "Korean Creators",
-  description: "Korean content creator onboarding",
-  glowColor: "#FF6B9D",
-  roiBadge: "300% Growth"
-}, {
-  name: "Tria",
-  logo: triaLogo,
-  bgImage: triaBg,
-  slug: "tria",
-  category: "Wallet",
-  result: "50K+",
-  resultLabel: "Users Onboarded",
-  description: "Web3 wallet onboarding campaign for Korean market",
-  glowColor: "#FF6B6B",
-  roiBadge: "10x Growth"
-}];
+const featuredCases = [
+  {
+    name: "BNB Chain",
+    logo: bnbLogo,
+    bgImage: bnbBg,
+    slug: "bnb-chain",
+    category: "Infrastructure",
+    result: "+340% Korean Trading Volume",
+    description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage.",
+    glowColor: "#F3BA2F",
+  },
+  {
+    name: "KuCoin",
+    logo: kucoinLogo,
+    bgImage: kucoinBg,
+    slug: "kucoin",
+    category: "Exchange",
+    result: "50K+ New Korean Users",
+    description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships.",
+    glowColor: "#23AF91",
+  },
+  {
+    name: "Polygon",
+    logo: polygonLogo,
+    bgImage: polygonBg,
+    slug: "polygon",
+    category: "Layer 2",
+    result: "$2M Korean TVL in 30 Days",
+    description: "Community growth from 0 to 50K Korean users with targeted developer relations and DeFi marketing.",
+    glowColor: "#8247E5",
+  },
+  {
+    name: "Ondo Finance",
+    logo: ondoLogo,
+    bgImage: ondoBg,
+    slug: "ondo",
+    category: "RWA",
+    result: "100K+ Korean Community",
+    description: "RWA education campaign targeting both retail and institutional Korean investors.",
+    glowColor: "#3B82F6",
+  },
+  {
+    name: "Peaq",
+    logo: peaqLogo,
+    bgImage: peaqBg,
+    slug: "peaq",
+    category: "DePIN",
+    result: "#1 DePIN in Korea",
+    description: "Established thought leadership in DePIN space with IoT partnerships and developer community.",
+    glowColor: "#00CED1",
+  },
+  {
+    name: "Tria",
+    logo: triaLogo,
+    bgImage: triaBg,
+    slug: "tria",
+    category: "Wallet",
+    result: "30K+ Korean Wallets",
+    description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users.",
+    glowColor: "#FF7F50",
+  },
+];
 
-const clientLogos = [{
-  name: "MegaETH",
-  logo: megaethLogo
-}, {
-  name: "Bybit",
-  logo: bybitLogo
-}];
+const clientLogos = [
+  { name: "Story Protocol", logo: storyLogo },
+  { name: "MegaETH", logo: megaethLogo },
+  { name: "Bybit", logo: bybitLogo },
+];
+
 const CasesSection = () => {
-  const {
-    ref,
-    isVisible
-  } = useScrollAnimation();
-  return <div ref={ref} className="bg-[hsl(0,0%,5%)] px-px py-[10px]">
+  const { ref, isVisible } = useScrollAnimation();
+
+  return (
+    <div ref={ref} className="bg-[hsl(0,0%,5%)] px-4 py-24">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className={`flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="bg-[hsl(0,0%,5%)] px-px py-px">
+          <div>
             <span className="text-xs font-medium text-primary mb-4 block tracking-widest uppercase">
               Featured Cases
             </span>
@@ -131,91 +113,123 @@ const CasesSection = () => {
           </Link>
         </div>
 
-        {/* Featured Cases Grid - 2 rows of 3 */}
+        {/* Featured Cases Grid - Same style as Projects page */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {featuredCases.map((project, index) => <Link key={index} to={`/projects/${project.slug}`} onClick={() => window.scrollTo(0, 0)} className={`group relative overflow-hidden rounded-3xl min-h-[420px] flex flex-col transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
-          transitionDelay: `${index * 150}ms`
-        }}>
-              {/* Background Image */}
-              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style={{
-            backgroundImage: `url(${project.bgImage})`
-          }} />
-              
-              {/* Dark Overlay for readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
-              
-              {/* ROI Badge */}
-              <div className="absolute top-4 right-4 z-20">
-                <div className="px-3 py-1.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-500 text-black text-xs font-bold shadow-lg">
-                  {project.roiBadge}
-                </div>
-              </div>
-              
-              {/* Intense Glow Effect on Hover */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" style={{
-            background: `radial-gradient(ellipse at 50% 50%, ${project.glowColor}40 0%, ${project.glowColor}15 40%, transparent 70%)`
-          }} />
-              <div className="absolute -inset-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none" style={{
-            boxShadow: `0 0 80px 30px ${project.glowColor}40, 0 0 120px 60px ${project.glowColor}20`
-          }} />
-
-              {/* Top Section - Category Badge with Project Color & Arrow */}
-              <div className="relative z-10 p-8 flex items-center justify-between">
-                <span className="text-xs font-medium uppercase tracking-widest text-white/90 bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full" style={{
-              border: `1px solid ${project.glowColor}50`
-            }}>
-                  {project.category}
-                </span>
-                <div className="w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110 group-hover:rotate-12" style={{
-              backgroundColor: `${project.glowColor}30`,
-              backdropFilter: 'blur(8px)'
-            }}>
-                  <ArrowUpRight className="w-5 h-5 text-white" />
-                </div>
-              </div>
-
-              {/* Center - Spacer */}
-              <div className="relative z-10 flex-1" />
-
-              {/* Bottom Section - Stats with Project Color */}
-              <div className="relative z-10 p-8 pt-4">
-                {/* Description - Hidden by default, shown on hover */}
-                <p className="text-sm text-white/60 mb-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 line-clamp-2">
-                  {project.description}
-                </p>
+          {featuredCases.map((caseItem, index) => (
+            <Link
+              key={caseItem.name}
+              to={`/projects/${caseItem.slug}`}
+              onClick={() => window.scrollTo(0, 0)}
+              className={`group cursor-pointer transition-all duration-500 ${
+                isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+              }`}
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              <div 
+                className="relative aspect-square rounded-3xl overflow-hidden mb-4 transition-all duration-500 hover:-translate-y-2"
+                style={{ boxShadow: `0 4px 30px ${caseItem.glowColor}20` }}
+                onMouseEnter={(e) => e.currentTarget.style.boxShadow = `0 10px 60px ${caseItem.glowColor}50, 0 0 100px ${caseItem.glowColor}30`}
+                onMouseLeave={(e) => e.currentTarget.style.boxShadow = `0 4px 30px ${caseItem.glowColor}20`}
+              >
+                {/* Background Image */}
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{ backgroundImage: `url(${caseItem.bgImage})` }}
+                />
                 
-                {/* Stats Row with Project Color Border */}
-                <div className="flex items-end justify-between pt-4" style={{
-              borderTop: `1px solid ${project.glowColor}30`
-            }}>
-                  <div>
-                    <span className="text-3xl md:text-4xl font-bold" style={{
-                  color: project.glowColor
-                }}>
-                      {project.result}
-                    </span>
-                    <p className="text-sm text-white/50 mt-1">{project.resultLabel}</p>
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                
+                {/* Project Color Glow Effect on Hover */}
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  style={{
+                    background: `radial-gradient(ellipse at 50% 50%, ${caseItem.glowColor}30 0%, transparent 70%)`,
+                  }}
+                />
+
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center p-6 z-10">
+                  {/* Logo - Hide for Tria since logo is integrated in background */}
+                  {caseItem.slug !== 'tria' && (
+                    <img
+                      src={caseItem.logo}
+                      alt={caseItem.name}
+                      className="w-16 h-16 md:w-20 md:h-20 object-contain mb-4 group-hover:scale-110 transition-transform duration-300"
+                      style={{ filter: `drop-shadow(0 0 20px ${caseItem.glowColor}80)` }}
+                    />
+                  )}
+                  
+                  {/* Project Name */}
+                  <h3 className="text-white text-2xl md:text-3xl font-bold text-center tracking-tight drop-shadow-lg">
+                    {caseItem.name}
+                  </h3>
+                </div>
+
+                {/* Bottom Info - Result with Project Color */}
+                <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-sm font-semibold text-center" style={{ color: caseItem.glowColor }}>
+                    {caseItem.result}
+                  </p>
+                  <p className="text-white/70 text-xs text-center mt-1 uppercase tracking-wider">
+                    {caseItem.category}
+                  </p>
+                </div>
+
+                {/* Hover Arrow with Project Color */}
+                <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                  <div 
+                    className="w-10 h-10 rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: `${caseItem.glowColor}30`, backdropFilter: 'blur(8px)' }}
+                  >
+                    <ArrowUpRight className="w-5 h-5 text-white" />
                   </div>
-                  <span className="text-base font-semibold text-white/80 group-hover:text-white transition-colors">
-                    {project.name}
+                </div>
+
+                {/* Category Badge with Project Color Border */}
+                <div className="absolute top-4 left-4">
+                  <span 
+                    className="px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider"
+                    style={{ border: `1px solid ${caseItem.glowColor}40` }}
+                  >
+                    {caseItem.category}
                   </span>
                 </div>
               </div>
-            </Link>)}
+
+              {/* Text Below Card */}
+              <div className="px-2">
+                <h3 
+                  className="text-xl font-medium text-white mb-1 transition-colors"
+                  onMouseEnter={(e) => e.currentTarget.style.color = caseItem.glowColor}
+                  onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                >
+                  {caseItem.name}
+                </h3>
+                <p className="text-white/50 text-sm line-clamp-2">
+                  {caseItem.description}
+                </p>
+              </div>
+            </Link>
+          ))}
         </div>
 
-        {/* Client Logos Marquee */}
+        {/* Client Logos */}
         <div className={`transition-all duration-700 delay-500 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
           <p className="text-center text-white/40 text-sm mb-8 uppercase tracking-widest">
-            Trusted by 200+ Web3 Projects
+            And More...
           </p>
           <div className="flex items-center justify-center flex-wrap gap-8 md:gap-12">
-            {clientLogos.map((client, index) => <div key={index} className="opacity-40 hover:opacity-80 transition-opacity">
+            {clientLogos.map((client, index) => (
+              <div key={index} className="opacity-40 hover:opacity-80 transition-opacity">
                 <img src={client.logo} alt={client.name} className="h-8 w-auto object-contain brightness-0 invert" />
-              </div>)}
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default CasesSection;
