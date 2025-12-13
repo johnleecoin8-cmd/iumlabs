@@ -95,7 +95,7 @@ const CasesSection = () => {
   const { ref, isVisible } = useScrollAnimation();
 
   return (
-    <div ref={ref} className="bg-[hsl(0,0%,5%)] px-4 py-24">
+    <div ref={ref} className="bg-black px-4 py-24">
       <div className="container mx-auto max-w-7xl">
         {/* Header */}
         <div className={`flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
@@ -104,16 +104,16 @@ const CasesSection = () => {
               Featured Cases
             </span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white">
-              Success <span className="text-primary">Stories</span>
+              Success <span className="bg-gradient-to-r from-[#1DB954] via-[#00D4FF] to-[#E040FB] bg-clip-text text-transparent">Stories</span>
             </h2>
           </div>
-          <Link to="/projects" className="group flex items-center gap-2 text-white/60 hover:text-primary transition-colors">
+          <Link to="/projects" className="group flex items-center gap-2 text-white/60 hover:text-[#00D4FF] transition-colors">
             View all projects
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           </Link>
         </div>
 
-        {/* Featured Cases Grid - Same style as Projects page */}
+        {/* Featured Cases Grid - Enhanced Glow Effects */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
           {featuredCases.map((caseItem, index) => (
             <Link
@@ -126,10 +126,10 @@ const CasesSection = () => {
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div 
-                className="relative aspect-square rounded-3xl overflow-hidden mb-4 transition-all duration-500 hover:-translate-y-2"
-                style={{ boxShadow: `0 4px 30px ${caseItem.glowColor}20` }}
-                onMouseEnter={(e) => e.currentTarget.style.boxShadow = `0 10px 60px ${caseItem.glowColor}50, 0 0 100px ${caseItem.glowColor}30`}
-                onMouseLeave={(e) => e.currentTarget.style.boxShadow = `0 4px 30px ${caseItem.glowColor}20`}
+                className="relative aspect-square rounded-3xl overflow-hidden mb-4 transition-all duration-500 hover:-translate-y-3"
+                style={{ boxShadow: `0 4px 40px ${caseItem.glowColor}40` }}
+                onMouseEnter={(e) => e.currentTarget.style.boxShadow = `0 15px 80px ${caseItem.glowColor}70, 0 0 120px ${caseItem.glowColor}40`}
+                onMouseLeave={(e) => e.currentTarget.style.boxShadow = `0 4px 40px ${caseItem.glowColor}40`}
               >
                 {/* Background Image */}
                 <div 
@@ -137,14 +137,22 @@ const CasesSection = () => {
                   style={{ backgroundImage: `url(${caseItem.bgImage})` }}
                 />
                 
+                {/* Gradient Overlay with Project Color */}
+                <div 
+                  className="absolute inset-0 pointer-events-none transition-opacity duration-500"
+                  style={{
+                    background: `linear-gradient(to top, ${caseItem.glowColor}80 0%, ${caseItem.glowColor}20 40%, transparent 70%)`,
+                  }}
+                />
+                
                 {/* Dark Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
                 
                 {/* Project Color Glow Effect on Hover */}
                 <div 
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{
-                    background: `radial-gradient(ellipse at 50% 50%, ${caseItem.glowColor}30 0%, transparent 70%)`,
+                    background: `radial-gradient(ellipse at 50% 50%, ${caseItem.glowColor}50 0%, transparent 70%)`,
                   }}
                 />
 
@@ -156,7 +164,7 @@ const CasesSection = () => {
                       src={caseItem.logo}
                       alt={caseItem.name}
                       className="w-16 h-16 md:w-20 md:h-20 object-contain mb-4 group-hover:scale-110 transition-transform duration-300"
-                      style={{ filter: `drop-shadow(0 0 20px ${caseItem.glowColor}80)` }}
+                      style={{ filter: `drop-shadow(0 0 30px ${caseItem.glowColor})` }}
                     />
                   )}
                   
@@ -167,11 +175,11 @@ const CasesSection = () => {
                 </div>
 
                 {/* Bottom Info - Result with Project Color */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-sm font-semibold text-center" style={{ color: caseItem.glowColor }}>
+                <div className="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-sm font-bold text-center drop-shadow-lg" style={{ color: caseItem.glowColor }}>
                     {caseItem.result}
                   </p>
-                  <p className="text-white/70 text-xs text-center mt-1 uppercase tracking-wider">
+                  <p className="text-white/80 text-xs text-center mt-1 uppercase tracking-wider">
                     {caseItem.category}
                   </p>
                 </div>
@@ -179,8 +187,8 @@ const CasesSection = () => {
                 {/* Hover Arrow with Project Color */}
                 <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                   <div 
-                    className="w-10 h-10 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: `${caseItem.glowColor}30`, backdropFilter: 'blur(8px)' }}
+                    className="w-10 h-10 rounded-full flex items-center justify-center backdrop-blur-md"
+                    style={{ backgroundColor: `${caseItem.glowColor}50` }}
                   >
                     <ArrowUpRight className="w-5 h-5 text-white" />
                   </div>
@@ -189,8 +197,8 @@ const CasesSection = () => {
                 {/* Category Badge with Project Color Border */}
                 <div className="absolute top-4 left-4">
                   <span 
-                    className="px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm text-xs text-white/80 uppercase tracking-wider"
-                    style={{ border: `1px solid ${caseItem.glowColor}40` }}
+                    className="px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-sm text-xs text-white uppercase tracking-wider font-medium"
+                    style={{ border: `2px solid ${caseItem.glowColor}60` }}
                   >
                     {caseItem.category}
                   </span>
