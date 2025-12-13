@@ -3,10 +3,10 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
-import { ArrowUpRight, Calendar } from "lucide-react";
-import CalendlyButton from "@/components/CalendlyButton";
+import { ArrowUpRight, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
-import seoulHanriverTwilight from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
+import { motion } from "framer-motion";
+import { useCountUp } from "@/hooks/useCountUp";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -132,115 +132,224 @@ const cases = [
   },
 ];
 
-const stats = [
-  { value: "18+", label: "Projects Launched" },
-  { value: "120+", label: "KOL Network" },
-  { value: "$2.5M+", label: "Token Sales" },
+// Floating tags
+const serviceTags = [
+  { label: "DeFi", position: "top-[15%] left-[5%]" },
+  { label: "Layer 1", position: "top-[35%] left-[4%]" },
+  { label: "GameFi", position: "top-[55%] left-[6%]" },
+  { label: "Infrastructure", position: "top-[18%] right-[6%]" },
+  { label: "Exchange", position: "top-[42%] right-[5%]" },
+  { label: "Layer 2", position: "top-[66%] right-[7%]" },
 ];
 
-const floatingTags = [
-  { label: "DeFi", top: "16%", left: "5%" },
-  { label: "Layer 1", top: "28%", left: "16%" },
-  { label: "GameFi", top: "46%", left: "4%" },
-  { label: "NFT", top: "56%", left: "12%" },
-  { label: "Infrastructure", top: "14%", right: "10%" },
-  { label: "Exchange", top: "28%", right: "5%" },
-  { label: "Layer 2", top: "46%", right: "8%" },
-  { label: "DePIN", top: "60%", right: "14%" },
-  { label: "RWA", top: "38%", left: "8%" },
+const mobileServiceTags = [
+  { label: "DeFi", position: "top-[8%] left-[3%]" },
+  { label: "Layer 2", position: "top-[12%] right-[3%]" },
+  { label: "Exchange", position: "bottom-[38%] left-[2%]" },
+  { label: "GameFi", position: "bottom-[42%] right-[2%]" },
 ];
+
+const clientLogos = [
+  { name: "BNB", logo: bnbLogo },
+  { name: "KuCoin", logo: kucoinLogo },
+  { name: "Polygon", logo: polygonLogo },
+  { name: "Ondo Finance", logo: ondoLogo },
+  { name: "Bybit", logo: bybitLogo },
+  { name: "Peaq", logo: peaqLogo },
+  { name: "Story Protocol", logo: storyLogo },
+  { name: "MegaETH", logo: megaethLogo },
+  { name: "Tria", logo: triaLogo },
+];
+
+const stats = [
+  { value: 17, label: "Projects Launched", suffix: "+" },
+  { value: 115, label: "KOL Network", suffix: "+" },
+  { value: 6, label: "Token Sales", prefix: "$", suffix: "M+" },
+  { value: 48, label: "AMA Hosting", suffix: "+" },
+];
+
+// Stat Item Component
+const StatItem = ({ 
+  value, 
+  label, 
+  prefix = "", 
+  suffix = "",
+  isVisible,
+  delay 
+}: { 
+  value: number; 
+  label: string; 
+  prefix?: string; 
+  suffix?: string;
+  isVisible: boolean;
+  delay: number;
+}) => {
+  const count = useCountUp({
+    end: value,
+    isVisible,
+    delay,
+    duration: 2000,
+  });
+  
+  return (
+    <motion.div 
+      className="text-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
+    >
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
+        {prefix}{count}{suffix}
+      </div>
+      <div className="text-xs sm:text-sm text-white/50 font-light">
+        {label}
+      </div>
+    </motion.div>
+  );
+};
 
 const Projects = () => {
   const { ref, isVisible } = useScrollAnimation();
-  const [scrollY, setScrollY] = useState(0);
+  const [isStatsVisible, setIsStatsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const timer = setTimeout(() => setIsStatsVisible(true), 800);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero - Compact with Ken Burns Background */}
-      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden">
-        {/* Background - Seoul Hanriver Twilight */}
+      {/* Hero - Matching Homepage Style with Video Background */}
+      <section className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
+        {/* Background Layer - Video */}
         <div className="absolute inset-0 overflow-hidden">
-          <div 
-            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
-            style={{ 
-              backgroundImage: `url(${seoulHanriverTwilight})`,
-              filter: "brightness(0.5) saturate(1.2)",
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ filter: "brightness(0.35)" }}
+            onLoadedMetadata={(e) => {
+              e.currentTarget.currentTime = 0;
             }}
-          />
-          
-          {/* Aurora light overlay - Blue/Cyan river theme */}
-          <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/25 via-transparent to-cyan-500/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-indigo-600/20 via-transparent to-sky-500/15" />
-          </div>
-          
-          {/* Light sweep effect */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
-          </div>
+          >
+            <source src="/videos/projects-background.mp4" type="video/mp4" />
+          </video>
           
           {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.2)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
         </div>
-        
-        {/* Floating Tags - lunar-tag-dark style */}
-        <div className="absolute inset-0 pointer-events-none hidden md:block">
-          {floatingTags.map((tag, index) => (
-            <div
-              key={tag.label}
-              className="absolute lunar-tag-dark text-xs whitespace-nowrap animate-float pointer-events-auto cursor-default hover:bg-white/10 transition-colors"
-              style={{
-                top: tag.top,
-                left: tag.left,
-                right: tag.right,
-                animationDelay: `${index * 0.3}s`,
-                animationDuration: `${4 + index * 0.5}s`,
-              }}
-            >
+
+        {/* Floating Service Tags - Desktop */}
+        {serviceTags.map((tag, index) => (
+          <motion.div
+            key={index}
+            className={`absolute ${tag.position} hidden lg:block z-10`}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
+          >
+            <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-primary/40 hover:text-white transition-all duration-300">
               {tag.label}
-            </div>
-          ))}
+            </span>
+          </motion.div>
+        ))}
+
+        {/* Floating Service Tags - Mobile */}
+        {mobileServiceTags.map((tag, index) => (
+          <div
+            key={`mobile-${index}`}
+            className={`absolute ${tag.position} lg:hidden z-10`}
+          >
+            <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-white/[0.03] border border-white/[0.08] text-white/60 whitespace-nowrap">
+              {tag.label}
+            </span>
+          </div>
+        ))}
+
+        {/* Main Content - Centered */}
+        <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
+          <div className="max-w-7xl mx-auto text-center">
+            {/* Main Headline */}
+            <motion.h1 
+              className="font-sans text-[10vw] sm:text-[9vw] md:text-[8vw] lg:text-[7vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10 mt-16 sm:mt-20"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <span className="text-white">Our </span>
+              <span className="text-white/90">Projects</span>
+            </motion.h1>
+
+            {/* Subtext */}
+            <motion.p 
+              className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-10 font-light tracking-wide"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              These case studies walk through the challenge, our approach, and the outcomes across services like <span className="text-white font-medium">GTM, KOLs, PR, and social media</span>.
+            </motion.p>
+          </div>
         </div>
 
-        {/* Content with Stagger Animation */}
-        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
-          <div className="mb-16">
-            <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Our Work ]</span>
-            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-              Ca<span className="serif-italic text-primary">s</span>es
-            </h1>
+        {/* Stats Section */}
+        <div className="relative z-10 py-4 sm:py-6">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+              {stats.map((stat, index) => (
+                <StatItem 
+                  key={index}
+                  value={stat.value}
+                  label={stat.label}
+                  prefix={stat.prefix}
+                  suffix={stat.suffix}
+                  isVisible={isStatsVisible}
+                  delay={index * 100}
+                />
+              ))}
+            </div>
           </div>
-          
-          <div className="pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-            <p className="text-lg text-white/60 max-w-xl">
-              These case studies walk through the challenge, our approach, and the outcomes across services like GTM, KOLs, PR, and social media.
-            </p>
+        </div>
+
+        {/* Client Logo Marquee */}
+        <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
+          <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
+            <span className="number-badge">01</span>
           </div>
 
-          {/* Stats Row */}
-          <div className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.6s', animationFillMode: 'forwards' }}>
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">{stat.value}</div>
-                <div className="text-sm text-white/50">{stat.label}</div>
+          <div className="flex items-center logo-marquee-slow ml-14 sm:ml-16">
+            {[...clientLogos, ...clientLogos].map((client, index) => (
+              <div 
+                key={index} 
+                className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+              >
+                <img 
+                  src={client.logo} 
+                  alt={client.name} 
+                  className="h-4 w-4 sm:h-5 sm:w-5 object-contain brightness-0 invert opacity-80 flex-shrink-0"
+                />
+                <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
+                  {client.name}
+                </span>
               </div>
             ))}
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/30">
-          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
-          <span className="text-xs uppercase tracking-widest">Scroll</span>
-        </div>
+        <motion.div 
+          className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+        >
+          <span className="text-white/40 text-xs sm:text-sm font-medium">scroll</span>
+          <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
+        </motion.div>
       </section>
 
       {/* Projects Grid */}
