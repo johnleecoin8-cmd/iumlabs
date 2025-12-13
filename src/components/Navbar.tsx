@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Menu, X, Send, Calendar } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
+import cryptobridgeLogo from "@/assets/logos/cryptobridge-logo.png";
 
 const brandConfig = {
   name: brand.name,
@@ -28,9 +29,11 @@ const Navbar = () => {
             to="/" 
             className="flex items-center gap-2.5 px-6 py-3.5 rounded-xl border border-white/10 bg-[hsl(0,0%,4%,0.95)] backdrop-blur-md transition-all duration-300 hover:bg-white/5 hover:border-white/20 hover:scale-[1.02]"
           >
-            <div className="w-9 h-9 bg-white rounded-lg flex items-center justify-center transition-transform duration-300 group-hover:rotate-6">
-              <div className="w-4.5 h-4.5 bg-background rounded-sm"></div>
-            </div>
+            <img 
+              src={cryptobridgeLogo} 
+              alt="CryptoBridge Logo" 
+              className="w-8 h-8 object-contain brightness-0 invert"
+            />
             <span className="text-base font-semibold text-white">{brandConfig.name}</span>
           </Link>
 
@@ -107,9 +110,11 @@ const Navbar = () => {
           <div className="flex-shrink-0 container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-                <div className="w-8 h-8 bg-white rounded-lg flex items-center justify-center">
-                  <div className="w-4 h-4 bg-background rounded-sm"></div>
-                </div>
+                <img 
+                  src={cryptobridgeLogo} 
+                  alt="CryptoBridge Logo" 
+                  className="w-8 h-8 object-contain brightness-0 invert"
+                />
                 <span className="text-lg font-semibold text-white">{brandConfig.name}</span>
               </Link>
               
