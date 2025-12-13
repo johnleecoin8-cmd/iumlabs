@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Search, Calendar, Clock, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, Calendar, Clock, ArrowRight, TrendingUp, LineChart, Users, Coins, Palette, BarChart3 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
@@ -8,7 +8,6 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import CalendlyButton from "@/components/CalendlyButton";
-import seoulDdpNight from "@/assets/backgrounds/seoul-ddp-night.jpg";
 
 // Research thumbnail images
 import ecosystemGrowthImg from "@/assets/blog/ecosystem-growth-2025.jpg";
@@ -2860,10 +2859,15 @@ const floatingTags = [
   { label: "Reports", top: "30%", left: "18%" },
   { label: "Strategy", top: "48%", left: "4%" },
   { label: "Analysis", top: "58%", left: "14%" },
-  { label: "Market", top: "16%", right: "10%" },
-  { label: "DeFi", top: "30%", right: "5%" },
-  { label: "Research", top: "48%", right: "10%" },
-  { label: "Trends", top: "62%", right: "6%" },
+];
+
+const researchCategories = [
+  { icon: TrendingUp, label: "Market Research", count: 2 },
+  { icon: Coins, label: "DeFi", count: 1 },
+  { icon: LineChart, label: "Strategy", count: 2 },
+  { icon: Users, label: "Community", count: 1 },
+  { icon: Palette, label: "NFT", count: 1 },
+  { icon: BarChart3, label: "Marketing", count: 1 },
 ];
 
 const categories = ["All", "Market Research", "DeFi", "Strategy", "Community", "NFT", "Marketing"];
@@ -2927,34 +2931,39 @@ const Research = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero Section - Seoul DDP Style */}
+      {/* Hero Section - Emerald/Green Theme with Video */}
       <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden">
-        {/* Background */}
+        {/* Video Background */}
         <div className="absolute inset-0 overflow-hidden">
-          <div 
-            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
-            style={{ 
-              backgroundImage: `url(${seoulDdpNight})`,
-              filter: "brightness(0.5) saturate(1.2)",
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover scale-110"
+            style={{ filter: "brightness(0.35)" }}
+            onLoadedMetadata={(e) => {
+              (e.target as HTMLVideoElement).currentTime = 0;
             }}
-          />
+          >
+            <source src="/videos/research-background.mp4" type="video/mp4" />
+          </video>
           <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-cyan-600/20 via-transparent to-blue-500/15" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-teal-600/15 via-transparent to-sky-500/10" />
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/25 via-transparent to-teal-500/20" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-green-600/15 via-transparent to-cyan-500/10" />
           </div>
           <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
         </div>
         
-        {/* Floating Tags - lunar-tag-dark style */}
+        {/* Floating Tags - Emerald Theme */}
         <div className="absolute inset-0 pointer-events-none hidden md:block">
           {floatingTags.map((tag, index) => (
             <div
               key={tag.label}
-              className="absolute lunar-tag-dark text-xs whitespace-nowrap animate-float pointer-events-auto cursor-default hover:bg-white/10 transition-colors"
+              className="absolute bg-emerald-500/10 border border-emerald-400/20 backdrop-blur-sm px-4 py-2 rounded-sm text-xs text-white/80 whitespace-nowrap animate-float pointer-events-auto cursor-default hover:bg-emerald-500/20 transition-colors"
               style={{
                 top: tag.top,
                 left: tag.left,
-                right: tag.right,
                 animationDelay: `${index * 0.3}s`,
                 animationDuration: `${4 + index * 0.5}s`,
               }}
@@ -2964,21 +2973,39 @@ const Research = () => {
           ))}
         </div>
 
-        {/* Content */}
+        {/* Content - Two Column Layout */}
         <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-16">
-          <div className="mb-12">
-            <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Research ]</span>
-            <h1 className="text-[10vw] md:text-[120px] lg:text-[150px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-              Rese<span className="serif-italic text-primary">a</span>rch
-            </h1>
-          </div>
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-            <p className="text-lg text-white/60 max-w-xl">
-              In-depth analysis and insights on Web3 marketing, Korean market dynamics, and emerging trends.
-            </p>
-            <div className="flex items-center gap-4 text-white/40 text-sm">
-              <span>{researchPosts.length} Articles</span>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Main Content */}
+            <div>
+              <span className="text-sm text-emerald-400/70 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Research ]</span>
+              <h1 className="text-[12vw] md:text-[100px] lg:text-[120px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
+                Rese<span className="serif-italic text-emerald-400">a</span>rch
+              </h1>
+              <p className="text-lg text-white/60 max-w-xl mt-8 opacity-0 animate-fade-up" style={{ animationDelay: '0.3s', animationFillMode: 'forwards' }}>
+                In-depth analysis and insights on Web3 marketing, Korean market dynamics, and emerging trends.
+              </p>
+              <div className="flex items-center gap-4 text-white/40 text-sm mt-6 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
+                <span>{researchPosts.length} Articles</span>
+                <span>•</span>
+                <span>6 Categories</span>
+              </div>
+            </div>
+            
+            {/* Right: Category Icons Grid */}
+            <div className="hidden lg:grid grid-cols-3 gap-4 opacity-0 animate-fade-up" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
+              {researchCategories.map((category, index) => (
+                <button
+                  key={category.label}
+                  onClick={() => { setSelectedCategory(category.label); setCurrentPage(1); }}
+                  className="group flex flex-col items-center justify-center p-6 bg-emerald-500/5 border border-emerald-400/10 rounded-xl hover:bg-emerald-500/15 hover:border-emerald-400/30 transition-all duration-300"
+                  style={{ animationDelay: `${0.5 + index * 0.1}s` }}
+                >
+                  <category.icon className="w-8 h-8 text-emerald-400/60 group-hover:text-emerald-400 transition-colors mb-3" />
+                  <span className="text-white/80 text-sm font-medium group-hover:text-white transition-colors">{category.label}</span>
+                  <span className="text-emerald-400/50 text-xs mt-1">{category.count} articles</span>
+                </button>
+              ))}
             </div>
           </div>
         </div>
