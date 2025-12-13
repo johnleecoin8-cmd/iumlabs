@@ -110,8 +110,9 @@ const ServiceDetailLayout = ({
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <div className="min-h-screen bg-white p-1 sm:p-1.5 md:p-2">
+      <div className="min-h-screen bg-background rounded-2xl sm:rounded-3xl overflow-hidden">
+        <Navbar />
 
       {/* Hero Section - Service-Specific Theme */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
@@ -448,6 +449,7 @@ const ServiceDetailLayout = ({
 
       <CTASection />
       <Footer />
+      </div>
     </div>
   );
 };

@@ -48,8 +48,9 @@ const ResearchDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
+    <div className="min-h-screen bg-white p-1 sm:p-1.5 md:p-2">
+      <div className="min-h-screen bg-background rounded-2xl sm:rounded-3xl overflow-hidden">
+        <Navbar />
       
       {/* Hero */}
       <section className="relative pt-24 pb-16">
@@ -269,6 +270,7 @@ const ResearchDetail = () => {
 
       <CTASection />
       <Footer />
+      </div>
     </div>
   );
 };
