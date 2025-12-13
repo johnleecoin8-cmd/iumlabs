@@ -137,20 +137,14 @@ const CasesSection = () => {
                   style={{ backgroundImage: `url(${caseItem.bgImage})` }}
                 />
                 
-                {/* Dark Overlay with Project Color */}
-                <div 
-                  className="absolute inset-0 pointer-events-none transition-opacity duration-500"
-                  style={{
-                    background: `linear-gradient(135deg, ${caseItem.glowColor}50 0%, transparent 40%, ${caseItem.glowColor}30 100%)`,
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent pointer-events-none" />
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
                 
-                {/* Project Color Glow Effect - Enhanced on Hover */}
+                {/* Project Color Glow Effect on Hover */}
                 <div 
-                  className="absolute inset-0 opacity-40 group-hover:opacity-70 transition-opacity duration-500 pointer-events-none"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                   style={{
-                    background: `radial-gradient(ellipse at 50% 50%, ${caseItem.glowColor}40 0%, transparent 70%)`,
+                    background: `radial-gradient(ellipse at 50% 50%, ${caseItem.glowColor}30 0%, transparent 70%)`,
                   }}
                 />
 

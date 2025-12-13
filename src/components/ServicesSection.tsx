@@ -1,232 +1,146 @@
 import { useState } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
-import { Users, Megaphone, Building2, Mic2, Newspaper, Calendar, ArrowRight, Check } from "lucide-react";
-
-// Service images
-import kolNetworkImg from "@/assets/services/kol-network.jpg";
-import communityGrowthImg from "@/assets/services/community-growth.jpg";
-import vaspComplianceImg from "@/assets/services/vasp-compliance.jpg";
-import prMediaImg from "@/assets/services/pr-media.jpg";
-import eventsImg from "@/assets/services/events.jpg";
-
-const services = [
-  {
-    id: "kol",
-    icon: Users,
-    title: "KOL Marketing",
-    subtitle: "Influencer Network",
-    description: "Access 1000+ vetted Korean crypto influencers across YouTube, Twitter, and Telegram to amplify your project's reach in the Korean market.",
-    image: kolNetworkImg,
-    stats: { value: "1,000+", label: "Vetted KOLs" },
-    features: [
-      "YouTube, Twitter, Telegram, Naver coverage",
-      "Performance tracking & analytics dashboard",
-      "Campaign strategy & execution",
-      "Authentic influencer matching"
-    ],
-    link: "/services/influencer"
-  },
-  {
-    id: "community",
-    icon: Megaphone,
-    title: "Community Operation",
-    subtitle: "24/7 Management",
-    description: "Build a thriving Korean community with native speakers managing your Telegram, Discord, and KakaoTalk channels around the clock.",
-    image: communityGrowthImg,
-    stats: { value: "24/7", label: "Support" },
-    features: [
-      "Korean native moderation team",
-      "Telegram, Discord, KakaoTalk management",
-      "Community engagement programs",
-      "Sentiment analysis & reporting"
-    ],
-    link: "/services/community"
-  },
-  {
-    id: "exchange",
-    icon: Building2,
-    title: "Exchange Support",
-    subtitle: "VASP & Listings",
-    description: "Navigate Korea's regulated crypto market with our VASP registration guidance and CEX/DEX listing support services.",
-    image: vaspComplianceImg,
-    stats: { value: "50+", label: "Exchange Partners" },
-    features: [
-      "VASP registration guidance",
-      "CEX & DEX listing support",
-      "AML/KYC compliance setup",
-      "Regulatory consulting"
-    ],
-    link: "/services/gtm-strategy"
-  },
-  {
-    id: "media",
-    icon: Newspaper,
-    title: "Media & PR",
-    subtitle: "Korean Coverage",
-    description: "Secure coverage in leading Korean crypto publications and mainstream media with our extensive media partnerships.",
-    image: prMediaImg,
-    stats: { value: "50+", label: "Media Partners" },
-    features: [
-      "Korean media partnerships",
-      "Press release distribution",
-      "Exclusive interview placements",
-      "Crisis management"
-    ],
-    link: "/services/pr"
-  },
-  {
-    id: "events",
-    icon: Calendar,
-    title: "Offline Events",
-    subtitle: "Seoul Presence",
-    description: "Make an impact at major Korean blockchain events or host your own exclusive side events and VIP networking sessions.",
-    image: eventsImg,
-    stats: { value: "38+", label: "AMAs Hosted" },
-    features: [
-      "Conference booth management",
-      "Side event organization",
-      "VIP networking events",
-      "Speaker placement"
-    ],
-    link: "/services/yap"
-  }
-];
-
+import { Users, Megaphone, Building2, Mic2, Newspaper, Calendar, ArrowUpRight } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+const services = [{
+  icon: Users,
+  title: "KOL Marketing",
+  description: "Access 1000+ vetted Korean crypto influencers across YouTube, Twitter, and Telegram",
+  fullDescription: "Partner with Korea's top crypto influencers to amplify your project's reach. We manage relationships with 1,000+ verified KOLs across Twitter, YouTube, and Korean platforms like Naver.",
+  features: ["Access to 1,000+ vetted Korean crypto KOLs", "YouTube, Twitter, Telegram, Naver coverage", "Performance tracking & analytics", "Campaign strategy & execution"],
+  size: "large"
+}, {
+  icon: Megaphone,
+  title: "Community Operation",
+  description: "24/7 Korean community management with native speakers",
+  fullDescription: "Build a thriving Korean community from scratch or enhance your existing presence. We handle everything from platform setup to 24/7 Korean moderation across Telegram, Discord, and KakaoTalk.",
+  features: ["24/7 Korean native moderation", "Telegram, Discord, KakaoTalk management", "Community engagement programs", "Sentiment analysis & reporting"],
+  size: "normal"
+}, {
+  icon: Building2,
+  title: "Exchange Support",
+  description: "VASP compliance and CEX/DEX listing support",
+  fullDescription: "Get compliant in Korea's regulated crypto market. We guide you through VASP registration, AML/KYC requirements, and ongoing compliance obligations.",
+  features: ["VASP registration guidance", "CEX & DEX listing support", "AML/KYC compliance setup", "Regulatory consulting"],
+  size: "normal"
+}, {
+  icon: Newspaper,
+  title: "Media & PR",
+  description: "Coverage in top Korean crypto media outlets",
+  fullDescription: "Secure coverage in leading Korean crypto publications and mainstream media. From press releases to exclusive interviews, we handle your complete Korean media strategy.",
+  features: ["50+ Korean media partnerships", "Press release distribution", "Exclusive interview placements", "Crisis management"],
+  size: "normal"
+}, {
+  icon: Mic2,
+  title: "AMA Hosting",
+  description: "Live AMAs with Korean communities",
+  fullDescription: "Engage directly with Korean crypto communities through professionally hosted AMAs. We handle everything from scheduling to live translation and community engagement.",
+  features: ["Professional AMA hosting", "Live Korean translation", "Community Q&A management", "Post-AMA content creation"],
+  size: "normal"
+}, {
+  icon: Calendar,
+  title: "Offline Events",
+  description: "Side events, meetups, and conference presence in Seoul",
+  fullDescription: "Make an impact at major Korean blockchain events or host your own. We manage everything from booth setup to VIP networking events and speaker placements.",
+  features: ["Conference booth management", "Side event organization", "VIP networking events", "Speaker placement"],
+  size: "large"
+}];
 const ServicesSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-  const [activeTab, setActiveTab] = useState(0);
+  const {
+    ref,
+    isVisible
+  } = useScrollAnimation();
+  const [selectedService, setSelectedService] = useState<typeof services[0] | null>(null);
+  return <div ref={ref} className="px-4 bg-[hsl(0,0%,4%)] py-[20px]">
+      <div className="container mx-auto max-w-7xl">
+        <div className="grid lg:grid-cols-12 gap-12">
+          {/* Left - Vertical Title */}
+          <div className={`lg:col-span-3 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+            <div className="lg:sticky lg:top-32">
+              <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase">
+                <span className="w-8 h-px bg-primary" />
+                What We Do
+              </span>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight">
+                Our <span className="text-primary">Services</span>
+              </h2>
+              <p className="text-white/50 mb-8 max-w-sm">
+                End-to-end Web3 marketing solutions tailored for the Korean market
+              </p>
+              <Link to="/services" className="group inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors">
+                Explore all services
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </Link>
+            </div>
+          </div>
 
-  return (
-    <div ref={ref} className="px-4 bg-gradient-to-br from-[#0a1a14] via-[#0d1f18] to-[#0a1a14] py-24 relative overflow-hidden">
-      {/* Background Glow Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-emerald-500/10 rounded-full blur-[150px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-green-500/10 rounded-full blur-[120px]" />
-      </div>
+          {/* Right - Bento Grid with Unified Card Style */}
+          <div className="lg:col-span-9">
+            <div className="grid md:grid-cols-2 gap-4">
+              {services.map((service, index) => <div key={index} onClick={() => setSelectedService(service)} className={`group relative p-8 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/40 hover:-translate-y-1 transition-all duration-500 cursor-pointer ${service.size === 'large' ? 'md:col-span-2' : ''} ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
+              transitionDelay: `${index * 100}ms`
+            }}>
+                  {/* Hover Glow */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
 
-      <div className="container mx-auto max-w-7xl relative z-10">
-        {/* Header */}
-        <div className={`text-center mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-flex items-center gap-2 text-xs font-medium text-emerald-400 mb-4 tracking-widest uppercase">
-            <span className="w-8 h-px bg-emerald-400" />
-            What We Do
-            <span className="w-8 h-px bg-emerald-400" />
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Our <span className="text-emerald-400">Services</span>
-          </h2>
-          <p className="text-white/50 max-w-2xl mx-auto">
-            End-to-end Web3 marketing solutions tailored for the Korean market
-          </p>
-        </div>
-
-        {/* Tab Navigation */}
-        <div className={`flex flex-wrap justify-center gap-2 mb-12 transition-all duration-700 delay-100 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {services.map((service, index) => (
-            <button
-              key={service.id}
-              onClick={() => setActiveTab(index)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${
-                activeTab === index
-                  ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
-                  : 'bg-white/[0.05] text-white/60 hover:bg-white/[0.1] hover:text-white border border-white/[0.08]'
-              }`}
-            >
-              <service.icon className="w-4 h-4" />
-              <span className="hidden sm:inline">{service.title}</span>
-            </button>
-          ))}
-        </div>
-
-        {/* Content Area */}
-        <div className={`transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {services.map((service, index) => (
-            <div
-              key={service.id}
-              className={`transition-all duration-500 ${
-                activeTab === index 
-                  ? 'opacity-100 translate-y-0' 
-                  : 'opacity-0 translate-y-4 absolute pointer-events-none'
-              }`}
-              style={{ display: activeTab === index ? 'block' : 'none' }}
-            >
-              <div className="grid lg:grid-cols-2 gap-8 items-center">
-                {/* Image */}
-                <div className="relative group">
-                  <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all duration-500" />
-                  <div className="relative overflow-hidden rounded-3xl border border-white/[0.1]">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-[300px] md:h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    {/* Overlay Stats */}
-                    <div className="absolute bottom-6 left-6 bg-black/60 backdrop-blur-sm rounded-2xl px-6 py-4 border border-white/[0.1]">
-                      <div className="text-3xl font-bold text-emerald-400">{service.stats.value}</div>
-                      <div className="text-sm text-white/60">{service.stats.label}</div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div className="space-y-6">
-                  <div>
-                    <span className="text-emerald-400 text-sm font-medium uppercase tracking-wider">
-                      {service.subtitle}
-                    </span>
-                    <h3 className="text-3xl md:text-4xl font-bold text-white mt-2">
-                      {service.title}
-                    </h3>
+                  {/* Icon */}
+                  <div className="relative w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-all duration-300 group-hover:scale-110">
+                    <service.icon className="w-7 h-7 text-primary transition-all duration-300" />
                   </div>
 
-                  <p className="text-white/60 text-lg leading-relaxed">
+                  {/* Content */}
+                  <h3 className="relative text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-primary transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="relative text-white/50 leading-relaxed">
                     {service.description}
                   </p>
 
-                  {/* Features List */}
-                  <ul className="space-y-3">
-                    {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-center gap-3 text-white/70">
-                        <div className="w-5 h-5 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
-                          <Check className="w-3 h-3 text-emerald-400" />
-                        </div>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* CTA Button */}
-                  <Link
-                    to={service.link}
-                    className="inline-flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-medium px-8 py-4 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-emerald-500/30 group"
-                  >
-                    Learn More
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </div>
+                  {/* Hover Arrow */}
+                  <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <ArrowUpRight className="w-5 h-5 text-primary" />
+                  </div>
+                </div>)}
             </div>
-          ))}
-        </div>
-
-        {/* Tab Indicators (dots) */}
-        <div className="flex justify-center gap-2 mt-12">
-          {services.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveTab(index)}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                activeTab === index 
-                  ? 'w-8 bg-emerald-400' 
-                  : 'bg-white/20 hover:bg-white/40'
-              }`}
-            />
-          ))}
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
 
+      {/* Service Detail Modal */}
+      <Dialog open={!!selectedService} onOpenChange={() => setSelectedService(null)}>
+        <DialogContent className="bg-[hsl(0,0%,6%)] border-white/[0.08] text-white max-w-lg">
+          <DialogHeader>
+            <div className="flex items-center gap-4 mb-4">
+              {selectedService && <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center">
+                  <selectedService.icon className="w-7 h-7 text-primary" />
+                </div>}
+              <DialogTitle className="text-2xl font-bold">{selectedService?.title}</DialogTitle>
+            </div>
+          </DialogHeader>
+          
+          <p className="text-white/60 leading-relaxed mb-6">
+            {selectedService?.fullDescription}
+          </p>
+
+          <div className="space-y-3">
+            <h4 className="text-sm font-medium text-primary uppercase tracking-wider">What's Included</h4>
+            <ul className="space-y-2">
+              {selectedService?.features.map((feature, i) => <li key={i} className="flex items-start gap-3 text-white/50">
+                  <span className="text-primary mt-1">•</span>
+                  {feature}
+                </li>)}
+            </ul>
+          </div>
+
+          <div className="mt-6 pt-6 border-t border-white/[0.08]">
+            <Link to="/contact" className="w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl transition-colors" onClick={() => setSelectedService(null)}>
+              Get Started
+              <ArrowUpRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </div>;
+};
 export default ServicesSection;
