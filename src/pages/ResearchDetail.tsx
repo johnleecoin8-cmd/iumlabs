@@ -48,8 +48,8 @@ const ResearchDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white p-1 sm:p-1.5 md:p-2">
-      <div className="min-h-screen bg-background rounded-2xl sm:rounded-3xl overflow-hidden">
+    <div className="min-h-screen bg-white p-0.5 sm:p-1 md:p-2">
+      <div className="min-h-screen bg-background rounded-xl sm:rounded-2xl overflow-hidden">
         <Navbar />
       
       {/* Hero */}
