@@ -265,12 +265,8 @@ const Projects = () => {
                 >
                   {/* Background Image */}
                   <div 
-                    className="absolute inset-0 transition-transform duration-700 group-hover:scale-110"
-                    style={{ 
-                      backgroundImage: `url(${caseItem.bgImage})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'left bottom',
-                    }}
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    style={{ backgroundImage: `url(${caseItem.bgImage})` }}
                   />
                   
                   {/* Dark Overlay */}
