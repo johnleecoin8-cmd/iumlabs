@@ -196,7 +196,7 @@ const AboutUsSection = () => {
             }, {
               name: "The Economist",
               logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/The_Economist_Logo.svg"
-            }].flatMap((media, i) => [media, media]).map((media, index) => <div key={index} className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-white rounded-full border border-gray-200 shadow-sm hover:border-gray-300 hover:shadow-md transition-all duration-300">
+            }].map((media, index) => <div key={index} className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-white rounded-full border border-gray-200 shadow-sm hover:border-gray-300 hover:shadow-md transition-all duration-300">
                   <img src={media.logo} alt={media.name} className="h-5 w-5 sm:h-6 sm:w-6 object-contain opacity-70 flex-shrink-0" />
                   <span className="text-gray-700 text-xs sm:text-sm font-medium whitespace-nowrap">
                     {media.name}
