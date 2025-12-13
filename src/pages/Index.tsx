@@ -27,39 +27,59 @@ const Index = () => {
         </div>
       </main>
       
-      <section className="scroll-reveal" id="about">
-        <AboutUsSection />
+      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="about">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <AboutUsSection />
+        </div>
       </section>
       
-      <section className="scroll-reveal" id="cases">
-        <CasesSection />
+      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="cases">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <CasesSection />
+        </div>
       </section>
       
-      <section className="scroll-reveal" id="why-choose-us">
-        <WhyChooseUsSection />
+      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="why-choose-us">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <WhyChooseUsSection />
+        </div>
       </section>
       
-      <section className="scroll-reveal" id="process">
-        <ProcessSection />
+      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="process">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <ProcessSection />
+        </div>
       </section>
       
-      <section className="scroll-reveal" id="services">
-        <ServicesSection />
+      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="services">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <ServicesSection />
+        </div>
       </section>
       
-      <section className="scroll-reveal" id="testimonials">
-        <TestimonialsSection />
+      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="testimonials">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <TestimonialsSection />
+        </div>
       </section>
       
-      <section className="scroll-reveal" id="insights">
-        <InsightsSection />
+      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="insights">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <InsightsSection />
+        </div>
       </section>
       
-      <section className="screen-8 scroll-reveal" id="contact">
-        <CTASection />
+      <section className="screen-8 scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="contact">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <CTASection />
+        </div>
       </section>
       
-      <Footer />
+      <div className="p-0.5 sm:p-1 md:p-2 bg-white">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <Footer />
+        </div>
+      </div>
       <FloatingContactButton />
     </div>
   );
