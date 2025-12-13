@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Send, Calendar, ChevronRight, Users, Share2, Megaphone, Target, MessageCircle, Newspaper } from "lucide-react";
+import { Menu, X, Send, Calendar } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
 
@@ -14,19 +14,9 @@ const brandConfig = {
 
 const navLinks = navigation.links.map(link => ({ to: link.href, label: link.name }));
 
-const serviceSubLinks = [
-  { to: "/services/community", label: "Community Operation", icon: Users },
-  { to: "/services/social-media", label: "Social Media Marketing", icon: Share2 },
-  { to: "/services/influencer", label: "KOL Marketing", icon: Megaphone },
-  { to: "/services/gtm-strategy", label: "GTM Strategy", icon: Target },
-  { to: "/services/yap", label: "Yapping Marketing", icon: MessageCircle },
-  { to: "/services/pr", label: "PR & Media", icon: Newspaper },
-];
-
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
-  const [isServicesExpanded, setIsServicesExpanded] = useState(false);
 
   return (
     <>
@@ -148,59 +138,17 @@ const Navbar = () => {
                 </span>
                 <nav className="space-y-2 lg:space-y-3">
                   {navLinks.map((link, index) => (
-                    <div key={link.to}>
-                      {link.label === "Services" ? (
-                        <div>
-                          <button
-                            onClick={() => setIsServicesExpanded(!isServicesExpanded)}
-                            className={`flex items-center gap-3 text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-all duration-500 ${
-                              isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                            }`}
-                            style={{ transitionDelay: isMenuOpen ? `${300 + index * 80}ms` : "0ms" }}
-                          >
-                            {link.label}
-                            <ChevronRight 
-                              className={`w-6 h-6 lg:w-8 lg:h-8 transition-transform duration-300 ${isServicesExpanded ? 'rotate-90' : ''}`} 
-                            />
-                          </button>
-                          
-                          {/* Services Submenu */}
-                          <div 
-                            className={`overflow-hidden transition-all duration-500 ${
-                              isServicesExpanded ? 'max-h-[400px] opacity-100' : 'max-h-0 opacity-0'
-                            }`}
-                          >
-                            <div className="pl-4 lg:pl-6 pt-3 lg:pt-4 space-y-2 lg:space-y-3 border-l-2 border-primary/30 ml-2">
-                              {serviceSubLinks.map((subLink, subIndex) => (
-                                <Link
-                                  key={subLink.to}
-                                  to={subLink.to}
-                                  onClick={() => setIsMenuOpen(false)}
-                                  className={`flex items-center gap-3 text-base sm:text-lg lg:text-xl text-white/70 hover:text-primary transition-all duration-300 group ${
-                                    isServicesExpanded ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-                                  }`}
-                                  style={{ transitionDelay: isServicesExpanded ? `${subIndex * 50}ms` : "0ms" }}
-                                >
-                                  <subLink.icon className="w-4 h-4 lg:w-5 lg:h-5 text-primary/60 group-hover:text-primary transition-colors" />
-                                  {subLink.label}
-                                </Link>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        <Link
-                          to={link.to}
-                          onClick={() => setIsMenuOpen(false)}
-                          className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-all duration-500 ${
-                            isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                          }`}
-                          style={{ transitionDelay: isMenuOpen ? `${300 + index * 80}ms` : "0ms" }}
-                        >
-                          {link.label}
-                        </Link>
-                      )}
-                    </div>
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      onClick={() => setIsMenuOpen(false)}
+                      className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-all duration-500 ${
+                        isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+                      }`}
+                      style={{ transitionDelay: isMenuOpen ? `${300 + index * 80}ms` : "0ms" }}
+                    >
+                      {link.label}
+                    </Link>
                   ))}
                 </nav>
               </div>
