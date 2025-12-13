@@ -190,7 +190,8 @@ const Services = () => {
       <Navbar />
       
       {/* Hero - Matching Homepage Style with Video Background */}
-      <section className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
+      <main className="p-2 sm:p-3 md:p-4 bg-white">
+      <section className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
         {/* Background Layer - Video */}
         <div className="absolute inset-0 overflow-hidden">
           <video
@@ -353,6 +354,7 @@ const Services = () => {
           <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
         </motion.div>
       </section>
+      </main>
 
       {/* Services List - Lunar Strategy Horizontal Layout */}
       <section ref={servicesRef} className="bg-[#fafafa] py-24">
