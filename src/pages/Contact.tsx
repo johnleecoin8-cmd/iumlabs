@@ -168,24 +168,6 @@ const Contact = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
         </div>
         
-        {/* Floating Tags - lunar-tag-dark style */}
-        <div className="absolute inset-0 pointer-events-none hidden md:block">
-          {floatingTags.map((tag, index) => (
-            <div
-              key={tag.label}
-              className="absolute lunar-tag-dark text-xs whitespace-nowrap animate-float pointer-events-auto cursor-default hover:bg-white/10 transition-colors"
-              style={{
-                top: tag.top,
-                left: tag.left,
-                right: tag.right,
-                animationDelay: `${index * 0.3}s`,
-                animationDuration: `${4 + index * 0.5}s`,
-              }}
-            >
-              {tag.label}
-            </div>
-          ))}
-        </div>
 
         {/* Content with Stagger Animation */}
         <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">

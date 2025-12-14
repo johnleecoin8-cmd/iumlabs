@@ -2956,23 +2956,6 @@ const Research = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
         </div>
         
-        {/* Floating Tags - Emerald Theme */}
-        <div className="absolute inset-0 pointer-events-none hidden md:block">
-          {floatingTags.map((tag, index) => (
-            <div
-              key={tag.label}
-              className="absolute bg-emerald-500/10 border border-emerald-400/20 backdrop-blur-sm px-4 py-2 rounded-sm text-xs text-white/80 whitespace-nowrap animate-float pointer-events-auto cursor-default hover:bg-emerald-500/20 transition-colors"
-              style={{
-                top: tag.top,
-                left: tag.left,
-                animationDelay: `${index * 0.3}s`,
-                animationDuration: `${4 + index * 0.5}s`,
-              }}
-            >
-              {tag.label}
-            </div>
-          ))}
-        </div>
 
         {/* Content - Two Column Layout */}
         <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-16">
