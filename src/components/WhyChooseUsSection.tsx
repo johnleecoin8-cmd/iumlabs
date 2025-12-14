@@ -115,15 +115,15 @@ const WhyChooseUsSection = () => {
               About Us
             </span>
 
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-relaxed mb-8">
-              We connect global{' '}
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-relaxed mb-4">
+              We bridge global{' '}
               <span className="text-primary">Web3 projects</span>{' '}
-              with success and scalable growth in the highly competitive{' '}
-              <span className="text-primary">Korean market</span>.{' '}
-              We are your trusted{' '}
-              <span className="text-primary">Go-To-Market partner</span>{' '}
-              with deep local expertise.
+              to scalable growth in the{' '}
+              <span className="text-primary">Korean market</span>.
             </h2>
+            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
+              Established in 2025, we have rapidly become a trusted partner, empowering 18+ brands—including BNB, Bybit, IP, and Tria—with our proven expertise in PR, KOL Marketing, and Ads.
+            </p>
 
             <CalendlyButton className="mt-6">
               Book a Meeting
