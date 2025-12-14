@@ -48,23 +48,23 @@ const HoverExpand_001 = ({ images, className }: HoverExpandProps) => {
 
   const config = {
     mobile: { 
-      cardWidth: 280,
-      height: "min(20rem, 40vh)", 
+      cardWidth: 300,
+      height: "min(22rem, 45vh)", 
       gap: 16,
     },
     smallTablet: { 
-      cardWidth: 300,
-      height: "min(24rem, 45vh)", 
+      cardWidth: 330,
+      height: "min(26rem, 50vh)", 
       gap: 16,
     },
     largeTablet: { 
-      cardWidth: 320,
-      height: "min(28rem, 50vh)", 
+      cardWidth: 360,
+      height: "min(30rem, 55vh)", 
       gap: 20,
     },
     desktop: { 
-      cardWidth: 360,
-      height: "min(36.875rem, 60vh)", 
+      cardWidth: 400,
+      height: "min(40rem, 65vh)", 
       gap: 24,
     },
   }[breakpoint];
@@ -94,7 +94,7 @@ const HoverExpand_001 = ({ images, className }: HoverExpandProps) => {
           return (
             <motion.div
               key={index}
-              className="relative h-full overflow-hidden rounded-xl flex-shrink-0 border border-white/20"
+              className="relative h-full overflow-hidden rounded-xl flex-shrink-0 border border-white/40"
               style={{ width: config.cardWidth }}
               animate={{ 
                 scale: isActive ? 1 : 0.95,
