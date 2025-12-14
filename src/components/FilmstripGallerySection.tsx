@@ -29,8 +29,8 @@ const campaignImages = [
   },
   {
     src: ondoSeminar,
-    alt: "Ondo Finance Seminar",
-    code: "Ondo Finance - RWA Seminar",
+    alt: "Story Protocol Origin Summit",
+    code: "Story Protocol - Origin Summit 2025",
   },
   {
     src: storyWorkshop,
