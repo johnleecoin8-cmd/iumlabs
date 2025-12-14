@@ -48,24 +48,24 @@ const HoverExpand_001 = ({ images, className }: HoverExpandProps) => {
 
   const config = {
     mobile: { 
-      cardWidth: 300,
-      height: "min(22rem, 45vh)", 
-      gap: 16,
+      cardWidth: 240,
+      height: "min(17.5rem, 36vh)", 
+      gap: 14,
     },
     smallTablet: { 
-      cardWidth: 330,
-      height: "min(26rem, 50vh)", 
-      gap: 16,
+      cardWidth: 264,
+      height: "min(21rem, 40vh)", 
+      gap: 14,
     },
     largeTablet: { 
-      cardWidth: 360,
-      height: "min(30rem, 55vh)", 
-      gap: 20,
+      cardWidth: 288,
+      height: "min(24rem, 44vh)", 
+      gap: 16,
     },
     desktop: { 
-      cardWidth: 400,
-      height: "min(40rem, 65vh)", 
-      gap: 24,
+      cardWidth: 320,
+      height: "min(32rem, 52vh)", 
+      gap: 20,
     },
   }[breakpoint];
 
