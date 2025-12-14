@@ -232,58 +232,6 @@ const AboutUsSection = () => {
           </div>
         </div>
 
-        {/* As Featured In Section */}
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
-          className="mt-12 pt-12 border-t border-gray-200"
-        >
-          <p className="text-center text-gray-500 text-sm uppercase tracking-widest mb-8">
-            As Featured In Media
-          </p>
-          <div className="relative overflow-hidden">
-            {/* Left fade gradient */}
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#F8F8F8] to-transparent z-10 pointer-events-none" />
-            {/* Right fade gradient */}
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#F8F8F8] to-transparent z-10 pointer-events-none" />
-            
-            <div className="flex items-center logo-marquee-slow">
-              {[{
-                name: "Cointelegraph",
-                logo: "https://cointelegraph.com/icons/logo/en.svg"
-              }, {
-                name: "CoinDesk",
-                logo: "https://upload.wikimedia.org/wikipedia/commons/4/40/CoinDesk_logo.svg"
-              }, {
-                name: "BlockMedia",
-                logo: "https://cdn.blockmedia.co.kr/wp-content/uploads/2024/07/Blockmedia_Logo_name.png"
-              }, {
-                name: "TokenPost",
-                logo: "https://s1.tokenpost.com/assets/images/tokenpost_new/common_new/logo.svg"
-              }, {
-                name: "Coinness",
-                logo: "https://event.coinness.com/awards/images/media/CoinNess.webp"
-              }, {
-                name: "Bloomingbit",
-                logo: "https://event.coinness.com/awards/images/media/Bloomingbit.webp"
-              }, {
-                name: "The Economist",
-                logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/The_Economist_Logo.svg"
-              }].map((media, index) => (
-                <div 
-                  key={index} 
-                  className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-white rounded-full border border-gray-200 shadow-sm hover:border-gray-300 hover:shadow-md transition-all duration-300"
-                >
-                  <img src={media.logo} alt={media.name} className="h-5 w-5 sm:h-6 sm:w-6 object-contain opacity-70 flex-shrink-0" />
-                  <span className="text-gray-700 text-xs sm:text-sm font-medium whitespace-nowrap">
-                    {media.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );
