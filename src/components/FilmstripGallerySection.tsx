@@ -10,6 +10,7 @@ import triaLaunch from "@/assets/campaigns/tria-launch.jpg";
 import lbankFestival from "@/assets/campaigns/lbank-festival.jpg";
 import kucoinOldschool from "@/assets/campaigns/kucoin-oldschool.jpg";
 import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
+import zkpassNights from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 
 const campaignImages = [
   {
@@ -56,6 +57,11 @@ const campaignImages = [
     src: openledgerInterview,
     alt: "Open Ledger Korea Media Interview",
     code: "Open Ledger - Korea Media Interview",
+  },
+  {
+    src: zkpassNights,
+    alt: "zkPass The Verifiable Nights",
+    code: "zkPass - The Verifiable Nights",
   },
 ];
 
