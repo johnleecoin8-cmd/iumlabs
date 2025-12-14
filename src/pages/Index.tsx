@@ -46,6 +46,12 @@ const Index = () => {
         </div>
       </section>
       
+      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="gallery">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <FilmstripGallerySection />
+        </div>
+      </section>
+      
       <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="process">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <ProcessSection />
@@ -67,12 +73,6 @@ const Index = () => {
       <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="insights">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <InsightsSection />
-        </div>
-      </section>
-      
-      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="gallery">
-        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
-          <FilmstripGallerySection />
         </div>
       </section>
       
