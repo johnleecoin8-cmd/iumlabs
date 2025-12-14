@@ -60,21 +60,13 @@ const WhyChooseUsSection = () => {
             </span>
 
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-snug mb-8">
-              We're a{' '}
-              <span className="text-primary">Korea-Based Agency</span>{' '}
-              supporting{' '}
-              <span className="text-primary">Web3 Projects</span>{' '}
-              since 2023, with a Proven track record of{' '}
-              <span className="text-primary">Helping 200+ Brands</span>{' '}
-              like{' '}
-              <span className="text-primary">BNB Chain</span>,{' '}
-              <span className="text-primary">KuCoin</span>, and{' '}
-              <span className="text-primary">Polygon</span>{' '}
-              through{' '}
-              <span className="text-primary">KOL Marketing</span>,{' '}
-              <span className="text-primary">Community Growth</span>,{' '}
-              <span className="text-primary">PR</span>, and{' '}
-              <span className="text-primary">Events</span>.
+              We connect global{' '}
+              <span className="text-primary">Web3 projects</span>{' '}
+              with success and scalable growth in the highly competitive{' '}
+              <span className="text-primary">Korean market</span>.{' '}
+              We are your trusted{' '}
+              <span className="text-primary">Go-To-Market partner</span>{' '}
+              with deep local expertise.
             </h2>
 
             <CalendlyButton className="mt-4">
