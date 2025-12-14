@@ -54,8 +54,8 @@ const campaignImages = [
   },
   {
     src: triaLaunch,
-    alt: "Tria Launch",
-    code: "Tria - Korea Community Launch",
+    alt: "Tria Korea Media Interview",
+    code: "Tria - Korea Media Interview",
   },
 ];
 
