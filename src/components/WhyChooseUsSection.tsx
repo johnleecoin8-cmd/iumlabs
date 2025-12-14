@@ -84,10 +84,10 @@ const WhyChooseUsSection = () => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
   }, []);
-  return <section className="relative bg-[#F5F2ED] py-16 md:py-24 overflow-hidden">
-      <div className="container mx-auto px-4">
-        {/* Main 2-column grid */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
+  return <section className="relative bg-white py-20 md:py-28 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8">
+        {/* Main 2-column grid - image larger */}
+        <div className="grid lg:grid-cols-[2fr_3fr] gap-10 lg:gap-20 items-center mb-16">
           {/* Left Column - Text Content */}
           <motion.div initial={{
           opacity: 0,
@@ -101,11 +101,11 @@ const WhyChooseUsSection = () => {
         }} transition={{
           duration: 0.6
         }} className="order-2 lg:order-1">
-            <span className="inline-block text-xs font-medium text-muted-foreground mb-4 tracking-widest uppercase">
+            <span className="inline-block text-xs font-semibold text-gray-500 mb-5 tracking-widest uppercase">
               About Us
             </span>
 
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-snug mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-relaxed mb-8">
               We connect global{' '}
               <span className="text-primary">Web3 projects</span>{' '}
               with success and scalable growth in the highly competitive{' '}
@@ -115,7 +115,7 @@ const WhyChooseUsSection = () => {
               with deep local expertise.
             </h2>
 
-            <CalendlyButton className="mt-4">
+            <CalendlyButton className="mt-6">
               Book a Meeting
             </CalendlyButton>
           </motion.div>
@@ -135,14 +135,11 @@ const WhyChooseUsSection = () => {
           delay: 0.2
         }} className="order-1 lg:order-2">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img src={teamPhoto} alt="CryptoBridge Korea Team" className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover object-top" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              <img src={teamPhoto} alt="CryptoBridge Korea Team" className="w-full h-[50vh] md:h-[60vh] lg:h-[70vh] object-cover object-top" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
             </div>
           </motion.div>
         </div>
-
-        {/* Bottom Stats Row */}
-        
 
         {/* As Featured In Media Section */}
         <motion.div initial={{
@@ -157,18 +154,18 @@ const WhyChooseUsSection = () => {
       }} transition={{
         duration: 0.7,
         delay: 0.5
-      }} className="mt-12 pt-12 border-t border-gray-200">
-          <p className="text-center text-gray-500 text-sm uppercase tracking-widest mb-8">
+      }} className="pt-14 border-t border-gray-100">
+          <p className="text-center text-gray-400 text-sm uppercase tracking-widest mb-10">
             As Featured In Media
           </p>
           <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
             
             <div className="flex items-center logo-marquee-slow">
-              {mediaLogos.map((media, index) => <div key={index} className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-white rounded-full border border-gray-200 shadow-sm hover:border-gray-300 hover:shadow-md transition-all duration-300">
-                  <img src={media.logo} alt={media.name} className="h-5 w-5 sm:h-6 sm:w-6 object-contain opacity-70 flex-shrink-0" />
-                  <span className="text-gray-700 text-xs sm:text-sm font-medium whitespace-nowrap">
+              {mediaLogos.map((media, index) => <div key={index} className="flex items-center gap-3 mx-3 px-6 py-3 bg-gray-50 rounded-full border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all duration-300">
+                  <img src={media.logo} alt={media.name} className="h-7 w-7 object-contain opacity-80 flex-shrink-0" />
+                  <span className="text-gray-600 text-sm font-medium whitespace-nowrap">
                     {media.name}
                   </span>
                 </div>)}
