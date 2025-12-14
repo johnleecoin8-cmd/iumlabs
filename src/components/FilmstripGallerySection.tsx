@@ -3,7 +3,6 @@ import { HoverExpand_001 } from "@/components/ui/expand-on-hover";
 // Import actual campaign images from assets
 import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
 import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
-import megaethLaunch from "@/assets/campaigns/megaeth-launch.jpg";
 import fogoFest from "@/assets/campaigns/fogo-fest.avif";
 import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
 import triaLaunch from "@/assets/campaigns/tria-launch.jpg";
@@ -22,11 +21,6 @@ const campaignImages = [
     src: ondoSeminar,
     alt: "Story Protocol Origin Summit",
     code: "Story Protocol - Origin Summit 2025",
-  },
-  {
-    src: megaethLaunch,
-    alt: "MegaETH Public Sales",
-    code: "MegaETH - Public Sales",
   },
   {
     src: fogoFest,
