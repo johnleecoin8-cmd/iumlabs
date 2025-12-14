@@ -27,6 +27,12 @@ const Index = () => {
         </div>
       </main>
       
+      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="why-choose-us">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <WhyChooseUsSection />
+        </div>
+      </section>
+      
       <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="about">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <AboutUsSection />
@@ -36,12 +42,6 @@ const Index = () => {
       <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="cases">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <CasesSection />
-        </div>
-      </section>
-      
-      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="why-choose-us">
-        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
-          <WhyChooseUsSection />
         </div>
       </section>
       
