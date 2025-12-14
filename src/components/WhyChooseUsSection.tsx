@@ -84,10 +84,10 @@ const WhyChooseUsSection = () => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
   }, []);
-  return <section className="relative bg-white py-20 md:py-28 overflow-hidden">
+  return <section className="relative bg-[#F5F2ED] py-12 md:py-16 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
         {/* Main 2-column grid - image larger */}
-        <div className="grid lg:grid-cols-[2fr_3fr] gap-10 lg:gap-20 items-center mb-16">
+        <div className="grid lg:grid-cols-[2fr_3fr] gap-10 lg:gap-16 items-center mb-12">
           {/* Left Column - Text Content */}
           <motion.div initial={{
           opacity: 0,
@@ -135,7 +135,7 @@ const WhyChooseUsSection = () => {
           delay: 0.2
         }} className="order-1 lg:order-2">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img src={teamPhoto} alt="CryptoBridge Korea Team" className="w-full h-[50vh] md:h-[60vh] lg:h-[70vh] object-cover object-top" />
+              <img src={teamPhoto} alt="CryptoBridge Korea Team" className="w-full h-[350px] md:h-[400px] lg:h-[450px] object-cover object-top" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
             </div>
           </motion.div>
@@ -154,13 +154,13 @@ const WhyChooseUsSection = () => {
       }} transition={{
         duration: 0.7,
         delay: 0.5
-      }} className="pt-14 border-t border-gray-100">
-          <p className="text-center text-gray-400 text-sm uppercase tracking-widest mb-10">
+      }} className="pt-10 border-t border-gray-200">
+          <p className="text-center text-gray-400 text-sm uppercase tracking-widest mb-8">
             As Featured In Media
           </p>
           <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
             
             <div className="flex items-center logo-marquee-slow">
               {mediaLogos.map((media, index) => <div key={index} className="flex items-center gap-3 mx-3 px-6 py-3 bg-gray-50 rounded-full border border-gray-100 hover:border-gray-200 hover:shadow-md transition-all duration-300">
