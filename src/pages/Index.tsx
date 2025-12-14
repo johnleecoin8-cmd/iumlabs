@@ -11,6 +11,7 @@ import CTASection from "@/components/CTASection";
 import Footer from "@/components/Footer";
 import SectionIndicator from "@/components/SectionIndicator";
 import FloatingContactButton from "@/components/FloatingContactButton";
+import FilmstripGallerySection from "@/components/FilmstripGallerySection";
 import useScrollReveal from "@/hooks/useScrollReveal";
 
 const Index = () => {
@@ -66,6 +67,12 @@ const Index = () => {
       <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="insights">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <InsightsSection />
+        </div>
+      </section>
+      
+      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="gallery">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <FilmstripGallerySection />
         </div>
       </section>
       

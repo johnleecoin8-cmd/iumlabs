@@ -1,0 +1,102 @@
+import { HoverExpand_001 } from "@/components/ui/expand-on-hover";
+
+// Campaign/project images for the gallery
+const galleryImages = [
+  {
+    src: "/lovable-uploads/campaigns/bnb-event.jpg",
+    alt: "BNB Chain Event",
+    code: "BNB Chain - Korea Launch Event 2024",
+  },
+  {
+    src: "/lovable-uploads/campaigns/kucoin-campaign.jpg",
+    alt: "KuCoin Campaign",
+    code: "KuCoin - Market Expansion Campaign",
+  },
+  {
+    src: "/lovable-uploads/campaigns/polygon-hackathon.jpg",
+    alt: "Polygon Hackathon",
+    code: "Polygon - Developer Hackathon Seoul",
+  },
+  {
+    src: "/lovable-uploads/campaigns/ondo-seminar.jpg",
+    alt: "Ondo Finance Seminar",
+    code: "Ondo Finance - RWA Seminar",
+  },
+  {
+    src: "/lovable-uploads/campaigns/story-workshop.jpg",
+    alt: "Story Protocol Workshop",
+    code: "Story Protocol - IP Workshop",
+  },
+  {
+    src: "/lovable-uploads/campaigns/megaeth-launch.jpg",
+    alt: "MegaETH Launch",
+    code: "MegaETH - Korea Community Launch",
+  },
+];
+
+// Use actual campaign images from assets
+import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
+import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
+import polygonHackathon from "@/assets/campaigns/polygon-hackathon.jpg";
+import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
+import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
+import megaethLaunch from "@/assets/campaigns/megaeth-launch.jpg";
+
+const campaignImages = [
+  {
+    src: bnbEvent,
+    alt: "BNB Chain Event",
+    code: "BNB Chain - Korea Launch Event 2024",
+  },
+  {
+    src: kucoinCampaign,
+    alt: "KuCoin Campaign",
+    code: "KuCoin - Market Expansion Campaign",
+  },
+  {
+    src: polygonHackathon,
+    alt: "Polygon Hackathon",
+    code: "Polygon - Developer Hackathon Seoul",
+  },
+  {
+    src: ondoSeminar,
+    alt: "Ondo Finance Seminar",
+    code: "Ondo Finance - RWA Seminar",
+  },
+  {
+    src: storyWorkshop,
+    alt: "Story Protocol Workshop",
+    code: "Story Protocol - IP Workshop",
+  },
+  {
+    src: megaethLaunch,
+    alt: "MegaETH Launch",
+    code: "MegaETH - Korea Community Launch",
+  },
+];
+
+const FilmstripGallerySection = () => {
+  return (
+    <div className="min-h-[80vh] bg-background flex flex-col justify-center py-16 md:py-24">
+      <div className="container mx-auto px-4 mb-8 md:mb-12">
+        <div className="max-w-3xl">
+          <span className="text-sm text-muted-foreground tracking-widest uppercase mb-4 block">
+            [ Campaign Gallery ]
+          </span>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
+            Our Work in Action
+          </h2>
+          <p className="text-muted-foreground text-lg">
+            Explore our successful campaigns and events across Korea's Web3 ecosystem.
+          </p>
+        </div>
+      </div>
+      
+      <div className="w-full px-4 md:px-8 lg:px-12">
+        <HoverExpand_001 images={campaignImages} className="w-full" />
+      </div>
+    </div>
+  );
+};
+
+export default FilmstripGallerySection;
