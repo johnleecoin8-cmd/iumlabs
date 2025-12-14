@@ -39,8 +39,8 @@ const campaignImages = [
   },
   {
     src: megaethLaunch,
-    alt: "MegaETH Launch",
-    code: "MegaETH - Korea Community Launch",
+    alt: "MegaETH Public Sales",
+    code: "MegaETH - Public Sales",
   },
   {
     src: bybitCompetition,
