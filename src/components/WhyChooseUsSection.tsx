@@ -3,17 +3,6 @@ import { useState, useEffect } from 'react';
 import { useCountUp } from '@/hooks/useCountUp';
 import seoulHanriver from '@/assets/backgrounds/seoul-hanriver-twilight.jpg';
 
-const floatingTags = [
-  { label: 'Trusted Partner', top: '12%', left: '5%', delay: 0 },
-  { label: '24/7 Support', top: '18%', right: '8%', delay: 0.5 },
-  { label: 'Korea Expert', top: '75%', left: '8%', delay: 1 },
-  { label: 'VASP Compliant', top: '70%', right: '5%', delay: 1.5 },
-];
-
-const mobileFloatingTags = [
-  { label: 'Trusted', top: '8%', left: '5%', delay: 0 },
-  { label: 'Korea', top: '8%', right: '5%', delay: 0.3 },
-];
 
 const stats = [
   { value: 1000, label: 'Vetted KOLs', suffix: '+' },
@@ -86,28 +75,6 @@ const WhyChooseUsSection = () => {
       {/* Cobalt Blue Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0047AB]/50 via-[#1a1a2e]/30 to-background/95" />
 
-      {/* Floating Tags - Desktop */}
-      {floatingTags.map((tag) => (
-        <motion.div
-          key={tag.label}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={isVisible ? { 
-            opacity: 1, 
-            scale: 1,
-            y: [0, -8, 0],
-          } : { opacity: 0, scale: 0.8 }}
-          transition={{ 
-            opacity: { delay: 0.2 + tag.delay, duration: 0.5 },
-            y: { delay: 0.2 + tag.delay, duration: 3 + tag.delay, repeat: Infinity, ease: "easeInOut" }
-          }}
-          className="hidden sm:block absolute z-10"
-          style={{ top: tag.top, left: tag.left, right: tag.right }}
-        >
-          <span className="px-3 py-1.5 text-xs font-medium text-white bg-primary/20 backdrop-blur-md rounded-full border border-primary/40">
-            {tag.label}
-          </span>
-        </motion.div>
-      ))}
 
       {/* Main Content */}
       <div className="container mx-auto px-4 relative z-10">
