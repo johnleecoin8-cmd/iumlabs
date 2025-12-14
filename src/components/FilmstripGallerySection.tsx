@@ -7,6 +7,9 @@ import polygonHackathon from "@/assets/campaigns/polygon-hackathon.jpg";
 import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
 import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
 import megaethLaunch from "@/assets/campaigns/megaeth-launch.jpg";
+import bybitCompetition from "@/assets/campaigns/bybit-competition.jpg";
+import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
+import triaLaunch from "@/assets/campaigns/tria-launch.jpg";
 
 const campaignImages = [
   {
@@ -39,6 +42,21 @@ const campaignImages = [
     alt: "MegaETH Launch",
     code: "MegaETH - Korea Community Launch",
   },
+  {
+    src: bybitCompetition,
+    alt: "Bybit Competition",
+    code: "Bybit - Trading Competition Korea",
+  },
+  {
+    src: peaqSummit,
+    alt: "Peaq Summit",
+    code: "Peaq - DePIN Summit Seoul",
+  },
+  {
+    src: triaLaunch,
+    alt: "Tria Launch",
+    code: "Tria - Korea Community Launch",
+  },
 ];
 
 const FilmstripGallerySection = () => {
@@ -47,18 +65,18 @@ const FilmstripGallerySection = () => {
       <div className="container mx-auto px-4 mb-8 md:mb-12">
         <div className="max-w-3xl">
           <span className="text-sm text-muted-foreground tracking-widest uppercase mb-4 block">
-            [ Campaign Gallery ]
+            [ Our Cases ]
           </span>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-            Our Work in Action
+            Campaign Gallery
           </h2>
           <p className="text-muted-foreground text-lg">
-            Explore our successful campaigns and events across Korea's Web3 ecosystem.
+            Explore our successful campaigns and events across Korea's Web3 ecosystem. Drag to see more.
           </p>
         </div>
       </div>
       
-      <div className="w-full px-4 md:px-8 lg:px-12">
+      <div className="w-full px-4 md:px-8">
         <HoverExpand_001 images={campaignImages} className="w-full" />
       </div>
     </div>
