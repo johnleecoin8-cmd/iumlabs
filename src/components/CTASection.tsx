@@ -81,68 +81,7 @@ const CTASection = () => {
   };
   return <div ref={ref} className="flex-1">
       {/* Hero CTA Section - Simplified with Unified Design */}
-      <div className="relative bg-gradient-to-br from-primary via-primary to-blue-600 py-20 md:py-32 px-4 overflow-hidden">
-        {/* Subtle Background Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-400/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-300/15 rounded-full blur-[100px]" />
-        </div>
-
-        <div className={`container mx-auto max-w-5xl text-center relative z-10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Badge - Unified Style */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.08] border border-white/[0.15] mb-6 md:mb-8">
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-white/90 text-sm font-medium">Free 30-min Strategy Call</span>
-          </div>
-
-          {/* Title */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-            Ready to Conquer
-            <br />
-            <span className="text-white/80">the Korean Market?</span>
-          </h2>
-          
-          <p className="text-base md:text-xl text-white/70 max-w-2xl mx-auto mb-8 md:mb-10 px-4">
-            Join 200+ Web3 projects that have successfully launched in Korea with our strategic guidance and unmatched network.
-          </p>
-
-          {/* CTA Buttons - Unified Style */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <CalendlyButton className="group w-full sm:w-auto bg-white text-primary hover:bg-white/90 px-6 md:px-10 py-4 md:py-5 rounded-xl font-semibold transition-all flex items-center justify-center gap-2">
-              <span>Book a Meeting</span>
-              <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </CalendlyButton>
-
-            <a href={`mailto:${brand.email}`} className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-4 md:py-5 rounded-xl border border-white/20 text-white font-medium hover:bg-white/10 hover:border-white/40 transition-all">
-              <Mail className="w-5 h-5" />
-              <span>Send Email</span>
-            </a>
-          </div>
-
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-8 mt-10 md:mt-12 pt-8 md:pt-10 border-t border-white/10">
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-white">18+</div>
-              <div className="text-xs md:text-sm text-white/60">Projects Launched</div>
-            </div>
-            <div className="w-px h-10 bg-white/20 hidden sm:block" />
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-white">120+</div>
-              <div className="text-xs md:text-sm text-white/60">KOL Network</div>
-            </div>
-            <div className="w-px h-10 bg-white/20 hidden sm:block" />
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-white">$2.5M+</div>
-              <div className="text-xs md:text-sm text-white/60">Token Sales</div>
-            </div>
-            <div className="w-px h-10 bg-white/20 hidden sm:block" />
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-white">38+</div>
-              <div className="text-xs md:text-sm text-white/60">AMA Hosting</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
       {/* Contact Form Section - Unified Dark Theme */}
       <div className="relative bg-[hsl(0,0%,4%)] py-16 px-4 overflow-hidden md:py-[20px]">
