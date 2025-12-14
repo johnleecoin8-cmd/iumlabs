@@ -61,7 +61,7 @@ const campaignImages = [
 
 const FilmstripGallerySection = () => {
   return (
-    <div className="min-h-[80vh] bg-background flex flex-col justify-center py-16 md:py-24">
+    <div className="min-h-[80vh] bg-orange-500 flex flex-col justify-center py-16 md:py-24">
       <div className="container mx-auto px-4 mb-8 md:mb-12">
         <div className="max-w-3xl">
           <span className="text-sm text-muted-foreground tracking-widest uppercase mb-4 block">
