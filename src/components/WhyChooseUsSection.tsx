@@ -11,7 +11,7 @@ const stats = [
   { value: 200, label: 'Projects Launched', suffix: '+' },
 ];
 
-const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0]; index: number; isVisible: boolean }) => {
+const StatItem = ({ stat, index, isVisible }: { stat: typeof stats[0]; index: number; isVisible: boolean }) => {
   const count = useCountUp({
     end: stat.value,
     duration: 2000,
@@ -22,18 +22,12 @@ const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0]; index: nu
   
   return (
     <motion.div
-      initial={{ opacity: 0, rotateY: -15, scale: 0.9 }}
-      animate={isVisible ? { opacity: 1, rotateY: 0, scale: 1 } : { opacity: 0, rotateY: -15, scale: 0.9 }}
-      transition={{ delay: 0.4 + index * 0.15, duration: 0.6, type: "spring", stiffness: 100 }}
-      whileHover={{ 
-        scale: 1.05, 
-        boxShadow: "0 0 40px rgba(59,130,246,0.3)",
-        borderColor: "rgba(59,130,246,0.5)"
-      }}
-      className="bg-white/5 backdrop-blur-md rounded-2xl p-5 md:p-6 border border-white/10 transition-all duration-300 group cursor-pointer"
-      style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
+      className="text-center"
     >
-      <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-white group-hover:text-primary transition-colors duration-300">
+      <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
         {count}
       </div>
       <div className="text-white/50 text-sm mt-1">{stat.label}</div>
@@ -50,7 +44,7 @@ const WhyChooseUsSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-[60vh] overflow-hidden flex flex-col justify-center py-16 md:py-24">
+    <section className="relative min-h-screen overflow-hidden flex flex-col justify-center">
       {/* Image Background with Ken Burns Effect */}
       <motion.div
         className="absolute inset-0 w-full h-full"
@@ -75,47 +69,45 @@ const WhyChooseUsSection = () => {
       {/* Cobalt Blue Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0047AB]/50 via-[#1a1a2e]/30 to-background/95" />
 
+      {/* Main Content - Centered */}
+      <div className="container mx-auto px-4 relative z-10 flex-1 flex flex-col justify-center items-center text-center">
+        <motion.span
+          initial={{ opacity: 0, y: -20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-6 tracking-widest uppercase"
+        >
+          <span className="w-6 h-px bg-primary" />
+          About Us
+          <span className="w-6 h-px bg-primary" />
+        </motion.span>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Left Column - Text */}
-          <div>
-            <motion.span
-              initial={{ opacity: 0, x: -20 }}
-              animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-              transition={{ delay: 0.1, duration: 0.5 }}
-              className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase"
-            >
-              <span className="w-6 h-px bg-primary" />
-              About Us
-            </motion.span>
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight"
+        >
+          We Bridge Your Project to{' '}
+          <span className="text-primary">Korea</span>
+        </motion.h2>
 
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight"
-            >
-              We Bridge Your<br />
-              Project to{' '}
-              <span className="text-primary">Korea</span>
-            </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="text-base md:text-lg text-white/60 max-w-2xl leading-relaxed"
+        >
+          We're Korean Web3 Go-To-Market Agency dedicated to achieving successful entry and scalable growth for global projects in the dynamic Korean market.
+        </motion.p>
+      </div>
 
-            <motion.p
-              initial={{ opacity: 0, y: 15 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
-              className="text-sm md:text-base text-white/60 max-w-md leading-relaxed"
-            >
-              We're Korean Web3 Go-To-Market Agency dedicated to achieving successful entry and scalable growth for global projects in the dynamic Korean market.
-            </motion.p>
-          </div>
-
-          {/* Right Column - Stats Grid */}
-          <div className="grid grid-cols-2 gap-3 md:gap-4">
+      {/* Bottom Stats Row */}
+      <div className="relative z-10 border-t border-white/10">
+        <div className="container mx-auto px-4 py-8 md:py-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {stats.map((stat, index) => (
-              <StatCard key={stat.label} stat={stat} index={index} isVisible={isVisible} />
+              <StatItem key={stat.label} stat={stat} index={index} isVisible={isVisible} />
             ))}
           </div>
         </div>
