@@ -118,14 +118,13 @@ const WhyChooseUsSection = () => {
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-snug mb-3">
               We bridge global{' '}
               <span className="text-primary">Web3 projects</span>{' '}
-              to growth in the{' '}
-              <span className="text-primary">Korean market</span>.
+              to <span className="text-primary">Korea</span>.
             </h2>
-            <p className="text-base md:text-lg text-gray-600 leading-normal mb-3">
-              Established in 2025, we have rapidly become a trusted partner, empowering 18+ brands—including BNB, Bybit, IP, and Tria—with our proven expertise in PR, KOL Marketing, and Ads.
+            <p className="text-base md:text-lg text-gray-700 font-medium mb-3">
+              Founded by former executives from Binance and KuCoin, we have rapidly become a trusted partner since 2025.
             </p>
-            <p className="text-base md:text-lg text-gray-700 font-medium mb-6">
-              Founded by former executives from Binance and KuCoin
+            <p className="text-base md:text-lg text-gray-600 leading-normal mb-6">
+              We empower 18+ brands—including BNB, Bybit, IP, and Tria—with our proven expertise in Offline Events, PR, KOL Marketing, Community Management, AMAs, and Ads.
             </p>
 
             <CalendlyButton className="mt-6 group relative overflow-hidden bg-gradient-to-r from-primary via-red-500 to-orange-500 hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300 border-0">
