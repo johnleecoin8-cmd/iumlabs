@@ -5,25 +5,25 @@ import CalendlyButton from './CalendlyButton';
 import teamPhoto from '@/assets/team-photo.png';
 const mediaLogos = [{
   name: "Cointelegraph",
-  logo: "https://cointelegraph.com/icons/icon-512x512.png"
+  logo: "https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/erkxwhl1gd48xfhe2yld"
 }, {
   name: "CoinDesk",
-  logo: "https://www.coindesk.com/pf/resources/images/favicons/apple-touch-icon.png"
+  logo: "https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1455854509/ayzwkdazzzsezhp7pyck.png"
 }, {
   name: "BlockMedia",
-  logo: "https://pbs.twimg.com/profile_images/1792823652873138176/z6yFvP6m_400x400.jpg"
+  logo: "https://public.rootdata.com/images/b6/1726303477780.jpg"
 }, {
   name: "TokenPost",
   logo: "https://miro.medium.com/v2/resize:fill:176:176/1*pCtFs9n-MWMhU133o7trNA.jpeg"
 }, {
   name: "Coinness",
-  logo: "https://pbs.twimg.com/profile_images/1540241652942946305/nxvR-bqd_400x400.jpg"
+  logo: "https://event.coinness.com/awards/images/media/CoinNess.webp"
 }, {
   name: "Bloomingbit",
-  logo: "https://play-lh.googleusercontent.com/TBhM49Oh02xtKqb4NLj2baowFz9LZ3yVheTzK-IvSvx9TEPZtNzqOp_qf6FMYl1UklU"
+  logo: "https://event.coinness.com/awards/images/media/Bloomingbit.webp"
 }, {
   name: "The Economist",
-  logo: "https://pbs.twimg.com/profile_images/879361822794080256/IitPe8Xc_400x400.jpg"
+  logo: "https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1397180377/24e5ba4fffa9a6eb18f8af6b6b74bb33.jpg"
 }];
 const stats = [{
   value: 1000,
