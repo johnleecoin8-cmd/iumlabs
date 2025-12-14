@@ -121,8 +121,11 @@ const WhyChooseUsSection = () => {
               to scalable growth in the{' '}
               <span className="text-primary">Korean market</span>.
             </h2>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-8">
+            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-4">
               Established in 2025, we have rapidly become a trusted partner, empowering 18+ brands—including BNB, Bybit, IP, and Tria—with our proven expertise in PR, KOL Marketing, and Ads.
+            </p>
+            <p className="text-base md:text-lg text-gray-700 font-medium mb-8">
+              Founded by former executives from Binance and KuCoin
             </p>
 
             <CalendlyButton className="mt-6 group relative overflow-hidden bg-gradient-to-r from-primary via-red-500 to-orange-500 hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300 border-0">
