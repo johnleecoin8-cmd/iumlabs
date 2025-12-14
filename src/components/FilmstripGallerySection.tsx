@@ -10,6 +10,8 @@ import megaethLaunch from "@/assets/campaigns/megaeth-launch.jpg";
 import fogoFest from "@/assets/campaigns/fogo-fest.avif";
 import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
 import triaLaunch from "@/assets/campaigns/tria-launch.jpg";
+import lbankFestival from "@/assets/campaigns/lbank-festival.jpg";
+import kucoinOldschool from "@/assets/campaigns/kucoin-oldschool.jpg";
 
 const campaignImages = [
   {
@@ -56,6 +58,16 @@ const campaignImages = [
     src: triaLaunch,
     alt: "Tria Korea Media Interview",
     code: "Tria - Korea Media Interview",
+  },
+  {
+    src: lbankFestival,
+    alt: "Lbank 1001 Festival Seoul",
+    code: "Lbank - 1001 Festival Seoul",
+  },
+  {
+    src: kucoinOldschool,
+    alt: "Kucoin Old School is Back",
+    code: "Kucoin - Old School is Back with Orbs and IOST",
   },
 ];
 
