@@ -121,7 +121,7 @@ const WhyChooseUsSection = () => {
               className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase"
             >
               <span className="w-6 h-px bg-primary" />
-              Why Choose Us
+              About Us
             </motion.span>
 
             <motion.h2
