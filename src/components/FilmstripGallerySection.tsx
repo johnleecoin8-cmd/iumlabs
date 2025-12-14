@@ -9,6 +9,7 @@ import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
 import triaLaunch from "@/assets/campaigns/tria-launch.jpg";
 import lbankFestival from "@/assets/campaigns/lbank-festival.jpg";
 import kucoinOldschool from "@/assets/campaigns/kucoin-oldschool.jpg";
+import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
 
 const campaignImages = [
   {
@@ -50,6 +51,11 @@ const campaignImages = [
     src: kucoinOldschool,
     alt: "Kucoin Old School is Back",
     code: "Kucoin - Old School is Back with Orbs and IOST",
+  },
+  {
+    src: openledgerInterview,
+    alt: "Open Ledger Korea Media Interview",
+    code: "Open Ledger - Korea Media Interview",
   },
 ];
 
