@@ -130,9 +130,8 @@ const WhyChooseUsSection = () => {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight"
             >
-              We Bridge Your<br />
-              Project to{' '}
-              <span className="text-primary">Korea</span>
+              The Numbers{' '}
+              <span className="text-primary">Speak</span>
             </motion.h2>
 
             <motion.p
