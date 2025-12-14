@@ -93,7 +93,7 @@ const WhyChooseUsSection = () => {
               <img
                 src={teamPhoto}
                 alt="CryptoBridge Korea Team"
-                className="w-full h-[300px] md:h-[400px] lg:h-[500px] object-cover"
+                className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
