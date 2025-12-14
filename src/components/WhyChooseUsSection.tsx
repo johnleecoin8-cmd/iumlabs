@@ -84,7 +84,7 @@ const WhyChooseUsSection = () => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
   }, []);
-  return <section className="relative bg-[#F5F2ED] py-12 md:py-16 overflow-hidden">
+  return <section className="relative bg-[#F5F2ED] py-12 overflow-hidden md:py-[20px]">
       <div className="container mx-auto px-4 md:px-8">
         {/* Main 2-column grid - image larger */}
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-12">
@@ -154,7 +154,7 @@ const WhyChooseUsSection = () => {
       }} transition={{
         duration: 0.7,
         delay: 0.5
-      }} className="pt-10 border-t border-gray-200">
+      }} className="pt-10 border-t border-gray-200 py-[20px]">
           <p className="text-center text-gray-400 text-sm uppercase tracking-widest mb-8">
             As Featured In Media
           </p>
