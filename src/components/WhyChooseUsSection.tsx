@@ -125,8 +125,11 @@ const WhyChooseUsSection = () => {
               Established in 2025, we have rapidly become a trusted partner, empowering 18+ brands—including BNB, Bybit, IP, and Tria—with our proven expertise in PR, KOL Marketing, and Ads.
             </p>
 
-            <CalendlyButton className="mt-6">
-              Book a Meeting
+            <CalendlyButton className="mt-6 group relative overflow-hidden bg-gradient-to-r from-primary via-red-500 to-orange-500 hover:shadow-2xl hover:shadow-primary/40 hover:-translate-y-1 transition-all duration-300 border-0">
+              <span className="relative z-10 flex items-center gap-2">
+                Book a Meeting
+              </span>
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
             </CalendlyButton>
           </motion.div>
 
