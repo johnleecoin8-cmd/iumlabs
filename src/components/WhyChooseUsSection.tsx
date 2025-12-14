@@ -94,7 +94,7 @@ const WhyChooseUsSection = () => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
   }, []);
-  return <section className="relative bg-[#F5F2ED] py-12 overflow-hidden md:py-[20px]">
+  return <section className="relative bg-[#F5F2ED] min-h-screen flex flex-col justify-center py-16 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8">
         {/* Main 2-column grid - image larger */}
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-12">
