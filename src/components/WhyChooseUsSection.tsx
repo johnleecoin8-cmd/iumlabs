@@ -11,19 +11,19 @@ const mediaLogos = [{
   logo: "https://www.coindesk.com/pf/resources/images/favicons/apple-touch-icon.png"
 }, {
   name: "BlockMedia",
-  logo: "https://cdn.blockmedia.co.kr/wp-content/uploads/2024/07/Blockmedia_Logo_name.png"
+  logo: "https://pbs.twimg.com/profile_images/1792823652873138176/z6yFvP6m_400x400.jpg"
 }, {
   name: "TokenPost",
-  logo: "https://s1.tokenpost.com/assets/images/tokenpost_new/common_new/logo.svg"
+  logo: "https://miro.medium.com/v2/resize:fill:176:176/1*pCtFs9n-MWMhU133o7trNA.jpeg"
 }, {
   name: "Coinness",
-  logo: "https://event.coinness.com/awards/images/media/CoinNess.webp"
+  logo: "https://pbs.twimg.com/profile_images/1540241652942946305/nxvR-bqd_400x400.jpg"
 }, {
   name: "Bloomingbit",
-  logo: "https://event.coinness.com/awards/images/media/Bloomingbit.webp"
+  logo: "https://play-lh.googleusercontent.com/TBhM49Oh02xtKqb4NLj2baowFz9LZ3yVheTzK-IvSvx9TEPZtNzqOp_qf6FMYl1UklU"
 }, {
   name: "The Economist",
-  logo: "https://upload.wikimedia.org/wikipedia/commons/a/ac/The_Economist_Logo.svg"
+  logo: "https://pbs.twimg.com/profile_images/879361822794080256/IitPe8Xc_400x400.jpg"
 }];
 const stats = [{
   value: 1000,
@@ -162,10 +162,10 @@ const WhyChooseUsSection = () => {
             <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
             
-            <div className="flex items-center animate-marquee-slow">
-              {[...mediaLogos, ...mediaLogos].map((media, index) => (
+            <div className="flex items-center animate-marquee-slow hover:[animation-play-state:paused]">
+              {[...mediaLogos, ...mediaLogos, ...mediaLogos].map((media, index) => (
                 <div key={index} className="flex items-center gap-3 mx-3 px-4 py-2 bg-white/80 rounded-full border border-gray-200 hover:border-gray-300 transition-all duration-300 flex-shrink-0">
-                  <img src={media.logo} alt={media.name} className="h-6 w-6 object-contain opacity-80 flex-shrink-0" />
+                  <img src={media.logo} alt={media.name} className="h-6 w-6 object-contain rounded-full flex-shrink-0" />
                   <span className="text-gray-700 text-sm font-medium whitespace-nowrap">
                     {media.name}
                   </span>
