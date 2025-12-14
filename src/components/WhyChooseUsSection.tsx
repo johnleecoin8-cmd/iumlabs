@@ -4,10 +4,11 @@ import { useCountUp } from '@/hooks/useCountUp';
 import CalendlyButton from './CalendlyButton';
 import teamPhoto from '@/assets/team-photo.png';
 import coindeskLogo from '@/assets/logos/coindesk.png';
-import blockmediaLogo from '@/assets/logos/blockmedia.png';
+import blockmediaLogo from '@/assets/logos/blockmedia-new.png';
 import economistLogo from '@/assets/logos/economist.png';
 import cointelegraphLogo from '@/assets/logos/cointelegraph.png';
 import bloomingbitLogo from '@/assets/logos/bloomingbit.png';
+import coinnessLogo from '@/assets/logos/coinness.png';
 
 const mediaLogos = [{
   name: "Cointelegraph",
@@ -23,7 +24,7 @@ const mediaLogos = [{
   logo: "https://miro.medium.com/v2/resize:fill:176:176/1*pCtFs9n-MWMhU133o7trNA.jpeg"
 }, {
   name: "Coinness",
-  logo: "https://event.coinness.com/awards/images/media/CoinNess.webp"
+  logo: coinnessLogo
 }, {
   name: "Bloomingbit",
   logo: bloomingbitLogo
