@@ -7,7 +7,7 @@ import polygonHackathon from "@/assets/campaigns/polygon-hackathon.jpg";
 import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
 import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
 import megaethLaunch from "@/assets/campaigns/megaeth-launch.jpg";
-import bybitCompetition from "@/assets/campaigns/bybit-competition.jpg";
+import fogoFest from "@/assets/campaigns/fogo-fest.avif";
 import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
 import triaLaunch from "@/assets/campaigns/tria-launch.jpg";
 
@@ -43,9 +43,9 @@ const campaignImages = [
     code: "MegaETH - Public Sales",
   },
   {
-    src: bybitCompetition,
-    alt: "Bybit Competition",
-    code: "Bybit - Trading Competition Korea",
+    src: fogoFest,
+    alt: "FOGO Fogo Fest 2025",
+    code: "FOGO - Fogo Fest 2025",
   },
   {
     src: peaqSummit,
