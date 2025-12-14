@@ -130,8 +130,9 @@ const WhyChooseUsSection = () => {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight"
             >
-              The Numbers{' '}
-              <span className="text-primary">Speak</span>
+              We Bridge Your<br />
+              Project to{' '}
+              <span className="text-primary">Korea</span>
             </motion.h2>
 
             <motion.p
@@ -140,8 +141,7 @@ const WhyChooseUsSection = () => {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="text-sm md:text-base text-white/60 max-w-md leading-relaxed"
             >
-              CryptoBridge delivers unmatched results in the Korean market. 
-              Our track record speaks for itself.
+              We're a Korean Go-To-Market Agency supporting Crypto Projects since 2025, with a Proven track record of Helping 18+ Brands like BNB, IP, Tria, Kucoin through PR, Social Media, KOL Marketing, and Ads.
             </motion.p>
 
             <motion.div
