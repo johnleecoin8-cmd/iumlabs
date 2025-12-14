@@ -78,7 +78,7 @@ const WhyChooseUsSection = () => {
           className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-6 tracking-widest uppercase"
         >
           <span className="w-6 h-px bg-primary" />
-          About Us
+          Who We Are
           <span className="w-6 h-px bg-primary" />
         </motion.span>
 
@@ -98,7 +98,7 @@ const WhyChooseUsSection = () => {
           transition={{ delay: 0.3, duration: 0.5 }}
           className="text-base md:text-lg text-white/60 max-w-2xl leading-relaxed"
         >
-          We're Korean Web3 Go-To-Market Agency dedicated to achieving successful entry and scalable growth for global projects in the dynamic Korean market.
+          Korea's leading Web3 Go-To-Market agency helping global projects achieve market entry and sustainable growth.
         </motion.p>
       </div>
 
