@@ -247,32 +247,6 @@ const Projects = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
         </div>
 
-        {/* Floating Service Tags - Desktop */}
-        {serviceTags.map((tag, index) => (
-          <motion.div
-            key={index}
-            className={`absolute ${tag.position} hidden lg:block z-10`}
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
-          >
-            <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-amber-500/10 border border-amber-400/20 text-white/70 hover:bg-amber-500/20 hover:border-amber-400/40 hover:text-white transition-all duration-300">
-              {tag.label}
-            </span>
-          </motion.div>
-        ))}
-
-        {/* Floating Service Tags - Mobile */}
-        {mobileServiceTags.map((tag, index) => (
-          <div
-            key={`mobile-${index}`}
-            className={`absolute ${tag.position} lg:hidden z-10`}
-          >
-            <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-amber-500/10 border border-amber-400/20 text-white/60 whitespace-nowrap">
-              {tag.label}
-            </span>
-          </div>
-        ))}
 
         {/* Main Content - Right aligned with project previews on left */}
         <div className="flex-1 flex items-center relative z-10 px-4 sm:px-6 lg:px-16">

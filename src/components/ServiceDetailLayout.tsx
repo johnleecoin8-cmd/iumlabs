@@ -155,25 +155,6 @@ const ServiceDetailLayout = ({
           <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
         </div>
 
-        {/* Floating Tags - lunar-tag-dark style */}
-        <div className="absolute inset-0 pointer-events-none hidden lg:block">
-          {themeConfig.floatingTags.map((tag, index) => (
-            <div
-              key={tag.label}
-              className="absolute lunar-tag-dark text-xs whitespace-nowrap animate-float pointer-events-auto"
-              style={{
-                top: tag.top,
-                left: tag.left,
-                right: tag.right,
-                bottom: tag.bottom,
-                animationDelay: `${index * 0.5}s`,
-                animationDuration: `${4 + index * 0.5}s`,
-              }}
-            >
-              {tag.label}
-            </div>
-          ))}
-        </div>
 
         {/* Content */}
         <div className="container mx-auto px-6 lg:px-16 pt-32 pb-24 relative z-10">
