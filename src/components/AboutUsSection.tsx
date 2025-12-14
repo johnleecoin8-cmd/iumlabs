@@ -1,6 +1,8 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
-import { TrendingUp, Users, Building2, Handshake, Sparkles } from "lucide-react";
+import { TrendingUp, Users, Building2, Handshake } from "lucide-react";
+import { motion } from "framer-motion";
+
 const stats = [{
   value: 18,
   suffix: "+",
@@ -34,6 +36,20 @@ const stats = [{
   description: "AMAs hosted for projects",
   glowColor: "from-purple-500/20 to-pink-500/10"
 }];
+
+// Floating tags for light background
+const floatingTags = [
+  { label: "Korea Expert", top: "8%", left: "5%", delay: 0 },
+  { label: "24/7 Support", top: "15%", right: "8%", delay: 0.2 },
+  { label: "VASP Compliant", bottom: "20%", left: "3%", delay: 0.4 },
+  { label: "120+ KOLs", bottom: "12%", right: "5%", delay: 0.6 },
+];
+
+const mobileFloatingTags = [
+  { label: "Korea Expert", top: "3%", left: "5%", delay: 0 },
+  { label: "120+ KOLs", top: "3%", right: "5%", delay: 0.2 },
+];
+
 const StatCard = ({
   stat,
   index,
@@ -50,9 +66,14 @@ const StatCard = ({
     suffix: stat.suffix,
     isVisible
   });
-  return <div className={`group relative p-6 rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-xl hover:border-primary/40 transition-all duration-500 overflow-hidden hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{
-    transitionDelay: `${index * 100 + 300}ms`
-  }}>
+  
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 30 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
+      className="group relative p-6 rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-xl hover:border-primary/40 transition-all duration-500 overflow-hidden hover:-translate-y-1"
+    >
       {/* Animated gradient background */}
       <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br ${stat.glowColor}`} />
       
@@ -77,47 +98,84 @@ const StatCard = ({
           {stat.description}
         </div>
       </div>
-    </div>;
+    </motion.div>
+  );
 };
+
 const AboutUsSection = () => {
-  const {
-    ref,
-    isVisible
-  } = useScrollAnimation();
-  return <div ref={ref} className="relative px-4 bg-[#F8F8F8] overflow-hidden py-[40px]">
+  const { ref, isVisible } = useScrollAnimation();
+  
+  return (
+    <div ref={ref} className="relative px-4 bg-[#F8F8F8] overflow-hidden py-[40px]">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Gradient Orbs - Lighter for light background */}
-        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[150px] animate-pulse" style={{
-        animationDuration: '8s'
-      }} />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[120px] animate-pulse" style={{
-        animationDuration: '10s',
-        animationDelay: '2s'
-      }} />
+        {/* Gradient Orbs - Subtle for light background */}
+        <div 
+          className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[150px] animate-pulse" 
+          style={{ animationDuration: '8s' }} 
+        />
+        <div 
+          className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] animate-pulse" 
+          style={{ animationDuration: '10s', animationDelay: '2s' }} 
+        />
         
         {/* Grid Pattern */}
-        <div className="absolute inset-0 opacity-[0.05]" style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)`,
-        backgroundSize: '80px 80px'
-      }} />
+        <div 
+          className="absolute inset-0 opacity-[0.03]" 
+          style={{
+            backgroundImage: `linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)`,
+            backgroundSize: '80px 80px'
+          }} 
+        />
       </div>
       
-      {/* Floating Sparkles */}
-      <Sparkles className="absolute top-[20%] left-[8%] w-5 h-5 text-primary/60 animate-pulse hidden md:block" style={{
-      animationDelay: '0s'
-    }} />
-      <Sparkles className="absolute top-[60%] right-[12%] w-6 h-6 text-cyan-500/50 animate-pulse hidden md:block" style={{
-      animationDelay: '1s'
-    }} />
-      <Sparkles className="absolute bottom-[25%] left-[20%] w-4 h-4 text-purple-500/50 animate-pulse hidden md:block" style={{
-      animationDelay: '2s'
-    }} />
+      {/* Floating Tags - Desktop */}
+      {floatingTags.map((tag, index) => (
+        <motion.div
+          key={index}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.5, delay: tag.delay }}
+          className="hidden md:flex absolute items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full shadow-sm text-gray-600 text-xs font-medium hover:border-primary/40 hover:shadow-md hover:scale-105 transition-all duration-300 z-20"
+          style={{
+            top: tag.top,
+            left: tag.left,
+            right: tag.right,
+            bottom: tag.bottom,
+          }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+          {tag.label}
+        </motion.div>
+      ))}
+
+      {/* Floating Tags - Mobile */}
+      {mobileFloatingTags.map((tag, index) => (
+        <motion.div
+          key={`mobile-${index}`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+          transition={{ duration: 0.5, delay: tag.delay }}
+          className="md:hidden flex absolute items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full shadow-sm text-gray-600 text-[10px] font-medium z-20"
+          style={{
+            top: tag.top,
+            left: tag.left,
+            right: tag.right,
+          }}
+        >
+          <span className="w-1 h-1 rounded-full bg-primary" />
+          {tag.label}
+        </motion.div>
+      ))}
 
       <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left - Content */}
-          <div className={`transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+            transition={{ duration: 0.7 }}
+          >
             <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-6 tracking-widest uppercase">
               <span className="w-8 h-px bg-primary" />
               Why Choose Us
@@ -127,20 +185,30 @@ const AboutUsSection = () => {
               We Bridge Your
               <br />
               Project to{" "}
-              <span className="relative">
-                <span className="text-primary">Korea</span>
-                {/* Underline effect */}
-                <span className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary via-cyan-400 to-primary rounded-full opacity-60" />
+              <span className="relative inline-block">
+                <span className="relative z-10 text-white px-3 py-1">Korea</span>
+                {/* Gradient background highlight */}
+                <span className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-cyan-400 rounded-lg -skew-x-3" />
               </span>
             </h2>
             
-            <p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-lg">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg text-gray-600 mb-10 leading-relaxed max-w-lg"
+            >
               Founded by veterans from <span className="text-gray-900 font-semibold bg-gray-100 px-2 py-0.5 rounded">Binance</span> and{" "}
               <span className="text-gray-900 font-semibold bg-gray-100 px-2 py-0.5 rounded">KuCoin</span>, we deliver unmatched expertise 
               in Korean Web3 market entry, community building, and exchange partnerships.
-            </p>
+            </motion.p>
 
-            <div className="group flex items-center gap-6 p-4 rounded-xl bg-white border border-gray-200 shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-500 w-fit">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="group flex items-center gap-6 p-4 rounded-xl bg-white border border-gray-200 shadow-lg hover:shadow-xl hover:border-primary/30 transition-all duration-500 w-fit"
+            >
               <div className="flex -space-x-3">
                 <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-primary/5 border-2 border-primary/40 flex items-center justify-center group-hover:scale-110 group-hover:border-primary/60 transition-all duration-500">
                   <span className="text-primary text-base font-bold">J</span>
@@ -153,18 +221,24 @@ const AboutUsSection = () => {
                 <p className="text-gray-500 text-sm mb-0.5">Founded by</p>
                 <p className="text-gray-900 font-medium">Ex-Binance & Ex-KuCoin Leaders</p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* Right - Stats Grid */}
           <div className="grid grid-cols-2 gap-4">
-            {stats.map((stat, index) => <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />)}
+            {stats.map((stat, index) => (
+              <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />
+            ))}
           </div>
         </div>
 
-
         {/* As Featured In Section */}
-        <div className={`mt-12 pt-12 border-t border-gray-200 transition-all duration-700 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.7, delay: 0.5 }}
+          className="mt-12 pt-12 border-t border-gray-200"
+        >
           <p className="text-center text-gray-500 text-sm uppercase tracking-widest mb-8">
             As Featured In Media
           </p>
@@ -176,36 +250,43 @@ const AboutUsSection = () => {
             
             <div className="flex items-center logo-marquee-slow">
               {[{
-              name: "Cointelegraph",
-              logo: "https://cointelegraph.com/icons/logo/en.svg"
-            }, {
-              name: "CoinDesk",
-              logo: "https://upload.wikimedia.org/wikipedia/commons/4/40/CoinDesk_logo.svg"
-            }, {
-              name: "BlockMedia",
-              logo: "https://cdn.blockmedia.co.kr/wp-content/uploads/2024/07/Blockmedia_Logo_name.png"
-            }, {
-              name: "TokenPost",
-              logo: "https://s1.tokenpost.com/assets/images/tokenpost_new/common_new/logo.svg"
-            }, {
-              name: "Coinness",
-              logo: "https://event.coinness.com/awards/images/media/CoinNess.webp"
-            }, {
-              name: "Bloomingbit",
-              logo: "https://event.coinness.com/awards/images/media/Bloomingbit.webp"
-            }, {
-              name: "The Economist",
-              logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/The_Economist_Logo.svg"
-            }].map((media, index) => <div key={index} className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-white rounded-full border border-gray-200 shadow-sm hover:border-gray-300 hover:shadow-md transition-all duration-300">
+                name: "Cointelegraph",
+                logo: "https://cointelegraph.com/icons/logo/en.svg"
+              }, {
+                name: "CoinDesk",
+                logo: "https://upload.wikimedia.org/wikipedia/commons/4/40/CoinDesk_logo.svg"
+              }, {
+                name: "BlockMedia",
+                logo: "https://cdn.blockmedia.co.kr/wp-content/uploads/2024/07/Blockmedia_Logo_name.png"
+              }, {
+                name: "TokenPost",
+                logo: "https://s1.tokenpost.com/assets/images/tokenpost_new/common_new/logo.svg"
+              }, {
+                name: "Coinness",
+                logo: "https://event.coinness.com/awards/images/media/CoinNess.webp"
+              }, {
+                name: "Bloomingbit",
+                logo: "https://event.coinness.com/awards/images/media/Bloomingbit.webp"
+              }, {
+                name: "The Economist",
+                logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/The_Economist_Logo.svg"
+              }].map((media, index) => (
+                <div 
+                  key={index} 
+                  className="flex items-center gap-2 sm:gap-3 mx-2 sm:mx-3 px-4 sm:px-5 py-2 sm:py-2.5 bg-white rounded-full border border-gray-200 shadow-sm hover:border-gray-300 hover:shadow-md transition-all duration-300"
+                >
                   <img src={media.logo} alt={media.name} className="h-5 w-5 sm:h-6 sm:w-6 object-contain opacity-70 flex-shrink-0" />
                   <span className="text-gray-700 text-xs sm:text-sm font-medium whitespace-nowrap">
                     {media.name}
                   </span>
-                </div>)}
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default AboutUsSection;
