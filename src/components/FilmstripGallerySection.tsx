@@ -49,8 +49,8 @@ const campaignImages = [
   },
   {
     src: peaqSummit,
-    alt: "Peaq Summit",
-    code: "Peaq - DePIN Summit Seoul",
+    alt: "Peaq KBW 2025",
+    code: "Peaq - KBW 2025",
   },
   {
     src: triaLaunch,
