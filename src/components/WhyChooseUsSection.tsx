@@ -61,14 +61,13 @@ const WhyChooseUsSection = () => {
   }, []);
 
   return (
-    <section className="relative min-h-screen overflow-hidden flex flex-col justify-center">
+    <section className="relative min-h-[60vh] overflow-hidden flex flex-col justify-center py-16 md:py-24">
       {/* Image Background with Ken Burns Effect */}
       <motion.div
         className="absolute inset-0 w-full h-full"
         animate={{
-          scale: [1, 1.1, 1],
-          x: ["0%", "-2%", "0%"],
-          y: ["0%", "-1%", "0%"],
+          scale: [1, 1.08, 1],
+          x: ["0%", "-1%", "0%"],
         }}
         transition={{
           duration: 20,
@@ -80,130 +79,81 @@ const WhyChooseUsSection = () => {
           src={seoulHanriver}
           alt="Seoul Han River"
           className="w-full h-full object-cover"
-          style={{ filter: 'brightness(0.35) saturate(0.8)' }}
+          style={{ filter: 'brightness(0.3) saturate(0.8)' }}
         />
       </motion.div>
 
-      {/* Cobalt Blue Gradient Overlay with Light Sweep */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0047AB]/60 via-[#1a1a2e]/40 to-[hsl(0,0%,4%,0.95)]" />
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
-        animate={{ x: ["-100%", "200%"] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "linear", repeatDelay: 4 }}
-      />
+      {/* Cobalt Blue Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0047AB]/50 via-[#1a1a2e]/30 to-background/95" />
 
-      {/* Floating Tags with Infinite Float Animation */}
+      {/* Floating Tags - Desktop */}
       {floatingTags.map((tag) => (
         <motion.div
           key={tag.label}
-          initial={{ opacity: 0, scale: 0.8, y: 0 }}
-          animate={isVisible ? { 
-            opacity: 1, 
-            scale: 1,
-            y: [0, -10, 0],
-          } : { opacity: 0, scale: 0.8 }}
-          transition={{ 
-            opacity: { delay: 0.2 + tag.delay, duration: 0.5 },
-            scale: { delay: 0.2 + tag.delay, duration: 0.5 },
-            y: { delay: 0.2 + tag.delay, duration: 3 + tag.delay, repeat: Infinity, ease: "easeInOut" }
-          }}
-          className="hidden sm:block absolute z-10"
-          style={{
-            top: tag.top,
-            left: tag.left,
-            right: tag.right,
-          }}
-        >
-          <span className="px-4 py-2 text-xs font-medium text-white bg-primary/20 backdrop-blur-md rounded-full border border-primary/40 shadow-lg shadow-primary/20 hover:bg-primary/30 hover:scale-110 transition-all duration-300">
-            {tag.label}
-          </span>
-        </motion.div>
-      ))}
-
-      {/* Floating Tags - Mobile */}
-      {mobileFloatingTags.map((tag) => (
-        <motion.div
-          key={`mobile-${tag.label}`}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isVisible ? { 
             opacity: 1, 
             scale: 1,
-            y: [0, -6, 0],
+            y: [0, -8, 0],
           } : { opacity: 0, scale: 0.8 }}
           transition={{ 
             opacity: { delay: 0.2 + tag.delay, duration: 0.5 },
-            y: { delay: 0.2 + tag.delay, duration: 2.5, repeat: Infinity, ease: "easeInOut" }
+            y: { delay: 0.2 + tag.delay, duration: 3 + tag.delay, repeat: Infinity, ease: "easeInOut" }
           }}
-          className="sm:hidden absolute z-10"
-          style={{
-            top: tag.top,
-            left: tag.left,
-            right: tag.right,
-          }}
+          className="hidden sm:block absolute z-10"
+          style={{ top: tag.top, left: tag.left, right: tag.right }}
         >
-          <span className="px-3 py-1.5 text-[10px] font-medium text-white bg-primary/20 backdrop-blur-md rounded-full border border-primary/40">
+          <span className="px-3 py-1.5 text-xs font-medium text-white bg-primary/20 backdrop-blur-md rounded-full border border-primary/40">
             {tag.label}
           </span>
         </motion.div>
       ))}
 
-      {/* Main Content - 2 Column Layout (Different from Hero's centered layout) */}
-      <div className="container mx-auto px-4 relative z-10 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      {/* Main Content */}
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Left Column - Text */}
           <div>
-            {/* Section Label */}
             <motion.span
               initial={{ opacity: 0, x: -20 }}
               animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
               transition={{ delay: 0.1, duration: 0.5 }}
-              className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-6 tracking-widest uppercase"
+              className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase"
             >
-              <span className="w-8 h-px bg-primary" />
+              <span className="w-6 h-px bg-primary" />
               Why Choose Us
             </motion.span>
 
-            {/* Main Headline with Blur-to-Clear Effect */}
             <motion.h2
-              initial={{ opacity: 0, filter: "blur(12px)", y: 20 }}
-              animate={isVisible ? { opacity: 1, filter: "blur(0px)", y: 0 } : { opacity: 0, filter: "blur(12px)", y: 20 }}
-              transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight"
             >
-              The Numbers{' '}
-              <span className="relative">
-                <span className="text-primary">Speak</span>
-                <motion.span 
-                  className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full"
-                  initial={{ scaleX: 0, opacity: 0 }}
-                  animate={isVisible ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
-                  transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
-                />
-              </span>
+              We Bridge Your<br />
+              Project to{' '}
+              <span className="text-primary">Korea</span>
             </motion.h2>
 
-            {/* Subtext with Blur-to-Clear Effect */}
             <motion.p
-              initial={{ opacity: 0, filter: "blur(8px)", y: 15 }}
-              animate={isVisible ? { opacity: 1, filter: "blur(0px)", y: 0 } : { opacity: 0, filter: "blur(8px)", y: 15 }}
-              transition={{ delay: 0.35, duration: 0.7, ease: "easeOut" }}
-              className="text-base md:text-lg text-white/60 max-w-lg leading-relaxed"
+              initial={{ opacity: 0, y: 15 }}
+              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="text-sm md:text-base text-white/60 max-w-md leading-relaxed"
             >
-              As a Web3 Marketing Agency with a focus on customer satisfaction, 
               CryptoBridge delivers unmatched results in the Korean market. 
               Our track record speaks for itself.
             </motion.p>
 
-            {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: 0.4, duration: 0.5 }}
-              className="mt-8"
+              className="mt-6"
             >
               <a
                 href="/projects"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-primary/10 border border-primary/30 text-primary rounded-full text-sm font-medium hover:bg-primary hover:text-white transition-all duration-300"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary/10 border border-primary/30 text-primary rounded-full text-sm font-medium hover:bg-primary hover:text-white transition-all duration-300"
               >
                 View Our Work
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -214,7 +164,7 @@ const WhyChooseUsSection = () => {
           </div>
 
           {/* Right Column - Stats Grid */}
-          <div className="grid grid-cols-2 gap-4 md:gap-5">
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
             {stats.map((stat, index) => (
               <StatCard key={stat.label} stat={stat} index={index} isVisible={isVisible} />
             ))}
