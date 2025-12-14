@@ -3,15 +3,21 @@ import { useState, useEffect } from 'react';
 import { useCountUp } from '@/hooks/useCountUp';
 import CalendlyButton from './CalendlyButton';
 import teamPhoto from '@/assets/team-photo.png';
+import coindeskLogo from '@/assets/logos/coindesk.png';
+import blockmediaLogo from '@/assets/logos/blockmedia.png';
+import economistLogo from '@/assets/logos/economist.png';
+import cointelegraphLogo from '@/assets/logos/cointelegraph.png';
+import bloomingbitLogo from '@/assets/logos/bloomingbit.png';
+
 const mediaLogos = [{
   name: "Cointelegraph",
-  logo: "https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/erkxwhl1gd48xfhe2yld"
+  logo: cointelegraphLogo
 }, {
   name: "CoinDesk",
-  logo: "https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1455854509/ayzwkdazzzsezhp7pyck.png"
+  logo: coindeskLogo
 }, {
   name: "BlockMedia",
-  logo: "https://public.rootdata.com/images/b6/1726303477780.jpg"
+  logo: blockmediaLogo
 }, {
   name: "TokenPost",
   logo: "https://miro.medium.com/v2/resize:fill:176:176/1*pCtFs9n-MWMhU133o7trNA.jpeg"
@@ -20,11 +26,12 @@ const mediaLogos = [{
   logo: "https://event.coinness.com/awards/images/media/CoinNess.webp"
 }, {
   name: "Bloomingbit",
-  logo: "https://event.coinness.com/awards/images/media/Bloomingbit.webp"
+  logo: bloomingbitLogo
 }, {
   name: "The Economist",
-  logo: "https://images.crunchbase.com/image/upload/c_pad,h_256,w_256,f_auto,q_auto:eco,dpr_1/v1397180377/24e5ba4fffa9a6eb18f8af6b6b74bb33.jpg"
+  logo: economistLogo
 }];
+
 const stats = [{
   value: 1000,
   label: 'Vetted KOLs',
@@ -43,6 +50,7 @@ const stats = [{
   label: 'Projects Launched',
   suffix: '+'
 }];
+
 const StatItem = ({
   stat,
   index,
@@ -78,6 +86,7 @@ const StatItem = ({
       <div className="text-muted-foreground text-sm mt-1">{stat.label}</div>
     </motion.div>;
 };
+
 const WhyChooseUsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   useEffect(() => {
@@ -177,4 +186,5 @@ const WhyChooseUsSection = () => {
       </div>
     </section>;
 };
+
 export default WhyChooseUsSection;
