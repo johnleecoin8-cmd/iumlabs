@@ -59,7 +59,7 @@ const WhyChooseUsSection = () => {
               About Us
             </span>
 
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-8">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-snug mb-8">
               We're a{' '}
               <span className="text-primary">Korea-Based Agency</span>{' '}
               supporting{' '}
