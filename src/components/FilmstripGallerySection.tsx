@@ -2,10 +2,7 @@ import { HoverExpand_001 } from "@/components/ui/expand-on-hover";
 
 // Import actual campaign images from assets
 import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
-import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
-import polygonHackathon from "@/assets/campaigns/polygon-hackathon.jpg";
 import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
-import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
 import megaethLaunch from "@/assets/campaigns/megaeth-launch.jpg";
 import fogoFest from "@/assets/campaigns/fogo-fest.avif";
 import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
@@ -20,24 +17,9 @@ const campaignImages = [
     code: "BNB Chain - Korea Launch Event 2024",
   },
   {
-    src: kucoinCampaign,
-    alt: "KuCoin Campaign",
-    code: "KuCoin - Market Expansion Campaign",
-  },
-  {
-    src: polygonHackathon,
-    alt: "Polygon Hackathon",
-    code: "Polygon - Developer Hackathon Seoul",
-  },
-  {
     src: ondoSeminar,
     alt: "Story Protocol Origin Summit",
     code: "Story Protocol - Origin Summit 2025",
-  },
-  {
-    src: storyWorkshop,
-    alt: "Story Protocol Workshop",
-    code: "Story Protocol - IP Workshop",
   },
   {
     src: megaethLaunch,
