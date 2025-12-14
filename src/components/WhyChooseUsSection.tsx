@@ -1,119 +1,163 @@
 import { motion } from 'framer-motion';
-import { useScrollAnimation } from '@/hooks/useScrollAnimation';
-import { Users, Clock, Globe, TrendingUp, Shield, Award } from "lucide-react";
-import realisticMoon from '@/assets/backgrounds/realistic-moon.png';
-const differentiators = [{
-  icon: Users,
-  stat: "1,000+",
-  label: "Vetted KOLs",
-  description: "Korea's largest verified influencer network"
-}, {
-  icon: Clock,
-  stat: "24/7",
-  label: "Korean Support",
-  description: "Native Korean team available around the clock"
-}, {
-  icon: TrendingUp,
-  stat: "$500M+",
-  label: "Raised for Clients",
-  description: "Total capital raised through TGE campaigns"
-}, {
-  icon: Globe,
-  stat: "50+",
-  label: "Exchange Partners",
-  description: "Direct relationships with major CEX & DEX"
-}, {
-  icon: Shield,
-  stat: "100%",
-  label: "VASP Compliant",
-  description: "Full regulatory compliance for Korean market"
-}, {
-  icon: Award,
-  stat: "200+",
-  label: "Projects Launched",
-  description: "Successful Web3 projects in Korea"
-}];
-const WhyChooseUsSection = () => {
-  const {
-    ref,
-    isVisible
-  } = useScrollAnimation();
-  return <section ref={ref} className="relative min-h-screen overflow-hidden bg-gradient-to-br from-[#1a0a2e] via-[#0f0618] to-[#1a0a2e] px-4 py-[20px]">
-      {/* Moon at right center */}
-      <div className="absolute top-1/2 -right-[10%] md:-right-[5%] lg:right-[0%] -translate-y-1/2 pointer-events-none opacity-50">
-        <motion.div animate={{
-        rotate: 360
-      }} transition={{
-        duration: 180,
-        repeat: Infinity,
-        ease: "linear"
-      }} className="relative">
-          <img src={realisticMoon} alt="" className="w-[400px] h-[400px] md:w-[550px] md:h-[550px] lg:w-[700px] lg:h-[700px] object-cover rounded-full" style={{
-          filter: "saturate(0.3) brightness(0.7) hue-rotate(240deg)"
-        }} />
-        </motion.div>
-      </div>
-      
-      {/* Purple glow effects */}
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-500/20 rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/3 w-[400px] h-[400px] bg-violet-500/15 rounded-full blur-[120px] pointer-events-none" />
+import { useState, useEffect } from 'react';
+import { useCountUp } from '@/hooks/useCountUp';
 
-      <div className="container mx-auto max-w-7xl relative z-10">
-        {/* Header - Unified Style */}
-        <div className={`mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase">
-            <span className="w-8 h-px bg-primary" />
-            Why Choose Us
-          </span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            The Numbers <span className="text-primary">Speak</span>
-          </h2>
-          <p className="text-lg text-white/50 max-w-xl">
-            As a Web3 Marketing Agency with a focus on customer satisfaction, 
-            CryptoBridge delivers unmatched results in the Korean market.
-          </p>
-        </div>
+const floatingTags = [
+  { label: 'Trusted Partner', top: '15%', left: '8%' },
+  { label: '24/7 Support', top: '25%', right: '12%' },
+  { label: 'Korea Expert', top: '45%', left: '5%' },
+  { label: 'VASP Compliant', top: '35%', right: '6%' },
+  { label: 'Exchange Network', top: '55%', right: '10%' },
+];
 
-        {/* Differentiators Grid - Unified Card Style */}
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-          {differentiators.map((item, index) => <motion.div key={item.label} initial={{
-          opacity: 0,
-          y: 30
-        }} animate={isVisible ? {
-          opacity: 1,
-          y: 0
-        } : {
-          opacity: 0,
-          y: 30
-        }} transition={{
-          delay: index * 0.1,
-          duration: 0.5
-        }} className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/40 hover:-translate-y-1 transition-all duration-500 overflow-hidden">
-              {/* Hover Glow */}
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              {/* Icon */}
-              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-primary/20 transition-all duration-300">
-                <item.icon className="w-6 h-6 text-primary" />
-              </div>
-              
-              {/* Stat */}
-              <div className="text-3xl md:text-4xl font-bold text-white mb-1 group-hover:text-primary transition-colors">
-                {item.stat}
-              </div>
-              
-              {/* Label */}
-              <div className="text-white/70 font-medium text-sm mb-2">
-                {item.label}
-              </div>
-              
-              {/* Description */}
-              <p className="text-white/40 text-xs leading-relaxed group-hover:text-white/60 transition-colors">
-                {item.description}
-              </p>
-            </motion.div>)}
-        </div>
+const mobileFloatingTags = [
+  { label: 'Trusted', top: '12%', left: '5%' },
+  { label: 'Korea', top: '20%', right: '5%' },
+  { label: 'VASP', top: '35%', left: '8%' },
+];
+
+const stats = [
+  { value: 1000, label: 'Vetted KOLs', suffix: '+' },
+  { value: 500, label: 'Raised for Clients', prefix: '$', suffix: 'M+' },
+  { value: 50, label: 'Exchange Partners', suffix: '+' },
+  { value: 200, label: 'Projects Launched', suffix: '+' },
+];
+
+const StatItem = ({ stat, index, isVisible }: { stat: typeof stats[0]; index: number; isVisible: boolean }) => {
+  const count = useCountUp({
+    end: stat.value,
+    duration: 2000,
+    isVisible,
+    prefix: stat.prefix,
+    suffix: stat.suffix,
+  });
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+      transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+      className="text-center"
+    >
+      <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1">
+        {count}
       </div>
-    </section>;
+      <div className="text-white/50 text-sm md:text-base">{stat.label}</div>
+    </motion.div>
+  );
 };
+
+const WhyChooseUsSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <section className="relative min-h-screen overflow-hidden flex flex-col justify-center">
+      {/* Video Background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        onLoadedMetadata={(e) => {
+          e.currentTarget.currentTime = 0;
+        }}
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ filter: 'brightness(0.35)' }}
+      >
+        <source src="/videos/hero-background.mp4" type="video/mp4" />
+      </video>
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+
+      {/* Floating Tags - Desktop */}
+      {floatingTags.map((tag, index) => (
+        <motion.div
+          key={tag.label}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+          transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+          className="hidden sm:block absolute z-10"
+          style={{
+            top: tag.top,
+            left: tag.left,
+            right: tag.right,
+          }}
+        >
+          <span className="px-4 py-2 text-xs font-medium text-white/80 bg-[hsl(0,0%,0%,0.6)] backdrop-blur-sm rounded-sm border border-white/10">
+            {tag.label}
+          </span>
+        </motion.div>
+      ))}
+
+      {/* Floating Tags - Mobile */}
+      {mobileFloatingTags.map((tag, index) => (
+        <motion.div
+          key={`mobile-${tag.label}`}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+          transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+          className="sm:hidden absolute z-10"
+          style={{
+            top: tag.top,
+            left: tag.left,
+            right: tag.right,
+          }}
+        >
+          <span className="px-3 py-1.5 text-[10px] font-medium text-white/80 bg-[hsl(0,0%,0%,0.6)] backdrop-blur-sm rounded-sm border border-white/10">
+            {tag.label}
+          </span>
+        </motion.div>
+      ))}
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 relative z-10 flex flex-col items-center justify-center py-20">
+        {/* Section Label */}
+        <motion.span
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.1, duration: 0.5 }}
+          className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-6 tracking-widest uppercase"
+        >
+          <span className="w-8 h-px bg-primary" />
+          Why Choose Us
+        </motion.span>
+
+        {/* Main Headline */}
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white text-center mb-6 leading-tight"
+        >
+          The Numbers <span className="text-primary">Speak</span>
+        </motion.h2>
+
+        {/* Subtext */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ delay: 0.3, duration: 0.5 }}
+          className="text-base md:text-lg text-white/50 max-w-2xl text-center mb-16 md:mb-24"
+        >
+          As a Web3 Marketing Agency with a focus on customer satisfaction, 
+          CryptoBridge delivers unmatched results in the Korean market.
+        </motion.p>
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 w-full max-w-4xl">
+          {stats.map((stat, index) => (
+            <StatItem key={stat.label} stat={stat} index={index} isVisible={isVisible} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
 export default WhyChooseUsSection;
