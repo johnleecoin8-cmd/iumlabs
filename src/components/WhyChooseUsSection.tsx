@@ -5,10 +5,10 @@ import CalendlyButton from './CalendlyButton';
 import teamPhoto from '@/assets/team-photo.png';
 const mediaLogos = [{
   name: "Cointelegraph",
-  logo: "https://cointelegraph.com/icons/logo/en.svg"
+  logo: "https://cointelegraph.com/icons/icon-512x512.png"
 }, {
   name: "CoinDesk",
-  logo: "https://upload.wikimedia.org/wikipedia/commons/4/40/CoinDesk_logo.svg"
+  logo: "https://www.coindesk.com/pf/resources/images/favicons/apple-touch-icon.png"
 }, {
   name: "BlockMedia",
   logo: "https://cdn.blockmedia.co.kr/wp-content/uploads/2024/07/Blockmedia_Logo_name.png"
@@ -23,7 +23,7 @@ const mediaLogos = [{
   logo: "https://event.coinness.com/awards/images/media/Bloomingbit.webp"
 }, {
   name: "The Economist",
-  logo: "https://upload.wikimedia.org/wikipedia/commons/0/05/The_Economist_Logo.svg"
+  logo: "https://upload.wikimedia.org/wikipedia/commons/a/ac/The_Economist_Logo.svg"
 }];
 const stats = [{
   value: 1000,
@@ -162,13 +162,15 @@ const WhyChooseUsSection = () => {
             <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
             <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
             
-            <div className="flex items-center logo-marquee-slow">
-              {mediaLogos.map((media, index) => <div key={index} className="flex items-center gap-2 mx-2 px-3 py-1.5 bg-white/80 rounded-full border border-gray-200 hover:border-gray-300 transition-all duration-300">
-                  <img src={media.logo} alt={media.name} className="h-4 w-4 object-contain opacity-70 flex-shrink-0" />
-                  <span className="text-gray-600 text-xs font-medium whitespace-nowrap">
+            <div className="flex items-center animate-marquee-slow">
+              {[...mediaLogos, ...mediaLogos].map((media, index) => (
+                <div key={index} className="flex items-center gap-3 mx-3 px-4 py-2 bg-white/80 rounded-full border border-gray-200 hover:border-gray-300 transition-all duration-300 flex-shrink-0">
+                  <img src={media.logo} alt={media.name} className="h-6 w-6 object-contain opacity-80 flex-shrink-0" />
+                  <span className="text-gray-700 text-sm font-medium whitespace-nowrap">
                     {media.name}
                   </span>
-                </div>)}
+                </div>
+              ))}
             </div>
           </div>
         </motion.div>
