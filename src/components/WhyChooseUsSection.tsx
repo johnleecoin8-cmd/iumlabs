@@ -143,23 +143,6 @@ const WhyChooseUsSection = () => {
             >
               We're Korean Web3 Go-To-Market Agency dedicated to achieving successful entry and scalable growth for global projects in the dynamic Korean market.
             </motion.p>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: 0.4, duration: 0.5 }}
-              className="mt-6"
-            >
-              <a
-                href="/projects"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-primary/10 border border-primary/30 text-primary rounded-full text-sm font-medium hover:bg-primary hover:text-white transition-all duration-300"
-              >
-                View Our Work
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-            </motion.div>
           </div>
 
           {/* Right Column - Stats Grid */}
