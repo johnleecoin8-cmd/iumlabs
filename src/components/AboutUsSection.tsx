@@ -129,7 +129,7 @@ const AboutUsSection = () => {
     ref,
     isVisible
   } = useScrollAnimation();
-  return <div ref={ref} className="relative px-4 bg-[#F8F8F8] overflow-hidden py-[40px]">
+  return <div ref={ref} className="relative px-4 bg-[#F8F8F8] overflow-hidden py-[20px]">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Gradient Orbs - Subtle for light background */}
@@ -204,17 +204,6 @@ const AboutUsSection = () => {
               <span className="w-8 h-px bg-primary" />
               Why Choose Us
             </span>
-            
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 leading-tight">
-              We Bridge Your
-              <br />
-              Project to{" "}
-              <span className="relative inline-block">
-                <span className="relative z-10 text-white px-3 py-1">Korea</span>
-                {/* Gradient background highlight */}
-                <span className="absolute inset-0 bg-gradient-to-r from-primary via-blue-500 to-cyan-400 rounded-lg -skew-x-3" />
-              </span>
-            </h2>
             
             <motion.p initial={{
             opacity: 0,
