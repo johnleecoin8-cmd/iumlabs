@@ -149,19 +149,7 @@ const AboutUsSection = () => {
       </div>
       
       {/* Floating Tags - Desktop */}
-      {floatingTags.map((tag, index) => (
-        <motion.div 
-          key={`desktop-${index}`} 
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-          transition={{ duration: 0.5, delay: tag.delay }}
-          className="hidden md:flex absolute items-center gap-1.5 px-3 py-1.5 bg-white/90 backdrop-blur-sm border border-gray-200 rounded-full shadow-sm text-gray-600 text-xs font-medium z-20"
-          style={{ top: tag.top, left: tag.left, right: tag.right, bottom: tag.bottom }}
-        >
-          <span className="w-1 h-1 rounded-full bg-primary" />
-          {tag.label}
-        </motion.div>
-      ))}
+      {floatingTags.map((tag, index) => {})}
 
       {/* Floating Tags - Mobile */}
       {mobileFloatingTags.map((tag, index) => <motion.div key={`mobile-${index}`} initial={{

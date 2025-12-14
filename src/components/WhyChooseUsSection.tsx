@@ -94,22 +94,10 @@ const WhyChooseUsSection = () => {
     const timer = setTimeout(() => setIsVisible(true), 300);
     return () => clearTimeout(timer);
   }, []);
-  return <section className="relative bg-[#F5F2ED] min-h-screen flex flex-col justify-start pt-24 md:pt-32 pb-16 overflow-hidden">
+  return <section className="relative bg-[#F5F2ED] py-12 overflow-hidden md:py-[20px]">
       <div className="container mx-auto px-4 md:px-8">
         {/* Main 2-column grid - image larger */}
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-16">
-          
-          {/* Stats Grid - 2x2 */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="order-3 lg:order-none lg:col-span-2 grid grid-cols-2 md:grid-cols-4 gap-6 mt-8"
-          >
-            {stats.map((stat, index) => (
-              <StatItem key={index} stat={stat} index={index} isVisible={isVisible} />
-            ))}
-          </motion.div>
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-12">
           {/* Left Column - Text Content */}
           <motion.div initial={{
           opacity: 0,
