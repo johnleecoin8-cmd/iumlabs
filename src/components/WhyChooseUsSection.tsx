@@ -118,7 +118,7 @@ const WhyChooseUsSection = () => {
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-snug mb-3">
               We bridge global{' '}
               <span className="text-primary">Web3 projects</span>{' '}
-              to scalable growth in the{' '}
+              to growth in the{' '}
               <span className="text-primary">Korean market</span>.
             </h2>
             <p className="text-base md:text-lg text-gray-600 leading-normal mb-3">
