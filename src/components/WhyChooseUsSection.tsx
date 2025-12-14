@@ -97,7 +97,7 @@ const WhyChooseUsSection = () => {
   return <section className="relative bg-[#F5F2ED] py-12 overflow-hidden md:py-[20px]">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Main 2-column grid - image larger */}
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center mb-8">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start mb-8">
           {/* Left Column - Text Content */}
           <motion.div initial={{
           opacity: 0,
