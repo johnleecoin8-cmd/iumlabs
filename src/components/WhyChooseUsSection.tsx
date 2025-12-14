@@ -141,7 +141,7 @@ const WhyChooseUsSection = () => {
               transition={{ delay: 0.3, duration: 0.5 }}
               className="text-sm md:text-base text-white/60 max-w-md leading-relaxed"
             >
-              We're a Korean Go-To-Market Agency supporting Crypto Projects since 2025, with a Proven track record of Helping 18+ Brands like BNB, IP, Tria, Kucoin through PR, Social Media, KOL Marketing, and Ads.
+              We're Korean Web3 Go-To-Market Agency dedicated to achieving successful entry and scalable growth for global projects in the dynamic Korean market.
             </motion.p>
 
             <motion.div
