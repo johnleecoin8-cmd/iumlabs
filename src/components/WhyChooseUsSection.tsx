@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useCountUp } from '@/hooks/useCountUp';
 import CalendlyButton from './CalendlyButton';
-import seoulHanriver from '@/assets/backgrounds/seoul-hanriver-twilight.jpg';
+import teamPhoto from '@/assets/team-photo.png';
 
 const stats = [
   { value: 1000, label: 'Vetted KOLs', suffix: '+' },
@@ -91,7 +91,7 @@ const WhyChooseUsSection = () => {
           >
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src={seoulHanriver}
+                src={teamPhoto}
                 alt="CryptoBridge Korea Team"
                 className="w-full h-[300px] md:h-[400px] lg:h-[500px] object-cover"
               />
