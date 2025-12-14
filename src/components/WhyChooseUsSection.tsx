@@ -22,6 +22,13 @@ const stats = [
   { value: 200, label: 'Projects Launched', suffix: '+' },
 ];
 
+const cardGradients = [
+  'from-blue-500/20 via-cyan-500/10 to-transparent',
+  'from-purple-500/20 via-pink-500/10 to-transparent',
+  'from-emerald-500/20 via-teal-500/10 to-transparent',
+  'from-orange-500/20 via-amber-500/10 to-transparent',
+];
+
 const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0]; index: number; isVisible: boolean }) => {
   const count = useCountUp({
     end: stat.value,
@@ -33,21 +40,62 @@ const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0]; index: nu
   
   return (
     <motion.div
-      initial={{ opacity: 0, rotateY: -15, scale: 0.9 }}
-      animate={isVisible ? { opacity: 1, rotateY: 0, scale: 1 } : { opacity: 0, rotateY: -15, scale: 0.9 }}
-      transition={{ delay: 0.4 + index * 0.15, duration: 0.6, type: "spring", stiffness: 100 }}
+      initial={{ opacity: 0, rotateY: -15, scale: 0.9, y: 30 }}
+      animate={isVisible ? { opacity: 1, rotateY: 0, scale: 1, y: 0 } : { opacity: 0, rotateY: -15, scale: 0.9, y: 30 }}
+      transition={{ delay: 0.4 + index * 0.15, duration: 0.7, type: "spring", stiffness: 80 }}
       whileHover={{ 
-        scale: 1.05, 
-        boxShadow: "0 0 40px rgba(59,130,246,0.3)",
-        borderColor: "rgba(59,130,246,0.5)"
+        scale: 1.08, 
+        y: -8,
+        rotateX: 5,
+        boxShadow: "0 20px 60px rgba(59,130,246,0.4)",
       }}
-      className="bg-white/5 backdrop-blur-md rounded-2xl p-5 md:p-6 border border-white/10 transition-all duration-300 group cursor-pointer"
+      className={`relative overflow-hidden bg-gradient-to-br ${cardGradients[index]} backdrop-blur-xl rounded-2xl p-6 md:p-8 border border-white/20 transition-all duration-500 group cursor-pointer`}
       style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
     >
-      <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-white group-hover:text-primary transition-colors duration-300">
-        {count}
+      {/* Animated glow ring */}
+      <motion.div 
+        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(147,51,234,0.2), rgba(59,130,246,0.3))',
+          filter: 'blur(20px)',
+        }}
+      />
+      
+      {/* Shine sweep effect */}
+      <motion.div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100"
+        initial={{ x: '-100%' }}
+        whileHover={{ x: '200%' }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        style={{
+          background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)',
+          width: '50%',
+        }}
+      />
+      
+      {/* Corner accent */}
+      <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-full opacity-50 group-hover:opacity-100 transition-opacity duration-300" />
+      
+      {/* Content */}
+      <div className="relative z-10">
+        <motion.div 
+          className="text-3xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-white via-white to-white/80 bg-clip-text text-transparent group-hover:from-primary group-hover:via-blue-400 group-hover:to-cyan-400 transition-all duration-500"
+          animate={isVisible ? { 
+            textShadow: ["0 0 20px rgba(59,130,246,0)", "0 0 30px rgba(59,130,246,0.3)", "0 0 20px rgba(59,130,246,0)"]
+          } : {}}
+          transition={{ duration: 2, repeat: Infinity, repeatDelay: 1 }}
+        >
+          {count}
+        </motion.div>
+        <div className="text-white/60 text-sm md:text-base mt-2 font-medium tracking-wide group-hover:text-white/80 transition-colors duration-300">
+          {stat.label}
+        </div>
       </div>
-      <div className="text-white/50 text-sm mt-1">{stat.label}</div>
+      
+      {/* Bottom border glow */}
+      <motion.div 
+        className="absolute bottom-0 left-1/2 -translate-x-1/2 h-px w-0 group-hover:w-3/4 bg-gradient-to-r from-transparent via-primary to-transparent transition-all duration-500"
+      />
     </motion.div>
   );
 };
