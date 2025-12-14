@@ -145,7 +145,7 @@ const WhyChooseUsSection = () => {
           delay: 0.2
         }} className="order-1 lg:order-2">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <img src={teamPhoto} alt="CryptoBridge Korea Team" className="w-full h-[450px] md:h-[520px] lg:h-[580px] object-cover object-[center_45%]" />
+              <img src={teamPhoto} alt="CryptoBridge Korea Team" className="w-full h-[450px] md:h-[520px] lg:h-[580px] object-cover object-[center_50%]" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
             </div>
           </motion.div>
