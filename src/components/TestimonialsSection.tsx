@@ -71,22 +71,14 @@ const TestimonialsSection = () => {
   return (
     <section 
       ref={ref} 
-      className="py-32 px-4 bg-[#F5F2ED] overflow-hidden"
+      className="py-[20px] px-4 bg-[#F5F2ED] overflow-hidden"
       onMouseEnter={() => setIsAutoPlaying(false)}
       onMouseLeave={() => setIsAutoPlaying(true)}
     >
       <div className="container mx-auto max-w-7xl">
         {/* Header - Unified Style */}
         <div className={`flex flex-col md:flex-row md:items-end md:justify-between mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div>
-            <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase">
-              <span className="w-8 h-px bg-primary" />
-              Testimonials
-            </span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900">
-              What Our <span className="text-primary">Clients Say</span>
-            </h2>
-          </div>
+          <div></div>
 
           {/* Navigation Controls */}
           <div className="flex items-center gap-4 mt-6 md:mt-0">

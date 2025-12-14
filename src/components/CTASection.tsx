@@ -81,7 +81,7 @@ const CTASection = () => {
   };
   return <div ref={ref} className="flex-1">
       {/* Hero CTA Section - Simplified with Unified Design */}
-      <div className="relative bg-gradient-to-br from-primary via-primary to-blue-600 py-20 md:py-32 px-4 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-primary via-primary to-blue-600 py-[20px] px-4 overflow-hidden">
         {/* Subtle Background Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-400/20 rounded-full blur-[120px]" />
@@ -89,18 +89,6 @@ const CTASection = () => {
         </div>
 
         <div className={`container mx-auto max-w-5xl text-center relative z-10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Badge - Unified Style */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/[0.08] border border-white/[0.15] mb-6 md:mb-8">
-            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-white/90 text-sm font-medium">Free 30-min Strategy Call</span>
-          </div>
-
-          {/* Title */}
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight">
-            Ready to Conquer
-            <br />
-            <span className="text-white/80">the Korean Market?</span>
-          </h2>
           
           <p className="text-base md:text-xl text-white/70 max-w-2xl mx-auto mb-8 md:mb-10 px-4">
             Join 200+ Web3 projects that have successfully launched in Korea with our strategic guidance and unmatched network.
@@ -145,7 +133,7 @@ const CTASection = () => {
       </div>
 
       {/* Contact Form Section - Unified Dark Theme */}
-      <div className="relative bg-[hsl(0,0%,4%)] py-16 px-4 overflow-hidden md:py-[20px]">
+      <div className="relative bg-[hsl(0,0%,4%)] py-[20px] px-4 overflow-hidden">
         <div className={`container mx-auto max-w-6xl relative z-10 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Section Header - Unified Style */}
           <div className="text-center mb-10 md:mb-16">
