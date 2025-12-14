@@ -24,7 +24,7 @@ import peaqSummitImg from "@/assets/campaigns/peaq-summit.jpg";
 import storyWorkshopImg from "@/assets/campaigns/story-workshop.jpg";
 import megaethLaunchImg from "@/assets/campaigns/megaeth-launch.jpg";
 import triaLaunchImg from "@/assets/campaigns/tria-launch.jpg";
-import bybitCompetitionImg from "@/assets/campaigns/bybit-competition.jpg";
+import fogoFestImg from "@/assets/campaigns/fogo-fest.avif";
 
 // Import project background images
 import bnbBg from "@/assets/projects/bnb-bg.jpg";
@@ -422,7 +422,7 @@ const projectsData: Record<string, {
     services: ["Market Entry Strategy", "User Acquisition", "VIP Relations", "Brand Marketing"],
     shortServices: ["KOLs", "PR", "VIP"],
     gallery: [
-      { src: bybitCompetitionImg, title: "Trading Campaign", description: "Zero-fee promotion launch with massive reach" },
+      { src: fogoFestImg, title: "Trading Campaign", description: "Zero-fee promotion launch with massive reach" },
       { src: "https://images.unsplash.com/photo-1560472355-536de3962603?w=800&h=600&fit=crop", title: "VIP Program", description: "Exclusive benefits for high-volume traders" },
       { src: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&h=600&fit=crop", title: "Esports Partnership", description: "Korean gaming community sponsorship events" },
       { src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop", title: "Brand Campaign", description: "Major marketing push across Korean channels" }
