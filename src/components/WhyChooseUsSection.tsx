@@ -95,9 +95,9 @@ const WhyChooseUsSection = () => {
     return () => clearTimeout(timer);
   }, []);
   return <section className="relative bg-[#F5F2ED] py-12 overflow-hidden md:py-[20px]">
-      <div className="container mx-auto px-4 md:px-8">
+      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Main 2-column grid - image larger */}
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center mb-12">
+        <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center mb-8">
           {/* Left Column - Text Content */}
           <motion.div initial={{
           opacity: 0,
@@ -115,16 +115,16 @@ const WhyChooseUsSection = () => {
               About Us
             </span>
 
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-relaxed mb-4">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-snug mb-3">
               We bridge global{' '}
               <span className="text-primary">Web3 projects</span>{' '}
               to scalable growth in the{' '}
               <span className="text-primary">Korean market</span>.
             </h2>
-            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-4">
+            <p className="text-base md:text-lg text-gray-600 leading-normal mb-3">
               Established in 2025, we have rapidly become a trusted partner, empowering 18+ brands—including BNB, Bybit, IP, and Tria—with our proven expertise in PR, KOL Marketing, and Ads.
             </p>
-            <p className="text-base md:text-lg text-gray-700 font-medium mb-8">
+            <p className="text-base md:text-lg text-gray-700 font-medium mb-6">
               Founded by former executives from Binance and KuCoin
             </p>
 
