@@ -94,7 +94,7 @@ const HoverExpand_001 = ({ images, className }: HoverExpandProps) => {
           return (
             <motion.div
               key={index}
-              className="relative h-full overflow-hidden rounded-xl flex-shrink-0"
+              className="relative h-full overflow-hidden rounded-xl flex-shrink-0 border border-white/20"
               style={{ width: config.cardWidth }}
               animate={{ 
                 scale: isActive ? 1 : 0.95,
