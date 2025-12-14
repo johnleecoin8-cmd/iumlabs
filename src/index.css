@@ -344,6 +344,10 @@
   .logo-marquee {
     animation: marquee 30s linear infinite;
   }
+
+  .animate-marquee-slow {
+    animation: marquee 40s linear infinite;
+  }
   
   @keyframes marquee {
     0% { transform: translateX(0); }
