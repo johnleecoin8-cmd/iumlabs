@@ -1,17 +1,18 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { useCountUp } from '@/hooks/useCountUp';
+import seoulHanriver from '@/assets/backgrounds/seoul-hanriver-twilight.jpg';
 
 const floatingTags = [
-  { label: 'Trusted Partner', top: '12%', left: '5%' },
-  { label: '24/7 Support', top: '18%', right: '8%' },
-  { label: 'Korea Expert', top: '75%', left: '8%' },
-  { label: 'VASP Compliant', top: '70%', right: '5%' },
+  { label: 'Trusted Partner', top: '12%', left: '5%', delay: 0 },
+  { label: '24/7 Support', top: '18%', right: '8%', delay: 0.5 },
+  { label: 'Korea Expert', top: '75%', left: '8%', delay: 1 },
+  { label: 'VASP Compliant', top: '70%', right: '5%', delay: 1.5 },
 ];
 
 const mobileFloatingTags = [
-  { label: 'Trusted', top: '8%', left: '5%' },
-  { label: 'Korea', top: '8%', right: '5%' },
+  { label: 'Trusted', top: '8%', left: '5%', delay: 0 },
+  { label: 'Korea', top: '8%', right: '5%', delay: 0.3 },
 ];
 
 const stats = [
@@ -32,10 +33,16 @@ const StatCard = ({ stat, index, isVisible }: { stat: typeof stats[0]; index: nu
   
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20, scale: 0.95 }}
-      animate={isVisible ? { opacity: 1, y: 0, scale: 1 } : { opacity: 0, y: 20, scale: 0.95 }}
-      transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-      className="bg-white/5 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-white/10 hover:border-primary/30 hover:bg-white/10 transition-all duration-300 group"
+      initial={{ opacity: 0, rotateY: -15, scale: 0.9 }}
+      animate={isVisible ? { opacity: 1, rotateY: 0, scale: 1 } : { opacity: 0, rotateY: -15, scale: 0.9 }}
+      transition={{ delay: 0.4 + index * 0.15, duration: 0.6, type: "spring", stiffness: 100 }}
+      whileHover={{ 
+        scale: 1.05, 
+        boxShadow: "0 0 40px rgba(59,130,246,0.3)",
+        borderColor: "rgba(59,130,246,0.5)"
+      }}
+      className="bg-white/5 backdrop-blur-md rounded-2xl p-5 md:p-6 border border-white/10 transition-all duration-300 group cursor-pointer"
+      style={{ transformStyle: "preserve-3d", perspective: "1000px" }}
     >
       <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-white group-hover:text-primary transition-colors duration-300">
         {count}
@@ -55,31 +62,51 @@ const WhyChooseUsSection = () => {
 
   return (
     <section className="relative min-h-screen overflow-hidden flex flex-col justify-center">
-      {/* Video Background */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        onLoadedMetadata={(e) => {
-          e.currentTarget.currentTime = 0;
+      {/* Image Background with Ken Burns Effect */}
+      <motion.div
+        className="absolute inset-0 w-full h-full"
+        animate={{
+          scale: [1, 1.1, 1],
+          x: ["0%", "-2%", "0%"],
+          y: ["0%", "-1%", "0%"],
         }}
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: 'brightness(0.3)' }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
       >
-        <source src="/videos/hero-background.mp4" type="video/mp4" />
-      </video>
+        <img
+          src={seoulHanriver}
+          alt="Seoul Han River"
+          className="w-full h-full object-cover"
+          style={{ filter: 'brightness(0.35) saturate(0.8)' }}
+        />
+      </motion.div>
 
-      {/* Cobalt Blue Gradient Overlay - Differentiated from Hero */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0047AB]/50 via-[#1a1a2e]/30 to-[hsl(0,0%,4%,0.95)]" />
+      {/* Cobalt Blue Gradient Overlay with Light Sweep */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#0047AB]/60 via-[#1a1a2e]/40 to-[hsl(0,0%,4%,0.95)]" />
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent"
+        animate={{ x: ["-100%", "200%"] }}
+        transition={{ duration: 8, repeat: Infinity, ease: "linear", repeatDelay: 4 }}
+      />
 
-      {/* Floating Tags - Primary Color Style (Different from Hero's dark tags) */}
-      {floatingTags.map((tag, index) => (
+      {/* Floating Tags with Infinite Float Animation */}
+      {floatingTags.map((tag) => (
         <motion.div
           key={tag.label}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-          transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+          initial={{ opacity: 0, scale: 0.8, y: 0 }}
+          animate={isVisible ? { 
+            opacity: 1, 
+            scale: 1,
+            y: [0, -10, 0],
+          } : { opacity: 0, scale: 0.8 }}
+          transition={{ 
+            opacity: { delay: 0.2 + tag.delay, duration: 0.5 },
+            scale: { delay: 0.2 + tag.delay, duration: 0.5 },
+            y: { delay: 0.2 + tag.delay, duration: 3 + tag.delay, repeat: Infinity, ease: "easeInOut" }
+          }}
           className="hidden sm:block absolute z-10"
           style={{
             top: tag.top,
@@ -87,19 +114,26 @@ const WhyChooseUsSection = () => {
             right: tag.right,
           }}
         >
-          <span className="px-4 py-2 text-xs font-medium text-white bg-primary/15 backdrop-blur-sm rounded-full border border-primary/30 shadow-lg shadow-primary/10">
+          <span className="px-4 py-2 text-xs font-medium text-white bg-primary/20 backdrop-blur-md rounded-full border border-primary/40 shadow-lg shadow-primary/20 hover:bg-primary/30 hover:scale-110 transition-all duration-300">
             {tag.label}
           </span>
         </motion.div>
       ))}
 
       {/* Floating Tags - Mobile */}
-      {mobileFloatingTags.map((tag, index) => (
+      {mobileFloatingTags.map((tag) => (
         <motion.div
           key={`mobile-${tag.label}`}
           initial={{ opacity: 0, scale: 0.8 }}
-          animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-          transition={{ delay: 0.2 + index * 0.1, duration: 0.5 }}
+          animate={isVisible ? { 
+            opacity: 1, 
+            scale: 1,
+            y: [0, -6, 0],
+          } : { opacity: 0, scale: 0.8 }}
+          transition={{ 
+            opacity: { delay: 0.2 + tag.delay, duration: 0.5 },
+            y: { delay: 0.2 + tag.delay, duration: 2.5, repeat: Infinity, ease: "easeInOut" }
+          }}
           className="sm:hidden absolute z-10"
           style={{
             top: tag.top,
@@ -107,7 +141,7 @@ const WhyChooseUsSection = () => {
             right: tag.right,
           }}
         >
-          <span className="px-3 py-1.5 text-[10px] font-medium text-white bg-primary/15 backdrop-blur-sm rounded-full border border-primary/30">
+          <span className="px-3 py-1.5 text-[10px] font-medium text-white bg-primary/20 backdrop-blur-md rounded-full border border-primary/40">
             {tag.label}
           </span>
         </motion.div>
@@ -129,11 +163,11 @@ const WhyChooseUsSection = () => {
               Why Choose Us
             </motion.span>
 
-            {/* Main Headline */}
+            {/* Main Headline with Blur-to-Clear Effect */}
             <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
+              initial={{ opacity: 0, filter: "blur(12px)", y: 20 }}
+              animate={isVisible ? { opacity: 1, filter: "blur(0px)", y: 0 } : { opacity: 0, filter: "blur(12px)", y: 20 }}
+              transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
             >
               The Numbers{' '}
@@ -141,18 +175,18 @@ const WhyChooseUsSection = () => {
                 <span className="text-primary">Speak</span>
                 <motion.span 
                   className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-primary to-primary/50 rounded-full"
-                  initial={{ scaleX: 0 }}
-                  animate={isVisible ? { scaleX: 1 } : { scaleX: 0 }}
-                  transition={{ delay: 0.5, duration: 0.6 }}
+                  initial={{ scaleX: 0, opacity: 0 }}
+                  animate={isVisible ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
+                  transition={{ delay: 0.6, duration: 0.8, ease: "easeOut" }}
                 />
               </span>
             </motion.h2>
 
-            {/* Subtext */}
+            {/* Subtext with Blur-to-Clear Effect */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: 0.3, duration: 0.5 }}
+              initial={{ opacity: 0, filter: "blur(8px)", y: 15 }}
+              animate={isVisible ? { opacity: 1, filter: "blur(0px)", y: 0 } : { opacity: 0, filter: "blur(8px)", y: 15 }}
+              transition={{ delay: 0.35, duration: 0.7, ease: "easeOut" }}
               className="text-base md:text-lg text-white/60 max-w-lg leading-relaxed"
             >
               As a Web3 Marketing Agency with a focus on customer satisfaction, 
