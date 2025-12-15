@@ -18,6 +18,7 @@ import triaLogo from "@/assets/logos/tria-official.png";
 import bybitLogo from "@/assets/logos/bybit.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import mantraLogo from "@/assets/logos/mantra.png";
+import fogoLogo from "@/assets/logos/fogo.png";
 
 // Import background images
 import bnbBg from "@/assets/projects/bnb-bg.jpg";
@@ -136,7 +137,7 @@ const cases = [
   },
   {
     name: "FOGO",
-    logo: fogoBg,
+    logo: fogoLogo,
     bgImage: fogoBg,
     slug: "fogo",
     result: "Fogo Fest 2025 Success",
@@ -144,7 +145,6 @@ const cases = [
     glowColor: "#FF4500",
     description: "Launch event and community activation for FOGO ecosystem in Korean market.",
     services: ["Event Marketing", "Community Building", "Launch Campaign"],
-    useCampaignImg: true,
   },
   {
     name: "zkPass",
@@ -185,7 +185,7 @@ const clientLogos = [
   { name: "Story Protocol", logo: storyLogo },
   { name: "MegaETH", logo: megaethLogo },
   { name: "Tria", logo: triaLogo },
-  { name: "FOGO", logo: fogoBg },
+  { name: "FOGO", logo: fogoLogo },
   { name: "zkPass", logo: zkpassBg },
 ];
 
