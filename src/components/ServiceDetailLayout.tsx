@@ -178,10 +178,10 @@ const ServiceDetailLayout = ({
 
             {/* CTA Button - Service Accent Color */}
             <CalendlyButton 
-              className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-2xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl backdrop-blur-sm"
               style={{ 
                 backgroundColor: themeConfig.accentColor,
-                boxShadow: `0 10px 40px ${themeConfig.accentColor}40`,
+                boxShadow: `0 15px 50px ${themeConfig.accentColor}50`,
               }}
             >
               <Calendar className="w-5 h-5" />
@@ -197,12 +197,14 @@ const ServiceDetailLayout = ({
         </div>
 
         {/* Client Logo Marquee */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm border-t border-white/20 py-6 overflow-hidden">
+        <div className="absolute bottom-0 left-0 right-0 bg-white/[0.08] backdrop-blur-xl border-t border-white/[0.15] py-6 overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
           <div className="flex animate-marquee whitespace-nowrap">
             {[...clientLogos, ...clientLogos, ...clientLogos].map((logo, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 mx-8 flex items-center justify-center"
+                className="flex-shrink-0 mx-4 px-6 py-3 bg-white/[0.05] backdrop-blur-sm rounded-2xl border border-white/[0.1] hover:bg-white/[0.1] hover:border-white/[0.2] transition-all duration-300"
               >
                 <img
                   src={logo.src}
@@ -228,7 +230,7 @@ const ServiceDetailLayout = ({
                 {aboutText}
               </p>
               <CalendlyButton 
-                className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 hover:scale-105"
+                className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-2xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 style={{ backgroundColor: themeConfig.accentColor }}
               >
                 <Calendar className="w-5 h-5" />
@@ -238,7 +240,7 @@ const ServiceDetailLayout = ({
           </div>
 
           {/* Right Column - Image/Pattern */}
-          <div className="w-full lg:w-1/2 relative min-h-[400px] lg:min-h-full">
+          <div className="w-full lg:w-1/2 relative min-h-[400px] lg:min-h-full overflow-hidden rounded-tl-3xl rounded-bl-3xl">
             {aboutImage ? (
               <div className="absolute inset-0">
                 <img 
@@ -253,7 +255,7 @@ const ServiceDetailLayout = ({
                   }}
                 />
                 {/* Open Hours Card */}
-                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/15 backdrop-blur-md rounded-xl px-6 py-5 border border-white/25">
+                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/[0.12] backdrop-blur-xl rounded-2xl px-6 py-5 border border-white/[0.2] shadow-2xl">
                   <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
                   <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
                 </div>
@@ -274,7 +276,7 @@ const ServiceDetailLayout = ({
                   <div className="absolute top-[65%] left-[55%] w-32 h-32 rounded-full border border-white/30" />
                 </div>
                 {/* Open Hours Card */}
-                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/15 backdrop-blur-md rounded-xl px-6 py-5 border border-white/25">
+                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/[0.12] backdrop-blur-xl rounded-2xl px-6 py-5 border border-white/[0.2] shadow-2xl">
                   <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
                   <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
                 </div>
@@ -325,14 +327,14 @@ const ServiceDetailLayout = ({
             </div>
 
             {/* Right - Process Steps */}
-            <div className="space-y-0">
+            <div className="space-y-4">
               {processSteps.map((step, index) => (
                 <div
                   key={step.number}
-                  className="scroll-reveal"
+                  className="scroll-reveal bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-lg hover:border-slate-200 transition-all duration-300"
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  <div className="flex justify-between items-start py-8 gap-6">
+                  <div className="flex justify-between items-start gap-6">
                     <div className="flex-1">
                       <h3 className="text-xl font-medium text-slate-900 mb-3">
                         {step.title}
@@ -342,15 +344,15 @@ const ServiceDetailLayout = ({
                       </p>
                     </div>
                     <span 
-                      className="text-sm whitespace-nowrap flex-shrink-0 px-3 py-1 rounded-full text-white font-medium"
-                      style={{ backgroundColor: themeConfig.accentColor }}
+                      className="text-sm whitespace-nowrap flex-shrink-0 px-4 py-2 rounded-2xl text-white font-medium shadow-lg"
+                      style={{ 
+                        backgroundColor: themeConfig.accentColor,
+                        boxShadow: `0 4px 20px ${themeConfig.accentColor}40`
+                      }}
                     >
                       {step.number}
                     </span>
                   </div>
-                  {index < processSteps.length - 1 && (
-                    <div className="border-b border-dashed border-slate-300" />
-                  )}
                 </div>
               ))}
             </div>
@@ -378,53 +380,30 @@ const ServiceDetailLayout = ({
           <div className="border-b border-dashed border-slate-300 mb-4" />
 
           {/* Service Links */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {otherServices.map((service, index) => (
             <Link
               key={service.slug}
               to={`/services/${service.slug}`}
-              className="block scroll-reveal"
+              className="block scroll-reveal group"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="py-8 border-b border-dashed border-slate-300 flex justify-between items-center group cursor-pointer hover:bg-slate-50 transition-colors duration-300 px-4 -mx-4 rounded-lg">
-                {index % 2 === 0 ? (
-                  <>
-                    <h3 
-                      className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 transition-colors duration-300 group-hover:translate-x-2 transform"
-                      style={{ color: undefined }}
-                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
-                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                    >
-                      {service.title}
-                    </h3>
-                    <span 
-                      className="text-slate-400 text-2xl md:text-3xl font-light transition-colors duration-300"
-                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
-                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                    >
-                      {service.number}
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <span 
-                      className="text-slate-400 text-2xl md:text-3xl font-light transition-colors duration-300"
-                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
-                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                    >
-                      {service.number}
-                    </span>
-                    <h3 
-                      className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 transition-colors duration-300 group-hover:-translate-x-2 transform text-right"
-                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
-                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                    >
-                      {service.title}
-                    </h3>
-                  </>
-                )}
+              <div className="p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 hover:-translate-y-1">
+                <span 
+                  className="text-sm font-medium px-3 py-1 rounded-full text-white inline-block mb-4"
+                  style={{ backgroundColor: themeConfig.accentColor }}
+                >
+                  {service.number}
+                </span>
+                <h3 
+                  className="text-xl md:text-2xl font-light text-slate-900 transition-colors duration-300 group-hover:text-slate-700"
+                >
+                  {service.title}
+                </h3>
               </div>
             </Link>
           ))}
+          </div>
         </div>
       </section>
 
