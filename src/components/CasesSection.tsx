@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
-import polygonLogo from "@/assets/logos/polygon.svg";
-import ondoLogo from "@/assets/logos/ondo.svg";
 import peaqLogo from "@/assets/logos/peaq.svg";
 import storyLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
@@ -18,6 +16,8 @@ import fogoImg from "@/assets/campaigns/fogo-fest.avif";
 import lbankImg from "@/assets/campaigns/lbank-festival.jpg";
 import zkpassImg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import openledgerImg from "@/assets/campaigns/openledger-interview.jpg";
+import saharaImg from "@/assets/campaigns/sahara-ai.jpg";
+import mantraImg from "@/assets/campaigns/mantra.jpg";
 
 const featuredCases = [
   {
@@ -40,21 +40,23 @@ const featuredCases = [
   },
   {
     number: "03",
-    name: "Polygon",
-    logo: polygonLogo,
-    slug: "polygon",
-    category: "Layer 2",
-    result: "$2M Korean TVL in 30 Days",
-    description: "Community growth from 0 to 50K Korean users with targeted developer relations and DeFi marketing.",
+    name: "Sahara AI",
+    logo: saharaImg,
+    slug: "sahara-ai",
+    category: "AI",
+    result: "Korean AI x Web3 Launch",
+    description: "AI blockchain platform launch with Korean developer community and enterprise partnerships.",
+    useCampaignImg: true,
   },
   {
     number: "04",
-    name: "Ondo Finance",
-    logo: ondoLogo,
-    slug: "ondo",
+    name: "Mantra",
+    logo: mantraImg,
+    slug: "mantra",
     category: "RWA",
-    result: "100K+ Korean Community",
-    description: "RWA education campaign targeting both retail and institutional Korean investors.",
+    result: "Korean RWA Expansion",
+    description: "Real World Assets platform expansion targeting Korean institutional investors.",
+    useCampaignImg: true,
   },
   {
     number: "05",
