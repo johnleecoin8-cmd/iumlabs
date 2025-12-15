@@ -3032,52 +3032,80 @@ const Research = () => {
         </div>
       </section>
 
-      {/* Featured Article */}
+      {/* 4pillars-style Featured + List Layout */}
       {currentPage === 1 && selectedCategory === "All" && !searchQuery && (
         <section className="bg-background py-16">
           <div className="container mx-auto max-w-7xl px-4">
-            <Link to={`/research/${researchPosts[0].slug}`} className="group block">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white/[0.02] backdrop-blur-sm rounded-3xl p-6 lg:p-8 border border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.04] transition-all duration-300">
-                <div className="aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl">
-                  <img 
-                    src={researchPosts[0].image} 
-                    alt={researchPosts[0].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-                <div>
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="px-4 py-1.5 bg-primary/20 text-primary rounded-2xl text-sm backdrop-blur-sm">
-                      {researchPosts[0].category}
-                    </span>
-                    <span className="text-white/40 text-sm flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      {researchPosts[0].readTime}
-                    </span>
-                  </div>
-                  <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight mb-4 group-hover:text-primary transition-colors">
-                    {researchPosts[0].title}
-                  </h2>
-                  <p className="text-white/60 text-lg mb-6">
-                    {researchPosts[0].excerpt}
-                  </p>
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-2xl bg-white/[0.1] backdrop-blur-sm flex items-center justify-center text-sm font-medium text-white">
-                        {researchPosts[0].author.split(' ').map(n => n[0]).join('')}
+            {/* Section Header */}
+            <div className="flex items-center gap-6 mb-12">
+              <h2 className="text-sm font-medium tracking-[0.2em] uppercase text-white">ARTICLES</h2>
+              <div className="flex-grow h-px bg-white/20" />
+            </div>
+            
+            {/* Featured + List Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              {/* Left: Featured Article (Large Card) */}
+              <div className="lg:col-span-7">
+                <Link to={`/research/${researchPosts[0].slug}`} className="group block h-full">
+                  <div className="relative h-full min-h-[500px] rounded-2xl overflow-hidden">
+                    <img 
+                      src={researchPosts[0].image} 
+                      alt={researchPosts[0].title}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-8">
+                      <div className="flex items-center gap-3 mb-4">
+                        <span className="px-3 py-1 bg-white/10 backdrop-blur-sm text-white/80 rounded-lg text-xs uppercase tracking-wider">
+                          {researchPosts[0].category}
+                        </span>
+                        <span className="text-white/50 text-sm">{researchPosts[0].date}</span>
                       </div>
-                      <div>
-                        <p className="text-white text-sm font-medium">{researchPosts[0].author}</p>
-                        <p className="text-white/40 text-xs">{researchPosts[0].date}</p>
+                      <h2 className="text-2xl md:text-3xl font-medium text-white leading-tight mb-4 group-hover:text-primary transition-colors">
+                        {researchPosts[0].title}
+                      </h2>
+                      <p className="text-white/60 text-sm mb-4 line-clamp-2">
+                        {researchPosts[0].excerpt}
+                      </p>
+                      <div className="flex items-center gap-2 text-white/50 group-hover:text-white transition-colors text-sm">
+                        Read Article
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>
-                    <span className="text-primary flex items-center gap-2 group-hover:gap-3 transition-all">
-                      Read Article <ArrowRight className="w-4 h-4" />
-                    </span>
                   </div>
-                </div>
+                </Link>
               </div>
-            </Link>
+              
+              {/* Right: Recent Articles List */}
+              <div className="lg:col-span-5 flex flex-col gap-4">
+                {researchPosts.slice(1, 5).map((post, index) => (
+                  <Link 
+                    key={post.id}
+                    to={`/research/${post.slug}`}
+                    className="group flex gap-4 p-4 bg-white/[0.02] rounded-xl border border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.04] transition-all duration-300"
+                  >
+                    <div className="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                      <img 
+                        src={post.image} 
+                        alt={post.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    </div>
+                    <div className="flex-1 flex flex-col justify-center">
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className="text-white/40 text-xs">{post.category}</span>
+                        <span className="text-white/20">•</span>
+                        <span className="text-white/40 text-xs">{post.readTime}</span>
+                      </div>
+                      <h3 className="text-white font-medium text-sm leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                        {post.title}
+                      </h3>
+                      <span className="text-white/30 text-xs mt-2">{post.date}</span>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       )}

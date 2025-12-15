@@ -163,34 +163,38 @@ interface CaseCardProps {
 
 const CaseCard = ({ name, logo, bgImage, slug, category, result, description, index }: CaseCardProps) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
+    transition={{ duration: 0.6, delay: index * 0.1 }}
     viewport={{ once: true }}
-    className="group"
-    style={{ perspective: "1000px" }}
+    className="group relative"
+    style={{ perspective: "1200px" }}
   >
     <Link
       to={`/projects/${slug}`}
       onClick={() => window.scrollTo(0, 0)}
       className="block h-full relative"
     >
-      {/* 3D Stack Effect - Background Layers */}
+      {/* 4pillars-style 3D Stack Effect - Multiple Background Layers */}
       <div 
-        className="absolute inset-0 rounded-2xl bg-white/5 transform translate-x-3 translate-y-3 transition-transform duration-500 group-hover:translate-x-4 group-hover:translate-y-4"
+        className="absolute inset-0 rounded-2xl bg-white/[0.03] transform translate-x-6 translate-y-6 transition-all duration-500 group-hover:translate-x-8 group-hover:translate-y-8"
+        style={{ zIndex: -3 }}
+      />
+      <div 
+        className="absolute inset-0 rounded-2xl bg-white/[0.05] transform translate-x-4 translate-y-4 transition-all duration-500 group-hover:translate-x-5 group-hover:translate-y-5"
         style={{ zIndex: -2 }}
       />
       <div 
-        className="absolute inset-0 rounded-2xl bg-white/[0.08] transform translate-x-1.5 translate-y-1.5 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2"
+        className="absolute inset-0 rounded-2xl bg-white/[0.08] transform translate-x-2 translate-y-2 transition-all duration-500 group-hover:translate-x-2.5 group-hover:translate-y-2.5"
         style={{ zIndex: -1 }}
       />
       
-      {/* Main Card with 3D Tilt */}
+      {/* Main Card with Enhanced 3D Tilt */}
       <div 
-        className="relative overflow-hidden rounded-2xl transition-all duration-500 group-hover:shadow-2xl group-hover:shadow-black/40"
+        className="relative overflow-hidden rounded-2xl transition-all duration-500 group-hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] group-hover:-translate-y-2"
         style={{
           transformStyle: "preserve-3d",
-          transition: "transform 0.5s ease-out",
+          transition: "transform 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 0.5s ease-out",
         }}
         onMouseMove={(e) => {
           const card = e.currentTarget;
@@ -199,12 +203,12 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
           const y = e.clientY - rect.top;
           const centerX = rect.width / 2;
           const centerY = rect.height / 2;
-          const rotateX = (y - centerY) / 20;
-          const rotateY = (centerX - x) / 20;
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          const rotateX = (y - centerY) / 12;
+          const rotateY = (centerX - x) / 12;
+          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg)';
+          e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0)';
         }}
       >
         {/* Background Image */}
@@ -218,7 +222,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
         </div>
         
         {/* Content */}
-        <div className="relative p-6 min-h-[300px] flex flex-col justify-end">
+        <div className="relative p-6 min-h-[340px] flex flex-col justify-end">
           <div className="flex items-start justify-between mb-4">
             <span className="text-white/70 text-xs uppercase tracking-wider bg-white/[0.08] backdrop-blur-sm px-3 py-1.5 rounded-xl border border-white/[0.1]">{category}</span>
           </div>
