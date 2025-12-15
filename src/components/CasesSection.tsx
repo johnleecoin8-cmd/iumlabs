@@ -10,14 +10,14 @@ import storyLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria-official.png";
 import bybitLogo from "@/assets/logos/bybit.png";
+import saharaAiLogo from "@/assets/logos/sahara-ai.png";
+import mantraLogo from "@/assets/logos/mantra.png";
 
 // Import campaign images for projects without dedicated logos
 import fogoImg from "@/assets/campaigns/fogo-fest.avif";
 import lbankImg from "@/assets/campaigns/lbank-festival.jpg";
 import zkpassImg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import openledgerImg from "@/assets/campaigns/openledger-interview.jpg";
-import saharaImg from "@/assets/campaigns/sahara-ai.jpg";
-import mantraImg from "@/assets/campaigns/mantra.jpg";
 
 const featuredCases = [
   {
@@ -41,22 +41,20 @@ const featuredCases = [
   {
     number: "03",
     name: "Sahara AI",
-    logo: saharaImg,
+    logo: saharaAiLogo,
     slug: "sahara-ai",
     category: "AI",
     result: "Korean AI x Web3 Launch",
     description: "AI blockchain platform launch with Korean developer community and enterprise partnerships.",
-    useCampaignImg: true,
   },
   {
     number: "04",
     name: "Mantra",
-    logo: mantraImg,
+    logo: mantraLogo,
     slug: "mantra",
     category: "RWA",
     result: "Korean RWA Expansion",
     description: "Real World Assets platform expansion targeting Korean institutional investors.",
-    useCampaignImg: true,
   },
   {
     number: "05",
