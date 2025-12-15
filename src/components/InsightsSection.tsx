@@ -1,4 +1,5 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowRight, Mail, Clock, TrendingUp } from "lucide-react";
 import { useState } from "react";
@@ -62,7 +63,13 @@ const InsightsSection = () => {
     <section ref={ref} className="px-4 bg-[#FAFAFA] py-16 md:py-24">
       <div className="container mx-auto max-w-7xl">
         {/* Option B Header */}
-        <div className="relative mb-12 md:mb-16">
+        <motion.div 
+          className="relative mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
             08
           </span>
@@ -75,7 +82,7 @@ const InsightsSection = () => {
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mt-4 rounded-full" />
           </div>
-        </div>
+        </motion.div>
 
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left - Newsletter */}

@@ -43,7 +43,13 @@ const WhyChooseUsSection = () => {
     <section className="relative bg-[#F5F2ED] py-16 md:py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Option B Header */}
-        <div className="relative mb-8 md:mb-12">
+        <motion.div 
+          className="relative mb-8 md:mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
             05
           </span>
@@ -56,7 +62,7 @@ const WhyChooseUsSection = () => {
             </h2>
             <div className="w-16 h-1 bg-gradient-to-r from-primary to-orange-400 mt-4 rounded-full" />
           </div>
-        </div>
+        </motion.div>
 
         {/* Main 2-column grid */}
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-start mb-8">
@@ -95,11 +101,11 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="order-1 lg:order-2"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200">
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 aspect-[4/3]">
               <img
                 src={teamPhoto}
                 alt="CryptoBridge Korea Team"
-                className="w-full h-[450px] md:h-[520px] lg:h-[580px] object-cover object-[center_65%]"
+                className="w-full h-full object-cover object-[center_65%]"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
             </div>

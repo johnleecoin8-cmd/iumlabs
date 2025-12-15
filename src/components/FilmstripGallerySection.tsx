@@ -1,4 +1,5 @@
 import { HoverExpand_001 } from "@/components/ui/expand-on-hover";
+import { motion } from "framer-motion";
 
 // Import actual campaign images from assets
 import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
@@ -67,10 +68,22 @@ const campaignImages = [
 
 const FilmstripGallerySection = () => {
   return (
-    <div className="min-h-[80vh] bg-[#0A0A0B] flex flex-col justify-center py-16 md:py-24">
-      <div className="container mx-auto px-4 mb-8 md:mb-12">
+    <div className="min-h-[80vh] bg-gradient-to-b from-[#0A0A0B] via-[#0F0F12] to-[#0A0A0B] flex flex-col justify-center py-16 md:py-24 relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+        backgroundSize: '40px 40px'
+      }} />
+      
+      <div className="container mx-auto px-4 mb-8 md:mb-12 relative z-10">
         {/* Option B Header */}
-        <div className="relative">
+        <motion.div 
+          className="relative"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-white/[0.03] leading-none pointer-events-none select-none">
             04
           </span>
@@ -86,7 +99,7 @@ const FilmstripGallerySection = () => {
               Explore our successful campaigns and events across Korea's Web3 ecosystem. Drag to see more.
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
       
       <div className="w-full px-4 md:px-8">
