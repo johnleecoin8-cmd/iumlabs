@@ -20,6 +20,7 @@ import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import mantraLogo from "@/assets/logos/mantra.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import zkpassLogo from "@/assets/logos/zkpass.png";
+import synfuturesLogo from "@/assets/logos/synfutures.png";
 
 // Import campaign images for backgrounds (replacing AI-generated backgrounds with real campaign photos)
 import bnbBg from "@/assets/campaigns/bnb-event.jpg";
@@ -33,6 +34,7 @@ import saharaAiBg from "@/assets/campaigns/sahara-ai.jpg";
 import mantraBg from "@/assets/campaigns/mantra-party.jpg";
 import fogoBg from "@/assets/campaigns/fogo-fest.avif";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
+import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
 
 const cases = [
   {
@@ -156,6 +158,17 @@ const cases = [
     description: "Privacy-focused Web3 identity solution launch with Korean developer community.",
     services: ["Developer Relations", "Event Marketing", "Community Building"],
   },
+  {
+    name: "SynFutures",
+    logo: synfuturesLogo,
+    bgImage: synfuturesBg,
+    slug: "synfutures",
+    result: "Gangnam Billboard Promotion",
+    category: "DeFi",
+    glowColor: "#6366F1",
+    description: "High-visibility billboard campaign in Gangnam district for Korean market awareness.",
+    services: ["Billboard Marketing", "Brand Awareness", "Market Entry"],
+  },
 ];
 const serviceTags = [
   { label: "DeFi", position: "top-[15%] left-[5%]" },
@@ -185,6 +198,7 @@ const clientLogos = [
   { name: "Tria", logo: triaLogo },
   { name: "FOGO", logo: fogoLogo },
   { name: "zkPass", logo: zkpassLogo },
+  { name: "SynFutures", logo: synfuturesLogo },
 ];
 
 const stats = [
