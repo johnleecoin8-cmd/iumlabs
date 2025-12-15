@@ -1,5 +1,6 @@
 import { HoverExpand_001 } from "@/components/ui/expand-on-hover";
 import { motion } from "framer-motion";
+import SectionHeader from "./SectionHeader";
 
 // Import actual campaign images from assets
 import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
@@ -82,30 +83,22 @@ const FilmstripGallerySection = () => {
       }} />
       
       <div className="container mx-auto px-4 mb-8 md:mb-12 relative z-10">
-        {/* Option B Header */}
-        <motion.div 
-          className="relative"
-          initial={{ opacity: 0, y: 20 }}
+        {/* 4pillars-style Header */}
+        <SectionHeader 
+          title="GALLERY" 
+          dark={true}
+        />
+        
+        {/* Subtitle */}
+        <motion.p 
+          className="text-white/40 text-lg -mt-8 mb-8 max-w-xl"
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-white/[0.03] leading-none pointer-events-none select-none">
-            04
-          </span>
-          <div className="relative">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              <span className="text-white/50">Campaign</span>{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Gallery
-              </span>
-            </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mt-4 rounded-full" />
-            <p className="text-white/40 text-lg mt-4 max-w-xl">
-              Explore our successful campaigns and events across Korea's Web3 ecosystem. Drag to see more.
-            </p>
-          </div>
-        </motion.div>
+          Explore our successful campaigns and events across Korea's Web3 ecosystem. Drag to see more.
+        </motion.p>
       </div>
       
       <div className="w-full px-4 md:px-8">

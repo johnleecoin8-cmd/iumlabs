@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
-import { ArrowRight, ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import SectionHeader from "./SectionHeader";
 
 // Import blog images
 import aiAgentsImg from "@/assets/blog/ai-agents-defi.jpg";
 import ecosystemImg from "@/assets/blog/ecosystem-growth-2025.jpg";
 import kolImg from "@/assets/blog/kol-marketing.jpg";
 import communityImg from "@/assets/blog/community-growth-ai.jpg";
+import cryptoMarketingImg from "@/assets/blog/crypto-marketing-bear.jpg";
 
 const insights = [
   {
@@ -18,7 +19,6 @@ const insights = [
     readTime: "5 min",
     category: "AI",
     image: aiAgentsImg,
-    gradient: "from-emerald-400 to-cyan-400"
   },
   {
     id: "ecosystem-growth-2025",
@@ -28,7 +28,6 @@ const insights = [
     readTime: "8 min",
     category: "Strategy",
     image: ecosystemImg,
-    gradient: "from-purple-400 to-pink-400"
   },
   {
     id: "kol-marketing",
@@ -38,7 +37,6 @@ const insights = [
     readTime: "6 min",
     category: "Marketing",
     image: kolImg,
-    gradient: "from-orange-400 to-rose-400"
   },
   {
     id: "community-growth-ai",
@@ -48,130 +46,124 @@ const insights = [
     readTime: "7 min",
     category: "Community",
     image: communityImg,
-    gradient: "from-blue-400 to-indigo-400"
+  },
+  {
+    id: "crypto-marketing-bear",
+    title: "Marketing in Bear Markets",
+    excerpt: "Strategic approaches to maintain growth during market downturns.",
+    date: "Oct 2024",
+    readTime: "6 min",
+    category: "Strategy",
+    image: cryptoMarketingImg,
   }
 ];
 
 const InsightsSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const visibleCards = 2;
-  const maxIndex = Math.max(0, insights.length - visibleCards);
-
-  const handlePrev = () => {
-    setCurrentIndex(prev => Math.max(0, prev - 1));
-  };
-
-  const handleNext = () => {
-    setCurrentIndex(prev => Math.min(maxIndex, prev + 1));
-  };
+  const featuredArticle = insights[0];
+  const listArticles = insights.slice(1, 5);
 
   return (
     <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
-        {/* Header - 2 Column Layout */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
-          {/* Left - Title & CTA */}
-          <div className="lg:col-span-4">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="sticky top-32"
-            >
-              <span className="text-sm font-mono text-gray-500 mb-4 block">/ INSIGHTS</span>
-              <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-6">
-                Latest
-                <br />
-                <span className="text-gray-500">Research</span>
-              </h2>
-              <p className="text-gray-400 mb-8 max-w-sm">
-                Deep dives into Web3 marketing trends, strategies, and the Korean crypto ecosystem.
-              </p>
-              
-              <Link 
-                to="/research"
-                className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-gray-300 transition-colors mb-8"
-              >
-                View all research
-                <ExternalLink className="w-4 h-4" />
-              </Link>
+        {/* 4pillars-style Header */}
+        <SectionHeader 
+          title="INSIGHTS" 
+          linkTo="/research" 
+          linkText="VIEW ALL"
+          dark={true}
+        />
 
-              {/* Navigation */}
-              <div className="flex gap-2">
-                <button
-                  onClick={handlePrev}
-                  disabled={currentIndex === 0}
-                  className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-                >
-                  <ArrowLeft className="w-5 h-5 text-white" />
-                </button>
-                <button
-                  onClick={handleNext}
-                  disabled={currentIndex >= maxIndex}
-                  className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-                >
-                  <ArrowRight className="w-5 h-5 text-white" />
-                </button>
+        {/* Featured + List Layout */}
+        <div className="grid lg:grid-cols-12 gap-6 lg:gap-8">
+          {/* Left - Featured Article (Large Card) */}
+          <motion.div
+            className="lg:col-span-7"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <Link to={`/research/${featuredArticle.id}`} className="group block">
+              <div className="relative rounded-2xl overflow-hidden h-[400px] md:h-[480px] lg:h-[520px]">
+                {/* Background Image */}
+                <img 
+                  src={featuredArticle.image} 
+                  alt={featuredArticle.title}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+                {/* Content */}
+                <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-end">
+                  {/* Category Badge */}
+                  <span className="inline-block bg-white/10 backdrop-blur-sm text-white text-xs font-medium px-3 py-1.5 rounded-full mb-4 w-fit border border-white/10">
+                    {featuredArticle.category}
+                  </span>
+
+                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 group-hover:text-white/90 transition-colors line-clamp-3">
+                    {featuredArticle.title}
+                  </h3>
+                  
+                  <p className="text-white/70 text-base md:text-lg mb-4 line-clamp-2 max-w-xl">
+                    {featuredArticle.excerpt}
+                  </p>
+
+                  <div className="flex items-center gap-4">
+                    <span className="text-white/50 text-sm">{featuredArticle.date}</span>
+                    <span className="text-white/30">·</span>
+                    <span className="text-white/50 text-sm">{featuredArticle.readTime} read</span>
+                  </div>
+                </div>
               </div>
-            </motion.div>
-          </div>
+            </Link>
+          </motion.div>
 
-          {/* Right - Cards Carousel */}
-          <div className="lg:col-span-8 overflow-hidden">
-            <motion.div
-              className="flex gap-6"
-              animate={{ x: -currentIndex * 52 + "%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            >
-              {insights.map((insight, index) => (
-                <motion.div
-                  key={insight.id}
-                  className="flex-shrink-0 w-[calc(50%-12px)]"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+          {/* Right - Article List */}
+          <div className="lg:col-span-5 flex flex-col gap-4">
+            {listArticles.map((article, index) => (
+              <motion.div
+                key={article.id}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+              >
+                <Link 
+                  to={`/research/${article.id}`} 
+                  className="group flex gap-4 p-4 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.05] hover:border-white/[0.1] transition-all duration-300"
                 >
-                  <Link to={`/research/${insight.id}`} className="group block">
-                    {/* Card with Pastel Gradient Background */}
-                    <div className="relative rounded-2xl overflow-hidden h-[320px] mb-4">
-                      {/* Gradient Background */}
-                      <div className={`absolute inset-0 bg-gradient-to-br ${insight.gradient} opacity-80`} />
-                      
-                      {/* Image */}
-                      <img 
-                        src={insight.image} 
-                        alt={insight.title}
-                        className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60 group-hover:scale-105 transition-transform duration-500"
-                      />
+                  {/* Thumbnail */}
+                  <div className="w-20 h-20 md:w-24 md:h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                    <img 
+                      src={article.image} 
+                      alt={article.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
 
-                      {/* Category Badge */}
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-medium px-3 py-1.5 rounded-full">
-                          {insight.category}
-                        </span>
-                      </div>
+                  {/* Content */}
+                  <div className="flex-1 flex flex-col justify-center min-w-0">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-white/40 text-xs">{article.category}</span>
+                      <span className="text-white/20">·</span>
+                      <span className="text-white/40 text-xs">{article.date}</span>
                     </div>
+                    
+                    <h4 className="text-white font-semibold text-sm md:text-base group-hover:text-white/80 transition-colors line-clamp-2 mb-1">
+                      {article.title}
+                    </h4>
+                    
+                    <span className="text-white/30 text-xs">{article.readTime} read</span>
+                  </div>
 
-                    {/* Content */}
-                    <div className="space-y-3">
-                      <h3 className="text-xl font-bold text-white group-hover:text-gray-300 transition-colors line-clamp-2">
-                        {insight.title}
-                      </h3>
-                      <p className="text-gray-400 text-sm line-clamp-2">
-                        {insight.excerpt}
-                      </p>
-                      <div className="flex items-center gap-3 text-xs text-gray-500">
-                        <span>{insight.date}</span>
-                        <span>·</span>
-                        <span>{insight.readTime} read</span>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </motion.div>
+                  {/* Arrow */}
+                  <div className="flex-shrink-0 self-center">
+                    <ArrowRight className="w-4 h-4 text-white/30 group-hover:text-white/60 group-hover:translate-x-1 transition-all" />
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
