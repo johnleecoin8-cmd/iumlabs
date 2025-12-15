@@ -1,40 +1,41 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
+import { TrendingUp, Users, Building2, Handshake } from "lucide-react";
 import { motion } from "framer-motion";
-import { lazy, Suspense } from "react";
 
-const Bridge3D = lazy(() => import("./Bridge3D"));
-
-const stats = [
-  {
-    value: 18,
-    suffix: "+",
-    prefix: "",
-    label: "Projects Launched",
-    description: "Successfully launched in Korea"
-  },
-  {
-    value: 120,
-    suffix: "+",
-    prefix: "",
-    label: "KOL Network",
-    description: "Influencers & creators"
-  },
-  {
-    value: 2.5,
-    suffix: "M+",
-    prefix: "$",
-    label: "Token Sales",
-    description: "Total token sales supported"
-  },
-  {
-    value: 38,
-    suffix: "+",
-    prefix: "",
-    label: "AMA Hosting",
-    description: "AMAs hosted for projects"
-  }
-];
+const stats = [{
+  value: 18,
+  suffix: "+",
+  prefix: "",
+  label: "Projects Launched",
+  icon: TrendingUp,
+  description: "Successfully launched in Korea",
+  glowColor: "from-emerald-500/20 to-cyan-500/10"
+}, {
+  value: 120,
+  suffix: "+",
+  prefix: "",
+  label: "KOL Network",
+  icon: Users,
+  description: "Influencers & creators",
+  glowColor: "from-primary/20 to-purple-500/10"
+}, {
+  value: 2.5,
+  suffix: "M+",
+  prefix: "$",
+  label: "Token Sales",
+  icon: Building2,
+  description: "Total token sales supported",
+  glowColor: "from-cyan-500/20 to-blue-500/10"
+}, {
+  value: 38,
+  suffix: "+",
+  prefix: "",
+  label: "AMA Hosting",
+  icon: Handshake,
+  description: "AMAs hosted for projects",
+  glowColor: "from-purple-500/20 to-pink-500/10"
+}];
 
 const StatCard = ({
   stat,
@@ -55,31 +56,31 @@ const StatCard = ({
   
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="relative py-8 md:py-12 border-b border-white/10 last:border-b-0 md:border-b-0 md:border-r md:last:border-r-0"
+      initial={{ opacity: 0, y: 30 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.6, delay: index * 0.1 + 0.3 }}
+      className="group relative p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden"
     >
-      <div className="px-4 md:px-8">
-        {/* a41 style: 01 / label format */}
-        <div className="flex items-baseline gap-2 mb-4">
-          <span className="text-white/30 font-mono text-sm">
-            {String(index + 1).padStart(2, '0')} /
-          </span>
-          <span className="text-white/50 text-sm uppercase tracking-wider">
-            {stat.label}
-          </span>
-        </div>
-        
-        {/* Large number */}
-        <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tabular-nums mb-2">
+      {/* Animated gradient background */}
+      <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none bg-gradient-to-br ${stat.glowColor}`} />
+      
+      {/* Shine effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-100/50 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 pointer-events-none" />
+
+      <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-300">
+        <stat.icon className="w-5 h-5 text-primary" />
+      </div>
+      
+      <div className="mt-8 relative z-10">
+        <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-1 tabular-nums group-hover:text-primary transition-colors duration-300">
           {formattedCount}
         </div>
-        
-        {/* Description */}
-        <p className="text-white/40 text-sm">
+        <div className="text-gray-700 font-medium text-sm mb-1">
+          {stat.label}
+        </div>
+        <div className="text-gray-500 text-xs group-hover:text-gray-700 transition-colors">
           {stat.description}
-        </p>
+        </div>
       </div>
     </motion.div>
   );
@@ -89,36 +90,25 @@ const AboutUsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
   
   return (
-    <section ref={ref} className="relative bg-[#0A0A0B] py-16 md:py-24 overflow-hidden">
-      {/* 3D Bridge Background */}
-      <Suspense fallback={null}>
-        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ minHeight: '400px' }}>
-          <Bridge3D className="w-full h-full" />
-        </div>
-      </Suspense>
-      
-      {/* Gradient overlay for better text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-transparent to-[#0A0A0B]/50 pointer-events-none" />
-      
-      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
-        {/* a41 style header */}
-        <motion.div 
-          className="mb-12 md:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="flex items-center gap-4 mb-4">
-            <span className="text-white/30 font-mono text-sm">[ METRICS ]</span>
-            <div className="flex-1 h-px bg-white/10" />
+    <section ref={ref} className="bg-[#F5F2ED] py-16 md:py-24">
+      <div className="container mx-auto px-4 md:px-8">
+        {/* Option B Header */}
+        <div className="relative mb-12 md:mb-16">
+          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
+            06
+          </span>
+          <div className="relative">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+              <span className="text-gray-400">The</span>{" "}
+              <span className="bg-gradient-to-r from-emerald-500 to-cyan-500 bg-clip-text text-transparent">
+                Numbers
+              </span>
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-emerald-500 to-cyan-500 mt-4 rounded-full" />
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">
-            The Numbers
-          </h2>
-        </motion.div>
+        </div>
 
-        {/* a41 style stats grid - horizontal dividers on mobile, vertical on desktop */}
-        <div className="grid md:grid-cols-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {stats.map((stat, index) => (
             <StatCard key={stat.label} stat={stat} index={index} isVisible={isVisible} />
           ))}
