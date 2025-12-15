@@ -11,7 +11,6 @@ import kucoinOldschool from "@/assets/campaigns/kucoin-oldschool.jpg";
 import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
 import zkpassNights from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import saharaAi from "@/assets/campaigns/sahara-ai.jpg";
-import mantra from "@/assets/campaigns/mantra.jpg";
 
 const campaignImages = [
   {
@@ -63,11 +62,6 @@ const campaignImages = [
     src: saharaAi,
     alt: "Sahara AI Korea Launch",
     code: "Sahara AI - Korean AI x Web3 Launch",
-  },
-  {
-    src: mantra,
-    alt: "Mantra RWA Summit",
-    code: "Mantra - Korean RWA Expansion",
   },
 ];
 
