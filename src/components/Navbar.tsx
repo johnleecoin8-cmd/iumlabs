@@ -21,20 +21,20 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Main Navbar - Unified bar like Lunar Strategy */}
+      {/* Main Navbar - Glass morphism style */}
       <nav className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-50">
-        <div className="flex items-center bg-white rounded-full border border-gray-200 shadow-sm">
+        <div className="flex items-center bg-white/90 backdrop-blur-xl rounded-2xl border border-gray-100/80 shadow-lg shadow-black/[0.03]">
           {/* Logo Section */}
           <Link 
             to="/" 
-            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 transition-all duration-300 hover:opacity-80"
+            className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 transition-all duration-300 hover:opacity-80"
           >
-            <img src={logoImage} alt="CryptoBridge Logo" className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg object-contain" />
+            <img src={logoImage} alt="CryptoBridge Logo" className="w-6 h-6 sm:w-7 sm:h-7 rounded-xl object-contain" />
             <span className="text-sm sm:text-base font-semibold text-gray-900">{brandConfig.name}</span>
           </Link>
 
           {/* Center - Email */}
-          <div className="hidden lg:flex items-center gap-2 px-6 py-3 border-l border-gray-200">
+          <div className="hidden lg:flex items-center gap-2 px-6 py-3 border-l border-gray-200/60">
             <span className="text-gray-400 text-xs">e-mail</span>
             <a 
               href={`mailto:${brandConfig.email}`} 
@@ -52,7 +52,7 @@ const Navbar = () => {
             {/* Live Chat Button */}
             <button
               onClick={() => setIsLiveChatOpen(true)}
-              className="hidden md:flex items-center gap-2 px-5 py-3 border-l border-gray-200 text-gray-900 text-sm font-medium transition-all duration-300 hover:bg-gray-50"
+              className="hidden md:flex items-center gap-2 px-5 py-3 border-l border-gray-200/60 text-gray-700 text-sm font-medium transition-all duration-300 hover:bg-gray-50/80 hover:text-primary"
             >
               <Send className="w-4 h-4 text-primary" />
               <span>Start Live Chat</span>
@@ -63,16 +63,16 @@ const Navbar = () => {
               href="https://calendly.com/cryptobridgekorea"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 px-5 py-3 border-l border-gray-200 text-gray-900 text-sm font-medium transition-all duration-300 hover:bg-gray-50"
+              className="hidden md:flex items-center gap-2 px-5 py-3 border-l border-gray-200/60 text-gray-700 text-sm font-medium transition-all duration-300 hover:bg-gray-50/80 hover:text-primary"
             >
               <Calendar className="w-4 h-4 text-primary" />
               <span>Book a Meeting</span>
             </a>
 
-            {/* Menu Button - Dark */}
+            {/* Menu Button - Dark with gradient */}
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2 m-1 sm:m-1.5 rounded-full bg-gray-900 text-white text-xs sm:text-sm font-medium transition-all duration-300 hover:bg-gray-800"
+              className="flex items-center gap-1.5 sm:gap-2 px-4 sm:px-5 py-2 sm:py-2.5 m-1.5 sm:m-2 rounded-xl bg-gray-900 text-white text-xs sm:text-sm font-medium transition-all duration-300 hover:bg-gray-800 hover:shadow-lg hover:shadow-gray-900/20 hover:-translate-y-0.5"
             >
               <span className="hidden sm:inline">menu</span>
               <Menu className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -89,27 +89,27 @@ const Navbar = () => {
         onClick={() => setIsMenuOpen(false)}
       />
 
-      {/* Top Panel Menu - slides from top */}
+      {/* Top Panel Menu - slides from top with glass effect */}
       <div
-        className={`fixed top-0 left-0 right-0 h-[85vh] sm:h-[75vh] lg:h-[60vh] z-[101] bg-gradient-to-b from-background via-background to-primary/10 transition-transform duration-500 ease-out ${
+        className={`fixed top-0 left-0 right-0 h-[85vh] sm:h-[75vh] lg:h-[65vh] z-[101] bg-gradient-to-b from-[hsl(0,0%,6%)] via-[hsl(0,0%,6%)] to-primary/5 backdrop-blur-xl transition-transform duration-500 ease-out rounded-b-3xl ${
           isMenuOpen ? "translate-y-0" : "-translate-y-full"
         }`}
       >
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-cyan-500/5 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-cyan-500/5 pointer-events-none rounded-b-3xl" />
         
         <div className="h-full flex flex-col relative z-10">
           {/* Header */}
-          <div className="flex-shrink-0 container mx-auto px-6 py-4">
+          <div className="flex-shrink-0 container mx-auto px-6 py-5">
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-                <img src={logoImage} alt="CryptoBridge Logo" className="w-8 h-8 rounded-lg object-contain" />
+                <img src={logoImage} alt="CryptoBridge Logo" className="w-8 h-8 rounded-xl object-contain" />
                 <span className="text-lg font-semibold text-white">{brandConfig.name}</span>
               </Link>
               
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center gap-3 px-5 py-2.5 rounded-full bg-zinc-800 text-white text-sm font-medium transition-all hover:bg-zinc-700"
+                className="flex items-center gap-3 px-5 py-2.5 rounded-xl bg-white/[0.06] backdrop-blur-sm border border-white/[0.1] text-white text-sm font-medium transition-all hover:bg-white/[0.1] hover:border-white/[0.2]"
               >
                 <span>close</span>
                 <X className="w-5 h-5" />
@@ -204,7 +204,7 @@ const Navbar = () => {
                     href={brandConfig.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-white/20 text-white text-xs lg:text-sm font-medium hover:bg-white/10 transition-colors"
+                    className="px-5 lg:px-6 py-2.5 lg:py-3 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.1] text-white text-xs lg:text-sm font-medium hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
                   >
                     Telegram
                   </a>
@@ -212,7 +212,7 @@ const Navbar = () => {
                     href={brandConfig.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-white/20 text-white text-xs lg:text-sm font-medium hover:bg-white/10 transition-colors"
+                    className="px-5 lg:px-6 py-2.5 lg:py-3 rounded-xl bg-white/[0.04] backdrop-blur-sm border border-white/[0.1] text-white text-xs lg:text-sm font-medium hover:bg-white/[0.08] hover:border-white/[0.2] transition-all duration-300"
                   >
                     LinkedIn
                   </a>

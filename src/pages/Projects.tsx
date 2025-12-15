@@ -302,23 +302,23 @@ const Projects = () => {
                 <Link
                   key={project.slug}
                   to={`/projects/${project.slug}`}
-                  className="group flex items-center gap-4 p-4 rounded-2xl border border-white/10 hover:border-amber-400/40 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300"
+                  className="group flex items-center gap-4 p-4 rounded-2xl border border-white/[0.08] hover:border-amber-400/30 bg-white/[0.02] backdrop-blur-sm hover:bg-white/[0.05] transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-amber-500/10"
                 >
                   <div 
-                    className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0"
+                    className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-white/10"
                     style={{ boxShadow: `0 0 20px ${project.glowColor}30` }}
                   >
                     <img 
                       src={project.bgImage} 
                       alt={project.name}
-                      className="w-full h-full object-cover"
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-white font-medium truncate">{project.name}</p>
                     <p className="text-sm truncate" style={{ color: project.glowColor }}>{project.result}</p>
                   </div>
-                  <ArrowUpRight className="w-5 h-5 text-white/40 group-hover:text-amber-400 transition-colors flex-shrink-0" />
+                  <ArrowUpRight className="w-5 h-5 text-white/40 group-hover:text-amber-400 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 flex-shrink-0" />
                 </Link>
               ))}
               <p className="text-white/40 text-sm text-center mt-2">+{cases.length - 3} more projects below</p>
@@ -369,24 +369,23 @@ const Projects = () => {
           </div>
         </div>
 
-        {/* Client Logo Marquee */}
-        <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
-          <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
-            <span className="number-badge">01</span>
-          </div>
+        {/* Client Logo Marquee - Glass Pills */}
+        <div className="relative z-10 border-t border-white/[0.08] py-4 sm:py-5 overflow-hidden bg-gradient-to-t from-black/20 to-transparent">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
 
-          <div className="flex items-center logo-marquee-slow ml-14 sm:ml-16">
-            {[...clientLogos, ...clientLogos].map((client, index) => (
+          <div className="flex items-center logo-marquee-slow hover:[animation-play-state:paused]">
+            {[...clientLogos, ...clientLogos, ...clientLogos].map((client, index) => (
               <div 
                 key={index} 
-                className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+                className="flex items-center gap-2 sm:gap-2.5 mx-2 sm:mx-2.5 px-4 sm:px-5 py-2 sm:py-2.5 bg-white/[0.04] backdrop-blur-sm rounded-2xl border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-300 cursor-default"
               >
                 <img 
                   src={client.logo} 
                   alt={client.name} 
-                  className="h-4 w-4 sm:h-5 sm:w-5 object-contain opacity-90 flex-shrink-0"
+                  className="h-5 w-5 sm:h-6 sm:w-6 object-contain opacity-90 flex-shrink-0"
                 />
-                <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
+                <span className="text-white/80 text-[11px] sm:text-xs font-medium whitespace-nowrap">
                   {client.name}
                 </span>
               </div>

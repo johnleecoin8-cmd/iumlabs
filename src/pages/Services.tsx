@@ -255,15 +255,15 @@ const Services = () => {
                 <Link
                   key={service.number}
                   to={service.link}
-                  className="group relative aspect-square rounded-2xl overflow-hidden border border-white/10 hover:border-purple-400/40 transition-all duration-300 hover:scale-105"
+                  className="group relative aspect-square rounded-2xl overflow-hidden border border-white/[0.08] hover:border-purple-400/30 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-purple-500/10"
                 >
                   <img 
                     src={service.image} 
                     alt={service.title}
-                    className="w-full h-full object-cover brightness-50 group-hover:brightness-75 transition-all duration-300"
+                    className="w-full h-full object-cover brightness-50 group-hover:brightness-75 group-hover:scale-110 transition-all duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-0 left-0 right-0 p-3">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
                     <span className="text-xs text-purple-300 font-medium">[{service.number}]</span>
                     <p className="text-white text-sm font-medium truncate">{service.title}</p>
                   </div>
@@ -292,24 +292,23 @@ const Services = () => {
           </div>
         </div>
 
-        {/* Client Logo Marquee */}
-        <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
-          <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
-            <span className="number-badge">01</span>
-          </div>
+        {/* Client Logo Marquee - Glass Pills */}
+        <div className="relative z-10 border-t border-white/[0.08] py-4 sm:py-5 overflow-hidden bg-gradient-to-t from-black/20 to-transparent">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
 
-          <div className="flex items-center logo-marquee-slow ml-14 sm:ml-16">
-            {[...clientLogos, ...clientLogos].map((client, index) => (
+          <div className="flex items-center logo-marquee-slow hover:[animation-play-state:paused]">
+            {[...clientLogos, ...clientLogos, ...clientLogos].map((client, index) => (
               <div 
                 key={index} 
-                className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+                className="flex items-center gap-2 sm:gap-2.5 mx-2 sm:mx-2.5 px-4 sm:px-5 py-2 sm:py-2.5 bg-white/[0.04] backdrop-blur-sm rounded-2xl border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-300 cursor-default"
               >
                 <img 
                   src={client.logo} 
                   alt={client.name} 
-                  className="h-4 w-4 sm:h-5 sm:w-5 object-contain brightness-0 invert opacity-80 flex-shrink-0"
+                  className="h-5 w-5 sm:h-6 sm:w-6 object-contain opacity-90 flex-shrink-0"
                 />
-                <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
+                <span className="text-white/80 text-[11px] sm:text-xs font-medium whitespace-nowrap">
                   {client.name}
                 </span>
               </div>
@@ -426,7 +425,7 @@ const Services = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className={`bg-white rounded-2xl p-8 border border-slate-200 hover:border-[#2563eb]/30 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${
+                className={`bg-white rounded-2xl p-8 border border-slate-100 hover:border-primary/20 hover:shadow-2xl hover:shadow-slate-200/60 hover:-translate-y-2 transition-all duration-500 ${
                   testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}
