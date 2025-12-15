@@ -12,18 +12,27 @@ import triaLogo from "@/assets/logos/tria-official.png";
 import bybitLogo from "@/assets/logos/bybit.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import mantraLogo from "@/assets/logos/mantra.png";
+import fogoLogo from "@/assets/logos/fogo.png";
+import zkpassLogo from "@/assets/logos/zkpass.png";
 
-// Import campaign images for projects without dedicated logos
-import fogoImg from "@/assets/campaigns/fogo-fest.avif";
-import lbankImg from "@/assets/campaigns/lbank-festival.jpg";
-import zkpassImg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
-import openledgerImg from "@/assets/campaigns/openledger-interview.jpg";
+// Import campaign images for card backgrounds
+import bnbCampaign from "@/assets/campaigns/bnb-event.jpg";
+import storyCampaign from "@/assets/campaigns/story-workshop.jpg";
+import saharaCampaign from "@/assets/campaigns/sahara-ai.jpg";
+import mantraCampaign from "@/assets/campaigns/mantra.jpg";
+import peaqCampaign from "@/assets/campaigns/peaq-summit.jpg";
+import triaCampaign from "@/assets/campaigns/tria-launch.jpg";
+import fogoCampaign from "@/assets/campaigns/fogo-fest.avif";
+import lbankCampaign from "@/assets/campaigns/lbank-festival.jpg";
+import zkpassCampaign from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
+import openledgerCampaign from "@/assets/campaigns/openledger-interview.jpg";
 
 const featuredCases = [
   {
     number: "01",
     name: "BNB Chain",
     logo: bnbLogo,
+    bgImage: bnbCampaign,
     slug: "bnb-chain",
     category: "Infrastructure",
     result: "+340% Korean Trading Volume",
@@ -33,6 +42,7 @@ const featuredCases = [
     number: "02",
     name: "Story Protocol",
     logo: storyLogo,
+    bgImage: storyCampaign,
     slug: "story-protocol",
     category: "IP",
     result: "Korean IP Revolution",
@@ -42,6 +52,7 @@ const featuredCases = [
     number: "03",
     name: "Sahara AI",
     logo: saharaAiLogo,
+    bgImage: saharaCampaign,
     slug: "sahara-ai",
     category: "AI",
     result: "Korean AI x Web3 Launch",
@@ -51,6 +62,7 @@ const featuredCases = [
     number: "04",
     name: "Mantra",
     logo: mantraLogo,
+    bgImage: mantraCampaign,
     slug: "mantra",
     category: "RWA",
     result: "Korean RWA Expansion",
@@ -60,6 +72,7 @@ const featuredCases = [
     number: "05",
     name: "Peaq",
     logo: peaqLogo,
+    bgImage: peaqCampaign,
     slug: "peaq",
     category: "DePIN",
     result: "#1 DePIN in Korea",
@@ -69,6 +82,7 @@ const featuredCases = [
     number: "06",
     name: "Tria",
     logo: triaLogo,
+    bgImage: triaCampaign,
     slug: "tria",
     category: "Wallet",
     result: "30K+ Korean Wallets",
@@ -77,42 +91,42 @@ const featuredCases = [
   {
     number: "07",
     name: "FOGO",
-    logo: fogoImg,
+    logo: fogoLogo,
+    bgImage: fogoCampaign,
     slug: "fogo",
     category: "Layer 1",
     result: "Fogo Fest 2025 Success",
     description: "Launch event and community activation for FOGO ecosystem in Korean market.",
-    useCampaignImg: true,
   },
   {
     number: "08",
     name: "Lbank",
-    logo: lbankImg,
+    logo: null,
+    bgImage: lbankCampaign,
     slug: "lbank",
     category: "Exchange",
     result: "1001 Festival Seoul",
     description: "Major exchange event marketing and Korean community engagement campaign.",
-    useCampaignImg: true,
   },
   {
     number: "09",
     name: "zkPass",
-    logo: zkpassImg,
+    logo: zkpassLogo,
+    bgImage: zkpassCampaign,
     slug: "zkpass",
     category: "Privacy",
     result: "The Verifiable Nights",
     description: "Privacy-focused Web3 identity solution launch with Korean developer community.",
-    useCampaignImg: true,
   },
   {
     number: "10",
     name: "Open Ledger",
-    logo: openledgerImg,
+    logo: null,
+    bgImage: openledgerCampaign,
     slug: "openledger",
     category: "Infrastructure",
     result: "Korea Media Coverage",
     description: "Strategic media interviews and PR campaign for Korean market awareness.",
-    useCampaignImg: true,
   },
 ];
 
@@ -125,16 +139,16 @@ const additionalClients = [
 interface CaseCardProps {
   number: string;
   name: string;
-  logo: string;
+  logo: string | null;
+  bgImage: string;
   slug: string;
   category: string;
   result: string;
   description: string;
   index: number;
-  useCampaignImg?: boolean;
 }
 
-const CaseCard = ({ number, name, logo, slug, category, result, description, index, useCampaignImg }: CaseCardProps) => (
+const CaseCard = ({ name, logo, bgImage, slug, category, result, description, index }: CaseCardProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -144,41 +158,47 @@ const CaseCard = ({ number, name, logo, slug, category, result, description, ind
     <Link
       to={`/projects/${slug}`}
       onClick={() => window.scrollTo(0, 0)}
-      className="group block h-full border border-white/10 hover:border-white/30 p-6 transition-all duration-300 hover:bg-white/[0.02]"
+      className="group block h-full relative overflow-hidden rounded-xl transition-all duration-300"
     >
-      <div className="flex items-start justify-between mb-4">
-        <span className="text-white/40 text-xs uppercase tracking-wider">{category}</span>
+      {/* Background Image */}
+      <div className="absolute inset-0">
+        <img
+          src={bgImage}
+          alt={name}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
       </div>
       
-      <div className="flex items-center gap-4 mb-3">
-        {slug !== 'tria' && !useCampaignImg && (
-          <img
-            src={logo}
-            alt={name}
-            className="w-10 h-10 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-          />
-        )}
-        {useCampaignImg && (
-          <img
-            src={logo}
-            alt={name}
-            className="w-12 h-12 object-cover rounded-lg opacity-80 group-hover:opacity-100 transition-opacity"
-          />
-        )}
-        <h4 className="text-xl font-bold text-white">{name}</h4>
-      </div>
-      
-      <p className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400 font-semibold text-sm mb-3">
-        {result}
-      </p>
-      
-      <p className="text-white/50 text-sm leading-relaxed mb-4">
-        {description}
-      </p>
-      
-      <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm">
-        View case study
-        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+      {/* Content */}
+      <div className="relative p-6 min-h-[280px] flex flex-col justify-end">
+        <div className="flex items-start justify-between mb-4">
+          <span className="text-white/60 text-xs uppercase tracking-wider bg-white/10 px-2 py-1 rounded">{category}</span>
+        </div>
+        
+        <div className="flex items-center gap-3 mb-3">
+          {logo && (
+            <img
+              src={logo}
+              alt={name}
+              className="w-10 h-10 object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+            />
+          )}
+          <h4 className="text-xl font-bold text-white">{name}</h4>
+        </div>
+        
+        <p className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400 font-semibold text-sm mb-3">
+          {result}
+        </p>
+        
+        <p className="text-white/70 text-sm leading-relaxed mb-4 line-clamp-2">
+          {description}
+        </p>
+        
+        <div className="flex items-center gap-2 text-white/60 group-hover:text-white transition-colors text-sm">
+          View case study
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </div>
       </div>
     </Link>
   </motion.div>
