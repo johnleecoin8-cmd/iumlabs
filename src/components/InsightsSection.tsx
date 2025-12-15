@@ -1,55 +1,85 @@
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight, Mail, Clock, TrendingUp } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import aiAgentsImg from "@/assets/blog/ai-agents-defi.jpg";
-import kaitoImg from "@/assets/blog/kaito-mindshare.jpg";
-import ecosystemImg from "@/assets/blog/ecosystem-growth-2025.jpg";
 
-const insights = [{
-  id: "ai-agents-defi",
-  title: "The Rise of AI Agents in DeFi",
-  excerpt: "How autonomous AI agents are reshaping decentralized finance and creating new opportunities in the Korean market.",
-  date: "Dec 10, 2024",
-  readTime: "8 min read",
-  category: "Research",
-  image: aiAgentsImg,
-  trending: true
-}, {
-  id: "kaito-mindshare",
-  title: "Kaito Mindshare: New Metric for Web3",
-  excerpt: "Understanding the emerging mindshare metrics and their impact on Web3 marketing strategies.",
-  date: "Dec 8, 2024",
-  readTime: "6 min read",
-  category: "Analysis",
-  image: kaitoImg,
-  trending: false
-}, {
-  id: "ecosystem-growth-2025",
-  title: "Ecosystem Growth Strategies for 2025",
-  excerpt: "Key trends and strategies for sustainable ecosystem growth in the evolving Web3 landscape.",
-  date: "Dec 5, 2024",
-  readTime: "10 min read",
-  category: "Strategy",
-  image: ecosystemImg,
-  trending: true
-}];
+import aiAgentsDefi from "@/assets/blog/ai-agents-defi.jpg";
+import kaitoMindshare from "@/assets/blog/kaito-mindshare.jpg";
+import ecosystemGrowth from "@/assets/blog/ecosystem-growth-2025.jpg";
+
+const insights = [
+  {
+    id: "ai-agents-defi",
+    title: "AI Agents in DeFi: The Next Frontier",
+    excerpt: "How autonomous AI agents are reshaping decentralized finance and what it means for your project.",
+    date: "Dec 10, 2024",
+    readTime: "8 min",
+    category: "AI & Blockchain",
+    image: aiAgentsDefi
+  },
+  {
+    id: "kaito-mindshare",
+    title: "Understanding Kaito Mindshare",
+    excerpt: "A deep dive into the emerging mindshare metrics and how to leverage them for your Web3 marketing.",
+    date: "Dec 8, 2024",
+    readTime: "6 min",
+    category: "Marketing",
+    image: kaitoMindshare
+  },
+  {
+    id: "ecosystem-growth-2025",
+    title: "Ecosystem Growth Strategies for 2025",
+    excerpt: "Key trends and strategies that will define successful Web3 ecosystem growth in the coming year.",
+    date: "Dec 5, 2024",
+    readTime: "10 min",
+    category: "Strategy",
+    image: ecosystemGrowth
+  }
+];
+
+const BlueShape = () => (
+  <motion.div
+    className="relative w-40 h-40 mx-auto"
+    animate={{ rotateY: 360 }}
+    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+    style={{ transformStyle: "preserve-3d" }}
+  >
+    <div
+      className="absolute inset-0 rounded-full"
+      style={{
+        background: "linear-gradient(135deg, #3B82F6 0%, #06B6D4 50%, #3B82F6 100%)",
+        transform: "rotateX(30deg)",
+        boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
+      }}
+    />
+    <div
+      className="absolute inset-6 rounded-full"
+      style={{
+        background: "linear-gradient(225deg, #06B6D4 0%, #3B82F6 100%)",
+        transform: "rotateX(30deg) translateZ(15px)"
+      }}
+    />
+  </motion.div>
+);
 
 const InsightsSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
+
     setIsSubmitting(true);
     try {
-      const { error } = await supabase.from("newsletter_subscribers").insert({ email });
+      const { error } = await supabase
+        .from("newsletter_subscribers")
+        .insert([{ email }]);
+
       if (error) throw error;
+
       toast.success("Successfully subscribed!");
       setEmail("");
     } catch (error) {
@@ -60,134 +90,99 @@ const InsightsSection = () => {
   };
 
   return (
-    <section ref={ref} className="px-4 md:px-8 bg-[#FAFAFA] py-16 md:py-24">
-      <div className="container mx-auto max-w-7xl">
-        {/* Option B Header - Unified */}
-        <motion.div 
-          className="relative mb-12 md:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+    <section className="bg-white">
+      <div className="flex flex-col lg:flex-row">
+        {/* Left: Articles List */}
+        <div className="w-full lg:w-2/3 border-r border-gray-200">
+          {insights.map((article, index) => (
+            <motion.div
+              key={article.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Link
+                to={`/research/${article.id}`}
+                className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-gray-50 ${
+                  index < insights.length - 1 ? "border-b border-gray-200" : ""
+                }`}
+              >
+                <div className="flex items-center gap-3 text-gray-400 text-xs mb-3">
+                  <span className="uppercase tracking-wider">{article.category}</span>
+                  <span>•</span>
+                  <span>{article.date}</span>
+                  <span>•</span>
+                  <span>{article.readTime} read</span>
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-600 transition-colors">
+                  {article.title}
+                </h3>
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                  {article.excerpt}
+                </p>
+                <div className="flex items-center gap-2 text-gray-400 group-hover:text-gray-900 transition-colors text-sm">
+                  Read article
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+
+          {/* View All Link */}
+          <div className="p-8 md:p-10 border-t border-gray-200">
+            <Link
+              to="/research"
+              className="inline-flex items-center gap-2 text-gray-900 font-medium hover:text-gray-600 transition-colors"
+            >
+              View all research
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Right: Newsletter CTA */}
+        <motion.div
+          className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] lg:text-[180px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
-            08
-          </span>
-          <div className="relative">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              <span className="text-gray-400">Latest</span>{" "}
-              <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-                Research
-              </span>
-            </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mt-4 rounded-full" />
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Latest Research
+          </h2>
+          <p className="text-gray-500 leading-relaxed mb-8">
+            Stay ahead with our insights on Korean Web3 market trends, marketing strategies, and ecosystem analysis.
+          </p>
+
+          <form onSubmit={handleSubscribe} className="mb-12">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="w-full px-4 py-3 border border-gray-200 text-gray-900 placeholder:text-gray-400 mb-3 focus:outline-none focus:border-gray-900 transition-colors"
+              required
+            />
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white px-6 py-3 text-sm font-medium hover:bg-gray-800 transition-colors disabled:opacity-50"
+            >
+              {isSubmitting ? "Subscribing..." : "SUBSCRIBE"}
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </form>
+
+          <BlueShape />
+
+          <div className="mt-12 pt-8 border-t border-gray-200">
+            <p className="text-gray-400 text-sm">
+              Join 500+ Web3 founders and marketers getting our weekly insights.
+            </p>
           </div>
         </motion.div>
-
-        <div className="grid lg:grid-cols-12 gap-12">
-          {/* Left - Newsletter */}
-          <div className={`lg:col-span-4 transition-all duration-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-            <div className="lg:sticky lg:top-32">
-              <p className="text-gray-600 mb-8">
-                Stay ahead with our market insights, research reports, and strategy guides for the Korean Web3 ecosystem.
-              </p>
-
-              {/* Newsletter Form - Unified Card Style */}
-              <form onSubmit={handleSubscribe} className="space-y-4 p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
-                <div className="relative group">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors duration-300" />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-primary/50 focus:bg-white transition-all duration-300"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="group w-full py-4 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-all duration-300 disabled:opacity-50"
-                >
-                  <span>{isSubmitting ? "Subscribing..." : "Subscribe to Newsletter"}</span>
-                </button>
-              </form>
-
-              <Link
-                to="/research"
-                className="group inline-flex items-center gap-2 text-gray-400 hover:text-primary transition-colors duration-300 mt-6 text-sm"
-              >
-                View all research
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-              </Link>
-            </div>
-          </div>
-
-          {/* Right - Articles */}
-          <div className="lg:col-span-8">
-            <div className="space-y-4">
-              {insights.map((article, index) => (
-                <Link
-                  key={article.id}
-                  to={`/research/${article.id}`}
-                  className={`group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden ${
-                    isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-                  }`}
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  {/* Hover Glow */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent" />
-                  </div>
-
-                  {/* Image */}
-                  <div className="relative md:w-56 h-40 rounded-xl overflow-hidden flex-shrink-0">
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    {article.trending && (
-                      <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-md bg-primary/90">
-                        <TrendingUp className="w-3 h-3 text-white" />
-                        <span className="text-[10px] text-white font-medium uppercase">Trending</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 flex flex-col justify-center relative z-10">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-xs text-primary uppercase tracking-wider font-medium px-2 py-1 rounded-md bg-primary/10">
-                        {article.category}
-                      </span>
-                      <div className="flex items-center gap-1 text-gray-400">
-                        <Clock className="w-3 h-3" />
-                        <span className="text-xs">{article.readTime}</span>
-                      </div>
-                    </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300 mb-2">
-                      {article.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
-                      {article.excerpt}
-                    </p>
-                    <div className="mt-4 flex items-center gap-2 text-gray-400 text-xs">
-                      <span>{article.date}</span>
-                    </div>
-                  </div>
-
-                  {/* Arrow */}
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary/10">
-                      <ArrowUpRight className="w-5 h-5 text-primary" />
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
