@@ -12,32 +12,32 @@ interface SectionHeaderProps {
 const SectionHeader = ({ title, linkTo, linkText = "VIEW ALL", dark = true }: SectionHeaderProps) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
       viewport={{ once: true }}
-      className="flex items-center gap-6 mb-12 md:mb-16"
+      className="flex items-center gap-4 md:gap-6 mb-10 md:mb-14"
     >
-      {/* Title */}
-      <h2 className={`text-sm font-medium tracking-[0.2em] uppercase ${dark ? 'text-white' : 'text-gray-900'}`}>
+      {/* Title - 4pillars style */}
+      <h2 className={`text-xs md:text-sm font-semibold tracking-[0.25em] uppercase whitespace-nowrap ${dark ? 'text-white' : 'text-gray-900'}`}>
         {title}
       </h2>
       
-      {/* Line */}
-      <div className={`flex-grow h-px ${dark ? 'bg-white/20' : 'bg-gray-300'}`} />
+      {/* Extending Line */}
+      <div className={`flex-grow h-px ${dark ? 'bg-white/15' : 'bg-gray-200'}`} />
       
       {/* View All Link */}
       {linkTo && (
         <Link 
           to={linkTo}
-          className={`group flex items-center gap-2 text-sm font-medium tracking-wide transition-colors ${
+          className={`group flex items-center gap-2 text-xs md:text-sm font-medium tracking-wider whitespace-nowrap transition-all duration-300 ${
             dark 
-              ? 'text-white/60 hover:text-white' 
-              : 'text-gray-500 hover:text-gray-900'
+              ? 'text-white/50 hover:text-white' 
+              : 'text-gray-400 hover:text-gray-900'
           }`}
         >
           {linkText}
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-3.5 h-3.5 md:w-4 md:h-4 group-hover:translate-x-1.5 transition-transform duration-300" />
         </Link>
       )}
     </motion.div>
