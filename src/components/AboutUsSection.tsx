@@ -200,10 +200,6 @@ const AboutUsSection = () => {
         }} transition={{
           duration: 0.7
         }}>
-            <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-6 tracking-widest uppercase">
-              <span className="w-8 h-px bg-primary" />
-              Why Choose Us
-            </span>
             
             <motion.p initial={{
             opacity: 0,
