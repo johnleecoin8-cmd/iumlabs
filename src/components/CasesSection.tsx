@@ -31,12 +31,12 @@ const featuredCases = [
   },
   {
     number: "02",
-    name: "KuCoin",
-    logo: kucoinLogo,
-    slug: "kucoin",
-    category: "Exchange",
-    result: "50K+ New Korean Users",
-    description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships.",
+    name: "Story Protocol",
+    logo: storyLogo,
+    slug: "story-protocol",
+    category: "IP",
+    result: "Korean IP Revolution",
+    description: "IP infrastructure platform launch with Korean creator community and media partnerships.",
   },
   {
     number: "03",
@@ -117,7 +117,7 @@ const featuredCases = [
 ];
 
 const additionalClients = [
-  { name: "Story Protocol", logo: storyLogo },
+  { name: "KuCoin", logo: kucoinLogo },
   { name: "MegaETH", logo: megaethLogo },
   { name: "Bybit", logo: bybitLogo },
 ];
