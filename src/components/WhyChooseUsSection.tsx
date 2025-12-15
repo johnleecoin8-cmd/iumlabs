@@ -131,7 +131,7 @@ const WhyChooseUsSection = () => {
       }} transition={{
         duration: 0.7,
         delay: 0.5
-      }} className="pt-10 border-t border-gray-200 py-[20px]">
+      }} className="pt-6 border-t border-gray-200 pb-4">
           <p className="text-center text-gray-400 text-sm uppercase tracking-widest mb-8">
             As Featured In Media
           </p>
