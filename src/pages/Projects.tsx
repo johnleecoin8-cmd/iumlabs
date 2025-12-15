@@ -32,9 +32,9 @@ import bybitBg from "@/assets/projects/bybit-bg.jpg";
 import saharaAiBg from "@/assets/projects/sahara-ai-bg.jpg";
 import mantraBg from "@/assets/projects/mantra-bg.jpg";
 
-// Import campaign images for projects without dedicated bg
-import fogoBg from "@/assets/campaigns/fogo-fest.avif";
-import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
+// Import project background images
+import fogoBg from "@/assets/projects/fogo-bg.jpg";
+import zkpassBg from "@/assets/projects/zkpass-bg.jpg";
 
 const cases = [
   {
