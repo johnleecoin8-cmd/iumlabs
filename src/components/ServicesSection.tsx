@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import SectionHeader from "./SectionHeader";
+import Bridge3D from "./Bridge3D";
 
 const services = [
   {
@@ -45,7 +46,11 @@ const services = [
 const ServicesSection = () => {
   return (
     <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+      {/* 3D Abstract Bridge - Background Right */}
+      <div className="absolute -right-32 top-1/3 w-[500px] h-[400px] opacity-15 z-0 pointer-events-none">
+        <Bridge3D type="abstract" color="#6B7280" className="w-full h-full" />
+      </div>
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
         {/* 4pillars-style Header */}
         <SectionHeader 
           title="SERVICES" 

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import SectionHeader from "./SectionHeader";
+import Bridge3D from "./Bridge3D";
 
 // Import blog images
 import aiAgentsImg from "@/assets/blog/ai-agents-defi.jpg";
@@ -64,7 +65,12 @@ const InsightsSection = () => {
 
   return (
     <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+      {/* 3D Minimal Bridge - Background Left */}
+      <div className="absolute -left-16 bottom-1/4 w-[350px] h-[250px] opacity-15 z-0 pointer-events-none">
+        <Bridge3D type="minimal" color="#E5E7EB" className="w-full h-full" />
+      </div>
+      
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
         {/* 4pillars-style Header */}
         <SectionHeader 
           title="INSIGHTS" 
