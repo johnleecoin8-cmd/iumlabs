@@ -60,8 +60,7 @@ const ServiceCard = ({ number, title, description, link, index }: ServiceCardPro
       to={link}
       className="group block h-full border border-white/10 hover:border-white/30 p-6 transition-all duration-300 hover:bg-white/[0.02]"
     >
-      <span className="text-white/40 font-mono text-sm">[{number}]</span>
-      <h4 className="text-xl font-bold text-white mt-3">
+      <h4 className="text-xl font-bold text-white">
         {title}
       </h4>
       <p className="text-white/50 text-sm mt-2 leading-relaxed mb-4">
