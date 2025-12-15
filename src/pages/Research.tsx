@@ -3038,11 +3038,11 @@ const Research = () => {
           <div className="container mx-auto max-w-7xl px-4">
             <Link to={`/research/${researchPosts[0].slug}`} className="group block">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <div className="aspect-[16/10] rounded-2xl overflow-hidden">
+                <div className="aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 hover:border-white/30 transition-all duration-300">
                   <img 
                     src={researchPosts[0].image} 
                     alt={researchPosts[0].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 <div>
@@ -3083,8 +3083,8 @@ const Research = () => {
       )}
 
       {/* Article Grid */}
-      <section className="bg-[hsl(0,0%,6%)] py-16">
-        <div className="container mx-auto max-w-7xl px-4">
+      <section className="bg-[#0A0A0A] py-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {currentPosts.map((post, index) => (
               <Link 
@@ -3094,11 +3094,11 @@ const Research = () => {
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Image */}
-                <div className="aspect-[16/10] rounded-xl overflow-hidden mb-4">
+                <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-4">
                   <img 
                     src={post.image} 
                     alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                 </div>
                 
