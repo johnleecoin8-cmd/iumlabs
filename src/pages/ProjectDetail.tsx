@@ -671,7 +671,7 @@ const ProjectDetail = () => {
         />
         
         {/* Content */}
-        <div className="relative z-10 container mx-auto max-w-6xl px-4 pt-32 pb-20">
+        <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-8 pt-32 pb-20">
           {/* Back Button */}
           <button
             onClick={() => navigate("/projects")}
@@ -755,13 +755,13 @@ const ProjectDetail = () => {
 
       {/* Metrics Section - Dark Project Color Style */}
       <section className="bg-[#0A0A0A] py-16">
-        <div className="container mx-auto max-w-6xl px-4">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
           {/* Metrics Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {project.metrics.map((metric, index) => (
               <div 
                 key={index} 
-                className="group relative p-6 md:p-8 rounded-2xl bg-[#111] border border-white/10 transition-all duration-300 overflow-hidden"
+                className="group relative p-6 md:p-8 rounded-2xl bg-[#111] border border-white/10 hover:border-white/30 hover:bg-white/[0.02] transition-all duration-300 overflow-hidden"
                 style={{ '--glow-color': project.glowColor } as React.CSSProperties}
                 onMouseEnter={(e) => e.currentTarget.style.borderColor = `${project.glowColor}50`}
                 onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
@@ -793,10 +793,10 @@ const ProjectDetail = () => {
 
       {/* Challenge & Approach Section - Dark Theme */}
       <section className="bg-[#0A0A0A]">
-        <div className="container mx-auto max-w-6xl px-4">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left - THE CHALLENGE */}
-            <div className="p-8 md:p-12 rounded-3xl bg-[#111] border border-white/10 relative overflow-hidden">
+            <div className="p-8 md:p-12 rounded-2xl bg-[#111] border border-white/10 hover:border-white/30 transition-all duration-300 relative overflow-hidden">
               {/* Accent Line */}
               <div 
                 className="absolute top-0 left-0 w-full h-1" 
@@ -813,7 +813,7 @@ const ProjectDetail = () => {
             </div>
 
             {/* Right - WHAT WE DID */}
-            <div className="p-8 md:p-12 rounded-3xl bg-[#111] border border-white/10 relative overflow-hidden">
+            <div className="p-8 md:p-12 rounded-2xl bg-[#111] border border-white/10 hover:border-white/30 transition-all duration-300 relative overflow-hidden">
               {/* Accent Line */}
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-white/30 via-white/10 to-transparent" />
               
@@ -846,7 +846,7 @@ const ProjectDetail = () => {
 
       {/* Gallery Section - Dark Project Color Style */}
       <section className="bg-[#0A0A0A] py-16">
-        <div className="container mx-auto max-w-6xl px-4">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
             <div>
@@ -889,7 +889,7 @@ const ProjectDetail = () => {
               {project.gallery.map((item, index) => (
                 <div 
                   key={index} 
-                  className="relative w-72 md:w-80 aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0 border border-white/10 transition-all"
+                  className="relative w-72 md:w-80 aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0 border border-white/10 hover:border-white/30 transition-all duration-300"
                   onClick={() => openLightbox(index)}
                   onMouseEnter={(e) => e.currentTarget.style.borderColor = `${project.glowColor}50`}
                   onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
@@ -897,7 +897,7 @@ const ProjectDetail = () => {
                   <img
                     src={item.src}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   
                   {/* Overlay */}
@@ -931,7 +931,7 @@ const ProjectDetail = () => {
 
       {/* Next Project - Dark Project Color Style */}
       <section className="py-24 bg-[#0A0A0A] border-t border-white/10">
-        <div className="container mx-auto max-w-6xl px-4">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
           <Link 
             to={`/projects/${nextSlug}`}
             onClick={() => window.scrollTo(0, 0)}

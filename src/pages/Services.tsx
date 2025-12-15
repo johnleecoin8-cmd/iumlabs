@@ -332,7 +332,7 @@ const Services = () => {
 
       {/* Services List - Lunar Strategy Horizontal Layout */}
       <section ref={servicesRef} className="bg-[#fafafa] py-24">
-        <div className="container mx-auto px-6 lg:px-16">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
           {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-4">
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
@@ -356,10 +356,10 @@ const Services = () => {
           {/* Service Items - Horizontal List */}
           <div className="space-y-0">
             {services.map((service, index) => (
-              <Link
-                key={service.number}
-                to={service.link}
-                className={`group flex flex-col lg:flex-row items-stretch gap-0 transition-all duration-500 ${
+                <Link
+                  key={service.number}
+                  to={service.link}
+                  className={`group flex flex-col lg:flex-row items-stretch gap-0 transition-all duration-300 ${
                   servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
@@ -403,8 +403,8 @@ const Services = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section ref={testimonialsRef} className="bg-[#f5f5f5] py-24">
-        <div className="container mx-auto max-w-7xl px-6 lg:px-16">
+      <section ref={testimonialsRef} className="bg-[#FAFAFA] py-24">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
           {/* Header */}
           <div className={`flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16 transition-all duration-700 ${
             testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
@@ -426,7 +426,7 @@ const Services = () => {
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
-                className={`bg-white rounded-2xl p-8 border border-slate-200 hover:border-[#2563eb]/30 hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${
+                className={`bg-white rounded-2xl p-8 border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300 ${
                   testimonialsVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
                 }`}
                 style={{ transitionDelay: `${index * 150}ms` }}

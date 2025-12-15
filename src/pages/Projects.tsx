@@ -408,28 +408,28 @@ const Projects = () => {
       </main>
 
       {/* Projects Grid */}
-      <section ref={ref} className="py-24 px-4 bg-background">
-        <div className="container mx-auto max-w-7xl">
+      <section ref={ref} className="py-24 bg-[#0A0A0A]">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {cases.map((caseItem, index) => (
               <Link
                 key={caseItem.name}
                 to={`/projects/${caseItem.slug}`}
                 onClick={() => window.scrollTo(0, 0)}
-                className={`group cursor-pointer transition-all duration-500 ${
+                className={`group cursor-pointer transition-all duration-300 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
+                style={{ transitionDelay: `${index * 0.1}s` }}
               >
                 <div 
-                  className="relative aspect-square rounded-3xl overflow-hidden mb-4 transition-all duration-500 hover:-translate-y-2"
+                  className="relative aspect-square rounded-2xl overflow-hidden mb-4 transition-all duration-300 hover:-translate-y-2"
                   style={{ boxShadow: `0 4px 30px ${caseItem.glowColor}20` }}
                   onMouseEnter={(e) => e.currentTarget.style.boxShadow = `0 10px 60px ${caseItem.glowColor}50, 0 0 100px ${caseItem.glowColor}30`}
                   onMouseLeave={(e) => e.currentTarget.style.boxShadow = `0 4px 30px ${caseItem.glowColor}20`}
                 >
                   {/* Background Image */}
                   <div 
-                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-300 group-hover:scale-105"
                     style={{ backgroundImage: `url(${caseItem.bgImage})` }}
                   />
                   
@@ -437,8 +437,8 @@ const Projects = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
                   
                   {/* Project Color Glow Effect on Hover */}
-                  <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                  <div
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
                     style={{
                       background: `radial-gradient(ellipse at 50% 50%, ${caseItem.glowColor}30 0%, transparent 70%)`,
                     }}

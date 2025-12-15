@@ -226,9 +226,9 @@ const Contact = () => {
       {/* Services Highlight Section */}
       <section 
         ref={servicesRef as React.RefObject<HTMLElement>}
-        className="bg-background/95 py-20 px-4 border-y border-white/5"
+        className="bg-[#0A0A0A] py-20 border-y border-white/5"
       >
-        <div className="container mx-auto max-w-6xl">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
           <div className={`text-center mb-12 transition-all duration-700 ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             <span className="text-sm text-white/40 mb-3 block">[ Our Services ]</span>
             <h2 className="text-3xl md:text-4xl font-light text-white">
@@ -238,17 +238,17 @@ const Contact = () => {
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {serviceHighlights.map((service, index) => (
-              <Link 
-                key={index}
-                to={service.link}
-                className={`group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 overflow-hidden transition-all duration-500 ${
-                  servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                <Link 
+                  key={index}
+                  to={service.link}
+                  className={`group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/30 hover:bg-white/[0.02] overflow-hidden transition-all duration-300 ${
+                    servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
-                style={{ transitionDelay: `${index * 100 + 200}ms` }}
+                style={{ transitionDelay: `${index * 0.1}s` }}
               >
-                {/* Hover gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-blue-500/10 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  {/* Hover gradient background */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-blue-500/10 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-4">
@@ -267,17 +267,17 @@ const Contact = () => {
       {/* Contact Form Section - Dark Theme 2-Column */}
       <section 
         ref={formRef as React.RefObject<HTMLElement>}
-        className="bg-background py-24 px-4"
+        className="bg-[#0A0A0A] py-24"
       >
-        <div className="container mx-auto max-w-6xl">
-          <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 transition-all duration-700 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
+          <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 transition-all duration-300 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
             {/* Left Column - Image & Contact Info */}
             <div 
-              className="space-y-8 transition-all duration-700"
+              className="space-y-8 transition-all duration-300"
               style={{ transitionDelay: '150ms' }}
             >
               {/* Seoul Skyline Image */}
-              <div className="rounded-xl overflow-hidden">
+              <div className="rounded-2xl overflow-hidden">
                 <img 
                   src={seoulSkyline} 
                   alt="Seoul Skyline" 
@@ -290,7 +290,7 @@ const Contact = () => {
                 {contactDetails.map((detail, index) => (
                   <div 
                     key={index}
-                    className={`transition-all duration-500 ${formVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
+                    className={`transition-all duration-300 ${formVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
                     style={{ transitionDelay: `${index * 100 + 300}ms` }}
                   >
                     <span className="text-sm text-white/40 block mb-1">{detail.label}</span>
@@ -313,7 +313,7 @@ const Contact = () => {
 
             {/* Right Column - Form */}
             <div 
-              className={`transition-all duration-700 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+              className={`transition-all duration-300 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
               style={{ transitionDelay: '300ms' }}
             >
               <form onSubmit={handleSubmit} className="space-y-6">
