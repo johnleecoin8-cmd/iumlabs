@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Search } from "lucide-react";
 import { Link } from "react-router-dom";
-import SectionHeader from "./SectionHeader";
+import Pillars3D from "./Pillars3D";
 
 // Import blog images
 import aiAgentsImg from "@/assets/blog/ai-agents-defi.jpg";
@@ -59,133 +59,109 @@ const insights = [
 ];
 
 const InsightsSection = () => {
-  const featuredArticle = insights[0];
-  const listArticles = insights.slice(1, 5);
-
   return (
-    <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
-        {/* 4pillars-style Header */}
-        <SectionHeader 
-          title="INSIGHTS" 
-          linkTo="/research" 
-          linkText="VIEW ALL"
-          dark={true}
-        />
-
-        {/* Featured + List Layout */}
-        <div className="grid lg:grid-cols-12 gap-6 lg:gap-8">
-          {/* Left - Featured Article (Large Card) - Enhanced 4pillars Style */}
-          <motion.div
-            className="lg:col-span-7"
+    <section className="relative bg-[#0A0A0B] overflow-hidden">
+      {/* 4pillars-style Hero with 3D Pillars */}
+      <div className="relative min-h-[60vh] flex flex-col items-center justify-center py-20">
+        {/* 3D Pillars Background */}
+        <div className="absolute inset-0 w-full h-full">
+          <Pillars3D className="w-full h-full" />
+        </div>
+        
+        {/* Content over pillars */}
+        <div className="relative z-10 text-center px-4">
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            className="text-white/90 text-sm md:text-base uppercase tracking-[0.3em] mb-4"
           >
-            <Link to={`/research/${featuredArticle.id}`} className="group block">
-              <div 
-                className="relative rounded-2xl overflow-hidden h-[400px] md:h-[480px] lg:h-[520px] transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:shadow-2xl"
-                style={{ perspective: "1000px" }}
-              >
-                {/* Background Image with Enhanced Zoom */}
-                <img 
-                  src={featuredArticle.image} 
-                  alt={featuredArticle.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-                
-                {/* Enhanced Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity duration-500" />
-                
-                {/* Glow Effect on Hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />
-
-                {/* Content */}
-                <div className="absolute inset-0 p-6 md:p-8 lg:p-10 flex flex-col justify-end">
-                  {/* Category Badge - Enhanced */}
-                  <motion.span 
-                    className="inline-block bg-white/10 backdrop-blur-md text-white text-xs font-semibold px-4 py-2 rounded-full mb-6 w-fit border border-white/20 group-hover:bg-primary/20 group-hover:border-primary/30 transition-all duration-300"
-                  >
-                    {featuredArticle.category}
-                  </motion.span>
-
-                  {/* Title - Much Larger */}
-                  <h3 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 leading-tight group-hover:text-white transition-colors">
-                    {featuredArticle.title}
-                  </h3>
-                  
-                  {/* Excerpt */}
-                  <p className="text-white/70 text-base md:text-lg lg:text-xl mb-6 line-clamp-2 max-w-2xl">
-                    {featuredArticle.excerpt}
-                  </p>
-
-                  {/* Meta + Read More */}
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                      <span className="text-white/50 text-sm font-mono">{featuredArticle.date}</span>
-                      <span className="text-white/30">·</span>
-                      <span className="text-white/50 text-sm">{featuredArticle.readTime} read</span>
-                    </div>
-                    
-                    {/* Read More Arrow */}
-                    <div className="flex items-center gap-2 text-white/50 group-hover:text-primary transition-colors">
-                      <span className="text-sm font-medium opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
-                        Read article
-                      </span>
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </Link>
+            Professional Research For
+          </motion.h2>
+          <motion.h3
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-primary text-lg md:text-xl uppercase tracking-[0.2em] mb-8"
+          >
+            Web3 Projects and Crypto Natives
+          </motion.h3>
+          
+          {/* Search Bar - 4pillars style */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="relative max-w-xl mx-auto"
+          >
+            <input
+              type="text"
+              placeholder="Search"
+              className="w-full bg-white/[0.05] border border-white/10 rounded-full px-6 py-4 text-white placeholder-white/40 focus:outline-none focus:border-white/30 transition-colors"
+            />
+            <Search className="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
           </motion.div>
+        </div>
+      </div>
 
-          {/* Right - Article List - Enhanced */}
-          <div className="lg:col-span-5 flex flex-col gap-4">
-            {listArticles.map((article, index) => (
+      {/* Articles Section */}
+      <div className="bg-[#F5F5F5] py-16 md:py-20">
+        <div className="container mx-auto px-4 md:px-8 lg:px-16">
+          {/* Comments/Articles Header */}
+          <div className="flex items-center justify-between mb-8">
+            <h4 className="text-gray-900 font-semibold uppercase tracking-wider">Research</h4>
+            <Link 
+              to="/research" 
+              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
+            >
+              VIEW ALL <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {/* Horizontal Scrollable Cards - 4pillars style */}
+          <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
+            {insights.map((article, index) => (
               <motion.div
                 key={article.id}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="flex-shrink-0 w-[320px] md:w-[380px]"
               >
                 <Link 
                   to={`/research/${article.id}`} 
-                  className="group flex gap-4 p-4 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.05] hover:border-white/[0.15] transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-lg hover:shadow-black/10"
+                  className="group block bg-[#1a1a1a] rounded-2xl overflow-hidden hover:bg-[#222] transition-colors"
                 >
-                  {/* Thumbnail */}
-                  <div className="w-24 h-24 md:w-28 md:h-28 flex-shrink-0 rounded-lg overflow-hidden">
-                    <img 
-                      src={article.image} 
-                      alt={article.title}
-                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 flex flex-col justify-center min-w-0">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-primary/80 text-xs font-semibold">{article.category}</span>
-                      <span className="text-white/20">·</span>
-                      <span className="text-white/40 text-xs font-mono">{article.date}</span>
+                  <div className="p-5">
+                    <div className="flex items-start gap-4">
+                      <span className="text-primary text-xs font-medium whitespace-nowrap">
+                        {article.date}
+                      </span>
+                      <h4 className="text-white font-medium text-sm leading-snug group-hover:text-primary transition-colors line-clamp-2">
+                        {article.title}
+                      </h4>
                     </div>
-                    
-                    <h4 className="text-white font-semibold text-sm md:text-base group-hover:text-primary transition-colors line-clamp-2 mb-1">
-                      {article.title}
-                    </h4>
-                    
-                    <span className="text-white/30 text-xs">{article.readTime} read</span>
-                  </div>
-
-                  {/* Arrow */}
-                  <div className="flex-shrink-0 self-center">
-                    <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                    <div className="flex items-center gap-2 mt-4">
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-cyan-400" />
+                      <span className="text-white/50 text-xs">{article.category}</span>
+                    </div>
                   </div>
                 </Link>
               </motion.div>
             ))}
+            
+            {/* View More Arrow */}
+            <div className="flex-shrink-0 flex items-center justify-center w-16">
+              <Link 
+                to="/research"
+                className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-500 hover:bg-gray-100 transition-all"
+              >
+                <ArrowRight className="w-5 h-5 text-gray-600" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>
