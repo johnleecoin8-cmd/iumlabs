@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useState } from "react";
 import SectionHeader from "./SectionHeader";
 
 // Import logos
@@ -91,56 +92,6 @@ const featuredCases = [
     result: "30K+ Korean Wallets",
     description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users.",
   },
-  {
-    number: "07",
-    name: "FOGO",
-    logo: fogoLogo,
-    bgImage: fogoCampaign,
-    slug: "fogo",
-    category: "Layer 1",
-    result: "Fogo Fest 2025 Success",
-    description: "Launch event and community activation for FOGO ecosystem in Korean market.",
-  },
-  {
-    number: "08",
-    name: "Lbank",
-    logo: null,
-    bgImage: lbankCampaign,
-    slug: "lbank",
-    category: "Exchange",
-    result: "1001 Festival Seoul",
-    description: "Major exchange event marketing and Korean community engagement campaign.",
-  },
-  {
-    number: "09",
-    name: "zkPass",
-    logo: zkpassLogo,
-    bgImage: zkpassCampaign,
-    slug: "zkpass",
-    category: "Privacy",
-    result: "The Verifiable Nights",
-    description: "Privacy-focused Web3 identity solution launch with Korean developer community.",
-  },
-  {
-    number: "10",
-    name: "Open Ledger",
-    logo: null,
-    bgImage: openledgerCampaign,
-    slug: "openledger",
-    category: "Infrastructure",
-    result: "Korea Media Coverage",
-    description: "Strategic media interviews and PR campaign for Korean market awareness.",
-  },
-  {
-    number: "11",
-    name: "SynFutures",
-    logo: synfuturesLogo,
-    bgImage: synfuturesCampaign,
-    slug: "synfutures",
-    category: "DeFi",
-    result: "Gangnam Billboard Promotion",
-    description: "High-visibility billboard campaign in Gangnam district for Korean market awareness.",
-  },
 ];
 
 const additionalClients = [
@@ -161,102 +112,148 @@ interface CaseCardProps {
   index: number;
 }
 
-const CaseCard = ({ name, logo, bgImage, slug, category, result, description, index }: CaseCardProps) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6, delay: index * 0.1 }}
-    viewport={{ once: true }}
-    className="group relative"
-    style={{ perspective: "1200px" }}
-  >
-    <Link
-      to={`/projects/${slug}`}
-      onClick={() => window.scrollTo(0, 0)}
-      className="block h-full relative"
+const CaseCard = ({ number, name, logo, bgImage, slug, category, result, description, index }: CaseCardProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="group relative"
+      style={{ perspective: "1500px" }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* 4pillars-style 3D Stack Effect - Multiple Background Layers */}
-      <div 
-        className="absolute inset-0 rounded-2xl bg-white/[0.03] transform translate-x-6 translate-y-6 transition-all duration-500 group-hover:translate-x-8 group-hover:translate-y-8"
-        style={{ zIndex: -3 }}
-      />
-      <div 
-        className="absolute inset-0 rounded-2xl bg-white/[0.05] transform translate-x-4 translate-y-4 transition-all duration-500 group-hover:translate-x-5 group-hover:translate-y-5"
-        style={{ zIndex: -2 }}
-      />
-      <div 
-        className="absolute inset-0 rounded-2xl bg-white/[0.08] transform translate-x-2 translate-y-2 transition-all duration-500 group-hover:translate-x-2.5 group-hover:translate-y-2.5"
-        style={{ zIndex: -1 }}
-      />
-      
-      {/* Main Card with Enhanced 3D Tilt */}
-      <div 
-        className="relative overflow-hidden rounded-2xl transition-all duration-500 group-hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.7)] group-hover:-translate-y-2"
-        style={{
-          transformStyle: "preserve-3d",
-          transition: "transform 0.4s cubic-bezier(0.03, 0.98, 0.52, 0.99), box-shadow 0.5s ease-out",
-        }}
-        onMouseMove={(e) => {
-          const card = e.currentTarget;
-          const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const centerX = rect.width / 2;
-          const centerY = rect.height / 2;
-          const rotateX = (y - centerY) / 12;
-          const rotateY = (centerX - x) / 12;
-          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-8px)`;
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.transform = 'rotateX(0deg) rotateY(0deg) translateY(0)';
-        }}
+      <Link
+        to={`/projects/${slug}`}
+        onClick={() => window.scrollTo(0, 0)}
+        className="block h-full relative"
       >
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src={bgImage}
-            alt={name}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/20 group-hover:from-black/90 group-hover:via-black/50 transition-all duration-500" />
-        </div>
+        {/* 4pillars Reports Style - Deep 3D Stack with Book-Open Effect */}
+        {/* Layer 5 - Deepest */}
+        <div 
+          className="absolute inset-0 rounded-2xl bg-white/[0.02] transition-all duration-700 ease-out"
+          style={{ 
+            transform: isHovered 
+              ? "translateX(20px) translateY(20px) rotateX(-8deg) rotateY(4deg)" 
+              : "translateX(10px) translateY(10px) rotateX(0deg)",
+            zIndex: -5,
+            boxShadow: "0 30px 60px -30px rgba(0,0,0,0.5)"
+          }}
+        />
+        {/* Layer 4 */}
+        <div 
+          className="absolute inset-0 rounded-2xl bg-white/[0.03] transition-all duration-600 ease-out"
+          style={{ 
+            transform: isHovered 
+              ? "translateX(15px) translateY(15px) rotateX(-6deg) rotateY(3deg)" 
+              : "translateX(8px) translateY(8px) rotateX(0deg)",
+            zIndex: -4,
+            boxShadow: "0 25px 50px -25px rgba(0,0,0,0.4)"
+          }}
+        />
+        {/* Layer 3 */}
+        <div 
+          className="absolute inset-0 rounded-2xl bg-white/[0.05] transition-all duration-500 ease-out"
+          style={{ 
+            transform: isHovered 
+              ? "translateX(10px) translateY(10px) rotateX(-4deg) rotateY(2deg)" 
+              : "translateX(6px) translateY(6px) rotateX(0deg)",
+            zIndex: -3,
+            boxShadow: "0 20px 40px -20px rgba(0,0,0,0.3)"
+          }}
+        />
+        {/* Layer 2 */}
+        <div 
+          className="absolute inset-0 rounded-2xl bg-white/[0.08] transition-all duration-400 ease-out"
+          style={{ 
+            transform: isHovered 
+              ? "translateX(6px) translateY(6px) rotateX(-2deg) rotateY(1deg)" 
+              : "translateX(4px) translateY(4px) rotateX(0deg)",
+            zIndex: -2,
+            boxShadow: "0 15px 30px -15px rgba(0,0,0,0.2)"
+          }}
+        />
+        {/* Layer 1 - Closest */}
+        <div 
+          className="absolute inset-0 rounded-2xl bg-white/[0.1] transition-all duration-300 ease-out"
+          style={{ 
+            transform: isHovered 
+              ? "translateX(3px) translateY(3px) rotateX(-1deg)" 
+              : "translateX(2px) translateY(2px) rotateX(0deg)",
+            zIndex: -1,
+          }}
+        />
         
-        {/* Content */}
-        <div className="relative p-6 min-h-[340px] flex flex-col justify-end">
-          <div className="flex items-start justify-between mb-4">
-            <span className="text-white/70 text-xs uppercase tracking-wider bg-white/[0.08] backdrop-blur-sm px-3 py-1.5 rounded-xl border border-white/[0.1]">{category}</span>
+        {/* Main Card with Book-Opening Effect */}
+        <motion.div 
+          className="relative overflow-hidden rounded-2xl transition-all duration-500 ease-out"
+          style={{
+            transformStyle: "preserve-3d",
+            transform: isHovered 
+              ? "translateY(-12px) rotateX(2deg) rotateY(-1deg)" 
+              : "translateY(0) rotateX(0deg) rotateY(0deg)",
+            boxShadow: isHovered 
+              ? "0 50px 100px -30px rgba(0,0,0,0.8), 0 30px 60px -20px rgba(0,0,0,0.5)" 
+              : "0 20px 40px -20px rgba(0,0,0,0.4)",
+          }}
+        >
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <img
+              src={bgImage}
+              alt={name}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/20 group-hover:from-black/90 group-hover:via-black/50 transition-all duration-500" />
           </div>
           
-          <div className="flex items-center gap-3 mb-3">
-            {logo && (
-              <div className="w-12 h-12 rounded-xl bg-white/[0.08] backdrop-blur-sm p-2 flex items-center justify-center border border-white/[0.1] group-hover:bg-white/[0.12] transition-all duration-300">
-                <img
-                  src={logo}
-                  alt={name}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-            )}
-            <h4 className="text-xl font-bold text-white">{name}</h4>
+          {/* Number Badge */}
+          <div className="absolute top-4 left-4">
+            <span className="text-white/20 text-6xl font-bold">{number}</span>
           </div>
           
-          <p className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400 font-semibold text-sm mb-3">
-            {result}
-          </p>
-          
-          <p className="text-white/70 text-sm leading-relaxed mb-4 line-clamp-2">
-            {description}
-          </p>
-          
-          <div className="flex items-center gap-2 text-white/50 group-hover:text-white transition-colors text-sm">
-            View case study
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+          {/* Content */}
+          <div className="relative p-6 min-h-[380px] flex flex-col justify-end">
+            <div className="flex items-start justify-between mb-4">
+              <span className="text-white/70 text-xs uppercase tracking-wider bg-white/[0.08] backdrop-blur-sm px-3 py-1.5 rounded-xl border border-white/[0.1] group-hover:bg-white/[0.15] group-hover:border-white/[0.2] transition-all">{category}</span>
+            </div>
+            
+            <div className="flex items-center gap-3 mb-3">
+              {logo && (
+                <div className="w-12 h-12 rounded-xl bg-white/[0.08] backdrop-blur-sm p-2 flex items-center justify-center border border-white/[0.1] group-hover:bg-white/[0.15] group-hover:scale-110 transition-all duration-300">
+                  <img
+                    src={logo}
+                    alt={name}
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              )}
+              <h4 className="text-2xl font-bold text-white">{name}</h4>
+            </div>
+            
+            <p className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400 font-semibold text-sm mb-3">
+              {result}
+            </p>
+            
+            <p className="text-white/70 text-sm leading-relaxed mb-4 line-clamp-2 group-hover:text-white/80 transition-colors">
+              {description}
+            </p>
+            
+            <div className="flex items-center gap-2 text-white/50 group-hover:text-primary transition-colors text-sm">
+              <span className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                View case study
+              </span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
+            </div>
           </div>
-        </div>
-      </div>
-    </Link>
-  </motion.div>
-);
+        </motion.div>
+      </Link>
+    </motion.div>
+  );
+};
 
 const CasesSection = () => {
   return (
@@ -271,8 +268,8 @@ const CasesSection = () => {
         />
 
         {/* Cases Grid - 3x2 */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-          {featuredCases.slice(0, 6).map((caseItem, index) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mb-16">
+          {featuredCases.map((caseItem, index) => (
             <CaseCard key={caseItem.slug} {...caseItem} index={index} />
           ))}
         </div>
