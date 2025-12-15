@@ -1,6 +1,6 @@
-import { useState, useRef } from "react";
-import { motion, AnimatePresence, PanInfo } from "framer-motion";
-import { Users, TrendingUp, Target, Newspaper, Calendar, Shield, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Users, TrendingUp, Target, Newspaper, Calendar, Shield, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
 // Service images
@@ -15,9 +15,7 @@ const services = [
   {
     icon: Users,
     title: "Community Growth",
-    subtitle: "Build & Engage",
-    description: "Build and engage vibrant Korean crypto communities across Telegram, KakaoTalk, and Discord with native Korean moderators.",
-    features: ["24/7 Korean moderation", "Telegram & Discord", "Sentiment analysis"],
+    description: "Build and engage vibrant Korean crypto communities across Telegram, KakaoTalk, and Discord.",
     image: communityImg,
     color: "#3B82F6",
     link: "/services/community"
@@ -25,9 +23,7 @@ const services = [
   {
     icon: TrendingUp,
     title: "KOL & Influencer",
-    subtitle: "Amplify Reach",
-    description: "Connect with Korea's top crypto influencers and thought leaders for authentic promotion and brand awareness.",
-    features: ["1000+ verified KOLs", "YouTube & Twitter", "Performance tracking"],
+    description: "Connect with Korea's top crypto influencers and thought leaders for authentic promotion.",
     image: kolImg,
     color: "#8B5CF6",
     link: "/services/influencer"
@@ -35,9 +31,7 @@ const services = [
   {
     icon: Target,
     title: "GTM Strategy",
-    subtitle: "Market Entry",
-    description: "Comprehensive go-to-market strategies tailored for the Korean blockchain ecosystem and regulatory landscape.",
-    features: ["Market analysis", "Launch planning", "KPI definition"],
+    description: "Comprehensive go-to-market strategies tailored for the Korean blockchain ecosystem.",
     image: gtmImg,
     color: "#EC4899",
     link: "/services/gtm-strategy"
@@ -45,9 +39,7 @@ const services = [
   {
     icon: Newspaper,
     title: "PR & Media",
-    subtitle: "Secure Coverage",
-    description: "Secure coverage in Korea's leading crypto publications and mainstream media outlets for maximum visibility.",
-    features: ["50+ media partners", "Press releases", "Interview placements"],
+    description: "Secure coverage in Korea's leading crypto publications and mainstream media outlets.",
     image: prImg,
     color: "#F59E0B",
     link: "/services/pr"
@@ -55,9 +47,7 @@ const services = [
   {
     icon: Calendar,
     title: "Events & AMAs",
-    subtitle: "Direct Engagement",
-    description: "Host impactful side events, AMAs, and meetups at major Korean blockchain conferences and venues.",
-    features: ["Conference presence", "VIP networking", "AMA hosting"],
+    description: "Host impactful side events, AMAs, and meetups at major Korean blockchain conferences.",
     image: eventsImg,
     color: "#10B981",
     link: "/services/yap"
@@ -65,9 +55,7 @@ const services = [
   {
     icon: Shield,
     title: "VASP Compliance",
-    subtitle: "Navigate Regulations",
-    description: "Navigate Korean regulatory requirements with expert VASP registration and compliance support.",
-    features: ["VASP registration", "AML/KYC setup", "Legal consulting"],
+    description: "Navigate Korean regulatory requirements with expert VASP registration support.",
     image: vaspImg,
     color: "#06B6D4",
     link: "/services/social-media"
@@ -76,8 +64,18 @@ const services = [
 
 const ServicesSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [direction, setDirection] = useState(0);
-  const constraintsRef = useRef(null);
+
+  // Auto-rotate every 5 seconds
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const interval = setInterval(() => {
+      setDirection(1);
+      setActiveIndex((prev) => (prev + 1) % services.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
 
   const goToSlide = (index: number) => {
     setDirection(index > activeIndex ? 1 : -1);
@@ -85,271 +83,274 @@ const ServicesSection = () => {
   };
 
   const goNext = () => {
-    if (activeIndex < services.length - 1) {
-      setDirection(1);
-      setActiveIndex(activeIndex + 1);
-    }
+    setDirection(1);
+    setActiveIndex((prev) => (prev + 1) % services.length);
   };
 
   const goPrev = () => {
-    if (activeIndex > 0) {
-      setDirection(-1);
-      setActiveIndex(activeIndex - 1);
-    }
+    setDirection(-1);
+    setActiveIndex((prev) => (prev - 1 + services.length) % services.length);
   };
 
-  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    const threshold = 50;
-    if (info.offset.x < -threshold && activeIndex < services.length - 1) {
-      goNext();
-    } else if (info.offset.x > threshold && activeIndex > 0) {
-      goPrev();
+  const getCardStyle = (index: number) => {
+    const diff = index - activeIndex;
+    const normalizedDiff = ((diff + services.length) % services.length);
+    
+    // Calculate position relative to active card
+    let position = normalizedDiff;
+    if (normalizedDiff > services.length / 2) {
+      position = normalizedDiff - services.length;
     }
-  };
 
-  const slideVariants = {
-    enter: (direction: number) => ({
-      x: direction > 0 ? "100%" : "-100%",
-      opacity: 0,
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => ({
-      x: direction > 0 ? "-100%" : "100%",
-      opacity: 0,
-    }),
+    const isActive = position === 0;
+    const isAdjacent = Math.abs(position) === 1;
+    const isSecondary = Math.abs(position) === 2;
+
+    if (isActive) {
+      return {
+        x: 0,
+        rotateY: 0,
+        scale: 1,
+        z: 100,
+        opacity: 1,
+        blur: 0,
+      };
+    } else if (isAdjacent) {
+      return {
+        x: position * 320,
+        rotateY: position * -25,
+        scale: 0.75,
+        z: 50,
+        opacity: 0.7,
+        blur: 2,
+      };
+    } else if (isSecondary) {
+      return {
+        x: position * 280,
+        rotateY: position * -35,
+        scale: 0.55,
+        z: 25,
+        opacity: 0.4,
+        blur: 4,
+      };
+    } else {
+      return {
+        x: position * 200,
+        rotateY: position * -40,
+        scale: 0.4,
+        z: 0,
+        opacity: 0,
+        blur: 8,
+      };
+    }
   };
 
   const activeService = services[activeIndex];
   const ActiveIcon = activeService.icon;
 
   return (
-    <section className="relative h-screen bg-[#0A0A0B] overflow-hidden">
-      {/* Fullscreen Slider */}
-      <div ref={constraintsRef} className="absolute inset-0">
-        <AnimatePresence initial={false} custom={direction} mode="wait">
-          <motion.div
-            key={activeIndex}
-            custom={direction}
-            variants={slideVariants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ type: "tween", duration: 0.5, ease: "easeInOut" }}
-            drag="x"
-            dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.2}
-            onDragEnd={handleDragEnd}
-            className="absolute inset-0 cursor-grab active:cursor-grabbing"
+    <section className="min-h-screen bg-[#0A0A0B] py-20 overflow-hidden">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="text-white/40 font-mono text-sm tracking-widest mb-4 block">
+            [ 01 ] ── What We Do
+          </span>
+          <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
+            Our Services
+          </h2>
+          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+            Comprehensive Web3 marketing solutions for the Korean market
+          </p>
+        </motion.div>
+
+        {/* 3D Carousel Container */}
+        <div 
+          className="relative h-[500px] md:h-[600px] flex items-center justify-center"
+          style={{ perspective: "1200px" }}
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+        >
+          {/* Navigation Arrows */}
+          <button
+            onClick={goPrev}
+            className="absolute left-4 md:left-12 z-50 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110"
           >
-            {/* Background Image */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${activeService.image})` }}
-            />
-            
-            {/* Gradient Overlays */}
-            <div 
-              className="absolute inset-0"
-              style={{
-                background: `linear-gradient(135deg, ${activeService.color}30 0%, transparent 50%, ${activeService.color}20 100%)`,
-              }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/40" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40" />
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button
+            onClick={goNext}
+            className="absolute right-4 md:right-12 z-50 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all hover:scale-110"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
 
-            {/* Content */}
-            <div className="relative z-10 h-full flex flex-col justify-center px-8 md:px-16 lg:px-24">
-              <div className="max-w-3xl">
-                {/* Section Label */}
+          {/* Cards */}
+          <div className="relative w-full max-w-[400px] md:max-w-[500px] h-[400px] md:h-[500px]" style={{ transformStyle: "preserve-3d" }}>
+            {services.map((service, index) => {
+              const style = getCardStyle(index);
+              const Icon = service.icon;
+              const isActive = index === activeIndex;
+
+              return (
                 <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 }}
-                  className="flex items-center gap-4 mb-6"
-                >
-                  <span className="text-white/40 font-mono text-sm tracking-widest">
-                    [ 0{activeIndex + 1} / 0{services.length} ]
-                  </span>
-                  <span className="w-12 h-px bg-white/30" />
-                  <span 
-                    className="text-sm uppercase tracking-widest font-medium"
-                    style={{ color: activeService.color }}
-                  >
-                    {activeService.subtitle}
-                  </span>
-                </motion.div>
-
-                {/* Icon */}
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.15 }}
-                  className="w-20 h-20 rounded-2xl flex items-center justify-center mb-8"
-                  style={{ 
-                    background: `${activeService.color}20`,
-                    border: `2px solid ${activeService.color}40`
+                  key={service.title}
+                  className="absolute inset-0 cursor-pointer"
+                  animate={{
+                    x: style.x,
+                    rotateY: style.rotateY,
+                    scale: style.scale,
+                    zIndex: style.z,
+                    opacity: style.opacity,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 30,
+                  }}
+                  onClick={() => !isActive && goToSlide(index)}
+                  style={{
+                    transformStyle: "preserve-3d",
+                    filter: `blur(${style.blur}px)`,
                   }}
                 >
-                  <ActiveIcon className="w-10 h-10" style={{ color: activeService.color }} />
-                </motion.div>
-
-                {/* Title */}
-                <motion.h2
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.2 }}
-                  className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6"
-                >
-                  {activeService.title}
-                </motion.h2>
-
-                {/* Description */}
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="text-xl md:text-2xl text-white/70 mb-8 leading-relaxed"
-                >
-                  {activeService.description}
-                </motion.p>
-
-                {/* Features */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="flex flex-wrap gap-3 mb-10"
-                >
-                  {activeService.features.map((feature, i) => (
-                    <span
-                      key={i}
-                      className="px-4 py-2 rounded-full text-sm font-medium text-white/80 border"
-                      style={{ 
-                        borderColor: `${activeService.color}50`,
-                        background: `${activeService.color}10`
-                      }}
-                    >
-                      {feature}
-                    </span>
-                  ))}
-                </motion.div>
-
-                {/* CTA Button */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <Link
-                    to={activeService.link}
-                    className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-white font-semibold text-lg transition-all group hover:gap-5"
-                    style={{ 
-                      background: activeService.color,
-                      boxShadow: `0 0 40px ${activeService.color}40`
+                  <div
+                    className="w-full h-full rounded-3xl overflow-hidden relative group"
+                    style={{
+                      boxShadow: isActive 
+                        ? `0 0 60px ${service.color}40, 0 25px 50px -12px rgba(0,0,0,0.8)` 
+                        : "0 25px 50px -12px rgba(0,0,0,0.5)",
                     }}
                   >
-                    Explore Service
-                    <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
+                    {/* Background Image */}
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                      style={{ backgroundImage: `url(${service.image})` }}
+                    />
+                    
+                    {/* Gradient Overlay */}
+                    <div 
+                      className="absolute inset-0"
+                      style={{
+                        background: `linear-gradient(180deg, ${service.color}20 0%, ${service.color}60 50%, ${service.color}90 100%)`,
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
 
-      {/* Navigation Arrows */}
-      <button
-        onClick={goPrev}
-        disabled={activeIndex === 0}
-        className={`absolute left-6 top-1/2 -translate-y-1/2 z-20 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all hover:bg-white/20 hover:scale-110 ${
-          activeIndex === 0 ? "opacity-30 cursor-not-allowed" : ""
-        }`}
-      >
-        <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button
-        onClick={goNext}
-        disabled={activeIndex === services.length - 1}
-        className={`absolute right-6 top-1/2 -translate-y-1/2 z-20 w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-white transition-all hover:bg-white/20 hover:scale-110 ${
-          activeIndex === services.length - 1 ? "opacity-30 cursor-not-allowed" : ""
-        }`}
-      >
-        <ChevronRight className="w-6 h-6" />
-      </button>
+                    {/* Content */}
+                    <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                      {/* Number Badge */}
+                      <div 
+                        className="absolute top-6 left-6 w-12 h-12 rounded-xl flex items-center justify-center text-lg font-mono font-bold"
+                        style={{ 
+                          background: `${service.color}30`,
+                          color: service.color,
+                          border: `1px solid ${service.color}50`
+                        }}
+                      >
+                        {String(index + 1).padStart(2, '0')}
+                      </div>
 
-      {/* Bottom Thumbnail Navigation */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20">
-        <div className="flex items-center gap-3 p-2 rounded-2xl bg-black/40 backdrop-blur-md border border-white/10">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            const isActive = index === activeIndex;
-            
-            return (
-              <button
-                key={index}
-                onClick={() => goToSlide(index)}
-                className={`relative overflow-hidden rounded-xl transition-all duration-300 ${
-                  isActive ? "w-32 h-20" : "w-16 h-16 hover:w-20"
-                }`}
-              >
-                {/* Thumbnail Image */}
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-300 hover:scale-110"
-                  style={{ backgroundImage: `url(${service.image})` }}
-                />
-                
-                {/* Overlay */}
-                <div 
-                  className={`absolute inset-0 transition-all duration-300 ${
-                    isActive ? "opacity-60" : "opacity-80 hover:opacity-60"
-                  }`}
-                  style={{ background: isActive ? service.color : "#000" }}
-                />
-                
-                {/* Icon & Number */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  {isActive ? (
-                    <div className="text-center">
-                      <Icon className="w-6 h-6 text-white mx-auto mb-1" />
-                      <span className="text-white text-xs font-medium truncate px-2 block">
+                      {/* Icon */}
+                      <div 
+                        className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4"
+                        style={{ 
+                          background: `${service.color}30`,
+                          backdropFilter: "blur(10px)"
+                        }}
+                      >
+                        <Icon className="w-7 h-7" style={{ color: service.color }} />
+                      </div>
+
+                      <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                         {service.title}
-                      </span>
+                      </h3>
+                      
+                      <p className="text-white/70 text-sm md:text-base mb-4 line-clamp-2">
+                        {service.description}
+                      </p>
+
+                      {isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          <Link
+                            to={service.link}
+                            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-white font-medium transition-all hover:gap-4"
+                            style={{ 
+                              background: service.color,
+                              boxShadow: `0 0 20px ${service.color}50`
+                            }}
+                          >
+                            Learn More
+                            <ChevronRight className="w-4 h-4" />
+                          </Link>
+                        </motion.div>
+                      )}
                     </div>
-                  ) : (
-                    <span className="text-white/80 font-mono text-sm font-bold">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                  )}
-                </div>
-
-                {/* Active Border */}
-                {isActive && (
-                  <div 
-                    className="absolute inset-0 rounded-xl border-2"
-                    style={{ borderColor: service.color }}
-                  />
-                )}
-              </button>
-            );
-          })}
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
-      </div>
 
-      {/* Swipe Hint */}
-      <motion.div 
-        className="absolute bottom-32 left-1/2 -translate-x-1/2 z-20 text-white/40 text-sm flex items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-      >
-        <ChevronLeft className="w-4 h-4" />
-        <span>Swipe to explore</span>
-        <ChevronRight className="w-4 h-4" />
-      </motion.div>
+        {/* Pagination Dots */}
+        <div className="flex justify-center gap-3 mt-8">
+          {services.map((service, index) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className="relative group"
+            >
+              <div
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === activeIndex 
+                    ? "scale-125" 
+                    : "bg-white/30 hover:bg-white/50"
+                }`}
+                style={{
+                  background: index === activeIndex ? service.color : undefined,
+                  boxShadow: index === activeIndex ? `0 0 15px ${service.color}` : undefined,
+                }}
+              />
+              <span className="absolute -bottom-8 left-1/2 -translate-x-1/2 text-xs text-white/50 opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+                {service.title}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {/* Active Service Info */}
+        <motion.div 
+          key={activeIndex}
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div 
+            className="inline-flex items-center gap-3 px-6 py-3 rounded-full mb-4"
+            style={{ 
+              background: `${activeService.color}20`,
+              border: `1px solid ${activeService.color}40`
+            }}
+          >
+            <ActiveIcon className="w-5 h-5" style={{ color: activeService.color }} />
+            <span className="text-white font-medium">{activeService.title}</span>
+            <span className="text-white/40">|</span>
+            <span className="text-white/60 text-sm">{activeIndex + 1} of {services.length}</span>
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 };
