@@ -76,7 +76,7 @@ const Index = () => {
         </div>
       </section>
       
-      <section className="screen-8 scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="contact">
+      <section className="screen-8 min-h-0 scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="contact">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <CTASection />
         </div>
