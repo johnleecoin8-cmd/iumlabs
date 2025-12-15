@@ -195,7 +195,7 @@ const Footer = () => {
 
       {/* Giant Brand Name */}
       <div className="container mx-auto px-6 pb-12 overflow-hidden">
-        <h2 className="text-[6rem] md:text-[10rem] lg:text-[14rem] font-light leading-none tracking-tight text-center">
+        <h2 className="text-[4rem] md:text-[8rem] lg:text-[12rem] font-light leading-none tracking-tight text-center whitespace-nowrap">
           <span className="text-transparent" style={{ WebkitTextStroke: '1px rgba(255,255,255,0.15)' }}>
             {brandConfig.name}
           </span>
