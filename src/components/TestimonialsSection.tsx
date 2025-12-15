@@ -1,6 +1,7 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
+
 const testimonials = [{
   name: "Alex Chen",
   role: "CEO",
@@ -32,24 +33,26 @@ const testimonials = [{
   content: "From zero to hero in the Korean NFT space. CryptoBridge made our launch a massive success with their comprehensive approach.",
   rating: 5
 }];
+
 const TestimonialsSection = () => {
-  const {
-    ref,
-    isVisible
-  } = useScrollAnimation();
+  const { ref, isVisible } = useScrollAnimation();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
   const nextSlide = useCallback(() => {
     setCurrentIndex(prev => (prev + 1) % testimonials.length);
   }, []);
+
   const prevSlide = useCallback(() => {
     setCurrentIndex(prev => (prev - 1 + testimonials.length) % testimonials.length);
   }, []);
+
   useEffect(() => {
     if (!isAutoPlaying) return;
     const interval = setInterval(nextSlide, 5000);
     return () => clearInterval(interval);
   }, [isAutoPlaying, nextSlide]);
+
   const getVisibleTestimonials = () => {
     const visible = [];
     for (let i = 0; i < 3; i++) {
@@ -61,21 +64,38 @@ const TestimonialsSection = () => {
     }
     return visible;
   };
+
   return (
-    <div ref={ref} className="relative bg-[#F5F2ED] py-[20px] overflow-hidden">
+    <div ref={ref} className="relative bg-[#F5F2ED] py-16 md:py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        {/* Option B Header */}
+        <div className="relative mb-12 md:mb-16">
+          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
+            07
+          </span>
+          <div className="relative">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+              <span className="text-gray-400">Client</span>{" "}
+              <span className="bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                Testimonials
+              </span>
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-yellow-500 to-orange-500 mt-4 rounded-full" />
+          </div>
+        </div>
+
         {/* Carousel Container */}
         <div 
           className="relative"
           onMouseEnter={() => setIsAutoPlaying(false)}
           onMouseLeave={() => setIsAutoPlaying(true)}
         >
-          {/* Testimonial Cards */}
+          {/* Testimonial Cards - Unified Style */}
           <div className="grid md:grid-cols-3 gap-4">
             {getVisibleTestimonials().map((testimonial, index) => (
               <div
                 key={`${testimonial.originalIndex}-${currentIndex}`}
-                className={`group p-6 rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-xl hover:border-primary/40 transition-all duration-500 ${
+                className={`group p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300 ${
                   isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
@@ -106,13 +126,13 @@ const TestimonialsSection = () => {
             ))}
           </div>
 
-          {/* Navigation */}
-          <div className="flex items-center justify-center gap-4 mt-6">
+          {/* Navigation - Unified Style */}
+          <div className="flex items-center justify-center gap-4 mt-8">
             <button 
               onClick={prevSlide}
-              className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+              className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-5 h-5 text-gray-600" />
             </button>
             
             <div className="flex gap-2">
@@ -129,9 +149,9 @@ const TestimonialsSection = () => {
             
             <button 
               onClick={nextSlide}
-              className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+              className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:border-primary/30 hover:bg-primary/5 transition-all duration-300"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-5 h-5 text-gray-600" />
             </button>
           </div>
         </div>
@@ -139,4 +159,5 @@ const TestimonialsSection = () => {
     </div>
   );
 };
+
 export default TestimonialsSection;

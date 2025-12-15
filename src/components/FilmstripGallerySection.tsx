@@ -61,18 +61,25 @@ const campaignImages = [
 
 const FilmstripGallerySection = () => {
   return (
-    <div className="min-h-[80vh] bg-background flex flex-col justify-center py-16 md:py-24">
+    <div className="min-h-[80vh] bg-[#0A0A0B] flex flex-col justify-center py-16 md:py-24">
       <div className="container mx-auto px-4 mb-8 md:mb-12">
-        <div className="max-w-3xl">
-          <span className="text-sm text-muted-foreground tracking-widest uppercase mb-4 block">
-            [ Our Cases ]
+        {/* Option B Header */}
+        <div className="relative">
+          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-white/[0.03] leading-none pointer-events-none select-none">
+            04
           </span>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-            Campaign Gallery
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            Explore our successful campaigns and events across Korea's Web3 ecosystem. Drag to see more.
-          </p>
+          <div className="relative">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+              <span className="text-white/50">Campaign</span>{" "}
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Gallery
+              </span>
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mt-4 rounded-full" />
+            <p className="text-white/40 text-lg mt-4 max-w-xl">
+              Explore our successful campaigns and events across Korea's Web3 ecosystem. Drag to see more.
+            </p>
+          </div>
         </div>
       </div>
       
