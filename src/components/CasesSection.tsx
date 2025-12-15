@@ -164,20 +164,20 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: index * 0.1 }}
+    transition={{ duration: 0.6, delay: index * 0.1 }}
     viewport={{ once: true }}
   >
     <Link
       to={`/projects/${slug}`}
       onClick={() => window.scrollTo(0, 0)}
-      className="group block h-full relative overflow-hidden rounded-xl transition-all duration-300"
+      className="group block h-full relative overflow-hidden rounded-2xl border border-white/10 hover:border-white/30 transition-all duration-300"
     >
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
           src={bgImage}
           alt={name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
       </div>
@@ -185,7 +185,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
       {/* Content */}
       <div className="relative p-6 min-h-[280px] flex flex-col justify-end">
         <div className="flex items-start justify-between mb-4">
-          <span className="text-white/60 text-xs uppercase tracking-wider bg-white/10 px-2 py-1 rounded">{category}</span>
+          <span className="text-white/60 text-xs uppercase tracking-wider bg-white/10 px-2 py-1 rounded-xl">{category}</span>
         </div>
         
         <div className="flex items-center gap-3 mb-3">
@@ -193,7 +193,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
             <img
               src={logo}
               alt={name}
-              className="w-10 h-10 object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+              className="w-10 h-10 object-contain opacity-90 group-hover:opacity-100 transition-opacity duration-300"
             />
           )}
           <h4 className="text-xl font-bold text-white">{name}</h4>
@@ -207,9 +207,9 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
           {description}
         </p>
         
-        <div className="flex items-center gap-2 text-white/60 group-hover:text-white transition-colors text-sm">
+        <div className="flex items-center gap-2 text-white/60 group-hover:text-white transition-colors duration-300 text-sm">
           View case study
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
         </div>
       </div>
     </Link>
@@ -218,31 +218,31 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
 
 const CasesSection = () => {
   return (
-    <div className="bg-[#0A0A0B] px-4 py-16 md:py-24">
+    <div className="bg-[#0A0A0B] px-4 md:px-8 py-16 md:py-24">
       <div className="container mx-auto max-w-7xl">
-        {/* Option B Header - Background number + gradient title */}
+        {/* Option B Header - Unified */}
         <motion.div 
-          className="relative mb-16 md:mb-20"
+          className="relative mb-12 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
           {/* Large background number */}
-          <span className="absolute -top-8 md:-top-12 left-0 text-[120px] md:text-[180px] lg:text-[220px] font-black text-white/[0.03] leading-none pointer-events-none select-none">
+          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] lg:text-[180px] font-bold text-white/[0.03] leading-none pointer-events-none select-none">
             03
           </span>
           
           {/* Title */}
           <div className="relative">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
               <span className="text-white/50">Our</span>{" "}
               <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
                 Cases
               </span>
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-green-400 to-emerald-400 mt-4" />
-            <p className="text-white/50 text-lg mt-6 max-w-2xl">
+            <div className="w-16 h-1 bg-gradient-to-r from-green-400 to-emerald-400 mt-4 rounded-full" />
+            <p className="text-white/50 text-base md:text-lg mt-6 max-w-2xl">
               Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
             </p>
           </div>
@@ -269,7 +269,7 @@ const CasesSection = () => {
             </p>
             <div className="flex items-center gap-8 md:gap-12">
               {additionalClients.map((client, index) => (
-                <div key={index} className="opacity-40 hover:opacity-80 transition-opacity">
+                <div key={index} className="opacity-40 hover:opacity-80 transition-opacity duration-300">
                   <img 
                     src={client.logo} 
                     alt={client.name} 
@@ -280,10 +280,10 @@ const CasesSection = () => {
             </div>
             <Link 
               to="/projects" 
-              className="group flex items-center gap-2 text-white/50 hover:text-white transition-colors text-sm"
+              className="group flex items-center gap-2 text-white/50 hover:text-white transition-colors duration-300 text-sm"
             >
               View all projects
-              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
             </Link>
           </div>
         </motion.div>

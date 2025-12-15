@@ -77,9 +77,9 @@ const CTASection = () => {
 
   return (
     <div ref={ref} className="flex-1">
-      <div className="relative bg-[#0A0A0B] py-16 md:py-24 px-4 overflow-hidden">
-        <div className={`container mx-auto max-w-6xl relative z-10 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Option B Header */}
+      <div className="relative bg-[#0A0A0B] py-16 md:py-24 px-4 md:px-8 overflow-hidden">
+        <div className={`container mx-auto max-w-7xl relative z-10 transition-all duration-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          {/* Option B Header - Unified */}
           <motion.div 
             className="relative mb-12 md:mb-16"
             initial={{ opacity: 0, y: 20 }}
@@ -87,7 +87,7 @@ const CTASection = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-white/[0.03] leading-none pointer-events-none select-none">
+            <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] lg:text-[180px] font-bold text-white/[0.03] leading-none pointer-events-none select-none">
               09
             </span>
             <div className="relative">
@@ -106,7 +106,7 @@ const CTASection = () => {
             <div className="space-y-4 order-2 lg:order-1">
               {/* Featured Image - Unified Card Style */}
               <div className="group relative rounded-2xl overflow-hidden h-[200px] md:h-[280px] border border-white/10 hover:border-white/30 transition-all duration-300">
-                <img src={seoulBridgeNight} alt="Seoul Office" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={seoulBridgeNight} alt="Seoul Office" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                 
                 {/* Live in Seoul Badge */}
@@ -141,7 +141,7 @@ const CTASection = () => {
                   </div>
                   <div>
                     <p className="text-white/40 text-xs mb-0.5">E-MAIL</p>
-                    <p className="text-white/70 text-sm group-hover:text-white transition-colors break-all leading-tight">{brand.email}</p>
+                    <p className="text-white/70 text-sm group-hover:text-white transition-colors duration-300 break-all leading-tight">{brand.email}</p>
                   </div>
                   <ArrowRight className="absolute top-4 right-4 w-4 h-4 text-white/20 group-hover:text-white/40 group-hover:translate-x-1 transition-all duration-300" />
                 </a>
@@ -157,7 +157,7 @@ const CTASection = () => {
                   </div>
                   <div>
                     <p className="text-white/40 text-xs mb-0.5">TELEGRAM</p>
-                    <p className="text-white/70 text-sm group-hover:text-white transition-colors">@cryptobridgekorea</p>
+                    <p className="text-white/70 text-sm group-hover:text-white transition-colors duration-300">@cryptobridgekorea</p>
                   </div>
                   <ArrowRight className="absolute top-4 right-4 w-4 h-4 text-white/20 group-hover:text-white/40 group-hover:translate-x-1 transition-all duration-300" />
                 </a>
