@@ -30,6 +30,10 @@ import bybitBg from "@/assets/projects/bybit-bg.jpg";
 import saharaAiBg from "@/assets/projects/sahara-ai-bg.jpg";
 import mantraBg from "@/assets/projects/mantra-bg.jpg";
 
+// Import campaign images for projects without dedicated bg
+import fogoBg from "@/assets/campaigns/fogo-fest.avif";
+import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
+
 const cases = [
   {
     name: "BNB Chain",
@@ -130,9 +134,31 @@ const cases = [
     description: "Multi-channel user acquisition and VIP program for Korean high-volume traders.",
     services: ["Market Entry Strategy", "User Acquisition", "VIP Relations"],
   },
+  {
+    name: "FOGO",
+    logo: fogoBg,
+    bgImage: fogoBg,
+    slug: "fogo",
+    result: "Fogo Fest 2025 Success",
+    category: "Layer 1",
+    glowColor: "#FF4500",
+    description: "Launch event and community activation for FOGO ecosystem in Korean market.",
+    services: ["Event Marketing", "Community Building", "Launch Campaign"],
+    useCampaignImg: true,
+  },
+  {
+    name: "zkPass",
+    logo: zkpassBg,
+    bgImage: zkpassBg,
+    slug: "zkpass",
+    result: "The Verifiable Nights",
+    category: "Privacy",
+    glowColor: "#8A2BE2",
+    description: "Privacy-focused Web3 identity solution launch with Korean developer community.",
+    services: ["Developer Relations", "Event Marketing", "Community Building"],
+    useCampaignImg: true,
+  },
 ];
-
-// Floating tags
 const serviceTags = [
   { label: "DeFi", position: "top-[15%] left-[5%]" },
   { label: "Layer 1", position: "top-[35%] left-[4%]" },
@@ -159,6 +185,8 @@ const clientLogos = [
   { name: "Story Protocol", logo: storyLogo },
   { name: "MegaETH", logo: megaethLogo },
   { name: "Tria", logo: triaLogo },
+  { name: "FOGO", logo: fogoBg },
+  { name: "zkPass", logo: zkpassBg },
 ];
 
 const stats = [
