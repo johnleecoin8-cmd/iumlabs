@@ -105,7 +105,6 @@ const ProcessSection = () => {
               <div className="relative h-full border border-white/10 hover:border-white/30 p-6 transition-all duration-300 hover:bg-white/[0.02]">
                 {/* Number & Timeline */}
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-white/40 font-mono text-sm">[{phase.number}]</span>
                   <span className="text-white/40 text-xs uppercase tracking-wider">
                     {phase.timeline}
                   </span>
