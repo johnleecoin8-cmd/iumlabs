@@ -762,21 +762,21 @@ const ProjectDetail = () => {
           {/* Back Button */}
           <button
             onClick={() => navigate("/projects")}
-            className="group flex items-center gap-2 text-white/60 mb-12 transition-colors"
+            className="group flex items-center gap-2 text-white/60 mb-12 px-4 py-2 rounded-xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] transition-all duration-300 hover:bg-white/[0.08] hover:border-white/20"
             style={{ '--hover-color': project.glowColor } as React.CSSProperties}
             onMouseEnter={(e) => e.currentTarget.style.color = project.glowColor}
             onMouseLeave={(e) => e.currentTarget.style.color = ''}
           >
-            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
             <span className="text-sm uppercase tracking-wider">Back to Projects</span>
           </button>
 
           {/* Category Badge */}
           <div 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl mb-6 backdrop-blur-sm transition-all duration-300"
             style={{ 
-              backgroundColor: `${project.glowColor}20`, 
-              border: `1px solid ${project.glowColor}40` 
+              backgroundColor: `${project.glowColor}15`, 
+              border: `1px solid ${project.glowColor}30` 
             }}
           >
             <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: project.glowColor }} />
@@ -813,8 +813,8 @@ const ProjectDetail = () => {
 
           {/* Key Result Badge */}
           <div 
-            className="mt-12 inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-black/40 backdrop-blur-sm"
-            style={{ border: `1px solid ${project.glowColor}30` }}
+            className="mt-12 inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-white/[0.03] backdrop-blur-xl transition-all duration-300 hover:bg-white/[0.06]"
+            style={{ border: `1px solid ${project.glowColor}25` }}
           >
             <span className="text-white/50 text-sm uppercase tracking-wider">Key Result</span>
             <span className="text-2xl md:text-3xl font-bold" style={{ color: project.glowColor }}>{project.result}</span>
@@ -848,19 +848,15 @@ const ProjectDetail = () => {
             {project.metrics.map((metric, index) => (
               <div 
                 key={index} 
-                className="group relative p-6 md:p-8 rounded-2xl bg-[#111] border border-white/10 transition-all duration-300 overflow-hidden"
+                className="group relative p-6 md:p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] transition-all duration-300 ease-out overflow-hidden hover:-translate-y-1"
                 style={{ '--glow-color': project.glowColor } as React.CSSProperties}
-                onMouseEnter={(e) => e.currentTarget.style.borderColor = `${project.glowColor}50`}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${project.glowColor}40`; e.currentTarget.style.boxShadow = `0 12px 40px ${project.glowColor}15`; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.boxShadow = ''; }}
               >
                 {/* Hover Glow */}
                 <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" 
-                  style={{ backgroundColor: `${project.glowColor}08` }}
-                />
-                <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                  style={{ boxShadow: `inset 0 0 40px ${project.glowColor}15` }}
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+                  style={{ backgroundColor: `${project.glowColor}06` }}
                 />
                 
                 <div className="relative">
@@ -881,12 +877,12 @@ const ProjectDetail = () => {
       {/* Challenge & Approach Section - Dark Theme */}
       <section className="bg-[#0A0A0A]">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Left - THE CHALLENGE */}
-            <div className="p-8 md:p-12 rounded-3xl bg-[#111] border border-white/10 relative overflow-hidden">
+            <div className="p-8 md:p-12 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] relative overflow-hidden transition-all duration-300 ease-out hover:border-white/[0.15] hover:bg-white/[0.05]">
               {/* Accent Line */}
               <div 
-                className="absolute top-0 left-0 w-full h-1" 
+                className="absolute top-0 left-0 w-full h-1 rounded-t-2xl" 
                 style={{ background: `linear-gradient(to right, ${project.glowColor}, ${project.glowColor}50, transparent)` }}
               />
               
@@ -900,9 +896,9 @@ const ProjectDetail = () => {
             </div>
 
             {/* Right - WHAT WE DID */}
-            <div className="p-8 md:p-12 rounded-3xl bg-[#111] border border-white/10 relative overflow-hidden">
+            <div className="p-8 md:p-12 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] relative overflow-hidden transition-all duration-300 ease-out hover:border-white/[0.15] hover:bg-white/[0.05]">
               {/* Accent Line */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-white/30 via-white/10 to-transparent" />
+              <div className="absolute top-0 left-0 w-full h-1 rounded-t-2xl bg-gradient-to-r from-white/30 via-white/10 to-transparent" />
               
               <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/50 mb-6">
                 <span className="w-6 h-px bg-white/50" />
@@ -912,7 +908,7 @@ const ProjectDetail = () => {
               {/* Services List with Project Color Dots */}
               <div className="space-y-4 mb-8">
                 {project.services.map((service, i) => (
-                  <div key={i} className="flex items-center gap-3">
+                  <div key={i} className="flex items-center gap-3 transition-all duration-200 hover:translate-x-1">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: project.glowColor }} />
                     <span className="text-white text-lg">{service}</span>
                   </div>
@@ -920,7 +916,7 @@ const ProjectDetail = () => {
               </div>
 
               {/* Divider */}
-              <div className="border-t border-white/10 my-6" />
+              <div className="border-t border-white/[0.08] my-6" />
 
               {/* Strategy Quote */}
               <p className="text-white/60 text-sm italic leading-relaxed">
@@ -950,19 +946,19 @@ const ProjectDetail = () => {
             <div className="flex gap-3">
               <button
                 onClick={() => scrollGallery('left')}
-                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group"
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.glowColor; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
+                className="w-12 h-12 rounded-2xl border border-white/[0.1] bg-white/[0.03] backdrop-blur-sm flex items-center justify-center transition-all duration-300 ease-out group hover:-translate-y-0.5"
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${project.glowColor}50`; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.backgroundColor = ''; }}
               >
-                <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-white" />
+                <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
               </button>
               <button
                 onClick={() => scrollGallery('right')}
-                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group"
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.glowColor; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
+                className="w-12 h-12 rounded-2xl border border-white/[0.1] bg-white/[0.03] backdrop-blur-sm flex items-center justify-center transition-all duration-300 ease-out group hover:-translate-y-0.5"
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${project.glowColor}50`; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.backgroundColor = ''; }}
               >
-                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white" />
+                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
               </button>
             </div>
           </div>
@@ -976,35 +972,29 @@ const ProjectDetail = () => {
               {project.gallery.map((item, index) => (
                 <div 
                   key={index} 
-                  className="relative w-72 md:w-80 aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0 border border-white/10 transition-all"
+                  className="relative w-72 md:w-80 aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0 border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1"
                   onClick={() => openLightbox(index)}
-                  onMouseEnter={(e) => e.currentTarget.style.borderColor = `${project.glowColor}50`}
-                  onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${project.glowColor}40`; e.currentTarget.style.boxShadow = `0 16px 48px ${project.glowColor}20`; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.boxShadow = ''; }}
                 >
                   <img
                     src={item.src}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
                   />
                   
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  
-                  {/* Project color border glow on hover */}
-                  <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-2xl"
-                    style={{ boxShadow: `inset 0 0 30px ${project.glowColor}40, 0 0 40px ${project.glowColor}30` }}
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
                   {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
                     <h3 className="text-white font-semibold text-base mb-1">{item.title}</h3>
                     <p className="text-white/60 text-sm line-clamp-2">{item.description}</p>
                   </div>
 
                   {/* Expand Icon */}
                   <div 
-                    className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100"
+                    className="absolute top-4 right-4 w-10 h-10 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100"
                     style={{ backgroundColor: project.glowColor }}
                   >
                     <ArrowUpRight className="w-5 h-5 text-black" />
@@ -1017,7 +1007,7 @@ const ProjectDetail = () => {
       </section>
 
       {/* Next Project - Dark Project Color Style */}
-      <section className="py-24 bg-[#0A0A0A] border-t border-white/10">
+      <section className="py-24 bg-[#0A0A0A] border-t border-white/[0.08]">
         <div className="container mx-auto max-w-6xl px-4">
           <Link 
             to={`/projects/${nextSlug}`}
@@ -1031,7 +1021,7 @@ const ProjectDetail = () => {
             <div className="flex items-center justify-between">
               <div>
                 <h3 
-                  className="text-5xl md:text-7xl lg:text-8xl font-bold text-white transition-colors duration-300 mb-3"
+                  className="text-5xl md:text-7xl lg:text-8xl font-bold text-white transition-all duration-300 ease-out mb-3"
                   onMouseEnter={(e) => e.currentTarget.style.color = nextProject.glowColor}
                   onMouseLeave={(e) => e.currentTarget.style.color = ''}
                 >
@@ -1041,16 +1031,13 @@ const ProjectDetail = () => {
               </div>
               <div className="relative">
                 <div 
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300"
+                  className="w-16 h-16 md:w-20 md:h-20 rounded-2xl border border-white/[0.1] bg-white/[0.03] backdrop-blur-sm flex items-center justify-center transition-all duration-300 ease-out group-hover:-translate-y-1"
                   style={{ '--next-glow': nextProject.glowColor } as React.CSSProperties}
+                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${nextProject.glowColor}50`; e.currentTarget.style.boxShadow = `0 12px 40px ${nextProject.glowColor}25`; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.boxShadow = ''; }}
                 >
-                  <ArrowUpRight className="w-8 h-8 md:w-10 md:h-10 text-white/50 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                  <ArrowUpRight className="w-8 h-8 md:w-10 md:h-10 text-white/50 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
                 </div>
-                {/* Glow on hover */}
-                <div 
-                  className="absolute inset-0 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" 
-                  style={{ backgroundColor: `${nextProject.glowColor}40` }}
-                />
               </div>
             </div>
           </Link>
