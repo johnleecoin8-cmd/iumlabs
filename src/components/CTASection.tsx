@@ -1,73 +1,46 @@
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
-import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
-import { ArrowUpRight, ArrowRight, Mail, MapPin, Send, CheckCircle2, User } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Send, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
+import SectionHeader from "./SectionHeader";
 
-const budgetOptions = ["$15K - $25K", "$25K - $50K", "$50K +", "Raising funds"];
+const budgetOptions = ["<$10K", "$10K-$30K", "$30K-$50K", "$50K+"];
 
 const CTASection = () => {
-  const { ref, isVisible } = useScrollAnimation();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    company: "",
-    website: "",
-    message: "",
-    budget: ""
+    budget: "",
+    message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const formProgress = useMemo(() => {
-    const fields = [formData.name, formData.email, formData.budget, formData.message];
-    const filledFields = fields.filter(Boolean).length;
-    return filledFields / fields.length * 100;
-  }, [formData.name, formData.email, formData.budget, formData.message]);
-
-  const seoulTime = useMemo(() => {
-    const now = new Date();
-    return now.toLocaleTimeString('en-US', {
-      timeZone: 'Asia/Seoul',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: true
-    });
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    
     try {
       const { error } = await supabase.from("contact_submissions").insert({
         name: formData.name,
         email: formData.email,
-        comments: `Company: ${formData.company}\nWebsite: ${formData.website}\nBudget: ${formData.budget}\n\n${formData.message}`
+        comments: `Budget: ${formData.budget}\n\n${formData.message}`
       });
+      
       if (error) throw error;
+      
       supabase.functions.invoke('send-contact-notification', {
         body: {
           name: formData.name,
           email: formData.email,
-          company: formData.company,
           budget: formData.budget,
           message: formData.message
         }
       }).catch(console.error);
-      setIsSubmitted(true);
-      toast.success("Message sent successfully! We'll get back to you soon.");
-      setFormData({
-        name: "",
-        email: "",
-        company: "",
-        website: "",
-        message: "",
-        budget: ""
-      });
-      setTimeout(() => setIsSubmitted(false), 3000);
+      
+      toast.success("Message sent! We'll get back to you within 24 hours.");
+      setFormData({ name: "", email: "", budget: "", message: "" });
     } catch {
       toast.error("Failed to send message. Please try again.");
     } finally {
@@ -76,236 +49,166 @@ const CTASection = () => {
   };
 
   return (
-    <div ref={ref} className="flex-1">
-      <div className="relative bg-[#0A0A0B] py-16 md:py-24 px-4 overflow-hidden">
-        <div className={`container mx-auto max-w-6xl relative z-10 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Option B Header */}
-          <motion.div 
-            className="relative mb-12 md:mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+    <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+        {/* Section Header */}
+        <SectionHeader 
+          title="CONTACT" 
+          dark={true}
+        />
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
+          {/* Left - Contact Info */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            className="space-y-6"
           >
-            <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-white/[0.03] leading-none pointer-events-none select-none">
-              09
-            </span>
-            <div className="relative">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-                <span className="text-white/50">Get in</span>{" "}
-                <span className="bg-gradient-to-r from-red-400 to-orange-400 bg-clip-text text-transparent">
-                  Touch
-                </span>
-              </h2>
-              <div className="w-16 h-1 bg-gradient-to-r from-red-400 to-orange-400 mt-4 rounded-full" />
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+              Let's Build<br />
+              <span className="text-primary">Something Great</span>
+            </h2>
+            
+            <p className="text-lg text-white/60 max-w-md">
+              Ready to conquer the Korean market? Get in touch and let's discuss your project.
+            </p>
+
+            {/* Contact Cards */}
+            <div className="space-y-4 pt-6">
+              {/* Office */}
+              <div className="flex items-start gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/10">
+                <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-white mb-1">Seoul Office</h4>
+                  <p className="text-sm text-white/50">{brand.address}</p>
+                </div>
+              </div>
+
+              {/* Email */}
+              <a 
+                href={`mailto:${brand.email}`}
+                className="flex items-start gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-primary/30 transition-colors group"
+              >
+                <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-white mb-1">Email</h4>
+                  <p className="text-sm text-white/50 group-hover:text-primary transition-colors">{brand.email}</p>
+                </div>
+              </a>
+
+              {/* Telegram */}
+              <a 
+                href={brand.telegramLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-start gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/10 hover:border-primary/30 transition-colors group"
+              >
+                <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center flex-shrink-0">
+                  <Send className="w-5 h-5 text-primary" />
+                </div>
+                <div>
+                  <h4 className="text-sm font-medium text-white mb-1">Telegram</h4>
+                  <p className="text-sm text-white/50 group-hover:text-primary transition-colors">@cryptobridgekorea</p>
+                </div>
+              </a>
             </div>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start">
-            {/* Left - Image & Contact Cards */}
-            <div className="space-y-4 order-2 lg:order-1">
-              {/* Featured Image - Glass Card Style */}
-              <div className="group relative rounded-3xl overflow-hidden h-[200px] md:h-[280px] border border-white/[0.08] hover:border-white/[0.2] transition-all duration-500 hover:shadow-2xl hover:shadow-black/30">
-                <img src={seoulBridgeNight} alt="Seoul Office" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
-                
-                {/* Live in Seoul Badge */}
-                <div className="absolute top-4 left-4 flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/[0.1]">
-                  <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                  <span className="text-white/90 text-xs font-medium">Live in Seoul</span>
-                  <span className="text-white/50 text-xs">{seoulTime}</span>
-                </div>
-
-                {/* Office Info */}
-                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
-                  <div className="flex items-start gap-3">
-                    <div className="w-11 h-11 rounded-2xl bg-primary/20 backdrop-blur-sm flex items-center justify-center border border-primary/20">
-                      <MapPin className="w-5 h-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="text-white/50 text-xs mb-1">OFFICE</p>
-                      <p className="text-white text-sm">{brand.address}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Contact Cards - Glass Style */}
-              <div className="grid grid-cols-2 gap-4">
-                <a
-                  href={`mailto:${brand.email}`}
-                  className="group relative flex flex-col items-start gap-3 p-6 rounded-2xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
-                >
-                  <div className="w-11 h-11 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 border border-primary/10">
-                    <Mail className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-white/40 text-xs mb-1">E-MAIL</p>
-                    <p className="text-white/70 text-sm group-hover:text-white transition-colors break-all leading-tight">{brand.email}</p>
-                  </div>
-                  <ArrowRight className="absolute top-4 right-4 w-4 h-4 text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
-                </a>
-
-                <a
-                  href={brand.telegramLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative flex flex-col items-start gap-3 p-6 rounded-2xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
-                >
-                  <div className="w-11 h-11 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 border border-primary/10">
-                    <Send className="w-5 h-5 text-primary" />
-                  </div>
-                  <div>
-                    <p className="text-white/40 text-xs mb-1">TELEGRAM</p>
-                    <p className="text-white/70 text-sm group-hover:text-white transition-colors">@cryptobridgekorea</p>
-                  </div>
-                  <ArrowRight className="absolute top-4 right-4 w-4 h-4 text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
-                </a>
-              </div>
-            </div>
-
-            {/* Right - Contact Form - Unified Card Style */}
-            <div className="order-1 lg:order-2">
-              <form onSubmit={handleSubmit} className="group space-y-4 p-6 rounded-3xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.08] hover:border-white/[0.15] transition-all duration-300">
-                {/* Progress Indicator */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-white/[0.03] overflow-hidden rounded-t-2xl">
-                  <motion.div
-                    className="h-full bg-primary"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${formProgress}%` }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                  />
-                </div>
-
-                {/* Form Header */}
-                <div className="flex items-center justify-between mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-white/40 font-mono text-sm">[01]</span>
-                    <span className="text-white/60 text-sm font-medium">Contact Form</span>
-                  </div>
-                  <span className="text-white/30 text-xs">{Math.round(formProgress)}% complete</span>
-                </div>
-                
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-white/40 text-xs mb-2">NAME *</label>
-                    <input
-                      type="text"
-                      value={formData.name}
-                      onChange={e => setFormData({ ...formData, name: e.target.value })}
-                      required
-                      className="w-full bg-transparent border border-white/10 hover:border-white/30 focus:border-primary/50 rounded-xl px-4 py-3 text-white outline-none transition-all duration-300 text-sm placeholder:text-white/30"
-                      placeholder="Your name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-white/40 text-xs mb-2">E-MAIL *</label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={e => setFormData({ ...formData, email: e.target.value })}
-                      required
-                      className="w-full bg-transparent border border-white/10 hover:border-white/30 focus:border-primary/50 rounded-xl px-4 py-3 text-white outline-none transition-all duration-300 text-sm placeholder:text-white/30"
-                      placeholder="your@email.com"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-white/40 text-xs mb-2">COMPANY</label>
-                    <input
-                      type="text"
-                      value={formData.company}
-                      onChange={e => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full bg-transparent border border-white/10 hover:border-white/30 focus:border-primary/50 rounded-xl px-4 py-3 text-white outline-none transition-all duration-300 text-sm placeholder:text-white/30"
-                      placeholder="Company name"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-white/40 text-xs mb-2">WEBSITE</label>
-                    <input
-                      type="url"
-                      value={formData.website}
-                      onChange={e => setFormData({ ...formData, website: e.target.value })}
-                      className="w-full bg-transparent border border-white/10 hover:border-white/30 focus:border-primary/50 rounded-xl px-4 py-3 text-white outline-none transition-all duration-300 text-sm placeholder:text-white/30"
-                      placeholder="https://..."
-                    />
-                  </div>
-                </div>
-
-                {/* Budget Options - Unified Button Style */}
+          {/* Right - Simplified Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+          >
+            <form onSubmit={handleSubmit} className="space-y-5 bg-white/[0.02] backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/10">
+              {/* Name & Email Row */}
+              <div className="grid md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-white/40 text-xs mb-3">BUDGET *</label>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                    {budgetOptions.map(option => (
-                      <button
-                        key={option}
-                        type="button"
-                        onClick={() => setFormData({ ...formData, budget: option })}
-                        className={`px-3 py-2.5 rounded-2xl text-xs border transition-all duration-300 ${
-                          formData.budget === option
-                            ? 'bg-primary text-white border-primary shadow-lg shadow-primary/25'
-                            : 'bg-white/[0.02] border-white/[0.08] text-white/60 hover:border-white/[0.2] hover:bg-white/[0.04] hover:text-white'
-                        }`}
-                      >
-                        {option}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-white/40 text-xs mb-2">PROJECT DETAILS *</label>
-                  <textarea
-                    value={formData.message}
-                    onChange={e => setFormData({ ...formData, message: e.target.value })}
+                  <label className="block text-sm text-white/60 mb-2">Name *</label>
+                  <input
+                    type="text"
                     required
-                    rows={3}
-                    className="w-full bg-transparent border border-white/10 hover:border-white/30 focus:border-primary/50 rounded-xl px-4 py-3 text-white outline-none transition-all duration-300 resize-none text-sm placeholder:text-white/30"
-                    placeholder="Tell us about your project and goals..."
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors"
+                    placeholder="Your name"
                   />
                 </div>
+                <div>
+                  <label className="block text-sm text-white/60 mb-2">Email *</label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors"
+                    placeholder="you@company.com"
+                  />
+                </div>
+              </div>
 
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting || formProgress < 100}
-                  className={`group w-full py-4 rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
-                    isSubmitted
-                      ? 'bg-green-500 text-white shadow-lg shadow-green-500/25'
-                      : formProgress === 100
-                      ? 'bg-primary text-white hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5'
-                      : 'bg-white/[0.03] text-white/40 cursor-not-allowed border border-white/[0.05]'
-                  }`}
-                >
-                  {isSubmitted ? (
-                    <>
-                      <CheckCircle2 className="w-5 h-5" />
-                      <span>Message Sent!</span>
-                    </>
-                  ) : isSubmitting ? (
-                    <>
-                      <motion.div
-                        className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                      />
-                      <span>Sending...</span>
-                    </>
-                  ) : (
-                    <>
-                      <span>Send Message</span>
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                    </>
-                  )}
-                </button>
-              </form>
-            </div>
-          </div>
+              {/* Budget */}
+              <div>
+                <label className="block text-sm text-white/60 mb-2">Budget Range</label>
+                <div className="grid grid-cols-4 gap-2">
+                  {budgetOptions.map((option) => (
+                    <button
+                      key={option}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, budget: option })}
+                      className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                        formData.budget === option
+                          ? "bg-primary text-white"
+                          : "bg-white/[0.03] text-white/60 border border-white/10 hover:border-white/30"
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-sm text-white/60 mb-2">Message *</label>
+                <textarea
+                  required
+                  rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-lg text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors resize-none"
+                  placeholder="Tell us about your project..."
+                />
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full py-4 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 disabled:opacity-50 flex items-center justify-center gap-2 group"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+            </form>
+          </motion.div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
