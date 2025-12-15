@@ -16,6 +16,8 @@ import triaLogo from "@/assets/logos/tria.png";
 import bybitLogo from "@/assets/logos/bybit.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import mantraLogo from "@/assets/logos/mantra.png";
+import fogoLogo from "@/assets/logos/fogo.png";
+import zkpassLogo from "@/assets/logos/zkpass.png";
 
 // Import campaign images
 import bnbEventImg from "@/assets/campaigns/bnb-event.jpg";
@@ -29,6 +31,7 @@ import triaLaunchImg from "@/assets/campaigns/tria-launch.jpg";
 import fogoFestImg from "@/assets/campaigns/fogo-fest.avif";
 import saharaAiImg from "@/assets/campaigns/sahara-ai.jpg";
 import mantraImg from "@/assets/campaigns/mantra.jpg";
+import zkpassImg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 
 // Import project background images
 import bnbBg from "@/assets/projects/bnb-bg.jpg";
@@ -42,6 +45,8 @@ import triaBg from "@/assets/projects/tria-bg.jpg";
 import bybitBg from "@/assets/projects/bybit-bg.jpg";
 import saharaAiBg from "@/assets/projects/sahara-ai-bg.jpg";
 import mantraBg from "@/assets/projects/mantra-bg.jpg";
+import fogoBg from "@/assets/campaigns/fogo-fest.avif";
+import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 
 // Project data
 const projectsData: Record<string, {
@@ -521,6 +526,90 @@ const projectsData: Record<string, {
       { title: "Mantra Targets Korean RWA Market with $50M Pipeline", source: "CoinDesk Korea", date: "2024-04-15", url: "#", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop" },
       { title: "Korean Institutions Show Interest in RWA Tokenization", source: "Hankyung Economy", date: "2024-03-30", url: "#", image: "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=400&h=250&fit=crop" },
       { title: "Mantra Partners with Korean Asset Managers", source: "Block Media", date: "2024-03-15", url: "#", image: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=400&h=250&fit=crop" }
+    ]
+  },
+  "fogo": {
+    name: "FOGO",
+    logo: fogoLogo,
+    bgImage: fogoBg,
+    category: "Layer 1",
+    result: "Fogo Fest 2025 Success",
+    glowColor: "#FF4500",
+    description: "FOGO aimed to make a splash in the Korean market with their Fogo Fest 2025 launch event and community activation campaign.",
+    challenge: "As a new Layer 1 blockchain, FOGO needed to create immediate awareness and excitement in the competitive Korean crypto market while building a lasting community.",
+    metrics: [
+      { value: "5K+", label: "Event Attendees" },
+      { value: "30K+", label: "Community Growth" },
+      { value: "100+", label: "KOL Partners" },
+      { value: "2M+", label: "Social Reach" }
+    ],
+    strategy: [
+      "Organized Fogo Fest 2025 as a signature launch event in Seoul",
+      "Partnered with top Korean crypto influencers for pre-launch hype",
+      "Created Korean-exclusive NFT drops and community rewards",
+      "Built Korean community channels with dedicated moderators",
+      "Launched social media campaigns targeting Korean crypto natives"
+    ],
+    results: [
+      { metric: "Event Attendance", value: "5K+" },
+      { metric: "Korean Community", value: "30K+" },
+      { metric: "KOL Partnerships", value: "100+" },
+      { metric: "Total Social Reach", value: "2M+" }
+    ],
+    services: ["Event Marketing", "Community Building", "KOL Marketing", "Launch Campaign"],
+    shortServices: ["Events", "Community", "KOLs"],
+    gallery: [
+      { src: fogoFestImg, title: "Fogo Fest 2025", description: "Signature launch event in Seoul with 5K+ attendees" },
+      { src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop", title: "Community Meetup", description: "Korean community gathering with exclusive perks" },
+      { src: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=800&h=600&fit=crop", title: "KOL Campaign", description: "Influencer collaboration for brand awareness" },
+      { src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=600&fit=crop", title: "After Party", description: "Networking event for Korean crypto community" }
+    ],
+    news: [
+      { title: "FOGO Launches Korean Market with Fogo Fest 2025", source: "Block Media", date: "2025-01-20", url: "#", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=400&h=250&fit=crop" },
+      { title: "Fogo Fest Draws 5K+ Crypto Enthusiasts in Seoul", source: "CoinDesk Korea", date: "2025-01-18", url: "#", image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=250&fit=crop" },
+      { title: "FOGO Partners with 100+ Korean Influencers", source: "TokenPost", date: "2025-01-10", url: "#", image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?w=400&h=250&fit=crop" }
+    ]
+  },
+  "zkpass": {
+    name: "zkPass",
+    logo: zkpassLogo,
+    bgImage: zkpassBg,
+    category: "Privacy",
+    result: "The Verifiable Nights",
+    glowColor: "#BFFF00",
+    description: "zkPass brought their privacy-focused Web3 identity solution to Korea through developer-focused events and community building.",
+    challenge: "Privacy-preserving identity solutions required technical education for Korean developers while building mainstream awareness for the broader crypto community.",
+    metrics: [
+      { value: "500+", label: "Developer Signups" },
+      { value: "20K+", label: "Community Growth" },
+      { value: "15+", label: "Tech Talks" },
+      { value: "50+", label: "KOL Partners" }
+    ],
+    strategy: [
+      "Organized 'The Verifiable Nights' developer event series",
+      "Partnered with Korean blockchain developer communities",
+      "Created Korean-language technical documentation",
+      "Built ambassador program with privacy advocates",
+      "Launched educational content on zero-knowledge proofs"
+    ],
+    results: [
+      { metric: "Developer Signups", value: "500+" },
+      { metric: "Korean Community", value: "20K+" },
+      { metric: "Technical Events", value: "15+" },
+      { metric: "KOL Partnerships", value: "50+" }
+    ],
+    services: ["Developer Relations", "Event Marketing", "Community Building", "Technical Education"],
+    shortServices: ["DevRel", "Events", "Community"],
+    gallery: [
+      { src: zkpassImg, title: "The Verifiable Nights", description: "Developer-focused event series in Seoul" },
+      { src: "https://images.unsplash.com/photo-1558403194-611308249627?w=800&h=600&fit=crop", title: "Tech Workshop", description: "Zero-knowledge proof workshop for developers" },
+      { src: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop", title: "Hackathon", description: "Privacy-focused blockchain hackathon" },
+      { src: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&h=600&fit=crop", title: "Community Event", description: "Korean zkPass community meetup" }
+    ],
+    news: [
+      { title: "zkPass Launches 'The Verifiable Nights' in Korea", source: "Block Media", date: "2024-11-15", url: "#", image: "https://images.unsplash.com/photo-1558403194-611308249627?w=400&h=250&fit=crop" },
+      { title: "Korean Developers Embrace Zero-Knowledge Identity", source: "CoinDesk Korea", date: "2024-11-08", url: "#", image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400&h=250&fit=crop" },
+      { title: "zkPass Partners with Korean Dev Communities", source: "TokenPost", date: "2024-10-25", url: "#", image: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=400&h=250&fit=crop" }
     ]
   }
 };
