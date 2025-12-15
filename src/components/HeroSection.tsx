@@ -38,19 +38,19 @@ const mobileServiceTags = [
 ];
 
 const clientLogos = [
-  { name: "BNB", logo: bnbLogo },
-  { name: "KuCoin", logo: kucoinLogo },
-  { name: "Polygon", logo: polygonLogo },
-  { name: "Ondo Finance", logo: ondoLogo },
-  { name: "Bybit", logo: bybitLogo },
-  { name: "Peaq", logo: peaqLogo },
-  { name: "Story Protocol", logo: storyProtocolLogo },
-  { name: "MegaETH", logo: megaethLogo },
-  { name: "Tria", logo: triaLogo },
-  { name: "Mantra", logo: mantraLogo },
-  { name: "Sahara AI", logo: saharaAiLogo },
-  { name: "FOGO", logo: fogoLogo },
-  { name: "SynFutures", logo: synfuturesLogo },
+  { name: "BNB", logo: bnbLogo, noInvert: false },
+  { name: "KuCoin", logo: kucoinLogo, noInvert: false },
+  { name: "Polygon", logo: polygonLogo, noInvert: false },
+  { name: "Ondo Finance", logo: ondoLogo, noInvert: false },
+  { name: "Bybit", logo: bybitLogo, noInvert: false },
+  { name: "Peaq", logo: peaqLogo, noInvert: false },
+  { name: "Story Protocol", logo: storyProtocolLogo, noInvert: false },
+  { name: "MegaETH", logo: megaethLogo, noInvert: false },
+  { name: "Tria", logo: triaLogo, noInvert: true },
+  { name: "Mantra", logo: mantraLogo, noInvert: true },
+  { name: "Sahara AI", logo: saharaAiLogo, noInvert: true },
+  { name: "FOGO", logo: fogoLogo, noInvert: true },
+  { name: "SynFutures", logo: synfuturesLogo, noInvert: true },
 ];
 
 const stats = [
@@ -182,7 +182,7 @@ const HeroSection = () => {
               <img 
                 src={client.logo} 
                 alt={client.name} 
-                className="h-4 w-4 sm:h-5 sm:w-5 object-contain brightness-0 invert opacity-80 flex-shrink-0"
+                className={`h-4 w-4 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-80'}`}
               />
               <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
                 {client.name}
