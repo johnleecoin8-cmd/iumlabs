@@ -34,11 +34,6 @@ const Index = () => {
         </div>
       </section>
       
-      <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="about">
-        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
-          <AboutUsSection />
-        </div>
-      </section>
       
       <section className="scroll-reveal p-0.5 sm:p-1 md:p-2 bg-white" id="cases">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
