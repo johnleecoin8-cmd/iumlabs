@@ -60,9 +60,9 @@ const InsightsSection = () => {
   };
 
   return (
-    <section ref={ref} className="px-4 bg-[#FAFAFA] py-16 md:py-24">
+    <section ref={ref} className="px-4 md:px-8 bg-[#FAFAFA] py-16 md:py-24">
       <div className="container mx-auto max-w-7xl">
-        {/* Option B Header */}
+        {/* Option B Header - Unified */}
         <motion.div 
           className="relative mb-12 md:mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -70,7 +70,7 @@ const InsightsSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
+          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] lg:text-[180px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
             08
           </span>
           <div className="relative">
@@ -86,16 +86,16 @@ const InsightsSection = () => {
 
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left - Newsletter */}
-          <div className={`lg:col-span-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+          <div className={`lg:col-span-4 transition-all duration-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
             <div className="lg:sticky lg:top-32">
               <p className="text-gray-600 mb-8">
                 Stay ahead with our market insights, research reports, and strategy guides for the Korean Web3 ecosystem.
               </p>
 
               {/* Newsletter Form - Unified Card Style */}
-              <form onSubmit={handleSubscribe} className="space-y-4 p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 transition-all duration-300">
+              <form onSubmit={handleSubscribe} className="space-y-4 p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300">
                 <div className="relative group">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors duration-300" />
                   <input
                     type="email"
                     value={email}
@@ -115,10 +115,10 @@ const InsightsSection = () => {
 
               <Link
                 to="/research"
-                className="group inline-flex items-center gap-2 text-white/40 hover:text-primary transition-colors mt-6 text-sm"
+                className="group inline-flex items-center gap-2 text-gray-400 hover:text-primary transition-colors duration-300 mt-6 text-sm"
               >
                 View all research
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </div>
           </div>
@@ -133,10 +133,10 @@ const InsightsSection = () => {
                   className={`group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden ${
                     isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
                   }`}
-                  style={{ transitionDelay: `${index * 150}ms` }}
+                  style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   {/* Hover Glow */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                     <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent" />
                   </div>
 
@@ -145,7 +145,7 @@ const InsightsSection = () => {
                     <img
                       src={article.image}
                       alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     {article.trending && (
                       <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-md bg-primary/90">
@@ -166,7 +166,7 @@ const InsightsSection = () => {
                         <span className="text-xs">{article.readTime}</span>
                       </div>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors mb-2">
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors duration-300 mb-2">
                       {article.title}
                     </h3>
                     <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">

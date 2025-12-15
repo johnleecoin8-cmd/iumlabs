@@ -40,9 +40,9 @@ const WhyChooseUsSection = () => {
   }, []);
   
   return (
-    <section className="relative bg-[#F5F2ED] py-16 md:py-24 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
-        {/* Option B Header */}
+    <section className="relative bg-[#FAFAFA] py-16 md:py-24 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        {/* Option B Header - Unified */}
         <motion.div 
           className="relative mb-8 md:mb-12"
           initial={{ opacity: 0, y: 20 }}
@@ -50,7 +50,7 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
+          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] lg:text-[180px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
             05
           </span>
           <div className="relative">
@@ -90,7 +90,7 @@ const WhyChooseUsSection = () => {
               <span className="relative z-10 flex items-center gap-2">
                 Book a Meeting
               </span>
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-300 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
             </CalendlyButton>
           </motion.div>
 
@@ -98,10 +98,10 @@ const WhyChooseUsSection = () => {
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="order-1 lg:order-2"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 aspect-[4/3]">
+            <div className="relative rounded-2xl overflow-hidden shadow-lg border border-gray-200 hover:border-primary/30 hover:shadow-xl transition-all duration-300 aspect-[4/3]">
               <img
                 src={teamPhoto}
                 alt="CryptoBridge Korea Team"
@@ -116,21 +116,21 @@ const WhyChooseUsSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.7, delay: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
           className="pt-10 border-t border-gray-200 py-[20px]"
         >
           <p className="text-center text-gray-400 text-sm uppercase tracking-widest mb-8">
             As Featured In Media
           </p>
           <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#FAFAFA] to-transparent z-10 pointer-events-none" />
             
             <div className="flex items-center animate-marquee-slow hover:[animation-play-state:paused]">
               {[...mediaLogos, ...mediaLogos, ...mediaLogos].map((media, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 mx-3 px-4 py-2 bg-white rounded-full border border-gray-200 hover:border-primary/30 transition-all duration-300 flex-shrink-0"
+                  className="flex items-center gap-3 mx-3 px-4 py-2 bg-white rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300 flex-shrink-0"
                 >
                   <img
                     src={media.logo}

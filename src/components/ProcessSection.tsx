@@ -56,44 +56,44 @@ const phases = [
 const ProcessSection = () => {
   return (
     <section className="bg-[#FAFAFA] py-16 md:py-24 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16">
-        {/* Option B Header - Background number + gradient title */}
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        {/* Option B Header - Unified */}
         <motion.div 
-          className="relative mb-16 md:mb-24"
-          initial={{ opacity: 0, y: 30 }}
+          className="relative mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
           {/* Large background number */}
-          <span className="absolute -top-8 md:-top-12 left-0 text-[120px] md:text-[180px] lg:text-[220px] font-black text-black/[0.03] leading-none pointer-events-none select-none">
+          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] lg:text-[180px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
             02
           </span>
           
           {/* Title */}
           <div className="relative">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
               <span className="text-gray-400">Our</span>{" "}
               <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-pink-500 bg-clip-text text-transparent">
                 Process
               </span>
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mt-4" />
-            <p className="text-gray-500 text-lg md:text-xl mt-6 max-w-xl">
+            <div className="w-16 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mt-4 rounded-full" />
+            <p className="text-gray-500 text-base md:text-lg mt-6 max-w-xl">
               From Zero to Korean Hype in 30 Days
             </p>
           </div>
         </motion.div>
 
         {/* Timeline Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {phases.map((phase, index) => (
             <motion.div
               key={phase.number}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
               className="group relative"
             >
               {/* Connection Line (desktop only) */}
@@ -101,8 +101,8 @@ const ProcessSection = () => {
                 <div className="hidden lg:block absolute top-12 left-full w-full h-px bg-gradient-to-r from-gray-300 to-transparent z-0" />
               )}
 
-              {/* Card */}
-              <div className="relative h-full border border-gray-200 hover:border-gray-400 bg-white p-6 transition-all duration-300 hover:shadow-lg rounded-xl">
+              {/* Card - Unified Style */}
+              <div className="relative h-full bg-white rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-lg p-6 transition-all duration-300">
                 {/* Number & Timeline */}
                 <div className="flex items-start justify-between mb-4">
                   <span className="text-gray-400 text-xs uppercase tracking-wider">
@@ -139,9 +139,9 @@ const ProcessSection = () => {
                 </div>
 
                 {/* Learn more */}
-                <div className="flex items-center gap-2 text-gray-400 group-hover:text-gray-900 transition-colors text-sm">
+                <div className="flex items-center gap-2 text-gray-400 group-hover:text-gray-900 transition-colors duration-300 text-sm">
                   Learn more
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </div>
               </div>
             </motion.div>
@@ -169,10 +169,10 @@ const ProcessSection = () => {
               href="https://calendly.com/cryptobridgekorea/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-900 transition-colors text-sm group"
+              className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-900 transition-colors duration-300 text-sm group"
             >
               Book a Call
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </a>
           </div>
         </motion.div>
