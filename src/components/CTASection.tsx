@@ -90,9 +90,6 @@ const CTASection = () => {
 
         <div className={`container mx-auto max-w-5xl text-center relative z-10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           
-          <p className="text-base md:text-xl text-white/70 max-w-2xl mx-auto mb-8 md:mb-10 px-4">
-            Join 200+ Web3 projects that have successfully launched in Korea with our strategic guidance and unmatched network.
-          </p>
 
           {/* CTA Buttons - Unified Style */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
