@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Rocket, Users, Megaphone, TrendingUp, FileText, Globe } from "lucide-react";
 import { Link } from "react-router-dom";
+import SectionHeader from "./SectionHeader";
 
 const services = [
   {
@@ -51,28 +52,13 @@ const ServicesSection = () => {
   return (
     <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
-        {/* Header */}
-        <motion.div 
-          className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="text-sm font-mono text-gray-500 mb-4 block">/ SERVICES</span>
-          <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
-              What We <span className="text-gray-500">Do</span>
-            </h2>
-            <Link 
-              to="/services"
-              className="inline-flex items-center gap-3 bg-white text-gray-900 px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors group"
-            >
-              CONNECT WITH US
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </motion.div>
+        {/* 4pillars-style Header */}
+        <SectionHeader 
+          title="SERVICES" 
+          linkTo="/services" 
+          linkText="VIEW ALL"
+          dark={true}
+        />
 
         {/* Services Grid - 2x3 Line Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3">
