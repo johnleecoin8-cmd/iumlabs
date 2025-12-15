@@ -14,6 +14,7 @@ import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import mantraLogo from "@/assets/logos/mantra.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import zkpassLogo from "@/assets/logos/zkpass.png";
+import synfuturesLogo from "@/assets/logos/synfutures.png";
 
 // Import campaign images for card backgrounds
 import bnbCampaign from "@/assets/campaigns/bnb-event.jpg";
@@ -26,6 +27,7 @@ import fogoCampaign from "@/assets/campaigns/fogo-fest.avif";
 import lbankCampaign from "@/assets/campaigns/lbank-festival.jpg";
 import zkpassCampaign from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import openledgerCampaign from "@/assets/campaigns/openledger-interview.jpg";
+import synfuturesCampaign from "@/assets/campaigns/synfutures-billboard.jpg";
 
 const featuredCases = [
   {
@@ -127,6 +129,16 @@ const featuredCases = [
     category: "Infrastructure",
     result: "Korea Media Coverage",
     description: "Strategic media interviews and PR campaign for Korean market awareness.",
+  },
+  {
+    number: "11",
+    name: "SynFutures",
+    logo: synfuturesLogo,
+    bgImage: synfuturesCampaign,
+    slug: "synfutures",
+    category: "DeFi",
+    result: "Gangnam Billboard Promotion",
+    description: "High-visibility billboard campaign in Gangnam district for Korean market awareness.",
   },
 ];
 
