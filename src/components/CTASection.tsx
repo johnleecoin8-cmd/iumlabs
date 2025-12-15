@@ -81,53 +81,7 @@ const CTASection = () => {
   };
   return <div ref={ref} className="flex-1">
       {/* Hero CTA Section - Simplified with Unified Design */}
-      <div className="relative bg-gradient-to-br from-primary via-primary to-blue-600 py-[20px] px-4 overflow-hidden">
-        {/* Subtle Background Elements */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-cyan-400/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-blue-300/15 rounded-full blur-[100px]" />
-        </div>
-
-        <div className={`container mx-auto max-w-5xl text-center relative z-10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          
-
-          {/* CTA Buttons - Unified Style */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <CalendlyButton className="group w-full sm:w-auto bg-white text-primary hover:bg-white/90 px-6 md:px-10 py-4 md:py-5 rounded-xl font-semibold transition-all flex items-center justify-center gap-2">
-              <span>Book a Meeting</span>
-              <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </CalendlyButton>
-
-            <a href={`mailto:${brand.email}`} className="group w-full sm:w-auto flex items-center justify-center gap-2 px-6 md:px-8 py-4 md:py-5 rounded-xl border border-white/20 text-white font-medium hover:bg-white/10 hover:border-white/40 transition-all">
-              <Mail className="w-5 h-5" />
-              <span>Send Email</span>
-            </a>
-          </div>
-
-          {/* Trust Indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-8 mt-10 md:mt-12 pt-8 md:pt-10 border-t border-white/10">
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-white">18+</div>
-              <div className="text-xs md:text-sm text-white/60">Projects Launched</div>
-            </div>
-            <div className="w-px h-10 bg-white/20 hidden sm:block" />
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-white">120+</div>
-              <div className="text-xs md:text-sm text-white/60">KOL Network</div>
-            </div>
-            <div className="w-px h-10 bg-white/20 hidden sm:block" />
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-white">$2.5M+</div>
-              <div className="text-xs md:text-sm text-white/60">Token Sales</div>
-            </div>
-            <div className="w-px h-10 bg-white/20 hidden sm:block" />
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold text-white">38+</div>
-              <div className="text-xs md:text-sm text-white/60">AMA Hosting</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
       {/* Contact Form Section - Unified Dark Theme */}
       <div className="relative bg-[hsl(0,0%,4%)] py-[20px] px-4 overflow-hidden">
