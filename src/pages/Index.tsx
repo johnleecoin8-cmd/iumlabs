@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProcessSection from "@/components/ProcessSection";
 import ServicesSection from "@/components/ServicesSection";
+import MediaPartnersSection from "@/components/MediaPartnersSection";
 import CasesSection from "@/components/CasesSection";
 import FilmstripGallerySection from "@/components/FilmstripGallerySection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
@@ -53,12 +54,26 @@ const Index = () => {
         </div>
       </section>
       
+      {/* Media Partners - Marquee Bar */}
+      <section className="scroll-reveal bg-[#0A0A0A]" id="media-partners">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Media Partners</h2>
+            </div>
+            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">As Featured In</span>
+          </div>
+          <MediaPartnersSection />
+        </div>
+      </section>
+      
       {/* Cases */}
       <section className="scroll-reveal bg-[#0A0A0A]" id="cases">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
             </div>
             <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">Our Work</span>
@@ -72,7 +87,7 @@ const Index = () => {
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Gallery</h2>
             </div>
             <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">Campaign Archive</span>
@@ -86,7 +101,7 @@ const Index = () => {
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
               <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
             </div>
             <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">Why CryptoBridge</span>
@@ -100,7 +115,7 @@ const Index = () => {
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">07</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>
             </div>
             <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">Research</span>
@@ -114,7 +129,7 @@ const Index = () => {
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">07</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">08</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Contact</h2>
             </div>
             <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">Get Started</span>
