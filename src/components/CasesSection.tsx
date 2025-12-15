@@ -17,9 +17,9 @@ import zkpassLogo from "@/assets/logos/zkpass.png";
 
 // Import campaign images for card backgrounds
 import bnbCampaign from "@/assets/campaigns/bnb-event.jpg";
-import storyCampaign from "@/assets/campaigns/story-workshop.jpg";
+import storyCampaign from "@/assets/campaigns/story-origin-summit.jpg";
 import saharaCampaign from "@/assets/campaigns/sahara-ai.jpg";
-import mantraCampaign from "@/assets/campaigns/mantra.jpg";
+import mantraCampaign from "@/assets/campaigns/mantra-party.jpg";
 import peaqCampaign from "@/assets/campaigns/peaq-summit.jpg";
 import triaCampaign from "@/assets/campaigns/tria-launch.jpg";
 import fogoCampaign from "@/assets/campaigns/fogo-fest.avif";
