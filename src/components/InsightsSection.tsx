@@ -4,151 +4,216 @@ import { ArrowUpRight, Mail, Clock, TrendingUp } from "lucide-react";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
 import aiAgentsImg from "@/assets/blog/ai-agents-defi.jpg";
 import kaitoImg from "@/assets/blog/kaito-mindshare.jpg";
 import ecosystemImg from "@/assets/blog/ecosystem-growth-2025.jpg";
-const insights = [{
-  id: "ai-agents-defi",
-  title: "The Rise of AI Agents in DeFi",
-  excerpt: "How autonomous AI agents are reshaping decentralized finance and creating new opportunities in the Korean market.",
-  date: "Dec 10, 2024",
-  readTime: "8 min read",
-  category: "Research",
-  image: aiAgentsImg,
-  trending: true
-}, {
-  id: "kaito-mindshare",
-  title: "Kaito Mindshare: New Metric for Web3",
-  excerpt: "Understanding the emerging mindshare metrics and their impact on Web3 marketing strategies.",
-  date: "Dec 8, 2024",
-  readTime: "6 min read",
-  category: "Analysis",
-  image: kaitoImg,
-  trending: false
-}, {
-  id: "ecosystem-growth-2025",
-  title: "Ecosystem Growth Strategies for 2025",
-  excerpt: "Key trends and strategies for sustainable ecosystem growth in the evolving Web3 landscape.",
-  date: "Dec 5, 2024",
-  readTime: "10 min read",
-  category: "Strategy",
-  image: ecosystemImg,
-  trending: true
-}];
+
+const insights = [
+  {
+    id: "ai-agents-defi",
+    title: "The Rise of AI Agents in DeFi",
+    excerpt: "How autonomous AI agents are reshaping decentralized finance and creating new opportunities in the Korean market.",
+    date: "Dec 10, 2024",
+    readTime: "8 min read",
+    category: "Research",
+    image: aiAgentsImg,
+    trending: true
+  },
+  {
+    id: "kaito-mindshare",
+    title: "Kaito Mindshare: New Metric for Web3",
+    excerpt: "Understanding the emerging mindshare metrics and their impact on Web3 marketing strategies.",
+    date: "Dec 8, 2024",
+    readTime: "6 min read",
+    category: "Analysis",
+    image: kaitoImg,
+    trending: false
+  },
+  {
+    id: "ecosystem-growth-2025",
+    title: "Ecosystem Growth Strategies for 2025",
+    excerpt: "Key trends and strategies for sustainable ecosystem growth in the evolving Web3 landscape.",
+    date: "Dec 5, 2024",
+    readTime: "10 min read",
+    category: "Strategy",
+    image: ecosystemImg,
+    trending: true
+  }
+];
+
+const floatingTags = [
+  { label: "Web3 Research", top: "8%", right: "5%", delay: 0 },
+  { label: "Market Insights", bottom: "15%", left: "3%", delay: 0.2 },
+];
+
 const InsightsSection = () => {
-  const {
-    ref,
-    isVisible
-  } = useScrollAnimation();
+  const { ref, isVisible } = useScrollAnimation();
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setIsSubmitting(true);
     try {
-      const {
-        error
-      } = await supabase.from("newsletter_subscribers").insert({
-        email
-      });
+      const { error } = await supabase.from("newsletter_subscribers").insert({ email });
       if (error) throw error;
       toast.success("Successfully subscribed!");
       setEmail("");
-    } catch (error) {
+    } catch {
       toast.error("Failed to subscribe. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
   };
-  return <section ref={ref} className="px-4 bg-[#FAFAFA] py-[20px]">
-      <div className="container mx-auto max-w-7xl">
+
+  return (
+    <section ref={ref} className="relative px-4 bg-[#0A0A0B] py-16 md:py-20 overflow-hidden">
+      {/* Background gradient effects */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-green-500/[0.02] to-transparent pointer-events-none" />
+      <div className="absolute top-1/3 left-0 w-96 h-96 bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Floating Tags */}
+      <div className="hidden lg:block">
+        {floatingTags.map((tag, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5, delay: tag.delay + 0.3 }}
+            className="absolute z-10 px-4 py-2 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/60 text-xs font-medium hover:bg-white/[0.06] hover:border-white/20 hover:text-white transition-all duration-300 cursor-default backdrop-blur-sm"
+            style={{
+              top: tag.top,
+              left: tag.left,
+              right: tag.right,
+              bottom: tag.bottom
+            }}
+          >
+            {tag.label}
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="container mx-auto max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Left - Newsletter */}
-          <div className={`lg:col-span-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: -30 }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-4"
+          >
             <div className="lg:sticky lg:top-32">
-              <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase">
-                <span className="w-8 h-px bg-primary" />
-                Research & Insights
+              <span className="text-white/40 text-xs font-mono tracking-widest uppercase mb-4 block">
+                [ 08 ] ── Research & Insights
               </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
                 Latest <span className="text-primary">Research</span>
               </h2>
-              <p className="text-gray-600 mb-8">
+              <p className="text-white/50 mb-8">
                 Stay ahead with our market insights, research reports, and strategy guides for the Korean Web3 ecosystem.
               </p>
 
-              {/* Newsletter Form */}
-              <form onSubmit={handleSubscribe} className="space-y-4">
+              {/* Newsletter Form - Glassmorphism */}
+              <form onSubmit={handleSubscribe} className="space-y-4 p-6 rounded-2xl bg-white/[0.03] border border-white/[0.08] backdrop-blur-sm">
                 <div className="relative group">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors" />
-                  <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" className="w-full pl-12 pr-4 py-4 rounded-xl bg-white border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-primary/50 focus:bg-white transition-all duration-300 shadow-sm" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/30 group-focus-within:text-primary transition-colors" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-white/[0.03] border border-white/[0.08] text-white placeholder:text-white/30 focus:outline-none focus:border-primary/50 focus:bg-white/[0.05] transition-all duration-300"
+                  />
                 </div>
-                <button type="submit" disabled={isSubmitting} className="group w-full py-4 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-all duration-300 disabled:opacity-50 relative overflow-hidden">
-                  <span className="relative z-10">{isSubmitting ? "Subscribing..." : "Subscribe to Newsletter"}</span>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="group w-full py-4 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-all duration-300 disabled:opacity-50"
+                >
+                  {isSubmitting ? "Subscribing..." : "Subscribe to Newsletter"}
                 </button>
               </form>
 
-              <Link to="/research" className="group inline-flex items-center gap-2 text-gray-500 hover:text-primary transition-colors mt-6">
+              <Link to="/research" className="group inline-flex items-center gap-2 text-white/40 hover:text-primary transition-colors mt-6 px-4 py-2 rounded-xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06]">
                 View all research
                 <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </Link>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right - Articles */}
           <div className="lg:col-span-8">
             <div className="space-y-4">
-              {insights.map((article, index) => <Link key={article.id} to={`/research/${article.id}`} className={`group relative flex flex-col md:flex-row gap-6 p-5 rounded-2xl bg-white border border-gray-200 shadow-sm hover:shadow-lg hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 overflow-hidden ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`} style={{
-              transitionDelay: `${index * 150}ms`
-            }}>
-                  {/* Hover Glow */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent" />
-                  </div>
+              {insights.map((article, index) => (
+                <motion.div
+                  key={article.id}
+                  initial={{ opacity: 0, x: 30 }}
+                  animate={isVisible ? { opacity: 1, x: 0 } : { opacity: 0, x: 30 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                >
+                  <Link
+                    to={`/research/${article.id}`}
+                    className="group relative flex flex-col md:flex-row gap-6 p-5 rounded-2xl bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-primary/30 hover:-translate-y-1 transition-all duration-500 overflow-hidden"
+                  >
+                    {/* Hover Glow */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent" />
+                    </div>
 
-                  {/* Image */}
-                  <div className="relative md:w-56 h-40 rounded-xl overflow-hidden flex-shrink-0">
-                    <img src={article.image} alt={article.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
-                    {article.trending && <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-md bg-primary/90">
-                        <TrendingUp className="w-3 h-3 text-white" />
-                        <span className="text-[10px] text-white font-medium uppercase">Trending</span>
-                      </div>}
-                  </div>
+                    {/* Image */}
+                    <div className="relative md:w-56 h-40 rounded-xl overflow-hidden flex-shrink-0 border border-white/[0.05]">
+                      <img
+                        src={article.image}
+                        alt={article.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      {article.trending && (
+                        <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-md bg-primary/90">
+                          <TrendingUp className="w-3 h-3 text-white" />
+                          <span className="text-[10px] text-white font-medium uppercase">Trending</span>
+                        </div>
+                      )}
+                    </div>
 
-                  {/* Content */}
-                  <div className="flex-1 flex flex-col justify-center relative z-10">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-xs text-primary uppercase tracking-wider font-medium px-2 py-1 rounded-md bg-primary/10">
-                        {article.category}
-                      </span>
-                      <div className="flex items-center gap-1 text-gray-400">
-                        <Clock className="w-3 h-3" />
-                        <span className="text-xs">{article.readTime}</span>
+                    {/* Content */}
+                    <div className="flex-1 flex flex-col justify-center relative z-10">
+                      <div className="flex items-center gap-3 mb-3">
+                        <span className="text-xs text-primary uppercase tracking-wider font-medium px-2 py-1 rounded-md bg-primary/10 border border-primary/20">
+                          {article.category}
+                        </span>
+                        <div className="flex items-center gap-1 text-white/30">
+                          <Clock className="w-3 h-3" />
+                          <span className="text-xs">{article.readTime}</span>
+                        </div>
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-primary transition-colors mb-2">
+                        {article.title}
+                      </h3>
+                      <p className="text-white/40 text-sm leading-relaxed line-clamp-2">
+                        {article.excerpt}
+                      </p>
+                      <div className="mt-4 flex items-center gap-2 text-white/30 text-xs">
+                        <span>{article.date}</span>
                       </div>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors mb-2">
-                      {article.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
-                      {article.excerpt}
-                    </p>
-                    <div className="mt-4 flex items-center gap-2 text-gray-400 text-xs">
-                      <span>{article.date}</span>
-                    </div>
-                  </div>
 
-                  {/* Arrow */}
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary/10">
-                      <ArrowUpRight className="w-5 h-5 text-primary" />
+                    {/* Arrow */}
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 rounded-full bg-white/[0.03] border border-white/[0.08] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary/10 group-hover:border-primary/30">
+                        <ArrowUpRight className="w-5 h-5 text-primary" />
+                      </div>
                     </div>
-                  </div>
-                </Link>)}
+                  </Link>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default InsightsSection;
