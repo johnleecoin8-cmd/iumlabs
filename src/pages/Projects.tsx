@@ -384,7 +384,7 @@ const Projects = () => {
                 <img 
                   src={client.logo} 
                   alt={client.name} 
-                  className="h-4 w-4 sm:h-5 sm:w-5 object-contain brightness-0 invert opacity-80 flex-shrink-0"
+                  className="h-4 w-4 sm:h-5 sm:w-5 object-contain opacity-90 flex-shrink-0"
                 />
                 <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
                   {client.name}

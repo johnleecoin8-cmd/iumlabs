@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useCountUp } from "@/hooks/useCountUp";
 
-// Import client logos
-import bnbLogo from "@/assets/logos/bnb.png";
+// Import client logos (matching Projects page)
+import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
@@ -17,6 +17,7 @@ import mantraLogo from "@/assets/logos/mantra.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
+import zkpassLogo from "@/assets/logos/zkpass.png";
 
 // Desktop tags
 const serviceTags = [
@@ -182,7 +183,7 @@ const HeroSection = () => {
               <img 
                 src={client.logo} 
                 alt={client.name} 
-                className="h-4 w-4 sm:h-5 sm:w-5 object-contain brightness-0 invert opacity-80 flex-shrink-0"
+                className="h-4 w-4 sm:h-5 sm:w-5 object-contain opacity-90 flex-shrink-0"
               />
               <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
                 {client.name}
