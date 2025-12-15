@@ -37,7 +37,7 @@ const stats = [{
 }];
 
 // Floating tags for light background
-const floatingTags = [{
+const floatingTags: { label: string; top?: string; left?: string; right?: string; bottom?: string; delay: number }[] = [{
   label: "Korea Expert",
   top: "8%",
   left: "5%",
@@ -58,7 +58,7 @@ const floatingTags = [{
   right: "5%",
   delay: 0.6
 }];
-const mobileFloatingTags = [{
+const mobileFloatingTags: { label: string; top?: string; left?: string; right?: string; bottom?: string; delay: number }[] = [{
   label: "Korea Expert",
   top: "3%",
   left: "5%",
@@ -129,6 +129,58 @@ const AboutUsSection = () => {
     ref,
     isVisible
   } = useScrollAnimation();
-  return;
+  return (
+    <div ref={ref} className="relative min-h-[50vh] bg-[#F5F2ED] py-[20px] overflow-hidden">
+      {/* Floating Tags - Desktop */}
+      <div className="hidden sm:block">
+        {floatingTags.map((tag, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5, delay: tag.delay + 0.2 }}
+            className="absolute z-10 px-3 py-1.5 rounded-full border border-gray-400 text-gray-600 text-xs font-medium hover:bg-gray-100 hover:border-gray-600 transition-all duration-300 cursor-default"
+            style={{
+              top: tag.top,
+              left: tag.left,
+              right: tag.right,
+              bottom: tag.bottom
+            }}
+          >
+            {tag.label}
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Floating Tags - Mobile */}
+      <div className="sm:hidden">
+        {mobileFloatingTags.map((tag, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.5, delay: tag.delay + 0.2 }}
+            className="absolute z-10 px-2 py-1 rounded-full border border-gray-400 text-gray-600 text-[10px] font-medium"
+            style={{
+              top: tag.top,
+              left: tag.left,
+              right: tag.right,
+              bottom: tag.bottom
+            }}
+          >
+            {tag.label}
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
+        <div className="grid lg:grid-cols-4 gap-4">
+          {stats.map((stat, index) => (
+            <StatCard key={index} stat={stat} index={index} isVisible={isVisible} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 };
 export default AboutUsSection;

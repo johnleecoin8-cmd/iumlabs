@@ -87,7 +87,7 @@ const CTASection = () => {
       <div className="relative bg-[hsl(0,0%,4%)] py-[20px] px-4 overflow-hidden">
         <div className={`container mx-auto max-w-6xl relative z-10 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Section Header - Unified Style */}
-          <div className="text-center mb-10 md:mb-16">
+          <div className="text-center mb-6 md:mb-8">
             <span className="inline-flex items-center gap-2 text-xs font-medium text-primary mb-4 tracking-widest uppercase">
               <span className="w-8 h-px bg-primary" />
               Get in Touch

@@ -61,6 +61,82 @@ const TestimonialsSection = () => {
     }
     return visible;
   };
-  return;
+  return (
+    <div ref={ref} className="relative bg-[#F5F2ED] py-[20px] overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+        {/* Carousel Container */}
+        <div 
+          className="relative"
+          onMouseEnter={() => setIsAutoPlaying(false)}
+          onMouseLeave={() => setIsAutoPlaying(true)}
+        >
+          {/* Testimonial Cards */}
+          <div className="grid md:grid-cols-3 gap-4">
+            {getVisibleTestimonials().map((testimonial, index) => (
+              <div
+                key={`${testimonial.originalIndex}-${currentIndex}`}
+                className={`group p-6 rounded-2xl bg-white border border-gray-200 shadow-lg hover:shadow-xl hover:border-primary/40 transition-all duration-500 ${
+                  isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <Quote className="w-8 h-8 text-primary/30 mb-4" />
+                
+                <p className="text-gray-700 text-sm leading-relaxed mb-6">
+                  "{testimonial.content}"
+                </p>
+                
+                <div className="flex items-center gap-3 pt-4 border-t border-gray-100">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <span className="text-primary font-bold text-sm">
+                      {testimonial.name.charAt(0)}
+                    </span>
+                  </div>
+                  <div>
+                    <p className="text-gray-900 font-semibold text-sm">{testimonial.name}</p>
+                    <p className="text-gray-500 text-xs">{testimonial.role} at {testimonial.company}</p>
+                  </div>
+                  <div className="ml-auto flex gap-0.5">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-3 h-3 text-yellow-400 fill-yellow-400" />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Navigation */}
+          <div className="flex items-center justify-center gap-4 mt-6">
+            <button 
+              onClick={prevSlide}
+              className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            
+            <div className="flex gap-2">
+              {testimonials.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentIndex(index)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentIndex ? 'bg-primary w-6' : 'bg-gray-300 hover:bg-gray-400'
+                  }`}
+                />
+              ))}
+            </div>
+            
+            <button 
+              onClick={nextSlide}
+              className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:bg-primary hover:text-white hover:border-primary transition-all duration-300"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 export default TestimonialsSection;
