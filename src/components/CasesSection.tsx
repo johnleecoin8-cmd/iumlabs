@@ -13,6 +13,12 @@ import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria-official.png";
 import bybitLogo from "@/assets/logos/bybit.png";
 
+// Import campaign images for projects without dedicated logos
+import fogoImg from "@/assets/campaigns/fogo-fest.avif";
+import lbankImg from "@/assets/campaigns/lbank-festival.jpg";
+import zkpassImg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
+import openledgerImg from "@/assets/campaigns/openledger-interview.jpg";
+
 const featuredCases = [
   {
     number: "01",
@@ -68,6 +74,46 @@ const featuredCases = [
     result: "30K+ Korean Wallets",
     description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users.",
   },
+  {
+    number: "07",
+    name: "FOGO",
+    logo: fogoImg,
+    slug: "fogo",
+    category: "Layer 1",
+    result: "Fogo Fest 2025 Success",
+    description: "Launch event and community activation for FOGO ecosystem in Korean market.",
+    useCampaignImg: true,
+  },
+  {
+    number: "08",
+    name: "Lbank",
+    logo: lbankImg,
+    slug: "lbank",
+    category: "Exchange",
+    result: "1001 Festival Seoul",
+    description: "Major exchange event marketing and Korean community engagement campaign.",
+    useCampaignImg: true,
+  },
+  {
+    number: "09",
+    name: "zkPass",
+    logo: zkpassImg,
+    slug: "zkpass",
+    category: "Privacy",
+    result: "The Verifiable Nights",
+    description: "Privacy-focused Web3 identity solution launch with Korean developer community.",
+    useCampaignImg: true,
+  },
+  {
+    number: "10",
+    name: "Open Ledger",
+    logo: openledgerImg,
+    slug: "openledger",
+    category: "Infrastructure",
+    result: "Korea Media Coverage",
+    description: "Strategic media interviews and PR campaign for Korean market awareness.",
+    useCampaignImg: true,
+  },
 ];
 
 const additionalClients = [
@@ -85,9 +131,10 @@ interface CaseCardProps {
   result: string;
   description: string;
   index: number;
+  useCampaignImg?: boolean;
 }
 
-const CaseCard = ({ number, name, logo, slug, category, result, description, index }: CaseCardProps) => (
+const CaseCard = ({ number, name, logo, slug, category, result, description, index, useCampaignImg }: CaseCardProps) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -104,11 +151,18 @@ const CaseCard = ({ number, name, logo, slug, category, result, description, ind
       </div>
       
       <div className="flex items-center gap-4 mb-3">
-        {slug !== 'tria' && (
+        {slug !== 'tria' && !useCampaignImg && (
           <img
             src={logo}
             alt={name}
             className="w-10 h-10 object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+          />
+        )}
+        {useCampaignImg && (
+          <img
+            src={logo}
+            alt={name}
+            className="w-12 h-12 object-cover rounded-lg opacity-80 group-hover:opacity-100 transition-opacity"
           />
         )}
         <h4 className="text-xl font-bold text-white">{name}</h4>
