@@ -1,60 +1,85 @@
 import { Canvas, useFrame } from '@react-three/fiber';
+import { Environment, Float } from '@react-three/drei';
 import { motion } from 'framer-motion';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import * as THREE from 'three';
 
-// ---------- WebGL version (react-three-fiber) ----------
+// ---------- Premium Metallic Pillar ----------
 
-const Pillar = ({ position, height, delay }: { position: [number, number, number]; height: number; delay: number }) => {
+const MetallicPillar = ({ 
+  position, 
+  height,
+  radius = 0.85,
+  delay = 0 
+}: { 
+  position: [number, number, number]; 
+  height: number;
+  radius?: number;
+  delay?: number;
+}) => {
   const meshRef = useRef<THREE.Mesh>(null);
   const initialY = position[1];
 
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.position.y = initialY + Math.sin(state.clock.elapsedTime * 0.8 + delay) * 0.15;
+      meshRef.current.position.y = initialY + Math.sin(state.clock.elapsedTime * 0.6 + delay) * 0.2;
     }
   });
 
   return (
     <mesh ref={meshRef} position={position}>
-      <cylinderGeometry args={[0.85, 0.85, height, 48]} />
-      <meshStandardMaterial color="#7a7a7a" metalness={0.9} roughness={0.12} envMapIntensity={2.5} />
+      <cylinderGeometry args={[radius, radius, height, 64]} />
+      <meshStandardMaterial 
+        color="#505050"
+        metalness={1}
+        roughness={0.08}
+        envMapIntensity={1.8}
+      />
+      {/* Top cap with highlight */}
       <mesh position={[0, height / 2, 0]}>
-        <cylinderGeometry args={[0.87, 0.87, 0.24, 48]} />
-        <meshStandardMaterial color="#9a9a9a" metalness={0.85} roughness={0.18} />
+        <cylinderGeometry args={[radius * 1.02, radius * 1.02, 0.15, 64]} />
+        <meshStandardMaterial color="#707070" metalness={0.95} roughness={0.1} envMapIntensity={2} />
       </mesh>
+      {/* Bottom cap */}
       <mesh position={[0, -height / 2, 0]}>
-        <cylinderGeometry args={[0.87, 0.87, 0.24, 48]} />
-        <meshStandardMaterial color="#5f5f5f" metalness={0.85} roughness={0.18} />
+        <cylinderGeometry args={[radius * 1.02, radius * 1.02, 0.15, 64]} />
+        <meshStandardMaterial color="#404040" metalness={0.95} roughness={0.12} />
       </mesh>
     </mesh>
   );
 };
 
+// ---------- Pillars Scene with Environment ----------
+
 const PillarsScene = () => {
   const groupRef = useRef<THREE.Group>(null);
 
   useFrame(() => {
-    if (groupRef.current) groupRef.current.rotation.y += 0.002;
+    if (groupRef.current) {
+      groupRef.current.rotation.y += 0.0015;
+    }
   });
 
   const pillars = useMemo(
     () => [
-      { position: [-3, 0, 1] as [number, number, number], height: 5, delay: 0 },
-      { position: [0, 0, 0] as [number, number, number], height: 6.5, delay: 1 },
-      { position: [3, 0, 1] as [number, number, number], height: 4.5, delay: 2 },
-      { position: [-1.5, 0, -2] as [number, number, number], height: 4, delay: 0.5 },
-      { position: [1.5, 0, -2] as [number, number, number], height: 5.5, delay: 1.5 },
+      { position: [-4, 0, 0] as [number, number, number], height: 6.5, radius: 1.1, delay: 0 },
+      { position: [-1.5, 0, 1.5] as [number, number, number], height: 5, radius: 0.9, delay: 0.8 },
+      { position: [1.2, 0, 0.5] as [number, number, number], height: 7.5, radius: 1.2, delay: 1.5 },
+      { position: [4, 0, -0.5] as [number, number, number], height: 5.5, radius: 1.0, delay: 2.2 },
+      { position: [-2.5, 0, -2] as [number, number, number], height: 4, radius: 0.7, delay: 0.4 },
+      { position: [2.5, 0, -2.5] as [number, number, number], height: 4.5, radius: 0.75, delay: 1.8 },
     ],
     []
   );
 
   return (
-    <group ref={groupRef} position={[0, -2, 0]}>
-      {pillars.map((pillar, i) => (
-        <Pillar key={i} {...pillar} />
-      ))}
-    </group>
+    <Float speed={0.4} rotationIntensity={0.05} floatIntensity={0.15}>
+      <group ref={groupRef} position={[0, -1.5, 0]}>
+        {pillars.map((pillar, i) => (
+          <MetallicPillar key={i} {...pillar} />
+        ))}
+      </group>
+    </Float>
   );
 };
 
@@ -125,16 +150,21 @@ const Pillars3D = ({ className = '' }: Pillars3DProps) => {
         <Canvas
           className="w-full h-full"
           style={{ width: '100%', height: '100%' }}
-          camera={{ position: [0, 3, 12], fov: 40 }}
+          camera={{ position: [0, 4, 14], fov: 38 }}
           gl={{ alpha: true, antialias: true }}
           dpr={[1, 2]}
         >
-          <ambientLight intensity={0.9} />
-          <directionalLight position={[10, 15, 10]} intensity={2.2} />
-          <directionalLight position={[-10, 10, -10]} intensity={1.1} color="#9aa1aa" />
-          <pointLight position={[0, 8, 8]} intensity={1.6} color="#ffffff" />
-          <pointLight position={[-5, 3, 5]} intensity={0.9} color="#c9c9c9" />
-          <pointLight position={[5, 3, 5]} intensity={0.9} color="#c9c9c9" />
+          {/* HDRI Environment for realistic chrome reflections */}
+          <Environment preset="city" />
+          
+          {/* Enhanced lighting system */}
+          <ambientLight intensity={0.4} />
+          <spotLight position={[15, 20, 15]} intensity={2} color="#ffffff" angle={0.25} penumbra={0.5} />
+          <spotLight position={[-15, 15, 10]} intensity={1.2} color="#a0a0ff" angle={0.3} penumbra={0.3} />
+          <pointLight position={[0, 10, 10]} intensity={1.5} color="#ffffff" />
+          <pointLight position={[-8, 5, 8]} intensity={0.8} color="#e0e0e0" />
+          <pointLight position={[8, 5, 8]} intensity={0.8} color="#e0e0e0" />
+          
           <PillarsScene />
         </Canvas>
       ) : (
