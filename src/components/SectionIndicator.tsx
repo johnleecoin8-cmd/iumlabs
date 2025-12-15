@@ -68,19 +68,7 @@ const SectionIndicator = () => {
     }
   };
   return <div className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-4">
-      {sections.map((section, index) => (
-        <button
-          key={section.id}
-          onClick={() => scrollToSection(section.id)}
-          className={`w-8 h-8 rounded-full border transition-all duration-300 flex items-center justify-center text-xs font-mono ${
-            index === activeSection
-              ? isLightSection ? "border-gray-900 bg-gray-900 text-white" : "border-white bg-white text-black"
-              : isLightSection ? "border-gray-400 text-gray-600 hover:border-gray-900" : "border-white/30 text-white/50 hover:border-white"
-          }`}
-        >
-          {section.number}
-        </button>
-      ))}
+      {sections.map((section, index) => {})}
     </div>;
 };
 export default SectionIndicator;
