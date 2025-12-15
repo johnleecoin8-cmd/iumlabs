@@ -82,7 +82,7 @@ const Index = () => {
         </div>
       </section>
       
-      <div className="p-0.5 sm:p-1 md:p-2 bg-white">
+      <div className="p-0.5 sm:p-1 md:p-1 bg-white">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <Footer />
         </div>
