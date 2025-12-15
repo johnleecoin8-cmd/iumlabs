@@ -584,9 +584,43 @@
    HOVER EFFECTS - STANDARDIZED
    ============================================ */
 
+/* Unified Button Hover - Primary */
+.btn-hover {
+  @apply transition-all duration-300 ease-out;
+}
+
+.btn-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px hsl(217 91% 60% / 0.3);
+}
+
+.btn-hover:active {
+  transform: translateY(0);
+}
+
+/* Unified Button Hover - Dark */
+.btn-hover-dark {
+  @apply transition-all duration-300 ease-out;
+}
+
+.btn-hover-dark:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px hsl(0 0% 0% / 0.4);
+}
+
+/* Unified Button Hover - Ghost */
+.btn-hover-ghost {
+  @apply transition-all duration-300 ease-out;
+}
+
+.btn-hover-ghost:hover {
+  background: hsl(0 0% 100% / 0.08);
+  transform: translateY(-1px);
+}
+
 /* Glass Card - Light */
 .glass-card {
-  @apply rounded-2xl transition-all duration-300;
+  @apply rounded-2xl transition-all duration-300 ease-out;
   background: hsl(0 0% 100% / 0.8);
   backdrop-filter: blur(20px);
   border: 1px solid hsl(0 0% 0% / 0.06);
@@ -595,13 +629,13 @@
 
 .glass-card:hover {
   border-color: hsl(0 0% 0% / 0.12);
-  box-shadow: 0 8px 32px hsl(0 0% 0% / 0.1);
+  box-shadow: 0 12px 40px hsl(0 0% 0% / 0.12);
   transform: translateY(-4px);
 }
 
 /* Glass Card - Dark */
 .glass-dark {
-  @apply rounded-2xl transition-all duration-300;
+  @apply rounded-2xl transition-all duration-300 ease-out;
   background: hsl(0 0% 100% / 0.03);
   backdrop-filter: blur(20px);
   border: 1px solid hsl(0 0% 100% / 0.08);
@@ -610,7 +644,7 @@
 .glass-dark:hover {
   background: hsl(0 0% 100% / 0.05);
   border-color: hsl(0 0% 100% / 0.15);
-  box-shadow: 0 8px 32px hsl(0 0% 0% / 0.3);
+  box-shadow: 0 12px 40px hsl(0 0% 0% / 0.35);
   transform: translateY(-4px);
 }
 
