@@ -80,7 +80,13 @@ const CTASection = () => {
       <div className="relative bg-[#0A0A0B] py-16 md:py-24 px-4 overflow-hidden">
         <div className={`container mx-auto max-w-6xl relative z-10 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           {/* Option B Header */}
-          <div className="relative mb-12 md:mb-16">
+          <motion.div 
+            className="relative mb-12 md:mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-white/[0.03] leading-none pointer-events-none select-none">
               09
             </span>
@@ -93,7 +99,7 @@ const CTASection = () => {
               </h2>
               <div className="w-16 h-1 bg-gradient-to-r from-red-400 to-orange-400 mt-4 rounded-full" />
             </div>
-          </div>
+          </motion.div>
 
           <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start">
             {/* Left - Image & Contact Cards */}
