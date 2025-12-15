@@ -93,7 +93,7 @@ const InsightsSection = () => {
     <section className="bg-white">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Articles List */}
-        <div className="w-full lg:w-2/3 border-r border-gray-200">
+        <div className="w-full lg:w-2/3 lg:border-r border-gray-200">
           {insights.map((article, index) => (
             <motion.div
               key={article.id}

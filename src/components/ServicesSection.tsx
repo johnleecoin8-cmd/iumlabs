@@ -111,7 +111,7 @@ const ServicesSection = () => {
     <section className="bg-white">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Services Grid */}
-        <div className="w-full lg:w-2/3 border-r border-gray-200">
+        <div className="w-full lg:w-2/3 lg:border-r border-gray-200">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {services.map((service, index) => (
               <ServiceCard key={service.number} service={service} index={index} />
