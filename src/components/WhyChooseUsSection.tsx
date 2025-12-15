@@ -98,7 +98,7 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="order-1 lg:order-2"
           >
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 h-[400px] md:h-[480px] lg:h-[520px] hover:shadow-3xl hover:shadow-gray-300/50 transition-all duration-500">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 h-[450px] md:h-[550px] lg:h-[620px] hover:shadow-3xl hover:shadow-gray-300/50 transition-all duration-500">
               <img
                 src={teamPhoto}
                 alt="CryptoBridge Korea Team"
