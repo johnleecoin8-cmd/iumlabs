@@ -86,7 +86,7 @@ const ProcessSection = () => {
         </motion.div>
 
         {/* Timeline Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5">
           {phases.map((phase, index) => (
             <motion.div
               key={phase.number}
@@ -98,14 +98,17 @@ const ProcessSection = () => {
             >
               {/* Connection Line (desktop only) */}
               {index < phases.length - 1 && (
-                <div className="hidden lg:block absolute top-12 left-full w-full h-px bg-gradient-to-r from-gray-300 to-transparent z-0" />
+                <div className="hidden lg:block absolute top-14 left-full w-full h-px bg-gradient-to-r from-amber-400/30 via-orange-400/20 to-transparent z-0" />
               )}
 
               {/* Card */}
-              <div className="relative h-full border border-gray-200 hover:border-gray-400 bg-white p-6 transition-all duration-300 hover:shadow-lg rounded-xl">
-                {/* Number & Timeline */}
+              <div className="relative h-full bg-white rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-gray-200/50 hover:-translate-y-1 border border-gray-100 hover:border-gray-200">
+                {/* Number badge */}
+                <span className="inline-block text-xs text-gray-300 font-mono mb-3">[{phase.number}]</span>
+                
+                {/* Timeline */}
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-gray-400 text-xs uppercase tracking-wider">
+                  <span className="text-xs uppercase tracking-wider px-3 py-1 rounded-xl bg-amber-50 text-amber-600 font-medium">
                     {phase.timeline}
                   </span>
                 </div>
@@ -116,7 +119,7 @@ const ProcessSection = () => {
                 </h3>
 
                 {/* Commitment */}
-                <p className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 font-semibold text-sm mb-3">
+                <p className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500 font-semibold text-sm mb-3">
                   {phase.commitment}
                 </p>
 
@@ -132,14 +135,14 @@ const ProcessSection = () => {
                       key={i}
                       className="flex items-center gap-2 text-gray-500 text-sm"
                     >
-                      <div className="w-1 h-1 bg-amber-500 rounded-full" />
+                      <div className="w-1.5 h-1.5 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full" />
                       <span>{deliverable}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* Learn more */}
-                <div className="flex items-center gap-2 text-gray-400 group-hover:text-gray-900 transition-colors text-sm">
+                <div className="flex items-center gap-2 text-gray-400 group-hover:text-amber-600 transition-colors text-sm">
                   Learn more
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -169,7 +172,7 @@ const ProcessSection = () => {
               href="https://calendly.com/cryptobridgekorea/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-900 transition-colors text-sm group"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-2xl font-medium hover:shadow-lg hover:shadow-amber-500/25 hover:-translate-y-0.5 transition-all duration-300 text-sm group"
             >
               Book a Call
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

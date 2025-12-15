@@ -58,15 +58,17 @@ const ServiceCard = ({ number, title, description, link, index }: ServiceCardPro
   >
     <Link 
       to={link}
-      className="group block h-full border border-white/10 hover:border-white/30 p-6 transition-all duration-300 hover:bg-white/[0.02]"
+      className="group block h-full rounded-2xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.04] p-6 transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1"
     >
-      <h4 className="text-xl font-bold text-white">
+      {/* Number badge */}
+      <span className="inline-block text-xs text-white/30 font-mono mb-3">[{number}]</span>
+      <h4 className="text-xl font-bold text-white mb-2">
         {title}
       </h4>
-      <p className="text-white/50 text-sm mt-2 leading-relaxed mb-4">
+      <p className="text-white/50 text-sm leading-relaxed mb-4">
         {description}
       </p>
-      <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm">
+      <div className="flex items-center gap-2 text-white/40 group-hover:text-primary transition-colors text-sm">
         Learn more
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
       </div>
@@ -107,7 +109,7 @@ const ServicesSection = () => {
         </motion.div>
 
         {/* Services Grid - 3x2 */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((service, index) => (
             <ServiceCard
               key={service.number}
