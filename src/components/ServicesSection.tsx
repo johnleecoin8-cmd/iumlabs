@@ -79,32 +79,32 @@ const ServicesSection = () => {
             >
               <Link 
                 to={service.link}
-                className="group flex items-center justify-between py-6 md:py-8 border-b border-white/10 transition-all duration-300 hover:bg-white/[0.02] hover:px-4 md:hover:px-6"
+                className="group flex items-center justify-between py-6 md:py-8 border-b border-white/10 transition-all duration-500 ease-out hover:bg-white/[0.05] hover:pl-4 md:hover:pl-6 hover:border-l-2 hover:border-l-primary"
               >
                 {/* Left - Number & Title */}
                 <div className="flex items-start md:items-center gap-4 md:gap-8 flex-1">
                   {/* Number */}
-                  <span className="text-sm font-mono text-white/30 pt-1 md:pt-0">
+                  <span className="text-sm font-mono text-white/30 pt-1 md:pt-0 group-hover:text-primary/60 transition-colors duration-500">
                     [{service.number}]
                   </span>
                   
                   {/* Title & Description */}
                   <div className="flex-1">
-                    <h3 className="text-xl md:text-2xl font-semibold text-white group-hover:text-primary transition-colors mb-1">
+                    <h3 className="text-xl md:text-2xl font-semibold text-white group-hover:text-primary transition-colors duration-500 mb-1">
                       {service.title}
                     </h3>
-                    <p className="text-sm md:text-base text-white/40">
+                    <p className="text-sm md:text-base text-white/40 group-hover:text-white/60 transition-colors duration-500">
                       {service.description}
                     </p>
                   </div>
                 </div>
 
                 {/* Right - Arrow */}
-                <div className="flex items-center gap-3 text-white/30 group-hover:text-primary transition-colors">
-                  <span className="hidden md:block text-sm font-medium opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                <div className="flex items-center gap-3 text-white/30 group-hover:text-primary transition-colors duration-500">
+                  <span className="hidden md:block text-sm font-medium opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
                     Learn more
                   </span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
                 </div>
               </Link>
             </motion.div>

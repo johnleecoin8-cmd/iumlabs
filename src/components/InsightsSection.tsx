@@ -85,21 +85,21 @@ const InsightsSection = () => {
           >
             <Link to={`/research/${featuredArticle.id}`} className="group block">
               <div 
-                className="relative rounded-2xl overflow-hidden h-[400px] md:h-[480px] lg:h-[520px] transition-all duration-500 group-hover:-translate-y-3 group-hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.8)]"
+                className="relative rounded-2xl overflow-hidden h-[400px] md:h-[480px] lg:h-[520px] transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:shadow-2xl"
                 style={{ perspective: "1000px" }}
               >
                 {/* Background Image with Enhanced Zoom */}
                 <img 
                   src={featuredArticle.image} 
                   alt={featuredArticle.title}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
                 
                 {/* Enhanced Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 group-hover:opacity-95 transition-opacity duration-500" />
                 
                 {/* Glow Effect on Hover */}
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-primary/20 via-transparent to-transparent" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />
 
                 {/* Content */}
                 <div className="absolute inset-0 p-6 md:p-8 lg:p-10 flex flex-col justify-end">
@@ -153,7 +153,7 @@ const InsightsSection = () => {
               >
                 <Link 
                   to={`/research/${article.id}`} 
-                  className="group flex gap-4 p-4 rounded-xl bg-white/[0.02] hover:bg-white/[0.06] border border-white/[0.05] hover:border-white/[0.15] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
+                  className="group flex gap-4 p-4 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] border border-white/[0.05] hover:border-white/[0.15] transition-all duration-500 ease-out hover:-translate-y-1 hover:shadow-lg hover:shadow-black/10"
                 >
                   {/* Thumbnail */}
                   <div className="w-24 h-24 md:w-28 md:h-28 flex-shrink-0 rounded-lg overflow-hidden">

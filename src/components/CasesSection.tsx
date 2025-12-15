@@ -234,7 +234,7 @@ const CaseCard = ({ number, name, logo, bgImage, slug, category, result, descrip
               <h4 className="text-2xl font-bold text-white">{name}</h4>
             </div>
             
-            <p className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400 font-semibold text-sm mb-3">
+            <p className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400 font-semibold text-sm mb-3">
               {result}
             </p>
             
