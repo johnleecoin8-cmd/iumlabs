@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import SectionHeader from "./SectionHeader";
-import Bridge3D from "./Bridge3D";
 import discoveryImg from "@/assets/process/discovery-research.jpg";
 import strategyImg from "@/assets/process/strategy-planning.jpg";
 import executionImg from "@/assets/process/execution-growth.jpg";
@@ -39,11 +38,6 @@ const phases = [
 const ProcessSection = () => {
   return (
     <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
-      {/* 3D Beams Bridge - Background */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] opacity-20 z-0 pointer-events-none">
-        <Bridge3D type="beams" color="#3B82F6" secondaryColor="#06B6D4" className="w-full h-full" />
-      </div>
-      
       <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
         {/* Header */}
         <SectionHeader 
