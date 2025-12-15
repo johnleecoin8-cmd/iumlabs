@@ -18,18 +18,27 @@ const Pillar = ({ position, height, delay }: { position: [number, number, number
     <mesh ref={meshRef} position={position}>
       <cylinderGeometry args={[0.8, 0.8, height, 32]} />
       <meshStandardMaterial
-        color="#1a1a1a"
-        metalness={0.95}
-        roughness={0.05}
+        color="#4a4a4a"
+        metalness={0.9}
+        roughness={0.1}
         envMapIntensity={2}
       />
       {/* Top cap */}
       <mesh position={[0, height / 2, 0]}>
-        <cylinderGeometry args={[0.8, 0.8, 0.15, 32]} />
+        <cylinderGeometry args={[0.82, 0.82, 0.2, 32]} />
         <meshStandardMaterial
-          color="#2a2a2a"
-          metalness={0.9}
-          roughness={0.1}
+          color="#5a5a5a"
+          metalness={0.85}
+          roughness={0.15}
+        />
+      </mesh>
+      {/* Bottom cap */}
+      <mesh position={[0, -height / 2, 0]}>
+        <cylinderGeometry args={[0.82, 0.82, 0.2, 32]} />
+        <meshStandardMaterial
+          color="#5a5a5a"
+          metalness={0.85}
+          roughness={0.15}
         />
       </mesh>
     </mesh>
@@ -43,20 +52,20 @@ const PillarsScene = () => {
   useFrame((state) => {
     if (groupRef.current) {
       // Slow rotation
-      groupRef.current.rotation.y += 0.001;
+      groupRef.current.rotation.y += 0.002;
     }
   });
 
   const pillars = useMemo(() => [
-    { position: [-2.5, 0, 0] as [number, number, number], height: 4, delay: 0 },
-    { position: [0, 0, 0] as [number, number, number], height: 5, delay: 1 },
-    { position: [2.5, 0, 0] as [number, number, number], height: 3.5, delay: 2 },
-    { position: [-1.2, 0, -1.5] as [number, number, number], height: 3, delay: 0.5 },
-    { position: [1.2, 0, -1.5] as [number, number, number], height: 4.5, delay: 1.5 },
+    { position: [-3, 0, 1] as [number, number, number], height: 5, delay: 0 },
+    { position: [0, 0, 0] as [number, number, number], height: 6.5, delay: 1 },
+    { position: [3, 0, 1] as [number, number, number], height: 4.5, delay: 2 },
+    { position: [-1.5, 0, -2] as [number, number, number], height: 4, delay: 0.5 },
+    { position: [1.5, 0, -2] as [number, number, number], height: 5.5, delay: 1.5 },
   ], []);
 
   return (
-    <group ref={groupRef} position={[0, -1, 0]}>
+    <group ref={groupRef} position={[0, -2, 0]}>
       {pillars.map((pillar, i) => (
         <Pillar key={i} {...pillar} />
       ))}
@@ -72,14 +81,17 @@ const Pillars3D = ({ className = '' }: Pillars3DProps) => {
   return (
     <div className={`pointer-events-none ${className}`}>
       <Canvas
-        camera={{ position: [0, 2, 10], fov: 35 }}
+        camera={{ position: [0, 3, 12], fov: 40 }}
         gl={{ alpha: true, antialias: true }}
         dpr={[1, 2]}
       >
-        <ambientLight intensity={0.3} />
-        <directionalLight position={[5, 10, 5]} intensity={1} />
-        <directionalLight position={[-5, 5, -5]} intensity={0.5} color="#404040" />
-        <pointLight position={[0, 5, 5]} intensity={0.8} color="#ffffff" />
+        {/* Stronger lighting for visibility */}
+        <ambientLight intensity={0.8} />
+        <directionalLight position={[10, 15, 10]} intensity={2} />
+        <directionalLight position={[-10, 10, -10]} intensity={1} color="#666666" />
+        <pointLight position={[0, 8, 8]} intensity={1.5} color="#ffffff" />
+        <pointLight position={[-5, 3, 5]} intensity={0.8} color="#888888" />
+        <pointLight position={[5, 3, 5]} intensity={0.8} color="#888888" />
         <PillarsScene />
       </Canvas>
     </div>
