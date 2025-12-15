@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Calendar } from 'lucide-react';
 import CalendlyButton from './CalendlyButton';
+import Bridge3D from './Bridge3D';
 import teamPhoto from '@/assets/team-photo.png';
 import coindeskLogo from '@/assets/logos/coindesk.png';
 import blockmediaLogo from '@/assets/logos/blockmedia-new.png';
@@ -67,13 +68,18 @@ const WhyChooseUsSection = () => {
             </CalendlyButton>
           </motion.div>
 
-          {/* Right Column - Image */}
+          {/* Right Column - Image + 3D Bridge */}
           <motion.div 
             initial={{ opacity: 0, x: 30 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="order-1 lg:order-2"
+            className="order-1 lg:order-2 relative"
           >
+            {/* 3D Arch Bridge - Floating Above */}
+            <div className="absolute -top-16 -right-16 md:-top-20 md:-right-20 w-[280px] h-[280px] md:w-[350px] md:h-[350px] z-10 opacity-70">
+              <Bridge3D type="arch" color="#B8860B" className="w-full h-full" />
+            </div>
+            
             <div className="relative rounded-3xl overflow-hidden shadow-2xl h-[450px] md:h-[520px] lg:h-[580px] hover:shadow-3xl transition-all duration-500 ease-out">
               <img 
                 src={teamPhoto} 
