@@ -1,6 +1,6 @@
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Calendar, ArrowDown } from "lucide-react";
+import { Calendar, ArrowDown, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
@@ -111,10 +111,10 @@ const ServiceDetailLayout = ({
 
   return (
     <div className="min-h-screen bg-white p-0.5 sm:p-1 md:p-2">
-      <div className="min-h-screen bg-background rounded-xl sm:rounded-2xl overflow-hidden">
+      <div className="min-h-screen bg-[#0A0A0B] rounded-xl sm:rounded-2xl overflow-hidden">
         <Navbar />
 
-      {/* Hero Section - Service-Specific Theme */}
+      {/* Hero Section - Dark Theme with Green Accents */}
       <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
         {/* Background - Service-Specific Image */}
         <div className="absolute inset-0 overflow-hidden">
@@ -122,66 +122,49 @@ const ServiceDetailLayout = ({
             className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
               backgroundImage: `url(${themeConfig.backgroundImage})`,
-              filter: "brightness(0.5) saturate(1.1)",
+              filter: "brightness(0.4) saturate(1.1)",
             }}
           />
           
-          {/* Aurora light overlay - Service-Specific Colors */}
-          <div className="absolute inset-0 animate-aurora">
-            <div className={`absolute inset-0 bg-gradient-to-tr ${themeConfig.auroraColors.primary} via-transparent ${themeConfig.auroraColors.secondary}`} />
-            {themeConfig.auroraColors.tertiary && (
-              <div className={`absolute inset-0 bg-gradient-to-bl ${themeConfig.auroraColors.tertiary} via-transparent to-transparent`} />
-            )}
-          </div>
-          
-          {/* Twinkling stars effect */}
-          <div className="absolute inset-0">
-            {[...Array(30)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  animationDelay: `${Math.random() * 3}s`,
-                  animationDuration: `${2 + Math.random() * 2}s`,
-                  opacity: 0.2 + Math.random() * 0.5,
-                }}
-              />
-            ))}
-          </div>
+          {/* Green/Emerald gradient overlay - Unified */}
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/15 via-transparent to-teal-500/10" />
           
           {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
         </div>
 
 
         {/* Content */}
         <div className="container mx-auto px-6 lg:px-16 pt-32 pb-24 relative z-10">
           <div className="max-w-3xl">
+            {/* Glass pill tag */}
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/[0.06] backdrop-blur-md rounded-full border border-white/[0.1] text-sm text-white/70 mb-8">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              Service Detail
+            </div>
+
             {/* Title */}
             <h1 className="text-white mb-8">
-              <span className="block text-6xl md:text-7xl lg:text-[100px] font-light tracking-tight leading-[0.95]">
+              <span className="block text-5xl md:text-6xl lg:text-[80px] font-bold tracking-tight leading-[0.95]">
                 {title}
               </span>
               {titleHighlight && (
-                <span className="block text-6xl md:text-7xl lg:text-[100px] font-light tracking-tight leading-[0.95]">
+                <span className="block text-5xl md:text-6xl lg:text-[80px] font-bold tracking-tight leading-[0.95] bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
                   {titleHighlight}
                 </span>
               )}
             </h1>
 
             {/* Subtitle */}
-            <p className="text-white/80 text-lg md:text-xl max-w-2xl mb-12 font-light leading-relaxed">
+            <p className="text-white/60 text-lg md:text-xl max-w-2xl mb-12 font-light leading-relaxed">
               {subtitle}
             </p>
 
-            {/* CTA Button - Service Accent Color */}
+            {/* CTA Button - Green Accent */}
             <CalendlyButton 
-              className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-2xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl backdrop-blur-sm"
+              className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-2xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400"
               style={{ 
-                backgroundColor: themeConfig.accentColor,
-                boxShadow: `0 15px 50px ${themeConfig.accentColor}50`,
+                boxShadow: `0 15px 50px rgba(16, 185, 129, 0.3)`,
               }}
             >
               <Calendar className="w-5 h-5" />
@@ -192,19 +175,19 @@ const ServiceDetailLayout = ({
 
         {/* Scroll Indicator */}
         <div className="absolute bottom-28 right-8 flex flex-col items-center gap-2 text-white/50 z-20">
-          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/40 to-transparent animate-pulse" />
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-emerald-400/40 to-transparent animate-pulse" />
           <span className="text-xs uppercase tracking-widest">Scroll</span>
         </div>
 
-        {/* Client Logo Marquee */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/[0.08] backdrop-blur-xl border-t border-white/[0.15] py-6 overflow-hidden">
-          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
-          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10" />
+        {/* Client Logo Marquee - Glass Style */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/[0.04] backdrop-blur-xl border-t border-white/[0.08] py-6 overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0B] to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0B] to-transparent z-10" />
           <div className="flex animate-marquee whitespace-nowrap">
             {[...clientLogos, ...clientLogos, ...clientLogos].map((logo, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 mx-4 px-6 py-3 bg-white/[0.05] backdrop-blur-sm rounded-2xl border border-white/[0.1] hover:bg-white/[0.1] hover:border-white/[0.2] transition-all duration-300"
+                className="flex-shrink-0 mx-4 px-6 py-3 bg-white/[0.04] backdrop-blur-sm rounded-2xl border border-white/[0.08] hover:bg-white/[0.08] hover:border-emerald-400/20 transition-all duration-300"
               >
                 <img
                   src={logo.src}
@@ -217,21 +200,31 @@ const ServiceDetailLayout = ({
         </div>
       </section>
 
-      {/* About Section - Light Gray */}
-      <section className="bg-[#f5f5f5]">
+      {/* About Section - Dark Theme */}
+      <section className="bg-[#0A0A0B] border-t border-white/[0.08]">
         <div className="flex flex-col lg:flex-row min-h-[600px]">
           {/* Left Column - Text */}
           <div className="w-full lg:w-1/2 px-6 lg:px-16 py-20 lg:py-32 flex items-center">
             <div className="max-w-xl scroll-reveal">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 mb-8 tracking-tight">
-                About
-              </h2>
-              <p className="text-slate-600 text-lg leading-relaxed mb-10">
+              {/* Option B Header */}
+              <div className="relative mb-8">
+                <span className="absolute -top-6 left-0 text-[100px] md:text-[140px] font-black text-white/[0.03] leading-none pointer-events-none select-none">
+                  01
+                </span>
+                <h2 className="relative text-4xl md:text-5xl font-bold tracking-tight">
+                  <span className="text-white/50">About</span>{" "}
+                  <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                    This Service
+                  </span>
+                </h2>
+                <div className="w-16 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 mt-4" />
+              </div>
+              
+              <p className="text-white/60 text-lg leading-relaxed mb-10">
                 {aboutText}
               </p>
               <CalendlyButton 
-                className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-2xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
-                style={{ backgroundColor: themeConfig.accentColor }}
+                className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-2xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400"
               >
                 <Calendar className="w-5 h-5" />
                 Book a Meeting
@@ -248,25 +241,15 @@ const ServiceDetailLayout = ({
                   alt="Service" 
                   className="w-full h-full object-cover"
                 />
-                <div 
-                  className="absolute inset-0"
-                  style={{
-                    background: `linear-gradient(135deg, ${themeConfig.accentColor}99 0%, ${themeConfig.accentColorHover}80 50%, ${themeConfig.accentColor}70 100%)`,
-                  }}
-                />
-                {/* Open Hours Card */}
-                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/[0.12] backdrop-blur-xl rounded-2xl px-6 py-5 border border-white/[0.2] shadow-2xl">
-                  <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/60 via-teal-500/50 to-cyan-600/40" />
+                {/* Open Hours Card - Glass Style */}
+                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/[0.08] backdrop-blur-xl rounded-2xl px-6 py-5 border border-white/[0.15] shadow-2xl">
+                  <p className="text-white/60 text-sm uppercase tracking-wider mb-1">open hours</p>
                   <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
                 </div>
               </div>
             ) : (
-              <div 
-                className="absolute inset-0"
-                style={{
-                  background: `linear-gradient(135deg, ${themeConfig.accentColor} 0%, ${themeConfig.accentColorHover} 100%)`,
-                }}
-              >
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-600 via-teal-500 to-cyan-600">
                 {/* Abstract pattern overlay */}
                 <div className="absolute inset-0 opacity-40">
                   <div className="absolute top-[15%] left-[15%] w-40 h-40 rounded-full border-2 border-white/40" />
@@ -286,43 +269,39 @@ const ServiceDetailLayout = ({
         </div>
       </section>
 
-      {/* What Includes Section */}
-      <section className="bg-[#fafafa] py-20 lg:py-32">
+      {/* What Includes Section - Dark Theme */}
+      <section className="bg-[#0A0A0B] py-20 lg:py-32 border-t border-white/[0.08]">
         <div className="container mx-auto px-6 lg:px-16">
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 scroll-reveal gap-4">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
-              What
-            </h2>
-            <div className="flex items-center gap-4">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
-                Includes
+          {/* Header - Option B Style */}
+          <div className="relative mb-16 scroll-reveal">
+            <span className="absolute -top-8 md:-top-10 left-0 text-[100px] md:text-[160px] font-black text-white/[0.03] leading-none pointer-events-none select-none">
+              02
+            </span>
+            <div className="relative">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                <span className="text-white/50">What</span>{" "}
+                <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+                  Includes
+                </span>
               </h2>
-              <div className="flex gap-1.5 ml-2">
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
-              </div>
+              <div className="w-20 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 mt-4" />
             </div>
           </div>
-
-          {/* Divider */}
-          <div className="border-b border-dashed border-slate-300 mb-12" />
 
           {/* Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Left - Description */}
             <div className="scroll-reveal">
-              <p className="text-slate-600 text-lg leading-relaxed mb-8">
+              <p className="text-white/60 text-lg leading-relaxed mb-8">
                 {whatIncludesText}
               </p>
               <CalendlyButton 
-                className="inline-flex items-center transition-colors group text-lg"
-                style={{ color: themeConfig.accentColor }}
+                className="inline-flex items-center gap-2 text-emerald-400 hover:text-emerald-300 transition-colors group text-lg"
               >
-                <span className="text-slate-400 mr-2">[</span>
+                <span className="text-white/30">[</span>
                 <span className="font-medium">book a meeting</span>
-                <span className="text-slate-400 ml-2">]</span>
+                <span className="text-white/30">]</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </CalendlyButton>
             </div>
 
@@ -331,25 +310,19 @@ const ServiceDetailLayout = ({
               {processSteps.map((step, index) => (
                 <div
                   key={step.number}
-                  className="scroll-reveal bg-white rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-lg hover:border-slate-200 transition-all duration-300"
+                  className="scroll-reveal bg-white/[0.02] backdrop-blur-sm rounded-2xl p-6 border border-white/[0.08] hover:border-emerald-400/20 hover:bg-white/[0.04] transition-all duration-300 group"
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   <div className="flex justify-between items-start gap-6">
                     <div className="flex-1">
-                      <h3 className="text-xl font-medium text-slate-900 mb-3">
+                      <h3 className="text-xl font-medium text-white mb-3 group-hover:text-emerald-400 transition-colors">
                         {step.title}
                       </h3>
-                      <p className="text-slate-500 leading-relaxed">
+                      <p className="text-white/50 leading-relaxed">
                         {step.description}
                       </p>
                     </div>
-                    <span 
-                      className="text-sm whitespace-nowrap flex-shrink-0 px-4 py-2 rounded-2xl text-white font-medium shadow-lg"
-                      style={{ 
-                        backgroundColor: themeConfig.accentColor,
-                        boxShadow: `0 4px 20px ${themeConfig.accentColor}40`
-                      }}
-                    >
+                    <span className="text-sm whitespace-nowrap flex-shrink-0 px-4 py-2 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-teal-500/20 border border-emerald-400/30 text-emerald-400 font-medium">
                       {step.number}
                     </span>
                   </div>
@@ -360,26 +333,29 @@ const ServiceDetailLayout = ({
         </div>
       </section>
 
-      {/* Watch Also Section */}
-      <section className="bg-white py-20 lg:py-32">
+      {/* Watch Also Section - Dark Theme */}
+      <section className="bg-[#0A0A0B] py-20 lg:py-32 border-t border-white/[0.08]">
         <div className="container mx-auto px-6 lg:px-16">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-8 scroll-reveal">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
-              Watch
-            </h2>
-            <div className="flex items-center gap-4">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
-                Also
-              </h2>
-              <ArrowDown className="w-8 h-8 text-slate-400" />
+          {/* Header - Option B Style */}
+          <div className="relative mb-12 scroll-reveal">
+            <span className="absolute -top-8 md:-top-10 left-0 text-[100px] md:text-[160px] font-black text-white/[0.03] leading-none pointer-events-none select-none">
+              03
+            </span>
+            <div className="relative flex justify-between items-end">
+              <div>
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                  <span className="text-white/50">Watch</span>{" "}
+                  <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+                    Also
+                  </span>
+                </h2>
+                <div className="w-20 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 mt-4" />
+              </div>
+              <ArrowDown className="w-8 h-8 text-white/30 hidden md:block" />
             </div>
           </div>
 
-          {/* Divider */}
-          <div className="border-b border-dashed border-slate-300 mb-4" />
-
-          {/* Service Links */}
+          {/* Service Links - Glass Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {otherServices.map((service, index) => (
             <Link
@@ -388,18 +364,17 @@ const ServiceDetailLayout = ({
               className="block scroll-reveal group"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="p-6 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:border-slate-200 transition-all duration-300 hover:-translate-y-1">
-                <span 
-                  className="text-sm font-medium px-3 py-1 rounded-full text-white inline-block mb-4"
-                  style={{ backgroundColor: themeConfig.accentColor }}
-                >
+              <div className="p-6 bg-white/[0.02] backdrop-blur-sm rounded-2xl border border-white/[0.08] hover:border-emerald-400/30 hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/10">
+                <span className="inline-flex items-center gap-2 text-sm font-medium px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-emerald-400 mb-4">
                   {service.number}
                 </span>
-                <h3 
-                  className="text-xl md:text-2xl font-light text-slate-900 transition-colors duration-300 group-hover:text-slate-700"
-                >
+                <h3 className="text-xl md:text-2xl font-medium text-white group-hover:text-emerald-400 transition-colors duration-300">
                   {service.title}
                 </h3>
+                <div className="flex items-center gap-2 text-white/40 group-hover:text-emerald-400 mt-4 text-sm transition-colors">
+                  View service
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
               </div>
             </Link>
           ))}
