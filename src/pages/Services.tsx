@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, Star, Quote, ChevronDown } from "lucide-react";
+import { ArrowRight, Star, Quote, ChevronDown, Rocket, Users, Globe, Megaphone, TrendingUp, FileText } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -69,13 +69,15 @@ const services = [
     title: "Go-To-Market Strategy",
     description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus.",
     image: gtmImage,
-    link: "/services/gtm",
+    icon: Rocket,
+    link: "/services/gtm-strategy",
   },
   {
     number: "02",
     title: "Community Management",
     description: "Complete Discord community infrastructure to build sticky, scalable and self-sustaining growth.",
     image: communityImage,
+    icon: Users,
     link: "/services/community",
   },
   {
@@ -83,6 +85,7 @@ const services = [
     title: "Social Media Marketing",
     description: "Content strategy and execution on X to grow visibility and engage with your ecosystem in real time.",
     image: socialImage,
+    icon: Globe,
     link: "/services/social-media",
   },
   {
@@ -90,6 +93,7 @@ const services = [
     title: "Influencer Strategy",
     description: "Influencer campaigns powered by top crypto voices aligned with your message and goals.",
     image: kolImage,
+    icon: Megaphone,
     link: "/services/influencer",
   },
   {
@@ -97,13 +101,15 @@ const services = [
     title: "Yap Strategy",
     description: "Targeted campaigns through a 600+ creator network designed to drive awareness and traction across Crypto X.",
     image: yapImage,
+    icon: TrendingUp,
     link: "/services/yap",
   },
   {
     number: "06",
-    title: "PR",
+    title: "PR & Media",
     description: "Narrative development and media placements to get your story published and seen in the right places.",
     image: prImage,
+    icon: FileText,
     link: "/services/pr",
   },
 ];
@@ -329,74 +335,86 @@ const Services = () => {
       </section>
       </main>
 
-      {/* Services List - Dark Theme Matching Homepage */}
-      <section ref={servicesRef} className="bg-[#0A0A0B] py-24">
-        <div className="container mx-auto px-6 lg:px-16">
-          {/* Header - Option B Style */}
-          <div className="relative mb-16 md:mb-20">
-            {/* Large background number */}
-            <span className="absolute -top-8 md:-top-12 left-0 text-[120px] md:text-[180px] lg:text-[220px] font-black text-white/[0.03] leading-none pointer-events-none select-none">
-              01
-            </span>
-            
-            {/* Title */}
-            <div className="relative">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
-                <span className="text-white/50">What We</span>{" "}
-                <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
-                  Do
-                </span>
+      {/* Services List - a41.io Line Grid Style */}
+      <section ref={servicesRef} className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
+        <div className="container mx-auto px-4 md:px-8 lg:px-16">
+          {/* Header */}
+          <motion.div 
+            className="mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="text-sm font-mono text-gray-500 mb-4 block">/ SERVICES</span>
+            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
+                What We <span className="text-gray-500">Do</span>
               </h2>
-              <div className="w-20 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 mt-4" />
-            </div>
-          </div>
-
-          {/* Service Grid - Cases Style */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((service, index) => (
-              <Link
-                key={service.number}
-                to={service.link}
-                className={`group block relative h-[320px] rounded-2xl overflow-hidden border border-white/[0.08] hover:border-emerald-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-500/10 ${
-                  servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
+              <Link 
+                to="/contact"
+                className="inline-flex items-center gap-3 bg-white text-gray-900 px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors group"
               >
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className="w-full h-full object-cover brightness-[0.4] group-hover:brightness-[0.5] group-hover:scale-110 transition-all duration-700"
-                  />
-                  {/* Gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
-                  {/* Green tint on hover */}
-                  <div className="absolute inset-0 bg-emerald-500/0 group-hover:bg-emerald-500/10 transition-colors duration-500" />
-                </div>
-
-                {/* Glass pill tag */}
-                <div className="absolute top-4 left-4 z-10">
-                  <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/[0.08] backdrop-blur-md rounded-full border border-white/[0.15] text-xs text-white/80">
-                    <span className="text-emerald-400">[{service.number}]</span>
-                  </span>
-                </div>
-
-                {/* Content */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors duration-300">
-                    {service.title}
-                  </h3>
-                  <p className="text-white/50 text-sm leading-relaxed mb-4 line-clamp-2 group-hover:text-white/70 transition-colors">
-                    {service.description}
-                  </p>
-                  <div className="flex items-center gap-2 text-emerald-400 text-sm font-medium opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
-                    Learn more
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
+                CONNECT WITH US
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-            ))}
+            </div>
+          </motion.div>
+
+          {/* Services Grid - 2x3 Line Grid */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3">
+            {services.map((service, index) => {
+              const Icon = service.icon;
+              const isTopRow = index < 3;
+              const isLeftColumn = index % 3 === 0;
+              
+              return (
+                <motion.div
+                  key={service.number}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Link 
+                    to={service.link}
+                    className={`group block h-full p-8 md:p-10 transition-all duration-300 hover:bg-white/[0.03]
+                      ${!isTopRow ? 'border-t border-white/10' : ''}
+                      ${!isLeftColumn ? 'lg:border-l border-white/10' : ''}
+                      ${index >= 3 && index < 6 && 'md:border-t'}
+                      ${index % 2 === 1 ? 'md:border-l lg:border-l-0' : ''}
+                      ${index === 3 || index === 4 || index === 5 ? 'lg:border-t' : ''}
+                    `}
+                  >
+                    {/* Icon */}
+                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 group-hover:border-white/20 transition-all">
+                      <Icon className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
+                    </div>
+
+                    {/* Number */}
+                    <span className="text-xs font-mono text-gray-600 mb-3 block">
+                      [{service.number}]
+                    </span>
+
+                    {/* Title */}
+                    <h4 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-white/90 transition-colors">
+                      {service.title}
+                    </h4>
+
+                    {/* Description */}
+                    <p className="text-white/40 text-sm leading-relaxed mb-6">
+                      {service.description}
+                    </p>
+
+                    {/* Arrow */}
+                    <div className="flex items-center gap-2 text-white/30 group-hover:text-white transition-colors">
+                      <span className="text-sm">Learn more</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
