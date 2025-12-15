@@ -19,6 +19,7 @@ import bybitLogo from "@/assets/logos/bybit.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import mantraLogo from "@/assets/logos/mantra.png";
 import fogoLogo from "@/assets/logos/fogo.png";
+import zkpassLogo from "@/assets/logos/zkpass.png";
 
 // Import background images
 import bnbBg from "@/assets/projects/bnb-bg.jpg";
@@ -148,7 +149,7 @@ const cases = [
   },
   {
     name: "zkPass",
-    logo: zkpassBg,
+    logo: zkpassLogo,
     bgImage: zkpassBg,
     slug: "zkpass",
     result: "The Verifiable Nights",
@@ -156,7 +157,6 @@ const cases = [
     glowColor: "#8A2BE2",
     description: "Privacy-focused Web3 identity solution launch with Korean developer community.",
     services: ["Developer Relations", "Event Marketing", "Community Building"],
-    useCampaignImg: true,
   },
 ];
 const serviceTags = [
@@ -186,7 +186,7 @@ const clientLogos = [
   { name: "MegaETH", logo: megaethLogo },
   { name: "Tria", logo: triaLogo },
   { name: "FOGO", logo: fogoLogo },
-  { name: "zkPass", logo: zkpassBg },
+  { name: "zkPass", logo: zkpassLogo },
 ];
 
 const stats = [
