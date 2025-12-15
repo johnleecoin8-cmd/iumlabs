@@ -25,6 +25,8 @@ import storyWorkshopImg from "@/assets/campaigns/story-workshop.jpg";
 import megaethLaunchImg from "@/assets/campaigns/megaeth-launch.jpg";
 import triaLaunchImg from "@/assets/campaigns/tria-launch.jpg";
 import fogoFestImg from "@/assets/campaigns/fogo-fest.avif";
+import saharaAiImg from "@/assets/campaigns/sahara-ai.jpg";
+import mantraImg from "@/assets/campaigns/mantra.jpg";
 
 // Import project background images
 import bnbBg from "@/assets/projects/bnb-bg.jpg";
@@ -36,6 +38,8 @@ import storyBg from "@/assets/projects/story-bg.jpg";
 import megaethBg from "@/assets/projects/megaeth-bg.jpg";
 import triaBg from "@/assets/projects/tria-bg.jpg";
 import bybitBg from "@/assets/projects/bybit-bg.jpg";
+import saharaAiBg from "@/assets/projects/sahara-ai-bg.jpg";
+import mantraBg from "@/assets/projects/mantra-bg.jpg";
 
 // Project data
 const projectsData: Record<string, {
@@ -431,6 +435,90 @@ const projectsData: Record<string, {
       { title: "Bybit Becomes #2 Exchange by Traffic in Korea", source: "Block Media", date: "2024-04-05", url: "#", image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop" },
       { title: "Bybit's Korean User Base Grows 200% in Q1", source: "Decenter", date: "2024-03-22", url: "#", image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=400&h=250&fit=crop" },
       { title: "Bybit Partners with Korean Esports League", source: "TokenPost", date: "2024-03-08", url: "#", image: "https://images.unsplash.com/photo-1542751110-97427bbecf20?w=400&h=250&fit=crop" }
+    ]
+  },
+  "sahara-ai": {
+    name: "Sahara AI",
+    logo: saharaAiImg,
+    bgImage: saharaAiBg,
+    category: "AI",
+    result: "Korean AI x Web3 Launch",
+    glowColor: "#00D4FF",
+    description: "Sahara AI wanted to establish themselves as the leading AI blockchain platform in Korea's growing AI x Web3 intersection.",
+    challenge: "AI blockchain was a new narrative in Korea. Sahara needed to educate the market while building developer and enterprise relationships.",
+    metrics: [
+      { value: "50+", label: "Enterprise Leads" },
+      { value: "200+", label: "Developers" },
+      { value: "25K+", label: "Community" },
+      { value: "10+", label: "Partnerships" }
+    ],
+    strategy: [
+      "Launched AI x Web3 educational content series",
+      "Partnered with Korean AI companies and universities",
+      "Organized developer hackathons and workshops",
+      "Built enterprise pipeline for AI blockchain solutions",
+      "Created Korean-specific use case demonstrations"
+    ],
+    results: [
+      { metric: "Enterprise Leads Generated", value: "50+" },
+      { metric: "Korean Developers Onboarded", value: "200+" },
+      { metric: "Community Size", value: "25K+" },
+      { metric: "Strategic Partnerships", value: "10+" }
+    ],
+    services: ["Enterprise Relations", "Developer Marketing", "Content Strategy", "Partnership Development"],
+    shortServices: ["PR", "DevRel", "Enterprise"],
+    gallery: [
+      { src: saharaAiImg, title: "AI Summit", description: "Korean AI x Web3 summit at Gangnam Tech Center" },
+      { src: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=600&fit=crop", title: "AI Demo", description: "Product demonstration events for enterprise clients" },
+      { src: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=600&fit=crop", title: "Hackathon", description: "AI blockchain developer hackathon in Seoul" },
+      { src: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop", title: "Workshop", description: "University partnership workshops" }
+    ],
+    news: [
+      { title: "Sahara AI Launches Korean Market Entry Campaign", source: "Block Media", date: "2024-04-10", url: "#", image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop" },
+      { title: "Korean Enterprises Show Interest in AI Blockchain", source: "Decenter", date: "2024-03-25", url: "#", image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=250&fit=crop" },
+      { title: "Sahara AI Partners with Korean Universities", source: "TokenPost", date: "2024-03-12", url: "#", image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400&h=250&fit=crop" }
+    ]
+  },
+  "mantra": {
+    name: "Mantra",
+    logo: mantraImg,
+    bgImage: mantraBg,
+    category: "RWA",
+    result: "Korean RWA Expansion",
+    glowColor: "#9B59B6",
+    description: "Mantra aimed to become the leading RWA (Real World Assets) platform for Korean institutional investors.",
+    challenge: "RWA tokenization was gaining traction but lacked mainstream adoption. Mantra needed to build trust with Korean financial institutions.",
+    metrics: [
+      { value: "$50M+", label: "Pipeline" },
+      { value: "30+", label: "Institutions" },
+      { value: "50K+", label: "Community" },
+      { value: "15+", label: "Media Features" }
+    ],
+    strategy: [
+      "Hosted RWA education seminars for institutions",
+      "Partnered with Korean asset management companies",
+      "Created comprehensive Korean research reports",
+      "Built community through educational content",
+      "Organized networking events with financial professionals"
+    ],
+    results: [
+      { metric: "Institutional Pipeline", value: "$50M+" },
+      { metric: "Institutional Contacts", value: "30+" },
+      { metric: "Korean Community", value: "50K+" },
+      { metric: "Media Features", value: "15+" }
+    ],
+    services: ["Institutional Relations", "Research Marketing", "Community Growth", "PR Strategy"],
+    shortServices: ["PR", "Institutional", "Research"],
+    gallery: [
+      { src: mantraImg, title: "RWA Summit", description: "Korean institutional investor summit in Seoul" },
+      { src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=600&fit=crop", title: "Research Launch", description: "Korean RWA market research publication" },
+      { src: "https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=800&h=600&fit=crop", title: "Networking Event", description: "Financial professional networking in Yeouido" },
+      { src: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=800&h=600&fit=crop", title: "Media Coverage", description: "Feature coverage in Korean financial media" }
+    ],
+    news: [
+      { title: "Mantra Targets Korean RWA Market with $50M Pipeline", source: "CoinDesk Korea", date: "2024-04-15", url: "#", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop" },
+      { title: "Korean Institutions Show Interest in RWA Tokenization", source: "Hankyung Economy", date: "2024-03-30", url: "#", image: "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=400&h=250&fit=crop" },
+      { title: "Mantra Partners with Korean Asset Managers", source: "Block Media", date: "2024-03-15", url: "#", image: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=400&h=250&fit=crop" }
     ]
   }
 };

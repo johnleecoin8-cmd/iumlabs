@@ -479,6 +479,16 @@ export const projectColors = {
     glow: "rgba(247, 166, 0, 0.5)",
     name: "Bybit",
   },
+  "sahara-ai": {
+    primary: "#00D4FF",
+    glow: "rgba(0, 212, 255, 0.5)",
+    name: "Sahara AI",
+  },
+  "mantra": {
+    primary: "#9B59B6",
+    glow: "rgba(155, 89, 182, 0.5)",
+    name: "Mantra",
+  },
 } as const;
 
 // Helper function to get project color by slug
