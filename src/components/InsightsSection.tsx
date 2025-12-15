@@ -1,191 +1,177 @@
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { motion } from "framer-motion";
+import { ArrowRight, ArrowLeft, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowRight, Mail, Clock, TrendingUp } from "lucide-react";
 import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
-import aiAgentsImg from "@/assets/blog/ai-agents-defi.jpg";
-import kaitoImg from "@/assets/blog/kaito-mindshare.jpg";
-import ecosystemImg from "@/assets/blog/ecosystem-growth-2025.jpg";
 
-const insights = [{
-  id: "ai-agents-defi",
-  title: "The Rise of AI Agents in DeFi",
-  excerpt: "How autonomous AI agents are reshaping decentralized finance and creating new opportunities in the Korean market.",
-  date: "Dec 10, 2024",
-  readTime: "8 min read",
-  category: "Research",
-  image: aiAgentsImg,
-  trending: true
-}, {
-  id: "kaito-mindshare",
-  title: "Kaito Mindshare: New Metric for Web3",
-  excerpt: "Understanding the emerging mindshare metrics and their impact on Web3 marketing strategies.",
-  date: "Dec 8, 2024",
-  readTime: "6 min read",
-  category: "Analysis",
-  image: kaitoImg,
-  trending: false
-}, {
-  id: "ecosystem-growth-2025",
-  title: "Ecosystem Growth Strategies for 2025",
-  excerpt: "Key trends and strategies for sustainable ecosystem growth in the evolving Web3 landscape.",
-  date: "Dec 5, 2024",
-  readTime: "10 min read",
-  category: "Strategy",
-  image: ecosystemImg,
-  trending: true
-}];
+// Import blog images
+import aiAgentsImg from "@/assets/blog/ai-agents-defi.jpg";
+import ecosystemImg from "@/assets/blog/ecosystem-growth-2025.jpg";
+import kolImg from "@/assets/blog/kol-marketing.jpg";
+import communityImg from "@/assets/blog/community-growth-ai.jpg";
+
+const insights = [
+  {
+    id: "ai-agents-defi",
+    title: "AI Agents Are Revolutionizing DeFi",
+    excerpt: "How autonomous AI is reshaping liquidity and trading strategies in crypto.",
+    date: "Dec 2024",
+    readTime: "5 min",
+    category: "AI",
+    image: aiAgentsImg,
+    gradient: "from-emerald-400 to-cyan-400"
+  },
+  {
+    id: "ecosystem-growth-2025",
+    title: "Ecosystem Growth Strategies for 2025",
+    excerpt: "Proven frameworks for building sustainable Web3 communities.",
+    date: "Dec 2024",
+    readTime: "8 min",
+    category: "Strategy",
+    image: ecosystemImg,
+    gradient: "from-purple-400 to-pink-400"
+  },
+  {
+    id: "kol-marketing",
+    title: "The State of KOL Marketing",
+    excerpt: "What works and what doesn't in crypto influencer campaigns.",
+    date: "Nov 2024",
+    readTime: "6 min",
+    category: "Marketing",
+    image: kolImg,
+    gradient: "from-orange-400 to-rose-400"
+  },
+  {
+    id: "community-growth-ai",
+    title: "Building Communities with AI Tools",
+    excerpt: "Leveraging automation for authentic community engagement.",
+    date: "Nov 2024",
+    readTime: "7 min",
+    category: "Community",
+    image: communityImg,
+    gradient: "from-blue-400 to-indigo-400"
+  }
+];
 
 const InsightsSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const visibleCards = 2;
+  const maxIndex = Math.max(0, insights.length - visibleCards);
 
-  const handleSubscribe = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    setIsSubmitting(true);
-    try {
-      const { error } = await supabase.from("newsletter_subscribers").insert({ email });
-      if (error) throw error;
-      toast.success("Successfully subscribed!");
-      setEmail("");
-    } catch (error) {
-      toast.error("Failed to subscribe. Please try again.");
-    } finally {
-      setIsSubmitting(false);
-    }
+  const handlePrev = () => {
+    setCurrentIndex(prev => Math.max(0, prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex(prev => Math.min(maxIndex, prev + 1));
   };
 
   return (
-    <section ref={ref} className="px-4 bg-[#FAFAFA] py-16 md:py-24">
-      <div className="container mx-auto max-w-7xl">
-        {/* Option B Header */}
-        <motion.div 
-          className="relative mb-12 md:mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
-            08
-          </span>
-          <div className="relative">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              <span className="text-gray-400">Latest</span>{" "}
-              <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-                Research
-              </span>
-            </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mt-4 rounded-full" />
-          </div>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-12 gap-12">
-          {/* Left - Newsletter */}
-          <div className={`lg:col-span-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-            <div className="lg:sticky lg:top-32">
-              <p className="text-gray-600 mb-8">
-                Stay ahead with our market insights, research reports, and strategy guides for the Korean Web3 ecosystem.
+    <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+        {/* Header - 2 Column Layout */}
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-16">
+          {/* Left - Title & CTA */}
+          <div className="lg:col-span-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="sticky top-32"
+            >
+              <span className="text-sm font-mono text-gray-500 mb-4 block">/ INSIGHTS</span>
+              <h2 className="text-4xl md:text-5xl font-black text-white leading-tight mb-6">
+                Latest
+                <br />
+                <span className="text-gray-500">Research</span>
+              </h2>
+              <p className="text-gray-400 mb-8 max-w-sm">
+                Deep dives into Web3 marketing trends, strategies, and the Korean crypto ecosystem.
               </p>
-
-              {/* Newsletter Form - Unified Card Style */}
-              <form onSubmit={handleSubscribe} className="space-y-4 p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 transition-all duration-300">
-                <div className="relative group">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors" />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-primary/50 focus:bg-white transition-all duration-300"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="group w-full py-4 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-all duration-300 disabled:opacity-50"
-                >
-                  <span>{isSubmitting ? "Subscribing..." : "Subscribe to Newsletter"}</span>
-                </button>
-              </form>
-
-              <Link
+              
+              <Link 
                 to="/research"
-                className="group inline-flex items-center gap-2 text-white/40 hover:text-primary transition-colors mt-6 text-sm"
+                className="inline-flex items-center gap-2 text-sm font-medium text-white hover:text-gray-300 transition-colors mb-8"
               >
                 View all research
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ExternalLink className="w-4 h-4" />
               </Link>
-            </div>
+
+              {/* Navigation */}
+              <div className="flex gap-2">
+                <button
+                  onClick={handlePrev}
+                  disabled={currentIndex === 0}
+                  className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                >
+                  <ArrowLeft className="w-5 h-5 text-white" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  disabled={currentIndex >= maxIndex}
+                  className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                >
+                  <ArrowRight className="w-5 h-5 text-white" />
+                </button>
+              </div>
+            </motion.div>
           </div>
 
-          {/* Right - Articles */}
-          <div className="lg:col-span-8">
-            <div className="space-y-4">
-              {insights.map((article, index) => (
-                <Link
-                  key={article.id}
-                  to={`/research/${article.id}`}
-                  className={`group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden ${
-                    isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
-                  }`}
-                  style={{ transitionDelay: `${index * 150}ms` }}
+          {/* Right - Cards Carousel */}
+          <div className="lg:col-span-8 overflow-hidden">
+            <motion.div
+              className="flex gap-6"
+              animate={{ x: -currentIndex * 52 + "%" }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            >
+              {insights.map((insight, index) => (
+                <motion.div
+                  key={insight.id}
+                  className="flex-shrink-0 w-[calc(50%-12px)]"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  {/* Hover Glow */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent" />
-                  </div>
+                  <Link to={`/research/${insight.id}`} className="group block">
+                    {/* Card with Pastel Gradient Background */}
+                    <div className="relative rounded-2xl overflow-hidden h-[320px] mb-4">
+                      {/* Gradient Background */}
+                      <div className={`absolute inset-0 bg-gradient-to-br ${insight.gradient} opacity-80`} />
+                      
+                      {/* Image */}
+                      <img 
+                        src={insight.image} 
+                        alt={insight.title}
+                        className="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-60 group-hover:scale-105 transition-transform duration-500"
+                      />
 
-                  {/* Image */}
-                  <div className="relative md:w-56 h-40 rounded-xl overflow-hidden flex-shrink-0">
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    {article.trending && (
-                      <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-md bg-primary/90">
-                        <TrendingUp className="w-3 h-3 text-white" />
-                        <span className="text-[10px] text-white font-medium uppercase">Trending</span>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 flex flex-col justify-center relative z-10">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="text-xs text-primary uppercase tracking-wider font-medium px-2 py-1 rounded-md bg-primary/10">
-                        {article.category}
-                      </span>
-                      <div className="flex items-center gap-1 text-gray-400">
-                        <Clock className="w-3 h-3" />
-                        <span className="text-xs">{article.readTime}</span>
+                      {/* Category Badge */}
+                      <div className="absolute top-4 left-4">
+                        <span className="bg-white/90 backdrop-blur-sm text-gray-900 text-xs font-medium px-3 py-1.5 rounded-full">
+                          {insight.category}
+                        </span>
                       </div>
                     </div>
-                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors mb-2">
-                      {article.title}
-                    </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
-                      {article.excerpt}
-                    </p>
-                    <div className="mt-4 flex items-center gap-2 text-gray-400 text-xs">
-                      <span>{article.date}</span>
-                    </div>
-                  </div>
 
-                  {/* Arrow */}
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary/10">
-                      <ArrowUpRight className="w-5 h-5 text-primary" />
+                    {/* Content */}
+                    <div className="space-y-3">
+                      <h3 className="text-xl font-bold text-white group-hover:text-gray-300 transition-colors line-clamp-2">
+                        {insight.title}
+                      </h3>
+                      <p className="text-gray-400 text-sm line-clamp-2">
+                        {insight.excerpt}
+                      </p>
+                      <div className="flex items-center gap-3 text-xs text-gray-500">
+                        <span>{insight.date}</span>
+                        <span>·</span>
+                        <span>{insight.readTime} read</span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>
