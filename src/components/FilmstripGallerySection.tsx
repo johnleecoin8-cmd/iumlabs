@@ -12,6 +12,7 @@ import kucoinOldschool from "@/assets/campaigns/kucoin-oldschool.jpg";
 import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
 import zkpassNights from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import saharaAi from "@/assets/campaigns/sahara-ai.jpg";
+import synfuturesBillboard from "@/assets/campaigns/synfutures-billboard.jpg";
 
 const campaignImages = [
   {
@@ -63,6 +64,11 @@ const campaignImages = [
     src: saharaAi,
     alt: "Sahara AI Korea Launch",
     code: "Sahara AI - Korean AI x Web3 Launch",
+  },
+  {
+    src: synfuturesBillboard,
+    alt: "SynFutures Gangnam Billboard",
+    code: "SynFutures - Gangnam Billboard Promotion",
   },
 ];
 
