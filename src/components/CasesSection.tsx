@@ -206,7 +206,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
 
 const CasesSection = () => {
   return (
-    <div className="bg-[#0A0A0B] px-4 py-20 md:py-28">
+    <div className="bg-[#0A0A0B] px-4 py-16 md:py-24">
       <div className="container mx-auto max-w-7xl">
         {/* Option B Header - Background number + gradient title */}
         <motion.div 

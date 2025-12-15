@@ -76,7 +76,7 @@ const ServiceCard = ({ number, title, description, link, index }: ServiceCardPro
 
 const ServicesSection = () => {
   return (
-    <section className="relative bg-[#0A0A0B] py-24 md:py-32 overflow-hidden">
+    <section className="relative bg-[#0A0A0B] py-16 md:py-24 overflow-hidden">
       {/* Subtle background gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/5 to-transparent pointer-events-none" />
       

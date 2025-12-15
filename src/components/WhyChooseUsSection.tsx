@@ -40,7 +40,7 @@ const WhyChooseUsSection = () => {
   }, []);
   
   return (
-    <section className="relative bg-[#F5F2ED] py-12 overflow-hidden md:py-[20px]">
+    <section className="relative bg-[#F5F2ED] py-16 md:py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Option B Header */}
         <div className="relative mb-8 md:mb-12">
