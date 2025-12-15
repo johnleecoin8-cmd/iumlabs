@@ -116,12 +116,12 @@ const FilmstripGallerySection = () => {
                 style={{ scrollSnapAlign: 'start' }}
               >
                 {/* Card */}
-                <div className="relative h-[240px] md:h-[280px] rounded-2xl overflow-hidden bg-gray-900 transition-all duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl">
+                <div className="relative h-[240px] md:h-[280px] rounded-2xl overflow-hidden bg-gray-900 transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:shadow-2xl">
                   {/* Image */}
                   <img
                     src={image.src}
                     alt={image.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                   />
                   
                   {/* Gradient Overlay */}
@@ -135,7 +135,7 @@ const FilmstripGallerySection = () => {
                     </span>
                     
                     {/* Title */}
-                    <h3 className="text-lg font-semibold text-white group-hover:text-primary transition-colors">
+                    <h3 className="text-lg font-semibold text-white group-hover:text-primary transition-colors duration-500">
                       {image.title}
                     </h3>
                   </div>
@@ -153,17 +153,17 @@ const FilmstripGallerySection = () => {
           className="mt-12 flex items-center justify-center gap-8 md:gap-16 text-center"
         >
           <div>
-            <div className="text-3xl md:text-4xl font-bold text-white">47+</div>
+            <div className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">47+</div>
             <div className="text-sm text-white/50">Events Hosted</div>
           </div>
           <div className="h-12 w-px bg-white/20" />
           <div>
-            <div className="text-3xl md:text-4xl font-bold text-white">5K+</div>
+            <div className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">5K+</div>
             <div className="text-sm text-white/50">Attendees</div>
           </div>
           <div className="h-12 w-px bg-white/20" />
           <div>
-            <div className="text-3xl md:text-4xl font-bold text-white">12</div>
+            <div className="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-cyan-400">12</div>
             <div className="text-sm text-white/50">Cities</div>
           </div>
         </motion.div>

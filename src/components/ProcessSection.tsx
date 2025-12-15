@@ -36,7 +36,7 @@ const phases = [
 
 const ProcessSection = () => {
   return (
-    <section className="relative bg-[#FAFAFA] py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-[#F8F8F8] py-20 md:py-28 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
         {/* Header */}
         <motion.div 
@@ -68,13 +68,13 @@ const ProcessSection = () => {
               transition={{ duration: 0.5, delay: index * 0.15 }}
               className="group"
             >
-              <div className="relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 h-full border border-gray-100">
+              <div className="relative bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 ease-out hover:-translate-y-2 h-full border border-gray-100">
                 {/* Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img 
                     src={phase.image} 
                     alt={phase.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   
@@ -93,7 +93,7 @@ const ProcessSection = () => {
 
                 {/* Content */}
                 <div className="p-6">
-                  <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                  <h4 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors duration-500">
                     {phase.title}
                   </h4>
                   
@@ -110,7 +110,7 @@ const ProcessSection = () => {
                     {phase.highlights.map((item, i) => (
                       <span 
                         key={i}
-                        className="px-3 py-1 rounded-full bg-gray-100 text-xs font-medium text-gray-600 group-hover:bg-primary/10 group-hover:text-primary transition-colors"
+                        className="px-3 py-1 rounded-full bg-gray-100 text-xs font-medium text-gray-600 group-hover:bg-primary/10 group-hover:text-primary transition-colors duration-500"
                       >
                         {item}
                       </span>
