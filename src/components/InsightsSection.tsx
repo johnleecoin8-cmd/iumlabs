@@ -63,8 +63,18 @@ const InsightsSection = () => {
   const listArticles = insights.slice(1, 5);
 
   return (
-    <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+    <section className="relative bg-gradient-to-br from-[#0A0A0B] via-[#0D1117] to-[#0A0A0B] py-20 md:py-28 overflow-hidden">
+      {/* Gradient Blobs */}
+      <div className="absolute top-20 right-1/4 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-purple-500/8 to-primary/8 blur-[120px] pointer-events-none animate-blob-delay-2" />
+      <div className="absolute bottom-20 -left-20 w-[350px] h-[350px] rounded-full bg-gradient-to-r from-primary/10 to-cyan-500/5 blur-[100px] pointer-events-none animate-blob" />
+      
+      {/* Dot Pattern */}
+      <div className="absolute inset-0 dot-pattern opacity-40 pointer-events-none" />
+      
+      {/* Glow Line Top */}
+      <div className="absolute top-0 left-0 right-0 h-px glow-line-cyan" />
+      
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
         {/* 4pillars-style Header */}
         <SectionHeader 
           title="INSIGHTS" 
@@ -189,6 +199,9 @@ const InsightsSection = () => {
           </div>
         </div>
       </div>
+      
+      {/* Glow Line Bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-px glow-line" />
     </section>
   );
 };
