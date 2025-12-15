@@ -28,9 +28,12 @@ const Index = () => {
       {/* Process - White with header */}
       <section className="scroll-reveal bg-white" id="process">
         <div className="border-t border-gray-200">
-          <div className="p-6 md:p-8 border-b border-gray-200">
-            <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">01 / How We Work</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Our Process</h2>
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-gray-200">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-gray-300 font-mono tracking-widest">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-gray-900">Process</h2>
+            </div>
+            <span className="text-[10px] md:text-xs text-gray-400 tracking-wider hidden sm:block">How We Work</span>
           </div>
           <ProcessSection />
         </div>
@@ -39,9 +42,12 @@ const Index = () => {
       {/* Services - White with header */}
       <section className="scroll-reveal bg-white" id="services">
         <div className="border-t border-gray-200">
-          <div className="p-6 md:p-8 border-b border-gray-200">
-            <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">02 / What We Do</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Our Services</h2>
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-gray-200">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-gray-300 font-mono tracking-widest">02</span>
+              <h2 className="text-lg md:text-xl font-medium text-gray-900">Services</h2>
+            </div>
+            <span className="text-[10px] md:text-xs text-gray-400 tracking-wider hidden sm:block">What We Do</span>
           </div>
           <ServicesSection />
         </div>
@@ -50,9 +56,12 @@ const Index = () => {
       {/* Cases - White with header */}
       <section className="scroll-reveal bg-white" id="cases">
         <div className="border-t border-gray-200">
-          <div className="p-6 md:p-8 border-b border-gray-200">
-            <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">03 / Our Work</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Featured Cases</h2>
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-gray-200">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-gray-300 font-mono tracking-widest">03</span>
+              <h2 className="text-lg md:text-xl font-medium text-gray-900">Cases</h2>
+            </div>
+            <span className="text-[10px] md:text-xs text-gray-400 tracking-wider hidden sm:block">Our Work</span>
           </div>
           <CasesSection />
         </div>
@@ -61,9 +70,12 @@ const Index = () => {
       {/* Gallery - White with header */}
       <section className="scroll-reveal bg-white" id="gallery">
         <div className="border-t border-gray-200">
-          <div className="p-6 md:p-8 border-b border-gray-200">
-            <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">04 / Campaign Archive</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Gallery</h2>
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-gray-200">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-gray-300 font-mono tracking-widest">04</span>
+              <h2 className="text-lg md:text-xl font-medium text-gray-900">Gallery</h2>
+            </div>
+            <span className="text-[10px] md:text-xs text-gray-400 tracking-wider hidden sm:block">Campaign Archive</span>
           </div>
           <FilmstripGallerySection />
         </div>
@@ -72,9 +84,12 @@ const Index = () => {
       {/* Why Choose Us - White with header */}
       <section className="scroll-reveal bg-white" id="why-choose-us">
         <div className="border-t border-gray-200">
-          <div className="p-6 md:p-8 border-b border-gray-200">
-            <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">05 / About Us</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Why CryptoBridge</h2>
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-gray-200">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-gray-300 font-mono tracking-widest">05</span>
+              <h2 className="text-lg md:text-xl font-medium text-gray-900">About</h2>
+            </div>
+            <span className="text-[10px] md:text-xs text-gray-400 tracking-wider hidden sm:block">Why CryptoBridge</span>
           </div>
           <WhyChooseUsSection />
         </div>
@@ -83,9 +98,12 @@ const Index = () => {
       {/* Insights - White with header */}
       <section className="scroll-reveal bg-white" id="insights">
         <div className="border-t border-gray-200">
-          <div className="p-6 md:p-8 border-b border-gray-200">
-            <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">06 / Research</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Latest Insights</h2>
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-gray-200">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-gray-300 font-mono tracking-widest">06</span>
+              <h2 className="text-lg md:text-xl font-medium text-gray-900">Insights</h2>
+            </div>
+            <span className="text-[10px] md:text-xs text-gray-400 tracking-wider hidden sm:block">Research</span>
           </div>
           <InsightsSection />
         </div>
@@ -94,9 +112,12 @@ const Index = () => {
       {/* CTA - White with header */}
       <section className="scroll-reveal bg-white" id="contact">
         <div className="border-t border-gray-200">
-          <div className="p-6 md:p-8 border-b border-gray-200">
-            <p className="text-xs text-gray-400 uppercase tracking-wider mb-1">07 / Get Started</p>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Contact Us</h2>
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-gray-200">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-gray-300 font-mono tracking-widest">07</span>
+              <h2 className="text-lg md:text-xl font-medium text-gray-900">Contact</h2>
+            </div>
+            <span className="text-[10px] md:text-xs text-gray-400 tracking-wider hidden sm:block">Get Started</span>
           </div>
           <CTASection />
         </div>
