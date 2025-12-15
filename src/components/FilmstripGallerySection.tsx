@@ -1,5 +1,6 @@
-import { HoverExpand_001 } from "@/components/ui/expand-on-hover";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 // Import actual campaign images from assets
 import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
@@ -15,103 +16,92 @@ import saharaAi from "@/assets/campaigns/sahara-ai.jpg";
 import synfuturesBillboard from "@/assets/campaigns/synfutures-billboard.jpg";
 
 const campaignImages = [
-  {
-    src: bnbEvent,
-    alt: "BNB Chain Event",
-    code: "BNB Chain - Korea Launch Event 2024",
-  },
-  {
-    src: ondoSeminar,
-    alt: "Story Protocol Origin Summit",
-    code: "Story Protocol - Origin Summit 2025",
-  },
-  {
-    src: fogoFest,
-    alt: "FOGO Fogo Fest 2025",
-    code: "FOGO - Fogo Fest 2025",
-  },
-  {
-    src: peaqSummit,
-    alt: "Peaq KBW 2025",
-    code: "Peaq - KBW 2025",
-  },
-  {
-    src: triaLaunch,
-    alt: "Tria Korea Media Interview",
-    code: "Tria - Korea Media Interview",
-  },
-  {
-    src: lbankFestival,
-    alt: "Lbank 1001 Festival Seoul",
-    code: "Lbank - 1001 Festival Seoul",
-  },
-  {
-    src: kucoinOldschool,
-    alt: "Kucoin Old School is Back",
-    code: "Kucoin - Old School is Back with Orbs and IOST",
-  },
-  {
-    src: openledgerInterview,
-    alt: "Open Ledger Korea Media Interview",
-    code: "Open Ledger - Korea Media Interview",
-  },
-  {
-    src: zkpassNights,
-    alt: "zkPass The Verifiable Nights",
-    code: "zkPass - The Verifiable Nights",
-  },
-  {
-    src: saharaAi,
-    alt: "Sahara AI Korea Launch",
-    code: "Sahara AI - Korean AI x Web3 Launch",
-  },
-  {
-    src: synfuturesBillboard,
-    alt: "SynFutures Gangnam Billboard",
-    code: "SynFutures - Gangnam Billboard Promotion",
-  },
+  { src: bnbEvent, alt: "BNB Chain Event", title: "BNB Chain", subtitle: "Korea Launch Event 2024" },
+  { src: ondoSeminar, alt: "Story Protocol", title: "Story Protocol", subtitle: "Origin Summit 2025" },
+  { src: fogoFest, alt: "FOGO Fest", title: "FOGO", subtitle: "Fogo Fest 2025" },
+  { src: peaqSummit, alt: "Peaq Summit", title: "Peaq", subtitle: "KBW 2025" },
+  { src: triaLaunch, alt: "Tria Launch", title: "Tria", subtitle: "Korea Media Interview" },
+  { src: lbankFestival, alt: "Lbank Festival", title: "Lbank", subtitle: "1001 Festival Seoul" },
+  { src: kucoinOldschool, alt: "Kucoin Event", title: "Kucoin", subtitle: "Old School is Back" },
+  { src: openledgerInterview, alt: "Open Ledger", title: "Open Ledger", subtitle: "Korea Media Interview" },
+  { src: zkpassNights, alt: "zkPass Nights", title: "zkPass", subtitle: "The Verifiable Nights" },
+  { src: saharaAi, alt: "Sahara AI", title: "Sahara AI", subtitle: "Korean AI x Web3 Launch" },
+  { src: synfuturesBillboard, alt: "SynFutures", title: "SynFutures", subtitle: "Gangnam Billboard" },
 ];
 
 const FilmstripGallerySection = () => {
   return (
-    <div className="min-h-[80vh] bg-gradient-to-b from-[#0A0A0B] via-[#0F0F12] to-[#0A0A0B] flex flex-col justify-center py-16 md:py-24 relative overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
-        backgroundSize: '40px 40px'
-      }} />
-      
-      <div className="container mx-auto px-4 mb-8 md:mb-12 relative z-10">
-        {/* Option B Header */}
-        <motion.div 
-          className="relative"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+    <section className="bg-white">
+      <div className="flex flex-col lg:flex-row">
+        {/* Left: Gallery Grid */}
+        <div className="w-full lg:w-2/3 border-r border-gray-200">
+          <div className="grid grid-cols-2 md:grid-cols-3">
+            {campaignImages.slice(0, 9).map((image, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                className={`group relative aspect-square overflow-hidden border-r border-b border-gray-200 ${
+                  index % 3 === 2 ? "border-r-0" : ""
+                }`}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
+                <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-white font-semibold text-lg">{image.title}</p>
+                  <p className="text-white/70 text-sm">{image.subtitle}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right: Info Panel */}
+        <motion.div
+          className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-white/[0.03] leading-none pointer-events-none select-none">
-            04
-          </span>
-          <div className="relative">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              <span className="text-white/50">Campaign</span>{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                Gallery
-              </span>
-            </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-purple-400 to-pink-400 mt-4 rounded-full" />
-            <p className="text-white/40 text-lg mt-4 max-w-xl">
-              Explore our successful campaigns and events across Korea's Web3 ecosystem. Drag to see more.
-            </p>
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            Campaign Gallery
+          </h2>
+          <p className="text-gray-500 leading-relaxed mb-8">
+            Explore our successful campaigns and events across Korea's Web3 ecosystem. From launch events to media coverage, we deliver results.
+          </p>
+
+          <div className="space-y-4 mb-12">
+            <div className="flex items-center justify-between py-3 border-b border-gray-100">
+              <span className="text-gray-500 text-sm">Events Hosted</span>
+              <span className="text-gray-900 font-semibold">48+</span>
+            </div>
+            <div className="flex items-center justify-between py-3 border-b border-gray-100">
+              <span className="text-gray-500 text-sm">Media Placements</span>
+              <span className="text-gray-900 font-semibold">200+</span>
+            </div>
+            <div className="flex items-center justify-between py-3">
+              <span className="text-gray-500 text-sm">Campaigns Launched</span>
+              <span className="text-gray-900 font-semibold">60+</span>
+            </div>
           </div>
+
+          <Link
+            to="/projects"
+            className="inline-flex items-center gap-2 text-gray-900 font-medium hover:text-gray-600 transition-colors"
+          >
+            View all projects
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </motion.div>
       </div>
-      
-      <div className="w-full px-4 md:px-8">
-        <HoverExpand_001 images={campaignImages} className="w-full" />
-      </div>
-    </div>
+    </section>
   );
 };
 
