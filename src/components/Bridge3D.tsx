@@ -1,76 +1,17 @@
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useRef, useMemo } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { Environment, Float } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Large Realistic Moon/Planet Sphere
-const MoonSphere = () => {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const materialRef = useRef<THREE.MeshStandardMaterial>(null);
-
-  // Create procedural bump/crater texture
-  const bumpTexture = useMemo(() => {
-    const size = 512;
-    const canvas = document.createElement('canvas');
-    canvas.width = size;
-    canvas.height = size;
-    const ctx = canvas.getContext('2d')!;
-    
-    // Base gray
-    ctx.fillStyle = '#8090A0';
-    ctx.fillRect(0, 0, size, size);
-    
-    // Add craters
-    for (let i = 0; i < 80; i++) {
-      const x = Math.random() * size;
-      const y = Math.random() * size;
-      const radius = Math.random() * 30 + 5;
-      
-      const gradient = ctx.createRadialGradient(x, y, 0, x, y, radius);
-      gradient.addColorStop(0, 'rgba(60, 80, 100, 0.8)');
-      gradient.addColorStop(0.7, 'rgba(90, 110, 130, 0.5)');
-      gradient.addColorStop(1, 'rgba(128, 144, 160, 0)');
-      
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = gradient;
-      ctx.fill();
-    }
-    
-    // Add smaller details
-    for (let i = 0; i < 200; i++) {
-      const x = Math.random() * size;
-      const y = Math.random() * size;
-      const radius = Math.random() * 8 + 2;
-      
-      ctx.beginPath();
-      ctx.arc(x, y, radius, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${70 + Math.random() * 40}, ${90 + Math.random() * 40}, ${110 + Math.random() * 40}, 0.6)`;
-      ctx.fill();
-    }
-    
-    const texture = new THREE.CanvasTexture(canvas);
-    texture.wrapS = THREE.RepeatWrapping;
-    texture.wrapT = THREE.RepeatWrapping;
-    return texture;
-  }, []);
-
-  useFrame(() => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += 0.001;
-    }
-  });
-
+// Chrome/Silver Sphere Component
+const ChromeSphere = ({ position, scale }: { position: [number, number, number]; scale: number }) => {
   return (
-    <mesh ref={meshRef} position={[2.5, 0, 0]} scale={[3.5, 3.5, 3.5]}>
+    <mesh position={position} scale={[scale, scale, scale]}>
       <sphereGeometry args={[1, 128, 128]} />
       <meshStandardMaterial
-        ref={materialRef}
-        color="#7090C0"
-        metalness={0.1}
-        roughness={0.8}
-        map={bumpTexture}
-        bumpMap={bumpTexture}
-        bumpScale={0.02}
+        color="#E8E8E8"
+        metalness={1}
+        roughness={0.05}
+        envMapIntensity={1.5}
       />
     </mesh>
   );
@@ -89,27 +30,31 @@ const Bridge3D = ({ className = '' }: Bridge3DProps) => {
         dpr={[1, 2]}
         style={{ width: '100%', height: '100%' }}
       >
-        {/* Key light - main illumination from top-left */}
-        <directionalLight 
-          position={[-5, 5, 5]} 
-          intensity={2} 
-          color="#ffffff"
-        />
+        {/* HDRI Environment for realistic reflections */}
+        <Environment preset="studio" />
         
-        {/* Fill light - softer from opposite side */}
-        <directionalLight 
-          position={[5, -2, 3]} 
-          intensity={0.3} 
-          color="#4060ff"
-        />
+        {/* 3-point lighting system */}
+        <spotLight position={[10, 10, 10]} intensity={1} color="#ffffff" />
+        <spotLight position={[-10, -10, -10]} intensity={0.5} color="#ffffff" />
+        <ambientLight intensity={0.4} />
         
-        {/* Ambient for overall visibility */}
-        <ambientLight intensity={0.2} />
+        {/* Floating Chrome Sphere 1 - Left/Top */}
+        <Float 
+          speed={1.5} 
+          rotationIntensity={0.3} 
+          floatIntensity={0.6}
+        >
+          <ChromeSphere position={[-2, 1, 0]} scale={1.8} />
+        </Float>
         
-        {/* Rim light for edge definition */}
-        <pointLight position={[5, 0, -5]} intensity={0.5} color="#6080ff" />
-        
-        <MoonSphere />
+        {/* Floating Chrome Sphere 2 - Right/Bottom (larger) */}
+        <Float 
+          speed={2} 
+          rotationIntensity={0.4} 
+          floatIntensity={0.8}
+        >
+          <ChromeSphere position={[2.5, -0.5, 0]} scale={2.5} />
+        </Float>
       </Canvas>
     </div>
   );
