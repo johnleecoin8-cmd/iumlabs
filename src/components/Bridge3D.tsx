@@ -168,10 +168,10 @@ interface Bridge3DProps {
 
 const Bridge3D = ({ className }: Bridge3DProps) => {
   return (
-    <div className={className}>
+    <div className={className} style={{ width: '100%', height: '100%', minHeight: '400px' }}>
       <Canvas
         camera={{ position: [0, 0, 6], fov: 50 }}
-        style={{ background: "transparent" }}
+        style={{ background: "transparent", width: '100%', height: '100%' }}
         gl={{ alpha: true, antialias: true }}
       >
         <ambientLight intensity={0.3} />
