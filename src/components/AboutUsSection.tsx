@@ -1,6 +1,9 @@
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
 import { motion } from "framer-motion";
+import { lazy, Suspense } from "react";
+
+const Bridge3D = lazy(() => import("./Bridge3D"));
 
 const stats = [
   {
@@ -86,8 +89,18 @@ const AboutUsSection = () => {
   const { ref, isVisible } = useScrollAnimation();
   
   return (
-    <section ref={ref} className="bg-[#0A0A0B] py-16 md:py-24">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+    <section ref={ref} className="relative bg-[#0A0A0B] py-16 md:py-24 overflow-hidden">
+      {/* 3D Bridge Background */}
+      <Suspense fallback={null}>
+        <div className="absolute inset-0 opacity-30 pointer-events-none">
+          <Bridge3D className="w-full h-full" />
+        </div>
+      </Suspense>
+      
+      {/* Gradient overlay for better text readability */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-transparent to-[#0A0A0B]/50 pointer-events-none" />
+      
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
         {/* a41 style header */}
         <motion.div 
           className="mb-12 md:mb-16"
