@@ -2,7 +2,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useRef, useMemo } from 'react';
 import * as THREE from 'three';
 
-type BridgeType = 'arch' | 'suspension' | 'abstract' | 'beams' | 'minimal';
+type BridgeType = 'arch' | 'suspension' | 'abstract' | 'beams' | 'minimal' | 'hero';
 
 interface BridgeMeshProps {
   type: BridgeType;
@@ -10,7 +10,138 @@ interface BridgeMeshProps {
   secondaryColor?: string;
 }
 
-// Arch Bridge - 아치형 다리 (Hero용 강화 버전)
+// Hero Bridge - 대형 히어로 섹션용 브릿지 (매우 밝고 큼)
+const HeroBridgeMesh = ({ color = '#3B82F6', secondaryColor = '#60A5FA' }: { color?: string; secondaryColor?: string }) => {
+  const groupRef = useRef<THREE.Group>(null);
+
+  useFrame((state) => {
+    if (groupRef.current) {
+      groupRef.current.rotation.y += 0.002;
+      groupRef.current.position.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.1;
+    }
+  });
+
+  const archCurve = useMemo(() => {
+    const curve = new THREE.CatmullRomCurve3([
+      new THREE.Vector3(-3, 0, 0),
+      new THREE.Vector3(-2, 2, 0),
+      new THREE.Vector3(0, 3, 0),
+      new THREE.Vector3(2, 2, 0),
+      new THREE.Vector3(3, 0, 0),
+    ]);
+    return curve;
+  }, []);
+
+  return (
+    <group ref={groupRef} scale={[2.2, 2.2, 2.2]}>
+      {/* Main Arch - Very Bright */}
+      <mesh>
+        <tubeGeometry args={[archCurve, 100, 0.25, 24, false]} />
+        <meshStandardMaterial
+          color={color}
+          metalness={0.9}
+          roughness={0.1}
+          envMapIntensity={4}
+          emissive={color}
+          emissiveIntensity={0.8}
+        />
+      </mesh>
+      
+      {/* Outer Glow Arch */}
+      <mesh>
+        <tubeGeometry args={[archCurve, 100, 0.35, 24, false]} />
+        <meshStandardMaterial
+          color={secondaryColor}
+          metalness={0.5}
+          roughness={0.5}
+          transparent
+          opacity={0.25}
+          emissive={secondaryColor}
+          emissiveIntensity={0.3}
+        />
+      </mesh>
+      
+      {/* Bridge Deck */}
+      <mesh position={[0, -0.2, 0]}>
+        <boxGeometry args={[6.5, 0.15, 1.2]} />
+        <meshStandardMaterial
+          color={color}
+          metalness={0.85}
+          roughness={0.15}
+          emissive={color}
+          emissiveIntensity={0.5}
+        />
+      </mesh>
+
+      {/* Support Pillars */}
+      {[-2, -1, 0, 1, 2].map((x, i) => {
+        const height = 0.8 + Math.abs(x) * 0.4;
+        return (
+          <mesh key={i} position={[x, height / 2 + 0.1, 0]}>
+            <cylinderGeometry args={[0.08, 0.1, height, 16]} />
+            <meshStandardMaterial
+              color={color}
+              metalness={0.85}
+              roughness={0.15}
+              emissive={color}
+              emissiveIntensity={0.4}
+            />
+          </mesh>
+        );
+      })}
+
+      {/* Glowing End Spheres */}
+      <mesh position={[-3, 0, 0]}>
+        <sphereGeometry args={[0.3, 24, 24]} />
+        <meshStandardMaterial 
+          color={secondaryColor} 
+          metalness={0.9} 
+          roughness={0.1}
+          emissive={secondaryColor}
+          emissiveIntensity={1.0}
+        />
+      </mesh>
+      <mesh position={[3, 0, 0]}>
+        <sphereGeometry args={[0.3, 24, 24]} />
+        <meshStandardMaterial 
+          color={secondaryColor} 
+          metalness={0.9} 
+          roughness={0.1}
+          emissive={secondaryColor}
+          emissiveIntensity={1.0}
+        />
+      </mesh>
+      
+      {/* Top Center Glow Sphere */}
+      <mesh position={[0, 3, 0]}>
+        <sphereGeometry args={[0.25, 24, 24]} />
+        <meshStandardMaterial 
+          color="#ffffff" 
+          metalness={0.95} 
+          roughness={0.05}
+          emissive={color}
+          emissiveIntensity={1.2}
+        />
+      </mesh>
+
+      {/* Additional decorative elements */}
+      {[-1.5, 1.5].map((x, i) => (
+        <mesh key={`ring-${i}`} position={[x, 1.8, 0]} rotation={[Math.PI / 2, 0, 0]}>
+          <torusGeometry args={[0.2, 0.05, 16, 32]} />
+          <meshStandardMaterial
+            color={secondaryColor}
+            metalness={0.9}
+            roughness={0.1}
+            emissive={secondaryColor}
+            emissiveIntensity={0.6}
+          />
+        </mesh>
+      ))}
+    </group>
+  );
+};
+
+// Arch Bridge - 아치형 다리
 const ArchBridgeMesh = ({ color = '#3B82F6' }: { color?: string }) => {
   const groupRef = useRef<THREE.Group>(null);
 
@@ -123,7 +254,7 @@ const ArchBridgeMesh = ({ color = '#3B82F6' }: { color?: string }) => {
   );
 };
 
-// Beams Bridge - 연결 빔 (4pillars 실린더 스타일)
+// Beams Bridge - 연결 빔
 const BeamsBridgeMesh = ({ color = '#3B82F6', secondaryColor = '#06B6D4' }: { color?: string; secondaryColor?: string }) => {
   const groupRef = useRef<THREE.Group>(null);
 
@@ -297,6 +428,8 @@ const MinimalBridgeMesh = ({ color = '#E5E7EB' }: { color?: string }) => {
 // Bridge Mesh Selector
 const BridgeMesh = ({ type, color, secondaryColor }: BridgeMeshProps) => {
   switch (type) {
+    case 'hero':
+      return <HeroBridgeMesh color={color} secondaryColor={secondaryColor} />;
     case 'arch':
       return <ArchBridgeMesh color={color} />;
     case 'beams':
@@ -319,17 +452,19 @@ interface Bridge3DProps {
 
 const Bridge3D = ({ type, className = '', color, secondaryColor }: Bridge3DProps) => {
   return (
-    <div className={`pointer-events-none ${className}`}>
+    <div className={`pointer-events-none ${className}`} style={{ width: '100%', height: '100%' }}>
       <Canvas
-        camera={{ position: [0, 0, 6], fov: 40 }}
+        camera={{ position: [0, 1, 8], fov: 50 }}
         gl={{ alpha: true, antialias: true }}
         dpr={[1, 2]}
+        style={{ width: '100%', height: '100%' }}
       >
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1.2} />
-        <directionalLight position={[-5, 3, -5]} intensity={0.8} color="#60A5FA" />
-        <pointLight position={[0, 3, 4]} intensity={1.2} color="#3B82F6" />
-        <pointLight position={[0, -1, 3]} intensity={0.6} color="#06B6D4" />
+        <ambientLight intensity={1.2} />
+        <directionalLight position={[5, 5, 5]} intensity={2.0} />
+        <directionalLight position={[-5, 3, -5]} intensity={1.5} color="#60A5FA" />
+        <pointLight position={[0, 5, 6]} intensity={3.0} color="#3B82F6" />
+        <pointLight position={[0, -2, 4]} intensity={1.5} color="#06B6D4" />
+        <spotLight position={[0, 8, 0]} intensity={2.0} angle={0.5} penumbra={1} color="#ffffff" />
         <BridgeMesh type={type} color={color} secondaryColor={secondaryColor} />
       </Canvas>
     </div>
