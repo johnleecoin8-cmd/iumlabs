@@ -16,6 +16,7 @@ import triaLogo from "@/assets/logos/tria.png";
 import bybitLogo from "@/assets/logos/bybit.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import mantraLogo from "@/assets/logos/mantra.png";
+import synfuturesLogo from "@/assets/logos/synfutures.png";
 
 // Import campaign images
 import bnbEventImg from "@/assets/campaigns/bnb-event.jpg";
@@ -29,6 +30,7 @@ import triaLaunchImg from "@/assets/campaigns/tria-launch.jpg";
 import fogoFestImg from "@/assets/campaigns/fogo-fest.avif";
 import saharaAiImg from "@/assets/campaigns/sahara-ai.jpg";
 import mantraImg from "@/assets/campaigns/mantra.jpg";
+import synfuturesBillboardImg from "@/assets/campaigns/synfutures-billboard.jpg";
 
 // Import project background images
 import bnbBg from "@/assets/projects/bnb-bg.jpg";
@@ -521,6 +523,48 @@ const projectsData: Record<string, {
       { title: "Mantra Targets Korean RWA Market with $50M Pipeline", source: "CoinDesk Korea", date: "2024-04-15", url: "#", image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop" },
       { title: "Korean Institutions Show Interest in RWA Tokenization", source: "Hankyung Economy", date: "2024-03-30", url: "#", image: "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=400&h=250&fit=crop" },
       { title: "Mantra Partners with Korean Asset Managers", source: "Block Media", date: "2024-03-15", url: "#", image: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?w=400&h=250&fit=crop" }
+    ]
+  },
+  "synfutures": {
+    name: "SynFutures",
+    logo: synfuturesLogo,
+    bgImage: synfuturesBillboardImg,
+    category: "DeFi",
+    result: "Gangnam Billboard Promotion",
+    glowColor: "#6366F1",
+    description: "SynFutures launched a high-visibility billboard campaign in Gangnam district to establish brand presence in the Korean market.",
+    challenge: "As a DeFi derivatives platform, SynFutures needed to increase brand awareness among Korean traders and establish credibility in a competitive market dominated by centralized exchanges.",
+    metrics: [
+      { value: "5M+", label: "Impressions" },
+      { value: "+300%", label: "Brand Awareness" },
+      { value: "50K+", label: "Social Reach" },
+      { value: "2 Weeks", label: "Campaign Duration" }
+    ],
+    strategy: [
+      "Secured prime billboard locations in Gangnam district",
+      "Created eye-catching visual campaign targeting Korean traders",
+      "Launched coordinated social media amplification campaign",
+      "Organized offline-to-online engagement activations",
+      "Partnered with local crypto communities for awareness"
+    ],
+    results: [
+      { metric: "Billboard Impressions", value: "5M+" },
+      { metric: "Brand Awareness Increase", value: "+300%" },
+      { metric: "Social Media Reach", value: "50K+" },
+      { metric: "Community Growth", value: "+25%" }
+    ],
+    services: ["Billboard Marketing", "Brand Awareness", "Social Media Campaign", "Market Entry"],
+    shortServices: ["OOH", "Brand", "Social"],
+    gallery: [
+      { src: synfuturesBillboardImg, title: "Gangnam Billboard", description: "Prime billboard placement in the heart of Gangnam district" },
+      { src: "https://images.unsplash.com/photo-1533158326339-7f3cf2404354?w=800&h=600&fit=crop", title: "Night Display", description: "Billboard illumination for 24/7 visibility" },
+      { src: "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&h=600&fit=crop", title: "Social Campaign", description: "Coordinated social media amplification" },
+      { src: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800&h=600&fit=crop", title: "Community Event", description: "Offline meetup organized near billboard location" }
+    ],
+    news: [
+      { title: "SynFutures Launches Major Billboard Campaign in Seoul", source: "Block Media", date: "2024-04-20", url: "#", image: "https://images.unsplash.com/photo-1533158326339-7f3cf2404354?w=400&h=250&fit=crop" },
+      { title: "DeFi Platform SynFutures Targets Korean Traders", source: "CoinDesk Korea", date: "2024-04-18", url: "#", image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop" },
+      { title: "Gangnam Sees New Crypto Billboard Campaign", source: "TokenPost", date: "2024-04-15", url: "#", image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=400&h=250&fit=crop" }
     ]
   }
 };

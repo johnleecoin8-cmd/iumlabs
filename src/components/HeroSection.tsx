@@ -12,7 +12,7 @@ import bybitLogo from "@/assets/logos/bybit.png";
 import peaqLogo from "@/assets/logos/peaq.svg";
 import storyProtocolLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
-import triaLogo from "@/assets/logos/tria.png";
+import triaLogo from "@/assets/logos/tria-official.png";
 import mantraLogo from "@/assets/logos/mantra.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import fogoLogo from "@/assets/logos/fogo.png";
