@@ -1,166 +1,190 @@
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { motion } from "framer-motion";
-import { ArrowRight, Search } from "lucide-react";
 import { Link } from "react-router-dom";
-import Pillars3D from "./Pillars3D";
-
-// Import blog images
+import { ArrowUpRight, ArrowRight, Mail, Clock, TrendingUp } from "lucide-react";
+import { useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 import aiAgentsImg from "@/assets/blog/ai-agents-defi.jpg";
+import kaitoImg from "@/assets/blog/kaito-mindshare.jpg";
 import ecosystemImg from "@/assets/blog/ecosystem-growth-2025.jpg";
-import kolImg from "@/assets/blog/kol-marketing.jpg";
-import communityImg from "@/assets/blog/community-growth-ai.jpg";
-import cryptoMarketingImg from "@/assets/blog/crypto-marketing-bear.jpg";
 
-const insights = [
-  {
-    id: "ai-agents-defi",
-    title: "AI Agents Are Revolutionizing DeFi",
-    excerpt: "How autonomous AI is reshaping liquidity and trading strategies in crypto.",
-    date: "2 days ago",
-    readTime: "5 min",
-    category: "AI",
-    image: aiAgentsImg,
-  },
-  {
-    id: "ecosystem-growth-2025",
-    title: "Ecosystem Growth Strategies for 2025",
-    excerpt: "Proven frameworks for building sustainable Web3 communities.",
-    date: "5 days ago",
-    readTime: "8 min",
-    category: "Strategy",
-    image: ecosystemImg,
-  },
-  {
-    id: "kol-marketing",
-    title: "The State of KOL Marketing",
-    excerpt: "What works and what doesn't in crypto influencer campaigns.",
-    date: "1 week ago",
-    readTime: "6 min",
-    category: "Marketing",
-    image: kolImg,
-  },
-  {
-    id: "community-growth-ai",
-    title: "Building Communities with AI Tools",
-    excerpt: "Leveraging automation for authentic community engagement.",
-    date: "2 weeks ago",
-    readTime: "7 min",
-    category: "Community",
-    image: communityImg,
-  },
-  {
-    id: "crypto-marketing-bear",
-    title: "Marketing in Bear Markets",
-    excerpt: "Strategic approaches to maintain growth during market downturns.",
-    date: "3 weeks ago",
-    readTime: "6 min",
-    category: "Strategy",
-    image: cryptoMarketingImg,
-  }
-];
+const insights = [{
+  id: "ai-agents-defi",
+  title: "The Rise of AI Agents in DeFi",
+  excerpt: "How autonomous AI agents are reshaping decentralized finance and creating new opportunities in the Korean market.",
+  date: "Dec 10, 2024",
+  readTime: "8 min read",
+  category: "Research",
+  image: aiAgentsImg,
+  trending: true
+}, {
+  id: "kaito-mindshare",
+  title: "Kaito Mindshare: New Metric for Web3",
+  excerpt: "Understanding the emerging mindshare metrics and their impact on Web3 marketing strategies.",
+  date: "Dec 8, 2024",
+  readTime: "6 min read",
+  category: "Analysis",
+  image: kaitoImg,
+  trending: false
+}, {
+  id: "ecosystem-growth-2025",
+  title: "Ecosystem Growth Strategies for 2025",
+  excerpt: "Key trends and strategies for sustainable ecosystem growth in the evolving Web3 landscape.",
+  date: "Dec 5, 2024",
+  readTime: "10 min read",
+  category: "Strategy",
+  image: ecosystemImg,
+  trending: true
+}];
 
 const InsightsSection = () => {
-  return (
-    <section className="relative bg-[#0A0A0B] overflow-hidden">
-      {/* 4pillars-style Hero with 3D Pillars */}
-      <div className="relative min-h-[60vh] flex flex-col items-center justify-center py-20">
-        {/* 3D Pillars Background */}
-        <div className="absolute inset-0 w-full h-full">
-          <Pillars3D className="w-full h-full" />
-        </div>
-        
-        {/* Content over pillars */}
-        <div className="relative z-10 text-center px-4">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-white/90 text-sm md:text-base uppercase tracking-[0.3em] mb-4"
-          >
-            Professional Research For
-          </motion.h2>
-          <motion.h3
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-primary text-lg md:text-xl uppercase tracking-[0.2em] mb-8"
-          >
-            Web3 Projects and Crypto Natives
-          </motion.h3>
-          
-          {/* Search Bar - 4pillars style */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="relative max-w-xl mx-auto"
-          >
-            <input
-              type="text"
-              placeholder="Search"
-              className="w-full bg-white/[0.05] border border-white/10 rounded-full px-6 py-4 text-white placeholder-white/40 focus:outline-none focus:border-white/30 transition-colors"
-            />
-            <Search className="absolute right-6 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
-          </motion.div>
-        </div>
-      </div>
+  const { ref, isVisible } = useScrollAnimation();
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-      {/* Articles Section */}
-      <div className="bg-[#F5F5F5] py-16 md:py-20">
-        <div className="container mx-auto px-4 md:px-8 lg:px-16">
-          {/* Comments/Articles Header */}
-          <div className="flex items-center justify-between mb-8">
-            <h4 className="text-gray-900 font-semibold uppercase tracking-wider">Research</h4>
-            <Link 
-              to="/research" 
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors text-sm font-medium"
-            >
-              VIEW ALL <ArrowRight className="w-4 h-4" />
-            </Link>
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.from("newsletter_subscribers").insert({ email });
+      if (error) throw error;
+      toast.success("Successfully subscribed!");
+      setEmail("");
+    } catch (error) {
+      toast.error("Failed to subscribe. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <section ref={ref} className="px-4 bg-[#FAFAFA] py-16 md:py-24">
+      <div className="container mx-auto max-w-7xl">
+        {/* Option B Header */}
+        <motion.div 
+          className="relative mb-12 md:mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
+            08
+          </span>
+          <div className="relative">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
+              <span className="text-gray-400">Latest</span>{" "}
+              <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
+                Research
+              </span>
+            </h2>
+            <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mt-4 rounded-full" />
+          </div>
+        </motion.div>
+
+        <div className="grid lg:grid-cols-12 gap-12">
+          {/* Left - Newsletter */}
+          <div className={`lg:col-span-4 transition-all duration-700 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
+            <div className="lg:sticky lg:top-32">
+              <p className="text-gray-600 mb-8">
+                Stay ahead with our market insights, research reports, and strategy guides for the Korean Web3 ecosystem.
+              </p>
+
+              {/* Newsletter Form - Unified Card Style */}
+              <form onSubmit={handleSubscribe} className="space-y-4 p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 transition-all duration-300">
+                <div className="relative group">
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 group-focus-within:text-primary transition-colors" />
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    placeholder="Enter your email"
+                    className="w-full pl-12 pr-4 py-4 rounded-xl bg-gray-50 border border-gray-200 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-primary/50 focus:bg-white transition-all duration-300"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="group w-full py-4 rounded-xl bg-primary text-white font-medium hover:bg-primary/90 transition-all duration-300 disabled:opacity-50"
+                >
+                  <span>{isSubmitting ? "Subscribing..." : "Subscribe to Newsletter"}</span>
+                </button>
+              </form>
+
+              <Link
+                to="/research"
+                className="group inline-flex items-center gap-2 text-white/40 hover:text-primary transition-colors mt-6 text-sm"
+              >
+                View all research
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
           </div>
 
-          {/* Horizontal Scrollable Cards - 4pillars style */}
-          <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 scrollbar-hide">
-            {insights.map((article, index) => (
-              <motion.div
-                key={article.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="flex-shrink-0 w-[320px] md:w-[380px]"
-              >
-                <Link 
-                  to={`/research/${article.id}`} 
-                  className="group block bg-[#1a1a1a] rounded-2xl overflow-hidden hover:bg-[#222] transition-colors"
+          {/* Right - Articles */}
+          <div className="lg:col-span-8">
+            <div className="space-y-4">
+              {insights.map((article, index) => (
+                <Link
+                  key={article.id}
+                  to={`/research/${article.id}`}
+                  className={`group relative flex flex-col md:flex-row gap-6 p-6 rounded-2xl bg-white border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300 overflow-hidden ${
+                    isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'
+                  }`}
+                  style={{ transitionDelay: `${index * 150}ms` }}
                 >
-                  <div className="p-5">
-                    <div className="flex items-start gap-4">
-                      <span className="text-primary text-xs font-medium whitespace-nowrap">
-                        {article.date}
+                  {/* Hover Glow */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent" />
+                  </div>
+
+                  {/* Image */}
+                  <div className="relative md:w-56 h-40 rounded-xl overflow-hidden flex-shrink-0">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    {article.trending && (
+                      <div className="absolute top-3 left-3 flex items-center gap-1 px-2 py-1 rounded-md bg-primary/90">
+                        <TrendingUp className="w-3 h-3 text-white" />
+                        <span className="text-[10px] text-white font-medium uppercase">Trending</span>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Content */}
+                  <div className="flex-1 flex flex-col justify-center relative z-10">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-xs text-primary uppercase tracking-wider font-medium px-2 py-1 rounded-md bg-primary/10">
+                        {article.category}
                       </span>
-                      <h4 className="text-white font-medium text-sm leading-snug group-hover:text-primary transition-colors line-clamp-2">
-                        {article.title}
-                      </h4>
+                      <div className="flex items-center gap-1 text-gray-400">
+                        <Clock className="w-3 h-3" />
+                        <span className="text-xs">{article.readTime}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 mt-4">
-                      <div className="w-6 h-6 rounded-full bg-gradient-to-br from-primary to-cyan-400" />
-                      <span className="text-white/50 text-xs">{article.category}</span>
+                    <h3 className="text-xl md:text-2xl font-bold text-gray-900 group-hover:text-primary transition-colors mb-2">
+                      {article.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
+                      {article.excerpt}
+                    </p>
+                    <div className="mt-4 flex items-center gap-2 text-gray-400 text-xs">
+                      <span>{article.date}</span>
+                    </div>
+                  </div>
+
+                  {/* Arrow */}
+                  <div className="flex items-center">
+                    <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:bg-primary/10">
+                      <ArrowUpRight className="w-5 h-5 text-primary" />
                     </div>
                   </div>
                 </Link>
-              </motion.div>
-            ))}
-            
-            {/* View More Arrow */}
-            <div className="flex-shrink-0 flex items-center justify-center w-16">
-              <Link 
-                to="/research"
-                className="w-12 h-12 rounded-full border border-gray-300 flex items-center justify-center hover:border-gray-500 hover:bg-gray-100 transition-all"
-              >
-                <ArrowRight className="w-5 h-5 text-gray-600" />
-              </Link>
+              ))}
             </div>
           </div>
         </div>

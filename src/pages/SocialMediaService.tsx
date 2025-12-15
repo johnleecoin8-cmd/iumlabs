@@ -27,12 +27,12 @@ const processSteps = [
 const themeConfig = {
   backgroundImage: socialMediaImage,
   auroraColors: {
-    primary: "from-emerald-600/30",
-    secondary: "to-teal-500/25",
-    tertiary: "from-cyan-500/20",
+    primary: "from-purple-600/30",
+    secondary: "to-pink-500/25",
+    tertiary: "from-fuchsia-500/20",
   },
-  accentColor: "#10b981",
-  accentColorHover: "#059669",
+  accentColor: "#a855f7",
+  accentColorHover: "#9333ea",
   floatingTags: [
     { label: "X/Twitter", top: "12%", left: "7%" },
     { label: "Content", top: "24%", right: "10%" },

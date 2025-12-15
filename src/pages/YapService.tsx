@@ -28,12 +28,12 @@ const processSteps = [
 const themeConfig = {
   backgroundImage: seoulTech,
   auroraColors: {
-    primary: "from-emerald-600/30",
+    primary: "from-cyan-600/30",
     secondary: "to-teal-500/25",
-    tertiary: "from-cyan-500/20",
+    tertiary: "from-sky-500/20",
   },
-  accentColor: "#10b981",
-  accentColorHover: "#059669",
+  accentColor: "#06b6d4",
+  accentColorHover: "#0891b2",
   floatingTags: [
     { label: "Yappers", top: "14%", left: "7%" },
     { label: "600+ Creators", top: "26%", right: "10%" },

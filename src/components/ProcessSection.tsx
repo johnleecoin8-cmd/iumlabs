@@ -1,149 +1,180 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import SectionHeader from "./SectionHeader";
-import discoveryImg from "@/assets/process/discovery-research.jpg";
-import strategyImg from "@/assets/process/strategy-planning.jpg";
-import executionImg from "@/assets/process/execution-growth.jpg";
 
+// Process phases data - commitment-based approach
 const phases = [
   {
     number: "01",
     title: "Discovery",
     timeline: "Week 1",
-    description: "Deep dive into your project, audience, and competitive landscape in Korea.",
-    commitment: "Market research & analysis",
-    image: discoveryImg,
-    highlights: ["Market Research", "Competitor Analysis", "Audience Mapping"]
+    commitment: "We'll understand your project deeply",
+    description: "Deep dive into your project goals, target audience, and competitive landscape in the Korean market.",
+    deliverables: [
+      "Market readiness assessment",
+      "Competitor mapping",
+      "Opportunity identification"
+    ]
   },
   {
     number: "02",
     title: "Strategy",
     timeline: "Week 2",
-    description: "Custom GTM plan with clear milestones and KPIs for Korean market success.",
-    commitment: "Tailored action plan",
-    image: strategyImg,
-    highlights: ["GTM Strategy", "Content Calendar", "KOL Selection"]
+    commitment: "You'll have a clear roadmap",
+    description: "Develop a comprehensive go-to-market strategy tailored for Korean market entry and growth.",
+    deliverables: [
+      "GTM strategy document",
+      "Channel selection",
+      "Timeline & milestones"
+    ]
   },
   {
     number: "03",
-    title: "Launch & Scale",
-    timeline: "Week 3+",
-    description: "Execute across all channels with precision timing, then optimize for growth.",
-    commitment: "Full campaign execution",
-    image: executionImg,
-    highlights: ["Campaign Launch", "Performance Reports", "Growth Scaling"]
+    title: "Launch",
+    timeline: "Week 3-4",
+    commitment: "Your project goes live in Korea",
+    description: "Execute across all channels—community, KOLs, PR, and events—with full coordination.",
+    deliverables: [
+      "Community activation",
+      "KOL campaign launch",
+      "Media coverage"
+    ]
+  },
+  {
+    number: "04",
+    title: "Scale",
+    timeline: "Ongoing",
+    commitment: "We'll grow together",
+    description: "Continuous optimization, reporting, and strategic expansion based on performance data.",
+    deliverables: [
+      "Weekly performance reports",
+      "Growth optimization",
+      "Strategic recommendations"
+    ]
   }
 ];
 
 const ProcessSection = () => {
   return (
-    <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
-        {/* Header */}
-        <SectionHeader 
-          title="OUR PROCESS" 
-          dark={true}
-        />
-
-        {/* Headline */}
+    <section className="bg-[#FAFAFA] py-16 md:py-24 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16">
+        {/* Option B Header - Background number + gradient title */}
         <motion.div 
-          className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
+          className="relative mb-16 md:mb-24"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-            From Zero to <span className="bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent">Korean Hype</span> in 30 Days
-          </h3>
-          <p className="text-white/50 max-w-2xl text-lg">
-            Our battle-tested process delivers measurable results, not just promises.
-          </p>
+          {/* Large background number */}
+          <span className="absolute -top-8 md:-top-12 left-0 text-[120px] md:text-[180px] lg:text-[220px] font-black text-black/[0.03] leading-none pointer-events-none select-none">
+            02
+          </span>
+          
+          {/* Title */}
+          <div className="relative">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
+              <span className="text-gray-400">Our</span>{" "}
+              <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-pink-500 bg-clip-text text-transparent">
+                Process
+              </span>
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mt-4" />
+            <p className="text-gray-500 text-lg md:text-xl mt-6 max-w-xl">
+              From Zero to Korean Hype in 30 Days
+            </p>
+          </div>
         </motion.div>
 
-        {/* Process Cards */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+        {/* Timeline Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-4">
           {phases.map((phase, index) => (
             <motion.div
               key={phase.number}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.15 }}
-              className="group"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative"
             >
-              <div className="relative bg-white/[0.02] rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-500 ease-out hover:-translate-y-2 h-full">
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={phase.image} 
-                    alt={phase.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/60 to-transparent" />
-                  
-                  {/* Number Badge */}
-                  <div className="absolute top-4 left-4 w-12 h-12 rounded-xl bg-white/[0.08] backdrop-blur-sm flex items-center justify-center border border-white/10">
-                    <span className="text-lg font-bold text-white/70">{phase.number}</span>
-                  </div>
-                  
-                  {/* Timeline Badge */}
-                  <div className="absolute bottom-4 left-4">
-                    <span className="px-3 py-1.5 rounded-full bg-white/[0.08] backdrop-blur-sm text-xs font-medium text-white/70 border border-white/10">
-                      {phase.timeline}
-                    </span>
-                  </div>
+              {/* Connection Line (desktop only) */}
+              {index < phases.length - 1 && (
+                <div className="hidden lg:block absolute top-12 left-full w-full h-px bg-gradient-to-r from-gray-300 to-transparent z-0" />
+              )}
+
+              {/* Card */}
+              <div className="relative h-full border border-gray-200 hover:border-gray-400 bg-white p-6 transition-all duration-300 hover:shadow-lg rounded-xl">
+                {/* Number & Timeline */}
+                <div className="flex items-start justify-between mb-4">
+                  <span className="text-gray-400 text-xs uppercase tracking-wider">
+                    {phase.timeline}
+                  </span>
                 </div>
 
-                {/* Content */}
-                <div className="p-6">
-                  <h4 className="text-xl font-bold text-white mb-2 group-hover:text-primary transition-colors duration-500">
-                    {phase.title}
-                  </h4>
-                  
-                  <p className="text-sm font-medium bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent mb-3">
-                    {phase.commitment}
-                  </p>
-                  
-                  <p className="text-white/50 text-sm mb-4">
-                    {phase.description}
-                  </p>
+                {/* Title */}
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  {phase.title}
+                </h3>
 
-                  {/* Highlights */}
-                  <div className="flex flex-wrap gap-2">
-                    {phase.highlights.map((item, i) => (
-                      <span 
-                        key={i}
-                        className="px-3 py-1 rounded-full bg-white/[0.05] border border-white/10 text-xs font-medium text-white/60 group-hover:bg-primary/10 group-hover:border-primary/30 group-hover:text-primary transition-all duration-500"
-                      >
-                        {item}
-                      </span>
-                    ))}
-                  </div>
+                {/* Commitment */}
+                <p className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 font-semibold text-sm mb-3">
+                  {phase.commitment}
+                </p>
+
+                {/* Description */}
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                  {phase.description}
+                </p>
+
+                {/* Deliverables */}
+                <div className="space-y-2 mb-4">
+                  {phase.deliverables.map((deliverable, i) => (
+                    <div 
+                      key={i}
+                      className="flex items-center gap-2 text-gray-500 text-sm"
+                    >
+                      <div className="w-1 h-1 bg-amber-500 rounded-full" />
+                      <span>{deliverable}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Learn more */}
+                <div className="flex items-center gap-2 text-gray-400 group-hover:text-gray-900 transition-colors text-sm">
+                  Learn more
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+        {/* Bottom CTA - commitment statement */}
+        <motion.div 
+          className="mt-16 md:mt-20 pt-12 border-t border-gray-200"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-12"
         >
-          <p className="text-white/50 mb-4">Ready to start your journey?</p>
-          <a 
-            href="https://calendly.com/cryptobridgekorea/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-cyan-500 text-white px-8 py-4 rounded-full font-medium hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300 group"
-          >
-            Book a Free Call
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-          </a>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
+                Ready to start?
+              </h3>
+              <p className="text-gray-500">
+                Book a free strategy call to discuss your Korean market entry.
+              </p>
+            </div>
+            <a 
+              href="https://calendly.com/cryptobridgekorea/30min"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-gray-400 hover:text-gray-900 transition-colors text-sm group"
+            >
+              Book a Call
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

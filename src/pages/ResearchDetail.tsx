@@ -66,7 +66,7 @@ const ResearchDetail = () => {
           
           {/* Meta */}
           <div className="flex flex-wrap items-center gap-4 mb-6">
-            <span className="px-4 py-1.5 bg-primary/20 text-primary rounded-2xl text-sm backdrop-blur-sm">
+            <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">
               {post.category}
             </span>
             <span className="text-white/40 text-sm flex items-center gap-1">
@@ -85,9 +85,9 @@ const ResearchDetail = () => {
           </h1>
           
           {/* Author */}
-          <div className="flex items-center justify-between flex-wrap gap-4 pb-8 border-b border-white/[0.1]">
+          <div className="flex items-center justify-between flex-wrap gap-4 pb-8 border-b border-white/10">
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 rounded-2xl bg-white/[0.1] backdrop-blur-sm flex items-center justify-center text-lg font-medium text-white">
+              <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-lg font-medium text-white">
                 {post.author.split(' ').map(n => n[0]).join('')}
               </div>
               <div>
@@ -101,19 +101,19 @@ const ResearchDetail = () => {
               <span className="text-white/40 text-sm mr-2">Share:</span>
               <button 
                 onClick={() => handleShare("twitter")}
-                className="p-2 rounded-2xl bg-white/[0.05] backdrop-blur-sm hover:bg-white/[0.1] border border-white/[0.08] text-white/60 hover:text-white transition-all duration-300"
+                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
               >
                 <Twitter className="w-4 h-4" />
               </button>
               <button 
                 onClick={() => handleShare("linkedin")}
-                className="p-2 rounded-2xl bg-white/[0.05] backdrop-blur-sm hover:bg-white/[0.1] border border-white/[0.08] text-white/60 hover:text-white transition-all duration-300"
+                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
               >
                 <Linkedin className="w-4 h-4" />
               </button>
               <button 
                 onClick={handleCopyLink}
-                className="p-2 rounded-2xl bg-white/[0.05] backdrop-blur-sm hover:bg-white/[0.1] border border-white/[0.08] text-white/60 hover:text-white transition-all duration-300"
+                className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
               >
                 <Copy className="w-4 h-4" />
               </button>
@@ -124,7 +124,7 @@ const ResearchDetail = () => {
 
       {/* Featured Image */}
       <section className="container mx-auto max-w-5xl px-4 mb-16">
-        <div className="aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl border border-white/[0.08]">
+        <div className="aspect-[21/9] rounded-2xl overflow-hidden">
           <img 
             src={post.image} 
             alt={post.title}
@@ -207,12 +207,12 @@ const ResearchDetail = () => {
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap items-center gap-2 mt-12 pt-8 border-t border-white/[0.1]">
+        <div className="flex flex-wrap items-center gap-2 mt-12 pt-8 border-t border-white/10">
           <span className="text-white/40 text-sm mr-2">Tags:</span>
           {post.tags.map((tag) => (
             <span 
               key={tag} 
-              className="px-4 py-1.5 bg-white/[0.05] backdrop-blur-sm text-white/60 rounded-2xl text-sm border border-white/[0.08] hover:bg-white/[0.1] hover:border-white/[0.15] transition-all duration-300"
+              className="px-3 py-1 bg-white/5 text-white/60 rounded-full text-sm"
             >
               {tag}
             </span>
@@ -236,12 +236,12 @@ const ResearchDetail = () => {
               </Link>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedPosts.map((relatedPost) => (
                 <Link 
                   key={relatedPost.id}
                   to={`/research/${relatedPost.slug}`}
-                  className="group bg-white/[0.02] backdrop-blur-sm rounded-2xl p-4 border border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.04] hover:shadow-xl transition-all duration-300"
+                  className="group"
                 >
                   <div className="aspect-[16/10] rounded-xl overflow-hidden mb-4">
                     <img 
@@ -251,7 +251,7 @@ const ResearchDetail = () => {
                     />
                   </div>
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="px-3 py-1 bg-white/[0.08] backdrop-blur-sm text-white/60 rounded-2xl text-xs border border-white/[0.1]">
+                    <span className="px-2 py-1 bg-white/5 text-white/60 rounded text-xs">
                       {relatedPost.category}
                     </span>
                     <span className="text-white/40 text-xs">

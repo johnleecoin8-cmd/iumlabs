@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useCountUp } from "@/hooks/useCountUp";
 
-// Import client logos (matching Projects page)
-import bnbLogo from "@/assets/logos/bnb.svg";
+// Import client logos
+import bnbLogo from "@/assets/logos/bnb.png";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
@@ -17,7 +17,6 @@ import mantraLogo from "@/assets/logos/mantra.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
-import zkpassLogo from "@/assets/logos/zkpass.png";
 
 // Desktop tags
 const serviceTags = [
@@ -92,34 +91,31 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* Floating Service Tags - Desktop - Glass Card Style */}
+      {/* Floating Service Tags - Desktop - Unified Card Style */}
       {serviceTags.map((tag, index) => (
         <motion.div
           key={index}
           className={`absolute ${tag.position} hidden lg:block z-10`}
-          initial={{ opacity: 0, scale: 0.8, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ delay: index * 0.1 + 0.5, duration: 0.6, ease: "easeOut" }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
         >
-          <span className="font-sans px-5 py-2.5 text-xs whitespace-nowrap rounded-2xl bg-white/[0.04] backdrop-blur-md border border-white/[0.1] text-white/80 hover:bg-white/[0.08] hover:border-white/[0.25] hover:text-white hover:shadow-lg hover:shadow-white/[0.05] transition-all duration-300 cursor-default">
+          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-primary/40 hover:text-white transition-all duration-300">
             {tag.label}
           </span>
         </motion.div>
       ))}
 
-      {/* Floating Service Tags - Mobile - Glass Card Style */}
+      {/* Floating Service Tags - Mobile - Unified Card Style */}
       {mobileServiceTags.map((tag, index) => (
-        <motion.div
+        <div
           key={`mobile-${index}`}
           className={`absolute ${tag.position} lg:hidden z-10`}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: index * 0.1 + 0.8, duration: 0.5 }}
         >
-          <span className="font-sans px-3 py-1.5 text-[10px] rounded-xl bg-white/[0.04] backdrop-blur-md border border-white/[0.1] text-white/70 whitespace-nowrap">
+          <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-white/[0.03] border border-white/[0.08] text-white/60 whitespace-nowrap">
             {tag.label}
           </span>
-        </motion.div>
+        </div>
       ))}
 
       {/* Main Content - Centered */}
@@ -152,9 +148,9 @@ const HeroSection = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="relative z-10 py-6 sm:py-8">
+      <div className="relative z-10 py-4 sm:py-6">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
             {stats.map((stat, index) => (
               <StatItem 
                 key={index}
@@ -170,24 +166,25 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Client Logo Marquee - Glass Pill Cards Style */}
-      <div className="relative z-10 border-t border-white/[0.08] py-4 sm:py-5 overflow-hidden bg-gradient-to-t from-black/20 to-transparent">
-        {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[hsl(0,0%,4%)] to-transparent z-10 pointer-events-none" />
+      {/* Client Logo Marquee - Dark Pill Cards Style */}
+      <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
+        {/* Section indicator */}
+        <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
+          <span className="number-badge">01</span>
+        </div>
 
-        <div className="flex items-center logo-marquee-slow hover:[animation-play-state:paused]">
-          {[...clientLogos, ...clientLogos, ...clientLogos].map((client, index) => (
+        <div className="flex items-center logo-marquee-slow ml-14 sm:ml-16">
+          {[...clientLogos, ...clientLogos].map((client, index) => (
             <div 
               key={index} 
-              className="flex items-center gap-2 sm:gap-2.5 mx-2 sm:mx-2.5 px-4 sm:px-5 py-2 sm:py-2.5 bg-white/[0.04] backdrop-blur-sm rounded-2xl border border-white/[0.08] hover:bg-white/[0.08] hover:border-white/[0.15] transition-all duration-300 cursor-default"
+              className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
             >
               <img 
                 src={client.logo} 
                 alt={client.name} 
-                className="h-5 w-5 sm:h-6 sm:w-6 object-contain opacity-90 flex-shrink-0"
+                className="h-4 w-4 sm:h-5 sm:w-5 object-contain brightness-0 invert opacity-80 flex-shrink-0"
               />
-              <span className="text-white/80 text-[11px] sm:text-xs font-medium whitespace-nowrap">
+              <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
                 {client.name}
               </span>
             </div>
@@ -234,12 +231,12 @@ const StatItem = ({
   
   return (
     <motion.div 
-      className="text-center px-4 py-3 rounded-2xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.05] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-300"
+      className="text-center"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
     >
-      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 bg-gradient-to-r from-white to-white/80 bg-clip-text text-transparent">
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
         {prefix}{count}{suffix}
       </div>
       <div className="text-xs sm:text-sm text-white/50 font-light">

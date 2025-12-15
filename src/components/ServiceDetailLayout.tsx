@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { Calendar, ArrowLeft, ArrowRight, Sparkles, Rocket, Users, Globe, Megaphone, TrendingUp, FileText } from "lucide-react";
-import { motion } from "framer-motion";
+import { useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
+import { Calendar, ArrowDown } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
@@ -56,12 +55,12 @@ interface ServiceDetailLayoutProps {
 }
 
 const allServices = [
-  { slug: "community", title: "Community Management", number: "01", icon: Users },
-  { slug: "social-media", title: "Social Media Marketing", number: "02", icon: Globe },
-  { slug: "influencer", title: "Influencer Strategy", number: "03", icon: Megaphone },
-  { slug: "gtm-strategy", title: "GTM Strategy", number: "04", icon: Rocket },
-  { slug: "yap", title: "Yap Strategy", number: "05", icon: TrendingUp },
-  { slug: "pr", title: "PR & Media", number: "06", icon: FileText },
+  { slug: "community", title: "Community Management", number: "01" },
+  { slug: "social-media", title: "Social Media Marketing", number: "02" },
+  { slug: "influencer", title: "Influencer Strategy", number: "03" },
+  { slug: "gtm", title: "GTM Strategy", number: "04" },
+  { slug: "yap", title: "Yap Strategy", number: "05" },
+  { slug: "pr", title: "PR & Media", number: "06" },
 ];
 
 const clientLogos = [
@@ -87,10 +86,10 @@ const ServiceDetailLayout = ({
   currentServiceSlug,
   themeConfig,
 }: ServiceDetailLayoutProps) => {
-  const navigate = useNavigate();
-  
-  // Filter out current service and get others
-  const otherServices = allServices.filter((service) => service.slug !== currentServiceSlug);
+  // Filter out current service and get top 3
+  const otherServices = allServices
+    .filter((service) => service.slug !== currentServiceSlug)
+    .slice(0, 3);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -111,288 +110,327 @@ const ServiceDetailLayout = ({
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0B]">
-      <Navbar />
+    <div className="min-h-screen bg-white p-0.5 sm:p-1 md:p-2">
+      <div className="min-h-screen bg-background rounded-xl sm:rounded-2xl overflow-hidden">
+        <Navbar />
 
-      {/* Hero Section - Minimal a41 Style */}
-      <section className="relative min-h-[80vh] flex items-end overflow-hidden">
-        {/* Background */}
-        <div className="absolute inset-0">
+      {/* Hero Section - Service-Specific Theme */}
+      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
+        {/* Background - Service-Specific Image */}
+        <div className="absolute inset-0 overflow-hidden">
           <div 
-            className="absolute inset-0 bg-cover bg-center"
+            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
             style={{ 
               backgroundImage: `url(${themeConfig.backgroundImage})`,
-              filter: "brightness(0.25)",
+              filter: "brightness(0.5) saturate(1.1)",
             }}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-transparent to-[#0A0A0B]" />
+          
+          {/* Aurora light overlay - Service-Specific Colors */}
+          <div className="absolute inset-0 animate-aurora">
+            <div className={`absolute inset-0 bg-gradient-to-tr ${themeConfig.auroraColors.primary} via-transparent ${themeConfig.auroraColors.secondary}`} />
+            {themeConfig.auroraColors.tertiary && (
+              <div className={`absolute inset-0 bg-gradient-to-bl ${themeConfig.auroraColors.tertiary} via-transparent to-transparent`} />
+            )}
+          </div>
+          
+          {/* Twinkling stars effect */}
+          <div className="absolute inset-0">
+            {[...Array(30)].map((_, i) => (
+              <div
+                key={i}
+                className="absolute w-1 h-1 bg-white rounded-full animate-pulse"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                  animationDelay: `${Math.random() * 3}s`,
+                  animationDuration: `${2 + Math.random() * 2}s`,
+                  opacity: 0.2 + Math.random() * 0.5,
+                }}
+              />
+            ))}
+          </div>
+          
+          {/* Dark overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
         </div>
 
-        {/* Back Button */}
-        <motion.button
-          onClick={() => navigate('/services')}
-          className="absolute top-28 left-6 z-30 flex items-center gap-2 px-4 py-2.5 bg-white/5 backdrop-blur-sm rounded-full border border-white/10 text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300 group"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span className="text-sm font-medium">Back</span>
-        </motion.button>
 
         {/* Content */}
-        <div className="relative z-10 w-full pb-20 pt-48">
-          <div className="container mx-auto px-6 lg:px-16">
-            {/* Service badge */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="mb-6"
-            >
-              <span className="text-sm font-mono text-gray-500">/ SERVICE</span>
-            </motion.div>
-
+        <div className="container mx-auto px-6 lg:px-16 pt-32 pb-24 relative z-10">
+          <div className="max-w-3xl">
             {/* Title */}
-            <motion.h1 
-              className="max-w-4xl mb-6"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              <span className="block text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-white leading-[0.95]">
+            <h1 className="text-white mb-8">
+              <span className="block text-6xl md:text-7xl lg:text-[100px] font-light tracking-tight leading-[0.95]">
                 {title}
               </span>
               {titleHighlight && (
-                <span className="block text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-gray-500 leading-[0.95]">
+                <span className="block text-6xl md:text-7xl lg:text-[100px] font-light tracking-tight leading-[0.95]">
                   {titleHighlight}
                 </span>
               )}
-            </motion.h1>
+            </h1>
 
             {/* Subtitle */}
-            <motion.p 
-              className="max-w-2xl text-lg md:text-xl text-white/40 font-light leading-relaxed mb-10"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
+            <p className="text-white/80 text-lg md:text-xl max-w-2xl mb-12 font-light leading-relaxed">
               {subtitle}
-            </motion.p>
+            </p>
 
-            {/* CTA */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+            {/* CTA Button - Service Accent Color */}
+            <CalendlyButton 
+              className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg"
+              style={{ 
+                backgroundColor: themeConfig.accentColor,
+                boxShadow: `0 10px 40px ${themeConfig.accentColor}40`,
+              }}
             >
-              <CalendlyButton 
-                className="group inline-flex items-center gap-3 px-6 py-3 bg-white text-gray-900 font-medium rounded-full hover:bg-gray-100 transition-all duration-300"
-              >
-                <Calendar className="w-4 h-4" />
-                Book a Call
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </CalendlyButton>
-            </motion.div>
-          </div>
-
-          {/* Client logos bar */}
-          <div className="mt-16 border-t border-white/[0.08] pt-6">
-            <div className="container mx-auto px-6 lg:px-16">
-              <div className="flex items-center gap-8 overflow-x-auto pb-2 scrollbar-hide">
-                <span className="text-white/30 text-xs font-mono whitespace-nowrap">TRUSTED BY</span>
-                {clientLogos.slice(0, 6).map((logo, index) => (
-                  <img
-                    key={index}
-                    src={logo.src}
-                    alt={logo.alt}
-                    className="h-5 w-auto object-contain brightness-0 invert opacity-30 hover:opacity-60 transition-opacity flex-shrink-0"
-                  />
-                ))}
-              </div>
-            </div>
+              <Calendar className="w-5 h-5" />
+              Book a Meeting
+            </CalendlyButton>
           </div>
         </div>
-      </section>
 
-      {/* About Section - Clean 2-Column */}
-      <section className="bg-[#0A0A0B] py-20 md:py-28 border-t border-white/[0.08]">
-        <div className="container mx-auto px-6 lg:px-16">
-          <div className="grid lg:grid-cols-2 gap-16">
-            {/* Left - About */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="text-sm font-mono text-gray-500 mb-4 block">/ ABOUT</span>
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-6">
-                What we <span className="text-gray-500">do</span>
-              </h2>
-              <p className="text-white/40 text-lg leading-relaxed">
-                {aboutText}
-              </p>
-            </motion.div>
-
-            {/* Right - Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="grid grid-cols-3 gap-4"
-            >
-              <div className="p-6 border border-white/[0.08] rounded-2xl text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">18+</div>
-                <div className="text-white/40 text-sm">Projects</div>
-              </div>
-              <div className="p-6 border border-white/[0.08] rounded-2xl text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">$6M+</div>
-                <div className="text-white/40 text-sm">Raised</div>
-              </div>
-              <div className="p-6 border border-white/[0.08] rounded-2xl text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white mb-2">120+</div>
-                <div className="text-white/40 text-sm">KOLs</div>
-              </div>
-            </motion.div>
-          </div>
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-28 right-8 flex flex-col items-center gap-2 text-white/50 z-20">
+          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/40 to-transparent animate-pulse" />
+          <span className="text-xs uppercase tracking-widest">Scroll</span>
         </div>
-      </section>
 
-      {/* Process Section - Line Grid Style */}
-      <section className="bg-[#0A0A0B] py-20 md:py-28 border-t border-white/[0.08]">
-        <div className="container mx-auto px-6 lg:px-16">
-          {/* Header */}
-          <motion.div 
-            className="mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="text-sm font-mono text-gray-500 mb-4 block">/ PROCESS</span>
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white">
-                How we <span className="text-gray-500">work</span>
-              </h2>
-              <p className="text-white/40 max-w-xl text-sm leading-relaxed">
-                {whatIncludesText}
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Process Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((step, index) => (
-              <motion.div
-                key={step.number}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`p-8 border-white/[0.08] ${
-                  index > 0 ? 'lg:border-l' : ''
-                } ${index >= 2 ? 'md:border-l' : ''} ${index % 2 === 1 && index < 2 ? 'md:border-l' : ''}`}
+        {/* Client Logo Marquee */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm border-t border-white/20 py-6 overflow-hidden">
+          <div className="flex animate-marquee whitespace-nowrap">
+            {[...clientLogos, ...clientLogos, ...clientLogos].map((logo, index) => (
+              <div
+                key={index}
+                className="flex-shrink-0 mx-8 flex items-center justify-center"
               >
-                {/* Number */}
-                <span className="text-xs font-mono text-gray-600 mb-4 block">
-                  [{step.number}]
-                </span>
-
-                {/* Title */}
-                <h4 className="text-xl font-bold text-white mb-3">
-                  {step.title}
-                </h4>
-
-                {/* Description */}
-                <p className="text-white/40 text-sm leading-relaxed">
-                  {step.description}
-                </p>
-              </motion.div>
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="h-8 md:h-10 w-auto object-contain brightness-0 invert opacity-70 hover:opacity-100 transition-opacity"
+                />
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Other Services Section - Line Grid */}
-      <section className="bg-[#0A0A0B] py-20 md:py-28 border-t border-white/[0.08]">
-        <div className="container mx-auto px-6 lg:px-16">
-          <motion.div 
-            className="mb-16"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <span className="text-sm font-mono text-gray-500 mb-4 block">/ OTHER SERVICES</span>
-            <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white">
-                Explore <span className="text-gray-500">More</span>
+      {/* About Section - Light Gray */}
+      <section className="bg-[#f5f5f5]">
+        <div className="flex flex-col lg:flex-row min-h-[600px]">
+          {/* Left Column - Text */}
+          <div className="w-full lg:w-1/2 px-6 lg:px-16 py-20 lg:py-32 flex items-center">
+            <div className="max-w-xl scroll-reveal">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 mb-8 tracking-tight">
+                About
               </h2>
-              <Link 
-                to="/services"
-                className="inline-flex items-center gap-3 bg-white text-gray-900 px-6 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors group"
+              <p className="text-slate-600 text-lg leading-relaxed mb-10">
+                {aboutText}
+              </p>
+              <CalendlyButton 
+                className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 hover:scale-105"
+                style={{ backgroundColor: themeConfig.accentColor }}
               >
-                VIEW ALL
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+                <Calendar className="w-5 h-5" />
+                Book a Meeting
+              </CalendlyButton>
             </div>
-          </motion.div>
-
-          {/* Services Grid - 2x3 Line Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3">
-            {otherServices.slice(0, 6).map((service, index) => {
-              const Icon = service.icon;
-              const isTopRow = index < 3;
-              const isLeftColumn = index % 3 === 0;
-              
-              return (
-                <motion.div
-                  key={service.slug}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Link 
-                    to={`/services/${service.slug}`}
-                    className={`group block h-full p-8 md:p-10 transition-all duration-300 hover:bg-white/[0.03]
-                      ${!isTopRow ? 'border-t border-white/[0.08]' : ''}
-                      ${!isLeftColumn ? 'lg:border-l border-white/[0.08]' : ''}
-                      ${index >= 3 && index < 6 && 'md:border-t'}
-                      ${index % 2 === 1 ? 'md:border-l lg:border-l-0' : ''}
-                      ${index === 3 || index === 4 || index === 5 ? 'lg:border-t' : ''}
-                    `}
-                  >
-                    {/* Icon */}
-                    <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 group-hover:border-white/20 transition-all">
-                      <Icon className="w-6 h-6 text-white/70 group-hover:text-white transition-colors" />
-                    </div>
-
-                    {/* Number */}
-                    <span className="text-xs font-mono text-gray-600 mb-3 block">
-                      [{service.number}]
-                    </span>
-
-                    {/* Title */}
-                    <h4 className="text-xl md:text-2xl font-bold text-white mb-6 group-hover:text-white/90 transition-colors">
-                      {service.title}
-                    </h4>
-
-                    {/* Arrow */}
-                    <div className="flex items-center gap-2 text-white/30 group-hover:text-white transition-colors">
-                      <span className="text-sm">Learn more</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
           </div>
+
+          {/* Right Column - Image/Pattern */}
+          <div className="w-full lg:w-1/2 relative min-h-[400px] lg:min-h-full">
+            {aboutImage ? (
+              <div className="absolute inset-0">
+                <img 
+                  src={aboutImage} 
+                  alt="Service" 
+                  className="w-full h-full object-cover"
+                />
+                <div 
+                  className="absolute inset-0"
+                  style={{
+                    background: `linear-gradient(135deg, ${themeConfig.accentColor}99 0%, ${themeConfig.accentColorHover}80 50%, ${themeConfig.accentColor}70 100%)`,
+                  }}
+                />
+                {/* Open Hours Card */}
+                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/15 backdrop-blur-md rounded-xl px-6 py-5 border border-white/25">
+                  <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
+                  <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
+                </div>
+              </div>
+            ) : (
+              <div 
+                className="absolute inset-0"
+                style={{
+                  background: `linear-gradient(135deg, ${themeConfig.accentColor} 0%, ${themeConfig.accentColorHover} 100%)`,
+                }}
+              >
+                {/* Abstract pattern overlay */}
+                <div className="absolute inset-0 opacity-40">
+                  <div className="absolute top-[15%] left-[15%] w-40 h-40 rounded-full border-2 border-white/40" />
+                  <div className="absolute top-[35%] left-[45%] w-64 h-64 rounded-full border border-white/25" />
+                  <div className="absolute top-[55%] left-[25%] w-28 h-28 rounded-full border-2 border-white/50" />
+                  <div className="absolute top-[20%] left-[60%] w-20 h-20 rounded-full bg-white/15" />
+                  <div className="absolute top-[65%] left-[55%] w-32 h-32 rounded-full border border-white/30" />
+                </div>
+                {/* Open Hours Card */}
+                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/15 backdrop-blur-md rounded-xl px-6 py-5 border border-white/25">
+                  <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
+                  <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* What Includes Section */}
+      <section className="bg-[#fafafa] py-20 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-16">
+          {/* Header */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 scroll-reveal gap-4">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+              What
+            </h2>
+            <div className="flex items-center gap-4">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+                Includes
+              </h2>
+              <div className="flex gap-1.5 ml-2">
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
+                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="border-b border-dashed border-slate-300 mb-12" />
+
+          {/* Content Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+            {/* Left - Description */}
+            <div className="scroll-reveal">
+              <p className="text-slate-600 text-lg leading-relaxed mb-8">
+                {whatIncludesText}
+              </p>
+              <CalendlyButton 
+                className="inline-flex items-center transition-colors group text-lg"
+                style={{ color: themeConfig.accentColor }}
+              >
+                <span className="text-slate-400 mr-2">[</span>
+                <span className="font-medium">book a meeting</span>
+                <span className="text-slate-400 ml-2">]</span>
+              </CalendlyButton>
+            </div>
+
+            {/* Right - Process Steps */}
+            <div className="space-y-0">
+              {processSteps.map((step, index) => (
+                <div
+                  key={step.number}
+                  className="scroll-reveal"
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex justify-between items-start py-8 gap-6">
+                    <div className="flex-1">
+                      <h3 className="text-xl font-medium text-slate-900 mb-3">
+                        {step.title}
+                      </h3>
+                      <p className="text-slate-500 leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
+                    <span 
+                      className="text-sm whitespace-nowrap flex-shrink-0 px-3 py-1 rounded-full text-white font-medium"
+                      style={{ backgroundColor: themeConfig.accentColor }}
+                    >
+                      {step.number}
+                    </span>
+                  </div>
+                  {index < processSteps.length - 1 && (
+                    <div className="border-b border-dashed border-slate-300" />
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Watch Also Section */}
+      <section className="bg-white py-20 lg:py-32">
+        <div className="container mx-auto px-6 lg:px-16">
+          {/* Header */}
+          <div className="flex justify-between items-center mb-8 scroll-reveal">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+              Watch
+            </h2>
+            <div className="flex items-center gap-4">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+                Also
+              </h2>
+              <ArrowDown className="w-8 h-8 text-slate-400" />
+            </div>
+          </div>
+
+          {/* Divider */}
+          <div className="border-b border-dashed border-slate-300 mb-4" />
+
+          {/* Service Links */}
+          {otherServices.map((service, index) => (
+            <Link
+              key={service.slug}
+              to={`/services/${service.slug}`}
+              className="block scroll-reveal"
+              style={{ transitionDelay: `${index * 100}ms` }}
+            >
+              <div className="py-8 border-b border-dashed border-slate-300 flex justify-between items-center group cursor-pointer hover:bg-slate-50 transition-colors duration-300 px-4 -mx-4 rounded-lg">
+                {index % 2 === 0 ? (
+                  <>
+                    <h3 
+                      className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 transition-colors duration-300 group-hover:translate-x-2 transform"
+                      style={{ color: undefined }}
+                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
+                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                    >
+                      {service.title}
+                    </h3>
+                    <span 
+                      className="text-slate-400 text-2xl md:text-3xl font-light transition-colors duration-300"
+                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
+                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                    >
+                      {service.number}
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <span 
+                      className="text-slate-400 text-2xl md:text-3xl font-light transition-colors duration-300"
+                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
+                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                    >
+                      {service.number}
+                    </span>
+                    <h3 
+                      className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 transition-colors duration-300 group-hover:-translate-x-2 transform text-right"
+                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
+                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                    >
+                      {service.title}
+                    </h3>
+                  </>
+                )}
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
       <CTASection />
       <Footer />
+      </div>
     </div>
   );
 };

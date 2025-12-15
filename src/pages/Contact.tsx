@@ -236,25 +236,23 @@ const Contact = () => {
             </h2>
           </div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {serviceHighlights.map((service, index) => (
               <Link 
                 key={index}
                 to={service.link}
-                className={`group relative p-6 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] hover:border-primary/30 hover:bg-white/[0.06] overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/10 ${
+                className={`group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 overflow-hidden transition-all duration-500 ${
                   servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
                 style={{ transitionDelay: `${index * 100 + 200}ms` }}
               >
                 {/* Hover gradient background */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-blue-500/10 to-cyan-500/15 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-blue-500/10 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors duration-300">
-                      <service.icon className="w-6 h-6 text-primary group-hover:scale-110 transition-transform duration-300" />
-                    </div>
+                    <service.icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
                     <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
                   </div>
                   <h3 className="text-lg font-medium text-white mb-2">{service.title}</h3>
@@ -279,11 +277,11 @@ const Contact = () => {
               style={{ transitionDelay: '150ms' }}
             >
               {/* Seoul Skyline Image */}
-              <div className="rounded-2xl overflow-hidden border border-white/[0.08]">
+              <div className="rounded-xl overflow-hidden">
                 <img 
                   src={seoulSkyline} 
                   alt="Seoul Skyline" 
-                  className="w-full h-64 sm:h-80 object-cover hover:scale-105 transition-transform duration-700"
+                  className="w-full h-64 sm:h-80 object-cover"
                 />
               </div>
               
@@ -378,10 +376,10 @@ const Contact = () => {
                         key={option}
                         type="button"
                         onClick={() => setFormData({ ...formData, budget: option })}
-                        className={`px-4 py-3 rounded-2xl text-sm border transition-all duration-300 text-center ${
+                        className={`px-4 py-3 rounded-lg text-sm border transition-all text-center ${
                           formData.budget === option
-                            ? 'bg-primary/20 border-primary text-white shadow-lg shadow-primary/20'
-                            : 'bg-white/[0.02] border-white/[0.1] text-white/60 hover:border-white/[0.2] hover:bg-white/[0.04] hover:text-white'
+                            ? 'bg-white/10 border-primary text-white'
+                            : 'bg-transparent border-white/20 text-white/60 hover:border-white/40 hover:text-white'
                         }`}
                       >
                         {option}

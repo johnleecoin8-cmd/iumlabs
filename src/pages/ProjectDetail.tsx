@@ -9,16 +9,14 @@ import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
-import peaqLogo from "@/assets/logos/peaq.svg";
+import peaqLogo from "@/assets/logos/peaq.png";
 import storyLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
-import triaLogo from "@/assets/logos/tria-official.png";
+import triaLogo from "@/assets/logos/tria.png";
 import bybitLogo from "@/assets/logos/bybit.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import mantraLogo from "@/assets/logos/mantra.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
-import fogoLogo from "@/assets/logos/fogo.png";
-import zkpassLogo from "@/assets/logos/zkpass.png";
 
 // Import campaign images
 import bnbEventImg from "@/assets/campaigns/bnb-event.jpg";
@@ -33,7 +31,6 @@ import fogoFestImg from "@/assets/campaigns/fogo-fest.avif";
 import saharaAiImg from "@/assets/campaigns/sahara-ai.jpg";
 import mantraImg from "@/assets/campaigns/mantra.jpg";
 import synfuturesBillboardImg from "@/assets/campaigns/synfutures-billboard.jpg";
-import zkpassImg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 
 // Import project background images
 import bnbBg from "@/assets/projects/bnb-bg.jpg";
@@ -569,90 +566,6 @@ const projectsData: Record<string, {
       { title: "DeFi Platform SynFutures Targets Korean Traders", source: "CoinDesk Korea", date: "2024-04-18", url: "#", image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=250&fit=crop" },
       { title: "Gangnam Sees New Crypto Billboard Campaign", source: "TokenPost", date: "2024-04-15", url: "#", image: "https://images.unsplash.com/photo-1620321023374-d1a68fbc720d?w=400&h=250&fit=crop" }
     ]
-  },
-  "fogo": {
-    name: "FOGO",
-    logo: fogoLogo,
-    bgImage: fogoFestImg,
-    category: "Layer 1",
-    result: "Fogo Fest 2025 Success",
-    glowColor: "#FF4500",
-    description: "FOGO launched their ecosystem activation in Korea with the highly successful Fogo Fest 2025 event.",
-    challenge: "As a new Layer 1 blockchain, FOGO needed to establish brand presence and community in the competitive Korean market while creating memorable experiences.",
-    metrics: [
-      { value: "2K+", label: "Event Attendees" },
-      { value: "100K+", label: "Social Reach" },
-      { value: "30+", label: "KOL Partners" },
-      { value: "50K+", label: "Community" }
-    ],
-    strategy: [
-      "Organized Fogo Fest 2025 with top Korean crypto KOLs",
-      "Created immersive brand experience events",
-      "Launched Korean community channels and engagement",
-      "Partnered with Korean crypto media for coverage",
-      "Built ambassador program with Korean influencers"
-    ],
-    results: [
-      { metric: "Event Attendance", value: "2K+" },
-      { metric: "Social Media Reach", value: "100K+" },
-      { metric: "KOL Partnerships", value: "30+" },
-      { metric: "Korean Community", value: "50K+" }
-    ],
-    services: ["Event Marketing", "Community Building", "KOL Campaigns", "Brand Activation"],
-    shortServices: ["Events", "KOLs", "Community"],
-    gallery: [
-      { src: fogoFestImg, title: "Fogo Fest 2025", description: "Flagship launch event in Seoul with 2,000+ attendees" },
-      { src: "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=800&h=600&fit=crop", title: "Stage Experience", description: "Main stage presentations and community showcase" },
-      { src: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&h=600&fit=crop", title: "Community Meetup", description: "Post-event networking with Korean community" },
-      { src: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=800&h=600&fit=crop", title: "Brand Activation", description: "Interactive brand experience zones" }
-    ],
-    news: [
-      { title: "Fogo Fest 2025 Draws 2,000+ Attendees in Seoul", source: "Block Media", date: "2025-01-20", url: "#", image: "https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?w=400&h=250&fit=crop" },
-      { title: "FOGO Launches Korean Market Entry with Major Event", source: "CoinDesk Korea", date: "2025-01-18", url: "#", image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=400&h=250&fit=crop" },
-      { title: "Korean Crypto Community Welcomes FOGO Ecosystem", source: "TokenPost", date: "2025-01-15", url: "#", image: "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=250&fit=crop" }
-    ]
-  },
-  "zkpass": {
-    name: "zkPass",
-    logo: zkpassLogo,
-    bgImage: zkpassImg,
-    category: "Privacy",
-    result: "The Verifiable Nights",
-    glowColor: "#8A2BE2",
-    description: "zkPass launched their privacy-focused Web3 identity solution in Korea with 'The Verifiable Nights' event series.",
-    challenge: "Privacy and zero-knowledge technology needed clear explanation for Korean developers and users. Building awareness around ZK identity verification was crucial.",
-    metrics: [
-      { value: "500+", label: "Event Attendees" },
-      { value: "200+", label: "Developers" },
-      { value: "50K+", label: "Impressions" },
-      { value: "15+", label: "Media Features" }
-    ],
-    strategy: [
-      "Organized 'The Verifiable Nights' educational event series",
-      "Created Korean ZK technology educational content",
-      "Built developer community for zkPass integration",
-      "Partnered with Korean Web3 projects for use cases",
-      "Launched Korean ambassador program"
-    ],
-    results: [
-      { metric: "Event Series Attendance", value: "500+" },
-      { metric: "Developer Signups", value: "200+" },
-      { metric: "Media Impressions", value: "50K+" },
-      { metric: "Media Coverage", value: "15+" }
-    ],
-    services: ["Developer Relations", "Event Marketing", "Educational Content", "Community Building"],
-    shortServices: ["DevRel", "Events", "Education"],
-    gallery: [
-      { src: zkpassImg, title: "The Verifiable Nights", description: "Educational event series on ZK identity verification" },
-      { src: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=800&h=600&fit=crop", title: "Developer Workshop", description: "Hands-on zkPass integration tutorials" },
-      { src: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=600&fit=crop", title: "Tech Talk", description: "ZK technology deep-dive sessions" },
-      { src: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=600&fit=crop", title: "Partner Showcase", description: "Korean Web3 integration demonstrations" }
-    ],
-    news: [
-      { title: "zkPass Hosts 'Verifiable Nights' in Seoul", source: "Block Media", date: "2024-04-25", url: "#", image: "https://images.unsplash.com/photo-1515187029135-18ee286d815b?w=400&h=250&fit=crop" },
-      { title: "Zero-Knowledge Identity Solutions Gain Traction in Korea", source: "CoinDesk Korea", date: "2024-04-22", url: "#", image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=250&fit=crop" },
-      { title: "zkPass Partners with Korean Web3 Projects", source: "TokenPost", date: "2024-04-18", url: "#", image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=400&h=250&fit=crop" }
-    ]
   }
 };
 
@@ -762,21 +675,21 @@ const ProjectDetail = () => {
           {/* Back Button */}
           <button
             onClick={() => navigate("/projects")}
-            className="group flex items-center gap-2 text-white/60 mb-12 px-4 py-2 rounded-xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] transition-all duration-300 hover:bg-white/[0.08] hover:border-white/20"
+            className="group flex items-center gap-2 text-white/60 mb-12 transition-colors"
             style={{ '--hover-color': project.glowColor } as React.CSSProperties}
             onMouseEnter={(e) => e.currentTarget.style.color = project.glowColor}
             onMouseLeave={(e) => e.currentTarget.style.color = ''}
           >
-            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform duration-300" />
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             <span className="text-sm uppercase tracking-wider">Back to Projects</span>
           </button>
 
           {/* Category Badge */}
           <div 
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl mb-6 backdrop-blur-sm transition-all duration-300"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
             style={{ 
-              backgroundColor: `${project.glowColor}15`, 
-              border: `1px solid ${project.glowColor}30` 
+              backgroundColor: `${project.glowColor}20`, 
+              border: `1px solid ${project.glowColor}40` 
             }}
           >
             <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: project.glowColor }} />
@@ -791,8 +704,8 @@ const ProjectDetail = () => {
               <img
                 src={project.logo}
                 alt={project.name}
-                className="w-24 h-24 object-contain"
-                style={{ filter: `drop-shadow(0 0 30px ${project.glowColor}80)` }}
+                className="w-24 h-24 object-contain filter brightness-0 invert"
+                style={{ filter: `brightness(0) invert(1) drop-shadow(0 0 30px ${project.glowColor}80)` }}
               />
               {/* Glow ring behind logo */}
               <div 
@@ -813,8 +726,8 @@ const ProjectDetail = () => {
 
           {/* Key Result Badge */}
           <div 
-            className="mt-12 inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-white/[0.03] backdrop-blur-xl transition-all duration-300 hover:bg-white/[0.06]"
-            style={{ border: `1px solid ${project.glowColor}25` }}
+            className="mt-12 inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-black/40 backdrop-blur-sm"
+            style={{ border: `1px solid ${project.glowColor}30` }}
           >
             <span className="text-white/50 text-sm uppercase tracking-wider">Key Result</span>
             <span className="text-2xl md:text-3xl font-bold" style={{ color: project.glowColor }}>{project.result}</span>
@@ -848,15 +761,19 @@ const ProjectDetail = () => {
             {project.metrics.map((metric, index) => (
               <div 
                 key={index} 
-                className="group relative p-6 md:p-8 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] transition-all duration-300 ease-out overflow-hidden hover:-translate-y-1"
+                className="group relative p-6 md:p-8 rounded-2xl bg-[#111] border border-white/10 transition-all duration-300 overflow-hidden"
                 style={{ '--glow-color': project.glowColor } as React.CSSProperties}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${project.glowColor}40`; e.currentTarget.style.boxShadow = `0 12px 40px ${project.glowColor}15`; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.boxShadow = ''; }}
+                onMouseEnter={(e) => e.currentTarget.style.borderColor = `${project.glowColor}50`}
+                onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
               >
                 {/* Hover Glow */}
                 <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
-                  style={{ backgroundColor: `${project.glowColor}06` }}
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" 
+                  style={{ backgroundColor: `${project.glowColor}08` }}
+                />
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                  style={{ boxShadow: `inset 0 0 40px ${project.glowColor}15` }}
                 />
                 
                 <div className="relative">
@@ -877,12 +794,12 @@ const ProjectDetail = () => {
       {/* Challenge & Approach Section - Dark Theme */}
       <section className="bg-[#0A0A0A]">
         <div className="container mx-auto max-w-6xl px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left - THE CHALLENGE */}
-            <div className="p-8 md:p-12 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] relative overflow-hidden transition-all duration-300 ease-out hover:border-white/[0.15] hover:bg-white/[0.05]">
+            <div className="p-8 md:p-12 rounded-3xl bg-[#111] border border-white/10 relative overflow-hidden">
               {/* Accent Line */}
               <div 
-                className="absolute top-0 left-0 w-full h-1 rounded-t-2xl" 
+                className="absolute top-0 left-0 w-full h-1" 
                 style={{ background: `linear-gradient(to right, ${project.glowColor}, ${project.glowColor}50, transparent)` }}
               />
               
@@ -896,9 +813,9 @@ const ProjectDetail = () => {
             </div>
 
             {/* Right - WHAT WE DID */}
-            <div className="p-8 md:p-12 rounded-2xl bg-white/[0.03] backdrop-blur-sm border border-white/[0.08] relative overflow-hidden transition-all duration-300 ease-out hover:border-white/[0.15] hover:bg-white/[0.05]">
+            <div className="p-8 md:p-12 rounded-3xl bg-[#111] border border-white/10 relative overflow-hidden">
               {/* Accent Line */}
-              <div className="absolute top-0 left-0 w-full h-1 rounded-t-2xl bg-gradient-to-r from-white/30 via-white/10 to-transparent" />
+              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-white/30 via-white/10 to-transparent" />
               
               <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/50 mb-6">
                 <span className="w-6 h-px bg-white/50" />
@@ -908,7 +825,7 @@ const ProjectDetail = () => {
               {/* Services List with Project Color Dots */}
               <div className="space-y-4 mb-8">
                 {project.services.map((service, i) => (
-                  <div key={i} className="flex items-center gap-3 transition-all duration-200 hover:translate-x-1">
+                  <div key={i} className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: project.glowColor }} />
                     <span className="text-white text-lg">{service}</span>
                   </div>
@@ -916,7 +833,7 @@ const ProjectDetail = () => {
               </div>
 
               {/* Divider */}
-              <div className="border-t border-white/[0.08] my-6" />
+              <div className="border-t border-white/10 my-6" />
 
               {/* Strategy Quote */}
               <p className="text-white/60 text-sm italic leading-relaxed">
@@ -946,19 +863,19 @@ const ProjectDetail = () => {
             <div className="flex gap-3">
               <button
                 onClick={() => scrollGallery('left')}
-                className="w-12 h-12 rounded-2xl border border-white/[0.1] bg-white/[0.03] backdrop-blur-sm flex items-center justify-center transition-all duration-300 ease-out group hover:-translate-y-0.5"
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${project.glowColor}50`; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group"
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.glowColor; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.backgroundColor = ''; }}
               >
-                <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
+                <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-white" />
               </button>
               <button
                 onClick={() => scrollGallery('right')}
-                className="w-12 h-12 rounded-2xl border border-white/[0.1] bg-white/[0.03] backdrop-blur-sm flex items-center justify-center transition-all duration-300 ease-out group hover:-translate-y-0.5"
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${project.glowColor}50`; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group"
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.glowColor; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.backgroundColor = ''; }}
               >
-                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
+                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white" />
               </button>
             </div>
           </div>
@@ -972,29 +889,35 @@ const ProjectDetail = () => {
               {project.gallery.map((item, index) => (
                 <div 
                   key={index} 
-                  className="relative w-72 md:w-80 aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0 border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm transition-all duration-300 ease-out hover:-translate-y-1"
+                  className="relative w-72 md:w-80 aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0 border border-white/10 transition-all"
                   onClick={() => openLightbox(index)}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${project.glowColor}40`; e.currentTarget.style.boxShadow = `0 16px 48px ${project.glowColor}20`; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.boxShadow = ''; }}
+                  onMouseEnter={(e) => e.currentTarget.style.borderColor = `${project.glowColor}50`}
+                  onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
                 >
                   <img
                     src={item.src}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                  
+                  {/* Project color border glow on hover */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-2xl"
+                    style={{ boxShadow: `inset 0 0 30px ${project.glowColor}40, 0 0 40px ${project.glowColor}30` }}
+                  />
                   
                   {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
+                  <div className="absolute bottom-0 left-0 right-0 p-5 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
                     <h3 className="text-white font-semibold text-base mb-1">{item.title}</h3>
                     <p className="text-white/60 text-sm line-clamp-2">{item.description}</p>
                   </div>
 
                   {/* Expand Icon */}
                   <div 
-                    className="absolute top-4 right-4 w-10 h-10 rounded-xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-75 group-hover:scale-100"
+                    className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100"
                     style={{ backgroundColor: project.glowColor }}
                   >
                     <ArrowUpRight className="w-5 h-5 text-black" />
@@ -1007,7 +930,7 @@ const ProjectDetail = () => {
       </section>
 
       {/* Next Project - Dark Project Color Style */}
-      <section className="py-24 bg-[#0A0A0A] border-t border-white/[0.08]">
+      <section className="py-24 bg-[#0A0A0A] border-t border-white/10">
         <div className="container mx-auto max-w-6xl px-4">
           <Link 
             to={`/projects/${nextSlug}`}
@@ -1021,7 +944,7 @@ const ProjectDetail = () => {
             <div className="flex items-center justify-between">
               <div>
                 <h3 
-                  className="text-5xl md:text-7xl lg:text-8xl font-bold text-white transition-all duration-300 ease-out mb-3"
+                  className="text-5xl md:text-7xl lg:text-8xl font-bold text-white transition-colors duration-300 mb-3"
                   onMouseEnter={(e) => e.currentTarget.style.color = nextProject.glowColor}
                   onMouseLeave={(e) => e.currentTarget.style.color = ''}
                 >
@@ -1031,13 +954,16 @@ const ProjectDetail = () => {
               </div>
               <div className="relative">
                 <div 
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-2xl border border-white/[0.1] bg-white/[0.03] backdrop-blur-sm flex items-center justify-center transition-all duration-300 ease-out group-hover:-translate-y-1"
+                  className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300"
                   style={{ '--next-glow': nextProject.glowColor } as React.CSSProperties}
-                  onMouseEnter={(e) => { e.currentTarget.style.borderColor = `${nextProject.glowColor}50`; e.currentTarget.style.boxShadow = `0 12px 40px ${nextProject.glowColor}25`; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.boxShadow = ''; }}
                 >
-                  <ArrowUpRight className="w-8 h-8 md:w-10 md:h-10 text-white/50 group-hover:text-white group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                  <ArrowUpRight className="w-8 h-8 md:w-10 md:h-10 text-white/50 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
                 </div>
+                {/* Glow on hover */}
+                <div 
+                  className="absolute inset-0 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" 
+                  style={{ backgroundColor: `${nextProject.glowColor}40` }}
+                />
               </div>
             </div>
           </Link>

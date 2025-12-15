@@ -1,113 +1,119 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import SectionHeader from "./SectionHeader";
 
 const services = [
   {
     number: "01",
     title: "Go-To-Market Strategy",
-    description: "Positioning, messaging, and audience clarity for Korean market entry",
+    description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus.",
     link: "/services/gtm-strategy"
   },
   {
     number: "02",
     title: "Community Management",
-    description: "Complete Discord infrastructure and sticky community growth",
+    description: "Complete Discord community infrastructure to build sticky, scalable and self-sustaining growth.",
     link: "/services/community"
   },
   {
     number: "03",
     title: "Social Media Marketing",
-    description: "Content strategy and execution on X (Twitter) for Korean audiences",
+    description: "Content strategy and execution on X to grow visibility and engage with your ecosystem in real time.",
     link: "/services/social-media"
   },
   {
     number: "04",
     title: "Influencer Strategy",
-    description: "Campaigns with top Korean crypto KOLs and thought leaders",
+    description: "Influencer campaigns powered by top crypto voices aligned with your message and goals.",
     link: "/services/influencer"
   },
   {
     number: "05",
     title: "Yap Strategy",
-    description: "600+ creator network to drive awareness across Crypto X",
+    description: "Targeted campaigns through a 600+ creator network designed to drive awareness and traction across Crypto X.",
     link: "/services/yap"
   },
   {
     number: "06",
-    title: "PR & Media",
-    description: "Strategic placements in Korean crypto media outlets",
+    title: "PR",
+    description: "Narrative development and media placements to get your story published and seen in the right places.",
     link: "/services/pr"
   }
 ];
 
+interface ServiceCardProps {
+  number: string;
+  title: string;
+  description: string;
+  link: string;
+  index: number;
+}
+
+const ServiceCard = ({ number, title, description, link, index }: ServiceCardProps) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.5, delay: index * 0.1 }}
+  >
+    <Link 
+      to={link}
+      className="group block h-full border border-white/10 hover:border-white/30 p-6 transition-all duration-300 hover:bg-white/[0.02]"
+    >
+      <h4 className="text-xl font-bold text-white">
+        {title}
+      </h4>
+      <p className="text-white/50 text-sm mt-2 leading-relaxed mb-4">
+        {description}
+      </p>
+      <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm">
+        Learn more
+        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+      </div>
+    </Link>
+  </motion.div>
+);
+
 const ServicesSection = () => {
   return (
-    <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
+    <section className="relative bg-[#0A0A0B] py-16 md:py-24 overflow-hidden">
+      {/* Subtle background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/5 to-transparent pointer-events-none" />
+      
       <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
-        {/* 4pillars-style Header */}
-        <SectionHeader 
-          title="SERVICES" 
-          linkTo="/services" 
-          linkText="VIEW ALL"
-          dark={true}
-        />
-
-        {/* Headline */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+        {/* Option B Header - Background number + gradient title */}
+        <motion.div 
+          className="relative mb-16 md:mb-20"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-12 -mt-6"
+          transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-            Make Korean Market{' '}
-            <span className="text-primary">Actually Work</span> for You
-          </h2>
+          {/* Large background number */}
+          <span className="absolute -top-8 md:-top-12 left-0 text-[120px] md:text-[180px] lg:text-[220px] font-black text-white/[0.03] leading-none pointer-events-none select-none">
+            01
+          </span>
+          
+          {/* Title */}
+          <div className="relative">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
+              <span className="text-white/50">Our</span>{" "}
+              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
+                Services
+              </span>
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mt-4" />
+          </div>
         </motion.div>
 
-        {/* 4pillars-style Full-Width List */}
-        <div className="border-t border-white/10">
+        {/* Services Grid - 3x2 */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
           {services.map((service, index) => (
-            <motion.div
+            <ServiceCard
               key={service.number}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-            >
-              <Link 
-                to={service.link}
-                className="group flex items-center justify-between py-6 md:py-8 border-b border-white/10 transition-all duration-500 ease-out hover:bg-white/[0.05] hover:pl-4 md:hover:pl-6 hover:border-l-2 hover:border-l-primary"
-              >
-                {/* Left - Number & Title */}
-                <div className="flex items-start md:items-center gap-4 md:gap-8 flex-1">
-                  {/* Number */}
-                  <span className="text-sm font-mono text-white/30 pt-1 md:pt-0 group-hover:text-primary/60 transition-colors duration-500">
-                    [{service.number}]
-                  </span>
-                  
-                  {/* Title & Description */}
-                  <div className="flex-1">
-                    <h3 className="text-xl md:text-2xl font-semibold text-white group-hover:text-primary transition-colors duration-500 mb-1">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm md:text-base text-white/40 group-hover:text-white/60 transition-colors duration-500">
-                      {service.description}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Right - Arrow */}
-                <div className="flex items-center gap-3 text-white/30 group-hover:text-primary transition-colors duration-500">
-                  <span className="hidden md:block text-sm font-medium opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500">
-                    Learn more
-                  </span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
-                </div>
-              </Link>
-            </motion.div>
+              {...service}
+              index={index}
+            />
           ))}
         </div>
       </div>

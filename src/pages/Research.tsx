@@ -2982,7 +2982,7 @@ const Research = () => {
                 <button
                   key={category.label}
                   onClick={() => { setSelectedCategory(category.label); setCurrentPage(1); }}
-                  className="group flex flex-col items-center justify-center p-6 bg-white/[0.05] backdrop-blur-sm border border-white/[0.1] rounded-2xl hover:bg-white/[0.1] hover:border-emerald-400/30 hover:shadow-xl hover:shadow-emerald-500/10 transition-all duration-300"
+                  className="group flex flex-col items-center justify-center p-6 bg-emerald-500/5 border border-emerald-400/10 rounded-xl hover:bg-emerald-500/15 hover:border-emerald-400/30 transition-all duration-300"
                   style={{ animationDelay: `${0.5 + index * 0.1}s` }}
                 >
                   <category.icon className="w-8 h-8 text-emerald-400/60 group-hover:text-emerald-400 transition-colors mb-3" />
@@ -3006,10 +3006,10 @@ const Research = () => {
                 <button
                   key={category}
                   onClick={() => { setSelectedCategory(category); setCurrentPage(1); }}
-                  className={`px-4 py-2 rounded-2xl text-sm whitespace-nowrap transition-all duration-300 ${
+                  className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all ${
                     selectedCategory === category 
-                      ? "bg-primary text-white shadow-lg shadow-primary/30" 
-                      : "bg-white/[0.05] backdrop-blur-sm text-white/60 hover:bg-white/[0.1] border border-white/[0.08]"
+                      ? "bg-primary text-white" 
+                      : "bg-white/5 text-white/60 hover:bg-white/10"
                   }`}
                 >
                   {category}
@@ -3025,87 +3025,59 @@ const Research = () => {
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-                className="bg-white/[0.05] backdrop-blur-sm border-white/[0.1] rounded-2xl pl-10 pr-4 h-10 text-white placeholder:text-white/40 focus:border-white/[0.2] transition-all"
+                className="bg-white/5 border-white/10 rounded-full pl-10 pr-4 h-10 text-white placeholder:text-white/40"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4pillars-style Featured + List Layout */}
+      {/* Featured Article */}
       {currentPage === 1 && selectedCategory === "All" && !searchQuery && (
         <section className="bg-background py-16">
           <div className="container mx-auto max-w-7xl px-4">
-            {/* Section Header */}
-            <div className="flex items-center gap-6 mb-12">
-              <h2 className="text-sm font-medium tracking-[0.2em] uppercase text-white">ARTICLES</h2>
-              <div className="flex-grow h-px bg-white/20" />
-            </div>
-            
-            {/* Featured + List Grid */}
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-              {/* Left: Featured Article (Large Card) */}
-              <div className="lg:col-span-7">
-                <Link to={`/research/${researchPosts[0].slug}`} className="group block h-full">
-                  <div className="relative h-full min-h-[500px] rounded-2xl overflow-hidden">
-                    <img 
-                      src={researchPosts[0].image} 
-                      alt={researchPosts[0].title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-8">
-                      <div className="flex items-center gap-3 mb-4">
-                        <span className="px-3 py-1 bg-white/10 backdrop-blur-sm text-white/80 rounded-lg text-xs uppercase tracking-wider">
-                          {researchPosts[0].category}
-                        </span>
-                        <span className="text-white/50 text-sm">{researchPosts[0].date}</span>
-                      </div>
-                      <h2 className="text-2xl md:text-3xl font-medium text-white leading-tight mb-4 group-hover:text-primary transition-colors">
-                        {researchPosts[0].title}
-                      </h2>
-                      <p className="text-white/60 text-sm mb-4 line-clamp-2">
-                        {researchPosts[0].excerpt}
-                      </p>
-                      <div className="flex items-center gap-2 text-white/50 group-hover:text-white transition-colors text-sm">
-                        Read Article
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
+            <Link to={`/research/${researchPosts[0].slug}`} className="group block">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div className="aspect-[16/10] rounded-2xl overflow-hidden">
+                  <img 
+                    src={researchPosts[0].image} 
+                    alt={researchPosts[0].title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+                <div>
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">
+                      {researchPosts[0].category}
+                    </span>
+                    <span className="text-white/40 text-sm flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      {researchPosts[0].readTime}
+                    </span>
                   </div>
-                </Link>
-              </div>
-              
-              {/* Right: Recent Articles List */}
-              <div className="lg:col-span-5 flex flex-col gap-4">
-                {researchPosts.slice(1, 5).map((post, index) => (
-                  <Link 
-                    key={post.id}
-                    to={`/research/${post.slug}`}
-                    className="group flex gap-4 p-4 bg-white/[0.02] rounded-xl border border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.04] transition-all duration-300"
-                  >
-                    <div className="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
-                      <img 
-                        src={post.image} 
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                    </div>
-                    <div className="flex-1 flex flex-col justify-center">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-white/40 text-xs">{post.category}</span>
-                        <span className="text-white/20">•</span>
-                        <span className="text-white/40 text-xs">{post.readTime}</span>
+                  <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight mb-4 group-hover:text-primary transition-colors">
+                    {researchPosts[0].title}
+                  </h2>
+                  <p className="text-white/60 text-lg mb-6">
+                    {researchPosts[0].excerpt}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-medium text-white">
+                        {researchPosts[0].author.split(' ').map(n => n[0]).join('')}
                       </div>
-                      <h3 className="text-white font-medium text-sm leading-snug group-hover:text-primary transition-colors line-clamp-2">
-                        {post.title}
-                      </h3>
-                      <span className="text-white/30 text-xs mt-2">{post.date}</span>
+                      <div>
+                        <p className="text-white text-sm font-medium">{researchPosts[0].author}</p>
+                        <p className="text-white/40 text-xs">{researchPosts[0].date}</p>
+                      </div>
                     </div>
-                  </Link>
-                ))}
+                    <span className="text-primary flex items-center gap-2 group-hover:gap-3 transition-all">
+                      Read Article <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         </section>
       )}
@@ -3113,12 +3085,12 @@ const Research = () => {
       {/* Article Grid */}
       <section className="bg-[hsl(0,0%,6%)] py-16">
         <div className="container mx-auto max-w-7xl px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {currentPosts.map((post, index) => (
               <Link 
                 key={post.id}
                 to={`/research/${post.slug}`}
-                className="group bg-white/[0.02] backdrop-blur-sm rounded-2xl p-4 border border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.04] hover:shadow-xl transition-all duration-300"
+                className="group"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 {/* Image */}
@@ -3132,7 +3104,7 @@ const Research = () => {
                 
                 {/* Meta */}
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="px-3 py-1 bg-white/[0.08] backdrop-blur-sm text-white/70 rounded-2xl text-xs border border-white/[0.1]">
+                  <span className="px-2 py-1 bg-white/5 text-white/60 rounded text-xs">
                     {post.category}
                   </span>
                   <span className="text-white/40 text-xs flex items-center gap-1">
@@ -3162,7 +3134,7 @@ const Research = () => {
               <button 
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="px-4 py-2 rounded-2xl bg-white/[0.05] backdrop-blur-sm text-white/60 hover:bg-white/[0.1] border border-white/[0.08] disabled:opacity-30 transition-all duration-300"
+                className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-white/10 disabled:opacity-30 transition-all"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -3170,10 +3142,10 @@ const Research = () => {
                 <button
                   key={i + 1}
                   onClick={() => setCurrentPage(i + 1)}
-                  className={`w-10 h-10 rounded-2xl text-sm transition-all duration-300 ${
+                  className={`w-10 h-10 rounded-lg text-sm transition-all ${
                     currentPage === i + 1 
-                      ? "bg-primary text-white shadow-lg shadow-primary/30" 
-                      : "bg-white/[0.05] backdrop-blur-sm text-white/60 hover:bg-white/[0.1] border border-white/[0.08]"
+                      ? "bg-primary text-white" 
+                      : "bg-white/5 text-white/60 hover:bg-white/10"
                   }`}
                 >
                   {i + 1}
@@ -3182,7 +3154,7 @@ const Research = () => {
               <button 
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 rounded-2xl bg-white/[0.05] backdrop-blur-sm text-white/60 hover:bg-white/[0.1] border border-white/[0.08] disabled:opacity-30 transition-all duration-300"
+                className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-white/10 disabled:opacity-30 transition-all"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -3194,30 +3166,28 @@ const Research = () => {
       {/* Newsletter Section */}
       <section className="bg-background py-20">
         <div className="container mx-auto max-w-3xl px-4 text-center">
-          <div className="bg-white/[0.03] backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-white/[0.08]">
-            <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
-              Stay Updated
-            </h2>
-            <p className="text-white/60 mb-8">
-              Subscribe to receive the latest research and insights directly in your inbox.
-            </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                className="flex-1 bg-white/[0.05] border-white/[0.1] rounded-2xl h-12 px-4 text-white placeholder:text-white/40 focus:border-white/[0.2] transition-all"
-              />
-              <button
-                type="submit"
-                disabled={isSubscribing}
-                className="px-8 h-12 bg-primary text-white rounded-2xl font-medium hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 disabled:opacity-50"
-              >
-                {isSubscribing ? "..." : "Subscribe"}
-              </button>
-            </form>
-          </div>
+          <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
+            Stay Updated
+          </h2>
+          <p className="text-white/60 mb-8">
+            Subscribe to receive the latest research and insights directly in your inbox.
+          </p>
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
+              className="flex-1 bg-white/5 border-white/10 rounded-xl h-12 px-4 text-white placeholder:text-white/40"
+            />
+            <button
+              type="submit"
+              disabled={isSubscribing}
+              className="px-8 h-12 bg-primary text-white rounded-xl font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
+            >
+              {isSubscribing ? "..." : "Subscribe"}
+            </button>
+          </form>
         </div>
       </section>
 
