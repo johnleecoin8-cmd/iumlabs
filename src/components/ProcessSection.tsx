@@ -102,32 +102,32 @@ const ProcessSection = () => {
               )}
 
               {/* Card */}
-              <div className="relative h-full border border-white/10 hover:border-white/30 bg-white/[0.02] hover:bg-white/[0.04] p-6 md:p-8 transition-all duration-300">
-                {/* Number */}
-                <div className="flex items-start justify-between mb-6">
-                  <span className="text-white/20 font-mono text-sm">[{phase.number}]</span>
-                  <span className="text-xs font-mono px-2 py-1 bg-white/10 text-white/60">
+              <div className="relative h-full border border-white/10 hover:border-white/30 p-6 transition-all duration-300 hover:bg-white/[0.02]">
+                {/* Number & Timeline */}
+                <div className="flex items-start justify-between mb-4">
+                  <span className="text-white/40 font-mono text-sm">[{phase.number}]</span>
+                  <span className="text-white/40 text-xs uppercase tracking-wider">
                     {phase.timeline}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                <h3 className="text-xl font-bold text-white mb-3">
                   {phase.title}
                 </h3>
 
-                {/* Commitment - key differentiator */}
-                <p className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 font-medium text-sm mb-4">
+                {/* Commitment */}
+                <p className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 font-semibold text-sm mb-3">
                   {phase.commitment}
                 </p>
 
                 {/* Description */}
-                <p className="text-white/50 text-sm leading-relaxed mb-6">
+                <p className="text-white/50 text-sm leading-relaxed mb-4">
                   {phase.description}
                 </p>
 
                 {/* Deliverables */}
-                <div className="space-y-2 mb-6">
+                <div className="space-y-2 mb-4">
                   {phase.deliverables.map((deliverable, i) => (
                     <div 
                       key={i}
@@ -139,10 +139,10 @@ const ProcessSection = () => {
                   ))}
                 </div>
 
-                {/* Arrow indicator on hover */}
-                <div className="flex items-center gap-2 text-white/30 group-hover:text-white/60 transition-colors">
-                  <span className="text-xs font-mono">Learn more</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                {/* Learn more */}
+                <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm">
+                  Learn more
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             </motion.div>
@@ -170,10 +170,10 @@ const ProcessSection = () => {
               href="https://calendly.com/cryptobridgekorea/30min"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-amber-500 to-orange-500 text-black font-semibold hover:from-amber-400 hover:to-orange-400 transition-all group"
+              className="inline-flex items-center gap-2 text-white/40 hover:text-white transition-colors text-sm group"
             >
               Book a Call
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </motion.div>

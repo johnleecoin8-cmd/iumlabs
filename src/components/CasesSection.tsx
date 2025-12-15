@@ -97,14 +97,14 @@ const CaseCard = ({ number, name, logo, slug, category, result, description, ind
     <Link
       to={`/projects/${slug}`}
       onClick={() => window.scrollTo(0, 0)}
-      className="group block border border-white/10 hover:border-white/30 hover:bg-white/[0.02] p-6 transition-all duration-300"
+      className="group block h-full border border-white/10 hover:border-white/30 p-6 transition-all duration-300 hover:bg-white/[0.02]"
     >
       <div className="flex items-start justify-between mb-4">
         <span className="text-white/40 font-mono text-sm">[{number}]</span>
         <span className="text-white/40 text-xs uppercase tracking-wider">{category}</span>
       </div>
       
-      <div className="flex items-center gap-4 mb-4">
+      <div className="flex items-center gap-4 mb-3">
         {slug !== 'tria' && (
           <img
             src={logo}

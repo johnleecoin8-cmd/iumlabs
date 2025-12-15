@@ -67,8 +67,22 @@ const SectionIndicator = () => {
       });
     }
   };
-  return <div className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-4">
-      {sections.map((section, index) => {})}
-    </div>;
+  return (
+    <div className="fixed left-6 top-1/2 -translate-y-1/2 z-50 hidden lg:flex flex-col gap-4">
+      {sections.map((section, index) => (
+        <button
+          key={section.id}
+          onClick={() => scrollToSection(section.id)}
+          className={`group flex items-center gap-3 transition-all duration-300 ${
+            activeSection === index ? 'opacity-100' : 'opacity-40 hover:opacity-70'
+          }`}
+        >
+          <span className={`font-mono text-xs ${isLightSection ? 'text-gray-900' : 'text-white'}`}>
+            [{section.number}]
+          </span>
+        </button>
+      ))}
+    </div>
+  );
 };
 export default SectionIndicator;
