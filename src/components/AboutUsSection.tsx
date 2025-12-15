@@ -92,7 +92,7 @@ const AboutUsSection = () => {
     <section ref={ref} className="relative bg-[#0A0A0B] py-16 md:py-24 overflow-hidden">
       {/* 3D Bridge Background */}
       <Suspense fallback={null}>
-        <div className="absolute inset-0 opacity-30 pointer-events-none">
+        <div className="absolute inset-0 opacity-50 pointer-events-none" style={{ minHeight: '400px' }}>
           <Bridge3D className="w-full h-full" />
         </div>
       </Suspense>
