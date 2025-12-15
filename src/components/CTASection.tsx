@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
-import { ArrowRight, Mail, MapPin, Send, Loader2, Phone } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Send, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
+import seoulTwilight from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
+
+const budgetOptions = ["$15K - $25K", "$25K - $50K", "$50K +", "Raising funds"];
 
 const CTASection = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +18,26 @@ const CTASection = () => {
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [currentTime, setCurrentTime] = useState("");
+
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const seoulTime = new Intl.DateTimeFormat('en-US', {
+        timeZone: 'Asia/Seoul',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      }).format(now);
+      setCurrentTime(seoulTime);
+    };
+    updateTime();
+    const interval = setInterval(updateTime, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const filledFields = [formData.name, formData.email, formData.company, formData.website, formData.budget, formData.message].filter(Boolean).length;
+  const completionPercent = Math.round((filledFields / 6) * 100);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -49,11 +72,14 @@ const CTASection = () => {
     }
   };
 
-  const budgetOptions = ["<$10K", "$10K-$30K", "$30K-$50K", "$50K+"];
-
   return (
-    <section className="relative bg-[#0A0A0B] py-16 md:py-24 overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 max-w-7xl">
+    <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
+      {/* Background Number */}
+      <div className="absolute top-8 left-8 md:left-16 text-[120px] md:text-[200px] font-bold text-white/[0.03] leading-none select-none pointer-events-none">
+        09
+      </div>
+
+      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -61,11 +87,8 @@ const CTASection = () => {
           viewport={{ once: true }}
           className="mb-12"
         >
-          <span className="text-sm font-medium text-primary/80 uppercase tracking-wider mb-4 block">
-            Get in Touch
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-            Let's Build <span className="text-primary">Something Great</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white">
+            Get in <span className="text-primary italic font-normal">Touch</span>
           </h2>
         </motion.div>
 
@@ -77,53 +100,66 @@ const CTASection = () => {
             viewport={{ once: true }}
             className="space-y-4"
           >
-            {/* Office Card */}
-            <div className="relative h-[220px] md:h-[260px] rounded-2xl overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900 p-6 flex flex-col justify-end">
-              <div className="absolute top-4 right-4 w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
-                <MapPin className="w-5 h-5 text-white" />
+            {/* Office Card with Image */}
+            <div className="relative rounded-2xl overflow-hidden h-[320px] md:h-[360px]">
+              <img 
+                src={seoulTwilight} 
+                alt="Seoul" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              
+              {/* Live Badge */}
+              <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/50 backdrop-blur-sm">
+                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                <span className="text-white text-sm font-medium">Live in Seoul</span>
+                <span className="text-white/60 text-sm">{currentTime}</span>
               </div>
-              <h4 className="text-lg font-semibold text-white mb-2">Seoul Office</h4>
-              <p className="text-white/60 text-sm">{brand.address}</p>
+              
+              {/* Office Info */}
+              <div className="absolute bottom-4 left-4 right-4">
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-primary/20 backdrop-blur-sm flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-white/60 text-xs uppercase tracking-wider mb-1">Office</p>
+                    <p className="text-white text-sm">{brand.address}</p>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            {/* Contact Cards Grid */}
+            {/* Email & Telegram Cards */}
             <div className="grid grid-cols-2 gap-4">
-              {/* Email */}
               <a 
                 href={`mailto:${brand.email}`}
-                className="group p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-primary/30 hover:bg-white/[0.05] transition-all"
+                className="group p-5 rounded-2xl bg-[#111113] border border-white/10 hover:border-white/20 transition-all"
               >
-                <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center mb-3">
-                  <Mail className="w-5 h-5 text-primary" />
+                <div className="flex items-center justify-between mb-8">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Mail className="w-6 h-6 text-primary" />
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-white/30 group-hover:text-white/60 group-hover:translate-x-1 transition-all" />
                 </div>
-                <h4 className="text-sm font-medium text-white mb-1">Email</h4>
-                <p className="text-xs text-white/50 group-hover:text-primary transition-colors truncate">{brand.email}</p>
+                <p className="text-white/40 text-xs uppercase tracking-wider mb-1">E-mail</p>
+                <p className="text-white text-sm">{brand.email}</p>
               </a>
 
-              {/* Telegram */}
               <a 
                 href={brand.telegramLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-primary/30 hover:bg-white/[0.05] transition-all"
+                className="group p-5 rounded-2xl bg-[#111113] border border-white/10 hover:border-white/20 transition-all"
               >
-                <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center mb-3">
-                  <Send className="w-5 h-5 text-primary" />
+                <div className="flex items-center justify-between mb-8">
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <Send className="w-6 h-6 text-primary" />
+                  </div>
+                  <ArrowRight className="w-5 h-5 text-white/30 group-hover:text-white/60 group-hover:translate-x-1 transition-all" />
                 </div>
-                <h4 className="text-sm font-medium text-white mb-1">Telegram</h4>
-                <p className="text-xs text-white/50 group-hover:text-primary transition-colors">@cryptobridgekorea</p>
-              </a>
-
-              {/* Phone */}
-              <a 
-                href={`tel:${brand.phone}`}
-                className="group p-4 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-primary/30 hover:bg-white/[0.05] transition-all col-span-2"
-              >
-                <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center mb-3">
-                  <Phone className="w-5 h-5 text-primary" />
-                </div>
-                <h4 className="text-sm font-medium text-white mb-1">Phone</h4>
-                <p className="text-xs text-white/50 group-hover:text-primary transition-colors">{brand.phone}</p>
+                <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Telegram</p>
+                <p className="text-white text-sm">@cryptobridgekorea</p>
               </a>
             </div>
           </motion.div>
@@ -134,109 +170,120 @@ const CTASection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <form onSubmit={handleSubmit} className="space-y-4 bg-white/[0.02] backdrop-blur-sm rounded-2xl p-4 md:p-6 border border-white/10">
-              {/* Name & Email */}
-              <div className="grid md:grid-cols-2 gap-3">
+            <form onSubmit={handleSubmit} className="rounded-2xl border border-white/10 p-6 md:p-8 bg-[#111113]">
+              {/* Form Header */}
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex items-center gap-3">
+                  <span className="text-white/30 font-mono text-sm">[01]</span>
+                  <span className="text-white font-medium">Contact Form</span>
+                </div>
+                <span className="text-white/40 text-sm">{completionPercent}% complete</span>
+              </div>
+
+              <div className="space-y-5">
+                {/* Name & Email */}
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs text-white/50 uppercase tracking-wider mb-2">Name *</label>
+                    <input
+                      type="text"
+                      required
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-white/30 transition-colors"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-white/50 uppercase tracking-wider mb-2">E-mail *</label>
+                    <input
+                      type="email"
+                      required
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-white/30 transition-colors"
+                      placeholder="your@email.com"
+                    />
+                  </div>
+                </div>
+
+                {/* Company & Website */}
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs text-white/50 uppercase tracking-wider mb-2">Company</label>
+                    <input
+                      type="text"
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-white/30 transition-colors"
+                      placeholder="Company name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs text-white/50 uppercase tracking-wider mb-2">Website</label>
+                    <input
+                      type="text"
+                      value={formData.website}
+                      onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                      className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-white/30 transition-colors"
+                      placeholder="https://..."
+                    />
+                  </div>
+                </div>
+
+                {/* Budget */}
                 <div>
-                  <label className="block text-xs text-white/60 mb-1.5">Name *</label>
-                  <input
-                    type="text"
+                  <label className="block text-xs text-white/50 uppercase tracking-wider mb-2">Budget *</label>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+                    {budgetOptions.map((option) => (
+                      <button
+                        key={option}
+                        type="button"
+                        onClick={() => setFormData({ ...formData, budget: option })}
+                        className={`px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
+                          formData.budget === option
+                            ? "bg-white text-black"
+                            : "bg-white/[0.03] text-white/60 border border-white/10 hover:border-white/30"
+                        }`}
+                      >
+                        {option}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Message */}
+                <div>
+                  <label className="block text-xs text-white/50 uppercase tracking-wider mb-2">Project Details *</label>
+                  <textarea
                     required
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-white/[0.03] border border-white/10 rounded-lg text-white text-sm placeholder-white/30 focus:outline-none focus:border-primary transition-colors"
-                    placeholder="Your name"
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full px-4 py-3 bg-white/[0.03] border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:border-white/30 transition-colors resize-none"
+                    placeholder="Tell us about your project and goals..."
                   />
                 </div>
-                <div>
-                  <label className="block text-xs text-white/60 mb-1.5">Email *</label>
-                  <input
-                    type="email"
-                    required
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-white/[0.03] border border-white/10 rounded-lg text-white text-sm placeholder-white/30 focus:outline-none focus:border-primary transition-colors"
-                    placeholder="you@company.com"
-                  />
-                </div>
-              </div>
 
-              {/* Company & Website */}
-              <div className="grid md:grid-cols-2 gap-3">
-                <div>
-                  <label className="block text-xs text-white/60 mb-1.5">Company</label>
-                  <input
-                    type="text"
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-white/[0.03] border border-white/10 rounded-lg text-white text-sm placeholder-white/30 focus:outline-none focus:border-primary transition-colors"
-                    placeholder="Company name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs text-white/60 mb-1.5">Website</label>
-                  <input
-                    type="text"
-                    value={formData.website}
-                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                    className="w-full px-4 py-2.5 bg-white/[0.03] border border-white/10 rounded-lg text-white text-sm placeholder-white/30 focus:outline-none focus:border-primary transition-colors"
-                    placeholder="https://..."
-                  />
-                </div>
+                {/* Submit */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-4 bg-white/[0.03] hover:bg-white/[0.08] border border-white/10 text-white font-medium rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    </>
+                  )}
+                </button>
               </div>
-
-              {/* Budget */}
-              <div>
-                <label className="block text-xs text-white/60 mb-1.5">Budget Range</label>
-                <div className="grid grid-cols-4 gap-2">
-                  {budgetOptions.map((option) => (
-                    <button
-                      key={option}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, budget: option })}
-                      className={`px-2 py-2 rounded-lg text-xs font-medium transition-all ${
-                        formData.budget === option
-                          ? "bg-primary text-white"
-                          : "bg-white/[0.03] text-white/60 border border-white/10 hover:border-white/30"
-                      }`}
-                    >
-                      {option}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Message */}
-              <div>
-                <label className="block text-xs text-white/60 mb-1.5">Message *</label>
-                <textarea
-                  required
-                  rows={3}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-2.5 bg-white/[0.03] border border-white/10 rounded-lg text-white text-sm placeholder-white/30 focus:outline-none focus:border-primary transition-colors resize-none"
-                  placeholder="Tell us about your project..."
-                />
-              </div>
-
-              {/* Submit */}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-primary/30 disabled:opacity-50 flex items-center justify-center gap-2 group"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Send Message
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </>
-                )}
-              </button>
             </form>
           </motion.div>
         </div>
