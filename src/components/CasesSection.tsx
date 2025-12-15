@@ -218,7 +218,7 @@ const CasesSection = () => {
 
         {/* Cases Grid - 3x2 */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
-          {featuredCases.map((caseItem, index) => (
+          {featuredCases.slice(0, 6).map((caseItem, index) => (
             <CaseCard key={caseItem.slug} {...caseItem} index={index} />
           ))}
         </div>
