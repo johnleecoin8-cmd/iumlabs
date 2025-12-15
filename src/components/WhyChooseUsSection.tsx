@@ -40,7 +40,7 @@ const WhyChooseUsSection = () => {
   }, []);
   
   return (
-    <section className="relative bg-[#0A0A0B] py-16 md:py-24 overflow-hidden">
+    <section className="relative bg-[#F5F2ED] py-16 md:py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 max-w-7xl">
         {/* Option B Header */}
         <motion.div 
@@ -50,12 +50,12 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-white/[0.03] leading-none pointer-events-none select-none">
+          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
             05
           </span>
           <div className="relative">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-              <span className="text-white/50">About</span>{" "}
+              <span className="text-gray-400">About</span>{" "}
               <span className="bg-gradient-to-r from-primary to-orange-400 bg-clip-text text-transparent">
                 Us
               </span>
@@ -73,16 +73,16 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.6 }}
             className="order-2 lg:order-1"
           >
-            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white leading-snug mb-3">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 leading-snug mb-3">
               We bridge global{' '}
               <span className="text-primary">Web3 projects</span>{' '}
               to growth in the{' '}
               <span className="text-primary">Korean market</span>.
             </h3>
-            <p className="text-base md:text-lg text-white/60 leading-normal mb-3">
+            <p className="text-base md:text-lg text-gray-600 leading-normal mb-3">
               Established in 2025, we have rapidly become a trusted partner, empowering 18+ brands—including BNB, Bybit, IP, and Tria—with our proven expertise in PR, KOL Marketing, and Ads.
             </p>
-            <p className="text-base md:text-lg text-white/80 font-medium mb-6">
+            <p className="text-base md:text-lg text-gray-700 font-medium mb-6">
               Founded by former executives from Binance and KuCoin
             </p>
 
@@ -101,13 +101,13 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="order-1 lg:order-2"
           >
-            <div className="relative rounded-2xl overflow-hidden border border-white/[0.08] aspect-[4/3] hover:border-white/[0.2] transition-all duration-500 hover:shadow-2xl hover:shadow-black/50">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 aspect-[4/3] hover:shadow-3xl hover:shadow-gray-300/50 transition-all duration-500">
               <img
                 src={teamPhoto}
                 alt="CryptoBridge Korea Team"
                 className="w-full h-full object-cover object-[center_65%]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/15 to-transparent" />
             </div>
           </motion.div>
         </div>
@@ -117,27 +117,27 @@ const WhyChooseUsSection = () => {
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="pt-10 border-t border-white/[0.08] py-[20px]"
+          className="pt-10 border-t border-gray-200 py-[20px]"
         >
-          <p className="text-center text-white/40 text-sm uppercase tracking-widest mb-8">
+          <p className="text-center text-gray-400 text-sm uppercase tracking-widest mb-8">
             As Featured In Media
           </p>
           <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#0A0A0B] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#0A0A0B] to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
             
             <div className="flex items-center animate-marquee-slow hover:[animation-play-state:paused]">
               {[...mediaLogos, ...mediaLogos, ...mediaLogos].map((media, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 mx-3 px-5 py-2.5 bg-white/[0.03] backdrop-blur-sm rounded-2xl border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.06] hover:-translate-y-0.5 transition-all duration-300 flex-shrink-0 cursor-default"
+                  className="flex items-center gap-3 mx-3 px-5 py-2.5 bg-white rounded-2xl border border-gray-100 hover:border-primary/20 hover:shadow-lg hover:shadow-gray-200/50 hover:-translate-y-0.5 transition-all duration-300 flex-shrink-0 cursor-default"
                 >
                   <img
                     src={media.logo}
                     alt={media.name}
                     className="h-7 w-7 object-contain rounded-xl flex-shrink-0"
                   />
-                  <span className="text-white/70 text-sm font-medium whitespace-nowrap">
+                  <span className="text-gray-700 text-sm font-medium whitespace-nowrap">
                     {media.name}
                   </span>
                 </div>

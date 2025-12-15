@@ -55,7 +55,7 @@ const phases = [
 
 const ProcessSection = () => {
   return (
-    <section className="bg-[#0A0A0B] py-16 md:py-24 overflow-hidden">
+    <section className="bg-[#FAFAFA] py-16 md:py-24 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
         {/* Option B Header - Background number + gradient title */}
         <motion.div 
@@ -66,20 +66,20 @@ const ProcessSection = () => {
           transition={{ duration: 0.6 }}
         >
           {/* Large background number */}
-          <span className="absolute -top-8 md:-top-12 left-0 text-[120px] md:text-[180px] lg:text-[220px] font-black text-white/[0.03] leading-none pointer-events-none select-none">
+          <span className="absolute -top-8 md:-top-12 left-0 text-[120px] md:text-[180px] lg:text-[220px] font-black text-black/[0.03] leading-none pointer-events-none select-none">
             02
           </span>
           
           {/* Title */}
           <div className="relative">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
-              <span className="text-white/50">Our</span>{" "}
+              <span className="text-gray-400">Our</span>{" "}
               <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-pink-500 bg-clip-text text-transparent">
                 Process
               </span>
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mt-4" />
-            <p className="text-white/50 text-lg md:text-xl mt-6 max-w-xl">
+            <p className="text-gray-500 text-lg md:text-xl mt-6 max-w-xl">
               From Zero to Korean Hype in 30 Days
             </p>
           </div>
@@ -102,29 +102,29 @@ const ProcessSection = () => {
               )}
 
               {/* Card */}
-              <div className="relative h-full bg-white/[0.03] backdrop-blur-sm rounded-2xl p-6 transition-all duration-300 hover:bg-white/[0.06] hover:-translate-y-1 border border-white/[0.08] hover:border-white/[0.2] hover:shadow-xl hover:shadow-black/30">
+              <div className="relative h-full bg-white rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:shadow-gray-200/50 hover:-translate-y-1 border border-gray-100 hover:border-gray-200">
                 {/* Number badge */}
-                <span className="inline-block text-xs text-white/30 font-mono mb-3">[{phase.number}]</span>
+                <span className="inline-block text-xs text-gray-300 font-mono mb-3">[{phase.number}]</span>
                 
                 {/* Timeline */}
                 <div className="flex items-start justify-between mb-4">
-                  <span className="text-xs uppercase tracking-wider px-3 py-1 rounded-xl bg-amber-500/10 text-amber-400 font-medium border border-amber-500/20">
+                  <span className="text-xs uppercase tracking-wider px-3 py-1 rounded-xl bg-amber-50 text-amber-600 font-medium">
                     {phase.timeline}
                   </span>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl font-bold text-white mb-3">
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
                   {phase.title}
                 </h3>
 
                 {/* Commitment */}
-                <p className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-400 font-semibold text-sm mb-3">
+                <p className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500 font-semibold text-sm mb-3">
                   {phase.commitment}
                 </p>
 
                 {/* Description */}
-                <p className="text-white/50 text-sm leading-relaxed mb-4">
+                <p className="text-gray-500 text-sm leading-relaxed mb-4">
                   {phase.description}
                 </p>
 
@@ -133,7 +133,7 @@ const ProcessSection = () => {
                   {phase.deliverables.map((deliverable, i) => (
                     <div 
                       key={i}
-                      className="flex items-center gap-2 text-white/50 text-sm"
+                      className="flex items-center gap-2 text-gray-500 text-sm"
                     >
                       <div className="w-1.5 h-1.5 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full" />
                       <span>{deliverable}</span>
@@ -142,7 +142,7 @@ const ProcessSection = () => {
                 </div>
 
                 {/* Learn more */}
-                <div className="flex items-center gap-2 text-white/40 group-hover:text-amber-400 transition-colors text-sm">
+                <div className="flex items-center gap-2 text-gray-400 group-hover:text-amber-600 transition-colors text-sm">
                   Learn more
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -153,7 +153,7 @@ const ProcessSection = () => {
 
         {/* Bottom CTA - commitment statement */}
         <motion.div 
-          className="mt-16 md:mt-20 pt-12 border-t border-white/[0.08]"
+          className="mt-16 md:mt-20 pt-12 border-t border-gray-200"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -161,10 +161,10 @@ const ProcessSection = () => {
         >
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
             <div>
-              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+              <h3 className="text-2xl md:text-3xl font-bold text-gray-900 mb-2">
                 Ready to start?
               </h3>
-              <p className="text-white/50">
+              <p className="text-gray-500">
                 Book a free strategy call to discuss your Korean market entry.
               </p>
             </div>
