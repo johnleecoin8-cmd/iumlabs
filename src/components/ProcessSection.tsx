@@ -1,329 +1,461 @@
 import { useState } from "react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { MessageSquare, Search, Map, Rocket, TrendingUp, FileText, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, PanInfo } from "framer-motion";
+import { 
+  MessageSquare, 
+  Search, 
+  Lightbulb, 
+  Rocket, 
+  TrendingUp, 
+  FileText,
+  RotateCcw,
+  ChevronDown
+} from "lucide-react";
 
-// Import process images
+// Process images
 import discoveryImg from "@/assets/process/discovery-research.jpg";
 import strategyImg from "@/assets/process/strategy-planning.jpg";
 import executionImg from "@/assets/process/execution-growth.jpg";
 
-const steps = [{
-  number: "01",
-  title: "Initial Discussion",
-  subtitle: "Kickoff",
-  icon: MessageSquare,
-  description: "프로젝트 이해 및 목표 정의",
-  details: ["프로젝트 이해", "시장/타깃/체인/토큰모델 파악", "목표 정의 (Mint, Awareness, IDO, 거래량, 커뮤니티 등)"],
-  image: discoveryImg,
-  color: "#FF6B35"
-}, {
-  number: "02",
-  title: "Discovery & Research",
-  subtitle: "Analysis",
-  icon: Search,
-  description: "경쟁사 분석 및 시장 포지션 파악",
-  details: ["경쟁사 분석", "Web3 내 포지션 파악 (Narrative / Chain Fit)", "커뮤니티 진단", "시장 사이클·내러티브 연동", "주요 인플루언서 매핑"],
-  note: "모든 Web3 마케팅의 핵심, 일반 Web2보다 비중이 큼",
-  image: discoveryImg,
-  color: "#00D9FF"
-}, {
-  number: "03",
-  title: "Strategy & Planning",
-  subtitle: "Design",
-  icon: Map,
-  description: "캠페인 설계 및 리소스 배분",
-  details: ["캠페인 설계 (AMA, KOL, PR, 콘텐츠, 커뮤니티)", "에코시스템 런칭 플랜", "KPI 정의", "리소스·예산 배분"],
-  note: "Web3는 채널이 다양하므로 전략설계 비중이 크다",
-  image: strategyImg,
-  color: "#A855F7"
-}, {
-  number: "04",
-  title: "Execution",
-  subtitle: "Launch",
-  icon: Rocket,
-  description: "캠페인 실행 및 유저 유입",
-  details: ["인플루언서/KOL 캠페인", "PR/미디어 배포", "SNS 운영", "Discord/Telegram 성장", "이벤트/퀘스트 기반 유저 유입", "상장/데이터 기반 Growth Sprint"],
-  note: "프로젝트에 따라 Execution 파트가 가장 길어짐",
-  image: executionImg,
-  color: "#10B981"
-}, {
-  number: "05",
-  title: "Growth Optimization",
-  subtitle: "Scale",
-  icon: TrendingUp,
-  description: "실시간 최적화 및 ROI 극대화",
-  details: ["KPI 실시간 조정", "콘텐츠/메시지/캠페인 튜닝", "ROI 기반 예산 재배분", "Narrative Riding (예: DePIN, RWA, AI 등)"],
-  note: "Web3 특유의 민첩한 어댑테이션이 중요한 단계",
-  image: executionImg,
-  color: "#F59E0B"
-}, {
-  number: "06",
-  title: "Reporting",
-  subtitle: "Review",
-  icon: FileText,
-  description: "성과 분석 및 다음 스프린트 제안",
-  details: ["KPI 달성도", "인플루언서 캠페인 퍼포먼스", "커뮤니티/트래픽 성장", "다음 Sprint 제안"],
-  image: strategyImg,
-  color: "#EC4899"
-}];
+const steps = [
+  {
+    number: "01",
+    title: "Initial Discussion",
+    subtitle: "Understanding Your Vision",
+    icon: MessageSquare,
+    description: "We begin with a deep dive into your project, understanding your goals, target audience, and unique value proposition for the Korean market.",
+    details: [
+      "Project overview and market analysis",
+      "Target audience identification",
+      "Competitive landscape review",
+      "Goal setting and KPI definition"
+    ],
+    image: discoveryImg,
+    color: "#3B82F6"
+  },
+  {
+    number: "02",
+    title: "Discovery & Research",
+    subtitle: "Market Intelligence",
+    icon: Search,
+    description: "Our team conducts comprehensive research on Korean market trends, competitor analysis, and community sentiment to inform our strategy.",
+    details: [
+      "Korean market trends analysis",
+      "Community sentiment research",
+      "KOL and media landscape mapping",
+      "Regulatory compliance assessment"
+    ],
+    image: discoveryImg,
+    color: "#8B5CF6"
+  },
+  {
+    number: "03",
+    title: "Strategy & Planning",
+    subtitle: "Tailored Approach",
+    icon: Lightbulb,
+    description: "We develop a customized go-to-market strategy combining community building, influencer partnerships, and media outreach.",
+    details: [
+      "GTM strategy development",
+      "Channel and platform selection",
+      "Content and messaging framework",
+      "Timeline and milestone planning"
+    ],
+    image: strategyImg,
+    color: "#EC4899"
+  },
+  {
+    number: "04",
+    title: "Execution",
+    subtitle: "Launching Your Campaign",
+    icon: Rocket,
+    description: "Our experienced team executes the strategy across multiple channels, managing communities, KOL campaigns, and media relations.",
+    details: [
+      "Community launch and management",
+      "KOL campaign activation",
+      "PR and media outreach",
+      "Event coordination"
+    ],
+    image: executionImg,
+    color: "#F59E0B"
+  },
+  {
+    number: "05",
+    title: "Growth Optimization",
+    subtitle: "Scaling Success",
+    icon: TrendingUp,
+    description: "We continuously optimize campaigns based on data and feedback, scaling what works and adjusting strategies for maximum impact.",
+    details: [
+      "Performance analysis",
+      "A/B testing and optimization",
+      "Community engagement scaling",
+      "Partnership expansion"
+    ],
+    image: executionImg,
+    color: "#10B981"
+  },
+  {
+    number: "06",
+    title: "Reporting & Insights",
+    subtitle: "Measuring Impact",
+    icon: FileText,
+    description: "Regular comprehensive reports provide clear visibility into campaign performance, ROI, and actionable insights for future growth.",
+    details: [
+      "Weekly performance reports",
+      "ROI and KPI tracking",
+      "Market intelligence updates",
+      "Strategic recommendations"
+    ],
+    image: strategyImg,
+    color: "#06B6D4"
+  }
+];
 
 const ProcessSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
-  const [activeStep, setActiveStep] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [exitDirection, setExitDirection] = useState<"left" | "right">("left");
+  const [removedCards, setRemovedCards] = useState<number[]>([]);
 
-  const goToNext = () => setActiveStep((prev) => (prev + 1) % steps.length);
-  const goToPrev = () => setActiveStep((prev) => (prev - 1 + steps.length) % steps.length);
+  const currentStep = steps[currentIndex];
+  const Icon = currentStep?.icon || MessageSquare;
+
+  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+    const threshold = 100;
+    if (Math.abs(info.offset.x) > threshold) {
+      setExitDirection(info.offset.x > 0 ? "right" : "left");
+      removeCard();
+    }
+  };
+
+  const removeCard = () => {
+    if (currentIndex < steps.length - 1) {
+      setRemovedCards([...removedCards, currentIndex]);
+      setCurrentIndex(currentIndex + 1);
+    }
+  };
+
+  const resetStack = () => {
+    setRemovedCards([]);
+    setCurrentIndex(0);
+  };
+
+  const goToStep = (index: number) => {
+    if (index > currentIndex) {
+      // Remove cards up to the target
+      const newRemoved = [];
+      for (let i = currentIndex; i < index; i++) {
+        newRemoved.push(i);
+      }
+      setRemovedCards([...removedCards, ...newRemoved]);
+    }
+    setCurrentIndex(index);
+  };
 
   return (
-    <section ref={ref} className="relative px-4 py-16 md:py-24 bg-[#0A0A0B] overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <AnimatePresence mode="wait">
-          <motion.img
-            key={activeStep}
-            src={steps[activeStep].image}
-            alt={steps[activeStep].title}
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 0.15, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
-            className="w-full h-full object-cover"
-          />
-        </AnimatePresence>
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-[#0A0A0B]/80 to-[#0A0A0B]" />
-      </div>
+    <section className="min-h-screen bg-[#0A0A0B] py-20 overflow-hidden relative">
+      {/* Background */}
+      <div 
+        className="absolute inset-0 opacity-20"
+        style={{
+          backgroundImage: `url(${currentStep?.image})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          filter: "blur(40px)",
+          transition: "background-image 0.5s ease-in-out"
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0B] via-transparent to-[#0A0A0B]" />
 
-      {/* Background Glow Effects */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{
-            background: `radial-gradient(circle at 30% 50%, ${steps[activeStep].color}20 0%, transparent 50%)`
-          }}
-          transition={{ duration: 0.8 }}
-          className="absolute inset-0"
-        />
-      </div>
-
-      <div className="container mx-auto max-w-7xl relative z-10">
-        {/* Section Header */}
-        <div className={`mb-12 md:mb-16 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-white/30 text-sm font-mono">[ 02 ]</span>
-            <span className="w-12 h-px bg-white/20" />
-            <span className="text-white/50 text-sm uppercase tracking-widest">How We Work</span>
-          </div>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6">
-            Our <span className="text-primary">Process</span>
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="text-white/40 font-mono text-sm tracking-widest mb-4 block">
+            [ 02 ] ── How We Work
+          </span>
+          <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
+            Our Process
           </h2>
-        </div>
+          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+            Swipe or click to explore each step
+          </p>
+        </motion.div>
 
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* Left - Step Navigation */}
-          <div className={`lg:col-span-4 transition-all duration-700 delay-200 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-            <div className="space-y-2">
+        <div className="grid lg:grid-cols-[280px_1fr] gap-8 lg:gap-16 items-start max-w-6xl mx-auto">
+          {/* Left: Timeline Progress */}
+          <div className="hidden lg:block">
+            <div className="sticky top-32 space-y-1">
               {steps.map((step, index) => {
-                const IconComponent = step.icon;
-                const isActive = index === activeStep;
-                const isPast = index < activeStep;
-                
+                const StepIcon = step.icon;
+                const isActive = index === currentIndex;
+                const isPassed = removedCards.includes(index);
+
                 return (
                   <button
-                    key={index}
-                    onClick={() => setActiveStep(index)}
-                    className={`w-full flex items-center gap-4 p-4 rounded-xl transition-all duration-300 text-left group ${
-                      isActive 
-                        ? 'bg-white/10 border border-white/20' 
-                        : 'hover:bg-white/5 border border-transparent'
+                    key={step.number}
+                    onClick={() => !isPassed && goToStep(index)}
+                    disabled={isPassed}
+                    className={`w-full text-left p-4 rounded-xl transition-all duration-300 group ${
+                      isPassed 
+                        ? "opacity-40 cursor-not-allowed" 
+                        : "hover:bg-white/5 cursor-pointer"
                     }`}
                   >
-                    {/* Step Number */}
-                    <div 
-                      className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${
-                        isActive ? '' : isPast ? 'bg-white/10' : 'bg-white/5'
-                      }`}
-                      style={{ 
-                        backgroundColor: isActive ? `${step.color}30` : undefined 
-                      }}
-                    >
-                      <IconComponent 
-                        className="w-5 h-5 transition-colors duration-300" 
-                        style={{ color: isActive ? step.color : isPast ? 'rgba(255,255,255,0.6)' : 'rgba(255,255,255,0.3)' }}
-                      />
-                    </div>
-                    
-                    {/* Step Info */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2">
-                        <span 
-                          className="text-xs font-mono transition-colors duration-300"
-                          style={{ color: isActive ? step.color : 'rgba(255,255,255,0.4)' }}
-                        >
-                          [{step.number}]
-                        </span>
-                        <span className={`text-xs uppercase tracking-wider transition-colors duration-300 ${
-                          isActive ? 'text-white/70' : 'text-white/30'
-                        }`}>
-                          {step.subtitle}
-                        </span>
+                    <div className="flex items-center gap-4">
+                      <div 
+                        className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+                          isActive ? "scale-110" : ""
+                        }`}
+                        style={{
+                          background: isActive ? `${step.color}30` : "rgba(255,255,255,0.05)",
+                          border: isActive ? `2px solid ${step.color}` : "2px solid transparent",
+                          boxShadow: isActive ? `0 0 20px ${step.color}40` : "none"
+                        }}
+                      >
+                        <StepIcon 
+                          className="w-5 h-5" 
+                          style={{ color: isActive ? step.color : "rgba(255,255,255,0.4)" }}
+                        />
                       </div>
-                      <h4 className={`font-semibold truncate transition-colors duration-300 ${
-                        isActive ? 'text-white' : 'text-white/50'
-                      }`}>
-                        {step.title}
-                      </h4>
+                      <div>
+                        <div 
+                          className={`font-mono text-xs transition-colors ${
+                            isActive ? "" : "text-white/40"
+                          }`}
+                          style={{ color: isActive ? step.color : undefined }}
+                        >
+                          Step {step.number}
+                        </div>
+                        <div className={`font-medium transition-colors ${
+                          isActive ? "text-white" : "text-white/60"
+                        }`}>
+                          {step.title}
+                        </div>
+                      </div>
                     </div>
-
-                    {/* Active Indicator */}
-                    <div 
-                      className={`w-1 h-8 rounded-full transition-all duration-300 ${isActive ? '' : 'opacity-0'}`}
-                      style={{ backgroundColor: isActive ? step.color : 'transparent' }}
-                    />
                   </button>
                 );
               })}
-            </div>
 
-            {/* Navigation Arrows */}
-            <div className="flex items-center gap-4 mt-6">
-              <button
-                onClick={goToPrev}
-                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all duration-300"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <div className="flex-1 h-1 bg-white/10 rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full rounded-full"
-                  style={{ backgroundColor: steps[activeStep].color }}
-                  animate={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
-                  transition={{ duration: 0.3 }}
-                />
+              {/* Reset Button */}
+              {removedCards.length > 0 && (
+                <motion.button
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  onClick={resetStack}
+                  className="w-full mt-6 p-4 rounded-xl bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                  Reset Stack
+                </motion.button>
+              )}
+
+              {/* Progress */}
+              <div className="mt-8 pt-6 border-t border-white/10">
+                <div className="flex justify-between text-sm text-white/40 mb-2">
+                  <span>Progress</span>
+                  <span>{currentIndex + 1} / {steps.length}</span>
+                </div>
+                <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                  <motion.div 
+                    className="h-full rounded-full"
+                    style={{ background: currentStep?.color }}
+                    animate={{ width: `${((currentIndex + 1) / steps.length) * 100}%` }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </div>
               </div>
-              <button
-                onClick={goToNext}
-                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all duration-300"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
             </div>
           </div>
 
-          {/* Right - Active Step Detail */}
-          <div className={`lg:col-span-8 transition-all duration-700 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeStep}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-                className="relative rounded-2xl overflow-hidden"
-              >
-                {/* Card Background */}
-                <div className="absolute inset-0">
-                  <img
-                    src={steps[activeStep].image}
-                    alt={steps[activeStep].title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div 
-                    className="absolute inset-0"
-                    style={{
-                      background: `linear-gradient(135deg, ${steps[activeStep].color}40 0%, rgba(0,0,0,0.9) 50%, rgba(0,0,0,0.95) 100%)`
-                    }}
-                  />
-                </div>
+          {/* Right: Card Stack */}
+          <div className="relative h-[500px] md:h-[550px] flex items-center justify-center">
+            {/* Stack Container */}
+            <div className="relative w-full max-w-[450px] h-[450px] md:h-[500px]">
+              <AnimatePresence mode="popLayout">
+                {steps.map((step, index) => {
+                  if (removedCards.includes(index)) return null;
+                  
+                  const stackPosition = index - currentIndex;
+                  const StepIcon = step.icon;
+                  const isTop = index === currentIndex;
 
-                {/* Card Content */}
-                <div className="relative z-10 p-8 md:p-10">
-                  {/* Header */}
-                  <div className="flex items-start justify-between mb-8">
-                    <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <span 
-                          className="text-5xl md:text-7xl font-bold opacity-30"
-                          style={{ color: steps[activeStep].color }}
-                        >
-                          {steps[activeStep].number}
-                        </span>
+                  if (stackPosition > 3) return null;
+
+                  return (
+                    <motion.div
+                      key={step.number}
+                      className={`absolute inset-0 ${isTop ? "cursor-grab active:cursor-grabbing" : ""}`}
+                      initial={{ 
+                        scale: 1 - stackPosition * 0.05,
+                        y: stackPosition * 12,
+                        rotate: stackPosition * 1.5,
+                        opacity: 1 - stackPosition * 0.15
+                      }}
+                      animate={{ 
+                        scale: 1 - stackPosition * 0.05,
+                        y: stackPosition * 12,
+                        rotate: stackPosition * 1.5,
+                        opacity: 1 - stackPosition * 0.15,
+                        zIndex: steps.length - index
+                      }}
+                      exit={{ 
+                        x: exitDirection === "left" ? -400 : 400,
+                        rotate: exitDirection === "left" ? -20 : 20,
+                        opacity: 0,
+                        transition: { duration: 0.3 }
+                      }}
+                      drag={isTop ? "x" : false}
+                      dragConstraints={{ left: 0, right: 0 }}
+                      dragElastic={0.9}
+                      onDragEnd={isTop ? handleDragEnd : undefined}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 30
+                      }}
+                      onClick={() => isTop && removeCard()}
+                    >
+                      <div 
+                        className="w-full h-full rounded-3xl overflow-hidden relative"
+                        style={{
+                          boxShadow: isTop 
+                            ? `0 0 60px ${step.color}30, 0 25px 50px -12px rgba(0,0,0,0.8)` 
+                            : "0 25px 50px -12px rgba(0,0,0,0.5)",
+                        }}
+                      >
+                        {/* Background Image */}
                         <div 
-                          className="w-16 h-16 rounded-2xl flex items-center justify-center"
-                          style={{ backgroundColor: `${steps[activeStep].color}30` }}
-                        >
-                          {(() => {
-                            const IconComponent = steps[activeStep].icon;
-                            return <IconComponent className="w-8 h-8" style={{ color: steps[activeStep].color }} />;
-                          })()}
+                          className="absolute inset-0 bg-cover bg-center"
+                          style={{ backgroundImage: `url(${step.image})` }}
+                        />
+                        
+                        {/* Gradient Overlay */}
+                        <div 
+                          className="absolute inset-0"
+                          style={{
+                            background: `linear-gradient(135deg, ${step.color}40 0%, ${step.color}80 100%)`,
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30" />
+
+                        {/* Content */}
+                        <div className="absolute inset-0 p-6 md:p-8 flex flex-col">
+                          {/* Top Row */}
+                          <div className="flex items-start justify-between mb-auto">
+                            <div 
+                              className="text-6xl md:text-7xl font-bold font-mono opacity-30"
+                              style={{ color: step.color }}
+                            >
+                              {step.number}
+                            </div>
+                            <div 
+                              className="w-14 h-14 rounded-2xl flex items-center justify-center"
+                              style={{ 
+                                background: `${step.color}30`,
+                                border: `1px solid ${step.color}50`
+                              }}
+                            >
+                              <StepIcon className="w-7 h-7" style={{ color: step.color }} />
+                            </div>
+                          </div>
+
+                          {/* Bottom Content */}
+                          <div>
+                            <div 
+                              className="text-sm font-medium mb-2 uppercase tracking-wider"
+                              style={{ color: step.color }}
+                            >
+                              {step.subtitle}
+                            </div>
+                            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                              {step.title}
+                            </h3>
+                            <p className="text-white/70 text-sm md:text-base mb-6 line-clamp-3">
+                              {step.description}
+                            </p>
+
+                            {/* Details */}
+                            <div className="space-y-2">
+                              {step.details.slice(0, 3).map((detail, i) => (
+                                <div 
+                                  key={i}
+                                  className="flex items-center gap-3 text-white/60 text-sm"
+                                >
+                                  <div 
+                                    className="w-1.5 h-1.5 rounded-full"
+                                    style={{ background: step.color }}
+                                  />
+                                  {detail}
+                                </div>
+                              ))}
+                            </div>
+
+                            {/* Swipe Hint */}
+                            {isTop && (
+                              <motion.div 
+                                className="mt-6 flex items-center justify-center gap-2 text-white/40 text-sm"
+                                animate={{ y: [0, 5, 0] }}
+                                transition={{ repeat: Infinity, duration: 1.5 }}
+                              >
+                                <span>Swipe or tap to continue</span>
+                                <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
+                              </motion.div>
+                            )}
+                          </div>
                         </div>
                       </div>
-                      <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">
-                        {steps[activeStep].title}
-                      </h3>
-                      <p className="text-white/60 text-lg">
-                        {steps[activeStep].description}
-                      </p>
-                    </div>
-                  </div>
+                    </motion.div>
+                  );
+                })}
+              </AnimatePresence>
 
-                  {/* Details List */}
-                  <div className="space-y-3 mb-6">
-                    {steps[activeStep].details.map((detail, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.05 }}
-                        className="flex items-start gap-4 group"
-                      >
-                        <div 
-                          className="w-2 h-2 rounded-full mt-2 shrink-0"
-                          style={{ backgroundColor: steps[activeStep].color }}
-                        />
-                        <span className="text-white/80 group-hover:text-white transition-colors">
-                          {detail}
-                        </span>
-                      </motion.div>
-                    ))}
-                  </div>
-
-                  {/* Note if exists */}
-                  {steps[activeStep].note && (
-                    <div 
-                      className="p-4 rounded-xl border-l-4 mt-6"
-                      style={{ 
-                        backgroundColor: `${steps[activeStep].color}10`,
-                        borderColor: steps[activeStep].color 
-                      }}
+              {/* All cards removed state */}
+              {currentIndex >= steps.length && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <div className="text-center p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                    <div className="text-6xl mb-4">🎉</div>
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      Process Complete!
+                    </h3>
+                    <p className="text-white/60 mb-6">
+                      You've explored all our process steps
+                    </p>
+                    <button
+                      onClick={resetStack}
+                      className="px-6 py-3 rounded-xl bg-primary text-white font-medium hover:bg-primary/80 transition-all flex items-center gap-2 mx-auto"
                     >
-                      <p className="text-white/70 text-sm italic">
-                        💡 {steps[activeStep].note}
-                      </p>
-                    </div>
-                  )}
-                </div>
-
-                {/* Border Glow */}
-                <div 
-                  className="absolute inset-0 rounded-2xl border-2 pointer-events-none"
-                  style={{ borderColor: `${steps[activeStep].color}30` }}
-                />
-              </motion.div>
-            </AnimatePresence>
+                      <RotateCcw className="w-4 h-4" />
+                      Review Again
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </div>
           </div>
         </div>
 
-        {/* Step Dots - Mobile */}
+        {/* Mobile Progress Dots */}
         <div className="flex justify-center gap-2 mt-8 lg:hidden">
           {steps.map((step, index) => (
-            <button
+            <div
               key={index}
-              onClick={() => setActiveStep(index)}
-              className="w-2 h-2 rounded-full transition-all duration-300"
-              style={{ 
-                backgroundColor: index === activeStep ? step.color : 'rgba(255,255,255,0.3)',
-                width: index === activeStep ? '24px' : '8px'
+              className={`w-2 h-2 rounded-full transition-all ${
+                removedCards.includes(index) 
+                  ? "bg-white/20" 
+                  : index === currentIndex 
+                    ? "w-6" 
+                    : "bg-white/40"
+              }`}
+              style={{
+                background: index === currentIndex ? step.color : undefined,
               }}
             />
           ))}
