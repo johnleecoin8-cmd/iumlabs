@@ -58,17 +58,17 @@ const ServiceCard = ({ number, title, description, link, index }: ServiceCardPro
   >
     <Link 
       to={link}
-      className="group block h-full rounded-2xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.04] p-6 transition-all duration-300 hover:shadow-xl hover:shadow-black/20 hover:-translate-y-1"
+      className="group block h-full rounded-2xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.08] hover:border-emerald-400/30 hover:bg-white/[0.04] p-6 transition-all duration-300 hover:shadow-xl hover:shadow-emerald-500/10 hover:-translate-y-1"
     >
       {/* Number badge */}
-      <span className="inline-block text-xs text-white/30 font-mono mb-3">[{number}]</span>
-      <h4 className="text-xl font-bold text-white mb-2">
+      <span className="inline-block text-xs text-emerald-400/70 font-mono mb-3">[{number}]</span>
+      <h4 className="text-xl font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">
         {title}
       </h4>
       <p className="text-white/50 text-sm leading-relaxed mb-4">
         {description}
       </p>
-      <div className="flex items-center gap-2 text-white/40 group-hover:text-primary transition-colors text-sm">
+      <div className="flex items-center gap-2 text-white/40 group-hover:text-emerald-400 transition-colors text-sm">
         Learn more
         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
       </div>
@@ -100,11 +100,11 @@ const ServicesSection = () => {
           <div className="relative">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
               <span className="text-white/50">Our</span>{" "}
-              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
                 Services
               </span>
             </h2>
-            <div className="w-20 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mt-4" />
+            <div className="w-20 h-1 bg-gradient-to-r from-emerald-400 to-teal-400 mt-4" />
           </div>
         </motion.div>
 

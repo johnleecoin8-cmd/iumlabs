@@ -28,12 +28,12 @@ const processSteps = [
 const themeConfig = {
   backgroundImage: seoulDDP,
   auroraColors: {
-    primary: "from-orange-600/30",
-    secondary: "to-amber-500/25",
-    tertiary: "from-yellow-500/20",
+    primary: "from-emerald-600/30",
+    secondary: "to-teal-500/25",
+    tertiary: "from-cyan-500/20",
   },
-  accentColor: "#f59e0b",
-  accentColorHover: "#d97706",
+  accentColor: "#10b981",
+  accentColorHover: "#059669",
   floatingTags: [
     { label: "KOL Network", top: "11%", left: "8%" },
     { label: "1000+ KOLs", top: "23%", right: "9%" },
