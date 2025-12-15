@@ -61,18 +61,18 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     >
       <Link
         to={service.link}
-        className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-gray-50 ${
-          !isRightColumn ? "border-r border-gray-200" : ""
-        } ${!isLastRow ? "border-b border-gray-200" : ""}`}
+        className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-white/5 ${
+          !isRightColumn ? "border-r border-white/10" : ""
+        } ${!isLastRow ? "border-b border-white/10" : ""}`}
       >
-        <Icon className="w-10 h-10 mb-6 text-gray-400 group-hover:text-gray-900 transition-colors" strokeWidth={1.5} />
-        <h3 className="text-xl font-semibold text-gray-900 mb-3">
+        <Icon className="w-10 h-10 mb-6 text-white/40 group-hover:text-white transition-colors" strokeWidth={1.5} />
+        <h3 className="text-xl font-semibold text-white mb-3">
           {service.title}
         </h3>
-        <p className="text-gray-500 text-sm leading-relaxed mb-6">
+        <p className="text-white/50 text-sm leading-relaxed mb-6">
           {service.description}
         </p>
-        <div className="flex items-center gap-2 text-gray-400 group-hover:text-gray-900 transition-colors text-sm">
+        <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm">
           Learn more
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>
@@ -108,10 +108,10 @@ const GoldShape = () => (
 
 const ServicesSection = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-[#0A0A0A]">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Services Grid */}
-        <div className="w-full lg:w-2/3 lg:border-r border-gray-200">
+        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {services.map((service, index) => (
               <ServiceCard key={service.number} service={service} index={index} />
@@ -127,15 +127,15 @@ const ServicesSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-white mb-4">
             Why CryptoBridge
           </h2>
-          <p className="text-gray-500 leading-relaxed mb-8">
+          <p className="text-white/50 leading-relaxed mb-8">
             We're the Korean Web3 marketing agency that builds the bridge between your project and the Korean market. Our team combines local expertise with global Web3 experience.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 text-sm font-medium hover:bg-gray-800 transition-colors w-fit mb-12"
+            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors w-fit mb-12"
           >
             CONNECT WITH US
             <ArrowRight className="w-4 h-4" />
@@ -143,15 +143,15 @@ const ServicesSection = () => {
 
           <GoldShape />
 
-          <div className="mt-12 pt-8 border-t border-gray-200">
+          <div className="mt-12 pt-8 border-t border-white/10">
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <p className="text-3xl font-bold text-gray-900">18+</p>
-                <p className="text-gray-500 text-sm">Projects Launched</p>
+                <p className="text-3xl font-bold text-white">18+</p>
+                <p className="text-white/50 text-sm">Projects Launched</p>
               </div>
               <div>
-                <p className="text-3xl font-bold text-gray-900">120+</p>
-                <p className="text-gray-500 text-sm">KOL Network</p>
+                <p className="text-3xl font-bold text-white">120+</p>
+                <p className="text-white/50 text-sm">KOL Network</p>
               </div>
             </div>
           </div>
