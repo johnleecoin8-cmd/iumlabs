@@ -135,24 +135,32 @@ const CasesSection = () => {
   return (
     <div className="bg-[#0A0A0B] px-4 py-20 md:py-28">
       <div className="container mx-auto max-w-7xl">
-        {/* Header - VaynerMedia Style */}
+        {/* Option B Header - Background number + gradient title */}
         <motion.div 
-          className="mb-16"
+          className="relative mb-16 md:mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4">
-            Real Results,{" "}
-            <span className="text-white/30">Not</span>{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400">
-              Just Promises
-            </span>
-          </h2>
-          <p className="text-white/50 max-w-2xl text-lg">
-            Every project we take on is a commitment to measurable outcomes. Here's how we've helped global Web3 projects conquer the Korean market.
-          </p>
+          {/* Large background number */}
+          <span className="absolute -top-8 md:-top-12 left-0 text-[120px] md:text-[180px] lg:text-[220px] font-black text-white/[0.03] leading-none pointer-events-none select-none">
+            03
+          </span>
+          
+          {/* Title */}
+          <div className="relative">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
+              <span className="text-white/50">Our</span>{" "}
+              <span className="bg-gradient-to-r from-green-400 via-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                Cases
+              </span>
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-green-400 to-emerald-400 mt-4" />
+            <p className="text-white/50 text-lg mt-6 max-w-2xl">
+              Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
+            </p>
+          </div>
         </motion.div>
 
         {/* Cases Grid - 3x2 */}

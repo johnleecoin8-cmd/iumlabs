@@ -57,26 +57,32 @@ const ProcessSection = () => {
   return (
     <section className="bg-[#0A0A0B] py-20 md:py-32 overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 lg:px-16">
-        {/* Header - VaynerMedia style impact headline */}
+        {/* Option B Header - Background number + gradient title */}
         <motion.div 
-          className="mb-16 md:mb-24"
+          className="relative mb-16 md:mb-24"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-left">
-            <span className="text-white/30">From Zero to</span>
-            <br />
-            <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-pink-500 bg-clip-text text-transparent">
-              Korean Hype
-            </span>
-            <br />
-            <span className="text-white">in 30 Days</span>
-          </h2>
-          <p className="text-white/50 text-lg md:text-xl mt-6 max-w-xl">
-            Our battle-tested process delivers measurable results, not just promises.
-          </p>
+          {/* Large background number */}
+          <span className="absolute -top-8 md:-top-12 left-0 text-[120px] md:text-[180px] lg:text-[220px] font-black text-white/[0.03] leading-none pointer-events-none select-none">
+            02
+          </span>
+          
+          {/* Title */}
+          <div className="relative">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
+              <span className="text-white/50">Our</span>{" "}
+              <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-pink-500 bg-clip-text text-transparent">
+                Process
+              </span>
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-amber-400 to-orange-400 mt-4" />
+            <p className="text-white/50 text-lg md:text-xl mt-6 max-w-xl">
+              From Zero to Korean Hype in 30 Days
+            </p>
+          </div>
         </motion.div>
 
         {/* Timeline Grid */}

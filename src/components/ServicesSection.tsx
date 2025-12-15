@@ -2,51 +2,42 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const strategicServices = [
+const services = [
   {
     number: "01",
-    title: "GTM Strategy",
-    description: "Market entry roadmap & timing for Korean launch",
+    title: "Go-To-Market Strategy",
+    description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus.",
     link: "/services/gtm-strategy"
   },
   {
     number: "02",
-    title: "VASP Compliance",
-    description: "Navigate Korean regulatory requirements",
-    link: "/services/social-media"
-  },
-  {
-    number: "03",
-    title: "Korean Relevance Audit",
-    description: "Cultural fit & market readiness assessment",
-    link: "/services/gtm-strategy"
-  }
-];
-
-const growthServices = [
-  {
-    number: "01",
-    title: "KOL & Influencer",
-    description: "120+ verified Korean KOLs for authentic promotion",
-    link: "/services/influencer"
-  },
-  {
-    number: "02",
-    title: "Community Growth",
-    description: "Telegram, KakaoTalk, Discord management",
+    title: "Community Management",
+    description: "Complete Discord community infrastructure to build sticky, scalable and self-sustaining growth.",
     link: "/services/community"
   },
   {
     number: "03",
-    title: "PR & Media",
-    description: "Coverage in top Korean crypto publications",
-    link: "/services/pr"
+    title: "Social Media Marketing",
+    description: "Content strategy and execution on X to grow visibility and engage with your ecosystem in real time.",
+    link: "/services/social-media"
   },
   {
     number: "04",
-    title: "Events & AMAs",
-    description: "Side events at major Korean conferences",
+    title: "Influencer Strategy",
+    description: "Influencer campaigns powered by top crypto voices aligned with your message and goals.",
+    link: "/services/influencer"
+  },
+  {
+    number: "05",
+    title: "Yap Strategy",
+    description: "Targeted campaigns through a 600+ creator network designed to drive awareness and traction across Crypto X.",
     link: "/services/yap"
+  },
+  {
+    number: "06",
+    title: "PR",
+    description: "Narrative development and media placements to get your story published and seen in the right places.",
+    link: "/services/pr"
   }
 ];
 
@@ -84,29 +75,6 @@ const ServiceCard = ({ number, title, description, link, index }: ServiceCardPro
   </motion.div>
 );
 
-interface CategoryHeaderProps {
-  line1: string;
-  line2: string;
-  gradientFrom: string;
-  gradientTo: string;
-  description: string;
-}
-
-const CategoryHeader = ({ line1, line2, gradientFrom, gradientTo, description }: CategoryHeaderProps) => (
-  <div className="mb-8">
-    <h3 className="text-2xl md:text-3xl font-bold text-white tracking-tight leading-tight">
-      {line1}<br />
-      <span className={`bg-gradient-to-r ${gradientFrom} ${gradientTo} bg-clip-text text-transparent`}>
-        {line2}
-      </span>
-    </h3>
-    <div className={`w-16 h-0.5 bg-gradient-to-r ${gradientFrom} ${gradientTo} mt-4`} />
-    <p className="text-white/40 mt-4 max-w-sm text-sm leading-relaxed">
-      {description}
-    </p>
-  </div>
-);
-
 const ServicesSection = () => {
   return (
     <section className="relative bg-[#0A0A0B] py-24 md:py-32 overflow-hidden">
@@ -114,76 +82,40 @@ const ServicesSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-950/5 to-transparent pointer-events-none" />
       
       <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
-        {/* Impact Headline */}
+        {/* Option B Header - Background number + gradient title */}
         <motion.div 
-          className="mb-20 md:mb-24"
+          className="relative mb-16 md:mb-20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-white text-left leading-[1.1] tracking-tight">
-            Make Korean Market<br />
-            <span className="text-white/30">Actually</span>{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Work for You
-            </span>
-          </h2>
+          {/* Large background number */}
+          <span className="absolute -top-8 md:-top-12 left-0 text-[120px] md:text-[180px] lg:text-[220px] font-black text-white/[0.03] leading-none pointer-events-none select-none">
+            01
+          </span>
+          
+          {/* Title */}
+          <div className="relative">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight">
+              <span className="text-white/50">Our</span>{" "}
+              <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400 bg-clip-text text-transparent">
+                Services
+              </span>
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mt-4" />
+          </div>
         </motion.div>
 
-        {/* Two Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Left Column - Strategic Infrastructure */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <CategoryHeader
-              line1="STRATEGIC"
-              line2="INFRASTRUCTURE"
-              gradientFrom="from-blue-400"
-              gradientTo="to-cyan-400"
-              description="The foundation that makes Korean market entry actually possible."
+        {/* Services Grid - 3x2 */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {services.map((service, index) => (
+            <ServiceCard
+              key={service.number}
+              {...service}
+              index={index}
             />
-            
-            <div className="space-y-4">
-              {strategicServices.map((service, index) => (
-                <ServiceCard
-                  key={service.number}
-                  {...service}
-                  index={index}
-                />
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right Column - Growth Engine */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <CategoryHeader
-              line1="GROWTH"
-              line2="ENGINE"
-              gradientFrom="from-purple-400"
-              gradientTo="to-pink-400"
-              description="The acceleration that drives viral growth in Korea."
-            />
-            
-            <div className="space-y-4">
-              {growthServices.map((service, index) => (
-                <ServiceCard
-                  key={service.number}
-                  {...service}
-                  index={index}
-                />
-              ))}
-            </div>
-          </motion.div>
+          ))}
         </div>
       </div>
     </section>
