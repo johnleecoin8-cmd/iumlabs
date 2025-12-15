@@ -90,10 +90,10 @@ const InsightsSection = () => {
   };
 
   return (
-    <section className="bg-white">
+    <section className="bg-[#0A0A0A]">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Articles List */}
-        <div className="w-full lg:w-2/3 lg:border-r border-gray-200">
+        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
           {insights.map((article, index) => (
             <motion.div
               key={article.id}
@@ -104,24 +104,24 @@ const InsightsSection = () => {
             >
               <Link
                 to={`/research/${article.id}`}
-                className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-gray-50 ${
-                  index < insights.length - 1 ? "border-b border-gray-200" : ""
+                className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-white/5 ${
+                  index < insights.length - 1 ? "border-b border-white/10" : ""
                 }`}
               >
-                <div className="flex items-center gap-3 text-gray-400 text-xs mb-3">
+                <div className="flex items-center gap-3 text-white/40 text-xs mb-3">
                   <span className="uppercase tracking-wider">{article.category}</span>
                   <span>•</span>
                   <span>{article.date}</span>
                   <span>•</span>
                   <span>{article.readTime} read</span>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-600 transition-colors">
+                <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-white/80 transition-colors">
                   {article.title}
                 </h3>
-                <p className="text-gray-500 text-sm leading-relaxed mb-4">
+                <p className="text-white/50 text-sm leading-relaxed mb-4">
                   {article.excerpt}
                 </p>
-                <div className="flex items-center gap-2 text-gray-400 group-hover:text-gray-900 transition-colors text-sm">
+                <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm">
                   Read article
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -130,10 +130,10 @@ const InsightsSection = () => {
           ))}
 
           {/* View All Link */}
-          <div className="p-8 md:p-10 border-t border-gray-200">
+          <div className="p-8 md:p-10 border-t border-white/10">
             <Link
               to="/research"
-              className="inline-flex items-center gap-2 text-gray-900 font-medium hover:text-gray-600 transition-colors"
+              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
             >
               View all research
               <ArrowRight className="w-4 h-4" />
@@ -149,10 +149,10 @@ const InsightsSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-white mb-4">
             Latest Research
           </h2>
-          <p className="text-gray-500 leading-relaxed mb-8">
+          <p className="text-white/50 leading-relaxed mb-8">
             Stay ahead with our insights on Korean Web3 market trends, marketing strategies, and ecosystem analysis.
           </p>
 
@@ -162,13 +162,13 @@ const InsightsSection = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="w-full px-4 py-3 border border-gray-200 text-gray-900 placeholder:text-gray-400 mb-3 focus:outline-none focus:border-gray-900 transition-colors"
+              className="w-full bg-transparent px-4 py-3 border border-white/20 text-white placeholder:text-white/40 mb-3 focus:outline-none focus:border-white transition-colors"
               required
             />
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white px-6 py-3 text-sm font-medium hover:bg-gray-800 transition-colors disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors disabled:opacity-50"
             >
               {isSubmitting ? "Subscribing..." : "SUBSCRIBE"}
               <ArrowRight className="w-4 h-4" />
@@ -177,8 +177,8 @@ const InsightsSection = () => {
 
           <BlueShape />
 
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <p className="text-gray-400 text-sm">
+          <div className="mt-12 pt-8 border-t border-white/10">
+            <p className="text-white/40 text-sm">
               Join 500+ Web3 founders and marketers getting our weekly insights.
             </p>
           </div>

@@ -31,10 +31,10 @@ const campaignImages = [
 
 const FilmstripGallerySection = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-[#0A0A0A]">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Gallery Grid */}
-        <div className="w-full lg:w-2/3 border-r border-gray-200">
+        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
           <div className="grid grid-cols-2 md:grid-cols-3">
             {campaignImages.slice(0, 9).map((image, index) => (
               <motion.div
@@ -43,7 +43,7 @@ const FilmstripGallerySection = () => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                className={`group relative aspect-square overflow-hidden border-r border-b border-gray-200 ${
+                className={`group relative aspect-square overflow-hidden border-r border-b border-white/10 ${
                   index % 3 === 2 ? "border-r-0" : ""
                 }`}
               >
@@ -52,7 +52,7 @@ const FilmstripGallerySection = () => {
                   alt={image.alt}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300" />
                 <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <p className="text-white font-semibold text-lg">{image.title}</p>
                   <p className="text-white/70 text-sm">{image.subtitle}</p>
@@ -70,31 +70,31 @@ const FilmstripGallerySection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-white mb-4">
             Campaign Gallery
           </h2>
-          <p className="text-gray-500 leading-relaxed mb-8">
+          <p className="text-white/50 leading-relaxed mb-8">
             Explore our successful campaigns and events across Korea's Web3 ecosystem. From launch events to media coverage, we deliver results.
           </p>
 
           <div className="space-y-4 mb-12">
-            <div className="flex items-center justify-between py-3 border-b border-gray-100">
-              <span className="text-gray-500 text-sm">Events Hosted</span>
-              <span className="text-gray-900 font-semibold">48+</span>
+            <div className="flex items-center justify-between py-3 border-b border-white/10">
+              <span className="text-white/50 text-sm">Events Hosted</span>
+              <span className="text-white font-semibold">48+</span>
             </div>
-            <div className="flex items-center justify-between py-3 border-b border-gray-100">
-              <span className="text-gray-500 text-sm">Media Placements</span>
-              <span className="text-gray-900 font-semibold">200+</span>
+            <div className="flex items-center justify-between py-3 border-b border-white/10">
+              <span className="text-white/50 text-sm">Media Placements</span>
+              <span className="text-white font-semibold">200+</span>
             </div>
             <div className="flex items-center justify-between py-3">
-              <span className="text-gray-500 text-sm">Campaigns Launched</span>
-              <span className="text-gray-900 font-semibold">60+</span>
+              <span className="text-white/50 text-sm">Campaigns Launched</span>
+              <span className="text-white font-semibold">60+</span>
             </div>
           </div>
 
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 text-gray-900 font-medium hover:text-gray-600 transition-colors"
+            className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
           >
             View all projects
             <ArrowRight className="w-4 h-4" />

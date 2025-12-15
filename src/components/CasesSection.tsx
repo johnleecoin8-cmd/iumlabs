@@ -101,9 +101,9 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
       <Link
         to={`/projects/${slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-gray-50 ${
-          !isRightColumn ? "border-r border-gray-200" : ""
-        } ${!isLastRow ? "border-b border-gray-200" : ""}`}
+        className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-white/5 ${
+          !isRightColumn ? "border-r border-white/10" : ""
+        } ${!isLastRow ? "border-b border-white/10" : ""}`}
       >
         <div className="flex items-start gap-6">
           {/* Image */}
@@ -117,22 +117,22 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 text-gray-400 text-xs mb-2">
+            <div className="flex items-center gap-3 text-white/40 text-xs mb-2">
               <span className="uppercase tracking-wider">{category}</span>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-1 group-hover:text-gray-600 transition-colors">
+            <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-white/80 transition-colors">
               {name}
             </h3>
-            <p className="text-gray-900 font-medium text-sm mb-2">
+            <p className="text-white font-medium text-sm mb-2">
               {result}
             </p>
-            <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">
+            <p className="text-white/50 text-sm leading-relaxed line-clamp-2">
               {description}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-gray-400 group-hover:text-gray-900 transition-colors text-sm mt-4">
+        <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm mt-4">
           View case study
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>
@@ -143,10 +143,10 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
 
 const CasesSection = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-[#0A0A0A]">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Cases Grid */}
-        <div className="w-full lg:w-2/3 border-r border-gray-200">
+        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {featuredCases.map((caseItem, index) => (
               <CaseCard key={caseItem.slug} {...caseItem} index={index} />
@@ -154,10 +154,10 @@ const CasesSection = () => {
           </div>
 
           {/* View All */}
-          <div className="p-8 md:p-10 border-t border-gray-200">
+          <div className="p-8 md:p-10 border-t border-white/10">
             <Link
               to="/projects"
-              className="inline-flex items-center gap-2 text-gray-900 font-medium hover:text-gray-600 transition-colors"
+              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
             >
               View all projects
               <ArrowRight className="w-4 h-4" />
@@ -173,31 +173,31 @@ const CasesSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <h2 className="text-3xl font-bold text-white mb-4">
             Our Cases
           </h2>
-          <p className="text-gray-500 leading-relaxed mb-8">
+          <p className="text-white/50 leading-relaxed mb-8">
             Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
           </p>
 
           <div className="space-y-6 mb-12">
-            <div className="flex items-center gap-4 pb-4 border-b border-gray-100">
-              <span className="text-3xl font-bold text-gray-900">340%</span>
-              <span className="text-gray-500 text-sm">Average volume increase</span>
+            <div className="flex items-center gap-4 pb-4 border-b border-white/10">
+              <span className="text-3xl font-bold text-white">340%</span>
+              <span className="text-white/50 text-sm">Average volume increase</span>
             </div>
-            <div className="flex items-center gap-4 pb-4 border-b border-gray-100">
-              <span className="text-3xl font-bold text-gray-900">50K+</span>
-              <span className="text-gray-500 text-sm">New users acquired</span>
+            <div className="flex items-center gap-4 pb-4 border-b border-white/10">
+              <span className="text-3xl font-bold text-white">50K+</span>
+              <span className="text-white/50 text-sm">New users acquired</span>
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-3xl font-bold text-gray-900">18+</span>
-              <span className="text-gray-500 text-sm">Projects launched</span>
+              <span className="text-3xl font-bold text-white">18+</span>
+              <span className="text-white/50 text-sm">Projects launched</span>
             </div>
           </div>
 
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 text-sm font-medium hover:bg-gray-800 transition-colors w-fit"
+            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors w-fit"
           >
             START YOUR PROJECT
             <ArrowRight className="w-4 h-4" />
