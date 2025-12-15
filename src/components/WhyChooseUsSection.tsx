@@ -32,12 +32,7 @@ const WhyChooseUsSection = () => {
     <section className="relative bg-[#0A0A0B] py-24 md:py-32 overflow-hidden min-h-screen flex items-center">
       {/* 3D Bridge - Full Background */}
       <div className="absolute inset-0 w-full h-full">
-        <Bridge3D 
-          type="hero" 
-          className="w-full h-full" 
-          color="#3B82F6" 
-          secondaryColor="#60A5FA" 
-        />
+        <Bridge3D className="w-full h-full" />
       </div>
 
       <div className="container mx-auto px-4 md:px-6 max-w-7xl relative z-10">
