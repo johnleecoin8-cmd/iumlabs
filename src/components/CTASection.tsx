@@ -73,17 +73,7 @@ const CTASection = () => {
   };
 
   return (
-    <section className="relative bg-gradient-to-b from-[#0A0A0B] via-[#0F1520] to-[#0A0A0B] py-20 md:py-28 overflow-hidden">
-      {/* Gradient Blobs */}
-      <div className="absolute top-1/4 -left-40 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-primary/12 to-purple-500/8 blur-[120px] pointer-events-none animate-blob" />
-      <div className="absolute bottom-1/4 -right-40 w-[450px] h-[450px] rounded-full bg-gradient-to-r from-cyan-500/10 to-primary/5 blur-[100px] pointer-events-none animate-blob-delay-2" />
-      
-      {/* Dot Pattern */}
-      <div className="absolute inset-0 dot-pattern opacity-30 pointer-events-none" />
-      
-      {/* Glow Line Top */}
-      <div className="absolute top-0 left-0 right-0 h-px glow-line" />
-
+    <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
       {/* Background Number */}
       <div className="absolute top-8 left-8 md:left-16 text-[120px] md:text-[200px] font-bold text-white/[0.03] leading-none select-none pointer-events-none">
         09

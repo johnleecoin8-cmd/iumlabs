@@ -37,18 +37,8 @@ const phases = [
 
 const ProcessSection = () => {
   return (
-    <section className="relative bg-gradient-to-b from-[#0A0A0B] via-[#0F1A2A] to-[#0A0A0B] py-20 md:py-28 overflow-hidden">
-      {/* Gradient Blobs */}
-      <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-primary/10 to-cyan-400/10 blur-[100px] pointer-events-none animate-blob" />
-      <div className="absolute bottom-1/3 right-1/4 w-[300px] h-[300px] rounded-full bg-gradient-to-r from-cyan-400/8 to-primary/5 blur-[80px] pointer-events-none animate-blob-delay-4" />
-      
-      {/* Dot Pattern */}
-      <div className="absolute inset-0 dot-pattern opacity-30 pointer-events-none" />
-      
-      {/* Glow Line Top */}
-      <div className="absolute top-0 left-0 right-0 h-px glow-line" />
-      
-      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
+    <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16">
         {/* Header */}
         <SectionHeader 
           title="OUR PROCESS" 
@@ -156,9 +146,6 @@ const ProcessSection = () => {
           </a>
         </motion.div>
       </div>
-      
-      {/* Glow Line Bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-px glow-line-cyan" />
     </section>
   );
 };

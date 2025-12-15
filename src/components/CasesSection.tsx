@@ -257,18 +257,8 @@ const CaseCard = ({ number, name, logo, bgImage, slug, category, result, descrip
 
 const CasesSection = () => {
   return (
-    <div className="relative bg-gradient-to-b from-[#0A0A0B] via-[#0D1420] to-[#0A0A0B] px-4 py-16 md:py-24 overflow-hidden">
-      {/* Gradient Blobs */}
-      <div className="absolute top-20 -left-40 w-[500px] h-[500px] rounded-full bg-gradient-to-r from-primary/15 to-cyan-500/10 blur-[120px] pointer-events-none animate-blob" />
-      <div className="absolute bottom-40 -right-40 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-cyan-500/10 to-primary/5 blur-[100px] pointer-events-none animate-blob-delay-2" />
-      
-      {/* Dot Pattern */}
-      <div className="absolute inset-0 dot-pattern opacity-50 pointer-events-none" />
-      
-      {/* Glow Line Top */}
-      <div className="absolute top-0 left-0 right-0 h-px glow-line" />
-      
-      <div className="container mx-auto max-w-7xl relative z-10">
+    <div className="bg-[#0A0A0B] px-4 py-16 md:py-24">
+      <div className="container mx-auto max-w-7xl">
         {/* 4pillars-style Header */}
         <SectionHeader 
           title="CASES" 
@@ -310,9 +300,6 @@ const CasesSection = () => {
           </div>
         </motion.div>
       </div>
-      
-      {/* Glow Line Bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-px glow-line-cyan" />
     </div>
   );
 };

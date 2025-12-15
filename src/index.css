@@ -103,48 +103,6 @@
   }
 }
 
-/* Dot Pattern Overlay */
-.dot-pattern {
-  background-image: radial-gradient(circle, hsl(0 0% 100% / 0.03) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-/* Gradient Blob Animation */
-@keyframes blob-float {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -20px) scale(1.05);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.95);
-  }
-}
-
-.animate-blob {
-  animation: blob-float 15s ease-in-out infinite;
-}
-
-.animate-blob-delay-2 {
-  animation: blob-float 18s ease-in-out infinite;
-  animation-delay: 2s;
-}
-
-.animate-blob-delay-4 {
-  animation: blob-float 20s ease-in-out infinite;
-  animation-delay: 4s;
-}
-
-/* Glow Line */
-.glow-line {
-  background: linear-gradient(90deg, transparent, hsl(217 91% 60% / 0.5), transparent);
-}
-
-.glow-line-cyan {
-  background: linear-gradient(90deg, transparent, hsl(187 85% 53% / 0.4), transparent);
-}
-
 @layer components {
   /* ============================================
      Screen-based Section System (Lunar Strategy Style)

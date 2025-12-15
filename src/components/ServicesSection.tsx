@@ -44,18 +44,8 @@ const services = [
 
 const ServicesSection = () => {
   return (
-    <section className="relative bg-gradient-to-br from-[#0A0A0B] via-[#0A1628]/70 to-[#0A0A0B] py-20 md:py-28 overflow-hidden">
-      {/* Gradient Blobs */}
-      <div className="absolute top-1/4 -right-32 w-[450px] h-[450px] rounded-full bg-gradient-to-r from-purple-500/10 to-primary/10 blur-[100px] pointer-events-none animate-blob-delay-2" />
-      <div className="absolute bottom-1/4 -left-32 w-[350px] h-[350px] rounded-full bg-gradient-to-r from-cyan-500/10 to-purple-500/5 blur-[80px] pointer-events-none animate-blob-delay-4" />
-      
-      {/* Dot Pattern */}
-      <div className="absolute inset-0 dot-pattern opacity-40 pointer-events-none" />
-      
-      {/* Glow Line Top */}
-      <div className="absolute top-0 left-0 right-0 h-px glow-line-cyan" />
-      
-      <div className="container mx-auto px-4 md:px-8 lg:px-16 relative z-10">
+    <section className="relative bg-[#0A0A0B] py-20 md:py-28 overflow-hidden">
+      <div className="container mx-auto px-4 md:px-8 lg:px-16">
         {/* 4pillars-style Header */}
         <SectionHeader 
           title="SERVICES" 
@@ -121,9 +111,6 @@ const ServicesSection = () => {
           ))}
         </div>
       </div>
-      
-      {/* Glow Line Bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-px glow-line" />
     </section>
   );
 };
