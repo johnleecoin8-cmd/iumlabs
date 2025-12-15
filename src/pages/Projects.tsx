@@ -21,18 +21,16 @@ import mantraLogo from "@/assets/logos/mantra.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import zkpassLogo from "@/assets/logos/zkpass.png";
 
-// Import background images
-import bnbBg from "@/assets/projects/bnb-bg.jpg";
-import kucoinBg from "@/assets/projects/kucoin-bg.jpg";
-import peaqBg from "@/assets/projects/peaq-bg.jpg";
-import storyBg from "@/assets/projects/story-bg.jpg";
-import megaethBg from "@/assets/projects/megaeth-bg.jpg";
-import triaBg from "@/assets/projects/tria-bg.jpg";
-import bybitBg from "@/assets/projects/bybit-bg.jpg";
-import saharaAiBg from "@/assets/projects/sahara-ai-bg.jpg";
-import mantraBg from "@/assets/projects/mantra-bg.jpg";
-
-// Import campaign images for projects without dedicated bg
+// Import campaign images for backgrounds (replacing AI-generated backgrounds with real campaign photos)
+import bnbBg from "@/assets/campaigns/bnb-event.jpg";
+import kucoinBg from "@/assets/campaigns/kucoin-campaign.jpg";
+import peaqBg from "@/assets/campaigns/peaq-summit.jpg";
+import storyBg from "@/assets/campaigns/story-workshop.jpg";
+import megaethBg from "@/assets/campaigns/megaeth-launch.jpg";
+import triaBg from "@/assets/campaigns/tria-launch.jpg";
+import bybitBg from "@/assets/projects/bybit-bg.jpg"; // Keep existing - no campaign image available
+import saharaAiBg from "@/assets/campaigns/sahara-ai.jpg";
+import mantraBg from "@/assets/campaigns/mantra.jpg";
 import fogoBg from "@/assets/campaigns/fogo-fest.avif";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 
