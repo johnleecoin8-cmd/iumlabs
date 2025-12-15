@@ -167,19 +167,33 @@ const ProcessSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-16 relative"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-white/40 font-mono text-sm tracking-widest mb-4 block">
-            [ 02 ] ── How We Work
+          {/* Background Number */}
+          <span className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[10rem] md:text-[14rem] font-black text-white/[0.03] pointer-events-none select-none">
+            02
           </span>
-          <h2 className="text-5xl md:text-7xl font-bold text-white mb-6">
-            Our Process
+          
+          <h2 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tight relative z-10">
+            <span className="text-white/50">Our</span>{" "}
+            <span className="bg-gradient-to-r from-amber-400 via-orange-400 to-pink-500 bg-clip-text text-transparent">
+              Process
+            </span>
           </h2>
-          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+          
+          {/* Gradient Underline */}
+          <motion.div 
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            className="w-24 h-1 mx-auto mt-6 bg-gradient-to-r from-amber-500 via-orange-500 to-pink-500 rounded-full"
+          />
+          
+          <p className="text-white/60 text-lg max-w-2xl mx-auto mt-6 relative z-10">
             Swipe or click to explore each step
           </p>
         </motion.div>
