@@ -11,24 +11,24 @@ import { useCountUp } from "@/hooks/useCountUp";
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
-import polygonLogo from "@/assets/logos/polygon.svg";
-import ondoLogo from "@/assets/logos/ondo.svg";
 import peaqLogo from "@/assets/logos/peaq.svg";
 import storyLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria-official.png";
 import bybitLogo from "@/assets/logos/bybit.png";
+import saharaAiLogo from "@/assets/logos/sahara-ai.png";
+import mantraLogo from "@/assets/logos/mantra.png";
 
 // Import background images
 import bnbBg from "@/assets/projects/bnb-bg.jpg";
 import kucoinBg from "@/assets/projects/kucoin-bg.jpg";
-import polygonBg from "@/assets/projects/polygon-bg.jpg";
-import ondoBg from "@/assets/projects/ondo-bg.jpg";
 import peaqBg from "@/assets/projects/peaq-bg.jpg";
 import storyBg from "@/assets/projects/story-bg.jpg";
 import megaethBg from "@/assets/projects/megaeth-bg.jpg";
 import triaBg from "@/assets/projects/tria-bg.jpg";
 import bybitBg from "@/assets/projects/bybit-bg.jpg";
+import saharaAiBg from "@/assets/projects/sahara-ai-bg.jpg";
+import mantraBg from "@/assets/projects/mantra-bg.jpg";
 
 const cases = [
   {
@@ -54,26 +54,26 @@ const cases = [
     services: ["User Acquisition", "Ambassador Program", "Localization"],
   },
   {
-    name: "Polygon",
-    logo: polygonLogo,
-    bgImage: polygonBg,
-    slug: "polygon",
-    result: "$2M Korean TVL in 30 Days",
-    category: "Layer 2",
-    glowColor: "#8247E5",
-    description: "Community growth from 0 to 50K Korean users with targeted developer relations and DeFi marketing.",
-    services: ["Developer Relations", "DeFi Marketing", "Event Management"],
+    name: "Sahara AI",
+    logo: saharaAiLogo,
+    bgImage: saharaAiBg,
+    slug: "sahara-ai",
+    result: "Korean AI x Web3 Launch",
+    category: "AI",
+    glowColor: "#00D4FF",
+    description: "AI blockchain platform launch with Korean developer community and enterprise partnerships.",
+    services: ["Enterprise Relations", "Developer Marketing", "Content Strategy"],
   },
   {
-    name: "Ondo Finance",
-    logo: ondoLogo,
-    bgImage: ondoBg,
-    slug: "ondo",
-    result: "100K+ Korean Community",
+    name: "Mantra",
+    logo: mantraLogo,
+    bgImage: mantraBg,
+    slug: "mantra",
+    result: "Korean RWA Expansion",
     category: "RWA",
-    glowColor: "#3B82F6",
-    description: "RWA education campaign targeting both retail and institutional Korean investors.",
-    services: ["Institutional Relations", "Content Marketing", "PR Strategy"],
+    glowColor: "#9B59B6",
+    description: "Real World Assets platform expansion targeting Korean institutional investors.",
+    services: ["Institutional Relations", "Research Marketing", "PR Strategy"],
   },
   {
     name: "Peaq",
@@ -152,8 +152,8 @@ const mobileServiceTags = [
 const clientLogos = [
   { name: "BNB", logo: bnbLogo },
   { name: "KuCoin", logo: kucoinLogo },
-  { name: "Polygon", logo: polygonLogo },
-  { name: "Ondo Finance", logo: ondoLogo },
+  { name: "Sahara AI", logo: saharaAiLogo },
+  { name: "Mantra", logo: mantraLogo },
   { name: "Bybit", logo: bybitLogo },
   { name: "Peaq", logo: peaqLogo },
   { name: "Story Protocol", logo: storyLogo },

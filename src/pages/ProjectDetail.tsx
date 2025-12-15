@@ -14,6 +14,8 @@ import storyLogo from "@/assets/logos/story-protocol.png";
 import megaethLogo from "@/assets/logos/megaeth.png";
 import triaLogo from "@/assets/logos/tria.png";
 import bybitLogo from "@/assets/logos/bybit.png";
+import saharaAiLogo from "@/assets/logos/sahara-ai.png";
+import mantraLogo from "@/assets/logos/mantra.png";
 
 // Import campaign images
 import bnbEventImg from "@/assets/campaigns/bnb-event.jpg";
@@ -439,7 +441,7 @@ const projectsData: Record<string, {
   },
   "sahara-ai": {
     name: "Sahara AI",
-    logo: saharaAiImg,
+    logo: saharaAiLogo,
     bgImage: saharaAiBg,
     category: "AI",
     result: "Korean AI x Web3 Launch",
@@ -481,7 +483,7 @@ const projectsData: Record<string, {
   },
   "mantra": {
     name: "Mantra",
-    logo: mantraImg,
+    logo: mantraLogo,
     bgImage: mantraBg,
     category: "RWA",
     result: "Korean RWA Expansion",
