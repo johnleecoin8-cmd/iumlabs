@@ -50,9 +50,6 @@ const WhyChooseUsSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <span className="absolute -top-8 left-0 text-[100px] md:text-[140px] font-bold text-black/[0.03] leading-none pointer-events-none select-none">
-            05
-          </span>
           <div className="relative">
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
               <span className="text-gray-400">About</span>{" "}
@@ -101,7 +98,7 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="order-1 lg:order-2"
           >
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 aspect-[4/3] hover:shadow-3xl hover:shadow-gray-300/50 transition-all duration-500">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 h-[400px] md:h-[480px] lg:h-[520px] hover:shadow-3xl hover:shadow-gray-300/50 transition-all duration-500">
               <img
                 src={teamPhoto}
                 alt="CryptoBridge Korea Team"
