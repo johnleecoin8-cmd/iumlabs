@@ -104,22 +104,22 @@ const CTASection = () => {
           <div className="grid lg:grid-cols-2 gap-6 md:gap-8 items-start">
             {/* Left - Image & Contact Cards */}
             <div className="space-y-4 order-2 lg:order-1">
-              {/* Featured Image - Unified Card Style */}
-              <div className="group relative rounded-2xl overflow-hidden h-[200px] md:h-[280px] border border-white/10 hover:border-white/30 transition-all duration-300">
-                <img src={seoulBridgeNight} alt="Seoul Office" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+              {/* Featured Image - Glass Card Style */}
+              <div className="group relative rounded-3xl overflow-hidden h-[200px] md:h-[280px] border border-white/[0.08] hover:border-white/[0.2] transition-all duration-500 hover:shadow-2xl hover:shadow-black/30">
+                <img src={seoulBridgeNight} alt="Seoul Office" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-transparent" />
                 
                 {/* Live in Seoul Badge */}
-                <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/[0.08] border border-white/[0.1]">
+                <div className="absolute top-4 left-4 flex items-center gap-2 px-4 py-2 rounded-2xl bg-white/[0.06] backdrop-blur-md border border-white/[0.1]">
                   <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
                   <span className="text-white/90 text-xs font-medium">Live in Seoul</span>
                   <span className="text-white/50 text-xs">{seoulTime}</span>
                 </div>
 
                 {/* Office Info */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6">
                   <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center">
+                    <div className="w-11 h-11 rounded-2xl bg-primary/20 backdrop-blur-sm flex items-center justify-center border border-primary/20">
                       <MapPin className="w-5 h-5 text-primary" />
                     </div>
                     <div>
@@ -130,43 +130,43 @@ const CTASection = () => {
                 </div>
               </div>
 
-              {/* Contact Cards - Unified Style */}
-              <div className="grid grid-cols-2 gap-3">
+              {/* Contact Cards - Glass Style */}
+              <div className="grid grid-cols-2 gap-4">
                 <a
                   href={`mailto:${brand.email}`}
-                  className="group relative flex flex-col items-start gap-2 p-6 rounded-2xl border border-white/10 hover:border-white/30 hover:bg-white/[0.02] transition-all duration-300"
+                  className="group relative flex flex-col items-start gap-3 p-6 rounded-2xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300">
+                  <div className="w-11 h-11 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 border border-primary/10">
                     <Mail className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-white/40 text-xs mb-0.5">E-MAIL</p>
+                    <p className="text-white/40 text-xs mb-1">E-MAIL</p>
                     <p className="text-white/70 text-sm group-hover:text-white transition-colors break-all leading-tight">{brand.email}</p>
                   </div>
-                  <ArrowRight className="absolute top-4 right-4 w-4 h-4 text-white/20 group-hover:text-white/40 group-hover:translate-x-1 transition-all duration-300" />
+                  <ArrowRight className="absolute top-4 right-4 w-4 h-4 text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
                 </a>
 
                 <a
                   href={brand.telegramLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex flex-col items-start gap-2 p-6 rounded-2xl border border-white/10 hover:border-white/30 hover:bg-white/[0.02] transition-all duration-300"
+                  className="group relative flex flex-col items-start gap-3 p-6 rounded-2xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.08] hover:border-white/[0.2] hover:bg-white/[0.04] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-black/20"
                 >
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300">
+                  <div className="w-11 h-11 rounded-2xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300 border border-primary/10">
                     <Send className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-white/40 text-xs mb-0.5">TELEGRAM</p>
+                    <p className="text-white/40 text-xs mb-1">TELEGRAM</p>
                     <p className="text-white/70 text-sm group-hover:text-white transition-colors">@cryptobridgekorea</p>
                   </div>
-                  <ArrowRight className="absolute top-4 right-4 w-4 h-4 text-white/20 group-hover:text-white/40 group-hover:translate-x-1 transition-all duration-300" />
+                  <ArrowRight className="absolute top-4 right-4 w-4 h-4 text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
                 </a>
               </div>
             </div>
 
             {/* Right - Contact Form - Unified Card Style */}
             <div className="order-1 lg:order-2">
-              <form onSubmit={handleSubmit} className="group space-y-4 p-6 rounded-2xl border border-white/10 hover:border-white/30 transition-all duration-300">
+              <form onSubmit={handleSubmit} className="group space-y-4 p-6 rounded-3xl bg-white/[0.02] backdrop-blur-sm border border-white/[0.08] hover:border-white/[0.15] transition-all duration-300">
                 {/* Progress Indicator */}
                 <div className="absolute top-0 left-0 right-0 h-1 bg-white/[0.03] overflow-hidden rounded-t-2xl">
                   <motion.div
@@ -243,10 +243,10 @@ const CTASection = () => {
                         key={option}
                         type="button"
                         onClick={() => setFormData({ ...formData, budget: option })}
-                        className={`px-3 py-2.5 rounded-xl text-xs border transition-all duration-300 ${
+                        className={`px-3 py-2.5 rounded-2xl text-xs border transition-all duration-300 ${
                           formData.budget === option
-                            ? 'bg-primary text-white border-primary'
-                            : 'bg-transparent border-white/10 text-white/60 hover:border-white/30 hover:text-white'
+                            ? 'bg-primary text-white border-primary shadow-lg shadow-primary/25'
+                            : 'bg-white/[0.02] border-white/[0.08] text-white/60 hover:border-white/[0.2] hover:bg-white/[0.04] hover:text-white'
                         }`}
                       >
                         {option}
@@ -271,12 +271,12 @@ const CTASection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting || formProgress < 100}
-                  className={`group w-full py-4 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
+                  className={`group w-full py-4 rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
                     isSubmitted
-                      ? 'bg-green-500 text-white'
+                      ? 'bg-green-500 text-white shadow-lg shadow-green-500/25'
                       : formProgress === 100
-                      ? 'bg-primary text-white hover:bg-primary/90'
-                      : 'bg-white/[0.05] text-white/40 cursor-not-allowed'
+                      ? 'bg-primary text-white hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5'
+                      : 'bg-white/[0.03] text-white/40 cursor-not-allowed border border-white/[0.05]'
                   }`}
                 >
                   {isSubmitted ? (

@@ -170,31 +170,33 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
     <Link
       to={`/projects/${slug}`}
       onClick={() => window.scrollTo(0, 0)}
-      className="group block h-full relative overflow-hidden rounded-xl transition-all duration-300"
+      className="group block h-full relative overflow-hidden rounded-2xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-black/30"
     >
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
           src={bgImage}
           alt={name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/20 group-hover:from-black/90 group-hover:via-black/50 transition-all duration-500" />
       </div>
       
       {/* Content */}
-      <div className="relative p-6 min-h-[280px] flex flex-col justify-end">
+      <div className="relative p-6 min-h-[300px] flex flex-col justify-end">
         <div className="flex items-start justify-between mb-4">
-          <span className="text-white/60 text-xs uppercase tracking-wider bg-white/10 px-2 py-1 rounded">{category}</span>
+          <span className="text-white/70 text-xs uppercase tracking-wider bg-white/[0.08] backdrop-blur-sm px-3 py-1.5 rounded-xl border border-white/[0.1]">{category}</span>
         </div>
         
         <div className="flex items-center gap-3 mb-3">
           {logo && (
-            <img
-              src={logo}
-              alt={name}
-              className="w-10 h-10 object-contain opacity-90 group-hover:opacity-100 transition-opacity"
-            />
+            <div className="w-12 h-12 rounded-xl bg-white/[0.08] backdrop-blur-sm p-2 flex items-center justify-center border border-white/[0.1] group-hover:bg-white/[0.12] transition-all duration-300">
+              <img
+                src={logo}
+                alt={name}
+                className="w-full h-full object-contain"
+              />
+            </div>
           )}
           <h4 className="text-xl font-bold text-white">{name}</h4>
         </div>
@@ -207,9 +209,9 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
           {description}
         </p>
         
-        <div className="flex items-center gap-2 text-white/60 group-hover:text-white transition-colors text-sm">
+        <div className="flex items-center gap-2 text-white/50 group-hover:text-white transition-colors text-sm">
           View case study
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
         </div>
       </div>
     </Link>
@@ -249,7 +251,7 @@ const CasesSection = () => {
         </motion.div>
 
         {/* Cases Grid - 3x2 */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mb-16">
           {featuredCases.slice(0, 6).map((caseItem, index) => (
             <CaseCard key={caseItem.slug} {...caseItem} index={index} />
           ))}

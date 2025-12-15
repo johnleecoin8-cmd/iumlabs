@@ -101,7 +101,7 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="order-1 lg:order-2"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-gray-200 aspect-[4/3]">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-100 aspect-[4/3] hover:shadow-3xl hover:shadow-gray-300/50 transition-all duration-500">
               <img
                 src={teamPhoto}
                 alt="CryptoBridge Korea Team"
@@ -123,19 +123,19 @@ const WhyChooseUsSection = () => {
             As Featured In Media
           </p>
           <div className="relative overflow-hidden">
-            <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-[#F5F2ED] to-transparent z-10 pointer-events-none" />
             
             <div className="flex items-center animate-marquee-slow hover:[animation-play-state:paused]">
               {[...mediaLogos, ...mediaLogos, ...mediaLogos].map((media, index) => (
                 <div
                   key={index}
-                  className="flex items-center gap-3 mx-3 px-4 py-2 bg-white rounded-full border border-gray-200 hover:border-primary/30 transition-all duration-300 flex-shrink-0"
+                  className="flex items-center gap-3 mx-3 px-5 py-2.5 bg-white rounded-2xl border border-gray-100 hover:border-primary/20 hover:shadow-lg hover:shadow-gray-200/50 hover:-translate-y-0.5 transition-all duration-300 flex-shrink-0 cursor-default"
                 >
                   <img
                     src={media.logo}
                     alt={media.name}
-                    className="h-6 w-6 object-contain rounded-full flex-shrink-0"
+                    className="h-7 w-7 object-contain rounded-xl flex-shrink-0"
                   />
                   <span className="text-gray-700 text-sm font-medium whitespace-nowrap">
                     {media.name}
