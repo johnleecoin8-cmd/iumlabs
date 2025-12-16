@@ -2929,11 +2929,11 @@ const Research = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
       {/* Hero Section - Emerald/Green Theme with Video */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-white">
+      <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
       <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden rounded-xl sm:rounded-2xl">
         {/* Video Background */}
         <div className="absolute inset-0 overflow-hidden">
@@ -2954,7 +2954,7 @@ const Research = () => {
             <div className="absolute inset-0 bg-gradient-to-br from-emerald-600/25 via-transparent to-teal-500/20" />
             <div className="absolute inset-0 bg-gradient-to-bl from-green-600/15 via-transparent to-cyan-500/10" />
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-transparent to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-transparent to-[#0A0A0A]" />
         </div>
         
 
@@ -2980,16 +2980,18 @@ const Research = () => {
             {/* Right: Category Icons Grid */}
             <div className="hidden lg:grid grid-cols-3 gap-4 opacity-0 animate-fade-up" style={{ animationDelay: '0.5s', animationFillMode: 'forwards' }}>
               {researchCategories.map((category, index) => (
-                <button
+                <motion.button
                   key={category.label}
                   onClick={() => { setSelectedCategory(category.label); setCurrentPage(1); }}
                   className="group flex flex-col items-center justify-center p-6 bg-emerald-500/5 border border-emerald-400/10 rounded-xl hover:bg-emerald-500/15 hover:border-emerald-400/30 transition-all duration-300"
-                  style={{ animationDelay: `${0.5 + index * 0.1}s` }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <category.icon className="w-8 h-8 text-emerald-400/60 group-hover:text-emerald-400 transition-colors mb-3" />
                   <span className="text-white/80 text-sm font-medium group-hover:text-white transition-colors">{category.label}</span>
                   <span className="text-emerald-400/50 text-xs mt-1">{category.count} articles</span>
-                </button>
+                </motion.button>
               ))}
             </div>
           </div>
@@ -2998,13 +3000,13 @@ const Research = () => {
       </main>
 
       {/* Filters & Search */}
-      <section className="bg-background border-b border-white/10">
+      <section className="bg-[#0A0A0A] border-b border-white/10">
         <div className="container mx-auto max-w-7xl px-4 py-4">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             {/* Categories */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
               {categories.map((category) => (
-                <button
+                <motion.button
                   key={category}
                   onClick={() => { setSelectedCategory(category); setCurrentPage(1); }}
                   className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all ${
@@ -3012,9 +3014,11 @@ const Research = () => {
                       ? "bg-primary text-white" 
                       : "bg-white/5 text-white/60 hover:bg-white/10"
                   }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   {category}
-                </button>
+                </motion.button>
               ))}
             </div>
             
@@ -3035,20 +3039,32 @@ const Research = () => {
 
       {/* Featured Article */}
       {currentPage === 1 && selectedCategory === "All" && !searchQuery && (
-        <section className="bg-background py-16">
+        <section className="bg-[#0A0A0A] py-16">
           <div className="container mx-auto max-w-7xl px-4">
             <Link to={`/research/${researchPosts[0].slug}`} className="group block">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <div className="aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 hover:border-white/30 transition-all duration-300">
+              <motion.div 
+                className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
+                <motion.div 
+                  className="aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 group-hover:border-emerald-400/30 transition-all duration-300 relative"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <img 
                     src={researchPosts[0].image} 
                     alt={researchPosts[0].title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                </div>
+                  {/* Glow effect on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </motion.div>
                 <div>
                   <div className="flex items-center gap-4 mb-4">
-                    <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">
+                    <span className="px-3 py-1 bg-emerald-400/20 text-emerald-400 rounded-full text-sm">
                       {researchPosts[0].category}
                     </span>
                     <span className="text-white/40 text-sm flex items-center gap-1">
@@ -3056,7 +3072,7 @@ const Research = () => {
                       {researchPosts[0].readTime}
                     </span>
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight mb-4 group-hover:text-primary transition-colors">
+                  <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight mb-4 group-hover:text-emerald-400 transition-colors">
                     {researchPosts[0].title}
                   </h2>
                   <p className="text-white/60 text-lg mb-6">
@@ -3072,12 +3088,12 @@ const Research = () => {
                         <p className="text-white/40 text-xs">{researchPosts[0].date}</p>
                       </div>
                     </div>
-                    <span className="text-primary flex items-center gap-2 group-hover:gap-3 transition-all">
+                    <span className="text-emerald-400 flex items-center gap-2 group-hover:gap-3 transition-all">
                       Read Article <ArrowRight className="w-4 h-4" />
                     </span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </Link>
           </div>
         </section>
@@ -3186,7 +3202,13 @@ const Research = () => {
       </section>
 
       {/* Newsletter Section */}
-      <section className="bg-background py-20">
+      <motion.section 
+        className="bg-[#0A0A0A] py-20 border-t border-white/10"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+      >
         <div className="container mx-auto max-w-3xl px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
             Stay Updated
@@ -3200,18 +3222,20 @@ const Research = () => {
               placeholder="Enter your email"
               value={newsletterEmail}
               onChange={(e) => setNewsletterEmail(e.target.value)}
-              className="flex-1 bg-white/5 border-white/10 rounded-xl h-12 px-4 text-white placeholder:text-white/40"
+              className="flex-1 bg-white/5 border-white/10 rounded-xl h-12 px-4 text-white placeholder:text-white/40 focus:border-emerald-400/50 transition-colors"
             />
-            <button
+            <motion.button
               type="submit"
               disabled={isSubscribing}
-              className="px-8 h-12 bg-primary text-white rounded-xl font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
+              className="px-8 h-12 bg-emerald-500 text-white rounded-xl font-medium hover:bg-emerald-400 transition-colors disabled:opacity-50"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
               {isSubscribing ? "..." : "Subscribe"}
-            </button>
+            </motion.button>
           </form>
         </div>
-      </section>
+      </motion.section>
 
       <CTASection />
       <Footer />

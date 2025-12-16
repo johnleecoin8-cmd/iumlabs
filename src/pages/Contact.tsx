@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
@@ -238,27 +239,33 @@ const Contact = () => {
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {serviceHighlights.map((service, index) => (
-                <Link 
+                <motion.div
                   key={index}
-                  to={service.link}
-                  className={`group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-white/30 hover:bg-white/[0.02] overflow-hidden transition-all duration-300 ${
-                    servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-                }`}
-                style={{ transitionDelay: `${index * 0.1}s` }}
-              >
-                  {/* Hover gradient background */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-blue-500/10 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-4">
-                    <service.icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
-                    <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
-                  </div>
-                  <h3 className="text-lg font-medium text-white mb-2">{service.title}</h3>
-                  <p className="text-sm text-white/50 group-hover:text-white/70 transition-colors duration-300">{service.description}</p>
-                </div>
-              </Link>
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  whileHover={{ y: -8, scale: 1.02 }}
+                >
+                  <Link 
+                    to={service.link}
+                    className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 overflow-hidden transition-all duration-300 block h-full"
+                  >
+                    {/* Hover gradient background */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-blue-500/10 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    {/* Glow effect */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: 'inset 0 0 40px rgba(239, 68, 68, 0.1)' }} />
+                  
+                    <div className="relative z-10">
+                      <div className="flex items-center justify-between mb-4">
+                        <service.icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
+                        <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                      </div>
+                      <h3 className="text-lg font-medium text-white mb-2 group-hover:text-primary transition-colors">{service.title}</h3>
+                      <p className="text-sm text-white/50 group-hover:text-white/70 transition-colors duration-300">{service.description}</p>
+                    </div>
+                  </Link>
+                </motion.div>
             ))}
           </div>
         </div>
@@ -288,10 +295,14 @@ const Contact = () => {
               {/* Contact Details */}
               <div className="space-y-6">
                 {contactDetails.map((detail, index) => (
-                  <div 
+                  <motion.div 
                     key={index}
-                    className={`transition-all duration-300 ${formVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'}`}
-                    style={{ transitionDelay: `${index * 100 + 300}ms` }}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ x: 8 }}
+                    className="group"
                   >
                     <span className="text-sm text-white/40 block mb-1">{detail.label}</span>
                     {detail.link ? (
@@ -306,7 +317,7 @@ const Contact = () => {
                     ) : (
                       <p className="text-white text-lg">{detail.value}</p>
                     )}
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
@@ -371,8 +382,8 @@ const Contact = () => {
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-white/40 mb-4">Estimated Budget</label>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {budgetOptions.map((option) => (
-                      <button
+                    {budgetOptions.map((option, index) => (
+                      <motion.button
                         key={option}
                         type="button"
                         onClick={() => setFormData({ ...formData, budget: option })}
@@ -381,9 +392,11 @@ const Contact = () => {
                             ? 'bg-white/10 border-primary text-white'
                             : 'bg-transparent border-white/20 text-white/60 hover:border-white/40 hover:text-white'
                         }`}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
                       >
                         {option}
-                      </button>
+                      </motion.button>
                     ))}
                   </div>
                 </div>
