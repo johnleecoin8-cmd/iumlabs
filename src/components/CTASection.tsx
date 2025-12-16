@@ -2,8 +2,9 @@ import { useState, useMemo } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
-import { ArrowRight, Mail, MapPin, Send, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Send, CheckCircle2, Linkedin, Globe } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const budgetOptions = ["$15K - $25K", "$25K - $50K", "$50K +", "Raising funds"];
 
@@ -122,7 +123,7 @@ const CTASection = () => {
               href={brand.telegramLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-start gap-4 hover:bg-white/5 -mx-4 px-4 py-4 transition-colors"
+              className="group flex items-start gap-4 pb-6 mb-6 border-b border-white/10 hover:bg-white/5 -mx-4 px-4 py-4 transition-colors"
             >
               <Send className="w-5 h-5 text-white/40 mt-0.5" />
               <div>
@@ -131,6 +132,43 @@ const CTASection = () => {
               </div>
               <ArrowRight className="w-4 h-4 text-white/30 ml-auto group-hover:translate-x-1 transition-transform" />
             </a>
+
+            {/* LinkedIn */}
+            <a
+              href={brand.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-start gap-4 pb-6 mb-6 border-b border-white/10 hover:bg-white/5 -mx-4 px-4 py-4 transition-colors"
+            >
+              <Linkedin className="w-5 h-5 text-white/40 mt-0.5" />
+              <div>
+                <p className="text-white/40 text-xs uppercase tracking-wider mb-1">LinkedIn</p>
+                <p className="text-white text-sm group-hover:text-white/70 transition-colors">CryptoBridge Korea</p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-white/30 ml-auto group-hover:translate-x-1 transition-transform" />
+            </a>
+
+            {/* Website */}
+            <a
+              href="https://cryptobridgekorea.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-start gap-4 pb-6 mb-6 border-b border-white/10 hover:bg-white/5 -mx-4 px-4 py-4 transition-colors"
+            >
+              <Globe className="w-5 h-5 text-white/40 mt-0.5" />
+              <div>
+                <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Website</p>
+                <p className="text-white text-sm group-hover:text-white/70 transition-colors">cryptobridgekorea.com</p>
+              </div>
+              <ArrowRight className="w-4 h-4 text-white/30 ml-auto group-hover:translate-x-1 transition-transform" />
+            </a>
+
+            {/* Legal Links */}
+            <div className="flex flex-wrap gap-4 mt-4 text-xs">
+              <Link to="/terms" className="text-white/40 hover:text-white transition-colors">Terms of Service</Link>
+              <Link to="/privacy" className="text-white/40 hover:text-white transition-colors">Privacy Policy</Link>
+              <Link to="/transparency" className="text-white/40 hover:text-white transition-colors">Transparency</Link>
+            </div>
           </motion.div>
         </div>
 
