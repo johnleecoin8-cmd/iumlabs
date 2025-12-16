@@ -110,8 +110,8 @@ const ServiceDetailLayout = ({
   }, []);
 
   return (
-    <div className="min-h-screen bg-white p-0.5 sm:p-1 md:p-2">
-      <div className="min-h-screen bg-background rounded-xl sm:rounded-2xl overflow-hidden">
+    <div className="min-h-screen bg-[#0A0A0A] p-0.5 sm:p-1 md:p-2">
+      <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden">
         <Navbar />
 
       {/* Hero Section - Service-Specific Theme */}
@@ -215,16 +215,16 @@ const ServiceDetailLayout = ({
         </div>
       </section>
 
-      {/* About Section - Light Gray */}
-      <section className="bg-[#f5f5f5]">
+      {/* About Section - Dark */}
+      <section className="bg-[#0A0A0A]">
         <div className="flex flex-col lg:flex-row min-h-[600px]">
           {/* Left Column - Text */}
           <div className="w-full lg:w-1/2 px-6 lg:px-16 py-20 lg:py-32 flex items-center">
             <div className="max-w-xl scroll-reveal">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 mb-8 tracking-tight">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white mb-8 tracking-tight">
                 About
               </h2>
-              <p className="text-slate-600 text-lg leading-relaxed mb-10">
+              <p className="text-white/60 text-lg leading-relaxed mb-10">
                 {aboutText}
               </p>
               <CalendlyButton 
@@ -253,7 +253,7 @@ const ServiceDetailLayout = ({
                   }}
                 />
                 {/* Open Hours Card */}
-                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/15 backdrop-blur-md rounded-xl px-6 py-5 border border-white/25">
+                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-black/40 backdrop-blur-md rounded-xl px-6 py-5 border border-white/20">
                   <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
                   <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
                 </div>
@@ -274,7 +274,7 @@ const ServiceDetailLayout = ({
                   <div className="absolute top-[65%] left-[55%] w-32 h-32 rounded-full border border-white/30" />
                 </div>
                 {/* Open Hours Card */}
-                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-white/15 backdrop-blur-md rounded-xl px-6 py-5 border border-white/25">
+                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-black/40 backdrop-blur-md rounded-xl px-6 py-5 border border-white/20">
                   <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
                   <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
                 </div>
@@ -285,15 +285,15 @@ const ServiceDetailLayout = ({
       </section>
 
       {/* What Includes Section */}
-      <section className="bg-[#fafafa] py-20 lg:py-32">
+      <section className="bg-[#111111] py-20 lg:py-32">
         <div className="container mx-auto px-6 lg:px-16">
           {/* Header */}
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 scroll-reveal gap-4">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight">
               What
             </h2>
             <div className="flex items-center gap-4">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight">
                 Includes
               </h2>
               <div className="flex gap-1.5 ml-2">
@@ -305,22 +305,22 @@ const ServiceDetailLayout = ({
           </div>
 
           {/* Divider */}
-          <div className="border-b border-dashed border-slate-300 mb-12" />
+          <div className="border-b border-dashed border-white/20 mb-12" />
 
           {/* Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
             {/* Left - Description */}
             <div className="scroll-reveal">
-              <p className="text-slate-600 text-lg leading-relaxed mb-8">
+              <p className="text-white/60 text-lg leading-relaxed mb-8">
                 {whatIncludesText}
               </p>
               <CalendlyButton 
                 className="inline-flex items-center transition-colors group text-lg"
                 style={{ color: themeConfig.accentColor }}
               >
-                <span className="text-slate-400 mr-2">[</span>
+                <span className="text-white/40 mr-2">[</span>
                 <span className="font-medium">book a meeting</span>
-                <span className="text-slate-400 ml-2">]</span>
+                <span className="text-white/40 ml-2">]</span>
               </CalendlyButton>
             </div>
 
@@ -334,10 +334,10 @@ const ServiceDetailLayout = ({
                 >
                   <div className="flex justify-between items-start py-8 gap-6">
                     <div className="flex-1">
-                      <h3 className="text-xl font-medium text-slate-900 mb-3">
+                      <h3 className="text-xl font-medium text-white mb-3">
                         {step.title}
                       </h3>
-                      <p className="text-slate-500 leading-relaxed">
+                      <p className="text-white/50 leading-relaxed">
                         {step.description}
                       </p>
                     </div>
@@ -349,7 +349,7 @@ const ServiceDetailLayout = ({
                     </span>
                   </div>
                   {index < processSteps.length - 1 && (
-                    <div className="border-b border-dashed border-slate-300" />
+                    <div className="border-b border-dashed border-white/20" />
                   )}
                 </div>
               ))}
@@ -359,23 +359,23 @@ const ServiceDetailLayout = ({
       </section>
 
       {/* Watch Also Section */}
-      <section className="bg-white py-20 lg:py-32">
+      <section className="bg-[#0A0A0A] py-20 lg:py-32">
         <div className="container mx-auto px-6 lg:px-16">
           {/* Header */}
           <div className="flex justify-between items-center mb-8 scroll-reveal">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight">
               Watch
             </h2>
             <div className="flex items-center gap-4">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-slate-900 tracking-tight">
+              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight">
                 Also
               </h2>
-              <ArrowDown className="w-8 h-8 text-slate-400" />
+              <ArrowDown className="w-8 h-8 text-white/40" />
             </div>
           </div>
 
           {/* Divider */}
-          <div className="border-b border-dashed border-slate-300 mb-4" />
+          <div className="border-b border-dashed border-white/20 mb-4" />
 
           {/* Service Links */}
           {otherServices.map((service, index) => (
@@ -385,11 +385,11 @@ const ServiceDetailLayout = ({
               className="block scroll-reveal"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="py-8 border-b border-dashed border-slate-300 flex justify-between items-center group cursor-pointer hover:bg-slate-50 transition-colors duration-300 px-4 -mx-4 rounded-lg">
+              <div className="py-8 border-b border-dashed border-white/20 flex justify-between items-center group cursor-pointer hover:bg-white/[0.02] transition-colors duration-300 px-4 -mx-4 rounded-lg">
                 {index % 2 === 0 ? (
                   <>
                     <h3 
-                      className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 transition-colors duration-300 group-hover:translate-x-2 transform"
+                      className="text-3xl md:text-4xl lg:text-5xl font-light text-white transition-colors duration-300 group-hover:translate-x-2 transform"
                       style={{ color: undefined }}
                       onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
                       onMouseLeave={(e) => e.currentTarget.style.color = ''}
@@ -397,7 +397,7 @@ const ServiceDetailLayout = ({
                       {service.title}
                     </h3>
                     <span 
-                      className="text-slate-400 text-2xl md:text-3xl font-light transition-colors duration-300"
+                      className="text-white/40 text-2xl md:text-3xl font-light transition-colors duration-300"
                       onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
                       onMouseLeave={(e) => e.currentTarget.style.color = ''}
                     >
@@ -407,14 +407,14 @@ const ServiceDetailLayout = ({
                 ) : (
                   <>
                     <span 
-                      className="text-slate-400 text-2xl md:text-3xl font-light transition-colors duration-300"
+                      className="text-white/40 text-2xl md:text-3xl font-light transition-colors duration-300"
                       onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
                       onMouseLeave={(e) => e.currentTarget.style.color = ''}
                     >
                       {service.number}
                     </span>
                     <h3 
-                      className="text-3xl md:text-4xl lg:text-5xl font-light text-slate-900 transition-colors duration-300 group-hover:-translate-x-2 transform text-right"
+                      className="text-3xl md:text-4xl lg:text-5xl font-light text-white transition-colors duration-300 group-hover:-translate-x-2 transform text-right"
                       onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
                       onMouseLeave={(e) => e.currentTarget.style.color = ''}
                     >

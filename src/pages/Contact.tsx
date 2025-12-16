@@ -137,11 +137,11 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
       {/* Hero - Compact with Ken Burns Background */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-white">
+      <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
       <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden rounded-xl sm:rounded-2xl">
         {/* Background - Korea Palace Modern */}
         <div className="absolute inset-0 overflow-hidden">
