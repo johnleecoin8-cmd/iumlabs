@@ -40,13 +40,14 @@ const ProcessSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`p-8 md:p-10 ${
+              whileHover={{ y: -4 }}
+              className={`group p-8 md:p-10 transition-all duration-300 hover:bg-white/5 ${
                 !isLast ? "lg:border-r border-white/10" : ""
               } ${isOdd ? "md:border-l lg:border-l-0 border-white/10" : ""} ${
                 index < 2 ? "border-b lg:border-b-0 border-white/10" : ""
               }`}
             >
-              <Icon className="w-8 h-8 mb-4 text-white/40" strokeWidth={1.5} />
+              <Icon className="w-8 h-8 mb-4 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" strokeWidth={1.5} />
               
               <h3 className="text-lg font-semibold text-white mb-3">
                 {phase.title}

@@ -43,17 +43,18 @@ const FilmstripGallerySection = () => {
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
-                className={`group relative aspect-square overflow-hidden border-r border-b border-white/10 ${
+                whileHover={{ scale: 1.02, zIndex: 10 }}
+                className={`group relative aspect-square overflow-hidden border-r border-b border-white/10 cursor-pointer ${
                   index % 3 === 2 ? "border-r-0" : ""
                 }`}
               >
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors duration-300" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 flex flex-col items-center justify-end pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <p className="text-white font-semibold text-lg">{image.title}</p>
                   <p className="text-white/70 text-sm">{image.subtitle}</p>
                 </div>

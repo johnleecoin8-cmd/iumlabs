@@ -97,21 +97,22 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
+      whileHover={{ y: -4 }}
     >
       <Link
         to={`/projects/${slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-white/5 ${
+        className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/5 hover:shadow-lg hover:shadow-white/5 ${
           !isRightColumn ? "border-r border-white/10" : ""
         } ${!isLastRow ? "border-b border-white/10" : ""}`}
       >
         <div className="flex items-start gap-6">
           {/* Image */}
-          <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0">
+          <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-white/10 transition-shadow duration-300">
             <img
               src={bgImage}
               alt={name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />
           </div>
 
