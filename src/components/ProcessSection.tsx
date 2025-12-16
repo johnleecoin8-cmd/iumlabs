@@ -6,28 +6,24 @@ const phases = [
     number: "01",
     title: "Discovery",
     icon: Search,
-    timeline: "1",
     description: "Deep-dive into your project, market positioning, and Korean audience fit."
   },
   {
     number: "02",
     title: "Strategy",
     icon: Target,
-    timeline: "2",
     description: "Build GTM roadmap, channel mix, and localized messaging framework."
   },
   {
     number: "03",
     title: "Launch",
     icon: Rocket,
-    timeline: "3-4",
     description: "Execute campaigns across KOLs, community, PR, and social channels."
   },
   {
     number: "04",
     title: "Scale",
     icon: TrendingUp,
-    timeline: "Ongoing",
     description: "Optimize, iterate, and expand based on performance data."
   }
 ];
@@ -35,37 +31,31 @@ const phases = [
 const ProcessSection = () => {
   return (
     <section className="bg-[#0A0A0A]">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 lg:grid-cols-4">
         {phases.map((phase, index) => {
           const Icon = phase.icon;
           const isLast = index === phases.length - 1;
-          const isOdd = index % 2 === 1;
           
           return (
             <motion.div
               key={phase.number}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`p-8 md:p-10 ${
-                !isLast ? "lg:border-r border-white/10" : ""
-              } ${isOdd ? "md:border-l lg:border-l-0 border-white/10" : ""} ${
-                index < 2 ? "border-b lg:border-b-0 border-white/10" : ""
-              }`}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
+              className={`p-4 md:p-6 ${
+                !isLast ? "border-r border-white/10" : ""
+              } ${index < 2 ? "border-b lg:border-b-0 border-white/10" : ""}`}
             >
-              <div className="flex items-center gap-3 mb-6">
-                <span className="text-xs text-white/30 font-mono">[{phase.number}]</span>
-                <span className="text-xs text-white/40 uppercase tracking-wider">{phase.timeline}</span>
+              <div className="flex items-center gap-2 mb-3">
+                <Icon className="w-4 h-4 text-white/40" strokeWidth={1.5} />
+                <h3 className="text-sm font-medium text-white">
+                  {phase.title}
+                </h3>
+                <span className="text-[10px] text-white/20 font-mono ml-auto">{phase.number}</span>
               </div>
               
-              <Icon className="w-8 h-8 mb-4 text-white/40" strokeWidth={1.5} />
-              
-              <h3 className="text-lg font-semibold text-white mb-3">
-                {phase.title}
-              </h3>
-              
-              <p className="text-white/50 text-sm leading-relaxed">
+              <p className="text-white/40 text-xs leading-relaxed">
                 {phase.description}
               </p>
             </motion.div>
