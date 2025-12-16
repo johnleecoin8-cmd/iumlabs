@@ -6,21 +6,21 @@ const phases = [
     number: "01",
     title: "Discovery",
     icon: Search,
-    timeline: "Week 1",
+    timeline: "1",
     description: "Deep-dive into your project, market positioning, and Korean audience fit."
   },
   {
     number: "02",
     title: "Strategy",
     icon: Target,
-    timeline: "Week 2",
+    timeline: "2",
     description: "Build GTM roadmap, channel mix, and localized messaging framework."
   },
   {
     number: "03",
     title: "Launch",
     icon: Rocket,
-    timeline: "Week 3-4",
+    timeline: "3-4",
     description: "Execute campaigns across KOLs, community, PR, and social channels."
   },
   {
