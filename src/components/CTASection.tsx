@@ -2,7 +2,7 @@ import { useState, useMemo } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
-import { ArrowRight, Mail, MapPin, Send, CheckCircle2, Linkedin, Globe } from "lucide-react";
+import { ArrowRight, Mail, MapPin, Send, CheckCircle2, Linkedin } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
@@ -79,7 +79,7 @@ const CTASection = () => {
         {/* Left: Contact Info */}
         <div className="w-full lg:w-1/3 lg:border-r border-white/10">
           <motion.div
-            className="p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
+            className="p-8 md:p-12 lg:sticky lg:top-0 flex flex-col pt-8 md:pt-12"
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -148,20 +148,6 @@ const CTASection = () => {
               <ArrowRight className="w-4 h-4 text-white/30 ml-auto group-hover:translate-x-1 transition-transform" />
             </a>
 
-            {/* Website */}
-            <a
-              href="https://cryptobridgekorea.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-start gap-4 pb-6 mb-6 border-b border-white/10 hover:bg-white/5 -mx-4 px-4 py-4 transition-colors"
-            >
-              <Globe className="w-5 h-5 text-white/40 mt-0.5" />
-              <div>
-                <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Website</p>
-                <p className="text-white text-sm group-hover:text-white/70 transition-colors">cryptobridgekorea.com</p>
-              </div>
-              <ArrowRight className="w-4 h-4 text-white/30 ml-auto group-hover:translate-x-1 transition-transform" />
-            </a>
 
             {/* Legal Links */}
             <div className="flex flex-wrap gap-4 mt-4 text-xs">
