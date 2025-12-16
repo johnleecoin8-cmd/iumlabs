@@ -1,7 +1,8 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Calendar } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useCountUp } from "@/hooks/useCountUp";
+import { brand } from "@/config/content";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -137,13 +138,31 @@ const HeroSection = () => {
 
           {/* Subtext - Larger and more prominent */}
           <motion.p 
-            className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-10 font-light tracking-wide"
+            className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-8 font-light tracking-wide"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
           </motion.p>
+
+          {/* CTA Button */}
+          <motion.a
+            href={brand.calendlyUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            {/* Shine sweep effect */}
+            <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+            <Calendar className="w-4 h-4" />
+            <span>Book a Meeting</span>
+          </motion.a>
         </div>
       </div>
 

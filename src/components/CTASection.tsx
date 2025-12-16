@@ -254,17 +254,23 @@ const CTASection = () => {
             </div>
 
             {/* Submit */}
-            <button
+            <motion.button
               type="submit"
               disabled={isSubmitting || formProgress < 100}
-              className={`inline-flex items-center gap-2 px-8 py-4 text-sm font-medium transition-all duration-300 ${
+              className={`group relative inline-flex items-center gap-2 px-8 py-4 text-sm font-medium overflow-hidden transition-all duration-300 ${
                 isSubmitted
                   ? 'bg-green-500 text-white'
                   : formProgress === 100
-                  ? 'bg-white text-black hover:bg-white/90'
+                  ? 'bg-white text-black hover:bg-white/90 hover:shadow-lg hover:shadow-white/20'
                   : 'bg-white/10 text-white/40 cursor-not-allowed'
               }`}
+              whileHover={formProgress === 100 && !isSubmitted ? { scale: 1.02, y: -2 } : {}}
+              whileTap={formProgress === 100 && !isSubmitted ? { scale: 0.98 } : {}}
             >
+              {/* Shine sweep effect */}
+              {formProgress === 100 && !isSubmitted && (
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+              )}
               {isSubmitted ? (
                 <>
                   <CheckCircle2 className="w-5 h-5" />
@@ -282,10 +288,10 @@ const CTASection = () => {
               ) : (
                 <>
                   SEND MESSAGE
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </>
               )}
-            </button>
+            </motion.button>
           </form>
         </motion.div>
       </div>

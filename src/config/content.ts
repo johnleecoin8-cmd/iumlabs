@@ -17,6 +17,7 @@ export const brand = {
   telegram: "@iumlabs",
   telegramLink: "https://t.me/iumlabs",
   linkedin: "https://www.linkedin.com/company/iumlabs",
+  calendlyUrl: "https://calendly.com/iumlabs/30min",
   copyright: `© ${new Date().getFullYear()} Ium Labs`,
 };
 

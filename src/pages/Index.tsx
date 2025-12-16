@@ -104,7 +104,7 @@ const Index = () => {
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
               <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
             </div>
-            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">Why CryptoBridge</span>
+            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">Why Ium Labs</span>
           </div>
           <WhyChooseUsSection />
         </div>
