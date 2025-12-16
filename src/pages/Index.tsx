@@ -175,12 +175,6 @@ const Index = () => {
             
             {/* External Links */}
             <div className="flex flex-wrap justify-center gap-6 md:gap-10 mb-10">
-              <a href="https://cryptobridgekorea.com" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors flex items-center gap-1 group">
-                cryptobridgekorea.com
-                <svg className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M7 17L17 7M17 7H7M17 7V17" />
-                </svg>
-              </a>
               <a href="https://www.linkedin.com/company/cryptobridge" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors flex items-center gap-1 group">
                 LinkedIn
                 <svg className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
