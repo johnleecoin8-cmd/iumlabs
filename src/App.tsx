@@ -17,6 +17,9 @@ import SocialMediaService from "./pages/SocialMediaService";
 import InfluencerService from "./pages/InfluencerService";
 import YapService from "./pages/YapService";
 import PRService from "./pages/PRService";
+import Terms from "./pages/Terms";
+import Privacy from "./pages/Privacy";
+import Transparency from "./pages/Transparency";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -71,6 +74,9 @@ const AppRoutes = () => {
         <Route path="/contact" element={<Contact />} />
         <Route path="/research" element={<Research />} />
         <Route path="/research/:slug" element={<ResearchDetail />} />
+        <Route path="/terms" element={<Terms />} />
+        <Route path="/privacy" element={<Privacy />} />
+        <Route path="/transparency" element={<Transparency />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
