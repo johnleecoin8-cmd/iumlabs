@@ -181,7 +181,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
@@ -189,37 +189,41 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
       <Link
         to={`/projects/${project.slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-gray-50 ${
-          !isRightColumn ? "border-r border-gray-200" : ""
-        } ${!isLastRow ? "border-b border-gray-200" : ""}`}
+        className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/[0.02] ${
+          !isRightColumn ? "border-r border-white/10" : ""
+        } ${!isLastRow ? "border-b border-white/10" : ""}`}
       >
         <div className="flex items-start gap-6">
           {/* Image */}
-          <div className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+          <motion.div 
+            className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 border border-white/10"
+            whileHover={{ scale: 1.05 }}
+            transition={{ duration: 0.3 }}
+          >
             <img 
               src={project.bgImage} 
               alt={project.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />
-          </div>
+          </motion.div>
           
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 text-gray-400 text-xs mb-2">
+            <div className="flex items-center gap-3 text-white/40 text-xs mb-2">
               <span className="uppercase tracking-wider">{project.category}</span>
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-600 transition-colors">
+            <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-primary transition-colors">
               {project.name}
             </h3>
-            <p className="text-gray-500 text-sm leading-relaxed mb-3 line-clamp-2">
+            <p className="text-white/50 text-sm leading-relaxed mb-3 line-clamp-2 group-hover:text-white/60 transition-colors">
               {project.description}
             </p>
-            <p className="text-gray-900 font-medium text-sm mb-4">
+            <p className="text-primary font-medium text-sm mb-4">
               {project.result}
             </p>
-            <div className="flex items-center gap-2 text-gray-400 group-hover:text-gray-900 transition-colors text-sm">
+            <div className="flex items-center gap-2 text-white/40 group-hover:text-primary transition-colors text-sm">
               View case study
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
             </div>
           </div>
         </div>
@@ -230,11 +234,11 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
 const Projects = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
       {/* Hero Section - Keep dark style */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-white">
+      <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
         <section className="relative min-h-[60vh] flex flex-col justify-center overflow-hidden rounded-xl sm:rounded-2xl bg-[#0A0A0A]">
           <div className="absolute inset-0 overflow-hidden">
             <video
@@ -277,11 +281,11 @@ const Projects = () => {
         </section>
       </main>
 
-      {/* Projects Grid - a41.io style 2-column layout */}
-      <section className="bg-white">
+      {/* Projects Grid - Dark theme 2-column layout */}
+      <section className="bg-[#0A0A0A]">
         <div className="flex flex-col lg:flex-row">
           {/* Left: Projects Grid */}
-          <div className="w-full lg:w-2/3 border-r border-gray-200">
+          <div className="w-full lg:w-2/3 border-r border-white/10">
             <div className="grid grid-cols-1 md:grid-cols-2">
               {cases.map((project, index) => (
                 <ProjectCard key={project.slug} project={project} index={index} />
@@ -297,32 +301,42 @@ const Projects = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl font-bold text-white mb-4">
               Our Track Record
             </h2>
-            <p className="text-gray-500 leading-relaxed mb-8">
+            <p className="text-white/50 leading-relaxed mb-8">
               We've helped 18+ global Web3 projects successfully enter and scale in the Korean market. From infrastructure to DeFi, exchange to AI.
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 text-sm font-medium hover:bg-gray-800 transition-colors w-fit mb-12"
+              className="group inline-flex items-center gap-2 bg-white text-[#0A0A0A] px-6 py-3 text-sm font-medium hover:bg-white/90 transition-all duration-300 w-fit mb-12 hover:gap-3"
             >
               START YOUR PROJECT
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
 
             <GoldShape />
 
-            <div className="mt-12 pt-8 border-t border-gray-200">
+            <div className="mt-12 pt-8 border-t border-white/10">
               <div className="grid grid-cols-2 gap-6">
-                <div>
-                  <p className="text-3xl font-bold text-gray-900">18+</p>
-                  <p className="text-gray-500 text-sm">Projects Launched</p>
-                </div>
-                <div>
-                  <p className="text-3xl font-bold text-gray-900">$6M+</p>
-                  <p className="text-gray-500 text-sm">Token Sales</p>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <p className="text-3xl font-bold text-white">18+</p>
+                  <p className="text-white/50 text-sm">Projects Launched</p>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <p className="text-3xl font-bold text-white">$6M+</p>
+                  <p className="text-white/50 text-sm">Token Sales</p>
+                </motion.div>
               </div>
             </div>
           </motion.div>

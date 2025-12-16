@@ -52,39 +52,44 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
   
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <Link 
         to={service.link}
-        className={`group block h-full p-8 md:p-12 transition-all duration-300 hover:bg-gray-50
-          ${!isRightColumn ? 'border-r border-gray-200' : ''}
-          ${!isLastRow ? 'border-b border-gray-200' : ''}
+        className={`group block h-full p-8 md:p-12 transition-all duration-300 hover:bg-white/[0.02]
+          ${!isRightColumn ? 'border-r border-white/10' : ''}
+          ${!isLastRow ? 'border-b border-white/10' : ''}
         `}
       >
         <div className="flex flex-col h-full min-h-[240px]">
           {/* Icon */}
-          <div className="mb-8">
+          <motion.div 
+            className="mb-8"
+            whileHover={{ scale: 1.1, rotate: 5 }}
+            transition={{ duration: 0.3 }}
+          >
             <Icon 
-              className="w-10 h-10 md:w-12 md:h-12 text-gray-900 stroke-[1.5] transition-transform duration-300 group-hover:scale-110" 
+              className="w-10 h-10 md:w-12 md:h-12 text-white/60 stroke-[1.5] transition-colors duration-300 group-hover:text-primary" 
             />
-          </div>
+          </motion.div>
           
           {/* Title */}
-          <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-4 leading-tight">
+          <h3 className="text-xl md:text-2xl font-bold text-white mb-4 leading-tight group-hover:text-white/90 transition-colors">
             {service.title}
           </h3>
           
           {/* Description */}
-          <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-6 flex-grow">
+          <p className="text-white/50 text-sm md:text-base leading-relaxed mb-6 flex-grow group-hover:text-white/60 transition-colors">
             {service.description}
           </p>
           
           {/* Arrow Link */}
-          <div className="flex items-center gap-2 text-gray-400 group-hover:text-gray-900 transition-colors duration-300">
+          <div className="flex items-center gap-2 text-white/40 group-hover:text-primary transition-colors duration-300">
             <span className="text-sm font-medium">Learn more</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
           </div>
         </div>
       </Link>
@@ -142,7 +147,7 @@ const GoldShape = () => (
 
 const Services = () => {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
       {/* Simple Header */}
@@ -152,18 +157,18 @@ const Services = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 tracking-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight">
           Our Services
         </h1>
-        <p className="text-gray-500 mt-4 text-lg max-w-xl">
+        <p className="text-white/50 mt-4 text-lg max-w-xl">
           Strategic solutions to launch and grow your Web3 project in the Korean market.
         </p>
       </motion.header>
       
       {/* Main 2-Column Layout */}
-      <main className="flex flex-col lg:flex-row max-w-7xl mx-auto border-t border-gray-200">
+      <main className="flex flex-col lg:flex-row max-w-7xl mx-auto border-t border-white/10">
         {/* Left: Service Grid (2/3) */}
-        <div className="w-full lg:w-2/3 border-r-0 lg:border-r border-gray-200">
+        <div className="w-full lg:w-2/3 border-r-0 lg:border-r border-white/10">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {services.map((service, index) => (
               <ServiceCard key={service.title} service={service} index={index} />
@@ -176,23 +181,24 @@ const Services = () => {
           <div className="lg:sticky lg:top-24 p-8 md:p-12">
             <motion.div
               initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
                 Why CryptoBridge
               </h2>
               
-              <p className="text-gray-500 text-sm md:text-base leading-relaxed mb-8">
+              <p className="text-white/50 text-sm md:text-base leading-relaxed mb-8">
                 We're the Korean Web3 marketing agency that builds the bridge between your project and the Korean market. Founded by former executives from Binance and KuCoin.
               </p>
               
               <Link 
                 to="/contact"
-                className="inline-flex items-center gap-2 bg-gray-900 text-white px-6 py-3 text-sm font-medium tracking-wide hover:bg-gray-800 transition-colors duration-300"
+                className="group inline-flex items-center gap-2 bg-white text-[#0A0A0A] px-6 py-3 text-sm font-medium tracking-wide hover:bg-white/90 transition-all duration-300 hover:gap-3"
               >
                 CONNECT WITH US
-                <ArrowRight className="w-4 h-4" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               
               {/* 3D Gold Shape */}
@@ -202,14 +208,24 @@ const Services = () => {
               
               {/* Stats */}
               <div className="mt-12 grid grid-cols-2 gap-6">
-                <div>
-                  <div className="text-2xl md:text-3xl font-bold text-gray-900">18+</div>
-                  <div className="text-sm text-gray-500">Projects Launched</div>
-                </div>
-                <div>
-                  <div className="text-2xl md:text-3xl font-bold text-gray-900">120+</div>
-                  <div className="text-sm text-gray-500">KOL Network</div>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.4 }}
+                >
+                  <div className="text-2xl md:text-3xl font-bold text-white">18+</div>
+                  <div className="text-sm text-white/50">Projects Launched</div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <div className="text-2xl md:text-3xl font-bold text-white">120+</div>
+                  <div className="text-sm text-white/50">KOL Network</div>
+                </motion.div>
               </div>
             </motion.div>
           </div>
