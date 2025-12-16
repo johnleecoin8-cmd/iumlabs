@@ -56,41 +56,55 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ y: -8 }}
     >
       <Link 
         to={service.link}
-        className={`group block h-full p-8 md:p-12 transition-all duration-300 hover:bg-white/[0.02]
+        className={`group block h-full p-8 md:p-12 transition-all duration-300 hover:bg-white/[0.03] relative overflow-hidden
           ${!isRightColumn ? 'border-r border-white/10' : ''}
           ${!isLastRow ? 'border-b border-white/10' : ''}
         `}
       >
-        <div className="flex flex-col h-full min-h-[240px]">
+        {/* Hover Glow Effect */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-primary/50 via-primary/20 to-transparent" />
+        </div>
+        
+        <div className="flex flex-col h-full min-h-[240px] relative">
           {/* Icon */}
           <motion.div 
-            className="mb-8"
-            whileHover={{ scale: 1.1, rotate: 5 }}
-            transition={{ duration: 0.3 }}
+            className="mb-8 relative"
+            whileHover={{ scale: 1.15, rotate: 8 }}
+            transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
           >
             <Icon 
               className="w-10 h-10 md:w-12 md:h-12 text-white/60 stroke-[1.5] transition-colors duration-300 group-hover:text-primary" 
             />
+            {/* Icon Glow */}
+            <div className="absolute inset-0 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10 scale-150" 
+              style={{ backgroundColor: 'hsl(var(--primary) / 0.3)' }} 
+            />
           </motion.div>
           
           {/* Title */}
-          <h3 className="text-xl md:text-2xl font-bold text-white mb-4 leading-tight group-hover:text-white/90 transition-colors">
+          <h3 className="text-xl md:text-2xl font-bold text-white mb-4 leading-tight group-hover:text-white transition-colors">
             {service.title}
           </h3>
           
           {/* Description */}
-          <p className="text-white/50 text-sm md:text-base leading-relaxed mb-6 flex-grow group-hover:text-white/60 transition-colors">
+          <p className="text-white/50 text-sm md:text-base leading-relaxed mb-6 flex-grow group-hover:text-white/70 transition-colors">
             {service.description}
           </p>
           
           {/* Arrow Link */}
-          <div className="flex items-center gap-2 text-white/40 group-hover:text-primary transition-colors duration-300">
+          <motion.div 
+            className="flex items-center gap-2 text-white/40 group-hover:text-primary transition-colors duration-300"
+            whileHover={{ x: 4 }}
+          >
             <span className="text-sm font-medium">Learn more</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
-          </div>
+          </motion.div>
         </div>
       </Link>
     </motion.div>
@@ -193,13 +207,15 @@ const Services = () => {
                 We're the Korean Web3 marketing agency that builds the bridge between your project and the Korean market. Founded by former executives from Binance and KuCoin.
               </p>
               
-              <Link 
-                to="/contact"
-                className="group inline-flex items-center gap-2 bg-white text-[#0A0A0A] px-6 py-3 text-sm font-medium tracking-wide hover:bg-white/90 transition-all duration-300 hover:gap-3"
-              >
-                CONNECT WITH US
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <Link 
+                  to="/contact"
+                  className="group inline-flex items-center gap-2 bg-white text-[#0A0A0A] px-6 py-3 text-sm font-medium tracking-wide hover:bg-white/90 transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-white/20"
+                >
+                  CONNECT WITH US
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
               
               {/* 3D Gold Shape */}
               <div className="mt-12 md:mt-16">

@@ -1,5 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Lightbox from "@/components/Lightbox";
@@ -673,20 +674,27 @@ const ProjectDetail = () => {
         {/* Content */}
         <div className="relative z-10 container mx-auto max-w-7xl px-4 md:px-8 pt-32 pb-20">
           {/* Back Button */}
-          <button
+          <motion.button
             onClick={() => navigate("/projects")}
             className="group flex items-center gap-2 text-white/60 mb-12 transition-colors"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            whileHover={{ x: -4 }}
             style={{ '--hover-color': project.glowColor } as React.CSSProperties}
             onMouseEnter={(e) => e.currentTarget.style.color = project.glowColor}
             onMouseLeave={(e) => e.currentTarget.style.color = ''}
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             <span className="text-sm uppercase tracking-wider">Back to Projects</span>
-          </button>
+          </motion.button>
 
           {/* Category Badge */}
-          <div 
+          <motion.div 
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
             style={{ 
               backgroundColor: `${project.glowColor}20`, 
               border: `1px solid ${project.glowColor}40` 
@@ -696,11 +704,16 @@ const ProjectDetail = () => {
             <span className="text-xs uppercase tracking-widest font-medium" style={{ color: project.glowColor }}>
               {project.category}
             </span>
-          </div>
+          </motion.div>
 
           {/* Logo & Name */}
           <div className="flex flex-col items-start gap-6">
-            <div className="relative">
+            <motion.div 
+              className="relative"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               <img
                 src={project.logo}
                 alt={project.name}
@@ -712,26 +725,40 @@ const ProjectDetail = () => {
                 className="absolute inset-0 rounded-full blur-xl -z-10 scale-150" 
                 style={{ backgroundColor: `${project.glowColor}20` }}
               />
-            </div>
+            </motion.div>
             
             <div>
-              <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-4 tracking-tight">
+              <motion.h1 
+                className="text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-4 tracking-tight"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
                 {project.name}
-              </h1>
-              <p className="text-xl md:text-2xl text-white/70 max-w-2xl leading-relaxed">
+              </motion.h1>
+              <motion.p 
+                className="text-xl md:text-2xl text-white/70 max-w-2xl leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
                 {project.description}
-              </p>
+              </motion.p>
             </div>
           </div>
 
           {/* Key Result Badge */}
-          <div 
+          <motion.div 
             className="mt-12 inline-flex items-center gap-4 px-6 py-4 rounded-2xl bg-black/40 backdrop-blur-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            whileHover={{ scale: 1.02, y: -2 }}
             style={{ border: `1px solid ${project.glowColor}30` }}
           >
             <span className="text-white/50 text-sm uppercase tracking-wider">Key Result</span>
             <span className="text-2xl md:text-3xl font-bold" style={{ color: project.glowColor }}>{project.result}</span>
-          </div>
+          </motion.div>
         </div>
 
         {/* Scroll Indicator */}
@@ -759,9 +786,14 @@ const ProjectDetail = () => {
           {/* Metrics Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {project.metrics.map((metric, index) => (
-              <div 
+              <motion.div 
                 key={index} 
                 className="group relative p-6 md:p-8 rounded-2xl bg-[#111] border border-white/10 hover:border-white/30 hover:bg-white/[0.02] transition-all duration-300 overflow-hidden"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -6, scale: 1.02 }}
                 style={{ '--glow-color': project.glowColor } as React.CSSProperties}
                 onMouseEnter={(e) => e.currentTarget.style.borderColor = `${project.glowColor}50`}
                 onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
@@ -785,7 +817,7 @@ const ProjectDetail = () => {
                   </p>
                 </div>
                 <span className="absolute bottom-4 right-4 text-white/20 text-xs font-mono">0{index + 1}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -796,11 +828,23 @@ const ProjectDetail = () => {
         <div className="container mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left - THE CHALLENGE */}
-            <div className="p-8 md:p-12 rounded-2xl bg-[#111] border border-white/10 hover:border-white/30 transition-all duration-300 relative overflow-hidden">
+            <motion.div 
+              className="p-8 md:p-12 rounded-2xl bg-[#111] border border-white/10 hover:border-white/30 transition-all duration-300 relative overflow-hidden group"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              whileHover={{ y: -4 }}
+            >
               {/* Accent Line */}
               <div 
                 className="absolute top-0 left-0 w-full h-1" 
                 style={{ background: `linear-gradient(to right, ${project.glowColor}, ${project.glowColor}50, transparent)` }}
+              />
+              {/* Hover Glow */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                style={{ boxShadow: `inset 0 0 60px ${project.glowColor}10` }}
               />
               
               <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] mb-6" style={{ color: project.glowColor }}>
@@ -810,12 +854,21 @@ const ProjectDetail = () => {
               <p className="text-white text-xl md:text-2xl font-light leading-relaxed">
                 {project.challenge}
               </p>
-            </div>
+            </motion.div>
 
             {/* Right - WHAT WE DID */}
-            <div className="p-8 md:p-12 rounded-2xl bg-[#111] border border-white/10 hover:border-white/30 transition-all duration-300 relative overflow-hidden">
+            <motion.div 
+              className="p-8 md:p-12 rounded-2xl bg-[#111] border border-white/10 hover:border-white/30 transition-all duration-300 relative overflow-hidden group"
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ y: -4 }}
+            >
               {/* Accent Line */}
               <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-white/30 via-white/10 to-transparent" />
+              {/* Hover Glow */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none bg-white/[0.02]" />
               
               <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/50 mb-6">
                 <span className="w-6 h-px bg-white/50" />
@@ -825,10 +878,17 @@ const ProjectDetail = () => {
               {/* Services List with Project Color Dots */}
               <div className="space-y-4 mb-8">
                 {project.services.map((service, i) => (
-                  <div key={i} className="flex items-center gap-3">
+                  <motion.div 
+                    key={i} 
+                    className="flex items-center gap-3"
+                    initial={{ opacity: 0, x: 10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.1 }}
+                  >
                     <div className="w-2 h-2 rounded-full" style={{ backgroundColor: project.glowColor }} />
                     <span className="text-white text-lg">{service}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
 
@@ -839,7 +899,7 @@ const ProjectDetail = () => {
               <p className="text-white/60 text-sm italic leading-relaxed">
                 "{project.strategy[0]}"
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -848,7 +908,13 @@ const ProjectDetail = () => {
       <section className="bg-[#0A0A0A] py-16">
         <div className="container mx-auto max-w-7xl px-4 md:px-8">
           {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
+          <motion.div 
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <div>
               <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] mb-4" style={{ color: project.glowColor }}>
                 <span className="w-6 h-px" style={{ backgroundColor: project.glowColor }} />
@@ -861,24 +927,28 @@ const ProjectDetail = () => {
             
             {/* Navigation Arrows */}
             <div className="flex gap-3">
-              <button
+              <motion.button
                 onClick={() => scrollGallery('left')}
                 className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.glowColor; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.backgroundColor = ''; }}
               >
                 <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-white" />
-              </button>
-              <button
+              </motion.button>
+              <motion.button
                 onClick={() => scrollGallery('right')}
                 className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 onMouseEnter={(e) => { e.currentTarget.style.borderColor = project.glowColor; e.currentTarget.style.backgroundColor = `${project.glowColor}15`; }}
                 onMouseLeave={(e) => { e.currentTarget.style.borderColor = ''; e.currentTarget.style.backgroundColor = ''; }}
               >
                 <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white" />
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
 
           {/* Gallery Images */}
           <div 
@@ -887,9 +957,14 @@ const ProjectDetail = () => {
           >
             <div className="flex gap-5" style={{ width: 'max-content' }}>
               {project.gallery.map((item, index) => (
-                <div 
+                <motion.div 
                   key={index} 
                   className="relative w-72 md:w-80 aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0 border border-white/10 hover:border-white/30 transition-all duration-300"
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  whileHover={{ y: -8, scale: 1.02 }}
                   onClick={() => openLightbox(index)}
                   onMouseEnter={(e) => e.currentTarget.style.borderColor = `${project.glowColor}50`}
                   onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
@@ -897,7 +972,7 @@ const ProjectDetail = () => {
                   <img
                     src={item.src}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   
                   {/* Overlay */}
@@ -916,13 +991,14 @@ const ProjectDetail = () => {
                   </div>
 
                   {/* Expand Icon */}
-                  <div 
-                    className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100"
+                  <motion.div 
+                    className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all"
+                    whileHover={{ scale: 1.1, rotate: 45 }}
                     style={{ backgroundColor: project.glowColor }}
                   >
                     <ArrowUpRight className="w-5 h-5 text-black" />
-                  </div>
-                </div>
+                  </motion.div>
+                </motion.div>
               ))}
             </div>
           </div>
@@ -932,24 +1008,31 @@ const ProjectDetail = () => {
       {/* Next Project - Dark Project Color Style */}
       <section className="py-24 bg-[#0A0A0A] border-t border-white/10">
         <div className="container mx-auto max-w-7xl px-4 md:px-8">
-          <Link 
-            to={`/projects/${nextSlug}`}
-            onClick={() => window.scrollTo(0, 0)}
-            className="block group"
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <p className="text-sm uppercase tracking-widest mb-6 flex items-center gap-3" style={{ color: nextProject.glowColor }}>
-              <span className="w-8 h-px" style={{ backgroundColor: nextProject.glowColor }} />
-              Next Project
-            </p>
-            <div className="flex items-center justify-between">
-              <div>
-                <h3 
-                  className="text-5xl md:text-7xl lg:text-8xl font-bold text-white transition-colors duration-300 mb-3"
-                  onMouseEnter={(e) => e.currentTarget.style.color = nextProject.glowColor}
-                  onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                >
-                  {nextProject.name}
-                </h3>
+            <Link 
+              to={`/projects/${nextSlug}`}
+              onClick={() => window.scrollTo(0, 0)}
+              className="block group"
+            >
+              <p className="text-sm uppercase tracking-widest mb-6 flex items-center gap-3" style={{ color: nextProject.glowColor }}>
+                <span className="w-8 h-px" style={{ backgroundColor: nextProject.glowColor }} />
+                Next Project
+              </p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <motion.h3 
+                    className="text-5xl md:text-7xl lg:text-8xl font-bold text-white transition-colors duration-300 mb-3"
+                    whileHover={{ x: 10 }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = nextProject.glowColor}
+                    onMouseLeave={(e) => e.currentTarget.style.color = ''}
+                  >
+                    {nextProject.name}
+                  </motion.h3>
                 <p className="text-white/50 text-xl">{nextProject.result}</p>
               </div>
               <div className="relative">
@@ -967,6 +1050,7 @@ const ProjectDetail = () => {
               </div>
             </div>
           </Link>
+          </motion.div>
         </div>
       </section>
 
