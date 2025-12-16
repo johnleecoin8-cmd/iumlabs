@@ -128,7 +128,7 @@ const CTASection = () => {
               <Send className="w-5 h-5 text-white/40 mt-0.5" />
               <div>
                 <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Telegram</p>
-                <p className="text-white text-sm group-hover:text-white/70 transition-colors">@cryptobridgekorea</p>
+                <p className="text-white text-sm group-hover:text-white/70 transition-colors">@iumlabs</p>
               </div>
               <ArrowRight className="w-4 h-4 text-white/30 ml-auto group-hover:translate-x-1 transition-transform" />
             </a>
@@ -143,7 +143,7 @@ const CTASection = () => {
               <Linkedin className="w-5 h-5 text-white/40 mt-0.5" />
               <div>
                 <p className="text-white/40 text-xs uppercase tracking-wider mb-1">LinkedIn</p>
-                <p className="text-white text-sm group-hover:text-white/70 transition-colors">CryptoBridge Korea</p>
+                <p className="text-white text-sm group-hover:text-white/70 transition-colors">Ium Labs</p>
               </div>
               <ArrowRight className="w-4 h-4 text-white/30 ml-auto group-hover:translate-x-1 transition-transform" />
             </a>

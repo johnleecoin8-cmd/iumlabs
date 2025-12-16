@@ -128,10 +128,10 @@ const ServicesSection = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl font-bold text-white mb-4">
-            Why CryptoBridge
+            Why Ium Labs
           </h2>
           <p className="text-white/50 leading-relaxed mb-8">
-            We're the Korean Web3 marketing agency that builds the bridge between your project and the Korean market. Our team combines local expertise with global Web3 experience.
+            We're the Korean Web3 marketing agency that bridges your project to the Korean market. Our team combines local expertise with global Web3 experience.
           </p>
           <Link
             to="/contact"

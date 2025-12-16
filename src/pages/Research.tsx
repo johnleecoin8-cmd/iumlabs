@@ -25,7 +25,7 @@ export const researchPosts = [
   {
     id: "1",
     slug: "ecosystem-growth-2025",
-    title: "The State of Ecosystem Growth in 2025: Key Insights from the CryptoBridge Research Report",
+    title: "The State of Ecosystem Growth in 2025: Key Insights from the Ium Labs Research Report",
     image: ecosystemGrowthImg,
     date: "Dec 11, 2024",
     readTime: "18 min read",
@@ -298,7 +298,7 @@ Projects that invest properly in these foundations see significantly better outc
 
 ---
 
-*This research was conducted by the CryptoBridge Korea research team. For detailed market analysis, strategic consulting, and market entry support, contact us at info@cryptobridgekorea.com.*
+*This research was conducted by the Ium Labs research team. For detailed market analysis, strategic consulting, and market entry support, contact us at info@iumlabs.com.*
 
 *Next Report: "Q2 2025 Korea Crypto Market Quarterly Review" - Coming March 2025*
     `,
@@ -646,7 +646,7 @@ The projects and teams that master this convergence will define the next generat
 
 ---
 
-*This research was produced by CryptoBridge Korea's DeFi Research Division. For investment consulting and market insights, contact david@cryptobridgekorea.com.*
+*This research was produced by Ium Labs' DeFi Research Division. For investment consulting and market insights, contact david@iumlabs.com.*
 
 *Disclaimer: This report is for informational purposes only and does not constitute investment advice.*
     `,
@@ -1084,9 +1084,9 @@ The margin for error has shrunk dramatically. Projects that invest in proper fou
 
 ---
 
-*For TGE planning, tokenomics consulting, and Korean market launch support, contact CryptoBridge Korea at info@cryptobridgekorea.com.*
+*For TGE planning, tokenomics consulting, and Korean market launch support, contact Ium Labs at info@iumlabs.com.*
 
-*Download our TGE Readiness Assessment Template at cryptobridgekorea.com/resources*
+*Download our TGE Readiness Assessment Template at iumlabs.com/resources*
     `,
   },
   {
@@ -1437,9 +1437,9 @@ Start with high-impact, lower-risk applications (moderation, FAQ), build team co
 
 ---
 
-*For community growth consulting and AI implementation support, contact CryptoBridge Korea.*
+*For community growth consulting and AI implementation support, contact Ium Labs.*
 
-*Download our Community AI Audit Template at cryptobridgekorea.com/resources*
+*Download our Community AI Audit Template at iumlabs.com/resources*
     `,
   },
   {
@@ -2081,7 +2081,7 @@ The key mindset shift: View bear markets not as obstacles but as opportunities t
 
 ---
 
-*For marketing strategy and Korean market support during bear markets, contact CryptoBridge Korea.*
+*For marketing strategy and Korean market support during bear markets, contact Ium Labs.*
     `,
   },
   {
@@ -2490,7 +2490,7 @@ The projects that master KOL marketing build lasting advantages in community gro
 
 ---
 
-*For KOL campaign management and Korean influencer network access, contact CryptoBridge Korea.*
+*For KOL campaign management and Korean influencer network access, contact Ium Labs.*
     `,
   },
   {
@@ -2850,7 +2850,7 @@ The goal isn't to game the algorithm—it's to build genuine attention and inter
 
 ---
 
-*For Kaito optimization and social strategy consulting, contact CryptoBridge Korea.*
+*For Kaito optimization and social strategy consulting, contact Ium Labs.*
     `,
   },
 ];

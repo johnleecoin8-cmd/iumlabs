@@ -9,19 +9,19 @@ const FloatingContactButton = () => {
     {
       icon: Send,
       label: "Telegram",
-      href: "https://t.me/cryptobridgekorea",
+      href: "https://t.me/iumlabs",
       color: "bg-[#0088cc]"
     },
     {
       icon: Calendar,
       label: "Book Meeting",
-      href: "https://calendly.com/cryptobridgekorea/30min",
+      href: "https://calendly.com/iumlabs/30min",
       color: "bg-primary"
     },
     {
       icon: Mail,
       label: "Email",
-      href: "mailto:info@cryptobridgekorea.com",
+      href: "mailto:info@iumlabs.com",
       color: "bg-emerald-500"
     }
   ];

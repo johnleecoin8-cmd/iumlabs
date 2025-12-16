@@ -8,16 +8,16 @@
 // Brand Information
 // =====================================================
 export const brand = {
-  name: "CryptoBridge Korea",
+  name: "Ium Labs",
   tagline: "Web3 Marketing Agency",
   description: "Korea's leading Web3 marketing agency. We help blockchain projects launch and grow successfully.",
-  email: "info@cryptobridgekorea.com",
+  email: "info@iumlabs.com",
   phone: "010 3969 9699",
   address: "OFFICE 11B, Gangnam-daero 373, Gangnam, Seoul, South Korea",
-  telegram: "@cryptobridgekorea",
-  telegramLink: "https://t.me/cryptobridgekorea",
-  linkedin: "https://www.linkedin.com/company/cryptobridge",
-  copyright: `© ${new Date().getFullYear()} CryptoBridge Korea`,
+  telegram: "@iumlabs",
+  telegramLink: "https://t.me/iumlabs",
+  linkedin: "https://www.linkedin.com/company/iumlabs",
+  copyright: `© ${new Date().getFullYear()} Ium Labs`,
 };
 
 // =====================================================

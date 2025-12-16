@@ -18,7 +18,7 @@ const WhyChooseUsSection = () => {
           <div className="aspect-[4/3] lg:aspect-auto lg:h-full overflow-hidden">
             <img
               src={teamPhoto}
-              alt="CryptoBridge Korea Team"
+              alt="Ium Labs Team"
               className="w-full h-full object-cover object-[center_65%]"
             />
           </div>
