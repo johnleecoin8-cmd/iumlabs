@@ -29,7 +29,7 @@ const Navbar = () => {
             to="/" 
             className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 transition-all duration-300 hover:opacity-80"
           >
-            <img src={logoImage} alt="CryptoBridge Logo" className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg object-contain" />
+            <img src={logoImage} alt="Ium Labs Logo" className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg object-contain" />
             <span className="text-sm sm:text-base font-semibold text-gray-900">{brandConfig.name}</span>
           </Link>
 
@@ -60,7 +60,7 @@ const Navbar = () => {
 
             {/* Book a Meeting Button */}
             <a
-              href="https://calendly.com/cryptobridgekorea"
+              href="https://calendly.com/iumlabs/30min"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden md:flex items-center gap-2 px-5 py-3 border-l border-gray-200 text-gray-900 text-sm font-medium transition-all duration-300 hover:bg-gray-50"
@@ -103,7 +103,7 @@ const Navbar = () => {
           <div className="flex-shrink-0 container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-                <img src={logoImage} alt="CryptoBridge Logo" className="w-8 h-8 rounded-lg object-contain" />
+                <img src={logoImage} alt="Ium Labs Logo" className="w-8 h-8 rounded-lg object-contain" />
                 <span className="text-lg font-semibold text-white">{brandConfig.name}</span>
               </Link>
               
@@ -178,7 +178,7 @@ const Navbar = () => {
                     rel="noopener noreferrer"
                     className="text-base lg:text-xl text-foreground hover:text-primary transition-colors"
                   >
-                    @cryptobridgekorea
+                    @iumlabs
                   </a>
                 </div>
 

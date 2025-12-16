@@ -4,12 +4,12 @@ import Footer from "@/components/Footer";
 
 const Terms = () => {
   const sections = [
-    { title: "1. Agreement to Terms", content: "By accessing and using CryptoBridge Korea's services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services." },
-    { title: "2. Services", content: "CryptoBridge Korea provides Web3 marketing and consulting services including but not limited to Go-To-Market strategy, community management, influencer marketing, and PR services for blockchain and cryptocurrency projects." },
+    { title: "1. Agreement to Terms", content: "By accessing and using Ium Labs' services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services." },
+    { title: "2. Services", content: "Ium Labs provides Web3 marketing and consulting services including but not limited to Go-To-Market strategy, community management, influencer marketing, and PR services for blockchain and cryptocurrency projects." },
     { title: "3. User Responsibilities", content: "Users agree to provide accurate information when using our services and to comply with all applicable laws and regulations in their jurisdiction." },
-    { title: "4. Intellectual Property", content: "All content, trademarks, and intellectual property on this website are owned by CryptoBridge Korea unless otherwise stated." },
-    { title: "5. Limitation of Liability", content: "CryptoBridge Korea shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our services." },
-    { title: "6. Contact", content: "For questions about these Terms, please contact us at info@cryptobridgekorea.com." },
+    { title: "4. Intellectual Property", content: "All content, trademarks, and intellectual property on this website are owned by Ium Labs unless otherwise stated." },
+    { title: "5. Limitation of Liability", content: "Ium Labs shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our services." },
+    { title: "6. Contact", content: "For questions about these Terms, please contact us at info@iumlabs.com." },
   ];
 
   return (

@@ -26,7 +26,7 @@ const handler = async (req: Request): Promise<Response> => {
     const { name, email, company, budget, message }: ContactNotificationRequest = await req.json();
     console.log("Processing contact notification for:", name, email);
 
-    // Send notification email to CryptoBridge team
+    // Send notification email to Ium Labs team
     const teamNotification = fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -34,7 +34,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "CryptoBridge <noreply@fvroka.resend.app>",
+        from: "Ium Labs <noreply@fvroka.resend.app>",
         to: ["james@cryptobridgekorea.com"],
         subject: `New Contact Form Submission from ${name}`,
         html: `
@@ -76,7 +76,7 @@ const handler = async (req: Request): Promise<Response> => {
             
             <hr style="border: 1px solid #e5e7eb; margin-top: 30px;" />
             <p style="color: #6b7280; font-size: 12px;">
-              This email was sent from the CryptoBridge Korea contact form.
+              This email was sent from the Ium Labs contact form.
             </p>
           </div>
         `,
@@ -91,9 +91,9 @@ const handler = async (req: Request): Promise<Response> => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "CryptoBridge Korea <noreply@fvroka.resend.app>",
+        from: "Ium Labs <noreply@fvroka.resend.app>",
         to: [email],
-        subject: "We received your inquiry - CryptoBridge Korea",
+        subject: "We received your inquiry - Ium Labs",
         html: `
           <!DOCTYPE html>
           <html>
@@ -113,11 +113,11 @@ const handler = async (req: Request): Promise<Response> => {
                         <div style="text-align: center;">
                           <div style="display: inline-block; background: linear-gradient(135deg, #3b82f6, #06b6d4); -webkit-background-clip: text; background-clip: text;">
                             <h1 style="margin: 0; font-size: 32px; font-weight: 300; letter-spacing: -0.5px; color: #ffffff;">
-                              Crypto<span style="font-weight: 600;">Bridge</span>
+                              Ium<span style="font-weight: 600;">Labs</span>
                             </h1>
                           </div>
                           <p style="margin: 8px 0 0; font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #3b82f6;">
-                            Korea
+                            Web3 Marketing Agency
                           </p>
                         </div>
                       </td>
@@ -175,7 +175,7 @@ const handler = async (req: Request): Promise<Response> => {
                           <p style="margin: 0 0 20px; font-size: 15px; color: #a1a1aa;">
                             Want to skip the wait? Schedule a meeting directly.
                           </p>
-                          <a href="https://calendly.com/cryptobridgekorea/30min" 
+                          <a href="https://calendly.com/iumlabs/30min" 
                              style="display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); color: #ffffff; text-decoration: none; padding: 16px 40px; border-radius: 12px; font-size: 15px; font-weight: 600; letter-spacing: 0.3px; box-shadow: 0 8px 32px rgba(59, 130, 246, 0.3);">
                             Book a Meeting
                           </a>
@@ -191,7 +191,7 @@ const handler = async (req: Request): Promise<Response> => {
                           <tr>
                             <td>
                               <p style="margin: 0 0 8px; font-size: 13px; color: #52525b;">
-                                CryptoBridge Korea
+                                Ium Labs
                               </p>
                               <p style="margin: 0; font-size: 12px; color: #3f3f46; line-height: 1.6;">
                                 OFFICE 11B, Gangnam-daero 373<br>
@@ -199,9 +199,9 @@ const handler = async (req: Request): Promise<Response> => {
                               </p>
                             </td>
                             <td align="right" valign="top">
-                              <a href="mailto:info@cryptobridgekorea.com" style="display: inline-block; margin-left: 12px; font-size: 12px; color: #3b82f6; text-decoration: none;">Email</a>
+                              <a href="mailto:info@iumlabs.com" style="display: inline-block; margin-left: 12px; font-size: 12px; color: #3b82f6; text-decoration: none;">Email</a>
                               <span style="color: #27272a; margin: 0 8px;">|</span>
-                              <a href="https://t.me/cryptobridgekorea" style="display: inline-block; font-size: 12px; color: #3b82f6; text-decoration: none;">Telegram</a>
+                              <a href="https://t.me/iumlabs" style="display: inline-block; font-size: 12px; color: #3b82f6; text-decoration: none;">Telegram</a>
                             </td>
                           </tr>
                         </table>
