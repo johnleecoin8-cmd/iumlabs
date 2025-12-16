@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Clock, Calendar, Twitter, Linkedin, Copy, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
@@ -12,7 +13,7 @@ const ResearchDetail = () => {
   
   if (!post) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-[#0A0A0A]">
         <Navbar />
         <div className="container mx-auto max-w-7xl px-4 py-32 text-center">
           <h1 className="text-4xl font-light text-white mb-4">Article Not Found</h1>
@@ -48,24 +49,35 @@ const ResearchDetail = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white p-0.5 sm:p-1 md:p-2">
-      <div className="min-h-screen bg-background rounded-xl sm:rounded-2xl overflow-hidden">
+    <div className="min-h-screen bg-[#0A0A0A] p-0.5 sm:p-1 md:p-2">
+      <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden">
         <Navbar />
       
       {/* Hero */}
       <section className="relative pt-24 pb-16">
         <div className="container mx-auto max-w-4xl px-4">
           {/* Back Link */}
-          <Link 
-            to="/research" 
-            className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8"
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <ArrowLeft className="w-4 h-4" />
-            Back to Research
-          </Link>
+            <Link 
+              to="/research" 
+              className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Research
+            </Link>
+          </motion.div>
           
           {/* Meta */}
-          <div className="flex flex-wrap items-center gap-4 mb-6">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex flex-wrap items-center gap-4 mb-6"
+          >
             <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">
               {post.category}
             </span>
@@ -77,15 +89,25 @@ const ResearchDetail = () => {
               <Calendar className="w-4 h-4" />
               {post.date}
             </span>
-          </div>
+          </motion.div>
           
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight mb-8">
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight mb-8"
+          >
             {post.title}
-          </h1>
+          </motion.h1>
           
           {/* Author */}
-          <div className="flex items-center justify-between flex-wrap gap-4 pb-8 border-b border-white/10">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="flex items-center justify-between flex-wrap gap-4 pb-8 border-b border-white/10"
+          >
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-lg font-medium text-white">
                 {post.author.split(' ').map(n => n[0]).join('')}
@@ -99,43 +121,59 @@ const ResearchDetail = () => {
             {/* Share */}
             <div className="flex items-center gap-2">
               <span className="text-white/40 text-sm mr-2">Share:</span>
-              <button 
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => handleShare("twitter")}
                 className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
               >
                 <Twitter className="w-4 h-4" />
-              </button>
-              <button 
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={() => handleShare("linkedin")}
                 className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
               >
                 <Linkedin className="w-4 h-4" />
-              </button>
-              <button 
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
                 onClick={handleCopyLink}
                 className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-white/60 hover:text-white transition-all"
               >
                 <Copy className="w-4 h-4" />
-              </button>
+              </motion.button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Featured Image */}
       <section className="container mx-auto max-w-5xl px-4 mb-16">
-        <div className="aspect-[21/9] rounded-2xl overflow-hidden">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+          className="aspect-[21/9] rounded-2xl overflow-hidden"
+        >
           <img 
             src={post.image} 
             alt={post.title}
             className="w-full h-full object-cover"
           />
-        </div>
+        </motion.div>
       </section>
 
       {/* Content */}
       <section className="container mx-auto max-w-4xl px-4 pb-20">
-        <div className="prose prose-invert prose-lg max-w-none">
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="prose prose-invert prose-lg max-w-none"
+        >
           <div className="text-white/80 leading-relaxed">
             {post.content.split('\n').map((line, index) => {
               if (line.startsWith('## ')) {
@@ -204,27 +242,39 @@ const ResearchDetail = () => {
               );
             })}
           </div>
-        </div>
+        </motion.div>
 
         {/* Tags */}
-        <div className="flex flex-wrap items-center gap-2 mt-12 pt-8 border-t border-white/10">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="flex flex-wrap items-center gap-2 mt-12 pt-8 border-t border-white/10"
+        >
           <span className="text-white/40 text-sm mr-2">Tags:</span>
           {post.tags.map((tag) => (
-            <span 
+            <motion.span 
               key={tag} 
-              className="px-3 py-1 bg-white/5 text-white/60 rounded-full text-sm"
+              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
+              className="px-3 py-1 bg-white/5 text-white/60 rounded-full text-sm cursor-pointer transition-colors"
             >
               {tag}
-            </span>
+            </motion.span>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       {/* Related Articles */}
       {relatedPosts.length > 0 && (
-        <section className="bg-[hsl(0,0%,6%)] py-20">
+        <section className="bg-[#0A0A0A] py-20 border-t border-white/10">
           <div className="container mx-auto max-w-7xl px-4">
-            <div className="flex items-center justify-between mb-12">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center justify-between mb-12"
+            >
               <h2 className="text-2xl md:text-3xl font-light text-white">
                 Related Articles
               </h2>
@@ -234,34 +284,51 @@ const ResearchDetail = () => {
               >
                 View All <ChevronRight className="w-4 h-4" />
               </Link>
-            </div>
+            </motion.div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {relatedPosts.map((relatedPost) => (
-                <Link 
+              {relatedPosts.map((relatedPost, index) => (
+                <motion.div
                   key={relatedPost.id}
-                  to={`/research/${relatedPost.slug}`}
-                  className="group"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
-                  <div className="aspect-[16/10] rounded-xl overflow-hidden mb-4">
-                    <img 
-                      src={relatedPost.image} 
-                      alt={relatedPost.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="flex items-center gap-3 mb-3">
-                    <span className="px-2 py-1 bg-white/5 text-white/60 rounded text-xs">
-                      {relatedPost.category}
-                    </span>
-                    <span className="text-white/40 text-xs">
-                      {relatedPost.readTime}
-                    </span>
-                  </div>
-                  <h3 className="text-lg font-medium text-white leading-snug group-hover:text-primary transition-colors">
-                    {relatedPost.title}
-                  </h3>
-                </Link>
+                  <Link 
+                    to={`/research/${relatedPost.slug}`}
+                    className="group block"
+                  >
+                    <motion.div 
+                      whileHover={{ y: -8 }}
+                      transition={{ duration: 0.3 }}
+                      className="rounded-2xl border border-white/10 hover:border-white/30 overflow-hidden bg-white/[0.02] transition-all duration-300"
+                    >
+                      <div className="aspect-[16/10] overflow-hidden">
+                        <motion.img 
+                          whileHover={{ scale: 1.05 }}
+                          transition={{ duration: 0.5 }}
+                          src={relatedPost.image} 
+                          alt={relatedPost.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="px-2 py-1 bg-white/5 text-white/60 rounded text-xs">
+                            {relatedPost.category}
+                          </span>
+                          <span className="text-white/40 text-xs">
+                            {relatedPost.readTime}
+                          </span>
+                        </div>
+                        <h3 className="text-lg font-medium text-white leading-snug group-hover:text-primary transition-colors">
+                          {relatedPost.title}
+                        </h3>
+                      </div>
+                    </motion.div>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>
