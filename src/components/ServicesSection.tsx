@@ -58,14 +58,15 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ y: -4 }}
     >
       <Link
         to={service.link}
-        className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-white/5 ${
+        className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/5 hover:shadow-lg hover:shadow-white/5 ${
           !isRightColumn ? "border-r border-white/10" : ""
         } ${!isLastRow ? "border-b border-white/10" : ""}`}
       >
-        <Icon className="w-10 h-10 mb-6 text-white/40 group-hover:text-white transition-colors" strokeWidth={1.5} />
+        <Icon className="w-10 h-10 mb-6 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" strokeWidth={1.5} />
         <h3 className="text-xl font-semibold text-white mb-3">
           {service.title}
         </h3>

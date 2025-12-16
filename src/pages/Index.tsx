@@ -26,26 +26,12 @@ const Index = () => {
         </div>
       </main>
       
-      {/* Process */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="process">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
-            </div>
-            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">How We Work</span>
-          </div>
-          <ProcessSection />
-        </div>
-      </section>
-      
       {/* Services */}
       <section className="scroll-reveal bg-[#0A0A0A]" id="services">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
             </div>
             <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">What We Do</span>
@@ -54,31 +40,45 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Media Partners - Marquee Bar */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="media-partners">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Media Partners</h2>
-            </div>
-            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">As Featured In</span>
-          </div>
-          <MediaPartnersSection />
-        </div>
-      </section>
-      
       {/* Cases */}
       <section className="scroll-reveal bg-[#0A0A0A]" id="cases">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
             </div>
             <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">Our Work</span>
           </div>
           <CasesSection />
+        </div>
+      </section>
+      
+      {/* Process */}
+      <section className="scroll-reveal bg-[#0A0A0A]" id="process">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
+            </div>
+            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">How We Work</span>
+          </div>
+          <ProcessSection />
+        </div>
+      </section>
+      
+      {/* About */}
+      <section className="scroll-reveal bg-[#0A0A0A]" id="why-choose-us">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
+            </div>
+            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">Why Ium Labs</span>
+          </div>
+          <WhyChooseUsSection />
         </div>
       </section>
       
@@ -96,17 +96,17 @@ const Index = () => {
         </div>
       </section>
       
-      {/* About */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="why-choose-us">
+      {/* Media Partners - Marquee Bar */}
+      <section className="scroll-reveal bg-[#0A0A0A]" id="media-partners">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
+              <h2 className="text-lg md:text-xl font-medium text-white">Media Partners</h2>
             </div>
-            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">Why Ium Labs</span>
+            <span className="text-[10px] md:text-xs text-white/40 tracking-wider hidden sm:block">As Featured In</span>
           </div>
-          <WhyChooseUsSection />
+          <MediaPartnersSection />
         </div>
       </section>
       
