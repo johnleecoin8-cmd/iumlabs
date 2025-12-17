@@ -620,9 +620,28 @@ const ProjectDetail = () => {
     setLightboxOpen(true);
   };
 
+  // Create CSS custom properties for the project color
+  const projectColorStyles = {
+    '--project-color': project.glowColor,
+    '--project-color-10': `${project.glowColor}1A`,
+    '--project-color-20': `${project.glowColor}33`,
+    '--project-color-30': `${project.glowColor}4D`,
+    '--project-color-50': `${project.glowColor}80`,
+  } as React.CSSProperties;
+
   return (
     <div className="min-h-screen bg-white p-0.5 sm:p-1 md:p-2">
-      <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden">
+      <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden relative" style={projectColorStyles}>
+        {/* Persistent Project Color Ambient Glow */}
+        <div 
+          className="fixed top-0 left-0 w-[50vw] h-[50vh] pointer-events-none z-0 opacity-20"
+          style={{ background: `radial-gradient(ellipse at 0% 0%, ${project.glowColor} 0%, transparent 60%)` }}
+        />
+        <div 
+          className="fixed bottom-0 right-0 w-[40vw] h-[40vh] pointer-events-none z-0 opacity-15"
+          style={{ background: `radial-gradient(ellipse at 100% 100%, ${project.glowColor} 0%, transparent 60%)` }}
+        />
+        
         <Navbar />
       
       {/* Lightbox */}
@@ -634,41 +653,64 @@ const ProjectDetail = () => {
         onNavigate={setLightboxIndex}
       />
       
-      {/* Hero Section - Neon Green Marketing Style */}
+      {/* Hero Section - Project Brand Color Style */}
       <section className="relative min-h-[85vh] overflow-hidden">
-        {/* Background Image with Ken Burns */}
+        {/* Background Image with Ken Burns + Color Tint */}
         <div 
           className="absolute inset-[-10%] bg-cover bg-center animate-kenburns"
           style={{ 
             backgroundImage: `url(${project.bgImage})`,
-            filter: 'brightness(0.4) saturate(1.3)',
+            filter: 'brightness(0.35) saturate(1.4)',
           }}
         />
         
+        {/* Project Color Tint Overlay */}
+        <div 
+          className="absolute inset-0 mix-blend-overlay opacity-30"
+          style={{ backgroundColor: project.glowColor }}
+        />
+        
         {/* Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/60 via-transparent to-[#0A0A0A]" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/80 via-transparent to-transparent" />
-        
-        {/* Project Color Glow Blobs */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/70 via-transparent to-[#0A0A0A]" />
         <div 
-          className="absolute top-1/4 left-1/4 w-[600px] h-[600px] rounded-full blur-[150px] opacity-40 animate-pulse"
-          style={{ background: `radial-gradient(circle, ${project.glowColor} 0%, transparent 70%)` }}
-        />
-        <div 
-          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full blur-[120px] opacity-30"
-          style={{ background: `radial-gradient(circle, ${project.glowColor} 0%, transparent 70%)` }}
+          className="absolute inset-0"
+          style={{ background: `linear-gradient(to right, ${project.glowColor}20 0%, transparent 50%, transparent 100%)` }}
         />
         
-        {/* Grid Pattern Overlay */}
+        {/* Project Color Glow Blobs - Larger & More Prominent */}
         <div 
-          className="absolute inset-0 opacity-[0.08] pointer-events-none"
+          className="absolute top-1/4 left-1/4 w-[800px] h-[800px] rounded-full blur-[200px] opacity-50 animate-pulse"
+          style={{ background: `radial-gradient(circle, ${project.glowColor} 0%, transparent 60%)` }}
+        />
+        <div 
+          className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] rounded-full blur-[150px] opacity-40"
+          style={{ background: `radial-gradient(circle, ${project.glowColor} 0%, transparent 60%)` }}
+        />
+        <div 
+          className="absolute top-1/2 right-1/3 w-[300px] h-[300px] rounded-full blur-[100px] opacity-30 animate-pulse"
+          style={{ background: project.glowColor, animationDelay: '1s' }}
+        />
+        
+        {/* Grid Pattern Overlay with Project Color */}
+        <div 
+          className="absolute inset-0 opacity-[0.12] pointer-events-none"
           style={{
             backgroundImage: `
               linear-gradient(${project.glowColor} 1px, transparent 1px),
               linear-gradient(90deg, ${project.glowColor} 1px, transparent 1px)
             `,
-            backgroundSize: '80px 80px'
+            backgroundSize: '60px 60px'
           }}
+        />
+        
+        {/* Corner Accent Lines */}
+        <div 
+          className="absolute top-0 left-0 w-40 h-px"
+          style={{ background: `linear-gradient(to right, ${project.glowColor}, transparent)` }}
+        />
+        <div 
+          className="absolute top-0 left-0 h-40 w-px"
+          style={{ background: `linear-gradient(to bottom, ${project.glowColor}, transparent)` }}
         />
         
         {/* Content */}
@@ -780,32 +822,61 @@ const ProjectDetail = () => {
         </div>
       </div>
 
-      {/* Metrics Section - Dark Project Color Style */}
-      <section className="bg-[#0A0A0A] py-16">
-        <div className="container mx-auto max-w-7xl px-4 md:px-8">
+      {/* Metrics Section - Project Brand Color Style */}
+      <section className="bg-[#0A0A0A] py-16 relative overflow-hidden">
+        {/* Subtle Background Gradient */}
+        <div 
+          className="absolute inset-0 opacity-[0.03] pointer-events-none"
+          style={{ background: `radial-gradient(ellipse at center, ${project.glowColor} 0%, transparent 70%)` }}
+        />
+        
+        <div className="container mx-auto max-w-7xl px-4 md:px-8 relative z-10">
+          {/* Section Header */}
+          <motion.div 
+            className="flex items-center gap-4 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="w-12 h-px" style={{ backgroundColor: project.glowColor }} />
+            <span className="text-sm uppercase tracking-[0.3em] font-medium" style={{ color: project.glowColor }}>Key Metrics</span>
+          </motion.div>
+          
           {/* Metrics Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {project.metrics.map((metric, index) => (
               <motion.div 
                 key={index} 
-                className="group relative p-6 md:p-8 rounded-2xl bg-[#111] border border-white/10 hover:border-white/30 hover:bg-white/[0.02] transition-all duration-300 overflow-hidden"
+                className="group relative p-6 md:p-8 rounded-2xl bg-[#111] overflow-hidden transition-all duration-300"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 whileHover={{ y: -6, scale: 1.02 }}
-                style={{ '--glow-color': project.glowColor } as React.CSSProperties}
-                onMouseEnter={(e) => e.currentTarget.style.borderColor = `${project.glowColor}50`}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = ''}
+                style={{ 
+                  border: `1px solid ${project.glowColor}20`,
+                }}
               >
+                {/* Always-visible color accent */}
+                <div 
+                  className="absolute top-0 left-0 w-full h-1"
+                  style={{ background: `linear-gradient(to right, ${project.glowColor}, ${project.glowColor}40, transparent)` }}
+                />
+                
+                {/* Corner Accent */}
+                <div 
+                  className="absolute top-0 right-0 w-20 h-20 opacity-20 group-hover:opacity-40 transition-opacity"
+                  style={{ background: `radial-gradient(circle at top right, ${project.glowColor} 0%, transparent 70%)` }}
+                />
+                
                 {/* Hover Glow */}
                 <div 
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity" 
-                  style={{ backgroundColor: `${project.glowColor}08` }}
+                  style={{ backgroundColor: `${project.glowColor}10` }}
                 />
                 <div 
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                  style={{ boxShadow: `inset 0 0 40px ${project.glowColor}15` }}
+                  style={{ boxShadow: `inset 0 0 60px ${project.glowColor}20, 0 0 40px ${project.glowColor}15` }}
                 />
                 
                 <div className="relative">
@@ -816,35 +887,58 @@ const ProjectDetail = () => {
                     {metric.label}
                   </p>
                 </div>
-                <span className="absolute bottom-4 right-4 text-white/20 text-xs font-mono">0{index + 1}</span>
+                <span 
+                  className="absolute bottom-4 right-4 text-xs font-mono opacity-30"
+                  style={{ color: project.glowColor }}
+                >
+                  0{index + 1}
+                </span>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Challenge & Approach Section - Dark Theme */}
-      <section className="bg-[#0A0A0A]">
+      {/* Challenge & Approach Section - Project Brand Color Style */}
+      <section className="bg-[#0A0A0A] py-8 relative">
+        {/* Colored Section Border */}
+        <div 
+          className="absolute top-0 left-0 right-0 h-px opacity-30"
+          style={{ background: `linear-gradient(to right, transparent, ${project.glowColor}, transparent)` }}
+        />
+        
         <div className="container mx-auto max-w-7xl px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Left - THE CHALLENGE */}
             <motion.div 
-              className="p-8 md:p-12 rounded-2xl bg-[#111] border border-white/10 hover:border-white/30 transition-all duration-300 relative overflow-hidden group"
+              className="p-8 md:p-12 rounded-2xl bg-[#111] transition-all duration-300 relative overflow-hidden group"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               whileHover={{ y: -4 }}
+              style={{ border: `1px solid ${project.glowColor}30` }}
             >
-              {/* Accent Line */}
+              {/* Top & Left Accent Lines */}
               <div 
                 className="absolute top-0 left-0 w-full h-1" 
                 style={{ background: `linear-gradient(to right, ${project.glowColor}, ${project.glowColor}50, transparent)` }}
               />
+              <div 
+                className="absolute top-0 left-0 h-full w-1" 
+                style={{ background: `linear-gradient(to bottom, ${project.glowColor}, transparent)` }}
+              />
+              
+              {/* Corner Glow */}
+              <div 
+                className="absolute -top-20 -left-20 w-40 h-40 opacity-40"
+                style={{ background: `radial-gradient(circle, ${project.glowColor} 0%, transparent 70%)` }}
+              />
+              
               {/* Hover Glow */}
               <div 
                 className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-                style={{ boxShadow: `inset 0 0 60px ${project.glowColor}10` }}
+                style={{ boxShadow: `inset 0 0 80px ${project.glowColor}15` }}
               />
               
               <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] mb-6" style={{ color: project.glowColor }}>
@@ -854,24 +948,40 @@ const ProjectDetail = () => {
               <p className="text-white text-xl md:text-2xl font-light leading-relaxed">
                 {project.challenge}
               </p>
+              
+              {/* Decorative Number */}
+              <span 
+                className="absolute bottom-6 right-6 text-8xl font-bold opacity-[0.05]"
+                style={{ color: project.glowColor }}
+              >
+                01
+              </span>
             </motion.div>
 
             {/* Right - WHAT WE DID */}
             <motion.div 
-              className="p-8 md:p-12 rounded-2xl bg-[#111] border border-white/10 hover:border-white/30 transition-all duration-300 relative overflow-hidden group"
+              className="p-8 md:p-12 rounded-2xl bg-[#111] transition-all duration-300 relative overflow-hidden group"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
               whileHover={{ y: -4 }}
+              style={{ border: `1px solid ${project.glowColor}20` }}
             >
               {/* Accent Line */}
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-white/30 via-white/10 to-transparent" />
-              {/* Hover Glow */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none bg-white/[0.02]" />
+              <div 
+                className="absolute top-0 left-0 w-full h-1" 
+                style={{ background: `linear-gradient(to right, ${project.glowColor}60, ${project.glowColor}20, transparent)` }}
+              />
               
-              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-white/50 mb-6">
-                <span className="w-6 h-px bg-white/50" />
+              {/* Hover Glow */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                style={{ backgroundColor: `${project.glowColor}08` }}
+              />
+              
+              <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] mb-6" style={{ color: project.glowColor }}>
+                <span className="w-6 h-px" style={{ backgroundColor: project.glowColor }} />
                 What We Did
               </span>
               
@@ -880,25 +990,42 @@ const ProjectDetail = () => {
                 {project.services.map((service, i) => (
                   <motion.div 
                     key={i} 
-                    className="flex items-center gap-3"
+                    className="flex items-center gap-3 group/item"
                     initial={{ opacity: 0, x: 10 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.1 }}
                   >
-                    <div className="w-2 h-2 rounded-full" style={{ backgroundColor: project.glowColor }} />
-                    <span className="text-white text-lg">{service}</span>
+                    <div 
+                      className="w-2 h-2 rounded-full transition-all duration-300 group-hover/item:scale-150 group-hover/item:shadow-lg"
+                      style={{ 
+                        backgroundColor: project.glowColor,
+                        boxShadow: `0 0 0 0 ${project.glowColor}40`
+                      }} 
+                    />
+                    <span className="text-white text-lg group-hover/item:translate-x-1 transition-transform">{service}</span>
                   </motion.div>
                 ))}
               </div>
 
-              {/* Divider */}
-              <div className="border-t border-white/10 my-6" />
+              {/* Divider with color */}
+              <div 
+                className="my-6 h-px"
+                style={{ background: `linear-gradient(to right, ${project.glowColor}30, transparent)` }}
+              />
 
               {/* Strategy Quote */}
               <p className="text-white/60 text-sm italic leading-relaxed">
                 "{project.strategy[0]}"
               </p>
+              
+              {/* Decorative Number */}
+              <span 
+                className="absolute bottom-6 right-6 text-8xl font-bold opacity-[0.05]"
+                style={{ color: project.glowColor }}
+              >
+                02
+              </span>
             </motion.div>
           </div>
         </div>
@@ -1005,9 +1132,21 @@ const ProjectDetail = () => {
         </div>
       </section>
 
-      {/* Next Project - Dark Project Color Style */}
-      <section className="py-24 bg-[#0A0A0A] border-t border-white/10">
-        <div className="container mx-auto max-w-7xl px-4 md:px-8">
+      {/* Next Project - Enhanced Brand Color Style */}
+      <section className="py-24 bg-[#0A0A0A] relative overflow-hidden">
+        {/* Top Border with Current Project Color */}
+        <div 
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{ background: `linear-gradient(to right, transparent, ${project.glowColor}50, transparent)` }}
+        />
+        
+        {/* Next Project Color Ambient */}
+        <div 
+          className="absolute bottom-0 right-0 w-[60%] h-full opacity-10 pointer-events-none"
+          style={{ background: `radial-gradient(ellipse at 100% 100%, ${nextProject.glowColor} 0%, transparent 60%)` }}
+        />
+        
+        <div className="container mx-auto max-w-7xl px-4 md:px-8 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -1020,36 +1159,47 @@ const ProjectDetail = () => {
               className="block group"
             >
               <p className="text-sm uppercase tracking-widest mb-6 flex items-center gap-3" style={{ color: nextProject.glowColor }}>
-                <span className="w-8 h-px" style={{ backgroundColor: nextProject.glowColor }} />
+                <span className="w-12 h-px" style={{ backgroundColor: nextProject.glowColor }} />
                 Next Project
+                <span className="w-8 h-px opacity-50" style={{ backgroundColor: nextProject.glowColor }} />
               </p>
               <div className="flex items-center justify-between">
                 <div>
                   <motion.h3 
                     className="text-5xl md:text-7xl lg:text-8xl font-bold text-white transition-colors duration-300 mb-3"
                     whileHover={{ x: 10 }}
+                    style={{ textShadow: `0 0 60px ${nextProject.glowColor}20` }}
                     onMouseEnter={(e) => e.currentTarget.style.color = nextProject.glowColor}
                     onMouseLeave={(e) => e.currentTarget.style.color = ''}
                   >
                     {nextProject.name}
                   </motion.h3>
-                <p className="text-white/50 text-xl">{nextProject.result}</p>
-              </div>
-              <div className="relative">
-                <div 
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-full border border-white/20 flex items-center justify-center transition-all duration-300"
-                  style={{ '--next-glow': nextProject.glowColor } as React.CSSProperties}
-                >
-                  <ArrowUpRight className="w-8 h-8 md:w-10 md:h-10 text-white/50 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                  <p className="text-white/50 text-xl flex items-center gap-3">
+                    <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: nextProject.glowColor }} />
+                    {nextProject.result}
+                  </p>
                 </div>
-                {/* Glow on hover */}
-                <div 
-                  className="absolute inset-0 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity -z-10" 
-                  style={{ backgroundColor: `${nextProject.glowColor}40` }}
-                />
+                <div className="relative">
+                  <div 
+                    className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+                    style={{ 
+                      border: `2px solid ${nextProject.glowColor}40`,
+                      backgroundColor: `${nextProject.glowColor}10`
+                    }}
+                  >
+                    <ArrowUpRight 
+                      className="w-8 h-8 md:w-10 md:h-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" 
+                      style={{ color: nextProject.glowColor }}
+                    />
+                  </div>
+                  {/* Glow on hover */}
+                  <div 
+                    className="absolute inset-0 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity -z-10 scale-150" 
+                    style={{ backgroundColor: `${nextProject.glowColor}50` }}
+                  />
+                </div>
               </div>
-            </div>
-          </Link>
+            </Link>
           </motion.div>
         </div>
       </section>
