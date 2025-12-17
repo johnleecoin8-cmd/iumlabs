@@ -1,14 +1,13 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Suspense } from 'react';
-import Bridge3D from './Bridge3D';
+import teamPhoto from '@/assets/team-photo.png';
 
 const WhyChooseUsSection = () => {
   return (
     <section className="bg-[#0A0A0A]">
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        {/* Left: 3D Bridge */}
+        {/* Left: Image */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -17,9 +16,11 @@ const WhyChooseUsSection = () => {
           className="lg:border-r border-white/10"
         >
           <div className="aspect-[4/3] lg:aspect-auto lg:h-full overflow-hidden">
-            <Suspense fallback={<div className="w-full h-full bg-[#0A0A0A]" />}>
-              <Bridge3D />
-            </Suspense>
+            <img
+              src={teamPhoto}
+              alt="Ium Labs Team"
+              className="w-full h-full object-cover object-[center_65%]"
+            />
           </div>
         </motion.div>
 
