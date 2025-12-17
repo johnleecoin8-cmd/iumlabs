@@ -34,11 +34,11 @@ const themeConfig = {
   backgroundImage: seoulHanriver,
   auroraColors: {
     primary: "from-blue-600/30",
-    secondary: "to-cyan-500/25",
-    tertiary: "from-teal-500/20",
+    secondary: "to-sky-500/25",
+    tertiary: "from-indigo-500/20",
   },
-  accentColor: "#0891b2",
-  accentColorHover: "#0e7490",
+  accentColor: "#3B82F6", // Blue - Trust, community
+  accentColorHover: "#2563EB",
   floatingTags: [
     { label: "Discord", top: "12%", left: "6%" },
     { label: "Telegram", top: "22%", right: "8%" },
