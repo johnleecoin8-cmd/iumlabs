@@ -157,9 +157,22 @@ const ServiceDetailLayout = ({
             </div>
           </div>
 
-          {/* Scroll Indicator */}
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40">
-            <ArrowDown className="w-4 h-4 animate-bounce" />
+          {/* Client Logo Marquee */}
+          <div className="absolute bottom-0 left-0 right-0 bg-white/5 backdrop-blur-sm border-t border-white/10 py-5 overflow-hidden">
+            <div className="flex animate-marquee whitespace-nowrap">
+              {[...clientLogos, ...clientLogos, ...clientLogos].map((logo, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 mx-8 flex items-center justify-center"
+                >
+                  <img
+                    src={logo.src}
+                    alt={logo.alt}
+                    className="h-6 md:h-8 w-auto object-contain brightness-0 invert opacity-60 hover:opacity-100 transition-opacity"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
