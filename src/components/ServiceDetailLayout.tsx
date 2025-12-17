@@ -63,12 +63,12 @@ interface ServiceDetailLayoutProps {
 }
 
 const allServices = [
-  { slug: "community", title: "Community Management", number: "01", icon: Users, description: "Complete Discord community infrastructure to build sticky, scalable and self-sustaining growth." },
-  { slug: "social-media", title: "Social Media Marketing", number: "02", icon: AtSign, description: "Content strategy and execution on X to grow visibility and engage with your ecosystem." },
-  { slug: "influencer", title: "Influencer Strategy", number: "03", icon: Mic2, description: "Influencer campaigns powered by top crypto voices aligned with your message and goals." },
-  { slug: "gtm", title: "GTM Strategy", number: "04", icon: Compass, description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus." },
-  { slug: "yap", title: "Yap Strategy", number: "05", icon: MessageCircle, description: "Targeted campaigns through a 600+ creator network designed to drive awareness." },
-  { slug: "pr", title: "PR & Media", number: "06", icon: Newspaper, description: "Narrative development and media placements to get your story published and seen." },
+  { slug: "community", title: "Community Management", number: "01", icon: Users, description: "Complete Discord community infrastructure to build sticky, scalable and self-sustaining growth.", color: "#3B82F6" },
+  { slug: "social-media", title: "Social Media Marketing", number: "02", icon: AtSign, description: "Content strategy and execution on X to grow visibility and engage with your ecosystem.", color: "#EC4899" },
+  { slug: "influencer", title: "Influencer Strategy", number: "03", icon: Mic2, description: "Influencer campaigns powered by top crypto voices aligned with your message and goals.", color: "#F59E0B" },
+  { slug: "gtm", title: "GTM Strategy", number: "04", icon: Compass, description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus.", color: "#10B981" },
+  { slug: "yap", title: "Yap Strategy", number: "05", icon: MessageCircle, description: "Targeted campaigns through a 600+ creator network designed to drive awareness.", color: "#22D3EE" },
+  { slug: "pr", title: "PR & Media", number: "06", icon: Newspaper, description: "Narrative development and media placements to get your story published and seen.", color: "#8B5CF6" },
 ];
 
 const clientLogos = [
@@ -126,7 +126,17 @@ const ServiceDetailLayout = ({
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] p-0.5 sm:p-1 md:p-2">
-      <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden">
+      <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden relative">
+        {/* Persistent Ambient Glow */}
+        <div 
+          className="fixed top-0 left-0 w-[50vw] h-[50vh] pointer-events-none z-0 opacity-15"
+          style={{ background: `radial-gradient(ellipse at 0% 0%, ${themeConfig.accentColor} 0%, transparent 60%)` }}
+        />
+        <div 
+          className="fixed bottom-0 right-0 w-[40vw] h-[40vh] pointer-events-none z-0 opacity-10"
+          style={{ background: `radial-gradient(ellipse at 100% 100%, ${themeConfig.accentColor} 0%, transparent 60%)` }}
+        />
+        
         <Navbar />
 
         {/* Hero Section */}
@@ -134,18 +144,34 @@ const ServiceDetailLayout = ({
           {/* Background */}
           <div className="absolute inset-0">
             <div 
-              className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+              className="absolute inset-[-5%] bg-cover bg-center bg-no-repeat animate-kenburns"
               style={{ 
                 backgroundImage: `url(${themeConfig.backgroundImage})`,
-                filter: "brightness(0.4)",
+                filter: "brightness(0.35) saturate(1.2)",
               }}
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/50 via-transparent to-[#0A0A0A]" />
-            {/* Accent Color Overlay */}
+            {/* Color Tint Overlay */}
             <div 
-              className="absolute inset-0 opacity-20"
+              className="absolute inset-0 mix-blend-overlay opacity-25"
+              style={{ backgroundColor: themeConfig.accentColor }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/60 via-transparent to-[#0A0A0A]" />
+            {/* Stronger Accent Color Glow */}
+            <div 
+              className="absolute inset-0"
               style={{ 
-                background: `radial-gradient(ellipse at 30% 50%, ${themeConfig.accentColor}30, transparent 70%)` 
+                background: `radial-gradient(ellipse at 20% 40%, ${themeConfig.accentColor}40, transparent 50%), radial-gradient(ellipse at 80% 60%, ${themeConfig.accentColor}20, transparent 50%)` 
+              }}
+            />
+            {/* Grid Pattern */}
+            <div 
+              className="absolute inset-0 opacity-[0.06] pointer-events-none"
+              style={{
+                backgroundImage: `
+                  linear-gradient(${themeConfig.accentColor} 1px, transparent 1px),
+                  linear-gradient(90deg, ${themeConfig.accentColor} 1px, transparent 1px)
+                `,
+                backgroundSize: '60px 60px'
               }}
             />
           </div>
@@ -231,22 +257,35 @@ const ServiceDetailLayout = ({
         <section 
           className="relative"
           style={{ 
-            background: `linear-gradient(to bottom, #0A0A0A, ${themeConfig.accentColor}08, #0A0A0A)` 
+            background: `linear-gradient(to bottom, #0A0A0A, ${themeConfig.accentColor}10, #0A0A0A)` 
           }}
         >
-          <div className="border-t border-white/10">
+          {/* Colored Top Border */}
+          <div 
+            className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: `linear-gradient(to right, transparent, ${themeConfig.accentColor}60, transparent)` }}
+          />
+          
+          <div className="border-t border-transparent">
             {/* Section Header */}
-            <div className="flex items-baseline justify-between px-6 md:px-10 py-6 border-b border-white/10">
+            <div 
+              className="flex items-baseline justify-between px-6 md:px-10 py-6"
+              style={{ borderBottom: `1px solid ${themeConfig.accentColor}20` }}
+            >
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+                <span 
+                  className="text-[10px] md:text-xs font-mono tracking-widest"
+                  style={{ color: themeConfig.accentColor }}
+                >01</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
               </div>
               <span 
                 className="text-xs tracking-wider hidden sm:block px-3 py-1 rounded-full"
                 style={{ 
                   borderWidth: 1,
-                  borderColor: `${themeConfig.accentColor}40`,
+                  borderColor: `${themeConfig.accentColor}50`,
                   color: themeConfig.accentColor,
+                  backgroundColor: `${themeConfig.accentColor}10`,
                 }}
               >
                 Overview
@@ -312,20 +351,39 @@ const ServiceDetailLayout = ({
         </section>
 
         {/* Process Section */}
-        <section className="bg-[#0A0A0A]">
-          <div className="border-t border-white/10">
+        <section className="bg-[#0A0A0A] relative overflow-hidden">
+          {/* Background Glow */}
+          <div 
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] opacity-[0.03] pointer-events-none"
+            style={{ background: `radial-gradient(ellipse at center, ${themeConfig.accentColor} 0%, transparent 70%)` }}
+          />
+          
+          {/* Colored Top Border */}
+          <div 
+            className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: `linear-gradient(to right, transparent, ${themeConfig.accentColor}40, transparent)` }}
+          />
+          
+          <div className="border-t border-transparent relative z-10">
             {/* Section Header */}
-            <div className="flex items-baseline justify-between px-6 md:px-10 py-6 border-b border-white/10">
+            <div 
+              className="flex items-baseline justify-between px-6 md:px-10 py-6"
+              style={{ borderBottom: `1px solid ${themeConfig.accentColor}20` }}
+            >
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+                <span 
+                  className="text-[10px] md:text-xs font-mono tracking-widest"
+                  style={{ color: themeConfig.accentColor }}
+                >02</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
               </div>
               <span 
                 className="text-xs tracking-wider hidden sm:block px-3 py-1 rounded-full"
                 style={{ 
                   borderWidth: 1,
-                  borderColor: `${themeConfig.accentColor}40`,
+                  borderColor: `${themeConfig.accentColor}50`,
                   color: themeConfig.accentColor,
+                  backgroundColor: `${themeConfig.accentColor}10`,
                 }}
               >
                 What's Included
@@ -347,35 +405,52 @@ const ServiceDetailLayout = ({
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     whileHover={{ y: -4 }}
-                    className={`group p-8 md:p-10 transition-all duration-300 hover:bg-white/5 ${
-                      !isLast ? "lg:border-r border-white/10" : ""
-                    } ${isOdd ? "md:border-l lg:border-l-0 border-white/10" : ""} ${
-                      index < 2 ? "border-b lg:border-b-0 border-white/10" : ""
+                    className={`group p-8 md:p-10 transition-all duration-300 relative overflow-hidden ${
+                      !isLast ? "lg:border-r" : ""
+                    } ${isOdd ? "md:border-l lg:border-l-0" : ""} ${
+                      index < 2 ? "border-b lg:border-b-0" : ""
                     }`}
+                    style={{ 
+                      borderColor: `${themeConfig.accentColor}15`,
+                    }}
                   >
-                    <Icon 
-                      className="w-8 h-8 mb-4 text-white/40 transition-all duration-300"
-                      style={{ 
-                        '--icon-color': themeConfig.accentColor,
-                      } as React.CSSProperties}
-                      strokeWidth={1.5} 
+                    {/* Hover Background */}
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ backgroundColor: `${themeConfig.accentColor}08` }}
                     />
-                    <style>
-                      {`
-                        .group:hover svg {
-                          color: ${themeConfig.accentColor};
-                          filter: drop-shadow(0 0 12px ${themeConfig.accentColor}60);
-                        }
-                      `}
-                    </style>
                     
-                    <h3 className="text-lg font-semibold text-white mb-3">
-                      {step.title}
-                    </h3>
+                    {/* Step Number Watermark */}
+                    <span 
+                      className="absolute top-4 right-4 text-5xl font-bold opacity-[0.05] group-hover:opacity-[0.1] transition-opacity"
+                      style={{ color: themeConfig.accentColor }}
+                    >
+                      {step.number}
+                    </span>
                     
-                    <p className="text-white/50 text-sm leading-relaxed">
-                      {step.description}
-                    </p>
+                    <div className="relative z-10">
+                      <div 
+                        className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-300"
+                        style={{ 
+                          backgroundColor: `${themeConfig.accentColor}15`,
+                          border: `1px solid ${themeConfig.accentColor}30`,
+                        }}
+                      >
+                        <Icon 
+                          className="w-6 h-6 transition-all duration-300 group-hover:scale-110"
+                          style={{ color: themeConfig.accentColor }}
+                          strokeWidth={1.5} 
+                        />
+                      </div>
+                      
+                      <h3 className="text-lg font-semibold text-white mb-3 group-hover:translate-x-1 transition-transform">
+                        {step.title}
+                      </h3>
+                      
+                      <p className="text-white/50 text-sm leading-relaxed">
+                        {step.description}
+                      </p>
+                    </div>
                   </motion.div>
                 );
               })}
@@ -384,15 +459,35 @@ const ServiceDetailLayout = ({
         </section>
 
         {/* More Services Section */}
-        <section className="bg-[#0A0A0A]">
-          <div className="border-t border-white/10">
+        <section className="bg-[#0A0A0A] relative">
+          {/* Top Border */}
+          <div 
+            className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: `linear-gradient(to right, transparent, ${themeConfig.accentColor}30, transparent)` }}
+          />
+          
+          <div className="border-t border-transparent">
             {/* Section Header */}
-            <div className="flex items-baseline justify-between px-6 md:px-10 py-6 border-b border-white/10">
+            <div 
+              className="flex items-baseline justify-between px-6 md:px-10 py-6"
+              style={{ borderBottom: `1px solid ${themeConfig.accentColor}15` }}
+            >
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
+                <span 
+                  className="text-[10px] md:text-xs font-mono tracking-widest"
+                  style={{ color: themeConfig.accentColor }}
+                >03</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">More Services</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Explore</span>
+              <span 
+                className="text-xs tracking-wider hidden sm:block px-3 py-1 rounded-full"
+                style={{ 
+                  border: `1px solid ${themeConfig.accentColor}40`,
+                  color: themeConfig.accentColor,
+                }}
+              >
+                Explore
+              </span>
             </div>
             
             {/* Services Grid */}
@@ -401,6 +496,7 @@ const ServiceDetailLayout = ({
                 const Icon = service.icon;
                 const isLastRow = index >= otherServices.length - 2;
                 const isRightColumn = index % 2 === 1;
+                const serviceColor = service.color;
                 
                 return (
                   <motion.div
@@ -413,20 +509,55 @@ const ServiceDetailLayout = ({
                   >
                     <Link
                       to={`/services/${service.slug}`}
-                      className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/5 hover:shadow-lg hover:shadow-white/5 ${
-                        !isRightColumn ? "md:border-r border-white/10" : ""
-                      } ${!isLastRow ? "border-b border-white/10" : ""}`}
+                      className={`group block p-8 md:p-10 transition-all duration-300 relative overflow-hidden ${
+                        !isRightColumn ? "md:border-r" : ""
+                      } ${!isLastRow ? "border-b" : ""}`}
+                      style={{ 
+                        borderColor: `${themeConfig.accentColor}15`,
+                      }}
                     >
-                      <Icon className="w-10 h-10 mb-6 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" strokeWidth={1.5} />
-                      <h3 className="text-xl font-semibold text-white mb-3">
-                        {service.title}
-                      </h3>
-                      <p className="text-white/50 text-sm leading-relaxed mb-6">
-                        {service.description}
-                      </p>
-                      <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm">
-                        Learn more
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      {/* Hover Background with Service Color */}
+                      <div 
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{ backgroundColor: `${serviceColor}08` }}
+                      />
+                      
+                      {/* Corner Accent on Hover */}
+                      <div 
+                        className="absolute top-0 left-0 w-1 h-0 group-hover:h-full transition-all duration-300"
+                        style={{ backgroundColor: serviceColor }}
+                      />
+                      
+                      <div className="relative z-10">
+                        <div 
+                          className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-all duration-300"
+                          style={{ 
+                            backgroundColor: `${serviceColor}10`,
+                            border: `1px solid ${serviceColor}20`,
+                          }}
+                        >
+                          <Icon 
+                            className="w-6 h-6 transition-all duration-300 group-hover:scale-110"
+                            style={{ color: serviceColor }}
+                            strokeWidth={1.5} 
+                          />
+                        </div>
+                        <h3 
+                          className="text-xl font-semibold text-white mb-3 group-hover:translate-x-1 transition-all duration-300"
+                          style={{ '--service-color': serviceColor } as React.CSSProperties}
+                        >
+                          {service.title}
+                        </h3>
+                        <p className="text-white/50 text-sm leading-relaxed mb-6">
+                          {service.description}
+                        </p>
+                        <div 
+                          className="flex items-center gap-2 text-sm transition-colors"
+                          style={{ color: serviceColor }}
+                        >
+                          Learn more
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </div>
                       </div>
                     </Link>
                   </motion.div>

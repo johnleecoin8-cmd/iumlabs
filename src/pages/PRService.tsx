@@ -33,12 +33,12 @@ const processSteps = [
 const themeConfig = {
   backgroundImage: seoulSkyline,
   auroraColors: {
-    primary: "from-indigo-600/30",
-    secondary: "to-blue-500/25",
-    tertiary: "from-violet-500/20",
+    primary: "from-violet-600/30",
+    secondary: "to-purple-500/25",
+    tertiary: "from-indigo-500/20",
   },
-  accentColor: "#6366f1",
-  accentColorHover: "#4f46e5",
+  accentColor: "#8B5CF6", // Violet - Premium, authority
+  accentColorHover: "#7C3AED",
   floatingTags: [
     { label: "Media", top: "12%", left: "8%" },
     { label: "Press", top: "24%", right: "11%" },
