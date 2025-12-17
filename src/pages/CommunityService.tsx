@@ -5,16 +5,21 @@ import seoulHanriver from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
 const processSteps = [
   {
     number: "01",
-    title: "Foundation",
+    title: "Onboarding",
     description: "We run a detailed onboarding process to collect information about your project, community goals, and current setup. This gives us what we need to design your custom Discord ecosystem.",
   },
   {
     number: "02",
-    title: "Infrastructure Setup, A/B Testing & Launch",
-    description: "We implement your selected infrastructure components, conduct A/B testing to optimize performance, and activate all chosen systems to drive sustainable growth.",
+    title: "Infrastructure Setup",
+    description: "We implement your selected infrastructure components including AI automation, gamified engagement systems, and community training modules tailored to your needs.",
   },
   {
     number: "03",
+    title: "Launch & Activation",
+    description: "We activate all systems, conduct A/B testing to optimize performance, and monitor early community engagement to ensure smooth operation.",
+  },
+  {
+    number: "04",
     title: "Reporting",
     description: "We deliver performance reports with top contributors, engagement trends, and actionable recommendations for continued community growth and optimization.",
   },
