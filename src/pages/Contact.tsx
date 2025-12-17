@@ -3,16 +3,11 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, Users, Globe, Megaphone, Shield } from "lucide-react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
-import koreaPalaceModern from "@/assets/backgrounds/korea-palace-modern.jpg";
-import seoulSkyline from "@/assets/seoul-skyline.jpg";
 
 const budgetOptions = [
   "$15,000 - $25,000",
@@ -34,49 +29,8 @@ const contactInfo = [
   { icon: MapPin, label: "Office", value: brand.address, link: "#" },
 ];
 
-const floatingTags = [
-  { label: "Seoul Office", top: "18%", left: "6%" },
-  { label: "24/7 Support", top: "28%", left: "18%" },
-  { label: "Book a Call", top: "46%", left: "4%" },
-  { label: "Fast Response", top: "56%", left: "14%" },
-  { label: "Global Reach", top: "16%", right: "10%" },
-  { label: "Partnership", top: "30%", right: "5%" },
-  { label: "Consultation", top: "48%", right: "10%" },
-  { label: "Get Started", top: "62%", right: "6%" },
-];
-
-const serviceHighlights = [
-  { 
-    icon: Globe, 
-    title: "DeFi Solutions", 
-    description: "Strategic marketing for DeFi protocols entering the Korean market",
-    link: "/services/defi"
-  },
-  { 
-    icon: Users, 
-    title: "NFT & Metaverse", 
-    description: "Build and engage communities around your NFT and metaverse projects",
-    link: "/services/nft"
-  },
-  { 
-    icon: Megaphone, 
-    title: "GameFi Marketing", 
-    description: "Connect with Korean gamers and gaming communities",
-    link: "/services/gamefi"
-  },
-  { 
-    icon: Shield, 
-    title: "All Services", 
-    description: "Explore our full range of Web3 marketing services",
-    link: "/services"
-  },
-];
-
 const Contact = () => {
   const { toast } = useToast();
-  const [scrollY, setScrollY] = useState(0);
-  const { ref: servicesRef, isVisible: servicesVisible } = useScrollAnimation({ threshold: 0.2 });
-  const { ref: formRef, isVisible: formVisible } = useScrollAnimation({ threshold: 0.15 });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -87,19 +41,12 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email) return;
 
     setIsSubmitting(true);
     try {
-      // Save to database
       const { error } = await supabase
         .from('contact_submissions')
         .insert({
@@ -110,7 +57,6 @@ const Contact = () => {
 
       if (error) throw error;
 
-      // Send email notification (don't block on this)
       supabase.functions.invoke('send-contact-notification', {
         body: {
           name: formData.name,
@@ -141,290 +87,265 @@ const Contact = () => {
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero - Compact with Ken Burns Background */}
+      {/* Hero Section - Simple centered like homepage */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
-      <section className="relative min-h-[80vh] flex flex-col justify-center overflow-hidden rounded-xl sm:rounded-2xl">
-        {/* Background - Korea Palace Modern */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div 
-            className="absolute inset-[-10%] bg-cover bg-center bg-no-repeat animate-kenburns"
-            style={{ 
-              backgroundImage: `url(${koreaPalaceModern})`,
-              filter: "brightness(0.5) saturate(1.2)",
-            }}
-          />
-          
-          {/* Aurora light overlay - Amber/Orange warm theme */}
-          <div className="absolute inset-0 animate-aurora">
-            <div className="absolute inset-0 bg-gradient-to-tr from-amber-600/25 via-transparent to-orange-500/20" />
-            <div className="absolute inset-0 bg-gradient-to-bl from-yellow-600/20 via-transparent to-red-500/15" />
+        <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl">
+          {/* Video Background */}
+          <div className="absolute inset-0 overflow-hidden">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ filter: "brightness(0.35)" }}
+              onLoadedMetadata={(e) => {
+                (e.target as HTMLVideoElement).currentTime = 0;
+              }}
+            >
+              <source src="/videos/services-background.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-transparent to-[#0A0A0A]" />
           </div>
-          
-          {/* Light sweep effect */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div className="absolute w-[200%] h-[200%] -top-1/2 -left-1/2 bg-gradient-to-r from-transparent via-white/8 to-transparent animate-light-sweep" />
-          </div>
-          
-          {/* Dark overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.9)]" />
-        </div>
-        
 
-        {/* Content with Stagger Animation */}
-        <div className="container mx-auto max-w-7xl px-4 relative z-10 pt-32 pb-24">
-          <div className="mb-16">
-            <span className="text-sm text-white/50 mb-4 block opacity-0 animate-fade-up" style={{ animationDelay: '0.1s', animationFillMode: 'forwards' }}>[ Contact ]</span>
-            <h1 className="text-[12vw] md:text-[150px] lg:text-[180px] font-light text-white leading-[0.85] tracking-tight opacity-0 animate-fade-up" style={{ animationDelay: '0.2s', animationFillMode: 'forwards' }}>
-              Let's <span className="serif-italic text-primary">Talk</span>
-            </h1>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-16 pt-8 border-t border-white/10 opacity-0 animate-fade-up" style={{ animationDelay: '0.4s', animationFillMode: 'forwards' }}>
-            {/* Left - Description */}
-            <div>
-              <p className="text-lg text-white/60 mb-8">
-                Tell us about your project and we'll explain how we can help you succeed in Korea.
-              </p>
-              <CalendlyButton className="lunar-btn">
+          {/* Content - Centered like homepage */}
+          <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
+            <motion.span 
+              className="text-xs text-white/50 mb-6 block tracking-widest"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              [ Contact ]
+            </motion.span>
+            <motion.h1 
+              className="text-[14vw] md:text-[120px] lg:text-[140px] font-light text-white leading-[0.85] tracking-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              Let's T<span className="serif-italic">a</span>lk
+            </motion.h1>
+            <motion.p 
+              className="text-lg text-white/60 max-w-xl mx-auto mt-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              Tell us about your project and we'll explain how we can help you succeed in Korea.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="mt-8"
+            >
+              <CalendlyButton className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 font-medium hover:bg-white/90 transition-colors">
                 <Calendar className="w-4 h-4" />
                 <span>Book a Meeting</span>
               </CalendlyButton>
-            </div>
+            </motion.div>
+          </div>
+        </section>
+      </main>
 
-            {/* Right - Contact Links */}
-            <div className="space-y-0">
+      {/* Contact Info Section */}
+      <section className="bg-[#0A0A0A]" id="contact-info">
+        <div className="border-t border-white/10">
+          {/* Section Header */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Contact Info</h2>
+            </div>
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+              Get in Touch
+            </span>
+          </div>
+          
+          {/* Contact Info Content */}
+          <div className="container mx-auto max-w-7xl px-4 md:px-8 py-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {contactInfo.map((info, index) => (
-                <a 
+                <motion.a 
                   key={info.label}
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
                   rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="flex items-center justify-between py-4 border-b border-white/10 group hover:border-white/30 transition-colors opacity-0 animate-fade-up"
-                  style={{ animationDelay: `${0.5 + index * 0.1}s`, animationFillMode: 'forwards' }}
+                  className="group flex items-center justify-between p-6 bg-white/[0.02] border border-white/10 rounded-2xl hover:border-white/30 transition-all duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -4 }}
                 >
-                  <div className="flex items-center gap-3">
-                    <info.icon className="w-4 h-4 text-white/50" />
-                    <span className="text-white/50 text-sm">{info.label}</span>
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
+                      <info.icon className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
+                    </div>
+                    <div>
+                      <p className="text-white/40 text-xs mb-1">{info.label}</p>
+                      <p className="text-white text-sm font-medium">{info.value}</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-white">{info.value}</span>
-                    <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-white transition-colors" />
-                  </div>
-                </a>
+                  <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-white transition-colors" />
+                </motion.a>
               ))}
             </div>
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 right-8 flex flex-col items-center gap-2 text-white/30">
-          <div className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent animate-pulse" />
-          <span className="text-xs uppercase tracking-widest">Scroll</span>
-        </div>
       </section>
-      </main>
 
-      {/* Services Highlight Section */}
-      <section 
-        ref={servicesRef as React.RefObject<HTMLElement>}
-        className="bg-[#0A0A0A] py-20 border-y border-white/5"
-      >
-        <div className="container mx-auto max-w-7xl px-4 md:px-8">
-          <div className={`text-center mb-12 transition-all duration-700 ${servicesVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <span className="text-sm text-white/40 mb-3 block">[ Our Services ]</span>
-            <h2 className="text-3xl md:text-4xl font-light text-white">
-              How we can <span className="serif-italic text-primary">help</span>
-            </h2>
+      {/* Contact Form Section */}
+      <section className="bg-[#0A0A0A]" id="contact-form">
+        <div className="border-t border-white/10">
+          {/* Section Header */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Send a Message</h2>
+            </div>
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+              We'll respond within 24h
+            </span>
           </div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {serviceHighlights.map((service, index) => (
+          {/* Form Content */}
+          <div className="container mx-auto max-w-4xl px-4 md:px-8 py-16">
+            <form onSubmit={handleSubmit} className="space-y-8">
+              {/* Name & Email Row */}
+              <div className="grid sm:grid-cols-2 gap-8">
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -8, scale: 1.02 }}
+                  transition={{ delay: 0.1 }}
                 >
-                  <Link 
-                    to={service.link}
-                    className="group relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 overflow-hidden transition-all duration-300 block h-full"
-                  >
-                    {/* Hover gradient background */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-blue-500/10 to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    {/* Glow effect */}
-                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ boxShadow: 'inset 0 0 40px rgba(239, 68, 68, 0.1)' }} />
-                  
-                    <div className="relative z-10">
-                      <div className="flex items-center justify-between mb-4">
-                        <service.icon className="w-8 h-8 text-primary group-hover:scale-110 transition-transform duration-300" />
-                        <ArrowUpRight className="w-4 h-4 text-white/30 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
-                      </div>
-                      <h3 className="text-lg font-medium text-white mb-2 group-hover:text-primary transition-colors">{service.title}</h3>
-                      <p className="text-sm text-white/50 group-hover:text-white/70 transition-colors duration-300">{service.description}</p>
-                    </div>
-                  </Link>
-                </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Contact Form Section - Dark Theme 2-Column */}
-      <section 
-        ref={formRef as React.RefObject<HTMLElement>}
-        className="bg-[#0A0A0A] py-24"
-      >
-        <div className="container mx-auto max-w-7xl px-4 md:px-8">
-          <div className={`grid lg:grid-cols-2 gap-12 lg:gap-16 transition-all duration-300 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            {/* Left Column - Image & Contact Info */}
-            <div 
-              className="space-y-8 transition-all duration-300"
-              style={{ transitionDelay: '150ms' }}
-            >
-              {/* Seoul Skyline Image */}
-              <div className="rounded-2xl overflow-hidden">
-                <img 
-                  src={seoulSkyline} 
-                  alt="Seoul Skyline" 
-                  className="w-full h-64 sm:h-80 object-cover"
-                />
-              </div>
-              
-              {/* Contact Details */}
-              <div className="space-y-6">
-                {contactDetails.map((detail, index) => (
-                  <motion.div 
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ x: 8 }}
-                    className="group"
-                  >
-                    <span className="text-sm text-white/40 block mb-1">{detail.label}</span>
-                    {detail.link ? (
-                      <a 
-                        href={detail.link}
-                        target={detail.link.startsWith('http') ? '_blank' : undefined}
-                        rel={detail.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                        className="text-white text-lg hover:text-primary transition-colors"
-                      >
-                        {detail.value}
-                      </a>
-                    ) : (
-                      <p className="text-white text-lg">{detail.value}</p>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-
-            {/* Right Column - Form */}
-            <div 
-              className={`transition-all duration-300 ${formVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
-              style={{ transitionDelay: '300ms' }}
-            >
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Name & Email Row */}
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Name</label>
-                    <input
-                      type="text"
-                      placeholder="Your name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      required
-                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-primary focus:outline-none transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">E-mail</label>
-                    <input
-                      type="email"
-                      placeholder="your@email.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      required
-                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-primary focus:outline-none transition-colors"
-                    />
-                  </div>
-                </div>
-
-                {/* Company Name & Website Row */}
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Name</label>
-                    <input
-                      type="text"
-                      placeholder="Company name"
-                      value={formData.company}
-                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-primary focus:outline-none transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Website</label>
-                    <input
-                      type="url"
-                      placeholder="https://..."
-                      value={formData.website}
-                      onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                      className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-primary focus:outline-none transition-colors"
-                    />
-                  </div>
-                </div>
-
-                {/* Estimated Budget */}
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-4">Estimated Budget</label>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    {budgetOptions.map((option, index) => (
-                      <motion.button
-                        key={option}
-                        type="button"
-                        onClick={() => setFormData({ ...formData, budget: option })}
-                        className={`px-4 py-3 rounded-lg text-sm border transition-all text-center ${
-                          formData.budget === option
-                            ? 'bg-white/10 border-primary text-white'
-                            : 'bg-transparent border-white/20 text-white/60 hover:border-white/40 hover:text-white'
-                        }`}
-                        whileHover={{ scale: 1.03 }}
-                        whileTap={{ scale: 0.97 }}
-                      >
-                        {option}
-                      </motion.button>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Project Description */}
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Tell Us About Your Project</label>
-                  <textarea
-                    placeholder="Describe your project and goals..."
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    rows={4}
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-primary focus:outline-none transition-colors resize-none"
+                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Name *</label>
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
                   />
-                </div>
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.15 }}
+                >
+                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Email *</label>
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                  />
+                </motion.div>
+              </div>
 
-                {/* Submit Button */}
-                <div className="pt-4">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full font-medium transition-all disabled:opacity-50"
-                  >
-                    {isSubmitting ? "Sending..." : "Send Message"}
-                  </button>
+              {/* Company Name & Website Row */}
+              <div className="grid sm:grid-cols-2 gap-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Name</label>
+                  <input
+                    type="text"
+                    placeholder="Company name"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.25 }}
+                >
+                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Website</label>
+                  <input
+                    type="url"
+                    placeholder="https://..."
+                    value={formData.website}
+                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                  />
+                </motion.div>
+              </div>
+
+              {/* Estimated Budget */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+              >
+                <label className="block text-xs uppercase tracking-wider text-white/40 mb-4">Estimated Budget</label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {budgetOptions.map((option) => (
+                    <motion.button
+                      key={option}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, budget: option })}
+                      className={`px-4 py-3 rounded-xl text-sm border transition-all text-center ${
+                        formData.budget === option
+                          ? 'bg-white/10 border-white text-white'
+                          : 'bg-transparent border-white/20 text-white/60 hover:border-white/40 hover:text-white'
+                      }`}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {option}
+                    </motion.button>
+                  ))}
                 </div>
-              </form>
-            </div>
+              </motion.div>
+
+              {/* Project Description */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.35 }}
+              >
+                <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Tell Us About Your Project</label>
+                <textarea
+                  placeholder="Describe your project and goals..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  rows={4}
+                  className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors resize-none"
+                />
+              </motion.div>
+
+              {/* Submit Button */}
+              <motion.div 
+                className="pt-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+              >
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="group inline-flex items-center gap-2 bg-white text-black px-8 py-4 font-medium hover:bg-white/90 transition-all disabled:opacity-50"
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </motion.div>
+            </form>
           </div>
         </div>
       </section>
