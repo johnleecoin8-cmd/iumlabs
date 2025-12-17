@@ -145,31 +145,6 @@ const cases = [
   },
 ];
 
-const GoldShape = () => (
-  <motion.div
-    className="relative w-40 h-40 mx-auto"
-    animate={{ rotateY: 360 }}
-    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-    style={{ transformStyle: "preserve-3d" }}
-  >
-    <div
-      className="absolute inset-0 rounded-3xl"
-      style={{
-        background: "linear-gradient(135deg, #C4A35A 0%, #F5E6C8 50%, #C4A35A 100%)",
-        transform: "rotateX(20deg) rotateZ(-10deg)",
-        boxShadow: "0 20px 40px rgba(196, 163, 90, 0.3)"
-      }}
-    />
-    <div
-      className="absolute inset-4 rounded-2xl"
-      style={{
-        background: "linear-gradient(225deg, #F5E6C8 0%, #C4A35A 100%)",
-        transform: "rotateX(20deg) rotateZ(-10deg) translateZ(20px)"
-      }}
-    />
-  </motion.div>
-);
-
 interface ProjectCardProps {
   project: typeof cases[0];
   index: number;
@@ -237,9 +212,9 @@ const Projects = () => {
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero Section - Keep dark style */}
+      {/* Hero Section - Simple centered like homepage */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
-        <section className="relative min-h-[60vh] flex flex-col justify-center overflow-hidden rounded-xl sm:rounded-2xl bg-[#0A0A0A]">
+        <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl bg-[#0A0A0A]">
           <div className="absolute inset-0 overflow-hidden">
             <video
               autoPlay
@@ -254,92 +229,120 @@ const Projects = () => {
             >
               <source src="/videos/projects-background.mp4" type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-transparent to-[#0A0A0A]" />
           </div>
 
-          <div className="flex-1 flex items-center relative z-10 px-4 sm:px-6 lg:px-16 py-24">
-            <div className="max-w-4xl">
-              <motion.h1 
-                className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                <span className="text-white">Our </span>
-                <span className="text-white">Projects</span>
-              </motion.h1>
-              <motion.p 
-                className="text-lg md:text-xl text-white/60 max-w-2xl"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                Case studies walking through the challenge, our approach, and the outcomes across GTM, KOLs, PR, and social media.
-              </motion.p>
-            </div>
+          {/* Content - Centered like homepage */}
+          <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
+            <motion.span 
+              className="text-xs text-white/50 mb-6 block tracking-widest"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              [ Projects ]
+            </motion.span>
+            <motion.h1 
+              className="text-[14vw] md:text-[120px] lg:text-[140px] font-light text-white leading-[0.85] tracking-tight"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+            >
+              Our W<span className="serif-italic">o</span>rk
+            </motion.h1>
+            <motion.p 
+              className="text-lg text-white/60 max-w-2xl mx-auto mt-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+            >
+              Case studies walking through the challenge, our approach, and the outcomes across GTM, KOLs, PR, and social media.
+            </motion.p>
+            <motion.div 
+              className="flex items-center justify-center gap-4 text-white/40 text-sm mt-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <span>{cases.length} Projects</span>
+              <span>•</span>
+              <span>8 Categories</span>
+            </motion.div>
           </div>
         </section>
       </main>
 
-      {/* Projects Grid - Dark theme 2-column layout */}
-      <section className="bg-[#0A0A0A]">
-        <div className="flex flex-col lg:flex-row">
-          {/* Left: Projects Grid */}
-          <div className="w-full lg:w-2/3 border-r border-white/10">
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              {cases.map((project, index) => (
-                <ProjectCard key={project.slug} project={project} index={index} />
-              ))}
+      {/* Projects Grid Section with Header */}
+      <section className="bg-[#0A0A0A]" id="projects-grid">
+        <div className="border-t border-white/10">
+          {/* Section Header */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Case Studies</h2>
             </div>
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+              {cases.length} Projects
+            </span>
           </div>
-
-          {/* Right: Sticky CTA Panel */}
-          <motion.div
-            className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl font-bold text-white mb-4">
-              Our Track Record
-            </h2>
-            <p className="text-white/50 leading-relaxed mb-8">
-              We've helped 18+ global Web3 projects successfully enter and scale in the Korean market. From infrastructure to DeFi, exchange to AI.
-            </p>
-            <Link
-              to="/contact"
-              className="group inline-flex items-center gap-2 bg-white text-[#0A0A0A] px-6 py-3 text-sm font-medium hover:bg-white/90 transition-all duration-300 w-fit mb-12 hover:gap-3"
-            >
-              START YOUR PROJECT
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-
-            <GoldShape />
-
-            <div className="mt-12 pt-8 border-t border-white/10">
-              <div className="grid grid-cols-2 gap-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 }}
-                >
-                  <p className="text-3xl font-bold text-white">18+</p>
-                  <p className="text-white/50 text-sm">Projects Launched</p>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 }}
-                >
-                  <p className="text-3xl font-bold text-white">$6M+</p>
-                  <p className="text-white/50 text-sm">Token Sales</p>
-                </motion.div>
+          
+          {/* Grid Content */}
+          <div className="flex flex-col lg:flex-row">
+            {/* Left: Projects Grid */}
+            <div className="w-full lg:w-2/3 lg:border-r lg:border-white/10">
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                {cases.map((project, index) => (
+                  <ProjectCard key={project.slug} project={project} index={index} />
+                ))}
               </div>
             </div>
-          </motion.div>
+
+            {/* Right: Sticky CTA Panel */}
+            <motion.div
+              className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl font-bold text-white mb-4">
+                Our Track Record
+              </h2>
+              <p className="text-white/50 leading-relaxed mb-8">
+                We've helped 18+ global Web3 projects successfully enter and scale in the Korean market. From infrastructure to DeFi, exchange to AI.
+              </p>
+              <Link
+                to="/contact"
+                className="group inline-flex items-center gap-2 bg-white text-[#0A0A0A] px-6 py-3 text-sm font-medium hover:bg-white/90 transition-all duration-300 w-fit mb-12 hover:gap-3"
+              >
+                START YOUR PROJECT
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+
+              <div className="pt-8 border-t border-white/10">
+                <div className="grid grid-cols-2 gap-6">
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                  >
+                    <p className="text-3xl font-bold text-white">18+</p>
+                    <p className="text-white/50 text-sm">Projects Launched</p>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <p className="text-3xl font-bold text-white">$6M+</p>
+                    <p className="text-white/50 text-sm">Token Sales</p>
+                  </motion.div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
