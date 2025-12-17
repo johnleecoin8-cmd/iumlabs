@@ -215,216 +215,184 @@ const ServiceDetailLayout = ({
         </div>
       </section>
 
-      {/* About Section - Dark */}
+      {/* About Section */}
       <section className="bg-[#0A0A0A]">
-        <div className="flex flex-col lg:flex-row min-h-[600px]">
-          {/* Left Column - Text */}
-          <div className="w-full lg:w-1/2 px-6 lg:px-16 py-20 lg:py-32 flex items-center">
-            <div className="max-w-xl scroll-reveal">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white mb-8 tracking-tight">
-                About
-              </h2>
-              <p className="text-white/60 text-lg leading-relaxed mb-10">
-                {aboutText}
-              </p>
-              <CalendlyButton 
-                className="inline-flex items-center gap-3 text-white px-8 py-4 rounded-xl font-medium text-lg transition-all duration-300 hover:scale-105"
-                style={{ backgroundColor: themeConfig.accentColor }}
-              >
-                <Calendar className="w-5 h-5" />
-                Book a Meeting
-              </CalendlyButton>
+        <div className="border-t border-white/10">
+          {/* Section Header */}
+          <div className="flex items-baseline justify-between px-6 md:px-10 py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
             </div>
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Overview</span>
           </div>
+          
+          {/* Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-2">
+            {/* Left Column - Text */}
+            <div className="px-6 lg:px-10 py-12 lg:py-16 flex items-center border-b lg:border-b-0 lg:border-r border-white/10">
+              <div className="max-w-xl scroll-reveal">
+                <p className="text-white/60 text-lg leading-relaxed mb-8">
+                  {aboutText}
+                </p>
+                <CalendlyButton 
+                  className="inline-flex items-center gap-3 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105"
+                  style={{ backgroundColor: themeConfig.accentColor }}
+                >
+                  <Calendar className="w-5 h-5" />
+                  Book a Meeting
+                </CalendlyButton>
+              </div>
+            </div>
 
-          {/* Right Column - Image/Pattern */}
-          <div className="w-full lg:w-1/2 relative min-h-[400px] lg:min-h-full">
-            {aboutImage ? (
-              <div className="absolute inset-0">
-                <img 
-                  src={aboutImage} 
-                  alt="Service" 
-                  className="w-full h-full object-cover"
-                />
+            {/* Right Column - Image/Info */}
+            <div className="relative min-h-[300px] lg:min-h-[400px]">
+              {aboutImage ? (
+                <div className="absolute inset-0">
+                  <img 
+                    src={aboutImage} 
+                    alt="Service" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div 
+                    className="absolute inset-0"
+                    style={{
+                      background: `linear-gradient(135deg, ${themeConfig.accentColor}80 0%, ${themeConfig.accentColorHover}60 100%)`,
+                    }}
+                  />
+                  <div className="absolute bottom-6 left-6 right-6 lg:right-auto lg:max-w-xs bg-black/40 backdrop-blur-md rounded-lg px-5 py-4 border border-white/20">
+                    <p className="text-white/70 text-xs uppercase tracking-wider mb-1">open hours</p>
+                    <p className="text-white font-medium">Mon-Fri 09:00 — 18:00</p>
+                  </div>
+                </div>
+              ) : (
                 <div 
                   className="absolute inset-0"
                   style={{
-                    background: `linear-gradient(135deg, ${themeConfig.accentColor}99 0%, ${themeConfig.accentColorHover}80 50%, ${themeConfig.accentColor}70 100%)`,
+                    background: `linear-gradient(135deg, ${themeConfig.accentColor} 0%, ${themeConfig.accentColorHover} 100%)`,
                   }}
-                />
-                {/* Open Hours Card */}
-                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-black/40 backdrop-blur-md rounded-xl px-6 py-5 border border-white/20">
-                  <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
-                  <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
+                >
+                  <div className="absolute inset-0 opacity-30">
+                    <div className="absolute top-[15%] left-[15%] w-32 h-32 rounded-full border-2 border-white/40" />
+                    <div className="absolute top-[35%] left-[45%] w-48 h-48 rounded-full border border-white/25" />
+                    <div className="absolute top-[55%] left-[25%] w-20 h-20 rounded-full border-2 border-white/50" />
+                  </div>
+                  <div className="absolute bottom-6 left-6 right-6 lg:right-auto lg:max-w-xs bg-black/40 backdrop-blur-md rounded-lg px-5 py-4 border border-white/20">
+                    <p className="text-white/70 text-xs uppercase tracking-wider mb-1">open hours</p>
+                    <p className="text-white font-medium">Mon-Fri 09:00 — 18:00</p>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <div 
-                className="absolute inset-0"
-                style={{
-                  background: `linear-gradient(135deg, ${themeConfig.accentColor} 0%, ${themeConfig.accentColorHover} 100%)`,
-                }}
-              >
-                {/* Abstract pattern overlay */}
-                <div className="absolute inset-0 opacity-40">
-                  <div className="absolute top-[15%] left-[15%] w-40 h-40 rounded-full border-2 border-white/40" />
-                  <div className="absolute top-[35%] left-[45%] w-64 h-64 rounded-full border border-white/25" />
-                  <div className="absolute top-[55%] left-[25%] w-28 h-28 rounded-full border-2 border-white/50" />
-                  <div className="absolute top-[20%] left-[60%] w-20 h-20 rounded-full bg-white/15" />
-                  <div className="absolute top-[65%] left-[55%] w-32 h-32 rounded-full border border-white/30" />
-                </div>
-                {/* Open Hours Card */}
-                <div className="absolute bottom-8 left-8 right-8 lg:right-auto lg:max-w-xs bg-black/40 backdrop-blur-md rounded-xl px-6 py-5 border border-white/20">
-                  <p className="text-white/70 text-sm uppercase tracking-wider mb-1">open hours</p>
-                  <p className="text-white font-medium text-lg">Mon-Fri 09:00 — 18:00</p>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* What Includes Section */}
-      <section className="bg-[#111111] py-20 lg:py-32">
-        <div className="container mx-auto px-6 lg:px-16">
-          {/* Header */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 scroll-reveal gap-4">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight">
-              What
-            </h2>
-            <div className="flex items-center gap-4">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight">
-                Includes
-              </h2>
-              <div className="flex gap-1.5 ml-2">
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
-                <span className="w-2 h-2 rounded-full" style={{ backgroundColor: themeConfig.accentColor }} />
-              </div>
+      {/* Process Section */}
+      <section className="bg-[#0A0A0A]">
+        <div className="border-t border-white/10">
+          {/* Section Header */}
+          <div className="flex items-baseline justify-between px-6 md:px-10 py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
             </div>
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What's Included</span>
           </div>
-
-          {/* Divider */}
-          <div className="border-b border-dashed border-white/20 mb-12" />
-
-          {/* Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+          
+          {/* Content */}
+          <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Left - Description */}
-            <div className="scroll-reveal">
-              <p className="text-white/60 text-lg leading-relaxed mb-8">
-                {whatIncludesText}
-              </p>
-              <CalendlyButton 
-                className="inline-flex items-center transition-colors group text-lg"
-                style={{ color: themeConfig.accentColor }}
-              >
-                <span className="text-white/40 mr-2">[</span>
-                <span className="font-medium">book a meeting</span>
-                <span className="text-white/40 ml-2">]</span>
-              </CalendlyButton>
+            <div className="px-6 lg:px-10 py-12 lg:py-16 border-b lg:border-b-0 lg:border-r border-white/10">
+              <div className="scroll-reveal">
+                <p className="text-white/60 text-lg leading-relaxed mb-8">
+                  {whatIncludesText}
+                </p>
+                <CalendlyButton 
+                  className="inline-flex items-center transition-colors group text-lg"
+                  style={{ color: themeConfig.accentColor }}
+                >
+                  <span className="text-white/40 mr-2">[</span>
+                  <span className="font-medium">book a meeting</span>
+                  <span className="text-white/40 ml-2">]</span>
+                </CalendlyButton>
+              </div>
             </div>
 
             {/* Right - Process Steps */}
-            <div className="space-y-0">
-              {processSteps.map((step, index) => (
-                <div
-                  key={step.number}
-                  className="scroll-reveal"
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <div className="flex justify-between items-start py-8 gap-6">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-medium text-white mb-3">
-                        {step.title}
-                      </h3>
-                      <p className="text-white/50 leading-relaxed">
-                        {step.description}
-                      </p>
+            <div className="px-6 lg:px-10 py-12 lg:py-16">
+              <div className="space-y-0">
+                {processSteps.map((step, index) => (
+                  <div
+                    key={step.number}
+                    className="scroll-reveal"
+                    style={{ transitionDelay: `${index * 100}ms` }}
+                  >
+                    <div className="flex justify-between items-start py-6 gap-6">
+                      <div className="flex-1">
+                        <h3 className="text-lg font-medium text-white mb-2">
+                          {step.title}
+                        </h3>
+                        <p className="text-white/50 text-sm leading-relaxed">
+                          {step.description}
+                        </p>
+                      </div>
+                      <span 
+                        className="text-xs whitespace-nowrap flex-shrink-0 px-3 py-1 rounded-full text-white font-medium"
+                        style={{ backgroundColor: themeConfig.accentColor }}
+                      >
+                        {step.number}
+                      </span>
                     </div>
-                    <span 
-                      className="text-sm whitespace-nowrap flex-shrink-0 px-3 py-1 rounded-full text-white font-medium"
-                      style={{ backgroundColor: themeConfig.accentColor }}
-                    >
-                      {step.number}
-                    </span>
+                    {index < processSteps.length - 1 && (
+                      <div className="border-b border-white/10" />
+                    )}
                   </div>
-                  {index < processSteps.length - 1 && (
-                    <div className="border-b border-dashed border-white/20" />
-                  )}
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Watch Also Section */}
-      <section className="bg-[#0A0A0A] py-20 lg:py-32">
-        <div className="container mx-auto px-6 lg:px-16">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-8 scroll-reveal">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight">
-              Watch
-            </h2>
-            <div className="flex items-center gap-4">
-              <h2 className="text-5xl md:text-6xl lg:text-7xl font-light text-white tracking-tight">
-                Also
-              </h2>
-              <ArrowDown className="w-8 h-8 text-white/40" />
+      {/* More Services Section */}
+      <section className="bg-[#0A0A0A]">
+        <div className="border-t border-white/10">
+          {/* Section Header */}
+          <div className="flex items-baseline justify-between px-6 md:px-10 py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">More Services</h2>
             </div>
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Explore</span>
           </div>
-
-          {/* Divider */}
-          <div className="border-b border-dashed border-white/20 mb-4" />
-
+          
           {/* Service Links */}
-          {otherServices.map((service, index) => (
-            <Link
-              key={service.slug}
-              to={`/services/${service.slug}`}
-              className="block scroll-reveal"
-              style={{ transitionDelay: `${index * 100}ms` }}
-            >
-              <div className="py-8 border-b border-dashed border-white/20 flex justify-between items-center group cursor-pointer hover:bg-white/[0.02] transition-colors duration-300 px-4 -mx-4 rounded-lg">
-                {index % 2 === 0 ? (
-                  <>
-                    <h3 
-                      className="text-3xl md:text-4xl lg:text-5xl font-light text-white transition-colors duration-300 group-hover:translate-x-2 transform"
-                      style={{ color: undefined }}
-                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
-                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                    >
+          <div className="px-6 lg:px-10">
+            {otherServices.map((service, index) => (
+              <Link
+                key={service.slug}
+                to={`/services/${service.slug}`}
+                className="block scroll-reveal"
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <div className="py-6 border-b border-white/10 flex justify-between items-center group cursor-pointer hover:bg-white/[0.02] transition-all duration-300 px-4 -mx-4 rounded-lg">
+                  <div className="flex items-center gap-6">
+                    <span className="text-white/30 text-xs font-mono">{service.number}</span>
+                    <h3 className="text-xl md:text-2xl font-medium text-white transition-colors duration-300 group-hover:text-white/80">
                       {service.title}
                     </h3>
-                    <span 
-                      className="text-white/40 text-2xl md:text-3xl font-light transition-colors duration-300"
-                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
-                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                    >
-                      {service.number}
-                    </span>
-                  </>
-                ) : (
-                  <>
-                    <span 
-                      className="text-white/40 text-2xl md:text-3xl font-light transition-colors duration-300"
-                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
-                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                    >
-                      {service.number}
-                    </span>
-                    <h3 
-                      className="text-3xl md:text-4xl lg:text-5xl font-light text-white transition-colors duration-300 group-hover:-translate-x-2 transform text-right"
-                      onMouseEnter={(e) => e.currentTarget.style.color = themeConfig.accentColor}
-                      onMouseLeave={(e) => e.currentTarget.style.color = ''}
-                    >
-                      {service.title}
-                    </h3>
-                  </>
-                )}
-              </div>
-            </Link>
-          ))}
+                  </div>
+                  <span 
+                    className="text-sm transition-colors duration-300"
+                    style={{ color: themeConfig.accentColor }}
+                  >
+                    →
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
