@@ -65,10 +65,10 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           ${!isLastRow ? 'border-b border-white/10' : ''}
         `}
       >
-        {/* Hover Glow Effect */}
+        {/* Hover Glow Effect - Emerald */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent" />
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-primary/50 via-primary/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent" />
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-emerald-500/50 via-emerald-500/20 to-transparent" />
         </div>
         
         <div className="flex flex-col h-full min-h-[240px] relative">
@@ -79,11 +79,10 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
             transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
           >
             <Icon 
-              className="w-10 h-10 md:w-12 md:h-12 text-white/60 stroke-[1.5] transition-colors duration-300 group-hover:text-primary" 
+              className="w-10 h-10 md:w-12 md:h-12 text-white/60 stroke-[1.5] transition-colors duration-300 group-hover:text-emerald-400" 
             />
-            {/* Icon Glow */}
-            <div className="absolute inset-0 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10 scale-150" 
-              style={{ backgroundColor: 'hsl(var(--primary) / 0.3)' }} 
+            {/* Icon Glow - Emerald */}
+            <div className="absolute inset-0 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10 scale-150 bg-emerald-500/30" 
             />
           </motion.div>
           
@@ -97,9 +96,9 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
             {service.description}
           </p>
           
-          {/* Arrow Link */}
+          {/* Arrow Link - Emerald */}
           <motion.div 
-            className="flex items-center gap-2 text-white/40 group-hover:text-primary transition-colors duration-300"
+            className="flex items-center gap-2 text-white/40 group-hover:text-emerald-400 transition-colors duration-300"
             whileHover={{ x: 4 }}
           >
             <span className="text-sm font-medium">Learn more</span>
@@ -164,23 +163,53 @@ const Services = () => {
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Simple Header */}
-      <motion.header 
-        className="pt-32 md:pt-40 pb-12 md:pb-16 px-4 md:px-8 max-w-7xl mx-auto"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-      >
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight">
-          Our Services
-        </h1>
-        <p className="text-white/50 mt-4 text-lg max-w-xl">
-          Strategic solutions to launch and grow your Web3 project in the Korean market.
-        </p>
-      </motion.header>
+      {/* Hero Section - Emerald Theme */}
+      <section className="relative min-h-[60vh] flex flex-col justify-center items-center overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ filter: "brightness(0.35)" }}
+          >
+            <source src="/videos/services-background.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/20 via-teal-500/10 to-[#0A0A0A]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-transparent to-teal-500/10" />
+        </div>
+
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
+          <motion.span 
+            className="text-xs text-emerald-400/70 mb-6 block tracking-widest"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            [ Services ]
+          </motion.span>
+          <motion.h1 
+            className="text-[14vw] md:text-[120px] lg:text-[140px] font-light text-white leading-[0.85] tracking-tight"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+          >
+            Gr<span className="serif-italic text-emerald-400">o</span>wth
+          </motion.h1>
+          <motion.p 
+            className="text-lg text-white/60 max-w-xl mx-auto mt-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+          >
+            Strategic solutions to launch and grow your Web3 project in the Korean market.
+          </motion.p>
+        </div>
+      </section>
       
-      {/* Main 2-Column Layout */}
-      <main className="flex flex-col lg:flex-row max-w-7xl mx-auto border-t border-white/10">
+      {/* Main 2-Column Layout - Emerald Theme */}
+      <main className="flex flex-col lg:flex-row max-w-7xl mx-auto border-t border-emerald-500/20">
         {/* Left: Service Grid (2/3) */}
         <div className="w-full lg:w-2/3 border-r-0 lg:border-r border-white/10">
           <div className="grid grid-cols-1 md:grid-cols-2">
@@ -210,7 +239,7 @@ const Services = () => {
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Link 
                   to="/contact"
-                  className="group inline-flex items-center gap-2 bg-white text-[#0A0A0A] px-6 py-3 text-sm font-medium tracking-wide hover:bg-white/90 transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-white/20"
+                  className="group inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 text-sm font-medium tracking-wide hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-emerald-500/30 rounded-lg"
                 >
                   CONNECT WITH US
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

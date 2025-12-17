@@ -2932,7 +2932,7 @@ const Research = () => {
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero Section - Simple, like homepage */}
+      {/* Hero Section - Indigo Theme */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
         <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl">
           {/* Video Background */}
@@ -2950,13 +2950,14 @@ const Research = () => {
             >
               <source src="/videos/research-background.mp4" type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-transparent to-[#0A0A0A]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/20 via-purple-500/10 to-[#0A0A0A]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-transparent to-violet-500/10" />
           </div>
 
           {/* Content - Centered like homepage */}
           <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
             <motion.span 
-              className="text-xs text-white/50 mb-6 block tracking-widest"
+              className="text-xs text-indigo-400/70 mb-6 block tracking-widest"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -2969,7 +2970,7 @@ const Research = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Rese<span className="serif-italic">a</span>rch
+              Rese<span className="serif-italic text-indigo-400">a</span>rch
             </motion.h1>
             <motion.p 
               className="text-lg text-white/60 max-w-xl mx-auto mt-8"
@@ -2980,7 +2981,7 @@ const Research = () => {
               In-depth analysis and insights on Web3 marketing, Korean market dynamics, and emerging trends.
             </motion.p>
             <motion.div 
-              className="flex items-center justify-center gap-4 text-white/40 text-sm mt-6"
+              className="flex items-center justify-center gap-4 text-indigo-400/60 text-sm mt-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -2995,14 +2996,14 @@ const Research = () => {
 
       {/* Filters Section with Header */}
       <section className="bg-[#0A0A0A]" id="filters">
-        <div className="border-t border-white/10">
-          {/* Section Header */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+        <div className="border-t border-indigo-500/20">
+          {/* Section Header - Indigo Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-indigo-500/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+              <span className="text-[10px] md:text-xs text-indigo-500 font-mono tracking-widest">01</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Browse</h2>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+            <span className="text-xs text-indigo-400/60 tracking-wider hidden sm:block px-3 py-1 border border-indigo-500/30 rounded-full">
               Filter by Topic
             </span>
           </div>
@@ -3018,8 +3019,8 @@ const Research = () => {
                     onClick={() => { setSelectedCategory(category); setCurrentPage(1); }}
                     className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all ${
                       selectedCategory === category 
-                        ? "bg-white text-black" 
-                        : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10"
+                        ? "bg-indigo-500 text-white" 
+                        : "bg-white/5 text-white/60 hover:bg-indigo-500/10 border border-white/10 hover:border-indigo-500/30"
                     }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
@@ -3048,14 +3049,14 @@ const Research = () => {
       {/* Featured Article Section */}
       {currentPage === 1 && selectedCategory === "All" && !searchQuery && (
         <section className="bg-[#0A0A0A]" id="featured">
-          <div className="border-t border-white/10">
-            {/* Section Header */}
-            <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+          <div className="border-t border-indigo-500/20">
+            {/* Section Header - Indigo Theme */}
+            <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-indigo-500/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+                <span className="text-[10px] md:text-xs text-indigo-500 font-mono tracking-widest">02</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Featured</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+              <span className="text-xs text-indigo-400/60 tracking-wider hidden sm:block px-3 py-1 border border-indigo-500/30 rounded-full">
                 Latest
               </span>
             </div>
@@ -3122,16 +3123,16 @@ const Research = () => {
 
       {/* Article Grid Section */}
       <section className="bg-[#0A0A0A]" id="articles">
-        <div className="border-t border-white/10">
-          {/* Section Header */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+        <div className="border-t border-indigo-500/20">
+          {/* Section Header - Indigo Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-indigo-500/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
+              <span className="text-[10px] md:text-xs text-indigo-500 font-mono tracking-widest">
                 {currentPage === 1 && selectedCategory === "All" && !searchQuery ? "03" : "02"}
               </span>
               <h2 className="text-lg md:text-xl font-medium text-white">Articles</h2>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+            <span className="text-xs text-indigo-400/60 tracking-wider hidden sm:block px-3 py-1 border border-indigo-500/30 rounded-full">
               {filteredPosts.length} Results
             </span>
           </div>
@@ -3238,16 +3239,16 @@ const Research = () => {
 
       {/* Newsletter Section */}
       <section className="bg-[#0A0A0A]" id="newsletter">
-        <div className="border-t border-white/10">
-          {/* Section Header */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+        <div className="border-t border-indigo-500/20">
+          {/* Section Header - Indigo Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-indigo-500/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
+              <span className="text-[10px] md:text-xs text-indigo-500 font-mono tracking-widest">
                 {currentPage === 1 && selectedCategory === "All" && !searchQuery ? "04" : "03"}
               </span>
               <h2 className="text-lg md:text-xl font-medium text-white">Newsletter</h2>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+            <span className="text-xs text-indigo-400/60 tracking-wider hidden sm:block px-3 py-1 border border-indigo-500/30 rounded-full">
               Stay Updated
             </span>
           </div>
@@ -3277,7 +3278,7 @@ const Research = () => {
               <motion.button
                 type="submit"
                 disabled={isSubscribing}
-                className="px-8 h-12 bg-white text-black rounded-xl font-medium hover:bg-white/90 transition-colors disabled:opacity-50"
+                className="px-8 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl font-medium hover:from-indigo-600 hover:to-purple-600 transition-colors disabled:opacity-50"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >

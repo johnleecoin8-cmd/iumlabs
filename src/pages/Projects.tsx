@@ -212,7 +212,7 @@ const Projects = () => {
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero Section - Simple centered like homepage */}
+      {/* Hero Section - Gold/Amber Theme */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
         <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl bg-[#0A0A0A]">
           <div className="absolute inset-0 overflow-hidden">
@@ -229,13 +229,14 @@ const Projects = () => {
             >
               <source src="/videos/projects-background.mp4" type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-transparent to-[#0A0A0A]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-amber-500/20 via-transparent to-[#0A0A0A]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-transparent to-amber-500/10" />
           </div>
 
           {/* Content - Centered like homepage */}
           <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
             <motion.span 
-              className="text-xs text-white/50 mb-6 block tracking-widest"
+              className="text-xs text-amber-400/70 mb-6 block tracking-widest"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -248,7 +249,7 @@ const Projects = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Our W<span className="serif-italic">o</span>rk
+              Our W<span className="serif-italic text-amber-400">o</span>rk
             </motion.h1>
             <motion.p 
               className="text-lg text-white/60 max-w-2xl mx-auto mt-8"
@@ -259,7 +260,7 @@ const Projects = () => {
               Case studies walking through the challenge, our approach, and the outcomes across GTM, KOLs, PR, and social media.
             </motion.p>
             <motion.div 
-              className="flex items-center justify-center gap-4 text-white/40 text-sm mt-6"
+              className="flex items-center justify-center gap-4 text-amber-400/60 text-sm mt-6"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
@@ -274,14 +275,14 @@ const Projects = () => {
 
       {/* Projects Grid Section with Header */}
       <section className="bg-[#0A0A0A]" id="projects-grid">
-        <div className="border-t border-white/10">
-          {/* Section Header */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+        <div className="border-t border-amber-500/20">
+          {/* Section Header - Gold Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-amber-500/20">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+              <span className="text-[10px] md:text-xs text-amber-500 font-mono tracking-widest">01</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Case Studies</h2>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+            <span className="text-xs text-amber-400/60 tracking-wider hidden sm:block px-3 py-1 border border-amber-500/30 rounded-full">
               {cases.length} Projects
             </span>
           </div>
