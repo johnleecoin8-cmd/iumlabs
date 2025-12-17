@@ -7,7 +7,7 @@ const services = [
     number: "01",
     title: "Go-To-Market Strategy",
     description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus.",
-    link: "/services/gtm-strategy",
+    link: "/services/gtm",
     icon: Compass
   },
   {
