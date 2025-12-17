@@ -90,7 +90,7 @@ const Contact = () => {
       {/* Hero Section - Simple centered like homepage */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
         <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl">
-          {/* Video Background */}
+          {/* Video Background - Coral Theme */}
           <div className="absolute inset-0 overflow-hidden">
             <video
               autoPlay
@@ -105,13 +105,14 @@ const Contact = () => {
             >
               <source src="/videos/services-background.mp4" type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/30 via-transparent to-[#0A0A0A]" />
+            <div className="absolute inset-0 bg-gradient-to-b from-orange-500/20 via-transparent to-[#0A0A0A]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-transparent to-rose-500/10" />
           </div>
 
           {/* Content - Centered like homepage */}
           <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
             <motion.span 
-              className="text-xs text-white/50 mb-6 block tracking-widest"
+              className="text-xs text-orange-400/70 mb-6 block tracking-widest"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -124,7 +125,7 @@ const Contact = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Let's T<span className="serif-italic">a</span>lk
+              Let's T<span className="serif-italic text-orange-400">a</span>lk
             </motion.h1>
             <motion.p 
               className="text-lg text-white/60 max-w-xl mx-auto mt-8"
@@ -140,7 +141,7 @@ const Contact = () => {
               transition={{ delay: 0.4 }}
               className="mt-8"
             >
-              <CalendlyButton className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 font-medium hover:bg-white/90 transition-colors">
+              <CalendlyButton className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-rose-500 text-white px-6 py-3 font-medium hover:from-orange-600 hover:to-rose-600 transition-colors rounded-lg">
                 <Calendar className="w-4 h-4" />
                 <span>Book a Meeting</span>
               </CalendlyButton>
@@ -151,14 +152,14 @@ const Contact = () => {
 
       {/* Contact Info Section */}
       <section className="bg-[#0A0A0A]" id="contact-info">
-        <div className="border-t border-white/10">
-          {/* Section Header */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+        <div className="border-t border-orange-500/20">
+          {/* Section Header - Coral Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-orange-500/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+              <span className="text-[10px] md:text-xs text-orange-500 font-mono tracking-widest">01</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Contact Info</h2>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+            <span className="text-xs text-orange-400/60 tracking-wider hidden sm:block px-3 py-1 border border-orange-500/30 rounded-full">
               Get in Touch
             </span>
           </div>
@@ -172,7 +173,7 @@ const Contact = () => {
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
                   rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="group flex items-center justify-between p-6 bg-white/[0.02] border border-white/10 rounded-2xl hover:border-white/30 transition-all duration-300"
+                  className="group flex items-center justify-between p-6 bg-white/[0.02] border border-white/10 rounded-2xl hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -198,14 +199,14 @@ const Contact = () => {
 
       {/* Contact Form Section */}
       <section className="bg-[#0A0A0A]" id="contact-form">
-        <div className="border-t border-white/10">
-          {/* Section Header */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+        <div className="border-t border-orange-500/20">
+          {/* Section Header - Coral Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-orange-500/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+              <span className="text-[10px] md:text-xs text-orange-500 font-mono tracking-widest">02</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Send a Message</h2>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+            <span className="text-xs text-orange-400/60 tracking-wider hidden sm:block px-3 py-1 border border-orange-500/30 rounded-full">
               We'll respond within 24h
             </span>
           </div>
@@ -339,7 +340,7 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group inline-flex items-center gap-2 bg-white text-black px-8 py-4 font-medium hover:bg-white/90 transition-all disabled:opacity-50"
+                  className="group inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-rose-500 text-white px-8 py-4 font-medium hover:from-orange-600 hover:to-rose-600 transition-all disabled:opacity-50 rounded-lg"
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
