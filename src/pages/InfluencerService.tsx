@@ -1,52 +1,59 @@
-import ServiceDetailLayout from "@/components/ServiceDetailLayout";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import CTASection from "@/components/CTASection";
+import CalendlyButton from "@/components/CalendlyButton";
+import { ArrowRight, Star, Users, TrendingUp, Target, Zap, Crown, Award, Sparkles } from "lucide-react";
 import kolImage from "@/assets/services/kol-network.jpg";
 import seoulDDP from "@/assets/backgrounds/seoul-ddp-night.jpg";
-import { Search, Users, Megaphone, PieChart } from "lucide-react";
-
-const processSteps = [
-  {
-    number: "01",
-    title: "Onboarding",
-    description: "We define your KOL strategy in a workshop — covering objectives, narrative direction, and targeting.",
-    icon: Search,
-  },
-  {
-    number: "02",
-    title: "KOL Coordination",
-    description: "We source and shortlist aligned creators, handle outreach and negotiations, and lock in timelines and deliverables.",
-    icon: Users,
-  },
-  {
-    number: "03",
-    title: "Campaign Goes Live",
-    description: "KOLs post across X, YouTube, and Telegram while we monitor content delivery, timing, and engagement live.",
-    icon: Megaphone,
-  },
-  {
-    number: "04",
-    title: "Reporting",
-    description: "We report on KOL performance, engagement, ROI, and suggest adjustments for future campaigns.",
-    icon: PieChart,
-  },
-];
 
 const themeConfig = {
-  backgroundImage: seoulDDP,
-  auroraColors: {
-    primary: "from-amber-500/30",
-    secondary: "to-orange-500/25",
-    tertiary: "from-yellow-500/20",
-  },
-  accentColor: "#F59E0B", // Gold/Amber - Influence, premium
+  accentColor: "#F59E0B",
   accentColorHover: "#D97706",
-  floatingTags: [
-    { label: "KOL Network", top: "11%", left: "8%" },
-    { label: "1000+ KOLs", top: "23%", right: "9%" },
-    { label: "Partnerships", top: "41%", left: "5%" },
-    { label: "YouTube", top: "51%", right: "7%" },
-    { label: "Campaigns", top: "31%", left: "15%" },
-  ],
 };
+
+// Sample KOL profiles for visualization
+const kolProfiles = [
+  { name: "CryptoKing", followers: "1.2M", tier: "platinum", avatar: "👑" },
+  { name: "DeFiWhale", followers: "890K", tier: "gold", avatar: "🐋" },
+  { name: "NFTHunter", followers: "650K", tier: "gold", avatar: "🎨" },
+  { name: "Web3Sarah", followers: "420K", tier: "silver", avatar: "⭐" },
+  { name: "TokenGuru", followers: "380K", tier: "silver", avatar: "🔮" },
+  { name: "ChainMaster", followers: "290K", tier: "bronze", avatar: "⛓️" },
+];
+
+const networkNodes = [
+  { x: 50, y: 30, size: 60, label: "Your Project" },
+  { x: 20, y: 20, size: 40, label: "Tier 1 KOL" },
+  { x: 80, y: 25, size: 40, label: "Tier 1 KOL" },
+  { x: 15, y: 50, size: 35, label: "Tier 2 KOL" },
+  { x: 85, y: 55, size: 35, label: "Tier 2 KOL" },
+  { x: 30, y: 70, size: 30, label: "Micro KOL" },
+  { x: 70, y: 75, size: 30, label: "Micro KOL" },
+];
+
+const tierData = [
+  { tier: "Platinum", icon: Crown, count: "10+", reach: "1M+", color: "from-purple-400 to-purple-600" },
+  { tier: "Gold", icon: Award, count: "30+", reach: "500K-1M", color: "from-amber-400 to-amber-600" },
+  { tier: "Silver", icon: Star, count: "50+", reach: "100K-500K", color: "from-gray-300 to-gray-500" },
+  { tier: "Bronze", icon: Zap, count: "30+", reach: "50K-100K", color: "from-orange-600 to-orange-800" },
+];
+
+const processSteps = [
+  { number: "01", title: "Discovery", description: "Identify ideal KOL profiles matching your project's narrative and target audience.", icon: Target },
+  { number: "02", title: "Outreach", description: "Negotiate terms, align on messaging, and coordinate campaign timelines.", icon: Users },
+  { number: "03", title: "Activation", description: "Launch coordinated content across platforms with real-time monitoring.", icon: TrendingUp },
+  { number: "04", title: "Amplification", description: "Analyze performance and optimize for maximum reach and engagement.", icon: Sparkles },
+];
+
+const allServices = [
+  { slug: "community", title: "Community", color: "#3B82F6" },
+  { slug: "social-media", title: "Social Media", color: "#EC4899" },
+  { slug: "gtm", title: "GTM Strategy", color: "#10B981" },
+  { slug: "yap", title: "Yap Strategy", color: "#22D3EE" },
+  { slug: "pr", title: "PR & Media", color: "#8B5CF6" },
+];
 
 const stats = [
   { value: "120+", label: "KOL Network" },
@@ -55,19 +62,417 @@ const stats = [
 
 const InfluencerService = () => {
   return (
-    <ServiceDetailLayout
-      tagline="Influencer Strategy"
-      title="Influencer "
-      titleHighlight="Strategy"
-      subtitle="Let others tell your story to the right audience to build awareness, trust, and momentum."
-      aboutText="We activate a wide range of crypto-native influencers, from top industry voices to niche micro-KOLs, to help you get seen by the right people. Our focus is on message alignment, credible distribution, and timing that supports your launch or campaign. We work with creators who start conversations, growth, and move real mindshare."
-      whatIncludesText="We run end-to-end influencer campaigns that connect your narrative to relevant audiences through trusted Content Creators. From creator sourcing and briefing to live coordination and reporting, we handle the process and ensure every post delivers with purpose."
-      processSteps={processSteps}
-      aboutImage={kolImage}
-      currentServiceSlug="influencer"
-      themeConfig={themeConfig}
-      stats={stats}
-    />
+    <div className="min-h-screen bg-[#0A0A0A] text-white">
+      <Navbar />
+      
+      {/* Ambient Glow */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        <div 
+          className="absolute top-1/4 right-1/4 w-[600px] h-[600px] rounded-full blur-[150px] opacity-20"
+          style={{ background: `radial-gradient(circle, ${themeConfig.accentColor}, transparent 70%)` }}
+        />
+      </div>
+
+      {/* Hero Section - KOL Profile Cards Showcase */}
+      <section className="relative min-h-screen flex items-center overflow-hidden">
+        {/* Background */}
+        <div className="absolute inset-0">
+          <img 
+            src={seoulDDP} 
+            alt="Background" 
+            className="w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
+        </div>
+
+        {/* Floating Star Particles */}
+        <div className="absolute inset-0 pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute text-amber-400"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                fontSize: `${8 + Math.random() * 16}px`,
+              }}
+              animate={{
+                opacity: [0.2, 0.8, 0.2],
+                scale: [0.8, 1.2, 0.8],
+                y: [0, -20, 0],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 2,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
+            >
+              ✦
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="container mx-auto px-4 md:px-8 relative z-10 pt-32">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left - Title */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div 
+                className="inline-block px-4 py-2 rounded-full text-sm font-medium mb-6"
+                style={{ 
+                  background: `${themeConfig.accentColor}20`,
+                  border: `1px solid ${themeConfig.accentColor}40`
+                }}
+              >
+                ⭐ Influencer Strategy
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                Connect with{" "}
+                <span style={{ color: themeConfig.accentColor }}>
+                  Crypto's Top Voices
+                </span>
+              </h1>
+              
+              <p className="text-lg text-white/60 mb-8 max-w-lg">
+                Access our exclusive network of 120+ crypto KOLs and reach 50M+ engaged followers across X, YouTube, and Telegram.
+              </p>
+
+              <div className="flex flex-wrap gap-4 mb-8">
+                {stats.map((stat, index) => (
+                  <div 
+                    key={index}
+                    className="px-6 py-3 rounded-xl border border-white/10 bg-white/5"
+                  >
+                    <div className="text-2xl font-bold" style={{ color: themeConfig.accentColor }}>
+                      {stat.value}
+                    </div>
+                    <div className="text-sm text-white/60">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+
+              <CalendlyButton 
+                className="px-8 py-4 rounded-xl font-medium text-black"
+                style={{ background: themeConfig.accentColor }}
+              >
+                Build Your KOL Strategy
+              </CalendlyButton>
+            </motion.div>
+
+            {/* Right - KOL Profile Cards Grid */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="grid grid-cols-2 md:grid-cols-3 gap-4"
+            >
+              {kolProfiles.map((kol, index) => (
+                <motion.div
+                  key={index}
+                  className="relative p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm group cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3 + index * 0.1 }}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    borderColor: themeConfig.accentColor,
+                    boxShadow: `0 0 30px ${themeConfig.accentColor}30`
+                  }}
+                >
+                  {/* Tier Badge */}
+                  <div 
+                    className={`absolute -top-2 -right-2 px-2 py-1 rounded-full text-[10px] font-bold uppercase ${
+                      kol.tier === 'platinum' ? 'bg-purple-500' :
+                      kol.tier === 'gold' ? 'bg-amber-500' :
+                      kol.tier === 'silver' ? 'bg-gray-400 text-black' : 'bg-orange-600'
+                    }`}
+                  >
+                    {kol.tier}
+                  </div>
+
+                  {/* Avatar */}
+                  <div className="text-4xl mb-3 text-center">{kol.avatar}</div>
+
+                  {/* Name */}
+                  <div className="text-sm font-medium text-center mb-1">{kol.name}</div>
+
+                  {/* Followers */}
+                  <div className="text-xs text-white/60 text-center">{kol.followers} followers</div>
+
+                  {/* Connection Line on Hover */}
+                  <motion.div 
+                    className="absolute -bottom-4 left-1/2 w-px h-4 bg-gradient-to-b from-amber-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Network Visualization Section */}
+      <section className="py-24 relative">
+        <div 
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
+        />
+
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="text-center mb-16">
+            <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ NETWORK ]</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-4">
+              Your Project at the <span style={{ color: themeConfig.accentColor }}>Center</span>
+            </h2>
+            <p className="text-white/60 mt-4 max-w-2xl mx-auto">
+              We position your project at the heart of crypto's most influential network, creating authentic connections that drive real engagement.
+            </p>
+          </div>
+
+          {/* Network Graph Visualization */}
+          <div className="relative h-[500px] max-w-4xl mx-auto">
+            {/* Connection Lines */}
+            <svg className="absolute inset-0 w-full h-full">
+              {networkNodes.slice(1).map((node, i) => (
+                <motion.line
+                  key={i}
+                  x1="50%"
+                  y1="30%"
+                  x2={`${node.x}%`}
+                  y2={`${node.y}%`}
+                  stroke={themeConfig.accentColor}
+                  strokeWidth="1"
+                  strokeDasharray="5,5"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  whileInView={{ pathLength: 1, opacity: 0.4 }}
+                  transition={{ duration: 1, delay: i * 0.2 }}
+                />
+              ))}
+            </svg>
+
+            {/* Nodes */}
+            {networkNodes.map((node, index) => (
+              <motion.div
+                key={index}
+                className="absolute transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
+                style={{ left: `${node.x}%`, top: `${node.y}%` }}
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ delay: index * 0.15, type: "spring" }}
+              >
+                <motion.div
+                  className={`rounded-full flex items-center justify-center ${
+                    index === 0 ? 'bg-gradient-to-br from-amber-400 to-amber-600' : 'bg-white/10 border border-white/20'
+                  }`}
+                  style={{ width: node.size, height: node.size }}
+                  whileHover={{ scale: 1.2 }}
+                  animate={index === 0 ? {
+                    boxShadow: [`0 0 20px ${themeConfig.accentColor}40`, `0 0 40px ${themeConfig.accentColor}60`, `0 0 20px ${themeConfig.accentColor}40`]
+                  } : {}}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  {index === 0 ? (
+                    <span className="text-2xl">🚀</span>
+                  ) : (
+                    <span className="text-lg">👤</span>
+                  )}
+                </motion.div>
+                <span className="text-xs text-white/60 mt-2 whitespace-nowrap">{node.label}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* About Section with Image */}
+      <section className="py-24 relative">
+        <div 
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
+        />
+
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <img 
+                src={kolImage} 
+                alt="KOL Network" 
+                className="rounded-2xl w-full h-[400px] object-cover"
+                style={{ boxShadow: `0 0 60px ${themeConfig.accentColor}20` }}
+              />
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ ABOUT ]</span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-6">
+                Let Others Tell <span style={{ color: themeConfig.accentColor }}>Your Story</span>
+              </h2>
+              <p className="text-white/60 mb-6 leading-relaxed">
+                We activate a wide range of crypto-native influencers, from top industry voices to niche micro-KOLs, 
+                to help you get seen by the right people. Our focus is on message alignment, credible distribution, 
+                and timing that supports your launch or campaign.
+              </p>
+              <p className="text-white/60 mb-8 leading-relaxed">
+                We work with creators who start conversations, drive growth, and move real mindshare in the Korean 
+                and global crypto communities.
+              </p>
+
+              <CalendlyButton 
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium border transition-all hover:scale-105"
+                style={{ 
+                  borderColor: themeConfig.accentColor,
+                  color: themeConfig.accentColor
+                }}
+              >
+                Explore Our Network <ArrowRight className="w-4 h-4" />
+              </CalendlyButton>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Tier Pyramid Section */}
+      <section className="py-24 relative">
+        <div 
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
+        />
+
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="text-center mb-16">
+            <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ TIERS ]</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-4">
+              Multi-Tier <span style={{ color: themeConfig.accentColor }}>KOL Strategy</span>
+            </h2>
+          </div>
+
+          {/* Pyramid Tiers */}
+          <div className="max-w-3xl mx-auto space-y-4">
+            {tierData.map((tier, index) => (
+              <motion.div
+                key={index}
+                className="relative"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.15 }}
+                style={{ 
+                  marginLeft: `${index * 8}%`,
+                  marginRight: `${index * 8}%`
+                }}
+              >
+                <div 
+                  className={`p-6 rounded-2xl border border-white/10 bg-gradient-to-r ${tier.color} bg-opacity-20 relative overflow-hidden group hover:border-white/30 transition-all`}
+                >
+                  <div className="absolute inset-0 bg-black/60" />
+                  <div className="relative z-10 flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <tier.icon className="w-8 h-8" style={{ color: themeConfig.accentColor }} />
+                      <div>
+                        <div className="text-xl font-bold">{tier.tier}</div>
+                        <div className="text-sm text-white/60">{tier.reach} followers</div>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold" style={{ color: themeConfig.accentColor }}>{tier.count}</div>
+                      <div className="text-xs text-white/60">KOLs</div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="py-24 relative">
+        <div 
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
+        />
+
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="text-center mb-16">
+            <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ PROCESS ]</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-4">
+              How We <span style={{ color: themeConfig.accentColor }}>Activate</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {processSteps.map((step, index) => (
+              <motion.div
+                key={index}
+                className="relative p-6 rounded-2xl border border-white/10 bg-white/5 group hover:border-amber-500/50 transition-all"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -5 }}
+              >
+                <div 
+                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                  style={{ background: `${themeConfig.accentColor}20`, border: `1px solid ${themeConfig.accentColor}40` }}
+                >
+                  <step.icon className="w-6 h-6" style={{ color: themeConfig.accentColor }} />
+                </div>
+                <div className="text-xs font-mono text-white/40 mb-2">[ {step.number} ]</div>
+                <h3 className="text-lg font-bold mb-2">{step.title}</h3>
+                <p className="text-sm text-white/60">{step.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* More Services */}
+      <section className="py-24 relative">
+        <div 
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
+        />
+
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ MORE ]</span>
+            <h2 className="text-2xl font-bold mt-4">Explore Other Services</h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            {allServices.map((service, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Link
+                  to={`/services/${service.slug}`}
+                  className="block p-4 rounded-xl border border-white/10 bg-white/5 text-center hover:border-white/30 transition-all group"
+                >
+                  <span className="text-sm group-hover:text-white transition-colors" style={{ color: service.color }}>
+                    {service.title}
+                  </span>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CTASection />
+      <Footer />
+    </div>
   );
 };
 
