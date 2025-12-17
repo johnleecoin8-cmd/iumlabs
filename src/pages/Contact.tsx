@@ -87,10 +87,10 @@ const Contact = () => {
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero Section - Simple centered like homepage */}
+      {/* Hero Section - Cyan/Teal Theme */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
         <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl">
-          {/* Video Background - Coral Theme */}
+          {/* Video Background - Cyan Theme */}
           <div className="absolute inset-0 overflow-hidden">
             <video
               autoPlay
@@ -105,14 +105,23 @@ const Contact = () => {
             >
               <source src="/videos/services-background.mp4" type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-orange-500/20 via-transparent to-[#0A0A0A]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-transparent to-rose-500/10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/20 via-teal-500/10 to-[#0A0A0A]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-teal-500/10" />
+            {/* Animated Grid Pattern */}
+            <div 
+              className="absolute inset-0 opacity-20"
+              style={{
+                backgroundImage: `linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+                                  linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)`,
+                backgroundSize: '50px 50px',
+              }}
+            />
           </div>
 
           {/* Content - Centered like homepage */}
           <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
             <motion.span 
-              className="text-xs text-orange-400/70 mb-6 block tracking-widest"
+              className="text-xs text-cyan-400/70 mb-6 block tracking-widest"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
@@ -125,7 +134,7 @@ const Contact = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Let's T<span className="serif-italic text-orange-400">a</span>lk
+              Let's T<span className="serif-italic text-cyan-400">a</span>lk
             </motion.h1>
             <motion.p 
               className="text-lg text-white/60 max-w-xl mx-auto mt-8"
@@ -141,10 +150,24 @@ const Contact = () => {
               transition={{ delay: 0.4 }}
               className="mt-8"
             >
-              <CalendlyButton className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-rose-500 text-white px-6 py-3 font-medium hover:from-orange-600 hover:to-rose-600 transition-colors rounded-lg">
-                <Calendar className="w-4 h-4" />
+              <CalendlyButton className="group inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-6 py-3 font-medium hover:from-cyan-600 hover:to-teal-600 transition-all rounded-lg hover:shadow-lg hover:shadow-cyan-500/30">
+                <Calendar className="w-4 h-4 group-hover:animate-pulse" />
                 <span>Book a Meeting</span>
               </CalendlyButton>
+            </motion.div>
+            
+            {/* Live Status Indicator */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-12 inline-flex items-center gap-2 text-cyan-400/60 text-sm"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+              </span>
+              Live in Seoul • Typically responds within 24h
             </motion.div>
           </div>
         </section>
@@ -152,14 +175,14 @@ const Contact = () => {
 
       {/* Contact Info Section */}
       <section className="bg-[#0A0A0A]" id="contact-info">
-        <div className="border-t border-orange-500/20">
-          {/* Section Header - Coral Theme */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-orange-500/10">
+        <div className="border-t border-cyan-500/20">
+          {/* Section Header - Cyan Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-cyan-500/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-orange-500 font-mono tracking-widest">01</span>
+              <span className="text-[10px] md:text-xs text-cyan-500 font-mono tracking-widest drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]">01</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Contact Info</h2>
             </div>
-            <span className="text-xs text-orange-400/60 tracking-wider hidden sm:block px-3 py-1 border border-orange-500/30 rounded-full">
+            <span className="text-xs text-cyan-400/60 tracking-wider hidden sm:block px-3 py-1 border border-cyan-500/30 rounded-full">
               Get in Touch
             </span>
           </div>
@@ -173,23 +196,28 @@ const Contact = () => {
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
                   rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="group flex items-center justify-between p-6 bg-white/[0.02] border border-white/10 rounded-2xl hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300"
+                  className="group flex items-center justify-between p-6 bg-white/[0.02] border border-white/10 rounded-2xl hover:border-cyan-500/40 hover:bg-cyan-500/5 transition-all duration-300 relative overflow-hidden"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                   whileHover={{ y: -4 }}
                 >
+                  {/* Hover Glow */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-cyan-500/50 via-cyan-500/20 to-transparent" />
+                  </div>
+                  
                   <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
-                      <info.icon className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
+                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                      <info.icon className="w-5 h-5 text-white/50 group-hover:text-cyan-400 transition-colors" />
                     </div>
                     <div>
                       <p className="text-white/40 text-xs mb-1">{info.label}</p>
-                      <p className="text-white text-sm font-medium">{info.value}</p>
+                      <p className="text-white text-sm font-medium group-hover:text-cyan-50 transition-colors">{info.value}</p>
                     </div>
                   </div>
-                  <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-white transition-colors" />
+                  <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-cyan-400 transition-colors" />
                 </motion.a>
               ))}
             </div>
@@ -199,20 +227,40 @@ const Contact = () => {
 
       {/* Contact Form Section */}
       <section className="bg-[#0A0A0A]" id="contact-form">
-        <div className="border-t border-orange-500/20">
-          {/* Section Header - Coral Theme */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-orange-500/10">
+        <div className="border-t border-cyan-500/20">
+          {/* Section Header - Cyan Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-cyan-500/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-orange-500 font-mono tracking-widest">02</span>
+              <span className="text-[10px] md:text-xs text-cyan-500 font-mono tracking-widest drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]">02</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Send a Message</h2>
             </div>
-            <span className="text-xs text-orange-400/60 tracking-wider hidden sm:block px-3 py-1 border border-orange-500/30 rounded-full">
+            <span className="text-xs text-cyan-400/60 tracking-wider hidden sm:block px-3 py-1 border border-cyan-500/30 rounded-full">
               We'll respond within 24h
             </span>
           </div>
           
           {/* Form Content */}
           <div className="container mx-auto max-w-4xl px-4 md:px-8 py-16">
+            {/* Progress Indicator */}
+            <div className="mb-12">
+              <div className="flex items-center justify-between text-xs text-white/40 mb-2">
+                <span>Form Progress</span>
+                <span className="text-cyan-400">
+                  {[formData.name, formData.email, formData.company, formData.budget, formData.message].filter(Boolean).length}/5 fields
+                </span>
+              </div>
+              <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                <motion.div 
+                  className="h-full bg-gradient-to-r from-cyan-500 to-teal-500 rounded-full"
+                  initial={{ width: '0%' }}
+                  animate={{ 
+                    width: `${([formData.name, formData.email, formData.company, formData.budget, formData.message].filter(Boolean).length / 5) * 100}%` 
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+              </div>
+            </div>
+            
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Name & Email Row */}
               <div className="grid sm:grid-cols-2 gap-8">
@@ -229,7 +277,7 @@ const Contact = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none transition-colors"
                   />
                 </motion.div>
                 <motion.div
@@ -245,7 +293,7 @@ const Contact = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none transition-colors"
                   />
                 </motion.div>
               </div>
@@ -264,7 +312,7 @@ const Contact = () => {
                     placeholder="Company name"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none transition-colors"
                   />
                 </motion.div>
                 <motion.div
@@ -279,12 +327,12 @@ const Contact = () => {
                     placeholder="https://..."
                     value={formData.website}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none transition-colors"
                   />
                 </motion.div>
               </div>
 
-              {/* Estimated Budget */}
+              {/* Estimated Budget - Cyan Theme */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -300,8 +348,8 @@ const Contact = () => {
                       onClick={() => setFormData({ ...formData, budget: option })}
                       className={`px-4 py-3 rounded-xl text-sm border transition-all text-center ${
                         formData.budget === option
-                          ? 'bg-white/10 border-white text-white'
-                          : 'bg-transparent border-white/20 text-white/60 hover:border-white/40 hover:text-white'
+                          ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                          : 'bg-transparent border-white/20 text-white/60 hover:border-cyan-500/40 hover:text-white'
                       }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -325,11 +373,11 @@ const Contact = () => {
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={4}
-                  className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors resize-none"
+                  className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none transition-colors resize-none"
                 />
               </motion.div>
 
-              {/* Submit Button */}
+              {/* Submit Button - Cyan Theme */}
               <motion.div 
                 className="pt-4"
                 initial={{ opacity: 0, y: 20 }}
@@ -340,10 +388,14 @@ const Contact = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-rose-500 text-white px-8 py-4 font-medium hover:from-orange-600 hover:to-rose-600 transition-all disabled:opacity-50 rounded-lg"
+                  className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-8 py-4 font-medium hover:from-cyan-600 hover:to-teal-600 transition-all disabled:opacity-50 rounded-lg overflow-hidden hover:shadow-lg hover:shadow-cyan-500/30"
                 >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  {/* Shine Effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  </div>
+                  <span className="relative">{isSubmitting ? "Sending..." : "Send Message"}</span>
+                  <ArrowRight className="w-4 h-4 relative group-hover:translate-x-1 transition-transform" />
                 </button>
               </motion.div>
             </form>
