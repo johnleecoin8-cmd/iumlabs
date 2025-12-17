@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, ArrowRight, MessageSquare, Sparkles, Clock, CheckCircle2 } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
@@ -16,43 +16,21 @@ const budgetOptions = [
   "Looking to raise funds",
 ];
 
-const formSteps = [
-  { id: 1, label: "Who are you?", fields: ["name", "email"] },
-  { id: 2, label: "Your project", fields: ["company", "website"] },
-  { id: 3, label: "Let's talk budget", fields: ["budget"] },
-  { id: 4, label: "Tell us more", fields: ["message"] },
+const contactDetails = [
+  { label: "office:", value: brand.address },
+  { label: "e-mail:", value: brand.email, link: `mailto:${brand.email}` },
+  { label: "telegram:", value: brand.telegram, link: brand.telegramLink },
 ];
 
-const contactMethods = [
-  { 
-    icon: Mail, 
-    label: "Email us", 
-    value: brand.email, 
-    link: `mailto:${brand.email}`,
-    description: "For detailed inquiries",
-    color: "#06B6D4"
-  },
-  { 
-    icon: Send, 
-    label: "Telegram", 
-    value: brand.telegram, 
-    link: brand.telegramLink,
-    description: "Quick responses",
-    color: "#0EA5E9"
-  },
-  { 
-    icon: Calendar, 
-    label: "Book a call", 
-    value: "30 min strategy call", 
-    link: brand.calendlyUrl,
-    description: "Face-to-face meeting",
-    color: "#14B8A6"
-  },
+const contactInfo = [
+  { icon: Mail, label: "Email", value: brand.email, link: `mailto:${brand.email}` },
+  { icon: Phone, label: "Phone", value: brand.phone, link: `tel:${brand.phone.replace(/\s/g, '')}` },
+  { icon: Send, label: "Telegram", value: brand.telegram, link: brand.telegramLink },
+  { icon: MapPin, label: "Office", value: brand.address, link: "#" },
 ];
 
 const Contact = () => {
   const { toast } = useToast();
-  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -62,17 +40,6 @@ const Contact = () => {
     budget: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isTyping, setIsTyping] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
-
-  // Simulate typing indicator
-  useEffect(() => {
-    if (formData.message.length > 0) {
-      setIsTyping(true);
-      const timer = setTimeout(() => setIsTyping(false), 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [formData.message]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,13 +67,11 @@ const Contact = () => {
         },
       }).catch(console.error);
 
-      setShowSuccess(true);
       toast({
         title: "Message sent!",
         description: "We'll get back to you within 24 hours.",
       });
       setFormData({ name: "", email: "", company: "", website: "", message: "", budget: "" });
-      setCurrentStep(1);
     } catch (error) {
       toast({
         title: "Failed to send",
@@ -118,431 +83,325 @@ const Contact = () => {
     }
   };
 
-  const canProceed = () => {
-    const currentFields = formSteps[currentStep - 1].fields;
-    if (currentStep === 1) return formData.name && formData.email;
-    if (currentStep === 2) return true; // Optional
-    if (currentStep === 3) return formData.budget;
-    if (currentStep === 4) return true;
-    return currentFields.every(field => formData[field as keyof typeof formData]);
-  };
-
-  const getCompletedSteps = () => {
-    let completed = 0;
-    if (formData.name && formData.email) completed++;
-    if (formData.company || formData.website) completed++;
-    if (formData.budget) completed++;
-    if (formData.message) completed++;
-    return completed;
-  };
-
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Compact Hero */}
-      <section className="relative pt-32 pb-12 overflow-hidden">
-        {/* Animated Background Grid */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div 
-            className="absolute inset-0 opacity-30"
-            style={{
-              backgroundImage: `radial-gradient(circle at 1px 1px, rgba(6, 182, 212, 0.3) 1px, transparent 0)`,
-              backgroundSize: '40px 40px',
-            }}
-          />
-          <motion.div 
-            className="absolute top-20 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-[120px]"
-            animate={{ 
-              scale: [1, 1.2, 1],
-              opacity: [0.2, 0.3, 0.2],
-            }}
-            transition={{ duration: 8, repeat: Infinity }}
-          />
-          <motion.div 
-            className="absolute bottom-0 right-1/4 w-80 h-80 bg-teal-500/20 rounded-full blur-[100px]"
-            animate={{ 
-              scale: [1.2, 1, 1.2],
-              opacity: [0.3, 0.2, 0.3],
-            }}
-            transition={{ duration: 6, repeat: Infinity }}
-          />
-        </div>
-
-        <div className="container mx-auto max-w-7xl px-4 relative z-10">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <span className="inline-flex items-center gap-2 text-cyan-400/70 text-xs tracking-widest mb-6">
-              <MessageSquare className="w-3 h-3" />
-              START A CONVERSATION
-            </span>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-[0.9] tracking-tight">
-              Let's build
-              <br />
-              <span className="bg-gradient-to-r from-cyan-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
-                something great
-              </span>
-            </h1>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Main Content - Asymmetric 2-Column Layout */}
-      <main className="container mx-auto max-w-7xl px-4 pb-24">
-        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
-          
-          {/* Left Column - Contact Methods (2/5) */}
-          <div className="lg:col-span-2 space-y-6">
-            {/* Sticky Container */}
-            <div className="lg:sticky lg:top-24 space-y-6">
-              
-              {/* Contact Method Cards - Stacked */}
-              <div className="space-y-4">
-                <p className="text-white/40 text-xs uppercase tracking-wider mb-4">Choose your preferred way</p>
-                
-                {contactMethods.map((method, index) => (
-                  <motion.a
-                    key={method.label}
-                    href={method.link}
-                    target={method.link.startsWith('http') ? '_blank' : undefined}
-                    rel={method.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="group block relative overflow-hidden"
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ x: 8 }}
-                  >
-                    <div 
-                      className="p-5 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-all duration-300 relative overflow-hidden"
-                      style={{ ['--method-color' as string]: method.color }}
-                    >
-                      {/* Hover Glow Line */}
-                      <div 
-                        className="absolute left-0 top-0 bottom-0 w-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        style={{ backgroundColor: method.color }}
-                      />
-                      
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4">
-                          <div 
-                            className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300"
-                            style={{ backgroundColor: `${method.color}20` }}
-                          >
-                            <method.icon 
-                              className="w-5 h-5 transition-colors duration-300"
-                              style={{ color: method.color }}
-                            />
-                          </div>
-                          <div>
-                            <p className="text-white font-medium group-hover:text-cyan-50 transition-colors">
-                              {method.label}
-                            </p>
-                            <p className="text-white/40 text-sm">{method.description}</p>
-                          </div>
-                        </div>
-                        <ArrowUpRight 
-                          className="w-5 h-5 text-white/20 group-hover:text-white/60 transition-all duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" 
-                        />
-                      </div>
-                    </div>
-                  </motion.a>
-                ))}
-              </div>
-
-              {/* Live Status Card */}
-              <motion.div 
-                className="p-6 rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 to-transparent"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4 }}
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-cyan-500"></span>
-                  </span>
-                  <span className="text-cyan-400 font-medium">We're online</span>
-                </div>
-                <p className="text-white/50 text-sm mb-4">
-                  Seoul, South Korea • {new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Seoul' })} KST
-                </p>
-                <div className="flex items-center gap-2 text-white/40 text-xs">
-                  <Clock className="w-3 h-3" />
-                  <span>Usually responds within 24 hours</span>
-                </div>
-              </motion.div>
-
-              {/* Office Location */}
-              <motion.div
-                className="p-5 rounded-2xl border border-white/10 bg-white/[0.02]"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center shrink-0">
-                    <MapPin className="w-5 h-5 text-white/50" />
-                  </div>
-                  <div>
-                    <p className="text-white/40 text-xs mb-1">Our Office</p>
-                    <p className="text-white text-sm">{brand.address}</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
+      {/* Hero Section - Cyan/Teal Theme */}
+      <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
+        <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl">
+          {/* Video Background - Cyan Theme */}
+          <div className="absolute inset-0 overflow-hidden">
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ filter: "brightness(0.35)" }}
+              onLoadedMetadata={(e) => {
+                (e.target as HTMLVideoElement).currentTime = 0;
+              }}
+            >
+              <source src="/videos/services-background.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/20 via-teal-500/10 to-[#0A0A0A]" />
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 via-transparent to-teal-500/10" />
+            {/* Animated Grid Pattern */}
+            <div 
+              className="absolute inset-0 opacity-20"
+              style={{
+                backgroundImage: `linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+                                  linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px)`,
+                backgroundSize: '50px 50px',
+              }}
+            />
           </div>
 
-          {/* Right Column - Chat-Style Form (3/5) */}
-          <div className="lg:col-span-3">
-            <motion.div 
-              className="rounded-3xl border border-white/10 bg-white/[0.02] overflow-hidden"
+          {/* Content - Centered like homepage */}
+          <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
+            <motion.span 
+              className="text-xs text-cyan-400/70 mb-6 block tracking-widest"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+            >
+              [ Contact ]
+            </motion.span>
+            <motion.h1 
+              className="text-[14vw] md:text-[120px] lg:text-[140px] font-light text-white leading-[0.85] tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              {/* Form Header - Chat Style */}
-              <div className="p-6 border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center">
-                    <Sparkles className="w-5 h-5 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-white font-medium">Ium Labs Team</p>
-                    <p className="text-cyan-400 text-xs flex items-center gap-1">
-                      <span className="w-1.5 h-1.5 bg-cyan-400 rounded-full"></span>
-                      Ready to chat
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Step Progress */}
-                <div className="flex items-center gap-1">
-                  {formSteps.map((step, i) => (
-                    <div 
-                      key={step.id}
-                      className={`w-8 h-1 rounded-full transition-all duration-300 ${
-                        i < currentStep ? 'bg-cyan-500' : 
-                        i === currentStep - 1 ? 'bg-cyan-500' : 'bg-white/10'
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Success State */}
-              <AnimatePresence mode="wait">
-                {showSuccess ? (
-                  <motion.div
-                    key="success"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    className="p-12 text-center"
-                  >
-                    <motion.div 
-                      className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center mx-auto mb-6"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      transition={{ type: "spring", delay: 0.2 }}
-                    >
-                      <CheckCircle2 className="w-10 h-10 text-white" />
-                    </motion.div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Message Sent!</h3>
-                    <p className="text-white/50 mb-8">We'll get back to you within 24 hours.</p>
-                    <button 
-                      onClick={() => setShowSuccess(false)}
-                      className="text-cyan-400 hover:text-cyan-300 text-sm transition-colors"
-                    >
-                      Send another message →
-                    </button>
-                  </motion.div>
-                ) : (
-                  <motion.form 
-                    key="form"
-                    onSubmit={handleSubmit} 
-                    className="p-6 md:p-8"
-                  >
-                    {/* Chat Messages Area */}
-                    <div className="space-y-6 mb-8">
-                      {/* Bot Message */}
-                      <div className="flex gap-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-cyan-500 to-teal-500 flex items-center justify-center shrink-0">
-                          <Sparkles className="w-4 h-4 text-white" />
-                        </div>
-                        <div className="bg-white/5 rounded-2xl rounded-tl-sm p-4 max-w-md">
-                          <p className="text-white/80 text-sm">
-                            {formSteps[currentStep - 1].label === "Who are you?" && "Hey! 👋 Let's start with the basics. What's your name and email?"}
-                            {formSteps[currentStep - 1].label === "Your project" && "Great to meet you! Tell us about your company. (Optional)"}
-                            {formSteps[currentStep - 1].label === "Let's talk budget" && "What's your estimated budget for this project?"}
-                            {formSteps[currentStep - 1].label === "Tell us more" && "Almost done! Share any additional details about your project."}
-                          </p>
-                        </div>
-                      </div>
-
-                      {/* User Input Area */}
-                      <AnimatePresence mode="wait">
-                        <motion.div
-                          key={currentStep}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -20 }}
-                          className="pl-11 space-y-4"
-                        >
-                          {/* Step 1: Name & Email */}
-                          {currentStep === 1 && (
-                            <>
-                              <div className="space-y-2">
-                                <input
-                                  type="text"
-                                  placeholder="Your name"
-                                  value={formData.name}
-                                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                  required
-                                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-all"
-                                />
-                              </div>
-                              <div className="space-y-2">
-                                <input
-                                  type="email"
-                                  placeholder="your@email.com"
-                                  value={formData.email}
-                                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                  required
-                                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-all"
-                                />
-                              </div>
-                            </>
-                          )}
-
-                          {/* Step 2: Company Info */}
-                          {currentStep === 2 && (
-                            <>
-                              <input
-                                type="text"
-                                placeholder="Company name (optional)"
-                                value={formData.company}
-                                onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-all"
-                              />
-                              <input
-                                type="url"
-                                placeholder="Website URL (optional)"
-                                value={formData.website}
-                                onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-all"
-                              />
-                            </>
-                          )}
-
-                          {/* Step 3: Budget */}
-                          {currentStep === 3 && (
-                            <div className="grid grid-cols-2 gap-3">
-                              {budgetOptions.map((option) => (
-                                <motion.button
-                                  key={option}
-                                  type="button"
-                                  onClick={() => setFormData({ ...formData, budget: option })}
-                                  className={`px-4 py-3 rounded-xl text-sm border transition-all text-left ${
-                                    formData.budget === option
-                                      ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400'
-                                      : 'bg-white/5 border-white/10 text-white/60 hover:border-white/30 hover:text-white'
-                                  }`}
-                                  whileHover={{ scale: 1.02 }}
-                                  whileTap={{ scale: 0.98 }}
-                                >
-                                  {option}
-                                </motion.button>
-                              ))}
-                            </div>
-                          )}
-
-                          {/* Step 4: Message */}
-                          {currentStep === 4 && (
-                            <div className="relative">
-                              <textarea
-                                placeholder="Tell us about your project goals, timeline, and any specific requirements..."
-                                value={formData.message}
-                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                rows={4}
-                                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500/50 transition-all resize-none"
-                              />
-                              {isTyping && (
-                                <div className="absolute bottom-3 right-3 flex items-center gap-1 text-cyan-400 text-xs">
-                                  <span className="w-1 h-1 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                                  <span className="w-1 h-1 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                                  <span className="w-1 h-1 bg-cyan-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-                                </div>
-                              )}
-                            </div>
-                          )}
-                        </motion.div>
-                      </AnimatePresence>
-                    </div>
-
-                    {/* Navigation */}
-                    <div className="flex items-center justify-between pt-4 border-t border-white/10">
-                      <button
-                        type="button"
-                        onClick={() => setCurrentStep(Math.max(1, currentStep - 1))}
-                        className={`text-sm text-white/40 hover:text-white transition-colors ${currentStep === 1 ? 'invisible' : ''}`}
-                      >
-                        ← Back
-                      </button>
-
-                      {currentStep < 4 ? (
-                        <motion.button
-                          type="button"
-                          onClick={() => setCurrentStep(currentStep + 1)}
-                          disabled={!canProceed()}
-                          className="group inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-6 py-3 rounded-xl font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-cyan-500/30 transition-all"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          Continue
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        </motion.button>
-                      ) : (
-                        <motion.button
-                          type="submit"
-                          disabled={isSubmitting}
-                          className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-6 py-3 rounded-xl font-medium disabled:opacity-50 overflow-hidden hover:shadow-lg hover:shadow-cyan-500/30 transition-all"
-                          whileHover={{ scale: 1.02 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          <span className="relative">{isSubmitting ? "Sending..." : "Send Message"}</span>
-                          <Send className="w-4 h-4 relative group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-                        </motion.button>
-                      )}
-                    </div>
-                  </motion.form>
-                )}
-              </AnimatePresence>
-            </motion.div>
-
-            {/* Quick Stats */}
-            <motion.div 
-              className="grid grid-cols-3 gap-4 mt-6"
+              Let's T<span className="serif-italic text-cyan-400">a</span>lk
+            </motion.h1>
+            <motion.p 
+              className="text-lg text-white/60 max-w-xl mx-auto mt-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+              transition={{ delay: 0.3 }}
             >
-              {[
-                { value: "24h", label: "Response Time" },
-                { value: "18+", label: "Projects Delivered" },
-                { value: "100%", label: "Client Satisfaction" },
-              ].map((stat, i) => (
-                <div key={stat.label} className="text-center p-4 rounded-xl border border-white/5 bg-white/[0.01]">
-                  <p className="text-xl font-bold text-cyan-400">{stat.value}</p>
-                  <p className="text-white/40 text-xs">{stat.label}</p>
-                </div>
-              ))}
+              Tell us about your project and we'll explain how we can help you succeed in Korea.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="mt-8"
+            >
+              <CalendlyButton className="group inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-6 py-3 font-medium hover:from-cyan-600 hover:to-teal-600 transition-all rounded-lg hover:shadow-lg hover:shadow-cyan-500/30">
+                <Calendar className="w-4 h-4 group-hover:animate-pulse" />
+                <span>Book a Meeting</span>
+              </CalendlyButton>
+            </motion.div>
+            
+            {/* Live Status Indicator */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              className="mt-12 inline-flex items-center gap-2 text-cyan-400/60 text-sm"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+              </span>
+              Live in Seoul • Typically responds within 24h
             </motion.div>
           </div>
-        </div>
+        </section>
       </main>
+
+      {/* Contact Info Section */}
+      <section className="bg-[#0A0A0A]" id="contact-info">
+        <div className="border-t border-cyan-500/20">
+          {/* Section Header - Cyan Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-cyan-500/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-cyan-500 font-mono tracking-widest drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Contact Info</h2>
+            </div>
+            <span className="text-xs text-cyan-400/60 tracking-wider hidden sm:block px-3 py-1 border border-cyan-500/30 rounded-full">
+              Get in Touch
+            </span>
+          </div>
+          
+          {/* Contact Info Content */}
+          <div className="container mx-auto max-w-7xl px-4 md:px-8 py-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {contactInfo.map((info, index) => (
+                <motion.a 
+                  key={info.label}
+                  href={info.link}
+                  target={info.link.startsWith('http') ? '_blank' : undefined}
+                  rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="group flex items-center justify-between p-6 bg-white/[0.02] border border-white/10 rounded-2xl hover:border-cyan-500/40 hover:bg-cyan-500/5 transition-all duration-300 relative overflow-hidden"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -4 }}
+                >
+                  {/* Hover Glow */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                    <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-cyan-500/50 via-cyan-500/20 to-transparent" />
+                  </div>
+                  
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-cyan-500/20 transition-colors">
+                      <info.icon className="w-5 h-5 text-white/50 group-hover:text-cyan-400 transition-colors" />
+                    </div>
+                    <div>
+                      <p className="text-white/40 text-xs mb-1">{info.label}</p>
+                      <p className="text-white text-sm font-medium group-hover:text-cyan-50 transition-colors">{info.value}</p>
+                    </div>
+                  </div>
+                  <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-cyan-400 transition-colors" />
+                </motion.a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Form Section */}
+      <section className="bg-[#0A0A0A]" id="contact-form">
+        <div className="border-t border-cyan-500/20">
+          {/* Section Header - Cyan Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-cyan-500/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-cyan-500 font-mono tracking-widest drop-shadow-[0_0_8px_rgba(6,182,212,0.5)]">02</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Send a Message</h2>
+            </div>
+            <span className="text-xs text-cyan-400/60 tracking-wider hidden sm:block px-3 py-1 border border-cyan-500/30 rounded-full">
+              We'll respond within 24h
+            </span>
+          </div>
+          
+          {/* Form Content */}
+          <div className="container mx-auto max-w-4xl px-4 md:px-8 py-16">
+            {/* Progress Indicator */}
+            <div className="mb-12">
+              <div className="flex items-center justify-between text-xs text-white/40 mb-2">
+                <span>Form Progress</span>
+                <span className="text-cyan-400">
+                  {[formData.name, formData.email, formData.company, formData.budget, formData.message].filter(Boolean).length}/5 fields
+                </span>
+              </div>
+              <div className="h-1 bg-white/10 rounded-full overflow-hidden">
+                <motion.div 
+                  className="h-full bg-gradient-to-r from-cyan-500 to-teal-500 rounded-full"
+                  initial={{ width: '0%' }}
+                  animate={{ 
+                    width: `${([formData.name, formData.email, formData.company, formData.budget, formData.message].filter(Boolean).length / 5) * 100}%` 
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+              </div>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-8">
+              {/* Name & Email Row */}
+              <div className="grid sm:grid-cols-2 gap-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                >
+                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Name *</label>
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none transition-colors"
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.15 }}
+                >
+                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Email *</label>
+                  <input
+                    type="email"
+                    placeholder="your@email.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none transition-colors"
+                  />
+                </motion.div>
+              </div>
+
+              {/* Company Name & Website Row */}
+              <div className="grid sm:grid-cols-2 gap-8">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                >
+                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Name</label>
+                  <input
+                    type="text"
+                    placeholder="Company name"
+                    value={formData.company}
+                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none transition-colors"
+                  />
+                </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.25 }}
+                >
+                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Website</label>
+                  <input
+                    type="url"
+                    placeholder="https://..."
+                    value={formData.website}
+                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
+                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none transition-colors"
+                  />
+                </motion.div>
+              </div>
+
+              {/* Estimated Budget - Cyan Theme */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+              >
+                <label className="block text-xs uppercase tracking-wider text-white/40 mb-4">Estimated Budget</label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {budgetOptions.map((option) => (
+                    <motion.button
+                      key={option}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, budget: option })}
+                      className={`px-4 py-3 rounded-xl text-sm border transition-all text-center ${
+                        formData.budget === option
+                          ? 'bg-cyan-500/20 border-cyan-500 text-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
+                          : 'bg-transparent border-white/20 text-white/60 hover:border-cyan-500/40 hover:text-white'
+                      }`}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      {option}
+                    </motion.button>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Project Description */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.35 }}
+              >
+                <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Tell Us About Your Project</label>
+                <textarea
+                  placeholder="Describe your project and goals..."
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  rows={4}
+                  className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-cyan-500 focus:outline-none transition-colors resize-none"
+                />
+              </motion.div>
+
+              {/* Submit Button - Cyan Theme */}
+              <motion.div 
+                className="pt-4"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+              >
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="group relative inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500 to-teal-500 text-white px-8 py-4 font-medium hover:from-cyan-600 hover:to-teal-600 transition-all disabled:opacity-50 rounded-lg overflow-hidden hover:shadow-lg hover:shadow-cyan-500/30"
+                >
+                  {/* Shine Effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
+                  </div>
+                  <span className="relative">{isSubmitting ? "Sending..." : "Send Message"}</span>
+                  <ArrowRight className="w-4 h-4 relative group-hover:translate-x-1 transition-transform" />
+                </button>
+              </motion.div>
+            </form>
+          </div>
+        </div>
+      </section>
 
       <Footer />
     </div>
