@@ -1,52 +1,42 @@
-import ServiceDetailLayout from "@/components/ServiceDetailLayout";
-import eventsImage from "@/assets/services/events.jpg";
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Calendar, ArrowRight, Volume2, Users, Zap, FileText, Radio, Waves, MessageCircle, Target } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import CTASection from "@/components/CTASection";
+import CalendlyButton from "@/components/CalendlyButton";
 import seoulTech from "@/assets/backgrounds/seoul-tech-future.jpg";
-import { Target, Users, Zap, FileText } from "lucide-react";
+
+// Electric Cyan accent
+const ACCENT_COLOR = "#22D3EE";
 
 const processSteps = [
   {
     number: "01",
     title: "Strategy & Onboarding",
-    description: "We align on your goals, messaging, timing, and target audiences. Then we define campaign angles, create a clear briefing, and prepare the materials for launch.",
+    description: "We align on your goals, messaging, timing, and target audiences. Then we define campaign angles and prepare materials.",
     icon: Target,
   },
   {
     number: "02",
     title: "Campaign Setup",
-    description: "We publish the briefing to our 600+ Yap Circle creators — an open network of aligned, crypto-native voices — inviting them to participate based on interest, timing, and narrative fit.",
+    description: "We publish the briefing to our 600+ Yap Circle creators — inviting them to participate based on interest and fit.",
     icon: Users,
   },
   {
     number: "03",
     title: "Activation",
-    description: "Creators begin posting organically across X: threads, quote RTs, memes, and reactions. We monitor delivery, track engagement, and amplify high-performing posts via KOLs and ecosystem replies.",
+    description: "Creators begin posting organically across X: threads, quote RTs, memes, and reactions. We amplify high-performing posts.",
     icon: Zap,
   },
   {
     number: "04",
-    title: "Reporting & Wrap-Up",
-    description: "We deliver a full report on campaign performance: reach, impressions, engagement, post volume, smart follower exposure and propose next steps for continued momentum.",
+    title: "Reporting",
+    description: "We deliver a full report on campaign performance: reach, impressions, engagement, and smart follower exposure.",
     icon: FileText,
   },
 ];
-
-const themeConfig = {
-  backgroundImage: seoulTech,
-  auroraColors: {
-    primary: "from-cyan-500/30",
-    secondary: "to-teal-400/25",
-    tertiary: "from-emerald-500/20",
-  },
-  accentColor: "#22D3EE", // Electric Cyan - Viral, energy
-  accentColorHover: "#06B6D4",
-  floatingTags: [
-    { label: "Yappers", top: "14%", left: "7%" },
-    { label: "600+ Creators", top: "26%", right: "10%" },
-    { label: "Amplification", top: "42%", left: "4%" },
-    { label: "Mindshare", top: "52%", right: "8%" },
-    { label: "Virality", top: "34%", left: "14%" },
-  ],
-};
 
 const stats = [
   { value: "600+", label: "Yapper Network" },
@@ -54,20 +44,432 @@ const stats = [
 ];
 
 const YapService = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // Sound wave animation
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const resize = () => {
+      canvas.width = canvas.offsetWidth * 2;
+      canvas.height = canvas.offsetHeight * 2;
+      ctx.scale(2, 2);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    let animationId: number;
+    let time = 0;
+
+    const draw = () => {
+      const width = canvas.offsetWidth;
+      const height = canvas.offsetHeight;
+      
+      ctx.clearRect(0, 0, width, height);
+      
+      // Draw multiple wave layers
+      for (let layer = 0; layer < 3; layer++) {
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(34, 211, 238, ${0.3 - layer * 0.1})`;
+        ctx.lineWidth = 2 - layer * 0.5;
+        
+        for (let x = 0; x < width; x++) {
+          const y = height / 2 + 
+            Math.sin(x * 0.02 + time + layer) * (30 + layer * 10) +
+            Math.sin(x * 0.01 + time * 0.5) * 20;
+          
+          if (x === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
+        }
+        ctx.stroke();
+      }
+      
+      time += 0.03;
+      animationId = requestAnimationFrame(draw);
+    };
+
+    draw();
+
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animationId);
+    };
+  }, []);
+
   return (
-    <ServiceDetailLayout
-      tagline="Yap Strategy"
-      title="Yap "
-      titleHighlight="Strategy"
-      subtitle="Scale awareness with hundreds of aligned yappers to amplify your project's mindshare across Crypto X."
-      aboutText="Yap Circle is our curated Yapper network designed to give your project consistent Mindshare and credible exposure across X. With 600+ Yappers, we activate waves of organic content around your narrative. It's a flexible, always-on strategy that reaches deep into crypto's most active segments without relying on Kaito's expensive leaderboard campaigns."
-      whatIncludesText="We run targeted Yap campaigns by publishing briefs to our network of 600+ creators. They opt in and post aligned content that fits your story, timing, and target audience. We coordinate the rollout, monitor performance, and amplify what gains traction."
-      processSteps={processSteps}
-      aboutImage={eventsImage}
-      currentServiceSlug="yap"
-      themeConfig={themeConfig}
-      stats={stats}
-    />
+    <div className="min-h-screen bg-[#0A0A0A] p-0.5 sm:p-1 md:p-2">
+      <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden relative">
+        {/* Ambient Glow */}
+        <div 
+          className="fixed top-0 left-0 w-[50vw] h-[50vh] pointer-events-none z-0 opacity-15"
+          style={{ background: `radial-gradient(ellipse at 0% 0%, ${ACCENT_COLOR} 0%, transparent 60%)` }}
+        />
+        <div 
+          className="fixed bottom-0 right-0 w-[40vw] h-[40vh] pointer-events-none z-0 opacity-10"
+          style={{ background: `radial-gradient(ellipse at 100% 100%, ${ACCENT_COLOR} 0%, transparent 60%)` }}
+        />
+        
+        <Navbar />
+
+        {/* Hero Section - Sound Wave Style */}
+        <section className="relative min-h-[85vh] flex flex-col justify-center overflow-hidden">
+          {/* Background */}
+          <div className="absolute inset-0">
+            <div 
+              className="absolute inset-[-5%] bg-cover bg-center bg-no-repeat animate-kenburns"
+              style={{ 
+                backgroundImage: `url(${seoulTech})`,
+                filter: "brightness(0.2) saturate(1.2)",
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/70 via-transparent to-[#0A0A0A]" />
+          </div>
+
+          {/* Sound Wave Canvas */}
+          <canvas 
+            ref={canvasRef}
+            className="absolute inset-0 w-full h-full opacity-60 pointer-events-none z-[1]"
+          />
+
+          {/* Floating Speech Bubbles */}
+          {Array.from({ length: 6 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute z-10 hidden md:block"
+              style={{ 
+                left: `${10 + i * 15}%`, 
+                top: `${25 + (i % 3) * 15}%`,
+              }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ 
+                opacity: [0, 1, 0],
+                scale: [0.5, 1, 0.5],
+                y: [0, -30, -60],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                delay: i * 0.8,
+              }}
+            >
+              <MessageCircle className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
+            </motion.div>
+          ))}
+
+          {/* Content */}
+          <div className="container mx-auto px-6 lg:px-16 pt-32 pb-16 relative z-10">
+            <div className="max-w-3xl">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6"
+                style={{ borderColor: `${ACCENT_COLOR}50`, backgroundColor: `${ACCENT_COLOR}10` }}
+              >
+                <Volume2 className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
+                <span className="text-sm" style={{ color: ACCENT_COLOR }}>Yap Strategy</span>
+              </motion.div>
+              
+              <h1 className="text-white mb-6">
+                <span className="block text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]">
+                  Yap
+                </span>
+                <span 
+                  className="block text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]"
+                  style={{ color: ACCENT_COLOR }}
+                >
+                  Strategy
+                </span>
+              </h1>
+
+              <p className="text-white/70 text-lg max-w-xl mb-8 font-light leading-relaxed">
+                Amplify your message with 600+ aligned yappers — driving mindshare and organic buzz across Crypto X.
+              </p>
+
+              <div className="flex flex-wrap gap-4">
+                <CalendlyButton 
+                  className="inline-flex items-center gap-3 px-6 py-3 font-medium text-sm transition-all duration-300 hover:scale-105 rounded-lg"
+                  style={{ backgroundColor: ACCENT_COLOR, color: '#000' }}
+                >
+                  <Calendar className="w-4 h-4" />
+                  Book a Meeting
+                </CalendlyButton>
+                
+                {/* Sound Wave Visual Badge */}
+                <div 
+                  className="inline-flex items-center gap-2 px-4 py-3 rounded-lg border"
+                  style={{ borderColor: `${ACCENT_COLOR}30` }}
+                >
+                  <Radio className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
+                  <span className="text-white/60 text-sm">600+ Active Creators</span>
+                  <motion.div
+                    className="flex gap-0.5"
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    {[1, 2, 3, 4].map((i) => (
+                      <motion.div
+                        key={i}
+                        className="w-1 rounded-full"
+                        style={{ backgroundColor: ACCENT_COLOR }}
+                        animate={{ height: [4, 16, 4] }}
+                        transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
+                      />
+                    ))}
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Creator Network Section */}
+        <section 
+          className="relative py-20"
+          style={{ background: `linear-gradient(to bottom, #0A0A0A, ${ACCENT_COLOR}08, #0A0A0A)` }}
+        >
+          <div 
+            className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: `linear-gradient(to right, transparent, ${ACCENT_COLOR}60, transparent)` }}
+          />
+
+          <div className="container mx-auto px-6 lg:px-16">
+            <div className="flex items-center gap-3 mb-12">
+              <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>01</span>
+              <h2 className="text-2xl md:text-3xl font-medium text-white">Creator Network</h2>
+            </div>
+
+            {/* Network Visualization */}
+            <div className="relative mb-16">
+              <div className="grid grid-cols-6 md:grid-cols-10 gap-2 md:gap-3">
+                {Array.from({ length: 60 }).map((_, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.01 }}
+                    className="aspect-square rounded-lg flex items-center justify-center relative group cursor-pointer"
+                    style={{ 
+                      backgroundColor: `${ACCENT_COLOR}${Math.random() > 0.7 ? '30' : '10'}`,
+                      border: `1px solid ${ACCENT_COLOR}${Math.random() > 0.8 ? '40' : '20'}`,
+                    }}
+                  >
+                    <Users className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors" />
+                    {/* Pulse effect on random cells */}
+                    {Math.random() > 0.85 && (
+                      <motion.div
+                        className="absolute inset-0 rounded-lg"
+                        style={{ backgroundColor: ACCENT_COLOR }}
+                        animate={{ opacity: [0.3, 0, 0.3] }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      />
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Center Badge */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#0A0A0A] border-2 px-8 py-4 rounded-xl z-10"
+                style={{ borderColor: ACCENT_COLOR }}
+              >
+                <p className="text-3xl font-bold text-center" style={{ color: ACCENT_COLOR }}>600+</p>
+                <p className="text-white/60 text-sm text-center">Yappers</p>
+              </motion.div>
+            </div>
+
+            {/* About Content */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              <div>
+                <p className="text-white/60 text-lg leading-relaxed mb-8">
+                  Yap Circle is our curated Yapper network designed to give your project consistent Mindshare and credible exposure across X. We activate waves of organic content around your narrative — a flexible, always-on strategy that reaches deep into crypto's most active segments.
+                </p>
+                <div className="grid grid-cols-2 gap-4">
+                  {stats.map((stat, index) => (
+                    <div 
+                      key={index} 
+                      className="p-4 rounded-xl border"
+                      style={{ borderColor: `${ACCENT_COLOR}30`, backgroundColor: `${ACCENT_COLOR}05` }}
+                    >
+                      <p className="text-3xl font-bold" style={{ color: ACCENT_COLOR }}>{stat.value}</p>
+                      <p className="text-white/50 text-sm">{stat.label}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              {/* Sound Wave Visual */}
+              <div className="relative flex items-center justify-center">
+                <div className="relative w-full max-w-sm">
+                  {/* Concentric circles */}
+                  {[1, 2, 3, 4].map((ring) => (
+                    <motion.div
+                      key={ring}
+                      className="absolute rounded-full border"
+                      style={{
+                        width: `${ring * 25}%`,
+                        height: `${ring * 25}%`,
+                        top: `${50 - ring * 12.5}%`,
+                        left: `${50 - ring * 12.5}%`,
+                        borderColor: `${ACCENT_COLOR}${40 - ring * 10}`,
+                      }}
+                      animate={{ scale: [1, 1.1, 1], opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 2, repeat: Infinity, delay: ring * 0.3 }}
+                    />
+                  ))}
+                  {/* Center icon */}
+                  <div 
+                    className="relative z-10 w-20 h-20 mx-auto rounded-full flex items-center justify-center"
+                    style={{ backgroundColor: `${ACCENT_COLOR}30`, border: `2px solid ${ACCENT_COLOR}` }}
+                  >
+                    <Waves className="w-10 h-10" style={{ color: ACCENT_COLOR }} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Process Section - Concentric Diffusion */}
+        <section className="bg-[#0A0A0A] relative py-20">
+          <div 
+            className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: `linear-gradient(to right, transparent, ${ACCENT_COLOR}40, transparent)` }}
+          />
+
+          <div className="container mx-auto px-6 lg:px-16">
+            <div className="flex items-center gap-3 mb-12">
+              <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>02</span>
+              <h2 className="text-2xl md:text-3xl font-medium text-white">Process</h2>
+            </div>
+
+            {/* Diffusion Style - Expanding Outward */}
+            <div className="relative max-w-4xl mx-auto">
+              {processSteps.map((step, index) => {
+                const size = 100 + index * 60; // Each step expands outward
+                return (
+                  <motion.div
+                    key={step.number}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 }}
+                    className="relative mb-6"
+                    style={{
+                      width: `${Math.min(100, 60 + index * 15)}%`,
+                      marginLeft: `${(100 - Math.min(100, 60 + index * 15)) / 2}%`,
+                    }}
+                  >
+                    <div 
+                      className="p-6 rounded-2xl border relative overflow-hidden"
+                      style={{ borderColor: `${ACCENT_COLOR}30` }}
+                    >
+                      {/* Background wave effect */}
+                      <motion.div
+                        className="absolute inset-0 opacity-10"
+                        style={{ backgroundColor: ACCENT_COLOR }}
+                        animate={{ opacity: [0.05, 0.1, 0.05] }}
+                        transition={{ duration: 3, repeat: Infinity, delay: index * 0.5 }}
+                      />
+                      
+                      <div className="flex items-start gap-4 relative z-10">
+                        <div 
+                          className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                          style={{ backgroundColor: `${ACCENT_COLOR}20` }}
+                        >
+                          <step.icon className="w-5 h-5" style={{ color: ACCENT_COLOR }} />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>{step.number}</span>
+                            <h3 className="text-white font-medium">{step.title}</h3>
+                          </div>
+                          <p className="text-white/50 text-sm">{step.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Connecting ripple */}
+                    {index < processSteps.length - 1 && (
+                      <motion.div
+                        className="absolute left-1/2 -bottom-4 w-8 h-8 -translate-x-1/2"
+                        animate={{ y: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        <div 
+                          className="w-full h-full rounded-full"
+                          style={{ 
+                            background: `radial-gradient(circle, ${ACCENT_COLOR}40, transparent)`,
+                          }}
+                        />
+                      </motion.div>
+                    )}
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* CTA */}
+            <div className="text-center mt-12">
+              <CalendlyButton 
+                className="inline-flex items-center gap-2 px-8 py-4 font-medium transition-all duration-300 hover:scale-105 rounded-lg"
+                style={{ backgroundColor: ACCENT_COLOR, color: '#000' }}
+              >
+                <Volume2 className="w-5 h-5" />
+                Amplify Your Message
+              </CalendlyButton>
+            </div>
+          </div>
+        </section>
+
+        {/* More Services */}
+        <section className="bg-[#0A0A0A] border-t border-white/10 py-20">
+          <div className="container mx-auto px-6 lg:px-16">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="text-xs font-mono text-white/40">03</span>
+              <h2 className="text-xl font-medium text-white">More Services</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {[
+                { slug: "community", title: "Community Management", color: "#5865F2" },
+                { slug: "social-media", title: "Social Media Marketing", color: "#EC4899" },
+                { slug: "influencer", title: "Influencer Strategy", color: "#F59E0B" },
+                { slug: "gtm", title: "GTM Strategy", color: "#10B981" },
+                { slug: "pr", title: "PR & Media", color: "#8B5CF6" },
+              ].map((service) => (
+                <Link
+                  key={service.slug}
+                  to={`/services/${service.slug}`}
+                  className="group p-6 border border-white/10 rounded-xl hover:border-white/30 transition-all duration-300"
+                  style={{ ['--service-color' as string]: service.color }}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-white group-hover:text-[var(--service-color)] transition-colors">
+                      {service.title}
+                    </span>
+                    <ArrowRight className="w-4 h-4 text-white/40 group-hover:text-[var(--service-color)] group-hover:translate-x-1 transition-all" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <CTASection />
+        <Footer />
+      </div>
+    </div>
   );
 };
 
