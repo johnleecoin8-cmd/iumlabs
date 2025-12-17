@@ -1,26 +1,31 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
 import socialMediaImage from "@/assets/backgrounds/seoul-gangnam-night.jpg";
+import { Pencil, Calendar, Send, LineChart } from "lucide-react";
 
 const processSteps = [
   {
     number: "01",
     title: "Onboarding",
     description: "We run a kickoff workshop and conduct competitor research to define your narrative, tone, and content strategy.",
+    icon: Pencil,
   },
   {
     number: "02",
     title: "Content Production",
     description: "We create post copy, a content calendar, branded visuals, and a reply strategy to guide day-to-day engagement.",
+    icon: Calendar,
   },
   {
     number: "03",
     title: "Campaign Goes Live",
     description: "We publish high-impact posts and actively monitor conversations across X, replying where relevant, surfacing mentions, and amplifying content from the community or related projects.",
+    icon: Send,
   },
   {
     number: "04",
     title: "Reporting",
     description: "We deliver a performance report with insights, learnings, and next-step recommendations.",
+    icon: LineChart,
   },
 ];
 
@@ -42,6 +47,11 @@ const themeConfig = {
   ],
 };
 
+const stats = [
+  { value: "2M+", label: "Impressions Generated" },
+  { value: "50+", label: "Accounts Managed" },
+];
+
 const SocialMediaService = () => {
   return (
     <ServiceDetailLayout
@@ -55,6 +65,7 @@ const SocialMediaService = () => {
       aboutImage={socialMediaImage}
       currentServiceSlug="social-media"
       themeConfig={themeConfig}
+      stats={stats}
     />
   );
 };

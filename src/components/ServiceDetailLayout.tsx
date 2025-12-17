@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, ArrowRight, ArrowDown, Users, AtSign, Mic2, Compass, MessageCircle, Newspaper, Search, Target, Rocket, TrendingUp, LucideIcon } from "lucide-react";
+import { Calendar, ArrowRight, Users, AtSign, Mic2, Compass, MessageCircle, Newspaper, Search, Target, Rocket, TrendingUp, LucideIcon } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
@@ -23,6 +23,11 @@ interface ProcessStep {
   title: string;
   description: string;
   icon?: LucideIcon;
+}
+
+interface Stat {
+  value: string;
+  label: string;
 }
 
 interface ThemeConfig {
@@ -54,6 +59,7 @@ interface ServiceDetailLayoutProps {
   aboutImage?: string;
   currentServiceSlug: string;
   themeConfig: ThemeConfig;
+  stats?: Stat[];
 }
 
 const allServices = [
@@ -80,6 +86,12 @@ const clientLogos = [
 // Default icons for process steps
 const defaultProcessIcons = [Search, Target, Rocket, TrendingUp];
 
+// Default stats
+const defaultStats: Stat[] = [
+  { value: "120+", label: "KOL Network" },
+  { value: "18+", label: "Projects Launched" },
+];
+
 const ServiceDetailLayout = ({
   title,
   titleHighlight,
@@ -89,6 +101,7 @@ const ServiceDetailLayout = ({
   aboutImage,
   currentServiceSlug,
   themeConfig,
+  stats = defaultStats,
 }: ServiceDetailLayoutProps) => {
   // Filter out current service
   const otherServices = allServices.filter((service) => service.slug !== currentServiceSlug);
@@ -116,9 +129,9 @@ const ServiceDetailLayout = ({
       <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden">
         <Navbar />
 
-        {/* Hero Section - Simplified */}
+        {/* Hero Section */}
         <section className="relative min-h-[70vh] flex flex-col justify-center overflow-hidden">
-          {/* Background - Simple Image with Dark Overlay */}
+          {/* Background */}
           <div className="absolute inset-0">
             <div 
               className="absolute inset-0 bg-cover bg-center bg-no-repeat"
@@ -128,7 +141,38 @@ const ServiceDetailLayout = ({
               }}
             />
             <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/50 via-transparent to-[#0A0A0A]" />
+            {/* Accent Color Overlay */}
+            <div 
+              className="absolute inset-0 opacity-20"
+              style={{ 
+                background: `radial-gradient(ellipse at 30% 50%, ${themeConfig.accentColor}30, transparent 70%)` 
+              }}
+            />
           </div>
+
+          {/* Floating Tags */}
+          {themeConfig.floatingTags.map((tag, index) => (
+            <motion.span
+              key={tag.label}
+              className="absolute px-3 py-1.5 text-xs border rounded-full backdrop-blur-sm z-10 hidden md:block"
+              style={{ 
+                top: tag.top, 
+                left: tag.left, 
+                right: tag.right,
+                borderColor: `${themeConfig.accentColor}40`,
+                color: themeConfig.accentColor,
+                backgroundColor: `${themeConfig.accentColor}10`,
+              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: [0, -8, 0] }}
+              transition={{ 
+                opacity: { duration: 0.5, delay: index * 0.1 },
+                y: { duration: 3, repeat: Infinity, delay: index * 0.5 }
+              }}
+            >
+              {tag.label}
+            </motion.span>
+          ))}
 
           {/* Content */}
           <div className="container mx-auto px-6 lg:px-16 pt-32 pb-16 relative z-10">
@@ -138,7 +182,10 @@ const ServiceDetailLayout = ({
                   {title}
                 </span>
                 {titleHighlight && (
-                  <span className="block text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]">
+                  <span 
+                    className="block text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]"
+                    style={{ color: themeConfig.accentColor }}
+                  >
                     {titleHighlight}
                   </span>
                 )}
@@ -149,7 +196,11 @@ const ServiceDetailLayout = ({
               </p>
 
               <CalendlyButton 
-                className="inline-flex items-center gap-3 bg-white text-black px-6 py-3 font-medium text-sm transition-all duration-300 hover:bg-white/90"
+                className="inline-flex items-center gap-3 px-6 py-3 font-medium text-sm transition-all duration-300 hover:scale-105"
+                style={{ 
+                  backgroundColor: themeConfig.accentColor,
+                  color: '#fff',
+                }}
               >
                 <Calendar className="w-4 h-4" />
                 Book a Meeting
@@ -176,8 +227,13 @@ const ServiceDetailLayout = ({
           </div>
         </section>
 
-        {/* About Section - 50/50 Image + Content */}
-        <section className="bg-[#0A0A0A]">
+        {/* About Section */}
+        <section 
+          className="relative"
+          style={{ 
+            background: `linear-gradient(to bottom, #0A0A0A, ${themeConfig.accentColor}08, #0A0A0A)` 
+          }}
+        >
           <div className="border-t border-white/10">
             {/* Section Header */}
             <div className="flex items-baseline justify-between px-6 md:px-10 py-6 border-b border-white/10">
@@ -185,10 +241,19 @@ const ServiceDetailLayout = ({
                 <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Overview</span>
+              <span 
+                className="text-xs tracking-wider hidden sm:block px-3 py-1 rounded-full"
+                style={{ 
+                  borderWidth: 1,
+                  borderColor: `${themeConfig.accentColor}40`,
+                  color: themeConfig.accentColor,
+                }}
+              >
+                Overview
+              </span>
             </div>
             
-            {/* Content - WhyChooseUsSection Style */}
+            {/* Content */}
             <div className="grid grid-cols-1 lg:grid-cols-2">
               {/* Left - Image */}
               <div className="relative min-h-[300px] lg:min-h-[450px] lg:border-r border-white/10">
@@ -218,17 +283,24 @@ const ServiceDetailLayout = ({
                 </div>
                 <div className="p-8 md:p-12">
                   <div className="grid grid-cols-2 gap-8 mb-8">
-                    <div>
-                      <p className="text-3xl font-bold text-white">120+</p>
-                      <p className="text-white/50 text-sm">KOL Network</p>
-                    </div>
-                    <div>
-                      <p className="text-3xl font-bold text-white">18+</p>
-                      <p className="text-white/50 text-sm">Projects Launched</p>
-                    </div>
+                    {stats.map((stat, index) => (
+                      <div key={index}>
+                        <p 
+                          className="text-3xl font-bold"
+                          style={{ color: themeConfig.accentColor }}
+                        >
+                          {stat.value}
+                        </p>
+                        <p className="text-white/50 text-sm">{stat.label}</p>
+                      </div>
+                    ))}
                   </div>
                   <CalendlyButton 
-                    className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors"
+                    className="inline-flex items-center gap-2 px-6 py-3 text-sm font-medium transition-all duration-300 hover:scale-105"
+                    style={{ 
+                      backgroundColor: themeConfig.accentColor,
+                      color: '#fff',
+                    }}
                   >
                     BOOK A MEETING
                     <ArrowRight className="w-4 h-4" />
@@ -239,7 +311,7 @@ const ServiceDetailLayout = ({
           </div>
         </section>
 
-        {/* Process Section - 4-Column Grid */}
+        {/* Process Section */}
         <section className="bg-[#0A0A0A]">
           <div className="border-t border-white/10">
             {/* Section Header */}
@@ -248,10 +320,19 @@ const ServiceDetailLayout = ({
                 <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What's Included</span>
+              <span 
+                className="text-xs tracking-wider hidden sm:block px-3 py-1 rounded-full"
+                style={{ 
+                  borderWidth: 1,
+                  borderColor: `${themeConfig.accentColor}40`,
+                  color: themeConfig.accentColor,
+                }}
+              >
+                What's Included
+              </span>
             </div>
             
-            {/* 4-Column Grid - ProcessSection Style */}
+            {/* 4-Column Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
               {processSteps.map((step, index) => {
                 const Icon = step.icon || defaultProcessIcons[index % defaultProcessIcons.length];
@@ -272,7 +353,21 @@ const ServiceDetailLayout = ({
                       index < 2 ? "border-b lg:border-b-0 border-white/10" : ""
                     }`}
                   >
-                    <Icon className="w-8 h-8 mb-4 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" strokeWidth={1.5} />
+                    <Icon 
+                      className="w-8 h-8 mb-4 text-white/40 transition-all duration-300"
+                      style={{ 
+                        '--icon-color': themeConfig.accentColor,
+                      } as React.CSSProperties}
+                      strokeWidth={1.5} 
+                    />
+                    <style>
+                      {`
+                        .group:hover svg {
+                          color: ${themeConfig.accentColor};
+                          filter: drop-shadow(0 0 12px ${themeConfig.accentColor}60);
+                        }
+                      `}
+                    </style>
                     
                     <h3 className="text-lg font-semibold text-white mb-3">
                       {step.title}
@@ -288,7 +383,7 @@ const ServiceDetailLayout = ({
           </div>
         </section>
 
-        {/* More Services Section - 2x3 Card Grid */}
+        {/* More Services Section */}
         <section className="bg-[#0A0A0A]">
           <div className="border-t border-white/10">
             {/* Section Header */}
@@ -300,7 +395,7 @@ const ServiceDetailLayout = ({
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Explore</span>
             </div>
             
-            {/* Services Grid - ServicesSection Style */}
+            {/* Services Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2">
               {otherServices.map((service, index) => {
                 const Icon = service.icon;

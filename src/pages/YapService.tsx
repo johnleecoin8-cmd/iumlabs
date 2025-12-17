@@ -1,27 +1,32 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
 import eventsImage from "@/assets/services/events.jpg";
 import seoulTech from "@/assets/backgrounds/seoul-tech-future.jpg";
+import { Target, Users, Zap, FileText } from "lucide-react";
 
 const processSteps = [
   {
     number: "01",
     title: "Strategy & Onboarding",
     description: "We align on your goals, messaging, timing, and target audiences. Then we define campaign angles, create a clear briefing, and prepare the materials for launch.",
+    icon: Target,
   },
   {
     number: "02",
     title: "Campaign Setup",
     description: "We publish the briefing to our 600+ Yap Circle creators — an open network of aligned, crypto-native voices — inviting them to participate based on interest, timing, and narrative fit.",
+    icon: Users,
   },
   {
     number: "03",
     title: "Activation",
     description: "Creators begin posting organically across X: threads, quote RTs, memes, and reactions. We monitor delivery, track engagement, and amplify high-performing posts via KOLs and ecosystem replies.",
+    icon: Zap,
   },
   {
     number: "04",
     title: "Reporting & Wrap-Up",
     description: "We deliver a full report on campaign performance: reach, impressions, engagement, post volume, smart follower exposure and propose next steps for continued momentum.",
+    icon: FileText,
   },
 ];
 
@@ -43,6 +48,11 @@ const themeConfig = {
   ],
 };
 
+const stats = [
+  { value: "600+", label: "Yapper Network" },
+  { value: "10M+", label: "Total Reach" },
+];
+
 const YapService = () => {
   return (
     <ServiceDetailLayout
@@ -56,6 +66,7 @@ const YapService = () => {
       aboutImage={eventsImage}
       currentServiceSlug="yap"
       themeConfig={themeConfig}
+      stats={stats}
     />
   );
 };

@@ -1,27 +1,32 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
 import prImage from "@/assets/services/pr-media.jpg";
 import seoulSkyline from "@/assets/seoul-skyline.jpg";
+import { FileEdit, BookOpen, Newspaper, ClipboardCheck } from "lucide-react";
 
 const processSteps = [
   {
     number: "01",
     title: "Onboarding",
     description: "We host a strategy session and research the landscape to define compelling angles and story directions.",
+    icon: FileEdit,
   },
   {
     number: "02",
     title: "Story Development",
     description: "We draft articles, design visuals, and pitch tailored stories to relevant journalists and editors.",
+    icon: BookOpen,
   },
   {
     number: "03",
     title: "Campaign Goes Live",
     description: "We secure media placements, coordinate timing, and amplify reach through supporting channels.",
+    icon: Newspaper,
   },
   {
     number: "04",
     title: "Reporting",
     description: "We share a full PR report covering placements, traffic, sentiment, and clear recommendations for follow-up.",
+    icon: ClipboardCheck,
   },
 ];
 
@@ -43,6 +48,11 @@ const themeConfig = {
   ],
 };
 
+const stats = [
+  { value: "200+", label: "Articles Published" },
+  { value: "50+", label: "Media Partners" },
+];
+
 const PRService = () => {
   return (
     <ServiceDetailLayout
@@ -56,6 +66,7 @@ const PRService = () => {
       aboutImage={prImage}
       currentServiceSlug="pr"
       themeConfig={themeConfig}
+      stats={stats}
     />
   );
 };

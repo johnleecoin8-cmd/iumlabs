@@ -1,27 +1,32 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
 import communityImage from "@/assets/services/community-growth.jpg";
 import seoulHanriver from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
+import { Users, Settings, Rocket, BarChart3 } from "lucide-react";
 
 const processSteps = [
   {
     number: "01",
     title: "Onboarding",
     description: "We run a detailed onboarding process to collect information about your project, community goals, and current setup. This gives us what we need to design your custom Discord ecosystem.",
+    icon: Users,
   },
   {
     number: "02",
     title: "Infrastructure Setup",
     description: "We implement your selected infrastructure components including AI automation, gamified engagement systems, and community training modules tailored to your needs.",
+    icon: Settings,
   },
   {
     number: "03",
     title: "Launch & Activation",
     description: "We activate all systems, conduct A/B testing to optimize performance, and monitor early community engagement to ensure smooth operation.",
+    icon: Rocket,
   },
   {
     number: "04",
     title: "Reporting",
     description: "We deliver performance reports with top contributors, engagement trends, and actionable recommendations for continued community growth and optimization.",
+    icon: BarChart3,
   },
 ];
 
@@ -43,6 +48,11 @@ const themeConfig = {
   ],
 };
 
+const stats = [
+  { value: "50+", label: "Discord Servers" },
+  { value: "500K+", label: "Members Managed" },
+];
+
 const CommunityService = () => {
   return (
     <ServiceDetailLayout
@@ -56,6 +66,7 @@ const CommunityService = () => {
       aboutImage={communityImage}
       currentServiceSlug="community"
       themeConfig={themeConfig}
+      stats={stats}
     />
   );
 };

@@ -1,27 +1,32 @@
 import ServiceDetailLayout from "@/components/ServiceDetailLayout";
 import gtmImage from "@/assets/services/gtm-strategy.jpg";
 import koreaPalace from "@/assets/backgrounds/korea-palace-modern.jpg";
+import { Compass, Map, Flag, TrendingUp } from "lucide-react";
 
 const processSteps = [
   {
     number: "01",
     title: "Strategy Kickoff",
     description: "We align on project goals, audience profiles, and competitive landscape to inform the full GTM plan.",
+    icon: Compass,
   },
   {
     number: "02",
     title: "Narrative & Positioning",
     description: "We craft your messaging framework, value proposition, and launch storyline across all channels.",
+    icon: Map,
   },
   {
     number: "03",
     title: "Launch Coordination",
     description: "We orchestrate all campaign elements — content, influencers, PR, community — into a unified launch.",
+    icon: Flag,
   },
   {
     number: "04",
     title: "Optimization & Scale",
     description: "We measure results, iterate on what works, and refine strategy for sustained growth post-launch.",
+    icon: TrendingUp,
   },
 ];
 
@@ -43,6 +48,11 @@ const themeConfig = {
   ],
 };
 
+const stats = [
+  { value: "30+", label: "Successful Launches" },
+  { value: "$50M+", label: "Token Sales Supported" },
+];
+
 const GTMStrategyService = () => {
   return (
     <ServiceDetailLayout
@@ -56,6 +66,7 @@ const GTMStrategyService = () => {
       aboutImage={gtmImage}
       currentServiceSlug="gtm"
       themeConfig={themeConfig}
+      stats={stats}
     />
   );
 };
