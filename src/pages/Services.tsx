@@ -9,37 +9,67 @@ const services = [
     icon: Compass,
     title: "Go-To-Market Strategy",
     description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus.",
-    link: "/services/gtm"
+    link: "/services/gtm",
+    color: "#10B981", // Emerald
+    hoverGradient: "from-emerald-500/10 via-transparent to-transparent",
+    borderGlow: "from-emerald-500/50 via-emerald-500/20 to-transparent",
+    iconHover: "group-hover:text-emerald-400",
+    glowBg: "bg-emerald-500/30"
   },
   {
     icon: Users,
     title: "Community Management",
     description: "Complete Discord community infrastructure to build sticky, scalable and self-sustaining growth.",
-    link: "/services/community"
+    link: "/services/community",
+    color: "#3B82F6", // Blue
+    hoverGradient: "from-blue-500/10 via-transparent to-transparent",
+    borderGlow: "from-blue-500/50 via-blue-500/20 to-transparent",
+    iconHover: "group-hover:text-blue-400",
+    glowBg: "bg-blue-500/30"
   },
   {
     icon: AtSign,
     title: "Social Media Marketing",
     description: "Content strategy and execution on X to grow visibility and engage with your ecosystem in real time.",
-    link: "/services/social-media"
+    link: "/services/social-media",
+    color: "#EC4899", // Pink
+    hoverGradient: "from-pink-500/10 via-transparent to-transparent",
+    borderGlow: "from-pink-500/50 via-pink-500/20 to-transparent",
+    iconHover: "group-hover:text-pink-400",
+    glowBg: "bg-pink-500/30"
   },
   {
     icon: Mic2,
     title: "Influencer Strategy",
     description: "Influencer campaigns powered by top crypto voices aligned with your message and goals.",
-    link: "/services/influencer"
+    link: "/services/influencer",
+    color: "#F59E0B", // Amber
+    hoverGradient: "from-amber-500/10 via-transparent to-transparent",
+    borderGlow: "from-amber-500/50 via-amber-500/20 to-transparent",
+    iconHover: "group-hover:text-amber-400",
+    glowBg: "bg-amber-500/30"
   },
   {
     icon: MessageCircle,
     title: "Yap Strategy",
     description: "Targeted campaigns through a 600+ creator network designed to drive awareness and traction across Crypto X.",
-    link: "/services/yap"
+    link: "/services/yap",
+    color: "#8B5CF6", // Violet
+    hoverGradient: "from-violet-500/10 via-transparent to-transparent",
+    borderGlow: "from-violet-500/50 via-violet-500/20 to-transparent",
+    iconHover: "group-hover:text-violet-400",
+    glowBg: "bg-violet-500/30"
   },
   {
     icon: Newspaper,
     title: "PR",
     description: "Narrative development and media placements to get your story published and seen in the right places.",
-    link: "/services/pr"
+    link: "/services/pr",
+    color: "#F97316", // Orange
+    hoverGradient: "from-orange-500/10 via-transparent to-transparent",
+    borderGlow: "from-orange-500/50 via-orange-500/20 to-transparent",
+    iconHover: "group-hover:text-orange-400",
+    glowBg: "bg-orange-500/30"
   }
 ];
 
@@ -64,14 +94,24 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           ${!isRightColumn ? 'border-r border-white/10' : ''}
           ${!isLastRow ? 'border-b border-white/10' : ''}
         `}
+        style={{ ['--service-color' as string]: service.color }}
       >
-        {/* Hover Glow Effect - Emerald */}
+        {/* Hover Glow Effect - Unique per service */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 via-transparent to-transparent" />
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-emerald-500/50 via-emerald-500/20 to-transparent" />
+          <div className={`absolute inset-0 bg-gradient-to-br ${service.hoverGradient}`} />
+          <div className={`absolute top-0 left-0 w-full h-px bg-gradient-to-r ${service.borderGlow}`} />
+          <div className={`absolute left-0 top-0 h-full w-px bg-gradient-to-b ${service.borderGlow}`} />
         </div>
         
         <div className="flex flex-col h-full min-h-[240px] relative">
+          {/* Number Badge */}
+          <div 
+            className="absolute top-0 right-0 text-[10px] font-mono opacity-40 group-hover:opacity-100 transition-all duration-300"
+            style={{ color: service.color }}
+          >
+            [ 0{index + 1} ]
+          </div>
+          
           {/* Icon */}
           <motion.div 
             className="mb-8 relative"
@@ -79,16 +119,21 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
             transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
           >
             <Icon 
-              className="w-10 h-10 md:w-12 md:h-12 text-white/60 stroke-[1.5] transition-colors duration-300 group-hover:text-emerald-400" 
+              className={`w-10 h-10 md:w-12 md:h-12 text-white/60 stroke-[1.5] transition-colors duration-300 ${service.iconHover}`}
             />
-            {/* Icon Glow - Emerald */}
-            <div className="absolute inset-0 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10 scale-150 bg-emerald-500/30" 
+            {/* Icon Glow - Unique per service */}
+            <div 
+              className={`absolute inset-0 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10 scale-150 ${service.glowBg}`}
             />
           </motion.div>
           
-          {/* Title */}
-          <h3 className="text-xl md:text-2xl font-bold text-white mb-4 leading-tight group-hover:text-white transition-colors">
+          {/* Title with colored underline on hover */}
+          <h3 className="text-xl md:text-2xl font-bold text-white mb-4 leading-tight group-hover:text-white transition-colors relative inline-block">
             {service.title}
+            <span 
+              className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
+              style={{ backgroundColor: service.color }}
+            />
           </h3>
           
           {/* Description */}
@@ -96,13 +141,20 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
             {service.description}
           </p>
           
-          {/* Arrow Link - Emerald */}
+          {/* Arrow Link - Unique color per service */}
           <motion.div 
-            className="flex items-center gap-2 text-white/40 group-hover:text-emerald-400 transition-colors duration-300"
+            className="flex items-center gap-2 text-white/40 transition-colors duration-300"
+            style={{ ['--link-color' as string]: service.color }}
             whileHover={{ x: 4 }}
           >
-            <span className="text-sm font-medium">Learn more</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+            <span 
+              className="text-sm font-medium transition-colors duration-300 group-hover:text-[var(--link-color)]"
+            >
+              Learn more
+            </span>
+            <ArrowRight 
+              className="w-4 h-4 group-hover:translate-x-2 transition-all duration-300 group-hover:text-[var(--link-color)]" 
+            />
           </motion.div>
         </div>
       </Link>
