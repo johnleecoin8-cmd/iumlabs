@@ -6,160 +6,143 @@ const phases = [
     title: "Discovery",
     icon: Search,
     description: "Deep-dive into your project, market positioning, and Korean audience fit.",
-    color: "#3B82F6", // Blue
-    glowColor: "rgba(59, 130, 246, 0.4)",
-    week: "Week 1"
+    week: "Week 1",
+    color: "#3B82F6",
   },
   {
     title: "Strategy",
     icon: Target,
     description: "Build GTM roadmap, channel mix, and localized messaging framework.",
-    color: "#06B6D4", // Cyan
-    glowColor: "rgba(6, 182, 212, 0.4)",
-    week: "Week 2"
+    week: "Week 2",
+    color: "#06B6D4",
   },
   {
     title: "Launch",
     icon: Rocket,
     description: "Execute campaigns across KOLs, community, PR, and social channels.",
-    color: "#10B981", // Emerald
-    glowColor: "rgba(16, 185, 129, 0.4)",
-    week: "Week 3"
+    week: "Week 3",
+    color: "#10B981",
   },
   {
     title: "Scale",
     icon: TrendingUp,
     description: "Optimize, iterate, and expand based on performance data.",
-    color: "#22C55E", // Green
-    glowColor: "rgba(34, 197, 94, 0.4)",
-    week: "Week 4+"
+    week: "Week 4+",
+    color: "#22C55E",
   }
 ];
 
 const ProcessSection = () => {
   return (
-    <section className="bg-[#0A0A0A] relative overflow-hidden">
-      {/* Gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-cyan-500/5 to-emerald-500/5 pointer-events-none" />
-      
-      <div className="relative">
-        {/* Connecting line SVG */}
-        <svg 
-          className="absolute top-1/2 left-0 w-full h-2 hidden lg:block pointer-events-none" 
-          style={{ transform: 'translateY(-50%)' }}
-        >
-          <defs>
-            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#3B82F6" />
-              <stop offset="33%" stopColor="#06B6D4" />
-              <stop offset="66%" stopColor="#10B981" />
-              <stop offset="100%" stopColor="#22C55E" />
-            </linearGradient>
-          </defs>
-          <line 
-            x1="12.5%" y1="50%" x2="87.5%" y2="50%" 
-            stroke="url(#lineGradient)" 
-            strokeWidth="2" 
-            strokeDasharray="8 4"
-            opacity="0.4"
-          />
-        </svg>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-          {phases.map((phase, index) => {
-            const Icon = phase.icon;
-            const isLast = index === phases.length - 1;
-            const isOdd = index % 2 === 1;
-            
-            return (
-              <motion.div
-                key={phase.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                whileHover={{ y: -8 }}
-                className={`group p-8 md:p-10 transition-all duration-300 relative ${
-                  !isLast ? "lg:border-r border-white/10" : ""
-                } ${isOdd ? "md:border-l lg:border-l-0 border-white/10" : ""} ${
-                  index < 2 ? "border-b lg:border-b-0 border-white/10" : ""
-                }`}
-                style={{
-                  background: `linear-gradient(180deg, transparent 0%, ${phase.color}05 100%)`
-                }}
-              >
-                {/* Phase indicator */}
-                <motion.div 
-                  className="absolute top-4 right-4 text-xs font-mono tracking-wider"
-                  style={{ color: phase.color }}
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 0.6 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 + 0.3 }}
-                >
-                  {phase.week}
-                </motion.div>
-
-                {/* Step number with glow */}
-                <motion.div
-                  className="absolute -top-3 left-8 w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border-2 bg-[#0A0A0A]"
-                  style={{ 
-                    borderColor: phase.color,
-                    color: phase.color,
-                    boxShadow: `0 0 20px ${phase.glowColor}`
-                  }}
-                  whileHover={{ scale: 1.1 }}
-                >
-                  {String(index + 1).padStart(2, '0')}
-                </motion.div>
-
-                <Icon 
-                  className="w-8 h-8 mb-4 transition-all duration-300 group-hover:scale-110" 
-                  strokeWidth={1.5}
-                  style={{ 
-                    color: 'rgba(255,255,255,0.4)',
-                  }}
-                />
-                
-                {/* Icon with color on hover */}
-                <motion.div
-                  className="-mt-12 mb-4"
-                  whileHover={{ scale: 1.1 }}
-                >
-                  <Icon 
-                    className="w-8 h-8 transition-all duration-300" 
-                    strokeWidth={1.5}
-                    style={{ 
-                      color: phase.color,
-                      filter: `drop-shadow(0 0 12px ${phase.glowColor})`,
-                      opacity: 0
-                    }}
-                  />
-                </motion.div>
-                
-                <h3 
-                  className="text-lg font-semibold text-white mb-3 group-hover:text-white/90 transition-colors"
-                >
-                  {phase.title}
-                </h3>
-                
-                <p className="text-white/50 text-sm leading-relaxed">
-                  {phase.description}
-                </p>
-
-                {/* Bottom accent line */}
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-0.5"
-                  style={{ backgroundColor: phase.color }}
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: index * 0.15 + 0.2 }}
-                />
-              </motion.div>
-            );
-          })}
+    <section className="bg-[#0A0A0A] relative overflow-hidden py-16 md:py-24">
+      <div className="container mx-auto max-w-7xl px-4 md:px-8">
+        {/* Header */}
+        <div className="text-center mb-16">
+          <motion.p 
+            className="text-white/40 text-sm uppercase tracking-wider mb-4"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            From Zero to Korean Hype
+          </motion.p>
+          <motion.h2 
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-white"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+          >
+            in <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-emerald-400 bg-clip-text text-transparent">30 Days</span>
+          </motion.h2>
         </div>
+
+        {/* Horizontal Timeline */}
+        <div className="relative">
+          {/* Connecting Line - Desktop */}
+          <div className="hidden lg:block absolute top-16 left-0 right-0 h-px">
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500 opacity-30" />
+            <motion.div 
+              className="absolute inset-0 bg-gradient-to-r from-blue-500 via-cyan-500 to-emerald-500"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1.5, ease: "easeOut" }}
+              style={{ transformOrigin: "left" }}
+            />
+          </div>
+
+          {/* Timeline Items */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
+            {phases.map((phase, index) => {
+              const Icon = phase.icon;
+              return (
+                <motion.div
+                  key={phase.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.15 }}
+                  className="relative"
+                >
+                  {/* Timeline Node */}
+                  <div className="flex lg:flex-col items-start lg:items-center gap-4 lg:gap-0">
+                    {/* Node Circle */}
+                    <motion.div
+                      className="relative z-10 w-12 h-12 lg:w-14 lg:h-14 rounded-full flex items-center justify-center border-2 bg-[#0A0A0A]"
+                      style={{ 
+                        borderColor: phase.color,
+                        boxShadow: `0 0 20px ${phase.color}40`
+                      }}
+                      whileHover={{ scale: 1.1 }}
+                    >
+                      <Icon className="w-5 h-5 lg:w-6 lg:h-6" style={{ color: phase.color }} />
+                    </motion.div>
+
+                    {/* Content Card */}
+                    <div className="flex-1 lg:mt-8 lg:text-center">
+                      <p 
+                        className="text-xs font-mono mb-2"
+                        style={{ color: phase.color }}
+                      >
+                        {phase.week}
+                      </p>
+                      <h3 className="text-xl font-bold text-white mb-2">
+                        {phase.title}
+                      </h3>
+                      <p className="text-white/50 text-sm leading-relaxed">
+                        {phase.description}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Mobile Connector Line */}
+                  {index < phases.length - 1 && (
+                    <div className="lg:hidden absolute left-6 top-12 w-px h-full bg-gradient-to-b from-white/20 to-transparent" />
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Bottom CTA */}
+        <motion.div 
+          className="mt-16 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+        >
+          <p className="text-white/40 text-sm mb-4">Ready to start?</p>
+          <a 
+            href="/contact" 
+            className="inline-flex items-center gap-2 text-cyan-400 font-medium hover:text-cyan-300 transition-colors"
+          >
+            Let's discuss your project
+            <span className="group-hover:translate-x-1 transition-transform">→</span>
+          </a>
+        </motion.div>
       </div>
     </section>
   );
