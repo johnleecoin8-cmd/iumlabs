@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { ArrowRight, Compass, Users, AtSign, Mic2, MessageCircle, Newspaper } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, Compass, Users, AtSign, Mic2, MessageCircle, Newspaper, ChevronDown, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,215 +9,68 @@ const services = [
   {
     icon: Compass,
     title: "Go-To-Market Strategy",
-    description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus.",
+    shortDesc: "Positioning, messaging, and audience clarity to launch with direction.",
+    fullDesc: "We develop comprehensive market entry strategies tailored to the Korean Web3 landscape. This includes competitive analysis, audience segmentation, messaging frameworks, and launch timing optimization.",
     link: "/services/gtm",
-    color: "#10B981", // Emerald
-    hoverGradient: "from-emerald-500/10 via-transparent to-transparent",
-    borderGlow: "from-emerald-500/50 via-emerald-500/20 to-transparent",
-    iconHover: "group-hover:text-emerald-400",
-    glowBg: "bg-emerald-500/30"
+    color: "#10B981",
+    deliverables: ["Market Analysis Report", "Positioning Strategy", "Launch Roadmap", "Messaging Framework", "Competitive Landscape"]
   },
   {
     icon: Users,
     title: "Community Management",
-    description: "Complete Discord community infrastructure to build sticky, scalable and self-sustaining growth.",
+    shortDesc: "Complete Discord infrastructure to build sticky, scalable growth.",
+    fullDesc: "Build thriving communities from scratch. We set up Discord/Telegram infrastructure, recruit moderators, create engagement programs, and develop community growth strategies tailored for Korean audiences.",
     link: "/services/community",
-    color: "#3B82F6", // Blue
-    hoverGradient: "from-blue-500/10 via-transparent to-transparent",
-    borderGlow: "from-blue-500/50 via-blue-500/20 to-transparent",
-    iconHover: "group-hover:text-blue-400",
-    glowBg: "bg-blue-500/30"
+    color: "#3B82F6",
+    deliverables: ["Discord/Telegram Setup", "Moderation Team", "Engagement Programs", "Growth Analytics", "Community Playbook"]
   },
   {
     icon: AtSign,
     title: "Social Media Marketing",
-    description: "Content strategy and execution on X to grow visibility and engage with your ecosystem in real time.",
+    shortDesc: "Content strategy and execution on X to grow visibility.",
+    fullDesc: "Strategic content creation and community engagement on X (Twitter). We handle content calendars, real-time engagement, trend hijacking, and audience growth with Korean market focus.",
     link: "/services/social-media",
-    color: "#EC4899", // Pink
-    hoverGradient: "from-pink-500/10 via-transparent to-transparent",
-    borderGlow: "from-pink-500/50 via-pink-500/20 to-transparent",
-    iconHover: "group-hover:text-pink-400",
-    glowBg: "bg-pink-500/30"
+    color: "#EC4899",
+    deliverables: ["Content Calendar", "Daily Posting", "Real-time Engagement", "Trend Analysis", "Performance Reports"]
   },
   {
     icon: Mic2,
     title: "Influencer Strategy",
-    description: "Influencer campaigns powered by top crypto voices aligned with your message and goals.",
+    shortDesc: "Campaigns powered by top Korean crypto voices.",
+    fullDesc: "Access our network of 120+ vetted Korean crypto KOLs. We match projects with the right influencers, negotiate rates, and manage end-to-end campaign execution.",
     link: "/services/influencer",
-    color: "#F59E0B", // Amber
-    hoverGradient: "from-amber-500/10 via-transparent to-transparent",
-    borderGlow: "from-amber-500/50 via-amber-500/20 to-transparent",
-    iconHover: "group-hover:text-amber-400",
-    glowBg: "bg-amber-500/30"
+    color: "#F59E0B",
+    deliverables: ["KOL Matching", "Campaign Design", "Contract Negotiation", "Performance Tracking", "ROI Analysis"]
   },
   {
     icon: MessageCircle,
     title: "Yap Strategy",
-    description: "Targeted campaigns through a 600+ creator network designed to drive awareness and traction across Crypto X.",
+    shortDesc: "600+ creator network for coordinated awareness campaigns.",
+    fullDesc: "Leverage our extensive network of 600+ crypto content creators for coordinated awareness campaigns that drive measurable engagement and conversion in Korean market.",
     link: "/services/yap",
-    color: "#8B5CF6", // Violet
-    hoverGradient: "from-violet-500/10 via-transparent to-transparent",
-    borderGlow: "from-violet-500/50 via-violet-500/20 to-transparent",
-    iconHover: "group-hover:text-violet-400",
-    glowBg: "bg-violet-500/30"
+    color: "#8B5CF6",
+    deliverables: ["Creator Network Access", "Campaign Coordination", "Trend Seeding", "Viral Mechanics", "Reach Analytics"]
   },
   {
     icon: Newspaper,
-    title: "PR",
-    description: "Narrative development and media placements to get your story published and seen in the right places.",
+    title: "PR & Media",
+    shortDesc: "Narrative development and media placements in Korean outlets.",
+    fullDesc: "Secure coverage in top Korean crypto media outlets including Block Media, TokenPost, and CoinDesk Korea. We craft compelling narratives and manage media relationships.",
     link: "/services/pr",
-    color: "#F97316", // Orange
-    hoverGradient: "from-orange-500/10 via-transparent to-transparent",
-    borderGlow: "from-orange-500/50 via-orange-500/20 to-transparent",
-    iconHover: "group-hover:text-orange-400",
-    glowBg: "bg-orange-500/30"
+    color: "#F97316",
+    deliverables: ["Press Releases", "Media Outreach", "Interview Prep", "Byline Articles", "Crisis Management"]
   }
 ];
 
-const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
-  const Icon = service.icon;
-  
-  // Determine border classes based on position
-  const isRightColumn = index % 2 === 1;
-  const isLastRow = index >= 4;
-  
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -8 }}
-    >
-      <Link 
-        to={service.link}
-        className={`group block h-full p-8 md:p-12 transition-all duration-300 hover:bg-white/[0.03] relative overflow-hidden
-          ${!isRightColumn ? 'border-r border-white/10' : ''}
-          ${!isLastRow ? 'border-b border-white/10' : ''}
-        `}
-        style={{ ['--service-color' as string]: service.color }}
-      >
-        {/* Hover Glow Effect - Unique per service */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-          <div className={`absolute inset-0 bg-gradient-to-br ${service.hoverGradient}`} />
-          <div className={`absolute top-0 left-0 w-full h-px bg-gradient-to-r ${service.borderGlow}`} />
-          <div className={`absolute left-0 top-0 h-full w-px bg-gradient-to-b ${service.borderGlow}`} />
-        </div>
-        
-        <div className="flex flex-col h-full min-h-[240px] relative">
-          {/* Number Badge */}
-          <div 
-            className="absolute top-0 right-0 text-[10px] font-mono opacity-40 group-hover:opacity-100 transition-all duration-300"
-            style={{ color: service.color }}
-          >
-            [ 0{index + 1} ]
-          </div>
-          
-          {/* Icon */}
-          <motion.div 
-            className="mb-8 relative"
-            whileHover={{ scale: 1.15, rotate: 8 }}
-            transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
-          >
-            <Icon 
-              className={`w-10 h-10 md:w-12 md:h-12 text-white/60 stroke-[1.5] transition-colors duration-300 ${service.iconHover}`}
-            />
-            {/* Icon Glow - Unique per service */}
-            <div 
-              className={`absolute inset-0 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10 scale-150 ${service.glowBg}`}
-            />
-          </motion.div>
-          
-          {/* Title with colored underline on hover */}
-          <h3 className="text-xl md:text-2xl font-bold text-white mb-4 leading-tight group-hover:text-white transition-colors relative inline-block">
-            {service.title}
-            <span 
-              className="absolute bottom-0 left-0 w-0 h-0.5 group-hover:w-full transition-all duration-300"
-              style={{ backgroundColor: service.color }}
-            />
-          </h3>
-          
-          {/* Description */}
-          <p className="text-white/50 text-sm md:text-base leading-relaxed mb-6 flex-grow group-hover:text-white/70 transition-colors">
-            {service.description}
-          </p>
-          
-          {/* Arrow Link - Unique color per service */}
-          <motion.div 
-            className="flex items-center gap-2 text-white/40 transition-colors duration-300"
-            style={{ ['--link-color' as string]: service.color }}
-            whileHover={{ x: 4 }}
-          >
-            <span 
-              className="text-sm font-medium transition-colors duration-300 group-hover:text-[var(--link-color)]"
-            >
-              Learn more
-            </span>
-            <ArrowRight 
-              className="w-4 h-4 group-hover:translate-x-2 transition-all duration-300 group-hover:text-[var(--link-color)]" 
-            />
-          </motion.div>
-        </div>
-      </Link>
-    </motion.div>
-  );
-};
-
-// 3D Abstract Gold Shape Component
-const GoldShape = () => (
-  <div className="relative w-full aspect-square max-w-[280px] mx-auto">
-    {/* Main shape layers */}
-    <motion.div 
-      className="absolute inset-0"
-      animate={{ rotateY: 360 }}
-      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      style={{ transformStyle: "preserve-3d" }}
-    >
-      {/* Gold gradient layers */}
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full"
-        style={{
-          background: "linear-gradient(135deg, #C4A35A 0%, #F5E6C8 50%, #C4A35A 100%)",
-          filter: "blur(1px)",
-          transform: "rotateX(60deg) rotateZ(45deg)",
-        }}
-      />
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full"
-        style={{
-          background: "linear-gradient(45deg, #D4B86A 0%, #F5E6C8 100%)",
-          filter: "blur(0.5px)",
-          transform: "rotateX(60deg) rotateZ(-30deg) translateZ(20px)",
-        }}
-      />
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24"
-        style={{
-          background: "linear-gradient(180deg, #C4A35A 0%, #8B7355 100%)",
-          clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-          transform: "rotateX(45deg) translateZ(40px)",
-        }}
-      />
-    </motion.div>
-    
-    {/* Glow effect */}
-    <div 
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full opacity-30"
-      style={{
-        background: "radial-gradient(circle, #C4A35A 0%, transparent 70%)",
-        filter: "blur(20px)",
-      }}
-    />
-  </div>
-);
-
 const Services = () => {
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero Section - Emerald Theme */}
-      <section className="relative min-h-[60vh] flex flex-col justify-center items-center overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative min-h-[50vh] flex flex-col justify-center items-center overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <video
             autoPlay
@@ -228,106 +82,171 @@ const Services = () => {
           >
             <source src="/videos/services-background.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/20 via-teal-500/10 to-[#0A0A0A]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-transparent to-teal-500/10" />
+          <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/10 via-transparent to-[#0A0A0A]" />
         </div>
 
-        <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
-          <motion.span 
-            className="text-xs text-emerald-400/70 mb-6 block tracking-widest"
+        <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center py-20">
+          <motion.p 
+            className="text-emerald-400/70 text-sm tracking-widest mb-4"
             initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            [ What We Do ]
+          </motion.p>
+          <motion.h1 
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
           >
-            [ Services ]
-          </motion.span>
-          <motion.h1 
-            className="text-[14vw] md:text-[120px] lg:text-[140px] font-light text-white leading-[0.85] tracking-tight"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            Gr<span className="serif-italic text-emerald-400">o</span>wth
+            Services
           </motion.h1>
-          <motion.p 
-            className="text-lg text-white/60 max-w-xl mx-auto mt-8"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            Strategic solutions to launch and grow your Web3 project in the Korean market.
-          </motion.p>
         </div>
       </section>
-      
-      {/* Main 2-Column Layout - Emerald Theme */}
-      <main className="flex flex-col lg:flex-row max-w-7xl mx-auto border-t border-emerald-500/20">
-        {/* Left: Service Grid (2/3) */}
-        <div className="w-full lg:w-2/3 border-r-0 lg:border-r border-white/10">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            {services.map((service, index) => (
-              <ServiceCard key={service.title} service={service} index={index} />
-            ))}
-          </div>
-        </div>
-        
-        {/* Right: Sticky CTA Panel (1/3) */}
-        <div className="w-full lg:w-1/3">
-          <div className="lg:sticky lg:top-24 p-8 md:p-12">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Why CryptoBridge
-              </h2>
-              
-              <p className="text-white/50 text-sm md:text-base leading-relaxed mb-8">
-                We're the Korean Web3 marketing agency that builds the bridge between your project and the Korean market. Founded by former executives from Binance and KuCoin.
-              </p>
-              
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Link 
-                  to="/contact"
-                  className="group inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 text-sm font-medium tracking-wide hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-emerald-500/30 rounded-lg"
+
+      {/* Accordion Services Section */}
+      <main className="container mx-auto max-w-5xl px-4 py-16 md:py-24">
+        <div className="space-y-0">
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            const isActive = activeIndex === index;
+
+            return (
+              <motion.div
+                key={service.title}
+                className="border-b border-white/10"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+              >
+                {/* Accordion Header */}
+                <button
+                  onClick={() => setActiveIndex(isActive ? null : index)}
+                  className="w-full py-6 md:py-8 flex items-center justify-between gap-4 group text-left"
                 >
-                  CONNECT WITH US
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
+                  <div className="flex items-center gap-4 md:gap-6">
+                    <span 
+                      className="text-xs font-mono"
+                      style={{ color: service.color }}
+                    >
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                    <div 
+                      className="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center transition-all duration-300"
+                      style={{ 
+                        backgroundColor: isActive ? `${service.color}20` : 'transparent',
+                        border: `1px solid ${isActive ? service.color : 'rgba(255,255,255,0.1)'}`
+                      }}
+                    >
+                      <Icon 
+                        className="w-5 h-5 md:w-6 md:h-6 transition-colors duration-300"
+                        style={{ color: isActive ? service.color : 'rgba(255,255,255,0.5)' }}
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-xl md:text-2xl font-semibold text-white group-hover:text-white/80 transition-colors">
+                        {service.title}
+                      </h3>
+                      {!isActive && (
+                        <p className="text-white/40 text-sm mt-1 hidden md:block">
+                          {service.shortDesc}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  <motion.div
+                    animate={{ rotate: isActive ? 180 : 0 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <ChevronDown 
+                      className="w-5 h-5"
+                      style={{ color: isActive ? service.color : 'rgba(255,255,255,0.4)' }}
+                    />
+                  </motion.div>
+                </button>
+
+                {/* Accordion Content */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div 
+                        className="pb-8 pl-16 md:pl-24 pr-4"
+                        style={{ 
+                          background: `linear-gradient(to right, ${service.color}05, transparent)`
+                        }}
+                      >
+                        <p className="text-white/60 text-base md:text-lg leading-relaxed mb-6 max-w-2xl">
+                          {service.fullDesc}
+                        </p>
+
+                        {/* Deliverables */}
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-8">
+                          {service.deliverables.map((item, i) => (
+                            <motion.div
+                              key={item}
+                              initial={{ opacity: 0, x: -10 }}
+                              animate={{ opacity: 1, x: 0 }}
+                              transition={{ delay: i * 0.05 }}
+                              className="flex items-center gap-2"
+                            >
+                              <Check 
+                                className="w-4 h-4 flex-shrink-0"
+                                style={{ color: service.color }}
+                              />
+                              <span className="text-white/70 text-sm">{item}</span>
+                            </motion.div>
+                          ))}
+                        </div>
+
+                        {/* CTA Link */}
+                        <Link
+                          to={service.link}
+                          className="inline-flex items-center gap-2 font-medium transition-colors"
+                          style={{ color: service.color }}
+                        >
+                          <span>Learn more about {service.title}</span>
+                          <ArrowRight className="w-4 h-4" />
+                        </Link>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </motion.div>
-              
-              {/* 3D Gold Shape */}
-              <div className="mt-12 md:mt-16">
-                <GoldShape />
-              </div>
-              
-              {/* Stats */}
-              <div className="mt-12 grid grid-cols-2 gap-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 }}
-                >
-                  <div className="text-2xl md:text-3xl font-bold text-white">18+</div>
-                  <div className="text-sm text-white/50">Projects Launched</div>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <div className="text-2xl md:text-3xl font-bold text-white">120+</div>
-                  <div className="text-sm text-white/50">KOL Network</div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
+            );
+          })}
         </div>
       </main>
+
+      {/* Bottom CTA Banner */}
+      <section className="bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-emerald-500/10 border-t border-b border-white/10">
+        <div className="container mx-auto max-w-7xl px-4 py-16 md:py-20">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div>
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                Ready to enter the Korean market?
+              </h2>
+              <p className="text-white/60">
+                Let's discuss how we can help your project grow.
+              </p>
+            </div>
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-3 bg-white text-[#0A0A0A] px-8 py-4 font-medium hover:bg-white/90 transition-all rounded-lg group"
+            >
+              Get Started
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
+        </div>
+      </section>
       
       <Footer />
     </div>

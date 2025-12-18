@@ -1,6 +1,7 @@
+import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Trophy } from "lucide-react";
-import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight, Trophy } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -87,198 +88,170 @@ const featuredCases = [
   },
 ];
 
-interface CaseCardProps {
-  name: string;
-  logo: string;
-  bgImage: string;
-  slug: string;
-  category: string;
-  result: string;
-  description: string;
-  color: string;
-  roi: string;
-  index: number;
-}
-
-const CaseCard = ({ name, logo, bgImage, slug, category, result, description, color, roi, index }: CaseCardProps) => {
-  const isLastRow = index >= 4;
-  const isRightColumn = index % 2 === 1;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-      whileHover={{ y: -4 }}
-    >
-      <Link
-        to={`/projects/${slug}`}
-        onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/5 relative ${
-          !isRightColumn ? "border-r border-white/10" : ""
-        } ${!isLastRow ? "border-b border-white/10" : ""}`}
-        style={{
-          boxShadow: `inset 0 0 0 1px transparent`,
-        }}
-      >
-        {/* ROI Badge */}
-        <motion.div
-          className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
-          style={{ 
-            backgroundColor: `${color}20`,
-            color: color,
-            border: `1px solid ${color}40`
-          }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: index * 0.1 + 0.3 }}
-        >
-          <Trophy className="w-3 h-3" />
-          {roi}
-        </motion.div>
-
-        <div className="flex items-start gap-6">
-          {/* Image */}
-          <div 
-            className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 transition-all duration-300"
-            style={{
-              boxShadow: `0 0 0 2px transparent`,
-            }}
-          >
-            <div 
-              className="w-full h-full relative group-hover:scale-110 transition-transform duration-500"
-              style={{
-                boxShadow: `0 4px 20px ${color}30`
-              }}
-            >
-              <img
-                src={bgImage}
-                alt={name}
-                className="w-full h-full object-cover"
-              />
-              <div 
-                className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-300"
-                style={{ backgroundColor: color }}
-              />
-            </div>
-          </div>
-
-          {/* Content */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 text-white/40 text-xs mb-2">
-              <span 
-                className="uppercase tracking-wider px-2 py-0.5 rounded"
-                style={{ 
-                  backgroundColor: `${color}15`,
-                  color: color
-                }}
-              >
-                {category}
-              </span>
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-white/80 transition-colors">
-              {name}
-            </h3>
-            <p 
-              className="font-medium text-sm mb-2"
-              style={{ color }}
-            >
-              {result}
-            </p>
-            <p className="text-white/50 text-sm leading-relaxed line-clamp-2">
-              {description}
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm mt-4">
-          View case study
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </div>
-
-        {/* Bottom accent on hover */}
-        <motion.div
-          className="absolute bottom-0 left-0 right-0 h-0.5 opacity-0 group-hover:opacity-100 transition-opacity"
-          style={{ backgroundColor: color }}
-        />
-      </Link>
-    </motion.div>
-  );
-};
-
 const CasesSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const visibleCards = 3; // Show 3 cards at a time on desktop
+  const maxIndex = Math.max(0, featuredCases.length - visibleCards);
+
+  const goToPrev = () => {
+    setCurrentIndex((prev) => Math.max(0, prev - 1));
+  };
+
+  const goToNext = () => {
+    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+  };
+
   return (
-    <section className="bg-[#0A0A0A] relative overflow-hidden">
-      {/* Subtle gold gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 via-transparent to-transparent pointer-events-none" />
-      
-      <div className="flex flex-col lg:flex-row relative">
-        {/* Left: Cases Grid */}
-        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            {featuredCases.map((caseItem, index) => (
-              <CaseCard key={caseItem.slug} {...caseItem} index={index} />
-            ))}
+    <section className="bg-[#0A0A0A] relative overflow-hidden py-16 md:py-24">
+      <div className="container mx-auto max-w-7xl px-4 md:px-8">
+        {/* Header with Navigation */}
+        <div className="flex items-end justify-between mb-12">
+          <div>
+            <p className="text-amber-400/60 text-sm uppercase tracking-wider mb-2">Featured Cases</p>
+            <h2 className="text-3xl md:text-4xl font-bold text-white">
+              Our <span className="text-amber-400">Work</span>
+            </h2>
           </div>
 
-          {/* View All */}
-          <div className="p-8 md:p-10 border-t border-white/10">
-            <Link
-              to="/projects"
-              className="inline-flex items-center gap-2 text-amber-400 font-medium hover:text-amber-300 transition-colors"
-            >
-              View all projects
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+          {/* Carousel Navigation */}
+          <div className="flex items-center gap-4">
+            <span className="text-white/40 text-sm font-mono hidden sm:block">
+              {String(currentIndex + 1).padStart(2, '0')} / {String(featuredCases.length).padStart(2, '0')}
+            </span>
+            <div className="flex gap-2">
+              <motion.button
+                onClick={goToPrev}
+                disabled={currentIndex === 0}
+                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-amber-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ArrowLeft className="w-4 h-4" />
+              </motion.button>
+              <motion.button
+                onClick={goToNext}
+                disabled={currentIndex >= maxIndex}
+                className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-amber-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ArrowRight className="w-4 h-4" />
+              </motion.button>
+            </div>
           </div>
         </div>
 
-        {/* Right: Sticky Info Panel */}
-        <motion.div
-          className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          {/* Trophy icon decoration */}
+        {/* Carousel Container */}
+        <div className="relative overflow-hidden" ref={containerRef}>
           <motion.div
-            className="mb-6"
-            animate={{ rotate: [0, 5, -5, 0] }}
-            transition={{ duration: 4, repeat: Infinity }}
+            className="flex gap-6"
+            animate={{ x: `-${currentIndex * (100 / visibleCards + 2)}%` }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
           >
-            <Trophy className="w-12 h-12 text-amber-400" strokeWidth={1.5} />
+            {featuredCases.map((caseItem, index) => (
+              <motion.div
+                key={caseItem.slug}
+                className="flex-shrink-0 w-full md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Link
+                  to={`/projects/${caseItem.slug}`}
+                  onClick={() => window.scrollTo(0, 0)}
+                  className="group block relative overflow-hidden rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-500"
+                >
+                  {/* Background Image */}
+                  <div className="relative h-72 md:h-80 overflow-hidden">
+                    <img
+                      src={caseItem.bgImage}
+                      alt={caseItem.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    {/* Gradient Overlay */}
+                    <div 
+                      className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80"
+                    />
+                    {/* Color Overlay on Hover */}
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+                      style={{ backgroundColor: caseItem.color }}
+                    />
+                  </div>
+
+                  {/* Content Overlay */}
+                  <div className="absolute inset-0 p-6 flex flex-col justify-between">
+                    {/* Top Row */}
+                    <div className="flex items-start justify-between">
+                      <span 
+                        className="px-3 py-1 rounded-full text-xs font-medium"
+                        style={{ 
+                          backgroundColor: `${caseItem.color}20`,
+                          color: caseItem.color
+                        }}
+                      >
+                        {caseItem.category}
+                      </span>
+                      <div 
+                        className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold"
+                        style={{ 
+                          backgroundColor: `${caseItem.color}20`,
+                          color: caseItem.color,
+                          border: `1px solid ${caseItem.color}40`
+                        }}
+                      >
+                        <Trophy className="w-3 h-3" />
+                        {caseItem.roi}
+                      </div>
+                    </div>
+
+                    {/* Bottom Content */}
+                    <div>
+                      <h3 className="text-2xl font-bold text-white mb-1 group-hover:text-white/90 transition-colors">
+                        {caseItem.name}
+                      </h3>
+                      <p 
+                        className="text-sm font-medium mb-2"
+                        style={{ color: caseItem.color }}
+                      >
+                        {caseItem.result}
+                      </p>
+                      <p className="text-white/50 text-sm line-clamp-2 group-hover:text-white/60 transition-colors">
+                        {caseItem.description}
+                      </p>
+
+                      {/* View Link - appears on hover */}
+                      <motion.div 
+                        className="flex items-center gap-2 mt-4 text-white/60 group-hover:text-white transition-colors"
+                        initial={{ opacity: 0, y: 10 }}
+                        whileHover={{ x: 4 }}
+                      >
+                        <span className="text-sm font-medium">View Case Study</span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </motion.div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
           </motion.div>
+        </div>
 
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Our <span className="text-amber-400">Cases</span>
-          </h2>
-          <p className="text-white/50 leading-relaxed mb-8">
-            Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
-          </p>
-
-          <div className="space-y-6 mb-12">
-            <div className="flex items-center gap-4 pb-4 border-b border-amber-500/20">
-              <span className="text-3xl font-bold text-amber-400">340%</span>
-              <span className="text-white/50 text-sm">Average volume increase</span>
-            </div>
-            <div className="flex items-center gap-4 pb-4 border-b border-amber-500/20">
-              <span className="text-3xl font-bold text-amber-400">50K+</span>
-              <span className="text-white/50 text-sm">New users acquired</span>
-            </div>
-            <div className="flex items-center gap-4">
-              <span className="text-3xl font-bold text-amber-400">18+</span>
-              <span className="text-white/50 text-sm">Projects launched</span>
-            </div>
-          </div>
-
+        {/* View All Link */}
+        <motion.div 
+          className="mt-12 text-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
           <Link
-            to="/contact"
-            className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 text-white px-6 py-3 text-sm font-medium hover:from-amber-600 hover:to-orange-600 transition-all duration-300 w-fit shadow-lg shadow-amber-500/20"
+            to="/projects"
+            className="inline-flex items-center gap-2 text-amber-400 font-medium hover:text-amber-300 transition-colors"
           >
-            START YOUR PROJECT
+            View all projects
             <ArrowRight className="w-4 h-4" />
           </Link>
         </motion.div>
