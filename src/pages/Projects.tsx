@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight, Filter, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -43,6 +42,7 @@ const cases = [
     result: "+340% Korean Trading Volume",
     category: "Infrastructure",
     description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage.",
+    featured: true,
   },
   {
     name: "KuCoin",
@@ -52,6 +52,7 @@ const cases = [
     result: "50K+ New Korean Users",
     category: "Exchange",
     description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships.",
+    featured: true,
   },
   {
     name: "Sahara AI",
@@ -145,204 +146,302 @@ const cases = [
   },
 ];
 
-interface ProjectCardProps {
-  project: typeof cases[0];
-  index: number;
-}
-
-const ProjectCard = ({ project, index }: ProjectCardProps) => {
-  const isLastRow = index >= Math.floor(cases.length / 2) * 2;
-  const isRightColumn = index % 2 === 1;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-    >
-      <Link
-        to={`/projects/${project.slug}`}
-        onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/[0.02] ${
-          !isRightColumn ? "border-r border-white/10" : ""
-        } ${!isLastRow ? "border-b border-white/10" : ""}`}
-      >
-        <div className="flex items-start gap-6">
-          {/* Image */}
-          <motion.div 
-            className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
-            <img 
-              src={project.bgImage} 
-              alt={project.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            />
-          </motion.div>
-          
-          {/* Content */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 text-white/40 text-xs mb-2">
-              <span className="uppercase tracking-wider">{project.category}</span>
-            </div>
-            <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-primary transition-colors">
-              {project.name}
-            </h3>
-            <p className="text-white/50 text-sm leading-relaxed mb-3 line-clamp-2 group-hover:text-white/60 transition-colors">
-              {project.description}
-            </p>
-            <p className="text-primary font-medium text-sm mb-4">
-              {project.result}
-            </p>
-            <div className="flex items-center gap-2 text-white/40 group-hover:text-primary transition-colors text-sm">
-              View case study
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
-            </div>
-          </div>
-        </div>
-      </Link>
-    </motion.div>
-  );
-};
+const allCategories = ["All", ...Array.from(new Set(cases.map(c => c.category)))];
 
 const Projects = () => {
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [showFilters, setShowFilters] = useState(false);
+
+  const filteredCases = activeCategory === "All" 
+    ? cases 
+    : cases.filter(c => c.category === activeCategory);
+
+  const featuredProjects = filteredCases.filter(c => c.featured);
+  const regularProjects = filteredCases.filter(c => !c.featured);
+
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero Section - Gold/Amber Theme */}
+      {/* Hero Section - Minimal with Featured Project Preview */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
-        <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl bg-[#0A0A0A]">
-          <div className="absolute inset-0 overflow-hidden">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: "brightness(0.35)" }}
-              onLoadedMetadata={(e) => {
-                e.currentTarget.currentTime = 0;
-              }}
-            >
-              <source src="/videos/projects-background.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-amber-500/20 via-transparent to-[#0A0A0A]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-transparent to-amber-500/10" />
-          </div>
-
-          {/* Content - Centered like homepage */}
-          <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
+        <section className="relative min-h-[60vh] flex overflow-hidden rounded-xl sm:rounded-2xl bg-[#0A0A0A]">
+          {/* Left: Title */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:px-16 py-20 relative z-10">
             <motion.span 
-              className="text-xs text-amber-400/70 mb-6 block tracking-widest"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              className="text-xs text-amber-400/70 mb-4 tracking-widest"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 }}
             >
-              [ Projects ]
+              [ Portfolio ]
             </motion.span>
             <motion.h1 
-              className="text-[14vw] md:text-[120px] lg:text-[140px] font-light text-white leading-[0.85] tracking-tight"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
+              className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-[0.9] tracking-tight"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Our W<span className="serif-italic text-amber-400">o</span>rk
+              Our<br />
+              W<span className="serif-italic text-amber-400">o</span>rk
             </motion.h1>
             <motion.p 
-              className="text-lg text-white/60 max-w-2xl mx-auto mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              className="text-white/50 mt-6 max-w-md text-lg"
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
             >
-              Case studies walking through the challenge, our approach, and the outcomes across GTM, KOLs, PR, and social media.
+              {cases.length} successful Korean market entries across {allCategories.length - 1} categories.
             </motion.p>
-            <motion.div 
-              className="flex items-center justify-center gap-4 text-amber-400/60 text-sm mt-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <span>{cases.length} Projects</span>
-              <span>•</span>
-              <span>8 Categories</span>
-            </motion.div>
           </div>
+
+          {/* Right: Featured Project Preview */}
+          {featuredProjects[0] && (
+            <Link 
+              to={`/projects/${featuredProjects[0].slug}`}
+              className="hidden lg:block w-1/2 relative group"
+            >
+              <motion.div 
+                className="absolute inset-0"
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3, duration: 0.6 }}
+              >
+                <img 
+                  src={featuredProjects[0].bgImage} 
+                  alt={featuredProjects[0].name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
+                
+                {/* Featured Label */}
+                <div className="absolute top-8 right-8 px-3 py-1 bg-amber-500/20 border border-amber-500/40 rounded-full text-amber-400 text-xs">
+                  Featured Project
+                </div>
+                
+                {/* Project Info */}
+                <div className="absolute bottom-8 left-8 right-8">
+                  <p className="text-amber-400 text-sm mb-2">{featuredProjects[0].result}</p>
+                  <h3 className="text-white text-2xl font-medium mb-2 group-hover:text-amber-50 transition-colors">
+                    {featuredProjects[0].name}
+                  </h3>
+                  <span className="text-white/40 text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                    View Case Study <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </motion.div>
+            </Link>
+          )}
         </section>
       </main>
 
-      {/* Projects Grid Section with Header */}
-      <section className="bg-[#0A0A0A]" id="projects-grid">
-        <div className="border-t border-amber-500/20">
-          {/* Section Header - Gold Theme */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-amber-500/20">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-amber-500 font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Case Studies</h2>
+      {/* Fixed Filter Bar */}
+      <section className="sticky top-16 z-30 bg-[#0A0A0A]/95 backdrop-blur-xl border-y border-amber-500/20">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
+          <div className="flex items-center justify-between py-4">
+            {/* Desktop Categories */}
+            <div className="hidden md:flex items-center gap-2 overflow-x-auto">
+              {allCategories.map((cat) => (
+                <motion.button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all ${
+                    activeCategory === cat 
+                      ? "bg-amber-500 text-black font-medium" 
+                      : "text-white/60 hover:text-white hover:bg-white/5 border border-white/10"
+                  }`}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {cat}
+                  {cat !== "All" && (
+                    <span className="ml-2 opacity-50">
+                      {cases.filter(c => c.category === cat).length}
+                    </span>
+                  )}
+                </motion.button>
+              ))}
             </div>
-            <span className="text-xs text-amber-400/60 tracking-wider hidden sm:block px-3 py-1 border border-amber-500/30 rounded-full">
-              {cases.length} Projects
+
+            {/* Mobile Filter Button */}
+            <button 
+              onClick={() => setShowFilters(!showFilters)}
+              className="md:hidden flex items-center gap-2 text-white/70 px-4 py-2 border border-white/10 rounded-full"
+            >
+              <Filter className="w-4 h-4" />
+              {activeCategory}
+            </button>
+
+            {/* Results Count */}
+            <span className="text-amber-400/60 text-sm">
+              {filteredCases.length} Projects
             </span>
           </div>
-          
-          {/* Grid Content */}
-          <div className="flex flex-col lg:flex-row">
-            {/* Left: Projects Grid */}
-            <div className="w-full lg:w-2/3 lg:border-r lg:border-white/10">
-              <div className="grid grid-cols-1 md:grid-cols-2">
-                {cases.map((project, index) => (
-                  <ProjectCard key={project.slug} project={project} index={index} />
-                ))}
-              </div>
-            </div>
 
-            {/* Right: Sticky CTA Panel */}
-            <motion.div
-              className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl font-bold text-white mb-4">
-                Our Track Record
-              </h2>
-              <p className="text-white/50 leading-relaxed mb-8">
-                We've helped 18+ global Web3 projects successfully enter and scale in the Korean market. From infrastructure to DeFi, exchange to AI.
-              </p>
-              <Link
-                to="/contact"
-                className="group inline-flex items-center gap-2 bg-white text-[#0A0A0A] px-6 py-3 text-sm font-medium hover:bg-white/90 transition-all duration-300 w-fit mb-12 hover:gap-3"
+          {/* Mobile Filter Dropdown */}
+          <AnimatePresence>
+            {showFilters && (
+              <motion.div 
+                className="md:hidden pb-4 flex flex-wrap gap-2"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
               >
-                START YOUR PROJECT
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
+                {allCategories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => { setActiveCategory(cat); setShowFilters(false); }}
+                    className={`px-3 py-1.5 rounded-full text-sm ${
+                      activeCategory === cat 
+                        ? "bg-amber-500 text-black" 
+                        : "text-white/60 border border-white/10"
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </section>
 
-              <div className="pt-8 border-t border-white/10">
-                <div className="grid grid-cols-2 gap-6">
+      {/* Bento Grid */}
+      <section className="bg-[#0A0A0A] py-12 md:py-20">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+            layout
+          >
+            <AnimatePresence mode="popLayout">
+              {filteredCases.map((project, index) => {
+                // Determine card size for bento layout
+                const isLarge = project.featured || index === 0;
+                const isWide = index === 3 || index === 7;
+                
+                return (
                   <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
+                    key={project.slug}
+                    layout
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
+                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                    className={`
+                      ${isLarge ? "md:col-span-2 md:row-span-2" : ""}
+                      ${isWide && !isLarge ? "md:col-span-2" : ""}
+                    `}
                   >
-                    <p className="text-3xl font-bold text-white">18+</p>
-                    <p className="text-white/50 text-sm">Projects Launched</p>
+                    <Link
+                      to={`/projects/${project.slug}`}
+                      onClick={() => window.scrollTo(0, 0)}
+                      className="group block relative h-full overflow-hidden rounded-2xl border border-white/10 hover:border-amber-500/40 transition-all duration-500"
+                    >
+                      {/* Background Image */}
+                      <div className={`relative ${isLarge ? "aspect-square md:aspect-auto md:h-full md:min-h-[500px]" : "aspect-[4/3]"}`}>
+                        <img 
+                          src={project.bgImage} 
+                          alt={project.name}
+                          className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                        
+                        {/* Category Badge */}
+                        <div className="absolute top-4 left-4 px-3 py-1 bg-black/50 backdrop-blur-sm border border-white/20 rounded-full text-white/80 text-xs">
+                          {project.category}
+                        </div>
+
+                        {/* Featured Badge */}
+                        {project.featured && (
+                          <div className="absolute top-4 right-4 px-3 py-1 bg-amber-500/20 border border-amber-500/40 rounded-full text-amber-400 text-xs">
+                            ★ Featured
+                          </div>
+                        )}
+
+                        {/* Content */}
+                        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                          {/* Logo */}
+                          <img 
+                            src={project.logo} 
+                            alt={project.name}
+                            className="h-8 md:h-10 mb-4 brightness-0 invert opacity-80"
+                          />
+                          
+                          {/* Result */}
+                          <p className="text-amber-400 text-sm md:text-base mb-2 font-medium">
+                            {project.result}
+                          </p>
+                          
+                          {/* Title */}
+                          <h3 className={`text-white font-medium mb-3 ${isLarge ? "text-2xl md:text-3xl" : "text-xl"}`}>
+                            {project.name}
+                          </h3>
+                          
+                          {/* Description - only on large cards */}
+                          {isLarge && (
+                            <p className="text-white/50 text-sm mb-4 max-w-md">
+                              {project.description}
+                            </p>
+                          )}
+                          
+                          {/* CTA */}
+                          <span className="inline-flex items-center gap-2 text-white/60 text-sm group-hover:text-amber-400 group-hover:gap-3 transition-all">
+                            View Case Study
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
                   </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <p className="text-3xl font-bold text-white">$6M+</p>
-                    <p className="text-white/50 text-sm">Token Sales</p>
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Bottom CTA Section */}
+      <section className="bg-[#0A0A0A] border-t border-amber-500/20 py-20">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
+                Ready to be our next <span className="text-amber-400">success story</span>?
+              </h2>
+              <p className="text-white/50 max-w-xl">
+                We've helped 18+ projects enter the Korean market. Let's discuss how we can help you.
+              </p>
+            </div>
+            <Link
+              to="/contact"
+              className="group flex items-center gap-3 bg-amber-500 text-black px-8 py-4 rounded-xl font-medium hover:bg-amber-400 transition-all hover:gap-4"
+            >
+              Start Your Project
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+          </div>
+
+          {/* Stats Row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16 pt-16 border-t border-white/10">
+            {[
+              { value: "18+", label: "Projects Launched" },
+              { value: "$6M+", label: "Token Sales" },
+              { value: "120+", label: "KOL Network" },
+              { value: "38+", label: "AMA Sessions" },
+            ].map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="text-center md:text-left"
+              >
+                <p className="text-3xl md:text-4xl font-bold text-amber-400">{stat.value}</p>
+                <p className="text-white/50 text-sm mt-1">{stat.label}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
