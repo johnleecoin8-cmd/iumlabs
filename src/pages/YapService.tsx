@@ -520,11 +520,98 @@ const YapService = () => {
           </div>
         </section>
 
+        {/* Full Creator Network Section */}
+        <section className="bg-[#0A0A0A] border-t border-white/10 py-20">
+          <div className="container mx-auto px-6 lg:px-16">
+            <div className="flex items-center gap-3 mb-4">
+              <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>03</span>
+              <h2 className="text-2xl md:text-3xl font-medium text-white">Full Creator Network</h2>
+            </div>
+            <p className="text-white/50 mb-12 max-w-2xl">
+              Explore our complete network of 600+ active creators across all crypto verticals
+            </p>
+
+            {/* Full Grid */}
+            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2">
+              {cryptoKOLs.map((kol, index) => (
+                <motion.a
+                  key={index}
+                  href={`https://x.com/${kol.handle.replace('@', '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative aspect-square"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.01 }}
+                >
+                  <div 
+                    className="w-full h-full rounded-lg overflow-hidden border transition-all"
+                    style={{ 
+                      borderColor: `${ACCENT_COLOR}30`,
+                      backgroundColor: '#0a0a0a'
+                    }}
+                  >
+                    <img 
+                      src={`https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`}
+                      alt={kol.name}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    
+                    {/* Hover overlay */}
+                    <div className="absolute inset-0 bg-black/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-1 rounded-lg">
+                      <span className="text-[7px] md:text-[9px] font-medium text-white text-center leading-tight">{kol.name}</span>
+                      <span className="text-[5px] md:text-[7px] text-cyan-400 text-center">{kol.followers}</span>
+                      <span 
+                        className="text-[4px] md:text-[6px] px-1 py-0.5 rounded-full mt-0.5"
+                        style={{ backgroundColor: `${ACCENT_COLOR}40`, color: ACCENT_COLOR }}
+                      >
+                        {kol.expertise}
+                      </span>
+                    </div>
+                    
+                    {/* Glow on hover */}
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-lg"
+                      style={{ boxShadow: `inset 0 0 15px ${ACCENT_COLOR}30, 0 0 10px ${ACCENT_COLOR}20` }}
+                    />
+                  </div>
+                </motion.a>
+              ))}
+              
+              {/* Placeholder cells for 600+ network feeling */}
+              {[...Array(20)].map((_, i) => (
+                <motion.div
+                  key={`placeholder-${i}`}
+                  className="aspect-square rounded-lg border border-dashed flex items-center justify-center"
+                  style={{ borderColor: `${ACCENT_COLOR}20`, backgroundColor: `${ACCENT_COLOR}05` }}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: (cryptoKOLs.length + i) * 0.01 }}
+                >
+                  <Users className="w-3 h-3 text-white/10" />
+                </motion.div>
+              ))}
+            </div>
+
+            {/* CTA */}
+            <div className="text-center mt-12">
+              <CalendlyButton 
+                className="inline-flex items-center gap-2 px-8 py-4 font-medium rounded-lg"
+                style={{ backgroundColor: ACCENT_COLOR, color: '#000' }}
+              >
+                Access Full Network <ArrowRight className="w-4 h-4" />
+              </CalendlyButton>
+            </div>
+          </div>
+        </section>
+
         {/* More Services */}
         <section className="bg-[#0A0A0A] border-t border-white/10 py-20">
           <div className="container mx-auto px-6 lg:px-16">
             <div className="flex items-center gap-3 mb-8">
-              <span className="text-xs font-mono text-white/40">03</span>
+              <span className="text-xs font-mono text-white/40">04</span>
               <h2 className="text-xl font-medium text-white">More Services</h2>
             </div>
             
