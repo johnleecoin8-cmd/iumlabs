@@ -134,13 +134,13 @@ const InsightsSection = ({ bgColor = "#0A0A0A" }: InsightsSectionProps) => {
           ))}
 
           {/* View All Link */}
-          <div className="px-8 md:px-10 py-4 border-t border-white/5">
+          <div className="px-6 md:px-8 py-3 border-t border-white/5">
             <Link
               to="/research"
-              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
+              className="inline-flex items-center gap-2 text-white text-sm font-medium hover:text-white/70 transition-colors"
             >
               View all research
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
