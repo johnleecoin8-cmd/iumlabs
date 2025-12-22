@@ -298,10 +298,14 @@ const YapService = () => {
                   const avatarUrl = hasKol 
                     ? `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`
                     : null;
+                  const twitterUrl = hasKol ? `https://x.com/${kol.handle.replace('@', '')}` : null;
                   
                   return (
-                    <motion.div
+                    <motion.a
                       key={i}
+                      href={twitterUrl || undefined}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       initial={{ opacity: 0, scale: 0 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
@@ -311,6 +315,7 @@ const YapService = () => {
                         backgroundColor: hasKol ? '#0a0a0a' : `${ACCENT_COLOR}10`,
                         border: `1px solid ${hasKol ? ACCENT_COLOR + '60' : ACCENT_COLOR + '20'}`,
                       }}
+                      onClick={(e) => !hasKol && e.preventDefault()}
                     >
                       {hasKol ? (
                         <>
@@ -331,6 +336,7 @@ const YapService = () => {
                             >
                               {kol.expertise}
                             </span>
+                            <span className="text-[5px] md:text-[6px] text-white/50 mt-1">Click to view ↗</span>
                           </div>
                           {/* Glow effect on hover */}
                           <div 
@@ -352,7 +358,7 @@ const YapService = () => {
                           transition={{ duration: 2, repeat: Infinity, delay: i * 0.1 }}
                         />
                       )}
-                    </motion.div>
+                    </motion.a>
                   );
                 })}
               </div>
