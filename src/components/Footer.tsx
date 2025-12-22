@@ -11,27 +11,28 @@ const brandConfig = {
   phone: brand.phone
 };
 
-// Footer link categories for SEO sitelinks
+// Footer link categories for SEO sitelinks - Research & Marketing focused
 const footerLinks = {
-  solutions: {
-    title: "Solutions",
+  research: {
+    title: "Research",
     links: [
-      { name: "Web3 Marketing", href: "/services" },
-      { name: "Research Lab", href: "/research" },
-      { name: "GTM Strategy", href: "/services/gtm-strategy" },
-    ]
-  },
-  insights: {
-    title: "Insights",
-    links: [
-      { name: "Research Reports", href: "/research" },
+      { name: "Proprietary Insights", href: "/research" },
       { name: "Market Analytics", href: "/research" },
+      { name: "Reports", href: "/research" },
     ]
   },
-  company: {
-    title: "Company",
+  marketing: {
+    title: "Marketing",
     links: [
-      { name: "About Ium Labs", href: "/#why-choose-us" },
+      { name: "GTM Strategy", href: "/services/gtm-strategy" },
+      { name: "Influencer Marketing", href: "/services/influencer" },
+      { name: "Community Growth", href: "/services/community" },
+    ]
+  },
+  about: {
+    title: "About",
+    links: [
+      { name: "Our Mission", href: "/#why-choose-us" },
       { name: "Contact Us", href: "/contact" },
       { name: "Privacy Policy", href: "/privacy" },
       { name: "Terms of Service", href: "/terms" },
@@ -79,13 +80,13 @@ const Footer = () => {
 
         {/* Navigation Links Grid - SEO Sitemap Footer */}
         <nav className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-b border-white/10" aria-label="Footer navigation">
-          {/* Solutions Column */}
+          {/* Research Column */}
           <div>
             <h4 className="text-xs uppercase tracking-widest text-white/30 mb-6 font-mono">
-              {footerLinks.solutions.title}
+              {footerLinks.research.title}
             </h4>
             <ul className="space-y-3">
-              {footerLinks.solutions.links.map((link) => (
+              {footerLinks.research.links.map((link) => (
                 <li key={link.name}>
                   <Link 
                     to={link.href}
@@ -98,13 +99,13 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Insights Column */}
+          {/* Marketing Column */}
           <div>
             <h4 className="text-xs uppercase tracking-widest text-white/30 mb-6 font-mono">
-              {footerLinks.insights.title}
+              {footerLinks.marketing.title}
             </h4>
             <ul className="space-y-3">
-              {footerLinks.insights.links.map((link) => (
+              {footerLinks.marketing.links.map((link) => (
                 <li key={link.name}>
                   <Link 
                     to={link.href}
@@ -117,13 +118,13 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company Column */}
+          {/* About Column */}
           <div>
             <h4 className="text-xs uppercase tracking-widest text-white/30 mb-6 font-mono">
-              {footerLinks.company.title}
+              {footerLinks.about.title}
             </h4>
             <ul className="space-y-3">
-              {footerLinks.company.links.map((link) => (
+              {footerLinks.about.links.map((link) => (
                 <li key={link.name}>
                   <Link 
                     to={link.href}
