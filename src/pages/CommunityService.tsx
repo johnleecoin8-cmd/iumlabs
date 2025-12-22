@@ -9,27 +9,6 @@ import CalendlyButton from "@/components/CalendlyButton";
 import communityImage from "@/assets/services/community-growth.jpg";
 import seoulHanriver from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
 
-// Project logos for avatar grid
-import bnbLogo from "@/assets/logos/bnb.png";
-import bybitLogo from "@/assets/logos/bybit.png";
-import kucoinLogo from "@/assets/logos/kucoin.png";
-import mantraLogo from "@/assets/logos/mantra.png";
-import megaethLogo from "@/assets/logos/megaeth.png";
-import peaqLogo from "@/assets/logos/peaq.png";
-import saharaLogo from "@/assets/logos/sahara-ai.png";
-import storyLogo from "@/assets/logos/story-protocol.png";
-import synfuturesLogo from "@/assets/logos/synfutures.png";
-import triaLogo from "@/assets/logos/tria-official.png";
-import zkpassLogo from "@/assets/logos/zkpass.png";
-import fogoLogo from "@/assets/logos/fogo.png";
-
-const projectLogos = [
-  bnbLogo, bybitLogo, kucoinLogo, mantraLogo, megaethLogo,
-  peaqLogo, saharaLogo, storyLogo, synfuturesLogo, triaLogo,
-  zkpassLogo, fogoLogo, bnbLogo, bybitLogo, kucoinLogo,
-  mantraLogo, megaethLogo, peaqLogo, saharaLogo, storyLogo,
-];
-
 // Platform colors
 const DISCORD_COLOR = "#5865F2";
 const TELEGRAM_COLOR = "#0088CC";
@@ -478,46 +457,135 @@ const CommunityService = () => {
           <div className="py-20">
             <div className="container mx-auto px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                {/* Left - Animated Avatar Grid */}
-                <div className="relative">
-                  <div className="grid grid-cols-5 gap-3">
-                    {projectLogos.map((logo, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, scale: 0 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: i * 0.05 }}
-                        whileHover={{ scale: 1.1, y: -5 }}
-                        className="aspect-square rounded-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 flex items-center justify-center relative overflow-hidden group border border-white/5 hover:border-white/20 transition-all duration-300"
-                      >
-                        <img 
-                          src={logo} 
-                          alt="Project logo" 
-                          className="w-10 h-10 object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-300"
-                        />
-                        {/* Online indicator for some */}
-                        {i % 3 === 0 && (
-                          <div className="absolute bottom-1 right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-800 animate-pulse" />
-                        )}
-                        {/* Glow effect on hover */}
-                        <div 
-                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                          style={{ boxShadow: `inset 0 0 30px ${accentColor}20` }}
-                        />
-                      </motion.div>
-                    ))}
-                  </div>
-                  {/* Floating "500K+ Members" badge */}
+                {/* Left - Community Activity Mockups */}
+                <div className="space-y-4">
+                  {/* Discord Chat Mockup */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    whileHover={{ scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-[#36393f] rounded-xl overflow-hidden shadow-xl border border-[#5865F2]/30 hover:border-[#5865F2]/60 transition-all duration-300"
+                  >
+                    {/* Discord Header */}
+                    <div className="bg-[#2f3136] px-4 py-2.5 flex items-center gap-2 border-b border-black/30">
+                      <svg viewBox="0 0 24 24" className="w-4 h-4 text-[#5865F2]" fill="currentColor">
+                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                      </svg>
+                      <Hash className="w-4 h-4 text-gray-400" />
+                      <span className="text-white text-sm font-medium">announcements</span>
+                      <div className="ml-auto flex items-center gap-1.5">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                        <span className="text-[10px] text-gray-400">2,847 online</span>
+                      </div>
+                    </div>
+                    {/* Discord Messages */}
+                    <div className="p-3 space-y-2.5">
+                      <div className="flex gap-2">
+                        <div className="w-8 h-8 rounded-full bg-indigo-500 flex items-center justify-center text-white text-xs font-bold shrink-0">M</div>
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-indigo-400 text-xs font-medium">ModTeam</span>
+                            <span className="text-[9px] px-1 py-0.5 bg-indigo-500 text-white rounded">BOT</span>
+                            <span className="text-[10px] text-gray-500">Today at 9:00 AM</span>
+                          </div>
+                          <p className="text-gray-300 text-xs">🎉 Welcome to the community! Check out our rules in #welcome</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <div className="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-white text-xs font-bold shrink-0">A</div>
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-orange-400 text-xs font-medium">Admin</span>
+                            <span className="text-[10px] text-gray-500">Today at 9:05 AM</span>
+                          </div>
+                          <p className="text-gray-300 text-xs">📢 AMA with the founding team starts in 1 hour! Don't miss it 🔥</p>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <div className="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center text-white text-xs font-bold shrink-0">C</div>
+                        <div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-green-400 text-xs font-medium">CryptoFan</span>
+                            <span className="text-[10px] text-gray-500">Today at 9:08 AM</span>
+                          </div>
+                          <p className="text-gray-300 text-xs">Just joined, excited to be here! GM everyone ☀️</p>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Telegram Chat Mockup */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.15 }}
+                    whileHover={{ scale: 1.02 }}
+                    className="bg-[#17212b] rounded-xl overflow-hidden shadow-xl border border-[#0088CC]/30 hover:border-[#0088CC]/60 transition-all duration-300"
+                  >
+                    {/* Telegram Header */}
+                    <div className="bg-[#232e3c] px-4 py-2.5 flex items-center gap-2 border-b border-black/30">
+                      <Send className="w-4 h-4 text-[#0088CC]" />
+                      <span className="text-white text-sm font-medium">Project Community</span>
+                      <div className="ml-auto flex items-center gap-1.5">
+                        <Users className="w-3 h-3 text-gray-400" />
+                        <span className="text-[10px] text-gray-400">15,432 members</span>
+                      </div>
+                    </div>
+                    {/* Telegram Messages */}
+                    <div className="p-3 space-y-2.5">
+                      <div className="flex gap-2">
+                        <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-xs font-bold shrink-0">A</div>
+                        <div className="bg-[#2b5278] rounded-xl rounded-tl-none px-3 py-2 max-w-[85%]">
+                          <div className="flex items-center gap-1.5 mb-0.5">
+                            <span className="text-blue-300 text-xs font-medium">Admin</span>
+                          </div>
+                          <p className="text-white text-xs">📊 Daily market update has been posted in the channel!</p>
+                          <span className="text-[10px] text-gray-400 mt-1 block text-right">9:02 AM</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-2 justify-end">
+                        <div className="bg-[#2b5278] rounded-xl rounded-tr-none px-3 py-2 max-w-[85%]">
+                          <p className="text-white text-xs">When is the next community call scheduled? 🗓️</p>
+                          <span className="text-[10px] text-gray-400 mt-1 block text-right">9:05 AM ✓✓</span>
+                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <div className="w-8 h-8 rounded-full bg-purple-500 flex items-center justify-center text-white text-xs font-bold shrink-0">M</div>
+                        <div className="bg-[#2b5278] rounded-xl rounded-tl-none px-3 py-2 max-w-[85%]">
+                          <div className="flex items-center gap-1.5 mb-0.5">
+                            <span className="text-purple-300 text-xs font-medium">Moderator</span>
+                          </div>
+                          <p className="text-white text-xs">Tomorrow at 3 PM UTC! Link will be shared soon 🚀</p>
+                          <span className="text-[10px] text-gray-400 mt-1 block text-right">9:06 AM</span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Floating Badge */}
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    className="absolute -bottom-4 -right-4 bg-[#0A0A0A] border px-6 py-3 rounded-xl transition-colors duration-300"
-                    style={{ borderColor: accentColor }}
+                    className="flex justify-center mt-4"
                   >
-                    <p className="text-2xl font-bold transition-colors duration-300" style={{ color: accentColor }}>500K+</p>
-                    <p className="text-white/60 text-sm">Members Managed</p>
+                    <div 
+                      className="bg-[#0A0A0A] border px-6 py-3 rounded-xl flex items-center gap-4 transition-colors duration-300"
+                      style={{ borderColor: accentColor }}
+                    >
+                      <div className="text-center">
+                        <p className="text-2xl font-bold transition-colors duration-300" style={{ color: accentColor }}>500K+</p>
+                        <p className="text-white/60 text-xs">Members Managed</p>
+                      </div>
+                      <div className="w-px h-10 bg-white/20" />
+                      <div className="text-center">
+                        <p className="text-2xl font-bold transition-colors duration-300" style={{ color: accentColor }}>50+</p>
+                        <p className="text-white/60 text-xs">Active Servers</p>
+                      </div>
+                    </div>
                   </motion.div>
                 </div>
 
