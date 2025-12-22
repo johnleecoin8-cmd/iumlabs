@@ -300,9 +300,12 @@ const YapService = () => {
                         }}
                       >
                         <img 
-                          src={`https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`}
+                          src={`https://unavatar.io/twitter/${kol.handle.replace('@', '')}`}
                           alt={kol.name}
                           className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.src = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`;
+                          }}
                         />
                         
                         {/* Hover overlay */}
@@ -359,6 +362,9 @@ const YapService = () => {
                   const kol = i < cryptoKOLs.length ? cryptoKOLs[i] : null;
                   const hasKol = kol !== null;
                   const avatarUrl = hasKol 
+                    ? `https://unavatar.io/twitter/${kol.handle.replace('@', '')}`
+                    : null;
+                  const fallbackUrl = hasKol 
                     ? `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`
                     : null;
                   const twitterUrl = hasKol ? `https://x.com/${kol.handle.replace('@', '')}` : null;
@@ -386,6 +392,9 @@ const YapService = () => {
                             src={avatarUrl!}
                             alt={kol.name}
                             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                            onError={(e) => {
+                              if (fallbackUrl) e.currentTarget.src = fallbackUrl;
+                            }}
                           />
                           {/* Hover overlay with name */}
                           <div 
@@ -616,9 +625,12 @@ const YapService = () => {
                     }}
                   >
                     <img 
-                      src={`https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`}
+                      src={`https://unavatar.io/twitter/${kol.handle.replace('@', '')}`}
                       alt={kol.name}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      onError={(e) => {
+                        e.currentTarget.src = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`;
+                      }}
                     />
                     
                     {/* Hover overlay */}

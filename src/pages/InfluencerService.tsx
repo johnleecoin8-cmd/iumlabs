@@ -238,9 +238,12 @@ const InfluencerService = () => {
                   {/* Avatar - DiceBear */}
                   <div className="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-amber-400 transition-colors">
                     <img 
-                      src={`https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=1a1a1a`}
+                      src={`https://unavatar.io/twitter/${kol.handle.replace('@', '')}`}
                       alt={kol.name}
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.currentTarget.src = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=1a1a1a`;
+                      }}
                     />
                   </div>
 
@@ -537,9 +540,12 @@ const InfluencerService = () => {
                   className="aspect-square rounded-xl overflow-hidden border border-white/10 bg-white/5 group-hover:border-amber-400/60 transition-all relative"
                 >
                   <img 
-                    src={`https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=1a1a1a`}
+                    src={`https://unavatar.io/twitter/${kol.handle.replace('@', '')}`}
                     alt={kol.name}
                     className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    onError={(e) => {
+                      e.currentTarget.src = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=1a1a1a`;
+                    }}
                   />
                   
                   {/* Hover overlay */}
