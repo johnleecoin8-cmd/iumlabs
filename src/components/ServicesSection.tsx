@@ -143,19 +143,6 @@ const ServicesSection = () => {
           </Link>
 
           <GoldShape />
-
-          <div className="mt-6 pt-4 border-t border-white/10">
-            <div className="grid grid-cols-2 gap-6">
-              <div>
-                <p className="text-3xl font-bold text-white">18+</p>
-                <p className="text-white/50 text-sm">Projects Launched</p>
-              </div>
-              <div>
-                <p className="text-3xl font-bold text-white">120+</p>
-                <p className="text-white/50 text-sm">KOL Network</p>
-              </div>
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>
