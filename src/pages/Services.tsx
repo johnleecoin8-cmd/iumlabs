@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 const services = [
   {
@@ -160,6 +161,8 @@ const GoldShape = () => (
 );
 
 const Services = () => {
+  usePageTitle("Services");
+  
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />

@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import CalendlyButton from "@/components/CalendlyButton";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 // Research thumbnail images
 import ecosystemGrowthImg from "@/assets/blog/ecosystem-growth-2025.jpg";
@@ -2874,6 +2875,8 @@ const researchCategories = [
 const categories = ["All", "Market Research", "DeFi", "Strategy", "Community", "NFT", "Marketing"];
 
 const Research = () => {
+  usePageTitle("Research");
+  
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);

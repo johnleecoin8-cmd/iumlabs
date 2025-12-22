@@ -6,6 +6,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -209,6 +210,8 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 };
 
 const Projects = () => {
+  usePageTitle("Projects");
+  
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />

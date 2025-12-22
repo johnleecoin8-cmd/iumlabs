@@ -11,9 +11,11 @@ import ContactFormSection from "@/components/ContactFormSection";
 import Footer from "@/components/Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import useScrollReveal from "@/hooks/useScrollReveal";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 const Index = () => {
   useScrollReveal();
+  usePageTitle("Web3 Research & GTM Strategy Group");
 
   return (
     <div className="min-h-screen bg-[#0A0A0A]">

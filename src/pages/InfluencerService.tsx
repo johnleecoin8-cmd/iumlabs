@@ -7,6 +7,7 @@ import CalendlyButton from "@/components/CalendlyButton";
 import { ArrowRight, Star, Users, TrendingUp, Target, Zap, Crown, Award, Sparkles } from "lucide-react";
 import kolImage from "@/assets/services/kol-network.jpg";
 import seoulDDP from "@/assets/backgrounds/seoul-ddp-night.jpg";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 const themeConfig = {
   accentColor: "#F59E0B",
@@ -99,6 +100,8 @@ const stats = [
 ];
 
 const InfluencerService = () => {
+  usePageTitle("Influencer Marketing");
+  
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
       <Navbar />

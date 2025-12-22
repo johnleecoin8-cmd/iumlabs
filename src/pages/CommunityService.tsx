@@ -8,6 +8,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import communityImage from "@/assets/services/community-growth.jpg";
 import seoulHanriver from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 // Platform colors
 const DISCORD_COLOR = "#5865F2";
@@ -78,6 +79,8 @@ const stats = [
 ];
 
 const CommunityService = () => {
+  usePageTitle("Community Building");
+  
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [typingIndicator, setTypingIndicator] = useState(false);
   const [activePlatform, setActivePlatform] = useState<'discord' | 'telegram'>('discord');
