@@ -25,6 +25,17 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// Scroll to top on every route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [pathname]);
+
+  return null;
+};
+
 // Page transition wrapper with smooth animations
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   useScrollReveal();
@@ -43,8 +54,6 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
     if (transitionStage === 'exit') {
       setDisplayChildren(children);
       setTransitionStage('enter');
-      // Scroll to top on page change
-      window.scrollTo({ top: 0, behavior: 'instant' });
     }
   };
 
@@ -93,6 +102,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
+        <ScrollToTop />
         <AppRoutes />
       </BrowserRouter>
     </TooltipProvider>
