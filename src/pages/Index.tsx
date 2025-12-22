@@ -10,7 +10,6 @@ import InsightsSection from "@/components/InsightsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import Footer from "@/components/Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
-import SectionTransition from "@/components/SectionTransition";
 import useScrollReveal from "@/hooks/useScrollReveal";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
@@ -36,12 +35,9 @@ const Index = () => {
         </div>
       </main>
       
-      {/* Transition: Hero -> Services */}
-      <SectionTransition fromColor={SECTION_COLORS.base} toColor={SECTION_COLORS.odd} height="h-12" />
-      
       {/* Services - 01 홀수 */}
       <section className="scroll-reveal" style={{ backgroundColor: SECTION_COLORS.odd }} id="services">
-        <div>
+        <div className="border-t border-white/5">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/5">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
@@ -53,12 +49,9 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Transition: Services -> Process */}
-      <SectionTransition fromColor={SECTION_COLORS.odd} toColor={SECTION_COLORS.even} height="h-8" />
-      
       {/* Process - 02 짝수 */}
       <section className="scroll-reveal" style={{ backgroundColor: SECTION_COLORS.even }} id="process">
-        <div>
+        <div className="border-t border-white/5">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/5">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
@@ -70,12 +63,9 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Transition: Process -> Cases */}
-      <SectionTransition fromColor={SECTION_COLORS.even} toColor={SECTION_COLORS.odd} height="h-8" />
-      
       {/* Cases - 03 홀수 */}
       <section className="scroll-reveal" style={{ backgroundColor: SECTION_COLORS.odd }} id="cases">
-        <div>
+        <div className="border-t border-white/5">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/5">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
@@ -87,12 +77,9 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Transition: Cases -> About */}
-      <SectionTransition fromColor={SECTION_COLORS.odd} toColor={SECTION_COLORS.even} height="h-8" />
-      
       {/* About - 04 짝수 */}
       <section className="scroll-reveal" style={{ backgroundColor: SECTION_COLORS.even }} id="why-choose-us">
-        <div>
+        <div className="border-t border-white/5">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/5">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
@@ -104,12 +91,9 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Transition: About -> Gallery */}
-      <SectionTransition fromColor={SECTION_COLORS.even} toColor={SECTION_COLORS.odd} height="h-8" />
-      
       {/* Gallery - 05 홀수 */}
       <section className="scroll-reveal" style={{ backgroundColor: SECTION_COLORS.odd }} id="gallery">
-        <div>
+        <div className="border-t border-white/5">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/5">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
@@ -121,12 +105,9 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Transition: Gallery -> Media Partners */}
-      <SectionTransition fromColor={SECTION_COLORS.odd} toColor={SECTION_COLORS.even} height="h-8" />
-      
       {/* Media Partners - 06 짝수 */}
       <section className="scroll-reveal" style={{ backgroundColor: SECTION_COLORS.even }} id="media-partners">
-        <div>
+        <div className="border-t border-white/5">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/5">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
@@ -138,12 +119,9 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Transition: Media Partners -> Insights */}
-      <SectionTransition fromColor={SECTION_COLORS.even} toColor={SECTION_COLORS.odd} height="h-8" />
-      
       {/* Insights - 07 홀수 */}
       <section className="scroll-reveal" style={{ backgroundColor: SECTION_COLORS.odd }} id="insights">
-        <div>
+        <div className="border-t border-white/5">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/5">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">07</span>
@@ -155,19 +133,13 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Transition: Insights -> Contact */}
-      <SectionTransition fromColor={SECTION_COLORS.odd} toColor={SECTION_COLORS.even} height="h-8" />
-      
       {/* Contact - 08 짝수 */}
       <section className="scroll-reveal" style={{ backgroundColor: SECTION_COLORS.even }} id="contact">
         <ContactFormSection sectionNumber="08" bgColor={SECTION_COLORS.even} />
       </section>
       
-      {/* Transition: Contact -> Footer */}
-      <SectionTransition fromColor={SECTION_COLORS.even} toColor={SECTION_COLORS.base} height="h-8" />
-      
       {/* Footer */}
-      <div>
+      <div className="border-t border-white/5">
         <Footer />
       </div>
       

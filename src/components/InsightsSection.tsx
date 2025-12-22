@@ -108,7 +108,7 @@ const InsightsSection = ({ bgColor = "#0A0A0A" }: InsightsSectionProps) => {
             >
               <Link
                 to={`/research/${article.id}`}
-                className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-white/[0.03] ${
+                className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-white/5 ${
                   index < insights.length - 1 ? "border-b border-white/5" : ""
                 }`}
               >

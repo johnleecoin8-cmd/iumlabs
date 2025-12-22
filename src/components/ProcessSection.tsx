@@ -45,7 +45,7 @@ const ProcessSection = ({ bgColor = "#0A0A0A" }: ProcessSectionProps) => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -4 }}
-              className={`group p-8 md:p-10 transition-all duration-300 hover:bg-white/[0.03] ${
+              className={`group p-8 md:p-10 transition-all duration-300 hover:bg-white/5 ${
                 !isLast ? "lg:border-r border-white/5" : ""
               } ${isOdd ? "md:border-l lg:border-l-0 border-white/5" : ""} ${
                 index < 2 ? "border-b lg:border-b-0 border-white/5" : ""
