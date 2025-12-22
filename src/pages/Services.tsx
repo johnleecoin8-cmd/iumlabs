@@ -209,7 +209,7 @@ const Services = () => {
       </section>
       
       {/* Services Section */}
-      <section className="scroll-reveal bg-[#0A0A0A]">
+      <section className="relative z-10 bg-[#0A0A0A]">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -242,7 +242,7 @@ const Services = () => {
                   transition={{ duration: 0.6, delay: 0.3 }}
                 >
                   <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                    Why CryptoBridge
+                    Why Ium Labs
                   </h2>
                   
                   <p className="text-white/50 text-sm md:text-base leading-relaxed mb-8">
@@ -259,9 +259,9 @@ const Services = () => {
                     </Link>
                   </motion.div>
                   
-                  {/* 3D Gold Shape */}
-                  <div className="mt-12 md:mt-16">
-                    <GoldShape />
+                  {/* Simple decorative element instead of 3D shape */}
+                  <div className="mt-12 md:mt-16 flex justify-center">
+                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30" />
                   </div>
                   
                   {/* Stats */}
