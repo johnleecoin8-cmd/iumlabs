@@ -142,9 +142,13 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
   );
 };
 
-const CasesSection = () => {
+interface CasesSectionProps {
+  bgColor?: string;
+}
+
+const CasesSection = ({ bgColor = "#0A0A0A" }: CasesSectionProps) => {
   return (
-    <section className="bg-[#0A0A0A]">
+    <section style={{ backgroundColor: bgColor }}>
       <div className="flex flex-col lg:flex-row">
         {/* Left: Cases Grid */}
         <div className="w-full lg:w-2/3 lg:border-r border-white/10">
