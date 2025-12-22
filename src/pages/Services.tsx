@@ -180,9 +180,9 @@ const Services = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-transparent to-teal-500/10" />
         </div>
 
-        <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
+        <div className="container mx-auto max-w-7xl px-4 relative z-20 text-center">
           <motion.span 
-            className="text-xs text-emerald-400/70 mb-6 block tracking-widest"
+            className="text-xs text-emerald-400 mb-6 block tracking-widest"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -190,7 +190,7 @@ const Services = () => {
             [ Services ]
           </motion.span>
           <motion.h1 
-            className="text-[14vw] md:text-[120px] lg:text-[140px] font-light text-white leading-[0.85] tracking-tight"
+            className="text-[14vw] md:text-[120px] lg:text-[140px] font-light text-white leading-[0.85] tracking-tight drop-shadow-lg"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
@@ -198,7 +198,7 @@ const Services = () => {
             Gr<span className="serif-italic text-emerald-400">o</span>wth
           </motion.h1>
           <motion.p 
-            className="text-lg text-white/60 max-w-xl mx-auto mt-8"
+            className="text-lg text-white/80 max-w-xl mx-auto mt-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
