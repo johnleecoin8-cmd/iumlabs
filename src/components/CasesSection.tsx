@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react";
-import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { useState, useRef } from "react";
+import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
+import kucoinLogo from "@/assets/logos/kucoin.svg";
 import peaqLogo from "@/assets/logos/peaq.svg";
 import storyLogo from "@/assets/logos/story-protocol.png";
 import triaLogo from "@/assets/logos/tria-official.png";
@@ -76,186 +76,135 @@ const featuredCases = [
   },
 ];
 
-const CasesSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const springX = useSpring(x, { stiffness: 300, damping: 30 });
+interface CaseCardProps {
+  name: string;
+  logo: string;
+  bgImage: string;
+  slug: string;
+  category: string;
+  result: string;
+  description: string;
+  index: number;
+}
 
-  const handleDrag = (event: any, info: any) => {
-    if (info.offset.x < -100 && currentIndex < featuredCases.length - 1) {
-      setCurrentIndex(prev => prev + 1);
-    } else if (info.offset.x > 100 && currentIndex > 0) {
-      setCurrentIndex(prev => prev - 1);
-    }
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(Math.max(0, Math.min(featuredCases.length - 1, index)));
-  };
+const CaseCard = ({ name, logo, bgImage, slug, category, result, description, index }: CaseCardProps) => {
+  const isLastRow = index >= 4;
+  const isRightColumn = index % 2 === 1;
 
   return (
-    <section className="relative bg-[#050508] py-24 overflow-hidden">
-      {/* Header */}
-      <div className="max-w-7xl mx-auto px-6 mb-12">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6"
-        >
-          <div>
-            <p className="text-white/40 text-sm tracking-widest uppercase mb-4">Case Studies</p>
-            <h2 className="text-4xl md:text-5xl font-bold text-white">Our Work</h2>
-          </div>
-          
-          {/* Navigation arrows */}
-          <div className="flex items-center gap-4">
-            <button
-              onClick={() => goToSlide(currentIndex - 1)}
-              disabled={currentIndex === 0}
-              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/40 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-            >
-              <ChevronLeft className="w-5 h-5" />
-            </button>
-            <button
-              onClick={() => goToSlide(currentIndex + 1)}
-              disabled={currentIndex === featuredCases.length - 1}
-              className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:border-white/40 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-            >
-              <ChevronRight className="w-5 h-5" />
-            </button>
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Carousel */}
-      <div ref={containerRef} className="relative">
-        <motion.div
-          className="flex gap-6 px-6 cursor-grab active:cursor-grabbing"
-          drag="x"
-          dragConstraints={{ left: -((featuredCases.length - 1) * 400), right: 0 }}
-          onDragEnd={handleDrag}
-          animate={{ x: -currentIndex * 420 }}
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        >
-          {featuredCases.map((caseItem, index) => {
-            const isActive = index === currentIndex;
-            
-            return (
-              <motion.div
-                key={caseItem.slug}
-                className="relative flex-shrink-0 w-[380px] md:w-[500px]"
-                animate={{
-                  scale: isActive ? 1 : 0.9,
-                  opacity: isActive ? 1 : 0.5,
-                }}
-                transition={{ duration: 0.4 }}
-              >
-                <Link
-                  to={`/projects/${caseItem.slug}`}
-                  onClick={() => window.scrollTo(0, 0)}
-                  className="group block"
-                >
-                  {/* Card */}
-                  <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
-                    {/* Background image */}
-                    <img
-                      src={caseItem.bgImage}
-                      alt={caseItem.name}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    
-                    {/* Gradient overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-                    
-                    {/* Category badge */}
-                    <div className="absolute top-6 left-6">
-                      <span className="px-3 py-1 bg-white/10 backdrop-blur-sm text-white text-xs font-medium rounded-full border border-white/20">
-                        {caseItem.category}
-                      </span>
-                    </div>
-
-                    {/* Content */}
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <div className="flex items-center gap-3 mb-4">
-                        <img
-                          src={caseItem.logo}
-                          alt={caseItem.name}
-                          className="w-10 h-10 object-contain rounded-lg bg-white/10 p-1"
-                        />
-                        <div>
-                          <h3 className="text-xl font-semibold text-white">
-                            {caseItem.name}
-                          </h3>
-                          <p className="text-white/60 text-sm">{caseItem.result}</p>
-                        </div>
-                      </div>
-                      
-                      <p className="text-white/50 text-sm leading-relaxed mb-4 line-clamp-2">
-                        {caseItem.description}
-                      </p>
-                      
-                      <div className="flex items-center gap-2 text-white/60 group-hover:text-white transition-colors text-sm font-medium">
-                        View case study
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              </motion.div>
-            );
-          })}
-        </motion.div>
-      </div>
-
-      {/* Pagination dots */}
-      <div className="flex justify-center gap-2 mt-8">
-        {featuredCases.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              index === currentIndex ? 'w-8 bg-white' : 'w-1.5 bg-white/30 hover:bg-white/50'
-            }`}
-          />
-        ))}
-      </div>
-
-      {/* Stats bar */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="max-w-7xl mx-auto px-6 mt-16"
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={{ y: -4 }}
+    >
+      <Link
+        to={`/projects/${slug}`}
+        onClick={() => window.scrollTo(0, 0)}
+        className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/5 hover:shadow-lg hover:shadow-white/5 ${
+          !isRightColumn ? "border-r border-white/10" : ""
+        } ${!isLastRow ? "border-b border-white/10" : ""}`}
       >
-        <div className="flex flex-wrap items-center justify-between gap-8 py-8 border-t border-b border-white/10">
-          <div className="flex items-center gap-12 flex-wrap">
-            <div>
-              <p className="text-3xl font-bold text-white">340%</p>
-              <p className="text-white/40 text-sm">Avg Volume Increase</p>
+        <div className="flex items-start gap-6">
+          {/* Image */}
+          <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-white/10 transition-shadow duration-300">
+            <img
+              src={bgImage}
+              alt={name}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-3 text-white/40 text-xs mb-2">
+              <span className="uppercase tracking-wider">{category}</span>
             </div>
-            <div className="w-px h-10 bg-white/10 hidden md:block" />
-            <div>
-              <p className="text-3xl font-bold text-white">50K+</p>
-              <p className="text-white/40 text-sm">Users Acquired</p>
+            <h3 className="text-xl font-semibold text-white mb-1 group-hover:text-white/80 transition-colors">
+              {name}
+            </h3>
+            <p className="text-white font-medium text-sm mb-2">
+              {result}
+            </p>
+            <p className="text-white/50 text-sm leading-relaxed line-clamp-2">
+              {description}
+            </p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm mt-4">
+          View case study
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </div>
+      </Link>
+    </motion.div>
+  );
+};
+
+const CasesSection = () => {
+  return (
+    <section className="bg-[#0A0A0A]">
+      <div className="flex flex-col lg:flex-row">
+        {/* Left: Cases Grid */}
+        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            {featuredCases.map((caseItem, index) => (
+              <CaseCard key={caseItem.slug} {...caseItem} index={index} />
+            ))}
+          </div>
+
+          {/* View All */}
+          <div className="p-8 md:p-10 border-t border-white/10">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
+            >
+              View all projects
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </div>
+
+        {/* Right: Sticky Info Panel */}
+        <motion.div
+          className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Our Cases
+          </h2>
+          <p className="text-white/50 leading-relaxed mb-8">
+            Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
+          </p>
+
+          <div className="space-y-6 mb-12">
+            <div className="flex items-center gap-4 pb-4 border-b border-white/10">
+              <span className="text-3xl font-bold text-white">340%</span>
+              <span className="text-white/50 text-sm">Average volume increase</span>
             </div>
-            <div className="w-px h-10 bg-white/10 hidden md:block" />
-            <div>
-              <p className="text-3xl font-bold text-white">18+</p>
-              <p className="text-white/40 text-sm">Projects</p>
+            <div className="flex items-center gap-4 pb-4 border-b border-white/10">
+              <span className="text-3xl font-bold text-white">50K+</span>
+              <span className="text-white/50 text-sm">New users acquired</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <span className="text-3xl font-bold text-white">18+</span>
+              <span className="text-white/50 text-sm">Projects launched</span>
             </div>
           </div>
-          
+
           <Link
-            to="/projects"
-            className="group inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
+            to="/contact"
+            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors w-fit"
           >
-            View all projects
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            START YOUR PROJECT
+            <ArrowRight className="w-4 h-4" />
           </Link>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </section>
   );
 };

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Newspaper } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -39,6 +39,31 @@ const insights = [
   }
 ];
 
+const BlueShape = () => (
+  <motion.div
+    className="relative w-40 h-40 mx-auto"
+    animate={{ rotateY: 360 }}
+    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+    style={{ transformStyle: "preserve-3d" }}
+  >
+    <div
+      className="absolute inset-0 rounded-full"
+      style={{
+        background: "linear-gradient(135deg, #3B82F6 0%, #06B6D4 50%, #3B82F6 100%)",
+        transform: "rotateX(30deg)",
+        boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
+      }}
+    />
+    <div
+      className="absolute inset-6 rounded-full"
+      style={{
+        background: "linear-gradient(225deg, #06B6D4 0%, #3B82F6 100%)",
+        transform: "rotateX(30deg) translateZ(15px)"
+      }}
+    />
+  </motion.div>
+);
+
 const InsightsSection = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,170 +89,48 @@ const InsightsSection = () => {
     }
   };
 
-  const featuredArticle = insights[0];
-  const otherArticles = insights.slice(1);
-
   return (
-    <section className="relative bg-[#0A0A0A] py-20 overflow-hidden">
-      {/* Magazine Masthead Header */}
-      <div className="max-w-7xl mx-auto px-6 mb-16">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-8 border-b border-white/10"
-        >
-          <div className="flex items-center gap-4">
+    <section className="bg-[#0A0A0A]">
+      <div className="flex flex-col lg:flex-row">
+        {/* Left: Articles List */}
+        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
+          {insights.map((article, index) => (
             <motion.div
-              className="w-12 h-12 rounded-lg bg-gradient-to-br from-blue-500/20 to-cyan-500/20 border border-white/10 flex items-center justify-center"
-              whileHover={{ scale: 1.1, rotate: -5 }}
-            >
-              <Newspaper className="w-5 h-5 text-blue-400" />
-            </motion.div>
-            <div>
-              <p className="text-white/40 text-xs tracking-[0.3em] uppercase">Research & Insights</p>
-              <h2 className="text-3xl md:text-4xl font-bold text-white">The Journal</h2>
-            </div>
-          </div>
-          
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-white/40 text-sm md:text-right max-w-md"
-          >
-            Weekly insights on Korean Web3 market trends, marketing strategies, and ecosystem analysis.
-          </motion.p>
-        </motion.div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Featured Article - Large */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="relative group"
-          >
-            <Link to={`/research/${featuredArticle.id}`} className="block">
-              <div className="relative aspect-[4/3] rounded-xl overflow-hidden">
-                <img
-                  src={featuredArticle.image}
-                  alt={featuredArticle.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-                
-                {/* Featured badge */}
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-blue-500 text-white text-xs font-medium rounded-full">
-                    Featured
-                  </span>
-                </div>
-
-                {/* Content overlay */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="flex items-center gap-3 text-white/60 text-xs mb-3">
-                    <span className="uppercase tracking-wider">{featuredArticle.category}</span>
-                    <span>•</span>
-                    <span>{featuredArticle.date}</span>
-                    <span>•</span>
-                    <span>{featuredArticle.readTime} read</span>
-                  </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 group-hover:text-white/90 transition-colors">
-                    {featuredArticle.title}
-                  </h3>
-                  <p className="text-white/70 leading-relaxed mb-4 max-w-lg">
-                    {featuredArticle.excerpt}
-                  </p>
-                  <div className="flex items-center gap-2 text-white/60 group-hover:text-white transition-colors text-sm font-medium">
-                    Read article
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </motion.div>
-
-          {/* Right side - Other articles + Newsletter */}
-          <div className="flex flex-col gap-6">
-            {/* Other Articles - Smaller cards */}
-            {otherArticles.map((article, index) => (
-              <motion.div
-                key={article.id}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link
-                  to={`/research/${article.id}`}
-                  className="group flex gap-5 p-4 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/5 hover:border-white/20 transition-all duration-300"
-                >
-                  <div className="w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <div className="flex items-center gap-2 text-white/40 text-xs mb-2">
-                      <span className="uppercase tracking-wider">{article.category}</span>
-                      <span>•</span>
-                      <span>{article.readTime}</span>
-                    </div>
-                    <h3 className="text-white font-semibold group-hover:text-white/80 transition-colors line-clamp-2">
-                      {article.title}
-                    </h3>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-
-            {/* Newsletter Card - Floating style */}
-            <motion.div
+              key={article.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="relative mt-auto"
+              transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <div className="p-6 rounded-xl bg-gradient-to-br from-blue-500/10 via-cyan-500/10 to-purple-500/10 border border-white/10">
-                <div className="absolute -top-3 -right-3 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl" />
-                
-                <p className="text-white/40 text-xs uppercase tracking-widest mb-2">Newsletter</p>
-                <h3 className="text-lg font-semibold text-white mb-3">
-                  Get Weekly Insights
+              <Link
+                to={`/research/${article.id}`}
+                className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-white/5 ${
+                  index < insights.length - 1 ? "border-b border-white/10" : ""
+                }`}
+              >
+                <div className="flex items-center gap-3 text-white/40 text-xs mb-3">
+                  <span className="uppercase tracking-wider">{article.category}</span>
+                  <span>•</span>
+                  <span>{article.date}</span>
+                  <span>•</span>
+                  <span>{article.readTime} read</span>
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-white/80 transition-colors">
+                  {article.title}
                 </h3>
-                
-                <form onSubmit={handleSubscribe} className="flex gap-2">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your@email.com"
-                    className="flex-1 bg-black/30 backdrop-blur-sm px-4 py-2.5 text-sm border border-white/10 text-white placeholder:text-white/30 rounded-lg focus:outline-none focus:border-white/30 transition-colors"
-                    required
-                  />
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="px-4 py-2.5 bg-white text-black text-sm font-medium rounded-lg hover:bg-white/90 transition-colors disabled:opacity-50"
-                  >
-                    {isSubmitting ? "..." : <ArrowRight className="w-4 h-4" />}
-                  </button>
-                </form>
-                
-                <p className="text-white/30 text-xs mt-3">
-                  Join 500+ Web3 founders
+                <p className="text-white/50 text-sm leading-relaxed mb-4">
+                  {article.excerpt}
                 </p>
-              </div>
+                <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm">
+                  Read article
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
             </motion.div>
+          ))}
 
-            {/* View all link */}
+          {/* View All Link */}
+          <div className="p-8 md:p-10 border-t border-white/10">
             <Link
               to="/research"
               className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
@@ -237,6 +140,49 @@ const InsightsSection = () => {
             </Link>
           </div>
         </div>
+
+        {/* Right: Newsletter CTA */}
+        <motion.div
+          className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-3xl font-bold text-white mb-4">
+            Latest Research
+          </h2>
+          <p className="text-white/50 leading-relaxed mb-8">
+            Stay ahead with our insights on Korean Web3 market trends, marketing strategies, and ecosystem analysis.
+          </p>
+
+          <form onSubmit={handleSubscribe} className="mb-12">
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              className="w-full bg-transparent px-4 py-3 border border-white/20 text-white placeholder:text-white/40 mb-3 focus:outline-none focus:border-white transition-colors"
+              required
+            />
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full flex items-center justify-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors disabled:opacity-50"
+            >
+              {isSubmitting ? "Subscribing..." : "SUBSCRIBE"}
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </form>
+
+          <BlueShape />
+
+          <div className="mt-12 pt-8 border-t border-white/10">
+            <p className="text-white/40 text-sm">
+              Join 500+ Web3 founders and marketers getting our weekly insights.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
