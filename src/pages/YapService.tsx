@@ -373,21 +373,15 @@ const YapService = () => {
                 {/* Network Visualization */}
             <div className="relative mb-16">
               <div className="grid grid-cols-6 md:grid-cols-10 gap-2 md:gap-3">
-                {Array.from({ length: 60 }).map((_, i) => {
-                  const kol = i < cryptoKOLs.length ? cryptoKOLs[i] : null;
-                  const hasKol = kol !== null;
-                  const avatarUrl = hasKol 
-                    ? `https://unavatar.io/twitter/${kol.handle.replace('@', '')}`
-                    : null;
-                  const fallbackUrl = hasKol 
-                    ? `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`
-                    : null;
-                  const twitterUrl = hasKol ? `https://x.com/${kol.handle.replace('@', '')}` : null;
+                {cryptoKOLs.map((kol, i) => {
+                  const avatarUrl = `https://unavatar.io/twitter/${kol.handle.replace('@', '')}`;
+                  const fallbackUrl = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`;
+                  const twitterUrl = `https://x.com/${kol.handle.replace('@', '')}`;
                   
                   return (
                     <motion.a
                       key={i}
-                      href={twitterUrl || undefined}
+                      href={twitterUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       initial={{ opacity: 0, scale: 0 }}
@@ -396,48 +390,41 @@ const YapService = () => {
                       transition={{ delay: i * 0.015 }}
                       className="aspect-square rounded-lg flex items-center justify-center relative group cursor-pointer overflow-hidden"
                       style={{ 
-                        backgroundColor: hasKol ? '#0a0a0a' : `${ACCENT_COLOR}10`,
-                        border: `1px solid ${hasKol ? ACCENT_COLOR + '60' : ACCENT_COLOR + '20'}`,
+                        backgroundColor: '#0a0a0a',
+                        border: `1px solid ${ACCENT_COLOR}60`,
                       }}
-                      onClick={(e) => !hasKol && e.preventDefault()}
                     >
-                      {hasKol ? (
-                        <>
-                          <img 
-                            src={avatarUrl!}
-                            alt={kol.name}
-                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                            onError={(e) => {
-                              if (fallbackUrl) e.currentTarget.src = fallbackUrl;
-                            }}
-                          />
-                          {/* Hover overlay with name */}
-                          <div 
-                            className="absolute inset-0 bg-black/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-1"
-                          >
-                            <span className="text-[8px] md:text-[10px] font-medium text-white text-center leading-tight">{kol.name}</span>
-                            <span className="text-[6px] md:text-[8px] text-cyan-400 text-center">{kol.followers}</span>
-                            <span 
-                              className="text-[5px] md:text-[7px] px-1.5 py-0.5 rounded-full mt-0.5"
-                              style={{ backgroundColor: `${ACCENT_COLOR}40`, color: ACCENT_COLOR }}
-                            >
-                              {kol.expertise}
-                            </span>
-                            <span className="text-[5px] md:text-[6px] text-white/50 mt-1">Click to view ↗</span>
-                          </div>
-                          {/* Glow effect on hover */}
-                          <div 
-                            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-                            style={{ 
-                              boxShadow: `inset 0 0 20px ${ACCENT_COLOR}40, 0 0 15px ${ACCENT_COLOR}30` 
-                            }}
-                          />
-                        </>
-                      ) : (
-                        <Users className="w-4 h-4 text-white/20 group-hover:text-white/40 transition-colors" />
-                      )}
+                      <img 
+                        src={avatarUrl}
+                        alt={kol.name}
+                        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        onError={(e) => {
+                          e.currentTarget.src = fallbackUrl;
+                        }}
+                      />
+                      {/* Hover overlay with name */}
+                      <div 
+                        className="absolute inset-0 bg-black/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-1"
+                      >
+                        <span className="text-[8px] md:text-[10px] font-medium text-white text-center leading-tight">{kol.name}</span>
+                        <span className="text-[6px] md:text-[8px] text-cyan-400 text-center">{kol.followers}</span>
+                        <span 
+                          className="text-[5px] md:text-[7px] px-1.5 py-0.5 rounded-full mt-0.5"
+                          style={{ backgroundColor: `${ACCENT_COLOR}40`, color: ACCENT_COLOR }}
+                        >
+                          {kol.expertise}
+                        </span>
+                        <span className="text-[5px] md:text-[6px] text-white/50 mt-1">Click to view ↗</span>
+                      </div>
+                      {/* Glow effect on hover */}
+                      <div 
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                        style={{ 
+                          boxShadow: `inset 0 0 20px ${ACCENT_COLOR}40, 0 0 15px ${ACCENT_COLOR}30` 
+                        }}
+                      />
                       {/* Pulse effect on some KOL cells */}
-                      {hasKol && i % 7 === 0 && (
+                      {i % 7 === 0 && (
                         <motion.div
                           className="absolute inset-0 rounded-lg pointer-events-none"
                           style={{ border: `2px solid ${ACCENT_COLOR}` }}
