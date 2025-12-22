@@ -237,170 +237,190 @@ const GTMStrategyService = () => {
           </div>
         </section>
 
-        {/* Flowchart Section */}
-        <section 
-          className="relative py-20"
-          style={{ background: `linear-gradient(to bottom, #0A0A0A, ${ACCENT_COLOR}08, #0A0A0A)` }}
-        >
-          <div 
-            className="absolute top-0 left-0 right-0 h-px"
-            style={{ background: `linear-gradient(to right, transparent, ${ACCENT_COLOR}60, transparent)` }}
-          />
-
-          <div className="container mx-auto px-6 lg:px-16">
-            <div className="flex items-center gap-3 mb-12">
-              <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>01</span>
-              <h2 className="text-2xl md:text-3xl font-medium text-white">Strategy Framework</h2>
-            </div>
-
-            {/* Strategy Canvas */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-              {[
-                { title: "Market Entry", items: ["Audience Analysis", "Competitor Mapping", "Channel Selection"], icon: Target },
-                { title: "Brand Positioning", items: ["Value Proposition", "Messaging Framework", "Visual Identity"], icon: Map },
-                { title: "Execution Plan", items: ["Launch Timeline", "Resource Allocation", "Success Metrics"], icon: Rocket },
-              ].map((block, index) => (
-                <motion.div
-                  key={block.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative"
+        {/* Strategy Framework Section */}
+        <section className="scroll-reveal bg-[#0A0A0A]">
+          <div className="border-t border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span 
+                  className="text-[10px] md:text-xs font-mono tracking-widest"
+                  style={{ color: ACCENT_COLOR }}
                 >
-                  <div 
-                    className="p-6 rounded-xl border h-full"
-                    style={{ borderColor: `${ACCENT_COLOR}30` }}
-                  >
-                    <block.icon className="w-8 h-8 mb-4" style={{ color: ACCENT_COLOR }} />
-                    <h3 className="text-white font-medium mb-4">{block.title}</h3>
-                    <ul className="space-y-2">
-                      {block.items.map((item) => (
-                        <li key={item} className="flex items-center gap-2 text-white/60 text-sm">
-                          <ChevronRight className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  {/* Arrow to next block */}
-                  {index < 2 && (
-                    <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
-                      <ArrowRight className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
-                    </div>
-                  )}
-                </motion.div>
-              ))}
+                  01
+                </span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Strategy Framework</h2>
+              </div>
+              <span 
+                className="text-xs tracking-wider hidden sm:block px-3 py-1 border rounded-full"
+                style={{ color: ACCENT_COLOR, borderColor: `${ACCENT_COLOR}40` }}
+              >
+                Overview
+              </span>
             </div>
 
-            {/* About Content */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <p className="text-white/60 text-lg leading-relaxed mb-8">
-                  Our Go-To-Market service helps you enter the Korean crypto market with clarity, precision, and momentum. We build a complete launch plan covering positioning, messaging, channel strategy, and execution timeline.
-                </p>
-                <div className="grid grid-cols-2 gap-4">
-                  {stats.map((stat, index) => (
-                    <div 
-                      key={index} 
-                      className="p-4 rounded-xl border"
-                      style={{ borderColor: `${ACCENT_COLOR}30`, backgroundColor: `${ACCENT_COLOR}05` }}
+            <div className="py-16 md:py-20">
+              <div className="container mx-auto px-6 lg:px-16">
+                {/* Strategy Canvas */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+                  {[
+                    { title: "Market Entry", items: ["Audience Analysis", "Competitor Mapping", "Channel Selection"], icon: Target },
+                    { title: "Brand Positioning", items: ["Value Proposition", "Messaging Framework", "Visual Identity"], icon: Map },
+                    { title: "Execution Plan", items: ["Launch Timeline", "Resource Allocation", "Success Metrics"], icon: Rocket },
+                  ].map((block, index) => (
+                    <motion.div
+                      key={block.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="relative"
                     >
-                      <p className="text-3xl font-bold" style={{ color: ACCENT_COLOR }}>{stat.value}</p>
-                      <p className="text-white/50 text-sm">{stat.label}</p>
-                    </div>
+                      <div 
+                        className="p-6 rounded-xl border h-full"
+                        style={{ borderColor: `${ACCENT_COLOR}30` }}
+                      >
+                        <block.icon className="w-8 h-8 mb-4" style={{ color: ACCENT_COLOR }} />
+                        <h3 className="text-white font-medium mb-4">{block.title}</h3>
+                        <ul className="space-y-2">
+                          {block.items.map((item) => (
+                            <li key={item} className="flex items-center gap-2 text-white/60 text-sm">
+                              <ChevronRight className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      {/* Arrow to next block */}
+                      {index < 2 && (
+                        <div className="hidden md:block absolute top-1/2 -right-3 transform -translate-y-1/2 z-10">
+                          <ArrowRight className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
+                        </div>
+                      )}
+                    </motion.div>
                   ))}
                 </div>
-              </div>
-              <div className="relative">
-                <img 
-                  src={gtmImage} 
-                  alt="GTM Strategy" 
-                  className="w-full h-64 lg:h-80 object-cover rounded-xl"
-                />
+
+                {/* About Content */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                  <div>
+                    <p className="text-white/60 text-lg leading-relaxed mb-8">
+                      Our Go-To-Market service helps you enter the Korean crypto market with clarity, precision, and momentum. We build a complete launch plan covering positioning, messaging, channel strategy, and execution timeline.
+                    </p>
+                    <div className="grid grid-cols-2 gap-4">
+                      {stats.map((stat, index) => (
+                        <div 
+                          key={index} 
+                          className="p-4 rounded-xl border"
+                          style={{ borderColor: `${ACCENT_COLOR}30`, backgroundColor: `${ACCENT_COLOR}05` }}
+                        >
+                          <p className="text-3xl font-bold" style={{ color: ACCENT_COLOR }}>{stat.value}</p>
+                          <p className="text-white/50 text-sm">{stat.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="relative">
+                    <img 
+                      src={gtmImage} 
+                      alt="GTM Strategy" 
+                      className="w-full h-64 lg:h-80 object-cover rounded-xl"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Process Section - Gantt Chart Style */}
-        <section className="bg-[#0A0A0A] relative py-20">
-          <div 
-            className="absolute top-0 left-0 right-0 h-px"
-            style={{ background: `linear-gradient(to right, transparent, ${ACCENT_COLOR}40, transparent)` }}
-          />
-
-          <div className="container mx-auto px-6 lg:px-16">
-            <div className="flex items-center gap-3 mb-12">
-              <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>02</span>
-              <h2 className="text-2xl md:text-3xl font-medium text-white">Process Timeline</h2>
+        {/* Process Section */}
+        <section className="scroll-reveal bg-[#0A0A0A]">
+          <div className="border-t border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span 
+                  className="text-[10px] md:text-xs font-mono tracking-widest"
+                  style={{ color: ACCENT_COLOR }}
+                >
+                  02
+                </span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Process Timeline</h2>
+              </div>
+              <span 
+                className="text-xs tracking-wider hidden sm:block px-3 py-1 border rounded-full"
+                style={{ color: ACCENT_COLOR, borderColor: `${ACCENT_COLOR}40` }}
+              >
+                How We Work
+              </span>
             </div>
 
-            {/* Gantt-style Timeline */}
-            <div className="space-y-4">
-              {processSteps.map((step, index) => (
-                <motion.div
-                  key={step.number}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-stretch gap-4"
-                >
-                  {/* Duration Label */}
-                  <div className="w-24 shrink-0 flex items-center justify-end">
-                    <span className="text-sm font-mono" style={{ color: ACCENT_COLOR }}>{step.duration}</span>
-                  </div>
-
-                  {/* Bar */}
-                  <div className="flex-1 relative">
+            <div className="py-16 md:py-20">
+              <div className="container mx-auto px-6 lg:px-16">
+                {/* Gantt-style Timeline */}
+                <div className="space-y-4">
+                  {processSteps.map((step, index) => (
                     <motion.div
-                      initial={{ scaleX: 0 }}
-                      whileInView={{ scaleX: 1 }}
+                      key={step.number}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.15, duration: 0.5 }}
-                      style={{ 
-                        transformOrigin: 'left',
-                        width: `${100 - index * 15}%`,
-                      }}
-                      className="h-full rounded-lg p-4 flex items-center gap-4"
-                      // Different shade for each step
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-stretch gap-4"
                     >
-                      <div 
-                        className="absolute inset-0 rounded-lg"
-                        style={{ 
-                          backgroundColor: `${ACCENT_COLOR}`,
-                          opacity: 0.15 - index * 0.03,
-                        }}
-                      />
-                      <div 
-                        className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 relative z-10"
-                        style={{ backgroundColor: `${ACCENT_COLOR}30` }}
-                      >
-                        <step.icon className="w-5 h-5" style={{ color: ACCENT_COLOR }} />
+                      {/* Duration Label */}
+                      <div className="w-24 shrink-0 flex items-center justify-end">
+                        <span className="text-sm font-mono" style={{ color: ACCENT_COLOR }}>{step.duration}</span>
                       </div>
-                      <div className="relative z-10">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="text-xs font-mono text-white/40">{step.number}</span>
-                          <h3 className="text-white font-medium">{step.title}</h3>
-                        </div>
-                        <p className="text-white/50 text-sm hidden md:block">{step.description}</p>
+
+                      {/* Bar */}
+                      <div className="flex-1 relative">
+                        <motion.div
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.15, duration: 0.5 }}
+                          style={{ 
+                            transformOrigin: 'left',
+                            width: `${100 - index * 15}%`,
+                          }}
+                          className="h-full rounded-lg p-4 flex items-center gap-4"
+                        >
+                          <div 
+                            className="absolute inset-0 rounded-lg"
+                            style={{ 
+                              backgroundColor: `${ACCENT_COLOR}`,
+                              opacity: 0.15 - index * 0.03,
+                            }}
+                          />
+                          <div 
+                            className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 relative z-10"
+                            style={{ backgroundColor: `${ACCENT_COLOR}30` }}
+                          >
+                            <step.icon className="w-5 h-5" style={{ color: ACCENT_COLOR }} />
+                          </div>
+                          <div className="relative z-10">
+                            <div className="flex items-center gap-2 mb-1">
+                              <span className="text-xs font-mono text-white/40">{step.number}</span>
+                              <h3 className="text-white font-medium">{step.title}</h3>
+                            </div>
+                            <p className="text-white/50 text-sm hidden md:block">{step.description}</p>
+                          </div>
+                        </motion.div>
                       </div>
                     </motion.div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+                  ))}
+                </div>
 
-            {/* CTA */}
-            <div className="text-center mt-12">
-              <CalendlyButton 
-                className="inline-flex items-center gap-2 px-8 py-4 font-medium transition-all duration-300 hover:scale-105 rounded-lg"
-                style={{ backgroundColor: ACCENT_COLOR, color: '#fff' }}
-              >
-                <Rocket className="w-5 h-5" />
-                Plan Your Korean Launch
-              </CalendlyButton>
+                {/* CTA */}
+                <div className="text-center mt-12">
+                  <CalendlyButton 
+                    className="inline-flex items-center gap-2 px-8 py-4 font-medium transition-all duration-300 hover:scale-105 rounded-lg"
+                    style={{ backgroundColor: ACCENT_COLOR, color: '#fff' }}
+                  >
+                    <Rocket className="w-5 h-5" />
+                    Plan Your Korean Launch
+                  </CalendlyButton>
+                </div>
+              </div>
             </div>
           </div>
         </section>
