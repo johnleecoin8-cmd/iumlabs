@@ -303,45 +303,65 @@ const PRService = () => {
         </div>
       </section>
 
-      {/* Process - Breaking News Ticker Style */}
-      <section className="py-24 relative bg-gradient-to-b from-[#0A0A0A] to-violet-950/10">
+      {/* Process Timeline - News Timeline Style */}
+      <section className="py-24 relative">
+        <div 
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
+        />
+
         <div className="container mx-auto px-4 md:px-8">
-          {/* Breaking News Header */}
-          <div className="flex items-center gap-4 mb-12 p-4 bg-red-600 rounded-none">
-            <span className="animate-pulse text-white font-bold text-sm px-3 py-1 bg-white/20">LIVE</span>
-            <div className="h-6 w-px bg-white/30" />
-            <span className="text-white font-serif text-lg">How We Get You Published</span>
+          <div className="text-center mb-16">
+            <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ PROCESS ]</span>
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mt-4" style={{ fontFamily: 'Georgia, serif' }}>
+              From Story to <span style={{ color: themeConfig.accentColor }}>Headlines</span>
+            </h2>
           </div>
 
-          {/* News Cards Row */}
-          <div className="grid md:grid-cols-4 gap-0 border border-white/10">
+          {/* Timeline */}
+          <div className="max-w-4xl mx-auto relative">
+            {/* Vertical Line */}
+            <div 
+              className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px transform md:-translate-x-1/2"
+              style={{ background: `linear-gradient(to bottom, transparent, ${themeConfig.accentColor}, transparent)` }}
+            />
+
             {processTimeline.map((step, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className={`p-6 ${index < 3 ? 'border-r border-white/10' : ''} bg-white/5 hover:bg-violet-500/10 transition-colors group`}
+                className={`relative flex items-center gap-8 mb-12 ${
+                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                }`}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.15 }}
               >
-                {/* Date Badge */}
-                <div className="text-xs font-bold text-violet-400 mb-3">{step.date}</div>
-                
-                {/* Icon */}
-                <step.icon className="w-8 h-8 mb-4 text-white/40 group-hover:text-violet-400 transition-colors" />
-                
-                {/* Title */}
-                <h3 className="text-lg font-serif font-bold text-white mb-2" style={{ fontFamily: 'Georgia, serif' }}>
-                  {step.title}
-                </h3>
-                
-                {/* Description */}
-                <p className="text-sm text-white/50 leading-relaxed">{step.description}</p>
-                
-                {/* Read more */}
-                <div className="mt-4 pt-4 border-t border-white/10">
-                  <span className="text-xs text-violet-400 group-hover:underline cursor-pointer">Read more →</span>
+                {/* Content */}
+                <div className={`flex-1 p-6 border border-white/10 bg-white/5 ${
+                  index % 2 === 0 ? 'md:text-right' : 'md:text-left'
+                }`}>
+                  <div 
+                    className="inline-block px-3 py-1 text-xs font-bold mb-3"
+                    style={{ background: `${themeConfig.accentColor}20`, color: themeConfig.accentColor }}
+                  >
+                    {step.date}
+                  </div>
+                  <h3 className="text-xl font-serif font-bold mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-white/60">{step.description}</p>
                 </div>
+
+                {/* Center Icon */}
+                <div 
+                  className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full items-center justify-center z-10"
+                  style={{ background: themeConfig.accentColor }}
+                >
+                  <step.icon className="w-5 h-5 text-white" />
+                </div>
+
+                {/* Spacer for opposite side */}
+                <div className="hidden md:block flex-1" />
               </motion.div>
             ))}
           </div>

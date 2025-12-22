@@ -340,87 +340,83 @@ const YapService = () => {
           </div>
         </section>
 
-        {/* Process Section - Audio Equalizer Style */}
+        {/* Process Section - Concentric Diffusion */}
         <section className="bg-[#0A0A0A] relative py-20">
+          <div 
+            className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: `linear-gradient(to right, transparent, ${ACCENT_COLOR}40, transparent)` }}
+          />
+
           <div className="container mx-auto px-6 lg:px-16">
-            {/* Audio Player Header */}
-            <div className="flex items-center gap-4 p-4 bg-cyan-950/30 rounded-xl mb-8 border border-cyan-500/20">
-              <motion.div
-                className="w-12 h-12 rounded-full flex items-center justify-center"
-                style={{ backgroundColor: ACCENT_COLOR }}
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <Volume2 className="w-6 h-6 text-black" />
-              </motion.div>
-              <div>
-                <p className="text-white font-medium">Now Playing: How We Yap</p>
-                <p className="text-cyan-400/60 text-sm">4 Steps • Est. 30 days</p>
-              </div>
-              {/* Mini equalizer */}
-              <div className="ml-auto flex items-end gap-1 h-8">
-                {[1,2,3,4,5,6,7,8].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="w-1 rounded-full"
-                    style={{ backgroundColor: ACCENT_COLOR }}
-                    animate={{ height: [8, 24, 8] }}
-                    transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.1 }}
-                  />
-                ))}
-              </div>
+            <div className="flex items-center gap-3 mb-12">
+              <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>02</span>
+              <h2 className="text-2xl md:text-3xl font-medium text-white">Process</h2>
             </div>
 
-            {/* Process as Audio Tracks */}
-            <div className="space-y-3">
-              {processSteps.map((step, index) => (
-                <motion.div
-                  key={step.number}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="flex items-center gap-4 p-4 bg-white/5 rounded-xl border border-white/10 hover:border-cyan-500/30 transition-colors group"
-                >
-                  {/* Track Number */}
-                  <div className="w-10 text-center">
-                    <span className="text-cyan-400 font-mono text-lg">{step.number}</span>
-                  </div>
-
-                  {/* Icon */}
-                  <div 
-                    className="w-10 h-10 rounded-lg flex items-center justify-center"
-                    style={{ backgroundColor: `${ACCENT_COLOR}20` }}
+            {/* Diffusion Style - Expanding Outward */}
+            <div className="relative max-w-4xl mx-auto">
+              {processSteps.map((step, index) => {
+                const size = 100 + index * 60; // Each step expands outward
+                return (
+                  <motion.div
+                    key={step.number}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15 }}
+                    className="relative mb-6"
+                    style={{
+                      width: `${Math.min(100, 60 + index * 15)}%`,
+                      marginLeft: `${(100 - Math.min(100, 60 + index * 15)) / 2}%`,
+                    }}
                   >
-                    <step.icon className="w-5 h-5" style={{ color: ACCENT_COLOR }} />
-                  </div>
-
-                  {/* Track Info */}
-                  <div className="flex-1">
-                    <h3 className="text-white font-medium group-hover:text-cyan-100 transition-colors">{step.title}</h3>
-                    <p className="text-white/40 text-sm">{step.description}</p>
-                  </div>
-
-                  {/* Waveform Visual */}
-                  <div className="hidden md:flex items-center gap-0.5 h-8 opacity-40 group-hover:opacity-100 transition-opacity">
-                    {Array.from({ length: 20 }).map((_, i) => (
-                      <div
-                        key={i}
-                        className="w-1 rounded-full"
-                        style={{ 
-                          backgroundColor: ACCENT_COLOR,
-                          height: `${8 + Math.sin(i * 0.5) * 12 + Math.random() * 8}px`
-                        }}
+                    <div 
+                      className="p-6 rounded-2xl border relative overflow-hidden"
+                      style={{ borderColor: `${ACCENT_COLOR}30` }}
+                    >
+                      {/* Background wave effect */}
+                      <motion.div
+                        className="absolute inset-0 opacity-10"
+                        style={{ backgroundColor: ACCENT_COLOR }}
+                        animate={{ opacity: [0.05, 0.1, 0.05] }}
+                        transition={{ duration: 3, repeat: Infinity, delay: index * 0.5 }}
                       />
-                    ))}
-                  </div>
-
-                  {/* Duration */}
-                  <span className="text-white/30 text-sm font-mono w-16 text-right">
-                    Week {index + 1}
-                  </span>
-                </motion.div>
-              ))}
+                      
+                      <div className="flex items-start gap-4 relative z-10">
+                        <div 
+                          className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
+                          style={{ backgroundColor: `${ACCENT_COLOR}20` }}
+                        >
+                          <step.icon className="w-5 h-5" style={{ color: ACCENT_COLOR }} />
+                        </div>
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>{step.number}</span>
+                            <h3 className="text-white font-medium">{step.title}</h3>
+                          </div>
+                          <p className="text-white/50 text-sm">{step.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    {/* Connecting ripple */}
+                    {index < processSteps.length - 1 && (
+                      <motion.div
+                        className="absolute left-1/2 -bottom-4 w-8 h-8 -translate-x-1/2"
+                        animate={{ y: [0, 5, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity }}
+                      >
+                        <div 
+                          className="w-full h-full rounded-full"
+                          style={{ 
+                            background: `radial-gradient(circle, ${ACCENT_COLOR}40, transparent)`,
+                          }}
+                        />
+                      </motion.div>
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
 
             {/* CTA */}

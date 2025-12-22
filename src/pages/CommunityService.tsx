@@ -339,68 +339,80 @@ const CommunityService = () => {
           </div>
         </section>
 
-        {/* Process Section - Discord Thread Style */}
-        <section className="bg-[#2f3136] relative py-12">
+        {/* Process Section - Vertical Chat Timeline */}
+        <section className="bg-[#0A0A0A] relative py-20">
+          <div 
+            className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: `linear-gradient(to right, transparent, ${ACCENT_COLOR}40, transparent)` }}
+          />
+
           <div className="container mx-auto px-6 lg:px-16">
-            {/* Discord Thread Header */}
-            <div className="flex items-center gap-3 p-4 bg-[#36393f] rounded-t-xl border-b border-black/20">
-              <Hash className="w-5 h-5 text-gray-400" />
-              <span className="text-white font-medium">how-we-work</span>
-              <span className="text-gray-500 text-sm ml-2">Thread started</span>
+            {/* Section Header */}
+            <div className="flex items-center gap-3 mb-12">
+              <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>02</span>
+              <h2 className="text-2xl md:text-3xl font-medium text-white">Process</h2>
             </div>
 
-            {/* Thread Messages */}
-            <div className="bg-[#36393f] rounded-b-xl p-6 space-y-4">
+            {/* Vertical Timeline */}
+            <div className="relative max-w-2xl mx-auto">
+              {/* Timeline Line */}
+              <div 
+                className="absolute left-8 top-0 bottom-0 w-0.5"
+                style={{ backgroundColor: `${ACCENT_COLOR}30` }}
+              />
+
               {processSteps.map((step, index) => (
                 <motion.div
                   key={step.number}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.15 }}
-                  className="flex gap-4"
+                  className="relative flex gap-6 mb-8 last:mb-0"
                 >
-                  {/* Bot Avatar */}
+                  {/* Node */}
                   <div 
-                    className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: ACCENT_COLOR }}
+                    className="w-16 h-16 rounded-xl flex items-center justify-center shrink-0 relative z-10"
+                    style={{ backgroundColor: `${ACCENT_COLOR}20`, border: `2px solid ${ACCENT_COLOR}` }}
                   >
-                    <step.icon className="w-5 h-5 text-white" />
+                    <step.icon className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
                   </div>
 
-                  {/* Message */}
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <span className="text-indigo-400 font-medium">Ium Labs Bot</span>
-                      <span className="text-xs px-1.5 py-0.5 bg-indigo-500 text-white rounded">BOT</span>
-                      <span className="text-gray-500 text-xs">Step {step.number}</span>
-                    </div>
-                    <h3 className="text-white font-medium mb-1">{step.title}</h3>
-                    <p className="text-gray-400 text-sm">{step.description}</p>
-                    
-                    {/* Reactions */}
-                    <div className="flex gap-2 mt-2">
-                      <span className="px-2 py-1 bg-white/5 rounded text-xs text-gray-400 hover:bg-white/10 cursor-pointer">
-                        ✅ {4 + index}
+                  {/* Chat Bubble Style Card */}
+                  <div className="flex-1 bg-[#2f3136] rounded-xl p-6 relative">
+                    {/* Triangle pointer */}
+                    <div 
+                      className="absolute left-0 top-6 w-0 h-0 -translate-x-full"
+                      style={{
+                        borderTop: '8px solid transparent',
+                        borderBottom: '8px solid transparent',
+                        borderRight: '8px solid #2f3136',
+                      }}
+                    />
+                    <div className="flex items-center gap-3 mb-2">
+                      <span 
+                        className="text-xs font-mono px-2 py-1 rounded"
+                        style={{ backgroundColor: `${ACCENT_COLOR}20`, color: ACCENT_COLOR }}
+                      >
+                        Step {step.number}
                       </span>
-                      <span className="px-2 py-1 bg-white/5 rounded text-xs text-gray-400 hover:bg-white/10 cursor-pointer">
-                        🔥 {2 + index}
-                      </span>
+                      <h3 className="text-white font-medium">{step.title}</h3>
                     </div>
+                    <p className="text-white/60 text-sm leading-relaxed">{step.description}</p>
                   </div>
                 </motion.div>
               ))}
-              
-              {/* CTA inside thread */}
-              <div className="pt-4 border-t border-white/10 mt-6">
-                <CalendlyButton 
-                  className="inline-flex items-center gap-2 px-6 py-3 font-medium transition-all duration-300 hover:scale-105 rounded-lg"
-                  style={{ backgroundColor: ACCENT_COLOR, color: '#fff' }}
-                >
-                  <UserPlus className="w-4 h-4" />
-                  Start Building Your Community
-                </CalendlyButton>
-              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="text-center mt-12">
+              <CalendlyButton 
+                className="inline-flex items-center gap-2 px-8 py-4 font-medium transition-all duration-300 hover:scale-105 rounded-xl"
+                style={{ backgroundColor: ACCENT_COLOR, color: '#fff' }}
+              >
+                <UserPlus className="w-5 h-5" />
+                Start Building Your Community
+              </CalendlyButton>
             </div>
           </div>
         </section>

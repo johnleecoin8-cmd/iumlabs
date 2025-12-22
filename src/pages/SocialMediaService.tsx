@@ -314,65 +314,89 @@ const SocialMediaService = () => {
           </div>
         </section>
 
-        {/* Process Section - Twitter Thread Style */}
+        {/* Process Section - Horizontal Carousel */}
         <section className="bg-[#0A0A0A] relative py-20 overflow-hidden">
-          <div className="container mx-auto px-6 lg:px-16 max-w-2xl">
-            {/* Thread Indicator */}
-            <div className="flex items-center gap-2 mb-6 text-gray-500 text-sm">
-              <span className="text-xl">𝕏</span>
-              <span>Thread • How We Work</span>
+          <div 
+            className="absolute top-0 left-0 right-0 h-px"
+            style={{ background: `linear-gradient(to right, transparent, ${ACCENT_COLOR}40, transparent)` }}
+          />
+
+          <div className="container mx-auto px-6 lg:px-16">
+            <div className="flex items-center gap-3 mb-12">
+              <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>02</span>
+              <h2 className="text-2xl md:text-3xl font-medium text-white">Process</h2>
             </div>
 
-            {/* Thread Posts */}
-            <div className="relative">
-              {/* Vertical thread line */}
-              <div className="absolute left-6 top-12 bottom-12 w-0.5 bg-gray-700" />
-              
+            {/* Carousel Navigation */}
+            <div className="flex gap-2 mb-8">
+              {processSteps.map((step, index) => (
+                <button
+                  key={step.number}
+                  onClick={() => setActiveStep(index)}
+                  className={`px-4 py-2 rounded-full text-sm transition-all ${
+                    activeStep === index 
+                      ? 'text-white' 
+                      : 'text-white/40 hover:text-white/60'
+                  }`}
+                  style={{ 
+                    backgroundColor: activeStep === index ? ACCENT_COLOR : 'transparent',
+                    border: `1px solid ${activeStep === index ? ACCENT_COLOR : 'rgba(255,255,255,0.1)'}`
+                  }}
+                >
+                  {step.hashtag}
+                </button>
+              ))}
+            </div>
+
+            {/* Carousel Content */}
+            <div className="relative min-h-[200px]">
               {processSteps.map((step, index) => (
                 <motion.div
                   key={step.number}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="relative flex gap-4 mb-4"
+                  initial={false}
+                  animate={{
+                    opacity: activeStep === index ? 1 : 0,
+                    x: activeStep === index ? 0 : 50,
+                  }}
+                  className={`${activeStep === index ? 'relative' : 'absolute top-0 left-0 right-0 pointer-events-none'}`}
                 >
-                  {/* Avatar */}
-                  <div 
-                    className="w-12 h-12 rounded-full flex items-center justify-center shrink-0 z-10"
-                    style={{ backgroundColor: ACCENT_COLOR }}
-                  >
-                    <span className="text-white font-bold text-sm">IL</span>
-                  </div>
-
-                  {/* Tweet Content */}
-                  <div className="flex-1 bg-[#16181c] border border-white/10 rounded-2xl p-4">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="font-bold text-white">Ium Labs</span>
-                      <span className="text-gray-500">@iumlabs</span>
-                      <span className="text-gray-500">·</span>
-                      <span className="text-gray-500">{step.hashtag}</span>
-                    </div>
-                    
-                    <p className="text-white mb-3">
-                      <span className="font-bold">{index + 1}/ {step.title}</span><br />
-                      <span className="text-gray-400">{step.description}</span>
-                    </p>
-
-                    {/* Tweet Actions */}
-                    <div className="flex items-center gap-8 text-gray-500 text-sm">
-                      <span className="flex items-center gap-1 hover:text-blue-400 cursor-pointer">
-                        <MessageCircle className="w-4 h-4" /> {12 + index * 3}
-                      </span>
-                      <span className="flex items-center gap-1 hover:text-green-400 cursor-pointer">
-                        <Repeat2 className="w-4 h-4" /> {45 + index * 10}
-                      </span>
-                      <span className="flex items-center gap-1 hover:text-pink-400 cursor-pointer">
-                        <Heart className="w-4 h-4" /> {120 + index * 25}
-                      </span>
+                  <div className="bg-[#16181c] border border-white/10 rounded-2xl p-8">
+                    <div className="flex items-start gap-6">
+                      <div 
+                        className="w-16 h-16 rounded-full flex items-center justify-center shrink-0"
+                        style={{ backgroundColor: `${ACCENT_COLOR}20` }}
+                      >
+                        <step.icon className="w-7 h-7" style={{ color: ACCENT_COLOR }} />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>Step {step.number}</span>
+                          <span className="text-gray-500">{step.hashtag}</span>
+                        </div>
+                        <h3 className="text-2xl font-medium text-white mb-3">{step.title}</h3>
+                        <p className="text-white/60 leading-relaxed">{step.description}</p>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
+              ))}
+            </div>
+
+            {/* Progress Bar */}
+            <div className="flex gap-2 mt-6">
+              {processSteps.map((_, index) => (
+                <div
+                  key={index}
+                  className="flex-1 h-1 rounded-full overflow-hidden bg-white/10"
+                >
+                  <motion.div
+                    className="h-full rounded-full"
+                    style={{ backgroundColor: ACCENT_COLOR }}
+                    initial={{ width: 0 }}
+                    animate={{ width: activeStep === index ? '100%' : '0%' }}
+                    transition={{ duration: 3, ease: 'linear' }}
+                  />
+                </div>
               ))}
             </div>
           </div>
