@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import useScrollReveal from "@/hooks/useScrollReveal";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
@@ -26,6 +27,8 @@ const queryClient = new QueryClient();
 
 // Page transition wrapper with smooth animations
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
+  useScrollReveal();
+
   const location = useLocation();
   const [displayChildren, setDisplayChildren] = useState(children);
   const [transitionStage, setTransitionStage] = useState<'enter' | 'exit'>('enter');
