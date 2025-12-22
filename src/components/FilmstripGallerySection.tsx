@@ -38,7 +38,7 @@ const FilmstripGallerySection = ({ bgColor = "#0A0A0A" }: FilmstripGallerySectio
     <section style={{ backgroundColor: bgColor }}>
       <div className="flex flex-col lg:flex-row">
         {/* Left: Gallery Grid */}
-        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
+        <div className="w-full lg:w-2/3 lg:border-r border-white/5">
           <div className="grid grid-cols-2 md:grid-cols-3">
             {campaignImages.slice(0, 9).map((image, index) => (
               <motion.div
@@ -48,7 +48,7 @@ const FilmstripGallerySection = ({ bgColor = "#0A0A0A" }: FilmstripGallerySectio
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 whileHover={{ scale: 1.02, zIndex: 10 }}
-                className={`group relative aspect-square overflow-hidden border-r border-b border-white/10 cursor-pointer ${
+                className={`group relative aspect-square overflow-hidden border-r border-b border-white/5 cursor-pointer ${
                   index % 3 === 2 ? "border-r-0" : ""
                 }`}
               >
@@ -83,11 +83,11 @@ const FilmstripGallerySection = ({ bgColor = "#0A0A0A" }: FilmstripGallerySectio
           </p>
 
           <div className="space-y-4 mb-12">
-            <div className="flex items-center justify-between py-3 border-b border-white/10">
+            <div className="flex items-center justify-between py-3 border-b border-white/5">
               <span className="text-white/50 text-sm">Events Hosted</span>
               <span className="text-white font-semibold">48+</span>
             </div>
-            <div className="flex items-center justify-between py-3 border-b border-white/10">
+            <div className="flex items-center justify-between py-3 border-b border-white/5">
               <span className="text-white/50 text-sm">Media Placements</span>
               <span className="text-white font-semibold">200+</span>
             </div>
