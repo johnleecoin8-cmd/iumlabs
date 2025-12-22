@@ -7,7 +7,7 @@ import CasesSection from "@/components/CasesSection";
 import FilmstripGallerySection from "@/components/FilmstripGallerySection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import InsightsSection from "@/components/InsightsSection";
-import CTASection from "@/components/CTASection";
+import ContactFormSection from "@/components/ContactFormSection";
 import Footer from "@/components/Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import useScrollReveal from "@/hooks/useScrollReveal";
@@ -126,16 +126,7 @@ const Index = () => {
       
       {/* Contact */}
       <section className="scroll-reveal bg-[#0A0A0A]" id="contact">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">08</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Contact</h2>
-            </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Get Started</span>
-          </div>
-          <CTASection />
-        </div>
+        <ContactFormSection sectionNumber="08" />
       </section>
       
       {/* Footer */}

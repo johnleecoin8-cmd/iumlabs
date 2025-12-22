@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+import ContactFormSection from "@/components/ContactFormSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import { ArrowRight, FileText, BookOpen, Newspaper, Globe, Mic, Award, Quote } from "lucide-react";
 import prImage from "@/assets/services/pr-media.jpg";
@@ -478,7 +478,7 @@ const PRService = () => {
         </div>
       </section>
 
-      <CTASection />
+      <ContactFormSection sectionNumber="04" />
       <Footer />
     </div>
   );

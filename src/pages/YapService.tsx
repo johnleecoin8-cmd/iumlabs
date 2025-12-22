@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Calendar, ArrowRight, Volume2, Users, Zap, FileText, Radio, Waves, MessageCircle, Target } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+import ContactFormSection from "@/components/ContactFormSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import seoulTech from "@/assets/backgrounds/seoul-tech-future.jpg";
 
@@ -644,7 +644,7 @@ const YapService = () => {
           </div>
         </section>
 
-        <CTASection />
+        <ContactFormSection sectionNumber="04" />
         <Footer />
       </div>
     </div>

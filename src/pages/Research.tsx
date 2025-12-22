@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Search, Calendar, Clock, ArrowRight, TrendingUp, LineChart, Users, Coins, Palette, BarChart3 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+import ContactFormSection from "@/components/ContactFormSection";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -3289,7 +3289,7 @@ const Research = () => {
         </div>
       </section>
 
-      <CTASection />
+      <ContactFormSection sectionNumber="04" />
       <Footer />
     </div>
   );
