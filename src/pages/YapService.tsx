@@ -14,11 +14,7 @@ const ACCENT_COLOR = "#22D3EE";
 // Famous Crypto KOLs with verified Twitter handles (Korean + Global)
 const cryptoKOLs = [
   // Korean Crypto KOLs
-  { name: "박호두", handle: "@Hodu_Park", followers: "180K", expertise: "Trading" },
-  { name: "Ki Young Ju", handle: "@ki_young_ju", followers: "420K", expertise: "Data" },
-  { name: "도권", handle: "@staboredape", followers: "1.1M", expertise: "Terra" },
   { name: "신현성", handle: "@hsshim", followers: "85K", expertise: "Fintech" },
-  { name: "Michael Saylor", handle: "@saylor", followers: "3.8M", expertise: "BTC" },
   // Global KOLs (Male only)
   { name: "Ansem", handle: "@blknoiz06", followers: "520K", expertise: "Memes" },
   { name: "Murad", handle: "@MustStopMurad", followers: "280K", expertise: "Memes" },
@@ -33,8 +29,6 @@ const cryptoKOLs = [
   { name: "Erik Voorhees", handle: "@ErikVoorhees", followers: "720K", expertise: "BTC" },
   { name: "Mike Novogratz", handle: "@novogratz", followers: "450K", expertise: "Macro" },
   { name: "Tyler Winklevoss", handle: "@tyler", followers: "1.1M", expertise: "Exchange" },
-  { name: "Justin Sun", handle: "@justinsuntron", followers: "3.5M", expertise: "TRX" },
-  { name: "CZ", handle: "@cz_binance", followers: "9.2M", expertise: "Exchange" },
   { name: "Dan Held", handle: "@danheld", followers: "650K", expertise: "BTC" },
   { name: "Scott Melker", handle: "@scottmelker", followers: "980K", expertise: "Trading" },
   { name: "Benjamin Cowen", handle: "@intocryptoverse", followers: "820K", expertise: "TA" },
@@ -73,10 +67,16 @@ const cryptoKOLs = [
   { name: "Loomdart", handle: "@loomdart", followers: "380K", expertise: "DeFi" },
   { name: "Fiskantes", handle: "@Fiskantes", followers: "185K", expertise: "VC" },
   { name: "Taiki Maeda", handle: "@TaikiMaeda2", followers: "180K", expertise: "DeFi" },
-  { name: "Crypto Rand", handle: "@crypto_rand", followers: "195K", expertise: "TA" },
   { name: "Lark Davis", handle: "@TheCryptoLark", followers: "520K", expertise: "Education" },
   { name: "Carl Runefelt", handle: "@TheMoonCarl", followers: "680K", expertise: "Trading" },
   { name: "Gareth Soloway", handle: "@GarethSoloway", followers: "310K", expertise: "TA" },
+  // New KOLs (10K-50K followers range)
+  { name: "CryptoGodJohn", handle: "@CryptoGodJohn", followers: "45K", expertise: "Trading" },
+  { name: "Posty", handle: "@PostyXBT", followers: "38K", expertise: "TA" },
+  { name: "DegenSpartan", handle: "@DegenSpartan", followers: "42K", expertise: "DeFi" },
+  { name: "Flood", handle: "@ThinkingUSD", followers: "35K", expertise: "Macro" },
+  { name: "Kano", handle: "@CryptoKano", followers: "28K", expertise: "BTC" },
+  { name: "CryptoTony", handle: "@CryptoTony__", followers: "48K", expertise: "TA" },
 ];
 
 const processSteps = [
