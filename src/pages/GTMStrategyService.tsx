@@ -8,6 +8,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import gtmImage from "@/assets/services/gtm-strategy.jpg";
 import koreaPalace from "@/assets/backgrounds/korea-palace-modern.jpg";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 // Emerald accent
 const ACCENT_COLOR = "#10B981";
@@ -57,6 +58,8 @@ const stats = [
 ];
 
 const GTMStrategyService = () => {
+  usePageTitle("GTM Strategy");
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {

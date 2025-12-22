@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import socialMediaImage from "@/assets/backgrounds/seoul-gangnam-night.jpg";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 // Twitter/X Pink accent
 const ACCENT_COLOR = "#EC4899";
@@ -76,6 +77,8 @@ const stats = [
 ];
 
 const SocialMediaService = () => {
+  usePageTitle("Social Media Marketing");
+  
   const [activeTweet, setActiveTweet] = useState(0);
   const [activeStep, setActiveStep] = useState(0);
 

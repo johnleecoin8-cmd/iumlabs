@@ -7,6 +7,7 @@ import CalendlyButton from "@/components/CalendlyButton";
 import { ArrowRight, FileText, BookOpen, Newspaper, Globe, Mic, Award, Quote } from "lucide-react";
 import prImage from "@/assets/services/pr-media.jpg";
 import seoulSkyline from "@/assets/seoul-skyline.jpg";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 // Import media logos
 import cointelegraphLogo from "@/assets/logos/cointelegraph.png";
@@ -91,6 +92,8 @@ const allServices = [
 ];
 
 const PRService = () => {
+  usePageTitle("PR & Media");
+  
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-white">
       <Navbar />

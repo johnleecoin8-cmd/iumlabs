@@ -8,6 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
+import { usePageTitle } from "@/hooks/usePageTitle";
 
 const budgetOptions = [
   "$15,000 - $25,000",
@@ -30,6 +31,8 @@ const contactInfo = [
 ];
 
 const Contact = () => {
+  usePageTitle("Contact");
+  
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
