@@ -1,13 +1,34 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calendar, ArrowRight, Users, Hash, MessageSquare, Bell, Settings, ChevronRight, Shield, Sparkles, UserPlus, Send } from "lucide-react";
+import { Calendar, ArrowRight, Users, Hash, MessageSquare, Bell, Settings, ChevronRight, Shield, Sparkles, UserPlus, Send, Megaphone, HelpCircle, Vote, Pin, Star, Info } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CalendlyButton from "@/components/CalendlyButton";
 import communityImage from "@/assets/services/community-growth.jpg";
 import seoulHanriver from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
+
+// Project logos for avatar grid
+import bnbLogo from "@/assets/logos/bnb.png";
+import bybitLogo from "@/assets/logos/bybit.png";
+import kucoinLogo from "@/assets/logos/kucoin.png";
+import mantraLogo from "@/assets/logos/mantra.png";
+import megaethLogo from "@/assets/logos/megaeth.png";
+import peaqLogo from "@/assets/logos/peaq.png";
+import saharaLogo from "@/assets/logos/sahara-ai.png";
+import storyLogo from "@/assets/logos/story-protocol.png";
+import synfuturesLogo from "@/assets/logos/synfutures.png";
+import triaLogo from "@/assets/logos/tria-official.png";
+import zkpassLogo from "@/assets/logos/zkpass.png";
+import fogoLogo from "@/assets/logos/fogo.png";
+
+const projectLogos = [
+  bnbLogo, bybitLogo, kucoinLogo, mantraLogo, megaethLogo,
+  peaqLogo, saharaLogo, storyLogo, synfuturesLogo, triaLogo,
+  zkpassLogo, fogoLogo, bnbLogo, bybitLogo, kucoinLogo,
+  mantraLogo, megaethLogo, peaqLogo, saharaLogo, storyLogo,
+];
 
 // Platform colors
 const DISCORD_COLOR = "#5865F2";
@@ -35,6 +56,14 @@ const discordChannels = [
   { name: "general", icon: Hash, active: true },
   { name: "support", icon: MessageSquare },
   { name: "governance", icon: Shield },
+];
+
+// Telegram channels (groups/topics)
+const telegramChannels = [
+  { name: "📢 Announcements", icon: Megaphone, unread: 2 },
+  { name: "💬 General Chat", icon: MessageSquare, active: true },
+  { name: "❓ Q&A", icon: HelpCircle },
+  { name: "📌 Pinned", icon: Pin },
 ];
 
 const processSteps = [
@@ -197,11 +226,13 @@ const CommunityService = () => {
               >
                 {/* Platform Tabs */}
                 <div className="flex gap-2 mb-4">
-                  <button
+                  <motion.button
                     onClick={() => setActivePlatform('discord')}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ${
                       activePlatform === 'discord' 
-                        ? 'bg-[#5865F2] text-white' 
+                        ? 'bg-[#5865F2] text-white shadow-lg shadow-[#5865F2]/30' 
                         : 'bg-white/10 text-white/60 hover:bg-white/20'
                     }`}
                   >
@@ -209,28 +240,30 @@ const CommunityService = () => {
                       <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
                     </svg>
                     Discord
-                  </button>
-                  <button
+                  </motion.button>
+                  <motion.button
                     onClick={() => setActivePlatform('telegram')}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm transition-all duration-300 ${
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ${
                       activePlatform === 'telegram' 
-                        ? 'bg-[#0088CC] text-white' 
+                        ? 'bg-[#0088CC] text-white shadow-lg shadow-[#0088CC]/30' 
                         : 'bg-white/10 text-white/60 hover:bg-white/20'
                     }`}
                   >
                     <Send className="w-5 h-5" />
                     Telegram
-                  </button>
+                  </motion.button>
                 </div>
 
                 <AnimatePresence mode="wait">
                   {activePlatform === 'discord' ? (
                     <motion.div
                       key="discord"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.3 }}
+                      initial={{ opacity: 0, x: -30, scale: 0.95 }}
+                      animate={{ opacity: 1, x: 0, scale: 1 }}
+                      exit={{ opacity: 0, x: 30, scale: 0.95 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
                       className="bg-[#36393f] rounded-xl overflow-hidden shadow-2xl border border-white/10"
                     >
                       {/* Discord Header */}
@@ -318,10 +351,10 @@ const CommunityService = () => {
                   ) : (
                     <motion.div
                       key="telegram"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.3 }}
+                      initial={{ opacity: 0, x: 30, scale: 0.95 }}
+                      animate={{ opacity: 1, x: 0, scale: 1 }}
+                      exit={{ opacity: 0, x: -30, scale: 0.95 }}
+                      transition={{ duration: 0.4, ease: "easeInOut" }}
                       className="bg-[#17212b] rounded-xl overflow-hidden shadow-2xl border border-white/10"
                     >
                       {/* Telegram Header */}
@@ -339,8 +372,28 @@ const CommunityService = () => {
                         </div>
                       </div>
 
-                      {/* Chat Area */}
-                      <div className="p-4 min-h-[300px] bg-[#0e1621]">
+                      <div className="flex">
+                        {/* Telegram Topics Sidebar */}
+                        <div className="w-48 bg-[#232e3c] p-3 hidden md:block">
+                          {telegramChannels.map((channel) => (
+                            <div
+                              key={channel.name}
+                              className={`flex items-center gap-2 px-2 py-1.5 rounded mb-1 cursor-pointer transition-colors ${
+                                channel.active ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                              }`}
+                            >
+                              <span className="text-sm">{channel.name}</span>
+                              {channel.unread && (
+                                <span className="ml-auto bg-cyan-500 text-white text-xs px-1.5 rounded-full">
+                                  {channel.unread}
+                                </span>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Chat Area */}
+                        <div className="flex-1 p-4 min-h-[300px] bg-[#0e1621]">
                         <AnimatePresence>
                           {telegramMessages.slice(0, visibleMessages).map((msg, index) => (
                             <motion.div
@@ -389,6 +442,7 @@ const CommunityService = () => {
                             <span>typing...</span>
                           </motion.div>
                         )}
+                        </div>
                       </div>
 
                       {/* Telegram Input */}
@@ -427,25 +481,30 @@ const CommunityService = () => {
                 {/* Left - Animated Avatar Grid */}
                 <div className="relative">
                   <div className="grid grid-cols-5 gap-3">
-                    {Array.from({ length: 20 }).map((_, i) => (
+                    {projectLogos.map((logo, i) => (
                       <motion.div
                         key={i}
                         initial={{ opacity: 0, scale: 0 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: i * 0.05 }}
-                        className="aspect-square rounded-xl bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center relative overflow-hidden group"
+                        whileHover={{ scale: 1.1, y: -5 }}
+                        className="aspect-square rounded-xl bg-gradient-to-br from-gray-800/80 to-gray-900/80 flex items-center justify-center relative overflow-hidden group border border-white/5 hover:border-white/20 transition-all duration-300"
                       >
-                        <motion.div
-                          animate={{ y: [0, -5, 0] }}
-                          transition={{ duration: 2, repeat: Infinity, delay: i * 0.1 }}
-                        >
-                          <Users className="w-6 h-6 text-gray-500 group-hover:text-white/80 transition-colors" />
-                        </motion.div>
+                        <img 
+                          src={logo} 
+                          alt="Project logo" 
+                          className="w-10 h-10 object-contain opacity-70 group-hover:opacity-100 transition-opacity duration-300"
+                        />
                         {/* Online indicator for some */}
                         {i % 3 === 0 && (
-                          <div className="absolute bottom-1 right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-800" />
+                          <div className="absolute bottom-1 right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-800 animate-pulse" />
                         )}
+                        {/* Glow effect on hover */}
+                        <div 
+                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                          style={{ boxShadow: `inset 0 0 30px ${accentColor}20` }}
+                        />
                       </motion.div>
                     ))}
                   </div>
