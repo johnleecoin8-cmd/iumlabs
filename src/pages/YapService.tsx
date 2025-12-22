@@ -209,66 +209,129 @@ const YapService = () => {
 
           {/* Content */}
           <div className="container mx-auto px-6 lg:px-16 pt-32 pb-16 relative z-10">
-            <div className="max-w-3xl">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6"
-                style={{ borderColor: `${ACCENT_COLOR}50`, backgroundColor: `${ACCENT_COLOR}10` }}
-              >
-                <Volume2 className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
-                <span className="text-sm" style={{ color: ACCENT_COLOR }}>Yap Strategy</span>
-              </motion.div>
-              
-              <h1 className="text-white mb-6">
-                <span className="block text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]">
-                  Yap
-                </span>
-                <span 
-                  className="block text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]"
-                  style={{ color: ACCENT_COLOR }}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left - Text Content */}
+              <div>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6"
+                  style={{ borderColor: `${ACCENT_COLOR}50`, backgroundColor: `${ACCENT_COLOR}10` }}
                 >
-                  Strategy
-                </span>
-              </h1>
-
-              <p className="text-white/70 text-lg max-w-xl mb-8 font-light leading-relaxed">
-                Amplify your message with 600+ aligned yappers — driving mindshare and organic buzz across Crypto X.
-              </p>
-
-              <div className="flex flex-wrap gap-4">
-                <CalendlyButton 
-                  className="inline-flex items-center gap-3 px-6 py-3 font-medium text-sm transition-all duration-300 hover:scale-105 rounded-lg"
-                  style={{ backgroundColor: ACCENT_COLOR, color: '#000' }}
-                >
-                  <Calendar className="w-4 h-4" />
-                  Book a Meeting
-                </CalendlyButton>
+                  <Volume2 className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
+                  <span className="text-sm" style={{ color: ACCENT_COLOR }}>Yap Strategy</span>
+                </motion.div>
                 
-                {/* Sound Wave Visual Badge */}
-                <div 
-                  className="inline-flex items-center gap-2 px-4 py-3 rounded-lg border"
-                  style={{ borderColor: `${ACCENT_COLOR}30` }}
-                >
-                  <Radio className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
-                  <span className="text-white/60 text-sm">600+ Active Creators</span>
-                  <motion.div
-                    className="flex gap-0.5"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
+                <h1 className="text-white mb-6">
+                  <span className="block text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]">
+                    Yap
+                  </span>
+                  <span 
+                    className="block text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]"
+                    style={{ color: ACCENT_COLOR }}
                   >
-                    {[1, 2, 3, 4].map((i) => (
-                      <motion.div
-                        key={i}
-                        className="w-1 rounded-full"
-                        style={{ backgroundColor: ACCENT_COLOR }}
-                        animate={{ height: [4, 16, 4] }}
-                        transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
-                      />
-                    ))}
-                  </motion.div>
+                    Strategy
+                  </span>
+                </h1>
+
+                <p className="text-white/70 text-lg max-w-xl mb-8 font-light leading-relaxed">
+                  Amplify your message with 600+ aligned yappers — driving mindshare and organic buzz across Crypto X.
+                </p>
+
+                <div className="flex flex-wrap gap-4">
+                  <CalendlyButton 
+                    className="inline-flex items-center gap-3 px-6 py-3 font-medium text-sm transition-all duration-300 hover:scale-105 rounded-lg"
+                    style={{ backgroundColor: ACCENT_COLOR, color: '#000' }}
+                  >
+                    <Calendar className="w-4 h-4" />
+                    Book a Meeting
+                  </CalendlyButton>
+                  
+                  {/* Sound Wave Visual Badge */}
+                  <div 
+                    className="inline-flex items-center gap-2 px-4 py-3 rounded-lg border"
+                    style={{ borderColor: `${ACCENT_COLOR}30` }}
+                  >
+                    <Radio className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
+                    <span className="text-white/60 text-sm">600+ Active Creators</span>
+                    <motion.div
+                      className="flex gap-0.5"
+                      animate={{ opacity: [0.5, 1, 0.5] }}
+                      transition={{ duration: 1.5, repeat: Infinity }}
+                    >
+                      {[1, 2, 3, 4].map((i) => (
+                        <motion.div
+                          key={i}
+                          className="w-1 rounded-full"
+                          style={{ backgroundColor: ACCENT_COLOR }}
+                          animate={{ height: [4, 16, 4] }}
+                          transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
+                        />
+                      ))}
+                    </motion.div>
+                  </div>
                 </div>
               </div>
+
+              {/* Right - KOL Avatar Grid */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="hidden lg:block"
+              >
+                <div className="grid grid-cols-4 gap-3">
+                  {cryptoKOLs.slice(0, 16).map((kol, index) => (
+                    <motion.a
+                      key={index}
+                      href={`https://x.com/${kol.handle.replace('@', '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative aspect-square"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.3 + index * 0.05 }}
+                    >
+                      <div 
+                        className="w-full h-full rounded-xl overflow-hidden border-2 transition-all duration-300 group-hover:scale-105"
+                        style={{ 
+                          borderColor: `${ACCENT_COLOR}30`,
+                          backgroundColor: '#0a0a0a'
+                        }}
+                      >
+                        <img 
+                          src={`https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`}
+                          alt={kol.name}
+                          className="w-full h-full object-cover"
+                        />
+                        
+                        {/* Hover overlay */}
+                        <div className="absolute inset-0 bg-black/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-1 rounded-xl">
+                          <span className="text-[9px] font-medium text-white text-center">{kol.name}</span>
+                          <span className="text-[7px] text-cyan-400 text-center">{kol.followers}</span>
+                          <span 
+                            className="text-[6px] px-1.5 py-0.5 rounded-full mt-0.5"
+                            style={{ backgroundColor: `${ACCENT_COLOR}40`, color: ACCENT_COLOR }}
+                          >
+                            {kol.expertise}
+                          </span>
+                        </div>
+                        
+                        {/* Glow on hover */}
+                        <div 
+                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-xl"
+                          style={{ boxShadow: `0 0 20px ${ACCENT_COLOR}40` }}
+                        />
+                      </div>
+                    </motion.a>
+                  ))}
+                </div>
+                
+                {/* Network label */}
+                <div className="text-center mt-4">
+                  <span className="text-white/40 text-xs">Click to view on 𝕏</span>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
