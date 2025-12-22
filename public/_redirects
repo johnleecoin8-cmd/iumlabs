@@ -1,0 +1,7 @@
+# Ensure static verification & SEO files are served directly
+/naver6b3b3b61387a6c4c99a3568c8a719430.html  /naver6b3b3b61387a6c4c99a3568c8a719430.html  200
+/sitemap.xml  /sitemap.xml  200
+/robots.txt  /robots.txt  200
+
+# SPA fallback
+/*  /index.html  200
