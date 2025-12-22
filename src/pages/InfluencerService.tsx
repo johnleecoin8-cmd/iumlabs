@@ -568,20 +568,6 @@ const InfluencerService = () => {
                 </div>
               </motion.a>
             ))}
-            
-            {/* "And more" placeholder cells */}
-            {[...Array(4)].map((_, i) => (
-              <motion.div
-                key={`more-${i}`}
-                className="aspect-square rounded-xl border border-dashed border-white/20 bg-white/5 flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: (extendedKOLs.length + i) * 0.02 }}
-              >
-                <span className="text-white/30 text-xs">+</span>
-              </motion.div>
-            ))}
           </div>
 
           {/* CTA */}
