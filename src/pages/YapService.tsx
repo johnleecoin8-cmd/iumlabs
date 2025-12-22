@@ -13,9 +13,10 @@ const ACCENT_COLOR = "#22D3EE";
 
 // Verified Crypto KOLs (under 500K followers) with working Twitter profile pictures
 const cryptoKOLs = [
-  // 🇰🇷 Korean KOLs (2)
+  // 🇰🇷 Korean KOLs (3)
+  { name: "Coinboy", handle: "@coinboy717", followers: "50K", expertise: "Trading" },
+  { name: "ONEMINNFT", handle: "@ONEMINNFT", followers: "45K", expertise: "NFT" },
   { name: "Nakju", handle: "@nakjumon", followers: "18.7K", expertise: "Trading" },
-  { name: "Goryeokim", handle: "@goryeokim", followers: "10.4K", expertise: "Trading" },
   
   // 🇨🇳 Chinese KOLs (5)
   { name: "KuiGas", handle: "@KuiGas", followers: "96K", expertise: "Research" },
