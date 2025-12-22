@@ -103,8 +103,8 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
         to={`/projects/${slug}`}
         onClick={() => window.scrollTo(0, 0)}
         className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/5 hover:shadow-lg hover:shadow-white/5 ${
-          !isRightColumn ? "border-r border-white/5" : ""
-        } ${!isLastRow ? "border-b border-white/5" : ""}`}
+          !isRightColumn ? "border-r border-white/10" : ""
+        } ${!isLastRow ? "border-b border-white/10" : ""}`}
       >
         <div className="flex items-start gap-6">
           {/* Image */}
@@ -142,16 +142,12 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
   );
 };
 
-interface CasesSectionProps {
-  bgColor?: string;
-}
-
-const CasesSection = ({ bgColor = "#0A0A0A" }: CasesSectionProps) => {
+const CasesSection = () => {
   return (
-    <section style={{ backgroundColor: bgColor }}>
+    <section className="bg-[#0A0A0A]">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Cases Grid */}
-        <div className="w-full lg:w-2/3 lg:border-r border-white/5">
+        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {featuredCases.map((caseItem, index) => (
               <CaseCard key={caseItem.slug} {...caseItem} index={index} />
@@ -159,7 +155,7 @@ const CasesSection = ({ bgColor = "#0A0A0A" }: CasesSectionProps) => {
           </div>
 
           {/* View All */}
-          <div className="p-8 md:p-10 border-t border-white/5">
+          <div className="p-8 md:p-10 border-t border-white/10">
             <Link
               to="/projects"
               className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
@@ -186,11 +182,11 @@ const CasesSection = ({ bgColor = "#0A0A0A" }: CasesSectionProps) => {
           </p>
 
           <div className="space-y-6 mb-12">
-            <div className="flex items-center gap-4 pb-4 border-b border-white/5">
+            <div className="flex items-center gap-4 pb-4 border-b border-white/10">
               <span className="text-3xl font-bold text-white">340%</span>
               <span className="text-white/50 text-sm">Average volume increase</span>
             </div>
-            <div className="flex items-center gap-4 pb-4 border-b border-white/5">
+            <div className="flex items-center gap-4 pb-4 border-b border-white/10">
               <span className="text-3xl font-bold text-white">50K+</span>
               <span className="text-white/50 text-sm">New users acquired</span>
             </div>

@@ -3,13 +3,9 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import teamPhoto from '@/assets/team-photo.png';
 
-interface WhyChooseUsSectionProps {
-  bgColor?: string;
-}
-
-const WhyChooseUsSection = ({ bgColor = "#0A0A0A" }: WhyChooseUsSectionProps) => {
+const WhyChooseUsSection = () => {
   return (
-    <section style={{ backgroundColor: bgColor }}>
+    <section className="bg-[#0A0A0A]">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* Left: Image */}
         <motion.div
@@ -17,7 +13,7 @@ const WhyChooseUsSection = ({ bgColor = "#0A0A0A" }: WhyChooseUsSectionProps) =>
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="lg:border-r border-white/5"
+          className="lg:border-r border-white/10"
         >
           <div className="aspect-[4/3] lg:aspect-auto lg:h-full overflow-hidden">
             <img
@@ -36,7 +32,7 @@ const WhyChooseUsSection = ({ bgColor = "#0A0A0A" }: WhyChooseUsSectionProps) =>
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="p-8 md:p-12 lg:p-16 flex-1 flex flex-col justify-center border-b border-white/5"
+            className="p-8 md:p-12 lg:p-16 flex-1 flex flex-col justify-center border-b border-white/10"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               About Us

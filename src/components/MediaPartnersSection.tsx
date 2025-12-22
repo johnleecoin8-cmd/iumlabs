@@ -18,20 +18,16 @@ const mediaLogos = [
   { name: "The Economist", logo: economistLogo },
 ];
 
-interface MediaPartnersSectionProps {
-  bgColor?: string;
-}
-
-const MediaPartnersSection = ({ bgColor = "#0A0A0A" }: MediaPartnersSectionProps) => {
+const MediaPartnersSection = () => {
   // Double the array for seamless loop
   const duplicatedLogos = [...mediaLogos, ...mediaLogos];
 
   return (
-    <section className="overflow-hidden" style={{ backgroundColor: bgColor }}>
+    <section className="bg-[#0A0A0A] overflow-hidden">
       <div className="relative">
         {/* Gradient overlays */}
-        <div className="absolute left-0 top-0 bottom-0 w-24 z-10" style={{ background: `linear-gradient(to right, ${bgColor}, transparent)` }} />
-        <div className="absolute right-0 top-0 bottom-0 w-24 z-10" style={{ background: `linear-gradient(to left, ${bgColor}, transparent)` }} />
+        <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10" />
+        <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10" />
         
         {/* Marquee */}
         <motion.div
