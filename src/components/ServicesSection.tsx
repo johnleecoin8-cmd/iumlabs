@@ -63,8 +63,8 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
       <Link
         to={service.link}
         className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/5 hover:shadow-lg hover:shadow-white/5 ${
-          !isRightColumn ? "border-r border-white/10" : ""
-        } ${!isLastRow ? "border-b border-white/10" : ""}`}
+          !isRightColumn ? "border-r border-white/5" : ""
+        } ${!isLastRow ? "border-b border-white/5" : ""}`}
       >
         <Icon className="w-10 h-10 mb-6 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" strokeWidth={1.5} />
         <h3 className="text-xl font-semibold text-white mb-3">
@@ -116,7 +116,7 @@ const ServicesSection = ({ bgColor = "#0A0A0A" }: ServicesSectionProps) => {
     <section style={{ backgroundColor: bgColor }}>
       <div className="flex flex-col lg:flex-row">
         {/* Left: Services Grid */}
-        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
+        <div className="w-full lg:w-2/3 lg:border-r border-white/5">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {services.map((service, index) => (
               <ServiceCard key={service.number} service={service} index={index} />
@@ -148,7 +148,7 @@ const ServicesSection = ({ bgColor = "#0A0A0A" }: ServicesSectionProps) => {
 
           <GoldShape />
 
-          <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="mt-12 pt-8 border-t border-white/5">
             <div className="grid grid-cols-2 gap-6">
               <div>
                 <p className="text-3xl font-bold text-white">18+</p>

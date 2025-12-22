@@ -97,7 +97,7 @@ const InsightsSection = ({ bgColor = "#0A0A0A" }: InsightsSectionProps) => {
     <section style={{ backgroundColor: bgColor }}>
       <div className="flex flex-col lg:flex-row">
         {/* Left: Articles List */}
-        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
+        <div className="w-full lg:w-2/3 lg:border-r border-white/5">
           {insights.map((article, index) => (
             <motion.div
               key={article.id}
@@ -109,7 +109,7 @@ const InsightsSection = ({ bgColor = "#0A0A0A" }: InsightsSectionProps) => {
               <Link
                 to={`/research/${article.id}`}
                 className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-white/5 ${
-                  index < insights.length - 1 ? "border-b border-white/10" : ""
+                  index < insights.length - 1 ? "border-b border-white/5" : ""
                 }`}
               >
                 <div className="flex items-center gap-3 text-white/40 text-xs mb-3">
@@ -134,7 +134,7 @@ const InsightsSection = ({ bgColor = "#0A0A0A" }: InsightsSectionProps) => {
           ))}
 
           {/* View All Link */}
-          <div className="px-8 md:px-10 py-4 border-t border-white/10">
+          <div className="px-8 md:px-10 py-4 border-t border-white/5">
             <Link
               to="/research"
               className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
@@ -181,7 +181,7 @@ const InsightsSection = ({ bgColor = "#0A0A0A" }: InsightsSectionProps) => {
 
           <BlueShape />
 
-          <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="mt-12 pt-8 border-t border-white/5">
             <p className="text-white/40 text-sm">
               Join 500+ Web3 founders and marketers getting our weekly insights.
             </p>

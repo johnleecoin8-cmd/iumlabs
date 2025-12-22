@@ -51,11 +51,11 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[hsl(0,0%,4%)] text-white">
+    <footer className="bg-[#0A0A0A] text-white">
       {/* Main Footer Content */}
       <div className="container mx-auto px-6 py-16">
         {/* Top Row - CTA + Back to Top */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-12 border-b border-white/10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-12 border-b border-white/5">
           <div>
             <h3 className="text-2xl md:text-3xl font-light mb-2">Have a project in mind?</h3>
             <p className="text-white/50">Let's discuss how we can help you succeed in Korea.</p>
@@ -79,7 +79,7 @@ const Footer = () => {
         </div>
 
         {/* Navigation Links Grid - SEO Sitemap Footer */}
-        <nav className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-b border-white/10" aria-label="Footer navigation">
+        <nav className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-b border-white/5" aria-label="Footer navigation">
           {/* Research Column */}
           <div>
             <h4 className="text-xs uppercase tracking-widest text-white/30 mb-6 font-mono">

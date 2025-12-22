@@ -96,14 +96,14 @@ const ContactFormSection = ({
     <section style={{ backgroundColor: bgColor }}>
       <div className="border-t border-white/5">
         {/* Section Header */}
-        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
           <div className="flex items-baseline gap-6 md:gap-10">
             <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">{sectionNumber}</span>
             <h2 className="text-lg md:text-xl font-medium text-white">Contact</h2>
           </div>
           <Link 
             to="/contact"
-            className="text-xs text-white/60 tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-white/20 rounded-full hover:border-white/40 transition-colors"
+            className="text-xs text-white/60 tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-white/10 rounded-full hover:border-white/30 transition-colors"
           >
             Get Started
           </Link>
@@ -112,7 +112,7 @@ const ContactFormSection = ({
         {/* Two Column Layout */}
         <div className="flex flex-col lg:flex-row">
           {/* Left Column - Contact Info */}
-          <div className="w-full lg:w-2/5 p-8 md:p-12 lg:p-16 border-b lg:border-b-0 lg:border-r border-white/10">
+          <div className="w-full lg:w-2/5 p-8 md:p-12 lg:p-16 border-b lg:border-b-0 lg:border-r border-white/5">
             <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
               Get in Touch
             </h3>
@@ -121,7 +121,7 @@ const ContactFormSection = ({
             </p>
 
             {/* Office */}
-            <div className="mb-8 pb-8 border-b border-white/10">
+            <div className="mb-8 pb-8 border-b border-white/5">
               <div className="flex items-start gap-4">
                 <MapPin className="w-5 h-5 text-white/30 mt-1" />
                 <div>
@@ -138,7 +138,7 @@ const ContactFormSection = ({
             {/* Email */}
             <a 
               href={`mailto:${brand.email}`}
-              className="group flex items-center justify-between mb-8 pb-8 border-b border-white/10 hover:border-white/20 transition-colors"
+              className="group flex items-center justify-between mb-8 pb-8 border-b border-white/5 hover:border-white/10 transition-colors"
             >
               <div className="flex items-start gap-4">
                 <Mail className="w-5 h-5 text-white/30 mt-1" />
@@ -155,7 +155,7 @@ const ContactFormSection = ({
               href={brand.telegramLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-between mb-8 pb-8 border-b border-white/10 hover:border-white/20 transition-colors"
+              className="group flex items-center justify-between mb-8 pb-8 border-b border-white/5 hover:border-white/10 transition-colors"
             >
               <div className="flex items-start gap-4">
                 <Send className="w-5 h-5 text-white/30 mt-1" />
@@ -187,7 +187,7 @@ const ContactFormSection = ({
             </a>
 
             {/* Footer Links */}
-            <div className="mt-16 pt-8 border-t border-white/10 flex gap-6">
+            <div className="mt-16 pt-8 border-t border-white/5 flex gap-6">
               <Link to="/terms" className="text-xs text-white/40 hover:text-white/60 transition-colors">Terms of Service</Link>
               <Link to="/privacy" className="text-xs text-white/40 hover:text-white/60 transition-colors">Privacy Policy</Link>
               <Link to="/transparency" className="text-xs text-white/40 hover:text-white/60 transition-colors">Transparency</Link>
@@ -286,7 +286,7 @@ const ContactFormSection = ({
               </div>
 
               {/* Submit Button */}
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-4 border-t border-white/5">
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
