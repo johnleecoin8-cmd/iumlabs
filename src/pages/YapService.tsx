@@ -67,10 +67,6 @@ const cryptoKOLs = [
   { name: "Bluntz", handle: "@Bluntz_Capital", followers: "180K", expertise: "TA" },
   { name: "Nunya Bizniz", handle: "@Nunya_Bizniz", followers: "165K", expertise: "TA" },
   { name: "ColdBloodShill", handle: "@ColdBloodShill", followers: "145K", expertise: "Trading" },
-  { name: "CryptoWizardd", handle: "@CryptoWizardd", followers: "120K", expertise: "TA" },
-  { name: "MacnBTC", handle: "@MacnBTC", followers: "135K", expertise: "BTC" },
-  { name: "Rekt Capital", handle: "@raboratory", followers: "490K", expertise: "TA" },
-  { name: "MoonOverlord", handle: "@MoonOverlord", followers: "175K", expertise: "Trading" },
 ];
 
 const processSteps = [
