@@ -28,8 +28,8 @@ const Index = () => {
         </div>
       </main>
       
-      {/* Services */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="services">
+      {/* Services - 01 홀수 */}
+      <section className="scroll-reveal bg-[#0F0F0F]" id="services">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -42,8 +42,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Process */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="process">
+      {/* Process - 02 짝수 */}
+      <section className="scroll-reveal bg-[#121212]" id="process">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -56,8 +56,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Cases */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="cases">
+      {/* Cases - 03 홀수 */}
+      <section className="scroll-reveal bg-[#0F0F0F]" id="cases">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -70,8 +70,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* About */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="why-choose-us">
+      {/* About - 04 짝수 */}
+      <section className="scroll-reveal bg-[#121212]" id="why-choose-us">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -84,8 +84,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Gallery */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="gallery">
+      {/* Gallery - 05 홀수 */}
+      <section className="scroll-reveal bg-[#0F0F0F]" id="gallery">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -98,8 +98,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Media Partners - Marquee Bar */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="media-partners">
+      {/* Media Partners - 06 짝수 */}
+      <section className="scroll-reveal bg-[#121212]" id="media-partners">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -112,8 +112,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Insights */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="insights">
+      {/* Insights - 07 홀수 */}
+      <section className="scroll-reveal bg-[#0F0F0F]" id="insights">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -126,8 +126,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Contact */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="contact">
+      {/* Contact - 08 짝수 */}
+      <section className="scroll-reveal bg-[#121212]" id="contact">
         <ContactFormSection sectionNumber="08" />
       </section>
       
