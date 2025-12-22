@@ -66,6 +66,10 @@ const cryptoKOLs = [
   { name: "CryptoTony", handle: "@CryptoTony__", followers: "48K", expertise: "TA" },
   { name: "Rager", handle: "@Raboratory", followers: "125K", expertise: "Trading" },
   { name: "Bluntz", handle: "@Bluntz_Capital", followers: "180K", expertise: "TA" },
+  { name: "Mando", handle: "@crypto_mando", followers: "165K", expertise: "Trading" },
+  { name: "Nebraskan Gooner", handle: "@nebaboratory", followers: "220K", expertise: "TA" },
+  { name: "Daan Crypto", handle: "@DaanCrypto", followers: "380K", expertise: "Trading" },
+  { name: "CryptoCred", handle: "@CryptoCred", followers: "290K", expertise: "TA" },
 ];
 
 const processSteps = [
