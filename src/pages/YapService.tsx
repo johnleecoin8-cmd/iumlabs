@@ -11,41 +11,26 @@ import seoulTech from "@/assets/backgrounds/seoul-tech-future.jpg";
 // Electric Cyan accent
 const ACCENT_COLOR = "#22D3EE";
 
-// Verified Crypto KOLs - Korean, Chinese, Japanese + Global
+// Verified Crypto KOLs with working Twitter profile pictures
 const cryptoKOLs = [
-  // 🇰🇷 Korean KOLs (2)
-  { name: "Nakju (낙주)", handle: "@nakjumon", followers: "18.7K", expertise: "Trading" },
-  { name: "Kim Goryeo (고려킴)", handle: "@goryeokim", followers: "10.4K", expertise: "Trading" },
+  // 🇰🇷 Korean KOLs (2) - verified handles
+  { name: "Nakju", handle: "@nakjumon", followers: "18.7K", expertise: "Trading" },
+  { name: "Goryeokim", handle: "@goryeokim", followers: "10.4K", expertise: "Trading" },
   
   // 🇨🇳 Chinese KOLs (5)
   { name: "KuiGas", handle: "@KuiGas", followers: "96K", expertise: "Research" },
   { name: "Jason Chen", handle: "@jason_chen998", followers: "90K", expertise: "Trading" },
-  { name: "Calman.eth", handle: "@CalmanBTC", followers: "70K", expertise: "BTC" },
-  { name: "孤鹤 (Lone Crane)", handle: "@zksgu", followers: "45K", expertise: "DeFi" },
-  { name: "CryptoMeow", handle: "@crypt0_meow", followers: "55K", expertise: "NFT" },
+  { name: "Calman", handle: "@CalmanBTC", followers: "70K", expertise: "BTC" },
+  { name: "Phyrex", handle: "@Phyrex_Ni", followers: "333K", expertise: "Data" },
+  { name: "Hebi", handle: "@hebi555", followers: "377K", expertise: "Trading" },
   
   // 🇯🇵 Japanese KOLs (4)
   { name: "Koji Higashi", handle: "@Coin_and_Peace", followers: "48K", expertise: "BTC" },
   { name: "DEG", handle: "@DEG_2020", followers: "32K", expertise: "Trading" },
-  { name: "Big Stone", handle: "@bigstonebtc", followers: "22K", expertise: "BTC" },
   { name: "miin", handle: "@NftPinuts", followers: "85K", expertise: "NFT" },
+  { name: "ikehaya", handle: "@IHayato", followers: "100K", expertise: "NFT" },
   
-  // 🌍 Global KOLs
-  { name: "CryptoGodJohn", handle: "@CryptoGodJohn", followers: "45K", expertise: "Trading" },
-  { name: "Posty", handle: "@PostyXBT", followers: "38K", expertise: "TA" },
-  { name: "DegenSpartan", handle: "@DegenSpartan", followers: "42K", expertise: "DeFi" },
-  { name: "Flood", handle: "@ThinkingUSD", followers: "35K", expertise: "Macro" },
-  { name: "Kano", handle: "@CryptoKano", followers: "28K", expertise: "BTC" },
-  { name: "CryptoTony", handle: "@CryptoTony__", followers: "48K", expertise: "TA" },
-  { name: "Thor Hartvigsen", handle: "@ThorHartvigsen", followers: "95K", expertise: "DeFi" },
-  { name: "Defi Edge", handle: "@thedefiedge", followers: "85K", expertise: "DeFi" },
-  { name: "Taiki Maeda", handle: "@TaikiMaeda2", followers: "80K", expertise: "DeFi" },
-  { name: "Pio", handle: "@Piovincenzo_", followers: "65K", expertise: "NFT" },
-  { name: "Ty Smith", handle: "@TySmithHQ", followers: "55K", expertise: "Marketing" },
-  { name: "CryptoBrekkie", handle: "@CryptoBrekkie", followers: "75K", expertise: "Art" },
-  { name: "Pierre Rochard", handle: "@pierre_crypt0", followers: "65K", expertise: "BTC" },
-  
-  // 🌍 Original Global KOLs
+  // 🌍 Global KOLs - All verified with profile pictures
   { name: "Ansem", handle: "@blknoiz06", followers: "520K", expertise: "Memes" },
   { name: "Murad", handle: "@MustStopMurad", followers: "280K", expertise: "Memes" },
   { name: "Pentoshi", handle: "@Pentosh1", followers: "610K", expertise: "Trading" },
@@ -53,18 +38,18 @@ const cryptoKOLs = [
   { name: "PlanB", handle: "@100trillionUSD", followers: "1.9M", expertise: "BTC" },
   { name: "Willy Woo", handle: "@woonomic", followers: "1.1M", expertise: "Data" },
   { name: "Vitalik", handle: "@VitalikButerin", followers: "5.5M", expertise: "ETH" },
-  { name: "Anthony Pompliano", handle: "@APompliano", followers: "1.7M", expertise: "BTC" },
+  { name: "Pomp", handle: "@APompliano", followers: "1.7M", expertise: "BTC" },
   { name: "Crypto Dog", handle: "@TheCryptoDog", followers: "750K", expertise: "Trading" },
   { name: "Arthur Hayes", handle: "@CryptoHayes", followers: "580K", expertise: "Macro" },
   { name: "Erik Voorhees", handle: "@ErikVoorhees", followers: "720K", expertise: "BTC" },
-  { name: "Mike Novogratz", handle: "@novogratz", followers: "450K", expertise: "Macro" },
-  { name: "Tyler Winklevoss", handle: "@tyler", followers: "1.1M", expertise: "Exchange" },
+  { name: "Novogratz", handle: "@novogratz", followers: "450K", expertise: "Macro" },
+  { name: "Tyler", handle: "@tyler", followers: "1.1M", expertise: "Exchange" },
   { name: "Dan Held", handle: "@danheld", followers: "650K", expertise: "BTC" },
   { name: "Scott Melker", handle: "@scottmelker", followers: "980K", expertise: "Trading" },
   { name: "Benjamin Cowen", handle: "@intocryptoverse", followers: "820K", expertise: "TA" },
-  { name: "David Gokhshtein", handle: "@davidgokhshtein", followers: "1.1M", expertise: "News" },
-  { name: "Anthony Sassano", handle: "@sassal0x", followers: "290K", expertise: "ETH" },
-  { name: "Peter McCormack", handle: "@PeterMcCormack", followers: "510K", expertise: "BTC" },
+  { name: "Gokhshtein", handle: "@davidgokhshtein", followers: "1.1M", expertise: "News" },
+  { name: "Sassano", handle: "@sassal0x", followers: "290K", expertise: "ETH" },
+  { name: "McCormack", handle: "@PeterMcCormack", followers: "510K", expertise: "BTC" },
   { name: "Ivan on Tech", handle: "@IvanOnTech", followers: "510K", expertise: "Education" },
   { name: "Tone Vays", handle: "@ToneVays", followers: "280K", expertise: "Trading" },
   { name: "Nick Szabo", handle: "@NickSzabo4", followers: "340K", expertise: "BTC" },
@@ -75,7 +60,7 @@ const cryptoKOLs = [
   { name: "ZachXBT", handle: "@zachxbt", followers: "650K", expertise: "On-chain" },
   { name: "CryptoCapo", handle: "@CryptoCapo_", followers: "780K", expertise: "TA" },
   { name: "CredibleCrypto", handle: "@CredibleCrypto", followers: "410K", expertise: "TA" },
-  { name: "Crypto Bird", handle: "@crypto_birb", followers: "410K", expertise: "TA" },
+  { name: "Crypto Birb", handle: "@crypto_birb", followers: "410K", expertise: "TA" },
   { name: "Altcoin Psycho", handle: "@AltcoinPsycho", followers: "295K", expertise: "Alt" },
   { name: "Trader XO", handle: "@TraderXO", followers: "290K", expertise: "TA" },
   { name: "SmartContracter", handle: "@SmartContracter", followers: "265K", expertise: "Trading" },
@@ -91,8 +76,11 @@ const cryptoKOLs = [
   { name: "Loomdart", handle: "@loomdart", followers: "380K", expertise: "DeFi" },
   { name: "Fiskantes", handle: "@Fiskantes", followers: "185K", expertise: "VC" },
   { name: "Lark Davis", handle: "@TheCryptoLark", followers: "520K", expertise: "Education" },
-  { name: "Carl Runefelt", handle: "@TheMoonCarl", followers: "680K", expertise: "Trading" },
+  { name: "TheMoonCarl", handle: "@TheMoonCarl", followers: "680K", expertise: "Trading" },
   { name: "Gareth Soloway", handle: "@GarethSoloway", followers: "310K", expertise: "TA" },
+  { name: "Thor", handle: "@ThorHartvigsen", followers: "95K", expertise: "DeFi" },
+  { name: "Defi Edge", handle: "@thedefiedge", followers: "85K", expertise: "DeFi" },
+  { name: "Taiki Maeda", handle: "@TaikiMaeda2", followers: "80K", expertise: "DeFi" },
 ];
 
 const processSteps = [
