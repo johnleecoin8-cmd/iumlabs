@@ -16,131 +16,149 @@ const Index = () => {
   useScrollReveal();
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-white">
       <Navbar />
       
       {/* Hero */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]" id="hero">
-        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+      <main className="p-1 sm:p-2 md:p-3 bg-white" id="hero">
+        <div className="rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden">
           <HeroSection />
         </div>
       </main>
       
       {/* Services */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="services">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
+      <section className="scroll-reveal px-1 sm:px-2 md:px-3 pb-1 sm:pb-2 md:pb-3 bg-white" id="services">
+        <div className="bg-[#0A0A0A] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden">
+          <div className="border-b border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What We Do</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What We Do</span>
           </div>
           <ServicesSection />
         </div>
       </section>
       
       {/* Process */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="process">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
+      <section className="scroll-reveal px-1 sm:px-2 md:px-3 pb-1 sm:pb-2 md:pb-3 bg-white" id="process">
+        <div className="bg-[#0A0A0A] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden">
+          <div className="border-b border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
           </div>
           <ProcessSection />
         </div>
       </section>
       
       {/* Cases */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="cases">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
+      <section className="scroll-reveal px-1 sm:px-2 md:px-3 pb-1 sm:pb-2 md:pb-3 bg-white" id="cases">
+        <div className="bg-[#0A0A0A] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden">
+          <div className="border-b border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Work</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Work</span>
           </div>
           <CasesSection />
         </div>
       </section>
       
       {/* About */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="why-choose-us">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
+      <section className="scroll-reveal px-1 sm:px-2 md:px-3 pb-1 sm:pb-2 md:pb-3 bg-white" id="why-choose-us">
+        <div className="bg-[#0A0A0A] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden">
+          <div className="border-b border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Why Ium Labs</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Why Ium Labs</span>
           </div>
           <WhyChooseUsSection />
         </div>
       </section>
       
       {/* Gallery */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="gallery">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Gallery</h2>
+      <section className="scroll-reveal px-1 sm:px-2 md:px-3 pb-1 sm:pb-2 md:pb-3 bg-white" id="gallery">
+        <div className="bg-[#0A0A0A] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden">
+          <div className="border-b border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Gallery</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Campaign Archive</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Campaign Archive</span>
           </div>
           <FilmstripGallerySection />
         </div>
       </section>
       
       {/* Media Partners - Marquee Bar */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="media-partners">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Media Partners</h2>
+      <section className="scroll-reveal px-1 sm:px-2 md:px-3 pb-1 sm:pb-2 md:pb-3 bg-white" id="media-partners">
+        <div className="bg-[#0A0A0A] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden">
+          <div className="border-b border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Media Partners</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">As Featured In</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">As Featured In</span>
           </div>
           <MediaPartnersSection />
         </div>
       </section>
       
       {/* Insights */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="insights">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">07</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>
+      <section className="scroll-reveal px-1 sm:px-2 md:px-3 pb-1 sm:pb-2 md:pb-3 bg-white" id="insights">
+        <div className="bg-[#0A0A0A] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden">
+          <div className="border-b border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">07</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Research</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Research</span>
           </div>
           <InsightsSection />
         </div>
       </section>
       
       {/* Contact */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="contact">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">08</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Contact</h2>
+      <section className="scroll-reveal px-1 sm:px-2 md:px-3 pb-1 sm:pb-2 md:pb-3 bg-white" id="contact">
+        <div className="bg-[#0A0A0A] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden">
+          <div className="border-b border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">08</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Contact</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Get Started</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Get Started</span>
           </div>
           <CTASection />
         </div>
       </section>
       
       {/* Footer */}
-      <div className="border-t border-white/10">
-        <Footer />
+      <div className="px-1 sm:px-2 md:px-3 pb-1 sm:pb-2 md:pb-3 bg-white">
+        <div className="bg-[#0A0A0A] rounded-xl sm:rounded-2xl md:rounded-3xl overflow-hidden">
+          <Footer />
+        </div>
       </div>
       
       <FloatingContactButton />
