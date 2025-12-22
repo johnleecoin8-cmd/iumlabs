@@ -208,74 +208,89 @@ const Services = () => {
         </div>
       </section>
       
-      {/* Main 2-Column Layout - Emerald Theme */}
-      <main className="flex flex-col lg:flex-row max-w-7xl mx-auto border-t border-emerald-500/20">
-        {/* Left: Service Grid (2/3) */}
-        <div className="w-full lg:w-2/3 border-r-0 lg:border-r border-white/10">
-          <div className="grid grid-cols-1 md:grid-cols-2">
-            {services.map((service, index) => (
-              <ServiceCard key={service.title} service={service} index={index} />
-            ))}
+      {/* Services Section */}
+      <section className="scroll-reveal bg-[#0A0A0A]">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-emerald-400 font-mono tracking-widest">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
+            </div>
+            <span className="text-xs text-emerald-400 tracking-wider hidden sm:block px-3 py-1 border border-emerald-400/40 rounded-full">
+              What We Do
+            </span>
+          </div>
+
+          {/* Main 2-Column Layout */}
+          <div className="flex flex-col lg:flex-row max-w-7xl mx-auto">
+            {/* Left: Service Grid (2/3) */}
+            <div className="w-full lg:w-2/3 border-r-0 lg:border-r border-white/10">
+              <div className="grid grid-cols-1 md:grid-cols-2">
+                {services.map((service, index) => (
+                  <ServiceCard key={service.title} service={service} index={index} />
+                ))}
+              </div>
+            </div>
+            
+            {/* Right: Sticky CTA Panel (1/3) */}
+            <div className="w-full lg:w-1/3">
+              <div className="lg:sticky lg:top-24 p-8 md:p-12">
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+                    Why CryptoBridge
+                  </h2>
+                  
+                  <p className="text-white/50 text-sm md:text-base leading-relaxed mb-8">
+                    We're the Korean Web3 marketing agency that builds the bridge between your project and the Korean market. Founded by former executives from Binance and KuCoin.
+                  </p>
+                  
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Link 
+                      to="/contact"
+                      className="group inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 text-sm font-medium tracking-wide hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-emerald-500/30 rounded-lg"
+                    >
+                      CONNECT WITH US
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </motion.div>
+                  
+                  {/* 3D Gold Shape */}
+                  <div className="mt-12 md:mt-16">
+                    <GoldShape />
+                  </div>
+                  
+                  {/* Stats */}
+                  <div className="mt-12 grid grid-cols-2 gap-6">
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.4 }}
+                    >
+                      <div className="text-2xl md:text-3xl font-bold text-white">18+</div>
+                      <div className="text-sm text-white/50">Projects Launched</div>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      <div className="text-2xl md:text-3xl font-bold text-white">120+</div>
+                      <div className="text-sm text-white/50">KOL Network</div>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
-        
-        {/* Right: Sticky CTA Panel (1/3) */}
-        <div className="w-full lg:w-1/3">
-          <div className="lg:sticky lg:top-24 p-8 md:p-12">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                Why CryptoBridge
-              </h2>
-              
-              <p className="text-white/50 text-sm md:text-base leading-relaxed mb-8">
-                We're the Korean Web3 marketing agency that builds the bridge between your project and the Korean market. Founded by former executives from Binance and KuCoin.
-              </p>
-              
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Link 
-                  to="/contact"
-                  className="group inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 text-sm font-medium tracking-wide hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-emerald-500/30 rounded-lg"
-                >
-                  CONNECT WITH US
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </motion.div>
-              
-              {/* 3D Gold Shape */}
-              <div className="mt-12 md:mt-16">
-                <GoldShape />
-              </div>
-              
-              {/* Stats */}
-              <div className="mt-12 grid grid-cols-2 gap-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.4 }}
-                >
-                  <div className="text-2xl md:text-3xl font-bold text-white">18+</div>
-                  <div className="text-sm text-white/50">Projects Launched</div>
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.5 }}
-                >
-                  <div className="text-2xl md:text-3xl font-bold text-white">120+</div>
-                  <div className="text-sm text-white/50">KOL Network</div>
-                </motion.div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </main>
+      </section>
       
       <Footer />
     </div>

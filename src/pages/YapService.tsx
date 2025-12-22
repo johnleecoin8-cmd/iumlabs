@@ -353,22 +353,24 @@ const YapService = () => {
         </section>
 
         {/* Creator Network Section */}
-        <section 
-          className="relative py-20"
-          style={{ background: `linear-gradient(to bottom, #0A0A0A, ${ACCENT_COLOR}08, #0A0A0A)` }}
-        >
-          <div 
-            className="absolute top-0 left-0 right-0 h-px"
-            style={{ background: `linear-gradient(to right, transparent, ${ACCENT_COLOR}60, transparent)` }}
-          />
-
-          <div className="container mx-auto px-6 lg:px-16">
-            <div className="flex items-center gap-3 mb-12">
-              <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>01</span>
-              <h2 className="text-2xl md:text-3xl font-medium text-white">Creator Network</h2>
+        <section className="scroll-reveal bg-[#0A0A0A]">
+          <div className="border-t border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs font-mono tracking-widest" style={{ color: ACCENT_COLOR }}>01</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Creator Network</h2>
+              </div>
+              <span 
+                className="text-xs tracking-wider hidden sm:block px-3 py-1 border rounded-full"
+                style={{ color: ACCENT_COLOR, borderColor: `${ACCENT_COLOR}40` }}
+              >
+                Overview
+              </span>
             </div>
 
-            {/* Network Visualization */}
+            <div className="py-16 md:py-20">
+              <div className="container mx-auto px-6 lg:px-16">
+                {/* Network Visualization */}
             <div className="relative mb-16">
               <div className="grid grid-cols-6 md:grid-cols-10 gap-2 md:gap-3">
                 {Array.from({ length: 60 }).map((_, i) => {
@@ -508,6 +510,8 @@ const YapService = () => {
                     <Waves className="w-10 h-10" style={{ color: ACCENT_COLOR }} />
                   </div>
                 </div>
+              </div>
+            </div>
               </div>
             </div>
           </div>
