@@ -66,8 +66,6 @@ const cryptoKOLs = [
   { name: "CryptoTony", handle: "@CryptoTony__", followers: "48K", expertise: "TA" },
   { name: "Rager", handle: "@Raboratory", followers: "125K", expertise: "Trading" },
   { name: "Bluntz", handle: "@Bluntz_Capital", followers: "180K", expertise: "TA" },
-  { name: "Nunya Bizniz", handle: "@Nunya_Bizniz", followers: "165K", expertise: "TA" },
-  { name: "ColdBloodShill", handle: "@ColdBloodShill", followers: "145K", expertise: "Trading" },
 ];
 
 const processSteps = [
@@ -295,8 +293,8 @@ const YapService = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="hidden lg:block"
               >
-                <div className="grid grid-cols-4 gap-3">
-                  {cryptoKOLs.slice(0, 16).map((kol, index) => (
+                <div className="grid grid-cols-5 gap-3">
+                  {cryptoKOLs.slice(0, 20).map((kol, index) => (
                     <motion.a
                       key={index}
                       href={`https://x.com/${kol.handle.replace('@', '')}`}
