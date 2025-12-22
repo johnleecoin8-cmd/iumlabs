@@ -64,7 +64,11 @@ const BlueShape = () => (
   </motion.div>
 );
 
-const InsightsSection = () => {
+interface InsightsSectionProps {
+  bgColor?: string;
+}
+
+const InsightsSection = ({ bgColor = "#0A0A0A" }: InsightsSectionProps) => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -90,7 +94,7 @@ const InsightsSection = () => {
   };
 
   return (
-    <section className="bg-[#0A0A0A]">
+    <section style={{ backgroundColor: bgColor }}>
       <div className="flex flex-col lg:flex-row">
         {/* Left: Articles List */}
         <div className="w-full lg:w-2/3 lg:border-r border-white/10">

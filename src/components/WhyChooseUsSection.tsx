@@ -3,9 +3,13 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import teamPhoto from '@/assets/team-photo.png';
 
-const WhyChooseUsSection = () => {
+interface WhyChooseUsSectionProps {
+  bgColor?: string;
+}
+
+const WhyChooseUsSection = ({ bgColor = "#0A0A0A" }: WhyChooseUsSectionProps) => {
   return (
-    <section className="bg-[#0A0A0A]">
+    <section style={{ backgroundColor: bgColor }}>
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* Left: Image */}
         <motion.div

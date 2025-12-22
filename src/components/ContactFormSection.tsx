@@ -16,11 +16,13 @@ const budgetOptions = [
 interface ContactFormSectionProps {
   sectionNumber?: string;
   accentColor?: string;
+  bgColor?: string;
 }
 
 const ContactFormSection = ({ 
   sectionNumber = "08", 
-  accentColor = "white" 
+  accentColor = "white",
+  bgColor = "#0A0A0A"
 }: ContactFormSectionProps) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -91,8 +93,8 @@ const ContactFormSection = ({
   };
 
   return (
-    <section className="bg-[#0A0A0A]">
-      <div className="border-t border-white/10">
+    <section style={{ backgroundColor: bgColor }}>
+      <div className="border-t border-white/5">
         {/* Section Header */}
         <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
           <div className="flex items-baseline gap-6 md:gap-10">

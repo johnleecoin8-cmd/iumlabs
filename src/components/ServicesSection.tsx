@@ -107,9 +107,13 @@ const GoldShape = () => (
   </motion.div>
 );
 
-const ServicesSection = () => {
+interface ServicesSectionProps {
+  bgColor?: string;
+}
+
+const ServicesSection = ({ bgColor = "#0A0A0A" }: ServicesSectionProps) => {
   return (
-    <section className="bg-[#0A0A0A]">
+    <section style={{ backgroundColor: bgColor }}>
       <div className="flex flex-col lg:flex-row">
         {/* Left: Services Grid */}
         <div className="w-full lg:w-2/3 lg:border-r border-white/10">

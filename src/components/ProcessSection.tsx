@@ -24,9 +24,13 @@ const phases = [
   }
 ];
 
-const ProcessSection = () => {
+interface ProcessSectionProps {
+  bgColor?: string;
+}
+
+const ProcessSection = ({ bgColor = "#0A0A0A" }: ProcessSectionProps) => {
   return (
-    <section className="bg-[#0A0A0A]">
+    <section style={{ backgroundColor: bgColor }}>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {phases.map((phase, index) => {
           const Icon = phase.icon;

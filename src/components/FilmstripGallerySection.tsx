@@ -29,9 +29,13 @@ const campaignImages = [
   { src: synfuturesBillboard, alt: "SynFutures", title: "SynFutures", subtitle: "Gangnam Billboard" },
 ];
 
-const FilmstripGallerySection = () => {
+interface FilmstripGallerySectionProps {
+  bgColor?: string;
+}
+
+const FilmstripGallerySection = ({ bgColor = "#0A0A0A" }: FilmstripGallerySectionProps) => {
   return (
-    <section className="bg-[#0A0A0A]">
+    <section style={{ backgroundColor: bgColor }}>
       <div className="flex flex-col lg:flex-row">
         {/* Left: Gallery Grid */}
         <div className="w-full lg:w-2/3 lg:border-r border-white/10">
