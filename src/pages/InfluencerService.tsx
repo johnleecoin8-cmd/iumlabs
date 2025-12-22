@@ -15,8 +15,9 @@ const themeConfig = {
 
 // Famous Crypto KOLs with DiceBear avatars
 const kolProfiles = [
-  { name: "PlanB", handle: "@100trillionUSD", followers: "1.9M", tier: "platinum", expertise: "BTC Analytics" },
-  { name: "Willy Woo", handle: "@woonomic", followers: "1.1M", tier: "platinum", expertise: "On-chain Data" },
+  { name: "CryptoGodJohn", handle: "@CryptoGodJohn", followers: "45K", tier: "bronze", expertise: "Trading" },
+  { name: "Posty", handle: "@PostyXBT", followers: "38K", tier: "bronze", expertise: "TA" },
+  { name: "DegenSpartan", handle: "@DegenSpartan", followers: "42K", tier: "bronze", expertise: "DeFi" },
   { name: "Cobie", handle: "@colobie", followers: "800K", tier: "platinum", expertise: "Trading" },
   { name: "Crypto Dog", handle: "@TheCryptoDog", followers: "750K", tier: "gold", expertise: "Swing Trading" },
   { name: "ZachXBT", handle: "@zachxbt", followers: "650K", tier: "gold", expertise: "Investigation" },
@@ -25,7 +26,6 @@ const kolProfiles = [
   { name: "Arthur Hayes", handle: "@CryptoHayes", followers: "580K", tier: "gold", expertise: "Macro" },
   { name: "Ansem", handle: "@blknoiz06", followers: "520K", tier: "gold", expertise: "Meme Coins" },
   { name: "Punk6529", handle: "@punk6529", followers: "510K", tier: "gold", expertise: "NFT Culture" },
-  { name: "Irene Zhao", handle: "@IreneZhao_", followers: "480K", tier: "silver", expertise: "Web3 Social" },
   { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", tier: "silver", expertise: "Technical Analysis" },
 ];
 
@@ -41,10 +41,8 @@ const extendedKOLs = [
   { name: "Altcoin Psycho", handle: "@AltcoinPsycho", followers: "295K", expertise: "Alt" },
   { name: "GCR", handle: "@GCRClassic", followers: "290K", expertise: "Macro" },
   { name: "Route 2 FI", handle: "@Route2FI", followers: "280K", expertise: "DeFi" },
-  { name: "Trader Joe", handle: "@CryptoGodJohn", followers: "275K", expertise: "Trading" },
   { name: "DeFi Dad", handle: "@DeFi_Dad", followers: "240K", expertise: "DeFi" },
   { name: "Cred", handle: "@CryptoCred", followers: "230K", expertise: "TA" },
-  { name: "Degen Spartan", handle: "@DegenSpartan", followers: "220K", expertise: "Yield" },
   { name: "Satoshi Flipper", handle: "@SatoshiFlipper", followers: "210K", expertise: "TA" },
   { name: "Light", handle: "@LightCrypto", followers: "195K", expertise: "Trading" },
   { name: "CryptoGarga", handle: "@CryptoGarga", followers: "195K", expertise: "NFT" },
@@ -58,7 +56,9 @@ const extendedKOLs = [
   { name: "Thor Hartvigsen", handle: "@ThorHartvigsen", followers: "125K", expertise: "DeFi" },
   { name: "Rune", handle: "@RuneKek", followers: "120K", expertise: "Memes" },
   { name: "Smol Dingus", handle: "@SmolDingus", followers: "95K", expertise: "Memes" },
-  { name: "Sandra", handle: "@sandra_leadswf", followers: "85K", expertise: "Web3" },
+  { name: "Flood", handle: "@ThinkingUSD", followers: "35K", expertise: "Macro" },
+  { name: "Kano", handle: "@CryptoKano", followers: "28K", expertise: "BTC" },
+  { name: "CryptoTony", handle: "@CryptoTony__", followers: "48K", expertise: "TA" },
 ];
 
 const networkNodes = [
