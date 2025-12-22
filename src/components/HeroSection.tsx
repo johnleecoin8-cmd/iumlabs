@@ -124,26 +124,25 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Unified Inter font with color contrast */}
           <motion.h1 
-            className="font-sans text-[9vw] sm:text-[8vw] md:text-[7vw] lg:text-[6vw] font-bold leading-[0.9] tracking-[-0.02em] mb-8 sm:mb-10 mt-8 sm:mt-12"
+            className="font-sans text-[8vw] sm:text-[7vw] md:text-[5.5vw] lg:text-[4.5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-white">Your </span>
-            <span className="text-white/90">Web 3.0 Ecosystem</span>
+            <span className="text-white">The Intelligence Layer</span>
             <br />
-            <span className="text-white/90">Marketing </span>
-            <span className="text-white">Agency</span>
+            <span className="text-white/90">for Your </span>
+            <span className="text-white">Korean Web3 Growth</span>
           </motion.h1>
 
           {/* Subtext - Larger and more prominent */}
           <motion.p 
-            className="text-lg sm:text-xl md:text-2xl text-white/50 max-w-2xl mx-auto mb-8 font-light tracking-wide"
+            className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            We build the bridge for your project to enter the Korean market with <span className="text-white font-medium">Multi-channel marketing</span>.
+            We combine <span className="text-white font-medium">deep-dive research labs</span> with <span className="text-white font-medium">high-impact marketing execution</span> to ensure your project thrives in the Korean market.
           </motion.p>
 
           {/* CTA Button */}

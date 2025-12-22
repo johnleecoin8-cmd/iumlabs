@@ -52,6 +52,28 @@
     }
     </script>
     
+    <!-- WebSite Schema for Search Engines -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Ium Labs",
+      "alternateName": "이음 랩스",
+      "url": "https://iumlabs.io",
+      "description": "Global Web3 GTM agency and research lab driving success in the Korean market.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Ium Labs",
+        "logo": "https://iumlabs.io/favicon.png"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://iumlabs.io/research?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
     <!-- SiteNavigationElement Schema for Sitelinks -->
     <script type="application/ld+json">
     {
@@ -84,13 +106,13 @@
         },
         {
           "@type": "SiteNavigationElement",
-          "name": "Community Building",
-          "url": "https://iumlabs.io/services/community"
+          "name": "Influencer Marketing",
+          "url": "https://iumlabs.io/services/influencer"
         },
         {
           "@type": "SiteNavigationElement",
-          "name": "PR & Media",
-          "url": "https://iumlabs.io/services/pr"
+          "name": "Community Growth",
+          "url": "https://iumlabs.io/services/community"
         }
       ]
     }
