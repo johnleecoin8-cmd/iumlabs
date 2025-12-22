@@ -15,7 +15,7 @@ const WhyChooseUsSection = () => {
           transition={{ duration: 0.6 }}
           className="lg:border-r border-white/10"
         >
-          <div className="aspect-[4/3] lg:aspect-auto lg:h-full overflow-hidden">
+          <div className="aspect-[4/3] overflow-hidden">
             <img
               src={teamPhoto}
               alt="Ium Labs Team"
@@ -32,7 +32,7 @@ const WhyChooseUsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="p-8 md:p-12 lg:p-16 flex-1 flex flex-col justify-center border-b border-white/10"
+            className="p-6 md:p-8 lg:p-10 flex-1 flex flex-col justify-center border-b border-white/10"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               About Us
@@ -51,9 +51,9 @@ const WhyChooseUsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="p-8 md:p-12 lg:p-16"
+            className="p-6 md:p-8 lg:p-10"
           >
-            <div className="grid grid-cols-2 gap-8 mb-8">
+            <div className="grid grid-cols-2 gap-6 mb-6">
               <div>
                 <p className="text-3xl md:text-4xl font-bold text-white">18+</p>
                 <p className="text-white/50 text-sm">Projects Launched</p>
