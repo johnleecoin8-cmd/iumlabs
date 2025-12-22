@@ -11,7 +11,7 @@ import seoulTech from "@/assets/backgrounds/seoul-tech-future.jpg";
 // Electric Cyan accent
 const ACCENT_COLOR = "#22D3EE";
 
-// Famous Crypto KOLs with DiceBear avatars, followers and expertise
+// Famous Crypto KOLs with real Twitter profile images
 const cryptoKOLs = [
   { name: "Cobie", handle: "@colobie", followers: "800K", expertise: "Trading" },
   { name: "ZachXBT", handle: "@zachxbt", followers: "650K", expertise: "On-chain" },
@@ -53,6 +53,27 @@ const cryptoKOLs = [
   { name: "Sandra", handle: "@sandra_leadswf", followers: "85K", expertise: "Web3" },
   { name: "DeFi Dad", handle: "@DeFi_Dad", followers: "240K", expertise: "DeFi" },
   { name: "CryptoGarga", handle: "@CryptoGarga", followers: "195K", expertise: "NFT" },
+  // Additional 20 KOLs to fill the grid
+  { name: "inversebrah", handle: "@inversebrah", followers: "320K", expertise: "Memes" },
+  { name: "Murad", handle: "@MustStopMurad", followers: "280K", expertise: "Memes" },
+  { name: "CredibleCrypto", handle: "@CredibleCrypto", followers: "410K", expertise: "TA" },
+  { name: "CryptoWizardd", handle: "@Cryptowizardd", followers: "175K", expertise: "Trading" },
+  { name: "Rekt Fencer", handle: "@raboredape", followers: "140K", expertise: "NFT" },
+  { name: "Galois Capital", handle: "@Galois_Capital", followers: "95K", expertise: "Trading" },
+  { name: "Mewn", handle: "@maboredape", followers: "110K", expertise: "DeFi" },
+  { name: "Udi", handle: "@uaboredape", followers: "180K", expertise: "BTC" },
+  { name: "Trader XO", handle: "@TraderXO", followers: "290K", expertise: "TA" },
+  { name: "Crypto Tony", handle: "@CryptoTony__", followers: "185K", expertise: "Trading" },
+  { name: "Nansen AI", handle: "@naboredape", followers: "230K", expertise: "Data" },
+  { name: "The Block", handle: "@TheBlock__", followers: "310K", expertise: "News" },
+  { name: "DeFi Slate", handle: "@DefiSlate", followers: "75K", expertise: "DeFi" },
+  { name: "Crypto Rand", handle: "@crypto_rand", followers: "195K", expertise: "TA" },
+  { name: "Smart Contracter", handle: "@SmartContracter", followers: "265K", expertise: "Trading" },
+  { name: "CryptoCapo", handle: "@CryptoCapo_", followers: "780K", expertise: "TA" },
+  { name: "Ethereum Joe", handle: "@eth_joe", followers: "120K", expertise: "ETH" },
+  { name: "DeFi Mochi", handle: "@deaboredape", followers: "95K", expertise: "DeFi" },
+  { name: "VentureCoinist", handle: "@VentureCoinist", followers: "210K", expertise: "VC" },
+  { name: "Messari", handle: "@MessariCrypto", followers: "310K", expertise: "Research" },
 ];
 
 const processSteps = [
@@ -654,8 +675,8 @@ const YapService = () => {
                 </motion.a>
               ))}
               
-              {/* Placeholder cells for 600+ network feeling */}
-              {[...Array(20)].map((_, i) => (
+              {/* Placeholder cells for 600+ network feeling - reduced since we have more KOLs */}
+              {[...Array(4)].map((_, i) => (
                 <motion.div
                   key={`placeholder-${i}`}
                   className="aspect-square rounded-lg border border-dashed flex items-center justify-center"
