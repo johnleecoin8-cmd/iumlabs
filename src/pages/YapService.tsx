@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight, Volume2, Users, Zap, FileText, Radio, Waves, MessageCircle, Target } from "lucide-react";
@@ -10,6 +10,50 @@ import seoulTech from "@/assets/backgrounds/seoul-tech-future.jpg";
 
 // Electric Cyan accent
 const ACCENT_COLOR = "#22D3EE";
+
+// Famous Crypto KOLs with DiceBear avatars
+const cryptoKOLs = [
+  { name: "Cobie", handle: "@colobie" },
+  { name: "ZachXBT", handle: "@zachxbt" },
+  { name: "Hsaka", handle: "@HsakaTrades" },
+  { name: "Loomdart", handle: "@loomdart" },
+  { name: "Ansem", handle: "@blknoiz06" },
+  { name: "GCR", handle: "@GCRClassic" },
+  { name: "CL", handle: "@CL207" },
+  { name: "Pentoshi", handle: "@Pentosh1" },
+  { name: "Crypto Cobain", handle: "@CryptoCobain" },
+  { name: "Route 2 FI", handle: "@Route2FI" },
+  { name: "Degen Spartan", handle: "@DegenSpartan" },
+  { name: "Light", handle: "@LightCrypto" },
+  { name: "Arthur Hayes", handle: "@CryptoHayes" },
+  { name: "Tetranode", handle: "@Tetranode" },
+  { name: "Mando", handle: "@TheCryptoMando" },
+  { name: "Cred", handle: "@CryptoCred" },
+  { name: "Tyler D", handle: "@Tyler_Did_It" },
+  { name: "Rune", handle: "@RuneKek" },
+  { name: "Fiskantes", handle: "@Fiskantes" },
+  { name: "Larry Cermak", handle: "@lawmaster" },
+  { name: "Frank", handle: "@frankdegods" },
+  { name: "Punk6529", handle: "@punk6529" },
+  { name: "Irene Zhao", handle: "@IreneZhao_" },
+  { name: "Andrew Kang", handle: "@Rewkang" },
+  { name: "Trader Joe", handle: "@CryptoGodJohn" },
+  { name: "Satoshi Flipper", handle: "@SatoshiFlipper" },
+  { name: "Kaleo", handle: "@CryptoKaleo" },
+  { name: "Altcoin Psycho", handle: "@AltcoinPsycho" },
+  { name: "Defi Edge", handle: "@thedefiedge" },
+  { name: "Smol Dingus", handle: "@SmolDingus" },
+  { name: "Willy Woo", handle: "@woonomic" },
+  { name: "PlanB", handle: "@100trillionUSD" },
+  { name: "Crypto Dog", handle: "@TheCryptoDog" },
+  { name: "Crypto Bird", handle: "@crypto_birb" },
+  { name: "Thor Hartvigsen", handle: "@ThorHartvigsen" },
+  { name: "Taiki Maeda", handle: "@TaikiMaeda2" },
+  { name: "DCF GOD", handle: "@dcaboredape" },
+  { name: "Sandra", handle: "@sandra_leadswf" },
+  { name: "DeFi Dad", handle: "@DeFi_Dad" },
+  { name: "CryptoGarga", handle: "@CryptoGarga" },
+];
 
 const processSteps = [
   {
@@ -248,31 +292,63 @@ const YapService = () => {
             {/* Network Visualization */}
             <div className="relative mb-16">
               <div className="grid grid-cols-6 md:grid-cols-10 gap-2 md:gap-3">
-                {Array.from({ length: 60 }).map((_, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.01 }}
-                    className="aspect-square rounded-lg flex items-center justify-center relative group cursor-pointer"
-                    style={{ 
-                      backgroundColor: `${ACCENT_COLOR}${Math.random() > 0.7 ? '30' : '10'}`,
-                      border: `1px solid ${ACCENT_COLOR}${Math.random() > 0.8 ? '40' : '20'}`,
-                    }}
-                  >
-                    <Users className="w-4 h-4 text-white/30 group-hover:text-white/60 transition-colors" />
-                    {/* Pulse effect on random cells */}
-                    {Math.random() > 0.85 && (
-                      <motion.div
-                        className="absolute inset-0 rounded-lg"
-                        style={{ backgroundColor: ACCENT_COLOR }}
-                        animate={{ opacity: [0.3, 0, 0.3] }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                      />
-                    )}
-                  </motion.div>
-                ))}
+                {Array.from({ length: 60 }).map((_, i) => {
+                  const kol = i < cryptoKOLs.length ? cryptoKOLs[i] : null;
+                  const hasKol = kol !== null;
+                  const avatarUrl = hasKol 
+                    ? `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`
+                    : null;
+                  
+                  return (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.015 }}
+                      className="aspect-square rounded-lg flex items-center justify-center relative group cursor-pointer overflow-hidden"
+                      style={{ 
+                        backgroundColor: hasKol ? '#0a0a0a' : `${ACCENT_COLOR}10`,
+                        border: `1px solid ${hasKol ? ACCENT_COLOR + '60' : ACCENT_COLOR + '20'}`,
+                      }}
+                    >
+                      {hasKol ? (
+                        <>
+                          <img 
+                            src={avatarUrl!}
+                            alt={kol.name}
+                            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                          />
+                          {/* Hover overlay with name */}
+                          <div 
+                            className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-1"
+                          >
+                            <span className="text-[8px] md:text-[10px] font-medium text-white text-center leading-tight">{kol.name}</span>
+                            <span className="text-[6px] md:text-[8px] text-cyan-400 text-center">{kol.handle}</span>
+                          </div>
+                          {/* Glow effect on hover */}
+                          <div 
+                            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                            style={{ 
+                              boxShadow: `inset 0 0 20px ${ACCENT_COLOR}40, 0 0 15px ${ACCENT_COLOR}30` 
+                            }}
+                          />
+                        </>
+                      ) : (
+                        <Users className="w-4 h-4 text-white/20 group-hover:text-white/40 transition-colors" />
+                      )}
+                      {/* Pulse effect on some KOL cells */}
+                      {hasKol && i % 7 === 0 && (
+                        <motion.div
+                          className="absolute inset-0 rounded-lg pointer-events-none"
+                          style={{ border: `2px solid ${ACCENT_COLOR}` }}
+                          animate={{ opacity: [0.6, 0, 0.6] }}
+                          transition={{ duration: 2, repeat: Infinity, delay: i * 0.1 }}
+                        />
+                      )}
+                    </motion.div>
+                  );
+                })}
               </div>
 
               {/* Center Badge */}
