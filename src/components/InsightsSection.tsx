@@ -130,7 +130,7 @@ const InsightsSection = () => {
           ))}
 
           {/* View All Link */}
-          <div className="px-8 md:px-10 py-4 border-t border-white/10">
+          <div className="px-8 md:px-10 py-1 border-t border-white/10">
             <Link
               to="/research"
               className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
