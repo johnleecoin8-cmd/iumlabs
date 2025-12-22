@@ -102,7 +102,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
       <Link
         to={`/projects/${slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/5 hover:shadow-lg hover:shadow-white/5 ${
+        className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/[0.03] hover:shadow-lg hover:shadow-white/5 ${
           !isRightColumn ? "border-r border-white/5" : ""
         } ${!isLastRow ? "border-b border-white/5" : ""}`}
       >
