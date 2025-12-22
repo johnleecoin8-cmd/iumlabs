@@ -11,48 +11,48 @@ import seoulTech from "@/assets/backgrounds/seoul-tech-future.jpg";
 // Electric Cyan accent
 const ACCENT_COLOR = "#22D3EE";
 
-// Famous Crypto KOLs with DiceBear avatars
+// Famous Crypto KOLs with DiceBear avatars, followers and expertise
 const cryptoKOLs = [
-  { name: "Cobie", handle: "@colobie" },
-  { name: "ZachXBT", handle: "@zachxbt" },
-  { name: "Hsaka", handle: "@HsakaTrades" },
-  { name: "Loomdart", handle: "@loomdart" },
-  { name: "Ansem", handle: "@blknoiz06" },
-  { name: "GCR", handle: "@GCRClassic" },
-  { name: "CL", handle: "@CL207" },
-  { name: "Pentoshi", handle: "@Pentosh1" },
-  { name: "Crypto Cobain", handle: "@CryptoCobain" },
-  { name: "Route 2 FI", handle: "@Route2FI" },
-  { name: "Degen Spartan", handle: "@DegenSpartan" },
-  { name: "Light", handle: "@LightCrypto" },
-  { name: "Arthur Hayes", handle: "@CryptoHayes" },
-  { name: "Tetranode", handle: "@Tetranode" },
-  { name: "Mando", handle: "@TheCryptoMando" },
-  { name: "Cred", handle: "@CryptoCred" },
-  { name: "Tyler D", handle: "@Tyler_Did_It" },
-  { name: "Rune", handle: "@RuneKek" },
-  { name: "Fiskantes", handle: "@Fiskantes" },
-  { name: "Larry Cermak", handle: "@lawmaster" },
-  { name: "Frank", handle: "@frankdegods" },
-  { name: "Punk6529", handle: "@punk6529" },
-  { name: "Irene Zhao", handle: "@IreneZhao_" },
-  { name: "Andrew Kang", handle: "@Rewkang" },
-  { name: "Trader Joe", handle: "@CryptoGodJohn" },
-  { name: "Satoshi Flipper", handle: "@SatoshiFlipper" },
-  { name: "Kaleo", handle: "@CryptoKaleo" },
-  { name: "Altcoin Psycho", handle: "@AltcoinPsycho" },
-  { name: "Defi Edge", handle: "@thedefiedge" },
-  { name: "Smol Dingus", handle: "@SmolDingus" },
-  { name: "Willy Woo", handle: "@woonomic" },
-  { name: "PlanB", handle: "@100trillionUSD" },
-  { name: "Crypto Dog", handle: "@TheCryptoDog" },
-  { name: "Crypto Bird", handle: "@crypto_birb" },
-  { name: "Thor Hartvigsen", handle: "@ThorHartvigsen" },
-  { name: "Taiki Maeda", handle: "@TaikiMaeda2" },
-  { name: "DCF GOD", handle: "@dcaboredape" },
-  { name: "Sandra", handle: "@sandra_leadswf" },
-  { name: "DeFi Dad", handle: "@DeFi_Dad" },
-  { name: "CryptoGarga", handle: "@CryptoGarga" },
+  { name: "Cobie", handle: "@colobie", followers: "800K", expertise: "Trading" },
+  { name: "ZachXBT", handle: "@zachxbt", followers: "650K", expertise: "On-chain" },
+  { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", expertise: "TA" },
+  { name: "Loomdart", handle: "@loomdart", followers: "380K", expertise: "DeFi" },
+  { name: "Ansem", handle: "@blknoiz06", followers: "520K", expertise: "Memes" },
+  { name: "GCR", handle: "@GCRClassic", followers: "290K", expertise: "Macro" },
+  { name: "CL", handle: "@CL207", followers: "180K", expertise: "Alt" },
+  { name: "Pentoshi", handle: "@Pentosh1", followers: "610K", expertise: "Trading" },
+  { name: "Crypto Cobain", handle: "@CryptoCobain", followers: "350K", expertise: "DeFi" },
+  { name: "Route 2 FI", handle: "@Route2FI", followers: "280K", expertise: "DeFi" },
+  { name: "Degen Spartan", handle: "@DegenSpartan", followers: "220K", expertise: "Yield" },
+  { name: "Light", handle: "@LightCrypto", followers: "195K", expertise: "Trading" },
+  { name: "Arthur Hayes", handle: "@CryptoHayes", followers: "580K", expertise: "Macro" },
+  { name: "Tetranode", handle: "@Tetranode", followers: "310K", expertise: "DeFi" },
+  { name: "Mando", handle: "@TheCryptoMando", followers: "145K", expertise: "NFT" },
+  { name: "Cred", handle: "@CryptoCred", followers: "230K", expertise: "TA" },
+  { name: "Tyler D", handle: "@Tyler_Did_It", followers: "165K", expertise: "Gems" },
+  { name: "Rune", handle: "@RuneKek", followers: "120K", expertise: "Memes" },
+  { name: "Fiskantes", handle: "@Fiskantes", followers: "185K", expertise: "VC" },
+  { name: "Larry Cermak", handle: "@lawmaster", followers: "420K", expertise: "Data" },
+  { name: "Frank", handle: "@frankdegods", followers: "390K", expertise: "NFT" },
+  { name: "Punk6529", handle: "@punk6529", followers: "510K", expertise: "NFT" },
+  { name: "Irene Zhao", handle: "@IreneZhao_", followers: "480K", expertise: "Web3" },
+  { name: "Andrew Kang", handle: "@Rewkang", followers: "340K", expertise: "VC" },
+  { name: "Trader Joe", handle: "@CryptoGodJohn", followers: "275K", expertise: "Trading" },
+  { name: "Satoshi Flipper", handle: "@SatoshiFlipper", followers: "210K", expertise: "TA" },
+  { name: "Kaleo", handle: "@CryptoKaleo", followers: "620K", expertise: "Trading" },
+  { name: "Altcoin Psycho", handle: "@AltcoinPsycho", followers: "295K", expertise: "Alt" },
+  { name: "Defi Edge", handle: "@thedefiedge", followers: "185K", expertise: "DeFi" },
+  { name: "Smol Dingus", handle: "@SmolDingus", followers: "95K", expertise: "Memes" },
+  { name: "Willy Woo", handle: "@woonomic", followers: "1.1M", expertise: "Data" },
+  { name: "PlanB", handle: "@100trillionUSD", followers: "1.9M", expertise: "BTC" },
+  { name: "Crypto Dog", handle: "@TheCryptoDog", followers: "750K", expertise: "Trading" },
+  { name: "Crypto Bird", handle: "@crypto_birb", followers: "410K", expertise: "TA" },
+  { name: "Thor Hartvigsen", handle: "@ThorHartvigsen", followers: "125K", expertise: "DeFi" },
+  { name: "Taiki Maeda", handle: "@TaikiMaeda2", followers: "180K", expertise: "DeFi" },
+  { name: "DCF GOD", handle: "@dcaboredape", followers: "155K", expertise: "NFT" },
+  { name: "Sandra", handle: "@sandra_leadswf", followers: "85K", expertise: "Web3" },
+  { name: "DeFi Dad", handle: "@DeFi_Dad", followers: "240K", expertise: "DeFi" },
+  { name: "CryptoGarga", handle: "@CryptoGarga", followers: "195K", expertise: "NFT" },
 ];
 
 const processSteps = [
@@ -321,10 +321,16 @@ const YapService = () => {
                           />
                           {/* Hover overlay with name */}
                           <div 
-                            className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-1"
+                            className="absolute inset-0 bg-black/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-1"
                           >
                             <span className="text-[8px] md:text-[10px] font-medium text-white text-center leading-tight">{kol.name}</span>
-                            <span className="text-[6px] md:text-[8px] text-cyan-400 text-center">{kol.handle}</span>
+                            <span className="text-[6px] md:text-[8px] text-cyan-400 text-center">{kol.followers}</span>
+                            <span 
+                              className="text-[5px] md:text-[7px] px-1.5 py-0.5 rounded-full mt-0.5"
+                              style={{ backgroundColor: `${ACCENT_COLOR}40`, color: ACCENT_COLOR }}
+                            >
+                              {kol.expertise}
+                            </span>
                           </div>
                           {/* Glow effect on hover */}
                           <div 

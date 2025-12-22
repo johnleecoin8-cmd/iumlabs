@@ -13,14 +13,20 @@ const themeConfig = {
   accentColorHover: "#D97706",
 };
 
-// Sample KOL profiles for visualization
+// Famous Crypto KOLs with DiceBear avatars
 const kolProfiles = [
-  { name: "CryptoKing", followers: "1.2M", tier: "platinum", avatar: "👑" },
-  { name: "DeFiWhale", followers: "890K", tier: "gold", avatar: "🐋" },
-  { name: "NFTHunter", followers: "650K", tier: "gold", avatar: "🎨" },
-  { name: "Web3Sarah", followers: "420K", tier: "silver", avatar: "⭐" },
-  { name: "TokenGuru", followers: "380K", tier: "silver", avatar: "🔮" },
-  { name: "ChainMaster", followers: "290K", tier: "bronze", avatar: "⛓️" },
+  { name: "PlanB", handle: "@100trillionUSD", followers: "1.9M", tier: "platinum", expertise: "BTC Analytics" },
+  { name: "Willy Woo", handle: "@woonomic", followers: "1.1M", tier: "platinum", expertise: "On-chain Data" },
+  { name: "Cobie", handle: "@colobie", followers: "800K", tier: "platinum", expertise: "Trading" },
+  { name: "Crypto Dog", handle: "@TheCryptoDog", followers: "750K", tier: "gold", expertise: "Swing Trading" },
+  { name: "ZachXBT", handle: "@zachxbt", followers: "650K", tier: "gold", expertise: "Investigation" },
+  { name: "Kaleo", handle: "@CryptoKaleo", followers: "620K", tier: "gold", expertise: "Chart Analysis" },
+  { name: "Pentoshi", handle: "@Pentosh1", followers: "610K", tier: "gold", expertise: "Trading" },
+  { name: "Arthur Hayes", handle: "@CryptoHayes", followers: "580K", tier: "gold", expertise: "Macro" },
+  { name: "Ansem", handle: "@blknoiz06", followers: "520K", tier: "gold", expertise: "Meme Coins" },
+  { name: "Punk6529", handle: "@punk6529", followers: "510K", tier: "gold", expertise: "NFT Culture" },
+  { name: "Irene Zhao", handle: "@IreneZhao_", followers: "480K", tier: "silver", expertise: "Web3 Social" },
+  { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", tier: "silver", expertise: "Technical Analysis" },
 ];
 
 const networkNodes = [
@@ -194,14 +200,31 @@ const InfluencerService = () => {
                     {kol.tier}
                   </div>
 
-                  {/* Avatar */}
-                  <div className="text-4xl mb-3 text-center">{kol.avatar}</div>
+                  {/* Avatar - DiceBear */}
+                  <div className="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-amber-400 transition-colors">
+                    <img 
+                      src={`https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=1a1a1a`}
+                      alt={kol.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
 
                   {/* Name */}
-                  <div className="text-sm font-medium text-center mb-1">{kol.name}</div>
+                  <div className="text-sm font-medium text-center mb-0.5">{kol.name}</div>
+                  
+                  {/* Handle */}
+                  <div className="text-[10px] text-amber-400 text-center mb-1">{kol.handle}</div>
 
                   {/* Followers */}
-                  <div className="text-xs text-white/60 text-center">{kol.followers} followers</div>
+                  <div className="text-xs text-white/60 text-center mb-2">{kol.followers} followers</div>
+                  
+                  {/* Expertise Tag */}
+                  <div 
+                    className="text-[9px] px-2 py-1 rounded-full text-center mx-auto w-fit"
+                    style={{ backgroundColor: `${themeConfig.accentColor}20`, color: themeConfig.accentColor }}
+                  >
+                    {kol.expertise}
+                  </div>
 
                   {/* Connection Line on Hover */}
                   <motion.div 
