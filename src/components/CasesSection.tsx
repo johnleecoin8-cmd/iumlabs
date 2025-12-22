@@ -155,7 +155,7 @@ const CasesSection = () => {
           </div>
 
           {/* View All */}
-          <div className="p-8 md:p-10 border-t border-white/10">
+          <div className="p-6 md:p-8 border-t border-white/10">
             <Link
               to="/projects"
               className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
@@ -168,7 +168,7 @@ const CasesSection = () => {
 
         {/* Right: Sticky Info Panel */}
         <motion.div
-          className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
+          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -181,7 +181,7 @@ const CasesSection = () => {
             Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
           </p>
 
-          <div className="space-y-6 mb-12">
+          <div className="space-y-6 mb-6">
             <div className="flex items-center gap-4 pb-4 border-b border-white/10">
               <span className="text-3xl font-bold text-white">340%</span>
               <span className="text-white/50 text-sm">Average volume increase</span>
