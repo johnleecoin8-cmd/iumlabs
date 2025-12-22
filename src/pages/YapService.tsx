@@ -13,7 +13,6 @@ const ACCENT_COLOR = "#22D3EE";
 
 // Famous Crypto KOLs with DiceBear avatars, followers and expertise
 const cryptoKOLs = [
-  // Global KOLs
   { name: "Cobie", handle: "@colobie", followers: "800K", expertise: "Trading" },
   { name: "ZachXBT", handle: "@zachxbt", followers: "650K", expertise: "On-chain" },
   { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", expertise: "TA" },
@@ -54,27 +53,6 @@ const cryptoKOLs = [
   { name: "Sandra", handle: "@sandra_leadswf", followers: "85K", expertise: "Web3" },
   { name: "DeFi Dad", handle: "@DeFi_Dad", followers: "240K", expertise: "DeFi" },
   { name: "CryptoGarga", handle: "@CryptoGarga", followers: "195K", expertise: "NFT" },
-  // Korean KOLs
-  { name: "비트코인갤러리", handle: "@BitcoinGallery_", followers: "180K", expertise: "BTC" },
-  { name: "코인원", handle: "@coinaboredape", followers: "95K", expertise: "Trading" },
-  { name: "크립토퀀트", handle: "@cryptaboredape", followers: "320K", expertise: "Data" },
-  { name: "업비트맨", handle: "@Upbitman", followers: "75K", expertise: "Trading" },
-  { name: "김치프리미엄", handle: "@KimchiPremium", followers: "120K", expertise: "Arb" },
-  { name: "블록인프레스", handle: "@blockinpress", followers: "85K", expertise: "News" },
-  { name: "코인니스", handle: "@coinaboredape", followers: "150K", expertise: "News" },
-  { name: "크립토서울", handle: "@CryptoSeoul", followers: "65K", expertise: "Community" },
-  { name: "디파이코리아", handle: "@DeFiKorea", followers: "45K", expertise: "DeFi" },
-  { name: "웹3코리아", handle: "@Web3Korea", followers: "55K", expertise: "Web3" },
-  { name: "NFT플레이어", handle: "@NFTPlayerKR", followers: "38K", expertise: "NFT" },
-  { name: "알트맨", handle: "@AltmanKR", followers: "82K", expertise: "Alt" },
-  { name: "체인플레이", handle: "@ChainPlayKR", followers: "48K", expertise: "GameFi" },
-  { name: "토큰이코노미", handle: "@TokenEconomyKR", followers: "62K", expertise: "Tokenomics" },
-  { name: "메타버스킹", handle: "@MetaverseKingKR", followers: "35K", expertise: "Metaverse" },
-  { name: "코인분석가", handle: "@CoinAnalystKR", followers: "95K", expertise: "TA" },
-  { name: "디지털자산", handle: "@DigitalAssetKR", followers: "72K", expertise: "Macro" },
-  { name: "블록체인밸리", handle: "@BlockchainValley", followers: "58K", expertise: "VC" },
-  { name: "크립토헌터", handle: "@CryptoHunterKR", followers: "42K", expertise: "Gems" },
-  { name: "밈코인마스터", handle: "@MemeCoinMasterKR", followers: "28K", expertise: "Memes" },
 ];
 
 const processSteps = [
