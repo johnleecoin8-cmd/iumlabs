@@ -13,30 +13,26 @@ const brandConfig = {
 
 // Footer link categories for SEO sitelinks
 const footerLinks = {
-  products: {
-    title: "Products",
+  solutions: {
+    title: "Solutions",
     links: [
-      { name: "Research Tool", href: "/research" },
-      { name: "Data Analytics", href: "/research" },
-      { name: "Market Insights", href: "/research" },
+      { name: "Web3 Marketing", href: "/services" },
+      { name: "Research Lab", href: "/research" },
+      { name: "GTM Strategy", href: "/services/gtm-strategy" },
     ]
   },
-  services: {
-    title: "Services",
+  insights: {
+    title: "Insights",
     links: [
-      { name: "GTM Strategy", href: "/services/gtm-strategy" },
-      { name: "Community Building", href: "/services/community" },
-      { name: "PR & Media", href: "/services/pr" },
-      { name: "Influencer Marketing", href: "/services/influencer" },
-      { name: "Social Media", href: "/services/social-media" },
+      { name: "Research Reports", href: "/research" },
+      { name: "Market Analytics", href: "/research" },
     ]
   },
   company: {
     title: "Company",
     links: [
-      { name: "About Us", href: "/#why-choose-us" },
-      { name: "Projects", href: "/projects" },
-      { name: "Contact", href: "/contact" },
+      { name: "About Ium Labs", href: "/#why-choose-us" },
+      { name: "Contact Us", href: "/contact" },
       { name: "Privacy Policy", href: "/privacy" },
       { name: "Terms of Service", href: "/terms" },
     ]
@@ -83,13 +79,13 @@ const Footer = () => {
 
         {/* Navigation Links Grid - SEO Sitemap Footer */}
         <nav className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-b border-white/10" aria-label="Footer navigation">
-          {/* Products Column */}
+          {/* Solutions Column */}
           <div>
             <h4 className="text-xs uppercase tracking-widest text-white/30 mb-6 font-mono">
-              {footerLinks.products.title}
+              {footerLinks.solutions.title}
             </h4>
             <ul className="space-y-3">
-              {footerLinks.products.links.map((link) => (
+              {footerLinks.solutions.links.map((link) => (
                 <li key={link.name}>
                   <Link 
                     to={link.href}
@@ -102,13 +98,13 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Services Column */}
+          {/* Insights Column */}
           <div>
             <h4 className="text-xs uppercase tracking-widest text-white/30 mb-6 font-mono">
-              {footerLinks.services.title}
+              {footerLinks.insights.title}
             </h4>
             <ul className="space-y-3">
-              {footerLinks.services.links.map((link) => (
+              {footerLinks.insights.links.map((link) => (
                 <li key={link.name}>
                   <Link 
                     to={link.href}
