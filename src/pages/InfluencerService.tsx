@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+import ContactFormSection from "@/components/ContactFormSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import { ArrowRight, Star, Users, TrendingUp, Target, Zap, Crown, Award, Sparkles } from "lucide-react";
 import kolImage from "@/assets/services/kol-network.jpg";
@@ -636,7 +636,7 @@ const InfluencerService = () => {
         </div>
       </section>
 
-      <CTASection />
+      <ContactFormSection sectionNumber="04" />
       <Footer />
     </div>
   );

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Calendar, ArrowRight, Heart, MessageCircle, Repeat2, Share, TrendingUp, BarChart3, Users, Eye, Pencil, Send, LineChart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+import ContactFormSection from "@/components/ContactFormSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import socialMediaImage from "@/assets/backgrounds/seoul-gangnam-night.jpg";
 
@@ -466,7 +466,7 @@ const SocialMediaService = () => {
           </div>
         </section>
 
-        <CTASection />
+        <ContactFormSection sectionNumber="04" />
         <Footer />
       </div>
     </div>

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Calendar, ArrowRight, Users, Hash, MessageSquare, Bell, Settings, ChevronRight, Shield, Sparkles, UserPlus, Send, Megaphone, HelpCircle, Vote, Pin, Star, Info } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+import ContactFormSection from "@/components/ContactFormSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import communityImage from "@/assets/services/community-growth.jpg";
 import seoulHanriver from "@/assets/backgrounds/seoul-hanriver-twilight.jpg";
@@ -752,7 +752,7 @@ const CommunityService = () => {
           </div>
         </section>
 
-        <CTASection />
+        <ContactFormSection sectionNumber="04" />
         <Footer />
       </div>
     </div>

@@ -3,6 +3,7 @@ import { ArrowRight, Compass, Users, AtSign, Mic2, MessageCircle, Newspaper } fr
 import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ContactFormSection from "@/components/ContactFormSection";
 
 const services = [
   {
@@ -291,6 +292,9 @@ const Services = () => {
           </div>
         </div>
       </section>
+      
+      {/* Contact Section */}
+      <ContactFormSection sectionNumber="02" />
       
       <Footer />
     </div>

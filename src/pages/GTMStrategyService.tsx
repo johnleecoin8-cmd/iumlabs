@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Calendar, ArrowRight, Flag, Map, Compass, TrendingUp, CheckCircle2, Circle, Target, Rocket, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
+import ContactFormSection from "@/components/ContactFormSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import gtmImage from "@/assets/services/gtm-strategy.jpg";
 import koreaPalace from "@/assets/backgrounds/korea-palace-modern.jpg";
@@ -459,7 +459,7 @@ const GTMStrategyService = () => {
           </div>
         </section>
 
-        <CTASection />
+        <ContactFormSection sectionNumber="04" />
         <Footer />
       </div>
     </div>

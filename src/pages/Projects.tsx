@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ContactFormSection from "@/components/ContactFormSection";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -346,6 +347,9 @@ const Projects = () => {
           </div>
         </div>
       </section>
+
+      {/* Contact Section */}
+      <ContactFormSection sectionNumber="02" />
 
       <Footer />
     </div>
