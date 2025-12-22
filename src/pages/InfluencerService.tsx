@@ -29,6 +29,38 @@ const kolProfiles = [
   { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", tier: "silver", expertise: "Technical Analysis" },
 ];
 
+// Extended KOL list for full network section
+const extendedKOLs = [
+  { name: "Larry Cermak", handle: "@lawmaster", followers: "420K", expertise: "Data" },
+  { name: "Crypto Bird", handle: "@crypto_birb", followers: "410K", expertise: "TA" },
+  { name: "Frank", handle: "@frankdegods", followers: "390K", expertise: "NFT" },
+  { name: "Loomdart", handle: "@loomdart", followers: "380K", expertise: "DeFi" },
+  { name: "Crypto Cobain", handle: "@CryptoCobain", followers: "350K", expertise: "DeFi" },
+  { name: "Andrew Kang", handle: "@Rewkang", followers: "340K", expertise: "VC" },
+  { name: "Tetranode", handle: "@Tetranode", followers: "310K", expertise: "DeFi" },
+  { name: "Altcoin Psycho", handle: "@AltcoinPsycho", followers: "295K", expertise: "Alt" },
+  { name: "GCR", handle: "@GCRClassic", followers: "290K", expertise: "Macro" },
+  { name: "Route 2 FI", handle: "@Route2FI", followers: "280K", expertise: "DeFi" },
+  { name: "Trader Joe", handle: "@CryptoGodJohn", followers: "275K", expertise: "Trading" },
+  { name: "DeFi Dad", handle: "@DeFi_Dad", followers: "240K", expertise: "DeFi" },
+  { name: "Cred", handle: "@CryptoCred", followers: "230K", expertise: "TA" },
+  { name: "Degen Spartan", handle: "@DegenSpartan", followers: "220K", expertise: "Yield" },
+  { name: "Satoshi Flipper", handle: "@SatoshiFlipper", followers: "210K", expertise: "TA" },
+  { name: "Light", handle: "@LightCrypto", followers: "195K", expertise: "Trading" },
+  { name: "CryptoGarga", handle: "@CryptoGarga", followers: "195K", expertise: "NFT" },
+  { name: "Fiskantes", handle: "@Fiskantes", followers: "185K", expertise: "VC" },
+  { name: "Defi Edge", handle: "@thedefiedge", followers: "185K", expertise: "DeFi" },
+  { name: "CL", handle: "@CL207", followers: "180K", expertise: "Alt" },
+  { name: "Taiki Maeda", handle: "@TaikiMaeda2", followers: "180K", expertise: "DeFi" },
+  { name: "Tyler D", handle: "@Tyler_Did_It", followers: "165K", expertise: "Gems" },
+  { name: "DCF GOD", handle: "@dcaboredape", followers: "155K", expertise: "NFT" },
+  { name: "Mando", handle: "@TheCryptoMando", followers: "145K", expertise: "NFT" },
+  { name: "Thor Hartvigsen", handle: "@ThorHartvigsen", followers: "125K", expertise: "DeFi" },
+  { name: "Rune", handle: "@RuneKek", followers: "120K", expertise: "Memes" },
+  { name: "Smol Dingus", handle: "@SmolDingus", followers: "95K", expertise: "Memes" },
+  { name: "Sandra", handle: "@sandra_leadswf", followers: "85K", expertise: "Web3" },
+];
+
 const networkNodes = [
   { x: 50, y: 30, size: 60, label: "Your Project" },
   { x: 20, y: 20, size: 40, label: "Tier 1 KOL" },
@@ -177,9 +209,12 @@ const InfluencerService = () => {
               className="grid grid-cols-2 md:grid-cols-3 gap-4"
             >
               {kolProfiles.map((kol, index) => (
-                <motion.div
+                <motion.a
                   key={index}
-                  className="relative p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm group cursor-pointer"
+                  href={`https://x.com/${kol.handle.replace('@', '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm group cursor-pointer block"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
@@ -226,11 +261,19 @@ const InfluencerService = () => {
                     {kol.expertise}
                   </div>
 
+                  {/* View on X indicator */}
+                  <div className="absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <div className="text-[8px] text-white/60 flex items-center gap-1">
+                      <span>View on</span>
+                      <span className="font-bold">𝕏</span>
+                    </div>
+                  </div>
+
                   {/* Connection Line on Hover */}
                   <motion.div 
                     className="absolute -bottom-4 left-1/2 w-px h-4 bg-gradient-to-b from-amber-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
                   />
-                </motion.div>
+                </motion.a>
               ))}
             </motion.div>
           </div>
@@ -455,6 +498,100 @@ const InfluencerService = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Full Network Section */}
+      <section className="py-24 relative">
+        <div 
+          className="absolute top-0 left-0 right-0 h-px"
+          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
+        />
+
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="text-center mb-16">
+            <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ FULL NETWORK ]</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-4">
+              Explore Our <span style={{ color: themeConfig.accentColor }}>120+ KOL Network</span>
+            </h2>
+            <p className="text-white/60 mt-4 max-w-2xl mx-auto">
+              Access our complete network of verified crypto influencers across all tiers and specializations
+            </p>
+          </div>
+
+          {/* Extended KOL Grid */}
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-3">
+            {extendedKOLs.map((kol, index) => (
+              <motion.a
+                key={index}
+                href={`https://x.com/${kol.handle.replace('@', '')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.02 }}
+              >
+                <div 
+                  className="aspect-square rounded-xl overflow-hidden border border-white/10 bg-white/5 group-hover:border-amber-400/60 transition-all relative"
+                >
+                  <img 
+                    src={`https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=1a1a1a`}
+                    alt={kol.name}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                  />
+                  
+                  {/* Hover overlay */}
+                  <div className="absolute inset-0 bg-black/85 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-2">
+                    <span className="text-[9px] md:text-[11px] font-medium text-white text-center leading-tight">{kol.name}</span>
+                    <span className="text-[7px] md:text-[9px] text-amber-400 text-center">{kol.followers}</span>
+                    <span 
+                      className="text-[6px] md:text-[8px] px-1.5 py-0.5 rounded-full mt-1"
+                      style={{ backgroundColor: `${themeConfig.accentColor}40`, color: themeConfig.accentColor }}
+                    >
+                      {kol.expertise}
+                    </span>
+                  </div>
+                  
+                  {/* Glow on hover */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+                    style={{ boxShadow: `inset 0 0 20px ${themeConfig.accentColor}30` }}
+                  />
+                </div>
+              </motion.a>
+            ))}
+            
+            {/* "And more" placeholder cells */}
+            {[...Array(4)].map((_, i) => (
+              <motion.div
+                key={`more-${i}`}
+                className="aspect-square rounded-xl border border-dashed border-white/20 bg-white/5 flex items-center justify-center"
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: (extendedKOLs.length + i) * 0.02 }}
+              >
+                <span className="text-white/30 text-xs">+</span>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* CTA */}
+          <motion.div 
+            className="text-center mt-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <CalendlyButton 
+              className="px-8 py-4 rounded-xl font-medium text-black inline-flex items-center gap-2"
+              style={{ background: themeConfig.accentColor }}
+            >
+              Access Full Network <ArrowRight className="w-4 h-4" />
+            </CalendlyButton>
+          </motion.div>
         </div>
       </section>
 
