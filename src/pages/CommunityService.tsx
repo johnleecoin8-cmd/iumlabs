@@ -56,7 +56,7 @@ const processSteps = [
 ];
 
 const stats = [
-  { value: "50+", label: "Discord Servers" },
+  { value: "50+", label: "Discord & Telegram Servers" },
   { value: "500K+", label: "Members Managed" },
 ];
 
@@ -155,7 +155,7 @@ const CommunityService = () => {
                 </h1>
 
                 <p className="text-white/70 text-lg max-w-xl mb-8 font-light leading-relaxed">
-                  Build thriving Discord communities with AI-powered automation, gamified engagement, and 24/7 moderation.
+                  Build thriving Discord & Telegram communities with AI-powered automation, gamified engagement, and 24/7 moderation.
                 </p>
 
                 <CalendlyButton 
