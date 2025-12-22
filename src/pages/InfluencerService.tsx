@@ -283,130 +283,144 @@ const InfluencerService = () => {
         </div>
       </section>
 
-      {/* Network Visualization Section */}
-      <section className="py-24 relative">
-        <div 
-          className="absolute top-0 left-0 right-0 h-px"
-          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
-        />
-
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ NETWORK ]</span>
-            <h2 className="text-3xl md:text-4xl font-bold mt-4">
-              Your Project at the <span style={{ color: themeConfig.accentColor }}>Center</span>
-            </h2>
-            <p className="text-white/60 mt-4 max-w-2xl mx-auto">
-              We position your project at the heart of crypto's most influential network, creating authentic connections that drive real engagement.
-            </p>
+      {/* Network Section */}
+      <section className="scroll-reveal bg-[#0A0A0A]">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs font-mono tracking-widest" style={{ color: themeConfig.accentColor }}>01</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Network</h2>
+            </div>
+            <span 
+              className="text-xs tracking-wider hidden sm:block px-3 py-1 border rounded-full"
+              style={{ color: themeConfig.accentColor, borderColor: `${themeConfig.accentColor}40` }}
+            >
+              Your Project at the Center
+            </span>
           </div>
 
-          {/* Network Graph Visualization */}
-          <div className="relative h-[500px] max-w-4xl mx-auto">
-            {/* Connection Lines */}
-            <svg className="absolute inset-0 w-full h-full">
-              {networkNodes.slice(1).map((node, i) => (
-                <motion.line
-                  key={i}
-                  x1="50%"
-                  y1="30%"
-                  x2={`${node.x}%`}
-                  y2={`${node.y}%`}
-                  stroke={themeConfig.accentColor}
-                  strokeWidth="1"
-                  strokeDasharray="5,5"
-                  initial={{ pathLength: 0, opacity: 0 }}
-                  whileInView={{ pathLength: 1, opacity: 0.4 }}
-                  transition={{ duration: 1, delay: i * 0.2 }}
-                />
-              ))}
-            </svg>
+          <div className="py-16 md:py-20">
+            <div className="container mx-auto px-4 md:px-8">
+              <p className="text-white/60 text-center max-w-2xl mx-auto mb-16">
+                We position your project at the heart of crypto's most influential network, creating authentic connections that drive real engagement.
+              </p>
 
-            {/* Nodes */}
-            {networkNodes.map((node, index) => (
-              <motion.div
-                key={index}
-                className="absolute transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
-                style={{ left: `${node.x}%`, top: `${node.y}%` }}
-                initial={{ scale: 0, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ delay: index * 0.15, type: "spring" }}
-              >
-                <motion.div
-                  className={`rounded-full flex items-center justify-center ${
-                    index === 0 ? 'bg-gradient-to-br from-amber-400 to-amber-600' : 'bg-white/10 border border-white/20'
-                  }`}
-                  style={{ width: node.size, height: node.size }}
-                  whileHover={{ scale: 1.2 }}
-                  animate={index === 0 ? {
-                    boxShadow: [`0 0 20px ${themeConfig.accentColor}40`, `0 0 40px ${themeConfig.accentColor}60`, `0 0 20px ${themeConfig.accentColor}40`]
-                  } : {}}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  {index === 0 ? (
-                    <span className="text-2xl">🚀</span>
-                  ) : (
-                    <span className="text-lg">👤</span>
-                  )}
-                </motion.div>
-                <span className="text-xs text-white/60 mt-2 whitespace-nowrap">{node.label}</span>
-              </motion.div>
-            ))}
+              {/* Network Graph Visualization */}
+              <div className="relative h-[500px] max-w-4xl mx-auto">
+                {/* Connection Lines */}
+                <svg className="absolute inset-0 w-full h-full">
+                  {networkNodes.slice(1).map((node, i) => (
+                    <motion.line
+                      key={i}
+                      x1="50%"
+                      y1="30%"
+                      x2={`${node.x}%`}
+                      y2={`${node.y}%`}
+                      stroke={themeConfig.accentColor}
+                      strokeWidth="1"
+                      strokeDasharray="5,5"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      whileInView={{ pathLength: 1, opacity: 0.4 }}
+                      transition={{ duration: 1, delay: i * 0.2 }}
+                    />
+                  ))}
+                </svg>
+
+                {/* Nodes */}
+                {networkNodes.map((node, index) => (
+                  <motion.div
+                    key={index}
+                    className="absolute transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center"
+                    style={{ left: `${node.x}%`, top: `${node.y}%` }}
+                    initial={{ scale: 0, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: index * 0.15, type: "spring" }}
+                  >
+                    <motion.div
+                      className={`rounded-full flex items-center justify-center ${
+                        index === 0 ? 'bg-gradient-to-br from-amber-400 to-amber-600' : 'bg-white/10 border border-white/20'
+                      }`}
+                      style={{ width: node.size, height: node.size }}
+                      whileHover={{ scale: 1.2 }}
+                      animate={index === 0 ? {
+                        boxShadow: [`0 0 20px ${themeConfig.accentColor}40`, `0 0 40px ${themeConfig.accentColor}60`, `0 0 20px ${themeConfig.accentColor}40`]
+                      } : {}}
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      {index === 0 ? (
+                        <span className="text-2xl">🚀</span>
+                      ) : (
+                        <span className="text-lg">👤</span>
+                      )}
+                    </motion.div>
+                    <span className="text-xs text-white/60 mt-2 whitespace-nowrap">{node.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* About Section with Image */}
-      <section className="py-24 relative">
-        <div 
-          className="absolute top-0 left-0 right-0 h-px"
-          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
-        />
-
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+      {/* About Section */}
+      <section className="scroll-reveal bg-[#0A0A0A]">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs font-mono tracking-widest" style={{ color: themeConfig.accentColor }}>02</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
+            </div>
+            <span 
+              className="text-xs tracking-wider hidden sm:block px-3 py-1 border rounded-full"
+              style={{ color: themeConfig.accentColor, borderColor: `${themeConfig.accentColor}40` }}
             >
-              <img 
-                src={kolImage} 
-                alt="KOL Network" 
-                className="rounded-2xl w-full h-[400px] object-cover"
-                style={{ boxShadow: `0 0 60px ${themeConfig.accentColor}20` }}
-              />
-            </motion.div>
+              Let Others Tell Your Story
+            </span>
+          </div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ ABOUT ]</span>
-              <h2 className="text-3xl md:text-4xl font-bold mt-4 mb-6">
-                Let Others Tell <span style={{ color: themeConfig.accentColor }}>Your Story</span>
-              </h2>
-              <p className="text-white/60 mb-6 leading-relaxed">
-                We activate a wide range of crypto-native influencers, from top industry voices to niche micro-KOLs, 
-                to help you get seen by the right people. Our focus is on message alignment, credible distribution, 
-                and timing that supports your launch or campaign.
-              </p>
-              <p className="text-white/60 mb-8 leading-relaxed">
-                We work with creators who start conversations, drive growth, and move real mindshare in the Korean 
-                and global crypto communities.
-              </p>
+          <div className="py-16 md:py-20">
+            <div className="container mx-auto px-4 md:px-8">
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <img 
+                    src={kolImage} 
+                    alt="KOL Network" 
+                    className="rounded-2xl w-full h-[400px] object-cover"
+                    style={{ boxShadow: `0 0 60px ${themeConfig.accentColor}20` }}
+                  />
+                </motion.div>
 
-              <CalendlyButton 
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium border transition-all hover:scale-105"
-                style={{ 
-                  borderColor: themeConfig.accentColor,
-                  color: themeConfig.accentColor
-                }}
-              >
-                Explore Our Network <ArrowRight className="w-4 h-4" />
-              </CalendlyButton>
-            </motion.div>
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  <p className="text-white/60 mb-6 leading-relaxed">
+                    We activate a wide range of crypto-native influencers, from top industry voices to niche micro-KOLs, 
+                    to help you get seen by the right people. Our focus is on message alignment, credible distribution, 
+                    and timing that supports your launch or campaign.
+                  </p>
+                  <p className="text-white/60 mb-8 leading-relaxed">
+                    We work with creators who start conversations, drive growth, and move real mindshare in the Korean 
+                    and global crypto communities.
+                  </p>
+
+                  <CalendlyButton 
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium border transition-all hover:scale-105"
+                    style={{ 
+                      borderColor: themeConfig.accentColor,
+                      color: themeConfig.accentColor
+                    }}
+                  >
+                    Explore Our Network <ArrowRight className="w-4 h-4" />
+                  </CalendlyButton>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

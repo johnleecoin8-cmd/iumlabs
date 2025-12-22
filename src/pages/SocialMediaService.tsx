@@ -269,65 +269,74 @@ const SocialMediaService = () => {
         </section>
 
         {/* Dashboard Section */}
-        <section 
-          className="relative py-20"
-          style={{ background: `linear-gradient(to bottom, #0A0A0A, ${ACCENT_COLOR}08, #0A0A0A)` }}
-        >
-          <div 
-            className="absolute top-0 left-0 right-0 h-px"
-            style={{ background: `linear-gradient(to right, transparent, ${ACCENT_COLOR}60, transparent)` }}
-          />
-
-          <div className="container mx-auto px-6 lg:px-16">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>01</span>
-              <h2 className="text-2xl md:text-3xl font-medium text-white">Real-Time Dashboard</h2>
+        <section className="scroll-reveal bg-[#0A0A0A]">
+          <div className="border-t border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs font-mono tracking-widest" style={{ color: ACCENT_COLOR }}>01</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Real-Time Dashboard</h2>
+              </div>
+              <span 
+                className="text-xs tracking-wider hidden sm:block px-3 py-1 border rounded-full"
+                style={{ color: ACCENT_COLOR, borderColor: `${ACCENT_COLOR}40` }}
+              >
+                Overview
+              </span>
             </div>
 
-            {/* Metrics Grid */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-              {dashboardMetrics.map((metric, index) => (
-                <motion.div
-                  key={metric.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-[#16181c] border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <metric.icon className="w-5 h-5 text-gray-500" />
-                    <span className="text-green-400 text-sm font-medium">{metric.change}</span>
-                  </div>
-                  <p className="text-3xl font-bold text-white mb-1">{metric.value}</p>
-                  <p className="text-gray-500 text-sm">{metric.label}</p>
-                </motion.div>
-              ))}
-            </div>
+            <div className="py-16 md:py-20">
+              <div className="container mx-auto px-6 lg:px-16">
+                {/* Metrics Grid */}
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+                  {dashboardMetrics.map((metric, index) => (
+                    <motion.div
+                      key={metric.label}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="bg-[#16181c] border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors"
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <metric.icon className="w-5 h-5 text-gray-500" />
+                        <span className="text-green-400 text-sm font-medium">{metric.change}</span>
+                      </div>
+                      <p className="text-3xl font-bold text-white mb-1">{metric.value}</p>
+                      <p className="text-gray-500 text-sm">{metric.label}</p>
+                    </motion.div>
+                  ))}
+                </div>
 
-            {/* About Text */}
-            <div className="max-w-3xl">
-              <p className="text-white/60 text-lg leading-relaxed">
-                We manage your presence on X with consistent, high-impact content and real-time ecosystem awareness. Our team handles content strategy, post creation, community replies, and partner engagement while tracking sentiment and identifying opportunities to amplify momentum.
-              </p>
+                {/* About Text */}
+                <div className="max-w-3xl">
+                  <p className="text-white/60 text-lg leading-relaxed">
+                    We manage your presence on X with consistent, high-impact content and real-time ecosystem awareness. Our team handles content strategy, post creation, community replies, and partner engagement while tracking sentiment and identifying opportunities to amplify momentum.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Process Section - Horizontal Carousel */}
-        <section className="bg-[#0A0A0A] relative py-20 overflow-hidden">
-          <div 
-            className="absolute top-0 left-0 right-0 h-px"
-            style={{ background: `linear-gradient(to right, transparent, ${ACCENT_COLOR}40, transparent)` }}
-          />
-
-          <div className="container mx-auto px-6 lg:px-16">
-            <div className="flex items-center gap-3 mb-12">
-              <span className="text-xs font-mono" style={{ color: ACCENT_COLOR }}>02</span>
-              <h2 className="text-2xl md:text-3xl font-medium text-white">Process</h2>
+        {/* Process Section */}
+        <section className="scroll-reveal bg-[#0A0A0A]">
+          <div className="border-t border-white/10">
+            <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs font-mono tracking-widest" style={{ color: ACCENT_COLOR }}>02</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
+              </div>
+              <span 
+                className="text-xs tracking-wider hidden sm:block px-3 py-1 border rounded-full"
+                style={{ color: ACCENT_COLOR, borderColor: `${ACCENT_COLOR}40` }}
+              >
+                How We Work
+              </span>
             </div>
 
-            {/* Carousel Navigation */}
+            <div className="py-16 md:py-20">
+              <div className="container mx-auto px-6 lg:px-16">
+                {/* Carousel Navigation */}
             <div className="flex gap-2 mb-8">
               {processSteps.map((step, index) => (
                 <button
@@ -398,6 +407,8 @@ const SocialMediaService = () => {
                   />
                 </div>
               ))}
+            </div>
+              </div>
             </div>
           </div>
         </section>

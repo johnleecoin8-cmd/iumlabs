@@ -266,157 +266,176 @@ const PRService = () => {
         </div>
       </section>
 
-      {/* Media Partners - Magazine Grid */}
-      <section className="py-24 relative">
-        <div 
-          className="absolute top-0 left-0 right-0 h-px"
-          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
-        />
-
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ MEDIA NETWORK ]</span>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mt-4" style={{ fontFamily: 'Georgia, serif' }}>
-              Where Your Story <span style={{ color: themeConfig.accentColor }}>Gets Published</span>
-            </h2>
+      {/* Media Partners Section */}
+      <section className="scroll-reveal bg-[#0A0A0A]">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs font-mono tracking-widest" style={{ color: themeConfig.accentColor }}>01</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Media Partners</h2>
+            </div>
+            <span 
+              className="text-xs tracking-wider hidden sm:block px-3 py-1 border rounded-full"
+              style={{ color: themeConfig.accentColor, borderColor: `${themeConfig.accentColor}40` }}
+            >
+              Where Your Story Gets Published
+            </span>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-            {mediaPartners.map((partner, index) => (
-              <motion.div
-                key={index}
-                className="relative p-6 border border-white/10 bg-white/5 flex flex-col items-center justify-center group hover:border-violet-500/50 transition-all"
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-              >
-                <img 
-                  src={partner.logo} 
-                  alt={partner.name}
-                  className="h-8 object-contain brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity mb-3"
-                />
-                <span className="text-[10px] uppercase tracking-wider text-white/40">{partner.type}</span>
-              </motion.div>
-            ))}
+          <div className="py-16 md:py-20">
+            <div className="container mx-auto px-4 md:px-8">
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+                {mediaPartners.map((partner, index) => (
+                  <motion.div
+                    key={index}
+                    className="relative p-6 border border-white/10 bg-white/5 flex flex-col items-center justify-center group hover:border-violet-500/50 transition-all"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ y: -5 }}
+                  >
+                    <img 
+                      src={partner.logo} 
+                      alt={partner.name}
+                      className="h-8 object-contain brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity mb-3"
+                    />
+                    <span className="text-[10px] uppercase tracking-wider text-white/40">{partner.type}</span>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Process Timeline - News Timeline Style */}
-      <section className="py-24 relative">
-        <div 
-          className="absolute top-0 left-0 right-0 h-px"
-          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
-        />
-
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="text-center mb-16">
-            <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ PROCESS ]</span>
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mt-4" style={{ fontFamily: 'Georgia, serif' }}>
-              From Story to <span style={{ color: themeConfig.accentColor }}>Headlines</span>
-            </h2>
+      {/* Process Section */}
+      <section className="scroll-reveal bg-[#0A0A0A]">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs font-mono tracking-widest" style={{ color: themeConfig.accentColor }}>02</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
+            </div>
+            <span 
+              className="text-xs tracking-wider hidden sm:block px-3 py-1 border rounded-full"
+              style={{ color: themeConfig.accentColor, borderColor: `${themeConfig.accentColor}40` }}
+            >
+              From Story to Headlines
+            </span>
           </div>
 
-          {/* Timeline */}
-          <div className="max-w-4xl mx-auto relative">
-            {/* Vertical Line */}
-            <div 
-              className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px transform md:-translate-x-1/2"
-              style={{ background: `linear-gradient(to bottom, transparent, ${themeConfig.accentColor}, transparent)` }}
-            />
+          <div className="py-16 md:py-20">
+            <div className="container mx-auto px-4 md:px-8">
 
-            {processTimeline.map((step, index) => (
-              <motion.div
-                key={index}
-                className={`relative flex items-center gap-8 mb-12 ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.15 }}
-              >
-                {/* Content */}
-                <div className={`flex-1 p-6 border border-white/10 bg-white/5 ${
-                  index % 2 === 0 ? 'md:text-right' : 'md:text-left'
-                }`}>
-                  <div 
-                    className="inline-block px-3 py-1 text-xs font-bold mb-3"
-                    style={{ background: `${themeConfig.accentColor}20`, color: themeConfig.accentColor }}
-                  >
-                    {step.date}
-                  </div>
-                  <h3 className="text-xl font-serif font-bold mb-2" style={{ fontFamily: 'Georgia, serif' }}>
-                    {step.title}
-                  </h3>
-                  <p className="text-sm text-white/60">{step.description}</p>
-                </div>
-
-                {/* Center Icon */}
+              {/* Timeline */}
+              <div className="max-w-4xl mx-auto relative">
+                {/* Vertical Line */}
                 <div 
-                  className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full items-center justify-center z-10"
-                  style={{ background: themeConfig.accentColor }}
-                >
-                  <step.icon className="w-5 h-5 text-white" />
-                </div>
+                  className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px transform md:-translate-x-1/2"
+                  style={{ background: `linear-gradient(to bottom, transparent, ${themeConfig.accentColor}, transparent)` }}
+                />
 
-                {/* Spacer for opposite side */}
-                <div className="hidden md:block flex-1" />
-              </motion.div>
-            ))}
+                {processTimeline.map((step, index) => (
+                  <motion.div
+                    key={index}
+                    className={`relative flex items-center gap-8 mb-12 ${
+                      index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                    }`}
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.15 }}
+                  >
+                    {/* Content */}
+                    <div className={`flex-1 p-6 border border-white/10 bg-white/5 ${
+                      index % 2 === 0 ? 'md:text-right' : 'md:text-left'
+                    }`}>
+                      <div 
+                        className="inline-block px-3 py-1 text-xs font-bold mb-3"
+                        style={{ background: `${themeConfig.accentColor}20`, color: themeConfig.accentColor }}
+                      >
+                        {step.date}
+                      </div>
+                      <h3 className="text-xl font-serif font-bold mb-2" style={{ fontFamily: 'Georgia, serif' }}>
+                        {step.title}
+                      </h3>
+                      <p className="text-sm text-white/60">{step.description}</p>
+                    </div>
+
+                    {/* Center Icon */}
+                    <div 
+                      className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-12 h-12 rounded-full items-center justify-center z-10"
+                      style={{ background: themeConfig.accentColor }}
+                    >
+                      <step.icon className="w-5 h-5 text-white" />
+                    </div>
+
+                    {/* Spacer for opposite side */}
+                    <div className="hidden md:block flex-1" />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* What's Included */}
-      <section className="py-24 relative">
-        <div 
-          className="absolute top-0 left-0 right-0 h-px"
-          style={{ background: `linear-gradient(90deg, transparent, ${themeConfig.accentColor}40, transparent)` }}
-        />
-
-        <div className="container mx-auto px-4 md:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <div>
-              <span className="text-xs uppercase tracking-widest text-white/40 font-mono">[ WHAT'S INCLUDED ]</span>
-              <h2 className="text-3xl md:text-4xl font-serif font-bold mt-4 mb-6" style={{ fontFamily: 'Georgia, serif' }}>
-                Full-Service <span style={{ color: themeConfig.accentColor }}>PR Package</span>
-              </h2>
-              <p className="text-white/60 mb-8">
-                We help you craft the right narrative and secure placements in top crypto and tech media. 
-                From article creation to journalist outreach and timing coordination.
-              </p>
-              <CalendlyButton 
-                className="inline-flex items-center gap-2 px-6 py-3 font-medium border transition-all hover:scale-105"
-                style={{ 
-                  borderColor: themeConfig.accentColor,
-                  color: themeConfig.accentColor
-                }}
-              >
-                Discuss Your PR Strategy <ArrowRight className="w-4 h-4" />
-              </CalendlyButton>
+      <section className="scroll-reveal bg-[#0A0A0A]">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs font-mono tracking-widest" style={{ color: themeConfig.accentColor }}>03</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">What's Included</h2>
             </div>
+            <span 
+              className="text-xs tracking-wider hidden sm:block px-3 py-1 border rounded-full"
+              style={{ color: themeConfig.accentColor, borderColor: `${themeConfig.accentColor}40` }}
+            >
+              Full-Service PR Package
+            </span>
+          </div>
 
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { icon: FileText, title: "Press Releases", desc: "Professional, newsworthy content" },
-                { icon: Newspaper, title: "Media Placement", desc: "Top-tier publication features" },
-                { icon: Globe, title: "Global & Korean", desc: "Dual-market coverage" },
-                { icon: Award, title: "Thought Leadership", desc: "Opinion pieces & interviews" },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="p-5 border border-white/10 bg-white/5 group hover:border-violet-500/50 transition-all"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -3 }}
-                >
-                  <item.icon className="w-8 h-8 mb-3" style={{ color: themeConfig.accentColor }} />
-                  <h4 className="font-bold mb-1">{item.title}</h4>
-                  <p className="text-xs text-white/60">{item.desc}</p>
-                </motion.div>
-              ))}
+          <div className="py-16 md:py-20">
+            <div className="container mx-auto px-4 md:px-8">
+              <div className="grid lg:grid-cols-2 gap-12">
+                <div>
+                  <p className="text-white/60 mb-8">
+                    We help you craft the right narrative and secure placements in top crypto and tech media. 
+                    From article creation to journalist outreach and timing coordination.
+                  </p>
+                  <CalendlyButton 
+                    className="inline-flex items-center gap-2 px-6 py-3 font-medium border transition-all hover:scale-105"
+                    style={{ 
+                      borderColor: themeConfig.accentColor,
+                      color: themeConfig.accentColor
+                    }}
+                  >
+                    Discuss Your PR Strategy <ArrowRight className="w-4 h-4" />
+                  </CalendlyButton>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { icon: FileText, title: "Press Releases", desc: "Professional, newsworthy content" },
+                    { icon: Newspaper, title: "Media Placement", desc: "Top-tier publication features" },
+                    { icon: Globe, title: "Global & Korean", desc: "Dual-market coverage" },
+                    { icon: Award, title: "Thought Leadership", desc: "Opinion pieces & interviews" },
+                  ].map((item, index) => (
+                    <motion.div
+                      key={index}
+                      className="p-5 border border-white/10 bg-white/5 group hover:border-violet-500/50 transition-all"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ y: -3 }}
+                    >
+                      <item.icon className="w-8 h-8 mb-3" style={{ color: themeConfig.accentColor }} />
+                      <h4 className="font-bold mb-1">{item.title}</h4>
+                      <p className="text-xs text-white/60">{item.desc}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
