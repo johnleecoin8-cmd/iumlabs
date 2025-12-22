@@ -41,7 +41,7 @@ const insights = [
 
 const BlueShape = () => (
   <motion.div
-    className="relative w-40 h-40 mx-auto"
+    className="relative w-24 h-24 mx-auto"
     animate={{ rotateY: 360 }}
     transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
     style={{ transformStyle: "preserve-3d" }}
@@ -143,7 +143,7 @@ const InsightsSection = () => {
 
         {/* Right: Newsletter CTA */}
         <motion.div
-          className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
+          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -156,7 +156,7 @@ const InsightsSection = () => {
             Stay ahead with our insights on Korean Web3 market trends, marketing strategies, and ecosystem analysis.
           </p>
 
-          <form onSubmit={handleSubscribe} className="mb-12">
+          <form onSubmit={handleSubscribe} className="mb-6">
             <input
               type="email"
               value={email}
@@ -177,7 +177,7 @@ const InsightsSection = () => {
 
           <BlueShape />
 
-          <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="mt-6 pt-4 border-t border-white/10">
             <p className="text-white/40 text-sm">
               Join 500+ Web3 founders and marketers getting our weekly insights.
             </p>
