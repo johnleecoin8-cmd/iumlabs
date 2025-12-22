@@ -142,6 +142,35 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
   );
 };
 
+const GreenShape = () => (
+  <motion.div
+    className="relative w-24 h-12 mx-auto"
+    animate={{ rotateY: 360 }}
+    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+    style={{ transformStyle: "preserve-3d" }}
+  >
+    {/* Bridge arch outer */}
+    <div
+      className="absolute inset-0 rounded-t-full"
+      style={{
+        background: "linear-gradient(135deg, #10B981 0%, #14B8A6 50%, #10B981 100%)",
+        transform: "rotateX(25deg)",
+        boxShadow: "0 15px 30px rgba(16, 185, 129, 0.35)",
+        clipPath: "ellipse(50% 100% at 50% 100%)"
+      }}
+    />
+    {/* Bridge arch inner */}
+    <div
+      className="absolute inset-x-2 inset-y-1.5 rounded-t-full"
+      style={{
+        background: "linear-gradient(225deg, #14B8A6 0%, #10B981 100%)",
+        transform: "rotateX(25deg) translateZ(6px)",
+        clipPath: "ellipse(50% 100% at 50% 100%)"
+      }}
+    />
+  </motion.div>
+);
+
 const CasesSection = () => {
   return (
     <section className="bg-[#0A0A0A]">
@@ -196,9 +225,11 @@ const CasesSection = () => {
             </div>
           </div>
 
+          <GreenShape />
+
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors w-fit"
+            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors w-fit mt-6"
           >
             START YOUR PROJECT
             <ArrowRight className="w-4 h-4" />
