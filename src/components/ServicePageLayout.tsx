@@ -1,7 +1,7 @@
 import { useEffect, useState, ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, ArrowRight, ChevronDown, LucideIcon } from "lucide-react";
+import { Calendar, ArrowRight, ChevronDown, LucideIcon, ArrowLeft } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -144,6 +144,7 @@ const ServicePageLayout = ({
   children,
   currentSlug,
 }: ServicePageLayoutProps) => {
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -203,6 +204,18 @@ const ServicePageLayout = ({
               style={{ background: `radial-gradient(ellipse at 50% 0%, ${accentColor} 0%, transparent 60%)` }}
             />
           </div>
+
+          {/* Back Button */}
+          <motion.button
+            onClick={() => navigate(-1)}
+            className="absolute top-6 left-6 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white hover:border-white/20 transition-all duration-300 backdrop-blur-sm"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.5 }}
+          >
+            <ArrowLeft className="w-4 h-4" />
+            <span className="text-sm font-medium">Back</span>
+          </motion.button>
 
           {/* Floating Service Tags - Desktop */}
           {serviceTags.slice(0, 6).map((tag, index) => {
