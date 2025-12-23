@@ -127,7 +127,7 @@ const HologramLogo = () => {
       groupRef.current.rotation.x = Math.sin(time * 0.15) * 0.08;
       
       // Subtle floating motion - positioned lower
-      groupRef.current.position.y = -0.4 + Math.sin(time * 0.5) * 0.05;
+      groupRef.current.position.y = -0.8 + Math.sin(time * 0.5) * 0.05;
     }
   });
 
@@ -188,26 +188,6 @@ const HologramLogo = () => {
         />
       </lineSegments>
 
-      {/* Inner glow mesh (semi-transparent fill) */}
-      <mesh position={[0, 0, -0.125]}>
-        <planeGeometry args={[3.4, 2.2]} />
-        <meshBasicMaterial
-          color={cyanColor}
-          transparent
-          opacity={glitchState.active ? 0.02 + Math.random() * 0.03 : 0.025}
-        />
-      </mesh>
-
-
-      {/* Outer glow */}
-      <mesh position={[0, 0, -0.3]}>
-        <planeGeometry args={[4.5, 3]} />
-        <meshBasicMaterial
-          color={cyanColor}
-          transparent
-          opacity={0.015}
-        />
-      </mesh>
 
       {/* Hologram ambient particles */}
       {[...Array(20)].map((_, i) => {
