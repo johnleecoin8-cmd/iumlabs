@@ -1,10 +1,12 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { ArrowLeft, ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Lightbox from "@/components/Lightbox";
 import { useEffect, useState, useRef } from "react";
+import { supabase } from "@/integrations/supabase/client";
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
@@ -576,6 +578,7 @@ const ProjectDetail = () => {
   const [scrollY, setScrollY] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const galleryRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
@@ -583,7 +586,92 @@ const ProjectDetail = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const project = slug ? projectsData[slug] : null;
+  // Fetch project from Supabase
+  const { data: dbProject } = useQuery({
+    queryKey: ['project-detail', slug],
+    queryFn: async () => {
+      if (!slug) return null;
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('slug', slug)
+        .eq('is_published', true)
+        .maybeSingle();
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!slug,
+  });
+
+  // Fetch related data if DB project exists
+  const { data: dbMetrics } = useQuery({
+    queryKey: ['project-metrics', dbProject?.id],
+    queryFn: async () => {
+      if (!dbProject?.id) return [];
+      const { data } = await supabase
+        .from('project_metrics')
+        .select('*')
+        .eq('project_id', dbProject.id)
+        .order('display_order');
+      return data || [];
+    },
+    enabled: !!dbProject?.id,
+  });
+
+  const { data: dbGallery } = useQuery({
+    queryKey: ['project-gallery', dbProject?.id],
+    queryFn: async () => {
+      if (!dbProject?.id) return [];
+      const { data } = await supabase
+        .from('project_gallery')
+        .select('*')
+        .eq('project_id', dbProject.id)
+        .order('display_order');
+      return data || [];
+    },
+    enabled: !!dbProject?.id,
+  });
+
+  const { data: dbNews } = useQuery({
+    queryKey: ['project-news', dbProject?.id],
+    queryFn: async () => {
+      if (!dbProject?.id) return [];
+      const { data } = await supabase
+        .from('project_news')
+        .select('*')
+        .eq('project_id', dbProject.id)
+        .order('display_order');
+      return data || [];
+    },
+    enabled: !!dbProject?.id,
+  });
+
+  // Use DB project if available, otherwise fallback to hardcoded
+  const fallbackProject = slug ? projectsData[slug] : null;
+  
+  const project = dbProject ? {
+    name: dbProject.name,
+    logo: dbProject.logo_url || fallbackProject?.logo || '',
+    bgImage: dbProject.background_url || fallbackProject?.bgImage || '',
+    category: dbProject.category || '',
+    result: dbProject.result || '',
+    glowColor: dbProject.glow_color || '#00D4FF',
+    description: dbProject.description || '',
+    challenge: dbProject.challenge || fallbackProject?.challenge || '',
+    metrics: dbMetrics && dbMetrics.length > 0 
+      ? dbMetrics.map(m => ({ value: m.value, label: m.label }))
+      : fallbackProject?.metrics || [],
+    strategy: dbProject.strategy || fallbackProject?.strategy || [],
+    results: fallbackProject?.results || [],
+    services: dbProject.services || fallbackProject?.services || [],
+    shortServices: dbProject.short_services || fallbackProject?.shortServices || [],
+    gallery: dbGallery && dbGallery.length > 0
+      ? dbGallery.map(g => ({ src: g.src, title: g.title || '', description: g.description || '' }))
+      : fallbackProject?.gallery || [],
+    news: dbNews && dbNews.length > 0
+      ? dbNews.map(n => ({ title: n.title, source: n.source || '', date: n.date || '', url: n.url || '#', image: n.image || '' }))
+      : fallbackProject?.news || [],
+  } : fallbackProject;
 
   if (!project) {
     return (
@@ -598,12 +686,11 @@ const ProjectDetail = () => {
     );
   }
 
-  // Get other projects for navigation
+  // Get other projects for navigation (using hardcoded for now)
   const allSlugs = Object.keys(projectsData);
   const currentIndex = allSlugs.indexOf(slug || "");
   const nextSlug = allSlugs[(currentIndex + 1) % allSlugs.length];
   const nextProject = projectsData[nextSlug];
-  const galleryRef = useRef<HTMLDivElement>(null);
 
   const scrollGallery = (direction: 'left' | 'right') => {
     if (galleryRef.current) {
