@@ -22,6 +22,11 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Transparency from "./pages/Transparency";
 import NotFound from "./pages/NotFound";
+// Admin pages
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminProjects from "./pages/admin/AdminProjects";
+import ProjectForm from "./pages/admin/ProjectForm";
 
 const queryClient = new QueryClient();
 
@@ -89,6 +94,12 @@ const AppRoutes = () => {
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/transparency" element={<Transparency />} />
+        {/* Hidden Admin Routes */}
+        <Route path="/ium-admin" element={<AdminLogin />} />
+        <Route path="/ium-admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/ium-admin/projects" element={<AdminProjects />} />
+        <Route path="/ium-admin/projects/new" element={<ProjectForm />} />
+        <Route path="/ium-admin/projects/:id/edit" element={<ProjectForm />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
