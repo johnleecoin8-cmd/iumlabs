@@ -81,25 +81,14 @@ const HologramLogo = () => {
     // 5. Bottom-right corner (rounded)
     shape.quadraticCurveTo(w/2, 0, w/2 - r, 0);
     
-    // 6. Right pillar bottom
-    shape.lineTo(w/2 - pillarWidth + r, 0);
+    // 6. Right pillar bottom - go directly to arch start point
+    shape.lineTo(w/2 - pillarWidth, 0);
     
-    // 7. Right inner pillar corner
-    shape.quadraticCurveTo(w/2 - pillarWidth, 0, w/2 - pillarWidth, r);
-    
-    // 8. Right inner pillar edge going up to arch
-    shape.lineTo(w/2 - pillarWidth, archRadius);
-    
-    // 9. Semicircular arch (opens downward from y=0)
+    // 7. Semicircular arch (opens downward from y=0)
+    // archRadius = w/2 - pillarWidth, so the arc connects directly
     shape.absarc(0, 0, archRadius, 0, Math.PI, false);
     
-    // 10. Left inner pillar edge going down
-    shape.lineTo(-w/2 + pillarWidth, r);
-    
-    // 11. Left inner pillar corner
-    shape.quadraticCurveTo(-w/2 + pillarWidth, 0, -w/2 + pillarWidth - r, 0);
-    
-    // 12. Left pillar bottom
+    // 8. Left pillar bottom
     shape.lineTo(-w/2 + r, 0);
     
     // 13. Bottom-left corner (rounded)
