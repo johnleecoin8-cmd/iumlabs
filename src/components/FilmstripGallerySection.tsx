@@ -44,7 +44,7 @@ const FilmstripGallerySection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 whileHover={{ scale: 1.02, zIndex: 10 }}
-                className={`group relative aspect-[5/4] overflow-hidden border-r border-b border-white/10 cursor-pointer ${
+                className={`group relative aspect-[6/5] overflow-hidden border-r border-b border-white/10 cursor-pointer ${
                   index % 3 === 2 ? "border-r-0" : ""
                 }`}
               >
