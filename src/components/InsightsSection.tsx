@@ -143,12 +143,15 @@ const InsightsSection = () => {
 
         {/* Right: Newsletter CTA */}
         <motion.div
-          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
+          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center relative"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
+          <div className="absolute top-6 right-6 opacity-30 pointer-events-none">
+            <BlueShape />
+          </div>
           <h2 className="text-3xl font-bold text-white mb-4">
             Latest Research
           </h2>
@@ -175,9 +178,7 @@ const InsightsSection = () => {
             </button>
           </form>
 
-          <BlueShape />
-
-          <div className="mt-6 pt-4 border-t border-white/10">
+          <div className="pt-4 border-t border-white/10">
             <p className="text-white/40 text-sm">
               Join 500+ Web3 founders and marketers getting our weekly insights.
             </p>
