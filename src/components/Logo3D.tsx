@@ -493,31 +493,27 @@ const TaegeukHologram = () => {
 
   return (
     <group ref={groupRef} position={[0, 0, 0]} scale={[glitchState.scaleX, 1, 1]}>
-      {/* Red Taegeuk (Yang) - main with metallic effect */}
+      {/* Red Taegeuk (Yang) - main */}
       <mesh 
         geometry={redGeometry} 
         position={[glitchOffset.x, glitchOffset.y, -0.05]}
       >
-        <meshStandardMaterial 
+        <meshBasicMaterial 
           color={glitchState.colorSwap ? blueColor : redColor} 
           transparent 
           opacity={mainOpacity * 0.95}
-          metalness={0.7}
-          roughness={0.2}
         />
       </mesh>
       
-      {/* Blue Taegeuk (Yin) - main with metallic effect */}
+      {/* Blue Taegeuk (Yin) - main */}
       <mesh 
         geometry={blueGeometry} 
         position={[glitchOffset.x, glitchOffset.y, -0.05]}
       >
-        <meshStandardMaterial 
+        <meshBasicMaterial 
           color={glitchState.colorSwap ? redColor : blueColor} 
           transparent 
           opacity={mainOpacity * 0.95}
-          metalness={0.7}
-          roughness={0.2}
         />
       </mesh>
 
@@ -526,15 +522,7 @@ const TaegeukHologram = () => {
         geometry={outerRingGeometry} 
         position={[glitchOffset.x * 0.5, glitchOffset.y * 0.5, -0.08]}
       >
-        <meshStandardMaterial 
-          color={whiteColor} 
-          transparent 
-          opacity={mainOpacity * 0.6}
-          metalness={0.5}
-          roughness={0.3}
-          emissive={whiteColor}
-          emissiveIntensity={0.2}
-        />
+        <meshBasicMaterial color={whiteColor} transparent opacity={mainOpacity * 0.6} />
       </mesh>
 
       {/* RGB split layers */}
