@@ -153,7 +153,7 @@ const InsightsSection = () => {
           </form>
 
           <div className="h-48">
-            <Logo3D />
+            <Logo3D variant="taegeuk" />
           </div>
 
           <div className="mt-6 pt-4 border-t border-white/10">

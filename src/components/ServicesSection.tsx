@@ -119,7 +119,7 @@ const ServicesSection = () => {
           </Link>
 
           <div className="h-64">
-            <Logo3D />
+            <Logo3D variant="taegeuk" />
           </div>
         </motion.div>
       </div>
