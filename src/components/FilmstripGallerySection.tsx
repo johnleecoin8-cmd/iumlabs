@@ -44,7 +44,7 @@ const FilmstripGallerySection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 whileHover={{ scale: 1.02, zIndex: 10 }}
-                className={`group relative aspect-[4/3] overflow-hidden border-r border-b border-white/10 cursor-pointer ${
+                className={`group relative aspect-square overflow-hidden border-r border-b border-white/10 cursor-pointer ${
                   index % 3 === 2 ? "border-r-0" : ""
                 }`}
               >
@@ -54,9 +54,9 @@ const FilmstripGallerySection = () => {
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute inset-0 flex flex-col items-center justify-end pb-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-white font-semibold text-base">{image.title}</p>
-                  <p className="text-white/70 text-xs">{image.subtitle}</p>
+                <div className="absolute inset-0 flex flex-col items-center justify-end pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-white font-semibold text-lg">{image.title}</p>
+                  <p className="text-white/70 text-sm">{image.subtitle}</p>
                 </div>
               </motion.div>
             ))}
@@ -65,29 +65,29 @@ const FilmstripGallerySection = () => {
 
         {/* Right: Info Panel */}
         <motion.div
-          className="w-full lg:w-1/3 p-4 md:p-6 flex flex-col justify-center"
+          className="w-full lg:w-1/3 p-6 md:p-10 flex flex-col justify-center"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-xl font-bold text-white/50 mb-2">
+          <h2 className="text-2xl font-bold text-white/50 mb-3">
             Campaign Gallery
           </h2>
-          <p className="text-white/50 leading-relaxed mb-4 text-sm">
-            Explore our successful campaigns and events across Korea's Web3 ecosystem.
+          <p className="text-white/50 leading-relaxed mb-6 text-sm">
+            Explore our successful campaigns and events across Korea's Web3 ecosystem. From launch events to media coverage, we deliver results.
           </p>
 
-          <div className="space-y-2 mb-6">
-            <div className="flex items-center justify-between py-2 border-b border-white/10">
+          <div className="space-y-3 mb-8">
+            <div className="flex items-center justify-between py-3 border-b border-white/10">
               <span className="text-white/50 text-sm">Events Hosted</span>
               <span className="text-white font-semibold">48+</span>
             </div>
-            <div className="flex items-center justify-between py-2 border-b border-white/10">
+            <div className="flex items-center justify-between py-3 border-b border-white/10">
               <span className="text-white/50 text-sm">Media Placements</span>
               <span className="text-white font-semibold">200+</span>
             </div>
-            <div className="flex items-center justify-between py-2">
+            <div className="flex items-center justify-between py-3">
               <span className="text-white/50 text-sm">Campaigns Launched</span>
               <span className="text-white font-semibold">60+</span>
             </div>
