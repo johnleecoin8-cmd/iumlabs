@@ -1,15 +1,93 @@
 import { useParams, Link } from "react-router-dom";
 import { ArrowLeft, Clock, Calendar, Twitter, Linkedin, Copy, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import { researchPosts } from "./Research";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 
 const ResearchDetail = () => {
   const { slug } = useParams();
-  const post = researchPosts.find(p => p.slug === slug);
+
+  // Fetch from DB
+  const { data: dbPost, isLoading } = useQuery({
+    queryKey: ['research-post', slug],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('research_posts')
+        .select('*')
+        .eq('slug', slug)
+        .eq('is_published', true)
+        .maybeSingle();
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  // Fetch related posts from DB
+  const { data: dbRelatedPosts } = useQuery({
+    queryKey: ['related-research-posts', dbPost?.category],
+    queryFn: async () => {
+      if (!dbPost?.category) return [];
+      const { data, error } = await supabase
+        .from('research_posts')
+        .select('*')
+        .eq('category', dbPost.category)
+        .eq('is_published', true)
+        .neq('id', dbPost.id)
+        .limit(3);
+      if (error) throw error;
+      return data;
+    },
+    enabled: !!dbPost?.category,
+  });
+
+  // Use DB data or fallback to hardcoded
+  const hardcodedPost = researchPosts.find(p => p.slug === slug);
+  const post = dbPost ? {
+    id: dbPost.id,
+    slug: dbPost.slug,
+    title: dbPost.title,
+    image: dbPost.image || '',
+    date: dbPost.date || '',
+    readTime: dbPost.read_time || '',
+    category: dbPost.category || '',
+    author: dbPost.author || '',
+    authorRole: dbPost.author_role || '',
+    excerpt: dbPost.excerpt || '',
+    tags: dbPost.tags || [],
+    content: dbPost.content || '',
+  } : hardcodedPost;
+
+  const hardcodedRelated = hardcodedPost 
+    ? researchPosts.filter(p => p.id !== hardcodedPost.id && p.category === hardcodedPost.category).slice(0, 3)
+    : [];
+  
+  const relatedPosts = dbRelatedPosts && dbRelatedPosts.length > 0 
+    ? dbRelatedPosts.map(p => ({
+        id: p.id,
+        slug: p.slug,
+        title: p.title,
+        image: p.image || '',
+        readTime: p.read_time || '',
+        category: p.category || '',
+      }))
+    : hardcodedRelated;
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-[#0A0A0A]">
+        <Navbar />
+        <div className="container mx-auto max-w-7xl px-4 py-32 text-center">
+          <div className="text-white/60">Loading...</div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
   
   if (!post) {
     return (
@@ -26,10 +104,6 @@ const ResearchDetail = () => {
       </div>
     );
   }
-
-  const relatedPosts = researchPosts
-    .filter(p => p.id !== post.id && p.category === post.category)
-    .slice(0, 3);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
