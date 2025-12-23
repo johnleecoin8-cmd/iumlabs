@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Star, Users, TrendingUp, Target, Sparkles, Crown, Award, Zap } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
@@ -122,6 +123,11 @@ const tierData = [
 
 const InfluencerService = () => {
   usePageTitle("Influencer Marketing");
+  const [activeTier, setActiveTier] = useState<string | null>(null);
+  
+  const filteredKOLs = activeTier 
+    ? kolProfiles.filter(kol => kol.tier === activeTier)
+    : kolProfiles;
   
   return (
     <ServicePageLayout
@@ -145,30 +151,75 @@ const InfluencerService = () => {
 
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
-              {/* Tier Overview */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
-                {tierData.map((tier, index) => (
-                  <motion.div
+              {/* Tier Filter Buttons */}
+              <div className="flex flex-wrap justify-center gap-3 mb-12">
+                <button
+                  onClick={() => setActiveTier(null)}
+                  className={`px-5 py-2.5 rounded-full border transition-all text-sm font-medium ${
+                    activeTier === null
+                      ? 'border-amber-500 bg-amber-500/20 text-amber-400'
+                      : 'border-white/20 text-white/60 hover:border-white/40 hover:text-white'
+                  }`}
+                >
+                  All Tiers
+                </button>
+                {tierData.map((tier) => (
+                  <button
                     key={tier.tier}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="p-6 rounded-xl border border-white/10 bg-white/5 text-center hover:border-white/20 transition-all"
+                    onClick={() => setActiveTier(tier.tier.toLowerCase())}
+                    className={`flex items-center gap-2 px-5 py-2.5 rounded-full border transition-all text-sm font-medium ${
+                      activeTier === tier.tier.toLowerCase()
+                        ? 'border-amber-500 bg-amber-500/20 text-amber-400'
+                        : 'border-white/20 text-white/60 hover:border-white/40 hover:text-white'
+                    }`}
                   >
-                    <div className={`w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-br ${tier.color} flex items-center justify-center`}>
-                      <tier.icon className="w-6 h-6 text-white" />
-                    </div>
-                    <h3 className="text-white font-medium mb-1">{tier.tier}</h3>
-                    <p className="text-2xl font-bold" style={{ color: ACCENT_COLOR }}>{tier.count}</p>
-                    <p className="text-white/40 text-sm">{tier.reach} reach</p>
-                  </motion.div>
+                    <tier.icon className="w-4 h-4" />
+                    {tier.tier}
+                    <span className="text-xs opacity-60">{tier.count}</span>
+                  </button>
                 ))}
               </div>
 
+              {/* Tier Stats (when filtered) */}
+              <AnimatePresence mode="wait">
+                {activeTier && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mb-8 overflow-hidden"
+                  >
+                    {tierData.filter(t => t.tier.toLowerCase() === activeTier).map((tier) => (
+                      <div 
+                        key={tier.tier}
+                        className="p-6 rounded-xl border border-white/10 bg-white/5 flex items-center justify-between"
+                      >
+                        <div className="flex items-center gap-4">
+                          <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${tier.color} flex items-center justify-center`}>
+                            <tier.icon className="w-7 h-7 text-white" />
+                          </div>
+                          <div>
+                            <h3 className="text-white font-bold text-xl">{tier.tier} Tier</h3>
+                            <p className="text-white/40">Reach: {tier.reach} followers</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-3xl font-bold" style={{ color: ACCENT_COLOR }}>{tier.count}</p>
+                          <p className="text-white/40 text-sm">Creators</p>
+                        </div>
+                      </div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
               {/* KOL Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {kolProfiles.map((kol, index) => (
+              <motion.div 
+                layout
+                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+              >
+                <AnimatePresence mode="popLayout">
+                {filteredKOLs.map((kol, index) => (
                   <motion.a
                     key={index}
                     href={`https://x.com/${kol.handle.replace('@', '')}`}
@@ -219,10 +270,14 @@ const InfluencerService = () => {
                     </div>
                   </motion.a>
                 ))}
-              </div>
+                </AnimatePresence>
+              </motion.div>
 
               <p className="text-center text-white/40 text-sm mt-8">
-                Click to view on 𝕏 · These are a sample of our network
+                {activeTier 
+                  ? `Showing ${filteredKOLs.length} ${activeTier} tier creators · Click to view on 𝕏`
+                  : 'Click to view on 𝕏 · These are a sample of our network'
+                }
               </p>
             </div>
           </div>

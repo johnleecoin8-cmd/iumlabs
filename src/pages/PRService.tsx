@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
-import { FileText, BookOpen, Newspaper, Globe, Quote, Mic, Award } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FileText, BookOpen, Newspaper, Globe, Quote, Mic, Award, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -125,8 +126,34 @@ const includedItems = [
   "Monthly Reporting",
 ];
 
+// Featured coverage articles
+const featuredCoverage = [
+  {
+    title: "Breaking: Layer 1 Protocol Announces Korean Market Expansion",
+    outlet: "CoinDesk",
+    date: "Dec 2024",
+    type: "Exclusive",
+    excerpt: "The protocol has partnered with Ium Labs to spearhead its Korean market entry strategy...",
+  },
+  {
+    title: "DeFi Protocol Raises $30M in Successful TGE",
+    outlet: "CoinTelegraph",
+    date: "Nov 2024",
+    type: "Feature",
+    excerpt: "With strategic PR support, the token launch achieved top trending status across major platforms...",
+  },
+  {
+    title: "NFT Marketplace Achieves Top 3 Ranking in Korea",
+    outlet: "BlockMedia",
+    date: "Oct 2024",
+    type: "Interview",
+    excerpt: "An exclusive interview with the founding team on their rapid growth in the Korean market...",
+  },
+];
+
 const PRService = () => {
   usePageTitle("PR & Media");
+  const [activeCoverage, setActiveCoverage] = useState(0);
   
   return (
     <ServicePageLayout
@@ -219,28 +246,78 @@ const PRService = () => {
         </div>
       </section>
 
-      {/* What's Included Section */}
+      {/* Featured Coverage Section */}
       <section className="scroll-reveal bg-[#121212]">
         <div className="border-t border-white/10">
-          <SectionHeader number="02" title="What's Included" badge="Full-Service PR Package" />
+          <SectionHeader number="02" title="Featured Coverage" badge="Recent Placements" />
 
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {includedItems.map((item, index) => (
-                  <motion.div
-                    key={item}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
-                    className="p-4 rounded-xl border border-white/10 bg-white/5 hover:border-violet-500/30 transition-all"
+              {/* Navigation */}
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex gap-2">
+                  {featuredCoverage.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveCoverage(idx)}
+                      className={`w-2 h-2 rounded-full transition-all ${
+                        activeCoverage === idx 
+                          ? 'w-8 bg-violet-500' 
+                          : 'bg-white/30 hover:bg-white/50'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setActiveCoverage(prev => prev === 0 ? featuredCoverage.length - 1 : prev - 1)}
+                    className="p-2 rounded-full border border-white/20 hover:border-violet-500/50 hover:bg-violet-500/10 transition-all"
                   >
-                    <Award className="w-5 h-5 mb-2" style={{ color: ACCENT_COLOR }} />
-                    <span className="text-white/80 text-sm">{item}</span>
-                  </motion.div>
-                ))}
+                    <ChevronLeft className="w-4 h-4 text-white/60" />
+                  </button>
+                  <button
+                    onClick={() => setActiveCoverage(prev => (prev + 1) % featuredCoverage.length)}
+                    className="p-2 rounded-full border border-white/20 hover:border-violet-500/50 hover:bg-violet-500/10 transition-all"
+                  >
+                    <ChevronRight className="w-4 h-4 text-white/60" />
+                  </button>
+                </div>
               </div>
+
+              {/* Coverage Card */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeCoverage}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.3 }}
+                  className="p-8 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] hover:border-violet-500/30 transition-all"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <span 
+                        className="px-3 py-1 rounded-full text-xs font-medium"
+                        style={{ backgroundColor: `${ACCENT_COLOR}20`, color: ACCENT_COLOR }}
+                      >
+                        {featuredCoverage[activeCoverage].type}
+                      </span>
+                      <span className="text-white/40 text-sm">{featuredCoverage[activeCoverage].outlet}</span>
+                      <span className="text-white/30 text-sm">·</span>
+                      <span className="text-white/40 text-sm">{featuredCoverage[activeCoverage].date}</span>
+                    </div>
+                    <ExternalLink className="w-5 h-5 text-white/40" />
+                  </div>
+                  
+                  <h3 className="text-2xl font-bold text-white mb-4 leading-tight">
+                    {featuredCoverage[activeCoverage].title}
+                  </h3>
+                  
+                  <p className="text-white/60 text-lg leading-relaxed">
+                    {featuredCoverage[activeCoverage].excerpt}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
         </div>

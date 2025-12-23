@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Pencil, Calendar, Send, LineChart, Eye, Heart, Users, TrendingUp, MessageCircle, Repeat2, Share } from "lucide-react";
+import { Pencil, Calendar, Send, LineChart, Eye, Heart, Users, TrendingUp, MessageCircle, Repeat2, Share, ChevronLeft, ChevronRight } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -187,77 +187,82 @@ const SocialMediaService = () => {
                   </p>
                 </div>
 
-                {/* Right - Tweet Cards */}
+                {/* Right - Tweet Cards with Navigation */}
                 <div className="relative">
-                  {sampleTweets.map((tweet, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ 
-                        opacity: activeTweet === index ? 1 : 0.3,
-                        y: activeTweet === index ? 0 : 20,
-                        scale: activeTweet === index ? 1 : 0.95,
-                      }}
-                      className={`bg-[#16181c] border border-white/10 rounded-2xl p-5 mb-4 transition-all ${
-                        activeTweet === index ? 'z-10 relative' : 'absolute top-0 left-0 right-0'
-                      }`}
+                  {/* Navigation Buttons */}
+                  <div className="flex items-center justify-between mb-4">
+                    <button
+                      onClick={() => setActiveTweet(prev => prev === 0 ? sampleTweets.length - 1 : prev - 1)}
+                      className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 hover:border-pink-500/50 hover:bg-pink-500/10 transition-all text-white/60 hover:text-white text-sm"
                     >
-                      {/* Tweet Header */}
-                      <div className="flex items-center gap-3 mb-3">
-                        <div 
-                          className="w-12 h-12 rounded-full flex items-center justify-center"
-                          style={{ backgroundColor: ACCENT_COLOR }}
-                        >
-                          <span className="text-white font-bold">YP</span>
-                        </div>
-                        <div>
-                          <p className="text-white font-bold">Your Project</p>
-                          <p className="text-gray-500 text-sm">{tweet.handle} · {tweet.time}</p>
-                        </div>
-                      </div>
-
-                      {/* Tweet Content */}
-                      <p className="text-white text-lg mb-4">{tweet.content}</p>
-
-                      {/* Tweet Actions */}
-                      <div className="flex items-center justify-between text-gray-500">
-                        <div className="flex items-center gap-2 hover:text-blue-400 transition-colors cursor-pointer">
-                          <MessageCircle className="w-5 h-5" />
-                          <span>{tweet.replies}</span>
-                        </div>
-                        <div className="flex items-center gap-2 hover:text-green-400 transition-colors cursor-pointer">
-                          <Repeat2 className="w-5 h-5" />
-                          <span>{tweet.retweets}</span>
-                        </div>
-                        <div className="flex items-center gap-2 hover:text-pink-400 transition-colors cursor-pointer">
-                          <Heart className="w-5 h-5" />
-                          <span>{tweet.likes}</span>
-                        </div>
-                        <Share className="w-5 h-5 hover:text-blue-400 transition-colors cursor-pointer" />
-                      </div>
-                    </motion.div>
-                  ))}
-
-                  {/* Heart Particles */}
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute"
-                      style={{ left: `${20 + i * 15}%`, bottom: 0 }}
-                      animate={{
-                        y: [-20, -100],
-                        opacity: [1, 0],
-                        scale: [1, 0.5],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        delay: i * 0.4,
-                      }}
+                      <ChevronLeft className="w-4 h-4" />
+                      Previous
+                    </button>
+                    <div className="flex gap-2">
+                      {sampleTweets.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setActiveTweet(idx)}
+                          className={`w-2 h-2 rounded-full transition-all ${
+                            activeTweet === idx 
+                              ? 'w-6 bg-pink-500' 
+                              : 'bg-white/30 hover:bg-white/50'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <button
+                      onClick={() => setActiveTweet(prev => (prev + 1) % sampleTweets.length)}
+                      className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 hover:border-pink-500/50 hover:bg-pink-500/10 transition-all text-white/60 hover:text-white text-sm"
                     >
-                      <Heart className="w-4 h-4 fill-pink-500 text-pink-500" />
-                    </motion.div>
-                  ))}
+                      Next
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {/* Tweet Card */}
+                  <motion.div
+                    key={activeTweet}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="bg-[#16181c] border border-white/10 rounded-2xl p-5"
+                  >
+                    {/* Tweet Header */}
+                    <div className="flex items-center gap-3 mb-3">
+                      <div 
+                        className="w-12 h-12 rounded-full flex items-center justify-center"
+                        style={{ backgroundColor: ACCENT_COLOR }}
+                      >
+                        <span className="text-white font-bold">YP</span>
+                      </div>
+                      <div>
+                        <p className="text-white font-bold">Your Project</p>
+                        <p className="text-gray-500 text-sm">{sampleTweets[activeTweet].handle} · {sampleTweets[activeTweet].time}</p>
+                      </div>
+                    </div>
+
+                    {/* Tweet Content */}
+                    <p className="text-white text-lg mb-4">{sampleTweets[activeTweet].content}</p>
+
+                    {/* Tweet Actions */}
+                    <div className="flex items-center justify-between text-gray-500">
+                      <div className="flex items-center gap-2 hover:text-blue-400 transition-colors cursor-pointer">
+                        <MessageCircle className="w-5 h-5" />
+                        <span>{sampleTweets[activeTweet].replies}</span>
+                      </div>
+                      <div className="flex items-center gap-2 hover:text-green-400 transition-colors cursor-pointer">
+                        <Repeat2 className="w-5 h-5" />
+                        <span>{sampleTweets[activeTweet].retweets}</span>
+                      </div>
+                      <div className="flex items-center gap-2 hover:text-pink-400 transition-colors cursor-pointer">
+                        <Heart className="w-5 h-5" />
+                        <span>{sampleTweets[activeTweet].likes}</span>
+                      </div>
+                      <Share className="w-5 h-5 hover:text-blue-400 transition-colors cursor-pointer" />
+                    </div>
+                  </motion.div>
                 </div>
               </div>
             </div>
