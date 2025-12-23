@@ -1,8 +1,54 @@
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
 
 const HologramLogo = () => {
+  const [glitchState, setGlitchState] = useState({
+    active: false,
+    offsetX: 0,
+    offsetY: 0,
+    rgbSplit: 0,
+  });
+
+  // Random glitch trigger
+  useEffect(() => {
+    const triggerGlitch = () => {
+      setGlitchState({
+        active: true,
+        offsetX: (Math.random() - 0.5) * 0.3,
+        offsetY: (Math.random() - 0.5) * 0.2,
+        rgbSplit: Math.random() * 0.15,
+      });
+
+      const glitchCount = Math.floor(Math.random() * 3) + 1;
+      let count = 0;
+      
+      const rapidGlitch = setInterval(() => {
+        count++;
+        if (count < glitchCount) {
+          setGlitchState({
+            active: true,
+            offsetX: (Math.random() - 0.5) * 0.25,
+            offsetY: (Math.random() - 0.5) * 0.15,
+            rgbSplit: Math.random() * 0.12,
+          });
+        } else {
+          clearInterval(rapidGlitch);
+          setTimeout(() => {
+            setGlitchState({ active: false, offsetX: 0, offsetY: 0, rgbSplit: 0 });
+          }, 50 + Math.random() * 100);
+        }
+      }, 50 + Math.random() * 80);
+    };
+
+    const glitchInterval = setInterval(() => {
+      triggerGlitch();
+    }, 2000 + Math.random() * 4000);
+
+    setTimeout(triggerGlitch, 1000);
+
+    return () => clearInterval(glitchInterval);
+  }, []);
 
   // Create edge geometry for wireframe effect
   const { mainEdges, innerEdges } = useMemo(() => {
@@ -35,19 +81,18 @@ const HologramLogo = () => {
     shape.lineTo(w/2 - pillarWidth, 0);
     
     // 7. Semicircular arch (opens downward from y=0)
-    // archRadius = w/2 - pillarWidth, so the arc connects directly
     shape.absarc(0, 0, archRadius, 0, Math.PI, false);
     
     // 8. Left pillar bottom
     shape.lineTo(-w/2 + r, 0);
     
-    // 13. Bottom-left corner (rounded)
+    // 9. Bottom-left corner (rounded)
     shape.quadraticCurveTo(-w/2, 0, -w/2, r);
     
-    // 14. Left outer side (CONCAVE curve) - curves inward
+    // 10. Left outer side (CONCAVE curve) - curves inward
     shape.quadraticCurveTo(-w/2 + sideCurve, h/2, -w/2, h - r);
     
-    // 15. Top-left corner (rounded) - close the shape
+    // 11. Top-left corner (rounded) - close the shape
     shape.quadraticCurveTo(-w/2, h, -w/2 + r, h);
     
     const extrudeSettings = {
@@ -67,22 +112,25 @@ const HologramLogo = () => {
     return { mainEdges: mainEdgesGeom, innerEdges: innerEdgesGeom };
   }, []);
 
-
   const cyanColor = "#00FFFF";
   const magentaColor = "#FF00FF";
   const whiteColor = "#FFFFFF";
 
   return (
-    <group position={[0, -0.5, 0]}>
+    <group position={[0, -1.0, 0]}>
       {/* Main cyan wireframe */}
       <lineSegments 
         geometry={mainEdges} 
-        position={[0, 0, -0.125]}
+        position={[
+          glitchState.active ? glitchState.offsetX : 0, 
+          glitchState.active ? glitchState.offsetY : 0, 
+          -0.125
+        ]}
       >
         <lineBasicMaterial 
           color={cyanColor} 
           transparent 
-          opacity={0.9}
+          opacity={glitchState.active ? 0.6 + Math.random() * 0.4 : 0.9}
           linewidth={2}
         />
       </lineSegments>
@@ -90,12 +138,16 @@ const HologramLogo = () => {
       {/* Magenta RGB split layer (offset for hologram effect) */}
       <lineSegments 
         geometry={mainEdges} 
-        position={[0.025, 0.01, -0.13]}
+        position={[
+          glitchState.active ? glitchState.rgbSplit + 0.03 : 0.025, 
+          glitchState.active ? -glitchState.rgbSplit * 0.5 : 0.01, 
+          -0.13
+        ]}
       >
         <lineBasicMaterial 
           color={magentaColor} 
           transparent 
-          opacity={0.5}
+          opacity={glitchState.active ? 0.4 + Math.random() * 0.3 : 0.5}
           linewidth={1}
         />
       </lineSegments>
@@ -103,12 +155,16 @@ const HologramLogo = () => {
       {/* White highlight layer */}
       <lineSegments 
         geometry={innerEdges} 
-        position={[0, 0, -0.075]}
+        position={[
+          glitchState.active ? -glitchState.offsetX * 0.5 : 0, 
+          glitchState.active ? glitchState.offsetY * 0.3 : 0, 
+          -0.075
+        ]}
       >
         <lineBasicMaterial 
           color={whiteColor} 
           transparent 
-          opacity={0.25}
+          opacity={glitchState.active ? 0.2 + Math.random() * 0.3 : 0.25}
           linewidth={1}
         />
       </lineSegments>
