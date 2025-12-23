@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, Save } from 'lucide-react';
+import { ArrowLeft, Save, Upload, X, Image as ImageIcon } from 'lucide-react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { ProtectedRoute } from '@/components/admin/ProtectedRoute';
 import { Button } from '@/components/ui/button';
@@ -49,8 +49,13 @@ export default function ResearchForm() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const isEditing = Boolean(id);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState<ResearchFormData>(initialFormData);
+  const [imageFile, setImageFile] = useState<File | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
 
   const { data: existingPost, isLoading } = useQuery({
     queryKey: ['research-post', id],
@@ -84,15 +89,111 @@ export default function ResearchForm() {
         is_published: existingPost.is_published ?? true,
         display_order: existingPost.display_order ?? 0,
       });
+      if (existingPost.image) {
+        setImagePreview(existingPost.image);
+      }
     }
   }, [existingPost]);
 
+  const handleImageFile = useCallback((file: File) => {
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image must be less than 5MB');
+      return;
+    }
+    setImageFile(file);
+    setImagePreview(URL.createObjectURL(file));
+  }, []);
+
+  const handlePaste = useCallback((e: React.ClipboardEvent) => {
+    const items = e.clipboardData.items;
+    for (const item of Array.from(items)) {
+      if (item.type.startsWith('image/')) {
+        e.preventDefault();
+        const file = item.getAsFile();
+        if (file) {
+          handleImageFile(file);
+        }
+        break;
+      }
+    }
+  }, [handleImageFile]);
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      handleImageFile(file);
+    }
+  }, [handleImageFile]);
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  }, []);
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+  }, []);
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleImageFile(file);
+    }
+  };
+
+  const removeImage = () => {
+    setImageFile(null);
+    setImagePreview(null);
+    setFormData({ ...formData, image: '' });
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+  };
+
+  const uploadImage = async (): Promise<string | null> => {
+    if (!imageFile) return formData.image || null;
+
+    setIsUploading(true);
+    try {
+      const fileExt = imageFile.name.split('.').pop() || 'jpg';
+      const slug = formData.slug || 'research';
+      const fileName = `research/${slug}-${Date.now()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('project-images')
+        .upload(fileName, imageFile);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('project-images')
+        .getPublicUrl(fileName);
+
+      return publicUrl;
+    } catch (error) {
+      console.error('Upload error:', error);
+      toast.error('Failed to upload image');
+      return null;
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
   const saveMutation = useMutation({
     mutationFn: async (data: ResearchFormData) => {
+      const imageUrl = await uploadImage();
+
       const postData = {
         title: data.title,
         slug: data.slug,
-        image: data.image || null,
+        image: imageUrl,
         date: data.date || null,
         read_time: data.read_time || null,
         category: data.category || null,
@@ -159,7 +260,7 @@ export default function ResearchForm() {
   return (
     <ProtectedRoute>
       <AdminLayout>
-        <div className="p-8 max-w-4xl">
+        <div className="p-8 max-w-4xl" onPaste={handlePaste}>
           <button
             onClick={() => navigate('/ium-admin/research')}
             className="flex items-center gap-2 text-white/60 hover:text-white mb-6 transition-colors"
@@ -210,13 +311,80 @@ export default function ResearchForm() {
               </div>
 
               <div>
-                <Label className="text-white">Image URL</Label>
+                <Label className="text-white">Date</Label>
                 <Input
-                  value={formData.image}
-                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                  value={formData.date}
+                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                   className="bg-[#111] border-white/10 text-white mt-1"
-                  placeholder="https://..."
+                  placeholder="e.g., Dec 11, 2024"
                 />
+              </div>
+
+              {/* Image Upload Section */}
+              <div className="col-span-2">
+                <Label className="text-white mb-2 block">Cover Image</Label>
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleFileSelect}
+                  className="hidden"
+                />
+                
+                {imagePreview ? (
+                  <div className="relative rounded-lg overflow-hidden border border-white/10 bg-[#111]">
+                    <img
+                      src={imagePreview}
+                      alt="Preview"
+                      className="w-full h-48 object-cover"
+                    />
+                    <button
+                      type="button"
+                      onClick={removeImage}
+                      className="absolute top-2 right-2 p-1.5 bg-black/70 hover:bg-black rounded-full transition-colors"
+                    >
+                      <X className="w-4 h-4 text-white" />
+                    </button>
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/70 px-3 py-2 text-xs text-white/60">
+                      {imageFile ? imageFile.name : 'Current image'}
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    onClick={() => fileInputRef.current?.click()}
+                    onDrop={handleDrop}
+                    onDragOver={handleDragOver}
+                    onDragLeave={handleDragLeave}
+                    className={`
+                      flex flex-col items-center justify-center gap-3 p-8
+                      border-2 border-dashed rounded-lg cursor-pointer
+                      transition-all duration-200
+                      ${isDragging 
+                        ? 'border-primary bg-primary/10' 
+                        : 'border-white/20 hover:border-white/40 bg-[#111]'
+                      }
+                    `}
+                  >
+                    <div className={`p-3 rounded-full ${isDragging ? 'bg-primary/20' : 'bg-white/5'}`}>
+                      {isDragging ? (
+                        <Upload className="w-6 h-6 text-primary" />
+                      ) : (
+                        <ImageIcon className="w-6 h-6 text-white/40" />
+                      )}
+                    </div>
+                    <div className="text-center">
+                      <p className="text-white/80 font-medium">
+                        {isDragging ? 'Drop image here' : 'Click to upload or drag & drop'}
+                      </p>
+                      <p className="text-white/40 text-sm mt-1">
+                        Or paste from clipboard (Ctrl/Cmd + V)
+                      </p>
+                      <p className="text-white/30 text-xs mt-2">
+                        PNG, JPG, WEBP up to 5MB
+                      </p>
+                    </div>
+                  </div>
+                )}
               </div>
 
               <div>
@@ -240,22 +408,22 @@ export default function ResearchForm() {
               </div>
 
               <div>
-                <Label className="text-white">Date</Label>
-                <Input
-                  value={formData.date}
-                  onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                  className="bg-[#111] border-white/10 text-white mt-1"
-                  placeholder="e.g., Dec 11, 2024"
-                />
-              </div>
-
-              <div>
                 <Label className="text-white">Read Time</Label>
                 <Input
                   value={formData.read_time}
                   onChange={(e) => setFormData({ ...formData, read_time: e.target.value })}
                   className="bg-[#111] border-white/10 text-white mt-1"
                   placeholder="e.g., 10 min read"
+                />
+              </div>
+
+              <div>
+                <Label className="text-white">Display Order</Label>
+                <Input
+                  type="number"
+                  value={formData.display_order}
+                  onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) || 0 })}
+                  className="bg-[#111] border-white/10 text-white mt-1"
                 />
               </div>
 
@@ -291,17 +459,7 @@ export default function ResearchForm() {
                 />
               </div>
 
-              <div>
-                <Label className="text-white">Display Order</Label>
-                <Input
-                  type="number"
-                  value={formData.display_order}
-                  onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) || 0 })}
-                  className="bg-[#111] border-white/10 text-white mt-1"
-                />
-              </div>
-
-              <div className="flex items-center gap-3 pt-6">
+              <div className="flex items-center gap-3 col-span-2">
                 <Switch
                   checked={formData.is_published}
                   onCheckedChange={(checked) => setFormData({ ...formData, is_published: checked })}
@@ -314,10 +472,10 @@ export default function ResearchForm() {
               <Button
                 type="submit"
                 className="bg-primary hover:bg-primary/90"
-                disabled={saveMutation.isPending}
+                disabled={saveMutation.isPending || isUploading}
               >
                 <Save className="w-4 h-4 mr-2" />
-                {saveMutation.isPending ? 'Saving...' : 'Save Post'}
+                {saveMutation.isPending || isUploading ? 'Saving...' : 'Save Post'}
               </Button>
               <Button
                 type="button"
