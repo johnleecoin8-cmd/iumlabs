@@ -254,10 +254,31 @@ const GTMStrategyService = () => {
             <div className="container mx-auto px-6 lg:px-16">
               {/* Timeline */}
               <div className="relative">
-                {/* Timeline Line */}
-                <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-emerald-500/50 to-transparent hidden md:block" />
+                {/* Animated Timeline Line */}
+                <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px hidden md:block overflow-hidden">
+                  <motion.div 
+                    className="absolute inset-0 w-full"
+                    style={{ 
+                      background: `linear-gradient(to bottom, transparent 0%, ${ACCENT_COLOR} 20%, ${ACCENT_COLOR} 80%, transparent 100%)` 
+                    }}
+                    initial={{ y: "-100%" }}
+                    whileInView={{ y: "0%" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                  />
+                  {/* Glowing particles moving down the line */}
+                  <motion.div
+                    className="absolute w-2 h-8 rounded-full left-1/2 -translate-x-1/2"
+                    style={{ 
+                      background: `linear-gradient(to bottom, transparent, ${ACCENT_COLOR}, transparent)`,
+                      boxShadow: `0 0 20px ${ACCENT_COLOR}`
+                    }}
+                    animate={{ y: ["-100%", "1000%"] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
+                  />
+                </div>
                 
-                <div className="space-y-8">
+                <div className="space-y-12">
                   {timelinePhases.map((phase, index) => {
                     const Icon = phase.icon;
                     const isLeft = index % 2 === 0;
@@ -265,50 +286,148 @@ const GTMStrategyService = () => {
                     return (
                       <motion.div
                         key={phase.phase}
-                        initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
+                        initial={{ opacity: 0, x: isLeft ? -50 : 50, scale: 0.9 }}
+                        whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ 
+                          delay: index * 0.15, 
+                          duration: 0.6,
+                          type: "spring",
+                          stiffness: 100
+                        }}
                         className={`relative flex items-center ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'}`}
                       >
-                        {/* Content */}
-                        <div className={`flex-1 ${isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'} pl-12 md:pl-0`}>
-                          <div 
-                            className={`p-6 rounded-xl border border-white/10 bg-white/5 hover:border-emerald-500/30 transition-all inline-block ${isLeft ? 'md:ml-auto' : ''}`}
+                        {/* Content Card */}
+                        <div className={`flex-1 ${isLeft ? 'md:pr-16 md:text-right' : 'md:pl-16 md:text-left'} pl-16 md:pl-0`}>
+                          <motion.div 
+                            className={`p-6 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-sm inline-block ${isLeft ? 'md:ml-auto' : ''} group cursor-default`}
+                            whileHover={{ 
+                              scale: 1.02, 
+                              borderColor: ACCENT_COLOR,
+                              boxShadow: `0 0 30px ${ACCENT_COLOR}20`
+                            }}
+                            transition={{ type: "spring", stiffness: 300, damping: 20 }}
                           >
-                            <div className={`flex items-center gap-3 mb-3 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
-                              <span 
-                                className="text-xs font-mono tracking-wider px-2 py-1 rounded-full"
+                            {/* Animated corner accent */}
+                            <motion.div 
+                              className={`absolute top-0 ${isLeft ? 'right-0 rounded-tr-2xl' : 'left-0 rounded-tl-2xl'} w-16 h-16 opacity-20`}
+                              style={{ 
+                                background: `radial-gradient(circle at ${isLeft ? 'top right' : 'top left'}, ${ACCENT_COLOR}, transparent 70%)`
+                              }}
+                              animate={{ opacity: [0.1, 0.3, 0.1] }}
+                              transition={{ duration: 2, repeat: Infinity, delay: index * 0.3 }}
+                            />
+                            
+                            <div className={`flex items-center gap-3 mb-4 ${isLeft ? 'md:flex-row-reverse' : ''}`}>
+                              <motion.span 
+                                className="text-xs font-mono tracking-wider px-3 py-1.5 rounded-full font-medium"
                                 style={{ backgroundColor: `${ACCENT_COLOR}20`, color: ACCENT_COLOR }}
+                                whileHover={{ scale: 1.05 }}
                               >
                                 {phase.phase}
-                              </span>
-                              <span className="text-white/40 text-sm flex items-center gap-1">
-                                <Clock className="w-3 h-3" />
+                              </motion.span>
+                              <span className="text-white/40 text-sm flex items-center gap-1.5">
+                                <Clock className="w-3.5 h-3.5" />
                                 {phase.duration}
                               </span>
                             </div>
-                            <h3 className="text-xl font-semibold text-white mb-3">{phase.title}</h3>
-                            <ul className={`space-y-2 ${isLeft ? 'md:text-right' : ''}`}>
-                              {phase.tasks.map((task) => (
-                                <li key={task} className={`flex items-center gap-2 text-white/60 text-sm ${isLeft ? 'md:flex-row-reverse' : ''}`}>
-                                  <CheckCircle className="w-3 h-3 text-emerald-400" />
-                                  {task}
-                                </li>
+                            
+                            <h3 className="text-xl font-bold text-white mb-4 group-hover:text-emerald-300 transition-colors">
+                              {phase.title}
+                            </h3>
+                            
+                            <ul className={`space-y-2.5 ${isLeft ? 'md:text-right' : ''}`}>
+                              {phase.tasks.map((task, taskIndex) => (
+                                <motion.li 
+                                  key={task} 
+                                  className={`flex items-center gap-2.5 text-white/60 text-sm ${isLeft ? 'md:flex-row-reverse' : ''}`}
+                                  initial={{ opacity: 0, x: isLeft ? 10 : -10 }}
+                                  whileInView={{ opacity: 1, x: 0 }}
+                                  viewport={{ once: true }}
+                                  transition={{ delay: index * 0.15 + taskIndex * 0.1 + 0.3 }}
+                                >
+                                  <motion.div
+                                    whileHover={{ scale: 1.2, rotate: 360 }}
+                                    transition={{ type: "spring", stiffness: 300 }}
+                                  >
+                                    <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
+                                  </motion.div>
+                                  <span className="group-hover:text-white/80 transition-colors">{task}</span>
+                                </motion.li>
                               ))}
                             </ul>
-                          </div>
+                          </motion.div>
                         </div>
 
-                        {/* Center Icon */}
+                        {/* Center Icon with Pulse Animation */}
                         <div className="absolute left-0 md:left-1/2 md:-translate-x-1/2 z-10">
-                          <div 
-                            className="w-8 h-8 rounded-full flex items-center justify-center"
+                          {/* Outer pulse rings */}
+                          <motion.div
+                            className="absolute inset-0 rounded-full"
                             style={{ backgroundColor: ACCENT_COLOR }}
+                            animate={{ 
+                              scale: [1, 1.8, 2.2],
+                              opacity: [0.4, 0.1, 0]
+                            }}
+                            transition={{ 
+                              duration: 2, 
+                              repeat: Infinity, 
+                              delay: index * 0.3,
+                              ease: "easeOut"
+                            }}
+                          />
+                          <motion.div
+                            className="absolute inset-0 rounded-full"
+                            style={{ backgroundColor: ACCENT_COLOR }}
+                            animate={{ 
+                              scale: [1, 1.5, 1.8],
+                              opacity: [0.3, 0.1, 0]
+                            }}
+                            transition={{ 
+                              duration: 2, 
+                              repeat: Infinity, 
+                              delay: index * 0.3 + 0.3,
+                              ease: "easeOut"
+                            }}
+                          />
+                          
+                          {/* Main icon circle */}
+                          <motion.div 
+                            className="relative w-10 h-10 rounded-full flex items-center justify-center"
+                            style={{ 
+                              backgroundColor: ACCENT_COLOR,
+                              boxShadow: `0 0 20px ${ACCENT_COLOR}60`
+                            }}
+                            initial={{ scale: 0, rotate: -180 }}
+                            whileInView={{ scale: 1, rotate: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ 
+                              delay: index * 0.15 + 0.2, 
+                              type: "spring", 
+                              stiffness: 200,
+                              damping: 15
+                            }}
+                            whileHover={{ 
+                              scale: 1.2,
+                              boxShadow: `0 0 30px ${ACCENT_COLOR}`
+                            }}
                           >
-                            <Icon className="w-4 h-4 text-white" />
-                          </div>
+                            <Icon className="w-5 h-5 text-white" />
+                          </motion.div>
                         </div>
+
+                        {/* Connector line from icon to card */}
+                        <motion.div 
+                          className={`absolute top-1/2 hidden md:block h-px ${isLeft ? 'left-1/2 right-auto' : 'right-1/2 left-auto'}`}
+                          style={{ 
+                            width: '40px',
+                            background: `linear-gradient(${isLeft ? 'to left' : 'to right'}, ${ACCENT_COLOR}50, transparent)`
+                          }}
+                          initial={{ scaleX: 0 }}
+                          whileInView={{ scaleX: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: index * 0.15 + 0.4, duration: 0.3 }}
+                        />
 
                         {/* Spacer for opposite side */}
                         <div className="flex-1 hidden md:block" />
