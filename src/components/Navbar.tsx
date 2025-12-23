@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Send, Calendar } from "lucide-react";
+import { X, Send, Calendar } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
 import logoImage from "@/assets/logo.png";
@@ -69,13 +69,17 @@ const Navbar = () => {
               <span>Book a Meeting</span>
             </a>
 
-            {/* Menu Button */}
+            {/* Menu Button - Animated Hamburger */}
             <button
               onClick={() => setIsMenuOpen(true)}
               className="group flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2 m-1 sm:m-1.5 rounded-full bg-background text-foreground text-xs sm:text-sm font-medium transition-all duration-300 hover:bg-background/90 hover:shadow-md"
             >
               <span className="hidden sm:inline">menu</span>
-              <Menu className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:rotate-90" />
+              <div className="relative w-4 h-4 sm:w-5 sm:h-5 flex flex-col justify-center items-center">
+                <span className="absolute w-4 h-0.5 bg-current transition-all duration-300 -translate-y-1 group-hover:translate-y-0 group-hover:rotate-45" />
+                <span className="absolute w-4 h-0.5 bg-current transition-all duration-300 opacity-100 group-hover:opacity-0" />
+                <span className="absolute w-4 h-0.5 bg-current transition-all duration-300 translate-y-1 group-hover:translate-y-0 group-hover:-rotate-45" />
+              </div>
             </button>
           </div>
         </div>
@@ -112,7 +116,10 @@ const Navbar = () => {
                 className="group flex items-center gap-3 px-5 py-2.5 rounded-full bg-secondary text-foreground text-sm font-medium transition-all duration-300 hover:bg-secondary/80"
               >
                 <span>close</span>
-                <X className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90" />
+                <div className="relative w-5 h-5 flex items-center justify-center">
+                  <span className="absolute w-4 h-0.5 bg-current rotate-45 transition-transform duration-300 group-hover:rotate-[135deg]" />
+                  <span className="absolute w-4 h-0.5 bg-current -rotate-45 transition-transform duration-300 group-hover:rotate-[45deg]" />
+                </div>
               </button>
             </div>
           </div>
