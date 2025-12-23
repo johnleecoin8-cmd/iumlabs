@@ -1,14 +1,13 @@
-import { useState, useEffect } from "react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { supabase } from "@/integrations/supabase/client";
+import useScrollReveal from "@/hooks/useScrollReveal";
 
 // Import logos as fallbacks
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -90,7 +89,6 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
         } ${!isLastRow ? "border-b border-white/10" : ""}`}
       >
         <div className="flex items-start gap-6">
-          {/* Image */}
           <motion.div 
             className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 border border-white/10"
             whileHover={{ scale: 1.05 }}
@@ -103,7 +101,6 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
             />
           </motion.div>
           
-          {/* Content */}
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-3 text-white/40 text-xs mb-2">
               <span className="uppercase tracking-wider">{project.category}</span>
@@ -130,8 +127,8 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
 
 const Projects = () => {
   usePageTitle("Projects");
+  useScrollReveal();
 
-  // Fetch projects from Supabase, fallback to hardcoded data
   const { data: dbProjects } = useQuery({
     queryKey: ['projects'],
     queryFn: async () => {
@@ -145,7 +142,6 @@ const Projects = () => {
     },
   });
 
-  // Use DB projects if available, otherwise fallback
   const cases = dbProjects && dbProjects.length > 0
     ? dbProjects.map(p => ({
         name: p.name,
@@ -156,11 +152,12 @@ const Projects = () => {
         bgImage: p.background_url || fallbackCases.find(f => f.slug === p.slug)?.bgImage || '',
       }))
     : fallbackCases;
+    
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero Section - Gold/Amber Theme */}
+      {/* Hero Section */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
         <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl bg-[#0A0A0A]">
           <div className="absolute inset-0 overflow-hidden">
@@ -181,7 +178,6 @@ const Projects = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-transparent to-amber-500/10" />
           </div>
 
-          {/* Content - Centered like homepage */}
           <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
             <motion.span 
               className="text-xs text-amber-400/70 mb-6 block tracking-widest"
@@ -221,23 +217,20 @@ const Projects = () => {
         </section>
       </main>
 
-      {/* Projects Grid Section with Header */}
-      <section className="bg-[#0A0A0A]" id="projects-grid">
-        <div className="border-t border-amber-500/20">
-          {/* Section Header - Gold Theme */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-amber-500/20">
+      {/* Projects Grid Section - 01 홀수 */}
+      <section className="scroll-reveal bg-[#0F0F0F]" id="projects-grid">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-amber-500 font-mono tracking-widest">01</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Case Studies</h2>
             </div>
-            <span className="text-xs text-amber-400/60 tracking-wider hidden sm:block px-3 py-1 border border-amber-500/30 rounded-full">
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
               {cases.length} Projects
             </span>
           </div>
           
-          {/* Grid Content */}
           <div className="flex flex-col lg:flex-row">
-            {/* Left: Projects Grid */}
             <div className="w-full lg:w-2/3 lg:border-r lg:border-white/10">
               <div className="grid grid-cols-1 md:grid-cols-2">
                 {cases.map((project, index) => (
@@ -246,7 +239,6 @@ const Projects = () => {
               </div>
             </div>
 
-            {/* Right: Sticky CTA Panel */}
             <motion.div
               className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
               initial={{ opacity: 0, x: 20 }}
@@ -295,10 +287,14 @@ const Projects = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <ContactFormSection sectionNumber="02" />
+      {/* Contact Section - 02 짝수 */}
+      <section className="scroll-reveal bg-[#121212]">
+        <ContactFormSection sectionNumber="02" />
+      </section>
 
-      <Footer />
+      <div className="border-t border-white/10">
+        <Footer />
+      </div>
     </div>
   );
 };
