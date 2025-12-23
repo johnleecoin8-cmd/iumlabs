@@ -1,13 +1,19 @@
 import { useEffect, useState, ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Calendar, ArrowRight, ChevronDown, LucideIcon, ArrowLeft } from "lucide-react";
+import { Calendar, ArrowRight, ChevronDown, LucideIcon, ArrowLeft, Check, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import SectionHeader from "@/components/SectionHeader";
 import { useCountUp } from "@/hooks/useCountUp";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 // Import client logos for marquee
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -68,6 +74,16 @@ export interface ProcessStep {
   icon: LucideIcon;
 }
 
+export interface Deliverable {
+  title: string;
+  items: string[];
+}
+
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
 interface ServicePageLayoutProps {
   // Hero Section
   serviceName: string;
@@ -82,6 +98,12 @@ interface ServicePageLayoutProps {
   
   // Process Section
   processSteps: ProcessStep[];
+  
+  // Deliverables Section (optional)
+  deliverables?: Deliverable[];
+  
+  // FAQ Section (optional)
+  faqItems?: FAQItem[];
   
   // Additional sections (optional)
   children?: ReactNode;
@@ -141,6 +163,8 @@ const ServicePageLayout = ({
   accentColor,
   videoSrc = "/videos/services-background.mp4",
   processSteps,
+  deliverables,
+  faqItems,
   children,
   currentSlug,
 }: ServicePageLayoutProps) => {
@@ -171,6 +195,23 @@ const ServicePageLayout = ({
   }, []);
 
   const otherServices = allServices.filter(s => s.slug !== currentSlug);
+
+  // Calculate section numbers dynamically
+  let sectionNumber = 1;
+  const getNextSectionNumber = () => {
+    const num = sectionNumber.toString().padStart(2, '0');
+    sectionNumber++;
+    return num;
+  };
+
+  // Reset section number for each render
+  sectionNumber = 1;
+  const childrenSectionNum = children ? getNextSectionNumber() : null;
+  const deliverablesSectionNum = deliverables ? getNextSectionNumber() : null;
+  const faqSectionNum = faqItems ? getNextSectionNumber() : null;
+  const processSectionNum = getNextSectionNumber();
+  const moreServicesSectionNum = getNextSectionNumber();
+  const contactSectionNum = getNextSectionNumber();
 
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
@@ -356,10 +397,98 @@ const ServicePageLayout = ({
       {/* Additional Content Sections */}
       {children}
 
+      {/* Deliverables Section */}
+      {deliverables && deliverables.length > 0 && (
+        <section className="scroll-reveal bg-[#0F0F0F]">
+          <div className="border-t border-white/10">
+            <SectionHeader number={deliverablesSectionNum!} title="What You Get" badge="Deliverables" />
+            
+            <div className="py-16 md:py-20">
+              <div className="container mx-auto px-6 lg:px-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {deliverables.map((deliverable, index) => (
+                    <motion.div
+                      key={deliverable.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="p-6 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all"
+                    >
+                      <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                        <div 
+                          className="w-2 h-2 rounded-full"
+                          style={{ backgroundColor: accentColor }}
+                        />
+                        {deliverable.title}
+                      </h3>
+                      <ul className="space-y-3">
+                        {deliverable.items.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-3 text-white/60 text-sm">
+                            <Check 
+                              className="w-4 h-4 mt-0.5 flex-shrink-0" 
+                              style={{ color: accentColor }} 
+                            />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* FAQ Section */}
+      {faqItems && faqItems.length > 0 && (
+        <section className="scroll-reveal bg-[#121212]">
+          <div className="border-t border-white/10">
+            <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
+            
+            <div className="py-16 md:py-20">
+              <div className="container mx-auto px-6 lg:px-16 max-w-4xl">
+                <Accordion type="single" collapsible className="space-y-4">
+                  {faqItems.map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <AccordionItem 
+                        value={`item-${index}`}
+                        className="border border-white/10 rounded-xl bg-white/5 px-6 overflow-hidden"
+                      >
+                        <AccordionTrigger className="text-left text-white hover:no-underline py-5">
+                          <span className="flex items-center gap-3">
+                            <ChevronRight 
+                              className="w-4 h-4 flex-shrink-0 transition-transform" 
+                              style={{ color: accentColor }}
+                            />
+                            {item.question}
+                          </span>
+                        </AccordionTrigger>
+                        <AccordionContent className="text-white/60 pb-5 pl-7">
+                          {item.answer}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </motion.div>
+                  ))}
+                </Accordion>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Process Section */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="process">
+      <section className="scroll-reveal bg-[#0F0F0F]" id="process">
         <div className="border-t border-white/10">
-          <SectionHeader number="02" title="Process" badge="How We Work" />
+          <SectionHeader number={processSectionNum} title="Process" badge="How We Work" />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {processSteps.map((step, index) => {
               const Icon = step.icon;
@@ -408,9 +537,9 @@ const ServicePageLayout = ({
       </section>
 
       {/* More Services Section */}
-      <section className="scroll-reveal bg-[#0A0A0A]">
+      <section className="scroll-reveal bg-[#121212]">
         <div className="border-t border-white/10">
-          <SectionHeader number="03" title="More Services" badge="Explore" />
+          <SectionHeader number={moreServicesSectionNum} title="More Services" badge="Explore" />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
             {otherServices.map((service, index) => (
               <Link
@@ -435,8 +564,8 @@ const ServicePageLayout = ({
       </section>
 
       {/* Contact Section */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="contact">
-        <ContactFormSection sectionNumber="04" />
+      <section className="scroll-reveal bg-[#0F0F0F]" id="contact">
+        <ContactFormSection sectionNumber={contactSectionNum} />
       </section>
 
       {/* Footer */}

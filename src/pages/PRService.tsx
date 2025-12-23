@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FileText, BookOpen, Newspaper, Globe, Quote, Mic, Award } from "lucide-react";
-import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep } from "@/components/ServicePageLayout";
+import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import prImage from "@/assets/services/pr-media.jpg";
@@ -57,6 +57,55 @@ const processSteps: ProcessStep[] = [
   },
 ];
 
+const deliverables: Deliverable[] = [
+  {
+    title: "Content Production",
+    items: [
+      "Press release writing",
+      "Article drafting",
+      "Media kit creation",
+      "Executive bios & quotes",
+    ],
+  },
+  {
+    title: "Media Relations",
+    items: [
+      "Journalist outreach",
+      "Interview coordination",
+      "Exclusive story pitching",
+      "Relationship management",
+    ],
+  },
+  {
+    title: "Coverage & Reporting",
+    items: [
+      "Publication tracking",
+      "Coverage reports",
+      "Social amplification",
+      "Monthly PR summary",
+    ],
+  },
+];
+
+const faqItems: FAQItem[] = [
+  {
+    question: "Which media outlets do you work with?",
+    answer: "We have relationships with major crypto outlets (CoinDesk, CoinTelegraph, The Block) and Korean media (BlockMedia, Bloomingbit, Coinness). We also work with mainstream tech and finance publications for broader reach.",
+  },
+  {
+    question: "How long does it take to get published?",
+    answer: "Timing varies by outlet and story type. Breaking news can be published within 24-48 hours. Feature stories typically take 1-2 weeks from pitch to publication.",
+  },
+  {
+    question: "Do you guarantee placements?",
+    answer: "While we can't guarantee specific placements (editorial independence matters), our track record shows 90%+ success rate for well-prepared stories. We focus on building genuine media relationships.",
+  },
+  {
+    question: "Can you help with crisis communications?",
+    answer: "Yes, we provide crisis PR support including rapid response drafting, media monitoring, and stakeholder communication. We recommend having a crisis plan in place before issues arise.",
+  },
+];
+
 const mediaPartners = [
   { name: "CoinTelegraph", logo: cointelegraphLogo, type: "Global" },
   { name: "CoinDesk", logo: coindeskLogo, type: "Global" },
@@ -90,10 +139,12 @@ const PRService = () => {
       stats={stats}
       accentColor={ACCENT_COLOR}
       processSteps={processSteps}
+      deliverables={deliverables}
+      faqItems={faqItems}
       currentSlug="pr"
     >
       {/* Media Partners Section */}
-      <section className="scroll-reveal bg-[#0A0A0A]">
+      <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="Media Partners" badge="Where Your Story Gets Published" />
 
@@ -169,7 +220,7 @@ const PRService = () => {
       </section>
 
       {/* What's Included Section */}
-      <section className="scroll-reveal bg-[#0A0A0A]">
+      <section className="scroll-reveal bg-[#121212]">
         <div className="border-t border-white/10">
           <SectionHeader number="02" title="What's Included" badge="Full-Service PR Package" />
 

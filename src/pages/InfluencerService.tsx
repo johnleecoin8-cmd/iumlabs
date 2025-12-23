@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Star, Users, TrendingUp, Target, Sparkles, Crown, Award, Zap } from "lucide-react";
-import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep } from "@/components/ServicePageLayout";
+import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
@@ -49,6 +49,55 @@ const processSteps: ProcessStep[] = [
   },
 ];
 
+const deliverables: Deliverable[] = [
+  {
+    title: "KOL Selection",
+    items: [
+      "Curated KOL shortlist",
+      "Audience analysis report",
+      "Engagement rate verification",
+      "Brand fit assessment",
+    ],
+  },
+  {
+    title: "Campaign Management",
+    items: [
+      "Messaging & brief creation",
+      "Content approval workflow",
+      "Posting schedule coordination",
+      "Real-time monitoring",
+    ],
+  },
+  {
+    title: "Reporting & Analytics",
+    items: [
+      "Campaign performance report",
+      "ROI analysis",
+      "Audience insights",
+      "Recommendations for scale",
+    ],
+  },
+];
+
+const faqItems: FAQItem[] = [
+  {
+    question: "How do you select KOLs for our campaign?",
+    answer: "We analyze your target audience, project narrative, and goals to match with KOLs who have genuine engagement and audience overlap. We verify engagement rates and check for authentic followers.",
+  },
+  {
+    question: "What's the typical budget range for KOL campaigns?",
+    answer: "Budgets vary widely based on KOL tier and campaign scope. We work with budgets from $5K for micro-influencer campaigns to $100K+ for multi-KOL launches. We'll recommend the optimal mix for your goals.",
+  },
+  {
+    question: "Do you have Korean-speaking KOLs?",
+    answer: "Yes, our network includes 50+ Korean crypto KOLs across different niches (DeFi, NFT, trading, research). We also work with bilingual KOLs who can reach both Korean and global audiences.",
+  },
+  {
+    question: "How do you measure campaign success?",
+    answer: "We track impressions, engagement rate, follower growth, website traffic, and community joins. For token projects, we can also correlate with on-chain metrics like holder growth.",
+  },
+];
+
 const kolProfiles = [
   { name: "CryptoGodJohn", handle: "@CryptoGodJohn", followers: "45K", tier: "bronze", expertise: "Trading" },
   { name: "Posty", handle: "@PostyXBT", followers: "38K", tier: "bronze", expertise: "TA" },
@@ -85,10 +134,12 @@ const InfluencerService = () => {
       stats={stats}
       accentColor={ACCENT_COLOR}
       processSteps={processSteps}
+      deliverables={deliverables}
+      faqItems={faqItems}
       currentSlug="influencer"
     >
       {/* KOL Network Section */}
-      <section className="scroll-reveal bg-[#0A0A0A]">
+      <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="KOL Network" badge="Featured Creators" />
 

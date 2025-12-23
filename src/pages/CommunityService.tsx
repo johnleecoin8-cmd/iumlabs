@@ -1,7 +1,7 @@
 import { Users, Settings, Sparkles, ChevronRight, Hash, MessageSquare, Bell, Shield, Send, Megaphone, HelpCircle, Pin } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep } from "@/components/ServicePageLayout";
+import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
@@ -51,6 +51,55 @@ const processSteps: ProcessStep[] = [
   },
 ];
 
+const deliverables: Deliverable[] = [
+  {
+    title: "Server Setup",
+    items: [
+      "Custom Discord/Telegram architecture",
+      "Role hierarchy & permissions",
+      "Verification systems",
+      "Channel organization",
+    ],
+  },
+  {
+    title: "Automation & Bots",
+    items: [
+      "AI-powered chatbot integration",
+      "Auto-moderation rules",
+      "Gamification systems (XP, levels)",
+      "Announcement automation",
+    ],
+  },
+  {
+    title: "Management & Support",
+    items: [
+      "24/7 moderation coverage",
+      "Community event coordination",
+      "Sentiment monitoring",
+      "Weekly performance reports",
+    ],
+  },
+];
+
+const faqItems: FAQItem[] = [
+  {
+    question: "Do you manage both Discord and Telegram?",
+    answer: "Yes, we provide full management for both platforms. Most projects use both for different purposes — Discord for deeper engagement and Telegram for quick updates and Korean market reach.",
+  },
+  {
+    question: "What's included in 24/7 moderation?",
+    answer: "Our moderation team covers all time zones with trained Korean and English-speaking moderators. This includes spam removal, FUD management, user support, and escalation handling.",
+  },
+  {
+    question: "Can you migrate our existing community?",
+    answer: "Absolutely. We handle migrations carefully to preserve member relationships and engagement levels. We'll audit your current setup and create a transition plan.",
+  },
+  {
+    question: "What AI tools do you use for automation?",
+    answer: "We deploy custom AI solutions for FAQ responses, sentiment analysis, and engagement optimization. Our bots learn from your community to provide increasingly accurate and helpful responses.",
+  },
+];
+
 // Fake chat messages
 const discordMessages = [
   { user: "Alex_Web3", message: "GM everyone! 🌅", time: "9:02 AM", avatar: "A" },
@@ -88,7 +137,6 @@ const CommunityService = () => {
   const [activePlatform, setActivePlatform] = useState<'discord' | 'telegram'>('discord');
 
   const currentMessages = activePlatform === 'discord' ? discordMessages : telegramMessages;
-  const accentColor = activePlatform === 'discord' ? ACCENT_COLOR : TELEGRAM_COLOR;
 
   useEffect(() => {
     setVisibleMessages(0);
@@ -120,10 +168,12 @@ const CommunityService = () => {
       stats={stats}
       accentColor={ACCENT_COLOR}
       processSteps={processSteps}
+      deliverables={deliverables}
+      faqItems={faqItems}
       currentSlug="community"
     >
       {/* Platform Preview Section */}
-      <section className="scroll-reveal bg-[#0A0A0A]">
+      <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="Platform Management" badge="Discord & Telegram" />
           
@@ -345,11 +395,11 @@ const CommunityService = () => {
                               className="flex items-center gap-2 text-gray-400 text-sm"
                             >
                               <div className="flex gap-1">
-                                <span className="w-2 h-2 bg-[#0088CC] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                                <span className="w-2 h-2 bg-[#0088CC] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                                <span className="w-2 h-2 bg-[#0088CC] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
                               </div>
-                              <span>typing...</span>
+                              <span>누군가 입력 중...</span>
                             </motion.div>
                           )}
                         </div>
