@@ -63,17 +63,17 @@ const Footer = () => {
           <div className="flex gap-4">
             <Link 
               to="/contact" 
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-white/90 transition-colors"
+              className="group inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-medium rounded-full hover:bg-white/90 hover:scale-105 transition-all duration-300"
             >
               Get in Touch
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
             <button
               onClick={scrollToTop}
-              className="p-3 border border-white/20 rounded-full hover:bg-white/10 transition-colors"
+              className="group p-3 border border-white/20 rounded-full hover:bg-white/10 hover:border-white/40 hover:scale-110 transition-all duration-300"
               aria-label="Back to top"
             >
-              <ArrowUp className="w-5 h-5" />
+              <ArrowUp className="w-5 h-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
             </button>
           </div>
         </div>
@@ -90,7 +90,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link 
                     to={link.href}
-                    className="text-white/70 hover:text-white transition-colors text-sm"
+                    className="text-white/70 hover:text-white hover:translate-x-1 transition-all duration-300 text-sm inline-block"
                   >
                     {link.name}
                   </Link>
@@ -109,7 +109,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link 
                     to={link.href}
-                    className="text-white/70 hover:text-white transition-colors text-sm"
+                    className="text-white/70 hover:text-white hover:translate-x-1 transition-all duration-300 text-sm inline-block"
                   >
                     {link.name}
                   </Link>
@@ -128,7 +128,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link 
                     to={link.href}
-                    className="text-white/70 hover:text-white transition-colors text-sm"
+                    className="text-white/70 hover:text-white hover:translate-x-1 transition-all duration-300 text-sm inline-block"
                   >
                     {link.name}
                   </Link>
@@ -146,9 +146,9 @@ const Footer = () => {
               <li>
                 <a 
                   href={`mailto:${brandConfig.email}`}
-                  className="flex items-start gap-3 text-white/70 hover:text-white transition-colors text-sm group"
+                  className="flex items-start gap-3 text-white/70 hover:text-white hover:translate-x-1 transition-all duration-300 text-sm group"
                 >
-                  <Mail className="w-4 h-4 mt-0.5 shrink-0" />
+                  <Mail className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
                   <span>{brandConfig.email}</span>
                 </a>
               </li>
@@ -157,9 +157,9 @@ const Footer = () => {
                   href={brandConfig.telegram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-white/70 hover:text-white transition-colors text-sm group"
+                  className="flex items-start gap-3 text-white/70 hover:text-white hover:translate-x-1 transition-all duration-300 text-sm group"
                 >
-                  <Send className="w-4 h-4 mt-0.5 shrink-0" />
+                  <Send className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
                   <span>Telegram</span>
                 </a>
               </li>
@@ -168,9 +168,9 @@ const Footer = () => {
                   href={brandConfig.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-3 text-white/70 hover:text-white transition-colors text-sm group"
+                  className="flex items-start gap-3 text-white/70 hover:text-white hover:translate-x-1 transition-all duration-300 text-sm group"
                 >
-                  <ArrowUpRight className="w-4 h-4 mt-0.5 shrink-0" />
+                  <ArrowUpRight className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   <span>LinkedIn</span>
                 </a>
               </li>
@@ -192,7 +192,7 @@ const Footer = () => {
               href={brandConfig.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors text-sm"
+              className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300 text-sm inline-block"
             >
               LinkedIn
             </a>
@@ -200,7 +200,7 @@ const Footer = () => {
               href={brandConfig.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors text-sm"
+              className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300 text-sm inline-block"
             >
               Telegram
             </a>
@@ -208,7 +208,7 @@ const Footer = () => {
               href="https://twitter.com/iumlabs"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors text-sm"
+              className="text-white/50 hover:text-white hover:scale-110 transition-all duration-300 text-sm inline-block"
             >
               Twitter
             </a>
@@ -217,9 +217,9 @@ const Footer = () => {
       </div>
 
       {/* Giant Brand Name */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-12 overflow-hidden">
-        <h2 className="text-[5rem] md:text-[10rem] lg:text-[16rem] font-light leading-none tracking-[0.1em] text-center whitespace-nowrap">
-          <span className="text-transparent" style={{
+      <div className="w-full px-4 pb-12 overflow-hidden">
+        <h2 className="text-[6rem] md:text-[12rem] lg:text-[20rem] xl:text-[24rem] font-light leading-none tracking-[0.15em] text-center whitespace-nowrap transition-all duration-500 hover:tracking-[0.2em]">
+          <span className="text-transparent transition-all duration-500 hover:opacity-80" style={{
             WebkitTextStroke: '1px rgba(255,255,255,0.15)'
           }}>
             {brandConfig.name}
