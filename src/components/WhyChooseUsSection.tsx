@@ -15,11 +15,11 @@ const WhyChooseUsSection = () => {
           transition={{ duration: 0.6 }}
           className="lg:border-r border-white/10"
         >
-          <div className="aspect-[4/3] overflow-hidden bg-white flex items-center justify-center p-12">
+          <div className="aspect-[4/3] overflow-hidden bg-[#0A0A0A] flex items-center justify-center p-8">
             <img
               src={iumLabsLogo}
               alt="Ium Labs Logo"
-              className="w-full h-auto max-w-[280px] object-contain"
+              className="w-full h-auto max-w-[340px] object-contain invert"
             />
           </div>
         </motion.div>
