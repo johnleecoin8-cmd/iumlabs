@@ -8,44 +8,63 @@ const HologramLogo = () => {
     offsetX: 0,
     offsetY: 0,
     rgbSplit: 0,
+    scaleX: 1,
+    opacity: 1,
+    isHeavy: false,
   });
 
-  // Random glitch trigger
+  // Dramatic glitch trigger
   useEffect(() => {
     const triggerGlitch = () => {
+      // 8% chance for heavy glitch
+      const isHeavy = Math.random() < 0.08;
+      
+      const baseOffsetX = isHeavy ? 1.2 : 0.8;
+      const baseOffsetY = isHeavy ? 0.8 : 0.5;
+      const baseRgbSplit = isHeavy ? 0.6 : 0.4;
+      
       setGlitchState({
         active: true,
-        offsetX: (Math.random() - 0.5) * 0.3,
-        offsetY: (Math.random() - 0.5) * 0.2,
-        rgbSplit: Math.random() * 0.15,
+        offsetX: (Math.random() - 0.5) * baseOffsetX,
+        offsetY: (Math.random() - 0.5) * baseOffsetY,
+        rgbSplit: Math.random() * baseRgbSplit + 0.15,
+        scaleX: isHeavy ? 0.9 + Math.random() * 0.2 : 0.95 + Math.random() * 0.1,
+        opacity: isHeavy ? 0.3 + Math.random() * 0.7 : 0.5 + Math.random() * 0.5,
+        isHeavy,
       });
 
-      const glitchCount = Math.floor(Math.random() * 3) + 1;
+      // More rapid glitches: 3-8 times
+      const glitchCount = Math.floor(Math.random() * 6) + 3;
       let count = 0;
       
       const rapidGlitch = setInterval(() => {
         count++;
         if (count < glitchCount) {
+          const flickerHeavy = Math.random() < 0.15;
           setGlitchState({
             active: true,
-            offsetX: (Math.random() - 0.5) * 0.25,
-            offsetY: (Math.random() - 0.5) * 0.15,
-            rgbSplit: Math.random() * 0.12,
+            offsetX: (Math.random() - 0.5) * (flickerHeavy ? 1.5 : 0.7),
+            offsetY: (Math.random() - 0.5) * (flickerHeavy ? 1.0 : 0.4),
+            rgbSplit: Math.random() * (flickerHeavy ? 0.8 : 0.5) + 0.1,
+            scaleX: flickerHeavy ? 0.85 + Math.random() * 0.3 : 0.92 + Math.random() * 0.16,
+            opacity: flickerHeavy ? 0.1 + Math.random() * 0.9 : 0.4 + Math.random() * 0.6,
+            isHeavy: flickerHeavy,
           });
         } else {
           clearInterval(rapidGlitch);
           setTimeout(() => {
-            setGlitchState({ active: false, offsetX: 0, offsetY: 0, rgbSplit: 0 });
-          }, 50 + Math.random() * 100);
+            setGlitchState({ active: false, offsetX: 0, offsetY: 0, rgbSplit: 0, scaleX: 1, opacity: 1, isHeavy: false });
+          }, 30 + Math.random() * 70);
         }
-      }, 50 + Math.random() * 80);
+      }, 35 + Math.random() * 60);
     };
 
+    // More frequent: 1-2.5 seconds
     const glitchInterval = setInterval(() => {
       triggerGlitch();
-    }, 2000 + Math.random() * 4000);
+    }, 1000 + Math.random() * 1500);
 
-    setTimeout(triggerGlitch, 1000);
+    setTimeout(triggerGlitch, 500);
 
     return () => clearInterval(glitchInterval);
   }, []);
@@ -116,8 +135,11 @@ const HologramLogo = () => {
   const magentaColor = "#FF00FF";
   const whiteColor = "#FFFFFF";
 
+  const yellowColor = "#FFFF00";
+  const greenColor = "#00FF88";
+
   return (
-    <group position={[0, -1.0, 0]}>
+    <group position={[0, -1.0, 0]} scale={[glitchState.scaleX, 1, 1]}>
       {/* Main cyan wireframe */}
       <lineSegments 
         geometry={mainEdges} 
@@ -130,44 +152,82 @@ const HologramLogo = () => {
         <lineBasicMaterial 
           color={cyanColor} 
           transparent 
-          opacity={glitchState.active ? 0.6 + Math.random() * 0.4 : 0.9}
+          opacity={glitchState.active ? glitchState.opacity * 0.9 : 0.9}
           linewidth={2}
         />
       </lineSegments>
 
-      {/* Magenta RGB split layer (offset for hologram effect) */}
+      {/* Magenta RGB split layer - stronger offset */}
       <lineSegments 
         geometry={mainEdges} 
         position={[
-          glitchState.active ? glitchState.rgbSplit + 0.03 : 0.025, 
-          glitchState.active ? -glitchState.rgbSplit * 0.5 : 0.01, 
+          glitchState.active ? glitchState.rgbSplit * 0.8 + 0.05 : 0.025, 
+          glitchState.active ? -glitchState.rgbSplit * 0.6 : 0.01, 
           -0.13
         ]}
       >
         <lineBasicMaterial 
           color={magentaColor} 
           transparent 
-          opacity={glitchState.active ? 0.4 + Math.random() * 0.3 : 0.5}
+          opacity={glitchState.active ? 0.5 + Math.random() * 0.4 : 0.5}
           linewidth={1}
         />
       </lineSegments>
 
-      {/* White highlight layer */}
+      {/* Yellow/Green layer - appears during glitch for extra RGB chaos */}
+      {glitchState.active && (
+        <lineSegments 
+          geometry={mainEdges} 
+          position={[
+            -glitchState.rgbSplit * 0.7 - 0.04, 
+            glitchState.rgbSplit * 0.4, 
+            -0.135
+          ]}
+        >
+          <lineBasicMaterial 
+            color={glitchState.isHeavy ? yellowColor : greenColor} 
+            transparent 
+            opacity={glitchState.isHeavy ? 0.6 : 0.35}
+            linewidth={1}
+          />
+        </lineSegments>
+      )}
+
+      {/* White highlight layer - follows glitch */}
       <lineSegments 
         geometry={innerEdges} 
         position={[
-          glitchState.active ? -glitchState.offsetX * 0.5 : 0, 
-          glitchState.active ? glitchState.offsetY * 0.3 : 0, 
+          glitchState.active ? -glitchState.offsetX * 0.7 : 0, 
+          glitchState.active ? glitchState.offsetY * 0.5 : 0, 
           -0.075
         ]}
       >
         <lineBasicMaterial 
           color={whiteColor} 
           transparent 
-          opacity={glitchState.active ? 0.2 + Math.random() * 0.3 : 0.25}
+          opacity={glitchState.active ? 0.3 + Math.random() * 0.4 : 0.25}
           linewidth={1}
         />
       </lineSegments>
+
+      {/* Extra glitch layer during heavy glitch */}
+      {glitchState.isHeavy && (
+        <lineSegments 
+          geometry={mainEdges} 
+          position={[
+            (Math.random() - 0.5) * 1.2, 
+            (Math.random() - 0.5) * 0.8, 
+            -0.14
+          ]}
+        >
+          <lineBasicMaterial 
+            color={cyanColor} 
+            transparent 
+            opacity={0.3 + Math.random() * 0.3}
+            linewidth={1}
+          />
+        </lineSegments>
+      )}
     </group>
   );
 };
