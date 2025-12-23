@@ -62,7 +62,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     >
       <Link
         to={service.link}
-        className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/5 hover:shadow-lg hover:shadow-white/5 ${
+        className={`group block p-6 md:p-8 transition-all duration-300 hover:bg-white/5 hover:shadow-lg hover:shadow-white/5 ${
           !isRightColumn ? "border-r border-white/10" : ""
         } ${!isLastRow ? "border-b border-white/10" : ""}`}
       >
