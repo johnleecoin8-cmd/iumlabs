@@ -4,7 +4,7 @@ import * as THREE from "three";
 
 const HologramLogo = () => {
   const groupRef = useRef<THREE.Group>(null);
-  const scanlineRef = useRef<THREE.Mesh>(null);
+  
   const [glitchState, setGlitchState] = useState({
     active: false,
     offsetX: 0,
@@ -126,14 +126,8 @@ const HologramLogo = () => {
       groupRef.current.rotation.y = Math.sin(time * 0.25) * 0.4;
       groupRef.current.rotation.x = Math.sin(time * 0.15) * 0.08;
       
-      // Subtle floating motion
-      groupRef.current.position.y = Math.sin(time * 0.5) * 0.05;
-    }
-    
-    // Animate scanline
-    if (scanlineRef.current) {
-      const scanY = ((state.clock.elapsedTime * 0.8) % 3) - 1.5;
-      scanlineRef.current.position.y = scanY;
+      // Subtle floating motion - positioned lower
+      groupRef.current.position.y = -0.4 + Math.sin(time * 0.5) * 0.05;
     }
   });
 
@@ -204,15 +198,6 @@ const HologramLogo = () => {
         />
       </mesh>
 
-      {/* Scanline effect */}
-      <mesh ref={scanlineRef} position={[0, 0, 0.1]}>
-        <planeGeometry args={[4, 0.03]} />
-        <meshBasicMaterial
-          color={cyanColor}
-          transparent
-          opacity={0.4}
-        />
-      </mesh>
 
       {/* Outer glow */}
       <mesh position={[0, 0, -0.3]}>
