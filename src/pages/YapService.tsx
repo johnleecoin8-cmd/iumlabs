@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Volume2, Users, Zap, FileText, Target } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
@@ -152,10 +153,20 @@ const cryptoKOLs = [
   { name: "CryptoCred", handle: "@CryptoCred", followers: "290K", expertise: "TA" },
 ];
 
+// Featured yappers for carousel
+const featuredYappers = [
+  { name: "Pentoshi", handle: "@Pentosh1", followers: "680K", expertise: "Trading", bio: "Crypto trader & investor. Top 10 most followed on CT." },
+  { name: "Murad", handle: "@MustStopMurad", followers: "280K", expertise: "Memes", bio: "Memecoin connoisseur. Culture analyst." },
+  { name: "ZachXBT", handle: "@zachxbt", followers: "650K", expertise: "Investigation", bio: "On-chain sleuth. Fraud investigator." },
+  { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", expertise: "TA", bio: "Technical analyst. Chart wizard." },
+  { name: "Route 2 FI", handle: "@Route2FI", followers: "280K", expertise: "DeFi", bio: "DeFi strategist. Yield optimizer." },
+];
+
 const YapService = () => {
   usePageTitle("Yap Strategy");
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [featuredIndex, setFeaturedIndex] = useState(0);
 
   // Sound wave animation
   useEffect(() => {
@@ -235,8 +246,88 @@ const YapService = () => {
 
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
+              {/* Featured Yappers Carousel */}
+              <div className="mb-16">
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-white/60 text-sm uppercase tracking-wider">Featured Creators</h3>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setFeaturedIndex(prev => prev === 0 ? featuredYappers.length - 1 : prev - 1)}
+                      className="p-2 rounded-full border border-white/20 hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all"
+                    >
+                      <ChevronLeft className="w-4 h-4 text-white/60" />
+                    </button>
+                    <button
+                      onClick={() => setFeaturedIndex(prev => (prev + 1) % featuredYappers.length)}
+                      className="p-2 rounded-full border border-white/20 hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all"
+                    >
+                      <ChevronRight className="w-4 h-4 text-white/60" />
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="relative overflow-hidden">
+                  <AnimatePresence mode="wait">
+                    <motion.a
+                      key={featuredIndex}
+                      href={`https://x.com/${featuredYappers[featuredIndex].handle.replace('@', '')}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, x: 50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -50 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex items-center gap-6 p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-cyan-500/50 transition-all block"
+                    >
+                      <div 
+                        className="w-20 h-20 rounded-full overflow-hidden border-2 flex-shrink-0"
+                        style={{ borderColor: ACCENT_COLOR }}
+                      >
+                        <img 
+                          src={`https://unavatar.io/twitter/${featuredYappers[featuredIndex].handle.replace('@', '')}`}
+                          alt={featuredYappers[featuredIndex].name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.src = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(featuredYappers[featuredIndex].name)}&backgroundColor=0a0a0a`;
+                          }}
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3 mb-2">
+                          <h4 className="text-white font-bold text-xl">{featuredYappers[featuredIndex].name}</h4>
+                          <span className="text-cyan-400 text-sm">{featuredYappers[featuredIndex].handle}</span>
+                          <span 
+                            className="text-xs px-2 py-1 rounded-full"
+                            style={{ backgroundColor: `${ACCENT_COLOR}20`, color: ACCENT_COLOR }}
+                          >
+                            {featuredYappers[featuredIndex].expertise}
+                          </span>
+                        </div>
+                        <p className="text-white/60 mb-2">{featuredYappers[featuredIndex].bio}</p>
+                        <p className="text-white/40 text-sm">{featuredYappers[featuredIndex].followers} followers</p>
+                      </div>
+                    </motion.a>
+                  </AnimatePresence>
+                  
+                  {/* Pagination dots */}
+                  <div className="flex justify-center gap-2 mt-4">
+                    {featuredYappers.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setFeaturedIndex(idx)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          featuredIndex === idx 
+                            ? 'w-6 bg-cyan-500' 
+                            : 'bg-white/30 hover:bg-white/50'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
               {/* Sound Wave Canvas */}
-              <div className="relative h-24 mb-12">
+              <div className="relative h-16 mb-8">
                 <canvas 
                   ref={canvasRef}
                   className="absolute inset-0 w-full h-full opacity-60"
