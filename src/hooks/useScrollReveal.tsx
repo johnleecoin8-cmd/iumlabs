@@ -4,14 +4,22 @@ const useScrollReveal = () => {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "0px",
-      threshold: 0.1,
+      rootMargin: "-50px 0px",
+      threshold: 0.15,
     };
 
     const handleIntersect = (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
+          // Add staggered delay for children with data-stagger attribute
+          const staggerDelay = entry.target.getAttribute('data-stagger');
+          if (staggerDelay) {
+            setTimeout(() => {
+              entry.target.classList.add("is-visible");
+            }, parseInt(staggerDelay) * 100);
+          } else {
+            entry.target.classList.add("is-visible");
+          }
         }
       });
     };
