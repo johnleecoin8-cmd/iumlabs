@@ -408,20 +408,6 @@ const TaegeukHologram = () => {
   const whiteColor = "#FFFFFF";
   const goldColor = "#FFD700";
 
-  // Trigram patterns (건곤감리)
-  // 건 (Geon/Heaven): ☰ - 3 solid bars
-  // 곤 (Gon/Earth): ☷ - 3 broken bars  
-  // 감 (Gam/Water): ☵ - broken, solid, broken
-  // 리 (Ri/Fire): ☲ - solid, broken, solid
-  const trigrams = {
-    geon: [true, true, true],      // ☰ top-left
-    ri: [true, false, true],       // ☲ top-right
-    gam: [false, true, false],     // ☵ bottom-left
-    gon: [false, false, false],    // ☷ bottom-right
-  };
-
-  const trigramDistance = 1.9;
-  const trigramRotation = Math.PI / 4; // 45 degrees
 
   const glitchOffset = {
     x: glitchState.active ? glitchState.offsetX : 0,
@@ -472,46 +458,6 @@ const TaegeukHologram = () => {
         <meshBasicMaterial color={blueColor} transparent opacity={0.3} />
       </mesh>
 
-      {/* 4 Trigrams (건곤감리) - white color */}
-      {/* 건 (Geon/Heaven) - top-left */}
-      <Trigram 
-        pattern={trigrams.geon}
-        position={[-trigramDistance * 0.7, trigramDistance * 0.7, 0]}
-        rotation={trigramRotation}
-        glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
-        color={whiteColor}
-        opacity={mainOpacity * 0.95}
-      />
-      
-      {/* 리 (Ri/Fire) - top-right */}
-      <Trigram 
-        pattern={trigrams.ri}
-        position={[trigramDistance * 0.7, trigramDistance * 0.7, 0]}
-        rotation={-trigramRotation}
-        glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
-        color={whiteColor}
-        opacity={mainOpacity * 0.95}
-      />
-      
-      {/* 감 (Gam/Water) - bottom-left */}
-      <Trigram 
-        pattern={trigrams.gam}
-        position={[-trigramDistance * 0.7, -trigramDistance * 0.7, 0]}
-        rotation={-trigramRotation}
-        glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
-        color={whiteColor}
-        opacity={mainOpacity * 0.95}
-      />
-      
-      {/* 곤 (Gon/Earth) - bottom-right */}
-      <Trigram 
-        pattern={trigrams.gon}
-        position={[trigramDistance * 0.7, -trigramDistance * 0.7, 0]}
-        rotation={trigramRotation}
-        glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
-        color={whiteColor}
-        opacity={mainOpacity * 0.95}
-      />
 
       {/* Heavy glitch gold overlay */}
       {glitchState.isHeavy && (
