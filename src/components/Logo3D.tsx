@@ -58,46 +58,85 @@ const HologramLogo = () => {
   const { mainEdges, innerEdges } = useMemo(() => {
     const shape = new THREE.Shape();
     
-    const totalWidth = 3.2;
-    const totalHeight = 2.0;
-    const deckHeight = 0.35;
-    const pillarWidth = 0.45;
-    const archRadius = (totalWidth - pillarWidth * 2) / 2;
-    const cornerRadius = 0.08;
-    const innerCornerRadius = 0.06;
+    // Proportions matching the reference image
+    const totalWidth = 3.8;
+    const totalHeight = 1.8;
+    const deckThickness = 0.28;
+    const pillarWidth = 0.65;
+    const cornerRadius = 0.1;
     
-    // Outer shape
+    // Arch parameters - semicircle at bottom
+    const innerWidth = totalWidth - pillarWidth * 2;
+    const archRadius = innerWidth / 2;
+    const archCenterY = 0.15; // Slightly above bottom
+    
+    // Start from bottom-left corner
     shape.moveTo(-totalWidth/2 + cornerRadius, 0);
+    
+    // Bottom-left corner (rounded)
     shape.quadraticCurveTo(-totalWidth/2, 0, -totalWidth/2, cornerRadius);
+    
+    // Left outer edge going up
     shape.lineTo(-totalWidth/2, totalHeight - cornerRadius);
+    
+    // Top-left corner (rounded)
     shape.quadraticCurveTo(-totalWidth/2, totalHeight, -totalWidth/2 + cornerRadius, totalHeight);
+    
+    // Top edge (deck top)
     shape.lineTo(totalWidth/2 - cornerRadius, totalHeight);
+    
+    // Top-right corner (rounded)
     shape.quadraticCurveTo(totalWidth/2, totalHeight, totalWidth/2, totalHeight - cornerRadius);
+    
+    // Right outer edge going down
     shape.lineTo(totalWidth/2, cornerRadius);
+    
+    // Bottom-right corner (rounded)
     shape.quadraticCurveTo(totalWidth/2, 0, totalWidth/2 - cornerRadius, 0);
+    
+    // Right pillar bottom
     shape.lineTo(totalWidth/2 - pillarWidth + cornerRadius, 0);
-    shape.quadraticCurveTo(totalWidth/2 - pillarWidth, 0, totalWidth/2 - pillarWidth, innerCornerRadius);
-    shape.lineTo(totalWidth/2 - pillarWidth, archRadius * 0.2);
-    shape.absarc(0, archRadius * 0.2, archRadius, 0, Math.PI, false);
-    shape.lineTo(-totalWidth/2 + pillarWidth, innerCornerRadius);
+    shape.quadraticCurveTo(totalWidth/2 - pillarWidth, 0, totalWidth/2 - pillarWidth, cornerRadius);
+    
+    // Right inner pillar edge with concave curve going up
+    const concaveDepth = 0.12;
+    shape.bezierCurveTo(
+      totalWidth/2 - pillarWidth - concaveDepth, archCenterY + archRadius * 0.5,
+      totalWidth/2 - pillarWidth - concaveDepth, archCenterY + archRadius * 0.8,
+      totalWidth/2 - pillarWidth, archCenterY + archRadius
+    );
+    
+    // Semicircular arch (opens downward)
+    shape.absarc(0, archCenterY, archRadius, 0, Math.PI, false);
+    
+    // Left inner pillar edge with concave curve going down
+    shape.bezierCurveTo(
+      -totalWidth/2 + pillarWidth + concaveDepth, archCenterY + archRadius * 0.8,
+      -totalWidth/2 + pillarWidth + concaveDepth, archCenterY + archRadius * 0.5,
+      -totalWidth/2 + pillarWidth, cornerRadius
+    );
+    
+    // Left pillar bottom
     shape.quadraticCurveTo(-totalWidth/2 + pillarWidth, 0, -totalWidth/2 + pillarWidth - cornerRadius, 0);
+    
+    // Close the shape
     shape.lineTo(-totalWidth/2 + cornerRadius, 0);
     
-    // Inner hole
+    // Inner hole (deck cutout)
     const hole = new THREE.Path();
-    const innerGap = 0.12;
-    const holeWidth = totalWidth - pillarWidth * 2 - innerGap * 2;
-    const holeTop = totalHeight - deckHeight;
-    const holeArchTop = archRadius * 0.2 + archRadius - innerGap;
+    const innerMargin = 0.15;
+    const holeWidth = innerWidth - innerMargin * 2;
+    const holeBottom = archCenterY + archRadius + innerMargin;
+    const holeTop = totalHeight - deckThickness;
+    const holeCorner = 0.06;
     
-    hole.moveTo(-holeWidth/2, holeArchTop);
-    hole.lineTo(-holeWidth/2, holeTop - innerCornerRadius);
-    hole.quadraticCurveTo(-holeWidth/2, holeTop, -holeWidth/2 + innerCornerRadius, holeTop);
-    hole.lineTo(holeWidth/2 - innerCornerRadius, holeTop);
-    hole.quadraticCurveTo(holeWidth/2, holeTop, holeWidth/2, holeTop - innerCornerRadius);
-    hole.lineTo(holeWidth/2, holeArchTop);
-    const innerArchRadius = archRadius - innerGap - 0.1;
-    hole.absarc(0, archRadius * 0.2, innerArchRadius, 0, Math.PI, false);
+    hole.moveTo(-holeWidth/2, holeBottom);
+    hole.lineTo(-holeWidth/2, holeTop - holeCorner);
+    hole.quadraticCurveTo(-holeWidth/2, holeTop, -holeWidth/2 + holeCorner, holeTop);
+    hole.lineTo(holeWidth/2 - holeCorner, holeTop);
+    hole.quadraticCurveTo(holeWidth/2, holeTop, holeWidth/2, holeTop - holeCorner);
+    hole.lineTo(holeWidth/2, holeBottom);
+    hole.lineTo(-holeWidth/2, holeBottom);
     
     shape.holes.push(hole);
     
