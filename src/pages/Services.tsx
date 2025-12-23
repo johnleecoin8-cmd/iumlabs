@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import Logo3D from "@/components/Logo3D";
 
 const services = [
   {
@@ -112,53 +113,6 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
   );
 };
 
-// 3D Abstract Gold Shape Component
-const GoldShape = () => (
-  <div className="relative w-full aspect-square max-w-[280px] mx-auto">
-    {/* Main shape layers */}
-    <motion.div 
-      className="absolute inset-0"
-      animate={{ rotateY: 360 }}
-      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-      style={{ transformStyle: "preserve-3d" }}
-    >
-      {/* Gold gradient layers */}
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full"
-        style={{
-          background: "linear-gradient(135deg, #C4A35A 0%, #F5E6C8 50%, #C4A35A 100%)",
-          filter: "blur(1px)",
-          transform: "rotateX(60deg) rotateZ(45deg)",
-        }}
-      />
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 rounded-full"
-        style={{
-          background: "linear-gradient(45deg, #D4B86A 0%, #F5E6C8 100%)",
-          filter: "blur(0.5px)",
-          transform: "rotateX(60deg) rotateZ(-30deg) translateZ(20px)",
-        }}
-      />
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24"
-        style={{
-          background: "linear-gradient(180deg, #C4A35A 0%, #8B7355 100%)",
-          clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
-          transform: "rotateX(45deg) translateZ(40px)",
-        }}
-      />
-    </motion.div>
-    
-    {/* Glow effect */}
-    <div 
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full opacity-30"
-      style={{
-        background: "radial-gradient(circle, #C4A35A 0%, transparent 70%)",
-        filter: "blur(20px)",
-      }}
-    />
-  </div>
-);
 
 const Services = () => {
   usePageTitle("Services");
@@ -263,9 +217,9 @@ const Services = () => {
                     </Link>
                   </motion.div>
                   
-                  {/* Simple decorative element instead of 3D shape */}
-                  <div className="mt-12 md:mt-16 flex justify-center">
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30" />
+                  {/* 3D Logo with Glitch Effect */}
+                  <div className="mt-12 md:mt-16 h-40">
+                    <Logo3D />
                   </div>
                   
                   {/* Stats */}

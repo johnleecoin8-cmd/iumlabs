@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import Logo3D from "@/components/Logo3D";
 
 import aiAgentsDefi from "@/assets/blog/ai-agents-defi.jpg";
 import kaitoMindshare from "@/assets/blog/kaito-mindshare.jpg";
@@ -39,30 +40,6 @@ const insights = [
   }
 ];
 
-const BlueShape = () => (
-  <motion.div
-    className="relative w-24 h-24 mx-auto"
-    animate={{ rotateY: 360 }}
-    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-    style={{ transformStyle: "preserve-3d" }}
-  >
-    <div
-      className="absolute inset-0 rounded-full"
-      style={{
-        background: "linear-gradient(135deg, #3B82F6 0%, #06B6D4 50%, #3B82F6 100%)",
-        transform: "rotateX(30deg)",
-        boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
-      }}
-    />
-    <div
-      className="absolute inset-6 rounded-full"
-      style={{
-        background: "linear-gradient(225deg, #06B6D4 0%, #3B82F6 100%)",
-        transform: "rotateX(30deg) translateZ(15px)"
-      }}
-    />
-  </motion.div>
-);
 
 const InsightsSection = () => {
   const [email, setEmail] = useState("");
@@ -175,7 +152,9 @@ const InsightsSection = () => {
             </button>
           </form>
 
-          <BlueShape />
+          <div className="h-32">
+            <Logo3D />
+          </div>
 
           <div className="mt-6 pt-4 border-t border-white/10">
             <p className="text-white/40 text-sm">
