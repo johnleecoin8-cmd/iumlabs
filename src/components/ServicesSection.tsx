@@ -118,7 +118,7 @@ const ServicesSection = () => {
             <ArrowRight className="w-4 h-4" />
           </Link>
 
-          <div className="h-40">
+          <div className="h-64">
             <Logo3D />
           </div>
         </motion.div>
