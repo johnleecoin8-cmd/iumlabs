@@ -33,8 +33,8 @@ const HologramLogo = () => {
         isHeavy,
       });
 
-      // More rapid glitches: 3-8 times
-      const glitchCount = Math.floor(Math.random() * 6) + 3;
+      // Reduced glitches: 2-4 times
+      const glitchCount = Math.floor(Math.random() * 3) + 2;
       let count = 0;
       
       const rapidGlitch = setInterval(() => {
@@ -59,12 +59,12 @@ const HologramLogo = () => {
       }, 35 + Math.random() * 60);
     };
 
-    // More frequent: 1-2.5 seconds
+    // Less frequent: 3-6 seconds
     const glitchInterval = setInterval(() => {
       triggerGlitch();
-    }, 1000 + Math.random() * 1500);
+    }, 3000 + Math.random() * 3000);
 
-    setTimeout(triggerGlitch, 500);
+    setTimeout(triggerGlitch, 1500);
 
     return () => clearInterval(glitchInterval);
   }, []);
