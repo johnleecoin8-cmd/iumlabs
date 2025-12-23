@@ -1,4 +1,4 @@
-import { FileText, BookOpen, Newspaper, Globe, Quote, Mic } from "lucide-react";
+import { FileText, BookOpen, Newspaper, Globe, Quote, Mic, Twitter, MessageCircle, Youtube } from "lucide-react";
 import { motion } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
@@ -14,6 +14,38 @@ import coinessLogo from "@/assets/logos/coinness.png";
 import economistLogo from "@/assets/logos/economist.png";
 
 const ACCENT_COLOR = "#8B5CF6";
+
+// Channel reach data (temporary numbers)
+const channelReach = [
+  { 
+    name: "X (Twitter)", 
+    icon: Twitter, 
+    value: "50K+", 
+    label: "Followers",
+    brandColor: "#000000"
+  },
+  { 
+    name: "Telegram", 
+    icon: MessageCircle, 
+    value: "30K+", 
+    label: "Members",
+    brandColor: "#0088CC"
+  },
+  { 
+    name: "Blog", 
+    icon: FileText, 
+    value: "100+", 
+    label: "Articles",
+    brandColor: "#FF6B35"
+  },
+  { 
+    name: "Youtube", 
+    icon: Youtube, 
+    value: "10K+", 
+    label: "Subscribers",
+    brandColor: "#FF0000"
+  },
+];
 
 const serviceTags: ServiceTag[] = [
   { label: "Press Releases" },
@@ -135,10 +167,62 @@ const PRService = () => {
       faqItems={faqItems}
       currentSlug="pr"
     >
-      {/* Simple Logo Wall Section */}
+      {/* Channel Reach Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader number="01" title="Media Partners" badge="Our Network" />
+          <SectionHeader number="01" title="Our Reach" badge="Channels" />
+
+          <div className="py-16 md:py-20">
+            <div className="container mx-auto px-6 lg:px-16">
+              {/* Channel Grid */}
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                {channelReach.map((channel, index) => {
+                  const Icon = channel.icon;
+                  return (
+                    <motion.div
+                      key={channel.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      whileHover={{ y: -4 }}
+                      className="group relative p-6 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all text-center"
+                    >
+                      {/* Icon */}
+                      <div 
+                        className="w-12 h-12 mx-auto mb-4 rounded-full flex items-center justify-center transition-transform group-hover:scale-110"
+                        style={{ backgroundColor: `${channel.brandColor}20` }}
+                      >
+                        <Icon className="w-6 h-6" style={{ color: channel.brandColor }} />
+                      </div>
+                      
+                      {/* Channel Name */}
+                      <div className="text-sm text-white/60 mb-2">{channel.name}</div>
+                      
+                      {/* Value */}
+                      <div className="text-3xl md:text-4xl font-bold text-white mb-1">
+                        {channel.value}
+                      </div>
+                      
+                      {/* Label */}
+                      <div className="text-sm text-white/40">{channel.label}</div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <p className="text-center text-white/40 text-sm mt-10">
+                Multi-channel presence for maximum reach and engagement
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Simple Logo Wall Section */}
+      <section className="scroll-reveal bg-[#121212]">
+        <div className="border-t border-white/10">
+          <SectionHeader number="02" title="Media Partners" badge="Our Network" />
 
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
@@ -172,7 +256,7 @@ const PRService = () => {
       </section>
 
       {/* Quote & Image Section */}
-      <section className="scroll-reveal bg-[#121212]">
+      <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
