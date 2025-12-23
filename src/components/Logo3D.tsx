@@ -58,87 +58,58 @@ const HologramLogo = () => {
   const { mainEdges, innerEdges } = useMemo(() => {
     const shape = new THREE.Shape();
     
-    // Proportions matching the reference image
-    const totalWidth = 3.8;
-    const totalHeight = 1.8;
-    const deckThickness = 0.28;
-    const pillarWidth = 0.65;
-    const cornerRadius = 0.1;
+    // Proportions matching the reference image exactly
+    const w = 3.8;       // Total width
+    const h = 1.8;       // Total height
+    const r = 0.1;       // Corner radius
+    const sideCurve = 0.25; // How much the outer sides curve inward (concave)
+    const pillarWidth = 0.7;
+    const archRadius = (w - pillarWidth * 2) / 2;
     
-    // Arch parameters - semicircle at bottom
-    const innerWidth = totalWidth - pillarWidth * 2;
-    const archRadius = innerWidth / 2;
-    const archCenterY = 0.15; // Slightly above bottom
+    // 1. Start at top-left (after corner radius)
+    shape.moveTo(-w/2 + r, h);
     
-    // Start from bottom-left corner
-    shape.moveTo(-totalWidth/2 + cornerRadius, 0);
+    // 2. Top edge (deck top) - straight line
+    shape.lineTo(w/2 - r, h);
     
-    // Bottom-left corner (rounded)
-    shape.quadraticCurveTo(-totalWidth/2, 0, -totalWidth/2, cornerRadius);
+    // 3. Top-right corner (rounded)
+    shape.quadraticCurveTo(w/2, h, w/2, h - r);
     
-    // Left outer edge going up
-    shape.lineTo(-totalWidth/2, totalHeight - cornerRadius);
+    // 4. Right outer side (CONCAVE curve) - curves inward
+    shape.quadraticCurveTo(w/2 - sideCurve, h/2, w/2, r);
     
-    // Top-left corner (rounded)
-    shape.quadraticCurveTo(-totalWidth/2, totalHeight, -totalWidth/2 + cornerRadius, totalHeight);
+    // 5. Bottom-right corner (rounded)
+    shape.quadraticCurveTo(w/2, 0, w/2 - r, 0);
     
-    // Top edge (deck top)
-    shape.lineTo(totalWidth/2 - cornerRadius, totalHeight);
+    // 6. Right pillar bottom
+    shape.lineTo(w/2 - pillarWidth + r, 0);
     
-    // Top-right corner (rounded)
-    shape.quadraticCurveTo(totalWidth/2, totalHeight, totalWidth/2, totalHeight - cornerRadius);
+    // 7. Right inner pillar corner
+    shape.quadraticCurveTo(w/2 - pillarWidth, 0, w/2 - pillarWidth, r);
     
-    // Right outer edge going down
-    shape.lineTo(totalWidth/2, cornerRadius);
+    // 8. Right inner pillar edge going up to arch
+    shape.lineTo(w/2 - pillarWidth, archRadius);
     
-    // Bottom-right corner (rounded)
-    shape.quadraticCurveTo(totalWidth/2, 0, totalWidth/2 - cornerRadius, 0);
+    // 9. Semicircular arch (opens downward from y=0)
+    shape.absarc(0, 0, archRadius, 0, Math.PI, false);
     
-    // Right pillar bottom
-    shape.lineTo(totalWidth/2 - pillarWidth + cornerRadius, 0);
-    shape.quadraticCurveTo(totalWidth/2 - pillarWidth, 0, totalWidth/2 - pillarWidth, cornerRadius);
+    // 10. Left inner pillar edge going down
+    shape.lineTo(-w/2 + pillarWidth, r);
     
-    // Right inner pillar edge with concave curve going up
-    const concaveDepth = 0.12;
-    shape.bezierCurveTo(
-      totalWidth/2 - pillarWidth - concaveDepth, archCenterY + archRadius * 0.5,
-      totalWidth/2 - pillarWidth - concaveDepth, archCenterY + archRadius * 0.8,
-      totalWidth/2 - pillarWidth, archCenterY + archRadius
-    );
+    // 11. Left inner pillar corner
+    shape.quadraticCurveTo(-w/2 + pillarWidth, 0, -w/2 + pillarWidth - r, 0);
     
-    // Semicircular arch (opens downward)
-    shape.absarc(0, archCenterY, archRadius, 0, Math.PI, false);
+    // 12. Left pillar bottom
+    shape.lineTo(-w/2 + r, 0);
     
-    // Left inner pillar edge with concave curve going down
-    shape.bezierCurveTo(
-      -totalWidth/2 + pillarWidth + concaveDepth, archCenterY + archRadius * 0.8,
-      -totalWidth/2 + pillarWidth + concaveDepth, archCenterY + archRadius * 0.5,
-      -totalWidth/2 + pillarWidth, cornerRadius
-    );
+    // 13. Bottom-left corner (rounded)
+    shape.quadraticCurveTo(-w/2, 0, -w/2, r);
     
-    // Left pillar bottom
-    shape.quadraticCurveTo(-totalWidth/2 + pillarWidth, 0, -totalWidth/2 + pillarWidth - cornerRadius, 0);
+    // 14. Left outer side (CONCAVE curve) - curves inward
+    shape.quadraticCurveTo(-w/2 + sideCurve, h/2, -w/2, h - r);
     
-    // Close the shape
-    shape.lineTo(-totalWidth/2 + cornerRadius, 0);
-    
-    // Inner hole (deck cutout)
-    const hole = new THREE.Path();
-    const innerMargin = 0.15;
-    const holeWidth = innerWidth - innerMargin * 2;
-    const holeBottom = archCenterY + archRadius + innerMargin;
-    const holeTop = totalHeight - deckThickness;
-    const holeCorner = 0.06;
-    
-    hole.moveTo(-holeWidth/2, holeBottom);
-    hole.lineTo(-holeWidth/2, holeTop - holeCorner);
-    hole.quadraticCurveTo(-holeWidth/2, holeTop, -holeWidth/2 + holeCorner, holeTop);
-    hole.lineTo(holeWidth/2 - holeCorner, holeTop);
-    hole.quadraticCurveTo(holeWidth/2, holeTop, holeWidth/2, holeTop - holeCorner);
-    hole.lineTo(holeWidth/2, holeBottom);
-    hole.lineTo(-holeWidth/2, holeBottom);
-    
-    shape.holes.push(hole);
+    // 15. Top-left corner (rounded) - close the shape
+    shape.quadraticCurveTo(-w/2, h, -w/2 + r, h);
     
     const extrudeSettings = {
       steps: 1,
