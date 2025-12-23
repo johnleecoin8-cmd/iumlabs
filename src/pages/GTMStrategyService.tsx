@@ -160,32 +160,61 @@ const GTMStrategyService = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    className="relative p-8 rounded-2xl border border-white/10 bg-gradient-to-br from-white/5 to-transparent group"
+                    whileHover={{ 
+                      y: -8, 
+                      scale: 1.02,
+                      boxShadow: `0 20px 60px ${ACCENT_COLOR}30, 0 0 40px ${ACCENT_COLOR}15`
+                    }}
+                    className="relative p-8 rounded-2xl border border-white/10 group overflow-hidden"
+                    style={{
+                      background: `linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.02) 50%, transparent 100%)`,
+                    }}
                   >
+                    {/* Animated Glow Background */}
+                    <div 
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{
+                        background: `radial-gradient(circle at 50% 0%, ${ACCENT_COLOR}20 0%, transparent 60%)`,
+                      }}
+                    />
+
+                    {/* Top Accent Line */}
+                    <div 
+                      className="absolute top-0 left-0 right-0 h-[2px] opacity-50 group-hover:opacity-100 transition-opacity"
+                      style={{
+                        background: `linear-gradient(90deg, transparent, ${ACCENT_COLOR}, transparent)`,
+                      }}
+                    />
+
                     {/* Step Number */}
                     <div 
-                      className="text-6xl font-bold mb-6 opacity-20 group-hover:opacity-40 transition-opacity"
-                      style={{ color: ACCENT_COLOR }}
+                      className="relative text-6xl font-bold mb-6 opacity-30 group-hover:opacity-60 transition-all duration-300"
+                      style={{ 
+                        color: ACCENT_COLOR,
+                        textShadow: `0 0 30px ${ACCENT_COLOR}40`
+                      }}
                     >
                       {step.number}
                     </div>
 
                     {/* Icon */}
                     <div 
-                      className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-transform group-hover:scale-110"
-                      style={{ backgroundColor: `${ACCENT_COLOR}20` }}
+                      className="relative w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110"
+                      style={{ 
+                        backgroundColor: `${ACCENT_COLOR}20`,
+                        boxShadow: `0 0 20px ${ACCENT_COLOR}20`
+                      }}
                     >
                       <step.icon className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-xl font-bold text-white mb-2">
+                    <h3 className="relative text-xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
                       {step.title}
                     </h3>
 
                     {/* Description */}
-                    <p className="text-white/50 text-sm">
+                    <p className="relative text-white/50 text-sm group-hover:text-white/70 transition-colors">
                       {step.description}
                     </p>
 
