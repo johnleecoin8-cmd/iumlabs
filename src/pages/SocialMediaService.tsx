@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Pencil, Calendar, Send, LineChart, Eye, Heart, Users, TrendingUp, MessageCircle, Repeat2, Share } from "lucide-react";
-import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep } from "@/components/ServicePageLayout";
+import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
@@ -47,6 +47,55 @@ const processSteps: ProcessStep[] = [
     title: "Reporting",
     description: "We deliver a performance report with insights, learnings, and next-step recommendations.",
     icon: LineChart,
+  },
+];
+
+const deliverables: Deliverable[] = [
+  {
+    title: "Content Creation",
+    items: [
+      "Weekly content calendar",
+      "Original post copywriting",
+      "Thread & carousel design",
+      "Meme & trend content",
+    ],
+  },
+  {
+    title: "Account Management",
+    items: [
+      "Daily posting & scheduling",
+      "Reply & engagement strategy",
+      "Hashtag optimization",
+      "Profile optimization",
+    ],
+  },
+  {
+    title: "Analytics & Reporting",
+    items: [
+      "Weekly performance reports",
+      "Competitor benchmarking",
+      "Trend analysis",
+      "Growth recommendations",
+    ],
+  },
+];
+
+const faqItems: FAQItem[] = [
+  {
+    question: "How many posts do you publish per week?",
+    answer: "Our standard package includes 3-5 posts per week, plus daily engagement activities like replies and quote tweets. We can scale up for launches or special campaigns.",
+  },
+  {
+    question: "Do you handle Korean and English content?",
+    answer: "Yes, we create native-quality content in both languages. Our team includes native Korean speakers who understand local crypto culture and trends.",
+  },
+  {
+    question: "Can you manage our account during Korean hours?",
+    answer: "Absolutely. We have team members based in Korea who handle real-time engagement during Korean peak hours (evening KST).",
+  },
+  {
+    question: "What platforms do you cover?",
+    answer: "We primarily focus on X (Twitter) as the main crypto social platform. We can also support LinkedIn, Threads, and Korean platforms like Naver Blog upon request.",
   },
 ];
 
@@ -99,10 +148,12 @@ const SocialMediaService = () => {
       stats={stats}
       accentColor={ACCENT_COLOR}
       processSteps={processSteps}
+      deliverables={deliverables}
+      faqItems={faqItems}
       currentSlug="social-media"
     >
       {/* Dashboard Section */}
-      <section className="scroll-reveal bg-[#0A0A0A]">
+      <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="Real-Time Dashboard" badge="Overview" />
 

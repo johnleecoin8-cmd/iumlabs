@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Volume2, Users, Zap, FileText, Target } from "lucide-react";
-import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep } from "@/components/ServicePageLayout";
+import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
@@ -47,6 +47,55 @@ const processSteps: ProcessStep[] = [
     title: "Reporting",
     description: "We deliver a full report on campaign performance: reach, impressions, engagement, and smart follower exposure.",
     icon: FileText,
+  },
+];
+
+const deliverables: Deliverable[] = [
+  {
+    title: "Campaign Materials",
+    items: [
+      "Campaign brief & guidelines",
+      "Key messaging points",
+      "Visual assets & templates",
+      "Hashtag strategy",
+    ],
+  },
+  {
+    title: "Creator Coordination",
+    items: [
+      "600+ yapper activation",
+      "Content quality review",
+      "Posting schedule management",
+      "Real-time amplification",
+    ],
+  },
+  {
+    title: "Performance Tracking",
+    items: [
+      "Impression tracking",
+      "Engagement metrics",
+      "Top performer highlights",
+      "Campaign summary report",
+    ],
+  },
+];
+
+const faqItems: FAQItem[] = [
+  {
+    question: "What's the difference between Yap and KOL marketing?",
+    answer: "Yap marketing focuses on creating organic buzz through many smaller creators (yappers) rather than relying on a few large influencers. This creates more authentic engagement and wider reach across different communities.",
+  },
+  {
+    question: "How do you ensure content quality from 600+ creators?",
+    answer: "We provide clear briefs and guidelines, and our team reviews content before amplification. Creators in our network are vetted for quality and authentic engagement.",
+  },
+  {
+    question: "How long does a typical Yap campaign run?",
+    answer: "Standard campaigns run 1-2 weeks with concentrated posting periods. We can also run extended campaigns for ongoing mindshare building around key milestones.",
+  },
+  {
+    question: "Can you target specific crypto niches?",
+    answer: "Yes! Our network includes creators across DeFi, NFT, trading, research, memes, and regional communities. We match your campaign with the most relevant creator segments.",
   },
 ];
 
@@ -175,10 +224,12 @@ const YapService = () => {
       stats={stats}
       accentColor={ACCENT_COLOR}
       processSteps={processSteps}
+      deliverables={deliverables}
+      faqItems={faqItems}
       currentSlug="yap"
     >
       {/* Creator Network Section */}
-      <section className="scroll-reveal bg-[#0A0A0A]">
+      <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="Creator Network" badge="600+ Yappers" />
 
