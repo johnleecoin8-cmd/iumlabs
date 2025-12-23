@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import iumLabsLogo from '@/assets/ium-labs-logo-about.png';
+import Logo3D from './Logo3D';
 
 const WhyChooseUsSection = () => {
   return (
     <section className="bg-[#0A0A0A]">
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        {/* Left: Image */}
+        {/* Left: 3D Logo */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -15,12 +15,8 @@ const WhyChooseUsSection = () => {
           transition={{ duration: 0.6 }}
           className="lg:border-r border-white/10"
         >
-          <div className="aspect-[4/3] overflow-hidden bg-[#0A0A0A] flex items-center justify-center p-6">
-            <img
-              src={iumLabsLogo}
-              alt="Ium Labs Logo"
-              className="w-full h-auto max-w-[420px] object-contain invert"
-            />
+          <div className="aspect-[4/3] overflow-hidden bg-[#0A0A0A]">
+            <Logo3D />
           </div>
         </motion.div>
 
