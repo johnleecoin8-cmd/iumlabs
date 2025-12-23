@@ -35,7 +35,7 @@ const handler = async (req: Request): Promise<Response> => {
       },
       body: JSON.stringify({
         from: "Ium Labs <noreply@fvroka.resend.app>",
-        to: ["james@cryptobridgekorea.com"],
+        to: ["info@iumlabs.io"],
         subject: `New Contact Form Submission from ${name}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
