@@ -166,20 +166,9 @@ const CasesSection = () => {
           <h2 className="text-3xl font-bold text-white mb-4">
             Our Cases
           </h2>
-          <p className="text-white/50 leading-relaxed mb-6">
+          <p className="text-white/50 leading-relaxed mb-8">
             Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
           </p>
-
-          {/* View All Projects */}
-          <div className="pb-6 mb-6 border-b border-white/10">
-            <Link
-              to="/projects"
-              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
-            >
-              View all projects
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
 
           <div className="space-y-6 mb-6">
             <div className="flex items-center gap-4 pb-4 border-b border-white/10">
@@ -198,11 +187,22 @@ const CasesSection = () => {
 
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors w-fit"
+            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors w-fit mb-6"
           >
             START YOUR PROJECT
             <ArrowRight className="w-4 h-4" />
           </Link>
+
+          {/* View All Projects */}
+          <div className="pt-6 border-t border-white/10">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
+            >
+              View all projects
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
         </motion.div>
       </div>
     </section>
