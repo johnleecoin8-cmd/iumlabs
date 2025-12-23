@@ -357,13 +357,7 @@ const TaegeukHologram = () => {
     colorSwap: false,
   });
 
-  // Slow rotation animation
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.12;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
-    }
-  });
+  // Static - no rotation
 
   // Glitch disabled - static state only
 
