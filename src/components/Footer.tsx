@@ -216,10 +216,10 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Giant Brand Name */}
+      {/* Giant Brand Name - Static */}
       <div className="w-full px-4 pb-12 overflow-hidden">
-        <h2 className="text-[6rem] md:text-[12rem] lg:text-[20rem] xl:text-[24rem] font-light leading-none tracking-[0.15em] text-center whitespace-nowrap transition-all duration-500 hover:tracking-[0.2em]">
-          <span className="text-transparent transition-all duration-500 hover:opacity-80" style={{
+        <h2 className="text-[6rem] md:text-[12rem] lg:text-[20rem] xl:text-[24rem] font-light leading-none tracking-[0.15em] text-center whitespace-nowrap">
+          <span className="text-transparent" style={{
             WebkitTextStroke: '1px hsl(var(--border))'
           }}>
             {brandConfig.name}

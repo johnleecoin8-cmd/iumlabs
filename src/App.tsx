@@ -44,31 +44,40 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Page transition wrapper with smooth animations
+// Enhanced page transition wrapper
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   useScrollReveal();
 
   const location = useLocation();
   const [displayChildren, setDisplayChildren] = useState(children);
-  const [transitionStage, setTransitionStage] = useState<'enter' | 'exit'>('enter');
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     if (children !== displayChildren) {
-      setTransitionStage('exit');
+      setIsAnimating(true);
+      
+      // Quick exit animation
+      const exitTimer = setTimeout(() => {
+        setDisplayChildren(children);
+        // Enter animation
+        const enterTimer = setTimeout(() => {
+          setIsAnimating(false);
+        }, 50);
+        return () => clearTimeout(enterTimer);
+      }, 200);
+      
+      return () => clearTimeout(exitTimer);
     }
   }, [children, displayChildren]);
 
-  const handleTransitionEnd = () => {
-    if (transitionStage === 'exit') {
-      setDisplayChildren(children);
-      setTransitionStage('enter');
-    }
-  };
-
   return (
     <div 
-      className={`page-transition ${transitionStage === 'enter' ? 'page-enter' : 'page-exit'}`}
-      onAnimationEnd={handleTransitionEnd}
+      className={`transition-all duration-300 ease-out ${
+        isAnimating 
+          ? 'opacity-0 translate-y-4' 
+          : 'opacity-100 translate-y-0'
+      }`}
+      style={{ willChange: 'opacity, transform' }}
     >
       {displayChildren}
     </div>
