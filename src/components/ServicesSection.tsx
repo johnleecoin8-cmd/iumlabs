@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Compass, Users, AtSign, Mic2, MessageCircle, Newspaper } from "lucide-react";
 import { Link } from "react-router-dom";
-import Logo3D from "@/components/Logo3D";
+
 const services = [
   {
     number: "01",
@@ -82,6 +82,30 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
   );
 };
 
+const GoldShape = () => (
+  <motion.div
+    className="relative w-32 h-32 mx-auto"
+    animate={{ rotateY: 360 }}
+    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+    style={{ transformStyle: "preserve-3d" }}
+  >
+    <div
+      className="absolute inset-0 rounded-3xl"
+      style={{
+        background: "linear-gradient(135deg, #C4A35A 0%, #F5E6C8 50%, #C4A35A 100%)",
+        transform: "rotateX(20deg) rotateZ(-10deg)",
+        boxShadow: "0 20px 40px rgba(196, 163, 90, 0.3)"
+      }}
+    />
+    <div
+      className="absolute inset-4 rounded-2xl"
+      style={{
+        background: "linear-gradient(225deg, #F5E6C8 0%, #C4A35A 100%)",
+        transform: "rotateX(20deg) rotateZ(-10deg) translateZ(20px)"
+      }}
+    />
+  </motion.div>
+);
 
 const ServicesSection = () => {
   return (
@@ -118,9 +142,7 @@ const ServicesSection = () => {
             <ArrowRight className="w-4 h-4" />
           </Link>
 
-          <div className="h-64">
-            <Logo3D variant="taegeuk" />
-          </div>
+          <GoldShape />
         </motion.div>
       </div>
     </section>
