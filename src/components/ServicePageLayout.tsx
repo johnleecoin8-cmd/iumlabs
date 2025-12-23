@@ -197,6 +197,7 @@ const ServicePageLayout = ({
   const otherServices = allServices.filter(s => s.slug !== currentSlug);
 
   // Calculate section numbers dynamically
+  // Order: Children (custom sections) -> Deliverables -> Process -> More Services -> FAQ -> Contact
   let sectionNumber = 1;
   const getNextSectionNumber = () => {
     const num = sectionNumber.toString().padStart(2, '0');
@@ -208,9 +209,9 @@ const ServicePageLayout = ({
   sectionNumber = 1;
   const childrenSectionNum = children ? getNextSectionNumber() : null;
   const deliverablesSectionNum = deliverables ? getNextSectionNumber() : null;
-  const faqSectionNum = faqItems ? getNextSectionNumber() : null;
   const processSectionNum = getNextSectionNumber();
   const moreServicesSectionNum = getNextSectionNumber();
+  const faqSectionNum = faqItems ? getNextSectionNumber() : null; // FAQ always after More Services
   const contactSectionNum = getNextSectionNumber();
 
   return (
@@ -442,49 +443,6 @@ const ServicePageLayout = ({
         </section>
       )}
 
-      {/* FAQ Section */}
-      {faqItems && faqItems.length > 0 && (
-        <section className="scroll-reveal bg-[#121212]">
-          <div className="border-t border-white/10">
-            <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
-            
-            <div className="py-16 md:py-20">
-              <div className="container mx-auto px-6 lg:px-16 max-w-4xl">
-                <Accordion type="single" collapsible className="space-y-4">
-                  {faqItems.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                    >
-                      <AccordionItem 
-                        value={`item-${index}`}
-                        className="border border-white/10 rounded-xl bg-white/5 px-6 overflow-hidden"
-                      >
-                        <AccordionTrigger className="text-left text-white hover:no-underline py-5">
-                          <span className="flex items-center gap-3">
-                            <ChevronRight 
-                              className="w-4 h-4 flex-shrink-0 transition-transform" 
-                              style={{ color: accentColor }}
-                            />
-                            {item.question}
-                          </span>
-                        </AccordionTrigger>
-                        <AccordionContent className="text-white/60 pb-5 pl-7">
-                          {item.answer}
-                        </AccordionContent>
-                      </AccordionItem>
-                    </motion.div>
-                  ))}
-                </Accordion>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
-
       {/* Process Section */}
       <section className="scroll-reveal bg-[#0F0F0F]" id="process">
         <div className="border-t border-white/10">
@@ -562,6 +520,49 @@ const ServicePageLayout = ({
           </div>
         </div>
       </section>
+
+      {/* FAQ Section - Always last before Contact */}
+      {faqItems && faqItems.length > 0 && (
+        <section className="scroll-reveal bg-[#0F0F0F]">
+          <div className="border-t border-white/10">
+            <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
+            
+            <div className="py-16 md:py-20">
+              <div className="container mx-auto px-6 lg:px-16 max-w-4xl">
+                <Accordion type="single" collapsible className="space-y-4">
+                  {faqItems.map((item, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <AccordionItem 
+                        value={`item-${index}`}
+                        className="border border-white/10 rounded-xl bg-white/5 px-6 overflow-hidden"
+                      >
+                        <AccordionTrigger className="text-left text-white hover:no-underline py-5">
+                          <span className="flex items-center gap-3">
+                            <ChevronRight 
+                              className="w-4 h-4 flex-shrink-0 transition-transform" 
+                              style={{ color: accentColor }}
+                            />
+                            {item.question}
+                          </span>
+                        </AccordionTrigger>
+                        <AccordionContent className="text-white/60 pb-5 pl-7">
+                          {item.answer}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </motion.div>
+                  ))}
+                </Accordion>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Contact Section */}
       <section className="scroll-reveal bg-[#0F0F0F]" id="contact">
