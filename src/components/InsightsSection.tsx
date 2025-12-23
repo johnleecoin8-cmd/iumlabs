@@ -152,7 +152,7 @@ const InsightsSection = () => {
             </button>
           </form>
 
-          <div className="h-32">
+          <div className="h-48">
             <Logo3D />
           </div>
 

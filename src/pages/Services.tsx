@@ -218,7 +218,7 @@ const Services = () => {
                   </motion.div>
                   
                   {/* 3D Logo with Glitch Effect */}
-                  <div className="mt-12 md:mt-16 h-40">
+                  <div className="mt-12 md:mt-16 h-64">
                     <Logo3D />
                   </div>
                   
