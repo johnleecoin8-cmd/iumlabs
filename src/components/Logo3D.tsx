@@ -493,27 +493,31 @@ const TaegeukHologram = () => {
 
   return (
     <group ref={groupRef} position={[0, 0, 0]} scale={[glitchState.scaleX, 1, 1]}>
-      {/* Red Taegeuk (Yang) - main */}
+      {/* Red Taegeuk (Yang) - main with metallic effect */}
       <mesh 
         geometry={redGeometry} 
         position={[glitchOffset.x, glitchOffset.y, -0.05]}
       >
-        <meshBasicMaterial 
+        <meshStandardMaterial 
           color={glitchState.colorSwap ? blueColor : redColor} 
           transparent 
-          opacity={mainOpacity * 0.95} 
+          opacity={mainOpacity * 0.95}
+          metalness={0.7}
+          roughness={0.2}
         />
       </mesh>
       
-      {/* Blue Taegeuk (Yin) - main */}
+      {/* Blue Taegeuk (Yin) - main with metallic effect */}
       <mesh 
         geometry={blueGeometry} 
         position={[glitchOffset.x, glitchOffset.y, -0.05]}
       >
-        <meshBasicMaterial 
+        <meshStandardMaterial 
           color={glitchState.colorSwap ? redColor : blueColor} 
           transparent 
-          opacity={mainOpacity * 0.95} 
+          opacity={mainOpacity * 0.95}
+          metalness={0.7}
+          roughness={0.2}
         />
       </mesh>
 
@@ -522,7 +526,15 @@ const TaegeukHologram = () => {
         geometry={outerRingGeometry} 
         position={[glitchOffset.x * 0.5, glitchOffset.y * 0.5, -0.08]}
       >
-        <meshBasicMaterial color={whiteColor} transparent opacity={mainOpacity * 0.6} />
+        <meshStandardMaterial 
+          color={whiteColor} 
+          transparent 
+          opacity={mainOpacity * 0.6}
+          metalness={0.5}
+          roughness={0.3}
+          emissive={whiteColor}
+          emissiveIntensity={0.2}
+        />
       </mesh>
 
       {/* RGB split layers */}
@@ -539,15 +551,15 @@ const TaegeukHologram = () => {
         <meshBasicMaterial color={blueColor} transparent opacity={0.3} />
       </mesh>
 
-      {/* 4 Trigrams (건곤감리) */}
+      {/* 4 Trigrams (건곤감리) - white color */}
       {/* 건 (Geon/Heaven) - top-left */}
       <Trigram 
         pattern={trigrams.geon}
         position={[-trigramDistance * 0.7, trigramDistance * 0.7, 0]}
         rotation={trigramRotation}
         glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
-        color={blackColor}
-        opacity={mainOpacity * 0.9}
+        color={whiteColor}
+        opacity={mainOpacity * 0.95}
       />
       
       {/* 리 (Ri/Fire) - top-right */}
@@ -556,8 +568,8 @@ const TaegeukHologram = () => {
         position={[trigramDistance * 0.7, trigramDistance * 0.7, 0]}
         rotation={-trigramRotation}
         glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
-        color={blackColor}
-        opacity={mainOpacity * 0.9}
+        color={whiteColor}
+        opacity={mainOpacity * 0.95}
       />
       
       {/* 감 (Gam/Water) - bottom-left */}
@@ -566,8 +578,8 @@ const TaegeukHologram = () => {
         position={[-trigramDistance * 0.7, -trigramDistance * 0.7, 0]}
         rotation={-trigramRotation}
         glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
-        color={blackColor}
-        opacity={mainOpacity * 0.9}
+        color={whiteColor}
+        opacity={mainOpacity * 0.95}
       />
       
       {/* 곤 (Gon/Earth) - bottom-right */}
@@ -576,8 +588,8 @@ const TaegeukHologram = () => {
         position={[trigramDistance * 0.7, -trigramDistance * 0.7, 0]}
         rotation={trigramRotation}
         glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
-        color={blackColor}
-        opacity={mainOpacity * 0.9}
+        color={whiteColor}
+        opacity={mainOpacity * 0.95}
       />
 
       {/* Heavy glitch gold overlay */}
