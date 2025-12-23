@@ -54,73 +54,56 @@ const HologramLogo = () => {
     return () => clearInterval(glitchInterval);
   }, []);
 
-  // Create edge geometry for wireframe effect - matching the reference image
+  // Create edge geometry for wireframe effect
   const { mainEdges, innerEdges } = useMemo(() => {
     const shape = new THREE.Shape();
     
-    // Scaled up dimensions (increased by 1)
-    const totalWidth = 4.2;  // was 3.2
-    const totalHeight = 2.4; // slightly taller
-    const deckHeight = 0.45; // top deck thickness
-    const pillarWidth = 0.7; // wider pillars
-    const cornerRadius = 0.15; // rounded outer corners
+    const totalWidth = 3.2;
+    const totalHeight = 2.0;
+    const deckHeight = 0.35;
+    const pillarWidth = 0.45;
+    const archRadius = (totalWidth - pillarWidth * 2) / 2;
+    const cornerRadius = 0.08;
+    const innerCornerRadius = 0.06;
     
-    // The arch - large semi-circle from bottom of left pillar to bottom of right pillar
-    const archCenterY = 0; // arch center at bottom
-    const archRadius = (totalWidth - pillarWidth * 2) / 2; // arch fills space between pillars
-    
-    // Start from bottom-left corner, go clockwise
-    // Bottom left corner (rounded)
+    // Outer shape
     shape.moveTo(-totalWidth/2 + cornerRadius, 0);
     shape.quadraticCurveTo(-totalWidth/2, 0, -totalWidth/2, cornerRadius);
-    
-    // Left edge going up
     shape.lineTo(-totalWidth/2, totalHeight - cornerRadius);
-    
-    // Top-left corner (rounded)
     shape.quadraticCurveTo(-totalWidth/2, totalHeight, -totalWidth/2 + cornerRadius, totalHeight);
-    
-    // Top edge
     shape.lineTo(totalWidth/2 - cornerRadius, totalHeight);
-    
-    // Top-right corner (rounded)
     shape.quadraticCurveTo(totalWidth/2, totalHeight, totalWidth/2, totalHeight - cornerRadius);
-    
-    // Right edge going down
     shape.lineTo(totalWidth/2, cornerRadius);
-    
-    // Bottom-right corner (rounded)
     shape.quadraticCurveTo(totalWidth/2, 0, totalWidth/2 - cornerRadius, 0);
-    
-    // Bottom of right pillar
-    shape.lineTo(totalWidth/2 - pillarWidth, 0);
-    
-    // Inner curve from right pillar up to arch
-    const innerCurveHeight = totalHeight - deckHeight;
-    shape.quadraticCurveTo(
-      totalWidth/2 - pillarWidth, 
-      innerCurveHeight * 0.5, 
-      archRadius, 
-      innerCurveHeight
-    );
-    
-    // The arch (semi-circle going from right to left)
-    shape.absarc(0, innerCurveHeight, archRadius, 0, Math.PI, false);
-    
-    // Inner curve from arch down to left pillar
-    shape.quadraticCurveTo(
-      -totalWidth/2 + pillarWidth, 
-      innerCurveHeight * 0.5, 
-      -totalWidth/2 + pillarWidth, 
-      0
-    );
-    
-    // Bottom of left pillar back to start
+    shape.lineTo(totalWidth/2 - pillarWidth + cornerRadius, 0);
+    shape.quadraticCurveTo(totalWidth/2 - pillarWidth, 0, totalWidth/2 - pillarWidth, innerCornerRadius);
+    shape.lineTo(totalWidth/2 - pillarWidth, archRadius * 0.2);
+    shape.absarc(0, archRadius * 0.2, archRadius, 0, Math.PI, false);
+    shape.lineTo(-totalWidth/2 + pillarWidth, innerCornerRadius);
+    shape.quadraticCurveTo(-totalWidth/2 + pillarWidth, 0, -totalWidth/2 + pillarWidth - cornerRadius, 0);
     shape.lineTo(-totalWidth/2 + cornerRadius, 0);
+    
+    // Inner hole
+    const hole = new THREE.Path();
+    const innerGap = 0.12;
+    const holeWidth = totalWidth - pillarWidth * 2 - innerGap * 2;
+    const holeTop = totalHeight - deckHeight;
+    const holeArchTop = archRadius * 0.2 + archRadius - innerGap;
+    
+    hole.moveTo(-holeWidth/2, holeArchTop);
+    hole.lineTo(-holeWidth/2, holeTop - innerCornerRadius);
+    hole.quadraticCurveTo(-holeWidth/2, holeTop, -holeWidth/2 + innerCornerRadius, holeTop);
+    hole.lineTo(holeWidth/2 - innerCornerRadius, holeTop);
+    hole.quadraticCurveTo(holeWidth/2, holeTop, holeWidth/2, holeTop - innerCornerRadius);
+    hole.lineTo(holeWidth/2, holeArchTop);
+    const innerArchRadius = archRadius - innerGap - 0.1;
+    hole.absarc(0, archRadius * 0.2, innerArchRadius, 0, Math.PI, false);
+    
+    shape.holes.push(hole);
     
     const extrudeSettings = {
       steps: 1,
-      depth: 0.3,
+      depth: 0.25,
       bevelEnabled: false,
     };
     
@@ -128,7 +111,7 @@ const HologramLogo = () => {
     const mainEdgesGeom = new THREE.EdgesGeometry(mainGeometry, 15);
     
     // Create inner wireframe geometry (slightly smaller)
-    const innerSettings = { ...extrudeSettings, depth: 0.18 };
+    const innerSettings = { ...extrudeSettings, depth: 0.15 };
     const innerGeometry = new THREE.ExtrudeGeometry(shape, innerSettings);
     const innerEdgesGeom = new THREE.EdgesGeometry(innerGeometry, 15);
     
@@ -188,6 +171,22 @@ const HologramLogo = () => {
         />
       </lineSegments>
 
+      {/* White highlight layer */}
+      <lineSegments 
+        geometry={innerEdges} 
+        position={[
+          glitchState.active ? -glitchState.offsetX * 0.5 : 0, 
+          glitchState.active ? glitchState.offsetY * 0.3 : 0, 
+          -0.075
+        ]}
+      >
+        <lineBasicMaterial 
+          color={whiteColor} 
+          transparent 
+          opacity={glitchState.active ? 0.2 + Math.random() * 0.3 : 0.25}
+          linewidth={1}
+        />
+      </lineSegments>
 
 
       {/* Hologram ambient particles */}
