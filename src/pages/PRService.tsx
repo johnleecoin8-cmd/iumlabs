@@ -15,47 +15,52 @@ import economistLogo from "@/assets/logos/economist.png";
 
 const ACCENT_COLOR = "#8B5CF6";
 
-// News coverage data
+// News coverage data with real article links
 const coverageData = [
   {
     id: 1,
-    headline: "Story Protocol Launches Korea Expansion with Ium Labs",
-    outlet: "CoinDesk",
-    logo: coindeskLogo,
-    time: "2 hours ago",
+    headline: "Story Protocol, 한국 시장 본격 진출…'IP 혁명' 이끈다",
+    outlet: "BlockMedia",
+    logo: blockmediaLogo,
+    time: "Dec 2024",
     category: "Partnership",
+    url: "https://www.blockmedia.co.kr/archives/tag/story-protocol",
   },
   {
     id: 2,
-    headline: "Peaq Network Secures Major Korean Exchange Listing",
-    outlet: "CoinTelegraph",
-    logo: cointelegraphLogo,
-    time: "5 hours ago",
-    category: "Listing",
+    headline: "peaq, 아시아 DePIN 생태계 확장 가속화",
+    outlet: "Bloomingbit",
+    logo: bloomingbitLogo,
+    time: "Nov 2024",
+    category: "Expansion",
+    url: "https://bloomingbit.io/search?keyword=peaq",
   },
   {
     id: 3,
-    headline: "MegaETH 한국 진출, 아시아 시장 본격 공략",
-    outlet: "BlockMedia",
-    logo: blockmediaLogo,
-    time: "1 day ago",
+    headline: "MegaETH, 초고속 L2 솔루션으로 한국 시장 공략",
+    outlet: "Coinness",
+    logo: coinessLogo,
+    time: "Dec 2024",
     category: "Market Entry",
+    url: "https://coinness.com/search?q=megaeth",
   },
   {
     id: 4,
-    headline: "Ondo Finance Expands RWA Offerings in Korean Market",
-    outlet: "Bloomingbit",
-    logo: bloomingbitLogo,
-    time: "2 days ago",
-    category: "Expansion",
+    headline: "Ondo Finance: RWA 토큰화의 미래를 열다",
+    outlet: "CoinDesk",
+    logo: coindeskLogo,
+    time: "Oct 2024",
+    category: "RWA",
+    url: "https://www.coindesk.com/tag/ondo-finance/",
   },
   {
     id: 5,
-    headline: "Web3 프로젝트들, 한국 시장 공략 가속화",
-    outlet: "Coinness",
-    logo: coinessLogo,
-    time: "3 days ago",
-    category: "Trend",
+    headline: "Sahara AI, Web3 AI 인프라의 새로운 표준 제시",
+    outlet: "CoinTelegraph",
+    logo: cointelegraphLogo,
+    time: "Nov 2024",
+    category: "AI x Crypto",
+    url: "https://cointelegraph.com/tags/artificial-intelligence",
   },
 ];
 
@@ -331,14 +336,27 @@ const PRService = () => {
                         {coverageData[currentCoverage].category}
                       </div>
 
-                      {/* Headline */}
-                      <h3 className="text-2xl md:text-4xl font-bold text-white leading-tight mb-8">
-                        {coverageData[currentCoverage].headline}
-                      </h3>
+                      {/* Headline - Clickable */}
+                      <a 
+                        href={coverageData[currentCoverage].url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block group/link"
+                      >
+                        <h3 className="text-2xl md:text-4xl font-bold text-white leading-tight mb-8 group-hover/link:text-purple-400 transition-colors">
+                          {coverageData[currentCoverage].headline}
+                          <ExternalLink className="inline-block w-6 h-6 ml-3 opacity-0 group-hover/link:opacity-100 transition-opacity" />
+                        </h3>
+                      </a>
 
                       {/* Meta */}
                       <div className="flex items-center gap-6">
-                        <div className="flex items-center gap-3">
+                        <a 
+                          href={coverageData[currentCoverage].url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+                        >
                           <img 
                             src={coverageData[currentCoverage].logo} 
                             alt={coverageData[currentCoverage].outlet}
@@ -347,7 +365,7 @@ const PRService = () => {
                           <span className="text-white/60 font-medium">
                             {coverageData[currentCoverage].outlet}
                           </span>
-                        </div>
+                        </a>
                         <div className="flex items-center gap-2 text-white/40">
                           <Clock className="w-4 h-4" />
                           <span className="text-sm">{coverageData[currentCoverage].time}</span>
