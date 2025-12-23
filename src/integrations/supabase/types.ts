@@ -65,10 +65,128 @@ export type Database = {
         }
         Relationships: []
       }
+      project_gallery: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          id: string
+          project_id: string
+          src: string
+          title: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          project_id: string
+          src: string
+          title?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          display_order?: number | null
+          id?: string
+          project_id?: string
+          src?: string
+          title?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_gallery_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_metrics: {
+        Row: {
+          created_at: string | null
+          display_order: number | null
+          id: string
+          label: string
+          project_id: string
+          value: string
+        }
+        Insert: {
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          label: string
+          project_id: string
+          value: string
+        }
+        Update: {
+          created_at?: string | null
+          display_order?: number | null
+          id?: string
+          label?: string
+          project_id?: string
+          value?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_metrics_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_news: {
+        Row: {
+          created_at: string | null
+          date: string | null
+          display_order: number | null
+          id: string
+          image: string | null
+          project_id: string
+          source: string | null
+          title: string
+          url: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          date?: string | null
+          display_order?: number | null
+          id?: string
+          image?: string | null
+          project_id: string
+          source?: string | null
+          title: string
+          url?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          date?: string | null
+          display_order?: number | null
+          id?: string
+          image?: string | null
+          project_id?: string
+          source?: string | null
+          title?: string
+          url?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_news_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
           background_url: string | null
           category: string | null
+          challenge: string | null
           created_at: string | null
           description: string | null
           display_order: number | null
@@ -78,12 +196,16 @@ export type Database = {
           logo_url: string | null
           name: string
           result: string | null
+          services: string[] | null
+          short_services: string[] | null
           slug: string
+          strategy: string[] | null
           updated_at: string | null
         }
         Insert: {
           background_url?: string | null
           category?: string | null
+          challenge?: string | null
           created_at?: string | null
           description?: string | null
           display_order?: number | null
@@ -93,12 +215,16 @@ export type Database = {
           logo_url?: string | null
           name: string
           result?: string | null
+          services?: string[] | null
+          short_services?: string[] | null
           slug: string
+          strategy?: string[] | null
           updated_at?: string | null
         }
         Update: {
           background_url?: string | null
           category?: string | null
+          challenge?: string | null
           created_at?: string | null
           description?: string | null
           display_order?: number | null
@@ -108,7 +234,10 @@ export type Database = {
           logo_url?: string | null
           name?: string
           result?: string | null
+          services?: string[] | null
+          short_services?: string[] | null
           slug?: string
+          strategy?: string[] | null
           updated_at?: string | null
         }
         Relationships: []
