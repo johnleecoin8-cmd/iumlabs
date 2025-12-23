@@ -365,56 +365,7 @@ const TaegeukHologram = () => {
     }
   });
 
-  // Glitch trigger
-  useEffect(() => {
-    const triggerGlitch = () => {
-      const isHeavy = Math.random() < 0.1;
-      const colorSwap = Math.random() < 0.3;
-      
-      setGlitchState({
-        active: true,
-        offsetX: (Math.random() - 0.5) * 0.4,
-        offsetY: (Math.random() - 0.5) * 0.3,
-        rgbSplit: Math.random() * 0.3 + 0.1,
-        scaleX: 0.95 + Math.random() * 0.1,
-        opacity: 0.6 + Math.random() * 0.4,
-        isHeavy,
-        colorSwap,
-      });
-
-      const glitchCount = Math.floor(Math.random() * 4) + 2;
-      let count = 0;
-      
-      const rapidGlitch = setInterval(() => {
-        count++;
-        if (count < glitchCount) {
-          setGlitchState({
-            active: true,
-            offsetX: (Math.random() - 0.5) * 0.35,
-            offsetY: (Math.random() - 0.5) * 0.25,
-            rgbSplit: Math.random() * 0.35 + 0.1,
-            scaleX: 0.93 + Math.random() * 0.14,
-            opacity: 0.5 + Math.random() * 0.5,
-            isHeavy: Math.random() < 0.12,
-            colorSwap: Math.random() < 0.35,
-          });
-        } else {
-          clearInterval(rapidGlitch);
-          setTimeout(() => {
-            setGlitchState({ active: false, offsetX: 0, offsetY: 0, rgbSplit: 0, scaleX: 1, opacity: 1, isHeavy: false, colorSwap: false });
-          }, 40 + Math.random() * 60);
-        }
-      }, 45 + Math.random() * 55);
-    };
-
-    const glitchInterval = setInterval(() => {
-      triggerGlitch();
-    }, 1800 + Math.random() * 2200);
-
-    setTimeout(triggerGlitch, 700);
-
-    return () => clearInterval(glitchInterval);
-  }, []);
+  // Glitch disabled - static state only
 
   // Create Taegeuk shapes with THREE.Shape
   const { redGeometry, blueGeometry, outerRingGeometry } = useMemo(() => {
