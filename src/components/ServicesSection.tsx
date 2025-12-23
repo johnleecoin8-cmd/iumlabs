@@ -142,7 +142,7 @@ const ServicesSection = () => {
             <ArrowRight className="w-4 h-4" />
           </Link>
 
-          <div className="mt-auto pt-8 flex justify-center">
+          <div className="mt-6 flex justify-center">
             <GoldShape />
           </div>
         </motion.div>
