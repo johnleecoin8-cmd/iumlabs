@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import CalendlyButton from "@/components/CalendlyButton";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { useQuery } from "@tanstack/react-query";
 
 // Research thumbnail images
 import ecosystemGrowthImg from "@/assets/blog/ecosystem-growth-2025.jpg";
@@ -2885,15 +2886,45 @@ const Research = () => {
   const [isSubscribing, setIsSubscribing] = useState(false);
   const postsPerPage = 8;
 
+  // Fetch from DB, fallback to hardcoded data
+  const { data: dbPosts } = useQuery({
+    queryKey: ['research-posts'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('research_posts')
+        .select('*')
+        .eq('is_published', true)
+        .order('display_order', { ascending: true });
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  // Use DB data if available, otherwise fallback to hardcoded
+  const posts = dbPosts && dbPosts.length > 0 ? dbPosts.map(post => ({
+    id: post.id,
+    slug: post.slug,
+    title: post.title,
+    image: post.image || '',
+    date: post.date || '',
+    readTime: post.read_time || '',
+    category: post.category || '',
+    author: post.author || '',
+    authorRole: post.author_role || '',
+    excerpt: post.excerpt || '',
+    tags: post.tags || [],
+    content: post.content || '',
+  })) : researchPosts;
+
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const filteredPosts = researchPosts.filter(post => {
+  const filteredPosts = posts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+                         (post.excerpt && post.excerpt.toLowerCase().includes(searchQuery.toLowerCase()));
     const matchesCategory = selectedCategory === "All" || post.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
@@ -2989,7 +3020,7 @@ const Research = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-              <span>{researchPosts.length} Articles</span>
+              <span>{posts.length} Articles</span>
               <span>•</span>
               <span>6 Categories</span>
             </motion.div>

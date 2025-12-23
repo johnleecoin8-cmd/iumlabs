@@ -242,6 +242,63 @@ export type Database = {
         }
         Relationships: []
       }
+      research_posts: {
+        Row: {
+          author: string | null
+          author_role: string | null
+          category: string | null
+          content: string | null
+          created_at: string | null
+          date: string | null
+          display_order: number | null
+          excerpt: string | null
+          id: string
+          image: string | null
+          is_published: boolean | null
+          read_time: string | null
+          slug: string
+          tags: string[] | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          author?: string | null
+          author_role?: string | null
+          category?: string | null
+          content?: string | null
+          created_at?: string | null
+          date?: string | null
+          display_order?: number | null
+          excerpt?: string | null
+          id?: string
+          image?: string | null
+          is_published?: boolean | null
+          read_time?: string | null
+          slug: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          author?: string | null
+          author_role?: string | null
+          category?: string | null
+          content?: string | null
+          created_at?: string | null
+          date?: string | null
+          display_order?: number | null
+          excerpt?: string | null
+          id?: string
+          image?: string | null
+          is_published?: boolean | null
+          read_time?: string | null
+          slug?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string | null
