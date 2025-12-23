@@ -53,7 +53,7 @@ const Footer = () => {
   return (
     <footer className="bg-[hsl(0,0%,4%)] text-white">
       {/* Main Footer Content */}
-      <div className="container mx-auto px-6 py-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
         {/* Top Row - CTA + Back to Top */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-12 border-b border-white/10">
           <div>
@@ -217,7 +217,7 @@ const Footer = () => {
       </div>
 
       {/* Giant Brand Name */}
-      <div className="container mx-auto px-6 pb-12 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-12 overflow-hidden">
         <h2 className="text-[5rem] md:text-[10rem] lg:text-[16rem] font-light leading-none tracking-[0.1em] text-center whitespace-nowrap">
           <span className="text-transparent" style={{
             WebkitTextStroke: '1px rgba(255,255,255,0.15)'
