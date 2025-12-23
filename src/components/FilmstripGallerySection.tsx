@@ -44,7 +44,7 @@ const FilmstripGallerySection = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.05 }}
                 whileHover={{ scale: 1.02, zIndex: 10 }}
-                className={`group relative aspect-square overflow-hidden border-r border-b border-white/10 cursor-pointer ${
+                className={`group relative aspect-[5/4] overflow-hidden border-r border-b border-white/10 cursor-pointer ${
                   index % 3 === 2 ? "border-r-0" : ""
                 }`}
               >
@@ -65,7 +65,7 @@ const FilmstripGallerySection = () => {
 
         {/* Right: Info Panel */}
         <motion.div
-          className="w-full lg:w-1/3 p-6 md:p-10 flex flex-col justify-center"
+          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
