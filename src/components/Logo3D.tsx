@@ -9,71 +9,100 @@ const LogoMesh = () => {
   const logoGeometry = useMemo(() => {
     const shape = new THREE.Shape();
     
-    // Logo dimensions (based on the actual Ium Labs logo - bridge/connection shape)
-    const width = 3;
-    const height = 1.8;
-    const thickness = 0.25;
-    const cornerRadius = 0.12;
+    // Logo dimensions - Ium Labs bridge logo
+    // Structure: flat top deck, two pillars, semi-circular arch opening at bottom
+    const totalWidth = 3.2;
+    const totalHeight = 2.0;
+    const deckHeight = 0.35; // top deck thickness
+    const pillarWidth = 0.45; // width of each pillar
+    const archRadius = (totalWidth - pillarWidth * 2) / 2; // radius of the bottom arch
+    const cornerRadius = 0.08;
+    const innerCornerRadius = 0.06;
     
-    // Start from bottom-left outer corner
-    shape.moveTo(-width/2 + cornerRadius, -height/2);
+    // Outer shape - start from bottom-left pillar, going clockwise
+    // Bottom-left corner of left pillar
+    shape.moveTo(-totalWidth/2 + cornerRadius, 0);
+    shape.quadraticCurveTo(-totalWidth/2, 0, -totalWidth/2, cornerRadius);
     
-    // Bottom edge
-    shape.lineTo(width/2 - cornerRadius, -height/2);
-    
-    // Bottom-right corner
-    shape.quadraticCurveTo(width/2, -height/2, width/2, -height/2 + cornerRadius);
-    
-    // Right outer edge going up
-    shape.lineTo(width/2, height/2 - cornerRadius);
-    
-    // Top-right corner
-    shape.quadraticCurveTo(width/2, height/2, width/2 - cornerRadius, height/2);
-    
-    // Top edge
-    shape.lineTo(-width/2 + cornerRadius, height/2);
+    // Left outer edge going up
+    shape.lineTo(-totalWidth/2, totalHeight - cornerRadius);
     
     // Top-left corner
-    shape.quadraticCurveTo(-width/2, height/2, -width/2, height/2 - cornerRadius);
+    shape.quadraticCurveTo(-totalWidth/2, totalHeight, -totalWidth/2 + cornerRadius, totalHeight);
     
-    // Left outer edge going down
-    shape.lineTo(-width/2, -height/2 + cornerRadius);
+    // Top edge
+    shape.lineTo(totalWidth/2 - cornerRadius, totalHeight);
     
-    // Bottom-left corner
-    shape.quadraticCurveTo(-width/2, -height/2, -width/2 + cornerRadius, -height/2);
+    // Top-right corner
+    shape.quadraticCurveTo(totalWidth/2, totalHeight, totalWidth/2, totalHeight - cornerRadius);
     
-    // Create the inner cutout (arch shape at top, open at bottom)
+    // Right outer edge going down
+    shape.lineTo(totalWidth/2, cornerRadius);
+    
+    // Bottom-right corner of right pillar
+    shape.quadraticCurveTo(totalWidth/2, 0, totalWidth/2 - cornerRadius, 0);
+    
+    // Bottom edge of right pillar
+    shape.lineTo(totalWidth/2 - pillarWidth + cornerRadius, 0);
+    
+    // Inner bottom-right corner (going into arch)
+    shape.quadraticCurveTo(totalWidth/2 - pillarWidth, 0, totalWidth/2 - pillarWidth, innerCornerRadius);
+    
+    // Right pillar inner edge going up slightly then arch
+    shape.lineTo(totalWidth/2 - pillarWidth, archRadius * 0.2);
+    
+    // Semi-circular arch at bottom (opening downward) - from right to left
+    shape.absarc(0, archRadius * 0.2, archRadius, 0, Math.PI, false);
+    
+    // Left pillar inner edge going down
+    shape.lineTo(-totalWidth/2 + pillarWidth, innerCornerRadius);
+    
+    // Inner bottom-left corner
+    shape.quadraticCurveTo(-totalWidth/2 + pillarWidth, 0, -totalWidth/2 + pillarWidth - cornerRadius, 0);
+    
+    // Bottom edge of left pillar back to start
+    shape.lineTo(-totalWidth/2 + cornerRadius, 0);
+    
+    // Create inner cutout hole for the space between deck and arch
     const hole = new THREE.Path();
+    const innerGap = 0.12; // gap between deck and top of arch
+    const holeWidth = totalWidth - pillarWidth * 2 - innerGap * 2;
+    const holeTop = totalHeight - deckHeight;
+    const holeArchTop = archRadius * 0.2 + archRadius - innerGap;
     
-    const innerWidth = width - thickness * 2;
-    const archCenterY = height/2 - thickness - 0.5;
-    const archRadius = innerWidth / 2;
+    // Inner rectangular space + top of arch
+    // Start from bottom-left of hole (above arch)
+    hole.moveTo(-holeWidth/2, holeArchTop);
     
-    // Start from inner bottom-left
-    hole.moveTo(-innerWidth/2, -height/2 + thickness);
+    // Left edge going up
+    hole.lineTo(-holeWidth/2, holeTop - innerCornerRadius);
     
-    // Left inner edge going up to arch
-    hole.lineTo(-innerWidth/2, archCenterY);
+    // Top-left corner
+    hole.quadraticCurveTo(-holeWidth/2, holeTop, -holeWidth/2 + innerCornerRadius, holeTop);
     
-    // The arch (semi-circle at top) - going from left to right
-    hole.absarc(0, archCenterY, archRadius, Math.PI, 0, true);
+    // Top edge
+    hole.lineTo(holeWidth/2 - innerCornerRadius, holeTop);
     
-    // Right inner edge going down
-    hole.lineTo(innerWidth/2, -height/2 + thickness);
+    // Top-right corner
+    hole.quadraticCurveTo(holeWidth/2, holeTop, holeWidth/2, holeTop - innerCornerRadius);
     
-    // Bottom inner edge
-    hole.lineTo(-innerWidth/2, -height/2 + thickness);
+    // Right edge going down
+    hole.lineTo(holeWidth/2, holeArchTop);
+    
+    // Arc connecting right to left (inner part of arch - smaller arc)
+    const innerArchRadius = archRadius - innerGap - 0.1;
+    hole.absarc(0, archRadius * 0.2, innerArchRadius, 0, Math.PI, false);
     
     shape.holes.push(hole);
     
     const extrudeSettings = {
       steps: 2,
-      depth: 0.35,
+      depth: 0.4,
       bevelEnabled: true,
-      bevelThickness: 0.04,
-      bevelSize: 0.04,
+      bevelThickness: 0.05,
+      bevelSize: 0.05,
       bevelOffset: 0,
-      bevelSegments: 4
+      bevelSegments: 5
     };
     
     return new THREE.ExtrudeGeometry(shape, extrudeSettings);
