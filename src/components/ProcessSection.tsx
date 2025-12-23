@@ -26,7 +26,7 @@ const phases = [
 
 const ProcessSection = () => {
   return (
-    <section className="bg-[#0A0A0A]">
+    <section className="bg-background">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
         {phases.map((phase, index) => {
           const Icon = phase.icon;
@@ -40,20 +40,24 @@ const ProcessSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ y: -4 }}
-              className={`group p-8 md:p-10 transition-all duration-300 hover:bg-white/5 ${
-                !isLast ? "lg:border-r border-white/10" : ""
-              } ${isOdd ? "md:border-l lg:border-l-0 border-white/10" : ""} ${
-                index < 2 ? "border-b lg:border-b-0 border-white/10" : ""
+              className={`group p-8 md:p-10 lg:p-12 transition-all duration-300 hover:bg-secondary/50 ${
+                !isLast ? "lg:border-r border-border" : ""
+              } ${isOdd ? "md:border-l lg:border-l-0 border-border" : ""} ${
+                index < 2 ? "border-b lg:border-b-0 border-border" : ""
               }`}
             >
-              <Icon className="w-8 h-8 mb-4 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" strokeWidth={1.5} />
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-medium text-muted-foreground">0{index + 1}</span>
+                <div className="h-px flex-1 bg-border" />
+              </div>
               
-              <h3 className="text-lg font-semibold text-white mb-3">
+              <Icon className="w-8 h-8 mb-4 text-muted-foreground group-hover:text-foreground group-hover:drop-shadow-[0_0_12px_hsl(var(--foreground)/0.3)] transition-all duration-300" strokeWidth={1.5} />
+              
+              <h3 className="text-lg font-semibold text-foreground mb-3">
                 {phase.title}
               </h3>
               
-              <p className="text-white/50 text-sm leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed">
                 {phase.description}
               </p>
             </motion.div>

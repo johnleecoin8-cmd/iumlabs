@@ -90,10 +90,10 @@ const InsightsSection = () => {
   };
 
   return (
-    <section className="bg-[#0A0A0A]">
+    <section className="bg-background">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Articles List */}
-        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
+        <div className="w-full lg:w-2/3 lg:border-r border-border">
           {insights.map((article, index) => (
             <motion.div
               key={article.id}
@@ -104,25 +104,25 @@ const InsightsSection = () => {
             >
               <Link
                 to={`/research/${article.id}`}
-                className={`group block p-8 md:p-10 transition-colors duration-300 hover:bg-white/5 ${
-                  index < insights.length - 1 ? "border-b border-white/10" : ""
+                className={`group block p-6 md:p-8 lg:p-10 transition-colors duration-300 hover:bg-secondary/50 ${
+                  index < insights.length - 1 ? "border-b border-border" : ""
                 }`}
               >
-                <div className="flex items-center gap-3 text-white/40 text-xs mb-3">
+                <div className="flex items-center gap-3 text-muted-foreground text-xs mb-3">
                   <span className="uppercase tracking-wider">{article.category}</span>
                   <span>•</span>
                   <span>{article.date}</span>
                   <span>•</span>
                   <span>{article.readTime} read</span>
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-white/80 transition-colors">
+                <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-foreground/80 transition-colors">
                   {article.title}
                 </h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
                   {article.excerpt}
                 </p>
-                <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm">
-                  Read article
+                <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm">
+                  <span className="group-hover:underline underline-offset-4">Read article</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
@@ -130,29 +130,29 @@ const InsightsSection = () => {
           ))}
 
           {/* View All Link */}
-          <div className="px-8 md:px-10 py-4 border-t border-white/10">
+          <div className="px-6 md:px-8 lg:px-10 py-4 border-t border-border">
             <Link
               to="/research"
-              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
+              className="group inline-flex items-center gap-2 text-foreground font-medium hover:text-foreground/70 transition-colors"
             >
-              View all research
-              <ArrowRight className="w-4 h-4" />
+              <span className="group-hover:underline underline-offset-4">View all research</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
         </div>
 
         {/* Right: Newsletter CTA */}
         <motion.div
-          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
+          className="w-full lg:w-1/3 p-6 md:p-8 lg:p-10 flex flex-col justify-center"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
             Latest Research
           </h2>
-          <p className="text-white/50 leading-relaxed mb-8">
+          <p className="text-muted-foreground leading-relaxed mb-8">
             Stay ahead with our insights on Korean Web3 market trends, marketing strategies, and ecosystem analysis.
           </p>
 
@@ -162,23 +162,23 @@ const InsightsSection = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="w-full bg-transparent px-4 py-3 border border-white/20 text-white placeholder:text-white/40 mb-3 focus:outline-none focus:border-white transition-colors"
+              className="w-full bg-transparent px-4 py-3 border border-border rounded-lg text-foreground placeholder:text-muted-foreground mb-3 focus:outline-none focus:border-foreground transition-colors"
               required
             />
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex items-center justify-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors disabled:opacity-50"
+              className="group w-full flex items-center justify-center gap-2 bg-foreground text-background px-6 py-3 text-sm font-medium rounded-full hover:bg-foreground/90 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 disabled:opacity-50 disabled:hover:translate-y-0"
             >
               {isSubmitting ? "Subscribing..." : "SUBSCRIBE"}
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </form>
 
           <BlueShape />
 
-          <div className="mt-6 pt-4 border-t border-white/10">
-            <p className="text-white/40 text-sm">
+          <div className="mt-6 pt-4 border-t border-border">
+            <p className="text-muted-foreground text-sm">
               Join 500+ Web3 founders and marketers getting our weekly insights.
             </p>
           </div>
