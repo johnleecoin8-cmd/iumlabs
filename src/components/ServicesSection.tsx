@@ -122,12 +122,15 @@ const ServicesSection = () => {
 
         {/* Right: Sticky CTA Panel */}
         <motion.div
-          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
+          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center relative"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
+          <div className="absolute top-6 right-6 opacity-30 pointer-events-none">
+            <GoldShape />
+          </div>
           <h2 className="text-3xl font-bold text-white mb-4">
             Why Ium Labs
           </h2>
@@ -136,13 +139,11 @@ const ServicesSection = () => {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors w-fit mb-6"
+            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors w-fit"
           >
             CONNECT WITH US
             <ArrowRight className="w-4 h-4" />
           </Link>
-
-          <GoldShape />
         </motion.div>
       </div>
     </section>
