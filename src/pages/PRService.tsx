@@ -219,35 +219,73 @@ const PRService = () => {
         </div>
       </section>
 
-      {/* Simple Logo Wall Section */}
+      {/* Media Partners Section - Editorial Style */}
       <section className="scroll-reveal bg-[#121212]">
         <div className="border-t border-white/10">
           <SectionHeader number="02" title="Media Partners" badge="Our Network" />
 
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
-              {/* Logo Grid */}
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-                {mediaLogos.map((partner, index) => (
-                  <motion.div
-                    key={partner.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ scale: 1.1 }}
-                    className="flex items-center justify-center p-6 rounded-xl bg-white/5 border border-white/5 hover:border-white/20 transition-all"
-                  >
-                    <img 
-                      src={partner.logo} 
-                      alt={partner.name}
-                      className="h-8 max-w-[100px] object-contain brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
-                    />
-                  </motion.div>
-                ))}
+              {/* Two-row layout: Global / Korean */}
+              <div className="space-y-12">
+                {/* Global Media */}
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white/60 font-medium">Global</span>
+                    <div className="flex-1 h-px bg-white/10" />
+                  </div>
+                  <div className="grid grid-cols-3 gap-4">
+                    {mediaLogos.slice(0, 3).map((partner, index) => (
+                      <motion.div
+                        key={partner.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        whileHover={{ y: -4 }}
+                        className="group flex flex-col items-center justify-center p-6 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
+                      >
+                        <img 
+                          src={partner.logo} 
+                          alt={partner.name}
+                          className="h-8 max-w-[120px] object-contain brightness-0 invert opacity-50 group-hover:opacity-100 transition-opacity"
+                        />
+                        <span className="mt-3 text-xs text-white/40 group-hover:text-white/60 transition-colors">{partner.name}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Korean Media */}
+                <div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white/60 font-medium">Korea</span>
+                    <div className="flex-1 h-px bg-white/10" />
+                  </div>
+                  <div className="grid grid-cols-3 gap-4">
+                    {mediaLogos.slice(3, 6).map((partner, index) => (
+                      <motion.div
+                        key={partner.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 + 0.3 }}
+                        whileHover={{ y: -4 }}
+                        className="group flex flex-col items-center justify-center p-6 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all"
+                      >
+                        <img 
+                          src={partner.logo} 
+                          alt={partner.name}
+                          className="h-8 max-w-[120px] object-contain brightness-0 invert opacity-50 group-hover:opacity-100 transition-opacity"
+                        />
+                        <span className="mt-3 text-xs text-white/40 group-hover:text-white/60 transition-colors">{partner.name}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              <p className="text-center text-white/40 text-sm mt-10">
+              <p className="text-center text-white/40 text-sm mt-12">
                 And 40+ more media partners across global and Korean markets
               </p>
             </div>
