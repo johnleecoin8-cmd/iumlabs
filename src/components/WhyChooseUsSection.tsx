@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import teamPhoto from '@/assets/team-photo.png';
+import iumLabsLogo from '@/assets/ium-labs-logo-about.png';
 
 const WhyChooseUsSection = () => {
   return (
@@ -15,11 +15,11 @@ const WhyChooseUsSection = () => {
           transition={{ duration: 0.6 }}
           className="lg:border-r border-white/10"
         >
-          <div className="aspect-[4/3] overflow-hidden">
+          <div className="aspect-[4/3] overflow-hidden bg-white flex items-center justify-center p-12">
             <img
-              src={teamPhoto}
-              alt="Ium Labs Team"
-              className="w-full h-full object-cover object-[center_65%]"
+              src={iumLabsLogo}
+              alt="Ium Labs Logo"
+              className="w-full h-auto max-w-[280px] object-contain"
             />
           </div>
         </motion.div>
