@@ -127,7 +127,7 @@ const HologramLogo = () => {
       groupRef.current.rotation.x = Math.sin(time * 0.15) * 0.08;
       
       // Subtle floating motion - positioned lower
-      groupRef.current.position.y = -0.8 + Math.sin(time * 0.5) * 0.05;
+      groupRef.current.position.y = -1.2 + Math.sin(time * 0.5) * 0.05;
     }
   });
 
@@ -190,10 +190,10 @@ const HologramLogo = () => {
 
 
       {/* Hologram ambient particles */}
-      {[...Array(20)].map((_, i) => {
-        const baseX = Math.sin(i * 0.8) * 2.5;
-        const baseY = Math.cos(i * 0.6) * 1.8;
-        const baseZ = Math.sin(i * 0.4) * 0.8;
+      {[...Array(40)].map((_, i) => {
+        const baseX = Math.sin(i * 0.5) * 3.2;
+        const baseY = Math.cos(i * 0.4) * 2.2;
+        const baseZ = Math.sin(i * 0.3) * 1.0;
         const isCyan = i % 2 === 0;
         
         return (
