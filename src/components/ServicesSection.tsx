@@ -84,7 +84,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 
 const GoldShape = () => (
   <motion.div
-    className="relative w-[50px] h-[50px]"
+    className="relative w-40 h-40"
     animate={{ rotateY: 360 }}
     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
     style={{ transformStyle: "preserve-3d" }}
