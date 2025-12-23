@@ -1,6 +1,5 @@
 import { useMemo, useState, useEffect, useRef } from "react";
-import { Canvas, useFrame, extend } from "@react-three/fiber";
-import { Line } from "@react-three/drei";
+import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 const HologramLogo = () => {
@@ -233,7 +232,118 @@ const HologramLogo = () => {
   );
 };
 
-// Taegeuk (Korean flag symbol) hologram component
+// Trigram bar component
+const TrigramBar = ({ 
+  position, 
+  rotation, 
+  isBroken, 
+  glitchOffset,
+  color,
+  opacity 
+}: { 
+  position: [number, number, number]; 
+  rotation: number; 
+  isBroken: boolean;
+  glitchOffset: { x: number; y: number };
+  color: string;
+  opacity: number;
+}) => {
+  const geometry = useMemo(() => {
+    const barW = 0.6;
+    const barH = 0.08;
+    const gap = 0.08;
+    
+    if (isBroken) {
+      // Two half bars with gap
+      const leftShape = new THREE.Shape();
+      leftShape.moveTo(-barW / 2, -barH / 2);
+      leftShape.lineTo(-gap / 2, -barH / 2);
+      leftShape.lineTo(-gap / 2, barH / 2);
+      leftShape.lineTo(-barW / 2, barH / 2);
+      leftShape.closePath();
+      
+      const rightShape = new THREE.Shape();
+      rightShape.moveTo(gap / 2, -barH / 2);
+      rightShape.lineTo(barW / 2, -barH / 2);
+      rightShape.lineTo(barW / 2, barH / 2);
+      rightShape.lineTo(gap / 2, barH / 2);
+      rightShape.closePath();
+      
+      const extrudeSettings = { depth: 0.05, bevelEnabled: false };
+      const leftGeom = new THREE.ExtrudeGeometry(leftShape, extrudeSettings);
+      const rightGeom = new THREE.ExtrudeGeometry(rightShape, extrudeSettings);
+      
+      return { left: leftGeom, right: rightGeom, single: null };
+    } else {
+      // Single solid bar
+      const shape = new THREE.Shape();
+      shape.moveTo(-barW / 2, -barH / 2);
+      shape.lineTo(barW / 2, -barH / 2);
+      shape.lineTo(barW / 2, barH / 2);
+      shape.lineTo(-barW / 2, barH / 2);
+      shape.closePath();
+      
+      const extrudeSettings = { depth: 0.05, bevelEnabled: false };
+      return { left: null, right: null, single: new THREE.ExtrudeGeometry(shape, extrudeSettings) };
+    }
+  }, [isBroken]);
+
+  return (
+    <group position={[position[0] + glitchOffset.x, position[1] + glitchOffset.y, position[2]]} rotation={[0, 0, rotation]}>
+      {geometry.single ? (
+        <mesh geometry={geometry.single}>
+          <meshBasicMaterial color={color} transparent opacity={opacity} />
+        </mesh>
+      ) : (
+        <>
+          <mesh geometry={geometry.left!}>
+            <meshBasicMaterial color={color} transparent opacity={opacity} />
+          </mesh>
+          <mesh geometry={geometry.right!}>
+            <meshBasicMaterial color={color} transparent opacity={opacity} />
+          </mesh>
+        </>
+      )}
+    </group>
+  );
+};
+
+// Trigram (3 bars) component
+const Trigram = ({ 
+  pattern, 
+  position, 
+  rotation,
+  glitchOffset,
+  color,
+  opacity
+}: { 
+  pattern: boolean[]; // true = solid, false = broken
+  position: [number, number, number];
+  rotation: number;
+  glitchOffset: { x: number; y: number };
+  color: string;
+  opacity: number;
+}) => {
+  const spacing = 0.14;
+  
+  return (
+    <group position={position} rotation={[0, 0, rotation]}>
+      {pattern.map((isSolid, i) => (
+        <TrigramBar
+          key={i}
+          position={[0, (1 - i) * spacing, 0]}
+          rotation={0}
+          isBroken={!isSolid}
+          glitchOffset={glitchOffset}
+          color={color}
+          opacity={opacity}
+        />
+      ))}
+    </group>
+  );
+};
+
+// Taegeuk (Korean flag symbol) hologram component with THREE.Shape
 const TaegeukHologram = () => {
   const groupRef = useRef<THREE.Group>(null);
   const [glitchState, setGlitchState] = useState({
@@ -250,8 +360,8 @@ const TaegeukHologram = () => {
   // Slow rotation animation
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.15;
-      groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
+      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.12;
+      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.05;
     }
   });
 
@@ -263,16 +373,16 @@ const TaegeukHologram = () => {
       
       setGlitchState({
         active: true,
-        offsetX: (Math.random() - 0.5) * 0.6,
-        offsetY: (Math.random() - 0.5) * 0.4,
-        rgbSplit: Math.random() * 0.4 + 0.1,
+        offsetX: (Math.random() - 0.5) * 0.4,
+        offsetY: (Math.random() - 0.5) * 0.3,
+        rgbSplit: Math.random() * 0.3 + 0.1,
         scaleX: 0.95 + Math.random() * 0.1,
-        opacity: 0.5 + Math.random() * 0.5,
+        opacity: 0.6 + Math.random() * 0.4,
         isHeavy,
         colorSwap,
       });
 
-      const glitchCount = Math.floor(Math.random() * 5) + 2;
+      const glitchCount = Math.floor(Math.random() * 4) + 2;
       let count = 0;
       
       const rapidGlitch = setInterval(() => {
@@ -280,13 +390,13 @@ const TaegeukHologram = () => {
         if (count < glitchCount) {
           setGlitchState({
             active: true,
-            offsetX: (Math.random() - 0.5) * 0.5,
-            offsetY: (Math.random() - 0.5) * 0.3,
-            rgbSplit: Math.random() * 0.5 + 0.1,
-            scaleX: 0.92 + Math.random() * 0.16,
-            opacity: 0.4 + Math.random() * 0.6,
-            isHeavy: Math.random() < 0.15,
-            colorSwap: Math.random() < 0.4,
+            offsetX: (Math.random() - 0.5) * 0.35,
+            offsetY: (Math.random() - 0.5) * 0.25,
+            rgbSplit: Math.random() * 0.35 + 0.1,
+            scaleX: 0.93 + Math.random() * 0.14,
+            opacity: 0.5 + Math.random() * 0.5,
+            isHeavy: Math.random() < 0.12,
+            colorSwap: Math.random() < 0.35,
           });
         } else {
           clearInterval(rapidGlitch);
@@ -294,142 +404,197 @@ const TaegeukHologram = () => {
             setGlitchState({ active: false, offsetX: 0, offsetY: 0, rgbSplit: 0, scaleX: 1, opacity: 1, isHeavy: false, colorSwap: false });
           }, 40 + Math.random() * 60);
         }
-      }, 40 + Math.random() * 50);
+      }, 45 + Math.random() * 55);
     };
 
     const glitchInterval = setInterval(() => {
       triggerGlitch();
-    }, 1500 + Math.random() * 2000);
+    }, 1800 + Math.random() * 2200);
 
-    setTimeout(triggerGlitch, 800);
+    setTimeout(triggerGlitch, 700);
 
     return () => clearInterval(glitchInterval);
   }, []);
 
-  // Create Taegeuk points
-  const { outerCirclePoints, sCurvePoints, topDotPoints, bottomDotPoints } = useMemo(() => {
-    const radius = 1.8;
-    const segments = 64;
+  // Create Taegeuk shapes with THREE.Shape
+  const { redGeometry, blueGeometry, outerRingGeometry } = useMemo(() => {
+    const r = 1.2; // Taegeuk radius
     
-    // Outer circle points
-    const circlePoints: [number, number, number][] = [];
-    for (let i = 0; i <= segments; i++) {
-      const angle = (i / segments) * Math.PI * 2;
-      circlePoints.push([Math.cos(angle) * radius, Math.sin(angle) * radius, 0]);
-    }
+    // Red Taegeuk (top half - Yang)
+    const redShape = new THREE.Shape();
+    redShape.moveTo(r, 0);
+    redShape.absarc(0, 0, r, 0, Math.PI, false); // Upper semicircle
+    redShape.absarc(-r/2, 0, r/2, Math.PI, 0, true); // Left small semicircle (inward)
+    redShape.absarc(r/2, 0, r/2, Math.PI, 0, false); // Right small semicircle (outward)
     
-    // S-curve points
-    const sPoints: [number, number, number][] = [];
-    for (let i = 0; i <= 32; i++) {
-      const t = i / 32;
-      const y = (t - 0.5) * radius * 2;
-      const x = Math.sin(t * Math.PI) * (radius / 2);
-      sPoints.push([x, y, 0]);
-    }
+    // Blue Taegeuk (bottom half - Yin)
+    const blueShape = new THREE.Shape();
+    blueShape.moveTo(-r, 0);
+    blueShape.absarc(0, 0, r, Math.PI, 2 * Math.PI, false); // Lower semicircle
+    blueShape.absarc(r/2, 0, r/2, 0, Math.PI, false); // Right small semicircle (outward)
+    blueShape.absarc(-r/2, 0, r/2, 0, Math.PI, true); // Left small semicircle (inward)
     
-    // Top dot points
-    const topPoints: [number, number, number][] = [];
-    for (let i = 0; i <= 24; i++) {
-      const angle = (i / 24) * Math.PI * 2;
-      topPoints.push([Math.cos(angle) * (radius / 4), Math.sin(angle) * (radius / 4) + radius / 2, 0]);
-    }
+    // Outer ring
+    const outerRingShape = new THREE.Shape();
+    outerRingShape.absarc(0, 0, r + 0.08, 0, Math.PI * 2, false);
+    const innerHole = new THREE.Path();
+    innerHole.absarc(0, 0, r + 0.02, 0, Math.PI * 2, true);
+    outerRingShape.holes.push(innerHole);
     
-    // Bottom dot points
-    const bottomPoints: [number, number, number][] = [];
-    for (let i = 0; i <= 24; i++) {
-      const angle = (i / 24) * Math.PI * 2;
-      bottomPoints.push([Math.cos(angle) * (radius / 4), Math.sin(angle) * (radius / 4) - radius / 2, 0]);
-    }
+    const extrudeSettings = {
+      depth: 0.1,
+      bevelEnabled: true,
+      bevelThickness: 0.02,
+      bevelSize: 0.02,
+      bevelSegments: 2
+    };
     
-    return { outerCirclePoints: circlePoints, sCurvePoints: sPoints, topDotPoints: topPoints, bottomDotPoints: bottomPoints };
+    const ringExtrudeSettings = {
+      depth: 0.05,
+      bevelEnabled: false
+    };
+    
+    return {
+      redGeometry: new THREE.ExtrudeGeometry(redShape, extrudeSettings),
+      blueGeometry: new THREE.ExtrudeGeometry(blueShape, extrudeSettings),
+      outerRingGeometry: new THREE.ExtrudeGeometry(outerRingShape, ringExtrudeSettings)
+    };
   }, []);
 
   // Korean flag colors
   const redColor = "#C60C30";
   const blueColor = "#003478";
+  const blackColor = "#1a1a1a";
   const whiteColor = "#FFFFFF";
   const goldColor = "#FFD700";
 
-  const topColor = glitchState.colorSwap ? redColor : blueColor;
-  const bottomColor = glitchState.colorSwap ? blueColor : redColor;
-
-  const offsetCircle = (points: [number, number, number][], ox: number, oy: number, oz: number): [number, number, number][] => {
-    return points.map(([x, y, z]) => [x + ox, y + oy, z + oz]);
+  // Trigram patterns (건곤감리)
+  // 건 (Geon/Heaven): ☰ - 3 solid bars
+  // 곤 (Gon/Earth): ☷ - 3 broken bars  
+  // 감 (Gam/Water): ☵ - broken, solid, broken
+  // 리 (Ri/Fire): ☲ - solid, broken, solid
+  const trigrams = {
+    geon: [true, true, true],      // ☰ top-left
+    ri: [true, false, true],       // ☲ top-right
+    gam: [false, true, false],     // ☵ bottom-left
+    gon: [false, false, false],    // ☷ bottom-right
   };
+
+  const trigramDistance = 1.9;
+  const trigramRotation = Math.PI / 4; // 45 degrees
+
+  const glitchOffset = {
+    x: glitchState.active ? glitchState.offsetX : 0,
+    y: glitchState.active ? glitchState.offsetY : 0,
+  };
+
+  const mainOpacity = glitchState.active ? glitchState.opacity : 1;
+  const rgbOffset = glitchState.active ? glitchState.rgbSplit * 0.15 : 0;
 
   return (
     <group ref={groupRef} position={[0, 0, 0]} scale={[glitchState.scaleX, 1, 1]}>
-      {/* Main outer circle - white */}
-      <Line
-        points={offsetCircle(outerCirclePoints, glitchState.active ? glitchState.offsetX : 0, glitchState.active ? glitchState.offsetY : 0, 0)}
-        color={whiteColor}
-        lineWidth={2}
-        transparent
-        opacity={glitchState.active ? glitchState.opacity * 0.9 : 0.85}
+      {/* Red Taegeuk (Yang) - main */}
+      <mesh 
+        geometry={redGeometry} 
+        position={[glitchOffset.x, glitchOffset.y, -0.05]}
+      >
+        <meshBasicMaterial 
+          color={glitchState.colorSwap ? blueColor : redColor} 
+          transparent 
+          opacity={mainOpacity * 0.95} 
+        />
+      </mesh>
+      
+      {/* Blue Taegeuk (Yin) - main */}
+      <mesh 
+        geometry={blueGeometry} 
+        position={[glitchOffset.x, glitchOffset.y, -0.05]}
+      >
+        <meshBasicMaterial 
+          color={glitchState.colorSwap ? redColor : blueColor} 
+          transparent 
+          opacity={mainOpacity * 0.95} 
+        />
+      </mesh>
+
+      {/* Outer ring - white glow */}
+      <mesh 
+        geometry={outerRingGeometry} 
+        position={[glitchOffset.x * 0.5, glitchOffset.y * 0.5, -0.08]}
+      >
+        <meshBasicMaterial color={whiteColor} transparent opacity={mainOpacity * 0.6} />
+      </mesh>
+
+      {/* RGB split layers */}
+      <mesh 
+        geometry={redGeometry} 
+        position={[rgbOffset + 0.03, -rgbOffset, -0.06]}
+      >
+        <meshBasicMaterial color={redColor} transparent opacity={0.3} />
+      </mesh>
+      <mesh 
+        geometry={blueGeometry} 
+        position={[-rgbOffset - 0.03, rgbOffset, -0.06]}
+      >
+        <meshBasicMaterial color={blueColor} transparent opacity={0.3} />
+      </mesh>
+
+      {/* 4 Trigrams (건곤감리) */}
+      {/* 건 (Geon/Heaven) - top-left */}
+      <Trigram 
+        pattern={trigrams.geon}
+        position={[-trigramDistance * 0.7, trigramDistance * 0.7, 0]}
+        rotation={trigramRotation}
+        glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
+        color={blackColor}
+        opacity={mainOpacity * 0.9}
+      />
+      
+      {/* 리 (Ri/Fire) - top-right */}
+      <Trigram 
+        pattern={trigrams.ri}
+        position={[trigramDistance * 0.7, trigramDistance * 0.7, 0]}
+        rotation={-trigramRotation}
+        glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
+        color={blackColor}
+        opacity={mainOpacity * 0.9}
+      />
+      
+      {/* 감 (Gam/Water) - bottom-left */}
+      <Trigram 
+        pattern={trigrams.gam}
+        position={[-trigramDistance * 0.7, -trigramDistance * 0.7, 0]}
+        rotation={-trigramRotation}
+        glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
+        color={blackColor}
+        opacity={mainOpacity * 0.9}
+      />
+      
+      {/* 곤 (Gon/Earth) - bottom-right */}
+      <Trigram 
+        pattern={trigrams.gon}
+        position={[trigramDistance * 0.7, -trigramDistance * 0.7, 0]}
+        rotation={trigramRotation}
+        glitchOffset={{ x: glitchOffset.x * 0.8, y: glitchOffset.y * 0.8 }}
+        color={blackColor}
+        opacity={mainOpacity * 0.9}
       />
 
-      {/* RGB split - red layer */}
-      <Line
-        points={offsetCircle(outerCirclePoints, glitchState.active ? glitchState.rgbSplit * 0.5 : 0.02, glitchState.active ? -glitchState.rgbSplit * 0.3 : 0, -0.01)}
-        color={redColor}
-        lineWidth={1}
-        transparent
-        opacity={glitchState.active ? 0.6 : 0.4}
-      />
-
-      {/* RGB split - blue layer */}
-      <Line
-        points={offsetCircle(outerCirclePoints, glitchState.active ? -glitchState.rgbSplit * 0.5 : -0.02, glitchState.active ? glitchState.rgbSplit * 0.3 : 0, -0.02)}
-        color={blueColor}
-        lineWidth={1}
-        transparent
-        opacity={glitchState.active ? 0.6 : 0.4}
-      />
-
-      {/* S-curve divider */}
-      <Line
-        points={offsetCircle(sCurvePoints, glitchState.active ? glitchState.offsetX * 0.5 : 0, glitchState.active ? glitchState.offsetY * 0.5 : 0, 0.01)}
-        color={whiteColor}
-        lineWidth={2}
-        transparent
-        opacity={glitchState.active ? glitchState.opacity : 0.7}
-      />
-
-      {/* Top dot (Yin - blue area) */}
-      <Line
-        points={offsetCircle(topDotPoints, glitchState.active ? glitchState.offsetX * 0.7 : 0, glitchState.active ? glitchState.offsetY * 0.7 : 0, 0.02)}
-        color={topColor}
-        lineWidth={2}
-        transparent
-        opacity={glitchState.active ? glitchState.opacity * 0.95 : 0.9}
-      />
-
-      {/* Bottom dot (Yang - red area) */}
-      <Line
-        points={offsetCircle(bottomDotPoints, glitchState.active ? glitchState.offsetX * 0.7 : 0, glitchState.active ? glitchState.offsetY * 0.7 : 0, 0.02)}
-        color={bottomColor}
-        lineWidth={2}
-        transparent
-        opacity={glitchState.active ? glitchState.opacity * 0.95 : 0.9}
-      />
-
-      {/* Glitch gold layer during heavy glitch */}
+      {/* Heavy glitch gold overlay */}
       {glitchState.isHeavy && (
         <>
-          <Line
-            points={offsetCircle(outerCirclePoints, (Math.random() - 0.5) * 0.8, (Math.random() - 0.5) * 0.5, -0.03)}
-            color={goldColor}
-            lineWidth={1}
-            transparent
-            opacity={0.4 + Math.random() * 0.3}
-          />
-          <Line
-            points={offsetCircle(sCurvePoints, (Math.random() - 0.5) * 0.6, (Math.random() - 0.5) * 0.4, 0.03)}
-            color={goldColor}
-            lineWidth={1}
-            transparent
-            opacity={0.5 + Math.random() * 0.3}
-          />
+          <mesh 
+            geometry={redGeometry} 
+            position={[(Math.random() - 0.5) * 0.5, (Math.random() - 0.5) * 0.4, -0.04]}
+          >
+            <meshBasicMaterial color={goldColor} transparent opacity={0.35} />
+          </mesh>
+          <mesh 
+            geometry={blueGeometry} 
+            position={[(Math.random() - 0.5) * 0.5, (Math.random() - 0.5) * 0.4, -0.04]}
+          >
+            <meshBasicMaterial color={whiteColor} transparent opacity={0.25} />
+          </mesh>
         </>
       )}
     </group>
