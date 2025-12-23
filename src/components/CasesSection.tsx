@@ -153,17 +153,6 @@ const CasesSection = () => {
               <CaseCard key={caseItem.slug} {...caseItem} index={index} />
             ))}
           </div>
-
-          {/* View All */}
-          <div className="p-6 md:p-8 border-t border-white/10">
-            <Link
-              to="/projects"
-              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
-            >
-              View all projects
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
         </div>
 
         {/* Right: Sticky Info Panel */}
@@ -177,9 +166,20 @@ const CasesSection = () => {
           <h2 className="text-3xl font-bold text-white mb-4">
             Our Cases
           </h2>
-          <p className="text-white/50 leading-relaxed mb-8">
+          <p className="text-white/50 leading-relaxed mb-6">
             Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
           </p>
+
+          {/* View All Projects */}
+          <div className="pb-6 mb-6 border-b border-white/10">
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors"
+            >
+              View all projects
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
 
           <div className="space-y-6 mb-6">
             <div className="flex items-center gap-4 pb-4 border-b border-white/10">
