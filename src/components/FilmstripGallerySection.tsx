@@ -65,29 +65,29 @@ const FilmstripGallerySection = () => {
 
         {/* Right: Info Panel */}
         <motion.div
-          className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
+          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-2xl font-bold text-white mb-3">
             Campaign Gallery
           </h2>
-          <p className="text-white/50 leading-relaxed mb-8">
+          <p className="text-white/50 leading-relaxed mb-6 text-sm">
             Explore our successful campaigns and events across Korea's Web3 ecosystem. From launch events to media coverage, we deliver results.
           </p>
 
-          <div className="space-y-4 mb-12">
-            <div className="flex items-center justify-between py-3 border-b border-white/10">
+          <div className="space-y-3 mb-8">
+            <div className="flex items-center justify-between py-2 border-b border-white/10">
               <span className="text-white/50 text-sm">Events Hosted</span>
               <span className="text-white font-semibold">48+</span>
             </div>
-            <div className="flex items-center justify-between py-3 border-b border-white/10">
+            <div className="flex items-center justify-between py-2 border-b border-white/10">
               <span className="text-white/50 text-sm">Media Placements</span>
               <span className="text-white font-semibold">200+</span>
             </div>
-            <div className="flex items-center justify-between py-3">
+            <div className="flex items-center justify-between py-2">
               <span className="text-white/50 text-sm">Campaigns Launched</span>
               <span className="text-white font-semibold">60+</span>
             </div>
