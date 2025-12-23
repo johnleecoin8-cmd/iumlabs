@@ -188,22 +188,6 @@ const HologramLogo = () => {
         />
       </lineSegments>
 
-      {/* White highlight layer */}
-      <lineSegments 
-        geometry={innerEdges} 
-        position={[
-          glitchState.active ? -glitchState.offsetX * 0.5 : 0, 
-          glitchState.active ? glitchState.offsetY * 0.3 : 0, 
-          -0.075
-        ]}
-      >
-        <lineBasicMaterial 
-          color={whiteColor} 
-          transparent 
-          opacity={glitchState.active ? 0.2 + Math.random() * 0.3 : 0.25}
-          linewidth={1}
-        />
-      </lineSegments>
 
 
       {/* Hologram ambient particles */}
