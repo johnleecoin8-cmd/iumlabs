@@ -362,29 +362,30 @@ const TaegeukHologram = () => {
   // Glitch disabled - static state only
 
   // Create Taegeuk shapes with THREE.Shape
-  const { redGeometry, blueGeometry, outerRingGeometry } = useMemo(() => {
+  const { redGeometry, blueGeometry } = useMemo(() => {
     const r = 1.2; // Taegeuk radius
     
-    // Red Taegeuk (top half - Yang)
+    // Red Taegeuk (top half - Yang) - S-curve shape
     const redShape = new THREE.Shape();
+    // Start at right edge of the circle
     redShape.moveTo(r, 0);
-    redShape.absarc(0, 0, r, 0, Math.PI, false); // Upper semicircle
-    redShape.absarc(-r/2, 0, r/2, Math.PI, 0, true); // Left small semicircle (inward)
-    redShape.absarc(r/2, 0, r/2, Math.PI, 0, false); // Right small semicircle (outward)
+    // Draw upper semicircle (from 0 to PI)
+    redShape.absarc(0, 0, r, 0, Math.PI, false);
+    // Draw small semicircle at left (center at -r/2, 0), going downward
+    redShape.absarc(-r/2, 0, r/2, Math.PI, 2 * Math.PI, false);
+    // Draw small semicircle at right (center at r/2, 0), going upward to close
+    redShape.absarc(r/2, 0, r/2, Math.PI, 0, true);
     
-    // Blue Taegeuk (bottom half - Yin)
+    // Blue Taegeuk (bottom half - Yin) - S-curve shape
     const blueShape = new THREE.Shape();
+    // Start at left edge of the circle
     blueShape.moveTo(-r, 0);
-    blueShape.absarc(0, 0, r, Math.PI, 2 * Math.PI, false); // Lower semicircle
-    blueShape.absarc(r/2, 0, r/2, 0, Math.PI, false); // Right small semicircle (outward)
-    blueShape.absarc(-r/2, 0, r/2, 0, Math.PI, true); // Left small semicircle (inward)
-    
-    // Outer ring
-    const outerRingShape = new THREE.Shape();
-    outerRingShape.absarc(0, 0, r + 0.08, 0, Math.PI * 2, false);
-    const innerHole = new THREE.Path();
-    innerHole.absarc(0, 0, r + 0.02, 0, Math.PI * 2, true);
-    outerRingShape.holes.push(innerHole);
+    // Draw lower semicircle (from PI to 2*PI)
+    blueShape.absarc(0, 0, r, Math.PI, 2 * Math.PI, false);
+    // Draw small semicircle at right (center at r/2, 0), going upward
+    blueShape.absarc(r/2, 0, r/2, 0, Math.PI, false);
+    // Draw small semicircle at left (center at -r/2, 0), going downward to close
+    blueShape.absarc(-r/2, 0, r/2, 0, -Math.PI, true);
     
     const extrudeSettings = {
       depth: 0.1,
@@ -394,15 +395,9 @@ const TaegeukHologram = () => {
       bevelSegments: 2
     };
     
-    const ringExtrudeSettings = {
-      depth: 0.05,
-      bevelEnabled: false
-    };
-    
     return {
       redGeometry: new THREE.ExtrudeGeometry(redShape, extrudeSettings),
-      blueGeometry: new THREE.ExtrudeGeometry(blueShape, extrudeSettings),
-      outerRingGeometry: new THREE.ExtrudeGeometry(outerRingShape, ringExtrudeSettings)
+      blueGeometry: new THREE.ExtrudeGeometry(blueShape, extrudeSettings)
     };
   }, []);
 
