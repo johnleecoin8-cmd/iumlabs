@@ -1,166 +1,271 @@
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-const LogoMesh = () => {
+const HologramLogo = () => {
   const groupRef = useRef<THREE.Group>(null);
+  const scanlineRef = useRef<THREE.Mesh>(null);
+  const [glitchState, setGlitchState] = useState({
+    active: false,
+    offsetX: 0,
+    offsetY: 0,
+    rgbSplit: 0,
+  });
 
-  // Create the Ium Labs bridge logo shape using Shape and ExtrudeGeometry
-  const logoGeometry = useMemo(() => {
+  // Random glitch trigger
+  useEffect(() => {
+    const triggerGlitch = () => {
+      setGlitchState({
+        active: true,
+        offsetX: (Math.random() - 0.5) * 0.3,
+        offsetY: (Math.random() - 0.5) * 0.2,
+        rgbSplit: Math.random() * 0.15,
+      });
+
+      // Multiple rapid glitches
+      const glitchCount = Math.floor(Math.random() * 3) + 1;
+      let count = 0;
+      
+      const rapidGlitch = setInterval(() => {
+        count++;
+        if (count < glitchCount) {
+          setGlitchState({
+            active: true,
+            offsetX: (Math.random() - 0.5) * 0.25,
+            offsetY: (Math.random() - 0.5) * 0.15,
+            rgbSplit: Math.random() * 0.12,
+          });
+        } else {
+          clearInterval(rapidGlitch);
+          setTimeout(() => {
+            setGlitchState({ active: false, offsetX: 0, offsetY: 0, rgbSplit: 0 });
+          }, 50 + Math.random() * 100);
+        }
+      }, 50 + Math.random() * 80);
+    };
+
+    const glitchInterval = setInterval(() => {
+      triggerGlitch();
+    }, 2000 + Math.random() * 4000);
+
+    // Initial glitch
+    setTimeout(triggerGlitch, 1000);
+
+    return () => clearInterval(glitchInterval);
+  }, []);
+
+  // Create edge geometry for wireframe effect
+  const { mainEdges, innerEdges } = useMemo(() => {
     const shape = new THREE.Shape();
     
-    // Logo dimensions - Ium Labs bridge logo
-    // Structure: flat top deck, two pillars, semi-circular arch opening at bottom
     const totalWidth = 3.2;
     const totalHeight = 2.0;
-    const deckHeight = 0.35; // top deck thickness
-    const pillarWidth = 0.45; // width of each pillar
-    const archRadius = (totalWidth - pillarWidth * 2) / 2; // radius of the bottom arch
+    const deckHeight = 0.35;
+    const pillarWidth = 0.45;
+    const archRadius = (totalWidth - pillarWidth * 2) / 2;
     const cornerRadius = 0.08;
     const innerCornerRadius = 0.06;
     
-    // Outer shape - start from bottom-left pillar, going clockwise
-    // Bottom-left corner of left pillar
+    // Outer shape
     shape.moveTo(-totalWidth/2 + cornerRadius, 0);
     shape.quadraticCurveTo(-totalWidth/2, 0, -totalWidth/2, cornerRadius);
-    
-    // Left outer edge going up
     shape.lineTo(-totalWidth/2, totalHeight - cornerRadius);
-    
-    // Top-left corner
     shape.quadraticCurveTo(-totalWidth/2, totalHeight, -totalWidth/2 + cornerRadius, totalHeight);
-    
-    // Top edge
     shape.lineTo(totalWidth/2 - cornerRadius, totalHeight);
-    
-    // Top-right corner
     shape.quadraticCurveTo(totalWidth/2, totalHeight, totalWidth/2, totalHeight - cornerRadius);
-    
-    // Right outer edge going down
     shape.lineTo(totalWidth/2, cornerRadius);
-    
-    // Bottom-right corner of right pillar
     shape.quadraticCurveTo(totalWidth/2, 0, totalWidth/2 - cornerRadius, 0);
-    
-    // Bottom edge of right pillar
     shape.lineTo(totalWidth/2 - pillarWidth + cornerRadius, 0);
-    
-    // Inner bottom-right corner (going into arch)
     shape.quadraticCurveTo(totalWidth/2 - pillarWidth, 0, totalWidth/2 - pillarWidth, innerCornerRadius);
-    
-    // Right pillar inner edge going up slightly then arch
     shape.lineTo(totalWidth/2 - pillarWidth, archRadius * 0.2);
-    
-    // Semi-circular arch at bottom (opening downward) - from right to left
     shape.absarc(0, archRadius * 0.2, archRadius, 0, Math.PI, false);
-    
-    // Left pillar inner edge going down
     shape.lineTo(-totalWidth/2 + pillarWidth, innerCornerRadius);
-    
-    // Inner bottom-left corner
     shape.quadraticCurveTo(-totalWidth/2 + pillarWidth, 0, -totalWidth/2 + pillarWidth - cornerRadius, 0);
-    
-    // Bottom edge of left pillar back to start
     shape.lineTo(-totalWidth/2 + cornerRadius, 0);
     
-    // Create inner cutout hole for the space between deck and arch
+    // Inner hole
     const hole = new THREE.Path();
-    const innerGap = 0.12; // gap between deck and top of arch
+    const innerGap = 0.12;
     const holeWidth = totalWidth - pillarWidth * 2 - innerGap * 2;
     const holeTop = totalHeight - deckHeight;
     const holeArchTop = archRadius * 0.2 + archRadius - innerGap;
     
-    // Inner rectangular space + top of arch
-    // Start from bottom-left of hole (above arch)
     hole.moveTo(-holeWidth/2, holeArchTop);
-    
-    // Left edge going up
     hole.lineTo(-holeWidth/2, holeTop - innerCornerRadius);
-    
-    // Top-left corner
     hole.quadraticCurveTo(-holeWidth/2, holeTop, -holeWidth/2 + innerCornerRadius, holeTop);
-    
-    // Top edge
     hole.lineTo(holeWidth/2 - innerCornerRadius, holeTop);
-    
-    // Top-right corner
     hole.quadraticCurveTo(holeWidth/2, holeTop, holeWidth/2, holeTop - innerCornerRadius);
-    
-    // Right edge going down
     hole.lineTo(holeWidth/2, holeArchTop);
-    
-    // Arc connecting right to left (inner part of arch - smaller arc)
     const innerArchRadius = archRadius - innerGap - 0.1;
     hole.absarc(0, archRadius * 0.2, innerArchRadius, 0, Math.PI, false);
     
     shape.holes.push(hole);
     
     const extrudeSettings = {
-      steps: 2,
-      depth: 0.4,
-      bevelEnabled: true,
-      bevelThickness: 0.05,
-      bevelSize: 0.05,
-      bevelOffset: 0,
-      bevelSegments: 5
+      steps: 1,
+      depth: 0.25,
+      bevelEnabled: false,
     };
     
-    return new THREE.ExtrudeGeometry(shape, extrudeSettings);
+    const mainGeometry = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+    const mainEdgesGeom = new THREE.EdgesGeometry(mainGeometry, 15);
+    
+    // Create inner wireframe geometry (slightly smaller)
+    const innerSettings = { ...extrudeSettings, depth: 0.15 };
+    const innerGeometry = new THREE.ExtrudeGeometry(shape, innerSettings);
+    const innerEdgesGeom = new THREE.EdgesGeometry(innerGeometry, 15);
+    
+    return { mainEdges: mainEdgesGeom, innerEdges: innerEdgesGeom };
   }, []);
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.35;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
+      const time = state.clock.elapsedTime;
+      
+      // Smooth rotation with subtle wobble
+      groupRef.current.rotation.y = Math.sin(time * 0.25) * 0.4;
+      groupRef.current.rotation.x = Math.sin(time * 0.15) * 0.08;
+      
+      // Subtle floating motion
+      groupRef.current.position.y = Math.sin(time * 0.5) * 0.05;
+    }
+    
+    // Animate scanline
+    if (scanlineRef.current) {
+      const scanY = ((state.clock.elapsedTime * 0.8) % 3) - 1.5;
+      scanlineRef.current.position.y = scanY;
     }
   });
 
+  const cyanColor = "#00FFFF";
+  const magentaColor = "#FF00FF";
+  const whiteColor = "#FFFFFF";
+
   return (
     <group ref={groupRef}>
-      {/* Main logo mesh */}
-      <mesh geometry={logoGeometry} position={[0, 0, -0.175]}>
-        <meshStandardMaterial
-          color="#FFFFFF"
-          roughness={0.15}
-          metalness={0.95}
-          emissive="#FFFFFF"
-          emissiveIntensity={0.12}
+      {/* Main cyan wireframe */}
+      <lineSegments 
+        geometry={mainEdges} 
+        position={[
+          glitchState.active ? glitchState.offsetX : 0, 
+          glitchState.active ? glitchState.offsetY : 0, 
+          -0.125
+        ]}
+      >
+        <lineBasicMaterial 
+          color={cyanColor} 
+          transparent 
+          opacity={glitchState.active ? 0.6 + Math.random() * 0.4 : 0.9}
+          linewidth={2}
         />
-      </mesh>
+      </lineSegments>
 
-      {/* Glow effect behind */}
-      <mesh position={[0, 0, -0.6]}>
-        <planeGeometry args={[4, 2.5]} />
+      {/* Magenta RGB split layer (offset for hologram effect) */}
+      <lineSegments 
+        geometry={mainEdges} 
+        position={[
+          glitchState.active ? glitchState.rgbSplit + 0.03 : 0.025, 
+          glitchState.active ? -glitchState.rgbSplit * 0.5 : 0.01, 
+          -0.13
+        ]}
+      >
+        <lineBasicMaterial 
+          color={magentaColor} 
+          transparent 
+          opacity={glitchState.active ? 0.4 + Math.random() * 0.3 : 0.5}
+          linewidth={1}
+        />
+      </lineSegments>
+
+      {/* White highlight layer */}
+      <lineSegments 
+        geometry={innerEdges} 
+        position={[
+          glitchState.active ? -glitchState.offsetX * 0.5 : 0, 
+          glitchState.active ? glitchState.offsetY * 0.3 : 0, 
+          -0.075
+        ]}
+      >
+        <lineBasicMaterial 
+          color={whiteColor} 
+          transparent 
+          opacity={glitchState.active ? 0.2 + Math.random() * 0.3 : 0.25}
+          linewidth={1}
+        />
+      </lineSegments>
+
+      {/* Inner glow mesh (semi-transparent fill) */}
+      <mesh position={[0, 0, -0.125]}>
+        <planeGeometry args={[3.4, 2.2]} />
         <meshBasicMaterial
-          color="#FFFFFF"
+          color={cyanColor}
           transparent
-          opacity={0.04}
+          opacity={glitchState.active ? 0.02 + Math.random() * 0.03 : 0.025}
         />
       </mesh>
 
-      {/* Outer glow sphere */}
-      <mesh position={[0, 0, 0]}>
-        <sphereGeometry args={[2.5, 32, 32]} />
+      {/* Scanline effect */}
+      <mesh ref={scanlineRef} position={[0, 0, 0.1]}>
+        <planeGeometry args={[4, 0.03]} />
         <meshBasicMaterial
-          color="#FFFFFF"
+          color={cyanColor}
+          transparent
+          opacity={0.4}
+        />
+      </mesh>
+
+      {/* Outer glow */}
+      <mesh position={[0, 0, -0.3]}>
+        <planeGeometry args={[4.5, 3]} />
+        <meshBasicMaterial
+          color={cyanColor}
           transparent
           opacity={0.015}
-          side={THREE.BackSide}
         />
       </mesh>
 
-      {/* Ambient particles */}
-      {[...Array(12)].map((_, i) => (
+      {/* Hologram ambient particles */}
+      {[...Array(20)].map((_, i) => {
+        const baseX = Math.sin(i * 0.8) * 2.5;
+        const baseY = Math.cos(i * 0.6) * 1.8;
+        const baseZ = Math.sin(i * 0.4) * 0.8;
+        const isCyan = i % 2 === 0;
+        
+        return (
+          <mesh
+            key={i}
+            position={[
+              baseX + (glitchState.active ? (Math.random() - 0.5) * 0.2 : 0),
+              baseY + (glitchState.active ? (Math.random() - 0.5) * 0.15 : 0),
+              baseZ
+            ]}
+          >
+            <sphereGeometry args={[0.015, 6, 6]} />
+            <meshBasicMaterial 
+              color={isCyan ? cyanColor : magentaColor} 
+              transparent 
+              opacity={glitchState.active ? 0.3 + Math.random() * 0.5 : 0.4} 
+            />
+          </mesh>
+        );
+      })}
+
+      {/* Floating data fragments during glitch */}
+      {glitchState.active && [...Array(8)].map((_, i) => (
         <mesh
-          key={i}
+          key={`glitch-${i}`}
           position={[
-            Math.sin(i * 0.9) * 2.2,
-            Math.cos(i * 0.7) * 1.5,
-            Math.sin(i * 0.5) * 0.6
+            (Math.random() - 0.5) * 4,
+            (Math.random() - 0.5) * 2.5,
+            (Math.random() - 0.5) * 0.5
           ]}
         >
-          <sphereGeometry args={[0.012, 8, 8]} />
-          <meshBasicMaterial color="#FFFFFF" transparent opacity={0.35} />
+          <boxGeometry args={[0.08, 0.02, 0.01]} />
+          <meshBasicMaterial 
+            color={i % 2 === 0 ? cyanColor : magentaColor} 
+            transparent 
+            opacity={0.6} 
+          />
         </mesh>
       ))}
     </group>
@@ -179,11 +284,10 @@ const Logo3D = ({ className = "" }: Logo3DProps) => {
         gl={{ antialias: true, alpha: true }}
         style={{ background: "transparent" }}
       >
-        <ambientLight intensity={0.5} />
-        <directionalLight position={[5, 5, 5]} intensity={1.0} />
-        <directionalLight position={[-5, -5, 5]} intensity={0.3} />
-        <pointLight position={[0, 0, 4]} intensity={0.5} color="#FFFFFF" />
-        <LogoMesh />
+        <ambientLight intensity={0.3} />
+        <pointLight position={[0, 0, 4]} intensity={0.4} color="#00FFFF" />
+        <pointLight position={[2, 2, 3]} intensity={0.2} color="#FF00FF" />
+        <HologramLogo />
       </Canvas>
     </div>
   );
