@@ -84,7 +84,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 
 const GoldShape = () => (
   <motion.div
-    className="relative w-32 h-32 mx-auto"
+    className="relative w-48 h-48 lg:w-56 lg:h-56"
     animate={{ rotateY: 360 }}
     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
     style={{ transformStyle: "preserve-3d" }}
@@ -94,14 +94,14 @@ const GoldShape = () => (
       style={{
         background: "linear-gradient(135deg, #C4A35A 0%, #F5E6C8 50%, #C4A35A 100%)",
         transform: "rotateX(20deg) rotateZ(-10deg)",
-        boxShadow: "0 20px 40px rgba(196, 163, 90, 0.3)"
+        boxShadow: "0 25px 50px rgba(196, 163, 90, 0.35)"
       }}
     />
     <div
-      className="absolute inset-4 rounded-2xl"
+      className="absolute inset-6 rounded-2xl"
       style={{
         background: "linear-gradient(225deg, #F5E6C8 0%, #C4A35A 100%)",
-        transform: "rotateX(20deg) rotateZ(-10deg) translateZ(20px)"
+        transform: "rotateX(20deg) rotateZ(-10deg) translateZ(25px)"
       }}
     />
   </motion.div>
@@ -142,7 +142,9 @@ const ServicesSection = () => {
             <ArrowRight className="w-4 h-4" />
           </Link>
 
-          <GoldShape />
+          <div className="mt-8 flex justify-start">
+            <GoldShape />
+          </div>
         </motion.div>
       </div>
     </section>
