@@ -462,13 +462,6 @@ const TaegeukHologram = () => {
         />
       </mesh>
 
-      {/* Outer ring - red */}
-      <mesh 
-        geometry={outerRingGeometry} 
-        position={[glitchOffset.x * 0.5, glitchOffset.y * 0.5, -0.08]}
-      >
-        <meshBasicMaterial color={redColor} transparent opacity={mainOpacity * 0.9} />
-      </mesh>
 
       {/* RGB split layers */}
       <mesh 
