@@ -6,35 +6,6 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 
-const PurpleShape = () => (
-  <motion.div
-    className="relative w-16 h-8 mx-auto"
-    animate={{ rotateY: 360 }}
-    transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
-    style={{ transformStyle: "preserve-3d" }}
-  >
-    {/* Bridge arch outer */}
-    <div
-      className="absolute inset-0 rounded-t-full"
-      style={{
-        background: "linear-gradient(135deg, #8B5CF6 0%, #A78BFA 50%, #8B5CF6 100%)",
-        transform: "rotateX(25deg)",
-        boxShadow: "0 10px 20px rgba(139, 92, 246, 0.35)",
-        clipPath: "ellipse(50% 100% at 50% 100%)"
-      }}
-    />
-    {/* Bridge arch inner */}
-    <div
-      className="absolute inset-x-1.5 inset-y-1 rounded-t-full"
-      style={{
-        background: "linear-gradient(225deg, #A78BFA 0%, #8B5CF6 100%)",
-        transform: "rotateX(25deg) translateZ(4px)",
-        clipPath: "ellipse(50% 100% at 50% 100%)"
-      }}
-    />
-  </motion.div>
-);
-
 const budgetOptions = [
   "$15K - $25K",
   "$25K - $50K",
@@ -213,13 +184,8 @@ const ContactFormSection = ({
               <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all" />
             </a>
 
-            {/* Bridge Shape */}
-            <div className="mt-12 mb-8">
-              <PurpleShape />
-            </div>
-
             {/* Footer Links */}
-            <div className="pt-8 border-t border-white/10 flex gap-6">
+            <div className="mt-16 pt-8 border-t border-white/10 flex gap-6">
               <Link to="/terms" className="text-xs text-white/40 hover:text-white/60 transition-colors">Terms of Service</Link>
               <Link to="/privacy" className="text-xs text-white/40 hover:text-white/60 transition-colors">Privacy Policy</Link>
               <Link to="/transparency" className="text-xs text-white/40 hover:text-white/60 transition-colors">Transparency</Link>

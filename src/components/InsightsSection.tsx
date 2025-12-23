@@ -41,28 +41,24 @@ const insights = [
 
 const BlueShape = () => (
   <motion.div
-    className="relative w-24 h-12 mx-auto"
+    className="relative w-24 h-24 mx-auto"
     animate={{ rotateY: 360 }}
     transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
     style={{ transformStyle: "preserve-3d" }}
   >
-    {/* Bridge arch outer */}
     <div
-      className="absolute inset-0 rounded-t-full"
+      className="absolute inset-0 rounded-full"
       style={{
         background: "linear-gradient(135deg, #3B82F6 0%, #06B6D4 50%, #3B82F6 100%)",
-        transform: "rotateX(25deg)",
-        boxShadow: "0 15px 30px rgba(59, 130, 246, 0.35)",
-        clipPath: "ellipse(50% 100% at 50% 100%)"
+        transform: "rotateX(30deg)",
+        boxShadow: "0 20px 40px rgba(59, 130, 246, 0.3)"
       }}
     />
-    {/* Bridge arch inner */}
     <div
-      className="absolute inset-x-2 inset-y-1.5 rounded-t-full"
+      className="absolute inset-6 rounded-full"
       style={{
         background: "linear-gradient(225deg, #06B6D4 0%, #3B82F6 100%)",
-        transform: "rotateX(25deg) translateZ(6px)",
-        clipPath: "ellipse(50% 100% at 50% 100%)"
+        transform: "rotateX(30deg) translateZ(15px)"
       }}
     />
   </motion.div>

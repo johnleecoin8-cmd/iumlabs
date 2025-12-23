@@ -84,28 +84,24 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 
 const GoldShape = () => (
   <motion.div
-    className="relative w-28 h-14 mx-auto mt-6"
+    className="relative w-32 h-32 mx-auto"
     animate={{ rotateY: 360 }}
     transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
     style={{ transformStyle: "preserve-3d" }}
   >
-    {/* Bridge arch outer */}
     <div
-      className="absolute inset-0 rounded-t-full"
+      className="absolute inset-0 rounded-3xl"
       style={{
         background: "linear-gradient(135deg, #C4A35A 0%, #F5E6C8 50%, #C4A35A 100%)",
-        transform: "rotateX(25deg)",
-        boxShadow: "0 15px 30px rgba(196, 163, 90, 0.35)",
-        clipPath: "ellipse(50% 100% at 50% 100%)"
+        transform: "rotateX(20deg) rotateZ(-10deg)",
+        boxShadow: "0 20px 40px rgba(196, 163, 90, 0.3)"
       }}
     />
-    {/* Bridge arch inner */}
     <div
-      className="absolute inset-x-3 inset-y-2 rounded-t-full"
+      className="absolute inset-4 rounded-2xl"
       style={{
         background: "linear-gradient(225deg, #F5E6C8 0%, #C4A35A 100%)",
-        transform: "rotateX(25deg) translateZ(8px)",
-        clipPath: "ellipse(50% 100% at 50% 100%)"
+        transform: "rotateX(20deg) rotateZ(-10deg) translateZ(20px)"
       }}
     />
   </motion.div>
