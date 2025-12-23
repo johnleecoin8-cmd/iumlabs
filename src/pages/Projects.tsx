@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -7,8 +8,9 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { supabase } from "@/integrations/supabase/client";
 
-// Import logos
+// Import logos as fallbacks
 import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
 import peaqLogo from "@/assets/logos/peaq.svg";
@@ -22,7 +24,7 @@ import fogoLogo from "@/assets/logos/fogo.png";
 import zkpassLogo from "@/assets/logos/zkpass.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 
-// Import campaign images for backgrounds
+// Import campaign images for backgrounds as fallbacks
 import bnbBg from "@/assets/campaigns/bnb-event.jpg";
 import kucoinBg from "@/assets/campaigns/kucoin-oldschool-panel.jpg";
 import peaqBg from "@/assets/campaigns/peaq-summit.jpg";
@@ -36,124 +38,41 @@ import fogoBg from "@/assets/campaigns/fogo-fest.avif";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
 
-const cases = [
-  {
-    name: "BNB Chain",
-    logo: bnbLogo,
-    bgImage: bnbBg,
-    slug: "bnb-chain",
-    result: "+340% Korean Trading Volume",
-    category: "Infrastructure",
-    description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage.",
-  },
-  {
-    name: "KuCoin",
-    logo: kucoinLogo,
-    bgImage: kucoinBg,
-    slug: "kucoin",
-    result: "50K+ New Korean Users",
-    category: "Exchange",
-    description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships.",
-  },
-  {
-    name: "Sahara AI",
-    logo: saharaAiLogo,
-    bgImage: saharaAiBg,
-    slug: "sahara-ai",
-    result: "Korean AI x Web3 Launch",
-    category: "AI",
-    description: "AI blockchain platform launch with Korean developer community and enterprise partnerships.",
-  },
-  {
-    name: "Mantra",
-    logo: mantraLogo,
-    bgImage: mantraBg,
-    slug: "mantra",
-    result: "Korean RWA Expansion",
-    category: "RWA",
-    description: "Real World Assets platform expansion targeting Korean institutional investors.",
-  },
-  {
-    name: "Peaq",
-    logo: peaqLogo,
-    bgImage: peaqBg,
-    slug: "peaq",
-    result: "#1 DePIN in Korea",
-    category: "DePIN",
-    description: "Established thought leadership in DePIN space with IoT partnerships and developer community.",
-  },
-  {
-    name: "Story Protocol",
-    logo: storyLogo,
-    bgImage: storyBg,
-    slug: "story-protocol",
-    result: "5K+ Korean Creators",
-    category: "IP Protocol",
-    description: "Korean content creator onboarding for IP tokenization platform targeting webtoon and music artists.",
-  },
-  {
-    name: "MegaETH",
-    logo: megaethLogo,
-    bgImage: megaethBg,
-    slug: "megaeth",
-    result: "+500% Korean Engagement",
-    category: "Layer 2",
-    description: "Pre-launch hype building and community engagement ahead of mainnet launch.",
-  },
-  {
-    name: "Tria",
-    logo: triaLogo,
-    bgImage: triaBg,
-    slug: "tria",
-    result: "30K+ Korean Wallets",
-    category: "Wallet",
-    description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users.",
-  },
-  {
-    name: "Bybit",
-    logo: bybitLogo,
-    bgImage: bybitBg,
-    slug: "bybit",
-    result: "#2 Korean Exchange Traffic",
-    category: "Exchange",
-    description: "Multi-channel user acquisition and VIP program for Korean high-volume traders.",
-  },
-  {
-    name: "FOGO",
-    logo: fogoLogo,
-    bgImage: fogoBg,
-    slug: "fogo",
-    result: "Fogo Fest 2025 Success",
-    category: "Layer 1",
-    description: "Launch event and community activation for FOGO ecosystem in Korean market.",
-  },
-  {
-    name: "zkPass",
-    logo: zkpassLogo,
-    bgImage: zkpassBg,
-    slug: "zkpass",
-    result: "The Verifiable Nights",
-    category: "Privacy",
-    description: "Privacy-focused Web3 identity solution launch with Korean developer community.",
-  },
-  {
-    name: "SynFutures",
-    logo: synfuturesLogo,
-    bgImage: synfuturesBg,
-    slug: "synfutures",
-    result: "Gangnam Billboard Promotion",
-    category: "DeFi",
-    description: "High-visibility billboard campaign in Gangnam district for Korean market awareness.",
-  },
+// Hardcoded fallback data
+const fallbackCases = [
+  { name: "BNB Chain", logo: bnbLogo, bgImage: bnbBg, slug: "bnb-chain", result: "+340% Korean Trading Volume", category: "Infrastructure", description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage." },
+  { name: "KuCoin", logo: kucoinLogo, bgImage: kucoinBg, slug: "kucoin", result: "50K+ New Korean Users", category: "Exchange", description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships." },
+  { name: "Sahara AI", logo: saharaAiLogo, bgImage: saharaAiBg, slug: "sahara-ai", result: "Korean AI x Web3 Launch", category: "AI", description: "AI blockchain platform launch with Korean developer community and enterprise partnerships." },
+  { name: "Mantra", logo: mantraLogo, bgImage: mantraBg, slug: "mantra", result: "Korean RWA Expansion", category: "RWA", description: "Real World Assets platform expansion targeting Korean institutional investors." },
+  { name: "Peaq", logo: peaqLogo, bgImage: peaqBg, slug: "peaq", result: "#1 DePIN in Korea", category: "DePIN", description: "Established thought leadership in DePIN space with IoT partnerships and developer community." },
+  { name: "Story Protocol", logo: storyLogo, bgImage: storyBg, slug: "story-protocol", result: "5K+ Korean Creators", category: "IP Protocol", description: "Korean content creator onboarding for IP tokenization platform targeting webtoon and music artists." },
+  { name: "MegaETH", logo: megaethLogo, bgImage: megaethBg, slug: "megaeth", result: "+500% Korean Engagement", category: "Layer 2", description: "Pre-launch hype building and community engagement ahead of mainnet launch." },
+  { name: "Tria", logo: triaLogo, bgImage: triaBg, slug: "tria", result: "30K+ Korean Wallets", category: "Wallet", description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users." },
+  { name: "Bybit", logo: bybitLogo, bgImage: bybitBg, slug: "bybit", result: "#2 Korean Exchange Traffic", category: "Exchange", description: "Multi-channel user acquisition and VIP program for Korean high-volume traders." },
+  { name: "FOGO", logo: fogoLogo, bgImage: fogoBg, slug: "fogo", result: "Fogo Fest 2025 Success", category: "Layer 1", description: "Launch event and community activation for FOGO ecosystem in Korean market." },
+  { name: "zkPass", logo: zkpassLogo, bgImage: zkpassBg, slug: "zkpass", result: "The Verifiable Nights", category: "Privacy", description: "Privacy-focused Web3 identity solution launch with Korean developer community." },
+  { name: "SynFutures", logo: synfuturesLogo, bgImage: synfuturesBg, slug: "synfutures", result: "Gangnam Billboard Promotion", category: "DeFi", description: "High-visibility billboard campaign in Gangnam district for Korean market awareness." },
 ];
 
-interface ProjectCardProps {
-  project: typeof cases[0];
-  index: number;
+interface Project {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  result: string | null;
+  category: string | null;
+  logo_url: string | null;
+  background_url: string | null;
 }
 
-const ProjectCard = ({ project, index }: ProjectCardProps) => {
-  const isLastRow = index >= Math.floor(cases.length / 2) * 2;
+interface ProjectCardProps {
+  project: { name: string; slug: string; description: string; result: string; category: string; logo?: string; bgImage: string };
+  index: number;
+  totalCount: number;
+}
+
+const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
+  const isLastRow = index >= Math.floor(totalCount / 2) * 2;
   const isRightColumn = index % 2 === 1;
 
   return (
@@ -211,7 +130,32 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
 
 const Projects = () => {
   usePageTitle("Projects");
-  
+
+  // Fetch projects from Supabase, fallback to hardcoded data
+  const { data: dbProjects } = useQuery({
+    queryKey: ['projects'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('projects')
+        .select('*')
+        .eq('is_published', true)
+        .order('display_order', { ascending: true });
+      if (error) throw error;
+      return data as Project[];
+    },
+  });
+
+  // Use DB projects if available, otherwise fallback
+  const cases = dbProjects && dbProjects.length > 0
+    ? dbProjects.map(p => ({
+        name: p.name,
+        slug: p.slug,
+        description: p.description || '',
+        result: p.result || '',
+        category: p.category || '',
+        bgImage: p.background_url || fallbackCases.find(f => f.slug === p.slug)?.bgImage || '',
+      }))
+    : fallbackCases;
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
@@ -297,7 +241,7 @@ const Projects = () => {
             <div className="w-full lg:w-2/3 lg:border-r lg:border-white/10">
               <div className="grid grid-cols-1 md:grid-cols-2">
                 {cases.map((project, index) => (
-                  <ProjectCard key={project.slug} project={project} index={index} />
+                  <ProjectCard key={project.slug} project={project} index={index} totalCount={cases.length} />
                 ))}
               </div>
             </div>
