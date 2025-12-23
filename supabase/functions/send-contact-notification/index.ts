@@ -34,7 +34,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Ium Labs <noreply@fvroka.resend.app>",
+        from: "Ium Labs <onboarding@resend.dev>",
         to: ["info@iumlabs.io"],
         subject: `New Contact Form Submission from ${name}`,
         html: `
@@ -91,7 +91,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Ium Labs <noreply@fvroka.resend.app>",
+        from: "Ium Labs <onboarding@resend.dev>",
         to: [email],
         subject: "We received your inquiry - Ium Labs",
         html: `
