@@ -71,7 +71,7 @@ const FilmstripGallerySection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-xl font-bold text-white mb-2">
+          <h2 className="text-xl font-bold text-white/50 mb-2">
             Campaign Gallery
           </h2>
           <p className="text-white/50 leading-relaxed mb-4 text-sm">
