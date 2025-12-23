@@ -1,10 +1,8 @@
-import { Compass, Map, Flag, TrendingUp, ArrowRight } from "lucide-react";
+import { Compass, Map, Flag, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
-
-const ACCENT_COLOR = "#10B981";
 
 const serviceTags: ServiceTag[] = [
   { label: "Market Entry" },
@@ -138,7 +136,7 @@ const GTMStrategyService = () => {
       serviceIcon={Compass}
       serviceTags={serviceTags}
       stats={stats}
-      accentColor={ACCENT_COLOR}
+      accentColor="#10B981"
       processSteps={processSteps}
       deliverables={deliverables}
       faqItems={faqItems}
@@ -151,6 +149,19 @@ const GTMStrategyService = () => {
           
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
+              {/* Desktop Process Line */}
+              <div className="hidden lg:block relative mb-12">
+                <div className="absolute top-1/2 left-[12.5%] right-[12.5%] h-px border-t border-dashed border-white/10" />
+                <div className="flex justify-between px-[8%]">
+                  {strategySteps.map((_, index) => (
+                    <div 
+                      key={index} 
+                      className="w-2 h-2 rounded-full bg-white/20"
+                    />
+                  ))}
+                </div>
+              </div>
+
               {/* 4-Step Process Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {strategySteps.map((step, index) => (
@@ -159,71 +170,38 @@ const GTMStrategyService = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ 
-                      y: -8, 
-                      scale: 1.02,
-                      boxShadow: `0 20px 60px ${ACCENT_COLOR}30, 0 0 40px ${ACCENT_COLOR}15`
-                    }}
-                    className="relative p-8 rounded-2xl border border-white/10 group overflow-hidden"
-                    style={{
-                      background: `linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(16, 185, 129, 0.02) 50%, transparent 100%)`,
-                    }}
+                    transition={{ delay: index * 0.1, duration: 0.4 }}
+                    whileHover={{ y: -4 }}
+                    className="relative group"
                   >
-                    {/* Animated Glow Background */}
-                    <div 
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                      style={{
-                        background: `radial-gradient(circle at 50% 0%, ${ACCENT_COLOR}20 0%, transparent 60%)`,
-                      }}
-                    />
-
-                    {/* Top Accent Line */}
-                    <div 
-                      className="absolute top-0 left-0 right-0 h-[2px] opacity-50 group-hover:opacity-100 transition-opacity"
-                      style={{
-                        background: `linear-gradient(90deg, transparent, ${ACCENT_COLOR}, transparent)`,
-                      }}
-                    />
-
-                    {/* Step Number */}
-                    <div 
-                      className="relative text-6xl font-bold mb-6 opacity-30 group-hover:opacity-60 transition-all duration-300"
-                      style={{ 
-                        color: ACCENT_COLOR,
-                        textShadow: `0 0 30px ${ACCENT_COLOR}40`
-                      }}
-                    >
-                      {step.number}
+                    {/* Gradient Border Wrapper */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/10 to-white/[0.02] p-px opacity-60 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-full h-full rounded-2xl bg-[#0F0F0F]" />
                     </div>
 
-                    {/* Icon */}
-                    <div 
-                      className="relative w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110"
-                      style={{ 
-                        backgroundColor: `${ACCENT_COLOR}20`,
-                        boxShadow: `0 0 20px ${ACCENT_COLOR}20`
-                      }}
-                    >
-                      <step.icon className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
-                    </div>
-
-                    {/* Title */}
-                    <h3 className="relative text-xl font-bold text-white mb-2 group-hover:text-emerald-300 transition-colors">
-                      {step.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="relative text-white/50 text-sm group-hover:text-white/70 transition-colors">
-                      {step.description}
-                    </p>
-
-                    {/* Arrow connector (hidden on last item and mobile) */}
-                    {index < strategySteps.length - 1 && (
-                      <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10">
-                        <ArrowRight className="w-6 h-6 text-white/20" />
+                    {/* Card Content */}
+                    <div className="relative p-8 rounded-2xl bg-white/[0.02] group-hover:bg-white/[0.04] transition-colors duration-300">
+                      {/* Step Pill */}
+                      <div className="inline-flex items-center px-3 py-1 rounded-full bg-white/5 border border-white/10 mb-6">
+                        <span className="text-xs font-medium text-white/40 mr-2">Step</span>
+                        <span className="text-xs font-bold text-emerald-400">{step.number}</span>
                       </div>
-                    )}
+
+                      {/* Icon */}
+                      <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center mb-4 group-hover:scale-105 group-hover:rotate-3 transition-transform duration-300">
+                        <step.icon className="w-5 h-5 text-emerald-400" />
+                      </div>
+
+                      {/* Title */}
+                      <h3 className="text-lg font-semibold text-white/90 mb-2 group-hover:text-white transition-colors">
+                        {step.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p className="text-sm text-white/40 leading-relaxed group-hover:text-white/60 transition-colors">
+                        {step.description}
+                      </p>
+                    </div>
                   </motion.div>
                 ))}
               </div>
