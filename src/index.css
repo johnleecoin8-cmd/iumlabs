@@ -233,14 +233,27 @@
   /* Lunar Strategy Blue Button - Solid, Clean */
   .lunar-btn {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all duration-300;
-    background-color: hsl(217 91% 60%);
-    color: hsl(0 0% 100%);
+    background-color: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
   }
   
   .lunar-btn:hover {
-    background-color: hsl(217 91% 55%);
+    background-color: hsl(var(--primary) / 0.9);
     transform: translateY(-2px);
-    box-shadow: 0 4px 20px hsl(217 91% 60% / 0.3);
+    box-shadow: 0 8px 24px hsl(var(--primary) / 0.3);
+  }
+
+  /* White/Light Solid Button */
+  .lunar-btn-solid {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 text-sm font-medium rounded-full transition-all duration-300;
+    background-color: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+  
+  .lunar-btn-solid:hover {
+    background-color: hsl(var(--foreground) / 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px hsl(var(--foreground) / 0.2);
   }
 
   /* Lunar Strategy Outline Button - Clean */
@@ -252,8 +265,9 @@
   }
   
   .lunar-btn-outline:hover {
-    border-color: hsl(0 0% 100% / 0.5);
-    background: hsl(0 0% 100% / 0.05);
+    border-color: hsl(var(--foreground) / 0.5);
+    background: hsl(var(--foreground) / 0.05);
+    transform: translateY(-2px);
   }
 
   /* Dark outline button - Clean */
@@ -267,6 +281,7 @@
   .lunar-btn-outline-dark:hover {
     border-color: hsl(var(--dark-fg) / 0.6);
     background: hsl(var(--dark-fg) / 0.05);
+    transform: translateY(-2px);
   }
 
   /* Bracket Link Style */
@@ -586,17 +601,17 @@
 
 /* Standard Card Hover */
 .hover-lift {
-  @apply transition-all duration-300;
+  @apply transition-all duration-300 ease-out;
 }
 
 .hover-lift:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 40px hsl(0 0% 0% / 0.25);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px hsl(0 0% 0% / 0.3);
 }
 
 /* Subtle Hover */
 .hover-subtle {
-  @apply transition-all duration-200;
+  @apply transition-all duration-300 ease-out;
 }
 
 .hover-subtle:hover {
@@ -605,31 +620,31 @@
 
 /* Scale Hover */
 .hover-scale {
-  @apply transition-transform duration-200;
+  @apply transition-transform duration-300 ease-out;
 }
 
 .hover-scale:hover {
-  transform: scale(1.02);
+  transform: scale(1.03);
 }
 
-/* Glow Hover - Blue */
+/* Glow Hover - Primary */
 .hover-glow {
   @apply transition-all duration-300;
 }
 
 .hover-glow:hover {
-  box-shadow: 0 0 30px hsl(217 91% 60% / 0.2);
+  box-shadow: 0 0 40px hsl(var(--primary) / 0.25);
 }
 
 /* Arrow hover effect for cases */
 .case-card {
-  @apply relative overflow-hidden transition-all duration-300;
+  @apply relative overflow-hidden transition-all duration-300 ease-out;
 }
 
 .case-card .arrow-icon {
   @apply absolute top-4 right-4 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 translate-y-2;
-  background: hsl(var(--dark-fg));
-  color: hsl(var(--dark-bg));
+  background: hsl(var(--foreground));
+  color: hsl(var(--background));
 }
 
 .case-card:hover .arrow-icon {
@@ -638,19 +653,19 @@
 
 .case-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 16px 48px hsl(0 0% 0% / 0.35);
+  box-shadow: 0 20px 48px hsl(0 0% 0% / 0.4);
 }
 
 /* Blog/Service Card Hover */
 .card-hover {
-  @apply transition-all duration-300;
+  @apply transition-all duration-300 ease-out;
   border: 1px solid transparent;
 }
 
 .card-hover:hover {
-  border-color: hsl(var(--primary) / 0.2);
+  border-color: hsl(var(--primary) / 0.25);
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px hsl(0 0% 0% / 0.1);
+  box-shadow: 0 16px 40px hsl(0 0% 0% / 0.15);
 }
 
 /* Link Hover Underline */
@@ -660,12 +675,36 @@
 
 .link-hover::after {
   content: '';
-  @apply absolute bottom-0 left-0 w-0 h-px transition-all duration-300;
+  @apply absolute bottom-0 left-0 w-0 h-px transition-all duration-300 ease-out;
   background: hsl(var(--primary));
 }
 
 .link-hover:hover::after {
   @apply w-full;
+}
+
+/* Icon Hover Glow */
+.icon-hover-glow {
+  @apply transition-all duration-300;
+}
+
+.icon-hover-glow:hover {
+  filter: drop-shadow(0 0 12px hsl(var(--foreground) / 0.4));
+}
+
+/* Button Shine Effect */
+.btn-shine {
+  @apply relative overflow-hidden;
+}
+
+.btn-shine::before {
+  content: '';
+  @apply absolute inset-0 -translate-x-full transition-transform duration-700;
+  background: linear-gradient(90deg, transparent, hsl(var(--foreground) / 0.1), transparent);
+}
+
+.btn-shine:hover::before {
+  @apply translate-x-full;
 }
 
 /* ============================================

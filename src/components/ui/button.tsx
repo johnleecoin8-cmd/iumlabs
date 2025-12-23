@@ -5,30 +5,35 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
-        destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-        outline: "border border-border bg-transparent text-foreground hover:bg-secondary hover:border-foreground/30",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-        ghost: "hover:bg-secondary hover:text-foreground",
+        // Primary solid button - rounded-full for consistency
+        default: "rounded-full bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 hover:-translate-y-0.5",
+        // Solid white button
+        filled: "rounded-full bg-foreground text-background hover:bg-foreground/90 hover:shadow-lg hover:shadow-foreground/20 hover:-translate-y-0.5",
+        // Outline dark theme
+        outline: "rounded-full border border-border bg-transparent text-foreground hover:bg-secondary hover:border-foreground/30 hover:-translate-y-0.5",
+        // Outline light theme (for dark backgrounds)
+        "outline-light": "rounded-full border border-foreground/20 bg-transparent text-foreground hover:bg-foreground/5 hover:border-foreground/40 hover:-translate-y-0.5",
+        // Secondary muted
+        secondary: "rounded-full bg-secondary text-secondary-foreground hover:bg-secondary/80 hover:-translate-y-0.5",
+        // Ghost (no background)
+        ghost: "rounded-full hover:bg-secondary hover:text-foreground",
+        // Link style
         link: "text-primary underline-offset-4 hover:underline",
-        // Solid button variants
-        filled: "bg-foreground text-background hover:bg-foreground/90",
-        "filled-primary": "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30",
-        // Glass/transparent variant
-        glass: "bg-card/50 backdrop-blur-sm border border-border/50 text-foreground hover:bg-card/70 hover:border-primary/30",
-        // Red gradient variant
-        gradient: "bg-gradient-to-r from-primary to-gradient-crimson text-primary-foreground hover:opacity-90 hover:shadow-lg hover:shadow-primary/30",
+        // Glass effect
+        glass: "rounded-full bg-card/50 backdrop-blur-sm border border-border/50 text-foreground hover:bg-card/70 hover:border-primary/30 hover:-translate-y-0.5",
+        // Destructive
+        destructive: "rounded-full bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:-translate-y-0.5",
       },
       size: {
         default: "h-11 px-6 py-2",
         sm: "h-9 px-4 text-sm",
         lg: "h-12 px-8 text-base",
         xl: "h-14 px-10 text-lg",
-        icon: "h-10 w-10",
+        icon: "h-10 w-10 rounded-full",
       },
     },
     defaultVariants: {

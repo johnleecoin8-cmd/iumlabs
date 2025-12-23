@@ -58,23 +58,22 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -4 }}
     >
       <Link
         to={service.link}
-        className={`group block p-6 md:p-8 transition-all duration-300 hover:bg-white/5 hover:shadow-lg hover:shadow-white/5 ${
-          !isRightColumn ? "border-r border-white/10" : ""
-        } ${!isLastRow ? "border-b border-white/10" : ""}`}
+        className={`group block p-6 md:p-8 lg:p-10 transition-all duration-300 hover:bg-secondary/50 ${
+          !isRightColumn ? "border-r border-border" : ""
+        } ${!isLastRow ? "border-b border-border" : ""}`}
       >
-        <Icon className="w-10 h-10 mb-6 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" strokeWidth={1.5} />
-        <h3 className="text-xl font-semibold text-white mb-3">
+        <Icon className="w-10 h-10 mb-6 text-muted-foreground group-hover:text-foreground group-hover:drop-shadow-[0_0_12px_hsl(var(--foreground)/0.3)] transition-all duration-300" strokeWidth={1.5} />
+        <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-foreground/90 transition-colors">
           {service.title}
         </h3>
-        <p className="text-white/50 text-sm leading-relaxed mb-6">
+        <p className="text-muted-foreground text-sm leading-relaxed mb-6">
           {service.description}
         </p>
-        <div className="flex items-center gap-2 text-white/40 group-hover:text-white transition-colors text-sm">
-          Learn more
+        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm">
+          <span className="group-hover:underline underline-offset-4">Learn more</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>
       </Link>
@@ -109,10 +108,10 @@ const GoldShape = () => (
 
 const ServicesSection = () => {
   return (
-    <section className="bg-[#0A0A0A]">
+    <section className="bg-background">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Services Grid */}
-        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
+        <div className="w-full lg:w-2/3 lg:border-r border-border">
           <div className="grid grid-cols-1 md:grid-cols-2">
             {services.map((service, index) => (
               <ServiceCard key={service.number} service={service} index={index} />
@@ -122,24 +121,24 @@ const ServicesSection = () => {
 
         {/* Right: Sticky CTA Panel */}
         <motion.div
-          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
+          className="w-full lg:w-1/3 p-6 md:p-8 lg:p-10 flex flex-col justify-center"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl font-bold text-white mb-4">
+          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
             Why Ium Labs
           </h2>
-          <p className="text-white/50 leading-relaxed mb-8">
+          <p className="text-muted-foreground leading-relaxed mb-8">
             We're the Korean Web3 marketing agency that bridges your project to the Korean market. Our team combines local expertise with global Web3 experience.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-white/90 transition-colors w-fit mb-6"
+            className="group inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 text-sm font-medium rounded-full hover:bg-foreground/90 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-fit mb-6"
           >
             CONNECT WITH US
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
 
           <div className="mt-6 flex justify-center">
