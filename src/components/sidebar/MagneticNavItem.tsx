@@ -19,7 +19,6 @@ interface Particle {
 }
 
 const MagneticNavItem = ({ icon: Icon, to, label, isActive, isCollapsed, index }: MagneticNavItemProps) => {
-  const [magneticOffset, setMagneticOffset] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
   const [particles, setParticles] = useState<Particle[]>([]);
   const [showRipple, setShowRipple] = useState(false);
@@ -27,20 +26,7 @@ const MagneticNavItem = ({ icon: Icon, to, label, isActive, isCollapsed, index }
   const containerRef = useRef<HTMLDivElement>(null);
   const particleIdRef = useRef(0);
 
-  const handleMouseMove = useCallback((e: MouseEvent<HTMLElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    const deltaX = (e.clientX - centerX) * 0.35;
-    const deltaY = (e.clientY - centerY) * 0.35;
-    
-    setMagneticOffset({ x: deltaX, y: deltaY });
-  }, []);
-
   const handleMouseLeave = useCallback(() => {
-    setMagneticOffset({ x: 0, y: 0 });
     setIsHovered(false);
   }, []);
 
@@ -80,7 +66,6 @@ const MagneticNavItem = ({ icon: Icon, to, label, isActive, isCollapsed, index }
     <div
       ref={containerRef}
       className="relative"
-      onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onMouseEnter={handleMouseEnter}
       style={{ 
@@ -96,10 +81,8 @@ const MagneticNavItem = ({ icon: Icon, to, label, isActive, isCollapsed, index }
           isCollapsed ? "w-12 h-12 justify-center" : "w-full px-4 py-3 gap-3"
         )}
         style={{
-          transform: `translate(${magneticOffset.x}px, ${magneticOffset.y}px) ${isHovered ? 'scale(1.02)' : 'scale(1)'}`,
-          transition: isHovered 
-            ? 'transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94)' 
-            : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+          transition: 'transform 0.2s ease-out',
         }}
       >
         {/* Active Background Glow with neon pulse */}
@@ -110,7 +93,7 @@ const MagneticNavItem = ({ icon: Icon, to, label, isActive, isCollapsed, index }
           </>
         )}
         
-        {/* Hover Background with 3D effect */}
+        {/* Hover Background */}
         <div className={cn(
           "absolute inset-0 rounded-2xl transition-all duration-300",
           !isActive && "bg-transparent",
@@ -122,17 +105,13 @@ const MagneticNavItem = ({ icon: Icon, to, label, isActive, isCollapsed, index }
           <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-primary rounded-r-full shadow-[0_0_15px_hsl(var(--primary)),0_0_30px_hsl(var(--primary)/0.5)]" />
         )}
         
-        {/* Icon Container with 3D perspective */}
+        {/* Icon Container */}
         <div 
           className={cn(
             "relative z-10 flex items-center justify-center transition-all duration-300",
             isCollapsed ? "" : "w-5 h-5",
             isActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
           )}
-          style={{
-            transform: isHovered ? `perspective(500px) rotateX(${magneticOffset.y * -0.3}deg) rotateY(${magneticOffset.x * 0.3}deg)` : 'none',
-            transition: 'transform 0.2s ease-out',
-          }}
         >
           <Icon 
             className={cn(
