@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { X, Send, Calendar } from "lucide-react";
+import { Menu } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
 import logoImage from "@/assets/logo.png";
@@ -23,9 +23,24 @@ const Navbar = () => {
     isCollapsed
   } = useSidebarState();
   return <>
-      {/* Main Navbar - Unified bar */}
-      <nav className={`fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-50 transition-all duration-500 ${isCollapsed ? 'md:left-[88px]' : 'md:left-60'}`}>
-        
+      {/* Mobile Top Navigation Bar */}
+      <nav className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-50 md:hidden">
+        <div className="bg-background/80 backdrop-blur-xl border border-border/50 rounded-2xl px-4 py-3 flex items-center justify-between shadow-lg">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2">
+            <img src={logoImage} alt="Ium Labs" className="w-8 h-8 rounded-lg object-contain" />
+            <span className="text-lg font-semibold text-foreground">{brandConfig.name}</span>
+          </Link>
+          
+          {/* Hamburger Menu Button */}
+          <button 
+            onClick={() => setIsMenuOpen(true)}
+            className="p-2 rounded-xl hover:bg-secondary/60 transition-colors"
+            aria-label="Open menu"
+          >
+            <Menu className="w-6 h-6 text-foreground" />
+          </button>
+        </div>
       </nav>
 
       {/* Backdrop Overlay */}
@@ -73,6 +88,14 @@ const Navbar = () => {
                         {link.label}
                       </Link>
                     </div>)}
+                  {/* Contact link - only in mobile menu since removed from main nav */}
+                  <div>
+                    <Link to="/contact" onClick={() => setIsMenuOpen(false)} className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-all duration-500 ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`} style={{
+                      transitionDelay: isMenuOpen ? `${300 + navLinks.length * 80}ms` : "0ms"
+                    }}>
+                      Contact
+                    </Link>
+                  </div>
                 </nav>
               </div>
 
