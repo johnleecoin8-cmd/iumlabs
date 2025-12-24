@@ -24,7 +24,7 @@ const Navbar = () => {
   } = useSidebarState();
   return <>
       {/* Mobile Top Navigation Bar */}
-      <nav className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-[60] md:hidden will-change-transform">
+      <nav className="relative top-0 left-0 right-0 z-[60] md:hidden p-2 sm:p-4">
         <div className="bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl px-4 py-3 flex items-center justify-between shadow-lg">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
