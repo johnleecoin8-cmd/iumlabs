@@ -9,6 +9,7 @@ import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import InsightsSection from "@/components/InsightsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import CTABannerSection from "@/components/CTABannerSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import useScrollReveal from "@/hooks/useScrollReveal";
@@ -135,10 +136,11 @@ const Index = () => {
       {/* CTA Banner */}
       <CTABannerSection />
       
-      {/* Footer */}
-      <div className="border-t border-white/10">
-        <Footer />
-      </div>
+      {/* Footer Links */}
+      <FooterLinksSection />
+      
+      {/* Footer Brand */}
+      <Footer />
       
       <FloatingContactButton />
     </div>
