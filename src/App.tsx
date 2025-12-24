@@ -132,7 +132,7 @@ const App = () => (
       <BrowserRouter>
         <ScrollToTop />
         <Sidebar />
-        <div className="md:ml-20">
+        <div className="md:ml-52">
           <AppRoutes />
         </div>
       </BrowserRouter>
