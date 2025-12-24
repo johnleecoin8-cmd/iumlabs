@@ -4,6 +4,7 @@ import { X, Send, Calendar } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
 import logoImage from "@/assets/logo.png";
+import { useSidebarState } from "@/hooks/useSidebarState";
 
 const brandConfig = {
   name: brand.name,
@@ -18,11 +19,14 @@ const navLinks = navigation.links.map(link => ({ to: link.href, label: link.name
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
+  const { isCollapsed } = useSidebarState();
 
   return (
     <>
       {/* Main Navbar - Unified bar */}
-      <nav className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 md:left-56 z-50">
+      <nav className={`fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-50 transition-all duration-300 ${
+        isCollapsed ? 'md:left-20' : 'md:left-56'
+      }`}>
         <div className="flex items-center bg-foreground/95 backdrop-blur-md rounded-full border border-foreground/10 shadow-lg shadow-background/20">
           {/* Logo Section */}
           <Link 
