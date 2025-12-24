@@ -31,7 +31,7 @@ const Navbar = () => {
   const mobileNavLayer = (
     <>
       {/* Mobile Top Navigation Bar */}
-      <nav className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-[60] md:hidden">
+      <nav className="fixed top-[max(0.5rem,env(safe-area-inset-top))] left-[max(0.5rem,env(safe-area-inset-left))] right-[max(0.5rem,env(safe-area-inset-right))] sm:top-[max(1rem,env(safe-area-inset-top))] sm:left-[max(1rem,env(safe-area-inset-left))] sm:right-[max(1rem,env(safe-area-inset-right))] z-[60] md:hidden">
         <div className="bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl px-4 py-3 flex items-center justify-between shadow-lg">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
