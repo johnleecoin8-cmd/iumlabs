@@ -48,7 +48,6 @@ export const navigation = {
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
     { name: "Research", href: "/research" },
-    { name: "Contact", href: "/contact" },
   ],
   ctaButton: "Get Started",
 };
