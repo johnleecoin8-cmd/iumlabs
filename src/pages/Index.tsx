@@ -8,6 +8,7 @@ import FilmstripGallerySection from "@/components/FilmstripGallerySection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import InsightsSection from "@/components/InsightsSection";
 import ContactFormSection from "@/components/ContactFormSection";
+import CTABannerSection from "@/components/CTABannerSection";
 import Footer from "@/components/Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import useScrollReveal from "@/hooks/useScrollReveal";
@@ -130,6 +131,9 @@ const Index = () => {
       <section className="scroll-reveal bg-[#121212]" id="contact">
         <ContactFormSection sectionNumber="08" />
       </section>
+      
+      {/* CTA Banner */}
+      <CTABannerSection />
       
       {/* Footer */}
       <div className="border-t border-white/10">
