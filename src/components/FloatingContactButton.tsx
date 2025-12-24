@@ -27,7 +27,7 @@ const FloatingContactButton = () => {
   ];
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-[max(1rem,calc(env(safe-area-inset-bottom)+0.5rem))] right-[max(1rem,calc(env(safe-area-inset-right)+0.5rem))] sm:bottom-[max(1.5rem,calc(env(safe-area-inset-bottom)+1rem))] sm:right-[max(1.5rem,calc(env(safe-area-inset-right)+1rem))] z-50 flex flex-col items-end gap-3">
       <AnimatePresence>
         {isOpen && (
           <motion.div
