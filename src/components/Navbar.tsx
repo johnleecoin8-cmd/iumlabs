@@ -32,20 +32,20 @@ const Navbar = () => {
     <>
       {/* Mobile Top Navigation Bar */}
       <nav className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-[60] md:hidden">
-        <div className="bg-white/95 backdrop-blur-xl border border-border/50 rounded-2xl px-4 py-3 flex items-center justify-between shadow-lg">
+        <div className="bg-white/95 backdrop-blur-xl border border-black/20 rounded-2xl px-4 py-3 flex items-center justify-between shadow-lg">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img src={logoImage} alt="Ium Labs" className="w-8 h-8 rounded-lg object-contain" />
-            <span className="text-lg font-semibold text-foreground">{brandConfig.name}</span>
+            <span className="text-lg font-semibold text-black">{brandConfig.name}</span>
           </Link>
 
           {/* Hamburger Menu Button */}
           <button
             onClick={() => setIsMenuOpen(true)}
-            className="p-2 rounded-xl hover:bg-secondary/60 transition-colors"
+            className="p-2 rounded-xl hover:bg-black/10 transition-colors"
             aria-label="Open menu"
           >
-            <Menu className="w-6 h-6 text-foreground" />
+            <Menu className="w-6 h-6 text-black" />
           </button>
         </div>
       </nav>
