@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, Briefcase, FolderOpen, FileText, Mail, Send, Linkedin, ChevronLeft } from "lucide-react";
+import { Home, Briefcase, FolderOpen, FileText, Mail, Send, Linkedin, ChevronLeft, MessageSquare, AtSign } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import logoImage from "@/assets/logo.png";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -37,7 +37,7 @@ const sectionToNavMap: Record<string, string> = {
   'contact': 'Contact',
 };
 
-// Magnetic Social Link Component
+// Magnetic Social Link Component (for external links)
 const MagneticSocialLink = ({ 
   href, 
   icon: Icon, 
@@ -100,6 +100,87 @@ const MagneticSocialLink = ({
         <span className="relative z-10 text-sm font-medium">{label}</span>
       )}
     </a>
+  );
+
+  if (isCollapsed) {
+    return (
+      <Tooltip delayDuration={0}>
+        <TooltipTrigger asChild>{content}</TooltipTrigger>
+        <TooltipContent 
+          side="right" 
+          sideOffset={16} 
+          className="bg-foreground text-background text-xs font-medium px-3 py-1.5 rounded-xl shadow-xl border-0"
+        >
+          {label}
+        </TooltipContent>
+      </Tooltip>
+    );
+  }
+
+  return content;
+};
+
+// Magnetic Connect Link Component (for internal links)
+const MagneticConnectLink = ({ 
+  to, 
+  icon: Icon, 
+  label, 
+  isCollapsed 
+}: { 
+  to: string; 
+  icon: React.ElementType; 
+  label: string; 
+  isCollapsed: boolean;
+}) => {
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    setOffset({ 
+      x: (e.clientX - centerX) * 0.3, 
+      y: (e.clientY - centerY) * 0.3 
+    });
+  };
+
+  const content = (
+    <Link
+      to={to}
+      className={cn(
+        "group relative flex items-center rounded-2xl transition-all duration-200",
+        isCollapsed ? "w-12 h-12 justify-center" : "w-full px-4 py-3 gap-3",
+        "text-muted-foreground hover:text-foreground"
+      )}
+      style={{
+        transform: `translate(${offset.x}px, ${offset.y}px) ${isHovered ? 'scale(1.02)' : 'scale(1)'}`,
+        transition: isHovered 
+          ? 'transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94)' 
+          : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+      }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => { setOffset({ x: 0, y: 0 }); setIsHovered(false); }}
+    >
+      <div className={cn(
+        "absolute inset-0 rounded-2xl transition-all duration-300",
+        isHovered && "bg-secondary/60 shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
+      )} />
+      <Icon 
+        className={cn(
+          "relative z-10 transition-all duration-300",
+          isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]",
+          isHovered && "scale-110"
+        )}
+        style={{
+          transform: isHovered ? `perspective(500px) rotateX(${offset.y * -0.3}deg) rotateY(${offset.x * 0.3}deg)` : 'none',
+        }}
+      />
+      {!isCollapsed && (
+        <span className="relative z-10 text-sm font-medium">{label}</span>
+      )}
+    </Link>
   );
 
   if (isCollapsed) {
@@ -302,7 +383,7 @@ const Sidebar = () => {
               <div className="h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
             </div>
 
-            {/* Social Links Section */}
+            {/* Connect Section */}
             {!isCollapsed && (
               <div className="px-1 mb-3">
                 <span className="text-[10px] text-muted-foreground/50 font-medium tracking-[0.2em] uppercase">
@@ -312,6 +393,18 @@ const Sidebar = () => {
             )}
             
             <div className={cn("flex flex-col gap-1.5", isCollapsed ? "items-center" : "")}>
+              <MagneticConnectLink
+                to="/contact"
+                icon={Mail}
+                label="Contact"
+                isCollapsed={isCollapsed}
+              />
+              <MagneticSocialLink
+                href={`mailto:${brand.email}`}
+                icon={AtSign}
+                label="Email"
+                isCollapsed={isCollapsed}
+              />
               <MagneticSocialLink
                 href={brand.telegramLink}
                 icon={Send}
@@ -322,6 +415,12 @@ const Sidebar = () => {
                 href={brand.linkedin}
                 icon={Linkedin}
                 label="LinkedIn"
+                isCollapsed={isCollapsed}
+              />
+              <MagneticConnectLink
+                to="/contact#contact-form"
+                icon={MessageSquare}
+                label="Proposal"
                 isCollapsed={isCollapsed}
               />
             </div>
