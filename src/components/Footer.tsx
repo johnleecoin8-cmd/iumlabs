@@ -4,10 +4,10 @@ const Footer = () => {
   return (
     <footer className="bg-background text-foreground pb-[env(safe-area-inset-bottom)]">
       {/* Giant Brand Name - Static */}
-      <div className="w-full px-4 py-4 sm:py-6 overflow-hidden">
-        <h2 className="text-[1.7rem] sm:text-[2.2rem] md:text-[3.3rem] lg:text-[4.4rem] xl:text-[5.5rem] font-light leading-none tracking-[0.2em] sm:tracking-[0.3em] text-center whitespace-nowrap">
-          <span className="text-foreground/30">
-            {brand.name}
+      <div className="w-full px-4 py-8 sm:py-12 overflow-hidden bg-background">
+        <h2 className="text-[3rem] sm:text-[5rem] md:text-[8rem] lg:text-[12rem] xl:text-[16rem] font-bold leading-none tracking-tight text-center whitespace-nowrap lowercase">
+          <span className="text-foreground">
+            {brand.name.toLowerCase()}
           </span>
         </h2>
       </div>
