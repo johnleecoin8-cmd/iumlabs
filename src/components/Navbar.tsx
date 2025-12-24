@@ -24,8 +24,8 @@ const Navbar = () => {
   return (
     <>
       {/* Main Navbar - Unified bar */}
-      <nav className={`fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-50 transition-all duration-300 ${
-        isCollapsed ? 'md:left-20' : 'md:left-56'
+      <nav className={`fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-50 transition-all duration-500 ${
+        isCollapsed ? 'md:left-[88px]' : 'md:left-60'
       }`}>
         <div className="flex items-center bg-foreground/95 backdrop-blur-md rounded-full border border-foreground/10 shadow-lg shadow-background/20">
           {/* Logo Section */}
