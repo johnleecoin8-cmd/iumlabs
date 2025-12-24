@@ -32,21 +32,21 @@ const Navbar = () => {
     <>
       {/* Mobile Top Navigation Bar */}
       <nav className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-[60] md:hidden">
-        <div className="bg-white/95 backdrop-blur-xl border border-black/20 rounded-2xl px-4 py-3 flex items-center justify-center shadow-xl shadow-black/10">
-          {/* Hamburger Menu Button - Left */}
-          <button
-            onClick={() => setIsMenuOpen(true)}
-            className="absolute left-4 p-2 rounded-xl hover:bg-black/10 transition-colors"
-            aria-label="Open menu"
-          >
-            <Menu className="w-6 h-6 text-black" />
-          </button>
-
-          {/* Logo - Center */}
+        <div className="bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl px-4 py-3 flex items-center justify-between shadow-lg">
+          {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img src={logoImage} alt="Ium Labs" className="w-8 h-8 rounded-lg object-contain" />
-            <span className="text-lg font-semibold text-black">{brandConfig.name}</span>
+            <span className="text-lg font-semibold text-foreground">{brandConfig.name}</span>
           </Link>
+
+          {/* Hamburger Menu Button */}
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="p-2 rounded-xl hover:bg-secondary/60 transition-colors"
+            aria-label="Open menu"
+          >
+            <Menu className="w-6 h-6 text-foreground" />
+          </button>
         </div>
       </nav>
 
@@ -60,12 +60,12 @@ const Navbar = () => {
 
       {/* Top Panel Menu - slides from top */}
       <div
-        className={`fixed top-0 left-0 right-0 h-[85vh] sm:h-[75vh] lg:h-[60vh] z-[101] bg-white transition-all duration-500 ease-out ${
+        className={`fixed top-0 left-0 right-0 h-[85vh] sm:h-[75vh] lg:h-[60vh] z-[101] bg-gradient-to-b from-background via-background to-primary/5 transition-all duration-500 ease-out ${
           isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         }`}
       >
         {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black/[0.02] via-transparent to-black/[0.02] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
 
         <div className="h-full flex flex-col relative z-10">
           {/* Header */}
@@ -73,12 +73,12 @@ const Navbar = () => {
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
                 <img src={logoImage} alt="Ium Labs Logo" className="w-8 h-8 rounded-lg object-contain" />
-                <span className="text-lg font-semibold text-black">{brandConfig.name}</span>
+                <span className="text-lg font-semibold text-foreground">{brandConfig.name}</span>
               </Link>
 
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="group flex items-center gap-3 px-5 py-2.5 rounded-full bg-black/10 text-black text-sm font-medium transition-all duration-300 hover:bg-black/20"
+                className="group flex items-center gap-3 px-5 py-2.5 rounded-full bg-secondary text-foreground text-sm font-medium transition-all duration-300 hover:bg-secondary/80"
               >
                 <span>close</span>
                 <div className="relative w-5 h-5 flex items-center justify-center">
@@ -95,7 +95,7 @@ const Navbar = () => {
               {/* Navigation Links */}
               <div className="flex flex-col justify-center">
                 <span
-                  className={`text-black/50 text-xs lg:text-sm uppercase tracking-widest mb-4 lg:mb-6 block transition-all duration-500 ${
+                  className={`text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-4 lg:mb-6 block transition-all duration-500 ${
                     isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "200ms" : "0ms" }}
@@ -108,7 +108,7 @@ const Navbar = () => {
                       <Link
                         to={link.to}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-black hover:text-black/60 transition-all duration-500 ${
+                        className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-all duration-500 ${
                           isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                         }`}
                         style={{ transitionDelay: isMenuOpen ? `${300 + index * 80}ms` : "0ms" }}
@@ -122,7 +122,7 @@ const Navbar = () => {
                     <Link
                       to="/contact"
                       onClick={() => setIsMenuOpen(false)}
-                      className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-black hover:text-black/60 transition-all duration-500 ${
+                      className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-all duration-500 ${
                         isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                       }`}
                       style={{
@@ -143,12 +143,12 @@ const Navbar = () => {
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "500ms" : "0ms" }}
                 >
-                  <span className="text-black/50 text-xs lg:text-sm uppercase tracking-widest mb-2 block">
+                  <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">
                     Get in touch
                   </span>
                   <a
                     href={`mailto:${brandConfig.email}`}
-                    className="text-base lg:text-xl text-black hover:text-black/60 transition-colors"
+                    className="text-base lg:text-xl text-foreground hover:text-primary transition-colors"
                   >
                     {brandConfig.email}
                   </a>
@@ -160,14 +160,14 @@ const Navbar = () => {
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "600ms" : "0ms" }}
                 >
-                  <span className="text-black/50 text-xs lg:text-sm uppercase tracking-widest mb-2 block">
+                  <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">
                     Telegram
                   </span>
                   <a
                     href={brandConfig.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base lg:text-xl text-black hover:text-black/60 transition-colors"
+                    className="text-base lg:text-xl text-foreground hover:text-primary transition-colors"
                   >
                     @iumlabs
                   </a>
@@ -179,10 +179,10 @@ const Navbar = () => {
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "700ms" : "0ms" }}
                 >
-                  <span className="text-black/50 text-xs lg:text-sm uppercase tracking-widest mb-2 block">
+                  <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">
                     Office
                   </span>
-                  <p className="text-sm lg:text-lg text-black/60">{brandConfig.office}</p>
+                  <p className="text-sm lg:text-lg text-muted-foreground">{brandConfig.office}</p>
                 </div>
 
                 <div
@@ -195,7 +195,7 @@ const Navbar = () => {
                     href={brandConfig.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-black/20 text-black text-xs lg:text-sm font-medium hover:bg-black/10 hover:border-black/30 transition-all duration-300"
+                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-border text-foreground text-xs lg:text-sm font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
                   >
                     Telegram
                   </a>
@@ -203,7 +203,7 @@ const Navbar = () => {
                     href={brandConfig.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-black/20 text-black text-xs lg:text-sm font-medium hover:bg-black/10 hover:border-black/30 transition-all duration-300"
+                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-border text-foreground text-xs lg:text-sm font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
                   >
                     LinkedIn
                   </a>
