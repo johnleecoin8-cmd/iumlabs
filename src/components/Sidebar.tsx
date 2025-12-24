@@ -218,10 +218,7 @@ const Sidebar = () => {
         )}
       >
         {/* Floating Island Container */}
-        <div className="relative flex flex-col h-full rounded-3xl overflow-hidden animate-floating-subtle">
-          {/* Outer glow aura */}
-          <div className="absolute -inset-2 bg-primary/5 blur-2xl rounded-[2rem] opacity-60" />
-          
+        <div className="relative flex flex-col h-full rounded-3xl overflow-hidden">
           {/* Main island background */}
           <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/85 backdrop-blur-2xl rounded-3xl" />
           
@@ -234,13 +231,10 @@ const Sidebar = () => {
           {/* Scroll Progress Bar */}
           <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-border/10 rounded-l-3xl overflow-hidden">
             <div 
-              className="w-full bg-gradient-to-b from-primary via-primary to-primary/50 transition-all duration-150 ease-out shadow-[0_0_10px_hsl(var(--primary))]"
+              className="w-full bg-gradient-to-b from-primary via-primary to-primary/50 transition-all duration-150 ease-out"
               style={{ height: `${scrollProgress}%` }}
             />
           </div>
-          
-          {/* Animated glow line */}
-          <div className="absolute left-0 top-0 w-[3px] h-12 bg-gradient-to-b from-transparent via-primary/60 to-transparent animate-glow-line rounded-full" />
           
           {/* Content Container */}
           <div className={cn(
