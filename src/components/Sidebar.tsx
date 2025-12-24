@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, Briefcase, FolderOpen, FileText, Mail, Send, Linkedin, ChevronLeft, MessageSquare, AtSign } from "lucide-react";
+import { Home, Briefcase, FolderOpen, FileText, Mail, Send, Linkedin, ChevronLeft, AtSign } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import logoImage from "@/assets/logo.png";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -37,8 +37,8 @@ const sectionToNavMap: Record<string, string> = {
   'contact': 'Contact',
 };
 
-// Magnetic Social Link Component (for external links)
-const MagneticSocialLink = ({ 
+// Simple Social Link Component (for external links)
+const SocialLink = ({ 
   href, 
   icon: Icon, 
   label, 
@@ -49,19 +49,6 @@ const MagneticSocialLink = ({
   label: string; 
   isCollapsed: boolean;
 }) => {
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    setOffset({ 
-      x: (e.clientX - centerX) * 0.3, 
-      y: (e.clientY - centerY) * 0.3 
-    });
-  };
-
   const content = (
     <a
       href={href}
@@ -70,34 +57,17 @@ const MagneticSocialLink = ({
       className={cn(
         "group relative flex items-center rounded-2xl transition-all duration-200",
         isCollapsed ? "w-12 h-12 justify-center" : "w-full px-4 py-3 gap-3",
-        "text-muted-foreground hover:text-foreground"
+        "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
       )}
-      style={{
-        transform: `translate(${offset.x}px, ${offset.y}px) ${isHovered ? 'scale(1.02)' : 'scale(1)'}`,
-        transition: isHovered 
-          ? 'transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94)' 
-          : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => { setOffset({ x: 0, y: 0 }); setIsHovered(false); }}
     >
-      <div className={cn(
-        "absolute inset-0 rounded-2xl transition-all duration-300",
-        isHovered && "bg-secondary/60 shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
-      )} />
       <Icon 
         className={cn(
-          "relative z-10 transition-all duration-300",
-          isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]",
-          isHovered && "scale-110"
+          "transition-all duration-300",
+          isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]"
         )}
-        style={{
-          transform: isHovered ? `perspective(500px) rotateX(${offset.y * -0.3}deg) rotateY(${offset.x * 0.3}deg)` : 'none',
-        }}
       />
       {!isCollapsed && (
-        <span className="relative z-10 text-sm font-medium">{label}</span>
+        <span className="text-sm font-medium">{label}</span>
       )}
     </a>
   );
@@ -120,8 +90,8 @@ const MagneticSocialLink = ({
   return content;
 };
 
-// Magnetic Connect Link Component (for internal links)
-const MagneticConnectLink = ({ 
+// Simple Connect Link Component (for internal links)
+const ConnectLink = ({ 
   to, 
   icon: Icon, 
   label, 
@@ -132,53 +102,23 @@ const MagneticConnectLink = ({
   label: string; 
   isCollapsed: boolean;
 }) => {
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    setOffset({ 
-      x: (e.clientX - centerX) * 0.3, 
-      y: (e.clientY - centerY) * 0.3 
-    });
-  };
-
   const content = (
     <Link
       to={to}
       className={cn(
         "group relative flex items-center rounded-2xl transition-all duration-200",
         isCollapsed ? "w-12 h-12 justify-center" : "w-full px-4 py-3 gap-3",
-        "text-muted-foreground hover:text-foreground"
+        "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
       )}
-      style={{
-        transform: `translate(${offset.x}px, ${offset.y}px) ${isHovered ? 'scale(1.02)' : 'scale(1)'}`,
-        transition: isHovered 
-          ? 'transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94)' 
-          : 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-      }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => { setOffset({ x: 0, y: 0 }); setIsHovered(false); }}
     >
-      <div className={cn(
-        "absolute inset-0 rounded-2xl transition-all duration-300",
-        isHovered && "bg-secondary/60 shadow-[0_4px_20px_rgba(0,0,0,0.15)]"
-      )} />
       <Icon 
         className={cn(
-          "relative z-10 transition-all duration-300",
-          isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]",
-          isHovered && "scale-110"
+          "transition-all duration-300",
+          isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]"
         )}
-        style={{
-          transform: isHovered ? `perspective(500px) rotateX(${offset.y * -0.3}deg) rotateY(${offset.x * 0.3}deg)` : 'none',
-        }}
       />
       {!isCollapsed && (
-        <span className="relative z-10 text-sm font-medium">{label}</span>
+        <span className="text-sm font-medium">{label}</span>
       )}
     </Link>
   );
@@ -393,34 +333,28 @@ const Sidebar = () => {
             )}
             
             <div className={cn("flex flex-col gap-1.5", isCollapsed ? "items-center" : "")}>
-              <MagneticConnectLink
+              <ConnectLink
                 to="/contact"
                 icon={Mail}
                 label="Contact"
                 isCollapsed={isCollapsed}
               />
-              <MagneticSocialLink
+              <SocialLink
                 href={`mailto:${brand.email}`}
                 icon={AtSign}
                 label="Email"
                 isCollapsed={isCollapsed}
               />
-              <MagneticSocialLink
+              <SocialLink
                 href={brand.telegramLink}
                 icon={Send}
                 label="Telegram"
                 isCollapsed={isCollapsed}
               />
-              <MagneticSocialLink
+              <SocialLink
                 href={brand.linkedin}
                 icon={Linkedin}
                 label="LinkedIn"
-                isCollapsed={isCollapsed}
-              />
-              <MagneticConnectLink
-                to="/contact#contact-form"
-                icon={MessageSquare}
-                label="Proposal"
                 isCollapsed={isCollapsed}
               />
             </div>
