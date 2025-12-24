@@ -39,7 +39,7 @@ const WhyChooseUsSection = () => {
               About Us
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              We bridge global Web3 projects to growth in the Korean market. Established in 2025, we've become a trusted partner for 18+ brands looking to expand into Korea's dynamic crypto ecosystem.
+              We bridge global Web3 projects to growth in the Korean market. Established in 2025, we have become a trusted partner for 18+ brands expanding into Korea's dynamic crypto ecosystem. Our name, 'Ium', is derived from the Korean verb 'to connect' (잇다), embodying our core mission to seamlessly link global innovation with local opportunities.
             </p>
             <p className="text-foreground font-medium">
               Founded by former executives from Binance and KuCoin
