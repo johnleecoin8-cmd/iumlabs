@@ -104,24 +104,24 @@ const InsightsSection = () => {
             >
               <Link
                 to={`/research/${article.id}`}
-                className={`group block p-6 md:p-8 lg:p-10 transition-colors duration-300 hover:bg-secondary/50 ${
+                className={`group block p-5 sm:p-6 md:p-8 lg:p-10 transition-colors duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
                   index < insights.length - 1 ? "border-b border-border" : ""
                 }`}
               >
-                <div className="flex items-center gap-3 text-muted-foreground text-xs mb-3">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-muted-foreground text-[11px] sm:text-xs mb-2 sm:mb-3">
                   <span className="uppercase tracking-wider">{article.category}</span>
-                  <span>•</span>
+                  <span className="hidden sm:inline">•</span>
                   <span>{article.date}</span>
-                  <span>•</span>
-                  <span>{article.readTime} read</span>
+                  <span className="hidden sm:inline">•</span>
+                  <span className="hidden sm:inline">{article.readTime} read</span>
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2 group-hover:text-foreground/80 transition-colors">
+                <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 group-hover:text-foreground/80 transition-colors">
                   {article.title}
                 </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                <p className="text-muted-foreground text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-2">
                   {article.excerpt}
                 </p>
-                <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm">
+                <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm min-h-[44px] sm:min-h-0">
                   <span className="group-hover:underline underline-offset-4">Read article</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -162,13 +162,13 @@ const InsightsSection = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Enter your email"
-              className="w-full bg-transparent px-4 py-3 border border-border rounded-lg text-foreground placeholder:text-muted-foreground mb-3 focus:outline-none focus:border-foreground transition-colors"
+              className="w-full bg-transparent px-4 py-4 sm:py-3 border border-border rounded-lg text-foreground placeholder:text-muted-foreground mb-3 focus:outline-none focus:border-foreground transition-colors min-h-[48px]"
               required
             />
             <button
               type="submit"
               disabled={isSubmitting}
-              className="group w-full flex items-center justify-center gap-2 bg-foreground text-background px-6 py-3 text-sm font-medium rounded-full hover:bg-foreground/90 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 disabled:opacity-50 disabled:hover:translate-y-0"
+              className="group w-full flex items-center justify-center gap-2 bg-foreground text-background px-6 py-4 sm:py-3 text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 disabled:opacity-50 disabled:hover:translate-y-0 min-h-[48px]"
             >
               {isSubmitting ? "Subscribing..." : "SUBSCRIBE"}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

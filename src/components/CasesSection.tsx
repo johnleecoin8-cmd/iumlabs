@@ -101,13 +101,13 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
       <Link
         to={`/projects/${slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-6 md:p-8 lg:p-10 transition-all duration-300 hover:bg-secondary/50 ${
-          !isRightColumn ? "border-r border-border" : ""
+        className={`group block p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
+          !isRightColumn ? "sm:border-r border-border" : ""
         } ${!isLastRow ? "border-b border-border" : ""}`}
       >
-        <div className="flex items-start gap-6">
+        <div className="flex items-start gap-4 sm:gap-6">
           {/* Image */}
-          <div className="w-20 h-20 rounded-xl overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img
               src={bgImage}
               alt={name}
@@ -117,22 +117,22 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 text-muted-foreground text-xs mb-2">
+            <div className="flex items-center gap-3 text-muted-foreground text-[11px] sm:text-xs mb-1 sm:mb-2">
               <span className="uppercase tracking-wider">{category}</span>
             </div>
-            <h3 className="text-xl font-semibold text-foreground mb-1 group-hover:text-foreground/80 transition-colors">
+            <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-1 group-hover:text-foreground/80 transition-colors">
               {name}
             </h3>
-            <p className="text-foreground font-medium text-sm mb-2">
+            <p className="text-foreground font-medium text-sm mb-1 sm:mb-2">
               {result}
             </p>
-            <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2">
+            <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 hidden sm:block">
               {description}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm mt-4">
+        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm mt-3 sm:mt-4 min-h-[44px] sm:min-h-0">
           <span className="group-hover:underline underline-offset-4">View case study</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>
@@ -186,7 +186,7 @@ const CasesSection = () => {
 
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 text-sm font-medium rounded-full hover:bg-foreground/90 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-fit mb-6"
+            className="group inline-flex items-center justify-center gap-2 bg-foreground text-background px-6 py-4 sm:py-3 text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-full sm:w-fit mb-6 min-h-[48px]"
           >
             START YOUR PROJECT
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
