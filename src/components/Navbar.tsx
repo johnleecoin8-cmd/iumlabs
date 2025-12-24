@@ -24,8 +24,8 @@ const Navbar = () => {
   } = useSidebarState();
   return <>
       {/* Mobile Top Navigation Bar */}
-      <nav className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-50 md:hidden">
-        <div className="bg-background/80 backdrop-blur-xl border border-border/50 rounded-2xl px-4 py-3 flex items-center justify-between shadow-lg">
+      <nav className="fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-[60] md:hidden will-change-transform">
+        <div className="bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl px-4 py-3 flex items-center justify-between shadow-lg">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
             <img src={logoImage} alt="Ium Labs" className="w-8 h-8 rounded-lg object-contain" />
