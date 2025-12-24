@@ -1,49 +1,61 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, Mail, MapPin, Send } from "lucide-react";
 import { brand } from "@/config/content";
-
 const brandConfig = {
   name: brand.name,
   email: brand.email,
   telegram: brand.telegramLink,
   linkedin: brand.linkedin,
-  office: brand.address,
+  office: brand.address
 };
-
 const footerLinks = {
   research: {
     title: "Research",
-    links: [
-      { name: "Proprietary Insights", href: "/research" },
-      { name: "Market Analytics", href: "/research" },
-      { name: "Reports", href: "/research" },
-    ]
+    links: [{
+      name: "Proprietary Insights",
+      href: "/research"
+    }, {
+      name: "Market Analytics",
+      href: "/research"
+    }, {
+      name: "Reports",
+      href: "/research"
+    }]
   },
   marketing: {
     title: "Marketing",
-    links: [
-      { name: "GTM Strategy", href: "/services/gtm-strategy" },
-      { name: "Influencer Marketing", href: "/services/influencer" },
-      { name: "Community Growth", href: "/services/community" },
-    ]
+    links: [{
+      name: "GTM Strategy",
+      href: "/services/gtm-strategy"
+    }, {
+      name: "Influencer Marketing",
+      href: "/services/influencer"
+    }, {
+      name: "Community Growth",
+      href: "/services/community"
+    }]
   },
   about: {
     title: "About",
-    links: [
-      { name: "Our Mission", href: "/#why-choose-us" },
-      { name: "Contact Us", href: "/contact" },
-      { name: "Privacy Policy", href: "/privacy" },
-      { name: "Terms of Service", href: "/terms" },
-    ]
+    links: [{
+      name: "Our Mission",
+      href: "/#why-choose-us"
+    }, {
+      name: "Contact Us",
+      href: "/contact"
+    }, {
+      name: "Privacy Policy",
+      href: "/privacy"
+    }, {
+      name: "Terms of Service",
+      href: "/terms"
+    }]
   }
 };
-
 const FooterLinksSection = () => {
   const currentYear = new Date().getFullYear();
-
-  return (
-    <section className="bg-background text-foreground border-t border-border w-full">
-      <div className="w-full px-6 lg:px-10 py-16">
+  return <section className="bg-background text-foreground border-t border-border w-full">
+      <div className="w-full px-6 lg:px-10 py-[20px]">
         {/* Navigation Links Grid - SEO Sitemap Footer */}
         <nav className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-b border-border" aria-label="Footer navigation">
           {/* Research Column */}
@@ -52,16 +64,11 @@ const FooterLinksSection = () => {
               {footerLinks.research.title}
             </h4>
             <ul className="space-y-3">
-              {footerLinks.research.links.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    to={link.href}
-                    className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block"
-                  >
+              {footerLinks.research.links.map(link => <li key={link.name}>
+                  <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
                     {link.name}
                   </Link>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
 
@@ -71,16 +78,11 @@ const FooterLinksSection = () => {
               {footerLinks.marketing.title}
             </h4>
             <ul className="space-y-3">
-              {footerLinks.marketing.links.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    to={link.href}
-                    className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block"
-                  >
+              {footerLinks.marketing.links.map(link => <li key={link.name}>
+                  <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
                     {link.name}
                   </Link>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
 
@@ -90,16 +92,11 @@ const FooterLinksSection = () => {
               {footerLinks.about.title}
             </h4>
             <ul className="space-y-3">
-              {footerLinks.about.links.map((link) => (
-                <li key={link.name}>
-                  <Link 
-                    to={link.href}
-                    className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block"
-                  >
+              {footerLinks.about.links.map(link => <li key={link.name}>
+                  <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
                     {link.name}
                   </Link>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
 
@@ -110,32 +107,19 @@ const FooterLinksSection = () => {
             </h4>
             <ul className="space-y-4">
               <li>
-                <a 
-                  href={`mailto:${brandConfig.email}`}
-                  className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm"
-                >
+                <a href={`mailto:${brandConfig.email}`} className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm">
                   <Mail className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
                   <span>{brandConfig.email}</span>
                 </a>
               </li>
               <li>
-                <a 
-                  href={brandConfig.telegram}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm"
-                >
+                <a href={brandConfig.telegram} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm">
                   <Send className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
                   <span>Telegram</span>
                 </a>
               </li>
               <li>
-                <a 
-                  href={brandConfig.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm"
-                >
+                <a href={brandConfig.linkedin} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm">
                   <ArrowUpRight className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   <span>LinkedIn</span>
                 </a>
@@ -154,35 +138,18 @@ const FooterLinksSection = () => {
             © {currentYear} {brandConfig.name}. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a 
-              href={brandConfig.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300 text-sm inline-block"
-            >
+            <a href={brandConfig.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300 text-sm inline-block">
               LinkedIn
             </a>
-            <a 
-              href={brandConfig.telegram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300 text-sm inline-block"
-            >
+            <a href={brandConfig.telegram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300 text-sm inline-block">
               Telegram
             </a>
-            <a 
-              href="https://twitter.com/iumlabs"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300 text-sm inline-block"
-            >
+            <a href="https://twitter.com/iumlabs" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300 text-sm inline-block">
               Twitter
             </a>
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default FooterLinksSection;
