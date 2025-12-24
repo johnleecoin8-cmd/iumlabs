@@ -5,104 +5,34 @@ import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
 import logoImage from "@/assets/logo.png";
 import { useSidebarState } from "@/hooks/useSidebarState";
-
 const brandConfig = {
   name: brand.name,
   email: brand.email,
   telegram: brand.telegramLink,
   linkedin: brand.linkedin,
-  office: brand.address,
+  office: brand.address
 };
-
-const navLinks = navigation.links.map(link => ({ to: link.href, label: link.name }));
-
+const navLinks = navigation.links.map(link => ({
+  to: link.href,
+  label: link.name
+}));
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
-  const { isCollapsed } = useSidebarState();
-
-  return (
-    <>
+  const {
+    isCollapsed
+  } = useSidebarState();
+  return <>
       {/* Main Navbar - Unified bar */}
-      <nav className={`fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-50 transition-all duration-500 ${
-        isCollapsed ? 'md:left-[88px]' : 'md:left-60'
-      }`}>
-        <div className="flex items-center bg-foreground/95 backdrop-blur-md rounded-full border border-foreground/10 shadow-lg shadow-background/20">
-          {/* Logo Section */}
-          <Link 
-            to="/" 
-            className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2 sm:py-3 transition-all duration-300 hover:opacity-80"
-          >
-            <img src={logoImage} alt="Ium Labs Logo" className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg object-contain" />
-            <span className="text-sm sm:text-base font-semibold text-background">{brandConfig.name}</span>
-          </Link>
-
-          {/* Center - Email */}
-          <div className="hidden lg:flex items-center gap-2 px-6 py-3 border-l border-background/10">
-            <span className="text-background/50 text-xs">e-mail</span>
-            <a 
-              href={`mailto:${brandConfig.email}`} 
-              className="text-background text-sm transition-colors duration-300 hover:text-background/70"
-            >
-              {brandConfig.email}
-            </a>
-          </div>
-
-          {/* Spacer */}
-          <div className="flex-1" />
-
-          {/* Right side buttons */}
-          <div className="flex items-center">
-            {/* Live Chat Button */}
-            <button
-              onClick={() => setIsLiveChatOpen(true)}
-              className="hidden md:flex items-center gap-2 px-5 py-3 border-l border-background/10 text-background text-sm font-medium transition-all duration-300 hover:bg-background/10"
-            >
-              <Send className="w-4 h-4 text-primary" />
-              <span>Start Live Chat</span>
-            </button>
-
-            {/* Book a Meeting Button */}
-            <a
-              href="https://calendly.com/iumlabs/30min"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hidden md:flex items-center gap-2 px-5 py-3 border-l border-background/10 text-background text-sm font-medium transition-all duration-300 hover:bg-background/10"
-            >
-              <Calendar className="w-4 h-4 text-primary" />
-              <span>Book a Meeting</span>
-            </a>
-
-            {/* Menu Button - Animated Hamburger */}
-            <button
-              onClick={() => setIsMenuOpen(true)}
-              className="group flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-1.5 sm:py-2 m-1 sm:m-1.5 rounded-full bg-background text-foreground text-xs sm:text-sm font-medium transition-all duration-300 hover:bg-background/90 hover:shadow-md"
-            >
-              <span className="hidden sm:inline">menu</span>
-              <div className="relative w-4 h-4 sm:w-5 sm:h-5 flex flex-col justify-center items-center">
-                <span className="absolute w-4 h-0.5 bg-current transition-all duration-300 -translate-y-1 group-hover:translate-y-0 group-hover:rotate-45" />
-                <span className="absolute w-4 h-0.5 bg-current transition-all duration-300 opacity-100 group-hover:opacity-0" />
-                <span className="absolute w-4 h-0.5 bg-current transition-all duration-300 translate-y-1 group-hover:translate-y-0 group-hover:-rotate-45" />
-              </div>
-            </button>
-          </div>
-        </div>
+      <nav className={`fixed top-2 left-2 right-2 sm:top-4 sm:left-4 sm:right-4 z-50 transition-all duration-500 ${isCollapsed ? 'md:left-[88px]' : 'md:left-60'}`}>
+        
       </nav>
 
       {/* Backdrop Overlay */}
-      <div
-        className={`fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
-          isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
-        }`}
-        onClick={() => setIsMenuOpen(false)}
-      />
+      <div className={`fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"}`} onClick={() => setIsMenuOpen(false)} />
 
       {/* Top Panel Menu - slides from top */}
-      <div
-        className={`fixed top-0 left-0 right-0 h-[85vh] sm:h-[75vh] lg:h-[60vh] z-[101] bg-gradient-to-b from-background via-background to-primary/5 transition-all duration-500 ease-out ${
-          isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
-        }`}
-      >
+      <div className={`fixed top-0 left-0 right-0 h-[85vh] sm:h-[75vh] lg:h-[60vh] z-[101] bg-gradient-to-b from-background via-background to-primary/5 transition-all duration-500 ease-out ${isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"}`}>
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
         
@@ -115,10 +45,7 @@ const Navbar = () => {
                 <span className="text-lg font-semibold text-foreground">{brandConfig.name}</span>
               </Link>
               
-              <button
-                onClick={() => setIsMenuOpen(false)}
-                className="group flex items-center gap-3 px-5 py-2.5 rounded-full bg-secondary text-foreground text-sm font-medium transition-all duration-300 hover:bg-secondary/80"
-              >
+              <button onClick={() => setIsMenuOpen(false)} className="group flex items-center gap-3 px-5 py-2.5 rounded-full bg-secondary text-foreground text-sm font-medium transition-all duration-300 hover:bg-secondary/80">
                 <span>close</span>
                 <div className="relative w-5 h-5 flex items-center justify-center">
                   <span className="absolute w-4 h-0.5 bg-current rotate-45 transition-transform duration-300 group-hover:rotate-[135deg]" />
@@ -133,98 +60,58 @@ const Navbar = () => {
             <div className="h-full grid md:grid-cols-2 gap-8 lg:gap-16 content-center">
               {/* Navigation Links */}
               <div className="flex flex-col justify-center">
-                <span 
-                  className={`text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-4 lg:mb-6 block transition-all duration-500 ${
-                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                  }`}
-                  style={{ transitionDelay: isMenuOpen ? "200ms" : "0ms" }}
-                >
+                <span className={`text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-4 lg:mb-6 block transition-all duration-500 ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`} style={{
+                transitionDelay: isMenuOpen ? "200ms" : "0ms"
+              }}>
                   Navigation
                 </span>
                 <nav className="space-y-2 lg:space-y-3">
-                  {navLinks.map((link, index) => (
-                    <div key={link.to}>
-                      <Link
-                        to={link.to}
-                        onClick={() => setIsMenuOpen(false)}
-                        className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-all duration-500 ${
-                          isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                        }`}
-                        style={{ transitionDelay: isMenuOpen ? `${300 + index * 80}ms` : "0ms" }}
-                      >
+                  {navLinks.map((link, index) => <div key={link.to}>
+                      <Link to={link.to} onClick={() => setIsMenuOpen(false)} className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-all duration-500 ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`} style={{
+                    transitionDelay: isMenuOpen ? `${300 + index * 80}ms` : "0ms"
+                  }}>
                         {link.label}
                       </Link>
-                    </div>
-                  ))}
+                    </div>)}
                 </nav>
               </div>
 
               {/* Contact Info */}
               <div className="flex flex-col justify-center space-y-4 lg:space-y-8">
-                <div
-                  className={`transition-all duration-500 ${
-                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                  }`}
-                  style={{ transitionDelay: isMenuOpen ? "500ms" : "0ms" }}
-                >
+                <div className={`transition-all duration-500 ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`} style={{
+                transitionDelay: isMenuOpen ? "500ms" : "0ms"
+              }}>
                   <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">Get in touch</span>
-                  <a 
-                    href={`mailto:${brandConfig.email}`}
-                    className="text-base lg:text-xl text-foreground hover:text-primary transition-colors"
-                  >
+                  <a href={`mailto:${brandConfig.email}`} className="text-base lg:text-xl text-foreground hover:text-primary transition-colors">
                     {brandConfig.email}
                   </a>
                 </div>
 
-                <div
-                  className={`transition-all duration-500 ${
-                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                  }`}
-                  style={{ transitionDelay: isMenuOpen ? "600ms" : "0ms" }}
-                >
+                <div className={`transition-all duration-500 ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`} style={{
+                transitionDelay: isMenuOpen ? "600ms" : "0ms"
+              }}>
                   <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">Telegram</span>
-                  <a 
-                    href={brandConfig.telegram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-base lg:text-xl text-foreground hover:text-primary transition-colors"
-                  >
+                  <a href={brandConfig.telegram} target="_blank" rel="noopener noreferrer" className="text-base lg:text-xl text-foreground hover:text-primary transition-colors">
                     @iumlabs
                   </a>
                 </div>
 
-                <div
-                  className={`transition-all duration-500 ${
-                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                  }`}
-                  style={{ transitionDelay: isMenuOpen ? "700ms" : "0ms" }}
-                >
+                <div className={`transition-all duration-500 ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`} style={{
+                transitionDelay: isMenuOpen ? "700ms" : "0ms"
+              }}>
                   <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">Office</span>
                   <p className="text-sm lg:text-lg text-muted-foreground">
                     {brandConfig.office}
                   </p>
                 </div>
 
-                <div 
-                  className={`flex gap-3 pt-2 lg:pt-4 transition-all duration-500 ${
-                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                  }`}
-                  style={{ transitionDelay: isMenuOpen ? "800ms" : "0ms" }}
-                >
-                  <a
-                    href={brandConfig.telegram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-border text-foreground text-xs lg:text-sm font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
-                  >
+                <div className={`flex gap-3 pt-2 lg:pt-4 transition-all duration-500 ${isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`} style={{
+                transitionDelay: isMenuOpen ? "800ms" : "0ms"
+              }}>
+                  <a href={brandConfig.telegram} target="_blank" rel="noopener noreferrer" className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-border text-foreground text-xs lg:text-sm font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300">
                     Telegram
                   </a>
-                  <a
-                    href={brandConfig.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-border text-foreground text-xs lg:text-sm font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
-                  >
+                  <a href={brandConfig.linkedin} target="_blank" rel="noopener noreferrer" className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-border text-foreground text-xs lg:text-sm font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300">
                     LinkedIn
                   </a>
                 </div>
@@ -236,8 +123,6 @@ const Navbar = () => {
 
       {/* Live Chat Modal */}
       <LiveChatModal isOpen={isLiveChatOpen} onClose={() => setIsLiveChatOpen(false)} />
-    </>
-  );
+    </>;
 };
-
 export default Navbar;
