@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,13 +9,18 @@ import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import useScrollReveal from "@/hooks/useScrollReveal";
 
 const budgetOptions = [
   "$15,000 - $25,000",
   "$25,000 - $50,000",
   "$50,000 +",
   "Looking to raise funds",
+];
+
+const contactDetails = [
+  { label: "office:", value: brand.address },
+  { label: "e-mail:", value: brand.email, link: `mailto:${brand.email}` },
+  { label: "telegram:", value: brand.telegram, link: brand.telegramLink },
 ];
 
 const contactInfo = [
@@ -26,7 +32,6 @@ const contactInfo = [
 
 const Contact = () => {
   usePageTitle("Contact");
-  useScrollReveal();
   
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -85,9 +90,10 @@ const Contact = () => {
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero Section */}
+      {/* Hero Section - Simple centered like homepage */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
         <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl">
+          {/* Video Background - Coral Theme */}
           <div className="absolute inset-0 overflow-hidden">
             <video
               autoPlay
@@ -106,6 +112,7 @@ const Contact = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-transparent to-rose-500/10" />
           </div>
 
+          {/* Content - Centered like homepage */}
           <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
             <motion.span 
               className="text-xs text-orange-400/70 mb-6 block tracking-widest"
@@ -146,19 +153,21 @@ const Contact = () => {
         </section>
       </main>
 
-      {/* Contact Info Section - 01 홀수 */}
-      <section className="scroll-reveal bg-[#0F0F0F]" id="contact-info">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+      {/* Contact Info Section */}
+      <section className="bg-[#0A0A0A]" id="contact-info">
+        <div className="border-t border-orange-500/20">
+          {/* Section Header - Coral Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-orange-500/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+              <span className="text-[10px] md:text-xs text-orange-500 font-mono tracking-widest">01</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Contact Info</h2>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+            <span className="text-xs text-orange-400/60 tracking-wider hidden sm:block px-3 py-1 border border-orange-500/30 rounded-full">
               Get in Touch
             </span>
           </div>
           
+          {/* Contact Info Content */}
           <div className="container mx-auto max-w-7xl px-4 md:px-8 py-12">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {contactInfo.map((info, index) => (
@@ -167,7 +176,7 @@ const Contact = () => {
                   href={info.link}
                   target={info.link.startsWith('http') ? '_blank' : undefined}
                   rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="group flex items-center justify-between p-6 bg-white/[0.02] border border-white/10 rounded-2xl hover:border-white/30 hover:bg-white/[0.04] transition-all duration-300"
+                  className="group flex items-center justify-between p-6 bg-white/[0.02] border border-white/10 rounded-2xl hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -191,21 +200,24 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Contact Form Section - 02 짝수 */}
-      <section className="scroll-reveal bg-[#121212]" id="contact-form">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+      {/* Contact Form Section */}
+      <section className="bg-[#0A0A0A]" id="contact-form">
+        <div className="border-t border-orange-500/20">
+          {/* Section Header - Coral Theme */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-orange-500/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+              <span className="text-[10px] md:text-xs text-orange-500 font-mono tracking-widest">02</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Send a Message</h2>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+            <span className="text-xs text-orange-400/60 tracking-wider hidden sm:block px-3 py-1 border border-orange-500/30 rounded-full">
               We'll respond within 24h
             </span>
           </div>
           
+          {/* Form Content */}
           <div className="container mx-auto max-w-4xl px-4 md:px-8 py-16">
             <form onSubmit={handleSubmit} className="space-y-8">
+              {/* Name & Email Row */}
               <div className="grid sm:grid-cols-2 gap-8">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -241,6 +253,7 @@ const Contact = () => {
                 </motion.div>
               </div>
 
+              {/* Company Name & Website Row */}
               <div className="grid sm:grid-cols-2 gap-8">
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
@@ -274,6 +287,7 @@ const Contact = () => {
                 </motion.div>
               </div>
 
+              {/* Estimated Budget */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -301,6 +315,7 @@ const Contact = () => {
                 </div>
               </motion.div>
 
+              {/* Project Description */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -317,6 +332,7 @@ const Contact = () => {
                 />
               </motion.div>
 
+              {/* Submit Button */}
               <motion.div 
                 className="pt-4"
                 initial={{ opacity: 0, y: 20 }}
@@ -338,9 +354,7 @@ const Contact = () => {
         </div>
       </section>
 
-      <div className="border-t border-white/10">
-        <Footer />
-      </div>
+      <Footer />
     </div>
   );
 };
