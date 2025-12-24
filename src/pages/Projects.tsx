@@ -1,14 +1,18 @@
-import { useState, useEffect } from "react";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
+import FooterLinksSection from "@/components/FooterLinksSection";
+import CTABannerSection from "@/components/CTABannerSection";
+import FloatingContactButton from "@/components/FloatingContactButton";
+import { ArrowRight, Calendar, ChevronDown, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { useCountUp } from "@/hooks/useCountUp";
 import { supabase } from "@/integrations/supabase/client";
+import { brand } from "@/config/content";
 
 // Import logos as fallbacks
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -65,6 +69,54 @@ interface Project {
   background_url: string | null;
 }
 
+const stats = [
+  { value: 18, label: "Projects Launched", suffix: "+" },
+  { value: 340, label: "Avg. Volume Increase", suffix: "%" },
+  { value: 6, label: "Token Sales", prefix: "$", suffix: "M+" },
+  { value: 50, label: "New Users Acquired", suffix: "K+" },
+];
+
+// Stat Item Component
+const StatItem = ({ 
+  value, 
+  label, 
+  prefix = "", 
+  suffix = "",
+  isVisible,
+  delay 
+}: { 
+  value: number; 
+  label: string; 
+  prefix?: string; 
+  suffix?: string;
+  isVisible: boolean;
+  delay: number;
+}) => {
+  const count = useCountUp({
+    end: value,
+    isVisible,
+    delay,
+    duration: 2000,
+  });
+  
+  return (
+    <motion.div 
+      className="text-center"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
+    >
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
+        {prefix}{count}{suffix}
+      </div>
+      <div className="text-xs sm:text-sm text-white/50 font-light">
+        {label}
+      </div>
+    </motion.div>
+  );
+};
+
+// Project Card Component
 interface ProjectCardProps {
   project: { name: string; slug: string; description: string; result: string; category: string; logo?: string; bgImage: string };
   index: number;
@@ -72,12 +124,12 @@ interface ProjectCardProps {
 }
 
 const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
-  const isLastRow = index >= Math.floor(totalCount / 2) * 2;
+  const isLastRow = index >= Math.floor((totalCount - 1) / 2) * 2;
   const isRightColumn = index % 2 === 1;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
@@ -85,51 +137,89 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
       <Link
         to={`/projects/${project.slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-8 md:p-10 transition-all duration-300 hover:bg-white/[0.02] ${
-          !isRightColumn ? "border-r border-white/10" : ""
-        } ${!isLastRow ? "border-b border-white/10" : ""}`}
+        className={`group block p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
+          !isRightColumn ? "sm:border-r border-border" : ""
+        } ${!isLastRow ? "border-b border-border" : ""}`}
       >
-        <div className="flex items-start gap-6">
+        <div className="flex items-start gap-4 sm:gap-6">
           {/* Image */}
-          <motion.div 
-            className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0 border border-white/10"
-            whileHover={{ scale: 1.05 }}
-            transition={{ duration: 0.3 }}
-          >
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img 
               src={project.bgImage} 
               alt={project.name}
               className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
             />
-          </motion.div>
+          </div>
           
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 text-white/40 text-xs mb-2">
+            <div className="flex items-center gap-3 text-muted-foreground text-[11px] sm:text-xs mb-1 sm:mb-2">
               <span className="uppercase tracking-wider">{project.category}</span>
             </div>
-            <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-primary transition-colors">
+            <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-1 group-hover:text-foreground/80 transition-colors">
               {project.name}
             </h3>
-            <p className="text-white/50 text-sm leading-relaxed mb-3 line-clamp-2 group-hover:text-white/60 transition-colors">
-              {project.description}
-            </p>
-            <p className="text-primary font-medium text-sm mb-4">
+            <p className="text-foreground font-medium text-sm mb-1 sm:mb-2">
               {project.result}
             </p>
-            <div className="flex items-center gap-2 text-white/40 group-hover:text-primary transition-colors text-sm">
-              View case study
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
-            </div>
+            <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 hidden sm:block">
+              {project.description}
+            </p>
           </div>
+        </div>
+        
+        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm mt-3 sm:mt-4 min-h-[44px] sm:min-h-0">
+          <span className="group-hover:underline underline-offset-4">View case study</span>
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>
       </Link>
     </motion.div>
   );
 };
 
+// Category Filter Component
+const CategoryFilter = ({ 
+  categories, 
+  activeCategory, 
+  onCategoryChange 
+}: { 
+  categories: string[]; 
+  activeCategory: string; 
+  onCategoryChange: (category: string) => void;
+}) => {
+  return (
+    <div className="flex flex-wrap gap-2 sm:gap-3">
+      <button
+        onClick={() => onCategoryChange("All")}
+        className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-full border transition-all duration-300 ${
+          activeCategory === "All"
+            ? "bg-foreground text-background border-foreground"
+            : "bg-transparent text-muted-foreground border-border hover:border-foreground/50 hover:text-foreground"
+        }`}
+      >
+        All
+      </button>
+      {categories.map((category) => (
+        <button
+          key={category}
+          onClick={() => onCategoryChange(category)}
+          className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-full border transition-all duration-300 ${
+            activeCategory === category
+              ? "bg-foreground text-background border-foreground"
+              : "bg-transparent text-muted-foreground border-border hover:border-foreground/50 hover:text-foreground"
+          }`}
+        >
+          {category}
+        </button>
+      ))}
+    </div>
+  );
+};
+
 const Projects = () => {
   usePageTitle("Projects");
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [isStatsVisible, setIsStatsVisible] = useState(false);
 
   // Fetch projects from Supabase, fallback to hardcoded data
   const { data: dbProjects } = useQuery({
@@ -156,149 +246,234 @@ const Projects = () => {
         bgImage: p.background_url || fallbackCases.find(f => f.slug === p.slug)?.bgImage || '',
       }))
     : fallbackCases;
+
+  // Get unique categories
+  const categories = useMemo(() => {
+    const cats = [...new Set(cases.map(c => c.category))].filter(Boolean);
+    return cats.sort();
+  }, [cases]);
+
+  // Filter projects by category
+  const filteredCases = useMemo(() => {
+    if (activeCategory === "All") return cases;
+    return cases.filter(c => c.category === activeCategory);
+  }, [cases, activeCategory]);
+
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-background">
       <Navbar />
       
-      {/* Hero Section - Gold/Amber Theme */}
-      <main className="bg-[#0A0A0A]">
-        <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden bg-[#0A0A0A]">
-          <div className="absolute inset-0 overflow-hidden">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: "brightness(0.35)" }}
-              onLoadedMetadata={(e) => {
-                e.currentTarget.currentTime = 0;
-              }}
-            >
-              <source src="/videos/projects-background.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-amber-500/20 via-transparent to-[#0A0A0A]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-transparent to-amber-500/10" />
-          </div>
+      {/* Hero Section - Homepage Style */}
+      <main className="p-0.5 sm:p-1 md:p-2 bg-background" id="hero">
+        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
+          <div className="relative min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
+            {/* Background Layer - Video */}
+            <div className="absolute inset-0 overflow-hidden">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ filter: "brightness(0.35)" }}
+                onLoadedMetadata={(e) => {
+                  e.currentTarget.currentTime = 0;
+                  setTimeout(() => setIsStatsVisible(true), 800);
+                }}
+              >
+                <source src="/videos/projects-background.mp4" type="video/mp4" />
+              </video>
+              
+              {/* Dark overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+            </div>
 
-          {/* Content - Centered like homepage */}
-          <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
-            <motion.span 
-              className="text-xs text-amber-400/70 mb-6 block tracking-widest"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              [ Projects ]
-            </motion.span>
-            <motion.h1 
-              className="text-[14vw] md:text-[120px] lg:text-[140px] font-light text-white leading-[0.85] tracking-tight"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              Our W<span className="serif-italic text-amber-400">o</span>rk
-            </motion.h1>
-            <motion.p 
-              className="text-lg text-white/60 max-w-2xl mx-auto mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              Case studies walking through the challenge, our approach, and the outcomes across GTM, KOLs, PR, and social media.
-            </motion.p>
+            {/* Main Content - Centered */}
+            <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
+              <div className="max-w-7xl mx-auto text-center">
+                {/* Main Headline */}
+                <motion.h1 
+                  className="font-sans text-[10vw] sm:text-[8vw] md:text-[6vw] lg:text-[5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12"
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <span className="text-white">Our </span>
+                  <span className="text-white/90">Case </span>
+                  <span className="text-white">Studies</span>
+                </motion.h1>
+
+                {/* Subtext */}
+                <motion.p 
+                  className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  Real results from <span className="text-white font-medium">18+ global Web3 projects</span> successfully entering and scaling in the Korean market.
+                </motion.p>
+
+                {/* CTA Button */}
+                <motion.a
+                  href={brand.calendlyUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.6 }}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+                  <Calendar className="w-4 h-4" />
+                  <span>Start Your Project</span>
+                </motion.a>
+              </div>
+            </div>
+
+            {/* Stats Section */}
+            <div className="relative z-10 py-4 sm:py-6">
+              <div className="container mx-auto px-4 sm:px-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+                  {stats.map((stat, index) => (
+                    <StatItem 
+                      key={index}
+                      value={stat.value}
+                      label={stat.label}
+                      prefix={stat.prefix}
+                      suffix={stat.suffix}
+                      isVisible={isStatsVisible}
+                      delay={index * 100}
+                    />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Scroll Indicator */}
             <motion.div 
-              className="flex items-center justify-center gap-4 text-amber-400/60 text-sm mt-6"
+              className="absolute bottom-8 sm:bottom-12 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 1 }}
             >
-              <span>{cases.length} Projects</span>
-              <span>•</span>
-              <span>8 Categories</span>
+              <span className="text-white/40 text-xs sm:text-sm font-medium">scroll</span>
+              <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
             </motion.div>
           </div>
-        </section>
+        </div>
       </main>
-
-      {/* Projects Grid Section with Header */}
-      <section className="bg-[#0A0A0A]" id="projects-grid">
-        <div className="border-t border-amber-500/20">
-          {/* Section Header - Gold Theme */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-amber-500/20">
+      
+      {/* Filter Section - 01 */}
+      <section className="scroll-reveal bg-[#0F0F0F]" id="filter">
+        <div className="border-t border-border">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-amber-500 font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Case Studies</h2>
+              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-foreground">Filter</h2>
             </div>
-            <span className="text-xs text-amber-400/60 tracking-wider hidden sm:block px-3 py-1 border border-amber-500/30 rounded-full">
-              {cases.length} Projects
+            <span className="text-xs text-muted-foreground tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-border rounded-full">
+              <Filter className="w-3 h-3" />
+              {categories.length} Categories
             </span>
           </div>
           
-          {/* Grid Content */}
+          <div className="p-6 md:px-10 md:py-8">
+            <CategoryFilter 
+              categories={categories} 
+              activeCategory={activeCategory} 
+              onCategoryChange={setActiveCategory} 
+            />
+          </div>
+        </div>
+      </section>
+      
+      {/* Cases Section - 02 */}
+      <section className="scroll-reveal bg-[#121212]" id="cases">
+        <div className="border-t border-border">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">02</span>
+              <h2 className="text-lg md:text-xl font-medium text-foreground">Case Studies</h2>
+            </div>
+            <span className="text-xs text-muted-foreground tracking-wider hidden sm:block px-3 py-1 border border-border rounded-full">
+              {filteredCases.length} Projects
+            </span>
+          </div>
+          
           <div className="flex flex-col lg:flex-row">
             {/* Left: Projects Grid */}
-            <div className="w-full lg:w-2/3 lg:border-r lg:border-white/10">
+            <div className="w-full lg:w-2/3 lg:border-r border-border">
               <div className="grid grid-cols-1 md:grid-cols-2">
-                {cases.map((project, index) => (
-                  <ProjectCard key={project.slug} project={project} index={index} totalCount={cases.length} />
+                {filteredCases.map((project, index) => (
+                  <ProjectCard 
+                    key={project.slug} 
+                    project={project} 
+                    index={index} 
+                    totalCount={filteredCases.length} 
+                  />
                 ))}
               </div>
             </div>
 
-            {/* Right: Sticky CTA Panel */}
+            {/* Right: Sticky Info Panel */}
             <motion.div
-              className="w-full lg:w-1/3 p-8 md:p-12 lg:sticky lg:top-0 lg:h-screen flex flex-col justify-center"
+              className="w-full lg:w-1/3 p-6 md:p-8 lg:p-10 flex flex-col justify-center"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl font-bold text-white mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 Our Track Record
               </h2>
-              <p className="text-white/50 leading-relaxed mb-8">
-                We've helped 18+ global Web3 projects successfully enter and scale in the Korean market. From infrastructure to DeFi, exchange to AI.
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
               </p>
+
+              <div className="space-y-6 mb-8">
+                <div className="flex items-center gap-4 pb-4 border-b border-border">
+                  <span className="text-3xl font-bold text-foreground">340%</span>
+                  <span className="text-muted-foreground text-sm">Average volume increase</span>
+                </div>
+                <div className="flex items-center gap-4 pb-4 border-b border-border">
+                  <span className="text-3xl font-bold text-foreground">50K+</span>
+                  <span className="text-muted-foreground text-sm">New users acquired</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="text-3xl font-bold text-foreground">18+</span>
+                  <span className="text-muted-foreground text-sm">Projects launched</span>
+                </div>
+              </div>
+
               <Link
                 to="/contact"
-                className="group inline-flex items-center gap-2 bg-white text-[#0A0A0A] px-6 py-3 text-sm font-medium hover:bg-white/90 transition-all duration-300 w-fit mb-12 hover:gap-3"
+                className="group inline-flex items-center justify-center gap-2 bg-foreground text-background px-6 py-4 sm:py-3 text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-full sm:w-fit mb-6 min-h-[48px]"
               >
                 START YOUR PROJECT
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-
-              <div className="pt-8 border-t border-white/10">
-                <div className="grid grid-cols-2 gap-6">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    <p className="text-3xl font-bold text-white">18+</p>
-                    <p className="text-white/50 text-sm">Projects Launched</p>
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    <p className="text-3xl font-bold text-white">$6M+</p>
-                    <p className="text-white/50 text-sm">Token Sales</p>
-                  </motion.div>
-                </div>
-              </div>
             </motion.div>
           </div>
         </div>
       </section>
-
-      {/* Contact Section */}
-      <ContactFormSection sectionNumber="02" />
-
+      
+      {/* Contact Section - 03 */}
+      <section className="scroll-reveal bg-[#0F0F0F]" id="contact">
+        <ContactFormSection sectionNumber="03" />
+      </section>
+      
+      {/* CTA Banner */}
+      <CTABannerSection />
+      
+      {/* Footer Links */}
+      <FooterLinksSection />
+      
+      {/* Footer */}
       <Footer />
+      
+      <FloatingContactButton />
     </div>
   );
 };
