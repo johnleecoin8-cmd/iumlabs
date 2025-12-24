@@ -236,11 +236,11 @@ const Sidebar = () => {
             >
               <div className="relative">
                 {/* Logo glow effect */}
-                <div className="absolute inset-0 bg-primary/30 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-500" />
+                <div className="absolute inset-0 bg-primary/30 blur-xl rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
                 <img 
                   src={logoImage} 
                   alt="Ium Labs Logo" 
-                  className="relative w-10 h-10 rounded-xl object-contain transition-all duration-300 group-hover:scale-110 group-hover:rotate-3" 
+                  className="relative w-10 h-10 rounded-lg object-cover bg-white p-1 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3" 
                 />
               </div>
               {!isCollapsed && (
