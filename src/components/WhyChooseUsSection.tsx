@@ -62,7 +62,7 @@ const WhyChooseUsSection = () => {
 
             <Link
               to="/contact"
-              className="group inline-flex items-center gap-2 bg-foreground text-background px-6 py-3 text-sm font-medium rounded-full hover:bg-foreground/90 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-fit"
+              className="group inline-flex items-center justify-center gap-2 bg-foreground text-background px-6 py-4 sm:py-3 text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-full sm:w-fit min-h-[48px]"
             >
               GET IN TOUCH
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

@@ -27,7 +27,7 @@ const FloatingContactButton = () => {
   ];
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-end gap-3">
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -46,7 +46,7 @@ const FloatingContactButton = () => {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className={`flex items-center gap-3 px-4 py-3 rounded-full ${option.color} text-white shadow-lg hover:scale-105 transition-transform`}
+                className={`flex items-center gap-3 px-5 py-4 sm:px-4 sm:py-3 rounded-full ${option.color} text-white shadow-lg hover:scale-105 active:scale-95 transition-transform min-h-[48px]`}
               >
                 <option.icon className="h-5 w-5" />
                 <span className="text-sm font-medium whitespace-nowrap">{option.label}</span>
@@ -60,9 +60,9 @@ const FloatingContactButton = () => {
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
-        className={`h-14 w-14 rounded-full shadow-lg flex items-center justify-center transition-colors ${
+        className={`h-14 w-14 sm:h-14 sm:w-14 rounded-full shadow-lg flex items-center justify-center transition-colors ${
           isOpen ? "bg-muted-foreground" : "bg-primary"
-        }`}
+        } min-w-[56px] min-h-[56px]`}
       >
         <AnimatePresence mode="wait">
           {isOpen ? (

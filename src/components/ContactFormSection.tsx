@@ -253,16 +253,16 @@ const ContactFormSection = ({
               {/* Budget */}
               <div>
                 <label className="block text-xs uppercase tracking-wider text-white/40 mb-4">Budget *</label>
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2 sm:gap-3">
                   {budgetOptions.map((option) => (
                     <button
                       key={option}
                       type="button"
                       onClick={() => setFormData({ ...formData, budget: option })}
-                      className={`px-5 py-3 text-sm border transition-all ${
+                      className={`px-4 sm:px-5 py-3 sm:py-3 text-sm border transition-all min-h-[48px] ${
                         formData.budget === option
                           ? 'bg-white/10 border-white text-white'
-                          : 'bg-transparent border-white/20 text-white/60 hover:border-white/40 hover:text-white'
+                          : 'bg-transparent border-white/20 text-white/60 hover:border-white/40 hover:text-white active:bg-white/10'
                       }`}
                     >
                       {option}
@@ -288,7 +288,7 @@ const ContactFormSection = ({
                 <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group inline-flex items-center gap-3 bg-white/10 text-white px-8 py-4 text-sm font-medium tracking-wider hover:bg-white/20 transition-all disabled:opacity-50"
+                  className="group inline-flex items-center justify-center gap-3 bg-white/10 text-white px-8 py-4 text-sm font-medium tracking-wider hover:bg-white/20 active:bg-white/30 transition-all disabled:opacity-50 w-full sm:w-auto min-h-[52px]"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
