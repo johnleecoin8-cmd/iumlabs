@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, Briefcase, FolderOpen, FileText, Mail, Send, Linkedin, ChevronLeft, ChevronRight } from "lucide-react";
+import { Home, Briefcase, FolderOpen, FileText, Mail, Send, Linkedin, ChevronLeft, ChevronDown, Target, Users, Share2, Mic2, Megaphone, Newspaper } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import logoImage from "@/assets/logo.png";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSidebarState } from "@/hooks/useSidebarState";
+import { cn } from "@/lib/utils";
 
 interface NavItemProps {
   icon: React.ElementType;
@@ -14,6 +15,16 @@ interface NavItemProps {
   isCollapsed: boolean;
   index: number;
 }
+
+// Services submenu data
+const servicesSubMenu = [
+  { name: "GTM Strategy", href: "/services/gtm", icon: Target },
+  { name: "Community", href: "/services/community", icon: Users },
+  { name: "Social Media", href: "/services/social-media", icon: Share2 },
+  { name: "Influencer", href: "/services/influencer", icon: Mic2 },
+  { name: "Yap Service", href: "/services/yap", icon: Megaphone },
+  { name: "PR/Media", href: "/services/pr", icon: Newspaper },
+];
 
 const NavItem = ({ icon: Icon, to, label, isActive, isCollapsed, index }: NavItemProps) => {
   const content = (
@@ -98,6 +109,195 @@ const NavItem = ({ icon: Icon, to, label, isActive, isCollapsed, index }: NavIte
   return content;
 };
 
+// Submenu item component
+interface SubMenuItemProps {
+  icon: React.ElementType;
+  to: string;
+  label: string;
+  isActive: boolean;
+}
+
+const SubMenuItem = ({ icon: Icon, to, label, isActive }: SubMenuItemProps) => (
+  <Link
+    to={to}
+    className={cn(
+      "group relative flex items-center gap-2.5 px-3 py-2 rounded-lg transition-all duration-200",
+      isActive 
+        ? "text-primary bg-primary/10" 
+        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+    )}
+  >
+    <Icon className={cn(
+      "w-4 h-4 transition-transform duration-200",
+      isActive ? "text-primary" : "group-hover:scale-105"
+    )} />
+    <span className="text-[13px] font-medium">{label}</span>
+    {isActive && (
+      <span className="absolute right-2 w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_hsl(var(--primary))]" />
+    )}
+  </Link>
+);
+
+// Services NavItem with Submenu
+interface ServicesNavItemProps {
+  isActive: boolean;
+  isCollapsed: boolean;
+  isOpen: boolean;
+  onToggle: () => void;
+  currentPath: string;
+}
+
+const ServicesNavItem = ({ isActive, isCollapsed, isOpen, onToggle, currentPath }: ServicesNavItemProps) => {
+  const [showPopover, setShowPopover] = useState(false);
+  
+  const hasActiveSubItem = servicesSubMenu.some(item => currentPath === item.href);
+  const isServicesActive = isActive || hasActiveSubItem;
+
+  // Collapsed view with popover
+  if (isCollapsed) {
+    return (
+      <div 
+        className="relative"
+        onMouseEnter={() => setShowPopover(true)}
+        onMouseLeave={() => setShowPopover(false)}
+      >
+        <Tooltip delayDuration={0}>
+          <TooltipTrigger asChild>
+            <button
+              className={cn(
+                "group relative flex items-center justify-center w-11 h-11 rounded-xl overflow-hidden transition-all duration-300 ease-out",
+                isServicesActive 
+                  ? 'text-foreground' 
+                  : 'text-muted-foreground hover:text-foreground'
+              )}
+            >
+              {isServicesActive && (
+                <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent rounded-xl" />
+              )}
+              <div className={cn(
+                "absolute inset-0 rounded-xl transition-all duration-300",
+                !isServicesActive && 'bg-secondary/0 group-hover:bg-secondary/50'
+              )} />
+              {isServicesActive && (
+                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-primary rounded-r-full shadow-[0_0_12px_hsl(var(--primary))]" />
+              )}
+              <Briefcase className={cn(
+                "relative z-10 w-5 h-5 transition-transform duration-300",
+                isServicesActive ? "text-primary scale-110" : "group-hover:scale-105"
+              )} />
+              {isServicesActive && (
+                <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full shadow-[0_0_8px_hsl(var(--primary))]" />
+              )}
+            </button>
+          </TooltipTrigger>
+          {!showPopover && (
+            <TooltipContent 
+              side="right" 
+              sideOffset={12}
+              className="bg-foreground text-background text-xs font-medium px-3 py-1.5 rounded-lg shadow-xl"
+            >
+              Services
+            </TooltipContent>
+          )}
+        </Tooltip>
+
+        {/* Popover submenu for collapsed state */}
+        <div className={cn(
+          "absolute left-full top-0 ml-3 w-48 py-2 px-2 rounded-xl",
+          "bg-background/95 backdrop-blur-xl border border-border/50 shadow-2xl",
+          "transition-all duration-200 origin-left",
+          showPopover 
+            ? "opacity-100 scale-100 translate-x-0" 
+            : "opacity-0 scale-95 -translate-x-2 pointer-events-none"
+        )}>
+          <div className="mb-2 px-2">
+            <span className="text-[10px] text-muted-foreground/60 font-medium tracking-[0.15em] uppercase">
+              Services
+            </span>
+          </div>
+          <div className="space-y-0.5">
+            {servicesSubMenu.map((item) => (
+              <SubMenuItem
+                key={item.href}
+                icon={item.icon}
+                to={item.href}
+                label={item.name}
+                isActive={currentPath === item.href}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Expanded view with dropdown
+  return (
+    <div className="w-full">
+      <button
+        onClick={onToggle}
+        className={cn(
+          "group relative flex items-center w-full px-4 py-3 gap-3 rounded-xl overflow-hidden transition-all duration-300 ease-out",
+          isServicesActive 
+            ? 'text-foreground' 
+            : 'text-muted-foreground hover:text-foreground'
+        )}
+      >
+        {isServicesActive && (
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-primary/10 to-transparent rounded-xl" />
+        )}
+        <div className={cn(
+          "absolute inset-0 rounded-xl transition-all duration-300",
+          !isServicesActive && 'bg-secondary/0 group-hover:bg-secondary/50'
+        )} />
+        {isServicesActive && (
+          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-primary rounded-r-full shadow-[0_0_12px_hsl(var(--primary))]" />
+        )}
+        
+        <div className={cn(
+          "relative z-10 flex items-center justify-center w-5 h-5 transition-all duration-300",
+          isServicesActive ? 'text-primary' : 'text-muted-foreground group-hover:text-foreground'
+        )}>
+          <Briefcase className={cn(
+            "w-[18px] h-[18px] transition-transform duration-300",
+            isServicesActive ? 'scale-110' : 'group-hover:scale-105'
+          )} />
+        </div>
+        
+        <span className={cn(
+          "relative z-10 flex-1 text-left text-sm font-medium tracking-wide transition-all duration-300",
+          isServicesActive && 'text-foreground'
+        )}>
+          Services
+        </span>
+        
+        <ChevronDown className={cn(
+          "relative z-10 w-4 h-4 text-muted-foreground transition-transform duration-300",
+          isOpen && "rotate-180"
+        )} />
+      </button>
+
+      {/* Dropdown submenu */}
+      <div className={cn(
+        "overflow-hidden transition-all duration-300 ease-out",
+        isOpen ? "max-h-96 opacity-100 mt-1" : "max-h-0 opacity-0"
+      )}>
+        <div className="ml-4 pl-3 border-l border-border/30 space-y-0.5 py-1">
+          {servicesSubMenu.map((item) => (
+            <SubMenuItem
+              key={item.href}
+              icon={item.icon}
+              to={item.href}
+              label={item.name}
+              isActive={currentPath === item.href}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Map navigation labels to icons
 const getIconForLabel = (label: string) => {
   const iconMap: Record<string, React.ElementType> = {
@@ -131,6 +331,17 @@ const Sidebar = () => {
   const currentPath = location.pathname;
   const { isCollapsed, toggleSidebar } = useSidebarState();
   const [activeSection, setActiveSection] = useState('hero');
+  const [servicesOpen, setServicesOpen] = useState(() => {
+    // Auto-open if on a services subpage
+    return currentPath.startsWith('/services/');
+  });
+
+  // Auto-open services menu when navigating to a service page
+  useEffect(() => {
+    if (currentPath.startsWith('/services/')) {
+      setServicesOpen(true);
+    }
+  }, [currentPath]);
 
   // Scroll-based section detection (only on homepage)
   useEffect(() => {
@@ -168,6 +379,10 @@ const Sidebar = () => {
     if (currentPath === '/') {
       const activeLinkName = sectionToNavMap[activeSection] || 'Home';
       return linkName === activeLinkName;
+    }
+    // For Services, only highlight main /services page, not subpages
+    if (linkName === 'Services') {
+      return currentPath === '/services';
     }
     return currentPath === linkHref || 
       (linkHref !== '/' && currentPath.startsWith(linkHref));
@@ -238,6 +453,20 @@ const Sidebar = () => {
             {navigation.links.map((link, index) => {
               const Icon = getIconForLabel(link.name);
               const isActive = getIsActive(link.name, link.href);
+              
+              // Render Services with submenu
+              if (link.name === 'Services') {
+                return (
+                  <ServicesNavItem
+                    key={link.href}
+                    isActive={isActive}
+                    isCollapsed={isCollapsed}
+                    isOpen={servicesOpen}
+                    onToggle={() => setServicesOpen(!servicesOpen)}
+                    currentPath={currentPath}
+                  />
+                );
+              }
               
               return (
                 <NavItem
