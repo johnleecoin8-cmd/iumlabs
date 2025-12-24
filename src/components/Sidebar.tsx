@@ -6,7 +6,7 @@ import logoImage from "@/assets/logo.png";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { cn } from "@/lib/utils";
-import MagneticNavItem from "@/components/sidebar/MagneticNavItem";
+import SimpleNavItem from "@/components/sidebar/SimpleNavItem";
 import FloatingServicesMenu from "@/components/sidebar/FloatingServicesMenu";
 
 // Map navigation labels to icons
@@ -214,7 +214,7 @@ const Sidebar = () => {
         className={cn(
           "fixed left-0 top-0 h-screen z-50 hidden md:flex flex-col p-3",
           "transition-all duration-500 ease-out",
-          isCollapsed ? "w-[88px]" : "w-60"
+          isCollapsed ? "w-[89px]" : "w-60"
         )}
       >
         {/* Floating Island Container */}
@@ -305,14 +305,13 @@ const Sidebar = () => {
                 }
                 
                 return (
-                  <MagneticNavItem
+                  <SimpleNavItem
                     key={link.href}
                     icon={Icon}
                     to={link.href}
                     label={link.name}
                     isActive={isActive}
                     isCollapsed={isCollapsed}
-                    index={index}
                   />
                 );
               })}
@@ -397,7 +396,7 @@ const Sidebar = () => {
       {/* Dynamic margin spacer for content */}
       <div className={cn(
         "hidden md:block flex-shrink-0 transition-all duration-500",
-        isCollapsed ? "w-[88px]" : "w-60"
+        isCollapsed ? "w-[89px]" : "w-60"
       )} />
     </>
   );
