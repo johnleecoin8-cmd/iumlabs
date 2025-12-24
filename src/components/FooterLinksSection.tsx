@@ -42,8 +42,8 @@ const FooterLinksSection = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <section className="bg-background text-foreground border-t border-border">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16">
+    <section className="bg-background text-foreground border-t border-border w-full">
+      <div className="w-full px-6 lg:px-10 py-16">
         {/* Navigation Links Grid - SEO Sitemap Footer */}
         <nav className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-b border-border" aria-label="Footer navigation">
           {/* Research Column */}
