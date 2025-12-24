@@ -6,7 +6,7 @@ const Footer = () => {
       {/* Giant Brand Name - Static */}
       <div className="w-full px-4 py-4 sm:py-6 overflow-hidden">
         <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[3rem] lg:text-[4rem] xl:text-[5rem] font-light leading-none tracking-[0.08em] sm:tracking-[0.15em] text-center whitespace-nowrap">
-          <span className="text-muted-foreground/40">
+          <span className="text-foreground/30">
             {brand.name}
           </span>
         </h2>
