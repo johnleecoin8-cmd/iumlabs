@@ -4,11 +4,9 @@ const Footer = () => {
   return (
     <footer className="bg-background text-foreground pb-[env(safe-area-inset-bottom)]">
       {/* Giant Brand Name - Static */}
-      <div className="w-full px-4 py-6 sm:py-8 overflow-hidden">
-        <h2 className="text-[2.5rem] sm:text-[4rem] md:text-[6rem] lg:text-[10rem] xl:text-[12rem] font-light leading-none tracking-[0.08em] sm:tracking-[0.15em] text-center whitespace-nowrap">
-          <span className="text-transparent" style={{
-            WebkitTextStroke: '1px hsl(var(--border))'
-          }}>
+      <div className="w-full px-4 py-4 sm:py-6 overflow-hidden">
+        <h2 className="text-[1.5rem] sm:text-[2rem] md:text-[3rem] lg:text-[4rem] xl:text-[5rem] font-light leading-none tracking-[0.08em] sm:tracking-[0.15em] text-center whitespace-nowrap">
+          <span className="text-muted-foreground/40">
             {brand.name}
           </span>
         </h2>
