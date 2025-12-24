@@ -161,8 +161,8 @@ const Projects = () => {
       <Navbar />
       
       {/* Hero Section - Gold/Amber Theme */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
-        <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl bg-[#0A0A0A]">
+      <main className="bg-[#0A0A0A]">
+        <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden bg-[#0A0A0A]">
           <div className="absolute inset-0 overflow-hidden">
             <video
               autoPlay
