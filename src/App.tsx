@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useScrollReveal from "@/hooks/useScrollReveal";
+import Sidebar from "@/components/Sidebar";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
@@ -130,7 +131,10 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <ScrollToTop />
-        <AppRoutes />
+        <Sidebar />
+        <div className="md:ml-20">
+          <AppRoutes />
+        </div>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
