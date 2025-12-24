@@ -135,6 +135,33 @@ export default {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.7" },
         },
+        // Floating Island animations
+        "floating-subtle": {
+          "0%, 100%": { transform: "translateY(0) rotate(0deg)" },
+          "33%": { transform: "translateY(-4px) rotate(0.2deg)" },
+          "66%": { transform: "translateY(3px) rotate(-0.15deg)" },
+        },
+        "neon-pulse": {
+          "0%, 100%": { 
+            boxShadow: "0 0 20px hsl(var(--primary) / 0.15), 0 0 40px hsl(var(--primary) / 0.1), inset 0 0 20px hsl(var(--primary) / 0.05)" 
+          },
+          "50%": { 
+            boxShadow: "0 0 30px hsl(var(--primary) / 0.25), 0 0 60px hsl(var(--primary) / 0.15), inset 0 0 30px hsl(var(--primary) / 0.08)" 
+          },
+        },
+        "glow-line": {
+          "0%": { transform: "translateY(-100%)", opacity: "0" },
+          "50%": { opacity: "1" },
+          "100%": { transform: "translateY(100%)", opacity: "0" },
+        },
+        "particle-float": {
+          "0%": { transform: "translateY(0) scale(1)", opacity: "1" },
+          "100%": { transform: "translateY(-20px) scale(0)", opacity: "0" },
+        },
+        "ripple-out": {
+          "0%": { transform: "scale(0.5)", opacity: "0.8" },
+          "100%": { transform: "scale(2.5)", opacity: "0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -151,6 +178,12 @@ export default {
         "light-sweep": "light-sweep 4s ease-in-out infinite",
         "aurora": "aurora 6s ease-in-out infinite",
         "pulse-soft": "pulse-soft 2s ease-in-out infinite",
+        // Floating Island animations
+        "floating-subtle": "floating-subtle 5s ease-in-out infinite",
+        "neon-pulse": "neon-pulse 3s ease-in-out infinite",
+        "glow-line": "glow-line 3s ease-in-out infinite",
+        "particle-float": "particle-float 0.6s ease-out forwards",
+        "ripple-out": "ripple-out 0.6s ease-out forwards",
       },
       transitionTimingFunction: {
         "smooth": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
