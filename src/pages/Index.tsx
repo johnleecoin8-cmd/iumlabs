@@ -30,12 +30,26 @@ const Index = () => {
         </div>
       </main>
       
-      {/* Services - 01 홀수 */}
-      <section className="scroll-reveal bg-[#0F0F0F]" id="services">
+      {/* About - 01 홀수 */}
+      <section className="scroll-reveal bg-[#0F0F0F]" id="why-choose-us">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
+            </div>
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Why Ium Labs</span>
+          </div>
+          <WhyChooseUsSection />
+        </div>
+      </section>
+      
+      {/* Services - 02 짝수 */}
+      <section className="scroll-reveal bg-[#121212]" id="services">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
             </div>
             <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What We Do</span>
@@ -44,12 +58,12 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Process - 02 짝수 */}
-      <section className="scroll-reveal bg-[#121212]" id="process">
+      {/* Process - 03 홀수 */}
+      <section className="scroll-reveal bg-[#0F0F0F]" id="process">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
             </div>
             <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
@@ -58,31 +72,17 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Cases - 03 홀수 */}
-      <section className="scroll-reveal bg-[#0F0F0F]" id="cases">
+      {/* Cases - 04 짝수 */}
+      <section className="scroll-reveal bg-[#121212]" id="cases">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
             </div>
             <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Work</span>
           </div>
           <CasesSection />
-        </div>
-      </section>
-      
-      {/* About - 04 짝수 */}
-      <section className="scroll-reveal bg-[#121212]" id="why-choose-us">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
-            </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Why Ium Labs</span>
-          </div>
-          <WhyChooseUsSection />
         </div>
       </section>
       
