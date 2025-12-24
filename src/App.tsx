@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useScrollReveal from "@/hooks/useScrollReveal";
 import Sidebar from "@/components/Sidebar";
+import { SidebarProvider } from "@/hooks/useSidebarState";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import Projects from "./pages/Projects";
@@ -130,11 +131,15 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <ScrollToTop />
-        <Sidebar />
-        <div className="md:ml-52">
-          <AppRoutes />
-        </div>
+        <SidebarProvider>
+          <ScrollToTop />
+          <div className="flex w-full">
+            <Sidebar />
+            <div className="flex-1 min-w-0">
+              <AppRoutes />
+            </div>
+          </div>
+        </SidebarProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
