@@ -162,29 +162,6 @@ export default {
           "0%": { transform: "scale(0.5)", opacity: "0.8" },
           "100%": { transform: "scale(2.5)", opacity: "0" },
         },
-        // Logo hover animations
-        "logo-spin-3d": {
-          "0%": { transform: "rotateY(0deg) scale(1)" },
-          "100%": { transform: "rotateY(360deg) scale(1)" },
-        },
-        "logo-glow-pulse": {
-          "0%, 100%": { 
-            opacity: "0.6",
-            transform: "scale(1)"
-          },
-          "50%": { 
-            opacity: "1",
-            transform: "scale(1.15)"
-          },
-        },
-        "logo-ring-rotate": {
-          "0%": { transform: "rotate(0deg)" },
-          "100%": { transform: "rotate(360deg)" },
-        },
-        "logo-particle-burst": {
-          "0%": { transform: "scale(0)", opacity: "1" },
-          "100%": { transform: "scale(2)", opacity: "0" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -207,11 +184,6 @@ export default {
         "glow-line": "glow-line 3s ease-in-out infinite",
         "particle-float": "particle-float 0.6s ease-out forwards",
         "ripple-out": "ripple-out 0.6s ease-out forwards",
-        // Logo hover animations
-        "logo-spin-3d": "logo-spin-3d 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards",
-        "logo-glow-pulse": "logo-glow-pulse 2s ease-in-out infinite",
-        "logo-ring-rotate": "logo-ring-rotate 3s linear infinite",
-        "logo-particle-burst": "logo-particle-burst 0.6s ease-out forwards",
       },
       transitionTimingFunction: {
         "smooth": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",

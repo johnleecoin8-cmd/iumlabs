@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Briefcase, FolderOpen, FileText, Mail, Send, Linkedin, ChevronLeft, AtSign } from "lucide-react";
 import { brand, navigation } from "@/config/content";
@@ -8,6 +8,7 @@ import { useSidebarState } from "@/hooks/useSidebarState";
 import { cn } from "@/lib/utils";
 import SimpleNavItem from "@/components/sidebar/SimpleNavItem";
 import FloatingServicesMenu from "@/components/sidebar/FloatingServicesMenu";
+
 // Map navigation labels to icons
 const getIconForLabel = (label: string) => {
   const iconMap: Record<string, React.ElementType> = {
@@ -268,7 +269,7 @@ const Sidebar = () => {
             "relative z-10 flex flex-col h-full py-6",
             isCollapsed ? "px-4 items-center" : "px-5"
           )}>
-            {/* Logo Section - Enhanced with 3D rotation and multi-layer glow */}
+            {/* Logo Section */}
             <Link 
               to="/" 
               className={cn(
@@ -276,52 +277,21 @@ const Sidebar = () => {
                 isCollapsed ? "justify-center" : "px-1"
               )}
             >
-              <div className="relative" style={{ perspective: '1000px' }}>
-                {/* Outer glow layer - largest, most diffused */}
-                <div className="absolute -inset-4 bg-gradient-to-r from-primary/40 via-[rgba(var(--gold-rgb),0.3)] to-primary/40 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition-all duration-700 group-hover:animate-logo-glow-pulse" />
-                
-                {/* Middle glow layer */}
-                <div className="absolute -inset-2 bg-gradient-to-br from-primary/50 to-[rgba(var(--gold-rgb),0.4)] blur-xl rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                
-                {/* Inner glow layer - sharpest */}
-                <div className="absolute -inset-1 bg-primary/40 blur-lg rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-400" />
-                
-                {/* Rotating border ring */}
-                <div className="absolute -inset-1.5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 overflow-hidden">
-                  <div 
-                    className="absolute inset-0 bg-[conic-gradient(from_0deg,hsl(var(--primary)),rgba(var(--gold-rgb),0.8),hsl(var(--primary)),rgba(var(--gold-rgb),0.6),hsl(var(--primary)))] group-hover:animate-logo-ring-rotate"
-                  />
-                  <div className="absolute inset-[2px] bg-background rounded-lg" />
-                </div>
-                
-                {/* Main logo image with X+Y axis 3D rotation */}
+              <div className="relative">
+                {/* Logo glow effect */}
+                <div className="absolute inset-0 bg-primary/30 blur-xl rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
                 <img 
                   src={logoImage} 
                   alt="Ium Labs Logo" 
-                  className={cn(
-                    "relative w-10 h-10 rounded-lg object-cover bg-white p-1 z-10",
-                    "transition-all duration-700 ease-out",
-                    "group-hover:scale-115 group-hover:[transform:rotateX(360deg)_rotateY(360deg)]",
-                    "group-hover:shadow-[0_0_25px_rgba(var(--primary-rgb),0.5),0_0_50px_rgba(var(--primary-rgb),0.3),0_0_75px_rgba(var(--gold-rgb),0.2)]"
-                  )}
-                  style={{ transformStyle: 'preserve-3d' }}
+                  className="relative w-10 h-10 rounded-lg object-cover bg-white p-1 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3" 
                 />
-                
-                {/* Particle effects on hover */}
-                <div className="absolute top-0 left-0 w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-logo-particle-burst" style={{ animationDelay: '0ms' }} />
-                <div className="absolute top-0 right-0 w-1.5 h-1.5 bg-[rgba(var(--gold-rgb),1)] rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-logo-particle-burst" style={{ animationDelay: '100ms' }} />
-                <div className="absolute bottom-0 left-0 w-1.5 h-1.5 bg-[rgba(var(--gold-rgb),1)] rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-logo-particle-burst" style={{ animationDelay: '200ms' }} />
-                <div className="absolute bottom-0 right-0 w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-logo-particle-burst" style={{ animationDelay: '150ms' }} />
-                
-                {/* Center ping effect */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1 h-1 bg-white rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping z-20" />
               </div>
               {!isCollapsed && (
-                <div className="flex flex-col transition-all duration-500 group-hover:translate-x-1">
-                  <span className="text-base font-bold tracking-tight text-foreground transition-all duration-300 group-hover:text-primary">
+                <div className="flex flex-col">
+                  <span className="text-base font-bold tracking-tight text-foreground">
                     Ium Labs
                   </span>
-                  <span className="text-[10px] text-muted-foreground font-medium tracking-widest uppercase transition-all duration-300 group-hover:text-primary/70">
+                  <span className="text-[10px] text-muted-foreground font-medium tracking-widest uppercase">
                     Web3 Agency
                   </span>
                 </div>
