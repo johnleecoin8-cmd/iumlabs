@@ -1,25 +1,12 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, Briefcase, FolderOpen, FileText, Mail, Send, Linkedin, ChevronLeft, AtSign } from "lucide-react";
+import { ChevronLeft, Send, Linkedin } from "lucide-react";
 import { brand, navigation } from "@/config/content";
-import logoImage from "@/assets/logo.png";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { cn } from "@/lib/utils";
 import SimpleNavItem from "@/components/sidebar/SimpleNavItem";
 import FloatingServicesMenu from "@/components/sidebar/FloatingServicesMenu";
-
-// Map navigation labels to icons
-const getIconForLabel = (label: string) => {
-  const iconMap: Record<string, React.ElementType> = {
-    Home: Home,
-    Services: Briefcase,
-    Projects: FolderOpen,
-    Research: FileText,
-    Contact: Mail,
-  };
-  return iconMap[label] || Home;
-};
 
 // Section IDs for scroll-based highlighting on homepage
 const sectionIds = ['hero', 'services', 'process', 'cases', 'why-choose-us', 'gallery', 'media-partners', 'insights', 'contact'];
@@ -37,144 +24,11 @@ const sectionToNavMap: Record<string, string> = {
   'contact': 'Contact',
 };
 
-// Enhanced Social Link Component with glow effects
-const SocialLink = ({ 
-  href, 
-  icon: Icon, 
-  label, 
-  isCollapsed 
-}: { 
-  href: string; 
-  icon: React.ElementType; 
-  label: string; 
-  isCollapsed: boolean;
-}) => {
-  const content = (
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cn(
-        "group relative flex items-center rounded-2xl transition-all duration-300 overflow-hidden",
-        isCollapsed ? "w-12 h-12 justify-center" : "w-full px-4 py-3 gap-3",
-        "text-muted-foreground hover:text-foreground"
-      )}
-    >
-      {/* Hover background with glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-secondary/0 via-secondary/60 to-secondary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-primary/10" />
-      
-      {/* Icon with glow effect */}
-      <div className="relative z-10">
-        <div className="absolute inset-0 bg-primary/30 blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 scale-150" />
-        <Icon 
-          className={cn(
-            "relative transition-all duration-500 group-hover:scale-110 group-hover:text-primary",
-            isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]"
-          )}
-        />
-      </div>
-      
-      {!isCollapsed && (
-        <span className="relative z-10 text-sm font-medium transition-all duration-300 group-hover:translate-x-0.5">
-          {label}
-        </span>
-      )}
-      
-      {/* Right edge glow line */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-gradient-to-b from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 group-hover:h-1/2 transition-all duration-500" />
-    </a>
-  );
-
-  if (isCollapsed) {
-    return (
-      <Tooltip delayDuration={0}>
-        <TooltipTrigger asChild>{content}</TooltipTrigger>
-        <TooltipContent 
-          side="right" 
-          sideOffset={16} 
-          className="bg-foreground text-background text-xs font-medium px-3 py-1.5 rounded-xl shadow-xl border-0"
-        >
-          {label}
-        </TooltipContent>
-      </Tooltip>
-    );
-  }
-
-  return content;
-};
-
-// Enhanced Connect Link Component with glow effects
-const ConnectLink = ({ 
-  to, 
-  icon: Icon, 
-  label, 
-  isCollapsed 
-}: { 
-  to: string; 
-  icon: React.ElementType; 
-  label: string; 
-  isCollapsed: boolean;
-}) => {
-  const content = (
-    <Link
-      to={to}
-      className={cn(
-        "group relative flex items-center rounded-2xl transition-all duration-300 overflow-hidden",
-        isCollapsed ? "w-12 h-12 justify-center" : "w-full px-4 py-3 gap-3",
-        "text-muted-foreground hover:text-foreground"
-      )}
-    >
-      {/* Hover background with glow */}
-      <div className="absolute inset-0 bg-gradient-to-r from-secondary/0 via-secondary/60 to-secondary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-primary/10" />
-      
-      {/* Icon with glow effect */}
-      <div className="relative z-10">
-        <div className="absolute inset-0 bg-primary/30 blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 scale-150" />
-        <Icon 
-          className={cn(
-            "relative transition-all duration-500 group-hover:scale-110 group-hover:text-primary",
-            isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]"
-          )}
-        />
-      </div>
-      
-      {!isCollapsed && (
-        <span className="relative z-10 text-sm font-medium transition-all duration-300 group-hover:translate-x-0.5">
-          {label}
-        </span>
-      )}
-      
-      {/* Right edge glow line */}
-      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-gradient-to-b from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 group-hover:h-1/2 transition-all duration-500" />
-    </Link>
-  );
-
-  if (isCollapsed) {
-    return (
-      <Tooltip delayDuration={0}>
-        <TooltipTrigger asChild>{content}</TooltipTrigger>
-        <TooltipContent 
-          side="right" 
-          sideOffset={16} 
-          className="bg-foreground text-background text-xs font-medium px-3 py-1.5 rounded-xl shadow-xl border-0"
-        >
-          {label}
-        </TooltipContent>
-      </Tooltip>
-    );
-  }
-
-  return content;
-};
-
 const Sidebar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const { isCollapsed, toggleSidebar } = useSidebarState();
   const [activeSection, setActiveSection] = useState('hero');
-  const [scrollProgress, setScrollProgress] = useState(0);
   const [servicesOpen, setServicesOpen] = useState(() => {
     return currentPath.startsWith('/services/');
   });
@@ -186,15 +40,9 @@ const Sidebar = () => {
     }
   }, [currentPath]);
 
-  // Scroll-based section detection and progress
+  // Scroll-based section detection
   useEffect(() => {
     const handleScroll = () => {
-      // Calculate scroll progress
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setScrollProgress(progress);
-
       // Section detection only on homepage
       if (currentPath !== '/') return;
 
@@ -240,76 +88,62 @@ const Sidebar = () => {
     <>
       <aside 
         className={cn(
-          "fixed left-0 top-0 h-screen z-50 hidden md:flex flex-col p-3",
+          "fixed left-0 top-0 h-screen z-50 hidden md:flex flex-col",
           "transition-all duration-500 ease-out",
-          isCollapsed ? "w-[89px]" : "w-60"
+          isCollapsed ? "w-[72px]" : "w-56"
         )}
       >
-        {/* Floating Island Container */}
-        <div className="relative flex flex-col h-full rounded-3xl overflow-hidden">
-          {/* Main island background */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background/85 backdrop-blur-2xl rounded-3xl" />
-          
-          {/* Glass border effect */}
-          <div className="absolute inset-0 rounded-3xl border border-border/30 shadow-[0_8px_40px_rgba(0,0,0,0.2),inset_0_1px_0_rgba(255,255,255,0.08)]" />
-          
-          {/* Top highlight line */}
-          <div className="absolute top-0 inset-x-6 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
-          
-          {/* Scroll Progress Bar */}
-          <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-border/10 rounded-l-3xl overflow-hidden">
-            <div 
-              className="w-full bg-gradient-to-b from-primary via-primary to-primary/50 transition-all duration-150 ease-out"
-              style={{ height: `${scrollProgress}%` }}
-            />
-          </div>
+        {/* Minimal Container - only right border */}
+        <div className="relative flex flex-col h-full border-r border-white/[0.08]">
           
           {/* Content Container */}
           <div className={cn(
-            "relative z-10 flex flex-col h-full py-6",
-            isCollapsed ? "px-4 items-center" : "px-5"
+            "relative z-10 flex flex-col h-full py-8",
+            isCollapsed ? "px-4 items-center" : "px-6"
           )}>
-            {/* Logo Section */}
+            {/* Logo Section - Text only */}
             <Link 
               to="/" 
               className={cn(
-                "group flex items-center gap-3 mb-10 transition-all duration-300",
-                isCollapsed ? "justify-center" : "px-1"
+                "group mb-12 transition-all duration-300",
+                isCollapsed ? "text-center" : ""
               )}
             >
-              <div className="relative">
-                {/* Logo glow effect */}
-                <div className="absolute inset-0 bg-primary/30 blur-xl rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-500" />
-                <img 
-                  src={logoImage} 
-                  alt="Ium Labs Logo" 
-                  className="relative w-10 h-10 rounded-lg object-cover bg-white p-1 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3" 
-                />
-              </div>
-              {!isCollapsed && (
+              {isCollapsed ? (
+                <Tooltip delayDuration={0}>
+                  <TooltipTrigger asChild>
+                    <span className="text-lg font-bold text-white/80 group-hover:text-white transition-colors cursor-pointer">
+                      IL
+                    </span>
+                  </TooltipTrigger>
+                  <TooltipContent 
+                    side="right" 
+                    sideOffset={12}
+                    className="bg-white text-black text-xs font-medium px-3 py-1.5 rounded-lg border-0"
+                  >
+                    Ium Labs
+                  </TooltipContent>
+                </Tooltip>
+              ) : (
                 <div className="flex flex-col">
-                  <span className="text-base font-bold tracking-tight text-foreground">
+                  <span className="text-base font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">
                     Ium Labs
                   </span>
-                  <span className="text-[10px] text-muted-foreground font-medium tracking-widest uppercase">
+                  <span className="text-[9px] text-white/30 font-medium tracking-[0.25em] uppercase mt-0.5">
                     Web3 Agency
                   </span>
                 </div>
               )}
             </Link>
 
-            {/* Navigation Section */}
-            <div className={cn("mb-4", isCollapsed ? "" : "px-1")}>
-              {!isCollapsed && (
-                <span className="text-[10px] text-muted-foreground/50 font-medium tracking-[0.2em] uppercase">
-                  Navigation
-                </span>
-              )}
-            </div>
+            {/* Thin separator line */}
+            {!isCollapsed && (
+              <div className="w-8 h-px bg-white/10 mb-8" />
+            )}
             
-            <nav className={cn("flex-1 flex flex-col gap-1.5", isCollapsed ? "items-center" : "")}>
-              {navigation.links.map((link, index) => {
-                const Icon = getIconForLabel(link.name);
+            {/* Navigation Section */}
+            <nav className={cn("flex-1 flex flex-col gap-0.5", isCollapsed ? "items-center" : "")}>
+              {navigation.links.map((link) => {
                 const isActive = getIsActive(link.name, link.href);
                 
                 // Render Services with floating submenu
@@ -329,7 +163,6 @@ const Sidebar = () => {
                 return (
                   <SimpleNavItem
                     key={link.href}
-                    icon={Icon}
                     to={link.href}
                     label={link.name}
                     isActive={isActive}
@@ -339,76 +172,45 @@ const Sidebar = () => {
               })}
             </nav>
 
-            {/* Divider */}
-            <div className={cn("my-5", isCollapsed ? "w-8" : "mx-1")}>
-              <div className="h-px bg-gradient-to-r from-transparent via-border/50 to-transparent" />
+            {/* Thin separator line */}
+            <div className={cn("my-6", isCollapsed ? "w-6" : "w-8")}>
+              <div className="h-px bg-white/10" />
             </div>
 
-            {/* Connect Section */}
-            {!isCollapsed && (
-              <div className="px-1 mb-3">
-                <span className="text-[10px] text-muted-foreground/50 font-medium tracking-[0.2em] uppercase">
-                  Connect
-                </span>
-              </div>
-            )}
-            
-            <div className={cn("flex flex-col gap-1.5", isCollapsed ? "items-center" : "")}>
-              <ConnectLink
-                to="/contact"
-                icon={Mail}
-                label="Contact"
-                isCollapsed={isCollapsed}
-              />
-              <SocialLink
-                href={`mailto:${brand.email}`}
-                icon={AtSign}
-                label="Email"
-                isCollapsed={isCollapsed}
-              />
-              <SocialLink
+            {/* Social Links - Horizontal icons */}
+            <div className={cn(
+              "flex items-center gap-4",
+              isCollapsed ? "flex-col gap-3" : ""
+            )}>
+              <a
                 href={brand.telegramLink}
-                icon={Send}
-                label="Telegram"
-                isCollapsed={isCollapsed}
-              />
-              <SocialLink
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/30 hover:text-white transition-colors duration-300"
+              >
+                <Send className="w-4 h-4" />
+              </a>
+              <a
                 href={brand.linkedin}
-                icon={Linkedin}
-                label="LinkedIn"
-                isCollapsed={isCollapsed}
-              />
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-white/30 hover:text-white transition-colors duration-300"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
             </div>
 
-            {/* Toggle Button */}
-            <div className={cn("mt-6", isCollapsed ? "" : "px-1")}>
+            {/* Toggle Button - Icon only */}
+            <div className="mt-6">
               <button
                 onClick={toggleSidebar}
-                className={cn(
-                  "group relative flex items-center justify-center rounded-2xl",
-                  "transition-all duration-300 overflow-hidden",
-                  isCollapsed ? "w-12 h-12" : "w-full h-12 gap-2"
-                )}
+                className="text-white/20 hover:text-white/60 transition-colors duration-300"
                 aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
               >
-                {/* Button background with hover glow */}
-                <div className="absolute inset-0 bg-secondary/40 group-hover:bg-secondary/70 transition-all duration-300 rounded-2xl" />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl shadow-[0_0_20px_hsl(var(--primary)/0.1)]" />
-                
-                {/* Icon with rotation animation */}
-                <div className={cn(
-                  "relative z-10 flex items-center justify-center",
-                  "transition-transform duration-500",
-                  isCollapsed ? "rotate-0" : "rotate-180"
-                )}>
-                  <ChevronLeft className="w-4 h-4 text-muted-foreground group-hover:text-foreground transition-colors duration-300" />
-                </div>
-                
-                {!isCollapsed && (
-                  <span className="relative z-10 text-xs font-medium text-muted-foreground group-hover:text-foreground transition-colors duration-300">
-                    Collapse
-                  </span>
-                )}
+                <ChevronLeft className={cn(
+                  "w-4 h-4 transition-transform duration-300",
+                  isCollapsed && "rotate-180"
+                )} />
               </button>
             </div>
           </div>
@@ -418,7 +220,7 @@ const Sidebar = () => {
       {/* Dynamic margin spacer for content */}
       <div className={cn(
         "hidden md:block flex-shrink-0 transition-all duration-500",
-        isCollapsed ? "w-[89px]" : "w-60"
+        isCollapsed ? "w-[72px]" : "w-56"
       )} />
     </>
   );

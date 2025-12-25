@@ -3,90 +3,50 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { cn } from "@/lib/utils";
 
 interface SimpleNavItemProps {
-  icon: React.ElementType;
   to: string;
   label: string;
   isActive: boolean;
   isCollapsed: boolean;
 }
 
-const SimpleNavItem = ({ icon: Icon, to, label, isActive, isCollapsed }: SimpleNavItemProps) => {
+const SimpleNavItem = ({ to, label, isActive, isCollapsed }: SimpleNavItemProps) => {
   const content = (
     <Link
       to={to}
       className={cn(
-        "group relative flex items-center rounded-2xl overflow-hidden",
-        "transition-all duration-300",
-        isCollapsed ? "w-12 h-12 justify-center" : "w-full px-4 py-3 gap-3"
+        "group relative flex items-center gap-3 py-2.5 transition-all duration-300",
+        isCollapsed ? "justify-center px-2" : "px-0"
       )}
     >
-      {/* Hover background with gradient glow */}
-      <div className={cn(
-        "absolute inset-0 transition-opacity duration-500",
+      {/* Text Label */}
+      <span className={cn(
+        "text-sm font-medium transition-all duration-300",
         isActive 
-          ? "bg-primary/15 opacity-100" 
-          : "bg-gradient-to-r from-secondary/0 via-secondary/60 to-secondary/0 opacity-0 group-hover:opacity-100"
-      )} />
+          ? "text-white" 
+          : "text-white/40 group-hover:text-white"
+      )}>
+        {isCollapsed ? label.charAt(0) : label}
+      </span>
       
-      {/* Subtle glow behind on hover */}
-      {!isActive && (
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-primary/10" />
-      )}
-      
-      {/* Active Indicator Line with glow */}
-      {isActive && (
-        <>
-          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-primary rounded-r-full shadow-[0_0_12px_hsl(var(--primary)/0.6)]" />
-        </>
-      )}
-      
-      {/* Icon Container with glow effect */}
-      <div 
-        className={cn(
-          "relative z-10 flex items-center justify-center transition-all duration-500",
-          isCollapsed ? "" : "w-5 h-5"
-        )}
-      >
-        {/* Icon glow */}
-        <div className={cn(
-          "absolute inset-0 blur-lg scale-150 transition-all duration-500",
-          isActive 
-            ? "bg-primary/40 opacity-100" 
-            : "bg-primary/30 opacity-0 group-hover:opacity-100"
-        )} />
-        
-        <Icon 
-          className={cn(
-            "relative transition-all duration-500",
-            isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]",
-            isActive 
-              ? "text-primary" 
-              : "text-muted-foreground group-hover:text-primary group-hover:scale-110"
-          )} 
-        />
-      </div>
-      
-      {/* Label with slide effect */}
+      {/* Arrow indicator - appears on hover/active */}
       {!isCollapsed && (
         <span className={cn(
-          "relative z-10 text-sm font-medium tracking-wide transition-all duration-300",
+          "text-xs transition-all duration-300",
           isActive 
-            ? "text-foreground" 
-            : "text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5"
+            ? "opacity-100 translate-x-0 text-white/60" 
+            : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 text-white/40"
         )}>
-          {label}
+          →
         </span>
       )}
       
-      {/* Right edge glow line on hover */}
-      {!isActive && (
-        <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-gradient-to-b from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 group-hover:h-1/2 transition-all duration-500" />
-      )}
-      
-      {/* Active dot indicator for collapsed with glow */}
-      {isCollapsed && isActive && (
-        <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_hsl(var(--primary)/0.8)]" />
-      )}
+      {/* Underline animation */}
+      <span className={cn(
+        "absolute bottom-1.5 left-0 h-px bg-white/60 transition-all duration-300 origin-left",
+        isActive 
+          ? "w-6" 
+          : "w-0 group-hover:w-8"
+      )} />
     </Link>
   );
 
@@ -98,8 +58,8 @@ const SimpleNavItem = ({ icon: Icon, to, label, isActive, isCollapsed }: SimpleN
         </TooltipTrigger>
         <TooltipContent 
           side="right" 
-          sideOffset={16}
-          className="bg-foreground text-background text-xs font-medium px-3 py-1.5 rounded-xl shadow-xl border-0"
+          sideOffset={12}
+          className="bg-white text-black text-xs font-medium px-3 py-1.5 rounded-lg border-0"
         >
           {label}
         </TooltipContent>
