@@ -37,7 +37,7 @@ const sectionToNavMap: Record<string, string> = {
   'contact': 'Contact',
 };
 
-// Simple Social Link Component (for external links)
+// Enhanced Social Link Component with glow effects
 const SocialLink = ({ 
   href, 
   icon: Icon, 
@@ -55,20 +55,34 @@ const SocialLink = ({
       target="_blank"
       rel="noopener noreferrer"
       className={cn(
-        "group relative flex items-center rounded-2xl transition-all duration-200",
+        "group relative flex items-center rounded-2xl transition-all duration-300 overflow-hidden",
         isCollapsed ? "w-12 h-12 justify-center" : "w-full px-4 py-3 gap-3",
-        "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+        "text-muted-foreground hover:text-foreground"
       )}
     >
-      <Icon 
-        className={cn(
-          "transition-all duration-300",
-          isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]"
-        )}
-      />
+      {/* Hover background with glow */}
+      <div className="absolute inset-0 bg-gradient-to-r from-secondary/0 via-secondary/60 to-secondary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-primary/10" />
+      
+      {/* Icon with glow effect */}
+      <div className="relative z-10">
+        <div className="absolute inset-0 bg-primary/30 blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 scale-150" />
+        <Icon 
+          className={cn(
+            "relative transition-all duration-500 group-hover:scale-110 group-hover:text-primary",
+            isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]"
+          )}
+        />
+      </div>
+      
       {!isCollapsed && (
-        <span className="text-sm font-medium">{label}</span>
+        <span className="relative z-10 text-sm font-medium transition-all duration-300 group-hover:translate-x-0.5">
+          {label}
+        </span>
       )}
+      
+      {/* Right edge glow line */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-gradient-to-b from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 group-hover:h-1/2 transition-all duration-500" />
     </a>
   );
 
@@ -90,7 +104,7 @@ const SocialLink = ({
   return content;
 };
 
-// Simple Connect Link Component (for internal links)
+// Enhanced Connect Link Component with glow effects
 const ConnectLink = ({ 
   to, 
   icon: Icon, 
@@ -106,20 +120,34 @@ const ConnectLink = ({
     <Link
       to={to}
       className={cn(
-        "group relative flex items-center rounded-2xl transition-all duration-200",
+        "group relative flex items-center rounded-2xl transition-all duration-300 overflow-hidden",
         isCollapsed ? "w-12 h-12 justify-center" : "w-full px-4 py-3 gap-3",
-        "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+        "text-muted-foreground hover:text-foreground"
       )}
     >
-      <Icon 
-        className={cn(
-          "transition-all duration-300",
-          isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]"
-        )}
-      />
+      {/* Hover background with glow */}
+      <div className="absolute inset-0 bg-gradient-to-r from-secondary/0 via-secondary/60 to-secondary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-primary/10" />
+      
+      {/* Icon with glow effect */}
+      <div className="relative z-10">
+        <div className="absolute inset-0 bg-primary/30 blur-lg opacity-0 group-hover:opacity-100 transition-all duration-500 scale-150" />
+        <Icon 
+          className={cn(
+            "relative transition-all duration-500 group-hover:scale-110 group-hover:text-primary",
+            isCollapsed ? "w-5 h-5" : "w-[18px] h-[18px]"
+          )}
+        />
+      </div>
+      
       {!isCollapsed && (
-        <span className="text-sm font-medium">{label}</span>
+        <span className="relative z-10 text-sm font-medium transition-all duration-300 group-hover:translate-x-0.5">
+          {label}
+        </span>
       )}
+      
+      {/* Right edge glow line */}
+      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-gradient-to-b from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 group-hover:h-1/2 transition-all duration-500" />
     </Link>
   );
 
