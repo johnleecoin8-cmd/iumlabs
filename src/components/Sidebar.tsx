@@ -294,14 +294,14 @@ const Sidebar = () => {
                   <div className="absolute inset-[2px] bg-background rounded-lg" />
                 </div>
                 
-                {/* Main logo image with 3D rotation */}
+                {/* Main logo image with X+Y axis 3D rotation */}
                 <img 
                   src={logoImage} 
                   alt="Ium Labs Logo" 
                   className={cn(
                     "relative w-10 h-10 rounded-lg object-cover bg-white p-1 z-10",
                     "transition-all duration-700 ease-out",
-                    "group-hover:scale-115 group-hover:[transform:rotateY(360deg)]",
+                    "group-hover:scale-115 group-hover:[transform:rotateX(360deg)_rotateY(360deg)]",
                     "group-hover:shadow-[0_0_25px_rgba(var(--primary-rgb),0.5),0_0_50px_rgba(var(--primary-rgb),0.3),0_0_75px_rgba(var(--gold-rgb),0.2)]"
                   )}
                   style={{ transformStyle: 'preserve-3d' }}
