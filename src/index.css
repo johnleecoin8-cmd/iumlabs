@@ -58,6 +58,10 @@
 
     /* Lunar Strategy Blue */
     --lunar-blue: 217 91% 60%;
+
+    /* Primary RGB for glow effects */
+    --primary-rgb: 59, 130, 246;
+    --gold-rgb: 255, 215, 0;
   }
 
   .dark {
