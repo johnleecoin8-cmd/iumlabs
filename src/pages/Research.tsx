@@ -2966,9 +2966,9 @@ const Research = () => {
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero Section - Indigo Theme */}
+      {/* Hero Section - Homepage Style */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
-        <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl">
+        <section className="relative min-h-[60vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl">
           {/* Video Background */}
           <div className="absolute inset-0 overflow-hidden">
             <video
@@ -2984,27 +2984,26 @@ const Research = () => {
             >
               <source src="/videos/research-background.mp4" type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-indigo-500/20 via-purple-500/10 to-[#0A0A0A]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 via-transparent to-violet-500/10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-[#0A0A0A]" />
           </div>
 
-          {/* Content - Centered like homepage */}
+          {/* Hero Content */}
           <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
             <motion.span 
-              className="text-xs text-indigo-400/70 mb-6 block tracking-widest"
+              className="text-xs text-primary/70 mb-6 block tracking-widest font-mono"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
-              [ Research ]
+              [ Research & Insights ]
             </motion.span>
             <motion.h1 
-              className="text-[14vw] md:text-[120px] lg:text-[140px] font-light text-white leading-[0.85] tracking-tight"
+              className="text-[12vw] md:text-[100px] lg:text-[120px] font-light text-white leading-[0.85] tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              Rese<span className="serif-italic text-indigo-400">a</span>rch
+              Rese<span className="serif-italic text-primary">a</span>rch
             </motion.h1>
             <motion.p 
               className="text-lg text-white/60 max-w-xl mx-auto mt-8"
@@ -3014,316 +3013,346 @@ const Research = () => {
             >
               In-depth analysis and insights on Web3 marketing, Korean market dynamics, and emerging trends.
             </motion.p>
+            
+            {/* Stats */}
             <motion.div 
-              className="flex items-center justify-center gap-4 text-indigo-400/60 text-sm mt-6"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
+              className="flex items-center justify-center gap-12 mt-10"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              <span>{posts.length} Articles</span>
-              <span>•</span>
-              <span>6 Categories</span>
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-white">{posts.length}</div>
+                <div className="text-xs text-white/40 mt-1 uppercase tracking-wider">Articles</div>
+              </div>
+              <div className="w-px h-8 bg-white/20" />
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-white">6</div>
+                <div className="text-xs text-white/40 mt-1 uppercase tracking-wider">Categories</div>
+              </div>
+              <div className="w-px h-8 bg-white/20" />
+              <div className="text-center">
+                <div className="text-3xl md:text-4xl font-bold text-white">100+</div>
+                <div className="text-xs text-white/40 mt-1 uppercase tracking-wider">Min Read</div>
+              </div>
+            </motion.div>
+            
+            {/* Scroll Indicator */}
+            <motion.div 
+              className="mt-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+                className="w-5 h-8 border border-white/30 rounded-full mx-auto flex items-start justify-center p-1"
+              >
+                <motion.div className="w-1 h-2 bg-primary rounded-full" />
+              </motion.div>
             </motion.div>
           </div>
         </section>
       </main>
 
-      {/* Filters Section with Header */}
-      <section className="bg-[#0A0A0A]" id="filters">
-        <div className="border-t border-indigo-500/20">
-          {/* Section Header - Indigo Theme */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-indigo-500/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-indigo-500 font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Browse</h2>
-            </div>
-            <span className="text-xs text-indigo-400/60 tracking-wider hidden sm:block px-3 py-1 border border-indigo-500/30 rounded-full">
-              Filter by Topic
-            </span>
+      {/* 01 - Browse Section */}
+      <section className="bg-[#0F0F0F] border-t border-white/10" id="filters">
+        {/* Section Header - Homepage Style */}
+        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
+          <div className="flex items-baseline gap-6 md:gap-10">
+            <span className="text-[10px] md:text-xs text-primary font-mono tracking-widest">01</span>
+            <h2 className="text-lg md:text-xl font-medium text-white">Browse</h2>
           </div>
-          
-          {/* Filter Content */}
-          <div className="container mx-auto max-w-7xl px-4 md:px-8 py-4">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              {/* Categories */}
-              <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
-                {categories.map((category) => (
-                  <motion.button
-                    key={category}
-                    onClick={() => { setSelectedCategory(category); setCurrentPage(1); }}
-                    className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all ${
-                      selectedCategory === category 
-                        ? "bg-indigo-500 text-white" 
-                        : "bg-white/5 text-white/60 hover:bg-indigo-500/10 border border-white/10 hover:border-indigo-500/30"
-                    }`}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {category}
-                  </motion.button>
-                ))}
-              </div>
-              
-              {/* Search */}
-              <div className="relative w-full md:w-80">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
-                <Input
-                  type="text"
-                  placeholder="Search articles..."
-                  value={searchQuery}
-                  onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-                  className="bg-white/5 border-white/10 rounded-full pl-10 pr-4 h-10 text-white placeholder:text-white/40"
-                />
-              </div>
+          <span className="text-xs text-white/40 tracking-wider hidden sm:block">
+            Filter by Topic
+          </span>
+        </div>
+        
+        {/* Filter Content */}
+        <div className="container mx-auto max-w-7xl px-4 md:px-8 py-6">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            {/* Categories */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
+              {categories.map((category) => (
+                <motion.button
+                  key={category}
+                  onClick={() => { setSelectedCategory(category); setCurrentPage(1); }}
+                  className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all ${
+                    selectedCategory === category 
+                      ? "bg-primary text-primary-foreground" 
+                      : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10 hover:border-primary/30"
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  {category}
+                </motion.button>
+              ))}
+            </div>
+            
+            {/* Search */}
+            <div className="relative w-full md:w-80">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+              <Input
+                type="text"
+                placeholder="Search articles..."
+                value={searchQuery}
+                onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
+                className="bg-white/5 border-white/10 rounded-full pl-10 pr-4 h-10 text-white placeholder:text-white/40 focus:border-primary/50"
+              />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Featured Article Section */}
+      {/* 02 - Featured Article Section */}
       {currentPage === 1 && selectedCategory === "All" && !searchQuery && (
-        <section className="bg-[#0A0A0A]" id="featured">
-          <div className="border-t border-indigo-500/20">
-            {/* Section Header - Indigo Theme */}
-            <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-indigo-500/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-indigo-500 font-mono tracking-widest">02</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Featured</h2>
-              </div>
-              <span className="text-xs text-indigo-400/60 tracking-wider hidden sm:block px-3 py-1 border border-indigo-500/30 rounded-full">
-                Latest
-              </span>
+        <section className="bg-[#121212] border-t border-white/10" id="featured">
+          {/* Section Header */}
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-primary font-mono tracking-widest">02</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">Featured</h2>
             </div>
-            
-            {/* Featured Content */}
-            <div className="container mx-auto max-w-7xl px-4 md:px-8 py-12">
-              <Link to={`/research/${researchPosts[0].slug}`} className="group block">
+            <span className="text-xs text-white/40 tracking-wider hidden sm:block">
+              Latest Research
+            </span>
+          </div>
+          
+          {/* Featured Content */}
+          <div className="container mx-auto max-w-7xl px-4 md:px-8 py-16">
+            <Link to={`/research/${researchPosts[0].slug}`} className="group block">
+              <motion.div 
+                className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6 }}
+              >
                 <motion.div 
-                  className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
+                  className="aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.3 }}
                 >
-                  <motion.div 
-                    className="aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 group-hover:border-white/30 transition-all duration-300 relative"
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <img 
-                      src={researchPosts[0].image} 
-                      alt={researchPosts[0].title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </motion.div>
-                  <div>
-                    <div className="flex items-center gap-4 mb-4">
-                      <span className="px-3 py-1 bg-white/10 text-white/80 rounded-full text-sm border border-white/10">
-                        {researchPosts[0].category}
-                      </span>
-                      <span className="text-white/40 text-sm flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        {researchPosts[0].readTime}
-                      </span>
-                    </div>
-                    <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight mb-4 group-hover:text-white/80 transition-colors">
-                      {researchPosts[0].title}
-                    </h2>
-                    <p className="text-white/60 text-lg mb-6">
-                      {researchPosts[0].excerpt}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-medium text-white">
-                          {researchPosts[0].author.split(' ').map(n => n[0]).join('')}
-                        </div>
-                        <div>
-                          <p className="text-white text-sm font-medium">{researchPosts[0].author}</p>
-                          <p className="text-white/40 text-xs">{researchPosts[0].date}</p>
-                        </div>
-                      </div>
-                      <span className="text-white/60 flex items-center gap-2 group-hover:gap-3 transition-all">
-                        Read Article <ArrowRight className="w-4 h-4" />
-                      </span>
-                    </div>
+                  <img 
+                    src={researchPosts[0].image} 
+                    alt={researchPosts[0].title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                    <span className="px-3 py-1 bg-primary text-primary-foreground rounded-full text-sm font-medium">
+                      Read Article
+                    </span>
                   </div>
                 </motion.div>
-              </Link>
-            </div>
+                <div>
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm border border-primary/20">
+                      {researchPosts[0].category}
+                    </span>
+                    <span className="text-white/40 text-sm flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      {researchPosts[0].readTime}
+                    </span>
+                  </div>
+                  <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight mb-4 group-hover:text-primary/90 transition-colors duration-300">
+                    {researchPosts[0].title}
+                  </h2>
+                  <p className="text-white/60 text-lg mb-6 line-clamp-3">
+                    {researchPosts[0].excerpt}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-sm font-medium text-primary">
+                        {researchPosts[0].author.split(' ').map(n => n[0]).join('')}
+                      </div>
+                      <div>
+                        <p className="text-white text-sm font-medium">{researchPosts[0].author}</p>
+                        <p className="text-white/40 text-xs">{researchPosts[0].date}</p>
+                      </div>
+                    </div>
+                    <span className="text-primary flex items-center gap-2 group-hover:gap-3 transition-all font-medium">
+                      Read More <ArrowRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
           </div>
         </section>
       )}
 
-      {/* Article Grid Section */}
-      <section className="bg-[#0A0A0A]" id="articles">
-        <div className="border-t border-indigo-500/20">
-          {/* Section Header - Indigo Theme */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-indigo-500/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-indigo-500 font-mono tracking-widest">
-                {currentPage === 1 && selectedCategory === "All" && !searchQuery ? "03" : "02"}
-              </span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Articles</h2>
-            </div>
-            <span className="text-xs text-indigo-400/60 tracking-wider hidden sm:block px-3 py-1 border border-indigo-500/30 rounded-full">
-              {filteredPosts.length} Results
+      {/* 03 - Article Grid Section */}
+      <section className="bg-[#0F0F0F] border-t border-white/10" id="articles">
+        {/* Section Header */}
+        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
+          <div className="flex items-baseline gap-6 md:gap-10">
+            <span className="text-[10px] md:text-xs text-primary font-mono tracking-widest">
+              {currentPage === 1 && selectedCategory === "All" && !searchQuery ? "03" : "02"}
             </span>
+            <h2 className="text-lg md:text-xl font-medium text-white">All Articles</h2>
           </div>
-          
-          {/* Article Grid Content */}
-          <div className="container mx-auto max-w-7xl px-4 md:px-8 py-12">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {currentPosts.map((post, index) => (
-                <motion.div
-                  key={post.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Link 
-                    to={`/research/${post.slug}`}
-                    className="group block"
-                  >
-                    <motion.div
-                      whileHover={{ y: -8 }}
-                      transition={{ duration: 0.3 }}
-                      className="relative"
-                    >
-                      {/* Image */}
-                      <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-4 border border-white/10 group-hover:border-white/30 transition-all duration-300 relative">
-                        <motion.img 
-                          src={post.image} 
-                          alt={post.title}
-                          className="w-full h-full object-cover"
-                          whileHover={{ scale: 1.08 }}
-                          transition={{ duration: 0.4 }}
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                          <span className="text-white text-sm font-medium">Read Article</span>
-                          <ArrowRight className="w-4 h-4 text-white" />
-                        </div>
-                      </div>
-                      
-                      {/* Meta */}
-                      <div className="flex items-center gap-3 mb-3">
-                        <span className="px-2 py-1 bg-white/5 text-white/70 rounded text-xs border border-white/10">
-                          {post.category}
-                        </span>
-                        <span className="text-white/40 text-xs flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          {post.readTime}
-                        </span>
-                      </div>
-                      
-                      {/* Title */}
-                      <h3 className="text-lg font-medium text-white leading-snug group-hover:text-white/80 transition-colors duration-300 mb-3">
-                        {post.title}
-                      </h3>
-                      
-                      {/* Author & Date */}
-                      <div className="flex items-center gap-2 text-white/40 text-sm">
-                        <span>{post.author}</span>
-                        <span>•</span>
-                        <span>{post.date}</span>
-                      </div>
-                    </motion.div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-2 mt-16">
-                <button 
-                  onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
-                  disabled={currentPage === 1}
-                  className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-white/10 disabled:opacity-30 transition-all border border-white/10"
-                >
-                  <ChevronLeft className="w-5 h-5" />
-                </button>
-                {Array.from({ length: totalPages }, (_, i) => (
-                  <button
-                    key={i + 1}
-                    onClick={() => setCurrentPage(i + 1)}
-                    className={`w-10 h-10 rounded-lg text-sm transition-all ${
-                      currentPage === i + 1 
-                        ? "bg-white text-black" 
-                        : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10"
-                    }`}
-                  >
-                    {i + 1}
-                  </button>
-                ))}
-                <button 
-                  onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
-                  disabled={currentPage === totalPages}
-                  className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-white/10 disabled:opacity-30 transition-all border border-white/10"
-                >
-                  <ChevronRight className="w-5 h-5" />
-                </button>
-              </div>
-            )}
-          </div>
+          <span className="text-xs text-white/40 tracking-wider hidden sm:block">
+            {filteredPosts.length} Results
+          </span>
         </div>
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="bg-[#0A0A0A]" id="newsletter">
-        <div className="border-t border-indigo-500/20">
-          {/* Section Header - Indigo Theme */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-indigo-500/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-indigo-500 font-mono tracking-widest">
-                {currentPage === 1 && selectedCategory === "All" && !searchQuery ? "04" : "03"}
-              </span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Newsletter</h2>
-            </div>
-            <span className="text-xs text-indigo-400/60 tracking-wider hidden sm:block px-3 py-1 border border-indigo-500/30 rounded-full">
-              Stay Updated
-            </span>
-          </div>
-          
-          {/* Newsletter Content */}
-          <motion.div 
-            className="container mx-auto max-w-3xl px-4 py-16 text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
-              Stay Updated
-            </h2>
-            <p className="text-white/60 mb-8">
-              Subscribe to receive the latest research and insights directly in your inbox.
-            </p>
-            <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                value={newsletterEmail}
-                onChange={(e) => setNewsletterEmail(e.target.value)}
-                className="flex-1 bg-white/5 border-white/10 rounded-xl h-12 px-4 text-white placeholder:text-white/40 focus:border-white/30 transition-colors"
-              />
-              <motion.button
-                type="submit"
-                disabled={isSubscribing}
-                className="px-8 h-12 bg-gradient-to-r from-indigo-500 to-purple-500 text-white rounded-xl font-medium hover:from-indigo-600 hover:to-purple-600 transition-colors disabled:opacity-50"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+        
+        {/* Article Grid Content */}
+        <div className="container mx-auto max-w-7xl px-4 md:px-8 py-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {currentPosts.map((post, index) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                {isSubscribing ? "..." : "Subscribe"}
-              </motion.button>
-            </form>
-          </motion.div>
+                <Link 
+                  to={`/research/${post.slug}`}
+                  className="group block"
+                >
+                  <motion.div
+                    whileHover={{ y: -8 }}
+                    transition={{ duration: 0.3 }}
+                    className="relative"
+                  >
+                    {/* Image */}
+                    <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-4 border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative">
+                      <motion.img 
+                        src={post.image} 
+                        alt={post.title}
+                        className="w-full h-full object-cover"
+                        whileHover={{ scale: 1.08 }}
+                        transition={{ duration: 0.4 }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+                        <span className="text-white text-sm font-medium">Read Article</span>
+                        <ArrowRight className="w-4 h-4 text-primary" />
+                      </div>
+                    </div>
+                    
+                    {/* Meta */}
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="px-2 py-1 bg-primary/10 text-primary rounded text-xs border border-primary/20">
+                        {post.category}
+                      </span>
+                      <span className="text-white/40 text-xs flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {post.readTime}
+                      </span>
+                    </div>
+                    
+                    {/* Title */}
+                    <h3 className="text-lg font-medium text-white leading-snug group-hover:text-primary transition-colors duration-300 mb-3 line-clamp-2">
+                      {post.title}
+                    </h3>
+                    
+                    {/* Author & Date */}
+                    <div className="flex items-center gap-2 text-white/40 text-sm">
+                      <span>{post.author}</span>
+                      <span>•</span>
+                      <span>{post.date}</span>
+                    </div>
+                  </motion.div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-2 mt-16">
+              <button 
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+                className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-primary/10 hover:text-primary disabled:opacity-30 transition-all border border-white/10"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              {Array.from({ length: totalPages }, (_, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`w-10 h-10 rounded-lg text-sm transition-all ${
+                    currentPage === i + 1 
+                      ? "bg-primary text-primary-foreground" 
+                      : "bg-white/5 text-white/60 hover:bg-primary/10 hover:text-primary border border-white/10"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+              <button 
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+                className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-primary/10 hover:text-primary disabled:opacity-30 transition-all border border-white/10"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          )}
         </div>
       </section>
 
-      <ContactFormSection sectionNumber="04" />
+      {/* 04 - Newsletter Section */}
+      <section className="bg-[#121212] border-t border-white/10" id="newsletter">
+        {/* Section Header */}
+        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
+          <div className="flex items-baseline gap-6 md:gap-10">
+            <span className="text-[10px] md:text-xs text-primary font-mono tracking-widest">
+              {currentPage === 1 && selectedCategory === "All" && !searchQuery ? "04" : "03"}
+            </span>
+            <h2 className="text-lg md:text-xl font-medium text-white">Newsletter</h2>
+          </div>
+          <span className="text-xs text-white/40 tracking-wider hidden sm:block">
+            Stay Updated
+          </span>
+        </div>
+        
+        {/* Newsletter Content */}
+        <motion.div 
+          className="container mx-auto max-w-3xl px-4 py-20 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
+            Stay <span className="text-primary">Updated</span>
+          </h2>
+          <p className="text-white/60 mb-8 max-w-md mx-auto">
+            Subscribe to receive the latest research and insights directly in your inbox.
+          </p>
+          <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              value={newsletterEmail}
+              onChange={(e) => setNewsletterEmail(e.target.value)}
+              className="flex-1 bg-white/5 border-white/10 rounded-xl h-12 px-4 text-white placeholder:text-white/40 focus:border-primary/50 transition-colors"
+            />
+            <motion.button
+              type="submit"
+              disabled={isSubscribing}
+              className="px-8 h-12 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              {isSubscribing ? "..." : "Subscribe"}
+            </motion.button>
+          </form>
+        </motion.div>
+      </section>
+
+      {/* 05 - Contact Section */}
+      <section className="bg-[#0F0F0F] border-t border-white/10">
+        <ContactFormSection sectionNumber="05" />
+      </section>
+      
       <Footer />
     </div>
   );

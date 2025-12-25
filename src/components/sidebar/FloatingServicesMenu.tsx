@@ -40,27 +40,44 @@ const FloatingServicesMenu = ({ isActive, isCollapsed, isOpen, onToggle, current
           <TooltipTrigger asChild>
             <button
               className={cn(
-                "group relative flex items-center justify-center w-12 h-12 rounded-2xl overflow-hidden transition-all duration-200",
-                isServicesActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
-                !isServicesActive && "hover:bg-secondary/60"
+                "group relative flex items-center justify-center w-12 h-12 rounded-2xl overflow-hidden transition-all duration-300",
+                isServicesActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               )}
             >
-              {isServicesActive && (
-                <>
-                  <div className="absolute inset-0 bg-primary/15 rounded-2xl" />
-                </>
+              {/* Background with glow */}
+              <div className={cn(
+                "absolute inset-0 transition-opacity duration-500",
+                isServicesActive 
+                  ? "bg-primary/15 opacity-100" 
+                  : "bg-gradient-to-r from-secondary/0 via-secondary/60 to-secondary/0 opacity-0 group-hover:opacity-100"
+              )} />
+              
+              {!isServicesActive && (
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-primary/10" />
               )}
+              
               {isServicesActive && (
-                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-primary rounded-r-full" />
+                <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-primary rounded-r-full shadow-[0_0_12px_hsl(var(--primary)/0.6)]" />
               )}
-              <Briefcase 
-                className={cn(
-                  "relative z-10 w-5 h-5 transition-colors duration-200",
-                  isServicesActive && "text-primary"
-                )}
-              />
+              
+              {/* Icon with glow */}
+              <div className="relative z-10">
+                <div className={cn(
+                  "absolute inset-0 blur-lg scale-150 transition-all duration-500",
+                  isServicesActive 
+                    ? "bg-primary/40 opacity-100" 
+                    : "bg-primary/30 opacity-0 group-hover:opacity-100"
+                )} />
+                <Briefcase 
+                  className={cn(
+                    "relative w-5 h-5 transition-all duration-500",
+                    isServicesActive ? "text-primary" : "group-hover:text-primary group-hover:scale-110"
+                  )}
+                />
+              </div>
+              
               {isServicesActive && (
-                <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-primary rounded-full" />
+                <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_8px_hsl(var(--primary)/0.8)]" />
               )}
             </button>
           </TooltipTrigger>
@@ -101,19 +118,40 @@ const FloatingServicesMenu = ({ isActive, isCollapsed, isOpen, onToggle, current
                   key={item.href}
                   to={item.href}
                   className={cn(
-                    "group relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200",
+                    "group/item relative flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-300 overflow-hidden",
                     isItemActive 
                       ? "text-primary bg-primary/10" 
-                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                      : "text-muted-foreground hover:text-foreground"
                   )}
                 >
-                  <item.icon className={cn(
-                    "w-4 h-4 transition-colors duration-200",
-                    isItemActive && "text-primary"
-                  )} />
-                  <span className="text-[13px] font-medium">{item.name}</span>
+                  {/* Hover background */}
+                  {!isItemActive && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-secondary/0 via-secondary/50 to-secondary/0 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500" />
+                  )}
+                  
+                  {/* Icon with glow */}
+                  <div className="relative z-10">
+                    <div className={cn(
+                      "absolute inset-0 blur-md scale-150 transition-all duration-500",
+                      isItemActive 
+                        ? "bg-primary/30 opacity-100" 
+                        : "bg-primary/20 opacity-0 group-hover/item:opacity-100"
+                    )} />
+                    <item.icon className={cn(
+                      "relative w-4 h-4 transition-all duration-500",
+                      isItemActive ? "text-primary" : "group-hover/item:text-primary group-hover/item:scale-110"
+                    )} />
+                  </div>
+                  
+                  <span className={cn(
+                    "relative z-10 text-[13px] font-medium transition-all duration-300",
+                    !isItemActive && "group-hover/item:translate-x-0.5"
+                  )}>
+                    {item.name}
+                  </span>
+                  
                   {isItemActive && (
-                    <span className="absolute right-2 w-1.5 h-1.5 bg-primary rounded-full" />
+                    <span className="absolute right-2 w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_6px_hsl(var(--primary)/0.6)]" />
                   )}
                 </Link>
               );
@@ -130,38 +168,57 @@ const FloatingServicesMenu = ({ isActive, isCollapsed, isOpen, onToggle, current
       <button
         onClick={onToggle}
         className={cn(
-          "group relative flex items-center w-full px-4 py-3 gap-3 rounded-2xl overflow-hidden transition-all duration-200",
-          isServicesActive ? "text-foreground" : "text-muted-foreground hover:text-foreground",
-          !isServicesActive && "hover:bg-secondary/60"
+          "group relative flex items-center w-full px-4 py-3 gap-3 rounded-2xl overflow-hidden transition-all duration-300",
+          isServicesActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
         )}
       >
-        {isServicesActive && (
-          <div className="absolute inset-0 bg-primary/15 rounded-2xl" />
-        )}
-        {isServicesActive && (
-          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-primary rounded-r-full" />
+        {/* Background with glow */}
+        <div className={cn(
+          "absolute inset-0 transition-opacity duration-500",
+          isServicesActive 
+            ? "bg-primary/15 opacity-100" 
+            : "bg-gradient-to-r from-secondary/0 via-secondary/60 to-secondary/0 opacity-0 group-hover:opacity-100"
+        )} />
+        
+        {!isServicesActive && (
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl bg-primary/10" />
         )}
         
-        <div 
-          className={cn(
-            "relative z-10 flex items-center justify-center w-5 h-5 transition-colors duration-200",
-            isServicesActive ? "text-primary" : "text-muted-foreground group-hover:text-foreground"
-          )}
-        >
-          <Briefcase className="w-[18px] h-[18px]" />
+        {isServicesActive && (
+          <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-6 bg-primary rounded-r-full shadow-[0_0_12px_hsl(var(--primary)/0.6)]" />
+        )}
+        
+        {/* Icon with glow */}
+        <div className="relative z-10 flex items-center justify-center w-5 h-5">
+          <div className={cn(
+            "absolute inset-0 blur-lg scale-150 transition-all duration-500",
+            isServicesActive 
+              ? "bg-primary/40 opacity-100" 
+              : "bg-primary/30 opacity-0 group-hover:opacity-100"
+          )} />
+          <Briefcase className={cn(
+            "relative w-[18px] h-[18px] transition-all duration-500",
+            isServicesActive ? "text-primary" : "group-hover:text-primary group-hover:scale-110"
+          )} />
         </div>
         
         <span className={cn(
-          "relative z-10 flex-1 text-left text-sm font-medium tracking-wide transition-colors duration-200",
-          isServicesActive && "text-foreground"
+          "relative z-10 flex-1 text-left text-sm font-medium tracking-wide transition-all duration-300",
+          isServicesActive ? "text-foreground" : "group-hover:translate-x-0.5"
         )}>
           Services
         </span>
         
         <ChevronDown className={cn(
-          "relative z-10 w-4 h-4 text-muted-foreground transition-transform duration-300",
-          isOpen && "rotate-180"
+          "relative z-10 w-4 h-4 text-muted-foreground transition-all duration-300",
+          isOpen && "rotate-180",
+          "group-hover:text-primary"
         )} />
+        
+        {/* Right edge glow line on hover */}
+        {!isServicesActive && (
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 w-0.5 h-0 bg-gradient-to-b from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 group-hover:h-1/2 transition-all duration-500" />
+        )}
       </button>
 
       {/* Dropdown submenu */}
@@ -177,19 +234,40 @@ const FloatingServicesMenu = ({ isActive, isCollapsed, isOpen, onToggle, current
                 key={item.href}
                 to={item.href}
                 className={cn(
-                  "group relative flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-200",
+                  "group/item relative flex items-center gap-3 px-3 py-2 rounded-xl transition-all duration-300 overflow-hidden",
                   isItemActive 
                     ? "text-primary bg-primary/10" 
-                    : "text-muted-foreground hover:text-foreground hover:bg-secondary/40"
+                    : "text-muted-foreground hover:text-foreground"
                 )}
               >
-                <item.icon className={cn(
-                  "w-4 h-4 transition-colors duration-200",
-                  isItemActive && "text-primary"
-                )} />
-                <span className="text-[13px] font-medium">{item.name}</span>
+                {/* Hover background */}
+                {!isItemActive && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-secondary/0 via-secondary/40 to-secondary/0 opacity-0 group-hover/item:opacity-100 transition-opacity duration-500" />
+                )}
+                
+                {/* Icon with glow */}
+                <div className="relative z-10">
+                  <div className={cn(
+                    "absolute inset-0 blur-md scale-150 transition-all duration-500",
+                    isItemActive 
+                      ? "bg-primary/30 opacity-100" 
+                      : "bg-primary/20 opacity-0 group-hover/item:opacity-100"
+                  )} />
+                  <item.icon className={cn(
+                    "relative w-4 h-4 transition-all duration-500",
+                    isItemActive ? "text-primary" : "group-hover/item:text-primary group-hover/item:scale-110"
+                  )} />
+                </div>
+                
+                <span className={cn(
+                  "relative z-10 text-[13px] font-medium transition-all duration-300",
+                  !isItemActive && "group-hover/item:translate-x-0.5"
+                )}>
+                  {item.name}
+                </span>
+                
                 {isItemActive && (
-                  <span className="absolute right-2 w-1.5 h-1.5 bg-primary rounded-full" />
+                  <span className="absolute right-2 w-1.5 h-1.5 bg-primary rounded-full shadow-[0_0_6px_hsl(var(--primary)/0.6)]" />
                 )}
               </Link>
             );
