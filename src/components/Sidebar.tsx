@@ -1,13 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronLeft, Send, Linkedin } from "lucide-react";
+import { ChevronLeft, Send, Linkedin, Home, Briefcase, FolderOpen, BookOpen, Mail } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { cn } from "@/lib/utils";
 import SimpleNavItem from "@/components/sidebar/SimpleNavItem";
 import FloatingServicesMenu from "@/components/sidebar/FloatingServicesMenu";
+import logoImage from "@/assets/logo.png";
 
+// Icon mapping for navigation items
+const navIconMap: Record<string, React.ElementType> = {
+  'Home': Home,
+  'Services': Briefcase,
+  'Projects': FolderOpen,
+  'Research': BookOpen,
+  'Contact': Mail,
+};
 // Section IDs for scroll-based highlighting on homepage
 const sectionIds = ['hero', 'services', 'process', 'cases', 'why-choose-us', 'gallery', 'media-partners', 'insights', 'contact'];
 
@@ -29,10 +38,10 @@ const Sidebar = () => {
   const currentPath = location.pathname;
   const { isCollapsed, toggleSidebar } = useSidebarState();
   const [activeSection, setActiveSection] = useState('hero');
+  const [scrollProgress, setScrollProgress] = useState(0);
   const [servicesOpen, setServicesOpen] = useState(() => {
     return currentPath.startsWith('/services/');
   });
-
   // Auto-open services menu when navigating to a service page
   useEffect(() => {
     if (currentPath.startsWith('/services/')) {
@@ -40,9 +49,14 @@ const Sidebar = () => {
     }
   }, [currentPath]);
 
-  // Scroll-based section detection
+  // Scroll-based section detection and progress
   useEffect(() => {
     const handleScroll = () => {
+      // Calculate scroll progress
+      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollHeight > 0 ? (window.scrollY / scrollHeight) * 100 : 0;
+      setScrollProgress(Math.min(100, Math.max(0, progress)));
+
       // Section detection only on homepage
       if (currentPath !== '/') return;
 
@@ -96,12 +110,20 @@ const Sidebar = () => {
         {/* Minimal Container - only right border */}
         <div className="relative flex flex-col h-full border-r border-white/[0.08]">
           
+          {/* Scroll Progress Indicator - Minimal vertical line */}
+          <div className="absolute right-0 top-0 w-px h-full bg-white/5">
+            <div 
+              className="w-full bg-white/30 transition-all duration-150 ease-out"
+              style={{ height: `${scrollProgress}%` }}
+            />
+          </div>
+          
           {/* Content Container */}
           <div className={cn(
             "relative z-10 flex flex-col h-full py-8",
             isCollapsed ? "px-4 items-center" : "px-6"
           )}>
-            {/* Logo Section - Text only */}
+            {/* Logo Section - Image logo */}
             <Link 
               to="/" 
               className={cn(
@@ -112,9 +134,11 @@ const Sidebar = () => {
               {isCollapsed ? (
                 <Tooltip delayDuration={0}>
                   <TooltipTrigger asChild>
-                    <span className="text-lg font-bold text-white/80 group-hover:text-white transition-colors cursor-pointer">
-                      IL
-                    </span>
+                    <img 
+                      src={logoImage} 
+                      alt="Ium Labs" 
+                      className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 transition-opacity cursor-pointer"
+                    />
                   </TooltipTrigger>
                   <TooltipContent 
                     side="right" 
@@ -125,13 +149,20 @@ const Sidebar = () => {
                   </TooltipContent>
                 </Tooltip>
               ) : (
-                <div className="flex flex-col">
-                  <span className="text-base font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">
-                    Ium Labs
-                  </span>
-                  <span className="text-[9px] text-white/30 font-medium tracking-[0.25em] uppercase mt-0.5">
-                    Web3 Agency
-                  </span>
+                <div className="flex items-center gap-3">
+                  <img 
+                    src={logoImage} 
+                    alt="Ium Labs" 
+                    className="w-9 h-9 object-contain opacity-90 group-hover:opacity-100 transition-opacity"
+                  />
+                  <div className="flex flex-col">
+                    <span className="text-base font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">
+                      Ium Labs
+                    </span>
+                    <span className="text-[9px] text-white/30 font-medium tracking-[0.25em] uppercase">
+                      Web3 Agency
+                    </span>
+                  </div>
                 </div>
               )}
             </Link>
@@ -160,11 +191,13 @@ const Sidebar = () => {
                   );
                 }
                 
+                const NavIcon = navIconMap[link.name];
                 return (
                   <SimpleNavItem
                     key={link.href}
                     to={link.href}
                     label={link.name}
+                    icon={NavIcon}
                     isActive={isActive}
                     isCollapsed={isCollapsed}
                   />

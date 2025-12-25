@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Briefcase } from "lucide-react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 
@@ -44,12 +44,13 @@ const FloatingServicesMenu = ({ isActive, isCollapsed, isOpen, onToggle, current
                 isServicesActive ? "text-white" : "text-white/40 hover:text-white"
               )}
             >
-              <span className="text-sm font-medium">S</span>
+              <Briefcase className="w-4 h-4" />
               
               {/* Underline for active */}
-              {isServicesActive && (
-                <span className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-4 h-px bg-white/60" />
-              )}
+              <span className={cn(
+                "absolute bottom-1.5 left-1/2 -translate-x-1/2 h-px bg-white/60 transition-all duration-300",
+                isServicesActive ? "w-4" : "w-0 group-hover:w-4"
+              )} />
             </button>
           </TooltipTrigger>
           {!showPopover && (
