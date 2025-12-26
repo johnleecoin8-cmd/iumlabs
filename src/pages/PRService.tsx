@@ -152,107 +152,115 @@ const PRService = () => {
           
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                {/* Left - Description */}
-                <div>
-                  <p className="text-white/60 text-lg leading-relaxed mb-8">
-                    We maintain direct relationships with 50+ media outlets across global and Korean markets. Our network ensures your announcements reach the right audiences with maximum impact.
-                  </p>
-                  
-                  {/* Region Toggle */}
-                  <div className="flex gap-2 mb-6">
-                    <motion.button
-                      onClick={() => setActiveRegion('global')}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ${
-                        activeRegion === 'global' 
-                          ? 'text-white shadow-lg' 
-                          : 'bg-white/10 text-white/60 hover:bg-white/20'
-                      }`}
-                      style={activeRegion === 'global' ? { 
-                        backgroundColor: ACCENT_COLOR,
-                        boxShadow: `0 10px 40px ${ACCENT_COLOR}40`
-                      } : {}}
-                    >
-                      <Globe className="w-5 h-5" />
-                      Global
-                    </motion.button>
-                    <motion.button
-                      onClick={() => setActiveRegion('korea')}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ${
-                        activeRegion === 'korea' 
-                          ? 'text-white shadow-lg' 
-                          : 'bg-white/10 text-white/60 hover:bg-white/20'
-                      }`}
-                      style={activeRegion === 'korea' ? { 
-                        backgroundColor: ACCENT_COLOR,
-                        boxShadow: `0 10px 40px ${ACCENT_COLOR}40`
-                      } : {}}
-                    >
-                      <span className="text-lg">🇰🇷</span>
-                      Korea
-                    </motion.button>
-                  </div>
-                </div>
+              {/* Region Toggle - Centered */}
+              <div className="flex justify-center gap-3 mb-12">
+                <motion.button
+                  onClick={() => setActiveRegion('global')}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 ${
+                    activeRegion === 'global' 
+                      ? 'text-white shadow-lg' 
+                      : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white/70'
+                  }`}
+                  style={activeRegion === 'global' ? { 
+                    backgroundColor: ACCENT_COLOR,
+                    boxShadow: `0 10px 40px ${ACCENT_COLOR}40`
+                  } : {}}
+                >
+                  <Globe className="w-4 h-4" />
+                  Global
+                </motion.button>
+                <motion.button
+                  onClick={() => setActiveRegion('korea')}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className={`flex items-center gap-2 px-6 py-3 rounded-full font-medium text-sm transition-all duration-300 ${
+                    activeRegion === 'korea' 
+                      ? 'text-white shadow-lg' 
+                      : 'bg-white/5 text-white/50 hover:bg-white/10 hover:text-white/70'
+                  }`}
+                  style={activeRegion === 'korea' ? { 
+                    backgroundColor: ACCENT_COLOR,
+                    boxShadow: `0 10px 40px ${ACCENT_COLOR}40`
+                  } : {}}
+                >
+                  <span className="text-base">🇰🇷</span>
+                  Korea
+                </motion.button>
+              </div>
 
-                {/* Right - Media Partners Grid */}
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={activeRegion}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="grid grid-cols-1 sm:grid-cols-3 gap-4"
-                  >
-                    {currentPartners.map((partner) => (
-                      <motion.div
-                        key={partner.name}
-                        onMouseEnter={() => setHoveredPartner(partner.name)}
-                        onMouseLeave={() => setHoveredPartner(null)}
-                        whileHover={{ scale: 1.02, y: -4 }}
-                        className="relative bg-white/5 border border-white/10 rounded-xl p-6 cursor-pointer transition-all duration-300 hover:border-white/20 hover:bg-white/10 group"
+              {/* Media Partners - Horizontal Cards */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeRegion}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="flex flex-col md:flex-row gap-4 justify-center"
+                >
+                  {currentPartners.map((partner, index) => (
+                    <motion.div
+                      key={partner.name}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      onMouseEnter={() => setHoveredPartner(partner.name)}
+                      onMouseLeave={() => setHoveredPartner(null)}
+                      className="group relative flex-1 max-w-sm"
+                    >
+                      <div 
+                        className="relative bg-gradient-to-br from-white/[0.08] to-transparent border border-white/10 rounded-2xl p-8 h-full transition-all duration-500 hover:border-white/20 overflow-hidden"
+                        style={{
+                          boxShadow: hoveredPartner === partner.name ? `0 20px 60px ${ACCENT_COLOR}20` : 'none'
+                        }}
                       >
+                        {/* Accent line */}
+                        <div 
+                          className="absolute top-0 left-0 right-0 h-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                          style={{ background: `linear-gradient(90deg, transparent, ${ACCENT_COLOR}, transparent)` }}
+                        />
+                        
                         {/* Logo */}
-                        <div className="h-12 flex items-center justify-center mb-4">
+                        <div className="h-16 flex items-center justify-center mb-6">
                           <img 
                             src={partner.logo} 
                             alt={partner.name}
-                            className="max-h-10 max-w-full object-contain brightness-0 invert opacity-70 group-hover:opacity-100 transition-opacity"
+                            className="max-h-12 max-w-[160px] object-contain brightness-0 invert opacity-60 group-hover:opacity-100 transition-all duration-300"
                           />
                         </div>
                         
-                        {/* Stats */}
-                        <div className="text-center">
-                          <p className="text-white font-medium mb-1">{partner.name}</p>
-                          <div className="flex items-center justify-center gap-4 text-sm text-white/50">
-                            <span>{partner.articles} articles</span>
-                            <span>•</span>
-                            <span>{partner.reach} reach</span>
+                        {/* Stats Grid */}
+                        <div className="grid grid-cols-2 gap-4 text-center">
+                          <div className="bg-white/5 rounded-xl p-4">
+                            <p className="text-2xl font-bold text-white mb-1">{partner.articles}</p>
+                            <p className="text-xs text-white/40 uppercase tracking-wider">Articles</p>
+                          </div>
+                          <div className="bg-white/5 rounded-xl p-4">
+                            <p className="text-2xl font-bold text-white mb-1">{partner.reach}</p>
+                            <p className="text-xs text-white/40 uppercase tracking-wider">Reach</p>
                           </div>
                         </div>
 
-                        {/* Hover indicator */}
-                        <AnimatePresence>
-                          {hoveredPartner === partner.name && (
-                            <motion.div
-                              initial={{ opacity: 0, scale: 0.8 }}
-                              animate={{ opacity: 1, scale: 1 }}
-                              exit={{ opacity: 0, scale: 0.8 }}
-                              className="absolute top-3 right-3"
-                            >
-                              <ArrowUpRight className="w-4 h-4 text-white/60" />
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </motion.div>
-                    ))}
-                  </motion.div>
-                </AnimatePresence>
-              </div>
+                        {/* Hover arrow */}
+                        <motion.div
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: hoveredPartner === partner.name ? 1 : 0, x: hoveredPartner === partner.name ? 0 : -10 }}
+                          className="absolute top-4 right-4"
+                        >
+                          <ArrowUpRight className="w-5 h-5" style={{ color: ACCENT_COLOR }} />
+                        </motion.div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Bottom text */}
+              <p className="text-center text-white/40 text-sm mt-10 max-w-xl mx-auto">
+                Direct relationships with 50+ media outlets across global and Korean markets
+              </p>
             </div>
           </div>
         </div>
