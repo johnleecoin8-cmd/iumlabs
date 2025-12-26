@@ -6,7 +6,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
-import { ArrowRight, Calendar, ChevronDown, Filter, Rocket, TrendingUp, Users, DollarSign, Quote, Star } from "lucide-react";
+import { ArrowRight, Calendar, ChevronDown, Filter, Rocket, TrendingUp, Users, DollarSign, Zap, Globe, Target, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -425,7 +425,7 @@ const Projects = () => {
               </div>
             </div>
 
-            {/* Right: Sticky Info Panel - Client Testimonial */}
+            {/* Right: Sticky Info Panel - Animated Visual */}
             <motion.div
               className="w-full lg:w-1/3 p-6 md:p-8 lg:p-10 flex flex-col justify-center lg:sticky lg:top-20 lg:h-fit"
               initial={{ opacity: 0, x: 20 }}
@@ -433,53 +433,114 @@ const Projects = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="mb-6">
-                <div className="flex items-center gap-1 mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                  ))}
-                </div>
-                <Quote className="w-8 h-8 text-foreground/20 mb-4" />
-                <p className="text-lg text-foreground/90 leading-relaxed mb-6 italic">
-                  "Ium Labs didn't just help us enter Korea—they helped us dominate it. Their deep understanding of the market and strategic execution exceeded our expectations."
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-foreground/20 to-foreground/5 flex items-center justify-center">
-                    <span className="text-sm font-semibold text-foreground">JK</span>
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-foreground">John Kim</p>
-                    <p className="text-xs text-muted-foreground">Head of Growth, Global Web3 Project</p>
-                  </div>
+              {/* Animated Floating Keywords */}
+              <div className="relative h-48 mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-foreground/5 to-transparent border border-border">
+                {/* Floating Tags */}
+                {["DeFi", "Layer 1", "Layer 2", "NFT", "GameFi", "AI", "RWA", "DePIN"].map((tag, i) => (
+                  <motion.span
+                    key={tag}
+                    className="absolute px-3 py-1.5 text-xs font-medium rounded-full bg-foreground/10 text-foreground/70 border border-border/50"
+                    style={{
+                      left: `${10 + (i % 4) * 22}%`,
+                      top: `${15 + Math.floor(i / 4) * 45}%`,
+                    }}
+                    animate={{
+                      y: [0, -8, 0],
+                      opacity: [0.5, 1, 0.5],
+                    }}
+                    transition={{
+                      duration: 3 + i * 0.3,
+                      repeat: Infinity,
+                      delay: i * 0.2,
+                      ease: "easeInOut",
+                    }}
+                  >
+                    {tag}
+                  </motion.span>
+                ))}
+                
+                {/* Center Glow Effect */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <motion.div
+                    className="w-20 h-20 rounded-full bg-gradient-to-r from-foreground/20 to-foreground/5 blur-xl"
+                    animate={{
+                      scale: [1, 1.3, 1],
+                      opacity: [0.3, 0.6, 0.3],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                  />
                 </div>
               </div>
 
-              <div className="border-t border-border pt-6 mt-2">
-                <h3 className="text-sm font-medium text-foreground mb-3 uppercase tracking-wider">What We Offer</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground mb-6">
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-foreground/50" />
-                    End-to-end GTM strategy
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-foreground/50" />
-                    Korea-native KOL network
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-foreground/50" />
-                    Community & PR management
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-foreground/50" />
-                    Data-driven optimization
-                  </li>
-                </ul>
+              {/* Animated Service Icons */}
+              <div className="grid grid-cols-2 gap-3 mb-8">
+                {[
+                  { icon: Globe, label: "Korea Market", delay: 0 },
+                  { icon: Target, label: "GTM Strategy", delay: 0.1 },
+                  { icon: Users, label: "Community", delay: 0.2 },
+                  { icon: BarChart3, label: "Analytics", delay: 0.3 },
+                ].map((item, i) => (
+                  <motion.div
+                    key={item.label}
+                    className="flex items-center gap-3 p-3 rounded-xl bg-foreground/5 border border-border/50 hover:bg-foreground/10 transition-colors cursor-default"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: item.delay + 0.3 }}
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <motion.div
+                      className="w-8 h-8 rounded-lg bg-foreground/10 flex items-center justify-center"
+                      animate={{ rotate: [0, 5, -5, 0] }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        delay: i * 0.5,
+                        ease: "easeInOut",
+                      }}
+                    >
+                      <item.icon className="w-4 h-4 text-foreground/70" />
+                    </motion.div>
+                    <span className="text-xs font-medium text-foreground/80">{item.label}</span>
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Animated Progress Indicator */}
+              <div className="space-y-4 mb-8">
+                <p className="text-sm text-muted-foreground">Average project success rate</p>
+                <div className="relative h-2 bg-foreground/10 rounded-full overflow-hidden">
+                  <motion.div
+                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-foreground/60 to-foreground rounded-full"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: "94%" }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
+                  />
+                </div>
+                <div className="flex justify-between text-xs">
+                  <span className="text-muted-foreground">0%</span>
+                  <motion.span
+                    className="font-bold text-foreground"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 1.5 }}
+                  >
+                    94%
+                  </motion.span>
+                </div>
               </div>
 
               <Link
                 to="/contact"
                 className="group inline-flex items-center justify-center gap-2 bg-foreground text-background px-6 py-4 sm:py-3 text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-full sm:w-fit min-h-[48px]"
               >
+                <Zap className="w-4 h-4" />
                 START YOUR PROJECT
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
