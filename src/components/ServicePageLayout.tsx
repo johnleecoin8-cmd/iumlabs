@@ -48,10 +48,10 @@ const clientLogos = [
 
 // All services for "More Services" section
 const allServices = [
-  { slug: "gtm-strategy", title: "GTM Strategy", color: "#10B981" },
-  { slug: "community", title: "Community", color: "#5865F2" },
+  { slug: "offline-event", title: "Offline Event", color: "#10B981" },
+  { slug: "community", title: "Community Management", color: "#5865F2" },
   { slug: "social-media", title: "Social Media", color: "#EC4899" },
-  { slug: "influencer", title: "Influencer", color: "#F59E0B" },
+  { slug: "influencer", title: "Influencer/KOL", color: "#F59E0B" },
   { slug: "yap", title: "Yap Strategy", color: "#22D3EE" },
   { slug: "pr-media", title: "PR & Media", color: "#8B5CF6" },
 ];

@@ -122,7 +122,7 @@ const tierData = [
 ];
 
 const InfluencerService = () => {
-  usePageTitle("Influencer Marketing");
+  usePageTitle("Influencer/KOL");
   const [activeTier, setActiveTier] = useState<string | null>(null);
   
   const filteredKOLs = activeTier 
@@ -131,9 +131,9 @@ const InfluencerService = () => {
   
   return (
     <ServicePageLayout
-      serviceName="Influencer Strategy"
-      serviceTitle="Connect with"
-      serviceSubtitle="Crypto's Top Voices"
+      serviceName="Influencer/KOL"
+      serviceTitle="Access Our"
+      serviceSubtitle="KOL Network"
       serviceDescription="Access our exclusive network of 120+ crypto KOLs and reach 50M+ engaged followers across X, YouTube, and Telegram."
       serviceIcon={Star}
       serviceTags={serviceTags}

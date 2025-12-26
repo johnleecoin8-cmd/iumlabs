@@ -7,10 +7,10 @@ import { cn } from "@/lib/utils";
 
 // Services submenu data
 const servicesSubMenu = [
-  { name: "GTM Strategy", href: "/services/gtm" },
-  { name: "Community", href: "/services/community" },
+  { name: "Offline Event", href: "/services/offline-event" },
+  { name: "Community Management", href: "/services/community" },
   { name: "Social Media", href: "/services/social-media" },
-  { name: "Influencer", href: "/services/influencer" },
+  { name: "Influencer/KOL", href: "/services/influencer" },
   { name: "Yap Service", href: "/services/yap" },
   { name: "PR/Media", href: "/services/pr" },
 ];
