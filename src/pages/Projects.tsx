@@ -6,7 +6,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
-import { ArrowRight, Calendar, ChevronDown, Filter, Rocket, TrendingUp, Users, DollarSign, Zap, Globe, Target, BarChart3 } from "lucide-react";
+import { ArrowRight, Calendar, ChevronDown, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -70,10 +70,10 @@ interface Project {
 }
 
 const stats = [
-  { value: 18, label: "Successful Launches", suffix: "+", icon: Rocket },
-  { value: 340, label: "Average Growth", suffix: "%", icon: TrendingUp },
-  { value: 6, label: "Token Sale Raised", prefix: "$", suffix: "M+", icon: DollarSign },
-  { value: 50, label: "Korean Users Onboarded", suffix: "K+", icon: Users },
+  { value: 18, label: "Projects Launched", suffix: "+" },
+  { value: 340, label: "Avg. Volume Increase", suffix: "%" },
+  { value: 6, label: "Token Sales", prefix: "$", suffix: "M+" },
+  { value: 50, label: "New Users Acquired", suffix: "K+" },
 ];
 
 // Stat Item Component
@@ -82,7 +82,6 @@ const StatItem = ({
   label, 
   prefix = "", 
   suffix = "",
-  icon: Icon,
   isVisible,
   delay 
 }: { 
@@ -90,7 +89,6 @@ const StatItem = ({
   label: string; 
   prefix?: string; 
   suffix?: string;
-  icon: React.ComponentType<{ className?: string }>;
   isVisible: boolean;
   delay: number;
 }) => {
@@ -103,16 +101,11 @@ const StatItem = ({
   
   return (
     <motion.div 
-      className="text-center p-4 sm:p-6 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 hover:bg-white/10 transition-all duration-300"
+      className="text-center"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
     >
-      <div className="flex items-center justify-center mb-2 sm:mb-3">
-        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-white/10 flex items-center justify-center">
-          <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white/80" />
-        </div>
-      </div>
       <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
         {prefix}{count}{suffix}
       </div>
@@ -305,9 +298,9 @@ const Projects = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
-                  <span className="text-white">Proven </span>
-                  <span className="text-white/90">Results </span>
-                  <span className="text-white">in Korea</span>
+                  <span className="text-white">Our </span>
+                  <span className="text-white/90">Case </span>
+                  <span className="text-white">Studies</span>
                 </motion.h1>
 
                 {/* Subtext */}
@@ -317,7 +310,7 @@ const Projects = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  We don't just promise—<span className="text-white font-medium">we deliver measurable outcomes</span>. See how global Web3 projects achieved real growth in the Korean market.
+                  Real results from <span className="text-white font-medium">18+ global Web3 projects</span> successfully entering and scaling in the Korean market.
                 </motion.p>
 
                 {/* CTA Button */}
@@ -340,9 +333,9 @@ const Projects = () => {
             </div>
 
             {/* Stats Section */}
-            <div className="relative z-10 py-6 sm:py-10">
+            <div className="relative z-10 py-4 sm:py-6">
               <div className="container mx-auto px-4 sm:px-6">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
                   {stats.map((stat, index) => (
                     <StatItem 
                       key={index}
@@ -350,7 +343,6 @@ const Projects = () => {
                       label={stat.label}
                       prefix={stat.prefix}
                       suffix={stat.suffix}
-                      icon={stat.icon}
                       isVisible={isStatsVisible}
                       delay={index * 100}
                     />
@@ -379,7 +371,7 @@ const Projects = () => {
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-foreground">Browse by Category</h2>
+              <h2 className="text-lg md:text-xl font-medium text-foreground">Filter</h2>
             </div>
             <span className="text-xs text-muted-foreground tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-border rounded-full">
               <Filter className="w-3 h-3" />
@@ -403,7 +395,7 @@ const Projects = () => {
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">02</span>
-              <h2 className="text-lg md:text-xl font-medium text-foreground">Featured Projects</h2>
+              <h2 className="text-lg md:text-xl font-medium text-foreground">Case Studies</h2>
             </div>
             <span className="text-xs text-muted-foreground tracking-wider hidden sm:block px-3 py-1 border border-border rounded-full">
               {filteredCases.length} Projects
@@ -425,122 +417,40 @@ const Projects = () => {
               </div>
             </div>
 
-            {/* Right: Sticky Info Panel - Animated Visual */}
+            {/* Right: Sticky Info Panel */}
             <motion.div
-              className="w-full lg:w-1/3 p-6 md:p-8 lg:p-10 flex flex-col justify-center lg:sticky lg:top-20 lg:h-fit"
+              className="w-full lg:w-1/3 p-6 md:p-8 lg:p-10 flex flex-col justify-center"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              {/* Animated Floating Keywords */}
-              <div className="relative h-48 mb-8 overflow-hidden rounded-2xl bg-gradient-to-br from-foreground/5 to-transparent border border-border">
-                {/* Floating Tags */}
-                {["DeFi", "Layer 1", "Layer 2", "NFT", "GameFi", "AI", "RWA", "DePIN"].map((tag, i) => (
-                  <motion.span
-                    key={tag}
-                    className="absolute px-3 py-1.5 text-xs font-medium rounded-full bg-foreground/10 text-foreground/70 border border-border/50"
-                    style={{
-                      left: `${10 + (i % 4) * 22}%`,
-                      top: `${15 + Math.floor(i / 4) * 45}%`,
-                    }}
-                    animate={{
-                      y: [0, -8, 0],
-                      opacity: [0.5, 1, 0.5],
-                    }}
-                    transition={{
-                      duration: 3 + i * 0.3,
-                      repeat: Infinity,
-                      delay: i * 0.2,
-                      ease: "easeInOut",
-                    }}
-                  >
-                    {tag}
-                  </motion.span>
-                ))}
-                
-                {/* Center Glow Effect */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <motion.div
-                    className="w-20 h-20 rounded-full bg-gradient-to-r from-foreground/20 to-foreground/5 blur-xl"
-                    animate={{
-                      scale: [1, 1.3, 1],
-                      opacity: [0.3, 0.6, 0.3],
-                    }}
-                    transition={{
-                      duration: 4,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                  />
-                </div>
-              </div>
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                Our Track Record
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-8">
+                Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
+              </p>
 
-              {/* Animated Service Icons */}
-              <div className="grid grid-cols-2 gap-3 mb-8">
-                {[
-                  { icon: Globe, label: "Korea Market", delay: 0 },
-                  { icon: Target, label: "GTM Strategy", delay: 0.1 },
-                  { icon: Users, label: "Community", delay: 0.2 },
-                  { icon: BarChart3, label: "Analytics", delay: 0.3 },
-                ].map((item, i) => (
-                  <motion.div
-                    key={item.label}
-                    className="flex items-center gap-3 p-3 rounded-xl bg-foreground/5 border border-border/50 hover:bg-foreground/10 transition-colors cursor-default"
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: item.delay + 0.3 }}
-                    whileHover={{ scale: 1.02 }}
-                  >
-                    <motion.div
-                      className="w-8 h-8 rounded-lg bg-foreground/10 flex items-center justify-center"
-                      animate={{ rotate: [0, 5, -5, 0] }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        delay: i * 0.5,
-                        ease: "easeInOut",
-                      }}
-                    >
-                      <item.icon className="w-4 h-4 text-foreground/70" />
-                    </motion.div>
-                    <span className="text-xs font-medium text-foreground/80">{item.label}</span>
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Animated Progress Indicator */}
-              <div className="space-y-4 mb-8">
-                <p className="text-sm text-muted-foreground">Average project success rate</p>
-                <div className="relative h-2 bg-foreground/10 rounded-full overflow-hidden">
-                  <motion.div
-                    className="absolute inset-y-0 left-0 bg-gradient-to-r from-foreground/60 to-foreground rounded-full"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "94%" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-                  />
+              <div className="space-y-6 mb-8">
+                <div className="flex items-center gap-4 pb-4 border-b border-border">
+                  <span className="text-3xl font-bold text-foreground">340%</span>
+                  <span className="text-muted-foreground text-sm">Average volume increase</span>
                 </div>
-                <div className="flex justify-between text-xs">
-                  <span className="text-muted-foreground">0%</span>
-                  <motion.span
-                    className="font-bold text-foreground"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 1.5 }}
-                  >
-                    94%
-                  </motion.span>
+                <div className="flex items-center gap-4 pb-4 border-b border-border">
+                  <span className="text-3xl font-bold text-foreground">50K+</span>
+                  <span className="text-muted-foreground text-sm">New users acquired</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="text-3xl font-bold text-foreground">18+</span>
+                  <span className="text-muted-foreground text-sm">Projects launched</span>
                 </div>
               </div>
 
               <Link
                 to="/contact"
-                className="group inline-flex items-center justify-center gap-2 bg-foreground text-background px-6 py-4 sm:py-3 text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-full sm:w-fit min-h-[48px]"
+                className="group inline-flex items-center justify-center gap-2 bg-foreground text-background px-6 py-4 sm:py-3 text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-full sm:w-fit mb-6 min-h-[48px]"
               >
-                <Zap className="w-4 h-4" />
                 START YOUR PROJECT
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
