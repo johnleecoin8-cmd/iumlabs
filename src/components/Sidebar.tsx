@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronLeft, Send, Linkedin, Home, Briefcase, FolderOpen, BookOpen, Mail } from "lucide-react";
+import { ChevronLeft, Send, Linkedin, Home, Briefcase, FolderOpen, BookOpen, Mail, AtSign } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSidebarState } from "@/hooks/useSidebarState";
@@ -110,15 +110,15 @@ const Sidebar = () => {
         {/* Minimal Container - only right border */}
         <div className="relative flex flex-col h-full border-r border-white/[0.08]">
           
-          {/* Scroll Progress Indicator - Minimal vertical line with glow */}
-          <div className="absolute right-0 top-0 w-px h-full bg-white/5">
+          {/* Scroll Progress Indicator - Brand color with glow */}
+          <div className="absolute right-0 top-0 w-px h-full bg-primary/10">
             <div 
-              className="w-full bg-gradient-to-b from-white/50 via-white/30 to-white/10 transition-all duration-150 ease-out relative"
+              className="w-full bg-gradient-to-b from-primary via-primary/60 to-primary/20 transition-all duration-150 ease-out relative"
               style={{ height: `${scrollProgress}%` }}
             >
               {/* Glow effect at the bottom of progress */}
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-8 bg-white/40 blur-md rounded-full" />
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-4 bg-white/60 blur-sm rounded-full" />
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-10 bg-primary/50 blur-lg rounded-full" />
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-5 bg-primary blur-sm rounded-full" />
             </div>
           </div>
           
@@ -214,45 +214,72 @@ const Sidebar = () => {
               })}
             </nav>
 
-            {/* Thin separator line */}
-            <div className={cn("my-6", isCollapsed ? "w-6" : "w-8")}>
-              <div className="h-px bg-white/10" />
-            </div>
-
-            {/* Social Links - Horizontal icons */}
+            {/* Bottom Section - Social Links & Toggle */}
             <div className={cn(
-              "flex items-center gap-4",
-              isCollapsed ? "flex-col gap-3" : ""
+              "mt-auto pt-6 border-t border-white/[0.06]",
+              isCollapsed ? "w-full flex flex-col items-center" : ""
             )}>
-              <a
-                href={brand.telegramLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/30 hover:text-white transition-colors duration-300"
-              >
-                <Send className="w-4 h-4" />
-              </a>
-              <a
-                href={brand.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/30 hover:text-white transition-colors duration-300"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-            </div>
+              {/* Contact Info - Only when expanded */}
+              {!isCollapsed && (
+                <div className="mb-6">
+                  <span className="text-[9px] text-white/30 font-medium tracking-[0.2em] uppercase block mb-3">
+                    Connect
+                  </span>
+                  <a 
+                    href={`mailto:${brand.email}`}
+                    className="group flex items-center gap-2 text-white/40 hover:text-white transition-colors duration-300 mb-2"
+                  >
+                    <AtSign className="w-3.5 h-3.5" />
+                    <span className="text-xs">{brand.email}</span>
+                  </a>
+                </div>
+              )}
 
-            {/* Toggle Button - Icon only */}
-            <div className="mt-6">
+              {/* Social Icons Row */}
+              <div className={cn(
+                "flex items-center",
+                isCollapsed ? "flex-col gap-4" : "gap-3 mb-6"
+              )}>
+                <a
+                  href={brand.telegramLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
+                >
+                  <Send className="w-4 h-4" />
+                </a>
+                <a
+                  href={brand.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group relative p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
+                >
+                  <Linkedin className="w-4 h-4" />
+                </a>
+                <a
+                  href={`mailto:${brand.email}`}
+                  className="group relative p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
+                >
+                  <Mail className="w-4 h-4" />
+                </a>
+              </div>
+
+              {/* Toggle Button */}
               <button
                 onClick={toggleSidebar}
-                className="text-white/20 hover:text-white/60 transition-colors duration-300"
+                className={cn(
+                  "flex items-center justify-center p-2 rounded-lg text-white/20 hover:text-white/60 hover:bg-white/5 transition-all duration-300",
+                  isCollapsed ? "w-full" : ""
+                )}
                 aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
               >
                 <ChevronLeft className={cn(
                   "w-4 h-4 transition-transform duration-300",
                   isCollapsed && "rotate-180"
                 )} />
+                {!isCollapsed && (
+                  <span className="text-[10px] text-white/30 ml-2">Collapse</span>
+                )}
               </button>
             </div>
           </div>
