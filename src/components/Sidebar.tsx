@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronLeft, Send, Linkedin, Home, Briefcase, FolderOpen, BookOpen, Mail } from "lucide-react";
+import { ChevronLeft, Home, Briefcase, FolderOpen, BookOpen, Mail } from "lucide-react";
 import { motion } from "framer-motion";
-import { brand, navigation } from "@/config/content";
+import { navigation } from "@/config/content";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSidebarState } from "@/hooks/useSidebarState";
 import { cn } from "@/lib/utils";
 import SimpleNavItem from "@/components/sidebar/SimpleNavItem";
 import FloatingServicesMenu from "@/components/sidebar/FloatingServicesMenu";
+import ConnectSection from "@/components/sidebar/ConnectSection";
 import logoImage from "@/assets/logo.png";
 
 // Icon mapping for navigation items
@@ -262,94 +263,12 @@ const Sidebar = () => {
               })}
             </nav>
 
-            {/* Bottom Section - Social Links & Toggle */}
+            {/* Bottom Section - Connect & Toggle */}
             <div className={cn(
-              "mt-auto pt-6 border-t border-white/[0.06]",
-              isCollapsed ? "w-full flex flex-col items-center" : ""
+              "mt-auto pt-4 border-t border-white/[0.05]",
+              isCollapsed ? "w-full flex flex-col items-center gap-3" : "space-y-4"
             )}>
-              {/* Contact Info - Pill style (only when expanded) */}
-              {!isCollapsed && (
-                <motion.div 
-                  className="mb-6 space-y-2"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: 0.3 }}
-                >
-                  <span className="text-[9px] text-white/30 font-medium tracking-[0.2em] uppercase block mb-3">
-                    Connect
-                  </span>
-                  <motion.a 
-                    href={brand.telegramLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
-                    whileHover={{ scale: 1.02, x: 2 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Send className="w-3.5 h-3.5 text-white/40 group-hover:text-primary transition-colors duration-300" />
-                    <span className="text-xs text-white/50 group-hover:text-white/80 transition-colors duration-300">@iumlabs</span>
-                  </motion.a>
-                  <motion.a 
-                    href={brand.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
-                    whileHover={{ scale: 1.02, x: 2 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Linkedin className="w-3.5 h-3.5 text-white/40 group-hover:text-primary transition-colors duration-300" />
-                    <span className="text-xs text-white/50 group-hover:text-white/80 transition-colors duration-300">Ium Labs</span>
-                  </motion.a>
-                  <motion.a 
-                    href={`mailto:${brand.email}`}
-                    className="group flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
-                    whileHover={{ scale: 1.02, x: 2 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <Mail className="w-3.5 h-3.5 text-white/40 group-hover:text-primary transition-colors duration-300" />
-                    <span className="text-xs text-white/50 group-hover:text-white/80 transition-colors duration-300">{brand.email}</span>
-                  </motion.a>
-                </motion.div>
-              )}
-
-              {/* Collapsed Social Icons - Pill style */}
-              {isCollapsed && (
-                <motion.div 
-                  className="flex flex-col items-center gap-2 mb-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <motion.a
-                    href={brand.telegramLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-white/30 hover:text-primary hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Send className="w-4 h-4" />
-                  </motion.a>
-                  <motion.a
-                    href={brand.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-white/30 hover:text-primary hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Linkedin className="w-4 h-4" />
-                  </motion.a>
-                  <motion.a
-                    href={`mailto:${brand.email}`}
-                    className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-white/30 hover:text-primary hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Mail className="w-4 h-4" />
-                  </motion.a>
-                </motion.div>
-              )}
+              <ConnectSection isCollapsed={isCollapsed} />
 
               {/* Toggle Button - Pill style */}
               <motion.button
