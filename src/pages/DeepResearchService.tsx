@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 import ServicePageLayout, { 
   ServiceTag, 
   ServiceStat, 
@@ -8,7 +11,7 @@ import ServicePageLayout, {
   FAQItem
 } from "@/components/ServicePageLayout";
 import { motion } from "framer-motion";
-import { FileText, BarChart3, TrendingUp, Users, Newspaper, Share2, Search, PenTool, Send } from "lucide-react";
+import { FileText, BarChart3, TrendingUp, Users, Newspaper, Share2, Search, PenTool, Send, ArrowRight, BookOpen, Mic2, Globe } from "lucide-react";
 
 const ACCENT_COLOR = "#06B6D4";
 
@@ -23,8 +26,8 @@ const serviceTags: ServiceTag[] = [
 
 const stats: ServiceStat[] = [
   { value: 100, label: "Research Reports Published", suffix: "+" },
-  { value: 50, label: "Media Partners", suffix: "+" },
-  { value: 5, label: "Avg Media Coverage", suffix: "M+" },
+  { value: 50, label: "Distribution Partners", suffix: "+" },
+  { value: 5, label: "Avg Coverage Reach", suffix: "M+" },
   { value: 200, label: "KOL Network Reach", suffix: "K+" },
 ];
 
@@ -69,9 +72,9 @@ const deliverables: Deliverable[] = [
   {
     title: "Distribution Package",
     items: [
-      "Korean media placement (5-10 outlets)",
-      "KOL review threads (3-5 KOLs)",
-      "Community summary posts",
+      "Korean media placement",
+      "KOL review threads",
+      "Blog articles & posts",
       "Executive briefing deck",
       "Social media snippets"
     ]
@@ -82,7 +85,7 @@ const deliverables: Deliverable[] = [
       "Monthly market updates",
       "Trend alert reports",
       "Strategy recommendations",
-      "Media monitoring dashboard",
+      "Performance tracking",
       "Quarterly deep dives"
     ]
   }
@@ -91,11 +94,11 @@ const deliverables: Deliverable[] = [
 const faqItems: FAQItem[] = [
   {
     question: "What types of research do you provide?",
-    answer: "We offer comprehensive research services including market sizing reports, competitor analysis, token economics reviews, user behavior studies, and Korean market entry strategies. Each report is tailored to your project's specific needs and objectives."
+    answer: "We offer comprehensive research services including market sizing reports, competitor analysis, token economics reviews, user behavior studies, and Korean market entry strategies. Each report is tailored to your specific needs."
   },
   {
     question: "How do you distribute the research?",
-    answer: "We leverage our network of 50+ Korean media partners (Block Media, Tokenpost, CoinDesk Korea, etc.) and 200+ KOL connections. Research is published as articles, Twitter threads, and community posts to maximize reach and credibility."
+    answer: "We leverage our network of media partners, blog platforms, and KOL connections. Research is published as articles, review threads, and community posts to maximize reach and credibility in the Korean market."
   },
   {
     question: "Can you write research in Korean?",
@@ -103,11 +106,11 @@ const faqItems: FAQItem[] = [
   },
   {
     question: "How long does a research report take?",
-    answer: "A standard research report takes 2-3 weeks from kickoff to delivery. Complex reports with extensive data analysis may take 4-6 weeks. Distribution and amplification typically runs for 2-4 weeks following report completion."
+    answer: "A standard research report takes 2-3 weeks from kickoff to delivery. Complex reports with extensive data analysis may take 4-6 weeks. Distribution typically runs for 2-4 weeks following report completion."
   },
   {
     question: "What makes your research different?",
-    answer: "Our research combines on-chain data analysis with local market insights that only a Korea-based team can provide. We don't just deliver reports—we ensure they reach the right audience through our established media and KOL network."
+    answer: "Our research combines on-chain data analysis with local market insights that only a Korea-based team can provide. We ensure research reaches the right audience through our established distribution network."
   }
 ];
 
@@ -133,22 +136,35 @@ const researchTopics = [
 ];
 
 const distributionChannels = [
-  { name: "Block Media", type: "Media" },
-  { name: "Tokenpost", type: "Media" },
-  { name: "CoinDesk Korea", type: "Media" },
-  { name: "Top KOLs", type: "KOL Network" },
-  { name: "Crypto Communities", type: "Community" },
-  { name: "Telegram Groups", type: "Community" }
+  { name: "KOL Networks", icon: Mic2 },
+  { name: "Blog Platforms", icon: BookOpen },
+  { name: "Media Outlets", icon: Globe }
 ];
 
 const DeepResearchService = () => {
   usePageTitle("Deep Research");
   const [activeChannel, setActiveChannel] = useState(0);
 
+  // Fetch latest research posts
+  const { data: researchPosts } = useQuery({
+    queryKey: ['research-posts-preview'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('research_posts')
+        .select('id, title, slug, excerpt, image, category, date, read_time')
+        .eq('is_published', true)
+        .order('date', { ascending: false })
+        .limit(3);
+      
+      if (error) throw error;
+      return data;
+    }
+  });
+
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveChannel((prev) => (prev + 1) % distributionChannels.length);
-    }, 2000);
+    }, 2500);
     return () => clearInterval(interval);
   }, []);
 
@@ -243,44 +259,48 @@ const DeepResearchService = () => {
 
               {/* Arrow */}
               <div className="hidden md:flex items-center">
-                <div className="w-24 h-0.5 bg-gradient-to-r from-[#06B6D4] to-[#06B6D4]/30" />
+                <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4] to-[#06B6D4]/30" />
                 <Share2 className="w-5 h-5 mx-2" style={{ color: ACCENT_COLOR }} />
-                <div className="w-24 h-0.5 bg-gradient-to-r from-[#06B6D4]/30 to-[#06B6D4]" />
+                <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4]/30 to-[#06B6D4]" />
               </div>
 
               {/* Distribution Channels */}
-              <div className="flex-1 max-w-md">
+              <div className="flex-1 max-w-sm">
                 <div className="text-center mb-4">
                   <span className="text-xs text-muted-foreground uppercase tracking-wider">
                     Distributed Through
                   </span>
                 </div>
-                <div className="grid grid-cols-3 gap-3">
-                  {distributionChannels.map((channel, index) => (
-                    <motion.div
-                      key={channel.name}
-                      animate={{
-                        scale: activeChannel === index ? 1.05 : 1,
-                        borderColor: activeChannel === index ? ACCENT_COLOR : 'transparent'
-                      }}
-                      className="p-3 rounded-xl border-2 bg-background/50 text-center transition-all"
-                    >
-                      <span className="text-xs font-medium text-foreground block">
-                        {channel.name}
-                      </span>
-                      <span className="text-[10px] text-muted-foreground">
-                        {channel.type}
-                      </span>
-                    </motion.div>
-                  ))}
+                <div className="grid grid-cols-3 gap-4">
+                  {distributionChannels.map((channel, index) => {
+                    const Icon = channel.icon;
+                    return (
+                      <motion.div
+                        key={channel.name}
+                        animate={{
+                          scale: activeChannel === index ? 1.08 : 1,
+                          borderColor: activeChannel === index ? ACCENT_COLOR : 'rgba(255,255,255,0.1)'
+                        }}
+                        className="p-4 rounded-xl border-2 bg-background/50 text-center transition-all flex flex-col items-center gap-2"
+                      >
+                        <Icon 
+                          className="w-5 h-5" 
+                          style={{ color: activeChannel === index ? ACCENT_COLOR : 'rgba(255,255,255,0.5)' }} 
+                        />
+                        <span className="text-xs font-medium text-foreground">
+                          {channel.name}
+                        </span>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
 
               {/* Arrow */}
               <div className="hidden md:flex items-center">
-                <div className="w-24 h-0.5 bg-gradient-to-r from-[#06B6D4] to-[#06B6D4]/30" />
+                <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4] to-[#06B6D4]/30" />
                 <Newspaper className="w-5 h-5 mx-2" style={{ color: ACCENT_COLOR }} />
-                <div className="w-24 h-0.5 bg-gradient-to-r from-[#06B6D4]/30 to-[#06B6D4]" />
+                <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4]/30 to-[#06B6D4]" />
               </div>
 
               {/* Result */}
@@ -297,6 +317,92 @@ const DeepResearchService = () => {
           </motion.div>
         </div>
       </section>
+
+      {/* Latest Research Preview Section */}
+      {researchPosts && researchPosts.length > 0 && (
+        <section className="py-20 relative bg-[#0A0A0A]">
+          <div className="container mx-auto px-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col md:flex-row md:items-end md:justify-between mb-12"
+            >
+              <div>
+                <span 
+                  className="text-sm font-medium tracking-wider uppercase mb-4 block"
+                  style={{ color: ACCENT_COLOR }}
+                >
+                  Sample Work
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                  Latest Research
+                </h2>
+              </div>
+              <Link 
+                to="/research"
+                className="group inline-flex items-center gap-2 mt-4 md:mt-0 text-sm font-medium transition-colors hover:text-[#06B6D4]"
+                style={{ color: ACCENT_COLOR }}
+              >
+                View All Research
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {researchPosts.map((post, index) => (
+                <motion.div
+                  key={post.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link
+                    to={`/research/${post.slug}`}
+                    className="group block h-full rounded-2xl border border-border/50 bg-card/30 overflow-hidden hover:border-[#06B6D4]/50 transition-all duration-300"
+                  >
+                    {/* Image */}
+                    {post.image && (
+                      <div className="aspect-[16/9] overflow-hidden">
+                        <img 
+                          src={post.image} 
+                          alt={post.title}
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
+                      </div>
+                    )}
+                    
+                    {/* Content */}
+                    <div className="p-6">
+                      {post.category && (
+                        <span 
+                          className="inline-block text-xs font-medium px-2 py-1 rounded-full mb-3"
+                          style={{ backgroundColor: `${ACCENT_COLOR}20`, color: ACCENT_COLOR }}
+                        >
+                          {post.category}
+                        </span>
+                      )}
+                      <h3 className="text-lg font-semibold text-foreground mb-2 line-clamp-2 group-hover:text-[#06B6D4] transition-colors">
+                        {post.title}
+                      </h3>
+                      {post.excerpt && (
+                        <p className="text-sm text-muted-foreground line-clamp-2 mb-4">
+                          {post.excerpt}
+                        </p>
+                      )}
+                      <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                        {post.date && <span>{post.date}</span>}
+                        {post.read_time && <span>{post.read_time}</span>}
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </ServicePageLayout>
   );
 };
