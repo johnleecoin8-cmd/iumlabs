@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ChevronLeft, Send, Linkedin, Home, Briefcase, FolderOpen, BookOpen, Mail, AtSign } from "lucide-react";
+import { ChevronLeft, Send, Linkedin, Home, Briefcase, FolderOpen, BookOpen, Mail } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSidebarState } from "@/hooks/useSidebarState";
@@ -221,48 +221,65 @@ const Sidebar = () => {
             )}>
               {/* Contact Info - Only when expanded */}
               {!isCollapsed && (
-                <div className="mb-6">
+                <div className="mb-6 space-y-2">
                   <span className="text-[9px] text-white/30 font-medium tracking-[0.2em] uppercase block mb-3">
                     Connect
                   </span>
                   <a 
-                    href={`mailto:${brand.email}`}
-                    className="group flex items-center gap-2 text-white/40 hover:text-white transition-colors duration-300 mb-2"
+                    href={brand.telegramLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2 text-white/40 hover:text-white transition-colors duration-300"
                   >
-                    <AtSign className="w-3.5 h-3.5" />
+                    <Send className="w-3.5 h-3.5" />
+                    <span className="text-xs">@iumlabs</span>
+                  </a>
+                  <a 
+                    href={brand.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex items-center gap-2 text-white/40 hover:text-white transition-colors duration-300"
+                  >
+                    <Linkedin className="w-3.5 h-3.5" />
+                    <span className="text-xs">Ium Labs</span>
+                  </a>
+                  <a 
+                    href={`mailto:${brand.email}`}
+                    className="group flex items-center gap-2 text-white/40 hover:text-white transition-colors duration-300"
+                  >
+                    <Mail className="w-3.5 h-3.5" />
                     <span className="text-xs">{brand.email}</span>
                   </a>
                 </div>
               )}
 
-              {/* Social Icons Row */}
-              <div className={cn(
-                "flex items-center",
-                isCollapsed ? "flex-col gap-4" : "gap-3 mb-6"
-              )}>
-                <a
-                  href={brand.telegramLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
-                >
-                  <Send className="w-4 h-4" />
-                </a>
-                <a
-                  href={brand.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group relative p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-                <a
-                  href={`mailto:${brand.email}`}
-                  className="group relative p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
-                >
-                  <Mail className="w-4 h-4" />
-                </a>
-              </div>
+              {/* Collapsed Social Icons */}
+              {isCollapsed && (
+                <div className="flex flex-col items-center gap-3 mb-4">
+                  <a
+                    href={brand.telegramLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
+                  >
+                    <Send className="w-4 h-4" />
+                  </a>
+                  <a
+                    href={brand.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                  <a
+                    href={`mailto:${brand.email}`}
+                    className="p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
+                  >
+                    <Mail className="w-4 h-4" />
+                  </a>
+                </div>
+              )}
 
               {/* Toggle Button */}
               <button
