@@ -1,4 +1,4 @@
-import { CalendarDays, Search, Target, Zap, TrendingUp, ArrowRight, MapPin, Users, Megaphone, Camera } from "lucide-react";
+import { CalendarDays, Search, Target, Zap, Megaphone, MapPin, Camera, Users, Sparkles, Globe } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
@@ -13,122 +13,130 @@ const journeyPhases = [
     week: "Week 1",
     title: "Planning",
     icon: Search,
-    activities: ["Event concept development", "Venue research", "Budget planning", "Timeline creation"],
+    activities: ["Event concept & theme", "Venue scouting in Seoul", "Budget & sponsor strategy", "Speaker & panelist outreach"],
     deliverables: ["Event brief", "Venue shortlist"],
   },
   {
     week: "Week 2",
     title: "Preparation",
     icon: Target,
-    activities: ["Venue confirmation", "Vendor coordination", "Guest list management", "Logistics setup"],
-    deliverables: ["Event rundown", "Invitation design"],
+    activities: ["Venue booking", "KOL & media invitations", "Catering & AV setup", "Registration system"],
+    deliverables: ["Event rundown", "Guest list"],
   },
   {
     week: "Week 3",
     title: "Promotion",
     icon: Megaphone,
-    activities: ["Marketing campaign", "Media outreach", "RSVP tracking", "Speaker coordination"],
-    deliverables: ["Promo materials", "Media kit"],
+    activities: ["Crypto Twitter campaign", "Community announcements", "Media partnership", "RSVP management"],
+    deliverables: ["Promo assets", "Press kit"],
   },
   {
     week: "Week 4",
     title: "Execution",
     icon: Zap,
-    activities: ["On-site management", "Live coverage", "Guest relations", "Post-event follow-up"],
-    deliverables: ["Event recap", "Photo/Video assets"],
+    activities: ["On-site coordination", "Live social coverage", "Networking facilitation", "Post-event content"],
+    deliverables: ["Event recap", "Photo/Video"],
   },
 ];
 
 
 const serviceTags: ServiceTag[] = [
-  { label: "Event Planning" },
-  { label: "Venue Coordination" },
-  { label: "Networking Events" },
-  { label: "Conference & Summit" },
-  { label: "On-Ground Activation" },
-  { label: "Event Marketing" },
+  { label: "Web3 Events" },
+  { label: "Crypto Meetups" },
+  { label: "Launch Parties" },
+  { label: "Conferences" },
+  { label: "Networking Nights" },
+  { label: "Korea Activations" },
 ];
 
 const stats: ServiceStat[] = [
-  { value: 50, label: "Events Hosted", suffix: "+" },
-  { value: 500, label: "Average Attendance", suffix: "+" },
-  { value: 3, label: "Avg Event Lead Time", suffix: " weeks" },
-  { value: 100, label: "Korea Market Coverage", suffix: "%" },
+  { value: 50, label: "Web3 Events Hosted", suffix: "+" },
+  { value: 5000, label: "Total Attendees", suffix: "+" },
+  { value: 120, label: "KOLs Attended", suffix: "+" },
+  { value: 30, label: "Media Partners", suffix: "+" },
 ];
 
 const processSteps: ProcessStep[] = [
   {
     number: "01",
-    title: "Concept & Planning",
-    description: "Define event objectives, target audience, and develop a compelling event concept aligned with your brand.",
-    icon: Search,
+    title: "Concept & Strategy",
+    description: "Define event goals aligned with your Web3 project narrative. Whether it's a token launch party, hackathon, or community meetup, we craft the perfect concept.",
+    icon: Sparkles,
   },
   {
     number: "02",
-    title: "Venue & Logistics",
-    description: "Secure premium venues in Seoul, manage vendors, and coordinate all logistical requirements.",
+    title: "Venue & Production",
+    description: "Secure premium venues across Seoul — from Gangnam rooftops to Itaewon lounges. Full production including stage, AV, branding, and crypto-themed decor.",
     icon: MapPin,
   },
   {
     number: "03",
-    title: "Promotion & Outreach",
-    description: "Drive registrations through targeted marketing, KOL invitations, and media partnerships.",
-    icon: Megaphone,
+    title: "Guest Curation",
+    description: "Invite the right mix of Korean crypto KOLs, traders, developers, VCs, and community members. We handle VIP relations and media coordination.",
+    icon: Users,
   },
   {
     number: "04",
-    title: "Execution & Coverage",
-    description: "Flawless on-site execution with professional photography, live streaming, and real-time social coverage.",
+    title: "Live Coverage & Amplification",
+    description: "Real-time content creation with professional photography, video, and live Twitter/Telegram coverage to maximize reach and FOMO.",
     icon: Camera,
   },
 ];
 
 const deliverables: Deliverable[] = [
   {
-    title: "Event Planning",
+    title: "Event Production",
     items: [
-      "Event concept & theme development",
-      "Venue scouting & booking",
-      "Budget management",
-      "Timeline & rundown creation",
+      "Venue booking & setup",
+      "Stage & AV production",
+      "Branded decor & signage",
+      "Catering & hospitality",
     ],
   },
   {
-    title: "Guest Management",
+    title: "Guest & Speaker Management",
     items: [
-      "VIP & KOL invitation handling",
-      "RSVP tracking system",
-      "On-site registration",
-      "Guest relations support",
+      "Korean KOL invitations",
+      "Speaker & panelist coordination",
+      "VIP guest handling",
+      "Registration & check-in",
     ],
   },
   {
     title: "Content & Coverage",
     items: [
-      "Professional photography",
-      "Video production",
-      "Live social media coverage",
-      "Post-event recap report",
+      "Professional photo & video",
+      "Live social media updates",
+      "Post-event highlight reel",
+      "Press release & media coverage",
     ],
   },
 ];
 
 const faqItems: FAQItem[] = [
   {
-    question: "What types of events do you organize?",
-    answer: "We organize a wide range of Web3 events including launch parties, networking meetups, conferences, panels, AMAs, hackathons, and exclusive VIP dinners. We tailor each event to your project's goals and target audience.",
+    question: "What types of Web3 events do you organize?",
+    answer: "We specialize in crypto-native events including token launch parties, project reveals, hackathons, developer meetups, trading competitions, NFT exhibitions, DAO gatherings, and exclusive whale dinners. Each event is tailored to your project's stage and goals.",
   },
   {
-    question: "How long does event planning typically take?",
-    answer: "We recommend a minimum of 3-4 weeks for proper planning. However, we can accommodate faster timelines for smaller events or urgent launches with focused scope.",
+    question: "How do you ensure quality attendance?",
+    answer: "We leverage our extensive network of 120+ Korean crypto KOLs, 30+ media partners, and direct connections to trading communities, VCs, and developer groups. Our curated invite lists ensure high-quality, engaged attendees — not just headcount.",
   },
   {
     question: "What venues do you work with in Seoul?",
-    answer: "We have partnerships with premium venues across Seoul including Gangnam, Hongdae, Itaewon, and Yeouido. From rooftop lounges to conference halls, we match the venue to your event's vibe and capacity needs.",
+    answer: "We have exclusive partnerships with premium venues across Seoul's crypto hotspots — Gangnam, Seongsu, Itaewon, and Yeouido. From intimate rooftop lounges for 50 to conference halls for 500+, we match the venue to your event's vibe and scale.",
   },
   {
-    question: "Do you handle KOL and media invitations?",
-    answer: "Yes, we leverage our extensive network of Korean crypto KOLs, media partners, and community leaders to ensure strong attendance and coverage for your event.",
+    question: "Can you handle international project teams visiting Korea?",
+    answer: "Absolutely. We provide full concierge support for global teams including airport pickup, hotel coordination, translator services, and local market briefings. We've hosted teams from Polygon, Story Protocol, Ondo, and many more.",
+  },
+  {
+    question: "What's the typical budget range?",
+    answer: "Event budgets vary based on scale and production level. Intimate networking events start around $5K, while large-scale launch parties with full production can range $30K-100K+. We work with your budget to maximize impact.",
+  },
+  {
+    question: "How far in advance should we plan?",
+    answer: "We recommend 4-6 weeks for optimal planning, especially for larger events. However, we've successfully executed events in as little as 2 weeks for urgent launches. Earlier planning allows better venue selection and KOL availability.",
   },
 ];
 
@@ -140,9 +148,9 @@ const OfflineEventService = () => {
   return (
     <ServicePageLayout
       serviceName="Offline Event"
-      serviceTitle="Offline"
-      serviceSubtitle="Events"
-      serviceDescription="Create impactful offline experiences in Korea with end-to-end event planning, venue coordination, and on-ground activation."
+      serviceTitle="Web3 Events"
+      serviceSubtitle="in Korea"
+      serviceDescription="Create unforgettable crypto events in Seoul — from intimate KOL dinners to large-scale launch parties. Full-service production with Korea's top Web3 network."
       serviceIcon={CalendarDays}
       serviceTags={serviceTags}
       stats={stats}
@@ -155,16 +163,26 @@ const OfflineEventService = () => {
       {/* Event Journey Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader number="01" title="Your Event Journey" badge="4-Week Program" />
+          <SectionHeader number="01" title="Event Planning Journey" badge="4-Week Program" />
           
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 {/* Left - Description */}
                 <div>
-                  <p className="text-white/60 text-lg leading-relaxed">
-                    Our proven event planning process takes you from concept to execution. Each phase builds on the previous, ensuring comprehensive preparation and flawless delivery of memorable experiences.
+                  <p className="text-white/60 text-lg leading-relaxed mb-6">
+                    From concept to execution, our proven 4-week process ensures every detail is covered. We handle the complexity so you can focus on connecting with Korea's crypto community.
                   </p>
+                  <div className="flex flex-wrap gap-3">
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10">
+                      <Globe className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
+                      <span className="text-sm text-white/70">Global Teams Welcome</span>
+                    </div>
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10">
+                      <Users className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
+                      <span className="text-sm text-white/70">50-500+ Capacity</span>
+                    </div>
+                  </div>
                 </div>
 
                 {/* Right - Phase Cards */}
@@ -214,7 +232,7 @@ const OfflineEventService = () => {
                             <div className="space-y-2">
                               {phase.activities.map((activity) => (
                                 <div key={activity} className="flex items-center gap-2 text-sm text-white/60">
-                                  <ArrowRight className="w-3 h-3" style={{ color: ACCENT_COLOR }} />
+                                  <div className="w-1 h-1 rounded-full" style={{ backgroundColor: ACCENT_COLOR }} />
                                   <span>{activity}</span>
                                 </div>
                               ))}
