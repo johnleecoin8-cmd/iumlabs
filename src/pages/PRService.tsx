@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
+import MediaPartnersSection from "@/components/MediaPartnersSection";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 // Media logos
@@ -256,6 +257,9 @@ const PRService = () => {
           </div>
         </div>
       </section>
+
+      {/* Media Partners Marquee */}
+      <MediaPartnersSection />
     </ServicePageLayout>
   );
 };
