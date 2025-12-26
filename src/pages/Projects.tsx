@@ -6,8 +6,6 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
-import HighlightText from "@/components/HighlightText";
-import StaggerContainer from "@/components/StaggerContainer";
 import { ArrowRight, Calendar, ChevronDown, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -46,16 +44,16 @@ import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
 
 // Hardcoded fallback data
 const fallbackCases = [
-  { name: "BNB Chain", logo: bnbLogo, bgImage: bnbBg, slug: "bnb-chain", result: "+340% Korean Trading Volume", category: "L1", description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage." },
-  { name: "KuCoin", logo: kucoinLogo, bgImage: kucoinBg, slug: "kucoin", result: "50K+ New Korean Users", category: "DeFi", description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships." },
+  { name: "BNB Chain", logo: bnbLogo, bgImage: bnbBg, slug: "bnb-chain", result: "+340% Korean Trading Volume", category: "Infrastructure", description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage." },
+  { name: "KuCoin", logo: kucoinLogo, bgImage: kucoinBg, slug: "kucoin", result: "50K+ New Korean Users", category: "Exchange", description: "Successful market launch with Korean trader-focused campaigns and ambassador partnerships." },
   { name: "Sahara AI", logo: saharaAiLogo, bgImage: saharaAiBg, slug: "sahara-ai", result: "Korean AI x Web3 Launch", category: "AI", description: "AI blockchain platform launch with Korean developer community and enterprise partnerships." },
   { name: "Mantra", logo: mantraLogo, bgImage: mantraBg, slug: "mantra", result: "Korean RWA Expansion", category: "RWA", description: "Real World Assets platform expansion targeting Korean institutional investors." },
-  { name: "Peaq", logo: peaqLogo, bgImage: peaqBg, slug: "peaq", result: "#1 DePIN in Korea", category: "AI", description: "Established thought leadership in DePIN space with IoT partnerships and developer community." },
-  { name: "Story Protocol", logo: storyLogo, bgImage: storyBg, slug: "story-protocol", result: "5K+ Korean Creators", category: "IP", description: "Korean content creator onboarding for IP tokenization platform targeting webtoon and music artists." },
-  { name: "MegaETH", logo: megaethLogo, bgImage: megaethBg, slug: "megaeth", result: "+500% Korean Engagement", category: "L2", description: "Pre-launch hype building and community engagement ahead of mainnet launch." },
-  { name: "Tria", logo: triaLogo, bgImage: triaBg, slug: "tria", result: "30K+ Korean Wallets", category: "DeFi", description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users." },
-  { name: "Bybit", logo: bybitLogo, bgImage: bybitBg, slug: "bybit", result: "#2 Korean Exchange Traffic", category: "DeFi", description: "Multi-channel user acquisition and VIP program for Korean high-volume traders." },
-  { name: "FOGO", logo: fogoLogo, bgImage: fogoBg, slug: "fogo", result: "Fogo Fest 2025 Success", category: "L1", description: "Launch event and community activation for FOGO ecosystem in Korean market." },
+  { name: "Peaq", logo: peaqLogo, bgImage: peaqBg, slug: "peaq", result: "#1 DePIN in Korea", category: "DePIN", description: "Established thought leadership in DePIN space with IoT partnerships and developer community." },
+  { name: "Story Protocol", logo: storyLogo, bgImage: storyBg, slug: "story-protocol", result: "5K+ Korean Creators", category: "IP Protocol", description: "Korean content creator onboarding for IP tokenization platform targeting webtoon and music artists." },
+  { name: "MegaETH", logo: megaethLogo, bgImage: megaethBg, slug: "megaeth", result: "+500% Korean Engagement", category: "Layer 2", description: "Pre-launch hype building and community engagement ahead of mainnet launch." },
+  { name: "Tria", logo: triaLogo, bgImage: triaBg, slug: "tria", result: "30K+ Korean Wallets", category: "Wallet", description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users." },
+  { name: "Bybit", logo: bybitLogo, bgImage: bybitBg, slug: "bybit", result: "#2 Korean Exchange Traffic", category: "Exchange", description: "Multi-channel user acquisition and VIP program for Korean high-volume traders." },
+  { name: "FOGO", logo: fogoLogo, bgImage: fogoBg, slug: "fogo", result: "Fogo Fest 2025 Success", category: "Layer 1", description: "Launch event and community activation for FOGO ecosystem in Korean market." },
   { name: "zkPass", logo: zkpassLogo, bgImage: zkpassBg, slug: "zkpass", result: "The Verifiable Nights", category: "Privacy", description: "Privacy-focused Web3 identity solution launch with Korean developer community." },
   { name: "SynFutures", logo: synfuturesLogo, bgImage: synfuturesBg, slug: "synfutures", result: "Gangnam Billboard Promotion", category: "DeFi", description: "High-visibility billboard campaign in Gangnam district for Korean market awareness." },
 ];
@@ -130,16 +128,22 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
   const isRightColumn = index % 2 === 1;
 
   return (
-    <Link
-      to={`/projects/${project.slug}`}
-      onClick={() => window.scrollTo(0, 0)}
-      className={`group block p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
-        !isRightColumn ? "sm:border-r border-border" : ""
-      } ${!isLastRow ? "border-b border-border" : ""}`}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+    >
+      <Link
+        to={`/projects/${project.slug}`}
+        onClick={() => window.scrollTo(0, 0)}
+        className={`group block p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
+          !isRightColumn ? "sm:border-r border-border" : ""
+        } ${!isLastRow ? "border-b border-border" : ""}`}
       >
-        <div className="flex items-start gap-3 sm:gap-4">
+        <div className="flex items-start gap-4 sm:gap-6">
           {/* Image */}
-          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img 
               src={project.bgImage} 
               alt={project.name}
@@ -164,11 +168,12 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
           </div>
         </div>
         
-      <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-xs sm:text-sm mt-2 sm:mt-3 min-h-[44px] sm:min-h-0">
-        <span className="group-hover:underline underline-offset-4">View case study</span>
-        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-      </div>
-    </Link>
+        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm mt-3 sm:mt-4 min-h-[44px] sm:min-h-0">
+          <span className="group-hover:underline underline-offset-4">View case study</span>
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </div>
+      </Link>
+    </motion.div>
   );
 };
 
@@ -186,7 +191,7 @@ const CategoryFilter = ({
     <div className="flex flex-wrap gap-2 sm:gap-3">
       <button
         onClick={() => onCategoryChange("All")}
-        className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-all duration-300 ${
+        className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-full border transition-all duration-300 ${
           activeCategory === "All"
             ? "bg-foreground text-background border-foreground"
             : "bg-transparent text-muted-foreground border-border hover:border-foreground/50 hover:text-foreground"
@@ -198,7 +203,7 @@ const CategoryFilter = ({
         <button
           key={category}
           onClick={() => onCategoryChange(category)}
-          className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-all duration-300 ${
+          className={`px-4 py-2 text-xs sm:text-sm font-medium rounded-full border transition-all duration-300 ${
             activeCategory === category
               ? "bg-foreground text-background border-foreground"
               : "bg-transparent text-muted-foreground border-border hover:border-foreground/50 hover:text-foreground"
@@ -294,9 +299,7 @@ const Projects = () => {
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
                   <span className="text-white">Our </span>
-                  <HighlightText variant="sweep" delay={800}>
-                    <span className="text-white/90">Case </span>
-                  </HighlightText>
+                  <span className="text-white/90">Case </span>
                   <span className="text-white">Studies</span>
                 </motion.h1>
 
@@ -307,11 +310,7 @@ const Projects = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  Real results from{" "}
-                  <HighlightText variant="underline" delay={1000}>
-                    <span className="text-white font-medium">18+ global Web3 projects</span>
-                  </HighlightText>{" "}
-                  successfully entering and scaling in the Korean market.
+                  Real results from <span className="text-white font-medium">18+ global Web3 projects</span> successfully entering and scaling in the Korean market.
                 </motion.p>
 
                 {/* CTA Button */}
@@ -406,11 +405,7 @@ const Projects = () => {
           <div className="flex flex-col lg:flex-row">
             {/* Left: Projects Grid */}
             <div className="w-full lg:w-2/3 lg:border-r border-border">
-              <StaggerContainer 
-                className="grid grid-cols-1 md:grid-cols-2"
-                staggerDelay={0.08}
-                direction="up"
-              >
+              <div className="grid grid-cols-1 md:grid-cols-2">
                 {filteredCases.map((project, index) => (
                   <ProjectCard 
                     key={project.slug} 
@@ -419,7 +414,7 @@ const Projects = () => {
                     totalCount={filteredCases.length} 
                   />
                 ))}
-              </StaggerContainer>
+              </div>
             </div>
 
             {/* Right: Sticky Info Panel */}
