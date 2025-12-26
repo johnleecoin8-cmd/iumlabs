@@ -11,7 +11,7 @@ import ServicePageLayout, {
   FAQItem
 } from "@/components/ServicePageLayout";
 import { motion } from "framer-motion";
-import { FileText, BarChart3, TrendingUp, Users, Newspaper, Share2, Search, PenTool, Send, ArrowRight, BookOpen, Mic2, Globe } from "lucide-react";
+import { FileText, BarChart3, TrendingUp, Users, Newspaper, Share2, Search, PenTool, Send, ArrowRight, BookOpen, Mic2, Globe, MessageSquare, CheckCircle2, Rocket, Clock } from "lucide-react";
 
 const ACCENT_COLOR = "#06B6D4";
 
@@ -141,9 +141,49 @@ const distributionChannels = [
   { name: "Media Outlets", icon: Globe }
 ];
 
+// Timeline steps for research process
+const timelineSteps = [
+  {
+    week: "Week 1",
+    title: "Kickoff & Discovery",
+    description: "Initial consultation, scope definition, and research planning",
+    icon: MessageSquare,
+    tasks: ["Project briefing", "Scope alignment", "Timeline confirmation"]
+  },
+  {
+    week: "Week 2-3",
+    title: "Deep Research",
+    description: "Market analysis, data collection, and competitive research",
+    icon: Search,
+    tasks: ["Market sizing", "Competitor mapping", "Data analysis"]
+  },
+  {
+    week: "Week 3-4",
+    title: "Report Creation",
+    description: "Drafting, design, and bilingual localization",
+    icon: PenTool,
+    tasks: ["Report drafting", "Visual design", "KR/EN localization"]
+  },
+  {
+    week: "Week 4-5",
+    title: "Review & Finalize",
+    description: "Client review, revisions, and final approval",
+    icon: CheckCircle2,
+    tasks: ["Client review", "Revisions", "Final approval"]
+  },
+  {
+    week: "Week 5-8",
+    title: "Distribution",
+    description: "Media placement, KOL outreach, and performance tracking",
+    icon: Rocket,
+    tasks: ["Media publishing", "KOL distribution", "Performance report"]
+  }
+];
+
 const DeepResearchService = () => {
   usePageTitle("Deep Research");
   const [activeChannel, setActiveChannel] = useState(0);
+  const [activeTimelineStep, setActiveTimelineStep] = useState(0);
 
   // Fetch latest research posts
   const { data: researchPosts } = useQuery({
@@ -165,6 +205,14 @@ const DeepResearchService = () => {
     const interval = setInterval(() => {
       setActiveChannel((prev) => (prev + 1) % distributionChannels.length);
     }, 2500);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Timeline auto-progression
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTimelineStep((prev) => (prev + 1) % timelineSteps.length);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -318,7 +366,241 @@ const DeepResearchService = () => {
         </div>
       </section>
 
-      {/* Latest Research Preview Section */}
+      {/* Timeline Process Section */}
+      <section className="py-20 relative bg-[#0F0F0F] overflow-hidden">
+        {/* Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#06B6D4]/5 to-transparent" />
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <span 
+              className="text-sm font-medium tracking-wider uppercase mb-4 block"
+              style={{ color: ACCENT_COLOR }}
+            >
+              Timeline
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+              From Request to Distribution
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              A typical research engagement spans 5-8 weeks, from initial discovery to full market distribution.
+            </p>
+          </motion.div>
+
+          {/* Desktop Timeline */}
+          <div className="hidden lg:block relative">
+            {/* Timeline Line */}
+            <div className="absolute top-12 left-0 right-0 h-1 bg-border/30 rounded-full">
+              <motion.div 
+                className="h-full rounded-full"
+                style={{ backgroundColor: ACCENT_COLOR }}
+                initial={{ width: "0%" }}
+                animate={{ width: `${((activeTimelineStep + 1) / timelineSteps.length) * 100}%` }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              />
+            </div>
+
+            {/* Timeline Steps */}
+            <div className="grid grid-cols-5 gap-4">
+              {timelineSteps.map((step, index) => {
+                const Icon = step.icon;
+                const isActive = index === activeTimelineStep;
+                const isPast = index < activeTimelineStep;
+                
+                return (
+                  <motion.div
+                    key={step.title}
+                    className="relative pt-16 cursor-pointer"
+                    onClick={() => setActiveTimelineStep(index)}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    {/* Node */}
+                    <motion.div 
+                      className="absolute top-6 left-1/2 -translate-x-1/2 w-12 h-12 rounded-full flex items-center justify-center border-4 transition-all duration-300"
+                      style={{ 
+                        backgroundColor: isActive || isPast ? ACCENT_COLOR : '#1a1a1a',
+                        borderColor: isActive || isPast ? ACCENT_COLOR : 'rgba(255,255,255,0.1)'
+                      }}
+                      animate={{ 
+                        scale: isActive ? 1.2 : 1,
+                        boxShadow: isActive ? `0 0 30px ${ACCENT_COLOR}50` : 'none'
+                      }}
+                    >
+                      <Icon className="w-5 h-5" style={{ color: isActive || isPast ? '#fff' : 'rgba(255,255,255,0.4)' }} />
+                    </motion.div>
+
+                    {/* Content */}
+                    <motion.div 
+                      className="text-center p-4 rounded-xl transition-all duration-300"
+                      animate={{ 
+                        backgroundColor: isActive ? 'rgba(6,182,212,0.1)' : 'transparent',
+                        scale: isActive ? 1.02 : 1
+                      }}
+                    >
+                      <span 
+                        className="text-xs font-medium tracking-wider uppercase mb-2 block"
+                        style={{ color: isActive ? ACCENT_COLOR : 'rgba(255,255,255,0.4)' }}
+                      >
+                        {step.week}
+                      </span>
+                      <h3 
+                        className="text-sm font-semibold mb-2 transition-colors"
+                        style={{ color: isActive || isPast ? '#fff' : 'rgba(255,255,255,0.6)' }}
+                      >
+                        {step.title}
+                      </h3>
+                      <p className="text-xs text-muted-foreground line-clamp-2">
+                        {step.description}
+                      </p>
+                      
+                      {/* Tasks - Only show for active step */}
+                      <motion.div 
+                        className="mt-3 space-y-1 overflow-hidden"
+                        initial={false}
+                        animate={{ 
+                          height: isActive ? 'auto' : 0,
+                          opacity: isActive ? 1 : 0
+                        }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {step.tasks.map((task, idx) => (
+                          <motion.div 
+                            key={task}
+                            className="flex items-center justify-center gap-1 text-xs"
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : -10 }}
+                            transition={{ delay: idx * 0.1 }}
+                          >
+                            <CheckCircle2 className="w-3 h-3" style={{ color: ACCENT_COLOR }} />
+                            <span className="text-foreground/80">{task}</span>
+                          </motion.div>
+                        ))}
+                      </motion.div>
+                    </motion.div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Mobile Timeline */}
+          <div className="lg:hidden space-y-4">
+            {timelineSteps.map((step, index) => {
+              const Icon = step.icon;
+              const isActive = index === activeTimelineStep;
+              const isPast = index < activeTimelineStep;
+              
+              return (
+                <motion.div
+                  key={step.title}
+                  className="relative flex gap-4 cursor-pointer"
+                  onClick={() => setActiveTimelineStep(index)}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  {/* Left line */}
+                  <div className="flex flex-col items-center">
+                    <motion.div 
+                      className="w-10 h-10 rounded-full flex items-center justify-center border-2 flex-shrink-0"
+                      style={{ 
+                        backgroundColor: isActive || isPast ? ACCENT_COLOR : '#1a1a1a',
+                        borderColor: isActive || isPast ? ACCENT_COLOR : 'rgba(255,255,255,0.1)'
+                      }}
+                      animate={{ 
+                        scale: isActive ? 1.1 : 1,
+                        boxShadow: isActive ? `0 0 20px ${ACCENT_COLOR}40` : 'none'
+                      }}
+                    >
+                      <Icon className="w-4 h-4" style={{ color: isActive || isPast ? '#fff' : 'rgba(255,255,255,0.4)' }} />
+                    </motion.div>
+                    {index < timelineSteps.length - 1 && (
+                      <div 
+                        className="w-0.5 flex-1 my-2"
+                        style={{ backgroundColor: isPast ? ACCENT_COLOR : 'rgba(255,255,255,0.1)' }}
+                      />
+                    )}
+                  </div>
+                  
+                  {/* Content */}
+                  <motion.div 
+                    className="flex-1 pb-6 p-4 rounded-xl transition-all"
+                    animate={{ 
+                      backgroundColor: isActive ? 'rgba(6,182,212,0.1)' : 'transparent'
+                    }}
+                  >
+                    <div className="flex items-center gap-2 mb-1">
+                      <span 
+                        className="text-xs font-medium px-2 py-0.5 rounded-full"
+                        style={{ 
+                          backgroundColor: isActive ? `${ACCENT_COLOR}30` : 'rgba(255,255,255,0.05)',
+                          color: isActive ? ACCENT_COLOR : 'rgba(255,255,255,0.5)'
+                        }}
+                      >
+                        {step.week}
+                      </span>
+                    </div>
+                    <h3 
+                      className="text-base font-semibold mb-1"
+                      style={{ color: isActive || isPast ? '#fff' : 'rgba(255,255,255,0.6)' }}
+                    >
+                      {step.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      {step.description}
+                    </p>
+                    
+                    {/* Tasks */}
+                    <motion.div 
+                      className="space-y-1 overflow-hidden"
+                      initial={false}
+                      animate={{ 
+                        height: isActive ? 'auto' : 0,
+                        opacity: isActive ? 1 : 0
+                      }}
+                    >
+                      {step.tasks.map((task, idx) => (
+                        <div key={task} className="flex items-center gap-2 text-xs">
+                          <CheckCircle2 className="w-3 h-3" style={{ color: ACCENT_COLOR }} />
+                          <span className="text-foreground/80">{task}</span>
+                        </div>
+                      ))}
+                    </motion.div>
+                  </motion.div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* Total Duration Indicator */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-12 flex justify-center"
+          >
+            <div 
+              className="inline-flex items-center gap-3 px-6 py-3 rounded-full border"
+              style={{ borderColor: `${ACCENT_COLOR}30`, backgroundColor: `${ACCENT_COLOR}10` }}
+            >
+              <Clock className="w-5 h-5" style={{ color: ACCENT_COLOR }} />
+              <span className="text-sm font-medium text-foreground">
+                Total Duration: <span style={{ color: ACCENT_COLOR }}>5-8 Weeks</span>
+              </span>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {researchPosts && researchPosts.length > 0 && (
         <section className="py-20 relative bg-[#0A0A0A]">
           <div className="container mx-auto px-6">
