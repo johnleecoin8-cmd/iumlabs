@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 const servicesSubMenu = [
   { name: "Offline Event", href: "/services/offline-event" },
   { name: "Community Management", href: "/services/community" },
-  { name: "Social Media", href: "/services/social-media" },
+  { name: "Deep Research", href: "/services/deep-research" },
   { name: "Influencer/KOL", href: "/services/influencer" },
   { name: "Yap Service", href: "/services/yap" },
   { name: "PR/Media", href: "/services/pr" },

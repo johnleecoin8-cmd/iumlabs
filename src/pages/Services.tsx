@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Compass, Users, AtSign, Mic2, MessageCircle, Newspaper, ChevronDown, Search, Target, Rocket, TrendingUp } from "lucide-react";
+import { ArrowRight, Compass, Users, Search, Mic2, MessageCircle, Newspaper, ChevronDown, Target, Rocket, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
@@ -27,10 +27,10 @@ const services = [
     link: "/services/community"
   },
   {
-    icon: AtSign,
-    title: "Social Media Marketing",
-    description: "Content strategy and execution on X to grow visibility and engage with your ecosystem in real time.",
-    link: "/services/social-media"
+    icon: Search,
+    title: "Deep Research",
+    description: "Data-driven market research for the Korean crypto market, distributed through our media and KOL network.",
+    link: "/services/deep-research"
   },
   {
     icon: Mic2,
