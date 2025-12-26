@@ -110,12 +110,16 @@ const Sidebar = () => {
         {/* Minimal Container - only right border */}
         <div className="relative flex flex-col h-full border-r border-white/[0.08]">
           
-          {/* Scroll Progress Indicator - Minimal vertical line */}
+          {/* Scroll Progress Indicator - Minimal vertical line with glow */}
           <div className="absolute right-0 top-0 w-px h-full bg-white/5">
             <div 
-              className="w-full bg-white/30 transition-all duration-150 ease-out"
+              className="w-full bg-gradient-to-b from-white/50 via-white/30 to-white/10 transition-all duration-150 ease-out relative"
               style={{ height: `${scrollProgress}%` }}
-            />
+            >
+              {/* Glow effect at the bottom of progress */}
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-8 bg-white/40 blur-md rounded-full" />
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-4 bg-white/60 blur-sm rounded-full" />
+            </div>
           </div>
           
           {/* Content Container */}
@@ -124,31 +128,36 @@ const Sidebar = () => {
             isCollapsed ? "px-4 items-center" : "px-6"
           )}>
             {/* Logo Section - Image logo */}
-            <Link 
-              to="/" 
-              className={cn(
-                "group mb-12 transition-all duration-300",
-                isCollapsed ? "text-center" : ""
-              )}
-            >
-              {isCollapsed ? (
-                <Tooltip delayDuration={0}>
-                  <TooltipTrigger asChild>
+            {isCollapsed ? (
+              <Tooltip delayDuration={0}>
+                <TooltipTrigger asChild>
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      toggleSidebar();
+                    }}
+                    className="group mb-12 transition-all duration-300"
+                  >
                     <img 
                       src={logoImage} 
                       alt="Ium Labs" 
                       className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 transition-opacity cursor-pointer"
                     />
-                  </TooltipTrigger>
-                  <TooltipContent 
-                    side="right" 
-                    sideOffset={12}
-                    className="bg-white text-black text-xs font-medium px-3 py-1.5 rounded-lg border-0"
-                  >
-                    Ium Labs
-                  </TooltipContent>
-                </Tooltip>
-              ) : (
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent 
+                  side="right" 
+                  sideOffset={12}
+                  className="bg-white text-black text-xs font-medium px-3 py-1.5 rounded-lg border-0"
+                >
+                  Click to expand
+                </TooltipContent>
+              </Tooltip>
+            ) : (
+              <Link 
+                to="/" 
+                className="group mb-12 transition-all duration-300"
+              >
                 <div className="flex items-center gap-3">
                   <img 
                     src={logoImage} 
@@ -164,8 +173,8 @@ const Sidebar = () => {
                     </span>
                   </div>
                 </div>
-              )}
-            </Link>
+              </Link>
+            )}
 
             {/* Thin separator line */}
             {!isCollapsed && (
