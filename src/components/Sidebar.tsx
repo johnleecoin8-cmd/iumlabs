@@ -106,7 +106,7 @@ const Sidebar = () => {
         className={cn(
           "fixed left-0 top-0 h-screen z-50 hidden md:flex flex-col",
           "transition-all duration-500 ease-out",
-          isCollapsed ? "w-[72px]" : "w-56"
+          isCollapsed ? "w-[72px]" : "w-60"
         )}
       >
         {/* Glassmorphism Container */}
@@ -302,7 +302,7 @@ const Sidebar = () => {
       {/* Dynamic margin spacer for content */}
       <div className={cn(
         "hidden md:block flex-shrink-0 transition-all duration-500",
-        isCollapsed ? "w-[72px]" : "w-56"
+        isCollapsed ? "w-[72px]" : "w-60"
       )} />
     </>
   );

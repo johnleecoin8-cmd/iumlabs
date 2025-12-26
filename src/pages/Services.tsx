@@ -15,7 +15,25 @@ import {
 
 const services = [
   {
+    icon: Rocket,
+    title: "GTM Strategy",
+    description: "Strategic market entry planning and execution for Web3 projects launching in the Korean market.",
+    link: "/services/gtm"
+  },
+  {
     icon: Compass,
+    title: "Branding/Website",
+    description: "Distinctive brand identity and high-performance websites for Web3 projects. From logo design to custom development.",
+    link: "/services/branding"
+  },
+  {
+    icon: Search,
+    title: "SEO/Paid Ads",
+    description: "Drive qualified traffic through search optimization and targeted advertising across Google, Twitter/X, and crypto-native platforms.",
+    link: "/services/seo-ads"
+  },
+  {
+    icon: Target,
     title: "Offline Event",
     description: "End-to-end event planning, venue coordination, and on-ground activation for impactful Web3 experiences.",
     link: "/services/offline-event"

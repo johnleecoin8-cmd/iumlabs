@@ -48,6 +48,9 @@ const clientLogos = [
 
 // All services for "More Services" section
 const allServices = [
+  { slug: "gtm", title: "GTM Strategy", color: "#10B981" },
+  { slug: "branding", title: "Branding & Website", color: "#8B5CF6" },
+  { slug: "seo-ads", title: "SEO & Paid Ads", color: "#F59E0B" },
   { slug: "offline-event", title: "Offline Event", color: "#10B981" },
   { slug: "community", title: "Community Management", color: "#5865F2" },
   { slug: "deep-research", title: "Deep Research", color: "#06B6D4" },
