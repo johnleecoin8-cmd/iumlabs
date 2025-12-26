@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronLeft, Send, Linkedin, Home, Briefcase, FolderOpen, BookOpen, Mail } from "lucide-react";
+import { motion } from "framer-motion";
 import { brand, navigation } from "@/config/content";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSidebarState } from "@/hooks/useSidebarState";
@@ -107,19 +108,38 @@ const Sidebar = () => {
           isCollapsed ? "w-[72px]" : "w-56"
         )}
       >
-        {/* Minimal Container - only right border */}
-        <div className="relative flex flex-col h-full border-r border-white/[0.08]">
+        {/* Glassmorphism Container */}
+        <div className="relative flex flex-col h-full">
+          {/* Glass background layer */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] via-transparent to-white/[0.02] backdrop-blur-sm" />
           
-          {/* Scroll Progress Indicator - Brand color with glow */}
-          <div className="absolute right-0 top-0 w-px h-full bg-primary/10">
-            <div 
-              className="w-full bg-gradient-to-b from-primary via-primary/60 to-primary/20 transition-all duration-150 ease-out relative"
+          {/* Gradient border on right */}
+          <div className="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-white/[0.15] via-white/[0.06] to-white/[0.15]" />
+          
+          {/* Scroll Progress Indicator - Enhanced with pulse */}
+          <div className="absolute right-0 top-0 w-px h-full bg-primary/5">
+            <motion.div 
+              className="w-full bg-gradient-to-b from-primary via-primary/60 to-primary/20 relative"
               style={{ height: `${scrollProgress}%` }}
+              initial={false}
+              animate={{ height: `${scrollProgress}%` }}
+              transition={{ duration: 0.15, ease: "easeOut" }}
             >
               {/* Glow effect at the bottom of progress */}
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-10 bg-primary/50 blur-lg rounded-full" />
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-5 bg-primary blur-sm rounded-full" />
-            </div>
+              <motion.div 
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-6 h-12 bg-primary/40 blur-xl rounded-full"
+                animate={{ 
+                  opacity: [0.4, 0.8, 0.4],
+                  scale: [1, 1.2, 1]
+                }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              />
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-6 bg-primary blur-sm rounded-full" />
+            </motion.div>
           </div>
           
           {/* Content Container */}
@@ -127,89 +147,117 @@ const Sidebar = () => {
             "relative z-10 flex flex-col h-full py-8",
             isCollapsed ? "px-4 items-center" : "px-6"
           )}>
-            {/* Logo Section - Image logo */}
+            {/* Logo Section - With Motion */}
             {isCollapsed ? (
               <Tooltip delayDuration={0}>
                 <TooltipTrigger asChild>
-                  <button
+                  <motion.button
                     onClick={(e) => {
                       e.preventDefault();
                       toggleSidebar();
                     }}
                     className="group mb-12 transition-all duration-300"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <img 
                       src={logoImage} 
                       alt="Ium Labs" 
-                      className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 transition-opacity cursor-pointer"
+                      className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]"
                     />
-                  </button>
+                  </motion.button>
                 </TooltipTrigger>
                 <TooltipContent 
                   side="right" 
                   sideOffset={12}
-                  className="bg-white text-black text-xs font-medium px-3 py-1.5 rounded-lg border-0"
+                  className="bg-black/80 backdrop-blur-xl text-white text-xs font-medium px-3 py-1.5 rounded-xl border border-white/10"
                 >
                   Click to expand
                 </TooltipContent>
               </Tooltip>
             ) : (
-              <Link 
-                to="/" 
-                className="group mb-12 transition-all duration-300"
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
               >
-                <div className="flex items-center gap-3">
-                  <img 
-                    src={logoImage} 
-                    alt="Ium Labs" 
-                    className="w-9 h-9 object-contain opacity-90 group-hover:opacity-100 transition-opacity"
-                  />
-                  <div className="flex flex-col">
-                    <span className="text-base font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">
-                      Ium Labs
-                    </span>
-                    <span className="text-[9px] text-white/30 font-medium tracking-[0.25em] uppercase">
-                      Web3 Agency
-                    </span>
-                  </div>
-                </div>
-              </Link>
+                <Link 
+                  to="/" 
+                  className="group mb-12 block transition-all duration-300"
+                >
+                  <motion.div 
+                    className="flex items-center gap-3"
+                    whileHover={{ scale: 1.02 }}
+                  >
+                    <img 
+                      src={logoImage} 
+                      alt="Ium Labs" 
+                      className="w-9 h-9 object-contain opacity-90 group-hover:opacity-100 transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]"
+                    />
+                    <div className="flex flex-col">
+                      <span className="text-base font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">
+                        Ium Labs
+                      </span>
+                      <span className="text-[9px] text-white/30 font-medium tracking-[0.25em] uppercase">
+                        Web3 Agency
+                      </span>
+                    </div>
+                  </motion.div>
+                </Link>
+              </motion.div>
             )}
 
-            {/* Thin separator line */}
+            {/* Thin separator line with gradient */}
             {!isCollapsed && (
-              <div className="w-8 h-px bg-white/10 mb-8" />
+              <motion.div 
+                className="w-10 h-px bg-gradient-to-r from-white/20 via-white/10 to-transparent mb-8"
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              />
             )}
             
             {/* Navigation Section */}
-            <nav className={cn("flex-1 flex flex-col gap-0.5", isCollapsed ? "items-center" : "")}>
-              {navigation.links.map((link) => {
+            <nav className={cn("flex-1 flex flex-col gap-1", isCollapsed ? "items-center" : "")}>
+              {navigation.links.map((link, index) => {
                 const isActive = getIsActive(link.name, link.href);
                 
                 // Render Services with floating submenu
                 if (link.name === 'Services') {
                   return (
-                    <FloatingServicesMenu
+                    <motion.div
                       key={link.href}
-                      isActive={isActive}
-                      isCollapsed={isCollapsed}
-                      isOpen={servicesOpen}
-                      onToggle={() => setServicesOpen(!servicesOpen)}
-                      currentPath={currentPath}
-                    />
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                    >
+                      <FloatingServicesMenu
+                        isActive={isActive}
+                        isCollapsed={isCollapsed}
+                        isOpen={servicesOpen}
+                        onToggle={() => setServicesOpen(!servicesOpen)}
+                        currentPath={currentPath}
+                      />
+                    </motion.div>
                   );
                 }
                 
                 const NavIcon = navIconMap[link.name];
                 return (
-                  <SimpleNavItem
+                  <motion.div
                     key={link.href}
-                    to={link.href}
-                    label={link.name}
-                    icon={NavIcon}
-                    isActive={isActive}
-                    isCollapsed={isCollapsed}
-                  />
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                  >
+                    <SimpleNavItem
+                      to={link.href}
+                      label={link.name}
+                      icon={NavIcon}
+                      isActive={isActive}
+                      isCollapsed={isCollapsed}
+                    />
+                  </motion.div>
                 );
               })}
             </nav>
@@ -219,85 +267,114 @@ const Sidebar = () => {
               "mt-auto pt-6 border-t border-white/[0.06]",
               isCollapsed ? "w-full flex flex-col items-center" : ""
             )}>
-              {/* Contact Info - Only when expanded */}
+              {/* Contact Info - Pill style (only when expanded) */}
               {!isCollapsed && (
-                <div className="mb-6 space-y-2">
+                <motion.div 
+                  className="mb-6 space-y-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
+                >
                   <span className="text-[9px] text-white/30 font-medium tracking-[0.2em] uppercase block mb-3">
                     Connect
                   </span>
-                  <a 
+                  <motion.a 
                     href={brand.telegramLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 text-white/40 hover:text-white transition-colors duration-300"
+                    className="group flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
+                    whileHover={{ scale: 1.02, x: 2 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <Send className="w-3.5 h-3.5" />
-                    <span className="text-xs">@iumlabs</span>
-                  </a>
-                  <a 
+                    <Send className="w-3.5 h-3.5 text-white/40 group-hover:text-primary transition-colors duration-300" />
+                    <span className="text-xs text-white/50 group-hover:text-white/80 transition-colors duration-300">@iumlabs</span>
+                  </motion.a>
+                  <motion.a 
                     href={brand.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex items-center gap-2 text-white/40 hover:text-white transition-colors duration-300"
+                    className="group flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
+                    whileHover={{ scale: 1.02, x: 2 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <Linkedin className="w-3.5 h-3.5" />
-                    <span className="text-xs">Ium Labs</span>
-                  </a>
-                  <a 
+                    <Linkedin className="w-3.5 h-3.5 text-white/40 group-hover:text-primary transition-colors duration-300" />
+                    <span className="text-xs text-white/50 group-hover:text-white/80 transition-colors duration-300">Ium Labs</span>
+                  </motion.a>
+                  <motion.a 
                     href={`mailto:${brand.email}`}
-                    className="group flex items-center gap-2 text-white/40 hover:text-white transition-colors duration-300"
+                    className="group flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
+                    whileHover={{ scale: 1.02, x: 2 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    <Mail className="w-3.5 h-3.5" />
-                    <span className="text-xs">{brand.email}</span>
-                  </a>
-                </div>
+                    <Mail className="w-3.5 h-3.5 text-white/40 group-hover:text-primary transition-colors duration-300" />
+                    <span className="text-xs text-white/50 group-hover:text-white/80 transition-colors duration-300">{brand.email}</span>
+                  </motion.a>
+                </motion.div>
               )}
 
-              {/* Collapsed Social Icons */}
+              {/* Collapsed Social Icons - Pill style */}
               {isCollapsed && (
-                <div className="flex flex-col items-center gap-3 mb-4">
-                  <a
+                <motion.div 
+                  className="flex flex-col items-center gap-2 mb-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <motion.a
                     href={brand.telegramLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
+                    className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-white/30 hover:text-primary hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Send className="w-4 h-4" />
-                  </a>
-                  <a
+                  </motion.a>
+                  <motion.a
                     href={brand.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
+                    className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-white/30 hover:text-primary hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Linkedin className="w-4 h-4" />
-                  </a>
-                  <a
+                  </motion.a>
+                  <motion.a
                     href={`mailto:${brand.email}`}
-                    className="p-2 rounded-lg text-white/30 hover:text-primary hover:bg-primary/10 transition-all duration-300"
+                    className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.06] text-white/30 hover:text-primary hover:bg-white/[0.06] hover:border-primary/30 transition-all duration-300"
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Mail className="w-4 h-4" />
-                  </a>
-                </div>
+                  </motion.a>
+                </motion.div>
               )}
 
-              {/* Toggle Button */}
-              <button
+              {/* Toggle Button - Pill style */}
+              <motion.button
                 onClick={toggleSidebar}
                 className={cn(
-                  "flex items-center justify-center p-2 rounded-lg text-white/20 hover:text-white/60 hover:bg-white/5 transition-all duration-300",
+                  "flex items-center justify-center gap-2 px-3 py-2 rounded-xl",
+                  "bg-white/[0.02] border border-white/[0.06]",
+                  "text-white/20 hover:text-white/60 hover:bg-white/[0.06] hover:border-white/[0.12]",
+                  "transition-all duration-300",
                   isCollapsed ? "w-full" : ""
                 )}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
               >
-                <ChevronLeft className={cn(
-                  "w-4 h-4 transition-transform duration-300",
-                  isCollapsed && "rotate-180"
-                )} />
+                <motion.div
+                  animate={{ rotate: isCollapsed ? 180 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </motion.div>
                 {!isCollapsed && (
-                  <span className="text-[10px] text-white/30 ml-2">Collapse</span>
+                  <span className="text-[10px] text-white/30">Collapse</span>
                 )}
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>
