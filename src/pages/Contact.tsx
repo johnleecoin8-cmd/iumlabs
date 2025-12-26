@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, ArrowRight, Linkedin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
@@ -17,24 +17,30 @@ const budgetOptions = [
   "Looking to raise funds",
 ];
 
-const contactDetails = [
-  { label: "office:", value: brand.address },
-  { label: "e-mail:", value: brand.email, link: `mailto:${brand.email}` },
-  { label: "telegram:", value: brand.telegram, link: brand.telegramLink },
-];
-
 const contactInfo = [
   { icon: Mail, label: "Email", value: brand.email, link: `mailto:${brand.email}` },
   { icon: Phone, label: "Phone", value: brand.phone, link: `tel:${brand.phone.replace(/\s/g, '')}` },
   { icon: Send, label: "Telegram", value: brand.telegram, link: brand.telegramLink },
-  { icon: MapPin, label: "Office", value: brand.address, link: "#" },
+  { icon: Linkedin, label: "LinkedIn", value: "Ium Labs", link: brand.linkedin },
+];
+
+// Floating tags similar to HeroSection
+const floatingTags = [
+  { label: "Free Consultation", position: "top-[15%] left-[5%]" },
+  { label: "24h Response", position: "top-[35%] left-[4%]" },
+  { label: "Korean Market Expert", position: "top-[18%] right-[6%]" },
+  { label: "Global Partners", position: "top-[40%] right-[5%]" },
+];
+
+const mobileFloatingTags = [
+  { label: "Free Consult", position: "top-[8%] left-[3%]" },
+  { label: "24h Response", position: "top-[12%] right-[3%]" },
 ];
 
 const Contact = () => {
   usePageTitle("Contact");
   const location = useLocation();
   
-  // Handle hash navigation for scrolling to contact form
   useEffect(() => {
     if (location.hash) {
       const element = document.querySelector(location.hash);
@@ -103,10 +109,10 @@ const Contact = () => {
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero Section - Simple centered like homepage */}
+      {/* Hero Section - Glassmorphism Style */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
-        <section className="relative min-h-[70vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl">
-          {/* Video Background - Coral Theme */}
+        <section className="relative min-h-[80vh] flex flex-col justify-center items-center overflow-hidden rounded-2xl sm:rounded-3xl">
+          {/* Video Background */}
           <div className="absolute inset-0 overflow-hidden">
             <video
               autoPlay
@@ -121,123 +127,146 @@ const Contact = () => {
             >
               <source src="/videos/services-background.mp4" type="video/mp4" />
             </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-orange-500/20 via-transparent to-[#0A0A0A]" />
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 via-transparent to-rose-500/10" />
+            {/* Dark overlay gradient matching hero */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
           </div>
 
-          {/* Content - Centered like homepage */}
-          <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
-            <motion.span 
-              className="text-xs text-orange-400/70 mb-6 block tracking-widest"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              [ Contact ]
-            </motion.span>
-            <motion.h1 
-              className="text-[14vw] md:text-[120px] lg:text-[140px] font-light text-white leading-[0.85] tracking-tight"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              Let's T<span className="serif-italic text-orange-400">a</span>lk
-            </motion.h1>
-            <motion.p 
-              className="text-lg text-white/60 max-w-xl mx-auto mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              Tell us about your project and we'll explain how we can help you succeed in Korea.
-            </motion.p>
+          {/* Floating Tags - Desktop */}
+          {floatingTags.map((tag, index) => (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="mt-8"
+              key={index}
+              className={`absolute ${tag.position} hidden lg:block z-10`}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
             >
-              <CalendlyButton className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-rose-500 text-white px-6 py-3 font-medium hover:from-orange-600 hover:to-rose-600 transition-colors rounded-lg">
-                <Calendar className="w-4 h-4" />
-                <span>Book a Meeting</span>
-              </CalendlyButton>
+              <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-primary/40 hover:text-white transition-all duration-300">
+                {tag.label}
+              </span>
             </motion.div>
+          ))}
+
+          {/* Floating Tags - Mobile */}
+          {mobileFloatingTags.map((tag, index) => (
+            <div
+              key={`mobile-${index}`}
+              className={`absolute ${tag.position} lg:hidden z-10`}
+            >
+              <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-white/[0.03] border border-white/[0.08] text-white/60 whitespace-nowrap">
+                {tag.label}
+              </span>
+            </div>
+          ))}
+
+          {/* Main Content - Centered */}
+          <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 w-full">
+            <div className="max-w-7xl mx-auto text-center">
+              {/* Main Headline */}
+              <motion.h1 
+                className="font-sans text-[10vw] sm:text-[8vw] md:text-[6vw] lg:text-[5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <span className="text-white">Let's Build</span>
+                <br />
+                <span className="text-white/90">Something </span>
+                <span className="text-white">Great Together</span>
+              </motion.h1>
+
+              {/* Subtext */}
+              <motion.p 
+                className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
+                Tell us about your project and we'll explain how we can help you <span className="text-white font-medium">succeed in Korea</span>.
+              </motion.p>
+
+              {/* CTA Button */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+              >
+                <CalendlyButton className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5">
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+                  <Calendar className="w-4 h-4" />
+                  <span>Book a Meeting</span>
+                </CalendlyButton>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Contact Info Cards - Bottom Section */}
+          <div className="relative z-10 w-full border-t border-white/10 py-4 sm:py-6">
+            <div className="container mx-auto px-4 sm:px-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+                {contactInfo.map((info, index) => (
+                  <motion.a 
+                    key={info.label}
+                    href={info.link}
+                    target={info.link.startsWith('http') ? '_blank' : undefined}
+                    rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="group flex items-center gap-3 px-4 py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl hover:bg-white/[0.06] hover:border-white/20 transition-all duration-300"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8 + index * 0.1 }}
+                    whileHover={{ y: -2 }}
+                  >
+                    <div className="w-8 h-8 rounded-lg bg-white/[0.05] flex items-center justify-center">
+                      <info.icon className="w-4 h-4 text-white/50 group-hover:text-white transition-colors" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-white/40 text-[10px] uppercase tracking-wider">{info.label}</p>
+                      <p className="text-white text-xs sm:text-sm font-medium truncate">{info.value}</p>
+                    </div>
+                    <ArrowUpRight className="w-3 h-3 text-white/20 group-hover:text-white transition-colors flex-shrink-0" />
+                  </motion.a>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
       </main>
 
-      {/* Contact Info Section */}
-      <section className="bg-[#0A0A0A]" id="contact-info">
-        <div className="border-t border-orange-500/20">
-          {/* Section Header - Coral Theme */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-orange-500/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-orange-500 font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Contact Info</h2>
-            </div>
-            <span className="text-xs text-orange-400/60 tracking-wider hidden sm:block px-3 py-1 border border-orange-500/30 rounded-full">
-              Get in Touch
+      {/* Contact Form Section - Glassmorphism */}
+      <section className="bg-[#0A0A0A] py-16 sm:py-24" id="contact-form">
+        <div className="container mx-auto max-w-4xl px-4 sm:px-6">
+          {/* Section Header */}
+          <motion.div 
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="inline-block px-4 py-2 text-xs rounded-full bg-white/[0.03] border border-white/[0.08] text-white/60 mb-6">
+              Send a Message
             </span>
-          </div>
-          
-          {/* Contact Info Content */}
-          <div className="container mx-auto max-w-7xl px-4 md:px-8 py-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {contactInfo.map((info, index) => (
-                <motion.a 
-                  key={info.label}
-                  href={info.link}
-                  target={info.link.startsWith('http') ? '_blank' : undefined}
-                  rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                  className="group flex items-center justify-between p-6 bg-white/[0.02] border border-white/10 rounded-2xl hover:border-orange-500/40 hover:bg-orange-500/5 transition-all duration-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ y: -4 }}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center">
-                      <info.icon className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
-                    </div>
-                    <div>
-                      <p className="text-white/40 text-xs mb-1">{info.label}</p>
-                      <p className="text-white text-sm font-medium">{info.value}</p>
-                    </div>
-                  </div>
-                  <ArrowUpRight className="w-4 h-4 text-white/20 group-hover:text-white transition-colors" />
-                </motion.a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+            <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+              Start Your Project
+            </h2>
+            <p className="text-white/50 max-w-xl mx-auto">
+              Fill out the form below and we'll get back to you within 24 hours.
+            </p>
+          </motion.div>
 
-      {/* Contact Form Section */}
-      <section className="bg-[#0A0A0A]" id="contact-form">
-        <div className="border-t border-orange-500/20">
-          {/* Section Header - Coral Theme */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-orange-500/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-orange-500 font-mono tracking-widest">02</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Send a Message</h2>
-            </div>
-            <span className="text-xs text-orange-400/60 tracking-wider hidden sm:block px-3 py-1 border border-orange-500/30 rounded-full">
-              We'll respond within 24h
-            </span>
-          </div>
-          
-          {/* Form Content */}
-          <div className="container mx-auto max-w-4xl px-4 md:px-8 py-16">
-            <form onSubmit={handleSubmit} className="space-y-8">
+          {/* Glassmorphism Form Container */}
+          <motion.div 
+            className="relative p-6 sm:p-10 rounded-3xl bg-white/[0.02] border border-white/[0.08] backdrop-blur-sm"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            {/* Subtle gradient glow */}
+            <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/[0.03] via-transparent to-white/[0.01] pointer-events-none" />
+            
+            <form onSubmit={handleSubmit} className="relative space-y-8">
               {/* Name & Email Row */}
-              <div className="grid sm:grid-cols-2 gap-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                >
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div>
                   <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Name *</label>
                   <input
                     type="text"
@@ -245,15 +274,10 @@ const Contact = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all"
                   />
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.15 }}
-                >
+                </div>
+                <div>
                   <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Email *</label>
                   <input
                     type="email"
@@ -261,52 +285,37 @@ const Contact = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all"
                   />
-                </motion.div>
+                </div>
               </div>
 
               {/* Company Name & Website Row */}
-              <div className="grid sm:grid-cols-2 gap-8">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                >
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div>
                   <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Name</label>
                   <input
                     type="text"
                     placeholder="Company name"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all"
                   />
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.25 }}
-                >
+                </div>
+                <div>
                   <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Website</label>
                   <input
                     type="url"
                     placeholder="https://..."
                     value={formData.website}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all"
                   />
-                </motion.div>
+                </div>
               </div>
 
               {/* Estimated Budget */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 }}
-              >
+              <div>
                 <label className="block text-xs uppercase tracking-wider text-white/40 mb-4">Estimated Budget</label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {budgetOptions.map((option) => (
@@ -316,8 +325,8 @@ const Contact = () => {
                       onClick={() => setFormData({ ...formData, budget: option })}
                       className={`px-4 py-3 rounded-xl text-sm border transition-all text-center ${
                         formData.budget === option
-                          ? 'bg-white/10 border-white text-white'
-                          : 'bg-transparent border-white/20 text-white/60 hover:border-white/40 hover:text-white'
+                          ? 'bg-white/[0.1] border-white/30 text-white'
+                          : 'bg-white/[0.03] border-white/[0.08] text-white/60 hover:border-white/20 hover:bg-white/[0.05] hover:text-white'
                       }`}
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -326,44 +335,53 @@ const Contact = () => {
                     </motion.button>
                   ))}
                 </div>
-              </motion.div>
+              </div>
 
               {/* Project Description */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.35 }}
-              >
+              <div>
                 <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Tell Us About Your Project</label>
                 <textarea
                   placeholder="Describe your project and goals..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   rows={4}
-                  className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors resize-none"
+                  className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all resize-none"
                 />
-              </motion.div>
+              </div>
 
               {/* Submit Button */}
-              <motion.div 
-                className="pt-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-              >
-                <button
+              <div className="pt-2">
+                <motion.button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-rose-500 text-white px-8 py-4 font-medium hover:from-orange-600 hover:to-rose-600 transition-all disabled:opacity-50 rounded-lg"
+                  className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 disabled:opacity-50"
+                  whileHover={{ scale: 1.02, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
+                  <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </motion.div>
+                </motion.button>
+              </div>
             </form>
-          </div>
+          </motion.div>
+
+          {/* Office Location Card */}
+          <motion.div 
+            className="mt-8 p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] flex items-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            <div className="w-12 h-12 rounded-xl bg-white/[0.05] flex items-center justify-center flex-shrink-0">
+              <MapPin className="w-5 h-5 text-white/50" />
+            </div>
+            <div>
+              <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Office</p>
+              <p className="text-white font-medium">{brand.address}</p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
