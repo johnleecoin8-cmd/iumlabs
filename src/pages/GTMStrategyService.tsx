@@ -5,41 +5,33 @@ import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, F
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
-// Project logos
-import storyLogo from "@/assets/logos/story-protocol.png";
-import peaqLogo from "@/assets/logos/peaq.svg";
-import ondoLogo from "@/assets/logos/ondo.svg";
-import megaethLogo from "@/assets/logos/megaeth.png";
-import saharaLogo from "@/assets/logos/sahara-ai.png";
-import triaLogo from "@/assets/logos/tria-official.png";
-
 const ACCENT_COLOR = "#10B981";
 
 // GTM Journey phases
 const journeyPhases = [
   {
-    week: "Week 1-2",
+    week: "Week 1",
     title: "Discovery",
     icon: Search,
     activities: ["Market research", "Competitor analysis", "Community audit", "Strategy workshop"],
     deliverables: ["Market report", "Positioning deck"],
   },
   {
-    week: "Week 3-4",
+    week: "Week 2",
     title: "Strategy",
     icon: Target,
     activities: ["GTM roadmap", "Channel strategy", "KOL mapping", "Content planning"],
     deliverables: ["GTM playbook", "Launch calendar"],
   },
   {
-    week: "Week 5-6",
+    week: "Week 3",
     title: "Launch",
     icon: Zap,
     activities: ["Campaign execution", "PR distribution", "Community activation", "Event coordination"],
     deliverables: ["Launch report", "Media coverage"],
   },
   {
-    week: "Week 7+",
+    week: "Week 4",
     title: "Scale",
     icon: TrendingUp,
     activities: ["Performance optimization", "Community growth", "Partnership expansion", "Ongoing support"],
@@ -47,15 +39,6 @@ const journeyPhases = [
   },
 ];
 
-// Trusted by projects
-const trustedProjects = [
-  { name: "Story Protocol", logo: storyLogo },
-  { name: "Peaq", logo: peaqLogo },
-  { name: "Ondo Finance", logo: ondoLogo },
-  { name: "MegaETH", logo: megaethLogo },
-  { name: "Sahara AI", logo: saharaLogo },
-  { name: "Tria", logo: triaLogo },
-];
 
 const serviceTags: ServiceTag[] = [
   { label: "Market Entry" },
@@ -69,7 +52,7 @@ const serviceTags: ServiceTag[] = [
 const stats: ServiceStat[] = [
   { value: 30, label: "Projects Launched", suffix: "+" },
   { value: 85, label: "Average Mindshare Gain", suffix: "%" },
-  { value: 6, label: "Avg Launch Timeline", suffix: " weeks" },
+  { value: 4, label: "Avg Launch Timeline", suffix: " weeks" },
   { value: 100, label: "Korea Market Coverage", suffix: "%" },
 ];
 
@@ -137,7 +120,7 @@ const faqItems: FAQItem[] = [
   },
   {
     question: "How long does a typical GTM take?",
-    answer: "A comprehensive GTM launch typically takes 6-8 weeks from strategy to execution. We can accommodate faster timelines for urgent launches with focused scope.",
+    answer: "A comprehensive GTM launch typically takes 4 weeks from strategy to execution. We can accommodate faster timelines for urgent launches with focused scope.",
   },
   {
     question: "Do you handle exchange listings?",
@@ -172,31 +155,16 @@ const GTMStrategyService = () => {
       {/* GTM Journey Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader number="01" title="Your GTM Journey" badge="6-Week Program" />
+          <SectionHeader number="01" title="Your GTM Journey" badge="4-Week Program" />
           
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 {/* Left - Description */}
                 <div>
-                  <p className="text-white/60 text-lg leading-relaxed mb-8">
-                    Our proven 6-week GTM program takes you from market research to successful launch. Each phase builds on the previous, ensuring comprehensive preparation and flawless execution.
+                  <p className="text-white/60 text-lg leading-relaxed">
+                    Our proven 4-week GTM program takes you from market research to successful launch. Each phase builds on the previous, ensuring comprehensive preparation and flawless execution.
                   </p>
-                  
-                  {/* Trusted By */}
-                  <div className="mt-8">
-                    <p className="text-white/40 text-sm mb-4">Trusted by</p>
-                    <div className="flex flex-wrap items-center gap-6">
-                      {trustedProjects.map((project) => (
-                        <img 
-                          key={project.name}
-                          src={project.logo} 
-                          alt={project.name}
-                          className="h-6 object-contain brightness-0 invert opacity-50 hover:opacity-100 transition-opacity"
-                        />
-                      ))}
-                    </div>
-                  </div>
                 </div>
 
                 {/* Right - Phase Cards */}
