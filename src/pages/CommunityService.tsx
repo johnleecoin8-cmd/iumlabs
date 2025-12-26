@@ -11,10 +11,10 @@ const TELEGRAM_COLOR = "#0088CC";
 const serviceTags: ServiceTag[] = [
   { label: "Discord Management" },
   { label: "Telegram Ops" },
-  { label: "AI Automation" },
+  { label: "KakaoTalk 오픈채팅" },
+  { label: "Naver Cafe" },
   { label: "24/7 Moderation" },
-  { label: "Gamification" },
-  { label: "Community Events" },
+  { label: "AI Automation" },
 ];
 
 const stats: ServiceStat[] = [
@@ -53,50 +53,50 @@ const processSteps: ProcessStep[] = [
 
 const deliverables: Deliverable[] = [
   {
-    title: "Server Setup",
+    title: "글로벌 플랫폼",
     items: [
-      "Custom Discord/Telegram architecture",
-      "Role hierarchy & permissions",
-      "Verification systems",
-      "Channel organization",
+      "Discord/Telegram 서버 구축",
+      "Role hierarchy & 권한 설정",
+      "Verification 시스템",
+      "AI 챗봇 & 자동화",
     ],
   },
   {
-    title: "Automation & Bots",
+    title: "한국 플랫폼",
     items: [
-      "AI-powered chatbot integration",
-      "Auto-moderation rules",
-      "Gamification systems (XP, levels)",
-      "Announcement automation",
+      "KakaoTalk 오픈채팅방 운영",
+      "Naver Cafe 개설 & 관리",
+      "한국어 콘텐츠 제작",
+      "한국 커뮤니티 이벤트",
     ],
   },
   {
     title: "Management & Support",
     items: [
-      "24/7 moderation coverage",
-      "Community event coordination",
-      "Sentiment monitoring",
-      "Weekly performance reports",
+      "24/7 한영 모더레이션",
+      "인증샷 이벤트 기획",
+      "Sentiment 모니터링",
+      "주간 성과 리포트",
     ],
   },
 ];
 
 const faqItems: FAQItem[] = [
   {
-    question: "Do you manage both Discord and Telegram?",
-    answer: "Yes, we provide full management for both platforms. Most projects use both for different purposes — Discord for deeper engagement and Telegram for quick updates and Korean market reach.",
+    question: "한국 플랫폼(KakaoTalk, Naver)도 지원하나요?",
+    answer: "네, KakaoTalk 오픈채팅방과 Naver Cafe 운영을 전문적으로 지원합니다. 한국 유저들은 글로벌 플랫폼보다 카카오톡과 네이버를 선호하므로, 한국 시장 진출 시 필수적인 채널입니다.",
   },
   {
-    question: "What's included in 24/7 moderation?",
-    answer: "Our moderation team covers all time zones with trained Korean and English-speaking moderators. This includes spam removal, FUD management, user support, and escalation handling.",
+    question: "Discord, Telegram도 함께 관리하나요?",
+    answer: "물론입니다. 글로벌(Discord, Telegram)과 한국(KakaoTalk, Naver Cafe) 플랫폼을 통합 관리합니다. 각 플랫폼의 특성에 맞는 맞춤형 운영 전략을 제공합니다.",
   },
   {
-    question: "Can you migrate our existing community?",
-    answer: "Absolutely. We handle migrations carefully to preserve member relationships and engagement levels. We'll audit your current setup and create a transition plan.",
+    question: "24/7 모더레이션에는 무엇이 포함되나요?",
+    answer: "한국어와 영어를 모두 구사하는 전문 모더레이터가 모든 시간대를 커버합니다. 스팸 제거, FUD 대응, 유저 지원, 에스컬레이션 처리를 포함합니다.",
   },
   {
-    question: "What AI tools do you use for automation?",
-    answer: "We deploy custom AI solutions for FAQ responses, sentiment analysis, and engagement optimization. Our bots learn from your community to provide increasingly accurate and helpful responses.",
+    question: "기존 커뮤니티를 이전할 수 있나요?",
+    answer: "가능합니다. 멤버 관계와 참여도를 유지하면서 신중하게 이전을 진행합니다. 현재 설정을 감사하고 전환 계획을 수립해 드립니다.",
   },
 ];
 

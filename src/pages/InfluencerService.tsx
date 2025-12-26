@@ -8,12 +8,12 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 const ACCENT_COLOR = "#F59E0B";
 
 const serviceTags: ServiceTag[] = [
-  { label: "KOL Network" },
+  { label: "Global KOL" },
+  { label: "Korean KOL" },
   { label: "Campaign Strategy" },
   { label: "Content Coordination" },
   { label: "Performance Tracking" },
-  { label: "Audience Matching" },
-  { label: "Brand Alignment" },
+  { label: "한국 유튜버/블로거" },
 ];
 
 const stats: ServiceStat[] = [
@@ -82,36 +82,38 @@ const deliverables: Deliverable[] = [
 
 const faqItems: FAQItem[] = [
   {
-    question: "How do you select KOLs for our campaign?",
-    answer: "We analyze your target audience, project narrative, and goals to match with KOLs who have genuine engagement and audience overlap. We verify engagement rates and check for authentic followers.",
+    question: "한국 KOL 네트워크가 있나요?",
+    answer: "네, 50명 이상의 한국 크립토 KOL을 보유하고 있습니다. DeFi, NFT, 트레이딩, 리서치 등 다양한 분야의 전문가들과 협력합니다. 한국어/영어 바이링구얼 KOL도 연결해 드립니다.",
   },
   {
-    question: "What's the typical budget range for KOL campaigns?",
-    answer: "Budgets vary widely based on KOL tier and campaign scope. We work with budgets from $5K for micro-influencer campaigns to $100K+ for multi-KOL launches. We'll recommend the optimal mix for your goals.",
+    question: "한국 유튜버나 블로거와도 협업하나요?",
+    answer: "물론입니다. 네이버 블로그, 유튜브 크립토 채널, 티스토리 등 한국 로컬 플랫폼의 인플루언서 네트워크도 보유하고 있습니다. 한국 SEO에 효과적인 콘텐츠 배포가 가능합니다.",
   },
   {
-    question: "Do you have Korean-speaking KOLs?",
-    answer: "Yes, our network includes 50+ Korean crypto KOLs across different niches (DeFi, NFT, trading, research). We also work with bilingual KOLs who can reach both Korean and global audiences.",
+    question: "KOL 캠페인 예산은 어느 정도인가요?",
+    answer: "KOL 티어와 캠페인 범위에 따라 다양합니다. 마이크로 인플루언서 캠페인은 $5K부터, 멀티 KOL 론칭은 $100K 이상까지 진행합니다. 목표에 맞는 최적의 조합을 추천해 드립니다.",
   },
   {
-    question: "How do you measure campaign success?",
-    answer: "We track impressions, engagement rate, follower growth, website traffic, and community joins. For token projects, we can also correlate with on-chain metrics like holder growth.",
+    question: "캠페인 성과는 어떻게 측정하나요?",
+    answer: "노출수, 참여율, 팔로워 증가, 웹사이트 트래픽, 커뮤니티 가입을 추적합니다. 토큰 프로젝트의 경우 홀더 증가 등 온체인 지표와도 연계 분석합니다.",
   },
 ];
 
 const kolProfiles = [
-  { name: "CryptoGodJohn", handle: "@CryptoGodJohn", followers: "45K", tier: "bronze", expertise: "Trading" },
-  { name: "Posty", handle: "@PostyXBT", followers: "38K", tier: "bronze", expertise: "TA" },
-  { name: "DegenSpartan", handle: "@DegenSpartan", followers: "42K", tier: "bronze", expertise: "DeFi" },
-  { name: "Cobie", handle: "@colobie", followers: "800K", tier: "platinum", expertise: "Trading" },
-  { name: "Crypto Dog", handle: "@TheCryptoDog", followers: "750K", tier: "gold", expertise: "Swing Trading" },
-  { name: "ZachXBT", handle: "@zachxbt", followers: "650K", tier: "gold", expertise: "Investigation" },
-  { name: "Kaleo", handle: "@CryptoKaleo", followers: "620K", tier: "gold", expertise: "Chart Analysis" },
-  { name: "Pentoshi", handle: "@Pentosh1", followers: "610K", tier: "gold", expertise: "Trading" },
-  { name: "Arthur Hayes", handle: "@CryptoHayes", followers: "580K", tier: "gold", expertise: "Macro" },
-  { name: "Ansem", handle: "@blknoiz06", followers: "520K", tier: "gold", expertise: "Meme Coins" },
-  { name: "Punk6529", handle: "@punk6529", followers: "510K", tier: "gold", expertise: "NFT Culture" },
-  { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", tier: "silver", expertise: "Technical Analysis" },
+  // Global KOLs
+  { name: "Cobie", handle: "@colobie", followers: "800K", tier: "platinum", expertise: "Trading", region: "global" },
+  { name: "Crypto Dog", handle: "@TheCryptoDog", followers: "750K", tier: "gold", expertise: "Swing Trading", region: "global" },
+  { name: "ZachXBT", handle: "@zachxbt", followers: "650K", tier: "gold", expertise: "Investigation", region: "global" },
+  { name: "Kaleo", handle: "@CryptoKaleo", followers: "620K", tier: "gold", expertise: "Chart Analysis", region: "global" },
+  { name: "Pentoshi", handle: "@Pentosh1", followers: "610K", tier: "gold", expertise: "Trading", region: "global" },
+  { name: "Arthur Hayes", handle: "@CryptoHayes", followers: "580K", tier: "gold", expertise: "Macro", region: "global" },
+  // Korean KOLs
+  { name: "체인의정석", handle: "@ChainExpert_KR", followers: "85K", tier: "silver", expertise: "DeFi 분석", region: "korean" },
+  { name: "크립토퀀트", handle: "@cryptoquant_com", followers: "280K", tier: "gold", expertise: "온체인 분석", region: "korean" },
+  { name: "비트맨", handle: "@BitmanKR", followers: "120K", tier: "silver", expertise: "트레이딩", region: "korean" },
+  { name: "블록인프레스", handle: "@blockinpress", followers: "95K", tier: "silver", expertise: "뉴스/리서치", region: "korean" },
+  { name: "코인갤러리", handle: "@CoinGalleryKR", followers: "68K", tier: "bronze", expertise: "NFT/메타버스", region: "korean" },
+  { name: "김프리", handle: "@Kimchi_Premium", followers: "52K", tier: "bronze", expertise: "김프 분석", region: "korean" },
 ];
 
 const tierData = [
@@ -121,13 +123,20 @@ const tierData = [
   { tier: "Bronze", icon: Zap, count: "30+", reach: "50K-100K", color: "from-orange-600 to-orange-800" },
 ];
 
+const regionData = [
+  { id: "all", label: "All", count: "120+" },
+  { id: "global", label: "Global", count: "70+" },
+  { id: "korean", label: "Korean 🇰🇷", count: "50+" },
+];
+
 const InfluencerService = () => {
   usePageTitle("Influencer/KOL");
   const [activeTier, setActiveTier] = useState<string | null>(null);
+  const [activeRegion, setActiveRegion] = useState<string>("all");
   
-  const filteredKOLs = activeTier 
-    ? kolProfiles.filter(kol => kol.tier === activeTier)
-    : kolProfiles;
+  const filteredKOLs = kolProfiles
+    .filter(kol => activeRegion === "all" || kol.region === activeRegion)
+    .filter(kol => !activeTier || kol.tier === activeTier);
   
   return (
     <ServicePageLayout
@@ -151,6 +160,24 @@ const InfluencerService = () => {
 
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
+              {/* Region Filter */}
+              <div className="flex flex-wrap justify-center gap-2 mb-6">
+                {regionData.map((region) => (
+                  <button
+                    key={region.id}
+                    onClick={() => setActiveRegion(region.id)}
+                    className={`px-4 py-2 rounded-full border transition-all text-sm font-medium ${
+                      activeRegion === region.id
+                        ? 'border-amber-500 bg-amber-500/20 text-amber-400'
+                        : 'border-white/20 text-white/60 hover:border-white/40 hover:text-white'
+                    }`}
+                  >
+                    {region.label}
+                    <span className="ml-1.5 text-xs opacity-60">{region.count}</span>
+                  </button>
+                ))}
+              </div>
+
               {/* Tier Filter Buttons */}
               <div className="flex flex-wrap justify-center gap-3 mb-12">
                 <button
