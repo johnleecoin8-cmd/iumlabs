@@ -14,7 +14,7 @@ import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
 import Research from "./pages/Research";
 import ResearchDetail from "./pages/ResearchDetail";
-import GTMStrategyService from "./pages/GTMStrategyService";
+import OfflineEventService from "./pages/GTMStrategyService";
 import CommunityService from "./pages/CommunityService";
 import SocialMediaService from "./pages/SocialMediaService";
 import InfluencerService from "./pages/InfluencerService";
@@ -94,7 +94,7 @@ const AppRoutes = () => {
       <Routes location={location}>
         <Route path="/" element={<Index />} />
         <Route path="/services" element={<Services />} />
-        <Route path="/services/gtm" element={<GTMStrategyService />} />
+        <Route path="/services/offline-event" element={<OfflineEventService />} />
         <Route path="/services/community" element={<CommunityService />} />
         <Route path="/services/social-media" element={<SocialMediaService />} />
         <Route path="/services/influencer" element={<InfluencerService />} />

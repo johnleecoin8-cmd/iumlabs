@@ -1,4 +1,4 @@
-import { Rocket, Search, Target, Zap, TrendingUp, ArrowRight } from "lucide-react";
+import { CalendarDays, Search, Target, Zap, TrendingUp, ArrowRight, MapPin, Users, Megaphone, Camera } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
@@ -7,155 +7,155 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 
 const ACCENT_COLOR = "#10B981";
 
-// GTM Journey phases
+// Event Planning Journey phases
 const journeyPhases = [
   {
     week: "Week 1",
-    title: "Discovery",
+    title: "Planning",
     icon: Search,
-    activities: ["Market research", "Competitor analysis", "Community audit", "Strategy workshop"],
-    deliverables: ["Market report", "Positioning deck"],
+    activities: ["Event concept development", "Venue research", "Budget planning", "Timeline creation"],
+    deliverables: ["Event brief", "Venue shortlist"],
   },
   {
     week: "Week 2",
-    title: "Strategy",
+    title: "Preparation",
     icon: Target,
-    activities: ["GTM roadmap", "Channel strategy", "KOL mapping", "Content planning"],
-    deliverables: ["GTM playbook", "Launch calendar"],
+    activities: ["Venue confirmation", "Vendor coordination", "Guest list management", "Logistics setup"],
+    deliverables: ["Event rundown", "Invitation design"],
   },
   {
     week: "Week 3",
-    title: "Launch",
-    icon: Zap,
-    activities: ["Campaign execution", "PR distribution", "Community activation", "Event coordination"],
-    deliverables: ["Launch report", "Media coverage"],
+    title: "Promotion",
+    icon: Megaphone,
+    activities: ["Marketing campaign", "Media outreach", "RSVP tracking", "Speaker coordination"],
+    deliverables: ["Promo materials", "Media kit"],
   },
   {
     week: "Week 4",
-    title: "Scale",
-    icon: TrendingUp,
-    activities: ["Performance optimization", "Community growth", "Partnership expansion", "Ongoing support"],
-    deliverables: ["Growth metrics", "Monthly reports"],
+    title: "Execution",
+    icon: Zap,
+    activities: ["On-site management", "Live coverage", "Guest relations", "Post-event follow-up"],
+    deliverables: ["Event recap", "Photo/Video assets"],
   },
 ];
 
 
 const serviceTags: ServiceTag[] = [
-  { label: "Market Entry" },
-  { label: "Launch Strategy" },
-  { label: "Brand Positioning" },
-  { label: "Channel Strategy" },
-  { label: "Campaign Planning" },
-  { label: "Growth Optimization" },
+  { label: "Event Planning" },
+  { label: "Venue Coordination" },
+  { label: "Networking Events" },
+  { label: "Conference & Summit" },
+  { label: "On-Ground Activation" },
+  { label: "Event Marketing" },
 ];
 
 const stats: ServiceStat[] = [
-  { value: 30, label: "Projects Launched", suffix: "+" },
-  { value: 85, label: "Average Mindshare Gain", suffix: "%" },
-  { value: 4, label: "Avg Launch Timeline", suffix: " weeks" },
+  { value: 50, label: "Events Hosted", suffix: "+" },
+  { value: 500, label: "Average Attendance", suffix: "+" },
+  { value: 3, label: "Avg Event Lead Time", suffix: " weeks" },
   { value: 100, label: "Korea Market Coverage", suffix: "%" },
 ];
 
 const processSteps: ProcessStep[] = [
   {
     number: "01",
-    title: "Discovery & Research",
-    description: "Deep dive into Korean market dynamics, competitor landscape, and community sentiment to inform strategy.",
+    title: "Concept & Planning",
+    description: "Define event objectives, target audience, and develop a compelling event concept aligned with your brand.",
     icon: Search,
   },
   {
     number: "02",
-    title: "Strategy Development",
-    description: "Craft comprehensive GTM playbook with positioning, messaging, channel mix, and launch timeline.",
-    icon: Target,
+    title: "Venue & Logistics",
+    description: "Secure premium venues in Seoul, manage vendors, and coordinate all logistical requirements.",
+    icon: MapPin,
   },
   {
     number: "03",
-    title: "Launch Execution",
-    description: "Coordinate multi-channel campaign across PR, community, KOLs, and events for maximum impact.",
-    icon: Zap,
+    title: "Promotion & Outreach",
+    description: "Drive registrations through targeted marketing, KOL invitations, and media partnerships.",
+    icon: Megaphone,
   },
   {
     number: "04",
-    title: "Optimization & Scale",
-    description: "Continuous performance tracking, A/B testing, and strategy refinement for sustained growth.",
-    icon: TrendingUp,
+    title: "Execution & Coverage",
+    description: "Flawless on-site execution with professional photography, live streaming, and real-time social coverage.",
+    icon: Camera,
   },
 ];
 
 const deliverables: Deliverable[] = [
   {
-    title: "Research & Analysis",
+    title: "Event Planning",
     items: [
-      "Korea market landscape report",
-      "Competitor benchmarking",
-      "Community sentiment analysis",
-      "KOL influence mapping",
+      "Event concept & theme development",
+      "Venue scouting & booking",
+      "Budget management",
+      "Timeline & rundown creation",
     ],
   },
   {
-    title: "Strategy Assets",
+    title: "Guest Management",
     items: [
-      "GTM playbook",
-      "Brand positioning guide",
-      "Content strategy framework",
-      "Launch calendar",
+      "VIP & KOL invitation handling",
+      "RSVP tracking system",
+      "On-site registration",
+      "Guest relations support",
     ],
   },
   {
-    title: "Execution & Reporting",
+    title: "Content & Coverage",
     items: [
-      "Campaign performance dashboard",
-      "Weekly progress reports",
-      "Mindshare tracking",
-      "ROI analysis",
+      "Professional photography",
+      "Video production",
+      "Live social media coverage",
+      "Post-event recap report",
     ],
   },
 ];
 
 const faqItems: FAQItem[] = [
   {
-    question: "What makes Korean market entry different?",
-    answer: "Korea has unique dynamics including strong community culture, specific platform preferences (KakaoTalk, Naver), influential local KOLs, and distinct regulatory requirements. Local expertise is essential for success.",
+    question: "What types of events do you organize?",
+    answer: "We organize a wide range of Web3 events including launch parties, networking meetups, conferences, panels, AMAs, hackathons, and exclusive VIP dinners. We tailor each event to your project's goals and target audience.",
   },
   {
-    question: "How long does a typical GTM take?",
-    answer: "A comprehensive GTM launch typically takes 4 weeks from strategy to execution. We can accommodate faster timelines for urgent launches with focused scope.",
+    question: "How long does event planning typically take?",
+    answer: "We recommend a minimum of 3-4 weeks for proper planning. However, we can accommodate faster timelines for smaller events or urgent launches with focused scope.",
   },
   {
-    question: "Do you handle exchange listings?",
-    answer: "Yes, we support Korean exchange listing strategy including Upbit, Bithumb, and Coinone. This includes listing preparation, documentation, and ongoing relationship management.",
+    question: "What venues do you work with in Seoul?",
+    answer: "We have partnerships with premium venues across Seoul including Gangnam, Hongdae, Itaewon, and Yeouido. From rooftop lounges to conference halls, we match the venue to your event's vibe and capacity needs.",
   },
   {
-    question: "What metrics do you track for success?",
-    answer: "We track mindshare (Kaito), community growth, media coverage, social engagement, trading volume impact, and overall brand sentiment in the Korean market.",
+    question: "Do you handle KOL and media invitations?",
+    answer: "Yes, we leverage our extensive network of Korean crypto KOLs, media partners, and community leaders to ensure strong attendance and coverage for your event.",
   },
 ];
 
-const GTMStrategyService = () => {
-  usePageTitle("GTM Strategy");
+const OfflineEventService = () => {
+  usePageTitle("Offline Event");
   
   const [activePhase, setActivePhase] = useState<number | null>(null);
 
   return (
     <ServicePageLayout
-      serviceName="GTM Strategy"
-      serviceTitle="GTM"
-      serviceSubtitle="Strategy"
-      serviceDescription="Launch successfully in Korea with data-driven market entry strategy, comprehensive planning, and end-to-end execution."
-      serviceIcon={Rocket}
+      serviceName="Offline Event"
+      serviceTitle="Offline"
+      serviceSubtitle="Events"
+      serviceDescription="Create impactful offline experiences in Korea with end-to-end event planning, venue coordination, and on-ground activation."
+      serviceIcon={CalendarDays}
       serviceTags={serviceTags}
       stats={stats}
       accentColor={ACCENT_COLOR}
       processSteps={processSteps}
       deliverables={deliverables}
       faqItems={faqItems}
-      currentSlug="gtm-strategy"
+      currentSlug="offline-event"
     >
-      {/* GTM Journey Section */}
+      {/* Event Journey Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader number="01" title="Your GTM Journey" badge="4-Week Program" />
+          <SectionHeader number="01" title="Your Event Journey" badge="4-Week Program" />
           
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
@@ -163,7 +163,7 @@ const GTMStrategyService = () => {
                 {/* Left - Description */}
                 <div>
                   <p className="text-white/60 text-lg leading-relaxed">
-                    Our proven 4-week GTM program takes you from market research to successful launch. Each phase builds on the previous, ensuring comprehensive preparation and flawless execution.
+                    Our proven event planning process takes you from concept to execution. Each phase builds on the previous, ensuring comprehensive preparation and flawless delivery of memorable experiences.
                   </p>
                 </div>
 
@@ -249,4 +249,4 @@ const GTMStrategyService = () => {
   );
 };
 
-export default GTMStrategyService;
+export default OfflineEventService;

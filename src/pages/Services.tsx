@@ -16,14 +16,14 @@ import {
 const services = [
   {
     icon: Compass,
-    title: "Go-To-Market Strategy",
-    description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus.",
-    link: "/services/gtm"
+    title: "Offline Event",
+    description: "End-to-end event planning, venue coordination, and on-ground activation for impactful Web3 experiences.",
+    link: "/services/offline-event"
   },
   {
     icon: Users,
     title: "Community Management",
-    description: "Complete Discord community infrastructure to build sticky, scalable and self-sustaining growth.",
+    description: "Complete Discord & Telegram community infrastructure to build sticky, scalable and self-sustaining growth.",
     link: "/services/community"
   },
   {
@@ -34,7 +34,7 @@ const services = [
   },
   {
     icon: Mic2,
-    title: "Influencer Strategy",
+    title: "Influencer/KOL",
     description: "Influencer campaigns powered by top crypto voices aligned with your message and goals.",
     link: "/services/influencer"
   },
