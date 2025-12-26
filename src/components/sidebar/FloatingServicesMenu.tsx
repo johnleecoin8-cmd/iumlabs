@@ -7,6 +7,9 @@ import { cn } from "@/lib/utils";
 
 // Services submenu data
 const servicesSubMenu = [
+  { name: "GTM Strategy", href: "/services/gtm" },
+  { name: "Branding/Website", href: "/services/branding" },
+  { name: "SEO/Paid Ads", href: "/services/seo-ads" },
   { name: "Offline Event", href: "/services/offline-event" },
   { name: "Community Management", href: "/services/community" },
   { name: "Deep Research", href: "/services/deep-research" },
@@ -75,8 +78,8 @@ const FloatingServicesMenu = ({ isActive, isCollapsed, isOpen, onToggle, current
         {/* Floating Popover submenu - Glass card style */}
         <AnimatePresence>
           {showPopover && (
-            <motion.div 
-              className="absolute left-full top-0 ml-6 w-48 py-4 px-4 rounded-2xl bg-black/80 backdrop-blur-xl border border-white/[0.08]"
+            <motion.div
+              className="absolute left-full top-0 ml-6 w-52 max-h-[70vh] overflow-y-auto py-4 px-4 rounded-2xl bg-black/80 backdrop-blur-xl border border-white/[0.08]"
               initial={{ opacity: 0, scale: 0.95, x: -10 }}
               animate={{ opacity: 1, scale: 1, x: 0 }}
               exit={{ opacity: 0, scale: 0.95, x: -10 }}

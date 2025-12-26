@@ -14,6 +14,9 @@ import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
 import Research from "./pages/Research";
 import ResearchDetail from "./pages/ResearchDetail";
+import GTMService from "./pages/GTMService";
+import BrandingService from "./pages/BrandingService";
+import SEOAdsService from "./pages/SEOAdsService";
 import OfflineEventService from "./pages/GTMStrategyService";
 import CommunityService from "./pages/CommunityService";
 import DeepResearchService from "./pages/DeepResearchService";
@@ -94,6 +97,9 @@ const AppRoutes = () => {
       <Routes location={location}>
         <Route path="/" element={<Index />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/services/gtm" element={<GTMService />} />
+        <Route path="/services/branding" element={<BrandingService />} />
+        <Route path="/services/seo-ads" element={<SEOAdsService />} />
         <Route path="/services/offline-event" element={<OfflineEventService />} />
         <Route path="/services/community" element={<CommunityService />} />
         <Route path="/services/deep-research" element={<DeepResearchService />} />
