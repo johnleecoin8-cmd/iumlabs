@@ -133,21 +133,11 @@ const FooterLinksSection = () => {
         </nav>
 
         {/* Bottom Row - Copyright & Social */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 pt-8 py-0">
           <p className="text-muted-foreground/60 text-sm">
             © {currentYear} {brandConfig.name}. All rights reserved.
           </p>
-          <div className="flex gap-6">
-            <a href={brandConfig.linkedin} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300 text-sm inline-block">
-              LinkedIn
-            </a>
-            <a href={brandConfig.telegram} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300 text-sm inline-block">
-              Telegram
-            </a>
-            <a href="https://twitter.com/iumlabs" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground hover:-translate-y-0.5 transition-all duration-300 text-sm inline-block">
-              Twitter
-            </a>
-          </div>
+          
         </div>
       </div>
     </section>;
