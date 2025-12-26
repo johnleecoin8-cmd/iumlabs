@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { ChevronLeft, Send, Linkedin, Home, Briefcase, FolderOpen, BookOpen, Mail } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { ChevronLeft, Send, Linkedin, Home, Briefcase, FolderOpen, BookOpen, Mail, ArrowLeft } from "lucide-react";
 import { brand, navigation } from "@/config/content";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { useSidebarState } from "@/hooks/useSidebarState";
@@ -56,6 +56,7 @@ const SOCIAL_LINKS = [
 
 const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const currentPath = location.pathname;
   const { isCollapsed, toggleSidebar } = useSidebarState();
   const [activeSection, setActiveSection] = useState('hero');
@@ -196,12 +197,31 @@ const Sidebar = () => {
               </Link>
             )}
 
-            {/* Breadcrumb - Current Page */}
+            {/* Breadcrumb - Current Page with Back Button */}
             {!isCollapsed && (
               <div className="mb-8">
-                <div className="flex items-center gap-2 text-[10px] text-white/30">
-                  <span className="text-white/20">/</span>
-                  <span className="text-primary/80 font-medium capitalize">{currentPageName}</span>
+                <div className="flex items-center gap-2">
+                  {/* Back Button - only show when not on home */}
+                  {currentPath !== '/' && (
+                    <Tooltip delayDuration={0}>
+                      <TooltipTrigger asChild>
+                        <button
+                          onClick={() => navigate(-1)}
+                          className="p-1.5 -ml-1.5 rounded-md text-white/30 hover:text-white hover:bg-white/5 transition-all duration-200"
+                          aria-label="Go back"
+                        >
+                          <ArrowLeft className="w-3.5 h-3.5" />
+                        </button>
+                      </TooltipTrigger>
+                      <TooltipContent side="right" sideOffset={8} className="bg-white text-black text-xs font-medium px-2.5 py-1 rounded-md border-0">
+                        Go back
+                      </TooltipContent>
+                    </Tooltip>
+                  )}
+                  <div className="flex items-center gap-1.5 text-[10px] text-white/30">
+                    <span className="text-white/20">/</span>
+                    <span className="text-primary/80 font-medium capitalize">{currentPageName}</span>
+                  </div>
                 </div>
                 <div className="w-8 h-px bg-white/10 mt-3" />
               </div>
