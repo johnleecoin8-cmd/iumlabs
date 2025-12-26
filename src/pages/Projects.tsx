@@ -6,6 +6,8 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
+import HighlightText from "@/components/HighlightText";
+import StaggerContainer from "@/components/StaggerContainer";
 import { ArrowRight, Calendar, ChevronDown, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -128,18 +130,12 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
   const isRightColumn = index % 2 === 1;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-    >
-      <Link
-        to={`/projects/${project.slug}`}
-        onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
-          !isRightColumn ? "sm:border-r border-border" : ""
-        } ${!isLastRow ? "border-b border-border" : ""}`}
+    <Link
+      to={`/projects/${project.slug}`}
+      onClick={() => window.scrollTo(0, 0)}
+      className={`group block p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
+        !isRightColumn ? "sm:border-r border-border" : ""
+      } ${!isLastRow ? "border-b border-border" : ""}`}
       >
         <div className="flex items-start gap-3 sm:gap-4">
           {/* Image */}
@@ -168,12 +164,11 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
           </div>
         </div>
         
-        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-xs sm:text-sm mt-2 sm:mt-3 min-h-[44px] sm:min-h-0">
-          <span className="group-hover:underline underline-offset-4">View case study</span>
-          <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-        </div>
-      </Link>
-    </motion.div>
+      <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-xs sm:text-sm mt-2 sm:mt-3 min-h-[44px] sm:min-h-0">
+        <span className="group-hover:underline underline-offset-4">View case study</span>
+        <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+      </div>
+    </Link>
   );
 };
 
@@ -299,7 +294,9 @@ const Projects = () => {
                   transition={{ duration: 0.8, delay: 0.2 }}
                 >
                   <span className="text-white">Our </span>
-                  <span className="text-white/90">Case </span>
+                  <HighlightText variant="sweep" delay={800}>
+                    <span className="text-white/90">Case </span>
+                  </HighlightText>
                   <span className="text-white">Studies</span>
                 </motion.h1>
 
@@ -310,7 +307,11 @@ const Projects = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.4 }}
                 >
-                  Real results from <span className="text-white font-medium">18+ global Web3 projects</span> successfully entering and scaling in the Korean market.
+                  Real results from{" "}
+                  <HighlightText variant="underline" delay={1000}>
+                    <span className="text-white font-medium">18+ global Web3 projects</span>
+                  </HighlightText>{" "}
+                  successfully entering and scaling in the Korean market.
                 </motion.p>
 
                 {/* CTA Button */}
@@ -405,7 +406,11 @@ const Projects = () => {
           <div className="flex flex-col lg:flex-row">
             {/* Left: Projects Grid */}
             <div className="w-full lg:w-2/3 lg:border-r border-border">
-              <div className="grid grid-cols-1 md:grid-cols-2">
+              <StaggerContainer 
+                className="grid grid-cols-1 md:grid-cols-2"
+                staggerDelay={0.08}
+                direction="up"
+              >
                 {filteredCases.map((project, index) => (
                   <ProjectCard 
                     key={project.slug} 
@@ -414,7 +419,7 @@ const Projects = () => {
                     totalCount={filteredCases.length} 
                   />
                 ))}
-              </div>
+              </StaggerContainer>
             </div>
 
             {/* Right: Sticky Info Panel */}
