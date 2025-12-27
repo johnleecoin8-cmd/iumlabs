@@ -71,23 +71,23 @@ const FilmstripGallerySection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-2xl font-bold text-white/50 mb-3">
+          <h2 className="text-xl md:text-2xl font-bold text-white/50 mb-3">
             Campaign Gallery
           </h2>
-          <p className="text-white/50 leading-relaxed mb-6 text-sm">
+          <p className="text-white/50 leading-relaxed mb-5 text-sm">
             Explore our successful campaigns and events across Korea's Web3 ecosystem. From launch events to media coverage, we deliver results.
           </p>
 
-          <div className="space-y-3 mb-8">
-            <div className="flex items-center justify-between py-3 border-b border-white/10">
+          <div className="space-y-2 mb-6">
+            <div className="flex items-center justify-between py-2.5 border-b border-white/10">
               <span className="text-white/50 text-sm">Events Hosted</span>
               <span className="text-white font-semibold">48+</span>
             </div>
-            <div className="flex items-center justify-between py-3 border-b border-white/10">
+            <div className="flex items-center justify-between py-2.5 border-b border-white/10">
               <span className="text-white/50 text-sm">Media Placements</span>
               <span className="text-white font-semibold">200+</span>
             </div>
-            <div className="flex items-center justify-between py-3">
+            <div className="flex items-center justify-between py-2.5">
               <span className="text-white/50 text-sm">Campaigns Launched</span>
               <span className="text-white font-semibold">60+</span>
             </div>
