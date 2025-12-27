@@ -2,6 +2,7 @@ import { Newspaper, Globe, Users, FileText, Eye } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
+import ClientLogosSection from "@/components/ClientLogosSection";
 import { usePageTitle } from "@/hooks/usePageTitle";
 const ACCENT_COLOR = "#8B5CF6";
 const serviceTags: ServiceTag[] = [{
@@ -163,6 +164,16 @@ const PRService = () => {
 
       {/* Media Partners Marquee */}
       <MediaPartnersSection />
+
+      {/* Client Logos Section */}
+      <section className="bg-[#0A0A0A] border-t border-white/10">
+        <ClientLogosSection 
+          title="PR Campaign Clients"
+          subtitle="Projects featured in Korean media"
+          serviceFilter="pr"
+          accentColor={ACCENT_COLOR}
+        />
+      </section>
     </ServicePageLayout>;
 };
 export default PRService;
