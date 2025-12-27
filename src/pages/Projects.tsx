@@ -137,7 +137,7 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
       <Link
         to={`/projects/${project.slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
+        className={`group block p-4 sm:p-6 md:p-8 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
           !isRightColumn ? "sm:border-r border-border" : ""
         } ${!isLastRow ? "border-b border-border" : ""}`}
       >
@@ -335,7 +335,7 @@ const Projects = () => {
             {/* Stats Section */}
             <div className="relative z-10 py-4 sm:py-6">
               <div className="container mx-auto px-4 sm:px-6">
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                   {stats.map((stat, index) => (
                     <StatItem 
                       key={index}
@@ -368,7 +368,7 @@ const Projects = () => {
       {/* Filter Section - 01 */}
       <section className="scroll-reveal bg-[#0F0F0F]" id="filter">
         <div className="border-t border-border">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border">
+          <div className="flex items-baseline justify-between p-4 sm:p-6 md:px-10 md:py-6 border-b border-border">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">01</span>
               <h2 className="text-lg md:text-xl font-medium text-foreground">Filter</h2>
@@ -379,7 +379,7 @@ const Projects = () => {
             </span>
           </div>
           
-          <div className="p-6 md:px-10 md:py-8">
+          <div className="p-4 sm:p-6 md:px-10 md:py-6">
             <CategoryFilter 
               categories={categories} 
               activeCategory={activeCategory} 

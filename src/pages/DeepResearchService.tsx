@@ -185,15 +185,15 @@ const DeepResearchService = () => {
       currentSlug="deep-research"
     >
       {/* Research Showcase Section */}
-      <section className="py-20 relative overflow-hidden">
+      <section className="py-12 md:py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
         
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-16"
+            className="text-center mb-10 md:mb-12"
           >
             <span 
               className="text-sm font-medium tracking-wider uppercase mb-4 block"
@@ -201,17 +201,17 @@ const DeepResearchService = () => {
             >
               What We Analyze
             </span>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               Research That Drives Results
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
               From market sizing to user behavior, we deliver actionable insights 
               that position your project for success in the Korean market.
             </p>
           </motion.div>
 
           {/* Research Topics Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-10 md:mb-12">
             {researchTopics.map((topic, index) => (
               <motion.div
                 key={topic.title}
@@ -219,16 +219,16 @@ const DeepResearchService = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-[#06B6D4]/50 transition-all duration-300"
+                className="group relative p-4 sm:p-5 md:p-6 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-[#06B6D4]/50 transition-all duration-300"
               >
                 <div 
-                  className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                  className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-4"
                   style={{ backgroundColor: `${ACCENT_COLOR}20` }}
                 >
-                  <topic.icon className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
+                  <topic.icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: ACCENT_COLOR }} />
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-2">{topic.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{topic.description}</p>
+                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">{topic.title}</h3>
+                <p className="text-sm text-muted-foreground mb-3 sm:mb-4">{topic.description}</p>
                 <span
                   className="text-xs font-medium"
                   style={{ color: ACCENT_COLOR }}
@@ -244,16 +244,16 @@ const DeepResearchService = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative p-8 rounded-3xl border border-white/10 bg-white/[0.03]"
+            className="relative p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border border-white/10 bg-white/[0.03]"
           >
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 md:gap-8">
               {/* Research Icon */}
               <div className="flex flex-col items-center">
                 <div 
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center mb-3"
+                  className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3"
                   style={{ backgroundColor: `${ACCENT_COLOR}20` }}
                 >
-                  <FileText className="w-8 h-8" style={{ color: ACCENT_COLOR }} />
+                  <FileText className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" style={{ color: ACCENT_COLOR }} />
                 </div>
                 <span className="text-sm font-medium text-foreground">Research</span>
               </div>
@@ -266,13 +266,13 @@ const DeepResearchService = () => {
               </div>
 
               {/* Distribution Channels */}
-              <div className="flex-1 max-w-sm">
-                <div className="text-center mb-4">
+              <div className="flex-1 max-w-sm w-full">
+                <div className="text-center mb-3 sm:mb-4">
                   <span className="text-xs text-muted-foreground uppercase tracking-wider">
                     Distributed Through
                   </span>
                 </div>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-2 sm:gap-4">
                   {distributionChannels.map((channel, index) => {
                     const Icon = channel.icon;
                     return (
@@ -282,13 +282,13 @@ const DeepResearchService = () => {
                           scale: activeChannel === index ? 1.08 : 1,
                           borderColor: activeChannel === index ? ACCENT_COLOR : 'rgba(255,255,255,0.1)'
                         }}
-                        className="p-4 rounded-xl border-2 bg-background/50 text-center transition-all flex flex-col items-center gap-2"
+                        className="p-2.5 sm:p-4 rounded-lg sm:rounded-xl border-2 bg-background/50 text-center transition-all flex flex-col items-center gap-1.5 sm:gap-2"
                       >
                         <Icon 
-                          className="w-5 h-5" 
+                          className="w-4 h-4 sm:w-5 sm:h-5" 
                           style={{ color: activeChannel === index ? ACCENT_COLOR : 'rgba(255,255,255,0.5)' }} 
                         />
-                        <span className="text-xs font-medium text-foreground">
+                        <span className="text-[10px] sm:text-xs font-medium text-foreground">
                           {channel.name}
                         </span>
                       </motion.div>
@@ -307,12 +307,12 @@ const DeepResearchService = () => {
               {/* Result */}
               <div className="flex flex-col items-center">
                 <div 
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center mb-3"
+                  className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3"
                   style={{ backgroundColor: `${ACCENT_COLOR}20` }}
                 >
-                  <TrendingUp className="w-8 h-8" style={{ color: ACCENT_COLOR }} />
+                  <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" style={{ color: ACCENT_COLOR }} />
                 </div>
-                <span className="text-sm font-medium text-foreground">Brand Authority</span>
+                <span className="text-xs sm:text-sm font-medium text-foreground">Brand Authority</span>
               </div>
             </div>
           </motion.div>
@@ -322,21 +322,21 @@ const DeepResearchService = () => {
       {/* Latest Research Preview Section */}
       {researchPosts && researchPosts.length > 0 && (
         <section className="py-12 md:py-16 relative bg-[#121212]">
-          <div className="container mx-auto px-6 lg:px-16">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="flex flex-col md:flex-row md:items-end md:justify-between mb-12"
+              className="flex flex-col md:flex-row md:items-end md:justify-between mb-8 md:mb-12"
             >
               <div>
                 <span 
-                  className="text-sm font-medium tracking-wider uppercase mb-4 block"
+                  className="text-sm font-medium tracking-wider uppercase mb-3 sm:mb-4 block"
                   style={{ color: ACCENT_COLOR }}
                 >
                   Sample Work
                 </span>
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+                <h2 className="text-2xl md:text-3xl font-bold text-foreground">
                   Latest Research
                 </h2>
               </div>
@@ -350,7 +350,7 @@ const DeepResearchService = () => {
               </Link>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
               {researchPosts.map((post, index) => (
                 <motion.div
                   key={post.id}
@@ -361,7 +361,7 @@ const DeepResearchService = () => {
                 >
                   <Link
                     to={`/research/${post.slug}`}
-                    className="group block h-full rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden hover:border-[#06B6D4]/50 transition-all duration-300"
+                    className="group block h-full rounded-xl sm:rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden hover:border-[#06B6D4]/50 transition-all duration-300"
                   >
                     {/* Image */}
                     {post.image && (
@@ -375,7 +375,7 @@ const DeepResearchService = () => {
                     )}
                     
                     {/* Content */}
-                    <div className="p-6">
+                    <div className="p-4 sm:p-5 md:p-6">
                       {post.category && (
                         <span 
                           className="inline-block text-xs font-medium px-2 py-1 rounded-full mb-3"
