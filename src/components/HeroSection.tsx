@@ -129,10 +129,9 @@ const HeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-white">The Intelligence Layer</span>
+            <span className="text-white">Bridge Your Web3 Project</span>
             <br />
-            <span className="text-white/90">for Your </span>
-            <span className="text-white">Korean Web3 Growth</span>
+            <span className="text-white">to Korea's Crypto Ecosystem</span>
           </motion.h1>
 
           {/* Subtext - Larger and more prominent */}
