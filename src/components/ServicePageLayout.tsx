@@ -506,18 +506,50 @@ const ServicePageLayout = ({
               <Link
                 key={service.slug}
                 to={`/services/${service.slug}`}
-                className="group p-8 md:p-10 transition-all duration-300 hover:bg-white/5 border-b sm:border-b-0 sm:border-r border-white/10 last:border-r-0"
+                className="group relative p-8 md:p-10 transition-all duration-500 border-b sm:border-b-0 sm:border-r border-white/10 last:border-r-0 overflow-hidden"
               >
+                {/* Hover background gradient */}
                 <div 
-                  className="w-3 h-3 rounded-full mb-4 group-hover:scale-125 transition-transform"
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ 
+                    background: `linear-gradient(135deg, ${service.color}15 0%, transparent 60%)` 
+                  }}
+                />
+                
+                {/* Glow effect on hover */}
+                <div 
+                  className="absolute -top-20 -left-20 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
                   style={{ backgroundColor: service.color }}
                 />
-                <h3 className="text-white font-medium mb-2 group-hover:text-white/90">
-                  {service.title}
-                </h3>
-                <ArrowRight 
-                  className="w-4 h-4 text-white/30 group-hover:text-white/70 group-hover:translate-x-1 transition-all" 
-                />
+                
+                <div className="relative z-10">
+                  {/* Color indicator with pulse effect */}
+                  <div className="relative mb-5">
+                    <div 
+                      className="w-3 h-3 rounded-full group-hover:scale-110 transition-all duration-300"
+                      style={{ backgroundColor: service.color }}
+                    />
+                    <div 
+                      className="absolute inset-0 w-3 h-3 rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-ping"
+                      style={{ backgroundColor: service.color }}
+                    />
+                  </div>
+                  
+                  {/* Service title */}
+                  <h3 className="text-white font-medium text-lg mb-3 group-hover:translate-x-1 transition-transform duration-300">
+                    {service.title}
+                  </h3>
+                  
+                  {/* Arrow with enhanced animation */}
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs text-white/40 group-hover:text-white/60 transition-colors duration-300 uppercase tracking-wider">
+                      Explore
+                    </span>
+                    <ArrowRight 
+                      className="w-4 h-4 text-white/30 group-hover:text-white/80 group-hover:translate-x-2 transition-all duration-300" 
+                    />
+                  </div>
+                </div>
               </Link>
             ))}
           </div>
