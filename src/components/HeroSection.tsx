@@ -213,15 +213,25 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll Indicator - Bottom Right */}
+      {/* Enhanced Scroll Indicator - Bottom Right */}
       <motion.div 
-        className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3"
+        className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3 group cursor-pointer"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
+        whileHover={{ scale: 1.05 }}
+        onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
       >
-        <span className="text-white/40 text-xs sm:text-sm font-medium">scroll</span>
-        <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
+        <span className="text-white/40 text-xs sm:text-sm font-medium group-hover:text-white/70 transition-colors duration-300">scroll</span>
+        <div className="relative flex flex-col items-center">
+          <div className="w-5 h-8 sm:w-6 sm:h-9 rounded-full border border-white/20 group-hover:border-white/40 transition-colors duration-300 flex justify-center pt-1.5">
+            <motion.div 
+              className="w-1 h-1.5 sm:w-1.5 sm:h-2 rounded-full bg-white/60 group-hover:bg-primary transition-colors duration-300"
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            />
+          </div>
+        </div>
       </motion.div>
     </div>
   );
@@ -252,15 +262,16 @@ const StatItem = ({
   
   return (
     <motion.div 
-      className="text-center"
+      className="text-center group cursor-default"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
+      whileHover={{ scale: 1.05 }}
     >
-      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 stat-glow transition-all duration-300 group-hover:text-primary">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-xs sm:text-sm text-white/50 font-light">
+      <div className="text-xs sm:text-sm text-white/50 font-light group-hover:text-white/70 transition-colors duration-300">
         {label}
       </div>
     </motion.div>

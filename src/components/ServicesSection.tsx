@@ -58,23 +58,36 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ y: -4 }}
+      whileTap={{ scale: 0.98 }}
     >
       <Link
         to={service.link}
-        className={`group block p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
+        className={`group block p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 relative overflow-hidden ${
           !isRightColumn ? "sm:border-r border-border" : ""
         } ${!isLastRow ? "border-b border-border" : ""}`}
       >
-        <Icon className="w-8 h-8 sm:w-10 sm:h-10 mb-4 sm:mb-6 text-muted-foreground group-hover:text-foreground group-hover:drop-shadow-[0_0_12px_hsl(var(--foreground)/0.3)] transition-all duration-300" strokeWidth={1.5} />
-        <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3 group-hover:text-foreground/90 transition-colors">
+        {/* Hover glow effect */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+        </div>
+
+        <motion.div
+          className="relative z-10"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
+        >
+          <Icon className="w-8 h-8 sm:w-10 sm:h-10 mb-4 sm:mb-6 text-muted-foreground group-hover:text-foreground group-hover:drop-shadow-[0_0_12px_hsl(var(--foreground)/0.3)] transition-all duration-300" strokeWidth={1.5} />
+        </motion.div>
+        <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3 group-hover:text-foreground/90 transition-colors relative z-10">
           {service.title}
         </h3>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-4 sm:mb-6">
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4 sm:mb-6 relative z-10">
           {service.description}
         </p>
-        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm min-h-[44px] sm:min-h-0">
+        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm min-h-[44px] sm:min-h-0 relative z-10">
           <span className="group-hover:underline underline-offset-4">Learn more</span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
         </div>
       </Link>
     </motion.div>

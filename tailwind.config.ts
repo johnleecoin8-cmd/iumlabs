@@ -162,6 +162,26 @@ export default {
           "0%": { transform: "scale(0.5)", opacity: "0.8" },
           "100%": { transform: "scale(2.5)", opacity: "0" },
         },
+        "reveal-up": {
+          "0%": { opacity: "0", transform: "translateY(30px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        "reveal-fade": {
+          "0%": { opacity: "0", filter: "blur(8px)" },
+          "100%": { opacity: "1", filter: "blur(0)" },
+        },
+        "scroll-indicator": {
+          "0%, 100%": { transform: "translateY(0)", opacity: "1" },
+          "50%": { transform: "translateY(6px)", opacity: "0.5" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { boxShadow: "0 0 0 0 hsl(var(--primary) / 0.4)" },
+          "50%": { boxShadow: "0 0 20px 4px hsl(var(--primary) / 0.2)" },
+        },
+        "shimmer": {
+          "0%": { backgroundPosition: "-200% 0" },
+          "100%": { backgroundPosition: "200% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -184,6 +204,12 @@ export default {
         "glow-line": "glow-line 3s ease-in-out infinite",
         "particle-float": "particle-float 0.6s ease-out forwards",
         "ripple-out": "ripple-out 0.6s ease-out forwards",
+        // New micro-interaction animations
+        "reveal-up": "reveal-up 0.6s ease-out forwards",
+        "reveal-fade": "reveal-fade 0.8s ease-out forwards",
+        "scroll-indicator": "scroll-indicator 2s ease-in-out infinite",
+        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        "shimmer": "shimmer 2s linear infinite",
       },
       transitionTimingFunction: {
         "smooth": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
