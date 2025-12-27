@@ -501,7 +501,7 @@ const ServicePageLayout = ({
       <section className="scroll-reveal bg-[#121212]">
         <div className="border-t border-white/10">
           <SectionHeader number={moreServicesSectionNum} title="More Services" badge="Explore" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {otherServices.map((service, index) => (
               <Link
                 key={service.slug}
