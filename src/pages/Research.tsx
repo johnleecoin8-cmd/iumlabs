@@ -2976,14 +2976,14 @@ const Research = () => {
       </main>
 
       {/* 01 - Browse Section */}
-      <section className="bg-[#0F0F0F] border-t border-white/10" id="filters">
-        {/* Section Header - Homepage Style */}
-        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
+      <section className="bg-[#0A0F14] border-t border-blue-500/10" id="filters">
+        {/* Section Header - Research Style */}
+        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-blue-500/5">
           <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+            <span className="text-[10px] md:text-xs text-blue-400/50 font-mono tracking-widest">01</span>
             <h2 className="text-lg md:text-xl font-medium text-white">Browse</h2>
           </div>
-          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+          <span className="text-xs text-blue-400/70 tracking-wider hidden sm:block px-3 py-1 border border-blue-500/30 rounded-full">
             Filter by Topic
           </span>
         </div>
@@ -2999,8 +2999,8 @@ const Research = () => {
                   onClick={() => { setSelectedCategory(category); setCurrentPage(1); }}
                   className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all ${
                     selectedCategory === category 
-                      ? "bg-primary text-primary-foreground" 
-                      : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10 hover:border-primary/30"
+                      ? "bg-blue-500 text-white" 
+                      : "bg-blue-500/5 text-white/60 hover:bg-blue-500/10 border border-blue-500/20 hover:border-blue-500/40"
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -3012,13 +3012,13 @@ const Research = () => {
             
             {/* Search */}
             <div className="relative w-full md:w-80">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-blue-400/40" />
               <Input
                 type="text"
                 placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-                className="bg-white/5 border-white/10 rounded-full pl-10 pr-4 h-10 text-white placeholder:text-white/40 focus:border-primary/50"
+                className="bg-blue-500/5 border-blue-500/20 rounded-full pl-10 pr-4 h-10 text-white placeholder:text-white/40 focus:border-blue-400/50"
               />
             </div>
           </div>
@@ -3027,14 +3027,14 @@ const Research = () => {
 
       {/* 02 - Featured Article Section */}
       {currentPage === 1 && selectedCategory === "All" && !searchQuery && (
-        <section className="bg-[#121212] border-t border-white/10" id="featured">
+        <section className="bg-[#080C12] border-t border-blue-500/10" id="featured">
           {/* Section Header */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
+          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-blue-500/5">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+              <span className="text-[10px] md:text-xs text-blue-400/50 font-mono tracking-widest">02</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Featured</h2>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+            <span className="text-xs text-blue-400/70 tracking-wider hidden sm:block px-3 py-1 border border-blue-500/30 rounded-full">
               Latest Research
             </span>
           </div>
@@ -3050,7 +3050,7 @@ const Research = () => {
                 transition={{ duration: 0.6 }}
               >
                 <motion.div 
-                  className="aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative"
+                  className="aspect-[16/10] rounded-2xl overflow-hidden border border-blue-500/20 group-hover:border-blue-400/40 transition-all duration-500 relative"
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -3059,16 +3059,16 @@ const Research = () => {
                     alt={researchPosts[0].title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080C12]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <span className="px-3 py-1 bg-primary text-primary-foreground rounded-full text-sm font-medium">
+                    <span className="px-3 py-1 bg-blue-500 text-white rounded-full text-sm font-medium">
                       Read Article
                     </span>
                   </div>
                 </motion.div>
                 <div>
                   <div className="flex items-center gap-4 mb-4">
-                    <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm border border-primary/20">
+                    <span className="px-3 py-1 bg-blue-500/10 text-blue-400 rounded-full text-sm border border-blue-500/20">
                       {researchPosts[0].category}
                     </span>
                     <span className="text-white/40 text-sm flex items-center gap-1">
@@ -3076,7 +3076,7 @@ const Research = () => {
                       {researchPosts[0].readTime}
                     </span>
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight mb-4 group-hover:text-primary/90 transition-colors duration-300">
+                  <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight mb-4 group-hover:text-blue-400 transition-colors duration-300">
                     {researchPosts[0].title}
                   </h2>
                   <p className="text-white/60 text-lg mb-6 line-clamp-3">
@@ -3084,7 +3084,7 @@ const Research = () => {
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-sm font-medium text-primary">
+                      <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-sm font-medium text-blue-400">
                         {researchPosts[0].author.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div>
@@ -3092,7 +3092,7 @@ const Research = () => {
                         <p className="text-white/40 text-xs">{researchPosts[0].date}</p>
                       </div>
                     </div>
-                    <span className="text-primary flex items-center gap-2 group-hover:gap-3 transition-all font-medium">
+                    <span className="text-blue-400 flex items-center gap-2 group-hover:gap-3 transition-all font-medium">
                       Read More <ArrowRight className="w-4 h-4" />
                     </span>
                   </div>
@@ -3104,16 +3104,16 @@ const Research = () => {
       )}
 
       {/* 03 - Article Grid Section */}
-      <section className="bg-[#0F0F0F] border-t border-white/10" id="articles">
+      <section className="bg-[#0A0F14] border-t border-blue-500/10" id="articles">
         {/* Section Header */}
-        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
+        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-blue-500/5">
           <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
+            <span className="text-[10px] md:text-xs text-blue-400/50 font-mono tracking-widest">
               {currentPage === 1 && selectedCategory === "All" && !searchQuery ? "03" : "02"}
             </span>
             <h2 className="text-lg md:text-xl font-medium text-white">All Articles</h2>
           </div>
-          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+          <span className="text-xs text-blue-400/70 tracking-wider hidden sm:block px-3 py-1 border border-blue-500/30 rounded-full">
             {filteredPosts.length} Results
           </span>
         </div>
@@ -3139,7 +3139,7 @@ const Research = () => {
                     className="relative"
                   >
                     {/* Image */}
-                    <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-4 border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative">
+                    <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-4 border border-blue-500/20 group-hover:border-blue-400/40 transition-all duration-500 relative">
                       <motion.img 
                         src={post.image} 
                         alt={post.title}
@@ -3147,16 +3147,16 @@ const Research = () => {
                         whileHover={{ scale: 1.08 }}
                         transition={{ duration: 0.4 }}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F14]/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                         <span className="text-white text-sm font-medium">Read Article</span>
-                        <ArrowRight className="w-4 h-4 text-primary" />
+                        <ArrowRight className="w-4 h-4 text-blue-400" />
                       </div>
                     </div>
                     
                     {/* Meta */}
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="px-2 py-1 bg-primary/10 text-primary rounded text-xs border border-primary/20">
+                      <span className="px-2 py-1 bg-blue-500/10 text-blue-400 rounded text-xs border border-blue-500/20">
                         {post.category}
                       </span>
                       <span className="text-white/40 text-xs flex items-center gap-1">
@@ -3166,7 +3166,7 @@ const Research = () => {
                     </div>
                     
                     {/* Title */}
-                    <h3 className="text-lg font-medium text-white leading-snug group-hover:text-primary transition-colors duration-300 mb-3 line-clamp-2">
+                    <h3 className="text-lg font-medium text-white leading-snug group-hover:text-blue-400 transition-colors duration-300 mb-3 line-clamp-2">
                       {post.title}
                     </h3>
                     
@@ -3188,7 +3188,7 @@ const Research = () => {
               <button 
                 onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 disabled={currentPage === 1}
-                className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-primary/10 hover:text-primary disabled:opacity-30 transition-all border border-white/10"
+                className="px-4 py-2 rounded-lg bg-blue-500/5 text-white/60 hover:bg-blue-500/10 hover:text-blue-400 disabled:opacity-30 transition-all border border-blue-500/20"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
@@ -3198,8 +3198,8 @@ const Research = () => {
                   onClick={() => setCurrentPage(i + 1)}
                   className={`w-10 h-10 rounded-lg text-sm transition-all ${
                     currentPage === i + 1 
-                      ? "bg-primary text-primary-foreground" 
-                      : "bg-white/5 text-white/60 hover:bg-primary/10 hover:text-primary border border-white/10"
+                      ? "bg-blue-500 text-white" 
+                      : "bg-blue-500/5 text-white/60 hover:bg-blue-500/10 hover:text-blue-400 border border-blue-500/20"
                   }`}
                 >
                   {i + 1}
@@ -3208,7 +3208,7 @@ const Research = () => {
               <button 
                 onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 disabled={currentPage === totalPages}
-                className="px-4 py-2 rounded-lg bg-white/5 text-white/60 hover:bg-primary/10 hover:text-primary disabled:opacity-30 transition-all border border-white/10"
+                className="px-4 py-2 rounded-lg bg-blue-500/5 text-white/60 hover:bg-blue-500/10 hover:text-blue-400 disabled:opacity-30 transition-all border border-blue-500/20"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
@@ -3218,16 +3218,16 @@ const Research = () => {
       </section>
 
       {/* 04 - Newsletter Section */}
-      <section className="bg-[#121212] border-t border-white/10" id="newsletter">
+      <section className="bg-[#080C12] border-t border-blue-500/10" id="newsletter">
         {/* Section Header */}
-        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
+        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-blue-500/5">
           <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
+            <span className="text-[10px] md:text-xs text-blue-400/50 font-mono tracking-widest">
               {currentPage === 1 && selectedCategory === "All" && !searchQuery ? "04" : "03"}
             </span>
             <h2 className="text-lg md:text-xl font-medium text-white">Newsletter</h2>
           </div>
-          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+          <span className="text-xs text-blue-400/70 tracking-wider hidden sm:block px-3 py-1 border border-blue-500/30 rounded-full">
             Stay Updated
           </span>
         </div>
@@ -3241,7 +3241,7 @@ const Research = () => {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
-            Stay <span className="text-primary">Updated</span>
+            Stay <span className="text-blue-400">Updated</span>
           </h2>
           <p className="text-white/60 mb-8 max-w-md mx-auto">
             Subscribe to receive the latest research and insights directly in your inbox.
@@ -3252,12 +3252,12 @@ const Research = () => {
               placeholder="Enter your email"
               value={newsletterEmail}
               onChange={(e) => setNewsletterEmail(e.target.value)}
-              className="flex-1 bg-white/5 border-white/10 rounded-xl h-12 px-4 text-white placeholder:text-white/40 focus:border-primary/50 transition-colors"
+              className="flex-1 bg-blue-500/5 border-blue-500/20 rounded-xl h-12 px-4 text-white placeholder:text-white/40 focus:border-blue-400/50 transition-colors"
             />
             <motion.button
               type="submit"
               disabled={isSubscribing}
-              className="px-8 h-12 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
+              className="px-8 h-12 bg-blue-500 text-white rounded-xl font-medium hover:bg-blue-400 transition-colors disabled:opacity-50"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
@@ -3268,7 +3268,7 @@ const Research = () => {
       </section>
 
       {/* 05 - Contact Section */}
-      <section className="bg-[#0F0F0F] border-t border-white/10">
+      <section className="bg-[#0A0F14] border-t border-blue-500/10">
         <ContactFormSection sectionNumber="05" />
       </section>
       
