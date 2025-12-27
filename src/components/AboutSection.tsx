@@ -1,4 +1,5 @@
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Linkedin, Send } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -32,89 +33,169 @@ const founders = [
 ];
 
 const AboutSection = () => {
-  const { ref, isVisible } = useScrollAnimation();
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Parallax transforms
+  const contentY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const foundersY = useTransform(scrollYProgress, [0, 1], [100, -40]);
+  const statsY = useTransform(scrollYProgress, [0, 1], [40, -20]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.3, 1, 1, 0.3]);
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 0.95]);
 
   return (
-    <section ref={ref} className="py-24 md:py-32 relative bg-muted/30">
-      <div className="container mx-auto px-4">
-        <div className={`grid lg:grid-cols-2 gap-16 items-center transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          {/* Left - Content */}
-          <div>
-            <span className="text-sm font-medium text-blue-600 tracking-wider mb-4 block">ABOUT US</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 text-foreground">
+    <section ref={sectionRef} className="py-24 md:py-32 relative bg-muted/30 overflow-hidden">
+      {/* Parallax Background Elements */}
+      <motion.div 
+        className="absolute inset-0 pointer-events-none"
+        style={{ y: useTransform(scrollYProgress, [0, 1], [-50, 50]) }}
+      >
+        <div className="absolute top-20 left-10 w-72 h-72 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+      </motion.div>
+
+      <motion.div 
+        className="container mx-auto px-4"
+        style={{ opacity, scale }}
+      >
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left - Content with Parallax */}
+          <motion.div style={{ y: contentY }}>
+            <motion.span 
+              className="text-sm font-medium text-blue-600 tracking-wider mb-4 block"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+            >
+              ABOUT US
+            </motion.span>
+            <motion.h2 
+              className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 text-foreground"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
               Korea's Leading<br />
               <span className="text-gradient">Web3 Marketing</span> Agency
-            </h2>
-            <p className="text-muted-foreground text-lg leading-relaxed mb-8">
+            </motion.h2>
+            <motion.p 
+              className="text-muted-foreground text-lg leading-relaxed mb-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               We bridge global Web3 projects to Korea's 5M+ crypto-native audience. 
               With deep local expertise and proven strategies, we help you succeed in 
               one of the world's most active crypto markets.
-            </p>
+            </motion.p>
 
-            {/* Stats */}
-            <div className="flex flex-wrap gap-8 mb-10">
+            {/* Stats with Parallax */}
+            <motion.div 
+              className="flex flex-wrap gap-8 mb-10"
+              style={{ y: statsY }}
+            >
               {stats.map((stat, index) => (
-                <div key={index}>
-                  <div className={`text-3xl font-bold ${stat.color}`}>{stat.value}</div>
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  className="cursor-default"
+                >
+                  <div className={`text-3xl font-bold ${stat.color} stat-glow`}>{stat.value}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
-            <Link to="/contact">
-              <Button 
-                size="lg" 
-                className="rounded-full bg-primary hover:bg-primary/90 group shadow-md"
-              >
-                Book a Meeting
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+            >
+              <Link to="/contact">
+                <Button 
+                  size="lg" 
+                  className="rounded-full bg-primary hover:bg-primary/90 group shadow-md"
+                >
+                  Book a Meeting
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </motion.div>
+          </motion.div>
 
-          {/* Right - Founders Preview */}
-          <div className="grid grid-cols-2 gap-6">
+          {/* Right - Founders with Parallax */}
+          <motion.div 
+            className="grid grid-cols-2 gap-6"
+            style={{ y: foundersY }}
+          >
             {founders.map((founder, index) => (
-              <div 
+              <motion.div 
                 key={founder.name}
-                className={`group p-6 rounded-2xl bg-card border-2 ${founder.color} transition-all shadow-sm hover:shadow-md`}
-                style={{ transitionDelay: `${index * 100}ms` }}
+                className={`group p-6 rounded-2xl bg-card border-2 ${founder.color} transition-all shadow-sm hover:shadow-lg`}
+                initial={{ opacity: 0, y: 40, rotate: index === 0 ? -2 : 2 }}
+                whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+                whileHover={{ 
+                  y: -8, 
+                  scale: 1.02,
+                  transition: { duration: 0.3 }
+                }}
               >
-                <div className="w-20 h-20 rounded-full overflow-hidden mb-4 ring-4 ring-muted">
+                <motion.div 
+                  className="w-20 h-20 rounded-full overflow-hidden mb-4 ring-4 ring-muted"
+                  whileHover={{ scale: 1.1 }}
+                  transition={{ duration: 0.3 }}
+                >
                   <img 
                     src={founder.image} 
                     alt={founder.name}
                     className="w-full h-full object-cover"
                   />
-                </div>
+                </motion.div>
                 <h3 className="text-lg font-semibold text-foreground">{founder.name}</h3>
                 <p className="text-sm text-primary mb-2">{founder.role}</p>
                 <p className="text-xs text-muted-foreground mb-4 line-clamp-2">{founder.background}</p>
                 
                 {/* Social Links */}
                 <div className="flex items-center gap-3">
-                  <a 
+                  <motion.a 
                     href={founder.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-blue-600 hover:bg-blue-100 transition-all"
+                    whileHover={{ scale: 1.15, rotate: 5 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Linkedin className="w-4 h-4" />
-                  </a>
-                  <a 
+                  </motion.a>
+                  <motion.a 
                     href={founder.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-blue-500 hover:bg-blue-100 transition-all"
+                    whileHover={{ scale: 1.15, rotate: -5 }}
+                    whileTap={{ scale: 0.95 }}
                   >
                     <Send className="w-4 h-4" />
-                  </a>
+                  </motion.a>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };
