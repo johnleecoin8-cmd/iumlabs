@@ -501,58 +501,90 @@ const ServicePageLayout = ({
       <section className="scroll-reveal bg-[#121212]">
         <div className="border-t border-white/10">
           <SectionHeader number={moreServicesSectionNum} title="More Services" badge="Explore" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+          <motion.div 
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: {},
+              visible: {
+                transition: {
+                  staggerChildren: 0.1
+                }
+              }
+            }}
+          >
             {otherServices.map((service, index) => (
-              <Link
+              <motion.div
                 key={service.slug}
-                to={`/services/${service.slug}`}
-                className="group relative p-8 md:p-10 transition-all duration-500 border-b sm:border-b-0 sm:border-r border-white/10 last:border-r-0 overflow-hidden"
+                variants={{
+                  hidden: { 
+                    opacity: 0, 
+                    y: 30,
+                    scale: 0.95
+                  },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    scale: 1,
+                    transition: {
+                      duration: 0.5,
+                      ease: [0.25, 0.46, 0.45, 0.94]
+                    }
+                  }
+                }}
               >
-                {/* Hover background gradient */}
-                <div 
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ 
-                    background: `linear-gradient(135deg, ${service.color}15 0%, transparent 60%)` 
-                  }}
-                />
-                
-                {/* Glow effect on hover */}
-                <div 
-                  className="absolute -top-20 -left-20 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
-                  style={{ backgroundColor: service.color }}
-                />
-                
-                <div className="relative z-10">
-                  {/* Color indicator with pulse effect */}
-                  <div className="relative mb-5">
-                    <div 
-                      className="w-3 h-3 rounded-full group-hover:scale-110 transition-all duration-300"
-                      style={{ backgroundColor: service.color }}
-                    />
-                    <div 
-                      className="absolute inset-0 w-3 h-3 rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-ping"
-                      style={{ backgroundColor: service.color }}
-                    />
-                  </div>
+                <Link
+                  to={`/services/${service.slug}`}
+                  className="group relative block p-8 md:p-10 h-full transition-all duration-500 border-b sm:border-b-0 sm:border-r border-white/10 last:border-r-0 overflow-hidden"
+                >
+                  {/* Hover background gradient */}
+                  <div 
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                    style={{ 
+                      background: `linear-gradient(135deg, ${service.color}15 0%, transparent 60%)` 
+                    }}
+                  />
                   
-                  {/* Service title */}
-                  <h3 className="text-white font-medium text-lg mb-3 group-hover:translate-x-1 transition-transform duration-300">
-                    {service.title}
-                  </h3>
+                  {/* Glow effect on hover */}
+                  <div 
+                    className="absolute -top-20 -left-20 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+                    style={{ backgroundColor: service.color }}
+                  />
                   
-                  {/* Arrow with enhanced animation */}
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-white/40 group-hover:text-white/60 transition-colors duration-300 uppercase tracking-wider">
-                      Explore
-                    </span>
-                    <ArrowRight 
-                      className="w-4 h-4 text-white/30 group-hover:text-white/80 group-hover:translate-x-2 transition-all duration-300" 
-                    />
+                  <div className="relative z-10">
+                    {/* Color indicator with pulse effect */}
+                    <div className="relative mb-5">
+                      <div 
+                        className="w-3 h-3 rounded-full group-hover:scale-110 transition-all duration-300"
+                        style={{ backgroundColor: service.color }}
+                      />
+                      <div 
+                        className="absolute inset-0 w-3 h-3 rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-ping"
+                        style={{ backgroundColor: service.color }}
+                      />
+                    </div>
+                    
+                    {/* Service title */}
+                    <h3 className="text-white font-medium text-lg mb-3 group-hover:translate-x-1 transition-transform duration-300">
+                      {service.title}
+                    </h3>
+                    
+                    {/* Arrow with enhanced animation */}
+                    <div className="flex items-center gap-2">
+                      <span className="text-xs text-white/40 group-hover:text-white/60 transition-colors duration-300 uppercase tracking-wider">
+                        Explore
+                      </span>
+                      <ArrowRight 
+                        className="w-4 h-4 text-white/30 group-hover:text-white/80 group-hover:translate-x-2 transition-all duration-300" 
+                      />
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
