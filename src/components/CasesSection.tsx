@@ -101,13 +101,13 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
       <Link
         to={`/projects/${slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
+        className={`group block p-4 sm:p-6 md:p-8 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
           !isRightColumn ? "sm:border-r border-border" : ""
         } ${!isLastRow ? "border-b border-border" : ""}`}
       >
-        <div className="flex items-start gap-4 sm:gap-6">
+        <div className="flex items-start gap-4 sm:gap-5">
           {/* Image */}
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img
               src={bgImage}
               alt={name}
@@ -156,30 +156,30 @@ const CasesSection = () => {
 
         {/* Right: Sticky Info Panel */}
         <motion.div
-          className="w-full lg:w-1/3 p-6 md:p-8 lg:p-10 flex flex-col justify-center"
+          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
           initial={{ opacity: 0, x: 20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
             Our Cases
           </h2>
-          <p className="text-muted-foreground leading-relaxed mb-8">
+          <p className="text-muted-foreground leading-relaxed mb-6 text-sm">
             Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
           </p>
 
-          <div className="space-y-6 mb-8">
-            <div className="flex items-center gap-4 pb-4 border-b border-border">
-              <span className="text-3xl font-bold text-foreground">340%</span>
+          <div className="space-y-4 mb-6">
+            <div className="flex items-center gap-4 pb-3 border-b border-border">
+              <span className="text-2xl md:text-3xl font-bold text-foreground">340%</span>
               <span className="text-muted-foreground text-sm">Average volume increase</span>
             </div>
-            <div className="flex items-center gap-4 pb-4 border-b border-border">
-              <span className="text-3xl font-bold text-foreground">50K+</span>
+            <div className="flex items-center gap-4 pb-3 border-b border-border">
+              <span className="text-2xl md:text-3xl font-bold text-foreground">50K+</span>
               <span className="text-muted-foreground text-sm">New users acquired</span>
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-3xl font-bold text-foreground">18+</span>
+              <span className="text-2xl md:text-3xl font-bold text-foreground">18+</span>
               <span className="text-muted-foreground text-sm">Projects launched</span>
             </div>
           </div>

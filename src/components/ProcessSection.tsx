@@ -40,7 +40,7 @@ const ProcessSection = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`group p-6 sm:p-8 md:p-10 lg:p-12 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
+              className={`group p-5 sm:p-6 md:p-8 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
                 !isLast ? "lg:border-r border-border" : ""
               } ${isOdd ? "md:border-l lg:border-l-0 border-border" : ""} ${
                 index < 2 ? "border-b lg:border-b-0 border-border" : ""

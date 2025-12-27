@@ -34,14 +34,14 @@ const WhyChooseUsSection = () => {
         }} transition={{
           duration: 0.6,
           delay: 0.1
-        }} className="p-6 md:p-8 lg:p-10 flex-1 flex flex-col justify-center border-b border-border">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
+        }} className="p-6 md:p-8 flex-1 flex flex-col justify-center border-b border-border">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               About Us
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">
+            <p className="text-muted-foreground leading-relaxed mb-4 text-sm">
               We bridge global Web3 projects to growth in the Korean market. Established in 2025, we have become a trusted partner for 18+ brands expanding into Korea's dynamic crypto ecosystem. Our name, 'Ium', is derived from the Korean verb 'to connect' (잇다), embodying our core mission to seamlessly link global innovation with local opportunities.
             </p>
-            <p className="text-foreground font-medium">
+            <p className="text-foreground font-medium text-sm">
               Founded by former executives from Binance and KuCoin
             </p>
           </motion.div>

@@ -21,7 +21,7 @@ const CTABannerSection = () => {
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-[100px]" />
       </motion.div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 md:py-14 relative z-10">
         <motion.div 
           className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8"
           initial={{ opacity: 0, y: 20 }}

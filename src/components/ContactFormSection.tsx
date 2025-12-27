@@ -110,11 +110,11 @@ const ContactFormSection = ({
         {/* Two Column Layout */}
         <div className="flex flex-col lg:flex-row">
           {/* Left Column - Contact Info */}
-          <div className="w-full lg:w-2/5 p-8 md:p-12 lg:p-16 border-b lg:border-b-0 lg:border-r border-white/10">
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <div className="w-full lg:w-2/5 p-6 md:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10">
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
               Get in Touch
             </h3>
-            <p className="text-white/50 text-base leading-relaxed mb-12">
+            <p className="text-white/50 text-sm leading-relaxed mb-10">
               Ready to enter the Korean market? Let's discuss how we can help your project grow.
             </p>
 
@@ -193,8 +193,8 @@ const ContactFormSection = ({
           </div>
 
           {/* Right Column - Contact Form */}
-          <div className="w-full lg:w-3/5 p-8 md:p-12 lg:p-16">
-            <div className="flex items-center justify-between mb-8">
+          <div className="w-full lg:w-3/5 p-6 md:p-10 lg:p-12">
+            <div className="flex items-center justify-between mb-6">
               <span className="text-sm text-white/40">Contact Form</span>
               <span className="text-sm text-white/40">{completionPercentage}% complete</span>
             </div>

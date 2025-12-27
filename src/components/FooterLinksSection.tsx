@@ -55,9 +55,9 @@ const footerLinks = {
 const FooterLinksSection = () => {
   const currentYear = new Date().getFullYear();
   return <section className="bg-background text-foreground border-t border-border w-full">
-      <div className="w-full px-6 lg:px-10 py-[20px]">
+      <div className="w-full px-6 lg:px-10 py-6 md:py-8">
         {/* Navigation Links Grid - SEO Sitemap Footer */}
-        <nav className="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-b border-border" aria-label="Footer navigation">
+        <nav className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 py-8 md:py-10 border-b border-border" aria-label="Footer navigation">
           {/* Research Column */}
           <div>
             <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-6 font-mono">

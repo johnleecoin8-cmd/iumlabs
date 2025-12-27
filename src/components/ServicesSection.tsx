@@ -79,7 +79,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     >
       <Link
         to={service.link}
-        className={`group block p-5 sm:p-6 md:p-8 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 relative overflow-hidden ${
+        className={`group block p-4 sm:p-6 md:p-8 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 relative overflow-hidden ${
           hasBorderRight ? "lg:border-r border-border" : ""
         } ${hasBorderBottom ? "border-b border-border" : ""} ${
           (index % 2) === 0 ? "sm:border-r border-border lg:border-r-0" : ""
@@ -95,7 +95,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         >
-          <Icon className="w-8 h-8 sm:w-10 sm:h-10 mb-4 sm:mb-6 text-muted-foreground group-hover:text-foreground group-hover:drop-shadow-[0_0_12px_hsl(var(--foreground)/0.3)] transition-all duration-300" strokeWidth={1.5} />
+          <Icon className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 mb-4 sm:mb-6 text-muted-foreground group-hover:text-foreground group-hover:drop-shadow-[0_0_12px_hsl(var(--foreground)/0.3)] transition-all duration-300" strokeWidth={1.5} />
         </motion.div>
         <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3 group-hover:text-foreground/90 transition-colors relative z-10">
           {service.title}
