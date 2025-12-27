@@ -91,7 +91,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* Floating Service Tags - Desktop - Unified Card Style */}
+      {/* Floating Service Tags - Desktop - Enhanced Hover Animation */}
       {serviceTags.map((tag, index) => (
         <motion.div
           key={index}
@@ -99,8 +99,13 @@ const HeroSection = () => {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
+          whileHover={{ 
+            scale: 1.1, 
+            y: -4,
+            transition: { duration: 0.2, ease: "easeOut" }
+          }}
         >
-          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-primary/40 hover:text-white transition-all duration-300">
+          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-300 cursor-default backdrop-blur-sm">
             {tag.label}
           </span>
         </motion.div>
