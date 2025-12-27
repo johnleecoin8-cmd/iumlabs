@@ -2,7 +2,6 @@ import { ChevronDown, Calendar } from "lucide-react";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useCountUp } from "@/hooks/useCountUp";
-import { useTypewriter } from "@/hooks/useTypewriter";
 import { brand } from "@/config/content";
 
 // Import client logos
@@ -61,40 +60,6 @@ const stats = [
   { value: 6, label: "Token Sales", prefix: "$", suffix: "M+" },
   { value: 48, label: "AMA Hosting", suffix: "+" },
 ];
-
-// Typewriter Headline Component
-const TypewriterHeadline = () => {
-  const line1 = "Bridge Your Web3 Project";
-  const line2 = "to Korea's Crypto Ecosystem";
-  
-  const { displayText: text1, isTyping: isTyping1 } = useTypewriter(line1, { 
-    speed: 40, 
-    delay: 300,
-    cursor: false 
-  });
-  
-  const { displayText: text2, cursorVisible } = useTypewriter(line2, { 
-    speed: 40, 
-    delay: 300 + line1.length * 40 + 200,
-    cursor: true 
-  });
-
-  return (
-    <motion.h1 
-      className="font-sans text-[8vw] sm:text-[7vw] md:text-[5.5vw] lg:text-[4.5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-    >
-      <span className="text-white">{text1}</span>
-      {!isTyping1 && text1.length === line1.length && <br />}
-      <span className="text-white">{text2}</span>
-      {cursorVisible && (
-        <span className="text-primary animate-pulse">|</span>
-      )}
-    </motion.h1>
-  );
-};
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -157,8 +122,17 @@ const HeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Typewriter animation */}
-          <TypewriterHeadline />
+          {/* Main Headline - Unified Inter font with color contrast */}
+          <motion.h1 
+            className="font-sans text-[8vw] sm:text-[7vw] md:text-[5.5vw] lg:text-[4.5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <span className="text-white">Bridge Your Web3 Project</span>
+            <br />
+            <span className="text-white">to Korea's Crypto Ecosystem</span>
+          </motion.h1>
 
           {/* Subtext - Larger and more prominent */}
           <motion.p 
