@@ -4,6 +4,10 @@ import { ChevronLeft, ChevronRight, Search, Calendar, Clock, ArrowRight, Trendin
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
+import CTABannerSection from "@/components/CTABannerSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
+import FloatingContactButton from "@/components/FloatingContactButton";
+import ResearchHeroSection from "@/components/ResearchHeroSection";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
@@ -2968,92 +2972,7 @@ const Research = () => {
       
       {/* Hero Section - Homepage Style */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]">
-        <section className="relative min-h-[60vh] flex flex-col justify-center items-center overflow-hidden rounded-xl sm:rounded-2xl">
-          {/* Video Background */}
-          <div className="absolute inset-0 overflow-hidden">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover scale-110"
-              style={{ filter: "brightness(0.35)" }}
-              onLoadedMetadata={(e) => {
-                (e.target as HTMLVideoElement).currentTime = 0;
-              }}
-            >
-              <source src="/videos/research-background.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-[#0A0A0A]" />
-          </div>
-
-          {/* Hero Content */}
-          <div className="container mx-auto max-w-7xl px-4 relative z-10 text-center">
-            <motion.span 
-              className="text-xs text-primary/70 mb-6 block tracking-widest font-mono"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-            >
-              [ Research & Insights ]
-            </motion.span>
-            <motion.h1 
-              className="text-[12vw] md:text-[100px] lg:text-[120px] font-light text-white leading-[0.85] tracking-tight"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              Rese<span className="serif-italic text-primary">a</span>rch
-            </motion.h1>
-            <motion.p 
-              className="text-lg text-white/60 max-w-xl mx-auto mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
-              In-depth analysis and insights on Web3 marketing, Korean market dynamics, and emerging trends.
-            </motion.p>
-            
-            {/* Stats */}
-            <motion.div 
-              className="flex items-center justify-center gap-12 mt-10"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-            >
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white">{posts.length}</div>
-                <div className="text-xs text-white/40 mt-1 uppercase tracking-wider">Articles</div>
-              </div>
-              <div className="w-px h-8 bg-white/20" />
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white">6</div>
-                <div className="text-xs text-white/40 mt-1 uppercase tracking-wider">Categories</div>
-              </div>
-              <div className="w-px h-8 bg-white/20" />
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-white">100+</div>
-                <div className="text-xs text-white/40 mt-1 uppercase tracking-wider">Min Read</div>
-              </div>
-            </motion.div>
-            
-            {/* Scroll Indicator */}
-            <motion.div 
-              className="mt-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              <motion.div
-                animate={{ y: [0, 8, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-                className="w-5 h-8 border border-white/30 rounded-full mx-auto flex items-start justify-center p-1"
-              >
-                <motion.div className="w-1 h-2 bg-primary rounded-full" />
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
+        <ResearchHeroSection />
       </main>
 
       {/* 01 - Browse Section */}
@@ -3061,10 +2980,10 @@ const Research = () => {
         {/* Section Header - Homepage Style */}
         <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
           <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-primary font-mono tracking-widest">01</span>
+            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
             <h2 className="text-lg md:text-xl font-medium text-white">Browse</h2>
           </div>
-          <span className="text-xs text-white/40 tracking-wider hidden sm:block">
+          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
             Filter by Topic
           </span>
         </div>
@@ -3112,10 +3031,10 @@ const Research = () => {
           {/* Section Header */}
           <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-primary font-mono tracking-widest">02</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Featured</h2>
             </div>
-            <span className="text-xs text-white/40 tracking-wider hidden sm:block">
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
               Latest Research
             </span>
           </div>
@@ -3189,12 +3108,12 @@ const Research = () => {
         {/* Section Header */}
         <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
           <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-primary font-mono tracking-widest">
+            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
               {currentPage === 1 && selectedCategory === "All" && !searchQuery ? "03" : "02"}
             </span>
             <h2 className="text-lg md:text-xl font-medium text-white">All Articles</h2>
           </div>
-          <span className="text-xs text-white/40 tracking-wider hidden sm:block">
+          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
             {filteredPosts.length} Results
           </span>
         </div>
@@ -3303,12 +3222,12 @@ const Research = () => {
         {/* Section Header */}
         <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
           <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-primary font-mono tracking-widest">
+            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
               {currentPage === 1 && selectedCategory === "All" && !searchQuery ? "04" : "03"}
             </span>
             <h2 className="text-lg md:text-xl font-medium text-white">Newsletter</h2>
           </div>
-          <span className="text-xs text-white/40 tracking-wider hidden sm:block">
+          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
             Stay Updated
           </span>
         </div>
@@ -3353,7 +3272,16 @@ const Research = () => {
         <ContactFormSection sectionNumber="05" />
       </section>
       
+      {/* CTA Banner Section */}
+      <CTABannerSection />
+      
+      {/* Footer Links Section */}
+      <FooterLinksSection />
+      
       <Footer />
+      
+      {/* Floating Contact Button */}
+      <FloatingContactButton />
     </div>
   );
 };
