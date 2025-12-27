@@ -20,18 +20,18 @@ const Index = () => {
   usePageTitle("Web3 Research & GTM Strategy Group");
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div className="min-h-screen bg-surface-base">
       <Navbar />
       
       {/* Hero */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]" id="hero">
+      <main className="p-0.5 sm:p-1 md:p-2 bg-surface-base" id="hero">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <HeroSection />
         </div>
       </main>
       
       {/* About - 01 홀수 */}
-      <section className="scroll-reveal bg-[#0F0F0F]" id="why-choose-us">
+      <section className="scroll-reveal bg-surface-odd" id="why-choose-us">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -45,7 +45,7 @@ const Index = () => {
       </section>
       
       {/* Services - 02 짝수 */}
-      <section className="scroll-reveal bg-[#121212]" id="services">
+      <section className="scroll-reveal bg-surface-even" id="services">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -59,7 +59,7 @@ const Index = () => {
       </section>
       
       {/* Process - 03 홀수 */}
-      <section className="scroll-reveal bg-[#0F0F0F]" id="process">
+      <section className="scroll-reveal bg-surface-odd" id="process">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -73,7 +73,7 @@ const Index = () => {
       </section>
       
       {/* Cases - 04 짝수 */}
-      <section className="scroll-reveal bg-[#121212]" id="cases">
+      <section className="scroll-reveal bg-surface-even" id="cases">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -87,7 +87,7 @@ const Index = () => {
       </section>
       
       {/* Gallery - 05 홀수 */}
-      <section className="scroll-reveal bg-[#0F0F0F]" id="gallery">
+      <section className="scroll-reveal bg-surface-odd" id="gallery">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -101,7 +101,7 @@ const Index = () => {
       </section>
       
       {/* Media Partners - 06 짝수 */}
-      <section className="scroll-reveal bg-[#121212]" id="media-partners">
+      <section className="scroll-reveal bg-surface-even" id="media-partners">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -115,7 +115,7 @@ const Index = () => {
       </section>
       
       {/* Insights - 07 홀수 */}
-      <section className="scroll-reveal bg-[#0F0F0F]" id="insights">
+      <section className="scroll-reveal bg-surface-odd" id="insights">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -129,7 +129,7 @@ const Index = () => {
       </section>
       
       {/* Contact - 08 짝수 */}
-      <section className="scroll-reveal bg-[#121212]" id="contact">
+      <section className="scroll-reveal bg-surface-even" id="contact">
         <ContactFormSection sectionNumber="08" />
       </section>
       

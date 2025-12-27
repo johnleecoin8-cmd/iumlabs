@@ -57,6 +57,12 @@ export default {
           dark: "hsl(0 0% 4%)",
           light: "hsl(0 0% 96%)",
         },
+        // Section surface colors
+        surface: {
+          base: "hsl(var(--surface-base))",
+          odd: "hsl(var(--surface-odd))",
+          even: "hsl(var(--surface-even))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

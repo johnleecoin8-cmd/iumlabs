@@ -30,7 +30,7 @@ const campaignImages = [
 
 const FilmstripGallerySection = () => {
   return (
-    <section className="bg-[#0A0A0A]">
+    <section className="bg-surface-base">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Gallery Grid */}
         <div className="w-full lg:w-2/3 lg:border-r border-white/10">

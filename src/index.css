@@ -56,6 +56,11 @@
     --light-bg: 0 0% 96%;
     --light-fg: 0 0% 8%;
 
+    /* Section background system - Alternating dark shades */
+    --surface-base: 0 0% 4%;      /* #0A0A0A - darkest */
+    --surface-odd: 0 0% 6%;       /* #0F0F0F - odd sections */
+    --surface-even: 0 0% 7%;      /* #121212 - even sections */
+
     /* Lunar Strategy Blue */
     --lunar-blue: 217 91% 60%;
   }
