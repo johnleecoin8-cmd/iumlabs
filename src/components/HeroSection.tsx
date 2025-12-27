@@ -21,20 +21,19 @@ import synfuturesLogo from "@/assets/logos/synfutures.png";
 
 // Desktop tags
 const serviceTags = [
-  { label: "KOL Marketing", position: "top-[15%] left-[5%]" },
-  { label: "Community Operation", position: "top-[35%] left-[4%]" },
-  { label: "GTM Strategy", position: "top-[55%] left-[6%]" },
-  { label: "Exchange Support", position: "top-[75%] left-[5%]" },
-  { label: "Media & PR", position: "top-[18%] right-[6%]" },
-  { label: "AMA Hosting", position: "top-[42%] right-[5%]" },
+  { label: "Deep Research", position: "top-[15%] left-[5%]" },
+  { label: "GTM Strategy", position: "top-[35%] left-[4%]" },
+  { label: "Community Growth", position: "top-[55%] left-[6%]" },
+  { label: "KOL Marketing", position: "top-[18%] right-[6%]" },
+  { label: "Media & PR", position: "top-[42%] right-[5%]" },
   { label: "Offline Events", position: "top-[66%] right-[7%]" },
 ];
 
 // Mobile tags (fewer, repositioned for small screens)
 const mobileServiceTags = [
-  { label: "KOL", position: "top-[8%] left-[3%]" },
-  { label: "Community", position: "top-[12%] right-[3%]" },
-  { label: "Media", position: "bottom-[38%] left-[2%]" },
+  { label: "Research", position: "top-[8%] left-[3%]" },
+  { label: "Marketing", position: "top-[12%] right-[3%]" },
+  { label: "GTM", position: "bottom-[38%] left-[2%]" },
   { label: "Events", position: "bottom-[42%] right-[2%]" },
 ];
 
