@@ -2,9 +2,10 @@ import { Newspaper, Globe, Users, FileText, Eye } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
-import ClientLogosSection from "@/components/ClientLogosSection";
 import { usePageTitle } from "@/hooks/usePageTitle";
+
 const ACCENT_COLOR = "#8B5CF6";
+
 const serviceTags: ServiceTag[] = [{
   label: "한국 미디어 배포"
 }, {
@@ -18,6 +19,7 @@ const serviceTags: ServiceTag[] = [{
 }, {
   label: "Crisis Management"
 }];
+
 const stats: ServiceStat[] = [{
   value: 50,
   label: "Articles Published",
@@ -35,6 +37,7 @@ const stats: ServiceStat[] = [{
   label: "Coverage Success Rate",
   suffix: "%"
 }];
+
 const processSteps: ProcessStep[] = [{
   number: "01",
   title: "Story Development",
@@ -56,6 +59,7 @@ const processSteps: ProcessStep[] = [{
   description: "We monitor coverage, measure reach, and provide detailed analytics on media performance.",
   icon: Globe
 }];
+
 const deliverables: Deliverable[] = [{
   title: "한국 미디어",
   items: ["한국어 보도자료 작성", "블록미디어/코인니스/토큰포스트", "경제지 비즈니스 섹션", "한국 크립토 팟캐스트"]
@@ -66,6 +70,7 @@ const deliverables: Deliverable[] = [{
   title: "Reporting & Analysis",
   items: ["커버리지 트래킹 대시보드", "한/영 Sentiment 분석", "경쟁사 벤치마킹", "월간 PR 리포트"]
 }];
+
 const faqItems: FAQItem[] = [{
   question: "어떤 한국 미디어와 협력하나요?",
   answer: "블록미디어, 코인니스, 블루밍비트, 토큰포스트 등 주요 한국 크립토 미디어와 직접 협력 관계를 맺고 있습니다. 조선비즈, 한경 등 주류 경제지에도 배포 가능합니다."
@@ -79,6 +84,7 @@ const faqItems: FAQItem[] = [{
   question: "한국 미디어 인터뷰 주선이 가능한가요?",
   answer: "물론입니다. 한국 주요 크립토 기자 및 팟캐스터와의 인터뷰를 정기적으로 주선합니다. 통역 지원을 포함한 모든 로지스틱을 처리해 드립니다."
 }];
+
 const PRService = () => {
   usePageTitle("PR & Media");
   return <ServicePageLayout serviceName="PR & Media Relations" serviceTitle="PR &" serviceSubtitle="Media" serviceDescription="Secure premium coverage across Korean media outlets with our established network of 20+ publishers and journalists." serviceIcon={Newspaper} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="pr-media">
@@ -93,10 +99,10 @@ const PRService = () => {
         <div className="border-t border-white/10 relative z-10">
           <SectionHeader number="01" title="Media Network" badge="Global & Korea" />
           
-          <div className="py-16 md:py-24">
+          <div className="py-12 md:py-16">
             <div className="container mx-auto px-6 lg:px-16">
               <div className="max-w-4xl mx-auto text-center">
-                <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-12">
+                <p className="text-white/70 text-base md:text-lg leading-relaxed mb-12">
                   We maintain direct relationships with <span className="text-white font-semibold">20+ media outlets</span> across global and Korean markets. Our network ensures your announcements reach the right audiences with maximum impact.
                 </p>
                 
@@ -164,16 +170,6 @@ const PRService = () => {
 
       {/* Media Partners Marquee */}
       <MediaPartnersSection />
-
-      {/* Client Logos Section */}
-      <section className="bg-[#0A0A0A] border-t border-white/10">
-        <ClientLogosSection 
-          title="PR Campaign Clients"
-          subtitle="Projects featured in Korean media"
-          serviceFilter="pr"
-          accentColor={ACCENT_COLOR}
-        />
-      </section>
     </ServicePageLayout>;
 };
 export default PRService;

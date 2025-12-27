@@ -219,7 +219,7 @@ const DeepResearchService = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative p-6 rounded-2xl border border-border/50 bg-card/30 backdrop-blur-sm hover:border-[#06B6D4]/50 transition-all duration-300"
+                className="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-[#06B6D4]/50 transition-all duration-300"
               >
                 <div 
                   className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
@@ -229,7 +229,7 @@ const DeepResearchService = () => {
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-2">{topic.title}</h3>
                 <p className="text-sm text-muted-foreground mb-4">{topic.description}</p>
-                <span 
+                <span
                   className="text-xs font-medium"
                   style={{ color: ACCENT_COLOR }}
                 >
@@ -244,7 +244,7 @@ const DeepResearchService = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative p-8 rounded-3xl border border-border/50 bg-card/30 backdrop-blur-sm"
+            className="relative p-8 rounded-3xl border border-white/10 bg-white/[0.03]"
           >
             <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               {/* Research Icon */}
@@ -321,8 +321,8 @@ const DeepResearchService = () => {
 
       {/* Latest Research Preview Section */}
       {researchPosts && researchPosts.length > 0 && (
-        <section className="py-20 relative bg-[#0A0A0A]">
-          <div className="container mx-auto px-6">
+        <section className="py-12 md:py-16 relative bg-[#121212]">
+          <div className="container mx-auto px-6 lg:px-16">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -361,7 +361,7 @@ const DeepResearchService = () => {
                 >
                   <Link
                     to={`/research/${post.slug}`}
-                    className="group block h-full rounded-2xl border border-border/50 bg-card/30 overflow-hidden hover:border-[#06B6D4]/50 transition-all duration-300"
+                    className="group block h-full rounded-2xl border border-white/10 bg-white/[0.03] overflow-hidden hover:border-[#06B6D4]/50 transition-all duration-300"
                   >
                     {/* Image */}
                     {post.image && (
