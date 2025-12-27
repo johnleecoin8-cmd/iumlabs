@@ -4,7 +4,6 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Volume2, Users, Zap, FileText, Target } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-import ClientLogosSection from "@/components/ClientLogosSection";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 const ACCENT_COLOR = "#22D3EE";
@@ -245,7 +244,7 @@ const YapService = () => {
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="Creator Network" badge="150+ Yappers" />
 
-          <div className="py-16 md:py-20">
+          <div className="py-12 md:py-16">
             <div className="container mx-auto px-6 lg:px-16">
               {/* Featured Yappers Carousel */}
               <div className="mb-16">
@@ -401,15 +400,6 @@ const YapService = () => {
         </div>
       </section>
 
-      {/* Client Logos Section */}
-      <section className="bg-[#0A0A0A] border-t border-white/10">
-        <ClientLogosSection 
-          title="Clients We've Amplified"
-          subtitle="Projects that leveraged our Yap network"
-          serviceFilter="yap"
-          accentColor={ACCENT_COLOR}
-        />
-      </section>
     </ServicePageLayout>
   );
 };

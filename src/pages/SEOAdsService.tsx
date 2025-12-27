@@ -3,7 +3,6 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-import ClientLogosSection from "@/components/ClientLogosSection";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 const ACCENT_COLOR = "#F59E0B";
@@ -174,7 +173,6 @@ const SEOAdsService = () => {
       serviceTags={serviceTags}
       stats={stats}
       accentColor={ACCENT_COLOR}
-      processSteps={processSteps}
       deliverables={deliverables}
       faqItems={faqItems}
       currentSlug="seo-ads"
@@ -184,12 +182,12 @@ const SEOAdsService = () => {
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="4-Week Program" badge="Growth Journey" />
           
-          <div className="py-16 md:py-20">
+          <div className="py-12 md:py-16">
             <div className="container mx-auto px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 {/* Left - Phase Navigation */}
                 <div>
-                  <p className="text-white/60 text-lg leading-relaxed mb-8">
+                  <p className="text-white/60 text-base leading-relaxed mb-8">
                     From technical audit to scaled campaigns, our 4-week program delivers measurable growth through SEO and paid advertising.
                   </p>
                   
@@ -323,14 +321,6 @@ const SEOAdsService = () => {
         </div>
       </section>
 
-      {/* Client Logos Section */}
-      <section className="bg-[#0A0A0A] border-t border-white/10">
-        <ClientLogosSection 
-          title="Advertising Clients"
-          subtitle="Projects we've grown through SEO & Ads"
-          accentColor={ACCENT_COLOR}
-        />
-      </section>
     </ServicePageLayout>
   );
 };

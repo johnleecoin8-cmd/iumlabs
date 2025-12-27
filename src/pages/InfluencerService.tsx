@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Star, Users, TrendingUp, Target, Sparkles, Crown, Award, Zap } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-import ClientLogosSection from "@/components/ClientLogosSection";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 const ACCENT_COLOR = "#F59E0B";
@@ -159,7 +158,7 @@ const InfluencerService = () => {
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="KOL Network" badge="Featured Creators" />
 
-          <div className="py-16 md:py-20">
+          <div className="py-12 md:py-16">
             <div className="container mx-auto px-6 lg:px-16">
               {/* Region Filter */}
               <div className="flex flex-wrap justify-center gap-2 mb-6">
@@ -312,15 +311,6 @@ const InfluencerService = () => {
         </div>
       </section>
 
-      {/* Client Logos Section */}
-      <section className="bg-[#0A0A0A] border-t border-white/10">
-        <ClientLogosSection 
-          title="KOL Campaign Clients"
-          subtitle="Projects we've connected with top influencers"
-          serviceFilter="kol"
-          accentColor={ACCENT_COLOR}
-        />
-      </section>
     </ServicePageLayout>
   );
 };
