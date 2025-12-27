@@ -74,8 +74,24 @@ const CTASection = () => {
   };
 
   return (
-    <section className="bg-background">
-      <div className="flex flex-col lg:flex-row">
+    <section className="bg-background relative overflow-hidden">
+      {/* Subtle animated background glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <motion.div 
+          className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[150px]"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.3, 0.5, 0.3]
+          }}
+          transition={{ 
+            duration: 8, 
+            repeat: Infinity, 
+            ease: "easeInOut" 
+          }}
+        />
+      </div>
+
+      <div className="flex flex-col lg:flex-row relative z-10">
         {/* Left: Contact Info */}
         <div className="w-full lg:w-1/3 lg:border-r border-border">
           <motion.div
@@ -254,44 +270,69 @@ const CTASection = () => {
             </div>
 
             {/* Submit */}
-            <motion.button
-              type="submit"
-              disabled={isSubmitting || formProgress < 100}
-              className={`group relative inline-flex items-center gap-2 px-8 py-4 text-sm font-medium rounded-full overflow-hidden transition-all duration-300 ${
-                isSubmitted
-                  ? 'bg-green-500 text-white'
-                  : formProgress === 100
-                  ? 'bg-foreground text-background hover:bg-foreground/90 hover:shadow-lg hover:shadow-foreground/20'
-                  : 'bg-muted text-muted-foreground cursor-not-allowed'
-              }`}
-              whileHover={formProgress === 100 && !isSubmitted ? { scale: 1.02, y: -2 } : {}}
-              whileTap={formProgress === 100 && !isSubmitted ? { scale: 0.98 } : {}}
-            >
-              {/* Shine sweep effect */}
-              {formProgress === 100 && !isSubmitted && (
-                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-background/10 to-transparent" />
-              )}
-              {isSubmitted ? (
-                <>
-                  <CheckCircle2 className="w-5 h-5" />
-                  Message Sent!
-                </>
-              ) : isSubmitting ? (
-                <>
-                  <motion.div
-                    className="w-5 h-5 border-2 border-background/30 border-t-background rounded-full"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  />
-                  Sending...
-                </>
-              ) : (
-                <>
-                  SEND MESSAGE
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </>
-              )}
-            </motion.button>
+            <motion.div className="relative inline-block">
+              {/* Glow effect behind button */}
+              <motion.div 
+                className="absolute inset-0 bg-primary/30 rounded-full blur-xl"
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={formProgress === 100 && !isSubmitted ? { 
+                  opacity: [0.3, 0.6, 0.3],
+                  scale: [0.9, 1.1, 0.9]
+                } : { opacity: 0, scale: 0.8 }}
+                transition={{ 
+                  duration: 2, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+              />
+              
+              <motion.button
+                type="submit"
+                disabled={isSubmitting || formProgress < 100}
+                className={`group relative inline-flex items-center gap-2 px-8 py-4 text-sm font-medium rounded-full overflow-hidden transition-all duration-300 ${
+                  isSubmitted
+                    ? 'bg-green-500 text-white shadow-[0_0_30px_rgba(34,197,94,0.4)]'
+                    : formProgress === 100
+                    ? 'bg-foreground text-background hover:bg-foreground/90 hover:shadow-[0_10px_40px_-10px_rgba(255,255,255,0.4)]'
+                    : 'bg-muted text-muted-foreground cursor-not-allowed'
+                }`}
+                whileHover={formProgress === 100 && !isSubmitted ? { scale: 1.02, y: -2 } : {}}
+                whileTap={formProgress === 100 && !isSubmitted ? { scale: 0.98 } : {}}
+              >
+                {/* Shimmer sweep effect */}
+                {formProgress === 100 && !isSubmitted && (
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                )}
+                
+                {/* Pulse ring effect */}
+                {formProgress === 100 && !isSubmitted && (
+                  <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100">
+                    <span className="absolute inset-0 rounded-full animate-ping bg-foreground/10" style={{ animationDuration: '1.5s' }} />
+                  </span>
+                )}
+                
+                {isSubmitted ? (
+                  <>
+                    <CheckCircle2 className="w-5 h-5" />
+                    Message Sent!
+                  </>
+                ) : isSubmitting ? (
+                  <>
+                    <motion.div
+                      className="w-5 h-5 border-2 border-background/30 border-t-background rounded-full"
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                    />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <span className="relative z-10">SEND MESSAGE</span>
+                    <ArrowRight className="relative z-10 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </motion.button>
+            </motion.div>
           </form>
         </motion.div>
       </div>
