@@ -29,7 +29,29 @@ const WhyChooseUsSection = () => {
           </div>
 
           {/* Stats + CTA */}
-          
+          <div className="p-6 md:p-8">
+            <div className="grid grid-cols-3 gap-4 mb-6">
+              <div className="text-center">
+                <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">2025</div>
+                <div className="text-xs text-muted-foreground">Founded</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">18+</div>
+                <div className="text-xs text-muted-foreground">Partners</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl md:text-3xl font-bold text-foreground mb-1">60+</div>
+                <div className="text-xs text-muted-foreground">Campaigns</div>
+              </div>
+            </div>
+            <Link
+              to="/projects"
+              className="group inline-flex items-center justify-center gap-2 bg-foreground text-background px-6 py-3 text-sm font-medium rounded-full hover:bg-foreground/90 hover:-translate-y-0.5 hover:shadow-lg transition-all duration-300 w-full"
+            >
+              View Our Work
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
         </div>
       </div>
     </section>
