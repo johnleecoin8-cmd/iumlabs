@@ -69,10 +69,10 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 300, label: "Avg Traffic Increase", suffix: "%+" },
-  { value: 50, label: "Campaigns Managed", suffix: "+" },
+  { value: 150, label: "Avg Traffic Increase", suffix: "%+" },
+  { value: 12, label: "Campaigns Managed", suffix: "+" },
   { value: 2.5, label: "Avg ROAS", suffix: "x" },
-  { value: 40, label: "Avg CPA Reduction", suffix: "%" },
+  { value: 35, label: "Avg CPA Reduction", suffix: "%" },
 ];
 
 const processSteps: ProcessStep[] = [

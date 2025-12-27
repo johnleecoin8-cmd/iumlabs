@@ -97,8 +97,8 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 18, label: "Projects Launched", suffix: "+" },
-  { value: 500, label: "TGE Support", prefix: "$", suffix: "M+" },
+  { value: 12, label: "Projects Launched", suffix: "+" },
+  { value: 3, label: "TGE Support", prefix: "$", suffix: "M+" },
   { value: 4, label: "Avg Launch Timeline", suffix: " weeks" },
   { value: 95, label: "Client Retention", suffix: "%" },
 ];

@@ -50,10 +50,10 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 50, label: "Web3 Events Hosted", suffix: "+" },
-  { value: 5000, label: "Total Attendees", suffix: "+" },
-  { value: 120, label: "KOLs Attended", suffix: "+" },
-  { value: 30, label: "Media Partners", suffix: "+" },
+  { value: 19, label: "Web3 Events Hosted", suffix: "+" },
+  { value: 1500, label: "Total Attendees", suffix: "+" },
+  { value: 69, label: "KOLs Attended", suffix: "+" },
+  { value: 20, label: "Media Partners", suffix: "+" },
 ];
 
 const processSteps: ProcessStep[] = [
@@ -120,7 +120,7 @@ const faqItems: FAQItem[] = [
   },
   {
     question: "How do you ensure quality attendance?",
-    answer: "We leverage our extensive network of 120+ Korean crypto KOLs, 30+ media partners, and direct connections to trading communities, VCs, and developer groups. Our curated invite lists ensure high-quality, engaged attendees — not just headcount.",
+    answer: "We leverage our network of 69+ Korean crypto KOLs, 20+ media partners, and direct connections to trading communities, VCs, and developer groups. Our curated invite lists ensure high-quality, engaged attendees — not just headcount.",
   },
   {
     question: "What venues do you work with in Seoul?",

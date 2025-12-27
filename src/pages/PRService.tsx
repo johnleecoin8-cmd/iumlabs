@@ -18,19 +18,19 @@ const serviceTags: ServiceTag[] = [{
   label: "Crisis Management"
 }];
 const stats: ServiceStat[] = [{
-  value: 200,
+  value: 50,
   label: "Articles Published",
   suffix: "+"
 }, {
-  value: 50,
+  value: 20,
   label: "Media Partners",
   suffix: "+"
 }, {
-  value: 10,
+  value: 5,
   label: "Total Reach",
   suffix: "M+"
 }, {
-  value: 95,
+  value: 90,
   label: "Coverage Success Rate",
   suffix: "%"
 }];
@@ -42,7 +42,7 @@ const processSteps: ProcessStep[] = [{
 }, {
   number: "02",
   title: "Media Outreach",
-  description: "We leverage our network of 50+ Korean media outlets to secure premium coverage and interviews.",
+  description: "We leverage our network of 20+ Korean media outlets to secure premium coverage and interviews.",
   icon: Globe
 }, {
   number: "03",
@@ -80,7 +80,7 @@ const faqItems: FAQItem[] = [{
 }];
 const PRService = () => {
   usePageTitle("PR & Media");
-  return <ServicePageLayout serviceName="PR & Media Relations" serviceTitle="PR &" serviceSubtitle="Media" serviceDescription="Secure premium coverage across Korean media outlets with our established network of 50+ publishers and journalists." serviceIcon={Newspaper} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="pr-media">
+  return <ServicePageLayout serviceName="PR & Media Relations" serviceTitle="PR &" serviceSubtitle="Media" serviceDescription="Secure premium coverage across Korean media outlets with our established network of 20+ publishers and journalists." serviceIcon={Newspaper} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="pr-media">
       {/* Media Network Section */}
       <section className="scroll-reveal bg-[#0F0F0F] relative overflow-hidden">
         {/* Background glow effect */}
@@ -96,7 +96,7 @@ const PRService = () => {
             <div className="container mx-auto px-6 lg:px-16">
               <div className="max-w-4xl mx-auto text-center">
                 <p className="text-white/70 text-lg md:text-xl leading-relaxed mb-12">
-                  We maintain direct relationships with <span className="text-white font-semibold">50+ media outlets</span> across global and Korean markets. Our network ensures your announcements reach the right audiences with maximum impact.
+                  We maintain direct relationships with <span className="text-white font-semibold">20+ media outlets</span> across global and Korean markets. Our network ensures your announcements reach the right audiences with maximum impact.
                 </p>
                 
                 {/* Stats Grid */}
@@ -114,7 +114,7 @@ const PRService = () => {
                       >
                         <Users className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
                       </div>
-                      <div className="text-4xl md:text-5xl font-bold text-white mb-2">50+</div>
+                      <div className="text-4xl md:text-5xl font-bold text-white mb-2">20+</div>
                       <div className="text-white/50 text-sm uppercase tracking-wider">Media Partners</div>
                     </div>
                   </div>
@@ -132,7 +132,7 @@ const PRService = () => {
                       >
                         <FileText className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
                       </div>
-                      <div className="text-4xl md:text-5xl font-bold text-white mb-2">500+</div>
+                      <div className="text-4xl md:text-5xl font-bold text-white mb-2">50+</div>
                       <div className="text-white/50 text-sm uppercase tracking-wider">Articles Published</div>
                     </div>
                   </div>
@@ -150,7 +150,7 @@ const PRService = () => {
                       >
                         <Eye className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
                       </div>
-                      <div className="text-4xl md:text-5xl font-bold text-white mb-2">10M+</div>
+                      <div className="text-4xl md:text-5xl font-bold text-white mb-2">5M+</div>
                       <div className="text-white/50 text-sm uppercase tracking-wider">Total Reach</div>
                     </div>
                   </div>
