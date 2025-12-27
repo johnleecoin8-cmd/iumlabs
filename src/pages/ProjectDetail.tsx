@@ -1,21 +1,16 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Lightbox from "@/components/Lightbox";
 import { supabase } from "@/integrations/supabase/client";
 import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
 import ProjectHero from "@/components/project-detail/ProjectHero";
 import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
 import ProjectChallenge from "@/components/project-detail/ProjectChallenge";
-import ProjectGallery from "@/components/project-detail/ProjectGallery";
 import NextProject from "@/components/project-detail/NextProject";
 
 const ProjectDetail = () => {
   const { slug } = useParams();
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   // Fetch project from Supabase
   const { data: dbProject } = useQuery({
@@ -49,19 +44,6 @@ const ProjectDetail = () => {
     enabled: !!dbProject?.id,
   });
 
-  const { data: dbGallery } = useQuery({
-    queryKey: ['project-gallery', dbProject?.id],
-    queryFn: async () => {
-      if (!dbProject?.id) return [];
-      const { data } = await supabase
-        .from('project_gallery')
-        .select('*')
-        .eq('project_id', dbProject.id)
-        .order('display_order');
-      return data || [];
-    },
-    enabled: !!dbProject?.id,
-  });
 
   // Use DB project if available, otherwise fallback to hardcoded
   const fallbackProject = slug ? projectsData[slug] : null;
@@ -82,9 +64,7 @@ const ProjectDetail = () => {
     results: fallbackProject?.results || [],
     services: dbProject.services || fallbackProject?.services || [],
     shortServices: dbProject.short_services || fallbackProject?.shortServices || [],
-    gallery: dbGallery && dbGallery.length > 0
-      ? dbGallery.map(g => ({ src: g.src, title: g.title || '', description: g.description || '' }))
-      : fallbackProject?.gallery || [],
+    gallery: fallbackProject?.gallery || [],
     news: fallbackProject?.news || [],
   } : fallbackProject;
 
@@ -104,10 +84,6 @@ const ProjectDetail = () => {
   // Get next project for navigation
   const nextProjectData = getNextProject(slug || "");
 
-  const openLightbox = (index: number) => {
-    setLightboxIndex(index);
-    setLightboxOpen(true);
-  };
 
   // Create CSS custom properties for the project color
   const projectColorStyles = {
@@ -133,14 +109,6 @@ const ProjectDetail = () => {
         
         <Navbar />
       
-        {/* Lightbox */}
-        <Lightbox
-          images={project.gallery}
-          currentIndex={lightboxIndex}
-          isOpen={lightboxOpen}
-          onClose={() => setLightboxOpen(false)}
-          onNavigate={setLightboxIndex}
-        />
         
         {/* Hero Section */}
         <ProjectHero project={project} />
@@ -168,14 +136,7 @@ const ProjectDetail = () => {
           glowColor={project.glowColor} 
         />
 
-        {/* 03 - Gallery Section */}
-        <ProjectGallery 
-          gallery={project.gallery} 
-          glowColor={project.glowColor} 
-          onOpenLightbox={openLightbox} 
-        />
-
-        {/* 04 - Next Project */}
+        {/* 03 - Next Project */}
         {nextProjectData && (
           <NextProject 
             nextSlug={nextProjectData.slug} 
