@@ -8,7 +8,6 @@ import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import { ArrowRight, Calendar, ChevronDown, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { useCountUp } from "@/hooks/useCountUp";
 import { supabase } from "@/integrations/supabase/client";
@@ -100,19 +99,14 @@ const StatItem = ({
   });
   
   return (
-    <motion.div 
-      className="text-center"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
-    >
+    <div className="text-center">
       <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
         {prefix}{count}{suffix}
       </div>
       <div className="text-xs sm:text-sm text-white/50 font-light">
         {label}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
@@ -128,12 +122,7 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
   const isRightColumn = index % 2 === 1;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-    >
+    <div>
       <Link
         to={`/projects/${project.slug}`}
         onClick={() => window.scrollTo(0, 0)}
@@ -173,7 +162,7 @@ const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 };
 
@@ -292,43 +281,28 @@ const Projects = () => {
             <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
               <div className="max-w-7xl mx-auto text-center">
                 {/* Main Headline */}
-                <motion.h1 
-                  className="font-sans text-[10vw] sm:text-[8vw] md:text-[6vw] lg:text-[5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12"
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                >
+                <h1 className="font-sans text-[10vw] sm:text-[8vw] md:text-[6vw] lg:text-[5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12">
                   <span className="text-white">Our </span>
                   <span className="text-white/90">Case </span>
                   <span className="text-white">Studies</span>
-                </motion.h1>
+                </h1>
 
                 {/* Subtext */}
-                <motion.p 
-                  className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.4 }}
-                >
+                <p className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed">
                   Real results from <span className="text-white font-medium">18+ global Web3 projects</span> successfully entering and scaling in the Korean market.
-                </motion.p>
+                </p>
 
                 {/* CTA Button */}
-                <motion.a
+                <a
                   href={brand.calendlyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8, delay: 0.6 }}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98]"
                 >
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                   <Calendar className="w-4 h-4" />
                   <span>Start Your Project</span>
-                </motion.a>
+                </a>
               </div>
             </div>
 
@@ -352,15 +326,10 @@ const Projects = () => {
             </div>
 
             {/* Scroll Indicator */}
-            <motion.div 
-              className="absolute bottom-8 sm:bottom-12 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-            >
+            <div className="absolute bottom-8 sm:bottom-12 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3">
               <span className="text-white/40 text-xs sm:text-sm font-medium">scroll</span>
               <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
-            </motion.div>
+            </div>
           </div>
         </div>
       </main>
@@ -418,13 +387,7 @@ const Projects = () => {
             </div>
 
             {/* Right: Sticky Info Panel */}
-            <motion.div
-              className="w-full lg:w-1/3 p-6 md:p-8 lg:p-10 flex flex-col justify-center"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
+            <div className="w-full lg:w-1/3 p-6 md:p-8 lg:p-10 flex flex-col justify-center">
               <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 Our Track Record
               </h2>
@@ -454,7 +417,7 @@ const Projects = () => {
                 START YOUR PROJECT
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>

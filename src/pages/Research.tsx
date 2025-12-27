@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, Search, Calendar, Clock, ArrowRight, TrendingUp, LineChart, Users, Coins, Palette, BarChart3 } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -2983,19 +2982,17 @@ const Research = () => {
             {/* Categories */}
             <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0">
               {categories.map((category) => (
-                <motion.button
+                <button
                   key={category}
                   onClick={() => { setSelectedCategory(category); setCurrentPage(1); }}
-                  className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all ${
+                  className={`px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all hover:scale-[1.05] active:scale-[0.95] ${
                     selectedCategory === category 
                       ? "bg-primary text-primary-foreground" 
                       : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10 hover:border-primary/30"
                   }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   {category}
-                </motion.button>
+                </button>
               ))}
             </div>
             
@@ -3031,18 +3028,8 @@ const Research = () => {
           {/* Featured Content */}
           <div className="container mx-auto max-w-7xl px-4 md:px-8 py-16">
             <Link to={`/research/${researchPosts[0].slug}`} className="group block">
-              <motion.div 
-                className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-              >
-                <motion.div 
-                  className="aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                >
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div className="aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative hover:scale-[1.02]">
                   <img 
                     src={researchPosts[0].image} 
                     alt={researchPosts[0].title}
@@ -3054,7 +3041,7 @@ const Research = () => {
                       Read Article
                     </span>
                   </div>
-                </motion.div>
+                </div>
                 <div>
                   <div className="flex items-center gap-4 mb-4">
                     <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm border border-primary/20">
@@ -3086,7 +3073,7 @@ const Research = () => {
                     </span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </Link>
           </div>
         </section>
@@ -3110,31 +3097,19 @@ const Research = () => {
         {/* Article Grid Content */}
         <div className="container mx-auto max-w-7xl px-4 md:px-8 py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {currentPosts.map((post, index) => (
-              <motion.div
-                key={post.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
+            {currentPosts.map((post) => (
+              <div key={post.id}>
                 <Link 
                   to={`/research/${post.slug}`}
                   className="group block"
                 >
-                  <motion.div
-                    whileHover={{ y: -8 }}
-                    transition={{ duration: 0.3 }}
-                    className="relative"
-                  >
+                  <div className="relative hover:-translate-y-2 transition-transform duration-300">
                     {/* Image */}
                     <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-4 border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative">
-                      <motion.img 
+                      <img 
                         src={post.image} 
                         alt={post.title}
-                        className="w-full h-full object-cover"
-                        whileHover={{ scale: 1.08 }}
-                        transition={{ duration: 0.4 }}
+                        className="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-400"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                       <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
@@ -3165,9 +3140,9 @@ const Research = () => {
                       <span>•</span>
                       <span>{post.date}</span>
                     </div>
-                  </motion.div>
+                  </div>
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
 
@@ -3222,13 +3197,7 @@ const Research = () => {
         </div>
         
         {/* Newsletter Content */}
-        <motion.div 
-          className="container mx-auto max-w-3xl px-4 py-20 text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="container mx-auto max-w-3xl px-4 py-20 text-center">
           <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
             Stay <span className="text-primary">Updated</span>
           </h2>
@@ -3243,17 +3212,15 @@ const Research = () => {
               onChange={(e) => setNewsletterEmail(e.target.value)}
               className="flex-1 bg-white/5 border-white/10 rounded-xl h-12 px-4 text-white placeholder:text-white/40 focus:border-primary/50 transition-colors"
             />
-            <motion.button
+            <button
               type="submit"
               disabled={isSubscribing}
-              className="px-8 h-12 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-colors disabled:opacity-50"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
+              className="px-8 h-12 bg-primary text-primary-foreground rounded-xl font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 hover:scale-[1.02] active:scale-[0.98]"
             >
               {isSubscribing ? "..." : "Subscribe"}
-            </motion.button>
+            </button>
           </form>
-        </motion.div>
+        </div>
       </section>
 
       {/* 05 - Contact Section */}
