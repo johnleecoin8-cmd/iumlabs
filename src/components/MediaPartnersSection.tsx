@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 // Import media logos
 import coindeskLogo from "@/assets/logos/coindesk.png";
 import blockmediaLogo from "@/assets/logos/blockmedia-new.png";
@@ -29,18 +27,8 @@ const MediaPartnersSection = () => {
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-[#0A0A0A] to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10" />
         
-        {/* Marquee */}
-        <motion.div
-          className="flex items-center gap-12 py-6"
-          animate={{ x: [0, -50 * mediaLogos.length] }}
-          transition={{
-            x: {
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear",
-            },
-          }}
-        >
+        {/* Marquee with CSS animation */}
+        <div className="flex items-center gap-12 py-6 logo-marquee-slow">
           {duplicatedLogos.map((media, index) => (
             <div
               key={`${media.name}-${index}`}
@@ -56,7 +44,7 @@ const MediaPartnersSection = () => {
               </span>
             </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

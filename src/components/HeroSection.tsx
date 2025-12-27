@@ -1,6 +1,5 @@
 import { ChevronDown, Calendar } from "lucide-react";
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { useCountUp } from "@/hooks/useCountUp";
 import { brand } from "@/config/content";
 
@@ -91,24 +90,16 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* Floating Service Tags - Desktop - Enhanced Hover Animation */}
+      {/* Floating Service Tags - Desktop */}
       {serviceTags.map((tag, index) => (
-        <motion.div
+        <div
           key={index}
           className={`absolute ${tag.position} hidden lg:block z-10`}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: index * 0.1 + 0.5, duration: 0.5 }}
-          whileHover={{ 
-            scale: 1.1, 
-            y: -4,
-            transition: { duration: 0.2, ease: "easeOut" }
-          }}
         >
-          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all duration-300 cursor-default backdrop-blur-sm">
+          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-sm">
             {tag.label}
           </span>
-        </motion.div>
+        </div>
       ))}
 
       {/* Floating Service Tags - Mobile - Unified Card Style */}
@@ -127,44 +118,29 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Unified Inter font with color contrast */}
-          <motion.h1 
-            className="font-sans text-[8vw] sm:text-[7vw] md:text-[5.5vw] lg:text-[4.5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <h1 className="font-sans text-[8vw] sm:text-[7vw] md:text-[5.5vw] lg:text-[4.5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12">
             <span className="text-white">Bridge Your Web3 Project</span>
             <br />
             <span className="text-white">to Korea's Crypto Ecosystem</span>
-          </motion.h1>
+          </h1>
 
           {/* Subtext - Larger and more prominent */}
-          <motion.p 
-            className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
+          <p className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed">
             We combine <span className="text-white font-medium">deep-dive research labs</span> with <span className="text-white font-medium">high-impact marketing execution</span> to ensure your project thrives in the Korean market.
-          </motion.p>
+          </p>
 
           {/* CTA Button */}
-          <motion.a
+          <a
             href={brand.calendlyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 min-h-[48px]"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
+            className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"
           >
             {/* Shine sweep effect */}
             <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
             <Calendar className="w-4 h-4" />
             <span>Book a Meeting</span>
-          </motion.a>
+          </a>
         </div>
       </div>
 
@@ -214,25 +190,17 @@ const HeroSection = () => {
       </div>
 
       {/* Enhanced Scroll Indicator - Bottom Right */}
-      <motion.div 
-        className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3 group cursor-pointer"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        whileHover={{ scale: 1.05 }}
+      <div 
+        className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3 group cursor-pointer hover:scale-105 transition-transform"
         onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
       >
         <span className="text-white/40 text-xs sm:text-sm font-medium group-hover:text-white/70 transition-colors duration-300">scroll</span>
         <div className="relative flex flex-col items-center">
           <div className="w-5 h-8 sm:w-6 sm:h-9 rounded-full border border-white/20 group-hover:border-white/40 transition-colors duration-300 flex justify-center pt-1.5">
-            <motion.div 
-              className="w-1 h-1.5 sm:w-1.5 sm:h-2 rounded-full bg-white/60 group-hover:bg-primary transition-colors duration-300"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            />
+            <div className="w-1 h-1.5 sm:w-1.5 sm:h-2 rounded-full bg-white/60 group-hover:bg-primary transition-colors duration-300 animate-bounce" />
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
@@ -261,20 +229,14 @@ const StatItem = ({
   });
   
   return (
-    <motion.div 
-      className="text-center group cursor-default"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
-      whileHover={{ scale: 1.05 }}
-    >
+    <div className="text-center group cursor-default hover:scale-105 transition-transform">
       <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 stat-glow transition-all duration-300 group-hover:text-primary">
         {prefix}{count}{suffix}
       </div>
       <div className="text-xs sm:text-sm text-white/50 font-light group-hover:text-white/70 transition-colors duration-300">
         {label}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

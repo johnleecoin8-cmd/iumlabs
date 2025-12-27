@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ArrowRight, Compass, Users, Search, Mic2, MessageCircle, Newspaper, Rocket, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -69,14 +68,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
   const hasBorderBottom = index < 4;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-      whileHover={{ y: -4 }}
-      whileTap={{ scale: 0.98 }}
-    >
+    <div className="hover:-translate-y-1 active:scale-[0.98] transition-transform duration-300">
       <Link
         to={service.link}
         className={`group block p-4 sm:p-6 md:p-8 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 relative overflow-hidden ${
@@ -90,13 +82,9 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
         </div>
 
-        <motion.div
-          className="relative z-10"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.3 }}
-        >
+        <div className="relative z-10 group-hover:scale-105 transition-transform duration-300">
           <Icon className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 mb-4 sm:mb-6 text-muted-foreground group-hover:text-foreground group-hover:drop-shadow-[0_0_12px_hsl(var(--foreground)/0.3)] transition-all duration-300" strokeWidth={1.5} />
-        </motion.div>
+        </div>
         <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 sm:mb-3 group-hover:text-foreground/90 transition-colors relative z-10">
           {service.title}
         </h3>
@@ -108,7 +96,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 };
 

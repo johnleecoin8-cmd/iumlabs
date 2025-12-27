@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 import { Mail, MapPin, Send, ArrowRight } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -285,16 +284,14 @@ const ContactFormSection = ({
 
               {/* Submit Button */}
               <div className="pt-4 border-t border-white/10">
-                <motion.button
+                <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group inline-flex items-center justify-center gap-3 bg-white/10 text-white px-8 py-4 text-sm font-medium tracking-wider hover:bg-white/20 active:bg-white/30 transition-all disabled:opacity-50 w-full sm:w-auto min-h-[52px]"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  className="group inline-flex items-center justify-center gap-3 bg-white/10 text-white px-8 py-4 text-sm font-medium tracking-wider hover:bg-white/20 active:bg-white/30 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 w-full sm:w-auto min-h-[52px]"
                 >
                   {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </motion.button>
+                </button>
               </div>
             </form>
           </div>

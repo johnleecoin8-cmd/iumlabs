@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { MessageCircle, X, Send, Calendar, Mail } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const FloatingContactButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,66 +27,36 @@ const FloatingContactButton = () => {
 
   return (
     <div className="fixed bottom-[max(1rem,calc(env(safe-area-inset-bottom)+0.5rem))] right-[max(1rem,calc(env(safe-area-inset-right)+0.5rem))] sm:bottom-[max(1.5rem,calc(env(safe-area-inset-bottom)+1rem))] sm:right-[max(1.5rem,calc(env(safe-area-inset-right)+1rem))] z-50 flex flex-col items-end gap-3">
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.8 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.8 }}
-            transition={{ duration: 0.2 }}
-            className="flex flex-col gap-2"
-          >
-            {contactOptions.map((option, index) => (
-              <motion.a
-                key={option.label}
-                href={option.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className={`flex items-center gap-3 px-5 py-4 sm:px-4 sm:py-3 rounded-full ${option.color} text-white shadow-lg hover:scale-105 active:scale-95 transition-transform min-h-[48px]`}
-              >
-                <option.icon className="h-5 w-5" />
-                <span className="text-sm font-medium whitespace-nowrap">{option.label}</span>
-              </motion.a>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isOpen && (
+        <div className="flex flex-col gap-2 animate-fade-in">
+          {contactOptions.map((option, index) => (
+            <a
+              key={option.label}
+              href={option.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-center gap-3 px-5 py-4 sm:px-4 sm:py-3 rounded-full ${option.color} text-white shadow-lg hover:scale-105 active:scale-95 transition-transform min-h-[48px]`}
+              style={{ animationDelay: `${index * 50}ms` }}
+            >
+              <option.icon className="h-5 w-5" />
+              <span className="text-sm font-medium whitespace-nowrap">{option.label}</span>
+            </a>
+          ))}
+        </div>
+      )}
 
-      <motion.button
+      <button
         onClick={() => setIsOpen(!isOpen)}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className={`h-14 w-14 sm:h-14 sm:w-14 rounded-full shadow-lg flex items-center justify-center transition-colors ${
+        className={`h-14 w-14 sm:h-14 sm:w-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-110 active:scale-95 ${
           isOpen ? "bg-muted-foreground" : "bg-primary"
         } min-w-[56px] min-h-[56px]`}
       >
-        <AnimatePresence mode="wait">
-          {isOpen ? (
-            <motion.div
-              key="close"
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: 90, opacity: 0 }}
-              transition={{ duration: 0.15 }}
-            >
-              <X className="h-6 w-6 text-white" />
-            </motion.div>
-          ) : (
-            <motion.div
-              key="open"
-              initial={{ rotate: 90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              exit={{ rotate: -90, opacity: 0 }}
-              transition={{ duration: 0.15 }}
-            >
-              <MessageCircle className="h-6 w-6 text-white" />
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.button>
+        {isOpen ? (
+          <X className="h-6 w-6 text-white" />
+        ) : (
+          <MessageCircle className="h-6 w-6 text-white" />
+        )}
+      </button>
     </div>
   );
 };

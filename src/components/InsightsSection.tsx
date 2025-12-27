@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -40,11 +39,9 @@ const insights = [
 ];
 
 const BlueShape = () => (
-  <motion.div
-    className="relative w-24 h-24 mx-auto"
-    animate={{ rotateY: 360 }}
-    transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-    style={{ transformStyle: "preserve-3d" }}
+  <div
+    className="relative w-24 h-24 mx-auto animate-spin"
+    style={{ animationDuration: "25s", transformStyle: "preserve-3d" }}
   >
     <div
       className="absolute inset-0 rounded-full"
@@ -61,7 +58,7 @@ const BlueShape = () => (
         transform: "rotateX(30deg) translateZ(15px)"
       }}
     />
-  </motion.div>
+  </div>
 );
 
 const InsightsSection = () => {
@@ -95,13 +92,7 @@ const InsightsSection = () => {
         {/* Left: Articles List */}
         <div className="w-full lg:w-2/3 lg:border-r border-border">
           {insights.map((article, index) => (
-            <motion.div
-              key={article.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-            >
+            <div key={article.id}>
               <Link
                 to={`/research/${article.id}`}
                 className={`group block p-5 sm:p-6 md:p-8 lg:p-10 transition-colors duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
@@ -126,7 +117,7 @@ const InsightsSection = () => {
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
-            </motion.div>
+            </div>
           ))}
 
           {/* View All Link */}
@@ -142,13 +133,7 @@ const InsightsSection = () => {
         </div>
 
         {/* Right: Newsletter CTA */}
-        <motion.div
-          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
             Latest Research
           </h2>
@@ -182,7 +167,7 @@ const InsightsSection = () => {
               Join 500+ Web3 founders and marketers getting our weekly insights.
             </p>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
