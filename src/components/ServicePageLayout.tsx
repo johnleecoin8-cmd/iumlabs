@@ -140,15 +140,16 @@ const StatItem = ({
   
   return (
     <motion.div 
-      className="text-center"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
+      className="relative text-center p-4 sm:p-6 rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 backdrop-blur-sm"
+      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ delay: (delay + 600) / 1000, duration: 0.6, ease: "easeOut" }}
+      whileHover={{ scale: 1.02, borderColor: "rgba(255,255,255,0.2)" }}
     >
-      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
+      <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-xs sm:text-sm text-white/50 font-light">
+      <div className="text-xs sm:text-sm text-white/60 font-medium uppercase tracking-widest">
         {label}
       </div>
     </motion.div>
@@ -303,19 +304,28 @@ const ServicePageLayout = ({
 
               {/* Main Headline */}
               <motion.h1 
-                className="font-sans text-[10vw] sm:text-[8vw] md:text-[6vw] lg:text-[5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8"
-                initial={{ opacity: 0, y: 30 }}
+                className="font-sans text-[12vw] sm:text-[10vw] md:text-[7vw] lg:text-[6vw] font-bold leading-[1.05] tracking-[-0.03em] mb-6 sm:mb-10"
+                initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 0.9, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
               >
-                <span className="text-white">{serviceTitle}</span>
+                <span className="text-white drop-shadow-[0_4px_24px_rgba(0,0,0,0.3)]">{serviceTitle}</span>
                 <br />
-                <span style={{ color: accentColor }}>{serviceSubtitle}</span>
+                <span 
+                  className="relative inline-block"
+                  style={{ color: accentColor }}
+                >
+                  {serviceSubtitle}
+                  <span 
+                    className="absolute -bottom-2 left-0 w-full h-1 rounded-full opacity-60"
+                    style={{ background: `linear-gradient(90deg, ${accentColor}, transparent)` }}
+                  />
+                </span>
               </motion.h1>
 
               {/* Description */}
               <motion.p 
-                className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed"
+                className="text-lg sm:text-xl md:text-2xl text-white/70 max-w-4xl mx-auto mb-10 font-light tracking-wide leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -330,21 +340,26 @@ const ServicePageLayout = ({
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 <CalendlyButton 
-                  className="group relative inline-flex items-center gap-3 px-8 py-4 font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
-                  style={{ backgroundColor: accentColor, color: '#fff' }}
+                  className="group relative inline-flex items-center gap-3 px-10 py-5 font-semibold text-base rounded-full overflow-hidden transition-all duration-300 hover:-translate-y-1"
+                  style={{ 
+                    backgroundColor: accentColor, 
+                    color: '#fff',
+                    boxShadow: `0 8px 32px -8px ${accentColor}80, 0 4px 16px -4px ${accentColor}40`
+                  }}
                 >
-                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                  <Calendar className="w-4 h-4" />
+                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/30 to-transparent" />
+                  <Calendar className="w-5 h-5" />
                   <span>Book a Meeting</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </CalendlyButton>
               </motion.div>
             </div>
           </div>
 
           {/* Stats Section */}
-          <div className="relative z-10 py-4 sm:py-6">
-            <div className="container mx-auto px-4 sm:px-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+          <div className="relative z-10 py-6 sm:py-10">
+            <div className="container mx-auto px-4 sm:px-8">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                 {stats.map((stat, index) => (
                   <StatItem 
                     key={index}
@@ -403,34 +418,41 @@ const ServicePageLayout = ({
 
       {/* Deliverables Section */}
       {deliverables && deliverables.length > 0 && (
-        <section className="scroll-reveal bg-[#0F0F0F]">
+        <section className="scroll-reveal bg-[#0A0A0A]">
           <div className="border-t border-white/10">
             <SectionHeader number={deliverablesSectionNum!} title="What You Get" badge="Deliverables" />
             
-            <div className="py-16 md:py-20">
+            <div className="py-20 md:py-28">
               <div className="container mx-auto px-6 lg:px-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {deliverables.map((deliverable, index) => (
                     <motion.div
                       key={deliverable.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
+                      initial={{ opacity: 0, y: 30, scale: 0.95 }}
+                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="p-6 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all"
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      className="group relative p-8 rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.06] to-transparent hover:border-white/25 transition-all duration-500 overflow-hidden"
                     >
-                      <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                      {/* Glow effect */}
+                      <div 
+                        className="absolute -top-16 -right-16 w-32 h-32 rounded-full blur-3xl opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+                        style={{ backgroundColor: accentColor }}
+                      />
+                      
+                      <h3 className="relative text-xl font-bold text-white mb-6 flex items-center gap-3">
                         <div 
-                          className="w-2 h-2 rounded-full"
-                          style={{ backgroundColor: accentColor }}
+                          className="w-3 h-3 rounded-full"
+                          style={{ backgroundColor: accentColor, boxShadow: `0 0 12px ${accentColor}` }}
                         />
                         {deliverable.title}
                       </h3>
-                      <ul className="space-y-3">
+                      <ul className="relative space-y-4">
                         {deliverable.items.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-3 text-white/60 text-sm">
+                          <li key={idx} className="flex items-start gap-3 text-white/70 text-sm leading-relaxed">
                             <Check 
-                              className="w-4 h-4 mt-0.5 flex-shrink-0" 
+                              className="w-5 h-5 mt-0.5 flex-shrink-0" 
                               style={{ color: accentColor }} 
                             />
                             {item}
@@ -459,35 +481,40 @@ const ServicePageLayout = ({
               return (
                 <motion.div
                   key={step.number}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -4 }}
-                  className={`group p-8 md:p-10 transition-all duration-300 hover:bg-white/5 ${
+                  transition={{ duration: 0.6, delay: index * 0.12 }}
+                  whileHover={{ y: -8 }}
+                  className={`group relative p-10 md:p-12 transition-all duration-500 hover:bg-gradient-to-b hover:from-white/[0.08] hover:to-transparent ${
                     !isLast ? "lg:border-r border-white/10" : ""
                   } ${isOdd ? "md:border-l lg:border-l-0 border-white/10" : ""} ${
                     index < 2 ? "border-b lg:border-b-0 border-white/10" : ""
                   }`}
                 >
-                  <div className="flex items-center gap-3 mb-4">
-                    <span 
-                      className="text-xs font-mono tracking-widest"
-                      style={{ color: accentColor }}
+                  {/* Step number badge */}
+                  <div className="flex items-center gap-4 mb-6">
+                    <div 
+                      className="w-12 h-12 rounded-xl flex items-center justify-center text-lg font-bold border transition-all duration-300 group-hover:scale-110"
+                      style={{ 
+                        borderColor: `${accentColor}50`,
+                        backgroundColor: `${accentColor}15`,
+                        color: accentColor 
+                      }}
                     >
                       {step.number}
-                    </span>
+                    </div>
                     <Icon 
-                      className="w-6 h-6 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" 
+                      className="w-7 h-7 text-white/30 group-hover:text-white/80 transition-all duration-300" 
                       strokeWidth={1.5} 
                     />
                   </div>
                   
-                  <h3 className="text-lg font-semibold text-white mb-3">
+                  <h3 className="text-xl font-bold text-white mb-4 group-hover:translate-x-1 transition-transform duration-300">
                     {step.title}
                   </h3>
                   
-                  <p className="text-white/50 text-sm leading-relaxed">
+                  <p className="text-white/50 text-sm leading-relaxed group-hover:text-white/70 transition-colors duration-300">
                     {step.description}
                   </p>
                 </motion.div>
@@ -590,35 +617,42 @@ const ServicePageLayout = ({
 
       {/* FAQ Section - Always last before Contact */}
       {faqItems && faqItems.length > 0 && (
-        <section className="scroll-reveal bg-[#0F0F0F]">
+        <section className="scroll-reveal bg-[#0A0A0A]">
           <div className="border-t border-white/10">
             <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
             
-            <div className="py-16 md:py-20">
+            <div className="py-20 md:py-28">
               <div className="container mx-auto px-6 lg:px-16 max-w-4xl">
-                <Accordion type="single" collapsible className="space-y-4">
+                <Accordion type="single" collapsible className="space-y-5">
                   {faqItems.map((item, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * 0.08, duration: 0.5 }}
                     >
                       <AccordionItem 
                         value={`item-${index}`}
-                        className="border border-white/10 rounded-xl bg-white/5 px-6 overflow-hidden"
+                        className="group border border-white/10 rounded-2xl bg-gradient-to-br from-white/[0.05] to-transparent px-8 overflow-hidden hover:border-white/20 transition-all duration-300 data-[state=open]:border-white/25"
                       >
-                        <AccordionTrigger className="text-left text-white hover:no-underline py-5">
-                          <span className="flex items-center gap-3">
-                            <ChevronRight 
-                              className="w-4 h-4 flex-shrink-0 transition-transform" 
-                              style={{ color: accentColor }}
-                            />
-                            {item.question}
+                        <AccordionTrigger className="text-left text-white hover:no-underline py-6 text-lg font-medium">
+                          <span className="flex items-center gap-4">
+                            <div 
+                              className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 group-data-[state=open]:rotate-90"
+                              style={{ backgroundColor: `${accentColor}20` }}
+                            >
+                              <ChevronRight 
+                                className="w-4 h-4" 
+                                style={{ color: accentColor }}
+                              />
+                            </div>
+                            <span className="group-hover:translate-x-1 transition-transform duration-300">
+                              {item.question}
+                            </span>
                           </span>
                         </AccordionTrigger>
-                        <AccordionContent className="text-white/60 pb-5 pl-7">
+                        <AccordionContent className="text-white/70 pb-6 pl-12 text-base leading-relaxed">
                           {item.answer}
                         </AccordionContent>
                       </AccordionItem>
