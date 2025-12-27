@@ -1,6 +1,5 @@
 import { Rocket, Target, Compass, TrendingUp, CheckCircle, Building2, Shield, Scale, Landmark } from "lucide-react";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -184,20 +183,16 @@ const GTMService = () => {
               {/* Regulatory Expertise - Compact Badges */}
               <div className="mb-10">
                 <div className="flex flex-wrap gap-2">
-                  {regulatoryFramework.map((item, idx) => {
+                  {regulatoryFramework.map((item) => {
                     const Icon = item.icon;
                     return (
-                      <motion.div
+                      <div
                         key={item.title}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: idx * 0.05 }}
                         className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full"
                       >
                         <Icon className="w-3.5 h-3.5 text-emerald-400" />
                         <span className="text-xs font-medium text-emerald-400">{item.title}</span>
-                      </motion.div>
+                      </div>
                     );
                   })}
                 </div>
@@ -217,16 +212,14 @@ const GTMService = () => {
                       const isActive = activePhase === index;
                       
                       return (
-                        <motion.button
+                        <button
                           key={phase.week}
                           onClick={() => setActivePhase(index)}
-                          className={`w-full text-left p-3 sm:p-4 rounded-xl border transition-all duration-300 ${
+                          className={`w-full text-left p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:translate-x-1 active:scale-[0.98] ${
                             isActive 
                               ? 'bg-emerald-500/10 border-emerald-500/30' 
                               : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
                           }`}
-                          whileHover={{ x: 4 }}
-                          whileTap={{ scale: 0.98 }}
                         >
                           <div className="flex items-center gap-3">
                             <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${
@@ -243,18 +236,15 @@ const GTMService = () => {
                               </h4>
                             </div>
                           </div>
-                        </motion.button>
+                        </button>
                       );
                     })}
                   </div>
                 </div>
 
                 {/* Right - Phase Details */}
-                <motion.div
+                <div
                   key={activePhase}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3 }}
                   className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 md:p-6"
                 >
                   <div className="flex items-center gap-3 mb-5">
@@ -295,7 +285,7 @@ const GTMService = () => {
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>

@@ -1,6 +1,5 @@
 import { Users, Settings, Sparkles, ChevronRight, Hash, MessageSquare, Bell, Shield, Send, Megaphone, HelpCircle, Pin } from "lucide-react";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import ClientLogosSection from "@/components/ClientLogosSection";
@@ -189,11 +188,9 @@ const CommunityService = () => {
                   
                   {/* Platform Toggle */}
                   <div className="flex gap-2 mb-6">
-                    <motion.button
+                    <button
                       onClick={() => setActivePlatform('discord')}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ${
+                      className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-[1.05] active:scale-[0.95] ${
                         activePlatform === 'discord' 
                           ? 'bg-[#5865F2] text-white shadow-lg shadow-[#5865F2]/30' 
                           : 'bg-white/10 text-white/60 hover:bg-white/20'
@@ -203,12 +200,10 @@ const CommunityService = () => {
                         <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
                       </svg>
                       Discord
-                    </motion.button>
-                    <motion.button
+                    </button>
+                    <button
                       onClick={() => setActivePlatform('telegram')}
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 ${
+                      className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-medium text-sm transition-all duration-300 hover:scale-[1.05] active:scale-[0.95] ${
                         activePlatform === 'telegram' 
                           ? 'bg-[#0088CC] text-white shadow-lg shadow-[#0088CC]/30' 
                           : 'bg-white/10 text-white/60 hover:bg-white/20'
@@ -216,198 +211,174 @@ const CommunityService = () => {
                     >
                       <Send className="w-5 h-5" />
                       Telegram
-                    </motion.button>
+                    </button>
                   </div>
                 </div>
 
                 {/* Right - Chat Preview */}
-                <AnimatePresence mode="wait">
-                  {activePlatform === 'discord' ? (
-                    <motion.div
-                      key="discord"
-                      initial={{ opacity: 0, x: -30, scale: 0.95 }}
-                      animate={{ opacity: 1, x: 0, scale: 1 }}
-                      exit={{ opacity: 0, x: 30, scale: 0.95 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="bg-[#36393f] rounded-xl overflow-hidden shadow-2xl border border-white/10"
-                    >
-                      {/* Discord Header */}
-                      <div className="bg-[#2f3136] px-4 py-3 flex items-center gap-3 border-b border-black/20">
-                        <Hash className="w-5 h-5 text-gray-400" />
-                        <span className="text-white font-medium">general</span>
-                        <div className="ml-auto flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-xs text-gray-400">1,234 online</span>
-                        </div>
+                {activePlatform === 'discord' ? (
+                  <div
+                    className="bg-[#36393f] rounded-xl overflow-hidden shadow-2xl border border-white/10"
+                  >
+                    {/* Discord Header */}
+                    <div className="bg-[#2f3136] px-4 py-3 flex items-center gap-3 border-b border-black/20">
+                      <Hash className="w-5 h-5 text-gray-400" />
+                      <span className="text-white font-medium">general</span>
+                      <div className="ml-auto flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                        <span className="text-xs text-gray-400">1,234 online</span>
+                      </div>
+                    </div>
+
+                    <div className="flex">
+                      {/* Channels Sidebar */}
+                      <div className="w-48 bg-[#2f3136] p-3 hidden md:block">
+                        {discordChannels.map((channel) => (
+                          <div
+                            key={channel.name}
+                            className={`flex items-center gap-2 px-2 py-1.5 rounded mb-1 cursor-pointer transition-colors ${
+                              channel.active ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                            }`}
+                          >
+                            <channel.icon className="w-4 h-4" />
+                            <span className="text-sm">{channel.name}</span>
+                            {channel.unread && (
+                              <span className="ml-auto bg-red-500 text-white text-xs px-1.5 rounded-full">
+                                {channel.unread}
+                              </span>
+                            )}
+                          </div>
+                        ))}
                       </div>
 
-                      <div className="flex">
-                        {/* Channels Sidebar */}
-                        <div className="w-48 bg-[#2f3136] p-3 hidden md:block">
-                          {discordChannels.map((channel) => (
-                            <div
-                              key={channel.name}
-                              className={`flex items-center gap-2 px-2 py-1.5 rounded mb-1 cursor-pointer transition-colors ${
-                                channel.active ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                      {/* Chat Area */}
+                      <div className="flex-1 p-4 min-h-[300px]">
+                        {discordMessages.slice(0, visibleMessages).map((msg, index) => (
+                          <div
+                            key={index}
+                            className="flex gap-3 mb-4"
+                          >
+                            <div 
+                              className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${
+                                msg.isBot ? 'bg-indigo-500' : 'bg-gray-600'
                               }`}
                             >
-                              <channel.icon className="w-4 h-4" />
-                              <span className="text-sm">{channel.name}</span>
-                              {channel.unread && (
-                                <span className="ml-auto bg-red-500 text-white text-xs px-1.5 rounded-full">
-                                  {channel.unread}
-                                </span>
-                              )}
+                              {msg.avatar}
                             </div>
-                          ))}
-                        </div>
-
-                        {/* Chat Area */}
-                        <div className="flex-1 p-4 min-h-[300px]">
-                          <AnimatePresence>
-                            {discordMessages.slice(0, visibleMessages).map((msg, index) => (
-                              <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="flex gap-3 mb-4"
-                              >
-                                <div 
-                                  className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${
-                                    msg.isBot ? 'bg-indigo-500' : 'bg-gray-600'
-                                  }`}
-                                >
-                                  {msg.avatar}
-                                </div>
-                                <div>
-                                  <div className="flex items-center gap-2">
-                                    <span className={`font-medium ${msg.isBot ? 'text-indigo-400' : 'text-white'}`}>
-                                      {msg.user}
-                                    </span>
-                                    {msg.isBot && (
-                                      <span className="text-xs px-1.5 py-0.5 bg-indigo-500 text-white rounded">BOT</span>
-                                    )}
-                                    <span className="text-xs text-gray-500">{msg.time}</span>
-                                  </div>
-                                  <p className="text-gray-300 text-sm">{msg.message}</p>
-                                </div>
-                              </motion.div>
-                            ))}
-                          </AnimatePresence>
-                          
-                          {typingIndicator && (
-                            <motion.div
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              className="flex items-center gap-2 text-gray-400 text-sm"
-                            >
-                              <div className="flex gap-1">
-                                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className={`font-medium ${msg.isBot ? 'text-indigo-400' : 'text-white'}`}>
+                                  {msg.user}
+                                </span>
+                                {msg.isBot && (
+                                  <span className="text-xs px-1.5 py-0.5 bg-indigo-500 text-white rounded">BOT</span>
+                                )}
+                                <span className="text-xs text-gray-500">{msg.time}</span>
                               </div>
-                              <span>Someone is typing...</span>
-                            </motion.div>
-                          )}
-                        </div>
+                              <p className="text-gray-300 text-sm">{msg.message}</p>
+                            </div>
+                          </div>
+                        ))}
+                        
+                        {typingIndicator && (
+                          <div
+                            className="flex items-center gap-2 text-gray-400 text-sm"
+                          >
+                            <div className="flex gap-1">
+                              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                            </div>
+                            <span>Someone is typing...</span>
+                          </div>
+                        )}
                       </div>
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="telegram"
-                      initial={{ opacity: 0, x: 30, scale: 0.95 }}
-                      animate={{ opacity: 1, x: 0, scale: 1 }}
-                      exit={{ opacity: 0, x: -30, scale: 0.95 }}
-                      transition={{ duration: 0.4, ease: "easeInOut" }}
-                      className="bg-[#17212b] rounded-xl overflow-hidden shadow-2xl border border-white/10"
-                    >
-                      {/* Telegram Header */}
-                      <div className="bg-[#232e3c] px-4 py-3 flex items-center gap-3 border-b border-black/20">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
-                          <span className="text-white font-bold">P</span>
-                        </div>
-                        <div>
-                          <span className="text-white font-medium block">Project Community</span>
-                          <span className="text-xs text-gray-400">1,234 members</span>
-                        </div>
-                        <div className="ml-auto flex items-center gap-2">
-                          <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                          <span className="text-xs text-gray-400">423 online</span>
-                        </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    className="bg-[#17212b] rounded-xl overflow-hidden shadow-2xl border border-white/10"
+                  >
+                    {/* Telegram Header */}
+                    <div className="bg-[#232e3c] px-4 py-3 flex items-center gap-3 border-b border-black/20">
+                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-cyan-400 to-blue-500 flex items-center justify-center">
+                        <span className="text-white font-bold">P</span>
+                      </div>
+                      <div>
+                        <span className="text-white font-medium block">Project Community</span>
+                        <span className="text-xs text-gray-400">1,234 members</span>
+                      </div>
+                      <div className="ml-auto flex items-center gap-2">
+                        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+                        <span className="text-xs text-gray-400">423 online</span>
+                      </div>
+                    </div>
+
+                    <div className="flex">
+                      {/* Telegram Topics Sidebar */}
+                      <div className="w-48 bg-[#1e2c3a] p-3 hidden md:block">
+                        {telegramChannels.map((channel) => (
+                          <div
+                            key={channel.name}
+                            className={`flex items-center gap-2 px-2 py-1.5 rounded mb-1 cursor-pointer transition-colors ${
+                              channel.active ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                            }`}
+                          >
+                            <span className="text-sm">{channel.name}</span>
+                            {channel.unread && (
+                              <span className="ml-auto bg-[#0088CC] text-white text-xs px-1.5 rounded-full">
+                                {channel.unread}
+                              </span>
+                            )}
+                          </div>
+                        ))}
                       </div>
 
-                      <div className="flex">
-                        {/* Telegram Topics Sidebar */}
-                        <div className="w-48 bg-[#1e2c3a] p-3 hidden md:block">
-                          {telegramChannels.map((channel) => (
-                            <div
-                              key={channel.name}
-                              className={`flex items-center gap-2 px-2 py-1.5 rounded mb-1 cursor-pointer transition-colors ${
-                                channel.active ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
+                      {/* Chat Area */}
+                      <div className="flex-1 p-4 min-h-[300px]">
+                        {telegramMessages.slice(0, visibleMessages).map((msg, index) => (
+                          <div
+                            key={index}
+                            className="flex gap-3 mb-4"
+                          >
+                            <div 
+                              className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${
+                                msg.isBot ? 'bg-[#0088CC]' : 'bg-gradient-to-br from-purple-500 to-pink-500'
                               }`}
                             >
-                              <span className="text-sm">{channel.name}</span>
-                              {channel.unread && (
-                                <span className="ml-auto bg-[#0088CC] text-white text-xs px-1.5 rounded-full">
-                                  {channel.unread}
-                                </span>
-                              )}
+                              {msg.avatar}
                             </div>
-                          ))}
-                        </div>
-
-                        {/* Chat Area */}
-                        <div className="flex-1 p-4 min-h-[300px]">
-                          <AnimatePresence>
-                            {telegramMessages.slice(0, visibleMessages).map((msg, index) => (
-                              <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                className="flex gap-3 mb-4"
-                              >
-                                <div 
-                                  className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${
-                                    msg.isBot ? 'bg-[#0088CC]' : 'bg-gradient-to-br from-purple-500 to-pink-500'
-                                  }`}
-                                >
-                                  {msg.avatar}
-                                </div>
-                                <div>
-                                  <div className="flex items-center gap-2">
-                                    <span className={`font-medium ${msg.isBot ? 'text-[#0088CC]' : 'text-white'}`}>
-                                      {msg.user}
-                                    </span>
-                                    {msg.isBot && (
-                                      <span className="text-xs px-1.5 py-0.5 bg-[#0088CC] text-white rounded">Admin</span>
-                                    )}
-                                    <span className="text-xs text-gray-500">{msg.time}</span>
-                                  </div>
-                                  <p className="text-gray-300 text-sm">{msg.message}</p>
-                                </div>
-                              </motion.div>
-                            ))}
-                          </AnimatePresence>
-                          
-                          {typingIndicator && (
-                            <motion.div
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              className="flex items-center gap-2 text-gray-400 text-sm"
-                            >
-                              <div className="flex gap-1">
-                                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                                <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <span className={`font-medium ${msg.isBot ? 'text-[#0088CC]' : 'text-white'}`}>
+                                  {msg.user}
+                                </span>
+                                {msg.isBot && (
+                                  <span className="text-xs px-1.5 py-0.5 bg-[#0088CC] text-white rounded">Admin</span>
+                                )}
+                                <span className="text-xs text-gray-500">{msg.time}</span>
                               </div>
-                              <span>누군가 입력 중...</span>
-                            </motion.div>
-                          )}
-                        </div>
+                              <p className="text-gray-300 text-sm">{msg.message}</p>
+                            </div>
+                          </div>
+                        ))}
+                        
+                        {typingIndicator && (
+                          <div
+                            className="flex items-center gap-2 text-gray-400 text-sm"
+                          >
+                            <div className="flex gap-1">
+                              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                              <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                            </div>
+                            <span>누군가 입력 중...</span>
+                          </div>
+                        )}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           </div>

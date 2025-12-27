@@ -11,7 +11,6 @@ import ServicePageLayout, {
   FAQItem
 } from "@/components/ServicePageLayout";
 import ClientLogosSection from "@/components/ClientLogosSection";
-import { motion } from "framer-motion";
 import { FileText, BarChart3, TrendingUp, Users, Newspaper, Share2, Search, PenTool, Send, ArrowRight, BookOpen, Mic2, Globe } from "lucide-react";
 
 const ACCENT_COLOR = "#06B6D4";
@@ -189,10 +188,7 @@ const DeepResearchService = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
         
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div
             className="text-center mb-10 md:mb-12"
           >
             <span 
@@ -208,17 +204,13 @@ const DeepResearchService = () => {
               From market sizing to user behavior, we deliver actionable insights 
               that position your project for success in the Korean market.
             </p>
-          </motion.div>
+          </div>
 
           {/* Research Topics Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-10 md:mb-12">
-            {researchTopics.map((topic, index) => (
-              <motion.div
+            {researchTopics.map((topic) => (
+              <div
                 key={topic.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
                 className="group relative p-4 sm:p-5 md:p-6 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-[#06B6D4]/50 transition-all duration-300"
               >
                 <div 
@@ -235,15 +227,12 @@ const DeepResearchService = () => {
                 >
                   {topic.stats}
                 </span>
-              </motion.div>
+              </div>
             ))}
           </div>
 
           {/* Distribution Flow */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+          <div
             className="relative p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border border-white/10 bg-white/[0.03]"
           >
             <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 md:gap-8">
@@ -276,13 +265,14 @@ const DeepResearchService = () => {
                   {distributionChannels.map((channel, index) => {
                     const Icon = channel.icon;
                     return (
-                      <motion.div
+                      <div
                         key={channel.name}
-                        animate={{
-                          scale: activeChannel === index ? 1.08 : 1,
+                        className={`p-2.5 sm:p-4 rounded-lg sm:rounded-xl border-2 bg-background/50 text-center transition-all flex flex-col items-center gap-1.5 sm:gap-2 ${
+                          activeChannel === index ? 'scale-[1.08]' : ''
+                        }`}
+                        style={{
                           borderColor: activeChannel === index ? ACCENT_COLOR : 'rgba(255,255,255,0.1)'
                         }}
-                        className="p-2.5 sm:p-4 rounded-lg sm:rounded-xl border-2 bg-background/50 text-center transition-all flex flex-col items-center gap-1.5 sm:gap-2"
                       >
                         <Icon 
                           className="w-4 h-4 sm:w-5 sm:h-5" 
@@ -291,7 +281,7 @@ const DeepResearchService = () => {
                         <span className="text-[10px] sm:text-xs font-medium text-foreground">
                           {channel.name}
                         </span>
-                      </motion.div>
+                      </div>
                     );
                   })}
                 </div>
@@ -315,7 +305,7 @@ const DeepResearchService = () => {
                 <span className="text-xs sm:text-sm font-medium text-foreground">Brand Authority</span>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -323,10 +313,7 @@ const DeepResearchService = () => {
       {researchPosts && researchPosts.length > 0 && (
         <section className="py-12 md:py-16 relative bg-[#121212]">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+            <div
               className="flex flex-col md:flex-row md:items-end md:justify-between mb-8 md:mb-12"
             >
               <div>
@@ -348,16 +335,12 @@ const DeepResearchService = () => {
                 View All Research
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-            </motion.div>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-              {researchPosts.map((post, index) => (
-                <motion.div
+              {researchPosts.map((post) => (
+                <div
                   key={post.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
                 >
                   <Link
                     to={`/research/${post.slug}`}
@@ -398,7 +381,7 @@ const DeepResearchService = () => {
                       </div>
                     </div>
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>
