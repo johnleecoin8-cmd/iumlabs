@@ -127,6 +127,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
   const row = Math.floor(index / 2);
   const isRightColumn = index % 2 === 1;
   const isLastRow = row === 3;
+  const isEven = index % 2 === 0;
 
   return (
     <motion.div
@@ -134,7 +135,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      whileHover={{ y: -4 }}
+      whileHover={isEven ? { y: -4 } : { scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       className="relative"
     >
@@ -159,27 +160,56 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           <div className="absolute top-0 right-0 w-8 h-8 bg-primary/20 blur-xl" />
           <div className="absolute bottom-0 left-0 w-8 h-8 bg-primary/20 blur-xl" />
           <div className="absolute bottom-0 right-0 w-8 h-8 bg-primary/20 blur-xl" />
-          {/* Background glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
+          {/* Background glow - different for even/odd */}
+          <div className={`absolute inset-0 ${isEven ? 'bg-gradient-to-br from-primary/5 to-transparent' : 'bg-gradient-to-tl from-primary/8 via-primary/3 to-transparent'}`} />
         </div>
 
-        <motion.div
-          className="relative z-10"
-          whileHover={{ scale: 1.05 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Icon className="w-6 h-6 sm:w-8 sm:h-8 mb-3 sm:mb-4 text-muted-foreground group-hover:text-primary group-hover:drop-shadow-[0_0_12px_hsl(var(--primary)/0.5)] transition-all duration-300" strokeWidth={1.5} />
-        </motion.div>
-        <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2 group-hover:text-foreground/90 transition-colors relative z-10">
-          {service.title}
-        </h3>
-        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-3 relative z-10 line-clamp-2">
-          {service.description}
-        </p>
-        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-primary transition-colors text-xs sm:text-sm relative z-10">
-          <span className="group-hover:underline underline-offset-4">Learn more</span>
-          <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-2 transition-transform duration-300" />
-        </div>
+        {/* Even cards: Vertical layout (default) */}
+        {isEven ? (
+          <div className="relative z-10">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Icon className="w-6 h-6 sm:w-8 sm:h-8 mb-3 sm:mb-4 text-muted-foreground group-hover:text-primary group-hover:drop-shadow-[0_0_12px_hsl(var(--primary)/0.5)] transition-all duration-300" strokeWidth={1.5} />
+            </motion.div>
+            <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2 group-hover:text-foreground/90 transition-colors">
+              {service.title}
+            </h3>
+            <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-3 line-clamp-2">
+              {service.description}
+            </p>
+            <div className="flex items-center gap-2 text-muted-foreground group-hover:text-primary transition-colors text-xs sm:text-sm">
+              <span className="group-hover:underline underline-offset-4">Learn more</span>
+              <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-2 transition-transform duration-300" />
+            </div>
+          </div>
+        ) : (
+          /* Odd cards: Horizontal layout with circular icon */
+          <div className="relative z-10 flex gap-4 items-start">
+            <motion.div
+              className="flex-shrink-0"
+              whileHover={{ rotate: 10 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-border group-hover:border-primary/50 bg-secondary/50 group-hover:bg-primary/10 flex items-center justify-center transition-all duration-300 group-hover:shadow-[0_0_20px_hsl(var(--primary)/0.3)]">
+                <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-muted-foreground group-hover:text-primary transition-all duration-300" strokeWidth={1.5} />
+              </div>
+            </motion.div>
+            <div className="flex-1 min-w-0">
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1 group-hover:text-foreground/90 transition-colors">
+                {service.title}
+              </h3>
+              <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-2 line-clamp-2">
+                {service.description}
+              </p>
+              <div className="flex items-center gap-2 text-muted-foreground group-hover:text-primary transition-colors text-xs sm:text-sm">
+                <span className="group-hover:underline underline-offset-4">Learn more</span>
+                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-2 transition-transform duration-300" />
+              </div>
+            </div>
+          </div>
+        )}
       </Link>
     </motion.div>
   );
