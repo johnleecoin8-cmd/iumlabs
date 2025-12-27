@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Compass, Users, Search, Mic2, MessageCircle, Newspaper, Rocket, Target } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useRef, Suspense } from "react";
+import * as THREE from "three";
 
 const services = [
   {
@@ -61,6 +64,64 @@ const services = [
   }
 ];
 
+const RotatingShape = () => {
+  const meshRef = useRef<THREE.Mesh>(null);
+  const torusRef = useRef<THREE.Mesh>(null);
+
+  useFrame((state) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.x = state.clock.elapsedTime * 0.3;
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.5;
+    }
+    if (torusRef.current) {
+      torusRef.current.rotation.x = state.clock.elapsedTime * 0.4;
+      torusRef.current.rotation.z = state.clock.elapsedTime * 0.2;
+    }
+  });
+
+  return (
+    <group>
+      {/* Main icosahedron */}
+      <mesh ref={meshRef}>
+        <icosahedronGeometry args={[1, 0]} />
+        <meshStandardMaterial
+          color="#C4A35A"
+          metalness={0.8}
+          roughness={0.2}
+          emissive="#C4A35A"
+          emissiveIntensity={0.1}
+        />
+      </mesh>
+      {/* Orbiting torus */}
+      <mesh ref={torusRef}>
+        <torusGeometry args={[1.5, 0.05, 16, 100]} />
+        <meshStandardMaterial
+          color="#F5E6C8"
+          metalness={0.9}
+          roughness={0.1}
+          transparent
+          opacity={0.7}
+        />
+      </mesh>
+    </group>
+  );
+};
+
+const Shape3D = () => {
+  return (
+    <div className="w-32 h-32 md:w-40 md:h-40">
+      <Canvas camera={{ position: [0, 0, 4], fov: 50 }}>
+        <ambientLight intensity={0.5} />
+        <pointLight position={[10, 10, 10]} intensity={1} />
+        <pointLight position={[-10, -10, -10]} intensity={0.5} color="#C4A35A" />
+        <Suspense fallback={null}>
+          <RotatingShape />
+        </Suspense>
+      </Canvas>
+    </div>
+  );
+};
+
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
   const row = Math.floor(index / 2);
@@ -75,6 +136,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
       transition={{ duration: 0.5, delay: index * 0.05 }}
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.98 }}
+      className="relative"
     >
       <Link
         to={service.link}
@@ -82,8 +144,22 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           !isRightColumn ? "sm:border-r border-border" : ""
         } ${!isLastRow ? "border-b border-border" : ""}`}
       >
-        {/* Hover glow effect */}
+        {/* Glowing border effect on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+          {/* Top border glow */}
+          <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+          {/* Bottom border glow */}
+          <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent" />
+          {/* Left border glow */}
+          <div className="absolute top-0 bottom-0 left-0 w-px bg-gradient-to-b from-transparent via-primary/60 to-transparent" />
+          {/* Right border glow */}
+          <div className="absolute top-0 bottom-0 right-0 w-px bg-gradient-to-b from-transparent via-primary/60 to-transparent" />
+          {/* Corner glows */}
+          <div className="absolute top-0 left-0 w-8 h-8 bg-primary/20 blur-xl" />
+          <div className="absolute top-0 right-0 w-8 h-8 bg-primary/20 blur-xl" />
+          <div className="absolute bottom-0 left-0 w-8 h-8 bg-primary/20 blur-xl" />
+          <div className="absolute bottom-0 right-0 w-8 h-8 bg-primary/20 blur-xl" />
+          {/* Background glow */}
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent" />
         </div>
 
@@ -92,7 +168,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
           whileHover={{ scale: 1.05 }}
           transition={{ duration: 0.3 }}
         >
-          <Icon className="w-6 h-6 sm:w-8 sm:h-8 mb-3 sm:mb-4 text-muted-foreground group-hover:text-foreground group-hover:drop-shadow-[0_0_12px_hsl(var(--foreground)/0.3)] transition-all duration-300" strokeWidth={1.5} />
+          <Icon className="w-6 h-6 sm:w-8 sm:h-8 mb-3 sm:mb-4 text-muted-foreground group-hover:text-primary group-hover:drop-shadow-[0_0_12px_hsl(var(--primary)/0.5)] transition-all duration-300" strokeWidth={1.5} />
         </motion.div>
         <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2 group-hover:text-foreground/90 transition-colors relative z-10">
           {service.title}
@@ -100,7 +176,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
         <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-3 relative z-10 line-clamp-2">
           {service.description}
         </p>
-        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-xs sm:text-sm relative z-10">
+        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-primary transition-colors text-xs sm:text-sm relative z-10">
           <span className="group-hover:underline underline-offset-4">Learn more</span>
           <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-2 transition-transform duration-300" />
         </div>
@@ -189,13 +265,24 @@ const ServicesSection = () => {
               </Link>
             </motion.div>
 
+            {/* 3D Shape */}
+            <motion.div 
+              className="mt-6 flex justify-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+            >
+              <Shape3D />
+            </motion.div>
+
             {/* Stats */}
             <motion.div 
-              className="mt-8 grid grid-cols-2 gap-4"
+              className="mt-6 grid grid-cols-2 gap-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.6 }}
             >
               <div>
                 <div className="text-xl font-bold text-foreground">$500M+</div>
