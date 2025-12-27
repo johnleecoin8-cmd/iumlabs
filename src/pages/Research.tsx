@@ -2975,19 +2975,8 @@ const Research = () => {
         <ResearchHeroSection />
       </main>
 
-      {/* 01 - Browse Section */}
+      {/* Filter Section */}
       <section className="bg-[#0F0F0F] border-t border-white/10" id="filters">
-        {/* Section Header - Homepage Style */}
-        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
-          <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-            <h2 className="text-lg md:text-xl font-medium text-white">Browse</h2>
-          </div>
-          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
-            Filter by Topic
-          </span>
-        </div>
-        
         {/* Filter Content */}
         <div className="container mx-auto max-w-7xl px-4 md:px-8 py-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
