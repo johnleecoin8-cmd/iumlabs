@@ -497,6 +497,39 @@
     @apply translate-y-[-4px];
   }
 
+  /* Research Page Specific Styles */
+  .research-card {
+    @apply transition-all duration-300;
+    border: 1px solid hsl(0 0% 100% / 0.06);
+    background: hsl(0 0% 100% / 0.02);
+  }
+
+  .research-card:hover {
+    border-color: hsl(217 91% 60% / 0.3);
+    background: hsl(0 0% 100% / 0.04);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 40px hsl(217 91% 60% / 0.1);
+  }
+
+  .research-badge {
+    @apply px-3 py-1 text-xs font-medium rounded-full;
+    background: hsl(217 91% 60% / 0.1);
+    color: hsl(217 91% 70%);
+    border: 1px solid hsl(217 91% 60% / 0.2);
+  }
+
+  .research-section-badge {
+    @apply px-3 py-1 text-xs font-medium rounded-full;
+    background: transparent;
+    color: hsl(217 91% 70% / 0.8);
+    border: 1px solid hsl(217 91% 60% / 0.3);
+  }
+
+  .research-number {
+    @apply text-xs font-mono;
+    color: hsl(217 91% 60% / 0.5);
+  }
+
   /* Input focus glow */
   .input-focus-glow {
     @apply transition-all duration-200;
