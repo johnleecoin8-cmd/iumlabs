@@ -7,15 +7,7 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 
 const ACCENT_COLOR = "#10B981";
 
-// Korean Exchange & Regulatory Data
-const koreanExchanges = [
-  { name: "Upbit", tier: "Tier 1", volume: "60%+ KRW Volume", color: "#093687" },
-  { name: "Bithumb", tier: "Tier 1", volume: "Major CEX", color: "#F37321" },
-  { name: "Coinone", tier: "Tier 2", volume: "Established", color: "#0066FF" },
-  { name: "Korbit", tier: "Tier 2", volume: "Institutional Focus", color: "#1E88E5" },
-  { name: "Gopax", tier: "Tier 2", volume: "Retail Friendly", color: "#00D1C1" },
-];
-
+// Regulatory Framework Data (compact)
 const regulatoryFramework = [
   {
     title: "VASP Registration",
@@ -210,112 +202,45 @@ const GTMService = () => {
       faqItems={faqItems}
       currentSlug="gtm"
     >
-      {/* Korean Exchange Ecosystem Section */}
+      {/* 4-Week Program Journey Section with Integrated Regulatory */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader number="01" title="Korean Exchanges" badge="Listing Strategy" />
+          <SectionHeader number="01" title="4-Week Program" badge="GTM Journey" />
           
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
+              {/* Regulatory Expertise - Compact Row */}
               <div className="mb-12">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                  Major Korean Exchange Listing Support
-                </h3>
-                <p className="text-white/60 text-lg leading-relaxed max-w-2xl">
-                  Korea accounts for a significant portion of global cryptocurrency trading volume. We understand listing requirements and processes for major exchanges and approach strategically.
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                {koreanExchanges.map((exchange, idx) => (
-                  <motion.div
-                    key={exchange.name}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: idx * 0.1 }}
-                    className="bg-white/5 border border-white/10 rounded-xl p-5 hover:bg-white/10 transition-all duration-300"
-                  >
-                    <div 
-                      className="w-10 h-10 rounded-lg mb-3 flex items-center justify-center"
-                      style={{ backgroundColor: `${exchange.color}20` }}
-                    >
-                      <Building2 className="w-5 h-5" style={{ color: exchange.color }} />
-                    </div>
-                    <h4 className="font-bold text-white mb-1">{exchange.name}</h4>
-                    <span className="text-xs text-emerald-400 font-medium">{exchange.tier}</span>
-                    <p className="text-xs text-white/50 mt-1">{exchange.volume}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Regulatory Framework Section */}
-      <section className="scroll-reveal bg-[#0A0A0A]">
-        <div className="border-t border-white/10">
-          <SectionHeader number="02" title="Regulatory Framework" badge="Regulatory" />
-          
-          <div className="py-16 md:py-20">
-            <div className="container mx-auto px-6 lg:px-16">
-              <div className="mb-12">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                  Korean Crypto Regulatory Framework
-                </h3>
-                <p className="text-white/60 text-lg leading-relaxed max-w-2xl">
-                  Essential regulatory environment for Korean market entry. We provide comprehensive consulting on VASP registration, Special Act compliance, and tax policies.
-                </p>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                {regulatoryFramework.map((item, idx) => {
-                  const Icon = item.icon;
-                  return (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: idx * 0.1 }}
-                      className="bg-white/5 border border-white/10 rounded-xl p-6 hover:bg-white/10 transition-all duration-300"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
-                          <Icon className="w-6 h-6 text-emerald-400" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-bold text-white mb-1">{item.title}</h4>
-                          <p className="text-white/60 text-sm mb-3">{item.description}</p>
-                          <div className="flex flex-wrap gap-2">
-                            {item.details.map((detail, dIdx) => (
-                              <span 
-                                key={dIdx}
-                                className="px-2 py-1 bg-white/5 border border-white/10 text-white/70 text-xs rounded-md"
-                              >
-                                {detail}
-                              </span>
-                            ))}
+                <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-4">Regulatory Expertise</h3>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                  {regulatoryFramework.map((item, idx) => {
+                    const Icon = item.icon;
+                    return (
+                      <motion.div
+                        key={item.title}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: idx * 0.05 }}
+                        className="group bg-white/5 border border-white/10 rounded-lg p-3 hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-300 cursor-default"
+                      >
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                            <Icon className="w-4 h-4 text-emerald-400" />
+                          </div>
+                          <div className="min-w-0">
+                            <h4 className="font-medium text-white text-sm truncate">{item.title}</h4>
+                            <p className="text-white/40 text-xs truncate group-hover:text-white/60 transition-colors">{item.description}</p>
                           </div>
                         </div>
-                      </div>
-                    </motion.div>
-                  );
-                })}
+                      </motion.div>
+                    );
+                  })}
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4-Week Program Journey Section */}
-      <section className="scroll-reveal bg-[#0F0F0F]">
-        <div className="border-t border-white/10">
-          <SectionHeader number="03" title="4-Week Program" badge="GTM Journey" />
-          
-          <div className="py-16 md:py-20">
-            <div className="container mx-auto px-6 lg:px-16">
+              
+              
+              {/* 4-Week Journey Content */}
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 {/* Left - Phase Navigation */}
                 <div>
