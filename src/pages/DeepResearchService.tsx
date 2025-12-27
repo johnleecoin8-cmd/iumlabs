@@ -25,10 +25,10 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 100, label: "Research Reports Published", suffix: "+" },
-  { value: 50, label: "Distribution Partners", suffix: "+" },
-  { value: 5, label: "Avg Coverage Reach", suffix: "M+" },
-  { value: 200, label: "KOL Network Reach", suffix: "K+" },
+  { value: 25, label: "Research Reports Published", suffix: "+" },
+  { value: 15, label: "Distribution Partners", suffix: "+" },
+  { value: 2, label: "Avg Coverage Reach", suffix: "M+" },
+  { value: 100, label: "KOL Network Reach", suffix: "K+" },
 ];
 
 const processSteps: ProcessStep[] = [
@@ -119,19 +119,19 @@ const researchTopics = [
     icon: BarChart3,
     title: "Market Analysis",
     description: "Korean crypto market sizing, trends, and opportunities",
-    stats: "50+ reports"
+    stats: "25+ reports"
   },
   {
     icon: TrendingUp,
     title: "Investment Thesis",
     description: "Deep dives into tokenomics, fundamentals, and growth potential",
-    stats: "30+ projects"
+    stats: "12+ projects"
   },
   {
     icon: Users,
     title: "User Research",
     description: "Korean user behavior, preferences, and adoption patterns",
-    stats: "100K+ data points"
+    stats: "50K+ data points"
   }
 ];
 

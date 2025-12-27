@@ -18,10 +18,10 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 50, label: "Discord & Telegram Servers", suffix: "+" },
-  { value: 500, label: "Members Managed", suffix: "K+" },
+  { value: 15, label: "Discord & Telegram Servers", suffix: "+" },
+  { value: 80, label: "Members Managed", suffix: "K+" },
   { value: 24, label: "Support Coverage", suffix: "/7" },
-  { value: 98, label: "Retention Rate", suffix: "%" },
+  { value: 95, label: "Retention Rate", suffix: "%" },
 ];
 
 const processSteps: ProcessStep[] = [

@@ -17,9 +17,9 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 120, label: "KOL Network", suffix: "+" },
-  { value: 50, label: "Total Reach", suffix: "M+" },
-  { value: 30, label: "Campaigns Delivered", suffix: "+" },
+  { value: 69, label: "KOL Network", suffix: "+" },
+  { value: 15, label: "Total Reach", suffix: "M+" },
+  { value: 12, label: "Campaigns Delivered", suffix: "+" },
   { value: 4, label: "Avg Engagement", suffix: "x" },
 ];
 
@@ -117,16 +117,16 @@ const kolProfiles = [
 ];
 
 const tierData = [
-  { tier: "Platinum", icon: Crown, count: "10+", reach: "1M+", color: "from-purple-400 to-purple-600" },
-  { tier: "Gold", icon: Award, count: "30+", reach: "500K-1M", color: "from-amber-400 to-amber-600" },
-  { tier: "Silver", icon: Star, count: "50+", reach: "100K-500K", color: "from-gray-300 to-gray-500" },
-  { tier: "Bronze", icon: Zap, count: "30+", reach: "50K-100K", color: "from-orange-600 to-orange-800" },
+  { tier: "Platinum", icon: Crown, count: "5+", reach: "1M+", color: "from-purple-400 to-purple-600" },
+  { tier: "Gold", icon: Award, count: "15+", reach: "500K-1M", color: "from-amber-400 to-amber-600" },
+  { tier: "Silver", icon: Star, count: "30+", reach: "100K-500K", color: "from-gray-300 to-gray-500" },
+  { tier: "Bronze", icon: Zap, count: "19+", reach: "50K-100K", color: "from-orange-600 to-orange-800" },
 ];
 
 const regionData = [
-  { id: "all", label: "All", count: "120+" },
-  { id: "global", label: "Global", count: "70+" },
-  { id: "korean", label: "Korean 🇰🇷", count: "50+" },
+  { id: "all", label: "All", count: "69+" },
+  { id: "global", label: "Global", count: "40+" },
+  { id: "korean", label: "Korean 🇰🇷", count: "29+" },
 ];
 
 const InfluencerService = () => {
@@ -143,7 +143,7 @@ const InfluencerService = () => {
       serviceName="Influencer/KOL"
       serviceTitle="Access Our"
       serviceSubtitle="KOL Network"
-      serviceDescription="Access our exclusive network of 120+ crypto KOLs and reach 50M+ engaged followers across X, YouTube, and Telegram."
+      serviceDescription="Access our exclusive network of 69+ crypto KOLs and reach 15M+ engaged followers across X, YouTube, and Telegram."
       serviceIcon={Star}
       serviceTags={serviceTags}
       stats={stats}

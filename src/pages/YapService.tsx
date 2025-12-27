@@ -18,9 +18,9 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 600, label: "Yapper Network", suffix: "+" },
-  { value: 10, label: "Total Reach", suffix: "M+" },
-  { value: 50, label: "Campaigns Delivered", suffix: "+" },
+  { value: 150, label: "Yapper Network", suffix: "+" },
+  { value: 3, label: "Total Reach", suffix: "M+" },
+  { value: 12, label: "Campaigns Delivered", suffix: "+" },
   { value: 3, label: "Avg Engagement", suffix: "x" },
 ];
 
@@ -34,7 +34,7 @@ const processSteps: ProcessStep[] = [
   {
     number: "02",
     title: "Campaign Setup",
-    description: "We publish the briefing to our 600+ Yap Circle creators — inviting them to participate based on interest and fit.",
+    description: "We publish the briefing to our 150+ Yap Circle creators — inviting them to participate based on interest and fit.",
     icon: Users,
   },
   {
@@ -64,7 +64,7 @@ const deliverables: Deliverable[] = [
   {
     title: "Creator Coordination",
     items: [
-      "600+ yapper activation",
+      "150+ yapper activation",
       "Content quality review",
       "Posting schedule management",
       "Real-time amplification",
@@ -87,8 +87,8 @@ const faqItems: FAQItem[] = [
     answer: "Yap marketing focuses on creating organic buzz through many smaller creators (yappers) rather than relying on a few large influencers. This creates more authentic engagement and wider reach across different communities.",
   },
   {
-    question: "How do you ensure content quality from 600+ creators?",
-    answer: "We provide clear briefs and guidelines, and our team reviews content before amplification. Creators in our network are vetted for quality and authentic engagement.",
+    question: "How do you ensure content quality from 150+ creators?",
+    answer: "We provide clear briefs and guidelines, and our team reviews content before amplification. Creators in our 150+ network are vetted for quality and authentic engagement.",
   },
   {
     question: "How long does a typical Yap campaign run?",
@@ -229,7 +229,7 @@ const YapService = () => {
       serviceName="Yap Strategy"
       serviceTitle="Yap"
       serviceSubtitle="Strategy"
-      serviceDescription="Amplify your message with 600+ aligned yappers — driving mindshare and organic buzz across Crypto X."
+      serviceDescription="Amplify your message with 150+ aligned yappers — driving mindshare and organic buzz across Crypto X."
       serviceIcon={Volume2}
       serviceTags={serviceTags}
       stats={stats}
@@ -242,7 +242,7 @@ const YapService = () => {
       {/* Creator Network Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader number="01" title="Creator Network" badge="600+ Yappers" />
+          <SectionHeader number="01" title="Creator Network" badge="150+ Yappers" />
 
           <div className="py-16 md:py-20">
             <div className="container mx-auto px-6 lg:px-16">
