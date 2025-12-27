@@ -111,8 +111,8 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
             <img
               src={project.logo}
               alt={project.name}
-              className="w-16 h-16 object-contain filter brightness-0 invert"
-              style={{ filter: `brightness(0) invert(1) drop-shadow(0 0 20px ${project.glowColor}80)` }}
+              className="w-16 h-16 object-contain"
+              style={{ filter: `drop-shadow(0 0 20px ${project.glowColor}80)` }}
             />
             <div 
               className="absolute inset-0 rounded-full blur-xl -z-10 scale-150" 
