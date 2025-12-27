@@ -244,8 +244,8 @@ const YapService = () => {
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="Creator Network" badge="150+ Yappers" />
 
-          <div className="py-12 md:py-16">
-            <div className="container mx-auto px-6 lg:px-16">
+          <div className="py-10 md:py-14">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               {/* Featured Yappers Carousel */}
               <div className="mb-16">
                 <div className="flex items-center justify-between mb-6">

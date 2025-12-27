@@ -178,9 +178,9 @@ const CommunityService = () => {
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="Platform Management" badge="Discord & Telegram" />
           
-          <div className="py-12 md:py-16">
-            <div className="container mx-auto px-6 lg:px-16">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+          <div className="py-10 md:py-14">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-16">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                 {/* Left - Description */}
                 <div>
                   <p className="text-white/60 text-base leading-relaxed mb-8">

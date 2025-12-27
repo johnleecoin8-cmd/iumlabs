@@ -182,8 +182,8 @@ const SEOAdsService = () => {
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="4-Week Program" badge="Growth Journey" />
           
-          <div className="py-12 md:py-16">
-            <div className="container mx-auto px-6 lg:px-16">
+          <div className="py-10 md:py-14">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 {/* Left - Phase Navigation */}
                 <div>
@@ -253,7 +253,7 @@ const SEOAdsService = () => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-8"
+                  className="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8"
                 >
                   <div className="flex items-center gap-3 mb-6">
                     <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">

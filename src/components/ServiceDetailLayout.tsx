@@ -201,7 +201,7 @@ const ServiceDetailLayout = ({
           ))}
 
           {/* Content */}
-          <div className="container mx-auto px-6 lg:px-16 pt-32 pb-16 relative z-10">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-16 pt-32 pb-16 relative z-10">
             <div className="max-w-3xl">
               <h1 className="text-white mb-6">
                 <span className="block text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-[0.95]">
@@ -315,12 +315,12 @@ const ServiceDetailLayout = ({
 
               {/* Right - Content + Stats + CTA */}
               <div className="flex flex-col">
-                <div className="p-8 md:p-12 flex-1 border-b border-white/10">
+                <div className="p-5 sm:p-6 md:p-10 lg:p-12 flex-1 border-b border-white/10">
                   <p className="text-white/60 text-lg leading-relaxed">
                     {aboutText}
                   </p>
                 </div>
-                <div className="p-8 md:p-12">
+                <div className="p-5 sm:p-6 md:p-10 lg:p-12">
                   <div className="grid grid-cols-2 gap-8 mb-8">
                     {stats.map((stat, index) => (
                       <div key={index}>
@@ -405,7 +405,7 @@ const ServiceDetailLayout = ({
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     whileHover={{ y: -4 }}
-                    className={`group p-8 md:p-10 transition-all duration-300 relative overflow-hidden ${
+                    className={`group p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-300 relative overflow-hidden ${
                       !isLast ? "lg:border-r" : ""
                     } ${isOdd ? "md:border-l lg:border-l-0" : ""} ${
                       index < 2 ? "border-b lg:border-b-0" : ""
