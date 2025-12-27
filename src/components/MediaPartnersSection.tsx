@@ -28,18 +28,18 @@ const MediaPartnersSection = () => {
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0A0A0A] to-transparent z-10" />
         
         {/* Marquee with CSS animation */}
-        <div className="flex items-center gap-12 py-6 logo-marquee-slow">
+        <div className="flex items-center gap-16 py-10 logo-marquee-slow">
           {duplicatedLogos.map((media, index) => (
             <div
               key={`${media.name}-${index}`}
-              className="flex items-center gap-3 flex-shrink-0"
+              className="flex items-center gap-4 flex-shrink-0"
             >
               <img
                 src={media.logo}
                 alt={media.name}
-                className="w-6 h-6 object-contain rounded-full opacity-60"
+                className="w-8 h-8 object-contain rounded-full opacity-80"
               />
-              <span className="text-white/40 text-sm font-medium whitespace-nowrap">
+              <span className="text-white/60 text-base font-medium whitespace-nowrap">
                 {media.name}
               </span>
             </div>

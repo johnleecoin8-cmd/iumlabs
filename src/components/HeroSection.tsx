@@ -53,10 +53,10 @@ const clientLogos = [
 ];
 
 const stats = [
-  { value: 12, label: "Projects Launched", suffix: "+" },
-  { value: 69, label: "KOL Network", suffix: "+" },
+  { value: 18, label: "Projects Launched", suffix: "+" },
+  { value: 100, label: "KOL Network", suffix: "+" },
   { value: 3, label: "Token Sales", prefix: "$", suffix: "M+" },
-  { value: 19, label: "AMA Hosting", suffix: "+" },
+  { value: 48, label: "Events Hosted", suffix: "+" },
 ];
 
 const HeroSection = () => {

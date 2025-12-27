@@ -92,7 +92,7 @@ const Index = () => {
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
-              <h2 className="text-lg md:text-xl font-medium text-white/50">Gallery</h2>
+              <h2 className="text-lg md:text-xl font-medium text-white">Gallery</h2>
             </div>
             <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Campaign Archive</span>
           </div>
@@ -106,7 +106,7 @@ const Index = () => {
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
-              <h2 className="text-lg md:text-xl font-medium text-white/50">Media Partners</h2>
+              <h2 className="text-lg md:text-xl font-medium text-white">Media Partners</h2>
             </div>
             <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">As Featured In</span>
           </div>

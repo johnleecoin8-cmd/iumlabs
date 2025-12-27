@@ -59,7 +59,7 @@ const FilmstripGallerySection = () => {
 
         {/* Right: Info Panel */}
         <div className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center">
-          <h2 className="text-xl md:text-2xl font-bold text-white/50 mb-3">
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-3">
             Campaign Gallery
           </h2>
           <p className="text-white/50 leading-relaxed mb-5 text-sm">
