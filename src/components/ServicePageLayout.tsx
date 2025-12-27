@@ -1,6 +1,6 @@
-import { useEffect, useState, ReactNode } from "react";
+import { useEffect, useState, ReactNode, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Calendar, ArrowRight, ChevronDown, LucideIcon, ArrowLeft, Check, ChevronRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -8,6 +8,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import SectionHeader from "@/components/SectionHeader";
 import { useCountUp } from "@/hooks/useCountUp";
+import { ServicePageSkeleton } from "@/components/ui/skeleton-loader";
 import {
   Accordion,
   AccordionContent,
@@ -174,9 +175,20 @@ const ServicePageLayout = ({
 }: ServicePageLayoutProps) => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const heroRef = useRef<HTMLDivElement>(null);
+  
+  // Parallax scroll effects
+  const { scrollY } = useScroll();
+  const heroY = useTransform(scrollY, [0, 500], [0, 150]);
+  const heroOpacity = useTransform(scrollY, [0, 400], [1, 0.3]);
+  const contentY = useTransform(scrollY, [0, 500], [0, -50]);
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 800);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      setIsVisible(true);
+    }, 600);
     return () => clearTimeout(timer);
   }, []);
 
@@ -218,21 +230,32 @@ const ServicePageLayout = ({
   const faqSectionNum = faqItems ? getNextSectionNumber() : null; // FAQ always after More Services
   const contactSectionNum = getNextSectionNumber();
 
+  // Show loading skeleton
+  if (isLoading) {
+    return <ServicePageSkeleton />;
+  }
+
   return (
     <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
       {/* Hero Section */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]" id="hero">
-        <div className="relative min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
-          {/* Background Layer - Video */}
-          <div className="absolute inset-0 overflow-hidden">
+        <div 
+          ref={heroRef}
+          className="relative min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl"
+        >
+          {/* Background Layer - Video with Parallax */}
+          <motion.div 
+            className="absolute inset-0 overflow-hidden"
+            style={{ y: heroY }}
+          >
             <video
               autoPlay
               muted
               loop
               playsInline
-              className="absolute inset-0 w-full h-full object-cover"
+              className="absolute inset-0 w-full h-full object-cover scale-110"
               style={{ filter: "brightness(0.35)" }}
               onLoadedMetadata={(e) => {
                 e.currentTarget.currentTime = 0;
@@ -249,7 +272,7 @@ const ServicePageLayout = ({
               className="absolute inset-0 opacity-10"
               style={{ background: `radial-gradient(ellipse at 50% 0%, ${accentColor} 0%, transparent 60%)` }}
             />
-          </div>
+          </motion.div>
 
           {/* Back Button */}
           <motion.button
@@ -288,8 +311,11 @@ const ServicePageLayout = ({
             );
           })}
 
-          {/* Main Content - Centered */}
-          <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
+          {/* Main Content - Centered with Parallax */}
+          <motion.div 
+            className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6"
+            style={{ y: contentY, opacity: heroOpacity }}
+          >
             <div className="max-w-7xl mx-auto text-center">
               {/* Service Badge */}
               <motion.div
@@ -354,7 +380,7 @@ const ServicePageLayout = ({
                 </CalendlyButton>
               </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Stats Section */}
           <div className="relative z-10 py-6 sm:py-10">
