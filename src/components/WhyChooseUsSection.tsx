@@ -1,40 +1,22 @@
-import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Logo3D from './Logo3D';
+
 const WhyChooseUsSection = () => {
-  return <section className="bg-background">
+  return (
+    <section className="bg-background">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* Left: 3D Logo */}
-        <motion.div initial={{
-        opacity: 0
-      }} whileInView={{
-        opacity: 1
-      }} viewport={{
-        once: true
-      }} transition={{
-        duration: 0.6
-      }} className="lg:border-r border-border">
+        <div className="lg:border-r border-border">
           <div className="aspect-[4/3] overflow-hidden bg-background">
             <Logo3D />
           </div>
-        </motion.div>
+        </div>
 
         {/* Right: Content */}
         <div className="flex flex-col">
           {/* About Text */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.6,
-          delay: 0.1
-        }} className="p-6 md:p-8 flex-1 flex flex-col justify-center border-b border-border">
+          <div className="p-6 md:p-8 flex-1 flex flex-col justify-center border-b border-border">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
               About Us
             </h2>
@@ -44,12 +26,14 @@ const WhyChooseUsSection = () => {
             <p className="text-foreground font-medium text-sm">
               Founded by former executives from Binance and KuCoin
             </p>
-          </motion.div>
+          </div>
 
           {/* Stats + CTA */}
           
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default WhyChooseUsSection;

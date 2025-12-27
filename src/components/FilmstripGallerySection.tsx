@@ -1,5 +1,4 @@
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 // Import actual campaign images from assets
@@ -37,14 +36,9 @@ const FilmstripGallerySection = () => {
         <div className="w-full lg:w-2/3 lg:border-r border-white/10">
           <div className="grid grid-cols-2 md:grid-cols-3">
             {campaignImages.slice(0, 9).map((image, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                whileHover={{ scale: 1.02, zIndex: 10 }}
-                className={`group relative aspect-[6/5] overflow-hidden border-r border-b border-white/10 cursor-pointer ${
+                className={`group relative aspect-[6/5] overflow-hidden border-r border-b border-white/10 cursor-pointer hover:scale-[1.02] hover:z-10 transition-transform duration-300 ${
                   index % 3 === 2 ? "border-r-0" : ""
                 }`}
               >
@@ -58,19 +52,13 @@ const FilmstripGallerySection = () => {
                   <p className="text-white font-semibold text-lg">{image.title}</p>
                   <p className="text-white/70 text-sm">{image.subtitle}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
 
         {/* Right: Info Panel */}
-        <motion.div
-          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center">
           <h2 className="text-xl md:text-2xl font-bold text-white/50 mb-3">
             Campaign Gallery
           </h2>
@@ -100,7 +88,7 @@ const FilmstripGallerySection = () => {
             View all projects
             <ArrowRight className="w-4 h-4" />
           </Link>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

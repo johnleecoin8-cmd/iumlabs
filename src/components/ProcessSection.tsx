@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { Search, Target, Rocket, TrendingUp } from "lucide-react";
 
 const phases = [
@@ -34,12 +33,8 @@ const ProcessSection = () => {
           const isOdd = index % 2 === 1;
           
           return (
-            <motion.div
+            <div
               key={phase.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
               className={`group p-5 sm:p-6 md:p-8 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
                 !isLast ? "lg:border-r border-border" : ""
               } ${isOdd ? "md:border-l lg:border-l-0 border-border" : ""} ${
@@ -60,7 +55,7 @@ const ProcessSection = () => {
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {phase.description}
               </p>
-            </motion.div>
+            </div>
           );
         })}
       </div>

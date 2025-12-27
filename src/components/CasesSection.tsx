@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -92,12 +91,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
   const isRightColumn = index % 2 === 1;
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
-    >
+    <div>
       <Link
         to={`/projects/${slug}`}
         onClick={() => window.scrollTo(0, 0)}
@@ -137,7 +131,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 };
 
@@ -155,13 +149,7 @@ const CasesSection = () => {
         </div>
 
         {/* Right: Sticky Info Panel */}
-        <motion.div
-          className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center"
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
             Our Cases
           </h2>
@@ -202,7 +190,7 @@ const CasesSection = () => {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
