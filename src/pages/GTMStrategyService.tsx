@@ -165,8 +165,8 @@ const OfflineEventService = () => {
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="Event Planning Journey" badge="4-Week Program" />
           
-          <div className="py-12 md:py-16">
-            <div className="container mx-auto px-6 lg:px-16">
+          <div className="py-10 md:py-14">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                 {/* Left - Description */}
                 <div>
@@ -193,7 +193,7 @@ const OfflineEventService = () => {
                       onMouseEnter={() => setActivePhase(index)}
                       onMouseLeave={() => setActivePhase(null)}
                       whileHover={{ scale: 1.02, y: -4 }}
-                      className="relative bg-white/5 border border-white/10 rounded-xl p-5 cursor-pointer transition-all duration-300 hover:border-white/20 group overflow-hidden"
+                      className="relative bg-white/5 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer transition-all duration-300 hover:border-white/20 group overflow-hidden"
                       style={{
                         backgroundColor: activePhase === index ? `${ACCENT_COLOR}10` : undefined,
                         borderColor: activePhase === index ? `${ACCENT_COLOR}40` : undefined,

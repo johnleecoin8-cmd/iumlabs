@@ -158,8 +158,8 @@ const InfluencerService = () => {
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="KOL Network" badge="Featured Creators" />
 
-          <div className="py-12 md:py-16">
-            <div className="container mx-auto px-6 lg:px-16">
+          <div className="py-10 md:py-14">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               {/* Region Filter */}
               <div className="flex flex-wrap justify-center gap-2 mb-6">
                 {regionData.map((region) => (

@@ -60,7 +60,7 @@ const Navbar = () => {
 
       {/* Top Panel Menu - slides from top */}
       <div
-        className={`fixed top-0 left-0 right-0 h-[85vh] sm:h-[75vh] lg:h-[60vh] z-[101] bg-gradient-to-b from-background via-background to-primary/5 transition-all duration-500 ease-out ${
+        className={`fixed top-0 left-0 right-0 h-[70vh] sm:h-[65vh] lg:h-[55vh] z-[101] bg-gradient-to-b from-background via-background to-primary/5 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] ${
           isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         }`}
       >
@@ -90,8 +90,8 @@ const Navbar = () => {
           </div>
 
           {/* Content - flex-1 to fill remaining space */}
-          <div className="flex-1 container mx-auto px-6 py-4 lg:py-8 overflow-y-auto">
-            <div className="h-full grid md:grid-cols-2 gap-8 lg:gap-16 content-center">
+          <div className="flex-1 container mx-auto px-4 sm:px-6 py-3 lg:py-6 overflow-y-auto overscroll-contain scrollbar-thin">
+            <div className="h-full grid md:grid-cols-2 gap-6 lg:gap-12 content-center">
               {/* Navigation Links */}
               <div className="flex flex-col justify-center">
                 <span
@@ -102,13 +102,13 @@ const Navbar = () => {
                 >
                   Navigation
                 </span>
-                <nav className="space-y-2 lg:space-y-3">
+                <nav className="space-y-1.5 sm:space-y-2 md:space-y-3">
                   {navLinks.map((link, index) => (
                     <div key={link.to}>
                       <Link
                         to={link.to}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-all duration-500 ${
+                        className={`block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-foreground hover:text-primary transition-all duration-400 min-h-[44px] flex items-center ${
                           isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                         }`}
                         style={{ transitionDelay: isMenuOpen ? `${300 + index * 80}ms` : "0ms" }}
@@ -122,7 +122,7 @@ const Navbar = () => {
                     <Link
                       to="/contact"
                       onClick={() => setIsMenuOpen(false)}
-                      className={`block text-2xl sm:text-3xl lg:text-5xl font-bold text-foreground hover:text-primary transition-all duration-500 ${
+                      className={`block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-foreground hover:text-primary transition-all duration-400 min-h-[44px] flex items-center ${
                         isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                       }`}
                       style={{
@@ -136,7 +136,7 @@ const Navbar = () => {
               </div>
 
               {/* Contact Info */}
-              <div className="flex flex-col justify-center space-y-4 lg:space-y-8">
+              <div className="flex flex-col justify-center space-y-3 sm:space-y-4 md:space-y-6">
                 <div
                   className={`transition-all duration-500 ${
                     isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"

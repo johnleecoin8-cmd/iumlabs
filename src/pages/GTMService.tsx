@@ -220,7 +220,7 @@ const GTMService = () => {
                         <motion.button
                           key={phase.week}
                           onClick={() => setActivePhase(index)}
-                          className={`w-full text-left p-3 rounded-xl border transition-all duration-300 ${
+                          className={`w-full text-left p-3 sm:p-4 rounded-xl border transition-all duration-300 ${
                             isActive 
                               ? 'bg-emerald-500/10 border-emerald-500/30' 
                               : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
@@ -255,7 +255,7 @@ const GTMService = () => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-6"
+                  className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 md:p-6"
                 >
                   <div className="flex items-center gap-3 mb-5">
                     <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">

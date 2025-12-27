@@ -99,17 +99,17 @@ const PRService = () => {
         <div className="border-t border-white/10 relative z-10">
           <SectionHeader number="01" title="Media Network" badge="Global & Korea" />
           
-          <div className="py-12 md:py-16">
-            <div className="container mx-auto px-6 lg:px-16">
+          <div className="py-10 md:py-14">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               <div className="max-w-4xl mx-auto text-center">
                 <p className="text-white/70 text-base md:text-lg leading-relaxed mb-12">
                   We maintain direct relationships with <span className="text-white font-semibold">20+ media outlets</span> across global and Korean markets. Our network ensures your announcements reach the right audiences with maximum impact.
                 </p>
                 
                 {/* Stats Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
                   {/* Media Partners */}
-                  <div className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all duration-300">
+                  <div className="group relative p-4 sm:p-5 md:p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all duration-300">
                     <div 
                       className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: `linear-gradient(135deg, ${ACCENT_COLOR}10 0%, transparent 50%)` }}
@@ -127,7 +127,7 @@ const PRService = () => {
                   </div>
                   
                   {/* Articles Published */}
-                  <div className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all duration-300">
+                  <div className="group relative p-4 sm:p-5 md:p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all duration-300">
                     <div 
                       className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: `linear-gradient(135deg, ${ACCENT_COLOR}10 0%, transparent 50%)` }}
@@ -145,7 +145,7 @@ const PRService = () => {
                   </div>
                   
                   {/* Total Reach */}
-                  <div className="group relative p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all duration-300">
+                  <div className="group relative p-4 sm:p-5 md:p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-white/20 transition-all duration-300">
                     <div 
                       className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                       style={{ background: `linear-gradient(135deg, ${ACCENT_COLOR}10 0%, transparent 50%)` }}

@@ -344,7 +344,7 @@ const ServicePageLayout = ({
           {/* Stats Section */}
           <div className="relative z-10 py-4 sm:py-6">
             <div className="container mx-auto px-4 sm:px-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                 {stats.map((stat, index) => (
                   <StatItem 
                     key={index}
@@ -465,7 +465,7 @@ const ServicePageLayout = ({
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     whileHover={{ y: -4 }}
-                    className={`group p-6 md:p-8 transition-all duration-300 hover:bg-white/5 ${
+                    className={`group p-4 sm:p-6 md:p-8 transition-all duration-300 hover:bg-white/5 ${
                       !isLast ? "lg:border-r border-white/10" : ""
                     } ${isOdd ? "md:border-l lg:border-l-0 border-white/10" : ""} ${
                       index < 2 ? "border-b lg:border-b-0 border-white/10" : ""
@@ -539,7 +539,7 @@ const ServicePageLayout = ({
               >
                 <Link
                   to={`/services/${service.slug}`}
-                  className="group relative block p-8 md:p-10 h-full transition-all duration-500 border-b sm:border-b-0 sm:border-r border-white/10 last:border-r-0 overflow-hidden"
+                  className="group relative block p-5 sm:p-6 md:p-8 lg:p-10 h-full transition-all duration-500 border-b sm:border-b-0 sm:border-r border-white/10 last:border-r-0 overflow-hidden"
                 >
                   {/* Hover background gradient */}
                   <div 
@@ -597,7 +597,7 @@ const ServicePageLayout = ({
             <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
             
             <div className="py-12 md:py-16">
-              <div className="container mx-auto px-6 lg:px-16 max-w-4xl">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-4xl">
                 <Accordion type="single" collapsible className="space-y-3">
                   {faqItems.map((item, index) => (
                     <motion.div
@@ -607,9 +607,9 @@ const ServicePageLayout = ({
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <AccordionItem 
+                        <AccordionItem 
                         value={`item-${index}`}
-                        className="border border-white/10 rounded-xl bg-white/5 px-5 overflow-hidden"
+                        className="border border-white/10 rounded-xl bg-white/5 px-4 sm:px-5 overflow-hidden"
                       >
                         <AccordionTrigger className="text-left text-white hover:no-underline py-4 text-sm">
                           <span className="flex items-center gap-3">
