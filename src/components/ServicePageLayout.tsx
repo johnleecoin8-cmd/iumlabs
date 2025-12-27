@@ -99,8 +99,8 @@ interface ServicePageLayoutProps {
   accentColor: string;
   videoSrc?: string;
   
-  // Process Section
-  processSteps: ProcessStep[];
+  // Process Section (optional - can be replaced by custom children)
+  processSteps?: ProcessStep[];
   
   // Deliverables Section (optional)
   deliverables?: Deliverable[];
@@ -200,7 +200,7 @@ const ServicePageLayout = ({
   const otherServices = allServices.filter(s => s.slug !== currentSlug);
 
   // Calculate section numbers dynamically
-  // Order: Children (custom sections) -> Deliverables -> Process -> More Services -> FAQ -> Contact
+  // Order: Children (custom sections) -> Deliverables -> Process (if exists) -> More Services -> FAQ -> Contact
   let sectionNumber = 1;
   const getNextSectionNumber = () => {
     const num = sectionNumber.toString().padStart(2, '0');
@@ -212,9 +212,9 @@ const ServicePageLayout = ({
   sectionNumber = 1;
   const childrenSectionNum = children ? getNextSectionNumber() : null;
   const deliverablesSectionNum = deliverables ? getNextSectionNumber() : null;
-  const processSectionNum = getNextSectionNumber();
+  const processSectionNum = processSteps && processSteps.length > 0 ? getNextSectionNumber() : null;
   const moreServicesSectionNum = getNextSectionNumber();
-  const faqSectionNum = faqItems ? getNextSectionNumber() : null; // FAQ always after More Services
+  const faqSectionNum = faqItems ? getNextSectionNumber() : null;
   const contactSectionNum = getNextSectionNumber();
 
   return (
@@ -403,13 +403,13 @@ const ServicePageLayout = ({
 
       {/* Deliverables Section */}
       {deliverables && deliverables.length > 0 && (
-        <section className="scroll-reveal bg-[#0F0F0F]">
+        <section className="scroll-reveal bg-[#121212]">
           <div className="border-t border-white/10">
             <SectionHeader number={deliverablesSectionNum!} title="What You Get" badge="Deliverables" />
             
-            <div className="py-16 md:py-20">
+            <div className="py-12 md:py-16">
               <div className="container mx-auto px-6 lg:px-16">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                   {deliverables.map((deliverable, index) => (
                     <motion.div
                       key={deliverable.title}
@@ -417,20 +417,20 @@ const ServicePageLayout = ({
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: index * 0.1 }}
-                      className="p-6 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all"
+                      className="p-5 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all"
                     >
-                      <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                      <h3 className="text-base font-semibold text-white mb-3 flex items-center gap-2">
                         <div 
                           className="w-2 h-2 rounded-full"
                           style={{ backgroundColor: accentColor }}
                         />
                         {deliverable.title}
                       </h3>
-                      <ul className="space-y-3">
+                      <ul className="space-y-2">
                         {deliverable.items.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-3 text-white/60 text-sm">
+                          <li key={idx} className="flex items-start gap-2 text-white/60 text-sm">
                             <Check 
-                              className="w-4 h-4 mt-0.5 flex-shrink-0" 
+                              className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" 
                               style={{ color: accentColor }} 
                             />
                             {item}
@@ -446,56 +446,58 @@ const ServicePageLayout = ({
         </section>
       )}
 
-      {/* Process Section */}
-      <section className="scroll-reveal bg-[#0F0F0F]" id="process">
-        <div className="border-t border-white/10">
-          <SectionHeader number={processSectionNum} title="Process" badge="How We Work" />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-            {processSteps.map((step, index) => {
-              const Icon = step.icon;
-              const isLast = index === processSteps.length - 1;
-              const isOdd = index % 2 === 1;
-              
-              return (
-                <motion.div
-                  key={step.number}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  whileHover={{ y: -4 }}
-                  className={`group p-8 md:p-10 transition-all duration-300 hover:bg-white/5 ${
-                    !isLast ? "lg:border-r border-white/10" : ""
-                  } ${isOdd ? "md:border-l lg:border-l-0 border-white/10" : ""} ${
-                    index < 2 ? "border-b lg:border-b-0 border-white/10" : ""
-                  }`}
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <span 
-                      className="text-xs font-mono tracking-widest"
-                      style={{ color: accentColor }}
-                    >
-                      {step.number}
-                    </span>
-                    <Icon 
-                      className="w-6 h-6 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" 
-                      strokeWidth={1.5} 
-                    />
-                  </div>
-                  
-                  <h3 className="text-lg font-semibold text-white mb-3">
-                    {step.title}
-                  </h3>
-                  
-                  <p className="text-white/50 text-sm leading-relaxed">
-                    {step.description}
-                  </p>
-                </motion.div>
-              );
-            })}
+      {/* Process Section - Conditional */}
+      {processSteps && processSteps.length > 0 && (
+        <section className="scroll-reveal bg-[#0F0F0F]" id="process">
+          <div className="border-t border-white/10">
+            <SectionHeader number={processSectionNum!} title="Process" badge="How We Work" />
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+              {processSteps.map((step, index) => {
+                const Icon = step.icon;
+                const isLast = index === processSteps.length - 1;
+                const isOdd = index % 2 === 1;
+                
+                return (
+                  <motion.div
+                    key={step.number}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    whileHover={{ y: -4 }}
+                    className={`group p-6 md:p-8 transition-all duration-300 hover:bg-white/5 ${
+                      !isLast ? "lg:border-r border-white/10" : ""
+                    } ${isOdd ? "md:border-l lg:border-l-0 border-white/10" : ""} ${
+                      index < 2 ? "border-b lg:border-b-0 border-white/10" : ""
+                    }`}
+                  >
+                    <div className="flex items-center gap-3 mb-3">
+                      <span 
+                        className="text-xs font-mono tracking-widest"
+                        style={{ color: accentColor }}
+                      >
+                        {step.number}
+                      </span>
+                      <Icon 
+                        className="w-5 h-5 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" 
+                        strokeWidth={1.5} 
+                      />
+                    </div>
+                    
+                    <h3 className="text-base font-semibold text-white mb-2">
+                      {step.title}
+                    </h3>
+                    
+                    <p className="text-white/50 text-sm leading-relaxed">
+                      {step.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* More Services Section */}
       <section className="scroll-reveal bg-[#121212]">
@@ -588,15 +590,15 @@ const ServicePageLayout = ({
         </div>
       </section>
 
-      {/* FAQ Section - Always last before Contact */}
+      {/* FAQ Section */}
       {faqItems && faqItems.length > 0 && (
         <section className="scroll-reveal bg-[#0F0F0F]">
           <div className="border-t border-white/10">
             <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
             
-            <div className="py-16 md:py-20">
+            <div className="py-12 md:py-16">
               <div className="container mx-auto px-6 lg:px-16 max-w-4xl">
-                <Accordion type="single" collapsible className="space-y-4">
+                <Accordion type="single" collapsible className="space-y-3">
                   {faqItems.map((item, index) => (
                     <motion.div
                       key={index}
@@ -607,9 +609,9 @@ const ServicePageLayout = ({
                     >
                       <AccordionItem 
                         value={`item-${index}`}
-                        className="border border-white/10 rounded-xl bg-white/5 px-6 overflow-hidden"
+                        className="border border-white/10 rounded-xl bg-white/5 px-5 overflow-hidden"
                       >
-                        <AccordionTrigger className="text-left text-white hover:no-underline py-5">
+                        <AccordionTrigger className="text-left text-white hover:no-underline py-4 text-sm">
                           <span className="flex items-center gap-3">
                             <ChevronRight 
                               className="w-4 h-4 flex-shrink-0 transition-transform" 
@@ -618,7 +620,7 @@ const ServicePageLayout = ({
                             {item.question}
                           </span>
                         </AccordionTrigger>
-                        <AccordionContent className="text-white/60 pb-5 pl-7">
+                        <AccordionContent className="text-white/60 text-sm pb-4 pl-7">
                           {item.answer}
                         </AccordionContent>
                       </AccordionItem>
@@ -632,7 +634,7 @@ const ServicePageLayout = ({
       )}
 
       {/* Contact Section */}
-      <section className="scroll-reveal bg-[#0F0F0F]" id="contact">
+      <section className="scroll-reveal bg-[#121212]" id="contact">
         <ContactFormSection sectionNumber={contactSectionNum} />
       </section>
 

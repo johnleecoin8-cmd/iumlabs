@@ -1,9 +1,8 @@
-import { Rocket, Target, Compass, LineChart, Users, TrendingUp, Calendar, FileText, Zap, CheckCircle, Building2, Shield, Scale, Landmark } from "lucide-react";
+import { Rocket, Target, Compass, TrendingUp, CheckCircle, Building2, Shield, Scale, Landmark } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
+import ServicePageLayout, { ServiceStat, ServiceTag, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-import ClientLogosSection from "@/components/ClientLogosSection";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 const ACCENT_COLOR = "#10B981";
@@ -104,33 +103,6 @@ const stats: ServiceStat[] = [
   { value: 95, label: "Client Retention", suffix: "%" },
 ];
 
-const processSteps: ProcessStep[] = [
-  {
-    number: "01",
-    title: "Discovery",
-    description: "Deep-dive into your project, tokenomics, target audience, and Korean market fit assessment.",
-    icon: Compass,
-  },
-  {
-    number: "02",
-    title: "Strategy",
-    description: "Build comprehensive GTM roadmap with channel mix, messaging framework, and launch timeline.",
-    icon: Target,
-  },
-  {
-    number: "03",
-    title: "Preparation",
-    description: "Set up partnerships, localize content, build community infrastructure, and prepare media outreach.",
-    icon: FileText,
-  },
-  {
-    number: "04",
-    title: "Launch",
-    description: "Execute coordinated campaign across all channels with real-time monitoring and optimization.",
-    icon: Rocket,
-  },
-];
-
 const deliverables: Deliverable[] = [
   {
     title: "Regulatory & Listing Analysis",
@@ -198,58 +170,48 @@ const GTMService = () => {
       serviceTags={serviceTags}
       stats={stats}
       accentColor={ACCENT_COLOR}
-      processSteps={processSteps}
       deliverables={deliverables}
       faqItems={faqItems}
       currentSlug="gtm"
     >
-      {/* 4-Week Program Journey Section with Integrated Regulatory */}
-      <section className="scroll-reveal bg-[#0F0F0F]">
+      {/* 4-Week Program Journey Section */}
+      <section className="scroll-reveal">
         <div className="border-t border-white/10">
           <SectionHeader number="01" title="4-Week Program" badge="GTM Journey" />
           
-          <div className="py-16 md:py-20">
+          <div className="py-12 md:py-16">
             <div className="container mx-auto px-6 lg:px-16">
-              {/* Regulatory Expertise - Compact Row */}
-              <div className="mb-12">
-                <h3 className="text-sm font-medium text-white/50 uppercase tracking-wider mb-4">Regulatory Expertise</h3>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {/* Regulatory Expertise - Compact Badges */}
+              <div className="mb-10">
+                <div className="flex flex-wrap gap-2">
                   {regulatoryFramework.map((item, idx) => {
                     const Icon = item.icon;
                     return (
                       <motion.div
                         key={item.title}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: idx * 0.05 }}
-                        className="group bg-white/5 border border-white/10 rounded-lg p-3 hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-300 cursor-default"
+                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full"
                       >
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
-                            <Icon className="w-4 h-4 text-emerald-400" />
-                          </div>
-                          <div className="min-w-0">
-                            <h4 className="font-medium text-white text-sm truncate">{item.title}</h4>
-                            <p className="text-white/40 text-xs truncate group-hover:text-white/60 transition-colors">{item.description}</p>
-                          </div>
-                        </div>
+                        <Icon className="w-3.5 h-3.5 text-emerald-400" />
+                        <span className="text-xs font-medium text-emerald-400">{item.title}</span>
                       </motion.div>
                     );
                   })}
                 </div>
               </div>
               
-              
               {/* 4-Week Journey Content */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
                 {/* Left - Phase Navigation */}
                 <div>
-                  <p className="text-white/60 text-lg leading-relaxed mb-8">
+                  <p className="text-white/60 text-base leading-relaxed mb-6">
                     A 4-week program from market analysis to successful launch, with clear deliverables at each stage.
                   </p>
                   
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {journeyPhases.map((phase, index) => {
                       const Icon = phase.icon;
                       const isActive = activePhase === index;
@@ -258,7 +220,7 @@ const GTMService = () => {
                         <motion.button
                           key={phase.week}
                           onClick={() => setActivePhase(index)}
-                          className={`w-full text-left p-4 rounded-xl border transition-all duration-300 ${
+                          className={`w-full text-left p-3 rounded-xl border transition-all duration-300 ${
                             isActive 
                               ? 'bg-emerald-500/10 border-emerald-500/30' 
                               : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
@@ -266,17 +228,17 @@ const GTMService = () => {
                           whileHover={{ x: 4 }}
                           whileTap={{ scale: 0.98 }}
                         >
-                          <div className="flex items-center gap-4">
-                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
+                          <div className="flex items-center gap-3">
+                            <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${
                               isActive ? 'bg-emerald-500/20' : 'bg-white/10'
                             }`}>
-                              <Icon className={`w-5 h-5 ${isActive ? 'text-emerald-400' : 'text-white/60'}`} />
+                              <Icon className={`w-4 h-4 ${isActive ? 'text-emerald-400' : 'text-white/60'}`} />
                             </div>
                             <div>
                               <span className={`text-xs font-medium ${isActive ? 'text-emerald-400' : 'text-white/40'}`}>
                                 {phase.week}
                               </span>
-                              <h4 className={`font-semibold ${isActive ? 'text-white' : 'text-white/70'}`}>
+                              <h4 className={`text-sm font-semibold ${isActive ? 'text-white' : 'text-white/70'}`}>
                                 {phase.title}
                               </h4>
                             </div>
@@ -293,40 +255,40 @@ const GTMService = () => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-8"
+                  className="bg-white/5 border border-white/10 rounded-2xl p-6"
                 >
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
                       {(() => {
                         const Icon = journeyPhases[activePhase].icon;
-                        return <Icon className="w-6 h-6 text-emerald-400" />;
+                        return <Icon className="w-5 h-5 text-emerald-400" />;
                       })()}
                     </div>
                     <div>
                       <span className="text-xs text-emerald-400 font-medium">{journeyPhases[activePhase].week}</span>
-                      <h3 className="text-xl font-bold text-white">{journeyPhases[activePhase].title}</h3>
+                      <h3 className="text-lg font-bold text-white">{journeyPhases[activePhase].title}</h3>
                     </div>
                   </div>
 
-                  <div className="mb-6">
-                    <h4 className="text-sm font-medium text-white/60 mb-3">Activities</h4>
-                    <ul className="space-y-2">
+                  <div className="mb-5">
+                    <h4 className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2">Activities</h4>
+                    <ul className="space-y-1.5">
                       {journeyPhases[activePhase].activities.map((activity, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-white/80">
-                          <CheckCircle className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" />
+                        <li key={idx} className="flex items-start gap-2 text-white/70">
+                          <CheckCircle className="w-3.5 h-3.5 text-emerald-400 mt-0.5 flex-shrink-0" />
                           <span className="text-sm">{activity}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="pt-6 border-t border-white/10">
-                    <h4 className="text-sm font-medium text-white/60 mb-3">Deliverables</h4>
+                  <div className="pt-5 border-t border-white/10">
+                    <h4 className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2">Deliverables</h4>
                     <div className="flex flex-wrap gap-2">
                       {journeyPhases[activePhase].deliverables.map((deliverable, idx) => (
                         <span 
                           key={idx}
-                          className="px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium rounded-lg"
+                          className="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium rounded-lg"
                         >
                           {deliverable}
                         </span>
@@ -338,15 +300,6 @@ const GTMService = () => {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Client Logos Section */}
-      <section className="bg-[#0A0A0A] border-t border-white/10">
-        <ClientLogosSection 
-          title="GTM Success Stories"
-          subtitle="Projects we've launched in Korea"
-          accentColor={ACCENT_COLOR}
-        />
       </section>
     </ServicePageLayout>
   );
