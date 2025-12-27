@@ -113,30 +113,15 @@ const ProjectDetail = () => {
         {/* Hero Section */}
         <ProjectHero project={project} />
 
-        {/* Overview Section */}
-        <div className="py-6 px-4 sm:px-8" style={{ backgroundColor: project.glowColor }}>
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-              {project.shortServices && project.shortServices.length > 0 ? (
-                project.shortServices.map((service, i) => (
-                  <span key={i} className="text-black text-sm font-bold uppercase tracking-widest flex items-center gap-3">
-                    {i > 0 && <span className="w-1.5 h-1.5 rounded-full bg-black/40" />}
-                    {service}
-                  </span>
-                ))
-              ) : project.services && project.services.length > 0 ? (
-                project.services.map((service, i) => (
-                  <span key={i} className="text-black text-sm font-bold uppercase tracking-widest flex items-center gap-3">
-                    {i > 0 && <span className="w-1.5 h-1.5 rounded-full bg-black/40" />}
-                    {service}
-                  </span>
-                ))
-              ) : (
-                <span className="text-black text-sm font-bold uppercase tracking-widest">
-                  {project.category}
-                </span>
-              )}
-            </div>
+        {/* Key Result Marquee */}
+        <div className="py-4 overflow-hidden relative" style={{ backgroundColor: project.glowColor }}>
+          <div className="flex animate-marquee whitespace-nowrap relative">
+            {[...Array(10)].map((_, i) => (
+              <span key={i} className="mx-8 text-black text-sm font-bold uppercase tracking-widest flex items-center gap-4">
+                <span className="w-2 h-2 rounded-full bg-black/30" />
+                {project.result}
+              </span>
+            ))}
           </div>
         </div>
 
