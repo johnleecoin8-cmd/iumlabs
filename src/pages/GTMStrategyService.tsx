@@ -3,6 +3,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
+import ClientLogosSection from "@/components/ClientLogosSection";
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 const ACCENT_COLOR = "#10B981";
@@ -262,6 +263,16 @@ const OfflineEventService = () => {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Client Logos Section */}
+      <section className="bg-[#0A0A0A] border-t border-white/10">
+        <ClientLogosSection 
+          title="Events We've Hosted"
+          subtitle="Memorable Web3 experiences in Korea"
+          serviceFilter="events"
+          accentColor={ACCENT_COLOR}
+        />
       </section>
     </ServicePageLayout>
   );
