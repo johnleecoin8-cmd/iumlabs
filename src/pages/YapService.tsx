@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Volume2, Users, Zap, FileText, Target } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
@@ -267,47 +266,41 @@ const YapService = () => {
                 </div>
                 
                 <div className="relative overflow-hidden">
-                  <AnimatePresence mode="wait">
-                    <motion.a
-                      key={featuredIndex}
-                      href={`https://x.com/${featuredYappers[featuredIndex].handle.replace('@', '')}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      initial={{ opacity: 0, x: 50 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -50 }}
-                      transition={{ duration: 0.3 }}
-                      className="flex items-center gap-6 p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-cyan-500/50 transition-all block"
+                  <a
+                    key={featuredIndex}
+                    href={`https://x.com/${featuredYappers[featuredIndex].handle.replace('@', '')}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-6 p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-cyan-500/50 transition-all block"
+                  >
+                    <div 
+                      className="w-20 h-20 rounded-full overflow-hidden border-2 flex-shrink-0"
+                      style={{ borderColor: ACCENT_COLOR }}
                     >
-                      <div 
-                        className="w-20 h-20 rounded-full overflow-hidden border-2 flex-shrink-0"
-                        style={{ borderColor: ACCENT_COLOR }}
-                      >
-                        <img 
-                          src={`https://unavatar.io/twitter/${featuredYappers[featuredIndex].handle.replace('@', '')}`}
-                          alt={featuredYappers[featuredIndex].name}
-                          className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.src = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(featuredYappers[featuredIndex].name)}&backgroundColor=0a0a0a`;
-                          }}
-                        />
+                      <img 
+                        src={`https://unavatar.io/twitter/${featuredYappers[featuredIndex].handle.replace('@', '')}`}
+                        alt={featuredYappers[featuredIndex].name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          e.currentTarget.src = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(featuredYappers[featuredIndex].name)}&backgroundColor=0a0a0a`;
+                        }}
+                      />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h4 className="text-white font-bold text-xl">{featuredYappers[featuredIndex].name}</h4>
+                        <span className="text-cyan-400 text-sm">{featuredYappers[featuredIndex].handle}</span>
+                        <span 
+                          className="text-xs px-2 py-1 rounded-full"
+                          style={{ backgroundColor: `${ACCENT_COLOR}20`, color: ACCENT_COLOR }}
+                        >
+                          {featuredYappers[featuredIndex].expertise}
+                        </span>
                       </div>
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3 mb-2">
-                          <h4 className="text-white font-bold text-xl">{featuredYappers[featuredIndex].name}</h4>
-                          <span className="text-cyan-400 text-sm">{featuredYappers[featuredIndex].handle}</span>
-                          <span 
-                            className="text-xs px-2 py-1 rounded-full"
-                            style={{ backgroundColor: `${ACCENT_COLOR}20`, color: ACCENT_COLOR }}
-                          >
-                            {featuredYappers[featuredIndex].expertise}
-                          </span>
-                        </div>
-                        <p className="text-white/60 mb-2">{featuredYappers[featuredIndex].bio}</p>
-                        <p className="text-white/40 text-sm">{featuredYappers[featuredIndex].followers} followers</p>
-                      </div>
-                    </motion.a>
-                  </AnimatePresence>
+                      <p className="text-white/60 mb-2">{featuredYappers[featuredIndex].bio}</p>
+                      <p className="text-white/40 text-sm">{featuredYappers[featuredIndex].followers} followers</p>
+                    </div>
+                  </a>
                   
                   {/* Pagination dots */}
                   <div className="flex justify-center gap-2 mt-4">
@@ -336,22 +329,18 @@ const YapService = () => {
 
               {/* KOL Avatar Grid */}
               <div className="grid grid-cols-6 md:grid-cols-10 gap-2 md:gap-3">
-                {cryptoKOLs.map((kol, i) => {
+                {cryptoKOLs.map((kol) => {
                   const avatarUrl = `https://unavatar.io/twitter/${kol.handle.replace('@', '')}`;
                   const fallbackUrl = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=0a0a0a`;
                   const twitterUrl = `https://x.com/${kol.handle.replace('@', '')}`;
                   
                   return (
-                    <motion.a
+                    <a
                       key={kol.handle}
                       href={twitterUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group relative aspect-square"
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      whileInView={{ opacity: 1, scale: 1 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.02 }}
                     >
                       <div 
                         className="w-full h-full rounded-xl overflow-hidden border-2 transition-all duration-300 group-hover:scale-105"
@@ -375,25 +364,19 @@ const YapService = () => {
                           <span className="text-[7px] text-cyan-400 text-center">{kol.followers}</span>
                           <span 
                             className="text-[6px] px-1.5 py-0.5 rounded-full mt-0.5"
-                            style={{ backgroundColor: `${ACCENT_COLOR}40`, color: ACCENT_COLOR }}
+                            style={{ backgroundColor: `${ACCENT_COLOR}30`, color: ACCENT_COLOR }}
                           >
                             {kol.expertise}
                           </span>
                         </div>
-                        
-                        {/* Glow on hover */}
-                        <div 
-                          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-xl"
-                          style={{ boxShadow: `0 0 20px ${ACCENT_COLOR}40` }}
-                        />
                       </div>
-                    </motion.a>
+                    </a>
                   );
                 })}
               </div>
 
               <p className="text-center text-white/40 text-sm mt-8">
-                Click to view on 𝕏 · These are a sample of our 150+ creator network
+                150+ creators ready to amplify your message · Click to view on 𝕏
               </p>
             </div>
           </div>

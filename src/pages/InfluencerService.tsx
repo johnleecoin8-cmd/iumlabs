@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Star, Users, TrendingUp, Target, Sparkles, Crown, Award, Zap } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
@@ -208,58 +207,42 @@ const InfluencerService = () => {
               </div>
 
               {/* Tier Stats (when filtered) */}
-              <AnimatePresence mode="wait">
-                {activeTier && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="mb-8 overflow-hidden"
-                  >
-                    {tierData.filter(t => t.tier.toLowerCase() === activeTier).map((tier) => (
-                      <div 
-                        key={tier.tier}
-                        className="p-6 rounded-xl border border-white/10 bg-white/5 flex items-center justify-between"
-                      >
-                        <div className="flex items-center gap-4">
-                          <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${tier.color} flex items-center justify-center`}>
-                            <tier.icon className="w-7 h-7 text-white" />
-                          </div>
-                          <div>
-                            <h3 className="text-white font-bold text-xl">{tier.tier} Tier</h3>
-                            <p className="text-white/40">Reach: {tier.reach} followers</p>
-                          </div>
+              {activeTier && (
+                <div className="mb-8 overflow-hidden">
+                  {tierData.filter(t => t.tier.toLowerCase() === activeTier).map((tier) => (
+                    <div 
+                      key={tier.tier}
+                      className="p-6 rounded-xl border border-white/10 bg-white/5 flex items-center justify-between"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${tier.color} flex items-center justify-center`}>
+                          <tier.icon className="w-7 h-7 text-white" />
                         </div>
-                        <div className="text-right">
-                          <p className="text-3xl font-bold" style={{ color: ACCENT_COLOR }}>{tier.count}</p>
-                          <p className="text-white/40 text-sm">Creators</p>
+                        <div>
+                          <h3 className="text-white font-bold text-xl">{tier.tier} Tier</h3>
+                          <p className="text-white/40">Reach: {tier.reach} followers</p>
                         </div>
                       </div>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                      <div className="text-right">
+                        <p className="text-3xl font-bold" style={{ color: ACCENT_COLOR }}>{tier.count}</p>
+                        <p className="text-white/40 text-sm">Creators</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {/* KOL Grid */}
-              <motion.div 
-                layout
-                className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-              >
-                <AnimatePresence mode="popLayout">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {filteredKOLs.map((kol, index) => (
-                  <motion.a
+                  <a
                     key={index}
                     href={`https://x.com/${kol.handle.replace('@', '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm group cursor-pointer block hover:border-amber-500/50 transition-all"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
-                    whileHover={{ 
-                      scale: 1.02,
-                      boxShadow: `0 0 30px ${ACCENT_COLOR}20`
+                    className="relative p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm group cursor-pointer block hover:border-amber-500/50 transition-all hover:scale-[1.02]"
+                    style={{
+                      boxShadow: 'none'
                     }}
                   >
                     {/* Tier Badge */}
@@ -295,10 +278,9 @@ const InfluencerService = () => {
                     >
                       {kol.expertise}
                     </div>
-                  </motion.a>
+                  </a>
                 ))}
-                </AnimatePresence>
-              </motion.div>
+              </div>
 
               <p className="text-center text-white/40 text-sm mt-8">
                 {activeTier 

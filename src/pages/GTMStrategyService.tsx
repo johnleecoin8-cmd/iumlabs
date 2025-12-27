@@ -1,6 +1,5 @@
 import { CalendarDays, Search, Target, Zap, Megaphone, MapPin, Camera, Users, Sparkles, Globe } from "lucide-react";
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import ClientLogosSection from "@/components/ClientLogosSection";
@@ -188,12 +187,11 @@ const OfflineEventService = () => {
                 {/* Right - Phase Cards */}
                 <div className="grid grid-cols-2 gap-4">
                   {journeyPhases.map((phase, index) => (
-                    <motion.div
+                    <div
                       key={phase.title}
                       onMouseEnter={() => setActivePhase(index)}
                       onMouseLeave={() => setActivePhase(null)}
-                      whileHover={{ scale: 1.02, y: -4 }}
-                      className="relative bg-white/5 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer transition-all duration-300 hover:border-white/20 group overflow-hidden"
+                      className="relative bg-white/5 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer transition-all duration-300 hover:border-white/20 hover:scale-[1.02] hover:-translate-y-1 group overflow-hidden"
                       style={{
                         backgroundColor: activePhase === index ? `${ACCENT_COLOR}10` : undefined,
                         borderColor: activePhase === index ? `${ACCENT_COLOR}40` : undefined,
@@ -220,42 +218,27 @@ const OfflineEventService = () => {
                       </div>
 
                       {/* Content - Toggle on Hover */}
-                      <AnimatePresence mode="wait">
-                        {activePhase === index ? (
-                          <motion.div
-                            key="details"
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            transition={{ duration: 0.2 }}
-                          >
-                            <div className="space-y-2">
-                              {phase.activities.map((activity) => (
-                                <div key={activity} className="flex items-center gap-2 text-sm text-white/60">
-                                  <div className="w-1 h-1 rounded-full" style={{ backgroundColor: ACCENT_COLOR }} />
-                                  <span>{activity}</span>
-                                </div>
-                              ))}
-                            </div>
-                            <div className="mt-3 pt-3 border-t border-white/10">
-                              <p className="text-xs text-white/40 mb-1">Deliverables</p>
-                              <p className="text-sm text-white/80">{phase.deliverables.join(", ")}</p>
-                            </div>
-                          </motion.div>
-                        ) : (
-                          <motion.div
-                            key="summary"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                            className="text-sm text-white/40"
-                          >
-                            {phase.activities.length} activities • {phase.deliverables.length} deliverables
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-                    </motion.div>
+                      {activePhase === index ? (
+                        <div>
+                          <div className="space-y-2">
+                            {phase.activities.map((activity) => (
+                              <div key={activity} className="flex items-center gap-2 text-sm text-white/60">
+                                <div className="w-1 h-1 rounded-full" style={{ backgroundColor: ACCENT_COLOR }} />
+                                <span>{activity}</span>
+                              </div>
+                            ))}
+                          </div>
+                          <div className="mt-3 pt-3 border-t border-white/10">
+                            <p className="text-xs text-white/40 mb-1">Deliverables</p>
+                            <p className="text-sm text-white/80">{phase.deliverables.join(", ")}</p>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="text-sm text-white/40">
+                          {phase.activities.length} activities • {phase.deliverables.length} deliverables
+                        </div>
+                      )}
+                    </div>
                   ))}
                 </div>
               </div>

@@ -1,6 +1,5 @@
 import { Search, BarChart3, Target, TrendingUp, MousePointer, Megaphone, LineChart, Eye, DollarSign, Zap } from "lucide-react";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -215,16 +214,14 @@ const SEOAdsService = () => {
                       const isActive = activePhase === index;
                       
                       return (
-                        <motion.button
+                        <button
                           key={phase.week}
                           onClick={() => setActivePhase(index)}
-                          className={`w-full text-left p-4 rounded-xl border transition-all duration-300 ${
+                          className={`w-full text-left p-4 rounded-xl border transition-all duration-300 hover:translate-x-1 active:scale-[0.98] ${
                             isActive 
                               ? 'bg-amber-500/10 border-amber-500/30' 
                               : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
                           }`}
-                          whileHover={{ x: 4 }}
-                          whileTap={{ scale: 0.98 }}
                         >
                           <div className="flex items-center gap-4">
                             <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
@@ -241,18 +238,15 @@ const SEOAdsService = () => {
                               </h4>
                             </div>
                           </div>
-                        </motion.button>
+                        </button>
                       );
                     })}
                   </div>
                 </div>
 
                 {/* Right - Phase Details */}
-                <motion.div
+                <div
                   key={activePhase}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3 }}
                   className="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8"
                 >
                   <div className="flex items-center gap-3 mb-6">
@@ -314,7 +308,7 @@ const SEOAdsService = () => {
                       </div>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>

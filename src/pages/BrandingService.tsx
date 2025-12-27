@@ -1,6 +1,5 @@
 import { Palette, Globe, Layout, Sparkles, Eye, Layers, Brush, Monitor, Code, Figma } from "lucide-react";
 import { useState } from "react";
-import { motion } from "framer-motion";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -208,16 +207,14 @@ const BrandingService = () => {
                       const isActive = activePhase === index;
                       
                       return (
-                        <motion.button
+                        <button
                           key={phase.week}
                           onClick={() => setActivePhase(index)}
-                          className={`w-full text-left p-4 rounded-xl border transition-all duration-300 ${
+                          className={`w-full text-left p-4 rounded-xl border transition-all duration-300 hover:translate-x-1 active:scale-[0.98] ${
                             isActive 
                               ? 'bg-violet-500/10 border-violet-500/30' 
                               : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
                           }`}
-                          whileHover={{ x: 4 }}
-                          whileTap={{ scale: 0.98 }}
                         >
                           <div className="flex items-center gap-4">
                             <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${
@@ -234,18 +231,15 @@ const BrandingService = () => {
                               </h4>
                             </div>
                           </div>
-                        </motion.button>
+                        </button>
                       );
                     })}
                   </div>
                 </div>
 
                 {/* Right - Phase Details */}
-                <motion.div
+                <div
                   key={activePhase}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.3 }}
                   className="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8"
                 >
                   <div className="flex items-center gap-3 mb-6">
@@ -286,20 +280,16 @@ const BrandingService = () => {
                       ))}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               </div>
 
               {/* Portfolio Preview */}
               <div className="mt-16">
                 <h3 className="text-sm font-medium text-white/40 mb-6 uppercase tracking-wider">Recent Work</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {portfolioItems.map((item, index) => (
-                    <motion.div
+                  {portfolioItems.map((item) => (
+                    <div
                       key={item.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
                       className="group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
                     >
                       <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-80 group-hover:opacity-100 transition-opacity`} />
@@ -308,7 +298,7 @@ const BrandingService = () => {
                         <span className="text-xs text-white/60 mb-1">{item.type}</span>
                         <h4 className="text-lg font-bold text-white">{item.title}</h4>
                       </div>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </div>
