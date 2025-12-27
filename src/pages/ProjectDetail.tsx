@@ -114,16 +114,18 @@ const ProjectDetail = () => {
         <ProjectHero project={project} />
 
         {/* Key Result Marquee */}
-        <div className="py-4 overflow-hidden relative" style={{ backgroundColor: project.glowColor }}>
-          <div className="flex animate-marquee whitespace-nowrap relative">
-            {[...Array(10)].map((_, i) => (
-              <span key={i} className="mx-8 text-black text-sm font-bold uppercase tracking-widest flex items-center gap-4">
+      <div className="py-4 overflow-hidden relative" style={{ backgroundColor: project.glowColor }}>
+        <div className="flex animate-marquee whitespace-nowrap relative">
+          {[...Array(3)].map((_, repeatIndex) => (
+            project.metrics.map((metric, i) => (
+              <span key={`${repeatIndex}-${i}`} className="mx-8 text-black text-sm font-bold uppercase tracking-widest flex items-center gap-4">
                 <span className="w-2 h-2 rounded-full bg-black/30" />
-                {project.result}
+                {metric.value} {metric.label}
               </span>
-            ))}
-          </div>
+            ))
+          ))}
         </div>
+      </div>
 
         {/* 01 - Metrics Section */}
         <ProjectMetrics metrics={project.metrics} glowColor={project.glowColor} />
