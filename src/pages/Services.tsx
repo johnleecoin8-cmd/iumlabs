@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ArrowRight, Compass, Users, Search, Mic2, MessageCircle, Newspaper, ChevronDown, Target, Rocket, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
@@ -153,16 +152,10 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
   const isLastRow = index >= 4;
   
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -8 }}
-    >
+    <div className="group">
       <Link 
         to={service.link}
-        className={`group block h-full p-8 md:p-12 transition-all duration-300 hover:bg-white/[0.03] relative overflow-hidden
+        className={`block h-full p-8 md:p-12 transition-all duration-300 hover:bg-white/[0.03] hover:-translate-y-2 relative overflow-hidden
           ${!isRightColumn ? 'border-r border-white/10' : ''}
           ${!isLastRow ? 'border-b border-white/10' : ''}
         `}
@@ -174,16 +167,12 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
         </div>
         
         <div className="flex flex-col h-full min-h-[240px] relative">
-          <motion.div 
-            className="mb-8 relative"
-            whileHover={{ scale: 1.15, rotate: 8 }}
-            transition={{ duration: 0.3, type: "spring", stiffness: 300 }}
-          >
+          <div className="mb-8 relative group-hover:scale-[1.15] group-hover:rotate-[8deg] transition-transform duration-300">
             <Icon 
               className="w-10 h-10 md:w-12 md:h-12 text-white/60 stroke-[1.5] transition-colors duration-300 group-hover:text-emerald-400" 
             />
             <div className="absolute inset-0 blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300 -z-10 scale-150 bg-emerald-500/30" />
-          </motion.div>
+          </div>
           
           <h3 className="text-xl md:text-2xl font-bold text-white mb-4 leading-tight group-hover:text-white transition-colors">
             {service.title}
@@ -193,16 +182,13 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
             {service.description}
           </p>
           
-          <motion.div 
-            className="flex items-center gap-2 text-white/40 group-hover:text-emerald-400 transition-colors duration-300"
-            whileHover={{ x: 4 }}
-          >
+          <div className="flex items-center gap-2 text-white/40 group-hover:text-emerald-400 transition-colors duration-300">
             <span className="text-sm font-medium">Learn more</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
-          </motion.div>
+          </div>
         </div>
       </Link>
-    </motion.div>
+    </div>
   );
 };
 
@@ -257,42 +243,22 @@ const Services = () => {
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-20 text-center">
-          <motion.span 
-            className="inline-block px-4 py-1.5 text-xs text-emerald-400 border border-emerald-400/30 rounded-full mb-8 tracking-widest"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-          >
+          <span className="inline-block px-4 py-1.5 text-xs text-emerald-400 border border-emerald-400/30 rounded-full mb-8 tracking-widest">
             SERVICES
-          </motion.span>
+          </span>
           
-          <motion.h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-[0.95] tracking-tight mb-6"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-[0.95] tracking-tight mb-6">
             Gr<span className="serif-italic text-emerald-400">o</span>wth
             <br />
             <span className="text-white/60">Solutions</span>
-          </motion.h1>
+          </h1>
           
-          <motion.p 
-            className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
+          <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-12">
             Strategic solutions to launch and grow your Web3 project in the Korean market.
-          </motion.p>
+          </p>
           
           {/* Stats */}
-          <motion.div 
-            className="flex flex-wrap justify-center gap-8 md:gap-16"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-          >
+          <div className="flex flex-wrap justify-center gap-8 md:gap-16">
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-white">{projectsCount}+</div>
               <div className="text-sm text-white/50 mt-1">Projects Launched</div>
@@ -305,25 +271,16 @@ const Services = () => {
               <div className="text-3xl md:text-4xl font-bold text-white">{mediaCount}+</div>
               <div className="text-sm text-white/50 mt-1">Media Partners</div>
             </div>
-          </motion.div>
+          </div>
         </div>
         
         {/* Scroll Indicator */}
-        <motion.div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="flex flex-col items-center gap-2"
-          >
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+          <div className="flex flex-col items-center gap-2 animate-bounce">
             <span className="text-xs text-white/40 tracking-wider">SCROLL</span>
             <ChevronDown className="w-5 h-5 text-white/40" />
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </section>
       
       {/* Services Section - 01 */}
@@ -352,12 +309,7 @@ const Services = () => {
           {/* Right: Sticky CTA Panel (1/3) */}
           <div className="w-full lg:w-1/3">
             <div className="lg:sticky lg:top-24 p-8 md:p-12">
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-              >
+              <div>
                 <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
                   Why Ium Labs
                 </h2>
@@ -366,47 +318,33 @@ const Services = () => {
                   We're the Korean Web3 marketing agency that builds the bridge between your project and the Korean market. Founded by former executives from Binance and KuCoin.
                 </p>
                 
-                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                <div>
                   <Link 
                     to="/contact"
-                    className="group inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 text-sm font-medium tracking-wide hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-emerald-500/30 rounded-lg"
+                    className="group inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 text-sm font-medium tracking-wide hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-emerald-500/30 rounded-lg hover:scale-[1.02] active:scale-[0.98]"
                   >
                     CONNECT WITH US
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
-                </motion.div>
+                </div>
                 
                 {/* Decorative element */}
                 <div className="mt-12 md:mt-16 flex justify-center">
-                  <motion.div 
-                    className="w-24 h-24 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30"
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                  />
+                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 animate-spin" style={{ animationDuration: '20s' }} />
                 </div>
                 
                 {/* Additional Stats */}
                 <div className="mt-12 grid grid-cols-2 gap-6">
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
-                  >
+                  <div>
                     <div className="text-2xl md:text-3xl font-bold text-white">$500M+</div>
                     <div className="text-sm text-white/50">TGE Support</div>
-                  </motion.div>
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.5 }}
-                  >
+                  </div>
+                  <div>
                     <div className="text-2xl md:text-3xl font-bold text-white">600+</div>
                     <div className="text-sm text-white/50">Creator Network</div>
-                  </motion.div>
+                  </div>
                 </div>
-              </motion.div>
+              </div>
             </div>
           </div>
         </div>
@@ -430,12 +368,8 @@ const Services = () => {
             const isLast = index === phases.length - 1;
             
             return (
-              <motion.div
+              <div
                 key={phase.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
                 className={`group p-8 md:p-10 lg:p-12 transition-all duration-300 hover:bg-white/[0.02] ${
                   !isLast ? "lg:border-r border-white/10" : ""
                 } ${index < 2 ? "border-b lg:border-b-0 border-white/10" : ""} ${
@@ -456,7 +390,7 @@ const Services = () => {
                 <p className="text-white/50 text-sm leading-relaxed">
                   {phase.description}
                 </p>
-              </motion.div>
+              </div>
             );
           })}
         </div>
@@ -477,13 +411,7 @@ const Services = () => {
         <div className="max-w-4xl mx-auto p-6 md:p-12">
           <Accordion type="single" collapsible className="space-y-3">
             {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-              >
+              <div key={index}>
                 <AccordionItem 
                   value={`item-${index}`}
                   className="bg-white/[0.02] border border-white/10 rounded-xl px-6 data-[state=open]:border-emerald-500/30 transition-colors"
@@ -495,7 +423,7 @@ const Services = () => {
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
-              </motion.div>
+              </div>
             ))}
           </Accordion>
         </div>
