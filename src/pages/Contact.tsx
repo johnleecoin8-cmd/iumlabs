@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, ArrowRight, Linkedin } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, ArrowRight, Linkedin, Globe, BarChart3, Rocket } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
@@ -208,6 +208,88 @@ const Contact = () => {
           </div>
         </section>
       </main>
+
+      {/* Why Work With Us - Identity Section */}
+      <section className="bg-[#0A0A0A] py-20 md:py-28 border-t border-white/5">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+          {/* Core Message */}
+          <div className="text-center mb-16 md:mb-20">
+            <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-[-0.02em] leading-[1.1]">
+              We don't just market.
+              <br />
+              <span className="text-white/40">We </span>
+              <span className="relative inline-block">
+                <span className="text-white">connect</span>
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-white/60 to-transparent" />
+              </span>
+              <span className="text-white/40">.</span>
+            </h2>
+            <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto font-light">
+              <span className="text-white/70 font-medium">이음</span> — Bridging global Web3 vision to Korean reality
+            </p>
+          </div>
+
+          {/* Three Value Cards */}
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-16">
+            {/* Card 1 - Bridge */}
+            <div className="group relative p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative">
+                <div className="w-12 h-12 rounded-xl bg-white/[0.05] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Globe className="w-6 h-6 text-white/60 group-hover:text-white transition-colors" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">Bridge</h3>
+                <p className="text-white/50 leading-relaxed text-sm">
+                  We connect global Web3 projects with the Korean market through deep local expertise and authentic relationships.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 2 - Data */}
+            <div className="group relative p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative">
+                <div className="w-12 h-12 rounded-xl bg-white/[0.05] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <BarChart3 className="w-6 h-6 text-white/60 group-hover:text-white transition-colors" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">Data-Driven</h3>
+                <p className="text-white/50 leading-relaxed text-sm">
+                  Every strategy is backed by proprietary research and real-time market intelligence. No guesswork, only insights.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 3 - Growth */}
+            <div className="group relative p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500">
+              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative">
+                <div className="w-12 h-12 rounded-xl bg-white/[0.05] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <Rocket className="w-6 h-6 text-white/60 group-hover:text-white transition-colors" />
+                </div>
+                <h3 className="text-xl font-semibold text-white mb-3">Growth</h3>
+                <p className="text-white/50 leading-relaxed text-sm">
+                  From market entry to becoming a leader in Korea. We've helped 50+ projects achieve sustainable growth.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* CTA to Form */}
+          <div className="text-center">
+            <a 
+              href="#contact-form" 
+              className="group inline-flex items-center gap-3 text-white/60 hover:text-white transition-colors duration-300"
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector('#contact-form')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <span className="text-sm uppercase tracking-widest">Ready to connect?</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </section>
 
       {/* Contact Form Section - Glassmorphism */}
       <section className="bg-[#0A0A0A] py-12 md:py-16" id="contact-form">
