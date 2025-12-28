@@ -153,19 +153,22 @@ const faqItems: FAQItem[] = [
 // Portfolio showcase items
 const portfolioItems = [
   { 
-    title: "Web3 Protocol", 
-    type: "Brand + Website",
-    gradient: "from-violet-500 to-purple-500"
+    title: "Bananago", 
+    type: "Affiliate Platform",
+    gradient: "from-orange-500 to-amber-500",
+    url: "https://bananago.kr"
   },
   { 
-    title: "DeFi Platform", 
-    type: "Website Redesign",
-    gradient: "from-blue-500 to-cyan-500"
+    title: "Thirdweb", 
+    type: "Developer Platform",
+    gradient: "from-purple-500 to-pink-500",
+    url: "https://thirdweb.com"
   },
   { 
-    title: "NFT Marketplace", 
-    type: "Full Identity",
-    gradient: "from-pink-500 to-rose-500"
+    title: "Coinmerce", 
+    type: "Crypto Exchange",
+    gradient: "from-blue-500 to-indigo-500",
+    url: "https://coinmerce.io"
   },
 ];
 
@@ -287,18 +290,21 @@ const BrandingService = () => {
               <div className="mt-16">
                 <h3 className="text-sm font-medium text-white/40 mb-6 uppercase tracking-wider">Recent Work</h3>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  {portfolioItems.map((item) => (
-                    <div
+                {portfolioItems.map((item) => (
+                    <a
                       key={item.title}
-                      className="group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer"
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer block"
                     >
                       <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-80 group-hover:opacity-100 transition-opacity`} />
                       <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
                       <div className="absolute inset-0 flex flex-col justify-end p-6">
                         <span className="text-xs text-white/60 mb-1">{item.type}</span>
-                        <h4 className="text-lg font-bold text-white">{item.title}</h4>
+                        <h4 className="text-lg font-bold text-white group-hover:underline">{item.title}</h4>
                       </div>
-                    </div>
+                    </a>
                   ))}
                 </div>
               </div>
