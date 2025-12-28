@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import SimpleNavItem from "@/components/sidebar/SimpleNavItem";
 import FloatingServicesMenu from "@/components/sidebar/FloatingServicesMenu";
 import ConnectSection from "@/components/sidebar/ConnectSection";
+import SeoulTimeDisplay from "@/components/sidebar/SeoulTimeDisplay";
 import logoImage from "@/assets/logo.png";
 
 // Icon mapping for navigation items
@@ -208,14 +209,17 @@ const Sidebar = () => {
               </motion.div>
             )}
 
-            {/* Thin separator line with gradient */}
+            {/* Section: Navigate */}
             {!isCollapsed && (
-              <motion.div 
-                className="w-10 h-px bg-gradient-to-r from-white/20 via-white/10 to-transparent mb-8"
-                initial={{ scaleX: 0, opacity: 0 }}
-                animate={{ scaleX: 1, opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              />
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.3, delay: 0.2 }}
+              >
+                <span className="text-[9px] text-white/25 font-medium tracking-[0.15em] uppercase block mb-3 ml-1">
+                  Navigate
+                </span>
+              </motion.div>
             )}
             
             {/* Navigation Section */}
@@ -263,11 +267,19 @@ const Sidebar = () => {
               })}
             </nav>
 
-            {/* Bottom Section - Connect & Toggle */}
+            {/* Bottom Section - Status, Connect & Toggle */}
             <div className={cn(
               "mt-auto pt-4 border-t border-white/[0.05]",
               isCollapsed ? "w-full flex flex-col items-center gap-3" : "space-y-4"
             )}>
+              {/* Seoul Time Status */}
+              <SeoulTimeDisplay isCollapsed={isCollapsed} />
+              
+              {/* Divider between sections */}
+              {!isCollapsed && (
+                <div className="w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+              )}
+              
               <ConnectSection isCollapsed={isCollapsed} />
 
               {/* Toggle Button - Pill style */}
