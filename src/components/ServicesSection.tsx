@@ -34,7 +34,7 @@ const services = [
     description: "Drive qualified traffic through search optimization and targeted advertising across Google, Twitter/X, and crypto-native platforms.",
     link: "/services/seo-ads",
     icon: Search,
-    image: null // Gradient fallback
+    image: seoAdsImage
   },
   {
     number: "04",
