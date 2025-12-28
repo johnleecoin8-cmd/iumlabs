@@ -17,7 +17,7 @@ import ResearchDetail from "./pages/ResearchDetail";
 import GTMService from "./pages/GTMService";
 import BrandingService from "./pages/BrandingService";
 import SEOAdsService from "./pages/SEOAdsService";
-import OfflineEventService from "./pages/GTMStrategyService";
+import OfflineEventService from "./pages/OfflineEventService";
 import CommunityService from "./pages/CommunityService";
 import DeepResearchService from "./pages/DeepResearchService";
 import InfluencerService from "./pages/InfluencerService";
