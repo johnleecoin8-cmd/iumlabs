@@ -238,29 +238,19 @@ const Services = () => {
           >
             <source src="/videos/services-background.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-[hsl(var(--accent-cyan))]/10 via-transparent to-[#0A0A0A]" />
-          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(var(--accent-violet))]/5 via-transparent to-[hsl(var(--accent-cyan))]/5" />
-        </div>
-
-        {/* Aurora color effect */}
-        <div className="absolute inset-0 opacity-40 pointer-events-none">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[hsl(var(--accent-cyan))] rounded-full blur-[120px] animate-glow-pulse" />
-          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[hsl(var(--accent-violet))] rounded-full blur-[100px] animate-glow-pulse" style={{ animationDelay: '1s' }} />
+          <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/15 via-transparent to-[#0A0A0A]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/5 via-transparent to-teal-500/5" />
         </div>
 
         <div className="container mx-auto max-w-7xl px-4 relative z-20 text-center">
-          <span className="inline-block px-4 py-1.5 text-xs text-[hsl(var(--accent-cyan))] border border-[hsl(var(--accent-cyan))]/30 rounded-full mb-8 tracking-widest">
+          <span className="inline-block px-4 py-1.5 text-xs text-emerald-400 border border-emerald-400/30 rounded-full mb-8 tracking-widest">
             SERVICES
           </span>
           
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light leading-[0.95] tracking-tight mb-6">
-            <span className="bg-gradient-to-r from-white via-[hsl(var(--accent-cyan))] to-white bg-[length:200%_auto] bg-clip-text text-transparent animate-gradient-x">
-              Growth
-            </span>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-[0.95] tracking-tight mb-6">
+            Gr<span className="serif-italic text-emerald-400">o</span>wth
             <br />
-            <span className="bg-gradient-to-r from-white/60 via-[hsl(var(--accent-violet))] to-white/60 bg-[length:200%_auto] bg-clip-text text-transparent animate-gradient-x" style={{ animationDelay: '0.5s' }}>
-              Solutions
-            </span>
+            <span className="text-white/60">Solutions</span>
           </h1>
           
           <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-12">
@@ -269,22 +259,16 @@ const Services = () => {
           
           {/* Stats */}
           <div className="flex flex-wrap justify-center gap-8 md:gap-16">
-            <div className="text-center group cursor-default hover:scale-105 transition-transform">
-              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[hsl(var(--accent-cyan))] via-white to-[hsl(var(--accent-violet))] bg-clip-text text-transparent group-hover:from-[hsl(var(--accent-violet))] group-hover:to-[hsl(var(--accent-cyan))] transition-all">
-                {projectsCount}+
-              </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-white">{projectsCount}+</div>
               <div className="text-sm text-white/50 mt-1">Projects Launched</div>
             </div>
-            <div className="text-center group cursor-default hover:scale-105 transition-transform">
-              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[hsl(var(--accent-violet))] via-white to-[hsl(var(--accent-cyan))] bg-clip-text text-transparent group-hover:from-[hsl(var(--accent-cyan))] group-hover:to-[hsl(var(--accent-violet))] transition-all">
-                {kolCount}+
-              </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-white">{kolCount}+</div>
               <div className="text-sm text-white/50 mt-1">KOL Network</div>
             </div>
-            <div className="text-center group cursor-default hover:scale-105 transition-transform">
-              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-[hsl(var(--accent-cyan))] via-white to-[hsl(var(--accent-violet))] bg-clip-text text-transparent group-hover:from-[hsl(var(--accent-violet))] group-hover:to-[hsl(var(--accent-cyan))] transition-all">
-                {mediaCount}+
-              </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-white">{mediaCount}+</div>
               <div className="text-sm text-white/50 mt-1">Media Partners</div>
             </div>
           </div>

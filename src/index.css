@@ -63,13 +63,6 @@
 
     /* Lunar Strategy Blue */
     --lunar-blue: 217 91% 60%;
-
-    /* Colorful Accent Palette */
-    --accent-cyan: 185 94% 60%;
-    --accent-violet: 270 91% 65%;
-    --accent-emerald: 160 84% 50%;
-    --accent-orange: 25 95% 60%;
-    --accent-rose: 350 89% 60%;
   }
 
   .dark {

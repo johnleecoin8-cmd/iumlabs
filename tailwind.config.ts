@@ -63,12 +63,6 @@ export default {
           odd: "hsl(var(--surface-odd))",
           even: "hsl(var(--surface-even))",
         },
-        // Colorful accent colors
-        "accent-cyan": "hsl(var(--accent-cyan))",
-        "accent-violet": "hsl(var(--accent-violet))",
-        "accent-emerald": "hsl(var(--accent-emerald))",
-        "accent-orange": "hsl(var(--accent-orange))",
-        "accent-rose": "hsl(var(--accent-rose))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -194,14 +188,6 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
-        "gradient-x": {
-          "0%, 100%": { backgroundPosition: "0% 50%" },
-          "50%": { backgroundPosition: "100% 50%" },
-        },
-        "glow-pulse": {
-          "0%, 100%": { opacity: "0.4", transform: "scale(1)" },
-          "50%": { opacity: "0.8", transform: "scale(1.05)" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -230,8 +216,6 @@ export default {
         "scroll-indicator": "scroll-indicator 2s ease-in-out infinite",
         "pulse-glow": "pulse-glow 2s ease-in-out infinite",
         "shimmer": "shimmer 2s linear infinite",
-        "gradient-x": "gradient-x 3s ease infinite",
-        "glow-pulse": "glow-pulse 2s ease-in-out infinite",
       },
       transitionTimingFunction: {
         "smooth": "cubic-bezier(0.25, 0.46, 0.45, 0.94)",

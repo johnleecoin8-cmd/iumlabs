@@ -93,14 +93,14 @@ const SeoulTimeDisplay = ({ isCollapsed }: SeoulTimeDisplayProps) => {
           </span>
           <div className="flex items-center gap-1.5">
             <div className={cn(
-              "w-1.5 h-1.5 rounded-full transition-all duration-300",
+              "w-1.5 h-1.5 rounded-full",
               isBusinessHours 
-                ? "bg-[hsl(var(--accent-emerald))] shadow-[0_0_8px_hsl(var(--accent-emerald)/0.8)] animate-pulse" 
+                ? "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.6)] animate-pulse" 
                 : "bg-white/20"
             )} />
             <span className={cn(
-              "text-[9px] font-medium",
-              isBusinessHours ? "text-[hsl(var(--accent-emerald))]" : "text-white/40"
+              "text-[9px]",
+              isBusinessHours ? "text-emerald-400" : "text-white/40"
             )}>
               {isBusinessHours ? "Open Now" : "Closed"}
             </span>
