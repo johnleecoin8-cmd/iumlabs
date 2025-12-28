@@ -18,7 +18,11 @@ const journeyPhases = [
       "Competitor ad analysis",
       "Platform selection strategy"
     ],
-    deliverables: ["SEO Audit Report", "Keyword Strategy"]
+    deliverables: ["SEO Audit Report", "Keyword Strategy"],
+    metrics: [
+      { icon: Search, label: "Keywords", value: "50-100" },
+      { icon: Eye, label: "Competitors", value: "10+" }
+    ]
   },
   {
     week: "Week 2",
@@ -30,7 +34,11 @@ const journeyPhases = [
       "Audience targeting configuration",
       "Tracking & analytics setup"
     ],
-    deliverables: ["SEO Implementation", "Ad Account Setup"]
+    deliverables: ["SEO Implementation", "Ad Account Setup"],
+    metrics: [
+      { icon: TrendingUp, label: "SEO Score", value: "+30-50%" },
+      { icon: Target, label: "Platforms", value: "3+" }
+    ]
   },
   {
     week: "Week 3",
@@ -42,7 +50,11 @@ const journeyPhases = [
       "A/B testing initialization",
       "Bid strategy optimization"
     ],
-    deliverables: ["Live Campaigns", "Creative Assets"]
+    deliverables: ["Live Campaigns", "Creative Assets"],
+    metrics: [
+      { icon: Eye, label: "Impressions", value: "10K-50K" },
+      { icon: MousePointer, label: "CTR", value: "2-4%" }
+    ]
   },
   {
     week: "Week 4",
@@ -54,7 +66,11 @@ const journeyPhases = [
       "Budget reallocation",
       "Scaling recommendations"
     ],
-    deliverables: ["Performance Report", "Growth Plan"]
+    deliverables: ["Performance Report", "Growth Plan"],
+    metrics: [
+      { icon: TrendingUp, label: "Traffic", value: "+150-300%" },
+      { icon: DollarSign, label: "ROAS", value: "2-4x" }
+    ]
   }
 ];
 
@@ -291,20 +307,18 @@ const SEOAdsService = () => {
                   <div className="mt-6 pt-6 border-t border-white/10">
                     <h4 className="text-sm font-medium text-white/60 mb-4">Expected Metrics</h4>
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="p-3 bg-white/5 rounded-lg">
-                        <div className="flex items-center gap-2 mb-1">
-                          <TrendingUp className="w-4 h-4 text-amber-400" />
-                          <span className="text-xs text-white/40">Traffic</span>
-                        </div>
-                        <span className="text-lg font-bold text-white">+150-300%</span>
-                      </div>
-                      <div className="p-3 bg-white/5 rounded-lg">
-                        <div className="flex items-center gap-2 mb-1">
-                          <DollarSign className="w-4 h-4 text-amber-400" />
-                          <span className="text-xs text-white/40">ROAS</span>
-                        </div>
-                        <span className="text-lg font-bold text-white">2-4x</span>
-                      </div>
+                      {journeyPhases[activePhase].metrics.map((metric, idx) => {
+                        const MetricIcon = metric.icon;
+                        return (
+                          <div key={idx} className="p-3 bg-white/5 rounded-lg">
+                            <div className="flex items-center gap-2 mb-1">
+                              <MetricIcon className="w-4 h-4 text-amber-400" />
+                              <span className="text-xs text-white/40">{metric.label}</span>
+                            </div>
+                            <span className="text-lg font-bold text-white">{metric.value}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
