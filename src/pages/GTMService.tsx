@@ -1,4 +1,4 @@
-import { Rocket, Target, Compass, TrendingUp, CheckCircle, Building2, Shield, Scale, Landmark } from "lucide-react";
+import { Rocket, Target, Compass, TrendingUp, CheckCircle, Building2, Shield, Scale, Landmark, Users, FileText, BarChart3 } from "lucide-react";
 import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
@@ -46,7 +46,11 @@ const journeyPhases = [
       "Korean exchange listing feasibility analysis",
       "Regulatory environment & VASP requirements review"
     ],
-    deliverables: ["Market Entry Report", "Regulatory Checklist"]
+    deliverables: ["Market Entry Report", "Regulatory Checklist"],
+    metrics: [
+      { icon: FileText, label: "Competitors", value: "10+" },
+      { icon: Shield, label: "Regulations", value: "5+" }
+    ]
   },
   {
     week: "Week 2",
@@ -58,7 +62,11 @@ const journeyPhases = [
       "Special Act compliance planning",
       "KPI definition & tracking setup"
     ],
-    deliverables: ["GTM Strategy Deck", "Exchange Listing Plan"]
+    deliverables: ["GTM Strategy Deck", "Exchange Listing Plan"],
+    metrics: [
+      { icon: Target, label: "Channels", value: "5-8" },
+      { icon: BarChart3, label: "KPIs", value: "10+" }
+    ]
   },
   {
     week: "Week 3",
@@ -70,7 +78,11 @@ const journeyPhases = [
       "KakaoTalk/Naver community building",
       "Korean media PR preparation"
     ],
-    deliverables: ["Launch Timeline", "Korean Asset Library"]
+    deliverables: ["Launch Timeline", "Korean Asset Library"],
+    metrics: [
+      { icon: Users, label: "Partners", value: "3-5" },
+      { icon: FileText, label: "Contents", value: "20+" }
+    ]
   },
   {
     week: "Week 4",
@@ -82,7 +94,11 @@ const journeyPhases = [
       "Real-time optimization",
       "Exchange listing follow-up support"
     ],
-    deliverables: ["Performance Report", "Exchange Roadmap"]
+    deliverables: ["Performance Report", "Exchange Roadmap"],
+    metrics: [
+      { icon: Users, label: "Community", value: "+500-2K" },
+      { icon: TrendingUp, label: "Awareness", value: "+200%" }
+    ]
   }
 ];
 
@@ -283,6 +299,25 @@ const GTMService = () => {
                           {deliverable}
                         </span>
                       ))}
+                    </div>
+                  </div>
+
+                  {/* Expected Metrics */}
+                  <div className="mt-5 pt-5 border-t border-white/10">
+                    <h4 className="text-xs font-medium text-white/50 uppercase tracking-wider mb-3">Expected Metrics</h4>
+                    <div className="grid grid-cols-2 gap-3">
+                      {journeyPhases[activePhase].metrics.map((metric, idx) => {
+                        const MetricIcon = metric.icon;
+                        return (
+                          <div key={idx} className="p-3 bg-white/5 rounded-lg">
+                            <div className="flex items-center gap-2 mb-1">
+                              <MetricIcon className="w-4 h-4 text-emerald-400" />
+                              <span className="text-xs text-white/40">{metric.label}</span>
+                            </div>
+                            <span className="text-lg font-bold text-white">{metric.value}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>

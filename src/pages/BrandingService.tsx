@@ -1,4 +1,4 @@
-import { Palette, Globe, Layout, Sparkles, Eye, Layers, Brush, Monitor, Code, Figma } from "lucide-react";
+import { Palette, Globe, Layout, Sparkles, Eye, Layers, Brush, Monitor, Code, Figma, FileText, Zap } from "lucide-react";
 import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
@@ -21,7 +21,11 @@ const journeyPhases = [
       "Visual direction exploration",
       "Technical requirements gathering"
     ],
-    deliverables: ["Brand Discovery Report", "Moodboard"]
+    deliverables: ["Brand Discovery Report", "Moodboard"],
+    metrics: [
+      { icon: Eye, label: "Competitors", value: "5-10" },
+      { icon: FileText, label: "References", value: "20+" }
+    ]
   },
   {
     week: "Week 2",
@@ -33,7 +37,11 @@ const journeyPhases = [
       "Visual language creation",
       "Brand guidelines drafting"
     ],
-    deliverables: ["Logo Concepts", "Style Guide Draft"]
+    deliverables: ["Logo Concepts", "Style Guide Draft"],
+    metrics: [
+      { icon: Palette, label: "Concepts", value: "3-5" },
+      { icon: Brush, label: "Revisions", value: "2-3" }
+    ]
   },
   {
     week: "Week 3",
@@ -45,7 +53,11 @@ const journeyPhases = [
       "Responsive layout design",
       "Animation & interaction design"
     ],
-    deliverables: ["Figma Prototype", "Design System"]
+    deliverables: ["Figma Prototype", "Design System"],
+    metrics: [
+      { icon: Layout, label: "Pages", value: "5-10" },
+      { icon: Layers, label: "Components", value: "30+" }
+    ]
   },
   {
     week: "Week 4",
@@ -57,7 +69,11 @@ const journeyPhases = [
       "Performance optimization",
       "Launch & handover"
     ],
-    deliverables: ["Live Website", "Brand Assets Package"]
+    deliverables: ["Live Website", "Brand Assets Package"],
+    metrics: [
+      { icon: Zap, label: "Performance", value: "90+" },
+      { icon: Code, label: "SEO Score", value: "95+" }
+    ]
   }
 ];
 
@@ -284,6 +300,25 @@ const BrandingService = () => {
                           {deliverable}
                         </span>
                       ))}
+                    </div>
+                  </div>
+
+                  {/* Expected Metrics */}
+                  <div className="mt-6 pt-6 border-t border-white/10">
+                    <h4 className="text-sm font-medium text-white/60 mb-4">Expected Metrics</h4>
+                    <div className="grid grid-cols-2 gap-4">
+                      {journeyPhases[activePhase].metrics.map((metric, idx) => {
+                        const MetricIcon = metric.icon;
+                        return (
+                          <div key={idx} className="p-3 bg-white/5 rounded-lg">
+                            <div className="flex items-center gap-2 mb-1">
+                              <MetricIcon className="w-4 h-4 text-violet-400" />
+                              <span className="text-xs text-white/40">{metric.label}</span>
+                            </div>
+                            <span className="text-lg font-bold text-white">{metric.value}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
