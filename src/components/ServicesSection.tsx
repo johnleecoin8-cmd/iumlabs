@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 
 // Import service images
 import gtmImage from "@/assets/services/gtm-ecosystem.png";
+import brandingImage from "@/assets/services/branding-website.png";
 import eventsImage from "@/assets/services/events.jpg";
-import communityImage from "@/assets/services/community-growth.jpg";
+import communityImage from "@/assets/services/community-management.png";
 import kolImage from "@/assets/services/kol-network.jpg";
 import prImage from "@/assets/services/pr-media.jpg";
 import yapImage from "@/assets/services/yap-network.png";
@@ -24,7 +25,7 @@ const services = [
     description: "Distinctive brand identity and high-performance websites for Web3 projects. From logo design to custom development.",
     link: "/services/branding",
     icon: Compass,
-    image: null // Gradient fallback
+    image: brandingImage
   },
   {
     number: "03",
