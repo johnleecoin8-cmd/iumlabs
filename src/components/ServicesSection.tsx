@@ -2,11 +2,12 @@ import { ArrowRight, Compass, Users, Search, Mic2, MessageCircle, Newspaper, Roc
 import { Link } from "react-router-dom";
 
 // Import service images
-import gtmImage from "@/assets/services/gtm-strategy.jpg";
+import gtmImage from "@/assets/services/gtm-ecosystem.png";
 import eventsImage from "@/assets/services/events.jpg";
 import communityImage from "@/assets/services/community-growth.jpg";
 import kolImage from "@/assets/services/kol-network.jpg";
 import prImage from "@/assets/services/pr-media.jpg";
+import yapImage from "@/assets/services/yap-network.png";
 
 const services = [
   {
@@ -63,7 +64,7 @@ const services = [
     description: "Targeted campaigns through a 600+ creator network designed to drive awareness and traction across Crypto X.",
     link: "/services/yap",
     icon: MessageCircle,
-    image: null // Gradient fallback
+    image: yapImage
   },
   {
     number: "08",
