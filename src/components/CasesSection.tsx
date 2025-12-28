@@ -1,77 +1,37 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
-// Import logos
-import bnbLogo from "@/assets/logos/bnb.svg";
-import kucoinLogo from "@/assets/logos/kucoin.svg";
-import peaqLogo from "@/assets/logos/peaq.svg";
-import storyLogo from "@/assets/logos/story-protocol.png";
-import triaLogo from "@/assets/logos/tria-official.png";
-import saharaAiLogo from "@/assets/logos/sahara-ai.png";
-import mantraLogo from "@/assets/logos/mantra.png";
-
-// Import campaign images
-import bnbCampaign from "@/assets/campaigns/bnb-event.jpg";
-import storyCampaign from "@/assets/campaigns/story-origin-summit.jpg";
-import saharaCampaign from "@/assets/campaigns/sahara-ai.jpg";
-import mantraCampaign from "@/assets/campaigns/mantra-party.jpg";
-import peaqCampaign from "@/assets/campaigns/peaq-summit.jpg";
-import triaCampaign from "@/assets/campaigns/tria-launch.jpg";
+// Placeholder images for new cases
+const placeholderLogo = "https://via.placeholder.com/80x80/1a1a1a/ffffff?text=Logo";
+const placeholderBg = "https://via.placeholder.com/400x300/2a2a2a/ffffff?text=Campaign";
 
 const featuredCases = [
   {
-    name: "BNB Chain",
-    logo: bnbLogo,
-    bgImage: bnbCampaign,
-    slug: "bnb-chain",
+    name: "Bananago",
+    logo: placeholderLogo,
+    bgImage: placeholderBg,
+    slug: "bananago",
+    category: "Affiliate",
+    result: "40% Binance Payback",
+    description: "Real-time automated crypto affiliate platform offering the highest cashback rates in Korea.",
+  },
+  {
+    name: "Thirdweb",
+    logo: placeholderLogo,
+    bgImage: placeholderBg,
+    slug: "thirdweb",
     category: "Infrastructure",
-    result: "+340% Korean Trading Volume",
-    description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage.",
+    result: "Korean Developer Growth",
+    description: "Full-stack Web3 development platform enabling seamless blockchain integration for Korean builders.",
   },
   {
-    name: "Story Protocol",
-    logo: storyLogo,
-    bgImage: storyCampaign,
-    slug: "story-protocol",
-    category: "IP",
-    result: "Korean IP Revolution",
-    description: "IP infrastructure platform launch with Korean creator community and media partnerships.",
-  },
-  {
-    name: "Sahara AI",
-    logo: saharaAiLogo,
-    bgImage: saharaCampaign,
-    slug: "sahara-ai",
-    category: "AI",
-    result: "Korean AI x Web3 Launch",
-    description: "AI blockchain platform launch with Korean developer community and enterprise partnerships.",
-  },
-  {
-    name: "Mantra",
-    logo: mantraLogo,
-    bgImage: mantraCampaign,
-    slug: "mantra",
-    category: "RWA",
-    result: "Korean RWA Expansion",
-    description: "Real World Assets platform expansion targeting Korean institutional investors.",
-  },
-  {
-    name: "Peaq",
-    logo: peaqLogo,
-    bgImage: peaqCampaign,
-    slug: "peaq",
-    category: "DePIN",
-    result: "#1 DePIN in Korea",
-    description: "Established thought leadership in DePIN space with IoT partnerships and developer community.",
-  },
-  {
-    name: "Tria",
-    logo: triaLogo,
-    bgImage: triaCampaign,
-    slug: "tria",
-    category: "Wallet",
-    result: "30K+ Korean Wallets",
-    description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users.",
+    name: "Coinmerce",
+    logo: placeholderLogo,
+    bgImage: placeholderBg,
+    slug: "coinmerce",
+    category: "Exchange",
+    result: "European Expansion",
+    description: "User-friendly European crypto exchange supporting 200+ cryptocurrencies with instant deposits.",
   },
 ];
 
@@ -87,17 +47,16 @@ interface CaseCardProps {
 }
 
 const CaseCard = ({ name, logo, bgImage, slug, category, result, description, index }: CaseCardProps) => {
-  const isLastRow = index >= 4;
-  const isRightColumn = index % 2 === 1;
+  const isRightBorder = index < 2; // First two cards get right border on desktop
 
   return (
     <div>
       <Link
         to={`/projects/${slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-4 sm:p-6 md:p-8 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
-          !isRightColumn ? "sm:border-r border-border" : ""
-        } ${!isLastRow ? "border-b border-border" : ""}`}
+        className={`group block p-4 sm:p-6 md:p-8 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 border-b md:border-b-0 border-border ${
+          isRightBorder ? "md:border-r" : ""
+        }`}
       >
         <div className="flex items-start gap-4 sm:gap-5">
           {/* Image */}
@@ -139,9 +98,9 @@ const CasesSection = () => {
   return (
     <section className="bg-background">
       <div className="flex flex-col lg:flex-row">
-        {/* Left: Cases Grid */}
+        {/* Left: Cases Grid - 3 columns for 3 cases */}
         <div className="w-full lg:w-2/3 lg:border-r border-border">
-          <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="grid grid-cols-1 md:grid-cols-3">
             {featuredCases.map((caseItem, index) => (
               <CaseCard key={caseItem.slug} {...caseItem} index={index} />
             ))}
@@ -151,7 +110,7 @@ const CasesSection = () => {
         {/* Right: Sticky Info Panel */}
         <div className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
-            Our Cases
+            Recent Work
           </h2>
           <p className="text-muted-foreground leading-relaxed mb-6 text-sm">
             Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
@@ -159,16 +118,16 @@ const CasesSection = () => {
 
           <div className="space-y-4 mb-6">
             <div className="flex items-center gap-4 pb-3 border-b border-border">
-              <span className="text-2xl md:text-3xl font-bold text-foreground">340%</span>
-              <span className="text-muted-foreground text-sm">Average volume increase</span>
+              <span className="text-2xl md:text-3xl font-bold text-foreground">200+</span>
+              <span className="text-muted-foreground text-sm">Cryptocurrencies supported</span>
             </div>
             <div className="flex items-center gap-4 pb-3 border-b border-border">
-              <span className="text-2xl md:text-3xl font-bold text-foreground">50K+</span>
-              <span className="text-muted-foreground text-sm">New users acquired</span>
+              <span className="text-2xl md:text-3xl font-bold text-foreground">40%</span>
+              <span className="text-muted-foreground text-sm">Max payback rate</span>
             </div>
             <div className="flex items-center gap-4">
-              <span className="text-2xl md:text-3xl font-bold text-foreground">18+</span>
-              <span className="text-muted-foreground text-sm">Projects launched</span>
+              <span className="text-2xl md:text-3xl font-bold text-foreground">3</span>
+              <span className="text-muted-foreground text-sm">Recent partnerships</span>
             </div>
           </div>
 
