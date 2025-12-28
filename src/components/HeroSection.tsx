@@ -88,6 +88,12 @@ const HeroSection = () => {
         
         {/* Dark overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+        
+        {/* Aurora color effect */}
+        <div className="absolute inset-0 opacity-40 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[hsl(var(--accent-cyan))] rounded-full blur-[120px] animate-glow-pulse" />
+          <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-[hsl(var(--accent-violet))] rounded-full blur-[100px] animate-glow-pulse" style={{ animationDelay: '1s' }} />
+        </div>
       </div>
 
       {/* Floating Service Tags - Desktop */}
@@ -117,11 +123,11 @@ const HeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Unified Inter font with color contrast */}
+          {/* Main Headline - Animated gradient text */}
           <h1 className="font-sans text-[8vw] sm:text-[7vw] md:text-[5.5vw] lg:text-[4.5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12">
-            <span className="text-white">Bridge Your Web3 Project</span>
+            <span className="bg-gradient-to-r from-white via-[hsl(var(--accent-cyan))] to-white bg-[length:200%_auto] bg-clip-text text-transparent animate-gradient-x">Bridge Your Web3 Project</span>
             <br />
-            <span className="text-white">to Korea's Crypto Ecosystem</span>
+            <span className="bg-gradient-to-r from-white via-[hsl(var(--accent-violet))] to-white bg-[length:200%_auto] bg-clip-text text-transparent animate-gradient-x" style={{ animationDelay: '0.5s' }}>to Korea's Crypto Ecosystem</span>
           </h1>
 
           {/* Subtext - Larger and more prominent */}
@@ -230,7 +236,7 @@ const StatItem = ({
   
   return (
     <div className="text-center group cursor-default hover:scale-105 transition-transform">
-      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 stat-glow transition-all duration-300 group-hover:text-primary">
+      <div className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 stat-glow transition-all duration-300 bg-gradient-to-r from-[hsl(var(--accent-cyan))] via-white to-[hsl(var(--accent-violet))] bg-clip-text text-transparent group-hover:from-[hsl(var(--accent-violet))] group-hover:to-[hsl(var(--accent-cyan))]">
         {prefix}{count}{suffix}
       </div>
       <div className="text-xs sm:text-sm text-white/50 font-light group-hover:text-white/70 transition-colors duration-300">
