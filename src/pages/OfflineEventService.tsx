@@ -1,4 +1,4 @@
-import { CalendarDays, Search, Target, Zap, Megaphone, MapPin, Camera, Users, Sparkles, Globe } from "lucide-react";
+import { CalendarDays, Search, Target, Zap, Megaphone, MapPin, Camera, Users, Sparkles, Globe, Building2, Mic, UserCheck, Handshake, Eye, ClipboardCheck, BarChart3, Newspaper } from "lucide-react";
 import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
@@ -15,6 +15,10 @@ const journeyPhases = [
     icon: Search,
     activities: ["Event concept & theme", "Venue scouting in Seoul", "Budget & sponsor strategy", "Speaker & panelist outreach"],
     deliverables: ["Event brief", "Venue shortlist"],
+    metrics: [
+      { icon: Building2, label: "Venues", value: "5-10" },
+      { icon: Mic, label: "Speakers", value: "3-5" },
+    ],
   },
   {
     week: "Week 2",
@@ -22,6 +26,10 @@ const journeyPhases = [
     icon: Target,
     activities: ["Venue booking", "KOL & media invitations", "Catering & AV setup", "Registration system"],
     deliverables: ["Event rundown", "Guest list"],
+    metrics: [
+      { icon: UserCheck, label: "RSVPs", value: "100-300" },
+      { icon: Handshake, label: "Partners", value: "5+" },
+    ],
   },
   {
     week: "Week 3",
@@ -29,6 +37,10 @@ const journeyPhases = [
     icon: Megaphone,
     activities: ["Crypto Twitter campaign", "Community announcements", "Media partnership", "RSVP management"],
     deliverables: ["Promo assets", "Press kit"],
+    metrics: [
+      { icon: Eye, label: "Impressions", value: "50K+" },
+      { icon: ClipboardCheck, label: "Registration", value: "80%+" },
+    ],
   },
   {
     week: "Week 4",
@@ -36,6 +48,10 @@ const journeyPhases = [
     icon: Zap,
     activities: ["On-site coordination", "Live social coverage", "Networking facilitation", "Post-event content"],
     deliverables: ["Event recap", "Photo/Video"],
+    metrics: [
+      { icon: BarChart3, label: "Attendees", value: "100-500" },
+      { icon: Newspaper, label: "Coverage", value: "10+ Articles" },
+    ],
   },
 ];
 
@@ -234,8 +250,25 @@ const OfflineEventService = () => {
                           </div>
                         </div>
                       ) : (
-                        <div className="text-sm text-white/40">
-                          {phase.activities.length} activities • {phase.deliverables.length} deliverables
+                        <div>
+                          <div className="text-sm text-white/40 mb-3">
+                            {phase.activities.length} activities • {phase.deliverables.length} deliverables
+                          </div>
+                          {/* Expected Metrics */}
+                          <div className="pt-3 border-t border-white/10">
+                            <p className="text-xs text-white/40 mb-2">Expected Metrics</p>
+                            <div className="space-y-1.5">
+                              {phase.metrics.map((metric) => (
+                                <div key={metric.label} className="flex items-center justify-between">
+                                  <div className="flex items-center gap-2">
+                                    <metric.icon className="w-3.5 h-3.5" style={{ color: ACCENT_COLOR }} />
+                                    <span className="text-xs text-white/60">{metric.label}</span>
+                                  </div>
+                                  <span className="text-xs font-medium" style={{ color: ACCENT_COLOR }}>{metric.value}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       )}
                     </div>
