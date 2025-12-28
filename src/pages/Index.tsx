@@ -7,7 +7,6 @@ import CasesSection from "@/components/CasesSection";
 import FilmstripGallerySection from "@/components/FilmstripGallerySection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import InsightsSection from "@/components/InsightsSection";
-import MarketOpportunitySection from "@/components/MarketOpportunitySection";
 import ContactFormSection from "@/components/ContactFormSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -129,23 +128,9 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Market Opportunity - 08 짝수 */}
-      <section className="scroll-reveal bg-surface-even" id="market-opportunity">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">08</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Market Opportunity</h2>
-            </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Korea Entry</span>
-          </div>
-          <MarketOpportunitySection />
-        </div>
-      </section>
-      
-      {/* Contact - 09 홀수 */}
-      <section className="scroll-reveal bg-surface-odd" id="contact">
-        <ContactFormSection sectionNumber="09" />
+      {/* Contact - 08 짝수 */}
+      <section className="scroll-reveal bg-surface-even" id="contact">
+        <ContactFormSection sectionNumber="08" />
       </section>
       
       {/* CTA Banner */}
