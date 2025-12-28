@@ -3,8 +3,9 @@ import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import bananagoLogo from "@/assets/logos/bananago.png";
-import thirdwebLogo from "@/assets/logos/thirdweb.png";
+import bananagoPreview from "@/assets/portfolio/bananago-preview.png";
+import thirdwebPreview from "@/assets/portfolio/thirdweb-preview.png";
+import coinmercePreview from "@/assets/portfolio/coinmerce-preview.png";
 
 const ACCENT_COLOR = "#8B5CF6";
 
@@ -157,23 +158,20 @@ const portfolioItems = [
   { 
     title: "Bananago", 
     type: "Affiliate Platform",
-    gradient: "from-orange-500 to-amber-500",
     url: "https://bananago.kr",
-    logo: bananagoLogo
+    image: bananagoPreview
   },
   { 
     title: "Thirdweb", 
     type: "Developer Platform",
-    gradient: "from-purple-500 to-pink-500",
     url: "https://thirdweb.com",
-    logo: thirdwebLogo
+    image: thirdwebPreview
   },
   { 
     title: "Coinmerce", 
     type: "Crypto Exchange",
-    gradient: "from-blue-500 to-indigo-500",
     url: "https://coinmerce.io",
-    logo: null // Text-based logo
+    image: coinmercePreview
   },
 ];
 
@@ -303,22 +301,12 @@ const BrandingService = () => {
                       rel="noopener noreferrer"
                       className="group relative aspect-[4/3] rounded-xl overflow-hidden cursor-pointer block"
                     >
-                      <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-80 group-hover:opacity-100 transition-opacity`} />
-                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
-                      {/* Logo in center */}
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        {item.logo ? (
-                          <img 
-                            src={item.logo} 
-                            alt={`${item.title} logo`} 
-                            className="w-16 h-16 object-contain opacity-90 group-hover:scale-110 transition-transform"
-                          />
-                        ) : (
-                          <span className="text-2xl font-bold text-white/90 group-hover:scale-110 transition-transform">
-                            {item.title}
-                          </span>
-                        )}
-                      </div>
+                      <img 
+                        src={item.image} 
+                        alt={item.title}
+                        className="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                       <div className="absolute inset-0 flex flex-col justify-end p-6">
                         <span className="text-xs text-white/60 mb-1">{item.type}</span>
                         <h4 className="text-lg font-bold text-white group-hover:underline">{item.title}</h4>
