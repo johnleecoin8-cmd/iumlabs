@@ -2,7 +2,7 @@ import { Users, Settings, Sparkles, ChevronRight, Hash, MessageSquare, Bell, Shi
 import { useState, useEffect } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-import ClientLogosSection from "@/components/ClientLogosSection";
+
 import { usePageTitle } from "@/hooks/usePageTitle";
 
 const ACCENT_COLOR = "#5865F2";
@@ -385,15 +385,6 @@ const CommunityService = () => {
         </div>
       </section>
 
-      {/* Client Logos Section */}
-      <section className="bg-[#0A0A0A] border-t border-white/10">
-        <ClientLogosSection 
-          title="Communities We've Built"
-          subtitle="Projects with thriving Korean communities"
-          serviceFilter="community"
-          accentColor={ACCENT_COLOR}
-        />
-      </section>
     </ServicePageLayout>
   );
 };

@@ -10,7 +10,7 @@ import ServicePageLayout, {
   Deliverable,
   FAQItem
 } from "@/components/ServicePageLayout";
-import ClientLogosSection from "@/components/ClientLogosSection";
+
 import { FileText, BarChart3, TrendingUp, Users, Newspaper, Share2, Search, PenTool, Send, ArrowRight, BookOpen, Mic2, Globe } from "lucide-react";
 
 const ACCENT_COLOR = "#06B6D4";
@@ -388,15 +388,6 @@ const DeepResearchService = () => {
         </section>
       )}
 
-      {/* Client Logos Section */}
-      <section className="bg-[#0A0A0A] border-t border-white/10">
-        <ClientLogosSection 
-          title="Research Clients"
-          subtitle="Projects we've analyzed for the Korean market"
-          serviceFilter="research"
-          accentColor={ACCENT_COLOR}
-        />
-      </section>
     </ServicePageLayout>
   );
 };
