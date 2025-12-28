@@ -155,7 +155,6 @@ const adPlatforms = [
   { name: "Google Ads", icon: "G", color: "#4285F4" },
   { name: "Twitter/X", icon: "X", color: "#000000" },
   { name: "YouTube", icon: "▶", color: "#FF0000" },
-  { name: "Display", icon: "◇", color: "#34A853" },
 ];
 
 const SEOAdsService = () => {
