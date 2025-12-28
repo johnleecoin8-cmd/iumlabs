@@ -25,6 +25,12 @@ const SeoulTimeDisplay = ({ isCollapsed }: SeoulTimeDisplayProps) => {
   const minutes = seoulTime.getMinutes().toString().padStart(2, "0");
   const formattedHours = hours.toString().padStart(2, "0");
   const dayOfWeek = seoulTime.getDay(); // 0 = Sunday, 6 = Saturday
+  const date = seoulTime.getDate();
+  const month = seoulTime.getMonth() + 1;
+
+  // Day names in Korean
+  const dayNames = ["일", "월", "화", "수", "목", "금", "토"];
+  const dayName = dayNames[dayOfWeek];
 
   // Check if within business hours (Mon-Fri, 09:00-18:00 KST)
   const isBusinessHours = dayOfWeek >= 1 && dayOfWeek <= 5 && hours >= 9 && hours < 18;
@@ -52,6 +58,7 @@ const SeoulTimeDisplay = ({ isCollapsed }: SeoulTimeDisplayProps) => {
           className="bg-black/90 backdrop-blur-xl text-white text-[10px] font-medium px-3 py-2 rounded-lg border border-white/10"
         >
           <div className="flex flex-col gap-1">
+            <span className="text-white/50 text-[9px]">{month}/{date} ({dayName})</span>
             <span className="text-white/90">{formattedHours}:{minutes} KST</span>
             <span className={cn(
               "text-[9px]",
@@ -78,6 +85,9 @@ const SeoulTimeDisplay = ({ isCollapsed }: SeoulTimeDisplayProps) => {
       <div className="flex items-center gap-2.5 px-2.5 py-2 rounded-lg bg-white/[0.02] border border-white/[0.04]">
         <Clock className="w-3.5 h-3.5 text-white/30" />
         <div className="flex flex-col">
+          <span className="text-[10px] text-white/40 tabular-nums">
+            {month}/{date} ({dayName})
+          </span>
           <span className="text-[11px] text-white/60 font-medium tabular-nums">
             {formattedHours}:{minutes} <span className="text-white/30">KST</span>
           </span>
