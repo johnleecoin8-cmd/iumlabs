@@ -9,6 +9,7 @@ import communityImage from "@/assets/services/community-management.png";
 import kolImage from "@/assets/services/kol-network.jpg";
 import prImage from "@/assets/services/pr-media.jpg";
 import yapImage from "@/assets/services/yap-network.png";
+import seoAdsImage from "@/assets/services/seo-ads.jpg";
 
 const services = [
   {
@@ -33,7 +34,7 @@ const services = [
     description: "Drive qualified traffic through search optimization and targeted advertising across Google, Twitter/X, and crypto-native platforms.",
     link: "/services/seo-ads",
     icon: Search,
-    image: null // Gradient fallback
+    image: seoAdsImage
   },
   {
     number: "04",
