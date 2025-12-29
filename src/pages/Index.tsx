@@ -211,7 +211,6 @@ const Index = () => {
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <h2 className="text-lg md:text-xl font-medium text-white">Media Partners</h2>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">As Featured In</span>
           </div>
           <MediaPartnersSection />
         </div>
