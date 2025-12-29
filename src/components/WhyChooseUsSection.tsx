@@ -5,7 +5,7 @@ import seoulMetroPoster from '@/assets/campaigns/seoul-metro-poster.jpeg';
 const WhyChooseUsSection = () => {
   return (
     <section className="bg-background">
-      <div className="grid grid-cols-1 lg:grid-cols-[2.5fr_3.5fr] max-h-[400px] lg:max-h-[450px] overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-[2.5fr_3.5fr] max-h-[500px] lg:max-h-[550px] overflow-hidden">
         {/* Left: Featured Image */}
         <div className="lg:border-r border-border overflow-hidden h-full">
           <img 
