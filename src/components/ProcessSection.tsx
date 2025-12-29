@@ -4,7 +4,7 @@ import { Search, Target, Rocket, TrendingUp } from "lucide-react";
 import discoveryImage from "@/assets/process/discovery-research.jpg";
 import strategyImage from "@/assets/process/strategy-planning.jpg";
 import launchImage from "@/assets/process/execution-growth.jpg";
-import scaleImage from "@/assets/process/execution-growth.jpg"; // Scale용 이미지 업로드 후 교체
+import scaleImage from "@/assets/process/scale-success.jpg";
 
 const phases = [
   {
