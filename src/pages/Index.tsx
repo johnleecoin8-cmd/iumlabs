@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProcessSection from "@/components/ProcessSection";
-import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.webp";
+import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
 import ServicesSection from "@/components/ServicesSection";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
 import CasesSection from "@/components/CasesSection";
@@ -69,11 +69,11 @@ const Index = () => {
           </div>
           
           {/* Featured Billboard Image */}
-          <div className="px-4 md:px-10 pt-8 md:pt-12">
+          <div className="px-4 md:px-10 pt-4 md:pt-6 pb-2 md:pb-4">
             <img 
               src={seoulMetroBillboard} 
               alt="Seoul Metro Billboard Campaign" 
-              className="w-full h-auto rounded-xl md:rounded-2xl"
+              className="w-full h-auto rounded-lg md:rounded-xl"
             />
           </div>
           
