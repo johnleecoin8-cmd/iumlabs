@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -6,7 +6,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
-import { ArrowRight, Calendar, ChevronDown, Filter } from "lucide-react";
+import { ArrowRight, Calendar, ChevronDown, Filter, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { useCountUp } from "@/hooks/useCountUp";
@@ -41,6 +41,20 @@ import fogoBg from "@/assets/campaigns/fogo-fest.avif";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
 
+// Gallery images for slider
+const galleryImages = [
+  { src: bnbBg, title: "BNB Chain Event", category: "Infrastructure" },
+  { src: kucoinBg, title: "KuCoin Panel", category: "Exchange" },
+  { src: storyBg, title: "Story Origin Summit", category: "IP Protocol" },
+  { src: peaqBg, title: "Peaq Summit", category: "DePIN" },
+  { src: megaethBg, title: "MegaETH Launch", category: "Layer 2" },
+  { src: triaBg, title: "Tria Launch", category: "Wallet" },
+  { src: saharaAiBg, title: "Sahara AI Event", category: "AI" },
+  { src: mantraBg, title: "Mantra Party", category: "RWA" },
+  { src: zkpassBg, title: "Verifiable Nights", category: "Privacy" },
+  { src: synfuturesBg, title: "Gangnam Billboard", category: "DeFi" },
+];
+
 // Hardcoded fallback data
 const fallbackCases = [
   { name: "BNB Chain", logo: bnbLogo, bgImage: bnbBg, slug: "bnb-chain", result: "+340% Korean Trading Volume", category: "Infrastructure", description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage." },
@@ -56,6 +70,99 @@ const fallbackCases = [
   { name: "zkPass", logo: zkpassLogo, bgImage: zkpassBg, slug: "zkpass", result: "The Verifiable Nights", category: "Privacy", description: "Privacy-focused Web3 identity solution launch with Korean developer community." },
   { name: "SynFutures", logo: synfuturesLogo, bgImage: synfuturesBg, slug: "synfutures", result: "Gangnam Billboard Promotion", category: "DeFi", description: "High-visibility billboard campaign in Gangnam district for Korean market awareness." },
 ];
+
+// Gallery Slider Component
+const GallerySlider = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isAutoPlaying]);
+
+  const goToPrev = () => {
+    setIsAutoPlaying(false);
+    setCurrentIndex((prev) => (prev - 1 + galleryImages.length) % galleryImages.length);
+  };
+
+  const goToNext = () => {
+    setIsAutoPlaying(false);
+    setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
+  };
+
+  return (
+    <div className="relative w-full h-[300px] sm:h-[400px] lg:h-[500px] overflow-hidden rounded-lg md:rounded-xl">
+      {/* Images */}
+      {galleryImages.map((image, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 transition-all duration-700 ${
+            index === currentIndex 
+              ? 'opacity-100 scale-100' 
+              : 'opacity-0 scale-105'
+          }`}
+        >
+          <img
+            src={image.src}
+            alt={image.title}
+            className="w-full h-full object-cover"
+          />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          
+          {/* Caption */}
+          <div className={`absolute bottom-8 left-8 transition-all duration-500 delay-200 ${
+            index === currentIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
+          }`}>
+            <span className="text-xs text-white/60 uppercase tracking-wider mb-2 block">{image.category}</span>
+            <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">{image.title}</h3>
+          </div>
+        </div>
+      ))}
+
+      {/* Navigation Arrows */}
+      <button
+        onClick={goToPrev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
+      >
+        <ChevronLeft className="w-5 h-5" />
+      </button>
+      <button
+        onClick={goToNext}
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-white/20 transition-all duration-300"
+      >
+        <ChevronRight className="w-5 h-5" />
+      </button>
+
+      {/* Dots Indicator */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+        {galleryImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              setIsAutoPlaying(false);
+              setCurrentIndex(index);
+            }}
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              index === currentIndex 
+                ? 'bg-white w-6' 
+                : 'bg-white/40 hover:bg-white/60'
+            }`}
+          />
+        ))}
+      </div>
+
+      {/* Counter */}
+      <div className="absolute top-4 right-4 text-white/60 text-sm font-mono">
+        {String(currentIndex + 1).padStart(2, '0')} / {String(galleryImages.length).padStart(2, '0')}
+      </div>
+    </div>
+  );
+};
 
 interface Project {
   id: string;
@@ -334,12 +441,31 @@ const Projects = () => {
         </div>
       </main>
       
-      {/* Filter Section - 01 */}
-      <section className="scroll-reveal bg-[#0F0F0F]" id="filter">
+      {/* Gallery Section - 01 */}
+      <section className="scroll-reveal bg-[#0A0A0A]" id="gallery">
         <div className="border-t border-border">
           <div className="flex items-baseline justify-between p-4 sm:p-6 md:px-10 md:py-6 border-b border-border">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-foreground">Campaign Gallery</h2>
+            </div>
+            <span className="text-xs text-muted-foreground tracking-wider hidden sm:block px-3 py-1 border border-border rounded-full">
+              {galleryImages.length} Events
+            </span>
+          </div>
+          
+          <div className="p-4 sm:p-6 md:p-10">
+            <GallerySlider />
+          </div>
+        </div>
+      </section>
+      
+      {/* Filter Section - 02 */}
+      <section className="scroll-reveal bg-[#0F0F0F]" id="filter">
+        <div className="border-t border-border">
+          <div className="flex items-baseline justify-between p-4 sm:p-6 md:px-10 md:py-6 border-b border-border">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">02</span>
               <h2 className="text-lg md:text-xl font-medium text-foreground">Filter</h2>
             </div>
             <span className="text-xs text-muted-foreground tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-border rounded-full">
@@ -363,7 +489,7 @@ const Projects = () => {
         <div className="border-t border-border">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">02</span>
+              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">03</span>
               <h2 className="text-lg md:text-xl font-medium text-foreground">Case Studies</h2>
             </div>
             <span className="text-xs text-muted-foreground tracking-wider hidden sm:block px-3 py-1 border border-border rounded-full">
@@ -422,9 +548,9 @@ const Projects = () => {
         </div>
       </section>
       
-      {/* Contact Section - 03 */}
+      {/* Contact Section - 04 */}
       <section className="scroll-reveal bg-[#0F0F0F]" id="contact">
-        <ContactFormSection sectionNumber="03" />
+        <ContactFormSection sectionNumber="04" />
       </section>
       
       {/* CTA Banner */}
