@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import seoulMetroPoster from '@/assets/campaigns/seoul-metro-poster.jpeg';
+import seoulMetroPoster from '@/assets/campaigns/seoul-metro-billboard-new.jpeg';
 
 const WhyChooseUsSection = () => {
   return (
