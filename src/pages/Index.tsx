@@ -70,11 +70,13 @@ const Index = () => {
           
           {/* Featured Billboard Image */}
           <div className="px-4 md:px-10 pt-4 md:pt-6 pb-2 md:pb-4">
-            <img 
-              src={seoulMetroBillboard} 
-              alt="Seoul Metro Billboard Campaign" 
-              className="w-full h-auto rounded-lg md:rounded-xl"
-            />
+            <div className="w-full h-[200px] md:h-[300px] lg:h-[400px] rounded-lg md:rounded-xl overflow-hidden">
+              <img 
+                src={seoulMetroBillboard} 
+                alt="Seoul Metro Billboard Campaign" 
+                className="w-full h-full object-cover object-center"
+              />
+            </div>
           </div>
           
           <ProcessSection />
