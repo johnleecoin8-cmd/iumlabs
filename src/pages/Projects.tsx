@@ -42,13 +42,18 @@ import fogoBg from "@/assets/campaigns/fogo-fest.avif";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
 
-// Gallery images for hover expand gallery
+// Additional gallery images for hover expand gallery
 import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
 import polygonHackathon from "@/assets/campaigns/polygon-hackathon.jpg";
 import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
 import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
 import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
+import seoulMetroPoster from "@/assets/campaigns/seoul-metro-poster.jpeg";
 import lbankFestival from "@/assets/campaigns/lbank-festival.jpg";
+import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
+import kucoinOldschool from "@/assets/campaigns/kucoin-oldschool.jpg";
+import ondoLogo from "@/assets/logos/ondo.svg";
+import polygonLogo from "@/assets/logos/polygon.svg";
 
 // Hardcoded fallback data
 const fallbackCases = [
@@ -84,7 +89,7 @@ const stats = [
   { value: 50, label: "New Users Acquired", suffix: "K+" },
 ];
 
-// Gallery images data for hover expand gallery
+// Gallery images data for hover expand gallery - ALL campaign images
 const galleryImages = [
   { src: storyBg, alt: "Story Protocol Origin Summit", title: "Story Origin Summit", description: "IP Protocol launch event in Seoul" },
   { src: ondoSeminar, alt: "Ondo Finance Seminar", title: "Ondo Finance Seminar", description: "RWA education seminar for Korean investors" },
@@ -96,6 +101,17 @@ const galleryImages = [
   { src: seoulMetroBillboard, alt: "Seoul Metro Billboard", title: "Seoul Metro Billboard", description: "Subway advertising campaign" },
   { src: lbankFestival, alt: "LBank Festival", title: "LBank Festival", description: "Exchange partnership event" },
   { src: fogoBg, alt: "Fogo Fest", title: "Fogo Fest 2025", description: "FOGO community launch event" },
+  { src: bnbBg, alt: "BNB Chain Event", title: "BNB Chain Seoul", description: "BNB Chain community event in Seoul" },
+  { src: bybitBg, alt: "Bybit Event", title: "Bybit Trading Event", description: "Bybit VIP trader meetup" },
+  { src: kucoinBg, alt: "KuCoin Panel", title: "KuCoin Old School Panel", description: "KuCoin crypto OG panel discussion" },
+  { src: kucoinCampaign, alt: "KuCoin Campaign", title: "KuCoin Trading Campaign", description: "Trading competition campaign" },
+  { src: kucoinOldschool, alt: "KuCoin Old School", title: "KuCoin Old School Event", description: "Old school crypto meetup" },
+  { src: mantraBg, alt: "Mantra Party", title: "Mantra RWA Party", description: "Mantra community celebration" },
+  { src: megaethBg, alt: "MegaETH Launch", title: "MegaETH Launch", description: "MegaETH pre-launch event" },
+  { src: saharaAiBg, alt: "Sahara AI Summit", title: "Sahara AI Summit", description: "AI x Web3 summit in Korea" },
+  { src: triaBg, alt: "Tria Launch", title: "Tria Wallet Launch", description: "Tria wallet Korean launch" },
+  { src: zkpassBg, alt: "zkPass Verifiable Nights", title: "The Verifiable Nights", description: "zkPass privacy event" },
+  { src: seoulMetroPoster, alt: "Seoul Metro Poster", title: "Seoul Metro Poster", description: "Subway poster campaign" },
 ];
 
 // Stat Item Component
