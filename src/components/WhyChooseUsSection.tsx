@@ -1,30 +1,17 @@
-import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import seoulMetroPoster from '@/assets/campaigns/seoul-metro-poster.jpeg';
-import seoulMetroHover from '@/assets/campaigns/seoul-metro-hover.png';
 
 const WhyChooseUsSection = () => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <section className="bg-background">
       <div className="grid grid-cols-1 lg:grid-cols-[2.5fr_3.5fr] max-h-[500px] lg:max-h-[550px] overflow-hidden">
         {/* Left: Featured Image */}
-        <div 
-          className="lg:border-r border-border overflow-hidden h-full relative cursor-pointer"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="lg:border-r border-border overflow-hidden h-full">
           <img 
             src={seoulMetroPoster} 
             alt="Seoul Metro Billboard - Ium Labs" 
-            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
-          />
-          <img 
-            src={seoulMetroHover} 
-            alt="Seoul Metro Billboard - Ium Labs Hover" 
-            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
+            className="block w-full h-full object-cover object-center"
           />
         </div>
 
