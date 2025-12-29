@@ -201,8 +201,6 @@ const Index = () => {
           
           {/* Featured Billboard Image with Process Overlay */}
           <ProcessBillboardOverlay />
-          
-          <ProcessSection />
         </div>
       </section>
       
