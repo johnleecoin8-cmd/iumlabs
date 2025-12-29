@@ -1,6 +1,5 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
@@ -8,14 +7,10 @@ import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
 import ProjectHero from "@/components/project-detail/ProjectHero";
 import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
 import ProjectChallenge from "@/components/project-detail/ProjectChallenge";
-import ProjectGallery from "@/components/project-detail/ProjectGallery";
-import Lightbox from "@/components/Lightbox";
 import NextProject from "@/components/project-detail/NextProject";
 
 const ProjectDetail = () => {
   const { slug } = useParams();
-  const [lightboxOpen, setLightboxOpen] = useState(false);
-  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   // Fetch project from Supabase
   const { data: dbProject } = useQuery({
@@ -143,30 +138,7 @@ const ProjectDetail = () => {
           glowColor={project.glowColor} 
         />
 
-        {/* 03 - Gallery Section */}
-        {project.gallery && project.gallery.length > 0 && (
-          <ProjectGallery 
-            gallery={project.gallery} 
-            glowColor={project.glowColor}
-            onOpenLightbox={(index) => {
-              setLightboxIndex(index);
-              setLightboxOpen(true);
-            }}
-          />
-        )}
-
-        {/* Lightbox */}
-        {project.gallery && project.gallery.length > 0 && (
-          <Lightbox
-            images={project.gallery.map(g => ({ src: g.src, alt: g.title || '', title: g.title, description: g.description }))}
-            currentIndex={lightboxIndex}
-            isOpen={lightboxOpen}
-            onClose={() => setLightboxOpen(false)}
-            onNavigate={setLightboxIndex}
-          />
-        )}
-
-        {/* 04 - Next Project */}
+        {/* 03 - Next Project */}
         {nextProjectData && (
           <NextProject 
             nextSlug={nextProjectData.slug} 
