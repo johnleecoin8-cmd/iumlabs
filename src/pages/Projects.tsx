@@ -410,53 +410,15 @@ const Projects = () => {
             </span>
           </div>
           
-          <div className="flex flex-col lg:flex-row">
-            {/* Left: Projects Grid */}
-            <div className="w-full lg:w-2/3 lg:border-r border-border">
-              <div className="grid grid-cols-1 md:grid-cols-2">
-                {filteredCases.map((project, index) => (
-                  <ProjectCard 
-                    key={project.slug} 
-                    project={project} 
-                    index={index} 
-                    totalCount={filteredCases.length} 
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Right: Sticky Info Panel */}
-            <div className="w-full lg:w-1/3 p-6 md:p-8 lg:p-10 flex flex-col justify-center">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                Our Track Record
-              </h2>
-              <p className="text-muted-foreground leading-relaxed mb-8">
-                Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
-              </p>
-
-              <div className="space-y-6 mb-8">
-                <div className="flex items-center gap-4 pb-4 border-b border-border">
-                  <span className="text-3xl font-bold text-foreground">340%</span>
-                  <span className="text-muted-foreground text-sm">Average volume increase</span>
-                </div>
-                <div className="flex items-center gap-4 pb-4 border-b border-border">
-                  <span className="text-3xl font-bold text-foreground">50K+</span>
-                  <span className="text-muted-foreground text-sm">New users acquired</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <span className="text-3xl font-bold text-foreground">18+</span>
-                  <span className="text-muted-foreground text-sm">Projects launched</span>
-                </div>
-              </div>
-
-              <Link
-                to="/contact"
-                className="group inline-flex items-center justify-center gap-2 bg-foreground text-background px-6 py-4 sm:py-3 text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-full sm:w-fit mb-6 min-h-[48px]"
-              >
-                START YOUR PROJECT
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            {filteredCases.map((project, index) => (
+              <ProjectCard 
+                key={project.slug} 
+                project={project} 
+                index={index} 
+                totalCount={filteredCases.length} 
+              />
+            ))}
           </div>
         </div>
       </section>
