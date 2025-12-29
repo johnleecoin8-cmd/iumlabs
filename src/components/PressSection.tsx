@@ -17,7 +17,7 @@ const mediaFeatures = [
   },
   {
     name: "CoinTelegraph",
-    title: "Leading Web3 Agency",
+    title: "Leading Web3 Marketing Partner",
     logo: "Cointelegraph",
     link: "#",
   },
