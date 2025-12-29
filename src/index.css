@@ -131,16 +131,6 @@
     flex-direction: column;
   }
 
-  /* Scroll Reveal Animation - Ultra Smooth */
-  .scroll-reveal {
-    opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity;
-  }
-
-  .scroll-reveal.is-visible {
-    opacity: 1;
-  }
 
   /* Dark screens */
   .screen-1 {
@@ -592,19 +582,6 @@
   animation: fadeUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-/* Fade In Animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.4s ease-out forwards;
-}
 
 /* Scale In Animation */
 @keyframes scaleIn {
