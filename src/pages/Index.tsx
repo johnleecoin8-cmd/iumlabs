@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProcessSection from "@/components/ProcessSection";
@@ -14,6 +15,136 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { Search, Target, Rocket, TrendingUp } from "lucide-react";
+
+const processPhases = [
+  {
+    title: "Discovery",
+    icon: Search,
+    description: "Deep market research and competitor analysis to understand your positioning in Korea"
+  },
+  {
+    title: "Strategy",
+    icon: Target,
+    description: "Custom GTM roadmap with KPI-driven milestones and localized messaging"
+  },
+  {
+    title: "Launch",
+    icon: Rocket,
+    description: "Multi-channel execution across KOLs, PR, events, and community activation"
+  },
+  {
+    title: "Scale",
+    icon: TrendingUp,
+    description: "Performance optimization and sustainable growth through data-driven iteration"
+  }
+];
+
+const ProcessBillboardOverlay = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  return (
+    <div className="px-4 md:px-10 pt-4 md:pt-6 pb-2 md:pb-4">
+      <div className="relative w-full h-[280px] md:h-[350px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
+        {/* Background Image */}
+        <img 
+          src={seoulMetroBillboard} 
+          alt="Seoul Metro Billboard Campaign" 
+          className="w-full h-full object-cover object-center"
+        />
+        
+        {/* Dark Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20" />
+        
+        {/* 4-Sector Grid Overlay */}
+        <div className="absolute inset-0 grid grid-cols-2 lg:grid-cols-4">
+          {processPhases.map((phase, index) => {
+            const Icon = phase.icon;
+            const isHovered = hoveredIndex === index;
+            const hasHover = hoveredIndex !== null;
+            
+            return (
+              <div
+                key={index}
+                className={`
+                  relative flex flex-col items-center justify-center p-4 md:p-6
+                  border-r border-b border-white/10 last:border-r-0
+                  lg:border-b-0 lg:[&:nth-child(2)]:border-r lg:[&:nth-child(4)]:border-r-0
+                  cursor-pointer transition-all duration-500 ease-out
+                  ${isHovered ? 'bg-white/10 backdrop-blur-sm' : hasHover ? 'bg-black/20' : 'bg-transparent'}
+                `}
+                onMouseEnter={() => setHoveredIndex(index)}
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                {/* Step Number */}
+                <span className={`
+                  absolute top-3 left-3 md:top-4 md:left-4
+                  text-[10px] md:text-xs font-mono tracking-widest
+                  transition-all duration-300
+                  ${isHovered ? 'text-white' : 'text-white/40'}
+                `}>
+                  0{index + 1}
+                </span>
+                
+                {/* Icon */}
+                <div className={`
+                  w-12 h-12 md:w-16 md:h-16 rounded-full
+                  flex items-center justify-center mb-3 md:mb-4
+                  border transition-all duration-500
+                  ${isHovered 
+                    ? 'bg-white/20 border-white/40 scale-110' 
+                    : 'bg-white/5 border-white/20'
+                  }
+                `}>
+                  <Icon className={`
+                    w-5 h-5 md:w-7 md:h-7 transition-all duration-300
+                    ${isHovered ? 'text-white' : 'text-white/60'}
+                  `} />
+                </div>
+                
+                {/* Title */}
+                <h4 className={`
+                  text-sm md:text-base lg:text-lg font-medium text-center
+                  transition-all duration-300
+                  ${isHovered ? 'text-white' : 'text-white/80'}
+                `}>
+                  {phase.title}
+                </h4>
+                
+                {/* Description - Only visible on hover */}
+                <div className={`
+                  mt-2 md:mt-3 text-center overflow-hidden
+                  transition-all duration-500 ease-out
+                  ${isHovered 
+                    ? 'max-h-[100px] opacity-100 translate-y-0' 
+                    : 'max-h-0 opacity-0 translate-y-2'
+                  }
+                `}>
+                  <p className="text-[11px] md:text-xs lg:text-sm text-white/70 leading-relaxed px-1">
+                    {phase.description}
+                  </p>
+                </div>
+                
+                {/* Bottom Accent Line */}
+                <div className={`
+                  absolute bottom-0 left-1/2 -translate-x-1/2
+                  h-[2px] bg-gradient-to-r from-transparent via-white to-transparent
+                  transition-all duration-500
+                  ${isHovered ? 'w-3/4 opacity-100' : 'w-0 opacity-0'}
+                `} />
+              </div>
+            );
+          })}
+        </div>
+        
+        {/* Corner Decorations */}
+        <div className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-2">
+          <span className="text-[10px] md:text-xs text-white/50 font-mono tracking-wider">HOW WE WORK</span>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Index = () => {
   usePageTitle("Web3 Research & GTM Strategy Group");
@@ -68,16 +199,8 @@ const Index = () => {
             <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
           </div>
           
-          {/* Featured Billboard Image */}
-          <div className="px-4 md:px-10 pt-4 md:pt-6 pb-2 md:pb-4">
-            <div className="w-full h-[200px] md:h-[300px] lg:h-[400px] rounded-lg md:rounded-xl overflow-hidden">
-              <img 
-                src={seoulMetroBillboard} 
-                alt="Seoul Metro Billboard Campaign" 
-                className="w-full h-full object-cover object-center"
-              />
-            </div>
-          </div>
+          {/* Featured Billboard Image with Process Overlay */}
+          <ProcessBillboardOverlay />
           
           <ProcessSection />
         </div>
