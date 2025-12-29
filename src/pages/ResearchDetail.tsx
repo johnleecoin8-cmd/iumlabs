@@ -60,6 +60,7 @@ const ResearchDetail = () => {
     excerpt: dbPost.excerpt || '',
     tags: dbPost.tags || [],
     content: dbPost.content || '',
+    chartImages: undefined as Record<string, string> | undefined,
   } : hardcodedPost;
 
   const hardcodedRelated = hardcodedPost 
@@ -221,6 +222,43 @@ const ResearchDetail = () => {
         <div className="prose prose-invert prose-lg max-w-none">
           <div className="text-white/80 leading-relaxed">
             {post.content.split('\n').map((line, index) => {
+              // Handle chart images for SUI research
+              if (line.startsWith('![') && line.includes('](chart:')) {
+                const chartMatch = line.match(/\!\[([^\]]*)\]\(chart:(\w+)\)/);
+                if (chartMatch && post.chartImages) {
+                  const [, altText, chartKey] = chartMatch;
+                  const chartImage = post.chartImages[chartKey as keyof typeof post.chartImages];
+                  if (chartImage) {
+                    return (
+                      <div key={index} className="my-8 rounded-xl overflow-hidden border border-white/10">
+                        <img 
+                          src={chartImage} 
+                          alt={altText}
+                          className="w-full h-auto"
+                        />
+                      </div>
+                    );
+                  }
+                }
+                return null;
+              }
+              // Handle blockquotes (lines starting with >)
+              if (line.startsWith('> ')) {
+                const quoteContent = line.replace(/^>\s*/, '');
+                // Check if it's a bold header inside quote
+                if (quoteContent.startsWith('**') && quoteContent.includes('**')) {
+                  return (
+                    <div key={index} className="border-l-4 border-primary/50 pl-4 my-4 bg-primary/5 py-3 rounded-r">
+                      <p className="text-white/80 font-medium">{quoteContent.replace(/\*\*/g, '')}</p>
+                    </div>
+                  );
+                }
+                return (
+                  <div key={index} className="border-l-4 border-primary/50 pl-4 ml-0 bg-primary/5 py-2 rounded-r">
+                    <p className="text-white/70 italic">{quoteContent}</p>
+                  </div>
+                );
+              }
               if (line.startsWith('## ')) {
                 return (
                   <h2 key={index} className="text-2xl md:text-3xl font-medium text-white mt-12 mb-6">
@@ -235,10 +273,31 @@ const ResearchDetail = () => {
                   </h3>
                 );
               }
+              if (line.startsWith('#### ')) {
+                return (
+                  <h4 key={index} className="text-lg md:text-xl font-medium text-white mt-6 mb-3">
+                    {line.replace('#### ', '')}
+                  </h4>
+                );
+              }
               if (line.startsWith('**') && line.endsWith('**')) {
                 return (
                   <p key={index} className="font-semibold text-white mt-6 mb-2">
                     {line.replace(/\*\*/g, '')}
+                  </p>
+                );
+              }
+              // Handle inline bold text
+              if (line.includes('**')) {
+                const parts = line.split(/(\*\*[^*]+\*\*)/g);
+                return (
+                  <p key={index} className="text-white/70 mb-4 leading-relaxed">
+                    {parts.map((part, i) => {
+                      if (part.startsWith('**') && part.endsWith('**')) {
+                        return <strong key={i} className="text-white font-semibold">{part.replace(/\*\*/g, '')}</strong>;
+                      }
+                      return part;
+                    })}
                   </p>
                 );
               }
@@ -249,8 +308,19 @@ const ResearchDetail = () => {
                   </li>
                 );
               }
-              if (line.startsWith('| ')) {
-                // Skip table formatting for now
+              // Handle table headers and rows
+              if (line.startsWith('| ') && !line.includes('---')) {
+                const cells = line.split('|').filter(cell => cell.trim());
+                const isHeader = index > 0 && post.content.split('\n')[index + 1]?.includes('---');
+                return (
+                  <div key={index} className={`grid grid-cols-${cells.length} gap-2 py-2 border-b border-white/10 ${isHeader ? 'font-semibold text-white' : 'text-white/70'}`}>
+                    {cells.map((cell, i) => (
+                      <span key={i} className="px-2 text-sm">{cell.trim()}</span>
+                    ))}
+                  </div>
+                );
+              }
+              if (line.includes('|---')) {
                 return null;
               }
               if (line.startsWith('1. ') || line.startsWith('2. ') || line.startsWith('3. ')) {
@@ -270,7 +340,7 @@ const ResearchDetail = () => {
               if (line.startsWith('---')) {
                 return <hr key={index} className="border-white/10 my-12" />;
               }
-              if (line.startsWith('*') && line.endsWith('*')) {
+              if (line.startsWith('*') && line.endsWith('*') && !line.startsWith('**')) {
                 return (
                   <p key={index} className="text-white/50 italic my-8">
                     {line.replace(/\*/g, '')}
