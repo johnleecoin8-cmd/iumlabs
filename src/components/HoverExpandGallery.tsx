@@ -176,6 +176,7 @@ export function HoverExpandGallery({
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const startX = useRef(0);
@@ -186,9 +187,6 @@ export function HoverExpandGallery({
   const momentumFrame = useRef<number | null>(null);
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const breakpoint = useBreakpoint();
-
-  // Triple the images for infinite scroll effect
-  const tripleImages = useMemo(() => [...images, ...images, ...images], [images]);
 
   // Calculate item width based on container width (5 items per view)
   const [itemWidth, setItemWidth] = useState(0);
@@ -223,30 +221,16 @@ export function HoverExpandGallery({
     }
   })[breakpoint], [breakpoint, itemWidth]);
 
-  // Center to middle set on mount
-  useEffect(() => {
-    if (scrollContainerRef.current && itemWidth > 0) {
-      const singleSetWidth = images.length * (itemWidth + gap);
-      scrollContainerRef.current.scrollLeft = singleSetWidth;
-    }
-  }, [images.length, itemWidth, gap]);
-
-  // Handle infinite scroll loop
-  const handleScroll = useCallback(() => {
-    if (!scrollContainerRef.current || itemWidth === 0) return;
-    
+  // Update scroll progress
+  const updateScrollProgress = useCallback(() => {
+    if (!scrollContainerRef.current) return;
     const container = scrollContainerRef.current;
-    const singleSetWidth = images.length * (itemWidth + gap);
-    
-    // If scrolled past the third set, jump back to middle
-    if (container.scrollLeft >= singleSetWidth * 2) {
-      container.scrollLeft = container.scrollLeft - singleSetWidth;
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    if (maxScroll > 0) {
+      const progress = (container.scrollLeft / maxScroll) * 100;
+      setScrollProgress(Math.min(100, Math.max(0, progress)));
     }
-    // If scrolled before the first set, jump to middle
-    if (container.scrollLeft <= 0) {
-      container.scrollLeft = container.scrollLeft + singleSetWidth;
-    }
-  }, [images.length, itemWidth, gap]);
+  }, []);
 
   // Momentum scrolling
   const applyMomentum = useCallback(() => {
@@ -257,7 +241,7 @@ export function HoverExpandGallery({
     
     if (Math.abs(velocity.current) > minVelocity) {
       scrollContainerRef.current.scrollLeft += velocity.current;
-      handleScroll();
+      updateScrollProgress();
       velocity.current *= friction;
       momentumFrame.current = requestAnimationFrame(applyMomentum);
     } else {
@@ -267,7 +251,7 @@ export function HoverExpandGallery({
         momentumFrame.current = null;
       }
     }
-  }, [handleScroll]);
+  }, [updateScrollProgress]);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (!scrollContainerRef.current) return;
@@ -290,7 +274,7 @@ export function HoverExpandGallery({
     const x = e.pageX - scrollContainerRef.current.offsetLeft;
     const walk = (x - startX.current) * 1.5;
     scrollContainerRef.current.scrollLeft = scrollLeft.current - walk;
-    handleScroll();
+    updateScrollProgress();
 
     const now = Date.now();
     const dt = now - lastTime.current;
@@ -299,7 +283,7 @@ export function HoverExpandGallery({
     }
     lastX.current = e.pageX;
     lastTime.current = now;
-  }, [handleScroll]);
+  }, [updateScrollProgress]);
 
   const handleMouseUp = useCallback(() => {
     if (!isDragging.current) return;
@@ -342,7 +326,7 @@ export function HoverExpandGallery({
     const x = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
     const walk = (x - startX.current) * 1.5;
     scrollContainerRef.current.scrollLeft = scrollLeft.current - walk;
-    handleScroll();
+    updateScrollProgress();
     
     const now = Date.now();
     const dt = now - lastTime.current;
@@ -351,7 +335,7 @@ export function HoverExpandGallery({
     }
     lastX.current = e.touches[0].pageX;
     lastTime.current = now;
-  }, [handleScroll]);
+  }, [updateScrollProgress]);
 
   const handleTouchEnd = useCallback(() => {
     if (!isDragging.current) return;
@@ -364,6 +348,11 @@ export function HoverExpandGallery({
       setIsScrolling(false);
     }, 150);
   }, [applyMomentum]);
+
+  // Handle native scroll event for progress
+  const handleScroll = useCallback(() => {
+    updateScrollProgress();
+  }, [updateScrollProgress]);
 
   // Cleanup
   useEffect(() => {
@@ -379,9 +368,7 @@ export function HoverExpandGallery({
 
   const openLightbox = (index: number) => {
     if (!isScrolling && !isDragging.current) {
-      // Map tripled index back to original
-      const originalIndex = index % images.length;
-      setLightboxIndex(originalIndex);
+      setLightboxIndex(index);
       setLightboxOpen(true);
     }
   };
@@ -415,7 +402,7 @@ export function HoverExpandGallery({
           onTouchEnd={handleTouchEnd}
           onScroll={handleScroll}
         >
-          {tripleImages.map((image, index) => {
+          {images.map((image, index) => {
             const isActive = activeIndex === index && !isScrolling;
             const width = isActive ? config.expandedWidth : itemWidth;
 
@@ -478,6 +465,17 @@ export function HoverExpandGallery({
               </motion.div>
             );
           })}
+        </div>
+
+        {/* Progress bar */}
+        <div className="mt-4 mx-auto max-w-md px-4">
+          <div className="h-1 bg-muted/30 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-primary rounded-full"
+              style={{ width: `${scrollProgress}%` }}
+              transition={{ duration: 0.1 }}
+            />
+          </div>
         </div>
       </div>
 
