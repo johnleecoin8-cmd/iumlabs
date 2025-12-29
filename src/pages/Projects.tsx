@@ -156,52 +156,43 @@ interface ProjectCardProps {
   totalCount: number;
 }
 
-const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
-  const isLastRow = index >= Math.floor((totalCount - 1) / 2) * 2;
-  const isRightColumn = index % 2 === 1;
-
+const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <div>
-      <Link
-        to={`/projects/${project.slug}`}
-        onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-4 sm:p-6 md:p-8 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
-          !isRightColumn ? "sm:border-r border-border" : ""
-        } ${!isLastRow ? "border-b border-border" : ""}`}
-      >
-        <div className="flex items-start gap-4 sm:gap-6">
-          {/* Image */}
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
-            <img 
-              src={project.bgImage} 
-              alt={project.name}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-            />
-          </div>
-          
-          {/* Content */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 text-muted-foreground text-[11px] sm:text-xs mb-1 sm:mb-2">
-              <span className="uppercase tracking-wider">{project.category}</span>
-            </div>
-            <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-1 group-hover:text-foreground/80 transition-colors">
-              {project.name}
-            </h3>
-            <p className="text-foreground font-medium text-sm mb-1 sm:mb-2">
-              {project.result}
-            </p>
-            <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 hidden sm:block">
-              {project.description}
-            </p>
-          </div>
+    <Link
+      to={`/projects/${project.slug}`}
+      onClick={() => window.scrollTo(0, 0)}
+      className="group block rounded-2xl border border-border bg-card overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-foreground/5 hover:-translate-y-1 hover:border-foreground/20"
+    >
+      {/* Image */}
+      <div className="aspect-square overflow-hidden">
+        <img 
+          src={project.bgImage} 
+          alt={project.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      </div>
+      
+      {/* Content */}
+      <div className="p-4 sm:p-5">
+        <div className="flex items-center gap-3 text-muted-foreground text-[11px] sm:text-xs mb-2">
+          <span className="uppercase tracking-wider font-medium">{project.category}</span>
         </div>
+        <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-1">
+          {project.name}
+        </h3>
+        <p className="text-foreground/80 font-medium text-sm mb-2 line-clamp-1">
+          {project.result}
+        </p>
+        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 mb-4">
+          {project.description}
+        </p>
         
-        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm mt-3 sm:mt-4 min-h-[44px] sm:min-h-0">
+        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm">
           <span className="group-hover:underline underline-offset-4">View case study</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </div>
-      </Link>
-    </div>
+      </div>
+    </Link>
   );
 };
 
@@ -410,7 +401,7 @@ const Projects = () => {
             </span>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-4 sm:p-6 md:p-8">
             {filteredCases.map((project, index) => (
               <ProjectCard 
                 key={project.slug} 
