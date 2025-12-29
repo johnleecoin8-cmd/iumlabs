@@ -1,7 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
+import storyOriginSummit from "@/assets/campaigns/story-origin-summit.jpg";
+import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
+import synfuturesBillboard from "@/assets/campaigns/synfutures-billboard.jpg";
+import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
+
+const campaignImages = [
+  { src: seoulMetroBillboard, alt: "Seoul Metro Billboard Campaign" },
+  { src: storyOriginSummit, alt: "Story Origin Summit" },
+  { src: ondoSeminar, alt: "Ondo Seminar" },
+  { src: synfuturesBillboard, alt: "SynFutures Billboard" },
+  { src: peaqSummit, alt: "Peaq Summit" },
+];
 import ServicesSection from "@/components/ServicesSection";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
 import CasesSection from "@/components/CasesSection";
@@ -40,17 +52,46 @@ const processPhases = [
 ];
 
 const ProcessBillboardOverlay = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Auto-slide effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % campaignImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <div className="px-4 md:px-10 pt-4 md:pt-6 pb-4 md:pb-6">
       <div className="relative w-full h-[420px] sm:h-[350px] md:h-[380px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
-        {/* Background Image */}
-        <img 
-          src={seoulMetroBillboard} 
-          alt="Seoul Metro Billboard Campaign" 
-          className="w-full h-full object-cover object-center"
-        />
+        {/* Background Images - Auto Sliding */}
+        {campaignImages.map((image, index) => (
+          <img 
+            key={index}
+            src={image.src} 
+            alt={image.alt} 
+            className={`absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-1000 ${
+              index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        ))}
+        
+        {/* Slide Indicators */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+          {campaignImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentImageIndex(index)}
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                index === currentImageIndex 
+                  ? 'bg-white w-4' 
+                  : 'bg-white/40 hover:bg-white/60'
+              }`}
+            />
+          ))}
+        </div>
         
         {/* Dark Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30" />
