@@ -200,7 +200,7 @@ const Index = () => {
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
               <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Why Ium Labs</span>
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Why ium Labs</span>
           </div>
           <WhyChooseUsSection />
         </div>

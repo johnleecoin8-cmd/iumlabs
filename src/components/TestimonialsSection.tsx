@@ -6,7 +6,7 @@ const testimonials = [{
   name: "Alex Chen",
   role: "CEO",
   company: "MetaVerse Korea",
-  content: "Ium Labs helped us raise $12M and build a community of 50K+ members in just 3 months. Their understanding of the Korean market is unmatched.",
+  content: "ium Labs helped us raise $12M and build a community of 50K+ members in just 3 months. Their understanding of the Korean market is unmatched.",
   rating: 5
 }, {
   name: "Sarah Kim",
@@ -30,7 +30,7 @@ const testimonials = [{
   name: "David Hong",
   role: "CEO",
   company: "NFT Seoul",
-  content: "From zero to hero in the Korean NFT space. Ium Labs made our launch a massive success with their comprehensive approach.",
+  content: "From zero to hero in the Korean NFT space. ium Labs made our launch a massive success with their comprehensive approach.",
   rating: 5
 }];
 

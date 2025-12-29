@@ -20,7 +20,7 @@ const contactInfo = [
   { icon: Mail, label: "Email", value: brand.email, link: `mailto:${brand.email}` },
   { icon: Phone, label: "Phone", value: brand.phone, link: `tel:${brand.phone.replace(/\s/g, '')}` },
   { icon: Send, label: "Telegram", value: brand.telegram, link: brand.telegramLink },
-  { icon: Linkedin, label: "LinkedIn", value: "Ium Labs", link: brand.linkedin },
+  { icon: Linkedin, label: "LinkedIn", value: "ium Labs", link: brand.linkedin },
 ];
 
 // Floating tags similar to HeroSection

@@ -10,7 +10,7 @@ const WhyChooseUsSection = () => {
         <div className="lg:border-r border-border overflow-hidden h-full">
           <img 
             src={seoulMetroPoster} 
-            alt="Seoul Metro Billboard - Ium Labs" 
+            alt="Seoul Metro Billboard - ium Labs" 
             className="block w-full h-full object-cover object-center"
           />
         </div>

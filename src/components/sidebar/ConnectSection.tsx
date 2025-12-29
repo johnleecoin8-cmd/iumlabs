@@ -16,7 +16,7 @@ const connectLinks = [
   },
   {
     icon: Linkedin,
-    label: "Ium Labs",
+    label: "ium Labs",
     href: brand.linkedin,
     external: true,
   },

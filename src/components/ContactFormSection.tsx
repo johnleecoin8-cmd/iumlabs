@@ -177,7 +177,7 @@ const ContactFormSection = ({
                 </svg>
                 <div>
                   <span className="text-xs uppercase tracking-wider text-white/40 block mb-2">LinkedIn</span>
-                  <p className="text-white text-sm">Ium Labs</p>
+                  <p className="text-white text-sm">ium Labs</p>
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all" />
