@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ProcessSection from "@/components/ProcessSection";
 import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
 import ServicesSection from "@/components/ServicesSection";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
@@ -44,8 +43,8 @@ const ProcessBillboardOverlay = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="px-4 md:px-10 pt-4 md:pt-6 pb-2 md:pb-4">
-      <div className="relative w-full h-[280px] md:h-[350px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
+    <div className="px-4 md:px-10 pt-4 md:pt-6 pb-4 md:pb-6">
+      <div className="relative w-full h-[420px] sm:h-[350px] md:h-[380px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
         {/* Background Image */}
         <img 
           src={seoulMetroBillboard} 
@@ -54,10 +53,10 @@ const ProcessBillboardOverlay = () => {
         />
         
         {/* Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-black/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30" />
         
-        {/* 4-Sector Grid Overlay */}
-        <div className="absolute inset-0 grid grid-cols-2 lg:grid-cols-4">
+        {/* 4-Sector Grid Overlay - 모바일은 세로 스택 */}
+        <div className="absolute inset-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {processPhases.map((phase, index) => {
             const Icon = phase.icon;
             const isHovered = hoveredIndex === index;
@@ -67,18 +66,23 @@ const ProcessBillboardOverlay = () => {
               <div
                 key={index}
                 className={`
-                  relative flex flex-col items-center justify-center p-4 md:p-6
-                  border-r border-b border-white/10 last:border-r-0
-                  lg:border-b-0 lg:[&:nth-child(2)]:border-r lg:[&:nth-child(4)]:border-r-0
+                  relative flex flex-row sm:flex-col items-center sm:justify-center 
+                  gap-3 sm:gap-0 p-3 sm:p-4 md:p-6
+                  border-b sm:border-r sm:border-b border-white/10 
+                  last:border-b-0 sm:last:border-r-0
+                  sm:[&:nth-child(2)]:border-r-0 lg:[&:nth-child(2)]:border-r
+                  sm:[&:nth-child(3)]:border-b-0 sm:[&:nth-child(4)]:border-b-0
+                  lg:border-b-0
                   cursor-pointer transition-all duration-500 ease-out
                   ${isHovered ? 'bg-white/10 backdrop-blur-sm' : hasHover ? 'bg-black/20' : 'bg-transparent'}
                 `}
                 onMouseEnter={() => setHoveredIndex(index)}
                 onMouseLeave={() => setHoveredIndex(null)}
+                onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}
               >
                 {/* Step Number */}
                 <span className={`
-                  absolute top-3 left-3 md:top-4 md:left-4
+                  absolute top-2 left-2 sm:top-3 sm:left-3 md:top-4 md:left-4
                   text-[10px] md:text-xs font-mono tracking-widest
                   transition-all duration-300
                   ${isHovered ? 'text-white' : 'text-white/40'}
@@ -88,8 +92,8 @@ const ProcessBillboardOverlay = () => {
                 
                 {/* Icon */}
                 <div className={`
-                  w-12 h-12 md:w-16 md:h-16 rounded-full
-                  flex items-center justify-center mb-3 md:mb-4
+                  w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex-shrink-0
+                  flex items-center justify-center sm:mb-2 md:mb-3
                   border transition-all duration-500
                   ${isHovered 
                     ? 'bg-white/20 border-white/40 scale-110' 
@@ -97,40 +101,56 @@ const ProcessBillboardOverlay = () => {
                   }
                 `}>
                   <Icon className={`
-                    w-5 h-5 md:w-7 md:h-7 transition-all duration-300
+                    w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-all duration-300
                     ${isHovered ? 'text-white' : 'text-white/60'}
                   `} />
                 </div>
                 
-                {/* Title */}
-                <h4 className={`
-                  text-sm md:text-base lg:text-lg font-medium text-center
-                  transition-all duration-300
-                  ${isHovered ? 'text-white' : 'text-white/80'}
-                `}>
-                  {phase.title}
-                </h4>
-                
-                {/* Description - Only visible on hover */}
-                <div className={`
-                  mt-2 md:mt-3 text-center overflow-hidden
-                  transition-all duration-500 ease-out
-                  ${isHovered 
-                    ? 'max-h-[100px] opacity-100 translate-y-0' 
-                    : 'max-h-0 opacity-0 translate-y-2'
-                  }
-                `}>
-                  <p className="text-[11px] md:text-xs lg:text-sm text-white/70 leading-relaxed px-1">
-                    {phase.description}
-                  </p>
+                {/* Content */}
+                <div className="flex-1 sm:flex-none sm:text-center">
+                  {/* Title */}
+                  <h4 className={`
+                    text-sm sm:text-sm md:text-base lg:text-lg font-medium
+                    transition-all duration-300
+                    ${isHovered ? 'text-white' : 'text-white/80'}
+                  `}>
+                    {phase.title}
+                  </h4>
+                  
+                  {/* Description - 모바일에서 항상 표시, 태블릿/데스크톱은 호버 시 */}
+                  <div className={`
+                    sm:mt-2 md:mt-3 overflow-hidden
+                    transition-all duration-500 ease-out
+                    max-h-[60px] opacity-100
+                    sm:${isHovered 
+                      ? 'sm:max-h-[100px] sm:opacity-100 sm:translate-y-0' 
+                      : 'sm:max-h-0 sm:opacity-0 sm:translate-y-2'
+                    }
+                  `}>
+                    <p className={`
+                      text-[11px] sm:text-[11px] md:text-xs lg:text-sm text-white/60 leading-relaxed
+                      transition-all duration-500
+                      ${isHovered ? 'sm:opacity-100' : 'sm:opacity-0'}
+                    `}>
+                      {phase.description}
+                    </p>
+                  </div>
                 </div>
                 
-                {/* Bottom Accent Line */}
+                {/* Bottom Accent Line - 데스크톱만 */}
                 <div className={`
                   absolute bottom-0 left-1/2 -translate-x-1/2
                   h-[2px] bg-gradient-to-r from-transparent via-white to-transparent
-                  transition-all duration-500
+                  transition-all duration-500 hidden sm:block
                   ${isHovered ? 'w-3/4 opacity-100' : 'w-0 opacity-0'}
+                `} />
+                
+                {/* Right Accent Line - 모바일만 */}
+                <div className={`
+                  absolute right-0 top-1/2 -translate-y-1/2
+                  w-[2px] bg-gradient-to-b from-transparent via-white to-transparent
+                  transition-all duration-500 sm:hidden
+                  ${isHovered ? 'h-1/2 opacity-100' : 'h-0 opacity-0'}
                 `} />
               </div>
             );
