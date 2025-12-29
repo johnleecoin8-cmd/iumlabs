@@ -18,31 +18,34 @@ const WhyChooseUsSection = () => {
         {/* Right: Content */}
         <div className="flex flex-col">
           {/* About Text */}
-          <div className="p-4 md:p-5 flex-1 flex flex-col justify-center border-b border-border">
-            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-2">
+          <div className="p-5 md:p-6 flex-1 flex flex-col justify-center border-b border-border">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3">
               About Us
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-2 text-sm">
+            <p className="text-muted-foreground leading-relaxed mb-4 text-sm md:text-base">
               We bridge global Web3 projects to growth in the Korean market. Established in 2025, we have become a trusted partner for 18+ brands expanding into Korea's dynamic crypto ecosystem. Our name, 'Ium', is derived from the Korean verb 'to connect' (잇다), embodying our core mission to seamlessly link global innovation with local opportunities.
             </p>
-            <p className="text-foreground font-medium text-sm">
-              Founded by former executives from Binance and KuCoin
-            </p>
+            <div className="flex items-center gap-2">
+              <div className="w-1 h-4 bg-primary rounded-full"></div>
+              <p className="text-foreground font-medium text-sm">
+                Founded by former executives from Binance and KuCoin
+              </p>
+            </div>
           </div>
 
           {/* Stats + CTA */}
-          <div className="p-4 md:p-5">
+          <div className="p-5 md:p-6">
             <div className="grid grid-cols-3 gap-3 mb-4">
-              <div className="text-center">
-                <div className="text-xl md:text-2xl font-bold text-foreground mb-0.5">2025</div>
+              <div className="text-center p-3 bg-muted/30 rounded-lg">
+                <div className="text-2xl md:text-3xl font-bold text-foreground mb-0.5">2025</div>
                 <div className="text-xs text-muted-foreground">Founded</div>
               </div>
-              <div className="text-center">
-                <div className="text-xl md:text-2xl font-bold text-foreground mb-0.5">18+</div>
+              <div className="text-center p-3 bg-muted/30 rounded-lg">
+                <div className="text-2xl md:text-3xl font-bold text-foreground mb-0.5">18+</div>
                 <div className="text-xs text-muted-foreground">Partners</div>
               </div>
-              <div className="text-center">
-                <div className="text-xl md:text-2xl font-bold text-foreground mb-0.5">60+</div>
+              <div className="text-center p-3 bg-muted/30 rounded-lg">
+                <div className="text-2xl md:text-3xl font-bold text-foreground mb-0.5">60+</div>
                 <div className="text-xs text-muted-foreground">Campaigns</div>
               </div>
             </div>
