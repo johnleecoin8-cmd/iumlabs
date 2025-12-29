@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import Logo3D from "@/components/Logo3D";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -189,6 +190,11 @@ const CasesSection = () => {
               <span className="group-hover:underline underline-offset-4">View all projects</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
+          </div>
+
+          {/* 3D Bridge Logo */}
+          <div className="h-32 w-full mt-6">
+            <Logo3D />
           </div>
         </div>
       </div>
