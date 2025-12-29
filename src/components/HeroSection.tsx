@@ -18,16 +18,14 @@ import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 
-// Desktop tags - 8 services
+// Desktop tags
 const serviceTags = [
-  { label: "Deep Research", position: "top-[12%] left-[5%]" },
-  { label: "GTM Strategy", position: "top-[28%] left-[4%]" },
-  { label: "Community Growth", position: "top-[44%] left-[6%]" },
-  { label: "Branding & Web", position: "top-[60%] left-[5%]" },
-  { label: "KOL Marketing", position: "top-[15%] right-[6%]" },
-  { label: "Media & PR", position: "top-[31%] right-[5%]" },
-  { label: "SEO & Ads", position: "top-[47%] right-[7%]" },
-  { label: "Offline Events", position: "top-[63%] right-[6%]" },
+  { label: "Deep Research", position: "top-[15%] left-[5%]" },
+  { label: "GTM Strategy", position: "top-[35%] left-[4%]" },
+  { label: "Community Growth", position: "top-[55%] left-[6%]" },
+  { label: "KOL Marketing", position: "top-[18%] right-[6%]" },
+  { label: "Media & PR", position: "top-[42%] right-[5%]" },
+  { label: "Offline Events", position: "top-[66%] right-[7%]" },
 ];
 
 // Mobile tags (fewer, repositioned for small screens)
