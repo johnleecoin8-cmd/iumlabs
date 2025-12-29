@@ -131,11 +131,7 @@ const ResearchDetail = () => {
       <section className="relative pt-24 pb-16">
         <div className="container mx-auto max-w-4xl px-4">
           {/* Back Link */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
+          <div>
             <Link 
               to="/research" 
               className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8"
@@ -143,15 +139,10 @@ const ResearchDetail = () => {
               <ArrowLeft className="w-4 h-4" />
               Back to Research
             </Link>
-          </motion.div>
+          </div>
           
           {/* Meta */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex flex-wrap items-center gap-4 mb-6"
-          >
+          <div className="flex flex-wrap items-center gap-4 mb-6">
             <span className="px-3 py-1 bg-primary/20 text-primary rounded-full text-sm">
               {post.category}
             </span>
@@ -163,25 +154,15 @@ const ResearchDetail = () => {
               <Calendar className="w-4 h-4" />
               {post.date}
             </span>
-          </motion.div>
+          </div>
           
           {/* Title */}
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight mb-8"
-          >
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium text-white leading-tight mb-8">
             {post.title}
-          </motion.h1>
+          </h1>
           
           {/* Author */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex items-center justify-between flex-wrap gap-4 pb-8 border-b border-white/10"
-          >
+          <div className="flex items-center justify-between flex-wrap gap-4 pb-8 border-b border-white/10">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-lg font-medium text-white">
                 {post.author.split(' ').map(n => n[0]).join('')}
@@ -220,34 +201,24 @@ const ResearchDetail = () => {
                 <Copy className="w-4 h-4" />
               </motion.button>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Featured Image */}
       <section className="container mx-auto max-w-5xl px-4 mb-16">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="aspect-[21/9] rounded-2xl overflow-hidden"
-        >
+        <div className="aspect-[21/9] rounded-2xl overflow-hidden">
           <img 
             src={post.image} 
             alt={post.title}
             className="w-full h-full object-cover"
           />
-        </motion.div>
+        </div>
       </section>
 
       {/* Content */}
       <section className="container mx-auto max-w-4xl px-4 pb-20">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="prose prose-invert prose-lg max-w-none"
-        >
+        <div className="prose prose-invert prose-lg max-w-none">
           <div className="text-white/80 leading-relaxed">
             {post.content.split('\n').map((line, index) => {
               if (line.startsWith('## ')) {
@@ -316,39 +287,27 @@ const ResearchDetail = () => {
               );
             })}
           </div>
-        </motion.div>
+        </div>
 
         {/* Tags */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.6 }}
-          className="flex flex-wrap items-center gap-2 mt-12 pt-8 border-t border-white/10"
-        >
+        <div className="flex flex-wrap items-center gap-2 mt-12 pt-8 border-t border-white/10">
           <span className="text-white/40 text-sm mr-2">Tags:</span>
           {post.tags.map((tag) => (
-            <motion.span 
+            <span 
               key={tag} 
-              whileHover={{ scale: 1.05, backgroundColor: "rgba(255,255,255,0.1)" }}
-              className="px-3 py-1 bg-white/5 text-white/60 rounded-full text-sm cursor-pointer transition-colors"
+              className="px-3 py-1 bg-white/5 text-white/60 rounded-full text-sm cursor-pointer transition-colors hover:bg-white/10"
             >
               {tag}
-            </motion.span>
+            </span>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       {/* Related Articles */}
       {relatedPosts.length > 0 && (
         <section className="bg-[#0A0A0A] py-20 border-t border-white/10">
           <div className="container mx-auto max-w-7xl px-4">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="flex items-center justify-between mb-12"
-            >
+            <div className="flex items-center justify-between mb-12">
               <h2 className="text-2xl md:text-3xl font-light text-white">
                 Related Articles
               </h2>
@@ -358,17 +317,11 @@ const ResearchDetail = () => {
               >
                 View All <ChevronRight className="w-4 h-4" />
               </Link>
-            </motion.div>
+            </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {relatedPosts.map((relatedPost, index) => (
-                <motion.div
-                  key={relatedPost.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
+              {relatedPosts.map((relatedPost) => (
+                <div key={relatedPost.id}>
                   <Link 
                     to={`/research/${relatedPost.slug}`}
                     className="group block"
@@ -402,7 +355,7 @@ const ResearchDetail = () => {
                       </div>
                     </motion.div>
                   </Link>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>

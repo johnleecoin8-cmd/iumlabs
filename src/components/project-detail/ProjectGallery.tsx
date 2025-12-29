@@ -37,13 +37,7 @@ const ProjectGallery = ({ gallery, glowColor, onOpenLightbox }: ProjectGalleryPr
       
       <div className="container mx-auto max-w-7xl px-4 md:px-8 pt-12">
         {/* Header */}
-        <motion.div 
-          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
           <div>
             <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] mb-4" style={{ color: glowColor }}>
               <span className="w-6 h-px" style={{ backgroundColor: glowColor }} />
@@ -77,7 +71,7 @@ const ProjectGallery = ({ gallery, glowColor, onOpenLightbox }: ProjectGalleryPr
               <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white" />
             </motion.button>
           </div>
-        </motion.div>
+        </div>
 
         {/* Gallery Images */}
         <div 
@@ -89,10 +83,6 @@ const ProjectGallery = ({ gallery, glowColor, onOpenLightbox }: ProjectGalleryPr
               <motion.div 
                 key={index} 
                 className="relative w-72 md:w-80 aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0 border border-white/10 hover:border-white/30 transition-all duration-300"
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
                 whileHover={{ y: -8, scale: 1.02 }}
                 onClick={() => onOpenLightbox(index)}
                 onMouseEnter={(e) => e.currentTarget.style.borderColor = `${glowColor}50`}

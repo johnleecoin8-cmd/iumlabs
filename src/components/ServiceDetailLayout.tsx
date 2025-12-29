@@ -106,23 +106,6 @@ const ServiceDetailLayout = ({
   // Filter out current service
   const otherServices = allServices.filter((service) => service.slug !== currentServiceSlug);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll(".scroll-reveal");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] p-0.5 sm:p-1 md:p-2">
@@ -398,14 +381,9 @@ const ServiceDetailLayout = ({
                 const isOdd = index % 2 === 1;
                 
                 return (
-                  <motion.div
+                  <div
                     key={step.number}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ y: -4 }}
-                    className={`group p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-300 relative overflow-hidden ${
+                    className={`group p-5 sm:p-6 md:p-8 lg:p-10 transition-all duration-300 relative overflow-hidden hover:-translate-y-1 ${
                       !isLast ? "lg:border-r" : ""
                     } ${isOdd ? "md:border-l lg:border-l-0" : ""} ${
                       index < 2 ? "border-b lg:border-b-0" : ""
@@ -451,7 +429,7 @@ const ServiceDetailLayout = ({
                         {step.description}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>

@@ -26,17 +26,7 @@ const ProjectChallenge = ({
       <div className="container mx-auto max-w-7xl px-4 md:px-8 pt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left - THE CHALLENGE */}
-          <motion.div className="p-8 md:p-12 rounded-2xl bg-[#111] transition-all duration-300 relative overflow-hidden group" initial={{
-          opacity: 0,
-          x: -30
-        }} whileInView={{
-          opacity: 1,
-          x: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.6
-        }} whileHover={{
+          <motion.div className="p-8 md:p-12 rounded-2xl bg-[#111] transition-all duration-300 relative overflow-hidden group" whileHover={{
           y: -4
         }} style={{
           border: `1px solid ${glowColor}30`
@@ -80,18 +70,7 @@ const ProjectChallenge = ({
           </motion.div>
 
           {/* Right - WHAT WE DID */}
-          <motion.div className="p-8 md:p-12 rounded-2xl bg-[#111] transition-all duration-300 relative overflow-hidden group" initial={{
-          opacity: 0,
-          x: 30
-        }} whileInView={{
-          opacity: 1,
-          x: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          duration: 0.6,
-          delay: 0.1
-        }} whileHover={{
+          <motion.div className="p-8 md:p-12 rounded-2xl bg-[#111] transition-all duration-300 relative overflow-hidden group" whileHover={{
           y: -4
         }} style={{
           border: `1px solid ${glowColor}20`
@@ -117,24 +96,13 @@ const ProjectChallenge = ({
             
             {/* Services List with Project Color Dots */}
             <div className="space-y-4 mb-8">
-              {services.map((service, i) => <motion.div key={i} className="flex items-center gap-3 group/item" initial={{
-              opacity: 0,
-              x: 10
-            }} whileInView={{
-              opacity: 1,
-              x: 0
-            }} viewport={{
-              once: true
-            }} transition={{
-              duration: 0.4,
-              delay: i * 0.1
-            }}>
+              {services.map((service, i) => <div key={i} className="flex items-center gap-3 group/item">
                   <div className="w-2 h-2 rounded-full transition-all duration-300 group-hover/item:scale-150 group-hover/item:shadow-lg" style={{
                 backgroundColor: glowColor,
                 boxShadow: `0 0 0 0 ${glowColor}40`
               }} />
                   <span className="text-white text-lg group-hover/item:translate-x-1 transition-transform">{service}</span>
-                </motion.div>)}
+                </div>)}
             </div>
 
             {/* Divider with color */}

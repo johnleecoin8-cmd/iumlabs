@@ -179,23 +179,6 @@ const ServicePageLayout = ({
     return () => clearTimeout(timer);
   }, []);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = document.querySelectorAll(".scroll-reveal");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
 
   const otherServices = allServices.filter(s => s.slug !== currentSlug);
 
@@ -403,20 +386,16 @@ const ServicePageLayout = ({
 
       {/* Deliverables Section */}
       {deliverables && deliverables.length > 0 && (
-        <section className="scroll-reveal bg-[#121212]">
+        <section className="bg-[#121212]">
           <div className="border-t border-white/10">
             <SectionHeader number={deliverablesSectionNum!} title="What You Get" badge="Deliverables" />
             
             <div className="py-12 md:py-16">
               <div className="container mx-auto px-6 lg:px-16">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {deliverables.map((deliverable, index) => (
-                    <motion.div
+                  {deliverables.map((deliverable) => (
+                    <div
                       key={deliverable.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
                       className="p-5 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all"
                     >
                       <h3 className="text-base font-semibold text-white mb-3 flex items-center gap-2">
@@ -437,7 +416,7 @@ const ServicePageLayout = ({
                           </li>
                         ))}
                       </ul>
-                    </motion.div>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -448,7 +427,7 @@ const ServicePageLayout = ({
 
       {/* Process Section - Conditional */}
       {processSteps && processSteps.length > 0 && (
-        <section className="scroll-reveal bg-[#0F0F0F]" id="process">
+        <section className="bg-[#0F0F0F]" id="process">
           <div className="border-t border-white/10">
             <SectionHeader number={processSectionNum!} title="Process" badge="How We Work" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
@@ -458,13 +437,8 @@ const ServicePageLayout = ({
                 const isOdd = index % 2 === 1;
                 
                 return (
-                  <motion.div
+                  <div
                     key={step.number}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ y: -4 }}
                     className={`group p-4 sm:p-6 md:p-8 transition-all duration-300 hover:bg-white/5 ${
                       !isLast ? "lg:border-r border-white/10" : ""
                     } ${isOdd ? "md:border-l lg:border-l-0 border-white/10" : ""} ${
@@ -491,7 +465,7 @@ const ServicePageLayout = ({
                     <p className="text-white/50 text-sm leading-relaxed">
                       {step.description}
                     </p>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
@@ -500,42 +474,15 @@ const ServicePageLayout = ({
       )}
 
       {/* More Services Section */}
-      <section className="scroll-reveal bg-[#121212]">
+      <section className="bg-[#121212]">
         <div className="border-t border-white/10">
           <SectionHeader number={moreServicesSectionNum} title="More Services" badge="Explore" />
-          <motion.div 
+          <div 
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            variants={{
-              hidden: {},
-              visible: {
-                transition: {
-                  staggerChildren: 0.1
-                }
-              }
-            }}
           >
-            {otherServices.map((service, index) => (
-              <motion.div
+            {otherServices.map((service) => (
+              <div
                 key={service.slug}
-                variants={{
-                  hidden: { 
-                    opacity: 0, 
-                    y: 30,
-                    scale: 0.95
-                  },
-                  visible: { 
-                    opacity: 1, 
-                    y: 0,
-                    scale: 1,
-                    transition: {
-                      duration: 0.5,
-                      ease: [0.25, 0.46, 0.45, 0.94]
-                    }
-                  }
-                }}
               >
                 <Link
                   to={`/services/${service.slug}`}
@@ -584,15 +531,15 @@ const ServicePageLayout = ({
                     </div>
                   </div>
                 </Link>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* FAQ Section */}
       {faqItems && faqItems.length > 0 && (
-        <section className="scroll-reveal bg-[#0F0F0F]">
+        <section className="bg-[#0F0F0F]">
           <div className="border-t border-white/10">
             <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
             
@@ -600,12 +547,8 @@ const ServicePageLayout = ({
                 <div className="container mx-auto px-4 sm:px-6 lg:px-16 max-w-4xl">
                 <Accordion type="single" collapsible className="space-y-3">
                   {faqItems.map((item, index) => (
-                    <motion.div
+                    <div
                       key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
                     >
                         <AccordionItem 
                         value={`item-${index}`}
@@ -624,7 +567,7 @@ const ServicePageLayout = ({
                           {item.answer}
                         </AccordionContent>
                       </AccordionItem>
-                    </motion.div>
+                    </div>
                   ))}
                 </Accordion>
               </div>
@@ -634,7 +577,7 @@ const ServicePageLayout = ({
       )}
 
       {/* Contact Section */}
-      <section className="scroll-reveal bg-[#121212]" id="contact">
+      <section className="bg-[#121212]" id="contact">
         <ContactFormSection sectionNumber={contactSectionNum} />
       </section>
 

@@ -94,12 +94,8 @@ const CTASection = () => {
       <div className="flex flex-col lg:flex-row relative z-10">
         {/* Left: Contact Info */}
         <div className="w-full lg:w-1/3 lg:border-r border-border">
-          <motion.div
+          <div
             className="p-6 md:p-8 lg:p-10 lg:sticky lg:top-0 flex flex-col pt-8 md:pt-12"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Get in Touch
@@ -171,16 +167,12 @@ const CTASection = () => {
               <Link to="/privacy" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</Link>
               <Link to="/transparency" className="text-muted-foreground hover:text-foreground transition-colors">Transparency</Link>
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* Right: Contact Form */}
-        <motion.div
+        <div
           className="w-full lg:w-2/3 p-6 md:p-8 lg:p-10"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
         >
           <form onSubmit={handleSubmit} className="max-w-2xl">
             <div className="flex items-center justify-between mb-8">
@@ -334,7 +326,7 @@ const CTASection = () => {
               </motion.button>
             </motion.div>
           </form>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
