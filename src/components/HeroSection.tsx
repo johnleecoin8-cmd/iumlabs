@@ -1,4 +1,4 @@
-import { ChevronDown, Calendar } from "lucide-react";
+import { ChevronDown, Send } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { brand } from "@/config/content";
@@ -18,22 +18,24 @@ import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 
-// Desktop tags
+// Desktop tags - 8 services
 const serviceTags = [
-  { label: "Deep Research", position: "top-[15%] left-[5%]" },
-  { label: "GTM Strategy", position: "top-[35%] left-[4%]" },
-  { label: "Community Growth", position: "top-[55%] left-[6%]" },
-  { label: "KOL Marketing", position: "top-[18%] right-[6%]" },
-  { label: "Media & PR", position: "top-[42%] right-[5%]" },
-  { label: "Offline Events", position: "top-[66%] right-[7%]" },
+  { label: "Deep Research", position: "top-[12%] left-[5%]" },
+  { label: "GTM Strategy", position: "top-[28%] left-[4%]" },
+  { label: "Community Growth", position: "top-[44%] left-[6%]" },
+  { label: "Branding & Web", position: "top-[60%] left-[5%]" },
+  { label: "KOL Marketing", position: "top-[14%] right-[6%]" },
+  { label: "Media & PR", position: "top-[30%] right-[5%]" },
+  { label: "SEO & Ads", position: "top-[46%] right-[7%]" },
+  { label: "Offline Events", position: "top-[62%] right-[6%]" },
 ];
 
 // Mobile tags (fewer, repositioned for small screens)
 const mobileServiceTags = [
   { label: "Research", position: "top-[8%] left-[3%]" },
-  { label: "Marketing", position: "top-[12%] right-[3%]" },
-  { label: "GTM", position: "bottom-[38%] left-[2%]" },
-  { label: "Events", position: "bottom-[42%] right-[2%]" },
+  { label: "GTM", position: "top-[14%] right-[3%]" },
+  { label: "Marketing", position: "bottom-[40%] left-[2%]" },
+  { label: "Events", position: "bottom-[34%] right-[2%]" },
 ];
 
 const clientLogos = [
@@ -131,15 +133,13 @@ const HeroSection = () => {
 
           {/* CTA Button */}
           <a
-            href={brand.calendlyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/contact#contact-form"
             className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"
           >
             {/* Shine sweep effect */}
             <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
-            <Calendar className="w-4 h-4" />
-            <span>Book a Meeting</span>
+            <Send className="w-4 h-4" />
+            <span>Get Your Free Proposal</span>
           </a>
         </div>
       </div>
