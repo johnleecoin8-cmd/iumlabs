@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import ProcessSection from "@/components/ProcessSection";
+import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.webp";
 import ServicesSection from "@/components/ServicesSection";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
 import CasesSection from "@/components/CasesSection";
@@ -67,6 +68,17 @@ const Index = () => {
             <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
           </div>
           <ProcessSection />
+        </div>
+      </section>
+      
+      {/* Featured Billboard Image */}
+      <section className="bg-surface-odd">
+        <div className="px-4 md:px-10 pb-10 md:pb-16">
+          <img 
+            src={seoulMetroBillboard} 
+            alt="Seoul Metro Billboard Campaign" 
+            className="w-full h-auto rounded-xl md:rounded-2xl"
+          />
         </div>
       </section>
       
