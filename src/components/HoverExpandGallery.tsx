@@ -278,7 +278,7 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
           style={{ height: config.height }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.3}
+          dragElastic={0.6}
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
@@ -400,7 +400,7 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
           style={{ height: config.height, gap: `${config.gap}px` }}
           drag="x"
           dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.3}
+          dragElastic={0.6}
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
         >
