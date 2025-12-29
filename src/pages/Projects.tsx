@@ -6,6 +6,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
+import { HoverExpandGallery } from "@/components/HoverExpandGallery";
 import { ArrowRight, Calendar, ChevronDown, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { usePageTitle } from "@/hooks/usePageTitle";
@@ -41,6 +42,14 @@ import fogoBg from "@/assets/campaigns/fogo-fest.avif";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
 
+// Gallery images for hover expand gallery
+import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
+import polygonHackathon from "@/assets/campaigns/polygon-hackathon.jpg";
+import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
+import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
+import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
+import lbankFestival from "@/assets/campaigns/lbank-festival.jpg";
+
 // Hardcoded fallback data
 const fallbackCases = [
   { name: "BNB Chain", logo: bnbLogo, bgImage: bnbBg, slug: "bnb-chain", result: "+340% Korean Trading Volume", category: "Infrastructure", description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage." },
@@ -73,6 +82,20 @@ const stats = [
   { value: 340, label: "Avg. Volume Increase", suffix: "%" },
   { value: 6, label: "Token Sales", prefix: "$", suffix: "M+" },
   { value: 50, label: "New Users Acquired", suffix: "K+" },
+];
+
+// Gallery images data for hover expand gallery
+const galleryImages = [
+  { src: storyBg, alt: "Story Protocol Origin Summit", title: "Story Origin Summit", description: "IP Protocol launch event in Seoul" },
+  { src: ondoSeminar, alt: "Ondo Finance Seminar", title: "Ondo Finance Seminar", description: "RWA education seminar for Korean investors" },
+  { src: synfuturesBg, alt: "SynFutures Billboard", title: "Gangnam Billboard", description: "High-visibility billboard campaign in Gangnam" },
+  { src: peaqBg, alt: "Peaq Summit", title: "Peaq DePIN Summit", description: "DePIN thought leadership event" },
+  { src: polygonHackathon, alt: "Polygon Hackathon", title: "Polygon Hackathon", description: "Developer hackathon in Seoul" },
+  { src: storyWorkshop, alt: "Story Workshop", title: "Creator Workshop", description: "IP tokenization workshop for creators" },
+  { src: openledgerInterview, alt: "OpenLedger Interview", title: "OpenLedger Interview", description: "Media interview session" },
+  { src: seoulMetroBillboard, alt: "Seoul Metro Billboard", title: "Seoul Metro Billboard", description: "Subway advertising campaign" },
+  { src: lbankFestival, alt: "LBank Festival", title: "LBank Festival", description: "Exchange partnership event" },
+  { src: fogoBg, alt: "Fogo Fest", title: "Fogo Fest 2025", description: "FOGO community launch event" },
 ];
 
 // Stat Item Component
@@ -422,9 +445,28 @@ const Projects = () => {
         </div>
       </section>
       
-      {/* Contact Section - 03 */}
+      {/* Gallery Section - 03 */}
+      <section className="scroll-reveal bg-[#0A0A0A]" id="gallery">
+        <div className="border-t border-border">
+          <div className="flex items-baseline justify-between p-4 sm:p-6 md:px-10 md:py-6 border-b border-border">
+            <div className="flex items-baseline gap-6 md:gap-10">
+              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">03</span>
+              <h2 className="text-lg md:text-xl font-medium text-foreground">Gallery</h2>
+            </div>
+            <span className="text-xs text-muted-foreground tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-border rounded-full">
+              Campaign Highlights
+            </span>
+          </div>
+          
+          <div className="py-8 md:py-12">
+            <HoverExpandGallery images={galleryImages} />
+          </div>
+        </div>
+      </section>
+      
+      {/* Contact Section - 04 */}
       <section className="scroll-reveal bg-[#0F0F0F]" id="contact">
-        <ContactFormSection sectionNumber="03" />
+        <ContactFormSection sectionNumber="04" />
       </section>
       
       {/* CTA Banner */}
