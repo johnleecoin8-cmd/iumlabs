@@ -92,11 +92,9 @@ const stats = [
 // Gallery images data for hover expand gallery - ALL campaign images
 const galleryImages = [
   { src: storyBg, alt: "Story Protocol Origin Summit", title: "Story Origin Summit", description: "IP Protocol launch event in Seoul" },
-  { src: ondoSeminar, alt: "Ondo Finance Seminar", title: "Ondo Finance Seminar", description: "RWA education seminar for Korean investors" },
   { src: synfuturesBg, alt: "SynFutures Billboard", title: "Gangnam Billboard", description: "High-visibility billboard campaign in Gangnam" },
   { src: peaqBg, alt: "Peaq Summit", title: "Peaq DePIN Summit", description: "DePIN thought leadership event" },
   { src: polygonHackathon, alt: "Polygon Hackathon", title: "Polygon Hackathon", description: "Developer hackathon in Seoul" },
-  { src: storyWorkshop, alt: "Story Workshop", title: "Creator Workshop", description: "IP tokenization workshop for creators" },
   { src: openledgerInterview, alt: "OpenLedger Interview", title: "OpenLedger Interview", description: "Media interview session" },
   { src: seoulMetroBillboard, alt: "Seoul Metro Billboard", title: "Seoul Metro Billboard", description: "Subway advertising campaign" },
   { src: lbankFestival, alt: "LBank Festival", title: "LBank Festival", description: "Exchange partnership event" },
@@ -104,7 +102,6 @@ const galleryImages = [
   { src: bnbBg, alt: "BNB Chain Event", title: "BNB Chain Seoul", description: "BNB Chain community event in Seoul" },
   { src: bybitBg, alt: "Bybit Event", title: "Bybit Trading Event", description: "Bybit VIP trader meetup" },
   { src: kucoinBg, alt: "KuCoin Panel", title: "KuCoin Old School Panel", description: "KuCoin crypto OG panel discussion" },
-  { src: kucoinCampaign, alt: "KuCoin Campaign", title: "KuCoin Trading Campaign", description: "Trading competition campaign" },
   { src: kucoinOldschool, alt: "KuCoin Old School", title: "KuCoin Old School Event", description: "Old school crypto meetup" },
   { src: mantraBg, alt: "Mantra Party", title: "Mantra RWA Party", description: "Mantra community celebration" },
   { src: megaethBg, alt: "MegaETH Launch", title: "MegaETH Launch", description: "MegaETH pre-launch event" },
