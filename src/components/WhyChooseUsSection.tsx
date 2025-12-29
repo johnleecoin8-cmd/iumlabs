@@ -36,16 +36,16 @@ const WhyChooseUsSection = () => {
           {/* Stats + CTA */}
           <div className="p-5 md:p-6">
             <div className="grid grid-cols-3 gap-3 mb-4">
-              <div className="text-center p-3 bg-muted/30 rounded-lg">
-                <div className="text-2xl md:text-3xl font-bold text-foreground mb-0.5">2025</div>
+              <div className="text-center p-3 bg-muted/30 rounded-lg border border-border/50 hover:bg-muted/50 hover:scale-105 transition-all duration-300 cursor-default">
+                <div className="text-2xl md:text-3xl font-bold text-primary mb-0.5">2025</div>
                 <div className="text-xs text-muted-foreground">Founded</div>
               </div>
-              <div className="text-center p-3 bg-muted/30 rounded-lg">
-                <div className="text-2xl md:text-3xl font-bold text-foreground mb-0.5">18+</div>
+              <div className="text-center p-3 bg-muted/30 rounded-lg border border-border/50 hover:bg-muted/50 hover:scale-105 transition-all duration-300 cursor-default">
+                <div className="text-2xl md:text-3xl font-bold text-primary mb-0.5">18+</div>
                 <div className="text-xs text-muted-foreground">Partners</div>
               </div>
-              <div className="text-center p-3 bg-muted/30 rounded-lg">
-                <div className="text-2xl md:text-3xl font-bold text-foreground mb-0.5">60+</div>
+              <div className="text-center p-3 bg-muted/30 rounded-lg border border-border/50 hover:bg-muted/50 hover:scale-105 transition-all duration-300 cursor-default">
+                <div className="text-2xl md:text-3xl font-bold text-primary mb-0.5">60+</div>
                 <div className="text-xs text-muted-foreground">Campaigns</div>
               </div>
             </div>
