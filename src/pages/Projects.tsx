@@ -30,7 +30,7 @@ import synfuturesLogo from "@/assets/logos/synfutures.png";
 
 // Import campaign images for backgrounds as fallbacks
 import bnbBg from "@/assets/campaigns/bnb-event.jpg";
-import kucoinBg from "@/assets/campaigns/kucoin-oldschool-panel.jpg";
+import kucoinBg from "@/assets/campaigns/kucoin-oldschool.jpg";
 import peaqBg from "@/assets/campaigns/peaq-summit.jpg";
 import storyBg from "@/assets/campaigns/story-origin-summit.jpg";
 import megaethBg from "@/assets/campaigns/megaeth-launch.jpg";
