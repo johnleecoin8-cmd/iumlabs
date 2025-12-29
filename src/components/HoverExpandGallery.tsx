@@ -40,17 +40,17 @@ const useBreakpoint = () => {
 };
 
 // Lightbox Component
-function Lightbox({
-  images,
-  currentIndex,
-  isOpen,
-  onClose,
-  onNavigate
-}: {
-  images: GalleryImage[];
-  currentIndex: number;
-  isOpen: boolean;
-  onClose: () => void;
+function Lightbox({ 
+  images, 
+  currentIndex, 
+  isOpen, 
+  onClose, 
+  onNavigate 
+}: { 
+  images: GalleryImage[]; 
+  currentIndex: number; 
+  isOpen: boolean; 
+  onClose: () => void; 
   onNavigate: (index: number) => void;
 }) {
   const [dragDirection, setDragDirection] = useState(0);
@@ -75,6 +75,7 @@ function Lightbox({
   const handleDragEnd = (_: any, info: { offset: { x: number }; velocity: { x: number } }) => {
     const swipeThreshold = 50;
     const velocityThreshold = 500;
+    
     if (info.offset.x > swipeThreshold || info.velocity.x > velocityThreshold) {
       setDragDirection(-1);
       onNavigate((currentIndex - 1 + images.length) % images.length);
@@ -85,6 +86,7 @@ function Lightbox({
   };
 
   if (!isOpen) return null;
+
   const currentImage = images[currentIndex];
 
   return (
@@ -148,8 +150,12 @@ function Lightbox({
           
           {(currentImage.title || currentImage.description) && (
             <div className="mt-4 text-center px-4">
-              {currentImage.title && <h3 className="text-white text-lg font-semibold">{currentImage.title}</h3>}
-              {currentImage.description && <p className="text-white/70 text-sm mt-1">{currentImage.description}</p>}
+              {currentImage.title && (
+                <h3 className="text-white text-lg font-semibold">{currentImage.title}</h3>
+              )}
+              {currentImage.description && (
+                <p className="text-white/70 text-sm mt-1">{currentImage.description}</p>
+              )}
             </div>
           )}
 
@@ -168,15 +174,11 @@ function Lightbox({
   );
 }
 
-export function HoverExpandGallery({
-  images,
-  className = ""
-}: HoverExpandGalleryProps) {
+export function HoverExpandGallery({ images, className = "" }: HoverExpandGalleryProps) {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isDragging = useRef(false);
   const startX = useRef(0);
@@ -188,49 +190,11 @@ export function HoverExpandGallery({
   const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const breakpoint = useBreakpoint();
 
-  // Calculate item width based on container width (5 items per view)
-  const [itemWidth, setItemWidth] = useState(0);
-  const gap = breakpoint === "mobile" ? 8 : breakpoint === "tablet" ? 12 : 16;
-
-  useEffect(() => {
-    const calculateWidth = () => {
-      if (typeof window !== "undefined") {
-        const containerWidth = window.innerWidth;
-        const totalGaps = gap * 4; // 4 gaps between 5 items
-        const calculatedWidth = (containerWidth - totalGaps) / 5;
-        setItemWidth(calculatedWidth);
-      }
-    };
-    calculateWidth();
-    window.addEventListener("resize", calculateWidth);
-    return () => window.removeEventListener("resize", calculateWidth);
-  }, [gap]);
-
   const config = useMemo(() => ({
-    mobile: {
-      expandedWidth: itemWidth * 1.3,
-      height: "min(400px, 50vh)"
-    },
-    tablet: {
-      expandedWidth: itemWidth * 1.4,
-      height: "min(500px, 55vh)"
-    },
-    desktop: {
-      expandedWidth: itemWidth * 1.5,
-      height: "min(590px, 60vh)"
-    }
-  })[breakpoint], [breakpoint, itemWidth]);
-
-  // Update scroll progress
-  const updateScrollProgress = useCallback(() => {
-    if (!scrollContainerRef.current) return;
-    const container = scrollContainerRef.current;
-    const maxScroll = container.scrollWidth - container.clientWidth;
-    if (maxScroll > 0) {
-      const progress = (container.scrollLeft / maxScroll) * 100;
-      setScrollProgress(Math.min(100, Math.max(0, progress)));
-    }
-  }, []);
+    mobile: { itemWidth: 200, expandedWidth: 280, height: "min(400px, 50vh)", gap: 12 },
+    tablet: { itemWidth: 220, expandedWidth: 340, height: "min(500px, 55vh)", gap: 16 },
+    desktop: { itemWidth: 260, expandedWidth: 420, height: "min(590px, 60vh)", gap: 20 },
+  })[breakpoint], [breakpoint]);
 
   // Momentum scrolling
   const applyMomentum = useCallback(() => {
@@ -241,7 +205,6 @@ export function HoverExpandGallery({
     
     if (Math.abs(velocity.current) > minVelocity) {
       scrollContainerRef.current.scrollLeft += velocity.current;
-      updateScrollProgress();
       velocity.current *= friction;
       momentumFrame.current = requestAnimationFrame(applyMomentum);
     } else {
@@ -251,10 +214,11 @@ export function HoverExpandGallery({
         momentumFrame.current = null;
       }
     }
-  }, [updateScrollProgress]);
+  }, []);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (!scrollContainerRef.current) return;
+    
     isDragging.current = true;
     setIsScrolling(true);
     startX.current = e.pageX - scrollContainerRef.current.offsetLeft;
@@ -262,6 +226,7 @@ export function HoverExpandGallery({
     lastX.current = e.pageX;
     lastTime.current = Date.now();
     velocity.current = 0;
+    
     if (momentumFrame.current) {
       cancelAnimationFrame(momentumFrame.current);
       momentumFrame.current = null;
@@ -271,28 +236,31 @@ export function HoverExpandGallery({
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
     if (!isDragging.current || !scrollContainerRef.current) return;
     e.preventDefault();
+    
     const x = e.pageX - scrollContainerRef.current.offsetLeft;
-    const walk = (x - startX.current) * 1.5;
+    const walk = (x - startX.current) * 1.5; // Scroll speed multiplier
     scrollContainerRef.current.scrollLeft = scrollLeft.current - walk;
-    updateScrollProgress();
-
+    
+    // Calculate velocity
     const now = Date.now();
     const dt = now - lastTime.current;
     if (dt > 0) {
-      velocity.current = (lastX.current - e.pageX) * (16 / dt) * 1.2;
+      velocity.current = (lastX.current - e.pageX) * (16 / dt) * 1.2; // Adjusted for momentum
     }
     lastX.current = e.pageX;
     lastTime.current = now;
-  }, [updateScrollProgress]);
+  }, []);
 
   const handleMouseUp = useCallback(() => {
     if (!isDragging.current) return;
     isDragging.current = false;
-
+    
+    // Apply momentum
     if (Math.abs(velocity.current) > 2) {
       applyMomentum();
     }
-
+    
+    // Delay removing scroll state
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     scrollTimeout.current = setTimeout(() => {
       setIsScrolling(false);
@@ -308,6 +276,7 @@ export function HoverExpandGallery({
   // Touch handlers for mobile
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     if (!scrollContainerRef.current) return;
+    
     isDragging.current = true;
     setIsScrolling(true);
     startX.current = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
@@ -315,6 +284,7 @@ export function HoverExpandGallery({
     lastX.current = e.touches[0].pageX;
     lastTime.current = Date.now();
     velocity.current = 0;
+    
     if (momentumFrame.current) {
       cancelAnimationFrame(momentumFrame.current);
       momentumFrame.current = null;
@@ -323,10 +293,10 @@ export function HoverExpandGallery({
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
     if (!isDragging.current || !scrollContainerRef.current) return;
+    
     const x = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
     const walk = (x - startX.current) * 1.5;
     scrollContainerRef.current.scrollLeft = scrollLeft.current - walk;
-    updateScrollProgress();
     
     const now = Date.now();
     const dt = now - lastTime.current;
@@ -335,24 +305,21 @@ export function HoverExpandGallery({
     }
     lastX.current = e.touches[0].pageX;
     lastTime.current = now;
-  }, [updateScrollProgress]);
+  }, []);
 
   const handleTouchEnd = useCallback(() => {
     if (!isDragging.current) return;
     isDragging.current = false;
+    
     if (Math.abs(velocity.current) > 2) {
       applyMomentum();
     }
+    
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
     scrollTimeout.current = setTimeout(() => {
       setIsScrolling(false);
     }, 150);
   }, [applyMomentum]);
-
-  // Handle native scroll event for progress
-  const handleScroll = useCallback(() => {
-    updateScrollProgress();
-  }, [updateScrollProgress]);
 
   // Cleanup
   useEffect(() => {
@@ -373,6 +340,16 @@ export function HoverExpandGallery({
     }
   };
 
+  const scrollToPosition = (direction: 'left' | 'right') => {
+    if (!scrollContainerRef.current) return;
+    const scrollAmount = config.itemWidth * 2 + config.gap * 2;
+    const targetScroll = scrollContainerRef.current.scrollLeft + (direction === 'right' ? scrollAmount : -scrollAmount);
+    scrollContainerRef.current.scrollTo({
+      left: targetScroll,
+      behavior: 'smooth'
+    });
+  };
+
   if (images.length === 0) {
     return (
       <div className={`flex items-center justify-center h-64 ${className}`}>
@@ -383,15 +360,29 @@ export function HoverExpandGallery({
 
   return (
     <>
-      <div className={`relative w-full overflow-hidden ${className}`}>
-        {/* Scrollable container - full width, no padding */}
+      <div className={`relative ${className}`}>
+        {/* Navigation buttons */}
+        <button
+          onClick={() => scrollToPosition('left')}
+          className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
+        >
+          <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+        </button>
+        <button
+          onClick={() => scrollToPosition('right')}
+          className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
+        >
+          <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+        </button>
+
+        {/* Scrollable container */}
         <div
           ref={scrollContainerRef}
-          className="flex overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none"
-          style={{
-            height: config.height,
-            gap: `${gap}px`,
-            scrollBehavior: isDragging.current ? 'auto' : 'smooth'
+          className="flex overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none px-12 md:px-16"
+          style={{ 
+            height: config.height, 
+            gap: `${config.gap}px`,
+            scrollBehavior: isDragging.current ? 'auto' : 'smooth',
           }}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
@@ -400,28 +391,27 @@ export function HoverExpandGallery({
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
-          onScroll={handleScroll}
         >
           {images.map((image, index) => {
             const isActive = activeIndex === index && !isScrolling;
-            const width = isActive ? config.expandedWidth : itemWidth;
-
+            const width = isActive ? config.expandedWidth : config.itemWidth;
+            
             return (
               <motion.div
-                key={`${index}-${image.src}`}
+                key={index}
                 className="relative overflow-hidden flex-shrink-0"
-                style={{
-                  borderRadius: "12px",
-                  height: "100%"
+                style={{ 
+                  borderRadius: "20px",
+                  height: "100%",
                 }}
-                animate={{
+                animate={{ 
                   width,
                   opacity: 1
                 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 30
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 30,
                 }}
                 onHoverStart={() => !isScrolling && !isDragging.current && setActiveIndex(index)}
                 onHoverEnd={() => setActiveIndex(null)}
@@ -431,9 +421,7 @@ export function HoverExpandGallery({
                   src={image.src}
                   alt={image.alt}
                   className="w-full h-full object-cover transition-transform duration-500 pointer-events-none"
-                  style={{
-                    transform: isActive ? "scale(1)" : "scale(1.05)"
-                  }}
+                  style={{ transform: isActive ? "scale(1)" : "scale(1.05)" }}
                   loading="lazy"
                   draggable={false}
                 />
@@ -453,11 +441,11 @@ export function HoverExpandGallery({
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 20 }}
                       transition={{ delay: 0.1, duration: 0.25 }}
-                      className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black/80 via-black/50 to-transparent pointer-events-none"
+                      className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/80 via-black/50 to-transparent pointer-events-none"
                     >
-                      <p className="text-white text-xs md:text-sm font-semibold">{image.title}</p>
+                      <p className="text-white text-sm md:text-base font-semibold">{image.title}</p>
                       {image.description && (
-                        <p className="text-white/70 text-xs mt-1 line-clamp-2">{image.description}</p>
+                        <p className="text-white/70 text-xs md:text-sm mt-1 line-clamp-2">{image.description}</p>
                       )}
                     </motion.div>
                   )}
@@ -467,14 +455,12 @@ export function HoverExpandGallery({
           })}
         </div>
 
-        {/* Progress bar */}
-        <div className="mt-4 mx-auto max-w-md px-4">
-          <div className="h-1 bg-muted/30 rounded-full overflow-hidden">
-            <motion.div
-              className="h-full bg-primary rounded-full"
-              style={{ width: `${scrollProgress}%` }}
-              transition={{ duration: 0.1 }}
-            />
+        {/* Scroll indicator */}
+        <div className="flex justify-center gap-2 mt-4">
+          <div className="text-muted-foreground text-xs flex items-center gap-2">
+            <ChevronLeft className="w-3 h-3" />
+            <span>Drag to scroll</span>
+            <ChevronRight className="w-3 h-3" />
           </div>
         </div>
       </div>
