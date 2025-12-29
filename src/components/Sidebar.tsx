@@ -200,9 +200,6 @@ const Sidebar = () => {
                       <span className="text-base font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">
                         Ium Labs
                       </span>
-                      <span className="text-[9px] text-white/30 font-medium tracking-[0.25em] uppercase">
-                        Web3 Agency
-                      </span>
                     </div>
                   </motion.div>
                 </Link>
