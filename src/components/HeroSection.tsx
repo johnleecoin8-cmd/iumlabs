@@ -3,10 +3,6 @@ import { useEffect, useState } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { brand } from "@/config/content";
 
-// Import hero images
-import heroDefault from "@/assets/hero/hero-default.png";
-import heroHover from "@/assets/hero/hero-hover.png";
-
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
@@ -65,7 +61,6 @@ const stats = [
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     // Trigger count-up animation after component mounts
@@ -74,27 +69,22 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div 
-      className="relative h-full min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      {/* Background Layer - Images with Hover Transition */}
+    <div className="relative h-full min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
+      {/* Background Layer - Video */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Default Image */}
-        <img 
-          src={heroDefault} 
-          alt="Hero background"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovered ? 'opacity-0' : 'opacity-100'}`}
-          style={{ filter: "brightness(0.4)" }}
-        />
-        {/* Hover Image */}
-        <img 
-          src={heroHover} 
-          alt="Hero background hover"
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-          style={{ filter: "brightness(0.4)" }}
-        />
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: "brightness(0.35)" }}
+          onLoadedMetadata={(e) => {
+            e.currentTarget.currentTime = 0;
+          }}
+        >
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+        </video>
         
         {/* Dark overlay gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
