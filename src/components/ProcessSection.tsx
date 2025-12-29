@@ -25,66 +25,105 @@ const phases = [
 
 const ProcessSection = () => {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4">
-      {phases.map((phase, index) => {
-        const Icon = phase.icon;
+    <div className="relative bg-surface py-16 md:py-24 px-6 md:px-12 overflow-hidden">
+      {/* Section Header */}
+      <div className="text-center mb-16 md:mb-20">
+        <span className="text-xs tracking-[0.3em] text-muted-foreground uppercase mb-3 block">
+          Our Process
+        </span>
+        <h2 className="text-2xl md:text-3xl font-light text-foreground">
+          How We Work
+        </h2>
+      </div>
+
+      {/* Timeline Container */}
+      <div className="relative max-w-6xl mx-auto">
+        {/* Horizontal Line - Desktop */}
+        <div className="hidden lg:block absolute top-[60px] left-[12.5%] right-[12.5%] h-[1px] bg-gradient-to-r from-transparent via-foreground/20 to-transparent" />
         
-        return (
-          <div
-            key={phase.title}
-            className="group relative h-[280px] md:h-[320px] overflow-hidden cursor-pointer border-r border-b border-border/10 last:border-r-0"
-          >
-            {/* Gradient Background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-surface via-surface to-muted/20 group-hover:from-muted/30 group-hover:via-surface group-hover:to-muted/40 transition-all duration-700" />
+        {/* Vertical Line - Mobile */}
+        <div className="lg:hidden absolute top-0 bottom-0 left-8 w-[1px] bg-gradient-to-b from-transparent via-foreground/20 to-transparent" />
+
+        {/* Timeline Items */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-4">
+          {phases.map((phase, index) => {
+            const Icon = phase.icon;
             
-            {/* Glow Effect on Hover */}
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 bg-gradient-to-t from-foreground/5 via-transparent to-transparent" />
-            
-            {/* Content */}
-            <div className="relative h-full flex flex-col justify-end p-5 md:p-6 group-hover:-translate-y-1 transition-transform duration-500">
-              {/* Phase Number - Large Background */}
-              <div className="absolute top-4 left-5 md:top-5 md:left-6">
-                <span className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground/[0.04] group-hover:text-foreground/[0.08] transition-colors duration-700">
-                  0{index + 1}
-                </span>
-              </div>
-              
-              {/* Step Indicator */}
-              <div className="absolute top-4 right-5 md:top-5 md:right-6">
-                <span className="text-[10px] md:text-xs font-medium text-muted-foreground/50 tracking-wider uppercase">
-                  Step {index + 1}
-                </span>
-              </div>
-              
-              {/* Icon */}
-              <div className="mb-4">
-                <div className="w-12 h-12 md:w-14 md:h-14 rounded-lg bg-foreground/[0.06] backdrop-blur-sm flex items-center justify-center group-hover:bg-foreground/10 group-hover:shadow-lg group-hover:shadow-foreground/5 transition-all duration-500">
-                  <Icon className="w-5 h-5 md:w-6 md:h-6 text-foreground/70 group-hover:text-foreground group-hover:scale-110 transition-all duration-500" strokeWidth={1.5} />
+            return (
+              <div
+                key={phase.title}
+                className="group relative"
+              >
+                {/* Desktop Layout */}
+                <div className="hidden lg:flex flex-col items-center">
+                  {/* Node */}
+                  <div className="relative z-10 mb-6">
+                    {/* Outer Ring - Glow on Hover */}
+                    <div className="absolute -inset-2 rounded-full bg-foreground/0 group-hover:bg-foreground/5 transition-all duration-500" />
+                    
+                    {/* Circle Node */}
+                    <div className="relative w-[120px] h-[120px] rounded-full border border-foreground/10 bg-background flex flex-col items-center justify-center group-hover:border-foreground/30 group-hover:shadow-lg group-hover:shadow-foreground/5 transition-all duration-500">
+                      {/* Step Number */}
+                      <span className="text-3xl font-light text-foreground/30 group-hover:text-foreground/60 transition-colors duration-500">
+                        0{index + 1}
+                      </span>
+                      {/* Icon */}
+                      <div className="mt-1">
+                        <Icon className="w-5 h-5 text-foreground/40 group-hover:text-foreground transition-colors duration-500" strokeWidth={1.5} />
+                      </div>
+                    </div>
+                    
+                    {/* Pulse Effect on Hover */}
+                    <div className="absolute inset-0 rounded-full border border-foreground/0 group-hover:border-foreground/10 group-hover:scale-125 transition-all duration-700 opacity-0 group-hover:opacity-100" />
+                  </div>
+                  
+                  {/* Content Card */}
+                  <div className="text-center px-2 max-h-[60px] group-hover:max-h-[200px] overflow-hidden transition-all duration-500 ease-out">
+                    <h3 className="text-lg font-medium text-foreground mb-2 group-hover:mb-3 transition-all duration-300">
+                      {phase.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                      {phase.description}
+                    </p>
+                  </div>
                 </div>
+
+                {/* Mobile Layout */}
+                <div className="lg:hidden flex items-start gap-6 pl-2">
+                  {/* Node */}
+                  <div className="relative z-10 flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full border border-foreground/20 bg-background flex items-center justify-center group-hover:border-foreground/40 transition-all duration-300">
+                      <span className="text-lg font-light text-foreground/50 group-hover:text-foreground transition-colors duration-300">
+                        0{index + 1}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="flex-1 pb-8">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Icon className="w-4 h-4 text-foreground/60" strokeWidth={1.5} />
+                      <h3 className="text-base font-medium text-foreground">
+                        {phase.title}
+                      </h3>
+                    </div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      {phase.description}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Connector Dots - Desktop */}
+                {index < phases.length - 1 && (
+                  <div className="hidden lg:block absolute top-[60px] -right-2 z-20">
+                    <div className="w-1 h-1 rounded-full bg-foreground/20" />
+                  </div>
+                )}
               </div>
-              
-              {/* Title */}
-              <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2 group-hover:translate-x-1 transition-transform duration-500">
-                {phase.title}
-              </h3>
-              
-              {/* Description */}
-              <p className="text-muted-foreground text-sm leading-relaxed opacity-70 group-hover:opacity-100 transition-opacity duration-500">
-                {phase.description}
-              </p>
-              
-              {/* Bottom Line Indicator */}
-              <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-foreground/80 to-foreground/40 group-hover:w-full transition-all duration-700 ease-out" />
-              
-              {/* Corner Accent */}
-              <div className="absolute top-0 right-0 w-16 h-16 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <div className="absolute top-0 right-0 w-[1px] h-8 bg-gradient-to-b from-foreground/20 to-transparent" />
-                <div className="absolute top-0 right-0 w-8 h-[1px] bg-gradient-to-l from-foreground/20 to-transparent" />
-              </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
