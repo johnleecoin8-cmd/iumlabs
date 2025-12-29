@@ -1,15 +1,19 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import Logo3D from './Logo3D';
+import seoulMetroPoster from '@/assets/campaigns/seoul-metro-poster.jpeg';
 
 const WhyChooseUsSection = () => {
   return (
     <section className="bg-background">
       <div className="grid grid-cols-1 lg:grid-cols-2">
-        {/* Left: 3D Logo */}
+        {/* Left: Featured Image */}
         <div className="lg:border-r border-border">
           <div className="aspect-[4/3] overflow-hidden bg-background">
-            <Logo3D />
+            <img 
+              src={seoulMetroPoster} 
+              alt="Seoul Metro Billboard - Ium Labs" 
+              className="w-full h-full object-cover object-center"
+            />
           </div>
         </div>
 
