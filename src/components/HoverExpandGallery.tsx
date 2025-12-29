@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+import { motion, AnimatePresence, PanInfo } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface GalleryImage {
@@ -15,6 +15,9 @@ interface HoverExpandGalleryProps {
   images: GalleryImage[];
   className?: string;
 }
+
+const SWIPE_THRESHOLD = 50;
+const VELOCITY_THRESHOLD = 300;
 
 const useBreakpoint = () => {
   const [breakpoint, setBreakpoint] = useState<"mobile" | "tablet" | "desktop">(() => {
@@ -187,6 +190,8 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
   const [startIndex, setStartIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const dragStartTime = useRef(0);
   const breakpoint = useBreakpoint();
 
   const config = useMemo(() => ({
@@ -206,7 +211,7 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
 
   const canNavigate = images.length > config.numVisible;
 
-  const navigate = (direction: "prev" | "next") => {
+  const navigate = useCallback((direction: "prev" | "next") => {
     if (direction === "next") {
       setStartIndex((prev) => (prev + 1) % images.length);
       setActiveIndex(0);
@@ -214,11 +219,34 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
       setStartIndex((prev) => (prev - 1 + images.length) % images.length);
       setActiveIndex(0);
     }
+  }, [images.length]);
+
+  const handleDragStart = () => {
+    setIsDragging(true);
+    dragStartTime.current = Date.now();
+  };
+
+  const handleDragEnd = (_: any, info: PanInfo) => {
+    const dragDuration = Date.now() - dragStartTime.current;
+    
+    // Only navigate if it was a real drag (not a click)
+    if (dragDuration > 100) {
+      if (info.offset.x > SWIPE_THRESHOLD || info.velocity.x > VELOCITY_THRESHOLD) {
+        navigate("prev");
+      } else if (info.offset.x < -SWIPE_THRESHOLD || info.velocity.x < -VELOCITY_THRESHOLD) {
+        navigate("next");
+      }
+    }
+    
+    // Small delay to prevent click after drag
+    setTimeout(() => setIsDragging(false), 50);
   };
 
   const openLightbox = (originalIndex: number) => {
-    setLightboxIndex(originalIndex);
-    setLightboxOpen(true);
+    if (!isDragging) {
+      setLightboxIndex(originalIndex);
+      setLightboxOpen(true);
+    }
   };
 
   if (images.length === 0) {
@@ -234,14 +262,22 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
     return (
       <>
         <div className={`relative ${className}`}>
-          <div className="flex gap-2 overflow-hidden" style={{ height: config.height }}>
-            <AnimatePresence mode="popLayout" initial={false}>
-              {visibleImages.map((image, index) => {
-                const isActive = activeIndex === index;
-                return (
-                  <motion.div
-                    key={`${image.originalIndex}-${startIndex}`}
-                    className="relative overflow-hidden cursor-pointer flex-shrink-0"
+        <motion.div 
+          className="flex gap-2 overflow-hidden cursor-grab active:cursor-grabbing select-none" 
+          style={{ height: config.height }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.3}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
+        >
+          <AnimatePresence mode="popLayout" initial={false}>
+            {visibleImages.map((image, index) => {
+              const isActive = activeIndex === index;
+              return (
+                <motion.div
+                  key={`${image.originalIndex}-${startIndex}`}
+                  className="relative overflow-hidden cursor-pointer flex-shrink-0 pointer-events-none"
                     style={{ 
                       borderRadius: "16px",
                       height: "100%",
@@ -290,7 +326,7 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
                 );
               })}
             </AnimatePresence>
-          </div>
+          </motion.div>
 
           {/* Mobile navigation buttons */}
           {canNavigate && (
@@ -348,9 +384,14 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
           </>
         )}
 
-        <div 
-          className="flex justify-center overflow-hidden px-16"
+        <motion.div 
+          className="flex justify-center overflow-hidden px-16 cursor-grab active:cursor-grabbing select-none"
           style={{ height: config.height, gap: `${config.gap}px` }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.3}
+          onDragStart={handleDragStart}
+          onDragEnd={handleDragEnd}
         >
           <AnimatePresence mode="popLayout" initial={false}>
             {visibleImages.map((image, index) => {
@@ -358,7 +399,7 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
               return (
                 <motion.div
                   key={`${image.originalIndex}-${startIndex}`}
-                  className="relative overflow-hidden cursor-pointer flex-shrink-0"
+                  className="relative overflow-hidden flex-shrink-0 pointer-events-none"
                   style={{ 
                     borderRadius: "20px",
                     height: "100%",
@@ -375,8 +416,8 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
                     damping: 28,
                     mass: 0.9
                   }}
-                  onHoverStart={() => setActiveIndex(index)}
-                  onClick={() => openLightbox(image.originalIndex)}
+                  onHoverStart={() => !isDragging && setActiveIndex(index)}
+                  onPointerUp={() => !isDragging && openLightbox(image.originalIndex)}
                 >
                   <img
                     src={image.src}
@@ -414,7 +455,7 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
               );
             })}
           </AnimatePresence>
-        </div>
+        </motion.div>
 
         {/* Progress indicator */}
         <div className="flex justify-center gap-1.5 mt-6">
