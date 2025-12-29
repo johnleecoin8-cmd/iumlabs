@@ -364,13 +364,13 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
         {/* Navigation buttons */}
         <button
           onClick={() => scrollToPosition('left')}
-          className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
+          className="absolute left-1 md:left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
         >
           <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
         </button>
         <button
           onClick={() => scrollToPosition('right')}
-          className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
+          className="absolute right-1 md:right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
         >
           <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
         </button>
@@ -378,7 +378,7 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
         {/* Scrollable container */}
         <div
           ref={scrollContainerRef}
-          className="flex overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none px-12 md:px-16"
+          className="flex overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none px-4 md:px-8"
           style={{ 
             height: config.height, 
             gap: `${config.gap}px`,

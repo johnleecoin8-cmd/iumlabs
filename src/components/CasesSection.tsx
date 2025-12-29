@@ -10,6 +10,11 @@ import storyLogo from "@/assets/logos/story-protocol.png";
 import triaLogo from "@/assets/logos/tria-official.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import mantraLogo from "@/assets/logos/mantra.png";
+import bybitLogo from "@/assets/logos/bybit.png";
+import polygonLogo from "@/assets/logos/polygon.svg";
+import ondoLogo from "@/assets/logos/ondo.svg";
+import megaethLogo from "@/assets/logos/megaeth.png";
+import zkpassLogo from "@/assets/logos/zkpass.png";
 
 // Import campaign images
 import bnbCampaign from "@/assets/campaigns/bnb-event.jpg";
@@ -18,6 +23,12 @@ import saharaCampaign from "@/assets/campaigns/sahara-ai.jpg";
 import mantraCampaign from "@/assets/campaigns/mantra-party.jpg";
 import peaqCampaign from "@/assets/campaigns/peaq-summit.jpg";
 import triaCampaign from "@/assets/campaigns/tria-launch.jpg";
+import bybitCampaign from "@/assets/campaigns/bybit-event.jpg";
+import kucoinCampaign from "@/assets/campaigns/kucoin-oldschool-panel.jpg";
+import polygonCampaign from "@/assets/campaigns/polygon-hackathon.jpg";
+import ondoCampaign from "@/assets/campaigns/ondo-seminar.jpg";
+import megaethCampaign from "@/assets/campaigns/megaeth-launch.jpg";
+import zkpassCampaign from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 
 const featuredCases = [
   {
@@ -39,6 +50,42 @@ const featuredCases = [
     description: "IP infrastructure platform launch with Korean creator community and media partnerships.",
   },
   {
+    name: "Bybit",
+    logo: bybitLogo,
+    bgImage: bybitCampaign,
+    slug: "bybit",
+    category: "Exchange",
+    result: "+200% Korean Users",
+    description: "Comprehensive VIP trader acquisition and community building for Korean market expansion.",
+  },
+  {
+    name: "KuCoin",
+    logo: kucoinLogo,
+    bgImage: kucoinCampaign,
+    slug: "kucoin",
+    category: "Exchange",
+    result: "Top 3 Exchange in Korea",
+    description: "Strategic Korean market penetration with trading campaigns and community events.",
+  },
+  {
+    name: "Polygon",
+    logo: polygonLogo,
+    bgImage: polygonCampaign,
+    slug: "polygon",
+    category: "Infrastructure",
+    result: "Korean Dev Ecosystem",
+    description: "Developer community building and hackathon series for Korean blockchain developers.",
+  },
+  {
+    name: "Ondo Finance",
+    logo: ondoLogo,
+    bgImage: ondoCampaign,
+    slug: "ondo",
+    category: "RWA",
+    result: "Korean RWA Education",
+    description: "RWA investment education and institutional investor outreach in Korean market.",
+  },
+  {
     name: "Sahara AI",
     logo: saharaAiLogo,
     bgImage: saharaCampaign,
@@ -48,6 +95,15 @@ const featuredCases = [
     description: "AI blockchain platform launch with Korean developer community and enterprise partnerships.",
   },
   {
+    name: "MegaETH",
+    logo: megaethLogo,
+    bgImage: megaethCampaign,
+    slug: "megaeth",
+    category: "Infrastructure",
+    result: "Pre-launch Hype Campaign",
+    description: "Strategic pre-launch marketing and community building for Layer 2 solution.",
+  },
+  {
     name: "Mantra",
     logo: mantraLogo,
     bgImage: mantraCampaign,
@@ -55,6 +111,15 @@ const featuredCases = [
     category: "RWA",
     result: "Korean RWA Expansion",
     description: "Real World Assets platform expansion targeting Korean institutional investors.",
+  },
+  {
+    name: "zkPass",
+    logo: zkpassLogo,
+    bgImage: zkpassCampaign,
+    slug: "zkpass",
+    category: "Privacy",
+    result: "Privacy Tech Awareness",
+    description: "Zero-knowledge privacy solution awareness campaign in Korean market.",
   },
   {
     name: "Peaq",
@@ -88,21 +153,21 @@ interface CaseCardProps {
 }
 
 const CaseCard = ({ name, logo, bgImage, slug, category, result, description, index }: CaseCardProps) => {
-  const isLastRow = index >= 4;
+  const isLastRow = index >= 10; // Last 2 cards (index 10, 11)
   const isRightColumn = index % 2 === 1;
 
   return (
-    <div>
+    <div className="h-full">
       <Link
         to={`/projects/${slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-4 sm:p-6 md:p-8 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${
+        className={`group block p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 h-full min-h-[140px] sm:min-h-[160px] ${
           !isRightColumn ? "sm:border-r border-border" : ""
         } ${!isLastRow ? "border-b border-border" : ""}`}
       >
-        <div className="flex items-start gap-4 sm:gap-5">
+        <div className="flex items-start gap-3 sm:gap-4">
           {/* Image */}
-          <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img
               src={bgImage}
               alt={name}
@@ -112,24 +177,24 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-3 text-muted-foreground text-[11px] sm:text-xs mb-1 sm:mb-2">
+            <div className="flex items-center gap-2 text-muted-foreground text-[10px] sm:text-xs mb-0.5 sm:mb-1">
               <span className="uppercase tracking-wider">{category}</span>
             </div>
-            <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-1 group-hover:text-foreground/80 transition-colors">
+            <h3 className="text-base sm:text-lg font-semibold text-foreground mb-0.5 group-hover:text-foreground/80 transition-colors line-clamp-1">
               {name}
             </h3>
-            <p className="text-foreground font-medium text-sm mb-1 sm:mb-2">
+            <p className="text-foreground font-medium text-xs sm:text-sm mb-0.5 sm:mb-1 line-clamp-1">
               {result}
             </p>
-            <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 hidden sm:block">
+            <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2 hidden sm:block">
               {description}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm mt-3 sm:mt-4 min-h-[44px] sm:min-h-0">
+        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-xs sm:text-sm mt-2 sm:mt-3">
           <span className="group-hover:underline underline-offset-4">View case study</span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
         </div>
       </Link>
     </div>
