@@ -206,8 +206,19 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Services - 02 짝수 */}
-      <section className="bg-surface-even" id="services">
+      {/* Media Partners - 번호 없음 */}
+      <section className="bg-surface-even" id="media-partners">
+        <div className="border-t border-white/10">
+          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+            <h2 className="text-lg md:text-xl font-medium text-white">Media Partners</h2>
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">As Featured In</span>
+          </div>
+          <MediaPartnersSection />
+        </div>
+      </section>
+      
+      {/* Services - 02 홀수 */}
+      <section className="bg-surface-odd" id="services">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -220,8 +231,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Process - 03 홀수 */}
-      <section className="bg-surface-odd" id="process">
+      {/* Process - 03 짝수 */}
+      <section className="bg-surface-even" id="process">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -236,8 +247,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Cases - 04 짝수 */}
-      <section className="bg-surface-even" id="cases">
+      {/* Cases - 04 홀수 */}
+      <section className="bg-surface-odd" id="cases">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -250,8 +261,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Gallery - 05 홀수 */}
-      <section className="bg-surface-odd" id="gallery">
+      {/* Gallery - 05 짝수 */}
+      <section className="bg-surface-even" id="gallery">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
@@ -264,26 +275,12 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Media Partners - 06 짝수 */}
-      <section className="bg-surface-even" id="media-partners">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Media Partners</h2>
-            </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">As Featured In</span>
-          </div>
-          <MediaPartnersSection />
-        </div>
-      </section>
-      
-      {/* Insights - 07 홀수 */}
+      {/* Insights - 06 홀수 */}
       <section className="bg-surface-odd" id="insights">
         <div className="border-t border-white/10">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">07</span>
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>
             </div>
             <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Research</span>
@@ -292,9 +289,9 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Contact - 08 짝수 */}
+      {/* Contact - 07 짝수 */}
       <section className="bg-surface-even" id="contact">
-        <ContactFormSection sectionNumber="08" />
+        <ContactFormSection sectionNumber="07" />
       </section>
       
       {/* CTA Banner */}
