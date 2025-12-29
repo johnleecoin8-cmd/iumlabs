@@ -48,7 +48,7 @@ const WhyChooseUsSection = () => {
             </div>
             <Link
               to="/projects"
-              className="group inline-flex items-center justify-center gap-2 bg-transparent text-foreground border border-foreground px-5 py-2.5 text-sm font-medium rounded-none hover:bg-foreground hover:text-background transition-all duration-300 w-full"
+              className="group inline-flex items-center gap-2 text-foreground text-sm font-medium relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-foreground after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left"
             >
               View Our Work
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
