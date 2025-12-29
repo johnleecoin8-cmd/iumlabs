@@ -35,7 +35,7 @@ const Navbar = () => {
         <div className="bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl px-4 py-3 flex items-center justify-between shadow-lg">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <img src={logoImage} alt="Ium Labs" className="w-8 h-8 rounded-lg object-contain" />
+            <img src={logoImage} alt="ium Labs" className="w-8 h-8 rounded-lg object-contain" />
             <span className="text-lg font-semibold text-foreground">{brandConfig.name}</span>
           </Link>
 
@@ -72,7 +72,7 @@ const Navbar = () => {
           <div className="flex-shrink-0 container mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-                <img src={logoImage} alt="Ium Labs Logo" className="w-8 h-8 rounded-lg object-contain" />
+                <img src={logoImage} alt="ium Labs Logo" className="w-8 h-8 rounded-lg object-contain" />
                 <span className="text-lg font-semibold text-foreground">{brandConfig.name}</span>
               </Link>
 

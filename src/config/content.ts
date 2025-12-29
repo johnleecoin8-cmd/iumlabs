@@ -8,7 +8,7 @@
 // Brand Information
 // =====================================================
 export const brand = {
-  name: "Ium Labs",
+  name: "ium Labs",
   tagline: "Web3 Marketing Agency",
   description: "Korea's leading Web3 marketing agency. We help blockchain projects launch and grow successfully.",
   email: "info@iumlabs.com",
@@ -18,7 +18,7 @@ export const brand = {
   telegramLink: "https://t.me/iumlabs",
   linkedin: "https://www.linkedin.com/company/iumlabs",
   calendlyUrl: "https://calendly.com/iumlabs/30min",
-  copyright: `© ${new Date().getFullYear()} Ium Labs`,
+  copyright: `© ${new Date().getFullYear()} ium Labs`,
 };
 
 // =====================================================
