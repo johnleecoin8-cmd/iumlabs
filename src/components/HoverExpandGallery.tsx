@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
-import { motion, AnimatePresence, PanInfo } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
 interface GalleryImage {
@@ -15,10 +15,6 @@ interface HoverExpandGalleryProps {
   images: GalleryImage[];
   className?: string;
 }
-
-const SWIPE_THRESHOLD = 30;
-const VELOCITY_THRESHOLD = 200;
-const MOMENTUM_MULTIPLIER = 0.003; // How much velocity affects the number of slides to skip
 
 const useBreakpoint = () => {
   const [breakpoint, setBreakpoint] = useState<"mobile" | "tablet" | "desktop">(() => {
@@ -81,11 +77,9 @@ function Lightbox({
     const velocityThreshold = 500;
     
     if (info.offset.x > swipeThreshold || info.velocity.x > velocityThreshold) {
-      // Swiped right - go to previous
       setDragDirection(-1);
       onNavigate((currentIndex - 1 + images.length) % images.length);
     } else if (info.offset.x < -swipeThreshold || info.velocity.x < -velocityThreshold) {
-      // Swiped left - go to next
       setDragDirection(1);
       onNavigate((currentIndex + 1) % images.length);
     }
@@ -104,7 +98,6 @@ function Lightbox({
       className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center"
       onClick={onClose}
     >
-      {/* Close button */}
       <button
         onClick={onClose}
         className="absolute top-4 right-4 z-50 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors"
@@ -112,7 +105,6 @@ function Lightbox({
         <X className="w-6 h-6 text-white" />
       </button>
 
-      {/* Navigation buttons */}
       <button
         onClick={(e) => {
           e.stopPropagation();
@@ -134,7 +126,6 @@ function Lightbox({
         <ChevronRight className="w-6 h-6 text-white" />
       </button>
 
-      {/* Image container with drag */}
       <AnimatePresence mode="popLayout" initial={false} custom={dragDirection}>
         <motion.div
           key={currentIndex}
@@ -157,7 +148,6 @@ function Lightbox({
             draggable={false}
           />
           
-          {/* Caption */}
           {(currentImage.title || currentImage.description) && (
             <div className="mt-4 text-center px-4">
               {currentImage.title && (
@@ -169,14 +159,12 @@ function Lightbox({
             </div>
           )}
 
-          {/* Image counter */}
           <div className="mt-4 text-white/50 text-sm">
             {currentIndex + 1} / {images.length}
           </div>
         </motion.div>
       </AnimatePresence>
 
-      {/* Drag hint */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/30 text-xs flex items-center gap-2">
         <ChevronLeft className="w-4 h-4" />
         <span>Drag to navigate</span>
@@ -187,77 +175,179 @@ function Lightbox({
 }
 
 export function HoverExpandGallery({ images, className = "" }: HoverExpandGalleryProps) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [startIndex, setStartIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const dragStartTime = useRef(0);
+  const [isScrolling, setIsScrolling] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+  const velocity = useRef(0);
+  const lastX = useRef(0);
+  const lastTime = useRef(0);
+  const momentumFrame = useRef<number | null>(null);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const breakpoint = useBreakpoint();
 
   const config = useMemo(() => ({
-    mobile: { numVisible: 3, expandedPercent: 60, collapsedPercent: 20, height: "min(400px, 50vh)", gap: 8 },
-    tablet: { numVisible: 5, expandedPercent: 40, collapsedPercent: 15, height: "min(500px, 55vh)", gap: 12 },
-    desktop: { numVisible: 6, expandedPercent: 36, collapsedPercent: 12.8, height: "min(590px, 60vh)", gap: 16 },
+    mobile: { itemWidth: 200, expandedWidth: 280, height: "min(400px, 50vh)", gap: 12 },
+    tablet: { itemWidth: 220, expandedWidth: 340, height: "min(500px, 55vh)", gap: 16 },
+    desktop: { itemWidth: 260, expandedWidth: 420, height: "min(590px, 60vh)", gap: 20 },
   })[breakpoint], [breakpoint]);
 
-  const visibleImages = useMemo(() => {
-    const result: (GalleryImage & { originalIndex: number })[] = [];
-    for (let i = 0; i < config.numVisible && i < images.length; i++) {
-      const idx = (startIndex + i) % images.length;
-      result.push({ ...images[idx], originalIndex: idx });
-    }
-    return result;
-  }, [images, startIndex, config.numVisible]);
-
-  const canNavigate = images.length > config.numVisible;
-
-  const navigateMultiple = useCallback((count: number) => {
-    setStartIndex((prev) => {
-      let newIndex = prev + count;
-      // Wrap around properly
-      while (newIndex < 0) newIndex += images.length;
-      return newIndex % images.length;
-    });
-    setActiveIndex(0);
-  }, [images.length]);
-
-  const handleDragStart = () => {
-    setIsDragging(true);
-    dragStartTime.current = Date.now();
-  };
-
-  const handleDragEnd = (_: any, info: PanInfo) => {
-    const dragDuration = Date.now() - dragStartTime.current;
+  // Momentum scrolling
+  const applyMomentum = useCallback(() => {
+    if (!scrollContainerRef.current) return;
     
-    // Only navigate if it was a real drag (not a click)
-    if (dragDuration > 100) {
-      const velocity = Math.abs(info.velocity.x);
-      const offset = info.offset.x;
-      
-      // Calculate how many slides to skip based on momentum
-      const momentumSlides = Math.floor(velocity * MOMENTUM_MULTIPLIER);
-      const baseSlide = 1;
-      const totalSlides = Math.max(1, Math.min(baseSlide + momentumSlides, config.numVisible));
-      
-      if (offset > SWIPE_THRESHOLD || info.velocity.x > VELOCITY_THRESHOLD) {
-        // Swiped right - go to previous
-        navigateMultiple(-totalSlides);
-      } else if (offset < -SWIPE_THRESHOLD || info.velocity.x < -VELOCITY_THRESHOLD) {
-        // Swiped left - go to next
-        navigateMultiple(totalSlides);
+    const friction = 0.95;
+    const minVelocity = 0.5;
+    
+    if (Math.abs(velocity.current) > minVelocity) {
+      scrollContainerRef.current.scrollLeft += velocity.current;
+      velocity.current *= friction;
+      momentumFrame.current = requestAnimationFrame(applyMomentum);
+    } else {
+      velocity.current = 0;
+      if (momentumFrame.current) {
+        cancelAnimationFrame(momentumFrame.current);
+        momentumFrame.current = null;
       }
     }
-    
-    // Small delay to prevent click after drag
-    setTimeout(() => setIsDragging(false), 50);
-  };
+  }, []);
 
-  const openLightbox = (originalIndex: number) => {
-    if (!isDragging) {
-      setLightboxIndex(originalIndex);
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    if (!scrollContainerRef.current) return;
+    
+    isDragging.current = true;
+    setIsScrolling(true);
+    startX.current = e.pageX - scrollContainerRef.current.offsetLeft;
+    scrollLeft.current = scrollContainerRef.current.scrollLeft;
+    lastX.current = e.pageX;
+    lastTime.current = Date.now();
+    velocity.current = 0;
+    
+    if (momentumFrame.current) {
+      cancelAnimationFrame(momentumFrame.current);
+      momentumFrame.current = null;
+    }
+  }, []);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!isDragging.current || !scrollContainerRef.current) return;
+    e.preventDefault();
+    
+    const x = e.pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5; // Scroll speed multiplier
+    scrollContainerRef.current.scrollLeft = scrollLeft.current - walk;
+    
+    // Calculate velocity
+    const now = Date.now();
+    const dt = now - lastTime.current;
+    if (dt > 0) {
+      velocity.current = (lastX.current - e.pageX) * (16 / dt) * 1.2; // Adjusted for momentum
+    }
+    lastX.current = e.pageX;
+    lastTime.current = now;
+  }, []);
+
+  const handleMouseUp = useCallback(() => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    
+    // Apply momentum
+    if (Math.abs(velocity.current) > 2) {
+      applyMomentum();
+    }
+    
+    // Delay removing scroll state
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    scrollTimeout.current = setTimeout(() => {
+      setIsScrolling(false);
+    }, 150);
+  }, [applyMomentum]);
+
+  const handleMouseLeave = useCallback(() => {
+    if (isDragging.current) {
+      handleMouseUp();
+    }
+  }, [handleMouseUp]);
+
+  // Touch handlers for mobile
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    if (!scrollContainerRef.current) return;
+    
+    isDragging.current = true;
+    setIsScrolling(true);
+    startX.current = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
+    scrollLeft.current = scrollContainerRef.current.scrollLeft;
+    lastX.current = e.touches[0].pageX;
+    lastTime.current = Date.now();
+    velocity.current = 0;
+    
+    if (momentumFrame.current) {
+      cancelAnimationFrame(momentumFrame.current);
+      momentumFrame.current = null;
+    }
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!isDragging.current || !scrollContainerRef.current) return;
+    
+    const x = e.touches[0].pageX - scrollContainerRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    scrollContainerRef.current.scrollLeft = scrollLeft.current - walk;
+    
+    const now = Date.now();
+    const dt = now - lastTime.current;
+    if (dt > 0) {
+      velocity.current = (lastX.current - e.touches[0].pageX) * (16 / dt) * 1.2;
+    }
+    lastX.current = e.touches[0].pageX;
+    lastTime.current = now;
+  }, []);
+
+  const handleTouchEnd = useCallback(() => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    
+    if (Math.abs(velocity.current) > 2) {
+      applyMomentum();
+    }
+    
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    scrollTimeout.current = setTimeout(() => {
+      setIsScrolling(false);
+    }, 150);
+  }, [applyMomentum]);
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (momentumFrame.current) {
+        cancelAnimationFrame(momentumFrame.current);
+      }
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, []);
+
+  const openLightbox = (index: number) => {
+    if (!isScrolling && !isDragging.current) {
+      setLightboxIndex(index);
       setLightboxOpen(true);
     }
+  };
+
+  const scrollToPosition = (direction: 'left' | 'right') => {
+    if (!scrollContainerRef.current) return;
+    const scrollAmount = config.itemWidth * 2 + config.gap * 2;
+    const targetScroll = scrollContainerRef.current.scrollLeft + (direction === 'right' ? scrollAmount : -scrollAmount);
+    scrollContainerRef.current.scrollTo({
+      left: targetScroll,
+      behavior: 'smooth'
+    });
   };
 
   if (images.length === 0) {
@@ -268,222 +358,110 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
     );
   }
 
-  // Mobile list layout
-  if (breakpoint === "mobile") {
-    return (
-      <>
-        <div className={`relative ${className}`}>
-        <motion.div 
-          className="flex gap-2 overflow-hidden cursor-grab active:cursor-grabbing select-none" 
-          style={{ height: config.height }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.6}
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
-        >
-          <AnimatePresence mode="popLayout" initial={false}>
-            {visibleImages.map((image, index) => {
-              const isActive = activeIndex === index;
-              return (
-                <motion.div
-                  key={`${image.originalIndex}-${startIndex}`}
-                  className="relative overflow-hidden cursor-pointer flex-shrink-0 pointer-events-none"
-                    style={{ 
-                      borderRadius: "16px",
-                      height: "100%",
-                    }}
-                    initial={{ width: `${config.collapsedPercent}%`, opacity: 0.8 }}
-                    animate={{ 
-                      width: isActive ? `${config.expandedPercent}%` : `${config.collapsedPercent}%`,
-                      opacity: 1
-                    }}
-                    exit={{ width: `${config.collapsedPercent}%`, opacity: 0.8 }}
-                    transition={{ 
-                      type: "spring", 
-                      stiffness: 300, 
-                      damping: 30,
-                      mass: 1
-                    }}
-                    onClick={() => {
-                      if (isActive) {
-                        openLightbox(image.originalIndex);
-                      } else {
-                        setActiveIndex(index);
-                      }
-                    }}
-                  >
-                    <img
-                      src={image.src}
-                      alt={image.alt}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                    />
-                    {/* Caption overlay */}
-                    <AnimatePresence>
-                      {isActive && image.title && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: 10 }}
-                          transition={{ delay: 0.1, duration: 0.2 }}
-                          className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
-                        >
-                          <p className="text-white text-sm font-medium line-clamp-1">{image.title}</p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
-          </motion.div>
-
-          {/* Mobile navigation buttons */}
-          {canNavigate && (
-            <div className="flex justify-center gap-3 mt-4">
-              <button
-                onClick={() => navigateMultiple(-1)}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary transition-colors"
-              >
-                <ChevronLeft className="w-5 h-5 text-foreground" />
-              </button>
-              <button
-                onClick={() => navigateMultiple(1)}
-                className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary transition-colors"
-              >
-                <ChevronRight className="w-5 h-5 text-foreground" />
-              </button>
-            </div>
-          )}
-        </div>
-
-        <AnimatePresence>
-          {lightboxOpen && (
-            <Lightbox
-              images={images}
-              currentIndex={lightboxIndex}
-              isOpen={lightboxOpen}
-              onClose={() => setLightboxOpen(false)}
-              onNavigate={setLightboxIndex}
-            />
-          )}
-        </AnimatePresence>
-      </>
-    );
-  }
-
-  // Desktop/Tablet horizontal expand layout
   return (
     <>
       <div className={`relative ${className}`}>
         {/* Navigation buttons */}
-        {canNavigate && (
-          <>
-            <button
-              onClick={() => navigateMultiple(-1)}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
-            >
-              <ChevronLeft className="w-6 h-6 text-foreground" />
-            </button>
-            <button
-              onClick={() => navigateMultiple(1)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
-            >
-              <ChevronRight className="w-6 h-6 text-foreground" />
-            </button>
-          </>
-        )}
-
-        <motion.div 
-          className="flex justify-center overflow-hidden px-16 cursor-grab active:cursor-grabbing select-none"
-          style={{ height: config.height, gap: `${config.gap}px` }}
-          drag="x"
-          dragConstraints={{ left: 0, right: 0 }}
-          dragElastic={0.6}
-          onDragStart={handleDragStart}
-          onDragEnd={handleDragEnd}
+        <button
+          onClick={() => scrollToPosition('left')}
+          className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
         >
-          <AnimatePresence mode="popLayout" initial={false}>
-            {visibleImages.map((image, index) => {
-              const isActive = activeIndex === index;
-              return (
+          <ChevronLeft className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+        </button>
+        <button
+          onClick={() => scrollToPosition('right')}
+          className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
+        >
+          <ChevronRight className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
+        </button>
+
+        {/* Scrollable container */}
+        <div
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing select-none px-12 md:px-16"
+          style={{ 
+            height: config.height, 
+            gap: `${config.gap}px`,
+            scrollBehavior: isDragging.current ? 'auto' : 'smooth',
+          }}
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          onMouseLeave={handleMouseLeave}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {images.map((image, index) => {
+            const isActive = activeIndex === index && !isScrolling;
+            const width = isActive ? config.expandedWidth : config.itemWidth;
+            
+            return (
+              <motion.div
+                key={index}
+                className="relative overflow-hidden flex-shrink-0"
+                style={{ 
+                  borderRadius: "20px",
+                  height: "100%",
+                }}
+                animate={{ 
+                  width,
+                  opacity: 1
+                }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 30,
+                }}
+                onHoverStart={() => !isScrolling && !isDragging.current && setActiveIndex(index)}
+                onHoverEnd={() => setActiveIndex(null)}
+                onClick={() => openLightbox(index)}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover transition-transform duration-500 pointer-events-none"
+                  style={{ transform: isActive ? "scale(1)" : "scale(1.05)" }}
+                  loading="lazy"
+                  draggable={false}
+                />
+                
+                {/* Gradient overlay for inactive */}
                 <motion.div
-                  key={`${image.originalIndex}-${startIndex}`}
-                  className="relative overflow-hidden flex-shrink-0 pointer-events-none"
-                  style={{ 
-                    borderRadius: "20px",
-                    height: "100%",
-                  }}
-                  initial={{ width: `${config.collapsedPercent}%`, opacity: 0.9 }}
-                  animate={{ 
-                    width: isActive ? `${config.expandedPercent}%` : `${config.collapsedPercent}%`,
-                    opacity: 1
-                  }}
-                  exit={{ width: `${config.collapsedPercent}%`, opacity: 0.9 }}
-                  transition={{ 
-                    type: "spring", 
-                    stiffness: 280, 
-                    damping: 28,
-                    mass: 0.9
-                  }}
-                  onHoverStart={() => !isDragging && setActiveIndex(index)}
-                  onPointerUp={() => !isDragging && openLightbox(image.originalIndex)}
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="w-full h-full object-cover transition-transform duration-500"
-                    style={{ transform: isActive ? "scale(1)" : "scale(1.05)" }}
-                    loading="lazy"
-                  />
-                  
-                  {/* Gradient overlay for inactive */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"
-                    animate={{ opacity: isActive ? 0 : 0.3 }}
-                    transition={{ duration: 0.3 }}
-                  />
+                  className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"
+                  animate={{ opacity: isActive ? 0 : 0.3 }}
+                  transition={{ duration: 0.3 }}
+                />
 
-                  {/* Caption overlay */}
-                  <AnimatePresence>
-                    {isActive && image.title && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        transition={{ delay: 0.1, duration: 0.25 }}
-                        className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 via-black/50 to-transparent"
-                      >
-                        <p className="text-white text-base font-semibold">{image.title}</p>
-                        {image.description && (
-                          <p className="text-white/70 text-sm mt-1 line-clamp-2">{image.description}</p>
-                        )}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
-        </motion.div>
+                {/* Caption overlay */}
+                <AnimatePresence>
+                  {isActive && image.title && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 20 }}
+                      transition={{ delay: 0.1, duration: 0.25 }}
+                      className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/80 via-black/50 to-transparent pointer-events-none"
+                    >
+                      <p className="text-white text-sm md:text-base font-semibold">{image.title}</p>
+                      {image.description && (
+                        <p className="text-white/70 text-xs md:text-sm mt-1 line-clamp-2">{image.description}</p>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
 
-        {/* Progress indicator */}
-        <div className="flex justify-center gap-1.5 mt-6">
-          {images.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setStartIndex(index);
-                setActiveIndex(0);
-              }}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                index === startIndex 
-                  ? "w-8 bg-foreground" 
-                  : "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-              }`}
-            />
-          ))}
+        {/* Scroll indicator */}
+        <div className="flex justify-center gap-2 mt-4">
+          <div className="text-muted-foreground text-xs flex items-center gap-2">
+            <ChevronLeft className="w-3 h-3" />
+            <span>Drag to scroll</span>
+            <ChevronRight className="w-3 h-3" />
+          </div>
         </div>
       </div>
 
