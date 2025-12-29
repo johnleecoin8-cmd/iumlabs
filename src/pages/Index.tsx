@@ -67,18 +67,17 @@ const Index = () => {
             </div>
             <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
           </div>
+          
+          {/* Featured Billboard Image */}
+          <div className="px-4 md:px-10 pt-8 md:pt-12">
+            <img 
+              src={seoulMetroBillboard} 
+              alt="Seoul Metro Billboard Campaign" 
+              className="w-full h-auto rounded-xl md:rounded-2xl"
+            />
+          </div>
+          
           <ProcessSection />
-        </div>
-      </section>
-      
-      {/* Featured Billboard Image */}
-      <section className="bg-surface-odd">
-        <div className="px-4 md:px-10 pb-10 md:pb-16">
-          <img 
-            src={seoulMetroBillboard} 
-            alt="Seoul Metro Billboard Campaign" 
-            className="w-full h-auto rounded-xl md:rounded-2xl"
-          />
         </div>
       </section>
       
