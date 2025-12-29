@@ -229,8 +229,6 @@ const Sidebar = () => {
               {/* Seoul Time Status */}
               <SeoulTimeDisplay isCollapsed={isCollapsed} />
               
-              {/* Divider between sections */}
-              {!isCollapsed && <div className="w-full h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />}
               
               <ConnectSection isCollapsed={isCollapsed} />
 
