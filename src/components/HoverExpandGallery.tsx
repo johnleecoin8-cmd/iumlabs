@@ -53,6 +53,8 @@ function Lightbox({
   onClose: () => void; 
   onNavigate: (index: number) => void;
 }) {
+  const [dragDirection, setDragDirection] = useState(0);
+
   const handleKeyDown = useCallback((e: KeyboardEvent) => {
     if (e.key === "Escape") onClose();
     if (e.key === "ArrowLeft") onNavigate((currentIndex - 1 + images.length) % images.length);
@@ -69,6 +71,21 @@ function Lightbox({
       document.body.style.overflow = "";
     };
   }, [isOpen, handleKeyDown]);
+
+  const handleDragEnd = (_: any, info: { offset: { x: number }; velocity: { x: number } }) => {
+    const swipeThreshold = 50;
+    const velocityThreshold = 500;
+    
+    if (info.offset.x > swipeThreshold || info.velocity.x > velocityThreshold) {
+      // Swiped right - go to previous
+      setDragDirection(-1);
+      onNavigate((currentIndex - 1 + images.length) % images.length);
+    } else if (info.offset.x < -swipeThreshold || info.velocity.x < -velocityThreshold) {
+      // Swiped left - go to next
+      setDragDirection(1);
+      onNavigate((currentIndex + 1) % images.length);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -95,6 +112,7 @@ function Lightbox({
       <button
         onClick={(e) => {
           e.stopPropagation();
+          setDragDirection(-1);
           onNavigate((currentIndex - 1 + images.length) % images.length);
         }}
         className="absolute left-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors"
@@ -104,6 +122,7 @@ function Lightbox({
       <button
         onClick={(e) => {
           e.stopPropagation();
+          setDragDirection(1);
           onNavigate((currentIndex + 1) % images.length);
         }}
         className="absolute right-4 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors"
@@ -111,39 +130,54 @@ function Lightbox({
         <ChevronRight className="w-6 h-6 text-white" />
       </button>
 
-      {/* Image container */}
-      <motion.div
-        key={currentIndex}
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
-        transition={{ duration: 0.2 }}
-        className="relative max-w-[90vw] max-h-[85vh] flex flex-col items-center"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <img
-          src={currentImage.src}
-          alt={currentImage.alt}
-          className="max-w-full max-h-[75vh] object-contain rounded-lg"
-        />
-        
-        {/* Caption */}
-        {(currentImage.title || currentImage.description) && (
-          <div className="mt-4 text-center px-4">
-            {currentImage.title && (
-              <h3 className="text-white text-lg font-semibold">{currentImage.title}</h3>
-            )}
-            {currentImage.description && (
-              <p className="text-white/70 text-sm mt-1">{currentImage.description}</p>
-            )}
-          </div>
-        )}
+      {/* Image container with drag */}
+      <AnimatePresence mode="popLayout" initial={false} custom={dragDirection}>
+        <motion.div
+          key={currentIndex}
+          custom={dragDirection}
+          initial={{ opacity: 0, x: dragDirection * 300 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: dragDirection * -300 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          drag="x"
+          dragConstraints={{ left: 0, right: 0 }}
+          dragElastic={0.2}
+          onDragEnd={handleDragEnd}
+          className="relative max-w-[90vw] max-h-[85vh] flex flex-col items-center cursor-grab active:cursor-grabbing"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <img
+            src={currentImage.src}
+            alt={currentImage.alt}
+            className="max-w-full max-h-[75vh] object-contain rounded-lg select-none pointer-events-none"
+            draggable={false}
+          />
+          
+          {/* Caption */}
+          {(currentImage.title || currentImage.description) && (
+            <div className="mt-4 text-center px-4">
+              {currentImage.title && (
+                <h3 className="text-white text-lg font-semibold">{currentImage.title}</h3>
+              )}
+              {currentImage.description && (
+                <p className="text-white/70 text-sm mt-1">{currentImage.description}</p>
+              )}
+            </div>
+          )}
 
-        {/* Image counter */}
-        <div className="mt-4 text-white/50 text-sm">
-          {currentIndex + 1} / {images.length}
-        </div>
-      </motion.div>
+          {/* Image counter */}
+          <div className="mt-4 text-white/50 text-sm">
+            {currentIndex + 1} / {images.length}
+          </div>
+        </motion.div>
+      </AnimatePresence>
+
+      {/* Drag hint */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/30 text-xs flex items-center gap-2">
+        <ChevronLeft className="w-4 h-4" />
+        <span>Drag to navigate</span>
+        <ChevronRight className="w-4 h-4" />
+      </div>
     </motion.div>
   );
 }
