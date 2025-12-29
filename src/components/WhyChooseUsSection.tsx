@@ -7,14 +7,12 @@ const WhyChooseUsSection = () => {
     <section className="bg-background">
       <div className="grid grid-cols-1 lg:grid-cols-2">
         {/* Left: Featured Image */}
-        <div className="lg:border-r border-border">
-          <div className="aspect-[4/3] overflow-hidden">
-            <img 
-              src={seoulMetroPoster} 
-              alt="Seoul Metro Billboard - Ium Labs" 
-              className="w-full h-full object-cover"
-            />
-          </div>
+        <div className="lg:border-r border-border h-full">
+          <img 
+            src={seoulMetroPoster} 
+            alt="Seoul Metro Billboard - Ium Labs" 
+            className="w-full h-full object-cover min-h-[300px] lg:min-h-full"
+          />
         </div>
 
         {/* Right: Content */}
