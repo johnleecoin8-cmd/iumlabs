@@ -16,8 +16,9 @@ interface HoverExpandGalleryProps {
   className?: string;
 }
 
-const SWIPE_THRESHOLD = 50;
-const VELOCITY_THRESHOLD = 300;
+const SWIPE_THRESHOLD = 30;
+const VELOCITY_THRESHOLD = 200;
+const MOMENTUM_MULTIPLIER = 0.003; // How much velocity affects the number of slides to skip
 
 const useBreakpoint = () => {
   const [breakpoint, setBreakpoint] = useState<"mobile" | "tablet" | "desktop">(() => {
@@ -211,14 +212,14 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
 
   const canNavigate = images.length > config.numVisible;
 
-  const navigate = useCallback((direction: "prev" | "next") => {
-    if (direction === "next") {
-      setStartIndex((prev) => (prev + 1) % images.length);
-      setActiveIndex(0);
-    } else {
-      setStartIndex((prev) => (prev - 1 + images.length) % images.length);
-      setActiveIndex(0);
-    }
+  const navigateMultiple = useCallback((count: number) => {
+    setStartIndex((prev) => {
+      let newIndex = prev + count;
+      // Wrap around properly
+      while (newIndex < 0) newIndex += images.length;
+      return newIndex % images.length;
+    });
+    setActiveIndex(0);
   }, [images.length]);
 
   const handleDragStart = () => {
@@ -231,10 +232,20 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
     
     // Only navigate if it was a real drag (not a click)
     if (dragDuration > 100) {
-      if (info.offset.x > SWIPE_THRESHOLD || info.velocity.x > VELOCITY_THRESHOLD) {
-        navigate("prev");
-      } else if (info.offset.x < -SWIPE_THRESHOLD || info.velocity.x < -VELOCITY_THRESHOLD) {
-        navigate("next");
+      const velocity = Math.abs(info.velocity.x);
+      const offset = info.offset.x;
+      
+      // Calculate how many slides to skip based on momentum
+      const momentumSlides = Math.floor(velocity * MOMENTUM_MULTIPLIER);
+      const baseSlide = 1;
+      const totalSlides = Math.max(1, Math.min(baseSlide + momentumSlides, config.numVisible));
+      
+      if (offset > SWIPE_THRESHOLD || info.velocity.x > VELOCITY_THRESHOLD) {
+        // Swiped right - go to previous
+        navigateMultiple(-totalSlides);
+      } else if (offset < -SWIPE_THRESHOLD || info.velocity.x < -VELOCITY_THRESHOLD) {
+        // Swiped left - go to next
+        navigateMultiple(totalSlides);
       }
     }
     
@@ -332,13 +343,13 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
           {canNavigate && (
             <div className="flex justify-center gap-3 mt-4">
               <button
-                onClick={() => navigate("prev")}
+                onClick={() => navigateMultiple(-1)}
                 className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary transition-colors"
               >
                 <ChevronLeft className="w-5 h-5 text-foreground" />
               </button>
               <button
-                onClick={() => navigate("next")}
+                onClick={() => navigateMultiple(1)}
                 className="w-10 h-10 rounded-full border border-border flex items-center justify-center hover:bg-secondary transition-colors"
               >
                 <ChevronRight className="w-5 h-5 text-foreground" />
@@ -370,13 +381,13 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
         {canNavigate && (
           <>
             <button
-              onClick={() => navigate("prev")}
+              onClick={() => navigateMultiple(-1)}
               className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
             >
               <ChevronLeft className="w-6 h-6 text-foreground" />
             </button>
             <button
-              onClick={() => navigate("next")}
+              onClick={() => navigateMultiple(1)}
               className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 rounded-full bg-background/80 backdrop-blur-sm border border-border flex items-center justify-center hover:bg-background transition-colors shadow-lg"
             >
               <ChevronRight className="w-6 h-6 text-foreground" />
