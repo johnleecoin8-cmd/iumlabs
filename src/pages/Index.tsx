@@ -26,28 +26,32 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import { MessageSquare, FileText, Rocket, TrendingUp } from "lucide-react";
+import { MessageSquare, FileText, Rocket, TrendingUp, Check } from "lucide-react";
 
 const processPhases = [
   {
     title: "Share",
     icon: MessageSquare,
-    description: "Share your project details, budget, and KPIs with us"
+    description: "Tell us about your project vision, target audience, budget range, and success metrics",
+    subPoints: ["Project goals & timeline", "Budget & resources", "Target KPIs"]
   },
   {
     title: "Propose",
     icon: FileText,
-    description: "We deliver a customized GTM strategy tailored to your goals"
+    description: "We analyze your needs and deliver a customized GTM strategy with clear milestones",
+    subPoints: ["Market research", "Competitive analysis", "Custom GTM roadmap"]
   },
   {
     title: "Launch",
     icon: Rocket,
-    description: "Execute and launch your strategy across Korean market"
+    description: "Execute your strategy with our network of media, KOLs, and community partners",
+    subPoints: ["PR & media outreach", "KOL activation", "Community building"]
   },
   {
     title: "Scale",
     icon: TrendingUp,
-    description: "Optimize and grow your presence with data-driven iteration"
+    description: "Measure, optimize, and scale your presence based on real performance data",
+    subPoints: ["Performance tracking", "Strategy optimization", "Growth acceleration"]
   }
 ];
 
@@ -146,6 +150,19 @@ const ProcessBillboardOverlay = () => {
                     `}>
                       {phase.description}
                     </p>
+                    
+                    {/* Sub Points */}
+                    <div className={`
+                      mt-2 space-y-1 transition-all duration-500 delay-100
+                      ${isHovered ? 'opacity-100' : 'opacity-0 sm:opacity-0'}
+                    `}>
+                      {phase.subPoints.map((point, i) => (
+                        <div key={i} className="flex items-center gap-1.5 text-[10px] md:text-[11px] text-white/50">
+                          <Check className="w-3 h-3 text-green-400 flex-shrink-0" />
+                          <span>{point}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 
