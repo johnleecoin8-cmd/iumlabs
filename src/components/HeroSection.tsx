@@ -120,14 +120,14 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-10 px-3 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Unified Inter font with color contrast */}
-          <h1 className="font-sans text-[7vw] sm:text-[6vw] md:text-[5vw] lg:text-[4.5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6 mt-6 sm:mt-10">
+          <h1 className="font-sans text-[7vw] sm:text-[5.5vw] md:text-[4.5vw] lg:text-[4vw] font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-5 md:mb-6 mt-6 sm:mt-8 md:mt-10">
             <span className="text-white">Bridge Your Web3 Project</span>
             <br />
             <span className="text-white">to Korea's Crypto Ecosystem</span>
           </h1>
 
           {/* Subtext - Larger and more prominent */}
-          <p className="text-sm sm:text-base md:text-lg text-white/60 max-w-3xl mx-auto mb-5 sm:mb-8 font-light tracking-wide leading-relaxed px-2">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/60 max-w-3xl mx-auto mb-5 sm:mb-6 md:mb-8 font-light tracking-wide leading-relaxed px-2">
             We combine <span className="text-white font-medium">deep-dive research labs</span> with <span className="text-white font-medium">high-impact marketing execution</span> to ensure your project thrives in the Korean market.
           </p>
 
@@ -145,9 +145,9 @@ const HeroSection = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="relative z-10 py-3 sm:py-5">
-        <div className="container mx-auto px-3 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5">
+      <div className="relative z-10 py-3 sm:py-4 md:py-5">
+        <div className="container mx-auto px-3 sm:px-6 md:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
             {stats.map((stat, index) => (
               <StatItem 
                 key={index}
@@ -230,10 +230,10 @@ const StatItem = ({
   
   return (
     <div className="text-center group cursor-default hover:scale-105 transition-transform">
-      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 stat-glow transition-all duration-300 group-hover:text-primary">
+      <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-0.5 stat-glow transition-all duration-300 group-hover:text-primary">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-[10px] sm:text-xs text-white/50 font-light group-hover:text-white/70 transition-colors duration-300">
+      <div className="text-[10px] sm:text-xs md:text-sm text-white/50 font-light group-hover:text-white/70 transition-colors duration-300">
         {label}
       </div>
     </div>

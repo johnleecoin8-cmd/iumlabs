@@ -6,9 +6,9 @@ import aboutImageHover from '@/assets/campaigns/about-image-hover.jpeg';
 const WhyChooseUsSection = () => {
   return (
     <section className="bg-background">
-      <div className="grid grid-cols-1 lg:grid-cols-[2.5fr_3.5fr] max-h-[500px] sm:max-h-[550px] lg:max-h-[650px] overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:grid-cols-[2.5fr_3.5fr] max-h-[500px] sm:max-h-[520px] md:max-h-[400px] lg:max-h-[650px] overflow-hidden">
         {/* Left: Featured Image with Hover Effect */}
-        <div className="lg:border-r border-border overflow-hidden h-[200px] sm:h-[250px] lg:h-full relative group">
+        <div className="md:border-r border-border overflow-hidden h-[200px] sm:h-[220px] md:h-full relative group">
           <img 
             src={aboutImageDefault} 
             alt="ium Labs Team - Default" 
@@ -24,32 +24,32 @@ const WhyChooseUsSection = () => {
         {/* Right: Content */}
         <div className="flex flex-col">
           {/* About Text */}
-          <div className="p-3 sm:p-4 md:p-5 flex-1 flex flex-col justify-center border-b border-border">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-1.5 sm:mb-2">
+          <div className="p-3 sm:p-4 md:p-5 lg:p-6 flex-1 flex flex-col justify-center border-b border-border">
+            <h2 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-foreground mb-1.5 sm:mb-2">
               About Us
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-1.5 sm:mb-2 text-xs sm:text-sm">
+            <p className="text-muted-foreground leading-relaxed mb-1.5 sm:mb-2 text-xs sm:text-sm md:text-sm">
               We bridge global Web3 projects to growth in the Korean market. Established in 2025, we have become a trusted partner for 18+ brands expanding into Korea's dynamic crypto ecosystem.
             </p>
-            <p className="text-foreground font-medium text-xs sm:text-sm">
+            <p className="text-foreground font-medium text-xs sm:text-sm md:text-sm">
               Founded by former executives from Binance and KuCoin
             </p>
           </div>
 
           {/* Stats + CTA */}
-          <div className="p-3 sm:p-4 md:p-5">
-            <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-3 sm:mb-4">
+          <div className="p-3 sm:p-4 md:p-5 lg:p-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4">
               <div className="text-center">
-                <div className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-0.5">2025</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground">Founded</div>
+                <div className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-foreground mb-0.5">2025</div>
+                <div className="text-[10px] sm:text-xs md:text-xs text-muted-foreground">Founded</div>
               </div>
               <div className="text-center">
-                <div className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-0.5">18+</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground">Partners</div>
+                <div className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-foreground mb-0.5">18+</div>
+                <div className="text-[10px] sm:text-xs md:text-xs text-muted-foreground">Partners</div>
               </div>
               <div className="text-center">
-                <div className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-0.5">60+</div>
-                <div className="text-[10px] sm:text-xs text-muted-foreground">Campaigns</div>
+                <div className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-foreground mb-0.5">60+</div>
+                <div className="text-[10px] sm:text-xs md:text-xs text-muted-foreground">Campaigns</div>
               </div>
             </div>
             <Link

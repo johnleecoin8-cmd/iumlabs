@@ -31,16 +31,16 @@ const campaignImages = [
 const FilmstripGallerySection = () => {
   return (
     <section className="bg-surface-base">
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col md:flex-row">
         {/* Left: Gallery Grid */}
-        <div className="w-full lg:w-2/3 lg:border-r border-white/10">
-          <div className="grid grid-cols-2 sm:grid-cols-3">
+        <div className="w-full md:w-2/3 md:border-r border-white/10">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3">
             {campaignImages.slice(0, 6).map((image, index) => (
               <div
                 key={index}
                 className={`group relative aspect-[6/5] overflow-hidden border-r border-b border-white/10 cursor-pointer hover:scale-[1.02] hover:z-10 transition-transform duration-300 ${
-                  index % 2 === 1 ? "sm:border-r" : ""
-                } ${index % 3 === 2 ? "sm:border-r-0" : ""} last:border-r-0`}
+                  index % 2 === 1 ? "border-r-0 sm:border-r" : ""
+                } ${index % 3 === 2 ? "sm:border-r-0" : ""}`}
               >
                 <img
                   src={image.src}
@@ -58,11 +58,11 @@ const FilmstripGallerySection = () => {
         </div>
 
         {/* Right: Info Panel */}
-        <div className="w-full lg:w-1/3 p-4 sm:p-6 md:p-8 flex flex-col justify-center">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3">
+        <div className="w-full md:w-1/3 p-4 sm:p-6 md:p-6 lg:p-8 flex flex-col justify-center">
+          <h2 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3">
             Campaign Gallery
           </h2>
-          <p className="text-white/50 leading-relaxed mb-4 sm:mb-5 text-xs sm:text-sm">
+          <p className="text-white/50 leading-relaxed mb-4 sm:mb-5 text-xs sm:text-sm md:text-sm">
             Explore our successful campaigns and events across Korea's Web3 ecosystem.
           </p>
 

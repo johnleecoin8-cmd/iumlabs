@@ -66,9 +66,9 @@ const InsightsSection = () => {
 
   return (
     <section className="bg-background">
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col md:flex-row">
         {/* Left: Articles List */}
-        <div className="w-full lg:w-2/3 lg:border-r border-border">
+        <div className="w-full md:w-2/3 md:border-r border-border">
           {insights.map((article, index) => (
             <div key={article.id}>
               <Link
@@ -111,11 +111,11 @@ const InsightsSection = () => {
         </div>
 
         {/* Right: Newsletter CTA */}
-        <div className="w-full lg:w-1/3 p-4 sm:p-6 md:p-8 flex flex-col justify-center">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3 sm:mb-4">
+        <div className="w-full md:w-1/3 p-4 sm:p-6 md:p-6 lg:p-8 flex flex-col justify-center">
+          <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground mb-3 sm:mb-4">
             Latest Research
           </h2>
-          <p className="text-muted-foreground leading-relaxed mb-4 sm:mb-6 text-xs sm:text-sm">
+          <p className="text-muted-foreground leading-relaxed mb-4 sm:mb-5 md:mb-6 text-xs sm:text-sm md:text-sm">
             Stay ahead with our insights on Korean Web3 market trends and strategies.
           </p>
 
