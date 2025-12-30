@@ -107,9 +107,9 @@ const ContactFormSection = ({
         </div>
         
         {/* Two Column Layout */}
-        <div className="flex flex-col lg:flex-row">
+        <div className="flex flex-col md:flex-row">
           {/* Left Column - Contact Info */}
-          <div className="w-full lg:w-2/5 p-4 sm:p-6 md:p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-white/10">
+          <div className="w-full md:w-2/5 p-4 sm:p-6 md:p-6 lg:p-10 border-b md:border-b-0 md:border-r border-white/10">
             <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4">
               Get in Touch
             </h3>
@@ -192,7 +192,7 @@ const ContactFormSection = ({
           </div>
 
           {/* Right Column - Contact Form */}
-          <div className="w-full lg:w-3/5 p-4 sm:p-6 md:p-8 lg:p-10">
+          <div className="w-full md:w-3/5 p-4 sm:p-6 md:p-6 lg:p-10">
             <div className="flex items-center justify-between mb-4 sm:mb-6">
               <span className="text-xs sm:text-sm text-white/40">Contact Form</span>
               <span className="text-xs sm:text-sm text-white/40">{completionPercentage}% complete</span>

@@ -207,7 +207,7 @@ const CasesSection = () => {
       <div className="flex flex-col lg:flex-row">
         {/* Left: Cases Grid */}
         <div className="w-full lg:w-2/3 lg:border-r border-border">
-          <div className="grid grid-cols-1 md:grid-cols-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2">
             {featuredCases.map((caseItem, index) => (
               <CaseCard key={caseItem.slug} {...caseItem} index={index} />
             ))}
@@ -215,26 +215,26 @@ const CasesSection = () => {
         </div>
 
         {/* Right: Sticky Info Panel */}
-        <div className="w-full lg:w-1/3 p-4 sm:p-6 md:p-8 flex flex-col justify-center">
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3 sm:mb-4">
+        <div className="w-full lg:w-1/3 p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-center">
+          <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground mb-3 sm:mb-4">
             Our Cases
           </h2>
-          <p className="text-muted-foreground leading-relaxed mb-4 sm:mb-6 text-xs sm:text-sm">
+          <p className="text-muted-foreground leading-relaxed mb-4 sm:mb-5 md:mb-6 text-xs sm:text-sm md:text-sm">
             Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
           </p>
 
-          <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
+          <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-5 md:mb-6">
             <div className="flex items-center gap-3 sm:gap-4 pb-2 sm:pb-3 border-b border-border">
-              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">340%</span>
-              <span className="text-muted-foreground text-xs sm:text-sm">Average volume increase</span>
+              <span className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground">340%</span>
+              <span className="text-muted-foreground text-xs sm:text-sm md:text-sm">Average volume increase</span>
             </div>
             <div className="flex items-center gap-3 sm:gap-4 pb-2 sm:pb-3 border-b border-border">
-              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">50K+</span>
-              <span className="text-muted-foreground text-xs sm:text-sm">New users acquired</span>
+              <span className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground">50K+</span>
+              <span className="text-muted-foreground text-xs sm:text-sm md:text-sm">New users acquired</span>
             </div>
             <div className="flex items-center gap-3 sm:gap-4">
-              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">18+</span>
-              <span className="text-muted-foreground text-xs sm:text-sm">Projects launched</span>
+              <span className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground">18+</span>
+              <span className="text-muted-foreground text-xs sm:text-sm md:text-sm">Projects launched</span>
             </div>
           </div>
 

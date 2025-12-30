@@ -31,7 +31,7 @@ const Navbar = () => {
   const mobileNavLayer = (
     <>
       {/* Mobile Top Navigation Bar */}
-      <nav className="fixed top-[max(0.5rem,env(safe-area-inset-top))] left-[max(0.5rem,env(safe-area-inset-left))] right-[max(0.5rem,env(safe-area-inset-right))] sm:top-[max(1rem,env(safe-area-inset-top))] sm:left-[max(1rem,env(safe-area-inset-left))] sm:right-[max(1rem,env(safe-area-inset-right))] z-[60] md:hidden">
+      <nav className="fixed top-[max(0.5rem,env(safe-area-inset-top))] left-[max(0.5rem,env(safe-area-inset-left))] right-[max(0.5rem,env(safe-area-inset-right))] sm:top-[max(1rem,env(safe-area-inset-top))] sm:left-[max(1rem,env(safe-area-inset-left))] sm:right-[max(1rem,env(safe-area-inset-right))] z-[60] lg:hidden">
         <div className="bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl px-4 py-3 flex items-center justify-between shadow-lg">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
@@ -103,12 +103,12 @@ const Navbar = () => {
                   Navigation
                 </span>
                 <nav className="space-y-1 sm:space-y-1.5 md:space-y-2">
-                  {navLinks.map((link, index) => (
+              {navLinks.map((link, index) => (
                     <div key={link.to}>
                       <Link
                         to={link.to}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`block text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[40px] sm:min-h-[44px] flex items-center ${
+                        className={`block text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[40px] sm:min-h-[44px] md:min-h-[52px] flex items-center ${
                           isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                         }`}
                         style={{ transitionDelay: isMenuOpen ? `${200 + index * 60}ms` : "0ms" }}

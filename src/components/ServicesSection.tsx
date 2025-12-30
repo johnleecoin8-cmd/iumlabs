@@ -87,11 +87,13 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     <div className="group relative overflow-hidden">
       <Link
         to={service.link}
-        className={`block h-full min-h-[200px] sm:min-h-[260px] md:min-h-[300px] relative transition-all duration-300 ${
+        className={`block h-full min-h-[200px] sm:min-h-[240px] md:min-h-[280px] lg:min-h-[300px] relative transition-all duration-300 ${
           hasBorderRight ? "lg:border-r border-border/30" : ""
         } ${hasBorderBottom ? "border-b border-border/30" : ""} ${
-          (index % 2) === 0 ? "sm:border-r border-border/30 lg:border-r-0" : ""
-        } ${(index % 2) === 0 && hasBorderRight ? "lg:border-r" : ""}`}
+          (index % 2) === 0 ? "sm:border-r border-border/30 md:border-r lg:border-r-0" : ""
+        } ${(index % 2) === 0 && hasBorderRight ? "lg:border-r" : ""} ${
+          (index % 2) === 1 ? "md:border-r-0 lg:border-r" : ""
+        }`}
       >
         {/* Background Layer */}
         <div className="absolute inset-0">
@@ -151,7 +153,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 const ServicesSection = () => {
   return (
     <section className="bg-background">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
         {services.map((service, index) => (
           <ServiceCard key={service.number} service={service} index={index} />
         ))}
