@@ -60,7 +60,7 @@ const ProcessBillboardOverlay = () => {
 
   return (
       <div className="px-3 sm:px-4 md:px-8 lg:px-10 pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6">
-      <div className="relative w-full h-[380px] sm:h-[320px] md:h-[340px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
+      <div className="relative w-full h-[320px] sm:h-[320px] md:h-[340px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
         {/* Background Image - Fixed Billboard */}
         <img 
           src={seoulMetroBillboard} 
@@ -72,7 +72,7 @@ const ProcessBillboardOverlay = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30" />
         
         {/* 4-Sector Grid Overlay - 모바일은 세로 스택, 태블릿은 2x2 */}
-        <div className="absolute inset-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+        <div className="absolute inset-0 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
           {processPhases.map((phase, index) => {
             const Icon = phase.icon;
             const isHovered = hoveredIndex === index;
