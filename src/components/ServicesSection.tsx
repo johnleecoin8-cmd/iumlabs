@@ -153,7 +153,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 const ServicesSection = () => {
   return (
     <section className="bg-background">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
         {services.map((service, index) => (
           <ServiceCard key={service.number} service={service} index={index} />
         ))}
