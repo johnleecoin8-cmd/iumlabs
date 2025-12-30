@@ -6,9 +6,9 @@ import aboutImageHover from '@/assets/campaigns/about-image-hover.jpeg';
 const WhyChooseUsSection = () => {
   return (
     <section className="bg-background">
-      <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:grid-cols-[2.5fr_3.5fr] max-h-[580px] sm:max-h-[600px] md:max-h-[400px] lg:max-h-[650px] overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:grid-cols-[2.5fr_3.5fr] max-h-[700px] sm:max-h-[720px] md:max-h-[400px] lg:max-h-[650px] overflow-hidden">
         {/* Left: Featured Image with Hover Effect */}
-        <div className="md:border-r border-border overflow-hidden h-[280px] sm:h-[300px] md:h-full relative group">
+        <div className="md:border-r border-border overflow-hidden h-[400px] sm:h-[420px] md:h-full relative group">
           <img 
             src={aboutImageDefault} 
             alt="ium Labs Team - Default" 
