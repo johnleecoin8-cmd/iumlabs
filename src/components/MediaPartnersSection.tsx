@@ -23,6 +23,11 @@ const MediaPartnersSection = () => {
   return (
     <section className="bg-surface-base overflow-hidden">
       <div className="relative">
+        {/* Small label */}
+        <div className="text-center pt-4 pb-2">
+          <span className="text-[10px] text-white/30 tracking-widest uppercase">Media Partners</span>
+        </div>
+        
         {/* Gradient overlays */}
         <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-surface-base to-transparent z-10" />
         <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-surface-base to-transparent z-10" />
