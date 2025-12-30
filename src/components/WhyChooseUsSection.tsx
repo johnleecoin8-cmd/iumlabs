@@ -1,17 +1,23 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import seoulMetroPoster from '@/assets/campaigns/seoul-metro-billboard-new.jpeg';
+import aboutImageDefault from '@/assets/campaigns/about-image-default.jpeg';
+import aboutImageHover from '@/assets/campaigns/about-image-hover.jpeg';
 
 const WhyChooseUsSection = () => {
   return (
     <section className="bg-background">
       <div className="grid grid-cols-1 lg:grid-cols-[2.5fr_3.5fr] max-h-[600px] lg:max-h-[650px] overflow-hidden">
-        {/* Left: Featured Image */}
-        <div className="lg:border-r border-border overflow-hidden h-full">
+        {/* Left: Featured Image with Hover Effect */}
+        <div className="lg:border-r border-border overflow-hidden h-full relative group">
           <img 
-            src={seoulMetroPoster} 
-            alt="Seoul Metro Billboard - ium Labs" 
-            className="block w-full h-full object-cover object-center"
+            src={aboutImageDefault} 
+            alt="ium Labs Team - Default" 
+            className="block w-full h-full object-cover object-center transition-opacity duration-500 group-hover:opacity-0"
+          />
+          <img 
+            src={aboutImageHover} 
+            alt="ium Labs Team - Hover" 
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover:opacity-100"
           />
         </div>
 
