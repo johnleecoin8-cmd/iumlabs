@@ -206,14 +206,9 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Media Partners - 번호 없음 */}
+      {/* Media Partners - 번호 없음, 헤더 없이 마키만 */}
       <section className="bg-surface-even" id="media-partners">
-        <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
-            <h2 className="text-lg md:text-xl font-medium text-white">Media Partners</h2>
-          </div>
-          <MediaPartnersSection />
-        </div>
+        <MediaPartnersSection />
       </section>
       
       {/* Services - 02 홀수 */}
