@@ -161,13 +161,13 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
       <Link
         to={`/projects/${slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 h-full min-h-[140px] sm:min-h-[160px] ${
+        className={`group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 h-full min-h-[120px] sm:min-h-[140px] ${
           !isRightColumn ? "sm:border-r border-border" : ""
         } ${!isLastRow ? "border-b border-border" : ""}`}
       >
-        <div className="flex items-start gap-3 sm:gap-4">
+        <div className="flex items-start gap-2.5 sm:gap-3">
           {/* Image */}
-          <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img
               src={bgImage}
               alt={name}
@@ -177,24 +177,24 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 text-muted-foreground text-[10px] sm:text-xs mb-0.5 sm:mb-1">
+            <div className="flex items-center gap-2 text-muted-foreground text-[9px] sm:text-[10px] mb-0.5">
               <span className="uppercase tracking-wider">{category}</span>
             </div>
-            <h3 className="text-base sm:text-lg font-semibold text-foreground mb-0.5 group-hover:text-foreground/80 transition-colors line-clamp-1">
+            <h3 className="text-sm sm:text-base font-semibold text-foreground mb-0.5 group-hover:text-foreground/80 transition-colors line-clamp-1">
               {name}
             </h3>
-            <p className="text-foreground font-medium text-xs sm:text-sm mb-0.5 sm:mb-1 line-clamp-1">
+            <p className="text-foreground font-medium text-[11px] sm:text-xs mb-0.5 line-clamp-1">
               {result}
             </p>
-            <p className="text-muted-foreground text-xs leading-relaxed line-clamp-2 hidden sm:block">
+            <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed line-clamp-1 hidden sm:block">
               {description}
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-xs sm:text-sm mt-2 sm:mt-3">
+        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-xs mt-2 min-h-[36px] sm:min-h-0">
           <span className="group-hover:underline underline-offset-4">View case study</span>
-          <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
         </div>
       </Link>
     </div>
@@ -215,42 +215,42 @@ const CasesSection = () => {
         </div>
 
         {/* Right: Sticky Info Panel */}
-        <div className="w-full lg:w-1/3 p-6 md:p-8 flex flex-col justify-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+        <div className="w-full lg:w-1/3 p-4 sm:p-6 md:p-8 flex flex-col justify-center">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-3 sm:mb-4">
             Our Cases
           </h2>
-          <p className="text-muted-foreground leading-relaxed mb-6 text-sm">
+          <p className="text-muted-foreground leading-relaxed mb-4 sm:mb-6 text-xs sm:text-sm">
             Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
           </p>
 
-          <div className="space-y-4 mb-6">
-            <div className="flex items-center gap-4 pb-3 border-b border-border">
-              <span className="text-2xl md:text-3xl font-bold text-foreground">340%</span>
-              <span className="text-muted-foreground text-sm">Average volume increase</span>
+          <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
+            <div className="flex items-center gap-3 sm:gap-4 pb-2 sm:pb-3 border-b border-border">
+              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">340%</span>
+              <span className="text-muted-foreground text-xs sm:text-sm">Average volume increase</span>
             </div>
-            <div className="flex items-center gap-4 pb-3 border-b border-border">
-              <span className="text-2xl md:text-3xl font-bold text-foreground">50K+</span>
-              <span className="text-muted-foreground text-sm">New users acquired</span>
+            <div className="flex items-center gap-3 sm:gap-4 pb-2 sm:pb-3 border-b border-border">
+              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">50K+</span>
+              <span className="text-muted-foreground text-xs sm:text-sm">New users acquired</span>
             </div>
-            <div className="flex items-center gap-4">
-              <span className="text-2xl md:text-3xl font-bold text-foreground">18+</span>
-              <span className="text-muted-foreground text-sm">Projects launched</span>
+            <div className="flex items-center gap-3 sm:gap-4">
+              <span className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">18+</span>
+              <span className="text-muted-foreground text-xs sm:text-sm">Projects launched</span>
             </div>
           </div>
 
           <Link
             to="/contact"
-            className="group inline-flex items-center justify-center gap-2 bg-foreground text-background px-6 py-4 sm:py-3 text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-full sm:w-fit mb-6 min-h-[48px]"
+            className="group inline-flex items-center justify-center gap-2 bg-foreground text-background px-5 sm:px-6 py-3 sm:py-3 text-xs sm:text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-full sm:w-fit mb-4 sm:mb-6 min-h-[44px]"
           >
             START YOUR PROJECT
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
 
           {/* View All Projects */}
-          <div className="pt-6 border-t border-border">
+          <div className="pt-4 sm:pt-6 border-t border-border">
             <Link
               to="/projects"
-              className="group inline-flex items-center gap-2 text-foreground font-medium hover:text-foreground/70 transition-colors"
+              className="group inline-flex items-center gap-2 text-foreground font-medium hover:text-foreground/70 transition-colors text-sm"
             >
               <span className="group-hover:underline underline-offset-4">View all projects</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -258,7 +258,7 @@ const CasesSection = () => {
           </div>
 
           {/* 3D Bridge Logo */}
-          <div className="h-32 w-full mt-6">
+          <div className="h-24 sm:h-32 w-full mt-4 sm:mt-6 hidden sm:block">
             <Logo3D />
           </div>
         </div>

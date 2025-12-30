@@ -87,7 +87,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     <div className="group relative overflow-hidden">
       <Link
         to={service.link}
-        className={`block h-full min-h-[280px] sm:min-h-[320px] relative transition-all duration-300 ${
+        className={`block h-full min-h-[200px] sm:min-h-[260px] md:min-h-[300px] relative transition-all duration-300 ${
           hasBorderRight ? "lg:border-r border-border/30" : ""
         } ${hasBorderBottom ? "border-b border-border/30" : ""} ${
           (index % 2) === 0 ? "sm:border-r border-border/30 lg:border-r-0" : ""
@@ -118,21 +118,21 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
         </div>
 
         {/* Content */}
-        <div className="relative z-10 h-full flex flex-col justify-end p-6 sm:p-8">
+        <div className="relative z-10 h-full flex flex-col justify-end p-4 sm:p-6 md:p-8">
           <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
-            <div className="mb-4 sm:mb-6">
+            <div className="mb-3 sm:mb-4 md:mb-6">
               <Icon 
-                className="w-8 h-8 sm:w-10 sm:h-10 text-white/80 group-hover:text-white group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-500" 
+                className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white/80 group-hover:text-white group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-500" 
                 strokeWidth={1.5} 
               />
             </div>
-            <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2 sm:mb-3 group-hover:text-white transition-colors">
+            <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white mb-1.5 sm:mb-2 md:mb-3 group-hover:text-white transition-colors">
               {service.title}
             </h3>
-            <p className="text-white/70 text-sm leading-relaxed mb-4 sm:mb-6 line-clamp-2 group-hover:text-white/90 transition-colors">
+            <p className="text-white/70 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 md:mb-6 line-clamp-2 group-hover:text-white/90 transition-colors">
               {service.description}
             </p>
-            <div className="flex items-center gap-2 text-white/80 group-hover:text-white transition-colors text-sm">
+            <div className="flex items-center gap-2 text-white/80 group-hover:text-white transition-colors text-xs sm:text-sm min-h-[44px] sm:min-h-0">
               <span className="group-hover:underline underline-offset-4">Learn more</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
             </div>

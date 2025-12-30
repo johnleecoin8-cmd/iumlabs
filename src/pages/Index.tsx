@@ -59,8 +59,8 @@ const ProcessBillboardOverlay = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="px-4 md:px-10 pt-4 md:pt-6 pb-4 md:pb-6">
-      <div className="relative w-full h-[420px] sm:h-[350px] md:h-[380px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
+    <div className="px-3 sm:px-4 md:px-10 pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6">
+      <div className="relative w-full h-[380px] sm:h-[320px] md:h-[360px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
         {/* Background Image - Fixed Billboard */}
         <img 
           src={seoulMetroBillboard} 
@@ -108,8 +108,8 @@ const ProcessBillboardOverlay = () => {
                 
                 {/* Icon */}
                 <div className={`
-                  w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full flex-shrink-0
-                  flex items-center justify-center sm:mb-2 md:mb-3
+                  w-9 h-9 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full flex-shrink-0
+                  flex items-center justify-center sm:mb-1 md:mb-2 lg:mb-3
                   border transition-all duration-500
                   ${isHovered 
                     ? 'bg-white/20 border-white/40 scale-110' 
@@ -117,7 +117,7 @@ const ProcessBillboardOverlay = () => {
                   }
                 `}>
                   <Icon className={`
-                    w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-all duration-500
+                    w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 transition-all duration-500
                     ${isHovered ? 'text-white rotate-[360deg]' : 'text-white/60 rotate-0'}
                   `} />
                 </div>
@@ -126,7 +126,7 @@ const ProcessBillboardOverlay = () => {
                 <div className="flex-1 sm:flex-none sm:text-center">
                   {/* Title */}
                   <h4 className={`
-                    text-sm sm:text-sm md:text-base lg:text-lg font-medium
+                    text-xs sm:text-sm md:text-sm lg:text-base font-medium
                     transition-all duration-300
                     ${isHovered ? 'text-white' : 'text-white/80'}
                   `}>
@@ -135,31 +135,31 @@ const ProcessBillboardOverlay = () => {
                   
                   {/* Description - 모바일에서 항상 표시, 태블릿/데스크톱은 호버 시 */}
                   <div className={`
-                    sm:mt-2 md:mt-3 overflow-hidden
+                    sm:mt-1 md:mt-2 overflow-hidden
                     transition-all duration-500 ease-out
-                    max-h-[60px] opacity-100
+                    max-h-[80px] opacity-100
                     sm:${isHovered 
                       ? 'sm:max-h-[100px] sm:opacity-100 sm:translate-y-0' 
                       : 'sm:max-h-0 sm:opacity-0 sm:translate-y-2'
                     }
                   `}>
                     <p className={`
-                      text-[11px] sm:text-[11px] md:text-xs lg:text-sm text-white/60 leading-relaxed
-                      transition-all duration-500
+                      text-[10px] sm:text-[10px] md:text-[11px] lg:text-xs text-white/60 leading-relaxed
+                      transition-all duration-500 line-clamp-2 sm:line-clamp-none
                       ${isHovered ? 'sm:opacity-100' : 'sm:opacity-0'}
                     `}>
                       {phase.description}
                     </p>
                     
-                    {/* Sub Points */}
+                    {/* Sub Points - 모바일에서 항상 표시 */}
                     <div className={`
-                      mt-2 space-y-1 transition-all duration-500 delay-100
-                      ${isHovered ? 'opacity-100' : 'opacity-0 sm:opacity-0'}
+                      mt-1.5 sm:mt-2 space-y-0.5 sm:space-y-1 transition-all duration-500 delay-100
+                      opacity-100 sm:${isHovered ? 'opacity-100' : 'opacity-0'}
                     `}>
                       {phase.subPoints.map((point, i) => (
-                        <div key={i} className="flex items-center gap-1.5 text-[10px] md:text-[11px] text-white/50">
-                          <Check className="w-3 h-3 text-green-400 flex-shrink-0" />
-                          <span>{point}</span>
+                        <div key={i} className="flex items-center gap-1 sm:gap-1.5 text-[9px] sm:text-[10px] md:text-[11px] text-white/50">
+                          <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-green-400 flex-shrink-0" />
+                          <span className="line-clamp-1">{point}</span>
                         </div>
                       ))}
                     </div>
