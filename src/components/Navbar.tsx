@@ -60,7 +60,7 @@ const Navbar = () => {
 
       {/* Top Panel Menu - slides from top */}
       <div
-        className={`fixed top-0 left-0 right-0 h-[70vh] sm:h-[65vh] lg:h-[55vh] z-[101] bg-gradient-to-b from-background via-background to-primary/5 transition-all duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+        className={`fixed top-0 left-0 right-0 max-h-[85vh] sm:max-h-[75vh] lg:max-h-[65vh] z-[101] bg-gradient-to-b from-background via-background to-primary/5 transition-all duration-300 ease-out ${
           isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         }`}
       >
@@ -69,16 +69,16 @@ const Navbar = () => {
 
         <div className="h-full flex flex-col relative z-10">
           {/* Header */}
-          <div className="flex-shrink-0 container mx-auto px-6 py-4">
+          <div className="flex-shrink-0 container mx-auto px-4 sm:px-6 py-3 sm:py-4">
             <div className="flex items-center justify-between">
               <Link to="/" className="flex items-center gap-2" onClick={() => setIsMenuOpen(false)}>
-                <img src={logoImage} alt="ium Labs Logo" className="w-8 h-8 rounded-lg object-contain" />
-                <span className="text-lg font-semibold text-foreground">{brandConfig.name}</span>
+                <img src={logoImage} alt="ium Labs Logo" className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-contain" />
+                <span className="text-base sm:text-lg font-semibold text-foreground">{brandConfig.name}</span>
               </Link>
 
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="group flex items-center gap-3 px-5 py-2.5 rounded-full bg-secondary text-foreground text-sm font-medium transition-all duration-300 hover:bg-secondary/80"
+                className="group flex items-center gap-2 sm:gap-3 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-secondary text-foreground text-sm font-medium transition-all duration-300 hover:bg-secondary/80"
               >
                 <span>close</span>
                 <div className="relative w-5 h-5 flex items-center justify-center">
@@ -90,8 +90,8 @@ const Navbar = () => {
           </div>
 
           {/* Content - flex-1 to fill remaining space */}
-          <div className="flex-1 container mx-auto px-4 sm:px-6 py-3 lg:py-6 overflow-y-auto overscroll-contain scrollbar-thin">
-            <div className="h-full grid md:grid-cols-2 gap-6 lg:gap-12 content-center">
+          <div className="flex-1 container mx-auto px-4 sm:px-6 py-2 sm:py-3 lg:py-6 overflow-y-auto overscroll-contain scrollbar-thin">
+            <div className="h-full grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 content-center">
               {/* Navigation Links */}
               <div className="flex flex-col justify-center">
                 <span
@@ -102,16 +102,16 @@ const Navbar = () => {
                 >
                   Navigation
                 </span>
-                <nav className="space-y-1.5 sm:space-y-2 md:space-y-3">
+                <nav className="space-y-1 sm:space-y-1.5 md:space-y-2">
                   {navLinks.map((link, index) => (
                     <div key={link.to}>
                       <Link
                         to={link.to}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-foreground hover:text-primary transition-all duration-400 min-h-[44px] flex items-center ${
+                        className={`block text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[40px] sm:min-h-[44px] flex items-center ${
                           isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                         }`}
-                        style={{ transitionDelay: isMenuOpen ? `${300 + index * 80}ms` : "0ms" }}
+                        style={{ transitionDelay: isMenuOpen ? `${200 + index * 60}ms` : "0ms" }}
                       >
                         {link.label}
                       </Link>
@@ -122,11 +122,11 @@ const Navbar = () => {
                     <Link
                       to="/contact"
                       onClick={() => setIsMenuOpen(false)}
-                      className={`block text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-foreground hover:text-primary transition-all duration-400 min-h-[44px] flex items-center ${
+                      className={`block text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[40px] sm:min-h-[44px] flex items-center ${
                         isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                       }`}
                       style={{
-                        transitionDelay: isMenuOpen ? `${300 + navLinks.length * 80}ms` : "0ms",
+                        transitionDelay: isMenuOpen ? `${200 + navLinks.length * 60}ms` : "0ms",
                       }}
                     >
                       Contact
@@ -136,66 +136,66 @@ const Navbar = () => {
               </div>
 
               {/* Contact Info */}
-              <div className="flex flex-col justify-center space-y-3 sm:space-y-4 md:space-y-6">
+              <div className="flex flex-col justify-center space-y-2 sm:space-y-3 md:space-y-4">
                 <div
-                  className={`transition-all duration-500 ${
+                  className={`transition-all duration-400 ${
                     isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                   }`}
-                  style={{ transitionDelay: isMenuOpen ? "500ms" : "0ms" }}
+                  style={{ transitionDelay: isMenuOpen ? "400ms" : "0ms" }}
                 >
-                  <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">
+                  <span className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-widest mb-1 block">
                     Get in touch
                   </span>
                   <a
                     href={`mailto:${brandConfig.email}`}
-                    className="text-base lg:text-xl text-foreground hover:text-primary transition-colors"
+                    className="text-sm sm:text-base lg:text-lg text-foreground hover:text-primary transition-colors"
                   >
                     {brandConfig.email}
                   </a>
                 </div>
 
                 <div
-                  className={`transition-all duration-500 ${
+                  className={`transition-all duration-400 ${
                     isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                   }`}
-                  style={{ transitionDelay: isMenuOpen ? "600ms" : "0ms" }}
+                  style={{ transitionDelay: isMenuOpen ? "450ms" : "0ms" }}
                 >
-                  <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">
+                  <span className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-widest mb-1 block">
                     Telegram
                   </span>
                   <a
                     href={brandConfig.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base lg:text-xl text-foreground hover:text-primary transition-colors"
+                    className="text-sm sm:text-base lg:text-lg text-foreground hover:text-primary transition-colors"
                   >
                     @iumlabs
                   </a>
                 </div>
 
                 <div
-                  className={`transition-all duration-500 ${
+                  className={`transition-all duration-400 ${
                     isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                   }`}
-                  style={{ transitionDelay: isMenuOpen ? "700ms" : "0ms" }}
+                  style={{ transitionDelay: isMenuOpen ? "500ms" : "0ms" }}
                 >
-                  <span className="text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block">
+                  <span className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-widest mb-1 block">
                     Office
                   </span>
-                  <p className="text-sm lg:text-lg text-muted-foreground">{brandConfig.office}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">{brandConfig.office}</p>
                 </div>
 
                 <div
-                  className={`flex gap-3 pt-2 lg:pt-4 transition-all duration-500 ${
+                  className={`flex gap-2 sm:gap-3 pt-2 sm:pt-3 transition-all duration-400 ${
                     isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                   }`}
-                  style={{ transitionDelay: isMenuOpen ? "800ms" : "0ms" }}
+                  style={{ transitionDelay: isMenuOpen ? "550ms" : "0ms" }}
                 >
                   <a
                     href={brandConfig.telegram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-border text-foreground text-xs lg:text-sm font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
+                    className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-border text-foreground text-xs font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
                   >
                     Telegram
                   </a>
@@ -203,7 +203,7 @@ const Navbar = () => {
                     href={brandConfig.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 lg:px-6 py-2 lg:py-3 rounded-full border border-border text-foreground text-xs lg:text-sm font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
+                    className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-border text-foreground text-xs font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
                   >
                     LinkedIn
                   </a>

@@ -117,24 +117,24 @@ const HeroSection = () => {
       ))}
 
       {/* Main Content - Centered */}
-      <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
+      <div className="flex-1 flex items-center justify-center relative z-10 px-3 sm:px-6">
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Unified Inter font with color contrast */}
-          <h1 className="font-sans text-[8vw] sm:text-[7vw] md:text-[5.5vw] lg:text-[4.5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12">
+          <h1 className="font-sans text-[7vw] sm:text-[6vw] md:text-[5vw] lg:text-[4.5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6 mt-6 sm:mt-10">
             <span className="text-white">Bridge Your Web3 Project</span>
             <br />
             <span className="text-white">to Korea's Crypto Ecosystem</span>
           </h1>
 
           {/* Subtext - Larger and more prominent */}
-          <p className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-white/60 max-w-3xl mx-auto mb-5 sm:mb-8 font-light tracking-wide leading-relaxed px-2">
             We combine <span className="text-white font-medium">deep-dive research labs</span> with <span className="text-white font-medium">high-impact marketing execution</span> to ensure your project thrives in the Korean market.
           </p>
 
           {/* CTA Button */}
           <a
             href="/contact#contact-form"
-            className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 py-3.5 sm:px-8 sm:py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"
+            className="group relative inline-flex items-center gap-2 px-5 py-3 sm:px-8 sm:py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] min-h-[44px] sm:min-h-[48px]"
           >
             {/* Shine sweep effect */}
             <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
@@ -145,9 +145,9 @@ const HeroSection = () => {
       </div>
 
       {/* Stats Section */}
-      <div className="relative z-10 py-4 sm:py-6">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+      <div className="relative z-10 py-3 sm:py-5">
+        <div className="container mx-auto px-3 sm:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5">
             {stats.map((stat, index) => (
               <StatItem 
                 key={index}
@@ -164,24 +164,24 @@ const HeroSection = () => {
       </div>
 
       {/* Client Logo Marquee - Dark Pill Cards Style */}
-      <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
+      <div className="relative z-10 border-t border-white/10 py-2 sm:py-3 overflow-hidden">
         {/* Section indicator */}
-        <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
+        <div className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[9px] sm:text-xs z-20">
           <span className="number-badge">01</span>
         </div>
 
-        <div className="flex items-center logo-marquee-slow ml-14 sm:ml-16">
+        <div className="flex items-center logo-marquee-slow ml-10 sm:ml-16">
           {[...clientLogos, ...clientLogos].map((client, index) => (
             <div 
               key={index} 
-              className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+              className="flex items-center gap-1 sm:gap-2 mx-1 sm:mx-2 px-2 sm:px-4 py-1 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
             >
               <img 
                 src={client.logo} 
                 alt={client.name} 
-                className={`h-4 w-4 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-80'}`}
+                className={`h-3 w-3 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-80'}`}
               />
-              <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
+              <span className="text-white/70 text-[9px] sm:text-xs font-medium whitespace-nowrap">
                 {client.name}
               </span>
             </div>
@@ -191,13 +191,13 @@ const HeroSection = () => {
 
       {/* Enhanced Scroll Indicator - Bottom Right */}
       <div 
-        className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3 group cursor-pointer hover:scale-105 transition-transform"
+        className="absolute bottom-16 sm:bottom-24 right-3 sm:right-8 z-10 flex items-center gap-2 group cursor-pointer hover:scale-105 transition-transform"
         onClick={() => window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' })}
       >
-        <span className="text-white/40 text-xs sm:text-sm font-medium group-hover:text-white/70 transition-colors duration-300">scroll</span>
+        <span className="text-white/40 text-[10px] sm:text-sm font-medium group-hover:text-white/70 transition-colors duration-300">scroll</span>
         <div className="relative flex flex-col items-center">
-          <div className="w-5 h-8 sm:w-6 sm:h-9 rounded-full border border-white/20 group-hover:border-white/40 transition-colors duration-300 flex justify-center pt-1.5">
-            <div className="w-1 h-1.5 sm:w-1.5 sm:h-2 rounded-full bg-white/60 group-hover:bg-primary transition-colors duration-300 animate-bounce" />
+          <div className="w-4 h-6 sm:w-6 sm:h-9 rounded-full border border-white/20 group-hover:border-white/40 transition-colors duration-300 flex justify-center pt-1">
+            <div className="w-1 h-1 sm:w-1.5 sm:h-2 rounded-full bg-white/60 group-hover:bg-primary transition-colors duration-300 animate-bounce" />
           </div>
         </div>
       </div>
@@ -230,10 +230,10 @@ const StatItem = ({
   
   return (
     <div className="text-center group cursor-default hover:scale-105 transition-transform">
-      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 stat-glow transition-all duration-300 group-hover:text-primary">
+      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-0.5 stat-glow transition-all duration-300 group-hover:text-primary">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-xs sm:text-sm text-white/50 font-light group-hover:text-white/70 transition-colors duration-300">
+      <div className="text-[10px] sm:text-xs text-white/50 font-light group-hover:text-white/70 transition-colors duration-300">
         {label}
       </div>
     </div>

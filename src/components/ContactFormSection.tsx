@@ -109,24 +109,24 @@ const ContactFormSection = ({
         {/* Two Column Layout */}
         <div className="flex flex-col lg:flex-row">
           {/* Left Column - Contact Info */}
-          <div className="w-full lg:w-2/5 p-6 md:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/10">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
+          <div className="w-full lg:w-2/5 p-4 sm:p-6 md:p-8 lg:p-10 border-b lg:border-b-0 lg:border-r border-white/10">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 sm:mb-4">
               Get in Touch
             </h3>
-            <p className="text-white/50 text-sm leading-relaxed mb-10">
+            <p className="text-white/50 text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8">
               Ready to enter the Korean market? Let's discuss how we can help your project grow.
             </p>
 
             {/* Office */}
-            <div className="mb-8 pb-8 border-b border-white/10">
-              <div className="flex items-start gap-4">
-                <MapPin className="w-5 h-5 text-white/30 mt-1" />
+            <div className="mb-5 sm:mb-6 pb-5 sm:pb-6 border-b border-white/10">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white/30 mt-1" />
                 <div>
-                  <span className="text-xs uppercase tracking-wider text-white/40 block mb-2">Office</span>
-                  <p className="text-white text-sm leading-relaxed">{brand.address}</p>
-                  <div className="flex items-center gap-2 mt-3">
+                  <span className="text-[10px] sm:text-xs uppercase tracking-wider text-white/40 block mb-1.5 sm:mb-2">Office</span>
+                  <p className="text-white text-xs sm:text-sm leading-relaxed">{brand.address}</p>
+                  <div className="flex items-center gap-2 mt-2 sm:mt-3">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs text-white/40">Live in Seoul • {getSeoulTime()}</span>
+                    <span className="text-[10px] sm:text-xs text-white/40">Live in Seoul • {getSeoulTime()}</span>
                   </div>
                 </div>
               </div>
@@ -135,13 +135,13 @@ const ContactFormSection = ({
             {/* Email */}
             <a 
               href={`mailto:${brand.email}`}
-              className="group flex items-center justify-between mb-8 pb-8 border-b border-white/10 hover:border-white/20 transition-colors"
+              className="group flex items-center justify-between mb-5 sm:mb-6 pb-5 sm:pb-6 border-b border-white/10 hover:border-white/20 transition-colors"
             >
-              <div className="flex items-start gap-4">
-                <Mail className="w-5 h-5 text-white/30 mt-1" />
+              <div className="flex items-start gap-3 sm:gap-4">
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-white/30 mt-1" />
                 <div>
-                  <span className="text-xs uppercase tracking-wider text-white/40 block mb-2">Email</span>
-                  <p className="text-white text-sm">{brand.email}</p>
+                  <span className="text-[10px] sm:text-xs uppercase tracking-wider text-white/40 block mb-1.5 sm:mb-2">Email</span>
+                  <p className="text-white text-xs sm:text-sm">{brand.email}</p>
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all" />
@@ -152,13 +152,13 @@ const ContactFormSection = ({
               href={brand.telegramLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center justify-between mb-8 pb-8 border-b border-white/10 hover:border-white/20 transition-colors"
+              className="group flex items-center justify-between mb-5 sm:mb-6 pb-5 sm:pb-6 border-b border-white/10 hover:border-white/20 transition-colors"
             >
-              <div className="flex items-start gap-4">
-                <Send className="w-5 h-5 text-white/30 mt-1" />
+              <div className="flex items-start gap-3 sm:gap-4">
+                <Send className="w-4 h-4 sm:w-5 sm:h-5 text-white/30 mt-1" />
                 <div>
-                  <span className="text-xs uppercase tracking-wider text-white/40 block mb-2">Telegram</span>
-                  <p className="text-white text-sm">{brand.telegram}</p>
+                  <span className="text-[10px] sm:text-xs uppercase tracking-wider text-white/40 block mb-1.5 sm:mb-2">Telegram</span>
+                  <p className="text-white text-xs sm:text-sm">{brand.telegram}</p>
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all" />
@@ -171,94 +171,94 @@ const ContactFormSection = ({
               rel="noopener noreferrer"
               className="group flex items-center justify-between"
             >
-              <div className="flex items-start gap-4">
-                <svg className="w-5 h-5 text-white/30 mt-1" viewBox="0 0 24 24" fill="currentColor">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-white/30 mt-1" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
                 <div>
-                  <span className="text-xs uppercase tracking-wider text-white/40 block mb-2">LinkedIn</span>
-                  <p className="text-white text-sm">ium Labs</p>
+                  <span className="text-[10px] sm:text-xs uppercase tracking-wider text-white/40 block mb-1.5 sm:mb-2">LinkedIn</span>
+                  <p className="text-white text-xs sm:text-sm">ium Labs</p>
                 </div>
               </div>
               <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all" />
             </a>
 
             {/* Footer Links */}
-            <div className="mt-16 pt-8 border-t border-white/10 flex gap-6">
-              <Link to="/terms" className="text-xs text-white/40 hover:text-white/60 transition-colors">Terms of Service</Link>
-              <Link to="/privacy" className="text-xs text-white/40 hover:text-white/60 transition-colors">Privacy Policy</Link>
-              <Link to="/transparency" className="text-xs text-white/40 hover:text-white/60 transition-colors">Transparency</Link>
+            <div className="mt-10 sm:mt-12 pt-5 sm:pt-6 border-t border-white/10 flex flex-wrap gap-4 sm:gap-6">
+              <Link to="/terms" className="text-[10px] sm:text-xs text-white/40 hover:text-white/60 transition-colors">Terms of Service</Link>
+              <Link to="/privacy" className="text-[10px] sm:text-xs text-white/40 hover:text-white/60 transition-colors">Privacy Policy</Link>
+              <Link to="/transparency" className="text-[10px] sm:text-xs text-white/40 hover:text-white/60 transition-colors">Transparency</Link>
             </div>
           </div>
 
           {/* Right Column - Contact Form */}
-          <div className="w-full lg:w-3/5 p-6 md:p-10 lg:p-12">
-            <div className="flex items-center justify-between mb-6">
-              <span className="text-sm text-white/40">Contact Form</span>
-              <span className="text-sm text-white/40">{completionPercentage}% complete</span>
+          <div className="w-full lg:w-3/5 p-4 sm:p-6 md:p-8 lg:p-10">
+            <div className="flex items-center justify-between mb-4 sm:mb-6">
+              <span className="text-xs sm:text-sm text-white/40">Contact Form</span>
+              <span className="text-xs sm:text-sm text-white/40">{completionPercentage}% complete</span>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
               {/* Name & Email Row */}
-              <div className="grid sm:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Name *</label>
+                  <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/40 mb-2 sm:mb-3">Name *</label>
                   <input
                     type="text"
                     placeholder="Your name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-transparent border-b border-white/20 pb-2 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Email *</label>
+                  <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/40 mb-2 sm:mb-3">Email *</label>
                   <input
                     type="email"
                     placeholder="your@email.com"
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     required
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-transparent border-b border-white/20 pb-2 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
               {/* Company & Website Row */}
-              <div className="grid sm:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company</label>
+                  <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/40 mb-2 sm:mb-3">Company</label>
                   <input
                     type="text"
                     placeholder="Company name"
                     value={formData.company}
                     onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-transparent border-b border-white/20 pb-2 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
                   />
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Website</label>
+                  <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/40 mb-2 sm:mb-3">Website</label>
                   <input
                     type="url"
                     placeholder="https://..."
                     value={formData.website}
                     onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                    className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
+                    className="w-full bg-transparent border-b border-white/20 pb-2 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors"
                   />
                 </div>
               </div>
 
               {/* Budget */}
               <div>
-                <label className="block text-xs uppercase tracking-wider text-white/40 mb-4">Budget *</label>
-                <div className="flex flex-wrap gap-2 sm:gap-3">
+                <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/40 mb-3 sm:mb-4">Budget *</label>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {budgetOptions.map((option) => (
                     <button
                       key={option}
                       type="button"
                       onClick={() => setFormData({ ...formData, budget: option })}
-                      className={`px-4 sm:px-5 py-3 sm:py-3 text-sm border transition-all min-h-[48px] ${
+                      className={`px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm border transition-all min-h-[40px] sm:min-h-[44px] ${
                         formData.budget === option
                           ? 'bg-white/10 border-white text-white'
                           : 'bg-transparent border-white/20 text-white/60 hover:border-white/40 hover:text-white active:bg-white/10'
@@ -272,22 +272,22 @@ const ContactFormSection = ({
 
               {/* Project Details */}
               <div>
-                <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Project Details *</label>
+                <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/40 mb-2 sm:mb-3">Project Details *</label>
                 <textarea
-                  placeholder="Tell us about your project and goals..."
+                  placeholder="Tell us about your project..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={4}
-                  className="w-full bg-transparent border-b border-white/20 pb-3 text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors resize-none"
+                  rows={3}
+                  className="w-full bg-transparent border-b border-white/20 pb-2 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/30 focus:border-white focus:outline-none transition-colors resize-none"
                 />
               </div>
 
               {/* Submit Button */}
-              <div className="pt-4 border-t border-white/10">
+              <div className="pt-3 sm:pt-4 border-t border-white/10">
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group inline-flex items-center justify-center gap-3 bg-white/10 text-white px-8 py-4 text-sm font-medium tracking-wider hover:bg-white/20 active:bg-white/30 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 w-full sm:w-auto min-h-[52px]"
+                  className="group inline-flex items-center justify-center gap-2 sm:gap-3 bg-white/10 text-white px-6 sm:px-8 py-3 sm:py-4 text-xs sm:text-sm font-medium tracking-wider hover:bg-white/20 active:bg-white/30 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 w-full sm:w-auto min-h-[44px] sm:min-h-[48px]"
                 >
                   {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
