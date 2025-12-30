@@ -26,28 +26,28 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import { usePageTitle } from "@/hooks/usePageTitle";
-import { Search, Target, Rocket, TrendingUp } from "lucide-react";
+import { MessageSquare, FileText, Rocket, TrendingUp } from "lucide-react";
 
 const processPhases = [
   {
-    title: "Discovery",
-    icon: Search,
-    description: "Deep market research and competitor analysis to understand your positioning in Korea"
+    title: "Share",
+    icon: MessageSquare,
+    description: "Share your project details, budget, and KPIs with us"
   },
   {
-    title: "Strategy",
-    icon: Target,
-    description: "Custom GTM roadmap with KPI-driven milestones and localized messaging"
+    title: "Propose",
+    icon: FileText,
+    description: "We deliver a customized GTM strategy tailored to your goals"
   },
   {
     title: "Launch",
     icon: Rocket,
-    description: "Multi-channel execution across KOLs, PR, events, and community activation"
+    description: "Execute and launch your strategy across Korean market"
   },
   {
     title: "Scale",
     icon: TrendingUp,
-    description: "Performance optimization and sustainable growth through data-driven iteration"
+    description: "Optimize and grow your presence with data-driven iteration"
   }
 ];
 
@@ -113,8 +113,8 @@ const ProcessBillboardOverlay = () => {
                   }
                 `}>
                   <Icon className={`
-                    w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-all duration-300
-                    ${isHovered ? 'text-white' : 'text-white/60'}
+                    w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 transition-all duration-500
+                    ${isHovered ? 'text-white rotate-[360deg]' : 'text-white/60 rotate-0'}
                   `} />
                 </div>
                 
