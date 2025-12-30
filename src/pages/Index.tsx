@@ -71,8 +71,8 @@ const ProcessBillboardOverlay = () => {
         {/* Dark Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30" />
         
-        {/* 4-Sector Grid Overlay - 모바일은 세로 스택, 태블릿은 2x2 */}
-        <div className="absolute inset-0 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
+        {/* 4-Sector Grid Overlay - 모바일은 1열, 태블릿은 2x2 */}
+        <div className="absolute inset-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
           {processPhases.map((phase, index) => {
             const Icon = phase.icon;
             const isHovered = hoveredIndex === index;
