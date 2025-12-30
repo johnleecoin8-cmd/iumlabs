@@ -195,7 +195,7 @@ const Index = () => {
       {/* About - 01 홀수 */}
       <section className="bg-surface-odd" id="why-choose-us">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
               <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
@@ -214,7 +214,7 @@ const Index = () => {
       {/* Services - 02 홀수 */}
       <section className="bg-surface-odd" id="services">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
@@ -228,7 +228,7 @@ const Index = () => {
       {/* Process - 03 짝수 */}
       <section className="bg-surface-even" id="process">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
@@ -244,7 +244,7 @@ const Index = () => {
       {/* Cases - 04 홀수 */}
       <section className="bg-surface-odd" id="cases">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
@@ -258,7 +258,7 @@ const Index = () => {
       {/* Gallery - 05 짝수 */}
       <section className="bg-surface-even" id="gallery">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Gallery</h2>
@@ -272,7 +272,7 @@ const Index = () => {
       {/* Insights - 06 홀수 */}
       <section className="bg-surface-odd" id="insights">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-white/10">
+          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
             <div className="flex items-baseline gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
               <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>
