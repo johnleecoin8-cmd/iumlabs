@@ -87,10 +87,10 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
     <div className="group relative overflow-hidden">
       <Link
         to={service.link}
-        className={`block h-full min-h-[200px] sm:min-h-[240px] md:min-h-[280px] lg:min-h-[300px] relative transition-all duration-300 ${
-          hasBorderRight ? "lg:border-r border-border/30" : ""
-        } ${hasBorderBottom ? "border-b border-border/30" : ""} ${
-          (index % 2) === 0 ? "sm:border-r border-border/30 md:border-r lg:border-r-0" : ""
+        className={`block h-full min-h-[220px] sm:min-h-[280px] md:min-h-[320px] lg:min-h-[360px] relative transition-all duration-300 ${
+          hasBorderRight ? "lg:border-r border-border/40" : ""
+        } ${hasBorderBottom ? "border-b border-border/40" : ""} ${
+          (index % 2) === 0 ? "sm:border-r border-border/40 md:border-r lg:border-r-0" : ""
         } ${(index % 2) === 0 && hasBorderRight ? "lg:border-r" : ""} ${
           (index % 2) === 1 ? "md:border-r-0 lg:border-r" : ""
         }`}
@@ -105,7 +105,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               {/* Dark overlay */}
-              <div className="absolute inset-0 bg-black/65 group-hover:bg-black/50 transition-colors duration-500" />
+              <div className="absolute inset-0 bg-black/60 group-hover:bg-black/45 transition-colors duration-500" />
             </>
           ) : (
             <>
@@ -116,34 +116,34 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
             </>
           )}
           {/* Bottom gradient for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
         </div>
 
         {/* Content */}
-        <div className="relative z-10 h-full flex flex-col justify-end p-4 sm:p-6 md:p-8">
-          <div className="transform group-hover:-translate-y-2 transition-transform duration-500">
-            <div className="mb-3 sm:mb-4 md:mb-6">
+        <div className="relative z-10 h-full flex flex-col justify-end p-5 sm:p-7 md:p-9 lg:p-10">
+          <div className="transform group-hover:-translate-y-3 transition-transform duration-500">
+            <div className="mb-4 sm:mb-5 md:mb-7">
               <Icon 
-                className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white/80 group-hover:text-white group-hover:drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] transition-all duration-500" 
+                className="w-7 h-7 sm:w-9 sm:h-9 md:w-11 md:h-11 text-white/85 group-hover:text-white group-hover:drop-shadow-[0_0_24px_rgba(255,255,255,0.45)] transition-all duration-500" 
                 strokeWidth={1.5} 
               />
             </div>
-            <h3 className="text-base sm:text-lg md:text-xl font-semibold text-white mb-1.5 sm:mb-2 md:mb-3 group-hover:text-white transition-colors">
+            <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white mb-2 sm:mb-3 md:mb-4 group-hover:text-white transition-colors tracking-tight">
               {service.title}
             </h3>
-            <p className="text-white/70 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 md:mb-6 line-clamp-2 group-hover:text-white/90 transition-colors">
+            <p className="text-white/75 text-body-sm sm:text-body leading-relaxed mb-4 sm:mb-5 md:mb-7 line-clamp-2 group-hover:text-white/90 transition-colors">
               {service.description}
             </p>
-            <div className="flex items-center gap-2 text-white/80 group-hover:text-white transition-colors text-xs sm:text-sm min-h-[44px] sm:min-h-0">
+            <div className="flex items-center gap-2.5 text-white/85 group-hover:text-white transition-colors text-body font-medium min-h-[44px] sm:min-h-0">
               <span className="group-hover:underline underline-offset-4">Learn more</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform duration-300" />
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform duration-300" />
             </div>
           </div>
         </div>
 
         {/* Hover border glow */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-          <div className="absolute inset-0 border border-white/20" />
+          <div className="absolute inset-0 border border-white/25" />
         </div>
       </Link>
     </div>
