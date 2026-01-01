@@ -1,4 +1,4 @@
-import { Newspaper, Globe, Users, FileText, Eye } from "lucide-react";
+import { Newspaper, Users, FileText, Eye, Share2, BarChart3 } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
@@ -6,19 +6,14 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 
 const ACCENT_COLOR = "#8B5CF6";
 
-const serviceTags: ServiceTag[] = [{
-  label: "한국 미디어 배포"
-}, {
-  label: "Press Release (KR/EN)"
-}, {
-  label: "Media Outreach"
-}, {
-  label: "블록미디어/코인니스"
-}, {
-  label: "Interview Setup"
-}, {
-  label: "Crisis Management"
-}];
+const serviceTags: ServiceTag[] = [
+  { label: "Korean Media Distribution" },
+  { label: "Press Release (KR/EN)" },
+  { label: "Media Outreach" },
+  { label: "Blockmedia/Coinness" },
+  { label: "Interview Setup" },
+  { label: "Crisis Management" },
+];
 
 const stats: ServiceStat[] = [{
   value: 50,
@@ -38,52 +33,81 @@ const stats: ServiceStat[] = [{
   suffix: "%"
 }];
 
-const processSteps: ProcessStep[] = [{
-  number: "01",
-  title: "Story Development",
-  description: "We craft compelling narratives that resonate with Korean media and audiences, positioning your project for maximum impact.",
-  icon: Newspaper
-}, {
-  number: "02",
-  title: "Media Outreach",
-  description: "We leverage our network of 20+ Korean media outlets to secure premium coverage and interviews.",
-  icon: Globe
-}, {
-  number: "03",
-  title: "Content Distribution",
-  description: "We coordinate multi-channel distribution across news sites, social media, and community platforms.",
-  icon: Newspaper
-}, {
-  number: "04",
-  title: "Impact Tracking",
-  description: "We monitor coverage, measure reach, and provide detailed analytics on media performance.",
-  icon: Globe
-}];
+const processSteps: ProcessStep[] = [
+  {
+    number: "01",
+    title: "Story Development",
+    description: "We craft compelling narratives that resonate with Korean media and audiences, positioning your project for maximum impact.",
+    icon: Newspaper,
+  },
+  {
+    number: "02",
+    title: "Media Outreach",
+    description: "We leverage our network of 20+ Korean media outlets to secure premium coverage and interviews.",
+    icon: Users,
+  },
+  {
+    number: "03",
+    title: "Content Distribution",
+    description: "We coordinate multi-channel distribution across news sites, social media, and community platforms.",
+    icon: Share2,
+  },
+  {
+    number: "04",
+    title: "Impact Tracking",
+    description: "We monitor coverage, measure reach, and provide detailed analytics on media performance.",
+    icon: BarChart3,
+  },
+];
 
-const deliverables: Deliverable[] = [{
-  title: "한국 미디어",
-  items: ["한국어 보도자료 작성", "블록미디어/코인니스/토큰포스트", "경제지 비즈니스 섹션", "한국 크립토 팟캐스트"]
-}, {
-  title: "글로벌 미디어",
-  items: ["영문 Press Release", "CoinDesk/Cointelegraph 배포", "글로벌 인터뷰 조율", "Op-ed 기고"]
-}, {
-  title: "Reporting & Analysis",
-  items: ["커버리지 트래킹 대시보드", "한/영 Sentiment 분석", "경쟁사 벤치마킹", "월간 PR 리포트"]
-}];
+const deliverables: Deliverable[] = [
+  {
+    title: "Korean Media",
+    items: [
+      "Korean press release writing",
+      "Blockmedia/Coinness/TokenPost placement",
+      "Business section in major outlets",
+      "Korean crypto podcast features",
+    ],
+  },
+  {
+    title: "Global Media",
+    items: [
+      "English press release",
+      "CoinDesk/Cointelegraph distribution",
+      "Global interview coordination",
+      "Op-ed contributions",
+    ],
+  },
+  {
+    title: "Reporting & Analysis",
+    items: [
+      "Coverage tracking dashboard",
+      "KR/EN sentiment analysis",
+      "Competitor benchmarking",
+      "Monthly PR report",
+    ],
+  },
+];
 
-const faqItems: FAQItem[] = [{
-  question: "어떤 한국 미디어와 협력하나요?",
-  answer: "블록미디어, 코인니스, 블루밍비트, 토큰포스트 등 주요 한국 크립토 미디어와 직접 협력 관계를 맺고 있습니다. 조선비즈, 한경 등 주류 경제지에도 배포 가능합니다."
-}, {
-  question: "보도자료 게재까지 얼마나 걸리나요?",
-  answer: "보도자료 작성부터 게재까지 보통 3-5 영업일이 소요됩니다. 긴급 뉴스나 시간이 촉박한 발표는 당일 게재도 가능합니다."
-}, {
-  question: "위기 대응 커뮤니케이션도 지원하나요?",
-  answer: "네, 24/7 위기 관리 지원을 제공합니다. 신속 대응 메시지 작성, 미디어 조율, 평판 관리 전략을 포함합니다."
-}, {
-  question: "한국 미디어 인터뷰 주선이 가능한가요?",
-  answer: "물론입니다. 한국 주요 크립토 기자 및 팟캐스터와의 인터뷰를 정기적으로 주선합니다. 통역 지원을 포함한 모든 로지스틱을 처리해 드립니다."
-}];
+const faqItems: FAQItem[] = [
+  {
+    question: "Which Korean media outlets do you work with?",
+    answer: "We have direct partnerships with major Korean crypto media including Blockmedia, Coinness, BloomingBit, and TokenPost. We can also distribute to mainstream business outlets like Chosun Biz and Hankyung.",
+  },
+  {
+    question: "How long does it take to publish a press release?",
+    answer: "From writing to publication typically takes 3-5 business days. For urgent news or time-sensitive announcements, same-day publication is possible.",
+  },
+  {
+    question: "Do you support crisis communication?",
+    answer: "Yes, we provide 24/7 crisis management support. This includes rapid response messaging, media coordination, and reputation management strategies.",
+  },
+  {
+    question: "Can you arrange Korean media interviews?",
+    answer: "Absolutely. We regularly arrange interviews with top Korean crypto journalists and podcasters. We handle all logistics including interpretation support.",
+  },
+];
 
 const PRService = () => {
   usePageTitle("PR & Media");
