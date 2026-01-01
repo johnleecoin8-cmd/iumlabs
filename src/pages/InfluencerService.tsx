@@ -12,13 +12,13 @@ const serviceTags: ServiceTag[] = [
   { label: "Campaign Strategy" },
   { label: "Content Coordination" },
   { label: "Performance Tracking" },
-  { label: "한국 유튜버/블로거" },
+  { label: "Korean YouTubers/Bloggers" },
 ];
 
 const stats: ServiceStat[] = [
-  { value: 69, label: "KOL Network", suffix: "+" },
+  { value: 70, label: "KOL Network", suffix: "+" },
   { value: 15, label: "Total Reach", suffix: "M+" },
-  { value: 12, label: "Campaigns Delivered", suffix: "+" },
+  { value: 15, label: "Campaigns Delivered", suffix: "+" },
   { value: 4, label: "Avg Engagement", suffix: "x" },
 ];
 
@@ -81,51 +81,51 @@ const deliverables: Deliverable[] = [
 
 const faqItems: FAQItem[] = [
   {
-    question: "한국 KOL 네트워크가 있나요?",
-    answer: "네, 50명 이상의 한국 크립토 KOL을 보유하고 있습니다. DeFi, NFT, 트레이딩, 리서치 등 다양한 분야의 전문가들과 협력합니다. 한국어/영어 바이링구얼 KOL도 연결해 드립니다.",
+    question: "Do you have a Korean KOL network?",
+    answer: "Yes, we have a network of 50+ Korean crypto KOLs specializing in DeFi, NFT, trading, and research. We also connect you with bilingual Korean/English KOLs.",
   },
   {
-    question: "한국 유튜버나 블로거와도 협업하나요?",
-    answer: "물론입니다. 네이버 블로그, 유튜브 크립토 채널, 티스토리 등 한국 로컬 플랫폼의 인플루언서 네트워크도 보유하고 있습니다. 한국 SEO에 효과적인 콘텐츠 배포가 가능합니다.",
+    question: "Do you work with Korean YouTubers and bloggers?",
+    answer: "Absolutely. We have an influencer network on Korean local platforms including Naver Blog, YouTube crypto channels, and Tistory. This enables effective content distribution for Korean SEO.",
   },
   {
-    question: "KOL 캠페인 예산은 어느 정도인가요?",
-    answer: "KOL 티어와 캠페인 범위에 따라 다양합니다. 마이크로 인플루언서 캠페인은 $5K부터, 멀티 KOL 론칭은 $100K 이상까지 진행합니다. 목표에 맞는 최적의 조합을 추천해 드립니다.",
+    question: "What's the typical KOL campaign budget?",
+    answer: "Budgets vary by KOL tier and campaign scope. Micro-influencer campaigns start from $5K, while multi-KOL launches can range $100K+. We recommend optimal combinations based on your goals.",
   },
   {
-    question: "캠페인 성과는 어떻게 측정하나요?",
-    answer: "노출수, 참여율, 팔로워 증가, 웹사이트 트래픽, 커뮤니티 가입을 추적합니다. 토큰 프로젝트의 경우 홀더 증가 등 온체인 지표와도 연계 분석합니다.",
+    question: "How do you measure campaign performance?",
+    answer: "We track impressions, engagement rate, follower growth, website traffic, and community signups. For token projects, we also correlate with on-chain metrics like holder growth.",
   },
 ];
 
 const kolProfiles = [
-  // Global KOLs
-  { name: "Cobie", handle: "@colobie", followers: "800K", tier: "platinum", expertise: "Trading", region: "global" },
-  { name: "Crypto Dog", handle: "@TheCryptoDog", followers: "750K", tier: "gold", expertise: "Swing Trading", region: "global" },
-  { name: "ZachXBT", handle: "@zachxbt", followers: "650K", tier: "gold", expertise: "Investigation", region: "global" },
-  { name: "Kaleo", handle: "@CryptoKaleo", followers: "620K", tier: "gold", expertise: "Chart Analysis", region: "global" },
-  { name: "Pentoshi", handle: "@Pentosh1", followers: "610K", tier: "gold", expertise: "Trading", region: "global" },
-  { name: "Arthur Hayes", handle: "@CryptoHayes", followers: "580K", tier: "gold", expertise: "Macro", region: "global" },
+  // Global KOLs - Using real, verifiable accounts
+  { name: "Pentoshi", handle: "@Pentosh1", followers: "610K", tier: "platinum", expertise: "Trading", region: "global" },
+  { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", tier: "gold", expertise: "TA", region: "global" },
+  { name: "Route 2 FI", handle: "@Route2FI", followers: "280K", tier: "gold", expertise: "DeFi", region: "global" },
+  { name: "Daan Crypto", handle: "@DaanCrypto", followers: "380K", tier: "gold", expertise: "Trading", region: "global" },
+  { name: "ColdBloodShill", handle: "@ColdBloodShill", followers: "310K", tier: "gold", expertise: "TA", region: "global" },
+  { name: "Tetranode", handle: "@Tetranode", followers: "310K", tier: "gold", expertise: "DeFi", region: "global" },
   // Korean KOLs
-  { name: "체인의정석", handle: "@ChainExpert_KR", followers: "85K", tier: "silver", expertise: "DeFi 분석", region: "korean" },
-  { name: "크립토퀀트", handle: "@cryptoquant_com", followers: "280K", tier: "gold", expertise: "온체인 분석", region: "korean" },
-  { name: "비트맨", handle: "@BitmanKR", followers: "120K", tier: "silver", expertise: "트레이딩", region: "korean" },
-  { name: "블록인프레스", handle: "@blockinpress", followers: "95K", tier: "silver", expertise: "뉴스/리서치", region: "korean" },
-  { name: "코인갤러리", handle: "@CoinGalleryKR", followers: "68K", tier: "bronze", expertise: "NFT/메타버스", region: "korean" },
-  { name: "김프리", handle: "@Kimchi_Premium", followers: "52K", tier: "bronze", expertise: "김프 분석", region: "korean" },
+  { name: "CryptoQuant", handle: "@cryptoquant_com", followers: "280K", tier: "gold", expertise: "On-chain Analysis", region: "korean" },
+  { name: "Phyrex", handle: "@Phyrex_Ni", followers: "333K", tier: "gold", expertise: "Data Analysis", region: "korean" },
+  { name: "Hebi", handle: "@hebi555", followers: "377K", tier: "gold", expertise: "Trading", region: "korean" },
+  { name: "KuiGas", handle: "@KuiGas", followers: "96K", tier: "silver", expertise: "Research", region: "korean" },
+  { name: "Coinboy", handle: "@coinboy717", followers: "50K", tier: "bronze", expertise: "Trading", region: "korean" },
+  { name: "Nakju", handle: "@nakjumon", followers: "18.7K", tier: "bronze", expertise: "Trading", region: "korean" },
 ];
 
 const tierData = [
   { tier: "Platinum", icon: Crown, count: "5+", reach: "1M+", color: "from-purple-400 to-purple-600" },
-  { tier: "Gold", icon: Award, count: "15+", reach: "500K-1M", color: "from-amber-400 to-amber-600" },
-  { tier: "Silver", icon: Star, count: "30+", reach: "100K-500K", color: "from-gray-300 to-gray-500" },
-  { tier: "Bronze", icon: Zap, count: "19+", reach: "50K-100K", color: "from-orange-600 to-orange-800" },
+  { tier: "Gold", icon: Award, count: "20+", reach: "300K-1M", color: "from-amber-400 to-amber-600" },
+  { tier: "Silver", icon: Star, count: "25+", reach: "100K-300K", color: "from-gray-300 to-gray-500" },
+  { tier: "Bronze", icon: Zap, count: "20+", reach: "50K-100K", color: "from-orange-600 to-orange-800" },
 ];
 
 const regionData = [
-  { id: "all", label: "All", count: "69+" },
+  { id: "all", label: "All", count: "70+" },
   { id: "global", label: "Global", count: "40+" },
-  { id: "korean", label: "Korean 🇰🇷", count: "29+" },
+  { id: "korean", label: "Korean 🇰🇷", count: "30+" },
 ];
 
 const InfluencerService = () => {
@@ -142,7 +142,7 @@ const InfluencerService = () => {
       serviceName="Influencer/KOL"
       serviceTitle="Access Our"
       serviceSubtitle="KOL Network"
-      serviceDescription="Access our exclusive network of 69+ crypto KOLs and reach 15M+ engaged followers across X, YouTube, and Telegram."
+      serviceDescription="Access our exclusive network of 70+ crypto KOLs and reach 15M+ engaged followers across X, YouTube, and Telegram."
       serviceIcon={Star}
       serviceTags={serviceTags}
       stats={stats}

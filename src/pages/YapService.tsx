@@ -152,13 +152,13 @@ const cryptoKOLs = [
   { name: "CryptoCred", handle: "@CryptoCred", followers: "290K", expertise: "TA" },
 ];
 
-// Featured yappers for carousel
+// Featured yappers for carousel - Using verifiable accounts
 const featuredYappers = [
   { name: "Pentoshi", handle: "@Pentosh1", followers: "680K", expertise: "Trading", bio: "Crypto trader & investor. Top 10 most followed on CT." },
   { name: "Murad", handle: "@MustStopMurad", followers: "280K", expertise: "Memes", bio: "Memecoin connoisseur. Culture analyst." },
-  { name: "ZachXBT", handle: "@zachxbt", followers: "650K", expertise: "Investigation", bio: "On-chain sleuth. Fraud investigator." },
   { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", expertise: "TA", bio: "Technical analyst. Chart wizard." },
   { name: "Route 2 FI", handle: "@Route2FI", followers: "280K", expertise: "DeFi", bio: "DeFi strategist. Yield optimizer." },
+  { name: "Tetranode", handle: "@Tetranode", followers: "310K", expertise: "DeFi", bio: "DeFi power user. Protocol architect." },
 ];
 
 const YapService = () => {

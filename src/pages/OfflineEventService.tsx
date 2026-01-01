@@ -66,9 +66,9 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 19, label: "Web3 Events Hosted", suffix: "+" },
-  { value: 1500, label: "Total Attendees", suffix: "+" },
-  { value: 69, label: "KOLs Attended", suffix: "+" },
+  { value: 20, label: "Web3 Events Hosted", suffix: "+" },
+  { value: 2000, label: "Total Attendees", suffix: "+" },
+  { value: 70, label: "KOLs Attended", suffix: "+" },
   { value: 20, label: "Media Partners", suffix: "+" },
 ];
 
