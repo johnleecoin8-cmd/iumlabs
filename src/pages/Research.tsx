@@ -18,6 +18,9 @@ import { useQuery } from "@tanstack/react-query";
 // Research thumbnail images
 import ecosystemGrowthImg from "@/assets/blog/ecosystem-growth-2025.jpg";
 import suiNetwork2026Img from "@/assets/blog/sui-network-2026.jpg";
+import koreaExchangeListingImg from "@/assets/blog/korea-exchange-listing.jpg";
+import defaiAgentsImg from "@/assets/blog/defai-ai-agents.jpg";
+import memecoinMarketingImg from "@/assets/blog/memecoin-marketing.jpg";
 
 // SUI Network chart images
 import suiChartTvlPriceImg from "@/assets/blog/sui-chart-tvl-price.jpg";
@@ -35,6 +38,338 @@ import ecosystemChartRegulatoryImg from "@/assets/blog/ecosystem-chart-regulator
 
 // Research posts data with comprehensive content
 export const researchPosts = [
+  {
+    id: "12",
+    slug: "memecoin-marketing-masterclass-2024",
+    title: "Memecoin Marketing Masterclass: Lessons from 2024's Biggest Launches",
+    image: memecoinMarketingImg,
+    date: "Jan 2, 2025",
+    readTime: "18 min read",
+    category: "Marketing",
+    author: "Ium Labs Research",
+    authorRole: "Research Team",
+    excerpt: "A detailed breakdown of successful memecoin launches in 2024, analyzing viral marketing strategies, community building tactics, and sustainable growth models.",
+    tags: ["Memecoin", "Marketing", "Community", "Viral", "Social Media", "Launch Strategy"],
+    content: `
+## Introduction: The Memecoin Phenomenon
+
+Memecoins generated over $120 billion in trading volume in 2024, with several tokens achieving multi-billion dollar market caps within weeks of launch. While critics dismiss memecoins as purely speculative, the marketing mechanics behind successful launches offer valuable lessons for all Web3 projects.
+
+This analysis examines 47 memecoin launches from 2024, identifying patterns that separated billion-dollar successes from forgotten failures.
+
+---
+
+## Part 1: The Anatomy of Viral Memecoin Launches
+
+### 1.1 Success Patterns
+
+After analyzing 47 launches, we identified five critical success factors:
+
+| Factor | Correlation with Success | Example |
+|--------|-------------------------|---------|
+| Community Pre-Build | 89% | WIF, PEPE |
+| Unique Visual Identity | 94% | BRETT, DOG |
+| Influencer Seeding | 78% | BONK, MYRO |
+| Platform Timing | 85% | All Solana memes |
+| Tokenomics Simplicity | 91% | No tax tokens |
+
+### 1.2 The Launch Timeline
+
+**Phase 1: Pre-Launch (2-4 weeks)**
+- Concept development and meme creation
+- Telegram/Discord community seeding
+- Influencer relationship building
+- Website and social presence setup
+
+**Phase 2: Stealth Launch (24-72 hours)**
+- DEX deployment (Raydium, Uniswap)
+- Initial liquidity provision
+- Whale seeding strategy
+- "Organic" discovery narrative
+
+**Phase 3: Viral Phase (1-2 weeks)**
+- CT (Crypto Twitter) explosion
+- Influencer posts cascade
+- Retail FOMO entry
+- CEX listing announcements
+
+**Phase 4: Sustainability (ongoing)**
+- Community governance
+- Utility development (if any)
+- Ecosystem expansion
+- Brand partnerships
+
+---
+
+## Part 2: Marketing Tactics Deep Dive
+
+### 2.1 Community Building Before Launch
+
+The most successful memecoins built communities before tokens existed:
+
+**Telegram Strategy:**
+- 5,000+ members before launch (minimum viable community)
+- Active moderation and engagement
+- Meme creation contests
+- "Alpha" sharing to build loyalty
+
+**Discord Strategy:**
+- Tiered access (OG, Early, Public)
+- Verification gates
+- Activity rewards
+- Voice channel events
+
+### 2.2 The Influencer Cascade
+
+Effective memecoin launches use a coordinated influencer strategy:
+
+**Tier Structure:**
+
+| Tier | Follower Count | Role | Timing |
+|------|---------------|------|--------|
+| Tier 1 | 500K+ | Legitimization | Hour 6-12 |
+| Tier 2 | 100K-500K | Amplification | Hour 12-24 |
+| Tier 3 | 20K-100K | Reach Extension | Hour 24-48 |
+| Tier 4 | 5K-20K | Community Building | Ongoing |
+
+**Key Principle:** Never launch with Tier 1. Build organic narrative first, then bring in major voices to amplify.
+
+---
+
+## Conclusion
+
+Memecoin marketing, stripped of its speculative elements, offers valuable lessons for all Web3 projects:
+
+1. **Community First**: Build before you launch
+2. **Narrative Matters**: Simple, authentic stories win
+3. **Visual Impact**: Invest in memorable branding
+4. **Influencer Strategy**: Organic > Paid appearance
+5. **Sustainability Planning**: Day 1 decisions matter
+
+---
+
+*© 2025 Ium Labs. This analysis is for educational purposes and does not constitute investment advice.*
+    `,
+  },
+  {
+    id: "11",
+    slug: "defai-ai-agents-defi-convergence",
+    title: "DeFAI Deep Dive: The Convergence of AI Agents and DeFi in 2025",
+    image: defaiAgentsImg,
+    date: "Dec 30, 2024",
+    readTime: "22 min read",
+    category: "DeFi",
+    author: "Ium Labs Research",
+    authorRole: "Research Team",
+    excerpt: "An in-depth analysis of the emerging DeFAI sector, exploring how AI agents are transforming decentralized finance through automated trading, risk management, and protocol optimization.",
+    tags: ["DeFAI", "AI Agents", "DeFi", "Automation", "Trading", "Machine Learning"],
+    content: `
+## The DeFAI Thesis
+
+We are witnessing the emergence of a new paradigm at the intersection of two transformative technologies: Artificial Intelligence and Decentralized Finance. This convergence—which we term "DeFAI"—represents not merely an incremental improvement but a fundamental reimagining of how financial services can operate.
+
+By 2027, we project that AI-managed DeFi assets will exceed $50 billion, up from approximately $2.3 billion today.
+
+---
+
+## Part 1: Market Landscape
+
+### 1.1 Current State of DeFAI
+
+**Market Size Evolution:**
+
+| Metric | Q1 2024 | Q4 2024 | Q4 2025 (Projected) |
+|--------|---------|---------|---------------------|
+| Total TVL in AI Protocols | $340M | $2.3B | $12B |
+| Active AI Agents | 1,200 | 15,000 | 150,000 |
+| Daily Transactions by AI | 45K | 890K | 8M |
+| Avg Returns vs Manual | +12% | +34% | +45% |
+
+### 1.2 Key Protocol Categories
+
+**1. Autonomous Trading Agents**
+- Market making optimization
+- Arbitrage detection and execution
+- Liquidation protection
+- MEV capture and redistribution
+
+**2. Risk Management Systems**
+- Real-time portfolio rebalancing
+- Impermanent loss hedging
+- Liquidation prediction
+- Protocol health monitoring
+
+**3. Yield Optimization**
+- Cross-protocol yield aggregation
+- Gas optimization
+- Entry/exit timing
+- Compound frequency optimization
+
+---
+
+## Part 2: Investment Thesis
+
+### 2.1 Why DeFAI Will Dominate
+
+**Structural Advantages:**
+
+1. **24/7 Operation**: Unlike human traders, AI agents never sleep
+2. **Emotion-Free Execution**: No FOMO, no panic selling
+3. **Speed Advantage**: Millisecond reaction times
+4. **Scale Efficiency**: One agent can manage unlimited positions
+5. **Continuous Improvement**: Models improve with more data
+
+### 2.2 Market Opportunity
+
+**Total Addressable Market:**
+- Global DeFi TVL: $180B
+- Current AI-managed: ~1.3%
+- Projected 2027: ~28%
+
+---
+
+## Conclusion & Recommendations
+
+### For Investors
+1. **Allocate 5-10%** of crypto portfolio to DeFAI protocols
+2. **Diversify** across multiple AI strategies and protocols
+3. **Start small**, increase allocation as you understand the technology
+
+### For Builders
+1. **Focus on UX**: AI complexity should be invisible to users
+2. **Prioritize security**: One exploit can destroy trust
+3. **Build for Korean market**: High adoption, underserved
+
+---
+
+*© 2025 Ium Labs. This report represents our analysis and opinions as of the publication date.*
+    `,
+  },
+  {
+    id: "10",
+    slug: "korea-exchange-listing-strategy",
+    title: "Korea Exchange Listing Strategy: A Complete 2025 Playbook",
+    image: koreaExchangeListingImg,
+    date: "Dec 28, 2024",
+    readTime: "25 min read",
+    category: "Strategy",
+    author: "Ium Labs Research",
+    authorRole: "Research Team",
+    excerpt: "A comprehensive guide to navigating Korean exchange listings including Upbit, Bithumb, Coinone requirements, VASP compliance, and strategic timing for maximum market impact.",
+    tags: ["Exchange Listing", "Korea", "Upbit", "Bithumb", "VASP", "Strategy"],
+    content: `
+## Executive Summary
+
+Listing on Korean exchanges represents one of the most impactful catalysts for token price appreciation in the global crypto market. With Upbit alone processing over $15 billion in daily trading volume—often exceeding Coinbase and rivaling Binance—a Korean listing can fundamentally transform a project's trajectory.
+
+---
+
+## Part 1: Understanding the Korean Exchange Landscape
+
+### 1.1 Market Structure Overview
+
+**The Big Three:**
+
+| Exchange | Market Share | Daily Volume | Listing Difficulty |
+|----------|-------------|--------------|-------------------|
+| Upbit | 82% | $12-18B | Extremely High |
+| Bithumb | 12% | $1.5-3B | High |
+| Coinone | 4% | $400-800M | Medium |
+
+### 1.2 The Upbit Effect
+
+An Upbit listing creates a distinct market phenomenon:
+
+- **Immediate Impact**: 200-400% average price increase within 24 hours
+- **Volume Surge**: 10-50x increase in daily trading volume
+- **Sustained Effect**: Projects maintain 40% of peak volume after 30 days
+- **Secondary Listings**: Other Korean exchanges typically list within 2-4 weeks
+
+### 1.3 Regulatory Requirements
+
+All Korean exchanges operate under the Virtual Asset Service Provider (VASP) framework:
+
+**Project Requirements:**
+- Clear token utility and use case documentation
+- Transparent team information and KYC
+- Legal opinion letter from recognized law firm
+- No securities classification risk
+- Demonstrated community and trading history
+
+---
+
+## Part 2: The Listing Process
+
+### 2.1 Pre-Application Phase (4-8 weeks)
+
+1. **Legal Documentation**
+   - Obtain legal opinion from Korean-recognized law firm
+   - Prepare VASP compliance documentation
+   - Complete internal compliance review
+
+2. **Technical Preparation**
+   - Security audit from recognized firm
+   - Smart contract documentation
+   - Technical integration requirements
+
+3. **Market Presence**
+   - Minimum 3 months trading history on recognized exchanges
+   - Daily volume requirements (typically $1M+)
+   - Korean community establishment (5,000+ members)
+
+### 2.2 Application Phase (2-4 weeks)
+
+**Key Evaluation Criteria:**
+- Token utility and ecosystem value
+- Team credibility and track record
+- Community strength and engagement
+- Trading volume and liquidity
+- Regulatory compliance
+- Long-term viability
+
+---
+
+## Part 3: Strategic Recommendations
+
+### 3.1 Timing Optimization
+
+**Best Periods:**
+- Q1: January-March (new year momentum)
+- Q4: October-November (before year-end slowdown)
+
+**Avoid:**
+- Korean holidays (Chuseok, Lunar New Year)
+- Major market volatility periods
+
+### 3.2 Budget Considerations
+
+**Realistic Budget Breakdown:**
+
+| Category | Minimum | Recommended |
+|----------|---------|-------------|
+| Legal & Compliance | $50K | $100K |
+| Market Making | $200K | $500K |
+| PR & Marketing | $30K | $80K |
+| Community Building | $20K | $50K |
+| **Total** | **$300K** | **$730K** |
+
+---
+
+## Conclusion
+
+Korean exchange listings remain among the most impactful catalysts in crypto markets. Success requires:
+
+1. **Thorough Preparation**: 3-6 months minimum before application
+2. **Local Expertise**: Native Korean team members or partners are essential
+3. **Regulatory Compliance**: No shortcuts on legal and compliance matters
+4. **Community Foundation**: Genuine Korean community before application
+5. **Adequate Resources**: Budget for the full process
+
+---
+
+*© 2025 Ium Labs. For consultation on Korean exchange listings, contact our team.*
+    `,
+  },
   {
     id: "9",
     slug: "sui-network-2026",
