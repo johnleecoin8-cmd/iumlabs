@@ -183,7 +183,7 @@ const Sidebar = () => {
             duration: 0.3,
             delay: 0.2
           }}>
-                <span className="text-[9px] text-white/25 font-medium tracking-[0.15em] uppercase block mb-3 ml-1">
+                <span className="text-label text-white/35 font-medium tracking-[0.15em] uppercase block mb-4 ml-1">
                   Navigate
                 </span>
               </motion.div>}

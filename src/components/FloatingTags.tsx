@@ -21,7 +21,7 @@ const FloatingTags = ({ tags }: FloatingTagsProps) => {
       {tags.map((tag, index) => (
         <span
           key={tag.label}
-          className="lunar-tag-dark absolute animate-float text-[10px] sm:text-xs px-2 sm:px-3 py-1 sm:py-1.5"
+          className="lunar-tag-dark absolute animate-float text-caption px-3 sm:px-4 py-1.5 sm:py-2 backdrop-blur-md"
           style={{
             top: tag.top,
             left: tag.left,

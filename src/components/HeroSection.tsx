@@ -92,62 +92,62 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* Floating Service Tags - Desktop */}
+      {/* Floating Service Tags - Desktop - Enhanced */}
       {serviceTags.map((tag, index) => (
         <div
           key={index}
           className={`absolute ${tag.position} hidden lg:block z-10`}
         >
-          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-sm">
+          <span className="font-sans px-5 py-2.5 text-sm whitespace-nowrap rounded-xl bg-white/[0.04] border border-white/[0.12] text-white/75 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-md">
             {tag.label}
           </span>
         </div>
       ))}
 
-      {/* Floating Service Tags - Mobile - Unified Card Style */}
+      {/* Floating Service Tags - Mobile - Enhanced */}
       {mobileServiceTags.map((tag, index) => (
         <div
           key={`mobile-${index}`}
           className={`absolute ${tag.position} lg:hidden z-10`}
         >
-          <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-white/[0.03] border border-white/[0.08] text-white/60 whitespace-nowrap">
+          <span className="font-sans px-3 py-1.5 text-xs rounded-lg bg-white/[0.04] border border-white/[0.12] text-white/65 whitespace-nowrap backdrop-blur-sm">
             {tag.label}
           </span>
         </div>
       ))}
 
       {/* Main Content - Centered */}
-      <div className="flex-1 flex items-center justify-center relative z-10 px-3 sm:px-6">
+      <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Unified Inter font with color contrast */}
-          <h1 className="font-sans text-[7vw] sm:text-[5.5vw] md:text-[4.5vw] lg:text-[4vw] font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-5 md:mb-6 mt-6 sm:mt-8 md:mt-10">
+          {/* Main Headline - Premium Display Typography */}
+          <h1 className="font-display text-display-hero font-bold leading-[1.0] tracking-[-0.03em] mb-5 sm:mb-6 md:mb-8 mt-6 sm:mt-8 md:mt-10">
             <span className="text-white">Bridge Your Web3 Project</span>
             <br />
             <span className="text-white">to Korea's Crypto Ecosystem</span>
           </h1>
 
-          {/* Subtext - Larger and more prominent */}
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-white/60 max-w-3xl mx-auto mb-5 sm:mb-6 md:mb-8 font-light tracking-wide leading-relaxed px-2">
-            We combine <span className="text-white font-medium">deep-dive research labs</span> with <span className="text-white font-medium">high-impact marketing execution</span> to ensure your project thrives in the Korean market.
+          {/* Subtext - Enhanced readability */}
+          <p className="text-body-lg md:text-body-xl text-white/70 max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10 font-normal tracking-wide leading-relaxed px-2">
+            We combine <span className="text-white font-semibold">deep-dive research labs</span> with <span className="text-white font-semibold">high-impact marketing execution</span> to ensure your project thrives in the Korean market.
           </p>
 
-          {/* CTA Button */}
+          {/* CTA Button - Enhanced */}
           <a
             href="/contact#contact-form"
-            className="group relative inline-flex items-center gap-2 px-5 py-3 sm:px-8 sm:py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] min-h-[44px] sm:min-h-[48px]"
+            className="group relative inline-flex items-center gap-2.5 px-7 py-4 sm:px-10 sm:py-5 bg-white text-black font-semibold text-base rounded-full overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-white/25 hover:-translate-y-1 hover:scale-[1.03] active:scale-[0.98] min-h-[52px] sm:min-h-[56px]"
           >
             {/* Shine sweep effect */}
             <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
-            <Send className="w-4 h-4" />
+            <Send className="w-5 h-5" />
             <span>Get Your Free Proposal</span>
           </a>
         </div>
       </div>
 
-      {/* Stats Section */}
-      <div className="relative z-10 py-3 sm:py-4 md:py-5">
-        <div className="container mx-auto px-3 sm:px-6 md:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
+      {/* Stats Section - Enhanced */}
+      <div className="relative z-10 py-5 sm:py-6 md:py-8">
+        <div className="container mx-auto px-4 sm:px-8 md:px-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
             {stats.map((stat, index) => (
               <StatItem 
                 key={index}
@@ -163,25 +163,25 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Client Logo Marquee - Dark Pill Cards Style */}
-      <div className="relative z-10 border-t border-white/10 py-2 sm:py-3 overflow-hidden">
+      {/* Client Logo Marquee - Enhanced */}
+      <div className="relative z-10 border-t border-white/15 py-3 sm:py-4 overflow-hidden">
         {/* Section indicator */}
-        <div className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[9px] sm:text-xs z-20">
+        <div className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/50 text-label z-20">
           <span className="number-badge">01</span>
         </div>
 
-        <div className="flex items-center logo-marquee-slow ml-10 sm:ml-16">
+        <div className="flex items-center logo-marquee-slow ml-12 sm:ml-20">
           {[...clientLogos, ...clientLogos].map((client, index) => (
             <div 
               key={index} 
-              className="flex items-center gap-1 sm:gap-2 mx-1 sm:mx-2 px-2 sm:px-4 py-1 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+              className="flex items-center gap-2 sm:gap-2.5 mx-1.5 sm:mx-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300"
             >
               <img 
                 src={client.logo} 
                 alt={client.name} 
-                className={`h-3 w-3 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-80'}`}
+                className={`h-4 w-4 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`}
               />
-              <span className="text-white/70 text-[9px] sm:text-xs font-medium whitespace-nowrap">
+              <span className="text-white/75 text-caption font-medium whitespace-nowrap">
                 {client.name}
               </span>
             </div>
@@ -230,10 +230,10 @@ const StatItem = ({
   
   return (
     <div className="text-center group cursor-default hover:scale-105 transition-transform">
-      <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-0.5 stat-glow transition-all duration-300 group-hover:text-primary">
+      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 stat-glow transition-all duration-300 group-hover:text-primary tracking-tight">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-[10px] sm:text-xs md:text-sm text-white/50 font-light group-hover:text-white/70 transition-colors duration-300">
+      <div className="text-caption text-white/60 font-medium group-hover:text-white/75 transition-colors duration-300">
         {label}
       </div>
     </div>

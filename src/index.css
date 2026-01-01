@@ -33,7 +33,7 @@
     --secondary-foreground: 0 0% 100%;
     
     --muted: 0 0% 12%;
-    --muted-foreground: 0 0% 55%;
+    --muted-foreground: 0 0% 60%;
     
     /* Blue Accent */
     --accent: 217 91% 60%;
@@ -42,8 +42,8 @@
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
     --ring: 217 91% 60%;
     
     --radius: 0.5rem;
@@ -63,6 +63,11 @@
 
     /* Lunar Strategy Blue */
     --lunar-blue: 217 91% 60%;
+    
+    /* Premium Text Hierarchy - 3-tier opacity system */
+    --text-primary: 0 0% 100%;
+    --text-secondary: 0 0% 75%;
+    --text-tertiary: 0 0% 50%;
   }
 
   .dark {
