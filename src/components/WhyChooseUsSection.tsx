@@ -24,37 +24,14 @@ const WhyChooseUsSection = () => {
         {/* Right: Content */}
         <div className="flex flex-col">
           {/* About Text */}
-          <div className="p-3 sm:p-4 md:p-5 lg:p-6 flex-1 flex flex-col justify-center border-b border-border">
-            <h2 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-foreground mb-2 sm:mb-3">
+          <div className="p-4 sm:p-5 md:p-5 lg:p-6 flex-1 flex flex-col justify-center border-b border-border">
+            <h2 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-foreground mb-3 sm:mb-4">
               About Us
             </h2>
             
-            <div className="space-y-2 sm:space-y-3">
-              {/* Brand Identity - Ium */}
-              <div>
-                <p className="text-foreground font-medium text-xs sm:text-sm md:text-sm mb-0.5">
-                  「Ium (이음)」
-                </p>
-                <p className="text-muted-foreground leading-relaxed text-[11px] sm:text-xs md:text-xs">
-                  Derived from the Korean word "잇다" (to connect). We are the bridge that links global Web3 projects with Korea's dynamic crypto ecosystem — serving as both connector and foundational layer for market entry.
-                </p>
-              </div>
-              
-              {/* Brand Identity - Labs */}
-              <div>
-                <p className="text-foreground font-medium text-xs sm:text-sm md:text-sm mb-0.5">
-                  「Labs」
-                </p>
-                <p className="text-muted-foreground leading-relaxed text-[11px] sm:text-xs md:text-xs">
-                  Reflects our commitment to data-driven research and proprietary analytics. Beyond marketing, we deliver actionable insights through our Research Products that power informed decision-making for market entry.
-                </p>
-              </div>
-              
-              {/* Mission & Credibility */}
-              <p className="text-foreground/90 leading-relaxed text-[11px] sm:text-xs md:text-xs pt-1 border-t border-border/50">
-                <span className="font-medium">Our Mission:</span> Bridging global Web3 projects with the Korean market through strategic GTM marketing and proprietary research products. Founded by former Binance and KuCoin executives, trusted by 18+ leading brands since 2025.
-              </p>
-            </div>
+            <p className="text-muted-foreground leading-relaxed text-xs sm:text-sm md:text-sm lg:text-base">
+              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. Derived from the Korean word "to connect," we function as your foundational layer for market entry. We transcend standard marketing by leveraging proprietary analytics and data-driven research, providing the actionable insights needed to navigate and succeed in the Korean market.
+            </p>
           </div>
 
           {/* Stats + CTA */}
