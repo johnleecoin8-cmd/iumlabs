@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import aboutImageDefault from '@/assets/campaigns/about-image-default.jpeg';
 import aboutImageHover from '@/assets/campaigns/about-image-hover.jpeg';
 
@@ -24,15 +25,25 @@ const WhyChooseUsSection = () => {
         {/* Right: Content */}
         <div className="flex flex-col">
           {/* About Text */}
-          <div className="p-4 sm:p-5 md:p-5 lg:p-6 flex-1 flex flex-col justify-center border-b border-border">
+          <motion.div 
+            className="p-4 sm:p-5 md:p-5 lg:p-6 flex-1 flex flex-col justify-center border-b border-border"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-50px" }}
+          >
             <h2 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-foreground mb-3 sm:mb-4">
               About Us
             </h2>
             
-            <p className="text-muted-foreground leading-relaxed text-xs sm:text-sm md:text-sm lg:text-base">
+            <p className="text-muted-foreground leading-relaxed text-xs sm:text-sm md:text-sm lg:text-base mb-3">
               ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. Derived from the Korean word "to connect," we function as your foundational layer for market entry. We transcend standard marketing by leveraging proprietary analytics and data-driven research, providing the actionable insights needed to navigate and succeed in the Korean market.
             </p>
-          </div>
+            
+            <p className="text-foreground/70 text-[11px] sm:text-xs md:text-xs italic">
+              Founded by former Binance & KuCoin executives
+            </p>
+          </motion.div>
 
           {/* Stats + CTA */}
           <div className="p-3 sm:p-4 md:p-5 lg:p-6">
