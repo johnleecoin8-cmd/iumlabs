@@ -160,99 +160,143 @@ const HoverExpand_001 = ({
     );
   }
 
-  // Tablet & Desktop: Horizontal expand layout
+  // Tablet & Desktop: Horizontal expand layout with scroll
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Scroll-based autoplay
+  useEffect(() => {
+  if (!autoAdvance || isPaused || breakpoint === "mobile") return;
+    
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const scrollInterval = setInterval(() => {
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      const currentScroll = container.scrollLeft;
+      
+      if (currentScroll >= maxScroll - 10) {
+        // Reset to start
+        container.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        // Scroll by one image width
+        const imageWidth = breakpoint === 'desktop' ? 180 : 150;
+        container.scrollBy({ left: imageWidth, behavior: 'smooth' });
+      }
+    }, autoAdvanceInterval);
+
+    return () => clearInterval(scrollInterval);
+  }, [autoAdvance, isPaused, autoAdvanceInterval, breakpoint, config.layout]);
+
+  const collapsedWidth = breakpoint === 'desktop' ? '9.21875rem' : breakpoint === 'largeTablet' ? '7rem' : '5.5rem';
+  const expandedWidth = breakpoint === 'desktop' ? '27.65625rem' : breakpoint === 'largeTablet' ? '18rem' : '14rem';
+
   return (
     <div 
-      className={cn("w-full", className)}
+      className={cn("w-full relative", className)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
+      {/* Scroll container */}
       <div
-        className={cn(
-          "flex justify-center mx-auto",
-          config.gap,
-          "maxWidth" in config && config.maxWidth
-        )}
-        style={{ height: config.height }}
+        ref={scrollContainerRef}
+        className="overflow-x-auto scrollbar-hide scroll-smooth"
+        style={{ 
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+        }}
       >
-        {images.slice(0, config.numVisible).map((image, index) => {
-          const isActive = activeImage === index;
-          const width =
-            "expandedWidth" in config
-              ? isActive
-                ? config.expandedWidth
-                : config.collapsedWidth
-              : isActive
-              ? `${config.expandedPercent}%`
-              : `${config.collapsedPercent}%`;
-          const initialWidth =
-            "expandedWidth" in config
-              ? config.collapsedWidth
-              : `${config.collapsedPercent}%`;
+        <div
+          className={cn("flex", config.gap)}
+          style={{ 
+            height: config.height,
+            width: 'max-content',
+            paddingRight: '2rem',
+          }}
+        >
+          {images.map((image, index) => {
+            const isActive = activeImage === index;
+            const width = isActive ? expandedWidth : collapsedWidth;
 
-          return (
-            <motion.div
-              key={index}
-              className="relative h-full overflow-hidden rounded-[20px] cursor-pointer"
-              initial={{ width: initialWidth }}
-              animate={{ width }}
-              transition={{ type: "spring", stiffness: 400, damping: 40 }}
-              onClick={() => handleClick(index, image.slug)}
-              onHoverStart={() => setActiveImage(index)}
-            >
-              <img
-                src={image.src}
-                alt={image.alt}
-                className="w-full h-full object-cover"
-              />
-              
-              {/* Dark overlay for inactive images */}
+            return (
               <motion.div
-                className="absolute inset-0 bg-black/30"
-                initial={{ opacity: 1 }}
-                animate={{ opacity: isActive ? 0 : 1 }}
-                transition={{ duration: 0.3 }}
-              />
-              
-              {/* Gradient overlay for caption */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-              
-              {/* Caption - only visible when active */}
-              <AnimatePresence>
-                {isActive && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute bottom-4 left-4 right-4"
-                  >
-                    <p className="text-white font-medium text-sm md:text-base">
-                      {image.code}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          );
-        })}
+                key={index}
+                className="relative h-full overflow-hidden rounded-[20px] cursor-pointer flex-shrink-0"
+                initial={{ width: collapsedWidth }}
+                animate={{ width }}
+                transition={{ type: "spring", stiffness: 400, damping: 40 }}
+                onClick={() => handleClick(index, image.slug)}
+                onHoverStart={() => setActiveImage(index)}
+              >
+                <img
+                  src={image.src}
+                  alt={image.alt}
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Dark overlay for inactive images */}
+                <motion.div
+                  className="absolute inset-0 bg-black/30"
+                  initial={{ opacity: 1 }}
+                  animate={{ opacity: isActive ? 0 : 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+                
+                {/* Gradient overlay for caption */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+                
+                {/* Caption - only visible when active */}
+                <AnimatePresence>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      transition={{ duration: 0.3 }}
+                      className="absolute bottom-4 left-4 right-4"
+                    >
+                      <p className="text-white font-medium text-sm md:text-base">
+                        {image.code}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Autoplay indicator dots */}
+      {/* Right fade hint */}
+      <div className="absolute right-0 top-0 bottom-8 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none" />
+
+      {/* Scroll progress indicator */}
       {autoAdvance && (
-        <div className="flex justify-center gap-2 mt-4">
-          {images.slice(0, config.numVisible).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActiveImage(index)}
-              className={cn(
-                "w-2 h-2 rounded-full transition-all duration-300",
-                activeImage === index 
-                  ? "bg-foreground w-6" 
-                  : "bg-muted-foreground/40 hover:bg-muted-foreground/60"
-              )}
-            />
-          ))}
+        <div className="flex justify-center gap-1.5 mt-4">
+          {Array.from({ length: Math.min(images.length, 10) }).map((_, index) => {
+            const groupSize = Math.ceil(images.length / 10);
+            const groupStart = index * groupSize;
+            const groupEnd = Math.min((index + 1) * groupSize - 1, images.length - 1);
+            const isInGroup = activeImage >= groupStart && activeImage <= groupEnd;
+            
+            return (
+              <button
+                key={index}
+                onClick={() => {
+                  setActiveImage(groupStart);
+                  scrollContainerRef.current?.scrollTo({
+                    left: groupStart * (breakpoint === 'desktop' ? 180 : 150),
+                    behavior: 'smooth'
+                  });
+                }}
+                className={cn(
+                  "w-2 h-2 rounded-full transition-all duration-300",
+                  isInGroup 
+                    ? "bg-foreground w-6" 
+                    : "bg-muted-foreground/40 hover:bg-muted-foreground/60"
+                )}
+              />
+            );
+          })}
         </div>
       )}
     </div>
