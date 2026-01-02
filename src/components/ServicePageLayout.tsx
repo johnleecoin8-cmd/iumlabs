@@ -145,10 +145,10 @@ const StatItem = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
     >
-      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
+      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-xs sm:text-sm text-white/50 font-light">
+      <div className="text-[10px] sm:text-xs text-white/50 font-light">
         {label}
       </div>
     </motion.div>
@@ -286,7 +286,7 @@ const ServicePageLayout = ({
 
               {/* Main Headline */}
               <motion.h1 
-                className="font-sans text-[10vw] sm:text-[8vw] md:text-[6vw] lg:text-[5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8"
+                className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-[-0.02em] mb-5 sm:mb-6"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -298,7 +298,7 @@ const ServicePageLayout = ({
 
               {/* Description */}
               <motion.p 
-                className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed"
+                className="text-sm sm:text-base md:text-lg text-white/60 max-w-3xl mx-auto mb-6 font-light tracking-wide leading-relaxed"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -396,20 +396,20 @@ const ServicePageLayout = ({
                   {deliverables.map((deliverable) => (
                     <div
                       key={deliverable.title}
-                      className="p-5 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all"
+                      className="p-4 sm:p-5 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all"
                     >
-                      <h3 className="text-base font-semibold text-white mb-3 flex items-center gap-2">
+                      <h3 className="text-sm font-semibold text-white mb-2.5 flex items-center gap-2">
                         <div 
-                          className="w-2 h-2 rounded-full"
+                          className="w-1.5 h-1.5 rounded-full"
                           style={{ backgroundColor: accentColor }}
                         />
                         {deliverable.title}
                       </h3>
-                      <ul className="space-y-2">
+                      <ul className="space-y-1.5">
                         {deliverable.items.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-white/60 text-sm">
+                          <li key={idx} className="flex items-start gap-2 text-white/60 text-xs">
                             <Check 
-                              className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" 
+                              className="w-3 h-3 mt-0.5 flex-shrink-0" 
                               style={{ color: accentColor }} 
                             />
                             {item}

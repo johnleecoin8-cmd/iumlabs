@@ -246,9 +246,9 @@ const YapService = () => {
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               {/* Featured Yappers Carousel */}
-              <div className="mb-16">
-                <div className="flex items-center justify-between mb-6">
-                  <h3 className="text-white/60 text-sm uppercase tracking-wider">Featured Creators</h3>
+              <div className="mb-12">
+                <div className="flex items-center justify-between mb-5">
+                  <h3 className="text-white/60 text-xs uppercase tracking-wider">Featured Creators</h3>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setFeaturedIndex(prev => prev === 0 ? featuredYappers.length - 1 : prev - 1)}
@@ -287,9 +287,9 @@ const YapService = () => {
                       />
                     </div>
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h4 className="text-white font-bold text-xl">{featuredYappers[featuredIndex].name}</h4>
-                        <span className="text-cyan-400 text-sm">{featuredYappers[featuredIndex].handle}</span>
+                      <div className="flex items-center gap-2.5 mb-1.5">
+                        <h4 className="text-white font-bold text-lg">{featuredYappers[featuredIndex].name}</h4>
+                        <span className="text-cyan-400 text-xs">{featuredYappers[featuredIndex].handle}</span>
                         <span 
                           className="text-xs px-2 py-1 rounded-full"
                           style={{ backgroundColor: `${ACCENT_COLOR}20`, color: ACCENT_COLOR }}

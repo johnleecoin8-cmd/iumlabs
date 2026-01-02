@@ -215,10 +215,10 @@ const GTMService = () => {
               </div>
               
               {/* 4-Week Journey Content */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                 {/* Left - Phase Navigation */}
                 <div>
-                  <p className="text-white/60 text-base leading-relaxed mb-6">
+                  <p className="text-white/60 text-sm leading-relaxed mb-5">
                     A 4-week program from market analysis to successful launch, with clear deliverables at each stage.
                   </p>
                   
@@ -263,16 +263,16 @@ const GTMService = () => {
                   key={activePhase}
                   className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 md:p-6"
                 >
-                  <div className="flex items-center gap-3 mb-5">
-                    <div className="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center">
+                  <div className="flex items-center gap-2.5 mb-4">
+                    <div className="w-9 h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                       {(() => {
                         const Icon = journeyPhases[activePhase].icon;
-                        return <Icon className="w-5 h-5 text-emerald-400" />;
+                        return <Icon className="w-4 h-4 text-emerald-400" />;
                       })()}
                     </div>
                     <div>
-                      <span className="text-xs text-emerald-400 font-medium">{journeyPhases[activePhase].week}</span>
-                      <h3 className="text-lg font-bold text-white">{journeyPhases[activePhase].title}</h3>
+                      <span className="text-[10px] text-emerald-400 font-medium">{journeyPhases[activePhase].week}</span>
+                      <h3 className="text-base font-bold text-white">{journeyPhases[activePhase].title}</h3>
                     </div>
                   </div>
 
