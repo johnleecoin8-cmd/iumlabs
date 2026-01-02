@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 const useBreakpoint = () => {
@@ -40,11 +40,23 @@ interface HoverExpandProps {
   images: HoverExpandImage[];
   className?: string;
   onImageClick?: (slug: string) => void;
+  onLightboxOpen?: (index: number) => void;
+  autoAdvance?: boolean;
+  autoAdvanceInterval?: number;
 }
 
-const HoverExpand_001 = ({ images, className, onImageClick }: HoverExpandProps) => {
+const HoverExpand_001 = ({ 
+  images, 
+  className, 
+  onImageClick,
+  onLightboxOpen,
+  autoAdvance = true,
+  autoAdvanceInterval = 4000
+}: HoverExpandProps) => {
   const [activeImage, setActiveImage] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
   const breakpoint = useBreakpoint();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const config = {
     mobile: { 
@@ -79,8 +91,43 @@ const HoverExpand_001 = ({ images, className, onImageClick }: HoverExpandProps) 
     },
   }[breakpoint];
 
+  const numVisible = config.numVisible;
+
+  // Autoplay logic
+  const startAutoAdvance = useCallback(() => {
+    if (!autoAdvance || isPaused || config.layout === "list") return;
+    
+    intervalRef.current = setInterval(() => {
+      setActiveImage((prev) => (prev + 1) % numVisible);
+    }, autoAdvanceInterval);
+  }, [autoAdvance, isPaused, numVisible, autoAdvanceInterval, config.layout]);
+
+  const stopAutoAdvance = useCallback(() => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  }, []);
+
+  useEffect(() => {
+    startAutoAdvance();
+    return () => stopAutoAdvance();
+  }, [startAutoAdvance, stopAutoAdvance]);
+
+  const handleMouseEnter = () => {
+    setIsPaused(true);
+    stopAutoAdvance();
+  };
+
+  const handleMouseLeave = () => {
+    setIsPaused(false);
+  };
+
   const handleClick = (index: number, slug?: string) => {
-    if (onImageClick && slug) {
+    // Open lightbox if handler provided
+    if (onLightboxOpen) {
+      onLightboxOpen(index);
+    } else if (onImageClick && slug) {
       onImageClick(slug);
     } else {
       setActiveImage(index);
@@ -115,7 +162,11 @@ const HoverExpand_001 = ({ images, className, onImageClick }: HoverExpandProps) 
 
   // Tablet & Desktop: Horizontal expand layout
   return (
-    <div className={cn("w-full", className)}>
+    <div 
+      className={cn("w-full", className)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
       <div
         className={cn(
           "flex justify-center mx-auto",
@@ -186,6 +237,24 @@ const HoverExpand_001 = ({ images, className, onImageClick }: HoverExpandProps) 
           );
         })}
       </div>
+
+      {/* Autoplay indicator dots */}
+      {autoAdvance && (
+        <div className="flex justify-center gap-2 mt-4">
+          {images.slice(0, config.numVisible).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveImage(index)}
+              className={cn(
+                "w-2 h-2 rounded-full transition-all duration-300",
+                activeImage === index 
+                  ? "bg-foreground w-6" 
+                  : "bg-muted-foreground/40 hover:bg-muted-foreground/60"
+              )}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

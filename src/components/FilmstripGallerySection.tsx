@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { HoverExpand_001 } from "@/components/ui/expand-on-hover";
+import Lightbox from "@/components/Lightbox";
 
 // Import actual campaign images from assets
 import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
@@ -61,6 +63,8 @@ const fallbackImages = [
 
 const FilmstripGallerySection = () => {
   const navigate = useNavigate();
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   // Fetch first gallery image from each project
   const { data: galleryImages } = useQuery({
@@ -119,34 +123,63 @@ const FilmstripGallerySection = () => {
     slug: image.slug,
   }));
 
-  const handleImageClick = (slug: string) => {
-    navigate(`/projects/${slug}`);
+  // Transform images for Lightbox
+  const lightboxImages = images.map((image) => ({
+    src: image.src,
+    title: image.title,
+    description: image.subtitle,
+  }));
+
+  const handleLightboxOpen = (index: number) => {
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const handleLightboxClose = () => {
+    setLightboxOpen(false);
+  };
+
+  const handleLightboxNavigate = (index: number) => {
+    setLightboxIndex(index);
   };
 
   return (
-    <section className="py-16 md:py-24 bg-background">
-      <div className="container mx-auto px-4 md:px-8">
-        {/* Simple Header */}
-        <div className="flex items-center justify-between mb-8 md:mb-12">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
-            Campaign Gallery
-          </h2>
-          <Link
-            to="/projects"
-            className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-          >
-            View all
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
+    <>
+      <section className="py-16 md:py-24 bg-background">
+        <div className="container mx-auto px-4 md:px-8">
+          {/* Simple Header */}
+          <div className="flex items-center justify-between mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
+              Campaign Gallery
+            </h2>
+            <Link
+              to="/projects"
+              className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              View all
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </div>
 
-        {/* Hover Expand Gallery */}
-        <HoverExpand_001
-          images={transformedImages}
-          onImageClick={handleImageClick}
-        />
-      </div>
-    </section>
+          {/* Hover Expand Gallery with Autoplay */}
+          <HoverExpand_001
+            images={transformedImages}
+            onLightboxOpen={handleLightboxOpen}
+            autoAdvance={true}
+            autoAdvanceInterval={4000}
+          />
+        </div>
+      </section>
+
+      {/* Lightbox Modal */}
+      <Lightbox
+        images={lightboxImages}
+        currentIndex={lightboxIndex}
+        isOpen={lightboxOpen}
+        onClose={handleLightboxClose}
+        onNavigate={handleLightboxNavigate}
+      />
+    </>
   );
 };
 
