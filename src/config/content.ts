@@ -47,7 +47,7 @@ export const navigation = {
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
-    // { name: "Research", href: "/research" },  // 임시 숨김 - 준비되면 주석 해제
+    { name: "Research", href: "/research" },
     { name: "Contact", href: "/contact" },
   ],
   ctaButton: "Get Started",
