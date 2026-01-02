@@ -115,7 +115,7 @@ const ProjectHero = ({
           </motion.div>
           
           <div>
-            <motion.h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 tracking-tight" initial={{
+            <motion.h1 className="text-display-xl text-white mb-3 tracking-tight" initial={{
             opacity: 0,
             y: 30
           }} animate={{
@@ -127,7 +127,7 @@ const ProjectHero = ({
           }}>
               {project.name}
             </motion.h1>
-            <motion.p className="text-base md:text-lg text-white/70 max-w-2xl leading-relaxed" initial={{
+            <motion.p className="text-body-lg text-white/70 max-w-2xl leading-relaxed" initial={{
             opacity: 0,
             y: 20
           }} animate={{

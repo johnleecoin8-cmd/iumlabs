@@ -103,7 +103,7 @@ const ResearchHeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline */}
           <motion.h1 
-            className="font-sans text-[8vw] sm:text-[7vw] md:text-[5.5vw] lg:text-[4.5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12"
+            className="font-display text-display-hero mb-4 sm:mb-6 mt-8 sm:mt-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -115,7 +115,7 @@ const ResearchHeroSection = () => {
 
           {/* Subtext */}
           <motion.p 
-            className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed"
+            className="text-body-lg text-white/60 max-w-2xl mx-auto mb-8 font-light leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -254,10 +254,10 @@ const StatItem = ({
       transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
       whileHover={{ scale: 1.05 }}
     >
-      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 stat-glow transition-all duration-300 group-hover:text-primary">
+      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 stat-glow transition-all duration-300 group-hover:text-primary">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-xs sm:text-sm text-white/50 font-light group-hover:text-white/70 transition-colors duration-300">
+      <div className="text-caption text-white/50 font-light group-hover:text-white/70 transition-colors duration-300">
         {label}
       </div>
     </motion.div>

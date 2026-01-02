@@ -1003,31 +1003,31 @@ const Research = () => {
                 </div>
                 <div>
                   <div className="flex items-center gap-4 mb-4">
-                    <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm border border-primary/20">
+                    <span className="px-3 py-1.5 bg-primary/10 text-primary rounded-full text-caption border border-primary/20">
                       {researchPosts[0].category}
                     </span>
-                    <span className="text-white/40 text-sm flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
+                    <span className="text-white/40 text-caption flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5" />
                       {researchPosts[0].readTime}
                     </span>
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight mb-4 group-hover:text-primary/90 transition-colors duration-300">
+                  <h2 className="text-display-md text-white leading-tight mb-4 group-hover:text-primary/90 transition-colors duration-300">
                     {researchPosts[0].title}
                   </h2>
-                  <p className="text-white/60 text-lg mb-6 line-clamp-3">
+                  <p className="text-body-lg text-white/60 mb-6 line-clamp-3">
                     {researchPosts[0].excerpt}
                   </p>
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-sm font-medium text-primary">
+                      <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-caption font-medium text-primary">
                         {researchPosts[0].author.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div>
-                        <p className="text-white text-sm font-medium">{researchPosts[0].author}</p>
-                        <p className="text-white/40 text-xs">{researchPosts[0].date}</p>
+                        <p className="text-body-sm text-white font-medium">{researchPosts[0].author}</p>
+                        <p className="text-label text-white/40">{researchPosts[0].date}</p>
                       </div>
                     </div>
-                    <span className="text-primary flex items-center gap-2 group-hover:gap-3 transition-all font-medium">
+                    <span className="text-primary flex items-center gap-2 group-hover:gap-3 transition-all text-body-sm font-medium">
                       Read More <ArrowRight className="w-4 h-4" />
                     </span>
                   </div>
@@ -1079,22 +1079,22 @@ const Research = () => {
                     
                     {/* Meta */}
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="px-2 py-1 bg-primary/10 text-primary rounded text-xs border border-primary/20">
+                      <span className="px-2 py-1 bg-primary/10 text-primary rounded text-label border border-primary/20">
                         {post.category}
                       </span>
-                      <span className="text-white/40 text-xs flex items-center gap-1">
+                      <span className="text-white/40 text-label flex items-center gap-1">
                         <Clock className="w-3 h-3" />
                         {post.readTime}
                       </span>
                     </div>
                     
                     {/* Title */}
-                    <h3 className="text-lg font-medium text-white leading-snug group-hover:text-primary transition-colors duration-300 mb-3 line-clamp-2">
+                    <h3 className="text-body-lg font-medium text-white leading-snug group-hover:text-primary transition-colors duration-300 mb-3 line-clamp-2">
                       {post.title}
                     </h3>
                     
                     {/* Author & Date */}
-                    <div className="flex items-center gap-2 text-white/40 text-sm">
+                    <div className="flex items-center gap-2 text-white/40 text-caption">
                       <span>{post.author}</span>
                       <span>•</span>
                       <span>{post.date}</span>
@@ -1156,11 +1156,11 @@ const Research = () => {
         </div>
         
         {/* Newsletter Content */}
-        <div className="container mx-auto max-w-3xl px-4 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-light text-white mb-4">
+        <div className="container mx-auto max-w-3xl px-4 py-16 text-center">
+          <h2 className="text-display-md text-white mb-4">
             Stay <span className="text-primary">Updated</span>
           </h2>
-          <p className="text-white/60 mb-8 max-w-md mx-auto">
+          <p className="text-body text-white/60 mb-8 max-w-md mx-auto">
             Subscribe to receive the latest research and insights directly in your inbox.
           </p>
           <form onSubmit={handleNewsletterSubmit} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">

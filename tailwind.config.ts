@@ -74,20 +74,20 @@ export default {
         "3xl": "2rem",
       },
       fontSize: {
-        // Premium display scale - larger and more impactful
-        "display-hero": ["clamp(3rem, 6vw, 6rem)", { lineHeight: "1.0", letterSpacing: "-0.04em", fontWeight: "700" }],
-        "display-xl": ["clamp(2.5rem, 5vw, 5rem)", { lineHeight: "1.05", letterSpacing: "-0.03em", fontWeight: "700" }],
-        "display-lg": ["clamp(2rem, 4vw, 4rem)", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
-        "display-md": ["clamp(1.75rem, 3vw, 3rem)", { lineHeight: "1.15", letterSpacing: "-0.02em", fontWeight: "600" }],
-        "display-sm": ["clamp(1.5rem, 2.5vw, 2rem)", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600" }],
-        // Body text scale - improved readability
-        "body-xl": ["1.25rem", { lineHeight: "1.7", letterSpacing: "0" }],
-        "body-lg": ["1.125rem", { lineHeight: "1.7", letterSpacing: "0" }],
-        "body": ["1rem", { lineHeight: "1.6", letterSpacing: "0" }],
-        "body-sm": ["0.9375rem", { lineHeight: "1.6", letterSpacing: "0" }],
-        // Caption and label scale - minimum 12px
+        // Premium display scale - refined and balanced
+        "display-hero": ["clamp(2.25rem, 5vw, 4.5rem)", { lineHeight: "1.05", letterSpacing: "-0.03em", fontWeight: "700" }],
+        "display-xl": ["clamp(2rem, 4vw, 3.5rem)", { lineHeight: "1.1", letterSpacing: "-0.025em", fontWeight: "700" }],
+        "display-lg": ["clamp(1.75rem, 3vw, 2.75rem)", { lineHeight: "1.15", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "display-md": ["clamp(1.5rem, 2.5vw, 2.25rem)", { lineHeight: "1.2", letterSpacing: "-0.015em", fontWeight: "600" }],
+        "display-sm": ["clamp(1.25rem, 2vw, 1.75rem)", { lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "600" }],
+        // Body text scale - balanced readability
+        "body-xl": ["1.125rem", { lineHeight: "1.7", letterSpacing: "0" }],
+        "body-lg": ["1rem", { lineHeight: "1.7", letterSpacing: "0" }],
+        "body": ["0.9375rem", { lineHeight: "1.6", letterSpacing: "0" }],
+        "body-sm": ["0.875rem", { lineHeight: "1.6", letterSpacing: "0" }],
+        // Caption and label scale - minimum 11px
         "caption": ["0.8125rem", { lineHeight: "1.5", letterSpacing: "0.01em" }],
-        "label": ["0.75rem", { lineHeight: "1.4", letterSpacing: "0.02em" }],
+        "label": ["0.6875rem", { lineHeight: "1.4", letterSpacing: "0.03em" }],
       },
       keyframes: {
         "accordion-down": {
