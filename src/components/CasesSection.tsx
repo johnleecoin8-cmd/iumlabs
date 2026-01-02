@@ -29,10 +29,37 @@ import peaqCampaign from "@/assets/campaigns/peaq-summit.jpg";
 import triaCampaign from "@/assets/campaigns/tria-launch.jpg";
 import bybitCampaign from "@/assets/campaigns/bybit-event.jpg";
 import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
-import polygonCampaign from "@/assets/campaigns/polygon-hackathon.jpg";
+import polygonConnect from "@/assets/campaigns/polygon-connect.png";
 import ondoCampaign from "@/assets/campaigns/ondo-seminar.jpg";
 import megaethCampaign from "@/assets/campaigns/megaeth-launch.jpg";
 import zkpassCampaign from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
+import synfuturesCampaign from "@/assets/campaigns/synfutures-billboard.jpg";
+import fogoCampaign from "@/assets/campaigns/fogo-fest.avif";
+
+// Map gallery `src` (stored as file path strings) to bundled campaign assets
+const campaignAssetByFile: Record<string, string> = {
+  "bnb-event.jpg": bnbCampaign,
+  "kucoin-campaign.jpg": kucoinCampaign,
+  "ondo-seminar.jpg": ondoCampaign,
+  "polygon-connect.png": polygonConnect,
+  "sahara-ai.jpg": saharaCampaign,
+  "story-origin-summit.jpg": storyCampaign,
+  "peaq-summit.jpg": peaqCampaign,
+  "bybit-event.jpg": bybitCampaign,
+  "mantra-party.jpg": mantraCampaign,
+  "megaeth-launch.jpg": megaethCampaign,
+  "tria-launch.jpg": triaCampaign,
+  "zkpass-verifiable-nights.jpg": zkpassCampaign,
+  "synfutures-billboard.jpg": synfuturesCampaign,
+  "fogo-fest.avif": fogoCampaign,
+};
+
+const resolveGallerySrcToAsset = (src?: string | null) => {
+  if (!src) return null;
+  const file = src.split("/").pop();
+  if (!file) return null;
+  return campaignAssetByFile[file] ?? null;
+};
 
 // Fallback data for projects without DB entries
 const fallbackImages: Record<string, { logo: string; bgImage: string }> = {
@@ -40,7 +67,7 @@ const fallbackImages: Record<string, { logo: string; bgImage: string }> = {
   'story-protocol': { logo: storyLogo, bgImage: storyCampaign },
   'bybit': { logo: bybitLogo, bgImage: bybitCampaign },
   'kucoin': { logo: kucoinLogo, bgImage: kucoinCampaign },
-  'polygon': { logo: polygonLogo, bgImage: polygonCampaign },
+  'polygon': { logo: polygonLogo, bgImage: polygonConnect },
   'ondo-finance': { logo: ondoLogo, bgImage: ondoCampaign },
   'sahara-ai': { logo: saharaAiLogo, bgImage: saharaCampaign },
   'megaeth': { logo: megaethLogo, bgImage: megaethCampaign },
@@ -146,30 +173,36 @@ const CasesSection = () => {
       
       // Fetch first gallery image for each project
       if (projectsData) {
-        const projectsWithGallery = await Promise.all(
-          projectsData.map(async (project) => {
-            const { data: gallery } = await supabase
-              .from('project_gallery')
-              .select('src')
-              .eq('project_id', project.id)
-              .order('display_order')
-              .limit(1);
-            
-            const fallback = fallbackImages[project.slug] || { logo: '', bgImage: '' };
-            
-            // Use fallback bgImage since gallery images are stored as source paths
-            // which don't work in production builds
-            return {
-              name: project.name,
-              slug: project.slug,
-              category: project.category || '',
-              result: project.result || '',
-              description: project.description || '',
-              logo: project.logo_url || fallback.logo,
-              bgImage: fallback.bgImage || project.background_url || '',
-            };
-          })
-        );
+        const projectIds = projectsData.map((p) => p.id);
+        
+        const { data: galleryRows } = await supabase
+          .from('project_gallery')
+          .select('project_id, src, display_order')
+          .in('project_id', projectIds)
+          .order('display_order', { ascending: true });
+
+        const firstGalleryByProject = new Map<string, string>();
+        for (const row of galleryRows ?? []) {
+          if (!firstGalleryByProject.has(row.project_id)) {
+            firstGalleryByProject.set(row.project_id, row.src);
+          }
+        }
+
+        const projectsWithGallery = projectsData.map((project) => {
+          const gallerySrc = firstGalleryByProject.get(project.id) ?? null;
+          const galleryAsset = resolveGallerySrcToAsset(gallerySrc);
+          const fallback = fallbackImages[project.slug] || { logo: '', bgImage: '' };
+
+          return {
+            name: project.name,
+            slug: project.slug,
+            category: project.category || '',
+            result: project.result || '',
+            description: project.description || '',
+            logo: project.logo_url || fallback.logo,
+            bgImage: galleryAsset || project.background_url || fallback.bgImage || '',
+          };
+        });
         return projectsWithGallery;
       }
       return [];
