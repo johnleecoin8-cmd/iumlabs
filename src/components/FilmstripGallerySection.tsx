@@ -1,8 +1,8 @@
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { useRef } from "react";
+import { HoverExpand_001 } from "@/components/ui/expand-on-hover";
 
 // Import actual campaign images from assets
 import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
@@ -60,7 +60,7 @@ const fallbackImages = [
 ];
 
 const FilmstripGallerySection = () => {
-  const galleryRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   // Fetch first gallery image from each project
   const { data: galleryImages } = useQuery({
@@ -111,6 +111,18 @@ const FilmstripGallerySection = () => {
 
   const images = galleryImages || fallbackImages;
 
+  // Transform images for HoverExpand component
+  const transformedImages = images.map((image) => ({
+    src: image.src,
+    alt: image.alt,
+    code: `${image.title} · ${image.subtitle}`,
+    slug: image.slug,
+  }));
+
+  const handleImageClick = (slug: string) => {
+    navigate(`/projects/${slug}`);
+  };
+
   return (
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 md:px-8">
@@ -128,36 +140,11 @@ const FilmstripGallerySection = () => {
           </Link>
         </div>
 
-        {/* Simple Horizontal Scroll Gallery */}
-        <div 
-          ref={galleryRef}
-          className="flex gap-4 md:gap-6 overflow-x-auto scrollbar-hide pb-4 -mx-4 px-4 md:-mx-8 md:px-8"
-        >
-          {images.map((image, index) => (
-            <Link
-              key={index}
-              to={`/projects/${image.slug}`}
-              className="group flex-shrink-0 w-[260px] md:w-[300px] lg:w-[320px] rounded-xl overflow-hidden bg-card"
-            >
-              <div className="relative aspect-[4/5] overflow-hidden">
-                <img 
-                  src={image.src} 
-                  alt={image.alt}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5 transform transition-transform duration-300 group-hover:-translate-y-1">
-                  <h3 className="text-white font-semibold text-base md:text-lg mb-1">
-                    {image.title}
-                  </h3>
-                  <p className="text-white/70 text-sm line-clamp-2">
-                    {image.subtitle}
-                  </p>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {/* Hover Expand Gallery */}
+        <HoverExpand_001
+          images={transformedImages}
+          onImageClick={handleImageClick}
+        />
       </div>
     </section>
   );

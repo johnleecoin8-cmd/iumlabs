@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const useBreakpoint = () => {
@@ -29,115 +29,162 @@ const useBreakpoint = () => {
   return breakpoint;
 };
 
-interface HoverExpandImage {
+export interface HoverExpandImage {
   src: string;
   alt: string;
   code: string;
+  slug?: string;
 }
 
 interface HoverExpandProps {
   images: HoverExpandImage[];
   className?: string;
+  onImageClick?: (slug: string) => void;
 }
 
-const HoverExpand_001 = ({ images, className }: HoverExpandProps) => {
-  const [activeImage, setActiveImage] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+const HoverExpand_001 = ({ images, className, onImageClick }: HoverExpandProps) => {
+  const [activeImage, setActiveImage] = useState(1);
   const breakpoint = useBreakpoint();
 
   const config = {
     mobile: { 
-      cardWidth: 240,
-      height: "min(17.5rem, 36vh)", 
-      gap: 14,
+      layout: "list" as const, 
+      numVisible: images.length, 
+      height: "min(20rem, 40vh)", 
     },
     smallTablet: { 
-      cardWidth: 264,
-      height: "min(21rem, 40vh)", 
-      gap: 14,
+      layout: "horizontal" as const, 
+      numVisible: 3, 
+      expandedPercent: 50, 
+      collapsedPercent: 25, 
+      height: "min(24rem, 45vh)", 
+      gap: "gap-2", 
     },
     largeTablet: { 
-      cardWidth: 288,
-      height: "min(24rem, 44vh)", 
-      gap: 16,
+      layout: "horizontal" as const, 
+      numVisible: 4, 
+      expandedPercent: 46, 
+      collapsedPercent: 18, 
+      height: "min(28rem, 50vh)", 
+      gap: "gap-3", 
     },
     desktop: { 
-      cardWidth: 320,
-      height: "min(32rem, 52vh)", 
-      gap: 20,
+      layout: "horizontal" as const, 
+      numVisible: 6, 
+      expandedWidth: "27.65625rem", 
+      collapsedWidth: "9.21875rem", 
+      height: "min(36.875rem, 60vh)", 
+      gap: "gap-5", 
+      maxWidth: "max-w-[1200px]" 
     },
   }[breakpoint];
 
-  const totalWidth = images.length * (config.cardWidth + config.gap) - config.gap;
-  const containerWidth = typeof window !== "undefined" ? window.innerWidth - 64 : 1200;
-  const dragConstraint = Math.max(0, totalWidth - containerWidth);
+  const handleClick = (index: number, slug?: string) => {
+    if (onImageClick && slug) {
+      onImageClick(slug);
+    } else {
+      setActiveImage(index);
+    }
+  };
 
+  // Mobile: List layout
+  if (config.layout === "list") {
+    return (
+      <div className={cn("flex flex-col gap-4", className)}>
+        {images.map((image, index) => (
+          <div
+            key={index}
+            onClick={() => handleClick(index, image.slug)}
+            className="relative rounded-xl overflow-hidden cursor-pointer"
+            style={{ height: config.height }}
+          >
+            <img
+              src={image.src}
+              alt={image.alt}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+            <div className="absolute bottom-4 left-4 right-4">
+              <p className="text-white font-medium text-sm">{image.code}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  // Tablet & Desktop: Horizontal expand layout
   return (
-    <div className={cn("w-full overflow-hidden", className)}>
-      <motion.div
-        ref={containerRef}
-        className="flex cursor-grab active:cursor-grabbing"
-        style={{ 
-          height: config.height,
-          gap: config.gap,
-        }}
-        drag="x"
-        dragConstraints={{ left: -dragConstraint, right: 0 }}
-        dragElastic={0.1}
-        onDragStart={() => setIsDragging(true)}
-        onDragEnd={() => setTimeout(() => setIsDragging(false), 100)}
+    <div className={cn("w-full", className)}>
+      <div
+        className={cn(
+          "flex justify-center mx-auto",
+          config.gap,
+          "maxWidth" in config && config.maxWidth
+        )}
+        style={{ height: config.height }}
       >
-        {images.map((image, index) => {
+        {images.slice(0, config.numVisible).map((image, index) => {
           const isActive = activeImage === index;
+          const width =
+            "expandedWidth" in config
+              ? isActive
+                ? config.expandedWidth
+                : config.collapsedWidth
+              : isActive
+              ? `${config.expandedPercent}%`
+              : `${config.collapsedPercent}%`;
+          const initialWidth =
+            "expandedWidth" in config
+              ? config.collapsedWidth
+              : `${config.collapsedPercent}%`;
 
           return (
             <motion.div
               key={index}
-              className="relative h-full overflow-hidden rounded-xl flex-shrink-0 border border-white/40"
-              style={{ width: config.cardWidth }}
-              animate={{ 
-                scale: isActive ? 1 : 0.95,
-                opacity: isActive ? 1 : 0.7,
-              }}
-              transition={{ duration: 0.3 }}
-              onClick={() => !isDragging && setActiveImage(index)}
-              onHoverStart={() => !isDragging && setActiveImage(index)}
+              className="relative h-full overflow-hidden rounded-[20px] cursor-pointer"
+              initial={{ width: initialWidth }}
+              animate={{ width }}
+              transition={{ type: "spring", stiffness: 400, damping: 40 }}
+              onClick={() => handleClick(index, image.slug)}
+              onHoverStart={() => setActiveImage(index)}
             >
               <img
                 src={image.src}
                 alt={image.alt}
-                className="w-full h-full object-cover pointer-events-none"
-                draggable={false}
+                className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              
+              {/* Dark overlay for inactive images */}
+              <motion.div
+                className="absolute inset-0 bg-black/30"
+                initial={{ opacity: 1 }}
+                animate={{ opacity: isActive ? 0 : 1 }}
+                transition={{ duration: 0.3 }}
+              />
+              
+              {/* Gradient overlay for caption */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+              
+              {/* Caption - only visible when active */}
               <AnimatePresence>
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 p-4 z-20"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: isActive ? 1 : 0.6, y: 0 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <p className="text-white text-sm md:text-base font-medium drop-shadow-lg">{image.code}</p>
-                </motion.div>
+                {isActive && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute bottom-4 left-4 right-4"
+                  >
+                    <p className="text-white font-medium text-sm md:text-base">
+                      {image.code}
+                    </p>
+                  </motion.div>
+                )}
               </AnimatePresence>
             </motion.div>
           );
         })}
-      </motion.div>
-      
-      {/* Scroll indicator */}
-      <div className="flex justify-center mt-4 gap-2">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setActiveImage(index)}
-            className={cn(
-              "w-2 h-2 rounded-full transition-all duration-300",
-              activeImage === index ? "bg-primary w-6" : "bg-muted-foreground/30"
-            )}
-          />
-        ))}
       </div>
     </div>
   );
