@@ -45,6 +45,7 @@ import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
 // Additional gallery images for hover expand gallery
 import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
 import polygonHackathon from "@/assets/campaigns/polygon-hackathon.jpg";
+import polygonConnect from "@/assets/campaigns/polygon-connect.png";
 import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
 import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
 import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
@@ -62,6 +63,7 @@ const campaignAssetByFile: Record<string, string> = {
   "kucoin-oldschool.jpg": kucoinOldschool,
   "ondo-seminar.jpg": ondoSeminar,
   "polygon-hackathon.jpg": polygonHackathon,
+  "polygon-connect.png": polygonConnect,
   "sahara-ai.jpg": saharaAiBg,
   "seoul-metro-billboard.jpeg": seoulMetroBillboard,
   "seoul-metro-poster.jpeg": seoulMetroPoster,
