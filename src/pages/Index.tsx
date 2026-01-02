@@ -59,6 +59,8 @@ const processPhases = [
 const ProcessBillboardOverlay = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [introActiveIndex, setIntroActiveIndex] = useState<number | null>(null);
+  const [introPlayed, setIntroPlayed] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -79,6 +81,25 @@ const ProcessBillboardOverlay = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Intro animation: sequentially activate each card when visible
+  useEffect(() => {
+    if (isVisible && !introPlayed) {
+      setIntroPlayed(true);
+      
+      // Sequentially activate each card (0, 1, 2, 3)
+      [0, 1, 2, 3].forEach((index, i) => {
+        setTimeout(() => {
+          setIntroActiveIndex(index);
+        }, i * 300 + 300); // 300ms delay between each, 300ms initial delay
+      });
+      
+      // Reset after last card
+      setTimeout(() => {
+        setIntroActiveIndex(null);
+      }, 4 * 300 + 800);
+    }
+  }, [isVisible, introPlayed]);
+
   return (
       <div ref={sectionRef} className="px-3 sm:px-4 md:px-8 lg:px-10 pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6">
       <div className="relative w-full h-[380px] sm:h-[320px] md:h-[340px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
@@ -96,8 +117,8 @@ const ProcessBillboardOverlay = () => {
         <div className="absolute inset-0 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
           {processPhases.map((phase, index) => {
             const Icon = phase.icon;
-            const isHovered = hoveredIndex === index;
-            const hasHover = hoveredIndex !== null;
+            const isActive = hoveredIndex === index || introActiveIndex === index;
+            const hasActive = hoveredIndex !== null || introActiveIndex !== null;
             
             // 스텝 번호별 그라데이션 색상 (진행감 표현)
             const stepColors = [
@@ -117,7 +138,7 @@ const ProcessBillboardOverlay = () => {
                   ${index === 0 || index === 1 ? 'border-b border-white/10' : ''}
                   lg:border-r lg:border-b-0 lg:last:border-r-0
                   cursor-pointer
-                  ${isHovered ? 'bg-white/10 backdrop-blur-sm' : hasHover ? 'bg-black/20' : 'bg-transparent'}
+                  ${isActive ? 'bg-white/10 backdrop-blur-sm' : hasActive ? 'bg-black/20' : 'bg-transparent'}
                 `}
                 style={{
                   opacity: isVisible ? 1 : 0,
@@ -133,7 +154,7 @@ const ProcessBillboardOverlay = () => {
                   absolute top-2 left-2 sm:top-3 sm:left-3 md:top-4 md:left-4
                   text-[10px] md:text-xs font-mono tracking-widest
                   transition-all duration-300
-                  ${isHovered ? 'text-white' : stepColors[index]}
+                  ${isActive ? 'text-white' : stepColors[index]}
                 `}>
                   0{index + 1}
                 </span>
@@ -170,14 +191,14 @@ const ProcessBillboardOverlay = () => {
                   w-10 h-10 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full flex-shrink-0
                   flex items-center justify-center mb-1 md:mb-2 lg:mb-3
                   border transition-all duration-500
-                  ${isHovered 
+                  ${isActive 
                     ? 'bg-white/20 border-white/40 scale-110' 
                     : 'bg-white/5 border-white/20'
                   }
                 `}>
                   <Icon className={`
                     w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 transition-all duration-500
-                    ${isHovered ? 'text-white rotate-[360deg]' : 'text-white/60 rotate-0'}
+                    ${isActive ? 'text-white rotate-[360deg]' : 'text-white/60 rotate-0'}
                   `} />
                 </div>
                 
@@ -187,7 +208,7 @@ const ProcessBillboardOverlay = () => {
                   <h4 className={`
                     text-xs sm:text-sm md:text-sm lg:text-base font-medium
                     transition-all duration-300
-                    ${isHovered ? 'text-white' : 'text-white/80'}
+                    ${isActive ? 'text-white' : 'text-white/80'}
                   `}>
                     {phase.title}
                   </h4>
@@ -196,7 +217,7 @@ const ProcessBillboardOverlay = () => {
                   <div className={`
                     mt-1 md:mt-2 overflow-hidden
                     transition-all duration-500 ease-out
-                    ${isHovered 
+                    ${isActive 
                       ? 'max-h-[100px] opacity-100' 
                       : 'max-h-[40px] opacity-80'
                     }
@@ -204,7 +225,7 @@ const ProcessBillboardOverlay = () => {
                     <p className={`
                       text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs text-white/60 leading-relaxed
                       transition-all duration-500 line-clamp-2
-                      ${isHovered ? 'opacity-100' : 'opacity-70'}
+                      ${isActive ? 'opacity-100' : 'opacity-70'}
                     `}>
                       {phase.description}
                     </p>
@@ -212,7 +233,7 @@ const ProcessBillboardOverlay = () => {
                     {/* Sub Points - 호버 시에만 */}
                     <div className={`
                       mt-1 sm:mt-2 space-y-0.5 transition-all duration-500 delay-100
-                      ${isHovered ? 'opacity-100 max-h-[60px]' : 'opacity-0 max-h-0 overflow-hidden'}
+                      ${isActive ? 'opacity-100 max-h-[60px]' : 'opacity-0 max-h-0 overflow-hidden'}
                     `}>
                       {phase.subPoints.slice(0, 2).map((point, i) => (
                         <div key={i} className="flex items-center justify-center gap-1 text-[8px] sm:text-[9px] md:text-[10px] text-white/50">
@@ -229,7 +250,7 @@ const ProcessBillboardOverlay = () => {
                   absolute bottom-0 left-1/2 -translate-x-1/2
                   h-[2px] bg-gradient-to-r from-transparent via-white to-transparent
                   transition-all duration-500
-                  ${isHovered ? 'w-3/4 opacity-100' : 'w-0 opacity-0'}
+                  ${isActive ? 'w-3/4 opacity-100' : 'w-0 opacity-0'}
                 `} />
               </div>
             );
