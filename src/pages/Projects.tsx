@@ -55,6 +55,37 @@ import kucoinOldschool from "@/assets/campaigns/kucoin-oldschool.jpg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import polygonLogo from "@/assets/logos/polygon.svg";
 
+// Map gallery `src` (stored as file path strings) to bundled campaign assets.
+const campaignAssetByFile: Record<string, string> = {
+  "bnb-event.jpg": bnbBg,
+  "kucoin-campaign.jpg": kucoinCampaign,
+  "kucoin-oldschool.jpg": kucoinOldschool,
+  "ondo-seminar.jpg": ondoSeminar,
+  "polygon-hackathon.jpg": polygonHackathon,
+  "sahara-ai.jpg": saharaAiBg,
+  "seoul-metro-billboard.jpeg": seoulMetroBillboard,
+  "seoul-metro-poster.jpeg": seoulMetroPoster,
+  "story-origin-summit.jpg": storyBg,
+  "story-workshop.jpg": storyWorkshop,
+  "openledger-interview.jpg": openledgerInterview,
+  "lbank-festival.jpg": lbankFestival,
+  "peaq-summit.jpg": peaqBg,
+  "bybit-event.jpg": bybitBg,
+  "mantra-party.jpg": mantraBg,
+  "megaeth-launch.jpg": megaethBg,
+  "tria-launch.jpg": triaBg,
+  "zkpass-verifiable-nights.jpg": zkpassBg,
+  "synfutures-billboard.jpg": synfuturesBg,
+  "fogo-fest.avif": fogoBg,
+};
+
+const resolveGallerySrcToAsset = (src?: string | null) => {
+  if (!src) return null;
+  const file = src.split("/").pop();
+  if (!file) return null;
+  return campaignAssetByFile[file] ?? null;
+};
+
 // Hardcoded fallback data
 const fallbackCases = [
   { name: "BNB Chain", logo: bnbLogo, bgImage: bnbBg, slug: "bnb-chain", result: "+340% Korean Trading Volume", category: "Infrastructure", description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage." },
@@ -237,30 +268,58 @@ const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [isStatsVisible, setIsStatsVisible] = useState(false);
 
-  // Fetch projects from Supabase, fallback to hardcoded data
+  // Fetch projects from database + first gallery image (display_order asc)
   const { data: dbProjects } = useQuery({
-    queryKey: ['projects'],
+    queryKey: ["projects"],
     queryFn: async () => {
-      const { data, error } = await supabase
-        .from('projects')
-        .select('*')
-        .eq('is_published', true)
-        .order('display_order', { ascending: true });
+      const { data: projects, error } = await supabase
+        .from("projects")
+        .select("*")
+        .eq("is_published", true)
+        .order("display_order", { ascending: true });
+
       if (error) throw error;
-      return data as Project[];
+      if (!projects || projects.length === 0) return [];
+
+      const projectIds = projects.map((p) => p.id);
+
+      const { data: galleryRows, error: galleryError } = await supabase
+        .from("project_gallery")
+        .select("project_id, src, display_order")
+        .in("project_id", projectIds)
+        .order("display_order", { ascending: true });
+
+      if (galleryError) throw galleryError;
+
+      const firstGalleryByProject = new Map<string, string>();
+      for (const row of galleryRows ?? []) {
+        if (!firstGalleryByProject.has(row.project_id)) {
+          firstGalleryByProject.set(row.project_id, row.src);
+        }
+      }
+
+      return projects.map((p) => ({
+        ...p,
+        first_gallery_src: firstGalleryByProject.get(p.id) ?? null,
+      }));
     },
   });
 
   // Use DB projects if available, otherwise fallback
   const cases = dbProjects && dbProjects.length > 0
-    ? dbProjects.map(p => ({
-        name: p.name,
-        slug: p.slug,
-        description: p.description || '',
-        result: p.result || '',
-        category: p.category || '',
-        bgImage: p.background_url || fallbackCases.find(f => f.slug === p.slug)?.bgImage || '',
-      }))
+    ? dbProjects.map((p: Project & { first_gallery_src?: string | null }) => {
+        const galleryAsset = resolveGallerySrcToAsset(p.first_gallery_src ?? null);
+        const fallback = fallbackCases.find((f) => f.slug === p.slug);
+
+        return {
+          name: p.name,
+          slug: p.slug,
+          description: p.description || "",
+          result: p.result || "",
+          category: p.category || "",
+          bgImage: galleryAsset || p.background_url || fallback?.bgImage || "",
+        };
+      })
     : fallbackCases;
 
   // Get unique categories
