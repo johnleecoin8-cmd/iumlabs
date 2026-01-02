@@ -1,7 +1,9 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Images } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
+import { motion } from "framer-motion";
+import { useRef } from "react";
 
 // Import actual campaign images from assets
 import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
@@ -59,6 +61,18 @@ const fallbackImages = [
 ];
 
 const FilmstripGallerySection = () => {
+  const galleryRef = useRef<HTMLDivElement>(null);
+
+  const scrollGallery = (direction: 'left' | 'right') => {
+    if (galleryRef.current) {
+      const scrollAmount = 400;
+      galleryRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   // Fetch first gallery image from each project
   const { data: galleryImages } = useQuery({
     queryKey: ['filmstrip-gallery'],
@@ -109,67 +123,156 @@ const FilmstripGallerySection = () => {
   });
 
   const images = galleryImages || fallbackImages;
+  const glowColor = "#00D4FF";
 
   return (
-    <section className="bg-surface-base">
-      <div className="flex flex-col md:flex-row">
-        {/* Left: Gallery Grid */}
-        <div className="w-full md:w-2/3 md:border-r border-white/10">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3">
-            {images.slice(0, 6).map((image, index) => (
-              <div
-                key={index}
-                className={`group relative aspect-[6/5] overflow-hidden border-r border-b border-white/10 cursor-pointer hover:scale-[1.02] hover:z-10 transition-transform duration-300 ${
-                  index % 2 === 1 ? "border-r-0 sm:border-r" : ""
-                } ${index % 3 === 2 ? "sm:border-r-0" : ""}`}
+    <section className="relative py-20 md:py-32 bg-surface-base overflow-hidden">
+      {/* Background Effects */}
+      <div 
+        className="absolute bottom-0 left-0 w-[40%] h-[60%] opacity-5 pointer-events-none"
+        style={{ background: `radial-gradient(ellipse at 0% 100%, ${glowColor} 0%, transparent 60%)` }}
+      />
+      
+      <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
+        {/* Section Header */}
+        <motion.div 
+          className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div>
+            <div className="flex items-center gap-4 mb-4">
+              <span 
+                className="text-sm font-mono tracking-wider"
+                style={{ color: glowColor }}
               >
+                GALLERY
+              </span>
+              <div 
+                className="h-px w-12"
+                style={{ background: `linear-gradient(to right, ${glowColor}, transparent)` }}
+              />
+              <span className="text-xs text-white/40 uppercase tracking-widest">Visual Journey</span>
+            </div>
+            
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+              Campaign <span style={{ color: glowColor }}>Highlights</span>
+            </h2>
+            <p className="text-white/50 mt-3 max-w-md text-sm md:text-base">
+              Explore our successful campaigns and events across Korea's Web3 ecosystem.
+            </p>
+          </div>
+          
+          {/* Navigation Arrows */}
+          <div className="flex items-center gap-4">
+            <div className="flex gap-3">
+              <motion.button
+                onClick={() => scrollGallery('left')}
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group hover:border-white/40"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
+              </motion.button>
+              <motion.button
+                onClick={() => scrollGallery('right')}
+                className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group hover:border-white/40"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <ChevronRight className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
+              </motion.button>
+            </div>
+            
+            <Link
+              to="/projects"
+              className="hidden md:inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors text-sm px-4 py-2 rounded-full border border-white/20 hover:border-white/40"
+            >
+              View all
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+        </motion.div>
+
+        {/* Gallery Slider */}
+        <div 
+          ref={galleryRef}
+          className="overflow-x-auto scrollbar-hide scroll-smooth -mx-6 px-6"
+        >
+          <div className="flex gap-4 md:gap-6" style={{ width: 'max-content' }}>
+            {images.map((image, index) => (
+              <motion.div 
+                key={index} 
+                className="relative w-72 md:w-80 lg:w-[420px] aspect-[4/3] overflow-hidden rounded-2xl group cursor-pointer flex-shrink-0"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
+              >
+                {/* Image */}
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute inset-0 flex flex-col items-center justify-end pb-3 sm:pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-white font-semibold text-sm sm:text-lg">{image.title}</p>
-                  <p className="text-white/70 text-[10px] sm:text-sm">{image.subtitle}</p>
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                
+                {/* Border Glow on Hover */}
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl"
+                  style={{ 
+                    boxShadow: `inset 0 0 0 2px ${glowColor}60, 0 0 40px ${glowColor}30`
+                  }}
+                />
+                
+                {/* Content */}
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <h3 className="text-white font-semibold text-base md:text-lg mb-1">{image.title}</h3>
+                  <p className="text-white/60 text-xs md:text-sm line-clamp-2">{image.subtitle}</p>
                 </div>
-              </div>
+
+                {/* Index Badge */}
+                <div 
+                  className="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity"
+                  style={{ 
+                    backgroundColor: `${glowColor}20`,
+                    color: glowColor,
+                    border: `1px solid ${glowColor}40`
+                  }}
+                >
+                  {String(index + 1).padStart(2, '0')}
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
 
-        {/* Right: Info Panel */}
-        <div className="w-full md:w-1/3 p-4 sm:p-6 md:p-6 lg:p-8 flex flex-col justify-center">
-          <h2 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3">
-            Campaign Gallery
-          </h2>
-          <p className="text-white/50 leading-relaxed mb-4 sm:mb-5 text-xs sm:text-sm md:text-sm">
-            Explore our successful campaigns and events across Korea's Web3 ecosystem.
-          </p>
-
-          <div className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6">
-            <div className="flex items-center justify-between py-2 border-b border-white/10">
-              <span className="text-white/50 text-xs sm:text-sm">Events Hosted</span>
-              <span className="text-white font-semibold text-sm sm:text-base">48+</span>
-            </div>
-            <div className="flex items-center justify-between py-2 border-b border-white/10">
-              <span className="text-white/50 text-xs sm:text-sm">Media Placements</span>
-              <span className="text-white font-semibold text-sm sm:text-base">200+</span>
-            </div>
-            <div className="flex items-center justify-between py-2">
-              <span className="text-white/50 text-xs sm:text-sm">Campaigns Launched</span>
-              <span className="text-white font-semibold text-sm sm:text-base">60+</span>
-            </div>
+        {/* Gallery Count & Mobile Link */}
+        <motion.div 
+          className="flex items-center justify-between mt-8 md:mt-10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-3">
+            <Images className="w-4 h-4" style={{ color: glowColor }} />
+            <span className="text-white/40 text-sm">
+              {images.length} campaigns
+            </span>
           </div>
-
+          
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors text-sm min-h-[44px] sm:min-h-0"
+            className="md:hidden inline-flex items-center gap-2 text-white font-medium hover:text-white/70 transition-colors text-sm"
           >
             View all projects
             <ArrowRight className="w-4 h-4" />
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
