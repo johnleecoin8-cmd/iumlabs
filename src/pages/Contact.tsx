@@ -156,9 +156,9 @@ const Contact = () => {
 
           {/* Main Content - Centered */}
           <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 w-full">
-            <div className="max-w-7xl mx-auto text-center">
+            <div className="max-w-5xl mx-auto text-center">
               {/* Main Headline */}
-              <h1 className="font-sans text-[10vw] sm:text-[8vw] md:text-[6vw] lg:text-[5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8">
+              <h1 className="font-sans text-display-hero font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6">
                 <span className="text-white">Let's Build</span>
                 <br />
                 <span className="text-white/90">Something </span>
@@ -166,13 +166,13 @@ const Contact = () => {
               </h1>
 
               {/* Subtext */}
-              <p className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed">
+              <p className="text-body-lg text-white/60 max-w-2xl mx-auto mb-6 font-light tracking-wide leading-relaxed">
                 Tell us about your project and we'll explain how we can help you <span className="text-white font-medium">succeed in Korea</span>.
               </p>
 
               {/* CTA Button */}
               <div>
-                <CalendlyButton className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5">
+                <CalendlyButton className="group relative inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 min-h-[44px]">
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                   <Calendar className="w-4 h-4" />
                   <span>Book a Meeting</span>
@@ -210,65 +210,65 @@ const Contact = () => {
       </main>
 
       {/* Why Work With Us - Identity Section */}
-      <section className="bg-[#0A0A0A] py-20 md:py-28 border-t border-white/5">
+      <section className="bg-[#0A0A0A] py-16 md:py-20 border-t border-white/5">
         <div className="container mx-auto max-w-6xl px-4 sm:px-6">
           {/* Core Message */}
-          <div className="text-center mb-16 md:mb-20">
-            <h2 className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-[-0.02em] leading-[1.1]">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="font-sans text-display-xl font-bold text-white mb-4 tracking-[-0.02em] leading-[1.1]">
               We don't just market.
               <br />
               <span className="text-white/40">We </span>
               <span className="relative inline-block">
                 <span className="text-white">connect</span>
-                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-white/60 to-transparent" />
+                <span className="absolute -bottom-1 left-0 w-full h-[1.5px] bg-gradient-to-r from-white/60 to-transparent" />
               </span>
               <span className="text-white/40">.</span>
             </h2>
-            <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto font-light">
+            <p className="text-body-lg text-white/50 max-w-xl mx-auto font-light">
               <span className="text-white/70 font-medium">이음</span> — Bridging global Web3 vision to Korean reality
             </p>
           </div>
 
           {/* Three Value Cards */}
-          <div className="grid md:grid-cols-3 gap-4 md:gap-6 mb-16">
+          <div className="grid md:grid-cols-3 gap-3 md:gap-4 mb-12">
             {/* Card 1 - Bridge */}
-            <div className="group relative p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="group relative p-5 md:p-6 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500 min-h-[44px]">
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative">
-                <div className="w-12 h-12 rounded-xl bg-white/[0.05] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Globe className="w-6 h-6 text-white/60 group-hover:text-white transition-colors" />
+                <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Globe className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3">Bridge</h3>
+                <h3 className="text-base font-semibold text-white mb-2">Bridge</h3>
                 <p className="text-white/50 leading-relaxed text-sm">
-                  We connect global Web3 projects with the Korean market through deep local expertise and authentic relationships.
+                  We connect global Web3 projects with the Korean market through deep local expertise.
                 </p>
               </div>
             </div>
 
             {/* Card 2 - Data */}
-            <div className="group relative p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="group relative p-5 md:p-6 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500 min-h-[44px]">
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative">
-                <div className="w-12 h-12 rounded-xl bg-white/[0.05] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <BarChart3 className="w-6 h-6 text-white/60 group-hover:text-white transition-colors" />
+                <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <BarChart3 className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3">Data-Driven</h3>
+                <h3 className="text-base font-semibold text-white mb-2">Data-Driven</h3>
                 <p className="text-white/50 leading-relaxed text-sm">
-                  Every strategy is backed by proprietary research and real-time market intelligence. No guesswork, only insights.
+                  Every strategy is backed by proprietary research and real-time market intelligence.
                 </p>
               </div>
             </div>
 
             {/* Card 3 - Growth */}
-            <div className="group relative p-6 md:p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500">
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="group relative p-5 md:p-6 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500 min-h-[44px]">
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="relative">
-                <div className="w-12 h-12 rounded-xl bg-white/[0.05] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                  <Rocket className="w-6 h-6 text-white/60 group-hover:text-white transition-colors" />
+                <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Rocket className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
                 </div>
-                <h3 className="text-xl font-semibold text-white mb-3">Growth</h3>
+                <h3 className="text-base font-semibold text-white mb-2">Growth</h3>
                 <p className="text-white/50 leading-relaxed text-sm">
-                  From market entry to becoming a leader in Korea. We've helped 50+ projects achieve sustainable growth.
+                  From market entry to becoming a leader in Korea. 50+ projects helped.
                 </p>
               </div>
             </div>

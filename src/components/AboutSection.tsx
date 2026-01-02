@@ -65,16 +65,16 @@ const AboutSection = () => {
           {/* Left - Content with Parallax */}
           <motion.div style={{ y: contentY }}>
             <motion.span 
-              className="text-sm font-medium text-blue-600 tracking-wider mb-4 block"
+              className="text-label font-medium text-blue-600 tracking-wider mb-3 block uppercase"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              ABOUT US
+              About Us
             </motion.span>
             <motion.h2 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight mb-6 text-foreground"
+              className="text-display-lg font-bold tracking-tight mb-4 text-foreground"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -84,7 +84,7 @@ const AboutSection = () => {
               <span className="text-gradient">Web3 Marketing</span> Agency
             </motion.h2>
             <motion.p 
-              className="text-muted-foreground text-lg leading-relaxed mb-8"
+              className="text-muted-foreground text-body leading-relaxed mb-6"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -97,7 +97,7 @@ const AboutSection = () => {
 
             {/* Stats with Parallax */}
             <motion.div 
-              className="flex flex-wrap gap-8 mb-10"
+              className="flex flex-wrap gap-6 mb-8"
               style={{ y: statsY }}
             >
               {stats.map((stat, index) => (
@@ -110,8 +110,8 @@ const AboutSection = () => {
                   whileHover={{ scale: 1.05, y: -4 }}
                   className="cursor-default"
                 >
-                  <div className={`text-3xl font-bold ${stat.color} stat-glow`}>{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div className={`text-2xl font-bold ${stat.color} stat-glow`}>{stat.value}</div>
+                  <div className="text-caption text-muted-foreground">{stat.label}</div>
                 </motion.div>
               ))}
             </motion.div>
