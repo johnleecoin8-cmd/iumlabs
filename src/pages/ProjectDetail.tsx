@@ -95,37 +95,46 @@ const ProjectDetail = () => {
   } as React.CSSProperties;
 
   return (
-    <div className="min-h-screen bg-white p-0.5 sm:p-1 md:p-2">
-      <div className="min-h-screen bg-[#0A0A0A] rounded-xl sm:rounded-2xl overflow-hidden relative" style={projectColorStyles}>
+    <div className="min-h-screen bg-[#050505]">
+      <div className="min-h-screen bg-[#0A0A0A] overflow-hidden relative" style={projectColorStyles}>
         {/* Persistent Project Color Ambient Glow */}
         <div 
-          className="fixed top-0 left-0 w-[50vw] h-[50vh] pointer-events-none z-0 opacity-20"
+          className="fixed top-0 left-0 w-[50vw] h-[50vh] pointer-events-none z-0 opacity-15"
           style={{ background: `radial-gradient(ellipse at 0% 0%, ${project.glowColor} 0%, transparent 60%)` }}
         />
         <div 
-          className="fixed bottom-0 right-0 w-[40vw] h-[40vh] pointer-events-none z-0 opacity-15"
+          className="fixed bottom-0 right-0 w-[40vw] h-[40vh] pointer-events-none z-0 opacity-10"
           style={{ background: `radial-gradient(ellipse at 100% 100%, ${project.glowColor} 0%, transparent 60%)` }}
         />
         
         <Navbar />
-      
         
         {/* Hero Section */}
         <ProjectHero project={project} />
 
-        {/* Key Result Marquee */}
-      <div className="py-4 overflow-hidden relative" style={{ backgroundColor: project.glowColor }}>
-        <div className="flex animate-marquee whitespace-nowrap relative">
-          {[...Array(3)].map((_, repeatIndex) => (
-            project.metrics.map((metric, i) => (
-              <span key={`${repeatIndex}-${i}`} className="mx-8 text-black text-sm font-bold uppercase tracking-widest flex items-center gap-4">
-                <span className="w-2 h-2 rounded-full bg-black/30" />
-                {metric.value} {metric.label}
-              </span>
-            ))
-          ))}
+        {/* Key Result Marquee - Enhanced */}
+        <div 
+          className="py-4 overflow-hidden relative"
+          style={{ backgroundColor: project.glowColor }}
+        >
+          {/* Gradient overlays for seamless loop */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 z-10" style={{ background: `linear-gradient(to right, ${project.glowColor}, transparent)` }} />
+          <div className="absolute right-0 top-0 bottom-0 w-20 z-10" style={{ background: `linear-gradient(to left, ${project.glowColor}, transparent)` }} />
+          
+          <div className="flex animate-marquee whitespace-nowrap">
+            {[...Array(4)].map((_, repeatIndex) => (
+              project.metrics.map((metric, i) => (
+                <span 
+                  key={`${repeatIndex}-${i}`} 
+                  className="mx-10 text-black/90 text-sm font-bold uppercase tracking-[0.15em] flex items-center gap-4"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-black/40" />
+                  {metric.value} {metric.label}
+                </span>
+              ))
+            ))}
+          </div>
         </div>
-      </div>
 
         {/* 01 - Metrics Section */}
         <ProjectMetrics metrics={project.metrics} glowColor={project.glowColor} />

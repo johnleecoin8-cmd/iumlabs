@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { TrendingUp, Target, Users, Clock } from "lucide-react";
 import { ProjectMetric } from "@/data/projectsData";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useCountUp } from "@/hooks/useCountUp";
@@ -7,6 +8,8 @@ interface ProjectMetricsProps {
   metrics: ProjectMetric[];
   glowColor: string;
 }
+
+const metricIcons = [TrendingUp, Target, Users, Clock];
 
 const MetricCard = ({ 
   metric, 
@@ -19,11 +22,11 @@ const MetricCard = ({
   glowColor: string;
   isVisible: boolean;
 }) => {
-  // Extract numeric value for count up animation
   const numericMatch = metric.value.match(/[\d.]+/);
   const numericValue = numericMatch ? parseFloat(numericMatch[0]) : 0;
   const prefix = metric.value.match(/^[^\d]*/)?.[0] || '';
   const suffix = metric.value.match(/[^\d]*$/)?.[0] || '';
+  const Icon = metricIcons[index % metricIcons.length];
 
   const displayValue = useCountUp({
     end: numericValue,
@@ -36,67 +39,73 @@ const MetricCard = ({
 
   return (
     <motion.div
-      className="group relative p-6 md:p-8 rounded-3xl bg-card/30 backdrop-blur-sm border border-border/30 overflow-hidden transition-all duration-500"
-      initial={{ opacity: 0, y: 30 }}
+      className="group relative"
+      initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -6 }}
-      style={{
-        ['--glow-color' as string]: glowColor,
-      }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
     >
-      {/* Hover border effect */}
+      {/* Card Container */}
       <div 
-        className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-        style={{ 
-          boxShadow: `inset 0 0 0 1px ${glowColor}50`,
-        }}
-      />
-      
-      {/* Top accent line */}
-      <div 
-        className="absolute top-0 left-0 right-0 h-px opacity-50 group-hover:opacity-100 transition-opacity"
-        style={{
-          background: `linear-gradient(to right, transparent, ${glowColor}, transparent)`
-        }}
-      />
-      
-      {/* Corner glow */}
-      <div 
-        className="absolute top-0 right-0 w-32 h-32 opacity-10 group-hover:opacity-30 transition-opacity"
-        style={{
-          background: `radial-gradient(circle at top right, ${glowColor} 0%, transparent 70%)`
-        }}
-      />
-      
-      {/* Hover background glow */}
-      <div 
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
-        style={{
-          background: `radial-gradient(ellipse at center, ${glowColor}10 0%, transparent 70%)`
-        }}
-      />
-
-      <div className="relative">
+        className="relative p-8 rounded-3xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] backdrop-blur-sm border border-white/[0.06] overflow-hidden h-full transition-all duration-500 group-hover:border-white/10"
+      >
+        {/* Hover Glow Effect */}
+        <div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl"
+          style={{ 
+            background: `radial-gradient(ellipse at 50% 50%, ${glowColor}15 0%, transparent 70%)`,
+          }}
+        />
+        
+        {/* Top Line Accent */}
+        <div 
+          className="absolute top-0 left-6 right-6 h-px opacity-60 group-hover:opacity-100 transition-opacity"
+          style={{ background: `linear-gradient(to right, transparent, ${glowColor}80, transparent)` }}
+        />
+        
+        {/* Icon */}
+        <div 
+          className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
+          style={{ 
+            backgroundColor: `${glowColor}15`,
+            border: `1px solid ${glowColor}25`
+          }}
+        >
+          <Icon className="w-5 h-5" style={{ color: glowColor }} />
+        </div>
+        
+        {/* Value */}
         <p 
-          className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 tracking-tight transition-colors"
-          style={{ color: glowColor }}
+          className="text-4xl md:text-5xl font-bold mb-3 tracking-tight transition-all duration-300"
+          style={{ 
+            color: glowColor,
+            textShadow: `0 0 40px ${glowColor}30`
+          }}
         >
           {displayValue}
         </p>
-        <p className="text-label text-muted-foreground font-medium uppercase tracking-wider">
+        
+        {/* Label */}
+        <p className="text-sm text-white/50 font-medium uppercase tracking-widest">
           {metric.label}
         </p>
+        
+        {/* Index Number */}
+        <span 
+          className="absolute top-6 right-6 text-xs font-mono opacity-30 group-hover:opacity-60 transition-opacity"
+          style={{ color: glowColor }}
+        >
+          0{index + 1}
+        </span>
+        
+        {/* Corner Decoration */}
+        <div 
+          className="absolute bottom-0 right-0 w-24 h-24 opacity-10 group-hover:opacity-20 transition-opacity"
+          style={{
+            background: `radial-gradient(circle at bottom right, ${glowColor} 0%, transparent 70%)`
+          }}
+        />
       </div>
-      
-      {/* Index number */}
-      <span 
-        className="absolute bottom-4 right-4 text-xs font-mono opacity-30 group-hover:opacity-60 transition-opacity"
-        style={{ color: glowColor }}
-      >
-        0{index + 1}
-      </span>
     </motion.div>
   );
 };
@@ -105,77 +114,59 @@ const ProjectMetrics = ({ metrics, glowColor }: ProjectMetricsProps) => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <section ref={ref} className="relative overflow-hidden py-24">
-      {/* Background effects */}
+    <section ref={ref} className="relative py-32 overflow-hidden bg-[#0A0A0A]">
+      {/* Background Elements */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-card/10 to-background" />
-        {/* Dot pattern */}
+        {/* Subtle radial gradient */}
         <div 
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-5"
           style={{
-            backgroundImage: `radial-gradient(circle, hsl(var(--muted-foreground) / 0.3) 1px, transparent 1px)`,
-            backgroundSize: '24px 24px'
+            background: `radial-gradient(ellipse at 50% 0%, ${glowColor} 0%, transparent 50%)`
           }}
         />
-        {/* Subtle color glow */}
+        
+        {/* Grid pattern */}
         <div 
-          className="absolute inset-0 opacity-5 pointer-events-none"
+          className="absolute inset-0 opacity-[0.02]"
           style={{
-            background: `radial-gradient(ellipse at center, ${glowColor} 0%, transparent 60%)`
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px'
           }}
         />
       </div>
 
-      {/* Top border gradient */}
-      <div 
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{
-          background: `linear-gradient(to right, transparent, ${glowColor}40, transparent)`
-        }}
-      />
-      
-      {/* Bottom border gradient */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 h-px"
-        style={{
-          background: `linear-gradient(to right, transparent, ${glowColor}40, transparent)`
-        }}
-      />
-
-      <div className="container mx-auto px-4 md:px-8 relative z-10">
+      <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
         {/* Section Header */}
-        <div className={`mb-12 scroll-animate ${isVisible ? 'is-visible' : ''}`}>
-          <div className="flex items-center gap-4 mb-6">
+        <motion.div 
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-4 mb-4">
             <span 
-              className="font-mono text-sm tracking-wider"
+              className="text-sm font-mono tracking-wider"
               style={{ color: glowColor }}
             >
-              01.
+              01
             </span>
             <div 
-              className="h-px flex-1 max-w-[100px]"
-              style={{ background: `linear-gradient(to right, ${glowColor}60, transparent)` }}
+              className="h-px w-12"
+              style={{ background: `linear-gradient(to right, ${glowColor}, transparent)` }}
             />
+            <span className="text-xs text-white/40 uppercase tracking-widest">Project Overview</span>
           </div>
-          <div className="flex items-baseline justify-between">
-            <h2 className="text-display-md tracking-tight">
-              <span className="font-serif italic text-muted-foreground">Project</span>{" "}
-              <span className="font-sans font-bold text-foreground">Overview</span>
-            </h2>
-            <span 
-              className="text-label tracking-wider hidden sm:block px-3 py-1 rounded-full border"
-              style={{ 
-                borderColor: `${glowColor}30`,
-                color: `${glowColor}90`
-              }}
-            >
-              Key Metrics
-            </span>
-          </div>
-        </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
+            Key <span style={{ color: glowColor }}>Results</span>
+          </h2>
+        </motion.div>
 
         {/* Metrics Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {metrics.map((metric, index) => (
             <MetricCard 
               key={index} 
