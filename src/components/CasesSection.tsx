@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
 import Logo3D from "@/components/Logo3D";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
+import { supabase } from "@/integrations/supabase/client";
 
-// Import logos
+// Import logos as fallback
 import bnbLogo from "@/assets/logos/bnb.svg";
 import kucoinLogo from "@/assets/logos/kucoin.svg";
 import peaqLogo from "@/assets/logos/peaq.svg";
@@ -18,7 +20,7 @@ import ondoLogo from "@/assets/logos/ondo.svg";
 import megaethLogo from "@/assets/logos/megaeth.png";
 import zkpassLogo from "@/assets/logos/zkpass.png";
 
-// Import campaign images
+// Import campaign images as fallback
 import bnbCampaign from "@/assets/campaigns/bnb-event.jpg";
 import storyCampaign from "@/assets/campaigns/story-origin-summit.jpg";
 import saharaCampaign from "@/assets/campaigns/sahara-ai.jpg";
@@ -32,116 +34,21 @@ import ondoCampaign from "@/assets/campaigns/ondo-seminar.jpg";
 import megaethCampaign from "@/assets/campaigns/megaeth-launch.jpg";
 import zkpassCampaign from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 
-const featuredCases = [
-  {
-    name: "BNB Chain",
-    logo: bnbLogo,
-    bgImage: bnbCampaign,
-    slug: "bnb-chain",
-    category: "Infrastructure",
-    result: "+340% Korean Trading Volume",
-    description: "Full Korean market entry including KOL campaigns, community setup, and comprehensive PR coverage.",
-  },
-  {
-    name: "Story Protocol",
-    logo: storyLogo,
-    bgImage: storyCampaign,
-    slug: "story-protocol",
-    category: "IP",
-    result: "Korean IP Revolution",
-    description: "IP infrastructure platform launch with Korean creator community and media partnerships.",
-  },
-  {
-    name: "Bybit",
-    logo: bybitLogo,
-    bgImage: bybitCampaign,
-    slug: "bybit",
-    category: "Exchange",
-    result: "+200% Korean Users",
-    description: "Comprehensive VIP trader acquisition and community building for Korean market expansion.",
-  },
-  {
-    name: "KuCoin",
-    logo: kucoinLogo,
-    bgImage: kucoinCampaign,
-    slug: "kucoin",
-    category: "Exchange",
-    result: "Top 3 Exchange in Korea",
-    description: "Strategic Korean market penetration with trading campaigns and community events.",
-  },
-  {
-    name: "Polygon",
-    logo: polygonLogo,
-    bgImage: polygonCampaign,
-    slug: "polygon",
-    category: "Infrastructure",
-    result: "Korean Dev Ecosystem",
-    description: "Developer community building and hackathon series for Korean blockchain developers.",
-  },
-  {
-    name: "Ondo Finance",
-    logo: ondoLogo,
-    bgImage: ondoCampaign,
-    slug: "ondo",
-    category: "RWA",
-    result: "Korean RWA Education",
-    description: "RWA investment education and institutional investor outreach in Korean market.",
-  },
-  {
-    name: "Sahara AI",
-    logo: saharaAiLogo,
-    bgImage: saharaCampaign,
-    slug: "sahara-ai",
-    category: "AI",
-    result: "Korean AI x Web3 Launch",
-    description: "AI blockchain platform launch with Korean developer community and enterprise partnerships.",
-  },
-  {
-    name: "MegaETH",
-    logo: megaethLogo,
-    bgImage: megaethCampaign,
-    slug: "megaeth",
-    category: "Infrastructure",
-    result: "Pre-launch Hype Campaign",
-    description: "Strategic pre-launch marketing and community building for Layer 2 solution.",
-  },
-  {
-    name: "Mantra",
-    logo: mantraLogo,
-    bgImage: mantraCampaign,
-    slug: "mantra",
-    category: "RWA",
-    result: "Korean RWA Expansion",
-    description: "Real World Assets platform expansion targeting Korean institutional investors.",
-  },
-  {
-    name: "zkPass",
-    logo: zkpassLogo,
-    bgImage: zkpassCampaign,
-    slug: "zkpass",
-    category: "Privacy",
-    result: "Privacy Tech Awareness",
-    description: "Zero-knowledge privacy solution awareness campaign in Korean market.",
-  },
-  {
-    name: "Peaq",
-    logo: peaqLogo,
-    bgImage: peaqCampaign,
-    slug: "peaq",
-    category: "DePIN",
-    result: "#1 DePIN in Korea",
-    description: "Established thought leadership in DePIN space with IoT partnerships and developer community.",
-  },
-  {
-    name: "Tria",
-    logo: triaLogo,
-    bgImage: triaCampaign,
-    slug: "tria",
-    category: "Wallet",
-    result: "30K+ Korean Wallets",
-    description: "User acquisition campaign with simplified onboarding for Korean Web3 wallet users.",
-  },
-];
+// Fallback data for projects without DB entries
+const fallbackImages: Record<string, { logo: string; bgImage: string }> = {
+  'bnb-chain': { logo: bnbLogo, bgImage: bnbCampaign },
+  'story-protocol': { logo: storyLogo, bgImage: storyCampaign },
+  'bybit': { logo: bybitLogo, bgImage: bybitCampaign },
+  'kucoin': { logo: kucoinLogo, bgImage: kucoinCampaign },
+  'polygon': { logo: polygonLogo, bgImage: polygonCampaign },
+  'ondo-finance': { logo: ondoLogo, bgImage: ondoCampaign },
+  'sahara-ai': { logo: saharaAiLogo, bgImage: saharaCampaign },
+  'megaeth': { logo: megaethLogo, bgImage: megaethCampaign },
+  'mantra': { logo: mantraLogo, bgImage: mantraCampaign },
+  'zkpass': { logo: zkpassLogo, bgImage: zkpassCampaign },
+  'peaq': { logo: peaqLogo, bgImage: peaqCampaign },
+  'tria': { logo: triaLogo, bgImage: triaCampaign },
+};
 
 interface CaseCardProps {
   name: string;
@@ -155,7 +62,7 @@ interface CaseCardProps {
 }
 
 const CaseCard = ({ name, logo, bgImage, slug, category, result, description, index }: CaseCardProps) => {
-  const isLastRow = index >= 10; // Last 2 cards (index 10, 11)
+  const isLastRow = index >= 10;
   const isRightColumn = index % 2 === 1;
 
   const { ref, isVisible } = useScrollAnimation({ 
@@ -217,13 +124,66 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
 };
 
 const CasesSection = () => {
+  // Fetch projects from database
+  const { data: projects } = useQuery({
+    queryKey: ['cases-projects'],
+    queryFn: async () => {
+      const { data: projectsData } = await supabase
+        .from('projects')
+        .select(`
+          id,
+          name,
+          slug,
+          category,
+          result,
+          description,
+          logo_url,
+          background_url
+        `)
+        .eq('is_published', true)
+        .order('display_order')
+        .limit(12);
+      
+      // Fetch first gallery image for each project
+      if (projectsData) {
+        const projectsWithGallery = await Promise.all(
+          projectsData.map(async (project) => {
+            const { data: gallery } = await supabase
+              .from('project_gallery')
+              .select('src')
+              .eq('project_id', project.id)
+              .order('display_order')
+              .limit(1);
+            
+            const fallback = fallbackImages[project.slug] || { logo: '', bgImage: '' };
+            const galleryImage = gallery && gallery.length > 0 ? gallery[0].src : null;
+            
+            return {
+              name: project.name,
+              slug: project.slug,
+              category: project.category || '',
+              result: project.result || '',
+              description: project.description || '',
+              logo: project.logo_url || fallback.logo,
+              bgImage: galleryImage || project.background_url || fallback.bgImage,
+            };
+          })
+        );
+        return projectsWithGallery;
+      }
+      return [];
+    },
+  });
+
+  const cases = projects || [];
+
   return (
     <section className="bg-background">
       <div className="flex flex-col lg:flex-row">
         {/* Left: Cases Grid */}
         <div className="w-full lg:w-2/3 lg:border-r border-border">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2">
-            {featuredCases.map((caseItem, index) => (
+            {cases.map((caseItem, index) => (
               <CaseCard key={caseItem.slug} {...caseItem} index={index} />
             ))}
           </div>
@@ -248,7 +208,7 @@ const CasesSection = () => {
               <span className="text-muted-foreground text-xs sm:text-sm md:text-sm">New users acquired</span>
             </div>
             <div className="flex items-center gap-3 sm:gap-4">
-              <span className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground">18+</span>
+              <span className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground">{cases.length}+</span>
               <span className="text-muted-foreground text-xs sm:text-sm md:text-sm">Projects launched</span>
             </div>
           </div>
