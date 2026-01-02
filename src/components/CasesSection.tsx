@@ -156,8 +156,9 @@ const CasesSection = () => {
               .limit(1);
             
             const fallback = fallbackImages[project.slug] || { logo: '', bgImage: '' };
-            const galleryImage = gallery && gallery.length > 0 ? gallery[0].src : null;
             
+            // Use fallback bgImage since gallery images are stored as source paths
+            // which don't work in production builds
             return {
               name: project.name,
               slug: project.slug,
@@ -165,7 +166,7 @@ const CasesSection = () => {
               result: project.result || '',
               description: project.description || '',
               logo: project.logo_url || fallback.logo,
-              bgImage: galleryImage || project.background_url || fallback.bgImage,
+              bgImage: fallback.bgImage || project.background_url || '',
             };
           })
         );
