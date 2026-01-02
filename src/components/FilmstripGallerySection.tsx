@@ -1,5 +1,5 @@
-import { ArrowRight, ChevronLeft, ChevronRight, Images } from "lucide-react";
-import { Link } from "react-router-dom";
+import { ArrowRight, ChevronLeft, ChevronRight, Images, Pause, Play } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
@@ -51,14 +51,14 @@ const resolveGallerySrcToAsset = (src?: string | null) => {
   return campaignAssetByFile[file] ?? null;
 };
 
-// Fallback images
+// Fallback images with slugs
 const fallbackImages = [
-  { src: bnbEvent, alt: "BNB Chain Event", title: "BNB Chain", subtitle: "Korea Launch Event 2024" },
-  { src: ondoSeminar, alt: "Ondo Finance", title: "Ondo Finance", subtitle: "Origin Summit 2025" },
-  { src: fogoFest, alt: "FOGO Fest", title: "FOGO", subtitle: "Fogo Fest 2025" },
-  { src: peaqSummit, alt: "Peaq Summit", title: "Peaq", subtitle: "KBW 2025" },
-  { src: triaLaunch, alt: "Tria Launch", title: "Tria", subtitle: "Korea Media Interview" },
-  { src: lbankFestival, alt: "Lbank Festival", title: "Lbank", subtitle: "1001 Festival Seoul" },
+  { src: bnbEvent, alt: "BNB Chain Event", title: "BNB Chain", subtitle: "Korea Launch Event 2024", slug: "bnb-chain" },
+  { src: ondoSeminar, alt: "Ondo Finance", title: "Ondo Finance", subtitle: "Origin Summit 2025", slug: "ondo-finance" },
+  { src: fogoFest, alt: "FOGO Fest", title: "FOGO", subtitle: "Fogo Fest 2025", slug: "fogo" },
+  { src: peaqSummit, alt: "Peaq Summit", title: "Peaq", subtitle: "KBW 2025", slug: "peaq" },
+  { src: triaLaunch, alt: "Tria Launch", title: "Tria", subtitle: "Korea Media Interview", slug: "tria" },
+  { src: lbankFestival, alt: "Lbank Festival", title: "Lbank", subtitle: "1001 Festival Seoul", slug: "lbank" },
 ];
 
 // Responsive breakpoint hook
@@ -86,10 +86,13 @@ const useBreakpoint = () => {
 };
 
 const FilmstripGallerySection = () => {
+  const navigate = useNavigate();
   const galleryRef = useRef<HTMLDivElement>(null);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
   
   // Drag scroll refs
   const isDragging = useRef(false);
@@ -231,6 +234,72 @@ const FilmstripGallerySection = () => {
     }, 150);
   }, [applyMomentum]);
 
+  const scrollGallery = useCallback((direction: 'left' | 'right') => {
+    if (galleryRef.current) {
+      const scrollAmount = config.itemWidth * 2 + config.gap * 2;
+      galleryRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  }, [config.itemWidth, config.gap]);
+
+  // Autoplay functionality
+  useEffect(() => {
+    if (!isAutoPlaying || !galleryRef.current) return;
+
+    const startAutoPlay = () => {
+      autoPlayRef.current = setInterval(() => {
+        if (!galleryRef.current) return;
+        
+        const { scrollLeft: currentScroll, scrollWidth, clientWidth } = galleryRef.current;
+        const maxScroll = scrollWidth - clientWidth;
+        
+        // If at end, scroll back to start
+        if (currentScroll >= maxScroll - 10) {
+          galleryRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          // Scroll by one item width
+          scrollGallery('right');
+        }
+      }, 4000); // 4 seconds interval
+    };
+
+    startAutoPlay();
+
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
+    };
+  }, [isAutoPlaying, scrollGallery]);
+
+  // Pause autoplay on user interaction
+  const pauseAutoPlay = useCallback(() => {
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+      autoPlayRef.current = null;
+    }
+  }, []);
+
+  // Resume autoplay after interaction
+  const handleInteractionEnd = useCallback(() => {
+    if (isAutoPlaying && !autoPlayRef.current) {
+      autoPlayRef.current = setInterval(() => {
+        if (!galleryRef.current) return;
+        
+        const { scrollLeft: currentScroll, scrollWidth, clientWidth } = galleryRef.current;
+        const maxScroll = scrollWidth - clientWidth;
+        
+        if (currentScroll >= maxScroll - 10) {
+          galleryRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          scrollGallery('right');
+        }
+      }, 4000);
+    }
+  }, [isAutoPlaying, scrollGallery]);
+
   // Cleanup
   useEffect(() => {
     return () => {
@@ -240,20 +309,26 @@ const FilmstripGallerySection = () => {
       if (scrollTimeout.current) {
         clearTimeout(scrollTimeout.current);
       }
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
     };
   }, []);
 
-  const scrollGallery = (direction: 'left' | 'right') => {
-    if (galleryRef.current) {
-      const scrollAmount = config.itemWidth * 2 + config.gap * 2;
-      galleryRef.current.scrollBy({
-        left: direction === 'left' ? -scrollAmount : scrollAmount,
-        behavior: 'smooth'
-      });
+  const handleImageClick = (index: number, slug?: string) => {
+    if (!isScrolling && !isDragging.current) {
+      // Navigate to project detail page if slug exists
+      if (slug) {
+        navigate(`/projects/${slug}`);
+      } else {
+        // Fallback to lightbox if no slug
+        setLightboxIndex(index);
+      }
     }
   };
 
-  const openLightbox = (index: number) => {
+  const openLightbox = (index: number, e: React.MouseEvent) => {
+    e.stopPropagation();
     if (!isScrolling && !isDragging.current) {
       setLightboxIndex(index);
     }
@@ -297,6 +372,7 @@ const FilmstripGallerySection = () => {
             alt: project.name,
             title: project.name,
             subtitle: project.result || '',
+            slug: project.slug,
           };
         })
         .filter((img): img is NonNullable<typeof img> => img !== null);
@@ -347,11 +423,26 @@ const FilmstripGallerySection = () => {
             </p>
           </div>
           
-          {/* Navigation Arrows */}
+          {/* Navigation Arrows & Autoplay Toggle */}
           <div className="flex items-center gap-4">
+            {/* Autoplay Toggle */}
+            <motion.button
+              onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+              className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center transition-all group hover:border-white/40"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              title={isAutoPlaying ? "Pause autoplay" : "Start autoplay"}
+            >
+              {isAutoPlaying ? (
+                <Pause className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
+              ) : (
+                <Play className="w-4 h-4 text-white/60 group-hover:text-white transition-colors" />
+              )}
+            </motion.button>
+
             <div className="flex gap-3">
               <motion.button
-                onClick={() => scrollGallery('left')}
+                onClick={() => { pauseAutoPlay(); scrollGallery('left'); handleInteractionEnd(); }}
                 className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group hover:border-white/40"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -359,7 +450,7 @@ const FilmstripGallerySection = () => {
                 <ChevronLeft className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
               </motion.button>
               <motion.button
-                onClick={() => scrollGallery('right')}
+                onClick={() => { pauseAutoPlay(); scrollGallery('right'); handleInteractionEnd(); }}
                 className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center transition-all group hover:border-white/40"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -387,13 +478,13 @@ const FilmstripGallerySection = () => {
             gap: `${config.gap}px`,
             scrollBehavior: isDragging.current ? 'auto' : 'smooth',
           }}
-          onMouseDown={handleMouseDown}
+          onMouseDown={(e) => { pauseAutoPlay(); handleMouseDown(e); }}
           onMouseMove={handleMouseMove}
-          onMouseUp={handleMouseUp}
-          onMouseLeave={handleMouseLeave}
-          onTouchStart={handleTouchStart}
+          onMouseUp={() => { handleMouseUp(); handleInteractionEnd(); }}
+          onMouseLeave={() => { handleMouseLeave(); handleInteractionEnd(); }}
+          onTouchStart={(e) => { pauseAutoPlay(); handleTouchStart(e); }}
           onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
+          onTouchEnd={() => { handleTouchEnd(); handleInteractionEnd(); }}
         >
           {images.map((image, index) => {
             const isActive = activeIndex === index && !isScrolling;
@@ -416,9 +507,17 @@ const FilmstripGallerySection = () => {
                   stiffness: 300, 
                   damping: 30,
                 }}
-                onHoverStart={() => !isScrolling && !isDragging.current && setActiveIndex(index)}
-                onHoverEnd={() => setActiveIndex(null)}
-                onClick={() => openLightbox(index)}
+                onHoverStart={() => { 
+                  if (!isScrolling && !isDragging.current) {
+                    pauseAutoPlay();
+                    setActiveIndex(index);
+                  }
+                }}
+                onHoverEnd={() => { 
+                  setActiveIndex(null);
+                  handleInteractionEnd();
+                }}
+                onClick={() => handleImageClick(index, image.slug)}
               >
                 {/* Image */}
                 <img
@@ -457,9 +556,12 @@ const FilmstripGallerySection = () => {
                       transition={{ delay: 0.1, duration: 0.25 }}
                       className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-black/80 via-black/50 to-transparent pointer-events-none"
                     >
-                      <p className="text-white text-sm md:text-base font-semibold">{image.title}</p>
+                      <div className="flex items-center gap-2 mb-1">
+                        <p className="text-white text-sm md:text-base font-semibold">{image.title}</p>
+                        <ArrowRight className="w-4 h-4 text-white/70" />
+                      </div>
                       {image.subtitle && (
-                        <p className="text-white/70 text-xs md:text-sm mt-1 line-clamp-2">{image.subtitle}</p>
+                        <p className="text-white/70 text-xs md:text-sm line-clamp-2">{image.subtitle}</p>
                       )}
                     </motion.div>
                   )}
@@ -481,12 +583,18 @@ const FilmstripGallerySection = () => {
             <span className="text-white/40 text-sm">
               {images.length} campaigns
             </span>
+            {isAutoPlaying && (
+              <span className="text-xs text-white/30 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                Auto
+              </span>
+            )}
           </div>
 
           {/* Drag to scroll indicator */}
           <div className="hidden md:flex items-center gap-2 text-white/30 text-xs">
             <ChevronLeft className="w-3 h-3" />
-            <span>Drag to scroll</span>
+            <span>Drag to scroll • Click to view project</span>
             <ChevronRight className="w-3 h-3" />
           </div>
           
