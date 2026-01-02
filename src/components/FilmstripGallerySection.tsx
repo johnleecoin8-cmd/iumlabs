@@ -1,9 +1,10 @@
-import { ArrowRight, ChevronLeft, ChevronRight, Images } from "lucide-react";
+import { ArrowRight, ArrowUpRight, ChevronLeft, ChevronRight, Images } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import Lightbox from "@/components/Lightbox";
 
 // Import actual campaign images from assets
 import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
@@ -62,6 +63,7 @@ const fallbackImages = [
 
 const FilmstripGallerySection = () => {
   const galleryRef = useRef<HTMLDivElement>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const scrollGallery = (direction: 'left' | 'right') => {
     if (galleryRef.current) {
@@ -210,6 +212,7 @@ const FilmstripGallerySection = () => {
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -8 }}
+                onClick={() => setLightboxIndex(index)}
               >
                 {/* Image */}
                 <img
@@ -246,6 +249,15 @@ const FilmstripGallerySection = () => {
                 >
                   {String(index + 1).padStart(2, '0')}
                 </div>
+
+                {/* Expand Icon */}
+                <motion.div 
+                  className="absolute top-4 right-4 w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all"
+                  whileHover={{ scale: 1.1, rotate: 45 }}
+                  style={{ backgroundColor: glowColor }}
+                >
+                  <ArrowUpRight className="w-5 h-5 text-black" />
+                </motion.div>
               </motion.div>
             ))}
           </div>
@@ -274,6 +286,15 @@ const FilmstripGallerySection = () => {
           </Link>
         </motion.div>
       </div>
+
+      {/* Lightbox */}
+      <Lightbox
+        images={images.map(img => ({ src: img.src, title: img.title, description: img.subtitle }))}
+        currentIndex={lightboxIndex ?? 0}
+        isOpen={lightboxIndex !== null}
+        onClose={() => setLightboxIndex(null)}
+        onNavigate={setLightboxIndex}
+      />
     </section>
   );
 };
