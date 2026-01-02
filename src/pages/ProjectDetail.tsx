@@ -1,16 +1,21 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
-import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
+import { projectsData, getNextProject, ProjectData, GalleryItem } from "@/data/projectsData";
 import ProjectHero from "@/components/project-detail/ProjectHero";
 import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
 import ProjectChallenge from "@/components/project-detail/ProjectChallenge";
+import ProjectGallery from "@/components/project-detail/ProjectGallery";
 import NextProject from "@/components/project-detail/NextProject";
+import Lightbox from "@/components/Lightbox";
 
 const ProjectDetail = () => {
   const { slug } = useParams();
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Fetch project from Supabase
   const { data: dbProject } = useQuery({
@@ -44,9 +49,28 @@ const ProjectDetail = () => {
     enabled: !!dbProject?.id,
   });
 
+  // Fetch gallery from DB
+  const { data: dbGallery } = useQuery({
+    queryKey: ['project-gallery', dbProject?.id],
+    queryFn: async () => {
+      if (!dbProject?.id) return [];
+      const { data } = await supabase
+        .from('project_gallery')
+        .select('*')
+        .eq('project_id', dbProject.id)
+        .order('display_order');
+      return data || [];
+    },
+    enabled: !!dbProject?.id,
+  });
 
   // Use DB project if available, otherwise fallback to hardcoded
   const fallbackProject = slug ? projectsData[slug] : null;
+  
+  // Map gallery data
+  const galleryItems: GalleryItem[] = dbGallery && dbGallery.length > 0
+    ? dbGallery.map(g => ({ src: g.src, title: g.title || '', description: g.description || '' }))
+    : fallbackProject?.gallery || [];
   
   const project: ProjectData | null = dbProject ? {
     name: dbProject.name,
@@ -64,7 +88,7 @@ const ProjectDetail = () => {
     results: fallbackProject?.results || [],
     services: dbProject.services || fallbackProject?.services || [],
     shortServices: dbProject.short_services || fallbackProject?.shortServices || [],
-    gallery: fallbackProject?.gallery || [],
+    gallery: galleryItems,
     news: fallbackProject?.news || [],
   } : fallbackProject;
 
@@ -84,6 +108,14 @@ const ProjectDetail = () => {
   // Get next project for navigation
   const nextProjectData = getNextProject(slug || "");
 
+  const handleOpenLightbox = (index: number) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const handleNavigate = (index: number) => {
+    setCurrentImageIndex(index);
+  };
 
   // Create CSS custom properties for the project color
   const projectColorStyles = {
@@ -147,7 +179,16 @@ const ProjectDetail = () => {
           glowColor={project.glowColor} 
         />
 
-        {/* 03 - Next Project */}
+        {/* 03 - Gallery Section */}
+        {project.gallery && project.gallery.length > 0 && (
+          <ProjectGallery 
+            gallery={project.gallery} 
+            glowColor={project.glowColor}
+            onOpenLightbox={handleOpenLightbox}
+          />
+        )}
+
+        {/* 04 - Next Project */}
         {nextProjectData && (
           <NextProject 
             nextSlug={nextProjectData.slug} 
@@ -158,6 +199,17 @@ const ProjectDetail = () => {
 
         <Footer />
       </div>
+
+      {/* Lightbox */}
+      {project.gallery && project.gallery.length > 0 && (
+        <Lightbox
+          images={project.gallery}
+          currentIndex={currentImageIndex}
+          isOpen={lightboxOpen}
+          onClose={() => setLightboxOpen(false)}
+          onNavigate={handleNavigate}
+        />
+      )}
     </div>
   );
 };
