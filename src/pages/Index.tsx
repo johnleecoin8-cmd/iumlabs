@@ -26,6 +26,7 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { AnimatedSection } from "@/components/AnimatedSection";
 import { MessageSquare, FileText, Rocket, TrendingUp, Check, ArrowRight, ArrowDown } from "lucide-react";
 
 const processPhases = [
@@ -236,101 +237,131 @@ const Index = () => {
       {/* About - 01 홀수 */}
       <section className="bg-surface-odd" id="why-choose-us">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
+          <AnimatedSection>
+            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Why ium Labs</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Why ium Labs</span>
-          </div>
-          <WhyChooseUsSection />
+          </AnimatedSection>
+          <AnimatedSection delay={100}>
+            <WhyChooseUsSection />
+          </AnimatedSection>
         </div>
       </section>
       
       {/* Media Partners - 번호 없음, 헤더 없이 마키만 */}
       <section className="bg-surface-even" id="media-partners">
-        <MediaPartnersSection />
+        <AnimatedSection direction="none">
+          <MediaPartnersSection />
+        </AnimatedSection>
       </section>
       
       {/* Services - 02 홀수 */}
       <section className="bg-surface-odd" id="services">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
+          <AnimatedSection>
+            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What We Do</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What We Do</span>
-          </div>
-          <ServicesSection />
+          </AnimatedSection>
+          <AnimatedSection delay={100}>
+            <ServicesSection />
+          </AnimatedSection>
         </div>
       </section>
       
       {/* Process - 03 짝수 */}
       <section className="bg-surface-even" id="process">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
+          <AnimatedSection>
+            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
-          </div>
+          </AnimatedSection>
           
           {/* Featured Billboard Image with Process Overlay */}
-          <ProcessBillboardOverlay />
+          <AnimatedSection delay={100}>
+            <ProcessBillboardOverlay />
+          </AnimatedSection>
         </div>
       </section>
       
       {/* Cases - 04 홀수 */}
       <section className="bg-surface-odd" id="cases">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
+          <AnimatedSection>
+            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Work</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Work</span>
-          </div>
-          <CasesSection />
+          </AnimatedSection>
+          <AnimatedSection delay={100}>
+            <CasesSection />
+          </AnimatedSection>
         </div>
       </section>
       
       {/* Gallery - 05 짝수 */}
       <section className="bg-surface-even" id="gallery">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Gallery</h2>
+          <AnimatedSection>
+            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Gallery</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Campaign Archive</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Campaign Archive</span>
-          </div>
-          <FilmstripGallerySection />
+          </AnimatedSection>
+          <AnimatedSection delay={100}>
+            <FilmstripGallerySection />
+          </AnimatedSection>
         </div>
       </section>
       
       {/* Insights - 06 홀수 */}
       <section className="bg-surface-odd" id="insights">
         <div className="border-t border-white/10">
-          <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>
+          <AnimatedSection>
+            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Research</span>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Research</span>
-          </div>
-          <InsightsSection />
+          </AnimatedSection>
+          <AnimatedSection delay={100}>
+            <InsightsSection />
+          </AnimatedSection>
         </div>
       </section>
       
       {/* Contact - 07 짝수 */}
       <section className="bg-surface-even" id="contact">
-        <ContactFormSection sectionNumber="07" />
+        <AnimatedSection>
+          <ContactFormSection sectionNumber="07" />
+        </AnimatedSection>
       </section>
       
       {/* CTA Banner */}
-      <CTABannerSection />
+      <AnimatedSection direction="none">
+        <CTABannerSection />
+      </AnimatedSection>
       
       {/* Footer Links */}
       <FooterLinksSection />
