@@ -1,5 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
 
 // Import actual campaign images from assets
 import bnbEvent from "@/assets/campaigns/bnb-event.jpg";
@@ -8,34 +10,113 @@ import fogoFest from "@/assets/campaigns/fogo-fest.avif";
 import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
 import triaLaunch from "@/assets/campaigns/tria-launch.jpg";
 import lbankFestival from "@/assets/campaigns/lbank-festival.jpg";
-import kucoinOldschool from "@/assets/campaigns/kucoin-oldschool.jpg";
+import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
 import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
 import zkpassNights from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import saharaAi from "@/assets/campaigns/sahara-ai.jpg";
 import synfuturesBillboard from "@/assets/campaigns/synfutures-billboard.jpg";
+import polygonConnect from "@/assets/campaigns/polygon-connect.png";
+import storyOriginSummit from "@/assets/campaigns/story-origin-summit.jpg";
+import mantraParty from "@/assets/campaigns/mantra-party.jpg";
+import megaethLaunch from "@/assets/campaigns/megaeth-launch.jpg";
+import bybitEvent from "@/assets/campaigns/bybit-event.jpg";
 
-const campaignImages = [
+// Map gallery `src` (stored as file path strings) to bundled campaign assets
+const campaignAssetByFile: Record<string, string> = {
+  "bnb-event.jpg": bnbEvent,
+  "kucoin-campaign.jpg": kucoinCampaign,
+  "ondo-seminar.jpg": ondoSeminar,
+  "polygon-connect.png": polygonConnect,
+  "sahara-ai.jpg": saharaAi,
+  "story-origin-summit.jpg": storyOriginSummit,
+  "peaq-summit.jpg": peaqSummit,
+  "bybit-event.jpg": bybitEvent,
+  "mantra-party.jpg": mantraParty,
+  "megaeth-launch.jpg": megaethLaunch,
+  "tria-launch.jpg": triaLaunch,
+  "zkpass-verifiable-nights.jpg": zkpassNights,
+  "synfutures-billboard.jpg": synfuturesBillboard,
+  "fogo-fest.avif": fogoFest,
+  "lbank-festival.jpg": lbankFestival,
+  "openledger-interview.jpg": openledgerInterview,
+};
+
+const resolveGallerySrcToAsset = (src?: string | null) => {
+  if (!src) return null;
+  const file = src.split("/").pop();
+  if (!file) return null;
+  return campaignAssetByFile[file] ?? null;
+};
+
+// Fallback images
+const fallbackImages = [
   { src: bnbEvent, alt: "BNB Chain Event", title: "BNB Chain", subtitle: "Korea Launch Event 2024" },
-  { src: ondoSeminar, alt: "Story Protocol", title: "Story Protocol", subtitle: "Origin Summit 2025" },
+  { src: ondoSeminar, alt: "Ondo Finance", title: "Ondo Finance", subtitle: "Origin Summit 2025" },
   { src: fogoFest, alt: "FOGO Fest", title: "FOGO", subtitle: "Fogo Fest 2025" },
   { src: peaqSummit, alt: "Peaq Summit", title: "Peaq", subtitle: "KBW 2025" },
   { src: triaLaunch, alt: "Tria Launch", title: "Tria", subtitle: "Korea Media Interview" },
   { src: lbankFestival, alt: "Lbank Festival", title: "Lbank", subtitle: "1001 Festival Seoul" },
-  { src: kucoinOldschool, alt: "Kucoin Event", title: "Kucoin", subtitle: "Old School is Back" },
-  { src: openledgerInterview, alt: "Open Ledger", title: "Open Ledger", subtitle: "Korea Media Interview" },
-  { src: zkpassNights, alt: "zkPass Nights", title: "zkPass", subtitle: "The Verifiable Nights" },
-  { src: saharaAi, alt: "Sahara AI", title: "Sahara AI", subtitle: "Korean AI x Web3 Launch" },
-  { src: synfuturesBillboard, alt: "SynFutures", title: "SynFutures", subtitle: "Gangnam Billboard" },
 ];
 
 const FilmstripGallerySection = () => {
+  // Fetch first gallery image from each project
+  const { data: galleryImages } = useQuery({
+    queryKey: ['filmstrip-gallery'],
+    queryFn: async () => {
+      // Get all published projects
+      const { data: projects } = await supabase
+        .from('projects')
+        .select('id, name, slug, result')
+        .eq('is_published', true)
+        .order('display_order')
+        .limit(12);
+
+      if (!projects || projects.length === 0) return fallbackImages;
+
+      const projectIds = projects.map(p => p.id);
+
+      // Get first gallery image for each project
+      const { data: galleryRows } = await supabase
+        .from('project_gallery')
+        .select('project_id, src, display_order')
+        .in('project_id', projectIds)
+        .order('display_order', { ascending: true });
+
+      const firstGalleryByProject = new Map<string, string>();
+      for (const row of galleryRows ?? []) {
+        if (!firstGalleryByProject.has(row.project_id)) {
+          firstGalleryByProject.set(row.project_id, row.src);
+        }
+      }
+
+      // Map projects to gallery items
+      const images = projects
+        .map(project => {
+          const gallerySrc = firstGalleryByProject.get(project.id);
+          const asset = resolveGallerySrcToAsset(gallerySrc);
+          if (!asset) return null;
+          return {
+            src: asset,
+            alt: project.name,
+            title: project.name,
+            subtitle: project.result || '',
+          };
+        })
+        .filter((img): img is NonNullable<typeof img> => img !== null);
+
+      return images.length > 0 ? images : fallbackImages;
+    },
+  });
+
+  const images = galleryImages || fallbackImages;
+
   return (
     <section className="bg-surface-base">
       <div className="flex flex-col md:flex-row">
         {/* Left: Gallery Grid */}
         <div className="w-full md:w-2/3 md:border-r border-white/10">
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3">
-            {campaignImages.slice(0, 6).map((image, index) => (
+            {images.slice(0, 6).map((image, index) => (
               <div
                 key={index}
                 className={`group relative aspect-[6/5] overflow-hidden border-r border-b border-white/10 cursor-pointer hover:scale-[1.02] hover:z-10 transition-transform duration-300 ${
