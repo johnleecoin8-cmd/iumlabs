@@ -182,10 +182,10 @@ const OfflineEventService = () => {
           
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                 {/* Left - Description */}
                 <div>
-                  <p className="text-white/60 text-base leading-relaxed mb-6">
+                  <p className="text-white/60 text-sm leading-relaxed mb-5">
                     From concept to execution, our proven 4-week process ensures every detail is covered. We handle the complexity so you can focus on connecting with Korea's crypto community.
                   </p>
                   <div className="flex flex-wrap gap-3">

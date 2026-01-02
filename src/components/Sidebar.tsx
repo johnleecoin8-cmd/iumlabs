@@ -165,10 +165,10 @@ const Sidebar = () => {
                   <motion.div className="flex items-center gap-3" whileHover={{
                 scale: 1.02
               }}>
-                    <img src={logoImage} alt="Ium Labs" className="w-9 h-9 object-contain opacity-90 group-hover:opacity-100 transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]" />
+                    <img src={logoImage} alt="Ium Labs" className="w-8 h-8 object-contain opacity-90 group-hover:opacity-100 transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]" />
                     <div className="flex flex-col">
-                      <span className="text-base font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">ium Labs</span>
-                      <span className="text-xs text-white/40">Web3 Marketing & Research</span>
+                      <span className="text-sm font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">ium Labs</span>
+                      <span className="text-[10px] text-white/40">Web3 Marketing & Research</span>
                     </div>
                   </motion.div>
                 </Link>
@@ -183,7 +183,7 @@ const Sidebar = () => {
             duration: 0.3,
             delay: 0.2
           }}>
-                <span className="text-label text-white/35 font-medium tracking-[0.15em] uppercase block mb-4 ml-1">
+                <span className="text-[10px] text-white/35 font-medium tracking-[0.15em] uppercase block mb-3 ml-1">
                   Navigate
                 </span>
               </motion.div>}

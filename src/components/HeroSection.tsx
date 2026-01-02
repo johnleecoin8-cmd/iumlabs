@@ -120,14 +120,14 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography */}
-          <h1 className="font-display text-display-hero font-bold leading-[1.0] tracking-[-0.03em] mb-5 sm:mb-6 md:mb-8 mt-6 sm:mt-8 md:mt-10">
+          <h1 className="font-display text-display-lg sm:text-display-xl md:text-display-2xl font-bold leading-[1.05] tracking-[-0.02em] mb-4 sm:mb-5 md:mb-6 mt-4 sm:mt-6 md:mt-8">
             <span className="text-white">Bridge Your Web3 Project</span>
             <br />
             <span className="text-white">to Korea's Crypto Ecosystem</span>
           </h1>
 
           {/* Subtext - Enhanced readability */}
-          <p className="text-body-lg md:text-body-xl text-white/70 max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10 font-normal tracking-wide leading-relaxed px-2">
+          <p className="text-body-base md:text-body-lg text-white/70 max-w-3xl mx-auto mb-5 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-2">
             We combine <span className="text-white font-semibold">deep-dive research labs</span> with <span className="text-white font-semibold">high-impact marketing execution</span> to ensure your project thrives in the Korean market.
           </p>
 
@@ -230,10 +230,10 @@ const StatItem = ({
   
   return (
     <div className="text-center group cursor-default hover:scale-105 transition-transform">
-      <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-1 stat-glow transition-all duration-300 group-hover:text-primary tracking-tight">
+      <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1 stat-glow transition-all duration-300 group-hover:text-primary tracking-tight">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-caption text-white/60 font-medium group-hover:text-white/75 transition-colors duration-300">
+      <div className="text-xs sm:text-sm text-white/60 font-medium group-hover:text-white/75 transition-colors duration-300">
         {label}
       </div>
     </div>

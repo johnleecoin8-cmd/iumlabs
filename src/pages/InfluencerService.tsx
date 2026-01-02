@@ -224,8 +224,8 @@ const InfluencerService = () => {
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-3xl font-bold" style={{ color: ACCENT_COLOR }}>{tier.count}</p>
-                        <p className="text-white/40 text-sm">Creators</p>
+                        <p className="text-2xl font-bold" style={{ color: ACCENT_COLOR }}>{tier.count}</p>
+                        <p className="text-white/40 text-xs">Creators</p>
                       </div>
                     </div>
                   ))}

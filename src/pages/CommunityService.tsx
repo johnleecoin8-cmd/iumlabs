@@ -179,10 +179,10 @@ const CommunityService = () => {
           
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-start">
                 {/* Left - Description */}
                 <div>
-                  <p className="text-white/60 text-base leading-relaxed mb-8">
+                  <p className="text-white/60 text-sm leading-relaxed mb-6">
                     We manage your presence on Discord and Telegram with AI-powered automation, 24/7 moderation, and gamified engagement systems. Our team handles community setup, member onboarding, event coordination, and sentiment monitoring.
                   </p>
                   

@@ -189,18 +189,18 @@ const DeepResearchService = () => {
         
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <div
-            className="text-center mb-10 md:mb-12"
+            className="text-center mb-8 md:mb-10"
           >
             <span 
-              className="text-sm font-medium tracking-wider uppercase mb-4 block"
+              className="text-xs font-medium tracking-wider uppercase mb-3 block"
               style={{ color: ACCENT_COLOR }}
             >
               What We Analyze
             </span>
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
+            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
               Research That Drives Results
             </h2>
-            <p className="text-sm text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto">
               From market sizing to user behavior, we deliver actionable insights 
               that position your project for success in the Korean market.
             </p>
@@ -219,8 +219,8 @@ const DeepResearchService = () => {
                 >
                   <topic.icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color: ACCENT_COLOR }} />
                 </div>
-                <h3 className="text-base sm:text-lg font-semibold text-foreground mb-2">{topic.title}</h3>
-                <p className="text-sm text-muted-foreground mb-3 sm:mb-4">{topic.description}</p>
+                <h3 className="text-sm sm:text-base font-semibold text-foreground mb-1.5">{topic.title}</h3>
+                <p className="text-xs text-muted-foreground mb-2 sm:mb-3">{topic.description}</p>
                 <span
                   className="text-xs font-medium"
                   style={{ color: ACCENT_COLOR }}
@@ -314,16 +314,16 @@ const DeepResearchService = () => {
         <section className="py-12 md:py-16 relative bg-[#121212]">
           <div className="container mx-auto px-4 sm:px-6 lg:px-16">
             <div
-              className="flex flex-col md:flex-row md:items-end md:justify-between mb-8 md:mb-12"
+              className="flex flex-col md:flex-row md:items-end md:justify-between mb-6 md:mb-10"
             >
               <div>
                 <span 
-                  className="text-sm font-medium tracking-wider uppercase mb-3 sm:mb-4 block"
+                  className="text-xs font-medium tracking-wider uppercase mb-2 sm:mb-3 block"
                   style={{ color: ACCENT_COLOR }}
                 >
                   Sample Work
                 </span>
-                <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+                <h2 className="text-xl md:text-2xl font-bold text-foreground">
                   Latest Research
                 </h2>
               </div>

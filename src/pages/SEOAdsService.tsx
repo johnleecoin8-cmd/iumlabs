@@ -198,10 +198,10 @@ const SEOAdsService = () => {
           
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                 {/* Left - Phase Navigation */}
                 <div>
-                  <p className="text-white/60 text-base leading-relaxed mb-8">
+                  <p className="text-white/60 text-sm leading-relaxed mb-6">
                     From technical audit to scaled campaigns, our 4-week program delivers measurable growth through SEO and paid advertising.
                   </p>
                   
@@ -264,16 +264,16 @@ const SEOAdsService = () => {
                   key={activePhase}
                   className="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8"
                 >
-                  <div className="flex items-center gap-3 mb-6">
-                    <div className="w-12 h-12 rounded-xl bg-amber-500/20 flex items-center justify-center">
+                  <div className="flex items-center gap-2.5 mb-5">
+                    <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center">
                       {(() => {
                         const Icon = journeyPhases[activePhase].icon;
-                        return <Icon className="w-6 h-6 text-amber-400" />;
+                        return <Icon className="w-5 h-5 text-amber-400" />;
                       })()}
                     </div>
                     <div>
-                      <span className="text-xs text-amber-400 font-medium">{journeyPhases[activePhase].week}</span>
-                      <h3 className="text-xl font-bold text-white">{journeyPhases[activePhase].title}</h3>
+                      <span className="text-[10px] text-amber-400 font-medium">{journeyPhases[activePhase].week}</span>
+                      <h3 className="text-lg font-bold text-white">{journeyPhases[activePhase].title}</h3>
                     </div>
                   </div>
 
