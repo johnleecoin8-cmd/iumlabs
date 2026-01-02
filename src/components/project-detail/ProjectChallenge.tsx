@@ -49,7 +49,7 @@ const ProjectChallenge = ({
             boxShadow: `inset 0 0 80px ${glowColor}15`
           }} />
             
-            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] mb-6" style={{
+            <span className="inline-flex items-center gap-2 text-label uppercase tracking-[0.3em] mb-6" style={{
             color: glowColor
           }}>
               <span className="w-6 h-px" style={{
@@ -57,7 +57,7 @@ const ProjectChallenge = ({
             }} />
               The Challenge
             </span>
-            <p className="text-white text-xl md:text-2xl font-light leading-relaxed">
+            <p className="text-white text-body-xl font-light leading-relaxed">
               {challenge}
             </p>
             
@@ -85,7 +85,7 @@ const ProjectChallenge = ({
             backgroundColor: `${glowColor}08`
           }} />
             
-            <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] mb-6" style={{
+            <span className="inline-flex items-center gap-2 text-label uppercase tracking-[0.3em] mb-6" style={{
             color: glowColor
           }}>
               <span className="w-6 h-px" style={{
@@ -95,13 +95,13 @@ const ProjectChallenge = ({
             </span>
             
             {/* Services List with Project Color Dots */}
-            <div className="space-y-4 mb-8">
+            <div className="space-y-3 mb-8">
               {services.map((service, i) => <div key={i} className="flex items-center gap-3 group/item">
-                  <div className="w-2 h-2 rounded-full transition-all duration-300 group-hover/item:scale-150 group-hover/item:shadow-lg" style={{
+                  <div className="w-1.5 h-1.5 rounded-full transition-all duration-300 group-hover/item:scale-150 group-hover/item:shadow-lg" style={{
                 backgroundColor: glowColor,
                 boxShadow: `0 0 0 0 ${glowColor}40`
               }} />
-                  <span className="text-white text-lg group-hover/item:translate-x-1 transition-transform">{service}</span>
+                  <span className="text-white text-body-lg group-hover/item:translate-x-1 transition-transform">{service}</span>
                 </div>)}
             </div>
 

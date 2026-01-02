@@ -47,7 +47,7 @@ const NextProject = ({ nextSlug, nextProject, currentGlowColor }: NextProjectPro
             onClick={() => window.scrollTo(0, 0)}
             className="block group"
           >
-            <p className="text-sm uppercase tracking-widest mb-6 flex items-center gap-3" style={{ color: nextProject.glowColor }}>
+            <p className="text-label uppercase tracking-widest mb-6 flex items-center gap-3" style={{ color: nextProject.glowColor }}>
               <span className="w-12 h-px" style={{ backgroundColor: nextProject.glowColor }} />
               Next Project
               <span className="w-8 h-px opacity-50" style={{ backgroundColor: nextProject.glowColor }} />
@@ -55,7 +55,7 @@ const NextProject = ({ nextSlug, nextProject, currentGlowColor }: NextProjectPro
             <div className="flex items-center justify-between">
               <div>
                 <motion.h3 
-                  className="text-5xl md:text-7xl lg:text-8xl font-bold text-white transition-colors duration-300 mb-3"
+                  className="text-display-xl md:text-display-hero font-bold text-white transition-colors duration-300 mb-3"
                   whileHover={{ x: 10 }}
                   style={{ textShadow: `0 0 60px ${nextProject.glowColor}20` }}
                   onMouseEnter={(e) => e.currentTarget.style.color = nextProject.glowColor}
@@ -63,7 +63,7 @@ const NextProject = ({ nextSlug, nextProject, currentGlowColor }: NextProjectPro
                 >
                   {nextProject.name}
                 </motion.h3>
-                <p className="text-white/50 text-xl flex items-center gap-3">
+                <p className="text-white/50 text-body-lg flex items-center gap-3">
                   <span className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: nextProject.glowColor }} />
                   {nextProject.result}
                 </p>

@@ -135,11 +135,11 @@ const StatItem = ({
   });
   
   return (
-    <div className="text-center">
-      <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1">
+    <div className="text-center group">
+      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1 group-hover:text-primary transition-colors">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-xs sm:text-sm text-white/50 font-light">
+      <div className="text-caption text-white/50 font-light group-hover:text-white/70 transition-colors">
         {label}
       </div>
     </div>
@@ -158,10 +158,10 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
     <Link
       to={`/projects/${project.slug}`}
       onClick={() => window.scrollTo(0, 0)}
-      className="group block rounded-2xl border border-border bg-card overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-foreground/5 hover:-translate-y-1 hover:border-foreground/20"
+      className="group block rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30"
     >
       {/* Image */}
-      <div className="aspect-square overflow-hidden">
+      <div className="aspect-[4/3] overflow-hidden">
         <img 
           src={project.bgImage} 
           alt={project.name}
@@ -171,22 +171,22 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       
       {/* Content */}
       <div className="p-4 sm:p-5">
-        <div className="flex items-center gap-3 text-muted-foreground text-[11px] sm:text-xs mb-2">
-          <span className="uppercase tracking-wider font-medium">{project.category}</span>
+        <div className="flex items-center gap-3 mb-2">
+          <span className="text-label uppercase tracking-wider font-medium text-muted-foreground">{project.category}</span>
         </div>
-        <h3 className="text-lg sm:text-xl font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-1">
+        <h3 className="text-body-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-1">
           {project.name}
         </h3>
-        <p className="text-foreground/80 font-medium text-sm mb-2 line-clamp-1">
+        <p className="text-body-sm text-foreground/80 font-medium mb-2 line-clamp-1">
           {project.result}
         </p>
-        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 mb-4">
+        <p className="text-body-sm text-muted-foreground leading-relaxed line-clamp-2 mb-4">
           {project.description}
         </p>
         
-        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-sm">
+        <div className="flex items-center gap-2 text-caption text-muted-foreground group-hover:text-primary transition-colors">
           <span className="group-hover:underline underline-offset-4">View case study</span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
         </div>
       </div>
     </Link>
@@ -308,14 +308,14 @@ const Projects = () => {
             <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
               <div className="max-w-7xl mx-auto text-center">
                 {/* Main Headline */}
-                <h1 className="font-sans text-[10vw] sm:text-[8vw] md:text-[6vw] lg:text-[5vw] font-bold leading-[1.1] tracking-[-0.02em] mb-6 sm:mb-8 mt-8 sm:mt-12">
+                <h1 className="font-display text-display-hero mb-4 sm:mb-6 mt-8 sm:mt-12">
                   <span className="text-white">Our </span>
                   <span className="text-white/90">Case </span>
                   <span className="text-white">Studies</span>
                 </h1>
 
                 {/* Subtext */}
-                <p className="text-base sm:text-lg md:text-xl text-white/60 max-w-3xl mx-auto mb-8 font-light tracking-wide leading-relaxed">
+                <p className="text-body-lg text-white/60 max-w-2xl mx-auto mb-8 font-light leading-relaxed">
                   Real results from <span className="text-white font-medium">18+ global Web3 projects</span> successfully entering and scaling in the Korean market.
                 </p>
 

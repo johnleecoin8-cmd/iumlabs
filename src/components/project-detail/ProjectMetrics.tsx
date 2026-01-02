@@ -80,12 +80,12 @@ const MetricCard = ({
 
       <div className="relative">
         <p 
-          className="text-3xl md:text-4xl lg:text-5xl font-bold mb-2 tracking-tight transition-colors"
+          className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 tracking-tight transition-colors"
           style={{ color: glowColor }}
         >
           {displayValue}
         </p>
-        <p className="text-muted-foreground text-xs md:text-sm font-medium uppercase tracking-wider">
+        <p className="text-label text-muted-foreground font-medium uppercase tracking-wider">
           {metric.label}
         </p>
       </div>
@@ -158,12 +158,12 @@ const ProjectMetrics = ({ metrics, glowColor }: ProjectMetricsProps) => {
             />
           </div>
           <div className="flex items-baseline justify-between">
-            <h2 className="text-3xl md:text-4xl tracking-tight">
+            <h2 className="text-display-md tracking-tight">
               <span className="font-serif italic text-muted-foreground">Project</span>{" "}
               <span className="font-sans font-bold text-foreground">Overview</span>
             </h2>
             <span 
-              className="text-xs tracking-wider hidden sm:block px-3 py-1 rounded-full border"
+              className="text-label tracking-wider hidden sm:block px-3 py-1 rounded-full border"
               style={{ 
                 borderColor: `${glowColor}30`,
                 color: `${glowColor}90`
