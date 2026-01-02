@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import Logo3D from "@/components/Logo3D";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { cn } from "@/lib/utils";
 
 // Import logos
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -156,8 +158,21 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
   const isLastRow = index >= 10; // Last 2 cards (index 10, 11)
   const isRightColumn = index % 2 === 1;
 
+  const { ref, isVisible } = useScrollAnimation({ 
+    threshold: 0.1,
+    rootMargin: '30px',
+    triggerOnce: true 
+  });
+
   return (
-    <div className="h-full">
+    <div 
+      ref={ref}
+      className={cn(
+        "h-full transition-all duration-500 ease-out will-change-transform",
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      )}
+      style={{ transitionDelay: `${(index % 6) * 50}ms` }}
+    >
       <Link
         to={`/projects/${slug}`}
         onClick={() => window.scrollTo(0, 0)}

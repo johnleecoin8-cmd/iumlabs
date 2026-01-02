@@ -1,6 +1,7 @@
 import { ArrowRight, Compass, Users, Search, Mic2, MessageCircle, Newspaper, Rocket, Target } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { cn } from "@/lib/utils";
 // Import service images
 import gtmImage from "@/assets/services/gtm-ecosystem.png";
 import brandingImage from "@/assets/services/branding-website.png";
@@ -82,9 +83,22 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
   const Icon = service.icon;
   const hasBorderRight = (index % 4) !== 3;
   const hasBorderBottom = index < 4;
+  
+  const { ref, isVisible } = useScrollAnimation({ 
+    threshold: 0.1,
+    rootMargin: '50px',
+    triggerOnce: true 
+  });
 
   return (
-    <div className="group relative overflow-hidden">
+    <div 
+      ref={ref}
+      className={cn(
+        "group relative overflow-hidden transition-all duration-500 ease-out will-change-transform",
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+      )}
+      style={{ transitionDelay: `${index * 75}ms` }}
+    >
       <Link
         to={service.link}
         className={`block h-full min-h-[220px] sm:min-h-[280px] md:min-h-[320px] lg:min-h-[360px] relative transition-all duration-300 ${
