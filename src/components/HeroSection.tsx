@@ -45,19 +45,19 @@ const serviceTags = [{
   position: "top-[66%] right-[2%]"
 }];
 
-// Mobile tags (fewer, repositioned for small screens)
+// Mobile tags (fewer, repositioned for small screens with better spacing)
 const mobileServiceTags = [{
   label: "Research",
-  position: "top-[8%] left-[3%]"
+  position: "top-[5%] left-[3%]"
 }, {
   label: "GTM",
-  position: "top-[14%] right-[3%]"
+  position: "top-[5%] right-[3%]"
 }, {
   label: "Marketing",
-  position: "bottom-[40%] left-[2%]"
+  position: "bottom-[32%] left-[2%]"
 }, {
   label: "Events",
-  position: "bottom-[34%] right-[2%]"
+  position: "bottom-[32%] right-[2%]"
 }];
 const clientLogos = [{
   name: "BNB",
@@ -152,16 +152,22 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
-      {/* Floating Service Tags - Desktop - Enhanced */}
-      {serviceTags.map((tag, index) => <div key={index} className={`absolute ${tag.position} hidden lg:block z-10`}>
+      {/* Floating Service Tags - Desktop - Enhanced with floating animation */}
+      {serviceTags.map((tag, index) => <div key={index} className={`absolute ${tag.position} hidden lg:block z-10`} style={{
+          animation: `float-gentle ${3 + (index % 3) * 0.5}s ease-in-out infinite`,
+          animationDelay: `${index * 0.3}s`
+        }}>
           <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-lg bg-white/[0.04] border border-white/[0.12] text-white/65 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-md">
             {tag.label}
           </span>
         </div>)}
 
-      {/* Floating Service Tags - Mobile - Enhanced */}
-      {mobileServiceTags.map((tag, index) => <div key={`mobile-${index}`} className={`absolute ${tag.position} lg:hidden z-10`}>
-          <span className="font-sans px-3 py-1.5 text-xs rounded-lg bg-white/[0.04] border border-white/[0.12] text-white/65 whitespace-nowrap backdrop-blur-sm">
+      {/* Floating Service Tags - Mobile - Enhanced with floating animation */}
+      {mobileServiceTags.map((tag, index) => <div key={`mobile-${index}`} className={`absolute ${tag.position} lg:hidden z-10`} style={{
+          animation: `float-gentle ${3.5 + (index % 2) * 0.5}s ease-in-out infinite`,
+          animationDelay: `${index * 0.4}s`
+        }}>
+          <span className="font-sans px-2.5 py-1 text-[10px] rounded-md bg-white/[0.04] border border-white/[0.12] text-white/65 whitespace-nowrap backdrop-blur-sm">
             {tag.label}
           </span>
         </div>)}
@@ -169,22 +175,19 @@ const HeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Premium Display Typography with Syne */}
-          <h1 className="font-display text-display-xl sm:text-display-2xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-4 sm:mb-5 md:mb-6 mt-4 sm:mt-6 md:mt-8">
-            <span className="text-white font-sans text-display-hero">Bridge Your Web3 Project
-to Korea's Crypto Ecosystem</span>
-            <br />
-            
+          {/* Main Headline - Premium Display Typography - Mobile optimized */}
+          <h1 className="font-display text-[1.75rem] sm:text-display-xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.1] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
+            <span className="text-white font-sans text-[1.5rem] sm:text-display-hero leading-tight">Bridge Your Web3 Project to Korea's Crypto Ecosystem</span>
           </h1>
 
-          {/* Subtext - Enhanced readability */}
-          <p className="text-body-base text-white/70 max-w-3xl mx-auto mb-5 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-2 md:text-body-xl">
+          {/* Subtext - Enhanced readability - Mobile optimized */}
+          <p className="text-sm sm:text-body-base md:text-body-xl text-white/70 max-w-3xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-1 sm:px-2">
             We combine <span className="text-white font-semibold">deep-dive research labs</span> with <span className="text-white font-semibold">high-impact marketing execution</span> to ensure your project thrives in the Korean market.
           </p>
 
-          {/* CTA Button - Enhanced */}
-          <a href="/contact#contact-form" className="group relative inline-flex items-center gap-2 py-2.5 sm:px-6 sm:py-3 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] min-h-[40px] sm:min-h-[44px] px-[22px]">
-            <Send className="w-4 h-4" />
+          {/* CTA Button - Enhanced - Mobile optimized */}
+          <a href="/contact#contact-form" className="group relative inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 bg-white text-black font-medium text-xs sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] min-h-[40px] sm:min-h-[44px]">
+            <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             {/* Shine sweep effect */}
             <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
             <span>Get Your Free Proposal</span>
