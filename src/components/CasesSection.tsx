@@ -28,7 +28,7 @@ import mantraCampaign from "@/assets/campaigns/mantra-party.jpg";
 import peaqCampaign from "@/assets/campaigns/peaq-summit.jpg";
 import triaCampaign from "@/assets/campaigns/tria-launch.jpg";
 import bybitCampaign from "@/assets/campaigns/bybit-event.jpg";
-import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
+import kucoinCampaign from "@/assets/campaigns/kucoin-new.jpg";
 import polygonConnect from "@/assets/campaigns/polygon-connect.png";
 import ondoCampaign from "@/assets/campaigns/ondo-seminar.jpg";
 import megaethCampaign from "@/assets/campaigns/megaeth-launch.jpg";
