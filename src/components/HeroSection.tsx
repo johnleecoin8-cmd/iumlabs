@@ -119,8 +119,8 @@ const HeroSection = () => {
       {/* Main Content - Centered */}
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
-          {/* Main Headline - Premium Display Typography */}
-          <h1 className="font-display text-display-lg sm:text-display-xl md:text-display-2xl font-bold leading-[1.05] tracking-[-0.02em] mb-4 sm:mb-5 md:mb-6 mt-4 sm:mt-6 md:mt-8">
+          {/* Main Headline - Premium Display Typography with Syne */}
+          <h1 className="font-display text-display-xl sm:text-display-2xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-4 sm:mb-5 md:mb-6 mt-4 sm:mt-6 md:mt-8">
             <span className="text-white">Bridge Your Web3 Project</span>
             <br />
             <span className="text-white">to Korea's Crypto Ecosystem</span>
