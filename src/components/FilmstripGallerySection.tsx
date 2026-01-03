@@ -10,7 +10,7 @@ import fogoFest from "@/assets/campaigns/fogo-fest.avif";
 import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
 import triaLaunch from "@/assets/campaigns/tria-launch.jpg";
 import lbankFestival from "@/assets/campaigns/lbank-festival.jpg";
-import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
+import kucoinCampaign from "@/assets/campaigns/kucoin-new.jpg";
 import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
 import zkpassNights from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import saharaAi from "@/assets/campaigns/sahara-ai.jpg";
