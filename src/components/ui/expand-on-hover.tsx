@@ -413,9 +413,9 @@ const HoverExpand_001 = ({
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 10 }}
                     transition={{ duration: 0.3 }}
-                    className="absolute bottom-4 left-4 right-4"
+                    className="absolute bottom-6 left-6 right-6"
                   >
-                    <p className="text-white font-medium text-sm md:text-base">
+                    <p className="text-white font-semibold text-lg md:text-xl lg:text-2xl leading-tight">
                       {image.code}
                     </p>
                   </motion.div>
