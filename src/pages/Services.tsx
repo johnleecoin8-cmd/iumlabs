@@ -318,14 +318,15 @@ const Services = () => {
                   We're the Korean Web3 marketing agency that builds the bridge between your project and the Korean market.
                 </p>
                 
-                <div>
+                <div className="space-y-2">
                   <Link 
                     to="/contact"
-                    className="group inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-5 py-2.5 text-sm font-medium tracking-wide hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-emerald-500/30 rounded-lg hover:scale-[1.02] active:scale-[0.98] min-h-[44px]"
+                    className="group inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-5 py-2.5 text-sm font-medium tracking-wide hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-emerald-500/30 rounded-lg hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"
                   >
-                    CONNECT WITH US
+                    Start Your Project
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </Link>
+                  <p className="text-[10px] text-white/50">Free consultation • No commitment required</p>
                 </div>
                 
                 {/* Decorative element */}

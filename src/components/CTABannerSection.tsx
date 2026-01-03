@@ -22,8 +22,15 @@ const CTABannerSection = () => {
             <h3 className="text-xl sm:text-2xl md:text-3xl font-light text-foreground mb-1.5 sm:mb-2">
               Have a project in mind?
             </h3>
-            <p className="text-muted-foreground text-sm sm:text-base">
+            <p className="text-muted-foreground text-sm sm:text-base mb-2">
               Let's discuss how we can help you succeed in Korea.
+            </p>
+            <p className="text-xs text-muted-foreground/70 flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-primary/10 rounded-full text-primary">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                Response within 24h
+              </span>
+              <span>Join 18+ projects that launched with us</span>
             </p>
           </div>
           <div className="flex gap-2 sm:gap-3 w-full md:w-auto">
@@ -42,7 +49,7 @@ const CTABannerSection = () => {
                   <span className="absolute inset-0 rounded-full animate-ping bg-foreground/20" style={{ animationDuration: '1.5s' }} />
                 </span>
                 
-                <span className="relative z-10">Get in Touch</span>
+                <span className="relative z-10">Get Your Free Proposal</span>
                 <ArrowUpRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
