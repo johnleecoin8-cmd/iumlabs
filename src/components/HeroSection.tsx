@@ -171,7 +171,7 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography with Syne */}
           <h1 className="font-display text-display-xl sm:text-display-2xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.05] tracking-[-0.03em] mb-4 sm:mb-5 md:mb-6 mt-4 sm:mt-6 md:mt-8">
-            <span className="text-white font-sans text-5xl">Bridge Your Web3 Project
+            <span className="text-white font-sans text-display-hero">Bridge Your Web3 Project
 to Korea's Crypto Ecosystem</span>
             <br />
             
