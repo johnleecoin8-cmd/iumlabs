@@ -18,31 +18,31 @@ import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 
-// Desktop tags - 8 services
+// Desktop tags - 8 services (positioned at edges to avoid text overlap)
 const serviceTags = [{
   label: "Deep Research",
-  position: "top-[12%] left-[5%]"
+  position: "top-[8%] left-[2%]"
 }, {
   label: "GTM Strategy",
-  position: "top-[28%] left-[4%]"
+  position: "top-[22%] left-[1%]"
 }, {
   label: "Community Growth",
-  position: "top-[44%] left-[6%]"
+  position: "top-[36%] left-[2%]"
 }, {
   label: "Branding & Web",
-  position: "top-[60%] left-[5%]"
+  position: "top-[50%] left-[1%]"
 }, {
   label: "KOL Marketing",
-  position: "top-[14%] right-[6%]"
+  position: "top-[10%] right-[2%]"
 }, {
   label: "Media & PR",
-  position: "top-[30%] right-[5%]"
+  position: "top-[24%] right-[1%]"
 }, {
   label: "SEO & Ads",
-  position: "top-[46%] right-[7%]"
+  position: "top-[38%] right-[2%]"
 }, {
   label: "Offline Events",
-  position: "top-[62%] right-[6%]"
+  position: "top-[52%] right-[1%]"
 }];
 
 // Mobile tags (fewer, repositioned for small screens)
@@ -154,7 +154,7 @@ const HeroSection = () => {
 
       {/* Floating Service Tags - Desktop - Enhanced */}
       {serviceTags.map((tag, index) => <div key={index} className={`absolute ${tag.position} hidden lg:block z-10`}>
-          <span className="font-sans px-5 py-2.5 text-sm whitespace-nowrap rounded-xl bg-white/[0.04] border border-white/[0.12] text-white/75 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-md">
+          <span className="font-sans px-3 py-1.5 text-xs whitespace-nowrap rounded-lg bg-white/[0.04] border border-white/[0.12] text-white/65 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-md">
             {tag.label}
           </span>
         </div>)}
