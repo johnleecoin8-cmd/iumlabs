@@ -162,12 +162,12 @@ const HeroSection = () => {
           </span>
         </div>)}
 
-      {/* Floating Service Tags - Mobile - Enhanced with floating animation */}
+      {/* Floating Service Tags - Mobile - Enhanced visibility */}
       {mobileServiceTags.map((tag, index) => <div key={`mobile-${index}`} className={`absolute ${tag.position} lg:hidden z-10`} style={{
           animation: `float-gentle ${3.5 + (index % 2) * 0.5}s ease-in-out infinite`,
           animationDelay: `${index * 0.4}s`
         }}>
-          <span className="font-sans px-2.5 py-1 text-[10px] rounded-md bg-white/[0.04] border border-white/[0.12] text-white/65 whitespace-nowrap backdrop-blur-sm">
+          <span className="font-sans px-3 py-1.5 text-[11px] rounded-md bg-black/60 border border-white/25 text-white/90 whitespace-nowrap backdrop-blur-md shadow-lg">
             {tag.label}
           </span>
         </div>)}
@@ -195,10 +195,10 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Stats Section - Enhanced */}
-      <div className="relative z-10 py-5 sm:py-6 md:py-8">
-        <div className="container mx-auto px-4 sm:px-8 md:px-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+      {/* Stats Section - Enhanced - Mobile optimized */}
+      <div className="relative z-10 py-3 sm:py-6 md:py-8">
+        <div className="container mx-auto px-3 sm:px-8 md:px-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-6 md:gap-8">
             {stats.map((stat, index) => <StatItem key={index} value={stat.value} label={stat.label} prefix={stat.prefix} suffix={stat.suffix} isVisible={isVisible} delay={index * 100} />)}
           </div>
         </div>
@@ -259,10 +259,10 @@ const StatItem = ({
     duration: 2000
   });
   return <div className="text-center group cursor-default hover:scale-105 transition-transform">
-      <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-1 stat-glow transition-all duration-300 group-hover:text-primary tracking-tight">
+      <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-0.5 sm:mb-1 stat-glow transition-all duration-300 group-hover:text-primary tracking-tight">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-xs sm:text-sm text-white/60 font-medium group-hover:text-white/75 transition-colors duration-300">
+      <div className="text-[10px] sm:text-sm text-white/60 font-medium group-hover:text-white/75 transition-colors duration-300">
         {label}
       </div>
     </div>;
