@@ -53,10 +53,18 @@ const HoverExpand_001 = ({
   autoAdvance = true,
   autoAdvanceInterval = 4000
 }: HoverExpandProps) => {
-  const [activeImage, setActiveImage] = useState(1);
+  const [activeImage, setActiveImage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const breakpoint = useBreakpoint();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Drag scroll state
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+  const dragThreshold = 5;
+  const hasDragged = useRef(false);
 
   const config = {
     mobile: { 
@@ -82,11 +90,11 @@ const HoverExpand_001 = ({
     },
     desktop: { 
       layout: "horizontal" as const, 
-      numVisible: 6, 
-      expandedWidth: "27.65625rem", 
-      collapsedWidth: "9.21875rem", 
+      numVisible: 5, 
+      expandedWidth: "24rem", 
+      collapsedWidth: "10rem", 
       height: "min(36.875rem, 60vh)", 
-      gap: "gap-5", 
+      gap: "gap-4", 
       maxWidth: "max-w-[1200px]" 
     },
   }[breakpoint];
@@ -121,10 +129,51 @@ const HoverExpand_001 = ({
 
   const handleMouseLeave = () => {
     setIsPaused(false);
+    // End drag on mouse leave
+    if (isDragging) {
+      setIsDragging(false);
+    }
+  };
+
+  // Drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    
+    setIsDragging(true);
+    hasDragged.current = false;
+    setStartX(e.pageX - container.offsetLeft);
+    setScrollLeft(container.scrollLeft);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 1.2;
+    
+    if (Math.abs(walk) > dragThreshold) {
+      hasDragged.current = true;
+    }
+    
+    container.scrollLeft = scrollLeft - walk;
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
   };
 
   const handleClick = (index: number, slug?: string) => {
-    // Open lightbox if handler provided
+    // Ignore click if we just dragged
+    if (hasDragged.current) {
+      hasDragged.current = false;
+      return;
+    }
+    
     if (onLightboxOpen) {
       onLightboxOpen(index);
     } else if (onImageClick && slug) {
@@ -160,12 +209,9 @@ const HoverExpand_001 = ({
     );
   }
 
-  // Tablet & Desktop: Horizontal expand layout with scroll
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-
   // Scroll-based autoplay
   useEffect(() => {
-  if (!autoAdvance || isPaused || breakpoint === "mobile") return;
+    if (!autoAdvance || isPaused || breakpoint === "mobile") return;
     
     const container = scrollContainerRef.current;
     if (!container) return;
@@ -175,20 +221,18 @@ const HoverExpand_001 = ({
       const currentScroll = container.scrollLeft;
       
       if (currentScroll >= maxScroll - 10) {
-        // Reset to start
         container.scrollTo({ left: 0, behavior: 'smooth' });
       } else {
-        // Scroll by one image width
-        const imageWidth = breakpoint === 'desktop' ? 180 : 150;
+        const imageWidth = breakpoint === 'desktop' ? 200 : breakpoint === 'largeTablet' ? 150 : 120;
         container.scrollBy({ left: imageWidth, behavior: 'smooth' });
       }
     }, autoAdvanceInterval);
 
     return () => clearInterval(scrollInterval);
-  }, [autoAdvance, isPaused, autoAdvanceInterval, breakpoint, config.layout]);
+  }, [autoAdvance, isPaused, autoAdvanceInterval, breakpoint]);
 
-  const collapsedWidth = breakpoint === 'desktop' ? '9.21875rem' : breakpoint === 'largeTablet' ? '7rem' : '5.5rem';
-  const expandedWidth = breakpoint === 'desktop' ? '27.65625rem' : breakpoint === 'largeTablet' ? '18rem' : '14rem';
+  const collapsedWidth = breakpoint === 'desktop' ? '10rem' : breakpoint === 'largeTablet' ? '7rem' : '5.5rem';
+  const expandedWidth = breakpoint === 'desktop' ? '24rem' : breakpoint === 'largeTablet' ? '18rem' : '14rem';
 
   return (
     <div 
@@ -196,14 +240,21 @@ const HoverExpand_001 = ({
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Scroll container */}
+      {/* Scroll container with drag support */}
       <div
         ref={scrollContainerRef}
-        className="overflow-x-auto scrollbar-hide scroll-smooth"
+        className={cn(
+          "overflow-x-auto scrollbar-hide",
+          isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+        )}
         style={{ 
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
         }}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
       >
         <div
           className={cn("flex", config.gap)}
@@ -220,17 +271,18 @@ const HoverExpand_001 = ({
             return (
               <motion.div
                 key={index}
-                className="relative h-full overflow-hidden rounded-[20px] cursor-pointer flex-shrink-0"
+                className="relative h-full overflow-hidden rounded-[20px] flex-shrink-0"
                 initial={{ width: collapsedWidth }}
                 animate={{ width }}
                 transition={{ type: "spring", stiffness: 400, damping: 40 }}
                 onClick={() => handleClick(index, image.slug)}
-                onHoverStart={() => setActiveImage(index)}
+                onHoverStart={() => !isDragging && setActiveImage(index)}
               >
                 <img
                   src={image.src}
                   alt={image.alt}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover pointer-events-none"
+                  draggable={false}
                 />
                 
                 {/* Dark overlay for inactive images */}
@@ -284,7 +336,7 @@ const HoverExpand_001 = ({
                 onClick={() => {
                   setActiveImage(groupStart);
                   scrollContainerRef.current?.scrollTo({
-                    left: groupStart * (breakpoint === 'desktop' ? 180 : 150),
+                    left: groupStart * (breakpoint === 'desktop' ? 200 : 150),
                     behavior: 'smooth'
                   });
                 }}
@@ -302,5 +354,4 @@ const HoverExpand_001 = ({
     </div>
   );
 };
-
 export { HoverExpand_001 };
