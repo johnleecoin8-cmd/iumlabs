@@ -115,13 +115,13 @@ const FilmstripGallerySection = () => {
       <div className="flex flex-col md:flex-row">
         {/* Left: Gallery Grid */}
         <div className="w-full md:w-2/3 md:border-r border-white/10">
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3">
-            {images.slice(0, 6).map((image, index) => (
+          <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3">
+            {images.slice(0, 9).map((image, index) => (
               <div
                 key={index}
                 className={`group relative aspect-[6/5] overflow-hidden border-r border-b border-white/10 cursor-pointer hover:scale-[1.02] hover:z-10 transition-transform duration-300 ${
-                  index % 2 === 1 ? "border-r-0 sm:border-r" : ""
-                } ${index % 3 === 2 ? "sm:border-r-0" : ""}`}
+                  index % 3 === 2 ? "border-r-0" : ""
+                }`}
               >
                 <img
                   src={image.src}
