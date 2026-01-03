@@ -85,22 +85,22 @@ const HoverExpand_001 = ({
       height: "min(24rem, 45vh)", 
       gap: 12, 
     },
-    largeTablet: { 
-      layout: "horizontal" as const, 
-      numVisible: 4, 
-      itemWidth: 220,
-      expandedWidth: 400, 
-      height: "min(32rem, 55vh)", 
-      gap: 20, 
-    },
-    desktop: { 
-      layout: "horizontal" as const, 
-      numVisible: 4, 
-      itemWidth: 280,
-      expandedWidth: 500, 
-      height: "min(40rem, 65vh)", 
-      gap: 24, 
-    },
+  largeTablet: { 
+    layout: "horizontal" as const, 
+    numVisible: 4, 
+    itemWidth: 220, 
+    expandedWidth: 400, 
+    height: "min(26rem, 45vh)", 
+    gap: 20, 
+  },
+  desktop: { 
+    layout: "horizontal" as const, 
+    numVisible: 4, 
+    itemWidth: 280, 
+    expandedWidth: 500, 
+    height: "min(32rem, 50vh)", 
+    gap: 24, 
+  },
   }[breakpoint];
 
   // Momentum scrolling
