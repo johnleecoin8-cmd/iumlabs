@@ -55,15 +55,20 @@ const HoverExpand_001 = ({
 }: HoverExpandProps) => {
   const [activeImage, setActiveImage] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isScrolling, setIsScrolling] = useState(false);
   const breakpoint = useBreakpoint();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   
-  // Drag scroll state
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const dragThreshold = 5;
+  // Drag scroll state with momentum
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+  const velocity = useRef(0);
+  const lastX = useRef(0);
+  const lastTime = useRef(0);
+  const momentumFrame = useRef<number | null>(null);
+  const scrollTimeout = useRef<NodeJS.Timeout | null>(null);
   const hasDragged = useRef(false);
 
   const config = {
@@ -75,40 +80,68 @@ const HoverExpand_001 = ({
     smallTablet: { 
       layout: "horizontal" as const, 
       numVisible: 3, 
-      expandedPercent: 50, 
-      collapsedPercent: 25, 
+      itemWidth: 140,
+      expandedWidth: 280, 
       height: "min(24rem, 45vh)", 
-      gap: "gap-2", 
+      gap: 12, 
     },
     largeTablet: { 
       layout: "horizontal" as const, 
       numVisible: 4, 
-      expandedPercent: 46, 
-      collapsedPercent: 18, 
+      itemWidth: 160,
+      expandedWidth: 320, 
       height: "min(28rem, 50vh)", 
-      gap: "gap-3", 
+      gap: 16, 
     },
     desktop: { 
       layout: "horizontal" as const, 
-      numVisible: 5, 
-      expandedWidth: "24rem", 
-      collapsedWidth: "10rem", 
+      numVisible: 4, 
+      itemWidth: 200,
+      expandedWidth: 420, 
       height: "min(36.875rem, 60vh)", 
-      gap: "gap-4", 
-      maxWidth: "max-w-[1200px]" 
+      gap: 20, 
     },
   }[breakpoint];
 
-  const numVisible = config.numVisible;
+  // Momentum scrolling
+  const applyMomentum = useCallback(() => {
+    if (!scrollContainerRef.current) return;
+    
+    const friction = 0.95;
+    const minVelocity = 0.5;
+    
+    if (Math.abs(velocity.current) > minVelocity) {
+      scrollContainerRef.current.scrollLeft += velocity.current;
+      velocity.current *= friction;
+      momentumFrame.current = requestAnimationFrame(applyMomentum);
+    } else {
+      velocity.current = 0;
+      if (momentumFrame.current) {
+        cancelAnimationFrame(momentumFrame.current);
+        momentumFrame.current = null;
+      }
+    }
+  }, []);
 
   // Autoplay logic
   const startAutoAdvance = useCallback(() => {
     if (!autoAdvance || isPaused || config.layout === "list") return;
     
     intervalRef.current = setInterval(() => {
-      setActiveImage((prev) => (prev + 1) % numVisible);
+      const container = scrollContainerRef.current;
+      if (!container) return;
+      
+      const maxScroll = container.scrollWidth - container.clientWidth;
+      const currentScroll = container.scrollLeft;
+      
+      if (currentScroll >= maxScroll - 10) {
+        container.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        const scrollAmount = ('itemWidth' in config ? config.itemWidth : 200) + ('gap' in config ? config.gap : 16);
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
     }, autoAdvanceInterval);
-  }, [autoAdvance, isPaused, numVisible, autoAdvanceInterval, config.layout]);
+  }, [autoAdvance, isPaused, autoAdvanceInterval, config]);
 
   const stopAutoAdvance = useCallback(() => {
     if (intervalRef.current) {
@@ -129,47 +162,146 @@ const HoverExpand_001 = ({
 
   const handleMouseLeave = () => {
     setIsPaused(false);
-    // End drag on mouse leave
-    if (isDragging) {
-      setIsDragging(false);
+    if (isDragging.current) {
+      handleMouseUp();
     }
   };
 
-  // Drag handlers
+  // Drag handlers with momentum
   const handleMouseDown = (e: React.MouseEvent) => {
     const container = scrollContainerRef.current;
     if (!container) return;
     
-    setIsDragging(true);
+    isDragging.current = true;
+    setIsScrolling(true);
     hasDragged.current = false;
-    setStartX(e.pageX - container.offsetLeft);
-    setScrollLeft(container.scrollLeft);
+    startX.current = e.pageX - container.offsetLeft;
+    scrollLeft.current = container.scrollLeft;
+    lastX.current = e.pageX;
+    lastTime.current = Date.now();
+    velocity.current = 0;
+    
+    if (momentumFrame.current) {
+      cancelAnimationFrame(momentumFrame.current);
+      momentumFrame.current = null;
+    }
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
+    if (!isDragging.current) return;
     
     const container = scrollContainerRef.current;
     if (!container) return;
     
     e.preventDefault();
     const x = e.pageX - container.offsetLeft;
-    const walk = (x - startX) * 1.2;
+    const walk = (x - startX.current) * 1.5;
     
-    if (Math.abs(walk) > dragThreshold) {
+    if (Math.abs(walk) > 5) {
       hasDragged.current = true;
     }
     
-    container.scrollLeft = scrollLeft - walk;
+    container.scrollLeft = scrollLeft.current - walk;
+    
+    // Calculate velocity for momentum
+    const now = Date.now();
+    const dt = now - lastTime.current;
+    if (dt > 0) {
+      velocity.current = (lastX.current - e.pageX) * (16 / dt) * 1.2;
+    }
+    lastX.current = e.pageX;
+    lastTime.current = now;
   };
 
   const handleMouseUp = () => {
-    setIsDragging(false);
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    
+    // Apply momentum
+    if (Math.abs(velocity.current) > 2) {
+      applyMomentum();
+    }
+    
+    // Delay removing scroll state
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    scrollTimeout.current = setTimeout(() => {
+      setIsScrolling(false);
+    }, 150);
   };
+
+  // Touch handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    
+    isDragging.current = true;
+    setIsScrolling(true);
+    hasDragged.current = false;
+    startX.current = e.touches[0].pageX - container.offsetLeft;
+    scrollLeft.current = container.scrollLeft;
+    lastX.current = e.touches[0].pageX;
+    lastTime.current = Date.now();
+    velocity.current = 0;
+    
+    if (momentumFrame.current) {
+      cancelAnimationFrame(momentumFrame.current);
+      momentumFrame.current = null;
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging.current) return;
+    
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    
+    const x = e.touches[0].pageX - container.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    
+    if (Math.abs(walk) > 5) {
+      hasDragged.current = true;
+    }
+    
+    container.scrollLeft = scrollLeft.current - walk;
+    
+    const now = Date.now();
+    const dt = now - lastTime.current;
+    if (dt > 0) {
+      velocity.current = (lastX.current - e.touches[0].pageX) * (16 / dt) * 1.2;
+    }
+    lastX.current = e.touches[0].pageX;
+    lastTime.current = now;
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    
+    if (Math.abs(velocity.current) > 2) {
+      applyMomentum();
+    }
+    
+    if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
+    scrollTimeout.current = setTimeout(() => {
+      setIsScrolling(false);
+    }, 150);
+  };
+
+  // Cleanup
+  useEffect(() => {
+    return () => {
+      if (momentumFrame.current) {
+        cancelAnimationFrame(momentumFrame.current);
+      }
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
+    };
+  }, []);
 
   const handleClick = (index: number, slug?: string) => {
     // Ignore click if we just dragged
-    if (hasDragged.current) {
+    if (hasDragged.current || isScrolling) {
       hasDragged.current = false;
       return;
     }
@@ -209,30 +341,9 @@ const HoverExpand_001 = ({
     );
   }
 
-  // Scroll-based autoplay
-  useEffect(() => {
-    if (!autoAdvance || isPaused || breakpoint === "mobile") return;
-    
-    const container = scrollContainerRef.current;
-    if (!container) return;
-
-    const scrollInterval = setInterval(() => {
-      const maxScroll = container.scrollWidth - container.clientWidth;
-      const currentScroll = container.scrollLeft;
-      
-      if (currentScroll >= maxScroll - 10) {
-        container.scrollTo({ left: 0, behavior: 'smooth' });
-      } else {
-        const imageWidth = breakpoint === 'desktop' ? 200 : breakpoint === 'largeTablet' ? 150 : 120;
-        container.scrollBy({ left: imageWidth, behavior: 'smooth' });
-      }
-    }, autoAdvanceInterval);
-
-    return () => clearInterval(scrollInterval);
-  }, [autoAdvance, isPaused, autoAdvanceInterval, breakpoint]);
-
-  const collapsedWidth = breakpoint === 'desktop' ? '10rem' : breakpoint === 'largeTablet' ? '7rem' : '5.5rem';
-  const expandedWidth = breakpoint === 'desktop' ? '24rem' : breakpoint === 'largeTablet' ? '18rem' : '14rem';
+  const itemWidth = config.itemWidth;
+  const expandedWidth = config.expandedWidth;
+  const gap = config.gap;
 
   return (
     <div 
@@ -244,114 +355,85 @@ const HoverExpand_001 = ({
       <div
         ref={scrollContainerRef}
         className={cn(
-          "overflow-x-auto scrollbar-hide",
-          isDragging ? "cursor-grabbing select-none" : "cursor-grab"
+          "flex overflow-x-auto scrollbar-hide select-none",
+          isDragging.current ? "cursor-grabbing" : "cursor-grab"
         )}
         style={{ 
+          height: config.height,
+          gap: `${gap}px`,
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
+          scrollBehavior: isDragging.current ? 'auto' : 'smooth',
         }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
       >
-        <div
-          className={cn("flex", config.gap)}
-          style={{ 
-            height: config.height,
-            width: 'max-content',
-            paddingRight: '2rem',
-          }}
-        >
-          {images.map((image, index) => {
-            const isActive = activeImage === index;
-            const width = isActive ? expandedWidth : collapsedWidth;
+        {images.map((image, index) => {
+          const isActive = activeImage === index && !isScrolling;
+          const width = isActive ? expandedWidth : itemWidth;
 
-            return (
+          return (
+            <motion.div
+              key={index}
+              className="relative h-full overflow-hidden rounded-[20px] flex-shrink-0"
+              animate={{ width }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              onClick={() => handleClick(index, image.slug)}
+              onHoverStart={() => !isScrolling && !isDragging.current && setActiveImage(index)}
+              onHoverEnd={() => setActiveImage(-1)}
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                className="w-full h-full object-cover pointer-events-none"
+                style={{ transform: isActive ? "scale(1)" : "scale(1.05)" }}
+                draggable={false}
+              />
+              
+              {/* Dark overlay for inactive images */}
               <motion.div
-                key={index}
-                className="relative h-full overflow-hidden rounded-[20px] flex-shrink-0"
-                initial={{ width: collapsedWidth }}
-                animate={{ width }}
-                transition={{ type: "spring", stiffness: 400, damping: 40 }}
-                onClick={() => handleClick(index, image.slug)}
-                onHoverStart={() => !isDragging && setActiveImage(index)}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className="w-full h-full object-cover pointer-events-none"
-                  draggable={false}
-                />
-                
-                {/* Dark overlay for inactive images */}
-                <motion.div
-                  className="absolute inset-0 bg-black/30"
-                  initial={{ opacity: 1 }}
-                  animate={{ opacity: isActive ? 0 : 1 }}
-                  transition={{ duration: 0.3 }}
-                />
-                
-                {/* Gradient overlay for caption */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
-                
-                {/* Caption - only visible when active */}
-                <AnimatePresence>
-                  {isActive && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.3 }}
-                      className="absolute bottom-4 left-4 right-4"
-                    >
-                      <p className="text-white font-medium text-sm md:text-base">
-                        {image.code}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            );
-          })}
-        </div>
+                className="absolute inset-0 bg-black/30"
+                animate={{ opacity: isActive ? 0 : 0.3 }}
+                transition={{ duration: 0.3 }}
+              />
+              
+              {/* Gradient overlay for caption */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
+              
+              {/* Caption - only visible when active */}
+              <AnimatePresence>
+                {isActive && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute bottom-4 left-4 right-4"
+                  >
+                    <p className="text-white font-medium text-sm md:text-base">
+                      {image.code}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          );
+        })}
       </div>
 
-      {/* Right fade hint */}
-      <div className="absolute right-0 top-0 bottom-8 w-16 bg-gradient-to-l from-background to-transparent pointer-events-none" />
-
-      {/* Scroll progress indicator */}
-      {autoAdvance && (
-        <div className="flex justify-center gap-1.5 mt-4">
-          {Array.from({ length: Math.min(images.length, 10) }).map((_, index) => {
-            const groupSize = Math.ceil(images.length / 10);
-            const groupStart = index * groupSize;
-            const groupEnd = Math.min((index + 1) * groupSize - 1, images.length - 1);
-            const isInGroup = activeImage >= groupStart && activeImage <= groupEnd;
-            
-            return (
-              <button
-                key={index}
-                onClick={() => {
-                  setActiveImage(groupStart);
-                  scrollContainerRef.current?.scrollTo({
-                    left: groupStart * (breakpoint === 'desktop' ? 200 : 150),
-                    behavior: 'smooth'
-                  });
-                }}
-                className={cn(
-                  "w-2 h-2 rounded-full transition-all duration-300",
-                  isInGroup 
-                    ? "bg-foreground w-6" 
-                    : "bg-muted-foreground/40 hover:bg-muted-foreground/60"
-                )}
-              />
-            );
-          })}
+      {/* Scroll indicator */}
+      <div className="flex justify-center gap-2 mt-4">
+        <div className="text-muted-foreground text-xs flex items-center gap-2">
+          <span>← Drag to scroll →</span>
         </div>
-      )}
+      </div>
     </div>
   );
 };
+
 export { HoverExpand_001 };
