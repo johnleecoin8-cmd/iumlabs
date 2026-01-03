@@ -88,18 +88,18 @@ const HoverExpand_001 = ({
     largeTablet: { 
       layout: "horizontal" as const, 
       numVisible: 4, 
-      itemWidth: 160,
-      expandedWidth: 320, 
-      height: "min(28rem, 50vh)", 
-      gap: 16, 
+      itemWidth: 220,
+      expandedWidth: 400, 
+      height: "min(32rem, 55vh)", 
+      gap: 20, 
     },
     desktop: { 
       layout: "horizontal" as const, 
       numVisible: 4, 
-      itemWidth: 200,
-      expandedWidth: 420, 
-      height: "min(36.875rem, 60vh)", 
-      gap: 20, 
+      itemWidth: 280,
+      expandedWidth: 500, 
+      height: "min(40rem, 65vh)", 
+      gap: 24, 
     },
   }[breakpoint];
 
