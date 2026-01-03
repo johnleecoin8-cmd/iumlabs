@@ -90,7 +90,7 @@ const HoverExpand_001 = ({
     numVisible: 4, 
     itemWidth: 220, 
     expandedWidth: 400, 
-    height: "min(26rem, 45vh)", 
+    height: "min(34rem, 60vh)", 
     gap: 20, 
   },
   desktop: { 
@@ -98,7 +98,7 @@ const HoverExpand_001 = ({
     numVisible: 4, 
     itemWidth: 280, 
     expandedWidth: 500, 
-    height: "min(32rem, 50vh)", 
+    height: "min(42rem, 70vh)", 
     gap: 24, 
   },
   }[breakpoint];
