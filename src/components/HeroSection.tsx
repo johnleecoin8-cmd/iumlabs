@@ -154,7 +154,7 @@ const HeroSection = () => {
 
       {/* Floating Service Tags - Desktop - Enhanced */}
       {serviceTags.map((tag, index) => <div key={index} className={`absolute ${tag.position} hidden lg:block z-10`}>
-          <span className="font-sans px-3 py-1.5 text-xs whitespace-nowrap rounded-lg bg-white/[0.04] border border-white/[0.12] text-white/65 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-md">
+          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-lg bg-white/[0.04] border border-white/[0.12] text-white/65 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-md">
             {tag.label}
           </span>
         </div>)}
