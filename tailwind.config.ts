@@ -16,7 +16,7 @@ export default {
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
         serif: ['Playfair Display', 'Georgia', 'serif'],
-        display: ['Space Grotesk', 'Inter', 'sans-serif'],
+        display: ['Syne', 'Space Grotesk', 'Inter', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -74,15 +74,17 @@ export default {
         "3xl": "2rem",
       },
       fontSize: {
-        // Premium display scale - harmonious and readable
-        "display-hero": ["clamp(1.75rem, 4vw, 3rem)", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
-        "display-xl": ["clamp(1.5rem, 3vw, 2.5rem)", { lineHeight: "1.15", letterSpacing: "-0.02em", fontWeight: "700" }],
-        "display-lg": ["clamp(1.25rem, 2.5vw, 2rem)", { lineHeight: "1.2", letterSpacing: "-0.015em", fontWeight: "600" }],
-        "display-md": ["clamp(1.125rem, 2vw, 1.5rem)", { lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "600" }],
-        "display-sm": ["clamp(1rem, 1.5vw, 1.25rem)", { lineHeight: "1.3", letterSpacing: "-0.005em", fontWeight: "600" }],
+        // Premium display scale - harmonious and readable (increased by 2 steps)
+        "display-2xl": ["clamp(2.25rem, 5vw, 4rem)", { lineHeight: "1.05", letterSpacing: "-0.03em", fontWeight: "700" }],
+        "display-hero": ["clamp(2rem, 4.5vw, 3.5rem)", { lineHeight: "1.08", letterSpacing: "-0.025em", fontWeight: "700" }],
+        "display-xl": ["clamp(1.75rem, 3.5vw, 3rem)", { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" }],
+        "display-lg": ["clamp(1.5rem, 3vw, 2.5rem)", { lineHeight: "1.15", letterSpacing: "-0.015em", fontWeight: "600" }],
+        "display-md": ["clamp(1.25rem, 2.5vw, 1.75rem)", { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600" }],
+        "display-sm": ["clamp(1.125rem, 2vw, 1.5rem)", { lineHeight: "1.25", letterSpacing: "-0.005em", fontWeight: "600" }],
         // Body text scale - optimized for readability
-        "body-xl": ["1rem", { lineHeight: "1.7", letterSpacing: "0" }],
-        "body-lg": ["0.9375rem", { lineHeight: "1.7", letterSpacing: "0" }],
+        "body-xl": ["1.0625rem", { lineHeight: "1.7", letterSpacing: "0" }],
+        "body-lg": ["1rem", { lineHeight: "1.7", letterSpacing: "0" }],
+        "body-base": ["0.9375rem", { lineHeight: "1.65", letterSpacing: "0" }],
         "body": ["0.875rem", { lineHeight: "1.6", letterSpacing: "0" }],
         "body-sm": ["0.8125rem", { lineHeight: "1.6", letterSpacing: "0" }],
         // Caption and label scale
