@@ -240,6 +240,17 @@ const ProcessBillboardOverlay = () => {
         <div className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-2">
           <span className="text-[10px] md:text-xs text-white/50 font-mono tracking-wider">HOW WE WORK</span>
         </div>
+        
+        {/* Bottom CTA */}
+        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 md:bottom-4">
+          <a
+            href="/contact#contact-form"
+            className="group inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white/80 text-xs font-medium hover:bg-white/20 hover:text-white transition-all duration-300"
+          >
+            <span>Ready to start?</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </a>
+        </div>
       </div>
     </div>
   );

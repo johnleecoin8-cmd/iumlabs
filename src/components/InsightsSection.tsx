@@ -116,14 +116,21 @@ const InsightsSection = () => {
             );
           })}
 
-          {/* View All Link */}
-          <div className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 border-t border-border">
+          {/* View All Link + CTA */}
+          <div className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <Link
               to="/research"
               className="group inline-flex items-center gap-2 text-foreground font-medium hover:text-foreground/70 transition-colors text-sm"
             >
               <span className="group-hover:underline underline-offset-4">View all research</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            
+            <Link
+              to="/contact"
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Need help with your project? <span className="underline underline-offset-4">Contact us →</span>
             </Link>
           </div>
         </div>

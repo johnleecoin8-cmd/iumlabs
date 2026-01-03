@@ -6,20 +6,20 @@ const FloatingContactButton = () => {
 
   const contactOptions = [
     {
+      icon: Calendar,
+      label: "Free 30-min Call",
+      href: "https://calendly.com/iumlabs/30min",
+      color: "bg-primary"
+    },
+    {
       icon: Send,
       label: "Telegram",
       href: "https://t.me/iumlabs",
       color: "bg-[#0088cc]"
     },
     {
-      icon: Calendar,
-      label: "Book Meeting",
-      href: "https://calendly.com/iumlabs/30min",
-      color: "bg-primary"
-    },
-    {
       icon: Mail,
-      label: "Email",
+      label: "Email Us",
       href: "mailto:info@iumlabs.com",
       color: "bg-emerald-500"
     }
