@@ -188,12 +188,12 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography - Mobile optimized */}
           <h1 className="font-display text-[1.75rem] sm:text-display-xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.1] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
-            <span className="text-white font-sans text-[1.5rem] sm:text-display-hero leading-tight">Bridge Your Web3 Project to Korea's Crypto Ecosystem</span>
+            <span className="text-white font-sans text-[1.5rem] sm:text-display-hero leading-tight">The Premier Korean Web3 Marketing Partner.</span>
           </h1>
 
           {/* Subtext - Enhanced readability - Mobile optimized */}
           <p className="text-sm sm:text-body-base md:text-body-xl text-white/70 max-w-3xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-1 sm:px-2">
-            We combine <span className="text-white font-semibold">deep-dive research labs</span> with <span className="text-white font-semibold">high-impact marketing execution</span> to ensure your project thrives in the Korean market.
+            Bridging Global Web3 to Korea with <span className="text-white font-semibold">Data Intelligence</span>. We act as your <span className="text-white font-semibold">strategic gateway</span>.
           </p>
 
           {/* CTA Button - Enhanced - Mobile optimized */}
