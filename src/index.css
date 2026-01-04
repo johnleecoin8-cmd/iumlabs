@@ -14,60 +14,60 @@
 
 @layer base {
   :root {
-    /* Light Theme - Clean White Color System */
-    --background: 0 0% 98%;
-    --foreground: 0 0% 8%;
+    /* Lunar Strategy Clean Color System */
+    --background: 0 0% 4%;
+    --foreground: 0 0% 98%;
     
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 8%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 98%;
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 8%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 98%;
     
     /* Clean Blue Primary */
-    --primary: 217 91% 50%;
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
     
-    /* Light Gray Secondary */
-    --secondary: 0 0% 94%;
-    --secondary-foreground: 0 0% 15%;
+    /* Clean Gray Secondary */
+    --secondary: 0 0% 15%;
+    --secondary-foreground: 0 0% 100%;
     
-    --muted: 0 0% 92%;
-    --muted-foreground: 0 0% 45%;
+    --muted: 0 0% 12%;
+    --muted-foreground: 0 0% 60%;
     
     /* Blue Accent */
-    --accent: 217 91% 50%;
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 0 0% 88%;
-    --input: 0 0% 88%;
-    --ring: 217 91% 50%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 217 91% 60%;
     
     --radius: 0.5rem;
 
-    /* Section variables */
-    --dark-bg: 0 0% 8%;
+    /* Dark section variables */
+    --dark-bg: 0 0% 4%;
     --dark-fg: 0 0% 100%;
 
-    /* Light section variables */
-    --light-bg: 0 0% 98%;
+    /* Light section variables (for Team, Blog) */
+    --light-bg: 0 0% 96%;
     --light-fg: 0 0% 8%;
 
-    /* Section background system - Light shades */
-    --surface-base: 0 0% 100%;
-    --surface-odd: 0 0% 98%;
-    --surface-even: 0 0% 96%;
+    /* Section background system - Alternating dark shades */
+    --surface-base: 0 0% 4%;      /* #0A0A0A - darkest */
+    --surface-odd: 0 0% 6%;       /* #0F0F0F - odd sections */
+    --surface-even: 0 0% 7%;      /* #121212 - even sections */
 
     /* Lunar Strategy Blue */
-    --lunar-blue: 217 91% 50%;
+    --lunar-blue: 217 91% 60%;
     
-    /* Premium Text Hierarchy - 3-tier system */
-    --text-primary: 0 0% 8%;
-    --text-secondary: 0 0% 35%;
-    --text-tertiary: 0 0% 55%;
+    /* Premium Text Hierarchy - 3-tier opacity system */
+    --text-primary: 0 0% 100%;
+    --text-secondary: 0 0% 75%;
+    --text-tertiary: 0 0% 50%;
   }
 
   .dark {
@@ -137,29 +137,30 @@
   }
 
 
-  /* Light screens - All light theme */
+  /* Dark screens */
   .screen-1 {
-    background-color: hsl(0 0% 98%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
   }
 
   .screen-2 {
-    background-color: hsl(0 0% 96%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
   }
 
   .screen-3 {
-    background-color: hsl(0 0% 98%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
   }
 
   .screen-4 {
-    background-color: hsl(0 0% 96%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
   }
 
+  /* Light screens (Lunar Strategy alternating pattern) */
   .screen-5 {
-    background-color: hsl(0 0% 98%);
+    background-color: hsl(0 0% 96%);
     color: hsl(0 0% 8%);
   }
 
@@ -169,13 +170,14 @@
   }
 
   .screen-7 {
-    background-color: hsl(0 0% 98%);
+    background-color: hsl(0 0% 96%);
     color: hsl(0 0% 8%);
   }
 
+  /* Back to dark for CTA */
   .screen-8 {
-    background-color: hsl(0 0% 96%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 4%);
+    color: hsl(0 0% 98%);
   }
 
   /* Dark section styling */

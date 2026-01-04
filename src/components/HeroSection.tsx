@@ -140,13 +140,19 @@ const HeroSection = () => {
     const timer = setTimeout(() => setIsVisible(true), 800);
     return () => clearTimeout(timer);
   }, []);
-  return <div className="relative h-full min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary/10 via-background to-accent/5">
-      {/* Background Layer - Subtle gradient instead of video for light theme */}
+  return <div className="relative h-full min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
+      {/* Background Layer - Video */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-background" />
-        {/* Decorative circles */}
-        <div className="absolute top-20 right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-40 left-20 w-80 h-80 bg-accent/10 rounded-full blur-3xl" />
+        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{
+        filter: "brightness(0.35)"
+      }} onLoadedMetadata={e => {
+        e.currentTarget.currentTime = 0;
+      }}>
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Dark overlay gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
       </div>
 
       {/* Floating Service Tags - Desktop - Enhanced with floating animation */}
@@ -154,7 +160,7 @@ const HeroSection = () => {
           animation: `float-gentle ${3 + (index % 3) * 0.5}s ease-in-out infinite`,
           animationDelay: `${index * 0.3}s`
         }}>
-          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-lg bg-foreground/[0.04] border border-foreground/[0.12] text-foreground/65 hover:bg-foreground/[0.08] hover:border-primary/60 hover:text-foreground hover:shadow-[0_0_24px_rgba(0,0,0,0.1)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-md">
+          <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-lg bg-white/[0.04] border border-white/[0.12] text-white/65 hover:bg-white/[0.12] hover:border-primary/60 hover:text-white hover:shadow-[0_0_24px_rgba(255,255,255,0.15)] hover:scale-110 hover:-translate-y-1 transition-all duration-300 cursor-default backdrop-blur-md">
             {tag.label}
           </span>
         </div>)}
@@ -164,7 +170,7 @@ const HeroSection = () => {
           animation: `float-gentle ${3.5 + (index % 2) * 0.5}s ease-in-out infinite`,
           animationDelay: `${index * 0.4}s`
         }}>
-          <span className="font-sans px-3 py-1.5 text-[11px] rounded-md bg-background/80 border border-foreground/15 text-foreground/80 whitespace-nowrap backdrop-blur-md shadow-lg">
+          <span className="font-sans px-3 py-1.5 text-[11px] rounded-md bg-black/60 border border-white/25 text-white/90 whitespace-nowrap backdrop-blur-md shadow-lg">
             {tag.label}
           </span>
         </div>)}
@@ -174,18 +180,18 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography - Mobile optimized */}
           <h1 className="font-display text-[1.75rem] sm:text-display-xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.1] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
-            <span className="text-foreground font-sans text-[1.5rem] sm:text-display-hero leading-tight">Bridge Your Web3 Project to Korea's Crypto Ecosystem</span>
+            <span className="text-white font-sans text-[1.5rem] sm:text-display-hero leading-tight">Bridge Your Web3 Project to Korea's Crypto Ecosystem</span>
           </h1>
 
           {/* Subtext - Enhanced readability - Mobile optimized */}
-          <p className="text-sm sm:text-body-base md:text-body-xl text-foreground/70 max-w-3xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-1 sm:px-2">
-            We combine <span className="text-foreground font-semibold">deep-dive research labs</span> with <span className="text-foreground font-semibold">high-impact marketing execution</span> to ensure your project thrives in the Korean market.
+          <p className="text-sm sm:text-body-base md:text-body-xl text-white/70 max-w-3xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-1 sm:px-2">
+            We combine <span className="text-white font-semibold">deep-dive research labs</span> with <span className="text-white font-semibold">high-impact marketing execution</span> to ensure your project thrives in the Korean market.
           </p>
 
           {/* CTA Button - Enhanced - Mobile optimized */}
           <a 
             href="/contact#contact-form" 
-            className="group inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px] bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 shadow-lg hover:shadow-xl"
+            className="group primary-cta-dark inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px] border border-white/30"
             onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}
           >
             <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -193,9 +199,9 @@ const HeroSection = () => {
           </a>
           
           {/* Micro-copy for trust */}
-          <p className="mt-3 text-[10px] sm:text-xs text-foreground/50">
+          <p className="mt-3 text-[10px] sm:text-xs text-white/50">
             <span className="inline-flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
               Free 30-min consultation • Response within 24h
             </span>
           </p>
@@ -212,16 +218,16 @@ const HeroSection = () => {
       </div>
 
       {/* Client Logo Marquee - Enhanced */}
-      <div className="relative z-10 border-t border-foreground/10 py-3 sm:py-4 overflow-hidden">
+      <div className="relative z-10 border-t border-white/15 py-3 sm:py-4 overflow-hidden">
         {/* Section indicator */}
-        <div className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 flex items-center gap-2 text-foreground/50 text-label z-20">
+        <div className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/50 text-label z-20">
           <span className="number-badge">01</span>
         </div>
 
         <div className="flex items-center logo-marquee-slow ml-12 sm:ml-20">
-          {[...clientLogos, ...clientLogos].map((client, index) => <div key={index} className="flex items-center gap-2 sm:gap-2.5 mx-1.5 sm:mx-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-foreground/5 rounded-full border border-foreground/10 hover:border-foreground/20 transition-all duration-300">
-              <img src={client.logo} alt={client.name} className={`h-4 w-4 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-80' : 'opacity-70'}`} />
-              <span className="text-foreground/70 text-caption font-medium whitespace-nowrap">
+          {[...clientLogos, ...clientLogos].map((client, index) => <div key={index} className="flex items-center gap-2 sm:gap-2.5 mx-1.5 sm:mx-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300">
+              <img src={client.logo} alt={client.name} className={`h-4 w-4 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`} />
+              <span className="text-white/75 text-caption font-medium whitespace-nowrap">
                 {client.name}
               </span>
             </div>)}
@@ -233,10 +239,10 @@ const HeroSection = () => {
       top: window.innerHeight * 0.8,
       behavior: 'smooth'
     })}>
-        <span className="text-foreground/40 text-[10px] sm:text-sm font-medium group-hover:text-foreground/70 transition-colors duration-300">scroll</span>
+        <span className="text-white/40 text-[10px] sm:text-sm font-medium group-hover:text-white/70 transition-colors duration-300">scroll</span>
         <div className="relative flex flex-col items-center">
-          <div className="w-4 h-6 sm:w-6 sm:h-9 rounded-full border border-foreground/20 group-hover:border-foreground/40 transition-colors duration-300 flex justify-center pt-1">
-            <div className="w-1 h-1 sm:w-1.5 sm:h-2 rounded-full bg-foreground/60 group-hover:bg-primary transition-colors duration-300 animate-bounce" />
+          <div className="w-4 h-6 sm:w-6 sm:h-9 rounded-full border border-white/20 group-hover:border-white/40 transition-colors duration-300 flex justify-center pt-1">
+            <div className="w-1 h-1 sm:w-1.5 sm:h-2 rounded-full bg-white/60 group-hover:bg-primary transition-colors duration-300 animate-bounce" />
           </div>
         </div>
       </div>
@@ -266,10 +272,10 @@ const StatItem = ({
     duration: 2000
   });
   return <div className="text-center group cursor-default hover:scale-105 transition-transform">
-      <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-0.5 sm:mb-1 transition-all duration-300 group-hover:text-primary tracking-tight">
+      <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-0.5 sm:mb-1 stat-glow transition-all duration-300 group-hover:text-primary tracking-tight">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-[10px] sm:text-sm text-foreground/60 font-medium group-hover:text-foreground/75 transition-colors duration-300">
+      <div className="text-[10px] sm:text-sm text-white/60 font-medium group-hover:text-white/75 transition-colors duration-300">
         {label}
       </div>
     </div>;
