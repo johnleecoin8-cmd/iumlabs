@@ -100,14 +100,14 @@ const Sidebar = () => {
     return currentPath === linkHref || linkHref !== '/' && currentPath.startsWith(linkHref);
   };
   return <>
-      <aside className={cn("fixed left-0 top-0 h-screen z-50 hidden md:flex flex-col", "transition-all duration-500 ease-out", isCollapsed ? "w-[72px]" : "w-60")}>
+      <aside className={cn("fixed left-0 top-0 h-screen z-50 hidden md:flex flex-col", "transition-all duration-500 ease-out rounded-r-2xl", isCollapsed ? "w-[72px]" : "w-60")}>
         {/* Glassmorphism Container */}
         <div className="relative flex flex-col h-full">
           {/* Glass background layer */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] via-transparent to-white/[0.02] backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] via-transparent to-white/[0.02] backdrop-blur-sm rounded-r-2xl" />
           
           {/* Gradient border on right */}
-          <div className="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-white/[0.15] via-white/[0.06] to-white/[0.15]" />
+          <div className="absolute right-0 top-0 w-px h-[calc(100%-1rem)] mt-2 bg-gradient-to-b from-white/[0.15] via-white/[0.06] to-white/[0.15] rounded-full" />
           
           {/* Scroll Progress Indicator - Enhanced with pulse */}
           <div className="absolute right-0 top-0 w-px h-full bg-primary/5">
