@@ -321,7 +321,7 @@ const Services = () => {
                 <div className="space-y-2">
                   <Link 
                     to="/contact"
-                    className="group inline-flex items-center gap-2 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-5 py-2.5 text-sm font-medium tracking-wide hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 hover:gap-3 hover:shadow-lg hover:shadow-emerald-500/30 rounded-lg hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"
+                    className="group primary-cta-emerald inline-flex items-center gap-2 text-white px-5 py-2.5 text-sm font-medium tracking-wide rounded-lg active:scale-[0.98] min-h-[48px]"
                   >
                     Start Your Project
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />

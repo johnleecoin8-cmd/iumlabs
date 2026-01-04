@@ -186,10 +186,8 @@ const HeroSection = () => {
           </p>
 
           {/* CTA Button - Enhanced - Mobile optimized */}
-          <a href="/contact#contact-form" className="group relative inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 bg-white text-black font-medium text-xs sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] min-h-[44px] sm:min-h-[48px]">
+          <a href="/contact#contact-form" className="group primary-cta-dark inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px]">
             <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            {/* Shine sweep effect */}
-            <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
             <span>Get Your Free Proposal</span>
           </a>
           

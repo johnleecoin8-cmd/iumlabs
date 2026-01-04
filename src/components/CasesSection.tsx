@@ -249,7 +249,7 @@ const CasesSection = () => {
 
           <Link
             to="/contact"
-            className="group inline-flex items-center justify-center gap-2 bg-foreground text-background px-5 sm:px-6 py-3 sm:py-3 text-xs sm:text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 w-full sm:w-fit mb-2 min-h-[48px]"
+            className="group primary-cta-dark inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3 text-xs sm:text-sm font-medium rounded-full active:scale-[0.98] w-full sm:w-fit mb-2 min-h-[48px]"
           >
             Start Your Project
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

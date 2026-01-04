@@ -386,9 +386,8 @@ const Projects = () => {
                     href={brand.calendlyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] min-h-[48px]"
+                    className="group primary-cta-dark inline-flex items-center gap-3 px-8 py-4 font-medium text-sm rounded-full active:scale-[0.98] min-h-[48px]"
                   >
-                    <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                     <Calendar className="w-4 h-4" />
                     <span>Discuss Your Project</span>
                   </a>
