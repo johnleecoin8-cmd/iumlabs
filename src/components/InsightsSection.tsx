@@ -56,8 +56,8 @@ const InsightsSection = () => {
       setIsSubmitting(false);
     }
   };
-  return <section className="bg-background">
-      <div className="flex flex-col md:flex-row">
+  return <section className="bg-background px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4">
+      <div className="flex flex-col md:flex-row rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10">
         {/* Left: Articles List */}
         <div className="w-full md:w-2/3 md:border-r border-border">
           {insights.map((article, index) => {

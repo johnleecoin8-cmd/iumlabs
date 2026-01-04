@@ -7,7 +7,7 @@ const CTABannerSection = () => {
       behavior: 'smooth'
     });
   };
-  return <section className="bg-background text-foreground border-t border-border relative overflow-hidden group/section">
+  return <section className="mx-2 sm:mx-3 md:mx-4 my-2 sm:my-3 md:my-4 bg-background text-foreground border border-white/10 rounded-2xl sm:rounded-3xl relative overflow-hidden group/section">
       {/* Background glow on hover */}
       <div className="absolute inset-0 opacity-0 group-hover/section:opacity-100 transition-opacity duration-500 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-[100px]" />
