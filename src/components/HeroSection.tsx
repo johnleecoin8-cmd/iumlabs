@@ -140,7 +140,7 @@ const HeroSection = () => {
     const timer = setTimeout(() => setIsVisible(true), 800);
     return () => clearTimeout(timer);
   }, []);
-  return <div className="relative h-full min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
+  return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video */}
       <div className="absolute inset-0 overflow-hidden">
         <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{
