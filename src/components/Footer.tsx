@@ -11,6 +11,16 @@ const Footer = () => {
           </span>
         </h2>
       </div>
+      
+      {/* Copyright & SEO Keywords */}
+      <div className="w-full px-4 sm:px-6 pb-6 sm:pb-8 text-center space-y-2">
+        <p className="text-sm text-muted-foreground">
+          © 2026 ium labs (이음 랩스). All rights reserved.
+        </p>
+        <p className="text-xs text-muted-foreground/40">
+          Korean Web 3 Marketing, Blockchain Research, GTM Agency.
+        </p>
+      </div>
     </footer>
   );
 };
