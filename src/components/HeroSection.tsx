@@ -191,7 +191,7 @@ const HeroSection = () => {
           {/* CTA Button - Enhanced - Mobile optimized */}
           <a 
             href="/contact#contact-form" 
-            className="group primary-cta-dark inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px]"
+            className="group primary-cta-dark inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px] border border-white/30"
             onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}
           >
             <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
