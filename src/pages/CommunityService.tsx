@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const ACCENT_COLOR = "#5865F2";
 const TELEGRAM_COLOR = "#0088CC";
@@ -130,7 +130,11 @@ const telegramChannels = [
 ];
 
 const CommunityService = () => {
-  usePageTitle("Community Building");
+  usePageMeta(
+    "Community Management",
+    "Build thriving Discord & Telegram communities with AI-powered automation, gamified engagement, and 24/7 KR/EN moderation.",
+    "/services/community"
+  );
   
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [typingIndicator, setTypingIndicator] = useState(false);

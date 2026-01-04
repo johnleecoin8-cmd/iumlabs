@@ -2,7 +2,7 @@ import { Newspaper, Users, FileText, Eye, Share2, BarChart3 } from "lucide-react
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const ACCENT_COLOR = "#8B5CF6";
 
@@ -110,7 +110,11 @@ const faqItems: FAQItem[] = [
 ];
 
 const PRService = () => {
-  usePageTitle("PR & Media");
+  usePageMeta(
+    "PR & Media Relations",
+    "Secure premium coverage across 20+ Korean media outlets including Blockmedia, Coinness, and TokenPost. Press releases and interview coordination.",
+    "/services/pr"
+  );
   return <ServicePageLayout serviceName="PR & Media Relations" serviceTitle="PR &" serviceSubtitle="Media" serviceDescription="Secure premium coverage across Korean media outlets with our established network of 20+ publishers and journalists." serviceIcon={Newspaper} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="pr-media">
       {/* Media Network Section */}
       <section className="scroll-reveal bg-[#0F0F0F] relative overflow-hidden">

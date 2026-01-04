@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Star, Users, TrendingUp, Target, Sparkles, Crown, Award, Zap } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const ACCENT_COLOR = "#F59E0B";
 
@@ -129,7 +129,11 @@ const regionData = [
 ];
 
 const InfluencerService = () => {
-  usePageTitle("Influencer/KOL");
+  usePageMeta(
+    "Influencer/KOL Marketing",
+    "Access 70+ Korean and global crypto KOLs with 15M+ total reach. Strategic influencer campaigns for Web3 brand promotion.",
+    "/services/influencer"
+  );
   const [activeTier, setActiveTier] = useState<string | null>(null);
   const [activeRegion, setActiveRegion] = useState<string>("all");
   

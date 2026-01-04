@@ -1,7 +1,14 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Privacy = () => {
+  usePageMeta(
+    "Privacy Policy",
+    "Privacy Policy for Ium Labs. Learn how we collect, use, and protect your personal information.",
+    "/privacy"
+  );
+
   const sections = [
     { title: "1. Information We Collect", content: "We collect information you provide directly to us, including name, email address, company information, and project details when you contact us or use our services." },
     { title: "2. How We Use Your Information", content: "We use the information we collect to provide, maintain, and improve our services, communicate with you, and send you updates about our services." },
@@ -20,7 +27,7 @@ const Privacy = () => {
             Privacy Policy
           </h1>
           <p className="text-white/50 mb-12">
-            Last updated: December 2024
+            Last updated: January 2025
           </p>
           
           <div className="space-y-6">

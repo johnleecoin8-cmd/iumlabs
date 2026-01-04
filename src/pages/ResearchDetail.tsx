@@ -1,4 +1,5 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect } from "react";
 import { ArrowLeft, Clock, Calendar, Twitter, Linkedin, Copy, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
@@ -105,6 +106,22 @@ const ResearchDetail = () => {
       </div>
     );
   }
+
+  // Dynamic page meta for SEO
+  useEffect(() => {
+    if (post) {
+      const title = `${post.title} | Ium Labs Research`;
+      const description = post.excerpt || `${post.title} - ${post.category} research by Ium Labs.`;
+      
+      document.title = title;
+      document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+      document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
+      document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+      document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
+      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
+      document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://iumlabs.io/research/${slug}`);
+    }
+  }, [post, slug]);
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href);
