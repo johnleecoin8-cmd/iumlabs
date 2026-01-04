@@ -2,3 +2,6 @@ project_id = "iientxeipzodovkgnwgh"
 
 [functions.send-contact-notification]
 verify_jwt = false
+
+[functions.import-remote-image]
+verify_jwt = false

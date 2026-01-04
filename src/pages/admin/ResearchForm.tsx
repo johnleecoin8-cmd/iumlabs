@@ -109,6 +109,9 @@ export default function ResearchForm() {
   }, []);
 
   const handlePaste = useCallback((e: React.ClipboardEvent) => {
+    // Skip if pasting in content textarea
+    if (e.target instanceof HTMLTextAreaElement) return;
+    
     const items = e.clipboardData.items;
     for (const item of Array.from(items)) {
       if (item.type.startsWith('image/')) {
@@ -122,16 +125,21 @@ export default function ResearchForm() {
     }
   }, [handleImageFile]);
 
-  const uploadContentImage = useCallback(async (file: File) => {
+  const contentTextareaRef = useRef<HTMLTextAreaElement>(null);
+
+  const uploadContentImage = useCallback(async (file: File, cursorPosition?: number) => {
     const placeholderId = `uploading-${Date.now()}`;
-    const placeholder = `\n![Uploading...](${placeholderId})\n`;
+    const placeholder = `![Uploading...](${placeholderId})`;
     
-    setFormData(prev => ({ 
-      ...prev, 
-      content: prev.content + placeholder 
-    }));
+    // Insert at cursor position or end
+    setFormData(prev => {
+      const pos = cursorPosition ?? prev.content.length;
+      const before = prev.content.slice(0, pos);
+      const after = prev.content.slice(pos);
+      return { ...prev, content: before + '\n' + placeholder + '\n' + after };
+    });
     
-    toast.info('Uploading image...');
+    toast.info('이미지 업로드 중...');
     
     try {
       const fileExt = file.name.split('.').pop() || 'jpg';
@@ -152,36 +160,127 @@ export default function ResearchForm() {
         content: prev.content.replace(`![Uploading...](${placeholderId})`, `![image](${publicUrl})`)
       }));
       
-      toast.success('Image uploaded!');
+      toast.success('이미지 업로드 완료!');
     } catch (error) {
       console.error('Upload error:', error);
       setFormData(prev => ({
         ...prev,
-        content: prev.content.replace(`![Uploading...](${placeholderId})`, '[Image upload failed]')
+        content: prev.content.replace(`![Uploading...](${placeholderId})`, '[이미지 업로드 실패]')
       }));
-      toast.error('Failed to upload image');
+      toast.error('이미지 업로드 실패');
+    }
+  }, []);
+
+  const importRemoteImage = useCallback(async (imageUrl: string, cursorPosition?: number): Promise<string | null> => {
+    try {
+      const { data, error } = await supabase.functions.invoke('import-remote-image', {
+        body: { url: imageUrl },
+      });
+      
+      if (error || !data?.publicUrl) {
+        console.error('Remote import error:', error);
+        return null;
+      }
+      
+      return data.publicUrl;
+    } catch (error) {
+      console.error('Remote import error:', error);
+      return null;
     }
   }, []);
 
   const handleContentPaste = useCallback(async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
     const items = e.clipboardData.items;
-    const images: File[] = [];
+    const cursorPosition = e.currentTarget.selectionStart;
     
+    // Check for direct image files first (screenshots, copied images)
+    const imageFiles: File[] = [];
     for (const item of Array.from(items)) {
       if (item.type.startsWith('image/')) {
         const file = item.getAsFile();
-        if (file) images.push(file);
+        if (file) imageFiles.push(file);
       }
     }
     
-    if (images.length === 0) return;
-    
-    e.preventDefault();
-    
-    for (const file of images) {
-      await uploadContentImage(file);
+    if (imageFiles.length > 0) {
+      e.preventDefault();
+      for (const file of imageFiles) {
+        await uploadContentImage(file, cursorPosition);
+      }
+      return;
     }
-  }, [uploadContentImage]);
+    
+    // Check for HTML content (copied from web pages)
+    const html = e.clipboardData.getData('text/html');
+    if (html) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      const imgElements = doc.querySelectorAll('img');
+      
+      if (imgElements.length === 0) return; // No images, let default paste happen
+      
+      e.preventDefault();
+      
+      // Also get plain text to preserve
+      const plainText = e.clipboardData.getData('text/plain');
+      
+      toast.info(`이미지 ${imgElements.length}개 가져오는 중...`);
+      
+      let insertedContent = plainText || '';
+      let successCount = 0;
+      let failCount = 0;
+      
+      for (const img of Array.from(imgElements)) {
+        const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
+        
+        if (!src) continue;
+        
+        // Handle data URLs (base64 images)
+        if (src.startsWith('data:image/')) {
+          try {
+            const response = await fetch(src);
+            const blob = await response.blob();
+            const file = new File([blob], `pasted-${Date.now()}.png`, { type: blob.type });
+            await uploadContentImage(file, cursorPosition);
+            successCount++;
+          } catch (err) {
+            console.error('Failed to process data URL:', err);
+            failCount++;
+          }
+          continue;
+        }
+        
+        // Handle remote URLs
+        if (src.startsWith('http://') || src.startsWith('https://')) {
+          const publicUrl = await importRemoteImage(src);
+          if (publicUrl) {
+            insertedContent += `\n![image](${publicUrl})\n`;
+            successCount++;
+          } else {
+            // Fallback: use original URL (hotlink)
+            insertedContent += `\n![image](${src})\n`;
+            failCount++;
+          }
+        }
+      }
+      
+      // Insert the content at cursor position
+      if (insertedContent) {
+        setFormData(prev => {
+          const before = prev.content.slice(0, cursorPosition);
+          const after = prev.content.slice(cursorPosition);
+          return { ...prev, content: before + insertedContent + after };
+        });
+      }
+      
+      if (successCount > 0) {
+        toast.success(`이미지 ${successCount}개 업로드 완료!`);
+      }
+      if (failCount > 0) {
+        toast.warning(`${failCount}개 이미지는 원본 URL로 삽입됨`);
+      }
+    }
+  }, [uploadContentImage, importRemoteImage]);
 
   const [isContentDragging, setIsContentDragging] = useState(false);
 
