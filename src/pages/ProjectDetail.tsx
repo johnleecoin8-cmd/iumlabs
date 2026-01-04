@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
@@ -9,6 +9,7 @@ import ProjectHero from "@/components/project-detail/ProjectHero";
 import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
 import ProjectChallenge from "@/components/project-detail/ProjectChallenge";
 import NextProject from "@/components/project-detail/NextProject";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const ProjectDetail = () => {
   const { slug } = useParams();
@@ -100,6 +101,13 @@ const ProjectDetail = () => {
   // Get next project for navigation
   const nextProjectData = getNextProject(slug || "");
 
+  // Dynamic breadcrumb items
+  const breadcrumbItems = useMemo(() => [
+    { name: "Home", url: "https://iumlabs.io" },
+    { name: "Projects", url: "https://iumlabs.io/projects" },
+    { name: project.name, url: `https://iumlabs.io/projects/${slug}` }
+  ], [project.name, slug]);
+
   // Create CSS custom properties for the project color
   const projectColorStyles = {
     '--project-color': project.glowColor,
@@ -172,6 +180,7 @@ const ProjectDetail = () => {
         )}
 
         <Footer />
+        <BreadcrumbSchema items={breadcrumbItems} />
       </div>
     </div>
   );
