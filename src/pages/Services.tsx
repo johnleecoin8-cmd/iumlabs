@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, MouseEvent } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { useRipple } from "@/hooks/useRipple";
 import {
   Accordion,
@@ -194,7 +194,11 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 };
 
 const Services = () => {
-  usePageTitle("Services");
+  usePageMeta(
+    "Korean Web3 Marketing Services",
+    "Full-service Korean Web3 marketing solutions: GTM strategy, KOL campaigns, community building, PR, and more. 18+ projects launched in Korea.",
+    "/services"
+  );
   const { createRipple } = useRipple();
   const [heroInView, setHeroInView] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);

@@ -170,8 +170,8 @@ const featuredYappers = [
 
 const YapService = () => {
   usePageMeta(
-    "Yap Strategy",
-    "Amplify your message with 150+ aligned yappers. Organic buzz, mindshare growth, and strategic social media amplification on Crypto X.",
+    "Crypto Twitter Yap Marketing",
+    "Amplify your message with 150+ crypto yappers. Korean Web3 marketing through organic buzz and mindshare growth on Crypto X.",
     "/services/yap"
   );
   

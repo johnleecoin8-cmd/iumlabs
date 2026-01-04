@@ -137,8 +137,8 @@ const telegramChannels = [
 
 const CommunityService = () => {
   usePageMeta(
-    "Community Management",
-    "Build thriving Discord & Telegram communities with AI-powered automation, gamified engagement, and 24/7 KR/EN moderation.",
+    "Korean Web3 Community Management",
+    "Build thriving Korean crypto communities on Discord, Telegram, KakaoTalk, and Naver. 24/7 KR/EN moderation for Korean Web3 marketing success.",
     "/services/community"
   );
   
