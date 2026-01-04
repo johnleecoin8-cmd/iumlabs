@@ -214,6 +214,8 @@ const ServicePageLayout = ({
               muted
               loop
               playsInline
+              preload="metadata"
+              poster="/images/hero-poster.jpg"
               className="absolute inset-0 w-full h-full object-cover"
               style={{ filter: "brightness(0.35)" }}
               onLoadedMetadata={(e) => {
@@ -313,7 +315,7 @@ const ServicePageLayout = ({
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 <CalendlyButton 
-                  className="group relative inline-flex items-center gap-3 px-8 py-4 font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
+                  className="group relative inline-flex items-center gap-3 px-8 py-4 font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border border-white/30"
                   style={{ backgroundColor: accentColor, color: '#fff' }}
                 >
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />

@@ -212,7 +212,7 @@ const BrandingService = () => {
       {/* 4-Week Program Journey Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader number="01" title="4-Week Program" badge="Design Journey" />
+          <SectionHeader title="4-Week Program" badge="Design Journey" />
           
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
