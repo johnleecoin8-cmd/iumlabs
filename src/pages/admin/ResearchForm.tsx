@@ -122,6 +122,63 @@ export default function ResearchForm() {
     }
   }, [handleImageFile]);
 
+  const handleContentPaste = useCallback(async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
+    const items = e.clipboardData.items;
+    const images: File[] = [];
+    
+    for (const item of Array.from(items)) {
+      if (item.type.startsWith('image/')) {
+        const file = item.getAsFile();
+        if (file) images.push(file);
+      }
+    }
+    
+    if (images.length === 0) return;
+    
+    e.preventDefault();
+    
+    for (const file of images) {
+      const placeholderId = `uploading-${Date.now()}`;
+      const placeholder = `\n![Uploading...](${placeholderId})\n`;
+      
+      setFormData(prev => ({ 
+        ...prev, 
+        content: prev.content + placeholder 
+      }));
+      
+      toast.info('Uploading image...');
+      
+      try {
+        const fileExt = file.name.split('.').pop() || 'jpg';
+        const fileName = `research/inline-${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+        
+        const { error } = await supabase.storage
+          .from('project-images')
+          .upload(fileName, file);
+        
+        if (error) throw error;
+        
+        const { data: { publicUrl } } = supabase.storage
+          .from('project-images')
+          .getPublicUrl(fileName);
+        
+        setFormData(prev => ({
+          ...prev,
+          content: prev.content.replace(`![Uploading...](${placeholderId})`, `![image](${publicUrl})`)
+        }));
+        
+        toast.success('Image uploaded!');
+      } catch (error) {
+        console.error('Upload error:', error);
+        setFormData(prev => ({
+          ...prev,
+          content: prev.content.replace(`![Uploading...](${placeholderId})`, '[Image upload failed]')
+        }));
+        toast.error('Failed to upload image');
+      }
+    }
+  }, []);
+
   const handleDrop = useCallback((e: React.DragEvent) => {
     e.preventDefault();
     setIsDragging(false);
@@ -450,9 +507,13 @@ export default function ResearchForm() {
 
               <div className="col-span-2">
                 <Label className="text-white">Content (Markdown)</Label>
+                <p className="text-white/40 text-xs mt-1 mb-2">
+                  💡 이미지를 복사해서 여기에 붙여넣기(Ctrl/Cmd+V)하면 자동 업로드됩니다
+                </p>
                 <Textarea
                   value={formData.content}
                   onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                  onPaste={handleContentPaste}
                   className="bg-[#111] border-white/10 text-white mt-1 font-mono"
                   placeholder="Write your content in Markdown..."
                   rows={20}
