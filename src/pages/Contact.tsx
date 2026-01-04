@@ -8,104 +8,123 @@ import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
 import { usePageTitle } from "@/hooks/usePageTitle";
-
-const budgetOptions = [
-  "$15,000 - $25,000",
-  "$25,000 - $50,000",
-  "$50,000 +",
-  "Looking to raise funds",
-];
-
-const contactInfo = [
-  { icon: Mail, label: "Email", value: brand.email, link: `mailto:${brand.email}` },
-  { icon: Phone, label: "Phone", value: brand.phone, link: `tel:${brand.phone.replace(/\s/g, '')}` },
-  { icon: Send, label: "Telegram", value: brand.telegram, link: brand.telegramLink },
-  { icon: Linkedin, label: "LinkedIn", value: "ium Labs", link: brand.linkedin },
-];
+const budgetOptions = ["$15,000 - $25,000", "$25,000 - $50,000", "$50,000 +", "Looking to raise funds"];
+const contactInfo = [{
+  icon: Mail,
+  label: "Email",
+  value: brand.email,
+  link: `mailto:${brand.email}`
+}, {
+  icon: Phone,
+  label: "Phone",
+  value: brand.phone,
+  link: `tel:${brand.phone.replace(/\s/g, '')}`
+}, {
+  icon: Send,
+  label: "Telegram",
+  value: brand.telegram,
+  link: brand.telegramLink
+}, {
+  icon: Linkedin,
+  label: "LinkedIn",
+  value: "ium Labs",
+  link: brand.linkedin
+}];
 
 // Floating tags similar to HeroSection
-const floatingTags = [
-  { label: "Free Consultation", position: "top-[15%] left-[5%]" },
-  { label: "24h Response", position: "top-[35%] left-[4%]" },
-  { label: "Korean Market Expert", position: "top-[18%] right-[6%]" },
-  { label: "Global Partners", position: "top-[40%] right-[5%]" },
-];
-
-const mobileFloatingTags = [
-  { label: "Free Consult", position: "top-[8%] left-[3%]" },
-  { label: "24h Response", position: "top-[12%] right-[3%]" },
-];
-
+const floatingTags = [{
+  label: "Free Consultation",
+  position: "top-[15%] left-[5%]"
+}, {
+  label: "24h Response",
+  position: "top-[35%] left-[4%]"
+}, {
+  label: "Korean Market Expert",
+  position: "top-[18%] right-[6%]"
+}, {
+  label: "Global Partners",
+  position: "top-[40%] right-[5%]"
+}];
+const mobileFloatingTags = [{
+  label: "Free Consult",
+  position: "top-[8%] left-[3%]"
+}, {
+  label: "24h Response",
+  position: "top-[12%] right-[3%]"
+}];
 const Contact = () => {
   usePageTitle("Contact");
   const location = useLocation();
-  
   useEffect(() => {
     if (location.hash) {
       const element = document.querySelector(location.hash);
       if (element) {
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
         }, 100);
       }
     }
   }, [location.hash]);
-  
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     company: "",
     website: "",
     message: "",
-    budget: "",
+    budget: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email) return;
-
     setIsSubmitting(true);
     try {
-      const { error } = await supabase
-        .from('contact_submissions')
-        .insert({
-          name: formData.name,
-          email: formData.email,
-          comments: `Company: ${formData.company}\nWebsite: ${formData.website}\nBudget: ${formData.budget}\n\n${formData.message}`,
-        });
-
+      const {
+        error
+      } = await supabase.from('contact_submissions').insert({
+        name: formData.name,
+        email: formData.email,
+        comments: `Company: ${formData.company}\nWebsite: ${formData.website}\nBudget: ${formData.budget}\n\n${formData.message}`
+      });
       if (error) throw error;
-
       supabase.functions.invoke('send-contact-notification', {
         body: {
           name: formData.name,
           email: formData.email,
           company: formData.company,
           budget: formData.budget,
-          message: formData.message,
-        },
+          message: formData.message
+        }
       }).catch(console.error);
-
       toast({
         title: "Message sent!",
-        description: "We'll get back to you within 24 hours.",
+        description: "We'll get back to you within 24 hours."
       });
-      setFormData({ name: "", email: "", company: "", website: "", message: "", budget: "" });
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        website: "",
+        message: "",
+        budget: ""
+      });
     } catch (error) {
       toast({
         title: "Failed to send",
         description: "Please try again or contact us directly.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
     }
   };
-
-  return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+  return <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
       {/* Hero Section - Glassmorphism Style */}
@@ -113,17 +132,11 @@ const Contact = () => {
         <section className="relative min-h-[80vh] flex flex-col justify-center items-center overflow-hidden rounded-2xl sm:rounded-3xl">
           {/* Video Background */}
           <div className="absolute inset-0 overflow-hidden">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: "brightness(0.35)" }}
-              onLoadedMetadata={(e) => {
-                (e.target as HTMLVideoElement).currentTime = 0;
-              }}
-            >
+            <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{
+            filter: "brightness(0.35)"
+          }} onLoadedMetadata={e => {
+            (e.target as HTMLVideoElement).currentTime = 0;
+          }}>
               <source src="/videos/services-background.mp4" type="video/mp4" />
             </video>
             {/* Dark overlay gradient matching hero */}
@@ -131,28 +144,18 @@ const Contact = () => {
           </div>
 
           {/* Floating Tags - Desktop */}
-          {floatingTags.map((tag, index) => (
-            <div
-              key={index}
-              className={`absolute ${tag.position} hidden lg:block z-10`}
-            >
+          {floatingTags.map((tag, index) => <div key={index} className={`absolute ${tag.position} hidden lg:block z-10`}>
               <span className="font-sans px-4 py-2 text-xs whitespace-nowrap rounded-xl bg-white/[0.03] border border-white/[0.08] text-white/70 hover:bg-white/[0.06] hover:border-primary/40 hover:text-white transition-all duration-300">
                 {tag.label}
               </span>
-            </div>
-          ))}
+            </div>)}
 
           {/* Floating Tags - Mobile */}
-          {mobileFloatingTags.map((tag, index) => (
-            <div
-              key={`mobile-${index}`}
-              className={`absolute ${tag.position} lg:hidden z-10`}
-            >
+          {mobileFloatingTags.map((tag, index) => <div key={`mobile-${index}`} className={`absolute ${tag.position} lg:hidden z-10`}>
               <span className="font-sans px-2 py-1 text-[10px] rounded-lg bg-white/[0.03] border border-white/[0.08] text-white/60 whitespace-nowrap">
                 {tag.label}
               </span>
-            </div>
-          ))}
+            </div>)}
 
           {/* Main Content - Centered */}
           <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 w-full">
@@ -185,14 +188,7 @@ const Contact = () => {
           <div className="relative z-10 w-full border-t border-white/10 py-4 sm:py-6">
             <div className="container mx-auto px-4 sm:px-6">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
-                {contactInfo.map((info) => (
-                  <a 
-                    key={info.label}
-                    href={info.link}
-                    target={info.link.startsWith('http') ? '_blank' : undefined}
-                    rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                    className="group flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl hover:bg-white/[0.06] hover:border-white/20 hover:-translate-y-0.5 transition-all duration-300 min-h-[44px]"
-                  >
+                {contactInfo.map(info => <a key={info.label} href={info.link} target={info.link.startsWith('http') ? '_blank' : undefined} rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined} className="group flex items-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 bg-white/[0.03] border border-white/[0.08] rounded-xl hover:bg-white/[0.06] hover:border-white/20 hover:-translate-y-0.5 transition-all duration-300 min-h-[44px]">
                     <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white/[0.05] flex items-center justify-center flex-shrink-0">
                       <info.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/50 group-hover:text-white transition-colors" />
                     </div>
@@ -201,8 +197,7 @@ const Contact = () => {
                       <p className="text-white text-xs sm:text-sm font-medium truncate">{info.value}</p>
                     </div>
                     <ArrowUpRight className="w-3 h-3 text-white/20 group-hover:text-white transition-colors flex-shrink-0" />
-                  </a>
-                ))}
+                  </a>)}
               </div>
             </div>
           </div>
@@ -210,89 +205,10 @@ const Contact = () => {
       </main>
 
       {/* Why Work With Us - Identity Section */}
-      <section className="bg-[#0A0A0A] py-16 md:py-20 border-t border-white/5">
-        <div className="container mx-auto max-w-6xl px-4 sm:px-6">
-          {/* Core Message */}
-          <div className="text-center mb-12 md:mb-16">
-            <h2 className="font-sans text-display-xl font-bold text-white mb-4 tracking-[-0.02em] leading-[1.1]">
-              We don't just market.
-              <br />
-              <span className="text-white/40">We </span>
-              <span className="relative inline-block">
-                <span className="text-white">connect</span>
-                <span className="absolute -bottom-1 left-0 w-full h-[1.5px] bg-gradient-to-r from-white/60 to-transparent" />
-              </span>
-              <span className="text-white/40">.</span>
-            </h2>
-            <p className="text-body-lg text-white/50 max-w-xl mx-auto font-light">
-              <span className="text-white/70 font-medium">이음</span> — Bridging global Web3 vision to Korean reality
-            </p>
-          </div>
-
-          {/* Three Value Cards */}
-          <div className="grid md:grid-cols-3 gap-3 md:gap-4 mb-12">
-            {/* Card 1 - Bridge */}
-            <div className="group relative p-5 md:p-6 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500 min-h-[44px]">
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative">
-                <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <Globe className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="text-base font-semibold text-white mb-2">Bridge</h3>
-                <p className="text-white/50 leading-relaxed text-sm">
-                  We connect global Web3 projects with the Korean market through deep local expertise.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 2 - Data */}
-            <div className="group relative p-5 md:p-6 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500 min-h-[44px]">
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative">
-                <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <BarChart3 className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="text-base font-semibold text-white mb-2">Data-Driven</h3>
-                <p className="text-white/50 leading-relaxed text-sm">
-                  Every strategy is backed by proprietary research and real-time market intelligence.
-                </p>
-              </div>
-            </div>
-
-            {/* Card 3 - Growth */}
-            <div className="group relative p-5 md:p-6 rounded-xl bg-white/[0.02] border border-white/[0.08] hover:border-white/20 hover:bg-white/[0.04] transition-all duration-500 min-h-[44px]">
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-white/[0.03] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative">
-                <div className="w-10 h-10 rounded-lg bg-white/[0.05] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <Rocket className="w-5 h-5 text-white/60 group-hover:text-white transition-colors" />
-                </div>
-                <h3 className="text-base font-semibold text-white mb-2">Growth</h3>
-                <p className="text-white/50 leading-relaxed text-sm">
-                  From market entry to becoming a leader in Korea. 50+ projects helped.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* CTA to Form */}
-          <div className="text-center">
-            <a 
-              href="#contact-form" 
-              className="group inline-flex items-center gap-3 text-white/60 hover:text-white transition-colors duration-300"
-              onClick={(e) => {
-                e.preventDefault();
-                document.querySelector('#contact-form')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              <span className="text-sm uppercase tracking-widest">Ready to connect?</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Contact Form Section - Glassmorphism */}
-      <section className="bg-[#0A0A0A] py-12 md:py-16" id="contact-form">
+      <section id="contact-form" className="bg-[#0A0A0A] py-12 md:py-[20px]">
         <div className="container mx-auto max-w-4xl px-4 sm:px-6">
           {/* Section Header */}
           <div className="text-center mb-10 md:mb-12">
@@ -317,25 +233,17 @@ const Contact = () => {
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Name *</label>
-                  <input
-                    type="text"
-                    placeholder="Your name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                    className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all"
-                  />
+                  <input type="text" placeholder="Your name" value={formData.name} onChange={e => setFormData({
+                  ...formData,
+                  name: e.target.value
+                })} required className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all" />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Email *</label>
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    required
-                    className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all"
-                  />
+                  <input type="email" placeholder="your@email.com" value={formData.email} onChange={e => setFormData({
+                  ...formData,
+                  email: e.target.value
+                })} required className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all" />
                 </div>
               </div>
 
@@ -343,23 +251,17 @@ const Contact = () => {
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Name</label>
-                  <input
-                    type="text"
-                    placeholder="Company name"
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all"
-                  />
+                  <input type="text" placeholder="Company name" value={formData.company} onChange={e => setFormData({
+                  ...formData,
+                  company: e.target.value
+                })} className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all" />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Website</label>
-                  <input
-                    type="url"
-                    placeholder="https://..."
-                    value={formData.website}
-                    onChange={(e) => setFormData({ ...formData, website: e.target.value })}
-                    className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all"
-                  />
+                  <input type="url" placeholder="https://..." value={formData.website} onChange={e => setFormData({
+                  ...formData,
+                  website: e.target.value
+                })} className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all" />
                 </div>
               </div>
 
@@ -367,42 +269,27 @@ const Contact = () => {
               <div>
                 <label className="block text-xs uppercase tracking-wider text-white/40 mb-3 sm:mb-4">Estimated Budget</label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
-                  {budgetOptions.map((option) => (
-                    <button
-                      key={option}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, budget: option })}
-                      className={`px-3 py-3 sm:px-4 min-h-[44px] rounded-xl text-xs sm:text-sm border transition-all text-center hover:scale-[1.02] active:scale-[0.98] ${
-                        formData.budget === option
-                          ? 'bg-white/[0.1] border-white/30 text-white'
-                          : 'bg-white/[0.03] border-white/[0.08] text-white/60 hover:border-white/20 hover:bg-white/[0.05] hover:text-white'
-                      }`}
-                    >
+                  {budgetOptions.map(option => <button key={option} type="button" onClick={() => setFormData({
+                  ...formData,
+                  budget: option
+                })} className={`px-3 py-3 sm:px-4 min-h-[44px] rounded-xl text-xs sm:text-sm border transition-all text-center hover:scale-[1.02] active:scale-[0.98] ${formData.budget === option ? 'bg-white/[0.1] border-white/30 text-white' : 'bg-white/[0.03] border-white/[0.08] text-white/60 hover:border-white/20 hover:bg-white/[0.05] hover:text-white'}`}>
                       {option}
-                    </button>
-                  ))}
+                    </button>)}
                 </div>
               </div>
 
               {/* Project Description */}
               <div>
                 <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Tell Us About Your Project</label>
-                <textarea
-                  placeholder="Describe your project and goals..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  rows={4}
-                  className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all resize-none"
-                />
+                <textarea placeholder="Describe your project and goals..." value={formData.message} onChange={e => setFormData({
+                ...formData,
+                message: e.target.value
+              })} rows={4} className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all resize-none" />
               </div>
 
               {/* Submit Button */}
               <div className="pt-2">
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50"
-                >
+                <button type="submit" disabled={isSubmitting} className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50">
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                   <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -425,8 +312,6 @@ const Contact = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Contact;
