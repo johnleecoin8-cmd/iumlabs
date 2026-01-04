@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, Save, Upload, X, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, Save, Upload, X, Image as ImageIcon, Eye, EyeOff } from 'lucide-react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { ProtectedRoute } from '@/components/admin/ProtectedRoute';
 import { Button } from '@/components/ui/button';
@@ -56,6 +56,180 @@ export default function ResearchForm() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [showPreview, setShowPreview] = useState(false);
+
+  // Markdown rendering function
+  const renderMarkdown = useMemo(() => {
+    const content = formData.content;
+    if (!content) return null;
+
+    const lines = content.split('\n');
+    const elements: React.ReactNode[] = [];
+    let listItems: string[] = [];
+    let listType: 'ul' | 'ol' | null = null;
+    let blockquoteLines: string[] = [];
+
+    const flushList = () => {
+      if (listItems.length > 0 && listType) {
+        const ListTag = listType;
+        elements.push(
+          <ListTag key={`list-${elements.length}`} className={`${listType === 'ul' ? 'list-disc' : 'list-decimal'} pl-6 my-4 space-y-2 text-white/80`}>
+            {listItems.map((item, i) => <li key={i}>{item}</li>)}
+          </ListTag>
+        );
+        listItems = [];
+        listType = null;
+      }
+    };
+
+    const flushBlockquote = () => {
+      if (blockquoteLines.length > 0) {
+        elements.push(
+          <blockquote key={`bq-${elements.length}`} className="border-l-4 border-primary/50 pl-4 my-4 italic text-white/70">
+            {blockquoteLines.map((line, i) => <p key={i}>{line}</p>)}
+          </blockquote>
+        );
+        blockquoteLines = [];
+      }
+    };
+
+    const parseInline = (text: string): React.ReactNode => {
+      // Handle bold, italic, links, inline code
+      const parts: React.ReactNode[] = [];
+      let remaining = text;
+      let key = 0;
+
+      while (remaining.length > 0) {
+        // Bold
+        const boldMatch = remaining.match(/\*\*(.+?)\*\*/);
+        if (boldMatch && boldMatch.index === 0) {
+          parts.push(<strong key={key++} className="font-bold text-white">{boldMatch[1]}</strong>);
+          remaining = remaining.slice(boldMatch[0].length);
+          continue;
+        }
+
+        // Inline code
+        const codeMatch = remaining.match(/`([^`]+)`/);
+        if (codeMatch && codeMatch.index === 0) {
+          parts.push(<code key={key++} className="bg-white/10 px-1.5 py-0.5 rounded text-sm font-mono">{codeMatch[1]}</code>);
+          remaining = remaining.slice(codeMatch[0].length);
+          continue;
+        }
+
+        // Link
+        const linkMatch = remaining.match(/\[([^\]]+)\]\(([^)]+)\)/);
+        if (linkMatch && linkMatch.index === 0) {
+          parts.push(<a key={key++} href={linkMatch[2]} className="text-primary hover:underline" target="_blank" rel="noopener noreferrer">{linkMatch[1]}</a>);
+          remaining = remaining.slice(linkMatch[0].length);
+          continue;
+        }
+
+        // Find next special char
+        const nextSpecial = remaining.search(/\*\*|`|\[/);
+        if (nextSpecial > 0) {
+          parts.push(remaining.slice(0, nextSpecial));
+          remaining = remaining.slice(nextSpecial);
+        } else {
+          parts.push(remaining);
+          break;
+        }
+      }
+      return parts.length === 1 ? parts[0] : parts;
+    };
+
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      const trimmed = line.trim();
+
+      // Empty line
+      if (!trimmed) {
+        flushList();
+        flushBlockquote();
+        continue;
+      }
+
+      // Headings
+      if (trimmed.startsWith('### ')) {
+        flushList();
+        flushBlockquote();
+        elements.push(<h3 key={i} className="text-xl font-bold text-white mt-8 mb-4">{parseInline(trimmed.slice(4))}</h3>);
+        continue;
+      }
+      if (trimmed.startsWith('## ')) {
+        flushList();
+        flushBlockquote();
+        elements.push(<h2 key={i} className="text-2xl font-bold text-white mt-10 mb-6">{parseInline(trimmed.slice(3))}</h2>);
+        continue;
+      }
+      if (trimmed.startsWith('# ')) {
+        flushList();
+        flushBlockquote();
+        elements.push(<h1 key={i} className="text-3xl font-bold text-white mt-10 mb-6">{parseInline(trimmed.slice(2))}</h1>);
+        continue;
+      }
+
+      // Image
+      const imgMatch = trimmed.match(/!\[([^\]]*)\]\(([^)]+)\)/);
+      if (imgMatch) {
+        flushList();
+        flushBlockquote();
+        elements.push(
+          <figure key={i} className="my-6">
+            <img src={imgMatch[2]} alt={imgMatch[1]} className="w-full rounded-lg" loading="lazy" />
+            {imgMatch[1] && <figcaption className="text-center text-white/50 text-sm mt-2">{imgMatch[1]}</figcaption>}
+          </figure>
+        );
+        continue;
+      }
+
+      // Blockquote
+      if (trimmed.startsWith('> ')) {
+        flushList();
+        blockquoteLines.push(trimmed.slice(2));
+        continue;
+      }
+
+      // Unordered list
+      if (trimmed.startsWith('- ') || trimmed.startsWith('* ')) {
+        flushBlockquote();
+        if (listType !== 'ul') {
+          flushList();
+          listType = 'ul';
+        }
+        listItems.push(trimmed.slice(2));
+        continue;
+      }
+
+      // Ordered list
+      const olMatch = trimmed.match(/^\d+\.\s+(.+)/);
+      if (olMatch) {
+        flushBlockquote();
+        if (listType !== 'ol') {
+          flushList();
+          listType = 'ol';
+        }
+        listItems.push(olMatch[1]);
+        continue;
+      }
+
+      // Horizontal rule
+      if (trimmed === '---' || trimmed === '***') {
+        flushList();
+        flushBlockquote();
+        elements.push(<hr key={i} className="border-white/10 my-8" />);
+        continue;
+      }
+
+      // Regular paragraph
+      flushList();
+      flushBlockquote();
+      elements.push(<p key={i} className="text-white/80 leading-relaxed my-4">{parseInline(trimmed)}</p>);
+    }
+
+    flushList();
+    flushBlockquote();
+    return elements;
+  }, [formData.content]);
 
   const { data: existingPost, isLoading } = useQuery({
     queryKey: ['research-post', id],
@@ -636,30 +810,62 @@ export default function ResearchForm() {
               </div>
 
               <div className="col-span-2">
-                <Label className="text-white">Content (Markdown)</Label>
-                <p className="text-white/40 text-xs mt-1 mb-2">
+                <div className="flex items-center justify-between mb-2">
+                  <Label className="text-white">Content (Markdown)</Label>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => setShowPreview(!showPreview)}
+                    className="text-white/60 hover:text-white gap-2"
+                  >
+                    {showPreview ? (
+                      <>
+                        <EyeOff className="w-4 h-4" />
+                        에디터
+                      </>
+                    ) : (
+                      <>
+                        <Eye className="w-4 h-4" />
+                        미리보기
+                      </>
+                    )}
+                  </Button>
+                </div>
+                <p className="text-white/40 text-xs mb-2">
                   💡 이미지를 복사(Ctrl/Cmd+V) 또는 드래그 앤 드롭하면 자동 업로드됩니다
                 </p>
-                <div className="relative">
-                  <Textarea
-                    value={formData.content}
-                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                    onPaste={handleContentPaste}
-                    onDrop={handleContentDrop}
-                    onDragOver={handleContentDragOver}
-                    onDragLeave={handleContentDragLeave}
-                    className={`bg-[#111] border-white/10 text-white mt-1 font-mono transition-colors ${
-                      isContentDragging ? 'border-primary border-2 bg-primary/5' : ''
-                    }`}
-                    placeholder="Write your content in Markdown..."
-                    rows={20}
-                  />
-                  {isContentDragging && (
-                    <div className="absolute inset-0 flex items-center justify-center bg-primary/10 border-2 border-dashed border-primary rounded-md pointer-events-none">
-                      <p className="text-primary font-medium">이미지를 여기에 드롭하세요</p>
-                    </div>
-                  )}
-                </div>
+                
+                {showPreview ? (
+                  <div className="bg-[#111] border border-white/10 rounded-md p-6 min-h-[500px] max-h-[700px] overflow-y-auto prose prose-invert">
+                    {formData.content ? (
+                      renderMarkdown
+                    ) : (
+                      <p className="text-white/40 italic">콘텐츠를 입력하면 여기에 미리보기가 표시됩니다</p>
+                    )}
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <Textarea
+                      value={formData.content}
+                      onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                      onPaste={handleContentPaste}
+                      onDrop={handleContentDrop}
+                      onDragOver={handleContentDragOver}
+                      onDragLeave={handleContentDragLeave}
+                      className={`bg-[#111] border-white/10 text-white font-mono transition-colors ${
+                        isContentDragging ? 'border-primary border-2 bg-primary/5' : ''
+                      }`}
+                      placeholder="Write your content in Markdown..."
+                      rows={20}
+                    />
+                    {isContentDragging && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-primary/10 border-2 border-dashed border-primary rounded-md pointer-events-none">
+                        <p className="text-primary font-medium">이미지를 여기에 드롭하세요</p>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
 
               <div className="flex items-center gap-3 col-span-2">
