@@ -80,6 +80,47 @@ const ResearchDetail = () => {
       }))
     : hardcodedRelated;
 
+  // Dynamic page meta for SEO - must be before any conditional returns
+  useEffect(() => {
+    if (post) {
+      const title = `${post.title} | Ium Labs Research`;
+      const description = post.excerpt || `${post.title} - ${post.category} research by Ium Labs.`;
+      
+      document.title = title;
+      document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+      document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
+      document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+      document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
+      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
+      document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://iumlabs.io/research/${slug}`);
+    }
+  }, [post, slug]);
+
+  // Dynamic breadcrumb items - must be before any conditional returns
+  const breadcrumbItems = useMemo(() => [
+    { name: "Home", url: "https://iumlabs.io" },
+    { name: "Research", url: "https://iumlabs.io/research" },
+    { name: post?.title || '', url: `https://iumlabs.io/research/${slug}` }
+  ], [post?.title, slug]);
+
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    toast.success("Link copied to clipboard!");
+  };
+
+  const handleShare = (platform: string) => {
+    if (!post) return;
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(post.title);
+    
+    const shareUrls: Record<string, string> = {
+      twitter: `https://twitter.com/intent/tweet?text=${title}&url=${url}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
+    };
+    
+    window.open(shareUrls[platform], "_blank", "width=600,height=400");
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-[#0A0A0A]">
@@ -107,46 +148,6 @@ const ResearchDetail = () => {
       </div>
     );
   }
-
-  // Dynamic page meta for SEO
-  useEffect(() => {
-    if (post) {
-      const title = `${post.title} | Ium Labs Research`;
-      const description = post.excerpt || `${post.title} - ${post.category} research by Ium Labs.`;
-      
-      document.title = title;
-      document.querySelector('meta[name="description"]')?.setAttribute('content', description);
-      document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
-      document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
-      document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
-      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
-      document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://iumlabs.io/research/${slug}`);
-    }
-  }, [post, slug]);
-
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(window.location.href);
-    toast.success("Link copied to clipboard!");
-  };
-
-  // Dynamic breadcrumb items
-  const breadcrumbItems = useMemo(() => [
-    { name: "Home", url: "https://iumlabs.io" },
-    { name: "Research", url: "https://iumlabs.io/research" },
-    { name: post.title, url: `https://iumlabs.io/research/${slug}` }
-  ], [post.title, slug]);
-
-  const handleShare = (platform: string) => {
-    const url = encodeURIComponent(window.location.href);
-    const title = encodeURIComponent(post.title);
-    
-    const shareUrls: Record<string, string> = {
-      twitter: `https://twitter.com/intent/tweet?text=${title}&url=${url}`,
-      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${url}`,
-    };
-    
-    window.open(shareUrls[platform], "_blank", "width=600,height=400");
-  };
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] p-0.5 sm:p-1 md:p-2">
