@@ -9,7 +9,7 @@ import FloatingContactButton from "@/components/FloatingContactButton";
 import { HoverExpandGallery } from "@/components/HoverExpandGallery";
 import { ArrowRight, Calendar, ChevronDown, Filter } from "lucide-react";
 import { Link } from "react-router-dom";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { useCountUp } from "@/hooks/useCountUp";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
@@ -266,7 +266,11 @@ const CategoryFilter = ({
 };
 
 const Projects = () => {
-  usePageTitle("Projects");
+  usePageMeta(
+    "Korean Web3 Marketing Portfolio",
+    "View our portfolio of successful Korean Web3 marketing campaigns. 18+ global projects launched in Korea including Polygon, Ondo, and Story Protocol.",
+    "/projects"
+  );
   const [activeCategory, setActiveCategory] = useState("All");
   const [isStatsVisible, setIsStatsVisible] = useState(false);
 

@@ -137,8 +137,8 @@ const regionData = [
 
 const InfluencerService = () => {
   usePageMeta(
-    "Influencer/KOL Marketing",
-    "Access 70+ Korean and global crypto KOLs with 15M+ total reach. Strategic influencer campaigns for Web3 brand promotion.",
+    "Korean Crypto KOL Marketing",
+    "Access 70+ Korean and global crypto KOLs with 15M+ total reach. Korean Web3 marketing through strategic influencer campaigns.",
     "/services/influencer"
   );
   const [activeTier, setActiveTier] = useState<string | null>(null);

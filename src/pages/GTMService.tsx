@@ -180,8 +180,8 @@ const faqItems: FAQItem[] = [
 
 const GTMService = () => {
   usePageMeta(
-    "GTM Strategy",
-    "Strategic market entry planning for Web3 projects launching in Korea. VASP compliance, Korean exchange listing, and coordinated launch campaigns.",
+    "Korean Web3 GTM Strategy",
+    "Strategic Go-To-Market planning for Web3 projects launching in Korea. Korean exchange listing, VASP compliance, and localized launch campaigns.",
     "/services/gtm"
   );
   const [activePhase, setActivePhase] = useState(0);

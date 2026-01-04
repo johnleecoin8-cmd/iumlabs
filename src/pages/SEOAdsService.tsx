@@ -182,8 +182,8 @@ const adPlatforms = [
 
 const SEOAdsService = () => {
   usePageMeta(
-    "SEO & Paid Ads",
-    "Drive qualified traffic through search optimization and targeted ads on Google, Twitter/X, and crypto-native platforms.",
+    "Korean Crypto SEO & Paid Ads",
+    "Drive qualified traffic to your Web3 project in Korea through SEO optimization and targeted ads on Google, Naver, and crypto platforms.",
     "/services/seo-ads"
   );
   const [activePhase, setActivePhase] = useState(0);

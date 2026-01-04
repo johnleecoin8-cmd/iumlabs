@@ -200,8 +200,8 @@ const portfolioItems = [
 
 const BrandingService = () => {
   usePageMeta(
-    "Branding & Website",
-    "Distinctive Web3 brand identity and high-performance websites. Logo design, UI/UX, and custom frontend development for blockchain projects.",
+    "Web3 Branding & Website Design",
+    "Distinctive Web3 brand identity and high-performance websites for projects launching in Korea. Korean-localized design and development.",
     "/services/branding"
   );
   const [activePhase, setActivePhase] = useState(0);

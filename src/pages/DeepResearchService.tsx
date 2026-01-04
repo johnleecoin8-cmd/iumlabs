@@ -149,8 +149,8 @@ const distributionChannels = [
 
 const DeepResearchService = () => {
   usePageMeta(
-    "Deep Research & Distribution",
-    "Data-driven market research tailored for the Korean crypto market. Published through media and KOL networks for brand authority.",
+    "Korean Crypto Market Research",
+    "Data-driven market research for the Korean crypto market. Korean Web3 marketing insights distributed through media and KOL networks.",
     "/services/deep-research"
   );
   const [activeChannel, setActiveChannel] = useState(0);

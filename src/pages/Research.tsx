@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import CalendlyButton from "@/components/CalendlyButton";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { useQuery } from "@tanstack/react-query";
 
 // Research thumbnail images
@@ -838,7 +838,11 @@ const researchCategories = [
 const categories = ["All", "Market Research"];
 
 const Research = () => {
-  usePageTitle("Research");
+  usePageMeta(
+    "Korean Web3 Research & Insights",
+    "In-depth research and analysis on Korean crypto market trends, DeFi, NFTs, and blockchain technology. Expert insights from ium labs.",
+    "/research"
+  );
   
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");

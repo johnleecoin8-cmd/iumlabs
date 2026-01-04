@@ -8,7 +8,7 @@ export const usePageMeta = (
   title: string, 
   description?: string, 
   path?: string,
-  suffix: string = "Ium Labs"
+  suffix: string = "Korean Web3 Marketing Agency | ium labs"
 ) => {
   useEffect(() => {
     // Update page title
