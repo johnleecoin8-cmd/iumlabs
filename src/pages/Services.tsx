@@ -1,10 +1,11 @@
 import { ArrowRight, Compass, Users, Search, Mic2, MessageCircle, Newspaper, ChevronDown, Target, Rocket, TrendingUp } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, MouseEvent } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
 import { usePageTitle } from "@/hooks/usePageTitle";
+import { useRipple } from "@/hooks/useRipple";
 import {
   Accordion,
   AccordionContent,
@@ -194,6 +195,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 
 const Services = () => {
   usePageTitle("Services");
+  const { createRipple } = useRipple();
   const [heroInView, setHeroInView] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   
@@ -321,7 +323,8 @@ const Services = () => {
                 <div className="space-y-2">
                   <Link 
                     to="/contact"
-                    className="group primary-cta-emerald inline-flex items-center gap-2 text-white px-5 py-2.5 text-sm font-medium tracking-wide rounded-lg active:scale-[0.98] min-h-[48px]"
+                    className="group primary-cta-emerald inline-flex items-center gap-2 text-white px-5 py-2.5 text-sm font-medium tracking-wide rounded-lg active:scale-[0.98] min-h-[48px] border border-white/30"
+                    onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}
                   >
                     Start Your Project
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
