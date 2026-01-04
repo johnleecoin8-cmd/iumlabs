@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 const budgetOptions = ["$15,000 - $25,000", "$25,000 - $50,000", "$50,000 +", "Looking to raise funds"];
 const contactInfo = [{
   icon: Mail,
@@ -53,7 +53,11 @@ const mobileFloatingTags = [{
   position: "top-[12%] right-[3%]"
 }];
 const Contact = () => {
-  usePageTitle("Contact");
+  usePageMeta(
+    "Contact Us",
+    "Get in touch with ium labs for Korean Web3 marketing. Free consultation, 24h response. Seoul-based experts helping global projects succeed in Korea.",
+    "/contact"
+  );
   const location = useLocation();
   useEffect(() => {
     if (location.hash) {
