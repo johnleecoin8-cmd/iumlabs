@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight, ArrowUp } from "lucide-react";
-
 const CTABannerSection = () => {
   const scrollToTop = () => {
     window.scrollTo({
@@ -8,9 +7,7 @@ const CTABannerSection = () => {
       behavior: 'smooth'
     });
   };
-
-  return (
-    <section className="bg-background text-foreground border-t border-border relative overflow-hidden group/section">
+  return <section className="bg-background text-foreground border-t border-border relative overflow-hidden group/section">
       {/* Background glow on hover */}
       <div className="absolute inset-0 opacity-0 group-hover/section:opacity-100 transition-opacity duration-500 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-[100px]" />
@@ -35,26 +32,15 @@ const CTABannerSection = () => {
           </div>
           <div className="flex gap-2 sm:gap-3 w-full md:w-auto">
             <div className="flex-1 md:flex-none">
-              <Link 
-                to="/contact" 
-                className="group primary-cta-dark flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px]"
-              >
+              <Link to="/contact" className="group primary-cta-dark flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px]">
                 <span className="relative z-10">Get Your Free Proposal</span>
                 <ArrowUpRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
-            <button
-              onClick={scrollToTop}
-              className="group p-3 sm:p-3.5 border border-border rounded-full hover:bg-secondary active:bg-secondary/80 hover:border-foreground/30 hover:-translate-y-0.5 hover:scale-105 hover:rotate-[-5deg] active:scale-95 hover:shadow-[0_5px_20px_-5px_rgba(255,255,255,0.2)] transition-all duration-300 min-w-[44px] min-h-[44px] sm:min-w-[48px] sm:min-h-[48px] flex items-center justify-center"
-              aria-label="Back to top"
-            >
-              <ArrowUp className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:-translate-y-0.5" />
-            </button>
+            
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CTABannerSection;
