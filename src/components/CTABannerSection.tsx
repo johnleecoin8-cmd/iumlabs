@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, ArrowUp } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import { MouseEvent } from "react";
+import { useRipple } from "@/hooks/useRipple";
+
 const CTABannerSection = () => {
+  const { createRipple } = useRipple();
+  
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -32,7 +37,7 @@ const CTABannerSection = () => {
           </div>
           <div className="flex gap-2 sm:gap-3 w-full md:w-auto">
             <div className="flex-1 md:flex-none">
-              <Link to="/contact" className="group primary-cta-dark flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px]">
+              <Link to="/contact" className="group primary-cta-dark flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px] border border-white/30" onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}>
                 <span className="relative z-10">Get Your Free Proposal</span>
                 <ArrowUpRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>

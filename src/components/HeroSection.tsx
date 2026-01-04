@@ -49,16 +49,16 @@ const serviceTags = [{
 // Mobile tags (fewer, repositioned for small screens with better spacing)
 const mobileServiceTags = [{
   label: "Research",
-  position: "top-[5%] left-[3%]"
+  position: "top-[8%] left-[4%]"
 }, {
   label: "GTM",
-  position: "top-[5%] right-[3%]"
+  position: "top-[8%] right-[4%]"
 }, {
   label: "Marketing",
-  position: "bottom-[32%] left-[2%]"
+  position: "top-[18%] left-[3%]"
 }, {
   label: "Events",
-  position: "bottom-[32%] right-[2%]"
+  position: "top-[18%] right-[3%]"
 }];
 const clientLogos = [{
   name: "BNB",
@@ -143,11 +143,19 @@ const HeroSection = () => {
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video */}
       <div className="absolute inset-0 overflow-hidden">
-        <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{
-        filter: "brightness(0.35)"
-      }} onLoadedMetadata={e => {
-        e.currentTarget.currentTime = 0;
-      }}>
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          preload="metadata"
+          poster="/images/hero-poster.jpg"
+          className="absolute inset-0 w-full h-full object-cover" 
+          style={{ filter: "brightness(0.35)" }}
+          onLoadedMetadata={e => {
+            e.currentTarget.currentTime = 0;
+          }}
+        >
           <source src="/videos/hero-background.mp4" type="video/mp4" />
         </video>
         
