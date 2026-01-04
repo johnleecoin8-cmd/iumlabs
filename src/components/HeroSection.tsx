@@ -1,6 +1,7 @@
 import { ChevronDown, Send } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, MouseEvent } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
+import { useRipple } from "@/hooks/useRipple";
 import { brand } from "@/config/content";
 
 // Import client logos
@@ -132,6 +133,8 @@ const stats = [{
 }];
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { createRipple } = useRipple();
+  
   useEffect(() => {
     // Trigger count-up animation after component mounts
     const timer = setTimeout(() => setIsVisible(true), 800);
@@ -186,7 +189,11 @@ const HeroSection = () => {
           </p>
 
           {/* CTA Button - Enhanced - Mobile optimized */}
-          <a href="/contact#contact-form" className="group primary-cta-dark inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px]">
+          <a 
+            href="/contact#contact-form" 
+            className="group primary-cta-dark inline-flex items-center gap-1.5 sm:gap-2 px-5 py-2.5 sm:px-6 sm:py-3 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px]"
+            onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}
+          >
             <Send className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             <span>Get Your Free Proposal</span>
           </a>

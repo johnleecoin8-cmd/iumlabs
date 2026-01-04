@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
+import { MouseEvent } from "react";
 import Logo3D from "@/components/Logo3D";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useRipple } from "@/hooks/useRipple";
 import { cn } from "@/lib/utils";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -151,7 +153,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
 };
 
 const CasesSection = () => {
-  // Fetch projects from database
+  const { createRipple } = useRipple();
   const { data: projects } = useQuery({
     queryKey: ['cases-projects'],
     queryFn: async () => {
@@ -250,6 +252,7 @@ const CasesSection = () => {
           <Link
             to="/contact"
             className="group primary-cta-dark inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3 text-xs sm:text-sm font-medium rounded-full active:scale-[0.98] w-full sm:w-fit mb-2 min-h-[48px]"
+            onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}
           >
             Start Your Project
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

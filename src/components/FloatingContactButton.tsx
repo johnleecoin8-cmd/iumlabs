@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { MessageCircle, X, Send, Calendar, Mail } from "lucide-react";
+import { useScrollDirection } from "@/hooks/useScrollDirection";
 
 const FloatingContactButton = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { isVisible } = useScrollDirection({ threshold: 15 });
 
   const contactOptions = [
     {
@@ -26,7 +28,11 @@ const FloatingContactButton = () => {
   ];
 
   return (
-    <div className="fixed bottom-[max(1rem,calc(env(safe-area-inset-bottom)+0.5rem))] right-[max(1rem,calc(env(safe-area-inset-right)+0.5rem))] sm:bottom-[max(1.5rem,calc(env(safe-area-inset-bottom)+1rem))] sm:right-[max(1.5rem,calc(env(safe-area-inset-right)+1rem))] z-50 flex flex-col items-end gap-3">
+    <div 
+      className={`fixed bottom-[max(1rem,calc(env(safe-area-inset-bottom)+0.5rem))] right-[max(1rem,calc(env(safe-area-inset-right)+0.5rem))] sm:bottom-[max(1.5rem,calc(env(safe-area-inset-bottom)+1rem))] sm:right-[max(1.5rem,calc(env(safe-area-inset-right)+1rem))] z-50 flex flex-col items-end gap-3 transition-all duration-300 ${
+        isVisible || isOpen ? "translate-y-0 opacity-100" : "translate-y-20 opacity-0 pointer-events-none"
+      }`}
+    >
       {isOpen && (
         <div className="flex flex-col gap-2 animate-fade-in">
           {contactOptions.map((option, index) => (
