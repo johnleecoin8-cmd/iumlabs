@@ -122,6 +122,47 @@ export default function ResearchForm() {
     }
   }, [handleImageFile]);
 
+  const uploadContentImage = useCallback(async (file: File) => {
+    const placeholderId = `uploading-${Date.now()}`;
+    const placeholder = `\n![Uploading...](${placeholderId})\n`;
+    
+    setFormData(prev => ({ 
+      ...prev, 
+      content: prev.content + placeholder 
+    }));
+    
+    toast.info('Uploading image...');
+    
+    try {
+      const fileExt = file.name.split('.').pop() || 'jpg';
+      const fileName = `research/inline-${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+      
+      const { error } = await supabase.storage
+        .from('project-images')
+        .upload(fileName, file);
+      
+      if (error) throw error;
+      
+      const { data: { publicUrl } } = supabase.storage
+        .from('project-images')
+        .getPublicUrl(fileName);
+      
+      setFormData(prev => ({
+        ...prev,
+        content: prev.content.replace(`![Uploading...](${placeholderId})`, `![image](${publicUrl})`)
+      }));
+      
+      toast.success('Image uploaded!');
+    } catch (error) {
+      console.error('Upload error:', error);
+      setFormData(prev => ({
+        ...prev,
+        content: prev.content.replace(`![Uploading...](${placeholderId})`, '[Image upload failed]')
+      }));
+      toast.error('Failed to upload image');
+    }
+  }, []);
+
   const handleContentPaste = useCallback(async (e: React.ClipboardEvent<HTMLTextAreaElement>) => {
     const items = e.clipboardData.items;
     const images: File[] = [];
@@ -138,45 +179,35 @@ export default function ResearchForm() {
     e.preventDefault();
     
     for (const file of images) {
-      const placeholderId = `uploading-${Date.now()}`;
-      const placeholder = `\n![Uploading...](${placeholderId})\n`;
-      
-      setFormData(prev => ({ 
-        ...prev, 
-        content: prev.content + placeholder 
-      }));
-      
-      toast.info('Uploading image...');
-      
-      try {
-        const fileExt = file.name.split('.').pop() || 'jpg';
-        const fileName = `research/inline-${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
-        
-        const { error } = await supabase.storage
-          .from('project-images')
-          .upload(fileName, file);
-        
-        if (error) throw error;
-        
-        const { data: { publicUrl } } = supabase.storage
-          .from('project-images')
-          .getPublicUrl(fileName);
-        
-        setFormData(prev => ({
-          ...prev,
-          content: prev.content.replace(`![Uploading...](${placeholderId})`, `![image](${publicUrl})`)
-        }));
-        
-        toast.success('Image uploaded!');
-      } catch (error) {
-        console.error('Upload error:', error);
-        setFormData(prev => ({
-          ...prev,
-          content: prev.content.replace(`![Uploading...](${placeholderId})`, '[Image upload failed]')
-        }));
-        toast.error('Failed to upload image');
-      }
+      await uploadContentImage(file);
     }
+  }, [uploadContentImage]);
+
+  const [isContentDragging, setIsContentDragging] = useState(false);
+
+  const handleContentDrop = useCallback(async (e: React.DragEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsContentDragging(false);
+    
+    const files = Array.from(e.dataTransfer.files);
+    const images = files.filter(file => file.type.startsWith('image/'));
+    
+    for (const file of images) {
+      await uploadContentImage(file);
+    }
+  }, [uploadContentImage]);
+
+  const handleContentDragOver = useCallback((e: React.DragEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsContentDragging(true);
+  }, []);
+
+  const handleContentDragLeave = useCallback((e: React.DragEvent<HTMLTextAreaElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsContentDragging(false);
   }, []);
 
   const handleDrop = useCallback((e: React.DragEvent) => {
@@ -508,16 +539,28 @@ export default function ResearchForm() {
               <div className="col-span-2">
                 <Label className="text-white">Content (Markdown)</Label>
                 <p className="text-white/40 text-xs mt-1 mb-2">
-                  💡 이미지를 복사해서 여기에 붙여넣기(Ctrl/Cmd+V)하면 자동 업로드됩니다
+                  💡 이미지를 복사(Ctrl/Cmd+V) 또는 드래그 앤 드롭하면 자동 업로드됩니다
                 </p>
-                <Textarea
-                  value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  onPaste={handleContentPaste}
-                  className="bg-[#111] border-white/10 text-white mt-1 font-mono"
-                  placeholder="Write your content in Markdown..."
-                  rows={20}
-                />
+                <div className="relative">
+                  <Textarea
+                    value={formData.content}
+                    onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                    onPaste={handleContentPaste}
+                    onDrop={handleContentDrop}
+                    onDragOver={handleContentDragOver}
+                    onDragLeave={handleContentDragLeave}
+                    className={`bg-[#111] border-white/10 text-white mt-1 font-mono transition-colors ${
+                      isContentDragging ? 'border-primary border-2 bg-primary/5' : ''
+                    }`}
+                    placeholder="Write your content in Markdown..."
+                    rows={20}
+                  />
+                  {isContentDragging && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-primary/10 border-2 border-dashed border-primary rounded-md pointer-events-none">
+                      <p className="text-primary font-medium">이미지를 여기에 드롭하세요</p>
+                    </div>
+                  )}
+                </div>
               </div>
 
               <div className="flex items-center gap-3 col-span-2">
