@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -142,7 +142,11 @@ const distributionChannels = [
 ];
 
 const DeepResearchService = () => {
-  usePageTitle("Deep Research");
+  usePageMeta(
+    "Deep Research & Distribution",
+    "Data-driven market research tailored for the Korean crypto market. Published through media and KOL networks for brand authority.",
+    "/services/deep-research"
+  );
   const [activeChannel, setActiveChannel] = useState(0);
 
   // Fetch latest research posts

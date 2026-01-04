@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
@@ -66,6 +67,22 @@ const ProjectDetail = () => {
     gallery: [],
     news: fallbackProject?.news || [],
   } : fallbackProject;
+
+  // Dynamic page meta for SEO
+  useEffect(() => {
+    if (project) {
+      const title = `${project.name} Case Study | Ium Labs`;
+      const description = project.description || `${project.name} - ${project.category}. Web3 marketing case study by Ium Labs.`;
+      
+      document.title = title;
+      document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+      document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
+      document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+      document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
+      document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
+      document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://iumlabs.io/projects/${slug}`);
+    }
+  }, [project, slug]);
 
   if (!project) {
     return (

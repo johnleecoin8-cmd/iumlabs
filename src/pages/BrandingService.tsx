@@ -2,7 +2,7 @@ import { Palette, Globe, Layout, Sparkles, Eye, Layers, Brush, Monitor, Code, Fi
 import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import bananagoPreview from "@/assets/portfolio/bananago-preview.png";
 import thirdwebPreview from "@/assets/portfolio/thirdweb-preview.png";
 import coinmercePreview from "@/assets/portfolio/coinmerce-preview.png";
@@ -192,7 +192,11 @@ const portfolioItems = [
 ];
 
 const BrandingService = () => {
-  usePageTitle("Branding & Website");
+  usePageMeta(
+    "Branding & Website",
+    "Distinctive Web3 brand identity and high-performance websites. Logo design, UI/UX, and custom frontend development for blockchain projects.",
+    "/services/branding"
+  );
   const [activePhase, setActivePhase] = useState(0);
 
   return (

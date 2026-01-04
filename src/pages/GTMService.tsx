@@ -2,7 +2,7 @@ import { Rocket, Target, Compass, TrendingUp, CheckCircle, Building2, Shield, Sc
 import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const ACCENT_COLOR = "#10B981";
 
@@ -172,7 +172,11 @@ const faqItems: FAQItem[] = [
 ];
 
 const GTMService = () => {
-  usePageTitle("GTM Strategy");
+  usePageMeta(
+    "GTM Strategy",
+    "Strategic market entry planning for Web3 projects launching in Korea. VASP compliance, Korean exchange listing, and coordinated launch campaigns.",
+    "/services/gtm"
+  );
   const [activePhase, setActivePhase] = useState(0);
 
   return (

@@ -1,7 +1,14 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Terms = () => {
+  usePageMeta(
+    "Terms of Service",
+    "Terms of Service for Ium Labs Web3 marketing and consulting services. By using our services, you agree to these terms.",
+    "/terms"
+  );
+
   const sections = [
     { title: "1. Agreement to Terms", content: "By accessing and using ium Labs' services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services." },
     { title: "2. Services", content: "ium Labs provides Web3 marketing and consulting services including but not limited to Go-To-Market strategy, community management, influencer marketing, and PR services for blockchain and cryptocurrency projects." },
@@ -20,7 +27,7 @@ const Terms = () => {
             Terms of Service
           </h1>
           <p className="text-white/50 mb-12">
-            Last updated: December 2024
+            Last updated: January 2025
           </p>
           
           <div className="space-y-6">

@@ -3,7 +3,7 @@ import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const ACCENT_COLOR = "#10B981";
 
@@ -157,7 +157,11 @@ const faqItems: FAQItem[] = [
 ];
 
 const OfflineEventService = () => {
-  usePageTitle("Offline Event");
+  usePageMeta(
+    "Offline Events in Korea",
+    "Create unforgettable Web3 events in Seoul. Launch parties, meetups, conferences with full-service production and KOL attendance.",
+    "/services/offline-event"
+  );
   
   const [activePhase, setActivePhase] = useState<number | null>(null);
 

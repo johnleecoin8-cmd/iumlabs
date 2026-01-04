@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Volume2, Users, Zap, FileText, Target } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const ACCENT_COLOR = "#22D3EE";
 
@@ -162,7 +162,11 @@ const featuredYappers = [
 ];
 
 const YapService = () => {
-  usePageTitle("Yap Strategy");
+  usePageMeta(
+    "Yap Strategy",
+    "Amplify your message with 150+ aligned yappers. Organic buzz, mindshare growth, and strategic social media amplification on Crypto X.",
+    "/services/yap"
+  );
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [featuredIndex, setFeaturedIndex] = useState(0);

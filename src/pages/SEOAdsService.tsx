@@ -2,7 +2,7 @@ import { Search, BarChart3, Target, TrendingUp, MousePointer, Megaphone, LineCha
 import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const ACCENT_COLOR = "#F59E0B";
 
@@ -174,7 +174,11 @@ const adPlatforms = [
 ];
 
 const SEOAdsService = () => {
-  usePageTitle("SEO & Paid Ads");
+  usePageMeta(
+    "SEO & Paid Ads",
+    "Drive qualified traffic through search optimization and targeted ads on Google, Twitter/X, and crypto-native platforms.",
+    "/services/seo-ads"
+  );
   const [activePhase, setActivePhase] = useState(0);
 
   return (

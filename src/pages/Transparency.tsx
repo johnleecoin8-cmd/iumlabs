@@ -1,7 +1,14 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Transparency = () => {
+  usePageMeta(
+    "Transparency",
+    "Our commitment to transparency in business practices and client relationships. Ium Labs operates with honesty and clear communication.",
+    "/transparency"
+  );
+
   const sections = [
     { title: "Our Commitment to Transparency", content: "At Ium Labs, we believe in maintaining the highest standards of transparency in all our business operations and client relationships." },
     { title: "Business Practices", content: "We maintain clear and honest communication with all our clients. Our pricing, deliverables, and timelines are always communicated upfront with no hidden fees or surprises." },
@@ -20,7 +27,7 @@ const Transparency = () => {
             Transparency
           </h1>
           <p className="text-white/50 mb-12">
-            Last updated: December 2024
+            Last updated: January 2025
           </p>
           
           <div className="space-y-6">
