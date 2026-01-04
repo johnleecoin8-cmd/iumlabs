@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { ArrowLeft, Clock, Calendar, Twitter, Linkedin, Copy, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
@@ -9,6 +9,7 @@ import CTASection from "@/components/CTASection";
 import { researchPosts } from "./Research";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const ResearchDetail = () => {
   const { slug } = useParams();
@@ -127,6 +128,13 @@ const ResearchDetail = () => {
     navigator.clipboard.writeText(window.location.href);
     toast.success("Link copied to clipboard!");
   };
+
+  // Dynamic breadcrumb items
+  const breadcrumbItems = useMemo(() => [
+    { name: "Home", url: "https://iumlabs.io" },
+    { name: "Research", url: "https://iumlabs.io/research" },
+    { name: post.title, url: `https://iumlabs.io/research/${slug}` }
+  ], [post.title, slug]);
 
   const handleShare = (platform: string) => {
     const url = encodeURIComponent(window.location.href);
@@ -451,6 +459,7 @@ const ResearchDetail = () => {
 
       <CTASection />
       <Footer />
+      <BreadcrumbSchema items={breadcrumbItems} />
       </div>
     </div>
   );
