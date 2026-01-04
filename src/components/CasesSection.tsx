@@ -214,8 +214,8 @@ const CasesSection = () => {
   const cases = projects || [];
 
   return (
-    <section className="bg-background px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4">
-      <div className="flex flex-col lg:flex-row rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10">
+    <section className="bg-background">
+      <div className="flex flex-col lg:flex-row">
         {/* Left: Cases Grid */}
         <div className="w-full lg:w-2/3 lg:border-r border-border">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2">

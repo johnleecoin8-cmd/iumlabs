@@ -6,8 +6,8 @@ import aboutImageHover from '@/assets/campaigns/about-image-hover.jpeg';
 
 const WhyChooseUsSection = () => {
   return (
-    <section className="bg-background px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4">
-      <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:grid-cols-[2.5fr_3.5fr] max-h-[750px] sm:max-h-[780px] md:max-h-[450px] lg:max-h-[700px] overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20">
+    <section className="bg-background">
+      <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:grid-cols-[2.5fr_3.5fr] max-h-[750px] sm:max-h-[780px] md:max-h-[450px] lg:max-h-[700px] overflow-hidden">
         {/* Left: Featured Image with Hover Effect */}
         <div className="md:border-r border-border overflow-hidden h-[420px] sm:h-[450px] md:h-full relative group">
           <img 

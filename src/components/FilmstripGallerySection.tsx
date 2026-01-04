@@ -111,8 +111,8 @@ const FilmstripGallerySection = () => {
   const images = galleryImages || fallbackImages;
 
   return (
-    <section className="bg-surface-base px-2 sm:px-3 md:px-4 py-2 sm:py-3 md:py-4">
-      <div className="flex flex-col md:flex-row rounded-2xl sm:rounded-3xl overflow-hidden border border-white/20">
+    <section className="bg-surface-base">
+      <div className="flex flex-col md:flex-row">
         {/* Left: Gallery Grid */}
         <div className="w-full md:w-2/3 md:border-r border-white/10">
           <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3">

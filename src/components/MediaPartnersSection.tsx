@@ -21,7 +21,7 @@ const MediaPartnersSection = () => {
   const duplicatedLogos = [...mediaLogos, ...mediaLogos];
 
   return (
-    <section className="bg-surface-base overflow-hidden mx-2 sm:mx-3 md:mx-4 my-2 sm:my-3 md:my-4 rounded-2xl sm:rounded-3xl border border-white/20">
+    <section className="bg-surface-base overflow-hidden">
       <div className="relative">
         {/* Small label */}
         <div className="flex items-center justify-center gap-3 pt-4 pb-2">
