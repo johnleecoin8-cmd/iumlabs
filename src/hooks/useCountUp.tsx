@@ -8,6 +8,7 @@ interface UseCountUpOptions {
   prefix?: string;
   suffix?: string;
   isVisible?: boolean;
+  decimals?: number; // Support decimal values
 }
 
 export const useCountUp = ({
@@ -18,7 +19,11 @@ export const useCountUp = ({
   prefix = '',
   suffix = '',
   isVisible = true,
-}: UseCountUpOptions) => {
+  decimals,
+}: UseCountUpOptions): string => {
+  // Determine decimal places from the end value if not specified
+  const autoDecimals = decimals ?? (end % 1 !== 0 ? String(end).split('.')[1]?.length || 1 : 0);
+  
   const [count, setCount] = useState(start);
   const [hasStarted, setHasStarted] = useState(false);
 
@@ -35,12 +40,15 @@ export const useCountUp = ({
         
         // Easing function (ease-out)
         const easeOut = 1 - Math.pow(1 - progress, 3);
-        const currentCount = Math.floor(start + (end - start) * easeOut);
+        const currentCount = start + (end - start) * easeOut;
         
         setCount(currentCount);
         
         if (progress < 1) {
           requestAnimationFrame(animate);
+        } else {
+          // Ensure we end exactly at the target value
+          setCount(end);
         }
       };
       
@@ -50,7 +58,12 @@ export const useCountUp = ({
     return () => clearTimeout(timeout);
   }, [isVisible, hasStarted, start, end, duration, delay]);
 
-  return `${prefix}${count.toLocaleString()}${suffix}`;
+  // Format the count with proper decimal handling
+  const formattedCount = autoDecimals > 0 
+    ? count.toFixed(autoDecimals)
+    : Math.round(count).toLocaleString();
+
+  return `${prefix}${formattedCount}${suffix}`;
 };
 
 export default useCountUp;

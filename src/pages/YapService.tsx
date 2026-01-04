@@ -241,7 +241,7 @@ const YapService = () => {
       {/* Creator Network Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader number="01" title="Creator Network" badge="150+ Yappers" />
+          <SectionHeader title="Creator Network" badge="150+ Yappers" />
 
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">

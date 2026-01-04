@@ -192,7 +192,7 @@ const GTMService = () => {
       {/* 4-Week Program Journey Section */}
       <section className="scroll-reveal">
         <div className="border-t border-white/10">
-          <SectionHeader number="01" title="4-Week Program" badge="GTM Journey" />
+          <SectionHeader title="4-Week Program" badge="GTM Journey" />
           
           <div className="py-12 md:py-16">
             <div className="container mx-auto px-6 lg:px-16">
