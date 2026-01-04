@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Mail, MapPin, Send, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Send, ArrowRight, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
@@ -193,9 +193,31 @@ const ContactFormSection = ({
 
           {/* Right Column - Contact Form */}
           <div className="w-full md:w-3/5 p-5 sm:p-7 md:p-8 lg:p-12">
-            <div className="flex items-center justify-between mb-6 sm:mb-8">
-              <span className="text-body-sm text-white/50">Contact Form</span>
-              <span className="text-body-sm text-white/50">{completionPercentage}% complete</span>
+            <div className="mb-6 sm:mb-8">
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-body-sm text-white/50">Contact Form</span>
+                <div className="flex items-center gap-2">
+                  {completionPercentage === 100 ? (
+                    <div className="flex items-center gap-1.5 success-animate">
+                      <div className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center">
+                        <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="20 6 9 17 4 12" className="checkmark-animate" />
+                        </svg>
+                      </div>
+                      <span className="text-body-sm text-emerald-400 font-medium">Ready to send</span>
+                    </div>
+                  ) : (
+                    <span className="text-body-sm text-white/50">{completionPercentage}%</span>
+                  )}
+                </div>
+              </div>
+              {/* Progress Bar */}
+              <div className="form-progress-bar">
+                <div 
+                  className="form-progress-bar-fill" 
+                  style={{ width: `${completionPercentage}%` }}
+                />
+              </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
@@ -286,11 +308,29 @@ const ContactFormSection = ({
               <div className="pt-5 sm:pt-6 border-t border-white/15">
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="group inline-flex items-center justify-center gap-3 bg-white/15 text-white px-8 sm:px-10 py-4 sm:py-5 text-body font-semibold tracking-wider hover:bg-white/25 active:bg-white/35 hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-50 w-full sm:w-auto min-h-[52px] sm:min-h-[56px]"
+                  disabled={isSubmitting || completionPercentage < 100}
+                  className={`group inline-flex items-center justify-center gap-3 px-8 sm:px-10 py-4 sm:py-5 text-body font-semibold tracking-wider w-full sm:w-auto min-h-[52px] sm:min-h-[56px] rounded-lg transition-all duration-300 ${
+                    completionPercentage === 100 
+                      ? 'primary-cta-emerald text-white hover:gap-4 active:scale-[0.98]' 
+                      : 'bg-white/10 text-white/40 cursor-not-allowed'
+                  }`}
                 >
-                  {isSubmitting ? "SENDING..." : "SEND MESSAGE"}
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                      SENDING...
+                    </>
+                  ) : completionPercentage === 100 ? (
+                    <>
+                      SEND MESSAGE
+                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1.5 transition-transform" />
+                    </>
+                  ) : (
+                    <>
+                      Complete required fields
+                      <span className="text-sm opacity-60">({completionPercentage}%)</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>

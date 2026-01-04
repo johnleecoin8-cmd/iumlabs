@@ -34,21 +34,11 @@ const CTABannerSection = () => {
             </p>
           </div>
           <div className="flex gap-2 sm:gap-3 w-full md:w-auto">
-            <div className="flex-1 md:flex-none relative">
-              {/* Glow effect behind button */}
-              <div className="absolute inset-0 bg-primary/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="flex-1 md:flex-none">
               <Link 
                 to="/contact" 
-                className="group relative flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 bg-foreground text-background font-medium text-xs sm:text-sm rounded-full overflow-hidden hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.98] hover:shadow-[0_10px_40px_-10px_rgba(255,255,255,0.3)] transition-all duration-300 min-h-[44px] sm:min-h-[48px]"
+                className="group primary-cta-dark flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px]"
               >
-                {/* Shimmer effect */}
-                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                
-                {/* Pulse ring on hover */}
-                <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100">
-                  <span className="absolute inset-0 rounded-full animate-ping bg-foreground/20" style={{ animationDuration: '1.5s' }} />
-                </span>
-                
                 <span className="relative z-10">Get Your Free Proposal</span>
                 <ArrowUpRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
