@@ -23,13 +23,13 @@
     <loc>https://iumlabs.io/projects</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/contact</loc>
     <lastmod>2026-01-04</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   
   <!-- Service Detail Pages - Core Services -->
@@ -37,31 +37,31 @@
     <loc>https://iumlabs.io/services/gtm</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/services/pr</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/services/influencer</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/services/community</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/services/deep-research</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.7</priority>
   </url>
   
   <!-- Service Detail Pages - Supporting Services -->
@@ -69,25 +69,25 @@
     <loc>https://iumlabs.io/services/branding</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/services/seo-ads</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/services/offline-event</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://iumlabs.io/services/yap</loc>
     <lastmod>2026-01-04</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   
   <!-- Project Detail Pages -->
