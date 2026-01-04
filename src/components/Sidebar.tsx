@@ -103,11 +103,11 @@ const Sidebar = () => {
       <aside className={cn("fixed left-0 top-0 h-screen z-50 hidden md:flex flex-col", "transition-all duration-500 ease-out", isCollapsed ? "w-[72px]" : "w-60")}>
         {/* Glassmorphism Container */}
         <div className="relative flex flex-col h-full">
-          {/* Glass background layer */}
-          <div className="absolute inset-0 bg-gradient-to-b from-white/[0.03] via-transparent to-white/[0.02] backdrop-blur-sm" />
+          {/* Glass background layer - Light theme */}
+          <div className="absolute inset-0 bg-gradient-to-b from-foreground/[0.02] via-transparent to-foreground/[0.01] backdrop-blur-sm bg-background/80" />
           
           {/* Gradient border on right */}
-          <div className="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-white/[0.15] via-white/[0.06] to-white/[0.15]" />
+          <div className="absolute right-0 top-0 w-px h-full bg-gradient-to-b from-foreground/[0.1] via-foreground/[0.05] to-foreground/[0.1]" />
           
           {/* Scroll Progress Indicator - Enhanced with pulse */}
           <div className="absolute right-0 top-0 w-px h-full bg-primary/5">
@@ -145,10 +145,10 @@ const Sidebar = () => {
               }} whileTap={{
                 scale: 0.95
               }}>
-                    <img src={logoImage} alt="Ium Labs" className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)]" />
+                    <img src={logoImage} alt="Ium Labs" className="w-8 h-8 object-contain opacity-80 group-hover:opacity-100 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(0,0,0,0.2)]" />
                   </motion.button>
                 </TooltipTrigger>
-                <TooltipContent side="right" sideOffset={12} className="bg-black/80 backdrop-blur-xl text-white text-xs font-medium px-3 py-1.5 rounded-xl border border-white/10">
+                <TooltipContent side="right" sideOffset={12} className="bg-foreground/90 backdrop-blur-xl text-background text-xs font-medium px-3 py-1.5 rounded-xl border border-foreground/10">
                   Click to expand
                 </TooltipContent>
               </Tooltip> : <motion.div initial={{
@@ -165,10 +165,10 @@ const Sidebar = () => {
                   <motion.div className="flex items-center gap-3" whileHover={{
                 scale: 1.02
               }}>
-                    <img src={logoImage} alt="Ium Labs" className="w-8 h-8 object-contain opacity-90 group-hover:opacity-100 transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]" />
+                    <img src={logoImage} alt="Ium Labs" className="w-8 h-8 object-contain opacity-90 group-hover:opacity-100 transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(0,0,0,0.2)]" />
                     <div className="flex flex-col">
-                      <span className="text-sm font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">ium Labs</span>
-                      <span className="text-[10px] text-white/40">Web3 Marketing & Research</span>
+                      <span className="text-sm font-semibold tracking-tight text-foreground/90 group-hover:text-foreground transition-colors duration-300">ium Labs</span>
+                      <span className="text-[10px] text-foreground/50">Web3 Marketing & Research</span>
                     </div>
                   </motion.div>
                 </Link>
@@ -183,7 +183,7 @@ const Sidebar = () => {
             duration: 0.3,
             delay: 0.2
           }}>
-                <span className="text-[10px] text-white/35 font-medium tracking-[0.15em] uppercase block mb-3 ml-1">
+                <span className="text-[10px] text-foreground/40 font-medium tracking-[0.15em] uppercase block mb-3 ml-1">
                   Navigate
                 </span>
               </motion.div>}
@@ -225,7 +225,7 @@ const Sidebar = () => {
             </nav>
 
             {/* Bottom Section - Status, Connect & Toggle */}
-            <div className={cn("mt-auto pt-4 border-t border-white/[0.05]", isCollapsed ? "w-full flex flex-col items-center gap-3" : "space-y-4")}>
+            <div className={cn("mt-auto pt-4 border-t border-foreground/[0.05]", isCollapsed ? "w-full flex flex-col items-center gap-3" : "space-y-4")}>
               {/* Seoul Time Status */}
               <SeoulTimeDisplay isCollapsed={isCollapsed} />
               
@@ -233,7 +233,7 @@ const Sidebar = () => {
               <ConnectSection isCollapsed={isCollapsed} />
 
               {/* Toggle Button - Pill style */}
-              <motion.button onClick={toggleSidebar} className={cn("flex items-center justify-center gap-2 px-3 py-2 rounded-xl", "bg-white/[0.02] border border-white/[0.06]", "text-white/20 hover:text-white/60 hover:bg-white/[0.06] hover:border-white/[0.12]", "transition-all duration-300", isCollapsed ? "w-full" : "")} whileHover={{
+              <motion.button onClick={toggleSidebar} className={cn("flex items-center justify-center gap-2 px-3 py-2 rounded-xl", "bg-foreground/[0.03] border border-foreground/[0.08]", "text-foreground/30 hover:text-foreground/60 hover:bg-foreground/[0.06] hover:border-foreground/[0.15]", "transition-all duration-300", isCollapsed ? "w-full" : "")} whileHover={{
               scale: 1.02
             }} whileTap={{
               scale: 0.98
@@ -246,7 +246,7 @@ const Sidebar = () => {
               }}>
                   <ChevronLeft className="w-4 h-4" />
                 </motion.div>
-                {!isCollapsed && <span className="text-[10px] text-white/30">Collapse</span>}
+                {!isCollapsed && <span className="text-[10px] text-foreground/40">Collapse</span>}
               </motion.button>
             </div>
           </div>
