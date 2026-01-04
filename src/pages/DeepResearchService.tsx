@@ -10,10 +10,16 @@ import ServicePageLayout, {
   Deliverable,
   FAQItem
 } from "@/components/ServicePageLayout";
-
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import { FileText, BarChart3, TrendingUp, Users, Newspaper, Share2, Search, PenTool, Send, ArrowRight, BookOpen, Mic2, Globe } from "lucide-react";
 
 const ACCENT_COLOR = "#06B6D4";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://iumlabs.io" },
+  { name: "Services", url: "https://iumlabs.io/services" },
+  { name: "Deep Research", url: "https://iumlabs.io/services/deep-research" }
+];
 
 const serviceTags: ServiceTag[] = [
   { label: "Market Analysis" },
@@ -392,6 +398,7 @@ const DeepResearchService = () => {
         </section>
       )}
 
+      <BreadcrumbSchema items={breadcrumbItems} />
     </ServicePageLayout>
   );
 };

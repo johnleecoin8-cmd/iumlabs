@@ -3,8 +3,15 @@ import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, F
 import SectionHeader from "@/components/SectionHeader";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const ACCENT_COLOR = "#8B5CF6";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://iumlabs.io" },
+  { name: "Services", url: "https://iumlabs.io/services" },
+  { name: "PR & Media", url: "https://iumlabs.io/services/pr" }
+];
 
 const serviceTags: ServiceTag[] = [
   { label: "Korean Media Distribution" },
@@ -198,6 +205,7 @@ const PRService = () => {
 
       {/* Media Partners Marquee */}
       <MediaPartnersSection />
+      <BreadcrumbSchema items={breadcrumbItems} />
     </ServicePageLayout>;
 };
 export default PRService;
