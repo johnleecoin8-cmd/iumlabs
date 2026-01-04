@@ -3,8 +3,15 @@ import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const ACCENT_COLOR = "#F59E0B";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://iumlabs.io" },
+  { name: "Services", url: "https://iumlabs.io/services" },
+  { name: "SEO & Paid Ads", url: "https://iumlabs.io/services/seo-ads" }
+];
 
 // 4-Week Program Journey
 const journeyPhases = [
@@ -332,6 +339,7 @@ const SEOAdsService = () => {
         </div>
       </section>
 
+      <BreadcrumbSchema items={breadcrumbItems} />
     </ServicePageLayout>
   );
 };

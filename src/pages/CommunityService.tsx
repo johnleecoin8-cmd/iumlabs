@@ -2,10 +2,16 @@ import { Users, Settings, Sparkles, ChevronRight, Hash, MessageSquare, Bell, Shi
 import { useState, useEffect } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-
 import { usePageMeta } from "@/hooks/usePageMeta";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const ACCENT_COLOR = "#5865F2";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://iumlabs.io" },
+  { name: "Services", url: "https://iumlabs.io/services" },
+  { name: "Community Building", url: "https://iumlabs.io/services/community" }
+];
 const TELEGRAM_COLOR = "#0088CC";
 
 const serviceTags: ServiceTag[] = [
@@ -389,6 +395,7 @@ const CommunityService = () => {
         </div>
       </section>
 
+      <BreadcrumbSchema items={breadcrumbItems} />
     </ServicePageLayout>
   );
 };

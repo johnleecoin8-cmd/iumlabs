@@ -3,11 +3,18 @@ import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import bananagoPreview from "@/assets/portfolio/bananago-preview.png";
 import thirdwebPreview from "@/assets/portfolio/thirdweb-preview.png";
 import coinmercePreview from "@/assets/portfolio/coinmerce-preview.png";
 
 const ACCENT_COLOR = "#8B5CF6";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://iumlabs.io" },
+  { name: "Services", url: "https://iumlabs.io/services" },
+  { name: "Branding & Website", url: "https://iumlabs.io/services/branding" }
+];
 
 // 4-Week Program Journey
 const journeyPhases = [
@@ -359,6 +366,7 @@ const BrandingService = () => {
         </div>
       </section>
 
+      <BreadcrumbSchema items={breadcrumbItems} />
     </ServicePageLayout>
   );
 };

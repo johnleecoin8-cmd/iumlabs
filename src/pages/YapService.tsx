@@ -4,8 +4,15 @@ import { Volume2, Users, Zap, FileText, Target } from "lucide-react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const ACCENT_COLOR = "#22D3EE";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://iumlabs.io" },
+  { name: "Services", url: "https://iumlabs.io/services" },
+  { name: "Yapper Network", url: "https://iumlabs.io/services/yap" }
+];
 
 const serviceTags: ServiceTag[] = [
   { label: "Yapper Network" },
@@ -387,6 +394,7 @@ const YapService = () => {
         </div>
       </section>
 
+      <BreadcrumbSchema items={breadcrumbItems} />
     </ServicePageLayout>
   );
 };

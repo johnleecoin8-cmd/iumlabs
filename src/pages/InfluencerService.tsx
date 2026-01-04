@@ -3,8 +3,15 @@ import { Star, Users, TrendingUp, Target, Sparkles, Crown, Award, Zap } from "lu
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const ACCENT_COLOR = "#F59E0B";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://iumlabs.io" },
+  { name: "Services", url: "https://iumlabs.io/services" },
+  { name: "Influencer Marketing", url: "https://iumlabs.io/services/influencer" }
+];
 
 const serviceTags: ServiceTag[] = [
   { label: "Global KOL" },
@@ -297,6 +304,7 @@ const InfluencerService = () => {
         </div>
       </section>
 
+      <BreadcrumbSchema items={breadcrumbItems} />
     </ServicePageLayout>
   );
 };

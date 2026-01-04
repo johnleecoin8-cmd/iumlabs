@@ -2,10 +2,16 @@ import { CalendarDays, Search, Target, Zap, Megaphone, MapPin, Camera, Users, Sp
 import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
-
 import { usePageMeta } from "@/hooks/usePageMeta";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const ACCENT_COLOR = "#10B981";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://iumlabs.io" },
+  { name: "Services", url: "https://iumlabs.io/services" },
+  { name: "Offline Events", url: "https://iumlabs.io/services/offline-event" }
+];
 
 // Event Planning Journey phases
 const journeyPhases = [
@@ -284,6 +290,7 @@ const OfflineEventService = () => {
         </div>
       </section>
 
+      <BreadcrumbSchema items={breadcrumbItems} />
     </ServicePageLayout>
   );
 };

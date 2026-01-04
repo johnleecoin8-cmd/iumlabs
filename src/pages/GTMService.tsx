@@ -3,8 +3,15 @@ import { useState } from "react";
 import ServicePageLayout, { ServiceStat, ServiceTag, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const ACCENT_COLOR = "#10B981";
+
+const breadcrumbItems = [
+  { name: "Home", url: "https://iumlabs.io" },
+  { name: "Services", url: "https://iumlabs.io/services" },
+  { name: "GTM Strategy", url: "https://iumlabs.io/services/gtm" }
+];
 
 // Regulatory Framework Data (compact)
 const regulatoryFramework = [
@@ -330,6 +337,7 @@ const GTMService = () => {
           </div>
         </div>
       </section>
+      <BreadcrumbSchema items={breadcrumbItems} />
     </ServicePageLayout>
   );
 };
