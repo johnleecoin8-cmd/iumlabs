@@ -11,7 +11,6 @@ import ProjectChallenge from "@/components/project-detail/ProjectChallenge";
 import ProjectStrategy from "@/components/project-detail/ProjectStrategy";
 import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
 import ProjectGalleryGrid from "@/components/project-detail/ProjectGalleryGrid";
-import ProjectPress from "@/components/project-detail/ProjectPress";
 import NextProject from "@/components/project-detail/NextProject";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
@@ -163,11 +162,6 @@ const ProjectDetail = () => {
           glowColor={project.glowColor} 
         />
 
-        {/* 07 - Media Coverage */}
-        <ProjectPress 
-          news={project.news} 
-          glowColor={project.glowColor} 
-        />
 
         {/* 08 - Next Project */}
         {nextProjectData && (
