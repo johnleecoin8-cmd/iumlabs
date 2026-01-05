@@ -12,8 +12,19 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
 
   return (
     <section className="relative min-h-[85vh] overflow-hidden mx-4 mt-4 rounded-3xl">
-      {/* Black Background */}
-      <div className="absolute inset-0 bg-black" />
+      {/* Background Image from Gallery */}
+      {project.gallery && project.gallery.length > 0 ? (
+        <>
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${project.gallery[0].src})` }}
+          />
+          {/* Dark overlay for readability */}
+          <div className="absolute inset-0 bg-black/70" />
+        </>
+      ) : (
+        <div className="absolute inset-0 bg-black" />
+      )}
       
       {/* Multi-color gradient blobs */}
       <div 

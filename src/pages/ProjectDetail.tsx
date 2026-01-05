@@ -11,7 +11,6 @@ import ProjectHero from "@/components/project-detail/ProjectHero";
 import ProjectOverview from "@/components/project-detail/ProjectOverview";
 import ProjectStrategy from "@/components/project-detail/ProjectStrategy";
 import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
-import ProjectGalleryGrid from "@/components/project-detail/ProjectGalleryGrid";
 import NextProject from "@/components/project-detail/NextProject";
 import KeyResultMarquee from "@/components/project-detail/KeyResultMarquee";
 import FeatureImage from "@/components/project-detail/FeatureImage";
@@ -138,12 +137,6 @@ const ProjectDetail = () => {
 
       {/* Key Metrics / Results */}
       <ProjectMetrics metrics={project.metrics} glowColor={project.glowColor} />
-
-      {/* Gallery */}
-      <ProjectGalleryGrid 
-        gallery={project.gallery} 
-        glowColor={project.glowColor} 
-      />
 
       {/* Next Project */}
       {nextProjectData && (
