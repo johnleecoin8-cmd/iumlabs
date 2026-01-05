@@ -11,57 +11,35 @@ interface NextProjectProps {
 
 const NextProject = ({ nextSlug, nextProject, currentGlowColor }: NextProjectProps) => {
   return (
-    <section className="relative py-16 md:py-20 bg-[#0A0A0A] overflow-hidden">
-      {/* Transition Gradient from current to next project color */}
+    <section className="relative py-12 md:py-16 bg-[#0A0A0A] overflow-hidden">
+      {/* Transition Line */}
       <div 
         className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: `linear-gradient(to right, transparent, ${currentGlowColor}30, ${nextProject.glowColor}30, transparent)` }}
+        style={{ background: `linear-gradient(to right, transparent, ${currentGlowColor}20, ${nextProject.glowColor}20, transparent)` }}
       />
       
-      {/* Next Project Color Ambient */}
+      {/* Background Glow */}
       <div 
-        className="absolute bottom-0 right-0 w-[70%] h-[70%] opacity-10 pointer-events-none"
+        className="absolute bottom-0 right-0 w-[50%] h-[60%] opacity-8 pointer-events-none"
         style={{ background: `radial-gradient(ellipse at 100% 100%, ${nextProject.glowColor} 0%, transparent 60%)` }}
       />
       
       <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
-        {/* Section Label */}
-        <motion.div 
-          className="mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
-          <div className="flex items-center gap-4">
-            <span 
-              className="text-sm font-mono tracking-wider"
-              style={{ color: nextProject.glowColor }}
-            >
-              03
-            </span>
-            <div 
-              className="h-px w-12"
-              style={{ background: `linear-gradient(to right, ${nextProject.glowColor}, transparent)` }}
-            />
-            <span className="text-xs text-white/40 uppercase tracking-widest">Continue Exploring</span>
-          </div>
-        </motion.div>
-        
         <Link 
           to={`/projects/${nextSlug}`}
           onClick={() => window.scrollTo(0, 0)}
           className="block group"
         >
           <motion.div
-            className="relative p-6 md:p-10 rounded-2xl border overflow-hidden transition-all duration-500 group-hover:border-opacity-100"
+            className="relative p-5 md:p-8 rounded-xl border overflow-hidden transition-all duration-300 group-hover:border-opacity-100"
             style={{ 
               backgroundColor: `${nextProject.glowColor}05`,
-              borderColor: `${nextProject.glowColor}20`
+              borderColor: `${nextProject.glowColor}15`
             }}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            whileHover={{ y: -5 }}
+            whileHover={{ y: -3 }}
           >
             {/* Background Image Hint */}
             <div 
@@ -70,39 +48,28 @@ const NextProject = ({ nextSlug, nextProject, currentGlowColor }: NextProjectPro
                 backgroundImage: `url(${nextProject.bgImage})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
-                filter: 'blur(20px)'
+                filter: 'blur(15px)'
               }}
             />
             
-            {/* Hover Glow */}
-            <div 
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-              style={{ 
-                background: `radial-gradient(ellipse at center, ${nextProject.glowColor}10 0%, transparent 60%)`
-              }}
-            />
-            
-            <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+            <div className="relative flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div className="flex-1">
-                {/* Next Project Label */}
                 <p 
-                  className="text-xs uppercase tracking-[0.25em] font-semibold mb-3 flex items-center gap-2"
+                  className="text-xs uppercase tracking-[0.2em] font-semibold mb-2 flex items-center gap-2"
                   style={{ color: nextProject.glowColor }}
                 >
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3 h-3" />
                   Next Project
                 </p>
                 
-                {/* Project Name */}
                 <h3 
-                  className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-3 transition-colors duration-300 group-hover:text-opacity-100"
-                  style={{ textShadow: `0 0 40px ${nextProject.glowColor}20` }}
+                  className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2"
+                  style={{ textShadow: `0 0 30px ${nextProject.glowColor}15` }}
                 >
                   {nextProject.name}
                 </h3>
                 
-                {/* Result */}
-                <p className="text-base text-white/50 flex items-center gap-2">
+                <p className="text-sm text-white/50 flex items-center gap-2">
                   <span 
                     className="w-1.5 h-1.5 rounded-full animate-pulse"
                     style={{ backgroundColor: nextProject.glowColor }}
@@ -111,29 +78,21 @@ const NextProject = ({ nextSlug, nextProject, currentGlowColor }: NextProjectPro
                 </p>
               </div>
               
-              {/* Arrow Button */}
+              {/* Arrow */}
               <motion.div 
-                className="relative flex-shrink-0"
+                className="flex-shrink-0"
                 whileHover={{ scale: 1.1, rotate: 45 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <div 
-                  className="w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all duration-300"
+                  className="w-12 h-12 rounded-full flex items-center justify-center transition-all"
                   style={{ 
-                    border: `2px solid ${nextProject.glowColor}50`,
+                    border: `2px solid ${nextProject.glowColor}40`,
                     backgroundColor: `${nextProject.glowColor}10`
                   }}
                 >
-                  <ArrowUpRight 
-                    className="w-6 h-6 md:w-7 md:h-7" 
-                    style={{ color: nextProject.glowColor }}
-                  />
+                  <ArrowUpRight className="w-5 h-5" style={{ color: nextProject.glowColor }} />
                 </div>
-                {/* Glow Ring */}
-                <div 
-                  className="absolute inset-0 rounded-full blur-2xl opacity-0 group-hover:opacity-50 transition-opacity -z-10 scale-150"
-                  style={{ backgroundColor: nextProject.glowColor }}
-                />
               </motion.div>
             </div>
           </motion.div>
