@@ -6,8 +6,12 @@ import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
 import ProjectHero from "@/components/project-detail/ProjectHero";
-import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
+import ProjectOverview from "@/components/project-detail/ProjectOverview";
 import ProjectChallenge from "@/components/project-detail/ProjectChallenge";
+import ProjectStrategy from "@/components/project-detail/ProjectStrategy";
+import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
+import ProjectGalleryGrid from "@/components/project-detail/ProjectGalleryGrid";
+import ProjectPress from "@/components/project-detail/ProjectPress";
 import NextProject from "@/components/project-detail/NextProject";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
@@ -65,7 +69,7 @@ const ProjectDetail = () => {
     results: fallbackProject?.results || [],
     services: dbProject.services || fallbackProject?.services || [],
     shortServices: dbProject.short_services || fallbackProject?.shortServices || [],
-    gallery: [],
+    gallery: fallbackProject?.gallery || [],
     news: fallbackProject?.news || [],
   } : fallbackProject;
 
@@ -132,45 +136,40 @@ const ProjectDetail = () => {
         
         <Navbar />
         
-        {/* Hero Section */}
+        {/* 01 - Hero Section */}
         <ProjectHero project={project} />
 
-        {/* Key Result Marquee - Enhanced */}
-        <div 
-          className="py-3 overflow-hidden relative"
-          style={{ backgroundColor: project.glowColor }}
-        >
-          {/* Gradient overlays for seamless loop */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 z-10" style={{ background: `linear-gradient(to right, ${project.glowColor}, transparent)` }} />
-          <div className="absolute right-0 top-0 bottom-0 w-16 z-10" style={{ background: `linear-gradient(to left, ${project.glowColor}, transparent)` }} />
-          
-          <div className="flex animate-marquee whitespace-nowrap">
-            {[...Array(4)].map((_, repeatIndex) => (
-              project.metrics.map((metric, i) => (
-                <span 
-                  key={`${repeatIndex}-${i}`} 
-                  className="mx-6 text-black/90 text-xs font-bold uppercase tracking-[0.12em] flex items-center gap-3"
-                >
-                  <span className="w-1 h-1 rounded-full bg-black/40" />
-                  {metric.value} {metric.label}
-                </span>
-              ))
-            ))}
-          </div>
-        </div>
+        {/* 02 - Project Overview */}
+        <ProjectOverview project={project} />
 
-        {/* 01 - Metrics Section */}
-        <ProjectMetrics metrics={project.metrics} glowColor={project.glowColor} />
-
-        {/* 02 - Challenge & Approach Section */}
+        {/* 03 - Challenge */}
         <ProjectChallenge 
           challenge={project.challenge} 
-          services={project.services} 
+          glowColor={project.glowColor} 
+        />
+
+        {/* 04 - Strategy / Approach */}
+        <ProjectStrategy 
           strategy={project.strategy} 
           glowColor={project.glowColor} 
         />
 
-        {/* 03 - Next Project */}
+        {/* 05 - Key Metrics / Results */}
+        <ProjectMetrics metrics={project.metrics} glowColor={project.glowColor} />
+
+        {/* 06 - Gallery */}
+        <ProjectGalleryGrid 
+          gallery={project.gallery} 
+          glowColor={project.glowColor} 
+        />
+
+        {/* 07 - Media Coverage */}
+        <ProjectPress 
+          news={project.news} 
+          glowColor={project.glowColor} 
+        />
+
+        {/* 08 - Next Project */}
         {nextProjectData && (
           <NextProject 
             nextSlug={nextProjectData.slug} 
