@@ -86,12 +86,6 @@ const ProjectHero = ({
               >
                 {project.category}
               </span>
-              {project.result && (
-                <>
-                  <span className="text-white/30">•</span>
-                  <span className="text-white/60 text-sm">{project.result}</span>
-                </>
-              )}
             </motion.div>
             
             {/* Project Name - Large */}
