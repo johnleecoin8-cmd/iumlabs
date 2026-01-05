@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import CTABannerSection from "@/components/CTABannerSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
 import { supabase } from "@/integrations/supabase/client";
 import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
 import ProjectHero from "@/components/project-detail/ProjectHero";
@@ -151,6 +153,12 @@ const ProjectDetail = () => {
           currentGlowColor={project.glowColor} 
         />
       )}
+
+      {/* CTA Banner */}
+      <CTABannerSection />
+
+      {/* Footer Links */}
+      <FooterLinksSection />
 
       <Footer />
       <BreadcrumbSchema items={breadcrumbItems} />
