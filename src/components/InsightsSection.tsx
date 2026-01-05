@@ -6,47 +6,50 @@ import { toast } from "sonner";
 import Logo3D from "@/components/Logo3D";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
-import aiAgentsDefi from "@/assets/blog/ai-agents-defi.jpg";
-import kaitoMindshare from "@/assets/blog/kaito-mindshare.jpg";
-import ecosystemGrowth from "@/assets/blog/ecosystem-growth-2025.jpg";
-const insights = [{
-  id: "ai-agents-defi",
-  title: "AI Agents in DeFi: The Next Frontier",
-  excerpt: "How autonomous AI agents are reshaping decentralized finance and what it means for your project.",
-  date: "Dec 10, 2024",
-  readTime: "8 min",
-  category: "AI & Blockchain",
-  image: aiAgentsDefi
-}, {
-  id: "kaito-mindshare",
-  title: "Understanding Kaito Mindshare",
-  excerpt: "A deep dive into the emerging mindshare metrics and how to leverage them for your Web3 marketing.",
-  date: "Dec 8, 2024",
-  readTime: "6 min",
-  category: "Marketing",
-  image: kaitoMindshare
-}, {
-  id: "ecosystem-growth-2025",
-  title: "Ecosystem Growth Strategies for 2025",
-  excerpt: "Key trends and strategies that will define successful Web3 ecosystem growth in the coming year.",
-  date: "Dec 5, 2024",
-  readTime: "10 min",
-  category: "Strategy",
-  image: ecosystemGrowth
-}];
+import { useQuery } from "@tanstack/react-query";
+
+// Helper function to calculate read time from content
+const calculateReadTime = (content: string | null): string => {
+  if (!content) return "5 min";
+  const wordsPerMinute = 200;
+  const wordCount = content.split(/\s+/).length;
+  const minutes = Math.ceil(wordCount / wordsPerMinute);
+  return `${minutes} min`;
+};
+
 const InsightsSection = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Fetch latest 3 published research posts from DB
+  const { data: insights = [] } = useQuery({
+    queryKey: ['insights-research-posts'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('research_posts')
+        .select('*')
+        .eq('is_published', true)
+        .order('display_order', { ascending: true })
+        .limit(3);
+      if (error) throw error;
+      return (data || []).map(post => ({
+        id: post.slug,
+        title: post.title,
+        excerpt: post.excerpt || (post.content ? post.content.substring(0, 120) + '...' : ''),
+        date: post.date || new Date(post.created_at || '').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        readTime: post.read_time || calculateReadTime(post.content),
+        category: post.category || 'Research',
+        image: post.image || '',
+      }));
+    },
+  });
+
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) return;
     setIsSubmitting(true);
     try {
-      const {
-        error
-      } = await supabase.from("newsletter_subscribers").insert([{
-        email
-      }]);
+      const { error } = await supabase.from("newsletter_subscribers").insert([{ email }]);
       if (error) throw error;
       toast.success("Successfully subscribed!");
       setEmail("");
@@ -56,43 +59,59 @@ const InsightsSection = () => {
       setIsSubmitting(false);
     }
   };
-  return <section className="bg-background">
+
+  return (
+    <section className="bg-background">
       <div className="flex flex-col md:flex-row">
         {/* Left: Articles List */}
         <div className="w-full md:w-2/3 md:border-r border-border">
-          {insights.map((article, index) => {
-          const {
-            ref,
-            isVisible
-          } = useScrollAnimation({
-            threshold: 0.1,
-            rootMargin: '30px',
-            triggerOnce: true
-          });
-          return <div key={article.id} ref={ref} className={cn("transition-all duration-500 ease-out will-change-transform", isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6")} style={{
-            transitionDelay: `${index * 100}ms`
-          }}>
-                <Link to={`/research/${article.id}`} className={`group block p-4 sm:p-5 md:p-6 lg:p-8 transition-colors duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${index < insights.length - 1 ? "border-b border-border" : ""}`}>
-                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-muted-foreground text-[10px] sm:text-xs mb-1.5 sm:mb-2">
-                    <span className="uppercase tracking-wider">{article.category}</span>
-                    <span className="hidden sm:inline">•</span>
-                    <span>{article.date}</span>
-                    <span className="hidden sm:inline">•</span>
-                    <span className="hidden sm:inline">{article.readTime} read</span>
-                  </div>
-                  <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2 group-hover:text-foreground/80 transition-colors line-clamp-2">
-                    {article.title}
-                  </h3>
-                  <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-2 sm:mb-3 line-clamp-2">
-                    {article.excerpt}
-                  </p>
-                  <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-xs sm:text-sm min-h-[40px] sm:min-h-0">
-                    <span className="group-hover:underline underline-offset-4">Read article</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </Link>
-              </div>;
-        })}
+          {insights.length === 0 ? (
+            <div className="p-8 text-center text-muted-foreground">
+              <p>No research articles yet. Check back soon!</p>
+            </div>
+          ) : (
+            insights.map((article, index) => {
+              const { ref, isVisible } = useScrollAnimation({
+                threshold: 0.1,
+                rootMargin: '30px',
+                triggerOnce: true
+              });
+              return (
+                <div 
+                  key={article.id} 
+                  ref={ref} 
+                  className={cn(
+                    "transition-all duration-500 ease-out will-change-transform",
+                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                  )} 
+                  style={{ transitionDelay: `${index * 100}ms` }}
+                >
+                  <Link 
+                    to={`/research/${article.id}`} 
+                    className={`group block p-4 sm:p-5 md:p-6 lg:p-8 transition-colors duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${index < insights.length - 1 ? "border-b border-border" : ""}`}
+                  >
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-muted-foreground text-[10px] sm:text-xs mb-1.5 sm:mb-2">
+                      <span className="uppercase tracking-wider">{article.category}</span>
+                      <span className="hidden sm:inline">•</span>
+                      <span>{article.date}</span>
+                      <span className="hidden sm:inline">•</span>
+                      <span className="hidden sm:inline">{article.readTime} read</span>
+                    </div>
+                    <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2 group-hover:text-foreground/80 transition-colors line-clamp-2">
+                      {article.title}
+                    </h3>
+                    <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-2 sm:mb-3 line-clamp-2">
+                      {article.excerpt}
+                    </p>
+                    <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-xs sm:text-sm min-h-[40px] sm:min-h-0">
+                      <span className="group-hover:underline underline-offset-4">Read article</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                </div>
+              );
+            })
+          )}
 
           {/* View All Link + CTA */}
           <div className="px-4 sm:px-6 md:px-8 py-3 sm:py-4 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
@@ -100,8 +119,6 @@ const InsightsSection = () => {
               <span className="group-hover:underline underline-offset-4">View all research</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
-            
-            
           </div>
         </div>
 
@@ -115,8 +132,19 @@ const InsightsSection = () => {
           </p>
 
           <form onSubmit={handleSubscribe} className="mb-4 sm:mb-6">
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" className="w-full bg-transparent px-3 sm:px-4 py-3 border border-border rounded-lg text-foreground placeholder:text-muted-foreground mb-2 sm:mb-3 focus:outline-none focus:border-foreground transition-colors min-h-[44px] text-sm" required />
-            <button type="submit" disabled={isSubmitting} className="group w-full flex items-center justify-center gap-2 bg-foreground text-background px-5 sm:px-6 py-3 text-xs sm:text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 disabled:opacity-50 disabled:hover:translate-y-0 min-h-[44px]">
+            <input 
+              type="email" 
+              value={email} 
+              onChange={e => setEmail(e.target.value)} 
+              placeholder="Enter your email" 
+              className="w-full bg-transparent px-3 sm:px-4 py-3 border border-border rounded-lg text-foreground placeholder:text-muted-foreground mb-2 sm:mb-3 focus:outline-none focus:border-foreground transition-colors min-h-[44px] text-sm" 
+              required 
+            />
+            <button 
+              type="submit" 
+              disabled={isSubmitting} 
+              className="group w-full flex items-center justify-center gap-2 bg-foreground text-background px-5 sm:px-6 py-3 text-xs sm:text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 disabled:opacity-50 disabled:hover:translate-y-0 min-h-[44px]"
+            >
               {isSubmitting ? "Subscribing..." : "SUBSCRIBE"}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
@@ -133,6 +161,8 @@ const InsightsSection = () => {
           </div>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default InsightsSection;
