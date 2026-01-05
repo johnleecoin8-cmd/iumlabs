@@ -1,52 +1,184 @@
 import { motion } from "framer-motion";
+import { TrendingUp, Target, Users, Clock } from "lucide-react";
 import { ProjectMetric } from "@/data/projectsData";
-import AnimatedSection from "@/components/AnimatedSection";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { useCountUp } from "@/hooks/useCountUp";
 
 interface ProjectMetricsProps {
   metrics: ProjectMetric[];
   glowColor: string;
 }
 
-const ProjectMetrics = ({ metrics }: ProjectMetricsProps) => {
-  if (!metrics || metrics.length === 0) return null;
+const metricIcons = [TrendingUp, Target, Users, Clock];
+
+const MetricCard = ({ 
+  metric, 
+  index, 
+  glowColor, 
+  isVisible 
+}: { 
+  metric: ProjectMetric; 
+  index: number; 
+  glowColor: string;
+  isVisible: boolean;
+}) => {
+  const numericMatch = metric.value.match(/[\d.]+/);
+  const numericValue = numericMatch ? parseFloat(numericMatch[0]) : 0;
+  const prefix = metric.value.match(/^[^\d]*/)?.[0] || '';
+  const suffix = metric.value.match(/[^\d]*$/)?.[0] || '';
+  const Icon = metricIcons[index % metricIcons.length];
+
+  const displayValue = useCountUp({
+    end: numericValue,
+    duration: 2000,
+    delay: index * 150,
+    prefix,
+    suffix,
+    isVisible,
+  });
 
   return (
-    <div className="px-6 md:px-12 lg:px-20 py-16 md:py-24">
-      <div className="max-w-7xl mx-auto">
-        <AnimatedSection>
-          {/* Section Header */}
-          <div className="flex items-center justify-between mb-12 md:mb-16">
-            <div className="flex items-center gap-4">
-              <span className="text-sm font-mono text-muted-foreground">01</span>
-              <div className="w-8 h-px bg-border" />
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Key Results</h2>
-            </div>
-            <span className="hidden md:inline-flex px-3 py-1 text-xs font-medium uppercase tracking-widest text-muted-foreground border border-white/10 rounded-full">
-              Performance
-            </span>
-          </div>
-
-          {/* Metrics Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-            {metrics.map((metric, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="group relative p-6 md:p-8 rounded-xl bg-white/[0.02] border border-white/[0.06] hover:bg-white/[0.04] hover:border-white/[0.1] transition-all duration-300"
-              >
-                <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-2 tracking-tight">
-                  {metric.value}
-                </div>
-                <div className="text-sm text-muted-foreground">{metric.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </AnimatedSection>
+    <motion.div
+      className="group relative"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+    >
+      {/* Card Container */}
+      <div 
+        className="relative p-8 rounded-3xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] backdrop-blur-sm border border-white/[0.06] overflow-hidden h-full transition-all duration-500 group-hover:border-white/10"
+      >
+        {/* Hover Glow Effect */}
+        <div 
+          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl"
+          style={{ 
+            background: `radial-gradient(ellipse at 50% 50%, ${glowColor}15 0%, transparent 70%)`,
+          }}
+        />
+        
+        {/* Top Line Accent */}
+        <div 
+          className="absolute top-0 left-6 right-6 h-px opacity-60 group-hover:opacity-100 transition-opacity"
+          style={{ background: `linear-gradient(to right, transparent, ${glowColor}80, transparent)` }}
+        />
+        
+        {/* Icon */}
+        <div 
+          className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110"
+          style={{ 
+            backgroundColor: `${glowColor}15`,
+            border: `1px solid ${glowColor}25`
+          }}
+        >
+          <Icon className="w-5 h-5" style={{ color: glowColor }} />
+        </div>
+        
+        {/* Value */}
+        <p 
+          className="text-4xl md:text-5xl font-bold mb-3 tracking-tight transition-all duration-300"
+          style={{ 
+            color: glowColor,
+            textShadow: `0 0 40px ${glowColor}30`
+          }}
+        >
+          {displayValue}
+        </p>
+        
+        {/* Label */}
+        <p className="text-sm text-white/50 font-medium uppercase tracking-widest">
+          {metric.label}
+        </p>
+        
+        {/* Index Number */}
+        <span 
+          className="absolute top-6 right-6 text-xs font-mono opacity-30 group-hover:opacity-60 transition-opacity"
+          style={{ color: glowColor }}
+        >
+          0{index + 1}
+        </span>
+        
+        {/* Corner Decoration */}
+        <div 
+          className="absolute bottom-0 right-0 w-24 h-24 opacity-10 group-hover:opacity-20 transition-opacity"
+          style={{
+            background: `radial-gradient(circle at bottom right, ${glowColor} 0%, transparent 70%)`
+          }}
+        />
       </div>
-    </div>
+    </motion.div>
+  );
+};
+
+const ProjectMetrics = ({ metrics, glowColor }: ProjectMetricsProps) => {
+  const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
+
+  return (
+    <section ref={ref} className="relative py-32 overflow-hidden bg-[#0A0A0A]">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        {/* Subtle radial gradient */}
+        <div 
+          className="absolute inset-0 opacity-5"
+          style={{
+            background: `radial-gradient(ellipse at 50% 0%, ${glowColor} 0%, transparent 50%)`
+          }}
+        />
+        
+        {/* Grid pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: `
+              linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+            `,
+            backgroundSize: '60px 60px'
+          }}
+        />
+      </div>
+
+      <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
+        {/* Section Header */}
+        <motion.div 
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-4 mb-4">
+            <span 
+              className="text-sm font-mono tracking-wider"
+              style={{ color: glowColor }}
+            >
+              01
+            </span>
+            <div 
+              className="h-px w-12"
+              style={{ background: `linear-gradient(to right, ${glowColor}, transparent)` }}
+            />
+            <span className="text-xs text-white/40 uppercase tracking-widest">Project Overview</span>
+          </div>
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
+            Key <span style={{ color: glowColor }}>Results</span>
+          </h2>
+        </motion.div>
+
+        {/* Metrics Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {metrics.map((metric, index) => (
+            <MetricCard 
+              key={index} 
+              metric={metric} 
+              index={index} 
+              glowColor={glowColor}
+              isVisible={isVisible}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 

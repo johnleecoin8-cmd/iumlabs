@@ -10,7 +10,6 @@ import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
 import ProjectChallenge from "@/components/project-detail/ProjectChallenge";
 import NextProject from "@/components/project-detail/NextProject";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
-import { ArrowLeft } from "lucide-react";
 
 const ProjectDetail = () => {
   const { slug } = useParams();
@@ -109,54 +108,80 @@ const ProjectDetail = () => {
     { name: project.name, url: `https://iumlabs.io/projects/${slug}` }
   ], [project.name, slug]);
 
+  // Create CSS custom properties for the project color
+  const projectColorStyles = {
+    '--project-color': project.glowColor,
+    '--project-color-10': `${project.glowColor}1A`,
+    '--project-color-20': `${project.glowColor}33`,
+    '--project-color-30': `${project.glowColor}4D`,
+    '--project-color-50': `${project.glowColor}80`,
+  } as React.CSSProperties;
+
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <Navbar />
-      
-      {/* Back Navigation */}
-      <div className="pt-24 pb-8 px-6 md:px-12 lg:px-20 max-w-7xl mx-auto">
-        <Link
-          to="/projects"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
-        >
-          <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-          <span>Back to Projects</span>
-        </Link>
-      </div>
-
-      {/* Hero Section */}
-      <section className="bg-surface-base">
+    <div className="min-h-screen bg-[#050505]">
+      <div className="min-h-screen bg-[#0A0A0A] overflow-hidden relative" style={projectColorStyles}>
+        {/* Persistent Project Color Ambient Glow */}
+        <div 
+          className="fixed top-0 left-0 w-[50vw] h-[50vh] pointer-events-none z-0 opacity-15"
+          style={{ background: `radial-gradient(ellipse at 0% 0%, ${project.glowColor} 0%, transparent 60%)` }}
+        />
+        <div 
+          className="fixed bottom-0 right-0 w-[40vw] h-[40vh] pointer-events-none z-0 opacity-10"
+          style={{ background: `radial-gradient(ellipse at 100% 100%, ${project.glowColor} 0%, transparent 60%)` }}
+        />
+        
+        <Navbar />
+        
+        {/* Hero Section */}
         <ProjectHero project={project} />
-      </section>
 
-      {/* Metrics Section */}
-      <section className="bg-surface-odd">
+        {/* Key Result Marquee - Enhanced */}
+        <div 
+          className="py-4 overflow-hidden relative"
+          style={{ backgroundColor: project.glowColor }}
+        >
+          {/* Gradient overlays for seamless loop */}
+          <div className="absolute left-0 top-0 bottom-0 w-20 z-10" style={{ background: `linear-gradient(to right, ${project.glowColor}, transparent)` }} />
+          <div className="absolute right-0 top-0 bottom-0 w-20 z-10" style={{ background: `linear-gradient(to left, ${project.glowColor}, transparent)` }} />
+          
+          <div className="flex animate-marquee whitespace-nowrap">
+            {[...Array(4)].map((_, repeatIndex) => (
+              project.metrics.map((metric, i) => (
+                <span 
+                  key={`${repeatIndex}-${i}`} 
+                  className="mx-10 text-black/90 text-sm font-bold uppercase tracking-[0.15em] flex items-center gap-4"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-black/40" />
+                  {metric.value} {metric.label}
+                </span>
+              ))
+            ))}
+          </div>
+        </div>
+
+        {/* 01 - Metrics Section */}
         <ProjectMetrics metrics={project.metrics} glowColor={project.glowColor} />
-      </section>
 
-      {/* Challenge Section */}
-      <section className="bg-surface-base">
+        {/* 02 - Challenge & Approach Section */}
         <ProjectChallenge 
           challenge={project.challenge} 
           services={project.services} 
           strategy={project.strategy} 
           glowColor={project.glowColor} 
         />
-      </section>
 
-      {/* Next Project */}
-      {nextProjectData && (
-        <section className="bg-surface-odd">
+        {/* 03 - Next Project */}
+        {nextProjectData && (
           <NextProject 
             nextSlug={nextProjectData.slug} 
             nextProject={nextProjectData.project} 
             currentGlowColor={project.glowColor} 
           />
-        </section>
-      )}
+        )}
 
-      <Footer />
-      <BreadcrumbSchema items={breadcrumbItems} />
+        <Footer />
+        <BreadcrumbSchema items={breadcrumbItems} />
+      </div>
     </div>
   );
 };

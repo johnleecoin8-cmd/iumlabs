@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import AnimatedSection from "@/components/AnimatedSection";
-import { Check, Quote } from "lucide-react";
+import { Lightbulb, CheckCircle2, Sparkles } from "lucide-react";
 
 interface ProjectChallengeProps {
   challenge: string;
@@ -9,84 +8,181 @@ interface ProjectChallengeProps {
   glowColor: string;
 }
 
-const ProjectChallenge = ({ challenge, services, strategy }: ProjectChallengeProps) => {
+const ProjectChallenge = ({
+  challenge,
+  services,
+  strategy,
+  glowColor
+}: ProjectChallengeProps) => {
   return (
-    <div className="px-6 md:px-12 lg:px-20 py-16 md:py-24">
-      <div className="max-w-7xl mx-auto">
-        <AnimatedSection>
-          {/* Section Header */}
-          <div className="flex items-center justify-between mb-12 md:mb-16">
-            <div className="flex items-center gap-4">
-              <span className="text-sm font-mono text-muted-foreground">02</span>
-              <div className="w-8 h-px bg-border" />
-              <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Our Approach</h2>
-            </div>
-            <span className="hidden md:inline-flex px-3 py-1 text-xs font-medium uppercase tracking-widest text-muted-foreground border border-white/10 rounded-full">
-              Strategy
+    <section className="relative py-32 bg-[#0A0A0A] overflow-hidden">
+      {/* Background Gradient */}
+      <div 
+        className="absolute top-0 left-0 w-[50%] h-[50%] opacity-5 pointer-events-none"
+        style={{ background: `radial-gradient(ellipse at 0% 0%, ${glowColor} 0%, transparent 60%)` }}
+      />
+      
+      <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
+        {/* Section Header */}
+        <motion.div 
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <div className="flex items-center gap-4 mb-4">
+            <span 
+              className="text-sm font-mono tracking-wider"
+              style={{ color: glowColor }}
+            >
+              02
             </span>
+            <div 
+              className="h-px w-12"
+              style={{ background: `linear-gradient(to right, ${glowColor}, transparent)` }}
+            />
+            <span className="text-xs text-white/40 uppercase tracking-widest">Our Approach</span>
           </div>
-
-          {/* Content Grid */}
-          <div className="grid md:grid-cols-2 gap-6 md:gap-8">
-            {/* Challenge Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="p-6 md:p-8 rounded-xl bg-white/[0.02] border border-white/[0.06]"
+          
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
+            Challenge & <span style={{ color: glowColor }}>Solution</span>
+          </h2>
+        </motion.div>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left - Challenge Card */}
+          <motion.div 
+            className="group relative"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <div 
+              className="relative p-10 rounded-3xl bg-gradient-to-br from-white/[0.04] to-transparent border overflow-hidden h-full"
+              style={{ borderColor: `${glowColor}20` }}
             >
-              <h3 className="text-xs uppercase tracking-widest text-muted-foreground mb-6 font-medium">
+              {/* Top Accent Bar */}
+              <div 
+                className="absolute top-0 left-0 right-0 h-1 rounded-t-3xl"
+                style={{ background: `linear-gradient(to right, ${glowColor}, ${glowColor}50, transparent)` }}
+              />
+              
+              {/* Icon */}
+              <div 
+                className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8"
+                style={{ 
+                  backgroundColor: `${glowColor}15`,
+                  border: `1px solid ${glowColor}30`
+                }}
+              >
+                <Lightbulb className="w-6 h-6" style={{ color: glowColor }} />
+              </div>
+              
+              {/* Label */}
+              <p 
+                className="text-xs uppercase tracking-[0.25em] font-semibold mb-4"
+                style={{ color: glowColor }}
+              >
                 The Challenge
-              </h3>
-              <p className="text-lg md:text-xl text-foreground leading-relaxed">{challenge}</p>
-            </motion.div>
+              </p>
+              
+              {/* Challenge Text */}
+              <p className="text-xl md:text-2xl text-white/80 font-light leading-relaxed">
+                {challenge}
+              </p>
+              
+              {/* Decorative Element */}
+              <div 
+                className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full blur-3xl opacity-10"
+                style={{ backgroundColor: glowColor }}
+              />
+            </div>
+          </motion.div>
 
-            {/* What We Did Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="p-6 md:p-8 rounded-xl bg-white/[0.02] border border-white/[0.06]"
+          {/* Right - Solution Card */}
+          <motion.div 
+            className="group relative"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            <div 
+              className="relative p-10 rounded-3xl bg-gradient-to-br from-white/[0.04] to-transparent border overflow-hidden h-full"
+              style={{ borderColor: `${glowColor}15` }}
             >
-              <h3 className="text-xs uppercase tracking-widest text-muted-foreground mb-6 font-medium">
+              {/* Top Accent Bar */}
+              <div 
+                className="absolute top-0 left-0 right-0 h-1 rounded-t-3xl"
+                style={{ background: `linear-gradient(to right, ${glowColor}60, ${glowColor}20, transparent)` }}
+              />
+              
+              {/* Icon */}
+              <div 
+                className="w-14 h-14 rounded-2xl flex items-center justify-center mb-8"
+                style={{ 
+                  backgroundColor: `${glowColor}10`,
+                  border: `1px solid ${glowColor}20`
+                }}
+              >
+                <Sparkles className="w-6 h-6" style={{ color: glowColor }} />
+              </div>
+              
+              {/* Label */}
+              <p 
+                className="text-xs uppercase tracking-[0.25em] font-semibold mb-6"
+                style={{ color: glowColor }}
+              >
                 What We Did
-              </h3>
-
+              </p>
+              
               {/* Services List */}
-              <ul className="space-y-3 mb-8">
-                {services.map((service, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -10 }}
+              <div className="space-y-4 mb-8">
+                {services.map((service, i) => (
+                  <motion.div 
+                    key={i} 
+                    className="flex items-center gap-4 group/item"
+                    initial={{ opacity: 0, x: 20 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: 0.2 + index * 0.05 }}
-                    className="flex items-start gap-3"
+                    transition={{ delay: i * 0.1 }}
                   >
-                    <Check className="w-4 h-4 text-primary mt-1 flex-shrink-0" />
-                    <span className="text-muted-foreground">{service}</span>
-                  </motion.li>
+                    <div 
+                      className="w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0 transition-transform group-hover/item:scale-110"
+                      style={{ 
+                        backgroundColor: `${glowColor}20`,
+                        border: `1px solid ${glowColor}30`
+                      }}
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5" style={{ color: glowColor }} />
+                    </div>
+                    <span className="text-white/70 text-lg group-hover/item:text-white transition-colors">
+                      {service}
+                    </span>
+                  </motion.div>
                 ))}
-              </ul>
+              </div>
+
+              {/* Divider */}
+              <div 
+                className="h-px mb-6"
+                style={{ background: `linear-gradient(to right, ${glowColor}30, transparent)` }}
+              />
 
               {/* Strategy Quote */}
-              {strategy && strategy.length > 0 && (
-                <div className="pt-6 border-t border-white/[0.06]">
-                  <div className="flex gap-3">
-                    <Quote className="w-4 h-4 text-muted-foreground/50 flex-shrink-0 mt-1" />
-                    <p className="text-sm text-muted-foreground italic leading-relaxed">
-                      {strategy[0]}
-                    </p>
-                  </div>
-                </div>
+              {strategy[0] && (
+                <blockquote className="relative pl-4 border-l-2" style={{ borderColor: `${glowColor}50` }}>
+                  <p className="text-white/50 text-sm italic leading-relaxed">
+                    "{strategy[0]}"
+                  </p>
+                </blockquote>
               )}
-            </motion.div>
-          </div>
-        </AnimatedSection>
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
