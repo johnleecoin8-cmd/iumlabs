@@ -10,8 +10,8 @@ import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
 import ProjectHero from "@/components/project-detail/ProjectHero";
 import ProjectContentSection from "@/components/project-detail/ProjectContentSection";
 import NextProject from "@/components/project-detail/NextProject";
-
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import CaseStudySchema from "@/components/CaseStudySchema";
 
 const ProjectDetail = () => {
   const { slug } = useParams();
@@ -98,14 +98,21 @@ const ProjectDetail = () => {
     if (project) {
       const title = `${project.name} Case Study | Ium Labs`;
       const description = project.description || `${project.name} - ${project.category}. Web3 marketing case study by Ium Labs.`;
+      const pageUrl = `https://iumlabs.io/projects/${slug}`;
+      const ogImage = project.bgImage.startsWith('http') 
+        ? project.bgImage 
+        : `https://iumlabs.io${project.bgImage}`;
       
       document.title = title;
       document.querySelector('meta[name="description"]')?.setAttribute('content', description);
       document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
       document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+      document.querySelector('meta[property="og:url"]')?.setAttribute('content', pageUrl);
+      document.querySelector('meta[property="og:image"]')?.setAttribute('content', ogImage);
       document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
       document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
-      document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://iumlabs.io/projects/${slug}`);
+      document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', ogImage);
+      document.querySelector('link[rel="canonical"]')?.setAttribute('href', pageUrl);
     }
   }, [project, slug]);
 
@@ -159,6 +166,15 @@ const ProjectDetail = () => {
 
       <Footer />
       <BreadcrumbSchema items={breadcrumbItems} />
+      <CaseStudySchema
+        name={project.name}
+        description={project.description || `${project.name} - Web3 marketing case study by Ium Labs.`}
+        image={project.bgImage}
+        url={`https://iumlabs.io/projects/${slug}`}
+        category={project.category}
+        services={project.services}
+        metrics={project.metrics}
+      />
     </div>
   );
 };
