@@ -8,11 +8,8 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import { supabase } from "@/integrations/supabase/client";
 import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
 import ProjectHero from "@/components/project-detail/ProjectHero";
-import ProjectOverview from "@/components/project-detail/ProjectOverview";
-import ProjectStrategy from "@/components/project-detail/ProjectStrategy";
-import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
+import ProjectContentSection from "@/components/project-detail/ProjectContentSection";
 import NextProject from "@/components/project-detail/NextProject";
-import KeyResultMarquee from "@/components/project-detail/KeyResultMarquee";
 
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
@@ -120,21 +117,8 @@ const ProjectDetail = () => {
       {/* Hero Section */}
       <ProjectHero project={project} />
 
-      {/* Key Result Marquee */}
-      <KeyResultMarquee result={project.result} glowColor={project.glowColor} />
-
-      {/* Overview Section */}
-      <ProjectOverview project={project} />
-
-
-      {/* Strategy / Approach */}
-      <ProjectStrategy 
-        strategy={project.strategy} 
-        glowColor={project.glowColor} 
-      />
-
-      {/* Key Metrics / Results */}
-      <ProjectMetrics metrics={project.metrics} glowColor={project.glowColor} />
+      {/* Unified Content Section */}
+      <ProjectContentSection project={project} metrics={project.metrics} />
 
       {/* Next Project */}
       {nextProjectData && (
