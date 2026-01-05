@@ -8,34 +8,37 @@ interface KeyResultMarqueeProps {
 const KeyResultMarquee = ({ result, glowColor }: KeyResultMarqueeProps) => {
   if (!result) return null;
   
-  // Create multiple copies for seamless infinite scroll
-  const items = [...Array(20)].map((_, i) => i);
+  // Create items for seamless loop (duplicated for continuous scroll)
+  const items = [...Array(12)].map((_, i) => i);
   
   return (
     <motion.div 
-      className="w-full py-6 md:py-8 bg-black border-y border-white/10 overflow-hidden relative"
+      className="relative z-10 border-t border-white/15 py-3 sm:py-4 overflow-hidden"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
     >
-      {/* Left gradient overlay */}
-      <div className="absolute left-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-      
-      {/* Right gradient overlay */}
-      <div className="absolute right-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
-      
-      {/* Marquee content - needs min-width to exceed viewport for animation */}
-      <div className="flex items-center logo-marquee-slow min-w-max">
-        {items.map((idx) => (
-          <div key={idx} className="flex items-center gap-8 md:gap-12 shrink-0 px-10 md:px-16">
-            <span className="text-xs uppercase tracking-[0.2em] text-white/40 whitespace-nowrap">
-              Key Result
-            </span>
-            <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: glowColor }} />
+      {/* Left section indicator */}
+      <div className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/50 text-xs z-20">
+        <span className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-[10px] font-medium">
+          01
+        </span>
+      </div>
+
+      {/* Marquee content */}
+      <div className="flex items-center logo-marquee-slow ml-12 sm:ml-20">
+        {[...items, ...items].map((idx, index) => (
+          <div 
+            key={index} 
+            className="flex items-center gap-2 sm:gap-2.5 mx-1.5 sm:mx-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300"
+          >
+            {/* Project color dot */}
             <span 
-              className="text-xl md:text-2xl lg:text-3xl font-medium whitespace-nowrap"
-              style={{ color: glowColor }}
-            >
+              className="w-2 h-2 rounded-full flex-shrink-0" 
+              style={{ backgroundColor: glowColor }} 
+            />
+            {/* Key Result text */}
+            <span className="text-white/75 text-sm font-medium whitespace-nowrap">
               {result}
             </span>
           </div>
