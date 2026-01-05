@@ -11,7 +11,7 @@ interface NextProjectProps {
 
 const NextProject = ({ nextSlug, nextProject, currentGlowColor }: NextProjectProps) => {
   return (
-    <section className="relative py-12 md:py-16 bg-[#0A0A0A] overflow-hidden">
+    <section className="relative py-6 md:py-8 bg-[#0A0A0A] overflow-hidden">
       {/* Transition Line */}
       <div 
         className="absolute top-0 left-0 right-0 h-px"

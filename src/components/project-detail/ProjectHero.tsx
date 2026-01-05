@@ -25,7 +25,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
   const hasVideo = !!project.bgVideo;
 
   return (
-    <section ref={containerRef} className="relative min-h-[50vh] overflow-hidden flex items-end">
+    <section ref={containerRef} className="relative min-h-[45vh] overflow-hidden flex items-end">
       {/* Background Video */}
       {hasVideo && (
         <motion.div 
@@ -82,13 +82,13 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
       
       {/* Content */}
       <motion.div 
-        className="relative z-20 container mx-auto max-w-7xl px-6 md:px-12 pb-8"
+        className="relative z-20 container mx-auto max-w-7xl px-6 md:px-12 pb-4"
         style={{ opacity }}
       >
         {/* Back Button */}
         <motion.button 
           onClick={() => navigate("/projects")}
-          className="group flex items-center gap-2 mb-6 text-white/50 hover:text-white transition-colors"
+          className="group flex items-center gap-2 mb-4 text-white/50 hover:text-white transition-colors"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}

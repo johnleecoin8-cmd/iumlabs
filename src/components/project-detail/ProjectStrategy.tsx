@@ -10,7 +10,7 @@ const ProjectStrategy = ({ strategy, glowColor }: ProjectStrategyProps) => {
   if (!strategy || strategy.length === 0) return null;
 
   return (
-    <section className="relative py-8 md:py-10 bg-[#0A0A0A] overflow-hidden">
+    <section className="relative py-4 md:py-6 bg-[#0A0A0A] overflow-hidden">
       {/* Background */}
       <div 
         className="absolute bottom-0 right-0 w-[40%] h-[60%] opacity-5 pointer-events-none"
@@ -20,7 +20,7 @@ const ProjectStrategy = ({ strategy, glowColor }: ProjectStrategyProps) => {
       <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
         {/* Section Header */}
         <motion.div 
-          className="mb-8"
+          className="mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
