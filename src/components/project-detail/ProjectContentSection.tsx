@@ -88,7 +88,7 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
             <h3 className="text-xs uppercase tracking-[0.2em] text-white/40 mb-4">
               Strategy
             </h3>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-nowrap gap-2 overflow-x-auto scrollbar-hide">
               {project.shortServices?.map((service, i) => (
                 <span 
                   key={i}
