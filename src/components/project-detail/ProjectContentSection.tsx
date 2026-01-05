@@ -72,11 +72,11 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
         </section>
       )}
 
-      {/* SECTION 2: SCOPE OF WORK (Services + Overview) */}
+      {/* SECTION 2: SCOPE OF WORK + STRATEGY (Combined) + Overview */}
       <section className="py-3 md:py-4">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-            {/* Left: Scope of Work (Services) */}
+            {/* Left: Scope of Work + Strategy Combined */}
             <motion.div 
               className="bg-[#1A1A1A] rounded-2xl p-8 md:p-10"
               initial={{ opacity: 0, x: -20 }}
@@ -93,65 +93,52 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
                     {service}
                   </li>
                 ))}
+                {project.strategy && project.strategy.length > 0 && (
+                  <>
+                    <li className="pt-4 border-t border-white/10 text-sm text-white/40 uppercase tracking-wider">
+                      Strategy
+                    </li>
+                    {project.strategy.map((item, idx) => (
+                      <li key={`strategy-${idx}`} className="text-xl md:text-2xl font-normal text-white">
+                        {item}
+                      </li>
+                    ))}
+                  </>
+                )}
               </ul>
             </motion.div>
             
-            {/* Right: Overview */}
+            {/* Right: Overview + What We Did */}
             <motion.div 
-              className="bg-[#1A1A1A] rounded-2xl p-8 md:p-10"
+              className="bg-[#1A1A1A] rounded-2xl p-8 md:p-10 flex flex-col"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <h3 className="text-sm text-white/40 uppercase tracking-wider mb-6">
-                Overview
-              </h3>
-              <p className="text-xl md:text-2xl font-normal text-white/80 leading-relaxed">
-                {project.description}
-              </p>
+              <div className="mb-8">
+                <h3 className="text-sm text-white/40 uppercase tracking-wider mb-6">
+                  Overview
+                </h3>
+                <p className="text-xl md:text-2xl font-normal text-white/80 leading-relaxed">
+                  {project.description}
+                </p>
+              </div>
+              
+              {project.challenge && (
+                <div className="pt-8 border-t border-white/10">
+                  <h3 className="text-sm text-white/40 uppercase tracking-wider mb-6">
+                    What We Did
+                  </h3>
+                  <p className="text-xl md:text-2xl font-normal text-white/80 leading-relaxed">
+                    {project.challenge}
+                  </p>
+                </div>
+              )}
             </motion.div>
           </div>
         </div>
       </section>
-
-      {/* SECTION 3: WHAT WE DID (Challenge) */}
-      {project.challenge && (
-        <section className="py-3 md:py-4">
-          <div className="max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-              {/* Left: Empty or Strategy heading */}
-              <motion.div 
-                className="bg-[#1A1A1A] rounded-2xl p-8 md:p-10 flex items-end"
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-              >
-                <h3 className="text-3xl md:text-4xl font-light text-white/20">
-                  Strategy
-                </h3>
-              </motion.div>
-              
-              {/* Right: What We Did */}
-              <motion.div 
-                className="bg-[#1A1A1A] rounded-2xl p-8 md:p-10"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
-                <h3 className="text-sm text-white/40 uppercase tracking-wider mb-6">
-                  What We Did
-                </h3>
-                <p className="text-xl md:text-2xl font-normal text-white/80 leading-relaxed">
-                  {project.challenge}
-                </p>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* SECTION 4: CAMPAIGN GALLERY */}
       {project.gallery && project.gallery.length > 0 && (
