@@ -4,10 +4,10 @@ import { useCountUp } from "@/hooks/useCountUp";
 
 interface MetricCardProps {
   metric: ProjectMetric;
-  glowColor: string;
+  index: number;
 }
 
-const MetricCard = ({ metric, glowColor }: MetricCardProps) => {
+const MetricCard = ({ metric, index }: MetricCardProps) => {
   const numericMatch = metric.value.match(/^([^\d]*)([\d,.]+)(.*)$/);
   const prefix = numericMatch ? numericMatch[1] : '';
   const numericValue = numericMatch ? parseFloat(numericMatch[2].replace(/,/g, '')) : 0;
@@ -22,17 +22,30 @@ const MetricCard = ({ metric, glowColor }: MetricCardProps) => {
   });
 
   return (
-    <div className="text-center py-8 px-4 border border-white/10 rounded-lg bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
-      <span 
-        className="text-3xl md:text-4xl font-bold block"
-        style={{ color: glowColor }}
-      >
-        {numericMatch ? displayValue : metric.value}
+    <motion.div 
+      className="bg-[#EAEAE5] rounded-2xl p-6 md:p-8 relative min-h-[140px] flex flex-col justify-between"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+    >
+      <div>
+        {/* Large Number */}
+        <span className="text-3xl md:text-4xl lg:text-5xl font-normal text-black block">
+          {numericMatch ? displayValue : metric.value}
+        </span>
+        
+        {/* Label in Blue */}
+        <span className="text-sm text-blue-600 block mt-2">
+          {metric.label}
+        </span>
+      </div>
+      
+      {/* Index Number - Bottom Left */}
+      <span className="text-xs text-black/30 mt-4">
+        {String(index + 1).padStart(2, '0')}.
       </span>
-      <span className="block text-sm text-white/50 mt-3 uppercase tracking-wider">
-        {metric.label}
-      </span>
-    </div>
+    </motion.div>
   );
 };
 
@@ -43,175 +56,109 @@ interface ProjectContentSectionProps {
 
 const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps) => {
   const displayMetrics = metrics || project.metrics;
-  const glowColor = project.glowColor || '#ffffff';
 
   return (
-    <div className="bg-black">
-      {/* SECTION 1: PROJECT OVERVIEW */}
-      <section className="py-16 md:py-24 border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
-            {/* Left: Meta Info */}
-            <motion.div 
-              className="md:col-span-4 space-y-8"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div>
-                <span className="text-xs text-white/40 uppercase tracking-[0.2em] block mb-2">
-                  Client
-                </span>
-                <span className="text-lg text-white">{project.name}</span>
-              </div>
-              
-              {project.category && (
-                <div>
-                  <span className="text-xs text-white/40 uppercase tracking-[0.2em] block mb-2">
-                    Category
-                  </span>
-                  <span className="text-lg text-white">{project.category}</span>
-                </div>
-              )}
-              
-              {project.shortServices && project.shortServices.length > 0 && (
-                <div>
-                  <span className="text-xs text-white/40 uppercase tracking-[0.2em] block mb-3">
-                    Services
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {project.shortServices.map((service, idx) => (
-                      <span 
-                        key={idx}
-                        className="px-3 py-1.5 text-xs rounded-full border border-white/20 text-white/70"
-                      >
-                        {service}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </motion.div>
-            
-            {/* Right: Description */}
-            <motion.div 
-              className="md:col-span-8"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
-                {project.description || "No project description available."}
-              </p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 2: THE CHALLENGE */}
-      {project.challenge && (
-        <section className="py-16 md:py-24 border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="text-xs text-white/40 uppercase tracking-[0.2em] block mb-6">
-                Challenge
-              </span>
-              <p className="text-2xl md:text-3xl text-white/90 leading-relaxed max-w-4xl">
-                {project.challenge}
-              </p>
-            </motion.div>
-          </div>
-        </section>
-      )}
-
-      {/* SECTION 3: OUR STRATEGY */}
-      {project.strategy && project.strategy.length > 0 && (
-        <section className="py-16 md:py-24 border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <motion.h3 
-              className="text-xs text-white/40 uppercase tracking-[0.2em] mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              Our Approach
-            </motion.h3>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-              {project.strategy.slice(0, 4).map((step, idx) => (
-                <motion.div
-                  key={idx}
-                  className="group"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                >
-                  <span 
-                    className="text-sm font-semibold mb-3 block transition-opacity group-hover:opacity-100"
-                    style={{ color: glowColor, opacity: 0.7 }}
-                  >
-                    {String(idx + 1).padStart(2, '0')}
-                  </span>
-                  <p className="text-sm md:text-base text-white/70 leading-relaxed">
-                    {step}
-                  </p>
-                </motion.div>
+    <div className="bg-[#F5F5F0]">
+      {/* SECTION 1: METRICS */}
+      {displayMetrics && displayMetrics.length > 0 && (
+        <section className="py-6 md:py-8">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+              {displayMetrics.map((metric, idx) => (
+                <MetricCard key={idx} metric={metric} index={idx} />
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* SECTION 4: RESULTS */}
-      {(project.result || (displayMetrics && displayMetrics.length > 0)) && (
-        <section className="py-16 md:py-24 border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <motion.h3 
-              className="text-xs text-white/40 uppercase tracking-[0.2em] mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+      {/* SECTION 2: SCOPE OF WORK (Services + Overview) */}
+      <section className="py-3 md:py-4">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+            {/* Left: Scope of Work (Services) */}
+            <motion.div 
+              className="bg-[#EAEAE5] rounded-2xl p-8 md:p-10"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
             >
-              Results
-            </motion.h3>
-            
-            {project.result && (
-              <motion.p 
-                className="text-2xl md:text-4xl font-light text-white mb-12 max-w-4xl"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-              >
-                "{project.result}"
-              </motion.p>
-            )}
-            
-            {displayMetrics && displayMetrics.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                {displayMetrics.map((metric, idx) => (
-                  <MetricCard key={idx} metric={metric} glowColor={glowColor} />
+              <h3 className="text-sm text-black/40 uppercase tracking-wider mb-6">
+                Scope of Work
+              </h3>
+              <ul className="space-y-3">
+                {project.services.map((service, idx) => (
+                  <li key={idx} className="text-xl md:text-2xl font-normal text-black">
+                    {service}
+                  </li>
                 ))}
-              </div>
-            )}
+              </ul>
+            </motion.div>
+            
+            {/* Right: Overview */}
+            <motion.div 
+              className="bg-[#EAEAE5] rounded-2xl p-8 md:p-10"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <h3 className="text-sm text-black/40 uppercase tracking-wider mb-6">
+                Overview
+              </h3>
+              <p className="text-xl md:text-2xl font-normal text-black leading-relaxed">
+                {project.description}
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: WHAT WE DID (Challenge) */}
+      {project.challenge && (
+        <section className="py-3 md:py-4">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+              {/* Left: Empty or Strategy heading */}
+              <motion.div 
+                className="bg-[#EAEAE5] rounded-2xl p-8 md:p-10 flex items-end"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <h3 className="text-3xl md:text-4xl font-light text-black/20">
+                  Strategy
+                </h3>
+              </motion.div>
+              
+              {/* Right: What We Did */}
+              <motion.div 
+                className="bg-[#EAEAE5] rounded-2xl p-8 md:p-10"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+              >
+                <h3 className="text-sm text-black/40 uppercase tracking-wider mb-6">
+                  What We Did
+                </h3>
+                <p className="text-xl md:text-2xl font-normal text-black leading-relaxed">
+                  {project.challenge}
+                </p>
+              </motion.div>
+            </div>
           </div>
         </section>
       )}
 
-      {/* SECTION 5: CAMPAIGN GALLERY */}
+      {/* SECTION 4: CAMPAIGN GALLERY */}
       {project.gallery && project.gallery.length > 0 && (
-        <section className="py-16 md:py-24">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <section className="py-6 md:py-8">
+          <div className="max-w-7xl mx-auto px-4">
             <motion.h3 
-              className="text-xs text-white/40 uppercase tracking-[0.2em] mb-12"
+              className="text-sm text-black/40 uppercase tracking-wider mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -219,11 +166,11 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
               Campaign Highlights
             </motion.h3>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               {project.gallery.map((item, idx) => (
                 <motion.div
                   key={idx}
-                  className="group relative overflow-hidden rounded-lg"
+                  className="group relative overflow-hidden rounded-2xl bg-[#EAEAE5]"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -235,8 +182,8 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
                     className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   {item.title && (
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                      <span className="text-sm text-white/90">{item.title}</span>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
+                      <span className="text-sm text-white">{item.title}</span>
                     </div>
                   )}
                 </motion.div>
@@ -245,6 +192,9 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
           </div>
         </section>
       )}
+
+      {/* Bottom padding */}
+      <div className="h-12 md:h-16" />
     </div>
   );
 };
