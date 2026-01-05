@@ -91,10 +91,10 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center">
+      <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Project Not Found</h1>
-          <Link to="/projects" className="text-gray-600 hover:underline">
+          <h1 className="text-4xl font-bold text-white mb-4">Project Not Found</h1>
+          <Link to="/projects" className="text-gray-400 hover:underline">
             View All Projects
           </Link>
         </div>
@@ -113,7 +113,7 @@ const ProjectDetail = () => {
   ], [project.name, slug]);
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5]">
+    <div className="min-h-screen bg-black">
       <Navbar />
       
       {/* Hero Section */}

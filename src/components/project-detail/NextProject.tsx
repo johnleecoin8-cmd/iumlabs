@@ -11,7 +11,7 @@ interface NextProjectProps {
 
 const NextProject = ({ nextSlug, nextProject }: NextProjectProps) => {
   return (
-    <section className="relative py-16 md:py-24 bg-[#F5F5F5] overflow-hidden">
+    <section className="relative py-16 md:py-24 bg-black overflow-hidden border-t border-gray-800">
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
         <Link 
           to={`/projects/${nextSlug}`}
@@ -25,11 +25,11 @@ const NextProject = ({ nextSlug, nextProject }: NextProjectProps) => {
             viewport={{ once: true }}
           >
             <div>
-              <p className="text-sm text-gray-400 uppercase tracking-wider mb-3">
+              <p className="text-sm text-gray-500 uppercase tracking-wider mb-3">
                 Next Project
               </p>
               
-              <h3 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 group-hover:text-gray-600 transition-colors">
+              <h3 className="text-4xl md:text-5xl lg:text-6xl font-light text-white group-hover:text-gray-400 transition-colors">
                 {nextProject.name}
               </h3>
               
@@ -43,11 +43,11 @@ const NextProject = ({ nextSlug, nextProject }: NextProjectProps) => {
               transition={{ type: "spring", stiffness: 300 }}
             >
               <div 
-                className="w-16 h-16 rounded-full flex items-center justify-center border-2 transition-all group-hover:bg-gray-900 group-hover:border-gray-900"
+                className="w-16 h-16 rounded-full flex items-center justify-center border-2 transition-all group-hover:bg-white group-hover:border-white"
                 style={{ borderColor: nextProject.glowColor }}
               >
                 <ArrowRight 
-                  className="w-6 h-6 transition-colors group-hover:text-white" 
+                  className="w-6 h-6 transition-colors group-hover:text-black" 
                   style={{ color: nextProject.glowColor }}
                 />
               </div>

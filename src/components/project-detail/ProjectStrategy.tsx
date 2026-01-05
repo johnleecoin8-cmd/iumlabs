@@ -9,7 +9,7 @@ const ProjectStrategy = ({ strategy, glowColor }: ProjectStrategyProps) => {
   if (!strategy || strategy.length === 0) return null;
 
   return (
-    <section className="relative py-12 md:py-16 bg-[#F5F5F5] overflow-hidden">
+    <section className="relative py-12 md:py-16 bg-black overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
         {/* Section Header */}
         <motion.div 
@@ -18,7 +18,7 @@ const ProjectStrategy = ({ strategy, glowColor }: ProjectStrategyProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-light text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-light text-white">
             Approach
           </h2>
         </motion.div>
@@ -43,7 +43,7 @@ const ProjectStrategy = ({ strategy, glowColor }: ProjectStrategyProps) => {
               </span>
               
               {/* Text */}
-              <p className="text-sm md:text-base text-gray-600 leading-relaxed">
+              <p className="text-sm md:text-base text-gray-400 leading-relaxed">
                 {step}
               </p>
             </motion.div>

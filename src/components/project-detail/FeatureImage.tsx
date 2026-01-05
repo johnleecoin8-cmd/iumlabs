@@ -11,7 +11,7 @@ const FeatureImage = ({ gallery }: FeatureImageProps) => {
   const mainImage = gallery[0];
 
   return (
-    <section className="relative bg-[#F5F5F5]">
+    <section className="relative bg-black">
       <motion.div
         className="w-full aspect-[21/9] md:aspect-[3/1] overflow-hidden"
         initial={{ opacity: 0 }}
