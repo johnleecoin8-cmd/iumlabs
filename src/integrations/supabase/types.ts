@@ -245,6 +245,7 @@ export type Database = {
       research_posts: {
         Row: {
           author: string | null
+          author_image: string | null
           author_role: string | null
           category: string | null
           content: string | null
@@ -263,6 +264,7 @@ export type Database = {
         }
         Insert: {
           author?: string | null
+          author_image?: string | null
           author_role?: string | null
           category?: string | null
           content?: string | null
@@ -281,6 +283,7 @@ export type Database = {
         }
         Update: {
           author?: string | null
+          author_image?: string | null
           author_role?: string | null
           category?: string | null
           content?: string | null
