@@ -17,15 +17,13 @@ interface ResearchFormData {
   slug: string;
   image: string;
   date: string;
-  read_time: string;
   category: string;
   author: string;
   author_role: string;
+  author_image: string;
   excerpt: string;
-  tags: string;
   content: string;
   is_published: boolean;
-  display_order: number;
 }
 
 const initialFormData: ResearchFormData = {
@@ -33,15 +31,13 @@ const initialFormData: ResearchFormData = {
   slug: '',
   image: '',
   date: '',
-  read_time: '',
   category: '',
   author: '',
   author_role: '',
+  author_image: '',
   excerpt: '',
-  tags: '',
   content: '',
   is_published: true,
-  display_order: 0,
 };
 
 export default function ResearchForm() {
@@ -50,10 +46,13 @@ export default function ResearchForm() {
   const queryClient = useQueryClient();
   const isEditing = Boolean(id);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const authorImageInputRef = useRef<HTMLInputElement>(null);
 
   const [formData, setFormData] = useState<ResearchFormData>(initialFormData);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [authorImageFile, setAuthorImageFile] = useState<File | null>(null);
+  const [authorImagePreview, setAuthorImagePreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   
@@ -255,18 +254,19 @@ export default function ResearchForm() {
         slug: existingPost.slug || '',
         image: existingPost.image || '',
         date: existingPost.date || '',
-        read_time: existingPost.read_time || '',
         category: existingPost.category || '',
         author: existingPost.author || '',
         author_role: existingPost.author_role || '',
+        author_image: (existingPost as any).author_image || '',
         excerpt: existingPost.excerpt || '',
-        tags: existingPost.tags?.join(', ') || '',
         content: existingPost.content || '',
         is_published: existingPost.is_published ?? true,
-        display_order: existingPost.display_order ?? 0,
       });
       if (existingPost.image) {
         setImagePreview(existingPost.image);
+      }
+      if ((existingPost as any).author_image) {
+        setAuthorImagePreview((existingPost as any).author_image);
       }
     }
   }, [existingPost]);
@@ -520,6 +520,36 @@ export default function ResearchForm() {
     }
   };
 
+  // Author image handlers
+  const handleAuthorImageFile = useCallback((file: File) => {
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image must be less than 5MB');
+      return;
+    }
+    setAuthorImageFile(file);
+    setAuthorImagePreview(URL.createObjectURL(file));
+  }, []);
+
+  const handleAuthorImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      handleAuthorImageFile(file);
+    }
+  };
+
+  const removeAuthorImage = () => {
+    setAuthorImageFile(null);
+    setAuthorImagePreview(null);
+    setFormData({ ...formData, author_image: '' });
+    if (authorImageInputRef.current) {
+      authorImageInputRef.current.value = '';
+    }
+  };
+
   const uploadImage = async (): Promise<string | null> => {
     if (!imageFile) return formData.image || null;
 
@@ -549,24 +579,49 @@ export default function ResearchForm() {
     }
   };
 
+  const uploadAuthorImage = async (): Promise<string | null> => {
+    if (!authorImageFile) return formData.author_image || null;
+
+    try {
+      const fileExt = authorImageFile.name.split('.').pop() || 'jpg';
+      const slug = formData.slug || 'author';
+      const fileName = `research/authors/${slug}-${Date.now()}.${fileExt}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('project-images')
+        .upload(fileName, authorImageFile);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('project-images')
+        .getPublicUrl(fileName);
+
+      return publicUrl;
+    } catch (error) {
+      console.error('Author image upload error:', error);
+      toast.error('Failed to upload author image');
+      return null;
+    }
+  };
+
   const saveMutation = useMutation({
     mutationFn: async (data: ResearchFormData) => {
       const imageUrl = await uploadImage();
+      const authorImageUrl = await uploadAuthorImage();
 
       const postData = {
         title: data.title,
         slug: data.slug,
         image: imageUrl,
         date: data.date || null,
-        read_time: data.read_time || null,
         category: data.category || null,
         author: data.author || null,
         author_role: data.author_role || null,
+        author_image: authorImageUrl,
         excerpt: data.excerpt || null,
-        tags: data.tags ? data.tags.split(',').map(t => t.trim()) : [],
         content: data.content || null,
         is_published: data.is_published,
-        display_order: data.display_order,
       };
 
       if (isEditing) {
@@ -770,34 +825,46 @@ export default function ResearchForm() {
                 />
               </div>
 
-              <div>
-                <Label className="text-white">Read Time</Label>
-                <Input
-                  value={formData.read_time}
-                  onChange={(e) => setFormData({ ...formData, read_time: e.target.value })}
-                  className="bg-[#111] border-white/10 text-white mt-1"
-                  placeholder="e.g., 10 min read"
-                />
-              </div>
-
-              <div>
-                <Label className="text-white">Display Order</Label>
-                <Input
-                  type="number"
-                  value={formData.display_order}
-                  onChange={(e) => setFormData({ ...formData, display_order: parseInt(e.target.value) || 0 })}
-                  className="bg-[#111] border-white/10 text-white mt-1"
-                />
-              </div>
-
+              {/* Author Image Upload */}
               <div className="col-span-2">
-                <Label className="text-white">Tags (comma separated)</Label>
-                <Input
-                  value={formData.tags}
-                  onChange={(e) => setFormData({ ...formData, tags: e.target.value })}
-                  className="bg-[#111] border-white/10 text-white mt-1"
-                  placeholder="DeFi, AI, Korea, 2025"
+                <Label className="text-white mb-2 block">Author Profile Image</Label>
+                <input
+                  ref={authorImageInputRef}
+                  type="file"
+                  accept="image/*"
+                  onChange={handleAuthorImageSelect}
+                  className="hidden"
                 />
+                
+                <div className="flex items-center gap-4">
+                  {authorImagePreview ? (
+                    <div className="relative">
+                      <img
+                        src={authorImagePreview}
+                        alt="Author"
+                        className="w-20 h-20 rounded-full object-cover border border-white/10"
+                      />
+                      <button
+                        type="button"
+                        onClick={removeAuthorImage}
+                        className="absolute -top-1 -right-1 p-1 bg-black/70 hover:bg-black rounded-full transition-colors"
+                      >
+                        <X className="w-3 h-3 text-white" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div
+                      onClick={() => authorImageInputRef.current?.click()}
+                      className="w-20 h-20 rounded-full bg-[#111] border-2 border-dashed border-white/20 hover:border-white/40 flex items-center justify-center cursor-pointer transition-colors"
+                    >
+                      <Upload className="w-5 h-5 text-white/40" />
+                    </div>
+                  )}
+                  <div className="text-white/60 text-sm">
+                    <p>저자 프로필 이미지</p>
+                    <p className="text-white/40 text-xs mt-1">정사각형 이미지 권장</p>
+                  </div>
+                </div>
               </div>
 
               <div className="col-span-2">
