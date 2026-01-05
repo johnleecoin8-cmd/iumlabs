@@ -76,53 +76,48 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
           </motion.div>
         )}
 
-        {/* Strategy + Description Row */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
-          {/* Strategy Column */}
-          <motion.div 
-            className="md:col-span-3"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-xs uppercase tracking-[0.2em] text-white/40 mb-4">
-              Strategy
-            </h3>
-            <div className="flex flex-nowrap gap-2 overflow-x-auto scrollbar-hide">
-              {project.shortServices?.map((service, i) => (
-                <span 
-                  key={i}
-                  className="px-3 py-1.5 text-sm border rounded-full"
-                  style={{ 
-                    borderColor: project.glowColor,
-                    color: project.glowColor 
-                  }}
-                >
-                  {service}
-                </span>
-              ))}
-            </div>
-          </motion.div>
+        {/* Strategy + Category Row (인라인) */}
+        <motion.div 
+          className="flex flex-wrap items-center justify-between gap-4 mb-6"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          {/* Strategy Tags (왼쪽) */}
+          <div className="flex flex-nowrap gap-2 overflow-x-auto scrollbar-hide">
+            {project.shortServices?.map((service, i) => (
+              <span 
+                key={i}
+                className="px-3 py-1.5 text-sm border rounded-full whitespace-nowrap"
+                style={{ 
+                  borderColor: project.glowColor,
+                  color: project.glowColor 
+                }}
+              >
+                {service}
+              </span>
+            ))}
+          </div>
+          
+          {/* Category (오른쪽) */}
+          <div className="text-sm shrink-0">
+            <span className="text-white/40">Category</span>
+            <span className="ml-2 text-white">{project.category}</span>
+          </div>
+        </motion.div>
 
-          {/* Description Column */}
-          <motion.div 
-            className="md:col-span-9"
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-          >
-            <p className="text-base md:text-lg text-white/70 leading-relaxed mb-6">
-              {project.challenge || project.description}
-            </p>
-            <div className="flex gap-6 text-sm">
-              <div>
-                <span className="text-white/40">Category</span>
-                <span className="ml-2 text-white">{project.category}</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+        {/* Description Row (아래 별도 행) */}
+        <motion.div 
+          className="mb-10"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.1 }}
+        >
+          <p className="text-base md:text-lg text-white/70 leading-relaxed">
+            {project.challenge || project.description}
+          </p>
+        </motion.div>
 
         {/* Approach Section */}
         {project.strategy && project.strategy.length > 0 && (
