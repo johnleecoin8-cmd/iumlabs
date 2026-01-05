@@ -4,7 +4,8 @@ import { ArrowLeft, Clock, Calendar, Twitter, Linkedin, Copy, ChevronRight } fro
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
-import GlobalContactFooter from "@/components/GlobalContactFooter";
+import Footer from "@/components/Footer";
+import CTASection from "@/components/CTASection";
 import { researchPosts } from "./Research";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -127,7 +128,7 @@ const ResearchDetail = () => {
         <div className="container mx-auto max-w-7xl px-4 py-32 text-center">
           <div className="text-white/60">Loading...</div>
         </div>
-        <GlobalContactFooter />
+        <Footer />
       </div>
     );
   }
@@ -143,7 +144,7 @@ const ResearchDetail = () => {
             ← Back to Research
           </Link>
         </div>
-        <GlobalContactFooter />
+        <Footer />
       </div>
     );
   }
@@ -457,7 +458,8 @@ const ResearchDetail = () => {
         </section>
       )}
 
-      <GlobalContactFooter />
+      <CTASection />
+      <Footer />
       <BreadcrumbSchema items={breadcrumbItems} />
       </div>
     </div>

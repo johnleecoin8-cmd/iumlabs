@@ -28,7 +28,10 @@ import CasesSection from "@/components/CasesSection";
 import FilmstripGallerySection from "@/components/FilmstripGallerySection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import InsightsSection from "@/components/InsightsSection";
-import GlobalContactFooter from "@/components/GlobalContactFooter";
+import ContactFormSection from "@/components/ContactFormSection";
+import CTABannerSection from "@/components/CTABannerSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
+import Footer from "@/components/Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import { usePageTitle } from "@/hooks/usePageTitle";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -344,8 +347,24 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Global Contact + Footer */}
-      <GlobalContactFooter />
+      {/* Contact - 07 짝수 */}
+      <section className="bg-surface-even" id="contact">
+        <AnimatedSection>
+          <ContactFormSection sectionNumber="07" />
+        </AnimatedSection>
+      </section>
+      
+      {/* CTA Banner */}
+      <AnimatedSection direction="none">
+        <CTABannerSection />
+      </AnimatedSection>
+      
+      {/* Footer Links */}
+      <FooterLinksSection />
+      
+      {/* Footer Brand */}
+      <Footer />
+      
       <FloatingContactButton />
     </div>;
 };

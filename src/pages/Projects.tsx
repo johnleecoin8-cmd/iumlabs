@@ -1,7 +1,10 @@
 import { useState, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
-import GlobalContactFooter from "@/components/GlobalContactFooter";
+import Footer from "@/components/Footer";
+import ContactFormSection from "@/components/ContactFormSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
+import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import { HoverExpandGallery } from "@/components/HoverExpandGallery";
 import { ArrowRight, Calendar, ChevronDown, Filter } from "lucide-react";
@@ -496,8 +499,19 @@ const Projects = () => {
         </div>
       </section>
       
-      {/* Global Contact + Footer */}
-      <GlobalContactFooter />
+      {/* Contact Section - 04 */}
+      <section className="scroll-reveal bg-[#0F0F0F]" id="contact">
+        <ContactFormSection sectionNumber="04" />
+      </section>
+      
+      {/* CTA Banner */}
+      <CTABannerSection />
+      
+      {/* Footer Links */}
+      <FooterLinksSection />
+      
+      {/* Footer */}
+      <Footer />
       
       <FloatingContactButton />
     </div>

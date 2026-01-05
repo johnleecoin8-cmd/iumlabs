@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Search, Clock, ArrowRight, TrendingUp } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import GlobalContactFooter from "@/components/GlobalContactFooter";
+import Footer from "@/components/Footer";
+import ContactFormSection from "@/components/ContactFormSection";
+import CTABannerSection from "@/components/CTABannerSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import ResearchHeroSection from "@/components/ResearchHeroSection";
 import { Link } from "react-router-dom";
@@ -1183,8 +1186,18 @@ const Research = () => {
         </div>
       </section>
 
-      {/* Global Contact + Footer */}
-      <GlobalContactFooter />
+      {/* 05 - Contact Section */}
+      <section className="bg-[#0F0F0F] border-t border-white/10">
+        <ContactFormSection sectionNumber="05" />
+      </section>
+      
+      {/* CTA Banner Section */}
+      <CTABannerSection />
+      
+      {/* Footer Links Section */}
+      <FooterLinksSection />
+      
+      <Footer />
       
       {/* Floating Contact Button */}
       <FloatingContactButton />

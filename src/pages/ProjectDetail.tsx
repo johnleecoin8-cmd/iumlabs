@@ -2,7 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useMemo } from "react";
 import Navbar from "@/components/Navbar";
-import GlobalContactFooter from "@/components/GlobalContactFooter";
+import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
 import ProjectHero from "@/components/project-detail/ProjectHero";
@@ -152,7 +152,7 @@ const ProjectDetail = () => {
         />
       )}
 
-      <GlobalContactFooter />
+      <Footer />
       <BreadcrumbSchema items={breadcrumbItems} />
     </div>
   );

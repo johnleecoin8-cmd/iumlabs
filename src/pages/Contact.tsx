@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
-import GlobalContactFooter from "@/components/GlobalContactFooter";
+import Footer from "@/components/Footer";
 import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, ArrowRight, Linkedin, Globe, BarChart3, Rocket } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
@@ -315,8 +315,7 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Global Contact + Footer */}
-      <GlobalContactFooter />
+      <Footer />
     </div>;
 };
 export default Contact;

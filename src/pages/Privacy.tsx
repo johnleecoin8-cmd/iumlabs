@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import GlobalContactFooter from "@/components/GlobalContactFooter";
+import Footer from "@/components/Footer";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Privacy = () => {
@@ -43,7 +43,7 @@ const Privacy = () => {
           </div>
         </div>
       </div>
-      <GlobalContactFooter />
+      <Footer />
     </div>
   );
 };

@@ -2,7 +2,8 @@ import { ArrowRight, Compass, Users, Search, Mic2, MessageCircle, Newspaper, Che
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef, MouseEvent } from "react";
 import Navbar from "@/components/Navbar";
-import GlobalContactFooter from "@/components/GlobalContactFooter";
+import Footer from "@/components/Footer";
+import ContactFormSection from "@/components/ContactFormSection";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { useRipple } from "@/hooks/useRipple";
 import {
@@ -436,8 +437,21 @@ const Services = () => {
         </div>
       </section>
       
-      {/* Global Contact + Footer */}
-      <GlobalContactFooter />
+      {/* Contact Section - 04 */}
+      <div className="border-t border-white/10 bg-[#121212]">
+        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/10">
+          <div className="flex items-baseline gap-4 md:gap-8">
+            <span className="text-label text-emerald-400 font-mono tracking-widest">04</span>
+            <h2 className="text-base md:text-lg font-medium text-white">Contact</h2>
+          </div>
+          <span className="text-label text-emerald-400 tracking-wider hidden sm:block px-2.5 py-1 border border-emerald-400/40 rounded-full uppercase">
+            Get In Touch
+          </span>
+        </div>
+        <ContactFormSection />
+      </div>
+      
+      <Footer />
     </div>
   );
 };
