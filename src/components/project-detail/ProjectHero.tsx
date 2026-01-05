@@ -9,6 +9,7 @@ interface ProjectHeroProps {
     description: string;
     category: string;
     glowColor: string;
+    bgImage?: string;
     services?: string[];
   };
 }
@@ -17,8 +18,17 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
   return (
     <>
       <section className="relative min-h-screen mx-4 mt-4 rounded-3xl bg-black overflow-hidden flex flex-col">
-        {/* 상단 네비게이션 */}
-        <div className="flex justify-between items-start p-8 md:p-12">
+        {/* 배경 이미지 */}
+        {project.bgImage && (
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${project.bgImage})` }}
+          />
+        )}
+        {/* 어두운 오버레이 */}
+        <div className="absolute inset-0 bg-black/60" />
+        {/* 상단 네비게이션 - z-index로 오버레이 위에 */}
+        <div className="relative z-10 flex justify-between items-start p-8 md:p-12">
           <Link 
             to="/projects"
             className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors"
@@ -34,7 +44,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
         </div>
         
         {/* 메인 콘텐츠 - flex-grow로 중앙 배치 */}
-        <div className="flex-grow flex flex-col justify-center max-w-6xl px-8 md:px-12 pb-12">
+        <div className="relative z-10 flex-grow flex flex-col justify-center max-w-6xl px-8 md:px-12 pb-12">
           <motion.h1 
             className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-tight"
             initial={{ opacity: 0, y: 30 }}
