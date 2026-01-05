@@ -28,7 +28,7 @@ const ProjectGalleryGrid = ({ gallery, glowColor }: ProjectGalleryGridProps) => 
 
   return (
     <>
-      <section className="relative py-12 md:py-16 bg-[#F5F5F5] overflow-hidden">
+      <section className="relative py-12 md:py-16 bg-black overflow-hidden">
         <div className="container mx-auto px-6 md:px-12 max-w-7xl">
           {/* Section Header */}
           <motion.div 
@@ -37,7 +37,7 @@ const ProjectGalleryGrid = ({ gallery, glowColor }: ProjectGalleryGridProps) => 
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-4xl font-light text-gray-900">
+            <h2 className="text-3xl md:text-4xl font-light text-white">
               Gallery
             </h2>
           </motion.div>
@@ -47,7 +47,7 @@ const ProjectGalleryGrid = ({ gallery, glowColor }: ProjectGalleryGridProps) => 
             {gallery.slice(0, 2).map((item, i) => (
               <motion.div
                 key={i}
-                className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer bg-gray-200"
+                className="group relative aspect-video rounded-2xl overflow-hidden cursor-pointer bg-gray-900"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

@@ -41,10 +41,10 @@ const MetricCard = ({
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.08 }}
     >
-      <div className="relative bg-[#EDEDED] rounded-2xl p-6 md:p-8 flex flex-col justify-between min-h-[200px] transition-all duration-300 hover:bg-[#E5E5E5]">
+      <div className="relative bg-gray-900 rounded-2xl p-6 md:p-8 flex flex-col justify-between min-h-[200px] transition-all duration-300 hover:bg-gray-800 border border-gray-800">
         {/* Value */}
         <div>
-          <p className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 tracking-tight mb-3">
+          <p className="text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-tight mb-3">
             {displayValue}
           </p>
           <p 
@@ -56,7 +56,7 @@ const MetricCard = ({
         </div>
         
         {/* Number Index */}
-        <p className="text-xs text-gray-400 mt-6">
+        <p className="text-xs text-gray-600 mt-6">
           {String(index + 1).padStart(2, '0')}.
         </p>
       </div>
@@ -70,7 +70,7 @@ const ProjectMetrics = ({ metrics, glowColor }: ProjectMetricsProps) => {
   if (!metrics || metrics.length === 0) return null;
 
   return (
-    <section ref={ref} className="relative py-12 md:py-16 bg-[#F5F5F5] overflow-hidden">
+    <section ref={ref} className="relative py-12 md:py-16 bg-black overflow-hidden">
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
         {/* Section Header */}
         <motion.div 
@@ -79,7 +79,7 @@ const ProjectMetrics = ({ metrics, glowColor }: ProjectMetricsProps) => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-light text-gray-900">
+          <h2 className="text-3xl md:text-4xl font-light text-white">
             Key Results
           </h2>
         </motion.div>
