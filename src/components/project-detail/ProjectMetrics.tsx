@@ -83,7 +83,7 @@ const ProjectMetrics = ({ metrics, glowColor }: ProjectMetricsProps) => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <section ref={ref} className="relative py-12 md:py-16 overflow-hidden bg-[#0A0A0A]">
+    <section ref={ref} className="relative py-8 md:py-10 overflow-hidden bg-[#0A0A0A]">
       {/* Background */}
       <div 
         className="absolute inset-0 opacity-5"

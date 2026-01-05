@@ -28,7 +28,7 @@ const ProjectGalleryGrid = ({ gallery, glowColor }: ProjectGalleryGridProps) => 
 
   return (
     <>
-      <section className="relative py-12 md:py-16 bg-[#0A0A0A] overflow-hidden">
+      <section className="relative py-8 md:py-10 bg-[#0A0A0A] overflow-hidden">
         {/* Background */}
         <div 
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[60%] h-[40%] opacity-5 pointer-events-none"
