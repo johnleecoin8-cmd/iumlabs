@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowDownRight, Calendar } from "lucide-react";
+import { ArrowLeft, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ProjectData } from "@/data/projectsData";
@@ -11,7 +11,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
   const navigate = useNavigate();
 
   return (
-    <section className="relative min-h-[85vh] overflow-hidden mx-4 mt-4 rounded-3xl">
+    <section className="relative min-h-[50vh] overflow-hidden mx-4 mt-4 rounded-3xl">
       {/* Background Image from Gallery */}
       {project.gallery && project.gallery.length > 0 ? (
         <>
@@ -41,7 +41,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
       />
       
       {/* Content Container */}
-      <div className="relative z-10 h-full min-h-[85vh] flex flex-col justify-between p-8 md:p-12 lg:p-16">
+      <div className="relative z-10 h-full min-h-[50vh] flex flex-col justify-between p-8 md:p-12 lg:p-16">
         {/* Back Button - Top */}
         <motion.button 
           onClick={() => navigate("/projects")}
@@ -69,7 +69,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
               <img 
                 src={project.logo} 
                 alt={`${project.name} logo`}
-                className="h-16 md:h-20 w-auto object-contain brightness-0 invert"
+                className="h-16 md:h-20 w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)]"
               />
             </motion.div>
           )}
@@ -130,19 +130,6 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
           </motion.a>
         </div>
 
-        {/* Bottom Meta - Year + Arrow */}
-        <motion.div 
-          className="flex justify-between items-end"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-        >
-          <div>
-            <span className="text-xs text-white/40 uppercase tracking-wider block mb-1">year:</span>
-            <p className="text-4xl md:text-5xl font-light text-white/20">2025</p>
-          </div>
-          <ArrowDownRight className="w-8 h-8 text-white/30" />
-        </motion.div>
       </div>
     </section>
   );
