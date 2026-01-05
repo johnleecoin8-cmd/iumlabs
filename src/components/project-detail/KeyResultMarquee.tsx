@@ -8,7 +8,7 @@ interface KeyResultMarqueeProps {
 const KeyResultMarquee = ({ result, glowColor }: KeyResultMarqueeProps) => {
   if (!result) return null;
   
-  const items = [...Array(20)].map((_, i) => i);
+  const items = [...Array(30)].map((_, i) => i);
   
   return (
     <motion.div 
@@ -22,9 +22,10 @@ const KeyResultMarquee = ({ result, glowColor }: KeyResultMarqueeProps) => {
         {[...items, ...items].map((_, index) => (
           <span 
             key={index} 
-            className="text-black font-semibold text-sm sm:text-base whitespace-nowrap mx-6 sm:mx-10"
+            className="text-black font-medium text-sm sm:text-base whitespace-nowrap flex items-center gap-6 sm:gap-8"
           >
-            {result}
+            <span>key result</span>
+            <span className="text-black/40">•</span>
           </span>
         ))}
       </div>
