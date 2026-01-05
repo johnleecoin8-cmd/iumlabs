@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import GlobalContactFooter from "@/components/GlobalContactFooter";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Transparency = () => {
@@ -43,7 +43,7 @@ const Transparency = () => {
           </div>
         </div>
       </div>
-      <Footer />
+      <GlobalContactFooter />
     </div>
   );
 };
