@@ -122,7 +122,7 @@ const stats = [{
   label: "KOL Network",
   suffix: "+"
 }, {
-  value: 4,
+  value: 6,
   label: "Token Sales",
   prefix: "$",
   suffix: "M"
