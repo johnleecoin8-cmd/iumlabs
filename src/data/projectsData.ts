@@ -243,8 +243,8 @@ export const projectsData: Record<string, ProjectData> = {
     category: "DePIN",
     result: "#1 DePIN in Korea",
     glowColor: "#00CED1",
-    description: "Peaq aimed to become the leading DePIN (Decentralized Physical Infrastructure Network) platform in Korea.",
-    challenge: "DePIN was an emerging narrative with limited awareness. Peaq needed to establish thought leadership while building a strong community.",
+    description: "Peaq aimed to become the leading DePIN (Decentralized Physical Infrastructure Network) platform in Korea, targeting both enterprise partners and developer communities to build real-world machine economy applications.",
+    challenge: "DePIN was an emerging narrative with limited awareness in Korea. Peaq needed to establish thought leadership while building a strong community and demonstrating practical use cases for decentralized physical infrastructure.",
     metrics: [
       { value: "#1", label: "DePIN Position" },
       { value: "200+", label: "Developers" },
