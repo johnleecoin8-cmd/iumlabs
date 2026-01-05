@@ -56,103 +56,103 @@ const ProjectContentSection = ({
   const displayMetrics = metrics || project.metrics;
   return <section className="bg-black py-12 md:py-16">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
-        
-        {/* Key Result Banner */}
-        {project.result}
+        {/* 1. THE CHALLENGE */}
+        <motion.div 
+          className="mb-16"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-xs uppercase tracking-[0.2em] text-white/40 mb-6">
+            The Challenge
+          </h3>
+          <p className="text-lg md:text-xl text-white/80 leading-relaxed max-w-3xl mb-4">
+            {project.challenge || project.description}
+          </p>
+          <div className="text-sm">
+            <span className="text-white/40">Category</span>
+            <span className="ml-2 text-white">{project.category}</span>
+          </div>
+        </motion.div>
 
-        {/* Strategy + Description Row */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10">
-          {/* Strategy Column */}
-          <motion.div className="md:col-span-3" initial={{
-          opacity: 0,
-          y: 10
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }}>
-            <h3 className="text-xs uppercase tracking-[0.2em] text-white/40 mb-4">
-              Strategy
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {project.shortServices?.map((service, i) => <span key={i} className="px-3 py-1.5 text-sm border rounded-full" style={{
-              borderColor: project.glowColor,
-              color: project.glowColor
-            }}>
-                  {service}
-                </span>)}
-            </div>
-          </motion.div>
-
-          {/* Description Column */}
-          <motion.div className="md:col-span-9" initial={{
-          opacity: 0,
-          y: 10
-        }} whileInView={{
-          opacity: 1,
-          y: 0
-        }} viewport={{
-          once: true
-        }} transition={{
-          delay: 0.1
-        }}>
-            <p className="text-base md:text-lg text-white/70 leading-relaxed mb-6">
-              {project.challenge || project.description}
-            </p>
-            <div className="flex gap-6 text-sm">
-              <div>
-                <span className="text-white/40">Category</span>
-                <span className="ml-2 text-white">{project.category}</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Approach Section */}
-        {project.strategy && project.strategy.length > 0 && <motion.div className="mb-10 pb-10 border-b border-white/10" initial={{
-        opacity: 0,
-        y: 10
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }}>
+        {/* 2. OUR APPROACH */}
+        {project.strategy && project.strategy.length > 0 && (
+          <motion.div 
+            className="mb-16 pb-10 border-b border-white/10"
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
             <h3 className="text-xs uppercase tracking-[0.2em] text-white/40 mb-6">
-              Approach
+              Our Approach
             </h3>
+            {/* 서비스 태그 */}
+            <div className="flex flex-wrap gap-2 mb-8">
+              {project.shortServices?.map((service, i) => (
+                <span 
+                  key={i} 
+                  className="px-3 py-1.5 text-sm border rounded-full" 
+                  style={{
+                    borderColor: project.glowColor,
+                    color: project.glowColor
+                  }}
+                >
+                  {service}
+                </span>
+              ))}
+            </div>
+            {/* 전략 단계 */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {project.strategy.slice(0, 4).map((step, i) => <div key={i} className="flex gap-3">
-                  <span className="text-sm font-semibold shrink-0" style={{
-              color: project.glowColor
-            }}>
+              {project.strategy.slice(0, 4).map((step, i) => (
+                <div key={i} className="flex gap-3">
+                  <span 
+                    className="text-sm font-semibold shrink-0" 
+                    style={{ color: project.glowColor }}
+                  >
                     {String(i + 1).padStart(2, '0')}
                   </span>
                   <p className="text-sm text-white/60 leading-relaxed">
                     {step}
                   </p>
-                </div>)}
+                </div>
+              ))}
             </div>
-          </motion.div>}
+          </motion.div>
+        )}
 
-        {/* Key Results Metrics */}
-        {displayMetrics && displayMetrics.length > 0 && <motion.div initial={{
-        opacity: 0,
-        y: 10
-      }} whileInView={{
-        opacity: 1,
-        y: 0
-      }} viewport={{
-        once: true
-      }}>
-            <h3 className="text-xs uppercase tracking-[0.2em] text-white/40 mb-6">
-              Key Results
-            </h3>
+        {/* 3. THE RESULTS */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="text-xs uppercase tracking-[0.2em] text-white/40 mb-4">
+            The Results
+          </h3>
+          {/* Key Result 헤드라인 */}
+          {project.result && (
+            <h4 
+              className="text-2xl md:text-3xl font-bold mb-8" 
+              style={{ color: project.glowColor }}
+            >
+              {project.result}
+            </h4>
+          )}
+          {/* Metrics 카드 */}
+          {displayMetrics && displayMetrics.length > 0 && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {displayMetrics.map((metric, i) => <MetricCard key={i} metric={metric} index={i} glowColor={project.glowColor} isVisible={true} />)}
+              {displayMetrics.map((metric, i) => (
+                <MetricCard 
+                  key={i} 
+                  metric={metric} 
+                  index={i} 
+                  glowColor={project.glowColor} 
+                  isVisible={true} 
+                />
+              ))}
             </div>
-          </motion.div>}
+          )}
+        </motion.div>
       </div>
     </section>;
 };
