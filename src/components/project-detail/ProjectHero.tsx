@@ -1,7 +1,6 @@
-import { ArrowLeft } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { ArrowLeft, ArrowDownRight, Calendar } from "lucide-react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useRef, useState } from "react";
 import { ProjectData } from "@/data/projectsData";
 
 interface ProjectHeroProps {
@@ -10,150 +9,114 @@ interface ProjectHeroProps {
 
 const ProjectHero = ({ project }: ProjectHeroProps) => {
   const navigate = useNavigate();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"]
-  });
-  
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
-
-  const hasVideo = !!project.bgVideo;
 
   return (
-    <section ref={containerRef} className="relative min-h-[45vh] overflow-hidden flex items-end">
-      {/* Background Video */}
-      {hasVideo && (
-        <motion.div 
-          className="absolute inset-[-20%]"
-          style={{ y: backgroundY, scale }}
-        >
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full h-full object-cover"
-            style={{ filter: 'brightness(0.25) saturate(1.2)' }}
-            onLoadedData={() => setVideoLoaded(true)}
-            poster={project.bgImage}
-          >
-            <source src={project.bgVideo} type="video/mp4" />
-          </video>
-        </motion.div>
-      )}
-
-      {/* Background Image (fallback or if no video) */}
-      {(!hasVideo || !videoLoaded) && (
-        <motion.div 
-          className="absolute inset-[-20%] bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${project.bgImage})`,
-            filter: 'brightness(0.2) saturate(1.2)',
-            y: backgroundY,
-            scale
-          }}
-        />
-      )}
+    <section className="relative min-h-[85vh] overflow-hidden mx-4 mt-4 rounded-3xl">
+      {/* Colorful Gradient Background */}
+      <div className="absolute inset-0 bg-[#F0F0F0]" />
       
-      {/* Gradients */}
-      <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#0A0A0A] to-transparent z-10" />
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent z-10" />
-      
-      {/* Project Color Gradient Wash */}
+      {/* Multi-color gradient blobs */}
       <div 
-        className="absolute inset-0 opacity-30 z-[5]"
-        style={{
-          background: `linear-gradient(135deg, ${project.glowColor}25 0%, transparent 50%)`
+        className="absolute inset-0 pointer-events-none"
+        style={{ 
+          background: `
+            radial-gradient(ellipse 80% 60% at 70% 40%, ${project.glowColor}50 0%, transparent 50%),
+            radial-gradient(ellipse 60% 50% at 30% 70%, #FF6B6B35 0%, transparent 45%),
+            radial-gradient(ellipse 50% 40% at 80% 80%, #4ECDC430 0%, transparent 40%),
+            radial-gradient(ellipse 40% 30% at 20% 30%, #FFE66D25 0%, transparent 35%)
+          `,
+          filter: 'blur(60px)'
         }}
       />
       
-      {/* Animated Orb */}
-      <motion.div 
-        className="absolute top-1/2 left-1/4 w-[600px] h-[600px] rounded-full blur-[180px] opacity-25"
-        animate={{ scale: [1, 1.15, 1], opacity: [0.2, 0.3, 0.2] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        style={{ background: project.glowColor }}
-      />
-      
-      {/* Content */}
-      <motion.div 
-        className="relative z-20 container mx-auto max-w-7xl px-6 md:px-12 pb-4"
-        style={{ opacity }}
-      >
-        {/* Back Button */}
+      {/* Content Container */}
+      <div className="relative z-10 h-full min-h-[85vh] flex flex-col justify-between p-8 md:p-12 lg:p-16">
+        {/* Back Button - Top */}
         <motion.button 
           onClick={() => navigate("/projects")}
-          className="group flex items-center gap-2 mb-4 text-white/50 hover:text-white transition-colors"
+          className="group flex items-center gap-2 text-gray-500 hover:text-gray-800 transition-colors self-start"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
-          whileHover={{ x: -4 }}
         >
-          <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:border-white/40 transition-colors bg-white/5">
-            <ArrowLeft className="w-3.5 h-3.5" />
+          <div className="w-10 h-10 rounded-full border border-gray-300 flex items-center justify-center group-hover:border-gray-500 transition-colors bg-white/50 backdrop-blur-sm">
+            <ArrowLeft className="w-4 h-4" />
           </div>
-          <span className="text-xs tracking-wider uppercase font-medium">All Projects</span>
+          <span className="text-sm font-medium">Back</span>
         </motion.button>
 
-        {/* Title Area */}
-        <div className="flex items-center gap-4">
-          {/* Logo */}
-          <motion.div 
-            className="relative"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
+        {/* Main Content - Center/Bottom */}
+        <div className="flex-1 flex flex-col justify-center max-w-4xl">
+          {/* Category Tag */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
+            className="flex items-center gap-3 mb-6"
           >
-            <div 
-              className="w-16 h-16 rounded-xl flex items-center justify-center backdrop-blur-sm border"
-              style={{ 
-                backgroundColor: `${project.glowColor}12`,
-                borderColor: `${project.glowColor}25`
-              }}
+            <span 
+              className="px-4 py-1.5 rounded-full text-sm font-medium"
+              style={{ backgroundColor: `${project.glowColor}25`, color: project.glowColor }}
             >
-              <img 
-                src={project.logo} 
-                alt={project.name} 
-                className="w-9 h-9 object-contain"
-                style={{ filter: `drop-shadow(0 0 12px ${project.glowColor}60)` }}
-              />
-            </div>
+              {project.category}
+            </span>
+            {project.result && (
+              <>
+                <span className="text-gray-400">•</span>
+                <span className="text-gray-600 text-sm">{project.result}</span>
+              </>
+            )}
           </motion.div>
           
-          {/* Title & Category */}
-          <div>
-            <motion.div 
-              className="flex items-center gap-2 mb-1"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.15 }}
-            >
-              <span 
-                className="px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider"
-                style={{ backgroundColor: project.glowColor, color: '#000' }}
-              >
-                {project.category}
-              </span>
-              <span className="text-white/30 text-xs">•</span>
-              <span className="text-white/50 text-xs">{project.result}</span>
-            </motion.div>
-            
-            <motion.h1 
-              className="text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              {project.name}
-            </motion.h1>
-          </div>
+          {/* Project Name - Large */}
+          <motion.h1 
+            className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-light text-gray-800 tracking-tight mb-8"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            {project.name}
+          </motion.h1>
+          
+          {/* Description */}
+          <motion.p 
+            className="text-lg md:text-xl text-gray-600 max-w-2xl leading-relaxed mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            {project.description}
+          </motion.p>
+          
+          {/* CTA Button */}
+          <motion.a
+            href="https://calendly.com/iumlabs/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-6 py-4 border-2 border-dashed border-gray-400 rounded-2xl text-gray-700 hover:bg-white/60 hover:border-gray-600 transition-all self-start group"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+          >
+            <Calendar className="w-5 h-5" />
+            <span className="font-medium">Book a Meeting</span>
+          </motion.a>
         </div>
-      </motion.div>
+
+        {/* Bottom Meta - Year + Arrow */}
+        <motion.div 
+          className="flex justify-between items-end"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          <div>
+            <span className="text-xs text-gray-400 uppercase tracking-wider block mb-1">year:</span>
+            <p className="text-4xl md:text-5xl font-light text-gray-300">2025</p>
+          </div>
+          <ArrowDownRight className="w-8 h-8 text-gray-400" />
+        </motion.div>
+      </div>
     </section>
   );
 };
