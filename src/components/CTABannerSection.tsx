@@ -1,101 +1,51 @@
-import { motion } from "framer-motion";
-import { Calendar } from "lucide-react";
-import FloatingTags from "./FloatingTags";
-
-const floatingTags = [
-  { label: "30 min Free Call", top: "8%", left: "15%", mobileTop: "5%", mobileLeft: "5%" },
-  { label: "Flexible Scheduling", top: "45%", left: "5%", mobileTop: "15%", mobileLeft: "3%" },
-  { label: "Calendly", top: "15%", right: "12%", mobileTop: "5%", mobileRight: "5%" },
-  { label: "Ask Us Anything", top: "35%", right: "8%", mobileTop: "85%", mobileRight: "5%" },
-  { label: "Start Your Journey", bottom: "15%", right: "15%", mobileBottom: "5%", mobileRight: "3%" },
-];
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "lucide-react";
+import { MouseEvent } from "react";
+import { useRipple } from "@/hooks/useRipple";
 
 const CTABannerSection = () => {
-  return (
-    <section className="relative bg-[#0047FF] py-20 md:py-32 lg:py-40 overflow-hidden">
-      {/* Floating Tags */}
-      <div className="hidden md:block">
-        {floatingTags.map((tag, index) => (
-          <motion.span
-            key={tag.label}
-            className="absolute px-4 py-2 rounded-full text-sm font-medium backdrop-blur-sm"
-            style={{
-              top: tag.top,
-              left: tag.left,
-              right: tag.right,
-              bottom: tag.bottom,
-              backgroundColor: index === 0 ? "#FFD700" : 
-                              index === 1 ? "#D4FF00" : 
-                              index === 2 ? "#FF4444" : 
-                              index === 3 ? "#00E5E5" : "#FF4444",
-              color: "#000",
-            }}
-            animate={{
-              y: [0, -8, 0],
-              rotate: [-1, 1, -1],
-            }}
-            transition={{
-              duration: 4 + index * 0.5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: index * 0.3,
-            }}
-          >
-            {tag.label}
-          </motion.span>
-        ))}
+  const { createRipple } = useRipple();
+  
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+  return <section className="bg-background text-foreground border-t border-border relative overflow-hidden group/section">
+      {/* Background glow on hover */}
+      <div className="absolute inset-0 opacity-0 group-hover/section:opacity-100 transition-opacity duration-500 pointer-events-none">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-primary/5 rounded-full blur-[100px]" />
       </div>
 
-      {/* Mobile Tags - simplified positions */}
-      <div className="md:hidden">
-        <motion.span
-          className="absolute top-6 left-4 px-3 py-1.5 rounded-full text-xs font-medium"
-          style={{ backgroundColor: "#FFD700", color: "#000" }}
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        >
-          30 min Free Call
-        </motion.span>
-        <motion.span
-          className="absolute top-6 right-4 px-3 py-1.5 rounded-full text-xs font-medium"
-          style={{ backgroundColor: "#FF4444", color: "#000" }}
-          animate={{ y: [0, -5, 0] }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        >
-          Calendly
-        </motion.span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12 relative z-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-5 sm:gap-6 md:gap-8">
+          <div>
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-light text-foreground mb-1.5 sm:mb-2">
+              Have a project in mind?
+            </h3>
+            <p className="text-muted-foreground text-sm sm:text-base mb-2">
+              Let's discuss how we can help you succeed in Korea.
+            </p>
+            <p className="text-xs text-muted-foreground/70 flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 bg-primary/10 rounded-full text-primary">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                Response within 24h
+              </span>
+              <span>Join 18+ projects that launched with us</span>
+            </p>
+          </div>
+          <div className="flex gap-2 sm:gap-3 w-full md:w-auto">
+            <div className="flex-1 md:flex-none">
+              <Link to="/contact" className="group primary-cta-dark flex-1 md:flex-none inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3 sm:py-3.5 font-medium text-xs sm:text-sm rounded-full active:scale-[0.98] min-h-[44px] sm:min-h-[48px] border border-white/30" onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}>
+                <span className="relative z-10">Get Your Free Proposal</span>
+                <ArrowUpRight className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+            </div>
+            
+          </div>
+        </div>
       </div>
-
-      {/* Center Content */}
-      <div className="container mx-auto px-6 text-center relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mx-auto"
-        >
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-light text-white mb-6 leading-tight">
-            Let's Talk<br />Strategy
-          </h2>
-          
-          <p className="text-white/80 text-base md:text-lg lg:text-xl mb-10 max-w-xl mx-auto">
-            We'll get to the point. You explain what you're building and we'll explain how we'd support it.
-          </p>
-          
-          <a
-            href="https://calendly.com/ium-labs/intro"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-gray-900 rounded-2xl font-medium hover:shadow-2xl hover:scale-105 transition-all duration-300"
-          >
-            <Calendar className="w-5 h-5" />
-            Book a Meeting
-          </a>
-        </motion.div>
-      </div>
-    </section>
-  );
+    </section>;
 };
-
 export default CTABannerSection;
