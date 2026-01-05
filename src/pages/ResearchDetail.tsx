@@ -12,6 +12,7 @@ import { researchPosts } from "./Research";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import ArticleSchema from "@/components/ArticleSchema";
 
 const ResearchDetail = () => {
   const { slug } = useParams();
@@ -87,14 +88,21 @@ const ResearchDetail = () => {
     if (post) {
       const title = `${post.title} | Ium Labs Research`;
       const description = post.excerpt || `${post.title} - ${post.category} research by Ium Labs.`;
+      const pageUrl = `https://iumlabs.io/research/${slug}`;
+      const ogImage = post.image.startsWith('http') 
+        ? post.image 
+        : `https://iumlabs.io${post.image}`;
       
       document.title = title;
       document.querySelector('meta[name="description"]')?.setAttribute('content', description);
       document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
       document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+      document.querySelector('meta[property="og:url"]')?.setAttribute('content', pageUrl);
+      document.querySelector('meta[property="og:image"]')?.setAttribute('content', ogImage);
       document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
       document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
-      document.querySelector('link[rel="canonical"]')?.setAttribute('href', `https://iumlabs.io/research/${slug}`);
+      document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', ogImage);
+      document.querySelector('link[rel="canonical"]')?.setAttribute('href', pageUrl);
     }
   }, [post, slug]);
 
@@ -470,6 +478,16 @@ const ResearchDetail = () => {
 
       <Footer />
       <BreadcrumbSchema items={breadcrumbItems} />
+      <ArticleSchema
+        title={post.title}
+        description={post.excerpt || `${post.title} - ${post.category} research by Ium Labs.`}
+        image={post.image}
+        author={post.author}
+        authorRole={post.authorRole}
+        datePublished={post.date}
+        url={`https://iumlabs.io/research/${slug}`}
+        tags={post.tags}
+      />
       </div>
     </div>
   );

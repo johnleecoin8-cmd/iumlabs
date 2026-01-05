@@ -1,18 +1,47 @@
 import { useEffect } from 'react';
 
+interface PageMetaOptions {
+  title: string;
+  description?: string;
+  path?: string;
+  image?: string;
+  suffix?: string;
+}
+
 /**
  * Hook to set unique page meta tags for SEO
- * Includes title, description, canonical URL, and Open Graph tags
+ * Includes title, description, canonical URL, Open Graph tags, and og:image
  */
 export const usePageMeta = (
-  title: string, 
-  description?: string, 
+  titleOrOptions: string | PageMetaOptions,
+  description?: string,
   path?: string,
   suffix: string = "Korean Web3 Marketing Agency | ium labs"
 ) => {
   useEffect(() => {
+    // Support both old signature and new options object
+    let title: string;
+    let desc: string | undefined;
+    let pagePath: string | undefined;
+    let image: string | undefined;
+    let titleSuffix: string;
+
+    if (typeof titleOrOptions === 'object') {
+      title = titleOrOptions.title;
+      desc = titleOrOptions.description;
+      pagePath = titleOrOptions.path;
+      image = titleOrOptions.image;
+      titleSuffix = titleOrOptions.suffix || "Korean Web3 Marketing Agency | ium labs";
+    } else {
+      title = titleOrOptions;
+      desc = description;
+      pagePath = path;
+      image = undefined;
+      titleSuffix = suffix;
+    }
+
     // Update page title
-    const fullTitle = title ? `${title} | ${suffix}` : suffix;
+    const fullTitle = title ? `${title} | ${titleSuffix}` : titleSuffix;
     document.title = fullTitle;
     
     // Update og:title and twitter:title
@@ -27,36 +56,53 @@ export const usePageMeta = (
     }
     
     // Update description meta tags
-    if (description) {
+    if (desc) {
       const descMeta = document.querySelector('meta[name="description"]');
       if (descMeta) {
-        descMeta.setAttribute('content', description);
+        descMeta.setAttribute('content', desc);
       }
       
       const ogDescMeta = document.querySelector('meta[property="og:description"]');
       if (ogDescMeta) {
-        ogDescMeta.setAttribute('content', description);
+        ogDescMeta.setAttribute('content', desc);
       }
       
       const twitterDescMeta = document.querySelector('meta[name="twitter:description"]');
       if (twitterDescMeta) {
-        twitterDescMeta.setAttribute('content', description);
+        twitterDescMeta.setAttribute('content', desc);
       }
     }
     
-    // Update canonical URL
-    if (path) {
+    // Update canonical URL and og:url
+    if (pagePath) {
+      const fullUrl = `https://iumlabs.io${pagePath}`;
+      
       const canonicalLink = document.querySelector('link[rel="canonical"]');
       if (canonicalLink) {
-        canonicalLink.setAttribute('href', `https://iumlabs.io${path}`);
+        canonicalLink.setAttribute('href', fullUrl);
       }
       
       const ogUrlMeta = document.querySelector('meta[property="og:url"]');
       if (ogUrlMeta) {
-        ogUrlMeta.setAttribute('href', `https://iumlabs.io${path}`);
+        ogUrlMeta.setAttribute('content', fullUrl);
       }
     }
-  }, [title, description, path, suffix]);
+
+    // Update og:image and twitter:image
+    if (image) {
+      const fullImageUrl = image.startsWith('http') ? image : `https://iumlabs.io${image}`;
+      
+      const ogImageMeta = document.querySelector('meta[property="og:image"]');
+      if (ogImageMeta) {
+        ogImageMeta.setAttribute('content', fullImageUrl);
+      }
+      
+      const twitterImageMeta = document.querySelector('meta[name="twitter:image"]');
+      if (twitterImageMeta) {
+        twitterImageMeta.setAttribute('content', fullImageUrl);
+      }
+    }
+  }, [titleOrOptions, description, path, suffix]);
 };
 
 export default usePageMeta;
