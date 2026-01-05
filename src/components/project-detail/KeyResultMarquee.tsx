@@ -6,33 +6,29 @@ interface KeyResultMarqueeProps {
 }
 
 const KeyResultMarquee = ({ result, glowColor }: KeyResultMarqueeProps) => {
-  const displayText = result || "key result";
+  if (!result) return null;
   
   return (
-    <div 
-      className="py-4 overflow-hidden"
-      style={{ backgroundColor: '#D4FF00' }}
+    <motion.div 
+      className="w-full py-8 md:py-12 bg-black border-y border-white/10"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
     >
-      <motion.div 
-        className="flex gap-12 whitespace-nowrap"
-        animate={{ x: [0, -1200] }}
-        transition={{ 
-          repeat: Infinity, 
-          duration: 25, 
-          ease: "linear" 
-        }}
-      >
-        {Array(20).fill(displayText).map((text, i) => (
-          <span 
-            key={i} 
-            className="text-sm font-semibold uppercase tracking-wider"
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+          <span className="text-xs uppercase tracking-[0.2em] text-white/40 shrink-0">
+            Key Result
+          </span>
+          <p 
+            className="text-xl md:text-2xl lg:text-3xl font-medium leading-snug"
             style={{ color: glowColor }}
           >
-            {text} •
-          </span>
-        ))}
-      </motion.div>
-    </div>
+            {result}
+          </p>
+        </div>
+      </div>
+    </motion.div>
   );
 };
 
