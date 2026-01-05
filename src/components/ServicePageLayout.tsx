@@ -5,6 +5,8 @@ import { Calendar, ArrowRight, ChevronDown, LucideIcon, ArrowLeft, Check, Chevro
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
+import CTABannerSection from "@/components/CTABannerSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import SectionHeader from "@/components/SectionHeader";
 import { useCountUp } from "@/hooks/useCountUp";
@@ -582,6 +584,12 @@ const ServicePageLayout = ({
       <section className="bg-[#121212]" id="contact">
         <ContactFormSection sectionNumber={contactSectionNum} />
       </section>
+
+      {/* CTA Banner */}
+      <CTABannerSection />
+
+      {/* Footer Links */}
+      <FooterLinksSection />
 
       {/* Footer */}
       <div className="border-t border-white/10">

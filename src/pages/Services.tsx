@@ -4,6 +4,8 @@ import { useState, useEffect, useRef, MouseEvent } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
+import CTABannerSection from "@/components/CTABannerSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { useRipple } from "@/hooks/useRipple";
 import {
@@ -450,6 +452,12 @@ const Services = () => {
         </div>
         <ContactFormSection />
       </div>
+      
+      {/* CTA Banner */}
+      <CTABannerSection />
+      
+      {/* Footer Links */}
+      <FooterLinksSection />
       
       <Footer />
     </div>
