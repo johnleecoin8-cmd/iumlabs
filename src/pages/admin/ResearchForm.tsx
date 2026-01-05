@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, Save, Upload, X, Image as ImageIcon, Eye } from 'lucide-react';
+import { ArrowLeft, Save, Upload, X, Image as ImageIcon, Eye, Sparkles, Loader2 } from 'lucide-react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { ProtectedRoute } from '@/components/admin/ProtectedRoute';
 import { Button } from '@/components/ui/button';
@@ -55,6 +55,7 @@ export default function ResearchForm() {
   const [authorImagePreview, setAuthorImagePreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [isGeneratingImage, setIsGeneratingImage] = useState(false);
   
 
   // Markdown rendering function
@@ -740,7 +741,73 @@ export default function ResearchForm() {
 
               {/* Image Upload Section */}
               <div className="col-span-2">
-                <Label className="text-white mb-2 block">Cover Image</Label>
+                <div className="flex items-center justify-between mb-2">
+                  <Label className="text-white">Cover Image</Label>
+                  {!imagePreview && formData.title && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={async () => {
+                        if (!formData.title) {
+                          toast.error('제목을 먼저 입력해주세요');
+                          return;
+                        }
+                        setIsGeneratingImage(true);
+                        try {
+                          const { data, error } = await supabase.functions.invoke('generate-research-image', {
+                            body: { title: formData.title, category: formData.category },
+                          });
+                          
+                          if (error) throw error;
+                          if (data?.error) throw new Error(data.error);
+                          
+                          if (data?.imageData) {
+                            // Convert base64 to blob and upload
+                            const response = await fetch(data.imageData);
+                            const blob = await response.blob();
+                            const file = new File([blob], `ai-generated-${Date.now()}.png`, { type: 'image/png' });
+                            
+                            // Upload to storage
+                            const fileName = `research/${formData.slug || 'generated'}-${Date.now()}.png`;
+                            const { error: uploadError } = await supabase.storage
+                              .from('project-images')
+                              .upload(fileName, file);
+                            
+                            if (uploadError) throw uploadError;
+                            
+                            const { data: { publicUrl } } = supabase.storage
+                              .from('project-images')
+                              .getPublicUrl(fileName);
+                            
+                            setImagePreview(publicUrl);
+                            setFormData(prev => ({ ...prev, image: publicUrl }));
+                            toast.success('AI 이미지 생성 완료!');
+                          }
+                        } catch (err) {
+                          console.error('Image generation error:', err);
+                          toast.error(err instanceof Error ? err.message : 'AI 이미지 생성 실패');
+                        } finally {
+                          setIsGeneratingImage(false);
+                        }
+                      }}
+                      disabled={isGeneratingImage}
+                      className="gap-2"
+                    >
+                      {isGeneratingImage ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          생성 중...
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="w-4 h-4" />
+                          AI로 생성
+                        </>
+                      )}
+                    </Button>
+                  )}
+                </div>
                 <input
                   ref={fileInputRef}
                   type="file"
