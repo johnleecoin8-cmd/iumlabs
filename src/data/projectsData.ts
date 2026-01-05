@@ -68,6 +68,7 @@ export interface ProjectData {
   name: string;
   logo: string;
   bgImage: string;
+  bgVideo?: string; // Optional video background for hero section
   category: string;
   result: string;
   glowColor: string;

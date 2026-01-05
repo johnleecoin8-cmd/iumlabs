@@ -1,7 +1,7 @@
 import { ArrowLeft } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { ProjectData } from "@/data/projectsData";
 
 interface ProjectHeroProps {
@@ -11,6 +11,7 @@ interface ProjectHeroProps {
 const ProjectHero = ({ project }: ProjectHeroProps) => {
   const navigate = useNavigate();
   const containerRef = useRef<HTMLDivElement>(null);
+  const [videoLoaded, setVideoLoaded] = useState(false);
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -21,18 +22,43 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
+  const hasVideo = !!project.bgVideo;
+
   return (
     <section ref={containerRef} className="relative min-h-[50vh] overflow-hidden flex items-end">
-      {/* Background Image with Parallax */}
-      <motion.div 
-        className="absolute inset-[-20%] bg-cover bg-center"
-        style={{
-          backgroundImage: `url(${project.bgImage})`,
-          filter: 'brightness(0.2) saturate(1.2)',
-          y: backgroundY,
-          scale
-        }}
-      />
+      {/* Background Video */}
+      {hasVideo && (
+        <motion.div 
+          className="absolute inset-[-20%]"
+          style={{ y: backgroundY, scale }}
+        >
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+            style={{ filter: 'brightness(0.25) saturate(1.2)' }}
+            onLoadedData={() => setVideoLoaded(true)}
+            poster={project.bgImage}
+          >
+            <source src={project.bgVideo} type="video/mp4" />
+          </video>
+        </motion.div>
+      )}
+
+      {/* Background Image (fallback or if no video) */}
+      {(!hasVideo || !videoLoaded) && (
+        <motion.div 
+          className="absolute inset-[-20%] bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${project.bgImage})`,
+            filter: 'brightness(0.2) saturate(1.2)',
+            y: backgroundY,
+            scale
+          }}
+        />
+      )}
       
       {/* Gradients */}
       <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-[#0A0A0A] to-transparent z-10" />
@@ -40,7 +66,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
       
       {/* Project Color Gradient Wash */}
       <div 
-        className="absolute inset-0 opacity-30"
+        className="absolute inset-0 opacity-30 z-[5]"
         style={{
           background: `linear-gradient(135deg, ${project.glowColor}25 0%, transparent 50%)`
         }}
