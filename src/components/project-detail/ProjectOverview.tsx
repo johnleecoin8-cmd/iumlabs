@@ -8,7 +8,7 @@ interface ProjectOverviewProps {
 
 const ProjectOverview = ({ project }: ProjectOverviewProps) => {
   return (
-    <section className="relative py-12 md:py-16 bg-[#0A0A0A]">
+    <section className="relative py-8 md:py-10 bg-[#0A0A0A]">
       <div className="container mx-auto px-6 md:px-12 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left - About */}

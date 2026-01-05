@@ -10,7 +10,7 @@ const ProjectStrategy = ({ strategy, glowColor }: ProjectStrategyProps) => {
   if (!strategy || strategy.length === 0) return null;
 
   return (
-    <section className="relative py-12 md:py-16 bg-[#0A0A0A] overflow-hidden">
+    <section className="relative py-8 md:py-10 bg-[#0A0A0A] overflow-hidden">
       {/* Background */}
       <div 
         className="absolute bottom-0 right-0 w-[40%] h-[60%] opacity-5 pointer-events-none"
