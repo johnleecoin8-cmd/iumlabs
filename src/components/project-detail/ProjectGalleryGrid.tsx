@@ -62,12 +62,12 @@ const ProjectGalleryGrid = ({ gallery, glowColor }: ProjectGalleryGridProps) => 
             </h2>
           </motion.div>
           
-          {/* Gallery Grid - 2x2 */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {gallery.slice(0, 4).map((item, i) => (
-              <motion.div
-                key={i}
-                className="group relative aspect-[16/10] rounded-xl overflow-hidden cursor-pointer"
+        {/* Gallery Grid - 1x2 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {gallery.slice(0, 2).map((item, i) => (
+            <motion.div
+              key={i}
+              className="group relative aspect-video rounded-xl overflow-hidden cursor-pointer"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
