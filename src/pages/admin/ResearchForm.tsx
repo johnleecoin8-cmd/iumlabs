@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, Save, Upload, X, Image as ImageIcon, Eye, EyeOff } from 'lucide-react';
+import { ArrowLeft, Save, Upload, X, Image as ImageIcon, Eye } from 'lucide-react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { ProtectedRoute } from '@/components/admin/ProtectedRoute';
 import { Button } from '@/components/ui/button';
@@ -56,7 +56,7 @@ export default function ResearchForm() {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [showPreview, setShowPreview] = useState(false);
+  
 
   // Markdown rendering function
   const renderMarkdown = useMemo(() => {
@@ -814,40 +814,15 @@ export default function ResearchForm() {
               <div className="col-span-2">
                 <div className="flex items-center justify-between mb-2">
                   <Label className="text-white">Content (Markdown)</Label>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => setShowPreview(!showPreview)}
-                    className="text-white/60 hover:text-white gap-2"
-                  >
-                    {showPreview ? (
-                      <>
-                        <EyeOff className="w-4 h-4" />
-                        에디터
-                      </>
-                    ) : (
-                      <>
-                        <Eye className="w-4 h-4" />
-                        미리보기
-                      </>
-                    )}
-                  </Button>
+                  <p className="text-white/40 text-xs">
+                    💡 이미지를 복사(Ctrl/Cmd+V) 또는 드래그 앤 드롭하면 자동 업로드됩니다
+                  </p>
                 </div>
-                <p className="text-white/40 text-xs mb-2">
-                  💡 이미지를 복사(Ctrl/Cmd+V) 또는 드래그 앤 드롭하면 자동 업로드됩니다
-                </p>
                 
-                {showPreview ? (
-                  <div className="bg-[#111] border border-white/10 rounded-md p-6 min-h-[500px] max-h-[700px] overflow-y-auto prose prose-invert">
-                    {formData.content ? (
-                      renderMarkdown
-                    ) : (
-                      <p className="text-white/40 italic">콘텐츠를 입력하면 여기에 미리보기가 표시됩니다</p>
-                    )}
-                  </div>
-                ) : (
+                <div className="grid grid-cols-2 gap-4">
+                  {/* Editor */}
                   <div className="relative">
+                    <div className="text-white/50 text-xs mb-2 font-medium">에디터</div>
                     <Textarea
                       value={formData.content}
                       onChange={(e) => setFormData({ ...formData, content: e.target.value })}
@@ -855,19 +830,33 @@ export default function ResearchForm() {
                       onDrop={handleContentDrop}
                       onDragOver={handleContentDragOver}
                       onDragLeave={handleContentDragLeave}
-                      className={`bg-[#111] border-white/10 text-white font-mono transition-colors ${
+                      className={`bg-[#111] border-white/10 text-white font-mono text-sm transition-colors min-h-[500px] ${
                         isContentDragging ? 'border-primary border-2 bg-primary/5' : ''
                       }`}
                       placeholder="Write your content in Markdown..."
-                      rows={20}
                     />
                     {isContentDragging && (
-                      <div className="absolute inset-0 flex items-center justify-center bg-primary/10 border-2 border-dashed border-primary rounded-md pointer-events-none">
+                      <div className="absolute inset-0 top-6 flex items-center justify-center bg-primary/10 border-2 border-dashed border-primary rounded-md pointer-events-none">
                         <p className="text-primary font-medium">이미지를 여기에 드롭하세요</p>
                       </div>
                     )}
                   </div>
-                )}
+                  
+                  {/* Preview */}
+                  <div>
+                    <div className="text-white/50 text-xs mb-2 font-medium flex items-center gap-2">
+                      <Eye className="w-3 h-3" />
+                      미리보기
+                    </div>
+                    <div className="bg-[#111] border border-white/10 rounded-md p-4 min-h-[500px] max-h-[500px] overflow-y-auto prose prose-invert text-sm">
+                      {formData.content ? (
+                        renderMarkdown
+                      ) : (
+                        <p className="text-white/40 italic">콘텐츠를 입력하면 여기에 미리보기가 표시됩니다</p>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div className="flex items-center gap-3 col-span-2">
