@@ -47,94 +47,173 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
 
   return (
     <div className="bg-black">
-      {/* SECTION 1: KEY RESULTS */}
-      {displayMetrics && displayMetrics.length > 0 && (
-        <section className="py-16 md:py-24 border-b border-white/10">
-          <div className="max-w-7xl mx-auto px-6 md:px-12">
-            <motion.h3 
-              className="text-xs text-white/40 uppercase tracking-[0.2em] mb-12"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-            >
-              Key Results
-            </motion.h3>
-            
-            <motion.div 
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              {displayMetrics.map((metric, idx) => (
-                <MetricCard key={idx} metric={metric} glowColor={glowColor} />
-              ))}
-            </motion.div>
-          </div>
-        </section>
-      )}
-
-      {/* SECTION 2: CHALLENGE & SOLUTION */}
+      {/* SECTION 1: PROJECT OVERVIEW */}
       <section className="py-16 md:py-24 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
-            {/* Left: Challenge */}
-            <motion.div
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+            {/* Left: Meta Info */}
+            <motion.div 
+              className="md:col-span-4 space-y-8"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <span className="text-xs text-white/40 uppercase tracking-[0.2em]">
-                Challenge
-              </span>
-              <p className="text-lg md:text-xl text-white/80 leading-relaxed mt-4">
-                {project.challenge || "No challenge description available."}
-              </p>
+              <div>
+                <span className="text-xs text-white/40 uppercase tracking-[0.2em] block mb-2">
+                  Client
+                </span>
+                <span className="text-lg text-white">{project.name}</span>
+              </div>
+              
+              {project.category && (
+                <div>
+                  <span className="text-xs text-white/40 uppercase tracking-[0.2em] block mb-2">
+                    Category
+                  </span>
+                  <span className="text-lg text-white">{project.category}</span>
+                </div>
+              )}
+              
+              {project.shortServices && project.shortServices.length > 0 && (
+                <div>
+                  <span className="text-xs text-white/40 uppercase tracking-[0.2em] block mb-3">
+                    Services
+                  </span>
+                  <div className="flex flex-wrap gap-2">
+                    {project.shortServices.map((service, idx) => (
+                      <span 
+                        key={idx}
+                        className="px-3 py-1.5 text-xs rounded-full border border-white/20 text-white/70"
+                      >
+                        {service}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </motion.div>
             
-            {/* Right: Solution */}
-            <motion.div
+            {/* Right: Description */}
+            <motion.div 
+              className="md:col-span-8"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span className="text-xs text-white/40 uppercase tracking-[0.2em]">
-                Solution
-              </span>
-              <p className="text-lg md:text-xl text-white/80 leading-relaxed mt-4">
-                {project.description || "No solution description available."}
+              <p className="text-xl md:text-2xl text-white/80 leading-relaxed">
+                {project.description || "No project description available."}
               </p>
-              
-              {project.shortServices && project.shortServices.length > 0 && (
-                <div className="flex flex-wrap gap-2 mt-6">
-                  {project.shortServices.map((service, idx) => (
-                    <span 
-                      key={idx}
-                      className="px-3 py-1.5 text-xs rounded-full border border-white/20 text-white/70"
-                    >
-                      {service}
-                    </span>
-                  ))}
-                </div>
-              )}
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* SECTION 3: STRATEGY */}
+      {/* SECTION 2: THE CHALLENGE */}
+      {project.challenge && (
+        <section className="py-16 md:py-24 border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-xs text-white/40 uppercase tracking-[0.2em] block mb-6">
+                Challenge
+              </span>
+              <p className="text-2xl md:text-3xl text-white/90 leading-relaxed max-w-4xl">
+                {project.challenge}
+              </p>
+            </motion.div>
+          </div>
+        </section>
+      )}
 
-      {/* SECTION 4: GALLERY (Optional) */}
-      {project.gallery && project.gallery.length > 0 && (
-        <section className="py-16 md:py-24 border-t border-white/10">
+      {/* SECTION 3: OUR STRATEGY */}
+      {project.strategy && project.strategy.length > 0 && (
+        <section className="py-16 md:py-24 border-b border-white/10">
           <div className="max-w-7xl mx-auto px-6 md:px-12">
             <motion.h3 
               className="text-xs text-white/40 uppercase tracking-[0.2em] mb-12"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Our Approach
+            </motion.h3>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+              {project.strategy.slice(0, 4).map((step, idx) => (
+                <motion.div
+                  key={idx}
+                  className="group"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <span 
+                    className="text-sm font-semibold mb-3 block transition-opacity group-hover:opacity-100"
+                    style={{ color: glowColor, opacity: 0.7 }}
+                  >
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <p className="text-sm md:text-base text-white/70 leading-relaxed">
+                    {step}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* SECTION 4: RESULTS */}
+      {(project.result || (displayMetrics && displayMetrics.length > 0)) && (
+        <section className="py-16 md:py-24 border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <motion.h3 
+              className="text-xs text-white/40 uppercase tracking-[0.2em] mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              Results
+            </motion.h3>
+            
+            {project.result && (
+              <motion.p 
+                className="text-2xl md:text-4xl font-light text-white mb-12 max-w-4xl"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                "{project.result}"
+              </motion.p>
+            )}
+            
+            {displayMetrics && displayMetrics.length > 0 && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                {displayMetrics.map((metric, idx) => (
+                  <MetricCard key={idx} metric={metric} glowColor={glowColor} />
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* SECTION 5: CAMPAIGN GALLERY */}
+      {project.gallery && project.gallery.length > 0 && (
+        <section className="py-16 md:py-24">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <motion.h3 
+              className="text-xs text-white/40 uppercase tracking-[0.2em] mb-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
               Campaign Highlights
@@ -142,19 +221,24 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {project.gallery.map((item, idx) => (
-                <motion.div 
+                <motion.div
                   key={idx}
-                  className="aspect-video rounded-lg overflow-hidden bg-white/5"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
+                  className="group relative overflow-hidden rounded-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.1 }}
+                  transition={{ delay: idx * 0.1 }}
                 >
                   <img 
                     src={item.src} 
-                    alt={item.title || `Gallery image ${idx + 1}`}
-                    className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                    alt={item.title || `Campaign image ${idx + 1}`}
+                    className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105"
                   />
+                  {item.title && (
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                      <span className="text-sm text-white/90">{item.title}</span>
+                    </div>
+                  )}
                 </motion.div>
               ))}
             </div>
