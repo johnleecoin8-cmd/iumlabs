@@ -1,6 +1,48 @@
 import { motion } from "framer-motion";
 import { ProjectData, ProjectMetric } from "@/data/projectsData";
 import { useCountUp } from "@/hooks/useCountUp";
+import { 
+  Megaphone, 
+  Users, 
+  Code, 
+  Lightbulb, 
+  Handshake, 
+  BookOpen, 
+  Target, 
+  Rocket,
+  type LucideIcon
+} from "lucide-react";
+
+// Map keywords to icons for intelligent icon selection
+const getStepIcon = (step: string, index: number): LucideIcon => {
+  const lowerStep = step.toLowerCase();
+  
+  if (lowerStep.includes('education') || lowerStep.includes('content') || lowerStep.includes('tutorial')) {
+    return BookOpen;
+  }
+  if (lowerStep.includes('partner') || lowerStep.includes('collaboration')) {
+    return Handshake;
+  }
+  if (lowerStep.includes('developer') || lowerStep.includes('community') || lowerStep.includes('devrel')) {
+    return Code;
+  }
+  if (lowerStep.includes('event') || lowerStep.includes('meetup') || lowerStep.includes('conference')) {
+    return Users;
+  }
+  if (lowerStep.includes('campaign') || lowerStep.includes('marketing') || lowerStep.includes('pr')) {
+    return Megaphone;
+  }
+  if (lowerStep.includes('use case') || lowerStep.includes('demonstration') || lowerStep.includes('showcase')) {
+    return Lightbulb;
+  }
+  if (lowerStep.includes('launch') || lowerStep.includes('deploy') || lowerStep.includes('release')) {
+    return Rocket;
+  }
+  
+  // Default icons based on position
+  const defaultIcons = [Rocket, Handshake, Code, Target];
+  return defaultIcons[index % defaultIcons.length];
+};
 
 interface MetricCardProps {
   metric: ProjectMetric;
@@ -135,20 +177,46 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
             <h3 className="text-xs uppercase tracking-[0.2em] text-white/40 mb-6">
               Approach
             </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-              {project.strategy.slice(0, 4).map((step, i) => (
-                <div key={i} className="flex gap-3">
-                  <span 
-                    className="text-sm font-semibold shrink-0"
-                    style={{ color: project.glowColor }}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+              {project.strategy.slice(0, 4).map((step, i) => {
+                const IconComponent = getStepIcon(step, i);
+                return (
+                  <motion.div 
+                    key={i} 
+                    className="group relative p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-colors"
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
                   >
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <p className="text-sm text-white/60 leading-relaxed">
-                    {step}
-                  </p>
-                </div>
-              ))}
+                    {/* Icon with glow */}
+                    <div 
+                      className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
+                      style={{ 
+                        backgroundColor: `${project.glowColor}15`,
+                      }}
+                    >
+                      <IconComponent 
+                        size={20} 
+                        style={{ color: project.glowColor }}
+                      />
+                    </div>
+                    
+                    {/* Step number */}
+                    <span 
+                      className="text-xs font-semibold mb-2 block"
+                      style={{ color: project.glowColor }}
+                    >
+                      Step {String(i + 1).padStart(2, '0')}
+                    </span>
+                    
+                    {/* Text */}
+                    <p className="text-sm text-white/60 leading-relaxed">
+                      {step}
+                    </p>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         )}
