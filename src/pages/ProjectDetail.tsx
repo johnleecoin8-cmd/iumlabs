@@ -137,21 +137,21 @@ const ProjectDetail = () => {
 
         {/* Key Result Marquee - Enhanced */}
         <div 
-          className="py-4 overflow-hidden relative"
+          className="py-3 overflow-hidden relative"
           style={{ backgroundColor: project.glowColor }}
         >
           {/* Gradient overlays for seamless loop */}
-          <div className="absolute left-0 top-0 bottom-0 w-20 z-10" style={{ background: `linear-gradient(to right, ${project.glowColor}, transparent)` }} />
-          <div className="absolute right-0 top-0 bottom-0 w-20 z-10" style={{ background: `linear-gradient(to left, ${project.glowColor}, transparent)` }} />
+          <div className="absolute left-0 top-0 bottom-0 w-16 z-10" style={{ background: `linear-gradient(to right, ${project.glowColor}, transparent)` }} />
+          <div className="absolute right-0 top-0 bottom-0 w-16 z-10" style={{ background: `linear-gradient(to left, ${project.glowColor}, transparent)` }} />
           
           <div className="flex animate-marquee whitespace-nowrap">
             {[...Array(4)].map((_, repeatIndex) => (
               project.metrics.map((metric, i) => (
                 <span 
                   key={`${repeatIndex}-${i}`} 
-                  className="mx-10 text-black/90 text-sm font-bold uppercase tracking-[0.15em] flex items-center gap-4"
+                  className="mx-6 text-black/90 text-xs font-bold uppercase tracking-[0.12em] flex items-center gap-3"
                 >
-                  <span className="w-1.5 h-1.5 rounded-full bg-black/40" />
+                  <span className="w-1 h-1 rounded-full bg-black/40" />
                   {metric.value} {metric.label}
                 </span>
               ))
