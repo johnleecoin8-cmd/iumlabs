@@ -7,11 +7,12 @@ import { supabase } from "@/integrations/supabase/client";
 import { projectsData, getNextProject, ProjectData } from "@/data/projectsData";
 import ProjectHero from "@/components/project-detail/ProjectHero";
 import ProjectOverview from "@/components/project-detail/ProjectOverview";
-import ProjectChallenge from "@/components/project-detail/ProjectChallenge";
 import ProjectStrategy from "@/components/project-detail/ProjectStrategy";
 import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
 import ProjectGalleryGrid from "@/components/project-detail/ProjectGalleryGrid";
 import NextProject from "@/components/project-detail/NextProject";
+import KeyResultMarquee from "@/components/project-detail/KeyResultMarquee";
+import FeatureImage from "@/components/project-detail/FeatureImage";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const ProjectDetail = () => {
@@ -90,10 +91,10 @@ const ProjectDetail = () => {
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen bg-[#F5F5F5] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-foreground mb-4">Project Not Found</h1>
-          <Link to="/projects" className="text-primary hover:underline">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Project Not Found</h1>
+          <Link to="/projects" className="text-gray-600 hover:underline">
             View All Projects
           </Link>
         </div>
@@ -111,70 +112,48 @@ const ProjectDetail = () => {
     { name: project.name, url: `https://iumlabs.io/projects/${slug}` }
   ], [project.name, slug]);
 
-  // Create CSS custom properties for the project color
-  const projectColorStyles = {
-    '--project-color': project.glowColor,
-    '--project-color-10': `${project.glowColor}1A`,
-    '--project-color-20': `${project.glowColor}33`,
-    '--project-color-30': `${project.glowColor}4D`,
-    '--project-color-50': `${project.glowColor}80`,
-  } as React.CSSProperties;
-
   return (
-    <div className="min-h-screen bg-[#050505]">
-      <div className="min-h-screen bg-[#0A0A0A] overflow-hidden relative" style={projectColorStyles}>
-        {/* Persistent Project Color Ambient Glow */}
-        <div 
-          className="fixed top-0 left-0 w-[50vw] h-[50vh] pointer-events-none z-0 opacity-15"
-          style={{ background: `radial-gradient(ellipse at 0% 0%, ${project.glowColor} 0%, transparent 60%)` }}
+    <div className="min-h-screen bg-[#F5F5F5]">
+      <Navbar />
+      
+      {/* Hero Section */}
+      <ProjectHero project={project} />
+
+      {/* Key Result Marquee */}
+      <KeyResultMarquee result={project.result} glowColor={project.glowColor} />
+
+      {/* Overview Section */}
+      <ProjectOverview project={project} />
+
+      {/* Feature Image */}
+      <FeatureImage gallery={project.gallery} />
+
+      {/* Strategy / Approach */}
+      <ProjectStrategy 
+        strategy={project.strategy} 
+        glowColor={project.glowColor} 
+      />
+
+      {/* Key Metrics / Results */}
+      <ProjectMetrics metrics={project.metrics} glowColor={project.glowColor} />
+
+      {/* Gallery */}
+      <ProjectGalleryGrid 
+        gallery={project.gallery} 
+        glowColor={project.glowColor} 
+      />
+
+      {/* Next Project */}
+      {nextProjectData && (
+        <NextProject 
+          nextSlug={nextProjectData.slug} 
+          nextProject={nextProjectData.project} 
+          currentGlowColor={project.glowColor} 
         />
-        <div 
-          className="fixed bottom-0 right-0 w-[40vw] h-[40vh] pointer-events-none z-0 opacity-10"
-          style={{ background: `radial-gradient(ellipse at 100% 100%, ${project.glowColor} 0%, transparent 60%)` }}
-        />
-        
-        <Navbar />
-        
-        {/* 01 - Hero Section */}
-        <ProjectHero project={project} />
+      )}
 
-        {/* 02 - Project Overview */}
-        <ProjectOverview project={project} />
-
-        {/* 03 - Challenge */}
-        <ProjectChallenge 
-          challenge={project.challenge} 
-          glowColor={project.glowColor} 
-        />
-
-        {/* 04 - Strategy / Approach */}
-        <ProjectStrategy 
-          strategy={project.strategy} 
-          glowColor={project.glowColor} 
-        />
-
-        {/* 05 - Key Metrics / Results */}
-        <ProjectMetrics metrics={project.metrics} glowColor={project.glowColor} />
-
-        {/* 06 - Gallery */}
-        <ProjectGalleryGrid 
-          gallery={project.gallery} 
-          glowColor={project.glowColor} 
-        />
-
-
-        {/* 08 - Next Project */}
-        {nextProjectData && (
-          <NextProject 
-            nextSlug={nextProjectData.slug} 
-            nextProject={nextProjectData.project} 
-            currentGlowColor={project.glowColor} 
-          />
-        )}
-
-        <Footer />
-        <BreadcrumbSchema items={breadcrumbItems} />
-      </div>
+      <Footer />
+      <BreadcrumbSchema items={breadcrumbItems} />
     </div>
   );
 };
