@@ -72,9 +72,10 @@ export default function ResearchForm() {
     const flushList = () => {
       if (listItems.length > 0 && listType) {
         const ListTag = listType;
+        const currentItems = [...listItems];
         elements.push(
           <ListTag key={`list-${elements.length}`} className={`${listType === 'ul' ? 'list-disc' : 'list-decimal'} pl-6 my-4 space-y-2 text-white/80`}>
-            {listItems.map((item, i) => <li key={i}>{item}</li>)}
+            {currentItems.map((item, i) => <li key={i}>{parseInlineText(item)}</li>)}
           </ListTag>
         );
         listItems = [];
@@ -84,16 +85,17 @@ export default function ResearchForm() {
 
     const flushBlockquote = () => {
       if (blockquoteLines.length > 0) {
+        const currentLines = [...blockquoteLines];
         elements.push(
           <blockquote key={`bq-${elements.length}`} className="border-l-4 border-primary/50 pl-4 my-4 italic text-white/70">
-            {blockquoteLines.map((line, i) => <p key={i}>{line}</p>)}
+            {currentLines.map((line, i) => <p key={i}>{parseInlineText(line)}</p>)}
           </blockquote>
         );
         blockquoteLines = [];
       }
     };
 
-    const parseInline = (text: string): React.ReactNode => {
+    const parseInlineText = (text: string): React.ReactNode => {
       // Handle bold, italic, links, inline code
       const parts: React.ReactNode[] = [];
       let remaining = text;
@@ -127,14 +129,14 @@ export default function ResearchForm() {
         // Find next special char
         const nextSpecial = remaining.search(/\*\*|`|\[/);
         if (nextSpecial > 0) {
-          parts.push(remaining.slice(0, nextSpecial));
+          parts.push(<span key={key++}>{remaining.slice(0, nextSpecial)}</span>);
           remaining = remaining.slice(nextSpecial);
         } else {
-          parts.push(remaining);
+          parts.push(<span key={key++}>{remaining}</span>);
           break;
         }
       }
-      return parts.length === 1 ? parts[0] : parts;
+      return parts.length === 1 ? parts[0] : <>{parts}</>;
     };
 
     for (let i = 0; i < lines.length; i++) {
@@ -152,19 +154,19 @@ export default function ResearchForm() {
       if (trimmed.startsWith('### ')) {
         flushList();
         flushBlockquote();
-        elements.push(<h3 key={i} className="text-xl font-bold text-white mt-8 mb-4">{parseInline(trimmed.slice(4))}</h3>);
+        elements.push(<h3 key={i} className="text-xl font-bold text-white mt-8 mb-4">{parseInlineText(trimmed.slice(4))}</h3>);
         continue;
       }
       if (trimmed.startsWith('## ')) {
         flushList();
         flushBlockquote();
-        elements.push(<h2 key={i} className="text-2xl font-bold text-white mt-10 mb-6">{parseInline(trimmed.slice(3))}</h2>);
+        elements.push(<h2 key={i} className="text-2xl font-bold text-white mt-10 mb-6">{parseInlineText(trimmed.slice(3))}</h2>);
         continue;
       }
       if (trimmed.startsWith('# ')) {
         flushList();
         flushBlockquote();
-        elements.push(<h1 key={i} className="text-3xl font-bold text-white mt-10 mb-6">{parseInline(trimmed.slice(2))}</h1>);
+        elements.push(<h1 key={i} className="text-3xl font-bold text-white mt-10 mb-6">{parseInlineText(trimmed.slice(2))}</h1>);
         continue;
       }
 
@@ -223,7 +225,7 @@ export default function ResearchForm() {
       // Regular paragraph
       flushList();
       flushBlockquote();
-      elements.push(<p key={i} className="text-white/80 leading-relaxed my-4">{parseInline(trimmed)}</p>);
+      elements.push(<p key={i} className="text-white/80 leading-relaxed my-4">{parseInlineText(trimmed)}</p>);
     }
 
     flushList();
