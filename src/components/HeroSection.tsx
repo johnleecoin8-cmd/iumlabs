@@ -141,27 +141,17 @@ const HeroSection = () => {
     return () => clearTimeout(timer);
   }, []);
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Video */}
-      <div className="absolute inset-0 overflow-hidden">
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline 
-          preload="metadata"
-          poster="/images/hero-poster.jpg"
-          className="absolute inset-0 w-full h-full object-cover" 
-          style={{ filter: "brightness(0.35)" }}
-          onLoadedMetadata={e => {
-            e.currentTarget.currentTime = 0;
-          }}
-        >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
-        </video>
-        
-        {/* Dark overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
-      </div>
+      {/* Background Layer - Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url('/images/hero-poster.jpg')` }}
+      />
+      
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/60" />
+      
+      {/* Bottom gradient for smooth transition */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[hsl(0,0%,4%,0.95)]" />
 
       {/* Floating Service Tags - Desktop - Enhanced with floating animation */}
       {serviceTags.map((tag, index) => <div key={index} className={`absolute ${tag.position} hidden lg:block z-10`} style={{
