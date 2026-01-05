@@ -8,11 +8,19 @@ import Footer from "@/components/Footer";
 import CTASection from "@/components/CTASection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
-import { researchPosts } from "./Research";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ArticleSchema from "@/components/ArticleSchema";
+
+// Helper function to calculate read time from content
+const calculateReadTime = (content: string | null): string => {
+  if (!content) return "5 min read";
+  const wordsPerMinute = 200;
+  const wordCount = content.split(/\s+/).length;
+  const minutes = Math.ceil(wordCount / wordsPerMinute);
+  return `${minutes} min read`;
+};
 
 const ResearchDetail = () => {
   const { slug } = useParams();
@@ -50,38 +58,32 @@ const ResearchDetail = () => {
     enabled: !!dbPost?.category,
   });
 
-  // Use DB data or fallback to hardcoded
-  const hardcodedPost = researchPosts.find(p => p.slug === slug);
+  // Transform DB data to display format
   const post = dbPost ? {
     id: dbPost.id,
     slug: dbPost.slug,
     title: dbPost.title,
     image: dbPost.image || '',
-    date: dbPost.date || '',
-    readTime: dbPost.read_time || '',
-    category: dbPost.category || '',
-    author: dbPost.author || '',
-    authorRole: dbPost.author_role || '',
-    excerpt: dbPost.excerpt || '',
+    date: dbPost.date || new Date(dbPost.created_at || '').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+    readTime: dbPost.read_time || calculateReadTime(dbPost.content),
+    category: dbPost.category || 'Research',
+    author: dbPost.author || 'Ium Labs Research',
+    authorRole: dbPost.author_role || 'Research Team',
+    authorImage: (dbPost as any).author_image || '',
+    excerpt: dbPost.excerpt || (dbPost.content ? dbPost.content.substring(0, 150) + '...' : ''),
     tags: dbPost.tags || [],
     content: dbPost.content || '',
     chartImages: undefined as Record<string, string> | undefined,
-  } : hardcodedPost;
-
-  const hardcodedRelated = hardcodedPost 
-    ? researchPosts.filter(p => p.id !== hardcodedPost.id && p.category === hardcodedPost.category).slice(0, 3)
-    : [];
+  } : null;
   
-  const relatedPosts = dbRelatedPosts && dbRelatedPosts.length > 0 
-    ? dbRelatedPosts.map(p => ({
-        id: p.id,
-        slug: p.slug,
-        title: p.title,
-        image: p.image || '',
-        readTime: p.read_time || '',
-        category: p.category || '',
-      }))
-    : hardcodedRelated;
+  const relatedPosts = (dbRelatedPosts || []).map(p => ({
+    id: p.id,
+    slug: p.slug,
+    title: p.title,
+    image: p.image || '',
+    readTime: p.read_time || calculateReadTime(p.content),
+    category: p.category || 'Research',
+  }));
 
   // Dynamic page meta for SEO - must be before any conditional returns
   useEffect(() => {

@@ -23,6 +23,7 @@ interface ResearchFormData {
   author_image: string;
   content: string;
   is_published: boolean;
+  is_featured: boolean;
 }
 
 const initialFormData: ResearchFormData = {
@@ -36,6 +37,7 @@ const initialFormData: ResearchFormData = {
   author_image: '',
   content: '',
   is_published: true,
+  is_featured: false,
 };
 
 export default function ResearchForm() {
@@ -260,6 +262,7 @@ export default function ResearchForm() {
         author_image: (existingPost as any).author_image || '',
         content: existingPost.content || '',
         is_published: existingPost.is_published ?? true,
+        is_featured: (existingPost as any).is_featured ?? false,
       });
       if (existingPost.image) {
         setImagePreview(existingPost.image);
@@ -621,6 +624,7 @@ export default function ResearchForm() {
         excerpt: null,
         content: data.content || null,
         is_published: data.is_published,
+        is_featured: data.is_featured,
       };
 
       if (isEditing) {
@@ -1017,12 +1021,24 @@ export default function ResearchForm() {
                 </div>
               </div>
 
-              <div className="flex items-center gap-3 col-span-2">
-                <Switch
-                  checked={formData.is_published}
-                  onCheckedChange={(checked) => setFormData({ ...formData, is_published: checked })}
-                />
-                <Label className="text-white">Published</Label>
+              <div className="flex items-center gap-6 col-span-2">
+                <div className="flex items-center gap-3">
+                  <Switch
+                    checked={formData.is_published}
+                    onCheckedChange={(checked) => setFormData({ ...formData, is_published: checked })}
+                  />
+                  <Label className="text-white">Published</Label>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Switch
+                    checked={formData.is_featured}
+                    onCheckedChange={(checked) => setFormData({ ...formData, is_featured: checked })}
+                  />
+                  <Label className="text-white flex items-center gap-1.5">
+                    Featured
+                    <span className="text-yellow-500">★</span>
+                  </Label>
+                </div>
               </div>
             </div>
 
