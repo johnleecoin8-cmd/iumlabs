@@ -2,6 +2,8 @@ import { ArrowLeft, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ProjectData } from "@/data/projectsData";
+import KeyResultMarquee from "./KeyResultMarquee";
+
 interface ProjectHeroProps {
   project: ProjectData;
 }
@@ -132,6 +134,9 @@ const ProjectHero = ({
         </div>
 
       </div>
+      
+      {/* Key Result Marquee Bar */}
+      <KeyResultMarquee result={project.result || ""} glowColor={project.glowColor || "#00FF88"} />
     </section>;
 };
 export default ProjectHero;
