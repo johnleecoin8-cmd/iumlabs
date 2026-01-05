@@ -48,13 +48,33 @@ const ProjectDetail = () => {
     enabled: !!dbProject?.id,
   });
 
+  // Fetch gallery for hero background
+  const { data: dbGallery } = useQuery({
+    queryKey: ['project-gallery', dbProject?.id],
+    queryFn: async () => {
+      if (!dbProject?.id) return [];
+      const { data } = await supabase
+        .from('project_gallery')
+        .select('*')
+        .eq('project_id', dbProject.id)
+        .order('display_order');
+      return data || [];
+    },
+    enabled: !!dbProject?.id,
+  });
+
   // Use DB project if available, otherwise fallback to hardcoded
   const fallbackProject = slug ? projectsData[slug] : null;
+  
+  // Use first gallery image as hero background
+  const heroBackgroundImage = dbGallery && dbGallery.length > 0 
+    ? dbGallery[0].src 
+    : (fallbackProject?.gallery?.[0]?.src || fallbackProject?.bgImage || '');
   
   const project: ProjectData | null = dbProject ? {
     name: dbProject.name,
     logo: dbProject.logo_url || fallbackProject?.logo || '',
-    bgImage: dbProject.background_url || fallbackProject?.bgImage || '',
+    bgImage: heroBackgroundImage,
     category: dbProject.category || '',
     result: dbProject.result || '',
     glowColor: dbProject.glow_color || '#00D4FF',
@@ -67,7 +87,9 @@ const ProjectDetail = () => {
     results: fallbackProject?.results || [],
     services: dbProject.services || fallbackProject?.services || [],
     shortServices: dbProject.short_services || fallbackProject?.shortServices || [],
-    gallery: fallbackProject?.gallery || [],
+    gallery: dbGallery && dbGallery.length > 0 
+      ? dbGallery.map(g => ({ src: g.src, title: g.title || '', description: g.description || '' }))
+      : fallbackProject?.gallery || [],
     news: fallbackProject?.news || [],
   } : fallbackProject;
 
