@@ -83,7 +83,7 @@ const ProjectMetrics = ({ metrics, glowColor }: ProjectMetricsProps) => {
   const { ref, isVisible } = useScrollAnimation({ threshold: 0.2 });
 
   return (
-    <section ref={ref} className="relative py-8 md:py-10 overflow-hidden bg-[#0A0A0A]">
+    <section ref={ref} className="relative py-4 md:py-6 overflow-hidden bg-[#0A0A0A]">
       {/* Background */}
       <div 
         className="absolute inset-0 opacity-5"
@@ -93,7 +93,7 @@ const ProjectMetrics = ({ metrics, glowColor }: ProjectMetricsProps) => {
       <div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
         {/* Section Header */}
         <motion.div 
-          className="mb-8"
+          className="mb-4"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
