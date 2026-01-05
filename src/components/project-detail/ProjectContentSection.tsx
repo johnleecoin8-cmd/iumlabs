@@ -23,7 +23,7 @@ const MetricCard = ({ metric, index }: MetricCardProps) => {
 
   return (
     <motion.div 
-      className="bg-[#EAEAE5] rounded-2xl p-6 md:p-8 relative min-h-[140px] flex flex-col justify-between"
+      className="bg-[#1A1A1A] rounded-2xl p-6 md:p-8 relative min-h-[140px] flex flex-col justify-between"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -31,18 +31,18 @@ const MetricCard = ({ metric, index }: MetricCardProps) => {
     >
       <div>
         {/* Large Number */}
-        <span className="text-3xl md:text-4xl lg:text-5xl font-normal text-black block">
+        <span className="text-3xl md:text-4xl lg:text-5xl font-normal text-white block">
           {numericMatch ? displayValue : metric.value}
         </span>
         
         {/* Label in Blue */}
-        <span className="text-sm text-blue-600 block mt-2">
+        <span className="text-sm text-blue-400 block mt-2">
           {metric.label}
         </span>
       </div>
       
       {/* Index Number - Bottom Left */}
-      <span className="text-xs text-black/30 mt-4">
+      <span className="text-xs text-white/30 mt-4">
         {String(index + 1).padStart(2, '0')}.
       </span>
     </motion.div>
@@ -58,7 +58,7 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
   const displayMetrics = metrics || project.metrics;
 
   return (
-    <div className="bg-[#F5F5F0]">
+    <div className="bg-[#0A0A0A]">
       {/* SECTION 1: METRICS */}
       {displayMetrics && displayMetrics.length > 0 && (
         <section className="py-6 md:py-8">
@@ -78,18 +78,18 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {/* Left: Scope of Work (Services) */}
             <motion.div 
-              className="bg-[#EAEAE5] rounded-2xl p-8 md:p-10"
+              className="bg-[#1A1A1A] rounded-2xl p-8 md:p-10"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h3 className="text-sm text-black/40 uppercase tracking-wider mb-6">
+              <h3 className="text-sm text-white/40 uppercase tracking-wider mb-6">
                 Scope of Work
               </h3>
               <ul className="space-y-3">
                 {project.services.map((service, idx) => (
-                  <li key={idx} className="text-xl md:text-2xl font-normal text-black">
+                  <li key={idx} className="text-xl md:text-2xl font-normal text-white">
                     {service}
                   </li>
                 ))}
@@ -98,16 +98,16 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
             
             {/* Right: Overview */}
             <motion.div 
-              className="bg-[#EAEAE5] rounded-2xl p-8 md:p-10"
+              className="bg-[#1A1A1A] rounded-2xl p-8 md:p-10"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <h3 className="text-sm text-black/40 uppercase tracking-wider mb-6">
+              <h3 className="text-sm text-white/40 uppercase tracking-wider mb-6">
                 Overview
               </h3>
-              <p className="text-xl md:text-2xl font-normal text-black leading-relaxed">
+              <p className="text-xl md:text-2xl font-normal text-white/80 leading-relaxed">
                 {project.description}
               </p>
             </motion.div>
@@ -122,29 +122,29 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
               {/* Left: Empty or Strategy heading */}
               <motion.div 
-                className="bg-[#EAEAE5] rounded-2xl p-8 md:p-10 flex items-end"
+                className="bg-[#1A1A1A] rounded-2xl p-8 md:p-10 flex items-end"
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
               >
-                <h3 className="text-3xl md:text-4xl font-light text-black/20">
+                <h3 className="text-3xl md:text-4xl font-light text-white/20">
                   Strategy
                 </h3>
               </motion.div>
               
               {/* Right: What We Did */}
               <motion.div 
-                className="bg-[#EAEAE5] rounded-2xl p-8 md:p-10"
+                className="bg-[#1A1A1A] rounded-2xl p-8 md:p-10"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
               >
-                <h3 className="text-sm text-black/40 uppercase tracking-wider mb-6">
+                <h3 className="text-sm text-white/40 uppercase tracking-wider mb-6">
                   What We Did
                 </h3>
-                <p className="text-xl md:text-2xl font-normal text-black leading-relaxed">
+                <p className="text-xl md:text-2xl font-normal text-white/80 leading-relaxed">
                   {project.challenge}
                 </p>
               </motion.div>
@@ -158,7 +158,7 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
         <section className="py-6 md:py-8">
           <div className="max-w-7xl mx-auto px-4">
             <motion.h3 
-              className="text-sm text-black/40 uppercase tracking-wider mb-6"
+              className="text-sm text-white/40 uppercase tracking-wider mb-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -170,7 +170,7 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
               {project.gallery.map((item, idx) => (
                 <motion.div
                   key={idx}
-                  className="group relative overflow-hidden rounded-2xl bg-[#EAEAE5]"
+                  className="group relative overflow-hidden rounded-2xl bg-[#1A1A1A]"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
