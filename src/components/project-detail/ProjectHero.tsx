@@ -22,7 +22,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.1]);
 
   return (
-    <section ref={containerRef} className="relative min-h-[85vh] overflow-hidden flex items-end">
+    <section ref={containerRef} className="relative min-h-[60vh] overflow-hidden flex items-end">
       {/* Background Image with Parallax */}
       <motion.div 
         className="absolute inset-[-20%] bg-cover bg-center"
@@ -88,13 +88,13 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
       
       {/* Content */}
       <motion.div 
-        className="relative z-20 container mx-auto max-w-7xl px-6 md:px-12 pb-16"
+        className="relative z-20 container mx-auto max-w-7xl px-6 md:px-12 pb-10"
         style={{ opacity }}
       >
         {/* Back Button - Minimal */}
         <motion.button 
           onClick={() => navigate("/projects")}
-          className="group flex items-center gap-3 mb-16 text-white/50 hover:text-white transition-colors"
+          className="group flex items-center gap-2 mb-10 text-white/50 hover:text-white transition-colors"
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
@@ -117,13 +117,13 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
           <div className="lg:col-span-8">
             {/* Category & Services Tags */}
             <motion.div 
-              className="flex flex-wrap items-center gap-3 mb-6"
+              className="flex flex-wrap items-center gap-2 mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <div 
-                className="px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest"
+                className="px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-widest"
                 style={{
                   backgroundColor: project.glowColor,
                   color: '#000'
@@ -134,7 +134,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
               {project.shortServices?.slice(0, 3).map((service, i) => (
                 <span 
                   key={i}
-                  className="px-3 py-1.5 rounded-full text-xs tracking-wider border border-white/20 text-white/60"
+                  className="px-2.5 py-1 rounded-full text-[10px] tracking-wider border border-white/20 text-white/60"
                 >
                   {service}
                 </span>
@@ -142,7 +142,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
             </motion.div>
             
             {/* Logo & Project Name */}
-            <div className="flex items-center gap-6 mb-6">
+            <div className="flex items-center gap-4 mb-4">
               <motion.div 
                 className="relative"
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -150,7 +150,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <div 
-                  className="w-20 h-20 rounded-2xl flex items-center justify-center backdrop-blur-sm border"
+                  className="w-14 h-14 rounded-xl flex items-center justify-center backdrop-blur-sm border"
                   style={{ 
                     backgroundColor: `${project.glowColor}15`,
                     borderColor: `${project.glowColor}30`
@@ -159,19 +159,19 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
                   <img 
                     src={project.logo} 
                     alt={project.name} 
-                    className="w-12 h-12 object-contain"
-                    style={{ filter: `drop-shadow(0 0 20px ${project.glowColor}80)` }}
+                    className="w-8 h-8 object-contain"
+                    style={{ filter: `drop-shadow(0 0 15px ${project.glowColor}80)` }}
                   />
                 </div>
                 {/* Glow Ring */}
                 <div 
-                  className="absolute -inset-1 rounded-2xl blur-xl -z-10 opacity-40"
+                  className="absolute -inset-1 rounded-xl blur-lg -z-10 opacity-40"
                   style={{ backgroundColor: project.glowColor }}
                 />
               </motion.div>
               
               <motion.h1 
-                className="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight leading-none"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-none"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
@@ -183,7 +183,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
             
             {/* Description */}
             <motion.p 
-              className="text-lg md:text-xl text-white/60 max-w-2xl leading-relaxed"
+              className="text-base md:text-lg text-white/60 max-w-2xl leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
@@ -200,7 +200,7 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
             transition={{ duration: 0.6, delay: 0.5 }}
           >
             <div 
-              className="relative p-6 rounded-2xl border backdrop-blur-sm overflow-hidden"
+              className="relative p-5 rounded-xl border backdrop-blur-sm overflow-hidden"
               style={{ 
                 backgroundColor: `${project.glowColor}08`,
                 borderColor: `${project.glowColor}25`
@@ -212,9 +212,9 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
                 style={{ background: `linear-gradient(to right, ${project.glowColor}, transparent)` }}
               />
               
-              <p className="text-xs uppercase tracking-[0.2em] text-white/40 mb-3">Key Achievement</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-white/40 mb-2">Key Achievement</p>
               <p 
-                className="text-2xl md:text-3xl font-bold leading-tight"
+                className="text-xl md:text-2xl font-bold leading-tight"
                 style={{ color: project.glowColor }}
               >
                 {project.result}
@@ -235,20 +235,20 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
       
       {/* Bottom Scroll Indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-3"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.8 }}
       >
         <motion.div 
-          className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center pt-2"
+          className="w-5 h-8 rounded-full border-2 border-white/20 flex justify-center pt-1.5"
           animate={{ borderColor: [`${project.glowColor}30`, `${project.glowColor}60`, `${project.glowColor}30`] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
           <motion.div 
-            className="w-1 h-2 rounded-full"
+            className="w-0.5 h-1.5 rounded-full"
             style={{ backgroundColor: project.glowColor }}
-            animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
+            animate={{ y: [0, 6, 0], opacity: [1, 0.3, 1] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
           />
         </motion.div>
