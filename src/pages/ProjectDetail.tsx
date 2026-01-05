@@ -13,7 +13,7 @@ import ProjectStrategy from "@/components/project-detail/ProjectStrategy";
 import ProjectMetrics from "@/components/project-detail/ProjectMetrics";
 import NextProject from "@/components/project-detail/NextProject";
 import KeyResultMarquee from "@/components/project-detail/KeyResultMarquee";
-import FeatureImage from "@/components/project-detail/FeatureImage";
+
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 
 const ProjectDetail = () => {
@@ -126,8 +126,6 @@ const ProjectDetail = () => {
       {/* Overview Section */}
       <ProjectOverview project={project} />
 
-      {/* Feature Image */}
-      <FeatureImage gallery={project.gallery} />
 
       {/* Strategy / Approach */}
       <ProjectStrategy 
