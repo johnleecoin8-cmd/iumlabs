@@ -21,7 +21,6 @@ interface ResearchFormData {
   author: string;
   author_role: string;
   author_image: string;
-  excerpt: string;
   content: string;
   is_published: boolean;
 }
@@ -35,7 +34,6 @@ const initialFormData: ResearchFormData = {
   author: '',
   author_role: '',
   author_image: '',
-  excerpt: '',
   content: '',
   is_published: true,
 };
@@ -56,6 +54,7 @@ export default function ResearchForm() {
   const [isUploading, setIsUploading] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isGeneratingImage, setIsGeneratingImage] = useState(false);
+  const [isGeneratingCategory, setIsGeneratingCategory] = useState(false);
   
 
   // Markdown rendering function
@@ -259,7 +258,6 @@ export default function ResearchForm() {
         author: existingPost.author || '',
         author_role: existingPost.author_role || '',
         author_image: (existingPost as any).author_image || '',
-        excerpt: existingPost.excerpt || '',
         content: existingPost.content || '',
         is_published: existingPost.is_published ?? true,
       });
@@ -620,7 +618,7 @@ export default function ResearchForm() {
         author: data.author || null,
         author_role: data.author_role || null,
         author_image: authorImageUrl,
-        excerpt: data.excerpt || null,
+        excerpt: null,
         content: data.content || null,
         is_published: data.is_published,
       };
@@ -721,12 +719,48 @@ export default function ResearchForm() {
 
               <div>
                 <Label className="text-white">Category</Label>
-                <Input
-                  value={formData.category}
-                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="bg-[#111] border-white/10 text-white mt-1"
-                  placeholder="e.g., Market Research, DeFi"
-                />
+                <div className="flex gap-2 mt-1">
+                  <Input
+                    value={formData.category}
+                    onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                    className="bg-[#111] border-white/10 text-white"
+                    placeholder="e.g., Market Research, DeFi"
+                  />
+                  {formData.title && !formData.category && (
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={async () => {
+                        if (!formData.title) return;
+                        setIsGeneratingCategory(true);
+                        try {
+                          const { data, error } = await supabase.functions.invoke('generate-research-image', {
+                            body: { title: formData.title, type: 'category' },
+                          });
+                          if (error) throw error;
+                          if (data?.category) {
+                            setFormData(prev => ({ ...prev, category: data.category }));
+                            toast.success('카테고리 추천 완료!');
+                          }
+                        } catch (err) {
+                          console.error('Category generation error:', err);
+                          toast.error('카테고리 추천 실패');
+                        } finally {
+                          setIsGeneratingCategory(false);
+                        }
+                      }}
+                      disabled={isGeneratingCategory}
+                      className="gap-1 shrink-0"
+                    >
+                      {isGeneratingCategory ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <Sparkles className="w-4 h-4" />
+                      )}
+                    </Button>
+                  )}
+                </div>
               </div>
 
               <div>
@@ -934,16 +968,6 @@ export default function ResearchForm() {
                 </div>
               </div>
 
-              <div className="col-span-2">
-                <Label className="text-white">Excerpt</Label>
-                <Textarea
-                  value={formData.excerpt}
-                  onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-                  className="bg-[#111] border-white/10 text-white mt-1"
-                  placeholder="Short description of the post"
-                  rows={3}
-                />
-              </div>
 
               <div className="col-span-2">
                 <div className="flex items-center justify-between mb-2">
