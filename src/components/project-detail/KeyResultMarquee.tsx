@@ -8,8 +8,8 @@ interface KeyResultMarqueeProps {
 const KeyResultMarquee = ({ result, glowColor }: KeyResultMarqueeProps) => {
   if (!result) return null;
   
-  // Create array for seamless loop
-  const duplicatedItems = [...Array(8)].map((_, i) => i);
+  // Create multiple copies for seamless infinite scroll
+  const items = [...Array(20)].map((_, i) => i);
   
   return (
     <motion.div 
@@ -24,10 +24,10 @@ const KeyResultMarquee = ({ result, glowColor }: KeyResultMarqueeProps) => {
       {/* Right gradient overlay */}
       <div className="absolute right-0 top-0 bottom-0 w-24 md:w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
       
-      {/* Marquee content */}
-      <div className="flex items-center logo-marquee-slow">
-        {duplicatedItems.map((idx) => (
-          <div key={idx} className="flex items-center gap-6 md:gap-8 shrink-0 px-8 md:px-12">
+      {/* Marquee content - needs min-width to exceed viewport for animation */}
+      <div className="flex items-center logo-marquee-slow min-w-max">
+        {items.map((idx) => (
+          <div key={idx} className="flex items-center gap-8 md:gap-12 shrink-0 px-10 md:px-16">
             <span className="text-xs uppercase tracking-[0.2em] text-white/40 whitespace-nowrap">
               Key Result
             </span>
