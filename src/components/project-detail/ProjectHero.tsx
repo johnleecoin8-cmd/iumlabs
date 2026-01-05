@@ -1,6 +1,7 @@
-import { ArrowLeft, Calendar } from "lucide-react";
+import { ArrowLeft, Calendar, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import KeyResultMarquee from "./KeyResultMarquee";
 
 interface ProjectHeroProps {
@@ -14,39 +15,132 @@ interface ProjectHeroProps {
   };
 }
 
+// 플로팅 태그 위치 (데스크톱)
+const tagPositions = [
+  "top-[18%] left-[8%]",
+  "top-[35%] left-[5%]",
+  "top-[55%] left-[7%]",
+  "top-[72%] left-[4%]",
+  "top-[20%] right-[6%]",
+  "top-[38%] right-[8%]",
+  "top-[58%] right-[5%]",
+  "top-[75%] right-[7%]",
+];
+
+// 플로팅 태그 위치 (모바일)
+const mobileTagPositions = [
+  "top-[22%] left-[3%]",
+  "top-[32%] right-[3%]",
+  "top-[42%] left-[5%]",
+  "top-[52%] right-[4%]",
+];
+
 const ProjectHero = ({ project }: ProjectHeroProps) => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const services = project.services || [];
+
   return (
-    <>
-      <section className="relative min-h-screen mx-4 mt-4 rounded-3xl bg-black overflow-hidden flex flex-col">
-        {/* 배경 이미지 */}
-        {project.bgImage && (
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${project.bgImage})` }}
-          />
-        )}
-        {/* 어두운 오버레이 */}
-        <div className="absolute inset-0 bg-black/60" />
-        {/* 상단 네비게이션 - z-index로 오버레이 위에 */}
-        <div className="relative z-10 flex justify-between items-start p-8 md:p-12">
-          <Link 
-            to="/projects"
-            className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+    <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
+      {/* Background Layer - Image */}
+      {project.bgImage && (
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${project.bgImage})` }}
+        />
+      )}
+      
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/60" />
+      
+      {/* Bottom gradient for smooth transition */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[hsl(0,0%,4%,0.95)]" />
+
+      {/* Floating Service Tags - Desktop */}
+      {services.slice(0, 8).map((service, index) => (
+        <div 
+          key={index} 
+          className={`absolute ${tagPositions[index] || tagPositions[0]} hidden lg:block z-10`}
+          style={{
+            animation: `float-gentle ${3 + (index % 3) * 0.5}s ease-in-out infinite`,
+            animationDelay: `${index * 0.15}s`
+          }}
+        >
+          <span 
+            className={`
+              px-4 py-2 text-xs rounded-lg 
+              bg-white/[0.04] backdrop-blur-md border border-white/[0.12]
+              text-white/65 tracking-wide
+              transition-all duration-500 ease-out cursor-default
+              hover:bg-white/[0.08] hover:border-white/[0.22] hover:text-white/90
+              hover:shadow-[0_0_25px_rgba(255,255,255,0.08)] hover:scale-105
+              ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
+            `}
+            style={{ 
+              transitionDelay: `${0.3 + index * 0.1}s`,
+              fontFamily: "'Plus Jakarta Sans', sans-serif"
+            }}
           >
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-sm">Back</span>
-          </Link>
-          
-          <div className="text-right">
-            <span className="text-xs text-white/40 uppercase tracking-wider block">year</span>
-            <span className="text-lg text-white">2025</span>
-          </div>
+            {service}
+          </span>
         </div>
+      ))}
+
+      {/* Floating Service Tags - Mobile */}
+      {services.slice(0, 4).map((service, index) => (
+        <div 
+          key={`mobile-${index}`} 
+          className={`absolute ${mobileTagPositions[index] || mobileTagPositions[0]} block lg:hidden z-10`}
+          style={{
+            animation: `float-gentle ${3 + (index % 2) * 0.5}s ease-in-out infinite`,
+            animationDelay: `${index * 0.2}s`
+          }}
+        >
+          <span 
+            className={`
+              px-3 py-1.5 text-[10px] rounded-md 
+              bg-white/[0.04] backdrop-blur-md border border-white/[0.12]
+              text-white/65 tracking-wide
+              ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
+            `}
+            style={{ 
+              transitionDelay: `${0.3 + index * 0.1}s`,
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              transition: 'opacity 0.5s ease-out, transform 0.5s ease-out'
+            }}
+          >
+            {service}
+          </span>
+        </div>
+      ))}
+
+      {/* Top Navigation */}
+      <div className="relative z-10 flex justify-between items-start p-6 sm:p-8 md:p-12">
+        <Link 
+          to="/projects"
+          className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          <span className="text-sm">Back</span>
+        </Link>
         
-        {/* 메인 콘텐츠 - flex-grow로 중앙 배치 */}
-        <div className="relative z-10 flex-grow flex flex-col justify-center max-w-6xl px-8 md:px-12 pb-12">
+        <div className="text-right">
+          <span className="text-xs text-white/40 uppercase tracking-wider block">year</span>
+          <span className="text-lg text-white">2025</span>
+        </div>
+      </div>
+
+      {/* Main Content - Centered */}
+      <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
+        <div className="max-w-7xl mx-auto text-center">
+          {/* Project Name */}
           <motion.h1 
-            className="text-5xl md:text-7xl lg:text-8xl font-light text-white leading-tight"
+            className="font-display text-[2rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-light text-white leading-tight tracking-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -54,8 +148,9 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
             {project.name}
           </motion.h1>
           
+          {/* Project Description */}
           <motion.p 
-            className="text-lg md:text-xl text-white/70 mt-6 max-w-2xl leading-relaxed"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-white/70 mt-4 sm:mt-6 max-w-2xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -63,24 +158,48 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
             {project.description}
           </motion.p>
           
+          {/* CTA Button */}
           <motion.a 
             href="https://calendly.com/iumlabs/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-3 px-6 py-4 border-2 border-dashed border-white/30 rounded-2xl text-white hover:border-white/60 hover:bg-white/5 transition-all w-fit"
+            className="group mt-6 sm:mt-8 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:px-8 sm:py-4 rounded-full text-sm sm:text-[15px] font-medium transition-all duration-300
+              bg-white text-gray-900 hover:bg-white/90 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]
+              active:scale-[0.98]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           >
-            <Calendar className="w-5 h-5" />
+            <Calendar className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
             <span>Book a Meeting</span>
           </motion.a>
+          
+          {/* Micro copy */}
+          <motion.p 
+            className="mt-3 text-xs text-white/50 tracking-wide"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+          >
+            Free 30-min consultation • Response within 24h
+          </motion.p>
         </div>
-      </section>
-      
-      {/* Key Result Marquee */}
-      <KeyResultMarquee />
-    </>
+      </div>
+
+      {/* Bottom Section with KeyResult Marquee */}
+      <div className="relative z-10">
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-20 right-6 sm:right-8 z-10 flex items-center gap-2 group cursor-pointer hover:gap-3 transition-all duration-300">
+          <span className="text-white/40 text-xs sm:text-sm tracking-wide group-hover:text-white/60 transition-colors">scroll</span>
+          <div className="w-5 h-8 sm:w-6 sm:h-9 rounded-full border border-white/20 flex items-start justify-center p-1.5 group-hover:border-white/40 transition-colors">
+            <div className="w-1 h-1.5 sm:w-1.5 sm:h-2 rounded-full bg-white/60 animate-bounce" />
+          </div>
+        </div>
+
+        {/* Key Result Marquee */}
+        <KeyResultMarquee />
+      </div>
+    </div>
   );
 };
 
