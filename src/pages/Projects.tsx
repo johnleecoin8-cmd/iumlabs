@@ -7,7 +7,7 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import { HoverExpandGallery } from "@/components/HoverExpandGallery";
-import { ArrowRight, Calendar, ChevronDown, Filter, ExternalLink } from "lucide-react";
+import { ArrowRight, Calendar, ChevronDown, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { useCountUp } from "@/hooks/useCountUp";
@@ -456,41 +456,26 @@ const Projects = () => {
         </div>
       </main>
       
-      {/* Filter Section - 01 */}
-      <section className="scroll-reveal bg-[#0F0F0F]" id="filter">
-        <div className="border-t border-border">
-          <div className="flex items-baseline justify-between p-4 sm:p-6 md:px-10 md:py-6 border-b border-border">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-foreground">Filter</h2>
-            </div>
-            <span className="text-xs text-muted-foreground tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-border rounded-full">
-              <Filter className="w-3 h-3" />
-              {categories.length} Categories
-            </span>
-          </div>
-          
-          <div className="p-4 sm:p-6 md:px-10 md:py-6">
-            <CategoryFilter 
-              categories={categories} 
-              activeCategory={activeCategory} 
-              onCategoryChange={setActiveCategory} 
-            />
-          </div>
-        </div>
-      </section>
-      
-      {/* Cases Section - 02 */}
+      {/* Cases Section - 01 */}
       <section className="scroll-reveal bg-[#121212]" id="cases">
         <div className="border-t border-border">
           <div className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">02</span>
+              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">01</span>
               <h2 className="text-lg md:text-xl font-medium text-foreground">Case Studies</h2>
             </div>
             <span className="text-xs text-muted-foreground tracking-wider hidden sm:block px-3 py-1 border border-border rounded-full">
               {filteredCases.length} Projects
             </span>
+          </div>
+          
+          {/* Category Filter - integrated below header */}
+          <div className="p-4 sm:p-6 md:px-10 md:py-6 border-b border-border/50">
+            <CategoryFilter 
+              categories={categories} 
+              activeCategory={activeCategory} 
+              onCategoryChange={setActiveCategory} 
+            />
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-4 sm:p-6 md:p-8">
@@ -506,12 +491,12 @@ const Projects = () => {
         </div>
       </section>
       
-      {/* Gallery Section - 03 */}
+      {/* Gallery Section - 02 */}
       <section className="scroll-reveal bg-[#0A0A0A]" id="gallery">
         <div className="border-t border-border">
           <div className="flex items-baseline justify-between p-4 sm:p-6 md:px-10 md:py-6 border-b border-border">
             <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">03</span>
+              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">02</span>
               <h2 className="text-lg md:text-xl font-medium text-foreground">Gallery</h2>
             </div>
             <span className="text-xs text-muted-foreground tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-border rounded-full">
@@ -525,9 +510,9 @@ const Projects = () => {
         </div>
       </section>
       
-      {/* Contact Section - 04 */}
+      {/* Contact Section - 03 */}
       <section className="scroll-reveal bg-[#0F0F0F]" id="contact">
-        <ContactFormSection sectionNumber="04" />
+        <ContactFormSection sectionNumber="03" />
       </section>
       
       {/* CTA Banner */}
