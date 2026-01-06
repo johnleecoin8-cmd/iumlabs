@@ -7,6 +7,7 @@ import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
 import logoImage from "@/assets/logo.png";
 import { useSidebarState } from "@/hooks/useSidebarState";
+import { useScrollDirection } from "@/hooks/useScrollDirection";
 
 // Services submenu data (same as Sidebar)
 const servicesSubMenu = [
@@ -43,6 +44,7 @@ const Navbar = () => {
   const location = useLocation();
 
   const { isCollapsed } = useSidebarState();
+  const { isVisible: isNavVisible } = useScrollDirection({ threshold: 10 });
 
   // Hide on admin pages
   const isAdminPage = location.pathname.startsWith('/ium-admin');
@@ -71,22 +73,26 @@ const Navbar = () => {
   const mobileNavLayer = (
     <>
       {/* Mobile Top Navigation Bar */}
-      <nav className="fixed top-[max(0.5rem,env(safe-area-inset-top))] left-[max(0.5rem,env(safe-area-inset-left))] right-[max(0.5rem,env(safe-area-inset-right))] sm:top-[max(1rem,env(safe-area-inset-top))] sm:left-[max(1rem,env(safe-area-inset-left))] sm:right-[max(1rem,env(safe-area-inset-right))] z-[60] lg:hidden">
-        <div className="relative bg-background/95 backdrop-blur-xl border border-border/50 rounded-2xl shadow-lg overflow-hidden">
-          <div className="px-4 py-3 flex items-center justify-between">
+      <nav 
+        className={`fixed top-[max(0.5rem,env(safe-area-inset-top))] left-[max(0.5rem,env(safe-area-inset-left))] right-[max(0.5rem,env(safe-area-inset-right))] sm:top-[max(0.75rem,env(safe-area-inset-top))] sm:left-[max(0.75rem,env(safe-area-inset-left))] sm:right-[max(0.75rem,env(safe-area-inset-right))] z-[60] lg:hidden transition-transform duration-300 ease-out ${
+          isNavVisible || isMenuOpen ? 'translate-y-0' : '-translate-y-[calc(100%+1rem)]'
+        }`}
+      >
+        <div className="relative bg-background/95 backdrop-blur-xl border border-border/50 rounded-xl shadow-lg overflow-hidden">
+          <div className="px-3 py-2 flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-2">
-              <img src={logoImage} alt="ium Labs" className="w-8 h-8 rounded-lg object-contain" />
-              <span className="text-lg font-semibold text-foreground">{brandConfig.name}</span>
+            <Link to="/" className="flex items-center gap-1.5">
+              <img src={logoImage} alt="ium Labs" className="w-6 h-6 rounded-md object-contain" />
+              <span className="text-sm font-semibold text-foreground">{brandConfig.name}</span>
             </Link>
 
             {/* Hamburger Menu Button */}
             <button
               onClick={() => setIsMenuOpen(true)}
-              className="p-2 rounded-xl hover:bg-secondary/60 transition-colors"
+              className="p-1.5 rounded-lg hover:bg-secondary/60 transition-colors"
               aria-label="Open menu"
             >
-              <Menu className="w-6 h-6 text-foreground" />
+              <Menu className="w-5 h-5 text-foreground" />
             </button>
           </div>
           
