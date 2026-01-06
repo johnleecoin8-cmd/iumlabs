@@ -45,6 +45,9 @@ const footerLinks = {
       name: "Our Mission",
       href: "/#why-choose-us"
     }, {
+      name: "Careers",
+      href: "/jobs"
+    }, {
       name: "Contact Us",
       href: "/contact"
     }, {
