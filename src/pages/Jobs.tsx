@@ -354,7 +354,7 @@ const Jobs = () => {
       </section>
 
       {/* What You Get Section */}
-      <section className="py-20 md:py-28 px-6 bg-foreground">
+      <section className="py-20 md:py-28 px-6 bg-background">
         <div className="container mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {/* Benefit Cards */}
@@ -365,9 +365,9 @@ const Jobs = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="bg-foreground/80 border border-white/10 rounded-2xl p-6 md:p-8"
+                className="bg-muted/50 border border-border rounded-2xl p-6 md:p-8"
               >
-                <p className="text-white/90 text-sm md:text-base leading-relaxed">
+                <p className="text-foreground text-sm md:text-base leading-relaxed">
                   {benefit.text}
                 </p>
               </motion.div>
@@ -378,9 +378,9 @@ const Jobs = () => {
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              className="col-span-2 md:col-span-1 bg-gradient-to-br from-purple-600 via-pink-500 to-amber-400 rounded-2xl p-6 md:p-8 flex items-center justify-center row-span-2 md:row-span-1 order-last md:order-none"
+              className="col-span-2 md:col-span-1 bg-gradient-to-br from-primary via-primary/80 to-primary/60 rounded-2xl p-6 md:p-8 flex items-center justify-center row-span-2 md:row-span-1 order-last md:order-none"
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-white text-center">
+              <h2 className="text-2xl md:text-3xl font-bold text-primary-foreground text-center">
                 What You<br />Get
               </h2>
             </motion.div>
@@ -393,9 +393,9 @@ const Jobs = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: (idx + 2) * 0.1 }}
-                className="bg-foreground/80 border border-white/10 rounded-2xl p-6 md:p-8"
+                className="bg-muted/50 border border-border rounded-2xl p-6 md:p-8"
               >
-                <p className="text-white/90 text-sm md:text-base leading-relaxed">
+                <p className="text-foreground text-sm md:text-base leading-relaxed">
                   {benefit.text}
                 </p>
               </motion.div>
@@ -405,9 +405,9 @@ const Jobs = () => {
       </section>
 
       {/* Process Timeline Section */}
-      <section className="py-20 md:py-28 px-6 bg-foreground">
+      <section className="py-20 md:py-28 px-6 bg-background">
         <div className="container mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-white text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-16">
             Recruitment Process
           </h2>
           
@@ -422,19 +422,19 @@ const Jobs = () => {
                   transition={{ delay: idx * 0.15 }}
                   className="flex flex-col items-center"
                 >
-                  <p className="text-white/60 text-xs mb-2">{step.above}</p>
+                  <p className="text-muted-foreground text-xs mb-2">{step.above}</p>
                   <div className="bg-primary rounded-full px-8 py-4 min-w-[140px] text-center">
-                    <span className="text-white font-bold text-sm">
+                    <span className="text-primary-foreground font-bold text-sm">
                       {step.step}. {step.title}
                     </span>
                   </div>
-                  <p className="text-white/60 text-xs mt-2">{step.below}</p>
+                  <p className="text-muted-foreground text-xs mt-2">{step.below}</p>
                 </motion.div>
 
                 {/* Arrow */}
                 {idx < process.length - 1 && (
                   <div className="hidden md:block mx-4">
-                    <ArrowRight className="w-6 h-6 text-white/40" />
+                    <ArrowRight className="w-6 h-6 text-muted-foreground" />
                   </div>
                 )}
               </div>
