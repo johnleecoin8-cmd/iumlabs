@@ -10,19 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { ArrowRight, TrendingUp, Briefcase, GraduationCap, MapPin, DollarSign, Search } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import CTABannerSection from "@/components/CTABannerSection";
@@ -47,23 +36,59 @@ import mantraLogo from "@/assets/logos/mantra.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
-
-const clientLogos = [
-  { name: "BNB", logo: bnbLogo, noInvert: false },
-  { name: "KuCoin", logo: kucoinLogo, noInvert: false },
-  { name: "Polygon", logo: polygonLogo, noInvert: false },
-  { name: "Ondo Finance", logo: ondoLogo, noInvert: false },
-  { name: "Bybit", logo: bybitLogo, noInvert: false },
-  { name: "Peaq", logo: peaqLogo, noInvert: false },
-  { name: "Story Protocol", logo: storyProtocolLogo, noInvert: false },
-  { name: "MegaETH", logo: megaethLogo, noInvert: false },
-  { name: "Tria", logo: triaLogo, noInvert: true },
-  { name: "Mantra", logo: mantraLogo, noInvert: true },
-  { name: "Sahara AI", logo: saharaAiLogo, noInvert: true },
-  { name: "FOGO", logo: fogoLogo, noInvert: true },
-  { name: "SynFutures", logo: synfuturesLogo, noInvert: true },
-];
-
+const clientLogos = [{
+  name: "BNB",
+  logo: bnbLogo,
+  noInvert: false
+}, {
+  name: "KuCoin",
+  logo: kucoinLogo,
+  noInvert: false
+}, {
+  name: "Polygon",
+  logo: polygonLogo,
+  noInvert: false
+}, {
+  name: "Ondo Finance",
+  logo: ondoLogo,
+  noInvert: false
+}, {
+  name: "Bybit",
+  logo: bybitLogo,
+  noInvert: false
+}, {
+  name: "Peaq",
+  logo: peaqLogo,
+  noInvert: false
+}, {
+  name: "Story Protocol",
+  logo: storyProtocolLogo,
+  noInvert: false
+}, {
+  name: "MegaETH",
+  logo: megaethLogo,
+  noInvert: false
+}, {
+  name: "Tria",
+  logo: triaLogo,
+  noInvert: true
+}, {
+  name: "Mantra",
+  logo: mantraLogo,
+  noInvert: true
+}, {
+  name: "Sahara AI",
+  logo: saharaAiLogo,
+  noInvert: true
+}, {
+  name: "FOGO",
+  logo: fogoLogo,
+  noInvert: true
+}, {
+  name: "SynFutures",
+  logo: synfuturesLogo,
+  noInvert: true
+}];
 const applicationSchema = z.object({
   name: z.string().min(1, "Please enter your name"),
   email: z.string().email("Please enter a valid email"),
@@ -72,101 +97,59 @@ const applicationSchema = z.object({
   position: z.string().min(1, "Please select a position"),
   coverLetter: z.string().optional(),
   privacyAgreed: z.literal(true, {
-    errorMap: () => ({ message: "Please agree to the privacy policy" }),
-  }),
+    errorMap: () => ({
+      message: "Please agree to the privacy policy"
+    })
+  })
 });
-
 type ApplicationFormData = z.infer<typeof applicationSchema>;
-
-const positions = [
-  { 
-    icon: Search,
-    title: "Researcher", 
-    description: "Responsible for Web3 market research and in-depth analysis. Identify the latest trends in the blockchain ecosystem and derive insights.",
-    salary: "₩50M - 70M / year",
-    workType: "Hybrid (Seoul Office + Remote)",
-    jobDescription: [
-      "Conduct comprehensive Web3 market trend analysis and produce weekly/monthly research reports covering DeFi, NFTs, L1/L2 ecosystems, and emerging narratives",
-      "Perform deep-dive due diligence on potential client projects, analyzing tokenomics, team backgrounds, competitive landscape, and market positioning",
-      "Monitor and interpret on-chain metrics using Dune Analytics, Flipside, Nansen, and DefiLlama to derive actionable trading and investment insights",
-      "Track Korean crypto community sentiment across Naver, KakaoTalk, DC Inside, and local forums to identify emerging trends before mainstream adoption",
-      "Collaborate with the Growth team to develop data-backed GTM strategies and market entry recommendations for global projects",
-      "Create investor-grade pitch materials, one-pagers, and thesis documents that articulate project value propositions clearly",
-      "Maintain and update internal databases of Korean exchanges, VCs, KOLs, and media contacts with relevant intelligence",
-      "Present research findings to clients and internal teams, translating complex data into clear strategic recommendations"
-    ],
-    qualifications: [
-      "Deep understanding of Web3, DeFi protocols, and blockchain technology fundamentals",
-      "2+ years of experience in crypto research, investment analysis, or related field",
-      "Proficiency in on-chain analytics tools (Dune, Flipside, Nansen, Arkham)",
-      "Strong written and verbal communication skills in both Korean and English",
-      "Experience writing research reports or investment theses",
-      "Self-motivated with exceptional attention to detail and analytical rigor"
-    ]
-  },
-  { 
-    icon: TrendingUp,
-    title: "Growth Manager", 
-    description: "Develop and execute strategies for global Web3 projects entering the Korean market. Lead community building and marketing efforts.",
-    salary: "₩60M - 90M / year",
-    workType: "Hybrid (Seoul Office + Remote)",
-    jobDescription: [
-      "Design and execute end-to-end Go-To-Market (GTM) strategies for global Web3 projects targeting the Korean market, from initial market analysis to full launch",
-      "Build, nurture, and scale Korean crypto communities across Discord, Telegram, KakaoTalk open chats, and Twitter/X with engagement-focused content strategies",
-      "Identify, negotiate, and manage relationships with Korean KOLs (Key Opinion Leaders), ensuring authentic partnerships and measurable campaign ROI",
-      "Plan and execute high-impact offline events including meetups, conferences, hackathons, and exclusive networking dinners in Seoul",
-      "Develop and maintain strategic partnerships with Korean exchanges (Upbit, Bithumb, Coinone) for listing support and co-marketing initiatives",
-      "Coordinate PR campaigns with Korean crypto media outlets (Block Media, Coindesk Korea, Bloomingbit) to maximize project visibility",
-      "Create localized marketing content including blog posts, social media assets, and video scripts tailored to Korean audience preferences",
-      "Track and report on key growth metrics (community size, engagement rates, sentiment analysis) with data-driven optimization recommendations"
-    ],
-    qualifications: [
-      "3+ years experience in Web3 marketing, community management, or growth roles",
-      "Native Korean speaker with professional-level English communication skills",
-      "Proven track record of building and scaling crypto communities (10K+ members)",
-      "Established network within the Korean crypto ecosystem (exchanges, media, KOLs)",
-      "Experience with marketing analytics tools and community management platforms",
-      "Strong project management skills with ability to handle multiple campaigns simultaneously"
-    ]
-  },
-  { 
-    icon: Briefcase,
-    title: "Open Position", 
-    description: "If you have passion for Web3, feel free to apply. We create various roles together with talented individuals.",
-    salary: "Negotiable",
-    workType: "Flexible (Remote-first)",
-    jobDescription: [
-      "We're always searching for exceptional talent who can bring unique perspectives and skills to our growing team",
-      "Define and shape your own role based on your expertise—whether in BD, engineering, design, content, or operations",
-      "Contribute to cutting-edge Web3 projects working with top-tier global protocols entering the Korean market",
-      "Collaborate directly with founders and leadership to identify new business opportunities and service offerings",
-      "Help build internal processes, tools, and frameworks as we scale our agency operations",
-      "Participate in industry events, conferences, and networking sessions representing Ium Labs",
-      "Bring fresh ideas and innovations to enhance our research products and marketing services"
-    ],
-    qualifications: [
-      "Genuine passion for Web3, blockchain technology, and the future of decentralized systems",
-      "Self-driven individual with strong initiative and ownership mentality",
-      "Creative problem-solving abilities and adaptability in fast-paced environments",
-      "Excellent communication skills in Korean and/or English",
-      "Portfolio or demonstrated experience in your area of expertise",
-      "Eagerness to learn, grow, and take on new challenges"
-    ]
-  },
-];
-const process = [
-  { step: "01", title: "APPLICATION", description: "Resume Review" },
-  { step: "02", title: "INTERVIEW", description: "Video Interview" },
-  { step: "03", title: "TASK", description: "Practical Assignment" },
-  { step: "04", title: "OFFER", description: "Final Offer" },
-];
-
+const positions = [{
+  icon: Search,
+  title: "Researcher",
+  description: "Responsible for Web3 market research and in-depth analysis. Identify the latest trends in the blockchain ecosystem and derive insights.",
+  salary: "₩50M - 70M / year",
+  workType: "Hybrid (Seoul Office + Remote)",
+  jobDescription: ["Conduct comprehensive Web3 market trend analysis and produce weekly/monthly research reports covering DeFi, NFTs, L1/L2 ecosystems, and emerging narratives", "Perform deep-dive due diligence on potential client projects, analyzing tokenomics, team backgrounds, competitive landscape, and market positioning", "Monitor and interpret on-chain metrics using Dune Analytics, Flipside, Nansen, and DefiLlama to derive actionable trading and investment insights", "Track Korean crypto community sentiment across Naver, KakaoTalk, DC Inside, and local forums to identify emerging trends before mainstream adoption", "Collaborate with the Growth team to develop data-backed GTM strategies and market entry recommendations for global projects", "Create investor-grade pitch materials, one-pagers, and thesis documents that articulate project value propositions clearly", "Maintain and update internal databases of Korean exchanges, VCs, KOLs, and media contacts with relevant intelligence", "Present research findings to clients and internal teams, translating complex data into clear strategic recommendations"],
+  qualifications: ["Deep understanding of Web3, DeFi protocols, and blockchain technology fundamentals", "2+ years of experience in crypto research, investment analysis, or related field", "Proficiency in on-chain analytics tools (Dune, Flipside, Nansen, Arkham)", "Strong written and verbal communication skills in both Korean and English", "Experience writing research reports or investment theses", "Self-motivated with exceptional attention to detail and analytical rigor"]
+}, {
+  icon: TrendingUp,
+  title: "Growth Manager",
+  description: "Develop and execute strategies for global Web3 projects entering the Korean market. Lead community building and marketing efforts.",
+  salary: "₩60M - 90M / year",
+  workType: "Hybrid (Seoul Office + Remote)",
+  jobDescription: ["Design and execute end-to-end Go-To-Market (GTM) strategies for global Web3 projects targeting the Korean market, from initial market analysis to full launch", "Build, nurture, and scale Korean crypto communities across Discord, Telegram, KakaoTalk open chats, and Twitter/X with engagement-focused content strategies", "Identify, negotiate, and manage relationships with Korean KOLs (Key Opinion Leaders), ensuring authentic partnerships and measurable campaign ROI", "Plan and execute high-impact offline events including meetups, conferences, hackathons, and exclusive networking dinners in Seoul", "Develop and maintain strategic partnerships with Korean exchanges (Upbit, Bithumb, Coinone) for listing support and co-marketing initiatives", "Coordinate PR campaigns with Korean crypto media outlets (Block Media, Coindesk Korea, Bloomingbit) to maximize project visibility", "Create localized marketing content including blog posts, social media assets, and video scripts tailored to Korean audience preferences", "Track and report on key growth metrics (community size, engagement rates, sentiment analysis) with data-driven optimization recommendations"],
+  qualifications: ["3+ years experience in Web3 marketing, community management, or growth roles", "Native Korean speaker with professional-level English communication skills", "Proven track record of building and scaling crypto communities (10K+ members)", "Established network within the Korean crypto ecosystem (exchanges, media, KOLs)", "Experience with marketing analytics tools and community management platforms", "Strong project management skills with ability to handle multiple campaigns simultaneously"]
+}, {
+  icon: Briefcase,
+  title: "Open Position",
+  description: "If you have passion for Web3, feel free to apply. We create various roles together with talented individuals.",
+  salary: "Negotiable",
+  workType: "Flexible (Remote-first)",
+  jobDescription: ["We're always searching for exceptional talent who can bring unique perspectives and skills to our growing team", "Define and shape your own role based on your expertise—whether in BD, engineering, design, content, or operations", "Contribute to cutting-edge Web3 projects working with top-tier global protocols entering the Korean market", "Collaborate directly with founders and leadership to identify new business opportunities and service offerings", "Help build internal processes, tools, and frameworks as we scale our agency operations", "Participate in industry events, conferences, and networking sessions representing Ium Labs", "Bring fresh ideas and innovations to enhance our research products and marketing services"],
+  qualifications: ["Genuine passion for Web3, blockchain technology, and the future of decentralized systems", "Self-driven individual with strong initiative and ownership mentality", "Creative problem-solving abilities and adaptability in fast-paced environments", "Excellent communication skills in Korean and/or English", "Portfolio or demonstrated experience in your area of expertise", "Eagerness to learn, grow, and take on new challenges"]
+}];
+const process = [{
+  step: "01",
+  title: "APPLICATION",
+  description: "Resume Review"
+}, {
+  step: "02",
+  title: "INTERVIEW",
+  description: "Video Interview"
+}, {
+  step: "03",
+  title: "TASK",
+  description: "Practical Assignment"
+}, {
+  step: "04",
+  title: "OFFER",
+  description: "Final Offer"
+}];
 const Jobs = () => {
   usePageMeta({
     title: "Careers | Ium Labs - Join Our Web3 Team",
-    description: "Join Ium Labs and shape the future of Web3 in Korea. We're looking for passionate Researchers and Growth Managers.",
+    description: "Join Ium Labs and shape the future of Web3 in Korea. We're looking for passionate Researchers and Growth Managers."
   });
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -174,31 +157,30 @@ const Jobs = () => {
     linkedinUrl: "",
     position: "",
     coverLetter: "",
-    privacyAgreed: false,
+    privacyAgreed: false
   });
-
   const [selectedPosition, setSelectedPosition] = useState<typeof positions[0] | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleInputChange = (field: string, value: string | boolean) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
       const result = applicationSchema.safeParse(formData);
-
       if (!result.success) {
         const firstError = result.error.errors[0];
         toast.error(firstError.message);
         setIsSubmitting(false);
         return;
       }
-
-      const { error } = await supabase.from("job_applications").insert({
+      const {
+        error
+      } = await supabase.from("job_applications").insert({
         name: result.data.name,
         email: result.data.email,
         phone: null,
@@ -206,11 +188,9 @@ const Jobs = () => {
         linkedin_url: result.data.linkedinUrl || null,
         portfolio_url: null,
         position: result.data.position,
-        cover_letter: result.data.coverLetter || null,
+        cover_letter: result.data.coverLetter || null
       });
-
       if (error) throw error;
-
       toast.success("Your application has been submitted successfully!");
       setFormData({
         name: "",
@@ -219,7 +199,7 @@ const Jobs = () => {
         linkedinUrl: "",
         position: "",
         coverLetter: "",
-        privacyAgreed: false,
+        privacyAgreed: false
       });
     } catch (error) {
       console.error("Error submitting application:", error);
@@ -228,11 +208,8 @@ const Jobs = () => {
       setIsSubmitting(false);
     }
   };
-
   const talentMarquee = "Talent Wanted ".repeat(20);
-
-  return (
-    <div className="min-h-screen bg-surface-base flex flex-col">
+  return <div className="min-h-screen bg-surface-base flex flex-col">
       <Navbar />
 
       {/* Hero Section with Video Background */}
@@ -240,13 +217,7 @@ const Jobs = () => {
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <div className="relative min-h-[calc(100vh-2rem)] flex flex-col justify-center overflow-hidden rounded-2xl sm:rounded-3xl bg-surface-odd">
             {/* Video Background */}
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-            >
+            <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
               <source src="/videos/jobs-hero.mp4" type="video/mp4" />
             </video>
             
@@ -257,58 +228,88 @@ const Jobs = () => {
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface-odd/80" />
             
             {/* Floating Tags - Lunar Strategy Style */}
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="lunar-tag-dark absolute top-[15%] left-[8%] md:left-[12%] animate-float text-xs md:text-sm hidden sm:block"
-              style={{ animationDelay: '0s' }}
-            >
+            <motion.span initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 0.5,
+            duration: 0.6
+          }} className="lunar-tag-dark absolute top-[15%] left-[8%] md:left-[12%] animate-float text-xs md:text-sm hidden sm:block" style={{
+            animationDelay: '0s'
+          }}>
               Researcher
             </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.6 }}
-              className="lunar-tag-dark absolute top-[22%] right-[10%] md:right-[15%] animate-float text-xs md:text-sm hidden sm:block"
-              style={{ animationDelay: '0.5s' }}
-            >
+            <motion.span initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 0.7,
+            duration: 0.6
+          }} className="lunar-tag-dark absolute top-[22%] right-[10%] md:right-[15%] animate-float text-xs md:text-sm hidden sm:block" style={{
+            animationDelay: '0.5s'
+          }}>
               Growth Manager
             </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.9, duration: 0.6 }}
-              className="lunar-tag-dark absolute bottom-[28%] left-[6%] md:left-[10%] animate-float text-xs md:text-sm hidden md:block"
-              style={{ animationDelay: '1s' }}
-            >
+            <motion.span initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 0.9,
+            duration: 0.6
+          }} className="lunar-tag-dark absolute bottom-[28%] left-[6%] md:left-[10%] animate-float text-xs md:text-sm hidden md:block" style={{
+            animationDelay: '1s'
+          }}>
               Seoul HQ
             </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.1, duration: 0.6 }}
-              className="lunar-tag-dark absolute bottom-[35%] right-[8%] md:right-[12%] animate-float text-xs md:text-sm hidden sm:block"
-              style={{ animationDelay: '1.5s' }}
-            >
+            <motion.span initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 1.1,
+            duration: 0.6
+          }} className="lunar-tag-dark absolute bottom-[35%] right-[8%] md:right-[12%] animate-float text-xs md:text-sm hidden sm:block" style={{
+            animationDelay: '1.5s'
+          }}>
               Remote OK
             </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3, duration: 0.6 }}
-              className="lunar-tag-dark absolute top-[35%] left-[4%] md:left-[6%] animate-float text-xs md:text-sm hidden lg:block"
-              style={{ animationDelay: '2s' }}
-            >
+            <motion.span initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 1.3,
+            duration: 0.6
+          }} className="lunar-tag-dark absolute top-[35%] left-[4%] md:left-[6%] animate-float text-xs md:text-sm hidden lg:block" style={{
+            animationDelay: '2s'
+          }}>
               Web3 Native
             </motion.span>
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 0.6 }}
-              className="lunar-tag-dark absolute bottom-[20%] right-[5%] md:right-[8%] animate-float text-xs md:text-sm hidden lg:block"
-              style={{ animationDelay: '2.5s' }}
-            >
+            <motion.span initial={{
+            opacity: 0,
+            y: 20
+          }} animate={{
+            opacity: 1,
+            y: 0
+          }} transition={{
+            delay: 1.5,
+            duration: 0.6
+          }} className="lunar-tag-dark absolute bottom-[20%] right-[5%] md:right-[8%] animate-float text-xs md:text-sm hidden lg:block" style={{
+            animationDelay: '2.5s'
+          }}>
               Global Impact
             </motion.span>
             
@@ -334,10 +335,7 @@ const Jobs = () => {
               </AnimatedSection>
               
               <AnimatedSection delay={300}>
-                <a
-                  href="#positions"
-                  className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-colors"
-                >
+                <a href="#positions" className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-colors">
                   Explore Opportunities
                   <ArrowRight className="w-5 h-5" />
                 </a>
@@ -346,21 +344,19 @@ const Jobs = () => {
             
             {/* Talent Wanted Marquee - Bottom of Hero */}
             <div className="absolute bottom-0 left-0 right-0 z-10 bg-white overflow-hidden">
-              <motion.div
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-                className="flex whitespace-nowrap py-4 md:py-5"
-              >
-                {[...Array(2)].map((_, i) => (
-                  <span key={i} className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-black flex items-center">
-                    {[...Array(8)].map((_, j) => (
-                      <span key={j} className="flex items-center">
+              <motion.div animate={{
+              x: ["0%", "-50%"]
+            }} transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear"
+            }} className="flex whitespace-nowrap py-4 md:py-5">
+                {[...Array(2)].map((_, i) => <span key={i} className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-black flex items-center">
+                    {[...Array(8)].map((_, j) => <span key={j} className="flex items-center">
                         <span>Talent Wanted</span>
                         <span className="mx-5 md:mx-8 w-2 h-2 md:w-2.5 md:h-2.5 bg-black rounded-full" />
-                      </span>
-                    ))}
-                  </span>
-                ))}
+                      </span>)}
+                  </span>)}
               </motion.div>
             </div>
           </div>
@@ -369,22 +365,7 @@ const Jobs = () => {
 
       {/* Talent Wanted Marquee */}
       <section className="bg-white overflow-hidden" id="marquee">
-        <motion.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="flex whitespace-nowrap py-5 md:py-6"
-        >
-          {[...Array(2)].map((_, i) => (
-            <span key={i} className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-black flex items-center">
-              {[...Array(8)].map((_, j) => (
-                <span key={j} className="flex items-center">
-                  <span>Talent Wanted</span>
-                  <span className="mx-6 md:mx-10 w-2 h-2 md:w-3 md:h-3 bg-black rounded-full" />
-                </span>
-              ))}
-            </span>
-          ))}
-        </motion.div>
+        
       </section>
 
       {/* 01. Why Join Us Section */}
@@ -441,13 +422,8 @@ const Jobs = () => {
 
           {/* Position Rows */}
           {positions.map((pos, idx) => {
-            const Icon = pos.icon;
-            return (
-              <div
-                key={idx}
-                onClick={() => setSelectedPosition(pos)}
-                className="border-b border-white/10 group cursor-pointer hover:bg-white/5 transition-all"
-              >
+          const Icon = pos.icon;
+          return <div key={idx} onClick={() => setSelectedPosition(pos)} className="border-b border-white/10 group cursor-pointer hover:bg-white/5 transition-all">
                 <div className="px-4 md:px-10 py-6 md:py-8 flex items-center justify-between gap-6">
                   {/* Left: Number + Title */}
                   <div className="flex items-center gap-6 md:gap-10 flex-1 min-w-0">
@@ -481,9 +457,8 @@ const Jobs = () => {
                     </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              </div>;
+        })}
         </div>
       </section>
 
@@ -504,11 +479,7 @@ const Jobs = () => {
           <AnimatedSection delay={100}>
             <div className="px-4 md:px-10 py-10 md:py-16">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                {process.map((step, idx) => (
-                  <div
-                    key={idx}
-                    className="relative bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 text-center group hover:bg-white/10 transition-colors"
-                  >
+                {process.map((step, idx) => <div key={idx} className="relative bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 text-center group hover:bg-white/10 transition-colors">
                     <span className="text-3xl md:text-4xl font-bold text-white/20 block mb-2">
                       {step.step}
                     </span>
@@ -520,11 +491,8 @@ const Jobs = () => {
                     </p>
                     
                     {/* Connector Line */}
-                    {idx < process.length - 1 && (
-                      <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-px bg-white/10" />
-                    )}
-                  </div>
-                ))}
+                    {idx < process.length - 1 && <div className="hidden md:block absolute top-1/2 -right-3 w-6 h-px bg-white/10" />}
+                  </div>)}
               </div>
             </div>
           </AnimatedSection>
@@ -545,20 +513,7 @@ const Jobs = () => {
           </AnimatedSection>
 
           {/* We Want You Marquee */}
-          <div className="overflow-hidden bg-white py-4 md:py-5">
-            <motion.div
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-              className="flex whitespace-nowrap"
-            >
-              <span className="text-2xl md:text-3xl font-bold tracking-tight text-black">
-                {"We Want You · ".repeat(12)}
-              </span>
-              <span className="text-2xl md:text-3xl font-bold tracking-tight text-black">
-                {"We Want You · ".repeat(12)}
-              </span>
-            </motion.div>
-          </div>
+          
           
           <AnimatedSection delay={100}>
             <div className="px-4 md:px-10 py-10 md:py-16">
@@ -573,84 +528,41 @@ const Jobs = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Row 1: Name, Email, Phone */}
                   <div className="grid md:grid-cols-2 gap-4">
-                    <Input
-                      placeholder="Name *"
-                      value={formData.name}
-                      onChange={(e) => handleInputChange("name", e.target.value)}
-                      className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30"
-                    />
-                    <Input
-                      type="email"
-                      placeholder="Email *"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
-                      className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30"
-                    />
+                    <Input placeholder="Name *" value={formData.name} onChange={e => handleInputChange("name", e.target.value)} className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30" />
+                    <Input type="email" placeholder="Email *" value={formData.email} onChange={e => handleInputChange("email", e.target.value)} className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30" />
                   </div>
 
                   {/* Row 2: Telegram, LinkedIn */}
                   <div className="grid md:grid-cols-2 gap-4">
-                    <Input
-                      placeholder="Telegram"
-                      value={formData.telegram}
-                      onChange={(e) => handleInputChange("telegram", e.target.value)}
-                      className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30"
-                    />
-                    <Input
-                      placeholder="LinkedIn / Twitter URL"
-                      value={formData.linkedinUrl}
-                      onChange={(e) => handleInputChange("linkedinUrl", e.target.value)}
-                      className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30"
-                    />
+                    <Input placeholder="Telegram" value={formData.telegram} onChange={e => handleInputChange("telegram", e.target.value)} className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30" />
+                    <Input placeholder="LinkedIn / Twitter URL" value={formData.linkedinUrl} onChange={e => handleInputChange("linkedinUrl", e.target.value)} className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30" />
                   </div>
 
                   {/* Row 3: Position Select */}
-                  <Select
-                    value={formData.position}
-                    onValueChange={(value) => handleInputChange("position", value)}
-                  >
+                  <Select value={formData.position} onValueChange={value => handleInputChange("position", value)}>
                     <SelectTrigger className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white">
                       <SelectValue placeholder="Select a position *" />
                     </SelectTrigger>
                     <SelectContent className="bg-surface-odd border-white/10">
-                      {positions.map((pos) => (
-                        <SelectItem key={pos.title} value={pos.title} className="text-white">
+                      {positions.map(pos => <SelectItem key={pos.title} value={pos.title} className="text-white">
                           {pos.title}
-                        </SelectItem>
-                      ))}
+                        </SelectItem>)}
                     </SelectContent>
                   </Select>
 
                   {/* Row 4: Cover Letter */}
-                  <Textarea
-                    placeholder="Tell us about yourself and why you want to join Ium Labs..."
-                    value={formData.coverLetter}
-                    onChange={(e) => handleInputChange("coverLetter", e.target.value)}
-                    className="bg-white/5 border-white/10 min-h-[200px] rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30 resize-none"
-                  />
+                  <Textarea placeholder="Tell us about yourself and why you want to join Ium Labs..." value={formData.coverLetter} onChange={e => handleInputChange("coverLetter", e.target.value)} className="bg-white/5 border-white/10 min-h-[200px] rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30 resize-none" />
 
                   {/* Privacy Checkbox */}
                   <div className="flex items-center gap-3 pt-2">
-                    <Checkbox
-                      id="privacy"
-                      checked={formData.privacyAgreed}
-                      onCheckedChange={(checked) => handleInputChange("privacyAgreed", checked as boolean)}
-                      className="h-5 w-5 border-white/30 data-[state=checked]:bg-white data-[state=checked]:text-black"
-                    />
-                    <label
-                      htmlFor="privacy"
-                      className="text-sm text-white/50 cursor-pointer"
-                    >
+                    <Checkbox id="privacy" checked={formData.privacyAgreed} onCheckedChange={checked => handleInputChange("privacyAgreed", checked as boolean)} className="h-5 w-5 border-white/30 data-[state=checked]:bg-white data-[state=checked]:text-black" />
+                    <label htmlFor="privacy" className="text-sm text-white/50 cursor-pointer">
                       I agree to the privacy policy *
                     </label>
                   </div>
 
                   {/* Submit Button */}
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-6 h-auto text-lg bg-white text-black hover:bg-white/90 rounded-full font-semibold mt-6"
-                  >
+                  <Button type="submit" disabled={isSubmitting} className="w-full py-6 h-auto text-lg bg-white text-black hover:bg-white/90 rounded-full font-semibold mt-6">
                     {isSubmitting ? "Submitting..." : "Submit Application"}
                   </Button>
                 </form>
@@ -674,22 +586,29 @@ const Jobs = () => {
       <FloatingContactButton />
 
       {/* Position Detail Dialog */}
-      <Dialog open={!!selectedPosition} onOpenChange={(open) => !open && setSelectedPosition(null)}>
+      <Dialog open={!!selectedPosition} onOpenChange={open => !open && setSelectedPosition(null)}>
         <DialogContent className="bg-gradient-to-b from-surface-odd to-surface-base border-white/10 max-w-2xl max-h-[90vh] overflow-y-auto animate-scale-in">
-          {selectedPosition && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-            >
+          {selectedPosition && <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.3,
+          ease: "easeOut"
+        }}>
               <DialogHeader>
                 <div className="flex items-start gap-5 mb-4">
-                  <motion.div 
-                    className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0"
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
-                  >
+                  <motion.div className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0" initial={{
+                scale: 0
+              }} animate={{
+                scale: 1
+              }} transition={{
+                delay: 0.1,
+                type: "spring",
+                stiffness: 200
+              }}>
                     <selectedPosition.icon className="w-7 h-7 text-white/80" />
                   </motion.div>
                   <div>
@@ -701,12 +620,15 @@ const Jobs = () => {
                 </div>
 
                 {/* Salary & Work Type Pills */}
-                <motion.div 
-                  className="flex flex-wrap gap-3 mt-4"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.15 }}
-                >
+                <motion.div className="flex flex-wrap gap-3 mt-4" initial={{
+              opacity: 0,
+              x: -20
+            }} animate={{
+              opacity: 1,
+              x: 0
+            }} transition={{
+              delay: 0.15
+            }}>
                   <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full">
                     <DollarSign className="w-4 h-4" />
                     <span className="text-sm font-medium">{selectedPosition.salary}</span>
@@ -721,12 +643,15 @@ const Jobs = () => {
 
               <div className="space-y-6 mt-8">
                 {/* Job Description */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.25 }}
-                  className="bg-white/5 rounded-2xl p-6 border border-white/10"
-                >
+                <motion.div initial={{
+              opacity: 0,
+              y: 10
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.25
+            }} className="bg-white/5 rounded-2xl p-6 border border-white/10">
                   <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                     <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
                       <Briefcase className="w-4 h-4 text-white/70" />
@@ -734,28 +659,31 @@ const Jobs = () => {
                     Job Description
                   </h4>
                   <ul className="space-y-3">
-                    {selectedPosition.jobDescription.map((item, idx) => (
-                      <motion.li 
-                        key={idx} 
-                        className="text-white/60 text-sm flex items-start gap-3"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.3 + idx * 0.05 }}
-                      >
+                    {selectedPosition.jobDescription.map((item, idx) => <motion.li key={idx} className="text-white/60 text-sm flex items-start gap-3" initial={{
+                  opacity: 0,
+                  x: -10
+                }} animate={{
+                  opacity: 1,
+                  x: 0
+                }} transition={{
+                  delay: 0.3 + idx * 0.05
+                }}>
                         <span className="w-1.5 h-1.5 rounded-full bg-white/30 mt-2 flex-shrink-0" />
                         {item}
-                      </motion.li>
-                    ))}
+                      </motion.li>)}
                   </ul>
                 </motion.div>
 
                 {/* Qualifications */}
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.35 }}
-                  className="bg-white/5 rounded-2xl p-6 border border-white/10"
-                >
+                <motion.div initial={{
+              opacity: 0,
+              y: 10
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.35
+            }} className="bg-white/5 rounded-2xl p-6 border border-white/10">
                   <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
                     <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
                       <GraduationCap className="w-4 h-4 text-white/70" />
@@ -763,44 +691,43 @@ const Jobs = () => {
                     Qualifications
                   </h4>
                   <ul className="space-y-3">
-                    {selectedPosition.qualifications.map((item, idx) => (
-                      <motion.li 
-                        key={idx} 
-                        className="text-white/60 text-sm flex items-start gap-3"
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.4 + idx * 0.05 }}
-                      >
+                    {selectedPosition.qualifications.map((item, idx) => <motion.li key={idx} className="text-white/60 text-sm flex items-start gap-3" initial={{
+                  opacity: 0,
+                  x: -10
+                }} animate={{
+                  opacity: 1,
+                  x: 0
+                }} transition={{
+                  delay: 0.4 + idx * 0.05
+                }}>
                         <span className="w-1.5 h-1.5 rounded-full bg-white/30 mt-2 flex-shrink-0" />
                         {item}
-                      </motion.li>
-                    ))}
+                      </motion.li>)}
                   </ul>
                 </motion.div>
 
                 {/* Apply Button */}
-                <motion.a
-                  href="#apply"
-                  onClick={() => {
-                    setSelectedPosition(null);
-                    handleInputChange("position", selectedPosition.title === "Open Position" ? "Other" : selectedPosition.title);
-                  }}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.02] active:scale-[0.98] mt-2"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                  whileHover={{ boxShadow: "0 0 30px rgba(255,255,255,0.2)" }}
-                >
+                <motion.a href="#apply" onClick={() => {
+              setSelectedPosition(null);
+              handleInputChange("position", selectedPosition.title === "Open Position" ? "Other" : selectedPosition.title);
+            }} className="w-full inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.02] active:scale-[0.98] mt-2" initial={{
+              opacity: 0,
+              y: 10
+            }} animate={{
+              opacity: 1,
+              y: 0
+            }} transition={{
+              delay: 0.5
+            }} whileHover={{
+              boxShadow: "0 0 30px rgba(255,255,255,0.2)"
+            }}>
                   Apply for this Position
                   <ArrowRight className="w-5 h-5" />
                 </motion.a>
               </div>
-            </motion.div>
-          )}
+            </motion.div>}
         </DialogContent>
       </Dialog>
-    </div>
-  );
+    </div>;
 };
-
 export default Jobs;
