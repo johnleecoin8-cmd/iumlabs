@@ -439,54 +439,68 @@ const ServicePageLayout = ({
                 const Icon = step.icon;
                 const isLast = index === processSteps.length - 1;
                 
-                return (
-                  <div
-                    key={step.number}
-                    className="group relative p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/5"
-                  >
-                    {/* Arrow indicator between steps - Desktop */}
-                    {!isLast && (
-                      <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
-                        <ArrowRight 
-                          className="w-6 h-6 drop-shadow-lg" 
+                  return (
+                    <div
+                      key={step.number}
+                      className="group relative p-4 sm:p-5 md:p-6 transition-all duration-500 hover:bg-white/5 hover:scale-[1.02] hover:-translate-y-1"
+                      style={{
+                        boxShadow: 'inset 0 0 0 0 transparent',
+                        transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.5s ease'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.boxShadow = `inset 0 -3px 0 0 ${accentColor}, 0 10px 40px -10px ${accentColor}40`;
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.boxShadow = 'inset 0 0 0 0 transparent';
+                      }}
+                    >
+                      {/* Arrow indicator between steps - Desktop */}
+                      {!isLast && (
+                        <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
+                          <ArrowRight 
+                            className="w-6 h-6 drop-shadow-lg" 
+                            style={{ color: accentColor }}
+                            strokeWidth={2.5}
+                          />
+                        </div>
+                      )}
+                      
+                      {/* Arrow indicator between steps - Mobile/Tablet */}
+                      {!isLast && (
+                        <div className="flex lg:hidden absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
+                          <ArrowRight 
+                            className="w-6 h-6 rotate-90 drop-shadow-lg" 
+                            style={{ color: accentColor }}
+                            strokeWidth={2.5}
+                          />
+                        </div>
+                      )}
+                      
+                      <div className="flex items-center gap-3 mb-3">
+                        <span 
+                          className="text-xs font-mono tracking-widest transition-all duration-500 group-hover:scale-110"
                           style={{ color: accentColor }}
-                          strokeWidth={2.5}
+                        >
+                          {step.number}
+                        </span>
+                        <Icon 
+                          className="w-5 h-5 text-white/40 group-hover:text-white group-hover:scale-125 group-hover:rotate-12 transition-all duration-500" 
+                          strokeWidth={1.5}
+                          style={{
+                            filter: 'drop-shadow(0 0 0px transparent)',
+                            transition: 'all 0.5s ease'
+                          }}
                         />
                       </div>
-                    )}
-                    
-                    {/* Arrow indicator between steps - Mobile/Tablet */}
-                    {!isLast && (
-                      <div className="flex lg:hidden absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
-                        <ArrowRight 
-                          className="w-6 h-6 rotate-90 drop-shadow-lg" 
-                          style={{ color: accentColor }}
-                          strokeWidth={2.5}
-                        />
-                      </div>
-                    )}
-                    
-                    <div className="flex items-center gap-3 mb-3">
-                      <span 
-                        className="text-xs font-mono tracking-widest"
-                        style={{ color: accentColor }}
-                      >
-                        {step.number}
-                      </span>
-                      <Icon 
-                        className="w-5 h-5 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" 
-                        strokeWidth={1.5} 
-                      />
+                      
+                      <h3 className="text-base font-semibold text-white mb-2 transition-all duration-500 group-hover:translate-x-1">
+                        {step.title}
+                      </h3>
+                      
+                      <p className="text-white/50 text-sm leading-relaxed transition-all duration-500 group-hover:text-white/70">
+                        {step.description}
+                      </p>
                     </div>
-                    
-                    <h3 className="text-base font-semibold text-white mb-2">
-                      {step.title}
-                    </h3>
-                    
-                    <p className="text-white/50 text-sm leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
                 );
               })}
             </div>
