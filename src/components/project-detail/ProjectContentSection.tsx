@@ -222,11 +222,11 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <div className="rounded-xl overflow-hidden">
+              <div className="rounded-xl overflow-hidden h-[200px] md:h-[300px]">
                 <img 
                   src={gallery[0].src}
                   alt={gallery[0].title || `${project.name} featured image`}
-                  className="w-full h-auto object-cover"
+                  className="w-full h-full object-cover"
                 />
               </div>
             </motion.div>
