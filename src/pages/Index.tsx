@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, lazy, Suspense } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
@@ -6,7 +6,6 @@ import storyOriginSummit from "@/assets/campaigns/story-origin-summit.jpg";
 import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
 import synfuturesBillboard from "@/assets/campaigns/synfutures-billboard.jpg";
 import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
-const Bridge3D = lazy(() => import("@/components/Bridge3D"));
 const campaignImages = [{
   src: seoulMetroBillboard,
   alt: "Seoul Metro Billboard Campaign"
@@ -230,33 +229,6 @@ const Index = () => {
           <HeroSection />
         </div>
       </main>
-
-      {/* 3D Bridge Section */}
-      <section className="relative bg-surface-base overflow-hidden" id="bridge">
-        <div className="relative h-[300px] sm:h-[400px] md:h-[500px] w-full">
-          {/* Background gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/5 to-transparent" />
-          
-          {/* 3D Bridge */}
-          <Suspense fallback={
-            <div className="w-full h-full flex items-center justify-center">
-              <div className="text-cyan-400/30 text-6xl animate-pulse">⬢</div>
-            </div>
-          }>
-            <Bridge3D className="w-full h-full" />
-          </Suspense>
-          
-          {/* Text overlay */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-            <p className="text-xs sm:text-sm text-cyan-400/60 font-mono tracking-[0.3em] uppercase mb-2">
-              Bridging Web3 to Korea
-            </p>
-          </div>
-          
-          {/* Bottom fade */}
-          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-surface-base to-transparent" />
-        </div>
-      </section>
       
       {/* About - 01 홀수 */}
       <section className="bg-surface-odd" id="why-choose-us">
