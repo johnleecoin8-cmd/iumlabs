@@ -84,9 +84,10 @@ const MetricCard = ({ metric, index }: MetricCardProps) => {
 interface ProjectContentSectionProps {
   project: ProjectData & { client_name?: string; duration?: string };
   metrics?: ProjectMetric[];
+  gallery?: Array<{ src: string; title?: string; description?: string }>;
 }
 
-const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps) => {
+const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSectionProps) => {
   const displayMetrics = metrics || project.metrics;
   
   // Check if any meta info is available
@@ -211,6 +212,25 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
               )}
             </motion.div>
           </div>
+          
+          {/* Featured Image from Gallery */}
+          {gallery && gallery.length > 0 && (
+            <motion.div 
+              className="mt-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <div className="rounded-xl overflow-hidden">
+                <img 
+                  src={gallery[0].src}
+                  alt={gallery[0].title || `${project.name} featured image`}
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+            </motion.div>
+          )}
         </div>
       </section>
 
