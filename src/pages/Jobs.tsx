@@ -572,7 +572,7 @@ const Jobs = () => {
 
                 <form onSubmit={handleSubmit} className="space-y-4">
                   {/* Row 1: Name, Email, Phone */}
-                  <div className="grid md:grid-cols-3 gap-4">
+                  <div className="grid md:grid-cols-2 gap-4">
                     <Input
                       placeholder="Name *"
                       value={formData.name}
