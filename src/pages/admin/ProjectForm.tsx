@@ -33,6 +33,8 @@ interface ProjectFormData {
   background_url: string;
   is_published: boolean;
   display_order: number;
+  client_name: string;
+  duration: string;
 }
 
 export default function ProjectForm() {
@@ -52,6 +54,8 @@ export default function ProjectForm() {
     background_url: '',
     is_published: true,
     display_order: 0,
+    client_name: '',
+    duration: '',
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [logoFile, setLogoFile] = useState<File | null>(null);
@@ -88,6 +92,8 @@ export default function ProjectForm() {
         background_url: existingProject.background_url || '',
         is_published: existingProject.is_published ?? true,
         display_order: existingProject.display_order || 0,
+        client_name: existingProject.client_name || '',
+        duration: existingProject.duration || '',
       });
       if (existingProject.logo_url) setLogoPreview(existingProject.logo_url);
       if (existingProject.background_url) setBgPreview(existingProject.background_url);
@@ -160,6 +166,8 @@ export default function ProjectForm() {
         background_url: bgUrl || null,
         is_published: formData.is_published,
         display_order: formData.display_order,
+        client_name: formData.client_name || null,
+        duration: formData.duration || null,
       };
 
       if (isEditing && id) {
@@ -278,6 +286,28 @@ export default function ProjectForm() {
                     onChange={(e) => setFormData((prev) => ({ ...prev, result: e.target.value }))}
                     className="bg-[#0A0A0A] border-white/10 text-white"
                     placeholder="e.g. +340% Korean Trading Volume"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="client_name" className="text-white/80">Client Name</Label>
+                  <Input
+                    id="client_name"
+                    value={formData.client_name}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, client_name: e.target.value }))}
+                    className="bg-[#0A0A0A] border-white/10 text-white"
+                    placeholder="e.g. MegaETH Foundation"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="duration" className="text-white/80">Duration</Label>
+                  <Input
+                    id="duration"
+                    value={formData.duration}
+                    onChange={(e) => setFormData((prev) => ({ ...prev, duration: e.target.value }))}
+                    className="bg-[#0A0A0A] border-white/10 text-white"
+                    placeholder="e.g. 3 Months, Q1 2024"
                   />
                 </div>
               </div>

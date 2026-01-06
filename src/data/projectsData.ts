@@ -85,6 +85,8 @@ export interface ProjectData {
   glowColor: string;
   description: string;
   challenge: string;
+  client_name?: string; // Optional client name for meta info
+  duration?: string; // Optional project duration
   metrics: ProjectMetric[];
   strategy: string[];
   results: ProjectResult[];
