@@ -27,13 +27,20 @@ const MobileBottomNav = () => {
 
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
-      {/* Safe area background */}
-      <div className="absolute inset-0 bg-background/95 backdrop-blur-xl border-t border-border/50" 
-           style={{ paddingBottom: 'env(safe-area-inset-bottom)' }} />
+      {/* Glassmorphism background with gradient */}
+      <div 
+        className="absolute inset-0 bg-gradient-to-t from-background via-background/98 to-background/90 backdrop-blur-2xl border-t border-border/30"
+        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }} 
+      />
+      
+      {/* Subtle top highlight */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent" />
       
       {/* Navigation content */}
-      <div className="relative flex items-center justify-around px-2 py-2"
-           style={{ paddingBottom: 'max(0.5rem, env(safe-area-inset-bottom))' }}>
+      <div 
+        className="relative flex items-center justify-around px-1"
+        style={{ paddingBottom: 'max(0.625rem, env(safe-area-inset-bottom))' }}
+      >
         {navItems.map((item) => {
           const active = isActive(item.path);
           return (
@@ -41,29 +48,42 @@ const MobileBottomNav = () => {
               key={item.path}
               to={item.path}
               className={cn(
-                "relative flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 rounded-xl transition-all duration-200",
+                "relative flex flex-col items-center justify-center gap-1 px-4 py-2.5 rounded-2xl transition-all duration-300 min-w-[60px]",
+                "active:scale-90",
                 active 
-                  ? "text-primary" 
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-foreground" 
+                  : "text-muted-foreground/70 hover:text-foreground/80"
               )}
             >
-              {/* Active indicator */}
+              {/* Active pill indicator */}
               {active && (
                 <motion.div
-                  layoutId="mobile-nav-indicator"
-                  className="absolute inset-0 bg-primary/10 rounded-xl"
+                  layoutId="mobile-nav-pill"
+                  className="absolute inset-x-1 -top-0.5 h-1 bg-gradient-to-r from-primary/80 via-primary to-primary/80 rounded-full"
                   initial={false}
-                  transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
               )}
               
-              <item.icon className={cn(
-                "relative z-10 w-5 h-5 transition-transform duration-200",
-                active && "scale-110"
-              )} />
+              {/* Icon with glow effect when active */}
+              <div className="relative">
+                {active && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="absolute inset-0 bg-primary/20 blur-lg rounded-full"
+                  />
+                )}
+                <item.icon className={cn(
+                  "relative z-10 w-5 h-5 transition-all duration-300",
+                  active ? "stroke-[2.5]" : "stroke-[1.5]"
+                )} />
+              </div>
+              
+              {/* Label with better typography */}
               <span className={cn(
-                "relative z-10 text-[10px] font-medium transition-opacity duration-200",
-                active ? "opacity-100" : "opacity-70"
+                "relative z-10 text-[10px] tracking-wide transition-all duration-300",
+                active ? "font-semibold opacity-100" : "font-medium opacity-60"
               )}>
                 {item.label}
               </span>

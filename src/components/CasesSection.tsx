@@ -118,7 +118,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
         <Link
           to={`/projects/${slug}`}
           onClick={() => window.scrollTo(0, 0)}
-          className="flex items-start gap-2.5 sm:gap-3"
+          className="flex items-start gap-2.5 sm:gap-3 active:scale-[0.97] transition-transform duration-150"
         >
           {/* Image */}
           <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
