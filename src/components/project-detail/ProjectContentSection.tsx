@@ -212,7 +212,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <div 
-              className="rounded-xl overflow-hidden h-[180px] md:h-[250px] relative"
+              className="rounded-xl overflow-hidden h-[360px] md:h-[500px] relative"
               style={{
                 backgroundImage: gallery && gallery.length > 0 ? `url(${gallery[0].src})` : undefined,
                 backgroundSize: 'cover',
