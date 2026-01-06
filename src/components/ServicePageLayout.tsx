@@ -482,15 +482,16 @@ const ServicePageLayout = ({
         <div className="border-t border-white/10">
           <SectionHeader number={moreServicesSectionNum} title="More Services" badge="Explore" />
           <div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-x divide-white/10"
           >
-            {otherServices.map((service) => (
+            {otherServices.map((service, index) => (
               <div
                 key={service.slug}
+                className="border-b border-white/10 last:border-b-0 sm:last:border-b sm:[&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+4)]:border-b-0"
               >
                 <Link
                   to={`/services/${service.slug}`}
-                  className="group relative block p-4 sm:p-5 md:p-6 lg:p-8 h-full transition-all duration-500 border-b sm:border-b-0 sm:border-r border-white/10 last:border-r-0 overflow-hidden"
+                  className="group relative block p-4 sm:p-5 md:p-6 lg:p-8 h-full transition-all duration-500 overflow-hidden"
                 >
                   {/* Hover background gradient */}
                   <div 
