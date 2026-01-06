@@ -101,7 +101,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
       {/* SECTION 0: PROJECT META INFO */}
       {hasMetaInfo && (
         <section className="py-3 md:py-4">
-          <div className="max-w-7xl mx-auto px-4">
+          <div className="px-4 md:px-8 lg:px-12">
             <motion.div
               className="bg-[#1A1A1A] rounded-xl p-3 md:p-4 flex gap-4 md:gap-6"
               initial={{ opacity: 0, y: 20 }}
@@ -149,7 +149,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
       {/* SECTION 1: METRICS */}
       {displayMetrics && displayMetrics.length > 0 && (
         <section className="py-3 md:py-4">
-          <div className="max-w-7xl mx-auto px-4">
+          <div className="px-4 md:px-8 lg:px-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {displayMetrics.map((metric, idx) => (
                 <MetricCard key={idx} metric={metric} index={idx} />
@@ -161,7 +161,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
 
       {/* SECTION 2: SCOPE OF WORK + STRATEGY (Combined) + Overview */}
       <section className="py-2 md:py-3">
-        <div className="max-w-7xl mx-auto px-4">
+        <div className="px-4 md:px-8 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {/* Left: Scope of Work + Strategy Combined */}
             <motion.div 
