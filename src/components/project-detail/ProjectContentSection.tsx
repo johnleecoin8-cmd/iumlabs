@@ -1,28 +1,36 @@
 import { motion } from "framer-motion";
+import { Building2, Clock, Layers, LucideIcon } from "lucide-react";
 import { ProjectData, ProjectMetric } from "@/data/projectsData";
 import { useCountUp } from "@/hooks/useCountUp";
 
-// Meta info item component
+// Meta info item component with icon and accent color
 interface MetaInfoItemProps {
   label: string;
   value: string;
+  icon: LucideIcon;
+  accentColor: string;
   delay?: number;
 }
 
-const MetaInfoItem = ({ label, value, delay = 0 }: MetaInfoItemProps) => (
+const MetaInfoItem = ({ label, value, icon: Icon, accentColor, delay = 0 }: MetaInfoItemProps) => (
   <motion.div
-    className="text-center md:text-left"
+    className="flex items-center gap-2 md:gap-3"
     initial={{ opacity: 0, y: 10 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.4, delay }}
   >
-    <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-wider block mb-1">
-      {label}
-    </span>
-    <span className="text-sm md:text-base text-white font-normal">
-      {value}
-    </span>
+    <div className={`p-1.5 md:p-2 rounded-lg bg-white/5 ${accentColor}`}>
+      <Icon className="w-3.5 h-3.5 md:w-4 md:h-4" />
+    </div>
+    <div>
+      <span className="text-[9px] md:text-[10px] text-white/40 uppercase tracking-wider block">
+        {label}
+      </span>
+      <span className={`text-sm md:text-base font-medium ${accentColor}`}>
+        {value}
+      </span>
+    </div>
   </motion.div>
 );
 
@@ -91,21 +99,19 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
     <div className="bg-[#0A0A0A]">
       {/* SECTION 0: PROJECT META INFO */}
       {hasMetaInfo && (
-        <section className="py-6 md:py-8">
+        <section className="py-3 md:py-4">
           <div className="max-w-7xl mx-auto px-4">
             <motion.div
-              className="bg-[#1A1A1A] rounded-xl p-4 md:p-5"
+              className="bg-[#1A1A1A] rounded-xl p-3 md:p-4"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="grid grid-cols-3 gap-4 md:gap-8">
-                <MetaInfoItem label="Client" value={clientName} delay={0} />
-                {duration && <MetaInfoItem label="Duration" value={duration} delay={0.1} />}
-                {!duration && <div />}
-                {category && <MetaInfoItem label="Category" value={category} delay={0.2} />}
-                {!category && <div />}
+              <div className="flex flex-wrap items-center gap-6 md:gap-10">
+                <MetaInfoItem label="Client" value={clientName} icon={Building2} accentColor="text-blue-400" delay={0} />
+                {duration && <MetaInfoItem label="Duration" value={duration} icon={Clock} accentColor="text-purple-400" delay={0.1} />}
+                {category && <MetaInfoItem label="Category" value={category} icon={Layers} accentColor="text-emerald-400" delay={0.2} />}
               </div>
             </motion.div>
           </div>
@@ -114,7 +120,7 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
 
       {/* SECTION 1: METRICS */}
       {displayMetrics && displayMetrics.length > 0 && (
-        <section className="py-6 md:py-8">
+        <section className="py-3 md:py-4">
           <div className="max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
               {displayMetrics.map((metric, idx) => (
@@ -126,7 +132,7 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
       )}
 
       {/* SECTION 2: SCOPE OF WORK + STRATEGY (Combined) + Overview */}
-      <section className="py-3 md:py-4">
+      <section className="py-2 md:py-3">
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {/* Left: Scope of Work + Strategy Combined */}
@@ -183,7 +189,7 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
 
 
       {/* Bottom padding */}
-      <div className="h-12 md:h-16" />
+      <div className="h-8 md:h-10" />
     </div>
   );
 };
