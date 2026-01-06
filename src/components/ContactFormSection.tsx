@@ -218,7 +218,7 @@ const ContactFormSection = ({
               {/* Budget */}
               <div>
                 <label className="block text-label uppercase tracking-wider text-white/50 mb-4">Budget *</label>
-                <div className="flex flex-wrap gap-2 sm:gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
                   {budgetOptions.map(option => <button key={option} type="button" onClick={() => setFormData({
                   ...formData,
                   budget: option
