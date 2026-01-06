@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, MapPin, Send, Calendar, ArrowUpRight, ArrowRight, Linkedin, Globe, BarChart3, Rocket } from "lucide-react";
+import CTABannerSection from "@/components/CTABannerSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
+import { Mail, MapPin, Send, Calendar, ArrowUpRight, ArrowRight, Linkedin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
@@ -309,6 +311,12 @@ const Contact = () => {
           </div>
         </div>
       </section>
+
+      {/* CTA Banner */}
+      <CTABannerSection />
+      
+      {/* Footer Links */}
+      <FooterLinksSection />
 
       <Footer />
     </div>;
