@@ -437,15 +437,14 @@ export default function ResearchForm() {
       
       e.preventDefault();
       
-      // Also get plain text to preserve
-      const plainText = e.clipboardData.getData('text/plain');
-      
       toast.info(`이미지 ${imgElements.length}개 가져오는 중...`);
       
-      let insertedContent = plainText || '';
+      // Create a map to store image replacements
+      const imageReplacements: Map<string, string> = new Map();
       let successCount = 0;
       let failCount = 0;
       
+      // First, process all images and get their new URLs
       for (const img of Array.from(imgElements)) {
         const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
         console.log('[handleContentPaste] Processing image src:', src?.substring(0, 100));
@@ -459,8 +458,26 @@ export default function ResearchForm() {
             const response = await fetch(src);
             const blob = await response.blob();
             const file = new File([blob], `pasted-${Date.now()}.png`, { type: blob.type });
-            await uploadContentImage(file, cursorPosition);
-            successCount++;
+            
+            // Upload and get URL
+            const { data: uploadData, error: uploadError } = await supabase.functions.invoke('upload-content-image', {
+              body: {
+                base64Data: await new Promise<string>((resolve) => {
+                  const reader = new FileReader();
+                  reader.onload = () => resolve((reader.result as string).split(',')[1]);
+                  reader.readAsDataURL(file);
+                }),
+                fileName: file.name,
+                contentType: file.type,
+              },
+            });
+            
+            if (!uploadError && uploadData?.publicUrl) {
+              imageReplacements.set(src, uploadData.publicUrl);
+              successCount++;
+            } else {
+              failCount++;
+            }
           } catch (err) {
             console.error('[handleContentPaste] Failed to process data URL:', err);
             failCount++;
@@ -473,23 +490,97 @@ export default function ResearchForm() {
           console.log('[handleContentPaste] Importing remote URL');
           const publicUrl = await importRemoteImage(src);
           if (publicUrl) {
-            insertedContent += `\n![image](${publicUrl})\n`;
+            imageReplacements.set(src, publicUrl);
             successCount++;
           } else {
-            // Fallback: use original URL (hotlink)
-            console.log('[handleContentPaste] Fallback to original URL');
-            insertedContent += `\n![image](${src})\n`;
+            // Keep original URL as fallback
+            imageReplacements.set(src, src);
             failCount++;
           }
         }
       }
       
+      // Now convert HTML to markdown while preserving structure
+      const convertNodeToMarkdown = (node: Node): string => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          return node.textContent || '';
+        }
+        
+        if (node.nodeType !== Node.ELEMENT_NODE) return '';
+        
+        const el = node as Element;
+        const tagName = el.tagName.toLowerCase();
+        
+        // Handle images - insert at their original position
+        if (tagName === 'img') {
+          const src = el.getAttribute('src') || el.getAttribute('data-src') || '';
+          const newUrl = imageReplacements.get(src) || src;
+          if (newUrl) {
+            return `\n![image](${newUrl})\n`;
+          }
+          return '';
+        }
+        
+        // Handle block elements
+        const blockTags = ['p', 'div', 'section', 'article', 'header', 'footer', 'main', 'aside'];
+        const headingTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+        
+        let childContent = '';
+        for (const child of Array.from(el.childNodes)) {
+          childContent += convertNodeToMarkdown(child);
+        }
+        
+        if (headingTags.includes(tagName)) {
+          const level = parseInt(tagName.charAt(1));
+          return `\n${'#'.repeat(level)} ${childContent.trim()}\n`;
+        }
+        
+        if (tagName === 'br') {
+          return '\n';
+        }
+        
+        if (tagName === 'strong' || tagName === 'b') {
+          return `**${childContent}**`;
+        }
+        
+        if (tagName === 'em' || tagName === 'i') {
+          return `*${childContent}*`;
+        }
+        
+        if (tagName === 'a') {
+          const href = el.getAttribute('href') || '';
+          return `[${childContent}](${href})`;
+        }
+        
+        if (tagName === 'li') {
+          return `\n- ${childContent.trim()}`;
+        }
+        
+        if (tagName === 'ul' || tagName === 'ol') {
+          return `\n${childContent}\n`;
+        }
+        
+        if (blockTags.includes(tagName)) {
+          return `\n${childContent.trim()}\n`;
+        }
+        
+        return childContent;
+      };
+      
+      let markdownContent = '';
+      for (const child of Array.from(doc.body.childNodes)) {
+        markdownContent += convertNodeToMarkdown(child);
+      }
+      
+      // Clean up excessive newlines
+      markdownContent = markdownContent.replace(/\n{3,}/g, '\n\n').trim();
+      
       // Insert the content at cursor position
-      if (insertedContent) {
+      if (markdownContent) {
         setFormData(prev => {
           const before = prev.content.slice(0, cursorPosition);
           const after = prev.content.slice(cursorPosition);
-          return { ...prev, content: before + insertedContent + after };
+          return { ...prev, content: before + '\n' + markdownContent + '\n' + after };
         });
       }
       
