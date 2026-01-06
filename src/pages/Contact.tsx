@@ -205,8 +205,111 @@ const Contact = () => {
         </section>
       </main>
 
-      {/* Why Work With Us - Identity Section */}
-      
+      {/* Office Location Section - Below Hero */}
+      <section className="bg-[#0A0A0A] py-8 md:py-12">
+        <div className="container mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/[0.08] overflow-hidden">
+            <div className="grid lg:grid-cols-3 gap-0">
+              {/* Office Photo */}
+              <div className="relative aspect-[4/3] lg:aspect-auto overflow-hidden">
+                <img 
+                  src="/lovable-uploads/6f0a6e78-85ba-4530-8bc9-d00abfc3b17d.png"
+                  alt="Ium Labs Office"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-4 left-4">
+                  <span className="px-3 py-1.5 text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white">
+                    Our Office
+                  </span>
+                </div>
+              </div>
+
+              {/* Google Maps Embed */}
+              <a 
+                href="https://maps.google.com/?q=Ium+Labs+373+Gangnam-daero+Seocho-gu+Seoul"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative group aspect-[4/3] lg:aspect-auto overflow-hidden"
+              >
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.5!2d127.0265!3d37.4965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a6f8b5555%3A0x5555555555555555!2s373%20Gangnam-daero%2C%20Seocho-gu%2C%20Seoul!5e0!3m2!1sen!2skr!4v1704067200000!5m2!1sen!2skr"
+                  className="absolute inset-0 w-full h-full pointer-events-none grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
+                  style={{ border: 0, filter: 'invert(0.9) hue-rotate(180deg)' }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span className="px-4 py-2 bg-white/90 text-black text-sm font-medium rounded-full flex items-center gap-2 shadow-lg">
+                    <ExternalLink className="w-4 h-4" />
+                    Open in Google Maps
+                  </span>
+                </div>
+                <div className="absolute bottom-4 left-4">
+                  <span className="px-3 py-1.5 text-xs font-medium bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white">
+                    Location
+                  </span>
+                </div>
+              </a>
+
+              {/* Office Info */}
+              <div className="p-6 sm:p-8 flex flex-col justify-center bg-gradient-to-br from-white/[0.02] to-transparent">
+                {/* Company Badge */}
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-white/[0.05] flex items-center justify-center">
+                    <MapPin className="w-5 h-5 text-white/60" />
+                  </div>
+                  <div>
+                    <p className="text-white/40 text-xs uppercase tracking-wider">Corporate Office</p>
+                    <h3 className="text-white font-bold text-lg">Ium Labs</h3>
+                  </div>
+                </div>
+
+                {/* Address */}
+                <div className="space-y-4 mb-6">
+                  <div>
+                    <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Address</p>
+                    <p className="text-white text-sm leading-relaxed">
+                      373 Gangnam-daero, 10F<br />
+                      Seocho District, Seoul, Korea
+                    </p>
+                  </div>
+                  
+                  {/* Hours */}
+                  <div className="flex items-center gap-2 text-white/60">
+                    <Clock className="w-4 h-4" />
+                    <span className="text-sm">Mon - Fri, 10:00 AM - 7:00 PM KST</span>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex flex-wrap gap-3">
+                  <a
+                    href="https://maps.google.com/?q=Ium+Labs+373+Gangnam-daero+Seocho-gu+Seoul"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white text-sm font-medium hover:bg-white/[0.1] hover:border-white/20 transition-all"
+                  >
+                    <ExternalLink className="w-4 h-4" />
+                    View on Maps
+                  </a>
+                  <a
+                    href="https://www.google.com/maps/dir/?api=1&destination=373+Gangnam-daero+Seocho-gu+Seoul"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 px-4 py-2.5 bg-white text-black rounded-xl text-sm font-medium hover:bg-white/90 hover:shadow-lg hover:shadow-white/10 transition-all"
+                  >
+                    <Navigation className="w-4 h-4" />
+                    Get Directions
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Contact Form Section - Glassmorphism */}
       <section id="contact-form" className="bg-[#0A0A0A] py-12 md:py-[20px]">
@@ -299,88 +402,6 @@ const Contact = () => {
             </form>
           </div>
 
-          {/* Office Location Card - Enhanced with Google Maps */}
-          <div className="mt-8 rounded-2xl sm:rounded-3xl bg-white/[0.02] border border-white/[0.08] overflow-hidden">
-            <div className="grid md:grid-cols-2 gap-0">
-              {/* Google Maps Embed */}
-              <a 
-                href="https://maps.google.com/?q=Ium+Labs+373+Gangnam-daero+Seocho-gu+Seoul"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative group aspect-video md:aspect-auto md:min-h-[280px] overflow-hidden"
-              >
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.5!2d127.0265!3d37.4965!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a6f8b5555%3A0x5555555555555555!2s373%20Gangnam-daero%2C%20Seocho-gu%2C%20Seoul!5e0!3m2!1sen!2skr!4v1704067200000!5m2!1sen!2skr"
-                  className="absolute inset-0 w-full h-full pointer-events-none grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-500"
-                  style={{ border: 0, filter: 'invert(0.9) hue-rotate(180deg)' }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-300" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="px-4 py-2 bg-white/90 text-black text-sm font-medium rounded-full flex items-center gap-2">
-                    <ExternalLink className="w-4 h-4" />
-                    Open in Google Maps
-                  </span>
-                </div>
-              </a>
-
-              {/* Office Info */}
-              <div className="p-6 sm:p-8 flex flex-col justify-center">
-                {/* Company Badge */}
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-white/[0.05] flex items-center justify-center">
-                    <MapPin className="w-5 h-5 text-white/60" />
-                  </div>
-                  <div>
-                    <p className="text-white/40 text-xs uppercase tracking-wider">Corporate Office</p>
-                    <h3 className="text-white font-bold text-lg">Ium Labs</h3>
-                  </div>
-                </div>
-
-                {/* Address */}
-                <div className="space-y-4 mb-6">
-                  <div>
-                    <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Address</p>
-                    <p className="text-white text-sm leading-relaxed">
-                      373 Gangnam-daero, 10F<br />
-                      Seocho District, Seoul, Korea
-                    </p>
-                  </div>
-                  
-                  {/* Hours */}
-                  <div className="flex items-center gap-2 text-white/60">
-                    <Clock className="w-4 h-4" />
-                    <span className="text-sm">Mon - Fri, 10:00 AM - 7:00 PM KST</span>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="flex flex-wrap gap-3">
-                  <a
-                    href="https://maps.google.com/?q=Ium+Labs+373+Gangnam-daero+Seocho-gu+Seoul"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-4 py-2.5 bg-white/[0.05] border border-white/[0.1] rounded-xl text-white text-sm font-medium hover:bg-white/[0.1] hover:border-white/20 transition-all"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    View on Maps
-                  </a>
-                  <a
-                    href="https://www.google.com/maps/dir/?api=1&destination=373+Gangnam-daero+Seocho-gu+Seoul"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-4 py-2.5 bg-white text-black rounded-xl text-sm font-medium hover:bg-white/90 hover:shadow-lg hover:shadow-white/10 transition-all"
-                  >
-                    <Navigation className="w-4 h-4" />
-                    Get Directions
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
