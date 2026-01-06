@@ -238,7 +238,17 @@ const ContactFormSection = ({
               </div>
 
               {/* Submit Button */}
-              
+              <button
+                type="submit"
+                disabled={isSubmitting || completionPercentage < 100}
+                className={`w-full mt-4 py-4 text-body font-semibold transition-all duration-300 ${
+                  completionPercentage === 100
+                    ? 'bg-white text-black hover:bg-white/90'
+                    : 'bg-white/15 text-white/50 cursor-not-allowed'
+                }`}
+              >
+                {isSubmitting ? 'Sending...' : 'Send Message'}
+              </button>
             </form>
           </div>
         </div>
