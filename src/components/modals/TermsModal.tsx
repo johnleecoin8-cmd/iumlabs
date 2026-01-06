@@ -17,7 +17,7 @@ const sections = [
 const TermsModal = ({ isOpen, onClose }: TermsModalProps) => {
   return (
     <div
-      className={`fixed inset-0 z-[100] transition-all duration-500 ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center transition-all duration-300 ${
         isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
       }`}
     >
@@ -27,60 +27,42 @@ const TermsModal = ({ isOpen, onClose }: TermsModalProps) => {
         onClick={onClose}
       />
 
-      {/* Content */}
-      <div className="relative h-full flex flex-col">
-        {/* Back Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-6 left-6 z-10 flex items-center gap-2 text-foreground/70 hover:text-foreground transition-colors group"
-        >
-          <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-          <span className="text-sm">Back</span>
-        </button>
+      {/* Modal Content */}
+      <div className={`relative w-full max-w-2xl max-h-[85vh] mx-4 bg-background border border-border rounded-2xl shadow-2xl flex flex-col transition-all duration-300 ${
+        isOpen ? "scale-100 translate-y-0" : "scale-95 translate-y-4"
+      }`}>
+        {/* Header */}
+        <div className="flex items-center justify-between p-6 border-b border-border shrink-0">
+          <div>
+            <h1 className="text-xl md:text-2xl font-bold text-foreground">
+              Terms of Service
+            </h1>
+            <p className="text-muted-foreground text-sm mt-1">
+              Last updated: January 2025
+            </p>
+          </div>
+          <button
+            onClick={onClose}
+            className="w-10 h-10 rounded-full bg-muted/50 hover:bg-muted transition-colors flex items-center justify-center"
+          >
+            <X className="w-5 h-5 text-foreground" />
+          </button>
+        </div>
 
-        {/* Marquee Header */}
-        <div className="bg-muted/30 py-3 overflow-hidden border-b border-border/30 mt-14">
-          <div className="flex animate-marquee whitespace-nowrap">
-            {Array(10).fill(null).map((_, i) => (
-              <div key={i} className="flex items-center mx-4">
-                <span className="text-foreground text-sm mr-8">terms of service</span>
-                <span className="text-primary text-sm mr-8">legal agreement</span>
+        {/* Scrollable Content */}
+        <div className="flex-1 overflow-y-auto p-6">
+          <div className="space-y-4">
+            {sections.map((section) => (
+              <div
+                key={section.title}
+                className="p-5 rounded-xl border border-border hover:border-border/80 transition-all duration-300 hover:bg-muted/5"
+              >
+                <h2 className="text-base font-semibold text-foreground mb-2">{section.title}</h2>
+                <p className="text-muted-foreground text-sm leading-relaxed">{section.content}</p>
               </div>
             ))}
           </div>
         </div>
-
-        {/* Main Content */}
-        <div className="flex-1 container mx-auto px-6 py-12 overflow-y-auto">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
-              Terms of Service
-            </h1>
-            <p className="text-muted-foreground mb-10">
-              Last updated: January 2025
-            </p>
-            
-            <div className="space-y-4">
-              {sections.map((section) => (
-                <div
-                  key={section.title}
-                  className="p-6 rounded-xl border border-border hover:border-border/80 transition-all duration-300 hover:bg-muted/5"
-                >
-                  <h2 className="text-lg font-semibold text-foreground mb-3">{section.title}</h2>
-                  <p className="text-muted-foreground leading-relaxed">{section.content}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute bottom-8 right-8 w-12 h-12 rounded-full bg-muted/50 hover:bg-muted transition-colors flex items-center justify-center"
-        >
-          <X className="w-5 h-5 text-foreground" />
-        </button>
       </div>
     </div>
   );
