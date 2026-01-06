@@ -136,7 +136,6 @@ const galleryImages = [
   { src: bnbBg, alt: "BNB Chain Event", title: "BNB Chain Seoul", description: "BNB Chain community event in Seoul" },
   { src: bybitBg, alt: "Bybit Event", title: "Bybit Trading Event", description: "Bybit VIP trader meetup" },
   { src: kucoinBg, alt: "KuCoin Panel", title: "KuCoin Old School Panel", description: "KuCoin crypto OG panel discussion" },
-  { src: kucoinOldschool, alt: "KuCoin Old School", title: "KuCoin Old School Event", description: "Old school crypto meetup" },
   { src: mantraBg, alt: "Mantra Party", title: "Mantra RWA Party", description: "Mantra community celebration" },
   { src: megaethBg, alt: "MegaETH Launch", title: "MegaETH Launch", description: "MegaETH pre-launch event" },
   { src: saharaAiBg, alt: "Sahara AI Summit", title: "Sahara AI Summit", description: "AI x Web3 summit in Korea" },
