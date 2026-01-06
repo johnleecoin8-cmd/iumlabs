@@ -25,7 +25,7 @@ import FloatingContactButton from "@/components/FloatingContactButton";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
 
 // Import assets
-import teamPhoto from "@/assets/team-photo.png";
+import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
 
 const applicationSchema = z.object({
   name: z.string().min(1, "Please enter your name"),
@@ -260,8 +260,8 @@ const Jobs = () => {
                 </div>
                 <div className="relative">
                   <img
-                    src={teamPhoto}
-                    alt="Ium Labs Team"
+                    src={seoulBridgeNight}
+                    alt="Seoul Bridge at Night"
                     className="w-full h-auto rounded-2xl object-cover"
                   />
                   <div className="absolute -bottom-3 -right-3 w-full h-full bg-white/5 rounded-2xl -z-10" />
