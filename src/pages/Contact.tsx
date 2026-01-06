@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { Mail, MapPin, Phone, Send, Calendar, ArrowUpRight, ArrowRight, Linkedin, Globe, BarChart3, Rocket } from "lucide-react";
+import { Mail, MapPin, Send, Calendar, ArrowUpRight, ArrowRight, Linkedin, Globe, BarChart3, Rocket } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
@@ -14,11 +14,6 @@ const contactInfo = [{
   label: "Email",
   value: brand.email,
   link: `mailto:${brand.email}`
-}, {
-  icon: Phone,
-  label: "Phone",
-  value: brand.phone,
-  link: `tel:${brand.phone.replace(/\s/g, '')}`
 }, {
   icon: Send,
   label: "Telegram",
