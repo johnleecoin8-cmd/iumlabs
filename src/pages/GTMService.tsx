@@ -205,20 +205,20 @@ const GTMService = () => {
         <div className="border-t border-white/10">
           <SectionHeader title="4-Week Program" badge="GTM Journey" />
           
-          <div className="py-12 md:py-16">
-            <div className="container mx-auto px-6 lg:px-16">
+          <div className="py-8 sm:py-12 md:py-16">
+            <div className="container mx-auto px-3 sm:px-6 lg:px-16">
               {/* Regulatory Expertise - Compact Badges */}
-              <div className="mb-10">
-                <div className="flex flex-wrap gap-2">
+              <div className="mb-6 sm:mb-10">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {regulatoryFramework.map((item) => {
                     const Icon = item.icon;
                     return (
                       <div
                         key={item.title}
-                        className="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full"
+                        className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full"
                       >
-                        <Icon className="w-3.5 h-3.5 text-emerald-400" />
-                        <span className="text-xs font-medium text-emerald-400">{item.title}</span>
+                        <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400" />
+                        <span className="text-[10px] sm:text-xs font-medium text-emerald-400">{item.title}</span>
                       </div>
                     );
                   })}
@@ -226,14 +226,14 @@ const GTMService = () => {
               </div>
               
               {/* 4-Week Journey Content */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 items-start">
                 {/* Left - Phase Navigation */}
                 <div>
-                  <p className="text-white/60 text-sm leading-relaxed mb-5">
+                  <p className="text-white/60 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-5">
                     A 4-week program from market analysis to successful launch, with clear deliverables at each stage.
                   </p>
                   
-                  <div className="space-y-2">
+                  <div className="space-y-1.5 sm:space-y-2">
                     {journeyPhases.map((phase, index) => {
                       const Icon = phase.icon;
                       const isActive = activePhase === index;
@@ -242,23 +242,23 @@ const GTMService = () => {
                         <button
                           key={phase.week}
                           onClick={() => setActivePhase(index)}
-                          className={`w-full text-left p-3 sm:p-4 rounded-xl border transition-all duration-300 hover:translate-x-1 active:scale-[0.98] ${
+                          className={`w-full text-left p-2.5 sm:p-4 rounded-lg sm:rounded-xl border transition-all duration-300 hover:translate-x-1 active:scale-[0.98] ${
                             isActive 
                               ? 'bg-emerald-500/10 border-emerald-500/30' 
                               : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
                           }`}
                         >
-                          <div className="flex items-center gap-3">
-                            <div className={`w-9 h-9 rounded-lg flex items-center justify-center ${
+                          <div className="flex items-center gap-2 sm:gap-3">
+                            <div className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center ${
                               isActive ? 'bg-emerald-500/20' : 'bg-white/10'
                             }`}>
-                              <Icon className={`w-4 h-4 ${isActive ? 'text-emerald-400' : 'text-white/60'}`} />
+                              <Icon className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${isActive ? 'text-emerald-400' : 'text-white/60'}`} />
                             </div>
                             <div>
-                              <span className={`text-xs font-medium ${isActive ? 'text-emerald-400' : 'text-white/40'}`}>
+                              <span className={`text-[10px] sm:text-xs font-medium ${isActive ? 'text-emerald-400' : 'text-white/40'}`}>
                                 {phase.week}
                               </span>
-                              <h4 className={`text-sm font-semibold ${isActive ? 'text-white' : 'text-white/70'}`}>
+                              <h4 className={`text-xs sm:text-sm font-semibold ${isActive ? 'text-white' : 'text-white/70'}`}>
                                 {phase.title}
                               </h4>
                             </div>
@@ -272,40 +272,40 @@ const GTMService = () => {
                 {/* Right - Phase Details */}
                 <div
                   key={activePhase}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-4 sm:p-5 md:p-6"
+                  className="bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 md:p-6"
                 >
-                  <div className="flex items-center gap-2.5 mb-4">
-                    <div className="w-9 h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                  <div className="flex items-center gap-2 sm:gap-2.5 mb-3 sm:mb-4">
+                    <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                       {(() => {
                         const Icon = journeyPhases[activePhase].icon;
-                        return <Icon className="w-4 h-4 text-emerald-400" />;
+                        return <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />;
                       })()}
                     </div>
                     <div>
-                      <span className="text-[10px] text-emerald-400 font-medium">{journeyPhases[activePhase].week}</span>
-                      <h3 className="text-base font-bold text-white">{journeyPhases[activePhase].title}</h3>
+                      <span className="text-[9px] sm:text-[10px] text-emerald-400 font-medium">{journeyPhases[activePhase].week}</span>
+                      <h3 className="text-sm sm:text-base font-bold text-white">{journeyPhases[activePhase].title}</h3>
                     </div>
                   </div>
 
-                  <div className="mb-5">
-                    <h4 className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2">Activities</h4>
-                    <ul className="space-y-1.5">
+                  <div className="mb-4 sm:mb-5">
+                    <h4 className="text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-wider mb-1.5 sm:mb-2">Activities</h4>
+                    <ul className="space-y-1 sm:space-y-1.5">
                       {journeyPhases[activePhase].activities.map((activity, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-white/70">
-                          <CheckCircle className="w-3.5 h-3.5 text-emerald-400 mt-0.5 flex-shrink-0" />
-                          <span className="text-sm">{activity}</span>
+                        <li key={idx} className="flex items-start gap-1.5 sm:gap-2 text-white/70">
+                          <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                          <span className="text-xs sm:text-sm">{activity}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="pt-5 border-t border-white/10">
-                    <h4 className="text-xs font-medium text-white/50 uppercase tracking-wider mb-2">Deliverables</h4>
-                    <div className="flex flex-wrap gap-2">
+                  <div className="pt-4 sm:pt-5 border-t border-white/10">
+                    <h4 className="text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-wider mb-1.5 sm:mb-2">Deliverables</h4>
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
                       {journeyPhases[activePhase].deliverables.map((deliverable, idx) => (
                         <span 
                           key={idx}
-                          className="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-medium rounded-lg"
+                          className="px-2 sm:px-2.5 py-0.5 sm:py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] sm:text-xs font-medium rounded-md sm:rounded-lg"
                         >
                           {deliverable}
                         </span>
@@ -314,18 +314,18 @@ const GTMService = () => {
                   </div>
 
                   {/* Expected Metrics */}
-                  <div className="mt-5 pt-5 border-t border-white/10">
-                    <h4 className="text-xs font-medium text-white/50 uppercase tracking-wider mb-3">Expected Metrics</h4>
-                    <div className="grid grid-cols-2 gap-3">
+                  <div className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-white/10">
+                    <h4 className="text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-wider mb-2 sm:mb-3">Expected Metrics</h4>
+                    <div className="grid grid-cols-2 gap-2 sm:gap-3">
                       {journeyPhases[activePhase].metrics.map((metric, idx) => {
                         const MetricIcon = metric.icon;
                         return (
-                          <div key={idx} className="p-3 bg-white/5 rounded-lg">
-                            <div className="flex items-center gap-2 mb-1">
-                              <MetricIcon className="w-4 h-4 text-emerald-400" />
-                              <span className="text-xs text-white/40">{metric.label}</span>
+                          <div key={idx} className="p-2 sm:p-3 bg-white/5 rounded-lg">
+                            <div className="flex items-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
+                              <MetricIcon className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-400" />
+                              <span className="text-[10px] sm:text-xs text-white/40">{metric.label}</span>
                             </div>
-                            <span className="text-lg font-bold text-white">{metric.value}</span>
+                            <span className="text-sm sm:text-lg font-bold text-white">{metric.value}</span>
                           </div>
                         );
                       })}
