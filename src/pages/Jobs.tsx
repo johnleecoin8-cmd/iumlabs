@@ -331,6 +331,26 @@ const Jobs = () => {
         </div>
       </main>
 
+      {/* Talent Wanted Marquee */}
+      <section className="bg-white overflow-hidden" id="marquee">
+        <motion.div
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="flex whitespace-nowrap py-5 md:py-6"
+        >
+          {[...Array(2)].map((_, i) => (
+            <span key={i} className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-black flex items-center">
+              {[...Array(8)].map((_, j) => (
+                <span key={j} className="flex items-center">
+                  <span>Talent Wanted</span>
+                  <span className="mx-6 md:mx-10 w-2 h-2 md:w-3 md:h-3 bg-black rounded-full" />
+                </span>
+              ))}
+            </span>
+          ))}
+        </motion.div>
+      </section>
+
       {/* 01. Why Join Us Section */}
       <section className="bg-surface-odd" id="about">
         <div className="border-t border-white/10">
@@ -368,26 +388,6 @@ const Jobs = () => {
             </div>
           </AnimatedSection>
         </div>
-      </section>
-
-      {/* Talent Wanted Marquee */}
-      <section className="bg-white overflow-hidden" id="marquee">
-        <motion.div
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="flex whitespace-nowrap py-5 md:py-6"
-        >
-          {[...Array(2)].map((_, i) => (
-            <span key={i} className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-black flex items-center">
-              {[...Array(8)].map((_, j) => (
-                <span key={j} className="flex items-center">
-                  <span>Talent Wanted</span>
-                  <span className="mx-6 md:mx-10 w-2 h-2 md:w-3 md:h-3 bg-black rounded-full" />
-                </span>
-              ))}
-            </span>
-          ))}
-        </motion.div>
       </section>
 
       {/* 02. Positions Section */}
