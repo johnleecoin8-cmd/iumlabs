@@ -105,20 +105,47 @@ const faqItems: FAQItem[] = [
 ];
 
 const kolProfiles = [
-  // Global KOLs
+  // Global KOLs - Tier 1
   { name: "Pentoshi", handle: "@Pentosh1", followers: "610K", expertise: "Trading" },
   { name: "Hsaka", handle: "@HsakaTrades", followers: "450K", expertise: "TA" },
-  { name: "Route 2 FI", handle: "@Route2FI", followers: "280K", expertise: "DeFi" },
   { name: "Daan Crypto", handle: "@DaanCrypto", followers: "380K", expertise: "Trading" },
   { name: "ColdBloodShill", handle: "@ColdBloodShill", followers: "310K", expertise: "TA" },
   { name: "Tetranode", handle: "@Tetranode", followers: "310K", expertise: "DeFi" },
-  // Korean KOLs
-  { name: "CryptoQuant", handle: "@cryptoquant_com", followers: "280K", expertise: "On-chain Analysis" },
-  { name: "Phyrex", handle: "@Phyrex_Ni", followers: "333K", expertise: "Data Analysis" },
+  { name: "Route 2 FI", handle: "@Route2FI", followers: "280K", expertise: "DeFi" },
+  { name: "Cobie", handle: "@coaborting", followers: "740K", expertise: "Commentary" },
+  { name: "Bluntz", handle: "@Bluntz_Capital", followers: "290K", expertise: "TA" },
+  { name: "Crypto Birb", handle: "@crypto_birb", followers: "710K", expertise: "TA" },
+  { name: "Tyler", handle: "@ApeDurden", followers: "185K", expertise: "Trading" },
+  // Global KOLs - Tier 2
+  { name: "Kaleo", handle: "@CryptoKaleo", followers: "580K", expertise: "Trading" },
+  { name: "SmartContracter", handle: "@SmartContracter", followers: "250K", expertise: "TA" },
+  { name: "Loomdart", handle: "@loomdart", followers: "180K", expertise: "DeFi" },
+  { name: "Ansem", handle: "@blaborance", followers: "520K", expertise: "Memecoins" },
+  { name: "Crypto Tony", handle: "@CryptoTony__", followers: "410K", expertise: "TA" },
+  { name: "The DeFi Edge", handle: "@thedefiedge", followers: "390K", expertise: "DeFi" },
+  { name: "Miles Deutscher", handle: "@milesdeutscher", followers: "560K", expertise: "Research" },
+  { name: "Crypto Rover", handle: "@rovercrc", followers: "480K", expertise: "News" },
+  // Global KOLs - Tier 3
+  { name: "Crypto Rand", handle: "@crypto_rand", followers: "620K", expertise: "Trading" },
+  { name: "Lark Davis", handle: "@TheCryptoLark", followers: "510K", expertise: "Education" },
+  { name: "Jacob Bury", handle: "@JacobCryptoBury", followers: "170K", expertise: "Research" },
+  { name: "Crypto Banter", handle: "@cryptobanter", followers: "680K", expertise: "News" },
+  { name: "DeFi Dad", handle: "@DeFi_Dad", followers: "140K", expertise: "DeFi" },
+  { name: "Crypto Wendy", handle: "@CryptoWendyO", followers: "320K", expertise: "Education" },
+  // Korean KOLs - Tier 1
+  { name: "CryptoQuant", handle: "@cryptoquant_com", followers: "280K", expertise: "On-chain" },
+  { name: "Phyrex", handle: "@Phyrex_Ni", followers: "333K", expertise: "Data" },
   { name: "Hebi", handle: "@hebi555", followers: "377K", expertise: "Trading" },
   { name: "KuiGas", handle: "@KuiGas", followers: "96K", expertise: "Research" },
   { name: "Coinboy", handle: "@coinboy717", followers: "50K", expertise: "Trading" },
   { name: "Nakju", handle: "@nakjumon", followers: "18.7K", expertise: "Trading" },
+  // Korean KOLs - Tier 2
+  { name: "코인니스", handle: "@Coinness_ko", followers: "85K", expertise: "News" },
+  { name: "비트코인갤러리", handle: "@btcgall", followers: "45K", expertise: "Community" },
+  { name: "코인연구", handle: "@coin_study", followers: "32K", expertise: "Research" },
+  { name: "크립토문", handle: "@cryptomoon_kr", followers: "28K", expertise: "Trading" },
+  { name: "디파이코리아", handle: "@defi_korea", followers: "22K", expertise: "DeFi" },
+  { name: "NFT서울", handle: "@nft_seoul", followers: "19K", expertise: "NFT" },
 ];
 
 const InfluencerService = () => {
