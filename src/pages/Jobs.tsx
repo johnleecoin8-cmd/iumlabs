@@ -23,7 +23,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { ArrowRight, Users, TrendingUp, Globe, Award, Briefcase, GraduationCap, Clock, Wallet, BookOpen, Coffee } from "lucide-react";
+import { ArrowRight, Users, TrendingUp, Globe, Award, Briefcase, GraduationCap, Clock, Wallet, BookOpen, Coffee, MapPin, DollarSign } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -55,6 +55,8 @@ const positions = [
     title: "Researcher", 
     description: "Responsible for Web3 market research and in-depth analysis. Identify the latest trends in the blockchain ecosystem and derive insights.",
     tags: ["Market Research", "Data Analysis", "Report Writing"],
+    salary: "₩50M - 70M / year",
+    workType: "Hybrid (Seoul Office + Remote)",
     jobDescription: [
       "Conduct comprehensive Web3 market trends and project research",
       "Write data-driven analysis reports and investment theses",
@@ -75,6 +77,8 @@ const positions = [
     title: "Growth Manager", 
     description: "Develop and execute strategies for global Web3 projects entering the Korean market. Lead community building and marketing efforts.",
     tags: ["GTM Strategy", "Community", "Marketing"],
+    salary: "₩60M - 90M / year",
+    workType: "Hybrid (Seoul Office + Remote)",
     jobDescription: [
       "Develop and execute GTM strategies for Korean market entry",
       "Build and manage Korean crypto communities (Discord, Telegram, KakaoTalk)",
@@ -95,6 +99,8 @@ const positions = [
     title: "Open Position", 
     description: "If you have passion for Web3, feel free to apply. We create various roles together with talented individuals.",
     tags: ["Web3 Passion", "Self-Driven", "Creative"],
+    salary: "Negotiable",
+    workType: "Flexible (Remote-first)",
     jobDescription: [
       "We're always looking for exceptional talent",
       "Tell us what you're passionate about and how you can contribute",
@@ -620,17 +626,55 @@ const Jobs = () => {
 
       {/* Position Detail Dialog */}
       <Dialog open={!!selectedPosition} onOpenChange={(open) => !open && setSelectedPosition(null)}>
-        <DialogContent className="bg-surface-odd border-white/10 max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogContent className="bg-gradient-to-b from-surface-odd to-surface-base border-white/10 max-w-2xl max-h-[90vh] overflow-y-auto animate-scale-in">
           {selectedPosition && (
-            <>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
               <DialogHeader>
-                <div className="flex items-center gap-4 mb-2">
-                  <span className="text-5xl">{selectedPosition.emoji}</span>
-                  <DialogTitle className="text-2xl md:text-3xl font-bold text-white">
-                    {selectedPosition.title}
-                  </DialogTitle>
+                <div className="flex items-center gap-4 mb-4">
+                  <motion.span 
+                    className="text-6xl"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
+                  >
+                    {selectedPosition.emoji}
+                  </motion.span>
+                  <div>
+                    <DialogTitle className="text-2xl md:text-3xl font-bold text-white">
+                      {selectedPosition.title}
+                    </DialogTitle>
+                    <p className="text-white/50 text-sm mt-1">{selectedPosition.description}</p>
+                  </div>
                 </div>
-                <div className="flex flex-wrap gap-2 mt-4">
+
+                {/* Salary & Work Type Pills */}
+                <motion.div 
+                  className="flex flex-wrap gap-3 mt-4"
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.15 }}
+                >
+                  <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full">
+                    <DollarSign className="w-4 h-4" />
+                    <span className="text-sm font-medium">{selectedPosition.salary}</span>
+                  </div>
+                  <div className="flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 px-4 py-2 rounded-full">
+                    <MapPin className="w-4 h-4" />
+                    <span className="text-sm font-medium">{selectedPosition.workType}</span>
+                  </div>
+                </motion.div>
+
+                {/* Tags */}
+                <motion.div 
+                  className="flex flex-wrap gap-2 mt-4"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
                   {selectedPosition.tags.map((tag, idx) => (
                     <span
                       key={idx}
@@ -639,56 +683,86 @@ const Jobs = () => {
                       {tag}
                     </span>
                   ))}
-                </div>
+                </motion.div>
               </DialogHeader>
 
-              <div className="space-y-6 mt-6">
+              <div className="space-y-6 mt-8">
                 {/* Job Description */}
-                <div>
-                  <h4 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-                    <Briefcase className="w-5 h-5 text-white/50" />
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.25 }}
+                  className="bg-white/5 rounded-2xl p-6 border border-white/10"
+                >
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+                      <Briefcase className="w-4 h-4 text-white/70" />
+                    </div>
                     Job Description
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-3">
                     {selectedPosition.jobDescription.map((item, idx) => (
-                      <li key={idx} className="text-white/60 text-sm flex items-start gap-2">
-                        <span className="text-white/30 mt-1">•</span>
+                      <motion.li 
+                        key={idx} 
+                        className="text-white/60 text-sm flex items-start gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.3 + idx * 0.05 }}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-white/30 mt-2 flex-shrink-0" />
                         {item}
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
 
                 {/* Qualifications */}
-                <div>
-                  <h4 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
-                    <GraduationCap className="w-5 h-5 text-white/50" />
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35 }}
+                  className="bg-white/5 rounded-2xl p-6 border border-white/10"
+                >
+                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+                      <GraduationCap className="w-4 h-4 text-white/70" />
+                    </div>
                     Qualifications
                   </h4>
-                  <ul className="space-y-2">
+                  <ul className="space-y-3">
                     {selectedPosition.qualifications.map((item, idx) => (
-                      <li key={idx} className="text-white/60 text-sm flex items-start gap-2">
-                        <span className="text-white/30 mt-1">•</span>
+                      <motion.li 
+                        key={idx} 
+                        className="text-white/60 text-sm flex items-start gap-3"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4 + idx * 0.05 }}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-white/30 mt-2 flex-shrink-0" />
                         {item}
-                      </li>
+                      </motion.li>
                     ))}
                   </ul>
-                </div>
+                </motion.div>
 
                 {/* Apply Button */}
-                <a
+                <motion.a
                   href="#apply"
                   onClick={() => {
                     setSelectedPosition(null);
                     handleInputChange("position", selectedPosition.title === "Open Position" ? "Other" : selectedPosition.title);
                   }}
-                  className="w-full inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-colors mt-4"
+                  className="w-full inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-all hover:scale-[1.02] active:scale-[0.98] mt-2"
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  whileHover={{ boxShadow: "0 0 30px rgba(255,255,255,0.2)" }}
                 >
                   Apply for this Position
                   <ArrowRight className="w-5 h-5" />
-                </a>
+                </motion.a>
               </div>
-            </>
+            </motion.div>
           )}
         </DialogContent>
       </Dialog>
