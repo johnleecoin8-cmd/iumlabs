@@ -444,25 +444,25 @@ const ServicePageLayout = ({
                     key={step.number}
                     className="group relative p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/5"
                   >
-                    {/* Arrow indicator between steps */}
+                    {/* Arrow indicator between steps - Desktop */}
                     {!isLast && (
                       <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
-                        <div 
-                          className="w-8 h-8 rounded-full bg-[#0F0F0F] border border-white/10 flex items-center justify-center"
-                        >
-                          <ArrowRight className="w-4 h-4 text-white/40" />
-                        </div>
+                        <ArrowRight 
+                          className="w-6 h-6 drop-shadow-lg" 
+                          style={{ color: accentColor }}
+                          strokeWidth={2.5}
+                        />
                       </div>
                     )}
                     
-                    {/* Mobile/Tablet arrow (vertical) */}
+                    {/* Arrow indicator between steps - Mobile/Tablet */}
                     {!isLast && (
                       <div className="flex lg:hidden absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
-                        <div 
-                          className="w-8 h-8 rounded-full bg-[#0F0F0F] border border-white/10 flex items-center justify-center"
-                        >
-                          <ArrowRight className="w-4 h-4 text-white/40 rotate-90" />
-                        </div>
+                        <ArrowRight 
+                          className="w-6 h-6 rotate-90 drop-shadow-lg" 
+                          style={{ color: accentColor }}
+                          strokeWidth={2.5}
+                        />
                       </div>
                     )}
                     
