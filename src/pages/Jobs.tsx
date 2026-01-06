@@ -393,29 +393,38 @@ const Jobs = () => {
             </div>
           </AnimatedSection>
           
-          <AnimatedSection delay={100}>
-            <div className="px-4 md:px-10 py-10 md:py-16">
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                {benefits.map((benefit, idx) => {
-                  const Icon = benefit.icon;
-                  return (
-                    <div
-                      key={idx}
-                      className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 group hover:bg-white/10 transition-colors"
-                    >
-                      <Icon className="w-6 h-6 text-white/40 mb-4" />
-                      <h4 className="text-sm md:text-base font-semibold text-white mb-2">
+          {/* Benefit Rows */}
+          {benefits.map((benefit, idx) => {
+            const Icon = benefit.icon;
+            return (
+              <div
+                key={idx}
+                className="border-b border-white/10 group hover:bg-white/5 transition-all"
+              >
+                <div className="px-4 md:px-10 py-5 md:py-6 flex items-center justify-between gap-6">
+                  {/* Left: Number + Title */}
+                  <div className="flex items-center gap-6 md:gap-10 flex-1 min-w-0">
+                    <span className="text-2xl md:text-4xl font-bold text-white/20 group-hover:text-white/40 transition-colors">
+                      0{idx + 1}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <h4 className="text-xl md:text-2xl font-bold text-white group-hover:text-white/90 transition-colors">
                         {benefit.title}
                       </h4>
-                      <p className="text-white/50 text-sm leading-relaxed">
+                      <p className="text-white/40 text-sm md:text-base mt-1 hidden md:block">
                         {benefit.text}
                       </p>
                     </div>
-                  );
-                })}
+                  </div>
+                  
+                  {/* Right: Icon */}
+                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-all flex-shrink-0">
+                    <Icon className="w-5 h-5 md:w-6 md:h-6 text-white/50 group-hover:text-white/70 transition-colors" />
+                  </div>
+                </div>
               </div>
-            </div>
-          </AnimatedSection>
+            );
+          })}
         </div>
       </section>
 
