@@ -67,10 +67,8 @@ const clientLogos = [
 const applicationSchema = z.object({
   name: z.string().min(1, "Please enter your name"),
   email: z.string().email("Please enter a valid email"),
-  phone: z.string().optional(),
   telegram: z.string().optional(),
   linkedinUrl: z.string().optional(),
-  portfolioUrl: z.string().optional(),
   position: z.string().min(1, "Please select a position"),
   coverLetter: z.string().optional(),
   privacyAgreed: z.literal(true, {
@@ -172,41 +170,41 @@ const Jobs = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phone: "",
     telegram: "",
     linkedinUrl: "",
-    portfolioUrl: "",
     position: "",
     coverLetter: "",
-    privacyAgreed: false as boolean,
+    privacyAgreed: false,
   });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [selectedPosition, setSelectedPosition] = useState<typeof positions[0] | null>(null);
 
-  const handleInputChange = (field: keyof ApplicationFormData, value: string | boolean) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+  const [selectedPosition, setSelectedPosition] = useState<typeof positions[0] | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (field: string, value: string | boolean) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const result = applicationSchema.safeParse(formData);
-    if (!result.success) {
-      const firstError = result.error.errors[0];
-      toast.error(firstError.message);
-      return;
-    }
-
     setIsSubmitting(true);
 
     try {
+      const result = applicationSchema.safeParse(formData);
+
+      if (!result.success) {
+        const firstError = result.error.errors[0];
+        toast.error(firstError.message);
+        setIsSubmitting(false);
+        return;
+      }
+
       const { error } = await supabase.from("job_applications").insert({
         name: result.data.name,
         email: result.data.email,
-        phone: result.data.phone || null,
+        phone: null,
         telegram: result.data.telegram || null,
         linkedin_url: result.data.linkedinUrl || null,
-        portfolio_url: result.data.portfolioUrl || null,
+        portfolio_url: null,
         position: result.data.position,
         cover_letter: result.data.coverLetter || null,
       });
@@ -217,10 +215,8 @@ const Jobs = () => {
       setFormData({
         name: "",
         email: "",
-        phone: "",
         telegram: "",
         linkedinUrl: "",
-        portfolioUrl: "",
         position: "",
         coverLetter: "",
         privacyAgreed: false,
@@ -590,16 +586,10 @@ const Jobs = () => {
                       onChange={(e) => handleInputChange("email", e.target.value)}
                       className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30"
                     />
-                    <Input
-                      placeholder="Phone"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange("phone", e.target.value)}
-                      className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30"
-                    />
                   </div>
 
-                  {/* Row 2: Telegram, LinkedIn, Portfolio */}
-                  <div className="grid md:grid-cols-3 gap-4">
+                  {/* Row 2: Telegram, LinkedIn */}
+                  <div className="grid md:grid-cols-2 gap-4">
                     <Input
                       placeholder="Telegram"
                       value={formData.telegram}
@@ -610,12 +600,6 @@ const Jobs = () => {
                       placeholder="LinkedIn / Twitter URL"
                       value={formData.linkedinUrl}
                       onChange={(e) => handleInputChange("linkedinUrl", e.target.value)}
-                      className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30"
-                    />
-                    <Input
-                      placeholder="Portfolio URL"
-                      value={formData.portfolioUrl}
-                      onChange={(e) => handleInputChange("portfolioUrl", e.target.value)}
                       className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30"
                     />
                   </div>
@@ -629,9 +613,11 @@ const Jobs = () => {
                       <SelectValue placeholder="Select a position *" />
                     </SelectTrigger>
                     <SelectContent className="bg-surface-odd border-white/10">
-                      <SelectItem value="Researcher" className="text-white">Researcher</SelectItem>
-                      <SelectItem value="Growth Manager" className="text-white">Growth Manager</SelectItem>
-                      <SelectItem value="Other" className="text-white">Other / Open Application</SelectItem>
+                      {positions.map((pos) => (
+                        <SelectItem key={pos.title} value={pos.title} className="text-white">
+                          {pos.title}
+                        </SelectItem>
+                      ))}
                     </SelectContent>
                   </Select>
 
