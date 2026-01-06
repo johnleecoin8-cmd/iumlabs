@@ -23,7 +23,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { ArrowRight, Users, TrendingUp, Globe, Award, Briefcase, GraduationCap, Clock, Wallet, BookOpen, Coffee, MapPin, DollarSign } from "lucide-react";
+import { ArrowRight, Users, TrendingUp, Globe, Award, Briefcase, GraduationCap, Clock, Wallet, BookOpen, Coffee, MapPin, DollarSign, Search } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -51,7 +51,7 @@ type ApplicationFormData = z.infer<typeof applicationSchema>;
 
 const positions = [
   { 
-    emoji: "🔍", 
+    icon: Search,
     title: "Researcher", 
     description: "Responsible for Web3 market research and in-depth analysis. Identify the latest trends in the blockchain ecosystem and derive insights.",
     tags: ["Market Research", "Data Analysis", "Report Writing"],
@@ -73,7 +73,7 @@ const positions = [
     ]
   },
   { 
-    emoji: "📈", 
+    icon: TrendingUp,
     title: "Growth Manager", 
     description: "Develop and execute strategies for global Web3 projects entering the Korean market. Lead community building and marketing efforts.",
     tags: ["GTM Strategy", "Community", "Marketing"],
@@ -95,7 +95,7 @@ const positions = [
     ]
   },
   { 
-    emoji: "💼", 
+    icon: Briefcase,
     title: "Open Position", 
     description: "If you have passion for Web3, feel free to apply. We create various roles together with talented individuals.",
     tags: ["Web3 Passion", "Self-Driven", "Creative"],
@@ -357,35 +357,40 @@ const Jobs = () => {
           <AnimatedSection delay={100}>
             <div className="px-4 md:px-10 py-10 md:py-16">
               <div className="grid md:grid-cols-3 gap-4 md:gap-6">
-                {positions.map((pos, idx) => (
-                  <div
-                    key={idx}
-                    onClick={() => setSelectedPosition(pos)}
-                    className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col group hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
-                  >
-                    <span className="text-4xl mb-4">{pos.emoji}</span>
-                    <h3 className="text-xl font-bold text-white mb-3">
-                      {pos.title}
-                    </h3>
-                    <p className="text-white/50 text-sm leading-relaxed flex-1 mb-6">
-                      {pos.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-6">
-                      {pos.tags.map((tag, tagIdx) => (
-                        <span
-                          key={tagIdx}
-                          className="text-xs text-white/40 px-2 py-1 border border-white/10 rounded-full"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                {positions.map((pos, idx) => {
+                  const Icon = pos.icon;
+                  return (
+                    <div
+                      key={idx}
+                      onClick={() => setSelectedPosition(pos)}
+                      className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col group hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
+                    >
+                      <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-5 group-hover:bg-white/15 transition-colors">
+                        <Icon className="w-6 h-6 text-white/70" />
+                      </div>
+                      <h3 className="text-xl font-bold text-white mb-3">
+                        {pos.title}
+                      </h3>
+                      <p className="text-white/50 text-sm leading-relaxed flex-1 mb-6">
+                        {pos.description}
+                      </p>
+                      <div className="flex flex-wrap gap-2 mb-6">
+                        {pos.tags.map((tag, tagIdx) => (
+                          <span
+                            key={tagIdx}
+                            className="text-xs text-white/40 px-2 py-1 border border-white/10 rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <span className="inline-flex items-center gap-2 text-white font-medium group-hover:text-white/80 transition-colors">
+                        View Details
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </span>
                     </div>
-                    <span className="inline-flex items-center gap-2 text-white font-medium group-hover:text-white/80 transition-colors">
-                      View Details
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </span>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           </AnimatedSection>
@@ -634,20 +639,20 @@ const Jobs = () => {
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <DialogHeader>
-                <div className="flex items-center gap-4 mb-4">
-                  <motion.span 
-                    className="text-6xl"
+                <div className="flex items-start gap-5 mb-4">
+                  <motion.div 
+                    className="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center flex-shrink-0"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.1, type: "spring", stiffness: 200 }}
                   >
-                    {selectedPosition.emoji}
-                  </motion.span>
+                    <selectedPosition.icon className="w-7 h-7 text-white/80" />
+                  </motion.div>
                   <div>
                     <DialogTitle className="text-2xl md:text-3xl font-bold text-white">
                       {selectedPosition.title}
                     </DialogTitle>
-                    <p className="text-white/50 text-sm mt-1">{selectedPosition.description}</p>
+                    <p className="text-white/50 text-sm mt-2 leading-relaxed">{selectedPosition.description}</p>
                   </div>
                 </div>
 
