@@ -175,20 +175,20 @@ const InfluencerService = () => {
         <div className="border-t border-white/10">
           <SectionHeader title="KOL Network" badge="Featured Creators" />
 
-          <div className="py-10 md:py-14">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-16">
+          <div className="py-6 sm:py-10 md:py-14">
+            <div className="container mx-auto px-3 sm:px-6 lg:px-16">
               {/* KOL Grid - First 24 (6x4) visible */}
-              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
                 {kolProfiles.slice(0, 24).map((kol, index) => (
                   <a
                     key={index}
                     href={`https://x.com/${kol.handle.replace('@', '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative p-4 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm group cursor-pointer block hover:border-amber-500/50 transition-all hover:scale-[1.02]"
+                    className="relative p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm group cursor-pointer block hover:border-amber-500/50 transition-all hover:scale-[1.02] active:scale-[0.98]"
                   >
                     {/* Avatar */}
-                    <div className="w-14 h-14 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-amber-400 transition-colors">
+                    <div className="w-10 h-10 sm:w-14 sm:h-14 mx-auto mb-2 sm:mb-3 rounded-full overflow-hidden border-2 border-white/20 group-hover:border-amber-400 transition-colors">
                       <img 
                         src={`https://unavatar.io/twitter/${kol.handle.replace('@', '')}`}
                         alt={kol.name}
@@ -199,12 +199,12 @@ const InfluencerService = () => {
                       />
                     </div>
 
-                    <div className="text-sm font-medium text-center mb-0.5 truncate">{kol.name}</div>
-                    <div className="text-[10px] text-amber-400 text-center mb-1">{kol.handle}</div>
-                    <div className="text-xs text-white/60 text-center mb-2">{kol.followers}</div>
+                    <div className="text-xs sm:text-sm font-medium text-center mb-0.5 truncate">{kol.name}</div>
+                    <div className="text-[9px] sm:text-[10px] text-amber-400 text-center mb-0.5 sm:mb-1 truncate">{kol.handle}</div>
+                    <div className="text-[10px] sm:text-xs text-white/60 text-center mb-1.5 sm:mb-2">{kol.followers}</div>
                     
                     <div 
-                      className="text-[9px] px-2 py-1 rounded-full text-center mx-auto w-fit"
+                      className="text-[8px] sm:text-[9px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-center mx-auto w-fit"
                       style={{ backgroundColor: `${ACCENT_COLOR}20`, color: ACCENT_COLOR }}
                     >
                       {kol.expertise}
@@ -214,25 +214,25 @@ const InfluencerService = () => {
               </div>
 
               {/* Faded KOL Grid - Remaining KOLs */}
-              <div className="relative mt-4">
-                <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 opacity-30 blur-[2px] pointer-events-none select-none">
+              <div className="relative mt-3 sm:mt-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4 opacity-30 blur-[2px] pointer-events-none select-none">
                   {kolProfiles.slice(24).map((kol, index) => (
                     <div
                       key={index}
-                      className="relative p-4 rounded-2xl border border-white/10 bg-white/5"
+                      className="relative p-2.5 sm:p-4 rounded-xl sm:rounded-2xl border border-white/10 bg-white/5"
                     >
-                      <div className="w-14 h-14 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white/20">
+                      <div className="w-10 h-10 sm:w-14 sm:h-14 mx-auto mb-2 sm:mb-3 rounded-full overflow-hidden border-2 border-white/20">
                         <img 
                           src={`https://unavatar.io/twitter/${kol.handle.replace('@', '')}`}
                           alt={kol.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="text-sm font-medium text-center mb-0.5 truncate">{kol.name}</div>
-                      <div className="text-[10px] text-amber-400 text-center mb-1">{kol.handle}</div>
-                      <div className="text-xs text-white/60 text-center mb-2">{kol.followers}</div>
+                      <div className="text-xs sm:text-sm font-medium text-center mb-0.5 truncate">{kol.name}</div>
+                      <div className="text-[9px] sm:text-[10px] text-amber-400 text-center mb-0.5 sm:mb-1">{kol.handle}</div>
+                      <div className="text-[10px] sm:text-xs text-white/60 text-center mb-1.5 sm:mb-2">{kol.followers}</div>
                       <div 
-                        className="text-[9px] px-2 py-1 rounded-full text-center mx-auto w-fit"
+                        className="text-[8px] sm:text-[9px] px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-center mx-auto w-fit"
                         style={{ backgroundColor: `${ACCENT_COLOR}20`, color: ACCENT_COLOR }}
                       >
                         {kol.expertise}
@@ -246,11 +246,11 @@ const InfluencerService = () => {
                 
                 {/* More KOLs text */}
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <span className="text-white/50 text-lg font-medium tracking-wide">+50 More KOLs in Our Network</span>
+                  <span className="text-white/50 text-sm sm:text-lg font-medium tracking-wide">+50 More KOLs in Our Network</span>
                 </div>
               </div>
 
-              <p className="text-center text-white/40 text-sm mt-8">
+              <p className="text-center text-white/40 text-xs sm:text-sm mt-6 sm:mt-8">
                 Click to view on 𝕏 · These are a sample of our network
               </p>
             </div>

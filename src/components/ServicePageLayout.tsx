@@ -147,10 +147,10 @@ const StatItem = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
     >
-      <div className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-1">
+      <div className="text-lg sm:text-xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-[10px] sm:text-xs text-white/50 font-light">
+      <div className="text-[9px] sm:text-xs text-white/50 font-light">
         {label}
       </div>
     </motion.div>
@@ -240,13 +240,13 @@ const ServicePageLayout = ({
           {/* Back Button */}
           <motion.button
             onClick={() => navigate(-1)}
-            className="absolute top-8 left-6 md:left-10 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white hover:border-white/20 transition-all duration-300 backdrop-blur-sm"
+            className="absolute top-6 left-4 sm:top-8 sm:left-6 md:left-10 z-20 flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white hover:border-white/20 transition-all duration-300 backdrop-blur-sm active:scale-[0.97]"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <ArrowLeft className="w-4 h-4" />
-            <span className="text-sm font-medium">Back</span>
+            <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <span className="text-xs sm:text-sm font-medium">Back</span>
           </motion.button>
 
           {/* Floating Service Tags - Desktop */}
@@ -275,22 +275,22 @@ const ServicePageLayout = ({
           })}
 
           {/* Main Content - Centered */}
-          <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
+          <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 pt-14 sm:pt-8">
             <div className="max-w-7xl mx-auto text-center">
               {/* Service Badge */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full border mb-6"
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border mb-4 sm:mb-6"
                 style={{ borderColor: `${accentColor}50`, backgroundColor: `${accentColor}10` }}
               >
-                <ServiceIcon className="w-4 h-4" style={{ color: accentColor }} />
-                <span className="text-sm" style={{ color: accentColor }}>{serviceName}</span>
+                <ServiceIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" style={{ color: accentColor }} />
+                <span className="text-xs sm:text-sm" style={{ color: accentColor }}>{serviceName}</span>
               </motion.div>
 
               {/* Main Headline */}
               <motion.h1 
-                className="font-sans text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-[-0.02em] mb-5 sm:mb-6"
+                className="font-sans text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -302,7 +302,7 @@ const ServicePageLayout = ({
 
               {/* Description */}
               <motion.p 
-                className="text-sm sm:text-base md:text-lg text-white/60 max-w-3xl mx-auto mb-6 font-light tracking-wide leading-relaxed"
+                className="text-xs sm:text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-5 sm:mb-6 font-light tracking-wide leading-relaxed px-2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -317,11 +317,11 @@ const ServicePageLayout = ({
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 <CalendlyButton 
-                  className="group relative inline-flex items-center gap-3 px-8 py-4 font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border border-white/30"
+                  className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 font-medium text-xs sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border border-white/30 active:scale-[0.97] min-h-[44px]"
                   style={{ backgroundColor: accentColor, color: '#fff' }}
                 >
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                  <Calendar className="w-4 h-4" />
+                  <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   <span>Book a Meeting</span>
                 </CalendlyButton>
               </motion.div>
@@ -329,9 +329,9 @@ const ServicePageLayout = ({
           </div>
 
           {/* Stats Section */}
-          <div className="relative z-10 py-4 sm:py-6">
-            <div className="container mx-auto px-4 sm:px-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+          <div className="relative z-10 py-3 sm:py-6">
+            <div className="container mx-auto px-3 sm:px-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
                 {stats.map((stat, index) => (
                   <StatItem 
                     key={index}
@@ -348,23 +348,23 @@ const ServicePageLayout = ({
           </div>
 
           {/* Client Logo Marquee */}
-          <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
-            <div className="absolute left-4 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
+          <div className="relative z-10 border-t border-white/10 py-2.5 sm:py-4 overflow-hidden">
+            <div className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[9px] sm:text-xs z-20">
               <span className="number-badge">01</span>
             </div>
 
-            <div className="flex items-center logo-marquee-slow ml-14 sm:ml-16">
+            <div className="flex items-center logo-marquee-slow ml-10 sm:ml-16">
               {[...clientLogos, ...clientLogos].map((client, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-3 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+                  className="flex items-center gap-1 sm:gap-2 mx-1 sm:mx-2 px-2 sm:px-4 py-1 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
                 >
                   <img 
                     src={client.logo} 
                     alt={client.name} 
-                    className={`h-4 w-4 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-80'}`}
+                    className={`h-3 w-3 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-80'}`}
                   />
-                  <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
+                  <span className="text-white/70 text-[9px] sm:text-xs font-medium whitespace-nowrap">
                     {client.name}
                   </span>
                 </div>
@@ -374,12 +374,12 @@ const ServicePageLayout = ({
 
           {/* Scroll Indicator */}
           <motion.div 
-            className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3"
+            className="absolute bottom-16 sm:bottom-24 right-3 sm:right-8 z-10 flex items-center gap-1.5 sm:gap-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
-            <span className="text-white/40 text-xs sm:text-sm font-medium">scroll</span>
+            <span className="text-white/40 text-[10px] sm:text-sm font-medium">scroll</span>
             <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
           </motion.div>
         </div>
@@ -394,24 +394,24 @@ const ServicePageLayout = ({
           <div className="border-t border-white/10">
             <SectionHeader number={deliverablesSectionNum!} title="What You Get" badge="Deliverables" />
             
-            <div className="py-8 md:py-12">
-              <div className="container mx-auto px-4 lg:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="py-6 sm:py-8 md:py-12">
+              <div className="container mx-auto px-3 sm:px-4 lg:px-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
                   {deliverables.map((deliverable) => (
                     <div
                       key={deliverable.title}
-                      className="p-4 sm:p-5 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all"
+                      className="p-3.5 sm:p-5 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all active:scale-[0.98]"
                     >
-                      <h3 className="text-sm font-semibold text-white mb-2.5 flex items-center gap-2">
+                      <h3 className="text-xs sm:text-sm font-semibold text-white mb-2 sm:mb-2.5 flex items-center gap-2">
                         <div 
-                          className="w-1.5 h-1.5 rounded-full"
+                          className="w-1.5 h-1.5 rounded-full flex-shrink-0"
                           style={{ backgroundColor: accentColor }}
                         />
                         {deliverable.title}
                       </h3>
-                      <ul className="space-y-1.5">
+                      <ul className="space-y-1 sm:space-y-1.5">
                         {deliverable.items.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-white/60 text-xs">
+                          <li key={idx} className="flex items-start gap-1.5 sm:gap-2 text-white/60 text-[11px] sm:text-xs">
                             <Check 
                               className="w-3 h-3 mt-0.5 flex-shrink-0" 
                               style={{ color: accentColor }} 
@@ -434,7 +434,7 @@ const ServicePageLayout = ({
         <section className="bg-[#0F0F0F]" id="process">
           <div className="border-t border-white/10">
             <SectionHeader number={processSectionNum!} title="Process" badge="How We Work" />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {processSteps.map((step, index) => {
                 const Icon = step.icon;
                 const isLast = index === processSteps.length - 1;
@@ -442,7 +442,7 @@ const ServicePageLayout = ({
                 return (
                   <div
                     key={step.number}
-                    className="group relative p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/5"
+                    className="group relative p-3.5 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/5 active:scale-[0.98]"
                   >
                     {/* Arrow indicator between steps - Desktop */}
                     {!isLast && (
@@ -459,31 +459,31 @@ const ServicePageLayout = ({
                     {!isLast && (
                       <div className="flex lg:hidden absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
                         <ArrowRight 
-                          className="w-6 h-6 rotate-90 drop-shadow-lg" 
+                          className="w-5 h-5 sm:w-6 sm:h-6 rotate-90 drop-shadow-lg" 
                           style={{ color: accentColor }}
                           strokeWidth={2.5}
                         />
                       </div>
                     )}
                     
-                    <div className="flex items-center gap-3 mb-3">
+                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
                       <span 
-                        className="text-xs font-mono tracking-widest"
+                        className="text-[10px] sm:text-xs font-mono tracking-widest"
                         style={{ color: accentColor }}
                       >
                         {step.number}
                       </span>
                       <Icon 
-                        className="w-5 h-5 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" 
+                        className="w-4 h-4 sm:w-5 sm:h-5 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" 
                         strokeWidth={1.5} 
                       />
                     </div>
                     
-                    <h3 className="text-base font-semibold text-white mb-2">
+                    <h3 className="text-sm sm:text-base font-semibold text-white mb-1.5 sm:mb-2">
                       {step.title}
                     </h3>
                     
-                    <p className="text-white/50 text-sm leading-relaxed">
+                    <p className="text-white/50 text-xs sm:text-sm leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -499,7 +499,7 @@ const ServicePageLayout = ({
         <div className="border-t border-white/10">
           <SectionHeader number={moreServicesSectionNum} title="More Services" badge="Explore" />
           <div 
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-x divide-white/10"
+            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 divide-x divide-white/10"
           >
             {otherServices.map((service, index) => (
               <div
@@ -508,7 +508,7 @@ const ServicePageLayout = ({
               >
                 <Link
                   to={`/services/${service.slug}`}
-                  className="group relative block p-4 sm:p-5 md:p-6 lg:p-8 h-full transition-all duration-500 overflow-hidden"
+                  className="group relative block p-3 sm:p-5 md:p-6 lg:p-8 h-full transition-all duration-500 overflow-hidden active:scale-[0.97]"
                 >
                   {/* Hover background gradient */}
                   <div 
@@ -526,29 +526,29 @@ const ServicePageLayout = ({
                   
                   <div className="relative z-10">
                     {/* Color indicator with pulse effect */}
-                    <div className="relative mb-5">
+                    <div className="relative mb-3 sm:mb-5">
                       <div 
-                        className="w-3 h-3 rounded-full group-hover:scale-110 transition-all duration-300"
+                        className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full group-hover:scale-110 transition-all duration-300"
                         style={{ backgroundColor: service.color }}
                       />
                       <div 
-                        className="absolute inset-0 w-3 h-3 rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-ping"
+                        className="absolute inset-0 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-ping"
                         style={{ backgroundColor: service.color }}
                       />
                     </div>
                     
                     {/* Service title */}
-                    <h3 className="text-white font-medium text-lg mb-3 group-hover:translate-x-1 transition-transform duration-300">
+                    <h3 className="text-white font-medium text-sm sm:text-lg mb-2 sm:mb-3 group-hover:translate-x-1 transition-transform duration-300 line-clamp-1">
                       {service.title}
                     </h3>
                     
                     {/* Arrow with enhanced animation */}
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-white/40 group-hover:text-white/60 transition-colors duration-300 uppercase tracking-wider">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <span className="text-[10px] sm:text-xs text-white/40 group-hover:text-white/60 transition-colors duration-300 uppercase tracking-wider">
                         Explore
                       </span>
                       <ArrowRight 
-                        className="w-4 h-4 text-white/30 group-hover:text-white/80 group-hover:translate-x-2 transition-all duration-300" 
+                        className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/30 group-hover:text-white/80 group-hover:translate-x-2 transition-all duration-300" 
                       />
                     </div>
                   </div>
@@ -565,27 +565,27 @@ const ServicePageLayout = ({
           <div className="border-t border-white/10">
             <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
             
-            <div className="py-8 md:py-12">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-4xl">
-                <Accordion type="single" collapsible className="space-y-3">
+            <div className="py-6 sm:py-8 md:py-12">
+                <div className="container mx-auto px-3 sm:px-6 lg:px-12 max-w-4xl">
+                <Accordion type="single" collapsible className="space-y-2 sm:space-y-3">
                   {faqItems.map((item, index) => (
                     <div
                       key={index}
                     >
                         <AccordionItem 
                         value={`item-${index}`}
-                        className="border border-white/10 rounded-xl bg-white/5 px-4 sm:px-5 overflow-hidden"
+                        className="border border-white/10 rounded-lg sm:rounded-xl bg-white/5 px-3 sm:px-5 overflow-hidden"
                       >
-                        <AccordionTrigger className="text-left text-white hover:no-underline py-4 text-sm">
-                          <span className="flex items-center gap-3">
+                        <AccordionTrigger className="text-left text-white hover:no-underline py-3 sm:py-4 text-xs sm:text-sm">
+                          <span className="flex items-center gap-2 sm:gap-3">
                             <ChevronRight 
-                              className="w-4 h-4 flex-shrink-0 transition-transform" 
+                              className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 transition-transform" 
                               style={{ color: accentColor }}
                             />
-                            {item.question}
+                            <span className="line-clamp-2">{item.question}</span>
                           </span>
                         </AccordionTrigger>
-                        <AccordionContent className="text-white/60 text-sm pb-4 pl-7">
+                        <AccordionContent className="text-white/60 text-[11px] sm:text-sm pb-3 sm:pb-4 pl-5 sm:pl-7">
                           {item.answer}
                         </AccordionContent>
                       </AccordionItem>
