@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Users, Lightbulb, Rocket, Clock, Globe, TrendingUp, Heart, Mail, ArrowRight } from "lucide-react";
+import { Briefcase, Users, Lightbulb, Rocket, Clock, Globe, TrendingUp, Heart, FileText, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import FloatingTags from "@/components/FloatingTags";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import JobApplicationForm from "@/components/JobApplicationForm";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const heroTags = [
@@ -109,6 +111,14 @@ const perks = [
 ];
 
 const Jobs = () => {
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [selectedPosition, setSelectedPosition] = useState("");
+
+  const openApplicationForm = (position: string = "") => {
+    setSelectedPosition(position);
+    setIsFormOpen(true);
+  };
+
   usePageMeta({
     title: "Careers | Ium Labs - Join Our Web3 Team",
     description: "Join Ium Labs and shape the future of Web3 in Korea. We're looking for passionate Researchers and Growth Managers.",
@@ -281,13 +291,13 @@ const Jobs = () => {
                     </ul>
                   </div>
 
-                  <a
-                    href={`mailto:hr@iumlabs.io?subject=Application for ${position.title}`}
+                  <button
+                    onClick={() => openApplicationForm(position.title.toLowerCase().replace(" ", "-"))}
                     className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors"
                   >
-                    <Mail className="w-4 h-4" />
+                    <FileText className="w-4 h-4" />
                     Apply Now
-                  </a>
+                  </button>
                 </div>
               </motion.div>
             ))}
@@ -348,13 +358,13 @@ const Jobs = () => {
               우리는 항상 뛰어난 인재를 찾고 있습니다.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="mailto:hr@iumlabs.io?subject=General Application"
+              <button
+                onClick={() => openApplicationForm("other")}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors"
               >
-                <Mail className="w-4 h-4" />
-                Send Your Resume
-              </a>
+                <FileText className="w-4 h-4" />
+                지원서 작성하기
+              </button>
               <Link
                 to="/contact"
                 className="inline-flex items-center gap-2 px-8 py-4 border border-border hover:border-emerald-500/50 text-foreground font-medium rounded-lg transition-colors"
@@ -368,6 +378,13 @@ const Jobs = () => {
       </section>
 
       <Footer />
+
+      {/* Application Form Modal */}
+      <JobApplicationForm
+        isOpen={isFormOpen}
+        onClose={() => setIsFormOpen(false)}
+        defaultPosition={selectedPosition}
+      />
     </div>
   );
 };
