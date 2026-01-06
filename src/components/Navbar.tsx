@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
-import { Menu } from "lucide-react";
+import { Menu, Send, Linkedin, Mail, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
 import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
@@ -174,7 +174,7 @@ const Navbar = () => {
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "450ms" : "0ms" }}
                 >
-                  <span className="text-xl">📧</span>
+                  <Mail className="w-5 h-5 text-muted-foreground" />
                   <span>{brandConfig.email}</span>
                 </a>
 
@@ -187,7 +187,7 @@ const Navbar = () => {
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "500ms" : "0ms" }}
                 >
-                  <span className="text-xl">✈️</span>
+                  <Send className="w-5 h-5 text-muted-foreground" />
                   <span>@iumlabs</span>
                 </a>
 
@@ -200,7 +200,7 @@ const Navbar = () => {
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "550ms" : "0ms" }}
                 >
-                  <span className="text-xl">💼</span>
+                  <Linkedin className="w-5 h-5 text-muted-foreground" />
                   <span>LinkedIn</span>
                 </a>
 
@@ -210,7 +210,7 @@ const Navbar = () => {
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "600ms" : "0ms" }}
                 >
-                  <span className="text-lg">📍</span>
+                  <MapPin className="w-5 h-5 flex-shrink-0" />
                   <span>{brandConfig.office}</span>
                 </div>
               </div>
