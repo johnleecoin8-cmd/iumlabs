@@ -25,6 +25,7 @@ import PRService from "./pages/PRService";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Transparency from "./pages/Transparency";
+import Jobs from "./pages/Jobs";
 import NotFound from "./pages/NotFound";
 // Admin pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -111,6 +112,7 @@ const AppRoutes = () => {
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/transparency" element={<Transparency />} />
+        <Route path="/jobs" element={<Jobs />} />
         {/* Hidden Admin Routes */}
         <Route path="/ium-admin" element={<AdminLogin />} />
         <Route path="/ium-admin/dashboard" element={<AdminDashboard />} />
