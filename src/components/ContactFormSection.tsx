@@ -87,12 +87,12 @@ const ContactFormSection = ({
   return <section className="bg-[#0A0A0A]">
       <div className="border-t border-white/15">
         {/* Section Header */}
-        <div className="flex items-baseline justify-between p-5 md:px-10 lg:px-12 md:py-7 border-b border-white/15">
-          <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-label text-white/45 font-mono tracking-widest">{sectionNumber}</span>
-            <h2 className="text-xl md:text-2xl font-semibold text-white tracking-tight">Contact</h2>
+        <div className="flex items-baseline justify-between p-4 sm:p-5 md:px-10 lg:px-12 md:py-7 border-b border-white/15">
+          <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
+            <span className="text-[10px] sm:text-label text-white/45 font-mono tracking-widest">{sectionNumber}</span>
+            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white tracking-tight">Contact</h2>
           </div>
-          <Link to="/contact" className="text-caption text-white/65 tracking-wider hidden sm:flex items-center gap-2 px-4 py-1.5 border border-white/25 rounded-full hover:border-white/45 transition-colors font-medium">
+          <Link to="/contact" className="text-[10px] sm:text-caption text-white/65 tracking-wider hidden sm:flex items-center gap-2 px-3 sm:px-4 py-1.5 border border-white/25 rounded-full hover:border-white/45 transition-colors font-medium">
             Get Started
           </Link>
         </div>
@@ -100,51 +100,51 @@ const ContactFormSection = ({
         {/* Two Column Layout */}
         <div className="flex flex-col md:flex-row">
           {/* Left Column - Contact Info */}
-          <div className="w-full md:w-2/5 p-5 sm:p-7 md:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-white/15">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-5 tracking-tight">
+          <div className="w-full md:w-2/5 p-4 sm:p-6 md:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-white/15">
+            <h3 className="text-xl sm:text-2xl md:text-4xl font-bold text-white mb-3 sm:mb-5 tracking-tight">
               Get in Touch
             </h3>
-            <p className="text-white/60 text-body-sm sm:text-body leading-relaxed mb-8 sm:mb-10">
+            <p className="text-white/60 text-xs sm:text-sm md:text-base leading-relaxed mb-5 sm:mb-10">
               Ready to enter the Korean market? Let's discuss how we can help your project grow.
             </p>
 
             {/* Office */}
-            <div className="mb-6 sm:mb-7 pb-6 sm:pb-7 border-b border-white/15">
-              <div className="flex items-start gap-4">
-                <MapPin className="w-5 h-5 text-white/40 mt-0.5" />
+            <div className="mb-4 sm:mb-7 pb-4 sm:pb-7 border-b border-white/15">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-white/40 mt-0.5 flex-shrink-0" />
                 <div>
-                  <span className="text-label uppercase tracking-wider text-white/50 block mb-2">Office</span>
-                  <p className="text-white text-body-sm leading-relaxed">{brand.address}</p>
-                  <div className="flex items-center gap-2 mt-3">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-caption text-white/50">Live in Seoul • {getSeoulTime()}</span>
+                  <span className="text-[10px] sm:text-label uppercase tracking-wider text-white/50 block mb-1.5 sm:mb-2">Office</span>
+                  <p className="text-white text-xs sm:text-sm leading-relaxed">{brand.address}</p>
+                  <div className="flex items-center gap-2 mt-2 sm:mt-3">
+                    <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="text-[10px] sm:text-caption text-white/50">Live in Seoul • {getSeoulTime()}</span>
                   </div>
                 </div>
               </div>
             </div>
 
             {/* Email */}
-            <a href={`mailto:${brand.email}`} className="group flex items-center justify-between mb-6 sm:mb-7 pb-6 sm:pb-7 border-b border-white/15 hover:border-white/25 transition-colors">
-              <div className="flex items-start gap-4">
-                <Mail className="w-5 h-5 text-white/40 mt-0.5" />
+            <a href={`mailto:${brand.email}`} className="group flex items-center justify-between mb-4 sm:mb-7 pb-4 sm:pb-7 border-b border-white/15 hover:border-white/25 transition-colors active:scale-[0.98] min-h-[44px]">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-white/40 mt-0.5 flex-shrink-0" />
                 <div>
-                  <span className="text-label uppercase tracking-wider text-white/50 block mb-2">Email</span>
-                  <p className="text-white text-body-sm">{brand.email}</p>
+                  <span className="text-[10px] sm:text-label uppercase tracking-wider text-white/50 block mb-1.5 sm:mb-2">Email</span>
+                  <p className="text-white text-xs sm:text-sm">{brand.email}</p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
             </a>
 
             {/* Telegram */}
-            <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between mb-6 sm:mb-7 pb-6 sm:pb-7 border-b border-white/15 hover:border-white/25 transition-colors">
-              <div className="flex items-start gap-4">
-                <Send className="w-5 h-5 text-white/40 mt-0.5" />
+            <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between mb-4 sm:mb-7 pb-4 sm:pb-7 border-b border-white/15 hover:border-white/25 transition-colors active:scale-[0.98] min-h-[44px]">
+              <div className="flex items-start gap-3 sm:gap-4">
+                <Send className="w-4 h-4 sm:w-5 sm:h-5 text-white/40 mt-0.5 flex-shrink-0" />
                 <div>
-                  <span className="text-label uppercase tracking-wider text-white/50 block mb-2">Telegram</span>
-                  <p className="text-white text-body-sm">{brand.telegram}</p>
+                  <span className="text-[10px] sm:text-label uppercase tracking-wider text-white/50 block mb-1.5 sm:mb-2">Telegram</span>
+                  <p className="text-white text-xs sm:text-sm">{brand.telegram}</p>
                 </div>
               </div>
-              <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all" />
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
             </a>
 
             {/* LinkedIn */}
@@ -155,74 +155,74 @@ const ContactFormSection = ({
           </div>
 
           {/* Right Column - Contact Form */}
-          <div className="w-full md:w-3/5 px-5 py-4 sm:px-7 sm:py-5 md:px-8 md:py-6 lg:px-12 lg:py-8">
-            <div className="mb-6 sm:mb-8">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-body-sm text-white/50">Contact Form</span>
+          <div className="w-full md:w-3/5 px-4 py-4 sm:px-6 sm:py-5 md:px-8 md:py-6 lg:px-12 lg:py-8">
+            <div className="mb-4 sm:mb-8">
+              <div className="flex items-center justify-between mb-2 sm:mb-3">
+                <span className="text-xs sm:text-sm text-white/50">Contact Form</span>
                 <div className="flex items-center gap-2">
                   {completionPercentage === 100 ? <div className="flex items-center gap-1.5 success-animate">
-                      <div className="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center">
-                        <svg className="w-3 h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                      <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-emerald-500 flex items-center justify-center">
+                        <svg className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                           <polyline points="20 6 9 17 4 12" className="checkmark-animate" />
                         </svg>
                       </div>
-                      <span className="text-body-sm text-emerald-400 font-medium">Ready to send</span>
-                    </div> : <span className="text-body-sm text-white/50">{completionPercentage}%</span>}
+                      <span className="text-[10px] sm:text-sm text-emerald-400 font-medium">Ready to send</span>
+                    </div> : <span className="text-xs sm:text-sm text-white/50">{completionPercentage}%</span>}
                 </div>
               </div>
               {/* Progress Bar */}
-              <div className="form-progress-bar">
+              <div className="form-progress-bar h-1 sm:h-1.5">
                 <div className="form-progress-bar-fill" style={{
                 width: `${completionPercentage}%`
               }} />
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 md:space-y-8">
               {/* Name & Email Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                 <div>
-                  <label className="block text-label uppercase tracking-wider text-white/50 mb-3">Name *</label>
+                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Name *</label>
                   <input type="text" placeholder="Your name" value={formData.name} onChange={e => setFormData({
                   ...formData,
                   name: e.target.value
-                })} required className="w-full bg-transparent border-b border-white/25 pb-3 text-body text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors" />
+                })} required className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
                 </div>
                 <div>
-                  <label className="block text-label uppercase tracking-wider text-white/50 mb-3">Email *</label>
+                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Email *</label>
                   <input type="email" placeholder="your@email.com" value={formData.email} onChange={e => setFormData({
                   ...formData,
                   email: e.target.value
-                })} required className="w-full bg-transparent border-b border-white/25 pb-3 text-body text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors" />
+                })} required className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
                 </div>
               </div>
 
               {/* Company & Website Row */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                 <div>
-                  <label className="block text-label uppercase tracking-wider text-white/50 mb-3">Company</label>
+                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Company</label>
                   <input type="text" placeholder="Company name" value={formData.company} onChange={e => setFormData({
                   ...formData,
                   company: e.target.value
-                })} className="w-full bg-transparent border-b border-white/25 pb-3 text-body text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors" />
+                })} className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
                 </div>
                 <div>
-                  <label className="block text-label uppercase tracking-wider text-white/50 mb-3">Website</label>
+                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Website</label>
                   <input type="url" placeholder="https://..." value={formData.website} onChange={e => setFormData({
                   ...formData,
                   website: e.target.value
-                })} className="w-full bg-transparent border-b border-white/25 pb-3 text-body text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors" />
+                })} className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
                 </div>
               </div>
 
               {/* Budget */}
               <div>
-                <label className="block text-label uppercase tracking-wider text-white/50 mb-4">Budget *</label>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
+                <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-3 sm:mb-4">Budget *</label>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-3">
                   {budgetOptions.map(option => <button key={option} type="button" onClick={() => setFormData({
                   ...formData,
                   budget: option
-                })} className={`px-4 sm:px-5 py-2.5 sm:py-3 text-body-sm border transition-all min-h-[44px] sm:min-h-[48px] font-medium ${formData.budget === option ? 'bg-white/15 border-white text-white' : 'bg-transparent border-white/25 text-white/65 hover:border-white/45 hover:text-white active:bg-white/15'}`}>
+                })} className={`px-3 sm:px-5 py-2 sm:py-3 text-[11px] sm:text-sm border transition-all min-h-[40px] sm:min-h-[48px] font-medium active:scale-[0.97] ${formData.budget === option ? 'bg-white/15 border-white text-white' : 'bg-transparent border-white/25 text-white/65 hover:border-white/45 hover:text-white active:bg-white/15'}`}>
                       {option}
                     </button>)}
                 </div>
@@ -230,18 +230,18 @@ const ContactFormSection = ({
 
               {/* Project Details */}
               <div>
-                <label className="block text-label uppercase tracking-wider text-white/50 mb-3">Project Details *</label>
+                <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Project Details *</label>
                 <textarea placeholder="Tell us about your project..." value={formData.message} onChange={e => setFormData({
                 ...formData,
                 message: e.target.value
-              })} rows={3} className="w-full bg-transparent border-b border-white/25 pb-3 text-body text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors resize-none" />
+              })} rows={3} className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors resize-none min-h-[80px]" />
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isSubmitting || completionPercentage < 100}
-                className={`w-full mt-4 py-4 text-body font-semibold transition-all duration-300 ${
+                className={`w-full mt-3 sm:mt-4 py-3 sm:py-4 text-sm sm:text-base font-semibold transition-all duration-300 min-h-[48px] active:scale-[0.98] ${
                   completionPercentage === 100
                     ? 'bg-white text-black hover:bg-white/90'
                     : 'bg-white/15 text-white/50 cursor-not-allowed'
