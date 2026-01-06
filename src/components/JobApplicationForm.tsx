@@ -1,22 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Loader2, CheckCircle, X } from "lucide-react";
+import { Send, Loader2, CheckCircle, X, Upload, FileText, Trash2 } from "lucide-react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { Checkbox } from "@/components/ui/checkbox";
 
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const ALLOWED_FILE_TYPES = [
+  "application/pdf",
+  "application/msword",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+];
+
 const applicationSchema = z.object({
-  position: z.string().min(1, "포지션을 선택해주세요"),
-  name: z.string().trim().min(1, "이름을 입력해주세요").max(100, "이름은 100자 이내로 입력해주세요"),
-  email: z.string().trim().email("유효한 이메일을 입력해주세요").max(255, "이메일은 255자 이내로 입력해주세요"),
-  phone: z.string().max(50, "연락처는 50자 이내로 입력해주세요").optional(),
-  telegram: z.string().max(100, "Telegram ID는 100자 이내로 입력해주세요").optional(),
-  linkedinUrl: z.string().url("유효한 URL을 입력해주세요").optional().or(z.literal("")),
-  portfolioUrl: z.string().url("유효한 URL을 입력해주세요").optional().or(z.literal("")),
-  coverLetter: z.string().max(5000, "자기소개는 5000자 이내로 작성해주세요").optional(),
+  position: z.string().min(1, "Please select a position"),
+  name: z.string().trim().min(1, "Please enter your name").max(100, "Name must be less than 100 characters"),
+  email: z.string().trim().email("Please enter a valid email").max(255, "Email must be less than 255 characters"),
+  phone: z.string().max(50, "Phone must be less than 50 characters").optional(),
+  telegram: z.string().max(100, "Telegram ID must be less than 100 characters").optional(),
+  linkedinUrl: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
+  portfolioUrl: z.string().url("Please enter a valid URL").optional().or(z.literal("")),
+  coverLetter: z.string().max(5000, "Cover letter must be less than 5000 characters").optional(),
   privacyAgreed: z.boolean().refine((v) => v === true, {
-    message: "개인정보처리방침에 동의해주세요",
+    message: "Please agree to the Privacy Policy",
   }),
 });
 
@@ -70,6 +77,10 @@ const JobApplicationForm = ({ isOpen, onClose, defaultPosition = "" }: JobApplic
   const [errors, setErrors] = useState<Partial<Record<keyof ApplicationFormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
+  const [resumeError, setResumeError] = useState<string | null>(null);
+  const [isUploadingResume, setIsUploadingResume] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   // Update position when defaultPosition changes
   useEffect(() => {
@@ -77,6 +88,58 @@ const JobApplicationForm = ({ isOpen, onClose, defaultPosition = "" }: JobApplic
       setFormData(prev => ({ ...prev, position: defaultPosition }));
     }
   }, [defaultPosition]);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    setResumeError(null);
+    
+    if (!file) {
+      setResumeFile(null);
+      return;
+    }
+
+    // Validate file type
+    if (!ALLOWED_FILE_TYPES.includes(file.type)) {
+      setResumeError("Only PDF and Word documents are allowed");
+      setResumeFile(null);
+      return;
+    }
+
+    // Validate file size
+    if (file.size > MAX_FILE_SIZE) {
+      setResumeError("File size must be less than 10MB");
+      setResumeFile(null);
+      return;
+    }
+
+    setResumeFile(file);
+  };
+
+  const removeFile = () => {
+    setResumeFile(null);
+    setResumeError(null);
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  };
+
+  const uploadResume = async (file: File): Promise<string | null> => {
+    const fileExt = file.name.split(".").pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).substring(2)}.${fileExt}`;
+    const filePath = `applications/${fileName}`;
+
+    const { error: uploadError } = await supabase.storage
+      .from("resumes")
+      .upload(filePath, file);
+
+    if (uploadError) {
+      console.error("Resume upload error:", uploadError);
+      throw new Error("Failed to upload resume");
+    }
+
+    // Get the public URL (though bucket is private, we store the path)
+    return filePath;
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -120,6 +183,22 @@ const JobApplicationForm = ({ isOpen, onClose, defaultPosition = "" }: JobApplic
     setIsSubmitting(true);
     
     try {
+      let resumeUrl: string | null = null;
+
+      // Upload resume if provided
+      if (resumeFile) {
+        setIsUploadingResume(true);
+        try {
+          resumeUrl = await uploadResume(resumeFile);
+        } catch (uploadErr) {
+          toast.error("Failed to upload resume. Please try again.");
+          setIsSubmitting(false);
+          setIsUploadingResume(false);
+          return;
+        }
+        setIsUploadingResume(false);
+      }
+
       const { error } = await supabase
         .from("job_applications")
         .insert({
@@ -131,12 +210,13 @@ const JobApplicationForm = ({ isOpen, onClose, defaultPosition = "" }: JobApplic
           linkedin_url: formData.linkedinUrl?.trim() || null,
           portfolio_url: formData.portfolioUrl?.trim() || null,
           cover_letter: formData.coverLetter?.trim() || null,
+          resume_url: resumeUrl,
         });
 
       if (error) throw error;
 
       setIsSuccess(true);
-      toast.success("지원서가 성공적으로 제출되었습니다!");
+      toast.success("Application submitted successfully!");
       
       setTimeout(() => {
         setFormData({
@@ -150,13 +230,17 @@ const JobApplicationForm = ({ isOpen, onClose, defaultPosition = "" }: JobApplic
           coverLetter: "",
           privacyAgreed: false,
         });
+        setResumeFile(null);
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
         setIsSuccess(false);
         onClose();
       }, 2000);
       
     } catch (error) {
       console.error("Error submitting application:", error);
-      toast.error("지원서 제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+      toast.error("Failed to submit application. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -217,9 +301,9 @@ const JobApplicationForm = ({ isOpen, onClose, defaultPosition = "" }: JobApplic
                 >
                   <CheckCircle className="w-10 h-10 text-green-500" />
                 </motion.div>
-                <h3 className="text-2xl font-bold mb-2">지원 완료!</h3>
+                <h3 className="text-2xl font-bold mb-2">Application Submitted!</h3>
                 <p className="text-muted-foreground">
-                  검토 후 빠른 시일 내에 연락드리겠습니다.
+                  We'll review your application and get back to you soon.
                 </p>
               </motion.div>
             ) : (
@@ -336,14 +420,62 @@ const JobApplicationForm = ({ isOpen, onClose, defaultPosition = "" }: JobApplic
                     {errors.position && <p className="text-red-500 text-xs mt-1">{errors.position}</p>}
                   </div>
 
-                  {/* Row 4: Cover Letter */}
+                  {/* Row 4: Resume Upload */}
+                  <div>
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      onChange={handleFileChange}
+                      accept=".pdf,.doc,.docx"
+                      className="hidden"
+                      id="resume-upload"
+                    />
+                    
+                    {!resumeFile ? (
+                      <label
+                        htmlFor="resume-upload"
+                        className={`${inputBaseClass} flex items-center justify-center gap-3 cursor-pointer hover:bg-muted/80 transition-colors border-2 border-dashed border-border ${resumeError ? "border-red-500" : ""}`}
+                      >
+                        <Upload className="w-5 h-5 text-muted-foreground" />
+                        <span className="text-muted-foreground">
+                          Upload Resume (PDF, DOC, DOCX - Max 10MB)
+                        </span>
+                      </label>
+                    ) : (
+                      <div className={`${inputBaseClass} flex items-center justify-between`}>
+                        <div className="flex items-center gap-3">
+                          <FileText className="w-5 h-5 text-primary" />
+                          <span className="truncate max-w-[200px] md:max-w-[400px]">
+                            {resumeFile.name}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            ({(resumeFile.size / 1024 / 1024).toFixed(2)} MB)
+                          </span>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={removeFile}
+                          className="p-2 hover:bg-background rounded-lg transition-colors"
+                          aria-label="Remove file"
+                        >
+                          <Trash2 className="w-4 h-4 text-red-500" />
+                        </button>
+                      </div>
+                    )}
+                    
+                    {resumeError && (
+                      <p className="text-red-500 text-xs mt-1">{resumeError}</p>
+                    )}
+                  </div>
+
+                  {/* Row 5: Cover Letter */}
                   <div>
                     <textarea
                       name="coverLetter"
                       value={formData.coverLetter}
                       onChange={handleChange}
                       rows={6}
-                      placeholder="자기소개 및 지원동기를 작성해주세요"
+                      placeholder="Tell us about yourself and why you want to join Ium Labs"
                       className={`${inputBaseClass} resize-none min-h-[160px]`}
                     />
                     <p className="text-xs text-muted-foreground mt-1 text-right">
@@ -385,12 +517,12 @@ const JobApplicationForm = ({ isOpen, onClose, defaultPosition = "" }: JobApplic
                     {isSubmitting ? (
                       <>
                         <Loader2 className="w-5 h-5 animate-spin" />
-                        제출 중...
+                        {isUploadingResume ? "Uploading resume..." : "Submitting..."}
                       </>
                     ) : (
                       <>
                         <Send className="w-5 h-5" />
-                        Submit
+                        Submit Application
                       </>
                     )}
                   </button>
