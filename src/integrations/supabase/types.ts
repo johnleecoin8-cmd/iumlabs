@@ -203,6 +203,7 @@ export type Database = {
           slug: string
           strategy: string[] | null
           updated_at: string | null
+          website_url: string | null
         }
         Insert: {
           background_url?: string | null
@@ -224,6 +225,7 @@ export type Database = {
           slug: string
           strategy?: string[] | null
           updated_at?: string | null
+          website_url?: string | null
         }
         Update: {
           background_url?: string | null
@@ -245,6 +247,7 @@ export type Database = {
           slug?: string
           strategy?: string[] | null
           updated_at?: string | null
+          website_url?: string | null
         }
         Relationships: []
       }
