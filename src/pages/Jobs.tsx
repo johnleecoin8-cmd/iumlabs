@@ -57,18 +57,22 @@ const positions = [
     salary: "₩50M - 70M / year",
     workType: "Hybrid (Seoul Office + Remote)",
     jobDescription: [
-      "Conduct comprehensive Web3 market trends and project research",
-      "Write data-driven analysis reports and investment theses",
-      "Derive actionable insights from blockchain ecosystem data",
-      "Monitor and analyze on-chain metrics and market signals",
-      "Collaborate with Growth team to identify strategic opportunities"
+      "Conduct comprehensive Web3 market trend analysis and produce weekly/monthly research reports covering DeFi, NFTs, L1/L2 ecosystems, and emerging narratives",
+      "Perform deep-dive due diligence on potential client projects, analyzing tokenomics, team backgrounds, competitive landscape, and market positioning",
+      "Monitor and interpret on-chain metrics using Dune Analytics, Flipside, Nansen, and DefiLlama to derive actionable trading and investment insights",
+      "Track Korean crypto community sentiment across Naver, KakaoTalk, DC Inside, and local forums to identify emerging trends before mainstream adoption",
+      "Collaborate with the Growth team to develop data-backed GTM strategies and market entry recommendations for global projects",
+      "Create investor-grade pitch materials, one-pagers, and thesis documents that articulate project value propositions clearly",
+      "Maintain and update internal databases of Korean exchanges, VCs, KOLs, and media contacts with relevant intelligence",
+      "Present research findings to clients and internal teams, translating complex data into clear strategic recommendations"
     ],
     qualifications: [
-      "Deep understanding of Web3, DeFi, and blockchain technology",
-      "Experience in data analysis and research methodology",
-      "Strong written and verbal communication skills in English",
-      "Proficiency in data tools (Dune, Flipside, etc.) is a plus",
-      "Self-motivated with attention to detail"
+      "Deep understanding of Web3, DeFi protocols, and blockchain technology fundamentals",
+      "2+ years of experience in crypto research, investment analysis, or related field",
+      "Proficiency in on-chain analytics tools (Dune, Flipside, Nansen, Arkham)",
+      "Strong written and verbal communication skills in both Korean and English",
+      "Experience writing research reports or investment theses",
+      "Self-motivated with exceptional attention to detail and analytical rigor"
     ]
   },
   { 
@@ -78,18 +82,22 @@ const positions = [
     salary: "₩60M - 90M / year",
     workType: "Hybrid (Seoul Office + Remote)",
     jobDescription: [
-      "Develop and execute GTM strategies for Korean market entry",
-      "Build and manage Korean crypto communities (Discord, Telegram, KakaoTalk)",
-      "Coordinate KOL partnerships and influencer campaigns",
-      "Plan and execute offline events, meetups, and conferences",
-      "Manage relationships with local exchanges and media partners"
+      "Design and execute end-to-end Go-To-Market (GTM) strategies for global Web3 projects targeting the Korean market, from initial market analysis to full launch",
+      "Build, nurture, and scale Korean crypto communities across Discord, Telegram, KakaoTalk open chats, and Twitter/X with engagement-focused content strategies",
+      "Identify, negotiate, and manage relationships with Korean KOLs (Key Opinion Leaders), ensuring authentic partnerships and measurable campaign ROI",
+      "Plan and execute high-impact offline events including meetups, conferences, hackathons, and exclusive networking dinners in Seoul",
+      "Develop and maintain strategic partnerships with Korean exchanges (Upbit, Bithumb, Coinone) for listing support and co-marketing initiatives",
+      "Coordinate PR campaigns with Korean crypto media outlets (Block Media, Coindesk Korea, Bloomingbit) to maximize project visibility",
+      "Create localized marketing content including blog posts, social media assets, and video scripts tailored to Korean audience preferences",
+      "Track and report on key growth metrics (community size, engagement rates, sentiment analysis) with data-driven optimization recommendations"
     ],
     qualifications: [
-      "3+ years experience in Web3 marketing or community management",
-      "Native Korean with strong English communication skills",
-      "Proven track record in community building and growth",
-      "Strong network within Korean crypto ecosystem",
-      "Experience with crypto marketing tools and analytics"
+      "3+ years experience in Web3 marketing, community management, or growth roles",
+      "Native Korean speaker with professional-level English communication skills",
+      "Proven track record of building and scaling crypto communities (10K+ members)",
+      "Established network within the Korean crypto ecosystem (exchanges, media, KOLs)",
+      "Experience with marketing analytics tools and community management platforms",
+      "Strong project management skills with ability to handle multiple campaigns simultaneously"
     ]
   },
   { 
@@ -99,21 +107,24 @@ const positions = [
     salary: "Negotiable",
     workType: "Flexible (Remote-first)",
     jobDescription: [
-      "We're always looking for exceptional talent",
-      "Tell us what you're passionate about and how you can contribute",
-      "Shape your own role based on your unique skills",
-      "Work on cutting-edge Web3 projects in Korea"
+      "We're always searching for exceptional talent who can bring unique perspectives and skills to our growing team",
+      "Define and shape your own role based on your expertise—whether in BD, engineering, design, content, or operations",
+      "Contribute to cutting-edge Web3 projects working with top-tier global protocols entering the Korean market",
+      "Collaborate directly with founders and leadership to identify new business opportunities and service offerings",
+      "Help build internal processes, tools, and frameworks as we scale our agency operations",
+      "Participate in industry events, conferences, and networking sessions representing Ium Labs",
+      "Bring fresh ideas and innovations to enhance our research products and marketing services"
     ],
     qualifications: [
-      "Genuine passion for Web3 and blockchain technology",
-      "Self-driven with strong initiative",
-      "Creative problem-solving abilities",
-      "Ability to work in a fast-paced startup environment",
-      "Open to learning and adapting quickly"
+      "Genuine passion for Web3, blockchain technology, and the future of decentralized systems",
+      "Self-driven individual with strong initiative and ownership mentality",
+      "Creative problem-solving abilities and adaptability in fast-paced environments",
+      "Excellent communication skills in Korean and/or English",
+      "Portfolio or demonstrated experience in your area of expertise",
+      "Eagerness to learn, grow, and take on new challenges"
     ]
   },
 ];
-
 const process = [
   { step: "01", title: "APPLICATION", description: "Resume Review" },
   { step: "02", title: "INTERVIEW", description: "Video Interview" },
