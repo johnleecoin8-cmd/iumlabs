@@ -136,62 +136,62 @@ const Research = () => {
       {/* 02 - Featured Article Section */}
       {currentPage === 1 && selectedCategory === "All" && !searchQuery && featuredPost && <section className="bg-[#121212] border-t border-white/10" id="featured">
           {/* Section Header */}
-          <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
-            <div className="flex items-baseline gap-6 md:gap-10">
+          <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-8 md:py-5 border-b border-white/5">
+            <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
               <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white flex items-center gap-2">
+              <h2 className="text-base sm:text-lg md:text-xl font-medium text-white flex items-center gap-2">
                 Featured
-                {featuredPost.isFeatured && <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />}
+                {featuredPost.isFeatured && <Star className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-yellow-500 fill-yellow-500" />}
               </h2>
             </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+            <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">
               Latest Research
             </span>
           </div>
           
           {/* Featured Content */}
-          <div className="container mx-auto max-w-7xl px-4 md:px-8 py-16">
-            <Link to={`/research/${featuredPost.slug}`} className="group block">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                <div className="aspect-[16/10] rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative hover:scale-[1.02]">
+          <div className="container mx-auto max-w-7xl px-4 md:px-8 py-8 sm:py-12 md:py-16">
+            <Link to={`/research/${featuredPost.slug}`} className="group block active:scale-[0.99]">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 lg:gap-12 items-center">
+                <div className="aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative hover:scale-[1.02]">
                   {featuredPost.image ? <img src={featuredPost.image} alt={featuredPost.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /> : <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                      <TrendingUp className="w-16 h-16 text-primary/40" />
+                      <TrendingUp className="w-12 h-12 sm:w-16 sm:h-16 text-primary/40" />
                     </div>}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    <span className="px-3 py-1 bg-primary text-primary-foreground rounded-full text-sm font-medium">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300">
+                    <span className="px-2.5 sm:px-3 py-1 bg-primary text-primary-foreground rounded-full text-xs sm:text-sm font-medium">
                       Read Article
                     </span>
                   </div>
                 </div>
                 <div>
-                  <div className="flex items-center gap-4 mb-4">
-                    {featuredPost.category && <span className="px-3 py-1.5 bg-primary/10 text-primary rounded-full text-caption border border-primary/20">
+                  <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                    {featuredPost.category && <span className="px-2 sm:px-3 py-1 sm:py-1.5 bg-primary/10 text-primary rounded-full text-[10px] sm:text-caption border border-primary/20">
                         {featuredPost.category}
                       </span>}
-                    <span className="text-white/40 text-caption flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5" />
+                    <span className="text-white/40 text-[10px] sm:text-caption flex items-center gap-1 sm:gap-1.5">
+                      <Clock className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                       {featuredPost.readTime}
                     </span>
                   </div>
-                  <h2 className="text-display-md text-white leading-tight mb-4 group-hover:text-primary/90 transition-colors duration-300">
+                  <h2 className="text-xl sm:text-2xl md:text-display-md text-white leading-tight mb-3 sm:mb-4 group-hover:text-primary/90 transition-colors duration-300">
                     {featuredPost.title}
                   </h2>
-                  <p className="text-body-lg text-white/60 mb-6 line-clamp-3">
+                  <p className="text-sm sm:text-body-lg text-white/60 mb-4 sm:mb-6 line-clamp-2 sm:line-clamp-3">
                     {featuredPost.excerpt}
                   </p>
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <div className="w-9 h-9 rounded-full bg-primary/20 flex items-center justify-center text-caption font-medium text-primary">
+                    <div className="flex items-center gap-2 sm:gap-3">
+                      <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-primary/20 flex items-center justify-center text-[10px] sm:text-caption font-medium text-primary">
                         {featuredPost.author.split(' ').map(n => n[0]).join('')}
                       </div>
                       <div>
-                        <p className="text-body-sm text-white font-medium">{featuredPost.author}</p>
-                        <p className="text-label text-white/40">{featuredPost.date}</p>
+                        <p className="text-xs sm:text-body-sm text-white font-medium">{featuredPost.author}</p>
+                        <p className="text-[10px] sm:text-label text-white/40">{featuredPost.date}</p>
                       </div>
                     </div>
-                    <span className="text-primary flex items-center gap-2 group-hover:gap-3 transition-all text-body-sm font-medium">
-                      Read More <ArrowRight className="w-4 h-4" />
+                    <span className="text-primary flex items-center gap-1.5 sm:gap-2 group-hover:gap-3 transition-all text-xs sm:text-body-sm font-medium">
+                      Read More <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     </span>
                   </div>
                 </div>
@@ -203,60 +203,60 @@ const Research = () => {
       {/* 03 - Article Grid Section */}
       <section className="bg-[#0F0F0F] border-t border-white/10" id="articles">
         {/* Section Header */}
-        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
-          <div className="flex items-baseline gap-6 md:gap-10">
+        <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-8 md:py-5 border-b border-white/5">
+          <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
             <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
               {currentPage === 1 && selectedCategory === "All" && !searchQuery && featuredPost ? "03" : "02"}
             </span>
-            <h2 className="text-lg md:text-xl font-medium text-white">All Articles</h2>
+            <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">All Articles</h2>
           </div>
-          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">
+          <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">
             {filteredPosts.length} Results
           </span>
         </div>
         
         {/* Article Grid Content */}
-        <div className="container mx-auto max-w-7xl px-4 md:px-8 py-16">
-          {isLoading ? <div className="flex items-center justify-center py-20">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
-            </div> : currentPosts.length === 0 ? <div className="text-center py-20">
-              <TrendingUp className="w-12 h-12 text-white/20 mx-auto mb-4" />
-              <h3 className="text-xl font-medium text-white mb-2">No articles yet</h3>
-              <p className="text-white/60">Check back soon for our latest research and insights.</p>
-            </div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="container mx-auto max-w-7xl px-4 md:px-8 py-8 sm:py-12 md:py-16">
+          {isLoading ? <div className="flex items-center justify-center py-12 sm:py-20">
+              <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-primary"></div>
+            </div> : currentPosts.length === 0 ? <div className="text-center py-12 sm:py-20">
+              <TrendingUp className="w-10 h-10 sm:w-12 sm:h-12 text-white/20 mx-auto mb-3 sm:mb-4" />
+              <h3 className="text-lg sm:text-xl font-medium text-white mb-2">No articles yet</h3>
+              <p className="text-sm sm:text-base text-white/60">Check back soon for our latest research and insights.</p>
+            </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
               {currentPosts.map(post => <div key={post.id}>
-                  <Link to={`/research/${post.slug}`} className="group block">
+                  <Link to={`/research/${post.slug}`} className="group block active:scale-[0.98]">
                     <div className="relative hover:-translate-y-2 transition-transform duration-300">
                       {/* Image */}
-                      <div className="aspect-[16/10] rounded-2xl overflow-hidden mb-4 border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative">
+                      <div className="aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-4 border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative">
                         {post.image ? <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-400" /> : <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                            <TrendingUp className="w-10 h-10 text-primary/40" />
+                            <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 text-primary/40" />
                           </div>}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
-                          <span className="text-white text-sm font-medium">Read Article</span>
-                          <ArrowRight className="w-4 h-4 text-primary" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex items-center justify-between opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 translate-y-0 sm:translate-y-2 sm:group-hover:translate-y-0">
+                          <span className="text-white text-xs sm:text-sm font-medium">Read Article</span>
+                          <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
                         </div>
                       </div>
                       
                       {/* Meta */}
-                      <div className="flex items-center gap-3 mb-3">
-                        {post.category && <span className="px-2 py-1 bg-primary/10 text-primary rounded text-label border border-primary/20">
+                      <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                        {post.category && <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded text-[10px] sm:text-label border border-primary/20">
                             {post.category}
                           </span>}
-                        <span className="text-white/40 text-label flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
+                        <span className="text-white/40 text-[10px] sm:text-label flex items-center gap-1">
+                          <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
                           {post.readTime}
                         </span>
                       </div>
                       
                       {/* Title */}
-                      <h3 className="text-body-lg font-medium text-white leading-snug group-hover:text-primary transition-colors duration-300 mb-3 line-clamp-2">
+                      <h3 className="text-sm sm:text-body-lg font-medium text-white leading-snug group-hover:text-primary transition-colors duration-300 mb-2 sm:mb-3 line-clamp-2">
                         {post.title}
                       </h3>
                       
                       {/* Author & Date */}
-                      <div className="flex items-center justify-between text-label text-white/40">
+                      <div className="flex items-center justify-between text-[10px] sm:text-label text-white/40">
                         <span>{post.author}</span>
                         <span>{post.date}</span>
                       </div>
@@ -266,18 +266,18 @@ const Research = () => {
             </div>}
 
           {/* Pagination */}
-          {totalPages > 1 && <div className="flex items-center justify-center gap-2 mt-16">
-              <button onClick={() => setCurrentPage(p => Math.max(1, p - 1))} disabled={currentPage === 1} className="p-3 rounded-full bg-white/5 border border-white/10 disabled:opacity-30 hover:bg-white/10 hover:border-primary/30 transition-all hover:scale-105 active:scale-95">
+          {totalPages > 1 && <div className="flex items-center justify-center gap-1.5 sm:gap-2 mt-10 sm:mt-16">
+              <button onClick={() => setCurrentPage(p => Math.max(1, p - 1))} disabled={currentPage === 1} className="p-2.5 sm:p-3 rounded-full bg-white/5 border border-white/10 disabled:opacity-30 hover:bg-white/10 hover:border-primary/30 transition-all hover:scale-105 active:scale-95 min-w-[40px] min-h-[40px] sm:min-w-[44px] sm:min-h-[44px] flex items-center justify-center">
                 <ChevronLeft className="w-4 h-4 text-white" />
               </button>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 sm:gap-2">
                 {Array.from({
               length: totalPages
-            }, (_, i) => i + 1).map(page => <button key={page} onClick={() => setCurrentPage(page)} className={`w-10 h-10 rounded-full text-sm font-medium transition-all hover:scale-105 active:scale-95 ${currentPage === page ? "bg-primary text-primary-foreground" : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10 hover:border-primary/30"}`}>
+            }, (_, i) => i + 1).map(page => <button key={page} onClick={() => setCurrentPage(page)} className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full text-xs sm:text-sm font-medium transition-all hover:scale-105 active:scale-95 ${currentPage === page ? "bg-primary text-primary-foreground" : "bg-white/5 text-white/60 hover:bg-white/10 border border-white/10 hover:border-primary/30"}`}>
                     {page}
                   </button>)}
               </div>
-              <button onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} className="p-3 rounded-full bg-white/5 border border-white/10 disabled:opacity-30 hover:bg-white/10 hover:border-primary/30 transition-all hover:scale-105 active:scale-95">
+              <button onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} className="p-2.5 sm:p-3 rounded-full bg-white/5 border border-white/10 disabled:opacity-30 hover:bg-white/10 hover:border-primary/30 transition-all hover:scale-105 active:scale-95 min-w-[40px] min-h-[40px] sm:min-w-[44px] sm:min-h-[44px] flex items-center justify-center">
                 <ChevronRight className="w-4 h-4 text-white" />
               </button>
             </div>}
