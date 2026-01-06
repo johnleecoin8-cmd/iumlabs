@@ -201,25 +201,26 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
               </motion.div>
             )}
 
-            {/* Bottom Right: Featured Image from Gallery */}
-            {gallery && gallery.length > 0 && (
-              <motion.div 
-                className="h-full"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                <div className="rounded-xl overflow-hidden h-full">
-                  <img 
-                    src={gallery[0].src}
-                    alt={gallery[0].title || `${project.name} featured image`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </motion.div>
-            )}
           </div>
+          
+          {/* Featured Image - Full Width */}
+          {gallery && gallery.length > 0 && (
+            <motion.div 
+              className="mt-3 md:mt-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              <div className="rounded-xl overflow-hidden h-[180px] md:h-[250px]">
+                <img 
+                  src={gallery[0].src}
+                  alt={gallery[0].title || `${project.name} featured image`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+          )}
         </div>
       </section>
 
