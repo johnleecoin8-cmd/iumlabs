@@ -309,6 +309,8 @@ export default function ResearchForm() {
     const placeholderId = `uploading-${Date.now()}`;
     const placeholder = `![Uploading...](${placeholderId})`;
     
+    console.log('[uploadContentImage] Starting upload for:', file.name, 'Size:', file.size, 'Type:', file.type);
+    
     // Insert at cursor position or end
     setFormData(prev => {
       const pos = cursorPosition ?? prev.content.length;
@@ -320,49 +322,74 @@ export default function ResearchForm() {
     toast.info('이미지 업로드 중...');
     
     try {
-      const fileExt = file.name.split('.').pop() || 'jpg';
-      const fileName = `research/inline-${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+      // Convert file to base64 for edge function
+      const reader = new FileReader();
+      const base64Promise = new Promise<string>((resolve, reject) => {
+        reader.onload = () => resolve(reader.result as string);
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
       
-      const { error } = await supabase.storage
-        .from('project-images')
-        .upload(fileName, file);
+      const base64Data = await base64Promise;
+      console.log('[uploadContentImage] Base64 conversion complete');
       
-      if (error) throw error;
+      // Use edge function to bypass RLS
+      const { data, error } = await supabase.functions.invoke('upload-content-image', {
+        body: {
+          base64: base64Data,
+          fileName: file.name,
+          mimeType: file.type,
+        },
+      });
       
-      const { data: { publicUrl } } = supabase.storage
-        .from('project-images')
-        .getPublicUrl(fileName);
+      console.log('[uploadContentImage] Edge function response:', { data, error });
+      
+      if (error) {
+        throw new Error(error.message || 'Edge function error');
+      }
+      
+      if (!data?.publicUrl) {
+        throw new Error('No publicUrl in response');
+      }
       
       setFormData(prev => ({
         ...prev,
-        content: prev.content.replace(`![Uploading...](${placeholderId})`, `![image](${publicUrl})`)
+        content: prev.content.replace(`![Uploading...](${placeholderId})`, `![image](${data.publicUrl})`)
       }));
       
       toast.success('이미지 업로드 완료!');
     } catch (error) {
-      console.error('Upload error:', error);
+      console.error('[uploadContentImage] Upload error:', error);
       setFormData(prev => ({
         ...prev,
         content: prev.content.replace(`![Uploading...](${placeholderId})`, '[이미지 업로드 실패]')
       }));
-      toast.error('이미지 업로드 실패');
+      toast.error(`이미지 업로드 실패: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   }, []);
 
-  const importRemoteImage = useCallback(async (imageUrl: string, cursorPosition?: number): Promise<string | null> => {
+  const importRemoteImage = useCallback(async (imageUrl: string): Promise<string | null> => {
+    console.log('[importRemoteImage] Importing:', imageUrl);
     try {
       const { data, error } = await supabase.functions.invoke('import-remote-image', {
         body: { url: imageUrl },
       });
       
-      if (error || !data?.publicUrl) {
-        console.error('Remote import error:', error);
+      console.log('[importRemoteImage] Response:', { data, error });
+      
+      if (error) {
+        console.error('[importRemoteImage] Error:', error);
+        return null;
+      }
+      
+      if (!data?.publicUrl) {
+        console.error('[importRemoteImage] No publicUrl in response');
         return null;
       }
       
       return data.publicUrl;
     } catch (error) {
-      console.error('Remote import error:', error);
+      console.error('[importRemoteImage] Exception:', error);
       return null;
     }
   }, []);
@@ -371,17 +398,24 @@ export default function ResearchForm() {
     const items = e.clipboardData.items;
     const cursorPosition = e.currentTarget.selectionStart;
     
+    console.log('[handleContentPaste] Clipboard items:', items.length);
+    
     // Check for direct image files first (screenshots, copied images)
     const imageFiles: File[] = [];
     for (const item of Array.from(items)) {
+      console.log('[handleContentPaste] Item type:', item.type, 'kind:', item.kind);
       if (item.type.startsWith('image/')) {
         const file = item.getAsFile();
-        if (file) imageFiles.push(file);
+        if (file) {
+          console.log('[handleContentPaste] Found image file:', file.name, file.size);
+          imageFiles.push(file);
+        }
       }
     }
     
     if (imageFiles.length > 0) {
       e.preventDefault();
+      console.log('[handleContentPaste] Processing', imageFiles.length, 'image files');
       for (const file of imageFiles) {
         await uploadContentImage(file, cursorPosition);
       }
@@ -390,10 +424,14 @@ export default function ResearchForm() {
     
     // Check for HTML content (copied from web pages)
     const html = e.clipboardData.getData('text/html');
+    console.log('[handleContentPaste] HTML content:', html ? 'present' : 'none', html?.length || 0, 'chars');
+    
     if (html) {
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, 'text/html');
       const imgElements = doc.querySelectorAll('img');
+      
+      console.log('[handleContentPaste] Found', imgElements.length, 'img elements in HTML');
       
       if (imgElements.length === 0) return; // No images, let default paste happen
       
@@ -410,11 +448,13 @@ export default function ResearchForm() {
       
       for (const img of Array.from(imgElements)) {
         const src = img.getAttribute('src') || img.getAttribute('data-src') || '';
+        console.log('[handleContentPaste] Processing image src:', src?.substring(0, 100));
         
         if (!src) continue;
         
         // Handle data URLs (base64 images)
         if (src.startsWith('data:image/')) {
+          console.log('[handleContentPaste] Processing data URL');
           try {
             const response = await fetch(src);
             const blob = await response.blob();
@@ -422,7 +462,7 @@ export default function ResearchForm() {
             await uploadContentImage(file, cursorPosition);
             successCount++;
           } catch (err) {
-            console.error('Failed to process data URL:', err);
+            console.error('[handleContentPaste] Failed to process data URL:', err);
             failCount++;
           }
           continue;
@@ -430,12 +470,14 @@ export default function ResearchForm() {
         
         // Handle remote URLs
         if (src.startsWith('http://') || src.startsWith('https://')) {
+          console.log('[handleContentPaste] Importing remote URL');
           const publicUrl = await importRemoteImage(src);
           if (publicUrl) {
             insertedContent += `\n![image](${publicUrl})\n`;
             successCount++;
           } else {
             // Fallback: use original URL (hotlink)
+            console.log('[handleContentPaste] Fallback to original URL');
             insertedContent += `\n![image](${src})\n`;
             failCount++;
           }
@@ -450,6 +492,8 @@ export default function ResearchForm() {
           return { ...prev, content: before + insertedContent + after };
         });
       }
+      
+      console.log('[handleContentPaste] Complete. Success:', successCount, 'Failed:', failCount);
       
       if (successCount > 0) {
         toast.success(`이미지 ${successCount}개 업로드 완료!`);
