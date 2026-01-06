@@ -23,7 +23,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { ArrowRight, Users, TrendingUp, Globe, Award, Briefcase, GraduationCap, Clock, Wallet, BookOpen, Coffee, MapPin, DollarSign, Search } from "lucide-react";
+import { ArrowRight, TrendingUp, Briefcase, GraduationCap, MapPin, DollarSign, Search } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -112,15 +112,6 @@ const positions = [
       "Open to learning and adapting quickly"
     ]
   },
-];
-
-const benefits = [
-  { icon: Globe, title: "Global Impact", text: "Work with world-class Web3 projects and shape Korea's blockchain future" },
-  { icon: Clock, title: "Work Your Way", text: "Flexible hours and remote-first culture that respects your rhythm" },
-  { icon: Wallet, title: "Rewarding Growth", text: "Competitive compensation that grows with your impact" },
-  { icon: BookOpen, title: "We Invest in You", text: "Learning budgets, conferences, and resources to fuel your growth" },
-  { icon: Coffee, title: "Belong Here", text: "A collaborative team where your voice matters from day one" },
-  { icon: GraduationCap, title: "Learn from the Best", text: "Direct mentorship from industry veterans who want to see you succeed" },
 ];
 
 const process = [
@@ -449,103 +440,14 @@ const Jobs = () => {
         </div>
       </section>
 
-      {/* 03. What You'll Gain Section - Staggered Grid */}
-      <section className="bg-surface-odd" id="benefits">
+
+      {/* 03. Process Section */}
+      <section className="bg-surface-odd" id="process">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
                 <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">What You'll Gain</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Grow With Us</span>
-            </div>
-          </AnimatedSection>
-          
-          <AnimatedSection delay={100}>
-            <div className="px-4 md:px-10 py-10 md:py-16">
-              {/* Staggered 2-Column Grid */}
-              <div className="grid md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto">
-                {/* Left Column */}
-                <div className="space-y-4 md:space-y-6">
-                  {benefits.filter((_, idx) => idx % 2 === 0).map((benefit, idx) => {
-                    const Icon = benefit.icon;
-                    const originalIdx = idx * 2;
-                    return (
-                      <motion.div
-                        key={originalIdx}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: originalIdx * 0.1, duration: 0.5 }}
-                        whileHover={{ scale: 1.02, y: -4 }}
-                        className="group relative bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 rounded-2xl md:rounded-3xl p-6 md:p-8 overflow-hidden transition-all duration-300 hover:border-white/20 hover:shadow-[0_0_40px_rgba(255,255,255,0.05)]"
-                      >
-                        {/* Glow effect on hover */}
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/5 via-transparent to-transparent" />
-                        
-                        <div className="relative z-10">
-                          <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center mb-5 group-hover:bg-white/15 group-hover:scale-110 transition-all duration-300">
-                            <Icon className="w-6 h-6 md:w-7 md:h-7 text-white/70 group-hover:text-white transition-colors" />
-                          </div>
-                          <h4 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-white transition-colors">
-                            {benefit.title}
-                          </h4>
-                          <p className="text-white/50 text-sm md:text-base leading-relaxed group-hover:text-white/60 transition-colors">
-                            {benefit.text}
-                          </p>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-                
-                {/* Right Column - Offset for stagger effect */}
-                <div className="space-y-4 md:space-y-6 md:mt-12">
-                  {benefits.filter((_, idx) => idx % 2 === 1).map((benefit, idx) => {
-                    const Icon = benefit.icon;
-                    const originalIdx = idx * 2 + 1;
-                    return (
-                      <motion.div
-                        key={originalIdx}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: originalIdx * 0.1, duration: 0.5 }}
-                        whileHover={{ scale: 1.02, y: -4 }}
-                        className="group relative bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 rounded-2xl md:rounded-3xl p-6 md:p-8 overflow-hidden transition-all duration-300 hover:border-white/20 hover:shadow-[0_0_40px_rgba(255,255,255,0.05)]"
-                      >
-                        {/* Glow effect on hover */}
-                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/5 via-transparent to-transparent" />
-                        
-                        <div className="relative z-10">
-                          <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center mb-5 group-hover:bg-white/15 group-hover:scale-110 transition-all duration-300">
-                            <Icon className="w-6 h-6 md:w-7 md:h-7 text-white/70 group-hover:text-white transition-colors" />
-                          </div>
-                          <h4 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-white transition-colors">
-                            {benefit.title}
-                          </h4>
-                          <p className="text-white/50 text-sm md:text-base leading-relaxed group-hover:text-white/60 transition-colors">
-                            {benefit.text}
-                          </p>
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* 05. Process Section */}
-      <section className="bg-surface-even" id="process">
-        <div className="border-t border-white/10">
-          <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How It Works</span>
@@ -582,13 +484,13 @@ const Jobs = () => {
         </div>
       </section>
 
-      {/* 05. Apply Section */}
-      <section className="bg-surface-odd" id="apply">
+      {/* 04. Apply Section */}
+      <section className="bg-surface-even" id="apply">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">We Want You</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Tell Us Your Story</span>
