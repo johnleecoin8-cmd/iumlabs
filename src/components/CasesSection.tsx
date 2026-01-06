@@ -120,8 +120,8 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
           onClick={() => window.scrollTo(0, 0)}
           className="flex items-start gap-2.5 sm:gap-3 active:scale-[0.97] transition-transform duration-150"
         >
-          {/* Image */}
-          <div className="w-14 h-14 sm:w-16 sm:h-16 md:w-18 md:h-18 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+          {/* Image - Wide aspect ratio */}
+          <div className="w-20 h-12 sm:w-24 sm:h-14 md:w-28 md:h-16 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img
               src={bgImage}
               alt={name}
