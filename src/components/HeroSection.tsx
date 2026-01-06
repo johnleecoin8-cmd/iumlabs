@@ -154,6 +154,7 @@ const HeroSection = () => {
           muted
           loop
           playsInline
+          preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
           poster="/images/hero-poster.jpg"
         >
