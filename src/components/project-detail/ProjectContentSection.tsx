@@ -82,7 +82,7 @@ const MetricCard = ({ metric, index }: MetricCardProps) => {
 };
 
 interface ProjectContentSectionProps {
-  project: ProjectData & { client_name?: string; duration?: string };
+  project: ProjectData & { client_name?: string; duration?: string; featureImage?: string };
   metrics?: ProjectMetric[];
   gallery?: Array<{ src: string; title?: string; description?: string }>;
 }
@@ -98,7 +98,27 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
 
   return (
     <div className="bg-[#0A0A0A]">
-      {/* SECTION 0: PROJECT META INFO */}
+      {/* SECTION 0: FEATURE IMAGE HERO */}
+      {project.featureImage && (
+        <section className="py-0">
+          <motion.div 
+            className="w-full h-[50vh] md:h-[60vh] relative overflow-hidden"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <img 
+              src={project.featureImage} 
+              alt={`${project.name} featured`}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
+          </motion.div>
+        </section>
+      )}
+
+      {/* SECTION 1: PROJECT META INFO */}
       {hasMetaInfo && (
         <section className="py-3 md:py-4">
           <div className="px-4 md:px-8 lg:px-12">
