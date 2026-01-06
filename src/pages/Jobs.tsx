@@ -118,12 +118,12 @@ const positions = [
 ];
 
 const benefits = [
-  { icon: Globe, title: "Global Projects", text: "Opportunities to collaborate with global Web3 projects" },
-  { icon: Clock, title: "Flexible Work", text: "Flexible remote work environment and autonomous working hours" },
-  { icon: Wallet, title: "Competitive Compensation", text: "Competitive salary and performance incentives" },
-  { icon: BookOpen, title: "Growth Support", text: "Continuous learning and professional development support" },
-  { icon: Coffee, title: "Team Culture", text: "Horizontal and open team culture" },
-  { icon: GraduationCap, title: "Mentoring", text: "1:1 mentoring from senior team members" },
+  { icon: Globe, title: "Global Impact", text: "Work with world-class Web3 projects and shape Korea's blockchain future" },
+  { icon: Clock, title: "Work Your Way", text: "Flexible hours and remote-first culture that respects your rhythm" },
+  { icon: Wallet, title: "Rewarding Growth", text: "Competitive compensation that grows with your impact" },
+  { icon: BookOpen, title: "We Invest in You", text: "Learning budgets, conferences, and resources to fuel your growth" },
+  { icon: Coffee, title: "Belong Here", text: "A collaborative team where your voice matters from day one" },
+  { icon: GraduationCap, title: "Learn from the Best", text: "Direct mentorship from industry veterans who want to see you succeed" },
 ];
 
 const process = [
@@ -203,7 +203,7 @@ const Jobs = () => {
     }
   };
 
-  const buildForMarquee = "Build For ".repeat(20);
+  const talentMarquee = "Talent Wanted ".repeat(20);
 
   return (
     <div className="min-h-screen bg-surface-base flex flex-col">
@@ -234,29 +234,29 @@ const Jobs = () => {
             <div className="relative z-10 container mx-auto px-6 text-center">
               <AnimatedSection>
                 <span className="inline-block text-xs md:text-sm text-white/50 tracking-[0.3em] uppercase mb-6">
-                  Join Our Team
+                  We're Hiring
                 </span>
               </AnimatedSection>
               
               <AnimatedSection delay={100}>
                 <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
-                  Join Ium Labs
+                  We're Looking<br className="hidden md:block" /> for You
                 </h1>
               </AnimatedSection>
               
               <AnimatedSection delay={200}>
                 <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-                  Data-driven research & GTM marketing agency<br />
-                  bridging global Web3 projects with the Korean market
+                  한국 Web3 시장의 미래를 함께 만들 뛰어난 인재를 찾습니다.<br />
+                  Your next chapter starts here.
                 </p>
               </AnimatedSection>
               
               <AnimatedSection delay={300}>
                 <a
-                  href="#apply"
+                  href="#positions"
                   className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-colors"
                 >
-                  Apply Now
+                  Explore Opportunities
                   <ArrowRight className="w-5 h-5" />
                 </a>
               </AnimatedSection>
@@ -276,16 +276,16 @@ const Jobs = () => {
         </div>
       </main>
 
-      {/* 01. About Section */}
+      {/* 01. Why Join Us Section */}
       <section className="bg-surface-odd" id="about">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
                 <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
+                <h2 className="text-lg md:text-xl font-medium text-white">Why Join Us</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Who We Are</span>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Your Growth, Our Priority</span>
             </div>
           </AnimatedSection>
           
@@ -294,15 +294,16 @@ const Jobs = () => {
               <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
                 <div>
                   <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight">
-                    We bridge global Web3 projects with the Korean market
+                    We invest in exceptional people
                   </h3>
                   <p className="text-white/60 leading-relaxed mb-6">
-                    Ium Labs is a specialized agency helping global Web3 projects enter the Korean market. 
-                    Through data-driven research and strategic GTM marketing, we support projects in successfully establishing their presence in Korea.
+                    At Ium Labs, your ideas matter. We're not just building a company—we're building a team of passionate individuals who shape the future of Web3 in Korea together.
                   </p>
-                  <p className="text-white/60 leading-relaxed">
-                    True to our name "Ium" (meaning "connection" in Korean), we serve as a bridge between global and local markets.
-                    If you want to build the future of Web3 with our passionate team, join us now.
+                  <p className="text-white/60 leading-relaxed mb-6">
+                    Work with global projects, learn from industry leaders, and make a real impact. True to our name "Ium" (meaning "connection" in Korean), we connect talented individuals with extraordinary opportunities.
+                  </p>
+                  <p className="text-white/70 font-medium">
+                    Ready to write your next chapter? We're excited to meet you.
                   </p>
                 </div>
                 <div className="relative h-64 md:h-80 lg:h-96">
@@ -328,27 +329,27 @@ const Jobs = () => {
             <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
                 <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Positions</h2>
+                <h2 className="text-lg md:text-xl font-medium text-white">Find Your Role</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Open Roles</span>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">We're Actively Hiring</span>
             </div>
           </AnimatedSection>
 
-          {/* Build For Marquee */}
+          {/* Talent Wanted Marquee */}
           <div className="overflow-hidden border-b border-white/10 py-6 md:py-8">
             <motion.div
               animate={{ x: ["0%", "-50%"] }}
               transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
               className="flex whitespace-nowrap"
             >
-              {buildForMarquee.split("Build For ").map((_, idx) => (
+              {talentMarquee.split("Talent Wanted ").map((_, idx) => (
                 <span
                   key={idx}
                   className={`text-4xl md:text-6xl font-bold tracking-tight mr-8 ${
                     idx % 2 === 0 ? "text-white" : "text-white/20"
                   }`}
                 >
-                  Build For{" "}
+                  Talent Wanted{" "}
                 </span>
               ))}
             </motion.div>
@@ -397,16 +398,16 @@ const Jobs = () => {
         </div>
       </section>
 
-      {/* 04. Benefits Section */}
+      {/* 03. What You'll Gain Section */}
       <section className="bg-surface-odd" id="benefits">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
                 <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Benefits</h2>
+                <h2 className="text-lg md:text-xl font-medium text-white">What You'll Gain</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What You Get</span>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Grow With Us</span>
             </div>
           </AnimatedSection>
           
@@ -479,20 +480,20 @@ const Jobs = () => {
         </div>
       </section>
 
-      {/* 06. Apply Section */}
+      {/* 05. Apply Section */}
       <section className="bg-surface-odd" id="apply">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
                 <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Apply</h2>
+                <h2 className="text-lg md:text-xl font-medium text-white">We Want You</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Join Us</span>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Tell Us Your Story</span>
             </div>
           </AnimatedSection>
 
-          {/* Apply Now Marquee */}
+          {/* We Want You Marquee */}
           <div className="overflow-hidden bg-white py-4 md:py-5">
             <motion.div
               animate={{ x: ["0%", "-50%"] }}
@@ -500,10 +501,10 @@ const Jobs = () => {
               className="flex whitespace-nowrap"
             >
               <span className="text-2xl md:text-3xl font-bold tracking-tight text-black">
-                {"Apply Now · ".repeat(12)}
+                {"We Want You · ".repeat(12)}
               </span>
               <span className="text-2xl md:text-3xl font-bold tracking-tight text-black">
-                {"Apply Now · ".repeat(12)}
+                {"We Want You · ".repeat(12)}
               </span>
             </motion.div>
           </div>
@@ -511,9 +512,11 @@ const Jobs = () => {
           <AnimatedSection delay={100}>
             <div className="px-4 md:px-10 py-10 md:py-16">
               <div className="max-w-4xl mx-auto">
-                <p className="text-center text-white/50 text-sm md:text-base mb-10 leading-relaxed">
-                  We will contact you within 24 hours on business days.<br />
-                  The information you provide will only be used for recruitment purposes.
+                <p className="text-center text-white/60 text-lg md:text-xl mb-4 font-medium">
+                  Ready to make an impact?
+                </p>
+                <p className="text-center text-white/40 text-sm md:text-base mb-10 leading-relaxed">
+                  We're excited to hear from you. Tell us your story—we're listening.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
