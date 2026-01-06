@@ -612,24 +612,7 @@ const Jobs = () => {
                 </div>
 
                 {/* Salary & Work Type Pills */}
-                <motion.div className="flex flex-wrap gap-3 mt-4" initial={{
-              opacity: 0,
-              x: -20
-            }} animate={{
-              opacity: 1,
-              x: 0
-            }} transition={{
-              delay: 0.15
-            }}>
-                  <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full">
-                    <DollarSign className="w-4 h-4" />
-                    <span className="text-sm font-medium">{selectedPosition.salary}</span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-400 px-4 py-2 rounded-full">
-                    <MapPin className="w-4 h-4" />
-                    <span className="text-sm font-medium">{selectedPosition.workType}</span>
-                  </div>
-                </motion.div>
+                
 
               </DialogHeader>
 
