@@ -348,26 +348,24 @@ const Jobs = () => {
               </AnimatedSection>
             </div>
             
-            {/* Client Logo Marquee - Bottom of Hero */}
-            <div className="absolute bottom-0 left-0 right-0 z-10 border-t border-white/15 py-3 sm:py-4 overflow-hidden bg-gradient-to-t from-black/40 to-transparent">
-              <div className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/50 text-label z-20">
-                <span className="number-badge">01</span>
-              </div>
-
-              <div className="flex items-center logo-marquee-slow ml-12 sm:ml-20">
-                {[...clientLogos, ...clientLogos].map((client, index) => (
-                  <div key={index} className="flex items-center gap-2 sm:gap-2.5 mx-1.5 sm:mx-2.5 px-3 sm:px-5 py-1.5 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300">
-                    <img 
-                      src={client.logo} 
-                      alt={client.name} 
-                      className={`h-4 w-4 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`} 
-                    />
-                    <span className="text-white/75 text-caption font-medium whitespace-nowrap">
-                      {client.name}
-                    </span>
-                  </div>
+            {/* Talent Wanted Marquee - Bottom of Hero */}
+            <div className="absolute bottom-0 left-0 right-0 z-10 bg-white overflow-hidden">
+              <motion.div
+                animate={{ x: ["0%", "-50%"] }}
+                transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                className="flex whitespace-nowrap py-4 md:py-5"
+              >
+                {[...Array(2)].map((_, i) => (
+                  <span key={i} className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-black flex items-center">
+                    {[...Array(8)].map((_, j) => (
+                      <span key={j} className="flex items-center">
+                        <span>Talent Wanted</span>
+                        <span className="mx-5 md:mx-8 w-2 h-2 md:w-2.5 md:h-2.5 bg-black rounded-full" />
+                      </span>
+                    ))}
+                  </span>
                 ))}
-              </div>
+              </motion.div>
             </div>
           </div>
         </div>
