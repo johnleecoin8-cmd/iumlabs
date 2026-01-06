@@ -54,7 +54,6 @@ const positions = [
     icon: Search,
     title: "Researcher", 
     description: "Responsible for Web3 market research and in-depth analysis. Identify the latest trends in the blockchain ecosystem and derive insights.",
-    tags: ["Market Research", "Data Analysis", "Report Writing"],
     salary: "₩50M - 70M / year",
     workType: "Hybrid (Seoul Office + Remote)",
     jobDescription: [
@@ -76,7 +75,6 @@ const positions = [
     icon: TrendingUp,
     title: "Growth Manager", 
     description: "Develop and execute strategies for global Web3 projects entering the Korean market. Lead community building and marketing efforts.",
-    tags: ["GTM Strategy", "Community", "Marketing"],
     salary: "₩60M - 90M / year",
     workType: "Hybrid (Seoul Office + Remote)",
     jobDescription: [
@@ -98,7 +96,6 @@ const positions = [
     icon: Briefcase,
     title: "Open Position", 
     description: "If you have passion for Web3, feel free to apply. We create various roles together with talented individuals.",
-    tags: ["Web3 Passion", "Self-Driven", "Creative"],
     salary: "Negotiable",
     workType: "Flexible (Remote-first)",
     jobDescription: [
@@ -375,16 +372,6 @@ const Jobs = () => {
                       <p className="text-white/50 text-sm leading-relaxed flex-1 mb-6">
                         {pos.description}
                       </p>
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {pos.tags.map((tag, tagIdx) => (
-                          <span
-                            key={tagIdx}
-                            className="text-xs text-white/40 px-2 py-1 border border-white/10 rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
                       <span className="inline-flex items-center gap-2 text-white font-medium group-hover:text-white/80 transition-colors">
                         View Details
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -676,22 +663,6 @@ const Jobs = () => {
                   </div>
                 </motion.div>
 
-                {/* Tags */}
-                <motion.div 
-                  className="flex flex-wrap gap-2 mt-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  {selectedPosition.tags.map((tag, idx) => (
-                    <span
-                      key={idx}
-                      className="text-xs text-white/50 px-3 py-1 bg-white/5 border border-white/10 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </motion.div>
               </DialogHeader>
 
               <div className="space-y-6 mt-8">
