@@ -258,9 +258,8 @@ const Jobs = () => {
                     If you want to build the future of Web3 with our passionate team, join us now.
                   </p>
                 </div>
-                <div className="relative h-64 md:h-80 lg:h-96 bg-black/30 rounded-2xl border border-white/10 overflow-hidden">
+                <div className="relative h-64 md:h-80 lg:h-96">
                   <Logo3D className="w-full h-full" />
-                  <div className="absolute -bottom-3 -right-3 w-full h-full bg-white/5 rounded-2xl -z-10" />
                 </div>
               </div>
             </div>
