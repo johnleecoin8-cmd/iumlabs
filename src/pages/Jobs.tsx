@@ -177,16 +177,16 @@ const Jobs = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-sky-400 pt-20">
+      <section className="relative min-h-[90vh] flex flex-col justify-center overflow-hidden bg-background pt-20">
         {/* Floating decorations */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl" />
-        <div className="absolute top-40 right-20 w-48 h-48 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-40 left-1/4 w-24 h-24 bg-white/20 rounded-full blur-xl" />
-        <div className="absolute bottom-20 right-1/3 w-16 h-16 bg-yellow-300/30 rounded-full blur-lg" />
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl" />
+        <div className="absolute top-40 right-20 w-48 h-48 bg-primary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-40 left-1/4 w-24 h-24 bg-primary/20 rounded-full blur-xl" />
+        <div className="absolute bottom-20 right-1/3 w-16 h-16 bg-primary/30 rounded-full blur-lg" />
         
         {/* Dot pattern */}
-        <div className="absolute inset-0 opacity-20" style={{
-          backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage: 'radial-gradient(circle, hsl(var(--muted-foreground)) 1px, transparent 1px)',
           backgroundSize: '30px 30px'
         }} />
 
@@ -195,7 +195,7 @@ const Jobs = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight"
+            className="text-5xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6 tracking-tight"
           >
             Join Ium Labs
           </motion.h1>
@@ -203,7 +203,7 @@ const Jobs = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed"
+            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
           >
             글로벌 Web3 프로젝트와 한국 시장을 연결하는<br />
             데이터 기반 리서치 & GTM 마케팅 에이전시
@@ -213,7 +213,7 @@ const Jobs = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-colors"
+            className="inline-flex items-center gap-2 bg-foreground text-background px-8 py-4 rounded-full font-semibold text-lg hover:bg-foreground/90 transition-colors"
           >
             Apply Now
             <ArrowRight className="w-5 h-5" />
@@ -221,7 +221,7 @@ const Jobs = () => {
         </div>
 
         {/* Logo Marquee */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm py-6 overflow-hidden">
+        <div className="absolute bottom-0 left-0 right-0 bg-muted/50 backdrop-blur-sm py-6 overflow-hidden">
           <motion.div
             animate={{ x: ["0%", "-50%"] }}
             transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
@@ -232,7 +232,7 @@ const Jobs = () => {
                 key={idx}
                 src={logo.src}
                 alt={logo.alt}
-                className="h-8 md:h-10 w-auto opacity-80 brightness-0 invert"
+                className="h-8 md:h-10 w-auto opacity-60"
               />
             ))}
           </motion.div>
@@ -258,7 +258,7 @@ const Jobs = () => {
                 <p className="text-4xl md:text-5xl font-bold text-foreground mb-2">
                   {stat.number}
                 </p>
-                <p className="text-sm md:text-base text-blue-600 font-medium">
+                <p className="text-sm md:text-base text-primary font-medium">
                   {stat.label}
                 </p>
               </motion.div>
@@ -293,7 +293,7 @@ const Jobs = () => {
                 alt="Ium Labs Team"
                 className="w-full h-auto rounded-2xl object-cover"
               />
-              <div className="absolute -bottom-4 -right-4 w-full h-full bg-blue-500/20 rounded-2xl -z-10" />
+              <div className="absolute -bottom-4 -right-4 w-full h-full bg-primary/20 rounded-2xl -z-10" />
             </div>
           </div>
         </div>
@@ -312,7 +312,7 @@ const Jobs = () => {
               <span
                 key={idx}
                 className={`text-5xl md:text-7xl font-bold tracking-tight mr-8 ${
-                  idx % 2 === 0 ? "text-foreground" : "text-blue-500"
+                  idx % 2 === 0 ? "text-foreground" : "text-primary"
                 }`}
               >
                 Build For{" "}
@@ -342,7 +342,7 @@ const Jobs = () => {
                 </p>
                 <a
                   href="#apply-now"
-                  className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                  className="inline-flex items-center gap-2 text-primary font-semibold hover:text-primary/80 transition-colors"
                 >
                   Apply Now
                   <ArrowRight className="w-4 h-4" />
@@ -423,7 +423,7 @@ const Jobs = () => {
                   className="flex flex-col items-center"
                 >
                   <p className="text-white/60 text-xs mb-2">{step.above}</p>
-                  <div className="bg-blue-500 rounded-full px-8 py-4 min-w-[140px] text-center">
+                  <div className="bg-primary rounded-full px-8 py-4 min-w-[140px] text-center">
                     <span className="text-white font-bold text-sm">
                       {step.step}. {step.title}
                     </span>
