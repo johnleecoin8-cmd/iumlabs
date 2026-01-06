@@ -362,15 +362,61 @@ const ResearchDetail = () => {
                   </li>
                 );
               }
-              // Handle table headers and rows
+              // Handle table - collect consecutive table rows
               if (line.startsWith('| ') && !line.includes('---')) {
-                const cells = line.split('|').filter(cell => cell.trim());
-                const isHeader = index > 0 && post.content.split('\n')[index + 1]?.includes('---');
+                const lines = post.content.split('\n');
+                
+                // Check if this is the first row of a table
+                const prevLine = index > 0 ? lines[index - 1] : '';
+                if (prevLine.startsWith('| ') || prevLine.includes('---')) {
+                  // This row was already rendered as part of the table
+                  return null;
+                }
+                
+                // Collect all table rows
+                const tableRows: string[] = [];
+                let i = index;
+                while (i < lines.length && (lines[i].startsWith('| ') || lines[i].includes('|---'))) {
+                  if (!lines[i].includes('|---')) {
+                    tableRows.push(lines[i]);
+                  }
+                  i++;
+                }
+                
+                if (tableRows.length === 0) return null;
+                
+                // Parse and render table
+                const headerRow = tableRows[0];
+                const bodyRows = tableRows.slice(1);
+                const headerCells = headerRow.split('|').filter(cell => cell.trim()).map(cell => cell.trim());
+                
                 return (
-                  <div key={index} className={`grid grid-cols-${cells.length} gap-2 py-2 border-b border-white/10 ${isHeader ? 'font-semibold text-white' : 'text-white/70'}`}>
-                    {cells.map((cell, i) => (
-                      <span key={i} className="px-2 text-sm">{cell.trim()}</span>
-                    ))}
+                  <div key={index} className="my-6 overflow-x-auto rounded-lg border border-white/10">
+                    <table className="w-full text-sm">
+                      <thead className="bg-white/5">
+                        <tr>
+                          {headerCells.map((cell, i) => (
+                            <th key={i} className="px-4 py-3 text-left text-white font-semibold border-b border-white/10">
+                              {cell}
+                            </th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {bodyRows.map((row, rowIdx) => {
+                          const cells = row.split('|').filter(cell => cell.trim()).map(cell => cell.trim());
+                          return (
+                            <tr key={rowIdx} className="border-b border-white/5 hover:bg-white/5 transition-colors">
+                              {cells.map((cell, cellIdx) => (
+                                <td key={cellIdx} className="px-4 py-3 text-white/70">
+                                  {cell}
+                                </td>
+                              ))}
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
                   </div>
                 );
               }

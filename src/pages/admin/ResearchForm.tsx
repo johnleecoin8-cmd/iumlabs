@@ -501,6 +501,56 @@ export default function ResearchForm() {
       }
       
       // Now convert HTML to markdown while preserving structure
+      const convertTableToMarkdown = (tableEl: Element): string => {
+        const rows: string[][] = [];
+        const headerRows: string[][] = [];
+        
+        // Get header rows from thead
+        const thead = tableEl.querySelector('thead');
+        if (thead) {
+          const headerRowEls = thead.querySelectorAll('tr');
+          for (const tr of Array.from(headerRowEls)) {
+            const cells = Array.from(tr.querySelectorAll('th, td')).map(cell => cell.textContent?.trim() || '');
+            if (cells.length > 0) headerRows.push(cells);
+          }
+        }
+        
+        // Get body rows
+        const tbody = tableEl.querySelector('tbody') || tableEl;
+        const bodyRowEls = tbody.querySelectorAll('tr');
+        for (const tr of Array.from(bodyRowEls)) {
+          // Skip if it's in thead
+          if (tr.closest('thead')) continue;
+          const cells = Array.from(tr.querySelectorAll('th, td')).map(cell => cell.textContent?.trim() || '');
+          if (cells.length > 0) {
+            // First row without thead becomes header
+            if (headerRows.length === 0 && rows.length === 0) {
+              headerRows.push(cells);
+            } else {
+              rows.push(cells);
+            }
+          }
+        }
+        
+        if (headerRows.length === 0 && rows.length === 0) return '';
+        
+        let markdown = '\n';
+        
+        // Render header
+        if (headerRows.length > 0) {
+          const header = headerRows[0];
+          markdown += '| ' + header.join(' | ') + ' |\n';
+          markdown += '| ' + header.map(() => '---').join(' | ') + ' |\n';
+        }
+        
+        // Render body rows
+        for (const row of rows) {
+          markdown += '| ' + row.join(' | ') + ' |\n';
+        }
+        
+        return markdown + '\n';
+      };
+      
       const convertNodeToMarkdown = (node: Node): string => {
         if (node.nodeType === Node.TEXT_NODE) {
           return node.textContent || '';
@@ -510,6 +560,16 @@ export default function ResearchForm() {
         
         const el = node as Element;
         const tagName = el.tagName.toLowerCase();
+        
+        // Handle tables
+        if (tagName === 'table') {
+          return convertTableToMarkdown(el);
+        }
+        
+        // Skip table internals - handled by convertTableToMarkdown
+        if (['thead', 'tbody', 'tfoot', 'tr', 'th', 'td'].includes(tagName)) {
+          return '';
+        }
         
         // Handle images - insert at their original position
         if (tagName === 'img') {
