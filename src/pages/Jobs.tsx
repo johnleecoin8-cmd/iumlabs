@@ -24,8 +24,8 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
 
-// Import assets
-import seoulBridgeNight from "@/assets/seoul-bridge-night.jpg";
+// Import components
+import Logo3D from "@/components/Logo3D";
 
 const applicationSchema = z.object({
   name: z.string().min(1, "Please enter your name"),
@@ -258,12 +258,8 @@ const Jobs = () => {
                     If you want to build the future of Web3 with our passionate team, join us now.
                   </p>
                 </div>
-                <div className="relative">
-                  <img
-                    src={seoulBridgeNight}
-                    alt="Seoul Bridge at Night"
-                    className="w-full h-auto rounded-2xl object-cover"
-                  />
+                <div className="relative h-64 md:h-80 lg:h-96 bg-black/30 rounded-2xl border border-white/10 overflow-hidden">
+                  <Logo3D className="w-full h-full" />
                   <div className="absolute -bottom-3 -right-3 w-full h-full bg-white/5 rounded-2xl -z-10" />
                 </div>
               </div>
