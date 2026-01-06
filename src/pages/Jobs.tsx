@@ -28,16 +28,16 @@ import MediaPartnersSection from "@/components/MediaPartnersSection";
 import teamPhoto from "@/assets/team-photo.png";
 
 const applicationSchema = z.object({
-  name: z.string().min(1, "이름을 입력해주세요"),
-  email: z.string().email("유효한 이메일을 입력해주세요"),
+  name: z.string().min(1, "Please enter your name"),
+  email: z.string().email("Please enter a valid email"),
   phone: z.string().optional(),
   telegram: z.string().optional(),
   linkedinUrl: z.string().optional(),
   portfolioUrl: z.string().optional(),
-  position: z.string().min(1, "포지션을 선택해주세요"),
+  position: z.string().min(1, "Please select a position"),
   coverLetter: z.string().optional(),
   privacyAgreed: z.literal(true, {
-    errorMap: () => ({ message: "개인정보처리방침에 동의해주세요" }),
+    errorMap: () => ({ message: "Please agree to the privacy policy" }),
   }),
 });
 
@@ -54,37 +54,37 @@ const positions = [
   { 
     emoji: "🔍", 
     title: "Researcher", 
-    description: "Web3 시장 리서치 및 심층 분석을 담당합니다. 블록체인 생태계의 최신 트렌드를 파악하고 인사이트를 도출합니다.",
+    description: "Responsible for Web3 market research and in-depth analysis. Identify the latest trends in the blockchain ecosystem and derive insights.",
     tags: ["Market Research", "Data Analysis", "Report Writing"]
   },
   { 
     emoji: "📈", 
     title: "Growth Manager", 
-    description: "글로벌 Web3 프로젝트의 한국 시장 진출 전략을 수립하고 실행합니다. 커뮤니티 빌딩과 마케팅을 리드합니다.",
+    description: "Develop and execute strategies for global Web3 projects entering the Korean market. Lead community building and marketing efforts.",
     tags: ["GTM Strategy", "Community", "Marketing"]
   },
   { 
     emoji: "💼", 
     title: "Open Position", 
-    description: "위 포지션 외에도 Web3에 대한 열정이 있다면 자유롭게 지원해주세요. 다양한 역할을 함께 만들어갑니다.",
+    description: "If you have passion for Web3, feel free to apply. We create various roles together with talented individuals.",
     tags: ["Web3 Passion", "Self-Driven", "Creative"]
   },
 ];
 
 const benefits = [
-  { icon: Globe, title: "글로벌 프로젝트", text: "글로벌 Web3 프로젝트와의 협업 기회" },
-  { icon: Clock, title: "유연한 근무", text: "유연한 원격근무 환경과 자율적인 업무 시간" },
-  { icon: Wallet, title: "경쟁력 있는 보상", text: "경쟁력 있는 보상과 성과 인센티브" },
-  { icon: BookOpen, title: "성장 지원", text: "지속적인 학습과 성장 지원" },
-  { icon: Coffee, title: "팀 문화", text: "수평적이고 자유로운 팀 문화" },
-  { icon: GraduationCap, title: "멘토링", text: "시니어 멤버의 1:1 멘토링 제공" },
+  { icon: Globe, title: "Global Projects", text: "Opportunities to collaborate with global Web3 projects" },
+  { icon: Clock, title: "Flexible Work", text: "Flexible remote work environment and autonomous working hours" },
+  { icon: Wallet, title: "Competitive Compensation", text: "Competitive salary and performance incentives" },
+  { icon: BookOpen, title: "Growth Support", text: "Continuous learning and professional development support" },
+  { icon: Coffee, title: "Team Culture", text: "Horizontal and open team culture" },
+  { icon: GraduationCap, title: "Mentoring", text: "1:1 mentoring from senior team members" },
 ];
 
 const process = [
-  { step: "01", title: "APPLICATION", description: "서류 심사" },
-  { step: "02", title: "INTERVIEW", description: "화상 인터뷰" },
-  { step: "03", title: "TASK", description: "실무 과제" },
-  { step: "04", title: "OFFER", description: "최종 합류" },
+  { step: "01", title: "APPLICATION", description: "Resume Review" },
+  { step: "02", title: "INTERVIEW", description: "Video Interview" },
+  { step: "03", title: "TASK", description: "Practical Assignment" },
+  { step: "04", title: "OFFER", description: "Final Offer" },
 ];
 
 const Jobs = () => {
@@ -136,7 +136,7 @@ const Jobs = () => {
 
       if (error) throw error;
 
-      toast.success("지원서가 성공적으로 제출되었습니다!");
+      toast.success("Your application has been submitted successfully!");
       setFormData({
         name: "",
         email: "",
@@ -150,7 +150,7 @@ const Jobs = () => {
       });
     } catch (error) {
       console.error("Error submitting application:", error);
-      toast.error("지원서 제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+      toast.error("An error occurred while submitting. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -162,15 +162,23 @@ const Jobs = () => {
     <div className="min-h-screen bg-surface-base flex flex-col">
       <Navbar />
 
-      {/* Hero Section - Ium Labs Style */}
+      {/* Hero Section with Video Background */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-surface-base" id="hero">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <div className="relative min-h-[calc(100vh-2rem)] flex flex-col justify-center overflow-hidden rounded-2xl sm:rounded-3xl bg-surface-odd">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5" style={{
-              backgroundImage: 'radial-gradient(circle, white 1px, transparent 1px)',
-              backgroundSize: '40px 40px'
-            }} />
+            {/* Video Background */}
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 w-full h-full object-cover"
+            >
+              <source src="/videos/jobs-hero.mp4" type="video/mp4" />
+            </video>
+            
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/60" />
             
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface-odd/80" />
@@ -191,8 +199,8 @@ const Jobs = () => {
               
               <AnimatedSection delay={200}>
                 <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">
-                  글로벌 Web3 프로젝트와 한국 시장을 연결하는<br />
-                  데이터 기반 리서치 & GTM 마케팅 에이전시
+                  Data-driven research & GTM marketing agency<br />
+                  bridging global Web3 projects with the Korean market
                 </p>
               </AnimatedSection>
               
@@ -242,12 +250,12 @@ const Jobs = () => {
                     We bridge global Web3 projects with the Korean market
                   </h3>
                   <p className="text-white/60 leading-relaxed mb-6">
-                    이음 랩스는 글로벌 Web3 프로젝트의 한국 시장 진출을 돕는 전문 에이전시입니다. 
-                    데이터 기반의 리서치와 전략적인 GTM 마케팅을 통해 프로젝트의 성공적인 한국 시장 정착을 지원합니다.
+                    Ium Labs is a specialized agency helping global Web3 projects enter the Korean market. 
+                    Through data-driven research and strategic GTM marketing, we support projects in successfully establishing their presence in Korea.
                   </p>
                   <p className="text-white/60 leading-relaxed">
-                    "이음"이라는 이름처럼, 우리는 글로벌과 로컬을 연결하는 다리 역할을 합니다.
-                    열정적인 팀원들과 함께 Web3의 미래를 만들어가고 싶다면, 지금 합류하세요.
+                    True to our name "Ium" (meaning "connection" in Korean), we serve as a bridge between global and local markets.
+                    If you want to build the future of Web3 with our passionate team, join us now.
                   </p>
                 </div>
                 <div className="relative">
@@ -498,8 +506,8 @@ const Jobs = () => {
             <div className="px-4 md:px-10 py-10 md:py-16">
               <div className="max-w-4xl mx-auto">
                 <p className="text-center text-white/50 text-sm md:text-base mb-10 leading-relaxed">
-                  평일 기준 24시간 이내에 연락드립니다.<br />
-                  입력하신 정보는 채용 목적으로만 사용됩니다.
+                  We will contact you within 24 hours on business days.<br />
+                  The information you provide will only be used for recruitment purposes.
                 </p>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -559,7 +567,7 @@ const Jobs = () => {
                     <SelectContent className="bg-surface-odd border-white/10">
                       <SelectItem value="Researcher" className="text-white">Researcher</SelectItem>
                       <SelectItem value="Growth Manager" className="text-white">Growth Manager</SelectItem>
-                      <SelectItem value="Other" className="text-white">Other / 자유지원</SelectItem>
+                      <SelectItem value="Other" className="text-white">Other / Open Application</SelectItem>
                     </SelectContent>
                   </Select>
 
@@ -583,7 +591,7 @@ const Jobs = () => {
                       htmlFor="privacy"
                       className="text-sm text-white/50 cursor-pointer"
                     >
-                      개인정보처리방침에 동의합니다 *
+                      I agree to the privacy policy *
                     </label>
                   </div>
 
@@ -593,7 +601,7 @@ const Jobs = () => {
                     disabled={isSubmitting}
                     className="w-full py-6 h-auto text-lg bg-white text-black hover:bg-white/90 rounded-full font-semibold mt-6"
                   >
-                    {isSubmitting ? "제출 중..." : "Submit Application"}
+                    {isSubmitting ? "Submitting..." : "Submit Application"}
                   </Button>
                 </form>
               </div>
