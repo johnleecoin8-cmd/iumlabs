@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight, Search, Clock, ArrowRight, TrendingUp, Star } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, Clock, ArrowRight, TrendingUp, Star, Users, Sparkles } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -284,13 +284,88 @@ const Research = () => {
         </div>
       </section>
 
-      {/* 04 - Newsletter Section */}
-      <section className="bg-[#121212] border-t border-white/10" id="newsletter">
+      {/* 04 - Join as Researcher Section */}
+      <section className="bg-gradient-to-br from-primary/10 via-[#121212] to-[#121212] border-t border-white/10" id="join-researcher">
         {/* Section Header */}
         <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
           <div className="flex items-baseline gap-6 md:gap-10">
             <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
               {currentPage === 1 && selectedCategory === "All" && !searchQuery && featuredPost ? "04" : "03"}
+            </span>
+            <h2 className="text-lg md:text-xl font-medium text-white">Join Our Team</h2>
+          </div>
+          <span className="text-xs text-primary tracking-wider hidden sm:block px-3 py-1 border border-primary/30 rounded-full bg-primary/10">
+            Now Hiring
+          </span>
+        </div>
+
+        {/* Join Content */}
+        <div className="container mx-auto max-w-5xl px-4 md:px-8 py-16 md:py-20">
+          <div className="relative rounded-3xl overflow-hidden border border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-8 md:p-12">
+            {/* Background decoration */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-primary/5 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2" />
+            
+            <div className="relative z-10 flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+              {/* Icon/Visual */}
+              <div className="flex-shrink-0">
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-primary/20 border border-primary/30 flex items-center justify-center">
+                  <Users className="w-10 h-10 md:w-12 md:h-12 text-primary" />
+                </div>
+              </div>
+              
+              {/* Content */}
+              <div className="flex-1 text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start gap-2 mb-3">
+                  <Sparkles className="w-4 h-4 text-primary" />
+                  <span className="text-primary text-sm font-medium">Open Position</span>
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+                  Become an Ium Labs Researcher
+                </h3>
+                <p className="text-white/60 text-base md:text-lg mb-6 max-w-2xl">
+                  Join our research team to explore Korean Web3 ecosystem, analyze market trends, and create impactful insights that shape the industry.
+                </p>
+                
+                {/* Tags */}
+                <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-6">
+                  <span className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-sm text-white/70">
+                    Market Analysis
+                  </span>
+                  <span className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-sm text-white/70">
+                    Data Research
+                  </span>
+                  <span className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-sm text-white/70">
+                    Web3 Strategy
+                  </span>
+                  <span className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-sm text-white/70">
+                    Content Creation
+                  </span>
+                </div>
+              </div>
+              
+              {/* CTA Button */}
+              <div className="flex-shrink-0">
+                <Link 
+                  to="/jobs" 
+                  className="group inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full font-medium hover:bg-primary/90 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/30 transition-all duration-300"
+                >
+                  Apply Now
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 05 - Newsletter Section */}
+      <section className="bg-[#121212] border-t border-white/10" id="newsletter">
+        {/* Section Header */}
+        <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
+          <div className="flex items-baseline gap-6 md:gap-10">
+            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
+              {currentPage === 1 && selectedCategory === "All" && !searchQuery && featuredPost ? "05" : "04"}
             </span>
             <h2 className="text-lg md:text-xl font-medium text-white">Subscribe</h2>
           </div>
@@ -318,13 +393,13 @@ const Research = () => {
         </div>
       </section>
 
-      {/* 05 - CTA Section */}
+      {/* 06 - CTA Section */}
       <section className="bg-[#0F0F0F] border-t border-white/10" id="cta">
         {/* Section Header */}
         <div className="flex items-baseline justify-between p-4 md:px-8 md:py-5 border-b border-white/5">
           <div className="flex items-baseline gap-6 md:gap-10">
             <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">
-              {currentPage === 1 && selectedCategory === "All" && !searchQuery && featuredPost ? "05" : "04"}
+              {currentPage === 1 && selectedCategory === "All" && !searchQuery && featuredPost ? "06" : "05"}
             </span>
             <h2 className="text-lg md:text-xl font-medium text-white">Get in Touch</h2>
           </div>
