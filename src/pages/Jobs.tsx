@@ -314,22 +314,22 @@ const Jobs = () => {
               </AnimatedSection>
               
               <AnimatedSection delay={100}>
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 tracking-tight">
+                <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 tracking-tight">
                   We're Looking<br className="hidden md:block" /> for You
                 </h1>
               </AnimatedSection>
               
               <AnimatedSection delay={200}>
-                <p className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-10 leading-relaxed">
+                <p className="text-sm sm:text-lg md:text-xl text-white/60 max-w-2xl mx-auto mb-6 sm:mb-10 leading-relaxed px-4">
                   한국 Web3 시장의 미래를 함께 만들 뛰어난 인재를 찾습니다.<br />
                   Your next chapter starts here.
                 </p>
               </AnimatedSection>
               
               <AnimatedSection delay={300}>
-                <a href="#positions" className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-colors">
+                <a href="#positions" className="inline-flex items-center gap-2 bg-white text-black px-5 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-lg hover:bg-white/90 transition-colors active:scale-95 min-h-[44px]">
                   Explore Opportunities
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
                 </a>
               </AnimatedSection>
             </div>
@@ -364,33 +364,33 @@ const Jobs = () => {
       <section className="bg-surface-odd" id="about">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
+            <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
                 <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Why Join Us</h2>
+                <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">Why Join Us</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Your Growth, Our Priority</span>
+              <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">Your Growth, Our Priority</span>
             </div>
           </AnimatedSection>
           
           <AnimatedSection delay={100}>
-            <div className="px-4 md:px-10 py-10 md:py-16">
-              <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+            <div className="px-4 md:px-10 py-8 sm:py-10 md:py-16">
+              <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-16 items-center">
                 <div>
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-6 leading-tight">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6 leading-tight">
                     We invest in exceptional people
                   </h3>
-                  <p className="text-white/60 leading-relaxed mb-6">
+                  <p className="text-sm sm:text-base text-white/60 leading-relaxed mb-4 sm:mb-6">
                     At Ium Labs, your ideas matter. We're not just building a company—we're building a team of passionate individuals who shape the future of Web3 in Korea together.
                   </p>
-                  <p className="text-white/60 leading-relaxed mb-6">
+                  <p className="text-sm sm:text-base text-white/60 leading-relaxed mb-4 sm:mb-6">
                     Work with global projects, learn from industry leaders, and make a real impact. True to our name "Ium" (meaning "connection" in Korean), we connect talented individuals with extraordinary opportunities.
                   </p>
-                  <p className="text-white/70 font-medium">
+                  <p className="text-sm sm:text-base text-white/70 font-medium">
                     Ready to write your next chapter? We're excited to meet you.
                   </p>
                 </div>
-                <div className="relative h-64 md:h-80 lg:h-96">
+                <div className="relative h-48 sm:h-64 md:h-80 lg:h-96">
                   <Logo3D className="w-full h-full" />
                 </div>
               </div>
@@ -403,37 +403,37 @@ const Jobs = () => {
       <section className="bg-surface-even" id="positions">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
+            <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
                 <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Find Your Role</h2>
+                <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">Find Your Role</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">We're Actively Hiring</span>
+              <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">We're Actively Hiring</span>
             </div>
           </AnimatedSection>
 
           {/* Position Rows */}
           {positions.map((pos, idx) => {
           const Icon = pos.icon;
-          return <div key={idx} onClick={() => setSelectedPosition(pos)} className="border-b border-white/10 group cursor-pointer hover:bg-white/5 transition-all">
-                <div className="px-4 md:px-10 py-6 md:py-8 flex items-center justify-between gap-6">
+          return <div key={idx} onClick={() => setSelectedPosition(pos)} className="border-b border-white/10 group cursor-pointer hover:bg-white/5 transition-all active:bg-white/10">
+                <div className="px-4 md:px-10 py-4 sm:py-6 md:py-8 flex items-center justify-between gap-4 sm:gap-6">
                   {/* Left: Number + Title */}
-                  <div className="flex items-center gap-6 md:gap-10 flex-1 min-w-0">
-                    <span className="text-3xl md:text-5xl font-bold text-white/20 group-hover:text-white/40 transition-colors">
+                  <div className="flex items-center gap-4 sm:gap-6 md:gap-10 flex-1 min-w-0">
+                    <span className="text-2xl sm:text-3xl md:text-5xl font-bold text-white/20 group-hover:text-white/40 transition-colors">
                       0{idx + 1}
                     </span>
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-2xl md:text-4xl font-bold text-white group-hover:text-white/90 transition-colors truncate">
+                      <h3 className="text-lg sm:text-2xl md:text-4xl font-bold text-white group-hover:text-white/90 transition-colors truncate">
                         {pos.title}
                       </h3>
-                      <p className="text-white/40 text-sm md:text-base mt-1 hidden md:block truncate">
+                      <p className="text-white/40 text-xs sm:text-sm md:text-base mt-0.5 sm:mt-1 hidden sm:block truncate">
                         {pos.description}
                       </p>
                     </div>
                   </div>
                   
                   {/* Right: Info + Arrow */}
-                  <div className="flex items-center gap-4 md:gap-8 flex-shrink-0">
+                  <div className="flex items-center gap-3 sm:gap-4 md:gap-8 flex-shrink-0">
                     <div className="hidden lg:flex items-center gap-6 text-sm text-white/40">
                       <span className="flex items-center gap-2">
                         <DollarSign className="w-4 h-4" />
@@ -444,8 +444,8 @@ const Jobs = () => {
                         {pos.workType}
                       </span>
                     </div>
-                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all">
-                      <ArrowRight className="w-5 h-5 md:w-6 md:h-6 text-white/60 group-hover:text-black group-hover:translate-x-1 transition-all" />
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all">
+                      <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-white/60 group-hover:text-black group-hover:translate-x-1 transition-all" />
                     </div>
                   </div>
                 </div>
@@ -459,26 +459,26 @@ const Jobs = () => {
       <section className="bg-surface-odd" id="process">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
+            <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
                 <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
+                <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">Process</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How It Works</span>
+              <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">How It Works</span>
             </div>
           </AnimatedSection>
           
           <AnimatedSection delay={100}>
-            <div className="px-4 md:px-10 py-10 md:py-16">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                {process.map((step, idx) => <div key={idx} className="relative bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 text-center group hover:bg-white/10 transition-colors">
-                    <span className="text-3xl md:text-4xl font-bold text-white/20 block mb-2">
+            <div className="px-4 md:px-10 py-8 sm:py-10 md:py-16">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-4 md:gap-6">
+                {process.map((step, idx) => <div key={idx} className="relative bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-6 md:p-8 text-center group hover:bg-white/10 transition-colors active:scale-[0.98]">
+                    <span className="text-2xl sm:text-3xl md:text-4xl font-bold text-white/20 block mb-1 sm:mb-2">
                       {step.step}
                     </span>
-                    <h4 className="text-sm md:text-base font-semibold text-white mb-2">
+                    <h4 className="text-xs sm:text-sm md:text-base font-semibold text-white mb-1 sm:mb-2">
                       {step.title}
                     </h4>
-                    <p className="text-white/50 text-xs md:text-sm">
+                    <p className="text-white/50 text-[10px] sm:text-xs md:text-sm">
                       {step.description}
                     </p>
                     
@@ -495,12 +495,12 @@ const Jobs = () => {
       <section className="bg-surface-even" id="apply">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
+            <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
                 <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">We Want You</h2>
+                <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">We Want You</h2>
               </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Tell Us Your Story</span>
+              <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">Tell Us Your Story</span>
             </div>
           </AnimatedSection>
 
@@ -508,31 +508,31 @@ const Jobs = () => {
           
           
           <AnimatedSection delay={100}>
-            <div className="px-4 md:px-10 py-10 md:py-16">
+            <div className="px-4 md:px-10 py-8 sm:py-10 md:py-16">
               <div className="max-w-4xl mx-auto">
-                <p className="text-center text-white/60 text-lg md:text-xl mb-4 font-medium">
+                <p className="text-center text-white/60 text-base sm:text-lg md:text-xl mb-3 sm:mb-4 font-medium">
                   Ready to make an impact?
                 </p>
-                <p className="text-center text-white/40 text-sm md:text-base mb-10 leading-relaxed">
+                <p className="text-center text-white/40 text-xs sm:text-sm md:text-base mb-6 sm:mb-10 leading-relaxed">
                   We're excited to hear from you. Tell us your story—we're listening.
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
                   {/* Row 1: Name, Email, Phone */}
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Input placeholder="Name *" value={formData.name} onChange={e => handleInputChange("name", e.target.value)} className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30" />
-                    <Input type="email" placeholder="Email *" value={formData.email} onChange={e => handleInputChange("email", e.target.value)} className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30" />
+                  <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                    <Input placeholder="Name *" value={formData.name} onChange={e => handleInputChange("name", e.target.value)} className="bg-white/5 border-white/10 h-12 sm:h-14 rounded-xl text-sm sm:text-base text-white placeholder:text-white/30 focus:border-white/30" />
+                    <Input type="email" placeholder="Email *" value={formData.email} onChange={e => handleInputChange("email", e.target.value)} className="bg-white/5 border-white/10 h-12 sm:h-14 rounded-xl text-sm sm:text-base text-white placeholder:text-white/30 focus:border-white/30" />
                   </div>
 
                   {/* Row 2: Telegram, LinkedIn */}
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Input placeholder="Telegram" value={formData.telegram} onChange={e => handleInputChange("telegram", e.target.value)} className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30" />
-                    <Input placeholder="LinkedIn / Twitter URL" value={formData.linkedinUrl} onChange={e => handleInputChange("linkedinUrl", e.target.value)} className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30" />
+                  <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                    <Input placeholder="Telegram" value={formData.telegram} onChange={e => handleInputChange("telegram", e.target.value)} className="bg-white/5 border-white/10 h-12 sm:h-14 rounded-xl text-sm sm:text-base text-white placeholder:text-white/30 focus:border-white/30" />
+                    <Input placeholder="LinkedIn / Twitter URL" value={formData.linkedinUrl} onChange={e => handleInputChange("linkedinUrl", e.target.value)} className="bg-white/5 border-white/10 h-12 sm:h-14 rounded-xl text-sm sm:text-base text-white placeholder:text-white/30 focus:border-white/30" />
                   </div>
 
                   {/* Row 3: Position Select */}
                   <Select value={formData.position} onValueChange={value => handleInputChange("position", value)}>
-                    <SelectTrigger className="bg-white/5 border-white/10 h-14 rounded-xl text-base text-white">
+                    <SelectTrigger className="bg-white/5 border-white/10 h-12 sm:h-14 rounded-xl text-sm sm:text-base text-white">
                       <SelectValue placeholder="Select a position *" />
                     </SelectTrigger>
                     <SelectContent className="bg-surface-odd border-white/10">
@@ -543,7 +543,7 @@ const Jobs = () => {
                   </Select>
 
                   {/* Row 4: Cover Letter */}
-                  <Textarea placeholder="Tell us about yourself and why you want to join Ium Labs..." value={formData.coverLetter} onChange={e => handleInputChange("coverLetter", e.target.value)} className="bg-white/5 border-white/10 min-h-[200px] rounded-xl text-base text-white placeholder:text-white/30 focus:border-white/30 resize-none" />
+                  <Textarea placeholder="Tell us about yourself and why you want to join Ium Labs..." value={formData.coverLetter} onChange={e => handleInputChange("coverLetter", e.target.value)} className="bg-white/5 border-white/10 min-h-[150px] sm:min-h-[200px] rounded-xl text-sm sm:text-base text-white placeholder:text-white/30 focus:border-white/30 resize-none" />
 
                   {/* Privacy Checkbox */}
                   <div className="flex items-center gap-3 pt-2">
