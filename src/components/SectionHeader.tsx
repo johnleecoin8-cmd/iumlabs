@@ -10,7 +10,7 @@ export interface SectionHeaderProps {
 
 const SectionHeader = ({ number, title, badge, accentColor, enableMorph = true }: SectionHeaderProps) => {
   return (
-    <div className="flex items-baseline justify-between p-6 md:px-10 lg:px-12 md:py-7 border-b border-white/15">
+    <div className="flex items-baseline justify-between p-4 md:px-8 lg:px-10 md:py-5 border-b border-white/15">
       <div className="flex items-baseline gap-6 md:gap-10">
         {number && (
           enableMorph ? (
