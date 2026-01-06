@@ -1,4 +1,6 @@
-import { X, ArrowLeft } from "lucide-react";
+import { X } from "lucide-react";
+import { createPortal } from "react-dom";
+import { useEffect } from "react";
 
 interface TermsModalProps {
   isOpen: boolean;
@@ -15,7 +17,18 @@ const sections = [
 ];
 
 const TermsModal = ({ isOpen, onClose }: TermsModalProps) => {
-  return (
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  return createPortal(
     <div
       className={`fixed inset-0 z-[100] flex items-center justify-center transition-all duration-300 ${
         isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
@@ -64,7 +77,8 @@ const TermsModal = ({ isOpen, onClose }: TermsModalProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

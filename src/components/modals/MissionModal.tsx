@@ -1,4 +1,6 @@
-import { X, ArrowLeft, Target, Globe, Users, Zap } from "lucide-react";
+import { X, Target, Globe, Users, Zap } from "lucide-react";
+import { createPortal } from "react-dom";
+import { useEffect } from "react";
 
 interface MissionModalProps {
   isOpen: boolean;
@@ -29,7 +31,18 @@ const missionPoints = [
 ];
 
 const MissionModal = ({ isOpen, onClose }: MissionModalProps) => {
-  return (
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
+
+  return createPortal(
     <div
       className={`fixed inset-0 z-[100] flex items-center justify-center transition-all duration-300 ${
         isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
@@ -101,7 +114,8 @@ const MissionModal = ({ isOpen, onClose }: MissionModalProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
