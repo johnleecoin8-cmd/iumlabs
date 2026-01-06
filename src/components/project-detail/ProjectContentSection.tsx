@@ -93,18 +93,6 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
                     {service}
                   </li>
                 ))}
-                {project.strategy && project.strategy.length > 0 && (
-                  <>
-                    <li className="pt-4 border-t border-white/10 text-sm text-white/40 uppercase tracking-wider">
-                      Strategy
-                    </li>
-                    {project.strategy.map((item, idx) => (
-                      <li key={`strategy-${idx}`} className="text-xl md:text-2xl font-normal text-white">
-                        {item}
-                      </li>
-                    ))}
-                  </>
-                )}
               </ul>
             </motion.div>
             
@@ -140,45 +128,6 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
         </div>
       </section>
 
-      {/* SECTION 4: CAMPAIGN GALLERY */}
-      {project.gallery && project.gallery.length > 0 && (
-        <section className="py-6 md:py-8">
-          <div className="max-w-7xl mx-auto px-4">
-            <motion.h3 
-              className="text-sm text-white/40 uppercase tracking-wider mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              Campaign Highlights
-            </motion.h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-              {project.gallery.map((item, idx) => (
-                <motion.div
-                  key={idx}
-                  className="group relative overflow-hidden rounded-2xl bg-[#1A1A1A]"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                >
-                  <img 
-                    src={item.src} 
-                    alt={item.title || `Campaign image ${idx + 1}`}
-                    className="w-full aspect-video object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {item.title && (
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/60 to-transparent">
-                      <span className="text-sm text-white">{item.title}</span>
-                    </div>
-                  )}
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Bottom padding */}
       <div className="h-12 md:h-16" />
