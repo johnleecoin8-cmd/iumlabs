@@ -227,6 +227,62 @@ const Jobs = () => {
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-surface-odd/80" />
             
+            {/* Floating Tags - Lunar Strategy Style */}
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.6 }}
+              className="lunar-tag-dark absolute top-[15%] left-[8%] md:left-[12%] animate-float text-xs md:text-sm hidden sm:block"
+              style={{ animationDelay: '0s' }}
+            >
+              Researcher
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+              className="lunar-tag-dark absolute top-[22%] right-[10%] md:right-[15%] animate-float text-xs md:text-sm hidden sm:block"
+              style={{ animationDelay: '0.5s' }}
+            >
+              Growth Manager
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.6 }}
+              className="lunar-tag-dark absolute bottom-[28%] left-[6%] md:left-[10%] animate-float text-xs md:text-sm hidden md:block"
+              style={{ animationDelay: '1s' }}
+            >
+              Seoul HQ
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.1, duration: 0.6 }}
+              className="lunar-tag-dark absolute bottom-[35%] right-[8%] md:right-[12%] animate-float text-xs md:text-sm hidden sm:block"
+              style={{ animationDelay: '1.5s' }}
+            >
+              Remote OK
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.3, duration: 0.6 }}
+              className="lunar-tag-dark absolute top-[35%] left-[4%] md:left-[6%] animate-float text-xs md:text-sm hidden lg:block"
+              style={{ animationDelay: '2s' }}
+            >
+              Web3 Native
+            </motion.span>
+            <motion.span
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.5, duration: 0.6 }}
+              className="lunar-tag-dark absolute bottom-[20%] right-[5%] md:right-[8%] animate-float text-xs md:text-sm hidden lg:block"
+              style={{ animationDelay: '2.5s' }}
+            >
+              Global Impact
+            </motion.span>
+            
             {/* Content */}
             <div className="relative z-10 container mx-auto px-6 text-center">
               <AnimatedSection>
@@ -312,11 +368,24 @@ const Jobs = () => {
         </div>
       </section>
 
-      {/* Media Partners Marquee - No Header */}
-      <section className="bg-surface-even" id="partners">
-        <AnimatedSection direction="none">
-          <MediaPartnersSection />
-        </AnimatedSection>
+      {/* Talent Wanted Marquee */}
+      <section className="bg-white overflow-hidden" id="marquee">
+        <motion.div
+          animate={{ x: ["0%", "-50%"] }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="flex whitespace-nowrap py-5 md:py-6"
+        >
+          {[...Array(2)].map((_, i) => (
+            <span key={i} className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-black flex items-center">
+              {[...Array(8)].map((_, j) => (
+                <span key={j} className="flex items-center">
+                  <span>Talent Wanted</span>
+                  <span className="mx-6 md:mx-10 w-2 h-2 md:w-3 md:h-3 bg-black rounded-full" />
+                </span>
+              ))}
+            </span>
+          ))}
+        </motion.div>
       </section>
 
       {/* 02. Positions Section */}
@@ -380,7 +449,7 @@ const Jobs = () => {
         </div>
       </section>
 
-      {/* 03. What You'll Gain Section */}
+      {/* 03. What You'll Gain Section - Staggered Grid */}
       <section className="bg-surface-odd" id="benefits">
         <div className="border-t border-white/10">
           <AnimatedSection>
@@ -393,38 +462,80 @@ const Jobs = () => {
             </div>
           </AnimatedSection>
           
-          {/* Benefit Rows */}
-          {benefits.map((benefit, idx) => {
-            const Icon = benefit.icon;
-            return (
-              <div
-                key={idx}
-                className="border-b border-white/10 group hover:bg-white/5 transition-all"
-              >
-                <div className="px-4 md:px-10 py-5 md:py-6 flex items-center justify-between gap-6">
-                  {/* Left: Number + Title */}
-                  <div className="flex items-center gap-6 md:gap-10 flex-1 min-w-0">
-                    <span className="text-2xl md:text-4xl font-bold text-white/20 group-hover:text-white/40 transition-colors">
-                      0{idx + 1}
-                    </span>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="text-xl md:text-2xl font-bold text-white group-hover:text-white/90 transition-colors">
-                        {benefit.title}
-                      </h4>
-                      <p className="text-white/40 text-sm md:text-base mt-1 hidden md:block">
-                        {benefit.text}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  {/* Right: Icon */}
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-all flex-shrink-0">
-                    <Icon className="w-5 h-5 md:w-6 md:h-6 text-white/50 group-hover:text-white/70 transition-colors" />
-                  </div>
+          <AnimatedSection delay={100}>
+            <div className="px-4 md:px-10 py-10 md:py-16">
+              {/* Staggered 2-Column Grid */}
+              <div className="grid md:grid-cols-2 gap-4 md:gap-6 max-w-5xl mx-auto">
+                {/* Left Column */}
+                <div className="space-y-4 md:space-y-6">
+                  {benefits.filter((_, idx) => idx % 2 === 0).map((benefit, idx) => {
+                    const Icon = benefit.icon;
+                    const originalIdx = idx * 2;
+                    return (
+                      <motion.div
+                        key={originalIdx}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: originalIdx * 0.1, duration: 0.5 }}
+                        whileHover={{ scale: 1.02, y: -4 }}
+                        className="group relative bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 rounded-2xl md:rounded-3xl p-6 md:p-8 overflow-hidden transition-all duration-300 hover:border-white/20 hover:shadow-[0_0_40px_rgba(255,255,255,0.05)]"
+                      >
+                        {/* Glow effect on hover */}
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/5 via-transparent to-transparent" />
+                        
+                        <div className="relative z-10">
+                          <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center mb-5 group-hover:bg-white/15 group-hover:scale-110 transition-all duration-300">
+                            <Icon className="w-6 h-6 md:w-7 md:h-7 text-white/70 group-hover:text-white transition-colors" />
+                          </div>
+                          <h4 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-white transition-colors">
+                            {benefit.title}
+                          </h4>
+                          <p className="text-white/50 text-sm md:text-base leading-relaxed group-hover:text-white/60 transition-colors">
+                            {benefit.text}
+                          </p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+                
+                {/* Right Column - Offset for stagger effect */}
+                <div className="space-y-4 md:space-y-6 md:mt-12">
+                  {benefits.filter((_, idx) => idx % 2 === 1).map((benefit, idx) => {
+                    const Icon = benefit.icon;
+                    const originalIdx = idx * 2 + 1;
+                    return (
+                      <motion.div
+                        key={originalIdx}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: originalIdx * 0.1, duration: 0.5 }}
+                        whileHover={{ scale: 1.02, y: -4 }}
+                        className="group relative bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 rounded-2xl md:rounded-3xl p-6 md:p-8 overflow-hidden transition-all duration-300 hover:border-white/20 hover:shadow-[0_0_40px_rgba(255,255,255,0.05)]"
+                      >
+                        {/* Glow effect on hover */}
+                        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/5 via-transparent to-transparent" />
+                        
+                        <div className="relative z-10">
+                          <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center mb-5 group-hover:bg-white/15 group-hover:scale-110 transition-all duration-300">
+                            <Icon className="w-6 h-6 md:w-7 md:h-7 text-white/70 group-hover:text-white transition-colors" />
+                          </div>
+                          <h4 className="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-white transition-colors">
+                            {benefit.title}
+                          </h4>
+                          <p className="text-white/50 text-sm md:text-base leading-relaxed group-hover:text-white/60 transition-colors">
+                            {benefit.text}
+                          </p>
+                        </div>
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </div>
-            );
-          })}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
