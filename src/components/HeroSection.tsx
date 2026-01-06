@@ -141,14 +141,28 @@ const HeroSection = () => {
     return () => clearTimeout(timer);
   }, []);
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url('/images/hero-poster.jpg')` }}
-      />
+      {/* Background Layer - Video with Image Fallback */}
+      <div className="absolute inset-0">
+        {/* Fallback Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url('/images/hero-poster.jpg')` }}
+        />
+        {/* Video Background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          poster="/images/hero-poster.jpg"
+        >
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+        </video>
+      </div>
       
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/60" />
+      <div className="absolute inset-0 bg-black/50" />
       
       {/* Bottom gradient for smooth transition */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[hsl(0,0%,4%,0.95)]" />
