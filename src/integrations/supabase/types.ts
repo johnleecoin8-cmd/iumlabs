@@ -41,6 +41,45 @@ export type Database = {
         }
         Relationships: []
       }
+      job_applications: {
+        Row: {
+          cover_letter: string | null
+          created_at: string
+          email: string
+          id: string
+          is_read: boolean | null
+          name: string
+          phone: string | null
+          portfolio_url: string | null
+          position: string
+          resume_url: string | null
+        }
+        Insert: {
+          cover_letter?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          is_read?: boolean | null
+          name: string
+          phone?: string | null
+          portfolio_url?: string | null
+          position: string
+          resume_url?: string | null
+        }
+        Update: {
+          cover_letter?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          is_read?: boolean | null
+          name?: string
+          phone?: string | null
+          portfolio_url?: string | null
+          position?: string
+          resume_url?: string | null
+        }
+        Relationships: []
+      }
       newsletter_subscribers: {
         Row: {
           created_at: string
