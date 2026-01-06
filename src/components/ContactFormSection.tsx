@@ -155,7 +155,7 @@ const ContactFormSection = ({
           </div>
 
           {/* Right Column - Contact Form */}
-          <div className="w-full md:w-3/5 p-5 sm:p-7 md:p-8 lg:p-12">
+          <div className="w-full md:w-3/5 px-5 py-4 sm:px-7 sm:py-5 md:px-8 md:py-6 lg:px-12 lg:py-8">
             <div className="mb-6 sm:mb-8">
               <div className="flex items-center justify-between mb-3">
                 <span className="text-body-sm text-white/50">Contact Form</span>
