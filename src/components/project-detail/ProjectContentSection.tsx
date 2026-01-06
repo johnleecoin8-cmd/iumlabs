@@ -23,7 +23,7 @@ const MetricCard = ({ metric, index }: MetricCardProps) => {
 
   return (
     <motion.div 
-      className="bg-[#1A1A1A] rounded-2xl p-6 md:p-8 relative min-h-[140px] flex flex-col justify-between"
+      className="bg-[#1A1A1A] rounded-xl p-4 md:p-5 relative min-h-[100px] flex flex-col justify-between"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -31,18 +31,18 @@ const MetricCard = ({ metric, index }: MetricCardProps) => {
     >
       <div>
         {/* Large Number */}
-        <span className="text-3xl md:text-4xl lg:text-5xl font-normal text-white block">
+        <span className="text-2xl md:text-3xl font-normal text-white block">
           {numericMatch ? displayValue : metric.value}
         </span>
         
         {/* Label in Blue */}
-        <span className="text-sm text-blue-400 block mt-2">
+        <span className="text-xs text-blue-400 block mt-1.5">
           {metric.label}
         </span>
       </div>
       
       {/* Index Number - Bottom Left */}
-      <span className="text-xs text-white/30 mt-4">
+      <span className="text-[10px] text-white/30 mt-2">
         {String(index + 1).padStart(2, '0')}.
       </span>
     </motion.div>
@@ -78,18 +78,18 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {/* Left: Scope of Work + Strategy Combined */}
             <motion.div 
-              className="bg-[#1A1A1A] rounded-2xl p-8 md:p-10"
+              className="bg-[#1A1A1A] rounded-xl p-5 md:p-6"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h3 className="text-sm text-white/40 uppercase tracking-wider mb-6">
+              <h3 className="text-xs text-white/40 uppercase tracking-wider mb-4">
                 Scope of Work
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2">
                 {project.services.map((service, idx) => (
-                  <li key={idx} className="text-xl md:text-2xl font-normal text-white">
+                  <li key={idx} className="text-base md:text-lg font-normal text-white">
                     {service}
                   </li>
                 ))}
@@ -98,27 +98,27 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
             
             {/* Right: Overview + What We Did */}
             <motion.div 
-              className="bg-[#1A1A1A] rounded-2xl p-8 md:p-10 flex flex-col"
+              className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 flex flex-col"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <div className="mb-8">
-                <h3 className="text-sm text-white/40 uppercase tracking-wider mb-6">
+              <div className="mb-5">
+                <h3 className="text-xs text-white/40 uppercase tracking-wider mb-3">
                   Overview
                 </h3>
-                <p className="text-xl md:text-2xl font-normal text-white/80 leading-relaxed">
+                <p className="text-base md:text-lg font-normal text-white/80 leading-relaxed">
                   {project.description}
                 </p>
               </div>
               
               {project.challenge && (
-                <div className="pt-8 border-t border-white/10">
-                  <h3 className="text-sm text-white/40 uppercase tracking-wider mb-6">
+                <div className="pt-5 border-t border-white/10">
+                  <h3 className="text-xs text-white/40 uppercase tracking-wider mb-3">
                     What We Did
                   </h3>
-                  <p className="text-xl md:text-2xl font-normal text-white/80 leading-relaxed">
+                  <p className="text-base md:text-lg font-normal text-white/80 leading-relaxed">
                     {project.challenge}
                   </p>
                 </div>
