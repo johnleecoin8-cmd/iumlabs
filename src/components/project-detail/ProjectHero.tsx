@@ -1,4 +1,4 @@
-import { ArrowLeft, Calendar, ChevronDown } from "lucide-react";
+import { ArrowLeft, ExternalLink, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -13,6 +13,7 @@ interface ProjectHeroProps {
     bgImage?: string;
     services?: string[];
   };
+  websiteUrl?: string;
 }
 
 // 플로팅 태그 위치 (데스크톱)
@@ -35,7 +36,7 @@ const mobileTagPositions = [
   "top-[52%] right-[4%]",
 ];
 
-const ProjectHero = ({ project }: ProjectHeroProps) => {
+const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -159,30 +160,23 @@ const ProjectHero = ({ project }: ProjectHeroProps) => {
           </motion.p>
           
           {/* CTA Button */}
-          <motion.a 
-            href="https://calendly.com/iumlabs/30min"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group mt-6 sm:mt-8 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:px-8 sm:py-4 rounded-full text-sm sm:text-[15px] font-medium transition-all duration-300
-              bg-white text-gray-900 hover:bg-white/90 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]
-              active:scale-[0.98]"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          >
-            <Calendar className="w-4 h-4 group-hover:rotate-12 transition-transform duration-300" />
-            <span>Book a Meeting</span>
-          </motion.a>
+          {websiteUrl && (
+            <motion.a 
+              href={websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-6 sm:mt-8 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:px-8 sm:py-4 rounded-full text-sm sm:text-[15px] font-medium transition-all duration-300
+                bg-white text-gray-900 hover:bg-white/90 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]
+                active:scale-[0.98]"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            >
+              <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+              <span>Visit Website</span>
+            </motion.a>
+          )}
           
-          {/* Micro copy */}
-          <motion.p 
-            className="mt-3 text-xs text-white/50 tracking-wide"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-          >
-            Free 30-min consultation • Response within 24h
-          </motion.p>
         </div>
       </div>
 
