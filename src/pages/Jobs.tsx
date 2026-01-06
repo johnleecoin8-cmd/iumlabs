@@ -17,6 +17,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { ArrowRight, Users, TrendingUp, Globe, Award, Briefcase, GraduationCap, Clock, Wallet, BookOpen, Coffee } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import CTABannerSection from "@/components/CTABannerSection";
@@ -43,31 +49,65 @@ const applicationSchema = z.object({
 
 type ApplicationFormData = z.infer<typeof applicationSchema>;
 
-const stats = [
-  { number: "3+", label: "Years in Web3 Korea", icon: Clock },
-  { number: "50+", label: "Projects Delivered", icon: Briefcase },
-  { number: "100+", label: "KOL Network", icon: Users },
-  { number: "10+", label: "Team Members", icon: Award },
-];
-
 const positions = [
   { 
     emoji: "🔍", 
     title: "Researcher", 
     description: "Responsible for Web3 market research and in-depth analysis. Identify the latest trends in the blockchain ecosystem and derive insights.",
-    tags: ["Market Research", "Data Analysis", "Report Writing"]
+    tags: ["Market Research", "Data Analysis", "Report Writing"],
+    jobDescription: [
+      "Conduct comprehensive Web3 market trends and project research",
+      "Write data-driven analysis reports and investment theses",
+      "Derive actionable insights from blockchain ecosystem data",
+      "Monitor and analyze on-chain metrics and market signals",
+      "Collaborate with Growth team to identify strategic opportunities"
+    ],
+    qualifications: [
+      "Deep understanding of Web3, DeFi, and blockchain technology",
+      "Experience in data analysis and research methodology",
+      "Strong written and verbal communication skills in English",
+      "Proficiency in data tools (Dune, Flipside, etc.) is a plus",
+      "Self-motivated with attention to detail"
+    ]
   },
   { 
     emoji: "📈", 
     title: "Growth Manager", 
     description: "Develop and execute strategies for global Web3 projects entering the Korean market. Lead community building and marketing efforts.",
-    tags: ["GTM Strategy", "Community", "Marketing"]
+    tags: ["GTM Strategy", "Community", "Marketing"],
+    jobDescription: [
+      "Develop and execute GTM strategies for Korean market entry",
+      "Build and manage Korean crypto communities (Discord, Telegram, KakaoTalk)",
+      "Coordinate KOL partnerships and influencer campaigns",
+      "Plan and execute offline events, meetups, and conferences",
+      "Manage relationships with local exchanges and media partners"
+    ],
+    qualifications: [
+      "3+ years experience in Web3 marketing or community management",
+      "Native Korean with strong English communication skills",
+      "Proven track record in community building and growth",
+      "Strong network within Korean crypto ecosystem",
+      "Experience with crypto marketing tools and analytics"
+    ]
   },
   { 
     emoji: "💼", 
     title: "Open Position", 
     description: "If you have passion for Web3, feel free to apply. We create various roles together with talented individuals.",
-    tags: ["Web3 Passion", "Self-Driven", "Creative"]
+    tags: ["Web3 Passion", "Self-Driven", "Creative"],
+    jobDescription: [
+      "We're always looking for exceptional talent",
+      "Tell us what you're passionate about and how you can contribute",
+      "Shape your own role based on your unique skills",
+      "Work on cutting-edge Web3 projects in Korea"
+    ],
+    qualifications: [
+      "Genuine passion for Web3 and blockchain technology",
+      "Self-driven with strong initiative",
+      "Creative problem-solving abilities",
+      "Ability to work in a fast-paced startup environment",
+      "Open to learning and adapting quickly"
+    ]
   },
 ];
 
@@ -105,6 +145,7 @@ const Jobs = () => {
     privacyAgreed: false as boolean,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedPosition, setSelectedPosition] = useState<typeof positions[0] | null>(null);
 
   const handleInputChange = (field: keyof ApplicationFormData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -274,52 +315,13 @@ const Jobs = () => {
         </AnimatedSection>
       </section>
 
-      {/* 02. Stats Section */}
-      <section className="bg-surface-odd" id="stats">
-        <div className="border-t border-white/10">
-          <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Stats</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Numbers</span>
-            </div>
-          </AnimatedSection>
-          
-          <AnimatedSection delay={100}>
-            <div className="px-4 md:px-10 py-10 md:py-16">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                {stats.map((stat, idx) => {
-                  const Icon = stat.icon;
-                  return (
-                    <div
-                      key={idx}
-                      className="relative bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 group hover:bg-white/10 transition-colors"
-                    >
-                      <Icon className="w-5 h-5 text-white/30 mb-4" />
-                      <p className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2">
-                        {stat.number}
-                      </p>
-                      <p className="text-sm md:text-base text-white/50">
-                        {stat.label}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* 03. Positions Section */}
+      {/* 02. Positions Section */}
       <section className="bg-surface-even" id="positions">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Positions</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Open Roles</span>
@@ -352,7 +354,8 @@ const Jobs = () => {
                 {positions.map((pos, idx) => (
                   <div
                     key={idx}
-                    className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col group hover:bg-white/10 hover:border-white/20 transition-all"
+                    onClick={() => setSelectedPosition(pos)}
+                    className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col group hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
                   >
                     <span className="text-4xl mb-4">{pos.emoji}</span>
                     <h3 className="text-xl font-bold text-white mb-3">
@@ -371,13 +374,10 @@ const Jobs = () => {
                         </span>
                       ))}
                     </div>
-                    <a
-                      href="#apply"
-                      className="inline-flex items-center gap-2 text-white font-medium group-hover:text-white/80 transition-colors"
-                    >
-                      Apply Now
+                    <span className="inline-flex items-center gap-2 text-white font-medium group-hover:text-white/80 transition-colors">
+                      View Details
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </a>
+                    </span>
                   </div>
                 ))}
               </div>
@@ -392,7 +392,7 @@ const Jobs = () => {
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Benefits</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What You Get</span>
@@ -431,7 +431,7 @@ const Jobs = () => {
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How It Works</span>
@@ -474,7 +474,7 @@ const Jobs = () => {
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Apply</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Join Us</span>
@@ -617,6 +617,81 @@ const Jobs = () => {
       <Footer />
 
       <FloatingContactButton />
+
+      {/* Position Detail Dialog */}
+      <Dialog open={!!selectedPosition} onOpenChange={(open) => !open && setSelectedPosition(null)}>
+        <DialogContent className="bg-surface-odd border-white/10 max-w-2xl max-h-[90vh] overflow-y-auto">
+          {selectedPosition && (
+            <>
+              <DialogHeader>
+                <div className="flex items-center gap-4 mb-2">
+                  <span className="text-5xl">{selectedPosition.emoji}</span>
+                  <DialogTitle className="text-2xl md:text-3xl font-bold text-white">
+                    {selectedPosition.title}
+                  </DialogTitle>
+                </div>
+                <div className="flex flex-wrap gap-2 mt-4">
+                  {selectedPosition.tags.map((tag, idx) => (
+                    <span
+                      key={idx}
+                      className="text-xs text-white/50 px-3 py-1 bg-white/5 border border-white/10 rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </DialogHeader>
+
+              <div className="space-y-6 mt-6">
+                {/* Job Description */}
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                    <Briefcase className="w-5 h-5 text-white/50" />
+                    Job Description
+                  </h4>
+                  <ul className="space-y-2">
+                    {selectedPosition.jobDescription.map((item, idx) => (
+                      <li key={idx} className="text-white/60 text-sm flex items-start gap-2">
+                        <span className="text-white/30 mt-1">•</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Qualifications */}
+                <div>
+                  <h4 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+                    <GraduationCap className="w-5 h-5 text-white/50" />
+                    Qualifications
+                  </h4>
+                  <ul className="space-y-2">
+                    {selectedPosition.qualifications.map((item, idx) => (
+                      <li key={idx} className="text-white/60 text-sm flex items-start gap-2">
+                        <span className="text-white/30 mt-1">•</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Apply Button */}
+                <a
+                  href="#apply"
+                  onClick={() => {
+                    setSelectedPosition(null);
+                    handleInputChange("position", selectedPosition.title === "Open Position" ? "Other" : selectedPosition.title);
+                  }}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-white text-black px-6 py-4 rounded-full font-semibold text-lg hover:bg-white/90 transition-colors mt-4"
+                >
+                  Apply for this Position
+                  <ArrowRight className="w-5 h-5" />
+                </a>
+              </div>
+            </>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
