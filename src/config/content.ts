@@ -48,6 +48,7 @@ export const navigation = {
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
     { name: "Research", href: "/research" },
+    { name: "Career", href: "/jobs" },
     { name: "Contact", href: "/contact" },
   ],
   ctaButton: "Get Started",
