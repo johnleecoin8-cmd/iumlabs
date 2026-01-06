@@ -203,24 +203,36 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
 
           </div>
           
-          {/* Featured Image - Full Width */}
-          {gallery && gallery.length > 0 && (
-            <motion.div 
-              className="mt-3 md:mt-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+          {/* CTA Section */}
+          <motion.div 
+            className="mt-3 md:mt-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <div 
+              className="rounded-xl overflow-hidden h-[180px] md:h-[250px] relative"
+              style={{
+                backgroundImage: gallery && gallery.length > 0 ? `url(${gallery[0].src})` : undefined,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
             >
-              <div className="rounded-xl overflow-hidden h-[180px] md:h-[250px]">
-                <img 
-                  src={gallery[0].src}
-                  alt={gallery[0].title || `${project.name} featured image`}
-                  className="w-full h-full object-cover"
-                />
+              <div className="absolute inset-0 bg-black/60" />
+              <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
+                <h3 className="text-2xl md:text-4xl font-bold text-white mb-4">
+                  You wanna be next project?
+                </h3>
+                <a 
+                  href="/contact"
+                  className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-white/90 transition-colors"
+                >
+                  Get Your Free Proposal
+                </a>
               </div>
-            </motion.div>
-          )}
+            </div>
+          </motion.div>
         </div>
       </section>
 
