@@ -438,17 +438,34 @@ const ServicePageLayout = ({
               {processSteps.map((step, index) => {
                 const Icon = step.icon;
                 const isLast = index === processSteps.length - 1;
-                const isOdd = index % 2 === 1;
                 
                 return (
                   <div
                     key={step.number}
-                    className={`group p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/5 ${
-                      !isLast ? "lg:border-r border-white/10" : ""
-                    } ${isOdd ? "md:border-l lg:border-l-0 border-white/10" : ""} ${
-                      index < 2 ? "border-b lg:border-b-0 border-white/10" : ""
-                    }`}
+                    className="group relative p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/5"
                   >
+                    {/* Arrow indicator between steps */}
+                    {!isLast && (
+                      <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
+                        <div 
+                          className="w-8 h-8 rounded-full bg-[#0F0F0F] border border-white/10 flex items-center justify-center"
+                        >
+                          <ArrowRight className="w-4 h-4 text-white/40" />
+                        </div>
+                      </div>
+                    )}
+                    
+                    {/* Mobile/Tablet arrow (vertical) */}
+                    {!isLast && (
+                      <div className="flex lg:hidden absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
+                        <div 
+                          className="w-8 h-8 rounded-full bg-[#0F0F0F] border border-white/10 flex items-center justify-center"
+                        >
+                          <ArrowRight className="w-4 h-4 text-white/40 rotate-90" />
+                        </div>
+                      </div>
+                    )}
+                    
                     <div className="flex items-center gap-3 mb-3">
                       <span 
                         className="text-xs font-mono tracking-widest"
