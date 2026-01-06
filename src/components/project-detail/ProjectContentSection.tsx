@@ -162,10 +162,10 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
       {/* SECTION 2: SCOPE OF WORK + Overview + Featured Image - 2x2 Grid */}
       <section className="py-2 md:py-3">
         <div className="px-4 md:px-8 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 auto-rows-fr">
             {/* Top Left: Scope of Work */}
             <motion.div 
-              className="bg-[#1A1A1A] rounded-xl p-5 md:p-6"
+              className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 h-full"
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -185,7 +185,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
             
             {/* Top Right: Overview */}
             <motion.div 
-              className="bg-[#1A1A1A] rounded-xl p-5 md:p-6"
+              className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 h-full"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -202,7 +202,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
             {/* Bottom Left: What We Did */}
             {project.challenge && (
               <motion.div 
-                className="bg-[#1A1A1A] rounded-xl p-5 md:p-6"
+                className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 h-full"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -220,6 +220,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
             {/* Bottom Right: Featured Image from Gallery */}
             {gallery && gallery.length > 0 && (
               <motion.div 
+                className="h-full"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
