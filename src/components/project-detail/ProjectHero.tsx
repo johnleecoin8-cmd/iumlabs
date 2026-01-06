@@ -124,10 +124,10 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
       <div className="relative z-10 flex justify-between items-start p-6 sm:p-8 md:p-12">
         <Link 
           to="/projects"
-          className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors"
+          className="inline-flex items-center gap-3 text-white/60 hover:text-white transition-colors"
         >
-          <ArrowLeft className="w-4 h-4" />
-          <span className="text-sm">Back</span>
+          <ArrowLeft className="w-5 h-5" />
+          <span className="text-base font-medium">Back</span>
         </Link>
         
         <div className="text-right">
