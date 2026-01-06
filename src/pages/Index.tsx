@@ -77,7 +77,7 @@ const ProcessBillboardOverlay = () => {
     return () => observer.disconnect();
   }, []);
   return <div ref={sectionRef} className="px-3 sm:px-4 md:px-8 lg:px-10 pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6">
-      <div className="relative w-full h-[380px] sm:h-[320px] md:h-[340px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
+      <div className="relative w-full h-[340px] sm:h-[320px] md:h-[340px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
         {/* Background Image - Fixed Billboard */}
         <img src={seoulMetroBillboard} alt="Seoul Metro Billboard Campaign" className="absolute inset-0 w-full h-full object-cover object-center" />
         
@@ -102,11 +102,11 @@ const ProcessBillboardOverlay = () => {
           ];
           return <div key={index} className={`
                   relative flex flex-col items-center justify-center 
-                  gap-1 p-3 sm:p-4 md:p-6
+                  gap-0.5 sm:gap-1 p-2 sm:p-3 md:p-6
                   ${index === 0 || index === 2 ? 'border-r border-white/10' : ''}
                   ${index === 0 || index === 1 ? 'border-b border-white/10' : ''}
                   lg:border-r lg:border-b-0 lg:last:border-r-0
-                  cursor-pointer
+                  cursor-pointer active:scale-[0.97] transition-transform will-change-transform
                   ${isHovered ? 'bg-white/10 backdrop-blur-sm' : hasHover ? 'bg-black/20' : 'bg-transparent'}
                 `} style={{
             opacity: isVisible ? 1 : 0,
@@ -146,13 +146,13 @@ const ProcessBillboardOverlay = () => {
                 
                 {/* Icon */}
                 <div className={`
-                  w-10 h-10 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full flex-shrink-0
-                  flex items-center justify-center mb-1 md:mb-2 lg:mb-3
+                  w-8 h-8 sm:w-9 sm:h-9 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full flex-shrink-0
+                  flex items-center justify-center mb-0.5 sm:mb-1 md:mb-2 lg:mb-3
                   border transition-all duration-500
                   ${isHovered ? 'bg-white/20 border-white/40 scale-110' : 'bg-white/5 border-white/20'}
                 `}>
                   <Icon className={`
-                    w-4 h-4 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 transition-all duration-500
+                    w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 transition-all duration-500
                     ${isHovered ? 'text-white rotate-[360deg]' : 'text-white/60 rotate-0'}
                   `} />
                 </div>
@@ -161,7 +161,7 @@ const ProcessBillboardOverlay = () => {
                 <div className="text-center">
                   {/* Title */}
                   <h4 className={`
-                    text-xs sm:text-sm md:text-sm lg:text-base font-medium
+                    text-[11px] sm:text-xs md:text-sm lg:text-base font-medium
                     transition-all duration-300
                     ${isHovered ? 'text-white' : 'text-white/80'}
                   `}>
@@ -170,12 +170,12 @@ const ProcessBillboardOverlay = () => {
                   
                   {/* Description - 모바일에서 간략히, 호버 시 상세 */}
                   <div className={`
-                    mt-1 md:mt-2 overflow-hidden
+                    mt-0.5 sm:mt-1 md:mt-2 overflow-hidden
                     transition-all duration-500 ease-out
-                    ${isHovered ? 'max-h-[100px] opacity-100' : 'max-h-[40px] opacity-80'}
+                    ${isHovered ? 'max-h-[80px] sm:max-h-[100px] opacity-100' : 'max-h-[32px] sm:max-h-[40px] opacity-80'}
                   `}>
                     <p className={`
-                      text-[9px] sm:text-[10px] md:text-[11px] lg:text-xs text-white/60 leading-relaxed
+                      text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs text-white/60 leading-relaxed
                       transition-all duration-500 line-clamp-2
                       ${isHovered ? 'opacity-100' : 'opacity-70'}
                     `}>
