@@ -26,11 +26,10 @@ const MobileBottomNav = () => {
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 lg:hidden">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 lg:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
       {/* Glassmorphism background with gradient */}
       <div 
         className="absolute inset-0 bg-gradient-to-t from-background via-background/98 to-background/90 backdrop-blur-2xl border-t border-border/30"
-        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }} 
       />
       
       {/* Subtle top highlight */}
@@ -38,8 +37,7 @@ const MobileBottomNav = () => {
       
       {/* Navigation content */}
       <div 
-        className="relative flex items-center justify-around px-1"
-        style={{ paddingBottom: 'max(0.625rem, env(safe-area-inset-bottom))' }}
+        className="relative flex items-center justify-around px-1 py-1"
       >
       {navItems.map((item) => {
           const active = isActive(item.path);
@@ -57,7 +55,7 @@ const MobileBottomNav = () => {
               to={item.path}
               onClick={handleClick}
               className={cn(
-                "relative flex flex-col items-center justify-center gap-1 px-4 py-2.5 rounded-2xl transition-all duration-300 min-w-[60px]",
+                "relative flex flex-col items-center justify-center gap-0.5 px-3 py-2 rounded-xl transition-all duration-300 min-w-[56px] will-change-transform",
                 "active:scale-90",
                 active 
                   ? "text-foreground" 
@@ -68,7 +66,7 @@ const MobileBottomNav = () => {
               {active && (
                 <motion.div
                   layoutId="mobile-nav-pill"
-                  className="absolute inset-x-1 -top-0.5 h-1 bg-gradient-to-r from-primary/80 via-primary to-primary/80 rounded-full"
+                  className="absolute inset-x-1.5 -top-0.5 h-0.5 bg-gradient-to-r from-primary/80 via-primary to-primary/80 rounded-full will-change-transform"
                   initial={false}
                   transition={{ type: "spring", stiffness: 400, damping: 30 }}
                 />
@@ -80,11 +78,11 @@ const MobileBottomNav = () => {
                   <motion.div
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    className="absolute inset-0 bg-primary/20 blur-lg rounded-full"
+                    className="absolute inset-0 bg-primary/20 blur-md rounded-full will-change-transform"
                   />
                 )}
                 <item.icon className={cn(
-                  "relative z-10 w-5 h-5 transition-all duration-300",
+                  "relative z-10 w-[18px] h-[18px] transition-all duration-300",
                   active ? "stroke-[2.5]" : "stroke-[1.5]"
                 )} />
               </div>

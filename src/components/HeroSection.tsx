@@ -46,19 +46,19 @@ const serviceTags = [{
   position: "top-[66%] right-[2%]"
 }];
 
-// Mobile tags (fewer, repositioned for small screens with better spacing)
+// Mobile tags (fewer, repositioned for small screens - moved down to avoid navbar overlap)
 const mobileServiceTags = [{
   label: "Research",
-  position: "top-[8%] left-[4%]"
+  position: "top-[14%] left-[4%]"
 }, {
   label: "GTM",
-  position: "top-[8%] right-[4%]"
+  position: "top-[14%] right-[4%]"
 }, {
   label: "Marketing",
-  position: "top-[18%] left-[3%]"
+  position: "top-[23%] left-[3%]"
 }, {
   label: "Events",
-  position: "top-[18%] right-[3%]"
+  position: "top-[23%] right-[3%]"
 }];
 const clientLogos = [{
   name: "BNB",
