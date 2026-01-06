@@ -17,6 +17,59 @@ const calculateReadTime = (content: string | null): string => {
   return `${minutes} min`;
 };
 
+// Separate component to use hooks properly
+interface InsightArticle {
+  id: string;
+  title: string;
+  excerpt: string;
+  date: string;
+  readTime: string;
+  category: string;
+  image: string;
+}
+
+const InsightArticleItem = ({ article, index, isLast }: { article: InsightArticle; index: number; isLast: boolean }) => {
+  const { ref, isVisible } = useScrollAnimation({
+    threshold: 0.1,
+    rootMargin: '30px',
+    triggerOnce: true
+  });
+
+  return (
+    <div 
+      ref={ref} 
+      className={cn(
+        "transition-all duration-500 ease-out will-change-transform",
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      )} 
+      style={{ transitionDelay: `${index * 100}ms` }}
+    >
+      <Link 
+        to={`/research/${article.id}`} 
+        className={`group block p-4 sm:p-5 md:p-6 lg:p-8 transition-colors duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${!isLast ? "border-b border-border" : ""}`}
+      >
+        <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-muted-foreground text-[10px] sm:text-xs mb-1.5 sm:mb-2">
+          <span className="uppercase tracking-wider">{article.category}</span>
+          <span className="hidden sm:inline">•</span>
+          <span>{article.date}</span>
+          <span className="hidden sm:inline">•</span>
+          <span className="hidden sm:inline">{article.readTime} read</span>
+        </div>
+        <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2 group-hover:text-foreground/80 transition-colors line-clamp-2">
+          {article.title}
+        </h3>
+        <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-2 sm:mb-3 line-clamp-2">
+          {article.excerpt}
+        </p>
+        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-xs sm:text-sm min-h-[40px] sm:min-h-0">
+          <span className="group-hover:underline underline-offset-4">Read article</span>
+          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+        </div>
+      </Link>
+    </div>
+  );
+};
+
 const InsightsSection = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -70,47 +123,14 @@ const InsightsSection = () => {
               <p>No research articles yet. Check back soon!</p>
             </div>
           ) : (
-            insights.map((article, index) => {
-              const { ref, isVisible } = useScrollAnimation({
-                threshold: 0.1,
-                rootMargin: '30px',
-                triggerOnce: true
-              });
-              return (
-                <div 
-                  key={article.id} 
-                  ref={ref} 
-                  className={cn(
-                    "transition-all duration-500 ease-out will-change-transform",
-                    isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-                  )} 
-                  style={{ transitionDelay: `${index * 100}ms` }}
-                >
-                  <Link 
-                    to={`/research/${article.id}`} 
-                    className={`group block p-4 sm:p-5 md:p-6 lg:p-8 transition-colors duration-300 hover:bg-secondary/50 active:bg-secondary/70 ${index < insights.length - 1 ? "border-b border-border" : ""}`}
-                  >
-                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-muted-foreground text-[10px] sm:text-xs mb-1.5 sm:mb-2">
-                      <span className="uppercase tracking-wider">{article.category}</span>
-                      <span className="hidden sm:inline">•</span>
-                      <span>{article.date}</span>
-                      <span className="hidden sm:inline">•</span>
-                      <span className="hidden sm:inline">{article.readTime} read</span>
-                    </div>
-                    <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2 group-hover:text-foreground/80 transition-colors line-clamp-2">
-                      {article.title}
-                    </h3>
-                    <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed mb-2 sm:mb-3 line-clamp-2">
-                      {article.excerpt}
-                    </p>
-                    <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-xs sm:text-sm min-h-[40px] sm:min-h-0">
-                      <span className="group-hover:underline underline-offset-4">Read article</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </Link>
-                </div>
-              );
-            })
+            insights.map((article, index) => (
+              <InsightArticleItem 
+                key={article.id} 
+                article={article} 
+                index={index} 
+                isLast={index === insights.length - 1} 
+              />
+            ))
           )}
 
           {/* View All Link + CTA */}
