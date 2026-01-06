@@ -102,30 +102,44 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
         <section className="py-3 md:py-4">
           <div className="max-w-7xl mx-auto px-4">
             <motion.div
-              className="bg-[#1A1A1A] rounded-xl p-3 md:p-4"
+              className="bg-[#1A1A1A] rounded-xl p-3 md:p-4 flex gap-4 md:gap-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <div className="flex flex-wrap items-center gap-6 md:gap-10">
-                <MetaInfoItem label="Client" value={clientName} icon={Building2} accentColor="text-blue-400" delay={0} />
-                {duration && <MetaInfoItem label="Duration" value={duration} icon={Clock} accentColor="text-purple-400" delay={0.1} />}
-                {category && <MetaInfoItem label="Category" value={category} icon={Layers} accentColor="text-emerald-400" delay={0.2} />}
-              </div>
-              
-              {/* Project Description */}
-              {project.description && (
-                <motion.p
-                  className="text-sm md:text-base text-white/70 mt-4 pt-4 border-t border-white/10 leading-relaxed"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.3 }}
-                >
-                  {project.description}
-                </motion.p>
+              {/* Project Logo */}
+              {project.logo && (
+                <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-xl border border-white/10">
+                  <img 
+                    src={project.logo} 
+                    alt={`${project.name} logo`}
+                    className="w-10 h-10 md:w-14 md:h-14 object-contain"
+                  />
+                </div>
               )}
+              
+              {/* Meta Info & Description */}
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-4 md:gap-8">
+                  <MetaInfoItem label="Client" value={clientName} icon={Building2} accentColor="text-blue-400" delay={0} />
+                  {duration && <MetaInfoItem label="Duration" value={duration} icon={Clock} accentColor="text-purple-400" delay={0.1} />}
+                  {category && <MetaInfoItem label="Category" value={category} icon={Layers} accentColor="text-emerald-400" delay={0.2} />}
+                </div>
+                
+                {/* Project Description */}
+                {project.description && (
+                  <motion.p
+                    className="text-sm md:text-base text-white/70 mt-4 pt-4 border-t border-white/10 leading-relaxed"
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.3 }}
+                  >
+                    {project.description}
+                  </motion.p>
+                )}
+              </div>
             </motion.div>
           </div>
         </section>
