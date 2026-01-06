@@ -101,7 +101,7 @@ const Sidebar = () => {
     return currentPath === linkHref || linkHref !== '/' && currentPath.startsWith(linkHref);
   };
   return <>
-      <aside className={cn("fixed left-0 top-0 h-screen z-50 hidden md:flex flex-col", "transition-all duration-500 ease-out", isCollapsed ? "w-[72px]" : "w-60")}>
+      <aside className={cn("fixed left-0 top-0 h-screen z-50 hidden lg:flex flex-col", "transition-all duration-500 ease-out", isCollapsed ? "w-[72px]" : "w-60")}>
         {/* Glassmorphism Container */}
         <div className="relative flex flex-col h-full">
           {/* Glass background layer */}
@@ -255,7 +255,7 @@ const Sidebar = () => {
       </aside>
 
       {/* Dynamic margin spacer for content */}
-      <div className={cn("hidden md:block flex-shrink-0 transition-all duration-500", isCollapsed ? "w-[72px]" : "w-60")} />
+      <div className={cn("hidden lg:block flex-shrink-0 transition-all duration-500", isCollapsed ? "w-[72px]" : "w-60")} />
     </>;
 };
 export default Sidebar;
