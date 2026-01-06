@@ -71,6 +71,8 @@ const ProjectDetail = () => {
     ? dbGallery[0].src 
     : (fallbackProject?.gallery?.[0]?.src || fallbackProject?.bgImage || '');
   
+  const websiteUrl = dbProject?.website_url || '';
+  
   const project: ProjectData | null = dbProject ? {
     name: dbProject.name,
     logo: dbProject.logo_url || fallbackProject?.logo || '',
@@ -144,7 +146,7 @@ const ProjectDetail = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <ProjectHero project={project} />
+      <ProjectHero project={project} websiteUrl={websiteUrl} />
 
       {/* Unified Content Section */}
       <ProjectContentSection project={project} metrics={project.metrics} />
