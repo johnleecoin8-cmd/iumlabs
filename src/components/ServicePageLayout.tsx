@@ -396,47 +396,32 @@ const ServicePageLayout = ({
             
             <div className="py-8 md:py-12">
               <div className="container mx-auto px-4 lg:px-12">
-                <div className="space-y-4">
-                  {deliverables.map((deliverable, index) => {
-                    // 1번(index 0) -> 왼쪽, 2번(index 1) -> 오른쪽, 3번(index 2) -> 왼쪽
-                    const isRight = index === 1;
-                    
-                    return (
-                      <div
-                        key={deliverable.title}
-                        className={`flex ${isRight ? 'justify-end' : 'justify-start'}`}
-                      >
-                        <div className="w-full md:w-[85%] lg:w-[70%] p-5 sm:p-6 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all">
-                          <div className="flex flex-col md:flex-row md:items-start gap-4">
-                            {/* Title */}
-                            <h3 className="text-sm font-semibold text-white flex items-center gap-2 md:min-w-[140px] md:flex-shrink-0">
-                              <div 
-                                className="w-1.5 h-1.5 rounded-full"
-                                style={{ backgroundColor: accentColor }}
-                              />
-                              {deliverable.title}
-                            </h3>
-                            
-                            {/* Items - Horizontal list */}
-                            <div className="flex flex-wrap gap-2">
-                              {deliverable.items.map((item, idx) => (
-                                <span 
-                                  key={idx} 
-                                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-white/70 text-xs"
-                                >
-                                  <Check 
-                                    className="w-3 h-3 flex-shrink-0" 
-                                    style={{ color: accentColor }} 
-                                  />
-                                  {item}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {deliverables.map((deliverable) => (
+                    <div
+                      key={deliverable.title}
+                      className="p-4 sm:p-5 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all"
+                    >
+                      <h3 className="text-sm font-semibold text-white mb-2.5 flex items-center gap-2">
+                        <div 
+                          className="w-1.5 h-1.5 rounded-full"
+                          style={{ backgroundColor: accentColor }}
+                        />
+                        {deliverable.title}
+                      </h3>
+                      <ul className="space-y-1.5">
+                        {deliverable.items.map((item, idx) => (
+                          <li key={idx} className="flex items-start gap-2 text-white/60 text-xs">
+                            <Check 
+                              className="w-3 h-3 mt-0.5 flex-shrink-0" 
+                              style={{ color: accentColor }} 
+                            />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
