@@ -1,12 +1,25 @@
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, Send, Linkedin, Mail, MapPin } from "lucide-react";
-import { motion } from "framer-motion";
+import { Menu, Send, Linkedin, Mail, MapPin, ChevronDown } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import { brand, navigation } from "@/config/content";
 import LiveChatModal from "./LiveChatModal";
 import logoImage from "@/assets/logo.png";
 import { useSidebarState } from "@/hooks/useSidebarState";
+
+// Services submenu data (same as Sidebar)
+const servicesSubMenu = [
+  { name: "GTM Strategy", href: "/services/gtm" },
+  { name: "Branding/Website", href: "/services/branding" },
+  { name: "SEO/Paid Ads", href: "/services/seo-ads" },
+  { name: "Offline Event", href: "/services/offline-event" },
+  { name: "Community Management", href: "/services/community" },
+  { name: "Deep Research", href: "/services/deep-research" },
+  { name: "Influencer/KOL", href: "/services/influencer" },
+  { name: "Yap Service", href: "/services/yap" },
+  { name: "PR/Media", href: "/services/pr" },
+];
 
 const brandConfig = {
   name: brand.name,
@@ -26,6 +39,7 @@ const Navbar = () => {
   const [isLiveChatOpen, setIsLiveChatOpen] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [servicesOpen, setServicesOpen] = useState(false);
   const location = useLocation();
 
   const { isCollapsed } = useSidebarState();
@@ -139,20 +153,77 @@ const Navbar = () => {
                   Menu
                 </span>
                 <nav className="space-y-1 sm:space-y-1.5 md:space-y-2">
-                  {navLinks.map((link, index) => (
-                    <div key={link.to}>
-                      <Link
-                        to={link.to}
-                        onClick={() => setIsMenuOpen(false)}
-                        className={`block text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[40px] sm:min-h-[44px] md:min-h-[52px] flex items-center ${
-                          isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                        }`}
-                        style={{ transitionDelay: isMenuOpen ? `${200 + index * 60}ms` : "0ms" }}
-                      >
-                        {link.label}
-                      </Link>
-                    </div>
-                  ))}
+                  {navLinks.map((link, index) => {
+                    // Services with accordion
+                    if (link.label === 'Services') {
+                      return (
+                        <div key={link.to}>
+                          <button
+                            onClick={() => setServicesOpen(!servicesOpen)}
+                            className={`w-full flex items-center justify-between text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[40px] sm:min-h-[44px] md:min-h-[52px] ${
+                              isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+                            }`}
+                            style={{ transitionDelay: isMenuOpen ? `${200 + index * 60}ms` : "0ms" }}
+                          >
+                            <span>{link.label}</span>
+                            <motion.div
+                              animate={{ rotate: servicesOpen ? 180 : 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6" />
+                            </motion.div>
+                          </button>
+                          
+                          {/* Services Submenu */}
+                          <AnimatePresence>
+                            {servicesOpen && (
+                              <motion.div
+                                className="overflow-hidden mt-2 ml-2 pl-3 border-l border-border/30"
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                transition={{ duration: 0.3, ease: "easeOut" }}
+                              >
+                                <div className="space-y-1 py-1">
+                                  {servicesSubMenu.map((item, subIndex) => (
+                                    <motion.div
+                                      key={item.href}
+                                      initial={{ opacity: 0, x: -10 }}
+                                      animate={{ opacity: 1, x: 0 }}
+                                      transition={{ duration: 0.2, delay: subIndex * 0.03 }}
+                                    >
+                                      <Link
+                                        to={item.href}
+                                        onClick={() => setIsMenuOpen(false)}
+                                        className="block text-sm sm:text-base text-muted-foreground hover:text-primary transition-colors duration-200 py-1.5"
+                                      >
+                                        {item.name}
+                                      </Link>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      );
+                    }
+
+                    return (
+                      <div key={link.to}>
+                        <Link
+                          to={link.to}
+                          onClick={() => setIsMenuOpen(false)}
+                          className={`block text-lg sm:text-xl md:text-3xl lg:text-4xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[40px] sm:min-h-[44px] md:min-h-[52px] flex items-center ${
+                            isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+                          }`}
+                          style={{ transitionDelay: isMenuOpen ? `${200 + index * 60}ms` : "0ms" }}
+                        >
+                          {link.label}
+                        </Link>
+                      </div>
+                    );
+                  })}
                 </nav>
               </div>
 
