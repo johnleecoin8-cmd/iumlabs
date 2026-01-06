@@ -110,7 +110,7 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
             >
               {/* Project Logo */}
               {project.logo && (
-                <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-xl border border-white/10">
+                <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-xl border border-white/10 self-center">
                   <img 
                     src={project.logo} 
                     alt={`${project.name} logo`}
