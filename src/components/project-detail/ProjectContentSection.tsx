@@ -162,7 +162,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
       {/* SECTION 2: SCOPE OF WORK + Overview + Featured Image - 2x2 Grid */}
       <section className="py-2 md:py-3">
         <div className="px-4 md:px-8 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 auto-rows-fr">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4 md:grid-rows-[auto_180px]">
             {/* Top Left: Scope of Work */}
             <motion.div 
               className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 h-full"
@@ -226,7 +226,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                <div className="rounded-xl overflow-hidden h-full min-h-[200px]">
+                <div className="rounded-xl overflow-hidden h-full">
                   <img 
                     src={gallery[0].src}
                     alt={gallery[0].title || `${project.name} featured image`}
