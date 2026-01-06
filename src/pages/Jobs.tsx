@@ -332,56 +332,51 @@ const Jobs = () => {
             </div>
           </AnimatedSection>
 
-          {/* Talent Wanted Marquee */}
-          <div className="overflow-hidden border-b border-white/10 py-6 md:py-8">
-            <motion.div
-              animate={{ x: ["0%", "-50%"] }}
-              transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-              className="flex whitespace-nowrap"
-            >
-              {talentMarquee.split("Talent Wanted ").map((_, idx) => (
-                <span
-                  key={idx}
-                  className={`text-4xl md:text-6xl font-bold tracking-tight mr-8 ${
-                    idx % 2 === 0 ? "text-white" : "text-white/20"
-                  }`}
-                >
-                  Talent Wanted{" "}
-                </span>
-              ))}
-            </motion.div>
-          </div>
-          
-          <AnimatedSection delay={100}>
-            <div className="px-4 md:px-10 py-10 md:py-16">
-              <div className="grid md:grid-cols-3 gap-4 md:gap-6">
-                {positions.map((pos, idx) => {
-                  const Icon = pos.icon;
-                  return (
-                    <div
-                      key={idx}
-                      onClick={() => setSelectedPosition(pos)}
-                      className="bg-white/5 border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col group hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer"
-                    >
-                      <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mb-5 group-hover:bg-white/15 transition-colors">
-                        <Icon className="w-6 h-6 text-white/70" />
-                      </div>
-                      <h3 className="text-xl font-bold text-white mb-3">
+          {/* Position Rows */}
+          {positions.map((pos, idx) => {
+            const Icon = pos.icon;
+            return (
+              <div
+                key={idx}
+                onClick={() => setSelectedPosition(pos)}
+                className="border-b border-white/10 group cursor-pointer hover:bg-white/5 transition-all"
+              >
+                <div className="px-4 md:px-10 py-6 md:py-8 flex items-center justify-between gap-6">
+                  {/* Left: Number + Title */}
+                  <div className="flex items-center gap-6 md:gap-10 flex-1 min-w-0">
+                    <span className="text-3xl md:text-5xl font-bold text-white/20 group-hover:text-white/40 transition-colors">
+                      0{idx + 1}
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-2xl md:text-4xl font-bold text-white group-hover:text-white/90 transition-colors truncate">
                         {pos.title}
                       </h3>
-                      <p className="text-white/50 text-sm leading-relaxed flex-1 mb-6">
+                      <p className="text-white/40 text-sm md:text-base mt-1 hidden md:block truncate">
                         {pos.description}
                       </p>
-                      <span className="inline-flex items-center gap-2 text-white font-medium group-hover:text-white/80 transition-colors">
-                        View Details
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                  
+                  {/* Right: Info + Arrow */}
+                  <div className="flex items-center gap-4 md:gap-8 flex-shrink-0">
+                    <div className="hidden lg:flex items-center gap-6 text-sm text-white/40">
+                      <span className="flex items-center gap-2">
+                        <DollarSign className="w-4 h-4" />
+                        {pos.salary}
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <MapPin className="w-4 h-4" />
+                        {pos.workType}
                       </span>
                     </div>
-                  );
-                })}
+                    <div className="w-12 h-12 md:w-14 md:h-14 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:border-white transition-all">
+                      <ArrowRight className="w-5 h-5 md:w-6 md:h-6 text-white/60 group-hover:text-black group-hover:translate-x-1 transition-all" />
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </AnimatedSection>
+            );
+          })}
         </div>
       </section>
 
