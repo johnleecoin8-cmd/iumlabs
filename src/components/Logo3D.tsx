@@ -1,6 +1,29 @@
-import { useMemo, useState, useEffect } from "react";
+import { useMemo, useState, useEffect, Suspense, Component, ReactNode } from "react";
 import { Canvas } from "@react-three/fiber";
 import * as THREE from "three";
+
+// Error boundary to catch WebGL context issues
+class WebGLErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { hasError: boolean }> {
+  constructor(props: { children: ReactNode; fallback: ReactNode }) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error: Error) {
+    console.warn('WebGL Error:', error.message);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback;
+    }
+    return this.props.children;
+  }
+}
 
 const HologramLogo = () => {
   const [glitchState, setGlitchState] = useState({
@@ -237,18 +260,59 @@ interface Logo3DProps {
 }
 
 const Logo3D = ({ className = "" }: Logo3DProps) => {
+  const [isWebGLSupported, setIsWebGLSupported] = useState(true);
+
+  useEffect(() => {
+    // Check WebGL support on mount
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      if (!gl) {
+        setIsWebGLSupported(false);
+      }
+    } catch {
+      setIsWebGLSupported(false);
+    }
+  }, []);
+
+  // Fallback component when WebGL is not available
+  const Fallback = (
+    <div className={`w-full h-full flex items-center justify-center ${className}`}>
+      <div className="text-cyan-400/50 text-xs">⬢</div>
+    </div>
+  );
+
+  if (!isWebGLSupported) {
+    return Fallback;
+  }
+
   return (
     <div className={`w-full h-full ${className}`}>
-      <Canvas
-        camera={{ position: [0, 0, 5], fov: 38 }}
-        gl={{ antialias: true, alpha: true }}
-        style={{ background: "transparent" }}
-      >
-        <ambientLight intensity={0.3} />
-        <pointLight position={[0, 0, 4]} intensity={0.4} color="#00FFFF" />
-        <pointLight position={[2, 2, 3]} intensity={0.2} color="#FF00FF" />
-        <HologramLogo />
-      </Canvas>
+      <WebGLErrorBoundary fallback={Fallback}>
+        <Suspense fallback={Fallback}>
+          <Canvas
+            camera={{ position: [0, 0, 5], fov: 38 }}
+            gl={{ 
+              antialias: true, 
+              alpha: true,
+              failIfMajorPerformanceCaveat: true,
+              powerPreference: "low-power"
+            }}
+            style={{ background: "transparent" }}
+            onCreated={({ gl }) => {
+              gl.domElement.addEventListener('webglcontextlost', (e) => {
+                e.preventDefault();
+                console.warn('WebGL context lost');
+              }, false);
+            }}
+          >
+            <ambientLight intensity={0.3} />
+            <pointLight position={[0, 0, 4]} intensity={0.4} color="#00FFFF" />
+            <pointLight position={[2, 2, 3]} intensity={0.2} color="#FF00FF" />
+            <HologramLogo />
+          </Canvas>
+        </Suspense>
+      </WebGLErrorBoundary>
     </div>
   );
 };
