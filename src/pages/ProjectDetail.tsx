@@ -66,10 +66,11 @@ const ProjectDetail = () => {
   // Use DB project if available, otherwise fallback to hardcoded
   const fallbackProject = slug ? projectsData[slug] : null;
   
-  // Use background_url from DB first, then fallback to gallery
-  const heroBackgroundImage = dbProject?.background_url 
+  // Use fallback (imported) image first, then DB URL (for external URLs only)
+  const heroBackgroundImage = fallbackProject?.bgImage 
+    || (dbProject?.background_url?.startsWith('http') ? dbProject.background_url : null)
     || (dbGallery && dbGallery.length > 0 ? dbGallery[0].src : null)
-    || fallbackProject?.bgImage || '';
+    || '';
   
   const websiteUrl = dbProject?.website_url || '';
   
