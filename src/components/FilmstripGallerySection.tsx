@@ -119,7 +119,7 @@ const FilmstripGallerySection = () => {
             {images.slice(0, 9).map((image, index) => (
               <div
                 key={index}
-                className={`group relative aspect-[6/5] overflow-hidden border-r border-b border-white/10 cursor-pointer hover:scale-[1.02] hover:z-10 transition-transform duration-300 ${
+                className={`group relative aspect-square sm:aspect-[6/5] overflow-hidden border-r border-b border-white/10 cursor-pointer active:scale-[0.97] transition-transform duration-300 will-change-transform ${
                   index % 3 === 2 ? "border-r-0" : ""
                 }`}
               >
@@ -128,10 +128,11 @@ const FilmstripGallerySection = () => {
                   alt={image.alt}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="absolute inset-0 flex flex-col items-center justify-end pb-3 sm:pb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="text-white font-semibold text-sm sm:text-lg">{image.title}</p>
-                  <p className="text-white/70 text-[10px] sm:text-sm">{image.subtitle}</p>
+                {/* Always visible overlay on mobile, hover on desktop */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 flex flex-col items-center justify-end pb-2 sm:pb-6 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-white font-semibold text-[10px] sm:text-lg leading-tight text-center px-1">{image.title}</p>
+                  <p className="text-white/70 text-[8px] sm:text-sm hidden sm:block">{image.subtitle}</p>
                 </div>
               </div>
             ))}
@@ -139,26 +140,26 @@ const FilmstripGallerySection = () => {
         </div>
 
         {/* Right: Info Panel */}
-        <div className="w-full md:w-1/3 p-4 sm:p-6 md:p-6 lg:p-8 flex flex-col justify-center">
-          <h2 className="text-lg sm:text-xl md:text-xl lg:text-2xl font-bold text-white mb-2 sm:mb-3">
+        <div className="w-full md:w-1/3 p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col justify-center">
+          <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white mb-1.5 sm:mb-3">
             Campaign Gallery
           </h2>
-          <p className="text-white/50 leading-relaxed mb-4 sm:mb-5 text-xs sm:text-sm md:text-sm">
+          <p className="text-white/50 leading-relaxed mb-3 sm:mb-5 text-[11px] sm:text-xs md:text-sm">
             Explore our successful campaigns and events across Korea's Web3 ecosystem.
           </p>
 
-          <div className="space-y-1.5 sm:space-y-2 mb-4 sm:mb-6">
-            <div className="flex items-center justify-between py-2 border-b border-white/10">
-              <span className="text-white/50 text-xs sm:text-sm">Events Hosted</span>
-              <span className="text-white font-semibold text-sm sm:text-base">48+</span>
+          <div className="space-y-1 sm:space-y-2 mb-3 sm:mb-6">
+            <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-white/10">
+              <span className="text-white/50 text-[10px] sm:text-xs md:text-sm">Events Hosted</span>
+              <span className="text-white font-semibold text-xs sm:text-sm md:text-base">48+</span>
             </div>
-            <div className="flex items-center justify-between py-2 border-b border-white/10">
-              <span className="text-white/50 text-xs sm:text-sm">Media Placements</span>
-              <span className="text-white font-semibold text-sm sm:text-base">200+</span>
+            <div className="flex items-center justify-between py-1.5 sm:py-2 border-b border-white/10">
+              <span className="text-white/50 text-[10px] sm:text-xs md:text-sm">Media Placements</span>
+              <span className="text-white font-semibold text-xs sm:text-sm md:text-base">200+</span>
             </div>
-            <div className="flex items-center justify-between py-2">
-              <span className="text-white/50 text-xs sm:text-sm">Campaigns Launched</span>
-              <span className="text-white font-semibold text-sm sm:text-base">60+</span>
+            <div className="flex items-center justify-between py-1.5 sm:py-2">
+              <span className="text-white/50 text-[10px] sm:text-xs md:text-sm">Campaigns Launched</span>
+              <span className="text-white font-semibold text-xs sm:text-sm md:text-base">60+</span>
             </div>
           </div>
 

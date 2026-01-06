@@ -111,17 +111,17 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
       style={{ transitionDelay: `${(index % 6) * 50}ms` }}
     >
       <div
-        className={`group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full min-h-[120px] sm:min-h-[140px] ${
+        className={`group block p-2.5 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full min-h-[100px] sm:min-h-[140px] ${
           !isRightColumn ? "sm:border-r border-border" : ""
         } ${!isLastRow ? "border-b border-border" : ""}`}
       >
         <Link
           to={`/projects/${slug}`}
           onClick={() => window.scrollTo(0, 0)}
-          className="flex items-start gap-2.5 sm:gap-3 active:scale-[0.97] transition-transform duration-150"
+          className="flex items-start gap-2 sm:gap-3 active:scale-[0.97] transition-transform duration-150"
         >
           {/* Image - Wide aspect ratio */}
-          <div className="w-20 h-12 sm:w-24 sm:h-14 md:w-28 md:h-16 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+          <div className="w-16 h-10 sm:w-24 sm:h-14 md:w-28 md:h-16 rounded-md sm:rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img
               src={bgImage}
               alt={name}
@@ -131,13 +131,13 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 text-muted-foreground text-[9px] sm:text-[10px] mb-0.5">
-              <span className="uppercase tracking-wider">{category}</span>
+            <div className="flex items-center gap-2 text-muted-foreground text-[8px] sm:text-[10px] mb-0.5">
+              <span className="uppercase tracking-wider line-clamp-1">{category}</span>
             </div>
-            <h3 className="text-sm sm:text-base font-semibold text-foreground mb-0.5 group-hover:text-foreground/80 transition-colors line-clamp-1">
+            <h3 className="text-xs sm:text-base font-semibold text-foreground mb-0.5 group-hover:text-foreground/80 transition-colors line-clamp-1">
               {name}
             </h3>
-            <p className="text-foreground font-medium text-[11px] sm:text-xs mb-0.5 line-clamp-1">
+            <p className="text-foreground font-medium text-[9px] sm:text-xs mb-0.5 line-clamp-1">
               {result}
             </p>
             <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed line-clamp-1 hidden sm:block">
@@ -146,14 +146,14 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
           </div>
         </Link>
 
-        <div className="flex items-center justify-between gap-2 mt-2 min-h-[36px] sm:min-h-0">
+        <div className="flex items-center justify-between gap-2 mt-1.5 sm:mt-2 min-h-[32px] sm:min-h-0">
           <Link
             to={`/projects/${slug}`}
             onClick={() => window.scrollTo(0, 0)}
-            className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-xs"
+            className="flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors text-[9px] sm:text-xs"
           >
-            <span className="group-hover:underline underline-offset-4">View case study</span>
-            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+            <span className="group-hover:underline underline-offset-4">View case</span>
+            <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
           </Link>
           
           {websiteUrl && (
@@ -162,7 +162,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="flex items-center gap-1 px-2 py-1 text-[10px] sm:text-xs text-muted-foreground border border-border/50 rounded hover:border-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-all duration-300"
+              className="hidden sm:flex items-center gap-1 px-2 py-1 text-[10px] sm:text-xs text-muted-foreground border border-border/50 rounded hover:border-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-all duration-300"
             >
               <ExternalLink className="w-2.5 h-2.5" />
               <span>Website</span>
@@ -250,26 +250,26 @@ const CasesSection = () => {
         </div>
 
         {/* Right: Sticky Info Panel */}
-        <div className="w-full lg:w-1/3 p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-center">
-          <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground mb-3 sm:mb-4">
+        <div className="w-full lg:w-1/3 p-4 sm:p-5 md:p-8 lg:p-10 flex flex-col justify-center">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-2 sm:mb-4">
             Our Cases
           </h2>
-          <p className="text-muted-foreground leading-relaxed mb-4 sm:mb-5 md:mb-6 text-xs sm:text-sm md:text-sm">
+          <p className="text-muted-foreground leading-relaxed mb-3 sm:mb-5 md:mb-6 text-[11px] sm:text-xs md:text-sm">
             Real results, not just promises. Here's how we've helped global Web3 projects conquer the Korean market.
           </p>
 
-          <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-5 md:mb-6">
-            <div className="flex items-center gap-3 sm:gap-4 pb-2 sm:pb-3 border-b border-border">
-              <span className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground">340%</span>
-              <span className="text-muted-foreground text-xs sm:text-sm md:text-sm">Average volume increase</span>
+          <div className="space-y-2 sm:space-y-4 mb-3 sm:mb-5 md:mb-6">
+            <div className="flex items-center gap-2 sm:gap-4 pb-2 sm:pb-3 border-b border-border">
+              <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground">340%</span>
+              <span className="text-muted-foreground text-[10px] sm:text-xs md:text-sm">Average volume increase</span>
             </div>
-            <div className="flex items-center gap-3 sm:gap-4 pb-2 sm:pb-3 border-b border-border">
-              <span className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground">50K+</span>
-              <span className="text-muted-foreground text-xs sm:text-sm md:text-sm">New users acquired</span>
+            <div className="flex items-center gap-2 sm:gap-4 pb-2 sm:pb-3 border-b border-border">
+              <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground">50K+</span>
+              <span className="text-muted-foreground text-[10px] sm:text-xs md:text-sm">New users acquired</span>
             </div>
-            <div className="flex items-center gap-3 sm:gap-4">
-              <span className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground">{cases.length}+</span>
-              <span className="text-muted-foreground text-xs sm:text-sm md:text-sm">Projects launched</span>
+            <div className="flex items-center gap-2 sm:gap-4">
+              <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground">{cases.length}+</span>
+              <span className="text-muted-foreground text-[10px] sm:text-xs md:text-sm">Projects launched</span>
             </div>
           </div>
 
