@@ -221,7 +221,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
             >
               <div className="absolute inset-0 bg-black/60" />
               <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
-                <h3 className="text-2xl md:text-4xl font-bold text-white mb-4">
+                <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
                   Ready to achieve similar results in Korea?
                 </h3>
                 <a 
