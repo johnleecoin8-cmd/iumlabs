@@ -182,22 +182,6 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
                 ))}
               </ul>
             </motion.div>
-            
-            {/* Top Right: Overview */}
-            <motion.div 
-              className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 h-full"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              <h3 className="text-xs text-white/40 uppercase tracking-wider mb-3">
-                Overview
-              </h3>
-              <p className="text-base md:text-lg font-normal text-white/80 leading-relaxed">
-                {project.description}
-              </p>
-            </motion.div>
 
             {/* Bottom Left: What We Did */}
             {project.challenge && (
