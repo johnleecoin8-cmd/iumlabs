@@ -41,12 +41,21 @@ const MobileBottomNav = () => {
         className="relative flex items-center justify-around px-1"
         style={{ paddingBottom: 'max(0.625rem, env(safe-area-inset-bottom))' }}
       >
-        {navItems.map((item) => {
+      {navItems.map((item) => {
           const active = isActive(item.path);
+          
+          const handleClick = () => {
+            // Haptic feedback for mobile devices
+            if ('vibrate' in navigator) {
+              navigator.vibrate(10);
+            }
+          };
+          
           return (
             <Link
               key={item.path}
               to={item.path}
+              onClick={handleClick}
               className={cn(
                 "relative flex flex-col items-center justify-center gap-1 px-4 py-2.5 rounded-2xl transition-all duration-300 min-w-[60px]",
                 "active:scale-90",
