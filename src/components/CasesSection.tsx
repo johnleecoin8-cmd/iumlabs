@@ -242,7 +242,7 @@ const CasesSection = () => {
       <div className="flex flex-col lg:flex-row">
         {/* Left: Cases Grid */}
         <div className="w-full lg:w-2/3 lg:border-r border-border">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2">
             {cases.map((caseItem, index) => (
               <CaseCard key={caseItem.slug} {...caseItem} index={index} />
             ))}
