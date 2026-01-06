@@ -260,25 +260,41 @@ const ResearchDetail = () => {
         <div className="prose prose-invert prose-lg max-w-none">
           <div className="text-white/80 leading-relaxed">
             {post.content.split('\n').map((line, index) => {
-              // Handle chart images for SUI research
-              if (line.startsWith('![') && line.includes('](chart:')) {
-                const chartMatch = line.match(/\!\[([^\]]*)\]\(chart:(\w+)\)/);
-                if (chartMatch && post.chartImages) {
-                  const [, altText, chartKey] = chartMatch;
-                  const chartImage = post.chartImages[chartKey as keyof typeof post.chartImages];
-                  if (chartImage) {
-                    return (
-                      <div key={index} className="my-8 rounded-xl overflow-hidden border border-white/10">
-                        <img 
-                          src={chartImage} 
-                          alt={altText}
-                          className="w-full h-auto"
-                        />
-                      </div>
-                    );
+              // Handle standard markdown images ![alt](url)
+              if (line.startsWith('![') && line.includes('](')) {
+                const imageMatch = line.match(/\!\[([^\]]*)\]\(([^)]+)\)/);
+                if (imageMatch) {
+                  const [, altText, imageUrl] = imageMatch;
+                  // Skip chart: protocol images if no chartImages available
+                  if (imageUrl.startsWith('chart:')) {
+                    if (post.chartImages) {
+                      const chartKey = imageUrl.replace('chart:', '');
+                      const chartImage = post.chartImages[chartKey as keyof typeof post.chartImages];
+                      if (chartImage) {
+                        return (
+                          <div key={index} className="my-8 rounded-xl overflow-hidden border border-white/10">
+                            <img 
+                              src={chartImage} 
+                              alt={altText}
+                              className="w-full h-auto"
+                            />
+                          </div>
+                        );
+                      }
+                    }
+                    return null;
                   }
+                  // Regular image URL
+                  return (
+                    <div key={index} className="my-8 rounded-xl overflow-hidden border border-white/10">
+                      <img 
+                        src={imageUrl} 
+                        alt={altText}
+                        className="w-full h-auto"
+                      />
+                    </div>
+                  );
                 }
-                return null;
               }
               // Handle blockquotes (lines starting with >)
               if (line.startsWith('> ')) {
