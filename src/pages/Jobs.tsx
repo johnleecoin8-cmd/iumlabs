@@ -1,12 +1,24 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Users, Lightbulb, Rocket, Clock, Globe, TrendingUp, Heart, FileText, ArrowRight } from "lucide-react";
+import { Briefcase, Users, Lightbulb, Rocket, Clock, Globe, TrendingUp, Heart, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { z } from "zod";
 import FloatingTags from "@/components/FloatingTags";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import JobApplicationForm from "@/components/JobApplicationForm";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { usePageMeta } from "@/hooks/usePageMeta";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const heroTags = [
   { label: "Remote-Friendly", top: "25%", left: "15%" },
@@ -110,19 +122,112 @@ const perks = [
   },
 ];
 
+// Form validation schema
+const applicationSchema = z.object({
+  name: z.string().min(1, "이름을 입력해주세요"),
+  email: z.string().email("올바른 이메일을 입력해주세요"),
+  phone: z.string().optional(),
+  telegram: z.string().optional(),
+  linkedinUrl: z.string().optional(),
+  portfolioUrl: z.string().optional(),
+  position: z.string().min(1, "포지션을 선택해주세요"),
+  coverLetter: z.string().optional(),
+  privacyAgreed: z.literal(true, {
+    errorMap: () => ({ message: "개인정보처리방침에 동의해주세요" }),
+  }),
+});
+
+type ApplicationFormData = z.infer<typeof applicationSchema>;
+
 const Jobs = () => {
-  const [isFormOpen, setIsFormOpen] = useState(false);
-  const [selectedPosition, setSelectedPosition] = useState("");
-
-  const openApplicationForm = (position: string = "") => {
-    setSelectedPosition(position);
-    setIsFormOpen(true);
-  };
-
   usePageMeta({
     title: "Careers | Ium Labs - Join Our Web3 Team",
     description: "Join Ium Labs and shape the future of Web3 in Korea. We're looking for passionate Researchers and Growth Managers.",
   });
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    telegram: "",
+    linkedinUrl: "",
+    portfolioUrl: "",
+    position: "",
+    coverLetter: "",
+    privacyAgreed: false as boolean,
+  });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (field: keyof ApplicationFormData, value: string | boolean) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
+  };
+
+  const scrollToApply = (position?: string) => {
+    if (position) {
+      setFormData((prev) => ({ ...prev, position }));
+    }
+    document.getElementById("apply-now")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const result = applicationSchema.safeParse(formData);
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.errors.forEach((err) => {
+        if (err.path[0]) {
+          fieldErrors[err.path[0] as string] = err.message;
+        }
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { error } = await supabase.from("job_applications").insert({
+        name: result.data.name,
+        email: result.data.email,
+        phone: result.data.phone || null,
+        telegram: result.data.telegram || null,
+        linkedin_url: result.data.linkedinUrl || null,
+        portfolio_url: result.data.portfolioUrl || null,
+        position: result.data.position,
+        cover_letter: result.data.coverLetter || null,
+      });
+
+      if (error) throw error;
+
+      toast.success("지원서가 성공적으로 제출되었습니다!");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        telegram: "",
+        linkedinUrl: "",
+        portfolioUrl: "",
+        position: "",
+        coverLetter: "",
+        privacyAgreed: false as boolean,
+      });
+      setErrors({});
+    } catch (error) {
+      console.error("Error submitting application:", error);
+      toast.error("지원서 제출 중 오류가 발생했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -161,13 +266,13 @@ const Jobs = () => {
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
               Shape the future of Web3 in Korea. We're looking for passionate individuals who want to bridge global projects with the Korean market.
             </p>
-            <a
-              href="#positions"
+            <button
+              onClick={() => scrollToApply()}
               className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors"
             >
               View Open Positions
               <ArrowRight className="w-4 h-4" />
-            </a>
+            </button>
           </motion.div>
         </div>
       </section>
@@ -292,10 +397,9 @@ const Jobs = () => {
                   </div>
 
                   <button
-                    onClick={() => openApplicationForm(position.title.toLowerCase().replace(" ", "-"))}
+                    onClick={() => scrollToApply(position.title)}
                     className="inline-flex items-center gap-2 w-full justify-center px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors"
                   >
-                    <FileText className="w-4 h-4" />
                     Apply Now
                   </button>
                 </div>
@@ -342,6 +446,170 @@ const Jobs = () => {
         </div>
       </section>
 
+      {/* Apply Now Section - Inline Form */}
+      <section id="apply-now" className="py-0">
+        {/* Marquee Header */}
+        <div className="overflow-hidden py-6 bg-foreground text-background">
+          <motion.div
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="flex gap-8 text-3xl md:text-4xl font-bold whitespace-nowrap"
+          >
+            {[...Array(10)].map((_, i) => (
+              <span key={i} className="flex items-center gap-8">
+                <span>Apply Now</span>
+                <span className="text-background/50">·</span>
+              </span>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Form Container */}
+        <div className="container mx-auto max-w-4xl px-6 py-16 md:py-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <p className="text-muted-foreground">
+              평일 기준 24시간 이내에 연락드립니다.
+              <br />
+              입력하신 정보는 채용 목적으로만 사용됩니다.
+            </p>
+          </motion.div>
+
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            onSubmit={handleSubmit}
+            className="space-y-6"
+          >
+            {/* Row 1: Name, Email, Phone */}
+            <div className="grid md:grid-cols-3 gap-4">
+              <div>
+                <Input
+                  placeholder="Name *"
+                  value={formData.name || ""}
+                  onChange={(e) => handleInputChange("name", e.target.value)}
+                  className="bg-muted border-0 h-14 rounded-xl"
+                />
+                {errors.name && (
+                  <p className="text-destructive text-sm mt-1">{errors.name}</p>
+                )}
+              </div>
+              <div>
+                <Input
+                  type="email"
+                  placeholder="Email *"
+                  value={formData.email || ""}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  className="bg-muted border-0 h-14 rounded-xl"
+                />
+                {errors.email && (
+                  <p className="text-destructive text-sm mt-1">{errors.email}</p>
+                )}
+              </div>
+              <div>
+                <Input
+                  placeholder="Phone"
+                  value={formData.phone || ""}
+                  onChange={(e) => handleInputChange("phone", e.target.value)}
+                  className="bg-muted border-0 h-14 rounded-xl"
+                />
+              </div>
+            </div>
+
+            {/* Row 2: Telegram, LinkedIn, Portfolio */}
+            <div className="grid md:grid-cols-3 gap-4">
+              <Input
+                placeholder="Telegram"
+                value={formData.telegram || ""}
+                onChange={(e) => handleInputChange("telegram", e.target.value)}
+                className="bg-muted border-0 h-14 rounded-xl"
+              />
+              <Input
+                placeholder="LinkedIn / Twitter URL"
+                value={formData.linkedinUrl || ""}
+                onChange={(e) => handleInputChange("linkedinUrl", e.target.value)}
+                className="bg-muted border-0 h-14 rounded-xl"
+              />
+              <Input
+                placeholder="Portfolio URL"
+                value={formData.portfolioUrl || ""}
+                onChange={(e) => handleInputChange("portfolioUrl", e.target.value)}
+                className="bg-muted border-0 h-14 rounded-xl"
+              />
+            </div>
+
+            {/* Row 3: Position Select */}
+            <div>
+              <Select
+                value={formData.position || ""}
+                onValueChange={(value) => handleInputChange("position", value)}
+              >
+                <SelectTrigger className="bg-muted border-0 h-14 rounded-xl">
+                  <SelectValue placeholder="Select a position *" />
+                </SelectTrigger>
+                <SelectContent>
+                  {positions.map((pos) => (
+                    <SelectItem key={pos.title} value={pos.title}>
+                      {pos.title}
+                    </SelectItem>
+                  ))}
+                  <SelectItem value="Other">Other / 자유지원</SelectItem>
+                </SelectContent>
+              </Select>
+              {errors.position && (
+                <p className="text-destructive text-sm mt-1">{errors.position}</p>
+              )}
+            </div>
+
+            {/* Row 4: Cover Letter */}
+            <div>
+              <Textarea
+                placeholder="Tell us about yourself and why you want to join Ium Labs..."
+                value={formData.coverLetter || ""}
+                onChange={(e) => handleInputChange("coverLetter", e.target.value)}
+                className="bg-muted border-0 min-h-[200px] rounded-xl resize-none"
+              />
+            </div>
+
+            {/* Privacy Checkbox */}
+            <div className="flex items-start gap-3">
+              <Checkbox
+                id="privacy"
+                checked={formData.privacyAgreed || false}
+                onCheckedChange={(checked) =>
+                  handleInputChange("privacyAgreed", checked === true)
+                }
+                className="mt-0.5"
+              />
+              <label
+                htmlFor="privacy"
+                className="text-sm text-muted-foreground cursor-pointer"
+              >
+                개인정보처리방침에 동의합니다 *
+              </label>
+            </div>
+            {errors.privacyAgreed && (
+              <p className="text-destructive text-sm">{errors.privacyAgreed}</p>
+            )}
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-5 text-lg bg-foreground text-background hover:bg-foreground/90 rounded-full font-semibold transition-colors disabled:opacity-50"
+            >
+              {isSubmitting ? "Submitting..." : "Submit Application"}
+            </button>
+          </motion.form>
+        </div>
+      </section>
+
       {/* CTA Section */}
       <section className="py-24 px-6 bg-gradient-to-b from-background to-muted/30">
         <div className="container mx-auto max-w-3xl text-center">
@@ -359,10 +627,9 @@ const Jobs = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={() => openApplicationForm("other")}
+                onClick={() => scrollToApply("Other")}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-emerald-500 hover:bg-emerald-600 text-white font-medium rounded-lg transition-colors"
               >
-                <FileText className="w-4 h-4" />
                 지원서 작성하기
               </button>
               <Link
@@ -378,13 +645,6 @@ const Jobs = () => {
       </section>
 
       <Footer />
-
-      {/* Application Form Modal */}
-      <JobApplicationForm
-        isOpen={isFormOpen}
-        onClose={() => setIsFormOpen(false)}
-        defaultPosition={selectedPosition}
-      />
     </div>
   );
 };
