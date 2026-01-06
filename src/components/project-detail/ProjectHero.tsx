@@ -165,15 +165,17 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
               href={websiteUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="group mt-6 sm:mt-8 inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:px-8 sm:py-4 rounded-full text-sm sm:text-[15px] font-medium transition-all duration-300
-                bg-white text-gray-900 hover:bg-white/90 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,255,255,0.3)]
+              className="group mt-6 sm:mt-8 relative inline-flex items-center gap-3 px-5 py-3 sm:px-6 sm:py-3.5 text-sm sm:text-[15px] font-medium transition-all duration-500
+                bg-transparent text-white border border-white/30 rounded-none
+                hover:border-white hover:bg-white/5 hover:pl-8 hover:pr-6
                 active:scale-[0.98]"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             >
-              <ExternalLink className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-              <span>Visit Website</span>
+              <span className="relative z-10 tracking-wide uppercase text-xs sm:text-sm">Explore Project</span>
+              <ExternalLink className="w-3.5 h-3.5 relative z-10 group-hover:rotate-12 transition-transform duration-300" />
+              <span className="absolute left-0 top-0 h-full w-0.5 bg-white/50 group-hover:bg-white group-hover:h-full transition-all duration-300" />
             </motion.a>
           )}
           

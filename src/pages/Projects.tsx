@@ -7,7 +7,7 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import { HoverExpandGallery } from "@/components/HoverExpandGallery";
-import { ArrowRight, Calendar, ChevronDown, Filter } from "lucide-react";
+import { ArrowRight, Calendar, ChevronDown, Filter, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { useCountUp } from "@/hooks/useCountUp";
@@ -113,6 +113,7 @@ interface Project {
   category: string | null;
   logo_url: string | null;
   background_url: string | null;
+  website_url: string | null;
 }
 
 const stats = [
@@ -181,35 +182,40 @@ const StatItem = ({
 
 // Project Card Component
 interface ProjectCardProps {
-  project: { name: string; slug: string; description: string; result: string; category: string; logo?: string; bgImage: string };
+  project: { name: string; slug: string; description: string; result: string; category: string; logo?: string; bgImage: string; websiteUrl?: string };
   index: number;
   totalCount: number;
 }
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <Link
-      to={`/projects/${project.slug}`}
-      onClick={() => window.scrollTo(0, 0)}
-      className="group block rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30"
-    >
+    <div className="group rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30">
       {/* Image */}
-      <div className="aspect-[4/3] overflow-hidden">
+      <Link
+        to={`/projects/${project.slug}`}
+        onClick={() => window.scrollTo(0, 0)}
+        className="block aspect-[4/3] overflow-hidden"
+      >
         <img 
           src={project.bgImage} 
           alt={project.name}
           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
         />
-      </div>
+      </Link>
       
       {/* Content */}
       <div className="p-4 sm:p-5">
         <div className="flex items-center gap-3 mb-2">
           <span className="text-label uppercase tracking-wider font-medium text-muted-foreground">{project.category}</span>
         </div>
-        <h3 className="text-body-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-1">
-          {project.name}
-        </h3>
+        <Link
+          to={`/projects/${project.slug}`}
+          onClick={() => window.scrollTo(0, 0)}
+        >
+          <h3 className="text-body-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors line-clamp-1">
+            {project.name}
+          </h3>
+        </Link>
         <p className="text-body-sm text-foreground/80 font-medium mb-2 line-clamp-1">
           {project.result}
         </p>
@@ -217,12 +223,31 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
           {project.description}
         </p>
         
-        <div className="flex items-center gap-2 text-caption text-muted-foreground group-hover:text-primary transition-colors">
-          <span className="group-hover:underline underline-offset-4">View case study</span>
-          <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+        <div className="flex items-center justify-between gap-3">
+          <Link
+            to={`/projects/${project.slug}`}
+            onClick={() => window.scrollTo(0, 0)}
+            className="flex items-center gap-2 text-caption text-muted-foreground hover:text-primary transition-colors"
+          >
+            <span className="hover:underline underline-offset-4">View case study</span>
+            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+          </Link>
+          
+          {project.websiteUrl && (
+            <a
+              href={project.websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-caption font-medium text-foreground/70 border border-border/50 rounded-full hover:border-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-all duration-300"
+            >
+              <ExternalLink className="w-3 h-3" />
+              <span>Website</span>
+            </a>
+          )}
         </div>
       </div>
-    </Link>
+    </div>
   );
 };
 
@@ -324,6 +349,7 @@ const Projects = () => {
           result: p.result || "",
           category: p.category || "",
           bgImage: galleryAsset || p.background_url || fallback?.bgImage || "",
+          websiteUrl: p.website_url || "",
         };
       })
     : fallbackCases;

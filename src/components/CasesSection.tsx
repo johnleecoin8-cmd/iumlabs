@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { MouseEvent } from "react";
 import Logo3D from "@/components/Logo3D";
@@ -87,10 +87,11 @@ interface CaseCardProps {
   category: string;
   result: string;
   description: string;
+  websiteUrl?: string;
   index: number;
 }
 
-const CaseCard = ({ name, logo, bgImage, slug, category, result, description, index }: CaseCardProps) => {
+const CaseCard = ({ name, logo, bgImage, slug, category, result, description, websiteUrl, index }: CaseCardProps) => {
   const isLastRow = index >= 10;
   const isRightColumn = index % 2 === 1;
 
@@ -109,14 +110,16 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
       )}
       style={{ transitionDelay: `${(index % 6) * 50}ms` }}
     >
-      <Link
-        to={`/projects/${slug}`}
-        onClick={() => window.scrollTo(0, 0)}
-        className={`group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 active:bg-secondary/70 h-full min-h-[120px] sm:min-h-[140px] ${
+      <div
+        className={`group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full min-h-[120px] sm:min-h-[140px] ${
           !isRightColumn ? "sm:border-r border-border" : ""
         } ${!isLastRow ? "border-b border-border" : ""}`}
       >
-        <div className="flex items-start gap-2.5 sm:gap-3">
+        <Link
+          to={`/projects/${slug}`}
+          onClick={() => window.scrollTo(0, 0)}
+          className="flex items-start gap-2.5 sm:gap-3"
+        >
           {/* Image */}
           <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img
@@ -141,13 +144,32 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, in
               {description}
             </p>
           </div>
-        </div>
+        </Link>
 
-        <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-xs mt-2 min-h-[36px] sm:min-h-0">
-          <span className="group-hover:underline underline-offset-4">View case study</span>
-          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+        <div className="flex items-center justify-between gap-2 mt-2 min-h-[36px] sm:min-h-0">
+          <Link
+            to={`/projects/${slug}`}
+            onClick={() => window.scrollTo(0, 0)}
+            className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-xs"
+          >
+            <span className="group-hover:underline underline-offset-4">View case study</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </Link>
+          
+          {websiteUrl && (
+            <a
+              href={websiteUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={(e) => e.stopPropagation()}
+              className="flex items-center gap-1 px-2 py-1 text-[10px] sm:text-xs text-muted-foreground border border-border/50 rounded hover:border-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-all duration-300"
+            >
+              <ExternalLink className="w-2.5 h-2.5" />
+              <span>Website</span>
+            </a>
+          )}
         </div>
-      </Link>
+      </div>
     </div>
   );
 };
@@ -167,7 +189,8 @@ const CasesSection = () => {
           result,
           description,
           logo_url,
-          background_url
+          background_url,
+          website_url
         `)
         .eq('is_published', true)
         .order('display_order')
@@ -203,6 +226,7 @@ const CasesSection = () => {
             description: project.description || '',
             logo: project.logo_url || fallback.logo,
             bgImage: galleryAsset || project.background_url || fallback.bgImage || '',
+            websiteUrl: project.website_url || '',
           };
         });
         return projectsWithGallery;
