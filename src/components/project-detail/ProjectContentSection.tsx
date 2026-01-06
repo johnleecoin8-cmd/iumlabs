@@ -159,11 +159,11 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
         </section>
       )}
 
-      {/* SECTION 2: SCOPE OF WORK + STRATEGY (Combined) + Overview */}
+      {/* SECTION 2: SCOPE OF WORK + Overview + Featured Image - 2x2 Grid */}
       <section className="py-2 md:py-3">
         <div className="px-4 md:px-8 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-            {/* Left: Scope of Work + Strategy Combined */}
+            {/* Top Left: Scope of Work */}
             <motion.div 
               className="bg-[#1A1A1A] rounded-xl p-5 md:p-6"
               initial={{ opacity: 0, x: -20 }}
@@ -183,54 +183,58 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
               </ul>
             </motion.div>
             
-            {/* Right: Overview + What We Did */}
+            {/* Top Right: Overview */}
             <motion.div 
-              className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 flex flex-col"
+              className="bg-[#1A1A1A] rounded-xl p-5 md:p-6"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <div className="mb-5">
+              <h3 className="text-xs text-white/40 uppercase tracking-wider mb-3">
+                Overview
+              </h3>
+              <p className="text-base md:text-lg font-normal text-white/80 leading-relaxed">
+                {project.description}
+              </p>
+            </motion.div>
+
+            {/* Bottom Left: What We Did */}
+            {project.challenge && (
+              <motion.div 
+                className="bg-[#1A1A1A] rounded-xl p-5 md:p-6"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
                 <h3 className="text-xs text-white/40 uppercase tracking-wider mb-3">
-                  Overview
+                  What We Did
                 </h3>
                 <p className="text-base md:text-lg font-normal text-white/80 leading-relaxed">
-                  {project.description}
+                  {project.challenge}
                 </p>
-              </div>
-              
-              {project.challenge && (
-                <div className="pt-5 border-t border-white/10">
-                  <h3 className="text-xs text-white/40 uppercase tracking-wider mb-3">
-                    What We Did
-                  </h3>
-                  <p className="text-base md:text-lg font-normal text-white/80 leading-relaxed">
-                    {project.challenge}
-                  </p>
+              </motion.div>
+            )}
+
+            {/* Bottom Right: Featured Image from Gallery */}
+            {gallery && gallery.length > 0 && (
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
+                <div className="rounded-xl overflow-hidden h-full min-h-[200px]">
+                  <img 
+                    src={gallery[0].src}
+                    alt={gallery[0].title || `${project.name} featured image`}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              )}
-            </motion.div>
+              </motion.div>
+            )}
           </div>
-          
-          {/* Featured Image from Gallery */}
-          {gallery && gallery.length > 0 && (
-            <motion.div 
-              className="mt-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="rounded-xl overflow-hidden h-[200px] md:h-[300px]">
-                <img 
-                  src={gallery[0].src}
-                  alt={gallery[0].title || `${project.name} featured image`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </motion.div>
-          )}
         </div>
       </section>
 
