@@ -136,10 +136,10 @@ const Navbar = () => {
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "200ms" : "0ms" }}
                 >
-                  Navigation
+                  Menu
                 </span>
                 <nav className="space-y-1 sm:space-y-1.5 md:space-y-2">
-              {navLinks.map((link, index) => (
+                  {navLinks.map((link, index) => (
                     <div key={link.to}>
                       <Link
                         to={link.to}
@@ -153,96 +153,65 @@ const Navbar = () => {
                       </Link>
                     </div>
                   ))}
-                  {/* Contact link - only in mobile menu since removed from main nav */}
-                  <div>
-                    <Link
-                      to="/contact"
-                      onClick={() => setIsMenuOpen(false)}
-                      className={`block text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground hover:text-primary transition-all duration-300 min-h-[40px] sm:min-h-[44px] flex items-center ${
-                        isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
-                      }`}
-                      style={{
-                        transitionDelay: isMenuOpen ? `${200 + navLinks.length * 60}ms` : "0ms",
-                      }}
-                    >
-                      Contact
-                    </Link>
-                  </div>
                 </nav>
               </div>
 
-              {/* Contact Info */}
-              <div className="flex flex-col justify-center space-y-2 sm:space-y-3 md:space-y-4">
-                <div
-                  className={`transition-all duration-400 ${
+              {/* Contact Info - Simplified with emojis */}
+              <div className="flex flex-col justify-center space-y-3 sm:space-y-4">
+                <span
+                  className={`text-muted-foreground text-xs lg:text-sm uppercase tracking-widest mb-2 block transition-all duration-500 ${
                     isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "400ms" : "0ms" }}
                 >
-                  <span className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-widest mb-1 block">
-                    Get in touch
-                  </span>
-                  <a
-                    href={`mailto:${brandConfig.email}`}
-                    className="text-sm sm:text-base lg:text-lg text-foreground hover:text-primary transition-colors"
-                  >
-                    {brandConfig.email}
-                  </a>
-                </div>
+                  Connect
+                </span>
 
-                <div
-                  className={`transition-all duration-400 ${
+                <a
+                  href={`mailto:${brandConfig.email}`}
+                  className={`flex items-center gap-3 text-base sm:text-lg text-foreground hover:text-primary transition-all duration-300 ${
                     isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "450ms" : "0ms" }}
                 >
-                  <span className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-widest mb-1 block">
-                    Telegram
-                  </span>
-                  <a
-                    href={brandConfig.telegram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm sm:text-base lg:text-lg text-foreground hover:text-primary transition-colors"
-                  >
-                    @iumlabs
-                  </a>
-                </div>
+                  <span className="text-xl">📧</span>
+                  <span>{brandConfig.email}</span>
+                </a>
 
-                <div
-                  className={`transition-all duration-400 ${
+                <a
+                  href={brandConfig.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center gap-3 text-base sm:text-lg text-foreground hover:text-primary transition-all duration-300 ${
                     isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "500ms" : "0ms" }}
                 >
-                  <span className="text-muted-foreground text-[10px] sm:text-xs uppercase tracking-widest mb-1 block">
-                    Office
-                  </span>
-                  <p className="text-xs sm:text-sm text-muted-foreground">{brandConfig.office}</p>
-                </div>
+                  <span className="text-xl">✈️</span>
+                  <span>@iumlabs</span>
+                </a>
 
-                <div
-                  className={`flex gap-2 sm:gap-3 pt-2 sm:pt-3 transition-all duration-400 ${
+                <a
+                  href={brandConfig.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`flex items-center gap-3 text-base sm:text-lg text-foreground hover:text-primary transition-all duration-300 ${
                     isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
                   }`}
                   style={{ transitionDelay: isMenuOpen ? "550ms" : "0ms" }}
                 >
-                  <a
-                    href={brandConfig.telegram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-border text-foreground text-xs font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
-                  >
-                    Telegram
-                  </a>
-                  <a
-                    href={brandConfig.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-border text-foreground text-xs font-medium hover:bg-secondary hover:border-foreground/30 transition-all duration-300"
-                  >
-                    LinkedIn
-                  </a>
+                  <span className="text-xl">💼</span>
+                  <span>LinkedIn</span>
+                </a>
+
+                <div
+                  className={`flex items-start gap-3 text-sm text-muted-foreground pt-2 transition-all duration-300 ${
+                    isMenuOpen ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+                  }`}
+                  style={{ transitionDelay: isMenuOpen ? "600ms" : "0ms" }}
+                >
+                  <span className="text-lg">📍</span>
+                  <span>{brandConfig.office}</span>
                 </div>
               </div>
             </div>
