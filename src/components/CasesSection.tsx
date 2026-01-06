@@ -111,17 +111,17 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
       style={{ transitionDelay: `${(index % 6) * 50}ms` }}
     >
       <div
-        className={`group block p-2 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full min-h-[100px] sm:min-h-[140px] ${
-          !isRightColumn ? "border-r border-border" : ""
+        className={`group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full min-h-[120px] sm:min-h-[140px] ${
+          !isRightColumn ? "sm:border-r border-border" : ""
         } ${!isLastRow ? "border-b border-border" : ""}`}
       >
         <Link
           to={`/projects/${slug}`}
           onClick={() => window.scrollTo(0, 0)}
-          className="flex flex-col sm:flex-row items-center sm:items-start gap-2 sm:gap-3"
+          className="flex items-start gap-2.5 sm:gap-3"
         >
-          {/* Image - Bigger on mobile */}
-          <div className="w-14 h-14 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+          {/* Image */}
+          <div className="w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img
               src={bgImage}
               alt={name}
@@ -130,14 +130,14 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
           </div>
 
           {/* Content */}
-          <div className="flex-1 min-w-0 text-center sm:text-left">
-            <div className="hidden sm:flex items-center gap-2 text-muted-foreground text-[9px] sm:text-[10px] mb-0.5">
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 text-muted-foreground text-[9px] sm:text-[10px] mb-0.5">
               <span className="uppercase tracking-wider">{category}</span>
             </div>
-            <h3 className="text-xs sm:text-base font-semibold text-foreground mb-0.5 group-hover:text-foreground/80 transition-colors line-clamp-1">
+            <h3 className="text-sm sm:text-base font-semibold text-foreground mb-0.5 group-hover:text-foreground/80 transition-colors line-clamp-1">
               {name}
             </h3>
-            <p className="text-foreground font-medium text-[10px] sm:text-xs mb-0.5 line-clamp-1 hidden sm:block">
+            <p className="text-foreground font-medium text-[11px] sm:text-xs mb-0.5 line-clamp-1">
               {result}
             </p>
             <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed line-clamp-1 hidden sm:block">
@@ -146,8 +146,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
           </div>
         </Link>
 
-        {/* Desktop only: View case study & Website */}
-        <div className="hidden sm:flex items-center justify-between gap-2 mt-2">
+        <div className="flex items-center justify-between gap-2 mt-2 min-h-[36px] sm:min-h-0">
           <Link
             to={`/projects/${slug}`}
             onClick={() => window.scrollTo(0, 0)}
