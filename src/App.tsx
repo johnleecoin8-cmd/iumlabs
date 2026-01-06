@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Sidebar from "@/components/Sidebar";
+import MobileBottomNav from "@/components/MobileBottomNav";
 import { SidebarProvider } from "@/hooks/useSidebarState";
 import Index from "./pages/Index";
 import Services from "./pages/Services";
@@ -140,9 +141,10 @@ const App = () => (
           <ScrollToTop />
           <div className="flex w-full">
             <Sidebar />
-            <div className="flex-1 min-w-0">
+            <div className="flex-1 min-w-0 pb-16 lg:pb-0">
               <AppRoutes />
             </div>
+            <MobileBottomNav />
           </div>
         </SidebarProvider>
       </BrowserRouter>
