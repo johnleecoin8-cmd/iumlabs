@@ -187,9 +187,11 @@ export type Database = {
           background_url: string | null
           category: string | null
           challenge: string | null
+          client_name: string | null
           created_at: string | null
           description: string | null
           display_order: number | null
+          duration: string | null
           glow_color: string | null
           id: string
           is_published: boolean | null
@@ -206,9 +208,11 @@ export type Database = {
           background_url?: string | null
           category?: string | null
           challenge?: string | null
+          client_name?: string | null
           created_at?: string | null
           description?: string | null
           display_order?: number | null
+          duration?: string | null
           glow_color?: string | null
           id?: string
           is_published?: boolean | null
@@ -225,9 +229,11 @@ export type Database = {
           background_url?: string | null
           category?: string | null
           challenge?: string | null
+          client_name?: string | null
           created_at?: string | null
           description?: string | null
           display_order?: number | null
+          duration?: string | null
           glow_color?: string | null
           id?: string
           is_published?: boolean | null
