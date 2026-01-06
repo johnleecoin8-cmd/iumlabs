@@ -102,20 +102,12 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
         <section className="py-3 md:py-4">
           <div className="max-w-7xl mx-auto px-4">
             <motion.div
-              className="relative rounded-xl p-3 md:p-4 flex gap-4 md:gap-6 overflow-hidden"
+              className="bg-[#1A1A1A] rounded-xl p-3 md:p-4 flex gap-4 md:gap-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              {/* Background Image */}
-              {project.bgImage && (
-                <div 
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${project.bgImage})` }}
-                />
-              )}
-              <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" />
               {/* Project Logo */}
               {project.logo && (
                 <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-xl border border-white/10 self-center">
