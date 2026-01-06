@@ -48,11 +48,13 @@ export type Database = {
           email: string
           id: string
           is_read: boolean | null
+          linkedin_url: string | null
           name: string
           phone: string | null
           portfolio_url: string | null
           position: string
           resume_url: string | null
+          telegram: string | null
         }
         Insert: {
           cover_letter?: string | null
@@ -60,11 +62,13 @@ export type Database = {
           email: string
           id?: string
           is_read?: boolean | null
+          linkedin_url?: string | null
           name: string
           phone?: string | null
           portfolio_url?: string | null
           position: string
           resume_url?: string | null
+          telegram?: string | null
         }
         Update: {
           cover_letter?: string | null
@@ -72,11 +76,13 @@ export type Database = {
           email?: string
           id?: string
           is_read?: boolean | null
+          linkedin_url?: string | null
           name?: string
           phone?: string | null
           portfolio_url?: string | null
           position?: string
           resume_url?: string | null
+          telegram?: string | null
         }
         Relationships: []
       }
