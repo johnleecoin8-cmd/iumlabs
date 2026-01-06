@@ -113,6 +113,19 @@ const ProjectContentSection = ({ project, metrics }: ProjectContentSectionProps)
                 {duration && <MetaInfoItem label="Duration" value={duration} icon={Clock} accentColor="text-purple-400" delay={0.1} />}
                 {category && <MetaInfoItem label="Category" value={category} icon={Layers} accentColor="text-emerald-400" delay={0.2} />}
               </div>
+              
+              {/* Project Description */}
+              {project.description && (
+                <motion.p
+                  className="text-sm md:text-base text-white/70 mt-4 pt-4 border-t border-white/10 leading-relaxed"
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: 0.3 }}
+                >
+                  {project.description}
+                </motion.p>
+              )}
             </motion.div>
           </div>
         </section>
