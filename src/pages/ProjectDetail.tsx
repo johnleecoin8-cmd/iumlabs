@@ -149,7 +149,7 @@ const ProjectDetail = () => {
       <ProjectHero project={project} websiteUrl={websiteUrl} />
 
       {/* Unified Content Section */}
-      <ProjectContentSection project={project} metrics={project.metrics} />
+      <ProjectContentSection project={project} metrics={project.metrics} gallery={project.gallery} />
 
       {/* Next Project */}
       {nextProjectData && (
