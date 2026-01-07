@@ -9,6 +9,8 @@ import peaqBg from '@/assets/projects/peaq-bg.jpg';
 import mantraBg from '@/assets/projects/mantra-featured-bg.jpg';
 import openledgerHero from '@/assets/campaigns/openledger-hero-official.png';
 import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
+import bybitBg from '@/assets/projects/bybit-bg.jpg';
+import bnbBg from '@/assets/projects/bnb-bg.jpg';
 
 const SelectedWorkShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -19,10 +21,12 @@ const SelectedWorkShowcase = () => {
   const projects = [
     { name: "MANTRA", category: "L1 Infrastructure", result: "500% Growth", media: mantraBg, video: "/videos/projects/mantra-hero.mp4", slug: "mantra" },
     { name: "Story Protocol", category: "IP Platform", result: "Korea #1", media: storyBg, video: "/videos/projects/story-hero.mp4", slug: "story-protocol" },
+    { name: "Bybit", category: "Exchange", result: "#2 Traffic", media: bybitBg, video: "/videos/projects/bybit-hero.mp4", slug: "bybit" },
+    { name: "BNB Chain", category: "Infrastructure", result: "+340% Volume", media: bnbBg, slug: "bnb-chain" },
     { name: "peaq", category: "DePIN Entry", result: "First Branding", media: peaqBg, video: "/videos/projects/peaq-hero.mp4", slug: "peaq" },
     { name: "Sahara AI", category: "AI × Blockchain", result: "Community Built", media: saharaAiBg, video: "/videos/projects/sahara-hero.mp4", slug: "sahara-ai" },
-    { name: "OpenLedger", category: "Data Infrastructure", result: "Market Entry", media: openledgerHero, slug: "openledger" },
     { name: "KuCoin", category: "Exchange Campaign", result: "Top Engagement", media: kucoinBg, video: "/videos/projects/kucoin-hero.mp4", slug: "kucoin" },
+    { name: "OpenLedger", category: "Data Infrastructure", result: "Market Entry", media: openledgerHero, slug: "openledger" },
   ];
 
   // Auto-rotate when not hovering
