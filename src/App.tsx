@@ -92,14 +92,16 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
       {/* Logo overlay */}
-      {(phase === 'logo' || phase === 'fadeOut') && (
+      {(phase === 'logo' || phase === 'fadeOut' || phase === 'fadeIn') && (
         <div 
-          className="fixed inset-0 z-[9999] bg-background flex items-center justify-center"
+          className={`fixed inset-0 z-[9999] bg-background flex items-center justify-center transition-opacity duration-150 ${
+            phase === 'fadeIn' ? 'opacity-0' : 'opacity-100'
+          }`}
         >
           <img 
             src={logo} 
             alt="ium Labs" 
-            className={`w-16 h-16 object-contain brightness-0 invert ${
+            className={`w-20 h-20 object-contain brightness-0 invert ${
               phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
             }`}
           />
