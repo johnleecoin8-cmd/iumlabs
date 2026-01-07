@@ -170,12 +170,11 @@ const featuredYappers = [
 ];
 
 const YapService = () => {
-  usePageMeta({
-    title: "Crypto Twitter Yap Marketing",
-    description: "Amplify your message with 150+ crypto yappers. Korean Web3 marketing through organic buzz and mindshare growth on Crypto X.",
-    path: "/services/yap",
-    image: "/og/og-yap.jpg"
-  });
+  usePageMeta(
+    "Crypto Twitter Yap Marketing",
+    "Amplify your message with 150+ crypto yappers. Korean Web3 marketing through organic buzz and mindshare growth on Crypto X.",
+    "/services/yap"
+  );
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [featuredIndex, setFeaturedIndex] = useState(0);

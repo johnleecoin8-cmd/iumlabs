@@ -182,12 +182,11 @@ const adPlatforms = [
 ];
 
 const SEOAdsService = () => {
-  usePageMeta({
-    title: "Korean Crypto SEO & Paid Ads",
-    description: "Drive qualified traffic to your Web3 project in Korea through SEO optimization and targeted ads on Google, Naver, and crypto platforms.",
-    path: "/services/seo-ads",
-    image: "/og/og-seo-ads.jpg"
-  });
+  usePageMeta(
+    "Korean Crypto SEO & Paid Ads",
+    "Drive qualified traffic to your Web3 project in Korea through SEO optimization and targeted ads on Google, Naver, and crypto platforms.",
+    "/services/seo-ads"
+  );
   const [activePhase, setActivePhase] = useState(0);
 
   return (

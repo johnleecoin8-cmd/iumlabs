@@ -122,12 +122,7 @@ const distributionChannels = [{
   icon: Globe
 }];
 const DeepResearchService = () => {
-  usePageMeta({
-    title: "Korean Crypto Market Research",
-    description: "Data-driven market research for the Korean crypto market. Korean Web3 marketing insights distributed through media and KOL networks.",
-    path: "/services/deep-research",
-    image: "/og/og-deep-research.jpg"
-  });
+  usePageMeta("Korean Crypto Market Research", "Data-driven market research for the Korean crypto market. Korean Web3 marketing insights distributed through media and KOL networks.", "/services/deep-research");
   const [activeChannel, setActiveChannel] = useState(0);
 
   // Fetch latest research posts

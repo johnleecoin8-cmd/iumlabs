@@ -180,12 +180,11 @@ const faqItems: FAQItem[] = [
 ];
 
 const GTMService = () => {
-  usePageMeta({
-    title: "Korean Web3 GTM Strategy",
-    description: "Strategic Go-To-Market planning for Web3 projects launching in Korea. Korean exchange listing, VASP compliance, and localized launch campaigns.",
-    path: "/services/gtm",
-    image: "/og/og-gtm.jpg"
-  });
+  usePageMeta(
+    "Korean Web3 GTM Strategy",
+    "Strategic Go-To-Market planning for Web3 projects launching in Korea. Korean exchange listing, VASP compliance, and localized launch campaigns.",
+    "/services/gtm"
+  );
   const [activePhase, setActivePhase] = useState(0);
 
   return (
