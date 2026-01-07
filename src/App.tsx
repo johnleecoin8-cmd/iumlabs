@@ -99,11 +99,14 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
           }`}
         >
           <div 
-            className={`w-64 h-32 ${
+            className={`w-[32rem] h-64 ${
               phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
             }`}
+            style={{
+              filter: 'drop-shadow(0 0 40px rgba(0, 255, 255, 0.5)) drop-shadow(0 0 80px rgba(255, 0, 255, 0.3))'
+            }}
           >
-            <Logo3D />
+            <Logo3D immediate />
           </div>
         </div>
       )}
