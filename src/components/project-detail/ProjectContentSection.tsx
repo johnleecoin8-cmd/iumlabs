@@ -98,23 +98,103 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
 
   return (
     <div className="bg-[#0A0A0A]">
-      {/* SECTION 0: FEATURE IMAGE HERO */}
+      {/* SECTION 0: FEATURE IMAGE WITH OVERLAY CONTENT */}
       {project.featureImage && (
-        <section className="py-0">
-          <motion.div 
-            className="w-full h-[50vh] md:h-[60vh] relative overflow-hidden"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
+        <section className="relative min-h-screen">
+          {/* 배경 이미지 */}
+          <div className="absolute inset-0">
             <img 
               src={project.featureImage} 
               alt={`${project.name} featured`}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent" />
-          </motion.div>
+            <div className="absolute inset-0 bg-black/60" />
+          </div>
+          
+          {/* 오버레이 콘텐츠 */}
+          <div className="relative z-10 px-4 md:px-8 lg:px-12 py-12 md:py-16">
+            
+            {/* Client & Category 카드 */}
+            <motion.div 
+              className="grid grid-cols-2 gap-3 md:gap-4 mb-6 md:mb-8 max-w-md"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-5 border border-white/10">
+                <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider block mb-1">Client</span>
+                <span className="text-lg md:text-xl font-medium text-white block">{project.client_name || project.name}</span>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-5 border border-white/10">
+                <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider block mb-1">Category</span>
+                <span className="text-lg md:text-xl font-medium text-white block">{project.category}</span>
+              </div>
+            </motion.div>
+            
+            {/* Description */}
+            <motion.p 
+              className="text-base md:text-lg text-white/80 mb-8 md:mb-10 max-w-3xl leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
+              {project.description}
+            </motion.p>
+            
+            {/* Metrics Grid */}
+            {metrics && metrics.length > 0 && (
+              <motion.div 
+                className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                {metrics.map((metric, idx) => (
+                  <div 
+                    key={idx}
+                    className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-5 border border-white/10"
+                  >
+                    <span className="text-[10px] md:text-xs text-white/40 block mb-1">0{idx + 1}.</span>
+                    <span className="text-xl md:text-2xl font-bold text-white block mb-1">{metric.value}</span>
+                    <span className="text-xs md:text-sm text-white/60 block">{metric.label}</span>
+                  </div>
+                ))}
+              </motion.div>
+            )}
+            
+            {/* Scope of Work & What We Did */}
+            <motion.div 
+              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              {/* Scope of Work */}
+              {project.services && project.services.length > 0 && (
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-white/10">
+                  <h3 className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider mb-4">Scope of Work</h3>
+                  <ul className="space-y-2">
+                    {project.services.map((service, idx) => (
+                      <li key={idx} className="text-sm md:text-base text-white/90">{service}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              {/* What We Did */}
+              {project.challenge && (
+                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-white/10">
+                  <h3 className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider mb-4">What We Did</h3>
+                  <p className="text-sm md:text-base text-white/80 leading-relaxed">{project.challenge}</p>
+                </div>
+              )}
+            </motion.div>
+            
+          </div>
         </section>
       )}
 
