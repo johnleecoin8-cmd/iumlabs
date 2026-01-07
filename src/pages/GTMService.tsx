@@ -80,10 +80,10 @@ const StatItem = ({ value, suffix, label, delay }: { value: number; suffix: stri
   
   return (
     <div className="flex flex-col">
-      <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-black tracking-tight">
+      <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-white tracking-tight">
         {count}{suffix}
       </div>
-      <div className="text-sm text-black/50 mt-2 uppercase tracking-wider">{label}</div>
+      <div className="text-sm text-white/50 mt-2 uppercase tracking-wider">{label}</div>
     </div>
   );
 };
@@ -105,11 +105,11 @@ const GTMService = () => {
   const heroY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
-      {/* Hero Section - Innocean Style */}
-      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-white">
+      {/* Hero Section - Innocean Style (Dark) */}
+      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-[#0A0A0A]">
         {/* Featured Image - Top Right */}
         <motion.div 
           initial={{ opacity: 0, x: 50 }}
@@ -123,7 +123,7 @@ const GTMService = () => {
             className="w-full h-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-          <div className="absolute bottom-4 left-4 text-white">
+          <div className="absolute bottom-4 left-4 text-white z-10">
             <span className="text-xs uppercase tracking-wider opacity-70">Featured</span>
             <h4 className="text-lg font-medium">Story Protocol Korea</h4>
           </div>
@@ -139,7 +139,7 @@ const GTMService = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-black/60 max-w-md mb-8 leading-relaxed"
+            className="text-lg md:text-xl text-white/60 max-w-md mb-8 leading-relaxed"
           >
             새로운 시장을 설계하고<br />
             브랜드의 가능성을 바꿉니다.
@@ -150,7 +150,7 @@ const GTMService = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-black leading-[1.1] mb-12 max-w-4xl"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.1] mb-12 max-w-4xl"
           >
             Launch in Korea.<br />
             <span className="font-serif italic">Scale</span> Globally.
@@ -162,8 +162,8 @@ const GTMService = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <CalendlyButton className="group inline-flex items-center gap-3 text-black hover:text-black/70 transition-colors">
-              <span className="text-lg font-medium border-b-2 border-black group-hover:border-black/70 pb-1">
+            <CalendlyButton className="group inline-flex items-center gap-3 text-white hover:text-white/70 transition-colors">
+              <span className="text-lg font-medium border-b-2 border-white group-hover:border-white/70 pb-1">
                 Book a Strategy Call
               </span>
               <ArrowUpRight className="w-5 h-5" />
@@ -178,7 +178,7 @@ const GTMService = () => {
           transition={{ delay: 0.5, duration: 0.8 }}
           className="relative z-0 overflow-hidden"
         >
-          <div className="text-[15vw] md:text-[12vw] font-bold text-black/5 leading-none tracking-tighter select-none whitespace-nowrap">
+          <div className="text-[15vw] md:text-[12vw] font-bold text-white/5 leading-none tracking-tighter select-none whitespace-nowrap">
             ium LABS
           </div>
         </motion.div>
@@ -188,7 +188,7 @@ const GTMService = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="absolute bottom-8 left-6 lg:left-12 flex items-center gap-2 text-black/40"
+          className="absolute bottom-8 left-6 lg:left-12 flex items-center gap-2 text-white/40"
         >
           <div className="w-6 h-10 rounded-full border-2 border-current flex items-start justify-center p-1">
             <motion.div 
@@ -202,7 +202,7 @@ const GTMService = () => {
       </section>
 
       {/* Business Solutions Section */}
-      <section className="py-24 md:py-32 bg-white border-t border-black/10">
+      <section className="py-24 md:py-32 bg-[#0F0F0F] border-t border-white/10">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
             {/* Left - Image */}
@@ -225,21 +225,21 @@ const GTMService = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <span className="text-xs uppercase tracking-[0.2em] text-black/40 mb-6 block">
+              <span className="text-xs uppercase tracking-[0.2em] text-white/40 mb-6 block">
                 Business Solutions
               </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-black leading-tight mb-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white leading-tight mb-6">
                 방대한 데이터와 기술,<br />
                 <span className="font-serif italic">크리에이티브</span>로<br />
                 새로운 경험을 만듭니다
               </h2>
-              <p className="text-lg text-black/60 mb-8 max-w-md leading-relaxed">
+              <p className="text-lg text-white/60 mb-8 max-w-md leading-relaxed">
                 Deep market research, strategic planning, and flawless execution. 
                 We design new possibilities for your brand in the Korean market.
               </p>
               <Link 
                 to="/services"
-                className="group inline-flex items-center gap-2 text-black font-medium border-b border-black pb-1 hover:border-black/50 transition-colors"
+                className="group inline-flex items-center gap-2 text-white font-medium border-b border-white pb-1 hover:border-white/50 transition-colors"
               >
                 View Our Approach
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -250,7 +250,7 @@ const GTMService = () => {
       </section>
 
       {/* Company Numbers Section */}
-      <section className="py-24 md:py-32 bg-[#FAFAFA]">
+      <section className="py-24 md:py-32 bg-[#0A0A0A]">
         <div className="container mx-auto px-6 lg:px-12">
           {/* Featured Works Row */}
           <div className="flex gap-4 mb-16 overflow-x-auto pb-4 -mx-6 px-6 lg:mx-0 lg:px-0">
@@ -280,7 +280,7 @@ const GTMService = () => {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <h2 className="text-2xl md:text-3xl font-light text-black mb-4">
+            <h2 className="text-2xl md:text-3xl font-light text-white mb-4">
               브랜드를 성장시키는 힘<br />
               <span className="font-serif italic">숫자와 규모</span>부터 다릅니다.
             </h2>
@@ -304,7 +304,7 @@ const GTMService = () => {
       </section>
 
       {/* Global Network Section - Client Logos */}
-      <section className="py-24 md:py-32 bg-white border-t border-black/10">
+      <section className="py-24 md:py-32 bg-[#0F0F0F] border-t border-white/10">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -312,10 +312,10 @@ const GTMService = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <span className="text-xs uppercase tracking-[0.2em] text-black/40 mb-6 block">
+            <span className="text-xs uppercase tracking-[0.2em] text-white/40 mb-6 block">
               Global Network
             </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-black">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-white">
               세계 어디서나<br />
               <span className="font-serif italic">브랜드의 가능성</span>을 실현합니다
             </h2>
@@ -335,7 +335,7 @@ const GTMService = () => {
                 <img 
                   src={client.logo} 
                   alt={client.name}
-                  className="h-8 md:h-10 w-auto object-contain opacity-40 group-hover:opacity-100 transition-opacity duration-300 grayscale group-hover:grayscale-0"
+                  className="h-8 md:h-10 w-auto object-contain opacity-40 group-hover:opacity-100 transition-opacity duration-300 brightness-0 invert"
                 />
               </motion.div>
             ))}
@@ -344,7 +344,7 @@ const GTMService = () => {
       </section>
 
       {/* Services Preview */}
-      <section className="py-24 md:py-32 bg-black text-white">
+      <section className="py-24 md:py-32 bg-[#0A0A0A] text-white border-t border-white/10">
         <div className="container mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
             {/* Left - Heading */}
@@ -404,7 +404,7 @@ const GTMService = () => {
       </section>
 
       {/* CTA Section - Innocean Style */}
-      <section className="py-24 md:py-32 bg-white border-t border-black/10">
+      <section className="py-24 md:py-32 bg-[#0F0F0F] border-t border-white/10">
         <div className="container mx-auto px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -412,19 +412,19 @@ const GTMService = () => {
             viewport={{ once: true }}
             className="max-w-4xl"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-black leading-tight mb-8">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight mb-8">
               함께하세요.<br />
               <span className="font-serif italic">브랜드 경험</span>이 달라지면<br />
               모든 것이 달라집니다.
             </h2>
             
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mt-12">
-              <div className="text-black/60">
+              <div className="text-white/60">
                 <p className="mb-1">Seoul, South Korea</p>
                 <p>contact@iumlabs.io</p>
               </div>
               
-              <CalendlyButton className="group inline-flex items-center gap-3 px-8 py-4 bg-black hover:bg-black/80 text-white font-medium rounded-full transition-all duration-300">
+              <CalendlyButton className="group inline-flex items-center gap-3 px-8 py-4 bg-white hover:bg-white/90 text-black font-medium rounded-full transition-all duration-300">
                 <span>Get On Board</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </CalendlyButton>
