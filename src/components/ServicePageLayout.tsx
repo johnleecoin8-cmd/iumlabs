@@ -59,7 +59,7 @@ const allServices = [
   { slug: "deep-research", title: "Deep Research", color: "#06B6D4" },
   { slug: "influencer", title: "Influencer/KOL", color: "#F59E0B" },
   { slug: "yap", title: "Yap Strategy", color: "#22D3EE" },
-  { slug: "pr-media", title: "PR & Media", color: "#8B5CF6" },
+  { slug: "pr", title: "PR & Media", color: "#8B5CF6" },
 ];
 
 export interface ServiceStat {
