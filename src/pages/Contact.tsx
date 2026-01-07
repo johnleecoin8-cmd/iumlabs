@@ -50,6 +50,33 @@ const mobileFloatingTags = [{
   label: "24h Response",
   position: "top-[12%] right-[3%]"
 }];
+
+// Video component with loading state
+const ContactHeroVideo = () => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  
+  return (
+    <video 
+      autoPlay 
+      muted 
+      loop 
+      playsInline
+      preload="metadata"
+      poster="/images/hero-poster.jpg"
+      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+        videoLoaded ? 'opacity-100' : 'opacity-0'
+      }`}
+      style={{ filter: "brightness(0.35)" }}
+      onLoadedData={() => setVideoLoaded(true)}
+      onLoadedMetadata={(e) => {
+        (e.target as HTMLVideoElement).currentTime = 0;
+      }}
+    >
+      <source src="/videos/services-background.mp4" type="video/mp4" />
+    </video>
+  );
+};
+
 const Contact = () => {
   usePageMeta("Contact Us", "Get in touch with ium labs for Korean Web3 marketing. Free consultation, 24h response. Seoul-based experts helping global projects succeed in Korea.", "/contact");
   const location = useLocation();
@@ -130,13 +157,17 @@ const Contact = () => {
         <section className="relative min-h-[80vh] flex flex-col justify-center items-center overflow-hidden rounded-2xl sm:rounded-3xl">
           {/* Video Background */}
           <div className="absolute inset-0 overflow-hidden">
-            <video autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover" style={{
-            filter: "brightness(0.35)"
-          }} onLoadedMetadata={e => {
-            (e.target as HTMLVideoElement).currentTime = 0;
-          }}>
-              <source src="/videos/services-background.mp4" type="video/mp4" />
-            </video>
+            {/* Fallback poster image - shown before video loads */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ 
+                backgroundImage: `url('/images/hero-poster.jpg')`,
+                filter: "brightness(0.35)"
+              }}
+            />
+            
+            <ContactHeroVideo />
+            
             {/* Dark overlay gradient matching hero */}
             <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
           </div>

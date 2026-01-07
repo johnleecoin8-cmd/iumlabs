@@ -38,6 +38,7 @@ const categoryPills = [
 
 const ResearchHeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 800);
@@ -48,13 +49,27 @@ const ResearchHeroSection = () => {
     <div className="relative h-full min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
       {/* Background Layer - Video */}
       <div className="absolute inset-0 overflow-hidden">
+        {/* Fallback poster image - shown before video loads */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ 
+            backgroundImage: `url('/images/hero-poster.jpg')`,
+            filter: "brightness(0.35)"
+          }}
+        />
+        
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          preload="metadata"
+          poster="/images/hero-poster.jpg"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+            videoLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
           style={{ filter: "brightness(0.35)" }}
+          onLoadedData={() => setVideoLoaded(true)}
           onLoadedMetadata={(e) => {
             e.currentTarget.currentTime = 0;
           }}

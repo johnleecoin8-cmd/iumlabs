@@ -137,6 +137,29 @@ const process = [{
   title: "OFFER",
   description: "Final Offer"
 }];
+
+// Video component with loading state
+const JobsHeroVideo = () => {
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  
+  return (
+    <video 
+      autoPlay 
+      loop 
+      muted 
+      playsInline
+      preload="metadata"
+      poster="/images/hero-poster.jpg"
+      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+        videoLoaded ? 'opacity-100' : 'opacity-0'
+      }`}
+      onLoadedData={() => setVideoLoaded(true)}
+    >
+      <source src="/videos/jobs-hero.mp4" type="video/mp4" />
+    </video>
+  );
+};
+
 const Jobs = () => {
   usePageMeta({
     title: "Careers | Ium Labs - Join Our Web3 Team",
@@ -208,10 +231,14 @@ const Jobs = () => {
       <main className="p-0.5 sm:p-1 md:p-2 bg-surface-base" id="hero">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <div className="relative min-h-[calc(100vh-2rem)] flex flex-col justify-center overflow-hidden rounded-2xl sm:rounded-3xl bg-surface-odd">
+            {/* Fallback poster image - shown before video loads */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url('/images/hero-poster.jpg')` }}
+            />
+            
             {/* Video Background */}
-            <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
-              <source src="/videos/jobs-hero.mp4" type="video/mp4" />
-            </video>
+            <JobsHeroVideo />
             
             {/* Dark Overlay */}
             <div className="absolute inset-0 bg-black/60" />
