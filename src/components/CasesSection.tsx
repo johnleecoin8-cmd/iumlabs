@@ -146,7 +146,7 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
           </div>
         </Link>
 
-        <div className="flex items-center justify-between gap-2 mt-1.5 sm:mt-2 min-h-[32px] sm:min-h-0">
+        <div className="flex items-center justify-between gap-2 mt-1 sm:mt-1.5">
           <Link
             to={`/projects/${slug}`}
             onClick={() => window.scrollTo(0, 0)}
