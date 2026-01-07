@@ -123,6 +123,16 @@ const ProjectDetail = () => {
     }
   }, [project, slug]);
 
+  // Get next project for navigation
+  const nextProjectData = getNextProject(slug || "");
+
+  // Dynamic breadcrumb items - must be before any conditional returns
+  const breadcrumbItems = useMemo(() => [
+    { name: "Home", url: "https://iumlabs.io" },
+    { name: "Projects", url: "https://iumlabs.io/projects" },
+    { name: project?.name || '', url: `https://iumlabs.io/projects/${slug}` }
+  ], [project?.name, slug]);
+
   if (!project) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
@@ -135,16 +145,6 @@ const ProjectDetail = () => {
       </div>
     );
   }
-
-  // Get next project for navigation
-  const nextProjectData = getNextProject(slug || "");
-
-  // Dynamic breadcrumb items
-  const breadcrumbItems = useMemo(() => [
-    { name: "Home", url: "https://iumlabs.io" },
-    { name: "Projects", url: "https://iumlabs.io/projects" },
-    { name: project.name, url: `https://iumlabs.io/projects/${slug}` }
-  ], [project.name, slug]);
 
   return (
     <div className="min-h-screen bg-black">
