@@ -138,24 +138,18 @@ const process = [{
   description: "Final Offer"
 }];
 
-// Video component with loading state
+// Video component
 const JobsHeroVideo = () => {
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  
   return (
     <video 
       autoPlay 
       loop 
       muted 
       playsInline
-      preload="metadata"
-      poster="/images/hero-poster.jpg"
-      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-        videoLoaded ? 'opacity-100' : 'opacity-0'
-      }`}
-      onLoadedData={() => setVideoLoaded(true)}
+      preload="auto"
+      className="absolute inset-0 w-full h-full object-cover"
     >
-      <source src="/videos/jobs-hero.mp4" type="video/mp4" />
+      <source src="/videos/jobs-hero.mp4#t=0.001" type="video/mp4" />
     </video>
   );
 };
@@ -231,12 +225,6 @@ const Jobs = () => {
       <main className="p-0.5 sm:p-1 md:p-2 bg-surface-base" id="hero">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <div className="relative min-h-[calc(100vh-2rem)] flex flex-col justify-center overflow-hidden rounded-2xl sm:rounded-3xl bg-surface-odd">
-            {/* Fallback poster image - shown before video loads */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url('/images/hero-poster.jpg')` }}
-            />
-            
             {/* Video Background */}
             <JobsHeroVideo />
             
