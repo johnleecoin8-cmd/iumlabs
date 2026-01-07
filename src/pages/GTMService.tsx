@@ -82,14 +82,34 @@ const IntroSection = () => {
           </motion.h1>
         </div>
         
-        {/* Subtitle */}
+        {/* Main Copy */}
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="text-white text-xl md:text-3xl lg:text-4xl font-bold mt-6 md:mt-8 max-w-4xl mx-auto"
+        >
+          Your Strategic Gateway to the Korean Web3 Market.
+        </motion.h2>
+        
+        {/* Sub Copy */}
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="text-white/50 text-sm md:text-lg mt-4 tracking-[0.2em] uppercase"
+          transition={{ delay: 0.7, duration: 0.8 }}
+          className="text-white/50 text-sm md:text-lg mt-4 tracking-wide"
         >
-          Accelerating growth through Korean Market Entry
+          Launch in Korea with precision, Scale Globally with confidence.
+        </motion.p>
+        
+        {/* Narrative Hook */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.2, duration: 1 }}
+          className="text-indigo-400/80 text-sm md:text-base mt-8 italic"
+        >
+          "한국 시장 진출은 옵션이 아닌 필수입니다. 가장 확실한 파트너와 시작하세요."
         </motion.p>
         
         {/* Scroll indicator */}
@@ -97,7 +117,7 @@ const IntroSection = () => {
           className="absolute bottom-16 left-1/2 -translate-x-1/2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
+          transition={{ delay: 1.8 }}
         >
           <motion.div
             animate={{ y: [0, 12, 0] }}
@@ -149,7 +169,7 @@ const InteractiveTextSection = () => {
           transition={{ delay: 0.8 }}
           className="text-center text-white/40 text-lg md:text-xl mt-8"
         >
-          어떻게 도와드릴까요?
+          당신의 한국 성공 스토리, 함께 시작합니다.
         </motion.p>
       </div>
     </section>
@@ -171,10 +191,31 @@ const ChallengeSection = () => {
   const textOpacity = useTransform(scrollYProgress, [0.1, 0.35], [0, 1]);
   const imageScale = useTransform(scrollYProgress, [0.1, 0.5], [1.2, 1]);
 
-  const challenges = [
-    { label: "독특한 규제 환경", value: "VASP 등록 필수" },
-    { label: "강력한 커뮤니티", value: "세계 Top 5 시장" },
-    { label: "언어 장벽", value: "로컬라이제이션 필수" },
+  const narrativeCards = [
+    { 
+      type: "opportunity", 
+      label: "Opportunity", 
+      title: "High Liquidity & Passionate Community",
+      description: "세계 5대 시장, 글로벌 거래량의 10%",
+      color: "text-emerald-400",
+      borderColor: "border-emerald-500/30"
+    },
+    { 
+      type: "barrier", 
+      label: "Barrier", 
+      title: "Cultural & Regulatory Wall",
+      description: "VASP 규제, 언어 장벽, 까다로운 커뮤니티",
+      color: "text-rose-400",
+      borderColor: "border-rose-500/30"
+    },
+    { 
+      type: "solution", 
+      label: "Solution Hint", 
+      title: "You need a local expert who speaks the global language.",
+      description: "글로벌 언어를 구사하는 로컬 전문가",
+      color: "text-indigo-400",
+      borderColor: "border-indigo-500/30"
+    },
   ];
 
   return (
@@ -186,38 +227,51 @@ const ChallengeSection = () => {
       <div className="absolute inset-0 bg-gradient-to-b from-black via-slate-900 to-indigo-950/80" />
       
       <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-12 lg:px-20">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[70vh]">
-          {/* Text Content - Slides in from left */}
+        {/* Header */}
+        <motion.div 
+          className="mb-16 md:mb-20"
+          style={{ opacity: textOpacity }}
+        >
+          <span className="text-indigo-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">
+            Why Korea?
+          </span>
+          
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mt-4">
+            왜 <span className="text-indigo-400">한국 시장</span>인가?
+          </h2>
+        </motion.div>
+        
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Text Content */}
           <motion.div 
             className="space-y-8 order-2 lg:order-1"
             style={{ x: textX, opacity: textOpacity }}
           >
-            <span className="text-indigo-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">
-              The Challenge
-            </span>
-            
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
-              왜 <span className="text-indigo-400">한국 시장</span>인가?
-            </h2>
-            
-            <p className="text-white/50 text-lg md:text-xl leading-relaxed max-w-lg">
-              한국은 글로벌 암호화폐 거래량의 10%를 차지하는 핵심 시장입니다. 
-              하지만 문화적 특수성과 규제 환경은 진입 장벽이 높습니다.
+            <p className="text-white/60 text-lg md:text-xl leading-relaxed max-w-lg">
+              한국은 세계 5대 시장이자 글로벌 거래량의 10%를 차지하는 <span className="text-white font-semibold">'기회의 땅'</span>입니다. 
+              하지만 독특한 규제(VASP), 폐쇄적인 언어 장벽, 까다로운 커뮤니티 성향 때문에 
+              수많은 프로젝트가 실패하고 돌아갑니다.
             </p>
             
-            {/* Challenge stats */}
-            <div className="space-y-4 pt-6">
-              {challenges.map((item, i) => (
+            <p className="text-indigo-400 text-xl md:text-2xl font-bold">
+              당신에겐 '지도'가 필요합니다.
+            </p>
+            
+            {/* Narrative Flow Cards */}
+            <div className="space-y-4 pt-4">
+              {narrativeCards.map((card, i) => (
                 <motion.div
-                  key={item.label}
-                  className="flex items-center justify-between py-4 border-b border-white/10"
+                  key={card.type}
+                  className={`p-5 rounded-xl border ${card.borderColor} bg-white/[0.02] backdrop-blur-sm`}
                   initial={{ opacity: 0, x: -30 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.1, duration: 0.6 }}
+                  transition={{ delay: i * 0.15, duration: 0.6 }}
+                  whileHover={{ x: 8, borderColor: "rgba(255,255,255,0.2)" }}
                 >
-                  <span className="text-white/40 text-sm uppercase tracking-wider">{item.label}</span>
-                  <span className="text-white font-bold">{item.value}</span>
+                  <span className={`text-xs tracking-wider uppercase ${card.color}`}>{card.label}</span>
+                  <h4 className="text-white font-bold text-lg mt-2">{card.title}</h4>
+                  <p className="text-white/40 text-sm mt-1">{card.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -254,29 +308,29 @@ const ApproachSection = () => {
     {
       number: "01",
       title: "Discovery",
-      subtitle: "시장 분석",
-      description: "심층 시장 리서치, 경쟁사 분석, 타겟 오디언스 정의",
+      subtitle: "시장 해부",
+      description: "표면적인 번역이 아닌, 한국 유저의 심층 심리를 분석합니다.",
       image: storyBg,
     },
     {
       number: "02", 
       title: "Strategy",
-      subtitle: "전략 수립",
-      description: "맞춤형 GTM 프레임워크, KPI 설정, 로드맵 개발",
+      subtitle: "전략 설계",
+      description: "한국의 규제와 트렌드에 맞춘 '커스텀 GTM'을 설계합니다.",
       image: peaqBg,
     },
     {
       number: "03",
       title: "Execution",
-      subtitle: "실행 단계",
-      description: "PR, 커뮤니티, KOL, 이벤트 채널 통합 캠페인 실행",
+      subtitle: "정밀 타격",
+      description: "흩어진 채널이 아닌, 통합된 목소리로 임팩트를 만듭니다.",
       image: mantraBg,
     },
     {
       number: "04",
       title: "Scale",
-      subtitle: "확장 및 성장",
-      description: "퍼포먼스 최적화, 시장 확장, 지속 가능한 성장 가속화",
+      subtitle: "시장 장악",
+      description: "단순 진입을 넘어, 지속 가능한 생태계를 구축합니다.",
       image: saharaAiBg,
     }
   ];
@@ -294,8 +348,11 @@ const ApproachSection = () => {
         >
           <span className="text-violet-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">Solutions</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mt-3 leading-tight">
-            Our Approach
+            우리는 감으로 일하지 않습니다.
           </h2>
+          <p className="text-white/50 text-lg md:text-xl mt-4 max-w-2xl">
+            철저한 데이터와 검증된 4단계 프레임워크로 움직입니다.
+          </p>
         </motion.div>
         
         {/* monks-style numbered list */}
@@ -422,8 +479,11 @@ const ResultsSection = () => {
             Proven Track Record
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mt-4">
-            검증된 <span className="text-orange-400">성과</span>
+            말뿐인 전략은 의미가 없습니다.
           </h2>
+          <p className="text-white/50 text-xl md:text-2xl mt-4">
+            <span className="text-orange-400 font-bold">숫자</span>가 증명합니다.
+          </p>
         </motion.div>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -473,7 +533,7 @@ const StatCard = ({ stat, index }: { stat: { value: number; suffix: string; labe
 };
 
 // ============================================
-// SECTION 4.5: FEATURED PROJECT
+// SECTION 4.5: FEATURED PROJECT - MANTRA Hero's Journey
 // ============================================
 const FeaturedProjectSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -511,20 +571,34 @@ const FeaturedProjectSection = () => {
         className="absolute bottom-0 left-0 right-0 p-8 md:p-16 lg:p-24"
         style={{ y: textY, opacity: textOpacity }}
       >
-        <span className="text-indigo-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">
-          Featured Project
+        <span className="text-orange-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">
+          From Zero to Market Leader
         </span>
         <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-white mt-4">
           MANTRA
         </h2>
-        <p className="text-white/50 text-lg md:text-xl max-w-xl mt-4">
-          Korea GTM Campaign 2024 — Full-stack market entry strategy
+        <p className="text-white/60 text-lg md:text-xl max-w-2xl mt-4">
+          MANTRA가 한국에서 어떻게 인지도를 0에서 100으로 끌어올렸는지 확인하세요.
         </p>
+        <p className="text-indigo-400 text-base md:text-lg mt-2 italic">
+          이것은 곧 당신의 이야기가 될 수 있습니다.
+        </p>
+        
+        {/* Achievement badges */}
+        <div className="flex flex-wrap gap-4 mt-6">
+          <div className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/10">
+            <span className="text-white/80 text-sm">커뮤니티 성장 <span className="text-orange-400 font-bold">500%</span></span>
+          </div>
+          <div className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full border border-white/10">
+            <span className="text-white/80 text-sm">미디어 노출 <span className="text-orange-400 font-bold">100+</span></span>
+          </div>
+        </div>
+        
         <Link 
           to="/projects/mantra"
-          className="inline-flex items-center gap-2 text-white/70 hover:text-white mt-6 group"
+          className="inline-flex items-center gap-2 text-white/70 hover:text-white mt-8 group"
         >
-          <span>자세히 보기</span>
+          <span className="font-semibold">케이스 스터디 보기</span>
           <motion.span
             className="inline-block"
             whileHover={{ x: 5 }}
@@ -603,11 +677,13 @@ const NetworkSection = () => {
           <div>
             <span className="text-teal-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">Global Network</span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mt-4 leading-tight">
-              서울에서 <span className="text-teal-400">세계로</span>
+              Seoul is just the <span className="text-teal-400">beginning.</span>
             </h2>
           </div>
           <p className="text-white/50 text-lg leading-relaxed max-w-lg">
-            서울을 중심으로 글로벌 주요 도시에 파트너 네트워크를 보유하고 있습니다.
+            우리의 본진은 서울이지만, 시야는 세계를 향해 있습니다. 
+            서울에서의 성공을 발판 삼아 도쿄, 싱가포르, 뉴욕으로 연결합니다. 
+            <span className="text-teal-400">이음(ium)</span>은 이름 그대로 당신과 세계를 잇습니다.
           </p>
         </motion.div>
       </div>
@@ -755,17 +831,18 @@ const ClientStoriesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="flex justify-between items-end mb-12"
+          className="mb-12"
         >
-          <div>
-            <span className="text-violet-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">Client Stories</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mt-3">
-              Selected Work
-            </h2>
-          </div>
+          <span className="text-violet-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">Selected Work</span>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mt-3 max-w-3xl leading-tight">
+            업계를 선도하는 Top-tier 프로젝트들이 이미 이음 랩스를 선택했습니다.
+          </h2>
+          <p className="text-white/40 text-base md:text-lg mt-4 max-w-2xl">
+            Story Protocol, peaq, Sahara AI... 혁신적인 기술을 가진 그들이 한국 파트너로 우리를 택한 이유는 분명합니다.
+          </p>
           <Link 
             to="/projects" 
-            className="text-white/50 hover:text-violet-400 transition-colors text-sm tracking-wider uppercase hidden md:block"
+            className="inline-block text-violet-400 hover:text-violet-300 transition-colors text-sm tracking-wider uppercase mt-6"
           >
             View all work →
           </Link>
@@ -826,9 +903,9 @@ const ClientStoriesSection = () => {
 // ============================================
 const AwardsSection = () => {
   const awards = [
-    { title: "Top Web3 Agency", subtitle: "Korea Market 2024" },
-    { title: "30+ Launches", subtitle: "Verified Track Record" },
-    { title: "GTM Specialist", subtitle: "Industry Recognition" },
+    { title: "Korea's #1 Web3 GTM Partner", subtitle: "Market Leader 2024" },
+    { title: "30+ Successful Launches", subtitle: "Verified Track Record" },
+    { title: "500M+ Total Impressions", subtitle: "Proven Impact" },
   ];
 
   return (
@@ -881,7 +958,7 @@ const ActionSection = () => {
   
   const glowOpacity = useTransform(scrollYProgress, [0.3, 0.6], [0, 0.6]);
   
-  const ctaWords = ["Let's", "unlock", "what's", "possible", "together"];
+  const ctaWords = ["Ready", "to", "Unlock", "Korea", "?"];
 
   return (
     <section 
@@ -927,8 +1004,9 @@ const ActionSection = () => {
           </div>
           
           {/* Subtitle */}
-          <p className="text-white/40 text-lg md:text-xl max-w-xl mx-auto">
-            한국 시장 진출을 준비하고 계신가요?
+          <p className="text-white/50 text-lg md:text-xl max-w-xl mx-auto">
+            한국 시장 진출은 옵션이 아닌 필수입니다.<br />
+            <span className="text-indigo-400">가장 확실한 파트너</span>와 시작하세요.
           </p>
           
           {/* CTA Buttons */}
@@ -937,7 +1015,7 @@ const ActionSection = () => {
               to="/contact"
               className="group relative inline-flex items-center gap-3 px-8 md:px-12 py-4 md:py-5 bg-white text-black font-bold text-base md:text-lg rounded-full hover:bg-violet-400 transition-colors duration-300"
             >
-              <span>Get in touch</span>
+              <span>Unlock Korea Now</span>
               <motion.span
                 className="inline-block"
                 whileHover={{ x: 5 }}
@@ -997,7 +1075,7 @@ const MarqueeText = ({ texts, reverse = false }: { texts: string[]; reverse?: bo
           <span 
             key={i} 
             className={`text-3xl md:text-5xl lg:text-6xl font-black mx-8 md:mx-12 transition-all duration-500 ${
-              isPaused ? 'text-white' : 'text-white/10'
+              isPaused ? 'text-white/30' : 'text-white/5'
             }`}
           >
             {text}
