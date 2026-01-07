@@ -56,18 +56,12 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const [displayChildren, setDisplayChildren] = useState(children);
   const [phase, setPhase] = useState<'idle' | 'fadeOut' | 'logo' | 'fadeIn'>('idle');
-  const isFirstMount = useRef(true);
   const prevPathname = useRef(location.pathname);
 
   useEffect(() => {
-    // Skip animation on first mount
-    if (isFirstMount.current) {
-      isFirstMount.current = false;
-      return;
-    }
-
     // Only animate if pathname actually changed
     if (prevPathname.current === location.pathname) {
+      setDisplayChildren(children);
       return;
     }
     prevPathname.current = location.pathname;
@@ -77,16 +71,16 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
 
     const fadeOutTimer = setTimeout(() => {
       setPhase('logo');
-    }, 200);
+    }, 150);
 
     const logoTimer = setTimeout(() => {
       setDisplayChildren(children);
       setPhase('fadeIn');
-    }, 600);
+    }, 500);
 
     const fadeInTimer = setTimeout(() => {
       setPhase('idle');
-    }, 850);
+    }, 700);
 
     return () => {
       clearTimeout(fadeOutTimer);
@@ -95,20 +89,12 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
     };
   }, [location.pathname, children]);
 
-  // Update children immediately when not transitioning
-  useEffect(() => {
-    if (phase === 'idle' && children !== displayChildren) {
-      setDisplayChildren(children);
-    }
-  }, [children, displayChildren, phase]);
-
   return (
     <>
       {/* Logo overlay */}
       {(phase === 'logo' || phase === 'fadeOut') && (
         <div 
           className="fixed inset-0 z-[9999] bg-background flex items-center justify-center"
-          style={{ willChange: 'opacity' }}
         >
           <img 
             src={logo} 
@@ -116,19 +102,17 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
             className={`w-16 h-16 object-contain brightness-0 invert ${
               phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
             }`}
-            style={{ willChange: 'opacity, transform' }}
           />
         </div>
       )}
 
       {/* Page content */}
       <div 
-        className={`transition-opacity duration-200 ease-out ${
+        className={`transition-opacity duration-150 ease-out ${
           phase === 'fadeOut' || phase === 'logo' 
             ? 'opacity-0' 
             : 'opacity-100'
         }`}
-        style={{ willChange: 'opacity' }}
       >
         {displayChildren}
       </div>
@@ -140,7 +124,7 @@ const AppRoutes = () => {
   const location = useLocation();
 
   return (
-    <PageTransitionWrapper key={location.pathname}>
+    <PageTransitionWrapper>
       <Routes location={location}>
         <Route path="/" element={<Index />} />
         <Route path="/services" element={<Services />} />
