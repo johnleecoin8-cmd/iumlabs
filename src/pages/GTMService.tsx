@@ -196,6 +196,7 @@ const GTMService = () => {
       serviceTags={serviceTags}
       stats={stats}
       accentColor={ACCENT_COLOR}
+      videoSrc="/videos/gtm-hero.mp4"
       deliverables={deliverables}
       faqItems={faqItems}
       currentSlug="gtm"
