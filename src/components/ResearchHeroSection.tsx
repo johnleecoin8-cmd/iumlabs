@@ -101,7 +101,7 @@ const ResearchHeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline */}
           <motion.h1 
-            className="font-display text-display-hero mb-4 sm:mb-6 mt-8 sm:mt-12"
+            className="font-sans text-display-hero mb-4 sm:mb-6 mt-8 sm:mt-12"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
