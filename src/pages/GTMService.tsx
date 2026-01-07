@@ -1,5 +1,6 @@
-import { Rocket, Target, Compass, TrendingUp, CheckCircle, Building2, Shield, Scale, Landmark, Users, FileText, BarChart3 } from "lucide-react";
+import { Rocket, Target, Compass, TrendingUp, CheckCircle, Lightbulb, FileSearch, PresentationIcon, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import ServicePageLayout, { ServiceStat, ServiceTag, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
@@ -14,185 +15,151 @@ const breadcrumbItems = [
   { name: "GTM Strategy", url: "https://iumlabs.io/services/gtm" }
 ];
 
-// Regulatory Framework Data (compact)
-const regulatoryFramework = [
+// Consulting Approach Steps
+const approachSteps = [
   {
-    title: "VASP Registration",
-    description: "Virtual Asset Service Provider licensing requirements",
-    icon: Shield,
-    details: ["FIU Registration Required", "Real-name Account Linking", "AML/KYC Compliance"]
+    step: "Step 1",
+    title: "Discovery",
+    icon: FileSearch,
+    activities: [
+      "프로젝트 비전과 목표 파악",
+      "현재 마케팅 현황 분석",
+      "타겟 오디언스 정의",
+      "한국 시장 진입 타당성 검토"
+    ],
+    outcome: "프로젝트 현황 분석 리포트"
   },
   {
-    title: "Act Compliance",
-    description: "Understanding Special Financial Transaction Act guidelines",
-    icon: Scale,
-    details: ["Anti-Money Laundering", "Customer Due Diligence", "Transaction Reporting"]
+    step: "Step 2",
+    title: "Analysis",
+    icon: Compass,
+    activities: [
+      "한국 시장 적합성 평가",
+      "경쟁 환경 및 포지셔닝 분석",
+      "기회 영역 및 리스크 도출",
+      "규제 환경 검토"
+    ],
+    outcome: "시장 분석 및 기회 리포트"
   },
   {
-    title: "Tax Policy",
-    description: "Crypto taxation policies and filing methods",
-    icon: Landmark,
-    details: ["Capital Gains Tax", "Filing Standards", "Tax Rate Understanding"]
+    step: "Step 3",
+    title: "Strategy",
+    icon: Target,
+    activities: [
+      "맞춤형 서비스 조합 설계",
+      "채널 및 캠페인 우선순위 제안",
+      "단계별 실행 로드맵 수립",
+      "예상 성과 지표 설정"
+    ],
+    outcome: "맞춤형 전략 프레임워크"
   },
   {
-    title: "Listing Requirements",
-    description: "Exchange-specific listing review criteria",
-    icon: Building2,
-    details: ["Technical Review", "Legal Eligibility", "Liquidity Requirements"]
+    step: "Step 4",
+    title: "Proposal",
+    icon: PresentationIcon,
+    activities: [
+      "상세 제안서 작성",
+      "예상 타임라인 제시",
+      "투자 비용 및 ROI 분석",
+      "실행 파트너십 논의"
+    ],
+    outcome: "맞춤형 GTM 제안서"
   }
 ];
 
-// 4-Week Program Journey
-const journeyPhases = [
-  {
-    week: "Week 1",
-    title: "Market Analysis",
-    icon: Compass,
-    activities: [
-      "Korean market landscape research",
-      "Competitor analysis & positioning",
-      "Korean exchange listing feasibility analysis",
-      "Regulatory environment & VASP requirements review"
-    ],
-    deliverables: ["Market Entry Report", "Regulatory Checklist"],
-    metrics: [
-      { icon: FileText, label: "Competitors", value: "10+" },
-      { icon: Shield, label: "Regulations", value: "5+" }
-    ]
-  },
-  {
-    week: "Week 2",
-    title: "Strategy Development",
-    icon: Target,
-    activities: [
-      "GTM roadmap creation",
-      "Korean exchange listing strategy development",
-      "Special Act compliance planning",
-      "KPI definition & tracking setup"
-    ],
-    deliverables: ["GTM Strategy Deck", "Exchange Listing Plan"],
-    metrics: [
-      { icon: Target, label: "Channels", value: "5-8" },
-      { icon: BarChart3, label: "KPIs", value: "10+" }
-    ]
-  },
-  {
-    week: "Week 3",
-    title: "Launch Preparation",
-    icon: Rocket,
-    activities: [
-      "Korean partnership & KOL outreach",
-      "Korean content localization",
-      "KakaoTalk/Naver community building",
-      "Korean media PR preparation"
-    ],
-    deliverables: ["Launch Timeline", "Korean Asset Library"],
-    metrics: [
-      { icon: Users, label: "Partners", value: "3-5" },
-      { icon: FileText, label: "Contents", value: "20+" }
-    ]
-  },
-  {
-    week: "Week 4",
-    title: "Execution & Optimization",
-    icon: TrendingUp,
-    activities: [
-      "Campaign activation",
-      "Korean community performance monitoring",
-      "Real-time optimization",
-      "Exchange listing follow-up support"
-    ],
-    deliverables: ["Performance Report", "Exchange Roadmap"],
-    metrics: [
-      { icon: Users, label: "Community", value: "+500-2K" },
-      { icon: TrendingUp, label: "Awareness", value: "+200%" }
-    ]
-  }
+// Available Services for linking
+const availableServices = [
+  { name: "Community Management", slug: "community", description: "카카오톡/텔레그램 커뮤니티 운영" },
+  { name: "PR & Media", slug: "pr", description: "한국 미디어 노출 및 보도자료" },
+  { name: "Influencer/KOL", slug: "influencer", description: "한국 KOL 네트워크 활용" },
+  { name: "Offline Events", slug: "offline-event", description: "밋업, 컨퍼런스, 파티 기획" },
+  { name: "SEO & Ads", slug: "seo-ads", description: "네이버/구글 최적화 및 광고" },
+  { name: "Branding", slug: "branding", description: "한국화 브랜딩 및 웹사이트" },
+  { name: "Deep Research", slug: "deep-research", description: "심층 시장 분석 리포트" },
+  { name: "Yap Strategy", slug: "yap", description: "Yapper 네트워크 마케팅" },
 ];
 
 const serviceTags: ServiceTag[] = [
-  { label: "Korean Exchange Listing" },
-  { label: "VASP Consulting" },
-  { label: "Regulatory Compliance" },
-  { label: "Tokenomics Review" },
-  { label: "Korea Localization" },
-  { label: "Regulatory Response" },
+  { label: "Market Analysis" },
+  { label: "Custom Strategy" },
+  { label: "Tailored Solutions" },
+  { label: "Full-Service Package" },
 ];
 
 const stats: ServiceStat[] = [
-  { value: 15, label: "Projects Launched", suffix: "+" },
-  { value: 3, label: "TGE Volume Supported", prefix: "$", suffix: "M+" },
-  { value: 4, label: "Avg Launch Timeline", suffix: " weeks" },
-  { value: 600, label: "Client Retention", suffix: "%+" },
+  { value: 30, label: "Projects Consulted", suffix: "+" },
+  { value: 95, label: "Client Satisfaction", suffix: "%" },
+  { value: 2, label: "Avg Strategy Delivery", suffix: " weeks" },
+  { value: 100, label: "Custom Solutions", suffix: "%" },
 ];
 
 const deliverables: Deliverable[] = [
   {
-    title: "Regulatory & Listing Analysis",
+    title: "Discovery Report",
     items: [
-      "Korean Exchange Listing Feasibility Report",
-      "VASP Registration Requirements Checklist",
-      "Special Act Compliance Guide",
-      "Regulatory Risk Analysis Report",
+      "프로젝트 현황 분석",
+      "한국 시장 진입 가능성 평가",
+      "초기 기회 및 리스크 요약",
+      "권장 접근 방식 제안",
     ],
   },
   {
-    title: "Market & Strategy Documents",
+    title: "Custom Strategy Deck",
     items: [
-      "Korean Market Entry Strategy Deck",
-      "Exchange-specific Listing Roadmap",
-      "Korean-targeted Messaging Framework",
-      "KPI Dashboard Setup",
+      "맞춤형 서비스 조합 제안",
+      "채널별 실행 전략",
+      "예상 성과 지표 (KPIs)",
+      "경쟁 포지셔닝 전략",
     ],
   },
   {
-    title: "Execution Assets",
+    title: "Execution Roadmap",
     items: [
-      "Korean Content Library",
-      "KakaoTalk/Naver Community Setup Guide",
-      "Korean Partnership Outreach Kit",
-      "Exchange Listing Checklist",
+      "단계별 실행 계획",
+      "예상 타임라인",
+      "마일스톤 및 체크포인트",
+      "투자 비용 및 ROI 분석",
     ],
   },
 ];
 
 const faqItems: FAQItem[] = [
   {
-    question: "How does the Korean exchange listing process work?",
-    answer: "We analyze listing requirements for major Korean exchanges (Upbit, Bithumb, Coinone, etc.) and develop strategies to meet technical review, legal eligibility, and liquidity requirements. We support communication with exchange representatives throughout the listing process.",
+    question: "GTM 서비스는 어떤 방식으로 진행되나요?",
+    answer: "Discovery(발견) → Analysis(분석) → Strategy(전략) → Proposal(제안)의 4단계 컨설팅 프로세스로 진행됩니다. 약 2주 내에 프로젝트에 최적화된 맞춤형 제안서를 받아보실 수 있습니다.",
   },
   {
-    question: "How do you support VASP registration and regulatory compliance?",
-    answer: "We provide consulting for Special Financial Transaction Act compliance, including FIU registration requirements, real-name account linking, and AML/KYC policy development. We connect you with legal advisory partners when needed.",
+    question: "어떤 서비스들을 조합할 수 있나요?",
+    answer: "커뮤니티 관리, PR/미디어, 인플루언서/KOL, 오프라인 이벤트, SEO & 광고, 브랜딩, 딥 리서치, Yap 전략 등 다양한 서비스를 프로젝트 특성에 맞게 조합합니다. 각 서비스 페이지에서 상세 내용을 확인하실 수 있습니다.",
   },
   {
-    question: "What's included in the GTM Strategy service?",
-    answer: "We provide comprehensive GTM services specialized for the Korean Web3 market, including market analysis, competitive positioning, launch roadmap, channel strategy, messaging framework, Korean exchange listing strategy, and regulatory consulting.",
+    question: "프로젝트 규모에 따라 다른 접근이 가능한가요?",
+    answer: "네, 스타트업부터 대형 프로젝트까지 규모와 예산에 맞는 맞춤형 솔루션을 제안합니다. 최소 필수 서비스부터 풀 패키지까지 유연하게 구성 가능합니다.",
   },
   {
-    question: "What support is available at each project stage?",
-    answer: "Pre-TGE projects receive support for launch strategy, community building, and exchange listing preparation. Post-TGE projects get Korean market growth optimization, additional exchange listings, and regulatory response support.",
+    question: "기존에 마케팅을 진행 중인 프로젝트도 가능한가요?",
+    answer: "물론입니다. 현재 마케팅 현황을 분석하여 개선점을 도출하고, 추가로 필요한 서비스나 전략 조정을 제안합니다. 기존 활동과의 시너지를 극대화하는 방향으로 설계합니다.",
   },
   {
-    question: "Why is the Korean market different?",
-    answer: "Korea has unique platforms like KakaoTalk and Naver, strong community culture, special regulatory requirements including VASP registration and the Special Act, and distinctive user behavior patterns. Our local expertise helps localize strategies appropriately.",
+    question: "제안서를 받은 후 진행 여부는 어떻게 되나요?",
+    answer: "제안서 검토 후 원하시는 서비스와 범위를 선택하시면 됩니다. 부분 진행도 가능하며, 단계별로 확장해 나가는 것도 좋은 방법입니다.",
   },
 ];
 
 const GTMService = () => {
   usePageMeta(
     "Korean Web3 GTM Strategy",
-    "Strategic Go-To-Market planning for Web3 projects launching in Korea. Korean exchange listing, VASP compliance, and localized launch campaigns.",
+    "한국 Web3 시장 진출을 위한 맞춤형 GTM 전략 컨설팅. 프로젝트 분석부터 맞춤형 서비스 제안까지.",
     "/services/gtm"
   );
-  const [activePhase, setActivePhase] = useState(0);
+  const [activeStep, setActiveStep] = useState(0);
 
   return (
     <ServicePageLayout
       serviceName="GTM Strategy"
       serviceTitle="Go-To-Market"
       serviceSubtitle="Strategy"
-      serviceDescription="Strategic GTM planning and execution for Korean market entry. From exchange listing strategy, regulatory response, and tokenomics review to coordinated launch campaigns."
+      serviceDescription="한국 Web3 시장 진출을 위한 맞춤형 전략 수립. 프로젝트의 특성과 목표를 분석하여 최적의 서비스 조합과 실행 로드맵을 제안합니다."
       serviceIcon={Rocket}
       serviceTags={serviceTags}
       stats={stats}
@@ -203,48 +170,34 @@ const GTMService = () => {
       faqItems={faqItems}
       currentSlug="gtm"
     >
-      {/* 4-Week Program Journey Section */}
+      {/* Our Approach Section */}
       <section className="scroll-reveal">
         <div className="border-t border-white/10">
-          <SectionHeader title="4-Week Program" badge="GTM Journey" />
+          <SectionHeader title="Our Approach" badge="Consulting Process" />
           
           <div className="py-8 sm:py-12 md:py-16">
             <div className="container mx-auto px-3 sm:px-6 lg:px-16">
-              {/* Regulatory Expertise - Compact Badges */}
-              <div className="mb-6 sm:mb-10">
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {regulatoryFramework.map((item) => {
-                    const Icon = item.icon;
-                    return (
-                      <div
-                        key={item.title}
-                        className="inline-flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1 sm:py-1.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full"
-                      >
-                        <Icon className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400" />
-                        <span className="text-[10px] sm:text-xs font-medium text-emerald-400">{item.title}</span>
-                      </div>
-                    );
-                  })}
-                </div>
+              {/* Intro Text */}
+              <div className="mb-6 sm:mb-10 max-w-2xl">
+                <p className="text-white/60 text-xs sm:text-sm leading-relaxed">
+                  고객의 니즈를 파악하고 최적의 솔루션을 제안하는 4단계 컨설팅 프로세스입니다. 
+                  약 2주 내에 프로젝트에 맞춤화된 GTM 제안서를 받아보실 수 있습니다.
+                </p>
               </div>
               
-              {/* 4-Week Journey Content */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 items-start">
-                {/* Left - Phase Navigation */}
+              {/* Approach Content */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 items-start">
+                {/* Left - Step Navigation */}
                 <div>
-                  <p className="text-white/60 text-xs sm:text-sm leading-relaxed mb-4 sm:mb-5">
-                    A 4-week program from market analysis to successful launch, with clear deliverables at each stage.
-                  </p>
-                  
                   <div className="space-y-1.5 sm:space-y-2">
-                    {journeyPhases.map((phase, index) => {
+                    {approachSteps.map((phase, index) => {
                       const Icon = phase.icon;
-                      const isActive = activePhase === index;
+                      const isActive = activeStep === index;
                       
                       return (
                         <button
-                          key={phase.week}
-                          onClick={() => setActivePhase(index)}
+                          key={phase.step}
+                          onClick={() => setActiveStep(index)}
                           className={`w-full text-left p-2.5 sm:p-4 rounded-lg sm:rounded-xl border transition-all duration-300 hover:translate-x-1 active:scale-[0.98] ${
                             isActive 
                               ? 'bg-emerald-500/10 border-emerald-500/30' 
@@ -259,7 +212,7 @@ const GTMService = () => {
                             </div>
                             <div>
                               <span className={`text-[10px] sm:text-xs font-medium ${isActive ? 'text-emerald-400' : 'text-white/40'}`}>
-                                {phase.week}
+                                {phase.step}
                               </span>
                               <h4 className={`text-xs sm:text-sm font-semibold ${isActive ? 'text-white' : 'text-white/70'}`}>
                                 {phase.title}
@@ -272,28 +225,28 @@ const GTMService = () => {
                   </div>
                 </div>
 
-                {/* Right - Phase Details */}
+                {/* Right - Step Details */}
                 <div
-                  key={activePhase}
+                  key={activeStep}
                   className="bg-white/5 border border-white/10 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 md:p-6"
                 >
                   <div className="flex items-center gap-2 sm:gap-2.5 mb-3 sm:mb-4">
                     <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                       {(() => {
-                        const Icon = journeyPhases[activePhase].icon;
+                        const Icon = approachSteps[activeStep].icon;
                         return <Icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-emerald-400" />;
                       })()}
                     </div>
                     <div>
-                      <span className="text-[9px] sm:text-[10px] text-emerald-400 font-medium">{journeyPhases[activePhase].week}</span>
-                      <h3 className="text-sm sm:text-base font-bold text-white">{journeyPhases[activePhase].title}</h3>
+                      <span className="text-[9px] sm:text-[10px] text-emerald-400 font-medium">{approachSteps[activeStep].step}</span>
+                      <h3 className="text-sm sm:text-base font-bold text-white">{approachSteps[activeStep].title}</h3>
                     </div>
                   </div>
 
                   <div className="mb-4 sm:mb-5">
-                    <h4 className="text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-wider mb-1.5 sm:mb-2">Activities</h4>
+                    <h4 className="text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-wider mb-1.5 sm:mb-2">What We Do</h4>
                     <ul className="space-y-1 sm:space-y-1.5">
-                      {journeyPhases[activePhase].activities.map((activity, idx) => (
+                      {approachSteps[activeStep].activities.map((activity, idx) => (
                         <li key={idx} className="flex items-start gap-1.5 sm:gap-2 text-white/70">
                           <CheckCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400 mt-0.5 flex-shrink-0" />
                           <span className="text-xs sm:text-sm">{activity}</span>
@@ -303,35 +256,10 @@ const GTMService = () => {
                   </div>
 
                   <div className="pt-4 sm:pt-5 border-t border-white/10">
-                    <h4 className="text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-wider mb-1.5 sm:mb-2">Deliverables</h4>
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                      {journeyPhases[activePhase].deliverables.map((deliverable, idx) => (
-                        <span 
-                          key={idx}
-                          className="px-2 sm:px-2.5 py-0.5 sm:py-1 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-[10px] sm:text-xs font-medium rounded-md sm:rounded-lg"
-                        >
-                          {deliverable}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Expected Metrics */}
-                  <div className="mt-4 sm:mt-5 pt-4 sm:pt-5 border-t border-white/10">
-                    <h4 className="text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-wider mb-2 sm:mb-3">Expected Metrics</h4>
-                    <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                      {journeyPhases[activePhase].metrics.map((metric, idx) => {
-                        const MetricIcon = metric.icon;
-                        return (
-                          <div key={idx} className="p-2 sm:p-3 bg-white/5 rounded-lg">
-                            <div className="flex items-center gap-1.5 sm:gap-2 mb-0.5 sm:mb-1">
-                              <MetricIcon className="w-3 h-3 sm:w-4 sm:h-4 text-emerald-400" />
-                              <span className="text-[10px] sm:text-xs text-white/40">{metric.label}</span>
-                            </div>
-                            <span className="text-sm sm:text-lg font-bold text-white">{metric.value}</span>
-                          </div>
-                        );
-                      })}
+                    <h4 className="text-[10px] sm:text-xs font-medium text-white/50 uppercase tracking-wider mb-1.5 sm:mb-2">Outcome</h4>
+                    <div className="flex items-center gap-2">
+                      <Lightbulb className="w-4 h-4 text-emerald-400" />
+                      <span className="text-sm font-medium text-white">{approachSteps[activeStep].outcome}</span>
                     </div>
                   </div>
                 </div>
@@ -340,12 +268,49 @@ const GTMService = () => {
           </div>
         </div>
       </section>
+
+      {/* Available Services Section */}
+      <section className="scroll-reveal">
+        <div className="border-t border-white/10">
+          <SectionHeader title="Available Services" badge="선택 가능한 서비스" />
+          
+          <div className="py-8 sm:py-12 md:py-16">
+            <div className="container mx-auto px-3 sm:px-6 lg:px-16">
+              <p className="text-white/60 text-xs sm:text-sm leading-relaxed mb-6 sm:mb-8 max-w-2xl">
+                GTM 컨설팅을 통해 아래 서비스들을 프로젝트 특성에 맞게 조합하여 제안합니다. 
+                각 서비스의 상세 내용은 개별 페이지에서 확인하실 수 있습니다.
+              </p>
+              
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
+                {availableServices.map((service) => (
+                  <Link
+                    key={service.slug}
+                    to={`/services/${service.slug}`}
+                    className="group p-3 sm:p-4 bg-white/5 border border-white/10 rounded-lg sm:rounded-xl hover:bg-white/10 hover:border-emerald-500/30 transition-all duration-300"
+                  >
+                    <div className="flex items-center justify-between mb-1 sm:mb-2">
+                      <h4 className="text-xs sm:text-sm font-semibold text-white group-hover:text-emerald-400 transition-colors">
+                        {service.name}
+                      </h4>
+                      <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 text-white/30 group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all" />
+                    </div>
+                    <p className="text-[10px] sm:text-xs text-white/50 group-hover:text-white/70 transition-colors">
+                      {service.description}
+                    </p>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <BreadcrumbSchema items={breadcrumbItems} />
       <ServiceSchema 
         name="Korean Web3 GTM Strategy"
-        description="Strategic Go-To-Market planning for Web3 projects launching in Korea. Korean exchange listing, VASP compliance, and localized launch campaigns."
+        description="한국 Web3 시장 진출을 위한 맞춤형 GTM 전략 컨설팅. 프로젝트 분석부터 맞춤형 서비스 제안까지."
         url="/services/gtm"
-        serviceType={["GTM Strategy", "Korean Exchange Listing", "VASP Consulting", "Web3 Marketing"]}
+        serviceType={["GTM Strategy", "Web3 Consulting", "Market Entry Strategy", "Korea Marketing"]}
       />
     </ServicePageLayout>
   );
