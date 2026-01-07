@@ -22,7 +22,7 @@ const SelectedWorkShowcase = () => {
     { name: "Story Protocol", category: "IP Platform", result: "Korea #1", media: storyBg, video: "/videos/projects/story-hero.mp4", slug: "story-protocol" },
     { name: "MANTRA", category: "L1 Infrastructure", result: "500% Growth", media: mantraBg, video: "/videos/projects/mantra-hero.mp4", slug: "mantra" },
     { name: "Bybit", category: "Exchange", result: "#2 Traffic", media: bybitBg, video: "/videos/projects/bybit-hero.mp4", slug: "bybit" },
-    { name: "BNB Chain", category: "Infrastructure", result: "+340% Volume", media: bnbBg, slug: "bnb-chain" },
+    { name: "BNB Chain", category: "Infrastructure", result: "+340% Volume", media: bnbBg, video: "/videos/projects/bnb-hero.mp4", slug: "bnb-chain" },
     { name: "peaq", category: "DePIN Entry", result: "First Branding", media: peaqBg, video: "/videos/projects/peaq-hero.mp4", slug: "peaq" },
     { name: "Sahara AI", category: "AI × Blockchain", result: "Community Built", media: saharaAiBg, video: "/videos/projects/sahara-hero.mp4", slug: "sahara-ai" },
     { name: "KuCoin", category: "Exchange Campaign", result: "Top Engagement", media: kucoinBg, video: "/videos/projects/kucoin-hero.mp4", slug: "kucoin" },
