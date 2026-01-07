@@ -372,32 +372,51 @@ const Services = () => {
           </span>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 relative">
           {phases.map((phase, index) => {
             const Icon = phase.icon;
             const isLast = index === phases.length - 1;
+            const isRightColumn = index % 2 === 1;
+            const isTopRow = index < 2;
             
             return (
               <div
                 key={phase.title}
-                className={`group p-6 md:p-8 transition-all duration-300 hover:bg-white/[0.02] min-h-[44px] ${
-                  !isLast ? "lg:border-r border-white/10" : ""
-                } ${index < 2 ? "border-b lg:border-b-0 border-white/10" : ""} ${
-                  index === 2 ? "border-b lg:border-b-0 border-white/10" : ""
+                className={`group p-4 sm:p-6 md:p-8 transition-all duration-300 hover:bg-white/[0.02] min-h-[44px] relative ${
+                  !isRightColumn ? "border-r border-white/10" : ""
+                } ${isTopRow ? "border-b border-white/10 lg:border-b-0" : ""} ${
+                  !isLast ? "lg:border-r" : ""
                 }`}
               >
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="text-label font-mono text-emerald-400/60">0{index + 1}</span>
+                {/* Arrow connector for mobile 2x2 grid */}
+                {index === 0 && (
+                  <div className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 lg:hidden">
+                    <ArrowRight className="w-3 h-3 text-emerald-400/60" />
+                  </div>
+                )}
+                {index === 1 && (
+                  <div className="absolute left-1/2 -bottom-2 -translate-x-1/2 z-10 lg:hidden">
+                    <ChevronDown className="w-3 h-3 text-emerald-400/60" />
+                  </div>
+                )}
+                {index === 2 && (
+                  <div className="absolute -right-2 top-1/2 -translate-y-1/2 z-10 lg:hidden">
+                    <ArrowRight className="w-3 h-3 text-emerald-400/60" />
+                  </div>
+                )}
+                
+                <div className="flex items-center gap-2 mb-2 sm:mb-4">
+                  <span className="text-[10px] sm:text-label font-mono text-emerald-400/60">0{index + 1}</span>
                   <div className="h-px flex-1 bg-white/10" />
                 </div>
                 
-                <Icon className="w-8 h-8 mb-4 text-white/40 group-hover:text-emerald-400 transition-colors duration-300" strokeWidth={1.5} />
+                <Icon className="w-6 h-6 sm:w-8 sm:h-8 mb-2 sm:mb-4 text-white/40 group-hover:text-emerald-400 transition-colors duration-300" strokeWidth={1.5} />
                 
-                <h3 className="text-base font-semibold text-white mb-2">
+                <h3 className="text-sm sm:text-base font-semibold text-white mb-1 sm:mb-2">
                   {phase.title}
                 </h3>
                 
-                <p className="text-white/50 text-body-sm leading-relaxed">
+                <p className="text-white/50 text-xs sm:text-body-sm leading-relaxed">
                   {phase.description}
                 </p>
               </div>

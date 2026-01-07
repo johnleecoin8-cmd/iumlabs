@@ -188,12 +188,12 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <div className="group rounded-xl sm:rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30 active:scale-[0.98]">
+    <div className="group rounded-lg sm:rounded-xl md:rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30 active:scale-[0.98]">
       {/* Image */}
       <Link
         to={`/projects/${project.slug}`}
         onClick={() => window.scrollTo(0, 0)}
-        className="block aspect-[16/10] sm:aspect-[4/3] overflow-hidden"
+        className="block aspect-[16/10] overflow-hidden"
       >
         <img 
           src={project.bgImage} 
@@ -203,33 +203,33 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
       </Link>
       
       {/* Content */}
-      <div className="p-3 sm:p-4 md:p-5">
-        <div className="flex items-center gap-3 mb-1.5 sm:mb-2">
-          <span className="text-[10px] sm:text-label uppercase tracking-wider font-medium text-muted-foreground">{project.category}</span>
+      <div className="p-2 sm:p-3 md:p-4 lg:p-5">
+        <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-1.5 md:mb-2">
+          <span className="text-[8px] sm:text-[10px] md:text-label uppercase tracking-wider font-medium text-muted-foreground truncate">{project.category}</span>
         </div>
         <Link
           to={`/projects/${project.slug}`}
           onClick={() => window.scrollTo(0, 0)}
         >
-          <h3 className="text-sm sm:text-body-lg font-semibold text-foreground mb-1.5 sm:mb-2 group-hover:text-primary transition-colors line-clamp-1">
+          <h3 className="text-xs sm:text-sm md:text-body-lg font-semibold text-foreground mb-1 sm:mb-1.5 md:mb-2 group-hover:text-primary transition-colors line-clamp-1">
             {project.name}
           </h3>
         </Link>
-        <p className="text-xs sm:text-body-sm text-foreground/80 font-medium mb-1.5 sm:mb-2 line-clamp-1">
+        <p className="text-[10px] sm:text-xs md:text-body-sm text-foreground/80 font-medium mb-1 sm:mb-1.5 md:mb-2 line-clamp-1">
           {project.result}
         </p>
-        <p className="text-xs sm:text-body-sm text-muted-foreground leading-relaxed line-clamp-2 mb-3 sm:mb-4">
+        <p className="text-[10px] sm:text-xs md:text-body-sm text-muted-foreground leading-relaxed line-clamp-2 mb-2 sm:mb-3 md:mb-4 hidden sm:block">
           {project.description}
         </p>
         
-        <div className="flex items-center justify-between gap-2 sm:gap-3">
+        <div className="flex items-center justify-between gap-1 sm:gap-2 md:gap-3">
           <Link
             to={`/projects/${project.slug}`}
             onClick={() => window.scrollTo(0, 0)}
-            className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-caption text-muted-foreground hover:text-primary transition-colors"
+            className="flex items-center gap-1 sm:gap-1.5 md:gap-2 text-[8px] sm:text-[10px] md:text-caption text-muted-foreground hover:text-primary transition-colors"
           >
-            <span className="hover:underline underline-offset-4">View case study</span>
-            <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 group-hover:translate-x-1 transition-transform" />
+            <span className="hover:underline underline-offset-4">View</span>
+            <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-3.5 md:h-3.5 group-hover:translate-x-1 transition-transform" />
           </Link>
           
           {project.websiteUrl && (
@@ -238,7 +238,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
               target="_blank"
               rel="noopener noreferrer"
               onClick={(e) => e.stopPropagation()}
-              className="flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-caption font-medium text-foreground/70 border border-border/50 rounded-full hover:border-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-all duration-300 active:scale-95"
+              className="hidden sm:flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-caption font-medium text-foreground/70 border border-border/50 rounded-full hover:border-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-all duration-300 active:scale-95"
             >
               <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
               <span>Website</span>
@@ -477,7 +477,7 @@ const Projects = () => {
             />
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 p-4 sm:p-6 md:p-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 p-3 sm:p-4 md:p-6 lg:p-8">
             {filteredCases.map((project, index) => (
               <ProjectCard 
                 key={project.slug} 

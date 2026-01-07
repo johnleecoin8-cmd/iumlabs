@@ -223,42 +223,42 @@ const Research = () => {
               <TrendingUp className="w-10 h-10 sm:w-12 sm:h-12 text-white/20 mx-auto mb-3 sm:mb-4" />
               <h3 className="text-lg sm:text-xl font-medium text-white mb-2">No articles yet</h3>
               <p className="text-sm sm:text-base text-white/60">Check back soon for our latest research and insights.</p>
-            </div> : <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            </div> : <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6">
               {currentPosts.map(post => <div key={post.id}>
                   <Link to={`/research/${post.slug}`} className="group block active:scale-[0.98]">
-                    <div className="relative hover:-translate-y-2 transition-transform duration-300">
+                    <div className="relative hover:-translate-y-1 sm:hover:-translate-y-2 transition-transform duration-300">
                       {/* Image */}
-                      <div className="aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden mb-3 sm:mb-4 border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative">
+                      <div className="aspect-[16/10] rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden mb-2 sm:mb-3 md:mb-4 border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative">
                         {post.image ? <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-400" /> : <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                            <TrendingUp className="w-8 h-8 sm:w-10 sm:h-10 text-primary/40" />
+                            <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary/40" />
                           </div>}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex items-center justify-between opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 translate-y-0 sm:translate-y-2 sm:group-hover:translate-y-0">
-                          <span className="text-white text-xs sm:text-sm font-medium">Read Article</span>
-                          <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary" />
+                        <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4 flex items-center justify-between opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300 translate-y-0 sm:translate-y-2 sm:group-hover:translate-y-0">
+                          <span className="text-white text-[10px] sm:text-xs md:text-sm font-medium">Read</span>
+                          <ArrowRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4 text-primary" />
                         </div>
                       </div>
                       
                       {/* Meta */}
-                      <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                        {post.category && <span className="px-1.5 sm:px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded text-[10px] sm:text-label border border-primary/20">
+                      <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 mb-1 sm:mb-2 md:mb-3">
+                        {post.category && <span className="px-1 sm:px-1.5 md:px-2 py-0.5 sm:py-1 bg-primary/10 text-primary rounded text-[8px] sm:text-[10px] md:text-label border border-primary/20 truncate max-w-[60px] sm:max-w-none">
                             {post.category}
                           </span>}
-                        <span className="text-white/40 text-[10px] sm:text-label flex items-center gap-1">
-                          <Clock className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
+                        <span className="text-white/40 text-[8px] sm:text-[10px] md:text-label flex items-center gap-0.5 sm:gap-1 whitespace-nowrap">
+                          <Clock className="w-2 h-2 sm:w-2.5 sm:h-2.5 md:w-3 md:h-3" />
                           {post.readTime}
                         </span>
                       </div>
                       
                       {/* Title */}
-                      <h3 className="text-sm sm:text-body-lg font-medium text-white leading-snug group-hover:text-primary transition-colors duration-300 mb-2 sm:mb-3 line-clamp-2">
+                      <h3 className="text-xs sm:text-sm md:text-body-lg font-medium text-white leading-snug group-hover:text-primary transition-colors duration-300 mb-1 sm:mb-2 md:mb-3 line-clamp-2">
                         {post.title}
                       </h3>
                       
                       {/* Author & Date */}
-                      <div className="flex items-center justify-between text-[10px] sm:text-label text-white/40">
-                        <span>{post.author}</span>
-                        <span>{post.date}</span>
+                      <div className="flex items-center justify-between text-[8px] sm:text-[10px] md:text-label text-white/40">
+                        <span className="truncate max-w-[50%]">{post.author}</span>
+                        <span className="whitespace-nowrap">{post.date}</span>
                       </div>
                     </div>
                   </Link>
