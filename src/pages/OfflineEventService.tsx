@@ -181,6 +181,7 @@ const OfflineEventService = () => {
       serviceTags={serviceTags}
       stats={stats}
       accentColor={ACCENT_COLOR}
+      videoSrc="/videos/offline-event-hero.mp4"
       deliverables={deliverables}
       faqItems={faqItems}
       currentSlug="offline-event"
