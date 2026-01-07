@@ -172,7 +172,7 @@ const Contact = () => {
           <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 w-full">
             <div className="max-w-5xl mx-auto text-center">
               {/* Main Headline */}
-              <h1 className="font-display text-display-hero font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6">
+              <h1 className="font-sans text-display-hero font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6">
                 <span className="text-white">Let's Build</span>
                 <br />
                 <span className="text-white/90">Something </span>

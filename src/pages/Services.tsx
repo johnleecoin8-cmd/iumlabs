@@ -255,7 +255,7 @@ const Services = () => {
             Services
           </span>
           
-          <h1 className="font-display text-display-hero font-light text-white leading-[1.05] tracking-tight mb-4">
+          <h1 className="font-sans text-display-hero font-light text-white leading-[1.05] tracking-tight mb-4">
             Gr<span className="serif-italic text-emerald-400">o</span>wth
             <br />
             <span className="text-white/60">Solutions</span>
