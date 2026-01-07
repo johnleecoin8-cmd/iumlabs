@@ -14,6 +14,8 @@ import polygonConnectImg from '@/assets/campaigns/polygon-connect.png';
 import storyOriginImg from '@/assets/campaigns/story-origin-summit.jpg';
 import peaqSummitImg from '@/assets/campaigns/peaq-summit.jpg';
 import mantraPartyImg from '@/assets/campaigns/mantra-party.jpg';
+import iumLabsLogo from '@/assets/ium-labs-logo-about.png';
+import seoulSkyline from '@/assets/seoul-skyline.jpg';
 
 // Custom easing as tuple for TypeScript
 const customEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -75,27 +77,36 @@ const InlineImage = ({ src, alt }: { src: string; alt: string }) => (
     <img 
       src={src} 
       alt={alt} 
-      className="h-16 md:h-20 lg:h-24 w-auto rounded-lg object-cover inline-block transition-all duration-300 group-hover/img:scale-105 group-hover/img:shadow-xl group-hover/img:shadow-white/10"
+      className="h-16 md:h-20 lg:h-28 w-auto rounded-lg object-cover inline-block transition-all duration-300 group-hover/img:scale-105 group-hover/img:shadow-xl group-hover/img:shadow-white/10"
     />
   </span>
 );
 
-// Gallery Image Component
-const GalleryImage = ({ src, alt, delay }: { src: string; alt: string; delay: number }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 60 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.8, delay, ease: customEase }}
-    className="overflow-hidden rounded-lg"
-  >
-    <img 
-      src={src} 
-      alt={alt} 
-      className="w-full h-48 md:h-64 lg:h-80 object-cover transition-transform duration-700 hover:scale-105"
-    />
-  </motion.div>
-);
+// Parallax Image Component
+const ParallaxImage = ({ 
+  src, 
+  alt, 
+  className,
+  yOffset = 100
+}: { 
+  src: string; 
+  alt: string; 
+  className?: string;
+  yOffset?: number;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [yOffset, -yOffset]);
+
+  return (
+    <motion.div ref={ref} style={{ y }} className={className}>
+      <img src={src} alt={alt} className="w-full h-full object-cover" />
+    </motion.div>
+  );
+};
 
 // Network Node Component
 const NetworkNode = ({ x, y, label, delay }: { x: string; y: string; label: string; delay: number }) => (
@@ -125,14 +136,36 @@ const GTMService = () => {
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
-  const companyInfoRef = useRef<HTMLDivElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const galleryRef = useRef<HTMLDivElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
   
-  const { scrollYProgress } = useScroll({
-    target: companyInfoRef,
-    offset: ["start start", "end end"]
+  // Hero parallax
+  const { scrollYProgress: heroProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"]
   });
+  const heroLogoY = useTransform(heroProgress, [0, 1], [0, -150]);
+  const heroLogoOpacity = useTransform(heroProgress, [0, 0.5], [0.08, 0]);
+  const heroImageY = useTransform(heroProgress, [0, 1], [0, 100]);
+  const heroImageScale = useTransform(heroProgress, [0, 1], [1, 0.9]);
 
-  const backgroundOpacity = useTransform(scrollYProgress, [0, 0.3], [0.2, 0.4]);
+  // Gallery overlapping parallax
+  const { scrollYProgress: galleryProgress } = useScroll({
+    target: galleryRef,
+    offset: ["start end", "end start"]
+  });
+  const image1Y = useTransform(galleryProgress, [0, 1], [100, -50]);
+  const image2Y = useTransform(galleryProgress, [0, 1], [150, -100]);
+  const image3Y = useTransform(galleryProgress, [0, 1], [200, -150]);
+
+  // Stats background logo
+  const { scrollYProgress: statsProgress } = useScroll({
+    target: statsRef,
+    offset: ["start end", "end start"]
+  });
+  const statsLogoScale = useTransform(statsProgress, [0, 1], [0.9, 1.15]);
+  const statsLogoOpacity = useTransform(statsProgress, [0, 0.3, 0.7, 1], [0, 0.04, 0.04, 0]);
 
   return (
     <div ref={containerRef} className="bg-[#0A0A0A] text-white min-h-screen overflow-x-hidden">
@@ -145,8 +178,8 @@ const GTMService = () => {
       />
       <Navbar />
 
-      {/* Hero Section - 100vh */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Hero Section - Innocean Style with Featured Image & Large Logo */}
+      <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Video Background */}
         <video
           autoPlay
@@ -160,11 +193,49 @@ const GTMService = () => {
         
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0A0A]/50 to-[#0A0A0A]" />
 
+        {/* Featured Image - Top Right with Parallax */}
+        <motion.div
+          style={{ y: heroImageY, scale: heroImageScale }}
+          className="absolute top-20 right-6 md:top-24 md:right-12 lg:top-28 lg:right-20 z-20"
+        >
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.5, ease: customEase }}
+            className="relative"
+          >
+            <img 
+              src={peaqSummitImg} 
+              alt="Featured Project" 
+              className="w-32 h-44 md:w-48 md:h-64 lg:w-64 lg:h-80 object-cover rounded-lg shadow-2xl shadow-black/50"
+            />
+            <div className="absolute -bottom-4 -left-4 w-20 h-28 md:w-28 md:h-36 lg:w-32 lg:h-44 overflow-hidden rounded-lg shadow-xl shadow-black/50">
+              <img 
+                src={storyOriginImg} 
+                alt="Project Detail" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Large Logo at Bottom with Parallax */}
+        <motion.div
+          style={{ y: heroLogoY, opacity: heroLogoOpacity }}
+          className="absolute bottom-0 left-0 right-0 pointer-events-none z-10"
+        >
+          <img 
+            src={iumLabsLogo} 
+            alt="ium Labs" 
+            className="w-full max-w-5xl mx-auto opacity-100"
+          />
+        </motion.div>
+
         <motion.div
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
-          className="relative z-10 text-center px-6 max-w-6xl mx-auto"
+          className="relative z-10 text-center px-6 max-w-5xl mx-auto"
         >
           <motion.p 
             variants={slideUp}
@@ -175,7 +246,7 @@ const GTMService = () => {
           
           <motion.h1 
             variants={slideUp}
-            className="text-5xl md:text-7xl lg:text-9xl font-light tracking-tight mb-8"
+            className="text-5xl md:text-7xl lg:text-8xl font-light tracking-tight mb-8"
           >
             <span className="block">한국 시장</span>
             <span className="block text-white/60">진출 전략</span>
@@ -194,7 +265,7 @@ const GTMService = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 z-20"
         >
           <motion.div
             animate={{ y: [0, 10, 0] }}
@@ -207,9 +278,23 @@ const GTMService = () => {
         </motion.div>
       </section>
 
-      {/* GTM Strategy Section - Value Proposition */}
+      {/* GTM Strategy Section - Value Proposition with Floating Images */}
       <section className="min-h-screen flex items-center justify-center px-6 py-32 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] to-[#0F0F0F]" />
+        
+        {/* Floating Background Images with Parallax */}
+        <ParallaxImage 
+          src={storyOriginImg}
+          alt="Background"
+          className="absolute top-20 left-8 w-32 h-44 md:w-48 md:h-64 rounded-lg overflow-hidden opacity-20 hidden lg:block"
+          yOffset={80}
+        />
+        <ParallaxImage 
+          src={mantraPartyImg}
+          alt="Background"
+          className="absolute bottom-32 right-12 w-40 h-52 md:w-56 md:h-72 rounded-lg overflow-hidden opacity-15 hidden lg:block"
+          yOffset={120}
+        />
         
         <motion.div
           initial="hidden"
@@ -254,36 +339,103 @@ const GTMService = () => {
         </motion.div>
       </section>
 
-      {/* GTM Success Cases - Gallery */}
-      <section ref={companyInfoRef} className="relative bg-[#0A0A0A]">
-        {/* Gallery Section */}
-        <div className="px-6 py-24 md:py-32">
+      {/* GTM Success Cases - Overlapping Gallery with Parallax */}
+      <section className="relative bg-[#0A0A0A]">
+        {/* Gallery Section with Overlapping Images */}
+        <div ref={galleryRef} className="px-6 py-24 md:py-32">
           <div className="max-w-7xl mx-auto">
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="text-white/50 tracking-[0.3em] uppercase text-sm mb-12"
+              className="text-white/50 tracking-[0.3em] uppercase text-sm mb-16"
             >
               GTM Success Cases
             </motion.p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-              <GalleryImage src={bnbEventImg} alt="BNB Chain Korea Launch" delay={0} />
-              <GalleryImage src={kucoinCampaignImg} alt="KuCoin Campaign" delay={0.15} />
-              <GalleryImage src={polygonConnectImg} alt="Polygon Connect" delay={0.3} />
+            
+            {/* Overlapping Parallax Gallery */}
+            <div className="relative h-[500px] md:h-[600px] lg:h-[700px]">
+              {/* Image 1 - Slowest parallax, back layer */}
+              <motion.div 
+                style={{ y: image1Y }}
+                className="absolute left-0 top-0 w-[60%] md:w-[45%] z-10"
+              >
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: customEase }}
+                >
+                  <img 
+                    src={bnbEventImg} 
+                    alt="BNB Chain Korea Launch" 
+                    className="w-full h-64 md:h-80 lg:h-96 object-cover rounded-lg shadow-2xl shadow-black/50"
+                  />
+                  <p className="text-white/50 text-sm mt-4 font-light">BNB Chain Korea Launch Event</p>
+                </motion.div>
+              </motion.div>
+              
+              {/* Image 2 - Medium parallax, middle layer */}
+              <motion.div 
+                style={{ y: image2Y }}
+                className="absolute right-0 md:right-[5%] top-20 md:top-16 w-[55%] md:w-[40%] z-20"
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.15, ease: customEase }}
+                >
+                  <img 
+                    src={kucoinCampaignImg} 
+                    alt="KuCoin Campaign" 
+                    className="w-full h-56 md:h-72 lg:h-80 object-cover rounded-lg shadow-2xl shadow-black/50"
+                  />
+                  <p className="text-white/50 text-sm mt-4 font-light">KuCoin Korea Campaign</p>
+                </motion.div>
+              </motion.div>
+              
+              {/* Image 3 - Fastest parallax, front layer */}
+              <motion.div 
+                style={{ y: image3Y }}
+                className="absolute left-[15%] md:left-[25%] bottom-0 w-[50%] md:w-[35%] z-30"
+              >
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.3, ease: customEase }}
+                >
+                  <img 
+                    src={polygonConnectImg} 
+                    alt="Polygon Connect" 
+                    className="w-full h-48 md:h-64 lg:h-72 object-cover rounded-lg shadow-2xl shadow-black/50"
+                  />
+                  <p className="text-white/50 text-sm mt-4 font-light">Polygon Connect Seoul</p>
+                </motion.div>
+              </motion.div>
             </div>
           </div>
         </div>
 
-        {/* GTM Performance Stats */}
-        <div className="relative min-h-screen">
+        {/* GTM Performance Stats with Large Background Logo */}
+        <div ref={statsRef} className="relative min-h-screen">
+          {/* Large Background Logo - Watermark Style */}
+          <motion.div
+            style={{ scale: statsLogoScale, opacity: statsLogoOpacity }}
+            className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          >
+            <img 
+              src={iumLabsLogo} 
+              alt="" 
+              className="w-[150%] max-w-none"
+            />
+          </motion.div>
+
           {/* Video Background */}
           <div className="absolute inset-0 overflow-hidden">
-            <motion.div 
-              style={{ opacity: backgroundOpacity }}
-              className="absolute inset-0"
-            >
+            <div className="absolute inset-0 opacity-20">
               <video
                 autoPlay
                 muted
@@ -293,7 +445,7 @@ const GTMService = () => {
               >
                 <source src="/videos/services-background.mp4" type="video/mp4" />
               </video>
-            </motion.div>
+            </div>
             <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-[#0A0A0A]/90 to-[#0A0A0A]" />
           </div>
 
@@ -343,9 +495,19 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* What We Deliver Section */}
-      <section id="approach" className="py-32 px-6 bg-[#0A0A0A] relative">
-        <div className="max-w-6xl mx-auto">
+      {/* What We Deliver Section with Background Image */}
+      <section id="approach" className="py-32 px-6 relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src={seoulSkyline} 
+            alt="" 
+            className="w-full h-full object-cover opacity-[0.07]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] via-transparent to-[#0A0A0A]" />
+        </div>
+
+        <div className="max-w-6xl mx-auto relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -398,7 +560,7 @@ const GTMService = () => {
                   title: 'Exchange Relations',
                   desc: '한국 주요 거래소 관계 구축 및 상장 지원'
                 }
-              ].map((item, index) => (
+              ].map((item) => (
                 <motion.div
                   key={item.num}
                   variants={slideUp}
@@ -420,6 +582,16 @@ const GTMService = () => {
 
       {/* Global Network Section - Full Screen Dark Background */}
       <section className="min-h-screen flex items-center justify-center px-6 py-32 bg-[#050505] relative overflow-hidden">
+        {/* Seoul Skyline Background */}
+        <div className="absolute inset-0">
+          <img 
+            src={seoulSkyline} 
+            alt="" 
+            className="w-full h-full object-cover opacity-[0.12]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-[#050505]" />
+        </div>
+
         {/* Subtle grid pattern background */}
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: 'radial-gradient(circle at 1px 1px, white 1px, transparent 0)',
@@ -573,7 +745,7 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* CTA Section - Launch in Korea */}
+      {/* CTA Section - Launch in Korea with 3 Inline Images */}
       <section className="min-h-screen flex items-center px-6 py-32 relative">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
@@ -599,7 +771,9 @@ const GTMService = () => {
                 <span className="text-white/90">한국 시장 진입,</span>
                 <br />
                 <InlineImage src={storyOriginImg} alt="Launch" />
-                <span className="text-white/90">처음부터 끝까지</span>
+                <span className="text-white/90">처음부터</span>
+                <InlineImage src={peaqSummitImg} alt="Start" />
+                <span className="text-white/90">끝까지</span>
                 <br />
                 <span className="text-white/90">함께</span>
                 <InlineImage src={mantraPartyImg} alt="Together" />
