@@ -11,7 +11,7 @@ const Footer = () => {
       </div>
       
       {/* Copyright & SEO Keywords */}
-      <div className="w-full px-3 sm:px-6 pb-4 sm:pb-8 text-center space-y-1.5 sm:space-y-2">
+      <div className="w-full px-3 sm:px-6 pb-2 sm:pb-4 text-center space-y-1 sm:space-y-1.5">
         <p className="text-xs sm:text-sm text-muted-foreground">
           © 2026 ium labs (이음 랩스). All rights reserved.
         </p>
