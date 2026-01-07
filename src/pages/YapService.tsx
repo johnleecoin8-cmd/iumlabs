@@ -245,6 +245,7 @@ const YapService = () => {
       stats={stats}
       accentColor={ACCENT_COLOR}
       videoSrc="/videos/yap-hero.mp4"
+      posterSrc="/images/posters/yap-hero.jpg"
       processSteps={processSteps}
       deliverables={deliverables}
       faqItems={faqItems}

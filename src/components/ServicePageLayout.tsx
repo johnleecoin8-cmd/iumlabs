@@ -2,6 +2,7 @@ import { useEffect, useState, ReactNode } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight, ChevronDown, LucideIcon, ArrowLeft, Check, ChevronRight } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -100,6 +101,7 @@ interface ServicePageLayoutProps {
   stats: ServiceStat[];
   accentColor: string;
   videoSrc?: string;
+  posterSrc?: string;
   
   // Process Section (optional - can be replaced by custom children)
   processSteps?: ProcessStep[];
@@ -167,6 +169,7 @@ const ServicePageLayout = ({
   stats,
   accentColor,
   videoSrc = "/videos/services-background.mp4",
+  posterSrc,
   processSteps,
   deliverables,
   faqItems,
@@ -175,6 +178,11 @@ const ServicePageLayout = ({
 }: ServicePageLayoutProps) => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState(false);
+  const isMobile = useIsMobile();
+
+  // Generate poster path from video path if not provided
+  const defaultPosterSrc = posterSrc || (videoSrc ? videoSrc.replace('/videos/', '/images/posters/').replace('.mp4', '.jpg') : '/images/hero-poster.jpg');
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 800);
@@ -209,26 +217,38 @@ const ServicePageLayout = ({
       {/* Hero Section */}
       <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]" id="hero">
         <div className="relative min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
-          {/* Background Layer - Video */}
+          {/* Background Layer - Video with Fallback */}
           <div className="absolute inset-0 overflow-hidden">
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              poster="/images/hero-poster.jpg"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ filter: "brightness(0.35)" }}
-              onLoadedMetadata={(e) => {
-                e.currentTarget.currentTime = 0;
+            {/* Fallback Image - 즉시 표시 */}
+            <div 
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ 
+                backgroundImage: `url('${defaultPosterSrc}')`,
+                filter: "brightness(0.35)"
               }}
-            >
-              <source src={videoSrc} type="video/mp4" />
-            </video>
+            />
             
-            {/* Dark overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+            {/* Video - 데스크탑에서만, 로딩 후 fade-in */}
+            {!isMobile && (
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                poster={defaultPosterSrc}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+                  videoLoaded ? 'opacity-100' : 'opacity-0'
+                }`}
+                style={{ filter: "brightness(0.35)" }}
+                onLoadedData={() => setVideoLoaded(true)}
+              >
+                <source src={videoSrc} type="video/mp4" />
+              </video>
+            )}
+            
+            {/* Dark overlay gradient - 강도 조절 */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.5)] via-[hsl(0,0%,4%,0.2)] to-[hsl(0,0%,4%,0.95)]" />
             
             {/* Accent color overlay */}
             <div 

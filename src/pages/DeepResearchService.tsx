@@ -146,7 +146,7 @@ const DeepResearchService = () => {
     }, 2500);
     return () => clearInterval(interval);
   }, []);
-  return <ServicePageLayout serviceName="Deep Research" serviceTitle="Deep Research" serviceSubtitle="& Distribution" serviceDescription="Data-driven market research tailored for the Korean crypto market, distributed through our media and KOL network to establish your brand authority." serviceIcon={FileText} serviceTags={serviceTags} stats={stats} processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} accentColor={ACCENT_COLOR} videoSrc="/videos/deep-research-hero.mp4" currentSlug="deep-research">
+  return <ServicePageLayout serviceName="Deep Research" serviceTitle="Deep Research" serviceSubtitle="& Distribution" serviceDescription="Data-driven market research tailored for the Korean crypto market, distributed through our media and KOL network to establish your brand authority." serviceIcon={FileText} serviceTags={serviceTags} stats={stats} processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} accentColor={ACCENT_COLOR} videoSrc="/videos/deep-research-hero.mp4" posterSrc="/images/posters/deep-research-hero.jpg" currentSlug="deep-research">
       {/* Research Showcase Section */}
       <section className="py-12 md:py-16 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />

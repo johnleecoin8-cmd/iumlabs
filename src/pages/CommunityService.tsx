@@ -188,7 +188,7 @@ const CommunityService = () => {
     }, 2000);
     return () => clearInterval(interval);
   }, [currentMessages.length]);
-  return <ServicePageLayout serviceName="Community Management" serviceTitle="Community" serviceSubtitle="Management" serviceDescription="Build thriving Discord & Telegram communities with AI-powered automation, gamified engagement, and 24/7 moderation." serviceIcon={Users} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} videoSrc="/videos/community-hero.mp4" processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="community">
+  return <ServicePageLayout serviceName="Community Management" serviceTitle="Community" serviceSubtitle="Management" serviceDescription="Build thriving Discord & Telegram communities with AI-powered automation, gamified engagement, and 24/7 moderation." serviceIcon={Users} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} videoSrc="/videos/community-hero.mp4" posterSrc="/images/posters/community-hero.jpg" processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="community">
       {/* Platform Preview Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
