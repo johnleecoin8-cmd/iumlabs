@@ -74,15 +74,18 @@ const ProjectDetail = () => {
   
   const websiteUrl = dbProject?.website_url || '';
   
-  const project: ProjectData | null = dbProject ? {
+  const project: (ProjectData & { client_name?: string; duration?: string; featureImage?: string }) | null = dbProject ? {
     name: dbProject.name,
     logo: dbProject.logo_url || fallbackProject?.logo || '',
     bgImage: heroBackgroundImage,
+    featureImage: fallbackProject?.featureImage,
     category: dbProject.category || '',
     result: dbProject.result || '',
     glowColor: dbProject.glow_color || '#00D4FF',
     description: dbProject.description || '',
     challenge: dbProject.challenge || fallbackProject?.challenge || '',
+    client_name: dbProject.client_name || fallbackProject?.name,
+    duration: dbProject.duration || fallbackProject?.duration,
     metrics: dbMetrics && dbMetrics.length > 0 
       ? dbMetrics.map(m => ({ value: m.value, label: m.label }))
       : fallbackProject?.metrics || [],
@@ -94,7 +97,7 @@ const ProjectDetail = () => {
       ? dbGallery.map(g => ({ src: g.src, title: g.title || '', description: g.description || '' }))
       : fallbackProject?.gallery || [],
     news: fallbackProject?.news || [],
-  } : fallbackProject;
+  } : (fallbackProject ? { ...fallbackProject, client_name: fallbackProject.name, featureImage: fallbackProject.featureImage } : null);
 
   // Dynamic page meta for SEO
   useEffect(() => {
