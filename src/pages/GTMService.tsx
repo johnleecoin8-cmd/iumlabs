@@ -122,7 +122,7 @@ const stats: ServiceStat[] = [
   { value: 15, label: "Projects Launched", suffix: "+" },
   { value: 3, label: "TGE Volume Supported", prefix: "$", suffix: "M+" },
   { value: 4, label: "Avg Launch Timeline", suffix: " weeks" },
-  { value: 95, label: "Client Retention", suffix: "%" },
+  { value: 600, label: "Client Retention", suffix: "%+" },
 ];
 
 const deliverables: Deliverable[] = [
