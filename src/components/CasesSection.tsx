@@ -35,6 +35,7 @@ import zkpassCampaign from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import synfuturesCampaign from "@/assets/campaigns/synfutures-billboard.jpg";
 import fogoCampaign from "@/assets/campaigns/fogo-fest.avif";
 import openledgerCampaign from "@/assets/campaigns/openledger-interview.jpg";
+import openledgerHero from "@/assets/campaigns/openledger-hero.jpg";
 
 // Map gallery `src` (stored as file path strings) to bundled campaign assets
 const campaignAssetByFile: Record<string, string> = {
@@ -53,6 +54,7 @@ const campaignAssetByFile: Record<string, string> = {
   "synfutures-billboard.jpg": synfuturesCampaign,
   "fogo-fest.avif": fogoCampaign,
   "openledger-interview.jpg": openledgerCampaign,
+  "openledger-hero.jpg": openledgerHero,
 };
 
 const resolveGallerySrcToAsset = (src?: string | null) => {
