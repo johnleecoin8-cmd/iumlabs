@@ -25,7 +25,7 @@ import polygonBg from '@/assets/projects/polygon-bg.jpg';
 const customEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 // ============================================
-// SECTION 1: INTRO - Hero with scroll-based title separation
+// SECTION 1: INTRO - monks.com style oversized typography
 // ============================================
 const IntroSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -34,17 +34,16 @@ const IntroSection = () => {
     offset: ["start start", "end start"]
   });
   
-  const titleTopY = useTransform(scrollYProgress, [0, 0.5], [0, -120]);
-  const titleBottomY = useTransform(scrollYProgress, [0, 0.5], [0, 120]);
   const opacity = useTransform(scrollYProgress, [0, 0.4], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.85]);
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const titleY = useTransform(scrollYProgress, [0, 0.5], [0, 100]);
   const bgY = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
   return (
     <motion.section 
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ opacity, scale }}
+      style={{ opacity }}
     >
       {/* Animated gradient background */}
       <motion.div 
@@ -59,68 +58,38 @@ const IntroSection = () => {
         loop
         muted
         playsInline
-        className="absolute inset-0 w-full h-full object-cover opacity-30 mix-blend-overlay"
+        className="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-overlay"
         style={{ y: bgY }}
       />
-      
-      {/* Subtle grid pattern */}
-      <div className="absolute inset-0 opacity-10" style={{
-        backgroundImage: `linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-                          linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)`,
-        backgroundSize: '60px 60px'
-      }} />
       
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80" />
       
-      {/* Content */}
-      <div className="relative z-10 text-center px-4">
-        {/* Label */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="mb-8"
-        >
-          <span className="text-indigo-300/60 text-xs md:text-sm tracking-[0.4em] uppercase font-medium">
-            Go-To-Market Strategy
-          </span>
-        </motion.div>
-        
-        {/* Title with scroll separation effect */}
-        <div className="space-y-0 md:space-y-2">
-          <div className="overflow-hidden">
-            <motion.h1 
-              className="text-[14vw] md:text-[11vw] leading-[0.85] font-extralight text-white/50"
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              style={{ y: titleTopY }}
-              transition={{ duration: 1.2, ease: customEase, delay: 0.1 }}
-            >
-              한국 시장
-            </motion.h1>
-          </div>
-          <div className="overflow-hidden">
-            <motion.h1 
-              className="text-[14vw] md:text-[11vw] leading-[0.85] font-black text-white"
-              initial={{ y: "110%" }}
-              animate={{ y: 0 }}
-              style={{ y: titleBottomY }}
-              transition={{ duration: 1.2, ease: customEase, delay: 0.2 }}
-            >
-              진출 전략
-            </motion.h1>
-          </div>
+      {/* Content - monks style oversized */}
+      <motion.div 
+        className="relative z-10 text-center px-4 w-full"
+        style={{ scale, y: titleY }}
+      >
+        {/* Oversized GTM */}
+        <div className="overflow-hidden">
+          <motion.h1 
+            className="text-[35vw] md:text-[30vw] lg:text-[25vw] leading-[0.8] font-black text-white tracking-tighter"
+            initial={{ y: "100%" }}
+            animate={{ y: 0 }}
+            transition={{ duration: 1.2, ease: customEase }}
+          >
+            GTM
+          </motion.h1>
         </div>
         
         {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 1 }}
-          className="text-white/40 text-base md:text-xl mt-8 max-w-lg mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="text-white/50 text-sm md:text-lg mt-4 tracking-[0.2em] uppercase"
         >
-          Launch in Korea, Scale Globally
+          Accelerating growth through Korean Market Entry
         </motion.p>
         
         {/* Scroll indicator */}
@@ -137,8 +106,53 @@ const IntroSection = () => {
             <div className="w-px h-20 bg-gradient-to-b from-indigo-400/60 to-transparent" />
           </motion.div>
         </motion.div>
-      </div>
+      </motion.div>
     </motion.section>
+  );
+};
+
+// ============================================
+// SECTION 1.5: INTERACTIVE TEXT - "What can we do for you?"
+// ============================================
+const InteractiveTextSection = () => {
+  const words = ["What", "can", "we", "do", "for", "you", "?"];
+  
+  return (
+    <section className="relative py-24 md:py-32 bg-black overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-20">
+        <motion.div 
+          className="flex flex-wrap justify-center gap-x-4 md:gap-x-6 gap-y-2"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          {words.map((word, i) => (
+            <motion.span
+              key={i}
+              className="text-4xl md:text-6xl lg:text-8xl font-black text-white/20 hover:text-violet-400 transition-colors duration-300 cursor-default"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              whileHover={{ scale: 1.1, color: "#a78bfa" }}
+            >
+              {word}
+            </motion.span>
+          ))}
+        </motion.div>
+        
+        {/* Korean subtitle */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.8 }}
+          className="text-center text-white/40 text-lg md:text-xl mt-8"
+        >
+          어떻게 도와드릴까요?
+        </motion.p>
+      </div>
+    </section>
   );
 };
 
@@ -231,50 +245,44 @@ const ChallengeSection = () => {
 };
 
 // ============================================
-// SECTION 3: APPROACH - Process Steps (Compact Grid)
+// SECTION 3: APPROACH - monks.com style numbered list
 // ============================================
 const ApproachSection = () => {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  
   const steps = [
     {
       number: "01",
       title: "Discovery",
       subtitle: "시장 분석",
       description: "심층 시장 리서치, 경쟁사 분석, 타겟 오디언스 정의",
-      color: "from-slate-900 to-indigo-900",
-      accent: "text-indigo-400",
-      borderColor: "border-indigo-500/30",
+      image: storyBg,
     },
     {
       number: "02", 
       title: "Strategy",
       subtitle: "전략 수립",
       description: "맞춤형 GTM 프레임워크, KPI 설정, 로드맵 개발",
-      color: "from-indigo-900 to-violet-900",
-      accent: "text-violet-400",
-      borderColor: "border-violet-500/30",
+      image: peaqBg,
     },
     {
       number: "03",
       title: "Execution",
       subtitle: "실행 단계",
       description: "PR, 커뮤니티, KOL, 이벤트 채널 통합 캠페인 실행",
-      color: "from-violet-900 to-orange-900/80",
-      accent: "text-orange-400",
-      borderColor: "border-orange-500/30",
+      image: mantraBg,
     },
     {
       number: "04",
       title: "Scale",
       subtitle: "확장 및 성장",
       description: "퍼포먼스 최적화, 시장 확장, 지속 가능한 성장 가속화",
-      color: "from-orange-900/80 to-teal-900",
-      accent: "text-teal-400",
-      borderColor: "border-teal-500/30",
+      image: saharaAiBg,
     }
   ];
 
   return (
-    <section className="relative py-16 md:py-20 bg-gradient-to-b from-indigo-950/80 to-slate-900">
+    <section className="relative py-16 md:py-24 bg-black">
       <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-20">
         {/* Header */}
         <motion.div
@@ -282,55 +290,84 @@ const ApproachSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="grid md:grid-cols-2 gap-6 items-end mb-10"
+          className="mb-12 md:mb-16"
         >
-          <div>
-            <span className="text-violet-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">Our Approach</span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mt-3 leading-tight">
-              체계적인 <span className="text-violet-400">4단계</span>
-            </h2>
-          </div>
-          <p className="text-white/50 text-base md:text-lg leading-relaxed max-w-lg">
-            검증된 프로세스를 통해 한국 시장 진출을 성공으로 이끕니다.
-          </p>
+          <span className="text-violet-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">Solutions</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mt-3 leading-tight">
+            Our Approach
+          </h2>
         </motion.div>
         
-        {/* 2x2 Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        {/* monks-style numbered list */}
+        <div className="space-y-0">
           {steps.map((step, index) => (
             <motion.div 
               key={step.number}
-              className={`relative h-[200px] md:h-[220px] rounded-2xl bg-gradient-to-br ${step.color} border ${step.borderColor} overflow-hidden group cursor-pointer`}
-              initial={{ opacity: 0, y: 30 }}
+              className="group cursor-pointer border-t border-white/10 last:border-b"
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              whileHover={{ y: -5, scale: 1.02 }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <div className="h-full flex items-end p-6 md:p-8">
-                {/* Large number background */}
-                <span 
-                  className={`absolute top-2 right-4 text-[80px] md:text-[100px] font-black leading-none ${step.accent} opacity-10`}
+              <div className="flex items-center gap-6 md:gap-12 py-6 md:py-8">
+                {/* Large number */}
+                <motion.span 
+                  className="text-[60px] md:text-[100px] font-black leading-none text-white/10 w-[80px] md:w-[140px] flex-shrink-0 transition-colors duration-500"
+                  animate={{ 
+                    color: hoveredIndex === index ? "rgba(167, 139, 250, 0.4)" : "rgba(255, 255, 255, 0.1)"
+                  }}
                 >
                   {step.number}
-                </span>
+                </motion.span>
+                
+                {/* Image - shows on hover */}
+                <motion.div 
+                  className="hidden md:block relative w-[120px] h-[90px] rounded-lg overflow-hidden flex-shrink-0"
+                  animate={{
+                    opacity: hoveredIndex === index ? 1 : 0,
+                    scale: hoveredIndex === index ? 1 : 0.8,
+                  }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <img 
+                    src={step.image} 
+                    alt={step.title}
+                    className="w-full h-full object-cover"
+                  />
+                </motion.div>
                 
                 {/* Content */}
-                <div className="relative z-10 space-y-2">
-                  <span className={`text-xs tracking-wider uppercase ${step.accent}`}>
+                <div className="flex-1 min-w-0">
+                  <span className="text-violet-400/60 text-xs tracking-wider uppercase">
                     {step.subtitle}
                   </span>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white">
+                  <h3 className="text-xl md:text-3xl font-bold text-white mt-1 group-hover:text-violet-300 transition-colors duration-300">
                     {step.title}
                   </h3>
-                  <p className="text-white/50 text-sm md:text-base max-w-sm leading-relaxed">
+                  <motion.p 
+                    className="text-white/40 text-sm md:text-base mt-2 max-w-lg"
+                    animate={{
+                      opacity: hoveredIndex === index ? 1 : 0.6,
+                    }}
+                  >
                     {step.description}
-                  </p>
+                  </motion.p>
                 </div>
+                
+                {/* Arrow */}
+                <motion.div 
+                  className="text-white/20 group-hover:text-violet-400 transition-colors duration-300"
+                  animate={{
+                    x: hoveredIndex === index ? 10 : 0,
+                  }}
+                >
+                  <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </motion.div>
               </div>
-              
-              {/* Hover glow effect */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-white/5 to-transparent" />
             </motion.div>
           ))}
         </div>
@@ -697,87 +734,143 @@ const NetworkSection = () => {
 };
 
 // ============================================
-// SECTION 5.5: PROJECT SHOWCASE
+// SECTION 5.5: CLIENT STORIES - monks.com text list style
 // ============================================
-const ProjectShowcaseSection = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  
+const ClientStoriesSection = () => {
   const projects = [
-    { name: "Story Protocol", year: "2025", image: storyBg, slug: "story-protocol" },
-    { name: "peaq", year: "2024", image: peaqBg, slug: "peaq" },
-    { name: "Sahara AI", year: "2024", image: saharaAiBg, slug: "sahara-ai" },
-    { name: "Bybit", year: "2024", image: bybitBg, slug: "bybit" },
+    { name: "Story Protocol", subtitle: "Korea Launch Campaign", year: "2025", slug: "story-protocol" },
+    { name: "peaq", subtitle: "Web3 Infrastructure GTM", year: "2024", slug: "peaq" },
+    { name: "MANTRA", subtitle: "Full-Stack Market Entry", year: "2024", slug: "mantra" },
+    { name: "Sahara AI", subtitle: "AI + Blockchain Campaign", year: "2024", slug: "sahara-ai" },
+    { name: "Bybit", subtitle: "Exchange Branding Korea", year: "2024", slug: "bybit" },
+    { name: "KuCoin", subtitle: "Community & Events", year: "2024", slug: "kucoin" },
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-teal-950/50 via-slate-900 to-violet-950/50">
-      <div className="px-4 md:px-12 lg:px-20 mb-12 md:mb-16 max-w-7xl mx-auto">
+    <section className="py-16 md:py-24 bg-black">
+      <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-20">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
+          className="flex justify-between items-end mb-12"
         >
-          <span className="text-violet-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">Selected Work</span>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mt-4">
-            프로젝트 <span className="text-violet-400">갤러리</span>
-          </h2>
-        </motion.div>
-      </div>
-      
-      <div className="flex flex-col md:flex-row h-auto md:h-[55vh] lg:h-[65vh]">
-        {projects.map((project, index) => (
-          <Link
-            key={project.slug}
-            to={`/projects/${project.slug}`}
-            className="relative h-[35vh] md:h-full overflow-hidden cursor-pointer border-b md:border-b-0 md:border-r border-white/5 last:border-0"
-            style={{
-              flex: hoveredIndex === index ? 2.5 : hoveredIndex !== null ? 0.6 : 1,
-              transition: "flex 0.7s cubic-bezier(0.16, 1, 0.3, 1)"
-            }}
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
+          <div>
+            <span className="text-violet-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">Client Stories</span>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mt-3">
+              Selected Work
+            </h2>
+          </div>
+          <Link 
+            to="/projects" 
+            className="text-white/50 hover:text-violet-400 transition-colors text-sm tracking-wider uppercase hidden md:block"
           >
-            {/* Background image */}
-            <motion.div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${project.image})` }}
-              animate={{ 
-                scale: hoveredIndex === index ? 1.1 : 1 
-              }}
-              transition={{ duration: 0.7, ease: customEase }}
-            />
-            
-            {/* Gradient overlay */}
-            <div className={`absolute inset-0 transition-all duration-700 ${
-              hoveredIndex === index 
-                ? 'bg-gradient-to-t from-black/80 via-black/30 to-violet-950/20' 
-                : 'bg-gradient-to-t from-black/80 via-black/60 to-black/40'
-            }`} />
-            
-            {/* Content */}
-            <motion.div 
-              className="absolute bottom-0 left-0 right-0 p-6 md:p-8"
-              animate={{ 
-                opacity: hoveredIndex === null || hoveredIndex === index ? 1 : 0.3,
-                y: hoveredIndex === index ? 0 : 10
-              }}
-              transition={{ duration: 0.5 }}
-            >
-              <span className="text-violet-400/70 text-xs md:text-sm tracking-wider">{project.year}</span>
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mt-1">
-                {project.name}
-              </h3>
-            </motion.div>
+            View all work →
           </Link>
-        ))}
+        </motion.div>
+        
+        {/* Text-based project list */}
+        <div className="space-y-0">
+          {projects.map((project, index) => (
+            <motion.div
+              key={project.slug}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.05, duration: 0.5 }}
+            >
+              <Link 
+                to={`/projects/${project.slug}`}
+                className="group flex items-center justify-between py-5 md:py-6 border-b border-white/10 hover:border-violet-500/30 transition-colors"
+              >
+                <div className="flex items-center gap-4 md:gap-8">
+                  {/* Bullet */}
+                  <div className="w-2 h-2 rounded-full bg-white/20 group-hover:bg-violet-400 transition-colors" />
+                  
+                  {/* Project name */}
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white group-hover:text-violet-300 transition-colors">
+                    {project.name}
+                  </h3>
+                  
+                  {/* Subtitle - desktop only */}
+                  <span className="hidden md:inline text-white/30 text-sm italic">
+                    — {project.subtitle}
+                  </span>
+                </div>
+                
+                {/* Year */}
+                <span className="text-white/30 text-sm tracking-wider group-hover:text-violet-400/70 transition-colors">
+                  {project.year}
+                </span>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+        
+        {/* Mobile view all */}
+        <Link 
+          to="/projects" 
+          className="text-white/50 hover:text-violet-400 transition-colors text-sm tracking-wider uppercase mt-8 block md:hidden"
+        >
+          View all work →
+        </Link>
       </div>
     </section>
   );
 };
 
 // ============================================
-// SECTION 6: ACTION - CTA with glow effects
+// AWARDS SECTION - Recognition badges
+// ============================================
+const AwardsSection = () => {
+  const awards = [
+    { title: "Top Web3 Agency", subtitle: "Korea Market 2024" },
+    { title: "30+ Launches", subtitle: "Verified Track Record" },
+    { title: "GTM Specialist", subtitle: "Industry Recognition" },
+  ];
+
+  return (
+    <section className="py-12 md:py-16 bg-gradient-to-b from-black to-violet-950/30">
+      <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-20">
+        <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+          {awards.map((award, index) => (
+            <motion.div
+              key={award.title}
+              className="text-center group"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+            >
+              {/* Badge circle */}
+              <div className="relative w-24 h-24 md:w-32 md:h-32 mx-auto mb-4">
+                <div className="absolute inset-0 rounded-full border border-white/10 group-hover:border-violet-500/30 transition-colors" />
+                <div className="absolute inset-2 rounded-full border border-white/5" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <motion.div
+                    className="w-2 h-2 rounded-full bg-violet-400"
+                    animate={{ 
+                      boxShadow: ["0 0 10px rgba(167,139,250,0.5)", "0 0 30px rgba(167,139,250,0.8)", "0 0 10px rgba(167,139,250,0.5)"]
+                    }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  />
+                </div>
+              </div>
+              
+              <h4 className="text-white font-bold text-sm md:text-base">{award.title}</h4>
+              <p className="text-white/40 text-xs mt-1">{award.subtitle}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// SECTION 6: ACTION - monks.com style interactive CTA
 // ============================================
 const ActionSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -786,19 +879,17 @@ const ActionSection = () => {
     offset: ["start end", "end start"]
   });
   
-  const bgRotate = useTransform(scrollYProgress, [0, 1], [0, 15]);
   const glowOpacity = useTransform(scrollYProgress, [0.3, 0.6], [0, 0.6]);
+  
+  const ctaWords = ["Let's", "unlock", "what's", "possible", "together"];
 
   return (
     <section 
       ref={sectionRef}
       className="relative py-32 md:py-48 px-4 md:px-12 lg:px-20 overflow-hidden"
     >
-      {/* Animated gradient background */}
-      <motion.div 
-        className="absolute inset-0 bg-gradient-to-br from-violet-950 via-slate-900 to-indigo-950"
-        style={{ rotate: bgRotate }}
-      />
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-violet-950 via-slate-900 to-indigo-950" />
       
       {/* Glow orbs */}
       <motion.div 
@@ -810,73 +901,68 @@ const ActionSection = () => {
         style={{ opacity: glowOpacity }}
       />
       
-      {/* Grid pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 1px)`,
-          backgroundSize: '50px 50px'
-        }} />
-      </div>
-      
-      <div className="relative z-10 max-w-5xl mx-auto">
+      <div className="relative z-10 max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: customEase }}
-          className="text-center space-y-8"
+          className="text-center space-y-12"
         >
-          <span className="text-violet-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">
-            Let's Start
-          </span>
+          {/* Interactive text - monks style */}
+          <div className="flex flex-wrap justify-center gap-x-4 md:gap-x-6 gap-y-2">
+            {ctaWords.map((word, i) => (
+              <motion.span
+                key={i}
+                className="text-4xl md:text-6xl lg:text-7xl font-black text-white/30 hover:text-white transition-colors duration-300 cursor-default"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08, duration: 0.5 }}
+                whileHover={{ scale: 1.05 }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </div>
           
-          <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.95]">
-            Ready to<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 via-indigo-400 to-teal-400">
-              LAUNCH?
-            </span>
-          </h2>
-          
-          <p className="text-white/50 text-lg md:text-xl max-w-xl mx-auto leading-relaxed">
-            한국 시장 진출을 준비하고 계신가요?<br />
-            지금 바로 상담을 예약하세요.
+          {/* Subtitle */}
+          <p className="text-white/40 text-lg md:text-xl max-w-xl mx-auto">
+            한국 시장 진출을 준비하고 계신가요?
           </p>
           
-          <motion.div className="pt-8 md:pt-12 flex flex-wrap justify-center gap-4">
+          {/* CTA Buttons */}
+          <motion.div className="pt-4 flex flex-wrap justify-center gap-4">
             <Link
               to="/contact"
-              className="relative inline-block px-10 md:px-14 py-4 md:py-5 rounded-full overflow-hidden group"
+              className="group relative inline-flex items-center gap-3 px-8 md:px-12 py-4 md:py-5 bg-white text-black font-bold text-base md:text-lg rounded-full hover:bg-violet-400 transition-colors duration-300"
             >
-              {/* Button glow effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-violet-500 via-indigo-500 to-teal-500 opacity-90 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute inset-[2px] bg-slate-900 rounded-full group-hover:bg-transparent transition-colors duration-300" />
-              <span className="relative z-10 font-bold text-base md:text-lg text-white">
-                GET ON BOARD
-              </span>
+              <span>Get in touch</span>
+              <motion.span
+                className="inline-block"
+                whileHover={{ x: 5 }}
+              >
+                →
+              </motion.span>
             </Link>
             
             <Link
               to="/projects"
-              className="inline-block px-10 md:px-14 py-4 md:py-5 border border-white/20 text-white font-bold text-base md:text-lg rounded-full hover:border-violet-400/50 hover:bg-violet-500/10 transition-all duration-300"
+              className="inline-block px-8 md:px-12 py-4 md:py-5 border border-white/20 text-white font-bold text-base md:text-lg rounded-full hover:border-white/50 transition-all duration-300"
             >
-              VIEW PROJECTS
+              View our work
             </Link>
           </motion.div>
           
-          {/* Contact info */}
-          <div className="pt-16 md:pt-24 grid md:grid-cols-3 gap-8 text-center">
-            <div>
-              <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Email</p>
-              <p className="text-white/80">contact@iumlabs.io</p>
-            </div>
-            <div>
-              <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Location</p>
-              <p className="text-white/80">Seoul, South Korea</p>
-            </div>
-            <div>
-              <p className="text-white/40 text-xs uppercase tracking-wider mb-2">Social</p>
-              <p className="text-white/80">@iumlabs</p>
-            </div>
+          {/* Contact info - minimal style */}
+          <div className="pt-16 md:pt-20 flex flex-wrap justify-center gap-8 md:gap-16 text-sm">
+            <a href="mailto:contact@iumlabs.io" className="text-white/40 hover:text-white transition-colors">
+              contact@iumlabs.io
+            </a>
+            <span className="text-white/40">Seoul, South Korea</span>
+            <a href="https://twitter.com/iumlabs" target="_blank" rel="noopener noreferrer" className="text-white/40 hover:text-white transition-colors">
+              @iumlabs
+            </a>
           </div>
         </motion.div>
       </div>
@@ -944,8 +1030,11 @@ const GTMService = () => {
       
       <Navbar />
       
-      {/* 1. INTRO */}
+      {/* 1. INTRO - Oversized GTM */}
       <IntroSection />
+      
+      {/* 1.5. INTERACTIVE TEXT */}
+      <InteractiveTextSection />
       
       {/* 2. CHALLENGE */}
       <ChallengeSection />
@@ -953,7 +1042,7 @@ const GTMService = () => {
       {/* Marquee */}
       <MarqueeText texts={["GTM STRATEGY", "KOREA MARKET", "WEB3 MARKETING", "BRAND GROWTH"]} />
       
-      {/* 3. APPROACH */}
+      {/* 3. APPROACH - monks style numbered list */}
       <ApproachSection />
       
       {/* 4. RESULTS */}
@@ -965,13 +1054,16 @@ const GTMService = () => {
       {/* 5. NETWORK */}
       <NetworkSection />
       
-      {/* 5.5 PROJECT SHOWCASE */}
-      <ProjectShowcaseSection />
+      {/* 5.5 CLIENT STORIES - text list style */}
+      <ClientStoriesSection />
+      
+      {/* AWARDS */}
+      <AwardsSection />
       
       {/* Marquee */}
       <MarqueeText texts={["COMMUNITY", "PR & MEDIA", "KOL NETWORK", "EVENTS"]} reverse />
       
-      {/* 6. ACTION */}
+      {/* 6. ACTION - interactive CTA */}
       <ActionSection />
       
       <Footer />
