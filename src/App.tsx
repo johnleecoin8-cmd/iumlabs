@@ -134,16 +134,13 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
             phase === 'fadeIn' ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          {/* Particles */}
-          {phase === 'logo' && <TransitionParticles />}
-          
-          {/* Logo with scale + rotate animation */}
+          {/* Logo with scale animation - 3x larger */}
           <div 
-            className={`w-[32rem] h-64 ${
+            className={`w-[90rem] h-[45rem] ${
               phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
             }`}
             style={{
-              filter: 'drop-shadow(0 0 60px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 120px rgba(255, 0, 255, 0.4))'
+              filter: 'drop-shadow(0 0 80px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 160px rgba(255, 0, 255, 0.4))'
             }}
           >
             <Logo3D immediate />
