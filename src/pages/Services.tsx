@@ -307,7 +307,7 @@ const Services = () => {
         <div className="flex flex-col lg:flex-row">
           {/* Left: Service Grid (2/3) */}
           <div className="w-full lg:w-2/3 border-r-0 lg:border-r border-white/10">
-            <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="grid grid-cols-2 md:grid-cols-2">
               {services.map((service, index) => (
                 <ServiceCard key={service.title} service={service} index={index} />
               ))}
