@@ -111,17 +111,17 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
       style={{ transitionDelay: `${(index % 6) * 50}ms` }}
     >
       <div
-        className={`group block p-2.5 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full min-h-[100px] sm:min-h-[140px] ${
+        className={`group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full ${
           !isRightColumn ? "sm:border-r border-border" : ""
         } ${!isLastRow ? "border-b border-border" : ""}`}
       >
         <Link
           to={`/projects/${slug}`}
           onClick={() => window.scrollTo(0, 0)}
-          className="flex items-start gap-2 sm:gap-3 active:scale-[0.97] transition-transform duration-150"
+          className="flex items-start gap-3 sm:gap-4 active:scale-[0.97] transition-transform duration-150"
         >
-          {/* Image - Wide aspect ratio */}
-          <div className="w-16 h-10 sm:w-24 sm:h-14 md:w-28 md:h-16 rounded-md sm:rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+          {/* Image - Larger size */}
+          <div className="w-20 h-12 sm:w-28 sm:h-16 md:w-32 md:h-20 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img
               src={bgImage}
               alt={name}
@@ -131,16 +131,16 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
 
           {/* Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 text-muted-foreground text-[8px] sm:text-[10px] mb-0.5">
+            <div className="flex items-center gap-2 text-muted-foreground text-[9px] sm:text-[10px] mb-1">
               <span className="uppercase tracking-wider line-clamp-1">{category}</span>
             </div>
-            <h3 className="text-xs sm:text-base font-semibold text-foreground mb-0.5 group-hover:text-foreground/80 transition-colors line-clamp-1">
+            <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1 group-hover:text-foreground/80 transition-colors line-clamp-1">
               {name}
             </h3>
-            <p className="text-foreground font-medium text-[9px] sm:text-xs mb-0.5 line-clamp-1">
+            <p className="text-foreground font-medium text-[10px] sm:text-sm mb-1 line-clamp-1">
               {result}
             </p>
-            <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed line-clamp-1 hidden sm:block">
+            <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed line-clamp-2 hidden sm:block">
               {description}
             </p>
           </div>
