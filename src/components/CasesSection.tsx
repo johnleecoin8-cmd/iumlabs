@@ -38,6 +38,7 @@ import openledgerCampaign from "@/assets/campaigns/openledger-interview.jpg";
 import openledgerHero from "@/assets/campaigns/openledger-hero.jpg";
 import openledgerHeroNew from "@/assets/campaigns/openledger-hero-new.jpg";
 import openledgerEvent from "@/assets/campaigns/openledger-event.jpg";
+import openledgerHeroOfficial from "@/assets/campaigns/openledger-hero-official.png";
 
 // Map gallery `src` (stored as file path strings) to bundled campaign assets
 const campaignAssetByFile: Record<string, string> = {
@@ -56,9 +57,10 @@ const campaignAssetByFile: Record<string, string> = {
   "synfutures-billboard.jpg": synfuturesCampaign,
   "fogo-fest.avif": fogoCampaign,
   "openledger-interview.jpg": openledgerCampaign,
-  "openledger-hero.jpg": openledgerHero,
+  "openledger-hero.jpg": openledgerHeroOfficial,
   "openledger-hero-new.jpg": openledgerHeroNew,
   "openledger-event.jpg": openledgerEvent,
+  "openledger-hero-official.png": openledgerHeroOfficial,
 };
 
 const resolveGallerySrcToAsset = (src?: string | null) => {
