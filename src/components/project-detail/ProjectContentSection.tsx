@@ -96,10 +96,10 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
   const category = project.category;
   const hasMetaInfo = clientName || duration || category;
 
-  // Parallax scroll effect
+  // Parallax scroll effect - only use when ref is hydrated
   const parallaxRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
-    target: parallaxRef,
+    target: project.featureImage ? parallaxRef : undefined,
     offset: ["start start", "end start"]
   });
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
