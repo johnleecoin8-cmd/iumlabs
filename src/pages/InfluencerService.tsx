@@ -3,6 +3,7 @@ import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, F
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import ServiceSchema from "@/components/ServiceSchema";
 
 const ACCENT_COLOR = "#F59E0B";
 
@@ -261,6 +262,12 @@ const InfluencerService = () => {
       </section>
 
       <BreadcrumbSchema items={breadcrumbItems} />
+      <ServiceSchema 
+        name="Korean Crypto KOL Marketing"
+        description="Access 70+ Korean and global crypto KOLs with 15M+ total reach. Korean Web3 marketing through strategic influencer campaigns."
+        url="/services/influencer"
+        serviceType={["KOL Marketing", "Influencer Marketing", "Crypto Marketing", "Web3 Marketing"]}
+      />
     </ServicePageLayout>
   );
 };

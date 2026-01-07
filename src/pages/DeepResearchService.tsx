@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import ServicePageLayout, { ServiceTag, ServiceStat, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import ServiceSchema from "@/components/ServiceSchema";
 import { FileText, BarChart3, TrendingUp, Users, Newspaper, Share2, Search, PenTool, Send, ArrowRight, BookOpen, Mic2, Globe } from "lucide-react";
 const ACCENT_COLOR = "#06B6D4";
 const breadcrumbItems = [{
@@ -264,6 +265,12 @@ const DeepResearchService = () => {
       {researchPosts && researchPosts.length > 0}
 
       <BreadcrumbSchema items={breadcrumbItems} />
+      <ServiceSchema 
+        name="Korean Crypto Market Research"
+        description="Data-driven market research for the Korean crypto market. Korean Web3 marketing insights distributed through media and KOL networks."
+        url="/services/deep-research"
+        serviceType={["Market Research", "Competitor Analysis", "Investment Thesis", "Crypto Research"]}
+      />
     </ServicePageLayout>;
 };
 export default DeepResearchService;

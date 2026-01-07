@@ -4,6 +4,7 @@ import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, F
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import ServiceSchema from "@/components/ServiceSchema";
 
 const ACCENT_COLOR = "#F59E0B";
 
@@ -342,6 +343,12 @@ const SEOAdsService = () => {
       </section>
 
       <BreadcrumbSchema items={breadcrumbItems} />
+      <ServiceSchema 
+        name="Korean Crypto SEO & Paid Ads"
+        description="Drive qualified traffic to your Web3 project in Korea through SEO optimization and targeted ads on Google, Naver, and crypto platforms."
+        url="/services/seo-ads"
+        serviceType={["SEO Optimization", "Paid Advertising", "Google Ads", "Crypto Marketing"]}
+      />
     </ServicePageLayout>
   );
 };

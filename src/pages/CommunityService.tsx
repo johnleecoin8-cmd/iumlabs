@@ -4,6 +4,7 @@ import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, F
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import ServiceSchema from "@/components/ServiceSchema";
 const ACCENT_COLOR = "#5865F2";
 const breadcrumbItems = [{
   name: "Home",
@@ -345,6 +346,12 @@ const CommunityService = () => {
       </section>
 
       <BreadcrumbSchema items={breadcrumbItems} />
+      <ServiceSchema 
+        name="Korean Web3 Community Management"
+        description="Build thriving Korean crypto communities on Discord, Telegram, KakaoTalk, and Naver. 24/7 KR/EN moderation for Korean Web3 marketing success."
+        url="/services/community"
+        serviceType={["Community Management", "Discord Management", "Telegram Management", "KakaoTalk Management"]}
+      />
     </ServicePageLayout>;
 };
 export default CommunityService;

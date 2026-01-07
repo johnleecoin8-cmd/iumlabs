@@ -4,6 +4,7 @@ import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, F
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import ServiceSchema from "@/components/ServiceSchema";
 
 const ACCENT_COLOR = "#10B981";
 
@@ -293,6 +294,12 @@ const OfflineEventService = () => {
       </section>
 
       <BreadcrumbSchema items={breadcrumbItems} />
+      <ServiceSchema 
+        name="Web3 Events in Korea"
+        description="Create unforgettable crypto events in Seoul. Korean Web3 marketing through launch parties, meetups, and conferences with KOL attendance."
+        url="/services/offline-event"
+        serviceType={["Event Planning", "Web3 Events", "Crypto Meetups", "Launch Parties"]}
+      />
     </ServicePageLayout>
   );
 };
