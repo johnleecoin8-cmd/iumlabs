@@ -229,7 +229,6 @@ const ServicePageLayout = ({
             />
             
             {/* Video - 데스크탑에서만, 로딩 후 fade-in */}
-            {!isMobile && (
               <video
                 autoPlay
                 muted
@@ -245,7 +244,6 @@ const ServicePageLayout = ({
               >
                 <source src={videoSrc} type="video/mp4" />
               </video>
-            )}
             
             {/* Dark overlay gradient - 강도 조절 */}
             <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.5)] via-[hsl(0,0%,4%,0.2)] to-[hsl(0,0%,4%,0.95)]" />
