@@ -71,16 +71,16 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
 
     const fadeOutTimer = setTimeout(() => {
       setPhase('logo');
-    }, 150);
+    }, 250);
 
     const logoTimer = setTimeout(() => {
       setDisplayChildren(children);
       setPhase('fadeIn');
-    }, 500);
+    }, 900);
 
     const fadeInTimer = setTimeout(() => {
       setPhase('idle');
-    }, 700);
+    }, 1200);
 
     return () => {
       clearTimeout(fadeOutTimer);
@@ -99,7 +99,7 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
           }`}
         >
           <div 
-            className={`w-32 h-32 ${
+            className={`w-48 h-48 ${
               phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
             }`}
           >
