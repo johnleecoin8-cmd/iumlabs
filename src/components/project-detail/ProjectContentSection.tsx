@@ -175,11 +175,11 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
             >
               {/* Scope of Work */}
               {project.services && project.services.length > 0 && (
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-white/10">
-                  <h3 className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider mb-4">Scope of Work</h3>
+                <div className="bg-black/60 backdrop-blur-md rounded-xl p-5 md:p-6 border border-white/20 shadow-xl">
+                  <h3 className="text-xs md:text-sm text-white/80 uppercase tracking-wider mb-4 font-medium">Scope of Work</h3>
                   <ul className="space-y-2">
                     {project.services.map((service, idx) => (
-                      <li key={idx} className="text-sm md:text-base text-white/90">{service}</li>
+                      <li key={idx} className="text-sm md:text-base text-white font-medium">{service}</li>
                     ))}
                   </ul>
                 </div>
@@ -187,9 +187,9 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
               
               {/* What We Did */}
               {project.challenge && (
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-white/10">
-                  <h3 className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider mb-4">What We Did</h3>
-                  <p className="text-sm md:text-base text-white/80 leading-relaxed">{project.challenge}</p>
+                <div className="bg-black/60 backdrop-blur-md rounded-xl p-5 md:p-6 border border-white/20 shadow-xl">
+                  <h3 className="text-xs md:text-sm text-white/80 uppercase tracking-wider mb-4 font-medium">What We Did</h3>
+                  <p className="text-sm md:text-base text-white leading-relaxed">{project.challenge}</p>
                 </div>
               )}
             </motion.div>
