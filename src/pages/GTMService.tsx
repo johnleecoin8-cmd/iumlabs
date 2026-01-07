@@ -12,6 +12,10 @@ import storyBg from '@/assets/projects/story-bg.jpg';
 import saharaAiBg from '@/assets/projects/sahara-ai-bg.jpg';
 import peaqBg from '@/assets/projects/peaq-bg.jpg';
 import mantraBg from '@/assets/projects/mantra-bg.jpg';
+import bybitBg from '@/assets/projects/bybit-bg.jpg';
+import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
+import ondoBg from '@/assets/projects/ondo-bg.jpg';
+import polygonBg from '@/assets/projects/polygon-bg.jpg';
 
 // Custom easing
 const customEase: [number, number, number, number] = [0.16, 1, 0.3, 1];
@@ -656,78 +660,125 @@ const GTMService = () => {
       </motion.section>
       
       {/* ========== MANIFESTO SECTION ========== */}
-      <section className="relative py-32 md:py-48 px-4 md:px-12 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="space-y-6 md:space-y-10">
-            {/* Line 1 */}
-            <div className="flex flex-wrap items-baseline gap-x-3 md:gap-x-5">
-              <span className="text-[9vw] md:text-[6.5vw] font-thin text-white/20">We</span>
-              <motion.span 
-                className="text-[9vw] md:text-[6.5vw] font-black text-white cursor-pointer px-2"
-                whileHover={{ 
-                  backgroundColor: "#fff", 
-                  color: "#000",
-                  paddingLeft: "1rem",
-                  paddingRight: "1rem",
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                MAKE
-              </motion.span>
-              <span className="text-[9vw] md:text-[6.5vw] font-thin text-white/20">brands</span>
+      <section className="relative py-24 md:py-40 px-4 md:px-12 lg:px-20">
+        {/* Background image grid */}
+        <div className="absolute inset-0 grid grid-cols-3 gap-1 opacity-10 pointer-events-none">
+          <div className="bg-cover bg-center" style={{ backgroundImage: `url(${storyBg})` }} />
+          <div className="bg-cover bg-center" style={{ backgroundImage: `url(${mantraBg})` }} />
+          <div className="bg-cover bg-center" style={{ backgroundImage: `url(${peaqBg})` }} />
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-[1fr,400px] gap-12 lg:gap-20 items-center">
+            {/* Text content */}
+            <div className="space-y-6 md:space-y-10">
+              {/* Line 1 */}
+              <div className="flex flex-wrap items-baseline gap-x-3 md:gap-x-5">
+                <span className="text-[9vw] md:text-[6vw] font-thin text-white/20">We</span>
+                <motion.span 
+                  className="text-[9vw] md:text-[6vw] font-black text-white cursor-pointer px-2"
+                  whileHover={{ 
+                    backgroundColor: "#fff", 
+                    color: "#000",
+                    paddingLeft: "1rem",
+                    paddingRight: "1rem",
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  MAKE
+                </motion.span>
+                <span className="text-[9vw] md:text-[6vw] font-thin text-white/20">brands</span>
+              </div>
+              
+              {/* Line 2 */}
+              <div className="flex flex-wrap items-baseline gap-x-3 md:gap-x-5 md:pl-[4vw]">
+                <span className="text-[9vw] md:text-[6vw] font-thin text-white/20">We</span>
+                <motion.span 
+                  className="text-[9vw] md:text-[6vw] font-black text-white cursor-pointer px-2"
+                  whileHover={{ 
+                    backgroundColor: "#fff", 
+                    color: "#000",
+                    paddingLeft: "1rem",
+                    paddingRight: "1rem",
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  CHANGE
+                </motion.span>
+                <span className="text-[9vw] md:text-[6vw] font-thin text-white/20">markets</span>
+              </div>
+              
+              {/* Line 3 */}
+              <div className="flex flex-wrap items-baseline gap-x-3 md:gap-x-5 md:pl-[8vw]">
+                <span className="text-[9vw] md:text-[6vw] font-thin text-white/20">We</span>
+                <motion.span 
+                  className="text-[9vw] md:text-[6vw] font-black text-white cursor-pointer px-2"
+                  whileHover={{ 
+                    backgroundColor: "#fff", 
+                    color: "#000",
+                    paddingLeft: "1rem",
+                    paddingRight: "1rem",
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  DESIGN
+                </motion.span>
+                <span className="text-[9vw] md:text-[6vw] font-thin text-white/20">success</span>
+              </div>
             </div>
             
-            {/* Line 2 */}
-            <div className="flex flex-wrap items-baseline gap-x-3 md:gap-x-5 md:pl-[8vw]">
-              <span className="text-[9vw] md:text-[6.5vw] font-thin text-white/20">We</span>
-              <motion.span 
-                className="text-[9vw] md:text-[6.5vw] font-black text-white cursor-pointer px-2"
-                whileHover={{ 
-                  backgroundColor: "#fff", 
-                  color: "#000",
-                  paddingLeft: "1rem",
-                  paddingRight: "1rem",
-                }}
-                transition={{ duration: 0.3 }}
+            {/* Side image stack */}
+            <motion.div 
+              className="relative hidden lg:block h-[500px]"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+            >
+              <motion.div
+                className="absolute top-0 right-0 w-[280px] h-[180px] overflow-hidden"
+                initial={{ x: 100, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                whileHover={{ scale: 1.05, zIndex: 10 }}
               >
-                CHANGE
-              </motion.span>
-              <span className="text-[9vw] md:text-[6.5vw] font-thin text-white/20">markets</span>
-            </div>
-            
-            {/* Line 3 */}
-            <div className="flex flex-wrap items-baseline gap-x-3 md:gap-x-5 md:pl-[16vw]">
-              <span className="text-[9vw] md:text-[6.5vw] font-thin text-white/20">We</span>
-              <motion.span 
-                className="text-[9vw] md:text-[6.5vw] font-black text-white cursor-pointer px-2"
-                whileHover={{ 
-                  backgroundColor: "#fff", 
-                  color: "#000",
-                  paddingLeft: "1rem",
-                  paddingRight: "1rem",
-                }}
-                transition={{ duration: 0.3 }}
+                <img src={storyBg} alt="" className="w-full h-full object-cover" />
+              </motion.div>
+              <motion.div
+                className="absolute top-[120px] right-[60px] w-[260px] h-[170px] overflow-hidden"
+                initial={{ x: 100, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                whileHover={{ scale: 1.05, zIndex: 10 }}
               >
-                DESIGN
-              </motion.span>
-              <span className="text-[9vw] md:text-[6.5vw] font-thin text-white/20">success</span>
-            </div>
+                <img src={bybitBg} alt="" className="w-full h-full object-cover" />
+              </motion.div>
+              <motion.div
+                className="absolute top-[240px] right-[20px] w-[300px] h-[180px] overflow-hidden"
+                initial={{ x: 100, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                whileHover={{ scale: 1.05, zIndex: 10 }}
+              >
+                <img src={kucoinBg} alt="" className="w-full h-full object-cover" />
+              </motion.div>
+            </motion.div>
           </div>
           
-          {/* Overlapping image */}
-          <motion.div 
-            className="absolute right-8 lg:right-16 top-1/2 -translate-y-1/2 w-[25vw] h-[35vh] hidden lg:block"
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 0.5, x: 0 }}
+          {/* Description text */}
+          <motion.p
+            className="text-white/40 text-lg md:text-xl max-w-2xl mt-16 leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: customEase }}
+            transition={{ duration: 0.8, delay: 0.3 }}
           >
-            <img 
-              src={storyBg} 
-              alt="Project showcase" 
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
+            한국 시장은 복잡합니다. 규제, 문화, 커뮤니티 — 모든 것이 다릅니다. 
+            우리는 이 시장을 이해하고, 브랜드가 성공할 수 있도록 설계합니다.
+          </motion.p>
         </div>
       </section>
       
@@ -775,16 +826,36 @@ const GTMService = () => {
       </section>
       
       {/* ========== STATS SECTION ========== */}
-      <section className="py-20 md:py-32 px-4 md:px-12 lg:px-20 bg-black">
-        <div className="max-w-6xl mx-auto">
+      <section className="relative py-20 md:py-32 px-4 md:px-12 lg:px-20 bg-black overflow-hidden">
+        {/* Background decorative images */}
+        <motion.div
+          className="absolute -right-20 top-1/2 -translate-y-1/2 w-[400px] h-[600px] opacity-20 hidden xl:block"
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 0.2, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <img src={ondoBg} alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-l from-transparent to-black" />
+        </motion.div>
+        
+        <div className="max-w-6xl mx-auto relative">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="mb-12 md:mb-20"
+            className="mb-12 md:mb-20 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
           >
-            <span className="text-white/30 text-xs md:text-sm tracking-[0.3em] uppercase">By the numbers</span>
+            <div>
+              <span className="text-white/30 text-xs md:text-sm tracking-[0.3em] uppercase">By the numbers</span>
+              <h2 className="text-3xl md:text-5xl font-bold text-white mt-3">
+                Proven Results
+              </h2>
+            </div>
+            <p className="text-white/40 text-base max-w-md">
+              데이터가 증명하는 실적. 한국 시장에서 검증된 성과입니다.
+            </p>
           </motion.div>
           
           <div>
@@ -805,6 +876,12 @@ const GTMService = () => {
               suffix="M+" 
               label="Impressions Generated" 
               imageSrc={saharaAiBg}
+            />
+            <MaskedNumber 
+              value={50} 
+              suffix="+" 
+              label="Media Partners" 
+              imageSrc={polygonBg}
             />
           </div>
         </div>
@@ -829,6 +906,40 @@ const GTMService = () => {
         <ProjectShowcase setCursorText={setCursorText} />
       </section>
       
+      {/* ========== SECOND FULLSCREEN IMAGE ========== */}
+      <section className="relative h-[50vh] md:h-[70vh] overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          initial={{ scale: 1.2 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 1.5, ease: customEase }}
+          viewport={{ once: true }}
+        >
+          <img 
+            src={bybitBg} 
+            alt="Bybit campaign"
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="px-6 md:px-12 lg:px-20">
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <span className="text-white/50 text-sm tracking-widest">EXCHANGE PARTNERSHIP</span>
+              <h3 className="text-4xl md:text-6xl font-black text-white mt-2">Bybit Korea</h3>
+              <p className="text-white/40 text-lg max-w-md mt-4">
+                전략적 파트너십과 커뮤니티 캠페인을 통한 한국 사용자 확보
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+      
       {/* ========== HORIZONTAL SCROLL PROCESS ========== */}
       <section className="py-16 md:py-24 px-4 md:px-12 lg:px-20">
         <motion.div
@@ -836,16 +947,65 @@ const GTMService = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mb-8"
+          className="mb-8 grid md:grid-cols-2 gap-8 items-end"
         >
-          <span className="text-white/30 text-xs md:text-sm tracking-[0.3em] uppercase">Our Process</span>
-          <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mt-4 leading-tight">
-            How We<br />Work
-          </h2>
+          <div>
+            <span className="text-white/30 text-xs md:text-sm tracking-[0.3em] uppercase">Our Process</span>
+            <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mt-4 leading-tight">
+              How We<br />Work
+            </h2>
+          </div>
+          <p className="text-white/40 text-lg leading-relaxed max-w-lg">
+            체계적인 4단계 프로세스를 통해 한국 시장 진출을 성공으로 이끕니다. 
+            리서치부터 스케일업까지, 모든 단계를 함께합니다.
+          </p>
         </motion.div>
       </section>
       
       <HorizontalScrollSection />
+      
+      {/* ========== SERVICE HIGHLIGHTS ========== */}
+      <section className="py-20 md:py-32 px-4 md:px-12 lg:px-20 bg-white/[0.02]">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <span className="text-white/30 text-xs md:text-sm tracking-[0.3em] uppercase">What We Offer</span>
+            <h2 className="text-4xl md:text-5xl font-black text-white mt-4">Full-Stack GTM</h2>
+          </motion.div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {[
+              { title: "Market Research", desc: "심층 시장 분석과 경쟁사 리서치", image: storyBg },
+              { title: "Community", desc: "한국 커뮤니티 구축 및 운영", image: peaqBg },
+              { title: "PR & Media", desc: "주요 미디어 파트너십 및 보도", image: mantraBg },
+              { title: "KOL Network", desc: "인플루언서 마케팅 캠페인", image: saharaAiBg },
+            ].map((item, i) => (
+              <motion.div
+                key={item.title}
+                className="group relative h-[300px] md:h-[400px] overflow-hidden"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
+                  style={{ backgroundImage: `url(${item.image})` }}
+                />
+                <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-500" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6">
+                  <h3 className="text-xl md:text-2xl font-bold text-white">{item.title}</h3>
+                  <p className="text-white/50 text-sm mt-2 group-hover:text-white/70 transition-colors">{item.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
       
       {/* ========== INTERACTIVE NETWORK ========== */}
       <section className="py-16 md:py-24">
@@ -855,11 +1015,18 @@ const GTMService = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
+            className="grid md:grid-cols-2 gap-8 items-end"
           >
-            <span className="text-white/30 text-xs md:text-sm tracking-[0.3em] uppercase">Our Reach</span>
-            <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mt-4 leading-tight">
-              Global<br />Network
-            </h2>
+            <div>
+              <span className="text-white/30 text-xs md:text-sm tracking-[0.3em] uppercase">Our Reach</span>
+              <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-white mt-4 leading-tight">
+                Global<br />Network
+              </h2>
+            </div>
+            <p className="text-white/40 text-lg leading-relaxed max-w-lg">
+              서울을 중심으로 전 세계 주요 도시에 파트너 네트워크를 보유하고 있습니다. 
+              로컬 전문성과 글로벌 연결을 동시에 제공합니다.
+            </p>
           </motion.div>
         </div>
         
@@ -872,9 +1039,50 @@ const GTMService = () => {
         reverse 
       />
       
+      {/* ========== THIRD FULLSCREEN IMAGE ========== */}
+      <section className="relative h-[60vh] md:h-[80vh] overflow-hidden">
+        <motion.div
+          className="absolute inset-0"
+          initial={{ scale: 1.2 }}
+          whileInView={{ scale: 1 }}
+          transition={{ duration: 1.5, ease: customEase }}
+          viewport={{ once: true }}
+        >
+          <img 
+            src={polygonBg} 
+            alt="Polygon event"
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/20" />
+        <div className="absolute inset-0 flex items-center justify-center text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="px-4"
+          >
+            <span className="text-white/50 text-sm tracking-widest">BLOCKCHAIN ECOSYSTEM</span>
+            <h3 className="text-5xl md:text-7xl lg:text-9xl font-black text-white mt-4">Polygon</h3>
+            <p className="text-white/40 text-lg max-w-xl mx-auto mt-6">
+              Polygon Connect Seoul — 한국 최대 블록체인 커뮤니티 이벤트
+            </p>
+          </motion.div>
+        </div>
+      </section>
+      
       {/* ========== CTA SECTION ========== */}
       <section className="relative py-32 md:py-48 px-4 md:px-12 lg:px-20 overflow-hidden">
         <MultiImageFollow />
+        
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 1px)`,
+            backgroundSize: '40px 40px'
+          }} />
+        </div>
         
         <div className="relative z-20 max-w-5xl mx-auto">
           <motion.div
@@ -893,7 +1101,12 @@ const GTMService = () => {
               <span className="text-white/20">LAUNCH?</span>
             </h2>
             
-            <motion.div className="pt-8 md:pt-12">
+            <p className="text-white/40 text-lg md:text-xl max-w-xl leading-relaxed">
+              한국 시장 진출을 준비하고 계신가요? 지금 바로 상담을 예약하세요.
+              맞춤형 GTM 전략을 제안해 드립니다.
+            </p>
+            
+            <motion.div className="pt-8 md:pt-12 flex flex-wrap gap-4">
               <Link
                 to="/contact"
                 className="inline-block px-10 md:px-14 py-4 md:py-6 bg-white text-black font-bold text-base md:text-lg rounded-full relative overflow-hidden group"
@@ -913,11 +1126,27 @@ const GTMService = () => {
                   transition={{ duration: 0.4, ease: customEase }}
                 />
               </Link>
+              <Link
+                to="/projects"
+                className="inline-block px-10 md:px-14 py-4 md:py-6 border border-white/20 text-white font-bold text-base md:text-lg rounded-full hover:border-white/40 transition-colors"
+              >
+                VIEW PROJECTS
+              </Link>
             </motion.div>
             
-            <div className="pt-12 md:pt-20 space-y-3 text-white/30">
-              <p className="text-base md:text-lg">contact@iumlabs.io</p>
-              <p className="text-sm md:text-base">Seoul, South Korea</p>
+            <div className="pt-12 md:pt-20 grid md:grid-cols-3 gap-8 text-white/30">
+              <div>
+                <p className="text-white/50 text-sm uppercase tracking-wider mb-2">Email</p>
+                <p className="text-base md:text-lg text-white/70">contact@iumlabs.io</p>
+              </div>
+              <div>
+                <p className="text-white/50 text-sm uppercase tracking-wider mb-2">Location</p>
+                <p className="text-base md:text-lg text-white/70">Seoul, South Korea</p>
+              </div>
+              <div>
+                <p className="text-white/50 text-sm uppercase tracking-wider mb-2">Social</p>
+                <p className="text-base md:text-lg text-white/70">@iumlabs</p>
+              </div>
             </div>
           </motion.div>
         </div>
