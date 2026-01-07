@@ -191,9 +191,9 @@ export function HoverExpandGallery({ images, className = "" }: HoverExpandGaller
   const breakpoint = useBreakpoint();
 
   const config = useMemo(() => ({
-    mobile: { itemWidth: 200, expandedWidth: 280, height: "min(400px, 50vh)", gap: 12 },
-    tablet: { itemWidth: 220, expandedWidth: 340, height: "min(500px, 55vh)", gap: 16 },
-    desktop: { itemWidth: 260, expandedWidth: 420, height: "min(590px, 60vh)", gap: 20 },
+    mobile: { itemWidth: 140, expandedWidth: 200, height: "min(280px, 40vh)", gap: 8 },
+    tablet: { itemWidth: 160, expandedWidth: 260, height: "min(360px, 45vh)", gap: 12 },
+    desktop: { itemWidth: 200, expandedWidth: 340, height: "min(420px, 50vh)", gap: 16 },
   })[breakpoint], [breakpoint]);
 
   // Momentum scrolling
