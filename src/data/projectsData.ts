@@ -88,6 +88,7 @@ export interface ProjectData {
   glowColor: string;
   description: string;
   challenge: string;
+  whatWeDid?: string; // What we did section - service-specific description
   client_name?: string; // Optional client name for meta info
   duration?: string; // Optional project duration
   metrics: ProjectMetric[];
@@ -148,6 +149,7 @@ export const projectsData: Record<string, ProjectData> = {
     glowColor: "#23AF91",
     description: "KuCoin aimed to expand their user base in Korea and establish themselves as a trusted global exchange option for Korean traders.",
     challenge: "Competing with established Korean exchanges while building trust with Korean users who typically prefer local platforms. The challenge was to demonstrate KuCoin's unique value proposition.",
+    whatWeDid: "Organized premium offline events connecting KuCoin with the Korean trading community. Built creator partnerships for authentic content and brand advocacy. Developed institutional marketing materials and outreach programs targeting Korean crypto funds and professional traders.",
     metrics: [
       { value: "50K+", label: "New Users" },
       { value: "10K+", label: "Competition Users" },
@@ -167,8 +169,8 @@ export const projectsData: Record<string, ProjectData> = {
       { metric: "Ambassador Network", value: "100+" },
       { metric: "Customer Satisfaction", value: "4.8/5" }
     ],
-    services: ["User Acquisition", "Community Building", "Ambassador Program", "Localization"],
-    shortServices: ["KOLs", "Community"],
+    services: ["Offline Event", "Creator Relations", "Institutional Marketing"],
+    shortServices: ["Events", "Creator", "Institutional"],
     gallery: [
       { src: kucoinCampaignImg, title: "Trading Competition", description: "Korean-exclusive trading event with $100K prizes" }
     ],
@@ -257,6 +259,7 @@ export const projectsData: Record<string, ProjectData> = {
     glowColor: "#00CED1",
     description: "Peaq aimed to become the leading DePIN (Decentralized Physical Infrastructure Network) platform in Korea, targeting both enterprise partners and developer communities to build real-world machine economy applications.",
     challenge: "DePIN was an emerging narrative with limited awareness in Korea. Peaq needed to establish thought leadership while building a strong community and demonstrating practical use cases for decentralized physical infrastructure.",
+    whatWeDid: "Organized and hosted successful AMA sessions with Korean crypto communities, driving engagement and education around DePIN technology. Executed targeted PR campaigns with major Korean blockchain media outlets. Conducted in-depth brand positioning research to establish Peaq as the leading DePIN platform in Korea.",
     metrics: [
       { value: "#1", label: "DePIN Position" },
       { value: "200+", label: "Developers" },
@@ -276,8 +279,8 @@ export const projectsData: Record<string, ProjectData> = {
       { metric: "Partnership Agreements", value: "10+" },
       { metric: "Community Engagement Rate", value: "35%" }
     ],
-    services: ["Brand Positioning", "Developer Relations", "Partnership Development", "Community Building"],
-    shortServices: ["PR", "Events", "DevRel"],
+    services: ["AMA", "PR Strategy", "Brand Positioning Deep Research"],
+    shortServices: ["AMA", "PR", "Research"],
     gallery: [
       { src: peaqSummitImg, title: "DePIN Summit", description: "Korea's first DePIN-focused conference at Gangnam" }
     ],
@@ -294,6 +297,7 @@ export const projectsData: Record<string, ProjectData> = {
     glowColor: "#FF6B9D",
     description: "Story Protocol sought to onboard Korean content creators to their IP tokenization platform, targeting webtoon artists, musicians, and digital creators.",
     challenge: "Korean creators were unfamiliar with IP tokenization and blockchain technology. Building trust and demonstrating clear value was essential.",
+    whatWeDid: "Built and nurtured relationships with Korean content creators including webtoon artists, musicians, and digital creators. Developed platform marketing strategies tailored to the Korean creator economy, showcasing IP tokenization benefits through localized content and success stories.",
     metrics: [
       { value: "5K+", label: "Creators" },
       { value: "2K+", label: "Workshop Users" },
@@ -313,8 +317,8 @@ export const projectsData: Record<string, ProjectData> = {
       { metric: "Ambassador Network", value: "50+" },
       { metric: "Platform Content Created", value: "10K+" }
     ],
-    services: ["Creator Relations", "Platform Marketing", "Ambassador Program", "Content Strategy"],
-    shortServices: ["KOLs", "Content"],
+    services: ["Creator Relations", "Platform Marketing"],
+    shortServices: ["Creator", "Marketing"],
     gallery: [
       { src: storyWorkshopImg, title: "Creator Workshop", description: "Hands-on IP tokenization training for Korean artists" }
     ],
@@ -330,6 +334,7 @@ export const projectsData: Record<string, ProjectData> = {
     glowColor: "#4169E1",
     description: "MegaETH aimed to build strong community presence in Korea ahead of their mainnet launch.",
     challenge: "As a new L2 project, MegaETH needed to differentiate from established competitors and build early community momentum.",
+    whatWeDid: "Designed and executed a comprehensive pre-launch marketing campaign to build anticipation and community momentum before mainnet. Created hype-building content, coordinated with Korean crypto media for exclusive coverage, and established early community channels with engaged Korean members.",
     metrics: [
       { value: "+500%", label: "Engagement" },
       { value: "30K+", label: "Community" },
@@ -349,8 +354,8 @@ export const projectsData: Record<string, ProjectData> = {
       { metric: "Testnet Participants", value: "5K+" },
       { metric: "Media Impressions", value: "2M+" }
     ],
-    services: ["Pre-Launch Marketing", "Community Building", "Testnet Campaigns", "Media Relations"],
-    shortServices: ["KOLs", "PR", "Community"],
+    services: ["Pre-Launch Marketing"],
+    shortServices: ["Pre-Launch"],
     gallery: [
       { src: megaethLaunchImg, title: "Pre-Launch Campaign", description: "Hype-building social media strategy and teasers" }
     ],
@@ -403,6 +408,7 @@ export const projectsData: Record<string, ProjectData> = {
     glowColor: "#F7931A",
     description: "Bybit aimed to capture significant market share in the competitive Korean exchange landscape.",
     challenge: "Competing against dominant local exchanges required a sophisticated, multi-channel approach to user acquisition and retention.",
+    whatWeDid: "Planned and executed high-profile offline events in Seoul and major Korean cities, attracting thousands of traders and crypto enthusiasts. Developed multi-channel user acquisition campaigns including trading competitions, referral programs, and strategic partnerships with Korean influencers.",
     metrics: [
       { value: "#2", label: "Market Position" },
       { value: "+200%", label: "User Growth" },
@@ -422,8 +428,8 @@ export const projectsData: Record<string, ProjectData> = {
       { metric: "VIP User Acquisition", value: "500+" },
       { metric: "Brand Awareness Lift", value: "+45%" }
     ],
-    services: ["Market Entry Strategy", "User Acquisition", "VIP Relations", "Brand Marketing"],
-    shortServices: ["KOLs", "PR", "VIP"],
+    services: ["Offline Event", "User Acquisition"],
+    shortServices: ["Events", "Acquisition"],
     gallery: [
       { src: bybitEventImg, title: "Trading Campaign", description: "Zero-fee promotion launch with massive reach" }
     ],
@@ -440,6 +446,7 @@ export const projectsData: Record<string, ProjectData> = {
     glowColor: "#00D4FF",
     description: "Sahara AI wanted to establish themselves as the leading AI blockchain platform in Korea's growing AI x Web3 intersection.",
     challenge: "AI blockchain was a new narrative in Korea. Sahara needed to educate the market while building developer and enterprise relationships.",
+    whatWeDid: "Organized and executed offline events focused on educating the Korean market about AI x Web3 intersection. Created immersive experiences showcasing Sahara AI's technology and use cases, connecting with developers, enterprises, and crypto enthusiasts.",
     metrics: [
       { value: "50+", label: "Enterprise Leads" },
       { value: "200+", label: "Developers" },
@@ -459,8 +466,8 @@ export const projectsData: Record<string, ProjectData> = {
       { metric: "Community Size", value: "25K+" },
       { metric: "Strategic Partnerships", value: "10+" }
     ],
-    services: ["Enterprise Relations", "Developer Marketing", "Content Strategy", "Partnership Development"],
-    shortServices: ["PR", "DevRel", "Enterprise"],
+    services: ["Offline Event"],
+    shortServices: ["Events"],
     gallery: [
       { src: saharaAiImg, title: "AI Summit", description: "Korean AI x Web3 summit at Gangnam Tech Center" }
     ],
@@ -477,6 +484,7 @@ export const projectsData: Record<string, ProjectData> = {
     glowColor: "#9B59B6",
     description: "Mantra aimed to become the leading RWA (Real World Assets) platform for Korean institutional investors.",
     challenge: "RWA tokenization was gaining traction but lacked mainstream adoption. Mantra needed to build trust with Korean financial institutions.",
+    whatWeDid: "Executed comprehensive Korean community growth initiatives through strategic content creation, local influencer partnerships, and targeted social campaigns. Developed and implemented PR strategy including media outreach to top Korean crypto publications, securing feature coverage and building thought leadership in the RWA space.",
     metrics: [
       { value: "$50M+", label: "Pipeline" },
       { value: "30+", label: "Institutions" },
@@ -496,8 +504,8 @@ export const projectsData: Record<string, ProjectData> = {
       { metric: "Korean Community", value: "50K+" },
       { metric: "Media Features", value: "15+" }
     ],
-    services: ["Institutional Relations", "Research Marketing", "Community Growth", "PR Strategy"],
-    shortServices: ["PR", "Institutional", "Research"],
+    services: ["Community Growth", "PR Strategy"],
+    shortServices: ["Community", "PR"],
     gallery: [
       { src: mantraImg, title: "RWA Summit", description: "Korean institutional investor summit in Seoul" }
     ],
@@ -513,6 +521,7 @@ export const projectsData: Record<string, ProjectData> = {
     glowColor: "#6366F1",
     description: "SynFutures launched a high-visibility billboard campaign in Gangnam district to establish brand presence in the Korean market.",
     challenge: "As a DeFi derivatives platform, SynFutures needed to increase brand awareness among Korean traders and establish credibility in a competitive market dominated by centralized exchanges.",
+    whatWeDid: "Secured and managed premium billboard placements in Gangnam district, one of Korea's most visible locations. Designed eye-catching visuals that resonated with Korean traders. Launched coordinated social media campaigns to amplify billboard visibility and drive online engagement.",
     metrics: [
       { value: "5M+", label: "Impressions" },
       { value: "+300%", label: "Brand Awareness" },
@@ -532,10 +541,84 @@ export const projectsData: Record<string, ProjectData> = {
       { metric: "Social Media Reach", value: "50K+" },
       { metric: "Community Growth", value: "+25%" }
     ],
-    services: ["Billboard Marketing", "Brand Awareness", "Social Media Campaign", "Market Entry"],
-    shortServices: ["OOH", "Brand", "Social"],
+    services: ["Billboard Marketing", "Social Media Campaign"],
+    shortServices: ["Billboard", "Social"],
     gallery: [
       { src: synfuturesBillboardImg, title: "Gangnam Billboard", description: "Prime billboard placement in the heart of Gangnam district" }
+    ],
+    news: []
+  },
+  "fogo": {
+    name: "FOGO",
+    logo: megaethLogo, // Temporary - will need fogo logo
+    bgImage: fogoFestImg,
+    featureImage: fogoFestImg,
+    category: "Infrastructure",
+    result: "Korean Community Launch",
+    glowColor: "#FF6B35",
+    description: "FOGO aimed to build a strong Korean community presence ahead of their network launch.",
+    challenge: "As an emerging project, FOGO needed to establish brand awareness and community engagement in the competitive Korean market.",
+    whatWeDid: "Built a thriving Korean community from the ground up through strategic content, engagement initiatives, and local community management. Executed pre-launch marketing activities to generate awareness and excitement ahead of the network launch.",
+    metrics: [
+      { value: "20K+", label: "Community" },
+      { value: "+400%", label: "Engagement" },
+      { value: "50+", label: "KOL Partners" },
+      { value: "1M+", label: "Impressions" }
+    ],
+    strategy: [
+      "Built Korean community channels from scratch",
+      "Created localized content strategy",
+      "Partnered with Korean crypto influencers",
+      "Launched pre-launch hype campaigns",
+      "Organized community engagement activities"
+    ],
+    results: [
+      { metric: "Korean Community Size", value: "20K+" },
+      { metric: "Engagement Growth", value: "+400%" },
+      { metric: "KOL Partnerships", value: "50+" },
+      { metric: "Total Impressions", value: "1M+" }
+    ],
+    services: ["Community Growth", "Pre-Launch Marketing"],
+    shortServices: ["Community", "Pre-Launch"],
+    gallery: [
+      { src: fogoFestImg, title: "Community Launch", description: "FOGO Korean community launch event" }
+    ],
+    news: []
+  },
+  "openledger": {
+    name: "OpenLedger",
+    logo: saharaAiLogo, // Temporary - will need openledger logo
+    bgImage: openledgerHeroOfficialImg,
+    featureImage: openledgerInterviewImg,
+    category: "AI",
+    result: "Korean AI Community Growth",
+    glowColor: "#10B981",
+    description: "OpenLedger sought to establish themselves as a leading AI blockchain platform in Korea's growing Web3 AI ecosystem.",
+    challenge: "As an AI-focused blockchain project, OpenLedger needed to educate the Korean market about decentralized AI infrastructure and build a strong community of developers and users.",
+    whatWeDid: "Developed and executed community growth strategies specifically tailored for the Korean AI blockchain audience. Implemented comprehensive PR strategy including media outreach, interviews, and thought leadership content to establish OpenLedger's presence in Korea.",
+    metrics: [
+      { value: "30K+", label: "Community" },
+      { value: "100+", label: "Media Coverage" },
+      { value: "25+", label: "KOL Partners" },
+      { value: "2M+", label: "Impressions" }
+    ],
+    strategy: [
+      "Built Korean AI x Web3 community",
+      "Executed comprehensive PR campaign",
+      "Partnered with Korean AI influencers",
+      "Created educational content series",
+      "Organized community AMAs and events"
+    ],
+    results: [
+      { metric: "Korean Community Size", value: "30K+" },
+      { metric: "Media Coverage", value: "100+" },
+      { metric: "KOL Partnerships", value: "25+" },
+      { metric: "Total Impressions", value: "2M+" }
+    ],
+    services: ["Community Growth", "PR Strategy"],
+    shortServices: ["Community", "PR"],
+    gallery: [
+      { src: openledgerInterviewImg, title: "Media Interview", description: "OpenLedger executive interview with Korean crypto media" }
     ],
     news: []
   }
