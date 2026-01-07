@@ -185,8 +185,8 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography - Mobile optimized */}
-          <h1 className="font-display text-[1.75rem] sm:text-display-xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.1] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
-            <span className="text-white font-display text-[1.5rem] sm:text-display-hero leading-tight">Your Crypto Ecosystem Growth Agency</span>
+          <h1 className="font-sans text-[1.75rem] sm:text-display-xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.1] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
+            <span className="text-white font-sans text-[1.5rem] sm:text-display-hero leading-tight">Your Crypto Ecosystem Growth Agency</span>
           </h1>
 
           {/* Subtext - Enhanced readability - Mobile optimized */}
