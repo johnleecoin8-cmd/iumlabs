@@ -118,57 +118,50 @@ const CaseCard = ({ name, logo, bgImage, slug, category, result, description, we
         <Link
           to={`/projects/${slug}`}
           onClick={() => window.scrollTo(0, 0)}
-          className="flex items-start gap-3 sm:gap-4 active:scale-[0.97] transition-transform duration-150"
+          className="block active:scale-[0.98] transition-transform duration-150"
         >
-          {/* Image - Larger size */}
-          <div className="w-20 h-12 sm:w-28 sm:h-16 md:w-32 md:h-20 rounded-lg overflow-hidden flex-shrink-0 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+          {/* Image - Full width on top */}
+          <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-3 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
             <img
               src={bgImage}
               alt={name}
-              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
           </div>
 
           {/* Content */}
-          <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 text-muted-foreground text-[9px] sm:text-[10px] mb-1">
-              <span className="uppercase tracking-wider line-clamp-1">{category}</span>
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="text-muted-foreground text-[9px] sm:text-[10px] uppercase tracking-wider">{category}</span>
+              {websiteUrl && (
+                <a
+                  href={websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex items-center gap-1 text-[9px] sm:text-[10px] text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <ExternalLink className="w-2.5 h-2.5" />
+                </a>
+              )}
             </div>
-            <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1 group-hover:text-foreground/80 transition-colors line-clamp-1">
+            <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors line-clamp-1">
               {name}
             </h3>
-            <p className="text-foreground font-medium text-[10px] sm:text-sm mb-1 line-clamp-1">
+            <p className="text-foreground/80 font-medium text-[10px] sm:text-xs line-clamp-1">
               {result}
             </p>
             <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed line-clamp-2 hidden sm:block">
               {description}
             </p>
           </div>
-        </Link>
 
-        <div className="flex items-center justify-between gap-2 mt-1 sm:mt-1.5">
-          <Link
-            to={`/projects/${slug}`}
-            onClick={() => window.scrollTo(0, 0)}
-            className="flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors text-[9px] sm:text-xs"
-          >
+          {/* View case link */}
+          <div className="flex items-center gap-1.5 mt-3 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-xs">
             <span className="group-hover:underline underline-offset-4">View case</span>
-            <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 group-hover:translate-x-1 transition-transform" />
-          </Link>
-          
-          {websiteUrl && (
-            <a
-              href={websiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="hidden sm:flex items-center gap-1 px-2 py-1 text-[10px] sm:text-xs text-muted-foreground border border-border/50 rounded hover:border-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-all duration-300"
-            >
-              <ExternalLink className="w-2.5 h-2.5" />
-              <span>Website</span>
-            </a>
-          )}
-        </div>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </div>
+        </Link>
       </div>
     </div>
   );
