@@ -1,5 +1,5 @@
 import { ChevronDown, Send } from "lucide-react";
-import { useEffect, useState, MouseEvent, useRef } from "react";
+import { useEffect, useState, MouseEvent } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useRipple } from "@/hooks/useRipple";
 import { brand } from "@/config/content";
@@ -18,28 +18,6 @@ import mantraLogo from "@/assets/logos/mantra.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
-
-// Import Selected Work backgrounds
-import storyBg from '@/assets/projects/story-bg.jpg';
-import mantraBg from '@/assets/projects/mantra-featured-bg.jpg';
-import bybitBg from '@/assets/projects/bybit-bg.jpg';
-import bnbBg from '@/assets/projects/bnb-bg.jpg';
-import peaqBg from '@/assets/projects/peaq-bg.jpg';
-import saharaAiBg from '@/assets/projects/sahara-ai-bg.jpg';
-import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
-import openledgerHero from '@/assets/campaigns/openledger-hero-official.png';
-
-// Selected Work projects for hero background rotation
-const heroProjects = [
-  { name: "Story Protocol", media: storyBg, video: "/videos/projects/story-hero.mp4" },
-  { name: "MANTRA", media: mantraBg, video: "/videos/projects/mantra-hero.mp4" },
-  { name: "Bybit", media: bybitBg, video: "/videos/projects/bybit-hero.mp4" },
-  { name: "BNB Chain", media: bnbBg },
-  { name: "peaq", media: peaqBg, video: "/videos/projects/peaq-hero.mp4" },
-  { name: "Sahara AI", media: saharaAiBg, video: "/videos/projects/sahara-hero.mp4" },
-  { name: "KuCoin", media: kucoinBg, video: "/videos/projects/kucoin-hero.mp4" },
-  { name: "OpenLedger", media: openledgerHero },
-];
 
 // Desktop tags - 8 services (positioned at edges with good spacing)
 const serviceTags = [{
@@ -155,92 +133,33 @@ const stats = [{
 }];
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(0);
   const { createRipple } = useRipple();
-  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   
   useEffect(() => {
     // Trigger count-up animation after component mounts
     const timer = setTimeout(() => setIsVisible(true), 800);
     return () => clearTimeout(timer);
   }, []);
-
-  // Auto-rotate hero backgrounds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % heroProjects.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Handle video playback for active project
-  useEffect(() => {
-    videoRefs.current.forEach((video, index) => {
-      if (video) {
-        if (index === activeIndex) {
-          video.play().catch(() => {});
-        } else {
-          video.pause();
-          video.currentTime = 0;
-        }
-      }
-    });
-  }, [activeIndex]);
-
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Rotating Project Backgrounds */}
+      {/* Background Layer - Video */}
       <div className="absolute inset-0">
-        {heroProjects.map((project, index) => (
-          <div
-            key={project.name}
-            className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === activeIndex ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            {project.video ? (
-              <video
-                ref={(el) => (videoRefs.current[index] = el)}
-                muted
-                loop
-                playsInline
-                preload="auto"
-                poster={project.media}
-                className="absolute inset-0 w-full h-full object-cover scale-105"
-              >
-                <source src={`${project.video}#t=0.001`} type="video/mp4" />
-              </video>
-            ) : (
-              <img
-                src={project.media}
-                alt={project.name}
-                className="absolute inset-0 w-full h-full object-cover scale-105"
-              />
-            )}
-          </div>
-        ))}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
+        </video>
       </div>
       
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/55" />
+      <div className="absolute inset-0 bg-black/50" />
       
       {/* Bottom gradient for smooth transition */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[hsl(0,0%,4%,0.95)]" />
-
-      {/* Project Indicator Dots */}
-      <div className="absolute bottom-32 sm:bottom-36 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-        {heroProjects.map((project, index) => (
-          <button
-            key={project.name}
-            onClick={() => setActiveIndex(index)}
-            className={`w-2 h-2 rounded-full transition-all duration-300 ${
-              index === activeIndex 
-                ? 'bg-white w-6' 
-                : 'bg-white/40 hover:bg-white/60'
-            }`}
-            aria-label={`View ${project.name}`}
-          />
-        ))}
-      </div>
 
       {/* Floating Service Tags - Desktop - Enhanced with floating animation */}
       {serviceTags.map((tag, index) => <div key={index} className={`absolute ${tag.position} hidden lg:block z-10`} style={{
