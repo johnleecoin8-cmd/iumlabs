@@ -230,13 +230,13 @@ const Index = () => {
         </div>
       </main>
       
-      {/* About - 01 홀수 */}
-      <section className="bg-surface-odd" id="why-choose-us">
+      {/* About - 01 */}
+      <section className="bg-surface-base" id="why-choose-us">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">01</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Why ium Labs</span>
@@ -249,19 +249,19 @@ const Index = () => {
       </section>
       
       {/* Media Partners - 번호 없음, 헤더 없이 마키만 */}
-      <section className="bg-surface-even" id="media-partners">
+      <section className="bg-surface-base" id="media-partners">
         <AnimatedSection direction="none">
           <MediaPartnersSection />
         </AnimatedSection>
       </section>
       
-      {/* Services - 02 홀수 */}
-      <section className="bg-surface-odd" id="services">
+      {/* Services - 02 */}
+      <section className="bg-surface-base" id="services">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">02</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What We Do</span>
@@ -273,13 +273,13 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Process - 03 짝수 */}
-      <section className="bg-surface-even" id="process">
+      {/* Process - 03 */}
+      <section className="bg-surface-base" id="process">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">03</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
@@ -293,13 +293,13 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Cases - 04 홀수 */}
-      <section className="bg-surface-odd" id="cases">
+      {/* Cases - 04 */}
+      <section className="bg-surface-base" id="cases">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">04</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Work</span>
@@ -311,13 +311,13 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Gallery - 05 짝수 */}
-      <section className="bg-surface-even" id="gallery">
+      {/* Gallery - 05 */}
+      <section className="bg-surface-base" id="gallery">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">05</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Gallery</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Campaign Archive</span>
@@ -329,13 +329,13 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Insights - 06 홀수 */}
-      <section className="bg-surface-odd" id="insights">
+      {/* Insights - 06 */}
+      <section className="bg-surface-base" id="insights">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">06</span>
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">06</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Research</span>
@@ -347,8 +347,8 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Contact - 07 짝수 */}
-      <section className="bg-surface-even" id="contact">
+      {/* Contact - 07 */}
+      <section className="bg-surface-base" id="contact">
         <AnimatedSection>
           <ContactFormSection sectionNumber="07" />
         </AnimatedSection>
