@@ -217,6 +217,7 @@ const BrandingService = () => {
       stats={stats}
       accentColor={ACCENT_COLOR}
       videoSrc="/videos/branding-hero.mp4"
+      posterSrc="/images/posters/branding-hero.jpg"
       deliverables={deliverables}
       faqItems={faqItems}
       currentSlug="branding"

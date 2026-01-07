@@ -182,6 +182,7 @@ const OfflineEventService = () => {
       stats={stats}
       accentColor={ACCENT_COLOR}
       videoSrc="/videos/offline-event-hero.mp4"
+      posterSrc="/images/posters/offline-event-hero.jpg"
       deliverables={deliverables}
       faqItems={faqItems}
       currentSlug="offline-event"
