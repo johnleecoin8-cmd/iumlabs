@@ -8,11 +8,12 @@ import ServiceSchema from '@/components/ServiceSchema';
 import { useCountUp } from '@/hooks/useCountUp';
 
 // Import images
-import storyBg from '@/assets/projects/story-bg.jpg';
-import saharaAiBg from '@/assets/projects/sahara-ai-bg.jpg';
-import peaqBg from '@/assets/projects/peaq-bg.jpg';
-import mantraBg from '@/assets/projects/mantra-bg.jpg';
-import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
+import bnbEventImg from '@/assets/campaigns/bnb-event.jpg';
+import kucoinCampaignImg from '@/assets/campaigns/kucoin-campaign.jpg';
+import polygonConnectImg from '@/assets/campaigns/polygon-connect.png';
+import storyOriginImg from '@/assets/campaigns/story-origin-summit.jpg';
+import peaqSummitImg from '@/assets/campaigns/peaq-summit.jpg';
+import mantraPartyImg from '@/assets/campaigns/mantra-party.jpg';
 
 // Custom easing as tuple for TypeScript
 const customEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -206,35 +207,37 @@ const GTMService = () => {
         </motion.div>
       </section>
 
-      {/* Business Solutions Section - Innocean Style */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-32">
+      {/* GTM Strategy Section - Value Proposition */}
+      <section className="min-h-screen flex items-center justify-center px-6 py-32 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A] to-[#0F0F0F]" />
+        
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={staggerContainer}
-          className="max-w-7xl mx-auto"
+          className="max-w-7xl mx-auto relative z-10"
         >
           <motion.p 
             variants={slideUp}
             className="text-white/50 tracking-[0.3em] uppercase text-sm mb-16"
           >
-            Business Solutions
+            GTM Strategy
           </motion.p>
 
           <motion.div 
             variants={slideUp}
             className="text-4xl md:text-6xl lg:text-7xl font-light leading-[1.3] md:leading-[1.4] lg:leading-[1.4]"
           >
-            <span className="text-white/90">방대한 데이터와 기술,</span>
+            <span className="text-white/90">철저한 시장 분석과</span>
             <br className="hidden md:block" />
-            <span className="text-white/90">생각하지 못한</span>
-            <InlineImage src={storyBg} alt="Creative" />
-            <span className="text-white/90">크리에이티브로</span>
+            <span className="text-white/90">데이터 기반</span>
+            <InlineImage src={bnbEventImg} alt="Data" />
+            <span className="text-white/90">인사이트로</span>
             <br className="hidden md:block" />
-            <span className="text-white/90">새로운</span>
-            <InlineImage src={saharaAiBg} alt="Brand" />
-            <span className="text-white/90">브랜드 경험을 만듭니다.</span>
+            <span className="text-white/90">한국 시장</span>
+            <InlineImage src={kucoinCampaignImg} alt="Korea" />
+            <span className="text-white/90">진입을 설계합니다.</span>
           </motion.div>
 
           <motion.div variants={slideUp} className="mt-20">
@@ -251,20 +254,29 @@ const GTMService = () => {
         </motion.div>
       </section>
 
-      {/* Company Information Section - Innocean Style with Gallery + Stats */}
+      {/* GTM Success Cases - Gallery */}
       <section ref={companyInfoRef} className="relative bg-[#0A0A0A]">
         {/* Gallery Section */}
         <div className="px-6 py-24 md:py-32">
           <div className="max-w-7xl mx-auto">
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-white/50 tracking-[0.3em] uppercase text-sm mb-12"
+            >
+              GTM Success Cases
+            </motion.p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-              <GalleryImage src={storyBg} alt="Project 1" delay={0} />
-              <GalleryImage src={saharaAiBg} alt="Project 2" delay={0.15} />
-              <GalleryImage src={kucoinBg} alt="Project 3" delay={0.3} />
+              <GalleryImage src={bnbEventImg} alt="BNB Chain Korea Launch" delay={0} />
+              <GalleryImage src={kucoinCampaignImg} alt="KuCoin Campaign" delay={0.15} />
+              <GalleryImage src={polygonConnectImg} alt="Polygon Connect" delay={0.3} />
             </div>
           </div>
         </div>
 
-        {/* Stats Section with Video Background */}
+        {/* GTM Performance Stats */}
         <div className="relative min-h-screen">
           {/* Video Background */}
           <div className="absolute inset-0 overflow-hidden">
@@ -300,34 +312,109 @@ const GTMService = () => {
                   variants={slideUp}
                   className="text-white/50 tracking-[0.3em] uppercase text-sm mb-8"
                 >
-                  Company Information
+                  GTM Performance
                 </motion.p>
                 
                 <motion.h2 
                   variants={slideUp}
                   className="text-4xl md:text-5xl lg:text-6xl font-light mb-6"
                 >
-                  브랜드를 성장시키는 힘
+                  한국 시장 진입의 새로운 기준
                 </motion.h2>
                 
                 <motion.p 
                   variants={slideUp}
                   className="text-xl md:text-2xl text-white/60 font-light"
                 >
-                  숫자와 규모부터 다릅니다.
+                  숫자로 증명합니다.
                 </motion.p>
               </motion.div>
 
               {/* Stats - Vertical List */}
               <div className="space-y-0">
-                <StatItem value={30} suffix="+" label="프로젝트 수행" sublabel="2025년 기준" delay={0} />
-                <StatItem value={95} suffix="%" label="성공률" sublabel="2025년 기준" delay={200} />
-                <StatItem value={500} suffix="M+" label="총 노출 수" sublabel="2025년 기준" delay={400} />
-                <StatItem value={50} suffix="+" label="미디어 파트너" sublabel="2025년 기준" delay={600} />
+                <StatItem value={30} suffix="+" label="성공적 런칭" sublabel="한국 시장 GTM 프로젝트" delay={0} />
+                <StatItem value={340} suffix="%+" label="평균 성장률" sublabel="트레이딩 볼륨 / 커뮤니티" delay={200} />
+                <StatItem value={500} suffix="K+" label="총 커뮤니티 도달" sublabel="Discord, Telegram, KakaoTalk" delay={400} />
+                <StatItem value={5} suffix="M+" label="미디어 노출" sublabel="한국 주요 블록체인 미디어" delay={600} />
                 <div className="border-t border-white/20" />
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* What We Deliver Section */}
+      <section id="approach" className="py-32 px-6 bg-[#0A0A0A] relative">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={staggerContainer}
+          >
+            <motion.p 
+              variants={slideUp}
+              className="text-white/50 tracking-[0.3em] uppercase text-sm mb-8"
+            >
+              What We Deliver
+            </motion.p>
+            
+            <motion.h2 
+              variants={slideUp}
+              className="text-4xl md:text-5xl font-light mb-20"
+            >
+              GTM 서비스 범위
+            </motion.h2>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  num: '01',
+                  title: 'Market Research',
+                  desc: '한국 시장 트렌드, 경쟁사 분석, 타겟 오디언스 인사이트'
+                },
+                {
+                  num: '02',
+                  title: 'Localization',
+                  desc: '한국어 콘텐츠, 네이밍, 문화적 맥락에 맞는 메시징'
+                },
+                {
+                  num: '03',
+                  title: 'Community Setup',
+                  desc: 'KakaoTalk, Discord, Telegram 한국 커뮤니티 인프라 구축'
+                },
+                {
+                  num: '04',
+                  title: 'KOL Network',
+                  desc: '50+ 한국 크립토 인플루언서 파트너십 및 캠페인 실행'
+                },
+                {
+                  num: '05',
+                  title: 'PR & Media',
+                  desc: '주요 블록체인 미디어 커버리지 - Blockmedia, Coinness, 코인데스크'
+                },
+                {
+                  num: '06',
+                  title: 'Exchange Relations',
+                  desc: '한국 주요 거래소 관계 구축 및 상장 지원'
+                }
+              ].map((item, index) => (
+                <motion.div
+                  key={item.num}
+                  variants={slideUp}
+                  className="border-t border-white/10 pt-8 group"
+                >
+                  <span className="text-white/30 text-sm tracking-wider">{item.num}</span>
+                  <h3 className="text-xl md:text-2xl font-light text-white mt-4 mb-4 group-hover:text-white/80 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-white/50 font-light leading-relaxed">
+                    {item.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -448,26 +535,26 @@ const GTMService = () => {
                 variants={slideUp}
                 className="text-white/50 tracking-[0.3em] uppercase text-sm mb-10"
               >
-                Global Network
+                Korea Market Expertise
               </motion.p>
               
               <motion.h2 
                 variants={slideUp}
                 className="text-4xl md:text-5xl lg:text-6xl font-light mb-10 leading-tight"
               >
-                세계 어디서나
+                한국 시장을 가장 잘 아는
                 <br />
-                <span className="text-white/60">브랜드의 가능성을</span>
+                <span className="text-white/60">파트너와</span>
                 <br />
-                <span className="text-white/60">실현합니다.</span>
+                <span className="text-white/60">함께하세요.</span>
               </motion.h2>
 
               <motion.p 
                 variants={slideUp}
                 className="text-lg text-white/50 mb-14 max-w-md font-light leading-relaxed"
               >
-                서울을 중심으로 아시아, 중동, 북미까지 글로벌 네트워크를 통해 
-                프로젝트의 성공적인 시장 진입을 지원합니다.
+                서울을 기반으로 한국 주요 거래소, 미디어, KOL 네트워크와의 
+                직접 연결을 통해 가장 효과적인 시장 진입을 지원합니다.
               </motion.p>
 
               <motion.div variants={slideUp}>
@@ -476,7 +563,7 @@ const GTMService = () => {
                   className="inline-flex items-center gap-4 text-white/60 hover:text-white transition-colors group"
                 >
                   <span className="text-sm tracking-wider uppercase relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-px after:bottom-0 after:left-0 after:bg-white after:origin-bottom-right after:transition-transform after:duration-300 group-hover:after:scale-x-100 group-hover:after:origin-bottom-left">
-                    View Our Network
+                    View Our Projects
                   </span>
                   <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform duration-300" />
                 </a>
@@ -486,7 +573,7 @@ const GTMService = () => {
         </div>
       </section>
 
-      {/* CTA Section - Innocean Style */}
+      {/* CTA Section - Launch in Korea */}
       <section className="min-h-screen flex items-center px-6 py-32 relative">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
@@ -502,22 +589,21 @@ const GTMService = () => {
                 variants={slideUp}
                 className="text-white/50 tracking-[0.3em] uppercase text-sm mb-16"
               >
-                Get Started
+                Launch in Korea
               </motion.p>
 
               <motion.div 
                 variants={slideUp}
                 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-light leading-[1.3] md:leading-[1.4]"
               >
-                <span className="text-white/90">함께하세요.</span>
+                <span className="text-white/90">한국 시장 진입,</span>
                 <br />
-                <span className="text-white/90">브랜드 경험이</span>
-                <InlineImage src={peaqBg} alt="Experience" />
-                <span className="text-white/90">달라지면</span>
+                <InlineImage src={storyOriginImg} alt="Launch" />
+                <span className="text-white/90">처음부터 끝까지</span>
                 <br />
-                <span className="text-white/90">모든 것이</span>
-                <InlineImage src={mantraBg} alt="Everything" />
-                <span className="text-white/90">달라집니다.</span>
+                <span className="text-white/90">함께</span>
+                <InlineImage src={mantraPartyImg} alt="Together" />
+                <span className="text-white/90">설계합니다.</span>
               </motion.div>
             </div>
 
@@ -547,7 +633,7 @@ const GTMService = () => {
                     href="/contact" 
                     className="inline-flex items-center gap-4 bg-white text-black px-8 py-5 text-sm tracking-wider uppercase font-medium hover:bg-black hover:text-white border border-white transition-all duration-300 group"
                   >
-                    <span>Get On Board</span>
+                    <span>Start Your GTM</span>
                     <ArrowRight size={18} className="group-hover:translate-x-2 transition-transform duration-300" />
                   </a>
                 </div>
