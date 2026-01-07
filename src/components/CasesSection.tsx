@@ -34,6 +34,7 @@ import megaethCampaign from "@/assets/campaigns/megaeth-launch.jpg";
 import zkpassCampaign from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import synfuturesCampaign from "@/assets/campaigns/synfutures-billboard.jpg";
 import fogoCampaign from "@/assets/campaigns/fogo-fest.avif";
+import openledgerCampaign from "@/assets/campaigns/openledger-interview.jpg";
 
 // Map gallery `src` (stored as file path strings) to bundled campaign assets
 const campaignAssetByFile: Record<string, string> = {
@@ -51,6 +52,7 @@ const campaignAssetByFile: Record<string, string> = {
   "zkpass-verifiable-nights.jpg": zkpassCampaign,
   "synfutures-billboard.jpg": synfuturesCampaign,
   "fogo-fest.avif": fogoCampaign,
+  "openledger-interview.jpg": openledgerCampaign,
 };
 
 const resolveGallerySrcToAsset = (src?: string | null) => {
@@ -74,6 +76,7 @@ const fallbackImages: Record<string, { logo: string; bgImage: string }> = {
   'zkpass': { logo: zkpassLogo, bgImage: zkpassCampaign },
   'peaq': { logo: peaqLogo, bgImage: peaqCampaign },
   'tria': { logo: triaLogo, bgImage: triaCampaign },
+  'openledger': { logo: '', bgImage: openledgerCampaign },
 };
 
 interface CaseCardProps {
@@ -231,6 +234,7 @@ const CasesSection = () => {
   });
 
   const cases = projects || [];
+  const displayCases = cases.slice(0, 12); // Show only 3x4 = 12 projects on home
 
   return (
     <section className="bg-background">
@@ -263,23 +267,25 @@ const CasesSection = () => {
             <span className="text-[10px] md:text-xs text-muted-foreground">Projects</span>
           </div>
         </div>
-        
-        {/* Right: View All Link */}
-        <Link
-          to="/projects"
-          className="group inline-flex items-center gap-2 text-foreground font-medium hover:text-foreground/70 transition-colors text-sm whitespace-nowrap"
-        >
-          <span className="group-hover:underline underline-offset-4">View all projects</span>
-          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-        </Link>
       </div>
 
-      {/* 3xN Cases Grid */}
+      {/* 3x4 Cases Grid (12 projects max) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {cases.map((caseItem, index) => (
-          <CaseCard key={caseItem.slug} {...caseItem} index={index} totalCount={cases.length} />
+        {displayCases.map((caseItem, index) => (
+          <CaseCard key={caseItem.slug} {...caseItem} index={index} totalCount={displayCases.length} />
         ))}
       </div>
+
+      {/* View All Projects Row */}
+      <Link
+        to="/projects"
+        className="group flex items-center justify-center gap-3 p-6 md:p-8 border-t border-border bg-secondary/30 hover:bg-secondary/50 transition-colors"
+      >
+        <span className="text-foreground font-medium text-sm md:text-base group-hover:underline underline-offset-4">
+          View all {cases.length} projects
+        </span>
+        <ArrowRight className="w-4 h-4 text-foreground group-hover:translate-x-1 transition-transform" />
+      </Link>
     </section>
   );
 };
