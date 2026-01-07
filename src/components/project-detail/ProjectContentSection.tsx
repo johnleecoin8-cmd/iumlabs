@@ -208,10 +208,10 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
             )}
             
             {/* What We Did */}
-            {project.challenge && (
+            {(project.whatWeDid || project.challenge) && (
               <div className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 border border-white/10">
                 <h3 className="text-xs md:text-sm text-white/50 uppercase tracking-wider mb-4 font-medium">What We Did</h3>
-                <p className="text-sm md:text-base text-white leading-relaxed">{project.challenge}</p>
+                <p className="text-sm md:text-base text-white leading-relaxed">{project.whatWeDid || project.challenge}</p>
               </div>
             )}
           </motion.div>
