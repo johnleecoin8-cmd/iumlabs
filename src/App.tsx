@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import Sidebar from "@/components/Sidebar";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { SidebarProvider } from "@/hooks/useSidebarState";
@@ -51,6 +51,42 @@ const ScrollToTop = () => {
   return null;
 };
 
+// Transition Particles Component
+const TransitionParticles = () => {
+  const particles = useMemo(() => 
+    Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: 2 + Math.random() * 4,
+      duration: 0.4 + Math.random() * 0.4,
+      delay: Math.random() * 0.2,
+      color: Math.random() > 0.5 ? 'cyan' : 'magenta'
+    }))
+  , []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {particles.map(p => (
+        <div
+          key={p.id}
+          className="absolute rounded-full animate-particle-float"
+          style={{
+            left: `${p.x}%`,
+            top: `${p.y}%`,
+            width: p.size,
+            height: p.size,
+            backgroundColor: p.color === 'cyan' ? '#00FFFF' : '#FF00FF',
+            boxShadow: `0 0 ${p.size * 3}px ${p.color === 'cyan' ? '#00FFFF' : '#FF00FF'}`,
+            animationDuration: `${p.duration}s`,
+            animationDelay: `${p.delay}s`
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
 // Logo center pulse page transition
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
@@ -66,21 +102,21 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
     }
     prevPathname.current = location.pathname;
 
-    // Start transition sequence
+    // Start transition sequence - Total ~1.0s
     setPhase('fadeOut');
 
     const fadeOutTimer = setTimeout(() => {
       setPhase('logo');
-    }, 250);
+    }, 150); // Faster fadeOut
 
     const logoTimer = setTimeout(() => {
       setDisplayChildren(children);
       setPhase('fadeIn');
-    }, 900);
+    }, 750); // Logo phase: 600ms
 
     const fadeInTimer = setTimeout(() => {
       setPhase('idle');
-    }, 1200);
+    }, 1000); // Total: ~1s
 
     return () => {
       clearTimeout(fadeOutTimer);
@@ -94,16 +130,20 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
       {/* Logo overlay */}
       {(phase === 'logo' || phase === 'fadeOut' || phase === 'fadeIn') && (
         <div 
-          className={`fixed inset-0 z-[9999] bg-background flex items-center justify-center transition-opacity duration-150 ${
+          className={`fixed inset-0 z-[9999] bg-background flex items-center justify-center transition-opacity duration-100 ${
             phase === 'fadeIn' ? 'opacity-0' : 'opacity-100'
           }`}
         >
+          {/* Particles */}
+          {phase === 'logo' && <TransitionParticles />}
+          
+          {/* Logo with scale + rotate animation */}
           <div 
             className={`w-[32rem] h-64 ${
               phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
             }`}
             style={{
-              filter: 'drop-shadow(0 0 40px rgba(0, 255, 255, 0.5)) drop-shadow(0 0 80px rgba(255, 0, 255, 0.3))'
+              filter: 'drop-shadow(0 0 60px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 120px rgba(255, 0, 255, 0.4))'
             }}
           >
             <Logo3D immediate />
@@ -113,7 +153,7 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
 
       {/* Page content */}
       <div 
-        className={`transition-opacity duration-150 ease-out ${
+        className={`transition-opacity duration-100 ease-out ${
           phase === 'fadeOut' || phase === 'logo' 
             ? 'opacity-0' 
             : 'opacity-100'
