@@ -43,7 +43,7 @@ import kucoinBg from "@/assets/projects/kucoin-bg.jpg";
 import polygonBg from "@/assets/projects/polygon-bg.jpg";
 import ondoBg from "@/assets/projects/ondo-bg.jpg";
 import peaqBg from "@/assets/projects/peaq-bg.jpg";
-import peaqEventImg from "@/assets/projects/peaq-event.jpg";
+import peaqFeatureImg from "@/assets/projects/peaq-feature.jpg";
 import storyBg from "@/assets/projects/story-bg.jpg";
 import megaethBg from "@/assets/projects/megaeth-bg.jpg";
 import triaBg from "@/assets/projects/tria-bg.jpg";
@@ -244,7 +244,7 @@ export const projectsData: Record<string, ProjectData> = {
     name: "Peaq",
     logo: peaqLogo,
     bgImage: peaqBg,
-    featureImage: peaqEventImg,
+    featureImage: peaqFeatureImg,
     category: "DePIN",
     result: "#1 DePIN in Korea",
     glowColor: "#00CED1",
