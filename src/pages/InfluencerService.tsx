@@ -180,7 +180,7 @@ const InfluencerService = () => {
           <div className="py-6 sm:py-10 md:py-14">
             <div className="container mx-auto px-3 sm:px-6 lg:px-16">
               {/* KOL Grid - First 24 (6x4) visible */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
+              <div className="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1.5 sm:gap-4">
                 {kolProfiles.slice(0, 24).map((kol, index) => (
                   <a
                     key={index}
@@ -217,7 +217,7 @@ const InfluencerService = () => {
 
               {/* Faded KOL Grid - Remaining KOLs */}
               <div className="relative mt-3 sm:mt-4">
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4 opacity-30 blur-[2px] pointer-events-none select-none">
+                <div className="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1.5 sm:gap-4 opacity-30 blur-[2px] pointer-events-none select-none">
                   {kolProfiles.slice(24).map((kol, index) => (
                     <div
                       key={index}
