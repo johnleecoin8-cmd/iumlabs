@@ -108,45 +108,87 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
               alt={`${project.name} featured`}
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black/60" />
+            {/* 더 강한 그라데이션 오버레이 */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
           </div>
           
           {/* 오버레이 콘텐츠 */}
-          <div className="relative z-10 px-4 md:px-8 lg:px-12 py-12 md:py-16">
+          <div className="relative z-10 px-6 md:px-12 lg:px-20 py-16 md:py-24">
             
-            {/* Client & Category 카드 */}
+            {/* 프로젝트 로고 & 타이틀 */}
             <motion.div 
-              className="grid grid-cols-2 gap-3 md:gap-4 mb-6 md:mb-8 max-w-md"
+              className="flex items-center gap-4 mb-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-5 border border-white/10">
-                <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider block mb-1">Client</span>
-                <span className="text-lg md:text-xl font-medium text-white block">{project.client_name || project.name}</span>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-5 border border-white/10">
-                <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider block mb-1">Category</span>
-                <span className="text-lg md:text-xl font-medium text-white block">{project.category}</span>
+              {project.logo && (
+                <div className="w-16 h-16 md:w-20 md:h-20 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 flex items-center justify-center shadow-2xl">
+                  <img 
+                    src={project.logo} 
+                    alt={`${project.name} logo`}
+                    className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                  />
+                </div>
+              )}
+              <div>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white drop-shadow-lg">
+                  {project.name}
+                </h2>
+                <p className="text-white/60 text-sm md:text-base mt-1">{project.category}</p>
               </div>
             </motion.div>
             
-            {/* Description */}
-            <motion.p 
-              className="text-base md:text-lg text-white/80 mb-8 md:mb-10 max-w-3xl leading-relaxed"
+            {/* Client & Category 카드 */}
+            <motion.div 
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              {project.description}
-            </motion.p>
+              <div className="bg-black/50 backdrop-blur-md rounded-2xl p-5 md:p-6 border border-white/20 shadow-xl">
+                <span className="text-[11px] md:text-xs text-cyan-400 uppercase tracking-wider font-medium block mb-2">Client</span>
+                <span className="text-lg md:text-xl font-semibold text-white block">{project.client_name || project.name}</span>
+              </div>
+              <div className="bg-black/50 backdrop-blur-md rounded-2xl p-5 md:p-6 border border-white/20 shadow-xl">
+                <span className="text-[11px] md:text-xs text-purple-400 uppercase tracking-wider font-medium block mb-2">Category</span>
+                <span className="text-lg md:text-xl font-semibold text-white block">{project.category}</span>
+              </div>
+              {project.duration && (
+                <div className="bg-black/50 backdrop-blur-md rounded-2xl p-5 md:p-6 border border-white/20 shadow-xl">
+                  <span className="text-[11px] md:text-xs text-emerald-400 uppercase tracking-wider font-medium block mb-2">Duration</span>
+                  <span className="text-lg md:text-xl font-semibold text-white block">{project.duration}</span>
+                </div>
+              )}
+              {project.result && (
+                <div className="bg-black/50 backdrop-blur-md rounded-2xl p-5 md:p-6 border border-white/20 shadow-xl">
+                  <span className="text-[11px] md:text-xs text-orange-400 uppercase tracking-wider font-medium block mb-2">Result</span>
+                  <span className="text-lg md:text-xl font-semibold text-white block">{project.result}</span>
+                </div>
+              )}
+            </motion.div>
+            
+            {/* Description */}
+            <motion.div
+              className="bg-black/40 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/15 shadow-2xl mb-8 md:mb-12 max-w-4xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+            >
+              <h3 className="text-xs md:text-sm text-blue-400 uppercase tracking-wider font-medium mb-3">Overview</h3>
+              <p className="text-base md:text-lg lg:text-xl text-white/90 leading-relaxed">
+                {project.description}
+              </p>
+            </motion.div>
             
             {/* Metrics Grid */}
             {metrics && metrics.length > 0 && (
               <motion.div 
-                className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10"
+                className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8 md:mb-12"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -155,11 +197,12 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
                 {metrics.map((metric, idx) => (
                   <div 
                     key={idx}
-                    className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-5 border border-white/10"
+                    className="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-md rounded-2xl p-5 md:p-6 border border-white/20 shadow-xl relative overflow-hidden group"
                   >
-                    <span className="text-[10px] md:text-xs text-white/40 block mb-1">0{idx + 1}.</span>
-                    <span className="text-xl md:text-2xl font-bold text-white block mb-1">{metric.value}</span>
-                    <span className="text-xs md:text-sm text-white/60 block">{metric.label}</span>
+                    <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <span className="text-[10px] md:text-xs text-white/40 block mb-2 relative z-10">0{idx + 1}.</span>
+                    <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-white block mb-2 relative z-10">{metric.value}</span>
+                    <span className="text-sm md:text-base text-cyan-300/80 block relative z-10">{metric.label}</span>
                   </div>
                 ))}
               </motion.div>
@@ -167,7 +210,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
             
             {/* Scope of Work & What We Did */}
             <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -175,11 +218,14 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
             >
               {/* Scope of Work */}
               {project.services && project.services.length > 0 && (
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-white/10">
-                  <h3 className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider mb-4">Scope of Work</h3>
-                  <ul className="space-y-2">
+                <div className="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-cyan-500/30 shadow-xl">
+                  <h3 className="text-xs md:text-sm text-cyan-400 uppercase tracking-wider font-medium mb-5">Scope of Work</h3>
+                  <ul className="space-y-3">
                     {project.services.map((service, idx) => (
-                      <li key={idx} className="text-sm md:text-base text-white/90">{service}</li>
+                      <li key={idx} className="flex items-start gap-3">
+                        <span className="w-2 h-2 rounded-full bg-cyan-400 mt-2 flex-shrink-0" />
+                        <span className="text-base md:text-lg text-white/90">{service}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -187,9 +233,9 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
               
               {/* What We Did */}
               {project.challenge && (
-                <div className="bg-white/10 backdrop-blur-sm rounded-xl p-5 md:p-6 border border-white/10">
-                  <h3 className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider mb-4">What We Did</h3>
-                  <p className="text-sm md:text-base text-white/80 leading-relaxed">{project.challenge}</p>
+                <div className="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-purple-500/30 shadow-xl">
+                  <h3 className="text-xs md:text-sm text-purple-400 uppercase tracking-wider font-medium mb-5">What We Did</h3>
+                  <p className="text-base md:text-lg text-white/90 leading-relaxed">{project.challenge}</p>
                 </div>
               )}
             </motion.div>
