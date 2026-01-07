@@ -1,8 +1,7 @@
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import { Building2, Clock, Layers, LucideIcon } from "lucide-react";
 import { ProjectData, ProjectMetric } from "@/data/projectsData";
 import { useCountUp } from "@/hooks/useCountUp";
-import { useRef } from "react";
 // Meta info item component with icon and accent color
 interface MetaInfoItemProps {
   label: string;
@@ -96,300 +95,176 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
   const category = project.category;
   const hasMetaInfo = clientName || duration || category;
 
-  // Parallax scroll effect - only use when ref is hydrated
-  const parallaxRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: project.featureImage ? parallaxRef : undefined,
-    offset: ["start start", "end start"]
-  });
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   return (
     <div className="bg-[#0A0A0A]">
-      {/* SECTION 0: FEATURE IMAGE WITH OVERLAY CONTENT */}
-      {project.featureImage && (
-        <section ref={parallaxRef} className="relative min-h-screen overflow-hidden">
-          {/* 배경 이미지 with Parallax */}
+      {/* SECTION 0: PROJECT INFO - No background image */}
+      <section className="py-12 md:py-16">
+        <div className="px-4 md:px-8 lg:px-12">
+          
+          {/* Project Info Section - 2 Column Layout */}
           <motion.div 
-            className="absolute inset-0"
-            style={{ y: backgroundY }}
+            className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
           >
-            <img 
-              src={project.featureImage} 
-              alt={`${project.name} featured`}
-              className="w-full h-[120%] object-cover"
-            />
-            <div className="absolute inset-0 bg-black/60" />
+            {/* Left: Meta Info Panel */}
+            <div className="bg-[#1A1A1A] rounded-xl border border-white/10 overflow-hidden">
+              {/* Client */}
+              <div className="p-4 md:p-5 border-b border-white/10">
+                <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest block mb-1">Client</span>
+                <span className="text-base md:text-lg font-semibold text-white block">{project.client_name || project.name}</span>
+              </div>
+              
+              {/* Category */}
+              <div className="p-4 md:p-5 border-b border-white/10">
+                <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest block mb-1">Category</span>
+                <div className="flex items-center gap-2">
+                  <span 
+                    className="w-2 h-2 rounded-full"
+                    style={{ backgroundColor: project.glowColor || '#00CED1' }}
+                  />
+                  <span className="text-base md:text-lg font-semibold text-white">{project.category}</span>
+                </div>
+              </div>
+              
+              {/* Year */}
+              <div className="p-4 md:p-5 border-b border-white/10">
+                <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest block mb-1">Year</span>
+                <span className="text-base md:text-lg font-semibold text-white block">2025</span>
+              </div>
+              
+              {/* Result Highlight */}
+              {project.result && (
+                <div className="p-4 md:p-5">
+                  <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest block mb-1">Key Result</span>
+                  <span 
+                    className="text-base md:text-lg font-bold block"
+                    style={{ color: project.glowColor || '#00CED1' }}
+                  >
+                    {project.result}
+                  </span>
+                </div>
+              )}
+            </div>
+            
+            {/* Right: About & Challenge Panel */}
+            <div className="lg:col-span-2 flex flex-col gap-4 md:gap-6">
+              {/* About the Project */}
+              <div className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 border border-white/10 flex-1">
+                <h3 className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest mb-3 md:mb-4 font-medium">About the Project</h3>
+                <p className="text-base md:text-lg text-white/90 leading-relaxed">
+                  {project.description}
+                </p>
+              </div>
+              
+              {/* The Challenge */}
+              {project.challenge && (
+                <div className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 border border-white/10">
+                  <h3 className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest mb-3 md:mb-4 font-medium">The Challenge</h3>
+                  <p className="text-base md:text-lg text-white/90 leading-relaxed">
+                    {project.challenge}
+                  </p>
+                </div>
+              )}
+            </div>
           </motion.div>
           
-          {/* 오버레이 콘텐츠 */}
-          <div className="relative z-10 px-4 md:px-8 lg:px-12 py-12 md:py-16">
-            
-            {/* Project Info Section - 2 Column Layout */}
+          {/* Metrics Grid */}
+          {displayMetrics && displayMetrics.length > 0 && (
             <motion.div 
-              className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-10"
+              className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
             >
-              {/* Left: Meta Info Panel */}
-              <div className="bg-black/60 backdrop-blur-md rounded-xl border border-white/20 shadow-xl overflow-hidden">
-                {/* Client */}
-                <div className="p-4 md:p-5 border-b border-white/10">
-                  <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest block mb-1">Client</span>
-                  <span className="text-base md:text-lg font-semibold text-white block">{project.client_name || project.name}</span>
-                </div>
-                
-                {/* Category */}
-                <div className="p-4 md:p-5 border-b border-white/10">
-                  <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest block mb-1">Category</span>
-                  <div className="flex items-center gap-2">
-                    <span 
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: project.glowColor || '#00CED1' }}
-                    />
-                    <span className="text-base md:text-lg font-semibold text-white">{project.category}</span>
-                  </div>
-                </div>
-                
-                {/* Year */}
-                <div className="p-4 md:p-5 border-b border-white/10">
-                  <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest block mb-1">Year</span>
-                  <span className="text-base md:text-lg font-semibold text-white block">2025</span>
-                </div>
-                
-                {/* Result Highlight */}
-                {project.result && (
-                  <div className="p-4 md:p-5">
-                    <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest block mb-1">Key Result</span>
-                    <span 
-                      className="text-base md:text-lg font-bold block"
-                      style={{ color: project.glowColor || '#00CED1' }}
-                    >
-                      {project.result}
-                    </span>
-                  </div>
-                )}
-              </div>
-              
-              {/* Right: About & Challenge Panel */}
-              <div className="lg:col-span-2 flex flex-col gap-4 md:gap-6">
-                {/* About the Project */}
-                <div className="bg-black/60 backdrop-blur-md rounded-xl p-5 md:p-6 border border-white/20 shadow-xl flex-1">
-                  <h3 className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest mb-3 md:mb-4 font-medium">About the Project</h3>
-                  <p className="text-base md:text-lg text-white/90 leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-                
-                {/* The Challenge */}
-                {project.challenge && (
-                  <div className="bg-black/60 backdrop-blur-md rounded-xl p-5 md:p-6 border border-white/20 shadow-xl">
-                    <h3 className="text-[10px] md:text-xs text-white/50 uppercase tracking-widest mb-3 md:mb-4 font-medium">The Challenge</h3>
-                    <p className="text-base md:text-lg text-white/90 leading-relaxed">
-                      {project.challenge}
-                    </p>
-                  </div>
-                )}
-              </div>
+              {displayMetrics.map((metric, idx) => (
+                <MetricCard key={idx} metric={metric} index={idx} />
+              ))}
             </motion.div>
+          )}
+          
+          {/* Scope of Work & What We Did */}
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            {/* Scope of Work */}
+            {project.services && project.services.length > 0 && (
+              <div className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 border border-white/10">
+                <h3 className="text-xs md:text-sm text-white/50 uppercase tracking-wider mb-4 font-medium">Scope of Work</h3>
+                <ul className="space-y-2">
+                  {project.services.map((service, idx) => (
+                    <li key={idx} className="text-sm md:text-base text-white font-medium">{service}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
             
-            {/* Metrics Grid */}
-            {metrics && metrics.length > 0 && (
-              <motion.div 
-                className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-10"
+            {/* What We Did */}
+            {project.challenge && (
+              <div className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 border border-white/10">
+                <h3 className="text-xs md:text-sm text-white/50 uppercase tracking-wider mb-4 font-medium">What We Did</h3>
+                <p className="text-sm md:text-base text-white leading-relaxed">{project.challenge}</p>
+              </div>
+            )}
+          </motion.div>
+          
+        </div>
+      </section>
+
+      {/* NEW CTA SECTION: "You want to be a next project?" */}
+      <section className="py-8 md:py-12">
+        <div className="px-4 md:px-8 lg:px-12">
+          <motion.div 
+            className="rounded-2xl overflow-hidden h-[400px] md:h-[500px] relative group"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Background Image with Hover Zoom */}
+            <div 
+              className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
+              style={{
+                backgroundImage: `url(${gallery?.[0]?.src || project.bgImage || project.featureImage})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center'
+              }}
+            />
+            <div className="absolute inset-0 bg-black/60" />
+            
+            {/* Content */}
+            <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
+              <motion.h3 
+                className="text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                {metrics.map((metric, idx) => (
-                  <div 
-                    key={idx}
-                    className="bg-black/60 backdrop-blur-md rounded-xl p-4 md:p-5 border border-white/20 shadow-xl"
-                  >
-                    <span className="text-xs text-white/60 block mb-1">0{idx + 1}.</span>
-                    <span className="text-xl md:text-2xl font-bold text-white block mb-1">{metric.value}</span>
-                    <span className="text-xs md:text-sm text-white block">{metric.label}</span>
-                  </div>
-                ))}
-              </motion.div>
-            )}
-            
-            {/* Scope of Work & What We Did */}
-            <motion.div 
-              className="grid grid-cols-1 md:grid-cols-2 gap-4"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              {/* Scope of Work */}
-              {project.services && project.services.length > 0 && (
-                <div className="bg-black/60 backdrop-blur-md rounded-xl p-5 md:p-6 border border-white/20 shadow-xl">
-                  <h3 className="text-xs md:text-sm text-white/80 uppercase tracking-wider mb-4 font-medium">Scope of Work</h3>
-                  <ul className="space-y-2">
-                    {project.services.map((service, idx) => (
-                      <li key={idx} className="text-sm md:text-base text-white font-medium">{service}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              
-              {/* What We Did */}
-              {project.challenge && (
-                <div className="bg-black/60 backdrop-blur-md rounded-xl p-5 md:p-6 border border-white/20 shadow-xl">
-                  <h3 className="text-xs md:text-sm text-white/80 uppercase tracking-wider mb-4 font-medium">What We Did</h3>
-                  <p className="text-sm md:text-base text-white leading-relaxed">{project.challenge}</p>
-                </div>
-              )}
-            </motion.div>
-            
-          </div>
-        </section>
-      )}
-
-      {/* SECTION 1: PROJECT META INFO - Only show if no featureImage */}
-      {hasMetaInfo && !project.featureImage && (
-        <section className="py-3 md:py-4">
-          <div className="px-4 md:px-8 lg:px-12">
-            <motion.div
-              className="bg-[#1A1A1A] rounded-xl p-3 md:p-4 flex gap-4 md:gap-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              {/* Project Logo */}
-              {project.logo && (
-                <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 md:w-24 md:h-24 bg-white/5 rounded-xl border border-white/10 self-center">
-                  <img 
-                    src={project.logo} 
-                    alt={`${project.name} logo`}
-                    className="w-10 h-10 md:w-14 md:h-14 object-contain"
-                  />
-                </div>
-              )}
-              
-              {/* Meta Info & Description */}
-              <div className="flex-1 min-w-0">
-                <div className="flex flex-wrap items-center gap-4 md:gap-8">
-                  <MetaInfoItem label="Client" value={clientName} icon={Building2} accentColor="text-blue-400" delay={0} />
-                  {duration && <MetaInfoItem label="Duration" value={duration} icon={Clock} accentColor="text-purple-400" delay={0.1} />}
-                  {category && <MetaInfoItem label="Category" value={category} icon={Layers} accentColor="text-emerald-400" delay={0.2} />}
-                </div>
-                
-                {/* Project Description */}
-                {project.description && (
-                  <motion.p
-                    className="text-sm md:text-base text-white/70 mt-4 pt-4 border-t border-white/10 leading-relaxed"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: 0.3 }}
-                  >
-                    {project.description}
-                  </motion.p>
-                )}
-              </div>
-            </motion.div>
-          </div>
-        </section>
-      )}
-
-      {/* SECTION 1: METRICS - Only show if no featureImage */}
-      {displayMetrics && displayMetrics.length > 0 && !project.featureImage && (
-        <section className="py-3 md:py-4">
-          <div className="px-4 md:px-8 lg:px-12">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
-              {displayMetrics.map((metric, idx) => (
-                <MetricCard key={idx} metric={metric} index={idx} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* SECTION 2: SCOPE OF WORK + Overview - Only show if no featureImage */}
-      {!project.featureImage && (
-      <section className="py-2 md:py-3">
-        <div className="px-4 md:px-8 lg:px-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-            {/* Top Left: Scope of Work */}
-            <motion.div 
-              className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 h-full"
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <h3 className="text-xs text-white/40 uppercase tracking-wider mb-4">
-                Scope of Work
-              </h3>
-              <ul className="space-y-2">
-                {project.services.map((service, idx) => (
-                  <li key={idx} className="text-base md:text-lg font-normal text-white">
-                    {service}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-
-            {/* Bottom Left: What We Did */}
-            {project.challenge && (
-              <motion.div 
-                className="bg-[#1A1A1A] rounded-xl p-5 md:p-6 h-full"
+                You want to be a next project?
+              </motion.h3>
+              <motion.a 
+                href="/contact"
+                className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-white/90 transition-colors text-lg"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
               >
-                <h3 className="text-xs text-white/40 uppercase tracking-wider mb-3">
-                  What We Did
-                </h3>
-                <p className="text-base md:text-lg font-normal text-white/80 leading-relaxed">
-                  {project.challenge}
-                </p>
-              </motion.div>
-            )}
-
-          </div>
-          
-          {/* CTA Section */}
-          <motion.div 
-            className="mt-3 md:mt-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <div 
-              className="rounded-xl overflow-hidden h-[360px] md:h-[500px] relative"
-              style={{
-                backgroundImage: gallery && gallery.length > 0 ? `url(${gallery[0].src})` : undefined,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center'
-              }}
-            >
-              <div className="absolute inset-0 bg-black/60" />
-              <div className="relative h-full flex flex-col items-center justify-center text-center px-4">
-                <h3 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-6 whitespace-nowrap">
-                  Ready to achieve similar results in Korea?
-                </h3>
-                <a 
-                  href="/contact"
-                  className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-white/90 transition-colors"
-                >
-                  Start Your Project
-                </a>
-              </div>
+                Contact Us
+              </motion.a>
             </div>
           </motion.div>
         </div>
       </section>
-      )}
-
 
       {/* Bottom padding */}
       <div className="h-8 md:h-10" />
