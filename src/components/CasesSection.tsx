@@ -100,7 +100,13 @@ interface CaseCardProps {
   totalCount: number;
 }
 
-const CaseCard = ({ name, bgImage, slug, category, result, description, websiteUrl, index }: CaseCardProps) => {
+const CaseCard = ({ name, bgImage, slug, category, result, description, websiteUrl, index, totalCount }: CaseCardProps) => {
+  // 3-column grid border logic
+  const isRightColumn = index % 3 === 2;
+  const rowCount = Math.ceil(totalCount / 3);
+  const currentRow = Math.floor(index / 3);
+  const isLastRow = currentRow === rowCount - 1;
+
   const { ref, isVisible } = useScrollAnimation({ 
     threshold: 0.1,
     rootMargin: '30px',
@@ -111,61 +117,65 @@ const CaseCard = ({ name, bgImage, slug, category, result, description, websiteU
     <div 
       ref={ref}
       className={cn(
-        "transition-all duration-500 ease-out will-change-transform",
+        "h-full transition-all duration-500 ease-out will-change-transform",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       )}
       style={{ transitionDelay: `${(index % 6) * 50}ms` }}
     >
-      <div className="group rounded-lg sm:rounded-xl md:rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30 active:scale-[0.98]">
-        {/* Image */}
+      <div
+        className={cn(
+          "group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full",
+          !isRightColumn && "border-r border-border",
+          !isLastRow && "border-b border-border"
+        )}
+      >
         <Link
           to={`/projects/${slug}`}
           onClick={() => window.scrollTo(0, 0)}
-          className="block aspect-[16/10] overflow-hidden"
+          className="block active:scale-[0.98] transition-transform duration-150"
         >
-          <img 
-            src={bgImage} 
-            alt={name}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-        </Link>
-        
-        {/* Content */}
-        <div className="p-2 sm:p-3 md:p-4 lg:p-5">
-          <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-1.5 md:mb-2">
-            <span className="text-[8px] sm:text-[10px] md:text-label uppercase tracking-wider font-medium text-muted-foreground truncate">{category}</span>
-            {websiteUrl && (
-              <a
-                href={websiteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="flex items-center gap-1 text-[9px] sm:text-[10px] text-muted-foreground hover:text-foreground transition-colors ml-auto"
-              >
-                <ExternalLink className="w-2.5 h-2.5" />
-              </a>
-            )}
+          {/* Image - Full width on top */}
+          <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-3 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+            <img
+              src={bgImage}
+              alt={name}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
           </div>
-          <Link
-            to={`/projects/${slug}`}
-            onClick={() => window.scrollTo(0, 0)}
-          >
-            <h3 className="text-xs sm:text-sm md:text-body-lg font-semibold text-foreground mb-1 sm:mb-1.5 md:mb-2 group-hover:text-primary transition-colors line-clamp-1">
+
+          {/* Content */}
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="text-muted-foreground text-[9px] sm:text-[10px] uppercase tracking-wider">{category}</span>
+              {websiteUrl && (
+                <a
+                  href={websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex items-center gap-1 text-[9px] sm:text-[10px] text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <ExternalLink className="w-2.5 h-2.5" />
+                </a>
+              )}
+            </div>
+            <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors line-clamp-1">
               {name}
             </h3>
-          </Link>
-          <p className="text-[10px] sm:text-xs md:text-body-sm text-foreground/80 font-medium mb-1 sm:mb-1.5 md:mb-2 line-clamp-1">
-            {result}
-          </p>
-          <p className="text-[10px] sm:text-xs md:text-body-sm text-muted-foreground leading-relaxed line-clamp-2 mb-2 sm:mb-3 md:mb-4 hidden sm:block">
-            {description}
-          </p>
-          
-          <div className="flex items-center gap-1 sm:gap-1.5 md:gap-2 text-[8px] sm:text-[10px] md:text-caption text-muted-foreground hover:text-primary transition-colors">
-            <span className="group-hover:underline underline-offset-4">View case</span>
-            <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-3.5 md:h-3.5 group-hover:translate-x-1 transition-transform" />
+            <p className="text-foreground/80 font-medium text-[10px] sm:text-xs line-clamp-1">
+              {result}
+            </p>
+            <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed line-clamp-2 hidden sm:block">
+              {description}
+            </p>
           </div>
-        </div>
+
+          {/* View case link */}
+          <div className="flex items-center gap-1.5 mt-3 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-xs">
+            <span className="group-hover:underline underline-offset-4">View case</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </div>
+        </Link>
       </div>
     </div>
   );
@@ -235,57 +245,55 @@ const CasesSection = () => {
   const displayCases = cases.slice(0, 12); // Show only 3x4 = 12 projects on home
 
   return (
-    <section className="bg-background py-12 md:py-16 lg:py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8 md:mb-12">
-          {/* Left: Title + Description */}
-          <div className="flex-1 min-w-0">
-            <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-1">
-              Our Cases
-            </h2>
-            <p className="text-muted-foreground text-xs md:text-sm">
-              Real results, not just promises.
-            </p>
-          </div>
-          
-          {/* Center: Stats (horizontal) */}
-          <div className="flex items-center gap-4 md:gap-6">
-            <div className="text-center">
-              <span className="text-lg md:text-xl font-bold text-foreground block">340%</span>
-              <span className="text-[10px] md:text-xs text-muted-foreground">Avg. volume</span>
-            </div>
-            <div className="w-px h-8 bg-border" />
-            <div className="text-center">
-              <span className="text-lg md:text-xl font-bold text-foreground block">50K+</span>
-              <span className="text-[10px] md:text-xs text-muted-foreground">New users</span>
-            </div>
-            <div className="w-px h-8 bg-border" />
-            <div className="text-center">
-              <span className="text-lg md:text-xl font-bold text-foreground block">{cases.length}+</span>
-              <span className="text-[10px] md:text-xs text-muted-foreground">Projects</span>
-            </div>
-          </div>
+    <section className="bg-background">
+      {/* Top Info Bar */}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-4 md:p-6 border-b border-border">
+        {/* Left: Title + Description */}
+        <div className="flex-1 min-w-0">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-1">
+            Our Cases
+          </h2>
+          <p className="text-muted-foreground text-xs md:text-sm">
+            Real results, not just promises.
+          </p>
         </div>
-
-        {/* Cases Grid - Same as Projects page */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 mb-8 md:mb-12">
-          {displayCases.map((caseItem, index) => (
-            <CaseCard key={caseItem.slug} {...caseItem} index={index} totalCount={displayCases.length} />
-          ))}
-        </div>
-
-        {/* View All Projects Button */}
-        <div className="flex justify-center">
-          <Link
-            to="/projects"
-            className="group inline-flex items-center gap-3 px-6 py-3 bg-foreground text-background rounded-full font-medium text-sm hover:bg-foreground/90 transition-colors"
-          >
-            <span>View all {cases.length} projects</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
+        
+        {/* Center: Stats (horizontal) */}
+        <div className="flex items-center gap-4 md:gap-6">
+          <div className="text-center">
+            <span className="text-lg md:text-xl font-bold text-foreground block">340%</span>
+            <span className="text-[10px] md:text-xs text-muted-foreground">Avg. volume</span>
+          </div>
+          <div className="w-px h-8 bg-border" />
+          <div className="text-center">
+            <span className="text-lg md:text-xl font-bold text-foreground block">50K+</span>
+            <span className="text-[10px] md:text-xs text-muted-foreground">New users</span>
+          </div>
+          <div className="w-px h-8 bg-border" />
+          <div className="text-center">
+            <span className="text-lg md:text-xl font-bold text-foreground block">{cases.length}+</span>
+            <span className="text-[10px] md:text-xs text-muted-foreground">Projects</span>
+          </div>
         </div>
       </div>
+
+      {/* 3x4 Cases Grid (12 projects max) */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {displayCases.map((caseItem, index) => (
+          <CaseCard key={caseItem.slug} {...caseItem} index={index} totalCount={displayCases.length} />
+        ))}
+      </div>
+
+      {/* View All Projects Row */}
+      <Link
+        to="/projects"
+        className="group flex items-center justify-center gap-3 p-6 md:p-8 border-t border-border bg-secondary/30 hover:bg-secondary/50 transition-colors"
+      >
+        <span className="text-foreground font-medium text-sm md:text-base group-hover:underline underline-offset-4">
+          View all {cases.length} projects
+        </span>
+        <ArrowRight className="w-4 h-4 text-foreground group-hover:translate-x-1 transition-transform" />
+      </Link>
     </section>
   );
 };
