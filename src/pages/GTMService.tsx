@@ -21,6 +21,18 @@ import strategyImg from '@/assets/process/strategy-planning.jpg';
 import executionImg from '@/assets/process/execution-growth.jpg';
 import scaleImg from '@/assets/process/scale-success.jpg';
 import seoulMetroBillboard from '@/assets/campaigns/seoul-metro-billboard-new.jpeg';
+import openledgerEvent from '@/assets/campaigns/openledger-event.jpg';
+
+// Logo imports for TheTrust
+import bybitLogo from '@/assets/logos/bybit.png';
+import mantraLogo from '@/assets/logos/mantra.png';
+import peaqLogo from '@/assets/logos/peaq.svg';
+import storyLogo from '@/assets/logos/story-protocol.png';
+import kucoinLogo from '@/assets/logos/kucoin.svg';
+import bnbLogo from '@/assets/logos/bnb.svg';
+import coindeskLogo from '@/assets/logos/coindesk.png';
+import cointelegraphLogo from '@/assets/logos/cointelegraph.png';
+import blockmediaLogo from '@/assets/logos/blockmedia-new.png';
 
 // ============================================
 // SECTION 1: OPENING HERO - 풀스크린 비디오 (유지)
@@ -121,78 +133,175 @@ const OpeningHero = () => {
 };
 
 // ============================================
-// SECTION 2: STATEMENT SECTION - 심플 임팩트 (신규)
+// SECTION 2: THE QUESTION - 강렬한 질문 (신규)
 // ============================================
-const StatementSection = () => {
+const TheQuestion = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-20%" });
+  
+  const words = ["Why", "do", "90%", "of", "Web3", "projects", "fail", "in", "Korea?"];
 
   return (
-    <section ref={ref} className="relative min-h-screen bg-white py-24 md:py-32 lg:py-0 lg:h-screen flex items-center overflow-hidden">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-          {/* Left - Typography */}
-          <motion.div
-            initial={{ opacity: 0, y: 60 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="text-[10px] text-neutral-400 tracking-[0.4em] uppercase mb-8 block">
-              Our Philosophy
-            </span>
-            
-            <h2 className="text-[clamp(2rem,5vw,4rem)] font-black text-black leading-[1.1] tracking-tight">
-              데이터로 시장을 읽고,
-              <br />
-              <span className="text-neutral-300">전략으로 성장을 만듭니다.</span>
-            </h2>
-
-            <p className="text-neutral-500 text-base md:text-lg mt-8 max-w-md leading-relaxed">
-              감이 아닌 데이터로. 추측이 아닌 분석으로. 한국 시장의 진짜 성공을 설계합니다.
-            </p>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.5 }}
-              className="flex items-center gap-8 mt-12"
+    <section ref={ref} className="relative min-h-screen bg-black flex items-center justify-center px-6">
+      <div className="max-w-5xl mx-auto text-center">
+        <div className="flex flex-wrap justify-center gap-x-4 md:gap-x-6 gap-y-2">
+          {words.map((word, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ 
+                delay: i * 0.12,
+                duration: 0.5,
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+              className={`text-[clamp(2rem,8vw,6rem)] font-black leading-[1.1] tracking-tight ${
+                word === "90%" || word === "Korea?" 
+                  ? "text-violet-400" 
+                  : "text-white"
+              }`}
             >
-              <div>
-                <span className="text-4xl md:text-5xl font-black text-black">500%+</span>
-                <p className="text-neutral-400 text-xs mt-1">평균 성장률</p>
-              </div>
-              <div className="w-px h-12 bg-neutral-200" />
-              <div>
-                <span className="text-4xl md:text-5xl font-black text-black">30+</span>
-                <p className="text-neutral-400 text-xs mt-1">성공 프로젝트</p>
-              </div>
-            </motion.div>
-          </motion.div>
-
-          {/* Right - Asymmetric Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 60, rotate: 3 }}
-            animate={isInView ? { opacity: 1, x: 0, rotate: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
-          >
-            <div className="relative lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 lg:w-[120%] lg:max-w-[700px]">
-              <img
-                src={seoulMetroBillboard}
-                alt="Seoul Metro Billboard Campaign"
-                className="w-full aspect-[4/3] object-cover shadow-2xl"
-              />
-              <div className="absolute inset-0 bg-gradient-to-l from-transparent to-white/10" />
-            </div>
-          </motion.div>
+              {word}
+            </motion.span>
+          ))}
         </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 1.5 }}
+          className="mt-16"
+        >
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="inline-flex flex-col items-center gap-2"
+          >
+            <span className="text-white/30 text-xs tracking-widest uppercase">Discover why</span>
+            <svg className="w-5 h-5 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
 };
 
 // ============================================
-// SECTION 3: PROJECTS SHOWCASE - 풀스크린 호버 갤러리 (유지)
+// SECTION 3: THE REALITY - 문제점 슬라이드 (신규)
+// ============================================
+const TheReality = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const slides = [
+    {
+      num: "01",
+      title: "Language Barrier",
+      stat: "99%",
+      statLabel: "of Koreans search in Korean",
+      desc: "English content simply doesn't reach the Korean audience. Your message gets lost before it even lands.",
+      image: seoulMetroBillboard
+    },
+    {
+      num: "02", 
+      title: "Regulatory Maze",
+      stat: "VASP",
+      statLabel: "compliance is mandatory",
+      desc: "Korea has one of the strictest crypto regulations. One wrong move can shut you out entirely.",
+      image: strategyImg
+    },
+    {
+      num: "03",
+      title: "Cultural Gap",
+      stat: "24/7",
+      statLabel: "community engagement expected",
+      desc: "Korean communities have unique expectations. What works globally often fails locally.",
+      image: openledgerEvent
+    }
+  ];
+
+  return (
+    <div ref={containerRef} className="bg-black">
+      {slides.map((slide, i) => (
+        <RealitySlide key={i} slide={slide} index={i} />
+      ))}
+    </div>
+  );
+};
+
+const RealitySlide = ({ slide, index }: { slide: any; index: number }) => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+
+  return (
+    <section ref={ref} className="relative h-screen flex items-center overflow-hidden">
+      {/* Parallax Background */}
+      <motion.div className="absolute inset-0" style={{ y }}>
+        <img
+          src={slide.image}
+          alt={slide.title}
+          className="w-full h-[120%] object-cover"
+        />
+        <div className="absolute inset-0 bg-black/70" />
+      </motion.div>
+
+      {/* Content */}
+      <motion.div 
+        className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 w-full"
+        style={{ opacity }}
+      >
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left - Number & Title */}
+          <div>
+            <span className="text-violet-400/50 text-[clamp(4rem,12vw,10rem)] font-black leading-none">
+              {slide.num}
+            </span>
+            <h3 className="text-[clamp(2rem,5vw,4rem)] font-black text-white leading-[1.1] -mt-4 md:-mt-8">
+              {slide.title}
+            </h3>
+            <p className="text-white/50 text-base md:text-lg mt-6 max-w-md leading-relaxed">
+              {slide.desc}
+            </p>
+          </div>
+
+          {/* Right - Stat */}
+          <div className="text-right">
+            <span className="text-[clamp(3rem,10vw,8rem)] font-black text-white leading-none">
+              {slide.stat}
+            </span>
+            <p className="text-white/40 text-sm md:text-base mt-2">
+              {slide.statLabel}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Slide Progress */}
+      <div className="absolute bottom-12 left-6 md:left-12 lg:left-16 flex items-center gap-4">
+        <span className="text-white/30 text-xs tracking-wider">{slide.num}</span>
+        <div className="w-16 h-px bg-white/20">
+          <motion.div 
+            className="h-full bg-violet-400"
+            initial={{ width: "0%" }}
+            whileInView={{ width: "100%" }}
+            transition={{ duration: 1.5 }}
+          />
+        </div>
+        <span className="text-white/30 text-xs tracking-wider">03</span>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// SECTION 4: PROJECTS SHOWCASE - 풀스크린 호버 갤러리 (유지)
 // ============================================
 const ProjectsShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -364,232 +473,210 @@ const ProjectsShowcase = () => {
 };
 
 // ============================================
-// SECTION 4: SERVICE GRID - 2x2 풀블리드 (신규)
+// SECTION 5: THE ANSWER - 해결책 선언 (신규)
 // ============================================
-const ServiceGrid = () => {
+const TheAnswer = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-20%" });
+
+  const stats = [
+    { value: "30+", label: "Projects" },
+    { value: "500%+", label: "Avg. Growth" },
+    { value: "100M+", label: "Impressions" }
+  ];
+
+  const locations = ["SEOUL", "TOKYO", "SINGAPORE", "DUBAI", "NEW YORK"];
+
+  return (
+    <section ref={ref} className="relative min-h-screen bg-white flex items-center py-24 md:py-32 overflow-hidden">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 w-full">
+        <div className="flex flex-col items-center text-center">
+          {/* Main Statement */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ duration: 0.8 }}
+          >
+            <h2 className="text-[clamp(3rem,12vw,10rem)] font-black text-black leading-[0.9] tracking-tighter">
+              We bridge
+              <br />
+              <span className="text-violet-500">the gap.</span>
+            </h2>
+          </motion.div>
+
+          {/* Location Marquee */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.4 }}
+            className="mt-12 overflow-hidden w-full max-w-2xl"
+          >
+            <motion.div
+              animate={{ x: [0, -400] }}
+              transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+              className="flex whitespace-nowrap"
+            >
+              {[...Array(4)].map((_, setIdx) => (
+                <div key={setIdx} className="flex items-center">
+                  {locations.map((loc, i) => (
+                    <span key={`${setIdx}-${i}`} className="text-neutral-300 text-sm md:text-base font-medium mx-3">
+                      {loc}
+                      <span className="mx-3 text-violet-400">→</span>
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </motion.div>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.6 }}
+            className="mt-16 flex flex-wrap justify-center gap-8 md:gap-16"
+          >
+            {stats.map((stat, i) => (
+              <div key={i} className="text-center">
+                <span className="text-4xl md:text-6xl font-black text-black">{stat.value}</span>
+                <p className="text-neutral-400 text-sm mt-2">{stat.label}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// SECTION 6: THE METHOD - 수평 스크롤 (신규)
+// ============================================
+const TheMethod = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const services = [
+  const methods = [
     {
-      title: "Research & Insights",
-      subtitle: "시장 분석",
-      desc: "데이터 기반 심층 리서치",
+      num: "01",
+      title: "Research",
+      subtitle: "We dive deep into data",
+      desc: "Market analysis, competitor mapping, audience insights—we leave no stone unturned.",
       image: discoveryImg,
       link: "/services/deep-research"
     },
     {
-      title: "Strategy & GTM",
-      subtitle: "전략 설계",
-      desc: "맞춤형 진입 전략 수립",
+      num: "02",
+      title: "Strategy",
+      subtitle: "We craft your roadmap",
+      desc: "Custom GTM strategy aligned with Korean market dynamics and your business goals.",
       image: strategyImg,
       link: "/services/gtm"
     },
     {
-      title: "Execution & Growth",
-      subtitle: "실행 & 성장",
-      desc: "통합 마케팅 캠페인",
+      num: "03",
+      title: "Execute",
+      subtitle: "We launch with precision",
+      desc: "Integrated campaigns across PR, community, KOLs, and events—executed flawlessly.",
       image: executionImg,
       link: "/services/community"
     },
     {
-      title: "Scale & Expansion",
-      subtitle: "확장",
-      desc: "글로벌 네트워크 확대",
+      num: "04",
+      title: "Scale",
+      subtitle: "We amplify your growth",
+      desc: "Continuous optimization and expansion to maximize your market presence.",
       image: scaleImg,
       link: "/services/pr"
     }
   ];
 
   return (
-    <section ref={ref} className="relative bg-black">
-      <div className="grid md:grid-cols-2">
-        {services.map((service, i) => (
-          <motion.div
-            key={service.title}
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: i * 0.15 }}
-          >
-            <Link
-              to={service.link}
-              className="group relative block aspect-square overflow-hidden"
-            >
-              {/* Background Image */}
-              <div className="absolute inset-0">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/50 group-hover:bg-black/70 transition-colors duration-500" />
-              </div>
-
-              {/* Content */}
-              <div className="relative z-10 h-full p-8 md:p-12 flex flex-col justify-end">
-                <motion.div
-                  initial={{ y: 20, opacity: 0 }}
-                  animate={isInView ? { y: 0, opacity: 1 } : {}}
-                  transition={{ delay: 0.2 + i * 0.1 }}
-                >
-                  <span className="text-violet-400 text-xs tracking-wider uppercase">
-                    {service.subtitle}
-                  </span>
-                  <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mt-2">
-                    {service.title}
-                  </h3>
-                  <p className="text-white/50 text-sm mt-3 max-w-xs">
-                    {service.desc}
-                  </p>
-
-                  {/* Arrow */}
-                  <div className="mt-6 flex items-center gap-2 text-white/40 group-hover:text-white transition-colors">
-                    <span className="text-sm">Explore</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-                  </div>
-                </motion.div>
-              </div>
-
-              {/* Hover Border */}
-              <div className="absolute inset-0 border border-white/0 group-hover:border-white/20 transition-colors duration-500 pointer-events-none" />
-            </Link>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-// ============================================
-// SECTION 5: IMPACT STATEMENT - 브랜드 타이포 (신규)
-// ============================================
-const ImpactStatement = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <section ref={ref} className="relative py-32 md:py-48 bg-neutral-950 overflow-hidden">
-      {/* Background IUM */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <motion.span
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={isInView ? { opacity: 0.03, scale: 1 } : {}}
-          transition={{ duration: 1 }}
-          className="text-[40vw] font-black text-white select-none whitespace-nowrap"
+    <section ref={ref} className="relative bg-black py-24 md:py-32">
+      {/* Header */}
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
         >
-          IUM
-        </motion.span>
+          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Our Method</span>
+          <h3 className="text-3xl md:text-5xl font-black text-white mt-4">How we deliver results</h3>
+        </motion.div>
       </div>
 
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
-        <div className="flex flex-col items-center text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="text-[clamp(3rem,12vw,10rem)] font-black text-white leading-[0.9] tracking-tighter"
-          >
-            결과로
-            <br />
-            <span className="text-violet-400">증명합니다</span>
-          </motion.h2>
+      {/* Horizontal Scroll Cards */}
+      <div 
+        ref={containerRef}
+        className="overflow-x-auto scrollbar-hide"
+        style={{ scrollSnapType: 'x mandatory' }}
+      >
+        <div className="flex gap-6 px-6 md:px-12 lg:px-16 pb-8" style={{ width: 'max-content' }}>
+          {methods.map((method, i) => (
+            <motion.div
+              key={method.num}
+              initial={{ opacity: 0, x: 50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: i * 0.15 }}
+              style={{ scrollSnapAlign: 'start' }}
+            >
+              <Link
+                to={method.link}
+                className="group relative block w-[300px] md:w-[400px] lg:w-[450px] aspect-[3/4] overflow-hidden"
+              >
+                {/* Background Image */}
+                <div className="absolute inset-0">
+                  <img
+                    src={method.image}
+                    alt={method.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                </div>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
-            className="mt-16 flex flex-wrap items-center justify-center gap-4 md:gap-8 text-white/40"
-          >
-            <span className="text-lg md:text-xl font-medium">500%+ Growth</span>
-            <span className="text-white/20">·</span>
-            <span className="text-lg md:text-xl font-medium">30+ Projects</span>
-            <span className="text-white/20">·</span>
-            <span className="text-lg md:text-xl font-medium">100M+ Impressions</span>
-          </motion.div>
+                {/* Content */}
+                <div className="relative z-10 h-full p-8 flex flex-col justify-between">
+                  {/* Number */}
+                  <span className="text-[8rem] md:text-[10rem] font-black text-white/5 leading-none -ml-2 -mt-4 group-hover:text-violet-500/10 transition-colors duration-500">
+                    {method.num}
+                  </span>
+
+                  {/* Text */}
+                  <div>
+                    <h4 className="text-3xl md:text-4xl font-black text-white group-hover:text-violet-400 transition-colors">
+                      {method.title}
+                    </h4>
+                    <p className="text-white/60 text-sm mt-2">{method.subtitle}</p>
+                    <p className="text-white/40 text-sm mt-4 leading-relaxed">
+                      {method.desc}
+                    </p>
+
+                    {/* Arrow */}
+                    <div className="mt-6 flex items-center gap-2 text-white/30 group-hover:text-violet-400 transition-colors">
+                      <span className="text-sm">Learn more</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Border */}
+                <div className="absolute inset-0 border border-white/0 group-hover:border-violet-500/30 transition-colors pointer-events-none" />
+              </Link>
+            </motion.div>
+          ))}
         </div>
       </div>
-    </section>
-  );
-};
 
-// ============================================
-// SECTION 6: MARQUEE SECTION - 다중 마키 (신규)
-// ============================================
-const MarqueeSection = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const row1 = ["MANTRA", "Story Protocol", "peaq", "Sahara AI", "OpenLedger", "KuCoin", "BNB Chain", "Polygon"];
-  const row2 = ["SEOUL", "TOKYO", "SINGAPORE", "DUBAI", "NEW YORK", "LONDON", "BERLIN", "HONG KONG"];
-
-  return (
-    <section ref={ref} className="relative py-24 md:py-32 bg-white overflow-hidden">
+      {/* Scroll Hint */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="space-y-4"
+        transition={{ delay: 0.8 }}
+        className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 mt-8"
       >
-        {/* Row 1 - Projects (Left to Right) */}
-        <div className="overflow-hidden border-y border-neutral-100 py-6">
-          <motion.div
-            animate={{ x: [0, -1920] }}
-            transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
-            className="flex whitespace-nowrap"
-          >
-            {[...Array(4)].map((_, setIdx) => (
-              <div key={setIdx} className="flex">
-                {row1.map((item, i) => (
-                  <span 
-                    key={`${setIdx}-${i}`} 
-                    className="text-4xl md:text-6xl lg:text-7xl font-black text-neutral-200 hover:text-violet-500 transition-colors duration-300 mx-6 md:mx-10 cursor-default"
-                  >
-                    {item}
-                  </span>
-                ))}
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Row 2 - Locations (Right to Left) */}
-        <div className="overflow-hidden py-6">
-          <motion.div
-            animate={{ x: [-1920, 0] }}
-            transition={{ repeat: Infinity, duration: 35, ease: "linear" }}
-            className="flex whitespace-nowrap"
-          >
-            {[...Array(4)].map((_, setIdx) => (
-              <div key={setIdx} className="flex">
-                {row2.map((item, i) => (
-                  <span 
-                    key={`${setIdx}-${i}`} 
-                    className="text-3xl md:text-5xl lg:text-6xl font-black text-neutral-100 mx-4 md:mx-8"
-                  >
-                    {item}
-                    {i < row2.length - 1 && <span className="mx-4 text-neutral-200">—</span>}
-                  </span>
-                ))}
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Row 3 - Fast scroll with highlight */}
-        <div className="overflow-hidden border-y border-neutral-100 py-4">
-          <motion.div
-            animate={{ x: [0, -1920] }}
-            transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-            className="flex whitespace-nowrap"
-          >
-            {[...Array(8)].map((_, i) => (
-              <span 
-                key={i} 
-                className="text-lg md:text-2xl font-bold text-neutral-300 mx-8 tracking-wider"
-              >
-                DATA-DRIVEN GROWTH IN KOREA
-              </span>
-            ))}
-          </motion.div>
+        <div className="flex items-center gap-3 text-white/30">
+          <span className="text-xs tracking-wider">Drag to explore</span>
+          <ArrowRight className="w-4 h-4" />
         </div>
       </motion.div>
     </section>
@@ -597,58 +684,188 @@ const MarqueeSection = () => {
 };
 
 // ============================================
-// SECTION 7: CONTACT CTA - 풀스크린 (신규)
+// SECTION 7: THE TRUST - 로고 + 미디어 (신규)
 // ============================================
-const ContactCTA = () => {
+const TheTrust = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const clientLogos = [
+    { name: "Bybit", logo: bybitLogo },
+    { name: "MANTRA", logo: mantraLogo },
+    { name: "peaq", logo: peaqLogo },
+    { name: "Story Protocol", logo: storyLogo },
+    { name: "KuCoin", logo: kucoinLogo },
+    { name: "BNB Chain", logo: bnbLogo },
+  ];
+
+  const mediaLogos = [
+    { name: "CoinDesk", logo: coindeskLogo },
+    { name: "CoinTelegraph", logo: cointelegraphLogo },
+    { name: "BlockMedia", logo: blockmediaLogo },
+  ];
+
+  return (
+    <section ref={ref} className="relative py-24 md:py-32 bg-neutral-950 overflow-hidden">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="text-center mb-16"
+        >
+          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Trusted By</span>
+          <h3 className="text-3xl md:text-5xl font-black text-white mt-4">Global leaders choose us</h3>
+        </motion.div>
+
+        {/* Client Logos */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.3 }}
+          className="grid grid-cols-3 md:grid-cols-6 gap-8 md:gap-12 items-center justify-items-center mb-20"
+        >
+          {clientLogos.map((client, i) => (
+            <motion.div
+              key={client.name}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.4 + i * 0.1 }}
+              className="group"
+            >
+              <img
+                src={client.logo}
+                alt={client.name}
+                className="h-8 md:h-10 w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-300 grayscale group-hover:grayscale-0 group-hover:-translate-y-1"
+              />
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Divider */}
+        <div className="border-t border-white/10 mb-16" />
+
+        {/* Media Section */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.6 }}
+          className="text-center"
+        >
+          <span className="text-white/30 text-sm">Featured in</span>
+          
+          {/* Media Marquee */}
+          <div className="mt-8 overflow-hidden">
+            <motion.div
+              animate={{ x: [0, -600] }}
+              transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+              className="flex items-center gap-16 whitespace-nowrap"
+            >
+              {[...Array(4)].map((_, setIdx) => (
+                <div key={setIdx} className="flex items-center gap-16">
+                  {mediaLogos.map((media, i) => (
+                    <img
+                      key={`${setIdx}-${i}`}
+                      src={media.logo}
+                      alt={media.name}
+                      className="h-6 md:h-8 w-auto object-contain opacity-30 hover:opacity-60 transition-opacity grayscale"
+                    />
+                  ))}
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// SECTION 8: THE CTA - 풀스크린 CTA (신규)
+// ============================================
+const TheCTA = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isHovered, setIsHovered] = useState(false);
 
+  const ctaWords = ["Ready", "to", "conquer", "Korea?"];
+
   return (
     <section 
       ref={ref} 
-      className={`relative min-h-screen flex items-center transition-colors duration-700 ${
-        isHovered ? 'bg-violet-600' : 'bg-neutral-950'
+      className={`relative min-h-screen flex items-center transition-colors duration-700 overflow-hidden ${
+        isHovered ? 'bg-violet-600' : 'bg-black'
       }`}
     >
+      {/* Background Video */}
+      <div className="absolute inset-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className={`w-full h-full object-cover transition-opacity duration-700 ${
+            isHovered ? 'opacity-20' : 'opacity-30'
+          }`}
+        >
+          <source src="/videos/gtm-hero.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+      </div>
+
       {/* Background Text */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <span className="text-[25vw] font-black text-white/[0.02] select-none whitespace-nowrap">
-          CONTACT
-        </span>
+        <motion.span 
+          className="text-[20vw] font-black text-white/[0.02] select-none whitespace-nowrap"
+          animate={{ opacity: isHovered ? 0.05 : 0.02 }}
+        >
+          KOREA
+        </motion.span>
       </div>
 
       <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 w-full">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           {/* Left - Typography */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-[clamp(2.5rem,7vw,5rem)] font-black text-white leading-[1.05] tracking-tight">
-              Ready to
-              <br />
-              grow in Korea?
-            </h2>
-            <p className="text-white/50 text-base md:text-lg mt-8 max-w-md">
+          <div>
+            <div className="flex flex-wrap gap-x-4 md:gap-x-6 gap-y-2">
+              {ctaWords.map((word, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: i * 0.1, duration: 0.6 }}
+                  className={`text-[clamp(2.5rem,7vw,5rem)] font-black leading-[1.05] tracking-tight ${
+                    word === "Korea?" ? "text-violet-400" : "text-white"
+                  }`}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.6 }}
+              className="text-white/50 text-base md:text-lg mt-8 max-w-md"
+            >
               가장 확실한 파트너와 시작하세요.
               <br />
               데이터로 증명하고, 결과로 보여드립니다.
-            </p>
-          </motion.div>
+            </motion.p>
+          </div>
 
           {/* Right - Contact Info */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ delay: 0.4 }}
             className="flex flex-col gap-8"
           >
             {/* Main CTA Button */}
             <Link
               to="/contact"
-              className="group relative inline-flex items-center justify-between w-full p-6 md:p-8 bg-white text-black hover:bg-black hover:text-white transition-all duration-500 overflow-hidden"
+              className="group relative inline-flex items-center justify-between w-full p-6 md:p-8 bg-white text-black hover:bg-violet-500 hover:text-white transition-all duration-500 overflow-hidden"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
@@ -710,12 +927,13 @@ const GTMService = () => {
       />
       <Navbar />
       <OpeningHero />
-      <StatementSection />
+      <TheQuestion />
+      <TheReality />
       <ProjectsShowcase />
-      <ServiceGrid />
-      <ImpactStatement />
-      <MarqueeSection />
-      <ContactCTA />
+      <TheAnswer />
+      <TheMethod />
+      <TheTrust />
+      <TheCTA />
       <Footer />
     </div>
   );
