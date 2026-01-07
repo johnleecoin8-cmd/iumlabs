@@ -26,7 +26,6 @@ import ServicesSection from "@/components/ServicesSection";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
 import CasesSection from "@/components/CasesSection";
 import FilmstripGallerySection from "@/components/FilmstripGallerySection";
-import SelectedWorkShowcase from "@/components/SelectedWorkShowcase";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import InsightsSection from "@/components/InsightsSection";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -310,13 +309,6 @@ const Index = () => {
             <CasesSection />
           </AnimatedSection>
         </div>
-      </section>
-      
-      {/* Selected Work - Full Screen Showcase */}
-      <section className="bg-black" id="selected-work">
-        <AnimatedSection delay={100}>
-          <SelectedWorkShowcase />
-        </AnimatedSection>
       </section>
       
       {/* Gallery - 05 */}
