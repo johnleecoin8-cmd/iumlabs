@@ -351,7 +351,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-white/40 mb-3">Company Website</label>
-                  <input type="url" placeholder="https://..." value={formData.website} onChange={e => setFormData({
+                  <input type="text" placeholder="example.com" value={formData.website} onChange={e => setFormData({
                   ...formData,
                   website: e.target.value
                 })} className="w-full bg-white/[0.03] border border-white/[0.1] rounded-xl px-4 py-3 text-white placeholder:text-white/30 focus:border-white/30 focus:bg-white/[0.05] focus:outline-none transition-all" />
