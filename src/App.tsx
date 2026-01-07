@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState, useRef, useMemo } from "react";
+import { useEffect, useState, useRef } from "react";
 import Sidebar from "@/components/Sidebar";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { SidebarProvider } from "@/hooks/useSidebarState";
@@ -36,7 +36,7 @@ import ProjectForm from "./pages/admin/ProjectForm";
 import AdminResearch from "./pages/admin/AdminResearch";
 import ResearchForm from "./pages/admin/ResearchForm";
 import AdminContacts from "./pages/admin/AdminContacts";
-import Logo3D from "@/components/Logo3D";
+import logo from "@/assets/logo.png";
 
 const queryClient = new QueryClient();
 
@@ -51,72 +51,42 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Transition Particles Component
-const TransitionParticles = () => {
-  const particles = useMemo(() => 
-    Array.from({ length: 30 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: 2 + Math.random() * 4,
-      duration: 0.4 + Math.random() * 0.4,
-      delay: Math.random() * 0.2,
-      color: Math.random() > 0.5 ? 'cyan' : 'magenta'
-    }))
-  , []);
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map(p => (
-        <div
-          key={p.id}
-          className="absolute rounded-full animate-particle-float"
-          style={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            width: p.size,
-            height: p.size,
-            backgroundColor: p.color === 'cyan' ? '#00FFFF' : '#FF00FF',
-            boxShadow: `0 0 ${p.size * 3}px ${p.color === 'cyan' ? '#00FFFF' : '#FF00FF'}`,
-            animationDuration: `${p.duration}s`,
-            animationDelay: `${p.delay}s`
-          }}
-        />
-      ))}
-    </div>
-  );
-};
-
 // Logo center pulse page transition
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const [displayChildren, setDisplayChildren] = useState(children);
   const [phase, setPhase] = useState<'idle' | 'fadeOut' | 'logo' | 'fadeIn'>('idle');
+  const isFirstMount = useRef(true);
   const prevPathname = useRef(location.pathname);
 
   useEffect(() => {
+    // Skip animation on first mount
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+
     // Only animate if pathname actually changed
     if (prevPathname.current === location.pathname) {
-      setDisplayChildren(children);
       return;
     }
     prevPathname.current = location.pathname;
 
-    // Start transition sequence - Total ~1.0s
+    // Start transition sequence
     setPhase('fadeOut');
 
     const fadeOutTimer = setTimeout(() => {
       setPhase('logo');
-    }, 150); // Faster fadeOut
+    }, 200);
 
     const logoTimer = setTimeout(() => {
       setDisplayChildren(children);
       setPhase('fadeIn');
-    }, 750); // Logo phase: 600ms
+    }, 600);
 
     const fadeInTimer = setTimeout(() => {
       setPhase('idle');
-    }, 1000); // Total: ~1s
+    }, 850);
 
     return () => {
       clearTimeout(fadeOutTimer);
@@ -125,36 +95,40 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
     };
   }, [location.pathname, children]);
 
+  // Update children immediately when not transitioning
+  useEffect(() => {
+    if (phase === 'idle' && children !== displayChildren) {
+      setDisplayChildren(children);
+    }
+  }, [children, displayChildren, phase]);
+
   return (
     <>
       {/* Logo overlay */}
-      {(phase === 'logo' || phase === 'fadeOut' || phase === 'fadeIn') && (
+      {(phase === 'logo' || phase === 'fadeOut') && (
         <div 
-          className={`fixed inset-0 z-[9999] bg-background flex items-center justify-center transition-opacity duration-100 ${
-            phase === 'fadeIn' ? 'opacity-0' : 'opacity-100'
-          }`}
+          className="fixed inset-0 z-[9999] bg-background flex items-center justify-center"
+          style={{ willChange: 'opacity' }}
         >
-          {/* Logo with scale animation - 3x larger */}
-          <div 
-            className={`w-[90rem] h-[45rem] ${
+          <img 
+            src={logo} 
+            alt="ium Labs" 
+            className={`w-16 h-16 object-contain brightness-0 invert ${
               phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
             }`}
-            style={{
-              filter: 'drop-shadow(0 0 80px rgba(0, 255, 255, 0.6)) drop-shadow(0 0 160px rgba(255, 0, 255, 0.4))'
-            }}
-          >
-            <Logo3D immediate />
-          </div>
+            style={{ willChange: 'opacity, transform' }}
+          />
         </div>
       )}
 
       {/* Page content */}
       <div 
-        className={`transition-opacity duration-100 ease-out ${
+        className={`transition-opacity duration-200 ease-out ${
           phase === 'fadeOut' || phase === 'logo' 
             ? 'opacity-0' 
             : 'opacity-100'
         }`}
+        style={{ willChange: 'opacity' }}
       >
         {displayChildren}
       </div>
@@ -166,7 +140,7 @@ const AppRoutes = () => {
   const location = useLocation();
 
   return (
-    <PageTransitionWrapper>
+    <PageTransitionWrapper key={location.pathname}>
       <Routes location={location}>
         <Route path="/" element={<Index />} />
         <Route path="/services" element={<Services />} />
