@@ -51,28 +51,19 @@ const mobileFloatingTags = [{
   position: "top-[12%] right-[3%]"
 }];
 
-// Video component with loading state
+// Video component
 const ContactHeroVideo = () => {
-  const [videoLoaded, setVideoLoaded] = useState(false);
-  
   return (
     <video 
       autoPlay 
       muted 
       loop 
       playsInline
-      preload="metadata"
-      poster="/images/hero-poster.jpg"
-      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-        videoLoaded ? 'opacity-100' : 'opacity-0'
-      }`}
+      preload="auto"
+      className="absolute inset-0 w-full h-full object-cover"
       style={{ filter: "brightness(0.35)" }}
-      onLoadedData={() => setVideoLoaded(true)}
-      onLoadedMetadata={(e) => {
-        (e.target as HTMLVideoElement).currentTime = 0;
-      }}
     >
-      <source src="/videos/services-background.mp4" type="video/mp4" />
+      <source src="/videos/services-background.mp4#t=0.001" type="video/mp4" />
     </video>
   );
 };
@@ -157,15 +148,6 @@ const Contact = () => {
         <section className="relative min-h-[80vh] flex flex-col justify-center items-center overflow-hidden rounded-2xl sm:rounded-3xl">
           {/* Video Background */}
           <div className="absolute inset-0 overflow-hidden">
-            {/* Fallback poster image - shown before video loads */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ 
-                backgroundImage: `url('/images/hero-poster.jpg')`,
-                filter: "brightness(0.35)"
-              }}
-            />
-            
             <ContactHeroVideo />
             
             {/* Dark overlay gradient matching hero */}

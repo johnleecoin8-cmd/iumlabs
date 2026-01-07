@@ -141,14 +141,8 @@ const HeroSection = () => {
     return () => clearTimeout(timer);
   }, []);
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Video with Image Fallback */}
+      {/* Background Layer - Video */}
       <div className="absolute inset-0">
-        {/* Fallback Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url('/images/hero-poster.jpg')` }}
-        />
-        {/* Video Background */}
         <video
           autoPlay
           muted
@@ -156,9 +150,8 @@ const HeroSection = () => {
           playsInline
           preload="auto"
           className="absolute inset-0 w-full h-full object-cover"
-          poster="/images/hero-poster.jpg"
         >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
+          <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
         </video>
       </div>
       

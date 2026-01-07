@@ -39,7 +39,6 @@ const mobileTagPositions = [
 
 const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100);
@@ -50,8 +49,8 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
 
   return (
     <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Image (always shown as fallback/poster) */}
-      {project.bgImage && (
+      {/* Background Layer - Image (shown when no video) */}
+      {project.bgImage && !project.bgVideo && (
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${project.bgImage})` }}
@@ -65,14 +64,10 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
           loop 
           muted 
           playsInline
-          preload="metadata"
-          poster={project.bgImage}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-            videoLoaded ? 'opacity-100' : 'opacity-0'
-          }`}
-          onLoadedData={() => setVideoLoaded(true)}
+          preload="auto"
+          className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src={project.bgVideo} type="video/mp4" />
+          <source src={`${project.bgVideo}#t=0.001`} type="video/mp4" />
         </video>
       )}
       
