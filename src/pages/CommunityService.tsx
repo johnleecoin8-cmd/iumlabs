@@ -168,7 +168,12 @@ const telegramChannels = [{
   icon: Pin
 }];
 const CommunityService = () => {
-  usePageMeta("Korean Web3 Community Management", "Build thriving Korean crypto communities on Discord, Telegram, KakaoTalk, and Naver. 24/7 KR/EN moderation for Korean Web3 marketing success.", "/services/community");
+  usePageMeta({
+    title: "Korean Web3 Community Management",
+    description: "Build thriving Korean crypto communities on Discord, Telegram, KakaoTalk, and Naver. 24/7 KR/EN moderation for Korean Web3 marketing success.",
+    path: "/services/community",
+    image: "/og/og-community.jpg"
+  });
   const [visibleMessages, setVisibleMessages] = useState<number>(0);
   const [typingIndicator, setTypingIndicator] = useState(false);
   const [activePlatform, setActivePlatform] = useState<'discord' | 'telegram'>('discord');
