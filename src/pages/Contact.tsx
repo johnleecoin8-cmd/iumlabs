@@ -359,7 +359,7 @@ const Contact = () => {
               </div>
 
               {/* Submit Button */}
-              <div className="pt-2 py-0">
+              <div className="pt-2 py-0 flex justify-center">
                 <button type="submit" disabled={isSubmitting} className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black font-medium text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-white/20 hover:scale-[1.02] hover:-translate-y-0.5 active:scale-[0.98] disabled:opacity-50">
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
                   <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
