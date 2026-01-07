@@ -151,8 +151,8 @@ const useCountUp = (end: number, duration: number = 2000, shouldStart: boolean =
 
 const ServiceCard = ({ service, index }: { service: typeof services[0]; index: number }) => {
   const Icon = service.icon;
-  const isRightColumn = index % 2 === 1;
-  const isLastRow = index >= 4;
+  const isRightColumn = index % 3 === 2;
+  const isLastRow = index >= 6;
   
   return (
     <div className="group">
@@ -303,60 +303,11 @@ const Services = () => {
           </span>
         </div>
 
-        {/* Main 2-Column Layout */}
-        <div className="flex flex-col lg:flex-row">
-          {/* Left: Service Grid (2/3) */}
-          <div className="w-full lg:w-2/3 border-r-0 lg:border-r border-white/10">
-            <div className="grid grid-cols-2 md:grid-cols-2">
-              {services.map((service, index) => (
-                <ServiceCard key={service.title} service={service} index={index} />
-              ))}
-            </div>
-          </div>
-          
-          {/* Right: Sticky CTA Panel (1/3) */}
-          <div className="w-full lg:w-1/3">
-            <div className="lg:sticky lg:top-24 p-6 md:p-8">
-              <div>
-                <h2 className="text-display-sm font-bold text-white mb-3">
-                  Why Ium Labs
-                </h2>
-                
-                <p className="text-white/50 text-body leading-relaxed mb-6">
-                  We're the Korean Web3 marketing agency that builds the bridge between your project and the Korean market.
-                </p>
-                
-                <div className="space-y-2">
-                  <Link 
-                    to="/contact"
-                    className="group primary-cta-emerald inline-flex items-center gap-2 text-white px-5 py-2.5 text-sm font-medium tracking-wide rounded-lg active:scale-[0.98] min-h-[48px] border border-white/30"
-                    onClick={(e) => createRipple(e as unknown as MouseEvent<HTMLElement>)}
-                  >
-                    Start Your Project
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                  <p className="text-[10px] text-white/50">Free consultation • No commitment required</p>
-                </div>
-                
-                {/* Decorative element */}
-                <div className="mt-8 md:mt-12 flex justify-center">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500/20 to-teal-500/20 border border-emerald-500/30 animate-spin" style={{ animationDuration: '20s' }} />
-                </div>
-                
-                {/* Additional Stats */}
-                <div className="mt-8 grid grid-cols-2 gap-4">
-                  <div>
-                    <div className="text-xl md:text-2xl font-bold text-white">$500M+</div>
-                    <div className="text-caption text-white/50">TGE Support</div>
-                  </div>
-                  <div>
-                    <div className="text-xl md:text-2xl font-bold text-white">600+</div>
-                    <div className="text-caption text-white/50">Creator Network</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* 3x3 Service Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          {services.map((service, index) => (
+            <ServiceCard key={service.title} service={service} index={index} />
+          ))}
         </div>
       </section>
       
