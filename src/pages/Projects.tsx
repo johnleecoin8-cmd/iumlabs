@@ -400,7 +400,7 @@ const Projects = () => {
             <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6">
               <div className="max-w-7xl mx-auto text-center">
                 {/* Main Headline */}
-                <h1 className="font-display text-display-hero mb-4 sm:mb-6 mt-8 sm:mt-12">
+                <h1 className="font-sans text-display-hero mb-4 sm:mb-6 mt-8 sm:mt-12">
                   <span className="text-white">Our </span>
                   <span className="text-white/90">Case </span>
                   <span className="text-white">Studies</span>
