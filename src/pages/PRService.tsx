@@ -118,11 +118,12 @@ const faqItems: FAQItem[] = [
 ];
 
 const PRService = () => {
-  usePageMeta(
-    "Korean Crypto PR & Media",
-    "Secure premium coverage across 20+ Korean crypto media outlets including Blockmedia, Coinness, and TokenPost. Korean Web3 marketing through strategic PR.",
-    "/services/pr"
-  );
+  usePageMeta({
+    title: "Korean Crypto PR & Media",
+    description: "Secure premium coverage across 20+ Korean crypto media outlets including Blockmedia, Coinness, and TokenPost. Korean Web3 marketing through strategic PR.",
+    path: "/services/pr",
+    image: "/og/og-pr.jpg"
+  });
   return <ServicePageLayout serviceName="PR & Media Relations" serviceTitle="PR &" serviceSubtitle="Media" serviceDescription="Secure premium coverage across Korean media outlets with our established network of 20+ publishers and journalists." serviceIcon={Newspaper} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} videoSrc="/videos/pr-hero.mp4" posterSrc="/images/posters/pr-hero.jpg" processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="pr-media">
       {/* Media Network Section */}
       <section className="scroll-reveal bg-[#0F0F0F] relative overflow-hidden">

@@ -200,11 +200,12 @@ const portfolioItems = [
 ];
 
 const BrandingService = () => {
-  usePageMeta(
-    "Web3 Branding & Website Design",
-    "Distinctive Web3 brand identity and high-performance websites for projects launching in Korea. Korean-localized design and development.",
-    "/services/branding"
-  );
+  usePageMeta({
+    title: "Web3 Branding & Website Design",
+    description: "Distinctive Web3 brand identity and high-performance websites for projects launching in Korea. Korean-localized design and development.",
+    path: "/services/branding",
+    image: "/og/og-branding.jpg"
+  });
   const [activePhase, setActivePhase] = useState(0);
 
   return (

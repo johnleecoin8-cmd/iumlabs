@@ -150,11 +150,12 @@ const kolProfiles = [
 ];
 
 const InfluencerService = () => {
-  usePageMeta(
-    "Korean Crypto KOL Marketing",
-    "Access 70+ Korean and global crypto KOLs with 15M+ total reach. Korean Web3 marketing through strategic influencer campaigns.",
-    "/services/influencer"
-  );
+  usePageMeta({
+    title: "Korean Crypto KOL Marketing",
+    description: "Access 70+ Korean and global crypto KOLs with 15M+ total reach. Korean Web3 marketing through strategic influencer campaigns.",
+    path: "/services/influencer",
+    image: "/og/og-influencer.jpg"
+  });
   
   return (
     <ServicePageLayout
