@@ -48,6 +48,7 @@ import polygonHackathon from "@/assets/campaigns/polygon-hackathon.jpg";
 import polygonConnect from "@/assets/campaigns/polygon-connect.png";
 import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
 import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
+import openledgerHeroOfficial from "@/assets/campaigns/openledger-hero-official.png";
 import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
 import seoulMetroPoster from "@/assets/campaigns/seoul-metro-poster.jpeg";
 import lbankFestival from "@/assets/campaigns/lbank-festival.jpg";
@@ -70,6 +71,7 @@ const campaignAssetByFile: Record<string, string> = {
   "story-origin-summit.jpg": storyBg,
   "story-workshop.jpg": storyWorkshop,
   "openledger-interview.jpg": openledgerInterview,
+  "openledger-hero-official.png": openledgerHeroOfficial,
   "lbank-festival.jpg": lbankFestival,
   "peaq-summit.jpg": peaqBg,
   "bybit-event.jpg": bybitBg,

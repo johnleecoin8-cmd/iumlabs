@@ -32,6 +32,7 @@ import mantraImg from "@/assets/campaigns/mantra.jpg";
 import mantraPartyImg from "@/assets/campaigns/mantra-party.jpg";
 import synfuturesBillboardImg from "@/assets/campaigns/synfutures-billboard.jpg";
 import openledgerInterviewImg from "@/assets/campaigns/openledger-interview.jpg";
+import openledgerHeroOfficialImg from "@/assets/campaigns/openledger-hero-official.png";
 import zkpassImg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import lbankFestivalImg from "@/assets/campaigns/lbank-festival.jpg";
 import seoulMetroBillboardImg from "@/assets/campaigns/seoul-metro-billboard-new.jpeg";
