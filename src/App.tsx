@@ -99,7 +99,7 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
           }`}
         >
           <div 
-            className={`w-48 h-48 ${
+            className={`w-64 h-32 ${
               phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
             }`}
           >
