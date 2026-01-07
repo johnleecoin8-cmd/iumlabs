@@ -198,6 +198,7 @@ const SEOAdsService = () => {
       serviceTags={serviceTags}
       stats={stats}
       accentColor={ACCENT_COLOR}
+      videoSrc="/videos/seo-hero.mp4"
       deliverables={deliverables}
       faqItems={faqItems}
       currentSlug="seo-ads"

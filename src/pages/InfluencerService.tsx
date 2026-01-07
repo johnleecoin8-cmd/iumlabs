@@ -165,6 +165,7 @@ const InfluencerService = () => {
       serviceTags={serviceTags}
       stats={stats}
       accentColor={ACCENT_COLOR}
+      videoSrc="/videos/influencer-hero.mp4"
       processSteps={processSteps}
       deliverables={deliverables}
       faqItems={faqItems}
