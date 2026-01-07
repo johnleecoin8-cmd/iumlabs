@@ -1036,6 +1036,30 @@
   animation: ripple 0.6s ease-out forwards;
 }
 
+/* Logo pulse animation for page transitions */
+@keyframes logo-pulse {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  30% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.animate-logo-pulse {
+  animation: logo-pulse 400ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
 /* ============================================
    REDUCED MOTION SUPPORT
    ============================================ */
@@ -1057,6 +1081,10 @@
   
   .page-transition {
     transition: none !important;
+  }
+  
+  .animate-logo-pulse {
+    animation: none !important;
   }
   
   .primary-cta::before,

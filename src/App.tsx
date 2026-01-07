@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Sidebar from "@/components/Sidebar";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { SidebarProvider } from "@/hooks/useSidebarState";
@@ -36,6 +36,7 @@ import ProjectForm from "./pages/admin/ProjectForm";
 import AdminResearch from "./pages/admin/AdminResearch";
 import ResearchForm from "./pages/admin/ResearchForm";
 import AdminContacts from "./pages/admin/AdminContacts";
+import logo from "@/assets/logo.png";
 
 const queryClient = new QueryClient();
 
@@ -50,41 +51,88 @@ const ScrollToTop = () => {
   return null;
 };
 
-// Enhanced page transition wrapper
+// Logo center pulse page transition
 const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
   const location = useLocation();
   const [displayChildren, setDisplayChildren] = useState(children);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [phase, setPhase] = useState<'idle' | 'fadeOut' | 'logo' | 'fadeIn'>('idle');
+  const isFirstMount = useRef(true);
+  const prevPathname = useRef(location.pathname);
 
   useEffect(() => {
-    if (children !== displayChildren) {
-      setIsAnimating(true);
-      
-      // Quick exit animation
-      const exitTimer = setTimeout(() => {
-        setDisplayChildren(children);
-        // Enter animation
-        const enterTimer = setTimeout(() => {
-          setIsAnimating(false);
-        }, 50);
-        return () => clearTimeout(enterTimer);
-      }, 200);
-      
-      return () => clearTimeout(exitTimer);
+    // Skip animation on first mount
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
     }
-  }, [children, displayChildren]);
+
+    // Only animate if pathname actually changed
+    if (prevPathname.current === location.pathname) {
+      return;
+    }
+    prevPathname.current = location.pathname;
+
+    // Start transition sequence
+    setPhase('fadeOut');
+
+    const fadeOutTimer = setTimeout(() => {
+      setPhase('logo');
+    }, 200);
+
+    const logoTimer = setTimeout(() => {
+      setDisplayChildren(children);
+      setPhase('fadeIn');
+    }, 600);
+
+    const fadeInTimer = setTimeout(() => {
+      setPhase('idle');
+    }, 850);
+
+    return () => {
+      clearTimeout(fadeOutTimer);
+      clearTimeout(logoTimer);
+      clearTimeout(fadeInTimer);
+    };
+  }, [location.pathname, children]);
+
+  // Update children immediately when not transitioning
+  useEffect(() => {
+    if (phase === 'idle' && children !== displayChildren) {
+      setDisplayChildren(children);
+    }
+  }, [children, displayChildren, phase]);
 
   return (
-    <div 
-      className={`transition-all duration-300 ease-out ${
-        isAnimating 
-          ? 'opacity-0 translate-y-4' 
-          : 'opacity-100 translate-y-0'
-      }`}
-      style={{ willChange: 'opacity, transform' }}
-    >
-      {displayChildren}
-    </div>
+    <>
+      {/* Logo overlay */}
+      {(phase === 'logo' || phase === 'fadeOut') && (
+        <div 
+          className="fixed inset-0 z-[9999] bg-background flex items-center justify-center"
+          style={{ willChange: 'opacity' }}
+        >
+          <img 
+            src={logo} 
+            alt="ium Labs" 
+            className={`w-16 h-16 object-contain brightness-0 invert ${
+              phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
+            }`}
+            style={{ willChange: 'opacity, transform' }}
+          />
+        </div>
+      )}
+
+      {/* Page content */}
+      <div 
+        className={`transition-opacity duration-200 ease-out ${
+          phase === 'fadeOut' || phase === 'logo' 
+            ? 'opacity-0' 
+            : 'opacity-100'
+        }`}
+        style={{ willChange: 'opacity' }}
+      >
+        {displayChildren}
+      </div>
+    </>
   );
 };
 
