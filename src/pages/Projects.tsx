@@ -13,6 +13,8 @@ import { usePageMeta } from "@/hooks/usePageMeta";
 import { useCountUp } from "@/hooks/useCountUp";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
+import { useScrollAnimation } from "@/hooks/useScrollAnimation";
+import { cn } from "@/lib/utils";
 
 // Import logos as fallbacks
 import bnbLogo from "@/assets/logos/bnb.svg";
@@ -188,65 +190,82 @@ interface ProjectCardProps {
   totalCount: number;
 }
 
-const ProjectCard = ({ project }: ProjectCardProps) => {
+const ProjectCard = ({ project, index, totalCount }: ProjectCardProps) => {
+  // 3-column grid border logic
+  const isRightColumn = index % 3 === 2;
+  const rowCount = Math.ceil(totalCount / 3);
+  const currentRow = Math.floor(index / 3);
+  const isLastRow = currentRow === rowCount - 1;
+
+  const { ref, isVisible } = useScrollAnimation({ 
+    threshold: 0.1,
+    rootMargin: '30px',
+    triggerOnce: true 
+  });
+
   return (
-    <div className="group rounded-lg sm:rounded-xl md:rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:-translate-y-1 hover:border-primary/30 active:scale-[0.98]">
-      {/* Image */}
-      <Link
-        to={`/projects/${project.slug}`}
-        onClick={() => window.scrollTo(0, 0)}
-        className="block aspect-[16/10] overflow-hidden"
+    <div 
+      ref={ref}
+      className={cn(
+        "h-full transition-all duration-500 ease-out will-change-transform",
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+      )}
+      style={{ transitionDelay: `${(index % 6) * 50}ms` }}
+    >
+      <div
+        className={cn(
+          "group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full",
+          !isRightColumn && "lg:border-r border-border",
+          !isLastRow && "border-b border-border"
+        )}
       >
-        <img 
-          src={project.bgImage} 
-          alt={project.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-      </Link>
-      
-      {/* Content */}
-      <div className="p-2 sm:p-3 md:p-4 lg:p-5">
-        <div className="flex items-center gap-2 sm:gap-3 mb-1 sm:mb-1.5 md:mb-2">
-          <span className="text-[8px] sm:text-[10px] md:text-label uppercase tracking-wider font-medium text-muted-foreground truncate">{project.category}</span>
-        </div>
         <Link
           to={`/projects/${project.slug}`}
           onClick={() => window.scrollTo(0, 0)}
+          className="block active:scale-[0.98] transition-transform duration-150"
         >
-          <h3 className="text-xs sm:text-sm md:text-body-lg font-semibold text-foreground mb-1 sm:mb-1.5 md:mb-2 group-hover:text-primary transition-colors line-clamp-1">
-            {project.name}
-          </h3>
+          {/* Image - Full width on top */}
+          <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-3 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
+            <img
+              src={project.bgImage}
+              alt={project.name}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          </div>
+
+          {/* Content */}
+          <div className="space-y-1.5">
+            <div className="flex items-center justify-between">
+              <span className="text-muted-foreground text-[9px] sm:text-[10px] uppercase tracking-wider">{project.category}</span>
+              {project.websiteUrl && (
+                <a
+                  href={project.websiteUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="flex items-center gap-1 text-[9px] sm:text-[10px] text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  <ExternalLink className="w-2.5 h-2.5" />
+                </a>
+              )}
+            </div>
+            <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors line-clamp-1">
+              {project.name}
+            </h3>
+            <p className="text-foreground/80 font-medium text-[10px] sm:text-xs line-clamp-1">
+              {project.result}
+            </p>
+            <p className="text-muted-foreground text-[10px] sm:text-xs leading-relaxed line-clamp-2 hidden sm:block">
+              {project.description}
+            </p>
+          </div>
+
+          {/* View case link */}
+          <div className="flex items-center gap-1.5 mt-3 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-xs">
+            <span className="group-hover:underline underline-offset-4">View case</span>
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </div>
         </Link>
-        <p className="text-[10px] sm:text-xs md:text-body-sm text-foreground/80 font-medium mb-1 sm:mb-1.5 md:mb-2 line-clamp-1">
-          {project.result}
-        </p>
-        <p className="text-[10px] sm:text-xs md:text-body-sm text-muted-foreground leading-relaxed line-clamp-2 mb-2 sm:mb-3 md:mb-4 hidden sm:block">
-          {project.description}
-        </p>
-        
-        <div className="flex items-center justify-between gap-1 sm:gap-2 md:gap-3">
-          <Link
-            to={`/projects/${project.slug}`}
-            onClick={() => window.scrollTo(0, 0)}
-            className="flex items-center gap-1 sm:gap-1.5 md:gap-2 text-[8px] sm:text-[10px] md:text-caption text-muted-foreground hover:text-primary transition-colors"
-          >
-            <span className="hover:underline underline-offset-4">View</span>
-            <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 md:w-3.5 md:h-3.5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-          
-          {project.websiteUrl && (
-            <a
-              href={project.websiteUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={(e) => e.stopPropagation()}
-              className="hidden sm:flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 text-[10px] sm:text-caption font-medium text-foreground/70 border border-border/50 rounded-full hover:border-foreground/50 hover:text-foreground hover:bg-foreground/5 transition-all duration-300 active:scale-95"
-            >
-              <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
-              <span>Website</span>
-            </a>
-          )}
-        </div>
       </div>
     </div>
   );
@@ -479,7 +498,7 @@ const Projects = () => {
             />
           </div>
           
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6 p-3 sm:p-4 md:p-6 lg:p-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {filteredCases.map((project, index) => (
               <ProjectCard 
                 key={project.slug} 
