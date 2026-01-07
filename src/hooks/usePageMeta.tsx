@@ -16,7 +16,7 @@ export const usePageMeta = (
   titleOrOptions: string | PageMetaOptions,
   description?: string,
   path?: string,
-  suffix: string = "Korean Web3 Marketing Agency | ium labs"
+  suffix: string = "ium Labs"
 ) => {
   useEffect(() => {
     // Support both old signature and new options object
@@ -31,7 +31,7 @@ export const usePageMeta = (
       desc = titleOrOptions.description;
       pagePath = titleOrOptions.path;
       image = titleOrOptions.image;
-      titleSuffix = titleOrOptions.suffix || "Korean Web3 Marketing Agency | ium labs";
+      titleSuffix = titleOrOptions.suffix || "ium Labs";
     } else {
       title = titleOrOptions;
       desc = description;

@@ -219,7 +219,7 @@ const ProcessBillboardOverlay = () => {
     </div>;
 };
 const Index = () => {
-  usePageTitle("Korean Web3 Marketing & Research Agency");
+  usePageTitle("Korean Web3 GTM & Research Agency");
   return <div className="min-h-screen bg-surface-base">
       <Navbar />
       

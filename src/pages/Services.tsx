@@ -197,7 +197,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 
 const Services = () => {
   usePageMeta(
-    "Korean Web3 Marketing Services",
+    "Web3 Marketing Services",
     "Full-service Korean Web3 marketing solutions: GTM strategy, KOL campaigns, community building, PR, and more. 18+ projects launched in Korea.",
     "/services"
   );
