@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 import storyBg from '@/assets/projects/story-bg.jpg';
 import saharaAiBg from '@/assets/projects/sahara-ai-bg.jpg';
 import peaqBg from '@/assets/projects/peaq-bg.jpg';
-import mantraBg from '@/assets/projects/mantra-bg.jpg';
+import mantraBg from '@/assets/projects/mantra-featured-bg.jpg';
 import bybitBg from '@/assets/projects/bybit-bg.jpg';
 import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
 import ondoBg from '@/assets/projects/ondo-bg.jpg';
