@@ -25,7 +25,11 @@ class WebGLErrorBoundary extends Component<{ children: ReactNode; fallback: Reac
   }
 }
 
-const HologramLogo = () => {
+interface HologramLogoProps {
+  immediate?: boolean;
+}
+
+const HologramLogo = ({ immediate = false }: HologramLogoProps) => {
   const [glitchState, setGlitchState] = useState({
     active: false,
     offsetX: 0,
@@ -38,13 +42,15 @@ const HologramLogo = () => {
 
   // Dramatic glitch trigger
   useEffect(() => {
-    const triggerGlitch = () => {
-      // 8% chance for heavy glitch
-      const isHeavy = Math.random() < 0.08;
+    const triggerGlitch = (forceHeavy = false) => {
+      // Immediate mode: 40% heavy glitch, normal: 8%
+      const isHeavy = forceHeavy || (immediate ? Math.random() < 0.4 : Math.random() < 0.08);
       
-      const baseOffsetX = isHeavy ? 1.2 : 0.8;
-      const baseOffsetY = isHeavy ? 0.8 : 0.5;
-      const baseRgbSplit = isHeavy ? 0.6 : 0.4;
+      // Stronger effects for immediate mode
+      const intensity = immediate ? 1.5 : 1;
+      const baseOffsetX = (isHeavy ? 1.2 : 0.8) * intensity;
+      const baseOffsetY = (isHeavy ? 0.8 : 0.5) * intensity;
+      const baseRgbSplit = (isHeavy ? 0.6 : 0.4) * intensity;
       
       setGlitchState({
         active: true,
@@ -56,19 +62,22 @@ const HologramLogo = () => {
         isHeavy,
       });
 
-      // Reduced glitches: 2-4 times
-      const glitchCount = Math.floor(Math.random() * 3) + 2;
+      // More glitches in immediate mode: 4-8 times, normal: 2-4
+      const glitchCount = immediate ? Math.floor(Math.random() * 5) + 4 : Math.floor(Math.random() * 3) + 2;
       let count = 0;
+      
+      // Faster interval in immediate mode
+      const intervalTime = immediate ? 25 + Math.random() * 40 : 35 + Math.random() * 60;
       
       const rapidGlitch = setInterval(() => {
         count++;
         if (count < glitchCount) {
-          const flickerHeavy = Math.random() < 0.15;
+          const flickerHeavy = immediate ? Math.random() < 0.3 : Math.random() < 0.15;
           setGlitchState({
             active: true,
-            offsetX: (Math.random() - 0.5) * (flickerHeavy ? 1.5 : 0.7),
-            offsetY: (Math.random() - 0.5) * (flickerHeavy ? 1.0 : 0.4),
-            rgbSplit: Math.random() * (flickerHeavy ? 0.8 : 0.5) + 0.1,
+            offsetX: (Math.random() - 0.5) * (flickerHeavy ? 1.5 : 0.7) * intensity,
+            offsetY: (Math.random() - 0.5) * (flickerHeavy ? 1.0 : 0.4) * intensity,
+            rgbSplit: Math.random() * (flickerHeavy ? 0.8 : 0.5) * intensity + 0.1,
             scaleX: flickerHeavy ? 0.85 + Math.random() * 0.3 : 0.92 + Math.random() * 0.16,
             opacity: flickerHeavy ? 0.1 + Math.random() * 0.9 : 0.4 + Math.random() * 0.6,
             isHeavy: flickerHeavy,
@@ -79,10 +88,17 @@ const HologramLogo = () => {
             setGlitchState({ active: false, offsetX: 0, offsetY: 0, rgbSplit: 0, scaleX: 1, opacity: 1, isHeavy: false });
           }, 30 + Math.random() * 70);
         }
-      }, 35 + Math.random() * 60);
+      }, intervalTime);
     };
 
-    // Less frequent: 3-6 seconds
+    if (immediate) {
+      // Immediate mode: trigger glitch right away and rapidly
+      triggerGlitch(true);
+      const rapidInterval = setInterval(() => triggerGlitch(), 120 + Math.random() * 80);
+      return () => clearInterval(rapidInterval);
+    }
+
+    // Normal mode: less frequent, 3-6 seconds
     const glitchInterval = setInterval(() => {
       triggerGlitch();
     }, 3000 + Math.random() * 3000);
@@ -90,7 +106,7 @@ const HologramLogo = () => {
     setTimeout(triggerGlitch, 1500);
 
     return () => clearInterval(glitchInterval);
-  }, []);
+  }, [immediate]);
 
   // Create edge geometry for wireframe effect
   const { mainEdges, innerEdges } = useMemo(() => {
@@ -257,9 +273,10 @@ const HologramLogo = () => {
 
 interface Logo3DProps {
   className?: string;
+  immediate?: boolean;
 }
 
-const Logo3D = ({ className = "" }: Logo3DProps) => {
+const Logo3D = ({ className = "", immediate = false }: Logo3DProps) => {
   const [isWebGLSupported, setIsWebGLSupported] = useState(true);
 
   useEffect(() => {
@@ -309,7 +326,7 @@ const Logo3D = ({ className = "" }: Logo3DProps) => {
             <ambientLight intensity={0.3} />
             <pointLight position={[0, 0, 4]} intensity={0.4} color="#00FFFF" />
             <pointLight position={[2, 2, 3]} intensity={0.2} color="#FF00FF" />
-            <HologramLogo />
+            <HologramLogo immediate={immediate} />
           </Canvas>
         </Suspense>
       </WebGLErrorBoundary>
