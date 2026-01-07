@@ -36,7 +36,7 @@ import ProjectForm from "./pages/admin/ProjectForm";
 import AdminResearch from "./pages/admin/AdminResearch";
 import ResearchForm from "./pages/admin/ResearchForm";
 import AdminContacts from "./pages/admin/AdminContacts";
-import logo from "@/assets/logo.png";
+import Logo3D from "@/components/Logo3D";
 
 const queryClient = new QueryClient();
 
@@ -98,13 +98,13 @@ const PageTransitionWrapper = ({ children }: { children: React.ReactNode }) => {
             phase === 'fadeIn' ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <img 
-            src={logo} 
-            alt="ium Labs" 
-            className={`w-20 h-20 object-contain brightness-0 invert ${
+          <div 
+            className={`w-32 h-32 ${
               phase === 'logo' ? 'animate-logo-pulse' : 'opacity-0'
             }`}
-          />
+          >
+            <Logo3D />
+          </div>
         </div>
       )}
 
