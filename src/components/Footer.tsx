@@ -1,7 +1,7 @@
 import { brand } from "@/config/content";
 const Footer = () => {
   return <footer className="bg-background text-foreground" style={{
-    paddingBottom: 'calc(env(safe-area-inset-bottom) + 2.5rem)'
+    paddingBottom: 'env(safe-area-inset-bottom)'
   }}>
       {/* Giant Brand Name - Static */}
       <div className="w-full px-3 sm:px-6 py-4 sm:py-8 overflow-hidden bg-background md:py-[20px]">
