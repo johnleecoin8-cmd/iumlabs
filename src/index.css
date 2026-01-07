@@ -15,7 +15,7 @@
 @layer base {
   :root {
     /* Lunar Strategy Clean Color System */
-    --background: 0 0% 4%;
+    --background: 0 0% 3%;
     --foreground: 0 0% 98%;
     
     --card: 0 0% 8%;
@@ -56,10 +56,10 @@
     --light-bg: 0 0% 96%;
     --light-fg: 0 0% 8%;
 
-    /* Section background system - Alternating dark shades */
-    --surface-base: 0 0% 4%;      /* #0A0A0A - darkest */
-    --surface-odd: 0 0% 6%;       /* #0F0F0F - odd sections */
-    --surface-even: 0 0% 7%;      /* #121212 - even sections */
+    /* Section background system - Black vs Dark Gray */
+    --surface-base: 0 0% 3%;      /* #080808 - pure black */
+    --surface-odd: 0 0% 3%;       /* #080808 - black sections */
+    --surface-even: 0 0% 10%;     /* #1A1A1A - dark gray sections */
 
     /* Lunar Strategy Blue */
     --lunar-blue: 217 91% 60%;
@@ -71,7 +71,7 @@
   }
 
   .dark {
-    --background: 0 0% 4%;
+    --background: 0 0% 3%;
     --foreground: 0 0% 98%;
     
     --card: 0 0% 8%;
@@ -137,46 +137,51 @@
   }
 
 
-  /* Dark screens */
+  /* Black screens (odd) */
   .screen-1 {
-    background-color: hsl(0 0% 4%);
+    background-color: hsl(0 0% 3%);
     color: hsl(0 0% 98%);
   }
 
+  /* Dark gray screens (even) */
   .screen-2 {
-    background-color: hsl(0 0% 4%);
+    background-color: hsl(0 0% 10%);
     color: hsl(0 0% 98%);
   }
 
+  /* Black screens (odd) */
   .screen-3 {
-    background-color: hsl(0 0% 4%);
+    background-color: hsl(0 0% 3%);
     color: hsl(0 0% 98%);
   }
 
+  /* Dark gray screens (even) */
   .screen-4 {
-    background-color: hsl(0 0% 4%);
+    background-color: hsl(0 0% 10%);
     color: hsl(0 0% 98%);
   }
 
-  /* Light screens (Lunar Strategy alternating pattern) */
+  /* Black screens (odd) */
   .screen-5 {
-    background-color: hsl(0 0% 96%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 3%);
+    color: hsl(0 0% 98%);
   }
 
+  /* Dark gray screens (even) */
   .screen-6 {
-    background-color: hsl(0 0% 96%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 10%);
+    color: hsl(0 0% 98%);
   }
 
+  /* Black screens (odd) */
   .screen-7 {
-    background-color: hsl(0 0% 96%);
-    color: hsl(0 0% 8%);
+    background-color: hsl(0 0% 3%);
+    color: hsl(0 0% 98%);
   }
 
-  /* Back to dark for CTA */
+  /* Dark gray screens (even) */
   .screen-8 {
-    background-color: hsl(0 0% 4%);
+    background-color: hsl(0 0% 10%);
     color: hsl(0 0% 98%);
   }
 
