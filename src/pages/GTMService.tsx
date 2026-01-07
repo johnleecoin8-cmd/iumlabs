@@ -231,17 +231,9 @@ const ChallengeSection = () => {
 };
 
 // ============================================
-// SECTION 3: APPROACH - Process Steps
+// SECTION 3: APPROACH - Process Steps (Compact Grid)
 // ============================================
 const ApproachSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-  
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
-  
   const steps = [
     {
       number: "01",
@@ -282,65 +274,65 @@ const ApproachSection = () => {
   ];
 
   return (
-    <section className="relative py-16 md:py-24 bg-gradient-to-b from-indigo-950/80 to-slate-900">
-      <div className="px-4 md:px-12 lg:px-20 mb-8 max-w-7xl mx-auto">
+    <section className="relative py-16 md:py-20 bg-gradient-to-b from-indigo-950/80 to-slate-900">
+      <div className="max-w-7xl mx-auto px-4 md:px-12 lg:px-20">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="grid md:grid-cols-2 gap-8 items-end"
+          className="grid md:grid-cols-2 gap-6 items-end mb-10"
         >
           <div>
             <span className="text-violet-400/80 text-xs md:text-sm tracking-[0.3em] uppercase">Our Approach</span>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mt-4 leading-tight">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-white mt-3 leading-tight">
               체계적인 <span className="text-violet-400">4단계</span>
             </h2>
           </div>
-          <p className="text-white/50 text-lg leading-relaxed max-w-lg">
+          <p className="text-white/50 text-base md:text-lg leading-relaxed max-w-lg">
             검증된 프로세스를 통해 한국 시장 진출을 성공으로 이끕니다.
           </p>
         </motion.div>
-      </div>
-      
-      {/* Horizontal scroll container */}
-      <div ref={containerRef} className="relative h-[400vh]">
-        <div className="sticky top-0 h-screen flex items-center overflow-hidden">
-          <motion.div style={{ x }} className="flex gap-6 md:gap-8 pl-[5vw] md:pl-[10vw]">
-            {steps.map((step, index) => (
-              <motion.div 
-                key={step.number}
-                className={`relative w-[85vw] md:w-[45vw] lg:w-[35vw] h-[65vh] flex-shrink-0 rounded-3xl bg-gradient-to-br ${step.color} border ${step.borderColor} overflow-hidden group`}
-                whileHover={{ y: -10 }}
-                transition={{ duration: 0.5 }}
-              >
-                <div className="h-full flex flex-col justify-between p-8 md:p-12">
-                  <div>
-                    <span 
-                      className={`text-[18vw] md:text-[8vw] font-black leading-none ${step.accent} opacity-20`}
-                    >
-                      {step.number}
-                    </span>
-                  </div>
-                  
-                  <div className="space-y-4">
-                    <span className={`text-sm tracking-wider uppercase ${step.accent}`}>
-                      {step.subtitle}
-                    </span>
-                    <h3 className="text-4xl md:text-5xl font-bold text-white">
-                      {step.title}
-                    </h3>
-                    <p className="text-white/50 text-base md:text-lg max-w-md leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
+        
+        {/* 2x2 Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          {steps.map((step, index) => (
+            <motion.div 
+              key={step.number}
+              className={`relative h-[200px] md:h-[220px] rounded-2xl bg-gradient-to-br ${step.color} border ${step.borderColor} overflow-hidden group cursor-pointer`}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1, duration: 0.5 }}
+              whileHover={{ y: -5, scale: 1.02 }}
+            >
+              <div className="h-full flex items-end p-6 md:p-8">
+                {/* Large number background */}
+                <span 
+                  className={`absolute top-2 right-4 text-[80px] md:text-[100px] font-black leading-none ${step.accent} opacity-10`}
+                >
+                  {step.number}
+                </span>
                 
-                {/* Hover glow effect */}
-                <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-white/5 to-transparent`} />
-              </motion.div>
-            ))}
-          </motion.div>
+                {/* Content */}
+                <div className="relative z-10 space-y-2">
+                  <span className={`text-xs tracking-wider uppercase ${step.accent}`}>
+                    {step.subtitle}
+                  </span>
+                  <h3 className="text-2xl md:text-3xl font-bold text-white">
+                    {step.title}
+                  </h3>
+                  <p className="text-white/50 text-sm md:text-base max-w-sm leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+              </div>
+              
+              {/* Hover glow effect */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-white/5 to-transparent" />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
