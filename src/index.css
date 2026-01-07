@@ -1036,27 +1036,27 @@
   animation: ripple 0.6s ease-out forwards;
 }
 
-/* Logo pulse animation for page transitions - Small to Large + Rotation */
+/* Logo pulse animation for page transitions - Small to Large (no rotation) */
 @keyframes logo-pulse {
   0% {
     opacity: 0;
-    transform: scale(0.15) rotate(-20deg);
+    transform: scale(0.1);
   }
-  25% {
-    opacity: 0.9;
-    transform: scale(0.7) rotate(-8deg);
-  }
-  50% {
+  30% {
     opacity: 1;
-    transform: scale(1.12) rotate(4deg);
+    transform: scale(0.8);
   }
-  75% {
+  60% {
     opacity: 1;
-    transform: scale(1) rotate(0deg);
+    transform: scale(1.05);
+  }
+  80% {
+    opacity: 1;
+    transform: scale(1);
   }
   100% {
     opacity: 0;
-    transform: scale(0.92) rotate(-3deg);
+    transform: scale(0.95);
   }
 }
 
