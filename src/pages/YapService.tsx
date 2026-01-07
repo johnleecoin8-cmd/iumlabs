@@ -5,6 +5,7 @@ import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, F
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import ServiceSchema from "@/components/ServiceSchema";
 
 const ACCENT_COLOR = "#22D3EE";
 
@@ -397,6 +398,12 @@ const YapService = () => {
       </section>
 
       <BreadcrumbSchema items={breadcrumbItems} />
+      <ServiceSchema 
+        name="Crypto Twitter Yap Marketing"
+        description="Amplify your message with 150+ crypto yappers. Korean Web3 marketing through organic buzz and mindshare growth on Crypto X."
+        url="/services/yap"
+        serviceType={["Yap Marketing", "Twitter Marketing", "Organic Buzz", "Mindshare Growth"]}
+      />
     </ServicePageLayout>
   );
 };

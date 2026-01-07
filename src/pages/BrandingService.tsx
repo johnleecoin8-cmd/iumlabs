@@ -4,6 +4,7 @@ import ServicePageLayout, { ServiceStat, ServiceTag, ProcessStep, Deliverable, F
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import ServiceSchema from "@/components/ServiceSchema";
 import bananagoPreview from "@/assets/portfolio/bananago-preview.png";
 import thirdwebPreview from "@/assets/portfolio/thirdweb-preview.png";
 import coinmercePreview from "@/assets/portfolio/coinmerce-preview.png";
@@ -369,6 +370,12 @@ const BrandingService = () => {
       </section>
 
       <BreadcrumbSchema items={breadcrumbItems} />
+      <ServiceSchema 
+        name="Web3 Branding & Website Design"
+        description="Distinctive Web3 brand identity and high-performance websites for projects launching in Korea. Korean-localized design and development."
+        url="/services/branding"
+        serviceType={["Brand Identity", "Web Design", "Web Development", "UI/UX Design"]}
+      />
     </ServicePageLayout>
   );
 };

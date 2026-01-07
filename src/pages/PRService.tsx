@@ -4,6 +4,7 @@ import SectionHeader from "@/components/SectionHeader";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import ServiceSchema from "@/components/ServiceSchema";
 
 const ACCENT_COLOR = "#8B5CF6";
 
@@ -206,6 +207,12 @@ const PRService = () => {
       {/* Media Partners Marquee */}
       <MediaPartnersSection />
       <BreadcrumbSchema items={breadcrumbItems} />
+      <ServiceSchema 
+        name="Korean Crypto PR & Media"
+        description="Secure premium coverage across 20+ Korean crypto media outlets including Blockmedia, Coinness, and TokenPost. Korean Web3 marketing through strategic PR."
+        url="/services/pr"
+        serviceType={["PR & Media", "Press Release", "Media Outreach", "Crisis Management"]}
+      />
     </ServicePageLayout>;
 };
 export default PRService;

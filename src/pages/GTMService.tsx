@@ -4,6 +4,7 @@ import ServicePageLayout, { ServiceStat, ServiceTag, Deliverable, FAQItem } from
 import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
+import ServiceSchema from "@/components/ServiceSchema";
 
 const ACCENT_COLOR = "#10B981";
 
@@ -340,6 +341,12 @@ const GTMService = () => {
         </div>
       </section>
       <BreadcrumbSchema items={breadcrumbItems} />
+      <ServiceSchema 
+        name="Korean Web3 GTM Strategy"
+        description="Strategic Go-To-Market planning for Web3 projects launching in Korea. Korean exchange listing, VASP compliance, and localized launch campaigns."
+        url="/services/gtm"
+        serviceType={["GTM Strategy", "Korean Exchange Listing", "VASP Consulting", "Web3 Marketing"]}
+      />
     </ServicePageLayout>
   );
 };
