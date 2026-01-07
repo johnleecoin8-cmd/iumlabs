@@ -1,8 +1,8 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Building2, Clock, Layers, LucideIcon } from "lucide-react";
 import { ProjectData, ProjectMetric } from "@/data/projectsData";
 import { useCountUp } from "@/hooks/useCountUp";
-
+import { useRef } from "react";
 // Meta info item component with icon and accent color
 interface MetaInfoItemProps {
   label: string;
@@ -96,20 +96,31 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
   const category = project.category;
   const hasMetaInfo = clientName || duration || category;
 
+  // Parallax scroll effect
+  const parallaxRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: parallaxRef,
+    offset: ["start start", "end start"]
+  });
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
   return (
     <div className="bg-[#0A0A0A]">
       {/* SECTION 0: FEATURE IMAGE WITH OVERLAY CONTENT */}
       {project.featureImage && (
-        <section className="relative min-h-screen">
-          {/* 배경 이미지 */}
-          <div className="absolute inset-0">
+        <section ref={parallaxRef} className="relative min-h-screen overflow-hidden">
+          {/* 배경 이미지 with Parallax */}
+          <motion.div 
+            className="absolute inset-0"
+            style={{ y: backgroundY }}
+          >
             <img 
               src={project.featureImage} 
               alt={`${project.name} featured`}
-              className="w-full h-full object-cover"
+              className="w-full h-[120%] object-cover"
             />
             <div className="absolute inset-0 bg-black/60" />
-          </div>
+          </motion.div>
           
           {/* 오버레이 콘텐츠 */}
           <div className="relative z-10 px-4 md:px-8 lg:px-12 py-12 md:py-16">
@@ -122,26 +133,29 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-5 border border-white/10">
-                <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider block mb-1">Client</span>
+              <div className="bg-black/60 backdrop-blur-md rounded-xl p-4 md:p-5 border border-white/20 shadow-xl">
+                <span className="text-xs md:text-sm text-white/80 uppercase tracking-wider block mb-1 font-medium">Client</span>
                 <span className="text-lg md:text-xl font-medium text-white block">{project.client_name || project.name}</span>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-5 border border-white/10">
-                <span className="text-[10px] md:text-xs text-white/50 uppercase tracking-wider block mb-1">Category</span>
+              <div className="bg-black/60 backdrop-blur-md rounded-xl p-4 md:p-5 border border-white/20 shadow-xl">
+                <span className="text-xs md:text-sm text-white/80 uppercase tracking-wider block mb-1 font-medium">Category</span>
                 <span className="text-lg md:text-xl font-medium text-white block">{project.category}</span>
               </div>
             </motion.div>
             
             {/* Description */}
-            <motion.p 
-              className="text-base md:text-lg text-white/80 mb-8 md:mb-10 max-w-3xl leading-relaxed"
+            <motion.div 
+              className="bg-black/60 backdrop-blur-md rounded-xl p-5 md:p-6 border border-white/20 shadow-xl mb-8 md:mb-10 max-w-3xl"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              {project.description}
-            </motion.p>
+              <h3 className="text-xs md:text-sm text-white/80 uppercase tracking-wider mb-3 font-medium">Description</h3>
+              <p className="text-base md:text-lg text-white leading-relaxed">
+                {project.description}
+              </p>
+            </motion.div>
             
             {/* Metrics Grid */}
             {metrics && metrics.length > 0 && (
@@ -155,11 +169,11 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
                 {metrics.map((metric, idx) => (
                   <div 
                     key={idx}
-                    className="bg-white/10 backdrop-blur-sm rounded-xl p-4 md:p-5 border border-white/10"
+                    className="bg-black/60 backdrop-blur-md rounded-xl p-4 md:p-5 border border-white/20 shadow-xl"
                   >
-                    <span className="text-[10px] md:text-xs text-white/40 block mb-1">0{idx + 1}.</span>
+                    <span className="text-xs text-white/60 block mb-1">0{idx + 1}.</span>
                     <span className="text-xl md:text-2xl font-bold text-white block mb-1">{metric.value}</span>
-                    <span className="text-xs md:text-sm text-white/60 block">{metric.label}</span>
+                    <span className="text-xs md:text-sm text-white block">{metric.label}</span>
                   </div>
                 ))}
               </motion.div>
