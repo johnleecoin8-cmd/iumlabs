@@ -329,7 +329,7 @@ const Jobs = () => {
               </AnimatedSection>
               
               <AnimatedSection delay={100}>
-                <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 tracking-tight">
+                <h1 className="font-display text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 sm:mb-6 tracking-tight">
                   We're Looking<br className="hidden md:block" /> for You
                 </h1>
               </AnimatedSection>
