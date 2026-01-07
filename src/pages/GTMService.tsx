@@ -1,92 +1,87 @@
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { Link } from "react-router-dom";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef, useEffect, useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import ContactFormSection from "@/components/ContactFormSection";
-import FooterLinksSection from "@/components/FooterLinksSection";
-import CalendlyButton from "@/components/CalendlyButton";
-import { usePageMeta } from "@/hooks/usePageMeta";
-import BreadcrumbSchema from "@/components/BreadcrumbSchema";
-import ServiceSchema from "@/components/ServiceSchema";
-import { useCountUp } from "@/hooks/useCountUp";
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, type Easing } from 'framer-motion';
+import { ArrowRight, ArrowDown } from 'lucide-react';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { usePageMeta } from '@/hooks/usePageMeta';
+import ServiceSchema from '@/components/ServiceSchema';
+import { useCountUp } from '@/hooks/useCountUp';
 
-// Import client logos
-import bnbLogo from "@/assets/logos/bnb.png";
-import kucoinLogo from "@/assets/logos/kucoin.svg";
-import polygonLogo from "@/assets/logos/polygon.svg";
-import ondoLogo from "@/assets/logos/ondo.svg";
-import bybitLogo from "@/assets/logos/bybit.png";
-import peaqLogo from "@/assets/logos/peaq.svg";
-import storyProtocolLogo from "@/assets/logos/story-protocol.png";
-import megaethLogo from "@/assets/logos/megaeth.png";
-import triaLogo from "@/assets/logos/tria-official.png";
-import mantraLogo from "@/assets/logos/mantra.png";
-import saharaAiLogo from "@/assets/logos/sahara-ai.png";
-import fogoLogo from "@/assets/logos/fogo.png";
+// Import images
+import storyBg from '@/assets/projects/story-bg.jpg';
+import saharaAiBg from '@/assets/projects/sahara-ai-bg.jpg';
+import peaqBg from '@/assets/projects/peaq-bg.jpg';
+import mantraBg from '@/assets/projects/mantra-bg.jpg';
 
-// Import featured work images
-import storyBg from "@/assets/projects/story-bg.jpg";
-import peaqBg from "@/assets/projects/peaq-bg.jpg";
-import mantraBg from "@/assets/projects/mantra-bg.jpg";
+// Custom easing as tuple for TypeScript
+const customEase: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
-const breadcrumbItems = [
-  { name: "Home", url: "https://iumlabs.io" },
-  { name: "Services", url: "https://iumlabs.io/services" },
-  { name: "GTM Strategy", url: "https://iumlabs.io/services/gtm" }
-];
+// Animation variants
+const slideUp = {
+  hidden: { opacity: 0, y: 80 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.8, ease: customEase }
+  }
+};
 
-const clientLogos = [
-  { name: "BNB Chain", logo: bnbLogo },
-  { name: "KuCoin", logo: kucoinLogo },
-  { name: "Polygon", logo: polygonLogo },
-  { name: "Ondo", logo: ondoLogo },
-  { name: "Bybit", logo: bybitLogo },
-  { name: "Peaq", logo: peaqLogo },
-  { name: "Story Protocol", logo: storyProtocolLogo },
-  { name: "MegaETH", logo: megaethLogo },
-  { name: "Tria", logo: triaLogo },
-  { name: "Mantra", logo: mantraLogo },
-  { name: "Sahara AI", logo: saharaAiLogo },
-  { name: "FOGO", logo: fogoLogo },
-];
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+  }
+};
 
-// Stats
-const stats = [
-  { value: 30, suffix: "+", label: "Projects" },
-  { value: 95, suffix: "%", label: "Success Rate" },
-  { value: 500, suffix: "M+", label: "Impressions" },
-  { value: 50, suffix: "+", label: "Partners" },
-];
-
-// Featured Works
-const featuredWorks = [
-  { name: "Story Protocol", image: storyBg, category: "GTM Strategy" },
-  { name: "Peaq Network", image: peaqBg, category: "Market Entry" },
-  { name: "Mantra", image: mantraBg, category: "Full Service" },
-];
-
-// Stat Component
-const StatItem = ({ value, suffix, label, delay }: { value: number; suffix: string; label: string; delay: number }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  
-  useEffect(() => {
-    const timer = setTimeout(() => setIsVisible(true), 500);
-    return () => clearTimeout(timer);
-  }, []);
-  
-  const count = useCountUp({ end: value, isVisible, delay, duration: 2000 });
+// Stat Item Component
+const StatItem = ({ value, suffix = '', label, delay = 0 }: { value: number; suffix?: string; label: string; delay?: number }) => {
+  const count = useCountUp({ end: value, isVisible: true, delay, duration: 2000 });
   
   return (
-    <div className="flex flex-col">
-      <div className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-light text-white tracking-tight">
-        {count}{suffix}
+    <motion.div 
+      variants={slideUp}
+      className="border-t border-white/20 pt-8"
+    >
+      <div className="flex justify-between items-start">
+        <span className="text-white/50 text-sm tracking-wider uppercase">{label}</span>
+        <span className="text-6xl md:text-7xl lg:text-8xl font-light text-white tracking-tighter">
+          {count}{suffix}
+        </span>
       </div>
-      <div className="text-sm text-white/50 mt-2 uppercase tracking-wider">{label}</div>
-    </div>
+    </motion.div>
   );
 };
+
+// Inline Image Component
+const InlineImage = ({ src, alt }: { src: string; alt: string }) => (
+  <span className="inline-block align-middle mx-2 md:mx-4">
+    <img 
+      src={src} 
+      alt={alt} 
+      className="h-12 md:h-16 lg:h-20 w-auto rounded-lg object-cover inline-block"
+    />
+  </span>
+);
+
+// Network Node Component
+const NetworkNode = ({ x, y, label, delay }: { x: string; y: string; label: string; delay: number }) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0 }}
+    whileInView={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5, delay }}
+    className="absolute"
+    style={{ left: x, top: y }}
+  >
+    <div className="relative">
+      <div className="w-3 h-3 bg-white rounded-full" />
+      <div className="absolute w-3 h-3 bg-white rounded-full animate-ping" />
+      <span className="absolute left-5 top-1/2 -translate-y-1/2 text-white/70 text-sm whitespace-nowrap">
+        {label}
+      </span>
+    </div>
+  </motion.div>
+);
 
 const GTMService = () => {
   usePageMeta(
@@ -95,356 +90,405 @@ const GTMService = () => {
     "/services/gtm"
   );
 
-  const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"]
-  });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const companyInfoRef = useRef<HTMLDivElement>(null);
   
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const heroY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
+  const { scrollYProgress } = useScroll({
+    target: companyInfoRef,
+    offset: ["start start", "end end"]
+  });
+
+  const backgroundOpacity = useTransform(scrollYProgress, [0, 0.3], [0.3, 0.6]);
+  const statsY = useTransform(scrollYProgress, [0.2, 0.5], [100, 0]);
+  const statsOpacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 1]);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A]">
+    <div ref={containerRef} className="bg-[#0A0A0A] text-white min-h-screen overflow-x-hidden">
+      <ServiceSchema 
+        name="GTM Strategy - Korea Market Entry"
+        description="한국 시장 진출을 위한 전문 GTM 전략 서비스"
+        provider="ium LABS"
+        areaServed="Korea"
+        url="https://iumlabs.io/services/gtm"
+      />
       <Navbar />
-      
-      {/* Hero Section - Innocean Style (Dark) */}
-      <section ref={heroRef} className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-[#0A0A0A]">
-        {/* Featured Image - Top Right */}
-        <motion.div 
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="absolute top-24 right-8 md:right-16 lg:right-24 w-[280px] md:w-[360px] lg:w-[440px] aspect-[4/3] rounded-lg overflow-hidden shadow-2xl z-10"
-        >
-          <img 
-            src={storyBg} 
-            alt="Featured Work" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-          <div className="absolute bottom-4 left-4 text-white z-10">
-            <span className="text-xs uppercase tracking-wider opacity-70">Featured</span>
-            <h4 className="text-lg font-medium">Story Protocol Korea</h4>
-          </div>
-        </motion.div>
 
-        {/* Content */}
-        <motion.div 
-          style={{ opacity: heroOpacity, y: heroY }}
-          className="relative z-10 container mx-auto px-6 lg:px-12 pb-16 pt-48"
+      {/* Hero Section - 100vh */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Video Background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-30"
         >
-          {/* Tagline */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-lg md:text-xl text-white/60 max-w-md mb-8 leading-relaxed"
+          <source src="/videos/gtm-hero.mp4" type="video/mp4" />
+        </video>
+        
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#0A0A0A]/50 to-[#0A0A0A]" />
+
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+          className="relative z-10 text-center px-6 max-w-6xl mx-auto"
+        >
+          <motion.p 
+            variants={slideUp}
+            className="text-white/50 tracking-[0.3em] uppercase text-sm mb-8"
           >
-            새로운 시장을 설계하고<br />
-            브랜드의 가능성을 바꿉니다.
+            Go-To-Market Strategy
           </motion.p>
-
-          {/* Main Headline */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light text-white leading-[1.1] mb-12 max-w-4xl"
+          
+          <motion.h1 
+            variants={slideUp}
+            className="text-5xl md:text-7xl lg:text-9xl font-light tracking-tight mb-8"
           >
-            Launch in Korea.<br />
-            <span className="font-serif italic">Scale</span> Globally.
+            <span className="block">한국 시장</span>
+            <span className="block text-white/60">진출 전략</span>
           </motion.h1>
 
-          {/* CTA Link */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+          <motion.p 
+            variants={slideUp}
+            className="text-lg md:text-xl text-white/60 max-w-2xl mx-auto"
           >
-            <CalendlyButton className="group inline-flex items-center gap-3 text-white hover:text-white/70 transition-colors">
-              <span className="text-lg font-medium border-b-2 border-white group-hover:border-white/70 pb-1">
-                Book a Strategy Call
-              </span>
-              <ArrowUpRight className="w-5 h-5" />
-            </CalendlyButton>
-          </motion.div>
-        </motion.div>
-
-        {/* Giant Typography - Bottom */}
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="relative z-0 overflow-hidden"
-        >
-          <div className="text-[15vw] md:text-[12vw] font-bold text-white/5 leading-none tracking-tighter select-none whitespace-nowrap">
-            ium LABS
-          </div>
+            글로벌 Web3 프로젝트의 성공적인 한국 시장 진입을 지원합니다
+          </motion.p>
         </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-          className="absolute bottom-8 left-6 lg:left-12 flex items-center gap-2 text-white/40"
+          transition={{ delay: 1.5, duration: 0.8 }}
+          className="absolute bottom-12 left-1/2 -translate-x-1/2"
         >
-          <div className="w-6 h-10 rounded-full border-2 border-current flex items-start justify-center p-1">
-            <motion.div 
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1 h-2 bg-current rounded-full"
-            />
-          </div>
-          <span className="text-xs uppercase tracking-wider">Scroll</span>
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="flex flex-col items-center gap-2 text-white/40"
+          >
+            <span className="text-xs tracking-widest uppercase">Scroll</span>
+            <ArrowDown size={20} />
+          </motion.div>
         </motion.div>
       </section>
 
-      {/* Business Solutions Section */}
-      <section className="py-24 md:py-32 bg-[#0F0F0F] border-t border-white/10">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-            {/* Left - Image */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative aspect-[4/3] rounded-lg overflow-hidden"
-            >
-              <img 
-                src={peaqBg} 
-                alt="Business Solutions" 
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-
-            {/* Right - Content */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="text-xs uppercase tracking-[0.2em] text-white/40 mb-6 block">
-                Business Solutions
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white leading-tight mb-6">
-                방대한 데이터와 기술,<br />
-                <span className="font-serif italic">크리에이티브</span>로<br />
-                새로운 경험을 만듭니다
-              </h2>
-              <p className="text-lg text-white/60 mb-8 max-w-md leading-relaxed">
-                Deep market research, strategic planning, and flawless execution. 
-                We design new possibilities for your brand in the Korean market.
-              </p>
-              <Link 
-                to="/services"
-                className="group inline-flex items-center gap-2 text-white font-medium border-b border-white pb-1 hover:border-white/50 transition-colors"
-              >
-                View Our Approach
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Company Numbers Section */}
-      <section className="py-24 md:py-32 bg-[#0A0A0A]">
-        <div className="container mx-auto px-6 lg:px-12">
-          {/* Featured Works Row */}
-          <div className="flex gap-4 mb-16 overflow-x-auto pb-4 -mx-6 px-6 lg:mx-0 lg:px-0">
-            {featuredWorks.map((work, index) => (
-              <motion.div
-                key={work.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="flex-shrink-0 w-32 md:w-40 aspect-[3/4] rounded-lg overflow-hidden relative group cursor-pointer"
-              >
-                <img 
-                  src={work.image} 
-                  alt={work.name} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors" />
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mb-16"
+      {/* Business Solutions Section - 100vh */}
+      <section className="min-h-screen flex items-center justify-center px-6 py-32">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={staggerContainer}
+          className="max-w-7xl mx-auto"
+        >
+          <motion.p 
+            variants={slideUp}
+            className="text-white/50 tracking-[0.3em] uppercase text-sm mb-12"
           >
-            <h2 className="text-2xl md:text-3xl font-light text-white mb-4">
-              브랜드를 성장시키는 힘<br />
-              <span className="font-serif italic">숫자와 규모</span>부터 다릅니다.
-            </h2>
+            Business Solutions
+          </motion.p>
+
+          <motion.div 
+            variants={slideUp}
+            className="text-3xl md:text-5xl lg:text-6xl font-light leading-relaxed md:leading-relaxed lg:leading-relaxed"
+          >
+            <span className="text-white/90">방대한 데이터와 기술,</span>
+            <br />
+            <span className="text-white/90">생각하지 못한</span>
+            <InlineImage src={storyBg} alt="Creative" />
+            <span className="text-white/90">크리에이티브로</span>
+            <br />
+            <span className="text-white/90">새로운</span>
+            <InlineImage src={saharaAiBg} alt="Brand" />
+            <span className="text-white/90">브랜드 경험을 만듭니다.</span>
           </motion.div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <StatItem {...stat} delay={index * 100} />
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Global Network Section - Client Logos */}
-      <section className="py-24 md:py-32 bg-[#0F0F0F] border-t border-white/10">
-        <div className="container mx-auto px-6 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <span className="text-xs uppercase tracking-[0.2em] text-white/40 mb-6 block">
-              Global Network
-            </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-light text-white">
-              세계 어디서나<br />
-              <span className="font-serif italic">브랜드의 가능성</span>을 실현합니다
-            </h2>
+          <motion.div variants={slideUp} className="mt-16">
+            <a 
+              href="#approach" 
+              className="inline-flex items-center gap-3 text-white/60 hover:text-white transition-colors group"
+            >
+              <span className="text-sm tracking-wider uppercase">View Our Approach</span>
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+            </a>
           </motion.div>
-
-          {/* Logo Grid */}
-          <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 md:gap-12 items-center justify-items-center">
-            {clientLogos.map((client, index) => (
-              <motion.div
-                key={client.name}
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.05 }}
-                className="group cursor-pointer"
-              >
-                <img 
-                  src={client.logo} 
-                  alt={client.name}
-                  className="h-8 md:h-10 w-auto object-contain opacity-40 group-hover:opacity-100 transition-opacity duration-300 brightness-0 invert"
-                />
-              </motion.div>
-            ))}
-          </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* Services Preview */}
-      <section className="py-24 md:py-32 bg-[#0A0A0A] text-white border-t border-white/10">
-        <div className="container mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
-            {/* Left - Heading */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+      {/* Company Information Section - Scroll-linked */}
+      <section ref={companyInfoRef} className="relative min-h-[200vh]">
+        {/* Sticky Background */}
+        <div className="sticky top-0 h-screen overflow-hidden">
+          <motion.div 
+            style={{ opacity: backgroundOpacity }}
+            className="absolute inset-0"
+          >
+            <video
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
             >
-              <span className="text-xs uppercase tracking-[0.2em] text-white/40 mb-6 block">
-                Services
-              </span>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-light leading-tight mb-8">
-                End-to-end<br />
-                <span className="font-serif italic">GTM Strategy</span><br />
-                for Korea
-              </h2>
-              <Link 
-                to="/services"
-                className="group inline-flex items-center gap-2 text-white font-medium border-b border-white pb-1 hover:border-white/50 transition-colors"
-              >
-                View All Services
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
+              <source src="/videos/services-background.mp4" type="video/mp4" />
+            </video>
+          </motion.div>
+          
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A] via-[#0A0A0A]/80 to-transparent" />
 
-            {/* Right - Service List */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="space-y-0"
-            >
-              {[
-                { name: "Community Management", link: "/services/community" },
-                { name: "PR & Media Coverage", link: "/services/pr" },
-                { name: "KOL / Influencer Marketing", link: "/services/influencer" },
-                { name: "Offline Events & Meetups", link: "/services/offline-event" },
-                { name: "SEO & Performance Ads", link: "/services/seo-ads" },
-                { name: "Branding & Design", link: "/services/branding" },
-                { name: "Deep Research & Analysis", link: "/services/deep-research" },
-              ].map((service, index) => (
-                <Link
-                  key={service.name}
-                  to={service.link}
-                  className="group flex items-center justify-between py-5 border-b border-white/10 hover:border-white/30 transition-colors"
+          <div className="relative z-10 h-full flex items-center">
+            <div className="max-w-7xl mx-auto px-6 w-full grid lg:grid-cols-2 gap-16 items-center">
+              {/* Left Text */}
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={staggerContainer}
+              >
+                <motion.p 
+                  variants={slideUp}
+                  className="text-white/50 tracking-[0.3em] uppercase text-sm mb-8"
                 >
-                  <span className="text-lg md:text-xl font-light group-hover:translate-x-2 transition-transform">
-                    {service.name}
-                  </span>
-                  <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-              ))}
-            </motion.div>
+                  Company Information
+                </motion.p>
+                
+                <motion.h2 
+                  variants={slideUp}
+                  className="text-4xl md:text-5xl lg:text-6xl font-light mb-6"
+                >
+                  브랜드를 성장시키는 힘
+                </motion.h2>
+                
+                <motion.p 
+                  variants={slideUp}
+                  className="text-xl text-white/60"
+                >
+                  숫자와 규모부터 다릅니다.
+                </motion.p>
+              </motion.div>
+
+              {/* Right Stats */}
+              <motion.div 
+                style={{ y: statsY, opacity: statsOpacity }}
+                className="space-y-6"
+              >
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                  variants={staggerContainer}
+                  className="space-y-6"
+                >
+                  <StatItem value={30} suffix="+" label="프로젝트 수행" delay={0} />
+                  <StatItem value={95} suffix="%" label="성공률" delay={200} />
+                  <StatItem value={500} suffix="M+" label="총 노출 수" delay={400} />
+                  <StatItem value={50} suffix="+" label="미디어 파트너" delay={600} />
+                </motion.div>
+              </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section - Innocean Style */}
-      <section className="py-24 md:py-32 bg-[#0F0F0F] border-t border-white/10">
-        <div className="container mx-auto px-6 lg:px-12">
+      {/* Global Network Section - 100vh */}
+      <section className="min-h-screen flex items-center justify-center px-6 py-32 bg-[#0F0F0F]">
+        <div className="max-w-7xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center">
+          {/* Network Visualization */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="max-w-4xl"
+            transition={{ duration: 1 }}
+            className="relative aspect-square max-w-lg mx-auto w-full"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-light text-white leading-tight mb-8">
-              함께하세요.<br />
-              <span className="font-serif italic">브랜드 경험</span>이 달라지면<br />
-              모든 것이 달라집니다.
-            </h2>
+            {/* Globe Circle */}
+            <div className="absolute inset-0 rounded-full border border-white/10" />
+            <div className="absolute inset-[10%] rounded-full border border-white/10" />
+            <div className="absolute inset-[20%] rounded-full border border-white/10" />
+            <div className="absolute inset-[30%] rounded-full border border-white/10" />
             
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mt-12">
-              <div className="text-white/60">
-                <p className="mb-1">Seoul, South Korea</p>
-                <p>contact@iumlabs.io</p>
+            {/* Horizontal Lines */}
+            <div className="absolute top-1/4 left-0 right-0 h-px bg-white/10" />
+            <div className="absolute top-1/2 left-0 right-0 h-px bg-white/10" />
+            <div className="absolute top-3/4 left-0 right-0 h-px bg-white/10" />
+            
+            {/* Vertical Lines */}
+            <div className="absolute left-1/4 top-0 bottom-0 w-px bg-white/10" />
+            <div className="absolute left-1/2 top-0 bottom-0 w-px bg-white/10" />
+            <div className="absolute left-3/4 top-0 bottom-0 w-px bg-white/10" />
+
+            {/* Network Nodes */}
+            <NetworkNode x="50%" y="25%" label="Seoul" delay={0.2} />
+            <NetworkNode x="70%" y="40%" label="Tokyo" delay={0.4} />
+            <NetworkNode x="25%" y="45%" label="Singapore" delay={0.6} />
+            <NetworkNode x="15%" y="60%" label="Dubai" delay={0.8} />
+            <NetworkNode x="80%" y="65%" label="SF" delay={1.0} />
+            <NetworkNode x="60%" y="75%" label="NYC" delay={1.2} />
+
+            {/* Connecting Lines */}
+            <svg className="absolute inset-0 w-full h-full">
+              <motion.line 
+                x1="50%" y1="25%" x2="70%" y2="40%" 
+                stroke="rgba(255,255,255,0.2)" 
+                strokeWidth="1"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                transition={{ duration: 1, delay: 0.5 }}
+              />
+              <motion.line 
+                x1="50%" y1="25%" x2="25%" y2="45%" 
+                stroke="rgba(255,255,255,0.2)" 
+                strokeWidth="1"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                transition={{ duration: 1, delay: 0.7 }}
+              />
+              <motion.line 
+                x1="25%" y1="45%" x2="15%" y2="60%" 
+                stroke="rgba(255,255,255,0.2)" 
+                strokeWidth="1"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                transition={{ duration: 1, delay: 0.9 }}
+              />
+              <motion.line 
+                x1="70%" y1="40%" x2="80%" y2="65%" 
+                stroke="rgba(255,255,255,0.2)" 
+                strokeWidth="1"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                transition={{ duration: 1, delay: 1.1 }}
+              />
+              <motion.line 
+                x1="80%" y1="65%" x2="60%" y2="75%" 
+                stroke="rgba(255,255,255,0.2)" 
+                strokeWidth="1"
+                initial={{ pathLength: 0 }}
+                whileInView={{ pathLength: 1 }}
+                transition={{ duration: 1, delay: 1.3 }}
+              />
+            </svg>
+          </motion.div>
+
+          {/* Right Text */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={staggerContainer}
+          >
+            <motion.p 
+              variants={slideUp}
+              className="text-white/50 tracking-[0.3em] uppercase text-sm mb-8"
+            >
+              Global Network
+            </motion.p>
+            
+            <motion.h2 
+              variants={slideUp}
+              className="text-4xl md:text-5xl lg:text-6xl font-light mb-8"
+            >
+              세계 어디서나
+              <br />
+              <span className="text-white/60">브랜드의 가능성을</span>
+              <br />
+              <span className="text-white/60">실현합니다.</span>
+            </motion.h2>
+
+            <motion.p 
+              variants={slideUp}
+              className="text-lg text-white/50 mb-12 max-w-md"
+            >
+              서울을 중심으로 아시아, 중동, 북미까지 글로벌 네트워크를 통해 
+              프로젝트의 성공적인 시장 진입을 지원합니다.
+            </motion.p>
+
+            <motion.div variants={slideUp}>
+              <a 
+                href="/projects" 
+                className="inline-flex items-center gap-3 text-white/60 hover:text-white transition-colors group"
+              >
+                <span className="text-sm tracking-wider uppercase">View Our Network</span>
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </a>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* CTA Section - 100vh */}
+      <section className="min-h-screen flex items-center justify-center px-6 py-32">
+        <div className="max-w-7xl mx-auto w-full">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={staggerContainer}
+            className="grid lg:grid-cols-2 gap-16 items-end"
+          >
+            {/* Left - Main Text */}
+            <div>
+              <motion.p 
+                variants={slideUp}
+                className="text-white/50 tracking-[0.3em] uppercase text-sm mb-12"
+              >
+                Get Started
+              </motion.p>
+
+              <motion.div 
+                variants={slideUp}
+                className="text-3xl md:text-5xl lg:text-6xl font-light leading-relaxed md:leading-relaxed lg:leading-relaxed"
+              >
+                <span className="text-white/90">함께하세요.</span>
+                <br />
+                <span className="text-white/90">브랜드 경험이</span>
+                <InlineImage src={peaqBg} alt="Experience" />
+                <span className="text-white/90">달라지면</span>
+                <br />
+                <span className="text-white/90">모든 것이</span>
+                <InlineImage src={mantraBg} alt="Everything" />
+                <span className="text-white/90">달라집니다.</span>
+              </motion.div>
+            </div>
+
+            {/* Right - Contact Info */}
+            <motion.div 
+              variants={slideUp}
+              className="lg:text-right space-y-8"
+            >
+              <div>
+                <p className="text-white/40 text-sm tracking-wider uppercase mb-2">Location</p>
+                <p className="text-xl text-white/80">Seoul, South Korea</p>
               </div>
               
-              <CalendlyButton className="group inline-flex items-center gap-3 px-8 py-4 bg-white hover:bg-white/90 text-black font-medium rounded-full transition-all duration-300">
-                <span>Get On Board</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </CalendlyButton>
-            </div>
+              <div>
+                <p className="text-white/40 text-sm tracking-wider uppercase mb-2">Contact</p>
+                <a 
+                  href="mailto:contact@iumlabs.io" 
+                  className="text-xl text-white/80 hover:text-white transition-colors"
+                >
+                  contact@iumlabs.io
+                </a>
+              </div>
+
+              <div className="pt-8">
+                <a 
+                  href="/contact" 
+                  className="inline-flex items-center gap-4 bg-white text-black px-8 py-4 text-sm tracking-wider uppercase font-medium hover:bg-white/90 transition-colors group"
+                >
+                  <span>Get On Board</span>
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <ContactFormSection />
-      <FooterLinksSection />
       <Footer />
-
-      <BreadcrumbSchema items={breadcrumbItems} />
-      <ServiceSchema 
-        name="Korean Web3 GTM Strategy"
-        description="새로운 시장을 설계하고 브랜드의 가능성을 바꿉니다. End-to-end GTM strategy for Web3 projects entering the Korean market."
-        url="/services/gtm"
-        serviceType={["GTM Strategy", "Web3 Marketing", "Korea Market Entry"]}
-      />
     </div>
   );
 };
