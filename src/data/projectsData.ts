@@ -106,6 +106,7 @@ export const projectsData: Record<string, ProjectData> = {
     name: "BNB Chain",
     logo: bnbLogo,
     bgImage: bnbBg,
+    bgVideo: "/videos/projects/bnb-hero.mp4",
     featureImage: bnbBg,
     category: "Infrastructure",
     result: "+340% Korean Trading Volume",
