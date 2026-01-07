@@ -250,6 +250,14 @@
     <priority>0.6</priority>
   </url>
   
+  <!-- Jobs Page -->
+  <url>
+    <loc>https://iumlabs.io/jobs</loc>
+    <lastmod>2026-01-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
   <!-- Legal Pages -->
   <url>
     <loc>https://iumlabs.io/privacy</loc>
