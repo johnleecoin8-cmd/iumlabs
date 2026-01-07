@@ -11,6 +11,7 @@ interface ProjectHeroProps {
     category: string;
     glowColor: string;
     bgImage?: string;
+    bgVideo?: string;
     services?: string[];
   };
   websiteUrl?: string;
@@ -48,8 +49,21 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
 
   return (
     <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Image */}
-      {project.bgImage && (
+      {/* Background Layer - Video */}
+      {project.bgVideo && (
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src={project.bgVideo} type="video/mp4" />
+        </video>
+      )}
+      
+      {/* Background Layer - Image (fallback if no video) */}
+      {!project.bgVideo && project.bgImage && (
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${project.bgImage})` }}
