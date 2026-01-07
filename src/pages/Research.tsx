@@ -26,8 +26,8 @@ const calculateReadTime = (content: string | null): string => {
 };
 const Research = () => {
   usePageMeta({
-    title: "Research | Ium Labs - Web3 Market Insights",
-    description: "In-depth research and analysis on Korean Web3 market trends, strategies, and opportunities.",
+    title: "Web3 Research & Insights",
+    description: "In-depth research and analysis on Korean Web3 market trends, GTM strategies, and investment opportunities.",
     path: "/research"
   });
   const [searchQuery, setSearchQuery] = useState("");
