@@ -244,6 +244,7 @@ export const projectsData: Record<string, ProjectData> = {
     name: "Peaq",
     logo: peaqLogo,
     bgImage: peaqBg,
+    bgVideo: "/videos/projects/peaq-hero.mp4",
     featureImage: peaqFeatureImg,
     category: "DePIN",
     result: "#1 DePIN in Korea",

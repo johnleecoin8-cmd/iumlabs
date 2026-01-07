@@ -74,10 +74,11 @@ const ProjectDetail = () => {
   
   const websiteUrl = dbProject?.website_url || '';
   
-  const project: (ProjectData & { client_name?: string; duration?: string; featureImage?: string }) | null = dbProject ? {
+  const project: (ProjectData & { client_name?: string; duration?: string; featureImage?: string; bgVideo?: string }) | null = dbProject ? {
     name: dbProject.name,
     logo: dbProject.logo_url || fallbackProject?.logo || '',
     bgImage: heroBackgroundImage,
+    bgVideo: fallbackProject?.bgVideo,
     featureImage: fallbackProject?.featureImage,
     category: dbProject.category || '',
     result: dbProject.result || '',
@@ -97,7 +98,7 @@ const ProjectDetail = () => {
       ? dbGallery.map(g => ({ src: g.src, title: g.title || '', description: g.description || '' }))
       : fallbackProject?.gallery || [],
     news: fallbackProject?.news || [],
-  } : (fallbackProject ? { ...fallbackProject, client_name: fallbackProject.name, featureImage: fallbackProject.featureImage } : null);
+  } : (fallbackProject ? { ...fallbackProject, client_name: fallbackProject.name, featureImage: fallbackProject.featureImage, bgVideo: fallbackProject.bgVideo } : null);
 
   // Dynamic page meta for SEO
   useEffect(() => {
