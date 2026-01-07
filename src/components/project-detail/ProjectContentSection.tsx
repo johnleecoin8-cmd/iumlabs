@@ -198,8 +198,8 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
         </section>
       )}
 
-      {/* SECTION 1: PROJECT META INFO */}
-      {hasMetaInfo && (
+      {/* SECTION 1: PROJECT META INFO - Only show if no featureImage */}
+      {hasMetaInfo && !project.featureImage && (
         <section className="py-3 md:py-4">
           <div className="px-4 md:px-8 lg:px-12">
             <motion.div
@@ -246,8 +246,8 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
         </section>
       )}
 
-      {/* SECTION 1: METRICS */}
-      {displayMetrics && displayMetrics.length > 0 && (
+      {/* SECTION 1: METRICS - Only show if no featureImage */}
+      {displayMetrics && displayMetrics.length > 0 && !project.featureImage && (
         <section className="py-3 md:py-4">
           <div className="px-4 md:px-8 lg:px-12">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
@@ -259,7 +259,8 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
         </section>
       )}
 
-      {/* SECTION 2: SCOPE OF WORK + Overview + Featured Image - 2x2 Grid */}
+      {/* SECTION 2: SCOPE OF WORK + Overview - Only show if no featureImage */}
+      {!project.featureImage && (
       <section className="py-2 md:py-3">
         <div className="px-4 md:px-8 lg:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
@@ -335,6 +336,7 @@ const ProjectContentSection = ({ project, metrics, gallery }: ProjectContentSect
           </motion.div>
         </div>
       </section>
+      )}
 
 
       {/* Bottom padding */}
