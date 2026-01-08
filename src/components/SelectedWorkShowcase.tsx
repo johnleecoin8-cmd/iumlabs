@@ -157,8 +157,8 @@ const SelectedWorkShowcase = () => {
                       {project.name}
                     </span>
                     
-                    {/* Category */}
-                    <span className={`hidden md:block text-xs uppercase tracking-wider transition-colors duration-300 ${activeIndex === i ? 'text-white/60' : 'text-white/20'}`}>
+                    {/* Category - fixed width for alignment */}
+                    <span className={`hidden md:block text-xs uppercase tracking-wider transition-colors duration-300 w-28 text-left ${activeIndex === i ? 'text-white/60' : 'text-white/20'}`}>
                       {project.category}
                     </span>
                     
