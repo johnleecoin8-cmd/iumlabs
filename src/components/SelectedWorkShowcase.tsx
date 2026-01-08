@@ -165,9 +165,19 @@ const SelectedWorkShowcase = () => {
               proprietary analytics and data-driven research, providing the actionable 
               insights needed to navigate and succeed in the Korean market.
             </p>
-            <p className="text-violet-400 text-sm xl:text-base font-semibold">
+            <p className="text-violet-400 text-sm xl:text-base font-semibold mb-8">
               Founded by former Binance & KuCoin executives
             </p>
+            
+            <Link 
+              to="/projects"
+              className="inline-flex items-center gap-2 text-sm text-white border border-white/30 px-6 py-3 hover:bg-white hover:text-black transition-all duration-300"
+            >
+              <span>View All Projects</span>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </motion.div>
         </div>
       </div>
