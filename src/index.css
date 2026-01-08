@@ -1090,6 +1090,20 @@
   animation: scroll-right 30s linear infinite;
 }
 
+/* Fast Marquee for Service Text */
+.animate-scroll-left-fast {
+  animation: scroll-left 15s linear infinite;
+}
+
+.animate-scroll-right-fast {
+  animation: scroll-right 15s linear infinite;
+}
+
+/* Slow Marquee for Large Text */
+.animate-scroll-right-slow {
+  animation: scroll-right 40s linear infinite;
+}
+
 /* ============================================
    REDUCED MOTION SUPPORT
    ============================================ */
