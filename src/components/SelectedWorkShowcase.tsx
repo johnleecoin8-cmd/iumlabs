@@ -160,7 +160,7 @@ const SelectedWorkShowcase = () => {
           duration: 0.8,
           delay: 0.3
         }} className="max-w-3xl text-right">
-            <h3 className="text-4xl xl:text-5xl 2xl:text-6xl font-bold text-white mb-6">
+            <h3 className="text-3xl xl:text-4xl 2xl:text-5xl font-bold text-white mb-6 whitespace-nowrap">
               Real results, not just promises.
             </h3>
             <p className="text-white/70 text-lg xl:text-xl leading-relaxed mb-6">
