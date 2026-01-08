@@ -281,113 +281,44 @@ const CategoryFilter = ({
   );
 };
 
-// ============================================
-// SELECTED WORK SECTION - HORIZONTAL SCROLL GALLERY (FROM GTM)
-// ============================================
-interface FeaturedProject {
+// Logo mapping for gallery section
+const logoMap: Record<string, string | null> = {
+  "bnb-chain": bnbLogo,
+  "kucoin": kucoinLogo,
+  "sahara-ai": saharaAiLogo,
+  "mantra": mantraLogo,
+  "peaq": peaqLogo,
+  "story-protocol": storyLogo,
+  "megaeth": megaethLogo,
+  "tria": triaLogo,
+  "bybit": bybitLogo,
+  "fogo": fogoLogo,
+  "zkpass": zkpassLogo,
+  "synfutures": synfuturesLogo,
+};
+
+// Video mapping for projects that have videos
+const videoMap: Record<string, string | null> = {
+  "story-protocol": "/videos/projects/story-hero.mp4",
+  "mantra": "/videos/projects/mantra-hero.mp4",
+  "bybit": "/videos/projects/bybit-hero.mp4",
+  "peaq": "/videos/projects/peaq-hero.mp4",
+  "bnb-chain": "/videos/projects/bnb-hero.mp4",
+  "sahara-ai": "/videos/projects/sahara-hero.mp4",
+  "kucoin": "/videos/projects/kucoin-hero.mp4",
+};
+
+interface SelectedWorkProject {
   name: string;
   slug: string;
   category: string;
   result: string;
-  resultSub: string;
+  bgImage: string;
   logo: string | null;
-  bg: string;
   video: string | null;
-  gallery: string[];
 }
 
-const featuredProjects: FeaturedProject[] = [
-  { 
-    name: "Story Protocol", 
-    logo: storyLogo, 
-    bg: storyBg, 
-    video: "/videos/projects/story-hero.mp4",
-    gallery: [storyBg, storyWorkshop],
-    result: "+340%",
-    resultSub: "Trading Volume",
-    category: "IP Protocol",
-    slug: "story-protocol" 
-  },
-  { 
-    name: "MANTRA", 
-    logo: mantraLogo, 
-    bg: mantraBg, 
-    video: "/videos/projects/mantra-hero.mp4",
-    gallery: [mantraBg, mantraEvent],
-    result: "+500%",
-    resultSub: "Community Growth",
-    category: "RWA L1",
-    slug: "mantra" 
-  },
-  { 
-    name: "Bybit", 
-    logo: bybitLogo, 
-    bg: bybitBg, 
-    video: "/videos/projects/bybit-hero.mp4",
-    gallery: [bybitBg],
-    result: "#2",
-    resultSub: "Korea Exchange",
-    category: "CEX",
-    slug: "bybit" 
-  },
-  { 
-    name: "peaq", 
-    logo: peaqLogo, 
-    bg: peaqBg, 
-    video: "/videos/projects/peaq-hero.mp4",
-    gallery: [peaqBg],
-    result: "#1",
-    resultSub: "DePIN in Korea",
-    category: "DePIN L1",
-    slug: "peaq" 
-  },
-  { 
-    name: "BNB Chain", 
-    logo: bnbLogo, 
-    bg: bnbBg, 
-    video: "/videos/projects/bnb-hero.mp4",
-    gallery: [bnbBg],
-    result: "2.5M+",
-    resultSub: "Organic Reach",
-    category: "L1 Ecosystem",
-    slug: "bnb-chain" 
-  },
-  { 
-    name: "Sahara AI", 
-    logo: saharaAiLogo, 
-    bg: saharaAiBg, 
-    video: "/videos/projects/sahara-hero.mp4",
-    gallery: [saharaAiBg],
-    result: "200K+",
-    resultSub: "Community Members",
-    category: "AI Infrastructure",
-    slug: "sahara-ai" 
-  },
-  { 
-    name: "KuCoin", 
-    logo: kucoinLogo, 
-    bg: kucoinBg, 
-    video: "/videos/projects/kucoin-hero.mp4",
-    gallery: [kucoinCampaign, kucoinNew],
-    result: "Top 5",
-    resultSub: "Korea Volume",
-    category: "CEX",
-    slug: "kucoin" 
-  },
-  { 
-    name: "OpenLedger", 
-    logo: null, 
-    bg: openledgerHeroOfficial, 
-    video: null,
-    gallery: [openledgerEvent, openledgerInterview],
-    result: "50K+",
-    resultSub: "Community Growth",
-    category: "AI Data",
-    slug: "openledger" 
-  },
-];
-
-const SelectedWorkSection = () => {
+const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) => {
   const ref = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
@@ -444,6 +375,8 @@ const SelectedWorkSection = () => {
     scrollRef.current.scrollLeft = scrollLeft - walk;
   };
 
+  if (projects.length === 0) return null;
+
   return (
     <section ref={ref} className="relative bg-black py-16 overflow-hidden">
       {/* Section Title */}
@@ -481,15 +414,15 @@ const SelectedWorkSection = () => {
         onMouseMove={handleMouseMove}
       >
         <div className="flex gap-1 px-6 md:px-10 pb-4" style={{ width: 'max-content' }}>
-          {featuredProjects.map((project, i) => (
+          {projects.map((project, i) => (
             <motion.div
               key={project.slug}
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.1 + i * 0.05 }}
+              transition={{ delay: 0.1 + Math.min(i, 10) * 0.03 }}
               className="relative overflow-hidden group"
               style={{ 
-                width: hoveredIndex === null ? '180px' : hoveredIndex === i ? '480px' : '100px',
+                width: hoveredIndex === null ? '180px' : hoveredIndex === i ? '400px' : '100px',
                 transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                 pointerEvents: isDragging ? 'none' : 'auto'
               }}
@@ -499,7 +432,7 @@ const SelectedWorkSection = () => {
               <div className="relative h-[450px] md:h-[500px] overflow-hidden">
                 {/* Background Image */}
                 <img
-                  src={project.bg}
+                  src={project.bgImage}
                   alt={project.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
                   draggable={false}
@@ -550,76 +483,45 @@ const SelectedWorkSection = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 20 }}
                       transition={{ delay: 0.1, duration: 0.3 }}
-                      className="absolute inset-0 flex"
+                      className="absolute inset-0 flex flex-col justify-end p-6 md:p-8"
                     >
-                      {/* Left: Info */}
-                      <div className="flex-1 flex flex-col justify-end p-6 md:p-8">
-                        {/* Category Tag */}
-                        <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase mb-3">
-                          {project.category}
-                        </span>
+                      {/* Category Tag */}
+                      <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase mb-3">
+                        {project.category}
+                      </span>
 
-                        {/* Logo */}
-                        <div className="mb-4">
-                          {project.logo ? (
-                            <img
-                              src={project.logo}
-                              alt={project.name}
-                              className="h-8 md:h-10 w-auto object-contain brightness-0 invert"
-                              draggable={false}
-                            />
-                          ) : (
-                            <span className="text-white font-black text-xl md:text-2xl tracking-tight">
-                              {project.name}
-                            </span>
-                          )}
-                        </div>
-
-                        {/* Result Metric */}
-                        <div className="mb-6">
-                          <span className="text-2xl md:text-4xl font-black bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
-                            {project.result}
+                      {/* Logo */}
+                      <div className="mb-4">
+                        {project.logo ? (
+                          <img
+                            src={project.logo}
+                            alt={project.name}
+                            className="h-8 md:h-10 w-auto object-contain brightness-0 invert"
+                            draggable={false}
+                          />
+                        ) : (
+                          <span className="text-white font-black text-xl md:text-2xl tracking-tight">
+                            {project.name}
                           </span>
-                          <span className="block text-white/50 text-xs tracking-wider mt-1">
-                            {project.resultSub}
-                          </span>
-                        </div>
-
-                        {/* View Project Button */}
-                        <Link
-                          to={`/projects/${project.slug}`}
-                          className="inline-flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest transition-colors group/link"
-                          onClick={(e) => isDragging && e.preventDefault()}
-                        >
-                          <span>VIEW PROJECT</span>
-                          <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                        </Link>
+                        )}
                       </div>
 
-                      {/* Right: Gallery Preview */}
-                      {project.gallery && project.gallery.length > 0 && (
-                        <motion.div 
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.25, duration: 0.3 }}
-                          className="hidden md:flex flex-col gap-2 p-4 w-40"
-                        >
-                          {project.gallery.slice(0, 2).map((img, idx) => (
-                            <div 
-                              key={idx}
-                              className="relative aspect-[4/3] overflow-hidden rounded-sm group/img"
-                            >
-                              <img 
-                                src={img} 
-                                alt={`${project.name} gallery ${idx + 1}`}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110"
-                                draggable={false}
-                              />
-                              <div className="absolute inset-0 bg-black/20 group-hover/img:bg-black/0 transition-colors" />
-                            </div>
-                          ))}
-                        </motion.div>
-                      )}
+                      {/* Result Metric */}
+                      <div className="mb-6">
+                        <span className="text-xl md:text-2xl font-black bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent leading-tight">
+                          {project.result}
+                        </span>
+                      </div>
+
+                      {/* View Project Button */}
+                      <Link
+                        to={`/projects/${project.slug}`}
+                        className="inline-flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest transition-colors group/link"
+                        onClick={(e) => isDragging && e.preventDefault()}
+                      >
+                        <span>VIEW PROJECT</span>
+                        <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                      </Link>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -634,7 +536,7 @@ const SelectedWorkSection = () => {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.1 + featuredProjects.length * 0.05 }}
+            transition={{ delay: 0.5 }}
             style={{ pointerEvents: isDragging ? 'none' : 'auto' }}
           >
             <Link
@@ -676,7 +578,7 @@ const SelectedWorkSection = () => {
         </div>
         <div className="flex justify-between mt-2">
           <span className="text-white/30 text-[10px] tracking-wider">01</span>
-          <span className="text-white/30 text-[10px] tracking-wider">0{featuredProjects.length}</span>
+          <span className="text-white/30 text-[10px] tracking-wider">{String(projects.length).padStart(2, '0')}</span>
         </div>
       </motion.div>
 
@@ -746,9 +648,21 @@ const Projects = () => {
           category: p.category || "",
           bgImage: galleryAsset || p.background_url || fallback?.bgImage || "",
           websiteUrl: p.website_url || "",
+          logo: fallback?.logo || null,
         };
       })
-    : fallbackCases;
+    : fallbackCases.map(f => ({ ...f, logo: f.logo }));
+
+  // Transform cases to SelectedWorkProject format
+  const selectedWorkProjects: SelectedWorkProject[] = cases.map(c => ({
+    name: c.name,
+    slug: c.slug,
+    category: c.category,
+    result: c.result,
+    bgImage: c.bgImage,
+    logo: logoMap[c.slug] || null,
+    video: videoMap[c.slug] || null,
+  }));
 
   // Get unique categories
   const categories = useMemo(() => {
@@ -888,7 +802,7 @@ const Projects = () => {
       </section>
       
       {/* Selected Work Section - Horizontal Scroll Gallery */}
-      <SelectedWorkSection />
+      <SelectedWorkSection projects={selectedWorkProjects} />
       
       
       {/* Contact Section - 03 */}
