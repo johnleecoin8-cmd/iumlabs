@@ -14,6 +14,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
+// New Story-Driven Components
+import ProjectVideoGrid from '@/components/gtm/ProjectVideoGrid';
+import CampaignWall from '@/components/gtm/CampaignWall';
+import MasonryGallery from '@/components/gtm/MasonryGallery';
+
 // ============================================
 // IMAGE IMPORTS
 // ============================================
@@ -1587,15 +1592,37 @@ const GTMService = () => {
       />
       <Navbar />
       <main>
+        {/* Hook: First Impression */}
         <Hero />
+        
+        {/* Trust: Social Proof */}
         <SocialProofBar />
+        
+        {/* Problem: Why Korea is Different */}
         <ProblemStatement />
+        
+        {/* Solution: Our Approach */}
         <SolutionBridge />
-        <CaseStudyShowcase />
+        
+        {/* Proof: Project Portfolio with Video Hover */}
+        <ProjectVideoGrid />
+        
+        {/* Services: Interactive Grid with Galleries */}
         <ServicesAccordion />
+        
+        {/* Process: How We Work */}
         <ProcessTimeline />
+        
+        {/* Trust: Why Ium Labs */}
         <WhyUs />
-        <GalleryTestimonials />
+        
+        {/* Campaign Wall: Horizontal Scroll by Category */}
+        <CampaignWall />
+        
+        {/* Gallery: Masonry with Filters */}
+        <MasonryGallery />
+        
+        {/* CTA: Final Conversion */}
         <CTASection />
       </main>
       <Footer />
