@@ -144,28 +144,91 @@ const RealityCheckSection = () => {
 };
 
 // ============================================
-// SECTION 3: SOLUTION - SMC STYLE WHITE SECTION
+// SECTION 3: SOLUTION - SMC STYLE WITH CIRCLE MASK
 // ============================================
 const SolutionSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20%" });
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  });
+  
+  const circleY = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const circleScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.9]);
 
   return (
-    <section ref={ref} className="relative min-h-[60vh] bg-white flex flex-col items-center justify-center overflow-hidden py-16">
-      {/* Main Title with Image Mask - SMC Style */}
+    <section ref={ref} className="relative min-h-[70vh] bg-white flex flex-col items-center justify-center overflow-hidden py-20">
+      {/* Main Title with Circular Image Mask - SMC Style */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
-        className="text-center px-4"
+        className="relative text-center px-4"
       >
-        <h2 className="text-[clamp(2.5rem,10vw,8rem)] font-black text-black leading-[0.9] tracking-tighter">
-          <span className="block">BRIDGING</span>
-          <span className="block">
-            GLOBAL <span className="text-primary">WEB3</span>
-          </span>
-          <span className="block">TO KOREA</span>
+        {/* First Line */}
+        <h2 className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+          BRIDGING
         </h2>
+        
+        {/* Second Line with Circle Image */}
+        <div className="relative flex items-center justify-center gap-2 md:gap-4">
+          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+            GL
+          </span>
+          
+          {/* Circular Image Mask - SMC Style */}
+          <motion.div 
+            style={{ y: circleY, scale: circleScale }}
+            className="relative w-[clamp(4rem,15vw,12rem)] h-[clamp(4rem,15vw,12rem)] rounded-full overflow-hidden flex-shrink-0"
+          >
+            <img 
+              src={storyOriginSummit}
+              alt="Korea Event"
+              className="w-full h-full object-cover"
+            />
+            {/* Subtle overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
+          </motion.div>
+          
+          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+            BAL
+          </span>
+        </div>
+
+        {/* Third Line */}
+        <div className="relative flex items-center justify-center gap-2 md:gap-4">
+          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black leading-[0.85] tracking-tighter text-primary">
+            WEB3
+          </span>
+          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+            TO
+          </span>
+        </div>
+
+        {/* Fourth Line with Second Circle */}
+        <div className="relative flex items-center justify-center gap-2 md:gap-4">
+          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+            K
+          </span>
+          
+          {/* Second Circular Image */}
+          <motion.div 
+            style={{ y: useTransform(scrollYProgress, [0, 1], [-30, 30]), scale: circleScale }}
+            className="relative w-[clamp(4rem,15vw,12rem)] h-[clamp(4rem,15vw,12rem)] rounded-full overflow-hidden flex-shrink-0"
+          >
+            <img 
+              src={peaqSummit}
+              alt="Korea Summit"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-transparent" />
+          </motion.div>
+          
+          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+            REA
+          </span>
+        </div>
       </motion.div>
 
       {/* Tagline */}
@@ -173,7 +236,7 @@ const SolutionSection = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.4 }}
-        className="text-black/50 text-sm md:text-base tracking-widest mt-8 max-w-xl text-center px-6"
+        className="text-black/50 text-sm md:text-base tracking-widest mt-12 max-w-xl text-center px-6"
       >
         이음(Ium)은 "잇다"에서 유래한 이름으로, 글로벌 Web3 프로젝트와 한국 시장을 연결하는 다리 역할을 합니다.
       </motion.p>
