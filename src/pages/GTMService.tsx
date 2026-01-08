@@ -144,82 +144,130 @@ const RealityCheckSection = () => {
 };
 
 // ============================================
-// SECTION 3: SOLUTION - MADUP STYLE
+// SECTION 3: SOLUTION - SMC STYLE WHITE SECTION
 // ============================================
 const SolutionSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20%" });
 
   return (
-    <section ref={ref} className="relative min-h-[60vh] bg-black flex flex-col items-center justify-center overflow-hidden py-12">
-      {/* WE ARE */}
+    <section ref={ref} className="relative min-h-[60vh] bg-white flex flex-col items-center justify-center overflow-hidden py-16">
+      {/* Main Title with Image Mask - SMC Style */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
-        className="text-center"
+        className="text-center px-4"
       >
-        <span className="text-[clamp(2rem,8vw,6rem)] font-black text-transparent leading-none tracking-tighter"
-          style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.5)' }}>
-          WE ARE
-        </span>
-      </motion.div>
-
-      {/* 이음 - Giant Korean text */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={isInView ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="relative my-4"
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-violet-500/30 to-fuchsia-500/30 blur-3xl" />
-        <span className="relative text-[clamp(6rem,25vw,20rem)] font-black bg-gradient-to-r from-primary via-violet-400 to-fuchsia-400 bg-clip-text text-transparent leading-none">
-          이음
-        </span>
-      </motion.div>
-
-      {/* LABS */}
-      <motion.div
-        initial={{ opacity: 0, y: -40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="text-center"
-      >
-        <span className="text-[clamp(2rem,8vw,6rem)] font-black text-transparent leading-none tracking-tighter"
-          style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.5)' }}>
-          LABS
-        </span>
+        <h2 className="text-[clamp(2.5rem,10vw,8rem)] font-black text-black leading-[0.9] tracking-tighter">
+          <span className="block">BRIDGING</span>
+          <span className="block">
+            GLOBAL <span className="text-primary">WEB3</span>
+          </span>
+          <span className="block">TO KOREA</span>
+        </h2>
       </motion.div>
 
       {/* Tagline */}
       <motion.p
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.6 }}
-        className="text-white/40 text-sm md:text-base tracking-widest mt-4"
+        transition={{ delay: 0.4 }}
+        className="text-black/50 text-sm md:text-base tracking-widest mt-8 max-w-xl text-center px-6"
       >
-        "TO CONNECT" — YOUR FOUNDATIONAL LAYER FOR KOREA
+        이음(Ium)은 "잇다"에서 유래한 이름으로, 글로벌 Web3 프로젝트와 한국 시장을 연결하는 다리 역할을 합니다.
       </motion.p>
 
-      {/* Value Props */}
+      {/* Stats Row - SMC Style Numbers */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.8 }}
-        className="flex flex-wrap justify-center gap-8 md:gap-12 mt-8 px-6"
+        transition={{ delay: 0.6 }}
+        className="flex flex-wrap justify-center gap-12 md:gap-20 mt-12 px-6"
       >
-        {["LOCAL DNA", "DATA-FIRST", "FULL-STACK"].map((item, i) => (
-          <motion.span
-            key={item}
+        {[
+          { value: "5", suffix: "YEARS", sub: "In Korea Market" },
+          { value: "30", suffix: "+", sub: "Projects Launched" },
+          { value: "$50M", suffix: "+", sub: "Volume Generated" },
+        ].map((stat, i) => (
+          <motion.div
+            key={stat.sub}
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.9 + i * 0.1 }}
-            className="text-white/60 text-xs md:text-sm tracking-[0.3em] font-medium"
+            transition={{ delay: 0.7 + i * 0.1 }}
+            className="text-center"
           >
-            {item}
-          </motion.span>
+            <span className="text-4xl md:text-6xl font-black text-black">
+              {stat.value}
+              <span className="text-primary">{stat.suffix}</span>
+            </span>
+            <p className="text-black/40 text-[10px] md:text-xs tracking-[0.2em] mt-2 uppercase">
+              ({stat.sub})
+            </p>
+          </motion.div>
         ))}
       </motion.div>
+    </section>
+  );
+};
+
+// ============================================
+// INFINITE ROLLING GALLERY - SMC STYLE
+// ============================================
+const RollingGallerySection = () => {
+  const galleryImages = [
+    storyOriginSummit,
+    peaqSummit,
+    bnbEvent,
+    mantraParty,
+    kucoinCampaign,
+    openledgerEvent,
+    seoulMetroBillboard,
+    bybitEvent,
+  ];
+
+  return (
+    <section className="relative bg-black py-12 overflow-hidden">
+      {/* First Row - Left to Right */}
+      <div className="flex animate-scroll-left mb-2">
+        {[...galleryImages, ...galleryImages].map((img, i) => (
+          <div 
+            key={`row1-${i}`}
+            className="flex-shrink-0 w-[300px] md:w-[400px] h-[200px] md:h-[280px] mx-1 overflow-hidden"
+          >
+            <img 
+              src={img} 
+              alt="" 
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+            />
+          </div>
+        ))}
+      </div>
+      
+      {/* Second Row - Right to Left */}
+      <div className="flex animate-scroll-right">
+        {[...galleryImages.reverse(), ...galleryImages].map((img, i) => (
+          <div 
+            key={`row2-${i}`}
+            className="flex-shrink-0 w-[300px] md:w-[400px] h-[200px] md:h-[280px] mx-1 overflow-hidden"
+          >
+            <img 
+              src={img} 
+              alt="" 
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* Center Text Overlay */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <div className="bg-black/80 backdrop-blur-sm px-8 py-4">
+          <span className="text-white/60 text-xs tracking-[0.5em]">
+            WE KEEP DIVING TOWARDS POSSIBILITIES
+          </span>
+        </div>
+      </div>
     </section>
   );
 };
@@ -874,8 +922,11 @@ const GTMService = () => {
         {/* Section 2: Reality Check */}
         <RealityCheckSection />
         
-        {/* Section 3: Solution */}
+        {/* Section 3: Solution - SMC Style White */}
         <SolutionSection />
+
+        {/* Rolling Gallery - SMC Style */}
+        <RollingGallerySection />
         
         {/* Section 4: Evidence */}
         <EvidenceSection />
