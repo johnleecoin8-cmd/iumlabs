@@ -164,11 +164,10 @@ const SelectedWorkShowcase = () => {
               Real results, not just promises.
             </h3>
             <p className="text-white/70 text-lg xl:text-xl leading-relaxed mb-6">
-              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. 
-              "이음(ium)" Derived from the Korean word "to connect," we function as your foundational 
-              layer for market entry. We transcend standard marketing by leveraging 
-              proprietary analytics and data-driven research, providing the actionable 
-              insights needed to navigate and succeed in the Korean market.
+              ium Labs acts as the strategic bridge between global Web3 projects and Korea. 
+              True to our name "ium" (to connect), we serve as your foundational layer for market entry. 
+              We leverage proprietary analytics and data-driven research to deliver the actionable 
+              insights needed to succeed in the Korean market.
             </p>
             <p className="text-violet-400 text-base xl:text-lg mb-10">
               Founded by former Binance & KuCoin executives
