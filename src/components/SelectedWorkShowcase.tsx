@@ -108,7 +108,7 @@ const SelectedWorkShowcase = () => {
       {/* Content Grid */}
       <div className="relative z-10 h-full flex">
         {/* Left - Project List */}
-        <div className="w-full lg:w-1/2 h-full flex flex-col justify-center px-6 md:px-12 lg:px-16" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
+        <div className="w-full lg:w-2/5 h-full flex flex-col justify-center px-6 md:px-12 lg:px-16" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
           <motion.span initial={{
           opacity: 0
         }} animate={isInView ? {
@@ -149,7 +149,7 @@ const SelectedWorkShowcase = () => {
         </div>
 
         {/* Right - About Content (Desktop) */}
-        <div className="hidden lg:flex w-1/2 h-full items-center justify-end p-16 xl:p-20">
+        <div className="hidden lg:flex w-3/5 h-full items-center justify-end p-16 xl:p-20">
           <motion.div initial={{
           opacity: 0,
           y: 30
