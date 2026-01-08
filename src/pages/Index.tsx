@@ -232,7 +232,7 @@ const Index = () => {
       <section className="bg-surface-base lg:hidden" id="why-choose-us">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="bg-[#0D0D0D] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
                 <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">01</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
@@ -260,7 +260,7 @@ const Index = () => {
       <section className="bg-surface-base" id="services">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="bg-[#0D0D0D] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-center gap-4 md:gap-6">
                 <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">01</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
@@ -278,7 +278,7 @@ const Index = () => {
       <section className="bg-surface-base" id="process">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="bg-[#0D0D0D] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-center gap-4 md:gap-6">
                 <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">02</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
@@ -298,7 +298,7 @@ const Index = () => {
       <section className="bg-surface-base" id="cases">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="bg-[#0D0D0D] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-center gap-4 md:gap-6">
                 <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">03</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
@@ -317,7 +317,7 @@ const Index = () => {
       <section className="bg-surface-base" id="insights">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="bg-[#0D0D0D] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-center gap-4 md:gap-6">
                 <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">04</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>

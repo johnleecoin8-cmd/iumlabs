@@ -87,14 +87,12 @@ const ContactFormSection = ({
   return <section className="bg-[#0A0A0A]">
       <div className="border-t border-white/15">
         {/* Section Header */}
-        <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 sm:p-5 md:px-10 lg:px-12 border-b border-white/15 md:py-[2px] py-[18px]">
-          <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
-            <span className="text-[10px] sm:text-label text-white/40 font-mono tracking-widest">{sectionNumber}</span>
-            <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white tracking-tight">Contact</h2>
+        <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+          <div className="flex items-center gap-4 md:gap-6">
+            <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">{sectionNumber}</span>
+            <h2 className="text-lg md:text-xl font-medium text-white">Contact</h2>
           </div>
-          <Link to="/contact" className="text-[10px] sm:text-caption text-white/65 tracking-wider hidden sm:flex items-center gap-2 px-3 sm:px-4 py-1.5 border border-white/25 rounded-full hover:border-white/45 transition-colors font-medium">
-            Get Started
-          </Link>
+          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Get Started</span>
         </div>
         
         {/* Two Column Layout */}
