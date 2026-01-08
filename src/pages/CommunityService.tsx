@@ -193,7 +193,7 @@ const CommunityService = () => {
       {/* Platform Preview Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader title="Platform Management" badge="Discord & Telegram" />
+          <SectionHeader title="Platform Management" />
           
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">

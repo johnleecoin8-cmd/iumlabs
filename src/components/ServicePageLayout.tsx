@@ -410,7 +410,7 @@ const ServicePageLayout = ({
       {deliverables && deliverables.length > 0 && (
         <section className="bg-[#121212]">
           <div className="border-t border-white/10">
-            <SectionHeader number={deliverablesSectionNum!} title="What You Get" badge="Deliverables" />
+            <SectionHeader number={deliverablesSectionNum!} title="What You Get" />
             
             <div className="py-6 sm:py-8 md:py-12">
               <div className="container mx-auto px-3 sm:px-4 lg:px-12">
@@ -451,7 +451,7 @@ const ServicePageLayout = ({
       {processSteps && processSteps.length > 0 && (
         <section className="bg-[#0F0F0F]" id="process">
           <div className="border-t border-white/10">
-            <SectionHeader number={processSectionNum!} title="Process" badge="How We Work" />
+            <SectionHeader number={processSectionNum!} title="Process" />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {processSteps.map((step, index) => {
                 const Icon = step.icon;
@@ -515,7 +515,7 @@ const ServicePageLayout = ({
       {/* More Services Section */}
       <section className="bg-[#121212]">
         <div className="border-t border-white/10">
-          <SectionHeader number={moreServicesSectionNum} title="More Services" badge="Explore" />
+          <SectionHeader number={moreServicesSectionNum} title="More Services" />
           <div 
             className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 divide-x divide-white/10"
           >
@@ -581,7 +581,7 @@ const ServicePageLayout = ({
       {faqItems && faqItems.length > 0 && (
         <section className="bg-[#0F0F0F]">
           <div className="border-t border-white/10">
-            <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
+            <SectionHeader number={faqSectionNum!} title="FAQ" />
             
             <div className="py-6 sm:py-8 md:py-12">
                 <div className="container mx-auto px-3 sm:px-6 lg:px-12 max-w-4xl">

@@ -232,12 +232,8 @@ const Index = () => {
       <section className="bg-surface-base lg:hidden" id="why-choose-us">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">01</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Why ium Labs</span>
+            <div className="px-4 md:px-10 pt-6 md:pt-8 pb-4 md:pb-6">
+              <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">01 — ABOUT</span>
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
@@ -258,12 +254,8 @@ const Index = () => {
       <section className="bg-surface-base" id="services">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">02</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What We Do</span>
+            <div className="px-4 md:px-10 pt-6 md:pt-8 pb-4 md:pb-6">
+              <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">02 — SERVICES</span>
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
@@ -276,12 +268,8 @@ const Index = () => {
       <section className="bg-surface-base" id="process">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">03</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
+            <div className="px-4 md:px-10 pt-6 md:pt-8 pb-4 md:pb-6">
+              <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">03 — PROCESS</span>
             </div>
           </AnimatedSection>
           
@@ -296,12 +284,8 @@ const Index = () => {
       <section className="bg-surface-base" id="cases">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">04</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Work</span>
+            <div className="px-4 md:px-10 pt-6 md:pt-8 pb-4 md:pb-6">
+              <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">04 — CASES</span>
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
@@ -315,12 +299,8 @@ const Index = () => {
       <section className="bg-surface-base" id="insights">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">05</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Research</span>
+            <div className="px-4 md:px-10 pt-6 md:pt-8 pb-4 md:pb-6">
+              <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">05 — INSIGHTS</span>
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
