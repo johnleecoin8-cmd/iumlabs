@@ -396,7 +396,7 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
         </motion.div>
         
         {/* Gallery Content */}
-        <div className="py-8 md:py-12 relative">
+        <div className="py-4 md:py-6 relative">
           {/* Horizontal Scroll Container */}
           <motion.div 
             ref={scrollRef}
