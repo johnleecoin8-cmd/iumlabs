@@ -250,13 +250,7 @@ const Index = () => {
       <section className="bg-surface-base" id="selected-work">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">01</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Selected Work</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Projects</span>
-            </div>
+            
           </AnimatedSection>
           <AnimatedSection delay={100}>
             <SelectedWorkShowcase />
