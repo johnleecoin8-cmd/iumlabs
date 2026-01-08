@@ -231,8 +231,8 @@ const Index = () => {
         </div>
       </main>
       
-      {/* About - 01 */}
-      <section className="bg-surface-base" id="why-choose-us">
+      {/* About - 01 (모바일/태블릿에서만 표시) */}
+      <section className="bg-surface-base lg:hidden" id="why-choose-us">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
@@ -246,7 +246,13 @@ const Index = () => {
           <AnimatedSection delay={100}>
             <WhyChooseUsSection />
           </AnimatedSection>
-          <AnimatedSection delay={200}>
+        </div>
+      </section>
+
+      {/* Selected Work Showcase (모든 화면에서 표시) */}
+      <section className="bg-surface-base">
+        <div className="border-t border-white/10">
+          <AnimatedSection>
             <SelectedWorkShowcase />
           </AnimatedSection>
         </div>
