@@ -5,7 +5,8 @@ import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
-import { CalendarDays, ArrowRight, Mail } from 'lucide-react';
+import { CalendarDays, ArrowRight, Mail, Globe, Database, Users } from 'lucide-react';
+import { useCountUp } from '@/hooks/useCountUp';
 
 // ============================================
 // IMAGE IMPORTS
@@ -16,12 +17,6 @@ import peaqBg from '@/assets/projects/peaq-bg.jpg';
 import mantraBg from '@/assets/projects/mantra-featured-bg.jpg';
 import openledgerHero from '@/assets/campaigns/openledger-hero-official.png';
 import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
-import discoveryImg from '@/assets/process/discovery-research.jpg';
-import strategyImg from '@/assets/process/strategy-planning.jpg';
-import executionImg from '@/assets/process/execution-growth.jpg';
-import scaleImg from '@/assets/process/scale-success.jpg';
-import seoulMetroBillboard from '@/assets/campaigns/seoul-metro-billboard-new.jpeg';
-import openledgerEvent from '@/assets/campaigns/openledger-event.jpg';
 
 // Logo imports for TheTrust
 import bybitLogo from '@/assets/logos/bybit.png';
@@ -35,9 +30,9 @@ import cointelegraphLogo from '@/assets/logos/cointelegraph.png';
 import blockmediaLogo from '@/assets/logos/blockmedia-new.png';
 
 // ============================================
-// SECTION 1: OPENING HERO - 풀스크린 비디오 (유지)
+// SECTION 1: HERO - 더 구체적인 Hook
 // ============================================
-const OpeningHero = () => {
+const Hero = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -57,11 +52,11 @@ const OpeningHero = () => {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover opacity-60"
+          className="w-full h-full object-cover opacity-50"
         >
           <source src="/videos/gtm-hero.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black" />
       </motion.div>
 
       {/* Center Content */}
@@ -69,18 +64,6 @@ const OpeningHero = () => {
         className="relative z-10 h-full flex flex-col items-center justify-center px-6"
         style={{ opacity, y: textY }}
       >
-        {/* Large IUM Logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 0.1, scale: 1 }}
-          transition={{ duration: 1.5 }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        >
-          <span className="text-[30vw] font-black text-white/10 select-none tracking-tighter">
-            IUM
-          </span>
-        </motion.div>
-
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -94,13 +77,16 @@ const OpeningHero = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-center"
+          className="text-center max-w-5xl"
         >
-          <span className="block text-[clamp(2.5rem,8vw,7rem)] font-black text-white leading-[0.95] tracking-tight">
-            Data-Driven
+          <span className="block text-[clamp(1.8rem,5vw,4rem)] font-medium text-white/60 leading-tight mb-2">
+            We've helped
           </span>
-          <span className="block text-[clamp(2.5rem,8vw,7rem)] font-black text-white/40 leading-[0.95] tracking-tight">
-            Growth
+          <span className="block text-[clamp(2.5rem,8vw,6rem)] font-black text-white leading-[0.95] tracking-tight">
+            30+ global Web3 projects
+          </span>
+          <span className="block text-[clamp(1.5rem,4vw,3rem)] font-medium text-white/60 leading-tight mt-4">
+            crack Korea's <span className="text-violet-400 font-bold">$50B</span> crypto market.
           </span>
         </motion.h1>
 
@@ -108,585 +94,493 @@ const OpeningHero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
-          className="text-white/60 text-sm mt-8 tracking-wide"
+          className="text-white text-lg md:text-xl font-medium mt-10"
         >
-          Powered by Deep Research.
+          Your turn.
         </motion.p>
-      </motion.div>
-
-      {/* Scroll Indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
-      >
-        <span className="text-[10px] text-white/40 tracking-widest uppercase">Scroll</span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="w-px h-12 bg-gradient-to-b from-white/40 to-transparent"
-        />
-      </motion.div>
-    </section>
-  );
-};
-
-// ============================================
-// SECTION 2: THE QUESTION - 강렬한 질문 (신규)
-// ============================================
-const TheQuestion = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-20%" });
-  
-  const words = ["Why", "do", "90%", "of", "Web3", "projects", "fail", "in", "Korea?"];
-
-  return (
-    <section ref={ref} className="relative min-h-screen bg-black flex items-center justify-center px-6">
-      <div className="max-w-5xl mx-auto text-center">
-        <div className="flex flex-wrap justify-center gap-x-4 md:gap-x-6 gap-y-2">
-          {words.map((word, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ 
-                delay: i * 0.12,
-                duration: 0.5,
-                ease: [0.25, 0.46, 0.45, 0.94]
-              }}
-              className={`text-[clamp(2rem,8vw,6rem)] font-black leading-[1.1] tracking-tight ${
-                word === "90%" || word === "Korea?" 
-                  ? "text-violet-400" 
-                  : "text-white"
-              }`}
-            >
-              {word}
-            </motion.span>
-          ))}
-        </div>
 
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 1.5 }}
-          className="mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.1 }}
+          className="mt-12"
         >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-            className="inline-flex flex-col items-center gap-2"
+          <a 
+            href="#problem"
+            className="group inline-flex items-center gap-3 text-sm text-white/70 hover:text-white transition-colors"
           >
-            <span className="text-white/30 text-xs tracking-widest uppercase">Discover why</span>
-            <svg className="w-5 h-5 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </motion.div>
+            <span>See how we do it</span>
+            <motion.div
+              animate={{ y: [0, 5, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5 }}
+            >
+              <ArrowRight className="w-4 h-4 rotate-90" />
+            </motion.div>
+          </a>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };
 
 // ============================================
-// SECTION 3: THE REALITY - 문제점 슬라이드 (신규)
+// SECTION 2: PROBLEM NARRATIVE - 스크롤 기반 텍스트
 // ============================================
-const TheReality = () => {
+const ProblemNarrative = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  
-  const slides = [
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  const problems = [
     {
-      num: "01",
-      title: "Language Barrier",
-      stat: "99%",
-      statLabel: "of Koreans search in Korean",
-      desc: "English content simply doesn't reach the Korean audience. Your message gets lost before it even lands.",
-      image: seoulMetroBillboard
+      statement: "Every global project thinks they can just translate.",
+      reality: "99% of Koreans search in Korean only.",
+      emphasis: "99%"
     },
     {
-      num: "02", 
-      title: "Regulatory Maze",
-      stat: "VASP",
-      statLabel: "compliance is mandatory",
-      desc: "Korea has one of the strictest crypto regulations. One wrong move can shut you out entirely.",
-      image: strategyImg
+      statement: "Every team underestimates the regulations.",
+      reality: "Korea's VASP compliance shuts doors overnight.",
+      emphasis: "VASP"
     },
     {
-      num: "03",
-      title: "Cultural Gap",
-      stat: "24/7",
-      statLabel: "community engagement expected",
-      desc: "Korean communities have unique expectations. What works globally often fails locally.",
-      image: openledgerEvent
+      statement: "Every community manager misses the culture.",
+      reality: "Korean users expect 24/7 real engagement.",
+      emphasis: "24/7"
     }
   ];
 
   return (
-    <div ref={containerRef} className="bg-black">
-      {slides.map((slide, i) => (
-        <RealitySlide key={i} slide={slide} index={i} />
+    <div ref={containerRef} id="problem" className="bg-black">
+      {/* Problem Slides */}
+      {problems.map((problem, i) => (
+        <ProblemSlide key={i} problem={problem} index={i} total={problems.length} />
       ))}
+      
+      {/* Result Statistic */}
+      <ResultStat />
     </div>
   );
 };
 
-const RealitySlide = ({ slide, index }: { slide: any; index: number }) => {
+const ProblemSlide = ({ problem, index, total }: { problem: any; index: number; total: number }) => {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
-  
-  const y = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const isInView = useInView(ref, { once: false, margin: "-40% 0px -40% 0px" });
 
   return (
-    <section ref={ref} className="relative h-screen flex items-center overflow-hidden">
-      {/* Parallax Background */}
-      <motion.div className="absolute inset-0" style={{ y }}>
-        <img
-          src={slide.image}
-          alt={slide.title}
-          className="w-full h-[120%] object-cover"
-        />
-        <div className="absolute inset-0 bg-black/70" />
-      </motion.div>
+    <section ref={ref} className="min-h-screen flex items-center justify-center px-6 py-24">
+      <div className="max-w-4xl mx-auto text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0.2, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-xl md:text-2xl lg:text-3xl text-white/60 leading-relaxed mb-8"
+        >
+          {problem.statement}
+        </motion.p>
+        
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0.3, scale: 0.95 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <span className="text-[clamp(4rem,15vw,12rem)] font-black text-violet-400 leading-none">
+            {problem.emphasis}
+          </span>
+          <p className="text-white/40 text-sm md:text-base mt-4 max-w-md mx-auto">
+            {problem.reality}
+          </p>
+        </motion.div>
 
-      {/* Content */}
-      <motion.div 
-        className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-12 lg:px-16 w-full"
-        style={{ opacity }}
-      >
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left - Number & Title */}
-          <div>
-            <span className="text-violet-400/50 text-[clamp(4rem,12vw,10rem)] font-black leading-none">
-              {slide.num}
-            </span>
-            <h3 className="text-[clamp(2rem,5vw,4rem)] font-black text-white leading-[1.1] -mt-4 md:-mt-8">
-              {slide.title}
-            </h3>
-            <p className="text-white/50 text-base md:text-lg mt-6 max-w-md leading-relaxed">
-              {slide.desc}
-            </p>
-          </div>
-
-          {/* Right - Stat */}
-          <div className="text-right">
-            <span className="text-[clamp(3rem,10vw,8rem)] font-black text-white leading-none">
-              {slide.stat}
-            </span>
-            <p className="text-white/40 text-sm md:text-base mt-2">
-              {slide.statLabel}
-            </p>
-          </div>
+        {/* Progress Indicator */}
+        <div className="flex justify-center gap-2 mt-16">
+          {Array.from({ length: total }).map((_, i) => (
+            <div 
+              key={i} 
+              className={`w-8 h-0.5 transition-colors duration-300 ${
+                i === index ? 'bg-violet-400' : 'bg-white/20'
+              }`} 
+            />
+          ))}
         </div>
-      </motion.div>
+      </div>
+    </section>
+  );
+};
 
-      {/* Slide Progress */}
-      <div className="absolute bottom-12 left-6 md:left-12 lg:left-16 flex items-center gap-4">
-        <span className="text-white/30 text-xs tracking-wider">{slide.num}</span>
-        <div className="w-16 h-px bg-white/20">
-          <motion.div 
-            className="h-full bg-violet-400"
-            initial={{ width: "0%" }}
-            whileInView={{ width: "100%" }}
-            transition={{ duration: 1.5 }}
-          />
-        </div>
-        <span className="text-white/30 text-xs tracking-wider">03</span>
+const ResultStat = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-30%" });
+
+  return (
+    <section ref={ref} className="min-h-screen flex items-center justify-center px-6 bg-black">
+      <div className="text-center">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-white/40 text-sm md:text-base tracking-widest uppercase mb-6"
+        >
+          Result?
+        </motion.p>
+        
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={isInView ? { opacity: 1, scale: 1 } : {}}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <span className="text-[clamp(5rem,20vw,15rem)] font-black text-white leading-none">
+            90%
+          </span>
+        </motion.div>
+        
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="text-white/50 text-lg md:text-xl mt-6"
+        >
+          of Web3 projects <span className="text-red-400">fail</span> in Korea within 6 months.
+        </motion.p>
       </div>
     </section>
   );
 };
 
 // ============================================
-// SECTION 4: PROJECTS SHOWCASE - 풀스크린 호버 갤러리 (유지)
+// SECTION 3: TRANSITION - "But not ours"
 // ============================================
-const ProjectsShowcase = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isHovering, setIsHovering] = useState(false);
+const Transition = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const projects = [
-    { name: "MANTRA", category: "L1 Infrastructure", result: "500% Growth", media: mantraBg, video: "/videos/projects/mantra-hero.mp4", slug: "mantra" },
-    { name: "Story Protocol", category: "IP Platform", result: "Korea #1", media: storyBg, video: "/videos/projects/story-hero.mp4", slug: "story-protocol" },
-    { name: "peaq", category: "DePIN Entry", result: "First Branding", media: peaqBg, video: "/videos/projects/peaq-hero.mp4", slug: "peaq" },
-    { name: "Sahara AI", category: "AI × Blockchain", result: "Community Built", media: saharaAiBg, video: "/videos/projects/sahara-hero.mp4", slug: "sahara-ai" },
-    { name: "OpenLedger", category: "Data Infrastructure", result: "Market Entry", media: openledgerHero, slug: "openledger" },
-    { name: "KuCoin", category: "Exchange Campaign", result: "Top Engagement", media: kucoinBg, video: "/videos/projects/kucoin-hero.mp4", slug: "kucoin" },
-  ];
-
-  // Auto-rotate when not hovering
-  useEffect(() => {
-    if (isHovering) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % projects.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [isHovering, projects.length]);
+  const isInView = useInView(ref, { once: true, margin: "-30%" });
 
   return (
-    <section ref={ref} className="relative h-screen bg-black overflow-hidden">
-      {/* Background Media */}
+    <section ref={ref} className="h-screen flex items-center justify-center bg-black px-6">
+      <motion.h2
+        initial={{ opacity: 0, y: 50 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 1, ease: "easeOut" }}
+        className="text-[clamp(2rem,8vw,6rem)] font-black text-white text-center leading-tight"
+      >
+        But not the ones
+        <br />
+        <span className="text-violet-400">we work with.</span>
+      </motion.h2>
+    </section>
+  );
+};
+
+// ============================================
+// SECTION 4: RESULTS - 증명 섹션
+// ============================================
+const StatItem = ({ value, label, suffix = "" }: { value: number; label: string; suffix?: string }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const count = useCountUp({ end: value, isVisible: isInView, suffix });
+
+  return (
+    <div ref={ref} className="text-center">
+      <span className="text-5xl md:text-7xl font-black text-white">
+        {count}{suffix}
+      </span>
+      <p className="text-white/40 text-sm mt-2">{label}</p>
+    </div>
+  );
+};
+
+const Results = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const projects = [
+    { name: "Story Protocol", category: "IP Platform", result: "Korea #1 Community", media: storyBg, slug: "story-protocol" },
+    { name: "MANTRA", category: "L1 Infrastructure", result: "500% Volume Growth", media: mantraBg, slug: "mantra" },
+    { name: "peaq", category: "DePIN Entry", result: "First Mover Advantage", media: peaqBg, slug: "peaq" },
+    { name: "Sahara AI", category: "AI × Blockchain", result: "Community Built", media: saharaAiBg, slug: "sahara-ai" },
+    { name: "OpenLedger", category: "Data Infrastructure", result: "Market Entry", media: openledgerHero, slug: "openledger" },
+    { name: "KuCoin", category: "Exchange Campaign", result: "Top Engagement", media: kucoinBg, slug: "kucoin" },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % projects.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [projects.length]);
+
+  return (
+    <section ref={ref} className="relative py-24 md:py-32 bg-black overflow-hidden">
+      {/* Background */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeIndex}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.3 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.7 }}
           className="absolute inset-0"
         >
-          {projects[activeIndex].video ? (
-            <video
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full object-cover"
-            >
-              <source src={projects[activeIndex].video} type="video/mp4" />
-            </video>
-          ) : (
-            <img
-              src={projects[activeIndex].media}
-              alt={projects[activeIndex].name}
-              className="w-full h-full object-cover"
-            />
-          )}
-          <div className="absolute inset-0 bg-black/50" />
+          <img
+            src={projects[activeIndex].media}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black" />
         </motion.div>
       </AnimatePresence>
 
-      {/* Content Grid */}
-      <div className="relative z-10 h-full flex">
-        {/* Left - Project List */}
-        <div 
-          className="w-full lg:w-1/2 h-full flex flex-col justify-center px-8 md:px-16 lg:px-20"
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-        >
-          <motion.span
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-8"
-          >
-            Selected Work
-          </motion.span>
-
-          <div className="space-y-0">
-            {projects.map((project, i) => (
-              <motion.div
-                key={project.slug}
-                initial={{ opacity: 0, x: -30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: i * 0.1 }}
-              >
-                <Link
-                  to={`/projects/${project.slug}`}
-                  className="group block py-4 border-b border-white/10"
-                  onMouseEnter={() => setActiveIndex(i)}
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-baseline gap-4">
-                      <span className={`text-2xl md:text-4xl lg:text-5xl font-black transition-colors duration-300 ${
-                        activeIndex === i ? 'text-white' : 'text-white/30'
-                      }`}>
-                        {project.name}
-                      </span>
-                      <span className={`hidden md:block text-xs transition-colors duration-300 ${
-                        activeIndex === i ? 'text-violet-400' : 'text-white/20'
-                      }`}>
-                        {project.category}
-                      </span>
-                    </div>
-                    <motion.svg 
-                      className={`w-5 h-5 transition-all duration-300 ${
-                        activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-4'
-                      }`}
-                      fill="none" 
-                      viewBox="0 0 24 24" 
-                      stroke="currentColor"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                    </motion.svg>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.6 }}
-            className="mt-10"
-          >
-            <Link 
-              to="/projects"
-              className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
-            >
-              <span>View All Projects</span>
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Right - Active Project Info (Desktop) */}
-        <div className="hidden lg:flex w-1/2 h-full items-end justify-end p-20">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="text-right"
-            >
-              <span className="text-violet-400 text-sm">{projects[activeIndex].result}</span>
-              <p className="text-white/60 text-xs mt-2 max-w-xs ml-auto">
-                {projects[activeIndex].category} campaign delivering measurable results in the Korean market.
-              </p>
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </div>
-
-      {/* Progress Indicator */}
-      <div className="absolute bottom-12 left-8 md:left-16 lg:left-20 flex gap-2">
-        {projects.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setActiveIndex(i)}
-            className={`w-8 h-0.5 transition-all duration-300 ${
-              activeIndex === i ? 'bg-white' : 'bg-white/20'
-            }`}
-          />
-        ))}
-      </div>
-    </section>
-  );
-};
-
-// ============================================
-// SECTION 5: THE ANSWER - 해결책 선언 (신규)
-// ============================================
-const TheAnswer = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-20%" });
-
-  const stats = [
-    { value: "30+", label: "Projects" },
-    { value: "500%+", label: "Avg. Growth" },
-    { value: "100M+", label: "Impressions" }
-  ];
-
-  const locations = ["SEOUL", "TOKYO", "SINGAPORE", "DUBAI", "NEW YORK"];
-
-  return (
-    <section ref={ref} className="relative min-h-screen bg-white flex items-center py-24 md:py-32 overflow-hidden">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 w-full">
-        <div className="flex flex-col items-center text-center">
-          {/* Main Statement */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-[clamp(3rem,12vw,10rem)] font-black text-black leading-[0.9] tracking-tighter">
-              We bridge
-              <br />
-              <span className="text-violet-500">the gap.</span>
-            </h2>
-          </motion.div>
-
-          {/* Location Marquee */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.4 }}
-            className="mt-12 overflow-hidden w-full max-w-2xl"
-          >
-            <motion.div
-              animate={{ x: [0, -400] }}
-              transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
-              className="flex whitespace-nowrap"
-            >
-              {[...Array(4)].map((_, setIdx) => (
-                <div key={setIdx} className="flex items-center">
-                  {locations.map((loc, i) => (
-                    <span key={`${setIdx}-${i}`} className="text-neutral-300 text-sm md:text-base font-medium mx-3">
-                      {loc}
-                      <span className="mx-3 text-violet-400">→</span>
-                    </span>
-                  ))}
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.6 }}
-            className="mt-16 flex flex-wrap justify-center gap-8 md:gap-16"
-          >
-            {stats.map((stat, i) => (
-              <div key={i} className="text-center">
-                <span className="text-4xl md:text-6xl font-black text-black">{stat.value}</span>
-                <p className="text-neutral-400 text-sm mt-2">{stat.label}</p>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
-// ============================================
-// SECTION 6: THE METHOD - 수평 스크롤 (신규)
-// ============================================
-const TheMethod = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  const methods = [
-    {
-      num: "01",
-      title: "Research",
-      subtitle: "We dive deep into data",
-      desc: "Market analysis, competitor mapping, audience insights—we leave no stone unturned.",
-      image: discoveryImg,
-      link: "/services/deep-research"
-    },
-    {
-      num: "02",
-      title: "Strategy",
-      subtitle: "We craft your roadmap",
-      desc: "Custom GTM strategy aligned with Korean market dynamics and your business goals.",
-      image: strategyImg,
-      link: "/services/gtm"
-    },
-    {
-      num: "03",
-      title: "Execute",
-      subtitle: "We launch with precision",
-      desc: "Integrated campaigns across PR, community, KOLs, and events—executed flawlessly.",
-      image: executionImg,
-      link: "/services/community"
-    },
-    {
-      num: "04",
-      title: "Scale",
-      subtitle: "We amplify your growth",
-      desc: "Continuous optimization and expansion to maximize your market presence.",
-      image: scaleImg,
-      link: "/services/pr"
-    }
-  ];
-
-  return (
-    <section ref={ref} className="relative bg-black py-24 md:py-32">
-      {/* Header */}
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 mb-12">
+      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
+        {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="text-center mb-20"
         >
-          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Our Method</span>
-          <h3 className="text-3xl md:text-5xl font-black text-white mt-4">How we deliver results</h3>
+          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Track Record</span>
+          <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mt-4">
+            The proof is in the numbers.
+          </h3>
         </motion.div>
-      </div>
 
-      {/* Horizontal Scroll Cards */}
-      <div 
-        ref={containerRef}
-        className="overflow-x-auto scrollbar-hide"
-        style={{ scrollSnapType: 'x mandatory' }}
-      >
-        <div className="flex gap-6 px-6 md:px-12 lg:px-16 pb-8" style={{ width: 'max-content' }}>
-          {methods.map((method, i) => (
+        {/* Stats Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.2 }}
+          className="grid grid-cols-3 gap-8 mb-20 max-w-3xl mx-auto"
+        >
+          <StatItem value={340} suffix="%" label="Avg. Volume Increase" />
+          <StatItem value={2.5} suffix="M" label="Organic Reach" />
+          <StatItem value={30} suffix="+" label="Projects Launched" />
+        </motion.div>
+
+        {/* Project Cards Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {projects.map((project, i) => (
             <motion.div
-              key={method.num}
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: i * 0.15 }}
-              style={{ scrollSnapAlign: 'start' }}
+              key={project.slug}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.3 + i * 0.1 }}
             >
               <Link
-                to={method.link}
-                className="group relative block w-[300px] md:w-[400px] lg:w-[450px] aspect-[3/4] overflow-hidden"
+                to={`/projects/${project.slug}`}
+                className={`group relative block aspect-[4/5] overflow-hidden transition-all duration-500 ${
+                  activeIndex === i ? 'ring-2 ring-violet-500' : ''
+                }`}
+                onMouseEnter={() => setActiveIndex(i)}
               >
-                {/* Background Image */}
-                <div className="absolute inset-0">
-                  <img
-                    src={method.image}
-                    alt={method.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <img
+                  src={project.media}
+                  alt={project.name}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80" />
+                
+                <div className="absolute inset-0 p-4 flex flex-col justify-end">
+                  <h4 className="text-white font-bold text-sm md:text-base">{project.name}</h4>
+                  <p className="text-violet-400 text-xs mt-1">{project.result}</p>
                 </div>
-
-                {/* Content */}
-                <div className="relative z-10 h-full p-8 flex flex-col justify-between">
-                  {/* Number */}
-                  <span className="text-[8rem] md:text-[10rem] font-black text-white/5 leading-none -ml-2 -mt-4 group-hover:text-violet-500/10 transition-colors duration-500">
-                    {method.num}
-                  </span>
-
-                  {/* Text */}
-                  <div>
-                    <h4 className="text-3xl md:text-4xl font-black text-white group-hover:text-violet-400 transition-colors">
-                      {method.title}
-                    </h4>
-                    <p className="text-white/60 text-sm mt-2">{method.subtitle}</p>
-                    <p className="text-white/40 text-sm mt-4 leading-relaxed">
-                      {method.desc}
-                    </p>
-
-                    {/* Arrow */}
-                    <div className="mt-6 flex items-center gap-2 text-white/30 group-hover:text-violet-400 transition-colors">
-                      <span className="text-sm">Learn more</span>
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Border */}
-                <div className="absolute inset-0 border border-white/0 group-hover:border-violet-500/30 transition-colors pointer-events-none" />
               </Link>
             </motion.div>
           ))}
         </div>
-      </div>
 
-      {/* Scroll Hint */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.8 }}
-        className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 mt-8"
-      >
-        <div className="flex items-center gap-3 text-white/30">
-          <span className="text-xs tracking-wider">Drag to explore</span>
-          <ArrowRight className="w-4 h-4" />
-        </div>
-      </motion.div>
+        {/* View All */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.8 }}
+          className="text-center mt-12"
+        >
+          <Link 
+            to="/projects"
+            className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
+          >
+            <span>View All Case Studies</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </motion.div>
+      </div>
     </section>
   );
 };
 
 // ============================================
-// SECTION 7: THE TRUST - 로고 + 미디어 (신규)
+// SECTION 5: WHY US - 차별화
 // ============================================
-const TheTrust = () => {
+const WhyUs = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const differentiators = [
+    {
+      icon: Globe,
+      title: "Local DNA, Global Network",
+      description: "Founded by former Binance & KuCoin executives. We don't just understand Korea—we built its crypto ecosystem.",
+      highlight: "Binance & KuCoin Alumni"
+    },
+    {
+      icon: Database,
+      title: "Data-First Approach",
+      description: "Proprietary analytics dashboard tracking real-time market sentiment, competitor moves, and community health.",
+      highlight: "Proprietary Analytics"
+    },
+    {
+      icon: Users,
+      title: "End-to-End Execution",
+      description: "From research to launch to scale. One team. Complete accountability. No finger-pointing between agencies.",
+      highlight: "Full-Stack Team"
+    }
+  ];
+
+  return (
+    <section ref={ref} className="relative py-24 md:py-32 bg-white overflow-hidden">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="text-center mb-20"
+        >
+          <span className="text-[10px] text-black/40 tracking-[0.4em] uppercase">Why Ium Labs</span>
+          <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-black mt-4">
+            What makes us different.
+          </h3>
+        </motion.div>
+
+        {/* Cards */}
+        <div className="grid md:grid-cols-3 gap-8">
+          {differentiators.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.2 + i * 0.15 }}
+              className="group relative p-8 md:p-10 bg-neutral-50 hover:bg-black transition-colors duration-500"
+            >
+              {/* Icon */}
+              <div className="w-12 h-12 flex items-center justify-center bg-violet-100 group-hover:bg-violet-600 transition-colors mb-6">
+                <item.icon className="w-6 h-6 text-violet-600 group-hover:text-white transition-colors" />
+              </div>
+
+              {/* Content */}
+              <h4 className="text-xl md:text-2xl font-bold text-black group-hover:text-white transition-colors mb-4">
+                {item.title}
+              </h4>
+              <p className="text-neutral-600 group-hover:text-white/70 transition-colors text-sm leading-relaxed mb-6">
+                {item.description}
+              </p>
+
+              {/* Highlight */}
+              <span className="inline-block text-xs font-medium text-violet-600 group-hover:text-violet-400 transition-colors px-3 py-1 bg-violet-100 group-hover:bg-violet-900/50">
+                {item.highlight}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// SECTION 6: PROCESS - 타임라인
+// ============================================
+const Process = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const steps = [
+    {
+      week: "Week 1-2",
+      title: "Discovery",
+      tasks: ["Market research", "Competitor analysis", "Audience mapping", "Regulatory review"]
+    },
+    {
+      week: "Week 3-4",
+      title: "Strategy",
+      tasks: ["GTM roadmap", "Channel selection", "Budget allocation", "KPI definition"]
+    },
+    {
+      week: "Week 5-8",
+      title: "Launch",
+      tasks: ["PR campaigns", "Community building", "KOL activation", "Event execution"]
+    },
+    {
+      week: "Ongoing",
+      title: "Scale",
+      tasks: ["Performance tracking", "Optimization", "Expansion planning", "Reporting"]
+    }
+  ];
+
+  return (
+    <section ref={ref} className="relative py-24 md:py-32 bg-black">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="text-center mb-20"
+        >
+          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Our Process</span>
+          <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mt-4">
+            How we get you there.
+          </h3>
+        </motion.div>
+
+        {/* Timeline */}
+        <div className="relative">
+          {/* Line */}
+          <div className="absolute top-8 left-0 right-0 h-px bg-white/10 hidden md:block" />
+
+          {/* Steps */}
+          <div className="grid md:grid-cols-4 gap-8 md:gap-4">
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.week}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.2 + i * 0.15 }}
+                className="relative"
+              >
+                {/* Dot */}
+                <div className="hidden md:block absolute top-6 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <div className="w-4 h-4 bg-violet-500 rounded-full" />
+                </div>
+
+                {/* Card */}
+                <div className="md:pt-16 p-6 border border-white/10 hover:border-violet-500/50 transition-colors">
+                  <span className="text-violet-400 text-xs font-medium tracking-wider uppercase">
+                    {step.week}
+                  </span>
+                  <h4 className="text-2xl font-bold text-white mt-2 mb-4">
+                    {step.title}
+                  </h4>
+                  <ul className="space-y-2">
+                    {step.tasks.map((task, j) => (
+                      <li key={j} className="text-white/50 text-sm flex items-center gap-2">
+                        <span className="w-1 h-1 bg-white/30 rounded-full" />
+                        {task}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// SECTION 7: TRUST - 로고 + 테스티모니얼
+// ============================================
+const Trust = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -704,6 +598,12 @@ const TheTrust = () => {
     { name: "CoinTelegraph", logo: cointelegraphLogo },
     { name: "BlockMedia", logo: blockmediaLogo },
   ];
+
+  const testimonial = {
+    quote: "ium Labs understood the Korean market better than any agency we worked with. Their data-driven approach and local expertise made all the difference.",
+    author: "Global Marketing Lead",
+    company: "Top 10 L1 Project"
+  };
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 bg-neutral-950 overflow-hidden">
@@ -723,7 +623,7 @@ const TheTrust = () => {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3 }}
-          className="grid grid-cols-3 md:grid-cols-6 gap-8 md:gap-12 items-center justify-items-center mb-20"
+          className="grid grid-cols-3 md:grid-cols-6 gap-8 md:gap-12 items-center justify-items-center mb-16"
         >
           {clientLogos.map((client, i) => (
             <motion.div
@@ -736,14 +636,28 @@ const TheTrust = () => {
               <img
                 src={client.logo}
                 alt={client.name}
-                className="h-8 md:h-10 w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-300 grayscale group-hover:grayscale-0 group-hover:-translate-y-1"
+                className="h-8 md:h-10 w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-300 grayscale group-hover:grayscale-0"
               />
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Divider */}
-        <div className="border-t border-white/10 mb-16" />
+        {/* Testimonial */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5 }}
+          className="max-w-3xl mx-auto text-center py-12 border-t border-b border-white/10 mb-16"
+        >
+          <p className="text-xl md:text-2xl text-white/80 italic leading-relaxed mb-6">
+            "{testimonial.quote}"
+          </p>
+          <div>
+            <span className="text-white font-medium">{testimonial.author}</span>
+            <span className="text-white/40 mx-2">·</span>
+            <span className="text-violet-400">{testimonial.company}</span>
+          </div>
+        </motion.div>
 
         {/* Media Section */}
         <motion.div
@@ -754,26 +668,15 @@ const TheTrust = () => {
         >
           <span className="text-white/30 text-sm">Featured in</span>
           
-          {/* Media Marquee */}
-          <div className="mt-8 overflow-hidden">
-            <motion.div
-              animate={{ x: [0, -600] }}
-              transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
-              className="flex items-center gap-16 whitespace-nowrap"
-            >
-              {[...Array(4)].map((_, setIdx) => (
-                <div key={setIdx} className="flex items-center gap-16">
-                  {mediaLogos.map((media, i) => (
-                    <img
-                      key={`${setIdx}-${i}`}
-                      src={media.logo}
-                      alt={media.name}
-                      className="h-6 md:h-8 w-auto object-contain opacity-30 hover:opacity-60 transition-opacity grayscale"
-                    />
-                  ))}
-                </div>
-              ))}
-            </motion.div>
+          <div className="mt-8 flex items-center justify-center gap-12 md:gap-16">
+            {mediaLogos.map((media) => (
+              <img
+                key={media.name}
+                src={media.logo}
+                alt={media.name}
+                className="h-6 md:h-8 w-auto object-contain opacity-30 hover:opacity-60 transition-opacity grayscale"
+              />
+            ))}
           </div>
         </motion.div>
       </div>
@@ -782,14 +685,12 @@ const TheTrust = () => {
 };
 
 // ============================================
-// SECTION 8: THE CTA - 풀스크린 CTA (신규)
+// SECTION 8: CTA - 풀스크린 CTA
 // ============================================
-const TheCTA = () => {
+const CTA = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isHovered, setIsHovered] = useState(false);
-
-  const ctaWords = ["Ready", "to", "conquer", "Korea?"];
 
   return (
     <section 
@@ -798,7 +699,7 @@ const TheCTA = () => {
         isHovered ? 'bg-violet-600' : 'bg-black'
       }`}
     >
-      {/* Background Video */}
+      {/* Background */}
       <div className="absolute inset-0">
         <video
           autoPlay
@@ -814,91 +715,67 @@ const TheCTA = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
       </div>
 
-      {/* Background Text */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <motion.span 
-          className="text-[20vw] font-black text-white/[0.02] select-none whitespace-nowrap"
-          animate={{ opacity: isHovered ? 0.05 : 0.02 }}
-        >
-          KOREA
-        </motion.span>
-      </div>
-
       <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 w-full">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left - Typography */}
-          <div>
-            <div className="flex flex-wrap gap-x-4 md:gap-x-6 gap-y-2">
-              {ctaWords.map((word, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, y: 40 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: i * 0.1, duration: 0.6 }}
-                  className={`text-[clamp(2.5rem,7vw,5rem)] font-black leading-[1.05] tracking-tight ${
-                    word === "Korea?" ? "text-violet-400" : "text-white"
-                  }`}
-                >
-                  {word}
-                </motion.span>
-              ))}
-            </div>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.6 }}
-              className="text-white/50 text-base md:text-lg mt-8 max-w-md"
-            >
-              가장 확실한 파트너와 시작하세요.
-              <br />
-              데이터로 증명하고, 결과로 보여드립니다.
-            </motion.p>
-          </div>
-
-          {/* Right - Contact Info */}
-          <motion.div
+        <div className="max-w-3xl mx-auto text-center">
+          {/* Main CTA Text */}
+          <motion.h2
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.4 }}
-            className="flex flex-col gap-8"
+            transition={{ duration: 0.8 }}
+            className="text-[clamp(2.5rem,8vw,5rem)] font-black text-white leading-tight"
           >
-            {/* Main CTA Button */}
+            Ready to crack <span className="text-violet-400">Korea?</span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.3 }}
+            className="text-white/60 text-lg md:text-xl mt-6 mb-12"
+          >
+            가장 확실한 파트너와 시작하세요.
+          </motion.p>
+
+          {/* CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.4 }}
+          >
             <Link
               to="/contact"
-              className="group relative inline-flex items-center justify-between w-full p-6 md:p-8 bg-white text-black hover:bg-violet-500 hover:text-white transition-all duration-500 overflow-hidden"
+              className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-white text-black hover:bg-violet-500 hover:text-white transition-all duration-500 text-lg font-bold"
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              <span className="text-xl md:text-2xl font-bold">Start Your Journey</span>
-              <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
+              <span>Book a Strategy Call</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </Link>
+          </motion.div>
 
-            {/* Secondary Links */}
-            <div className="grid sm:grid-cols-2 gap-4">
-              <a
-                href="mailto:gm@iumlabs.io"
-                className="group flex items-center gap-4 p-5 border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all"
-              >
-                <Mail className="w-5 h-5 text-violet-400" />
-                <div>
-                  <span className="text-white/40 text-xs block">Email</span>
-                  <span className="text-white text-sm font-medium">gm@iumlabs.io</span>
-                </div>
-              </a>
-
-              <a
-                href="https://calendly.com/iumlabs"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-4 p-5 border border-white/10 hover:border-white/30 hover:bg-white/5 transition-all"
-              >
-                <CalendarDays className="w-5 h-5 text-violet-400" />
-                <div>
-                  <span className="text-white/40 text-xs block">Schedule</span>
-                  <span className="text-white text-sm font-medium">Book a Call</span>
-                </div>
-              </a>
-            </div>
+          {/* Contact Options */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.6 }}
+            className="mt-12 flex flex-wrap justify-center gap-8"
+          >
+            <a
+              href="mailto:gm@iumlabs.io"
+              className="flex items-center gap-2 text-white/50 hover:text-white transition-colors"
+            >
+              <Mail className="w-4 h-4" />
+              <span className="text-sm">gm@iumlabs.io</span>
+            </a>
+            <a
+              href="https://calendly.com/iumlabs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 text-white/50 hover:text-white transition-colors"
+            >
+              <CalendarDays className="w-4 h-4" />
+              <span className="text-sm">Calendly</span>
+            </a>
           </motion.div>
         </div>
       </div>
@@ -912,30 +789,31 @@ const TheCTA = () => {
 const GTMService = () => {
   usePageMeta(
     "Data-Driven Korea GTM Strategy | Ium Labs",
-    "Data-Driven Growth in Korea. Powered by Deep Research. Strategic market entry with measurable results.",
-    "/services/gtm"
+    "We've helped 30+ global Web3 projects crack Korea's $50B crypto market. Data-driven GTM strategy powered by former Binance & KuCoin executives."
   );
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
-      <ServiceSchema 
-        name="GTM Strategy - Korea Market Entry"
-        description="Data-Driven Growth in Korea. Powered by Deep Research."
+    <>
+      <ServiceSchema
+        name="Korea GTM Strategy"
+        description="Data-driven go-to-market strategy for Web3 projects entering the Korean market. Powered by deep research and local expertise."
+        url="/services/gtm"
         provider="Ium Labs"
-        areaServed="Korea"
-        url="https://iumlabs.io/services/gtm"
+        areaServed="South Korea"
       />
       <Navbar />
-      <OpeningHero />
-      <TheQuestion />
-      <TheReality />
-      <ProjectsShowcase />
-      <TheAnswer />
-      <TheMethod />
-      <TheTrust />
-      <TheCTA />
+      <main>
+        <Hero />
+        <ProblemNarrative />
+        <Transition />
+        <Results />
+        <WhyUs />
+        <Process />
+        <Trust />
+        <CTA />
+      </main>
       <Footer />
-    </div>
+    </>
   );
 };
 
