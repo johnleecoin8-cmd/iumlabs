@@ -26,7 +26,8 @@ import ServicesSection from "@/components/ServicesSection";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
 import CasesSection from "@/components/CasesSection";
 import FilmstripGallerySection from "@/components/FilmstripGallerySection";
-import AboutWorkShowcase from "@/components/AboutWorkShowcase";
+import SelectedWorkShowcase from "@/components/SelectedWorkShowcase";
+import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import InsightsSection from "@/components/InsightsSection";
 import ContactFormSection from "@/components/ContactFormSection";
 import CTABannerSection from "@/components/CTABannerSection";
@@ -230,10 +231,91 @@ const Index = () => {
         </div>
       </main>
       
-      {/* About + Selected Work - Full Screen Showcase */}
-      <section className="bg-black" id="about-work">
+      {/* About - 01 */}
+      <section className="bg-surface-base" id="why-choose-us">
+        <div className="border-t border-white/10">
+          <AnimatedSection>
+            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">01</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">About</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Why ium Labs</span>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={100}>
+            <WhyChooseUsSection />
+          </AnimatedSection>
+        </div>
+      </section>
+      
+      {/* Media Partners - 번호 없음, 헤더 없이 마키만 */}
+      <section className="bg-surface-base" id="media-partners">
+        <AnimatedSection direction="none">
+          <MediaPartnersSection />
+        </AnimatedSection>
+      </section>
+      
+      {/* Services - 02 */}
+      <section className="bg-surface-base" id="services">
+        <div className="border-t border-white/10">
+          <AnimatedSection>
+            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">02</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What We Do</span>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={100}>
+            <ServicesSection />
+          </AnimatedSection>
+        </div>
+      </section>
+      
+      {/* Process - 03 */}
+      <section className="bg-surface-base" id="process">
+        <div className="border-t border-white/10">
+          <AnimatedSection>
+            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">03</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
+            </div>
+          </AnimatedSection>
+          
+          {/* Featured Billboard Image with Process Overlay */}
+          <AnimatedSection delay={100}>
+            <ProcessBillboardOverlay />
+          </AnimatedSection>
+        </div>
+      </section>
+      
+      {/* Cases - 04 */}
+      <section className="bg-surface-base" id="cases">
+        <div className="border-t border-white/10">
+          <AnimatedSection>
+            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">04</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Work</span>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={100}>
+            <CasesSection />
+          </AnimatedSection>
+        </div>
+      </section>
+      
+      {/* Selected Work - Full Screen Showcase */}
+      <section className="bg-black" id="selected-work">
         <AnimatedSection delay={100}>
-          <AboutWorkShowcase />
+          <SelectedWorkShowcase />
         </AnimatedSection>
       </section>
       

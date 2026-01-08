@@ -12,7 +12,7 @@ import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
 import bybitBg from '@/assets/projects/bybit-bg.jpg';
 import bnbBg from '@/assets/projects/bnb-bg.jpg';
 
-const AboutWorkShowcase = () => {
+const SelectedWorkShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const ref = useRef(null);
@@ -29,12 +29,6 @@ const AboutWorkShowcase = () => {
     { name: "OpenLedger", category: "Data Infrastructure", result: "Market Entry", media: openledgerHero, slug: "openledger" },
   ];
 
-  const stats = [
-    { value: "2025", label: "Est." },
-    { value: "18+", label: "Projects" },
-    { value: "60+", label: "Partners" },
-  ];
-
   // Auto-rotate when not hovering
   useEffect(() => {
     if (isHovering) return;
@@ -45,7 +39,7 @@ const AboutWorkShowcase = () => {
   }, [isHovering, projects.length]);
 
   return (
-    <section ref={ref} className="relative h-[100vh] md:h-screen bg-black overflow-hidden">
+    <section ref={ref} className="relative h-[80vh] md:h-screen bg-black overflow-hidden">
       {/* Background Media */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -79,56 +73,16 @@ const AboutWorkShowcase = () => {
 
       {/* Content Grid */}
       <div className="relative z-10 h-full flex">
-        {/* Left - About + Project List */}
+        {/* Left - Project List */}
         <div 
           className="w-full lg:w-1/2 h-full flex flex-col justify-center px-6 md:px-12 lg:px-16"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
-          {/* About Section */}
-          <div className="mb-8 md:mb-12">
-            <motion.span
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-4 block"
-            >
-              About Us
-            </motion.span>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 }}
-              className="text-white/70 text-sm md:text-base leading-relaxed mb-6 max-w-md"
-            >
-              ium Labs bridges global Web3 projects with the Korean market through data-driven research and strategic GTM marketing.
-            </motion.p>
-
-            {/* Stats - Horizontal */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 }}
-              className="flex gap-8 md:gap-12"
-            >
-              {stats.map((stat, i) => (
-                <div key={i} className="text-center">
-                  <span className="text-2xl md:text-3xl font-bold text-white">{stat.value}</span>
-                  <span className="block text-[10px] text-white/40 uppercase tracking-wider mt-1">{stat.label}</span>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Divider */}
-          <div className="w-full h-px bg-white/10 mb-6 md:mb-8" />
-
-          {/* Selected Work Section */}
           <motion.span
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.3 }}
-            className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-4 md:mb-6 block"
+            className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-6 md:mb-8"
           >
             Selected Work
           </motion.span>
@@ -139,28 +93,28 @@ const AboutWorkShowcase = () => {
                 key={project.slug}
                 initial={{ opacity: 0, x: -30 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.4 + i * 0.05 }}
+                transition={{ delay: i * 0.1 }}
               >
                 <Link
                   to={`/projects/${project.slug}`}
-                  className="group block py-2 md:py-3 border-b border-white/10"
+                  className="group block py-3 md:py-4 border-b border-white/10"
                   onMouseEnter={() => setActiveIndex(i)}
                 >
                   <div className="flex items-center justify-between">
-                    <div className="flex items-baseline gap-2 md:gap-3">
-                      <span className={`text-base md:text-xl lg:text-2xl font-black transition-colors duration-300 ${
+                    <div className="flex items-baseline gap-3 md:gap-4">
+                      <span className={`text-xl md:text-3xl lg:text-4xl font-black transition-colors duration-300 ${
                         activeIndex === i ? 'text-white' : 'text-white/30'
                       }`}>
                         {project.name}
                       </span>
-                      <span className={`hidden md:block text-[10px] transition-colors duration-300 ${
+                      <span className={`hidden md:block text-xs transition-colors duration-300 ${
                         activeIndex === i ? 'text-violet-400' : 'text-white/20'
                       }`}>
                         {project.category}
                       </span>
                     </div>
                     <motion.svg 
-                      className={`w-3 h-3 md:w-4 md:h-4 transition-all duration-300 ${
+                      className={`w-4 h-4 md:w-5 md:h-5 transition-all duration-300 ${
                         activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-4'
                       }`}
                       fill="none" 
@@ -178,15 +132,15 @@ const AboutWorkShowcase = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.8 }}
-            className="mt-6 md:mt-8"
+            transition={{ delay: 0.6 }}
+            className="mt-8 md:mt-10"
           >
             <Link 
               to="/projects"
-              className="inline-flex items-center gap-2 text-xs md:text-sm text-white/50 hover:text-white transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
             >
               <span>View All Projects</span>
-              <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
@@ -216,4 +170,4 @@ const AboutWorkShowcase = () => {
   );
 };
 
-export default AboutWorkShowcase;
+export default SelectedWorkShowcase;
