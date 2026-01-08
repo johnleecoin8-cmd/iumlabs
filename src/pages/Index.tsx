@@ -253,12 +253,6 @@ const Index = () => {
         </AnimatedSection>
       </section>
       
-      {/* Media Partners - 번호 없음, 헤더 없이 마키만 */}
-      <section className="bg-surface-base" id="media-partners">
-        <AnimatedSection direction="none">
-          <MediaPartnersSection />
-        </AnimatedSection>
-      </section>
       
       {/* Services - 02 */}
       <section className="bg-surface-base" id="services">
@@ -333,6 +327,13 @@ const Index = () => {
             <InsightsSection />
           </AnimatedSection>
         </div>
+      </section>
+      
+      {/* Media Partners - 번호 없음, 헤더 없이 마키만 */}
+      <section className="bg-surface-base" id="media-partners">
+        <AnimatedSection direction="none">
+          <MediaPartnersSection />
+        </AnimatedSection>
       </section>
       
       {/* Contact - 06 */}
