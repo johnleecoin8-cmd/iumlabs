@@ -37,12 +37,12 @@ const SelectedWorkShowcase = () => {
       slug: "mantra"
     },
     {
-      name: "Bybit",
-      category: "Exchange",
-      result: "#2 Traffic",
-      media: bybitBg,
-      video: "/videos/projects/bybit-hero.mp4",
-      slug: "bybit"
+      name: "peaq",
+      category: "DePIN",
+      result: "First Mover",
+      media: peaqBg,
+      video: "/videos/projects/peaq-hero.mp4",
+      slug: "peaq"
     },
     {
       name: "BNB Chain",
@@ -53,28 +53,19 @@ const SelectedWorkShowcase = () => {
       slug: "bnb-chain"
     },
     {
-      name: "peaq",
-      category: "DePIN",
-      result: "First Mover",
-      media: peaqBg,
-      video: "/videos/projects/peaq-hero.mp4",
-      slug: "peaq"
-    },
-    {
-      name: "Sahara AI",
-      category: "AI × Blockchain",
-      result: "Community Built",
-      media: saharaAiBg,
-      video: "/videos/projects/sahara-hero.mp4",
-      slug: "sahara-ai"
-    },
-    {
-      name: "KuCoin",
+      name: "Bybit",
       category: "Exchange",
-      result: "Top Engagement",
-      media: kucoinBg,
-      video: "/videos/projects/kucoin-hero.mp4",
-      slug: "kucoin"
+      result: "#2 Traffic",
+      media: bybitBg,
+      video: "/videos/projects/bybit-hero.mp4",
+      slug: "bybit"
+    },
+    {
+      name: "FOGO",
+      category: "L1 Chain",
+      result: "Market Entry",
+      media: storyBg,
+      slug: "fogo"
     },
     {
       name: "OpenLedger",
@@ -82,6 +73,20 @@ const SelectedWorkShowcase = () => {
       result: "Market Entry",
       media: openledgerHero,
       slug: "openledger"
+    },
+    {
+      name: "Polygon",
+      category: "L2 Scaling",
+      result: "Ecosystem Growth",
+      media: peaqBg,
+      slug: "polygon"
+    },
+    {
+      name: "Tria",
+      category: "Wallet Infra",
+      result: "Korea Launch",
+      media: saharaAiBg,
+      slug: "tria"
     }
   ];
 
