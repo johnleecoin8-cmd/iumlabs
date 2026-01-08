@@ -246,6 +246,9 @@ const Index = () => {
           <AnimatedSection delay={100}>
             <WhyChooseUsSection />
           </AnimatedSection>
+          <AnimatedSection delay={200}>
+            <SelectedWorkShowcase />
+          </AnimatedSection>
         </div>
       </section>
       
@@ -312,12 +315,6 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Selected Work - Full Screen Showcase */}
-      <section className="bg-black" id="selected-work">
-        <AnimatedSection delay={100}>
-          <SelectedWorkShowcase />
-        </AnimatedSection>
-      </section>
       
       {/* Gallery - 05 */}
       <section className="bg-surface-base" id="gallery">
