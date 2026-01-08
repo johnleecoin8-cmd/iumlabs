@@ -4,7 +4,6 @@ import { Mail, MapPin, Send, ArrowRight, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
-import contactBgImage from "@/assets/backgrounds/contact-seoul-metro.jpeg";
 const budgetOptions = ["$15K - $25K", "$25K - $50K", "$50K +", "Raising funds"];
 interface ContactFormSectionProps {
   sectionNumber?: string;
@@ -101,23 +100,13 @@ const ContactFormSection = ({
         {/* Two Column Layout */}
         <div className="flex flex-col md:flex-row">
           {/* Left Column - Contact Info */}
-          <div 
-            className="w-full md:w-2/5 p-4 sm:p-6 md:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-white/15 relative overflow-hidden"
-            style={{
-              backgroundImage: `url(${contactBgImage})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          >
-            {/* Overlay for readability */}
-            <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
-            <div className="relative z-10">
-              <h3 className="text-xl sm:text-2xl md:text-4xl font-bold text-white mb-3 sm:mb-5 tracking-tight">
-                Get in Touch
-              </h3>
-              <p className="text-white/70 text-xs sm:text-sm md:text-base leading-relaxed mb-5 sm:mb-10">
-                Ready to enter the Korean market? Let's discuss how we can help your project grow.
-              </p>
+          <div className="w-full md:w-2/5 p-4 sm:p-6 md:p-8 lg:p-12 border-b md:border-b-0 md:border-r border-white/15">
+            <h3 className="text-xl sm:text-2xl md:text-4xl font-bold text-white mb-3 sm:mb-5 tracking-tight">
+              Get in Touch
+            </h3>
+            <p className="text-white/60 text-xs sm:text-sm md:text-base leading-relaxed mb-5 sm:mb-10">
+              Ready to enter the Korean market? Let's discuss how we can help your project grow.
+            </p>
 
             {/* Office */}
             <div className="mb-4 sm:mb-7 pb-4 sm:pb-7 border-b border-white/15">
@@ -163,7 +152,6 @@ const ContactFormSection = ({
 
             {/* Footer Links */}
             
-            </div>
           </div>
 
           {/* Right Column - Contact Form */}
