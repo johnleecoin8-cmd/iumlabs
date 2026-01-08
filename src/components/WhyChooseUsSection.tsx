@@ -38,46 +38,19 @@ const WhyChooseUsSection = () => {
             viewport={{ once: true, margin: "-50px" }}
           >
             {/* Headline */}
-            <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-black text-foreground mb-4 sm:mb-5 tracking-tight leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
               Real results, not just promises.
             </h2>
             
             {/* Description */}
-            <p className="text-foreground/80 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-6">
+            <p className="text-foreground/80 leading-relaxed text-base sm:text-lg md:text-lg lg:text-xl mb-6">
               ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. <span className="text-primary font-semibold">'이음(ium)'</span> Derived from the Korean word "to connect," we function as your foundational layer for market entry. We transcend standard marketing by leveraging proprietary analytics and data-driven research, providing the actionable insights needed to navigate and succeed in the Korean market.
             </p>
             
-            {/* Stats Row */}
-            <div className="flex flex-wrap gap-6 sm:gap-8 mb-6 pb-6 border-b border-border">
-              {stats.map((stat, index) => (
-                <motion.div 
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                  className="cursor-default"
-                >
-                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground tracking-tight">{stat.value}</div>
-                  <div className="text-xs sm:text-sm text-muted-foreground">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-            
-            {/* Bottom Row: Founders + CTA */}
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <p className="text-primary font-semibold text-sm sm:text-base">
-                Founded by former Binance & KuCoin executives
-              </p>
-              
-              <Link
-                to="/projects"
-                className="group inline-flex items-center gap-2 text-foreground text-sm sm:text-base font-semibold relative after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-[1.5px] after:bottom-0 after:left-0 after:bg-foreground after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left active:scale-[0.98] transition-transform"
-              >
-                View Our Work
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1.5 transition-transform" />
-              </Link>
-            </div>
+            {/* Founders Note */}
+            <p className="text-primary font-semibold text-base sm:text-lg">
+              Founded by former Binance & KuCoin executives
+            </p>
           </motion.div>
         </div>
       </div>
