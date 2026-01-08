@@ -278,20 +278,79 @@ const SolutionSection = () => {
 };
 
 // ============================================
+// HASHTAG SECTION - SPACE MONSTER STYLE
+// ============================================
+const HashtagSection = () => {
+  const hashtags = ['#KoreaMarketEntry', '#CommunityGrowth', '#KOLMarketing', '#Web3GTM', '#DataDriven'];
+  
+  return (
+    <section className="bg-black py-12 md:py-16">
+      <div className="flex flex-wrap justify-center gap-4 md:gap-8 px-6">
+        {hashtags.map((tag) => (
+          <motion.span 
+            key={tag}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            whileHover={{ scale: 1.05, color: 'hsl(var(--primary))' }}
+            className="text-xl md:text-3xl lg:text-4xl font-black text-primary/40 cursor-default transition-colors"
+          >
+            {tag}
+          </motion.span>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// VALUES MARQUEE - SPACE MONSTER ITALIC STYLE
+// ============================================
+const ValuesMarquee = () => {
+  const values = "data-driven · community-first · performance-based · Korea-focused · local-expertise · ";
+  
+  return (
+    <section className="bg-black py-8 md:py-12 overflow-hidden">
+      {/* Multiple rows with alternating directions */}
+      {[...Array(5)].map((_, row) => (
+        <div 
+          key={row}
+          className={`flex whitespace-nowrap ${row % 2 === 0 ? 'animate-scroll-left-values' : 'animate-scroll-right-values'}`}
+        >
+          {[...Array(4)].map((_, i) => (
+            <span 
+              key={i}
+              className="text-[clamp(2rem,5vw,4rem)] font-bold italic text-transparent tracking-tight mx-4"
+              style={{ 
+                WebkitTextStroke: row % 2 === 0 
+                  ? '1px rgba(255,107,0,0.25)' 
+                  : '1px rgba(255,255,255,0.15)' 
+              }}
+            >
+              {values}
+            </span>
+          ))}
+        </div>
+      ))}
+    </section>
+  );
+};
+
+// ============================================
 // SERVICE MARQUEE - SPACE MONSTER STYLE (OUTLINE TEXT)
 // ============================================
 const ServiceMarquee = () => {
   const services = "GTM STRATEGY · COMMUNITY BUILDING · KOL NETWORK · PR COVERAGE · EVENT MARKETING · BRAND AWARENESS · ";
   
   return (
-    <section className="relative bg-black py-8 md:py-12 overflow-hidden border-y border-white/5">
+    <section className="relative bg-black py-6 md:py-8 overflow-hidden border-y border-white/5">
       {/* First Row - Left to Right */}
-      <div className="flex whitespace-nowrap animate-scroll-left-fast mb-2">
+      <div className="flex whitespace-nowrap animate-scroll-left-fast mb-1">
         {[...Array(4)].map((_, i) => (
           <span 
             key={`row1-${i}`}
-            className="text-[clamp(1.5rem,4vw,3rem)] font-black text-transparent tracking-tight mx-2"
-            style={{ WebkitTextStroke: '1px rgba(255,107,0,0.4)' }}
+            className="text-[clamp(1.2rem,3vw,2.5rem)] font-black text-transparent tracking-tight mx-2"
+            style={{ WebkitTextStroke: '1px rgba(255,107,0,0.5)' }}
           >
             {services}
           </span>
@@ -303,8 +362,8 @@ const ServiceMarquee = () => {
         {[...Array(4)].map((_, i) => (
           <span 
             key={`row2-${i}`}
-            className="text-[clamp(1.5rem,4vw,3rem)] font-black text-transparent tracking-tight mx-2"
-            style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}
+            className="text-[clamp(1.2rem,3vw,2.5rem)] font-black text-transparent tracking-tight mx-2"
+            style={{ WebkitTextStroke: '1px rgba(255,255,255,0.25)' }}
           >
             {services}
           </span>
@@ -466,18 +525,32 @@ const AchievementsListSection = () => {
 };
 
 // ============================================
-// LARGE SERVICE MARQUEE - SPACE MONSTER STYLE
+// LARGE SERVICE MARQUEE - SPACE MONSTER STYLE (MASSIVE)
 // ============================================
 const LargeServiceMarquee = () => {
-  const services = "GTM · COMMUNITY · KOL · PR · EVENTS · BRANDING · ";
+  const services = "GTM Strategy · Community · KOL Network · PR Coverage · Events · Branding · ";
   
   return (
-    <section className="relative bg-white py-4 md:py-6 overflow-hidden">
-      <div className="flex whitespace-nowrap animate-scroll-right-slow">
-        {[...Array(6)].map((_, i) => (
+    <section className="relative bg-black py-6 md:py-10 overflow-hidden border-y border-white/10">
+      {/* First Row - Left */}
+      <div className="flex whitespace-nowrap animate-scroll-left-large">
+        {[...Array(4)].map((_, i) => (
           <span 
-            key={i}
-            className="text-[clamp(3rem,10vw,8rem)] font-black text-black tracking-tighter mx-4"
+            key={`large1-${i}`}
+            className="text-[clamp(4rem,15vw,12rem)] font-black text-white tracking-tighter mx-6"
+          >
+            {services}
+          </span>
+        ))}
+      </div>
+      
+      {/* Second Row - Right (Outline) */}
+      <div className="flex whitespace-nowrap animate-scroll-right-large mt-2">
+        {[...Array(4)].map((_, i) => (
+          <span 
+            key={`large2-${i}`}
+            className="text-[clamp(4rem,15vw,12rem)] font-black text-transparent tracking-tighter mx-6"
+            style={{ WebkitTextStroke: '2px rgba(255,255,255,0.3)' }}
           >
             {services}
           </span>
@@ -1140,7 +1213,13 @@ const GTMService = () => {
         {/* Section 3: Solution - SMC Style White */}
         <SolutionSection />
 
-        {/* NEW: Service Marquee - Space Monster Style */}
+        {/* NEW: Hashtag Section - Space Monster Style */}
+        <HashtagSection />
+
+        {/* NEW: Values Marquee - Space Monster Italic Style */}
+        <ValuesMarquee />
+
+        {/* Service Marquee - Space Monster Style */}
         <ServiceMarquee />
 
         {/* Rolling Gallery - SMC Style */}

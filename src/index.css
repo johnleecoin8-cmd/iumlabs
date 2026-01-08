@@ -1104,6 +1104,28 @@
   animation: scroll-right 40s linear infinite;
 }
 
+.animate-scroll-left-slow {
+  animation: scroll-left 40s linear infinite;
+}
+
+/* Values Marquee - Space Monster Style (slower, italic feel) */
+.animate-scroll-left-values {
+  animation: scroll-left 50s linear infinite;
+}
+
+.animate-scroll-right-values {
+  animation: scroll-right 55s linear infinite;
+}
+
+/* Large Marquee - Space Monster Style (massive text) */
+.animate-scroll-left-large {
+  animation: scroll-left 35s linear infinite;
+}
+
+.animate-scroll-right-large {
+  animation: scroll-right 40s linear infinite;
+}
+
 /* ============================================
    REDUCED MOTION SUPPORT
    ============================================ */
