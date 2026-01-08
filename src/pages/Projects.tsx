@@ -378,212 +378,212 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
   if (projects.length === 0) return null;
 
   return (
-    <section ref={ref} className="relative bg-black py-16 overflow-hidden">
-      {/* Section Title */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        className="px-6 md:px-10 mb-8"
-      >
-        <div className="flex items-baseline justify-between">
+    <section ref={ref} className="scroll-reveal bg-[#0A0A0A]" id="gallery">
+      <div className="border-t border-border">
+        {/* Section Header - matches other sections */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="flex items-baseline justify-between p-6 md:px-10 md:py-6 border-b border-border"
+        >
           <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-white/20 text-[10px] tracking-[0.5em]">PORTFOLIO</span>
-            <h2 className="text-2xl md:text-3xl font-black text-transparent tracking-tighter"
-              style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.6)' }}>
-              SELECTED W<span className="text-primary">⬡</span>RK
-            </h2>
+            <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">02</span>
+            <h2 className="text-lg md:text-xl font-medium text-foreground">Gallery</h2>
           </div>
-          <span className="text-xs text-white/40 tracking-wider hidden sm:flex items-center gap-2">
+          <span className="text-xs text-muted-foreground tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-border rounded-full">
             ← Drag / Scroll →
           </span>
-        </div>
-      </motion.div>
-
-      {/* Horizontal Scroll Container */}
-      <motion.div 
-        ref={scrollRef}
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.2 }}
-        className={`overflow-x-auto scrollbar-hide select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
-        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-        onScroll={handleScroll}
-        onMouseDown={handleMouseDown}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={() => { handleMouseUp(); handleMouseLeave(); }}
-        onMouseMove={handleMouseMove}
-      >
-        <div className="flex gap-1 px-6 md:px-10 pb-4" style={{ width: 'max-content' }}>
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.slug}
-              initial={{ opacity: 0, x: 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 0.1 + Math.min(i, 10) * 0.03 }}
-              className="relative overflow-hidden group"
-              style={{ 
-                width: hoveredIndex === null ? '180px' : hoveredIndex === i ? '400px' : '100px',
-                transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                pointerEvents: isDragging ? 'none' : 'auto'
-              }}
-              onMouseEnter={() => handleMouseEnter(i)}
-              onMouseLeave={handleMouseLeave}
-            >
-              <div className="relative h-[450px] md:h-[500px] overflow-hidden">
-                {/* Background Image */}
-                <img
-                  src={project.bgImage}
-                  alt={project.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
-                  draggable={false}
-                />
-
-                {/* Video (plays on hover) */}
-                {project.video && (
-                  <video
-                    src={project.video}
-                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
-                      activeVideo === i ? 'opacity-100' : 'opacity-0'
-                    }`}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                  />
-                )}
-
-                {/* Gradient Overlay */}
-                <div className={`absolute inset-0 transition-all duration-500 ${
-                  hoveredIndex === i 
-                    ? 'bg-gradient-to-t from-black via-black/40 to-transparent' 
-                    : 'bg-black/70'
-                }`} />
-
-                {/* Vertical Title (collapsed state) */}
-                <AnimatePresence>
-                  {hoveredIndex !== i && (
-                    <motion.div
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      className="absolute inset-0 flex items-center justify-center"
-                    >
-                      <span className="text-white/80 font-bold text-sm tracking-[0.3em] whitespace-nowrap rotate-90 origin-center">
-                        {project.name.toUpperCase()}
-                      </span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Expanded Content */}
-                <AnimatePresence>
-                  {hoveredIndex === i && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 20 }}
-                      transition={{ delay: 0.1, duration: 0.3 }}
-                      className="absolute inset-0 flex flex-col justify-end p-6 md:p-8"
-                    >
-                      {/* Category Tag */}
-                      <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase mb-3">
-                        {project.category}
-                      </span>
-
-                      {/* Logo */}
-                      <div className="mb-4">
-                        {project.logo ? (
-                          <img
-                            src={project.logo}
-                            alt={project.name}
-                            className="h-8 md:h-10 w-auto object-contain brightness-0 invert"
-                            draggable={false}
-                          />
-                        ) : (
-                          <span className="text-white font-black text-xl md:text-2xl tracking-tight">
-                            {project.name}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Result Metric */}
-                      <div className="mb-6">
-                        <span className="text-xl md:text-2xl font-black bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent leading-tight">
-                          {project.result}
-                        </span>
-                      </div>
-
-                      {/* View Project Button */}
-                      <Link
-                        to={`/projects/${project.slug}`}
-                        className="inline-flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest transition-colors group/link"
-                        onClick={(e) => isDragging && e.preventDefault()}
-                      >
-                        <span>VIEW PROJECT</span>
-                        <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                      </Link>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Panel Border */}
-                <div className="absolute inset-0 border-r border-white/5 pointer-events-none" />
-              </div>
-            </motion.div>
-          ))}
-          
-          {/* View All Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.5 }}
-            style={{ pointerEvents: isDragging ? 'none' : 'auto' }}
+        </motion.div>
+        
+        {/* Gallery Content */}
+        <div className="py-8 md:py-12 relative">
+          {/* Horizontal Scroll Container */}
+          <motion.div 
+            ref={scrollRef}
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.2 }}
+            className={`overflow-x-auto scrollbar-hide select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            onScroll={handleScroll}
+            onMouseDown={handleMouseDown}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={() => { handleMouseUp(); handleMouseLeave(); }}
+            onMouseMove={handleMouseMove}
           >
-            <Link
-              to="#cases"
-              onClick={(e) => {
-                if (isDragging) {
-                  e.preventDefault();
-                  return;
-                }
-                e.preventDefault();
-                document.getElementById('cases')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="relative flex items-center justify-center w-[160px] h-[450px] md:h-[500px] border border-white/20 hover:border-primary/50 hover:bg-white/5 transition-all group"
-            >
-              <div className="text-center">
-                <ArrowRight className="w-8 h-8 text-white/40 group-hover:text-primary mx-auto mb-3 group-hover:translate-x-1 transition-all" />
-                <span className="text-white/60 group-hover:text-white text-sm font-medium transition-colors">
-                  View All
-                </span>
-              </div>
-            </Link>
+            <div className="flex gap-1 px-6 md:px-10 pb-4" style={{ width: 'max-content' }}>
+              {projects.map((project, i) => (
+                <motion.div
+                  key={project.slug}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.1 + Math.min(i, 10) * 0.03 }}
+                  className="relative overflow-hidden group"
+                  style={{ 
+                    width: hoveredIndex === null ? '180px' : hoveredIndex === i ? '400px' : '100px',
+                    transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                    pointerEvents: isDragging ? 'none' : 'auto'
+                  }}
+                  onMouseEnter={() => handleMouseEnter(i)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <div className="relative h-[450px] md:h-[500px] overflow-hidden">
+                    {/* Background Image */}
+                    <img
+                      src={project.bgImage}
+                      alt={project.name}
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
+                      draggable={false}
+                    />
+
+                    {/* Video (plays on hover) */}
+                    {project.video && (
+                      <video
+                        src={project.video}
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                          activeVideo === i ? 'opacity-100' : 'opacity-0'
+                        }`}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                      />
+                    )}
+
+                    {/* Gradient Overlay */}
+                    <div className={`absolute inset-0 transition-all duration-500 ${
+                      hoveredIndex === i 
+                        ? 'bg-gradient-to-t from-black via-black/40 to-transparent' 
+                        : 'bg-black/70'
+                    }`} />
+
+                    {/* Vertical Title (collapsed state) */}
+                    <AnimatePresence>
+                      {hoveredIndex !== i && (
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          className="absolute inset-0 flex items-center justify-center"
+                        >
+                          <span className="text-white/80 font-bold text-sm tracking-[0.3em] whitespace-nowrap rotate-90 origin-center">
+                            {project.name.toUpperCase()}
+                          </span>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Expanded Content */}
+                    <AnimatePresence>
+                      {hoveredIndex === i && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 30 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 20 }}
+                          transition={{ delay: 0.1, duration: 0.3 }}
+                          className="absolute inset-0 flex flex-col justify-end p-6 md:p-8"
+                        >
+                          {/* Category Tag */}
+                          <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase mb-3">
+                            {project.category}
+                          </span>
+
+                          {/* Logo */}
+                          <div className="mb-4">
+                            {project.logo ? (
+                              <img
+                                src={project.logo}
+                                alt={project.name}
+                                className="h-8 md:h-10 w-auto object-contain brightness-0 invert"
+                                draggable={false}
+                              />
+                            ) : (
+                              <span className="text-white font-black text-xl md:text-2xl tracking-tight">
+                                {project.name}
+                              </span>
+                            )}
+                          </div>
+
+                          {/* Result Metric */}
+                          <div className="mb-6">
+                            <span className="text-xl md:text-2xl font-black bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent leading-tight">
+                              {project.result}
+                            </span>
+                          </div>
+
+                          {/* View Project Button */}
+                          <Link
+                            to={`/projects/${project.slug}`}
+                            className="inline-flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest transition-colors group/link"
+                            onClick={(e) => isDragging && e.preventDefault()}
+                          >
+                            <span>VIEW PROJECT</span>
+                            <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                          </Link>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    {/* Panel Border */}
+                    <div className="absolute inset-0 border-r border-white/5 pointer-events-none" />
+                  </div>
+                </motion.div>
+              ))}
+              
+              {/* View All Card */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: 0.5 }}
+                style={{ pointerEvents: isDragging ? 'none' : 'auto' }}
+              >
+                <Link
+                  to="#cases"
+                  onClick={(e) => {
+                    if (isDragging) {
+                      e.preventDefault();
+                      return;
+                    }
+                    e.preventDefault();
+                    document.getElementById('cases')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  className="relative flex items-center justify-center w-[160px] h-[450px] md:h-[500px] border border-white/20 hover:border-primary/50 hover:bg-white/5 transition-all group"
+                >
+                  <div className="text-center">
+                    <ArrowRight className="w-8 h-8 text-white/40 group-hover:text-primary mx-auto mb-3 group-hover:translate-x-1 transition-all" />
+                    <span className="text-white/60 group-hover:text-white text-sm font-medium transition-colors">
+                      View All
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            </div>
           </motion.div>
-        </div>
-      </motion.div>
 
-      {/* Progress Bar */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.4 }}
-        className="px-6 md:px-10 mt-6"
-      >
-        <div className="relative h-[2px] bg-white/10 rounded-full overflow-hidden">
+          {/* Progress Bar */}
           <motion.div
-            className="absolute left-0 top-0 h-full bg-gradient-to-r from-primary to-emerald-400 rounded-full"
-            style={{ width: `${scrollProgress}%` }}
-            transition={{ duration: 0.1 }}
-          />
-        </div>
-        <div className="flex justify-between mt-2">
-          <span className="text-white/30 text-[10px] tracking-wider">01</span>
-          <span className="text-white/30 text-[10px] tracking-wider">{String(projects.length).padStart(2, '0')}</span>
-        </div>
-      </motion.div>
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.4 }}
+            className="px-6 md:px-10 mt-6"
+          >
+            <div className="relative h-[2px] bg-border rounded-full overflow-hidden">
+              <motion.div
+                className="absolute left-0 top-0 h-full bg-gradient-to-r from-primary to-emerald-400 rounded-full"
+                style={{ width: `${scrollProgress}%` }}
+                transition={{ duration: 0.1 }}
+              />
+            </div>
+            <div className="flex justify-between mt-2">
+              <span className="text-muted-foreground text-[10px] tracking-wider">01</span>
+              <span className="text-muted-foreground text-[10px] tracking-wider">{String(projects.length).padStart(2, '0')}</span>
+            </div>
+          </motion.div>
 
-      {/* Scroll Hint Gradient */}
-      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-black to-transparent pointer-events-none" />
+          {/* Scroll Hint Gradient */}
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-[#0A0A0A] to-transparent pointer-events-none" />
+        </div>
+      </div>
     </section>
   );
 };
