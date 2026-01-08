@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -57,8 +57,11 @@ import seoulMetroPoster from "@/assets/campaigns/seoul-metro-poster.jpeg";
 import lbankFestival from "@/assets/campaigns/lbank-festival.jpg";
 import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
 import kucoinOldschool from "@/assets/campaigns/kucoin-oldschool.jpg";
+import kucoinNew from "@/assets/campaigns/kucoin-new.jpg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import polygonLogo from "@/assets/logos/polygon.svg";
+import openledgerEvent from "@/assets/campaigns/openledger-event.jpg";
+import mantraEvent from "@/assets/campaigns/mantra.jpg";
 
 // Map gallery `src` (stored as file path strings) to bundled campaign assets.
 const campaignAssetByFile: Record<string, string> = {
@@ -312,24 +315,131 @@ const CategoryFilter = ({
 };
 
 // ============================================
-// FEATURED PROJECTS - HORIZONTAL SCROLL GALLERY
+// SELECTED WORK SECTION - HORIZONTAL SCROLL GALLERY (FROM GTM)
 // ============================================
 interface FeaturedProject {
   name: string;
   slug: string;
   category: string;
   result: string;
-  bgImage: string;
+  resultSub: string;
+  logo: string | null;
+  bg: string;
+  video: string | null;
+  gallery: string[];
 }
 
-const FeaturedProjectsGallery = ({ projects }: { projects: FeaturedProject[] }) => {
+const featuredProjects: FeaturedProject[] = [
+  { 
+    name: "Story Protocol", 
+    logo: storyLogo, 
+    bg: storyBg, 
+    video: "/videos/projects/story-hero.mp4",
+    gallery: [storyBg, storyWorkshop],
+    result: "+340%",
+    resultSub: "Trading Volume",
+    category: "IP Protocol",
+    slug: "story-protocol" 
+  },
+  { 
+    name: "MANTRA", 
+    logo: mantraLogo, 
+    bg: mantraBg, 
+    video: "/videos/projects/mantra-hero.mp4",
+    gallery: [mantraBg, mantraEvent],
+    result: "+500%",
+    resultSub: "Community Growth",
+    category: "RWA L1",
+    slug: "mantra" 
+  },
+  { 
+    name: "Bybit", 
+    logo: bybitLogo, 
+    bg: bybitBg, 
+    video: "/videos/projects/bybit-hero.mp4",
+    gallery: [bybitBg],
+    result: "#2",
+    resultSub: "Korea Exchange",
+    category: "CEX",
+    slug: "bybit" 
+  },
+  { 
+    name: "peaq", 
+    logo: peaqLogo, 
+    bg: peaqBg, 
+    video: "/videos/projects/peaq-hero.mp4",
+    gallery: [peaqBg],
+    result: "#1",
+    resultSub: "DePIN in Korea",
+    category: "DePIN L1",
+    slug: "peaq" 
+  },
+  { 
+    name: "BNB Chain", 
+    logo: bnbLogo, 
+    bg: bnbBg, 
+    video: "/videos/projects/bnb-hero.mp4",
+    gallery: [bnbBg],
+    result: "2.5M+",
+    resultSub: "Organic Reach",
+    category: "L1 Ecosystem",
+    slug: "bnb-chain" 
+  },
+  { 
+    name: "Sahara AI", 
+    logo: saharaAiLogo, 
+    bg: saharaAiBg, 
+    video: "/videos/projects/sahara-hero.mp4",
+    gallery: [saharaAiBg],
+    result: "200K+",
+    resultSub: "Community Members",
+    category: "AI Infrastructure",
+    slug: "sahara-ai" 
+  },
+  { 
+    name: "KuCoin", 
+    logo: kucoinLogo, 
+    bg: kucoinBg, 
+    video: "/videos/projects/kucoin-hero.mp4",
+    gallery: [kucoinCampaign, kucoinNew],
+    result: "Top 5",
+    resultSub: "Korea Volume",
+    category: "CEX",
+    slug: "kucoin" 
+  },
+  { 
+    name: "OpenLedger", 
+    logo: null, 
+    bg: openledgerHeroOfficial, 
+    video: null,
+    gallery: [openledgerEvent, openledgerInterview],
+    result: "50K+",
+    resultSub: "Community Growth",
+    category: "AI Data",
+    slug: "openledger" 
+  },
+];
+
+const SelectedWorkSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeVideo, setActiveVideo] = useState<number | null>(null);
+
+  const handleMouseEnter = (index: number) => {
+    setHoveredIndex(index);
+    setActiveVideo(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+    setActiveVideo(null);
+  };
 
   return (
     <section ref={ref} className="relative bg-black py-16 overflow-hidden">
-      {/* Section Header */}
+      {/* Section Title */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -337,8 +447,9 @@ const FeaturedProjectsGallery = ({ projects }: { projects: FeaturedProject[] }) 
       >
         <div className="flex items-baseline justify-between">
           <div className="flex items-baseline gap-6 md:gap-10">
-            <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">FEATURED</span>
-            <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight">
+            <span className="text-white/20 text-[10px] tracking-[0.5em]">PORTFOLIO</span>
+            <h2 className="text-2xl md:text-3xl font-black text-transparent tracking-tighter"
+              style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.6)' }}>
               SELECTED W<span className="text-primary">⬡</span>RK
             </h2>
           </div>
@@ -357,56 +468,148 @@ const FeaturedProjectsGallery = ({ projects }: { projects: FeaturedProject[] }) 
         className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
       >
-        <div className="flex gap-4 px-6 md:px-10 pb-4" style={{ width: 'max-content' }}>
-          {projects.map((project, i) => (
+        <div className="flex gap-1 px-6 md:px-10 pb-4" style={{ width: 'max-content' }}>
+          {featuredProjects.map((project, i) => (
             <motion.div
               key={project.slug}
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.1 + i * 0.05 }}
-              className="group"
+              className="relative overflow-hidden cursor-pointer group"
+              style={{ 
+                width: hoveredIndex === null ? '180px' : hoveredIndex === i ? '480px' : '100px',
+                transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
+              }}
+              onMouseEnter={() => handleMouseEnter(i)}
+              onMouseLeave={handleMouseLeave}
             >
-              <Link
-                to={`/projects/${project.slug}`}
-                className="relative block w-[280px] md:w-[360px] aspect-[4/5] overflow-hidden rounded-lg"
-              >
+              <div className="relative h-[450px] md:h-[500px] overflow-hidden">
                 {/* Background Image */}
                 <img
-                  src={project.bgImage}
+                  src={project.bg}
                   alt={project.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
                 />
-                
+
+                {/* Video (plays on hover) */}
+                {project.video && (
+                  <video
+                    src={project.video}
+                    className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                      activeVideo === i ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  />
+                )}
+
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                <div className={`absolute inset-0 transition-all duration-500 ${
+                  hoveredIndex === i 
+                    ? 'bg-gradient-to-t from-black via-black/40 to-transparent' 
+                    : 'bg-black/70'
+                }`} />
 
-                {/* Content */}
-                <div className="absolute inset-0 flex flex-col justify-end p-5">
-                  {/* Category */}
-                  <span className="text-white/50 text-[10px] tracking-[0.3em] uppercase mb-2">
-                    {project.category}
-                  </span>
-                  
-                  {/* Name */}
-                  <h3 className="text-white font-bold text-lg md:text-xl mb-2 group-hover:text-primary transition-colors">
-                    {project.name}
-                  </h3>
-                  
-                  {/* Result */}
-                  <p className="text-emerald-400 font-bold text-sm mb-3">
-                    {project.result}
-                  </p>
-                  
-                  {/* View Link */}
-                  <div className="flex items-center gap-2 text-white/60 group-hover:text-white text-xs transition-colors">
-                    <span>View Project</span>
-                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
+                {/* Vertical Title (collapsed state) */}
+                <AnimatePresence>
+                  {hoveredIndex !== i && (
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <span className="text-white/80 font-bold text-sm tracking-[0.3em] whitespace-nowrap rotate-90 origin-center">
+                        {project.name.toUpperCase()}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-                {/* Border */}
-                <div className="absolute inset-0 border border-white/10 rounded-lg group-hover:border-white/20 transition-colors pointer-events-none" />
-              </Link>
+                {/* Expanded Content */}
+                <AnimatePresence>
+                  {hoveredIndex === i && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 20 }}
+                      transition={{ delay: 0.1, duration: 0.3 }}
+                      className="absolute inset-0 flex"
+                    >
+                      {/* Left: Info */}
+                      <div className="flex-1 flex flex-col justify-end p-6 md:p-8">
+                        {/* Category Tag */}
+                        <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase mb-3">
+                          {project.category}
+                        </span>
+
+                        {/* Logo */}
+                        <div className="mb-4">
+                          {project.logo ? (
+                            <img
+                              src={project.logo}
+                              alt={project.name}
+                              className="h-8 md:h-10 w-auto object-contain brightness-0 invert"
+                            />
+                          ) : (
+                            <span className="text-white font-black text-xl md:text-2xl tracking-tight">
+                              {project.name}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Result Metric */}
+                        <div className="mb-6">
+                          <span className="text-2xl md:text-4xl font-black bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                            {project.result}
+                          </span>
+                          <span className="block text-white/50 text-xs tracking-wider mt-1">
+                            {project.resultSub}
+                          </span>
+                        </div>
+
+                        {/* View Project Button */}
+                        <Link
+                          to={`/projects/${project.slug}`}
+                          className="inline-flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest transition-colors group/link"
+                        >
+                          <span>VIEW PROJECT</span>
+                          <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                        </Link>
+                      </div>
+
+                      {/* Right: Gallery Preview */}
+                      {project.gallery && project.gallery.length > 0 && (
+                        <motion.div 
+                          initial={{ opacity: 0, x: 20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.25, duration: 0.3 }}
+                          className="hidden md:flex flex-col gap-2 p-4 w-40"
+                        >
+                          {project.gallery.slice(0, 2).map((img, idx) => (
+                            <div 
+                              key={idx}
+                              className="relative aspect-[4/3] overflow-hidden rounded-sm group/img"
+                            >
+                              <img 
+                                src={img} 
+                                alt={`${project.name} gallery ${idx + 1}`}
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110"
+                              />
+                              <div className="absolute inset-0 bg-black/20 group-hover/img:bg-black/0 transition-colors" />
+                            </div>
+                          ))}
+                        </motion.div>
+                      )}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* Panel Border */}
+                <div className="absolute inset-0 border-r border-white/5 pointer-events-none" />
+              </div>
             </motion.div>
           ))}
           
@@ -414,7 +617,7 @@ const FeaturedProjectsGallery = ({ projects }: { projects: FeaturedProject[] }) 
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.1 + projects.length * 0.05 }}
+            transition={{ delay: 0.1 + featuredProjects.length * 0.05 }}
           >
             <Link
               to="#cases"
@@ -422,12 +625,12 @@ const FeaturedProjectsGallery = ({ projects }: { projects: FeaturedProject[] }) 
                 e.preventDefault();
                 document.getElementById('cases')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="relative flex items-center justify-center w-[200px] md:w-[240px] aspect-[4/5] rounded-lg border border-white/20 hover:border-primary/50 hover:bg-white/5 transition-all group"
+              className="relative flex items-center justify-center w-[160px] h-[450px] md:h-[500px] border border-white/20 hover:border-primary/50 hover:bg-white/5 transition-all group"
             >
               <div className="text-center">
                 <ArrowRight className="w-8 h-8 text-white/40 group-hover:text-primary mx-auto mb-3 group-hover:translate-x-1 transition-all" />
                 <span className="text-white/60 group-hover:text-white text-sm font-medium transition-colors">
-                  View All Projects
+                  View All
                 </span>
               </div>
             </Link>
@@ -642,8 +845,8 @@ const Projects = () => {
         </div>
       </section>
       
-      {/* Featured Projects Section - Horizontal Scroll Gallery */}
-      <FeaturedProjectsGallery projects={cases.slice(0, 8)} />
+      {/* Selected Work Section - Horizontal Scroll Gallery */}
+      <SelectedWorkSection />
       
       {/* Gallery Section - 02 */}
       <section className="scroll-reveal bg-[#0A0A0A]" id="gallery">
