@@ -35,7 +35,7 @@ const WhyChooseUsSection = () => {
             </h2>
             
             <p className="text-foreground/80 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-6">
-              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. Derived from the Korean word "to connect," we function as your foundational layer for market entry. We transcend standard marketing by leveraging proprietary analytics and data-driven research, providing the actionable insights needed to navigate and succeed in the Korean market.
+              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. '이음(ium)' Derived from the Korean word "to connect," we function as your foundational layer for market entry. We transcend standard marketing by leveraging proprietary analytics and data-driven research, providing the actionable insights needed to navigate and succeed in the Korean market.
             </p>
             
             <p className="text-primary font-semibold text-sm sm:text-base">
