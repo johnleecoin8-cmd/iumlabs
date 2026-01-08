@@ -87,7 +87,7 @@ const ContactFormSection = ({
   return <section className="bg-[#0A0A0A]">
       <div className="border-t border-white/15">
         {/* Section Header */}
-        <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 sm:p-5 md:px-10 lg:px-12 md:py-7 border-b border-white/15">
+        <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 sm:p-5 md:px-10 lg:px-12 border-b border-white/15 md:py-[2px] py-[18px]">
           <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
             <span className="text-[10px] sm:text-label text-white/40 font-mono tracking-widest">{sectionNumber}</span>
             <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-white tracking-tight">Contact</h2>
@@ -238,15 +238,7 @@ const ContactFormSection = ({
               </div>
 
               {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isSubmitting || completionPercentage < 100}
-                className={`w-full mt-3 sm:mt-4 py-3 sm:py-4 text-sm sm:text-base font-semibold transition-all duration-300 min-h-[48px] active:scale-[0.98] ${
-                  completionPercentage === 100
-                    ? 'bg-white text-black hover:bg-white/90'
-                    : 'bg-white/15 text-white/50 cursor-not-allowed'
-                }`}
-              >
+              <button type="submit" disabled={isSubmitting || completionPercentage < 100} className={`w-full mt-3 sm:mt-4 py-3 sm:py-4 text-sm sm:text-base font-semibold transition-all duration-300 min-h-[48px] active:scale-[0.98] ${completionPercentage === 100 ? 'bg-white text-black hover:bg-white/90' : 'bg-white/15 text-white/50 cursor-not-allowed'}`}>
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
