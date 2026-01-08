@@ -38,17 +38,17 @@ const WhyChooseUsSection = () => {
             viewport={{ once: true, margin: "-50px" }}
           >
             {/* Headline */}
-            <h2 className="text-3xl sm:text-4xl md:text-4xl lg:text-5xl font-black text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
+            <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
               Real results, not just promises.
             </h2>
             
             {/* Description */}
-            <p className="text-foreground/80 leading-relaxed text-base sm:text-lg md:text-lg lg:text-xl mb-6">
-              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. <span className="text-primary font-semibold">'이음(ium)'</span> Derived from the Korean word "to connect," we function as your foundational layer for market entry. We transcend standard marketing by leveraging proprietary analytics and data-driven research, providing the actionable insights needed to navigate and succeed in the Korean market.
+            <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-6">
+              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. '이음(ium)' Derived from the Korean word "to connect," we function as your foundational layer for market entry. We transcend standard marketing by leveraging proprietary analytics and data-driven research, providing the actionable insights needed to navigate and succeed in the Korean market.
             </p>
             
             {/* Founders Note */}
-            <p className="text-primary font-semibold text-base sm:text-lg">
+            <p className="text-foreground/40 text-xs sm:text-sm">
               Founded by former Binance & KuCoin executives
             </p>
           </motion.div>
