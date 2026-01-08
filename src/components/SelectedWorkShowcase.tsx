@@ -159,11 +159,11 @@ const SelectedWorkShowcase = () => {
         } : {}} transition={{
           duration: 0.8,
           delay: 0.3
-        }} className="max-w-xl text-right bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 xl:p-10">
+        }} className="max-w-xl text-right">
             <h3 className="text-2xl xl:text-3xl font-bold text-white mb-4">
               Real results, not just promises.
             </h3>
-            <p className="text-white/60 text-sm leading-relaxed mb-4">
+            <p className="text-white/80 text-sm leading-relaxed mb-4">
               ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. 
               Derived from the Korean word "to connect," we function as your foundational 
               layer for market entry. We transcend standard marketing by leveraging 
