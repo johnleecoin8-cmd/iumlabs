@@ -48,7 +48,7 @@ const WhyChooseUsSection = () => {
             </p>
             
             {/* Founders Note */}
-            <p className="text-foreground/40 text-xs sm:text-sm">
+            <p className="text-violet-400 text-xs sm:text-sm">
               Founded by former Binance & KuCoin executives
             </p>
           </motion.div>
