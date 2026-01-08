@@ -7,7 +7,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
-import { HoverExpandGallery } from "@/components/HoverExpandGallery";
+
 import { ArrowRight, Calendar, ChevronDown, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import { usePageMeta } from "@/hooks/usePageMeta";
@@ -45,21 +45,12 @@ import fogoBg from "@/assets/campaigns/fogo-fest.avif";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
 
-// Additional gallery images for hover expand gallery
-import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
-import polygonHackathon from "@/assets/campaigns/polygon-hackathon.jpg";
-import polygonConnect from "@/assets/campaigns/polygon-connect.png";
+// Additional images for featured projects
 import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
 import openledgerInterview from "@/assets/campaigns/openledger-interview.jpg";
 import openledgerHeroOfficial from "@/assets/campaigns/openledger-hero-official.png";
-import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
-import seoulMetroPoster from "@/assets/campaigns/seoul-metro-poster.jpeg";
-import lbankFestival from "@/assets/campaigns/lbank-festival.jpg";
 import kucoinCampaign from "@/assets/campaigns/kucoin-campaign.jpg";
-import kucoinOldschool from "@/assets/campaigns/kucoin-oldschool.jpg";
 import kucoinNew from "@/assets/campaigns/kucoin-new.jpg";
-import ondoLogo from "@/assets/logos/ondo.svg";
-import polygonLogo from "@/assets/logos/polygon.svg";
 import openledgerEvent from "@/assets/campaigns/openledger-event.jpg";
 import mantraEvent from "@/assets/campaigns/mantra.jpg";
 
@@ -67,18 +58,11 @@ import mantraEvent from "@/assets/campaigns/mantra.jpg";
 const campaignAssetByFile: Record<string, string> = {
   "bnb-event.jpg": bnbBg,
   "kucoin-campaign.jpg": kucoinCampaign,
-  "kucoin-oldschool.jpg": kucoinOldschool,
-  "ondo-seminar.jpg": ondoSeminar,
-  "polygon-hackathon.jpg": polygonHackathon,
-  "polygon-connect.png": polygonConnect,
   "sahara-ai.jpg": saharaAiBg,
-  "seoul-metro-billboard.jpeg": seoulMetroBillboard,
-  "seoul-metro-poster.jpeg": seoulMetroPoster,
   "story-origin-summit.jpg": storyBg,
   "story-workshop.jpg": storyWorkshop,
   "openledger-interview.jpg": openledgerInterview,
   "openledger-hero-official.png": openledgerHeroOfficial,
-  "lbank-festival.jpg": lbankFestival,
   "peaq-summit.jpg": peaqBg,
   "bybit-event.jpg": bybitBg,
   "mantra-party.jpg": mantraBg,
@@ -87,6 +71,9 @@ const campaignAssetByFile: Record<string, string> = {
   "zkpass-verifiable-nights.jpg": zkpassBg,
   "synfutures-billboard.jpg": synfuturesBg,
   "fogo-fest.avif": fogoBg,
+  "kucoin-new.jpg": kucoinNew,
+  "openledger-event.jpg": openledgerEvent,
+  "mantra.jpg": mantraEvent,
 };
 
 const resolveGallerySrcToAsset = (src?: string | null) => {
@@ -131,26 +118,6 @@ const stats = [
   { value: 50, label: "New Users Acquired", suffix: "K+" },
 ];
 
-// Gallery images data for hover expand gallery - ALL campaign images
-const galleryImages = [
-  { src: storyBg, alt: "Story Protocol Origin Summit", title: "Story Origin Summit", description: "IP Protocol launch event in Seoul" },
-  { src: synfuturesBg, alt: "SynFutures Billboard", title: "Gangnam Billboard", description: "High-visibility billboard campaign in Gangnam" },
-  { src: peaqBg, alt: "Peaq Summit", title: "Peaq DePIN Summit", description: "DePIN thought leadership event" },
-  { src: polygonHackathon, alt: "Polygon Hackathon", title: "Polygon Hackathon", description: "Developer hackathon in Seoul" },
-  { src: openledgerInterview, alt: "OpenLedger Interview", title: "OpenLedger Interview", description: "Media interview session" },
-  { src: seoulMetroBillboard, alt: "Seoul Metro Billboard", title: "Seoul Metro Billboard", description: "Subway advertising campaign" },
-  { src: lbankFestival, alt: "LBank Festival", title: "LBank Festival", description: "Exchange partnership event" },
-  { src: fogoBg, alt: "Fogo Fest", title: "Fogo Fest 2025", description: "FOGO community launch event" },
-  { src: bnbBg, alt: "BNB Chain Event", title: "BNB Chain Seoul", description: "BNB Chain community event in Seoul" },
-  { src: bybitBg, alt: "Bybit Event", title: "Bybit Trading Event", description: "Bybit VIP trader meetup" },
-  { src: kucoinBg, alt: "KuCoin Panel", title: "KuCoin Old School Panel", description: "KuCoin crypto OG panel discussion" },
-  { src: mantraBg, alt: "Mantra Party", title: "Mantra RWA Party", description: "Mantra community celebration" },
-  { src: megaethBg, alt: "MegaETH Launch", title: "MegaETH Launch", description: "MegaETH pre-launch event" },
-  { src: saharaAiBg, alt: "Sahara AI Summit", title: "Sahara AI Summit", description: "AI x Web3 summit in Korea" },
-  { src: triaBg, alt: "Tria Launch", title: "Tria Wallet Launch", description: "Tria wallet Korean launch" },
-  { src: zkpassBg, alt: "zkPass Verifiable Nights", title: "The Verifiable Nights", description: "zkPass privacy event" },
-  { src: seoulMetroPoster, alt: "Seoul Metro Poster", title: "Seoul Metro Poster", description: "Subway poster campaign" },
-];
 
 // Stat Item Component
 const StatItem = ({ 
@@ -426,15 +393,55 @@ const SelectedWorkSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-10%" });
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [activeVideo, setActiveVideo] = useState<number | null>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
 
   const handleMouseEnter = (index: number) => {
-    setHoveredIndex(index);
-    setActiveVideo(index);
+    if (!isDragging) {
+      setHoveredIndex(index);
+      setActiveVideo(index);
+    }
   };
 
   const handleMouseLeave = () => {
+    if (!isDragging) {
+      setHoveredIndex(null);
+      setActiveVideo(null);
+    }
+  };
+
+  // Scroll progress tracking
+  const handleScroll = () => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      const maxScroll = scrollWidth - clientWidth;
+      const progress = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
+      setScrollProgress(progress);
+    }
+  };
+
+  // Mouse drag handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!scrollRef.current) return;
+    setIsDragging(true);
+    setStartX(e.pageX - scrollRef.current.offsetLeft);
+    setScrollLeft(scrollRef.current.scrollLeft);
     setHoveredIndex(null);
     setActiveVideo(null);
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !scrollRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX) * 2;
+    scrollRef.current.scrollLeft = scrollLeft - walk;
   };
 
   return (
@@ -454,7 +461,7 @@ const SelectedWorkSection = () => {
             </h2>
           </div>
           <span className="text-xs text-white/40 tracking-wider hidden sm:flex items-center gap-2">
-            ← Scroll →
+            ← Drag / Scroll →
           </span>
         </div>
       </motion.div>
@@ -465,8 +472,13 @@ const SelectedWorkSection = () => {
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         transition={{ delay: 0.2 }}
-        className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
+        className={`overflow-x-auto scrollbar-hide select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
         style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        onScroll={handleScroll}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={() => { handleMouseUp(); handleMouseLeave(); }}
+        onMouseMove={handleMouseMove}
       >
         <div className="flex gap-1 px-6 md:px-10 pb-4" style={{ width: 'max-content' }}>
           {featuredProjects.map((project, i) => (
@@ -475,10 +487,11 @@ const SelectedWorkSection = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={isInView ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 0.1 + i * 0.05 }}
-              className="relative overflow-hidden cursor-pointer group"
+              className="relative overflow-hidden group"
               style={{ 
                 width: hoveredIndex === null ? '180px' : hoveredIndex === i ? '480px' : '100px',
-                transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)'
+                transition: 'width 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+                pointerEvents: isDragging ? 'none' : 'auto'
               }}
               onMouseEnter={() => handleMouseEnter(i)}
               onMouseLeave={handleMouseLeave}
@@ -489,6 +502,7 @@ const SelectedWorkSection = () => {
                   src={project.bg}
                   alt={project.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
+                  draggable={false}
                 />
 
                 {/* Video (plays on hover) */}
@@ -552,6 +566,7 @@ const SelectedWorkSection = () => {
                               src={project.logo}
                               alt={project.name}
                               className="h-8 md:h-10 w-auto object-contain brightness-0 invert"
+                              draggable={false}
                             />
                           ) : (
                             <span className="text-white font-black text-xl md:text-2xl tracking-tight">
@@ -574,6 +589,7 @@ const SelectedWorkSection = () => {
                         <Link
                           to={`/projects/${project.slug}`}
                           className="inline-flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest transition-colors group/link"
+                          onClick={(e) => isDragging && e.preventDefault()}
                         >
                           <span>VIEW PROJECT</span>
                           <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
@@ -597,6 +613,7 @@ const SelectedWorkSection = () => {
                                 src={img} 
                                 alt={`${project.name} gallery ${idx + 1}`}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110"
+                                draggable={false}
                               />
                               <div className="absolute inset-0 bg-black/20 group-hover/img:bg-black/0 transition-colors" />
                             </div>
@@ -618,10 +635,15 @@ const SelectedWorkSection = () => {
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ delay: 0.1 + featuredProjects.length * 0.05 }}
+            style={{ pointerEvents: isDragging ? 'none' : 'auto' }}
           >
             <Link
               to="#cases"
               onClick={(e) => {
+                if (isDragging) {
+                  e.preventDefault();
+                  return;
+                }
                 e.preventDefault();
                 document.getElementById('cases')?.scrollIntoView({ behavior: 'smooth' });
               }}
@@ -635,6 +657,26 @@ const SelectedWorkSection = () => {
               </div>
             </Link>
           </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Progress Bar */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.4 }}
+        className="px-6 md:px-10 mt-6"
+      >
+        <div className="relative h-[2px] bg-white/10 rounded-full overflow-hidden">
+          <motion.div
+            className="absolute left-0 top-0 h-full bg-gradient-to-r from-primary to-emerald-400 rounded-full"
+            style={{ width: `${scrollProgress}%` }}
+            transition={{ duration: 0.1 }}
+          />
+        </div>
+        <div className="flex justify-between mt-2">
+          <span className="text-white/30 text-[10px] tracking-wider">01</span>
+          <span className="text-white/30 text-[10px] tracking-wider">0{featuredProjects.length}</span>
         </div>
       </motion.div>
 
@@ -848,24 +890,6 @@ const Projects = () => {
       {/* Selected Work Section - Horizontal Scroll Gallery */}
       <SelectedWorkSection />
       
-      {/* Gallery Section - 02 */}
-      <section className="scroll-reveal bg-[#0A0A0A]" id="gallery">
-        <div className="border-t border-border">
-          <div className="flex items-baseline justify-between p-4 sm:p-6 md:px-10 md:py-6 border-b border-border">
-            <div className="flex items-baseline gap-6 md:gap-10">
-              <span className="text-[10px] md:text-xs text-muted-foreground font-mono tracking-widest">02</span>
-              <h2 className="text-lg md:text-xl font-medium text-foreground">Gallery</h2>
-            </div>
-            <span className="text-xs text-muted-foreground tracking-wider hidden sm:flex items-center gap-2 px-3 py-1 border border-border rounded-full">
-              Campaign Highlights
-            </span>
-          </div>
-          
-          <div className="py-8 md:py-12">
-            <HoverExpandGallery images={galleryImages} />
-          </div>
-        </div>
-      </section>
       
       {/* Contact Section - 03 */}
       <section className="scroll-reveal bg-[#0F0F0F]" id="contact">
