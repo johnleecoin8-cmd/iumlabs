@@ -30,6 +30,8 @@ import kucoinCampaign from '@/assets/campaigns/kucoin-campaign.jpg';
 import kucoinNew from '@/assets/campaigns/kucoin-new.jpg';
 
 import peaqLogo from '@/assets/logos/peaq.svg';
+import polygonLogo from '@/assets/logos/polygon.svg';
+import ondoLogo from '@/assets/logos/ondo.svg';
 
 // Project backgrounds
 import storyBg from '@/assets/projects/story-bg.jpg';
@@ -48,6 +50,7 @@ import bybitLogo from '@/assets/logos/bybit.png';
 import bnbLogo from '@/assets/logos/bnb.svg';
 import saharaLogo from '@/assets/logos/sahara-ai.png';
 import kucoinLogo from '@/assets/logos/kucoin.svg';
+import openledgerLogo from '@/assets/logos/thirdweb.png';
 
 // ============================================
 // SECTION 2: REALITY CHECK - MADUP STYLE
@@ -275,6 +278,43 @@ const SolutionSection = () => {
 };
 
 // ============================================
+// SERVICE MARQUEE - SPACE MONSTER STYLE (OUTLINE TEXT)
+// ============================================
+const ServiceMarquee = () => {
+  const services = "GTM STRATEGY · COMMUNITY BUILDING · KOL NETWORK · PR COVERAGE · EVENT MARKETING · BRAND AWARENESS · ";
+  
+  return (
+    <section className="relative bg-black py-8 md:py-12 overflow-hidden border-y border-white/5">
+      {/* First Row - Left to Right */}
+      <div className="flex whitespace-nowrap animate-scroll-left-fast mb-2">
+        {[...Array(4)].map((_, i) => (
+          <span 
+            key={`row1-${i}`}
+            className="text-[clamp(1.5rem,4vw,3rem)] font-black text-transparent tracking-tight mx-2"
+            style={{ WebkitTextStroke: '1px rgba(255,107,0,0.4)' }}
+          >
+            {services}
+          </span>
+        ))}
+      </div>
+      
+      {/* Second Row - Right to Left */}
+      <div className="flex whitespace-nowrap animate-scroll-right-fast">
+        {[...Array(4)].map((_, i) => (
+          <span 
+            key={`row2-${i}`}
+            className="text-[clamp(1.5rem,4vw,3rem)] font-black text-transparent tracking-tight mx-2"
+            style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}
+          >
+            {services}
+          </span>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// ============================================
 // INFINITE ROLLING GALLERY - SMC STYLE
 // ============================================
 const RollingGallerySection = () => {
@@ -289,14 +329,25 @@ const RollingGallerySection = () => {
     bybitEvent,
   ];
 
+  const galleryImagesReversed = [
+    bybitEvent,
+    seoulMetroBillboard,
+    openledgerEvent,
+    kucoinCampaign,
+    mantraParty,
+    bnbEvent,
+    peaqSummit,
+    storyOriginSummit,
+  ];
+
   return (
-    <section className="relative bg-black py-12 overflow-hidden">
+    <section className="relative bg-black py-8 overflow-hidden">
       {/* First Row - Left to Right */}
       <div className="flex animate-scroll-left mb-2">
         {[...galleryImages, ...galleryImages].map((img, i) => (
           <div 
             key={`row1-${i}`}
-            className="flex-shrink-0 w-[300px] md:w-[400px] h-[200px] md:h-[280px] mx-1 overflow-hidden"
+            className="flex-shrink-0 w-[280px] md:w-[380px] h-[180px] md:h-[260px] mx-1 overflow-hidden"
           >
             <img 
               src={img} 
@@ -309,10 +360,10 @@ const RollingGallerySection = () => {
       
       {/* Second Row - Right to Left */}
       <div className="flex animate-scroll-right">
-        {[...galleryImages.reverse(), ...galleryImages].map((img, i) => (
+        {[...galleryImagesReversed, ...galleryImagesReversed].map((img, i) => (
           <div 
             key={`row2-${i}`}
-            className="flex-shrink-0 w-[300px] md:w-[400px] h-[200px] md:h-[280px] mx-1 overflow-hidden"
+            className="flex-shrink-0 w-[280px] md:w-[380px] h-[180px] md:h-[260px] mx-1 overflow-hidden"
           >
             <img 
               src={img} 
@@ -325,11 +376,112 @@ const RollingGallerySection = () => {
 
       {/* Center Text Overlay */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="bg-black/80 backdrop-blur-sm px-8 py-4">
-          <span className="text-white/60 text-xs tracking-[0.5em]">
+        <div className="bg-black/80 backdrop-blur-sm px-6 md:px-8 py-3 md:py-4">
+          <span className="text-white/60 text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.5em]">
             WE KEEP DIVING TOWARDS POSSIBILITIES
           </span>
         </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// ACHIEVEMENTS LIST - SPACE MONSTER AWARD WINS STYLE
+// ============================================
+const AchievementsListSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  const achievements = [
+    { year: "2024", logo: storyLogo, title: "Story Protocol", desc: "Korea Launch GTM", result: "+340% Volume" },
+    { year: "2024", logo: mantraLogo, title: "MANTRA", desc: "Community Growth Campaign", result: "+500% Growth" },
+    { year: "2024", logo: peaqLogo, title: "peaq Network", desc: "Korea Market Expansion", result: "#1 DePIN Korea" },
+    { year: "2024", logo: bnbLogo, title: "BNB Chain", desc: "Korea Ecosystem", result: "2.5M+ Reach" },
+    { year: "2024", logo: bybitLogo, title: "Bybit", desc: "Korea Market Penetration", result: "#2 CEX Korea" },
+    { year: "2024", logo: saharaLogo, title: "Sahara AI", desc: "Community Launch", result: "200K+ Members" },
+    { year: "2024", logo: kucoinLogo, title: "KuCoin", desc: "Korea GTM Strategy", result: "Top 5 Volume" },
+    { year: "2024", logo: polygonLogo, title: "Polygon", desc: "Korea Developer Ecosystem", result: "50+ Builders" },
+  ];
+
+  return (
+    <section ref={ref} className="relative bg-black py-16 overflow-hidden">
+      {/* Section Title */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        className="text-center mb-8 px-4"
+      >
+        <span className="text-white/20 text-[10px] tracking-[0.5em] block mb-4">TRACK RECORD</span>
+        <h2 className="text-[clamp(2rem,6vw,4rem)] font-black text-white leading-none tracking-tighter">
+          ACHIEVEMENTS
+        </h2>
+      </motion.div>
+
+      {/* Achievement List */}
+      <div className="max-w-5xl mx-auto px-4 md:px-6">
+        {achievements.map((item, i) => (
+          <motion.div
+            key={item.title}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.1 + i * 0.05 }}
+            className="group border-t border-white/10 hover:border-white/20 transition-colors"
+          >
+            <div className="flex items-center py-5 md:py-6 px-2 md:px-4">
+              {/* Year */}
+              <span className="text-white/20 text-xs md:text-sm font-mono w-12 md:w-16 flex-shrink-0 hidden md:block">
+                {item.year}
+              </span>
+              
+              {/* Logo */}
+              <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 flex items-center justify-center mr-3 md:mr-6">
+                <img 
+                  src={item.logo} 
+                  alt={item.title}
+                  className="max-w-full max-h-full object-contain brightness-0 invert opacity-40 group-hover:opacity-80 transition-opacity"
+                />
+              </div>
+              
+              {/* Title & Description */}
+              <div className="flex-1 min-w-0">
+                <span className="text-white/90 font-bold text-sm md:text-base tracking-wide block truncate">
+                  {item.title}
+                </span>
+                <span className="text-white/40 text-xs md:text-sm hidden md:block">
+                  {item.desc}
+                </span>
+              </div>
+              
+              {/* Result */}
+              <span className="text-emerald-400/80 font-bold text-sm md:text-base tracking-wide ml-4 flex-shrink-0 group-hover:text-emerald-400 transition-colors">
+                {item.result}
+              </span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// LARGE SERVICE MARQUEE - SPACE MONSTER STYLE
+// ============================================
+const LargeServiceMarquee = () => {
+  const services = "GTM · COMMUNITY · KOL · PR · EVENTS · BRANDING · ";
+  
+  return (
+    <section className="relative bg-white py-4 md:py-6 overflow-hidden">
+      <div className="flex whitespace-nowrap animate-scroll-right-slow">
+        {[...Array(6)].map((_, i) => (
+          <span 
+            key={i}
+            className="text-[clamp(3rem,10vw,8rem)] font-black text-black tracking-tighter mx-4"
+          >
+            {services}
+          </span>
+        ))}
       </div>
     </section>
   );
@@ -988,11 +1140,20 @@ const GTMService = () => {
         {/* Section 3: Solution - SMC Style White */}
         <SolutionSection />
 
+        {/* NEW: Service Marquee - Space Monster Style */}
+        <ServiceMarquee />
+
         {/* Rolling Gallery - SMC Style */}
         <RollingGallerySection />
+
+        {/* NEW: Achievements List - Space Monster Award Wins Style */}
+        <AchievementsListSection />
         
         {/* Section 4: Evidence */}
         <EvidenceSection />
+
+        {/* NEW: Large Service Marquee - Space Monster Style */}
+        <LargeServiceMarquee />
         
         {/* Section 5: Strategy */}
         <StrategySection />
