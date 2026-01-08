@@ -177,13 +177,7 @@ const SelectedWorkShowcase = () => {
             </p>
             
             {/* Stats */}
-            <div className="grid grid-cols-2 gap-10 mb-10">
-              <div className="text-right">
-                <div className="text-5xl xl:text-6xl 2xl:text-7xl font-bold text-white">340%</div>
-                <div className="text-sm xl:text-base text-white/50 mt-2">Avg. Volume</div>
-              </div>
-              
-            </div>
+            
             
             <Link to="/projects" className="inline-flex items-center gap-3 text-lg xl:text-xl text-white border border-white/30 px-8 py-4 hover:bg-white hover:text-black transition-all duration-300">
               <span>View Our Work</span>
