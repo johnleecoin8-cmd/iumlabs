@@ -165,7 +165,7 @@ const SelectedWorkShowcase = () => {
             </h3>
             <p className="text-white/70 text-lg xl:text-xl leading-relaxed mb-6">
               ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. 
-              Derived from the Korean word "to connect," we function as your foundational 
+              "이음(ium)" Derived from the Korean word "to connect," we function as your foundational 
               layer for market entry. We transcend standard marketing by leveraging 
               proprietary analytics and data-driven research, providing the actionable 
               insights needed to navigate and succeed in the Korean market.
