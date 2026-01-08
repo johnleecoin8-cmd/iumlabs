@@ -223,15 +223,13 @@ const Index = () => {
   return <div className="min-h-screen bg-surface-base">
       <Navbar />
       
-      {/* Hero */}
-      <main id="hero" className="p-0.5 sm:p-1 md:p-2 bg-surface-base py-0 px-0">
-        <div className="rounded-xl sm:rounded-2xl overflow-hidden">
-          <HeroSection />
-        </div>
+      {/* Hero - Full Bleed */}
+      <main id="hero" className="bg-surface-base">
+        <HeroSection />
       </main>
       
-      {/* About - 01 */}
-      <section className="bg-surface-base" id="why-choose-us">
+      {/* About - 01 (Mobile/Tablet Only) */}
+      <section className="bg-surface-base lg:hidden" id="why-choose-us">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
@@ -245,10 +243,14 @@ const Index = () => {
           <AnimatedSection delay={100}>
             <WhyChooseUsSection />
           </AnimatedSection>
-          <AnimatedSection delay={200}>
-            <SelectedWorkShowcase />
-          </AnimatedSection>
         </div>
+      </section>
+      
+      {/* Selected Work Showcase (All Devices) */}
+      <section className="bg-surface-base" id="selected-work">
+        <AnimatedSection>
+          <SelectedWorkShowcase />
+        </AnimatedSection>
       </section>
       
       {/* Media Partners - 번호 없음, 헤더 없이 마키만 */}
