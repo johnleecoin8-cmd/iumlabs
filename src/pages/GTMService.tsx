@@ -65,27 +65,27 @@ import polygonLogo from '@/assets/logos/polygon.svg';
 // ============================================
 const FloatingServiceTags = () => {
   const tags = [
-    { label: "커뮤니티", top: "20%", left: "8%" },
-    { label: "인플루언서", top: "25%", right: "10%" },
-    { label: "PR", bottom: "35%", left: "5%" },
-    { label: "오프라인", bottom: "30%", right: "8%" },
-    { label: "리서치", top: "45%", left: "12%" },
-    { label: "광고", top: "40%", right: "15%" },
+    { label: "커뮤니티", icon: Users, top: "18%", left: "6%" },
+    { label: "인플루언서", icon: Users, top: "22%", right: "8%" },
+    { label: "PR", icon: Megaphone, bottom: "38%", left: "4%" },
+    { label: "오프라인", icon: Calendar, bottom: "32%", right: "6%" },
+    { label: "리서치", icon: Database, top: "48%", left: "10%" },
+    { label: "광고", icon: Target, top: "42%", right: "12%" },
   ];
 
   return (
     <>
       {tags.map((tag, index) => (
-        <motion.span
+        <motion.div
           key={tag.label}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ 
             opacity: 1, 
             scale: 1,
-            y: [0, -10, 0, 10, 0],
+            y: [0, -12, 0, 12, 0],
           }}
           transition={{ 
-            delay: 1.5 + index * 0.2,
+            delay: 1 + index * 0.15,
             duration: 0.5,
             y: {
               duration: 4 + index * 0.5,
@@ -93,7 +93,7 @@ const FloatingServiceTags = () => {
               ease: "easeInOut"
             }
           }}
-          className="hidden lg:block absolute text-[10px] tracking-[0.2em] uppercase px-4 py-2 bg-white/5 backdrop-blur-md border border-white/10 text-white/60"
+          className="hidden lg:flex absolute items-center gap-2.5 px-5 py-3 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg shadow-violet-500/10"
           style={{
             top: tag.top,
             left: tag.left,
@@ -101,8 +101,9 @@ const FloatingServiceTags = () => {
             bottom: tag.bottom,
           }}
         >
-          {tag.label}
-        </motion.span>
+          <tag.icon className="w-4 h-4 text-violet-400" />
+          <span className="text-sm font-medium text-white/80">{tag.label}</span>
+        </motion.div>
       ))}
     </>
   );
@@ -124,19 +125,30 @@ const Hero = () => {
 
   return (
     <section ref={sectionRef} className="relative h-[100vh] overflow-hidden bg-black">
-      {/* Video Background */}
+      {/* Video Background with enhanced effects */}
       <motion.div className="absolute inset-0" style={{ scale }}>
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover opacity-50"
         >
           <source src="/videos/gtm-hero.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black" />
+        {/* Radial gradient overlay for depth */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/20 via-transparent to-transparent" />
       </motion.div>
+      
+      {/* Animated grid pattern */}
+      <div className="absolute inset-0 opacity-[0.03]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `linear-gradient(rgba(139, 92, 246, 0.5) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(139, 92, 246, 0.5) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }} />
+      </div>
 
       {/* Floating Service Tags */}
       <FloatingServiceTags />
@@ -146,26 +158,28 @@ const Hero = () => {
         className="relative z-10 h-full flex flex-col items-center justify-center px-6"
         style={{ opacity, y: textY }}
       >
-        <motion.span
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.3 }}
-          className="text-[10px] tracking-[0.4em] text-white/50 uppercase mb-6"
+          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-300 text-sm font-medium mb-8"
         >
-          Korea Go-To-Market
-        </motion.span>
+          <Zap className="w-4 h-4" />
+          <span>Korea's #1 Web3 GTM Agency</span>
+        </motion.div>
 
-        {/* Korean Headline */}
+        {/* Korean Headline - Enhanced typography */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-center max-w-5xl"
         >
-          <span className="block text-[clamp(2.5rem,8vw,5.5rem)] font-black text-white leading-[1.1] tracking-tight">
+          <span className="block text-[clamp(2.8rem,9vw,6rem)] font-black text-white leading-[1.05] tracking-tight">
             한국 시장,
           </span>
-          <span className="block text-[clamp(2.5rem,8vw,5.5rem)] font-black text-white leading-[1.1] tracking-tight mt-2">
+          <span className="block text-[clamp(2.8rem,9vw,6rem)] font-black leading-[1.05] tracking-tight mt-2 bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">
             혼자 하시겠습니까?
           </span>
         </motion.h1>
@@ -174,26 +188,32 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
-          className="text-white/60 text-base md:text-lg max-w-2xl text-center mt-8 leading-relaxed"
+          className="text-white/60 text-lg md:text-xl max-w-2xl text-center mt-8 leading-relaxed"
         >
           We've helped <span className="text-white font-semibold">30+ global Web3 projects</span> crack Korea's{' '}
-          <span className="text-primary font-semibold">$50B</span> crypto market.
+          <span className="text-primary font-semibold">$50B</span> crypto market with data-driven strategies.
         </motion.p>
 
-        {/* CTA Button */}
+        {/* CTA Buttons - Enhanced */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}
-          className="mt-10"
+          className="mt-10 flex flex-col sm:flex-row gap-4"
         >
           <Link 
             to="/contact"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black hover:bg-primary hover:text-white transition-all duration-500 text-sm font-bold tracking-wide"
+            className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-full font-bold text-base overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(139,92,246,0.4)] hover:scale-105"
           >
-            <span>무료 상담 예약하기</span>
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <span className="relative z-10">무료 상담 예약하기</span>
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform relative z-10" />
           </Link>
+          <a 
+            href="#social-proof"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/5 border border-white/20 text-white/80 rounded-full font-medium text-base hover:bg-white/10 hover:border-white/30 transition-all duration-300"
+          >
+            케이스 스터디 보기
+          </a>
         </motion.div>
 
         <motion.div
@@ -448,15 +468,16 @@ const ProblemStatement = () => {
             </h3>
           </motion.div>
 
-          {/* Problem Cards */}
+          {/* Problem Cards - Enhanced with stagger animation */}
           <div className="grid md:grid-cols-3 gap-6 mb-20">
             {problems.map((problem, i) => (
               <motion.div
                 key={problem.emphasis}
-                initial={{ opacity: 0, y: 40 }}
-                animate={problemInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4 + i * 0.15 }}
-                className="group relative aspect-[4/5] overflow-hidden"
+                initial={{ opacity: 0, x: i === 0 ? -50 : i === 2 ? 50 : 0, y: 40 }}
+                animate={problemInView ? { opacity: 1, x: 0, y: 0 } : {}}
+                transition={{ delay: 0.4 + i * 0.15, duration: 0.6 }}
+                whileHover={{ scale: 1.03, y: -5 }}
+                className="group relative aspect-[4/5] overflow-hidden rounded-2xl border border-white/10 hover:border-red-500/30 transition-all duration-500"
               >
                 <img
                   src={problem.image}
@@ -465,17 +486,20 @@ const ProblemStatement = () => {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
                 
+                {/* Hover glow */}
+                <div className="absolute inset-0 bg-gradient-to-t from-red-600/0 to-red-600/0 group-hover:from-red-600/10 transition-all duration-500" />
+                
                 <div className="relative z-10 h-full flex flex-col justify-end p-6 md:p-8">
-                  <span className="text-xs text-primary font-medium tracking-wider uppercase mb-2">
+                  <span className="text-xs text-red-400 font-medium tracking-wider uppercase mb-2">
                     {problem.title}
                   </span>
-                  <span className="text-[clamp(3rem,8vw,5rem)] font-black text-white leading-none">
+                  <span className="text-[clamp(3rem,8vw,5rem)] font-black text-red-400 leading-none">
                     {problem.emphasis}
                   </span>
                   <p className="text-white font-medium text-base mt-3">
                     {problem.statement}
                   </p>
-                  <p className="text-white/50 text-sm mt-2 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-white/50 text-sm mt-2 leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                     {problem.description}
                   </p>
                 </div>
@@ -483,20 +507,35 @@ const ProblemStatement = () => {
             ))}
           </div>
 
-          {/* 90% Fail Stat */}
+          {/* 90% Fail Stat - Enhanced */}
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={problemInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.6 }}
-            className="text-center py-16 border-t border-white/10"
+            className="text-center py-20"
           >
-            <p className="text-white/40 text-sm tracking-widest uppercase mb-4">결과?</p>
-            <span className="text-[clamp(4rem,15vw,10rem)] font-black text-white leading-none">
-              90%
-            </span>
-            <p className="text-white/50 text-lg md:text-xl mt-4">
-              6개월 내 <span className="text-red-400 font-semibold">실패</span>합니다.
-            </p>
+            <div className="inline-block p-10 rounded-3xl bg-gradient-to-br from-red-950/50 to-red-900/20 border border-red-500/20 backdrop-blur-sm">
+              <p className="text-red-300 text-sm tracking-widest uppercase mb-4">결과?</p>
+              <motion.span 
+                className="text-[clamp(5rem,18vw,12rem)] font-black text-red-500 leading-none block"
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={problemInView ? { scale: 1, opacity: 1 } : {}}
+                transition={{ delay: 0.8, type: "spring", stiffness: 100 }}
+              >
+                90%
+              </motion.span>
+              <p className="text-white/70 text-xl md:text-2xl mt-6">
+                6개월 내 <span className="text-red-400 font-bold">실패</span>합니다.
+              </p>
+            </div>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={problemInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 1 }}
+              className="mt-10 text-xl md:text-2xl text-white/60"
+            >
+              하지만 <span className="text-white font-semibold">우리와 함께한 프로젝트</span>는 다릅니다.
+            </motion.p>
           </motion.div>
         </div>
       </section>
@@ -949,11 +988,15 @@ const ServicesAccordion = () => {
 };
 
 // ============================================
-// SECTION 7: PROCESS TIMELINE (Horizontal Scroll)
+// SECTION 7: PROCESS TIMELINE (Scroll-Triggered Animation)
 // ============================================
 const ProcessTimeline = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
 
   const steps = [
     {
@@ -962,7 +1005,9 @@ const ProcessTimeline = () => {
       title: "Discovery",
       titleKo: "리서치",
       image: discoveryResearch,
-      deliverables: ["시장 리서치 리포트", "경쟁사 분석", "타겟 오디언스 맵핑", "규제 검토"]
+      deliverables: ["시장 리서치 리포트", "경쟁사 분석", "타겟 오디언스 맵핑", "규제 검토"],
+      color: "from-blue-500 to-cyan-500",
+      icon: Search
     },
     {
       number: "02",
@@ -970,7 +1015,9 @@ const ProcessTimeline = () => {
       title: "Strategy",
       titleKo: "전략",
       image: strategyPlanning,
-      deliverables: ["GTM 로드맵", "채널 전략", "예산 배분", "KPI 설정"]
+      deliverables: ["GTM 로드맵", "채널 전략", "예산 배분", "KPI 설정"],
+      color: "from-violet-500 to-purple-500",
+      icon: Target
     },
     {
       number: "03",
@@ -978,7 +1025,9 @@ const ProcessTimeline = () => {
       title: "Launch",
       titleKo: "런칭",
       image: executionGrowth,
-      deliverables: ["PR 캠페인", "커뮤니티 빌딩", "KOL 활성화", "이벤트 실행"]
+      deliverables: ["PR 캠페인", "커뮤니티 빌딩", "KOL 활성화", "이벤트 실행"],
+      color: "from-fuchsia-500 to-pink-500",
+      icon: Zap
     },
     {
       number: "04",
@@ -986,80 +1035,139 @@ const ProcessTimeline = () => {
       title: "Scale",
       titleKo: "스케일",
       image: scaleSuccess,
-      deliverables: ["성과 트래킹", "최적화", "확장 기획", "정기 리포팅"]
+      deliverables: ["성과 트래킹", "최적화", "확장 기획", "정기 리포팅"],
+      color: "from-amber-500 to-orange-500",
+      icon: TrendingUp
     }
   ];
 
+  // Calculate progress for each step
+  const progressWidth = useTransform(scrollYProgress, [0.15, 0.75], ["0%", "100%"]);
+
   return (
-    <section ref={ref} className="relative py-24 md:py-32 bg-neutral-950 overflow-hidden">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
+    <section ref={containerRef} className="relative py-32 md:py-48 bg-gradient-to-b from-black via-neutral-950 to-black overflow-hidden">
+      {/* Background effects */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/10 via-transparent to-transparent" />
+      
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
           <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Our Process</span>
           <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mt-4">
-            어떻게 진행되나요?
+            어떻게 <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">진행</span>되나요?
           </h3>
+          <p className="text-white/50 mt-4 max-w-xl mx-auto">검증된 4단계 GTM 프레임워크로 한국 시장을 공략합니다</p>
         </motion.div>
 
-        {/* Horizontal Timeline */}
-        <div className="relative">
-          {/* Timeline Line */}
-          <div className="absolute top-1/2 left-0 right-0 h-px bg-white/10 hidden md:block" />
+        {/* Progress Bar - Desktop */}
+        <div className="hidden md:block max-w-4xl mx-auto mb-20">
+          <div className="relative h-1.5 bg-white/10 rounded-full overflow-hidden">
+            <motion.div 
+              className="absolute inset-y-0 left-0 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-pink-500 rounded-full"
+              style={{ width: progressWidth }}
+            />
+          </div>
+          {/* Step indicators */}
+          <div className="flex justify-between mt-6">
+            {steps.map((step, index) => {
+              const stepProgress = useTransform(
+                scrollYProgress,
+                [0.15 + index * 0.15, 0.25 + index * 0.15],
+                [0.4, 1]
+              );
+              return (
+                <motion.div
+                  key={step.number}
+                  style={{ opacity: stepProgress }}
+                  className="text-center"
+                >
+                  <div className={`w-10 h-10 mx-auto rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-2`}>
+                    <step.icon className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-xs font-mono text-violet-400">{step.number}</span>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
 
-          <div className="grid md:grid-cols-4 gap-6">
-            {steps.map((step, i) => (
+        {/* Process Cards - Staggered Layout */}
+        <div className="space-y-8 max-w-5xl mx-auto">
+          {steps.map((step, i) => {
+            const cardProgress = useTransform(
+              scrollYProgress,
+              [0.1 + i * 0.12, 0.2 + i * 0.12],
+              [0, 1]
+            );
+            const cardX = useTransform(cardProgress, [0, 1], [i % 2 === 0 ? -100 : 100, 0]);
+            const cardOpacity = useTransform(cardProgress, [0, 1], [0, 1]);
+
+            return (
               <motion.div
                 key={step.number}
-                initial={{ opacity: 0, y: 40 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.2 + i * 0.15 }}
-                className="relative group"
+                style={{ x: cardX, opacity: cardOpacity }}
+                className={`group relative ${i % 2 === 0 ? 'md:mr-32' : 'md:ml-32'}`}
               >
-                {/* Timeline Dot */}
-                <div className="hidden md:flex absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-neutral-950 border-2 border-white/20 group-hover:border-primary transition-colors z-10 items-center justify-center">
-                  <div className="w-2 h-2 rounded-full bg-primary" />
-                </div>
-
-                {/* Card */}
-                <div className="bg-white/[0.02] border border-white/10 p-6 mt-8 group-hover:border-primary/30 transition-all duration-300">
-                  {/* Header */}
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-3xl font-black text-white/20">[{step.number}]</span>
-                    <span className="text-xs text-primary font-medium px-2 py-1 bg-primary/10">
-                      {step.week}
-                    </span>
+                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-white/[0.08] to-white/[0.02] border border-white/10 hover:border-violet-500/40 transition-all duration-500">
+                  {/* Gradient accent line */}
+                  <div className={`absolute top-0 ${i % 2 === 0 ? 'left-0' : 'right-0'} w-1 h-full bg-gradient-to-b ${step.color}`} />
+                  
+                  {/* Hover glow */}
+                  <div className={`absolute inset-0 bg-gradient-to-r ${step.color} opacity-0 group-hover:opacity-[0.03] transition-opacity duration-500`} />
+                  
+                  <div className="relative z-10 p-6 md:p-8 flex flex-col lg:flex-row gap-6 items-start">
+                    {/* Image */}
+                    <div className="w-full lg:w-48 aspect-video lg:aspect-square rounded-xl overflow-hidden flex-shrink-0">
+                      <img
+                        src={step.image}
+                        alt={step.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-3">
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center group-hover:scale-110 transition-transform duration-500`}>
+                          <step.icon className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <span className="text-xs font-mono text-white/40 block">{step.week}</span>
+                          <span className="text-sm text-violet-400 font-medium">{step.titleKo}</span>
+                        </div>
+                      </div>
+                      
+                      <h4 className="text-2xl md:text-3xl font-bold text-white mb-4">{step.title}</h4>
+                      
+                      {/* Deliverables */}
+                      <div className="flex flex-wrap gap-2">
+                        {step.deliverables.map((item, j) => (
+                          <motion.span
+                            key={j}
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3 + j * 0.05 }}
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/70"
+                          >
+                            <ChevronRight className="w-3 h-3 text-violet-400" />
+                            {item}
+                          </motion.span>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    {/* Step number watermark */}
+                    <div className="hidden lg:block absolute right-6 top-1/2 -translate-y-1/2 text-8xl font-black text-white/[0.03] select-none">
+                      {step.number}
+                    </div>
                   </div>
-
-                  {/* Image */}
-                  <div className="relative aspect-video overflow-hidden mb-4">
-                    <img
-                      src={step.image}
-                      alt={step.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  </div>
-
-                  {/* Title */}
-                  <h4 className="text-xl font-bold text-white mb-1">{step.title}</h4>
-                  <p className="text-white/40 text-sm mb-4">{step.titleKo}</p>
-
-                  {/* Deliverables */}
-                  <ul className="space-y-2">
-                    {step.deliverables.map((item, j) => (
-                      <li key={j} className="flex items-center gap-2 text-white/60 text-xs">
-                        <ChevronRight className="w-3 h-3 text-primary" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
                 </div>
               </motion.div>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -1101,20 +1209,23 @@ const WhyUs = () => {
   ];
 
   return (
-    <section ref={ref} className="relative py-24 md:py-32 bg-white overflow-hidden">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
+    <section ref={ref} className="relative py-24 md:py-32 bg-gradient-to-b from-violet-950/30 to-black overflow-hidden">
+      {/* Background glow */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/15 via-transparent to-transparent" />
+      
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="text-center mb-16"
         >
-          <span className="text-[10px] text-black/40 tracking-[0.4em] uppercase">Why Ium Labs</span>
-          <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-black mt-4">
-            왜 이음랩스인가요?
+          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Why Ium Labs</span>
+          <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mt-4">
+            왜 <span className="bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">이음랩스</span>인가요?
           </h3>
         </motion.div>
 
-        {/* Cards */}
+        {/* Cards with glassmorphism */}
         <div className="grid md:grid-cols-3 gap-6">
           {differentiators.map((item, i) => (
             <motion.div
@@ -1122,23 +1233,31 @@ const WhyUs = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.2 + i * 0.1 }}
-              className="group relative overflow-hidden"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative overflow-hidden rounded-2xl"
+              style={{ transformStyle: 'preserve-3d' }}
             >
-              {/* Image */}
+              {/* Background image */}
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
+                
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-violet-600/0 to-fuchsia-600/0 group-hover:from-violet-600/20 group-hover:to-fuchsia-600/10 transition-all duration-500" />
                 
                 {/* Content Overlay */}
                 <div className="absolute inset-0 p-6 flex flex-col justify-end">
-                  <span className="text-xs text-primary font-medium mb-2">{item.highlight}</span>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-fuchsia-500 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-500">
+                    <item.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <span className="text-xs text-violet-400 font-medium mb-2">{item.highlight}</span>
                   <h4 className="text-xl font-bold text-white mb-1">{item.title}</h4>
-                  <p className="text-white/60 text-xs mb-2">{item.titleKo}</p>
-                  <p className="text-white/70 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <p className="text-white/50 text-xs mb-2">{item.titleKo}</p>
+                  <p className="text-white/70 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-2 group-hover:translate-y-0">
                     {item.description}
                   </p>
                 </div>
@@ -1146,6 +1265,27 @@ const WhyUs = () => {
             </motion.div>
           ))}
         </div>
+        
+        {/* Trust badges */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.6 }}
+          className="mt-16 text-center"
+        >
+          <p className="text-white/30 text-xs tracking-wider uppercase mb-6">Trusted By Leading Projects</p>
+          <div className="flex flex-wrap justify-center items-center gap-8">
+            {[storyLogo, mantraLogo, peaqLogo, saharaLogo].map((logo, index) => (
+              <motion.img
+                key={index}
+                src={logo}
+                alt=""
+                className="h-6 w-auto opacity-40 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+                whileHover={{ scale: 1.1 }}
+              />
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
