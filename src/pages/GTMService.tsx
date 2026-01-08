@@ -16,10 +16,18 @@ import EnhancedHero from '@/components/gtm/EnhancedHero';
 // ============================================
 import seoulMetroBillboard from '@/assets/campaigns/seoul-metro-billboard.jpeg';
 import storyOriginSummit from '@/assets/campaigns/story-origin-summit.jpg';
+import storyWorkshop from '@/assets/campaigns/story-workshop.jpg';
 import peaqSummit from '@/assets/campaigns/peaq-summit.jpg';
 import polygonConnect from '@/assets/campaigns/polygon-connect.png';
 import bnbEvent from '@/assets/campaigns/bnb-event.jpg';
 import openledgerEvent from '@/assets/campaigns/openledger-event.jpg';
+import openledgerInterview from '@/assets/campaigns/openledger-interview.jpg';
+import mantraParty from '@/assets/campaigns/mantra-party.jpg';
+import mantraEvent from '@/assets/campaigns/mantra.jpg';
+import bybitEvent from '@/assets/campaigns/bybit-event.jpg';
+import saharaAiCampaign from '@/assets/campaigns/sahara-ai.jpg';
+import kucoinCampaign from '@/assets/campaigns/kucoin-campaign.jpg';
+import kucoinNew from '@/assets/campaigns/kucoin-new.jpg';
 
 import peaqLogo from '@/assets/logos/peaq.svg';
 
@@ -452,6 +460,7 @@ const SelectedWorkSection = () => {
       logo: storyLogo, 
       bg: storyBg, 
       video: "/videos/projects/story-hero.mp4",
+      gallery: [storyOriginSummit, storyWorkshop],
       result: "+340%",
       resultSub: "Trading Volume",
       category: "IP Protocol",
@@ -462,6 +471,7 @@ const SelectedWorkSection = () => {
       logo: mantraLogo, 
       bg: mantraBg, 
       video: "/videos/projects/mantra-hero.mp4",
+      gallery: [mantraParty, mantraEvent],
       result: "+500%",
       resultSub: "Community Growth",
       category: "RWA L1",
@@ -472,6 +482,7 @@ const SelectedWorkSection = () => {
       logo: bybitLogo, 
       bg: bybitBg, 
       video: "/videos/projects/bybit-hero.mp4",
+      gallery: [bybitEvent],
       result: "#2",
       resultSub: "Korea Exchange",
       category: "CEX",
@@ -482,6 +493,7 @@ const SelectedWorkSection = () => {
       logo: peaqLogo, 
       bg: peaqBg, 
       video: "/videos/projects/peaq-hero.mp4",
+      gallery: [peaqSummit],
       result: "#1",
       resultSub: "DePIN in Korea",
       category: "DePIN L1",
@@ -492,6 +504,7 @@ const SelectedWorkSection = () => {
       logo: bnbLogo, 
       bg: bnbBg, 
       video: "/videos/projects/bnb-hero.mp4",
+      gallery: [bnbEvent],
       result: "2.5M+",
       resultSub: "Organic Reach",
       category: "L1 Ecosystem",
@@ -502,6 +515,7 @@ const SelectedWorkSection = () => {
       logo: saharaLogo, 
       bg: saharaBg, 
       video: "/videos/projects/sahara-hero.mp4",
+      gallery: [saharaAiCampaign],
       result: "200K+",
       resultSub: "Community Members",
       category: "AI Infrastructure",
@@ -512,6 +526,7 @@ const SelectedWorkSection = () => {
       logo: kucoinLogo, 
       bg: kucoinBg, 
       video: "/videos/projects/kucoin-hero.mp4",
+      gallery: [kucoinCampaign, kucoinNew],
       result: "Top 5",
       resultSub: "Korea Volume",
       category: "CEX",
@@ -522,6 +537,7 @@ const SelectedWorkSection = () => {
       logo: null, 
       bg: openledgerBg, 
       video: null,
+      gallery: [openledgerEvent, openledgerInterview],
       result: "50K+",
       resultSub: "Community Growth",
       category: "AI Data",
@@ -624,46 +640,78 @@ const SelectedWorkSection = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 20 }}
                   transition={{ delay: 0.1, duration: 0.3 }}
-                  className="absolute inset-0 flex flex-col justify-end p-8"
+                  className="absolute inset-0 flex"
                 >
-                  {/* Category Tag */}
-                  <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase mb-3">
-                    {project.category}
-                  </span>
+                  {/* Left: Info */}
+                  <div className="flex-1 flex flex-col justify-end p-8">
+                    {/* Category Tag */}
+                    <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase mb-3">
+                      {project.category}
+                    </span>
 
-                  {/* Logo */}
-                  <div className="mb-4">
-                    {project.logo ? (
-                      <img
-                        src={project.logo}
-                        alt={project.name}
-                        className="h-10 w-auto object-contain brightness-0 invert"
-                      />
-                    ) : (
-                      <span className="text-white font-black text-2xl tracking-tight">
-                        {project.name}
+                    {/* Logo */}
+                    <div className="mb-4">
+                      {project.logo ? (
+                        <img
+                          src={project.logo}
+                          alt={project.name}
+                          className="h-10 w-auto object-contain brightness-0 invert"
+                        />
+                      ) : (
+                        <span className="text-white font-black text-2xl tracking-tight">
+                          {project.name}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Result Metric */}
+                    <div className="mb-6">
+                      <span className="text-3xl md:text-4xl font-black bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                        {project.result}
                       </span>
-                    )}
+                      <span className="block text-white/50 text-xs tracking-wider mt-1">
+                        {project.resultSub}
+                      </span>
+                    </div>
+
+                    {/* View Project Button */}
+                    <Link
+                      to={`/projects/${project.slug}`}
+                      className="inline-flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest transition-colors group/link"
+                    >
+                      <span>VIEW PROJECT</span>
+                      <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                    </Link>
                   </div>
 
-                  {/* Result Metric */}
-                  <div className="mb-6">
-                    <span className="text-3xl md:text-4xl font-black bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
-                      {project.result}
-                    </span>
-                    <span className="block text-white/50 text-xs tracking-wider mt-1">
-                      {project.resultSub}
-                    </span>
-                  </div>
-
-                  {/* View Project Button */}
-                  <Link
-                    to={`/projects/${project.slug}`}
-                    className="inline-flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest transition-colors group/link"
-                  >
-                    <span>VIEW PROJECT</span>
-                    <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-                  </Link>
+                  {/* Right: Gallery Preview */}
+                  {project.gallery && project.gallery.length > 0 && (
+                    <motion.div 
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.25, duration: 0.3 }}
+                      className="hidden lg:flex flex-col gap-2 p-4 w-48"
+                    >
+                      {project.gallery.slice(0, 2).map((img, idx) => (
+                        <div 
+                          key={idx}
+                          className="relative aspect-[4/3] overflow-hidden rounded-sm group/img"
+                        >
+                          <img 
+                            src={img} 
+                            alt={`${project.name} gallery ${idx + 1}`}
+                            className="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-110"
+                          />
+                          <div className="absolute inset-0 bg-black/20 group-hover/img:bg-black/0 transition-colors" />
+                        </div>
+                      ))}
+                      {project.gallery.length > 2 && (
+                        <span className="text-white/30 text-[10px] tracking-wider text-center">
+                          +{project.gallery.length - 2} MORE
+                        </span>
+                      )}
+                    </motion.div>
+                  )}
                 </motion.div>
               )}
             </AnimatePresence>
