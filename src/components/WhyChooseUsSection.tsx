@@ -33,7 +33,7 @@ const WhyChooseUsSection = () => {
             viewport={{ once: true, margin: "-50px" }}
           >
             <h2 className="text-xl sm:text-2xl md:text-2xl lg:text-3xl font-bold text-foreground mb-4 sm:mb-5 tracking-tight">
-              About Us
+              Real results, not just promises.
             </h2>
             
             <p className="text-muted-foreground leading-relaxed text-body-sm sm:text-body md:text-body lg:text-body-lg mb-4">
@@ -47,18 +47,14 @@ const WhyChooseUsSection = () => {
 
           {/* Stats + CTA */}
           <div className="p-4 sm:p-5 md:p-6 lg:p-8">
-            <div className="grid grid-cols-3 gap-2 sm:gap-4 md:gap-6 mb-3 sm:mb-5">
+            <div className="grid grid-cols-2 gap-2 sm:gap-4 md:gap-6 mb-3 sm:mb-5">
               <div className="text-center">
-                <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-0.5 tracking-tight">2025</div>
-                <div className="text-[10px] sm:text-caption text-muted-foreground">Founded</div>
+                <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-0.5 tracking-tight">340%</div>
+                <div className="text-[10px] sm:text-caption text-muted-foreground">Avg. Volume</div>
               </div>
               <div className="text-center">
-                <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-0.5 tracking-tight">18+</div>
-                <div className="text-[10px] sm:text-caption text-muted-foreground">Partners</div>
-              </div>
-              <div className="text-center">
-                <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-0.5 tracking-tight">60+</div>
-                <div className="text-[10px] sm:text-caption text-muted-foreground">Campaigns</div>
+                <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-0.5 tracking-tight">2.5M</div>
+                <div className="text-[10px] sm:text-caption text-muted-foreground">Organic Reaching</div>
               </div>
             </div>
             <Link
