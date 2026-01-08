@@ -4,32 +4,28 @@ const sections = [{
   number: "01",
   label: "Hero"
 }, {
-  id: "about",
-  number: "02",
+  id: "why-choose-us",
+  number: "01",
   label: "About"
 }, {
-  id: "cases",
-  number: "03",
-  label: "Cases"
-}, {
   id: "services",
-  number: "04",
+  number: "02",
   label: "Services"
 }, {
-  id: "team",
+  id: "process",
+  number: "03",
+  label: "Process"
+}, {
+  id: "cases",
+  number: "04",
+  label: "Cases"
+}, {
+  id: "insights",
   number: "05",
-  label: "Team"
-}, {
-  id: "guides",
-  number: "06",
-  label: "Guides"
-}, {
-  id: "blog",
-  number: "07",
-  label: "Blog"
+  label: "Insights"
 }, {
   id: "contact",
-  number: "08",
+  number: "06",
   label: "Contact"
 }];
 const SectionIndicator = () => {
