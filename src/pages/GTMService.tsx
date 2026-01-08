@@ -63,7 +63,7 @@ const RealityCheckSection = () => {
   const textY = useTransform(scrollYProgress, [0, 1], [100, -100]);
 
   return (
-    <section ref={ref} className="relative min-h-screen bg-black flex flex-col items-center justify-center overflow-hidden py-20">
+    <section ref={ref} className="relative min-h-[70vh] bg-black flex flex-col items-center justify-center overflow-hidden py-16">
       {/* Main Warning Text */}
       <motion.div 
         className="text-center px-4"
@@ -116,7 +116,7 @@ const RealityCheckSection = () => {
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.5 }}
-        className="grid md:grid-cols-3 gap-8 md:gap-16 mt-20 px-6 max-w-5xl mx-auto"
+        className="grid md:grid-cols-3 gap-8 md:gap-12 mt-12 px-6 max-w-4xl mx-auto"
       >
         {[
           { icon: Lock, title: "LANGUAGE", sub: "99% search in Korean", desc: "Naver & Kakao dominate" },
@@ -151,7 +151,7 @@ const SolutionSection = () => {
   const isInView = useInView(ref, { once: true, margin: "-20%" });
 
   return (
-    <section ref={ref} className="relative min-h-screen bg-black flex flex-col items-center justify-center overflow-hidden py-20">
+    <section ref={ref} className="relative min-h-[60vh] bg-black flex flex-col items-center justify-center overflow-hidden py-12">
       {/* WE ARE */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
@@ -170,7 +170,7 @@ const SolutionSection = () => {
         initial={{ opacity: 0, scale: 0.9 }}
         animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="relative my-8"
+        className="relative my-4"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-primary/30 via-violet-500/30 to-fuchsia-500/30 blur-3xl" />
         <span className="relative text-[clamp(6rem,25vw,20rem)] font-black bg-gradient-to-r from-primary via-violet-400 to-fuchsia-400 bg-clip-text text-transparent leading-none">
@@ -196,7 +196,7 @@ const SolutionSection = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.6 }}
-        className="text-white/40 text-sm md:text-base tracking-widest mt-8"
+        className="text-white/40 text-sm md:text-base tracking-widest mt-4"
       >
         "TO CONNECT" — YOUR FOUNDATIONAL LAYER FOR KOREA
       </motion.p>
@@ -206,7 +206,7 @@ const SolutionSection = () => {
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.8 }}
-        className="flex flex-wrap justify-center gap-8 md:gap-16 mt-16 px-6"
+        className="flex flex-wrap justify-center gap-8 md:gap-12 mt-8 px-6"
       >
         {["LOCAL DNA", "DATA-FIRST", "FULL-STACK"].map((item, i) => (
           <motion.span
@@ -239,18 +239,18 @@ const EvidenceSection = () => {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen bg-black flex flex-col items-center justify-center overflow-hidden py-20">
+    <section ref={ref} className="relative py-16 bg-black flex flex-col items-center justify-center overflow-hidden">
       {/* Section Label */}
       <motion.span
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="text-white/20 text-[10px] tracking-[0.5em] mb-16"
+        className="text-white/20 text-[10px] tracking-[0.5em] mb-8"
       >
         NUMBERS DON'T LIE
       </motion.span>
 
       {/* Big Numbers Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-16 px-6 max-w-6xl mx-auto">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 px-6 max-w-5xl mx-auto">
         {metrics.map((metric, i) => (
           <MetricItem 
             key={metric.label}
@@ -266,7 +266,7 @@ const EvidenceSection = () => {
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.8 }}
-        className="max-w-2xl mx-auto mt-24 px-6 text-center"
+        className="max-w-2xl mx-auto mt-12 px-6 text-center"
       >
         <img 
           src={peaqLogo} 
@@ -321,13 +321,13 @@ const StrategySection = () => {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-screen bg-black flex flex-col items-center justify-center overflow-hidden py-20">
+    <section ref={ref} className="relative py-16 bg-black flex flex-col items-center justify-center overflow-hidden">
       {/* Giant Title */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
-        className="text-center mb-16 px-4"
+        className="text-center mb-10 px-4"
       >
         <div className="flex items-center justify-center gap-2 md:gap-4">
           <span className="text-[clamp(2rem,10vw,8rem)] font-black text-transparent leading-none tracking-tighter"
@@ -389,12 +389,12 @@ const PortfolioSection = () => {
   ];
 
   return (
-    <section ref={ref} className="relative bg-black py-24 overflow-hidden">
+    <section ref={ref} className="relative bg-black py-16 overflow-hidden">
       {/* Section Title */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        className="text-center mb-16 px-4"
+        className="text-center mb-10 px-4"
       >
         <span className="text-white/20 text-[10px] tracking-[0.5em] block mb-4">CAPABILITIES</span>
         <h2 className="text-[clamp(2rem,6vw,4rem)] font-black text-transparent leading-none tracking-tighter"
@@ -404,7 +404,7 @@ const PortfolioSection = () => {
       </motion.div>
 
       {/* Services */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-px max-w-5xl mx-auto px-6 mb-16">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-px max-w-5xl mx-auto px-6 mb-10">
         {services.map((service, i) => (
           <motion.div
             key={service.title}
@@ -556,12 +556,12 @@ const SelectedWorkSection = () => {
   };
 
   return (
-    <section ref={ref} className="relative bg-black py-24 overflow-hidden">
+    <section ref={ref} className="relative bg-black py-16 overflow-hidden">
       {/* Section Title */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        className="text-center mb-16 px-4"
+        className="text-center mb-10 px-4"
       >
         <span className="text-white/20 text-[10px] tracking-[0.5em] block mb-4">PORTFOLIO</span>
         <h2 className="text-[clamp(2rem,6vw,4rem)] font-black text-transparent leading-none tracking-tighter"
@@ -797,7 +797,7 @@ const FooterCTASection = () => {
   const isInView = useInView(ref, { once: true, margin: "-20%" });
 
   return (
-    <section ref={ref} className="relative min-h-[80vh] bg-black flex flex-col items-center justify-center overflow-hidden py-20">
+    <section ref={ref} className="relative min-h-[50vh] bg-black flex flex-col items-center justify-center overflow-hidden py-16">
       {/* Giant CTA Text */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
@@ -825,7 +825,7 @@ const FooterCTASection = () => {
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.4 }}
-        className="mt-16"
+        className="mt-10"
       >
         <Link
           to="/contact"
