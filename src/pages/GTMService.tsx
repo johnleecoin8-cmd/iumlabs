@@ -1,11 +1,11 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Skull, Lock, Zap, Users, Megaphone, TrendingUp, Calendar } from 'lucide-react';
+import { ArrowRight, Skull, Lock, Zap, Users, Megaphone, TrendingUp, Calendar, ExternalLink } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
 
 // Hero Component
@@ -438,22 +438,106 @@ const PortfolioSection = () => {
 };
 
 // ============================================
-// SELECTED WORK SECTION
+// SELECTED WORK SECTION - MADUP STYLE EXPANDABLE PANELS
 // ============================================
 const SelectedWorkSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [activeVideo, setActiveVideo] = useState<number | null>(null);
 
   const projects = [
-    { name: "Story", logo: storyLogo, bg: storyBg, slug: "story-protocol" },
-    { name: "MANTRA", logo: mantraLogo, bg: mantraBg, slug: "mantra" },
-    { name: "Bybit", logo: bybitLogo, bg: bybitBg, slug: "bybit" },
-    { name: "peaq", logo: peaqLogo, bg: peaqBg, slug: "peaq" },
-    { name: "BNB Chain", logo: bnbLogo, bg: bnbBg, slug: "bnb-chain" },
-    { name: "Sahara AI", logo: saharaLogo, bg: saharaBg, slug: "sahara-ai" },
-    { name: "KuCoin", logo: kucoinLogo, bg: kucoinBg, slug: "kucoin" },
-    { name: "OpenLedger", logo: null, bg: openledgerBg, slug: "openledger" },
+    { 
+      name: "Story Protocol", 
+      logo: storyLogo, 
+      bg: storyBg, 
+      video: "/videos/projects/story-hero.mp4",
+      result: "+340%",
+      resultSub: "Trading Volume",
+      category: "IP Protocol",
+      slug: "story-protocol" 
+    },
+    { 
+      name: "MANTRA", 
+      logo: mantraLogo, 
+      bg: mantraBg, 
+      video: "/videos/projects/mantra-hero.mp4",
+      result: "+500%",
+      resultSub: "Community Growth",
+      category: "RWA L1",
+      slug: "mantra" 
+    },
+    { 
+      name: "Bybit", 
+      logo: bybitLogo, 
+      bg: bybitBg, 
+      video: "/videos/projects/bybit-hero.mp4",
+      result: "#2",
+      resultSub: "Korea Exchange",
+      category: "CEX",
+      slug: "bybit" 
+    },
+    { 
+      name: "peaq", 
+      logo: peaqLogo, 
+      bg: peaqBg, 
+      video: "/videos/projects/peaq-hero.mp4",
+      result: "#1",
+      resultSub: "DePIN in Korea",
+      category: "DePIN L1",
+      slug: "peaq" 
+    },
+    { 
+      name: "BNB Chain", 
+      logo: bnbLogo, 
+      bg: bnbBg, 
+      video: "/videos/projects/bnb-hero.mp4",
+      result: "2.5M+",
+      resultSub: "Organic Reach",
+      category: "L1 Ecosystem",
+      slug: "bnb-chain" 
+    },
+    { 
+      name: "Sahara AI", 
+      logo: saharaLogo, 
+      bg: saharaBg, 
+      video: "/videos/projects/sahara-hero.mp4",
+      result: "200K+",
+      resultSub: "Community Members",
+      category: "AI Infrastructure",
+      slug: "sahara-ai" 
+    },
+    { 
+      name: "KuCoin", 
+      logo: kucoinLogo, 
+      bg: kucoinBg, 
+      video: "/videos/projects/kucoin-hero.mp4",
+      result: "Top 5",
+      resultSub: "Korea Volume",
+      category: "CEX",
+      slug: "kucoin" 
+    },
+    { 
+      name: "OpenLedger", 
+      logo: null, 
+      bg: openledgerBg, 
+      video: null,
+      result: "50K+",
+      resultSub: "Community Growth",
+      category: "AI Data",
+      slug: "openledger" 
+    },
   ];
+
+  const handleMouseEnter = (index: number) => {
+    setHoveredIndex(index);
+    setActiveVideo(index);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+    setActiveVideo(null);
+  };
 
   return (
     <section ref={ref} className="relative bg-black py-24 overflow-hidden">
@@ -463,15 +547,135 @@ const SelectedWorkSection = () => {
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         className="text-center mb-16 px-4"
       >
-        <span className="text-white/20 text-[10px] tracking-[0.5em] block mb-4">SELECTED WORK</span>
+        <span className="text-white/20 text-[10px] tracking-[0.5em] block mb-4">PORTFOLIO</span>
         <h2 className="text-[clamp(2rem,6vw,4rem)] font-black text-transparent leading-none tracking-tighter"
           style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.6)' }}>
-          OUR CLIENTS
+          SELECTED W<span className="text-primary">⬡</span>RK
         </h2>
       </motion.div>
 
-      {/* Projects Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-1 max-w-7xl mx-auto px-6">
+      {/* Desktop: Expandable Panels */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ delay: 0.2 }}
+        className="hidden md:flex h-[70vh] w-full px-4"
+      >
+        {projects.map((project, i) => (
+          <motion.div
+            key={project.name}
+            className="relative overflow-hidden cursor-pointer group"
+            animate={{
+              flex: hoveredIndex === null ? 1 : hoveredIndex === i ? 5 : 0.5,
+            }}
+            transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+            onMouseEnter={() => handleMouseEnter(i)}
+            onMouseLeave={handleMouseLeave}
+          >
+            {/* Background Image */}
+            <img
+              src={project.bg}
+              alt={project.name}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
+            />
+
+            {/* Video (plays on hover) */}
+            {project.video && (
+              <video
+                src={project.video}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                  activeVideo === i ? 'opacity-100' : 'opacity-0'
+                }`}
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
+            )}
+
+            {/* Gradient Overlay */}
+            <div className={`absolute inset-0 transition-all duration-500 ${
+              hoveredIndex === i 
+                ? 'bg-gradient-to-t from-black via-black/40 to-transparent' 
+                : 'bg-black/70'
+            }`} />
+
+            {/* Vertical Title (collapsed state) */}
+            <AnimatePresence>
+              {hoveredIndex !== i && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="absolute inset-0 flex items-center justify-center"
+                >
+                  <span className="text-white/80 font-bold text-sm tracking-[0.3em] whitespace-nowrap rotate-90 origin-center">
+                    {project.name.toUpperCase()}
+                  </span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Expanded Content */}
+            <AnimatePresence>
+              {hoveredIndex === i && (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 20 }}
+                  transition={{ delay: 0.1, duration: 0.3 }}
+                  className="absolute inset-0 flex flex-col justify-end p-8"
+                >
+                  {/* Category Tag */}
+                  <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase mb-3">
+                    {project.category}
+                  </span>
+
+                  {/* Logo */}
+                  <div className="mb-4">
+                    {project.logo ? (
+                      <img
+                        src={project.logo}
+                        alt={project.name}
+                        className="h-10 w-auto object-contain brightness-0 invert"
+                      />
+                    ) : (
+                      <span className="text-white font-black text-2xl tracking-tight">
+                        {project.name}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Result Metric */}
+                  <div className="mb-6">
+                    <span className="text-3xl md:text-4xl font-black bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
+                      {project.result}
+                    </span>
+                    <span className="block text-white/50 text-xs tracking-wider mt-1">
+                      {project.resultSub}
+                    </span>
+                  </div>
+
+                  {/* View Project Button */}
+                  <Link
+                    to={`/projects/${project.slug}`}
+                    className="inline-flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest transition-colors group/link"
+                  >
+                    <span>VIEW PROJECT</span>
+                    <ExternalLink className="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+                  </Link>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* Panel Border */}
+            <div className="absolute inset-0 border-r border-white/5 pointer-events-none" />
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Mobile: Grid Layout */}
+      <div className="md:hidden grid grid-cols-2 gap-1 px-4">
         {projects.map((project, i) => (
           <motion.div
             key={project.name}
@@ -481,33 +685,37 @@ const SelectedWorkSection = () => {
           >
             <Link
               to={`/projects/${project.slug}`}
-              className="relative aspect-square overflow-hidden group block"
+              className="relative aspect-[4/5] overflow-hidden group block"
             >
               <img
                 src={project.bg}
                 alt={project.name}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition-colors" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
               
-              {/* Logo or Name */}
-              <div className="absolute inset-0 flex items-center justify-center">
+              {/* Content */}
+              <div className="absolute inset-0 flex flex-col justify-end p-4">
+                <span className="text-white/40 text-[8px] tracking-[0.2em] uppercase mb-1">
+                  {project.category}
+                </span>
                 {project.logo ? (
                   <img
                     src={project.logo}
                     alt={project.name}
-                    className="h-8 md:h-12 w-auto object-contain brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity"
+                    className="h-5 w-auto object-contain brightness-0 invert mb-2"
                   />
                 ) : (
-                  <span className="text-white/60 group-hover:text-white font-bold text-lg tracking-wider transition-colors">
+                  <span className="text-white font-bold text-sm mb-2">
                     {project.name}
                   </span>
                 )}
-              </div>
-
-              {/* Hover Arrow */}
-              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                <ArrowRight className="w-5 h-5 text-white" />
+                <span className="text-lg font-black text-emerald-400">
+                  {project.result}
+                </span>
+                <span className="text-white/40 text-[10px]">
+                  {project.resultSub}
+                </span>
               </div>
             </Link>
           </motion.div>
