@@ -1,102 +1,7 @@
-import { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Zap, Users, Megaphone, Calendar, Database, Target } from 'lucide-react';
-
-// Campaign preview thumbnails
-import storyOriginSummit from '@/assets/campaigns/story-origin-summit.jpg';
-import mantraParty from '@/assets/campaigns/mantra-party.jpg';
-import peaqSummit from '@/assets/campaigns/peaq-summit.jpg';
-
-const FloatingServiceTags = () => {
-  const tags = [
-    { label: "커뮤니티", icon: Users, top: "18%", left: "6%" },
-    { label: "인플루언서", icon: Users, top: "22%", right: "8%" },
-    { label: "PR", icon: Megaphone, bottom: "38%", left: "4%" },
-    { label: "오프라인", icon: Calendar, bottom: "32%", right: "6%" },
-    { label: "리서치", icon: Database, top: "48%", left: "10%" },
-    { label: "광고", icon: Target, top: "42%", right: "12%" },
-  ];
-
-  return (
-    <>
-      {tags.map((tag, index) => (
-        <motion.div
-          key={tag.label}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ 
-            opacity: 1, 
-            scale: 1,
-            y: [0, -12, 0, 12, 0],
-          }}
-          transition={{ 
-            delay: 1 + index * 0.15,
-            duration: 0.5,
-            y: {
-              duration: 4 + index * 0.5,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }
-          }}
-          className="hidden lg:flex absolute items-center gap-2.5 px-5 py-3 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 shadow-lg shadow-violet-500/10"
-          style={{
-            top: tag.top,
-            left: tag.left,
-            right: tag.right,
-            bottom: tag.bottom,
-          }}
-        >
-          <tag.icon className="w-4 h-4 text-violet-400" />
-          <span className="text-sm font-medium text-white/80">{tag.label}</span>
-        </motion.div>
-      ))}
-    </>
-  );
-};
-
-// Mouse follow button component
-const MouseFollowButton = ({ children, href }: { children: React.ReactNode; href: string }) => {
-  const buttonRef = useRef<HTMLAnchorElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  const springX = useSpring(mouseX, { stiffness: 150, damping: 15 });
-  const springY = useSpring(mouseY, { stiffness: 150, damping: 15 });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!buttonRef.current) return;
-    const rect = buttonRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    
-    const deltaX = (e.clientX - centerX) * 0.15;
-    const deltaY = (e.clientY - centerY) * 0.15;
-    
-    mouseX.set(deltaX);
-    mouseY.set(deltaY);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
-  return (
-    <motion.a
-      ref={buttonRef}
-      href={href}
-      style={{ x: springX, y: springY }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="group relative inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-full font-bold text-lg overflow-hidden transition-all duration-500 hover:shadow-[0_0_60px_rgba(139,92,246,0.5)] hover:scale-105"
-    >
-      {/* Glow effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-violet-400 to-fuchsia-400 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
-      <span className="relative z-10">{children}</span>
-      <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform relative z-10" />
-    </motion.a>
-  );
-};
+import { ArrowRight, Rocket, Target, Infinity as InfinityIcon } from 'lucide-react';
 
 const EnhancedHero = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -105,167 +10,210 @@ const EnhancedHero = () => {
     offset: ["start start", "end start"]
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const textY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
+  const textY = useTransform(scrollYProgress, [0, 0.5], [0, -80]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
-  // Inline image thumbnails for headline
-  const inlineImages = [storyOriginSummit, mantraParty, peaqSummit];
-  const [activeImage, setActiveImage] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveImage((prev) => (prev + 1) % inlineImages.length);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
+  // 3D Icon component for letter replacement
+  const Icon3D = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+    <motion.span 
+      className={`inline-flex items-center justify-center ${className}`}
+      whileHover={{ scale: 1.1, rotateY: 15 }}
+      transition={{ type: "spring", stiffness: 300 }}
+    >
+      {children}
+    </motion.span>
+  );
 
   return (
-    <section ref={sectionRef} className="relative h-screen overflow-hidden bg-black">
-      {/* Video Background with enhanced effects */}
+    <section ref={sectionRef} className="relative min-h-screen overflow-hidden bg-black">
+      {/* Video Background - subtle */}
       <motion.div className="absolute inset-0" style={{ scale }}>
         <video
           autoPlay
           muted
           loop
           playsInline
-          className="w-full h-full object-cover opacity-40"
+          className="w-full h-full object-cover opacity-20"
         >
           <source src="/videos/gtm-hero.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black" />
-        {/* Radial gradient for depth */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-violet-900/20 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black" />
       </motion.div>
-      
-      {/* Animated grid pattern */}
-      <div className="absolute inset-0 opacity-[0.03]">
+
+      {/* Subtle grid pattern */}
+      <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{
-          backgroundImage: `linear-gradient(rgba(139, 92, 246, 0.5) 1px, transparent 1px),
-                            linear-gradient(90deg, rgba(139, 92, 246, 0.5) 1px, transparent 1px)`,
-          backgroundSize: '80px 80px',
+          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.3) 1px, transparent 1px),
+                            linear-gradient(90deg, rgba(255, 255, 255, 0.3) 1px, transparent 1px)`,
+          backgroundSize: '100px 100px',
         }} />
       </div>
 
-      {/* Floating Service Tags */}
-      <FloatingServiceTags />
-
-      {/* Center Content */}
+      {/* Main Content - Staggered Typography */}
       <motion.div 
-        className="relative z-10 h-full flex flex-col items-center justify-center px-6"
+        className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4 py-20"
         style={{ opacity, y: textY }}
       >
-        {/* Badge */}
+        {/* Staggered Large Typography - MADUP + theSMC style */}
+        <div className="w-full max-w-7xl mx-auto">
+          
+          {/* Line 1 - "KOREAN" with outline style */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2, duration: 0.8 }}
+            className="flex justify-start md:justify-center md:ml-[-15%] mb-2 md:mb-4"
+          >
+            <h1 className="text-[clamp(3rem,15vw,12rem)] font-black tracking-tighter leading-none">
+              <span 
+                className="text-transparent bg-clip-text"
+                style={{
+                  WebkitTextStroke: '2px rgba(255,255,255,0.8)',
+                }}
+              >
+                K
+              </span>
+              <Icon3D className="mx-1 md:mx-2">
+                <span className="relative inline-flex items-center justify-center w-[clamp(2.5rem,12vw,10rem)] h-[clamp(2.5rem,12vw,10rem)]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-violet-500 to-fuchsia-600 rounded-full opacity-80 blur-sm" />
+                  <div className="absolute inset-1 bg-gradient-to-br from-violet-400 to-fuchsia-500 rounded-full flex items-center justify-center">
+                    <Rocket className="w-[clamp(1.2rem,6vw,5rem)] h-[clamp(1.2rem,6vw,5rem)] text-white transform rotate-45" />
+                  </div>
+                </span>
+              </Icon3D>
+              <span className="text-white">REAN</span>
+            </h1>
+          </motion.div>
+
+          {/* Line 2 - "MARKET" with 3D icon */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
+            className="flex justify-end md:justify-center md:mr-[-10%] mb-2 md:mb-4"
+          >
+            <h1 className="text-[clamp(3rem,15vw,12rem)] font-black tracking-tighter leading-none">
+              <span className="text-white">M</span>
+              <span 
+                className="text-transparent"
+                style={{
+                  WebkitTextStroke: '2px rgba(255,255,255,0.6)',
+                }}
+              >
+                A
+              </span>
+              <span className="text-white">RK</span>
+              <Icon3D className="mx-1 md:mx-2">
+                <span className="relative inline-flex items-center justify-center w-[clamp(2.5rem,12vw,10rem)] h-[clamp(2.5rem,12vw,10rem)]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl rotate-12 opacity-80" />
+                  <div className="absolute inset-1 bg-gradient-to-br from-orange-400 to-red-500 rounded-xl rotate-12 flex items-center justify-center">
+                    <Target className="w-[clamp(1.2rem,6vw,5rem)] h-[clamp(1.2rem,6vw,5rem)] text-white" />
+                  </div>
+                </span>
+              </Icon3D>
+              <span className="text-white">T</span>
+            </h1>
+          </motion.div>
+
+          {/* Line 3 - "ENTRY" with infinity icon */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.6, duration: 0.8 }}
+            className="flex justify-start md:justify-center md:ml-[-5%] mb-8 md:mb-12"
+          >
+            <h1 className="text-[clamp(3rem,15vw,12rem)] font-black tracking-tighter leading-none">
+              <span 
+                className="text-transparent"
+                style={{
+                  WebkitTextStroke: '2px rgba(255,255,255,0.5)',
+                }}
+              >
+                E
+              </span>
+              <span className="text-white">NTR</span>
+              <Icon3D className="mx-1 md:mx-2">
+                <span className="relative inline-flex items-center justify-center w-[clamp(3rem,14vw,11rem)] h-[clamp(2.5rem,12vw,9rem)]">
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 to-blue-600 rounded-full opacity-80 blur-sm" />
+                  <div className="absolute inset-1 bg-gradient-to-br from-cyan-400 to-blue-500 rounded-full flex items-center justify-center">
+                    <InfinityIcon className="w-[clamp(1.5rem,7vw,6rem)] h-[clamp(1.5rem,7vw,6rem)] text-white" />
+                  </div>
+                </span>
+              </Icon3D>
+            </h1>
+          </motion.div>
+
+          {/* Subtitle - minimal */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+            className="text-center mb-12"
+          >
+            <p className="text-white/50 text-lg md:text-2xl font-light tracking-wide">
+              한국 Web3 시장 진출을 위한 올인원 솔루션
+            </p>
+            <p className="text-white/30 text-sm md:text-base mt-3 tracking-wider">
+              30+ Global Projects · $50B Market · Data-Driven GTM
+            </p>
+          </motion.div>
+
+          {/* CTA - Minimal border style */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.6 }}
+            className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6"
+          >
+            <Link 
+              to="/contact"
+              className="group relative inline-flex items-center gap-3 px-8 py-4 border-2 border-white text-white font-semibold text-lg hover:bg-white hover:text-black transition-all duration-300"
+            >
+              <span>무료 상담 예약</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <Link 
+              to="/projects"
+              className="inline-flex items-center gap-2 px-8 py-4 text-white/60 font-medium text-lg hover:text-white transition-colors"
+            >
+              <span>케이스 스터디</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Scroll indicator - minimal */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3 }}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-violet-500/10 border border-violet-500/30 text-violet-300 text-sm font-medium mb-8"
-        >
-          <Zap className="w-4 h-4" />
-          <span>Korea's #1 Web3 GTM Agency</span>
-        </motion.div>
-
-        {/* Giant Headline with inline images - Noomo style */}
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-center max-w-6xl"
-        >
-          <span className="block text-[clamp(2.5rem,8vw,5.5rem)] font-black text-white leading-[1.1] tracking-tight">
-            한국
-            {/* Inline rotating image */}
-            <span className="relative inline-block mx-4 w-[clamp(60px,10vw,120px)] h-[clamp(40px,6vw,80px)] rounded-lg overflow-hidden align-middle">
-              {inlineImages.map((img, i) => (
-                <motion.img
-                  key={i}
-                  src={img}
-                  alt=""
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ 
-                    opacity: activeImage === i ? 1 : 0,
-                    scale: activeImage === i ? 1 : 0.8
-                  }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              ))}
-            </span>
-            시장,
-          </span>
-          <span className="block text-[clamp(2.5rem,8vw,5.5rem)] font-black leading-[1.1] tracking-tight mt-2">
-            혼자
-            <span className="relative inline-block mx-4 w-[clamp(60px,10vw,120px)] h-[clamp(40px,6vw,80px)] rounded-lg overflow-hidden align-middle">
-              {inlineImages.map((img, i) => (
-                <motion.img
-                  key={i}
-                  src={inlineImages[(i + 1) % inlineImages.length]}
-                  alt=""
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ 
-                    opacity: activeImage === i ? 1 : 0,
-                    scale: activeImage === i ? 1 : 0.8
-                  }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              ))}
-            </span>
-            <span className="bg-gradient-to-r from-violet-400 via-fuchsia-400 to-pink-400 bg-clip-text text-transparent">하시겠습니까?</span>
-          </span>
-        </motion.h1>
-
-        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.9 }}
-          className="text-white/60 text-lg md:text-xl max-w-2xl text-center mt-8 leading-relaxed"
-        >
-          We've helped <span className="text-white font-semibold">30+ global Web3 projects</span> crack Korea's{' '}
-          <span className="text-primary font-semibold">$50B</span> crypto market with data-driven strategies.
-        </motion.p>
-
-        {/* CTA Buttons */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.1 }}
-          className="mt-12 flex flex-col sm:flex-row gap-4"
-        >
-          <MouseFollowButton href="/contact">
-            무료 상담 예약하기
-          </MouseFollowButton>
-          <Link 
-            to="/projects"
-            className="inline-flex items-center justify-center gap-2 px-8 py-5 bg-white/5 border border-white/20 text-white/80 rounded-full font-medium text-lg hover:bg-white/10 hover:border-white/30 transition-all duration-300"
-          >
-            케이스 스터디 보기
-          </Link>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.3 }}
-          className="absolute bottom-12"
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
         >
           <a 
             href="#social-proof"
-            className="group inline-flex flex-col items-center gap-2 text-sm text-white/40 hover:text-white transition-colors"
+            className="flex flex-col items-center gap-2 text-white/30 hover:text-white/60 transition-colors"
           >
-            <span>Scroll to explore</span>
             <motion.div
               animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5 }}
-              className="w-6 h-10 rounded-full border-2 border-white/20 flex justify-center pt-2"
-            >
-              <div className="w-1 h-2 bg-white/40 rounded-full" />
-            </motion.div>
+              transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
+              className="w-px h-12 bg-gradient-to-b from-transparent via-white/30 to-transparent"
+            />
           </a>
         </motion.div>
       </motion.div>
+
+      {/* Side decorative elements */}
+      <div className="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2 text-white/20 text-xs tracking-widest writing-mode-vertical">
+        <span className="transform rotate-180" style={{ writingMode: 'vertical-rl' }}>
+          KOREA'S #1 WEB3 GTM AGENCY
+        </span>
+      </div>
+      <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2 text-white/20 text-xs tracking-widest">
+        <span style={{ writingMode: 'vertical-rl' }}>
+          © 2024 IUM LABS
+        </span>
+      </div>
     </section>
   );
 };
