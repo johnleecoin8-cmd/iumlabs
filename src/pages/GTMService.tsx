@@ -5,13 +5,18 @@ import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
-import { CalendarDays, ArrowRight, Mail, Globe, Database, Users, ChevronRight, MessageCircle, Award, TrendingUp, Target, Megaphone, Calendar, Search, BarChart3 } from 'lucide-react';
+import { ArrowRight, Mail, Globe, Database, Users, ChevronRight, MessageCircle, TrendingUp, Megaphone, Calendar, Search, Check, X, Zap, Shield, BarChart3, Target } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 // ============================================
 // IMAGE IMPORTS
 // ============================================
-// Project backgrounds
 import storyBg from '@/assets/projects/story-bg.jpg';
 import saharaAiBg from '@/assets/projects/sahara-ai-bg.jpg';
 import peaqBg from '@/assets/projects/peaq-bg.jpg';
@@ -19,7 +24,6 @@ import mantraBg from '@/assets/projects/mantra-featured-bg.jpg';
 import openledgerHero from '@/assets/campaigns/openledger-hero-official.png';
 import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
 
-// Campaign images
 import seoulMetroBillboard from '@/assets/campaigns/seoul-metro-billboard.jpeg';
 import storyOriginSummit from '@/assets/campaigns/story-origin-summit.jpg';
 import ondoSeminar from '@/assets/campaigns/ondo-seminar.jpg';
@@ -29,24 +33,20 @@ import bnbEvent from '@/assets/campaigns/bnb-event.jpg';
 import openledgerEvent from '@/assets/campaigns/openledger-event.jpg';
 import kucoinCampaign from '@/assets/campaigns/kucoin-campaign.jpg';
 
-// Process images
 import discoveryResearch from '@/assets/process/discovery-research.jpg';
 import strategyPlanning from '@/assets/process/strategy-planning.jpg';
 import executionGrowth from '@/assets/process/execution-growth.jpg';
 import scaleSuccess from '@/assets/process/scale-success.jpg';
 
-// Service images
 import communityGrowth from '@/assets/services/community-growth.jpg';
 import prMedia from '@/assets/services/pr-media.jpg';
 import kolNetwork from '@/assets/services/kol-network.jpg';
 import seoAds from '@/assets/services/seo-ads.jpg';
 import events from '@/assets/services/events.jpg';
 
-// Other assets
 import dashboardMockup from '@/assets/dashboard-mockup.png';
 import officeImage from '@/assets/office/ium-labs-office.webp';
 
-// Logo imports
 import bybitLogo from '@/assets/logos/bybit.png';
 import mantraLogo from '@/assets/logos/mantra.png';
 import peaqLogo from '@/assets/logos/peaq.svg';
@@ -61,16 +61,16 @@ import megaethLogo from '@/assets/logos/megaeth.png';
 import polygonLogo from '@/assets/logos/polygon.svg';
 
 // ============================================
-// FLOATING SERVICE TAGS (Lunar Strategy Style)
+// FLOATING SERVICE TAGS (Korean Style)
 // ============================================
 const FloatingServiceTags = () => {
   const tags = [
-    { label: "PR & Media", top: "20%", left: "8%" },
-    { label: "Community", top: "25%", right: "10%" },
-    { label: "Influencer Marketing", bottom: "35%", left: "5%" },
-    { label: "GTM Strategy", bottom: "30%", right: "8%" },
-    { label: "Events", top: "45%", left: "12%" },
-    { label: "Research", top: "40%", right: "15%" },
+    { label: "커뮤니티", top: "20%", left: "8%" },
+    { label: "인플루언서", top: "25%", right: "10%" },
+    { label: "PR", bottom: "35%", left: "5%" },
+    { label: "오프라인", bottom: "30%", right: "8%" },
+    { label: "리서치", top: "45%", left: "12%" },
+    { label: "광고", top: "40%", right: "15%" },
   ];
 
   return (
@@ -109,7 +109,7 @@ const FloatingServiceTags = () => {
 };
 
 // ============================================
-// SECTION 1: HERO (with Floating Tags - Lunar Strategy)
+// SECTION 1: HERO (Korean Storytelling Style)
 // ============================================
 const Hero = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -131,7 +131,7 @@ const Hero = () => {
           muted
           loop
           playsInline
-          className="w-full h-full object-cover opacity-50"
+          className="w-full h-full object-cover opacity-40"
         >
           <source src="/videos/gtm-hero.mp4" type="video/mp4" />
         </video>
@@ -152,23 +152,21 @@ const Hero = () => {
           transition={{ delay: 0.3 }}
           className="text-[10px] tracking-[0.4em] text-white/50 uppercase mb-6"
         >
-          Korea GTM Strategy
+          Korea Go-To-Market
         </motion.span>
 
+        {/* Korean Headline */}
         <motion.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 0.8 }}
           className="text-center max-w-5xl"
         >
-          <span className="block text-[clamp(1.8rem,5vw,4rem)] font-medium text-white/60 leading-tight mb-2">
-            We've helped
+          <span className="block text-[clamp(2.5rem,8vw,5.5rem)] font-black text-white leading-[1.1] tracking-tight">
+            한국 시장,
           </span>
-          <span className="block text-[clamp(2.5rem,8vw,6rem)] font-black text-white leading-[0.95] tracking-tight">
-            30+ global Web3 projects
-          </span>
-          <span className="block text-[clamp(1.5rem,4vw,3rem)] font-medium text-white/60 leading-tight mt-4">
-            crack Korea's <span className="text-primary font-bold">$50B</span> crypto market.
+          <span className="block text-[clamp(2.5rem,8vw,5.5rem)] font-black text-white leading-[1.1] tracking-tight mt-2">
+            혼자 하시겠습니까?
           </span>
         </motion.h1>
 
@@ -176,9 +174,10 @@ const Hero = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.9 }}
-          className="text-white text-lg md:text-xl font-medium mt-10"
+          className="text-white/60 text-base md:text-lg max-w-2xl text-center mt-8 leading-relaxed"
         >
-          Your turn.
+          We've helped <span className="text-white font-semibold">30+ global Web3 projects</span> crack Korea's{' '}
+          <span className="text-primary font-semibold">$50B</span> crypto market.
         </motion.p>
 
         {/* CTA Button */}
@@ -190,9 +189,9 @@ const Hero = () => {
         >
           <Link 
             to="/contact"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground hover:bg-primary/90 transition-all duration-300 text-sm font-semibold tracking-wide"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black hover:bg-primary hover:text-white transition-all duration-500 text-sm font-bold tracking-wide"
           >
-            <span>Book a Free Consultation</span>
+            <span>무료 상담 예약하기</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </motion.div>
@@ -222,17 +221,17 @@ const Hero = () => {
 };
 
 // ============================================
-// SECTION 2: SOCIAL PROOF BAR (NoGood + Coinband Style)
+// SECTION 2: SOCIAL PROOF BAR
 // ============================================
 const SocialProofBar = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
   const stats = [
-    { value: 340, suffix: "%", label: "Avg. Volume Increase" },
-    { value: 2.5, suffix: "M", label: "Organic Reach" },
-    { value: 30, suffix: "+", label: "Projects Launched" },
-    { value: 84, suffix: "%", label: "Client Retention" },
+    { value: 340, suffix: "%", label: "평균 거래량 상승", labelEn: "Avg. Volume" },
+    { value: 2.5, suffix: "M", label: "오가닉 도달", labelEn: "Organic Reach" },
+    { value: 30, suffix: "+", label: "런칭 프로젝트", labelEn: "Projects Launched" },
+    { value: 84, suffix: "%", label: "재계약률", labelEn: "Client Retention" },
   ];
 
   const clientLogos = [
@@ -248,7 +247,7 @@ const SocialProofBar = () => {
   ];
 
   return (
-    <section ref={ref} id="social-proof" className="relative py-16 md:py-20 bg-neutral-950 border-y border-white/5">
+    <section ref={ref} id="social-proof" className="relative py-16 md:py-24 bg-neutral-950 border-y border-white/5">
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
         {/* Stats Row */}
         <motion.div
@@ -292,6 +291,24 @@ const SocialProofBar = () => {
             ))}
           </motion.div>
         </div>
+
+        {/* Media Badges */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.5 }}
+          className="flex flex-wrap justify-center items-center gap-6 mt-12 pt-12 border-t border-white/5"
+        >
+          <span className="text-white/30 text-xs tracking-wider">FEATURED IN</span>
+          {[coindeskLogo, cointelegraphLogo, blockmediaLogo].map((logo, i) => (
+            <img
+              key={i}
+              src={logo}
+              alt="Media"
+              className="h-5 w-auto object-contain opacity-30 grayscale"
+            />
+          ))}
+        </motion.div>
       </div>
     </section>
   );
@@ -322,49 +339,113 @@ const StatItem = ({ value, label, suffix = "", isInView, delay = 0 }: {
 };
 
 // ============================================
-// SECTION 3: PROBLEM + TESTIMONIAL (NoGood Style)
+// SECTION 3: PROBLEM STATEMENT (Interactive Korean Style)
 // ============================================
-const ProblemTestimonial = () => {
+const ProblemStatement = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const problemRef = useRef<HTMLDivElement>(null);
-  const testimonialRef = useRef<HTMLDivElement>(null);
-  
   const problemInView = useInView(problemRef, { once: true, margin: "-20%" });
-  const testimonialInView = useInView(testimonialRef, { once: true, margin: "-20%" });
+  const [selectedProblem, setSelectedProblem] = useState<number | null>(null);
+
+  const situations = [
+    { id: 0, label: "한국 진출을 처음 시도합니다", icon: Target },
+    { id: 1, label: "이미 진출했지만 성과가 없습니다", icon: X },
+    { id: 2, label: "한국 파트너가 필요합니다", icon: Users },
+    { id: 3, label: "커뮤니티가 성장하지 않습니다", icon: TrendingUp },
+  ];
 
   const problems = [
     {
       emphasis: "99%",
-      statement: "of Koreans search in Korean only.",
+      title: "언어 장벽",
+      statement: "한국인은 한국어로만 검색합니다.",
+      description: "영어 콘텐츠는 한국에서 전혀 도달하지 않습니다. 네이버, 카카오, 국내 커뮤니티 - 모든 것이 한국어입니다.",
       image: storyOriginSummit
     },
     {
       emphasis: "VASP",
-      statement: "Korea's compliance shuts doors overnight.",
+      title: "규제 장벽",
+      statement: "규정 미준수 = 문 닫습니다.",
+      description: "한국의 VASP 규제는 세계에서 가장 엄격합니다. 규제 대응 없이는 지속 가능한 성장이 불가능합니다.",
       image: ondoSeminar
     },
     {
       emphasis: "24/7",
-      statement: "Korean users expect real engagement.",
+      title: "운영 장벽",
+      statement: "관리 없는 커뮤니티는 죽은 커뮤니티.",
+      description: "한국 유저들은 빠른 응답과 실시간 소통을 기대합니다. 시차를 고려한 24시간 운영이 필수입니다.",
       image: mantraParty
     }
   ];
 
   return (
     <div ref={containerRef} id="problem" className="bg-black">
-      {/* Problem Section */}
       <section ref={problemRef} className="relative py-24 md:py-32">
         <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
+          {/* Interactive Question */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={problemInView ? { opacity: 1, y: 0 } : {}}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white">
+            <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase mb-4 block">Your Situation</span>
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-black text-white mb-8">
+              지금 어떤 상황인가요?
+            </h2>
+
+            {/* Situation Buttons */}
+            <div className="flex flex-wrap justify-center gap-3 max-w-3xl mx-auto">
+              {situations.map((situation, i) => (
+                <motion.button
+                  key={situation.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={problemInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.2 + i * 0.1 }}
+                  onClick={() => setSelectedProblem(selectedProblem === situation.id ? null : situation.id)}
+                  className={`flex items-center gap-2 px-5 py-3 border transition-all duration-300 text-sm ${
+                    selectedProblem === situation.id
+                      ? 'bg-primary border-primary text-white'
+                      : 'bg-white/5 border-white/10 text-white/70 hover:bg-white/10 hover:border-white/20'
+                  }`}
+                >
+                  <situation.icon className="w-4 h-4" />
+                  <span>{situation.label}</span>
+                </motion.button>
+              ))}
+            </div>
+
+            {/* Response Message */}
+            <AnimatePresence>
+              {selectedProblem !== null && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  className="mt-8 p-6 bg-primary/10 border border-primary/20 max-w-2xl mx-auto"
+                >
+                  <p className="text-primary text-lg font-medium">
+                    많은 프로젝트들이 같은 고민을 했습니다.
+                  </p>
+                  <p className="text-white/60 text-sm mt-2">
+                    하지만 대부분이 <span className="text-red-400">실패</span>했습니다. 이유가 뭘까요?
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
+
+          {/* Section Title */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={problemInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.3 }}
+            className="text-center mb-12"
+          >
+            <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white">
               Korea is different.
               <br />
               <span className="text-white/40">Really different.</span>
-            </h2>
+            </h3>
           </motion.div>
 
           {/* Problem Cards */}
@@ -374,7 +455,7 @@ const ProblemTestimonial = () => {
                 key={problem.emphasis}
                 initial={{ opacity: 0, y: 40 }}
                 animate={problemInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.2 + i * 0.15 }}
+                transition={{ delay: 0.4 + i * 0.15 }}
                 className="group relative aspect-[4/5] overflow-hidden"
               >
                 <img
@@ -385,11 +466,17 @@ const ProblemTestimonial = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/30" />
                 
                 <div className="relative z-10 h-full flex flex-col justify-end p-6 md:p-8">
-                  <span className="text-[clamp(3rem,8vw,5rem)] font-black text-primary leading-none">
+                  <span className="text-xs text-primary font-medium tracking-wider uppercase mb-2">
+                    {problem.title}
+                  </span>
+                  <span className="text-[clamp(3rem,8vw,5rem)] font-black text-white leading-none">
                     {problem.emphasis}
                   </span>
-                  <p className="text-white/70 text-sm md:text-base mt-3 leading-relaxed">
+                  <p className="text-white font-medium text-base mt-3">
                     {problem.statement}
+                  </p>
+                  <p className="text-white/50 text-sm mt-2 leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {problem.description}
                   </p>
                 </div>
               </motion.div>
@@ -403,75 +490,13 @@ const ProblemTestimonial = () => {
             transition={{ delay: 0.6 }}
             className="text-center py-16 border-t border-white/10"
           >
-            <p className="text-white/40 text-sm tracking-widest uppercase mb-4">Result?</p>
+            <p className="text-white/40 text-sm tracking-widest uppercase mb-4">결과?</p>
             <span className="text-[clamp(4rem,15vw,10rem)] font-black text-white leading-none">
               90%
             </span>
             <p className="text-white/50 text-lg md:text-xl mt-4">
-              of Web3 projects <span className="text-red-400 font-semibold">fail</span> in Korea within 6 months.
+              6개월 내 <span className="text-red-400 font-semibold">실패</span>합니다.
             </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Transition + Testimonial */}
-      <section ref={testimonialRef} className="relative py-24 md:py-32 bg-neutral-950">
-        <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 50 }}
-            animate={testimonialInView ? { opacity: 1, y: 0 } : {}}
-            className="text-[clamp(2rem,6vw,4.5rem)] font-black text-white text-center leading-tight mb-20"
-          >
-            But not the ones
-            <br />
-            <span className="text-primary">we work with.</span>
-          </motion.h2>
-
-          {/* Featured Testimonial Card (NoGood Style) */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={testimonialInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.3 }}
-            className="max-w-4xl mx-auto"
-          >
-            <div className="relative p-8 md:p-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10">
-              {/* Client Logo */}
-              <div className="mb-8">
-                <img src={storyLogo} alt="Story Protocol" className="h-8 w-auto brightness-0 invert opacity-80" />
-              </div>
-
-              {/* Quote */}
-              <blockquote className="text-xl md:text-2xl lg:text-3xl text-white/90 font-medium leading-relaxed mb-8">
-                "ium Labs made our Korea launch seamless. They understood our vision from day one and delivered beyond expectations."
-              </blockquote>
-
-              {/* Author + Result */}
-              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 pt-8 border-t border-white/10">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                    <span className="text-primary font-bold">SK</span>
-                  </div>
-                  <div>
-                    <p className="text-white font-semibold">Sarah Kim</p>
-                    <p className="text-white/50 text-sm">Head of Marketing, Story Protocol</p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <TrendingUp className="w-5 h-5 text-green-400" />
-                  <span className="text-green-400 font-bold text-lg">340% Volume Growth</span>
-                </div>
-              </div>
-
-              {/* View Case Study Link */}
-              <Link 
-                to="/projects/story-protocol"
-                className="inline-flex items-center gap-2 mt-8 text-primary hover:text-primary/80 transition-colors text-sm font-medium"
-              >
-                <span>View Case Study</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -480,305 +505,355 @@ const ProblemTestimonial = () => {
 };
 
 // ============================================
-// SECTION 4: RESULTS GRID
+// SECTION 4: SOLUTION BRIDGE (이음 Concept)
 // ============================================
-const ResultsGrid = () => {
+const SolutionBridge = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [activeProject, setActiveProject] = useState(0);
 
-  const projects = [
-    { name: "Story Protocol", result: "Korea #1 Community", media: storyBg, slug: "story-protocol" },
-    { name: "MANTRA", result: "500% Volume Growth", media: mantraBg, slug: "mantra" },
-    { name: "peaq", result: "First Mover Advantage", media: peaqBg, slug: "peaq" },
-    { name: "Sahara AI", result: "Community Built", media: saharaAiBg, slug: "sahara-ai" },
-    { name: "OpenLedger", result: "Market Entry", media: openledgerHero, slug: "openledger" },
-    { name: "KuCoin", result: "Top Engagement", media: kucoinBg, slug: "kucoin" },
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveProject((prev) => (prev + 1) % projects.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [projects.length]);
-
-  return (
-    <section ref={ref} className="relative py-24 md:py-32 bg-black overflow-hidden">
-      {/* Background Image Slider */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={activeProject}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.3 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.7 }}
-          className="absolute inset-0"
-        >
-          <img
-            src={projects[activeProject].media}
-            alt=""
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black" />
-        </motion.div>
-      </AnimatePresence>
-
-      <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
-        >
-          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Track Record</span>
-          <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mt-4">
-            The proof is in the numbers.
-          </h3>
-        </motion.div>
-
-        {/* Project Cards Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.slug}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 + i * 0.1 }}
-            >
-              <Link
-                to={`/projects/${project.slug}`}
-                className={`group relative block aspect-[4/5] overflow-hidden transition-all duration-500 ${
-                  activeProject === i ? 'ring-2 ring-primary' : ''
-                }`}
-                onMouseEnter={() => setActiveProject(i)}
-              >
-                <img
-                  src={project.media}
-                  alt={project.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-80" />
-                
-                <div className="absolute inset-0 p-4 flex flex-col justify-end">
-                  <h4 className="text-white font-bold text-sm md:text-base">{project.name}</h4>
-                  <p className="text-primary text-xs mt-1">{project.result}</p>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.8 }}
-          className="text-center mt-12"
-        >
-          <Link 
-            to="/projects"
-            className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
-          >
-            <span>View All Case Studies</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
-// ============================================
-// SECTION 5: SERVICES TABS (Coinband Style)
-// ============================================
-const ServicesTabs = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [activeTab, setActiveTab] = useState(0);
-
-  const services = [
+  const values = [
     {
-      id: "community",
-      label: "Community",
-      icon: MessageCircle,
-      image: communityGrowth,
-      title: "Community Management",
-      description: "Building engaged Korean communities that convert. 24/7 moderation, Discord/Telegram setup, event hosting, and ambassador programs.",
-      features: ["24/7 Korean moderation", "Discord/Telegram setup", "Event & AMA hosting", "Ambassador programs"]
+      icon: Globe,
+      title: "Local DNA",
+      subtitle: "Binance, KuCoin 출신 팀",
+      description: "한국 크립토 생태계를 직접 만든 사람들이 함께합니다."
     },
     {
-      id: "pr",
-      label: "PR & Media",
-      icon: Megaphone,
-      image: prMedia,
-      title: "PR & Media Relations",
-      description: "Strategic media placements across Korea's top crypto outlets. CoinDesk Korea, BlockMedia, and 50+ tier-1 publications.",
-      features: ["Tier-1 media placements", "Press release distribution", "Thought leadership", "Crisis management"]
+      icon: BarChart3,
+      title: "Data-First",
+      subtitle: "실시간 시장 분석",
+      description: "감이 아닌 데이터로 의사결정합니다."
     },
     {
-      id: "influencer",
-      label: "Influencer",
-      icon: Users,
-      image: kolNetwork,
-      title: "Influencer Marketing",
-      description: "Access to 500+ verified Korean crypto KOLs. Data-driven selection, performance tracking, and ROI optimization.",
-      features: ["500+ verified KOLs", "Performance analytics", "Content creation", "Campaign management"]
-    },
-    {
-      id: "seo",
-      label: "SEO & Ads",
-      icon: Search,
-      image: seoAds,
-      title: "SEO & Paid Ads",
-      description: "Dominate Korean search with Naver SEO and targeted paid campaigns across Korea's unique ad ecosystem.",
-      features: ["Naver SEO optimization", "Google Ads Korea", "Display advertising", "Retargeting campaigns"]
-    },
-    {
-      id: "events",
-      label: "Events",
-      icon: Calendar,
-      image: events,
-      title: "Offline Events",
-      description: "End-to-end event production in Korea. From intimate meetups to large-scale conferences and Web3 summits.",
-      features: ["Conference hosting", "Meetup organization", "VIP networking", "Venue partnerships"]
+      icon: Zap,
+      title: "Full-Stack",
+      subtitle: "리서치부터 스케일까지",
+      description: "모든 GTM 서비스를 원스톱으로 제공합니다."
     }
   ];
-
-  const activeService = services[activeTab];
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 bg-neutral-950">
       <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
+        {/* Main Message */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">What We Offer</span>
-          <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mt-4">
-            Full-Stack GTM Services
-          </h3>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            className="text-[clamp(2.5rem,8vw,5rem)] font-black text-white leading-tight"
+          >
+            하지만 우리와 함께한
+            <br />
+            <span className="text-primary">프로젝트는 다릅니다.</span>
+          </motion.h2>
         </motion.div>
 
-        {/* Tab Navigation */}
+        {/* ium Meaning */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-2 md:gap-3 mb-12"
+          className="text-center mb-20 py-16 border-y border-white/10"
         >
-          {services.map((service, i) => (
-            <button
-              key={service.id}
-              onClick={() => setActiveTab(i)}
-              className={`flex items-center gap-2 px-4 md:px-6 py-3 text-sm font-medium transition-all duration-300 ${
-                activeTab === i 
-                  ? 'bg-primary text-primary-foreground' 
-                  : 'bg-white/5 text-white/60 hover:bg-white/10 hover:text-white'
-              }`}
-            >
-              <service.icon className="w-4 h-4" />
-              <span className="hidden sm:inline">{service.label}</span>
-            </button>
-          ))}
+          <span className="text-[clamp(4rem,12vw,8rem)] font-black bg-gradient-to-r from-primary via-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
+            이음
+          </span>
+          <p className="text-white/40 text-lg mt-4 tracking-wider">
+            연결하다, 잇다
+          </p>
+          <p className="text-white/60 text-base md:text-lg max-w-2xl mx-auto mt-6 leading-relaxed">
+            ium Labs는 글로벌 프로젝트와 한국 시장을 잇는 다리가 됩니다.
+          </p>
         </motion.div>
 
-        {/* Tab Content */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="grid lg:grid-cols-2 gap-8 items-center"
-          >
-            {/* Image */}
-            <div className="relative aspect-[4/3] overflow-hidden">
-              <img
-                src={activeService.image}
-                alt={activeService.title}
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-transparent" />
-            </div>
-
-            {/* Content */}
-            <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary text-sm">
-                <activeService.icon className="w-4 h-4" />
-                <span>{activeService.label}</span>
+        {/* Value Props */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {values.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.3 + i * 0.1 }}
+              className="group p-8 bg-white/[0.02] border border-white/10 hover:border-primary/30 transition-all duration-300"
+            >
+              <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary/20 transition-colors">
+                <item.icon className="w-6 h-6 text-primary" />
               </div>
-
-              <h4 className="text-2xl md:text-4xl font-bold text-white">
-                {activeService.title}
-              </h4>
-
-              <p className="text-white/60 text-lg leading-relaxed">
-                {activeService.description}
-              </p>
-
-              <ul className="grid grid-cols-2 gap-3">
-                {activeService.features.map((feature) => (
-                  <li key={feature} className="flex items-center gap-2 text-white/80 text-sm">
-                    <ChevronRight className="w-4 h-4 text-primary" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                to={`/services/${activeService.id}`}
-                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
-              >
-                <span>Learn More</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+              
+              <h4 className="text-xl font-bold text-white mb-1">{item.title}</h4>
+              <p className="text-primary text-sm font-medium mb-4">{item.subtitle}</p>
+              <p className="text-white/50 text-sm leading-relaxed">{item.description}</p>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
 };
 
 // ============================================
-// SECTION 6: PROCESS (Numbered - Lunar Strategy Style)
+// SECTION 5: CASE STUDY SHOWCASE (Full Screen Slide)
 // ============================================
-const VisualProcess = () => {
+const CaseStudyShowcase = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [hoveredStep, setHoveredStep] = useState<number | null>(null);
+  const [activeCase, setActiveCase] = useState(0);
 
-  const steps = [
+  const cases = [
     {
-      number: "01",
-      week: "Week 1-2",
-      title: "Discovery",
-      image: discoveryResearch,
-      tasks: ["Market research", "Competitor analysis", "Audience mapping", "Regulatory review"]
+      name: "Story Protocol",
+      slug: "story-protocol",
+      challenge: "한국 진출 0에서 시작",
+      solution: "커뮤니티 + PR + 인플루언서 통합 캠페인",
+      result: "340% 거래량 상승",
+      resultSub: "한국 #1 커뮤니티",
+      image: storyBg,
+      logo: storyLogo
     },
     {
-      number: "02",
-      week: "Week 3-4",
-      title: "Strategy",
-      image: strategyPlanning,
-      tasks: ["GTM roadmap", "Channel selection", "Budget allocation", "KPI definition"]
+      name: "MANTRA",
+      slug: "mantra",
+      challenge: "RWA 인지도 부족",
+      solution: "타겟 미디어 + 프리미엄 이벤트",
+      result: "500% Volume Growth",
+      resultSub: "500K+ 커뮤니티",
+      image: mantraBg,
+      logo: mantraLogo
     },
     {
-      number: "03",
-      week: "Week 5-8",
-      title: "Launch",
-      image: executionGrowth,
-      tasks: ["PR campaigns", "Community building", "KOL activation", "Event execution"]
+      name: "peaq",
+      slug: "peaq",
+      challenge: "DePIN 시장 선점 필요",
+      solution: "선제적 미디어 + 파트너십 구축",
+      result: "First Mover",
+      resultSub: "한국 최초 DePIN L1",
+      image: peaqBg,
+      logo: peaqLogo
     },
     {
-      number: "04",
-      week: "Ongoing",
-      title: "Scale",
-      image: scaleSuccess,
-      tasks: ["Performance tracking", "Optimization", "Expansion planning", "Reporting"]
+      name: "Sahara AI",
+      slug: "sahara-ai",
+      challenge: "AI x Crypto 포지셔닝",
+      solution: "교육 콘텐츠 + 커뮤니티 빌딩",
+      result: "Community Built",
+      resultSub: "열성 팬층 구축",
+      image: saharaAiBg,
+      logo: saharaLogo
+    },
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveCase((prev) => (prev + 1) % cases.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [cases.length]);
+
+  const activeProject = cases[activeCase];
+
+  return (
+    <section ref={ref} className="relative min-h-screen bg-black overflow-hidden">
+      {/* Background Image */}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeCase}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 0.5, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8 }}
+          className="absolute inset-0"
+        >
+          <img
+            src={activeProject.image}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/60" />
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="relative z-10 h-full min-h-screen flex items-center">
+        <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 w-full py-24">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left: Case Content */}
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+            >
+              <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Case Study</span>
+              
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeCase}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -30 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <img 
+                    src={activeProject.logo} 
+                    alt={activeProject.name}
+                    className="h-10 w-auto brightness-0 invert mt-6 mb-8"
+                  />
+                  
+                  <div className="space-y-6 mb-8">
+                    <div>
+                      <span className="text-white/40 text-xs tracking-wider uppercase">Challenge</span>
+                      <p className="text-white/80 text-lg mt-1">{activeProject.challenge}</p>
+                    </div>
+                    <div>
+                      <span className="text-white/40 text-xs tracking-wider uppercase">Solution</span>
+                      <p className="text-white/80 text-lg mt-1">{activeProject.solution}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 mb-8">
+                    <TrendingUp className="w-6 h-6 text-green-400" />
+                    <div>
+                      <span className="text-green-400 font-bold text-2xl">{activeProject.result}</span>
+                      <span className="text-white/50 text-sm block">{activeProject.resultSub}</span>
+                    </div>
+                  </div>
+
+                  <Link 
+                    to={`/projects/${activeProject.slug}`}
+                    className="inline-flex items-center gap-2 text-primary hover:text-primary/80 transition-colors font-medium"
+                  >
+                    <span>케이스 스터디 보기</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+
+            {/* Right: Case Navigation */}
+            <div className="space-y-4">
+              {cases.map((caseItem, i) => (
+                <motion.button
+                  key={caseItem.slug}
+                  initial={{ opacity: 0, x: 50 }}
+                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.2 + i * 0.1 }}
+                  onClick={() => setActiveCase(i)}
+                  className={`w-full text-left p-6 border transition-all duration-300 ${
+                    activeCase === i
+                      ? 'bg-white/10 border-primary'
+                      : 'bg-white/[0.02] border-white/10 hover:bg-white/5'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-4">
+                      <img 
+                        src={caseItem.logo} 
+                        alt={caseItem.name}
+                        className={`h-6 w-auto transition-all ${
+                          activeCase === i ? 'opacity-100' : 'opacity-40 grayscale'
+                        }`}
+                      />
+                      <span className={`font-medium transition-colors ${
+                        activeCase === i ? 'text-white' : 'text-white/50'
+                      }`}>
+                        {caseItem.name}
+                      </span>
+                    </div>
+                    <span className={`text-sm ${
+                      activeCase === i ? 'text-primary' : 'text-white/30'
+                    }`}>
+                      {caseItem.result}
+                    </span>
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+          </div>
+
+          {/* View All Link */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.8 }}
+            className="text-center mt-16"
+          >
+            <Link 
+              to="/projects"
+              className="inline-flex items-center gap-2 text-sm text-white/50 hover:text-white transition-colors"
+            >
+              <span>View All Case Studies</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// SECTION 6: SERVICES ACCORDION (Korean Agency Style)
+// ============================================
+const ServicesAccordion = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [hoveredService, setHoveredService] = useState<string | null>("community");
+
+  const services = [
+    {
+      id: "community",
+      labelKo: "커뮤니티 관리",
+      labelEn: "Community Management",
+      icon: MessageCircle,
+      image: communityGrowth,
+      description: "24시간 한국어 모더레이션, Discord/Telegram 운영, AMA/이벤트 호스팅, 앰배서더 프로그램 운영",
+      features: ["24/7 한국어 모더레이션", "Discord/Telegram 셋업", "AMA & 이벤트", "앰배서더 프로그램"],
+      link: "/services/community"
+    },
+    {
+      id: "pr",
+      labelKo: "홍보 & 미디어",
+      labelEn: "PR & Media Relations",
+      icon: Megaphone,
+      image: prMedia,
+      description: "코인데스크 코리아, 블록미디어 등 50+ 미디어 네트워크를 통한 전략적 PR 캠페인",
+      features: ["Tier-1 미디어 배치", "프레스 릴리스", "Thought Leadership", "위기 관리"],
+      link: "/services/pr"
+    },
+    {
+      id: "influencer",
+      labelKo: "인플루언서 마케팅",
+      labelEn: "Influencer Marketing",
+      icon: Users,
+      image: kolNetwork,
+      description: "500+ 검증된 한국 크립토 KOL 네트워크, 데이터 기반 선정, 성과 추적, ROI 최적화",
+      features: ["500+ 검증 KOL", "성과 분석", "콘텐츠 제작", "캠페인 관리"],
+      link: "/services/influencer"
+    },
+    {
+      id: "seo",
+      labelKo: "검색최적화 & 광고",
+      labelEn: "SEO & Paid Ads",
+      icon: Search,
+      image: seoAds,
+      description: "네이버 SEO 최적화, 구글 코리아 광고, 디스플레이 광고, 리타게팅 캠페인",
+      features: ["네이버 SEO", "구글 Ads 코리아", "디스플레이 광고", "리타게팅"],
+      link: "/services/seo-ads"
+    },
+    {
+      id: "events",
+      labelKo: "오프라인 이벤트",
+      labelEn: "Offline Events",
+      icon: Calendar,
+      image: events,
+      description: "밋업부터 대규모 컨퍼런스까지, 한국 내 End-to-End 이벤트 프로덕션",
+      features: ["컨퍼런스 호스팅", "밋업 조직", "VIP 네트워킹", "베뉴 파트너십"],
+      link: "/services/offline-event"
     }
   ];
+
+  const hoveredServiceData = services.find(s => s.id === hoveredService) || services[0];
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 bg-black">
@@ -788,75 +863,85 @@ const VisualProcess = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="text-center mb-16"
         >
-          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Our Process</span>
+          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">What We Offer</span>
           <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mt-4">
-            How we get you there.
+            Full-Stack GTM 서비스
           </h3>
         </motion.div>
 
-        {/* Process Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {steps.map((step, i) => (
-            <motion.div
-              key={step.number}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 + i * 0.1 }}
-              className="group relative aspect-[3/4] overflow-hidden cursor-pointer"
-              onMouseEnter={() => setHoveredStep(i)}
-              onMouseLeave={() => setHoveredStep(null)}
-            >
-              <img
-                src={step.image}
-                alt={step.title}
-                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ${
-                  hoveredStep === i ? 'scale-110' : 'scale-100'
-                }`}
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* Left: Accordion */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.2 }}
+          >
+            <Accordion type="single" collapsible className="space-y-2" defaultValue="community">
+              {services.map((service) => (
+                <AccordionItem 
+                  key={service.id} 
+                  value={service.id}
+                  className="border border-white/10 bg-white/[0.02] data-[state=open]:bg-white/[0.05] data-[state=open]:border-primary/30"
+                  onMouseEnter={() => setHoveredService(service.id)}
+                >
+                  <AccordionTrigger className="px-6 py-5 hover:no-underline">
+                    <div className="flex items-center gap-4 text-left">
+                      <service.icon className="w-5 h-5 text-primary flex-shrink-0" />
+                      <div>
+                        <span className="text-white font-medium block">{service.labelKo}</span>
+                        <span className="text-white/40 text-xs">{service.labelEn}</span>
+                      </div>
+                    </div>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6 pb-6">
+                    <p className="text-white/60 text-sm mb-4 leading-relaxed">
+                      {service.description}
+                    </p>
+                    <ul className="grid grid-cols-2 gap-2 mb-4">
+                      {service.features.map((feature) => (
+                        <li key={feature} className="flex items-center gap-2 text-white/70 text-xs">
+                          <Check className="w-3 h-3 text-primary" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      to={service.link}
+                      className="inline-flex items-center gap-1 text-primary text-sm hover:text-primary/80 transition-colors"
+                    >
+                      <span>자세히 보기</span>
+                      <ArrowRight className="w-3 h-3" />
+                    </Link>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
+
+          {/* Right: Hover Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.3 }}
+            className="relative aspect-[4/3] overflow-hidden sticky top-24 hidden lg:block"
+          >
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={hoveredService}
+                src={hoveredServiceData.image}
+                alt={hoveredServiceData.labelKo}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="w-full h-full object-cover"
               />
-              
-              <div className={`absolute inset-0 transition-all duration-500 ${
-                hoveredStep === i 
-                  ? 'bg-primary/80' 
-                  : 'bg-gradient-to-t from-black via-black/60 to-transparent'
-              }`} />
-
-              <div className="relative z-10 h-full flex flex-col justify-between p-6">
-                {/* Top - Number Badge */}
-                <div className="flex items-center justify-between">
-                  <span className="text-4xl md:text-5xl font-black text-white/20">
-                    [{step.number}]
-                  </span>
-                  <span className="text-xs font-medium tracking-wider uppercase px-3 py-1 bg-white/10 backdrop-blur-sm text-white/80">
-                    {step.week}
-                  </span>
-                </div>
-
-                {/* Bottom */}
-                <div>
-                  <h4 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                    {step.title}
-                  </h4>
-                  
-                  <motion.ul
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ 
-                      opacity: hoveredStep === i ? 1 : 0,
-                      height: hoveredStep === i ? 'auto' : 0
-                    }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-2 overflow-hidden"
-                  >
-                    {step.tasks.map((task, j) => (
-                      <li key={j} className="text-white/90 text-sm flex items-center gap-2">
-                        <ChevronRight className="w-3 h-3" />
-                        {task}
-                      </li>
-                    ))}
-                  </motion.ul>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+            </AnimatePresence>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+            <div className="absolute bottom-6 left-6">
+              <span className="text-white font-medium">{hoveredServiceData.labelKo}</span>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -864,7 +949,125 @@ const VisualProcess = () => {
 };
 
 // ============================================
-// SECTION 7: WHY US + AWARDS (Coinband Style)
+// SECTION 7: PROCESS TIMELINE (Horizontal Scroll)
+// ============================================
+const ProcessTimeline = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  const steps = [
+    {
+      number: "01",
+      week: "Week 1-2",
+      title: "Discovery",
+      titleKo: "리서치",
+      image: discoveryResearch,
+      deliverables: ["시장 리서치 리포트", "경쟁사 분석", "타겟 오디언스 맵핑", "규제 검토"]
+    },
+    {
+      number: "02",
+      week: "Week 3-4",
+      title: "Strategy",
+      titleKo: "전략",
+      image: strategyPlanning,
+      deliverables: ["GTM 로드맵", "채널 전략", "예산 배분", "KPI 설정"]
+    },
+    {
+      number: "03",
+      week: "Week 5-8",
+      title: "Launch",
+      titleKo: "런칭",
+      image: executionGrowth,
+      deliverables: ["PR 캠페인", "커뮤니티 빌딩", "KOL 활성화", "이벤트 실행"]
+    },
+    {
+      number: "04",
+      week: "Ongoing",
+      title: "Scale",
+      titleKo: "스케일",
+      image: scaleSuccess,
+      deliverables: ["성과 트래킹", "최적화", "확장 기획", "정기 리포팅"]
+    }
+  ];
+
+  return (
+    <section ref={ref} className="relative py-24 md:py-32 bg-neutral-950 overflow-hidden">
+      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="text-center mb-16"
+        >
+          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Our Process</span>
+          <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mt-4">
+            어떻게 진행되나요?
+          </h3>
+        </motion.div>
+
+        {/* Horizontal Timeline */}
+        <div className="relative">
+          {/* Timeline Line */}
+          <div className="absolute top-1/2 left-0 right-0 h-px bg-white/10 hidden md:block" />
+
+          <div className="grid md:grid-cols-4 gap-6">
+            {steps.map((step, i) => (
+              <motion.div
+                key={step.number}
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.2 + i * 0.15 }}
+                className="relative group"
+              >
+                {/* Timeline Dot */}
+                <div className="hidden md:flex absolute -top-3 left-1/2 -translate-x-1/2 w-6 h-6 rounded-full bg-neutral-950 border-2 border-white/20 group-hover:border-primary transition-colors z-10 items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-primary" />
+                </div>
+
+                {/* Card */}
+                <div className="bg-white/[0.02] border border-white/10 p-6 mt-8 group-hover:border-primary/30 transition-all duration-300">
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-3xl font-black text-white/20">[{step.number}]</span>
+                    <span className="text-xs text-primary font-medium px-2 py-1 bg-primary/10">
+                      {step.week}
+                    </span>
+                  </div>
+
+                  {/* Image */}
+                  <div className="relative aspect-video overflow-hidden mb-4">
+                    <img
+                      src={step.image}
+                      alt={step.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  </div>
+
+                  {/* Title */}
+                  <h4 className="text-xl font-bold text-white mb-1">{step.title}</h4>
+                  <p className="text-white/40 text-sm mb-4">{step.titleKo}</p>
+
+                  {/* Deliverables */}
+                  <ul className="space-y-2">
+                    {step.deliverables.map((item, j) => (
+                      <li key={j} className="flex items-center gap-2 text-white/60 text-xs">
+                        <ChevronRight className="w-3 h-3 text-primary" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// SECTION 8: WHY US (강화)
 // ============================================
 const WhyUs = () => {
   const ref = useRef(null);
@@ -874,30 +1077,27 @@ const WhyUs = () => {
     {
       icon: Globe,
       title: "Local DNA, Global Network",
-      description: "Founded by former Binance & KuCoin executives. We don't just understand Korea—we built its crypto ecosystem.",
+      titleKo: "현지 DNA, 글로벌 네트워크",
+      description: "Binance & KuCoin 출신 경영진. 한국 크립토 생태계를 직접 만든 팀입니다.",
       highlight: "Binance & KuCoin Alumni",
       image: officeImage
     },
     {
       icon: Database,
       title: "Data-First Approach",
-      description: "Proprietary analytics dashboard tracking real-time market sentiment, competitor moves, and community health.",
+      titleKo: "데이터 기반 접근",
+      description: "자체 개발 분석 대시보드로 실시간 시장 센티먼트, 경쟁사 동향, 커뮤니티 건강도 추적.",
       highlight: "Proprietary Analytics",
       image: dashboardMockup
     },
     {
-      icon: Users,
+      icon: Shield,
       title: "End-to-End Execution",
-      description: "From research to launch to scale. One team. Complete accountability. No finger-pointing between agencies.",
+      titleKo: "원스톱 실행",
+      description: "리서치부터 런칭, 스케일까지. 하나의 팀, 완전한 책임. 에이전시 간 핑퐁 없음.",
       highlight: "Full-Stack Team",
       image: seoulMetroBillboard
     }
-  ];
-
-  const awards = [
-    { name: "Forbes Korea 30 Under 30", year: "2024" },
-    { name: "Top Web3 Agency", year: "Clutch 2024" },
-    { name: "Korea Marketing Excellence", year: "2025" },
   ];
 
   return (
@@ -910,88 +1110,58 @@ const WhyUs = () => {
         >
           <span className="text-[10px] text-black/40 tracking-[0.4em] uppercase">Why Ium Labs</span>
           <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-black mt-4">
-            What makes us different.
+            왜 이음랩스인가요?
           </h3>
         </motion.div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
+        <div className="grid md:grid-cols-3 gap-6">
           {differentiators.map((item, i) => (
             <motion.div
               key={item.title}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 + i * 0.15 }}
-              className="group relative overflow-hidden bg-neutral-100"
+              transition={{ delay: 0.2 + i * 0.1 }}
+              className="group relative overflow-hidden"
             >
+              {/* Image */}
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
                   src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
                 
-                <div className="absolute top-4 left-4 w-12 h-12 flex items-center justify-center bg-primary">
-                  <item.icon className="w-6 h-6 text-white" />
+                {/* Content Overlay */}
+                <div className="absolute inset-0 p-6 flex flex-col justify-end">
+                  <span className="text-xs text-primary font-medium mb-2">{item.highlight}</span>
+                  <h4 className="text-xl font-bold text-white mb-1">{item.title}</h4>
+                  <p className="text-white/60 text-xs mb-2">{item.titleKo}</p>
+                  <p className="text-white/70 text-sm leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {item.description}
+                  </p>
                 </div>
-              </div>
-
-              <div className="p-6 md:p-8">
-                <h4 className="text-xl md:text-2xl font-bold text-black mb-3">
-                  {item.title}
-                </h4>
-                <p className="text-neutral-600 text-sm leading-relaxed mb-4">
-                  {item.description}
-                </p>
-                <span className="inline-block text-xs font-medium text-primary px-3 py-1 bg-primary/10">
-                  {item.highlight}
-                </span>
               </div>
             </motion.div>
           ))}
         </div>
-
-        {/* Awards Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.6 }}
-          className="text-center pt-12 border-t border-neutral-200"
-        >
-          <span className="text-black/40 text-sm">Recognized Excellence</span>
-          
-          <div className="flex flex-wrap justify-center gap-6 md:gap-12 mt-8">
-            {awards.map((award) => (
-              <div 
-                key={award.name}
-                className="flex items-center gap-3 px-6 py-4 bg-neutral-100 border border-neutral-200"
-              >
-                <Award className="w-6 h-6 text-primary" />
-                <div className="text-left">
-                  <p className="text-black font-semibold text-sm">{award.name}</p>
-                  <p className="text-black/40 text-xs">{award.year}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );
 };
 
 // ============================================
-// SECTION 8: TESTIMONIAL CAROUSEL (NoGood Style)
+// SECTION 9: GALLERY + TESTIMONIALS
 // ============================================
-const TestimonialCarousel = () => {
+const GalleryTestimonials = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const testimonials = [
     {
-      quote: "ium Labs completely transformed our Korean market presence. Their deep understanding of local culture and data-driven approach delivered results beyond our expectations.",
+      quote: "ium Labs made our Korea launch seamless. They understood our vision from day one and delivered beyond expectations.",
       author: "Sarah Kim",
       role: "Head of Marketing",
       company: "Story Protocol",
@@ -999,7 +1169,7 @@ const TestimonialCarousel = () => {
       result: "340% Volume Growth"
     },
     {
-      quote: "The team's execution was flawless. From community building to media relations, they handled everything with precision and professionalism.",
+      quote: "The team's execution was flawless. From community building to media relations, they handled everything with precision.",
       author: "Michael Chen",
       role: "CEO",
       company: "DeFi Protocol",
@@ -1007,7 +1177,7 @@ const TestimonialCarousel = () => {
       result: "500K+ Community"
     },
     {
-      quote: "Working with ium Labs gave us a significant first-mover advantage in the Korean market. Their local expertise is unmatched.",
+      quote: "Working with ium Labs gave us a significant first-mover advantage in the Korean market.",
       author: "David Park",
       role: "BD Lead",
       company: "L1 Blockchain",
@@ -1016,7 +1186,7 @@ const TestimonialCarousel = () => {
     }
   ];
 
-  const campaignImages = [
+  const galleryImages = [
     { src: bnbEvent, title: "BNB Chain Event" },
     { src: storyOriginSummit, title: "Story Origin Summit" },
     { src: peaqSummit, title: "peaq Summit" },
@@ -1024,15 +1194,6 @@ const TestimonialCarousel = () => {
     { src: openledgerEvent, title: "OpenLedger Event" },
     { src: kucoinCampaign, title: "KuCoin Campaign" },
   ];
-
-  const [gallerySlide, setGallerySlide] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setGallerySlide((prev) => (prev + 1) % campaignImages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [campaignImages.length]);
 
   return (
     <section ref={ref} className="relative py-24 md:py-32 bg-neutral-950 overflow-hidden">
@@ -1044,34 +1205,17 @@ const TestimonialCarousel = () => {
         >
           <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">Testimonials</span>
           <h3 className="text-3xl md:text-5xl font-black text-white mt-4">
-            Don't take it from us.
-            <br />
-            <span className="text-white/40">Hear from our clients.</span>
+            클라이언트가 말합니다.
           </h3>
         </motion.div>
 
-        {/* Testimonial Cards */}
+        {/* Testimonial Slider */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.2 }}
           className="relative max-w-4xl mx-auto mb-16"
         >
-          {/* Navigation Arrows */}
-          <button 
-            onClick={() => setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-white/10 text-white transition-colors z-10"
-          >
-            <ArrowRight className="w-5 h-5 rotate-180" />
-          </button>
-          
-          <button 
-            onClick={() => setCurrentSlide((prev) => (prev + 1) % testimonials.length)}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-10 h-10 flex items-center justify-center bg-white/5 hover:bg-white/10 text-white transition-colors z-10"
-          >
-            <ArrowRight className="w-5 h-5" />
-          </button>
-
           <AnimatePresence mode="wait">
             <motion.div
               key={currentSlide}
@@ -1081,39 +1225,24 @@ const TestimonialCarousel = () => {
               transition={{ duration: 0.3 }}
               className="p-8 md:p-12 bg-gradient-to-br from-white/5 to-white/[0.02] border border-white/10"
             >
-              <div className="flex flex-col md:flex-row gap-8">
-                {/* Author Photo Placeholder */}
-                <div className="flex-shrink-0">
-                  <div className="w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-primary/30 to-primary/10 flex items-center justify-center mx-auto md:mx-0">
-                    <span className="text-3xl md:text-4xl font-bold text-primary">
-                      {testimonials[currentSlide].author.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
+              <img 
+                src={testimonials[currentSlide].logo} 
+                alt={testimonials[currentSlide].company}
+                className="h-6 w-auto brightness-0 invert opacity-60 mb-6"
+              />
+
+              <blockquote className="text-lg md:text-xl text-white/90 leading-relaxed mb-6">
+                "{testimonials[currentSlide].quote}"
+              </blockquote>
+
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-white/10">
+                <div>
+                  <p className="text-white font-semibold">{testimonials[currentSlide].author}</p>
+                  <p className="text-white/50 text-sm">{testimonials[currentSlide].role}, {testimonials[currentSlide].company}</p>
                 </div>
-
-                {/* Content */}
-                <div className="flex-1">
-                  <img 
-                    src={testimonials[currentSlide].logo} 
-                    alt={testimonials[currentSlide].company}
-                    className="h-6 w-auto brightness-0 invert opacity-60 mb-6"
-                  />
-
-                  <blockquote className="text-lg md:text-xl text-white/90 leading-relaxed mb-6">
-                    "{testimonials[currentSlide].quote}"
-                  </blockquote>
-
-                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-6 border-t border-white/10">
-                    <div>
-                      <p className="text-white font-semibold">{testimonials[currentSlide].author}</p>
-                      <p className="text-white/50 text-sm">{testimonials[currentSlide].role}, {testimonials[currentSlide].company}</p>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <TrendingUp className="w-4 h-4 text-green-400" />
-                      <span className="text-green-400 font-semibold text-sm">{testimonials[currentSlide].result}</span>
-                    </div>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="w-4 h-4 text-green-400" />
+                  <span className="text-green-400 font-semibold text-sm">{testimonials[currentSlide].result}</span>
                 </div>
               </div>
             </motion.div>
@@ -1133,67 +1262,31 @@ const TestimonialCarousel = () => {
           </div>
         </motion.div>
 
-        {/* Campaign Gallery */}
+        {/* Gallery Grid */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.4 }}
-          className="relative aspect-[21/9] overflow-hidden"
+          className="grid grid-cols-2 md:grid-cols-3 gap-4"
         >
-          <AnimatePresence mode="wait">
+          {galleryImages.map((img, i) => (
             <motion.div
-              key={gallerySlide}
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.5 }}
-              className="absolute inset-0"
+              key={img.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.5 + i * 0.1 }}
+              className="relative aspect-[4/3] overflow-hidden group"
             >
               <img
-                src={campaignImages[gallerySlide].src}
-                alt={campaignImages[gallerySlide].title}
-                className="w-full h-full object-cover"
+                src={img.src}
+                alt={img.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
-              
-              <div className="absolute bottom-6 left-6">
-                <span className="text-white/60 text-sm">{campaignImages[gallerySlide].title}</span>
+              <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <span className="text-white text-sm font-medium">{img.title}</span>
               </div>
             </motion.div>
-          </AnimatePresence>
-
-          <div className="absolute bottom-6 right-6 flex gap-2">
-            {campaignImages.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setGallerySlide(i)}
-                className={`w-8 h-1 transition-all duration-300 ${
-                  gallerySlide === i ? 'bg-primary' : 'bg-white/30 hover:bg-white/50'
-                }`}
-              />
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Media Logos */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.6 }}
-          className="text-center mt-16"
-        >
-          <span className="text-white/30 text-sm">Featured in</span>
-          
-          <div className="mt-8 flex items-center justify-center gap-12 md:gap-16">
-            {[coindeskLogo, cointelegraphLogo, blockmediaLogo].map((logo, i) => (
-              <img
-                key={i}
-                src={logo}
-                alt="Media"
-                className="h-6 md:h-8 w-auto object-contain opacity-30 hover:opacity-60 transition-opacity grayscale"
-              />
-            ))}
-          </div>
+          ))}
         </motion.div>
       </div>
     </section>
@@ -1201,9 +1294,9 @@ const TestimonialCarousel = () => {
 };
 
 // ============================================
-// SECTION 9: CTA WITH TEAM PROFILES (Lunar Strategy Style)
+// SECTION 10: CTA (Korean Style)
 // ============================================
-const CTAWithTeam = () => {
+const CTASection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isHovered, setIsHovered] = useState(false);
@@ -1255,22 +1348,34 @@ const CTAWithTeam = () => {
             transition={{ duration: 0.8 }}
             className="text-[clamp(2.5rem,8vw,5rem)] font-black text-white leading-tight"
           >
-            Ready to crack <span className="text-primary">Korea?</span>
+            한국 시장,
+            <br />
+            <span className={`transition-colors duration-500 ${isHovered ? 'text-white' : 'text-primary'}`}>
+              함께 열겠습니다.
+            </span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.3 }}
-            className="text-white/60 text-lg md:text-xl mt-6 mb-12"
+            className="text-white/60 text-base md:text-lg mt-6 mb-4"
           >
-            가장 확실한 파트너와 시작하세요.
+            Book a free 30-min strategy call.
+          </motion.p>
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 0.4 }}
+            className="text-white/40 text-sm mb-12"
+          >
+            No commitment. Just clarity.
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.4 }}
+            transition={{ delay: 0.5 }}
           >
             <Link
               to="/contact"
@@ -1278,7 +1383,7 @@ const CTAWithTeam = () => {
               onMouseEnter={() => setIsHovered(true)}
               onMouseLeave={() => setIsHovered(false)}
             >
-              <span>Book a Strategy Call</span>
+              <span>무료 상담 예약하기</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-2 transition-transform" />
             </Link>
           </motion.div>
@@ -1327,8 +1432,8 @@ const CTAWithTeam = () => {
 // ============================================
 const GTMService = () => {
   usePageMeta(
-    "Data-Driven Korea GTM Strategy | Ium Labs",
-    "We've helped 30+ global Web3 projects crack Korea's $50B crypto market. Data-driven GTM strategy powered by former Binance & KuCoin executives."
+    "한국 GTM 전략 | Korea Go-To-Market | Ium Labs",
+    "30+ 글로벌 Web3 프로젝트의 한국 시장 진출을 성공시켰습니다. 데이터 기반 GTM 전략, Binance & KuCoin 출신 팀."
   );
 
   return (
@@ -1344,13 +1449,14 @@ const GTMService = () => {
       <main>
         <Hero />
         <SocialProofBar />
-        <ProblemTestimonial />
-        <ResultsGrid />
-        <ServicesTabs />
-        <VisualProcess />
+        <ProblemStatement />
+        <SolutionBridge />
+        <CaseStudyShowcase />
+        <ServicesAccordion />
+        <ProcessTimeline />
         <WhyUs />
-        <TestimonialCarousel />
-        <CTAWithTeam />
+        <GalleryTestimonials />
+        <CTASection />
       </main>
       <Footer />
     </>
