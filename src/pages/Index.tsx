@@ -260,9 +260,12 @@ const Index = () => {
       <section className="bg-surface-base" id="services">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-center gap-3 px-4 md:px-10 pt-6 pb-2">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
-              <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest">Services</span>
+            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-center gap-4 md:gap-6">
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">02</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Services</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">What We Do</span>
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
@@ -275,11 +278,16 @@ const Index = () => {
       <section className="bg-surface-base" id="process">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-center gap-3 px-4 md:px-10 pt-6 pb-2">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
-              <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest">Process</span>
+            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-center gap-4 md:gap-6">
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">03</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
             </div>
           </AnimatedSection>
+          
+          {/* Featured Billboard Image with Process Overlay */}
           <AnimatedSection delay={100}>
             <ProcessBillboardOverlay />
           </AnimatedSection>
@@ -290,9 +298,12 @@ const Index = () => {
       <section className="bg-surface-base" id="cases">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-center gap-3 px-4 md:px-10 pt-6 pb-2">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
-              <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest">Cases</span>
+            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-center gap-4 md:gap-6">
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">04</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Work</span>
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
@@ -306,9 +317,12 @@ const Index = () => {
       <section className="bg-surface-base" id="insights">
         <div className="border-t border-white/10">
           <AnimatedSection>
-            <div className="flex items-center gap-3 px-4 md:px-10 pt-6 pb-2">
-              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
-              <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest">Insights</span>
+            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-center gap-4 md:gap-6">
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">05</span>
+                <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>
+              </div>
+              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Research</span>
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
