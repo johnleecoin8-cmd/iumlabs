@@ -1,5 +1,6 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { motion, useInView } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -310,6 +311,136 @@ const CategoryFilter = ({
   );
 };
 
+// ============================================
+// FEATURED PROJECTS - HORIZONTAL SCROLL GALLERY
+// ============================================
+interface FeaturedProject {
+  name: string;
+  slug: string;
+  category: string;
+  result: string;
+  bgImage: string;
+}
+
+const FeaturedProjectsGallery = ({ projects }: { projects: FeaturedProject[] }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  return (
+    <section ref={ref} className="relative bg-black py-16 overflow-hidden">
+      {/* Section Header */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        className="px-6 md:px-10 mb-8"
+      >
+        <div className="flex items-baseline justify-between">
+          <div className="flex items-baseline gap-6 md:gap-10">
+            <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">FEATURED</span>
+            <h2 className="text-2xl md:text-3xl font-black text-white tracking-tight">
+              SELECTED W<span className="text-primary">⬡</span>RK
+            </h2>
+          </div>
+          <span className="text-xs text-white/40 tracking-wider hidden sm:flex items-center gap-2">
+            ← Scroll →
+          </span>
+        </div>
+      </motion.div>
+
+      {/* Horizontal Scroll Container */}
+      <motion.div 
+        ref={scrollRef}
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ delay: 0.2 }}
+        className="overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing"
+        style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+      >
+        <div className="flex gap-4 px-6 md:px-10 pb-4" style={{ width: 'max-content' }}>
+          {projects.map((project, i) => (
+            <motion.div
+              key={project.slug}
+              initial={{ opacity: 0, x: 50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 0.1 + i * 0.05 }}
+              className="group"
+            >
+              <Link
+                to={`/projects/${project.slug}`}
+                className="relative block w-[280px] md:w-[360px] aspect-[4/5] overflow-hidden rounded-lg"
+              >
+                {/* Background Image */}
+                <img
+                  src={project.bgImage}
+                  alt={project.name}
+                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+
+                {/* Content */}
+                <div className="absolute inset-0 flex flex-col justify-end p-5">
+                  {/* Category */}
+                  <span className="text-white/50 text-[10px] tracking-[0.3em] uppercase mb-2">
+                    {project.category}
+                  </span>
+                  
+                  {/* Name */}
+                  <h3 className="text-white font-bold text-lg md:text-xl mb-2 group-hover:text-primary transition-colors">
+                    {project.name}
+                  </h3>
+                  
+                  {/* Result */}
+                  <p className="text-emerald-400 font-bold text-sm mb-3">
+                    {project.result}
+                  </p>
+                  
+                  {/* View Link */}
+                  <div className="flex items-center gap-2 text-white/60 group-hover:text-white text-xs transition-colors">
+                    <span>View Project</span>
+                    <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+
+                {/* Border */}
+                <div className="absolute inset-0 border border-white/10 rounded-lg group-hover:border-white/20 transition-colors pointer-events-none" />
+              </Link>
+            </motion.div>
+          ))}
+          
+          {/* View All Card */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.1 + projects.length * 0.05 }}
+          >
+            <Link
+              to="#cases"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('cases')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="relative flex items-center justify-center w-[200px] md:w-[240px] aspect-[4/5] rounded-lg border border-white/20 hover:border-primary/50 hover:bg-white/5 transition-all group"
+            >
+              <div className="text-center">
+                <ArrowRight className="w-8 h-8 text-white/40 group-hover:text-primary mx-auto mb-3 group-hover:translate-x-1 transition-all" />
+                <span className="text-white/60 group-hover:text-white text-sm font-medium transition-colors">
+                  View All Projects
+                </span>
+              </div>
+            </Link>
+          </motion.div>
+        </div>
+      </motion.div>
+
+      {/* Scroll Hint Gradient */}
+      <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-black to-transparent pointer-events-none" />
+    </section>
+  );
+};
+
 const Projects = () => {
   usePageMeta(
     "Case Studies",
@@ -510,6 +641,9 @@ const Projects = () => {
           </div>
         </div>
       </section>
+      
+      {/* Featured Projects Section - Horizontal Scroll Gallery */}
+      <FeaturedProjectsGallery projects={cases.slice(0, 8)} />
       
       {/* Gallery Section - 02 */}
       <section className="scroll-reveal bg-[#0A0A0A]" id="gallery">
