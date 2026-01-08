@@ -259,6 +259,12 @@ const Index = () => {
       {/* Services - 02 */}
       <section className="bg-surface-base" id="services">
         <div className="border-t border-white/10">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 px-4 md:px-10 pt-6 pb-2">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+              <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest">Services</span>
+            </div>
+          </AnimatedSection>
           <AnimatedSection delay={100}>
             <ServicesSection />
           </AnimatedSection>
@@ -268,8 +274,12 @@ const Index = () => {
       {/* Process - 03 */}
       <section className="bg-surface-base" id="process">
         <div className="border-t border-white/10">
-          
-          {/* Featured Billboard Image with Process Overlay */}
+          <AnimatedSection>
+            <div className="flex items-center gap-3 px-4 md:px-10 pt-6 pb-2">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">03</span>
+              <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest">Process</span>
+            </div>
+          </AnimatedSection>
           <AnimatedSection delay={100}>
             <ProcessBillboardOverlay />
           </AnimatedSection>
@@ -279,6 +289,12 @@ const Index = () => {
       {/* Cases - 04 */}
       <section className="bg-surface-base" id="cases">
         <div className="border-t border-white/10">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 px-4 md:px-10 pt-6 pb-2">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">04</span>
+              <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest">Cases</span>
+            </div>
+          </AnimatedSection>
           <AnimatedSection delay={100}>
             <CasesSection />
           </AnimatedSection>
@@ -289,6 +305,12 @@ const Index = () => {
       {/* Insights - 05 */}
       <section className="bg-surface-base" id="insights">
         <div className="border-t border-white/10">
+          <AnimatedSection>
+            <div className="flex items-center gap-3 px-4 md:px-10 pt-6 pb-2">
+              <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">05</span>
+              <span className="text-[10px] md:text-xs text-white/40 uppercase tracking-widest">Insights</span>
+            </div>
+          </AnimatedSection>
           <AnimatedSection delay={100}>
             <InsightsSection />
           </AnimatedSection>
