@@ -25,7 +25,7 @@ const campaignImages = [{
 import ServicesSection from "@/components/ServicesSection";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
 import CasesSection from "@/components/CasesSection";
-import FilmstripGallerySection from "@/components/FilmstripGallerySection";
+
 import SelectedWorkShowcase from "@/components/SelectedWorkShowcase";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import InsightsSection from "@/components/InsightsSection";
@@ -316,31 +316,13 @@ const Index = () => {
       </section>
       
       
-      {/* Gallery - 05 */}
-      <section className="bg-surface-base" id="gallery">
-        <div className="border-t border-white/10">
-          <AnimatedSection>
-            <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">05</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Gallery</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Campaign Archive</span>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection delay={100}>
-            <FilmstripGallerySection />
-          </AnimatedSection>
-        </div>
-      </section>
-      
-      {/* Insights - 06 */}
+      {/* Insights - 05 */}
       <section className="bg-surface-base" id="insights">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">06</span>
+                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest">05</span>
                 <h2 className="text-lg md:text-xl font-medium text-white">Insights</h2>
               </div>
               <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Research</span>
@@ -352,10 +334,10 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Contact - 07 */}
+      {/* Contact - 06 */}
       <section className="bg-surface-base" id="contact">
         <AnimatedSection>
-          <ContactFormSection sectionNumber="07" />
+          <ContactFormSection sectionNumber="06" />
         </AnimatedSection>
       </section>
       
