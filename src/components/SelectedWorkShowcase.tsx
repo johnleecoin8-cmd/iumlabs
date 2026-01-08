@@ -128,15 +128,15 @@ const SelectedWorkShowcase = () => {
             delay: i * 0.1
           }}>
                 <Link to={`/projects/${project.slug}`} className="group block py-3 md:py-4 border-b border-white/10" onMouseEnter={() => setActiveIndex(i)}>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between w-full">
                     <span className={`text-xl md:text-3xl lg:text-4xl font-black transition-colors duration-300 ${activeIndex === i ? 'text-white' : 'text-white/30'}`}>
                       {project.name}
                     </span>
-                    <div className="flex items-center gap-3 md:gap-4">
-                      <span className={`hidden md:block text-xs transition-colors duration-300 ${activeIndex === i ? 'text-violet-400' : 'text-white/20'}`}>
+                    <div className="flex items-center gap-3 md:gap-4 ml-auto">
+                      <span className={`hidden md:block text-xs text-right min-w-[100px] transition-colors duration-300 ${activeIndex === i ? 'text-violet-400' : 'text-white/20'}`}>
                         {project.category}
                       </span>
-                      <motion.svg className={`w-4 h-4 md:w-5 md:h-5 transition-all duration-300 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-4'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <motion.svg className={`w-4 h-4 md:w-5 md:h-5 flex-shrink-0 transition-all duration-300 ${activeIndex === i ? 'text-white opacity-100 translate-x-0' : 'text-white/20 opacity-0 -translate-x-4'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </motion.svg>
                     </div>
