@@ -159,7 +159,7 @@ const SelectedWorkShowcase = () => {
         } : {}} transition={{
           duration: 0.8,
           delay: 0.3
-        }} className="max-w-md text-right bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 xl:p-10">
+        }} className="max-w-xl text-right bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl p-8 xl:p-10">
             <h3 className="text-2xl xl:text-3xl font-bold text-white mb-4">
               Real results, not just promises.
             </h3>
