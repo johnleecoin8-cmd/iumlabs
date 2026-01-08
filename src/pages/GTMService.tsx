@@ -7,15 +7,12 @@ import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Mail, Globe, Database, Users, ChevronRight, MessageCircle, TrendingUp, Megaphone, Calendar, Search, Check, X, Zap, Shield, BarChart3, Target } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 
-// New Story-Driven Components
-import ProjectVideoGrid from '@/components/gtm/ProjectVideoGrid';
+// Top-Tier Agency Style Components
+import EnhancedHero from '@/components/gtm/EnhancedHero';
+import FullscreenCaseSlider from '@/components/gtm/FullscreenCaseSlider';
+import ServicesGridCards from '@/components/gtm/ServicesGridCards';
+import TestimonialsCarousel from '@/components/gtm/TestimonialsCarousel';
 import CampaignWall from '@/components/gtm/CampaignWall';
 import MasonryGallery from '@/components/gtm/MasonryGallery';
 
@@ -836,161 +833,9 @@ const CaseStudyShowcase = () => {
   );
 };
 
-// ============================================
-// SECTION 6: SERVICES ACCORDION (Korean Agency Style)
-// ============================================
-const ServicesAccordion = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [hoveredService, setHoveredService] = useState<string | null>("community");
 
-  const services = [
-    {
-      id: "community",
-      labelKo: "커뮤니티 관리",
-      labelEn: "Community Management",
-      icon: MessageCircle,
-      image: communityGrowth,
-      description: "24시간 한국어 모더레이션, Discord/Telegram 운영, AMA/이벤트 호스팅, 앰배서더 프로그램 운영",
-      features: ["24/7 한국어 모더레이션", "Discord/Telegram 셋업", "AMA & 이벤트", "앰배서더 프로그램"],
-      link: "/services/community"
-    },
-    {
-      id: "pr",
-      labelKo: "홍보 & 미디어",
-      labelEn: "PR & Media Relations",
-      icon: Megaphone,
-      image: prMedia,
-      description: "코인데스크 코리아, 블록미디어 등 50+ 미디어 네트워크를 통한 전략적 PR 캠페인",
-      features: ["Tier-1 미디어 배치", "프레스 릴리스", "Thought Leadership", "위기 관리"],
-      link: "/services/pr"
-    },
-    {
-      id: "influencer",
-      labelKo: "인플루언서 마케팅",
-      labelEn: "Influencer Marketing",
-      icon: Users,
-      image: kolNetwork,
-      description: "500+ 검증된 한국 크립토 KOL 네트워크, 데이터 기반 선정, 성과 추적, ROI 최적화",
-      features: ["500+ 검증 KOL", "성과 분석", "콘텐츠 제작", "캠페인 관리"],
-      link: "/services/influencer"
-    },
-    {
-      id: "seo",
-      labelKo: "검색최적화 & 광고",
-      labelEn: "SEO & Paid Ads",
-      icon: Search,
-      image: seoAds,
-      description: "네이버 SEO 최적화, 구글 코리아 광고, 디스플레이 광고, 리타게팅 캠페인",
-      features: ["네이버 SEO", "구글 Ads 코리아", "디스플레이 광고", "리타게팅"],
-      link: "/services/seo-ads"
-    },
-    {
-      id: "events",
-      labelKo: "오프라인 이벤트",
-      labelEn: "Offline Events",
-      icon: Calendar,
-      image: events,
-      description: "밋업부터 대규모 컨퍼런스까지, 한국 내 End-to-End 이벤트 프로덕션",
-      features: ["컨퍼런스 호스팅", "밋업 조직", "VIP 네트워킹", "베뉴 파트너십"],
-      link: "/services/offline-event"
-    }
-  ];
+// ServicesAccordion removed - now using ServicesGridCards component
 
-  const hoveredServiceData = services.find(s => s.id === hoveredService) || services[0];
-
-  return (
-    <section ref={ref} className="relative py-24 md:py-32 bg-black">
-      <div className="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-16"
-        >
-          <span className="text-[10px] text-white/40 tracking-[0.4em] uppercase">What We Offer</span>
-          <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-white mt-4">
-            Full-Stack GTM 서비스
-          </h3>
-        </motion.div>
-
-        <div className="grid lg:grid-cols-2 gap-8 items-start">
-          {/* Left: Accordion */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.2 }}
-          >
-            <Accordion type="single" collapsible className="space-y-2" defaultValue="community">
-              {services.map((service) => (
-                <AccordionItem 
-                  key={service.id} 
-                  value={service.id}
-                  className="border border-white/10 bg-white/[0.02] data-[state=open]:bg-white/[0.05] data-[state=open]:border-primary/30"
-                  onMouseEnter={() => setHoveredService(service.id)}
-                >
-                  <AccordionTrigger className="px-6 py-5 hover:no-underline">
-                    <div className="flex items-center gap-4 text-left">
-                      <service.icon className="w-5 h-5 text-primary flex-shrink-0" />
-                      <div>
-                        <span className="text-white font-medium block">{service.labelKo}</span>
-                        <span className="text-white/40 text-xs">{service.labelEn}</span>
-                      </div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent className="px-6 pb-6">
-                    <p className="text-white/60 text-sm mb-4 leading-relaxed">
-                      {service.description}
-                    </p>
-                    <ul className="grid grid-cols-2 gap-2 mb-4">
-                      {service.features.map((feature) => (
-                        <li key={feature} className="flex items-center gap-2 text-white/70 text-xs">
-                          <Check className="w-3 h-3 text-primary" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      to={service.link}
-                      className="inline-flex items-center gap-1 text-primary text-sm hover:text-primary/80 transition-colors"
-                    >
-                      <span>자세히 보기</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
-          </motion.div>
-
-          {/* Right: Hover Image */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.3 }}
-            className="relative aspect-[4/3] overflow-hidden sticky top-24 hidden lg:block"
-          >
-            <AnimatePresence mode="wait">
-              <motion.img
-                key={hoveredService}
-                src={hoveredServiceData.image}
-                alt={hoveredServiceData.labelKo}
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
-                className="w-full h-full object-cover"
-              />
-            </AnimatePresence>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-6 left-6">
-              <span className="text-white font-medium">{hoveredServiceData.labelKo}</span>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-};
 
 // ============================================
 // SECTION 7: PROCESS TIMELINE (Scroll-Triggered Animation)
@@ -1592,8 +1437,8 @@ const GTMService = () => {
       />
       <Navbar />
       <main>
-        {/* Hook: First Impression */}
-        <Hero />
+        {/* Hook: Enhanced Hero with inline images */}
+        <EnhancedHero />
         
         {/* Trust: Social Proof */}
         <SocialProofBar />
@@ -1604,17 +1449,20 @@ const GTMService = () => {
         {/* Solution: Our Approach */}
         <SolutionBridge />
         
-        {/* Proof: Project Portfolio with Video Hover */}
-        <ProjectVideoGrid />
+        {/* Proof: Fullscreen Case Study Slider */}
+        <FullscreenCaseSlider />
         
-        {/* Services: Interactive Grid with Galleries */}
-        <ServicesAccordion />
+        {/* Services: Grid Cards with hover effects */}
+        <ServicesGridCards />
         
         {/* Process: How We Work */}
         <ProcessTimeline />
         
         {/* Trust: Why Ium Labs */}
         <WhyUs />
+        
+        {/* Testimonials Carousel - NEW */}
+        <TestimonialsCarousel />
         
         {/* Campaign Wall: Horizontal Scroll by Category */}
         <CampaignWall />
