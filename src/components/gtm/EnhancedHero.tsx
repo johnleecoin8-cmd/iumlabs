@@ -1,7 +1,6 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Rocket, Target } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 const EnhancedHero = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -12,153 +11,103 @@ const EnhancedHero = () => {
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
 
   return (
-    <section ref={sectionRef} className="relative min-h-screen bg-black overflow-hidden">
-      {/* Pure black background */}
-      <div className="absolute inset-0 bg-black" />
-      
-      {/* Main Content - MADUP style giant typography */}
+    <section ref={sectionRef} className="relative h-screen bg-black overflow-hidden">
+      {/* Fullscreen Video Background */}
       <motion.div 
-        className="relative z-10 min-h-screen flex flex-col items-center justify-center px-4"
+        className="absolute inset-0"
+        style={{ scale: videoScale }}
+      >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+          poster="/images/hero-poster.jpg"
+        >
+          <source src="/videos/hero-background.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/60" />
+      </motion.div>
+      
+      {/* Main Content - Space Monster Style Giant Typography */}
+      <motion.div 
+        className="relative z-10 h-full flex flex-col items-center justify-center px-4"
         style={{ opacity, y: textY }}
       >
         <div className="w-full max-w-7xl mx-auto text-center">
           
-          {/* Giant Typography Block */}
-          <div className="mb-12">
-            {/* Line 1: CR[🚀]CK */}
+          {/* Giant Typography Block - SPACE MONSTER STYLE */}
+          <div className="space-y-0">
+            {/* Line 1 */}
             <motion.div
-              initial={{ opacity: 0, y: 60 }}
+              initial={{ opacity: 0, y: 80 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              className="flex items-center justify-center gap-2 md:gap-4"
+              transition={{ delay: 0.2, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <span className="text-[clamp(4rem,18vw,14rem)] font-black text-transparent leading-none tracking-tighter"
-                style={{ 
-                  WebkitTextStroke: '2px rgba(255,255,255,0.9)',
-                }}>
-                CR
-              </span>
-              <motion.div 
-                className="relative w-[clamp(3rem,12vw,10rem)] h-[clamp(3rem,12vw,10rem)] flex items-center justify-center"
-                animate={{ rotate: [0, 5, -5, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-violet-500 to-fuchsia-500 rounded-2xl blur-xl opacity-60" />
-                <Rocket className="relative w-2/3 h-2/3 text-white" strokeWidth={1.5} />
-              </motion.div>
-              <span className="text-[clamp(4rem,18vw,14rem)] font-black text-transparent leading-none tracking-tighter"
-                style={{ 
-                  WebkitTextStroke: '2px rgba(255,255,255,0.9)',
-                }}>
-                CK
+              <span className="block text-[clamp(3rem,15vw,12rem)] font-black text-transparent leading-[0.85] tracking-tighter"
+                style={{ WebkitTextStroke: '2px rgba(255,255,255,0.9)' }}>
+                BEYOND
               </span>
             </motion.div>
             
-            {/* Line 2: K[🎯]REA */}
+            {/* Line 2 - Filled gradient */}
             <motion.div
-              initial={{ opacity: 0, y: 60 }}
+              initial={{ opacity: 0, y: 80 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="flex items-center justify-center gap-2 md:gap-4 -mt-4 md:-mt-8"
+              transition={{ delay: 0.4, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             >
-              <span className="text-[clamp(4rem,18vw,14rem)] font-black text-transparent leading-none tracking-tighter"
-                style={{ 
-                  WebkitTextStroke: '2px rgba(255,255,255,0.9)',
-                }}>
-                K
-              </span>
-              <motion.div 
-                className="relative w-[clamp(3rem,12vw,10rem)] h-[clamp(3rem,12vw,10rem)] flex items-center justify-center"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-primary to-violet-600 rounded-2xl blur-xl opacity-60" />
-                <Target className="relative w-2/3 h-2/3 text-white" strokeWidth={1.5} />
-              </motion.div>
-              <span className="text-[clamp(4rem,18vw,14rem)] font-black text-transparent leading-none tracking-tighter"
-                style={{ 
-                  WebkitTextStroke: '2px rgba(255,255,255,0.9)',
-                }}>
-                REA
-              </span>
-            </motion.div>
-            
-            {/* Line 3: $50B - Filled text with gradient */}
-            <motion.div
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="-mt-4 md:-mt-8"
-            >
-              <span className="text-[clamp(4rem,18vw,14rem)] font-black bg-gradient-to-r from-primary via-violet-400 to-fuchsia-400 bg-clip-text text-transparent leading-none tracking-tighter">
-                $50B
+              <span className="block text-[clamp(3rem,15vw,12rem)] font-black bg-gradient-to-r from-primary via-violet-400 to-fuchsia-400 bg-clip-text text-transparent leading-[0.85] tracking-tighter">
+                CREATIVE
               </span>
             </motion.div>
           </div>
 
-          {/* Subtext */}
+          {/* Tagline */}
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
-            className="text-white/50 text-base md:text-xl max-w-2xl mx-auto leading-relaxed mb-10"
+            transition={{ delay: 0.8, duration: 0.8 }}
+            className="text-white/50 text-sm md:text-lg tracking-widest mt-8 md:mt-12"
           >
-            We bridge global Web3 projects to Korea's dynamic ecosystem
-            <br className="hidden md:block" />
-            <span className="text-white/80">with data-driven strategies.</span>
+            DATA-DRIVEN WEB3 GTM FOR KOREA
           </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
-            className="flex flex-col sm:flex-row justify-center items-center gap-4"
-          >
-            <Link 
-              to="/contact"
-              className="group inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-none font-bold text-sm tracking-wide hover:bg-white/90 transition-all"
-            >
-              <span>BOOK A STRATEGY CALL</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link 
-              to="/projects"
-              className="inline-flex items-center gap-2 px-8 py-4 text-white/60 hover:text-white font-medium text-sm tracking-wide transition-colors border border-white/20 hover:border-white/40"
-            >
-              <span>VIEW CASE STUDIES</span>
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Bottom Badge */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.3 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2"
-        >
-          <div className="flex items-center gap-6 text-white/30 text-xs tracking-widest">
-            <span>30+ PROJECTS</span>
-            <span className="w-px h-4 bg-white/20" />
-            <span>BINANCE & KUCOIN ALUMNI</span>
-          </div>
-        </motion.div>
-
-        {/* Side text - MADUP style */}
-        <div className="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2">
-          <span className="text-white/10 text-[10px] tracking-[0.3em] uppercase" style={{ writingMode: 'vertical-rl' }}>
-            KOREA'S #1 WEB3 GTM AGENCY
-          </span>
-        </div>
-        <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2">
-          <span className="text-white/10 text-[10px] tracking-[0.3em]" style={{ writingMode: 'vertical-rl' }}>
-            © 2024 IUM LABS
-          </span>
         </div>
       </motion.div>
+
+      {/* SCROLL DOWN Indicator - Space Monster Style */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+      >
+        <span className="text-white/40 text-[10px] md:text-xs tracking-[0.3em] font-medium">
+          SCROLL DOWN
+        </span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+        >
+          <ChevronDown className="w-5 h-5 text-white/40" strokeWidth={1.5} />
+        </motion.div>
+      </motion.div>
+
+      {/* Side text - Space Monster style */}
+      <div className="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2">
+        <span className="text-white/20 text-[10px] tracking-[0.3em] uppercase" style={{ writingMode: 'vertical-rl' }}>
+          KOREA'S #1 WEB3 GTM AGENCY
+        </span>
+      </div>
+      <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2">
+        <span className="text-white/20 text-[10px] tracking-[0.3em]" style={{ writingMode: 'vertical-rl' }}>
+          © 2025 IUM LABS
+        </span>
+      </div>
     </section>
   );
 };
