@@ -176,7 +176,7 @@ const InfluencerService = () => {
       {/* KOL Network Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader title="KOL Network" />
+          <SectionHeader title="KOL Network" badge="Featured Creators" />
 
           <div className="py-6 sm:py-10 md:py-14">
             <div className="container mx-auto px-3 sm:px-6 lg:px-16">

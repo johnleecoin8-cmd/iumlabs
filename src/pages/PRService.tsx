@@ -133,7 +133,7 @@ const PRService = () => {
         />
         
         <div className="border-t border-white/10 relative z-10">
-          <SectionHeader title="Media Network" />
+          <SectionHeader title="Media Network" badge="Global & Korea" />
           
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
