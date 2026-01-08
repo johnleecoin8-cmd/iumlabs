@@ -160,6 +160,9 @@ const SelectedWorkShowcase = () => {
           duration: 0.8,
           delay: 0.3
         }} className="max-w-3xl text-right">
+            <span className="text-sm uppercase tracking-widest text-violet-400 mb-4 block">
+              Who We Are
+            </span>
             <h3 className="text-3xl xl:text-4xl 2xl:text-5xl font-bold text-white mb-6 whitespace-nowrap">
               Real results, not just promises.
             </h3>
