@@ -147,23 +147,50 @@ const SelectedWorkShowcase = () => {
           </motion.div>
         </div>
 
-        {/* Right - Active Project Info (Desktop) */}
-        <div className="hidden lg:flex w-1/2 h-full items-end justify-end p-16 xl:p-20">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={activeIndex}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              className="text-right"
+        {/* Right - About Content (Desktop) */}
+        <div className="hidden lg:flex w-1/2 h-full items-center justify-end p-16 xl:p-20">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="max-w-md text-right"
+          >
+            <h3 className="text-2xl xl:text-3xl font-bold text-white mb-4">
+              Real results, not just promises.
+            </h3>
+            <p className="text-white/60 text-sm leading-relaxed mb-4">
+              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. 
+              Derived from the Korean word "to connect," we function as your foundational 
+              layer for market entry. We transcend standard marketing by leveraging 
+              proprietary analytics and data-driven research, providing the actionable 
+              insights needed to navigate and succeed in the Korean market.
+            </p>
+            <p className="text-violet-400 text-xs mb-8">
+              Founded by former Binance & KuCoin executives
+            </p>
+            
+            {/* Stats */}
+            <div className="grid grid-cols-2 gap-8 mb-8">
+              <div className="text-right">
+                <div className="text-3xl xl:text-4xl font-bold text-white">340%</div>
+                <div className="text-xs text-white/40 mt-1">Avg. Volume</div>
+              </div>
+              <div className="text-right">
+                <div className="text-3xl xl:text-4xl font-bold text-white">2.5M</div>
+                <div className="text-xs text-white/40 mt-1">Organic Reaching</div>
+              </div>
+            </div>
+            
+            <Link 
+              to="/projects"
+              className="inline-flex items-center gap-2 text-sm text-white border border-white/30 px-6 py-3 hover:bg-white hover:text-black transition-all duration-300"
             >
-              <span className="text-violet-400 text-sm">{projects[activeIndex].result}</span>
-              <p className="text-white/60 text-xs mt-2 max-w-xs ml-auto">
-                Successful Korean market entry with comprehensive GTM strategy.
-              </p>
-            </motion.div>
-          </AnimatePresence>
+              <span>View Our Work</span>
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
+          </motion.div>
         </div>
       </div>
     </section>
