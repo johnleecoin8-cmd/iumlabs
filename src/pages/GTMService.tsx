@@ -23,6 +23,24 @@ import openledgerEvent from '@/assets/campaigns/openledger-event.jpg';
 
 import peaqLogo from '@/assets/logos/peaq.svg';
 
+// Project backgrounds
+import storyBg from '@/assets/projects/story-bg.jpg';
+import mantraBg from '@/assets/projects/mantra-bg.jpg';
+import peaqBg from '@/assets/projects/peaq-bg.jpg';
+import bnbBg from '@/assets/projects/bnb-bg.jpg';
+import saharaBg from '@/assets/projects/sahara-ai-bg.jpg';
+import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
+import bybitBg from '@/assets/projects/bybit-bg.jpg';
+import openledgerBg from '@/assets/campaigns/openledger-hero-official.png';
+
+// Logos
+import storyLogo from '@/assets/logos/story-protocol.png';
+import mantraLogo from '@/assets/logos/mantra.png';
+import bybitLogo from '@/assets/logos/bybit.png';
+import bnbLogo from '@/assets/logos/bnb.svg';
+import saharaLogo from '@/assets/logos/sahara-ai.png';
+import kucoinLogo from '@/assets/logos/kucoin.svg';
+
 // ============================================
 // SECTION 2: REALITY CHECK - MADUP STYLE
 // ============================================
@@ -420,6 +438,102 @@ const PortfolioSection = () => {
 };
 
 // ============================================
+// SELECTED WORK SECTION
+// ============================================
+const SelectedWorkSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  const projects = [
+    { name: "Story", logo: storyLogo, bg: storyBg, slug: "story-protocol" },
+    { name: "MANTRA", logo: mantraLogo, bg: mantraBg, slug: "mantra" },
+    { name: "Bybit", logo: bybitLogo, bg: bybitBg, slug: "bybit" },
+    { name: "peaq", logo: peaqLogo, bg: peaqBg, slug: "peaq" },
+    { name: "BNB Chain", logo: bnbLogo, bg: bnbBg, slug: "bnb-chain" },
+    { name: "Sahara AI", logo: saharaLogo, bg: saharaBg, slug: "sahara-ai" },
+    { name: "KuCoin", logo: kucoinLogo, bg: kucoinBg, slug: "kucoin" },
+    { name: "OpenLedger", logo: null, bg: openledgerBg, slug: "openledger" },
+  ];
+
+  return (
+    <section ref={ref} className="relative bg-black py-24 overflow-hidden">
+      {/* Section Title */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        className="text-center mb-16 px-4"
+      >
+        <span className="text-white/20 text-[10px] tracking-[0.5em] block mb-4">SELECTED WORK</span>
+        <h2 className="text-[clamp(2rem,6vw,4rem)] font-black text-transparent leading-none tracking-tighter"
+          style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.6)' }}>
+          OUR CLIENTS
+        </h2>
+      </motion.div>
+
+      {/* Projects Grid */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-1 max-w-7xl mx-auto px-6">
+        {projects.map((project, i) => (
+          <motion.div
+            key={project.name}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={isInView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: 0.1 + i * 0.05 }}
+          >
+            <Link
+              to={`/projects/${project.slug}`}
+              className="relative aspect-square overflow-hidden group block"
+            >
+              <img
+                src={project.bg}
+                alt={project.name}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-black/70 group-hover:bg-black/50 transition-colors" />
+              
+              {/* Logo or Name */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                {project.logo ? (
+                  <img
+                    src={project.logo}
+                    alt={project.name}
+                    className="h-8 md:h-12 w-auto object-contain brightness-0 invert opacity-60 group-hover:opacity-100 transition-opacity"
+                  />
+                ) : (
+                  <span className="text-white/60 group-hover:text-white font-bold text-lg tracking-wider transition-colors">
+                    {project.name}
+                  </span>
+                )}
+              </div>
+
+              {/* Hover Arrow */}
+              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <ArrowRight className="w-5 h-5 text-white" />
+              </div>
+            </Link>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* View All Link */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.6 }}
+        className="text-center mt-12"
+      >
+        <Link
+          to="/projects"
+          className="inline-flex items-center gap-2 text-white/40 hover:text-white text-sm tracking-widest transition-colors"
+        >
+          <span>VIEW ALL PROJECTS</span>
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </motion.div>
+    </section>
+  );
+};
+
+// ============================================
 // SECTION 7: FOOTER CTA - MADUP STYLE
 // ============================================
 const FooterCTASection = () => {
@@ -515,6 +629,9 @@ const GTMService = () => {
         
         {/* Section 6: Portfolio */}
         <PortfolioSection />
+
+        {/* Selected Work */}
+        <SelectedWorkSection />
         
         {/* Section 7: Footer CTA */}
         <FooterCTASection />
