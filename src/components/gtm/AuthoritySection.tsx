@@ -1,187 +1,191 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
-import { Building2, Shield, Newspaper, TrendingUp, Target, DollarSign } from 'lucide-react';
+import { useRef, useState } from 'react';
 
-// Import logos for monochrome display
-import coindeskLogo from '@/assets/logos/coindesk.png';
-import blockmediaLogo from '@/assets/logos/blockmedia-new.png';
-import coinnessLogo from '@/assets/logos/coinness.png';
-
-// DNA Card Data - Part 1: Our System/Background
-const dnaCards = [
+// Roster Data - The Team
+const rosterMembers = [
   {
     number: '01',
-    title: 'Exchange DNA',
-    subtitle: 'Trading & Listing Strategy',
-    logos: ['Upbit', 'Bithumb', 'Coinone'],
-    description: 'Led by alumni from Korea\'s Tier-1 exchanges. We possess an internal understanding of liquidity management, MM operations, and the exact listing criteria used by DAXA members.',
-    descriptionKo: '한국 1위권 거래소 출신들이 리드합니다. 유동성 관리, MM 운영, 그리고 DAXA 멤버들이 사용하는 정확한 상장 기준에 대한 내부적 이해를 갖추고 있습니다.',
-    icon: Building2,
-    accentColor: 'emerald'
+    category: 'GLOBAL STRATEGY',
+    role: 'Global Strategy Lead',
+    origin: 'Ex-KuCoin Core Team',
+    intel: 'Inside knowledge of global CEX listing logic & MM operations.',
+    intelKo: '글로벌 거래소 핵심 팀, 상장 로직 및 MM 운영 총괄'
   },
   {
     number: '02',
-    title: 'Media Intelligence',
-    subtitle: 'Narrative & Public Sentiment',
-    logoImages: [coindeskLogo, blockmediaLogo, coinnessLogo],
-    description: 'Former editors from top crypto media outlets craft your narrative. We know exactly how to structure headlines and stories to pass editorial review and trigger retail attention.',
-    descriptionKo: '탑 크립토 미디어 출신 에디터들이 귀사의 내러티브를 만듭니다. 데스크 심사를 통과하고 리테일의 주목을 끌기 위해 헤드라인과 스토리를 어떻게 짜야 하는지 정확히 압니다.',
-    icon: Newspaper,
-    accentColor: 'purple'
+    category: 'VENTURE NETWORK',
+    role: 'Venture Network Lead',
+    origin: 'Ex-Outlier Ventures Inv. Manager',
+    intel: 'Direct access to Tier-1 VCs & Narrative structuring.',
+    intelKo: '유럽 최대 Web3 액셀러레이터, 글로벌 VC 네트워크 연결'
   },
   {
     number: '03',
-    title: 'Regulatory Shield',
-    subtitle: 'Compliance & Risk Mgmt',
-    logos: ['KISA', 'FSC Advisory'],
-    description: 'Advisors who helped shape Korea\'s VASP regulations. We provide a pre-emptive shield against regulatory friction, ensuring your project remains "clean" in the eyes of authorities.',
-    descriptionKo: '한국 VASP 규제 형성에 기여한 자문위원들입니다. 규제 마찰에 대한 선제적 방패를 제공하여, 당국의 눈에 귀사의 프로젝트가 \'무결점\' 상태로 남도록 보장합니다.',
-    icon: Shield,
-    accentColor: 'blue'
-  }
-];
-
-// Squad Members - Part 2: The People Who Execute
-const squadMembers = [
-  {
-    number: '01',
-    title: 'Global Strategy Lead',
-    subtitle: 'Ex-KuCoin Core Team',
-    description: 'Inside knowledge of global CEX listing logic and liquidity operations.',
-    descriptionKo: '글로벌 거래소 핵심 팀 출신, 상장 로직과 유동성 운영 총괄.',
-    icon: Building2
-  },
-  {
-    number: '02',
-    title: 'Venture Network Lead',
-    subtitle: 'Ex-Outlier Ventures Inv. Manager',
-    description: 'Direct access to Tier-1 global VC networks and narrative shaping.',
-    descriptionKo: '유럽 최대 Web3 액셀러레이터 출신, 글로벌 VC 네트워크 및 내러티브 설계.',
-    icon: TrendingUp
-  },
-  {
-    number: '03',
-    title: 'Korea Market Lead',
-    subtitle: 'Founder of CryptoBridge Korea',
-    description: 'Executed 30+ Korea GTM campaigns with deep local community roots.',
-    descriptionKo: '크립토브릿지 설립자, 30개 이상의 한국 GTM 캠페인 성공적 수행 및 커뮤니티 장악.',
-    icon: Target
+    category: 'KOREA EXECUTION',
+    role: 'Korea Market Lead',
+    origin: 'Founder of CryptoBridge',
+    intel: 'Executed 30+ GTM campaigns. Deepest local community roots.',
+    intelKo: '크립토브릿지 설립자, 30+ 프로젝트 성공 수행 및 커뮤니티 장악'
   },
   {
     number: '04',
-    title: 'Finance & Structuring',
-    subtitle: 'Senior Equity Consultant at Fundshing',
-    description: 'Expertise in financial structuring and token economy optimization.',
-    descriptionKo: '금융 컨설턴트 출신, 토큰 이코노미 구조화 및 자산 운용 최적화.',
-    icon: DollarSign
+    category: 'FINANCE & STRUCTURING',
+    role: 'Token Economy Architect',
+    origin: 'Senior Consultant at Fundshing',
+    intel: 'Financial structuring & Asset optimization expert.',
+    intelKo: '금융 컨설턴트 출신, 토큰 이코노미 및 자산 운용 최적화'
   }
 ];
 
-// DNA Card Component
-const DNACard = ({ data, index }: { data: typeof dnaCards[0]; index: number }) => {
-  const Icon = data.icon;
+// Metrics Data
+const metrics = [
+  { value: '$1.5B+', label: 'Volume Generated', labelKo: '거래량 창출' },
+  { value: '10+', label: 'Years Avg. Experience', labelKo: '평균 경력' },
+  { value: '100%', label: 'Listing Strategy Success', labelKo: '상장 전략 성공률' }
+];
 
+// Backing Intelligence
+const backingLogos = ['Upbit', 'Bithumb', 'Coinone', 'BlockMedia', 'KISA', 'FSC Advisory'];
+
+// Metrics Row Component
+const MetricsRow = () => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.15 }}
-      className="group relative p-8 rounded-xl border border-white/10 bg-black/50 backdrop-blur-sm hover:border-white/20 transition-all duration-500"
+      transition={{ duration: 0.5 }}
+      className="grid grid-cols-3 gap-px bg-white/10 rounded-lg overflow-hidden mb-12"
     >
-      {/* Number */}
-      <div className="absolute top-6 right-6 text-[80px] font-bold text-white/[0.03] leading-none select-none">
-        {data.number}
-      </div>
-
-      {/* Logos Section - Monochrome */}
-      <div className="flex items-center gap-3 mb-6 h-8">
-        {data.logoImages ? (
-          data.logoImages.map((logo, i) => (
-            <img
-              key={i}
-              src={logo}
-              alt=""
-              className="h-5 w-auto object-contain opacity-40 grayscale brightness-200 group-hover:opacity-60 transition-opacity"
-            />
-          ))
-        ) : (
-          data.logos?.map((logo, i) => (
-            <span
-              key={i}
-              className="px-3 py-1 text-[10px] font-mono uppercase tracking-wider text-white/40 border border-white/20 rounded group-hover:text-white/60 group-hover:border-white/30 transition-all"
-            >
-              {logo}
-            </span>
-          ))
-        )}
-      </div>
-
-      {/* Icon */}
-      <div className="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 transition-colors">
-        <Icon className="w-6 h-6 text-white/60 group-hover:text-white/80 transition-colors" />
-      </div>
-
-      {/* Title */}
-      <div className="mb-4">
-        <h3 className="text-xl font-bold text-white mb-1">
-          {data.title}
-        </h3>
-        <p className="text-xs text-white/40 uppercase tracking-wider">
-          {data.subtitle}
-        </p>
-      </div>
-
-      {/* Description */}
-      <p className="text-sm text-white/60 leading-relaxed mb-4">
-        {data.description}
-      </p>
-      <p className="text-xs text-white/30 leading-relaxed">
-        {data.descriptionKo}
-      </p>
+      {metrics.map((metric, index) => (
+        <motion.div
+          key={metric.label}
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: index * 0.1 }}
+          className="bg-black p-6 md:p-8 text-center group hover:bg-white/[0.02] transition-colors"
+        >
+          <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 font-mono tracking-tight">
+            {metric.value}
+          </div>
+          <div className="text-xs md:text-sm text-white/60 uppercase tracking-wider mb-1">
+            {metric.label}
+          </div>
+          <div className="text-[10px] text-white/30">
+            {metric.labelKo}
+          </div>
+        </motion.div>
+      ))}
     </motion.div>
   );
 };
 
-// Squad Card Component
-const SquadCard = ({ data, index }: { data: typeof squadMembers[0]; index: number }) => {
-  const Icon = data.icon;
+// Roster Row Component - Terminal Style
+const RosterRow = ({ data, index }: { data: typeof rosterMembers[0]; index: number }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, x: -20 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`
+        relative group cursor-default
+        border-b border-white/10 last:border-b-0
+        transition-all duration-300
+        ${isHovered ? 'bg-white/[0.04]' : 'bg-transparent'}
+      `}
+    >
+      {/* Left Accent Bar */}
+      <div 
+        className={`
+          absolute left-0 top-0 bottom-0 w-1
+          transition-all duration-300
+          ${isHovered ? 'bg-primary opacity-100' : 'bg-primary/50 opacity-0'}
+        `}
+      />
+
+      <div className="grid grid-cols-12 gap-4 py-6 px-4 md:px-6 items-start md:items-center">
+        {/* Number */}
+        <div className="col-span-1 hidden md:block">
+          <span className="font-mono text-sm text-white/20 group-hover:text-white/40 transition-colors">
+            {data.number}
+          </span>
+        </div>
+
+        {/* Category + Role */}
+        <div className="col-span-12 md:col-span-3">
+          <div className="flex items-center gap-2 mb-1 md:mb-0">
+            <span className="md:hidden font-mono text-xs text-white/30">{data.number}</span>
+            <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-primary/80 group-hover:text-primary transition-colors">
+              {data.category}
+            </span>
+          </div>
+          <h4 className="text-base md:text-lg font-semibold text-white group-hover:text-white transition-colors mt-1">
+            {data.role}
+          </h4>
+        </div>
+
+        {/* Origin */}
+        <div className="col-span-12 md:col-span-3 mt-2 md:mt-0">
+          <div className="text-[10px] text-white/30 uppercase tracking-wider mb-1 md:hidden">Origin</div>
+          <span className="text-sm text-white/50 group-hover:text-white/70 transition-colors font-medium">
+            {data.origin}
+          </span>
+        </div>
+
+        {/* Intel */}
+        <div className="col-span-12 md:col-span-5 mt-3 md:mt-0">
+          <div className="text-[10px] text-white/30 uppercase tracking-wider mb-1 md:hidden">Intel</div>
+          <p className="text-sm text-white/40 group-hover:text-white/60 transition-colors leading-relaxed">
+            {data.intel}
+          </p>
+          <p className="text-xs text-white/25 group-hover:text-white/40 transition-colors mt-1">
+            {data.intelKo}
+          </p>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Backing Section Component
+const BackingSection = () => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-      className="group relative p-6 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300"
+      transition={{ duration: 0.5, delay: 0.3 }}
+      className="mt-12 pt-8 border-t border-white/5"
     >
-      {/* Number Badge */}
-      <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
-        <span className="text-xs font-mono text-white/40">{data.number}</span>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div>
+          <div className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-1">
+            Backing Intelligence
+          </div>
+          <p className="text-xs text-white/20">Team's collective background</p>
+        </div>
+        
+        <div className="flex flex-wrap items-center gap-3 md:gap-4">
+          {backingLogos.map((logo, index) => (
+            <motion.span
+              key={logo}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
+              className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-white/30 border border-white/10 rounded hover:text-white/50 hover:border-white/20 transition-all cursor-default"
+            >
+              {logo}
+            </motion.span>
+          ))}
+        </div>
       </div>
-
-      {/* Icon */}
-      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:from-white/15 group-hover:to-white/10 transition-all">
-        <Icon className="w-5 h-5 text-white/70" />
-      </div>
-
-      {/* Title */}
-      <h4 className="text-lg font-semibold text-white mb-1">
-        {data.title}
-      </h4>
-      
-      {/* Subtitle - Background */}
-      <p className="text-sm text-primary/80 font-medium mb-4">
-        {data.subtitle}
-      </p>
-
-      {/* Description */}
-      <p className="text-sm text-white/60 leading-relaxed mb-2">
-        {data.description}
-      </p>
-      <p className="text-xs text-white/40 leading-relaxed">
-        {data.descriptionKo}
-      </p>
     </motion.div>
   );
 };
@@ -195,19 +199,24 @@ export const AuthoritySection = () => {
       ref={sectionRef}
       className="relative py-24 md:py-32 bg-black overflow-hidden"
     >
-      {/* Subtle Background Effects - Minimal */}
+      {/* Terminal Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
+        {/* Subtle scanlines */}
+        <div 
+          className="absolute inset-0 opacity-[0.015]"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)',
+          }}
+        />
+        
         {/* Very subtle grid */}
         <div 
           className="absolute inset-0 opacity-[0.02]"
           style={{
-            backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
-            backgroundSize: '80px 80px'
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
+            backgroundSize: '60px 60px'
           }}
         />
-        
-        {/* Subtle gradient orb */}
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-white/[0.01] rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
@@ -216,77 +225,67 @@ export const AuthoritySection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-16 md:mb-20"
+          className="mb-12 md:mb-16"
         >
           {/* Section number */}
           <div className="flex items-center gap-4 mb-8">
             <span className="text-sm font-mono text-white/40 tracking-wider">04</span>
-            <div className="h-px w-12 bg-white/20" />
-            <span className="text-sm font-medium text-white/40 uppercase tracking-wider">The Architects</span>
+            <div className="h-px w-16 bg-white/20" />
+            <span className="text-sm font-medium text-white/40 uppercase tracking-wider">Authority</span>
           </div>
 
           {/* Title Group */}
-          <div className="max-w-3xl">
+          <div className="max-w-4xl">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-              Built by Exchange Insiders
+              Human Capital
             </h2>
-            <p className="text-xl md:text-2xl text-white/60 mb-3">
-              "We don't just know the market. <span className="text-white">We built parts of it.</span>"
+            <p className="text-xl md:text-2xl text-white/70 mb-3 font-light">
+              <span className="text-primary font-medium">"Engineered for Liquidity."</span>
             </p>
-            <p className="text-base text-white/30">
-              우리는 시장을 아는 게 아닙니다. 시장의 일부를 직접 만들었습니다.
+            <p className="text-base md:text-lg text-white/50 mb-2">
+              We combined global exchange logic with local execution power.
+            </p>
+            <p className="text-sm text-white/30">
+              글로벌 거래소의 로직과 로컬의 실행력을 결합했습니다.
             </p>
           </div>
         </motion.div>
 
-        {/* Part 1: The DNA - 3 Column Layout */}
-        <div className="mb-20">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-3 mb-8"
-          >
-            <span className="text-xs font-mono text-white/30 uppercase tracking-widest">Part 1</span>
-            <div className="h-px flex-1 bg-white/10" />
-            <span className="text-xs text-white/40">The DNA — 출신 성분</span>
-          </motion.div>
+        {/* Section 1: The Metrics */}
+        <MetricsRow />
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {dnaCards.map((item, index) => (
-              <DNACard key={item.title} data={item} index={index} />
-            ))}
-          </div>
-        </div>
-
-        {/* Part 2: The Squad - Key Team Members */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="mb-8"
-          >
-            <div className="flex items-center gap-3 mb-6">
-              <span className="text-xs font-mono text-white/30 uppercase tracking-widest">Part 2</span>
-              <div className="h-px flex-1 bg-white/10" />
-              <span className="text-xs text-white/40">The Squad — 핵심 인력</span>
+        {/* Section 2: The Roster */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          className="mb-6"
+        >
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">The Roster</span>
+              <div className="h-px w-8 bg-white/10" />
             </div>
             
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
-              "Global Experience, Local Execution."
-            </h3>
-            <p className="text-base text-white/50 max-w-2xl">
-              글로벌 스탠다드와 한국의 실행력을 결합한 팀이 직접 움직입니다.
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {squadMembers.map((item, index) => (
-              <SquadCard key={item.title} data={item} index={index} />
-            ))}
+            {/* Column Headers - Desktop Only */}
+            <div className="hidden md:grid grid-cols-12 gap-4 text-[10px] font-mono text-white/20 uppercase tracking-wider flex-1 ml-8">
+              <div className="col-span-1">#</div>
+              <div className="col-span-3">Role</div>
+              <div className="col-span-3">Origin</div>
+              <div className="col-span-5">Intel</div>
+            </div>
           </div>
+        </motion.div>
+
+        {/* Roster List */}
+        <div className="border border-white/10 rounded-lg overflow-hidden bg-black/50 backdrop-blur-sm">
+          {rosterMembers.map((member, index) => (
+            <RosterRow key={member.number} data={member} index={index} />
+          ))}
         </div>
+
+        {/* Section 3: Backing Intelligence */}
+        <BackingSection />
       </div>
     </section>
   );
