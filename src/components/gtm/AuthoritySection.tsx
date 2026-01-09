@@ -1,394 +1,281 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Building2, Shield, Newspaper, CheckCircle, Users, Quote, Lock, Handshake } from 'lucide-react';
-import { useCountUp } from '@/hooks/useCountUp';
+import { Building2, Shield, Newspaper, Target, Radio, BookOpen, Users } from 'lucide-react';
 
-// Exchange DNA data
-const exchangeDNA = [
+// Import logos for monochrome display
+import coindeskLogo from '@/assets/logos/coindesk.png';
+import blockmediaLogo from '@/assets/logos/blockmedia-new.png';
+import coinnessLogo from '@/assets/logos/coinness.png';
+
+// DNA Card Data with logos
+const dnaCards = [
   {
-    title: 'Exchange Veterans',
-    titleKo: '거래소 베테랑',
-    description: '10+ years combined experience at Tier-1 KRW exchanges',
-    descriptionKo: '국내 1등급 거래소 출신, 합산 10년 이상 경력',
-    badges: ['Upbit', 'Bithumb', 'Coinone'],
+    number: '01',
+    title: 'Exchange DNA',
+    subtitle: 'Trading & Listing Strategy',
+    logos: ['Upbit', 'Bithumb', 'Coinone'], // Text-based for Korean exchanges
+    description: 'Led by alumni from Korea\'s Tier-1 exchanges. We possess an internal understanding of liquidity management, MM operations, and the exact listing criteria used by DAXA members.',
+    descriptionKo: '한국 1위권 거래소 출신들이 리드합니다. 유동성 관리, MM 운영, 그리고 DAXA 멤버들이 사용하는 정확한 상장 기준에 대한 내부적 이해를 갖추고 있습니다.',
     icon: Building2,
     accentColor: 'emerald'
   },
   {
-    title: 'Media & Research',
-    titleKo: '미디어 & 리서치',
-    description: "Former editors at Korea's top crypto media outlets",
-    descriptionKo: '국내 주요 암호화폐 미디어 출신 에디터',
-    badges: ['BlockMedia', 'CoinDesk KR', 'Coinness'],
+    number: '02',
+    title: 'Media Intelligence',
+    subtitle: 'Narrative & Public Sentiment',
+    logoImages: [coindeskLogo, blockmediaLogo, coinnessLogo],
+    description: 'Former editors from top crypto media outlets craft your narrative. We know exactly how to structure headlines and stories to pass editorial review and trigger retail attention.',
+    descriptionKo: '탑 크립토 미디어 출신 에디터들이 귀사의 내러티브를 만듭니다. 데스크 심사를 통과하고 리테일의 주목을 끌기 위해 헤드라인과 스토리를 어떻게 짜야 하는지 정확히 압니다.',
     icon: Newspaper,
     accentColor: 'purple'
   },
   {
-    title: 'Compliance Experts',
-    titleKo: '규제 전문가',
-    description: "VASP advisors who shaped Korea's crypto regulations",
-    descriptionKo: '한국 VASP 규제 형성에 참여한 어드바이저',
-    badges: ['KISA', 'FSC Advisory'],
+    number: '03',
+    title: 'Regulatory Shield',
+    subtitle: 'Compliance & Risk Mgmt',
+    logos: ['KISA', 'FSC Advisory'],
+    description: 'Advisors who helped shape Korea\'s VASP regulations. We provide a pre-emptive shield against regulatory friction, ensuring your project remains "clean" in the eyes of authorities.',
+    descriptionKo: '한국 VASP 규제 형성에 기여한 자문위원들입니다. 규제 마찰에 대한 선제적 방패를 제공하여, 당국의 눈에 귀사의 프로젝트가 \'무결점\' 상태로 남도록 보장합니다.',
     icon: Shield,
     accentColor: 'blue'
   }
 ];
 
-// Insider advantages data
+// Insider Advantage Data
 const insiderAdvantages = [
   {
-    title: 'Exchange Listing Playbook',
-    titleKo: '거래소 상장 플레이북',
-    description: 'We know the exact criteria and timelines for KRW exchange listings.',
-    icon: CheckCircle
+    number: '01',
+    title: 'Listing Playbook',
+    subtitle: 'Precision Engineering',
+    description: 'We don\'t guess. We utilize the exact criteria and timelines for KRW exchange listings to minimize rejection risk.',
+    descriptionKo: '추측하지 않습니다. 상장 거절 리스크를 최소화하기 위해 정확한 KRW 거래소 상장 기준과 타임라인을 활용합니다.',
+    icon: Target
   },
   {
+    number: '02',
     title: 'Regulatory Radar',
-    titleKo: '규제 레이더',
-    description: 'Direct lines to FSC, FSS for pre-emptive compliance.',
-    icon: Shield
+    subtitle: 'Direct Lines',
+    description: 'Direct communication channels with VASP compliance officers and regulatory advisors for real-time risk checks.',
+    descriptionKo: '실시간 리스크 체크를 위해 VASP 컴플라이언스 담당자 및 규제 자문역과의 핫라인을 가동합니다.',
+    icon: Radio
   },
   {
+    number: '03',
     title: 'Media Gatekeepers',
-    titleKo: '미디어 게이트키퍼',
-    description: 'Personal networks with editors at every major outlet.',
-    icon: Newspaper
+    subtitle: 'Editorial Network',
+    description: 'Personal networks with Chief Editors at every major outlet. We ensure your news gets featured, not buried.',
+    descriptionKo: '모든 주요 매체의 편집장들과 개인적 네트워크를 보유. 당신의 뉴스가 묻히지 않고 메인에 걸리도록 합니다.',
+    icon: BookOpen
   },
   {
+    number: '04',
     title: 'KOL Inner Circle',
-    titleKo: 'KOL 이너서클',
-    description: '120+ verified influencers, exclusive to our network.',
+    subtitle: 'Verified Quality',
+    description: 'A private network of 120+ verified influencers who prioritize our projects over generic paid shills.',
+    descriptionKo: '일반적인 유료 광고보다 우리 프로젝트를 우선순위에 두는, 120명 이상의 검증된 인플루언서 프라이빗 네트워크.',
     icon: Users
   }
 ];
 
-// Trust signals data
-const trustSignals = [
-  { value: 10, suffix: '+', label: 'Years in Korea Crypto', labelKo: '한국 크립토 경력' },
-  { value: 0, suffix: '', label: 'Incidents or Leaks', labelKo: '사고 및 정보유출' },
-  { value: 100, suffix: '%', label: 'Client NDA Protected', labelKo: 'NDA 보호율' },
-  { value: 5, suffix: '', label: 'Official Exchange Partners', labelKo: '공식 거래소 파트너' }
-];
-
 // DNA Card Component
-const DNACard = ({ data, index }: { data: typeof exchangeDNA[0]; index: number }) => {
+const DNACard = ({ data, index }: { data: typeof dnaCards[0]; index: number }) => {
   const Icon = data.icon;
-  const accentColors: Record<string, string> = {
-    emerald: 'group-hover:border-emerald-500/50 group-hover:shadow-emerald-500/10',
-    purple: 'group-hover:border-purple-500/50 group-hover:shadow-purple-500/10',
-    blue: 'group-hover:border-blue-500/50 group-hover:shadow-blue-500/10'
-  };
-  const iconColors: Record<string, string> = {
-    emerald: 'text-emerald-400 group-hover:text-emerald-300',
-    purple: 'text-purple-400 group-hover:text-purple-300',
-    blue: 'text-blue-400 group-hover:text-blue-300'
-  };
-  const bgColors: Record<string, string> = {
-    emerald: 'bg-emerald-500/10 group-hover:bg-emerald-500/20',
-    purple: 'bg-purple-500/10 group-hover:bg-purple-500/20',
-    blue: 'bg-blue-500/10 group-hover:bg-blue-500/20'
-  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: index * 0.15 }}
+      className="group relative p-8 rounded-xl border border-white/10 bg-black/50 backdrop-blur-sm hover:border-white/20 transition-all duration-500"
+    >
+      {/* Number */}
+      <div className="absolute top-6 right-6 text-[80px] font-bold text-white/[0.03] leading-none select-none">
+        {data.number}
+      </div>
+
+      {/* Logos Section - Monochrome */}
+      <div className="flex items-center gap-3 mb-6 h-8">
+        {data.logoImages ? (
+          data.logoImages.map((logo, i) => (
+            <img
+              key={i}
+              src={logo}
+              alt=""
+              className="h-5 w-auto object-contain opacity-40 grayscale brightness-200 group-hover:opacity-60 transition-opacity"
+            />
+          ))
+        ) : (
+          data.logos?.map((logo, i) => (
+            <span
+              key={i}
+              className="px-3 py-1 text-[10px] font-mono uppercase tracking-wider text-white/40 border border-white/20 rounded group-hover:text-white/60 group-hover:border-white/30 transition-all"
+            >
+              {logo}
+            </span>
+          ))
+        )}
+      </div>
+
+      {/* Icon */}
+      <div className="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center mb-6 group-hover:bg-white/10 transition-colors">
+        <Icon className="w-6 h-6 text-white/60 group-hover:text-white/80 transition-colors" />
+      </div>
+
+      {/* Title */}
+      <div className="mb-4">
+        <h3 className="text-xl font-bold text-white mb-1">
+          {data.title}
+        </h3>
+        <p className="text-xs text-white/40 uppercase tracking-wider">
+          {data.subtitle}
+        </p>
+      </div>
+
+      {/* Description */}
+      <p className="text-sm text-white/60 leading-relaxed mb-4">
+        {data.description}
+      </p>
+      <p className="text-xs text-white/30 leading-relaxed">
+        {data.descriptionKo}
+      </p>
+    </motion.div>
+  );
+};
+
+// Advantage Card Component
+const AdvantageCard = ({ data, index }: { data: typeof insiderAdvantages[0]; index: number }) => {
+  const Icon = data.icon;
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className={`group relative p-6 md:p-8 rounded-2xl border border-border bg-card/50 backdrop-blur-sm transition-all duration-500 hover:shadow-2xl ${accentColors[data.accentColor]}`}
+      transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+      className="group relative p-6 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300"
     >
+      {/* Number Badge */}
+      <div className="absolute top-4 right-4">
+        <span className="text-xs font-mono text-white/20">{data.number}</span>
+      </div>
+
       {/* Icon */}
-      <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 ${bgColors[data.accentColor]}`}>
-        <Icon className={`w-7 h-7 transition-colors duration-300 ${iconColors[data.accentColor]}`} />
+      <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:bg-white/10 transition-colors">
+        <Icon className="w-5 h-5 text-white/50 group-hover:text-white/70 transition-colors" />
       </div>
 
       {/* Title */}
-      <h3 className="text-xl md:text-2xl font-bold text-foreground mb-1">
+      <h4 className="text-base font-semibold text-white mb-1">
         {data.title}
-      </h3>
-      <p className="text-sm text-muted-foreground mb-4">{data.titleKo}</p>
-
-      {/* Description */}
-      <p className="text-muted-foreground leading-relaxed mb-6">
-        {data.description}
+      </h4>
+      <p className="text-[10px] text-white/30 uppercase tracking-wider mb-3">
+        {data.subtitle}
       </p>
 
-      {/* Badges */}
-      <div className="flex flex-wrap gap-2">
-        {data.badges.map((badge, i) => (
-          <span
-            key={i}
-            className="px-3 py-1 text-xs font-medium rounded-full bg-muted/50 text-muted-foreground border border-border"
-          >
-            {badge}
-          </span>
-        ))}
-      </div>
-    </motion.div>
-  );
-};
-
-// Advantage Item Component
-const AdvantageItem = ({ data, index }: { data: typeof insiderAdvantages[0]; index: number }) => {
-  const Icon = data.icon;
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: -20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="group flex items-start gap-4 p-4 rounded-xl hover:bg-muted/30 transition-colors duration-300"
-    >
-      <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-        <Icon className="w-5 h-5 text-primary" />
-      </div>
-      <div>
-        <h4 className="font-semibold text-foreground group-hover:text-primary transition-colors">
-          {data.title}
-        </h4>
-        <p className="text-xs text-muted-foreground mb-1">{data.titleKo}</p>
-        <p className="text-sm text-muted-foreground">{data.description}</p>
-      </div>
-    </motion.div>
-  );
-};
-
-// Trust Signal Card Component
-const TrustSignalCard = ({ data, index, isInView }: { data: typeof trustSignals[0]; index: number; isInView: boolean }) => {
-  const count = useCountUp({
-    end: data.value,
-    duration: 2000 + index * 200,
-    suffix: data.suffix,
-    isVisible: isInView
-  });
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="text-center p-6 rounded-xl border border-border bg-card/30 hover:border-primary/30 transition-all duration-300"
-    >
-      <div className="text-4xl md:text-5xl font-bold text-foreground mb-2">
-        {count}
-      </div>
-      <div className="text-sm font-medium text-muted-foreground">{data.label}</div>
-      <div className="text-xs text-muted-foreground/70 mt-1">{data.labelKo}</div>
+      {/* Description */}
+      <p className="text-sm text-white/50 leading-relaxed mb-2">
+        {data.description}
+      </p>
+      <p className="text-xs text-white/25 leading-relaxed">
+        {data.descriptionKo}
+      </p>
     </motion.div>
   );
 };
 
 export const AuthoritySection = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const trustRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(trustRef, { once: true, margin: "-100px" });
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 bg-background overflow-hidden"
+      className="relative py-24 md:py-32 bg-black overflow-hidden"
     >
-      {/* Data Terminal Background Effects */}
+      {/* Subtle Background Effects - Minimal */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Dot Grid */}
-        <div 
-          className="absolute inset-0 opacity-[0.03]"
-          style={{
-            backgroundImage: 'radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px)',
-            backgroundSize: '40px 40px'
-          }}
-        />
-        
-        {/* Scanline Effect */}
+        {/* Very subtle grid */}
         <div 
           className="absolute inset-0 opacity-[0.02]"
           style={{
-            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)'
+            backgroundImage: 'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+            backgroundSize: '80px 80px'
           }}
         />
         
-        {/* Gradient Orbs */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
-        
-        {/* Animated Connection Lines */}
-        <svg className="absolute inset-0 w-full h-full opacity-20">
-          <defs>
-            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-              <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="1" />
-              <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          
-          {/* Horizontal Lines */}
-          <motion.line
-            x1="0" y1="20%" x2="100%" y2="20%"
-            stroke="url(#lineGradient)"
-            strokeWidth="1"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: [0, 0.3, 0] }}
-            transition={{ duration: 4, repeat: Infinity, repeatDelay: 2 }}
-          />
-          <motion.line
-            x1="0" y1="50%" x2="100%" y2="50%"
-            stroke="url(#lineGradient)"
-            strokeWidth="1"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: [0, 0.3, 0] }}
-            transition={{ duration: 5, repeat: Infinity, repeatDelay: 3, delay: 1 }}
-          />
-          <motion.line
-            x1="0" y1="80%" x2="100%" y2="80%"
-            stroke="url(#lineGradient)"
-            strokeWidth="1"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: [0, 0.3, 0] }}
-            transition={{ duration: 4.5, repeat: Infinity, repeatDelay: 2.5, delay: 2 }}
-          />
-        </svg>
-        
-        {/* Floating Particles */}
-        <motion.div
-          className="absolute w-2 h-2 bg-primary/40 rounded-full blur-sm"
-          style={{ left: '10%', top: '30%' }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0.3, 0.6, 0.3]
-          }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute w-1.5 h-1.5 bg-emerald-500/40 rounded-full blur-sm"
-          style={{ left: '80%', top: '60%' }}
-          animate={{
-            y: [0, -25, 0],
-            opacity: [0.2, 0.5, 0.2]
-          }}
-          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-        />
-        <motion.div
-          className="absolute w-1 h-1 bg-purple-500/40 rounded-full blur-sm"
-          style={{ left: '50%', top: '70%' }}
-          animate={{
-            y: [0, -20, 0],
-            opacity: [0.2, 0.4, 0.2]
-          }}
-          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        />
+        {/* Subtle gradient orb */}
+        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-white/[0.01] rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
           className="mb-16 md:mb-20"
         >
           {/* Section number */}
-          <div className="flex items-center gap-4 mb-6">
-            <span className="text-sm font-mono text-primary tracking-wider">04</span>
-            <div className="h-px w-12 bg-primary/50" />
-            <span className="text-sm font-medium text-muted-foreground uppercase tracking-wider">Authority</span>
+          <div className="flex items-center gap-4 mb-8">
+            <span className="text-sm font-mono text-white/40 tracking-wider">04</span>
+            <div className="h-px w-12 bg-white/20" />
+            <span className="text-sm font-medium text-white/40 uppercase tracking-wider">The Architects</span>
           </div>
 
-          {/* Title */}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
-            The Architects
-          </h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-            We don't just know the market. <span className="text-foreground font-medium">We built parts of it.</span>
-          </p>
-          <p className="text-base text-muted-foreground/80 mt-2">
-            우리는 시장을 아는 게 아닙니다. 시장을 만든 사람들입니다.
-          </p>
+          {/* Title Group */}
+          <div className="max-w-3xl">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+              Built by Exchange Insiders
+            </h2>
+            <p className="text-xl md:text-2xl text-white/60 mb-3">
+              "We don't just know the market. <span className="text-white">We built parts of it.</span>"
+            </p>
+            <p className="text-base text-white/30">
+              우리는 시장을 아는 게 아닙니다. 시장의 일부를 직접 만들었습니다.
+            </p>
+          </div>
         </motion.div>
 
-        {/* Part A: Exchange DNA */}
-        <div className="mb-20 md:mb-24">
+        {/* Part 1: The DNA - 3 Column Layout */}
+        <div className="mb-20">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="flex items-center gap-3 mb-8"
           >
-            <Lock className="w-5 h-5 text-primary" />
-            <h3 className="text-lg font-semibold text-foreground">Exchange DNA</h3>
-            <span className="text-sm text-muted-foreground">— 출신 성분</span>
+            <span className="text-xs font-mono text-white/30 uppercase tracking-widest">Part 1</span>
+            <div className="h-px flex-1 bg-white/10" />
+            <span className="text-xs text-white/40">The DNA — 출신 성분</span>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6">
-            {exchangeDNA.map((item, index) => (
+            {dnaCards.map((item, index) => (
               <DNACard key={item.title} data={item} index={index} />
             ))}
           </div>
         </div>
 
-        {/* Part B: Insider Advantage */}
-        <div className="mb-20 md:mb-24">
+        {/* Part 2: The Insider Advantage - 2x2 Grid */}
+        <div>
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             className="flex items-center gap-3 mb-8"
           >
-            <Handshake className="w-5 h-5 text-primary" />
-            <h3 className="text-lg font-semibold text-foreground">The Insider Advantage</h3>
-            <span className="text-sm text-muted-foreground">— 우리만이 가진 것</span>
+            <span className="text-xs font-mono text-white/30 uppercase tracking-widest">Part 2</span>
+            <div className="h-px flex-1 bg-white/10" />
+            <span className="text-xs text-white/40">The Insider Advantage — 우리만의 무기</span>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-4 p-6 rounded-2xl border border-border bg-card/30">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {insiderAdvantages.map((item, index) => (
-              <AdvantageItem key={item.title} data={item} index={index} />
+              <AdvantageCard key={item.title} data={item} index={index} />
             ))}
           </div>
         </div>
-
-        {/* Part C: Trust Signals */}
-        <div className="mb-20 md:mb-24" ref={trustRef}>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex items-center gap-3 mb-8"
-          >
-            <Shield className="w-5 h-5 text-primary" />
-            <h3 className="text-lg font-semibold text-foreground">Trust Signals</h3>
-            <span className="text-sm text-muted-foreground">— 신뢰 지표</span>
-          </motion.div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {trustSignals.map((item, index) => (
-              <TrustSignalCard key={item.label} data={item} index={index} isInView={isInView} />
-            ))}
-          </div>
-        </div>
-
-        {/* Part D: Featured Quote */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="relative p-8 md:p-12 rounded-2xl border border-border bg-gradient-to-br from-card/80 to-card/40"
-        >
-          {/* Quote icon */}
-          <Quote className="absolute top-6 left-6 w-12 h-12 text-primary/20" />
-
-          <div className="relative z-10 max-w-3xl mx-auto text-center">
-            <p className="text-lg md:text-xl lg:text-2xl text-foreground leading-relaxed mb-6 italic">
-              "Ium Labs isn't just another agency. They understand the nuances of Korean regulations and exchange dynamics that only insiders know."
-            </p>
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-px h-6 bg-primary/50" />
-              <span className="text-sm text-muted-foreground">
-                Senior BD Lead, Tier-1 Exchange
-              </span>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );
