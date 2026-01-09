@@ -1344,7 +1344,13 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
       items: ['CEX/DEX Volume', 'Wallet Activity', 'Token Transfers', 'Smart Contracts'],
       value: liveData.onchain,
       suffix: ' signals',
-      color: 'from-blue-500/20 to-transparent'
+      color: 'from-blue-500/20 to-transparent',
+      borderColor: 'border-blue-500/50',
+      activeBorder: 'border-blue-500',
+      iconBg: 'bg-blue-500/20',
+      iconColor: 'text-blue-500',
+      dotColor: 'bg-blue-500',
+      barColor: 'bg-blue-500/50'
     },
     { 
       id: 1, 
@@ -1353,7 +1359,13 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
       items: ['X Mentions', 'Naver Trends', 'Discord Activity', 'Telegram Buzz'],
       value: liveData.social,
       suffix: ' signals',
-      color: 'from-purple-500/20 to-transparent'
+      color: 'from-purple-500/20 to-transparent',
+      borderColor: 'border-purple-500/50',
+      activeBorder: 'border-purple-500',
+      iconBg: 'bg-purple-500/20',
+      iconColor: 'text-purple-500',
+      dotColor: 'bg-purple-500',
+      barColor: 'bg-purple-500/50'
     },
     { 
       id: 2, 
@@ -1362,7 +1374,13 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
       items: ['CEX Order Books', 'Price Action', 'Liquidity Depth', 'Funding Rates'],
       value: liveData.market,
       suffix: ' data points',
-      color: 'from-green-500/20 to-transparent'
+      color: 'from-green-500/20 to-transparent',
+      borderColor: 'border-green-500/50',
+      activeBorder: 'border-green-500',
+      iconBg: 'bg-green-500/20',
+      iconColor: 'text-green-500',
+      dotColor: 'bg-green-500',
+      barColor: 'bg-green-500/50'
     }
   ];
 
@@ -1538,7 +1556,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                 transition={{ delay: i * 0.1 + 0.5 }}
                 onMouseEnter={() => setActiveDataSource(source.id)}
                 onMouseLeave={() => setActiveDataSource(null)}
-                className={`relative p-4 border bg-background transition-all duration-300 cursor-pointer overflow-hidden ${activeDataSource === source.id ? 'border-primary shadow-[0_0_25px_hsl(var(--primary)/0.15)]' : 'border-border hover:border-primary/30'}`}
+                className={`relative p-4 border bg-background transition-all duration-300 cursor-pointer overflow-hidden ${activeDataSource === source.id ? `${source.activeBorder} shadow-[0_0_25px_hsl(var(--primary)/0.15)]` : `${source.borderColor} hover:${source.activeBorder}`}`}
               >
                 {/* Gradient overlay on hover */}
                 <motion.div 
@@ -1549,14 +1567,14 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-3">
                     <div className="flex items-center gap-2">
-                      <div className={`p-1.5 rounded ${activeDataSource === source.id ? 'bg-primary/20' : 'bg-muted'}`}>
-                        <source.icon className={`w-4 h-4 transition-colors ${activeDataSource === source.id ? 'text-primary' : 'text-muted-foreground'}`} />
+                      <div className={`p-1.5 rounded ${source.iconBg}`}>
+                        <source.icon className={`w-4 h-4 transition-colors ${source.iconColor}`} />
                       </div>
                       <span className="text-sm font-medium text-foreground">{source.label}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <motion.span 
-                        className="w-2 h-2 rounded-full bg-green-500"
+                        className={`w-2 h-2 rounded-full ${source.dotColor}`}
                         animate={{ opacity: [1, 0.3, 1], scale: [1, 0.8, 1] }}
                         transition={{ duration: 1.5, repeat: Infinity }}
                       />
@@ -1564,7 +1582,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                         key={source.value}
                         initial={{ opacity: 0.5, y: -5 }}
                         animate={{ opacity: 1, y: 0 }}
-                        className="text-xs font-mono text-primary"
+                        className={`text-xs font-mono ${source.iconColor}`}
                       >
                         {source.value.toLocaleString()}{source.suffix}
                       </motion.span>
@@ -1582,7 +1600,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                         transition={{ delay: i * 0.1 + j * 0.05 + 0.6 }}
                       >
                         <motion.div 
-                          className="w-1 h-1 rounded-full bg-primary/50"
+                          className={`w-1 h-1 rounded-full ${source.dotColor}/50`}
                           animate={{ scale: [1, 1.5, 1] }}
                           transition={{ duration: 2, repeat: Infinity, delay: j * 0.2 }}
                         />
@@ -1594,7 +1612,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                   {/* Mini throughput bar */}
                   <div className="mt-3 h-1 bg-muted rounded-full overflow-hidden">
                     <motion.div 
-                      className="h-full bg-primary/50 rounded-full"
+                      className={`h-full ${source.barColor} rounded-full`}
                       animate={{ width: ['0%', '100%', '0%'] }}
                       transition={{ duration: 3, repeat: Infinity, delay: i * 0.5 }}
                     />
@@ -1604,7 +1622,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                 {/* Animated data flow particles */}
                 {activeDataSource === source.id && (
                   <motion.div
-                    className="absolute right-2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary"
+                    className={`absolute right-2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full ${source.dotColor}`}
                     animate={{ x: [0, 20], opacity: [1, 0] }}
                     transition={{ duration: 0.8, repeat: Infinity }}
                   />
