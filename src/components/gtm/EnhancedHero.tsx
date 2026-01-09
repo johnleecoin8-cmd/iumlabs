@@ -81,7 +81,7 @@ const EnhancedHero = () => {
           >
             <Zap className="w-3 h-3 text-primary" fill="currentColor" />
             <span className="text-primary text-xs font-medium tracking-widest uppercase">
-              #1 Crypto Liquidity
+              The World's Most Active Liquidity
             </span>
           </motion.div>
 
@@ -117,7 +117,7 @@ const EnhancedHero = () => {
               transition={{ delay: 0.5, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <span className="block text-[clamp(1.5rem,6vw,5rem)] font-black text-white/30 leading-[1] tracking-tight mt-2">
-                LIQUIDITY
+                THE ENGINE OF CRYPTO
               </span>
             </motion.div>
           </div>
@@ -129,7 +129,8 @@ const EnhancedHero = () => {
             transition={{ delay: 0.8, duration: 0.8 }}
             className="text-white/60 text-base md:text-xl tracking-wide mt-8 md:mt-12 max-w-2xl mx-auto font-light"
           >
-            <span className="text-white font-medium">Your ignition key for global hype.</span>
+            Korea isn't just a market.{' '}
+            <span className="text-white font-medium">It's the ignition key for global hype.</span>
           </motion.p>
         </div>
       </motion.div>
@@ -142,7 +143,7 @@ const EnhancedHero = () => {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
       >
         <span className="text-white/40 text-[10px] md:text-xs tracking-[0.3em] font-medium">
-          SCROLL
+          EXPLORE THE OPPORTUNITY
         </span>
         <motion.div
           animate={{ y: [0, 8, 0] }}
