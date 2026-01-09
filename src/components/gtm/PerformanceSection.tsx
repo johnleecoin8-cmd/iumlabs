@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Activity } from 'lucide-react';
+import { ArrowUpRight, Activity, Play, Video } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
-import { Progress } from '@/components/ui/progress';
 
 // Project logos
 import mantraLogo from '@/assets/logos/mantra.png';
@@ -20,6 +19,9 @@ import triaLogo from '@/assets/logos/tria-official.png';
 import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
 
 // Project backgrounds
+import mantraBg from '@/assets/projects/mantra-bg.jpg';
+import storyBg from '@/assets/projects/story-bg.jpg';
+import peaqBg from '@/assets/projects/peaq-bg.jpg';
 import bnbBg from '@/assets/projects/bnb-bg.jpg';
 import bybitBg from '@/assets/projects/bybit-bg.jpg';
 import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
@@ -29,54 +31,57 @@ import ondoBg from '@/assets/projects/ondo-bg.jpg';
 import polygonBg from '@/assets/projects/polygon-bg.jpg';
 import triaBg from '@/assets/projects/tria-bg.jpg';
 
-// Featured Projects Data
+// Featured Projects Data with videos
 const featuredProjects = [
   {
     name: 'MANTRA',
     slug: 'mantra',
     logo: mantraLogo,
+    image: mantraBg,
+    video: '/videos/projects/mantra-hero.mp4',
     category: 'RWA L1',
     strategy: 'KRW Market Entry',
     metric: { value: 450, suffix: '%', label: 'Volume Growth' },
     color: 'orange',
     glowColor: 'rgba(251,146,60,0.5)',
-    progress: 92
   },
   {
     name: 'Story Protocol',
     slug: 'story-protocol',
     logo: storyLogo,
+    image: storyBg,
+    video: '/videos/projects/story-hero.mp4',
     category: 'IP Protocol',
     strategy: 'Narrative-Led FOMO',
     metric: { value: 1, suffix: 'st', prefix: '#', label: 'Kaito Ranking' },
     color: 'purple',
     glowColor: 'rgba(168,85,247,0.5)',
-    progress: 100
   },
   {
     name: 'peaq',
     slug: 'peaq',
     logo: peaqLogo,
+    image: peaqBg,
+    video: '/videos/projects/peaq-hero.mp4',
     category: 'DePIN',
     strategy: 'Wallet Acquisition',
     metric: { value: 85, suffix: 'K+', label: 'Community' },
     color: 'cyan',
     glowColor: 'rgba(34,211,238,0.5)',
-    progress: 88
   },
 ];
 
-// Extended Portfolio Projects
+// Extended Portfolio Projects with videos
 const moreProjects = [
-  { name: 'BNB Chain', slug: 'bnb-chain', logo: bnbLogo, image: bnbBg },
-  { name: 'Bybit', slug: 'bybit', logo: bybitLogo, image: bybitBg },
-  { name: 'KuCoin', slug: 'kucoin', logo: kucoinLogo, image: kucoinBg },
-  { name: 'Sahara AI', slug: 'sahara-ai', logo: saharaLogo, image: saharaBg },
-  { name: 'OpenLedger', slug: 'openledger', logo: openledgerLogo, image: saharaBg },
-  { name: 'MegaETH', slug: 'megaeth', logo: megaethLogo, image: megaethBg },
-  { name: 'Ondo', slug: 'ondo', logo: ondoLogo, image: ondoBg },
-  { name: 'Polygon', slug: 'polygon', logo: polygonLogo, image: polygonBg },
-  { name: 'Tria', slug: 'tria', logo: triaLogo, image: triaBg },
+  { name: 'Sahara AI', slug: 'sahara-ai', logo: saharaLogo, image: saharaBg, video: '/videos/projects/sahara-hero.mp4', result: 'AI Partner' },
+  { name: 'KuCoin', slug: 'kucoin', logo: kucoinLogo, image: kucoinBg, video: '/videos/projects/kucoin-hero.mp4', result: 'Exchange Partner' },
+  { name: 'Bybit', slug: 'bybit', logo: bybitLogo, image: bybitBg, video: '/videos/projects/bybit-hero.mp4', result: 'Top 3 CEX' },
+  { name: 'BNB Chain', slug: 'bnb-chain', logo: bnbLogo, image: bnbBg, video: '/videos/projects/bnb-hero.mp4', result: 'Ecosystem Partner' },
+  { name: 'OpenLedger', slug: 'openledger', logo: openledgerLogo, image: saharaBg, video: null, result: 'AI Infrastructure' },
+  { name: 'MegaETH', slug: 'megaeth', logo: megaethLogo, image: megaethBg, video: null, result: 'L2 Launch' },
+  { name: 'Ondo', slug: 'ondo', logo: ondoLogo, image: ondoBg, video: null, result: 'RWA Leader' },
+  { name: 'Polygon', slug: 'polygon', logo: polygonLogo, image: polygonBg, video: null, result: 'L2 Partner' },
+  { name: 'Tria', slug: 'tria', logo: triaLogo, image: triaBg, video: null, result: 'Wallet Infra' },
 ];
 
 // Network Stats
@@ -87,47 +92,58 @@ const networkStats = [
   { value: 100, suffix: '%', label: 'Retention', sublabel: '재계약율' },
 ];
 
-// Featured Project Card
-const FeaturedProjectCard = ({
+// Video Featured Project Card
+const VideoFeaturedCard = ({
   project,
   index,
-  isVisible
+  isVisible,
+  isHero = false
 }: {
   project: typeof featuredProjects[0];
   index: number;
   isVisible: boolean;
+  isHero?: boolean;
 }) => {
-  const [isLive, setIsLive] = useState(true);
-  
-  useEffect(() => {
-    const interval = setInterval(() => setIsLive(prev => !prev), 1000);
-    return () => clearInterval(interval);
-  }, []);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (videoRef.current) {
+      videoRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setIsPlaying(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
 
   const colorClasses = {
     orange: {
       text: 'text-orange-400',
-      bg: 'bg-orange-500/10',
-      border: 'border-orange-500/30',
-      glow: 'hover:shadow-[0_0_60px_-15px_rgba(251,146,60,0.5)]',
-      indicator: 'bg-orange-500',
-      progress: 'bg-orange-500'
+      bg: 'bg-orange-500/20',
+      border: 'border-orange-500/40',
+      glow: 'shadow-[0_0_80px_-20px_rgba(251,146,60,0.6)]',
     },
     purple: {
       text: 'text-purple-400',
-      bg: 'bg-purple-500/10',
-      border: 'border-purple-500/30',
-      glow: 'hover:shadow-[0_0_60px_-15px_rgba(168,85,247,0.5)]',
-      indicator: 'bg-purple-500',
-      progress: 'bg-purple-500'
+      bg: 'bg-purple-500/20',
+      border: 'border-purple-500/40',
+      glow: 'shadow-[0_0_80px_-20px_rgba(168,85,247,0.6)]',
     },
     cyan: {
       text: 'text-cyan-400',
-      bg: 'bg-cyan-500/10',
-      border: 'border-cyan-500/30',
-      glow: 'hover:shadow-[0_0_60px_-15px_rgba(34,211,238,0.5)]',
-      indicator: 'bg-cyan-500',
-      progress: 'bg-cyan-500'
+      bg: 'bg-cyan-500/20',
+      border: 'border-cyan-500/40',
+      glow: 'shadow-[0_0_80px_-20px_rgba(34,211,238,0.6)]',
     }
   };
 
@@ -146,82 +162,121 @@ const FeaturedProjectCard = ({
         initial={{ opacity: 0, y: 30 }}
         animate={isVisible ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         className={`
-          group relative p-6 h-full
-          border ${colors.border} rounded-xl
-          bg-background/80 backdrop-blur-sm
+          group relative overflow-hidden rounded-xl
+          ${isHero ? 'aspect-[21/9] col-span-full' : 'aspect-[16/9]'}
+          border ${colors.border}
           transition-all duration-500
-          ${colors.glow}
-          hover:border-opacity-60
+          ${isHovered ? colors.glow : ''}
+          hover:border-opacity-80
         `}
       >
-        {/* Header: Logo + Live Indicator */}
-        <div className="flex items-center justify-between mb-4">
-          <img 
-            src={project.logo} 
-            alt={project.name}
-            className="h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+        {/* Background Image */}
+        <motion.img
+          src={project.image}
+          alt={project.name}
+          className="absolute inset-0 w-full h-full object-cover"
+          animate={{ scale: isHovered ? 1.1 : 1 }}
+          transition={{ duration: 0.6 }}
+        />
+
+        {/* Video Overlay */}
+        {project.video && (
+          <video
+            ref={videoRef}
+            src={project.video}
+            muted
+            loop
+            playsInline
+            className={`
+              absolute inset-0 w-full h-full object-cover
+              transition-opacity duration-500
+              ${isPlaying ? 'opacity-100' : 'opacity-0'}
+            `}
           />
-          <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${colors.indicator} ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
-            <span className={`text-[10px] font-mono uppercase tracking-wider ${colors.text}`}>
-              LIVE
+        )}
+
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/20" />
+
+        {/* Playing Indicator */}
+        {isPlaying && (
+          <motion.div
+            initial={{ opacity: 0, x: -10 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="absolute top-4 left-4 flex items-center gap-2 z-10"
+          >
+            <motion.div
+              className="w-2 h-2 bg-red-500 rounded-full"
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ repeat: Infinity, duration: 0.8 }}
+            />
+            <span className="text-xs font-mono text-white/80 uppercase tracking-wider">
+              Playing
+            </span>
+          </motion.div>
+        )}
+
+        {/* Video Icon (when not playing) */}
+        {project.video && !isPlaying && (
+          <div className="absolute top-4 left-4 flex items-center gap-2 z-10">
+            <Video className="w-4 h-4 text-white/50" />
+            <span className="text-xs font-mono text-white/50 uppercase tracking-wider">
+              Hover to Play
             </span>
           </div>
-        </div>
+        )}
 
         {/* Category Badge */}
-        <div className="flex items-center gap-2 mb-4">
-          <span className={`px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded ${colors.bg} ${colors.text}`}>
+        <div className="absolute top-4 right-4 z-10">
+          <span className={`px-3 py-1 text-[10px] font-mono uppercase tracking-wider rounded-full ${colors.bg} ${colors.text} backdrop-blur-sm`}>
             {project.category}
           </span>
         </div>
 
-        {/* Main Metric */}
-        <div className="mb-4">
-          <div className={`text-4xl font-bold font-mono ${colors.text} [text-shadow:0_0_30px_${project.glowColor}]`}>
-            {project.metric.prefix || ''}{count}
+        {/* Content */}
+        <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
+          {/* Logo */}
+          <img 
+            src={project.logo} 
+            alt={project.name}
+            className={`${isHero ? 'h-12' : 'h-8'} w-auto object-contain mb-3 opacity-90 group-hover:opacity-100 transition-opacity`}
+          />
+
+          {/* Metric */}
+          <div className="flex items-end gap-4 mb-2">
+            <div className={`${isHero ? 'text-5xl md:text-6xl' : 'text-3xl md:text-4xl'} font-bold font-mono ${colors.text}`}
+              style={{ textShadow: `0 0 40px ${project.glowColor}` }}
+            >
+              {project.metric.prefix || ''}{count}
+            </div>
+            <span className="text-white/70 font-mono text-sm mb-2 uppercase tracking-wider">
+              {project.metric.label}
+            </span>
           </div>
-          <div className="text-sm text-muted-foreground font-mono uppercase tracking-wider">
-            {project.metric.label}
+
+          {/* Strategy */}
+          <div className="flex items-center gap-3">
+            <span className="text-white/50 text-xs font-mono">STRATEGY:</span>
+            <span className="text-white/90 text-sm font-medium">
+              {project.strategy}
+            </span>
           </div>
         </div>
 
-        {/* Strategy Label */}
-        <div className="mb-4">
-          <div className="text-xs text-muted-foreground mb-1">STRATEGY</div>
-          <div className="text-sm text-foreground font-medium">
-            {project.strategy}
-          </div>
-        </div>
-
-        {/* Progress Bar */}
-        <div className="space-y-1">
-          <div className="flex items-center justify-between text-[10px] font-mono">
-            <span className="text-muted-foreground">THROUGHPUT</span>
-            <span className={colors.text}>{project.progress}%</span>
-          </div>
-          <div className="h-1 bg-border/30 rounded-full overflow-hidden">
-            <motion.div
-              className={`h-full ${colors.progress} rounded-full`}
-              initial={{ width: 0 }}
-              animate={isVisible ? { width: `${project.progress}%` } : {}}
-              transition={{ duration: 1.5, delay: 0.5 + index * 0.2 }}
-            />
-          </div>
-        </div>
-
-        {/* Arrow indicator */}
-        <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-          <ArrowUpRight className={`w-4 h-4 ${colors.text}`} />
+        {/* Arrow */}
+        <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity z-10">
+          <ArrowUpRight className={`w-5 h-5 ${colors.text}`} />
         </div>
       </motion.div>
     </Link>
   );
 };
 
-// More Project Tile
-const ProjectTile = ({
+// Video Extended Project Card
+const VideoProjectTile = ({
   project,
   index,
   isVisible
@@ -230,38 +285,111 @@ const ProjectTile = ({
   index: number;
   isVisible: boolean;
 }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    if (project.video && videoRef.current) {
+      videoRef.current.play().then(() => {
+        setIsPlaying(true);
+      }).catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setIsPlaying(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
   return (
     <Link to={`/projects/${project.slug}`}>
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={isVisible ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
-        className="group relative aspect-square rounded-lg overflow-hidden border border-border/30 hover:border-primary/50 transition-all duration-300 hover:scale-105"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        className={`
+          group relative aspect-[4/3] rounded-xl overflow-hidden 
+          border border-border/30 
+          transition-all duration-300
+          ${isHovered ? 'border-primary/50 scale-105 shadow-[0_0_40px_-10px_hsl(var(--primary)/0.4)]' : ''}
+        `}
       >
         {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+        <motion.div 
+          className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${project.image})` }}
+          animate={{ scale: isHovered ? 1.1 : 1 }}
+          transition={{ duration: 0.5 }}
         />
+
+        {/* Video Overlay */}
+        {project.video && (
+          <video
+            ref={videoRef}
+            src={project.video}
+            muted
+            loop
+            playsInline
+            className={`
+              absolute inset-0 w-full h-full object-cover
+              transition-opacity duration-500
+              ${isPlaying ? 'opacity-100' : 'opacity-0'}
+            `}
+          />
+        )}
         
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20" />
+
+        {/* Playing Indicator */}
+        {isPlaying && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="absolute top-3 left-3 flex items-center gap-1.5 z-10"
+          >
+            <motion.div
+              className="w-1.5 h-1.5 bg-red-500 rounded-full"
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ repeat: Infinity, duration: 0.8 }}
+            />
+            <span className="text-[9px] font-mono text-white/70 uppercase">Live</span>
+          </motion.div>
+        )}
+
+        {/* Video Available Icon */}
+        {project.video && !isPlaying && (
+          <div className="absolute top-3 right-3 z-10">
+            <Play className="w-3 h-3 text-white/40" />
+          </div>
+        )}
         
         {/* Content */}
-        <div className="absolute inset-0 p-3 flex flex-col justify-end">
+        <div className="absolute inset-0 p-4 flex flex-col justify-end z-10">
           <img 
             src={project.logo} 
             alt={project.name}
-            className="h-6 w-auto object-contain mb-1 opacity-80 group-hover:opacity-100 transition-opacity"
+            className="h-7 w-auto object-contain mb-2 opacity-80 group-hover:opacity-100 transition-opacity"
           />
-          <span className="text-xs font-mono text-muted-foreground group-hover:text-foreground transition-colors">
-            {project.name}
+          <span className="text-xs font-mono text-white/50 group-hover:text-white/80 transition-colors">
+            {project.result}
           </span>
         </div>
 
-        {/* Glow effect on hover */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+        {/* Hover glow */}
+        <div className={`
+          absolute inset-0 pointer-events-none transition-opacity duration-300
+          ${isHovered ? 'opacity-100' : 'opacity-0'}
+        `}>
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent" />
         </div>
       </motion.div>
     </Link>
@@ -291,7 +419,7 @@ const StatCard = ({
       initial={{ opacity: 0, y: 20 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-      className="text-center p-4 border border-border/30 rounded-lg bg-background/50 backdrop-blur-sm"
+      className="text-center p-4 border border-border/30 rounded-lg bg-background/50 backdrop-blur-sm hover:border-primary/30 transition-colors"
     >
       <div className="text-2xl md:text-3xl font-bold font-mono text-primary">
         {stat.prefix || ''}{count}
@@ -362,47 +490,6 @@ export const PerformanceSection = () => {
           />
         ))}
 
-        {/* Connection lines SVG */}
-        <svg className="absolute inset-0 w-full h-full opacity-10">
-          <motion.line
-            x1="16.5%"
-            y1="40%"
-            x2="50%"
-            y2="40%"
-            stroke="hsl(var(--primary))"
-            strokeWidth="1"
-            strokeDasharray="4 4"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
-            transition={{ duration: 2, delay: 1 }}
-          />
-          <motion.line
-            x1="50%"
-            y1="40%"
-            x2="83.5%"
-            y2="40%"
-            stroke="hsl(var(--primary))"
-            strokeWidth="1"
-            strokeDasharray="4 4"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
-            transition={{ duration: 2, delay: 1.2 }}
-          />
-          {/* Node points */}
-          {[16.5, 50, 83.5].map((x, i) => (
-            <motion.circle
-              key={i}
-              cx={`${x}%`}
-              cy="40%"
-              r="3"
-              fill="hsl(var(--primary))"
-              initial={{ scale: 0 }}
-              animate={isInView ? { scale: 1 } : {}}
-              transition={{ duration: 0.3, delay: 0.8 + i * 0.2 }}
-            />
-          ))}
-        </svg>
-
         {/* Central glow */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]">
           <motion.div
@@ -446,16 +533,29 @@ export const PerformanceSection = () => {
           </p>
         </motion.div>
 
-        {/* Featured Projects Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {featuredProjects.map((project, index) => (
-            <FeaturedProjectCard
-              key={project.slug}
-              project={project}
-              index={index}
+        {/* Featured Projects - Hero Layout */}
+        <div className="mb-12">
+          {/* Hero Card (First Project) */}
+          <div className="mb-6">
+            <VideoFeaturedCard
+              project={featuredProjects[0]}
+              index={0}
               isVisible={isInView}
+              isHero={true}
             />
-          ))}
+          </div>
+
+          {/* Two Column Grid */}
+          <div className="grid md:grid-cols-2 gap-6">
+            {featuredProjects.slice(1).map((project, index) => (
+              <VideoFeaturedCard
+                key={project.slug}
+                project={project}
+                index={index + 1}
+                isVisible={isInView}
+              />
+            ))}
+          </div>
         </div>
 
         {/* More Projects Section */}
@@ -470,11 +570,17 @@ export const PerformanceSection = () => {
             <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
               Extended Network • {moreProjects.length} Projects
             </span>
+            <div className="flex items-center gap-1 ml-2">
+              <Video className="w-3 h-3 text-primary/60" />
+              <span className="text-[10px] font-mono text-primary/60">
+                {moreProjects.filter(p => p.video).length} with video
+              </span>
+            </div>
           </div>
           
-          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {moreProjects.map((project, index) => (
-              <ProjectTile
+              <VideoProjectTile
                 key={project.slug}
                 project={project}
                 index={index}
@@ -507,14 +613,23 @@ export const PerformanceSection = () => {
             ))}
           </div>
 
-          {/* Full Progress Bar */}
-          <div className="p-4 border border-border/30 rounded-lg bg-background/50 backdrop-blur-sm">
-            <div className="flex items-center justify-between text-xs font-mono mb-2">
-              <span className="text-muted-foreground">NETWORK STATUS</span>
-              <span className="text-green-500">100% ACTIVE</span>
-            </div>
-            <Progress value={100} className="h-2" />
-          </div>
+          {/* View All Link */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 1 }}
+            className="flex justify-center mt-8"
+          >
+            <Link 
+              to="/projects"
+              className="group inline-flex items-center gap-2 px-6 py-3 border border-border/50 rounded-full hover:border-primary/50 hover:bg-primary/5 transition-all duration-300"
+            >
+              <span className="text-sm font-mono text-muted-foreground group-hover:text-foreground transition-colors">
+                View All Projects
+              </span>
+              <ArrowUpRight className="w-4 h-4 text-muted-foreground group-hover:text-primary transition-colors" />
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
     </section>
