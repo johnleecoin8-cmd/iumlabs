@@ -8,8 +8,7 @@ import teamGrowthPhoto from "@/assets/team/team-growth.jpeg";
 const LeadershipSection = () => {
   const ceoBackground = [
     "Ex-KuCoin Core Team",
-    "Senior Equity Consultant at Fundshing",
-    "Outlierventures Investment Manager",
+    "Outlier Ventures Investment Manager",
     "CryptoBridge Korea Founder"
   ];
 
