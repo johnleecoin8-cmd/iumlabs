@@ -23,27 +23,14 @@ import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
 const allProjects = [
   // Row 1 (→ right)
   {
-    name: 'MANTRA',
-    slug: 'mantra',
-    logo: mantraLogo,
-    bgImage: '/images/projects/mantra-bg.jpg',
-    bgVideo: '/videos/projects/mantra-hero.mp4',
-    category: 'RWA L1',
-    strategy: 'KRW Market Entry',
-    metric: { value: 450, suffix: '%', label: 'Volume Growth' },
-    color: 'orange',
-    glowColor: 'rgba(251,146,60,0.5)',
-    progress: 92
-  },
-  {
     name: 'Story Protocol',
     slug: 'story-protocol',
     logo: storyLogo,
     bgImage: '/images/projects/story-bg.jpg',
     bgVideo: '/videos/projects/story-hero.mp4',
     category: 'IP Protocol',
-    strategy: 'Narrative-Led FOMO',
-    metric: { value: 1, suffix: 'st', prefix: '#', label: 'Kaito Ranking' },
+    strategy: 'Branding & Hype',
+    metric: { value: 1, suffix: '', prefix: '#', label: 'Share of Voice' },
     color: 'purple',
     glowColor: 'rgba(168,85,247,0.5)',
     progress: 100
@@ -55,11 +42,24 @@ const allProjects = [
     bgImage: '/images/projects/peaq-bg.jpg',
     bgVideo: '/videos/projects/peaq-hero.mp4',
     category: 'DePIN',
-    strategy: 'Wallet Acquisition',
+    strategy: 'User Acquisition',
     metric: { value: 85, suffix: 'K+', label: 'Active Wallets' },
     color: 'cyan',
     glowColor: 'rgba(34,211,238,0.5)',
     progress: 88
+  },
+  {
+    name: 'MANTRA',
+    slug: 'mantra',
+    logo: mantraLogo,
+    bgImage: '/images/projects/mantra-bg.jpg',
+    bgVideo: '/videos/projects/mantra-hero.mp4',
+    category: 'RWA L1',
+    strategy: 'Market Impact',
+    metric: { value: 450, suffix: '%', label: 'Volume Growth' },
+    color: 'orange',
+    glowColor: 'rgba(251,146,60,0.5)',
+    progress: 92
   },
   // Row 2 (← left)
   {
@@ -193,10 +193,10 @@ const projectRows = [
 
 // Network Stats
 const networkStats = [
-  { value: 1.5, suffix: 'B+', prefix: '$', label: 'Volume', sublabel: '거래량' },
-  { value: 500, suffix: 'K+', label: 'Community', sublabel: '활성 커뮤니티' },
-  { value: 1, suffix: '', prefix: '#', label: 'Mindshare', sublabel: '마인드쉐어' },
-  { value: 100, suffix: '%', label: 'Retention', sublabel: '재계약율' },
+  { value: 1, suffix: '', prefix: '#', label: 'Trend Setter', sublabel: '트렌드 선도' },
+  { value: 95, suffix: '%', label: 'Engagement', sublabel: '활성 참여율' },
+  { value: 3, suffix: 'x', label: 'Viral Rate', sublabel: '바이럴 확산' },
+  { value: 100, suffix: '%', label: 'Retail-Driven', sublabel: '리테일 중심' },
 ];
 
 // Project Card for Marquee

@@ -385,7 +385,7 @@ const HeroSection = () => {
             delay: 0.35,
             ease: [0.33, 1, 0.68, 1]
           }}>
-              <GlitchText className="text-primary">Impact.</GlitchText>{' '}
+              <GlitchText className="text-primary">Influence.</GlitchText>{' '}
               <motion.span 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -397,7 +397,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.5, duration: 0.5 }}
                 className="text-foreground/40"
-              >Liquidity.</motion.span>
+              >Dominance.</motion.span>
             </motion.span>
           </span>
         </motion.h1>
@@ -412,9 +412,9 @@ const HeroSection = () => {
         duration: 0.6,
         delay: 0.5
       }} className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-16">
-          Launch in Korea with the most data-driven GTM framework.
+          We engineer market dominance in Korea through data-driven creativity.
           <br />
-          <span className="text-foreground/80">We turn cultural barriers into sustainable volume & user growth.</span>
+          <span className="text-foreground/80">우리는 데이터 기반의 크리에이티브로 한국 시장 내 지배력을 설계합니다.</span>
         </motion.p>
 
         {/* Stats with enhanced styling */}
@@ -428,11 +428,11 @@ const HeroSection = () => {
         duration: 0.6,
         delay: 0.7
       }} className="flex flex-wrap items-center gap-8 md:gap-12">
-          <AnimatedStat value={1.5} prefix="$" suffix="B+" label="Volume Generated" delay={0.8} isVisible={isInView} />
+          <AnimatedStat value={1} prefix="#" suffix="" label="Trend Setter in Asia" delay={0.8} isVisible={isInView} />
           <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <AnimatedStat value={500} suffix="K+" label="Active Community" delay={1.0} isVisible={isInView} />
+          <AnimatedStat value={95} suffix="%" label="Active Engagement" delay={1.0} isVisible={isInView} />
           <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <AnimatedStat value={1} prefix="#" suffix="" label="Mindshare Ranking" delay={1.2} isVisible={isInView} />
+          <AnimatedStat value={3} suffix="x" label="Viral Spread Rate" delay={1.2} isVisible={isInView} />
         </motion.div>
 
         {/* Before → After Transformation Bar */}
@@ -747,19 +747,19 @@ const MarketIntelligenceSection = () => {
   // Market Logic Data - 3 Column
   const marketLogic = [{
     number: '01',
-    title: 'The KRW Premium',
-    subtitle: '#2 Global Fiat Volume',
-    description: 'The Korean Won (KRW) consistently rivals the USD in crypto trading volume, often surpassing the Euro. Securing a foothold in the KRW market isn\'t just about exposure—it\'s about accessing a liquidity pool that rivals the global reserve currency.'
+    title: 'The Viral Gateway',
+    subtitle: '#1 Trend Setter in Asia',
+    description: "Korea isn't just a market; it's a microphone. Trends ignited in Seoul spread to Japan, SEA, and beyond. Winning here means winning Asia's attention economy."
   }, {
     number: '02',
-    title: 'High-Engagement Users',
-    subtitle: 'Active Participants, Not Holders',
-    description: 'Korean users are not just holders; they are active participants. High velocity comes from high engagement—users who research, discuss, and advocate for projects they believe in. This engagement creates organic momentum that compounds over time.'
+    title: 'Hyper-Active Users',
+    subtitle: 'Highest Engagement Rate',
+    description: "Korean users don't just 'hold'; they engage, discuss, and advocate. We tap into the world's most hyper-connected digital society to build a sticky, vocal community foundation."
   }, {
     number: '03',
-    title: 'The Organic Multiplier',
-    subtitle: 'Retail-Driven Price Discovery',
-    description: 'Unlike markets dominated by institutional algorithms, Korea is powered by real retail conviction. Winning the "mindshare" of Korean users creates a sustained buy-pressure floor that defends your token against global volatility.'
+    title: 'Retail Powerhouse',
+    subtitle: 'Real User Acquisition',
+    description: "Institutional money follows retail heat. By securing genuine retail 'Mindshare' and actual wallet usage in Korea, we create the organic demand that exchanges and VCs look for."
   }];
   return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border">
       <motion.div initial={{
@@ -771,10 +771,10 @@ const MarketIntelligenceSection = () => {
           01 The Strategic Imperative
         </p>
         <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-2">
-          The Power of KRW Liquidity
+          Why Korea Wins
         </h2>
         <p className="text-muted-foreground text-lg mb-16">
-          Access the world's most active fiat gateway.
+          한국은 돈이 많다 → 한국은 트렌드가 빠르고 유저가 열정적이다
         </p>
 
         {/* Module A: The Market Logic - 3 Column */}
@@ -882,16 +882,16 @@ const MarketIntelligenceSection = () => {
         {/* Key Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
           <div className="p-4 border border-border bg-background text-center">
-            <p className="text-2xl md:text-3xl font-medium text-primary">#2</p>
-            <p className="text-xs text-muted-foreground mt-1">Global Fiat Volume (KRW)</p>
+            <p className="text-2xl md:text-3xl font-medium text-primary">#1</p>
+            <p className="text-xs text-muted-foreground mt-1">Trend Setter in Asia</p>
           </div>
           <div className="p-4 border border-border bg-background text-center">
-            <p className="text-2xl md:text-3xl font-medium text-foreground">4-5x</p>
-            <p className="text-xs text-muted-foreground mt-1">Higher Velocity</p>
+            <p className="text-2xl md:text-3xl font-medium text-foreground">95%</p>
+            <p className="text-xs text-muted-foreground mt-1">Active Engagement</p>
           </div>
           <div className="p-4 border border-border bg-background text-center">
-            <p className="text-2xl md:text-3xl font-medium text-foreground">$10M</p>
-            <p className="text-xs text-muted-foreground mt-1">= $100M Volume Elsewhere</p>
+            <p className="text-2xl md:text-3xl font-medium text-foreground">3x</p>
+            <p className="text-xs text-muted-foreground mt-1">Viral Spread Rate</p>
           </div>
           <div className="p-4 border border-border bg-background text-center">
             <p className="text-2xl md:text-3xl font-medium text-foreground">100%</p>
@@ -909,10 +909,10 @@ const MarketIntelligenceSection = () => {
         delay: 0.5
       }} className="border-l-2 border-primary pl-6">
           <p className="text-lg md:text-xl text-foreground italic">
-            "Securing a foothold in the KRW market isn't just about exposure—it's about plugging into the only fiat pair that challenges the Dollar."
+            "한국은 단순한 시장이 아니라 '확성기'입니다. 서울에서 점화된 트렌드는 아시아 전역으로 퍼집니다."
           </p>
           <footer className="mt-2 text-sm text-muted-foreground">
-            — The Strategic Imperative
+            — Why Korea Wins
           </footer>
         </motion.blockquote>
       </motion.div>
