@@ -1521,172 +1521,8 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
           ))}
         </div>
 
-        {/* Main visualization grid */}
-        <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-start relative">
-          {/* SVG Connection Lines - Desktop Only */}
-          <svg className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-10" preserveAspectRatio="none">
-            <defs>
-              {/* Gradients for each data source */}
-              <linearGradient id="flowGradientBlue" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8"/>
-                <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.4"/>
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.2"/>
-              </linearGradient>
-              <linearGradient id="flowGradientPurple" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#a855f7" stopOpacity="0.8"/>
-                <stop offset="50%" stopColor="#a855f7" stopOpacity="0.4"/>
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.2"/>
-              </linearGradient>
-              <linearGradient id="flowGradientGreen" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="#22c55e" stopOpacity="0.8"/>
-                <stop offset="50%" stopColor="#22c55e" stopOpacity="0.4"/>
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.2"/>
-              </linearGradient>
-              <linearGradient id="flowGradientOutput" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8"/>
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.2"/>
-              </linearGradient>
-              
-              {/* Glow filter */}
-              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            
-            {/* Connection Line 1: Onchain Data (top) to AI Core */}
-            <path 
-              d="M 32% 18% C 38% 18%, 42% 35%, 48% 48%" 
-              stroke="url(#flowGradientBlue)"
-              strokeWidth="2"
-              fill="none"
-              strokeDasharray="4 2"
-              opacity="0.6"
-            />
-            {/* Animated particle 1 */}
-            <circle r="4" fill="#3b82f6" filter="url(#glow)">
-              <animateMotion 
-                dur="3s" 
-                repeatCount="indefinite"
-                path="M 32% 18% C 38% 18%, 42% 35%, 48% 48%"
-              />
-              <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" />
-            </circle>
-            <circle r="4" fill="#3b82f6" filter="url(#glow)">
-              <animateMotion 
-                dur="3s" 
-                repeatCount="indefinite"
-                path="M 32% 18% C 38% 18%, 42% 35%, 48% 48%"
-                begin="1.5s"
-              />
-              <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="1.5s" />
-            </circle>
-            
-            {/* Connection Line 2: Social Signals (middle) to AI Core */}
-            <path 
-              d="M 32% 50% C 36% 50%, 42% 50%, 48% 50%" 
-              stroke="url(#flowGradientPurple)"
-              strokeWidth="2"
-              fill="none"
-              strokeDasharray="4 2"
-              opacity="0.6"
-            />
-            {/* Animated particles 2 */}
-            <circle r="4" fill="#a855f7" filter="url(#glow)">
-              <animateMotion 
-                dur="2s" 
-                repeatCount="indefinite"
-                path="M 32% 50% C 36% 50%, 42% 50%, 48% 50%"
-              />
-              <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" />
-            </circle>
-            <circle r="4" fill="#a855f7" filter="url(#glow)">
-              <animateMotion 
-                dur="2s" 
-                repeatCount="indefinite"
-                path="M 32% 50% C 36% 50%, 42% 50%, 48% 50%"
-                begin="0.7s"
-              />
-              <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="0.7s" />
-            </circle>
-            <circle r="4" fill="#a855f7" filter="url(#glow)">
-              <animateMotion 
-                dur="2s" 
-                repeatCount="indefinite"
-                path="M 32% 50% C 36% 50%, 42% 50%, 48% 50%"
-                begin="1.4s"
-              />
-              <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="1.4s" />
-            </circle>
-            
-            {/* Connection Line 3: Market Data (bottom) to AI Core */}
-            <path 
-              d="M 32% 82% C 38% 82%, 42% 65%, 48% 52%" 
-              stroke="url(#flowGradientGreen)"
-              strokeWidth="2"
-              fill="none"
-              strokeDasharray="4 2"
-              opacity="0.6"
-            />
-            {/* Animated particle 3 */}
-            <circle r="4" fill="#22c55e" filter="url(#glow)">
-              <animateMotion 
-                dur="2.5s" 
-                repeatCount="indefinite"
-                path="M 32% 82% C 38% 82%, 42% 65%, 48% 52%"
-              />
-              <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" />
-            </circle>
-            <circle r="4" fill="#22c55e" filter="url(#glow)">
-              <animateMotion 
-                dur="2.5s" 
-                repeatCount="indefinite"
-                path="M 32% 82% C 38% 82%, 42% 65%, 48% 52%"
-                begin="1.25s"
-              />
-              <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin="1.25s" />
-            </circle>
-            
-            {/* Output Line: AI Core to Strategic Output */}
-            <path 
-              d="M 52% 50% C 58% 50%, 62% 50%, 68% 50%" 
-              stroke="url(#flowGradientOutput)"
-              strokeWidth="2"
-              fill="none"
-              strokeDasharray="4 2"
-              opacity="0.6"
-            />
-            {/* Animated output particles */}
-            <circle r="4" fill="hsl(var(--primary))" filter="url(#glow)">
-              <animateMotion 
-                dur="1.5s" 
-                repeatCount="indefinite"
-                path="M 52% 50% C 58% 50%, 62% 50%, 68% 50%"
-              />
-              <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" />
-            </circle>
-            <circle r="4" fill="hsl(var(--primary))" filter="url(#glow)">
-              <animateMotion 
-                dur="1.5s" 
-                repeatCount="indefinite"
-                path="M 52% 50% C 58% 50%, 62% 50%, 68% 50%"
-                begin="0.5s"
-              />
-              <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="0.5s" />
-            </circle>
-            <circle r="4" fill="hsl(var(--primary))" filter="url(#glow)">
-              <animateMotion 
-                dur="1.5s" 
-                repeatCount="indefinite"
-                path="M 52% 50% C 58% 50%, 62% 50%, 68% 50%"
-                begin="1s"
-              />
-              <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="1s" />
-            </circle>
-          </svg>
+        {/* Main visualization grid - 5 columns: Sources, Connector, Core, Connector, Output */}
+        <div className="grid lg:grid-cols-[1fr_auto_auto_auto_1fr] gap-4 lg:gap-0 items-center relative">
 
           {/* Data Sources */}
           <div className="space-y-4 relative z-10">
@@ -1777,12 +1613,48 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
             ))}
           </div>
 
+          {/* Connection Lines: Data Sources → AI Core */}
+          <div className="hidden lg:flex flex-col items-center justify-center px-4 py-8 relative z-10">
+            {/* Animated connection lines from each data source */}
+            {[0, 1, 2].map((i) => (
+              <motion.div
+                key={i}
+                className="relative h-16 flex items-center"
+                initial={{ opacity: 0 }}
+                animate={isVisible ? { opacity: 1 } : {}}
+                transition={{ delay: 0.6 + i * 0.1 }}
+              >
+                {/* Main connection line */}
+                <div className={`w-16 h-0.5 relative overflow-hidden ${
+                  i === 0 ? 'bg-gradient-to-r from-blue-500/60 to-primary/40' :
+                  i === 1 ? 'bg-gradient-to-r from-purple-500/60 to-primary/40' :
+                  'bg-gradient-to-r from-green-500/60 to-primary/40'
+                }`}>
+                  {/* Animated particle */}
+                  <motion.div
+                    className={`absolute h-full w-3 ${
+                      i === 0 ? 'bg-blue-400' : i === 1 ? 'bg-purple-400' : 'bg-green-400'
+                    }`}
+                    animate={{ x: ['-100%', '600%'] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3, ease: "linear" }}
+                  />
+                </div>
+                {/* Arrow head */}
+                <motion.div
+                  className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-primary/60"
+                  animate={{ opacity: [0.6, 1, 0.6] }}
+                  transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
+                />
+              </motion.div>
+            ))}
+          </div>
+
           {/* LLM Core - Enhanced */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isVisible ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.8, type: "spring" }}
-            className="relative flex flex-col items-center mt-8 lg:mt-12 z-10"
+            className="relative flex flex-col items-center z-10"
           >
 
             {/* Main LLM Core Box */}
@@ -1867,6 +1739,36 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
             </div>
 
           </motion.div>
+
+          {/* Connection Lines: AI Core → Output */}
+          <div className="hidden lg:flex flex-col items-center justify-center px-4 py-8 relative z-10">
+            {/* Single connection with multiple particles */}
+            <motion.div
+              className="relative flex items-center"
+              initial={{ opacity: 0 }}
+              animate={isVisible ? { opacity: 1 } : {}}
+              transition={{ delay: 1 }}
+            >
+              {/* Main connection line */}
+              <div className="w-16 h-0.5 bg-gradient-to-r from-primary/60 to-primary/40 relative overflow-hidden">
+                {/* Multiple animated particles */}
+                {[0, 1, 2].map((i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute h-full w-3 bg-primary"
+                    animate={{ x: ['-100%', '600%'] }}
+                    transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.4, ease: "linear" }}
+                  />
+                ))}
+              </div>
+              {/* Arrow head */}
+              <motion.div
+                className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-primary/80"
+                animate={{ opacity: [0.6, 1, 0.6] }}
+                transition={{ duration: 1, repeat: Infinity }}
+              />
+            </motion.div>
+          </div>
 
           {/* Output Panel - Simplified */}
           <div className="space-y-4 relative z-10">
