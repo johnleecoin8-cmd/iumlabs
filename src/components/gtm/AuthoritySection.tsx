@@ -1,47 +1,52 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { useCountUp } from '@/hooks/useCountUp';
-// Roster Data - The Team
+
+// Roster Data - The Team (Creative Agency Style)
 const rosterMembers = [
   {
-    number: '01',
-    category: 'GLOBAL STRATEGY',
-    role: 'Global Strategy Lead',
-    origin: 'Ex-KuCoin Core Team',
-    intel: 'Inside knowledge of global CEX listing logic & MM operations.',
-    intelKo: '글로벌 거래소 핵심 팀, 상장 로직 및 MM 운영 총괄'
+    id: '01',
+    role: 'CHIEF EXECUTIVE',
+    title: 'CEO / GTM Director',
+    background: 'Ex-KuCoin & Outlier Ventures',
+    quote: 'Standardizing Global Excellence.',
+    description: 'Defines the brand hierarchy and market entry strategy that matches Tier-1 global standards.',
+    descriptionKo: '글로벌 탑티어 수준의 브랜드 위계와 시장 진입 전략(GTM)을 총괄 설계합니다.'
   },
   {
-    number: '02',
-    category: 'VENTURE NETWORK',
-    role: 'Venture Network Lead',
-    origin: 'Ex-Outlier Ventures Inv. Manager',
-    intel: 'Direct access to Tier-1 VCs & Narrative structuring.',
-    intelKo: '유럽 최대 Web3 액셀러레이터, 글로벌 VC 네트워크 연결'
+    id: '02',
+    role: 'STRATEGY LEAD',
+    title: 'Head of Narrative',
+    background: 'Ex-Binance Strategy',
+    quote: 'Crafting the Billion-Dollar Narrative.',
+    description: 'Structuring compelling brand stories that resonate from retail users to institutional partners.',
+    descriptionKo: '리테일 유저부터 기관까지 설득할 수 있는, 강력하고 호소력 짙은 브랜드 내러티브를 만듭니다.'
   },
   {
-    number: '03',
-    category: 'KOREA EXECUTION',
-    role: 'Korea Market Lead',
-    origin: 'Founder of CryptoBridge',
-    intel: 'Executed 30+ GTM campaigns. Deepest local community roots.',
-    intelKo: '크립토브릿지 설립자, 30+ 프로젝트 성공 수행 및 커뮤니티 장악'
+    id: '03',
+    role: 'OPERATION LEAD',
+    title: 'Head of Experience',
+    background: 'Founder of CryptoBridge',
+    quote: 'Turning Tech into Culture.',
+    description: 'Translating complex Web3 tech into on-ground cultural movements and fandom-driven events.',
+    descriptionKo: '어려운 Web3 기술을 한국 유저들이 열광하는 \'문화\'와 \'오프라인 경험\'으로 번역합니다.'
   },
   {
-    number: '04',
-    category: 'FINANCE & STRUCTURING',
-    role: 'Token Economy Architect',
-    origin: 'Senior Consultant at Fundshing',
-    intel: 'Financial structuring & Asset optimization expert.',
-    intelKo: '금융 컨설턴트 출신, 토큰 이코노미 및 자산 운용 최적화'
-  }
+    id: '04',
+    role: 'GROWTH LEAD',
+    title: 'Head of Performance',
+    background: 'Ex-Fundshing Consultant',
+    quote: 'Data-Driven Impact.',
+    description: 'Optimizing marketing ROI through financial-grade data analysis and precision targeting.',
+    descriptionKo: '금융 레벨의 정밀한 데이터 분석을 마케팅에 적용하여, 예산 대비 최고의 효율(ROI)을 뽑아냅니다.'
+  },
 ];
 
 // Metrics Data
 const metrics = [
-  { value: '$1.5B+', label: 'Volume Generated', labelKo: '거래량 창출' },
+  { value: '$1.5B+', label: 'Volume Generated', labelKo: '생성된 거래량' },
   { value: '500K+', label: 'Active Community', labelKo: '활성 커뮤니티' },
-  { value: '#1', label: 'Mindshare Ranking', labelKo: '마인드쉐어 랭킹' }
+  { value: '#1', label: 'Mindshare Ranking', labelKo: '마인드셰어 랭킹' },
 ];
 
 // Backing Intelligence
@@ -145,39 +150,40 @@ const RosterRow = ({ data, index }: { data: typeof rosterMembers[0]; index: numb
         {/* Number */}
         <div className="col-span-1 hidden md:block">
           <span className="font-mono text-sm text-white/20 group-hover:text-white/40 transition-colors">
-            {data.number}
+            {data.id}
           </span>
         </div>
 
         {/* Category + Role */}
         <div className="col-span-12 md:col-span-3">
           <div className="flex items-center gap-2 mb-1 md:mb-0">
-            <span className="md:hidden font-mono text-xs text-white/30">{data.number}</span>
+            <span className="md:hidden font-mono text-xs text-white/30">{data.id}</span>
             <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-primary/80 group-hover:text-primary transition-colors">
-              {data.category}
+              {data.role}
             </span>
           </div>
           <h4 className="text-base md:text-lg font-semibold text-white group-hover:text-white transition-colors mt-1">
-            {data.role}
+            {data.title}
           </h4>
         </div>
 
-        {/* Origin */}
+        {/* Background */}
         <div className="col-span-12 md:col-span-3 mt-2 md:mt-0">
-          <div className="text-[10px] text-white/30 uppercase tracking-wider mb-1 md:hidden">Origin</div>
+          <div className="text-[10px] text-white/30 uppercase tracking-wider mb-1 md:hidden">Background</div>
           <span className="text-sm text-white/50 group-hover:text-white/70 transition-colors font-medium">
-            {data.origin}
+            {data.background}
           </span>
+          <p className="text-xs text-primary/70 italic mt-1">"{data.quote}"</p>
         </div>
 
-        {/* Intel */}
+        {/* Description */}
         <div className="col-span-12 md:col-span-5 mt-3 md:mt-0">
-          <div className="text-[10px] text-white/30 uppercase tracking-wider mb-1 md:hidden">Intel</div>
+          <div className="text-[10px] text-white/30 uppercase tracking-wider mb-1 md:hidden">Description</div>
           <p className="text-sm text-white/40 group-hover:text-white/60 transition-colors leading-relaxed">
-            {data.intel}
+            {data.description}
           </p>
           <p className="text-xs text-white/25 group-hover:text-white/40 transition-colors mt-1">
-            {data.intelKo}
+            {data.descriptionKo}
           </p>
         </div>
       </div>
@@ -269,7 +275,7 @@ export const AuthoritySection = () => {
           {/* Title Group */}
           <div className="max-w-4xl">
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
-              Human Capital
+              The Creative Engine
             </h2>
             <p className="text-xl md:text-2xl text-white/70 mb-3 font-light">
               <span className="text-primary font-medium">"Engineered for Growth."</span>
@@ -303,8 +309,8 @@ export const AuthoritySection = () => {
             <div className="hidden md:grid grid-cols-12 gap-4 text-[10px] font-mono text-white/20 uppercase tracking-wider flex-1 ml-8">
               <div className="col-span-1">#</div>
               <div className="col-span-3">Role</div>
-              <div className="col-span-3">Origin</div>
-              <div className="col-span-5">Intel</div>
+              <div className="col-span-3">Background</div>
+              <div className="col-span-5">Description</div>
             </div>
           </div>
         </motion.div>
@@ -312,7 +318,7 @@ export const AuthoritySection = () => {
         {/* Roster List */}
         <div className="border border-white/10 rounded-lg overflow-hidden bg-black/50 backdrop-blur-sm">
           {rosterMembers.map((member, index) => (
-            <RosterRow key={member.number} data={member} index={index} />
+            <RosterRow key={member.id} data={member} index={index} />
           ))}
         </div>
 
