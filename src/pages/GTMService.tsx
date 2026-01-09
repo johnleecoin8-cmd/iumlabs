@@ -1295,7 +1295,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
     timing: 94,
     channels: 87,
     budget: 92,
-    risk: 23
+    volume: 89
   });
 
   useEffect(() => {
@@ -1325,7 +1325,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
         timing: Math.floor(92 + Math.random() * 6),
         channels: Math.floor(85 + Math.random() * 10),
         budget: Math.floor(90 + Math.random() * 8),
-        risk: Math.floor(18 + Math.random() * 10)
+        volume: Math.floor(85 + Math.random() * 10)
       }));
     }, 2500);
 
@@ -1396,12 +1396,11 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
       icon: DollarSign
     },
     { 
-      label: 'Risk Score', 
-      sublabel: 'Market volatility factor',
-      value: liveData.risk, 
-      color: 'yellow',
-      icon: Activity,
-      inverted: true
+      label: 'Volume Projection', 
+      sublabel: 'Liquidity depth forecast',
+      value: liveData.volume, 
+      color: 'green',
+      icon: TrendingUp
     }
   ];
 
@@ -1468,13 +1467,13 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
             >
               <Cpu className="w-4 h-4 text-primary" />
             </motion.div>
-            <span className="text-xs font-mono text-primary tracking-wider">POWERED BY IUM ONCHAIN LLM ENGINE</span>
+            <span className="text-xs font-mono text-primary tracking-wider">POWERED BY IUM AI ENGINE</span>
           </motion.div>
           <h3 className="text-2xl md:text-3xl font-medium text-foreground mb-3">
             The Intelligence Engine
           </h3>
           <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
-            We don't guess. Our proprietary LLM analyzes <span className="text-primary font-medium">50+ onchain and social signals</span> in real-time to deliver data-driven Korea GTM strategies.
+            <span className="text-foreground font-medium">"We don't guess. We calculate."</span> Our proprietary AI synthesizes <span className="text-primary font-medium">50+ onchain and social signals</span> in real-time to engineer the perfect market entry.
           </p>
         </div>
 
@@ -1763,8 +1762,8 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                   </div>
                   
                   <div>
-                    <p className="text-lg font-medium text-foreground">ium LLM Core</p>
-                    <p className="text-xs text-muted-foreground">Real-time Analysis Engine</p>
+                    <p className="text-lg font-medium text-foreground">ium AI Core</p>
+                    <p className="text-xs text-muted-foreground">Quant-driven Intelligence</p>
                   </div>
 
                   {/* Processing visualization */}
@@ -1857,9 +1856,6 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                         >
                           {metric.value}%
                         </motion.span>
-                        {metric.inverted && (
-                          <span className="text-[9px] text-yellow-500/70 mb-1">LOW</span>
-                        )}
                       </div>
                       
                       <div className="h-1 bg-muted rounded-full overflow-hidden">
@@ -1895,7 +1891,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                   <span className="text-xs font-medium text-green-500">High Confidence</span>
                 </div>
                 <span className="text-xs font-mono text-green-500">
-                  {Math.floor((liveData.timing + liveData.channels + liveData.budget + (100 - liveData.risk)) / 4)}%
+                  {Math.floor((liveData.timing + liveData.channels + liveData.budget + liveData.volume) / 4)}%
                 </span>
               </div>
             </motion.div>
