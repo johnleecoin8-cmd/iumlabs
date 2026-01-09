@@ -727,7 +727,7 @@ const KoreaMapVisualization = ({
 };
 
 // ============================================
-// MARKET INTELLIGENCE - Why Korea? (Text Diet Version)
+// MARKET INTELLIGENCE - Why Korea?
 // ============================================
 const MarketIntelligenceSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -736,250 +736,202 @@ const MarketIntelligenceSection = () => {
     margin: "-10%"
   });
 
-  // Fiat Hierarchy Data for Bar Chart
-  const fiatHierarchy = [
-    { label: 'USD', value: 35, displayValue: '$35B', isHighlight: false },
-    { label: 'KRW', value: 4.5, displayValue: '$4.5B', isHighlight: true },
-    { label: 'EUR', value: 1.2, displayValue: '$1.2B', isHighlight: false },
-    { label: 'JPY', value: 0.4, displayValue: '$0.4B', isHighlight: false },
-  ];
+  // Fiat Volume Data - The Fiat Impact
+  const fiatVolumeData = [{
+    label: 'USD',
+    percentage: 100,
+    value: '$XX B',
+    isHighlight: false
+  }, {
+    label: 'KRW',
+    percentage: 85,
+    value: '$XX B',
+    isHighlight: true
+  }, {
+    label: 'EUR',
+    percentage: 35,
+    value: '$XX B',
+    isHighlight: false
+  }, {
+    label: 'JPY',
+    percentage: 15,
+    value: '$XX B',
+    isHighlight: false
+  }];
 
-  // Market Logic Data - Condensed to 3 Impact Points
-  const marketLogic = [
-    {
-      number: '01',
-      subtitle: '#2 Global Fiat Volume',
-      title: 'The Only Rival to USD.',
-      description: 'KRW consistently surpasses EUR and JPY in trading volume. It is the only fiat currency that provides deep liquidity comparable to the US Dollar.'
-    },
-    {
-      number: '02',
-      subtitle: '5x Capital Efficiency',
-      title: 'Volume > Market Cap.',
-      description: 'Korean portfolios turn over 5x faster than the global average. A $10M market cap here generates the trading volume of a $50M project elsewhere.'
-    },
-    {
-      number: '03',
-      subtitle: '100% Retail-Driven',
-      title: 'Sticky Liquidity.',
-      description: 'Unlike algorithmic wash trading, Korea is powered by real retail conviction. This creates a sustained buy-pressure floor that defends against volatility.'
-    }
-  ];
-
-  return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border">
-      <motion.div 
-        initial={{ opacity: 0 }} 
-        animate={isInView ? { opacity: 1 } : {}} 
-        className="max-w-7xl mx-auto"
-      >
-        {/* Header */}
-        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4 font-mono">
-          01 — The Strategic Imperative
+  // Market Logic Data - 3 Column
+  const marketLogic = [{
+    number: '01',
+    title: 'The KRW Premium',
+    subtitle: '#2 Global Fiat Volume',
+    description: 'The Korean Won (KRW) consistently rivals the USD in crypto trading volume, often surpassing the Euro. Securing a foothold in the KRW market isn\'t just about exposure—it\'s about accessing a liquidity pool that rivals the global reserve currency.'
+  }, {
+    number: '02',
+    title: 'High-Velocity Turnover',
+    subtitle: 'Highest Capital Efficiency',
+    description: 'Korean portfolios turn over 4-5x faster than the global average. A mere $10M in market cap here generates the trading volume of a $100M project elsewhere. This velocity creates the active charts that global market makers look for.'
+  }, {
+    number: '03',
+    title: 'The Organic Multiplier',
+    subtitle: 'Retail-Driven Price Discovery',
+    description: 'Unlike markets dominated by institutional algorithms, Korea is powered by real retail conviction. Winning the "mindshare" of Korean users creates a sustained buy-pressure floor that defends your token against global volatility.'
+  }];
+  return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border">
+      <motion.div initial={{
+      opacity: 0
+    }} animate={isInView ? {
+      opacity: 1
+    } : {}} className="max-w-7xl mx-auto">
+        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+          01 The Strategic Imperative
         </p>
-        <h2 className="text-3xl md:text-4xl lg:text-5xl font-medium text-foreground mb-2">
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-2">
           The Power of KRW Liquidity
         </h2>
         <p className="text-muted-foreground text-lg mb-16">
           Access the world's most active fiat gateway.
         </p>
 
-        {/* Two-Column Layout: Left = Logic Points, Right = Charts */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          
-          {/* LEFT: The Logic (3 Points) */}
-          <div className="space-y-6">
-            <p className="text-xs tracking-widest text-primary font-medium font-mono mb-4">
-              THE LOGIC
+        {/* Module A: The Market Logic - 3 Column */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {marketLogic.map((item, i) => <motion.div key={item.number} initial={{
+          opacity: 0,
+          y: 30
+        }} animate={isInView ? {
+          opacity: 1,
+          y: 0
+        } : {}} transition={{
+          delay: i * 0.15
+        }} className="relative p-6 border border-border bg-background hover:border-primary/30 transition-colors group">
+              <span className="absolute -top-3 left-6 px-2 py-0.5 bg-muted text-xs font-mono text-muted-foreground">
+                {item.number}
+              </span>
+              <p className="text-xs tracking-widest text-primary font-medium mb-2 mt-2">
+                {item.subtitle}
+              </p>
+              <h3 className="text-xl font-medium text-foreground mb-3">
+                {item.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {item.description}
+              </p>
+            </motion.div>)}
+        </div>
+
+        {/* Module B: Data Visualization */}
+        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+          {/* Chart 1: The Fiat Impact */}
+          <motion.div initial={{
+          opacity: 0,
+          x: -20
+        }} animate={isInView ? {
+          opacity: 1,
+          x: 0
+        } : {}} transition={{
+          delay: 0.3
+        }} className="p-6 border border-border bg-background">
+            <p className="text-xs tracking-widest text-primary font-medium mb-6">
+              THE FIAT IMPACT — Average Daily Volume per Fiat Pair
             </p>
-            {marketLogic.map((item, i) => (
-              <motion.div 
-                key={item.number} 
-                initial={{ opacity: 0, x: -20 }} 
-                animate={isInView ? { opacity: 1, x: 0 } : {}} 
-                transition={{ delay: i * 0.1 }} 
-                className="relative pl-8 border-l border-border hover:border-primary/50 transition-colors group"
-              >
-                <span className="absolute left-0 top-0 -translate-x-1/2 w-3 h-3 rounded-full bg-muted border-2 border-primary group-hover:bg-primary transition-colors" />
-                <p className="text-xs tracking-widest text-primary font-medium font-mono mb-1">
-                  {item.subtitle}
-                </p>
-                <h3 className="text-lg md:text-xl font-medium text-foreground mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
+            <div className="space-y-4 mb-6">
+              {fiatVolumeData.map((item, i) => <AnimatedProgressBar key={item.label} label={item.label} percentage={item.percentage} value={item.value} delay={i * 0.15 + 0.3} isHighlight={item.isHighlight} isVisible={isInView} />)}
+            </div>
+            <p className="text-sm text-muted-foreground italic border-t border-border pt-4">
+              "KRW is the only fiat pair that challenges the USD."
+            </p>
+          </motion.div>
+
+          {/* Chart 2: Velocity Comparison */}
+          <motion.div initial={{
+          opacity: 0,
+          x: 20
+        }} animate={isInView ? {
+          opacity: 1,
+          x: 0
+        } : {}} transition={{
+          delay: 0.4
+        }} className="p-6 border border-border bg-background">
+            <p className="text-xs tracking-widest text-primary font-medium mb-6">
+              VELOCITY COMPARISON — Token Velocity Ratio (Volume / Market Cap)
+            </p>
+            <div className="space-y-6 mb-6">
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium text-foreground/80">Global Average</span>
+                  <span className="text-sm font-mono text-muted-foreground">0.15</span>
+                </div>
+                <div className="h-3 bg-muted rounded-full overflow-hidden">
+                  <motion.div className="h-full bg-foreground/30 rounded-full" initial={{
+                  width: 0
+                }} animate={isInView ? {
+                  width: '22%'
+                } : {}} transition={{
+                  duration: 1,
+                  delay: 0.5
+                }} />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium text-primary">Korea Market</span>
+                  <span className="text-sm font-mono text-primary">0.68</span>
+                </div>
+                <div className="h-3 bg-muted rounded-full overflow-hidden">
+                  <motion.div className="h-full bg-primary rounded-full" initial={{
+                  width: 0
+                }} animate={isInView ? {
+                  width: '100%'
+                } : {}} transition={{
+                  duration: 1.2,
+                  delay: 0.6
+                }} />
+                </div>
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground italic border-t border-border pt-4">
+              "Same Market Cap, <span className="text-primary font-medium">4x More Volume</span> in Korea."
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Key Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div className="p-4 border border-border bg-background text-center">
+            <p className="text-2xl md:text-3xl font-medium text-primary">#2</p>
+            <p className="text-xs text-muted-foreground mt-1">Global Fiat Volume (KRW)</p>
           </div>
-
-          {/* RIGHT: The Proof (Visual Focus) - 2 Charts */}
-          <div className="space-y-8">
-            <p className="text-xs tracking-widest text-primary font-medium font-mono mb-4">
-              THE PROOF
-            </p>
-
-            {/* CHART 1: The Fiat Hierarchy - Horizontal Bar Chart */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }} 
-              animate={isInView ? { opacity: 1, x: 0 } : {}} 
-              transition={{ delay: 0.2 }} 
-              className="p-6 border border-border bg-background relative overflow-hidden group hover:border-primary/30 transition-colors"
-            >
-              {/* Scanline effect */}
-              <div 
-                className="absolute inset-0 pointer-events-none opacity-[0.02]"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)'
-                }}
-              />
-              
-              <div className="flex items-center justify-between mb-6">
-                <p className="text-xs tracking-widest text-muted-foreground font-mono uppercase">
-                  The Fiat Hierarchy
-                </p>
-                <span className="text-[10px] font-mono text-muted-foreground/50">
-                  AVG. DAILY VOLUME
-                </span>
-              </div>
-
-              <div className="space-y-4">
-                {fiatHierarchy.map((item, i) => {
-                  const maxValue = 35;
-                  const percentage = (item.value / maxValue) * 100;
-                  
-                  return (
-                    <motion.div 
-                      key={item.label} 
-                      className="space-y-1"
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={isInView ? { opacity: 1, x: 0 } : {}}
-                      transition={{ delay: 0.3 + i * 0.1 }}
-                    >
-                      <div className="flex justify-between items-center">
-                        <span className={`text-sm font-mono font-medium ${item.isHighlight ? 'text-primary' : 'text-foreground/70'}`}>
-                          {item.label}
-                        </span>
-                        <span className={`text-sm font-mono ${item.isHighlight ? 'text-primary font-bold' : 'text-muted-foreground'}`}>
-                          {item.displayValue}
-                        </span>
-                      </div>
-                      <div className="h-6 bg-muted/50 rounded overflow-hidden relative">
-                        <motion.div 
-                          className={`h-full rounded ${item.isHighlight ? 'bg-primary' : 'bg-foreground/20'}`}
-                          initial={{ width: 0 }}
-                          animate={isInView ? { width: `${percentage}%` } : {}}
-                          transition={{ duration: 1, delay: 0.4 + i * 0.1, ease: "easeOut" }}
-                          style={item.isHighlight ? { 
-                            boxShadow: '0 0 20px hsl(var(--primary) / 0.4)' 
-                          } : {}}
-                        />
-                        {item.isHighlight && (
-                          <motion.div 
-                            className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent"
-                            animate={{ opacity: [0.3, 0.6, 0.3] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                          />
-                        )}
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-
-              <p className="text-xs text-muted-foreground font-mono mt-6 pt-4 border-t border-border/50 text-center">
-                <span className="text-primary font-medium">KRW Volume</span> {">"} EUR + JPY Combined
-              </p>
-            </motion.div>
-
-            {/* CHART 2: Velocity Multiplier - Simple Bar Comparison */}
-            <motion.div 
-              initial={{ opacity: 0, x: 20 }} 
-              animate={isInView ? { opacity: 1, x: 0 } : {}} 
-              transition={{ delay: 0.4 }} 
-              className="p-6 border border-border bg-background relative overflow-hidden group hover:border-primary/30 transition-colors"
-            >
-              {/* Scanline effect */}
-              <div 
-                className="absolute inset-0 pointer-events-none opacity-[0.02]"
-                style={{
-                  backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)'
-                }}
-              />
-
-              <div className="flex items-center justify-between mb-6">
-                <p className="text-xs tracking-widest text-muted-foreground font-mono uppercase">
-                  Velocity Multiplier
-                </p>
-                <span className="text-[10px] font-mono text-muted-foreground/50">
-                  VOLUME / MARKET CAP
-                </span>
-              </div>
-
-              <div className="flex items-end justify-center gap-12 h-40 mb-6">
-                {/* Global Bar */}
-                <div className="flex flex-col items-center">
-                  <motion.div 
-                    className="w-20 md:w-24 bg-foreground/20 rounded-t relative"
-                    initial={{ height: 0 }}
-                    animate={isInView ? { height: 32 } : {}}
-                    transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-                  >
-                    <motion.span 
-                      className="absolute -top-8 left-1/2 -translate-x-1/2 text-lg font-mono font-bold text-muted-foreground"
-                      initial={{ opacity: 0 }}
-                      animate={isInView ? { opacity: 1 } : {}}
-                      transition={{ delay: 1 }}
-                    >
-                      0.15
-                    </motion.span>
-                  </motion.div>
-                  <p className="text-xs text-muted-foreground font-mono mt-2 text-center">
-                    Global<br/>Velocity
-                  </p>
-                </div>
-
-                {/* Korea Bar */}
-                <div className="flex flex-col items-center">
-                  <motion.div 
-                    className="w-20 md:w-24 bg-primary rounded-t relative"
-                    initial={{ height: 0 }}
-                    animate={isInView ? { height: 140 } : {}}
-                    transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
-                    style={{ boxShadow: '0 0 30px hsl(var(--primary) / 0.4)' }}
-                  >
-                    <motion.span 
-                      className="absolute -top-8 left-1/2 -translate-x-1/2 text-2xl font-mono font-bold text-primary"
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                      transition={{ delay: 1.2, type: "spring" }}
-                      style={{ textShadow: '0 0 20px hsl(var(--primary) / 0.5)' }}
-                    >
-                      0.68
-                    </motion.span>
-                    {/* Pulse glow */}
-                    <motion.div 
-                      className="absolute inset-0 rounded-t bg-primary/30"
-                      animate={{ opacity: [0.3, 0.6, 0.3] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-                  </motion.div>
-                  <p className="text-xs text-primary font-mono mt-2 font-medium text-center">
-                    Korea<br/>Velocity
-                  </p>
-                </div>
-              </div>
-
-              <p className="text-xs text-muted-foreground font-mono pt-4 border-t border-border/50 text-center">
-                <span className="text-primary font-medium">4x More Volume</span> for the Same Market Cap
-              </p>
-            </motion.div>
+          <div className="p-4 border border-border bg-background text-center">
+            <p className="text-2xl md:text-3xl font-medium text-foreground">4-5x</p>
+            <p className="text-xs text-muted-foreground mt-1">Higher Velocity</p>
+          </div>
+          <div className="p-4 border border-border bg-background text-center">
+            <p className="text-2xl md:text-3xl font-medium text-foreground">$10M</p>
+            <p className="text-xs text-muted-foreground mt-1">= $100M Volume Elsewhere</p>
+          </div>
+          <div className="p-4 border border-border bg-background text-center">
+            <p className="text-2xl md:text-3xl font-medium text-foreground">100%</p>
+            <p className="text-xs text-muted-foreground mt-1">Retail-Driven</p>
           </div>
         </div>
+
+        <motion.blockquote initial={{
+        opacity: 0,
+        y: 20
+      }} animate={isInView ? {
+        opacity: 1,
+        y: 0
+      } : {}} transition={{
+        delay: 0.5
+      }} className="border-l-2 border-primary pl-6">
+          <p className="text-lg md:text-xl text-foreground italic">
+            "Securing a foothold in the KRW market isn't just about exposure—it's about plugging into the only fiat pair that challenges the Dollar."
+          </p>
+          <footer className="mt-2 text-sm text-muted-foreground">
+            — The Strategic Imperative
+          </footer>
+        </motion.blockquote>
       </motion.div>
-    </section>
-  );
+    </section>;
 };
 
 // ============================================
