@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import WhyKoreaSection from "@/components/WhyKoreaSection";
-import MomentumSection from "@/components/MomentumSection";
 import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
 import storyOriginSummit from "@/assets/campaigns/story-origin-summit.jpg";
 import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
@@ -230,13 +228,6 @@ const Index = () => {
         <HeroSection />
       </main>
       
-      {/* Why Korea - NEW: The Ignition Key */}
-      <section className="bg-surface-base" id="why-korea">
-        <AnimatedSection>
-          <WhyKoreaSection />
-        </AnimatedSection>
-      </section>
-      
       {/* About - 01 (Mobile/Tablet Only) */}
       <section className="bg-surface-base lg:hidden" id="why-choose-us">
         <div className="border-t border-white/10">
@@ -251,15 +242,6 @@ const Index = () => {
           </AnimatedSection>
           <AnimatedSection delay={100}>
             <WhyChooseUsSection />
-          </AnimatedSection>
-        </div>
-      </section>
-      
-      {/* Momentum - NEW: Project Archive with counters */}
-      <section className="bg-surface-base" id="momentum">
-        <div className="border-t border-white/10">
-          <AnimatedSection>
-            <MomentumSection />
           </AnimatedSection>
         </div>
       </section>
