@@ -1522,10 +1522,181 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
           ))}
         </div>
 
-        {/* Main visualization grid */}
-        <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-start">
+        {/* Main visualization grid with SVG connections */}
+        <div className="relative grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-start">
+          
+          {/* SVG Connection Lines Layer - Desktop only */}
+          <svg className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0" style={{ overflow: 'visible' }}>
+            <defs>
+              {/* Gradient for left connections */}
+              <linearGradient id="leftFlowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
+                <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.9" />
+              </linearGradient>
+              
+              {/* Gradient for right connections */}
+              <linearGradient id="rightFlowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.9" />
+                <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="0.6" />
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
+              </linearGradient>
+              
+              {/* Glow filter */}
+              <filter id="energyGlow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              
+              {/* Stronger glow for particles */}
+              <filter id="particleGlow" x="-100%" y="-100%" width="300%" height="300%">
+                <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                <feMerge>
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="coloredBlur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+            
+            {/* Left Curved Connection Lines - Data Sources to LLM Core */}
+            {[
+              { id: 0, startY: '20%', endY: '50%', path: 'M 0,0 C 80,0 100,80 180,80' },
+              { id: 1, startY: '50%', endY: '50%', path: 'M 0,0 C 60,0 120,0 180,0' },
+              { id: 2, startY: '80%', endY: '50%', path: 'M 0,0 C 80,0 100,-80 180,-80' }
+            ].map((line, i) => (
+              <g key={`left-${line.id}`} style={{ transform: `translate(calc(33.33% - 20px), calc(${line.startY} + 60px))` }}>
+                {/* Base line with gradient */}
+                <motion.path
+                  d={line.path}
+                  fill="none"
+                  stroke="url(#leftFlowGradient)"
+                  strokeWidth="2"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={isVisible ? { pathLength: 1, opacity: 1 } : {}}
+                  transition={{ duration: 1.5, delay: 0.5 + i * 0.2 }}
+                />
+                
+                {/* Animated glow pulse along path */}
+                <motion.path
+                  d={line.path}
+                  fill="none"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="4"
+                  filter="url(#energyGlow)"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={isVisible ? { 
+                    pathLength: [0, 0.3, 0],
+                    opacity: [0, 0.8, 0]
+                  } : {}}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity, 
+                    delay: i * 0.6,
+                    ease: "easeInOut"
+                  }}
+                  style={{ offsetPath: `path('${line.path}')` }}
+                />
+                
+                {/* Flowing energy particles */}
+                {[0, 1, 2, 3, 4].map((particleIndex) => (
+                  <motion.circle
+                    key={particleIndex}
+                    r="4"
+                    fill="hsl(var(--primary))"
+                    filter="url(#particleGlow)"
+                    initial={{ opacity: 0 }}
+                    animate={isVisible ? {
+                      opacity: [0, 1, 1, 0],
+                      offsetDistance: ['0%', '25%', '75%', '100%']
+                    } : {}}
+                    transition={{
+                      duration: 2.5,
+                      repeat: Infinity,
+                      delay: i * 0.3 + particleIndex * 0.5,
+                      ease: "linear"
+                    }}
+                    style={{ 
+                      offsetPath: `path('${line.path}')`,
+                      offsetRotate: '0deg'
+                    }}
+                  />
+                ))}
+              </g>
+            ))}
+            
+            {/* Right Curved Connection Lines - LLM Core to Output */}
+            {[
+              { id: 0, startY: '35%', endY: '20%', path: 'M 0,0 C 60,0 120,-50 180,-60' },
+              { id: 1, startY: '50%', endY: '50%', path: 'M 0,0 C 60,0 120,0 180,0' },
+              { id: 2, startY: '65%', endY: '80%', path: 'M 0,0 C 60,0 120,50 180,60' }
+            ].map((line, i) => (
+              <g key={`right-${line.id}`} style={{ transform: `translate(calc(66.66% + 20px), calc(${line.startY} + 60px))` }}>
+                {/* Base line with gradient */}
+                <motion.path
+                  d={line.path}
+                  fill="none"
+                  stroke="url(#rightFlowGradient)"
+                  strokeWidth="2"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={isVisible ? { pathLength: 1, opacity: 1 } : {}}
+                  transition={{ duration: 1.5, delay: 1 + i * 0.2 }}
+                />
+                
+                {/* Animated energy wave */}
+                <motion.path
+                  d={line.path}
+                  fill="none"
+                  stroke="hsl(var(--primary))"
+                  strokeWidth="4"
+                  filter="url(#energyGlow)"
+                  initial={{ opacity: 0 }}
+                  animate={isVisible ? { 
+                    pathLength: [0, 0.4, 0],
+                    opacity: [0, 0.9, 0]
+                  } : {}}
+                  transition={{ 
+                    duration: 1.8, 
+                    repeat: Infinity, 
+                    delay: 0.5 + i * 0.4,
+                    ease: "easeInOut"
+                  }}
+                />
+                
+                {/* Faster, brighter particles for output */}
+                {[0, 1, 2, 3].map((particleIndex) => (
+                  <motion.circle
+                    key={particleIndex}
+                    r="5"
+                    fill="hsl(var(--primary))"
+                    filter="url(#particleGlow)"
+                    initial={{ opacity: 0 }}
+                    animate={isVisible ? {
+                      opacity: [0, 1, 1, 0],
+                      offsetDistance: ['0%', '30%', '70%', '100%'],
+                      r: [4, 6, 6, 4]
+                    } : {}}
+                    transition={{
+                      duration: 1.8,
+                      repeat: Infinity,
+                      delay: 0.8 + i * 0.25 + particleIndex * 0.45,
+                      ease: "linear"
+                    }}
+                    style={{ 
+                      offsetPath: `path('${line.path}')`,
+                      offsetRotate: '0deg'
+                    }}
+                  />
+                ))}
+              </g>
+            ))}
+          </svg>
+
           {/* Data Sources */}
-          <div className="space-y-4">
+          <div className="space-y-4 relative z-10">
             <p className="text-xs tracking-widest text-muted-foreground mb-4 text-center lg:text-left flex items-center gap-2 justify-center lg:justify-start">
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
               LIVE DATA SOURCES
@@ -1601,46 +1772,71 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                   </div>
                 </div>
 
-                {/* Animated data flow particles */}
+                {/* Energy burst on hover */}
                 {activeDataSource === source.id && (
-                  <motion.div
-                    className="absolute right-2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary"
-                    animate={{ x: [0, 20], opacity: [1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                  />
+                  <>
+                    <motion.div
+                      className="absolute right-0 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-primary/30"
+                      initial={{ scale: 0, x: 0 }}
+                      animate={{ scale: [0, 1.5, 0], x: [0, 20, 40], opacity: [0.8, 0.4, 0] }}
+                      transition={{ duration: 1, repeat: Infinity }}
+                    />
+                    <motion.div
+                      className="absolute right-2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full bg-primary"
+                      animate={{ x: [0, 30], opacity: [1, 0] }}
+                      transition={{ duration: 0.6, repeat: Infinity }}
+                    />
+                  </>
                 )}
               </motion.div>
             ))}
           </div>
 
-          {/* LLM Core - Enhanced */}
+          {/* LLM Core - Enhanced with connection points */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isVisible ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.8, type: "spring" }}
-            className="relative flex flex-col items-center mt-8 lg:mt-12"
+            className="relative flex flex-col items-center mt-8 lg:mt-12 z-10"
           >
-            {/* Connection lines with flowing particles - Left */}
-            <div className="hidden lg:flex absolute left-0 top-1/2 -translate-x-full items-center w-12">
-              <div className="w-full h-px bg-gradient-to-l from-primary/50 to-transparent relative">
-                {[0, 1, 2].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute top-0 w-2 h-2 rounded-full bg-primary -translate-y-1/2"
-                    animate={{ x: [48, 0], opacity: [0, 1, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.5 }}
-                  />
-                ))}
-              </div>
-            </div>
+            {/* Left energy intake indicator */}
+            <motion.div 
+              className="hidden lg:block absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 w-4 h-4"
+              animate={{ scale: [1, 1.3, 1], opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <div className="w-full h-full rounded-full bg-primary/50 blur-sm" />
+              <div className="absolute inset-1 rounded-full bg-primary" />
+            </motion.div>
+            
+            {/* Right energy output indicator */}
+            <motion.div 
+              className="hidden lg:block absolute right-0 top-1/2 -translate-y-1/2 translate-x-6 w-4 h-4"
+              animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
+              transition={{ duration: 1.2, repeat: Infinity, delay: 0.3 }}
+            >
+              <div className="w-full h-full rounded-full bg-primary/50 blur-sm" />
+              <div className="absolute inset-1 rounded-full bg-primary" />
+            </motion.div>
 
             {/* Main LLM Core Box */}
             <div className="relative">
               {/* Outer glow ring */}
               <motion.div 
                 className="absolute -inset-4 rounded-lg"
-                style={{ background: 'radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%)' }}
-                animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+                style={{ background: 'radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)' }}
+                animate={{ scale: [1, 1.15, 1], opacity: [0.5, 0.9, 0.5] }}
+                transition={{ duration: 2.5, repeat: Infinity }}
+              />
+              
+              {/* Energy absorption ring */}
+              <motion.div 
+                className="absolute -inset-8 rounded-full border border-primary/20"
+                animate={{ 
+                  scale: [1.2, 1, 1.2],
+                  opacity: [0, 0.5, 0],
+                  borderColor: ['hsl(var(--primary) / 0.1)', 'hsl(var(--primary) / 0.4)', 'hsl(var(--primary) / 0.1)']
+                }}
                 transition={{ duration: 3, repeat: Infinity }}
               />
 
@@ -1714,24 +1910,10 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                 </div>
               </div>
             </div>
-
-            {/* Connection lines with flowing particles - Right */}
-            <div className="hidden lg:flex absolute right-0 top-1/2 translate-x-full items-center w-12">
-              <div className="w-full h-px bg-gradient-to-r from-primary/50 to-transparent relative">
-                {[0, 1, 2].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute top-0 w-2 h-2 rounded-full bg-primary -translate-y-1/2"
-                    animate={{ x: [0, 48], opacity: [0, 1, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.5 }}
-                  />
-                ))}
-              </div>
-            </div>
           </motion.div>
 
           {/* Output Panel - Enhanced with gauges */}
-          <div className="space-y-4">
+          <div className="space-y-4 relative z-10">
             <p className="text-xs tracking-widest text-muted-foreground mb-4 text-center lg:text-right flex items-center gap-2 justify-center lg:justify-end">
               STRATEGIC OUTPUT
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -1743,6 +1925,13 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
               transition={{ delay: 1 }}
               className="p-6 border border-primary/50 bg-background relative overflow-hidden"
             >
+              {/* Energy intake glow */}
+              <motion.div 
+                className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-transparent via-primary to-transparent"
+                animate={{ opacity: [0.3, 0.8, 0.3] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              
               {/* Background pattern */}
               <div className="absolute inset-0 opacity-[0.02]" style={{
                 backgroundImage: 'radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)',
@@ -1825,9 +2014,16 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
               initial={{ opacity: 0, y: 10 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1.8 }}
-              className="p-4 border border-green-500/30 bg-green-500/5"
+              className="p-4 border border-green-500/30 bg-green-500/5 relative overflow-hidden"
             >
-              <div className="flex items-center justify-between">
+              {/* Energy pulse effect */}
+              <motion.div 
+                className="absolute left-0 top-0 bottom-0 w-full bg-gradient-to-r from-green-500/10 via-transparent to-transparent"
+                animate={{ x: ['-100%', '100%'] }}
+                transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+              />
+              
+              <div className="relative z-10 flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <motion.div 
                     className="w-3 h-3 rounded-full bg-green-500"
