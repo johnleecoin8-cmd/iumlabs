@@ -1341,7 +1341,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
       id: 0, 
       icon: Database, 
       label: 'Onchain Data', 
-      items: ['DEX Volume', 'Wallet Activity', 'Token Transfers', 'Smart Contracts'],
+      items: ['CEX/DEX Volume', 'Wallet Activity', 'Token Transfers', 'Smart Contracts'],
       value: liveData.onchain,
       suffix: ' signals',
       color: 'from-blue-500/20 to-transparent'
