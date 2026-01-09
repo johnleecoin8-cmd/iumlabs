@@ -56,7 +56,7 @@ const allProjects = [
     bgVideo: '/videos/projects/peaq-hero.mp4',
     category: 'DePIN',
     strategy: 'Wallet Acquisition',
-    metric: { value: 85, suffix: 'K+', label: 'Community' },
+    metric: { value: 85, suffix: 'K+', label: 'Active Wallets' },
     color: 'cyan',
     glowColor: 'rgba(34,211,238,0.5)',
     progress: 88
@@ -82,8 +82,8 @@ const allProjects = [
     bgImage: '/images/projects/bybit-bg.jpg',
     bgVideo: '/videos/projects/bybit-hero.mp4',
     category: 'CEX',
-    strategy: 'Market Maker Campaign',
-    metric: { value: 320, suffix: '%', label: 'Trading Volume' },
+    strategy: 'User Acquisition',
+    metric: { value: 180, suffix: 'K+', label: 'New Users' },
     color: 'orange',
     glowColor: 'rgba(251,146,60,0.5)',
     progress: 89
@@ -96,7 +96,7 @@ const allProjects = [
     bgVideo: '/videos/projects/kucoin-hero.mp4',
     category: 'CEX',
     strategy: 'Community Airdrop',
-    metric: { value: 180, suffix: 'K', label: 'New Users' },
+    metric: { value: 150, suffix: 'K', label: 'New Users' },
     color: 'green',
     glowColor: 'rgba(34,197,94,0.5)',
     progress: 91
@@ -110,7 +110,7 @@ const allProjects = [
     bgVideo: '/videos/projects/sahara-hero.mp4',
     category: 'AI Infra',
     strategy: 'Thought Leadership',
-    metric: { value: 500, suffix: 'K+', label: 'Reach' },
+    metric: { value: 500, suffix: 'K+', label: 'Community' },
     color: 'blue',
     glowColor: 'rgba(59,130,246,0.5)',
     progress: 87
@@ -136,7 +136,7 @@ const allProjects = [
     bgVideo: undefined,
     category: 'L2',
     strategy: 'Hype Building',
-    metric: { value: 1.2, suffix: 'M', label: 'Social Reach' },
+    metric: { value: 150, suffix: 'K+', label: 'MAU' },
     color: 'pink',
     glowColor: 'rgba(236,72,153,0.5)',
     progress: 94
@@ -193,9 +193,9 @@ const projectRows = [
 
 // Network Stats
 const networkStats = [
-  { value: 30, suffix: '+', label: 'Projects', sublabel: '프로젝트' },
   { value: 1.5, suffix: 'B+', prefix: '$', label: 'Volume', sublabel: '거래량' },
-  { value: 340, suffix: '%', label: 'Avg Growth', sublabel: '평균 성장' },
+  { value: 500, suffix: 'K+', label: 'Community', sublabel: '활성 커뮤니티' },
+  { value: 1, suffix: '', prefix: '#', label: 'Mindshare', sublabel: '마인드쉐어' },
   { value: 100, suffix: '%', label: 'Retention', sublabel: '재계약율' },
 ];
 

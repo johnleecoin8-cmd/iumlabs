@@ -40,8 +40,8 @@ const rosterMembers = [
 // Metrics Data
 const metrics = [
   { value: '$1.5B+', label: 'Volume Generated', labelKo: '거래량 창출' },
-  { value: '10+', label: 'Years Avg. Experience', labelKo: '평균 경력' },
-  { value: '100%', label: 'Listing Strategy Success', labelKo: '상장 전략 성공률' }
+  { value: '500K+', label: 'Active Community', labelKo: '활성 커뮤니티' },
+  { value: '#1', label: 'Mindshare Ranking', labelKo: '마인드쉐어 랭킹' }
 ];
 
 // Backing Intelligence
@@ -240,7 +240,7 @@ export const AuthoritySection = () => {
               Human Capital
             </h2>
             <p className="text-xl md:text-2xl text-white/70 mb-3 font-light">
-              <span className="text-primary font-medium">"Engineered for Liquidity."</span>
+              <span className="text-primary font-medium">"Engineered for Growth."</span>
             </p>
             <p className="text-base md:text-lg text-white/50 mb-2">
               We combined global exchange logic with local execution power.

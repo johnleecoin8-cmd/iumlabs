@@ -385,7 +385,9 @@ const HeroSection = () => {
             delay: 0.35,
             ease: [0.33, 1, 0.68, 1]
           }}>
-              <GlitchText className="text-primary">Liquidity.</GlitchText>
+              <GlitchText className="text-primary">Impact.</GlitchText>{' '}
+              <span className="text-foreground/60">Adoption.</span>{' '}
+              <span className="text-foreground/40">Liquidity.</span>
             </motion.span>
           </span>
         </motion.h1>
@@ -402,7 +404,7 @@ const HeroSection = () => {
       }} className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-16">
           Launch in Korea with the most data-driven GTM framework.
           <br />
-          <span className="text-foreground/80">We turn cultural barriers into your competitive moat.</span>
+          <span className="text-foreground/80">We turn cultural barriers into sustainable volume & user growth.</span>
         </motion.p>
 
         {/* Stats with enhanced styling */}
@@ -416,11 +418,11 @@ const HeroSection = () => {
         duration: 0.6,
         delay: 0.7
       }} className="flex flex-wrap items-center gap-8 md:gap-12">
-          <AnimatedStat value={30} suffix="+" label="Projects Launched" delay={0.8} isVisible={isInView} />
+          <AnimatedStat value={1.5} prefix="$" suffix="B+" label="Volume Generated" delay={0.8} isVisible={isInView} />
           <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <AnimatedStat value={1.5} prefix="$" suffix="B+" label="Volume Facilitated" delay={1.0} isVisible={isInView} />
+          <AnimatedStat value={500} suffix="K+" label="Active Community" delay={1.0} isVisible={isInView} />
           <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <AnimatedStat value={340} suffix="%" label="Avg. Growth Rate" delay={1.2} isVisible={isInView} />
+          <AnimatedStat value={1} prefix="#" suffix="" label="Mindshare Ranking" delay={1.2} isVisible={isInView} />
         </motion.div>
 
         {/* Before → After Transformation Bar */}
@@ -740,9 +742,9 @@ const MarketIntelligenceSection = () => {
     description: 'The Korean Won (KRW) consistently rivals the USD in crypto trading volume, often surpassing the Euro. Securing a foothold in the KRW market isn\'t just about exposure—it\'s about accessing a liquidity pool that rivals the global reserve currency.'
   }, {
     number: '02',
-    title: 'High-Velocity Turnover',
-    subtitle: 'Highest Capital Efficiency',
-    description: 'Korean portfolios turn over 4-5x faster than the global average. A mere $10M in market cap here generates the trading volume of a $100M project elsewhere. This velocity creates the active charts that global market makers look for.'
+    title: 'High-Engagement Users',
+    subtitle: 'Active Participants, Not Holders',
+    description: 'Korean users are not just holders; they are active participants. High velocity comes from high engagement—users who research, discuss, and advocate for projects they believe in. This engagement creates organic momentum that compounds over time.'
   }, {
     number: '03',
     title: 'The Organic Multiplier',
