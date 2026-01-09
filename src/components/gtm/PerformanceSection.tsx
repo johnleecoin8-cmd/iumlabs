@@ -14,7 +14,7 @@ import bybitLogo from '@/assets/logos/bybit.png';
 import kucoinLogo from '@/assets/logos/kucoin.svg';
 import saharaLogo from '@/assets/logos/sahara-ai.png';
 import megaethLogo from '@/assets/logos/megaeth.png';
-import ondoLogo from '@/assets/logos/ondo.svg';
+import fogoLogo from '@/assets/logos/fogo.png';
 import polygonLogo from '@/assets/logos/polygon.svg';
 import triaLogo from '@/assets/logos/tria-official.png';
 import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
@@ -143,17 +143,17 @@ const allProjects = [
   },
   // Row 4 (← left)
   {
-    name: 'Ondo',
-    slug: 'ondo',
-    logo: ondoLogo,
-    bgImage: '/images/projects/ondo-bg.jpg',
+    name: 'FOGO',
+    slug: 'fogo',
+    logo: fogoLogo,
+    bgImage: '/images/projects/fogo-bg.jpg',
     bgVideo: undefined,
-    category: 'RWA',
-    strategy: 'Institutional PR',
-    metric: { value: 25, suffix: '+', label: 'Press Coverage' },
-    color: 'blue',
-    glowColor: 'rgba(59,130,246,0.5)',
-    progress: 90
+    category: 'L1',
+    strategy: 'Community Building',
+    metric: { value: 200, suffix: 'K+', label: 'Community' },
+    color: 'orange',
+    glowColor: 'rgba(251,146,60,0.5)',
+    progress: 88
   },
   {
     name: 'Polygon',
