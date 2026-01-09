@@ -1058,6 +1058,76 @@ const AnimatedBarChart = ({
 };
 
 // ============================================
+// BEFORE/AFTER CARD COMPONENT
+// ============================================
+const BeforeAfterCard = ({ 
+  label, 
+  beforeValue, 
+  beforeDesc, 
+  afterValue, 
+  afterDesc, 
+  delay, 
+  isVisible 
+}: { 
+  label: string; 
+  beforeValue: string; 
+  beforeDesc: string; 
+  afterValue: string; 
+  afterDesc: string; 
+  delay: number; 
+  isVisible: boolean; 
+}) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay, duration: 0.6 }}
+      className="group relative p-6 md:p-8 border border-border bg-background/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300"
+    >
+      {/* Label */}
+      <p className="text-xs tracking-widest text-primary font-medium mb-6 uppercase">
+        {label}
+      </p>
+      
+      {/* Before → After Container */}
+      <div className="flex items-center justify-between gap-4">
+        {/* Before */}
+        <div className="flex-1 text-center p-4 rounded-lg bg-muted/20 border border-border/50">
+          <p className="text-2xl md:text-3xl font-medium text-muted-foreground mb-1">
+            {beforeValue}
+          </p>
+          <p className="text-xs text-muted-foreground/70">{beforeDesc}</p>
+        </div>
+        
+        {/* Arrow */}
+        <motion.div
+          animate={{ x: [0, 8, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          className="flex-shrink-0"
+        >
+          <ArrowRight className="w-6 h-6 text-primary" />
+        </motion.div>
+        
+        {/* After */}
+        <div className="flex-1 text-center p-4 rounded-lg bg-primary/10 border border-primary/30 relative overflow-hidden">
+          {/* Glow effect */}
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-50" />
+          <p className="text-2xl md:text-3xl font-medium text-primary mb-1 relative z-10">
+            {afterValue}
+          </p>
+          <p className="text-xs text-primary/80 relative z-10">{afterDesc}</p>
+        </div>
+      </div>
+      
+      {/* Hover glow */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent" />
+      </div>
+    </motion.div>
+  );
+};
+
+// ============================================
 // RESULTS DASHBOARD SECTION
 // ============================================
 const ResultsDashboardSection = () => {
@@ -1066,57 +1136,31 @@ const ResultsDashboardSection = () => {
     once: true,
     margin: "-10%"
   });
-  const ringMetrics = [{
-    value: 340,
-    maxValue: 400,
-    label: 'Avg. Growth',
-    suffix: '%',
-    prefix: '+',
-    delay: 0.2
-  }, {
-    value: 85,
-    maxValue: 100,
-    label: 'Success Rate',
-    suffix: '%',
-    prefix: '',
-    delay: 0.4
-  }, {
-    value: 50,
-    maxValue: 100,
-    label: 'Volume ($M)',
-    suffix: 'M',
-    prefix: '$',
-    delay: 0.6
-  }];
-  const metrics = [{
-    icon: TrendingUp,
-    value: 340,
-    suffix: '%',
-    prefix: '+',
-    label: 'Average Growth',
-    description: 'Trading volume increase for launched projects'
-  }, {
-    icon: DollarSign,
-    value: 1.5,
-    suffix: 'B+',
-    prefix: '$',
-    label: 'Volume Facilitated',
-    description: 'Total trading volume recorded by our clients'
-  }, {
-    icon: Users,
-    value: 500,
-    suffix: 'K+',
-    prefix: '',
-    label: 'Korean Users',
-    description: 'Community members across all projects'
-  }, {
-    icon: Trophy,
-    value: 1,
-    suffix: '',
-    prefix: '#',
-    label: 'Market Position',
-    description: 'Kaito mindshare ranking for key clients'
-  }];
+  
+  const beforeAfterData = [
+    {
+      label: 'KR Volume',
+      beforeValue: '$0',
+      beforeDesc: 'Zero presence in Korea',
+      afterValue: '$120M+',
+      afterDesc: 'Daily trading volume'
+    },
+    {
+      label: 'Mindshare Ranking',
+      beforeValue: '#50+',
+      beforeDesc: 'Unknown project',
+      afterValue: '#1~3',
+      afterDesc: 'Category leader'
+    },
+    {
+      label: 'Korean Community',
+      beforeValue: '0',
+      beforeDesc: 'No local community',
+      afterValue: '50K+',
+      afterDesc: 'Active Korean members'
+    }
+  ];
+
   return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-b border-border overflow-hidden">
       <motion.div initial={{
       opacity: 0
@@ -1128,16 +1172,27 @@ const ResultsDashboardSection = () => {
             03 Results
           </p>
           <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-4">
-            The Numbers That Matter
+            Before vs After
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Our data-driven approach delivers measurable results. Here's what we've achieved for our clients.
+            See the transformation our clients experience when entering the Korean market.
           </p>
         </div>
 
-        {/* Circular Progress Rings */}
-        <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mb-20">
-          {ringMetrics.map(metric => <CircularProgressRing key={metric.label} value={metric.value} maxValue={metric.maxValue} label={metric.label} suffix={metric.suffix} prefix={metric.prefix} delay={metric.delay} isVisible={isInView} size={140} strokeWidth={10} />)}
+        {/* Before → After Cards */}
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-20">
+          {beforeAfterData.map((item, i) => (
+            <BeforeAfterCard
+              key={item.label}
+              label={item.label}
+              beforeValue={item.beforeValue}
+              beforeDesc={item.beforeDesc}
+              afterValue={item.afterValue}
+              afterDesc={item.afterDesc}
+              delay={i * 0.15 + 0.2}
+              isVisible={isInView}
+            />
+          ))}
         </div>
 
         {/* Quarterly Growth Chart */}
@@ -1149,7 +1204,7 @@ const ResultsDashboardSection = () => {
         y: 0
       } : {}} transition={{
         delay: 0.8
-      }} className="max-w-2xl mx-auto mb-20">
+      }} className="max-w-2xl mx-auto">
           <p className="text-xs tracking-widest text-primary font-medium mb-6 text-center">
             QUARTERLY GROWTH TRAJECTORY
           </p>
@@ -1157,46 +1212,6 @@ const ResultsDashboardSection = () => {
             <AnimatedBarChart isVisible={isInView} />
           </div>
         </motion.div>
-
-        {/* Metric Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {metrics.map((metric, i) => <motion.div key={metric.label} initial={{
-          opacity: 0,
-          y: 40
-        }} animate={isInView ? {
-          opacity: 1,
-          y: 0
-        } : {}} transition={{
-          delay: i * 0.1 + 1,
-          duration: 0.6
-        }} className="group relative p-6 border border-border bg-background hover:border-primary/50 transition-all duration-300">
-              {/* Icon */}
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <metric.icon className="w-5 h-5 text-primary" />
-              </div>
-
-              {/* Value with count-up */}
-              <p className="text-4xl md:text-5xl font-medium text-foreground mb-2">
-                {useCountUp({
-              end: metric.value,
-              prefix: metric.prefix,
-              suffix: metric.suffix,
-              delay: i * 100 + 1000,
-              isVisible: isInView,
-              duration: 2000
-            })}
-              </p>
-
-              {/* Label */}
-              <p className="text-sm font-medium text-foreground mb-1">{metric.label}</p>
-              <p className="text-xs text-muted-foreground">{metric.description}</p>
-
-              {/* Hover glow */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent" />
-              </div>
-            </motion.div>)}
-        </div>
       </motion.div>
     </section>;
 };
