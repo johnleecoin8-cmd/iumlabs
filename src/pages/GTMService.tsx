@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy, Cpu, Database, Activity, LineChart, Target, Sparkles } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
 import TestimonialsSection from '@/components/gtm/TestimonialsCarousel';
+import { Button } from '@/components/ui/button';
 
 // Project backgrounds
 import storyBg from '@/assets/projects/story-bg.jpg';
@@ -2050,6 +2051,12 @@ const TiltCaseCard = ({
 const StrategyInActionSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Ensure ref is hydrated before using useScroll
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // All case study projects
   const allProjects = [{
@@ -2116,10 +2123,11 @@ const StrategyInActionSection = () => {
     image: openledgerBg,
     slug: 'openledger'
   }];
+
   const {
     scrollYProgress
   } = useScroll({
-    target: containerRef,
+    target: isMounted ? containerRef : undefined,
     offset: ["start start", "end end"]
   });
 
@@ -2128,8 +2136,15 @@ const StrategyInActionSection = () => {
     const newIndex = Math.min(Math.floor(latest * allProjects.length), allProjects.length - 1);
     setActiveIndex(newIndex);
   });
+
   const currentProject = allProjects[activeIndex];
-  return;
+  
+  // Return null during SSR/before mount to prevent hydration issues
+  if (!isMounted) {
+    return <section ref={containerRef} className="relative bg-background" style={{ height: `${allProjects.length * 100}vh` }} />;
+  }
+
+  return null;
 };
 
 // ============================================
@@ -2197,7 +2212,38 @@ const ClientLogosMarquee = () => {
   const isInView = useInView(ref, {
     once: true
   });
-  return;
+  return (
+    <section ref={ref} className="py-16 bg-muted/30 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+        <motion.p 
+          className="text-center text-sm text-muted-foreground mb-8 tracking-widest uppercase"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        >
+          Trusted by Industry Leaders
+        </motion.p>
+        <motion.div 
+          className="flex flex-wrap justify-center items-center gap-8 md:gap-12"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {clientLogos.slice(0, 10).map((client, index) => (
+            <div 
+              key={client.name} 
+              className="opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
+            >
+              <img 
+                src={client.logo} 
+                alt={client.name} 
+                className="h-8 md:h-10 w-auto object-contain"
+              />
+            </div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 // ============================================
@@ -2208,7 +2254,36 @@ const CTASection = () => {
   const isInView = useInView(ref, {
     once: true
   });
-  return;
+  return (
+    <section ref={ref} className="py-24 bg-gradient-to-br from-primary/10 via-background to-background">
+      <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-20 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            Ready to Launch in Korea?
+          </h2>
+          <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
+            Don't guess. Launch with data. Let's engineer your market entry together.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/research">
+              <Button size="lg" variant="outline" className="min-w-[200px]">
+                Get the Market Report
+              </Button>
+            </Link>
+            <Link to="/contact">
+              <Button size="lg" className="min-w-[200px]">
+                Schedule Strategy Call
+              </Button>
+            </Link>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
 };
 
 // ============================================
