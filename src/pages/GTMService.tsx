@@ -1058,77 +1058,7 @@ const AnimatedBarChart = ({
 };
 
 // ============================================
-// BEFORE/AFTER CARD COMPONENT
-// ============================================
-const BeforeAfterCard = ({ 
-  label, 
-  beforeValue, 
-  beforeDesc, 
-  afterValue, 
-  afterDesc, 
-  delay, 
-  isVisible 
-}: { 
-  label: string; 
-  beforeValue: string; 
-  beforeDesc: string; 
-  afterValue: string; 
-  afterDesc: string; 
-  delay: number; 
-  isVisible: boolean; 
-}) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay, duration: 0.6 }}
-      className="group relative p-6 md:p-8 border border-border bg-background/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300"
-    >
-      {/* Label */}
-      <p className="text-xs tracking-widest text-primary font-medium mb-6 uppercase">
-        {label}
-      </p>
-      
-      {/* Before → After Container */}
-      <div className="flex items-center justify-between gap-4">
-        {/* Before */}
-        <div className="flex-1 text-center p-4 rounded-lg bg-muted/20 border border-border/50">
-          <p className="text-2xl md:text-3xl font-medium text-muted-foreground mb-1">
-            {beforeValue}
-          </p>
-          <p className="text-xs text-muted-foreground/70">{beforeDesc}</p>
-        </div>
-        
-        {/* Arrow */}
-        <motion.div
-          animate={{ x: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="flex-shrink-0"
-        >
-          <ArrowRight className="w-6 h-6 text-primary" />
-        </motion.div>
-        
-        {/* After */}
-        <div className="flex-1 text-center p-4 rounded-lg bg-primary/10 border border-primary/30 relative overflow-hidden">
-          {/* Glow effect */}
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/10 to-transparent opacity-50" />
-          <p className="text-2xl md:text-3xl font-medium text-primary mb-1 relative z-10">
-            {afterValue}
-          </p>
-          <p className="text-xs text-primary/80 relative z-10">{afterDesc}</p>
-        </div>
-      </div>
-      
-      {/* Hover glow */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent" />
-      </div>
-    </motion.div>
-  );
-};
-
-// ============================================
-// RESULTS DASHBOARD SECTION
+// RESULTS DASHBOARD SECTION - Full Width Impact Design
 // ============================================
 const ResultsDashboardSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -1137,83 +1067,132 @@ const ResultsDashboardSection = () => {
     margin: "-10%"
   });
   
-  const beforeAfterData = [
+  const transformations = [
     {
-      label: 'KR Volume',
-      beforeValue: '$0',
-      beforeDesc: 'Zero presence in Korea',
-      afterValue: '$120M+',
-      afterDesc: 'Daily trading volume'
+      metric: 'KR Daily Volume',
+      before: '$0',
+      after: '$120M+',
+      highlight: 'From invisible to market leader'
     },
     {
-      label: 'Mindshare Ranking',
-      beforeValue: '#50+',
-      beforeDesc: 'Unknown project',
-      afterValue: '#1~3',
-      afterDesc: 'Category leader'
+      metric: 'Mindshare Rank',
+      before: '#50+',
+      after: '#1~3',
+      highlight: 'Category-defining presence'
     },
     {
-      label: 'Korean Community',
-      beforeValue: '0',
-      beforeDesc: 'No local community',
-      afterValue: '50K+',
-      afterDesc: 'Active Korean members'
+      metric: 'Korean Community',
+      before: '0',
+      after: '50K+',
+      highlight: 'Organic fanbase built'
     }
   ];
 
-  return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-b border-border overflow-hidden">
-      <motion.div initial={{
-      opacity: 0
-    }} animate={isInView ? {
-      opacity: 1
-    } : {}} className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+  return (
+    <section ref={ref} className="relative py-32 bg-background border-b border-border overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] via-transparent to-primary/[0.02]" />
+      
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="text-center mb-20"
+        >
+          <p className="text-primary text-sm tracking-widest uppercase mb-4 font-medium">
             03 Results
           </p>
-          <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-4">
-            Before vs After
+          <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium text-foreground">
+            The Transformation
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            See the transformation our clients experience when entering the Korean market.
-          </p>
-        </div>
+        </motion.div>
 
-        {/* Before → After Cards */}
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-20">
-          {beforeAfterData.map((item, i) => (
-            <BeforeAfterCard
-              key={item.label}
-              label={item.label}
-              beforeValue={item.beforeValue}
-              beforeDesc={item.beforeDesc}
-              afterValue={item.afterValue}
-              afterDesc={item.afterDesc}
-              delay={i * 0.15 + 0.2}
-              isVisible={isInView}
-            />
+        {/* Full-width transformation rows */}
+        <div className="space-y-0">
+          {transformations.map((item, i) => (
+            <motion.div
+              key={item.metric}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+              animate={isInView ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: i * 0.2 + 0.3, duration: 0.7 }}
+              className="group relative border-t border-border first:border-t-0"
+            >
+              <div className="grid grid-cols-12 items-center py-12 md:py-16 gap-4 md:gap-8">
+                {/* Metric Label */}
+                <div className="col-span-12 md:col-span-3">
+                  <p className="text-xs tracking-widest text-muted-foreground uppercase mb-2">
+                    {item.metric}
+                  </p>
+                  <p className="text-sm text-muted-foreground/70 hidden md:block">
+                    {item.highlight}
+                  </p>
+                </div>
+                
+                {/* Before Value */}
+                <div className="col-span-4 md:col-span-3 text-center md:text-right">
+                  <p className="text-3xl md:text-5xl lg:text-6xl font-light text-muted-foreground/40 line-through decoration-muted-foreground/20 decoration-2">
+                    {item.before}
+                  </p>
+                </div>
+                
+                {/* Arrow / Divider */}
+                <div className="col-span-4 md:col-span-2 flex items-center justify-center">
+                  <motion.div 
+                    className="flex items-center gap-2"
+                    animate={{ x: [0, 10, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    <div className="w-8 md:w-16 h-px bg-gradient-to-r from-muted-foreground/20 via-primary to-primary" />
+                    <ArrowRight className="w-5 h-5 md:w-6 md:h-6 text-primary" />
+                  </motion.div>
+                </div>
+                
+                {/* After Value */}
+                <div className="col-span-4 md:col-span-4 text-center md:text-left">
+                  <motion.p 
+                    className="text-4xl md:text-6xl lg:text-7xl font-medium text-primary"
+                    initial={{ scale: 0.9 }}
+                    animate={isInView ? { scale: 1 } : {}}
+                    transition={{ delay: i * 0.2 + 0.5, type: "spring", stiffness: 200 }}
+                  >
+                    {item.after}
+                  </motion.p>
+                </div>
+              </div>
+              
+              {/* Hover highlight line */}
+              <motion.div 
+                className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-primary via-primary to-transparent"
+                initial={{ scaleX: 0 }}
+                whileHover={{ scaleX: 1 }}
+                transition={{ duration: 0.3 }}
+                style={{ transformOrigin: 'left' }}
+              />
+            </motion.div>
           ))}
         </div>
 
-        {/* Quarterly Growth Chart */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 40
-      }} animate={isInView ? {
-        opacity: 1,
-        y: 0
-      } : {}} transition={{
-        delay: 0.8
-      }} className="max-w-2xl mx-auto">
-          <p className="text-xs tracking-widest text-primary font-medium mb-6 text-center">
-            QUARTERLY GROWTH TRAJECTORY
+        {/* Bottom divider line */}
+        <div className="border-t border-border" />
+
+        {/* Growth Chart */}
+        <motion.div 
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 1 }}
+          className="mt-20 max-w-3xl mx-auto"
+        >
+          <p className="text-xs tracking-widest text-muted-foreground uppercase mb-8 text-center">
+            Quarterly Growth Trajectory
           </p>
-          <div className="p-6 border border-border bg-muted/30 rounded-lg">
+          <div className="p-8 border border-border bg-muted/10">
             <AnimatedBarChart isVisible={isInView} />
           </div>
         </motion.div>
-      </motion.div>
-    </section>;
+      </div>
+    </section>
+  );
 };
 
 // ============================================
