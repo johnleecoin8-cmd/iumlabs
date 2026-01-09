@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
-import { Target, TrendingUp, Newspaper, ChevronRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import ceoPhoto from "@/assets/team/ceo-profile.png";
-import teamMember1Photo from "@/assets/team/team-member-1.jpeg";
+import teamStrategyPhoto from "@/assets/team/team-strategy.jpeg";
+import teamOperationsPhoto from "@/assets/team/team-operations.jpeg";
+import teamGrowthPhoto from "@/assets/team/team-growth.jpeg";
 
 const LeadershipSection = () => {
   const ceoBackground = [
@@ -14,8 +16,7 @@ const LeadershipSection = () => {
     {
       role: "Head of Strategy",
       nickname: "The Analyst",
-      icon: Target,
-      photo: teamMember1Photo,
+      photo: teamStrategyPhoto,
       background: [
         "Former VC Research Analyst",
         "Specialist in Tokenomics & GTM Strategy"
@@ -25,8 +26,7 @@ const LeadershipSection = () => {
     {
       role: "Head of Operations",
       nickname: "The Executor",
-      icon: TrendingUp,
-      photo: null,
+      photo: teamOperationsPhoto,
       background: [
         "Ex-Tier 1 Exchange Listing Manager",
         "Managed 50+ Listing Campaigns"
@@ -36,8 +36,7 @@ const LeadershipSection = () => {
     {
       role: "Head of Growth",
       nickname: "The Narrative Builder",
-      icon: Newspaper,
-      photo: null,
+      photo: teamGrowthPhoto,
       background: [
         "Former Chief Editor at Crypto Media",
         "Expert in Viral Marketing & KOL Mgmt"
@@ -171,20 +170,14 @@ const LeadershipSection = () => {
                 className="group relative"
               >
                 <div className="relative p-8 bg-gradient-to-br from-white/[0.06] to-white/[0.02] rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-500 h-full">
-                  {/* Photo or Icon */}
-                  {member.photo ? (
-                    <div className="w-16 h-16 rounded-xl overflow-hidden mb-6 border border-white/10">
-                      <img 
-                        src={member.photo} 
-                        alt={member.role}
-                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center mb-6 group-hover:bg-white/15 transition-colors duration-300">
-                      <member.icon className="w-7 h-7 text-white/70" />
-                    </div>
-                  )}
+                  {/* Photo */}
+                  <div className="w-16 h-16 rounded-xl overflow-hidden mb-6 border border-white/10">
+                    <img 
+                      src={member.photo} 
+                      alt={member.role}
+                      className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
+                    />
+                  </div>
 
                   {/* Role & Nickname */}
                   <div className="mb-6">
