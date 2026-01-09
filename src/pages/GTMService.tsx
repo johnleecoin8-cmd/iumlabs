@@ -1524,97 +1524,167 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
         {/* Main visualization grid */}
         <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-start relative">
           {/* SVG Connection Lines - Desktop Only */}
-          <svg className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0" style={{ overflow: 'visible' }}>
+          <svg className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-10" preserveAspectRatio="none">
             <defs>
-              <linearGradient id="flowGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.6"/>
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1"/>
+              {/* Gradients for each data source */}
+              <linearGradient id="flowGradientBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.8"/>
+                <stop offset="50%" stopColor="#3b82f6" stopOpacity="0.4"/>
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.2"/>
               </linearGradient>
-              <linearGradient id="flowGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="hsl(217, 91%, 60%)" stopOpacity="0.6"/>
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1"/>
+              <linearGradient id="flowGradientPurple" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#a855f7" stopOpacity="0.8"/>
+                <stop offset="50%" stopColor="#a855f7" stopOpacity="0.4"/>
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.2"/>
               </linearGradient>
-              <linearGradient id="flowGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stopColor="hsl(142, 76%, 36%)" stopOpacity="0.6"/>
-                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1"/>
+              <linearGradient id="flowGradientGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="#22c55e" stopOpacity="0.8"/>
+                <stop offset="50%" stopColor="#22c55e" stopOpacity="0.4"/>
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.2"/>
               </linearGradient>
+              <linearGradient id="flowGradientOutput" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.8"/>
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.2"/>
+              </linearGradient>
+              
+              {/* Glow filter */}
+              <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                <feMerge>
+                  <feMergeNode in="coloredBlur"/>
+                  <feMergeNode in="SourceGraphic"/>
+                </feMerge>
+              </filter>
             </defs>
             
-            {/* Path 1: Top source to center */}
+            {/* Connection Line 1: Onchain Data (top) to AI Core */}
             <path 
-              d="M 33% 12% Q 42% 12%, 50% 35%" 
-              stroke="url(#flowGradient2)"
-              strokeWidth="1.5"
+              d="M 32% 18% C 38% 18%, 42% 35%, 48% 48%" 
+              stroke="url(#flowGradientBlue)"
+              strokeWidth="2"
               fill="none"
-              className="opacity-40"
+              strokeDasharray="4 2"
+              opacity="0.6"
             />
-            <circle r="3" fill="hsl(217, 91%, 60%)">
+            {/* Animated particle 1 */}
+            <circle r="4" fill="#3b82f6" filter="url(#glow)">
               <animateMotion 
-                dur="2.5s" 
+                dur="3s" 
                 repeatCount="indefinite"
-                path="M 33% 12% Q 42% 12%, 50% 35%"
+                path="M 32% 18% C 38% 18%, 42% 35%, 48% 48%"
               />
-              <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <circle r="4" fill="#3b82f6" filter="url(#glow)">
+              <animateMotion 
+                dur="3s" 
+                repeatCount="indefinite"
+                path="M 32% 18% C 38% 18%, 42% 35%, 48% 48%"
+                begin="1.5s"
+              />
+              <animate attributeName="opacity" values="0;1;1;0" dur="3s" repeatCount="indefinite" begin="1.5s" />
             </circle>
             
-            {/* Path 2: Middle source to center */}
+            {/* Connection Line 2: Social Signals (middle) to AI Core */}
             <path 
-              d="M 33% 50% Q 40% 50%, 50% 50%" 
-              stroke="url(#flowGradient1)"
-              strokeWidth="1.5"
+              d="M 32% 50% C 36% 50%, 42% 50%, 48% 50%" 
+              stroke="url(#flowGradientPurple)"
+              strokeWidth="2"
               fill="none"
-              className="opacity-40"
+              strokeDasharray="4 2"
+              opacity="0.6"
             />
-            <circle r="3" fill="hsl(var(--primary))">
+            {/* Animated particles 2 */}
+            <circle r="4" fill="#a855f7" filter="url(#glow)">
               <animateMotion 
                 dur="2s" 
                 repeatCount="indefinite"
-                path="M 33% 50% Q 40% 50%, 50% 50%"
+                path="M 32% 50% C 36% 50%, 42% 50%, 48% 50%"
               />
               <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" />
             </circle>
-            <circle r="3" fill="hsl(var(--primary))">
+            <circle r="4" fill="#a855f7" filter="url(#glow)">
               <animateMotion 
                 dur="2s" 
                 repeatCount="indefinite"
-                path="M 33% 50% Q 40% 50%, 50% 50%"
+                path="M 32% 50% C 36% 50%, 42% 50%, 48% 50%"
                 begin="0.7s"
               />
               <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="0.7s" />
             </circle>
-            
-            {/* Path 3: Bottom source to center */}
-            <path 
-              d="M 33% 88% Q 42% 88%, 50% 65%" 
-              stroke="url(#flowGradient3)"
-              strokeWidth="1.5"
-              fill="none"
-              className="opacity-40"
-            />
-            <circle r="3" fill="hsl(142, 76%, 36%)">
+            <circle r="4" fill="#a855f7" filter="url(#glow)">
               <animateMotion 
-                dur="2.8s" 
+                dur="2s" 
                 repeatCount="indefinite"
-                path="M 33% 88% Q 42% 88%, 50% 65%"
+                path="M 32% 50% C 36% 50%, 42% 50%, 48% 50%"
+                begin="1.4s"
               />
-              <animate attributeName="opacity" values="0;1;1;0" dur="2.8s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="1.4s" />
             </circle>
             
-            {/* Output path from center to right */}
+            {/* Connection Line 3: Market Data (bottom) to AI Core */}
             <path 
-              d="M 50% 50% Q 58% 50%, 67% 50%" 
-              stroke="url(#flowGradient1)"
-              strokeWidth="1.5"
+              d="M 32% 82% C 38% 82%, 42% 65%, 48% 52%" 
+              stroke="url(#flowGradientGreen)"
+              strokeWidth="2"
               fill="none"
-              className="opacity-40"
+              strokeDasharray="4 2"
+              opacity="0.6"
             />
-            <circle r="3" fill="hsl(var(--primary))">
+            {/* Animated particle 3 */}
+            <circle r="4" fill="#22c55e" filter="url(#glow)">
+              <animateMotion 
+                dur="2.5s" 
+                repeatCount="indefinite"
+                path="M 32% 82% C 38% 82%, 42% 65%, 48% 52%"
+              />
+              <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" />
+            </circle>
+            <circle r="4" fill="#22c55e" filter="url(#glow)">
+              <animateMotion 
+                dur="2.5s" 
+                repeatCount="indefinite"
+                path="M 32% 82% C 38% 82%, 42% 65%, 48% 52%"
+                begin="1.25s"
+              />
+              <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" begin="1.25s" />
+            </circle>
+            
+            {/* Output Line: AI Core to Strategic Output */}
+            <path 
+              d="M 52% 50% C 58% 50%, 62% 50%, 68% 50%" 
+              stroke="url(#flowGradientOutput)"
+              strokeWidth="2"
+              fill="none"
+              strokeDasharray="4 2"
+              opacity="0.6"
+            />
+            {/* Animated output particles */}
+            <circle r="4" fill="hsl(var(--primary))" filter="url(#glow)">
               <animateMotion 
                 dur="1.5s" 
                 repeatCount="indefinite"
-                path="M 50% 50% Q 58% 50%, 67% 50%"
+                path="M 52% 50% C 58% 50%, 62% 50%, 68% 50%"
               />
               <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" />
+            </circle>
+            <circle r="4" fill="hsl(var(--primary))" filter="url(#glow)">
+              <animateMotion 
+                dur="1.5s" 
+                repeatCount="indefinite"
+                path="M 52% 50% C 58% 50%, 62% 50%, 68% 50%"
+                begin="0.5s"
+              />
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="0.5s" />
+            </circle>
+            <circle r="4" fill="hsl(var(--primary))" filter="url(#glow)">
+              <animateMotion 
+                dur="1.5s" 
+                repeatCount="indefinite"
+                path="M 52% 50% C 58% 50%, 62% 50%, 68% 50%"
+                begin="1s"
+              />
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" begin="1s" />
             </circle>
           </svg>
 
