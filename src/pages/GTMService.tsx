@@ -2025,15 +2025,15 @@ const StrategyInActionSection = () => {
   });
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
-  // All case study projects with their data
+  // All case study projects with their data - video takes priority, fallback to image
   const allProjects = [
-    { name: 'MANTRA', category: 'RWA L1', result: '+450% Volume', image: mantraBg, slug: 'mantra' },
-    { name: 'Story Protocol', category: 'IP Protocol', result: '#1 Mindshare', image: storyBg, slug: 'story-protocol' },
-    { name: 'peaq', category: 'DePIN', result: '85K+ Wallets', image: peaqBg, slug: 'peaq' },
-    { name: 'BNB Chain', category: 'Infrastructure', result: '+340% Volume', image: bnbBg, slug: 'bnb-chain' },
-    { name: 'Bybit', category: 'Exchange', result: 'Top Events', image: bybitBg, slug: 'bybit' },
-    { name: 'KuCoin', category: 'Exchange', result: '50K+ Users', image: kucoinBg, slug: 'kucoin' },
-    { name: 'Sahara AI', category: 'AI', result: 'KR Launch', image: saharaBg, slug: 'sahara-ai' },
+    { name: 'MANTRA', category: 'RWA L1', result: '+450% Volume', image: mantraBg, video: '/videos/projects/mantra-hero.mp4', slug: 'mantra' },
+    { name: 'Story Protocol', category: 'IP Protocol', result: '#1 Mindshare', image: storyBg, video: '/videos/projects/story-hero.mp4', slug: 'story-protocol' },
+    { name: 'peaq', category: 'DePIN', result: '85K+ Wallets', image: peaqBg, video: '/videos/projects/peaq-hero.mp4', slug: 'peaq' },
+    { name: 'BNB Chain', category: 'Infrastructure', result: '+340% Volume', image: bnbBg, video: '/videos/projects/bnb-hero.mp4', slug: 'bnb-chain' },
+    { name: 'Bybit', category: 'Exchange', result: 'Top Events', image: bybitBg, video: '/videos/projects/bybit-hero.mp4', slug: 'bybit' },
+    { name: 'KuCoin', category: 'Exchange', result: '50K+ Users', image: kucoinBg, video: '/videos/projects/kucoin-hero.mp4', slug: 'kucoin' },
+    { name: 'Sahara AI', category: 'AI', result: 'KR Launch', image: saharaBg, video: '/videos/projects/sahara-hero.mp4', slug: 'sahara-ai' },
     { name: 'OpenLedger', category: 'AI / Blockchain', result: 'Community', image: openledgerBg, slug: 'openledger' },
     { name: 'MegaETH', category: 'Layer 2', result: 'Pre-Launch', image: megaethBg, slug: 'megaeth' },
     { name: 'Polygon', category: 'Layer 2', result: 'DevRel', image: polygonBg, slug: 'polygon' },
@@ -2107,11 +2107,35 @@ const StrategyInActionSection = () => {
                 className="group block border-b border-border/30 py-5 md:py-6 transition-all duration-300 hover:bg-muted/5 hover:pl-4"
               >
                 <div className="flex items-center justify-between gap-4">
-                  {/* Left: Index + Name */}
-                  <div className="flex items-center gap-4 md:gap-8 lg:gap-12 flex-1 min-w-0">
+                  {/* Left: Index + Thumbnail + Name */}
+                  <div className="flex items-center gap-4 md:gap-6 lg:gap-8 flex-1 min-w-0">
                     <span className="text-xs text-muted-foreground/40 font-mono w-6 md:w-8 shrink-0">
                       {String(i + 1).padStart(2, '0')}
                     </span>
+                    
+                    {/* Thumbnail - Video or Image */}
+                    <div className="relative w-16 h-10 md:w-24 md:h-14 lg:w-32 lg:h-20 rounded-md overflow-hidden shrink-0 bg-muted/20">
+                      {project.video ? (
+                        <video
+                          src={project.video}
+                          muted
+                          loop
+                          playsInline
+                          autoPlay={hoveredProject === project.slug}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          poster={project.image}
+                        />
+                      ) : (
+                        <img
+                          src={project.image}
+                          alt={project.name}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                      )}
+                      {/* Overlay gradient */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+                    
                     <h3 className="text-lg md:text-2xl lg:text-3xl font-medium text-foreground group-hover:text-primary transition-colors duration-300 truncate">
                       {project.name}
                     </h3>
@@ -2119,7 +2143,7 @@ const StrategyInActionSection = () => {
 
                   {/* Right: Category + Result + Arrow */}
                   <div className="flex items-center gap-3 md:gap-6 lg:gap-8 shrink-0">
-                    <span className="hidden md:block text-sm text-muted-foreground/60 min-w-[100px]">
+                    <span className="hidden lg:block text-sm text-muted-foreground/60 min-w-[100px]">
                       {project.category}
                     </span>
                     <span className="text-xs md:text-sm text-primary font-medium min-w-[80px] md:min-w-[100px] text-right">
