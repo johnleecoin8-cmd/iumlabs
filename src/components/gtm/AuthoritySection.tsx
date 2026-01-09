@@ -190,10 +190,94 @@ export const AuthoritySection = () => {
       ref={sectionRef}
       className="relative py-24 md:py-32 bg-background overflow-hidden"
     >
-      {/* Background decoration */}
+      {/* Data Terminal Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
+        {/* Dot Grid */}
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}
+        />
+        
+        {/* Scanline Effect */}
+        <div 
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)'
+          }}
+        />
+        
+        {/* Gradient Orbs */}
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
+        
+        {/* Animated Connection Lines */}
+        <svg className="absolute inset-0 w-full h-full opacity-20">
+          <defs>
+            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+              <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="1" />
+              <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          
+          {/* Horizontal Lines */}
+          <motion.line
+            x1="0" y1="20%" x2="100%" y2="20%"
+            stroke="url(#lineGradient)"
+            strokeWidth="1"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: [0, 0.3, 0] }}
+            transition={{ duration: 4, repeat: Infinity, repeatDelay: 2 }}
+          />
+          <motion.line
+            x1="0" y1="50%" x2="100%" y2="50%"
+            stroke="url(#lineGradient)"
+            strokeWidth="1"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: [0, 0.3, 0] }}
+            transition={{ duration: 5, repeat: Infinity, repeatDelay: 3, delay: 1 }}
+          />
+          <motion.line
+            x1="0" y1="80%" x2="100%" y2="80%"
+            stroke="url(#lineGradient)"
+            strokeWidth="1"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: [0, 0.3, 0] }}
+            transition={{ duration: 4.5, repeat: Infinity, repeatDelay: 2.5, delay: 2 }}
+          />
+        </svg>
+        
+        {/* Floating Particles */}
+        <motion.div
+          className="absolute w-2 h-2 bg-primary/40 rounded-full blur-sm"
+          style={{ left: '10%', top: '30%' }}
+          animate={{
+            y: [0, -30, 0],
+            opacity: [0.3, 0.6, 0.3]
+          }}
+          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute w-1.5 h-1.5 bg-emerald-500/40 rounded-full blur-sm"
+          style={{ left: '80%', top: '60%' }}
+          animate={{
+            y: [0, -25, 0],
+            opacity: [0.2, 0.5, 0.2]
+          }}
+          transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+        />
+        <motion.div
+          className="absolute w-1 h-1 bg-purple-500/40 rounded-full blur-sm"
+          style={{ left: '50%', top: '70%' }}
+          animate={{
+            y: [0, -20, 0],
+            opacity: [0.2, 0.4, 0.2]
+          }}
+          transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
