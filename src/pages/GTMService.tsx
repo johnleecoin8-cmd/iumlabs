@@ -3,6 +3,7 @@ import { motion, useInView, AnimatePresence, useScroll, useMotionValueEvent } fr
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
+import PerformanceSection from '@/components/gtm/PerformanceSection';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy, Cpu, Database, Activity, LineChart, Target, Sparkles } from 'lucide-react';
@@ -2348,6 +2349,7 @@ const GTMService = () => {
         <HeroSection />
         <MarketIntelligenceSection />
         <FrameworkSection />
+        <PerformanceSection />
         <StrategyInActionSection />
         <ClientLogosMarquee />
         <CTASection />
