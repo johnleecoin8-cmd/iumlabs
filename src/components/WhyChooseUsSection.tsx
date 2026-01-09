@@ -1,13 +1,24 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Zap, Target, Rocket } from 'lucide-react';
 import aboutImageDefault from '@/assets/campaigns/about-image-default.jpeg';
 import aboutImageHover from '@/assets/campaigns/about-image-hover.jpeg';
 
-const stats = [
-  { value: "50+", label: "Projects Launched" },
-  { value: "$2B+", label: "Total Value Marketed" },
-  { value: "100+", label: "KOL Partners" },
+const vibeKeywords = [
+  { 
+    label: "Fresh Perspective", 
+    desc: "No old playbooks",
+    icon: Zap 
+  },
+  { 
+    label: "Trend Native", 
+    desc: "Meme & narrative fluent",
+    icon: Target 
+  },
+  { 
+    label: "Agile Move", 
+    desc: "Fast & sharp execution",
+    icon: Rocket 
+  },
 ];
 
 const WhyChooseUsSection = () => {
@@ -28,7 +39,7 @@ const WhyChooseUsSection = () => {
           />
         </div>
 
-        {/* Right: Content */}
+        {/* Right: Content - Updated messaging */}
         <div className="flex flex-col justify-center">
           <motion.div 
             className="p-6 sm:p-8 md:p-10 lg:p-14 flex flex-col justify-center"
@@ -37,19 +48,48 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true, margin: "-50px" }}
           >
-            {/* Headline */}
-            <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
-              Real results, not just promises.
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full border border-[hsl(var(--electric-blue)/0.3)] bg-[hsl(var(--electric-blue)/0.05)] w-fit">
+              <span className="text-[10px] font-mono tracking-wider text-[hsl(var(--electric-blue))]">
+                WHY US
+              </span>
+            </div>
+
+            {/* Headline - Updated */}
+            <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 sm:mb-5 tracking-tight leading-tight">
+              Old tactics don't work{' '}
+              <span className="gradient-neon">in a new cycle.</span>
             </h2>
             
-            {/* Description */}
+            {/* Description - Updated */}
             <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-6">
-              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. '이음(ium)' Derived from the Korean word "to connect," we function as your foundational layer for market entry. We transcend standard marketing by leveraging proprietary analytics and data-driven research, providing the actionable insights needed to navigate and succeed in the Korean market.
+              Web3 trends change weekly. Yesterday's playbook is already outdated. 
+              ium Labs speaks the 2025 market language—current community vibes, 
+              narratives that resonate <span className="text-foreground/70 font-medium">right now</span>.
             </p>
+
+            {/* Vibe Keywords - NEW */}
+            <div className="flex flex-wrap gap-2 mb-6">
+              {vibeKeywords.map((keyword, index) => {
+                const Icon = keyword.icon;
+                return (
+                  <div 
+                    key={index}
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/[0.03] border border-white/10 hover:border-[hsl(var(--neon-lime)/0.4)] transition-all duration-300 group"
+                  >
+                    <Icon className="w-3.5 h-3.5 text-[hsl(var(--neon-lime))] group-hover:scale-110 transition-transform" />
+                    <div>
+                      <span className="text-xs font-medium text-white/80 block">{keyword.label}</span>
+                      <span className="text-[10px] text-white/40">{keyword.desc}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
             
-            {/* Founders Note */}
-            <p className="text-violet-400 text-xs sm:text-sm">
-              Founded by former Binance & KuCoin executives
+            {/* Founders Note - Updated styling */}
+            <p className="text-[hsl(var(--hot-pink))] text-xs sm:text-sm font-medium">
+              Young, hungry, and hyper-sensitive to the market pulse.
             </p>
           </motion.div>
         </div>
