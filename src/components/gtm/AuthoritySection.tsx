@@ -1,6 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
-
+import { useCountUp } from '@/hooks/useCountUp';
 // Roster Data - The Team
 const rosterMembers = [
   {
@@ -45,10 +45,59 @@ const metrics = [
 ];
 
 // Backing Intelligence
-const backingLogos = ['Upbit', 'Bithumb', 'Coinone', 'BlockMedia', 'KISA', 'FSC Advisory'];
+const backingLogos = ['Binance', 'KuCoin', 'Coinone', 'Outlier Ventures', '21Shares'];
+
+// Parse metric value for count-up
+const parseMetricValue = (value: string): { numericValue: number; prefix: string; suffix: string } => {
+  const match = value.match(/^([#$]?)(\d+\.?\d*)(.*)$/);
+  if (match) {
+    return {
+      prefix: match[1] || '',
+      numericValue: parseFloat(match[2]),
+      suffix: match[3] || ''
+    };
+  }
+  return { prefix: '', numericValue: 0, suffix: value };
+};
+
+// Animated Metric Component
+const AnimatedMetric = ({ metric, index, isVisible }: { 
+  metric: typeof metrics[0]; 
+  index: number;
+  isVisible: boolean;
+}) => {
+  const parsed = parseMetricValue(metric.value);
+  const count = useCountUp({
+    end: parsed.numericValue,
+    duration: 2000,
+    delay: index * 200,
+    isVisible,
+    decimals: parsed.numericValue % 1 !== 0 ? 1 : 0
+  });
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      className="bg-black p-6 md:p-8 text-center group hover:bg-white/[0.02] transition-colors"
+    >
+      <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 font-mono tracking-tight">
+        {parsed.prefix}{count}{parsed.suffix}
+      </div>
+      <div className="text-xs md:text-sm text-white/60 uppercase tracking-wider mb-1">
+        {metric.label}
+      </div>
+      <div className="text-[10px] text-white/30">
+        {metric.labelKo}
+      </div>
+    </motion.div>
+  );
+};
 
 // Metrics Row Component
-const MetricsRow = () => {
+const MetricsRow = ({ isVisible }: { isVisible: boolean }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -58,24 +107,7 @@ const MetricsRow = () => {
       className="grid grid-cols-3 gap-px bg-white/10 rounded-lg overflow-hidden mb-12"
     >
       {metrics.map((metric, index) => (
-        <motion.div
-          key={metric.label}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: index * 0.1 }}
-          className="bg-black p-6 md:p-8 text-center group hover:bg-white/[0.02] transition-colors"
-        >
-          <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 font-mono tracking-tight">
-            {metric.value}
-          </div>
-          <div className="text-xs md:text-sm text-white/60 uppercase tracking-wider mb-1">
-            {metric.label}
-          </div>
-          <div className="text-[10px] text-white/30">
-            {metric.labelKo}
-          </div>
-        </motion.div>
+        <AnimatedMetric key={metric.label} metric={metric} index={index} isVisible={isVisible} />
       ))}
     </motion.div>
   );
@@ -252,7 +284,7 @@ export const AuthoritySection = () => {
         </motion.div>
 
         {/* Section 1: The Metrics */}
-        <MetricsRow />
+        <MetricsRow isVisible={isInView} />
 
         {/* Section 2: The Roster */}
         <motion.div

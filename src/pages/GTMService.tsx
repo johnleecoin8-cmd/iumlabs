@@ -386,8 +386,18 @@ const HeroSection = () => {
             ease: [0.33, 1, 0.68, 1]
           }}>
               <GlitchText className="text-primary">Impact.</GlitchText>{' '}
-              <span className="text-foreground/60">Adoption.</span>{' '}
-              <span className="text-foreground/40">Liquidity.</span>
+              <motion.span 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.0, duration: 0.5 }}
+                className="text-foreground/60"
+              >Adoption.</motion.span>{' '}
+              <motion.span 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.5, duration: 0.5 }}
+                className="text-foreground/40"
+              >Liquidity.</motion.span>
             </motion.span>
           </span>
         </motion.h1>
