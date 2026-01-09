@@ -2,8 +2,8 @@ import { motion } from "framer-motion";
 import { ChevronRight, Linkedin } from "lucide-react";
 import ceoPhoto from "@/assets/team/ceo-profile.png";
 import teamStrategyPhoto from "@/assets/team/team-strategy.jpeg";
-import teamOperationsPhoto from "@/assets/team/team-operations.jpeg";
-import teamGrowthPhoto from "@/assets/team/team-growth.jpeg";
+import teamCommunityPhoto from "@/assets/team/team-community.jpeg";
+import teamResearchPhoto from "@/assets/team/team-growth.jpeg";
 
 const LeadershipSection = () => {
   const ceoBackground = [
@@ -19,23 +19,26 @@ const LeadershipSection = () => {
       photo: teamStrategyPhoto,
       background: [
         "Former Binance / Ledger"
-      ]
+      ],
+      responsibility: "GTM Strategy & Planning"
     },
     {
       name: "Miles K",
       role: "Head of Community",
-      photo: teamOperationsPhoto,
+      photo: teamCommunityPhoto,
       background: [
         "Former Head of Operation ai16z"
-      ]
+      ],
+      responsibility: "Community Growth & Management"
     },
     {
-      name: "",
+      name: "Shim K",
       role: "Senior Researcher",
-      photo: teamGrowthPhoto,
+      photo: teamResearchPhoto,
       background: [
         ""
-      ]
+      ],
+      responsibility: "Market Research & Analysis"
     }
   ];
 
@@ -188,14 +191,20 @@ const LeadershipSection = () => {
                   </div>
 
                   {/* Background */}
-                  <ul className="space-y-2">
-                    {member.background.map((item, i) => (
+                  <ul className="space-y-2 mb-4">
+                    {member.background.filter(item => item).map((item, i) => (
                       <li key={i} className="text-white/40 text-sm flex items-start gap-2">
                         <span className="text-white/30 mt-1">•</span>
                         {item}
                       </li>
                     ))}
                   </ul>
+
+                  {/* Responsibility */}
+                  <div className="pt-4 border-t border-white/10">
+                    <span className="text-white/30 text-xs tracking-wider uppercase">Role</span>
+                    <p className="text-white/60 text-sm mt-1">{member.responsibility}</p>
+                  </div>
 
                   {/* Card Number */}
                   <div className="absolute top-6 right-6 text-white/10 text-4xl font-bold">
