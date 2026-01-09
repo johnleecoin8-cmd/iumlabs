@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Activity } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
 import { Progress } from '@/components/ui/progress';
 
@@ -19,18 +19,9 @@ import polygonLogo from '@/assets/logos/polygon.svg';
 import triaLogo from '@/assets/logos/tria-official.png';
 import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
 
-// Project backgrounds
-import bnbBg from '@/assets/projects/bnb-bg.jpg';
-import bybitBg from '@/assets/projects/bybit-bg.jpg';
-import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
-import saharaBg from '@/assets/projects/sahara-ai-bg.jpg';
-import megaethBg from '@/assets/projects/megaeth-bg.jpg';
-import ondoBg from '@/assets/projects/ondo-bg.jpg';
-import polygonBg from '@/assets/projects/polygon-bg.jpg';
-import triaBg from '@/assets/projects/tria-bg.jpg';
-
-// Featured Projects Data
-const featuredProjects = [
+// All Projects Data for 4-row Marquee
+const allProjects = [
+  // Row 1 (→ right)
   {
     name: 'MANTRA',
     slug: 'mantra',
@@ -64,19 +55,116 @@ const featuredProjects = [
     glowColor: 'rgba(34,211,238,0.5)',
     progress: 88
   },
+  // Row 2 (← left)
+  {
+    name: 'BNB Chain',
+    slug: 'bnb-chain',
+    logo: bnbLogo,
+    category: 'L1 Ecosystem',
+    strategy: 'Exchange Partnership',
+    metric: { value: 2.1, suffix: 'M', label: 'Impressions' },
+    color: 'yellow',
+    glowColor: 'rgba(234,179,8,0.5)',
+    progress: 95
+  },
+  {
+    name: 'Bybit',
+    slug: 'bybit',
+    logo: bybitLogo,
+    category: 'CEX',
+    strategy: 'Market Maker Campaign',
+    metric: { value: 320, suffix: '%', label: 'Trading Volume' },
+    color: 'orange',
+    glowColor: 'rgba(251,146,60,0.5)',
+    progress: 89
+  },
+  {
+    name: 'KuCoin',
+    slug: 'kucoin',
+    logo: kucoinLogo,
+    category: 'CEX',
+    strategy: 'Community Airdrop',
+    metric: { value: 180, suffix: 'K', label: 'New Users' },
+    color: 'green',
+    glowColor: 'rgba(34,197,94,0.5)',
+    progress: 91
+  },
+  // Row 3 (→ right)
+  {
+    name: 'Sahara AI',
+    slug: 'sahara-ai',
+    logo: saharaLogo,
+    category: 'AI Infra',
+    strategy: 'Thought Leadership',
+    metric: { value: 500, suffix: 'K+', label: 'Reach' },
+    color: 'blue',
+    glowColor: 'rgba(59,130,246,0.5)',
+    progress: 87
+  },
+  {
+    name: 'OpenLedger',
+    slug: 'openledger',
+    logo: openledgerLogo,
+    category: 'Data Layer',
+    strategy: 'Developer Outreach',
+    metric: { value: 45, suffix: 'K', label: 'Downloads' },
+    color: 'purple',
+    glowColor: 'rgba(168,85,247,0.5)',
+    progress: 82
+  },
+  {
+    name: 'MegaETH',
+    slug: 'megaeth',
+    logo: megaethLogo,
+    category: 'L2',
+    strategy: 'Hype Building',
+    metric: { value: 1.2, suffix: 'M', label: 'Social Reach' },
+    color: 'pink',
+    glowColor: 'rgba(236,72,153,0.5)',
+    progress: 94
+  },
+  // Row 4 (← left)
+  {
+    name: 'Ondo',
+    slug: 'ondo',
+    logo: ondoLogo,
+    category: 'RWA',
+    strategy: 'Institutional PR',
+    metric: { value: 25, suffix: '+', label: 'Press Coverage' },
+    color: 'blue',
+    glowColor: 'rgba(59,130,246,0.5)',
+    progress: 90
+  },
+  {
+    name: 'Polygon',
+    slug: 'polygon',
+    logo: polygonLogo,
+    category: 'L2',
+    strategy: 'Ecosystem Growth',
+    metric: { value: 280, suffix: '%', label: 'TVL Growth' },
+    color: 'purple',
+    glowColor: 'rgba(168,85,247,0.5)',
+    progress: 86
+  },
+  {
+    name: 'Tria',
+    slug: 'tria',
+    logo: triaLogo,
+    category: 'Wallet',
+    strategy: 'User Acquisition',
+    metric: { value: 120, suffix: 'K', label: 'Signups' },
+    color: 'cyan',
+    glowColor: 'rgba(34,211,238,0.5)',
+    progress: 83
+  },
 ];
 
-// Extended Portfolio Projects
-const moreProjects = [
-  { name: 'BNB Chain', slug: 'bnb-chain', logo: bnbLogo, image: bnbBg },
-  { name: 'Bybit', slug: 'bybit', logo: bybitLogo, image: bybitBg },
-  { name: 'KuCoin', slug: 'kucoin', logo: kucoinLogo, image: kucoinBg },
-  { name: 'Sahara AI', slug: 'sahara-ai', logo: saharaLogo, image: saharaBg },
-  { name: 'OpenLedger', slug: 'openledger', logo: openledgerLogo, image: saharaBg },
-  { name: 'MegaETH', slug: 'megaeth', logo: megaethLogo, image: megaethBg },
-  { name: 'Ondo', slug: 'ondo', logo: ondoLogo, image: ondoBg },
-  { name: 'Polygon', slug: 'polygon', logo: polygonLogo, image: polygonBg },
-  { name: 'Tria', slug: 'tria', logo: triaLogo, image: triaBg },
+// Split into 4 rows
+const projectRows = [
+  allProjects.slice(0, 3),   // Row 1: MANTRA, Story, peaq
+  allProjects.slice(3, 6),   // Row 2: BNB, Bybit, KuCoin
+  allProjects.slice(6, 9),   // Row 3: Sahara, OpenLedger, MegaETH
+  allProjects.slice(9, 12),  // Row 4: Ondo, Polygon, Tria
 ];
 
 // Network Stats
@@ -87,11 +175,11 @@ const networkStats = [
   { value: 100, suffix: '%', label: 'Retention', sublabel: '재계약율' },
 ];
 
-// Featured Project Card for Marquee
-const FeaturedProjectCard = ({
+// Project Card for Marquee
+const ProjectCard = ({
   project,
 }: {
-  project: typeof featuredProjects[0];
+  project: typeof allProjects[0];
 }) => {
   const [isLive, setIsLive] = useState(true);
   
@@ -124,6 +212,38 @@ const FeaturedProjectCard = ({
       glow: 'hover:shadow-[0_0_60px_-15px_rgba(34,211,238,0.5)]',
       indicator: 'bg-cyan-500',
       progress: 'bg-cyan-500'
+    },
+    yellow: {
+      text: 'text-yellow-400',
+      bg: 'bg-yellow-500/10',
+      border: 'border-yellow-500/30',
+      glow: 'hover:shadow-[0_0_60px_-15px_rgba(234,179,8,0.5)]',
+      indicator: 'bg-yellow-500',
+      progress: 'bg-yellow-500'
+    },
+    green: {
+      text: 'text-green-400',
+      bg: 'bg-green-500/10',
+      border: 'border-green-500/30',
+      glow: 'hover:shadow-[0_0_60px_-15px_rgba(34,197,94,0.5)]',
+      indicator: 'bg-green-500',
+      progress: 'bg-green-500'
+    },
+    blue: {
+      text: 'text-blue-400',
+      bg: 'bg-blue-500/10',
+      border: 'border-blue-500/30',
+      glow: 'hover:shadow-[0_0_60px_-15px_rgba(59,130,246,0.5)]',
+      indicator: 'bg-blue-500',
+      progress: 'bg-blue-500'
+    },
+    pink: {
+      text: 'text-pink-400',
+      bg: 'bg-pink-500/10',
+      border: 'border-pink-500/30',
+      glow: 'hover:shadow-[0_0_60px_-15px_rgba(236,72,153,0.5)]',
+      indicator: 'bg-pink-500',
+      progress: 'bg-pink-500'
     }
   };
 
@@ -204,33 +324,37 @@ const FeaturedProjectCard = ({
   );
 };
 
-// Marquee Component
-const ProjectMarquee = ({ direction = 'left' }: { direction?: 'left' | 'right' }) => {
-  // Duplicate projects for seamless loop
-  const duplicatedProjects = [...featuredProjects, ...featuredProjects, ...featuredProjects];
+// Marquee Row Component
+const MarqueeRow = ({ 
+  projects, 
+  direction,
+  speed = 25
+}: { 
+  projects: typeof allProjects;
+  direction: 'left' | 'right';
+  speed?: number;
+}) => {
+  // Duplicate projects 4 times for seamless loop
+  const duplicated = [...projects, ...projects, ...projects, ...projects];
   
   return (
-    <div className="relative overflow-hidden">
-      {/* Gradient masks */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-      
+    <div className="relative overflow-hidden py-2">
       <motion.div
-        className="flex gap-6"
+        className="flex gap-4"
         animate={{
-          x: direction === 'left' ? ['0%', '-33.33%'] : ['-33.33%', '0%']
+          x: direction === 'left' ? ['0%', '-25%'] : ['-25%', '0%']
         }}
         transition={{
           x: {
-            duration: 30,
+            duration: speed,
             repeat: Infinity,
             ease: 'linear',
             repeatType: 'loop'
           }
         }}
       >
-        {duplicatedProjects.map((project, index) => (
-          <FeaturedProjectCard
+        {duplicated.map((project, index) => (
+          <ProjectCard
             key={`${project.slug}-${index}`}
             project={project}
           />
@@ -240,53 +364,6 @@ const ProjectMarquee = ({ direction = 'left' }: { direction?: 'left' | 'right' }
   );
 };
 
-// More Project Tile
-const ProjectTile = ({
-  project,
-  index,
-  isVisible
-}: {
-  project: typeof moreProjects[0];
-  index: number;
-  isVisible: boolean;
-}) => {
-  return (
-    <Link to={`/projects/${project.slug}`}>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-        transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
-        className="group relative aspect-square rounded-lg overflow-hidden border border-border/30 hover:border-primary/50 transition-all duration-300 hover:scale-105"
-      >
-        {/* Background Image */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
-          style={{ backgroundImage: `url(${project.image})` }}
-        />
-        
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-        
-        {/* Content */}
-        <div className="absolute inset-0 p-3 flex flex-col justify-end">
-          <img 
-            src={project.logo} 
-            alt={project.name}
-            className="h-6 w-auto object-contain mb-1 opacity-80 group-hover:opacity-100 transition-opacity"
-          />
-          <span className="text-xs font-mono text-muted-foreground group-hover:text-foreground transition-colors">
-            {project.name}
-          </span>
-        </div>
-
-        {/* Glow effect on hover */}
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
-        </div>
-      </motion.div>
-    </Link>
-  );
-};
 
 // Stat Card
 const StatCard = ({
@@ -466,36 +543,25 @@ export const PerformanceSection = () => {
           </p>
         </motion.div>
 
-        {/* Featured Projects Marquee */}
-        <div className="mb-12 -mx-6 md:-mx-12 lg:-mx-20">
-          <ProjectMarquee direction="left" />
+        {/* 4-Row Alternating Marquee */}
+        <div className="mb-12 -mx-6 md:-mx-12 lg:-mx-20 space-y-2">
+          {/* Gradient masks for entire section */}
+          <div className="relative">
+            <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+            
+            <div className="space-y-2">
+              {projectRows.map((rowProjects, index) => (
+                <MarqueeRow
+                  key={index}
+                  projects={rowProjects}
+                  direction={index % 2 === 0 ? 'right' : 'left'}
+                  speed={22 + index * 2}
+                />
+              ))}
+            </div>
+          </div>
         </div>
-
-        {/* More Projects Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mb-12"
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <Activity className="w-4 h-4 text-primary" />
-            <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-              Extended Network • {moreProjects.length} Projects
-            </span>
-          </div>
-          
-          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-3">
-            {moreProjects.map((project, index) => (
-              <ProjectTile
-                key={project.slug}
-                project={project}
-                index={index}
-                isVisible={isInView}
-              />
-            ))}
-          </div>
-        </motion.div>
 
         {/* Network Stats */}
         <motion.div
