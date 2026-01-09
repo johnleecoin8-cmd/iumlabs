@@ -19,20 +19,6 @@ import polygonLogo from '@/assets/logos/polygon.svg';
 import triaLogo from '@/assets/logos/tria-official.png';
 import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
 
-// Project Hero Background images (from public folder)
-const mantraBg = '/images/projects/mantra-bg.jpg';
-const storyBg = '/images/projects/story-bg.jpg';
-const peaqBg = '/images/projects/peaq-bg.jpg';
-const bnbBg = '/images/projects/bnb-bg.jpg';
-const bybitBg = '/images/projects/bybit-bg.jpg';
-const kucoinBg = '/images/projects/kucoin-bg.jpg';
-const saharaBg = '/images/projects/sahara-ai-bg.jpg';
-const openledgerBg = '/images/projects/openledger-hero-official.png';
-const megaethBg = '/images/projects/megaeth-bg.jpg';
-const ondoBg = '/images/projects/ondo-bg.jpg';
-const polygonBg = '/images/projects/polygon-bg.jpg';
-const triaBg = '/images/projects/tria-bg.jpg';
-
 // All Projects Data for 4-row Marquee
 const allProjects = [
   // Row 1 (→ right)
@@ -40,7 +26,8 @@ const allProjects = [
     name: 'MANTRA',
     slug: 'mantra',
     logo: mantraLogo,
-    image: mantraBg,
+    bgImage: '/images/projects/mantra-bg.jpg',
+    bgVideo: '/videos/projects/mantra-hero.mp4',
     category: 'RWA L1',
     strategy: 'KRW Market Entry',
     metric: { value: 450, suffix: '%', label: 'Volume Growth' },
@@ -52,7 +39,8 @@ const allProjects = [
     name: 'Story Protocol',
     slug: 'story-protocol',
     logo: storyLogo,
-    image: storyBg,
+    bgImage: '/images/projects/story-bg.jpg',
+    bgVideo: '/videos/projects/story-hero.mp4',
     category: 'IP Protocol',
     strategy: 'Narrative-Led FOMO',
     metric: { value: 1, suffix: 'st', prefix: '#', label: 'Kaito Ranking' },
@@ -64,7 +52,8 @@ const allProjects = [
     name: 'peaq',
     slug: 'peaq',
     logo: peaqLogo,
-    image: peaqBg,
+    bgImage: '/images/projects/peaq-bg.jpg',
+    bgVideo: '/videos/projects/peaq-hero.mp4',
     category: 'DePIN',
     strategy: 'Wallet Acquisition',
     metric: { value: 85, suffix: 'K+', label: 'Community' },
@@ -77,7 +66,8 @@ const allProjects = [
     name: 'BNB Chain',
     slug: 'bnb-chain',
     logo: bnbLogo,
-    image: bnbBg,
+    bgImage: '/images/projects/bnb-bg.jpg',
+    bgVideo: '/videos/projects/bnb-hero.mp4',
     category: 'L1 Ecosystem',
     strategy: 'Exchange Partnership',
     metric: { value: 2.1, suffix: 'M', label: 'Impressions' },
@@ -89,7 +79,8 @@ const allProjects = [
     name: 'Bybit',
     slug: 'bybit',
     logo: bybitLogo,
-    image: bybitBg,
+    bgImage: '/images/projects/bybit-bg.jpg',
+    bgVideo: '/videos/projects/bybit-hero.mp4',
     category: 'CEX',
     strategy: 'Market Maker Campaign',
     metric: { value: 320, suffix: '%', label: 'Trading Volume' },
@@ -101,7 +92,8 @@ const allProjects = [
     name: 'KuCoin',
     slug: 'kucoin',
     logo: kucoinLogo,
-    image: kucoinBg,
+    bgImage: '/images/projects/kucoin-bg.jpg',
+    bgVideo: '/videos/projects/kucoin-hero.mp4',
     category: 'CEX',
     strategy: 'Community Airdrop',
     metric: { value: 180, suffix: 'K', label: 'New Users' },
@@ -114,7 +106,8 @@ const allProjects = [
     name: 'Sahara AI',
     slug: 'sahara-ai',
     logo: saharaLogo,
-    image: saharaBg,
+    bgImage: '/images/projects/sahara-ai-bg.jpg',
+    bgVideo: '/videos/projects/sahara-hero.mp4',
     category: 'AI Infra',
     strategy: 'Thought Leadership',
     metric: { value: 500, suffix: 'K+', label: 'Reach' },
@@ -126,7 +119,8 @@ const allProjects = [
     name: 'OpenLedger',
     slug: 'openledger',
     logo: openledgerLogo,
-    image: openledgerBg,
+    bgImage: '/images/projects/openledger-hero-official.png',
+    bgVideo: undefined,
     category: 'Data Layer',
     strategy: 'Developer Outreach',
     metric: { value: 45, suffix: 'K', label: 'Downloads' },
@@ -138,7 +132,8 @@ const allProjects = [
     name: 'MegaETH',
     slug: 'megaeth',
     logo: megaethLogo,
-    image: megaethBg,
+    bgImage: '/images/projects/megaeth-bg.jpg',
+    bgVideo: undefined,
     category: 'L2',
     strategy: 'Hype Building',
     metric: { value: 1.2, suffix: 'M', label: 'Social Reach' },
@@ -151,7 +146,8 @@ const allProjects = [
     name: 'Ondo',
     slug: 'ondo',
     logo: ondoLogo,
-    image: ondoBg,
+    bgImage: '/images/projects/ondo-bg.jpg',
+    bgVideo: undefined,
     category: 'RWA',
     strategy: 'Institutional PR',
     metric: { value: 25, suffix: '+', label: 'Press Coverage' },
@@ -163,7 +159,8 @@ const allProjects = [
     name: 'Polygon',
     slug: 'polygon',
     logo: polygonLogo,
-    image: polygonBg,
+    bgImage: '/images/projects/polygon-bg.jpg',
+    bgVideo: undefined,
     category: 'L2',
     strategy: 'Ecosystem Growth',
     metric: { value: 280, suffix: '%', label: 'TVL Growth' },
@@ -175,7 +172,8 @@ const allProjects = [
     name: 'Tria',
     slug: 'tria',
     logo: triaLogo,
-    image: triaBg,
+    bgImage: '/images/projects/tria-bg.jpg',
+    bgVideo: undefined,
     category: 'Wallet',
     strategy: 'User Acquisition',
     metric: { value: 120, suffix: 'K', label: 'Signups' },
@@ -288,11 +286,22 @@ const ProjectCard = ({
           overflow-hidden
         `}
       >
-        {/* Background Image - shows on hover */}
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-30 transition-opacity duration-500"
-          style={{ backgroundImage: `url(${project.image})` }}
-        />
+        {/* Background Video or Image - shows on hover */}
+        {project.bgVideo ? (
+          <video
+            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+            src={project.bgVideo}
+            muted
+            loop
+            playsInline
+            autoPlay
+          />
+        ) : (
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-40 transition-opacity duration-500"
+            style={{ backgroundImage: `url(${project.bgImage})` }}
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
         
         {/* Content wrapper */}
