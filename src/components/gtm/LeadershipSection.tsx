@@ -28,6 +28,14 @@ const LeadershipSection = () => {
       background: [
         "Former Head of Operation ai16z"
       ]
+    },
+    {
+      name: "",
+      role: "Senior Researcher",
+      photo: teamGrowthPhoto,
+      background: [
+        ""
+      ]
     }
   ];
 
