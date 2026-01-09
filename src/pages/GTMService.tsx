@@ -2120,38 +2120,7 @@ const ClientLogosMarquee = () => {
   const isInView = useInView(ref, {
     once: true
   });
-  return (
-    <section ref={ref} className="py-16 bg-muted/30 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-        <motion.p 
-          className="text-center text-sm text-muted-foreground mb-8 tracking-widest uppercase"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-        >
-          Trusted by Industry Leaders
-        </motion.p>
-        <motion.div 
-          className="flex flex-wrap justify-center items-center gap-8 md:gap-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          {clientLogos.slice(0, 10).map((client, index) => (
-            <div 
-              key={client.name} 
-              className="opacity-60 hover:opacity-100 transition-opacity duration-300 grayscale hover:grayscale-0"
-            >
-              <img 
-                src={client.logo} 
-                alt={client.name} 
-                className="h-8 md:h-10 w-auto object-contain"
-              />
-            </div>
-          ))}
-        </motion.div>
-      </div>
-    </section>
-  );
+  return;
 };
 
 // ============================================
@@ -2162,14 +2131,20 @@ const CTASection = () => {
   const isInView = useInView(ref, {
     once: true
   });
-  return (
-    <section ref={ref} className="py-24 bg-gradient-to-br from-primary/10 via-background to-background">
+  return <section ref={ref} className="py-24 bg-gradient-to-br from-primary/10 via-background to-background">
       <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-20 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6 }}
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 30
+      }} animate={isInView ? {
+        opacity: 1,
+        y: 0
+      } : {
+        opacity: 0,
+        y: 30
+      }} transition={{
+        duration: 0.6
+      }}>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
             Ready to Launch in Korea?
           </h2>
@@ -2190,8 +2165,7 @@ const CTASection = () => {
           </div>
         </motion.div>
       </div>
-    </section>
-  );
+    </section>;
 };
 
 // ============================================
