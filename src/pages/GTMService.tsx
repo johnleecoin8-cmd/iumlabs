@@ -1562,22 +1562,23 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
               </filter>
             </defs>
             
-            {/* Left Curved Connection Lines - Data Sources to LLM Core */}
+          {/* Left Curved Connection Lines - Data Sources to LLM Core */}
             {[
-              { id: 0, startY: '20%', endY: '50%', path: 'M 0,0 C 80,0 100,80 180,80' },
-              { id: 1, startY: '50%', endY: '50%', path: 'M 0,0 C 60,0 120,0 180,0' },
-              { id: 2, startY: '80%', endY: '50%', path: 'M 0,0 C 80,0 100,-80 180,-80' }
+              { id: 0, startY: 80, path: 'M 0,0 Q 60,-10 120,40 T 220,60' },
+              { id: 1, startY: 160, path: 'M 0,0 Q 80,0 140,0 T 220,0' },
+              { id: 2, startY: 240, path: 'M 0,0 Q 60,10 120,-40 T 220,-60' }
             ].map((line, i) => (
-              <g key={`left-${line.id}`} style={{ transform: `translate(calc(33.33% - 20px), calc(${line.startY} + 60px))` }}>
+              <g key={`left-${line.id}`} transform={`translate(${window.innerWidth * 0.25}, ${line.startY})`}>
                 {/* Base line with gradient */}
                 <motion.path
                   d={line.path}
                   fill="none"
                   stroke="url(#leftFlowGradient)"
-                  strokeWidth="2"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
                   initial={{ pathLength: 0, opacity: 0 }}
-                  animate={isVisible ? { pathLength: 1, opacity: 1 } : {}}
-                  transition={{ duration: 1.5, delay: 0.5 + i * 0.2 }}
+                  animate={isVisible ? { pathLength: 1, opacity: 0.6 } : {}}
+                  transition={{ duration: 1.2, delay: 0.3 + i * 0.15, ease: "easeOut" }}
                 />
                 
                 {/* Animated glow pulse along path */}
@@ -1585,39 +1586,39 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                   d={line.path}
                   fill="none"
                   stroke="hsl(var(--primary))"
-                  strokeWidth="4"
+                  strokeWidth="3"
+                  strokeLinecap="round"
                   filter="url(#energyGlow)"
                   initial={{ pathLength: 0, opacity: 0 }}
                   animate={isVisible ? { 
-                    pathLength: [0, 0.3, 0],
-                    opacity: [0, 0.8, 0]
+                    pathLength: [0, 0.5, 0],
+                    opacity: [0, 0.7, 0]
                   } : {}}
                   transition={{ 
-                    duration: 2, 
+                    duration: 1.5, 
                     repeat: Infinity, 
-                    delay: i * 0.6,
-                    ease: "easeInOut"
+                    delay: i * 0.4,
+                    ease: [0.4, 0, 0.2, 1]
                   }}
-                  style={{ offsetPath: `path('${line.path}')` }}
                 />
                 
-                {/* Flowing energy particles */}
-                {[0, 1, 2, 3, 4].map((particleIndex) => (
+                {/* Flowing energy particles - faster & smoother */}
+                {[0, 1, 2].map((particleIndex) => (
                   <motion.circle
                     key={particleIndex}
-                    r="4"
+                    r="3"
                     fill="hsl(var(--primary))"
                     filter="url(#particleGlow)"
                     initial={{ opacity: 0 }}
                     animate={isVisible ? {
-                      opacity: [0, 1, 1, 0],
-                      offsetDistance: ['0%', '25%', '75%', '100%']
+                      opacity: [0, 0.9, 0.9, 0],
+                      offsetDistance: ['0%', '20%', '80%', '100%']
                     } : {}}
                     transition={{
-                      duration: 2.5,
+                      duration: 1.6,
                       repeat: Infinity,
-                      delay: i * 0.3 + particleIndex * 0.5,
-                      ease: "linear"
+                      delay: i * 0.2 + particleIndex * 0.5,
+                      ease: [0.25, 0.1, 0.25, 1]
                     }}
                     style={{ 
                       offsetPath: `path('${line.path}')`,
@@ -1630,60 +1631,62 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
             
             {/* Right Curved Connection Lines - LLM Core to Output */}
             {[
-              { id: 0, startY: '35%', endY: '20%', path: 'M 0,0 C 60,0 120,-50 180,-60' },
-              { id: 1, startY: '50%', endY: '50%', path: 'M 0,0 C 60,0 120,0 180,0' },
-              { id: 2, startY: '65%', endY: '80%', path: 'M 0,0 C 60,0 120,50 180,60' }
+              { id: 0, startY: 100, path: 'M 0,0 Q 50,-20 100,-40 T 200,-50' },
+              { id: 1, startY: 160, path: 'M 0,0 Q 70,0 130,0 T 200,0' },
+              { id: 2, startY: 220, path: 'M 0,0 Q 50,20 100,40 T 200,50' }
             ].map((line, i) => (
-              <g key={`right-${line.id}`} style={{ transform: `translate(calc(66.66% + 20px), calc(${line.startY} + 60px))` }}>
+              <g key={`right-${line.id}`} transform={`translate(${window.innerWidth * 0.58}, ${line.startY})`}>
                 {/* Base line with gradient */}
                 <motion.path
                   d={line.path}
                   fill="none"
                   stroke="url(#rightFlowGradient)"
-                  strokeWidth="2"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
                   initial={{ pathLength: 0, opacity: 0 }}
-                  animate={isVisible ? { pathLength: 1, opacity: 1 } : {}}
-                  transition={{ duration: 1.5, delay: 1 + i * 0.2 }}
+                  animate={isVisible ? { pathLength: 1, opacity: 0.6 } : {}}
+                  transition={{ duration: 1.2, delay: 0.6 + i * 0.15, ease: "easeOut" }}
                 />
                 
-                {/* Animated energy wave */}
+                {/* Animated energy wave - faster */}
                 <motion.path
                   d={line.path}
                   fill="none"
                   stroke="hsl(var(--primary))"
-                  strokeWidth="4"
+                  strokeWidth="3"
+                  strokeLinecap="round"
                   filter="url(#energyGlow)"
                   initial={{ opacity: 0 }}
                   animate={isVisible ? { 
-                    pathLength: [0, 0.4, 0],
-                    opacity: [0, 0.9, 0]
+                    pathLength: [0, 0.6, 0],
+                    opacity: [0, 0.8, 0]
                   } : {}}
                   transition={{ 
-                    duration: 1.8, 
+                    duration: 1.3, 
                     repeat: Infinity, 
-                    delay: 0.5 + i * 0.4,
-                    ease: "easeInOut"
+                    delay: 0.3 + i * 0.35,
+                    ease: [0.4, 0, 0.2, 1]
                   }}
                 />
                 
                 {/* Faster, brighter particles for output */}
-                {[0, 1, 2, 3].map((particleIndex) => (
+                {[0, 1, 2].map((particleIndex) => (
                   <motion.circle
                     key={particleIndex}
-                    r="5"
+                    r="4"
                     fill="hsl(var(--primary))"
                     filter="url(#particleGlow)"
                     initial={{ opacity: 0 }}
                     animate={isVisible ? {
                       opacity: [0, 1, 1, 0],
-                      offsetDistance: ['0%', '30%', '70%', '100%'],
-                      r: [4, 6, 6, 4]
+                      offsetDistance: ['0%', '25%', '75%', '100%'],
+                      r: [3, 5, 5, 3]
                     } : {}}
                     transition={{
-                      duration: 1.8,
+                      duration: 1.2,
                       repeat: Infinity,
-                      delay: 0.8 + i * 0.25 + particleIndex * 0.45,
-                      ease: "linear"
+                      delay: 0.5 + i * 0.2 + particleIndex * 0.4,
+                      ease: [0.25, 0.1, 0.25, 1]
                     }}
                     style={{ 
                       offsetPath: `path('${line.path}')`,
