@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
 import TestimonialsSection from '@/components/gtm/TestimonialsCarousel';
-import GlobalLiquidityGlobe from '@/components/gtm/GlobalLiquidityGlobe';
 
 // Project backgrounds
 import storyBg from '@/assets/projects/story-bg.jpg';
@@ -724,9 +723,9 @@ const MarketIntelligenceSection = () => {
         </h2>
 
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-8 mb-16">
-          {/* Left: Global Liquidity Globe */}
+          {/* Left: Korea Map Visualization */}
           <div className="lg:col-span-1">
-            <GlobalLiquidityGlobe />
+            <KoreaMapVisualization isVisible={isInView} />
           </div>
 
           {/* Middle: Data Visualization */}
