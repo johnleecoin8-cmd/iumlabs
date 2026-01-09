@@ -19,19 +19,19 @@ import polygonLogo from '@/assets/logos/polygon.svg';
 import triaLogo from '@/assets/logos/tria-official.png';
 import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
 
-// Campaign/Background images
-import mantraBg from '@/assets/campaigns/mantra-party.jpg';
-import storyBg from '@/assets/campaigns/story-origin-summit.jpg';
-import peaqBg from '@/assets/campaigns/peaq-summit.jpg';
-import bnbBg from '@/assets/campaigns/bnb-event.jpg';
-import bybitBg from '@/assets/campaigns/bybit-event.jpg';
-import kucoinBg from '@/assets/campaigns/kucoin-campaign.jpg';
-import saharaBg from '@/assets/campaigns/sahara-ai.jpg';
-import openledgerBg from '@/assets/campaigns/openledger-event.jpg';
-import megaethBg from '@/assets/campaigns/megaeth-launch.jpg';
-import ondoBg from '@/assets/campaigns/ondo-seminar.jpg';
-import polygonBg from '@/assets/campaigns/polygon-hackathon.jpg';
-import triaBg from '@/assets/campaigns/tria-launch.jpg';
+// Project Hero Background images (from public folder)
+const mantraBg = '/images/projects/mantra-bg.jpg';
+const storyBg = '/images/projects/story-bg.jpg';
+const peaqBg = '/images/projects/peaq-bg.jpg';
+const bnbBg = '/images/projects/bnb-bg.jpg';
+const bybitBg = '/images/projects/bybit-bg.jpg';
+const kucoinBg = '/images/projects/kucoin-bg.jpg';
+const saharaBg = '/images/projects/sahara-ai-bg.jpg';
+const openledgerBg = '/images/projects/openledger-hero-official.png';
+const megaethBg = '/images/projects/megaeth-bg.jpg';
+const ondoBg = '/images/projects/ondo-bg.jpg';
+const polygonBg = '/images/projects/polygon-bg.jpg';
+const triaBg = '/images/projects/tria-bg.jpg';
 
 // All Projects Data for 4-row Marquee
 const allProjects = [
