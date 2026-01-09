@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
@@ -22,6 +22,8 @@ import megaethBg from '@/assets/projects/megaeth-bg.jpg';
 import ondoBg from '@/assets/projects/ondo-bg.jpg';
 import polygonBg from '@/assets/projects/polygon-bg.jpg';
 import triaBg from '@/assets/projects/tria-bg.jpg';
+import synfuturesBg from '@/assets/projects/synfutures-bg.jpg';
+import fogoBg from '@/assets/projects/fogo-bg.jpg';
 
 // ============================================
 // DATA
@@ -2021,29 +2023,60 @@ const StrategyInActionSection = () => {
     once: true,
     margin: "-10%"
   });
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
   // All case study projects with their data
   const allProjects = [
     { name: 'MANTRA', category: 'RWA L1', result: '+450% Volume', image: mantraBg, slug: 'mantra' },
     { name: 'Story Protocol', category: 'IP Protocol', result: '#1 Mindshare', image: storyBg, slug: 'story-protocol' },
     { name: 'peaq', category: 'DePIN', result: '85K+ Wallets', image: peaqBg, slug: 'peaq' },
-    { name: 'BNB Chain', category: 'Infrastructure', result: 'GTM Strategy', image: bnbBg, slug: 'bnb-chain' },
-    { name: 'Bybit', category: 'Exchange', result: 'Events', image: bybitBg, slug: 'bybit' },
-    { name: 'KuCoin', category: 'Exchange', result: 'Institutional', image: kucoinBg, slug: 'kucoin' },
-    { name: 'Sahara AI', category: 'AI', result: 'Events', image: saharaBg, slug: 'sahara-ai' },
+    { name: 'BNB Chain', category: 'Infrastructure', result: '+340% Volume', image: bnbBg, slug: 'bnb-chain' },
+    { name: 'Bybit', category: 'Exchange', result: 'Top Events', image: bybitBg, slug: 'bybit' },
+    { name: 'KuCoin', category: 'Exchange', result: '50K+ Users', image: kucoinBg, slug: 'kucoin' },
+    { name: 'Sahara AI', category: 'AI', result: 'KR Launch', image: saharaBg, slug: 'sahara-ai' },
     { name: 'OpenLedger', category: 'AI / Blockchain', result: 'Community', image: openledgerBg, slug: 'openledger' },
     { name: 'MegaETH', category: 'Layer 2', result: 'Pre-Launch', image: megaethBg, slug: 'megaeth' },
     { name: 'Polygon', category: 'Layer 2', result: 'DevRel', image: polygonBg, slug: 'polygon' },
-    { name: 'Tria', category: 'Wallet', result: 'KOLs', image: triaBg, slug: 'tria' },
+    { name: 'Tria', category: 'Wallet', result: 'KOL Campaign', image: triaBg, slug: 'tria' },
+    { name: 'Ondo Finance', category: 'RWA', result: 'Institutional', image: ondoBg, slug: 'ondo' },
+    { name: 'SynFutures', category: 'DeFi', result: 'Billboard', image: synfuturesBg, slug: 'synfutures' },
+    { name: 'FOGO', category: 'Gaming', result: 'Festival', image: fogoBg, slug: 'fogo' },
   ];
 
-  return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-t border-border">
-      <motion.div initial={{
-      opacity: 0
-    }} animate={isInView ? {
-      opacity: 1
-    } : {}} className="max-w-7xl mx-auto">
-        <div className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+  const hoveredProjectData = allProjects.find(p => p.slug === hoveredProject);
+
+  return (
+    <section ref={ref} className="relative px-6 md:px-12 lg:px-20 py-24 bg-background border-t border-border overflow-hidden">
+      {/* Background Image on Hover */}
+      <AnimatePresence>
+        {hoveredProjectData && (
+          <motion.div
+            key={hoveredProject}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.2 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="absolute inset-0 z-0"
+            style={{
+              backgroundImage: `url(${hoveredProjectData.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              filter: 'blur(40px) saturate(1.2)',
+            }}
+          />
+        )}
+      </AnimatePresence>
+      
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-background/85 z-0" />
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        {/* Header */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
+        >
           <div>
             <p className="text-primary text-sm tracking-widest uppercase mb-4 font-medium">
               Case Studies
@@ -2056,86 +2089,52 @@ const StrategyInActionSection = () => {
             View All
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
-        </div>
+        </motion.div>
 
-        {/* Bento Grid Layout */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
-          {/* Featured - Large */}
-          {allProjects.slice(0, 3).map((project, i) => (
+        {/* Stacked List */}
+        <div className="border-t border-border/30">
+          {allProjects.map((project, i) => (
             <motion.div
               key={project.slug}
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1 }}
-              className={`relative group overflow-hidden rounded-lg ${
-                i === 0 ? 'col-span-2 row-span-2' : 'col-span-2 md:col-span-2'
-              }`}
-              style={{ aspectRatio: i === 0 ? '1' : '16/9' }}
+              transition={{ delay: i * 0.03, duration: 0.4 }}
             >
-              <Link to={`/projects/${project.slug}`} className="block w-full h-full">
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${project.image})` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-                  <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">{project.category}</p>
-                  <h3 className="text-white font-medium text-lg md:text-xl mb-1">{project.name}</h3>
-                  <p className="text-primary text-sm font-medium">{project.result}</p>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
+              <Link
+                to={`/projects/${project.slug}`}
+                onMouseEnter={() => setHoveredProject(project.slug)}
+                onMouseLeave={() => setHoveredProject(null)}
+                className="group block border-b border-border/30 py-5 md:py-6 transition-all duration-300 hover:bg-muted/5 hover:pl-4"
+              >
+                <div className="flex items-center justify-between gap-4">
+                  {/* Left: Index + Name */}
+                  <div className="flex items-center gap-4 md:gap-8 lg:gap-12 flex-1 min-w-0">
+                    <span className="text-xs text-muted-foreground/40 font-mono w-6 md:w-8 shrink-0">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="text-lg md:text-2xl lg:text-3xl font-medium text-foreground group-hover:text-primary transition-colors duration-300 truncate">
+                      {project.name}
+                    </h3>
+                  </div>
 
-          {/* Grid - Medium */}
-          {allProjects.slice(3, 7).map((project, i) => (
-            <motion.div
-              key={project.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: (i + 3) * 0.1 }}
-              className="relative group overflow-hidden rounded-lg col-span-1 md:col-span-2 lg:col-span-2"
-              style={{ aspectRatio: '16/9' }}
-            >
-              <Link to={`/projects/${project.slug}`} className="block w-full h-full">
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${project.image})` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
-                  <p className="text-[9px] text-white/50 uppercase tracking-widest mb-0.5">{project.category}</p>
-                  <h3 className="text-white font-medium text-sm md:text-base">{project.name}</h3>
-                </div>
-              </Link>
-            </motion.div>
-          ))}
-
-          {/* Small Grid */}
-          {allProjects.slice(7).map((project, i) => (
-            <motion.div
-              key={project.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: (i + 7) * 0.1 }}
-              className="relative group overflow-hidden rounded-lg col-span-1"
-              style={{ aspectRatio: '1' }}
-            >
-              <Link to={`/projects/${project.slug}`} className="block w-full h-full">
-                <div 
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${project.image})` }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3">
-                  <h3 className="text-white font-medium text-xs md:text-sm">{project.name}</h3>
+                  {/* Right: Category + Result + Arrow */}
+                  <div className="flex items-center gap-3 md:gap-6 lg:gap-8 shrink-0">
+                    <span className="hidden md:block text-sm text-muted-foreground/60 min-w-[100px]">
+                      {project.category}
+                    </span>
+                    <span className="text-xs md:text-sm text-primary font-medium min-w-[80px] md:min-w-[100px] text-right">
+                      {project.result}
+                    </span>
+                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
+                  </div>
                 </div>
               </Link>
             </motion.div>
           ))}
         </div>
-      </motion.div>
-    </section>;
+      </div>
+    </section>
+  );
 };
 
 // ============================================
