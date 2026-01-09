@@ -2021,41 +2021,119 @@ const StrategyInActionSection = () => {
     once: true,
     margin: "-10%"
   });
-  return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/20 border-t border-border">
+
+  // All case study projects with their data
+  const allProjects = [
+    { name: 'MANTRA', category: 'RWA L1', result: '+450% Volume', image: mantraBg, slug: 'mantra' },
+    { name: 'Story Protocol', category: 'IP Protocol', result: '#1 Mindshare', image: storyBg, slug: 'story-protocol' },
+    { name: 'peaq', category: 'DePIN', result: '85K+ Wallets', image: peaqBg, slug: 'peaq' },
+    { name: 'BNB Chain', category: 'Infrastructure', result: 'GTM Strategy', image: bnbBg, slug: 'bnb-chain' },
+    { name: 'Bybit', category: 'Exchange', result: 'Events', image: bybitBg, slug: 'bybit' },
+    { name: 'KuCoin', category: 'Exchange', result: 'Institutional', image: kucoinBg, slug: 'kucoin' },
+    { name: 'Sahara AI', category: 'AI', result: 'Events', image: saharaBg, slug: 'sahara-ai' },
+    { name: 'OpenLedger', category: 'AI / Blockchain', result: 'Community', image: openledgerBg, slug: 'openledger' },
+    { name: 'MegaETH', category: 'Layer 2', result: 'Pre-Launch', image: megaethBg, slug: 'megaeth' },
+    { name: 'Polygon', category: 'Layer 2', result: 'DevRel', image: polygonBg, slug: 'polygon' },
+    { name: 'Tria', category: 'Wallet', result: 'KOLs', image: triaBg, slug: 'tria' },
+  ];
+
+  return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-t border-border">
       <motion.div initial={{
       opacity: 0
     }} animate={isInView ? {
       opacity: 1
-    } : {}} className="max-w-6xl mx-auto">
-        <div className="mb-12">
-          <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-            04 Strategy in Action
-          </p>
-          <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-            Case Studies
-          </h2>
-          <p className="text-muted-foreground max-w-xl">
-            Real results from real projects. See how we've helped leading Web3 projects dominate the Korean market.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project, i) => <TiltCaseCard key={project.slug} project={project} index={i} isVisible={isInView} />)}
-        </div>
-
-        {/* View All Projects Link */}
-        <motion.div initial={{
-        opacity: 0
-      }} animate={isInView ? {
-        opacity: 1
-      } : {}} transition={{
-        delay: 0.5
-      }} className="mt-16 text-center">
-          <Link to="/projects" className="group inline-flex items-center gap-3 px-6 py-3 border border-border hover:border-primary text-sm text-muted-foreground hover:text-primary transition-all duration-300">
-            View All Projects
+    } : {}} className="max-w-7xl mx-auto">
+        <div className="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <p className="text-primary text-sm tracking-widest uppercase mb-4 font-medium">
+              Case Studies
+            </p>
+            <h2 className="text-3xl md:text-5xl font-medium text-foreground">
+              {allProjects.length}+ Projects Delivered
+            </h2>
+          </div>
+          <Link to="/projects" className="group inline-flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-all duration-300">
+            View All
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
-        </motion.div>
+        </div>
+
+        {/* Bento Grid Layout */}
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-4">
+          {/* Featured - Large */}
+          {allProjects.slice(0, 3).map((project, i) => (
+            <motion.div
+              key={project.slug}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.1 }}
+              className={`relative group overflow-hidden rounded-lg ${
+                i === 0 ? 'col-span-2 row-span-2' : 'col-span-2 md:col-span-2'
+              }`}
+              style={{ aspectRatio: i === 0 ? '1' : '16/9' }}
+            >
+              <Link to={`/projects/${project.slug}`} className="block w-full h-full">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${project.image})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                  <p className="text-[10px] text-white/60 uppercase tracking-widest mb-1">{project.category}</p>
+                  <h3 className="text-white font-medium text-lg md:text-xl mb-1">{project.name}</h3>
+                  <p className="text-primary text-sm font-medium">{project.result}</p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+
+          {/* Grid - Medium */}
+          {allProjects.slice(3, 7).map((project, i) => (
+            <motion.div
+              key={project.slug}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: (i + 3) * 0.1 }}
+              className="relative group overflow-hidden rounded-lg col-span-1 md:col-span-2 lg:col-span-2"
+              style={{ aspectRatio: '16/9' }}
+            >
+              <Link to={`/projects/${project.slug}`} className="block w-full h-full">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${project.image})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4">
+                  <p className="text-[9px] text-white/50 uppercase tracking-widest mb-0.5">{project.category}</p>
+                  <h3 className="text-white font-medium text-sm md:text-base">{project.name}</h3>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+
+          {/* Small Grid */}
+          {allProjects.slice(7).map((project, i) => (
+            <motion.div
+              key={project.slug}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: (i + 7) * 0.1 }}
+              className="relative group overflow-hidden rounded-lg col-span-1"
+              style={{ aspectRatio: '1' }}
+            >
+              <Link to={`/projects/${project.slug}`} className="block w-full h-full">
+                <div 
+                  className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${project.image})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-2 md:p-3">
+                  <h3 className="text-white font-medium text-xs md:text-sm">{project.name}</h3>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
     </section>;
 };
