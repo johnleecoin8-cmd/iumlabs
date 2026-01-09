@@ -632,14 +632,6 @@ export const PerformanceSection = () => {
             ))}
           </div>
 
-          {/* Full Progress Bar */}
-          <div className="p-4 border border-border/30 rounded-lg bg-background/50 backdrop-blur-sm">
-            <div className="flex items-center justify-between text-xs font-mono mb-2">
-              <span className="text-muted-foreground">NETWORK STATUS</span>
-              <span className="text-green-500">100% ACTIVE</span>
-            </div>
-            <Progress value={100} className="h-2" />
-          </div>
         </motion.div>
       </div>
     </section>
