@@ -1685,23 +1685,41 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                 transition={{ duration: 3, repeat: Infinity }}
               />
 
-              <div className="relative p-8 border-2 border-primary bg-background">
-                {/* Pulsing border */}
-                <motion.div 
-                  className="absolute inset-0 border-2 border-primary/50 rounded-sm"
-                  animate={{ opacity: [0, 0.8, 0], scale: [1, 1.08, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                
-                {/* Corner accents */}
-                {['top-0 left-0', 'top-0 right-0', 'bottom-0 left-0', 'bottom-0 right-0'].map((pos, i) => (
+              {/* Gradient border wrapper */}
+              <div className="relative p-[2px] bg-gradient-to-br from-blue-500 via-purple-500 to-red-500">
+                <div className="relative p-8 bg-background">
+                  {/* Pulsing border overlay */}
                   <motion.div 
-                    key={i}
-                    className={`absolute ${pos} w-3 h-3 border-primary ${i < 2 ? 'border-t-2' : 'border-b-2'} ${i % 2 === 0 ? 'border-l-2' : 'border-r-2'}`}
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+                    className="absolute inset-0 border-2 border-transparent rounded-sm"
+                    style={{ 
+                      background: 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(168,85,247,0.3), rgba(239,68,68,0.3))',
+                      opacity: 0
+                    }}
+                    animate={{ opacity: [0, 0.5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
                   />
-                ))}
+                  
+                  {/* Corner accents with gradient colors */}
+                  <motion.div 
+                    className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-blue-500"
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
+                  />
+                  <motion.div 
+                    className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-purple-500"
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
+                  />
+                  <motion.div 
+                    className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-purple-500"
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
+                  />
+                  <motion.div 
+                    className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-red-500"
+                    animate={{ opacity: [0.5, 1, 0.5] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }}
+                  />
                 
                 <div className="text-center space-y-4">
                   {/* Rotating icon with glow */}
@@ -1755,6 +1773,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                 </div>
               </div>
             </div>
+          </div>
 
           </motion.div>
 
