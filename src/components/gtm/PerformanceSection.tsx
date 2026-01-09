@@ -87,15 +87,11 @@ const networkStats = [
   { value: 100, suffix: '%', label: 'Retention', sublabel: '재계약율' },
 ];
 
-// Featured Project Card
+// Featured Project Card for Marquee
 const FeaturedProjectCard = ({
   project,
-  index,
-  isVisible
 }: {
   project: typeof featuredProjects[0];
-  index: number;
-  isVisible: boolean;
 }) => {
   const [isLive, setIsLive] = useState(true);
   
@@ -132,22 +128,12 @@ const FeaturedProjectCard = ({
   };
 
   const colors = colorClasses[project.color as keyof typeof colorClasses];
-  
-  const count = useCountUp({
-    end: project.metric.value,
-    duration: 2000,
-    suffix: project.metric.suffix,
-    isVisible
-  });
 
   return (
-    <Link to={`/projects/${project.slug}`}>
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={isVisible ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+    <Link to={`/projects/${project.slug}`} className="block flex-shrink-0">
+      <div
         className={`
-          group relative p-6 h-full
+          group relative p-6 w-[320px] h-[280px]
           border ${colors.border} rounded-xl
           bg-background/80 backdrop-blur-sm
           transition-all duration-500
@@ -179,8 +165,8 @@ const FeaturedProjectCard = ({
 
         {/* Main Metric */}
         <div className="mb-4">
-          <div className={`text-4xl font-bold font-mono ${colors.text} [text-shadow:0_0_30px_${project.glowColor}]`}>
-            {project.metric.prefix || ''}{count}
+          <div className={`text-4xl font-bold font-mono ${colors.text}`}>
+            {project.metric.prefix || ''}{project.metric.value}{project.metric.suffix}
           </div>
           <div className="text-sm text-muted-foreground font-mono uppercase tracking-wider">
             {project.metric.label}
@@ -202,11 +188,9 @@ const FeaturedProjectCard = ({
             <span className={colors.text}>{project.progress}%</span>
           </div>
           <div className="h-1 bg-border/30 rounded-full overflow-hidden">
-            <motion.div
+            <div
               className={`h-full ${colors.progress} rounded-full`}
-              initial={{ width: 0 }}
-              animate={isVisible ? { width: `${project.progress}%` } : {}}
-              transition={{ duration: 1.5, delay: 0.5 + index * 0.2 }}
+              style={{ width: `${project.progress}%` }}
             />
           </div>
         </div>
@@ -215,8 +199,44 @@ const FeaturedProjectCard = ({
         <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
           <ArrowUpRight className={`w-4 h-4 ${colors.text}`} />
         </div>
-      </motion.div>
+      </div>
     </Link>
+  );
+};
+
+// Marquee Component
+const ProjectMarquee = ({ direction = 'left' }: { direction?: 'left' | 'right' }) => {
+  // Duplicate projects for seamless loop
+  const duplicatedProjects = [...featuredProjects, ...featuredProjects, ...featuredProjects];
+  
+  return (
+    <div className="relative overflow-hidden">
+      {/* Gradient masks */}
+      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+      
+      <motion.div
+        className="flex gap-6"
+        animate={{
+          x: direction === 'left' ? ['0%', '-33.33%'] : ['-33.33%', '0%']
+        }}
+        transition={{
+          x: {
+            duration: 30,
+            repeat: Infinity,
+            ease: 'linear',
+            repeatType: 'loop'
+          }
+        }}
+      >
+        {duplicatedProjects.map((project, index) => (
+          <FeaturedProjectCard
+            key={`${project.slug}-${index}`}
+            project={project}
+          />
+        ))}
+      </motion.div>
+    </div>
   );
 };
 
@@ -446,16 +466,9 @@ export const PerformanceSection = () => {
           </p>
         </motion.div>
 
-        {/* Featured Projects Grid */}
-        <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {featuredProjects.map((project, index) => (
-            <FeaturedProjectCard
-              key={project.slug}
-              project={project}
-              index={index}
-              isVisible={isInView}
-            />
-          ))}
+        {/* Featured Projects Marquee */}
+        <div className="mb-12 -mx-6 md:-mx-12 lg:-mx-20">
+          <ProjectMarquee direction="left" />
         </div>
 
         {/* More Projects Section */}
