@@ -1301,13 +1301,21 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
   useEffect(() => {
     if (!isVisible) return;
     
-    // Animate processing bar
+    // Animate processing bar and sync output updates at 100%
     const progressTimer = setInterval(() => {
       setProcessingProgress(prev => {
         if (prev >= 100) {
+          // Update output metrics when processing completes
+          setLiveData(prevData => ({
+            ...prevData,
+            timing: Math.floor(55 + Math.random() * 43),
+            channels: Math.floor(55 + Math.random() * 43),
+            budget: Math.floor(55 + Math.random() * 43),
+            volume: Math.floor(55 + Math.random() * 43)
+          }));
           return 0;
         }
-        return prev + 1;
+        return prev + 2;
       });
     }, 50);
 
@@ -1316,16 +1324,13 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
       setCurrentPhase(prev => (prev + 1) % 4);
     }, 3000);
 
-    // Simulate live data updates
+    // Simulate live data source updates (input data only)
     const dataTimer = setInterval(() => {
       setLiveData(prev => ({
+        ...prev,
         onchain: Math.floor(800 + Math.random() * 100),
         social: Math.floor(1200 + Math.random() * 100),
-        market: Math.floor(2800 + Math.random() * 200),
-        timing: Math.floor(55 + Math.random() * 43),
-        channels: Math.floor(55 + Math.random() * 43),
-        budget: Math.floor(55 + Math.random() * 43),
-        volume: Math.floor(55 + Math.random() * 43)
+        market: Math.floor(2800 + Math.random() * 200)
       }));
     }, 2500);
 
