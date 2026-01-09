@@ -1,11 +1,13 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Search, Building, Zap, TrendingUp } from 'lucide-react';
+import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy } from 'lucide-react';
+import { useCountUp } from '@/hooks/useCountUp';
+import TestimonialsSection from '@/components/gtm/TestimonialsCarousel';
 
 // Project backgrounds
 import storyBg from '@/assets/projects/story-bg.jpg';
@@ -33,6 +35,10 @@ const featuredProjects = [
     slug: 'mantra',
     category: 'RWA L1',
     strategy: 'Community-First Strategy',
+    metrics: [
+      { label: 'Community Growth', value: 500, suffix: '%' },
+      { label: 'Korean Users', value: 85, suffix: 'K+' },
+    ]
   },
   {
     name: 'Story Protocol',
@@ -42,6 +48,10 @@ const featuredProjects = [
     slug: 'story-protocol',
     category: 'IP Protocol',
     strategy: 'Narrative-Led Strategy',
+    metrics: [
+      { label: 'Trading Volume', value: 340, suffix: '%' },
+      { label: 'Media Coverage', value: 50, suffix: '+' },
+    ]
   },
   {
     name: 'peaq Network',
@@ -51,6 +61,10 @@ const featuredProjects = [
     slug: 'peaq',
     category: 'DePIN',
     strategy: 'Market Dominance Strategy',
+    metrics: [
+      { label: 'Market Rank', value: 1, prefix: '#' },
+      { label: 'Mindshare', value: 78, suffix: '%' },
+    ]
   },
 ];
 
@@ -103,11 +117,49 @@ const frameworkStages = [
 
 
 // ============================================
+// ANIMATED STAT COMPONENT
+// ============================================
+const AnimatedStat = ({ 
+  value, 
+  suffix = '', 
+  prefix = '', 
+  label, 
+  delay = 0,
+  isVisible = true 
+}: { 
+  value: number; 
+  suffix?: string; 
+  prefix?: string; 
+  label: string; 
+  delay?: number;
+  isVisible?: boolean;
+}) => {
+  const count = useCountUp({ end: value, delay: delay * 1000, isVisible, duration: 2000 });
+  
+  return (
+    <div className="text-center group">
+      <motion.p 
+        className="text-4xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: delay, duration: 0.5, type: "spring" }}
+      >
+        {prefix}{count}{suffix}
+      </motion.p>
+      <p className="text-xs text-muted-foreground mt-2 tracking-wider uppercase">{label}</p>
+    </div>
+  );
+};
+
+// ============================================
 // HERO SECTION
 // ============================================
 const HeroSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <section className="min-h-[85vh] flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-32 pb-20 bg-background">
+    <section ref={ref} className="min-h-[85vh] flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-32 pb-20 bg-background">
       <div className="max-w-5xl">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -144,25 +196,65 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
-          className="flex flex-wrap items-center gap-8 text-foreground"
+          className="flex flex-wrap items-center gap-8 md:gap-12"
         >
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-medium">30+</p>
-            <p className="text-xs text-muted-foreground mt-1">Projects</p>
-          </div>
-          <div className="w-px h-10 bg-border" />
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-medium">$50M+</p>
-            <p className="text-xs text-muted-foreground mt-1">Volume</p>
-          </div>
-          <div className="w-px h-10 bg-border" />
-          <div className="text-center">
-            <p className="text-3xl md:text-4xl font-medium">#1</p>
-            <p className="text-xs text-muted-foreground mt-1">Growth Rate</p>
-          </div>
+          <AnimatedStat value={30} suffix="+" label="Projects" delay={0.6} isVisible={isInView} />
+          <div className="w-px h-12 bg-border" />
+          <AnimatedStat value={50} prefix="$" suffix="M+" label="Volume Generated" delay={0.8} isVisible={isInView} />
+          <div className="w-px h-12 bg-border" />
+          <AnimatedStat value={340} suffix="%" label="Avg. Growth" delay={1.0} isVisible={isInView} />
         </motion.div>
       </div>
     </section>
+  );
+};
+
+// ============================================
+// ANIMATED PROGRESS BAR
+// ============================================
+const AnimatedProgressBar = ({ 
+  label, 
+  percentage, 
+  value, 
+  delay = 0, 
+  isHighlight = false,
+  isVisible = true 
+}: { 
+  label: string; 
+  percentage: number; 
+  value: string; 
+  delay?: number; 
+  isHighlight?: boolean;
+  isVisible?: boolean;
+}) => {
+  const [width, setWidth] = useState(0);
+  
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => setWidth(percentage), delay * 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, percentage, delay]);
+
+  return (
+    <div className="space-y-2">
+      <div className="flex justify-between items-center">
+        <span className={`text-sm font-medium ${isHighlight ? 'text-primary' : 'text-foreground/80'}`}>
+          {label}
+        </span>
+        <span className={`text-sm font-mono ${isHighlight ? 'text-primary' : 'text-muted-foreground'}`}>
+          {value}
+        </span>
+      </div>
+      <div className="h-2 bg-muted rounded-full overflow-hidden">
+        <motion.div
+          className={`h-full rounded-full ${isHighlight ? 'bg-primary' : 'bg-foreground/30'}`}
+          initial={{ width: 0 }}
+          animate={{ width: `${width}%` }}
+          transition={{ duration: 1, ease: "easeOut", delay: delay }}
+        />
+      </div>
+    </div>
   );
 };
 
@@ -173,22 +265,11 @@ const MarketIntelligenceSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
-  const dataPoints = [
-    {
-      label: 'VOLUME',
-      value: 'Global #3',
-      description: 'Behind only the US and Japan in 24h trading volume.',
-    },
-    {
-      label: 'CULTURE',
-      value: 'High-Risk, High-Reward',
-      description: 'Korean traders move fast and commit hard.',
-    },
-    {
-      label: 'BARRIER',
-      value: 'Unique Ecosystem',
-      description: 'Naver, Kakao, VASP regulations. Global strategies fail here.',
-    },
+  const volumeData = [
+    { label: 'United States', percentage: 100, value: '45%', isHighlight: false },
+    { label: 'Japan', percentage: 62, value: '28%', isHighlight: false },
+    { label: 'South Korea', percentage: 40, value: '18%', isHighlight: true },
+    { label: 'Others', percentage: 20, value: '9%', isHighlight: false },
   ];
 
   return (
@@ -199,32 +280,75 @@ const MarketIntelligenceSection = () => {
         className="max-w-6xl mx-auto"
       >
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-          The Strategic Imperative
+          01 The Strategic Imperative
         </p>
         <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-16">
           Why Korea?
         </h2>
 
-        <div className="grid md:grid-cols-3 gap-8 md:gap-12 mb-16">
-          {dataPoints.map((point, i) => (
-            <motion.div
-              key={point.label}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              className="space-y-3"
-            >
-              <p className="text-xs tracking-widest text-primary font-medium">
-                {point.label}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
+          {/* Left: Data Visualization */}
+          <div className="space-y-8">
+            <div>
+              <p className="text-xs tracking-widest text-primary font-medium mb-4">
+                GLOBAL TRADING VOLUME SHARE
               </p>
-              <p className="text-2xl md:text-3xl font-medium text-foreground">
-                {point.value}
-              </p>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {point.description}
-              </p>
-            </motion.div>
-          ))}
+              <div className="space-y-4">
+                {volumeData.map((item, i) => (
+                  <AnimatedProgressBar
+                    key={item.label}
+                    label={item.label}
+                    percentage={item.percentage}
+                    value={item.value}
+                    delay={i * 0.15}
+                    isHighlight={item.isHighlight}
+                    isVisible={isInView}
+                  />
+                ))}
+              </div>
+            </div>
+            
+            {/* Key Stats */}
+            <div className="grid grid-cols-2 gap-4 pt-4">
+              <div className="p-4 border border-border bg-background">
+                <p className="text-2xl md:text-3xl font-medium text-foreground">18%</p>
+                <p className="text-xs text-muted-foreground mt-1">of Global Volume</p>
+              </div>
+              <div className="p-4 border border-border bg-background">
+                <p className="text-2xl md:text-3xl font-medium text-foreground">5.2x</p>
+                <p className="text-xs text-muted-foreground mt-1">Higher Engagement</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Insights */}
+          <div className="space-y-8">
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <p className="text-xs tracking-widest text-primary font-medium">CULTURE</p>
+                <p className="text-xl font-medium text-foreground">High-Risk, High-Reward</p>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Korean traders move fast and commit hard. When they believe in a project, they go all in.
+                </p>
+              </div>
+              
+              <div className="space-y-2">
+                <p className="text-xs tracking-widest text-primary font-medium">BARRIER</p>
+                <p className="text-xl font-medium text-foreground">Unique Ecosystem</p>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Naver, Kakao, VASP regulations, and cultural nuances. Global strategies fail here without localization.
+                </p>
+              </div>
+
+              <div className="space-y-2">
+                <p className="text-xs tracking-widest text-primary font-medium">OPPORTUNITY</p>
+                <p className="text-xl font-medium text-foreground">First-Mover Advantage</p>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  Most global projects underestimate Korea. Those who get it right dominate.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         <motion.blockquote
@@ -240,6 +364,107 @@ const MarketIntelligenceSection = () => {
             — You need a local algorithm.
           </footer>
         </motion.blockquote>
+      </motion.div>
+    </section>
+  );
+};
+
+// ============================================
+// RESULTS DASHBOARD SECTION
+// ============================================
+const ResultsDashboardSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  const metrics = [
+    { 
+      icon: TrendingUp, 
+      value: 340, 
+      suffix: '%', 
+      prefix: '+', 
+      label: 'Average Growth',
+      description: 'Trading volume increase for launched projects'
+    },
+    { 
+      icon: DollarSign, 
+      value: 50, 
+      suffix: 'M+', 
+      prefix: '$', 
+      label: 'Volume Generated',
+      description: 'Total trading volume driven by our campaigns'
+    },
+    { 
+      icon: Users, 
+      value: 500, 
+      suffix: 'K+', 
+      prefix: '', 
+      label: 'Korean Users',
+      description: 'Community members across all projects'
+    },
+    { 
+      icon: Trophy, 
+      value: 1, 
+      suffix: '', 
+      prefix: '#', 
+      label: 'Market Position',
+      description: 'Kaito mindshare ranking for key clients'
+    },
+  ];
+
+  return (
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-b border-border">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        className="max-w-6xl mx-auto"
+      >
+        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+          03 Results
+        </p>
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
+          The Numbers That Matter
+        </h2>
+        <p className="text-muted-foreground max-w-2xl mb-16">
+          Our data-driven approach delivers measurable results. Here's what we've achieved for our clients.
+        </p>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {metrics.map((metric, i) => (
+            <motion.div
+              key={metric.label}
+              initial={{ opacity: 0, y: 40 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.1, duration: 0.6 }}
+              className="group relative p-6 border border-border bg-background hover:border-primary/50 transition-all duration-300"
+            >
+              {/* Icon */}
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                <metric.icon className="w-5 h-5 text-primary" />
+              </div>
+
+              {/* Value with count-up */}
+              <p className="text-4xl md:text-5xl font-medium text-foreground mb-2">
+                {useCountUp({ 
+                  end: metric.value, 
+                  prefix: metric.prefix, 
+                  suffix: metric.suffix, 
+                  delay: i * 200,
+                  isVisible: isInView,
+                  duration: 2000
+                })}
+              </p>
+
+              {/* Label */}
+              <p className="text-sm font-medium text-foreground mb-1">{metric.label}</p>
+              <p className="text-xs text-muted-foreground">{metric.description}</p>
+
+              {/* Hover glow */}
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent" />
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </motion.div>
     </section>
   );
@@ -314,23 +539,46 @@ const FrameworkSection = () => {
 };
 
 // ============================================
-// STRATEGY IN ACTION - Case Studies (2xN Grid)
+// STRATEGY IN ACTION - Case Studies with Metrics
 // ============================================
+const CaseMetricBar = ({ label, value, suffix = '', prefix = '', delay = 0, isVisible = true }: {
+  label: string;
+  value: number;
+  suffix?: string;
+  prefix?: string;
+  delay?: number;
+  isVisible?: boolean;
+}) => {
+  const displayValue = useCountUp({ end: value, prefix, suffix, delay: delay * 1000, isVisible, duration: 1500 });
+  
+  return (
+    <div className="flex items-center justify-between py-1.5 border-b border-border/50 last:border-0">
+      <span className="text-xs text-muted-foreground">{label}</span>
+      <span className="text-sm font-medium text-primary">{displayValue}</span>
+    </div>
+  );
+};
+
 const StrategyInActionSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
     <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-t border-border">
-      <motion.p
+      <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="text-muted-foreground text-sm tracking-widest uppercase mb-12"
+        className="mb-12"
       >
-        Strategy in Action
-      </motion.p>
+        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+          04 Strategy in Action
+        </p>
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground">
+          Case Studies
+        </h2>
+      </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {featuredProjects.map((project, i) => (
           <motion.article
             key={project.slug}
@@ -339,32 +587,68 @@ const StrategyInActionSection = () => {
             transition={{ delay: i * 0.1, duration: 0.6 }}
           >
             <Link to={`/projects/${project.slug}`} className="group block">
-              <div className="relative aspect-[3/2] overflow-hidden bg-muted mb-4">
+              <div className="relative aspect-[4/3] overflow-hidden bg-muted mb-4">
                 <img
                   src={project.image}
                   alt={project.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                 />
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
 
-              <div className="space-y-2">
-                <p className="text-xs tracking-widest text-primary uppercase">
-                  {project.category}
-                </p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <p className="text-xs tracking-widest text-primary uppercase">
+                    {project.category}
+                  </p>
+                  <span className="text-muted-foreground/50">•</span>
+                  <p className="text-xs text-muted-foreground">
+                    {project.strategy}
+                  </p>
+                </div>
                 <h3 className="text-xl font-medium text-foreground group-hover:text-primary transition-colors">
                   {project.name}
                 </h3>
                 <p className="text-sm text-muted-foreground line-clamp-2">
                   {project.tagline}
                 </p>
-                <p className="text-sm text-foreground font-medium">
-                  {project.result}
-                </p>
+                
+                {/* Metrics */}
+                <div className="pt-2 mt-2 border-t border-border">
+                  {project.metrics.map((metric, mi) => (
+                    <CaseMetricBar
+                      key={metric.label}
+                      label={metric.label}
+                      value={metric.value}
+                      suffix={metric.suffix}
+                      prefix={metric.prefix}
+                      delay={0.3 + mi * 0.1}
+                      isVisible={isInView}
+                    />
+                  ))}
+                </div>
               </div>
             </Link>
           </motion.article>
         ))}
       </div>
+
+      {/* View All Projects Link */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        transition={{ delay: 0.5 }}
+        className="mt-12 text-center"
+      >
+        <Link 
+          to="/projects" 
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+        >
+          View All Projects
+          <ArrowRight className="w-4 h-4" />
+        </Link>
+      </motion.div>
     </section>
   );
 };
@@ -538,7 +822,9 @@ const GTMService = () => {
         <HeroSection />
         <MarketIntelligenceSection />
         <FrameworkSection />
+        <ResultsDashboardSection />
         <StrategyInActionSection />
+        <TestimonialsSection />
         <ClientLogosMarquee />
         <CTASection />
       </main>
