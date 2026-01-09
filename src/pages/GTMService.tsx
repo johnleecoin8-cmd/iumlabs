@@ -29,53 +29,54 @@ import triaBg from '@/assets/projects/tria-bg.jpg';
 const featuredProjects = [{
   name: 'MANTRA',
   tagline: "Building Korea's largest RWA community.",
-  result: '+500% community growth.',
+  result: '+450% real volume growth post-KRW entry.',
   image: mantraBg,
   slug: 'mantra',
   category: 'RWA L1',
-  strategy: 'Community-First Strategy',
+  strategy: 'KRW Market Entry',
   metrics: [{
-    label: 'Community Growth',
-    value: 500,
-    suffix: '%'
+    label: 'Real Volume Growth',
+    value: 450,
+    suffix: '%',
+    prefix: '+'
   }, {
-    label: 'Korean Users',
+    label: 'Post-KRW Entry',
     value: 85,
-    suffix: 'K+'
+    suffix: 'K+ Users'
   }]
 }, {
   name: 'Story Protocol',
   tagline: 'Korea launch for the leading IP infrastructure.',
-  result: '+340% trading volume.',
+  result: '#1 Media Share of Voice in Korea.',
   image: storyBg,
   slug: 'story-protocol',
   category: 'IP Protocol',
-  strategy: 'Narrative-Led Strategy',
+  strategy: 'Narrative Dominance',
   metrics: [{
-    label: 'Trading Volume',
-    value: 340,
-    suffix: '%'
+    label: 'Share of Voice',
+    value: 1,
+    prefix: '#'
   }, {
     label: 'Media Coverage',
     value: 50,
-    suffix: '+'
+    suffix: '+ Articles'
   }]
 }, {
   name: 'peaq Network',
   tagline: 'Establishing DePIN leadership in Korea.',
-  result: '#1 in Korean market.',
+  result: '85K+ local wallet growth.',
   image: peaqBg,
   slug: 'peaq',
   category: 'DePIN',
-  strategy: 'Market Dominance Strategy',
+  strategy: 'Wallet Acquisition',
   metrics: [{
-    label: 'Market Rank',
+    label: 'Wallet Adoption',
+    value: 85,
+    suffix: 'K+'
+  }, {
+    label: 'Market Position',
     value: 1,
     prefix: '#'
-  }, {
-    label: 'Mindshare',
-    value: 78,
-    suffix: '%'
   }]
 }];
 const moreProjects = [{
@@ -688,27 +689,48 @@ const MarketIntelligenceSection = () => {
     once: true,
     margin: "-10%"
   });
-  const volumeData = [{
-    label: 'United States',
+
+  // Fiat Volume Data - The Fiat Impact
+  const fiatVolumeData = [{
+    label: 'USD',
     percentage: 100,
-    value: '45%',
+    value: '$XX B',
     isHighlight: false
   }, {
-    label: 'Japan',
-    percentage: 62,
-    value: '28%',
-    isHighlight: false
-  }, {
-    label: 'South Korea',
-    percentage: 40,
-    value: '18%',
+    label: 'KRW',
+    percentage: 85,
+    value: '$XX B',
     isHighlight: true
   }, {
-    label: 'Others',
-    percentage: 20,
-    value: '9%',
+    label: 'EUR',
+    percentage: 35,
+    value: '$XX B',
+    isHighlight: false
+  }, {
+    label: 'JPY',
+    percentage: 15,
+    value: '$XX B',
     isHighlight: false
   }];
+
+  // Market Logic Data - 3 Column
+  const marketLogic = [{
+    number: '01',
+    title: 'The KRW Premium',
+    subtitle: '#2 Global Fiat Volume',
+    description: 'The Korean Won (KRW) consistently rivals the USD in crypto trading volume, often surpassing the Euro. Securing a foothold in the KRW market isn\'t just about exposure—it\'s about accessing a liquidity pool that rivals the global reserve currency.'
+  }, {
+    number: '02',
+    title: 'High-Velocity Turnover',
+    subtitle: 'Highest Capital Efficiency',
+    description: 'Korean portfolios turn over 4-5x faster than the global average. A mere $10M in market cap here generates the trading volume of a $100M project elsewhere. This velocity creates the active charts that global market makers look for.'
+  }, {
+    number: '03',
+    title: 'The Organic Multiplier',
+    subtitle: 'Retail-Driven Price Discovery',
+    description: 'Unlike markets dominated by institutional algorithms, Korea is powered by real retail conviction. Winning the "mindshare" of Korean users creates a sustained buy-pressure floor that defends your token against global volatility.'
+  }];
+
   return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border">
       <motion.div initial={{
       opacity: 0
@@ -718,65 +740,132 @@ const MarketIntelligenceSection = () => {
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
           01 The Strategic Imperative
         </p>
-        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-16">
-          Why Korea?
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-2">
+          The Power of KRW Liquidity
         </h2>
+        <p className="text-muted-foreground text-lg mb-16">
+          Access the world's most active fiat gateway.
+        </p>
 
-        <div className="grid lg:grid-cols-3 gap-12 lg:gap-8 mb-16">
-          {/* Left: Korea Map Visualization */}
-          <div className="lg:col-span-1">
-            <KoreaMapVisualization isVisible={isInView} />
+        {/* Module A: The Market Logic - 3 Column */}
+        <div className="grid md:grid-cols-3 gap-8 mb-16">
+          {marketLogic.map((item, i) => (
+            <motion.div 
+              key={item.number}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.15 }}
+              className="relative p-6 border border-border bg-background hover:border-primary/30 transition-colors group"
+            >
+              <span className="absolute -top-3 left-6 px-2 py-0.5 bg-muted text-xs font-mono text-muted-foreground">
+                {item.number}
+              </span>
+              <p className="text-xs tracking-widest text-primary font-medium mb-2 mt-2">
+                {item.subtitle}
+              </p>
+              <h3 className="text-xl font-medium text-foreground mb-3">
+                {item.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {item.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Module B: Data Visualization */}
+        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+          {/* Chart 1: The Fiat Impact */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.3 }}
+            className="p-6 border border-border bg-background"
+          >
+            <p className="text-xs tracking-widest text-primary font-medium mb-6">
+              THE FIAT IMPACT — Average Daily Volume per Fiat Pair
+            </p>
+            <div className="space-y-4 mb-6">
+              {fiatVolumeData.map((item, i) => (
+                <AnimatedProgressBar 
+                  key={item.label} 
+                  label={item.label} 
+                  percentage={item.percentage} 
+                  value={item.value} 
+                  delay={i * 0.15 + 0.3} 
+                  isHighlight={item.isHighlight} 
+                  isVisible={isInView} 
+                />
+              ))}
+            </div>
+            <p className="text-sm text-muted-foreground italic border-t border-border pt-4">
+              "KRW is the only fiat pair that challenges the USD."
+            </p>
+          </motion.div>
+
+          {/* Chart 2: Velocity Comparison */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 0.4 }}
+            className="p-6 border border-border bg-background"
+          >
+            <p className="text-xs tracking-widest text-primary font-medium mb-6">
+              VELOCITY COMPARISON — Token Velocity Ratio (Volume / Market Cap)
+            </p>
+            <div className="space-y-6 mb-6">
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium text-foreground/80">Global Average</span>
+                  <span className="text-sm font-mono text-muted-foreground">0.15</span>
+                </div>
+                <div className="h-3 bg-muted rounded-full overflow-hidden">
+                  <motion.div 
+                    className="h-full bg-foreground/30 rounded-full"
+                    initial={{ width: 0 }}
+                    animate={isInView ? { width: '22%' } : {}}
+                    transition={{ duration: 1, delay: 0.5 }}
+                  />
+                </div>
+              </div>
+              <div className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm font-medium text-primary">Korea Market</span>
+                  <span className="text-sm font-mono text-primary">0.68</span>
+                </div>
+                <div className="h-3 bg-muted rounded-full overflow-hidden">
+                  <motion.div 
+                    className="h-full bg-primary rounded-full"
+                    initial={{ width: 0 }}
+                    animate={isInView ? { width: '100%' } : {}}
+                    transition={{ duration: 1.2, delay: 0.6 }}
+                  />
+                </div>
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground italic border-t border-border pt-4">
+              "Same Market Cap, <span className="text-primary font-medium">4x More Volume</span> in Korea."
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Key Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+          <div className="p-4 border border-border bg-background text-center">
+            <p className="text-2xl md:text-3xl font-medium text-primary">#2</p>
+            <p className="text-xs text-muted-foreground mt-1">Global Fiat Volume (KRW)</p>
           </div>
-
-          {/* Middle: Data Visualization */}
-          <div className="space-y-8">
-            <div>
-              <p className="text-xs tracking-widest text-primary font-medium mb-4">
-                GLOBAL TRADING VOLUME SHARE
-              </p>
-              <div className="space-y-4">
-                {volumeData.map((item, i) => <AnimatedProgressBar key={item.label} label={item.label} percentage={item.percentage} value={item.value} delay={i * 0.15} isHighlight={item.isHighlight} isVisible={isInView} />)}
-              </div>
-            </div>
-            
-            {/* Key Stats */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="p-4 border border-border bg-background">
-                <p className="text-2xl md:text-3xl font-medium text-foreground">18%</p>
-                <p className="text-xs text-muted-foreground mt-1">of Global Volume</p>
-              </div>
-              <div className="p-4 border border-border bg-background">
-                <p className="text-2xl md:text-3xl font-medium text-foreground">5.2x</p>
-                <p className="text-xs text-muted-foreground mt-1">Higher Engagement</p>
-              </div>
-            </div>
+          <div className="p-4 border border-border bg-background text-center">
+            <p className="text-2xl md:text-3xl font-medium text-foreground">4-5x</p>
+            <p className="text-xs text-muted-foreground mt-1">Higher Velocity</p>
           </div>
-
-          {/* Right: Insights */}
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <p className="text-xs tracking-widest text-primary font-medium">CULTURE</p>
-              <p className="text-xl font-medium text-foreground">High-Risk, High-Reward</p>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Korean traders move fast and commit hard. When they believe in a project, they go all in.
-              </p>
-            </div>
-            
-            <div className="space-y-2">
-              <p className="text-xs tracking-widest text-primary font-medium">BARRIER</p>
-              <p className="text-xl font-medium text-foreground">Unique Ecosystem</p>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Naver, Kakao, VASP regulations, and cultural nuances. Global strategies fail here without localization.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <p className="text-xs tracking-widest text-primary font-medium">OPPORTUNITY</p>
-              <p className="text-xl font-medium text-foreground">First-Mover Advantage</p>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Most global projects underestimate Korea. Those who get it right dominate.
-              </p>
-            </div>
+          <div className="p-4 border border-border bg-background text-center">
+            <p className="text-2xl md:text-3xl font-medium text-foreground">$10M</p>
+            <p className="text-xs text-muted-foreground mt-1">= $100M Volume Elsewhere</p>
+          </div>
+          <div className="p-4 border border-border bg-background text-center">
+            <p className="text-2xl md:text-3xl font-medium text-foreground">100%</p>
+            <p className="text-xs text-muted-foreground mt-1">Retail-Driven</p>
           </div>
         </div>
 
@@ -787,13 +876,13 @@ const MarketIntelligenceSection = () => {
         opacity: 1,
         y: 0
       } : {}} transition={{
-        delay: 0.4
+        delay: 0.5
       }} className="border-l-2 border-primary pl-6">
           <p className="text-lg md:text-xl text-foreground italic">
-            "Global projects succeed in the West, but they explode in Korea."
+            "Securing a foothold in the KRW market isn't just about exposure—it's about plugging into the only fiat pair that challenges the Dollar."
           </p>
           <footer className="mt-2 text-sm text-muted-foreground">
-            — You need a local algorithm.
+            — The Strategic Imperative
           </footer>
         </motion.blockquote>
       </motion.div>
