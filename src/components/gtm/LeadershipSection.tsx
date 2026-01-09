@@ -51,7 +51,7 @@ const LeadershipSection = () => {
           className="mb-14 md:mb-16"
         >
           <div className="flex items-center gap-3 mb-5">
-            <span className="text-white/40 text-sm font-mono tracking-wider">04</span>
+            <span className="text-white/40 text-sm font-mono tracking-wider">01</span>
             <div className="w-10 h-px bg-white/20" />
             <span className="text-white/60 text-sm tracking-wider uppercase">Leadership</span>
           </div>

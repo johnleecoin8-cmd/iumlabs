@@ -18,6 +18,7 @@ import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
+import LeadershipSection from "@/components/gtm/LeadershipSection";
 
 // Import components
 import Logo3D from "@/components/Logo3D";
@@ -375,44 +376,8 @@ const Jobs = () => {
         
       </section>
 
-      {/* 01. Why Join Us Section */}
-      <section className="bg-surface-odd" id="about">
-        <div className="border-t border-white/10">
-          <AnimatedSection>
-            <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-                <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">Why Join Us</h2>
-              </div>
-              <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">Your Growth, Our Priority</span>
-            </div>
-          </AnimatedSection>
-          
-          <AnimatedSection delay={100}>
-            <div className="px-4 md:px-10 py-8 sm:py-10 md:py-16">
-              <div className="grid md:grid-cols-2 gap-8 sm:gap-10 md:gap-16 items-center">
-                <div>
-                  <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 sm:mb-6 leading-tight">
-                    We invest in exceptional people
-                  </h3>
-                  <p className="text-sm sm:text-base text-white/60 leading-relaxed mb-4 sm:mb-6">
-                    At Ium Labs, your ideas matter. We're not just building a company—we're building a team of passionate individuals who shape the future of Web3 in Korea together.
-                  </p>
-                  <p className="text-sm sm:text-base text-white/60 leading-relaxed mb-4 sm:mb-6">
-                    Work with global projects, learn from industry leaders, and make a real impact. True to our name "Ium" (meaning "connection" in Korean), we connect talented individuals with extraordinary opportunities.
-                  </p>
-                  <p className="text-sm sm:text-base text-white/70 font-medium">
-                    Ready to write your next chapter? We're excited to meet you.
-                  </p>
-                </div>
-                <div className="relative h-48 sm:h-64 md:h-80 lg:h-96">
-                  <Logo3D className="w-full h-full" />
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+      {/* 01. Leadership Section */}
+      <LeadershipSection />
 
       {/* 02. Positions Section */}
       <section className="bg-surface-even" id="positions">
