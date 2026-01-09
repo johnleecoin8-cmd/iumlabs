@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Korean Web3 GTM & Research Agency | ium Labs</title>
     <meta name="description" content="ium Labs is Korea's leading Web3 marketing agency. GTM strategy, KOL network, influencer marketing, community management, and deep research for global crypto projects entering Korea." />
@@ -36,7 +40,12 @@
       "name": "ium Labs",
       "alternateName": "이음 랩스",
       "url": "https://iumlabs.io",
-      "logo": "https://iumlabs.io/favicon.png",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://iumlabs.io/android-chrome-512x512.png",
+        "width": 512,
+        "height": 512
+      },
       "description": "ium Labs is Korea's leading Web3 GTM & research agency helping global crypto projects succeed in the Korean market through strategic marketing, KOL networks, and data-driven insights.",
       "foundingDate": "2023",
       "areaServed": {
@@ -67,8 +76,12 @@
       "publisher": {
         "@type": "Organization",
         "name": "ium Labs",
-        "logo": "https://iumlabs.io/favicon.png"
-      },
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://iumlabs.io/android-chrome-512x512.png",
+          "width": 512,
+          "height": 512
+        }
       "potentialAction": {
         "@type": "SearchAction",
         "target": "https://iumlabs.io/research?q={search_term_string}",
