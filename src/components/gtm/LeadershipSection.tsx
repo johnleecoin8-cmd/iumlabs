@@ -14,34 +14,20 @@ const LeadershipSection = () => {
 
   const teamMembers = [
     {
+      name: "David Y",
       role: "Head of Strategy",
-      nickname: "The Analyst",
       photo: teamStrategyPhoto,
       background: [
-        "Former VC Research Analyst",
-        "Specialist in Tokenomics & GTM Strategy"
-      ],
-      responsibility: "Market Intelligence & Planning"
+        "Former Binance / Ledger"
+      ]
     },
     {
-      role: "Head of Operations",
-      nickname: "The Executor",
+      name: "Miles K",
+      role: "Head of Community",
       photo: teamOperationsPhoto,
       background: [
-        "Ex-Tier 1 Exchange Listing Manager",
-        "Managed 50+ Listing Campaigns"
-      ],
-      responsibility: "Exchange Relations & Compliance"
-    },
-    {
-      role: "Head of Growth",
-      nickname: "The Narrative Builder",
-      photo: teamGrowthPhoto,
-      background: [
-        "Former Chief Editor at Crypto Media",
-        "Expert in Viral Marketing & KOL Mgmt"
-      ],
-      responsibility: "PR & Community Growth"
+        "Former Head of Operation ai16z"
+      ]
     }
   ];
 
@@ -187,27 +173,21 @@ const LeadershipSection = () => {
                     />
                   </div>
 
-                  {/* Role & Nickname */}
-                  <div className="mb-6">
-                    <h4 className="text-xl font-bold text-white mb-1">{member.role}</h4>
-                    <span className="text-white/40 text-sm italic">"{member.nickname}"</span>
+                  {/* Name & Role */}
+                  <div className="mb-4">
+                    <h4 className="text-xl font-bold text-white mb-1">{member.name}</h4>
+                    <span className="text-white/50 text-sm">{member.role}</span>
                   </div>
 
                   {/* Background */}
-                  <ul className="space-y-2 mb-6">
+                  <ul className="space-y-2">
                     {member.background.map((item, i) => (
-                      <li key={i} className="text-white/50 text-sm flex items-start gap-2">
+                      <li key={i} className="text-white/40 text-sm flex items-start gap-2">
                         <span className="text-white/30 mt-1">•</span>
                         {item}
                       </li>
                     ))}
                   </ul>
-
-                  {/* Responsibility */}
-                  <div className="pt-4 border-t border-white/10">
-                    <span className="text-white/30 text-xs tracking-wider uppercase">Role</span>
-                    <p className="text-white/70 text-sm mt-1">{member.responsibility}</p>
-                  </div>
 
                   {/* Card Number */}
                   <div className="absolute top-6 right-6 text-white/10 text-4xl font-bold">
