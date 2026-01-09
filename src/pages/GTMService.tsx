@@ -1523,9 +1523,104 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
         </div>
 
         {/* Main visualization grid */}
-        <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-start">
+        <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-8 items-start relative">
+          {/* SVG Connection Lines - Desktop Only */}
+          <svg className="hidden lg:block absolute inset-0 w-full h-full pointer-events-none z-0" style={{ overflow: 'visible' }}>
+            <defs>
+              <linearGradient id="flowGradient1" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.6"/>
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1"/>
+              </linearGradient>
+              <linearGradient id="flowGradient2" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="hsl(217, 91%, 60%)" stopOpacity="0.6"/>
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1"/>
+              </linearGradient>
+              <linearGradient id="flowGradient3" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="hsl(142, 76%, 36%)" stopOpacity="0.6"/>
+                <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1"/>
+              </linearGradient>
+            </defs>
+            
+            {/* Path 1: Top source to center */}
+            <path 
+              d="M 33% 12% Q 42% 12%, 50% 35%" 
+              stroke="url(#flowGradient2)"
+              strokeWidth="1.5"
+              fill="none"
+              className="opacity-40"
+            />
+            <circle r="3" fill="hsl(217, 91%, 60%)">
+              <animateMotion 
+                dur="2.5s" 
+                repeatCount="indefinite"
+                path="M 33% 12% Q 42% 12%, 50% 35%"
+              />
+              <animate attributeName="opacity" values="0;1;1;0" dur="2.5s" repeatCount="indefinite" />
+            </circle>
+            
+            {/* Path 2: Middle source to center */}
+            <path 
+              d="M 33% 50% Q 40% 50%, 50% 50%" 
+              stroke="url(#flowGradient1)"
+              strokeWidth="1.5"
+              fill="none"
+              className="opacity-40"
+            />
+            <circle r="3" fill="hsl(var(--primary))">
+              <animateMotion 
+                dur="2s" 
+                repeatCount="indefinite"
+                path="M 33% 50% Q 40% 50%, 50% 50%"
+              />
+              <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" />
+            </circle>
+            <circle r="3" fill="hsl(var(--primary))">
+              <animateMotion 
+                dur="2s" 
+                repeatCount="indefinite"
+                path="M 33% 50% Q 40% 50%, 50% 50%"
+                begin="0.7s"
+              />
+              <animate attributeName="opacity" values="0;1;1;0" dur="2s" repeatCount="indefinite" begin="0.7s" />
+            </circle>
+            
+            {/* Path 3: Bottom source to center */}
+            <path 
+              d="M 33% 88% Q 42% 88%, 50% 65%" 
+              stroke="url(#flowGradient3)"
+              strokeWidth="1.5"
+              fill="none"
+              className="opacity-40"
+            />
+            <circle r="3" fill="hsl(142, 76%, 36%)">
+              <animateMotion 
+                dur="2.8s" 
+                repeatCount="indefinite"
+                path="M 33% 88% Q 42% 88%, 50% 65%"
+              />
+              <animate attributeName="opacity" values="0;1;1;0" dur="2.8s" repeatCount="indefinite" />
+            </circle>
+            
+            {/* Output path from center to right */}
+            <path 
+              d="M 50% 50% Q 58% 50%, 67% 50%" 
+              stroke="url(#flowGradient1)"
+              strokeWidth="1.5"
+              fill="none"
+              className="opacity-40"
+            />
+            <circle r="3" fill="hsl(var(--primary))">
+              <animateMotion 
+                dur="1.5s" 
+                repeatCount="indefinite"
+                path="M 50% 50% Q 58% 50%, 67% 50%"
+              />
+              <animate attributeName="opacity" values="0;1;1;0" dur="1.5s" repeatCount="indefinite" />
+            </circle>
+          </svg>
+
           {/* Data Sources */}
-          <div className="space-y-4">
+          <div className="space-y-4 relative z-10">
             <p className="text-xs tracking-widest text-muted-foreground mb-4 text-center lg:text-left flex items-center gap-2 justify-center lg:justify-start">
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
               LIVE DATA SOURCES
@@ -1618,21 +1713,8 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isVisible ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.8, type: "spring" }}
-            className="relative flex flex-col items-center mt-8 lg:mt-12"
+            className="relative flex flex-col items-center mt-8 lg:mt-12 z-10"
           >
-            {/* Connection lines with flowing particles - Left */}
-            <div className="hidden lg:flex absolute left-0 top-1/2 -translate-x-full items-center w-12">
-              <div className="w-full h-px bg-gradient-to-l from-primary/50 to-transparent relative">
-                {[0, 1, 2].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute top-0 w-2 h-2 rounded-full bg-primary -translate-y-1/2"
-                    animate={{ x: [48, 0], opacity: [0, 1, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.5 }}
-                  />
-                ))}
-              </div>
-            </div>
 
             {/* Main LLM Core Box */}
             <div className="relative">
@@ -1715,23 +1797,10 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
               </div>
             </div>
 
-            {/* Connection lines with flowing particles - Right */}
-            <div className="hidden lg:flex absolute right-0 top-1/2 translate-x-full items-center w-12">
-              <div className="w-full h-px bg-gradient-to-r from-primary/50 to-transparent relative">
-                {[0, 1, 2].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute top-0 w-2 h-2 rounded-full bg-primary -translate-y-1/2"
-                    animate={{ x: [0, 48], opacity: [0, 1, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.5 }}
-                  />
-                ))}
-              </div>
-            </div>
           </motion.div>
 
-          {/* Output Panel - Enhanced with gauges */}
-          <div className="space-y-4">
+          {/* Output Panel - Simplified */}
+          <div className="space-y-4 relative z-10">
             <p className="text-xs tracking-widest text-muted-foreground mb-4 text-center lg:text-right flex items-center gap-2 justify-center lg:justify-end">
               STRATEGIC OUTPUT
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
@@ -1741,7 +1810,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
               initial={{ opacity: 0, x: 30 }}
               animate={isVisible ? { opacity: 1, x: 0 } : {}}
               transition={{ delay: 1 }}
-              className="p-6 border border-primary/50 bg-background relative overflow-hidden"
+              className="p-5 border border-primary/50 bg-background relative overflow-hidden"
             >
               {/* Background pattern */}
               <div className="absolute inset-0 opacity-[0.02]" style={{
@@ -1750,7 +1819,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
               }} />
 
               <div className="relative z-10">
-                <div className="flex items-center gap-2 mb-6">
+                <div className="flex items-center gap-2 mb-5">
                   <div className="p-1.5 rounded bg-primary/20">
                     <Target className="w-4 h-4 text-primary" />
                   </div>
@@ -1764,56 +1833,45 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                   </motion.span>
                 </div>
 
-                {/* Circular Gauges Row */}
-                <div className="grid grid-cols-4 gap-2 mb-6">
-                  {outputMetrics.map((metric, i) => (
-                    <MiniGauge
-                      key={metric.label}
-                      value={metric.inverted ? 100 - metric.value : metric.value}
-                      label={metric.label.split(' ')[0]}
-                      color={metric.color}
-                      delay={1.2 + i * 0.15}
-                      isVisible={isVisible}
-                      size={44}
-                    />
-                  ))}
-                </div>
-
-                {/* Detailed metrics with bars */}
-                <div className="space-y-3">
+                {/* Simplified Metric Cards - 2x2 Grid */}
+                <div className="grid grid-cols-2 gap-3">
                   {outputMetrics.map((metric, i) => (
                     <motion.div 
                       key={metric.label}
-                      initial={{ opacity: 0, x: 10 }}
-                      animate={isVisible ? { opacity: 1, x: 0 } : {}}
-                      transition={{ delay: 1.4 + i * 0.1 }}
-                      className="group"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+                      transition={{ delay: 1.2 + i * 0.1 }}
+                      className="p-3 bg-muted/30 border border-border/50 rounded-sm"
                     >
-                      <div className="flex items-center justify-between mb-1.5">
-                        <div className="flex items-center gap-2">
-                          <metric.icon className="w-3 h-3 text-muted-foreground" />
-                          <span className="text-xs text-foreground font-medium">{metric.label}</span>
-                        </div>
+                      <div className="flex items-center gap-2 mb-2">
+                        <metric.icon className={`w-3.5 h-3.5 ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`} />
+                        <span className="text-[10px] text-muted-foreground uppercase tracking-wide">{metric.label}</span>
+                      </div>
+                      
+                      <div className="flex items-end justify-between gap-2 mb-2">
                         <motion.span 
                           key={metric.value}
                           initial={{ opacity: 0.5 }}
                           animate={{ opacity: 1 }}
-                          className={`text-xs font-mono ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`}
+                          className={`text-xl font-mono font-medium ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`}
                         >
-                          {metric.inverted ? `${metric.value}% (Low)` : `${metric.value}%`}
+                          {metric.value}%
                         </motion.span>
+                        {metric.inverted && (
+                          <span className="text-[9px] text-yellow-500/70 mb-1">LOW</span>
+                        )}
                       </div>
-                      <div className="flex items-center gap-2">
-                        <div className="flex-1 h-1.5 bg-muted rounded-full overflow-hidden">
-                          <motion.div 
-                            className={`h-full rounded-full ${metric.color === 'green' ? 'bg-green-500' : metric.color === 'yellow' ? 'bg-yellow-500' : 'bg-primary'}`}
-                            initial={{ width: 0 }}
-                            animate={isVisible ? { width: `${metric.inverted ? metric.value : metric.value}%` } : {}}
-                            transition={{ duration: 1.2, delay: 1.5 + i * 0.1 }}
-                          />
-                        </div>
-                        <span className="text-[9px] text-muted-foreground w-20 text-right">{metric.sublabel}</span>
+                      
+                      <div className="h-1 bg-muted rounded-full overflow-hidden">
+                        <motion.div 
+                          className={`h-full rounded-full ${metric.color === 'green' ? 'bg-green-500' : metric.color === 'yellow' ? 'bg-yellow-500' : 'bg-primary'}`}
+                          initial={{ width: 0 }}
+                          animate={isVisible ? { width: `${metric.value}%` } : {}}
+                          transition={{ duration: 1, delay: 1.3 + i * 0.1 }}
+                        />
                       </div>
+                      
+                      <p className="text-[9px] text-muted-foreground mt-1.5">{metric.sublabel}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -1824,20 +1882,20 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 1.8 }}
-              className="p-4 border border-green-500/30 bg-green-500/5"
+              transition={{ delay: 1.6 }}
+              className="p-3 border border-green-500/30 bg-green-500/5"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <motion.div 
-                    className="w-3 h-3 rounded-full bg-green-500"
-                    animate={{ scale: [1, 1.2, 1], boxShadow: ['0 0 0 0 hsl(142, 76%, 36%, 0.4)', '0 0 0 8px hsl(142, 76%, 36%, 0)', '0 0 0 0 hsl(142, 76%, 36%, 0)'] }}
+                    className="w-2.5 h-2.5 rounded-full bg-green-500"
+                    animate={{ scale: [1, 1.2, 1] }}
                     transition={{ duration: 2, repeat: Infinity }}
                   />
-                  <span className="text-xs font-medium text-green-500">High Confidence Output</span>
+                  <span className="text-xs font-medium text-green-500">High Confidence</span>
                 </div>
                 <span className="text-xs font-mono text-green-500">
-                  {Math.floor((liveData.timing + liveData.channels + liveData.budget + (100 - liveData.risk)) / 4)}% avg
+                  {Math.floor((liveData.timing + liveData.channels + liveData.budget + (100 - liveData.risk)) / 4)}%
                 </span>
               </div>
             </motion.div>
