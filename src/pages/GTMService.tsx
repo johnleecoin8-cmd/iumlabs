@@ -2216,7 +2216,6 @@ const GTMService = () => {
         <MarketIntelligenceSection />
         <FrameworkSection />
         <StrategyInActionSection />
-        <TestimonialsSection />
         <ClientLogosMarquee />
         <CTASection />
       </main>
