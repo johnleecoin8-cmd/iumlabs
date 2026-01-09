@@ -1,485 +1,524 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { ComposedChart, Area, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
-import { TrendingUp, Users, Zap, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowUpRight, Activity } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
+import { Progress } from '@/components/ui/progress';
 
 // Project logos
 import mantraLogo from '@/assets/logos/mantra.png';
 import storyLogo from '@/assets/logos/story-protocol.png';
 import peaqLogo from '@/assets/logos/peaq.png';
+import bnbLogo from '@/assets/logos/bnb.png';
+import bybitLogo from '@/assets/logos/bybit.png';
+import kucoinLogo from '@/assets/logos/kucoin.png';
+import saharaLogo from '@/assets/logos/sahara-ai.png';
+import megaethLogo from '@/assets/logos/megaeth.png';
+import ondoLogo from '@/assets/logos/ondo.svg';
+import polygonLogo from '@/assets/logos/polygon.svg';
+import triaLogo from '@/assets/logos/tria-official.png';
+import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
 
-// Before vs After Korea comparison data
-const growthData = [{
-  week: 'W1',
-  global: 100,
-  korea: 100,
-  volume: 15
-}, {
-  week: 'W2',
-  global: 103,
-  korea: 102,
-  volume: 18
-}, {
-  week: 'W3',
-  global: 101,
-  korea: 98,
-  volume: 12
-}, {
-  week: 'W4',
-  global: 106,
-  korea: 105,
-  volume: 22
-}, {
-  week: 'W5',
-  global: 108,
-  korea: 115,
-  volume: 35,
-  isEntry: true
-}, {
-  week: 'W6',
-  global: 110,
-  korea: 185,
-  volume: 85
-}, {
-  week: 'W7',
-  global: 112,
-  korea: 280,
-  volume: 145
-}, {
-  week: 'W8',
-  global: 115,
-  korea: 420,
-  volume: 220
-}, {
-  week: 'W9',
-  global: 118,
-  korea: 550,
-  volume: 280
-}];
-const metrics = [{
-  icon: TrendingUp,
-  value: 450,
-  suffix: '%',
-  label: 'Avg. Growth',
-  sublabel: '평균 성장률',
-  color: 'text-orange-400',
-  glowColor: 'shadow-orange-500/30'
-}, {
-  icon: Users,
-  value: 85,
-  suffix: 'K+',
-  label: 'Community',
-  sublabel: '커뮤니티 성장',
-  color: 'text-purple-400',
-  glowColor: 'shadow-purple-500/30'
-}, {
-  icon: Zap,
-  value: 12,
-  suffix: 'x',
-  label: 'Volume Spike',
-  sublabel: '거래량 급등',
-  color: 'text-cyan-400',
-  glowColor: 'shadow-cyan-500/30'
-}];
-const featuredCases = [{
-  number: '01',
-  title: 'The Liquidity Unlock',
-  project: 'MANTRA (OM)',
-  logo: mantraLogo,
-  result: {
-    value: '+450%',
-    label: 'Volume Increase'
-  },
-  description: 'Unlocked $2M+ daily trading volume through strategic KRW exchange partnerships.',
-  color: 'orange',
-  glowClass: 'hover:shadow-[0_0_60px_-15px_rgba(251,146,60,0.4)] hover:border-orange-500/50'
-}, {
-  number: '02',
-  title: 'The Mindshare Takeover',
-  project: 'Story Protocol',
-  logo: storyLogo,
-  result: {
-    value: '#1',
-    label: 'Kaito Ranking'
-  },
-  description: 'Achieved #1 Kaito mindshare through coordinated KOL campaign and media blitz.',
-  color: 'purple',
-  glowClass: 'hover:shadow-[0_0_60px_-15px_rgba(168,85,247,0.4)] hover:border-purple-500/50'
-}, {
-  number: '03',
-  title: 'The Community Surge',
-  project: 'peaq',
-  logo: peaqLogo,
-  result: {
-    value: '85K+',
-    label: 'Members Added'
-  },
-  description: 'Built a 85,000+ member community from scratch within 3 months.',
-  color: 'cyan',
-  glowClass: 'hover:shadow-[0_0_60px_-15px_rgba(34,211,238,0.4)] hover:border-cyan-500/50'
-}];
+// Project backgrounds
+import bnbBg from '@/assets/projects/bnb-bg.jpg';
+import bybitBg from '@/assets/projects/bybit-bg.jpg';
+import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
+import saharaBg from '@/assets/projects/sahara-ai-bg.jpg';
+import megaethBg from '@/assets/projects/megaeth-bg.jpg';
+import ondoBg from '@/assets/projects/ondo-bg.jpg';
+import polygonBg from '@/assets/projects/polygon-bg.jpg';
+import triaBg from '@/assets/projects/tria-bg.jpg';
 
-// Metric Card Component
-const MetricCard = ({
-  data,
+// Featured Projects Data
+const featuredProjects = [
+  {
+    name: 'MANTRA',
+    slug: 'mantra',
+    logo: mantraLogo,
+    category: 'RWA L1',
+    strategy: 'KRW Market Entry',
+    metric: { value: 450, suffix: '%', label: 'Volume Growth' },
+    color: 'orange',
+    glowColor: 'rgba(251,146,60,0.5)',
+    progress: 92
+  },
+  {
+    name: 'Story Protocol',
+    slug: 'story-protocol',
+    logo: storyLogo,
+    category: 'IP Protocol',
+    strategy: 'Narrative-Led FOMO',
+    metric: { value: 1, suffix: 'st', prefix: '#', label: 'Kaito Ranking' },
+    color: 'purple',
+    glowColor: 'rgba(168,85,247,0.5)',
+    progress: 100
+  },
+  {
+    name: 'peaq',
+    slug: 'peaq',
+    logo: peaqLogo,
+    category: 'DePIN',
+    strategy: 'Wallet Acquisition',
+    metric: { value: 85, suffix: 'K+', label: 'Community' },
+    color: 'cyan',
+    glowColor: 'rgba(34,211,238,0.5)',
+    progress: 88
+  },
+];
+
+// Extended Portfolio Projects
+const moreProjects = [
+  { name: 'BNB Chain', slug: 'bnb-chain', logo: bnbLogo, image: bnbBg },
+  { name: 'Bybit', slug: 'bybit', logo: bybitLogo, image: bybitBg },
+  { name: 'KuCoin', slug: 'kucoin', logo: kucoinLogo, image: kucoinBg },
+  { name: 'Sahara AI', slug: 'sahara-ai', logo: saharaLogo, image: saharaBg },
+  { name: 'OpenLedger', slug: 'openledger', logo: openledgerLogo, image: saharaBg },
+  { name: 'MegaETH', slug: 'megaeth', logo: megaethLogo, image: megaethBg },
+  { name: 'Ondo', slug: 'ondo', logo: ondoLogo, image: ondoBg },
+  { name: 'Polygon', slug: 'polygon', logo: polygonLogo, image: polygonBg },
+  { name: 'Tria', slug: 'tria', logo: triaLogo, image: triaBg },
+];
+
+// Network Stats
+const networkStats = [
+  { value: 30, suffix: '+', label: 'Projects', sublabel: '프로젝트' },
+  { value: 1.5, suffix: 'B+', prefix: '$', label: 'Volume', sublabel: '거래량' },
+  { value: 340, suffix: '%', label: 'Avg Growth', sublabel: '평균 성장' },
+  { value: 100, suffix: '%', label: 'Retention', sublabel: '재계약율' },
+];
+
+// Featured Project Card
+const FeaturedProjectCard = ({
+  project,
   index,
   isVisible
 }: {
-  data: typeof metrics[0];
+  project: typeof featuredProjects[0];
   index: number;
   isVisible: boolean;
 }) => {
-  const count = useCountUp({
-    end: data.value,
-    duration: 2000,
-    suffix: data.suffix,
-    isVisible
-  });
-  const Icon = data.icon;
-  return <motion.div initial={{
-    opacity: 0,
-    x: 20
-  }} animate={isVisible ? {
-    opacity: 1,
-    x: 0
-  } : {}} transition={{
-    duration: 0.5,
-    delay: index * 0.1
-  }} className={`
-        group relative p-4 
-        border border-border/50 rounded-lg
-        bg-background/60 backdrop-blur-sm
-        transition-all duration-300
-        hover:border-primary/30
-      `}>
-      <div className="flex items-center gap-3">
-        <div className={`p-2 rounded-lg bg-primary/10 ${data.color}`}>
-          <Icon className="w-4 h-4" />
-        </div>
-        <div>
-          <div className={`text-2xl font-bold font-mono ${data.color}`}>
-            {count}
-          </div>
-          <div className="text-xs text-muted-foreground font-mono uppercase tracking-wider">
-            {data.label}
-          </div>
-        </div>
-      </div>
-    </motion.div>;
-};
-
-// Case Study Card Component
-const CaseCard = ({
-  caseItem,
-  index,
-  isVisible
-}: {
-  caseItem: typeof featuredCases[0];
-  index: number;
-  isVisible: boolean;
-}) => {
-  const colorClasses = {
-    orange: {
-      text: 'text-orange-400',
-      highlight: 'bg-orange-500/20 shadow-[0_0_20px_rgba(251,146,60,0.3)]',
-      glow: '[text-shadow:0_0_30px_rgba(251,146,60,0.6)]'
-    },
-    purple: {
-      text: 'text-purple-400',
-      highlight: 'bg-purple-500/20 shadow-[0_0_20px_rgba(168,85,247,0.3)]',
-      glow: '[text-shadow:0_0_30px_rgba(168,85,247,0.6)]'
-    },
-    cyan: {
-      text: 'text-cyan-400',
-      highlight: 'bg-cyan-500/20 shadow-[0_0_20px_rgba(34,211,238,0.3)]',
-      glow: '[text-shadow:0_0_30px_rgba(34,211,238,0.6)]'
-    }
-  };
-  const colors = colorClasses[caseItem.color as keyof typeof colorClasses];
-  return <motion.div initial={{
-    opacity: 0,
-    y: 30
-  }} animate={isVisible ? {
-    opacity: 1,
-    y: 0
-  } : {}} transition={{
-    duration: 0.6,
-    delay: 0.3 + index * 0.15
-  }} className={`
-        group relative p-6 
-        border border-border/50 rounded-xl
-        bg-background/80 backdrop-blur-sm
-        transition-all duration-500
-        ${caseItem.glowClass}
-      `}>
-      {/* Project Logo & Case Number */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
-          <img src={caseItem.logo} alt={caseItem.project} className="h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
-          <span className="text-xs font-mono text-muted-foreground uppercase tracking-wider">
-            {caseItem.project}
-          </span>
-        </div>
-        <div className="px-2 py-1 text-[10px] font-mono border border-border/50 rounded text-muted-foreground">
-          CASE {caseItem.number}
-        </div>
-      </div>
-
-      {/* Title */}
-      <h4 className="text-lg font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
-        {caseItem.title}
-      </h4>
-
-      {/* Highlighted Result */}
-      <div className="mb-4">
-        <span className={`
-          inline-block px-3 py-1.5 rounded-md
-          text-xl font-bold font-mono
-          ${colors.text} ${colors.highlight} ${colors.glow}
-        `}>
-          {caseItem.result.value}
-        </span>
-        <span className="ml-2 text-sm text-muted-foreground">
-          {caseItem.result.label}
-        </span>
-      </div>
-
-      {/* Description */}
-      <p className="text-sm text-muted-foreground leading-relaxed">
-        {caseItem.description}
-      </p>
-
-      {/* Arrow indicator */}
-      <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
-        <ArrowUpRight className={`w-4 h-4 ${colors.text}`} />
-      </div>
-    </motion.div>;
-};
-
-// Custom Tooltip
-const CustomTooltip = ({
-  active,
-  payload,
-  label
-}: any) => {
-  if (active && payload && payload.length) {
-    const isEntry = payload[0]?.payload?.isEntry;
-    return <div className="bg-background/95 backdrop-blur-sm border border-border rounded-lg p-3 shadow-xl">
-        <div className="text-xs font-mono text-muted-foreground mb-2">{label}</div>
-        {isEntry && <div className="text-xs font-bold text-primary mb-2 border-b border-border pb-2">
-            🚀 KOREA ENTRY POINT
-          </div>}
-        {payload.map((entry: any, index: number) => <div key={index} className="flex items-center gap-2 text-sm">
-            <div className="w-2 h-2 rounded-full" style={{
-          backgroundColor: entry.color
-        }} />
-            <span className="text-muted-foreground">{entry.name}:</span>
-            <span className="font-mono font-semibold">{entry.value}</span>
-          </div>)}
-      </div>;
-  }
-  return null;
-};
-export const PerformanceSection = () => {
-  const ref = React.useRef(null);
-  const isInView = useInView(ref, {
-    once: true,
-    margin: "-100px"
-  });
   const [isLive, setIsLive] = useState(true);
-
-  // Blinking live indicator
+  
   useEffect(() => {
     const interval = setInterval(() => setIsLive(prev => !prev), 1000);
     return () => clearInterval(interval);
   }, []);
-  return <section ref={ref} className="relative py-24 px-6 md:px-12 lg:px-20 overflow-hidden">
+
+  const colorClasses = {
+    orange: {
+      text: 'text-orange-400',
+      bg: 'bg-orange-500/10',
+      border: 'border-orange-500/30',
+      glow: 'hover:shadow-[0_0_60px_-15px_rgba(251,146,60,0.5)]',
+      indicator: 'bg-orange-500',
+      progress: 'bg-orange-500'
+    },
+    purple: {
+      text: 'text-purple-400',
+      bg: 'bg-purple-500/10',
+      border: 'border-purple-500/30',
+      glow: 'hover:shadow-[0_0_60px_-15px_rgba(168,85,247,0.5)]',
+      indicator: 'bg-purple-500',
+      progress: 'bg-purple-500'
+    },
+    cyan: {
+      text: 'text-cyan-400',
+      bg: 'bg-cyan-500/10',
+      border: 'border-cyan-500/30',
+      glow: 'hover:shadow-[0_0_60px_-15px_rgba(34,211,238,0.5)]',
+      indicator: 'bg-cyan-500',
+      progress: 'bg-cyan-500'
+    }
+  };
+
+  const colors = colorClasses[project.color as keyof typeof colorClasses];
+  
+  const count = useCountUp({
+    end: project.metric.value,
+    duration: 2000,
+    suffix: project.metric.suffix,
+    isVisible
+  });
+
+  return (
+    <Link to={`/projects/${project.slug}`}>
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, delay: 0.2 + index * 0.15 }}
+        className={`
+          group relative p-6 h-full
+          border ${colors.border} rounded-xl
+          bg-background/80 backdrop-blur-sm
+          transition-all duration-500
+          ${colors.glow}
+          hover:border-opacity-60
+        `}
+      >
+        {/* Header: Logo + Live Indicator */}
+        <div className="flex items-center justify-between mb-4">
+          <img 
+            src={project.logo} 
+            alt={project.name}
+            className="h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+          />
+          <div className="flex items-center gap-2">
+            <div className={`w-2 h-2 rounded-full ${colors.indicator} ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
+            <span className={`text-[10px] font-mono uppercase tracking-wider ${colors.text}`}>
+              LIVE
+            </span>
+          </div>
+        </div>
+
+        {/* Category Badge */}
+        <div className="flex items-center gap-2 mb-4">
+          <span className={`px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded ${colors.bg} ${colors.text}`}>
+            {project.category}
+          </span>
+        </div>
+
+        {/* Main Metric */}
+        <div className="mb-4">
+          <div className={`text-4xl font-bold font-mono ${colors.text} [text-shadow:0_0_30px_${project.glowColor}]`}>
+            {project.metric.prefix || ''}{count}
+          </div>
+          <div className="text-sm text-muted-foreground font-mono uppercase tracking-wider">
+            {project.metric.label}
+          </div>
+        </div>
+
+        {/* Strategy Label */}
+        <div className="mb-4">
+          <div className="text-xs text-muted-foreground mb-1">STRATEGY</div>
+          <div className="text-sm text-foreground font-medium">
+            {project.strategy}
+          </div>
+        </div>
+
+        {/* Progress Bar */}
+        <div className="space-y-1">
+          <div className="flex items-center justify-between text-[10px] font-mono">
+            <span className="text-muted-foreground">THROUGHPUT</span>
+            <span className={colors.text}>{project.progress}%</span>
+          </div>
+          <div className="h-1 bg-border/30 rounded-full overflow-hidden">
+            <motion.div
+              className={`h-full ${colors.progress} rounded-full`}
+              initial={{ width: 0 }}
+              animate={isVisible ? { width: `${project.progress}%` } : {}}
+              transition={{ duration: 1.5, delay: 0.5 + index * 0.2 }}
+            />
+          </div>
+        </div>
+
+        {/* Arrow indicator */}
+        <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+          <ArrowUpRight className={`w-4 h-4 ${colors.text}`} />
+        </div>
+      </motion.div>
+    </Link>
+  );
+};
+
+// More Project Tile
+const ProjectTile = ({
+  project,
+  index,
+  isVisible
+}: {
+  project: typeof moreProjects[0];
+  index: number;
+  isVisible: boolean;
+}) => {
+  return (
+    <Link to={`/projects/${project.slug}`}>
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+        transition={{ duration: 0.4, delay: 0.5 + index * 0.05 }}
+        className="group relative aspect-square rounded-lg overflow-hidden border border-border/30 hover:border-primary/50 transition-all duration-300 hover:scale-105"
+      >
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+          style={{ backgroundImage: `url(${project.image})` }}
+        />
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+        
+        {/* Content */}
+        <div className="absolute inset-0 p-3 flex flex-col justify-end">
+          <img 
+            src={project.logo} 
+            alt={project.name}
+            className="h-6 w-auto object-contain mb-1 opacity-80 group-hover:opacity-100 transition-opacity"
+          />
+          <span className="text-xs font-mono text-muted-foreground group-hover:text-foreground transition-colors">
+            {project.name}
+          </span>
+        </div>
+
+        {/* Glow effect on hover */}
+        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+          <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent" />
+        </div>
+      </motion.div>
+    </Link>
+  );
+};
+
+// Stat Card
+const StatCard = ({
+  stat,
+  index,
+  isVisible
+}: {
+  stat: typeof networkStats[0];
+  index: number;
+  isVisible: boolean;
+}) => {
+  const count = useCountUp({
+    end: stat.value,
+    duration: 2000,
+    suffix: stat.suffix,
+    isVisible,
+    decimals: stat.value % 1 !== 0 ? 1 : 0
+  });
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
+      className="text-center p-4 border border-border/30 rounded-lg bg-background/50 backdrop-blur-sm"
+    >
+      <div className="text-2xl md:text-3xl font-bold font-mono text-primary">
+        {stat.prefix || ''}{count}
+      </div>
+      <div className="text-xs text-muted-foreground font-mono uppercase tracking-wider mt-1">
+        {stat.label}
+      </div>
+      <div className="text-[10px] text-muted-foreground/60 mt-0.5">
+        {stat.sublabel}
+      </div>
+    </motion.div>
+  );
+};
+
+export const PerformanceSection = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const [isLive, setIsLive] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => setIsLive(prev => !prev), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section 
+      ref={ref}
+      className="relative py-24 px-6 md:px-12 lg:px-20 overflow-hidden"
+    >
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         {/* Dot Grid */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: 'radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px)',
-        backgroundSize: '40px 40px'
-      }} />
+        <div 
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: 'radial-gradient(circle, hsl(var(--primary)) 1px, transparent 1px)',
+            backgroundSize: '40px 40px'
+          }}
+        />
         
         {/* Scanline effect */}
-        <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 4px)'
-      }} />
+        <div 
+          className="absolute inset-0 opacity-[0.02]"
+          style={{
+            backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.05) 2px, rgba(255,255,255,0.05) 4px)'
+          }}
+        />
+
+        {/* Floating Particles */}
+        {[...Array(6)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-1 h-1 bg-primary/40 rounded-full"
+            style={{ 
+              left: `${15 + i * 15}%`, 
+              top: `${20 + (i % 3) * 25}%` 
+            }}
+            animate={{
+              y: [0, -20, 0],
+              opacity: [0.2, 0.5, 0.2]
+            }}
+            transition={{ 
+              duration: 3 + i * 0.5, 
+              repeat: Infinity, 
+              ease: "easeInOut",
+              delay: i * 0.3 
+            }}
+          />
+        ))}
 
         {/* Connection lines SVG */}
         <svg className="absolute inset-0 w-full h-full opacity-10">
-          <motion.line x1="50%" y1="45%" x2="20%" y2="75%" stroke="hsl(var(--primary))" strokeWidth="1" strokeDasharray="4 4" initial={{
-          pathLength: 0,
-          opacity: 0
-        }} animate={isInView ? {
-          pathLength: 1,
-          opacity: 1
-        } : {}} transition={{
-          duration: 2,
-          delay: 1
-        }} />
-          <motion.line x1="50%" y1="45%" x2="50%" y2="75%" stroke="hsl(var(--primary))" strokeWidth="1" strokeDasharray="4 4" initial={{
-          pathLength: 0,
-          opacity: 0
-        }} animate={isInView ? {
-          pathLength: 1,
-          opacity: 1
-        } : {}} transition={{
-          duration: 2,
-          delay: 1.2
-        }} />
-          <motion.line x1="50%" y1="45%" x2="80%" y2="75%" stroke="hsl(var(--primary))" strokeWidth="1" strokeDasharray="4 4" initial={{
-          pathLength: 0,
-          opacity: 0
-        }} animate={isInView ? {
-          pathLength: 1,
-          opacity: 1
-        } : {}} transition={{
-          duration: 2,
-          delay: 1.4
-        }} />
+          <motion.line
+            x1="16.5%"
+            y1="40%"
+            x2="50%"
+            y2="40%"
+            stroke="hsl(var(--primary))"
+            strokeWidth="1"
+            strokeDasharray="4 4"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
+            transition={{ duration: 2, delay: 1 }}
+          />
+          <motion.line
+            x1="50%"
+            y1="40%"
+            x2="83.5%"
+            y2="40%"
+            stroke="hsl(var(--primary))"
+            strokeWidth="1"
+            strokeDasharray="4 4"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={isInView ? { pathLength: 1, opacity: 1 } : {}}
+            transition={{ duration: 2, delay: 1.2 }}
+          />
           {/* Node points */}
-          <motion.circle cx="50%" cy="45%" r="4" fill="hsl(var(--primary))" initial={{
-          scale: 0
-        }} animate={isInView ? {
-          scale: 1
-        } : {}} transition={{
-          duration: 0.3,
-          delay: 0.8
-        }} />
+          {[16.5, 50, 83.5].map((x, i) => (
+            <motion.circle
+              key={i}
+              cx={`${x}%`}
+              cy="40%"
+              r="3"
+              fill="hsl(var(--primary))"
+              initial={{ scale: 0 }}
+              animate={isInView ? { scale: 1 } : {}}
+              transition={{ duration: 0.3, delay: 0.8 + i * 0.2 }}
+            />
+          ))}
         </svg>
+
+        {/* Central glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px]">
+          <motion.div
+            className="w-full h-full rounded-full bg-gradient-radial from-primary/5 via-transparent to-transparent"
+            animate={{ 
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          />
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={isInView ? {
-        opacity: 1,
-        y: 0
-      } : {}} transition={{
-        duration: 0.6
-      }} className="mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
           <div className="flex items-center gap-3 mb-4">
             <span className="text-primary font-mono text-sm">03</span>
             <div className="w-12 h-px bg-primary/50" />
             <span className="text-muted-foreground font-mono text-xs uppercase tracking-widest">
-              Performance
+              Portfolio
             </span>
+            <div className="flex items-center gap-2 ml-auto">
+              <div className={`w-2 h-2 rounded-full bg-green-500 ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
+              <span className="text-xs font-mono text-green-500">LIVE NETWORK</span>
+            </div>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            The Korea Effect
+            The Portfolio
           </h2>
           <p className="text-muted-foreground max-w-2xl">
-            Real-time performance metrics from our Korea market entries. 
-            <span className="text-foreground"> Data doesn't lie.</span>
+            Data doesn't lie. Our track record speaks for itself.
+            <span className="text-foreground/60 block text-sm mt-1">
+              데이터는 거짓말하지 않습니다. 우리의 실적이 증명합니다.
+            </span>
           </p>
         </motion.div>
 
-        {/* Main Dashboard Grid */}
-        <div className="grid lg:grid-cols-12 gap-6 mb-8">
-          {/* Main Chart - 8 columns */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} animate={isInView ? {
-          opacity: 1,
-          y: 0
-        } : {}} transition={{
-          duration: 0.6,
-          delay: 0.2
-        }} className="lg:col-span-8 relative">
-            <div className="border border-border/50 rounded-xl bg-background/80 backdrop-blur-sm p-6">
-              {/* Chart Header */}
-              <div className="flex items-center justify-between mb-6">
-                <div>
-                  <h3 className="text-lg font-semibold text-foreground">
-                    Before vs After Korea Entry
-                  </h3>
-                  <p className="text-xs text-muted-foreground font-mono">
-                    TOKEN PRICE INDEX + VOLUME
-                  </p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className={`w-2 h-2 rounded-full ${isLive ? 'bg-green-500' : 'bg-green-500/30'} transition-all`} />
-                  <span className="text-xs font-mono text-green-500">LIVE</span>
-                </div>
-              </div>
+        {/* Featured Projects Grid */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {featuredProjects.map((project, index) => (
+            <FeaturedProjectCard
+              key={project.slug}
+              project={project}
+              index={index}
+              isVisible={isInView}
+            />
+          ))}
+        </div>
 
-              {/* Legend */}
-              <div className="flex items-center gap-6 mb-4 text-xs font-mono">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-0.5 bg-muted-foreground" style={{
-                  borderStyle: 'dashed'
-                }} />
-                  <span className="text-muted-foreground">Global Avg. (Without Korea)</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-2 bg-primary rounded-sm" />
-                  <span className="text-foreground">With Korea Strategy</span>
-                </div>
-              </div>
-
-              {/* Chart */}
-              <div className="h-[300px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <ComposedChart data={growthData}>
-                    <defs>
-                      <linearGradient id="koreaGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="hsl(var(--primary))" stopOpacity={0.4} />
-                        <stop offset="95%" stopColor="hsl(var(--primary))" stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.3} vertical={false} />
-                    <XAxis dataKey="week" axisLine={false} tickLine={false} tick={{
-                    fill: 'hsl(var(--muted-foreground))',
-                    fontSize: 11,
-                    fontFamily: 'monospace'
-                  }} />
-                    <YAxis axisLine={false} tickLine={false} tick={{
-                    fill: 'hsl(var(--muted-foreground))',
-                    fontSize: 11,
-                    fontFamily: 'monospace'
-                  }} domain={[0, 600]} />
-                    <Tooltip content={<CustomTooltip />} />
-                    
-                    {/* Korea Entry Reference Line */}
-                    <ReferenceLine x="W5" stroke="hsl(var(--primary))" strokeDasharray="4 4" strokeWidth={2} label={{
-                    value: '🇰🇷 KOREA ENTRY',
-                    position: 'top',
-                    fill: 'hsl(var(--primary))',
-                    fontSize: 10,
-                    fontFamily: 'monospace'
-                  }} />
-                    
-                    {/* Volume Bars */}
-                    <Bar dataKey="volume" fill="hsl(var(--primary))" opacity={0.2} radius={[2, 2, 0, 0]} name="Volume" />
-                    
-                    {/* Global Avg Line (flat) */}
-                    <Line type="monotone" dataKey="global" stroke="hsl(var(--muted-foreground))" strokeWidth={2} strokeDasharray="6 4" dot={false} name="Global Avg" />
-                    
-                    {/* Korea Strategy Line (spike) */}
-                    <Area type="stepAfter" dataKey="korea" stroke="hsl(var(--primary))" strokeWidth={3} fill="url(#koreaGradient)" name="Korea Strategy" />
-                  </ComposedChart>
-                </ResponsiveContainer>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Metrics Cards - 4 columns */}
-          <div className="lg:col-span-4 space-y-4">
-            {metrics.map((metric, index) => <MetricCard key={metric.label} data={metric} index={index} isVisible={isInView} />)}
+        {/* More Projects Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mb-12"
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <Activity className="w-4 h-4 text-primary" />
+            <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+              Extended Network • {moreProjects.length} Projects
+            </span>
           </div>
-        </div>
+          
+          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-9 gap-3">
+            {moreProjects.map((project, index) => (
+              <ProjectTile
+                key={project.slug}
+                project={project}
+                index={index}
+                isVisible={isInView}
+              />
+            ))}
+          </div>
+        </motion.div>
 
-        {/* Case Study Cards */}
-        <div className="grid md:grid-cols-3 gap-6 relative">
-          {featuredCases.map((caseItem, index) => {})}
-        </div>
+        {/* Network Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.6 }}
+        >
+          <div className="flex items-center gap-3 mb-6">
+            <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
+              Network Statistics
+            </span>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+            {networkStats.map((stat, index) => (
+              <StatCard
+                key={stat.label}
+                stat={stat}
+                index={index}
+                isVisible={isInView}
+              />
+            ))}
+          </div>
+
+          {/* Full Progress Bar */}
+          <div className="p-4 border border-border/30 rounded-lg bg-background/50 backdrop-blur-sm">
+            <div className="flex items-center justify-between text-xs font-mono mb-2">
+              <span className="text-muted-foreground">NETWORK STATUS</span>
+              <span className="text-green-500">100% ACTIVE</span>
+            </div>
+            <Progress value={100} className="h-2" />
+          </div>
+        </motion.div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default PerformanceSection;
