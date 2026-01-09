@@ -1350,7 +1350,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
       id: 1, 
       icon: Activity, 
       label: 'Social Signals', 
-      items: ['Twitter/X Mentions', 'Naver Trends', 'Discord Activity', 'Telegram Buzz'],
+      items: ['X Mentions', 'Naver Trends', 'Discord Activity', 'Telegram Buzz'],
       value: liveData.social,
       suffix: ' signals',
       color: 'from-purple-500/20 to-transparent'
