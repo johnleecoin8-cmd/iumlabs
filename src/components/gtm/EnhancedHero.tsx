@@ -1,9 +1,24 @@
-import { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState, useEffect } from 'react';
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { ChevronDown, Zap } from 'lucide-react';
+
+// Seoul Cyberpunk Images
+import seoulGangnamNight from '@/assets/backgrounds/seoul-gangnam-night.jpg';
+import seoulDdpNight from '@/assets/backgrounds/seoul-ddp-night.jpg';
+import seoulTechFuture from '@/assets/backgrounds/seoul-tech-future.jpg';
+import seoulHanriver from '@/assets/backgrounds/seoul-hanriver-twilight.jpg';
+
+const seoulImages = [
+  seoulGangnamNight,
+  seoulDdpNight,
+  seoulTechFuture,
+  seoulHanriver,
+];
 
 const EnhancedHero = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start start", "end start"]
@@ -11,29 +26,43 @@ const EnhancedHero = () => {
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const textY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+
+  // Auto-rotate images every 5 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % seoulImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <section ref={sectionRef} className="relative h-screen bg-black overflow-hidden">
-      {/* Fullscreen Video Background - Seoul Cyberpunk */}
+      {/* Seoul Cyberpunk Image Slideshow Background */}
       <motion.div 
         className="absolute inset-0"
-        style={{ scale: videoScale }}
+        style={{ scale: imageScale }}
       >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-          poster="/images/hero-poster.jpg"
-        >
-          <source src="/videos/hero-background.mp4" type="video/mp4" />
-        </video>
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={currentImageIndex}
+            src={seoulImages[currentImageIndex]}
+            alt="Seoul Cyberpunk"
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </AnimatePresence>
         {/* Dark overlay with gradient for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/80" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/85" />
         {/* Subtle orange glow from bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/15 via-transparent to-transparent" />
+        {/* Scanlines effect for cyberpunk vibe */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)'
+        }} />
       </motion.div>
       
       {/* Main Content */}

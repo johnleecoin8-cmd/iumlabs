@@ -51,11 +51,42 @@ import saharaLogo from '@/assets/logos/sahara-ai.png';
 import kucoinLogo from '@/assets/logos/kucoin.svg';
 
 // ============================================
-// SECTION 2: WHY KOREA - MARKET OPPORTUNITY (FOMO)
+// SECTION 2: WHY KOREA - MARKET OPPORTUNITY (FOMO) + DATA VISUALIZATION
 // ============================================
+import { 
+  BarChart, Bar, XAxis, YAxis, ResponsiveContainer, 
+  AreaChart, Area, Tooltip, Cell,
+  RadialBarChart, RadialBar, Legend
+} from 'recharts';
+
+// Trading Volume Comparison Data
+const volumeData = [
+  { country: 'USA', volume: 100, fill: 'hsl(var(--muted))' },
+  { country: 'Japan', volume: 72, fill: 'hsl(var(--muted))' },
+  { country: 'Korea', volume: 68, fill: 'hsl(var(--primary))' },
+  { country: 'EU', volume: 55, fill: 'hsl(var(--muted))' },
+];
+
+// Kimchi Premium Historical Data
+const kimchiPremiumData = [
+  { year: '2021', premium: 12, peak: 28 },
+  { year: '2022', premium: 6, peak: 15 },
+  { year: '2023', premium: 4, peak: 8 },
+  { year: '2024', premium: 8, peak: 18 },
+  { year: '2025', premium: 10, peak: 22 },
+];
+
+// Altcoin Market Share Data
+const altcoinShareData = [
+  { name: 'Korea', value: 42, fill: 'hsl(var(--primary))' },
+  { name: 'Others', value: 58, fill: 'hsl(var(--muted)/0.3)' },
+];
+
 const WhyKoreaSection = () => {
   const ref = useRef<HTMLDivElement>(null);
+  const chartsRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20%" });
+  const chartsInView = useInView(chartsRef, { once: true, margin: "-10%" });
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"]
@@ -70,7 +101,7 @@ const WhyKoreaSection = () => {
   ];
 
   return (
-    <section ref={ref} className="relative min-h-[90vh] bg-black flex flex-col items-center justify-center overflow-hidden py-20">
+    <section ref={ref} className="relative bg-black flex flex-col items-center justify-center overflow-hidden py-20">
       {/* Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
       
@@ -143,6 +174,190 @@ const WhyKoreaSection = () => {
             </span>
           </motion.div>
         ))}
+      </motion.div>
+
+      {/* ============================================ */}
+      {/* DATA VISUALIZATION SECTION */}
+      {/* ============================================ */}
+      <motion.div 
+        ref={chartsRef}
+        initial={{ opacity: 0, y: 60 }}
+        animate={chartsInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8 }}
+        className="w-full max-w-6xl mx-auto px-6 mb-16"
+      >
+        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+          
+          {/* Chart 1: Global Trading Volume Comparison */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={chartsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.2 }}
+            className="bg-white/[0.02] border border-white/10 rounded-lg p-6"
+          >
+            <h3 className="text-white/80 text-xs tracking-[0.2em] font-medium mb-2">
+              GLOBAL TRADING VOLUME
+            </h3>
+            <p className="text-white/40 text-[10px] mb-4">24h Volume by Region</p>
+            <div className="h-[200px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={volumeData} layout="vertical" barCategoryGap="20%">
+                  <XAxis type="number" hide />
+                  <YAxis 
+                    type="category" 
+                    dataKey="country" 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: 'rgba(255,255,255,0.5)', fontSize: 11 }}
+                    width={50}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'rgba(0,0,0,0.9)', 
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: '8px',
+                      color: '#fff'
+                    }}
+                    formatter={(value: number) => [`${value}%`, 'Volume Share']}
+                  />
+                  <Bar 
+                    dataKey="volume" 
+                    radius={[0, 4, 4, 0]}
+                  >
+                    {volumeData.map((entry, index) => (
+                      <Cell 
+                        key={`cell-${index}`} 
+                        fill={entry.country === 'Korea' ? 'hsl(24, 100%, 50%)' : 'rgba(255,255,255,0.15)'}
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <p className="text-primary text-xs font-medium mt-4 text-center">
+              Korea: Top 3 Globally
+            </p>
+          </motion.div>
+
+          {/* Chart 2: Kimchi Premium History */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={chartsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.35 }}
+            className="bg-white/[0.02] border border-white/10 rounded-lg p-6"
+          >
+            <h3 className="text-white/80 text-xs tracking-[0.2em] font-medium mb-2">
+              KIMCHI PREMIUM TREND
+            </h3>
+            <p className="text-white/40 text-[10px] mb-4">Historical Price Premium (%)</p>
+            <div className="h-[200px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={kimchiPremiumData}>
+                  <defs>
+                    <linearGradient id="premiumGradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="hsl(24, 100%, 50%)" stopOpacity={0.4}/>
+                      <stop offset="95%" stopColor="hsl(24, 100%, 50%)" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis 
+                    dataKey="year" 
+                    axisLine={false}
+                    tickLine={false}
+                    tick={{ fill: 'rgba(255,255,255,0.4)', fontSize: 10 }}
+                  />
+                  <YAxis 
+                    hide
+                    domain={[0, 30]}
+                  />
+                  <Tooltip 
+                    contentStyle={{ 
+                      backgroundColor: 'rgba(0,0,0,0.9)', 
+                      border: '1px solid rgba(255,255,255,0.1)',
+                      borderRadius: '8px',
+                      color: '#fff'
+                    }}
+                    formatter={(value: number, name: string) => [
+                      `${value}%`, 
+                      name === 'premium' ? 'Avg Premium' : 'Peak Premium'
+                    ]}
+                  />
+                  <Area 
+                    type="monotone" 
+                    dataKey="peak" 
+                    stroke="rgba(255,107,0,0.3)" 
+                    fill="none"
+                    strokeWidth={1}
+                    strokeDasharray="4 4"
+                  />
+                  <Area 
+                    type="monotone" 
+                    dataKey="premium" 
+                    stroke="hsl(24, 100%, 50%)" 
+                    fill="url(#premiumGradient)"
+                    strokeWidth={2}
+                  />
+                </AreaChart>
+              </ResponsiveContainer>
+            </div>
+            <p className="text-primary text-xs font-medium mt-4 text-center">
+              5-15% Average Premium
+            </p>
+          </motion.div>
+
+          {/* Chart 3: Altcoin Market Dominance */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={chartsInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.5 }}
+            className="bg-white/[0.02] border border-white/10 rounded-lg p-6"
+          >
+            <h3 className="text-white/80 text-xs tracking-[0.2em] font-medium mb-2">
+              ALTCOIN DOMINANCE
+            </h3>
+            <p className="text-white/40 text-[10px] mb-4">Korea vs Rest of World</p>
+            <div className="h-[200px] flex items-center justify-center">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadialBarChart 
+                  cx="50%" 
+                  cy="50%" 
+                  innerRadius="60%" 
+                  outerRadius="90%" 
+                  barSize={20} 
+                  data={[altcoinShareData[0]]}
+                  startAngle={90}
+                  endAngle={-270}
+                >
+                  <RadialBar
+                    background={{ fill: 'rgba(255,255,255,0.05)' }}
+                    dataKey="value"
+                    cornerRadius={10}
+                    fill="hsl(24, 100%, 50%)"
+                  />
+                  <text 
+                    x="50%" 
+                    y="50%" 
+                    textAnchor="middle" 
+                    dominantBaseline="middle"
+                    className="fill-white text-2xl font-black"
+                  >
+                    42%
+                  </text>
+                  <text 
+                    x="50%" 
+                    y="62%" 
+                    textAnchor="middle" 
+                    className="fill-white/40 text-[10px]"
+                  >
+                    Global Share
+                  </text>
+                </RadialBarChart>
+              </ResponsiveContainer>
+            </div>
+            <p className="text-primary text-xs font-medium mt-4 text-center">
+              #1 in Altcoin Trading
+            </p>
+          </motion.div>
+        </div>
       </motion.div>
 
       {/* Kimchi Premium Insight */}
