@@ -1291,11 +1291,11 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
     onchain: 847,
     social: 1243,
     market: 2891,
-    // Output metrics
-    timing: 94,
-    channels: 87,
-    budget: 92,
-    volume: 89
+    // Output metrics (range: 55-98%)
+    timing: 78,
+    channels: 65,
+    budget: 88,
+    volume: 72
   });
 
   useEffect(() => {
@@ -1322,10 +1322,10 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
         onchain: Math.floor(800 + Math.random() * 100),
         social: Math.floor(1200 + Math.random() * 100),
         market: Math.floor(2800 + Math.random() * 200),
-        timing: Math.floor(92 + Math.random() * 6),
-        channels: Math.floor(85 + Math.random() * 10),
-        budget: Math.floor(90 + Math.random() * 8),
-        volume: Math.floor(85 + Math.random() * 10)
+        timing: Math.floor(55 + Math.random() * 43),
+        channels: Math.floor(55 + Math.random() * 43),
+        budget: Math.floor(55 + Math.random() * 43),
+        volume: Math.floor(55 + Math.random() * 43)
       }));
     }, 2500);
 
