@@ -120,7 +120,7 @@ const LeadershipSection = () => {
               <div>
                 <span className="text-white/40 text-sm tracking-wider uppercase mb-2 block">Founder & CEO</span>
                 <a 
-                  href="https://www.linkedin.com/in/jameslee-iumlabs" 
+                  href="https://www.linkedin.com/in/james-l-13a998251" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-3 group/link"
