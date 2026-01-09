@@ -418,6 +418,37 @@ const HeroSection = () => {
           <AnimatedStat value={340} suffix="%" label="Avg. Growth Rate" delay={1.2} isVisible={isInView} />
         </motion.div>
 
+        {/* Before → After Transformation Bar */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.4 }}
+          className="mt-12 pt-8 border-t border-border/30"
+        >
+          <div className="grid grid-cols-3 gap-6 md:gap-12">
+            {[
+              { label: 'KR Volume', before: '$0', after: '$120M+' },
+              { label: 'Mindshare', before: '#50+', after: '#1~3' },
+              { label: 'Community', before: '0', after: '50K+' }
+            ].map((item) => (
+              <div key={item.label} className="text-center">
+                <p className="text-[10px] text-muted-foreground tracking-widest uppercase mb-2">
+                  {item.label}
+                </p>
+                <div className="flex items-center justify-center gap-2">
+                  <span className="text-muted-foreground/40 text-sm">
+                    {item.before}
+                  </span>
+                  <span className="text-muted-foreground/30">→</span>
+                  <span className="text-primary text-base md:text-lg font-medium">
+                    {item.after}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Scroll indicator */}
         <motion.div initial={{
         opacity: 0
@@ -986,213 +1017,6 @@ const CircularProgressRing = ({
       </div>
       <p className="text-sm font-medium text-foreground mt-4">{label}</p>
     </div>;
-};
-
-// ============================================
-// ANIMATED BAR CHART COMPONENT
-// ============================================
-const AnimatedBarChart = ({
-  isVisible
-}: {
-  isVisible: boolean;
-}) => {
-  const data = [{
-    label: 'Q1',
-    value: 65,
-    color: 'primary'
-  }, {
-    label: 'Q2',
-    value: 85,
-    color: 'primary'
-  }, {
-    label: 'Q3',
-    value: 120,
-    color: 'primary'
-  }, {
-    label: 'Q4',
-    value: 180,
-    color: 'primary'
-  }];
-  const maxValue = Math.max(...data.map(d => d.value));
-  return <div className="h-48 flex items-end justify-center gap-4">
-      {data.map((item, i) => <div key={item.label} className="flex flex-col items-center gap-2 flex-1 max-w-16">
-          <motion.div className="w-full bg-primary/80 rounded-t relative overflow-hidden" initial={{
-        height: 0
-      }} animate={isVisible ? {
-        height: `${item.value / maxValue * 100}%`
-      } : {
-        height: 0
-      }} transition={{
-        delay: i * 0.15,
-        duration: 0.8,
-        ease: "easeOut"
-      }}>
-            {/* Shimmer effect */}
-            <motion.div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/20 to-transparent" initial={{
-          y: '100%'
-        }} animate={isVisible ? {
-          y: '-100%'
-        } : {
-          y: '100%'
-        }} transition={{
-          delay: i * 0.15 + 0.8,
-          duration: 0.6
-        }} />
-            
-            {/* Value label */}
-            <motion.span className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-medium text-primary" initial={{
-          opacity: 0
-        }} animate={isVisible ? {
-          opacity: 1
-        } : {
-          opacity: 0
-        }} transition={{
-          delay: i * 0.15 + 0.5
-        }}>
-              +{item.value}%
-            </motion.span>
-          </motion.div>
-          <span className="text-xs text-muted-foreground">{item.label}</span>
-        </div>)}
-    </div>;
-};
-
-// ============================================
-// RESULTS DASHBOARD SECTION - Full Width Impact Design
-// ============================================
-const ResultsDashboardSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, {
-    once: true,
-    margin: "-10%"
-  });
-  
-  const transformations = [
-    {
-      metric: 'KR Daily Volume',
-      before: '$0',
-      after: '$120M+',
-      highlight: 'From invisible to market leader'
-    },
-    {
-      metric: 'Mindshare Rank',
-      before: '#50+',
-      after: '#1~3',
-      highlight: 'Category-defining presence'
-    },
-    {
-      metric: 'Korean Community',
-      before: '0',
-      after: '50K+',
-      highlight: 'Organic fanbase built'
-    }
-  ];
-
-  return (
-    <section ref={ref} className="relative py-32 bg-background border-b border-border overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.02] via-transparent to-primary/[0.02]" />
-      
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
-        {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          className="text-center mb-20"
-        >
-          <p className="text-primary text-sm tracking-widest uppercase mb-4 font-medium">
-            03 Results
-          </p>
-          <h2 className="text-4xl md:text-6xl lg:text-7xl font-medium text-foreground">
-            The Transformation
-          </h2>
-        </motion.div>
-
-        {/* Full-width transformation rows */}
-        <div className="space-y-0">
-          {transformations.map((item, i) => (
-            <motion.div
-              key={item.metric}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
-              animate={isInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: i * 0.2 + 0.3, duration: 0.7 }}
-              className="group relative border-t border-border first:border-t-0"
-            >
-              <div className="grid grid-cols-12 items-center py-12 md:py-16 gap-4 md:gap-8">
-                {/* Metric Label */}
-                <div className="col-span-12 md:col-span-3">
-                  <p className="text-xs tracking-widest text-muted-foreground uppercase mb-2">
-                    {item.metric}
-                  </p>
-                  <p className="text-sm text-muted-foreground/70 hidden md:block">
-                    {item.highlight}
-                  </p>
-                </div>
-                
-                {/* Before Value */}
-                <div className="col-span-4 md:col-span-3 text-center md:text-right">
-                  <p className="text-3xl md:text-5xl lg:text-6xl font-light text-muted-foreground/40 line-through decoration-muted-foreground/20 decoration-2">
-                    {item.before}
-                  </p>
-                </div>
-                
-                {/* Arrow / Divider */}
-                <div className="col-span-4 md:col-span-2 flex items-center justify-center">
-                  <motion.div 
-                    className="flex items-center gap-2"
-                    animate={{ x: [0, 10, 0] }}
-                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    <div className="w-8 md:w-16 h-px bg-gradient-to-r from-muted-foreground/20 via-primary to-primary" />
-                    <ArrowRight className="w-5 h-5 md:w-6 md:h-6 text-primary" />
-                  </motion.div>
-                </div>
-                
-                {/* After Value */}
-                <div className="col-span-4 md:col-span-4 text-center md:text-left">
-                  <motion.p 
-                    className="text-4xl md:text-6xl lg:text-7xl font-medium text-primary"
-                    initial={{ scale: 0.9 }}
-                    animate={isInView ? { scale: 1 } : {}}
-                    transition={{ delay: i * 0.2 + 0.5, type: "spring", stiffness: 200 }}
-                  >
-                    {item.after}
-                  </motion.p>
-                </div>
-              </div>
-              
-              {/* Hover highlight line */}
-              <motion.div 
-                className="absolute bottom-0 left-0 h-px bg-gradient-to-r from-primary via-primary to-transparent"
-                initial={{ scaleX: 0 }}
-                whileHover={{ scaleX: 1 }}
-                transition={{ duration: 0.3 }}
-                style={{ transformOrigin: 'left' }}
-              />
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Bottom divider line */}
-        <div className="border-t border-border" />
-
-        {/* Growth Chart */}
-        <motion.div 
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1 }}
-          className="mt-20 max-w-3xl mx-auto"
-        >
-          <p className="text-xs tracking-widest text-muted-foreground uppercase mb-8 text-center">
-            Quarterly Growth Trajectory
-          </p>
-          <div className="p-8 border border-border bg-muted/10">
-            <AnimatedBarChart isVisible={isInView} />
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
 };
 
 // ============================================
@@ -2391,7 +2215,6 @@ const GTMService = () => {
         <HeroSection />
         <MarketIntelligenceSection />
         <FrameworkSection />
-        <ResultsDashboardSection />
         <StrategyInActionSection />
         <TestimonialsSection />
         <ClientLogosMarquee />
