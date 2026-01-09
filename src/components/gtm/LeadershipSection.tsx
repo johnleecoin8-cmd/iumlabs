@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
-import { User, Target, TrendingUp, Newspaper, ChevronRight } from "lucide-react";
+import { Target, TrendingUp, Newspaper, ChevronRight } from "lucide-react";
+import ceoPhoto from "@/assets/team/ceo-profile.png";
+import teamMember1Photo from "@/assets/team/team-member-1.jpeg";
 
 const LeadershipSection = () => {
   const ceoBackground = [
@@ -13,6 +15,7 @@ const LeadershipSection = () => {
       role: "Head of Strategy",
       nickname: "The Analyst",
       icon: Target,
+      photo: teamMember1Photo,
       background: [
         "Former VC Research Analyst",
         "Specialist in Tokenomics & GTM Strategy"
@@ -23,6 +26,7 @@ const LeadershipSection = () => {
       role: "Head of Operations",
       nickname: "The Executor",
       icon: TrendingUp,
+      photo: null,
       background: [
         "Ex-Tier 1 Exchange Listing Manager",
         "Managed 50+ Listing Campaigns"
@@ -33,6 +37,7 @@ const LeadershipSection = () => {
       role: "Head of Growth",
       nickname: "The Narrative Builder",
       icon: Newspaper,
+      photo: null,
       background: [
         "Former Chief Editor at Crypto Media",
         "Expert in Viral Marketing & KOL Mgmt"
@@ -89,22 +94,19 @@ const LeadershipSection = () => {
             {/* CEO Photo Area */}
             <div className="relative group">
               <div className="relative aspect-[4/5] bg-gradient-to-br from-white/[0.08] to-white/[0.02] rounded-2xl overflow-hidden border border-white/10">
-                {/* Placeholder for CEO Photo */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-white/10 flex items-center justify-center">
-                      <User className="w-16 h-16 text-white/40" />
-                    </div>
-                    <span className="text-white/30 text-sm tracking-wider uppercase">CEO Profile Photo</span>
-                  </div>
-                </div>
+                {/* CEO Photo */}
+                <img 
+                  src={ceoPhoto} 
+                  alt="ium labs CEO" 
+                  className="absolute inset-0 w-full h-full object-cover object-top grayscale-[30%] group-hover:grayscale-0 transition-all duration-700"
+                />
                 
                 {/* Decorative Elements */}
                 <div className="absolute top-4 left-4 w-8 h-8 border-l-2 border-t-2 border-white/20" />
                 <div className="absolute bottom-4 right-4 w-8 h-8 border-r-2 border-b-2 border-white/20" />
                 
                 {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               </div>
               
               {/* Floating Badge */}
@@ -169,10 +171,20 @@ const LeadershipSection = () => {
                 className="group relative"
               >
                 <div className="relative p-8 bg-gradient-to-br from-white/[0.06] to-white/[0.02] rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-500 h-full">
-                  {/* Icon */}
-                  <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center mb-6 group-hover:bg-white/15 transition-colors duration-300">
-                    <member.icon className="w-7 h-7 text-white/70" />
-                  </div>
+                  {/* Photo or Icon */}
+                  {member.photo ? (
+                    <div className="w-16 h-16 rounded-xl overflow-hidden mb-6 border border-white/10">
+                      <img 
+                        src={member.photo} 
+                        alt={member.role}
+                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center mb-6 group-hover:bg-white/15 transition-colors duration-300">
+                      <member.icon className="w-7 h-7 text-white/70" />
+                    </div>
+                  )}
 
                   {/* Role & Nickname */}
                   <div className="mb-6">
