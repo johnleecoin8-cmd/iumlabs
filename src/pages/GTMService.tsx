@@ -449,200 +449,277 @@ const AnimatedProgressBar = ({
 };
 
 // ============================================
-// KOREA MAP SVG COMPONENT
+// VOLUME FLIPPENING CHART
 // ============================================
-const KoreaMapVisualization = ({ isVisible }: { isVisible: boolean }) => {
-  const [activePoint, setActivePoint] = useState<number | null>(null);
-  
-  const dataPoints = [
-    { id: 0, x: 65, y: 25, city: 'Seoul', value: '#1', label: 'Trading Hub', delay: 0.2 },
-    { id: 1, x: 75, y: 45, city: 'Busan', value: '#2', label: 'Tech Center', delay: 0.4 },
-    { id: 2, x: 45, y: 35, city: 'Incheon', value: '#3', label: 'Finance Hub', delay: 0.6 },
-    { id: 3, x: 55, y: 50, city: 'Daegu', value: '#4', label: 'Growing Market', delay: 0.8 },
+const VolumeFlippeningChart = ({ isVisible }: { isVisible: boolean }) => {
+  const exchangeData = [
+    { name: 'Upbit (KRW)', volume: 800, percentage: 100, highlight: true },
+    { name: 'Binance (USDT)', volume: 750, percentage: 94, highlight: false },
+    { name: 'Coinbase (USD)', volume: 120, percentage: 15, highlight: false },
   ];
 
   return (
-    <div className="relative w-full aspect-[4/5] max-w-md mx-auto">
-      {/* Glow background */}
-      <motion.div
-        className="absolute inset-0 opacity-30"
-        style={{
-          background: 'radial-gradient(ellipse at 60% 40%, hsl(var(--primary) / 0.3) 0%, transparent 60%)',
-        }}
-        animate={{
-          scale: [1, 1.05, 1],
-          opacity: [0.3, 0.4, 0.3],
-        }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-      />
-
-      {/* Korea Map SVG */}
-      <svg viewBox="0 0 100 100" className="w-full h-full relative z-10">
-        {/* Simplified Korea peninsula shape */}
-        <motion.path
-          d="M55 5 
-             C 70 5, 85 15, 85 30
-             C 85 45, 80 55, 75 65
-             C 70 75, 65 85, 60 90
-             C 55 95, 50 95, 45 90
-             C 40 85, 35 75, 30 65
-             C 25 55, 20 45, 25 35
-             C 30 25, 40 15, 55 5 Z"
-          fill="none"
-          stroke="hsl(var(--primary))"
-          strokeWidth="0.5"
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={isVisible ? { pathLength: 1, opacity: 1 } : {}}
-          transition={{ duration: 2, ease: "easeInOut" }}
-        />
-        
-        {/* Gradient fill */}
-        <motion.path
-          d="M55 5 
-             C 70 5, 85 15, 85 30
-             C 85 45, 80 55, 75 65
-             C 70 75, 65 85, 60 90
-             C 55 95, 50 95, 45 90
-             C 40 85, 35 75, 30 65
-             C 25 55, 20 45, 25 35
-             C 30 25, 40 15, 55 5 Z"
-          fill="url(#koreaGradient)"
-          initial={{ opacity: 0 }}
-          animate={isVisible ? { opacity: 0.3 } : {}}
-          transition={{ delay: 1, duration: 1 }}
-        />
-
-        {/* Gradient definition */}
-        <defs>
-          <linearGradient id="koreaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.5" />
-            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
-          </linearGradient>
-          
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-            <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
-            </feMerge>
-          </filter>
-        </defs>
-
-        {/* Grid lines inside Korea */}
-        {[20, 40, 60, 80].map((y, i) => (
-          <motion.line
-            key={`h-${i}`}
-            x1="25"
-            y1={y}
-            x2="85"
-            y2={y}
-            stroke="hsl(var(--primary) / 0.1)"
-            strokeWidth="0.3"
-            strokeDasharray="2 2"
-            initial={{ opacity: 0 }}
-            animate={isVisible ? { opacity: 1 } : {}}
-            transition={{ delay: 1.5 + i * 0.1 }}
-          />
-        ))}
-
-        {/* Data points */}
-        {dataPoints.map((point) => (
-          <g key={point.id}>
-            {/* Pulse ring */}
-            <motion.circle
-              cx={point.x}
-              cy={point.y}
-              r="4"
-              fill="none"
-              stroke="hsl(var(--primary))"
-              strokeWidth="0.5"
-              initial={{ scale: 0, opacity: 0 }}
-              animate={isVisible ? { 
-                scale: [1, 2, 1],
-                opacity: [0.8, 0, 0.8],
-              } : {}}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                delay: point.delay + 1,
-                ease: "easeOut",
-              }}
-            />
-            
-            {/* Center dot */}
-            <motion.circle
-              cx={point.x}
-              cy={point.y}
-              r="2"
-              fill="hsl(var(--primary))"
-              filter="url(#glow)"
-              initial={{ scale: 0 }}
-              animate={isVisible ? { scale: 1 } : {}}
-              transition={{ delay: point.delay + 1, type: "spring" }}
-              onMouseEnter={() => setActivePoint(point.id)}
-              onMouseLeave={() => setActivePoint(null)}
-              className="cursor-pointer"
-            />
-          </g>
-        ))}
-      </svg>
-
-      {/* Data point tooltips */}
-      {dataPoints.map((point) => (
-        <motion.div
-          key={`tooltip-${point.id}`}
-          className="absolute pointer-events-none"
-          style={{
-            left: `${point.x}%`,
-            top: `${point.y}%`,
-            transform: 'translate(-50%, -150%)',
-          }}
-          initial={{ opacity: 0, y: 10 }}
-          animate={activePoint === point.id || (isVisible && point.id === 0) ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-          transition={{ duration: 0.2 }}
-        >
-          <div className="bg-background/90 backdrop-blur-sm border border-primary/50 px-3 py-2 text-center">
-            <p className="text-xs font-medium text-primary">{point.city}</p>
-            <p className="text-lg font-bold text-foreground">{point.value}</p>
-            <p className="text-[10px] text-muted-foreground">{point.label}</p>
+    <div className="space-y-4">
+      <p className="text-xs tracking-widest text-primary font-medium mb-6">
+        TOKEN X — 24H TRADING VOLUME EXAMPLE
+      </p>
+      {exchangeData.map((item, i) => (
+        <div key={item.name} className="space-y-2">
+          <div className="flex justify-between items-center">
+            <span className={`text-sm font-medium ${item.highlight ? 'text-primary' : 'text-foreground/80'}`}>
+              {item.name}
+              {item.highlight && (
+                <motion.span
+                  className="ml-2 text-xs bg-primary/20 text-primary px-2 py-0.5 rounded"
+                  animate={{ opacity: [1, 0.5, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  LEADING
+                </motion.span>
+              )}
+            </span>
+            <span className={`text-sm font-mono ${item.highlight ? 'text-primary font-bold' : 'text-muted-foreground'}`}>
+              ${item.volume}M
+            </span>
           </div>
-        </motion.div>
-      ))}
-
-      {/* Legend */}
-      <motion.div
-        className="absolute bottom-0 left-0 right-0 flex justify-center gap-6"
-        initial={{ opacity: 0, y: 20 }}
-        animate={isVisible ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 2 }}
-      >
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="text-xs text-muted-foreground">Trading Hub</span>
+          <div className="h-3 bg-muted rounded-full overflow-hidden relative">
+            <motion.div
+              className={`h-full rounded-full ${item.highlight ? 'bg-gradient-to-r from-primary to-primary/70' : 'bg-foreground/30'}`}
+              initial={{ width: 0 }}
+              animate={isVisible ? { width: `${item.percentage}%` } : { width: 0 }}
+              transition={{ duration: 1.2, ease: "easeOut", delay: i * 0.2 }}
+            />
+            {item.highlight && (
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                initial={{ x: '-100%' }}
+                animate={isVisible ? { x: '200%' } : { x: '-100%' }}
+                transition={{ duration: 1.5, delay: 1.5, repeat: Infinity, repeatDelay: 3 }}
+              />
+            )}
+          </div>
         </div>
-      </motion.div>
+      ))}
+      <p className="text-xs text-muted-foreground mt-4 italic">
+        *Real example: Upbit leads global market for top altcoins
+      </p>
     </div>
   );
 };
 
 // ============================================
-// MARKET INTELLIGENCE - Why Korea?
+// GLOBAL LIQUIDITY MAP ANIMATION
+// ============================================
+const GlobalLiquidityMap = ({ isVisible }: { isVisible: boolean }) => {
+  const [pulseIndex, setPulseIndex] = useState(0);
+
+  useEffect(() => {
+    if (!isVisible) return;
+    const interval = setInterval(() => {
+      setPulseIndex(prev => (prev + 1) % 4);
+    }, 1500);
+    return () => clearInterval(interval);
+  }, [isVisible]);
+
+  const regions = [
+    { id: 'korea', x: 78, y: 35, name: 'Seoul', isSource: true },
+    { id: 'usa', x: 22, y: 38, name: 'USA', isSource: false },
+    { id: 'europe', x: 48, y: 30, name: 'Europe', isSource: false },
+    { id: 'asia', x: 68, y: 50, name: 'Asia', isSource: false },
+  ];
+
+  return (
+    <div className="relative aspect-[2/1] w-full max-w-lg mx-auto">
+      {/* World map simplified silhouette */}
+      <svg viewBox="0 0 100 50" className="w-full h-full">
+        {/* Background grid */}
+        {[...Array(10)].map((_, i) => (
+          <line
+            key={`grid-${i}`}
+            x1={i * 10}
+            y1="0"
+            x2={i * 10}
+            y2="50"
+            stroke="hsl(var(--foreground) / 0.05)"
+            strokeWidth="0.2"
+          />
+        ))}
+        {[...Array(5)].map((_, i) => (
+          <line
+            key={`grid-h-${i}`}
+            x1="0"
+            y1={i * 10}
+            x2="100"
+            y2={i * 10}
+            stroke="hsl(var(--foreground) / 0.05)"
+            strokeWidth="0.2"
+          />
+        ))}
+
+        {/* Connection lines from Seoul */}
+        {regions.filter(r => !r.isSource).map((region, i) => (
+          <motion.path
+            key={`line-${region.id}`}
+            d={`M 78 35 Q ${(78 + region.x) / 2} ${Math.min(region.y, 35) - 10} ${region.x} ${region.y}`}
+            fill="none"
+            stroke="hsl(var(--primary) / 0.3)"
+            strokeWidth="0.5"
+            strokeDasharray="2 2"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={isVisible ? { pathLength: 1, opacity: 1 } : {}}
+            transition={{ duration: 1.5, delay: 0.5 + i * 0.2 }}
+          />
+        ))}
+
+        {/* Animated pulse traveling from Seoul */}
+        {regions.filter(r => !r.isSource).map((region, i) => (
+          <motion.circle
+            key={`pulse-${region.id}`}
+            r="1.5"
+            fill="hsl(var(--primary))"
+            initial={{ opacity: 0 }}
+            animate={pulseIndex === i + 1 ? {
+              opacity: [0, 1, 1, 0],
+              cx: [78, (78 + region.x) / 2, region.x],
+              cy: [35, Math.min(region.y, 35) - 10, region.y],
+            } : { opacity: 0 }}
+            transition={{ duration: 1.2, ease: "easeOut" }}
+          />
+        ))}
+
+        {/* Region points */}
+        {regions.map((region) => (
+          <g key={region.id}>
+            {/* Outer pulse for Seoul */}
+            {region.isSource && (
+              <motion.circle
+                cx={region.x}
+                cy={region.y}
+                r="3"
+                fill="none"
+                stroke="hsl(var(--primary))"
+                strokeWidth="0.5"
+                animate={{
+                  scale: [1, 2.5, 1],
+                  opacity: [0.8, 0, 0.8],
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            )}
+            <motion.circle
+              cx={region.x}
+              cy={region.y}
+              r={region.isSource ? 2.5 : 1.5}
+              fill={region.isSource ? "hsl(var(--primary))" : "hsl(var(--foreground) / 0.5)"}
+              initial={{ scale: 0 }}
+              animate={isVisible ? { scale: 1 } : { scale: 0 }}
+              transition={{ delay: region.isSource ? 0.3 : 1 + regions.indexOf(region) * 0.1 }}
+              style={region.isSource ? { filter: 'drop-shadow(0 0 4px hsl(var(--primary)))' } : {}}
+            />
+            <motion.text
+              x={region.x}
+              y={region.y + (region.isSource ? -5 : 5)}
+              textAnchor="middle"
+              className={`text-[3px] ${region.isSource ? 'fill-primary font-bold' : 'fill-muted-foreground'}`}
+              initial={{ opacity: 0 }}
+              animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ delay: 1.5 }}
+            >
+              {region.name}
+            </motion.text>
+          </g>
+        ))}
+      </svg>
+
+      {/* Caption */}
+      <motion.p
+        className="absolute bottom-0 left-0 right-0 text-center text-xs text-primary font-medium"
+        initial={{ opacity: 0 }}
+        animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ delay: 2 }}
+      >
+        "Liquidity starts in Seoul, ripples globally."
+      </motion.p>
+    </div>
+  );
+};
+
+// ============================================
+// KINGMAKER STATS CARDS
+// ============================================
+const KingmakerStats = ({ isVisible }: { isVisible: boolean }) => {
+  const stats = [
+    { value: '#2', label: 'Global Fiat Volume', sublabel: 'KRW Pairs' },
+    { value: '#1', label: 'Altcoin Velocity', sublabel: '5x Global Avg' },
+    { value: '90%', label: 'Market Share', sublabel: 'Upbit + Bithumb' },
+  ];
+
+  return (
+    <div className="grid grid-cols-3 gap-4">
+      {stats.map((stat, i) => (
+        <motion.div
+          key={stat.label}
+          className="text-center p-4 border border-border bg-background/50 hover:border-primary/50 transition-colors"
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: i * 0.15 }}
+        >
+          <motion.p
+            className="text-2xl md:text-3xl font-bold text-primary"
+            initial={{ scale: 0 }}
+            animate={isVisible ? { scale: 1 } : { scale: 0 }}
+            transition={{ delay: i * 0.15 + 0.3, type: "spring" }}
+          >
+            {stat.value}
+          </motion.p>
+          <p className="text-xs font-medium text-foreground mt-1">{stat.label}</p>
+          <p className="text-[10px] text-muted-foreground">{stat.sublabel}</p>
+        </motion.div>
+      ))}
+    </div>
+  );
+};
+
+// ============================================
+// MARKET INTELLIGENCE - THE KINGMAKER EXCHANGES
 // ============================================
 const MarketIntelligenceSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
-  // Fiat Trading Volume Data (CEX 기준 - 2024-2025)
-  const volumeData = [
-    { label: 'USD (United States)', percentage: 100, value: '#1', isHighlight: false },
-    { label: 'KRW (South Korea)', percentage: 85, value: '#2', isHighlight: true },
-    { label: 'EUR (Europe)', percentage: 35, value: '#3', isHighlight: false },
-    { label: 'TRY (Turkey)', percentage: 25, value: '#4', isHighlight: false },
-    { label: 'JPY (Japan)', percentage: 18, value: '#5', isHighlight: false },
+  const kingmakerPoints = [
+    {
+      tag: 'DOMINANCE OVER DOLLAR',
+      title: 'Leading Global Price Discovery',
+      description: "For top altcoins, Upbit and Bithumb frequently surpass Binance in daily trading volume. We don't just follow the global market; we move it.",
+    },
+    {
+      tag: 'THE VERIFICATION STANDARD',
+      title: 'Ultimate Seal of Approval',
+      description: "Listing on Korea's DAXA exchanges (Upbit, Bithumb, Coinone) is the ultimate verification. It signals the strictest regulatory due diligence in the industry.",
+    },
+    {
+      tag: 'STICKY LIQUIDITY',
+      title: 'Organic Buy Pressure',
+      description: "Unlike institutional market makers who pull liquidity during volatility, Korean volume is driven by a massive retail army. This creates sticky, organic buy pressure.",
+    },
+  ];
+
+  const velocityPoints = [
+    {
+      metric: '5x',
+      label: 'Higher Trade Velocity',
+      description: 'Korean traders execute trades 5x more frequently than global average.',
+    },
+    {
+      metric: '60%',
+      label: 'Rallies Started in KRW',
+      description: '60% of major altcoin rallies in 2024 were preceded by KRW volume spikes.',
+    },
   ];
 
   return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border">
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
@@ -651,101 +728,115 @@ const MarketIntelligenceSection = () => {
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
           01 The Strategic Imperative
         </p>
-        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-16">
-          Why Korea?
+        <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-4">
+          The Kingmaker Exchanges
         </h2>
+        <p className="text-lg text-muted-foreground mb-16 max-w-2xl">
+          Where global price discovery begins.
+        </p>
 
-        <div className="grid lg:grid-cols-3 gap-12 lg:gap-8 mb-16">
-          {/* Left: Korea Map Visualization */}
-          <div className="lg:col-span-1">
-            <KoreaMapVisualization isVisible={isInView} />
+        {/* Kingmaker Stats */}
+        <div className="mb-16">
+          <KingmakerStats isVisible={isInView} />
+        </div>
+
+        {/* Main Content Grid */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
+          {/* Left: Volume Chart + Map */}
+          <div className="space-y-12">
+            <VolumeFlippeningChart isVisible={isInView} />
+            <GlobalLiquidityMap isVisible={isInView} />
           </div>
 
-          {/* Middle: Data Visualization */}
+          {/* Right: Kingmaker Points */}
           <div className="space-y-8">
-            <div>
-            <p className="text-xs tracking-widest text-primary font-medium mb-4">
-                GLOBAL FIAT TRADING VOLUME (CEX)
-              </p>
-              <div className="space-y-4">
-                {volumeData.map((item, i) => (
-                  <AnimatedProgressBar
-                    key={item.label}
-                    label={item.label}
-                    percentage={item.percentage}
-                    value={item.value}
-                    delay={i * 0.15}
-                    isHighlight={item.isHighlight}
-                    isVisible={isInView}
-                  />
-                ))}
-              </div>
-            </div>
-            
-            {/* Key Stats */}
-            <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="p-4 border border-primary/50 bg-primary/5">
-                <p className="text-2xl md:text-3xl font-bold text-primary">30%+</p>
-                <p className="text-xs text-muted-foreground mt-1">Global Altcoin Volume</p>
-              </div>
-              <div className="p-4 border border-border bg-background">
-                <p className="text-2xl md:text-3xl font-medium text-foreground">0.6%</p>
-                <p className="text-xs text-muted-foreground mt-1">World Population</p>
-              </div>
-            </div>
-            
-            {/* Insight callout */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.6 }}
-              className="p-4 bg-primary/10 border-l-2 border-primary"
-            >
-              <p className="text-sm text-foreground leading-relaxed">
-                <span className="font-semibold">The Density Effect:</span> 0.6% of world population generates 30%+ of global altcoin trading.
-              </p>
-            </motion.div>
-          </div>
-
-          {/* Right: Insights */}
-          <div className="space-y-6">
-            <div className="space-y-2">
-              <p className="text-xs tracking-widest text-primary font-medium">FIAT POWERHOUSE</p>
-              <p className="text-xl font-medium text-foreground">World's #2 Fiat Market</p>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                KRW consistently ranks as #2 most traded fiat in crypto, often challenging USD. Surpassing EUR and JPY.
-              </p>
-            </div>
-            
-            <div className="space-y-2">
-              <p className="text-xs tracking-widest text-primary font-medium">RETAIL DOMINANCE</p>
-              <p className="text-xl font-medium text-foreground">Global #1 Retail Activity</p>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Korea leads in retail investor participation. When they believe in a project, they go all in.
-              </p>
-            </div>
-
-            <div className="space-y-2">
-              <p className="text-xs tracking-widest text-primary font-medium">LIQUIDITY ACCESS</p>
-              <p className="text-xl font-medium text-foreground">Most Liquid Fiat Pair</p>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                Launch in Korea = plug into world's most liquid fiat pair after USD. Direct access to real buying power.
-              </p>
-            </div>
+            {kingmakerPoints.map((point, i) => (
+              <motion.div
+                key={point.tag}
+                className="p-6 border border-border bg-background hover:border-primary/50 transition-all duration-300 group"
+                initial={{ opacity: 0, x: 30 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: i * 0.15 }}
+              >
+                <p className="text-xs tracking-widest text-primary font-medium mb-2">{point.tag}</p>
+                <h3 className="text-xl font-medium text-foreground mb-3 group-hover:text-primary transition-colors">
+                  {point.title}
+                </h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {point.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
 
+        {/* Volume & Velocity Section */}
+        <motion.div
+          className="bg-background border border-border p-8 md:p-12"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5 }}
+        >
+          <div className="flex items-center gap-3 mb-8">
+            <TrendingUp className="w-5 h-5 text-primary" />
+            <h3 className="text-xl font-medium text-foreground">Volume & Velocity</h3>
+            <span className="text-xs text-muted-foreground">— Why smart money flows to Korea</span>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {velocityPoints.map((point, i) => (
+              <motion.div
+                key={point.label}
+                className="flex gap-4"
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: 0.7 + i * 0.15 }}
+              >
+                <div className="shrink-0">
+                  <motion.span
+                    className="text-4xl md:text-5xl font-bold text-primary"
+                    initial={{ scale: 0 }}
+                    animate={isInView ? { scale: 1 } : { scale: 0 }}
+                    transition={{ delay: 0.9 + i * 0.15, type: "spring" }}
+                  >
+                    {point.metric}
+                  </motion.span>
+                </div>
+                <div>
+                  <p className="text-sm font-medium text-foreground mb-1">{point.label}</p>
+                  <p className="text-sm text-muted-foreground">{point.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* The Upbit Pump Callout */}
+          <motion.div
+            className="mt-8 p-6 bg-primary/5 border-l-2 border-primary"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ delay: 1 }}
+          >
+            <p className="text-xs tracking-widest text-primary font-medium mb-2">THE "UPBIT PUMP" PHENOMENON</p>
+            <p className="text-foreground leading-relaxed">
+              Data shows that <span className="font-semibold text-primary">60% of major altcoin rallies in 2024</span> were preceded by a volume spike in KRW pairs. 
+              Launching in Korea isn't just about entering a new market—it's about <span className="font-semibold">igniting your next bull run.</span>
+            </p>
+          </motion.div>
+        </motion.div>
+
+        {/* Bottom Quote */}
         <motion.blockquote
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.4 }}
-          className="border-l-2 border-primary pl-6"
+          transition={{ delay: 0.8 }}
+          className="border-l-2 border-primary pl-6 mt-12"
         >
           <p className="text-lg md:text-xl text-foreground italic">
-            "When you launch in Korea, you're plugging into the world's most liquid fiat pair after the Dollar."
+            "When you launch in Korea, you're not just entering a market—you're plugging into the world's most liquid fiat pair after the Dollar and igniting global price discovery."
           </p>
-          <footer className="mt-2 text-sm text-muted-foreground">
-            — Real buying power, not just hype.
+          <footer className="mt-3 text-sm text-muted-foreground">
+            — The Kingmaker Advantage
           </footer>
         </motion.blockquote>
       </motion.div>
