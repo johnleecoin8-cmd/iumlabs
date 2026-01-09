@@ -1618,7 +1618,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isVisible ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.8, type: "spring" }}
-            className="relative flex flex-col items-center"
+            className="relative flex flex-col items-center mt-8 lg:mt-12"
           >
             {/* Connection lines with flowing particles - Left */}
             <div className="hidden lg:flex absolute left-0 top-1/2 -translate-x-full items-center w-12">
