@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Linkedin } from "lucide-react";
 import ceoPhoto from "@/assets/team/ceo-profile.png";
 import teamStrategyPhoto from "@/assets/team/team-strategy.jpeg";
 import teamOperationsPhoto from "@/assets/team/team-operations.jpeg";
@@ -119,7 +119,15 @@ const LeadershipSection = () => {
             <div className="space-y-8">
               <div>
                 <span className="text-white/40 text-sm tracking-wider uppercase mb-2 block">Founder & CEO</span>
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">James Lee</h3>
+                <a 
+                  href="https://www.linkedin.com/in/jameslee-iumlabs" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 group/link"
+                >
+                  <h3 className="text-3xl md:text-4xl font-bold text-white group-hover/link:text-white/80 transition-colors">James Lee</h3>
+                  <Linkedin className="w-6 h-6 text-white/40 group-hover/link:text-[#0A66C2] transition-colors" />
+                </a>
                 
                 <blockquote className="relative">
                   <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-white/40 to-transparent" />
