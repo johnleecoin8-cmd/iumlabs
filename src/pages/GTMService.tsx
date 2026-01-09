@@ -152,21 +152,172 @@ const AnimatedStat = ({
 };
 
 // ============================================
-// HERO SECTION
+// FLOATING 3D GRAPHIC ELEMENTS
+// ============================================
+const FloatingGraphics = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Floating orb 1 */}
+      <motion.div
+        className="absolute top-1/4 right-[15%] w-32 h-32 rounded-full opacity-30"
+        style={{
+          background: 'radial-gradient(circle at 30% 30%, hsl(var(--primary)), transparent 70%)',
+          filter: 'blur(40px)',
+        }}
+        animate={{
+          y: [0, -30, 0],
+          x: [0, 15, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      
+      {/* Floating orb 2 */}
+      <motion.div
+        className="absolute bottom-1/3 right-[25%] w-48 h-48 rounded-full opacity-20"
+        style={{
+          background: 'radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.5), transparent 60%)',
+          filter: 'blur(60px)',
+        }}
+        animate={{
+          y: [0, 40, 0],
+          x: [0, -20, 0],
+        }}
+        transition={{
+          duration: 10,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1,
+        }}
+      />
+
+      {/* Grid pattern */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `
+            linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
+            linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
+          `,
+          backgroundSize: '60px 60px',
+        }}
+      />
+
+      {/* Animated line */}
+      <motion.div
+        className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
+        initial={{ scaleX: 0, opacity: 0 }}
+        animate={{ scaleX: 1, opacity: 1 }}
+        transition={{ duration: 1.5, delay: 0.5 }}
+      />
+    </div>
+  );
+};
+
+// ============================================
+// GLITCH TEXT EFFECT
+// ============================================
+const GlitchText = ({ children, className = '' }: { children: string; className?: string }) => {
+  return (
+    <span className={`relative inline-block ${className}`}>
+      <span className="relative z-10">{children}</span>
+      <motion.span
+        className="absolute top-0 left-0 text-primary opacity-70 z-0"
+        style={{ clipPath: 'inset(0 0 50% 0)' }}
+        animate={{
+          x: [0, -2, 2, 0],
+          opacity: [0.7, 0.5, 0.8, 0.7],
+        }}
+        transition={{
+          duration: 0.3,
+          repeat: Infinity,
+          repeatDelay: 3,
+        }}
+      >
+        {children}
+      </motion.span>
+      <motion.span
+        className="absolute top-0 left-0 text-cyan-400 opacity-50 z-0"
+        style={{ clipPath: 'inset(50% 0 0 0)' }}
+        animate={{
+          x: [0, 2, -2, 0],
+          opacity: [0.5, 0.3, 0.6, 0.5],
+        }}
+        transition={{
+          duration: 0.3,
+          repeat: Infinity,
+          repeatDelay: 3,
+          delay: 0.1,
+        }}
+      >
+        {children}
+      </motion.span>
+    </span>
+  );
+};
+
+// ============================================
+// HERO SECTION - Enhanced with Graphics
 // ============================================
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      setMousePosition({
+        x: (e.clientX - rect.left) / rect.width,
+        y: (e.clientY - rect.top) / rect.height,
+      });
+    };
+    
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
-    <section ref={ref} className="min-h-[85vh] flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-32 pb-20 bg-background">
-      <div className="max-w-5xl">
+    <section ref={ref} className="relative min-h-[90vh] flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-32 pb-20 bg-background overflow-hidden">
+      {/* Floating graphics */}
+      <FloatingGraphics />
+      
+      {/* Mouse follow glow */}
+      <motion.div
+        className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
+        style={{
+          background: 'radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%)',
+          left: `calc(${mousePosition.x * 100}% - 250px)`,
+          top: `calc(${mousePosition.y * 100}% - 250px)`,
+        }}
+        animate={{
+          scale: [1, 1.1, 1],
+        }}
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+
+      <div className="relative max-w-5xl z-10">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-muted-foreground text-sm tracking-widest uppercase mb-6"
+          className="text-muted-foreground text-sm tracking-widest uppercase mb-6 flex items-center gap-3"
         >
+          <motion.span 
+            className="w-8 h-px bg-primary"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          />
           Korea GTM Strategy
         </motion.p>
         
@@ -174,35 +325,74 @@ const HeroSection = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-[clamp(2.5rem,8vw,5.5rem)] font-medium leading-[1.05] tracking-tight text-foreground mb-8"
+          className="text-[clamp(2.5rem,8vw,6rem)] font-medium leading-[1.02] tracking-tight text-foreground mb-8"
         >
-          Engineered for
-          <br />
-          <span className="text-primary">Liquidity.</span>
+          <span className="block overflow-hidden">
+            <motion.span
+              className="block"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.33, 1, 0.68, 1] }}
+            >
+              Engineered for
+            </motion.span>
+          </span>
+          <span className="block overflow-hidden">
+            <motion.span
+              className="block"
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.8, delay: 0.35, ease: [0.33, 1, 0.68, 1] }}
+            >
+              <GlitchText className="text-primary">Liquidity.</GlitchText>
+            </motion.span>
+          </span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-12"
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-16"
         >
           Launch in Korea with the most data-driven GTM framework.
           <br />
-          We turn cultural barriers into your competitive moat.
+          <span className="text-foreground/80">We turn cultural barriers into your competitive moat.</span>
         </motion.p>
 
+        {/* Stats with enhanced styling */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          transition={{ duration: 0.6, delay: 0.7 }}
           className="flex flex-wrap items-center gap-8 md:gap-12"
         >
-          <AnimatedStat value={30} suffix="+" label="Projects" delay={0.6} isVisible={isInView} />
-          <div className="w-px h-12 bg-border" />
-          <AnimatedStat value={50} prefix="$" suffix="M+" label="Volume Generated" delay={0.8} isVisible={isInView} />
-          <div className="w-px h-12 bg-border" />
-          <AnimatedStat value={340} suffix="%" label="Avg. Growth" delay={1.0} isVisible={isInView} />
+          <AnimatedStat value={30} suffix="+" label="Projects Launched" delay={0.8} isVisible={isInView} />
+          <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
+          <AnimatedStat value={50} prefix="$" suffix="M+" label="Volume Generated" delay={1.0} isVisible={isInView} />
+          <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
+          <AnimatedStat value={340} suffix="%" label="Avg. Growth Rate" delay={1.2} isVisible={isInView} />
+        </motion.div>
+
+        {/* Scroll indicator */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-8 left-0 flex items-center gap-3"
+        >
+          <motion.div
+            className="w-6 h-10 border border-muted-foreground/30 rounded-full flex items-start justify-center p-2"
+            animate={{ borderColor: ['hsl(var(--muted-foreground) / 0.3)', 'hsl(var(--primary) / 0.5)', 'hsl(var(--muted-foreground) / 0.3)'] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <motion.div
+              className="w-1 h-2 bg-primary rounded-full"
+              animate={{ y: [0, 8, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            />
+          </motion.div>
+          <span className="text-xs text-muted-foreground tracking-wider">SCROLL</span>
         </motion.div>
       </div>
     </section>
@@ -471,65 +661,123 @@ const ResultsDashboardSection = () => {
 };
 
 // ============================================
-// THE IUM FRAMEWORK - 4 Stage Process
+// THE IUM FRAMEWORK - Interactive Timeline
 // ============================================
 const FrameworkSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const [activeStage, setActiveStage] = useState<number | null>(null);
 
   return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background">
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.02] pointer-events-none">
+        <div className="absolute inset-0" style={{
+          backgroundImage: 'radial-gradient(circle at 2px 2px, hsl(var(--foreground)) 1px, transparent 0)',
+          backgroundSize: '32px 32px',
+        }} />
+      </div>
+
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="max-w-6xl mx-auto"
+        className="max-w-6xl mx-auto relative z-10"
       >
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
           02 Process
         </p>
-        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-16">
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-6">
           The ium Algorithm
         </h2>
+        <p className="text-muted-foreground max-w-xl mb-16">
+          Our proven 4-stage framework has helped 30+ projects successfully launch in Korea.
+        </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Timeline connector line */}
+        <div className="hidden lg:block absolute top-[280px] left-[10%] right-[10%] h-px">
+          <motion.div
+            className="h-full bg-gradient-to-r from-border via-primary/50 to-border"
+            initial={{ scaleX: 0 }}
+            animate={isInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 1.5, delay: 0.3 }}
+          />
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
           {frameworkStages.map((stage, i) => (
             <motion.div
               key={stage.number}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.12, duration: 0.6 }}
-              className="group relative p-6 border border-border bg-background hover:border-primary/50 transition-colors"
+              transition={{ delay: i * 0.15 + 0.2, duration: 0.6 }}
+              onMouseEnter={() => setActiveStage(i)}
+              onMouseLeave={() => setActiveStage(null)}
+              className={`group relative p-6 border bg-background transition-all duration-500 cursor-pointer ${
+                activeStage === i 
+                  ? 'border-primary shadow-[0_0_40px_-10px_hsl(var(--primary)/0.4)] scale-[1.02]' 
+                  : 'border-border hover:border-primary/30'
+              }`}
             >
-              {/* Arrow connector (hidden on last item and mobile) */}
-              {i < 3 && (
-                <div className="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10">
-                  <ArrowRight className="w-5 h-5 text-muted-foreground" />
-                </div>
-              )}
+              {/* Stage number badge */}
+              <motion.div
+                className={`absolute -top-3 left-6 px-3 py-1 text-xs font-mono transition-colors duration-300 ${
+                  activeStage === i ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
+                }`}
+                whileHover={{ scale: 1.05 }}
+              >
+                STAGE {stage.number}
+              </motion.div>
 
-              <div className="flex items-center gap-3 mb-4">
-                <span className="text-xs text-primary font-mono">{stage.number}</span>
-                <stage.icon className="w-5 h-5 text-primary" />
+              {/* Icon with glow */}
+              <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-6 mt-2 transition-all duration-300 ${
+                activeStage === i 
+                  ? 'bg-primary/20 shadow-[0_0_20px_hsl(var(--primary)/0.3)]' 
+                  : 'bg-muted'
+              }`}>
+                <stage.icon className={`w-6 h-6 transition-colors duration-300 ${
+                  activeStage === i ? 'text-primary' : 'text-muted-foreground'
+                }`} />
               </div>
               
-              <h3 className="text-xl font-medium text-foreground mb-1">
+              <h3 className="text-2xl font-medium text-foreground mb-1">
                 {stage.title}
               </h3>
-              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-4">
+              <p className="text-xs text-primary uppercase tracking-wide mb-4">
                 {stage.subtitle}
               </p>
 
               <ul className="space-y-2 mb-6">
-                {stage.items.map((item) => (
-                  <li key={item} className="text-sm text-muted-foreground">
+                {stage.items.map((item, itemIndex) => (
+                  <motion.li 
+                    key={item} 
+                    className="text-sm text-muted-foreground flex items-center gap-2"
+                    initial={false}
+                    animate={activeStage === i ? { x: 5 } : { x: 0 }}
+                    transition={{ delay: itemIndex * 0.05 }}
+                  >
+                    <span className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
+                      activeStage === i ? 'bg-primary' : 'bg-muted-foreground/30'
+                    }`} />
                     {item}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
 
-              <p className="text-xs text-primary/80 italic">
+              <p className="text-xs text-primary/80 italic border-t border-border pt-4">
                 {stage.quote}
               </p>
+
+              {/* Arrow connector (hidden on last item and mobile) */}
+              {i < 3 && (
+                <motion.div 
+                  className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-6 h-6 rounded-full bg-background border border-border items-center justify-center"
+                  animate={activeStage === i ? { scale: 1.2, borderColor: 'hsl(var(--primary))' } : { scale: 1 }}
+                >
+                  <ArrowRight className={`w-3 h-3 transition-colors duration-300 ${
+                    activeStage === i ? 'text-primary' : 'text-muted-foreground'
+                  }`} />
+                </motion.div>
+              )}
             </motion.div>
           ))}
         </div>
@@ -539,7 +787,7 @@ const FrameworkSection = () => {
 };
 
 // ============================================
-// STRATEGY IN ACTION - Case Studies with Metrics
+// STRATEGY IN ACTION - Case Studies with 3D Tilt
 // ============================================
 const CaseMetricBar = ({ label, value, suffix = '', prefix = '', delay = 0, isVisible = true }: {
   label: string;
@@ -559,95 +807,173 @@ const CaseMetricBar = ({ label, value, suffix = '', prefix = '', delay = 0, isVi
   );
 };
 
+// 3D Tilt Card component
+const TiltCaseCard = ({ project, index, isVisible }: { 
+  project: typeof featuredProjects[0]; 
+  index: number;
+  isVisible: boolean;
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    setTilt({
+      x: (y - 0.5) * 10,
+      y: (x - 0.5) * -10,
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+    setIsHovered(false);
+  };
+
+  return (
+    <motion.article
+      ref={cardRef}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: index * 0.1, duration: 0.6 }}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+        transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.5s ease-out',
+      }}
+      className="relative"
+    >
+      <Link to={`/projects/${project.slug}`} className="group block">
+        {/* Glow effect on hover */}
+        <motion.div
+          className="absolute -inset-px rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+          style={{
+            background: `linear-gradient(135deg, hsl(var(--primary) / 0.2) 0%, transparent 50%, hsl(var(--primary) / 0.1) 100%)`,
+          }}
+        />
+        
+        <div className="relative bg-background border border-border group-hover:border-primary/30 transition-colors duration-300 overflow-hidden">
+          {/* Image with parallax effect */}
+          <div className="relative aspect-[4/3] overflow-hidden">
+            <motion.img
+              src={project.image}
+              alt={project.name}
+              className="w-full h-full object-cover"
+              animate={{
+                scale: isHovered ? 1.1 : 1,
+                x: isHovered ? tilt.y * 2 : 0,
+                y: isHovered ? tilt.x * 2 : 0,
+              }}
+              transition={{ duration: 0.3 }}
+            />
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            
+            {/* Floating badge on hover */}
+            <motion.div
+              className="absolute bottom-4 left-4 px-3 py-1.5 bg-primary text-primary-foreground text-xs font-medium"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
+              transition={{ duration: 0.3 }}
+            >
+              View Case Study →
+            </motion.div>
+          </div>
+
+          <div className="p-5 space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="text-xs tracking-widest text-primary uppercase font-medium">
+                {project.category}
+              </span>
+              <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
+              <span className="text-xs text-muted-foreground">
+                {project.strategy}
+              </span>
+            </div>
+            
+            <h3 className="text-xl font-medium text-foreground group-hover:text-primary transition-colors duration-300">
+              {project.name}
+            </h3>
+            
+            <p className="text-sm text-muted-foreground line-clamp-2">
+              {project.tagline}
+            </p>
+            
+            {/* Metrics with animation */}
+            <div className="pt-3 mt-3 border-t border-border space-y-1">
+              {project.metrics.map((metric, mi) => (
+                <CaseMetricBar
+                  key={metric.label}
+                  label={metric.label}
+                  value={metric.value}
+                  suffix={metric.suffix}
+                  prefix={metric.prefix}
+                  delay={0.3 + mi * 0.1}
+                  isVisible={isVisible}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </Link>
+    </motion.article>
+  );
+};
+
 const StrategyInActionSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-t border-border">
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/20 border-t border-border">
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="mb-12"
+        className="max-w-6xl mx-auto"
       >
-        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-          04 Strategy in Action
-        </p>
-        <h2 className="text-3xl md:text-4xl font-medium text-foreground">
-          Case Studies
-        </h2>
-      </motion.div>
+        <div className="mb-12">
+          <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+            04 Strategy in Action
+          </p>
+          <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
+            Case Studies
+          </h2>
+          <p className="text-muted-foreground max-w-xl">
+            Real results from real projects. See how we've helped leading Web3 projects dominate the Korean market.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {featuredProjects.map((project, i) => (
-          <motion.article
-            key={project.slug}
-            initial={{ opacity: 0, y: 40 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: i * 0.1, duration: 0.6 }}
-          >
-            <Link to={`/projects/${project.slug}`} className="group block">
-              <div className="relative aspect-[4/3] overflow-hidden bg-muted mb-4">
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-                />
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredProjects.map((project, i) => (
+            <TiltCaseCard 
+              key={project.slug} 
+              project={project} 
+              index={i} 
+              isVisible={isInView} 
+            />
+          ))}
+        </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <p className="text-xs tracking-widest text-primary uppercase">
-                    {project.category}
-                  </p>
-                  <span className="text-muted-foreground/50">•</span>
-                  <p className="text-xs text-muted-foreground">
-                    {project.strategy}
-                  </p>
-                </div>
-                <h3 className="text-xl font-medium text-foreground group-hover:text-primary transition-colors">
-                  {project.name}
-                </h3>
-                <p className="text-sm text-muted-foreground line-clamp-2">
-                  {project.tagline}
-                </p>
-                
-                {/* Metrics */}
-                <div className="pt-2 mt-2 border-t border-border">
-                  {project.metrics.map((metric, mi) => (
-                    <CaseMetricBar
-                      key={metric.label}
-                      label={metric.label}
-                      value={metric.value}
-                      suffix={metric.suffix}
-                      prefix={metric.prefix}
-                      delay={0.3 + mi * 0.1}
-                      isVisible={isInView}
-                    />
-                  ))}
-                </div>
-              </div>
-            </Link>
-          </motion.article>
-        ))}
-      </div>
-
-      {/* View All Projects Link */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.5 }}
-        className="mt-12 text-center"
-      >
-        <Link 
-          to="/projects" 
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+        {/* View All Projects Link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.5 }}
+          className="mt-16 text-center"
         >
-          View All Projects
-          <ArrowRight className="w-4 h-4" />
-        </Link>
+          <Link 
+            to="/projects" 
+            className="group inline-flex items-center gap-3 px-6 py-3 border border-border hover:border-primary text-sm text-muted-foreground hover:text-primary transition-all duration-300"
+          >
+            View All Projects
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </motion.div>
       </motion.div>
     </section>
   );
