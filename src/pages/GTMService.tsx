@@ -1344,13 +1344,13 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
       items: ['CEX/DEX Volume', 'Wallet Activity', 'Token Transfers', 'Smart Contracts'],
       value: liveData.onchain,
       suffix: ' signals',
-      color: 'from-blue-500/20 to-transparent',
-      borderColor: 'border-blue-500/50',
-      activeBorder: 'border-blue-500',
-      iconBg: 'bg-blue-500/20',
-      iconColor: 'text-blue-500',
-      dotColor: 'bg-blue-500',
-      barColor: 'bg-blue-500/50'
+      color: 'from-red-500/20 to-transparent',
+      borderColor: 'border-red-500/50',
+      activeBorder: 'border-red-500',
+      iconBg: 'bg-red-500/20',
+      iconColor: 'text-red-500',
+      dotColor: 'bg-red-500',
+      barColor: 'bg-red-500/50'
     },
     { 
       id: 1, 
@@ -1644,14 +1644,14 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
               >
                 {/* Main connection line */}
                 <div className={`w-16 h-0.5 relative overflow-hidden ${
-                  i === 0 ? 'bg-gradient-to-r from-blue-500/60 to-primary/40' :
+                  i === 0 ? 'bg-gradient-to-r from-red-500/60 to-primary/40' :
                   i === 1 ? 'bg-gradient-to-r from-purple-500/60 to-primary/40' :
                   'bg-gradient-to-r from-green-500/60 to-primary/40'
                 }`}>
                   {/* Animated particle */}
                   <motion.div
                     className={`absolute h-full w-3 ${
-                      i === 0 ? 'bg-blue-400' : i === 1 ? 'bg-purple-400' : 'bg-green-400'
+                      i === 0 ? 'bg-red-400' : i === 1 ? 'bg-purple-400' : 'bg-green-400'
                     }`}
                     animate={{ x: ['-100%', '600%'] }}
                     transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3, ease: "linear" }}
