@@ -11,13 +11,27 @@ import storyLogo from '@/assets/logos/story-protocol.png';
 import peaqLogo from '@/assets/logos/peaq.png';
 import bnbLogo from '@/assets/logos/bnb.png';
 import bybitLogo from '@/assets/logos/bybit.png';
-import kucoinLogo from '@/assets/logos/kucoin.png';
+import kucoinLogo from '@/assets/logos/kucoin.svg';
 import saharaLogo from '@/assets/logos/sahara-ai.png';
 import megaethLogo from '@/assets/logos/megaeth.png';
 import ondoLogo from '@/assets/logos/ondo.svg';
 import polygonLogo from '@/assets/logos/polygon.svg';
 import triaLogo from '@/assets/logos/tria-official.png';
 import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
+
+// Campaign/Background images
+import mantraBg from '@/assets/campaigns/mantra-party.jpg';
+import storyBg from '@/assets/campaigns/story-origin-summit.jpg';
+import peaqBg from '@/assets/campaigns/peaq-summit.jpg';
+import bnbBg from '@/assets/campaigns/bnb-event.jpg';
+import bybitBg from '@/assets/campaigns/bybit-event.jpg';
+import kucoinBg from '@/assets/campaigns/kucoin-campaign.jpg';
+import saharaBg from '@/assets/campaigns/sahara-ai.jpg';
+import openledgerBg from '@/assets/campaigns/openledger-event.jpg';
+import megaethBg from '@/assets/campaigns/megaeth-launch.jpg';
+import ondoBg from '@/assets/campaigns/ondo-seminar.jpg';
+import polygonBg from '@/assets/campaigns/polygon-hackathon.jpg';
+import triaBg from '@/assets/campaigns/tria-launch.jpg';
 
 // All Projects Data for 4-row Marquee
 const allProjects = [
@@ -26,6 +40,7 @@ const allProjects = [
     name: 'MANTRA',
     slug: 'mantra',
     logo: mantraLogo,
+    image: mantraBg,
     category: 'RWA L1',
     strategy: 'KRW Market Entry',
     metric: { value: 450, suffix: '%', label: 'Volume Growth' },
@@ -37,6 +52,7 @@ const allProjects = [
     name: 'Story Protocol',
     slug: 'story-protocol',
     logo: storyLogo,
+    image: storyBg,
     category: 'IP Protocol',
     strategy: 'Narrative-Led FOMO',
     metric: { value: 1, suffix: 'st', prefix: '#', label: 'Kaito Ranking' },
@@ -48,6 +64,7 @@ const allProjects = [
     name: 'peaq',
     slug: 'peaq',
     logo: peaqLogo,
+    image: peaqBg,
     category: 'DePIN',
     strategy: 'Wallet Acquisition',
     metric: { value: 85, suffix: 'K+', label: 'Community' },
@@ -60,6 +77,7 @@ const allProjects = [
     name: 'BNB Chain',
     slug: 'bnb-chain',
     logo: bnbLogo,
+    image: bnbBg,
     category: 'L1 Ecosystem',
     strategy: 'Exchange Partnership',
     metric: { value: 2.1, suffix: 'M', label: 'Impressions' },
@@ -71,6 +89,7 @@ const allProjects = [
     name: 'Bybit',
     slug: 'bybit',
     logo: bybitLogo,
+    image: bybitBg,
     category: 'CEX',
     strategy: 'Market Maker Campaign',
     metric: { value: 320, suffix: '%', label: 'Trading Volume' },
@@ -82,6 +101,7 @@ const allProjects = [
     name: 'KuCoin',
     slug: 'kucoin',
     logo: kucoinLogo,
+    image: kucoinBg,
     category: 'CEX',
     strategy: 'Community Airdrop',
     metric: { value: 180, suffix: 'K', label: 'New Users' },
@@ -94,6 +114,7 @@ const allProjects = [
     name: 'Sahara AI',
     slug: 'sahara-ai',
     logo: saharaLogo,
+    image: saharaBg,
     category: 'AI Infra',
     strategy: 'Thought Leadership',
     metric: { value: 500, suffix: 'K+', label: 'Reach' },
@@ -105,6 +126,7 @@ const allProjects = [
     name: 'OpenLedger',
     slug: 'openledger',
     logo: openledgerLogo,
+    image: openledgerBg,
     category: 'Data Layer',
     strategy: 'Developer Outreach',
     metric: { value: 45, suffix: 'K', label: 'Downloads' },
@@ -116,6 +138,7 @@ const allProjects = [
     name: 'MegaETH',
     slug: 'megaeth',
     logo: megaethLogo,
+    image: megaethBg,
     category: 'L2',
     strategy: 'Hype Building',
     metric: { value: 1.2, suffix: 'M', label: 'Social Reach' },
@@ -128,6 +151,7 @@ const allProjects = [
     name: 'Ondo',
     slug: 'ondo',
     logo: ondoLogo,
+    image: ondoBg,
     category: 'RWA',
     strategy: 'Institutional PR',
     metric: { value: 25, suffix: '+', label: 'Press Coverage' },
@@ -139,6 +163,7 @@ const allProjects = [
     name: 'Polygon',
     slug: 'polygon',
     logo: polygonLogo,
+    image: polygonBg,
     category: 'L2',
     strategy: 'Ecosystem Growth',
     metric: { value: 280, suffix: '%', label: 'TVL Growth' },
@@ -150,6 +175,7 @@ const allProjects = [
     name: 'Tria',
     slug: 'tria',
     logo: triaLogo,
+    image: triaBg,
     category: 'Wallet',
     strategy: 'User Acquisition',
     metric: { value: 120, suffix: 'K', label: 'Signups' },
@@ -259,8 +285,18 @@ const ProjectCard = ({
           transition-all duration-500
           ${colors.glow}
           hover:border-opacity-60
+          overflow-hidden
         `}
       >
+        {/* Background Image - shows on hover */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+          style={{ backgroundImage: `url(${project.image})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        
+        {/* Content wrapper */}
+        <div className="relative z-10">
         {/* Header: Logo + Live Indicator */}
         <div className="flex items-center justify-between mb-4">
           <img 
@@ -316,8 +352,9 @@ const ProjectCard = ({
         </div>
 
         {/* Arrow indicator */}
-        <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity z-20">
           <ArrowUpRight className={`w-4 h-4 ${colors.text}`} />
+        </div>
         </div>
       </div>
     </Link>
