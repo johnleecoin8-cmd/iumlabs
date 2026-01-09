@@ -422,19 +422,29 @@ const HeroSection = () => {
         </motion.div>
 
         {/* Before → After Transformation Bar */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4 }}
-          className="mt-12 pt-8 border-t border-border/30"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 20
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        delay: 1.4
+      }} className="mt-12 pt-8 border-t border-border/30">
           <div className="grid grid-cols-3 gap-6 md:gap-12">
-            {[
-              { label: 'KR Volume', before: '$0', after: '$120M+' },
-              { label: 'Mindshare', before: '#50+', after: '#1~3' },
-              { label: 'Community', before: '0', after: '50K+' }
-            ].map((item) => (
-              <div key={item.label} className="text-center">
+            {[{
+            label: 'KR Volume',
+            before: '$0',
+            after: '$120M+'
+          }, {
+            label: 'Mindshare',
+            before: '#50+',
+            after: '#1~3'
+          }, {
+            label: 'Community',
+            before: '0',
+            after: '50K+'
+          }].map(item => <div key={item.label} className="text-center">
                 <p className="text-[10px] text-muted-foreground tracking-widest uppercase mb-2">
                   {item.label}
                 </p>
@@ -447,8 +457,7 @@ const HeroSection = () => {
                     {item.after}
                   </span>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </motion.div>
 
@@ -765,7 +774,6 @@ const MarketIntelligenceSection = () => {
     subtitle: 'Retail-Driven Price Discovery',
     description: 'Unlike markets dominated by institutional algorithms, Korea is powered by real retail conviction. Winning the "mindshare" of Korean users creates a sustained buy-pressure floor that defends your token against global volatility.'
   }];
-
   return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border">
       <motion.div initial={{
       opacity: 0
@@ -784,14 +792,15 @@ const MarketIntelligenceSection = () => {
 
         {/* Module A: The Market Logic - 3 Column */}
         <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {marketLogic.map((item, i) => (
-            <motion.div 
-              key={item.number}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.15 }}
-              className="relative p-6 border border-border bg-background hover:border-primary/30 transition-colors group"
-            >
+          {marketLogic.map((item, i) => <motion.div key={item.number} initial={{
+          opacity: 0,
+          y: 30
+        }} animate={isInView ? {
+          opacity: 1,
+          y: 0
+        } : {}} transition={{
+          delay: i * 0.15
+        }} className="relative p-6 border border-border bg-background hover:border-primary/30 transition-colors group">
               <span className="absolute -top-3 left-6 px-2 py-0.5 bg-muted text-xs font-mono text-muted-foreground">
                 {item.number}
               </span>
@@ -804,34 +813,26 @@ const MarketIntelligenceSection = () => {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 {item.description}
               </p>
-            </motion.div>
-          ))}
+            </motion.div>)}
         </div>
 
         {/* Module B: Data Visualization */}
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
           {/* Chart 1: The Fiat Impact */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.3 }}
-            className="p-6 border border-border bg-background"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          x: -20
+        }} animate={isInView ? {
+          opacity: 1,
+          x: 0
+        } : {}} transition={{
+          delay: 0.3
+        }} className="p-6 border border-border bg-background">
             <p className="text-xs tracking-widest text-primary font-medium mb-6">
               THE FIAT IMPACT — Average Daily Volume per Fiat Pair
             </p>
             <div className="space-y-4 mb-6">
-              {fiatVolumeData.map((item, i) => (
-                <AnimatedProgressBar 
-                  key={item.label} 
-                  label={item.label} 
-                  percentage={item.percentage} 
-                  value={item.value} 
-                  delay={i * 0.15 + 0.3} 
-                  isHighlight={item.isHighlight} 
-                  isVisible={isInView} 
-                />
-              ))}
+              {fiatVolumeData.map((item, i) => <AnimatedProgressBar key={item.label} label={item.label} percentage={item.percentage} value={item.value} delay={i * 0.15 + 0.3} isHighlight={item.isHighlight} isVisible={isInView} />)}
             </div>
             <p className="text-sm text-muted-foreground italic border-t border-border pt-4">
               "KRW is the only fiat pair that challenges the USD."
@@ -839,12 +840,15 @@ const MarketIntelligenceSection = () => {
           </motion.div>
 
           {/* Chart 2: Velocity Comparison */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ delay: 0.4 }}
-            className="p-6 border border-border bg-background"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          x: 20
+        }} animate={isInView ? {
+          opacity: 1,
+          x: 0
+        } : {}} transition={{
+          delay: 0.4
+        }} className="p-6 border border-border bg-background">
             <p className="text-xs tracking-widest text-primary font-medium mb-6">
               VELOCITY COMPARISON — Token Velocity Ratio (Volume / Market Cap)
             </p>
@@ -855,12 +859,14 @@ const MarketIntelligenceSection = () => {
                   <span className="text-sm font-mono text-muted-foreground">0.15</span>
                 </div>
                 <div className="h-3 bg-muted rounded-full overflow-hidden">
-                  <motion.div 
-                    className="h-full bg-foreground/30 rounded-full"
-                    initial={{ width: 0 }}
-                    animate={isInView ? { width: '22%' } : {}}
-                    transition={{ duration: 1, delay: 0.5 }}
-                  />
+                  <motion.div className="h-full bg-foreground/30 rounded-full" initial={{
+                  width: 0
+                }} animate={isInView ? {
+                  width: '22%'
+                } : {}} transition={{
+                  duration: 1,
+                  delay: 0.5
+                }} />
                 </div>
               </div>
               <div className="space-y-2">
@@ -869,12 +875,14 @@ const MarketIntelligenceSection = () => {
                   <span className="text-sm font-mono text-primary">0.68</span>
                 </div>
                 <div className="h-3 bg-muted rounded-full overflow-hidden">
-                  <motion.div 
-                    className="h-full bg-primary rounded-full"
-                    initial={{ width: 0 }}
-                    animate={isInView ? { width: '100%' } : {}}
-                    transition={{ duration: 1.2, delay: 0.6 }}
-                  />
+                  <motion.div className="h-full bg-primary rounded-full" initial={{
+                  width: 0
+                }} animate={isInView ? {
+                  width: '100%'
+                } : {}} transition={{
+                  duration: 1.2,
+                  delay: 0.6
+                }} />
                 </div>
               </div>
             </div>
@@ -1025,19 +1033,19 @@ const CircularProgressRing = ({
 // ============================================
 // MINI CIRCULAR GAUGE COMPONENT
 // ============================================
-const MiniGauge = ({ 
-  value, 
-  maxValue = 100, 
-  size = 48, 
-  label, 
+const MiniGauge = ({
+  value,
+  maxValue = 100,
+  size = 48,
+  label,
   color = 'primary',
   delay = 0,
-  isVisible = true 
-}: { 
-  value: number; 
-  maxValue?: number; 
-  size?: number; 
-  label: string; 
+  isVisible = true
+}: {
+  value: number;
+  maxValue?: number;
+  size?: number;
+  label: string;
   color?: string;
   delay?: number;
   isVisible?: boolean;
@@ -1046,64 +1054,57 @@ const MiniGauge = ({
   const radius = (size - strokeWidth) / 2;
   const circumference = radius * 2 * Math.PI;
   const [progress, setProgress] = useState(0);
-
   useEffect(() => {
     if (isVisible) {
-      const timer = setTimeout(() => setProgress((value / maxValue) * 100), delay * 1000);
+      const timer = setTimeout(() => setProgress(value / maxValue * 100), delay * 1000);
       return () => clearTimeout(timer);
     }
   }, [isVisible, value, maxValue, delay]);
-
-  const strokeDashoffset = circumference - (progress / 100) * circumference;
+  const strokeDashoffset = circumference - progress / 100 * circumference;
   const colorClass = color === 'green' ? 'hsl(142, 76%, 36%)' : color === 'yellow' ? 'hsl(48, 96%, 53%)' : 'hsl(var(--primary))';
-
-  return (
-    <div className="flex flex-col items-center gap-1">
-      <div className="relative" style={{ width: size, height: size }}>
+  return <div className="flex flex-col items-center gap-1">
+      <div className="relative" style={{
+      width: size,
+      height: size
+    }}>
         <svg className="absolute inset-0 -rotate-90" width={size} height={size}>
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke="hsl(var(--muted))"
-            strokeWidth={strokeWidth}
-          />
-          <motion.circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke={colorClass}
-            strokeWidth={strokeWidth}
-            strokeLinecap="round"
-            strokeDasharray={circumference}
-            initial={{ strokeDashoffset: circumference }}
-            animate={{ strokeDashoffset }}
-            transition={{ duration: 1.5, ease: "easeOut", delay }}
-            style={{ filter: `drop-shadow(0 0 4px ${colorClass})` }}
-          />
+          <circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke="hsl(var(--muted))" strokeWidth={strokeWidth} />
+          <motion.circle cx={size / 2} cy={size / 2} r={radius} fill="none" stroke={colorClass} strokeWidth={strokeWidth} strokeLinecap="round" strokeDasharray={circumference} initial={{
+          strokeDashoffset: circumference
+        }} animate={{
+          strokeDashoffset
+        }} transition={{
+          duration: 1.5,
+          ease: "easeOut",
+          delay
+        }} style={{
+          filter: `drop-shadow(0 0 4px ${colorClass})`
+        }} />
         </svg>
         <div className="absolute inset-0 flex items-center justify-center">
-          <motion.span 
-            className="text-xs font-bold text-foreground"
-            initial={{ opacity: 0 }}
-            animate={isVisible ? { opacity: 1 } : {}}
-            transition={{ delay: delay + 0.5 }}
-          >
+          <motion.span className="text-xs font-bold text-foreground" initial={{
+          opacity: 0
+        }} animate={isVisible ? {
+          opacity: 1
+        } : {}} transition={{
+          delay: delay + 0.5
+        }}>
             {value}%
           </motion.span>
         </div>
       </div>
       <span className="text-[10px] text-muted-foreground text-center">{label}</span>
-    </div>
-  );
+    </div>;
 };
 
 // ============================================
 // LLM ENGINE VISUALIZATION COMPONENT
 // ============================================
-const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
+const LLMEngineVisualization = ({
+  isVisible
+}: {
+  isVisible: boolean;
+}) => {
   const [activeDataSource, setActiveDataSource] = useState<number | null>(null);
   const [processingProgress, setProcessingProgress] = useState(0);
   const [currentPhase, setCurrentPhase] = useState(0);
@@ -1119,10 +1120,9 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
     budget: 88,
     volume: 72
   });
-
   useEffect(() => {
     if (!isVisible) return;
-    
+
     // Animate processing bar and sync output updates at 100%
     const progressTimer = setInterval(() => {
       setProcessingProgress(prev => {
@@ -1155,161 +1155,158 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
         market: Math.floor(2800 + Math.random() * 200)
       }));
     }, 2500);
-
     return () => {
       clearInterval(progressTimer);
       clearInterval(phaseTimer);
       clearInterval(dataTimer);
     };
   }, [isVisible]);
-
-  const dataSources = [
-    { 
-      id: 0, 
-      icon: Database, 
-      label: 'Onchain Data', 
-      items: ['CEX/DEX Volume', 'Wallet Activity', 'Token Transfers', 'Smart Contracts'],
-      value: liveData.onchain,
-      suffix: ' signals',
-      color: 'from-blue-500/20 to-transparent',
-      borderColor: 'border-blue-500/50',
-      activeBorder: 'border-blue-500',
-      iconBg: 'bg-blue-500/20',
-      iconColor: 'text-blue-500',
-      dotColor: 'bg-blue-500',
-      barColor: 'bg-blue-500/50'
-    },
-    { 
-      id: 1, 
-      icon: Activity, 
-      label: 'Social Signals', 
-      items: ['X Mentions', 'Naver Trends', 'Discord Activity', 'Telegram Buzz'],
-      value: liveData.social,
-      suffix: ' signals',
-      color: 'from-purple-500/20 to-transparent',
-      borderColor: 'border-purple-500/50',
-      activeBorder: 'border-purple-500',
-      iconBg: 'bg-purple-500/20',
-      iconColor: 'text-purple-500',
-      dotColor: 'bg-purple-500',
-      barColor: 'bg-purple-500/50'
-    },
-    { 
-      id: 2, 
-      icon: LineChart, 
-      label: 'Market Data', 
-      items: ['CEX Order Books', 'Price Action', 'Liquidity Depth', 'Funding Rates'],
-      value: liveData.market,
-      suffix: ' data points',
-      color: 'from-red-500/20 to-transparent',
-      borderColor: 'border-red-500/50',
-      activeBorder: 'border-red-500',
-      iconBg: 'bg-red-500/20',
-      iconColor: 'text-red-500',
-      dotColor: 'bg-red-500',
-      barColor: 'bg-red-500/50'
-    }
-  ];
-
-  const pipelineStages = [
-    { label: 'COLLECT', desc: 'Real-time data ingestion', icon: Database },
-    { label: 'PROCESS', desc: 'AI pattern recognition', icon: Cpu },
-    { label: 'OPTIMIZE', desc: 'Strategy generation', icon: Target },
-    { label: 'EXECUTE', desc: 'Precision timing', icon: Zap }
-  ];
-
-  const outputMetrics = [
-    { 
-      label: 'Launch Timing', 
-      sublabel: 'Optimal window confidence',
-      value: liveData.timing, 
-      color: 'green',
-      icon: Target
-    },
-    { 
-      label: 'Channel Mix', 
-      sublabel: 'Platform optimization',
-      value: liveData.channels, 
-      color: 'primary',
-      icon: Users
-    },
-    { 
-      label: 'Budget Efficiency', 
-      sublabel: 'ROI prediction',
-      value: liveData.budget, 
-      color: 'primary',
-      icon: DollarSign
-    },
-    { 
-      label: 'Volume Projection', 
-      sublabel: 'Liquidity depth forecast',
-      value: liveData.volume, 
-      color: 'green',
-      icon: TrendingUp
-    }
-  ];
-
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8 }}
-      className="mb-20 p-6 md:p-10 border border-primary/30 bg-gradient-to-b from-primary/5 via-background to-background relative overflow-hidden"
-    >
+  const dataSources = [{
+    id: 0,
+    icon: Database,
+    label: 'Onchain Data',
+    items: ['CEX/DEX Volume', 'Wallet Activity', 'Token Transfers', 'Smart Contracts'],
+    value: liveData.onchain,
+    suffix: ' signals',
+    color: 'from-blue-500/20 to-transparent',
+    borderColor: 'border-blue-500/50',
+    activeBorder: 'border-blue-500',
+    iconBg: 'bg-blue-500/20',
+    iconColor: 'text-blue-500',
+    dotColor: 'bg-blue-500',
+    barColor: 'bg-blue-500/50'
+  }, {
+    id: 1,
+    icon: Activity,
+    label: 'Social Signals',
+    items: ['X Mentions', 'Naver Trends', 'Discord Activity', 'Telegram Buzz'],
+    value: liveData.social,
+    suffix: ' signals',
+    color: 'from-purple-500/20 to-transparent',
+    borderColor: 'border-purple-500/50',
+    activeBorder: 'border-purple-500',
+    iconBg: 'bg-purple-500/20',
+    iconColor: 'text-purple-500',
+    dotColor: 'bg-purple-500',
+    barColor: 'bg-purple-500/50'
+  }, {
+    id: 2,
+    icon: LineChart,
+    label: 'Market Data',
+    items: ['CEX Order Books', 'Price Action', 'Liquidity Depth', 'Funding Rates'],
+    value: liveData.market,
+    suffix: ' data points',
+    color: 'from-red-500/20 to-transparent',
+    borderColor: 'border-red-500/50',
+    activeBorder: 'border-red-500',
+    iconBg: 'bg-red-500/20',
+    iconColor: 'text-red-500',
+    dotColor: 'bg-red-500',
+    barColor: 'bg-red-500/50'
+  }];
+  const pipelineStages = [{
+    label: 'COLLECT',
+    desc: 'Real-time data ingestion',
+    icon: Database
+  }, {
+    label: 'PROCESS',
+    desc: 'AI pattern recognition',
+    icon: Cpu
+  }, {
+    label: 'OPTIMIZE',
+    desc: 'Strategy generation',
+    icon: Target
+  }, {
+    label: 'EXECUTE',
+    desc: 'Precision timing',
+    icon: Zap
+  }];
+  const outputMetrics = [{
+    label: 'Launch Timing',
+    sublabel: 'Optimal window confidence',
+    value: liveData.timing,
+    color: 'green',
+    icon: Target
+  }, {
+    label: 'Channel Mix',
+    sublabel: 'Platform optimization',
+    value: liveData.channels,
+    color: 'primary',
+    icon: Users
+  }, {
+    label: 'Budget Efficiency',
+    sublabel: 'ROI prediction',
+    value: liveData.budget,
+    color: 'primary',
+    icon: DollarSign
+  }, {
+    label: 'Volume Projection',
+    sublabel: 'Liquidity depth forecast',
+    value: liveData.volume,
+    color: 'green',
+    icon: TrendingUp
+  }];
+  return <motion.div initial={{
+    opacity: 0,
+    y: 30
+  }} animate={isVisible ? {
+    opacity: 1,
+    y: 0
+  } : {}} transition={{
+    duration: 0.8
+  }} className="mb-20 p-6 md:p-10 border border-primary/30 bg-gradient-to-b from-primary/5 via-background to-background relative overflow-hidden">
       {/* Animated background patterns */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: `
+      backgroundImage: `
           linear-gradient(hsl(var(--primary)) 1px, transparent 1px),
           linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)
         `,
-        backgroundSize: '40px 40px'
-      }} />
+      backgroundSize: '40px 40px'
+    }} />
 
       {/* Floating particles */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 rounded-full bg-primary/40"
-          style={{
-            left: `${20 + i * 12}%`,
-            top: `${30 + (i % 3) * 20}%`
-          }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 0.8, 0.2],
-            scale: [1, 1.5, 1]
-          }}
-          transition={{
-            duration: 3 + i * 0.5,
-            repeat: Infinity,
-            delay: i * 0.3
-          }}
-        />
-      ))}
+      {[...Array(6)].map((_, i) => <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-primary/40" style={{
+      left: `${20 + i * 12}%`,
+      top: `${30 + i % 3 * 20}%`
+    }} animate={{
+      y: [0, -30, 0],
+      opacity: [0.2, 0.8, 0.2],
+      scale: [1, 1.5, 1]
+    }} transition={{
+      duration: 3 + i * 0.5,
+      repeat: Infinity,
+      delay: i * 0.3
+    }} />)}
 
       {/* Central glow */}
-      <motion.div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 60%)' }}
-        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-      />
+      <motion.div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full pointer-events-none" style={{
+      background: 'radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 60%)'
+    }} animate={{
+      scale: [1, 1.15, 1],
+      opacity: [0.3, 0.5, 0.3]
+    }} transition={{
+      duration: 5,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }} />
 
       <div className="relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
-          <motion.div 
-            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-4"
-            animate={{ 
-              boxShadow: ['0 0 20px hsl(var(--primary) / 0.1)', '0 0 40px hsl(var(--primary) / 0.2)', '0 0 20px hsl(var(--primary) / 0.1)'],
-              borderColor: ['hsl(var(--primary) / 0.3)', 'hsl(var(--primary) / 0.6)', 'hsl(var(--primary) / 0.3)']
-            }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <motion.div
-              animate={{ rotate: [0, 360] }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-            >
+          <motion.div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-4" animate={{
+          boxShadow: ['0 0 20px hsl(var(--primary) / 0.1)', '0 0 40px hsl(var(--primary) / 0.2)', '0 0 20px hsl(var(--primary) / 0.1)'],
+          borderColor: ['hsl(var(--primary) / 0.3)', 'hsl(var(--primary) / 0.6)', 'hsl(var(--primary) / 0.3)']
+        }} transition={{
+          duration: 2,
+          repeat: Infinity
+        }}>
+            <motion.div animate={{
+            rotate: [0, 360]
+          }} transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear"
+          }}>
               <Cpu className="w-4 h-4 text-primary" />
             </motion.div>
             <span className="text-xs font-mono text-primary tracking-wider">POWERED BY IUM AI ENGINE</span>
@@ -1324,46 +1321,44 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
 
         {/* Pipeline stages with active indicator */}
         <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
-          {pipelineStages.map((stage, i) => (
-            <motion.div
-              key={stage.label}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: i * 0.1 + 0.3 }}
-              className="flex items-center gap-2"
-            >
-              <motion.div 
-                className={`px-4 py-3 bg-background border transition-all duration-300 ${currentPhase === i ? 'border-primary shadow-[0_0_20px_hsl(var(--primary)/0.3)]' : 'border-border'}`}
-                animate={currentPhase === i ? { scale: [1, 1.02, 1] } : {}}
-                transition={{ duration: 0.5 }}
-              >
+          {pipelineStages.map((stage, i) => <motion.div key={stage.label} initial={{
+          opacity: 0,
+          scale: 0.8
+        }} animate={isVisible ? {
+          opacity: 1,
+          scale: 1
+        } : {}} transition={{
+          delay: i * 0.1 + 0.3
+        }} className="flex items-center gap-2">
+              <motion.div className={`px-4 py-3 bg-background border transition-all duration-300 ${currentPhase === i ? 'border-primary shadow-[0_0_20px_hsl(var(--primary)/0.3)]' : 'border-border'}`} animate={currentPhase === i ? {
+            scale: [1, 1.02, 1]
+          } : {}} transition={{
+            duration: 0.5
+          }}>
                 <div className="flex items-center gap-2 mb-1">
                   <stage.icon className={`w-3 h-3 ${currentPhase === i ? 'text-primary' : 'text-muted-foreground'}`} />
                   <p className={`text-xs font-mono ${currentPhase === i ? 'text-primary' : 'text-muted-foreground'}`}>{stage.label}</p>
                 </div>
                 <p className="text-[10px] text-muted-foreground">{stage.desc}</p>
-                {currentPhase === i && (
-                  <motion.div 
-                    className="h-0.5 bg-primary mt-2 rounded-full"
-                    initial={{ width: 0 }}
-                    animate={{ width: '100%' }}
-                    transition={{ duration: 2.5 }}
-                  />
-                )}
+                {currentPhase === i && <motion.div className="h-0.5 bg-primary mt-2 rounded-full" initial={{
+              width: 0
+            }} animate={{
+              width: '100%'
+            }} transition={{
+              duration: 2.5
+            }} />}
               </motion.div>
-              {i < pipelineStages.length - 1 && (
-                <motion.div
-                  animate={{ 
-                    x: [0, 5, 0], 
-                    opacity: currentPhase === i ? [0.8, 1, 0.8] : [0.3, 0.5, 0.3]
-                  }}
-                  transition={{ duration: 1, repeat: Infinity, delay: i * 0.15 }}
-                >
+              {i < pipelineStages.length - 1 && <motion.div animate={{
+            x: [0, 5, 0],
+            opacity: currentPhase === i ? [0.8, 1, 0.8] : [0.3, 0.5, 0.3]
+          }} transition={{
+            duration: 1,
+            repeat: Infinity,
+            delay: i * 0.15
+          }}>
                   <ArrowRight className={`w-4 h-4 ${currentPhase === i ? 'text-primary' : 'text-primary/30'}`} />
-                </motion.div>
-              )}
-            </motion.div>
-          ))}
+                </motion.div>}
+            </motion.div>)}
         </div>
 
         {/* Main visualization grid - 5 columns: Sources, Connector, Core, Connector, Output */}
@@ -1375,21 +1370,19 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
               LIVE DATA SOURCES
             </p>
-            {dataSources.map((source, i) => (
-              <motion.div
-                key={source.id}
-                initial={{ opacity: 0, x: -30 }}
-                animate={isVisible ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: i * 0.1 + 0.5 }}
-                onMouseEnter={() => setActiveDataSource(source.id)}
-                onMouseLeave={() => setActiveDataSource(null)}
-                className={`relative p-4 border bg-background transition-all duration-300 cursor-pointer overflow-hidden ${activeDataSource === source.id ? `${source.activeBorder} shadow-[0_0_25px_hsl(var(--primary)/0.15)]` : `${source.borderColor} hover:${source.activeBorder}`}`}
-              >
+            {dataSources.map((source, i) => <motion.div key={source.id} initial={{
+            opacity: 0,
+            x: -30
+          }} animate={isVisible ? {
+            opacity: 1,
+            x: 0
+          } : {}} transition={{
+            delay: i * 0.1 + 0.5
+          }} onMouseEnter={() => setActiveDataSource(source.id)} onMouseLeave={() => setActiveDataSource(null)} className={`relative p-4 border bg-background transition-all duration-300 cursor-pointer overflow-hidden ${activeDataSource === source.id ? `${source.activeBorder} shadow-[0_0_25px_hsl(var(--primary)/0.15)]` : `${source.borderColor} hover:${source.activeBorder}`}`}>
                 {/* Gradient overlay on hover */}
-                <motion.div 
-                  className={`absolute inset-0 bg-gradient-to-r ${source.color} opacity-0`}
-                  animate={{ opacity: activeDataSource === source.id ? 0.5 : 0 }}
-                />
+                <motion.div className={`absolute inset-0 bg-gradient-to-r ${source.color} opacity-0`} animate={{
+              opacity: activeDataSource === source.id ? 0.5 : 0
+            }} />
 
                 <div className="relative z-10">
                   <div className="flex items-center justify-between mb-3">
@@ -1400,17 +1393,20 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                       <span className="text-sm font-medium text-foreground">{source.label}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <motion.span 
-                        className={`w-2 h-2 rounded-full ${source.dotColor}`}
-                        animate={{ opacity: [1, 0.3, 1], scale: [1, 0.8, 1] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      />
-                      <motion.span 
-                        key={source.value}
-                        initial={{ opacity: 0.5, y: -5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className={`text-xs font-mono ${source.iconColor}`}
-                      >
+                      <motion.span className={`w-2 h-2 rounded-full ${source.dotColor}`} animate={{
+                    opacity: [1, 0.3, 1],
+                    scale: [1, 0.8, 1]
+                  }} transition={{
+                    duration: 1.5,
+                    repeat: Infinity
+                  }} />
+                      <motion.span key={source.value} initial={{
+                    opacity: 0.5,
+                    y: -5
+                  }} animate={{
+                    opacity: 1,
+                    y: 0
+                  }} className={`text-xs font-mono ${source.iconColor}`}>
                         {source.value.toLocaleString()}{source.suffix}
                       </motion.span>
                     </div>
@@ -1418,135 +1414,148 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                   
                   {/* Data items with mini progress indicators */}
                   <div className="grid grid-cols-2 gap-1.5">
-                    {source.items.map((item, j) => (
-                      <motion.div 
-                        key={j} 
-                        className="flex items-center gap-1.5"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: i * 0.1 + j * 0.05 + 0.6 }}
-                      >
-                        <motion.div 
-                          className={`w-1 h-1 rounded-full ${source.dotColor}/50`}
-                          animate={{ scale: [1, 1.5, 1] }}
-                          transition={{ duration: 2, repeat: Infinity, delay: j * 0.2 }}
-                        />
+                    {source.items.map((item, j) => <motion.div key={j} className="flex items-center gap-1.5" initial={{
+                  opacity: 0
+                }} animate={{
+                  opacity: 1
+                }} transition={{
+                  delay: i * 0.1 + j * 0.05 + 0.6
+                }}>
+                        <motion.div className={`w-1 h-1 rounded-full ${source.dotColor}/50`} animate={{
+                    scale: [1, 1.5, 1]
+                  }} transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: j * 0.2
+                  }} />
                         <span className="text-[10px] text-muted-foreground">{item}</span>
-                      </motion.div>
-                    ))}
+                      </motion.div>)}
                   </div>
 
                   {/* Mini throughput bar */}
                   <div className="mt-3 h-1 bg-muted rounded-full overflow-hidden">
-                    <motion.div 
-                      className={`h-full ${source.barColor} rounded-full`}
-                      animate={{ width: ['0%', '100%', '0%'] }}
-                      transition={{ duration: 3, repeat: Infinity, delay: i * 0.5 }}
-                    />
+                    <motion.div className={`h-full ${source.barColor} rounded-full`} animate={{
+                  width: ['0%', '100%', '0%']
+                }} transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: i * 0.5
+                }} />
                   </div>
                 </div>
 
                 {/* Animated data flow particles */}
-                {activeDataSource === source.id && (
-                  <motion.div
-                    className={`absolute right-2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full ${source.dotColor}`}
-                    animate={{ x: [0, 20], opacity: [1, 0] }}
-                    transition={{ duration: 0.8, repeat: Infinity }}
-                  />
-                )}
-              </motion.div>
-            ))}
+                {activeDataSource === source.id && <motion.div className={`absolute right-2 top-1/2 -translate-y-1/2 w-2 h-2 rounded-full ${source.dotColor}`} animate={{
+              x: [0, 20],
+              opacity: [1, 0]
+            }} transition={{
+              duration: 0.8,
+              repeat: Infinity
+            }} />}
+              </motion.div>)}
           </div>
 
           {/* Connection Lines: Data Sources → AI Core */}
           <div className="hidden lg:flex flex-col items-center justify-center px-4 py-8 relative z-10">
             {/* Animated connection lines from each data source */}
-            {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                className="relative h-16 flex items-center"
-                initial={{ opacity: 0 }}
-                animate={isVisible ? { opacity: 1 } : {}}
-                transition={{ delay: 0.6 + i * 0.1 }}
-              >
+            {[0, 1, 2].map(i => <motion.div key={i} className="relative h-16 flex items-center" initial={{
+            opacity: 0
+          }} animate={isVisible ? {
+            opacity: 1
+          } : {}} transition={{
+            delay: 0.6 + i * 0.1
+          }}>
                 {/* Main connection line */}
-                <div className={`w-16 h-0.5 relative overflow-hidden ${
-                  i === 0 ? 'bg-gradient-to-r from-blue-500/60 to-primary/40' :
-                  i === 1 ? 'bg-gradient-to-r from-purple-500/60 to-primary/40' :
-                  'bg-gradient-to-r from-red-500/60 to-primary/40'
-                }`}>
+                <div className={`w-16 h-0.5 relative overflow-hidden ${i === 0 ? 'bg-gradient-to-r from-blue-500/60 to-primary/40' : i === 1 ? 'bg-gradient-to-r from-purple-500/60 to-primary/40' : 'bg-gradient-to-r from-red-500/60 to-primary/40'}`}>
                   {/* Animated particle */}
-                  <motion.div
-                    className={`absolute h-full w-3 ${
-                      i === 0 ? 'bg-blue-400' : i === 1 ? 'bg-purple-400' : 'bg-red-400'
-                    }`}
-                    animate={{ x: ['-100%', '600%'] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.3, ease: "linear" }}
-                  />
+                  <motion.div className={`absolute h-full w-3 ${i === 0 ? 'bg-blue-400' : i === 1 ? 'bg-purple-400' : 'bg-red-400'}`} animate={{
+                x: ['-100%', '600%']
+              }} transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                delay: i * 0.3,
+                ease: "linear"
+              }} />
                 </div>
                 {/* Arrow head */}
-                <motion.div
-                  className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-primary/60"
-                  animate={{ opacity: [0.6, 1, 0.6] }}
-                  transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
-                />
-              </motion.div>
-            ))}
+                <motion.div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-primary/60" animate={{
+              opacity: [0.6, 1, 0.6]
+            }} transition={{
+              duration: 1,
+              repeat: Infinity,
+              delay: i * 0.2
+            }} />
+              </motion.div>)}
           </div>
 
           {/* LLM Core - Enhanced */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.8, type: "spring" }}
-            className="relative flex flex-col items-center z-10"
-          >
+          <motion.div initial={{
+          opacity: 0,
+          scale: 0.8
+        }} animate={isVisible ? {
+          opacity: 1,
+          scale: 1
+        } : {}} transition={{
+          delay: 0.8,
+          type: "spring"
+        }} className="relative flex flex-col items-center z-10">
 
             {/* Main LLM Core Box */}
             <div className="relative">
               {/* Outer glow ring */}
-              <motion.div 
-                className="absolute -inset-4 rounded-lg"
-                style={{ background: 'radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%)' }}
-                animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              />
+              <motion.div className="absolute -inset-4 rounded-lg" style={{
+              background: 'radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%)'
+            }} animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.5, 0.8, 0.5]
+            }} transition={{
+              duration: 3,
+              repeat: Infinity
+            }} />
 
               {/* Gradient border wrapper */}
               <div className="relative p-[2px] bg-gradient-to-br from-blue-500 via-purple-500 to-red-500">
                 <div className="relative p-8 bg-background">
                   {/* Pulsing border overlay */}
-                  <motion.div 
-                    className="absolute inset-0 border-2 border-transparent rounded-sm"
-                    style={{ 
-                      background: 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(168,85,247,0.3), rgba(239,68,68,0.3))',
-                      opacity: 0
-                    }}
-                    animate={{ opacity: [0, 0.5, 0] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
+                  <motion.div className="absolute inset-0 border-2 border-transparent rounded-sm" style={{
+                  background: 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(168,85,247,0.3), rgba(239,68,68,0.3))',
+                  opacity: 0
+                }} animate={{
+                  opacity: [0, 0.5, 0]
+                }} transition={{
+                  duration: 2,
+                  repeat: Infinity
+                }} />
                   
                   {/* Corner accents with gradient colors */}
-                  <motion.div 
-                    className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-blue-500"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: 0 }}
-                  />
-                  <motion.div 
-                    className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-purple-500"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: 0.2 }}
-                  />
-                  <motion.div 
-                    className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-purple-500"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: 0.4 }}
-                  />
-                  <motion.div 
-                    className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-red-500"
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 1.5, repeat: Infinity, delay: 0.6 }}
-                  />
+                  <motion.div className="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-blue-500" animate={{
+                  opacity: [0.5, 1, 0.5]
+                }} transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: 0
+                }} />
+                  <motion.div className="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-purple-500" animate={{
+                  opacity: [0.5, 1, 0.5]
+                }} transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: 0.2
+                }} />
+                  <motion.div className="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-purple-500" animate={{
+                  opacity: [0.5, 1, 0.5]
+                }} transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: 0.4
+                }} />
+                  <motion.div className="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-red-500" animate={{
+                  opacity: [0.5, 1, 0.5]
+                }} transition={{
+                  duration: 1.5,
+                  repeat: Infinity,
+                  delay: 0.6
+                }} />
                 
                 <div className="text-center space-y-4">
                   {/* Rotating icon with glow */}
@@ -1561,18 +1570,24 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                         </linearGradient>
                       </defs>
                     </svg>
-                    <motion.div
-                      className="absolute inset-0 rounded-full"
-                      style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 70%)' }}
-                      animate={{ scale: [1, 1.3, 1] }}
-                      transition={{ duration: 2, repeat: Infinity }}
-                    />
-                    <motion.div
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                      className="relative"
-                    >
-                      <Sparkles className="w-20 h-20" style={{ stroke: 'url(#iconGradient)' }} />
+                    <motion.div className="absolute inset-0 rounded-full" style={{
+                      background: 'radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 70%)'
+                    }} animate={{
+                      scale: [1, 1.3, 1]
+                    }} transition={{
+                      duration: 2,
+                      repeat: Infinity
+                    }} />
+                    <motion.div animate={{
+                      rotate: [0, 360]
+                    }} transition={{
+                      duration: 15,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }} className="relative">
+                      <Sparkles className="w-20 h-20" style={{
+                        stroke: 'url(#iconGradient)'
+                      }} />
                     </motion.div>
                   </div>
                   
@@ -1588,16 +1603,16 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                       <span>{Math.floor(processingProgress)}%</span>
                     </div>
                     <div className="h-2 bg-muted rounded-full overflow-hidden relative">
-                      <motion.div 
-                        className="h-full bg-gradient-to-r from-primary via-primary to-primary/50 rounded-full"
-                        style={{ width: `${processingProgress}%` }}
-                      />
+                      <motion.div className="h-full bg-gradient-to-r from-primary via-primary to-primary/50 rounded-full" style={{
+                        width: `${processingProgress}%`
+                      }} />
                       {/* Shimmer effect */}
-                      <motion.div 
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                        animate={{ x: ['-100%', '100%'] }}
-                        transition={{ duration: 1.5, repeat: Infinity }}
-                      />
+                      <motion.div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" animate={{
+                        x: ['-100%', '100%']
+                      }} transition={{
+                        duration: 1.5,
+                        repeat: Infinity
+                      }} />
                     </div>
                     <div className="flex justify-center gap-4 text-[9px] text-muted-foreground">
                       <span>50+ signals</span>
@@ -1617,30 +1632,32 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
           {/* Connection Lines: AI Core → Output */}
           <div className="hidden lg:flex flex-col items-center justify-center px-4 py-8 relative z-10">
             {/* Single connection with multiple particles */}
-            <motion.div
-              className="relative flex items-center"
-              initial={{ opacity: 0 }}
-              animate={isVisible ? { opacity: 1 } : {}}
-              transition={{ delay: 1 }}
-            >
+            <motion.div className="relative flex items-center" initial={{
+            opacity: 0
+          }} animate={isVisible ? {
+            opacity: 1
+          } : {}} transition={{
+            delay: 1
+          }}>
               {/* Main connection line */}
               <div className="w-16 h-0.5 bg-gradient-to-r from-primary/60 to-primary/40 relative overflow-hidden">
                 {/* Multiple animated particles */}
-                {[0, 1, 2].map((i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute h-full w-3 bg-primary"
-                    animate={{ x: ['-100%', '600%'] }}
-                    transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.4, ease: "linear" }}
-                  />
-                ))}
+                {[0, 1, 2].map(i => <motion.div key={i} className="absolute h-full w-3 bg-primary" animate={{
+                x: ['-100%', '600%']
+              }} transition={{
+                duration: 1.2,
+                repeat: Infinity,
+                delay: i * 0.4,
+                ease: "linear"
+              }} />)}
               </div>
               {/* Arrow head */}
-              <motion.div
-                className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-primary/80"
-                animate={{ opacity: [0.6, 1, 0.6] }}
-                transition={{ duration: 1, repeat: Infinity }}
-              />
+              <motion.div className="w-0 h-0 border-t-[5px] border-t-transparent border-b-[5px] border-b-transparent border-l-[8px] border-l-primary/80" animate={{
+              opacity: [0.6, 1, 0.6]
+            }} transition={{
+              duration: 1,
+              repeat: Infinity
+            }} />
             </motion.div>
           </div>
 
@@ -1651,17 +1668,20 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             </p>
             
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={isVisible ? { opacity: 1, x: 0 } : {}}
-              transition={{ delay: 1 }}
-              className="p-5 border border-primary/50 bg-background relative overflow-hidden"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            x: 30
+          }} animate={isVisible ? {
+            opacity: 1,
+            x: 0
+          } : {}} transition={{
+            delay: 1
+          }} className="p-5 border border-primary/50 bg-background relative overflow-hidden">
               {/* Background pattern */}
               <div className="absolute inset-0 opacity-[0.02]" style={{
-                backgroundImage: 'radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)',
-                backgroundSize: '16px 16px'
-              }} />
+              backgroundImage: 'radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)',
+              backgroundSize: '16px 16px'
+            }} />
 
               <div className="relative z-10">
                 <div className="flex items-center gap-2 mb-5">
@@ -1669,71 +1689,77 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                     <Target className="w-4 h-4 text-primary" />
                   </div>
                   <span className="text-sm font-medium text-foreground">Optimized Strategy</span>
-                  <motion.span 
-                    className="ml-auto text-[10px] px-2 py-0.5 bg-green-500/20 text-green-500 rounded-full"
-                    animate={{ opacity: [0.7, 1, 0.7] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
+                  <motion.span className="ml-auto text-[10px] px-2 py-0.5 bg-green-500/20 text-green-500 rounded-full" animate={{
+                  opacity: [0.7, 1, 0.7]
+                }} transition={{
+                  duration: 2,
+                  repeat: Infinity
+                }}>
                     LIVE
                   </motion.span>
                 </div>
 
                 {/* Simplified Metric Cards - 2x2 Grid */}
                 <div className="grid grid-cols-2 gap-3">
-                  {outputMetrics.map((metric, i) => (
-                    <motion.div 
-                      key={metric.label}
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-                      transition={{ delay: 1.2 + i * 0.1 }}
-                      className="p-3 bg-muted/30 border border-border/50 rounded-sm"
-                    >
+                  {outputMetrics.map((metric, i) => <motion.div key={metric.label} initial={{
+                  opacity: 0,
+                  y: 10
+                }} animate={isVisible ? {
+                  opacity: 1,
+                  y: 0
+                } : {}} transition={{
+                  delay: 1.2 + i * 0.1
+                }} className="p-3 bg-muted/30 border border-border/50 rounded-sm">
                       <div className="flex items-center gap-2 mb-2">
                         <metric.icon className={`w-3.5 h-3.5 ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`} />
                         <span className="text-[10px] text-muted-foreground uppercase tracking-wide">{metric.label}</span>
                       </div>
                       
                       <div className="flex items-end justify-between gap-2 mb-2">
-                        <motion.span 
-                          key={metric.value}
-                          initial={{ opacity: 0.5 }}
-                          animate={{ opacity: 1 }}
-                          className={`text-xl font-mono font-medium ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`}
-                        >
+                        <motion.span key={metric.value} initial={{
+                      opacity: 0.5
+                    }} animate={{
+                      opacity: 1
+                    }} className={`text-xl font-mono font-medium ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`}>
                           {metric.value}%
                         </motion.span>
                       </div>
                       
                       <div className="h-1 bg-muted rounded-full overflow-hidden">
-                        <motion.div 
-                          className={`h-full rounded-full ${metric.color === 'green' ? 'bg-green-500' : metric.color === 'yellow' ? 'bg-yellow-500' : 'bg-primary'}`}
-                          initial={{ width: 0 }}
-                          animate={isVisible ? { width: `${metric.value}%` } : {}}
-                          transition={{ duration: 1, delay: 1.3 + i * 0.1 }}
-                        />
+                        <motion.div className={`h-full rounded-full ${metric.color === 'green' ? 'bg-green-500' : metric.color === 'yellow' ? 'bg-yellow-500' : 'bg-primary'}`} initial={{
+                      width: 0
+                    }} animate={isVisible ? {
+                      width: `${metric.value}%`
+                    } : {}} transition={{
+                      duration: 1,
+                      delay: 1.3 + i * 0.1
+                    }} />
                       </div>
                       
                       <p className="text-[9px] text-muted-foreground mt-1.5">{metric.sublabel}</p>
-                    </motion.div>
-                  ))}
+                    </motion.div>)}
                 </div>
               </div>
             </motion.div>
 
             {/* Confidence Summary */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={isVisible ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 1.6 }}
-              className="p-3 border border-green-500/30 bg-green-500/5"
-            >
+            <motion.div initial={{
+            opacity: 0,
+            y: 10
+          }} animate={isVisible ? {
+            opacity: 1,
+            y: 0
+          } : {}} transition={{
+            delay: 1.6
+          }} className="p-3 border border-green-500/30 bg-green-500/5">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <motion.div 
-                    className="w-2.5 h-2.5 rounded-full bg-green-500"
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
+                  <motion.div className="w-2.5 h-2.5 rounded-full bg-green-500" animate={{
+                  scale: [1, 1.2, 1]
+                }} transition={{
+                  duration: 2,
+                  repeat: Infinity
+                }} />
                   <span className="text-xs font-medium text-green-500">High Confidence</span>
                 </div>
                 <span className="text-xs font-mono text-green-500">
@@ -1745,27 +1771,30 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
         </div>
 
         {/* Connection to Framework */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 2 }}
-          className="mt-12 text-center"
-        >
+        <motion.div initial={{
+        opacity: 0,
+        y: 20
+      }} animate={isVisible ? {
+        opacity: 1,
+        y: 0
+      } : {}} transition={{
+        delay: 2
+      }} className="mt-12 text-center">
           <div className="inline-flex items-center gap-3 px-6 py-3 border border-border bg-muted/30 rounded-full">
             <Sparkles className="w-4 h-4 text-primary" />
             <p className="text-sm text-muted-foreground">This intelligence powers every stage of our framework</p>
           </div>
-          <motion.div
-            className="mt-4"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-          >
+          <motion.div className="mt-4" animate={{
+          y: [0, 8, 0]
+        }} transition={{
+          duration: 1.5,
+          repeat: Infinity
+        }}>
             <ArrowRight className="w-6 h-6 text-primary mx-auto rotate-90" />
           </motion.div>
         </motion.div>
       </div>
-    </motion.div>
-  );
+    </motion.div>;
 };
 
 // ============================================
@@ -2021,177 +2050,86 @@ const TiltCaseCard = ({
 const StrategyInActionSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  
-  // All case study projects
-  const allProjects = [
-    { name: 'MANTRA', category: 'RWA L1', result: '+450% Volume', description: 'GTM strategy and community building for the leading RWA Layer 1 blockchain, driving massive trading volume growth.', image: mantraBg, video: '/videos/projects/mantra-hero.mp4', slug: 'mantra' },
-    { name: 'Story Protocol', category: 'IP Protocol', result: '#1 Mindshare', description: 'Achieved top Kaito mindshare ranking through strategic KOL campaigns and community engagement.', image: storyBg, video: '/videos/projects/story-hero.mp4', slug: 'story-protocol' },
-    { name: 'peaq', category: 'DePIN', result: '85K+ Wallets', description: 'Launched DePIN ecosystem in Korea with summit events and influencer partnerships.', image: peaqBg, video: '/videos/projects/peaq-hero.mp4', slug: 'peaq' },
-    { name: 'BNB Chain', category: 'Infrastructure', result: '+340% Volume', description: 'Multi-channel campaign driving significant volume increase across Korean exchanges.', image: bnbBg, video: '/videos/projects/bnb-hero.mp4', slug: 'bnb-chain' },
-    { name: 'Bybit', category: 'Exchange', result: 'Top Events', description: 'Premium offline events and KOL partnerships establishing market presence.', image: bybitBg, video: '/videos/projects/bybit-hero.mp4', slug: 'bybit' },
-    { name: 'KuCoin', category: 'Exchange', result: '50K+ Users', description: 'Comprehensive market entry strategy with community building and PR.', image: kucoinBg, video: '/videos/projects/kucoin-hero.mp4', slug: 'kucoin' },
-    { name: 'Sahara AI', category: 'AI', result: 'KR Launch', description: 'Full Korean market launch including branding, community, and media relations.', image: saharaBg, video: '/videos/projects/sahara-hero.mp4', slug: 'sahara-ai' },
-    { name: 'OpenLedger', category: 'AI / Blockchain', result: 'Community', description: 'AI-powered blockchain community building and ecosystem development.', image: openledgerBg, slug: 'openledger' },
-  ];
 
-  const { scrollYProgress } = useScroll({
+  // All case study projects
+  const allProjects = [{
+    name: 'MANTRA',
+    category: 'RWA L1',
+    result: '+450% Volume',
+    description: 'GTM strategy and community building for the leading RWA Layer 1 blockchain, driving massive trading volume growth.',
+    image: mantraBg,
+    video: '/videos/projects/mantra-hero.mp4',
+    slug: 'mantra'
+  }, {
+    name: 'Story Protocol',
+    category: 'IP Protocol',
+    result: '#1 Mindshare',
+    description: 'Achieved top Kaito mindshare ranking through strategic KOL campaigns and community engagement.',
+    image: storyBg,
+    video: '/videos/projects/story-hero.mp4',
+    slug: 'story-protocol'
+  }, {
+    name: 'peaq',
+    category: 'DePIN',
+    result: '85K+ Wallets',
+    description: 'Launched DePIN ecosystem in Korea with summit events and influencer partnerships.',
+    image: peaqBg,
+    video: '/videos/projects/peaq-hero.mp4',
+    slug: 'peaq'
+  }, {
+    name: 'BNB Chain',
+    category: 'Infrastructure',
+    result: '+340% Volume',
+    description: 'Multi-channel campaign driving significant volume increase across Korean exchanges.',
+    image: bnbBg,
+    video: '/videos/projects/bnb-hero.mp4',
+    slug: 'bnb-chain'
+  }, {
+    name: 'Bybit',
+    category: 'Exchange',
+    result: 'Top Events',
+    description: 'Premium offline events and KOL partnerships establishing market presence.',
+    image: bybitBg,
+    video: '/videos/projects/bybit-hero.mp4',
+    slug: 'bybit'
+  }, {
+    name: 'KuCoin',
+    category: 'Exchange',
+    result: '50K+ Users',
+    description: 'Comprehensive market entry strategy with community building and PR.',
+    image: kucoinBg,
+    video: '/videos/projects/kucoin-hero.mp4',
+    slug: 'kucoin'
+  }, {
+    name: 'Sahara AI',
+    category: 'AI',
+    result: 'KR Launch',
+    description: 'Full Korean market launch including branding, community, and media relations.',
+    image: saharaBg,
+    video: '/videos/projects/sahara-hero.mp4',
+    slug: 'sahara-ai'
+  }, {
+    name: 'OpenLedger',
+    category: 'AI / Blockchain',
+    result: 'Community',
+    description: 'AI-powered blockchain community building and ecosystem development.',
+    image: openledgerBg,
+    slug: 'openledger'
+  }];
+  const {
+    scrollYProgress
+  } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"]
   });
 
   // Calculate active index based on scroll progress
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const newIndex = Math.min(
-      Math.floor(latest * allProjects.length),
-      allProjects.length - 1
-    );
+  useMotionValueEvent(scrollYProgress, "change", latest => {
+    const newIndex = Math.min(Math.floor(latest * allProjects.length), allProjects.length - 1);
     setActiveIndex(newIndex);
   });
-
   const currentProject = allProjects[activeIndex];
-
-  return (
-    <section ref={containerRef} className="relative" style={{ height: `${allProjects.length * 100}vh` }}>
-      {/* Sticky Container */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
-        {/* Background Media */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeIndex}
-            initial={{ opacity: 0, scale: 1.1 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute inset-0 z-0"
-          >
-            {currentProject.video ? (
-              <video
-                key={currentProject.video}
-                src={currentProject.video}
-                autoPlay
-                muted
-                loop
-                playsInline
-                className="w-full h-full object-cover"
-                poster={currentProject.image}
-              />
-            ) : (
-              <img
-                src={currentProject.image}
-                alt={currentProject.name}
-                className="w-full h-full object-cover"
-              />
-            )}
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Dark Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-transparent z-10" />
-
-        {/* Content */}
-        <div className="absolute inset-0 z-20 flex flex-col justify-end pb-16 md:pb-24 lg:pb-32 px-6 md:px-12 lg:px-20">
-          <div className="max-w-7xl mx-auto w-full">
-            {/* Header - Fixed */}
-            <div className="absolute top-8 left-6 md:left-12 lg:left-20 right-6 md:right-12 lg:right-20 flex items-center justify-between">
-              <div className="flex items-center gap-4">
-                <span className="text-primary text-sm tracking-widest uppercase font-medium">
-                  Case Studies
-                </span>
-                <span className="text-muted-foreground/60 text-sm">
-                  {String(activeIndex + 1).padStart(2, '0')} / {String(allProjects.length).padStart(2, '0')}
-                </span>
-              </div>
-              <Link 
-                to="/projects" 
-                className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all duration-300"
-              >
-                View All
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-
-            {/* Project Info */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="space-y-6"
-              >
-                <div className="flex items-center gap-4">
-                  <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-medium backdrop-blur-sm">
-                    {currentProject.category}
-                  </span>
-                  <span className="text-primary font-semibold text-sm">
-                    {currentProject.result}
-                  </span>
-                </div>
-
-                <h2 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-foreground tracking-tight">
-                  {currentProject.name}
-                </h2>
-
-                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-                  {currentProject.description}
-                </p>
-
-                <Link
-                  to={`/projects/${currentProject.slug}`}
-                  className="group inline-flex items-center gap-3 mt-4 px-6 py-3 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all duration-300"
-                >
-                  <span className="font-medium">View Case Study</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Progress Dots */}
-            <div className="absolute right-6 md:right-12 lg:right-20 top-1/2 -translate-y-1/2 flex flex-col gap-3">
-              {allProjects.map((project, i) => (
-                <button
-                  key={project.slug}
-                  onClick={() => {
-                    const targetScroll = (i / allProjects.length) * (containerRef.current?.scrollHeight || 0);
-                    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
-                  }}
-                  className="group relative flex items-center gap-3"
-                >
-                  <span className={`hidden md:block text-xs font-medium transition-all duration-300 ${
-                    i === activeIndex ? 'text-primary opacity-100' : 'text-muted-foreground/40 opacity-0 group-hover:opacity-100'
-                  }`}>
-                    {project.name}
-                  </span>
-                  <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    i === activeIndex 
-                      ? 'bg-primary scale-150' 
-                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/60'
-                  }`} />
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
-          animate={{ opacity: activeIndex === 0 ? 1 : 0 }}
-        >
-          <span className="text-xs text-muted-foreground/60 uppercase tracking-widest">Scroll</span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="w-5 h-8 rounded-full border border-muted-foreground/30 flex items-start justify-center p-1"
-          >
-            <div className="w-1 h-2 rounded-full bg-primary" />
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
+  return;
 };
 
 // ============================================
@@ -2259,33 +2197,7 @@ const ClientLogosMarquee = () => {
   const isInView = useInView(ref, {
     once: true
   });
-  return <section ref={ref} className="py-20 bg-muted/30 border-y border-border overflow-hidden">
-      <motion.p initial={{
-      opacity: 0
-    }} animate={isInView ? {
-      opacity: 1
-    } : {}} className="text-muted-foreground text-sm tracking-widest uppercase mb-12 px-6 md:px-12 lg:px-20">
-        Trusted By Industry Leaders
-      </motion.p>
-
-      {/* First row - left to right */}
-      <div className="relative mb-8">
-        <div className="flex animate-marquee">
-          {[...clientLogos, ...clientLogos].map((client, i) => <div key={`row1-${i}`} className="flex-shrink-0 mx-8 md:mx-12 group">
-              <img src={client.logo} alt={client.name} className="h-8 md:h-10 w-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" />
-            </div>)}
-        </div>
-      </div>
-
-      {/* Second row - right to left */}
-      <div className="relative">
-        <div className="flex animate-marquee-reverse">
-          {[...clientLogos.slice().reverse(), ...clientLogos.slice().reverse()].map((client, i) => <div key={`row2-${i}`} className="flex-shrink-0 mx-8 md:mx-12 group">
-              <img src={client.logo} alt={client.name} className="h-8 md:h-10 w-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300" />
-            </div>)}
-        </div>
-      </div>
-    </section>;
+  return;
 };
 
 // ============================================
@@ -2296,45 +2208,7 @@ const CTASection = () => {
   const isInView = useInView(ref, {
     once: true
   });
-  return <section ref={ref} className="relative px-6 md:px-12 lg:px-20 py-32 overflow-hidden" style={{
-    background: 'linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(240 10% 10%) 50%, hsl(var(--foreground)) 100%)'
-  }}>
-      {/* Subtle glow effect */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px] pointer-events-none" style={{
-      background: 'hsl(var(--primary))'
-    }} />
-      
-      <motion.div initial={{
-      opacity: 0,
-      y: 40
-    }} animate={isInView ? {
-      opacity: 1,
-      y: 0
-    } : {}} transition={{
-      duration: 0.8
-    }} className="relative max-w-3xl z-10">
-        <h2 className="text-[clamp(2rem,6vw,4rem)] font-medium leading-tight mb-4 text-background">
-          Ready to execute your
-          <br />
-          <span className="text-primary">Korea Strategy?</span>
-        </h2>
-        
-        <p className="text-background/60 text-lg mb-10 max-w-xl">
-          Join 30+ projects that have successfully launched in the Korean market with our data-driven GTM framework.
-        </p>
-        
-        <div className="flex flex-wrap gap-4">
-          <Link to="/research" className="group inline-flex items-center gap-3 px-8 py-4 border border-background/30 text-background font-medium text-sm tracking-wide hover:border-primary hover:bg-primary/10 transition-all duration-300">
-            Get the Market Report
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-          <Link to="/contact" className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-medium text-sm tracking-wide hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)]">
-            Schedule a Strategy Call
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
-      </motion.div>
-    </section>;
+  return;
 };
 
 // ============================================
