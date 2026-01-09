@@ -86,6 +86,105 @@ const TestimonialsCarousel = () => {
     setIsAutoPlaying(false);
   };
   const activeTestimonial = testimonials[activeIndex];
-  return;
+
+  return (
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-t border-border">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        className="max-w-5xl mx-auto"
+      >
+        <div className="text-center mb-12">
+          <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+            What Our Clients Say
+          </p>
+          <h2 className="text-3xl md:text-4xl font-medium text-foreground">
+            Trusted by Industry Leaders
+          </h2>
+        </div>
+
+        <div className="relative">
+          {/* Main testimonial card */}
+          <div className="relative overflow-hidden min-h-[400px] md:min-h-[320px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                className="p-8 md:p-12 border border-border bg-muted/30"
+              >
+                <Quote className="w-10 h-10 text-primary/30 mb-6" />
+                
+                <p className="text-lg md:text-xl text-foreground leading-relaxed mb-8">
+                  "{activeTestimonial.quote}"
+                </p>
+
+                <div className="flex items-center justify-between flex-wrap gap-4">
+                  <div className="flex items-center gap-4">
+                    <img 
+                      src={activeTestimonial.logo} 
+                      alt={activeTestimonial.company}
+                      className="h-8 w-auto opacity-80"
+                    />
+                    <div>
+                      <p className="font-medium text-foreground">{activeTestimonial.author}</p>
+                      <p className="text-sm text-muted-foreground">
+                        {activeTestimonial.role}, {activeTestimonial.company}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-2">
+                    <div className="flex gap-0.5">
+                      {[...Array(activeTestimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                      ))}
+                    </div>
+                    <span className="text-sm font-medium text-primary ml-2">
+                      {activeTestimonial.result}
+                    </span>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Navigation */}
+          <div className="flex items-center justify-between mt-6">
+            <div className="flex gap-2">
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goToSlide(i)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    i === activeIndex 
+                      ? 'bg-primary w-8' 
+                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                  }`}
+                />
+              ))}
+            </div>
+            
+            <div className="flex gap-2">
+              <button
+                onClick={goPrev}
+                className="p-2 border border-border hover:border-primary transition-colors"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button
+                onClick={goNext}
+                className="p-2 border border-border hover:border-primary transition-colors"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </section>
+  );
 };
 export default TestimonialsCarousel;
