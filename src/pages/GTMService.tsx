@@ -1618,81 +1618,20 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={isVisible ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.8, type: "spring" }}
-            className="relative flex flex-col items-center mt-20 lg:mt-32"
+            className="relative flex flex-col items-center mt-8 lg:mt-12"
           >
-            {/* Connection lines with flowing particles - Left (Enhanced Wave) */}
-            <div className="hidden lg:flex absolute left-0 top-1/2 -translate-x-full items-center w-32">
-              {/* Glow background */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-l from-primary/20 to-transparent blur-md"
-                animate={{ opacity: [0.3, 0.7, 0.3] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              
-              {/* Multiple parallel lines with wave particles */}
-              {[-8, 0, 8].map((offset, lineIndex) => (
-                <div 
-                  key={lineIndex}
-                  className="absolute w-full h-px"
-                  style={{ 
-                    top: `calc(50% + ${offset}px)`,
-                    background: `linear-gradient(to left, hsl(var(--primary) / ${0.6 - lineIndex * 0.1}), transparent)`
-                  }}
-                >
-                  {/* Wave particles */}
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute top-0 rounded-full bg-primary -translate-y-1/2"
-                      style={{ 
-                        width: i % 2 === 0 ? '8px' : '5px',
-                        height: i % 2 === 0 ? '8px' : '5px',
-                        boxShadow: '0 0 8px hsl(var(--primary) / 0.8)'
-                      }}
-                      animate={{ 
-                        x: [128, 0], 
-                        y: [0, offset > 0 ? -6 : 6, 0, offset > 0 ? 6 : -6, 0],
-                        opacity: [0, 0.7, 1, 0.7, 0],
-                        scale: [0.4, 1, 1.3, 1, 0.4]
-                      }}
-                      transition={{ 
-                        duration: 2.2 + lineIndex * 0.3, 
-                        repeat: Infinity, 
-                        delay: i * 0.35 + lineIndex * 0.15,
-                        ease: "easeInOut"
-                      }}
-                    />
-                  ))}
-                  
-                  {/* Glow trail for each particle */}
-                  {[0, 1, 2].map((i) => (
-                    <motion.div
-                      key={`glow-${i}`}
-                      className="absolute top-0 w-4 h-4 rounded-full -translate-y-1/2 blur-sm"
-                      style={{ background: 'hsl(var(--primary) / 0.4)' }}
-                      animate={{ 
-                        x: [128, 0], 
-                        y: [0, offset > 0 ? -6 : 6, 0, offset > 0 ? 6 : -6, 0],
-                        opacity: [0, 0.5, 0.8, 0.5, 0]
-                      }}
-                      transition={{ 
-                        duration: 2.2 + lineIndex * 0.3, 
-                        repeat: Infinity, 
-                        delay: i * 0.7 + lineIndex * 0.15,
-                        ease: "easeInOut"
-                      }}
-                    />
-                  ))}
-                </div>
-              ))}
-              
-              {/* Pulsing line effect */}
-              <motion.div
-                className="absolute w-full h-0.5 top-1/2 -translate-y-1/2"
-                style={{ background: 'linear-gradient(to left, hsl(var(--primary)), transparent)' }}
-                animate={{ opacity: [0.2, 0.8, 0.2], scaleX: [0.7, 1, 0.7] }}
-                transition={{ duration: 1.8, repeat: Infinity }}
-              />
+            {/* Connection lines with flowing particles - Left */}
+            <div className="hidden lg:flex absolute left-0 top-1/2 -translate-x-full items-center w-12">
+              <div className="w-full h-px bg-gradient-to-l from-primary/50 to-transparent relative">
+                {[0, 1, 2].map((i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute top-0 w-2 h-2 rounded-full bg-primary -translate-y-1/2"
+                    animate={{ x: [48, 0], opacity: [0, 1, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.5 }}
+                  />
+                ))}
+              </div>
             </div>
 
             {/* Main LLM Core Box */}
@@ -1776,79 +1715,18 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
               </div>
             </div>
 
-            {/* Connection lines with flowing particles - Right (Enhanced Wave) */}
-            <div className="hidden lg:flex absolute right-0 top-1/2 translate-x-full items-center w-32">
-              {/* Glow background */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-primary/20 to-transparent blur-md"
-                animate={{ opacity: [0.3, 0.7, 0.3] }}
-                transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
-              />
-              
-              {/* Multiple parallel lines with wave particles */}
-              {[-8, 0, 8].map((offset, lineIndex) => (
-                <div 
-                  key={lineIndex}
-                  className="absolute w-full h-px"
-                  style={{ 
-                    top: `calc(50% + ${offset}px)`,
-                    background: `linear-gradient(to right, hsl(var(--primary) / ${0.6 - lineIndex * 0.1}), transparent)`
-                  }}
-                >
-                  {/* Wave particles */}
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute top-0 rounded-full bg-primary -translate-y-1/2"
-                      style={{ 
-                        width: i % 2 === 0 ? '8px' : '5px',
-                        height: i % 2 === 0 ? '8px' : '5px',
-                        boxShadow: '0 0 8px hsl(var(--primary) / 0.8)'
-                      }}
-                      animate={{ 
-                        x: [0, 128], 
-                        y: [0, offset > 0 ? -6 : 6, 0, offset > 0 ? 6 : -6, 0],
-                        opacity: [0, 0.7, 1, 0.7, 0],
-                        scale: [0.4, 1, 1.3, 1, 0.4]
-                      }}
-                      transition={{ 
-                        duration: 2.2 + lineIndex * 0.3, 
-                        repeat: Infinity, 
-                        delay: i * 0.35 + lineIndex * 0.15,
-                        ease: "easeInOut"
-                      }}
-                    />
-                  ))}
-                  
-                  {/* Glow trail for each particle */}
-                  {[0, 1, 2].map((i) => (
-                    <motion.div
-                      key={`glow-${i}`}
-                      className="absolute top-0 w-4 h-4 rounded-full -translate-y-1/2 blur-sm"
-                      style={{ background: 'hsl(var(--primary) / 0.4)' }}
-                      animate={{ 
-                        x: [0, 128], 
-                        y: [0, offset > 0 ? -6 : 6, 0, offset > 0 ? 6 : -6, 0],
-                        opacity: [0, 0.5, 0.8, 0.5, 0]
-                      }}
-                      transition={{ 
-                        duration: 2.2 + lineIndex * 0.3, 
-                        repeat: Infinity, 
-                        delay: i * 0.7 + lineIndex * 0.15,
-                        ease: "easeInOut"
-                      }}
-                    />
-                  ))}
-                </div>
-              ))}
-              
-              {/* Pulsing line effect */}
-              <motion.div
-                className="absolute w-full h-0.5 top-1/2 -translate-y-1/2"
-                style={{ background: 'linear-gradient(to right, hsl(var(--primary)), transparent)' }}
-                animate={{ opacity: [0.2, 0.8, 0.2], scaleX: [0.7, 1, 0.7] }}
-                transition={{ duration: 1.8, repeat: Infinity, delay: 0.3 }}
-              />
+            {/* Connection lines with flowing particles - Right */}
+            <div className="hidden lg:flex absolute right-0 top-1/2 translate-x-full items-center w-12">
+              <div className="w-full h-px bg-gradient-to-r from-primary/50 to-transparent relative">
+                {[0, 1, 2].map((i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute top-0 w-2 h-2 rounded-full bg-primary -translate-y-1/2"
+                    animate={{ x: [0, 48], opacity: [0, 1, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.5 }}
+                  />
+                ))}
+              </div>
             </div>
           </motion.div>
 
