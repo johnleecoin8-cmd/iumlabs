@@ -449,6 +449,183 @@ const AnimatedProgressBar = ({
 };
 
 // ============================================
+// KOREA MAP SVG COMPONENT
+// ============================================
+const KoreaMapVisualization = ({ isVisible }: { isVisible: boolean }) => {
+  const [activePoint, setActivePoint] = useState<number | null>(null);
+  
+  const dataPoints = [
+    { id: 0, x: 65, y: 25, city: 'Seoul', value: '45%', label: 'Trading Volume', delay: 0.2 },
+    { id: 1, x: 75, y: 45, city: 'Busan', value: '18%', label: 'Trading Volume', delay: 0.4 },
+    { id: 2, x: 45, y: 35, city: 'Daegu', value: '12%', label: 'Trading Volume', delay: 0.6 },
+    { id: 3, x: 55, y: 50, city: 'Gwangju', value: '8%', label: 'Trading Volume', delay: 0.8 },
+  ];
+
+  return (
+    <div className="relative w-full aspect-[4/5] max-w-md mx-auto">
+      {/* Glow background */}
+      <motion.div
+        className="absolute inset-0 opacity-30"
+        style={{
+          background: 'radial-gradient(ellipse at 60% 40%, hsl(var(--primary) / 0.3) 0%, transparent 60%)',
+        }}
+        animate={{
+          scale: [1, 1.05, 1],
+          opacity: [0.3, 0.4, 0.3],
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Korea Map SVG */}
+      <svg viewBox="0 0 100 100" className="w-full h-full relative z-10">
+        {/* Simplified Korea peninsula shape */}
+        <motion.path
+          d="M55 5 
+             C 70 5, 85 15, 85 30
+             C 85 45, 80 55, 75 65
+             C 70 75, 65 85, 60 90
+             C 55 95, 50 95, 45 90
+             C 40 85, 35 75, 30 65
+             C 25 55, 20 45, 25 35
+             C 30 25, 40 15, 55 5 Z"
+          fill="none"
+          stroke="hsl(var(--primary))"
+          strokeWidth="0.5"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={isVisible ? { pathLength: 1, opacity: 1 } : {}}
+          transition={{ duration: 2, ease: "easeInOut" }}
+        />
+        
+        {/* Gradient fill */}
+        <motion.path
+          d="M55 5 
+             C 70 5, 85 15, 85 30
+             C 85 45, 80 55, 75 65
+             C 70 75, 65 85, 60 90
+             C 55 95, 50 95, 45 90
+             C 40 85, 35 75, 30 65
+             C 25 55, 20 45, 25 35
+             C 30 25, 40 15, 55 5 Z"
+          fill="url(#koreaGradient)"
+          initial={{ opacity: 0 }}
+          animate={isVisible ? { opacity: 0.3 } : {}}
+          transition={{ delay: 1, duration: 1 }}
+        />
+
+        {/* Gradient definition */}
+        <defs>
+          <linearGradient id="koreaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
+          </linearGradient>
+          
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        {/* Grid lines inside Korea */}
+        {[20, 40, 60, 80].map((y, i) => (
+          <motion.line
+            key={`h-${i}`}
+            x1="25"
+            y1={y}
+            x2="85"
+            y2={y}
+            stroke="hsl(var(--primary) / 0.1)"
+            strokeWidth="0.3"
+            strokeDasharray="2 2"
+            initial={{ opacity: 0 }}
+            animate={isVisible ? { opacity: 1 } : {}}
+            transition={{ delay: 1.5 + i * 0.1 }}
+          />
+        ))}
+
+        {/* Data points */}
+        {dataPoints.map((point) => (
+          <g key={point.id}>
+            {/* Pulse ring */}
+            <motion.circle
+              cx={point.x}
+              cy={point.y}
+              r="4"
+              fill="none"
+              stroke="hsl(var(--primary))"
+              strokeWidth="0.5"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={isVisible ? { 
+                scale: [1, 2, 1],
+                opacity: [0.8, 0, 0.8],
+              } : {}}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: point.delay + 1,
+                ease: "easeOut",
+              }}
+            />
+            
+            {/* Center dot */}
+            <motion.circle
+              cx={point.x}
+              cy={point.y}
+              r="2"
+              fill="hsl(var(--primary))"
+              filter="url(#glow)"
+              initial={{ scale: 0 }}
+              animate={isVisible ? { scale: 1 } : {}}
+              transition={{ delay: point.delay + 1, type: "spring" }}
+              onMouseEnter={() => setActivePoint(point.id)}
+              onMouseLeave={() => setActivePoint(null)}
+              className="cursor-pointer"
+            />
+          </g>
+        ))}
+      </svg>
+
+      {/* Data point tooltips */}
+      {dataPoints.map((point) => (
+        <motion.div
+          key={`tooltip-${point.id}`}
+          className="absolute pointer-events-none"
+          style={{
+            left: `${point.x}%`,
+            top: `${point.y}%`,
+            transform: 'translate(-50%, -150%)',
+          }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={activePoint === point.id || (isVisible && point.id === 0) ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="bg-background/90 backdrop-blur-sm border border-primary/50 px-3 py-2 text-center">
+            <p className="text-xs font-medium text-primary">{point.city}</p>
+            <p className="text-lg font-bold text-foreground">{point.value}</p>
+            <p className="text-[10px] text-muted-foreground">{point.label}</p>
+          </div>
+        </motion.div>
+      ))}
+
+      {/* Legend */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 flex justify-center gap-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 2 }}
+      >
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          <span className="text-xs text-muted-foreground">Trading Hub</span>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+// ============================================
 // MARKET INTELLIGENCE - Why Korea?
 // ============================================
 const MarketIntelligenceSection = () => {
@@ -467,7 +644,7 @@ const MarketIntelligenceSection = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="max-w-6xl mx-auto"
+        className="max-w-7xl mx-auto"
       >
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
           01 The Strategic Imperative
@@ -476,8 +653,13 @@ const MarketIntelligenceSection = () => {
           Why Korea?
         </h2>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
-          {/* Left: Data Visualization */}
+        <div className="grid lg:grid-cols-3 gap-12 lg:gap-8 mb-16">
+          {/* Left: Korea Map Visualization */}
+          <div className="lg:col-span-1">
+            <KoreaMapVisualization isVisible={isInView} />
+          </div>
+
+          {/* Middle: Data Visualization */}
           <div className="space-y-8">
             <div>
               <p className="text-xs tracking-widest text-primary font-medium mb-4">
@@ -512,31 +694,29 @@ const MarketIntelligenceSection = () => {
           </div>
 
           {/* Right: Insights */}
-          <div className="space-y-8">
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <p className="text-xs tracking-widest text-primary font-medium">CULTURE</p>
-                <p className="text-xl font-medium text-foreground">High-Risk, High-Reward</p>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Korean traders move fast and commit hard. When they believe in a project, they go all in.
-                </p>
-              </div>
-              
-              <div className="space-y-2">
-                <p className="text-xs tracking-widest text-primary font-medium">BARRIER</p>
-                <p className="text-xl font-medium text-foreground">Unique Ecosystem</p>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Naver, Kakao, VASP regulations, and cultural nuances. Global strategies fail here without localization.
-                </p>
-              </div>
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <p className="text-xs tracking-widest text-primary font-medium">CULTURE</p>
+              <p className="text-xl font-medium text-foreground">High-Risk, High-Reward</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Korean traders move fast and commit hard. When they believe in a project, they go all in.
+              </p>
+            </div>
+            
+            <div className="space-y-2">
+              <p className="text-xs tracking-widest text-primary font-medium">BARRIER</p>
+              <p className="text-xl font-medium text-foreground">Unique Ecosystem</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Naver, Kakao, VASP regulations, and cultural nuances. Global strategies fail here without localization.
+              </p>
+            </div>
 
-              <div className="space-y-2">
-                <p className="text-xs tracking-widest text-primary font-medium">OPPORTUNITY</p>
-                <p className="text-xl font-medium text-foreground">First-Mover Advantage</p>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Most global projects underestimate Korea. Those who get it right dominate.
-                </p>
-              </div>
+            <div className="space-y-2">
+              <p className="text-xs tracking-widest text-primary font-medium">OPPORTUNITY</p>
+              <p className="text-xl font-medium text-foreground">First-Mover Advantage</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Most global projects underestimate Korea. Those who get it right dominate.
+              </p>
             </div>
           </div>
         </div>
@@ -560,11 +740,169 @@ const MarketIntelligenceSection = () => {
 };
 
 // ============================================
+// CIRCULAR PROGRESS RING COMPONENT
+// ============================================
+const CircularProgressRing = ({ 
+  value, 
+  maxValue = 100, 
+  size = 120, 
+  strokeWidth = 8,
+  label,
+  suffix = '%',
+  prefix = '',
+  delay = 0,
+  isVisible = true,
+  color = 'primary'
+}: {
+  value: number;
+  maxValue?: number;
+  size?: number;
+  strokeWidth?: number;
+  label: string;
+  suffix?: string;
+  prefix?: string;
+  delay?: number;
+  isVisible?: boolean;
+  color?: string;
+}) => {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = radius * 2 * Math.PI;
+  const [progress, setProgress] = useState(0);
+  const displayValue = useCountUp({ end: value, delay: delay * 1000, isVisible, duration: 2000 });
+
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => {
+        setProgress((value / maxValue) * 100);
+      }, delay * 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, value, maxValue, delay]);
+
+  const strokeDashoffset = circumference - (progress / 100) * circumference;
+
+  return (
+    <div className="flex flex-col items-center">
+      <div className="relative" style={{ width: size, height: size }}>
+        {/* Background circle */}
+        <svg className="absolute inset-0 -rotate-90" width={size} height={size}>
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            fill="none"
+            stroke="hsl(var(--muted))"
+            strokeWidth={strokeWidth}
+          />
+          {/* Progress circle */}
+          <motion.circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            fill="none"
+            stroke={`hsl(var(--${color}))`}
+            strokeWidth={strokeWidth}
+            strokeLinecap="round"
+            strokeDasharray={circumference}
+            initial={{ strokeDashoffset: circumference }}
+            animate={{ strokeDashoffset }}
+            transition={{ duration: 1.5, ease: "easeOut", delay }}
+            style={{
+              filter: 'drop-shadow(0 0 8px hsl(var(--primary) / 0.5))',
+            }}
+          />
+        </svg>
+        
+        {/* Center value */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <motion.span 
+            className="text-2xl md:text-3xl font-bold text-foreground"
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: delay + 0.5, type: "spring" }}
+          >
+            {prefix}{displayValue}{suffix}
+          </motion.span>
+        </div>
+        
+        {/* Glow effect */}
+        <motion.div
+          className="absolute inset-0 rounded-full"
+          style={{
+            background: `radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%)`,
+          }}
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.5, 0.8, 0.5],
+          }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        />
+      </div>
+      <p className="text-sm font-medium text-foreground mt-4">{label}</p>
+    </div>
+  );
+};
+
+// ============================================
+// ANIMATED BAR CHART COMPONENT
+// ============================================
+const AnimatedBarChart = ({ isVisible }: { isVisible: boolean }) => {
+  const data = [
+    { label: 'Q1', value: 65, color: 'primary' },
+    { label: 'Q2', value: 85, color: 'primary' },
+    { label: 'Q3', value: 120, color: 'primary' },
+    { label: 'Q4', value: 180, color: 'primary' },
+  ];
+  
+  const maxValue = Math.max(...data.map(d => d.value));
+
+  return (
+    <div className="h-48 flex items-end justify-center gap-4">
+      {data.map((item, i) => (
+        <div key={item.label} className="flex flex-col items-center gap-2 flex-1 max-w-16">
+          <motion.div
+            className="w-full bg-primary/80 rounded-t relative overflow-hidden"
+            initial={{ height: 0 }}
+            animate={isVisible ? { height: `${(item.value / maxValue) * 100}%` } : { height: 0 }}
+            transition={{ delay: i * 0.15, duration: 0.8, ease: "easeOut" }}
+          >
+            {/* Shimmer effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-t from-transparent via-white/20 to-transparent"
+              initial={{ y: '100%' }}
+              animate={isVisible ? { y: '-100%' } : { y: '100%' }}
+              transition={{ delay: i * 0.15 + 0.8, duration: 0.6 }}
+            />
+            
+            {/* Value label */}
+            <motion.span
+              className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-medium text-primary"
+              initial={{ opacity: 0 }}
+              animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ delay: i * 0.15 + 0.5 }}
+            >
+              +{item.value}%
+            </motion.span>
+          </motion.div>
+          <span className="text-xs text-muted-foreground">{item.label}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+// ============================================
 // RESULTS DASHBOARD SECTION
 // ============================================
 const ResultsDashboardSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  const ringMetrics = [
+    { value: 340, maxValue: 400, label: 'Avg. Growth', suffix: '%', prefix: '+', delay: 0.2 },
+    { value: 85, maxValue: 100, label: 'Success Rate', suffix: '%', prefix: '', delay: 0.4 },
+    { value: 50, maxValue: 100, label: 'Volume ($M)', suffix: 'M', prefix: '$', delay: 0.6 },
+  ];
 
   const metrics = [
     { 
@@ -602,29 +940,65 @@ const ResultsDashboardSection = () => {
   ];
 
   return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-b border-border">
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-b border-border overflow-hidden">
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="max-w-6xl mx-auto"
+        className="max-w-7xl mx-auto"
       >
-        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-          03 Results
-        </p>
-        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-          The Numbers That Matter
-        </h2>
-        <p className="text-muted-foreground max-w-2xl mb-16">
-          Our data-driven approach delivers measurable results. Here's what we've achieved for our clients.
-        </p>
+        <div className="text-center mb-16">
+          <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+            03 Results
+          </p>
+          <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-4">
+            The Numbers That Matter
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto">
+            Our data-driven approach delivers measurable results. Here's what we've achieved for our clients.
+          </p>
+        </div>
 
+        {/* Circular Progress Rings */}
+        <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mb-20">
+          {ringMetrics.map((metric) => (
+            <CircularProgressRing
+              key={metric.label}
+              value={metric.value}
+              maxValue={metric.maxValue}
+              label={metric.label}
+              suffix={metric.suffix}
+              prefix={metric.prefix}
+              delay={metric.delay}
+              isVisible={isInView}
+              size={140}
+              strokeWidth={10}
+            />
+          ))}
+        </div>
+
+        {/* Quarterly Growth Chart */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.8 }}
+          className="max-w-2xl mx-auto mb-20"
+        >
+          <p className="text-xs tracking-widest text-primary font-medium mb-6 text-center">
+            QUARTERLY GROWTH TRAJECTORY
+          </p>
+          <div className="p-6 border border-border bg-muted/30 rounded-lg">
+            <AnimatedBarChart isVisible={isInView} />
+          </div>
+        </motion.div>
+
+        {/* Metric Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {metrics.map((metric, i) => (
             <motion.div
               key={metric.label}
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
+              transition={{ delay: i * 0.1 + 1, duration: 0.6 }}
               className="group relative p-6 border border-border bg-background hover:border-primary/50 transition-all duration-300"
             >
               {/* Icon */}
@@ -638,7 +1012,7 @@ const ResultsDashboardSection = () => {
                   end: metric.value, 
                   prefix: metric.prefix, 
                   suffix: metric.suffix, 
-                  delay: i * 200,
+                  delay: (i * 100) + 1000,
                   isVisible: isInView,
                   duration: 2000
                 })}
