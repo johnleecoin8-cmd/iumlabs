@@ -37,25 +37,29 @@ import { usePageTitle } from "@/hooks/usePageTitle";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { MessageSquare, FileText, Rocket, TrendingUp, Check, ArrowRight, ArrowDown } from "lucide-react";
 const processPhases = [{
-  title: "Share",
+  title: "ANALYZE",
+  subtitle: "Intelligence",
   icon: MessageSquare,
-  description: "Tell us about your project vision, target audience, budget range, and success metrics",
-  subPoints: ["Project goals & timeline", "Budget & resources", "Target KPIs"]
+  subPoints: ["Deep Market Research", "Competitor Analysis", "Narrative Localization"],
+  quote: '"We don\'t guess. We analyze."'
 }, {
-  title: "Propose",
+  title: "BUILD",
+  subtitle: "Foundation",
   icon: FileText,
-  description: "We analyze your needs and deliver a customized GTM strategy with clear milestones",
-  subPoints: ["Market research", "Competitive analysis", "Custom GTM roadmap"]
+  subPoints: ["Naver SEO Dominance", "Community Infrastructure", "Brand Localization"],
+  quote: '"Building the localized infra."'
 }, {
-  title: "Launch",
+  title: "IGNITE",
+  subtitle: "Launch",
   icon: Rocket,
-  description: "Execute your strategy with our network of media, KOLs, and community partners",
-  subPoints: ["PR & media outreach", "KOL activation", "Community building"]
+  subPoints: ["Tier-1 KOL Activation", "Media Blitz Campaign", "Viral Marketing"],
+  quote: '"Maximum noise, maximum impact."'
 }, {
-  title: "Scale",
+  title: "SCALE",
+  subtitle: "Growth",
   icon: TrendingUp,
-  description: "Measure, optimize, and scale your presence based on real performance data",
-  subPoints: ["Performance tracking", "Strategy optimization", "Growth acceleration"]
+  subPoints: ["Events & Partnerships", "Liquidity Campaigns", "Retention Programs"],
+  quote: '"Turning hype into retention."'
 }];
 const ProcessBillboardOverlay = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -175,22 +179,22 @@ const ProcessBillboardOverlay = () => {
                     ${isHovered ? 'max-h-[80px] sm:max-h-[100px] opacity-100' : 'max-h-[32px] sm:max-h-[40px] opacity-80'}
                   `}>
                     <p className={`
-                      text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs text-white/60 leading-relaxed
-                      transition-all duration-500 line-clamp-2
+                      text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs text-white/40 uppercase tracking-wide
+                      transition-all duration-500 mb-1
                       ${isHovered ? 'opacity-100' : 'opacity-70'}
                     `}>
-                      {phase.description}
+                      {phase.subtitle}
                     </p>
                     
                     {/* Sub Points - 호버 시에만 */}
                     <div className={`
-                      mt-1 sm:mt-2 space-y-0.5 transition-all duration-500 delay-100
-                      ${isHovered ? 'opacity-100 max-h-[60px]' : 'opacity-0 max-h-0 overflow-hidden'}
+                      space-y-0.5 transition-all duration-500 delay-100
+                      ${isHovered ? 'opacity-100 max-h-[80px]' : 'opacity-0 max-h-0 overflow-hidden'}
                     `}>
-                      {phase.subPoints.slice(0, 2).map((point, i) => <div key={i} className="flex items-center justify-center gap-1 text-[8px] sm:text-[9px] md:text-[10px] text-white/50">
-                          <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-green-400 flex-shrink-0" />
+                      {phase.subPoints.map((point, i) => <div key={i} className="flex items-center justify-center gap-1 text-[8px] sm:text-[9px] md:text-[10px] text-white/60">
                           <span className="line-clamp-1">{point}</span>
                         </div>)}
+                      <p className="text-[7px] sm:text-[8px] text-primary/80 italic mt-1">{phase.quote}</p>
                     </div>
                   </div>
                 </div>
