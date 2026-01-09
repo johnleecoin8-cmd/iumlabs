@@ -2089,11 +2089,7 @@ const clientLogos = [{
   logo: zkpassLogo
 }];
 const ClientLogosMarquee = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, {
-    once: true
-  });
-  return;
+  return null;
 };
 
 // ============================================
