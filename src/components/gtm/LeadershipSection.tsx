@@ -7,9 +7,10 @@ import teamGrowthPhoto from "@/assets/team/team-growth.jpeg";
 
 const LeadershipSection = () => {
   const ceoBackground = [
-    "Ex-Binance / KuCoin Core Team",
-    "CryptoBridge Korea Founder",
-    "Strategic Advisor for 30+ Global Projects"
+    "Ex-KuCoin Core Team",
+    "Senior Equity Consultant at Fundshing",
+    "Outlierventures Investment Manager",
+    "CryptoBridge Korea Founder"
   ];
 
   const teamMembers = [
@@ -118,7 +119,7 @@ const LeadershipSection = () => {
             <div className="space-y-8">
               <div>
                 <span className="text-white/40 text-sm tracking-wider uppercase mb-2 block">Founder & CEO</span>
-                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">[CEO Name]</h3>
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-6">James Lee</h3>
                 
                 <blockquote className="relative">
                   <div className="absolute -left-4 top-0 bottom-0 w-1 bg-gradient-to-b from-white/40 to-transparent" />
