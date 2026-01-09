@@ -132,6 +132,10 @@ export default {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        "marquee-reverse": {
+          "0%": { transform: "translateX(-50%)" },
+          "100%": { transform: "translateX(0)" },
+        },
         "kenburns": {
           "0%": { transform: "scale(1) translate(0, 0)" },
           "25%": { transform: "scale(1.12) translate(-1.5%, 1%)" },
@@ -212,7 +216,8 @@ export default {
         "slide-up": "slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "slide-in-left": "slide-in-left 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
         "slide-in-right": "slide-in-right 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards",
-        "marquee": "marquee 20s linear infinite",
+        "marquee": "marquee 30s linear infinite",
+        "marquee-reverse": "marquee-reverse 30s linear infinite",
         "kenburns": "kenburns 12s ease-in-out infinite",
         "light-sweep": "light-sweep 4s ease-in-out infinite",
         "aurora": "aurora 6s ease-in-out infinite",

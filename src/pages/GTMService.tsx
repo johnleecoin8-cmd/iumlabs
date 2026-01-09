@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Search, Building, Zap, TrendingUp, Users, Mic2, Newspaper, Calendar, Palette } from 'lucide-react';
+import { ArrowRight, Search, Building, Zap, TrendingUp } from 'lucide-react';
 
 // Project backgrounds
 import storyBg from '@/assets/projects/story-bg.jpg';
@@ -101,14 +101,6 @@ const frameworkStages = [
   },
 ];
 
-const toolkitServices = [
-  { name: 'Research & Data', icon: Search, link: '/services/research' },
-  { name: 'Influencer Marketing', icon: Users, link: '/services/influencer' },
-  { name: 'PR & Media', icon: Newspaper, link: '/services/pr' },
-  { name: 'Community Management', icon: Mic2, link: '/services/community' },
-  { name: 'Offline Events', icon: Calendar, link: '/services/offline-event' },
-  { name: 'Branding & Design', icon: Palette, link: '/services/branding' },
-];
 
 // ============================================
 // HERO SECTION
@@ -322,7 +314,7 @@ const FrameworkSection = () => {
 };
 
 // ============================================
-// STRATEGY IN ACTION - Case Studies
+// STRATEGY IN ACTION - Case Studies (2xN Grid)
 // ============================================
 const StrategyInActionSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -333,45 +325,41 @@ const StrategyInActionSection = () => {
       <motion.p
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="text-muted-foreground text-sm tracking-widest uppercase mb-16"
+        className="text-muted-foreground text-sm tracking-widest uppercase mb-12"
       >
         Strategy in Action
       </motion.p>
 
-      <div className="space-y-32">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
         {featuredProjects.map((project, i) => (
           <motion.article
             key={project.slug}
-            initial={{ opacity: 0, y: 60 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: i * 0.15, duration: 0.8 }}
+            transition={{ delay: i * 0.1, duration: 0.6 }}
           >
             <Link to={`/projects/${project.slug}`} className="group block">
-              <div className="relative aspect-[16/9] overflow-hidden bg-muted mb-8">
+              <div className="relative aspect-[3/2] overflow-hidden bg-muted mb-4">
                 <img
                   src={project.image}
                   alt={project.name}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                 />
               </div>
 
-              <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div className="space-y-2">
-                  <p className="text-xs tracking-widest text-primary uppercase">
-                    {project.category} · {project.strategy}
-                  </p>
-                  <h2 className="text-2xl md:text-3xl font-medium text-foreground">
-                    {project.name}
-                  </h2>
-                  <p className="text-muted-foreground max-w-xl">
-                    {project.tagline} <span className="text-foreground font-medium">{project.result}</span>
-                  </p>
-                </div>
-                
-                <span className="inline-flex items-center gap-2 text-sm text-foreground group-hover:gap-3 transition-all">
-                  Learn more
-                  <ArrowUpRight className="w-4 h-4" />
-                </span>
+              <div className="space-y-2">
+                <p className="text-xs tracking-widest text-primary uppercase">
+                  {project.category}
+                </p>
+                <h3 className="text-xl font-medium text-foreground group-hover:text-primary transition-colors">
+                  {project.name}
+                </h3>
+                <p className="text-sm text-muted-foreground line-clamp-2">
+                  {project.tagline}
+                </p>
+                <p className="text-sm text-foreground font-medium">
+                  {project.result}
+                </p>
               </div>
             </Link>
           </motion.article>
@@ -382,145 +370,144 @@ const StrategyInActionSection = () => {
 };
 
 // ============================================
-// THE TOOLKIT - Services Grid
+// CLIENT LOGOS MARQUEE
 // ============================================
-const ToolkitSection = () => {
+import bnbLogo from '@/assets/logos/bnb.png';
+import bybitLogo from '@/assets/logos/bybit.png';
+import kucoinLogo from '@/assets/logos/kucoin.png';
+import mantraLogo from '@/assets/logos/mantra.png';
+import peaqLogo from '@/assets/logos/peaq.png';
+import storyLogo from '@/assets/logos/story-protocol.png';
+import saharaLogo from '@/assets/logos/sahara-ai.png';
+import megaethLogo from '@/assets/logos/megaeth.png';
+import polygonLogo from '@/assets/logos/polygon.svg';
+import ondoLogo from '@/assets/logos/ondo.svg';
+import triaLogo from '@/assets/logos/tria-official.png';
+import synfuturesLogo from '@/assets/logos/synfutures.png';
+import fogoLogo from '@/assets/logos/fogo.png';
+import zkpassLogo from '@/assets/logos/zkpass.png';
+
+const clientLogos = [
+  { name: 'BNB Chain', logo: bnbLogo },
+  { name: 'Bybit', logo: bybitLogo },
+  { name: 'KuCoin', logo: kucoinLogo },
+  { name: 'MANTRA', logo: mantraLogo },
+  { name: 'peaq', logo: peaqLogo },
+  { name: 'Story Protocol', logo: storyLogo },
+  { name: 'Sahara AI', logo: saharaLogo },
+  { name: 'MegaETH', logo: megaethLogo },
+  { name: 'Polygon', logo: polygonLogo },
+  { name: 'Ondo', logo: ondoLogo },
+  { name: 'Tria', logo: triaLogo },
+  { name: 'SynFutures', logo: synfuturesLogo },
+  { name: 'Fogo', logo: fogoLogo },
+  { name: 'zkPass', logo: zkpassLogo },
+];
+
+const ClientLogosMarquee = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const isInView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        className="max-w-6xl mx-auto"
-      >
-        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-          Full-Stack Capabilities
-        </p>
-        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-16">
-          The Toolkit
-        </h2>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-          {toolkitServices.map((service, i) => (
-            <motion.div
-              key={service.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.05, duration: 0.5 }}
-            >
-              <Link
-                to={service.link}
-                className="group flex items-center gap-4 p-4 md:p-6 border border-border bg-background hover:border-primary/50 transition-colors"
-              >
-                <service.icon className="w-5 h-5 text-primary shrink-0" />
-                <span className="text-sm md:text-base text-foreground group-hover:text-primary transition-colors">
-                  {service.name}
-                </span>
-              </Link>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    </section>
-  );
-};
-
-// ============================================
-// CLIENT ARCHIVE - More Work Grid
-// ============================================
-const ClientArchiveSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-
-  return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background">
+    <section ref={ref} className="py-20 bg-muted/30 border-y border-border overflow-hidden">
       <motion.p
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="text-muted-foreground text-sm tracking-widest uppercase mb-12"
+        className="text-muted-foreground text-sm tracking-widest uppercase mb-12 px-6 md:px-12 lg:px-20"
       >
-        Client Archive
+        Trusted By Industry Leaders
       </motion.p>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-        {moreProjects.map((project, i) => (
-          <motion.div
-            key={project.slug}
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: i * 0.05, duration: 0.5 }}
-          >
-            <Link to={`/projects/${project.slug}`} className="group block">
-              <div className="relative aspect-[4/3] overflow-hidden bg-muted mb-3">
-                <img
-                  src={project.image}
-                  alt={project.name}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
-                />
-              </div>
-              <p className="text-sm text-foreground group-hover:text-primary transition-colors">
-                {project.name}
-              </p>
-            </Link>
-          </motion.div>
-        ))}
+      {/* First row - left to right */}
+      <div className="relative mb-8">
+        <div className="flex animate-marquee">
+          {[...clientLogos, ...clientLogos].map((client, i) => (
+            <div
+              key={`row1-${i}`}
+              className="flex-shrink-0 mx-8 md:mx-12 group"
+            >
+              <img
+                src={client.logo}
+                alt={client.name}
+                className="h-8 md:h-10 w-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        transition={{ delay: 0.5 }}
-        className="mt-12"
-      >
-        <Link
-          to="/projects"
-          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
-        >
-          View all projects
-          <ArrowRight className="w-4 h-4" />
-        </Link>
-      </motion.div>
+      {/* Second row - right to left */}
+      <div className="relative">
+        <div className="flex animate-marquee-reverse">
+          {[...clientLogos.slice().reverse(), ...clientLogos.slice().reverse()].map((client, i) => (
+            <div
+              key={`row2-${i}`}
+              className="flex-shrink-0 mx-8 md:mx-12 group"
+            >
+              <img
+                src={client.logo}
+                alt={client.name}
+                className="h-8 md:h-10 w-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
 
 // ============================================
-// CTA SECTION - Dual CTA
+// CTA SECTION - Enhanced with Gradient
 // ============================================
 const CTASection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-32 bg-foreground text-background">
+    <section 
+      ref={ref} 
+      className="relative px-6 md:px-12 lg:px-20 py-32 overflow-hidden"
+      style={{
+        background: 'linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(240 10% 10%) 50%, hsl(var(--foreground)) 100%)',
+      }}
+    >
+      {/* Subtle glow effect */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px] pointer-events-none"
+        style={{ background: 'hsl(var(--primary))' }}
+      />
+      
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
-        className="max-w-3xl"
+        className="relative max-w-3xl z-10"
       >
-        <h2 className="text-[clamp(2rem,6vw,4rem)] font-medium leading-tight mb-8">
+        <h2 className="text-[clamp(2rem,6vw,4rem)] font-medium leading-tight mb-4 text-background">
           Ready to execute your
           <br />
-          Korea Strategy?
+          <span className="text-primary">Korea Strategy?</span>
         </h2>
+        
+        <p className="text-background/60 text-lg mb-10 max-w-xl">
+          Join 30+ projects that have successfully launched in the Korean market with our data-driven GTM framework.
+        </p>
         
         <div className="flex flex-wrap gap-4">
           <Link
             to="/research"
-            className="inline-flex items-center gap-3 px-8 py-4 border border-background/30 text-background font-medium text-sm tracking-wide hover:bg-background/10 transition-colors"
+            className="group inline-flex items-center gap-3 px-8 py-4 border border-background/30 text-background font-medium text-sm tracking-wide hover:border-primary hover:bg-primary/10 transition-all duration-300"
           >
             Get the Market Report
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-background text-foreground font-medium text-sm tracking-wide hover:bg-background/90 transition-colors"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-medium text-sm tracking-wide hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)]"
           >
             Schedule a Strategy Call
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </motion.div>
@@ -552,8 +539,7 @@ const GTMService = () => {
         <MarketIntelligenceSection />
         <FrameworkSection />
         <StrategyInActionSection />
-        <ToolkitSection />
-        <ClientArchiveSection />
+        <ClientLogosMarquee />
         <CTASection />
       </main>
       <Footer />
