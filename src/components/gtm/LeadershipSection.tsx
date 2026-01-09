@@ -36,7 +36,7 @@ const LeadershipSection = () => {
       role: "Senior Researcher",
       photo: teamResearchPhoto,
       background: [
-        ""
+        "Former Journalist Korean Media"
       ],
       responsibility: "Market Research & Analysis"
     }
