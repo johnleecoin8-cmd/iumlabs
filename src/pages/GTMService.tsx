@@ -268,14 +268,11 @@ const FrameworkSection = () => {
         className="max-w-6xl mx-auto"
       >
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-          Our Methodology
+          02 Process
         </p>
-        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-16">
           The ium Algorithm
         </h2>
-        <p className="text-muted-foreground mb-16 max-w-xl">
-          A proven 4-step process to crack the market.
-        </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {frameworkStages.map((stage, i) => (
