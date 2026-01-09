@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Zap } from 'lucide-react';
+import { ArrowDown } from 'lucide-react';
 
-// Seoul Cyberpunk Images
+// Seoul Images
 import seoulGangnamNight from '@/assets/backgrounds/seoul-gangnam-night.jpg';
 import seoulDdpNight from '@/assets/backgrounds/seoul-ddp-night.jpg';
 import seoulTechFuture from '@/assets/backgrounds/seoul-tech-future.jpg';
@@ -25,20 +25,19 @@ const EnhancedHero = () => {
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const textY = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
+  const textY = useTransform(scrollYProgress, [0, 0.5], [0, -80]);
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
-  // Auto-rotate images every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prev) => (prev + 1) % seoulImages.length);
-    }, 5000);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
   return (
     <section ref={sectionRef} className="relative h-screen bg-black overflow-hidden">
-      {/* Seoul Cyberpunk Image Slideshow Background */}
+      {/* Background Image Slideshow */}
       <motion.div 
         className="absolute inset-0"
         style={{ scale: imageScale }}
@@ -47,122 +46,125 @@ const EnhancedHero = () => {
           <motion.img
             key={currentImageIndex}
             src={seoulImages[currentImageIndex]}
-            alt="Seoul Cyberpunk"
-            initial={{ opacity: 0, scale: 1.1 }}
+            alt="Seoul"
+            initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
+            transition={{ duration: 2, ease: "easeOut" }}
             className="absolute inset-0 w-full h-full object-cover"
           />
         </AnimatePresence>
-        {/* Dark overlay with gradient for depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/60 to-black/85" />
-        {/* Subtle orange glow from bottom */}
-        <div className="absolute inset-0 bg-gradient-to-t from-primary/15 via-transparent to-transparent" />
-        {/* Scanlines effect for cyberpunk vibe */}
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.3) 2px, rgba(0,0,0,0.3) 4px)'
-        }} />
+        
+        {/* Refined overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60" />
       </motion.div>
       
       {/* Main Content */}
       <motion.div 
-        className="relative z-10 h-full flex flex-col items-center justify-center px-4"
+        className="relative z-10 h-full flex flex-col justify-end pb-24 md:pb-32 px-6 md:px-12 lg:px-20"
         style={{ opacity, y: textY }}
       >
-        <div className="w-full max-w-7xl mx-auto text-center">
-          
-          {/* Badge */}
+        <div className="max-w-6xl">
+          {/* Eyebrow */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1, duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/10 backdrop-blur-sm mb-8"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="flex items-center gap-3 mb-6"
           >
-            <Zap className="w-3 h-3 text-primary" fill="currentColor" />
-            <span className="text-primary text-xs font-medium tracking-widest uppercase">
-              The World's Most Active Liquidity
+            <div className="w-12 h-px bg-primary" />
+            <span className="text-primary text-xs font-medium tracking-[0.2em] uppercase">
+              Go-To-Market Strategy
             </span>
           </motion.div>
 
-          {/* Giant Typography Block */}
-          <div className="space-y-0">
-            {/* Line 1 - UNLOCK */}
-            <motion.div
-              initial={{ opacity: 0, y: 80 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <span className="block text-[clamp(2.5rem,12vw,10rem)] font-black text-transparent leading-[0.85] tracking-tighter"
-                style={{ WebkitTextStroke: '2px rgba(255,255,255,0.9)' }}>
-                UNLOCK
-              </span>
-            </motion.div>
-            
-            {/* Line 2 - KOREA with gradient */}
-            <motion.div
-              initial={{ opacity: 0, y: 80 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
-            >
-              <span className="block text-[clamp(2.5rem,12vw,10rem)] font-black bg-gradient-to-r from-primary via-orange-400 to-rose-500 bg-clip-text text-transparent leading-[0.85] tracking-tighter">
-                KOREA
-              </span>
-            </motion.div>
-
-            {/* Line 3 - THE ENGINE */}
-            <motion.div
-              initial={{ opacity: 0, y: 80 }}
+          {/* Main Headline */}
+          <div className="space-y-2">
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+              className="text-[clamp(2.5rem,8vw,6rem)] font-bold text-white leading-[1.05] tracking-tight"
             >
-              <span className="block text-[clamp(1.5rem,6vw,5rem)] font-black text-white/30 leading-[1] tracking-tight mt-2">
-                THE ENGINE OF CRYPTO
+              Unlock Korea,
+            </motion.h1>
+            
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.65, duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
+              className="text-[clamp(2.5rem,8vw,6rem)] font-bold leading-[1.05] tracking-tight"
+            >
+              <span className="text-white">The </span>
+              <span className="bg-gradient-to-r from-primary via-orange-400 to-amber-500 bg-clip-text text-transparent">
+                Engine of Crypto
               </span>
-            </motion.div>
+            </motion.h1>
           </div>
 
-          {/* Tagline - Dynamic messaging */}
+          {/* Subtext */}
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="text-white/60 text-base md:text-xl tracking-wide mt-8 md:mt-12 max-w-2xl mx-auto font-light"
+            transition={{ delay: 0.9, duration: 0.8 }}
+            className="text-white/50 text-base md:text-lg mt-8 max-w-xl font-light leading-relaxed"
           >
-            Korea isn't just a market.{' '}
-            <span className="text-white font-medium">It's the ignition key for global hype.</span>
+            Strategic market entry for Web3 projects.
+            <span className="text-white/80"> We turn Korean attention into global momentum.</span>
           </motion.p>
+
+          {/* Stats Row */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.1, duration: 0.8 }}
+            className="flex flex-wrap gap-8 md:gap-12 mt-10"
+          >
+            {[
+              { value: '50+', label: 'Projects Launched' },
+              { value: '2M+', label: 'Community Reach' },
+              { value: '#1', label: 'Korea GTM Agency' },
+            ].map((stat, i) => (
+              <div key={i} className="flex flex-col">
+                <span className="text-2xl md:text-3xl font-bold text-white">{stat.value}</span>
+                <span className="text-white/40 text-xs tracking-wide mt-1">{stat.label}</span>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </motion.div>
 
-      {/* SCROLL DOWN Indicator */}
+      {/* Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        transition={{ delay: 1.4, duration: 0.8 }}
+        className="absolute bottom-8 right-6 md:right-12 lg:right-20 flex items-center gap-3"
       >
-        <span className="text-white/40 text-[10px] md:text-xs tracking-[0.3em] font-medium">
-          EXPLORE THE OPPORTUNITY
+        <span className="text-white/30 text-[10px] tracking-[0.15em] uppercase hidden md:block">
+          Scroll
         </span>
         <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+          animate={{ y: [0, 6, 0] }}
+          transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+          className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center"
         >
-          <ChevronDown className="w-5 h-5 text-white/40" strokeWidth={1.5} />
+          <ArrowDown className="w-4 h-4 text-white/40" />
         </motion.div>
       </motion.div>
 
-      {/* Side text - Seoul Cyberpunk */}
-      <div className="hidden lg:block absolute left-8 top-1/2 -translate-y-1/2">
-        <span className="text-white/20 text-[10px] tracking-[0.3em] uppercase" style={{ writingMode: 'vertical-rl' }}>
-          SEOUL · GANGNAM · HONGDAE
-        </span>
-      </div>
-      <div className="hidden lg:block absolute right-8 top-1/2 -translate-y-1/2">
-        <span className="text-white/20 text-[10px] tracking-[0.3em]" style={{ writingMode: 'vertical-rl' }}>
-          © 2025 IUM LABS
-        </span>
+      {/* Image Progress Indicators */}
+      <div className="absolute bottom-8 left-6 md:left-12 lg:left-20 flex gap-2">
+        {seoulImages.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentImageIndex(i)}
+            className={`h-1 rounded-full transition-all duration-500 ${
+              i === currentImageIndex ? 'w-8 bg-primary' : 'w-2 bg-white/20'
+            }`}
+          />
+        ))}
       </div>
     </section>
   );
