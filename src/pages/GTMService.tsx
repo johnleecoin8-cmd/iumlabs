@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy } from 'lucide-react';
+import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy, Cpu, Database, Activity, LineChart, Target, Sparkles } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
 import TestimonialsSection from '@/components/gtm/TestimonialsCarousel';
 
@@ -1201,6 +1201,330 @@ const ResultsDashboardSection = () => {
 };
 
 // ============================================
+// LLM ENGINE VISUALIZATION COMPONENT
+// ============================================
+const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
+  const [activeDataSource, setActiveDataSource] = useState<number | null>(null);
+  const [processingProgress, setProcessingProgress] = useState(0);
+
+  // Simulated live data values
+  const [liveData, setLiveData] = useState({
+    onchain: 847,
+    social: 1243,
+    market: 2891
+  });
+
+  useEffect(() => {
+    if (!isVisible) return;
+    
+    // Animate processing bar
+    const progressTimer = setInterval(() => {
+      setProcessingProgress(prev => prev >= 100 ? 0 : prev + 2);
+    }, 100);
+
+    // Simulate live data updates
+    const dataTimer = setInterval(() => {
+      setLiveData({
+        onchain: Math.floor(800 + Math.random() * 100),
+        social: Math.floor(1200 + Math.random() * 100),
+        market: Math.floor(2800 + Math.random() * 200)
+      });
+    }, 2000);
+
+    return () => {
+      clearInterval(progressTimer);
+      clearInterval(dataTimer);
+    };
+  }, [isVisible]);
+
+  const dataSources = [
+    { 
+      id: 0, 
+      icon: Database, 
+      label: 'Onchain Data', 
+      items: ['DEX Volume', 'Wallet Activity', 'Token Transfers', 'Smart Contracts'],
+      value: liveData.onchain,
+      suffix: ' signals'
+    },
+    { 
+      id: 1, 
+      icon: Activity, 
+      label: 'Social Signals', 
+      items: ['Twitter/X Mentions', 'Naver Trends', 'Discord Activity', 'Telegram Buzz'],
+      value: liveData.social,
+      suffix: ' signals'
+    },
+    { 
+      id: 2, 
+      icon: LineChart, 
+      label: 'Market Data', 
+      items: ['CEX Order Books', 'Price Action', 'Liquidity Depth', 'Funding Rates'],
+      value: liveData.market,
+      suffix: ' data points'
+    }
+  ];
+
+  const pipelineStages = [
+    { label: 'COLLECT', desc: 'Real-time data ingestion' },
+    { label: 'PROCESS', desc: 'AI pattern recognition' },
+    { label: 'OPTIMIZE', desc: 'Strategy generation' },
+    { label: 'EXECUTE', desc: 'Precision timing' }
+  ];
+
+  const outputs = [
+    { label: 'Optimal Timing', value: '94%', confidence: true },
+    { label: 'Channel Mix', value: '6 channels' },
+    { label: 'Risk Score', value: 'Low' }
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={isVisible ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8 }}
+      className="mb-20 p-8 border border-primary/30 bg-gradient-to-b from-primary/5 to-transparent relative overflow-hidden"
+    >
+      {/* Background grid animation */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `
+          linear-gradient(hsl(var(--primary)) 1px, transparent 1px),
+          linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)
+        `,
+        backgroundSize: '40px 40px'
+      }} />
+
+      {/* Animated glow orb */}
+      <motion.div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full pointer-events-none"
+        style={{ background: 'radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 70%)' }}
+        animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      <div className="relative z-10">
+        {/* Header */}
+        <div className="text-center mb-10">
+          <motion.div 
+            className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 mb-4"
+            animate={{ boxShadow: ['0 0 20px hsl(var(--primary) / 0.1)', '0 0 30px hsl(var(--primary) / 0.2)', '0 0 20px hsl(var(--primary) / 0.1)'] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <Cpu className="w-4 h-4 text-primary" />
+            <span className="text-xs font-mono text-primary tracking-wider">POWERED BY IUM ONCHAIN LLM</span>
+          </motion.div>
+          <h3 className="text-2xl md:text-3xl font-medium text-foreground mb-2">
+            The Intelligence Engine
+          </h3>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
+            We don't guess. Our proprietary LLM analyzes 50+ onchain and social signals to deliver data-driven Korea GTM strategies.
+          </p>
+        </div>
+
+        {/* Pipeline stages */}
+        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-10">
+          {pipelineStages.map((stage, i) => (
+            <motion.div
+              key={stage.label}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: i * 0.1 + 0.3 }}
+              className="flex items-center gap-2"
+            >
+              <div className="px-4 py-2 bg-background border border-border hover:border-primary/50 transition-colors">
+                <p className="text-xs font-mono text-primary">{stage.label}</p>
+                <p className="text-[10px] text-muted-foreground">{stage.desc}</p>
+              </div>
+              {i < pipelineStages.length - 1 && (
+                <motion.div
+                  animate={{ x: [0, 5, 0], opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.2 }}
+                >
+                  <ArrowRight className="w-4 h-4 text-primary/50" />
+                </motion.div>
+              )}
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Main visualization grid */}
+        <div className="grid lg:grid-cols-[1fr_auto_1fr] gap-6 items-center">
+          {/* Data Sources */}
+          <div className="space-y-4">
+            <p className="text-xs tracking-widest text-muted-foreground mb-4 text-center lg:text-left">DATA SOURCES</p>
+            {dataSources.map((source, i) => (
+              <motion.div
+                key={source.id}
+                initial={{ opacity: 0, x: -20 }}
+                animate={isVisible ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: i * 0.1 + 0.5 }}
+                onMouseEnter={() => setActiveDataSource(source.id)}
+                onMouseLeave={() => setActiveDataSource(null)}
+                className={`p-4 border bg-background transition-all cursor-pointer ${activeDataSource === source.id ? 'border-primary shadow-[0_0_20px_hsl(var(--primary)/0.2)]' : 'border-border hover:border-primary/30'}`}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    <source.icon className={`w-4 h-4 transition-colors ${activeDataSource === source.id ? 'text-primary' : 'text-muted-foreground'}`} />
+                    <span className="text-sm font-medium text-foreground">{source.label}</span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <motion.span 
+                      className="w-2 h-2 rounded-full bg-green-500"
+                      animate={{ opacity: [1, 0.3, 1] }}
+                      transition={{ duration: 1, repeat: Infinity }}
+                    />
+                    <motion.span 
+                      key={source.value}
+                      initial={{ opacity: 0.5 }}
+                      animate={{ opacity: 1 }}
+                      className="text-xs font-mono text-primary"
+                    >
+                      {source.value.toLocaleString()}{source.suffix}
+                    </motion.span>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {source.items.map((item, j) => (
+                    <span key={j} className="text-[10px] px-2 py-0.5 bg-muted text-muted-foreground">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* LLM Core */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={isVisible ? { opacity: 1, scale: 1 } : {}}
+            transition={{ delay: 0.8, type: "spring" }}
+            className="relative"
+          >
+            {/* Connection lines left */}
+            <div className="hidden lg:block absolute left-0 top-1/2 -translate-x-full w-8 h-px bg-gradient-to-l from-primary/50 to-transparent">
+              <motion.div
+                className="absolute right-0 top-0 w-2 h-2 rounded-full bg-primary -translate-y-1/2"
+                animate={{ x: [0, -24, 0], opacity: [1, 0, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+            </div>
+
+            <div className="p-6 border-2 border-primary bg-background relative">
+              {/* Pulsing border effect */}
+              <motion.div 
+                className="absolute inset-0 border-2 border-primary/50"
+                animate={{ opacity: [0, 0.5, 0], scale: [1, 1.05, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              
+              <div className="text-center space-y-4">
+                <motion.div
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="w-16 h-16 mx-auto relative"
+                >
+                  <Sparkles className="w-16 h-16 text-primary" />
+                </motion.div>
+                
+                <div>
+                  <p className="text-lg font-medium text-foreground">ium LLM Core</p>
+                  <p className="text-xs text-muted-foreground">50+ Signals Analyzed</p>
+                </div>
+
+                {/* Processing bar */}
+                <div className="space-y-1">
+                  <div className="h-2 bg-muted rounded-full overflow-hidden">
+                    <motion.div 
+                      className="h-full bg-primary rounded-full"
+                      style={{ width: `${processingProgress}%` }}
+                    />
+                  </div>
+                  <p className="text-[10px] text-muted-foreground font-mono">PROCESSING...</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Connection lines right */}
+            <div className="hidden lg:block absolute right-0 top-1/2 translate-x-full w-8 h-px bg-gradient-to-r from-primary/50 to-transparent">
+              <motion.div
+                className="absolute left-0 top-0 w-2 h-2 rounded-full bg-primary -translate-y-1/2"
+                animate={{ x: [0, 24, 0], opacity: [1, 0, 1] }}
+                transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+              />
+            </div>
+          </motion.div>
+
+          {/* Output Panel */}
+          <div className="space-y-4">
+            <p className="text-xs tracking-widest text-muted-foreground mb-4 text-center lg:text-right">STRATEGIC OUTPUT</p>
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={isVisible ? { opacity: 1, x: 0 } : {}}
+              transition={{ delay: 1 }}
+              className="p-6 border border-primary/50 bg-background"
+            >
+              <div className="flex items-center gap-2 mb-4">
+                <Target className="w-4 h-4 text-primary" />
+                <span className="text-sm font-medium text-foreground">Optimized Strategy</span>
+              </div>
+              <div className="space-y-3">
+                {outputs.map((output, i) => (
+                  <motion.div 
+                    key={output.label}
+                    initial={{ opacity: 0 }}
+                    animate={isVisible ? { opacity: 1 } : {}}
+                    transition={{ delay: 1.2 + i * 0.1 }}
+                    className="flex justify-between items-center py-2 border-b border-border last:border-0"
+                  >
+                    <span className="text-xs text-muted-foreground">{output.label}</span>
+                    <span className={`text-sm font-mono ${output.confidence ? 'text-green-500' : 'text-primary'}`}>
+                      {output.value}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Confidence indicator */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={isVisible ? { opacity: 1 } : {}}
+              transition={{ delay: 1.5 }}
+              className="text-center lg:text-right"
+            >
+              <span className="inline-flex items-center gap-2 text-xs text-muted-foreground">
+                <motion.span 
+                  className="w-2 h-2 rounded-full bg-green-500"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                />
+                High Confidence Output
+              </span>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Connection to Framework */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={isVisible ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 1.8 }}
+          className="mt-10 text-center"
+        >
+          <p className="text-sm text-muted-foreground mb-4">This intelligence powers every stage of our framework</p>
+          <motion.div
+            animate={{ y: [0, 5, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+          >
+            <ArrowRight className="w-6 h-6 text-primary mx-auto rotate-90" />
+          </motion.div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+// ============================================
 // THE IUM FRAMEWORK - Interactive Timeline
 // ============================================
 const FrameworkSection = () => {
@@ -1230,9 +1554,12 @@ const FrameworkSection = () => {
         <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-6">
           The ium Algorithm
         </h2>
-        <p className="text-muted-foreground max-w-xl mb-16">
+        <p className="text-muted-foreground max-w-xl mb-12">
           Our proven 4-stage framework has helped 30+ projects successfully launch in Korea.
         </p>
+
+        {/* LLM Engine Visualization */}
+        <LLMEngineVisualization isVisible={isInView} />
 
         {/* Timeline connector line */}
         <div className="hidden lg:block absolute top-[280px] left-[10%] right-[10%] h-px">
