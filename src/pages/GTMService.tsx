@@ -1724,9 +1724,19 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                 <div className="text-center space-y-4">
                   {/* Rotating icon with glow */}
                   <div className="relative w-20 h-20 mx-auto">
+                    {/* SVG Gradient Definition */}
+                    <svg width="0" height="0" className="absolute">
+                      <defs>
+                        <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                          <stop offset="0%" stopColor="#3b82f6" />
+                          <stop offset="50%" stopColor="#a855f7" />
+                          <stop offset="100%" stopColor="#ef4444" />
+                        </linearGradient>
+                      </defs>
+                    </svg>
                     <motion.div
                       className="absolute inset-0 rounded-full"
-                      style={{ background: 'radial-gradient(circle, hsl(var(--primary) / 0.3) 0%, transparent 70%)' }}
+                      style={{ background: 'radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 70%)' }}
                       animate={{ scale: [1, 1.3, 1] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
@@ -1735,7 +1745,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                       transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                       className="relative"
                     >
-                      <Sparkles className="w-20 h-20 text-primary" />
+                      <Sparkles className="w-20 h-20" style={{ stroke: 'url(#iconGradient)' }} />
                     </motion.div>
                   </div>
                   
