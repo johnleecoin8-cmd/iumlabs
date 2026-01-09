@@ -1645,12 +1645,48 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
               />
 
               <div className="relative p-8 border-2 border-primary bg-background">
-                {/* Pulsing border */}
-                <motion.div 
-                  className="absolute inset-0 border-2 border-primary/50 rounded-sm"
-                  animate={{ opacity: [0, 0.8, 0], scale: [1, 1.08, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
+                {/* Orbiting particles instead of pulsing ring */}
+                <div className="absolute inset-0 pointer-events-none overflow-visible">
+                  {/* Orbit ring 1 */}
+                  <motion.div
+                    className="absolute inset-[-20px] border border-primary/20 rounded-full"
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  >
+                    <motion.div 
+                      className="absolute top-0 left-1/2 w-2 h-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary shadow-[0_0_8px_hsl(var(--primary))]"
+                    />
+                    <motion.div 
+                      className="absolute bottom-0 left-1/2 w-1.5 h-1.5 -translate-x-1/2 translate-y-1/2 rounded-full bg-primary/60"
+                    />
+                  </motion.div>
+                  
+                  {/* Orbit ring 2 - counter direction */}
+                  <motion.div
+                    className="absolute inset-[-35px] border border-primary/10 rounded-full"
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                  >
+                    <motion.div 
+                      className="absolute top-1/2 right-0 w-1.5 h-1.5 translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/80"
+                    />
+                    <motion.div 
+                      className="absolute top-1/2 left-0 w-1 h-1 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/40"
+                    />
+                  </motion.div>
+                  
+                  {/* Scanning line effect */}
+                  <motion.div
+                    className="absolute inset-0 overflow-hidden rounded-sm"
+                    style={{ clipPath: 'inset(0)' }}
+                  >
+                    <motion.div
+                      className="absolute left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary/60 to-transparent"
+                      animate={{ top: ['-2px', '100%'] }}
+                      transition={{ duration: 2.5, repeat: Infinity, ease: "linear" }}
+                    />
+                  </motion.div>
+                </div>
                 
                 {/* Corner accents */}
                 {['top-0 left-0', 'top-0 right-0', 'bottom-0 left-0', 'bottom-0 right-0'].map((pos, i) => (
@@ -1662,7 +1698,7 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
                   />
                 ))}
                 
-                <div className="text-center space-y-4">
+                <div className="text-center space-y-4 relative z-10">
                   {/* Rotating icon with glow */}
                   <div className="relative w-20 h-20 mx-auto">
                     <motion.div
