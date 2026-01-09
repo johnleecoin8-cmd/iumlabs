@@ -51,9 +51,9 @@ import saharaLogo from '@/assets/logos/sahara-ai.png';
 import kucoinLogo from '@/assets/logos/kucoin.svg';
 
 // ============================================
-// SECTION 2: REALITY CHECK - PROBLEM
+// SECTION 2: WHY KOREA - MARKET OPPORTUNITY (FOMO)
 // ============================================
-const RealityCheckSection = () => {
+const WhyKoreaSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-20%" });
   const { scrollYProgress } = useScroll({
@@ -61,82 +61,196 @@ const RealityCheckSection = () => {
     offset: ["start end", "end start"]
   });
   
-  const textY = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const textY = useTransform(scrollYProgress, [0, 1], [60, -60]);
+
+  const marketStats = [
+    { value: "#3", label: "GLOBAL VOLUME", sublabel: "Worldwide Trading" },
+    { value: "#1", label: "ALTCOIN VOLUME", sublabel: "Global Alt Market" },
+    { value: "5-15%", label: "KIMCHI PREMIUM", sublabel: "Price Premium" },
+  ];
 
   return (
-    <section ref={ref} className="relative min-h-[70vh] bg-black flex flex-col items-center justify-center overflow-hidden py-16">
-      {/* Main Warning Text */}
-      <motion.div 
-        className="text-center px-4"
-        style={{ y: textY }}
-      >
-        {/* 90% FAIL */}
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="flex items-center justify-center gap-2 md:gap-4 mb-2"
-        >
-          <span className="text-[clamp(3rem,15vw,12rem)] font-black text-transparent leading-none tracking-tighter"
-            style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>
-            90%
-          </span>
-          <span className="text-[clamp(3rem,15vw,12rem)] font-black text-transparent leading-none tracking-tighter"
-            style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>
-            F
-          </span>
-          <motion.div 
-            className="relative w-[clamp(2.5rem,10vw,8rem)] h-[clamp(2.5rem,10vw,8rem)] flex items-center justify-center"
-            animate={{ rotate: [0, 10, -10, 0] }}
-            transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl blur-xl opacity-60" />
-            <Skull className="relative w-2/3 h-2/3 text-white" strokeWidth={1.5} />
-          </motion.div>
-          <span className="text-[clamp(3rem,15vw,12rem)] font-black text-transparent leading-none tracking-tighter"
-            style={{ WebkitTextStroke: '2px rgba(255,255,255,0.8)' }}>
-            IL
-          </span>
-        </motion.div>
-
-        {/* WITHIN 6 MONTHS */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="-mt-2 md:-mt-6"
-        >
-          <span className="text-[clamp(1.5rem,6vw,5rem)] font-bold text-white/20 tracking-tight">
-            WITHIN 6 MONTHS
-          </span>
-        </motion.div>
-      </motion.div>
-
-      {/* Three Barriers */}
+    <section ref={ref} className="relative min-h-[90vh] bg-black flex flex-col items-center justify-center overflow-hidden py-20">
+      {/* Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-primary/5 via-transparent to-transparent" />
+      
+      {/* Section Header */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.5 }}
-        className="grid md:grid-cols-3 gap-8 md:gap-12 mt-12 px-6 max-w-4xl mx-auto"
+        transition={{ duration: 0.8 }}
+        className="text-center px-4 mb-12"
       >
-        {[
-          { icon: Lock, title: "LANGUAGE", sub: "99% search in Korean", desc: "Naver & Kakao dominate" },
-          { icon: Skull, title: "REGULATORY", sub: "Strictest VASP rules", desc: "Compliance = Survival" },
-          { icon: Zap, title: "OPERATIONS", sub: "24/7 engagement", desc: "Dead communities kill" },
-        ].map((item, i) => (
+        <span className="text-primary/60 text-[10px] md:text-xs tracking-[0.5em] font-medium block mb-4">
+          THE CHALLENGE
+        </span>
+        <h2 className="text-[clamp(2rem,8vw,6rem)] font-black text-transparent leading-[0.9] tracking-tighter"
+          style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.8)' }}>
+          WHY
+        </h2>
+        <h2 className="text-[clamp(2rem,8vw,6rem)] font-black bg-gradient-to-r from-primary via-orange-400 to-rose-500 bg-clip-text text-transparent leading-[0.9] tracking-tighter">
+          KOREA?
+        </h2>
+      </motion.div>
+
+      {/* Main Message */}
+      <motion.div 
+        className="text-center px-6 max-w-4xl mx-auto mb-16"
+        style={{ y: textY }}
+      >
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="text-white/70 text-lg md:text-2xl leading-relaxed font-light"
+        >
+          Global projects succeed in the West,{' '}
+          <span className="text-white font-semibold">but they explode in Korea.</span>
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="text-white/50 text-base md:text-lg mt-4"
+        >
+          The passion here is unmatched. Can you afford to miss it?
+        </motion.p>
+      </motion.div>
+
+      {/* Market Stats - Big Numbers */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.4 }}
+        className="grid md:grid-cols-3 gap-8 md:gap-16 px-6 max-w-5xl mx-auto mb-16"
+      >
+        {marketStats.map((stat, i) => (
           <motion.div
-            key={item.title}
+            key={stat.label}
+            initial={{ opacity: 0, y: 30, scale: 0.9 }}
+            animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
+            transition={{ delay: 0.5 + i * 0.15, duration: 0.6 }}
+            className="text-center group"
+          >
+            <span className="text-[clamp(3rem,10vw,6rem)] font-black bg-gradient-to-b from-white to-white/50 bg-clip-text text-transparent leading-none block">
+              {stat.value}
+            </span>
+            <span className="text-primary font-bold text-sm md:text-base tracking-wider block mt-2">
+              {stat.label}
+            </span>
+            <span className="text-white/30 text-xs tracking-widest block mt-1">
+              {stat.sublabel}
+            </span>
+          </motion.div>
+        ))}
+      </motion.div>
+
+      {/* Kimchi Premium Insight */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.8 }}
+        className="relative max-w-3xl mx-auto px-6"
+      >
+        <div className="relative bg-gradient-to-r from-primary/10 via-primary/5 to-transparent border-l-2 border-primary/50 pl-6 py-4">
+          <p className="text-white/60 text-sm md:text-base italic">
+            "The <span className="text-primary font-semibold">Kimchi Premium</span> isn't just a price gap—it's proof of 
+            <span className="text-white font-medium"> overwhelming buying power</span>. 
+            When Korea buys, the world watches."
+          </p>
+        </div>
+      </motion.div>
+    </section>
+  );
+};
+
+// ============================================
+// SECTION 3: THE BARRIERS - High Rewards Come with High Barriers
+// ============================================
+const BarriersSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-20%" });
+
+  const barriers = [
+    { 
+      icon: Lock, 
+      title: "LANGUAGE", 
+      stat: "99%",
+      statLabel: "Search in Korean",
+      desc: "Naver & Kakao dominate. Google is irrelevant here."
+    },
+    { 
+      icon: Skull, 
+      title: "REGULATORY", 
+      stat: "VASP",
+      statLabel: "Strictest Rules",
+      desc: "Travel rule compliance is not optional—it's survival."
+    },
+    { 
+      icon: Zap, 
+      title: "OPERATIONS", 
+      stat: "24/7",
+      statLabel: "Always-On",
+      desc: "Dead communities kill projects. Korea never sleeps."
+    },
+  ];
+
+  return (
+    <section ref={ref} className="relative min-h-[70vh] bg-black flex flex-col items-center justify-center overflow-hidden py-20">
+      {/* Section Title */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8 }}
+        className="text-center px-4 mb-12"
+      >
+        <span className="text-red-500/60 text-[10px] md:text-xs tracking-[0.5em] font-medium block mb-4">
+          THE REALITY
+        </span>
+        <h2 className="text-[clamp(1.5rem,6vw,4rem)] font-black text-white leading-tight tracking-tighter">
+          HIGH REWARDS COME WITH
+        </h2>
+        <h2 className="text-[clamp(1.5rem,6vw,4rem)] font-black text-transparent leading-tight tracking-tighter"
+          style={{ WebkitTextStroke: '1.5px rgba(239,68,68,0.8)' }}>
+          HIGH BARRIERS
+        </h2>
+      </motion.div>
+
+      {/* Barriers Grid */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 0.3 }}
+        className="grid md:grid-cols-3 gap-6 md:gap-8 px-6 max-w-5xl mx-auto"
+      >
+        {barriers.map((barrier, i) => (
+          <motion.div
+            key={barrier.title}
             initial={{ opacity: 0, y: 30 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.6 + i * 0.15 }}
-            className="text-center"
+            transition={{ delay: 0.4 + i * 0.15 }}
+            className="relative bg-white/[0.02] border border-white/10 p-8 text-center group hover:border-red-500/30 transition-colors"
           >
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full border border-white/10 flex items-center justify-center">
-              <item.icon className="w-7 h-7 text-white/40" strokeWidth={1.5} />
+            {/* Icon */}
+            <div className="w-16 h-16 mx-auto mb-6 rounded-full border border-white/10 flex items-center justify-center group-hover:border-red-500/30 transition-colors">
+              <barrier.icon className="w-7 h-7 text-white/40 group-hover:text-red-400/60 transition-colors" strokeWidth={1.5} />
             </div>
-            <h3 className="text-white/90 font-black text-lg tracking-wider mb-1">THE {item.title}</h3>
-            <p className="text-white/40 text-sm mb-1">{item.sub}</p>
-            <p className="text-white/20 text-xs">{item.desc}</p>
+            
+            {/* Stat */}
+            <span className="text-3xl md:text-4xl font-black text-white block mb-1">
+              {barrier.stat}
+            </span>
+            <span className="text-white/40 text-xs tracking-widest block mb-4">
+              {barrier.statLabel}
+            </span>
+            
+            {/* Title & Desc */}
+            <h3 className="text-white/90 font-black text-lg tracking-wider mb-3">
+              THE {barrier.title}
+            </h3>
+            <p className="text-white/40 text-sm leading-relaxed">
+              {barrier.desc}
+            </p>
           </motion.div>
         ))}
       </motion.div>
@@ -145,7 +259,7 @@ const RealityCheckSection = () => {
 };
 
 // ============================================
-// SECTION 3: SOLUTION - BRIDGE (with integrated marquee)
+// SECTION 4: SOLUTION - WE TAME THE BEAST
 // ============================================
 const SolutionSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -157,75 +271,42 @@ const SolutionSection = () => {
   
   const circleY = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const circleScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.9]);
-  const services = "GTM STRATEGY · COMMUNITY BUILDING · KOL NETWORK · PR COVERAGE · EVENT MARKETING · BRAND AWARENESS · ";
+  const services = "VASP COMPLIANCE · COMMUNITY BUILDING · KOL NETWORK · PR COVERAGE · EVENT MARKETING · LOCAL PARTNERSHIPS · ";
 
   return (
     <section ref={ref} className="relative bg-white flex flex-col items-center justify-center overflow-hidden">
       {/* Main Content */}
-      <div className="min-h-[70vh] flex flex-col items-center justify-center py-20">
-        {/* Main Title with Circular Image Mask */}
+      <div className="min-h-[80vh] flex flex-col items-center justify-center py-20">
+        {/* Section Label */}
+        <motion.span
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-primary/60 text-[10px] md:text-xs tracking-[0.5em] font-medium block mb-8"
+        >
+          OUR SOLUTION
+        </motion.span>
+
+        {/* Main Message */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
-          className="relative text-center px-4"
+          className="text-center px-4 max-w-5xl mx-auto"
         >
-          <h2 className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-            BRIDGING
+          <h2 className="text-[clamp(2rem,8vw,6rem)] font-black text-black leading-[0.9] tracking-tighter">
+            WE TURN
           </h2>
-          
-          <div className="relative flex items-center justify-center gap-2 md:gap-4">
-            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-              GL
-            </span>
-            
-            <motion.div 
-              style={{ y: circleY, scale: circleScale }}
-              className="relative w-[clamp(4rem,15vw,12rem)] h-[clamp(4rem,15vw,12rem)] rounded-full overflow-hidden flex-shrink-0"
-            >
-              <img 
-                src={storyOriginSummit}
-                alt="Korea Event"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
-            </motion.div>
-            
-            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-              BAL
-            </span>
-          </div>
-
-          <div className="relative flex items-center justify-center gap-2 md:gap-4">
-            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black leading-[0.85] tracking-tighter text-primary">
-              WEB3
-            </span>
-            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-              TO
-            </span>
-          </div>
-
-          <div className="relative flex items-center justify-center gap-2 md:gap-4">
-            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-              K
-            </span>
-            
-            <motion.div 
-              style={{ y: useTransform(scrollYProgress, [0, 1], [-30, 30]), scale: circleScale }}
-              className="relative w-[clamp(4rem,15vw,12rem)] h-[clamp(4rem,15vw,12rem)] rounded-full overflow-hidden flex-shrink-0"
-            >
-              <img 
-                src={peaqSummit}
-                alt="Korea Summit"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-transparent" />
-            </motion.div>
-            
-            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-              REA
-            </span>
-          </div>
+          <h2 className="text-[clamp(2rem,8vw,6rem)] font-black bg-gradient-to-r from-primary via-orange-500 to-rose-500 bg-clip-text text-transparent leading-[0.9] tracking-tighter">
+            BARRIERS
+          </h2>
+          <h2 className="text-[clamp(2rem,8vw,6rem)] font-black text-black leading-[0.9] tracking-tighter">
+            INTO YOUR
+          </h2>
+          <h2 className="text-[clamp(2rem,8vw,6rem)] font-black text-transparent leading-[0.9] tracking-tighter"
+            style={{ WebkitTextStroke: '2px rgba(0,0,0,0.8)' }}>
+            MOAT
+          </h2>
         </motion.div>
 
         {/* Tagline */}
@@ -233,20 +314,64 @@ const SolutionSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.4 }}
-          className="text-black/50 text-sm md:text-base tracking-widest mt-12 max-w-xl text-center px-6"
+          className="text-black/50 text-base md:text-lg tracking-wide mt-8 max-w-2xl text-center px-6"
         >
-          이음(Ium)은 "잇다"에서 유래한 이름으로, 글로벌 Web3 프로젝트와 한국 시장을 연결하는 다리 역할을 합니다.
+          이음(Ium)은 "잇다"에서 유래—글로벌 Web3와 한국을 연결하는 <span className="text-black font-semibold">전문 브릿지</span>입니다.
         </motion.p>
+
+        {/* Image Circles */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5 }}
+          className="flex items-center justify-center gap-4 md:gap-8 mt-12"
+        >
+          <motion.div 
+            style={{ y: circleY, scale: circleScale }}
+            className="relative w-24 h-24 md:w-40 md:h-40 rounded-full overflow-hidden"
+          >
+            <img 
+              src={storyOriginSummit}
+              alt="Korea Event"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent" />
+          </motion.div>
+          
+          <motion.div 
+            style={{ y: useTransform(scrollYProgress, [0, 1], [-30, 30]), scale: circleScale }}
+            className="relative w-28 h-28 md:w-48 md:h-48 rounded-full overflow-hidden border-4 border-primary"
+          >
+            <img 
+              src={peaqSummit}
+              alt="Korea Summit"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-transparent" />
+          </motion.div>
+          
+          <motion.div 
+            style={{ y: circleY, scale: circleScale }}
+            className="relative w-24 h-24 md:w-40 md:h-40 rounded-full overflow-hidden"
+          >
+            <img 
+              src={bnbEvent}
+              alt="BNB Event"
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-transparent" />
+          </motion.div>
+        </motion.div>
 
         {/* Stats Row */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.6 }}
-          className="flex flex-wrap justify-center gap-12 md:gap-20 mt-12 px-6"
+          className="flex flex-wrap justify-center gap-12 md:gap-20 mt-16 px-6"
         >
           {[
-            { value: "5", suffix: "YEARS", sub: "In Korea Market" },
+            { value: "2025", suffix: "", sub: "Born in Speed Era" },
             { value: "30", suffix: "+", sub: "Projects Launched" },
             { value: "$50M", suffix: "+", sub: "Volume Generated" },
           ].map((stat, i) => (
@@ -961,25 +1086,28 @@ const GTMService = () => {
       />
       <Navbar />
       <main className="bg-black">
-        {/* 1. HOOK */}
+        {/* 1. HOOK - Korea, The Engine of Crypto */}
         <EnhancedHero />
         
-        {/* 2. PROBLEM */}
-        <RealityCheckSection />
+        {/* 2. WHY KOREA - FOMO trigger */}
+        <WhyKoreaSection />
         
-        {/* 3. BRIDGE (with integrated marquee) */}
+        {/* 3. THE BARRIERS - High Barriers */}
+        <BarriersSection />
+        
+        {/* 4. OUR SOLUTION - We Tame the Beast */}
         <SolutionSection />
 
-        {/* 4. PROOF (gallery + numbers + achievements + testimonial) */}
+        {/* 5. PROOF (gallery + numbers + achievements + testimonial) */}
         <ProofSection />
         
-        {/* 5. PROCESS */}
+        {/* 6. PROCESS */}
         <StrategySection />
 
-        {/* 6. PORTFOLIO */}
+        {/* 7. PORTFOLIO */}
         <SelectedWorkSection />
         
-        {/* 7. CTA */}
+        {/* 8. CTA */}
         <FooterCTASection />
       </main>
       <Footer />
