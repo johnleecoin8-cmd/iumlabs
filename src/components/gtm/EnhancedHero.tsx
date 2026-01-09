@@ -122,9 +122,9 @@ const EnhancedHero = () => {
             className="flex flex-wrap gap-8 md:gap-12 mt-10"
           >
             {[
-              { value: '50+', label: 'Projects Launched' },
-              { value: '2M+', label: 'Community Reach' },
-              { value: '#1', label: 'Korea GTM Agency' },
+              { value: '$1.5B+', label: 'Volume Generated' },
+              { value: '500K+', label: 'Active Community' },
+              { value: '#1', label: 'Mindshare Ranking' },
             ].map((stat, i) => (
               <div key={i} className="flex flex-col">
                 <span className="text-2xl md:text-3xl font-bold text-white">{stat.value}</span>
