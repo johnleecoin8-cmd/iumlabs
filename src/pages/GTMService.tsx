@@ -1421,34 +1421,52 @@ const LLMEngineVisualization = ({ isVisible }: { isVisible: boolean }) => {
         backgroundSize: '40px 40px'
       }} />
 
-      {/* Floating particles */}
-      {[...Array(6)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 rounded-full bg-primary/40"
-          style={{
-            left: `${20 + i * 12}%`,
-            top: `${30 + (i % 3) * 20}%`
-          }}
-          animate={{
-            y: [0, -30, 0],
-            opacity: [0.2, 0.8, 0.2],
-            scale: [1, 1.5, 1]
-          }}
-          transition={{
-            duration: 3 + i * 0.5,
-            repeat: Infinity,
-            delay: i * 0.3
-          }}
-        />
-      ))}
+      {/* Scanline effect - horizontal line sweeping from top to bottom */}
+      <motion.div
+        className="absolute left-0 right-0 h-[2px] pointer-events-none"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, hsl(var(--primary) / 0.8) 20%, hsl(var(--primary)) 50%, hsl(var(--primary) / 0.8) 80%, transparent 100%)',
+          boxShadow: '0 0 20px hsl(var(--primary) / 0.5), 0 0 40px hsl(var(--primary) / 0.3), 0 4px 15px hsl(var(--primary) / 0.2)'
+        }}
+        animate={{
+          top: ['0%', '100%']
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "linear"
+        }}
+      />
 
-      {/* Central glow */}
-      <motion.div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full pointer-events-none"
-        style={{ background: 'radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 60%)' }}
-        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0.5, 0.3] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+      {/* Secondary scanline (offset timing) */}
+      <motion.div
+        className="absolute left-0 right-0 h-[1px] pointer-events-none opacity-50"
+        style={{
+          background: 'linear-gradient(90deg, transparent 0%, hsl(var(--primary) / 0.5) 30%, hsl(var(--primary) / 0.6) 50%, hsl(var(--primary) / 0.5) 70%, transparent 100%)'
+        }}
+        animate={{
+          top: ['0%', '100%']
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 1.5
+        }}
+      />
+
+      {/* Horizontal scan lines (CRT effect) */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, hsl(var(--primary) / 0.1) 2px, hsl(var(--primary) / 0.1) 4px)',
+        }}
+      />
+
+      {/* Subtle ambient glow (static, no pulse) */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full pointer-events-none opacity-20"
+        style={{ background: 'radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 60%)' }}
       />
 
       <div className="relative z-10">
