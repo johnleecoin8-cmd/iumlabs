@@ -69,27 +69,34 @@ const moreProjects = [
 const frameworkStages = [
   {
     number: '01',
-    title: 'Share',
-    description: 'Tell us about your project vision, target audience, budget range, and success metrics',
+    title: 'ANALYZE',
+    subtitle: 'Intelligence',
+    items: ['Deep Market Research', 'Competitor Analysis', 'Narrative Localization'],
+    quote: '"We don\'t guess. We analyze."',
     icon: Search,
   },
   {
     number: '02',
-    title: 'Propose',
-    description: 'We analyze your needs and deliver a customized GTM strategy with clear milestones',
+    title: 'BUILD',
+    subtitle: 'Foundation',
+    items: ['Naver SEO Dominance', 'Community Infrastructure', 'Brand Localization'],
+    quote: '"Building the localized infra."',
     icon: Building,
   },
   {
     number: '03',
-    title: 'Launch',
-    description: 'Execute your strategy with our network of media, KOLs, and community partners',
+    title: 'IGNITE',
+    subtitle: 'Launch',
+    items: ['Tier-1 KOL Activation', 'Media Blitz Campaign', 'Viral Marketing'],
+    quote: '"Maximum noise, maximum impact."',
     icon: Zap,
   },
   {
     number: '04',
-    title: 'Scale',
-    description: 'Measure, optimize, and scale your presence based on real performance data',
-    items: ['Performance tracking', 'Strategy optimization'],
+    title: 'SCALE',
+    subtitle: 'Growth',
+    items: ['Events & Partnerships', 'Liquidity Campaigns', 'Retention Programs'],
+    quote: '"Turning hype into retention."',
     icon: TrendingUp,
   },
 ];
@@ -288,23 +295,24 @@ const FrameworkSection = () => {
                 <stage.icon className="w-5 h-5 text-primary" />
               </div>
               
-              <h3 className="text-xl font-medium text-foreground mb-3">
+              <h3 className="text-xl font-medium text-foreground mb-1">
                 {stage.title}
               </h3>
-
-              <p className="text-sm text-muted-foreground mb-4">
-                {stage.description}
+              <p className="text-xs text-muted-foreground uppercase tracking-wide mb-4">
+                {stage.subtitle}
               </p>
 
-              {stage.items && (
-                <ul className="space-y-1">
-                  {stage.items.map((item) => (
-                    <li key={item} className="text-xs text-primary/80">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <ul className="space-y-2 mb-6">
+                {stage.items.map((item) => (
+                  <li key={item} className="text-sm text-muted-foreground">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="text-xs text-primary/80 italic">
+                {stage.quote}
+              </p>
             </motion.div>
           ))}
         </div>
