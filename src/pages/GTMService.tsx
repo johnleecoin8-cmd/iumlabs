@@ -47,19 +47,20 @@ const featuredProjects = [{
 }, {
   name: 'Story Protocol',
   tagline: 'Korea launch for the leading IP infrastructure.',
-  result: '#1 Media Share of Voice in Korea.',
+  result: '#1 Share of Voice in Korea.',
   image: storyBg,
   slug: 'story-protocol',
   category: 'IP Protocol',
-  strategy: 'Narrative Dominance',
+  strategy: 'Narrative-Led FOMO',
   metrics: [{
     label: 'Share of Voice',
     value: 1,
     prefix: '#'
   }, {
-    label: 'Media Coverage',
-    value: 50,
-    suffix: '+ Articles'
+    label: 'Search Volume Spike',
+    value: 450,
+    prefix: '+',
+    suffix: '%'
   }]
 }, {
   name: 'peaq Network',
@@ -412,7 +413,7 @@ const HeroSection = () => {
       }} className="flex flex-wrap items-center gap-8 md:gap-12">
           <AnimatedStat value={30} suffix="+" label="Projects Launched" delay={0.8} isVisible={isInView} />
           <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <AnimatedStat value={50} prefix="$" suffix="M+" label="Volume Generated" delay={1.0} isVisible={isInView} />
+          <AnimatedStat value={1.5} prefix="$" suffix="B+" label="Volume Facilitated" delay={1.0} isVisible={isInView} />
           <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
           <AnimatedStat value={340} suffix="%" label="Avg. Growth Rate" delay={1.2} isVisible={isInView} />
         </motion.div>
@@ -1096,11 +1097,11 @@ const ResultsDashboardSection = () => {
     description: 'Trading volume increase for launched projects'
   }, {
     icon: DollarSign,
-    value: 50,
-    suffix: 'M+',
+    value: 1.5,
+    suffix: 'B+',
     prefix: '$',
-    label: 'Volume Generated',
-    description: 'Total trading volume driven by our campaigns'
+    label: 'Volume Facilitated',
+    description: 'Total trading volume recorded by our clients'
   }, {
     icon: Users,
     value: 500,
@@ -2388,7 +2389,7 @@ const CTASection = () => {
 // MAIN COMPONENT
 // ============================================
 const GTMService = () => {
-  usePageMeta("Korea GTM Strategy | Ium Labs", "Engineered for Liquidity. Launch in Korea with the most data-driven GTM framework. 30+ projects. $50M+ volume.");
+  usePageMeta("Korea GTM Strategy | Ium Labs", "Engineered for Liquidity. Launch in Korea with the most data-driven GTM framework. 30+ projects. $1.5B+ volume facilitated.");
   return <>
       <ServiceSchema name="Korea GTM Strategy" description="Go-to-market strategy for Web3 projects entering the Korean market. Data-driven 4-stage framework." url="/services/gtm" provider="Ium Labs" areaServed="South Korea" />
       <Navbar />
