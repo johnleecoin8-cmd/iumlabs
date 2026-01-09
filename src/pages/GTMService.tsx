@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy } from 'lucide-react';
+import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy, Clock, Database, Network, Sparkles } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
 import TestimonialsSection from '@/components/gtm/TestimonialsCarousel';
 
@@ -13,1454 +13,8 @@ import TestimonialsSection from '@/components/gtm/TestimonialsCarousel';
 import storyBg from '@/assets/projects/story-bg.jpg';
 import mantraBg from '@/assets/projects/mantra-bg.jpg';
 import peaqBg from '@/assets/projects/peaq-bg.jpg';
-import bnbBg from '@/assets/projects/bnb-bg.jpg';
-import saharaBg from '@/assets/projects/sahara-ai-bg.jpg';
-import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
-import bybitBg from '@/assets/projects/bybit-bg.jpg';
-import openledgerBg from '@/assets/campaigns/openledger-hero-official.png';
-import megaethBg from '@/assets/projects/megaeth-bg.jpg';
-import ondoBg from '@/assets/projects/ondo-bg.jpg';
-import polygonBg from '@/assets/projects/polygon-bg.jpg';
-import triaBg from '@/assets/projects/tria-bg.jpg';
 
-// ============================================
-// DATA
-// ============================================
-const featuredProjects = [
-  {
-    name: 'MANTRA',
-    tagline: "Building Korea's largest RWA community.",
-    result: '+500% community growth.',
-    image: mantraBg,
-    slug: 'mantra',
-    category: 'RWA L1',
-    strategy: 'Community-First Strategy',
-    metrics: [
-      { label: 'Community Growth', value: 500, suffix: '%' },
-      { label: 'Korean Users', value: 85, suffix: 'K+' },
-    ]
-  },
-  {
-    name: 'Story Protocol',
-    tagline: 'Korea launch for the leading IP infrastructure.',
-    result: '+340% trading volume.',
-    image: storyBg,
-    slug: 'story-protocol',
-    category: 'IP Protocol',
-    strategy: 'Narrative-Led Strategy',
-    metrics: [
-      { label: 'Trading Volume', value: 340, suffix: '%' },
-      { label: 'Media Coverage', value: 50, suffix: '+' },
-    ]
-  },
-  {
-    name: 'peaq Network',
-    tagline: 'Establishing DePIN leadership in Korea.',
-    result: '#1 in Korean market.',
-    image: peaqBg,
-    slug: 'peaq',
-    category: 'DePIN',
-    strategy: 'Market Dominance Strategy',
-    metrics: [
-      { label: 'Market Rank', value: 1, prefix: '#' },
-      { label: 'Mindshare', value: 78, suffix: '%' },
-    ]
-  },
-];
-
-const moreProjects = [
-  { name: 'BNB Chain', image: bnbBg, slug: 'bnb-chain' },
-  { name: 'Bybit', image: bybitBg, slug: 'bybit' },
-  { name: 'KuCoin', image: kucoinBg, slug: 'kucoin' },
-  { name: 'Sahara AI', image: saharaBg, slug: 'sahara-ai' },
-  { name: 'OpenLedger', image: openledgerBg, slug: 'openledger' },
-  { name: 'MegaETH', image: megaethBg, slug: 'megaeth' },
-  { name: 'Ondo', image: ondoBg, slug: 'ondo' },
-  { name: 'Polygon', image: polygonBg, slug: 'polygon' },
-  { name: 'Tria', image: triaBg, slug: 'tria' },
-];
-
-const frameworkStages = [
-  {
-    number: '01',
-    title: 'ANALYZE',
-    subtitle: 'Intelligence',
-    items: ['Deep Market Research', 'Competitor Analysis', 'Narrative Localization'],
-    quote: '"We don\'t guess. We analyze."',
-    icon: Search,
-  },
-  {
-    number: '02',
-    title: 'BUILD',
-    subtitle: 'Foundation',
-    items: ['Naver SEO Dominance', 'Community Infrastructure', 'Brand Localization'],
-    quote: '"Building the localized infra."',
-    icon: Building,
-  },
-  {
-    number: '03',
-    title: 'IGNITE',
-    subtitle: 'Launch',
-    items: ['Tier-1 KOL Activation', 'Media Blitz Campaign', 'Viral Marketing'],
-    quote: '"Maximum noise, maximum impact."',
-    icon: Zap,
-  },
-  {
-    number: '04',
-    title: 'SCALE',
-    subtitle: 'Growth',
-    items: ['Events & Partnerships', 'Liquidity Campaigns', 'Retention Programs'],
-    quote: '"Turning hype into retention."',
-    icon: TrendingUp,
-  },
-];
-
-
-// ============================================
-// ANIMATED STAT COMPONENT
-// ============================================
-const AnimatedStat = ({ 
-  value, 
-  suffix = '', 
-  prefix = '', 
-  label, 
-  delay = 0,
-  isVisible = true 
-}: { 
-  value: number; 
-  suffix?: string; 
-  prefix?: string; 
-  label: string; 
-  delay?: number;
-  isVisible?: boolean;
-}) => {
-  const count = useCountUp({ end: value, delay: delay * 1000, isVisible, duration: 2000 });
-  
-  return (
-    <div className="text-center group">
-      <motion.p 
-        className="text-4xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: delay, duration: 0.5, type: "spring" }}
-      >
-        {prefix}{count}{suffix}
-      </motion.p>
-      <p className="text-xs text-muted-foreground mt-2 tracking-wider uppercase">{label}</p>
-    </div>
-  );
-};
-
-// ============================================
-// FLOATING 3D GRAPHIC ELEMENTS
-// ============================================
-const FloatingGraphics = () => {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Floating orb 1 */}
-      <motion.div
-        className="absolute top-1/4 right-[15%] w-32 h-32 rounded-full opacity-30"
-        style={{
-          background: 'radial-gradient(circle at 30% 30%, hsl(var(--primary)), transparent 70%)',
-          filter: 'blur(40px)',
-        }}
-        animate={{
-          y: [0, -30, 0],
-          x: [0, 15, 0],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      
-      {/* Floating orb 2 */}
-      <motion.div
-        className="absolute bottom-1/3 right-[25%] w-48 h-48 rounded-full opacity-20"
-        style={{
-          background: 'radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.5), transparent 60%)',
-          filter: 'blur(60px)',
-        }}
-        animate={{
-          y: [0, 40, 0],
-          x: [0, -20, 0],
-        }}
-        transition={{
-          duration: 10,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-      />
-
-      {/* Grid pattern */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
-          `,
-          backgroundSize: '60px 60px',
-        }}
-      />
-
-      {/* Animated line */}
-      <motion.div
-        className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"
-        initial={{ scaleX: 0, opacity: 0 }}
-        animate={{ scaleX: 1, opacity: 1 }}
-        transition={{ duration: 1.5, delay: 0.5 }}
-      />
-    </div>
-  );
-};
-
-// ============================================
-// GLITCH TEXT EFFECT
-// ============================================
-const GlitchText = ({ children, className = '' }: { children: string; className?: string }) => {
-  return (
-    <span className={`relative inline-block ${className}`}>
-      <span className="relative z-10">{children}</span>
-      <motion.span
-        className="absolute top-0 left-0 text-primary opacity-70 z-0"
-        style={{ clipPath: 'inset(0 0 50% 0)' }}
-        animate={{
-          x: [0, -2, 2, 0],
-          opacity: [0.7, 0.5, 0.8, 0.7],
-        }}
-        transition={{
-          duration: 0.3,
-          repeat: Infinity,
-          repeatDelay: 3,
-        }}
-      >
-        {children}
-      </motion.span>
-      <motion.span
-        className="absolute top-0 left-0 text-cyan-400 opacity-50 z-0"
-        style={{ clipPath: 'inset(50% 0 0 0)' }}
-        animate={{
-          x: [0, 2, -2, 0],
-          opacity: [0.5, 0.3, 0.6, 0.5],
-        }}
-        transition={{
-          duration: 0.3,
-          repeat: Infinity,
-          repeatDelay: 3,
-          delay: 0.1,
-        }}
-      >
-        {children}
-      </motion.span>
-    </span>
-  );
-};
-
-// ============================================
-// HERO SECTION - Enhanced with Graphics
-// ============================================
-const HeroSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      setMousePosition({
-        x: (e.clientX - rect.left) / rect.width,
-        y: (e.clientY - rect.top) / rect.height,
-      });
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  return (
-    <section ref={ref} className="relative min-h-[90vh] flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-32 pb-20 bg-background overflow-hidden">
-      {/* Floating graphics */}
-      <FloatingGraphics />
-      
-      {/* Mouse follow glow */}
-      <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%)',
-          left: `calc(${mousePosition.x * 100}% - 250px)`,
-          top: `calc(${mousePosition.y * 100}% - 250px)`,
-        }}
-        animate={{
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-
-      <div className="relative max-w-5xl z-10">
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-muted-foreground text-sm tracking-widest uppercase mb-6 flex items-center gap-3"
-        >
-          <motion.span 
-            className="w-8 h-px bg-primary"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          />
-          Korea GTM Strategy
-        </motion.p>
-        
-        <motion.h1
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-[clamp(2.5rem,8vw,6rem)] font-medium leading-[1.02] tracking-tight text-foreground mb-8"
-        >
-          <span className="block overflow-hidden">
-            <motion.span
-              className="block"
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.33, 1, 0.68, 1] }}
-            >
-              Engineered for
-            </motion.span>
-          </span>
-          <span className="block overflow-hidden">
-            <motion.span
-              className="block"
-              initial={{ y: '100%' }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.8, delay: 0.35, ease: [0.33, 1, 0.68, 1] }}
-            >
-              <GlitchText className="text-primary">Liquidity.</GlitchText>
-            </motion.span>
-          </span>
-        </motion.h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-16"
-        >
-          Launch in Korea with the most data-driven GTM framework.
-          <br />
-          <span className="text-foreground/80">We turn cultural barriers into your competitive moat.</span>
-        </motion.p>
-
-        {/* Stats with enhanced styling */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.7 }}
-          className="flex flex-wrap items-center gap-8 md:gap-12"
-        >
-          <AnimatedStat value={30} suffix="+" label="Projects Launched" delay={0.8} isVisible={isInView} />
-          <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <AnimatedStat value={50} prefix="$" suffix="M+" label="Volume Generated" delay={1.0} isVisible={isInView} />
-          <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <AnimatedStat value={340} suffix="%" label="Avg. Growth Rate" delay={1.2} isVisible={isInView} />
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-8 left-0 flex items-center gap-3"
-        >
-          <motion.div
-            className="w-6 h-10 border border-muted-foreground/30 rounded-full flex items-start justify-center p-2"
-            animate={{ borderColor: ['hsl(var(--muted-foreground) / 0.3)', 'hsl(var(--primary) / 0.5)', 'hsl(var(--muted-foreground) / 0.3)'] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            <motion.div
-              className="w-1 h-2 bg-primary rounded-full"
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
-          </motion.div>
-          <span className="text-xs text-muted-foreground tracking-wider">SCROLL</span>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
-// ============================================
-// ANIMATED PROGRESS BAR
-// ============================================
-const AnimatedProgressBar = ({ 
-  label, 
-  percentage, 
-  value, 
-  delay = 0, 
-  isHighlight = false,
-  isVisible = true 
-}: { 
-  label: string; 
-  percentage: number; 
-  value: string; 
-  delay?: number; 
-  isHighlight?: boolean;
-  isVisible?: boolean;
-}) => {
-  const [width, setWidth] = useState(0);
-  
-  useEffect(() => {
-    if (isVisible) {
-      const timer = setTimeout(() => setWidth(percentage), delay * 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible, percentage, delay]);
-
-  return (
-    <div className="space-y-2">
-      <div className="flex justify-between items-center">
-        <span className={`text-sm font-medium ${isHighlight ? 'text-primary' : 'text-foreground/80'}`}>
-          {label}
-        </span>
-        <span className={`text-sm font-mono ${isHighlight ? 'text-primary' : 'text-muted-foreground'}`}>
-          {value}
-        </span>
-      </div>
-      <div className="h-2 bg-muted rounded-full overflow-hidden">
-        <motion.div
-          className={`h-full rounded-full ${isHighlight ? 'bg-primary' : 'bg-foreground/30'}`}
-          initial={{ width: 0 }}
-          animate={{ width: `${width}%` }}
-          transition={{ duration: 1, ease: "easeOut", delay: delay }}
-        />
-      </div>
-    </div>
-  );
-};
-
-// ============================================
-// VOLUME FLIPPENING CHART
-// ============================================
-const VolumeFlippeningChart = ({ isVisible }: { isVisible: boolean }) => {
-  const exchangeData = [
-    { name: 'Upbit (KRW)', volume: 800, percentage: 100, highlight: true },
-    { name: 'Binance (USDT)', volume: 750, percentage: 94, highlight: false },
-    { name: 'Coinbase (USD)', volume: 120, percentage: 15, highlight: false },
-  ];
-
-  return (
-    <div className="space-y-4">
-      <p className="text-xs tracking-widest text-primary font-medium mb-6">
-        TOKEN X — 24H TRADING VOLUME EXAMPLE
-      </p>
-      {exchangeData.map((item, i) => (
-        <div key={item.name} className="space-y-2">
-          <div className="flex justify-between items-center">
-            <span className={`text-sm font-medium ${item.highlight ? 'text-primary' : 'text-foreground/80'}`}>
-              {item.name}
-              {item.highlight && (
-                <motion.span
-                  className="ml-2 text-xs bg-primary/20 text-primary px-2 py-0.5 rounded"
-                  animate={{ opacity: [1, 0.5, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                >
-                  LEADING
-                </motion.span>
-              )}
-            </span>
-            <span className={`text-sm font-mono ${item.highlight ? 'text-primary font-bold' : 'text-muted-foreground'}`}>
-              ${item.volume}M
-            </span>
-          </div>
-          <div className="h-3 bg-muted rounded-full overflow-hidden relative">
-            <motion.div
-              className={`h-full rounded-full ${item.highlight ? 'bg-gradient-to-r from-primary to-primary/70' : 'bg-foreground/30'}`}
-              initial={{ width: 0 }}
-              animate={isVisible ? { width: `${item.percentage}%` } : { width: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut", delay: i * 0.2 }}
-            />
-            {item.highlight && (
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-                initial={{ x: '-100%' }}
-                animate={isVisible ? { x: '200%' } : { x: '-100%' }}
-                transition={{ duration: 1.5, delay: 1.5, repeat: Infinity, repeatDelay: 3 }}
-              />
-            )}
-          </div>
-        </div>
-      ))}
-      <p className="text-xs text-muted-foreground mt-4 italic">
-        *Real example: Upbit leads global market for top altcoins
-      </p>
-    </div>
-  );
-};
-
-// ============================================
-// GLOBAL LIQUIDITY MAP ANIMATION
-// ============================================
-const GlobalLiquidityMap = ({ isVisible }: { isVisible: boolean }) => {
-  const [pulseIndex, setPulseIndex] = useState(0);
-
-  useEffect(() => {
-    if (!isVisible) return;
-    const interval = setInterval(() => {
-      setPulseIndex(prev => (prev + 1) % 4);
-    }, 1500);
-    return () => clearInterval(interval);
-  }, [isVisible]);
-
-  const regions = [
-    { id: 'korea', x: 78, y: 35, name: 'Seoul', isSource: true },
-    { id: 'usa', x: 22, y: 38, name: 'USA', isSource: false },
-    { id: 'europe', x: 48, y: 30, name: 'Europe', isSource: false },
-    { id: 'asia', x: 68, y: 50, name: 'Asia', isSource: false },
-  ];
-
-  return (
-    <div className="relative aspect-[2/1] w-full max-w-lg mx-auto">
-      {/* World map simplified silhouette */}
-      <svg viewBox="0 0 100 50" className="w-full h-full">
-        {/* Background grid */}
-        {[...Array(10)].map((_, i) => (
-          <line
-            key={`grid-${i}`}
-            x1={i * 10}
-            y1="0"
-            x2={i * 10}
-            y2="50"
-            stroke="hsl(var(--foreground) / 0.05)"
-            strokeWidth="0.2"
-          />
-        ))}
-        {[...Array(5)].map((_, i) => (
-          <line
-            key={`grid-h-${i}`}
-            x1="0"
-            y1={i * 10}
-            x2="100"
-            y2={i * 10}
-            stroke="hsl(var(--foreground) / 0.05)"
-            strokeWidth="0.2"
-          />
-        ))}
-
-        {/* Connection lines from Seoul */}
-        {regions.filter(r => !r.isSource).map((region, i) => (
-          <motion.path
-            key={`line-${region.id}`}
-            d={`M 78 35 Q ${(78 + region.x) / 2} ${Math.min(region.y, 35) - 10} ${region.x} ${region.y}`}
-            fill="none"
-            stroke="hsl(var(--primary) / 0.3)"
-            strokeWidth="0.5"
-            strokeDasharray="2 2"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={isVisible ? { pathLength: 1, opacity: 1 } : {}}
-            transition={{ duration: 1.5, delay: 0.5 + i * 0.2 }}
-          />
-        ))}
-
-        {/* Animated pulse traveling from Seoul */}
-        {regions.filter(r => !r.isSource).map((region, i) => (
-          <motion.circle
-            key={`pulse-${region.id}`}
-            r="1.5"
-            fill="hsl(var(--primary))"
-            initial={{ opacity: 0 }}
-            animate={pulseIndex === i + 1 ? {
-              opacity: [0, 1, 1, 0],
-              cx: [78, (78 + region.x) / 2, region.x],
-              cy: [35, Math.min(region.y, 35) - 10, region.y],
-            } : { opacity: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-          />
-        ))}
-
-        {/* Region points */}
-        {regions.map((region) => (
-          <g key={region.id}>
-            {/* Outer pulse for Seoul */}
-            {region.isSource && (
-              <motion.circle
-                cx={region.x}
-                cy={region.y}
-                r="3"
-                fill="none"
-                stroke="hsl(var(--primary))"
-                strokeWidth="0.5"
-                animate={{
-                  scale: [1, 2.5, 1],
-                  opacity: [0.8, 0, 0.8],
-                }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-            )}
-            <motion.circle
-              cx={region.x}
-              cy={region.y}
-              r={region.isSource ? 2.5 : 1.5}
-              fill={region.isSource ? "hsl(var(--primary))" : "hsl(var(--foreground) / 0.5)"}
-              initial={{ scale: 0 }}
-              animate={isVisible ? { scale: 1 } : { scale: 0 }}
-              transition={{ delay: region.isSource ? 0.3 : 1 + regions.indexOf(region) * 0.1 }}
-              style={region.isSource ? { filter: 'drop-shadow(0 0 4px hsl(var(--primary)))' } : {}}
-            />
-            <motion.text
-              x={region.x}
-              y={region.y + (region.isSource ? -5 : 5)}
-              textAnchor="middle"
-              className={`text-[3px] ${region.isSource ? 'fill-primary font-bold' : 'fill-muted-foreground'}`}
-              initial={{ opacity: 0 }}
-              animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: 1.5 }}
-            >
-              {region.name}
-            </motion.text>
-          </g>
-        ))}
-      </svg>
-
-      {/* Caption */}
-      <motion.p
-        className="absolute bottom-0 left-0 right-0 text-center text-xs text-primary font-medium"
-        initial={{ opacity: 0 }}
-        animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ delay: 2 }}
-      >
-        "Liquidity starts in Seoul, ripples globally."
-      </motion.p>
-    </div>
-  );
-};
-
-// ============================================
-// KINGMAKER STATS CARDS
-// ============================================
-const KingmakerStats = ({ isVisible }: { isVisible: boolean }) => {
-  const stats = [
-    { value: '#2', label: 'Global Fiat Volume', sublabel: 'KRW Pairs' },
-    { value: '#1', label: 'Altcoin Velocity', sublabel: '5x Global Avg' },
-    { value: '90%', label: 'Market Share', sublabel: 'Upbit + Bithumb' },
-  ];
-
-  return (
-    <div className="grid grid-cols-3 gap-4">
-      {stats.map((stat, i) => (
-        <motion.div
-          key={stat.label}
-          className="text-center p-4 border border-border bg-background/50 hover:border-primary/50 transition-colors"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: i * 0.15 }}
-        >
-          <motion.p
-            className="text-2xl md:text-3xl font-bold text-primary"
-            initial={{ scale: 0 }}
-            animate={isVisible ? { scale: 1 } : { scale: 0 }}
-            transition={{ delay: i * 0.15 + 0.3, type: "spring" }}
-          >
-            {stat.value}
-          </motion.p>
-          <p className="text-xs font-medium text-foreground mt-1">{stat.label}</p>
-          <p className="text-[10px] text-muted-foreground">{stat.sublabel}</p>
-        </motion.div>
-      ))}
-    </div>
-  );
-};
-
-// ============================================
-// MARKET INTELLIGENCE - THE KINGMAKER EXCHANGES
-// ============================================
-const MarketIntelligenceSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-
-  const kingmakerPoints = [
-    {
-      tag: 'DOMINANCE OVER DOLLAR',
-      title: 'Leading Global Price Discovery',
-      description: "For top altcoins, Upbit and Bithumb frequently surpass Binance in daily trading volume. We don't just follow the global market; we move it.",
-    },
-    {
-      tag: 'THE VERIFICATION STANDARD',
-      title: 'Ultimate Seal of Approval',
-      description: "Listing on Korea's DAXA exchanges (Upbit, Bithumb, Coinone) is the ultimate verification. It signals the strictest regulatory due diligence in the industry.",
-    },
-    {
-      tag: 'STICKY LIQUIDITY',
-      title: 'Organic Buy Pressure',
-      description: "Unlike institutional market makers who pull liquidity during volatility, Korean volume is driven by a massive retail army. This creates sticky, organic buy pressure.",
-    },
-  ];
-
-  const velocityPoints = [
-    {
-      metric: '5x',
-      label: 'Higher Trade Velocity',
-      description: 'Korean traders execute trades 5x more frequently than global average.',
-    },
-    {
-      metric: '60%',
-      label: 'Rallies Started in KRW',
-      description: '60% of major altcoin rallies in 2024 were preceded by KRW volume spikes.',
-    },
-  ];
-
-  return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        className="max-w-7xl mx-auto"
-      >
-        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-          01 The Strategic Imperative
-        </p>
-        <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-4">
-          The Kingmaker Exchanges
-        </h2>
-        <p className="text-lg text-muted-foreground mb-16 max-w-2xl">
-          Where global price discovery begins.
-        </p>
-
-        {/* Kingmaker Stats */}
-        <div className="mb-16">
-          <KingmakerStats isVisible={isInView} />
-        </div>
-
-        {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 mb-16">
-          {/* Left: Volume Chart + Map */}
-          <div className="space-y-12">
-            <VolumeFlippeningChart isVisible={isInView} />
-            <GlobalLiquidityMap isVisible={isInView} />
-          </div>
-
-          {/* Right: Kingmaker Points */}
-          <div className="space-y-8">
-            {kingmakerPoints.map((point, i) => (
-              <motion.div
-                key={point.tag}
-                className="p-6 border border-border bg-background hover:border-primary/50 transition-all duration-300 group"
-                initial={{ opacity: 0, x: 30 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: i * 0.15 }}
-              >
-                <p className="text-xs tracking-widest text-primary font-medium mb-2">{point.tag}</p>
-                <h3 className="text-xl font-medium text-foreground mb-3 group-hover:text-primary transition-colors">
-                  {point.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {point.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Volume & Velocity Section */}
-        <motion.div
-          className="bg-background border border-border p-8 md:p-12"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5 }}
-        >
-          <div className="flex items-center gap-3 mb-8">
-            <TrendingUp className="w-5 h-5 text-primary" />
-            <h3 className="text-xl font-medium text-foreground">Volume & Velocity</h3>
-            <span className="text-xs text-muted-foreground">— Why smart money flows to Korea</span>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            {velocityPoints.map((point, i) => (
-              <motion.div
-                key={point.label}
-                className="flex gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.7 + i * 0.15 }}
-              >
-                <div className="shrink-0">
-                  <motion.span
-                    className="text-4xl md:text-5xl font-bold text-primary"
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: 1 } : { scale: 0 }}
-                    transition={{ delay: 0.9 + i * 0.15, type: "spring" }}
-                  >
-                    {point.metric}
-                  </motion.span>
-                </div>
-                <div>
-                  <p className="text-sm font-medium text-foreground mb-1">{point.label}</p>
-                  <p className="text-sm text-muted-foreground">{point.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* The Upbit Pump Callout */}
-          <motion.div
-            className="mt-8 p-6 bg-primary/5 border-l-2 border-primary"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 1 }}
-          >
-            <p className="text-xs tracking-widest text-primary font-medium mb-2">THE "UPBIT PUMP" PHENOMENON</p>
-            <p className="text-foreground leading-relaxed">
-              Data shows that <span className="font-semibold text-primary">60% of major altcoin rallies in 2024</span> were preceded by a volume spike in KRW pairs. 
-              Launching in Korea isn't just about entering a new market—it's about <span className="font-semibold">igniting your next bull run.</span>
-            </p>
-          </motion.div>
-        </motion.div>
-
-        {/* Bottom Quote */}
-        <motion.blockquote
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8 }}
-          className="border-l-2 border-primary pl-6 mt-12"
-        >
-          <p className="text-lg md:text-xl text-foreground italic">
-            "When you launch in Korea, you're not just entering a market—you're plugging into the world's most liquid fiat pair after the Dollar and igniting global price discovery."
-          </p>
-          <footer className="mt-3 text-sm text-muted-foreground">
-            — The Kingmaker Advantage
-          </footer>
-        </motion.blockquote>
-      </motion.div>
-    </section>
-  );
-};
-
-// ============================================
-// CIRCULAR PROGRESS RING COMPONENT
-// ============================================
-const CircularProgressRing = ({ 
-  value, 
-  maxValue = 100, 
-  size = 120, 
-  strokeWidth = 8,
-  label,
-  suffix = '%',
-  prefix = '',
-  delay = 0,
-  isVisible = true,
-  color = 'primary'
-}: {
-  value: number;
-  maxValue?: number;
-  size?: number;
-  strokeWidth?: number;
-  label: string;
-  suffix?: string;
-  prefix?: string;
-  delay?: number;
-  isVisible?: boolean;
-  color?: string;
-}) => {
-  const radius = (size - strokeWidth) / 2;
-  const circumference = radius * 2 * Math.PI;
-  const [progress, setProgress] = useState(0);
-  const displayValue = useCountUp({ end: value, delay: delay * 1000, isVisible, duration: 2000 });
-
-  useEffect(() => {
-    if (isVisible) {
-      const timer = setTimeout(() => {
-        setProgress((value / maxValue) * 100);
-      }, delay * 1000);
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible, value, maxValue, delay]);
-
-  const strokeDashoffset = circumference - (progress / 100) * circumference;
-
-  return (
-    <div className="flex flex-col items-center">
-      <div className="relative" style={{ width: size, height: size }}>
-        {/* Background circle */}
-        <svg className="absolute inset-0 -rotate-90" width={size} height={size}>
-          <circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke="hsl(var(--muted))"
-            strokeWidth={strokeWidth}
-          />
-          {/* Progress circle */}
-          <motion.circle
-            cx={size / 2}
-            cy={size / 2}
-            r={radius}
-            fill="none"
-            stroke={`hsl(var(--${color}))`}
-            strokeWidth={strokeWidth}
-            strokeLinecap="round"
-            strokeDasharray={circumference}
-            initial={{ strokeDashoffset: circumference }}
-            animate={{ strokeDashoffset }}
-            transition={{ duration: 1.5, ease: "easeOut", delay }}
-            style={{
-              filter: 'drop-shadow(0 0 8px hsl(var(--primary) / 0.5))',
-            }}
-          />
-        </svg>
-        
-        {/* Center value */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <motion.span 
-            className="text-2xl md:text-3xl font-bold text-foreground"
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: delay + 0.5, type: "spring" }}
-          >
-            {prefix}{displayValue}{suffix}
-          </motion.span>
-        </div>
-        
-        {/* Glow effect */}
-        <motion.div
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: `radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%)`,
-          }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
-      <p className="text-sm font-medium text-foreground mt-4">{label}</p>
-    </div>
-  );
-};
-
-// ============================================
-// ANIMATED BAR CHART COMPONENT
-// ============================================
-const AnimatedBarChart = ({ isVisible }: { isVisible: boolean }) => {
-  const data = [
-    { label: 'Q1', value: 65, color: 'primary' },
-    { label: 'Q2', value: 85, color: 'primary' },
-    { label: 'Q3', value: 120, color: 'primary' },
-    { label: 'Q4', value: 180, color: 'primary' },
-  ];
-  
-  const maxValue = Math.max(...data.map(d => d.value));
-
-  return (
-    <div className="h-48 flex items-end justify-center gap-4">
-      {data.map((item, i) => (
-        <div key={item.label} className="flex flex-col items-center gap-2 flex-1 max-w-16">
-          <motion.div
-            className="w-full bg-primary/80 rounded-t relative overflow-hidden"
-            initial={{ height: 0 }}
-            animate={isVisible ? { height: `${(item.value / maxValue) * 100}%` } : { height: 0 }}
-            transition={{ delay: i * 0.15, duration: 0.8, ease: "easeOut" }}
-          >
-            {/* Shimmer effect */}
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-t from-transparent via-white/20 to-transparent"
-              initial={{ y: '100%' }}
-              animate={isVisible ? { y: '-100%' } : { y: '100%' }}
-              transition={{ delay: i * 0.15 + 0.8, duration: 0.6 }}
-            />
-            
-            {/* Value label */}
-            <motion.span
-              className="absolute -top-6 left-1/2 -translate-x-1/2 text-xs font-medium text-primary"
-              initial={{ opacity: 0 }}
-              animate={isVisible ? { opacity: 1 } : { opacity: 0 }}
-              transition={{ delay: i * 0.15 + 0.5 }}
-            >
-              +{item.value}%
-            </motion.span>
-          </motion.div>
-          <span className="text-xs text-muted-foreground">{item.label}</span>
-        </div>
-      ))}
-    </div>
-  );
-};
-
-// ============================================
-// RESULTS DASHBOARD SECTION
-// ============================================
-const ResultsDashboardSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-
-  const ringMetrics = [
-    { value: 340, maxValue: 400, label: 'Avg. Growth', suffix: '%', prefix: '+', delay: 0.2 },
-    { value: 85, maxValue: 100, label: 'Success Rate', suffix: '%', prefix: '', delay: 0.4 },
-    { value: 50, maxValue: 100, label: 'Volume ($M)', suffix: 'M', prefix: '$', delay: 0.6 },
-  ];
-
-  const metrics = [
-    { 
-      icon: TrendingUp, 
-      value: 340, 
-      suffix: '%', 
-      prefix: '+', 
-      label: 'Average Growth',
-      description: 'Trading volume increase for launched projects'
-    },
-    { 
-      icon: DollarSign, 
-      value: 50, 
-      suffix: 'M+', 
-      prefix: '$', 
-      label: 'Volume Generated',
-      description: 'Total trading volume driven by our campaigns'
-    },
-    { 
-      icon: Users, 
-      value: 500, 
-      suffix: 'K+', 
-      prefix: '', 
-      label: 'Korean Users',
-      description: 'Community members across all projects'
-    },
-    { 
-      icon: Trophy, 
-      value: 1, 
-      suffix: '', 
-      prefix: '#', 
-      label: 'Market Position',
-      description: 'Kaito mindshare ranking for key clients'
-    },
-  ];
-
-  return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-b border-border overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        className="max-w-7xl mx-auto"
-      >
-        <div className="text-center mb-16">
-          <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-            03 Results
-          </p>
-          <h2 className="text-3xl md:text-5xl font-medium text-foreground mb-4">
-            The Numbers That Matter
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Our data-driven approach delivers measurable results. Here's what we've achieved for our clients.
-          </p>
-        </div>
-
-        {/* Circular Progress Rings */}
-        <div className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mb-20">
-          {ringMetrics.map((metric) => (
-            <CircularProgressRing
-              key={metric.label}
-              value={metric.value}
-              maxValue={metric.maxValue}
-              label={metric.label}
-              suffix={metric.suffix}
-              prefix={metric.prefix}
-              delay={metric.delay}
-              isVisible={isInView}
-              size={140}
-              strokeWidth={10}
-            />
-          ))}
-        </div>
-
-        {/* Quarterly Growth Chart */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8 }}
-          className="max-w-2xl mx-auto mb-20"
-        >
-          <p className="text-xs tracking-widest text-primary font-medium mb-6 text-center">
-            QUARTERLY GROWTH TRAJECTORY
-          </p>
-          <div className="p-6 border border-border bg-muted/30 rounded-lg">
-            <AnimatedBarChart isVisible={isInView} />
-          </div>
-        </motion.div>
-
-        {/* Metric Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {metrics.map((metric, i) => (
-            <motion.div
-              key={metric.label}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.1 + 1, duration: 0.6 }}
-              className="group relative p-6 border border-border bg-background hover:border-primary/50 transition-all duration-300"
-            >
-              {/* Icon */}
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                <metric.icon className="w-5 h-5 text-primary" />
-              </div>
-
-              {/* Value with count-up */}
-              <p className="text-4xl md:text-5xl font-medium text-foreground mb-2">
-                {useCountUp({ 
-                  end: metric.value, 
-                  prefix: metric.prefix, 
-                  suffix: metric.suffix, 
-                  delay: (i * 100) + 1000,
-                  isVisible: isInView,
-                  duration: 2000
-                })}
-              </p>
-
-              {/* Label */}
-              <p className="text-sm font-medium text-foreground mb-1">{metric.label}</p>
-              <p className="text-xs text-muted-foreground">{metric.description}</p>
-
-              {/* Hover glow */}
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/5 to-transparent" />
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    </section>
-  );
-};
-
-// ============================================
-// THE IUM FRAMEWORK - Interactive Timeline
-// ============================================
-const FrameworkSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-  const [activeStage, setActiveStage] = useState<number | null>(null);
-
-  return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.02] pointer-events-none">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(circle at 2px 2px, hsl(var(--foreground)) 1px, transparent 0)',
-          backgroundSize: '32px 32px',
-        }} />
-      </div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        className="max-w-6xl mx-auto relative z-10"
-      >
-        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-          02 Process
-        </p>
-        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-6">
-          The ium Algorithm
-        </h2>
-        <p className="text-muted-foreground max-w-xl mb-16">
-          Our proven 4-stage framework has helped 30+ projects successfully launch in Korea.
-        </p>
-
-        {/* Timeline connector line */}
-        <div className="hidden lg:block absolute top-[280px] left-[10%] right-[10%] h-px">
-          <motion.div
-            className="h-full bg-gradient-to-r from-border via-primary/50 to-border"
-            initial={{ scaleX: 0 }}
-            animate={isInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 1.5, delay: 0.3 }}
-          />
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-          {frameworkStages.map((stage, i) => (
-            <motion.div
-              key={stage.number}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.15 + 0.2, duration: 0.6 }}
-              onMouseEnter={() => setActiveStage(i)}
-              onMouseLeave={() => setActiveStage(null)}
-              className={`group relative p-6 border bg-background transition-all duration-500 cursor-pointer ${
-                activeStage === i 
-                  ? 'border-primary shadow-[0_0_40px_-10px_hsl(var(--primary)/0.4)] scale-[1.02]' 
-                  : 'border-border hover:border-primary/30'
-              }`}
-            >
-              {/* Stage number badge */}
-              <motion.div
-                className={`absolute -top-3 left-6 px-3 py-1 text-xs font-mono transition-colors duration-300 ${
-                  activeStage === i ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'
-                }`}
-                whileHover={{ scale: 1.05 }}
-              >
-                STAGE {stage.number}
-              </motion.div>
-
-              {/* Icon with glow */}
-              <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-6 mt-2 transition-all duration-300 ${
-                activeStage === i 
-                  ? 'bg-primary/20 shadow-[0_0_20px_hsl(var(--primary)/0.3)]' 
-                  : 'bg-muted'
-              }`}>
-                <stage.icon className={`w-6 h-6 transition-colors duration-300 ${
-                  activeStage === i ? 'text-primary' : 'text-muted-foreground'
-                }`} />
-              </div>
-              
-              <h3 className="text-2xl font-medium text-foreground mb-1">
-                {stage.title}
-              </h3>
-              <p className="text-xs text-primary uppercase tracking-wide mb-4">
-                {stage.subtitle}
-              </p>
-
-              <ul className="space-y-2 mb-6">
-                {stage.items.map((item, itemIndex) => (
-                  <motion.li 
-                    key={item} 
-                    className="text-sm text-muted-foreground flex items-center gap-2"
-                    initial={false}
-                    animate={activeStage === i ? { x: 5 } : { x: 0 }}
-                    transition={{ delay: itemIndex * 0.05 }}
-                  >
-                    <span className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${
-                      activeStage === i ? 'bg-primary' : 'bg-muted-foreground/30'
-                    }`} />
-                    {item}
-                  </motion.li>
-                ))}
-              </ul>
-
-              <p className="text-xs text-primary/80 italic border-t border-border pt-4">
-                {stage.quote}
-              </p>
-
-              {/* Arrow connector (hidden on last item and mobile) */}
-              {i < 3 && (
-                <motion.div 
-                  className="hidden lg:flex absolute -right-3 top-1/2 -translate-y-1/2 z-10 w-6 h-6 rounded-full bg-background border border-border items-center justify-center"
-                  animate={activeStage === i ? { scale: 1.2, borderColor: 'hsl(var(--primary))' } : { scale: 1 }}
-                >
-                  <ArrowRight className={`w-3 h-3 transition-colors duration-300 ${
-                    activeStage === i ? 'text-primary' : 'text-muted-foreground'
-                  }`} />
-                </motion.div>
-              )}
-            </motion.div>
-          ))}
-        </div>
-      </motion.div>
-    </section>
-  );
-};
-
-// ============================================
-// STRATEGY IN ACTION - Case Studies with 3D Tilt
-// ============================================
-const CaseMetricBar = ({ label, value, suffix = '', prefix = '', delay = 0, isVisible = true }: {
-  label: string;
-  value: number;
-  suffix?: string;
-  prefix?: string;
-  delay?: number;
-  isVisible?: boolean;
-}) => {
-  const displayValue = useCountUp({ end: value, prefix, suffix, delay: delay * 1000, isVisible, duration: 1500 });
-  
-  return (
-    <div className="flex items-center justify-between py-1.5 border-b border-border/50 last:border-0">
-      <span className="text-xs text-muted-foreground">{label}</span>
-      <span className="text-sm font-medium text-primary">{displayValue}</span>
-    </div>
-  );
-};
-
-// 3D Tilt Card component
-const TiltCaseCard = ({ project, index, isVisible }: { 
-  project: typeof featuredProjects[0]; 
-  index: number;
-  isVisible: boolean;
-}) => {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const [tilt, setTilt] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width;
-    const y = (e.clientY - rect.top) / rect.height;
-    setTilt({
-      x: (y - 0.5) * 10,
-      y: (x - 0.5) * -10,
-    });
-  };
-
-  const handleMouseLeave = () => {
-    setTilt({ x: 0, y: 0 });
-    setIsHovered(false);
-  };
-
-  return (
-    <motion.article
-      ref={cardRef}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isVisible ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-        transition: isHovered ? 'transform 0.1s ease-out' : 'transform 0.5s ease-out',
-      }}
-      className="relative"
-    >
-      <Link to={`/projects/${project.slug}`} className="group block">
-        {/* Glow effect on hover */}
-        <motion.div
-          className="absolute -inset-px rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-          style={{
-            background: `linear-gradient(135deg, hsl(var(--primary) / 0.2) 0%, transparent 50%, hsl(var(--primary) / 0.1) 100%)`,
-          }}
-        />
-        
-        <div className="relative bg-background border border-border group-hover:border-primary/30 transition-colors duration-300 overflow-hidden">
-          {/* Image with parallax effect */}
-          <div className="relative aspect-[4/3] overflow-hidden">
-            <motion.img
-              src={project.image}
-              alt={project.name}
-              className="w-full h-full object-cover"
-              animate={{
-                scale: isHovered ? 1.1 : 1,
-                x: isHovered ? tilt.y * 2 : 0,
-                y: isHovered ? tilt.x * 2 : 0,
-              }}
-              transition={{ duration: 0.3 }}
-            />
-            {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            
-            {/* Floating badge on hover */}
-            <motion.div
-              className="absolute bottom-4 left-4 px-3 py-1.5 bg-primary text-primary-foreground text-xs font-medium"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: isHovered ? 1 : 0, y: isHovered ? 0 : 20 }}
-              transition={{ duration: 0.3 }}
-            >
-              View Case Study →
-            </motion.div>
-          </div>
-
-          <div className="p-5 space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="text-xs tracking-widest text-primary uppercase font-medium">
-                {project.category}
-              </span>
-              <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-              <span className="text-xs text-muted-foreground">
-                {project.strategy}
-              </span>
-            </div>
-            
-            <h3 className="text-xl font-medium text-foreground group-hover:text-primary transition-colors duration-300">
-              {project.name}
-            </h3>
-            
-            <p className="text-sm text-muted-foreground line-clamp-2">
-              {project.tagline}
-            </p>
-            
-            {/* Metrics with animation */}
-            <div className="pt-3 mt-3 border-t border-border space-y-1">
-              {project.metrics.map((metric, mi) => (
-                <CaseMetricBar
-                  key={metric.label}
-                  label={metric.label}
-                  value={metric.value}
-                  suffix={metric.suffix}
-                  prefix={metric.prefix}
-                  delay={0.3 + mi * 0.1}
-                  isVisible={isVisible}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </Link>
-    </motion.article>
-  );
-};
-
-const StrategyInActionSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-
-  return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/20 border-t border-border">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        className="max-w-6xl mx-auto"
-      >
-        <div className="mb-12">
-          <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-            04 Strategy in Action
-          </p>
-          <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-            Case Studies
-          </h2>
-          <p className="text-muted-foreground max-w-xl">
-            Real results from real projects. See how we've helped leading Web3 projects dominate the Korean market.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProjects.map((project, i) => (
-            <TiltCaseCard 
-              key={project.slug} 
-              project={project} 
-              index={i} 
-              isVisible={isInView} 
-            />
-          ))}
-        </div>
-
-        {/* View All Projects Link */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 0.5 }}
-          className="mt-16 text-center"
-        >
-          <Link 
-            to="/projects" 
-            className="group inline-flex items-center gap-3 px-6 py-3 border border-border hover:border-primary text-sm text-muted-foreground hover:text-primary transition-all duration-300"
-          >
-            View All Projects
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </motion.div>
-      </motion.div>
-    </section>
-  );
-};
-
-// ============================================
-// CLIENT LOGOS MARQUEE
-// ============================================
+// Client logos
 import bnbLogo from '@/assets/logos/bnb.png';
 import bybitLogo from '@/assets/logos/bybit.png';
 import kucoinLogo from '@/assets/logos/kucoin.png';
@@ -1475,6 +29,55 @@ import triaLogo from '@/assets/logos/tria-official.png';
 import synfuturesLogo from '@/assets/logos/synfutures.png';
 import fogoLogo from '@/assets/logos/fogo.png';
 import zkpassLogo from '@/assets/logos/zkpass.png';
+
+// ============================================
+// DATA
+// ============================================
+const featuredProjects = [
+  {
+    name: 'MANTRA',
+    tagline: "Building Korea's largest RWA community.",
+    result: '+500% community growth.',
+    image: mantraBg,
+    slug: 'mantra',
+    category: 'RWA L1',
+    metrics: [
+      { label: 'Community Growth', value: 500, suffix: '%' },
+      { label: 'Korean Users', value: 85, suffix: 'K+' },
+    ]
+  },
+  {
+    name: 'Story Protocol',
+    tagline: 'Korea launch for the leading IP infrastructure.',
+    result: '+340% trading volume.',
+    image: storyBg,
+    slug: 'story-protocol',
+    category: 'IP Protocol',
+    metrics: [
+      { label: 'Trading Volume', value: 340, suffix: '%' },
+      { label: 'Media Coverage', value: 50, suffix: '+' },
+    ]
+  },
+  {
+    name: 'peaq Network',
+    tagline: 'Establishing DePIN leadership in Korea.',
+    result: '#1 in Korean market.',
+    image: peaqBg,
+    slug: 'peaq',
+    category: 'DePIN',
+    metrics: [
+      { label: 'Market Rank', value: 1, prefix: '#' },
+      { label: 'Mindshare', value: 78, suffix: '%' },
+    ]
+  },
+];
+
+const frameworkStages = [
+  { number: '01', title: 'ANALYZE', items: ['Deep Market Research', 'Competitor Analysis', 'Narrative Localization'], icon: Search },
+  { number: '02', title: 'BUILD', items: ['Naver SEO', 'Community Infra', 'Brand Localization'], icon: Building },
+  { number: '03', title: 'IGNITE', items: ['Tier-1 KOL Activation', 'Media Blitz', 'Viral Marketing'], icon: Zap },
+  { number: '04', title: 'SCALE', items: ['Events & Partnerships', 'Liquidity Campaigns', 'Retention Programs'], icon: TrendingUp },
+];
 
 const clientLogos = [
   { name: 'BNB Chain', logo: bnbLogo },
@@ -1493,53 +96,531 @@ const clientLogos = [
   { name: 'zkPass', logo: zkpassLogo },
 ];
 
-const ClientLogosMarquee = () => {
+// ============================================
+// ANIMATED STAT
+// ============================================
+const AnimatedStat = ({ value, suffix = '', prefix = '', label, delay = 0, isVisible = true }: { 
+  value: number; suffix?: string; prefix?: string; label: string; delay?: number; isVisible?: boolean;
+}) => {
+  const count = useCountUp({ end: value, delay: delay * 1000, isVisible, duration: 2000 });
+  return (
+    <div className="text-center">
+      <motion.p 
+        className="text-4xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent"
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay, duration: 0.5, type: "spring" }}
+      >
+        {prefix}{count}{suffix}
+      </motion.p>
+      <p className="text-xs text-muted-foreground mt-2 tracking-wider uppercase">{label}</p>
+    </div>
+  );
+};
+
+// ============================================
+// GLITCH TEXT
+// ============================================
+const GlitchText = ({ children, className = '' }: { children: string; className?: string }) => (
+  <span className={`relative inline-block ${className}`}>
+    <span className="relative z-10">{children}</span>
+    <motion.span
+      className="absolute top-0 left-0 text-primary opacity-70 z-0"
+      style={{ clipPath: 'inset(0 0 50% 0)' }}
+      animate={{ x: [0, -2, 2, 0], opacity: [0.7, 0.5, 0.8, 0.7] }}
+      transition={{ duration: 0.3, repeat: Infinity, repeatDelay: 3 }}
+    >
+      {children}
+    </motion.span>
+  </span>
+);
+
+// ============================================
+// HERO SECTION
+// ============================================
+const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="py-20 bg-muted/30 border-y border-border overflow-hidden">
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        className="text-muted-foreground text-sm tracking-widest uppercase mb-12 px-6 md:px-12 lg:px-20"
-      >
-        Trusted By Industry Leaders
-      </motion.p>
+    <section ref={ref} className="relative min-h-[85vh] flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-32 pb-16 bg-background overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: 'linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)',
+        backgroundSize: '60px 60px',
+      }} />
 
-      {/* First row - left to right */}
-      <div className="relative mb-8">
-        <div className="flex animate-marquee">
-          {[...clientLogos, ...clientLogos].map((client, i) => (
-            <div
-              key={`row1-${i}`}
-              className="flex-shrink-0 mx-8 md:mx-12 group"
+      <div className="relative max-w-5xl z-10">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-muted-foreground text-sm tracking-widest uppercase mb-6 flex items-center gap-3"
+        >
+          <motion.span className="w-8 h-px bg-primary" initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.8, delay: 0.2 }} />
+          Korea GTM Strategy
+        </motion.p>
+        
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="text-[clamp(2.5rem,8vw,5.5rem)] font-medium leading-[1.05] tracking-tight text-foreground mb-6"
+        >
+          Engineered for<br />
+          <GlitchText className="text-primary">Liquidity.</GlitchText>
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="text-lg text-muted-foreground max-w-xl mb-12"
+        >
+          Launch in Korea with the most data-driven GTM framework.
+          <span className="text-foreground/80 block mt-1">We turn cultural barriers into your competitive moat.</span>
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          className="flex flex-wrap items-center gap-8 md:gap-12"
+        >
+          <AnimatedStat value={30} suffix="+" label="Projects Launched" delay={0.8} isVisible={isInView} />
+          <div className="w-px h-12 bg-border" />
+          <AnimatedStat value={50} prefix="$" suffix="M+" label="Volume Generated" delay={1.0} isVisible={isInView} />
+          <div className="w-px h-12 bg-border" />
+          <AnimatedStat value={340} suffix="%" label="Avg. Growth" delay={1.2} isVisible={isInView} />
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+// ============================================
+// 01 WHY KOREA - COMPACT
+// ============================================
+const WhyKoreaSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  const stats = [
+    { value: '#2', label: 'Global Fiat Volume', sublabel: 'KRW Pairs' },
+    { value: '#1', label: 'Altcoin Velocity', sublabel: '5x Global Avg' },
+    { value: '90%', label: 'Market Share', sublabel: 'Upbit + Bithumb' },
+  ];
+
+  const exchangeData = [
+    { name: 'Upbit (KRW)', volume: 800, percentage: 100, highlight: true },
+    { name: 'Binance (USDT)', volume: 750, percentage: 94, highlight: false },
+    { name: 'Coinbase (USD)', volume: 120, percentage: 15, highlight: false },
+  ];
+
+  const points = [
+    { icon: TrendingUp, title: 'Dominance Over Dollar', desc: 'Upbit & Bithumb frequently surpass Binance in daily volume.' },
+    { icon: Trophy, title: 'Verification Standard', desc: 'DAXA listing = the strictest regulatory seal of approval.' },
+    { icon: Users, title: 'Sticky Liquidity', desc: 'Retail army creates organic buy pressure that defends your floor.' },
+  ];
+
+  return (
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-20 bg-muted/30 border-y border-border">
+      <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} className="max-w-6xl mx-auto">
+        <p className="text-primary text-xs tracking-widest uppercase mb-3">01 The Strategic Imperative</p>
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-2">The Kingmaker Exchanges</h2>
+        <p className="text-muted-foreground mb-10">Where global price discovery begins.</p>
+
+        {/* Stats Row */}
+        <div className="grid grid-cols-3 gap-3 mb-10">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              className="text-center p-4 border border-border bg-background hover:border-primary/50 transition-colors"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.1 }}
             >
-              <img
-                src={client.logo}
-                alt={client.name}
-                className="h-8 md:h-10 w-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
-              />
-            </div>
+              <p className="text-2xl md:text-3xl font-bold text-primary">{stat.value}</p>
+              <p className="text-xs font-medium text-foreground">{stat.label}</p>
+              <p className="text-[10px] text-muted-foreground">{stat.sublabel}</p>
+            </motion.div>
           ))}
         </div>
-      </div>
 
-      {/* Second row - right to left */}
-      <div className="relative">
-        <div className="flex animate-marquee-reverse">
-          {[...clientLogos.slice().reverse(), ...clientLogos.slice().reverse()].map((client, i) => (
-            <div
-              key={`row2-${i}`}
-              className="flex-shrink-0 mx-8 md:mx-12 group"
+        {/* Two Column: Chart + Points */}
+        <div className="grid lg:grid-cols-2 gap-8 mb-10">
+          {/* Volume Chart */}
+          <div className="p-6 border border-border bg-background">
+            <p className="text-xs tracking-widest text-primary font-medium mb-4">24H TRADING VOLUME EXAMPLE</p>
+            {exchangeData.map((item, i) => (
+              <div key={item.name} className="mb-3 last:mb-0">
+                <div className="flex justify-between text-sm mb-1">
+                  <span className={item.highlight ? 'text-primary font-medium' : 'text-foreground/80'}>{item.name}</span>
+                  <span className={item.highlight ? 'text-primary font-bold' : 'text-muted-foreground'}>${item.volume}M</span>
+                </div>
+                <div className="h-2 bg-muted rounded-full overflow-hidden">
+                  <motion.div
+                    className={`h-full rounded-full ${item.highlight ? 'bg-primary' : 'bg-foreground/30'}`}
+                    initial={{ width: 0 }}
+                    animate={isInView ? { width: `${item.percentage}%` } : { width: 0 }}
+                    transition={{ duration: 1, delay: i * 0.15 }}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Key Points */}
+          <div className="space-y-4">
+            {points.map((point, i) => (
+              <motion.div
+                key={point.title}
+                className="flex gap-4 p-4 border border-border bg-background hover:border-primary/50 transition-colors"
+                initial={{ opacity: 0, x: 20 }}
+                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                transition={{ delay: i * 0.1 + 0.3 }}
+              >
+                <point.icon className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                <div>
+                  <p className="text-sm font-medium text-foreground">{point.title}</p>
+                  <p className="text-xs text-muted-foreground">{point.desc}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Upbit Pump Callout */}
+        <motion.div
+          className="p-5 bg-primary/5 border-l-2 border-primary"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.6 }}
+        >
+          <p className="text-xs tracking-widest text-primary font-medium mb-1">THE "UPBIT PUMP" PHENOMENON</p>
+          <p className="text-sm text-foreground">
+            <span className="font-semibold text-primary">60% of major altcoin rallies in 2024</span> were preceded by a volume spike in KRW pairs. 
+            Launching in Korea isn't just entering a market—it's <span className="font-semibold">igniting your next bull run.</span>
+          </p>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+};
+
+// ============================================
+// 02 WHY IUM LABS - NEW STORYTELLING
+// ============================================
+const WhyIumLabsSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  const stories = [
+    {
+      icon: Clock,
+      tagline: 'Since 2019',
+      title: 'We Were There First',
+      description: "6 years of hands-on experience in Korea's Web3 ecosystem. We've seen every market cycle and know what works.",
+      stat: '30+',
+      statLabel: 'Projects Launched',
+    },
+    {
+      icon: Database,
+      tagline: 'Proprietary Intel',
+      title: 'Data, Not Guesswork',
+      description: "Our research product tracks Kaito mindshare, Naver trends, and exchange flows in real-time. You get insights your competitors don't have.",
+      stat: '24/7',
+      statLabel: 'Market Monitoring',
+    },
+    {
+      icon: Network,
+      tagline: 'Deep Network',
+      title: 'The Right Connections',
+      description: "Direct relationships with Tier-1 KOLs, exchanges, media outlets, and communities. We don't just pitch—we open doors.",
+      stat: '50+',
+      statLabel: 'KOL Partners',
+    },
+  ];
+
+  return (
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-20 bg-background border-b border-border">
+      <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} className="max-w-6xl mx-auto">
+        <p className="text-primary text-xs tracking-widest uppercase mb-3">02 Your Local Advantage</p>
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-2">Why ium Labs?</h2>
+        <p className="text-muted-foreground mb-12 max-w-xl">The smartest projects choose us because we don't just enter Korea—we dominate it.</p>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {stories.map((story, i) => (
+            <motion.div
+              key={story.title}
+              className="group relative p-6 border border-border bg-background hover:border-primary/50 transition-all duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.15 }}
             >
-              <img
-                src={client.logo}
-                alt={client.name}
-                className="h-8 md:h-10 w-auto object-contain grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-300"
-              />
-            </div>
+              {/* Icon */}
+              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
+                <story.icon className="w-6 h-6 text-primary" />
+              </div>
+
+              {/* Content */}
+              <p className="text-xs tracking-widest text-primary font-medium mb-1">{story.tagline}</p>
+              <h3 className="text-lg font-medium text-foreground mb-2 group-hover:text-primary transition-colors">{story.title}</h3>
+              <p className="text-sm text-muted-foreground mb-4">{story.description}</p>
+
+              {/* Stat */}
+              <div className="pt-4 border-t border-border">
+                <p className="text-2xl font-bold text-primary">{story.stat}</p>
+                <p className="text-xs text-muted-foreground">{story.statLabel}</p>
+              </div>
+            </motion.div>
           ))}
+        </div>
+
+        {/* Bottom Quote */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.6 }}
+          className="text-center text-lg text-foreground/80 mt-12 italic"
+        >
+          "We don't just enter Korea. <span className="text-primary font-medium">We dominate it.</span>"
+        </motion.p>
+      </motion.div>
+    </section>
+  );
+};
+
+// ============================================
+// 03 THE FRAMEWORK - COMPACT
+// ============================================
+const FrameworkSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+  const [activeStage, setActiveStage] = useState<number | null>(null);
+
+  return (
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-20 bg-muted/20">
+      <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} className="max-w-6xl mx-auto">
+        <p className="text-primary text-xs tracking-widest uppercase mb-3">03 Process</p>
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-2">The ium Algorithm</h2>
+        <p className="text-muted-foreground mb-10">Our proven 4-stage framework has launched 30+ projects successfully.</p>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {frameworkStages.map((stage, i) => (
+            <motion.div
+              key={stage.number}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.1 }}
+              onMouseEnter={() => setActiveStage(i)}
+              onMouseLeave={() => setActiveStage(null)}
+              className={`relative p-5 border bg-background transition-all duration-300 cursor-pointer ${
+                activeStage === i ? 'border-primary shadow-lg' : 'border-border hover:border-primary/30'
+              }`}
+            >
+              <div className="absolute -top-2.5 left-4 px-2 py-0.5 text-[10px] font-mono bg-muted text-muted-foreground">
+                STAGE {stage.number}
+              </div>
+
+              <div className={`w-10 h-10 rounded-lg flex items-center justify-center mb-4 mt-1 transition-colors ${
+                activeStage === i ? 'bg-primary/20' : 'bg-muted'
+              }`}>
+                <stage.icon className={`w-5 h-5 ${activeStage === i ? 'text-primary' : 'text-muted-foreground'}`} />
+              </div>
+              
+              <h3 className="text-xl font-medium text-foreground mb-3">{stage.title}</h3>
+
+              <ul className="space-y-1.5">
+                {stage.items.map(item => (
+                  <li key={item} className="text-xs text-muted-foreground flex items-center gap-2">
+                    <span className={`w-1 h-1 rounded-full ${activeStage === i ? 'bg-primary' : 'bg-muted-foreground/40'}`} />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+    </section>
+  );
+};
+
+// ============================================
+// 04 RESULTS - COMPACT (NO CIRCULAR RINGS)
+// ============================================
+const ResultsSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  const metrics = [
+    { icon: TrendingUp, value: 340, suffix: '%', prefix: '+', label: 'Average Growth', desc: 'Trading volume increase' },
+    { icon: DollarSign, value: 50, suffix: 'M+', prefix: '$', label: 'Volume Generated', desc: 'Total volume driven' },
+    { icon: Users, value: 500, suffix: 'K+', label: 'Korean Users', desc: 'Community members' },
+    { icon: Trophy, value: 1, prefix: '#', label: 'Market Position', desc: 'Kaito mindshare rank' },
+  ];
+
+  const quarterlyData = [
+    { label: 'Q1', value: 65 },
+    { label: 'Q2', value: 85 },
+    { label: 'Q3', value: 120 },
+    { label: 'Q4', value: 180 },
+  ];
+  const maxValue = Math.max(...quarterlyData.map(d => d.value));
+
+  return (
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-20 bg-background border-b border-border">
+      <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} className="max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <p className="text-primary text-xs tracking-widest uppercase mb-3">04 Results</p>
+          <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-2">The Numbers That Matter</h2>
+          <p className="text-muted-foreground">Measurable results from our data-driven approach.</p>
+        </div>
+
+        {/* Metric Cards - 2x2 Grid */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          {metrics.map((metric, i) => {
+            const displayValue = useCountUp({ end: metric.value, prefix: metric.prefix || '', suffix: metric.suffix || '', delay: i * 150, isVisible: isInView, duration: 2000 });
+            return (
+              <motion.div
+                key={metric.label}
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ delay: i * 0.1 }}
+                className="p-5 border border-border bg-background hover:border-primary/50 transition-colors"
+              >
+                <metric.icon className="w-5 h-5 text-primary mb-3" />
+                <p className="text-3xl font-medium text-foreground">{displayValue}</p>
+                <p className="text-sm font-medium text-foreground mt-1">{metric.label}</p>
+                <p className="text-xs text-muted-foreground">{metric.desc}</p>
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Quarterly Growth Chart */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.4 }}
+          className="max-w-xl mx-auto"
+        >
+          <p className="text-xs tracking-widest text-primary font-medium mb-4 text-center">QUARTERLY GROWTH TRAJECTORY</p>
+          <div className="p-6 border border-border bg-muted/30 rounded-lg">
+            <div className="h-32 flex items-end justify-center gap-6">
+              {quarterlyData.map((item, i) => (
+                <div key={item.label} className="flex flex-col items-center gap-2 flex-1 max-w-14">
+                  <motion.div
+                    className="w-full bg-primary/80 rounded-t"
+                    initial={{ height: 0 }}
+                    animate={isInView ? { height: `${(item.value / maxValue) * 100}%` } : { height: 0 }}
+                    transition={{ delay: i * 0.1 + 0.5, duration: 0.8 }}
+                  />
+                  <span className="text-xs text-muted-foreground">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+};
+
+// ============================================
+// 05 CASE STUDIES - COMPACT
+// ============================================
+const CaseStudiesSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  return (
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-20 bg-muted/20">
+      <motion.div initial={{ opacity: 0 }} animate={isInView ? { opacity: 1 } : {}} className="max-w-6xl mx-auto">
+        <p className="text-primary text-xs tracking-widest uppercase mb-3">05 Strategy in Action</p>
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-2">Case Studies</h2>
+        <p className="text-muted-foreground mb-10">Real results from real projects.</p>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {featuredProjects.map((project, i) => (
+            <motion.article
+              key={project.slug}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.1 }}
+            >
+              <Link to={`/projects/${project.slug}`} className="group block border border-border bg-background hover:border-primary/50 transition-colors overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <img src={project.image} alt={project.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <span className="absolute bottom-3 left-3 text-xs px-2 py-1 bg-primary text-primary-foreground">{project.category}</span>
+                </div>
+                <div className="p-4">
+                  <h3 className="text-lg font-medium text-foreground group-hover:text-primary transition-colors">{project.name}</h3>
+                  <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{project.tagline}</p>
+                  <div className="mt-3 pt-3 border-t border-border space-y-1">
+                    {project.metrics.map(metric => {
+                      const val = useCountUp({ end: metric.value, prefix: metric.prefix || '', suffix: metric.suffix || '', delay: 500, isVisible: isInView, duration: 1500 });
+                      return (
+                        <div key={metric.label} className="flex justify-between text-xs">
+                          <span className="text-muted-foreground">{metric.label}</span>
+                          <span className="text-primary font-medium">{val}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </Link>
+            </motion.article>
+          ))}
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.4 }}
+          className="mt-10 text-center"
+        >
+          <Link to="/projects" className="group inline-flex items-center gap-2 px-5 py-2.5 border border-border hover:border-primary text-sm text-muted-foreground hover:text-primary transition-colors">
+            View All Projects
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </motion.div>
+      </motion.div>
+    </section>
+  );
+};
+
+// ============================================
+// 06 SOCIAL PROOF - INTEGRATED
+// ============================================
+const SocialProofSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <section ref={ref} className="bg-background border-b border-border">
+      {/* Testimonials */}
+      <TestimonialsSection />
+
+      {/* Client Logos */}
+      <div className="py-12 bg-muted/30 border-t border-border overflow-hidden">
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          className="text-muted-foreground text-xs tracking-widest uppercase mb-8 px-6 md:px-12 lg:px-20"
+        >
+          Trusted By Industry Leaders
+        </motion.p>
+
+        <div className="relative">
+          <div className="flex animate-marquee">
+            {[...clientLogos, ...clientLogos].map((client, i) => (
+              <div key={`logo-${i}`} className="flex-shrink-0 mx-6 md:mx-10">
+                <img src={client.logo} alt={client.name} className="h-8 w-auto object-contain grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -1547,7 +628,7 @@ const ClientLogosMarquee = () => {
 };
 
 // ============================================
-// CTA SECTION - Enhanced with Gradient
+// CTA SECTION
 // ============================================
 const CTASection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -1556,46 +637,38 @@ const CTASection = () => {
   return (
     <section 
       ref={ref} 
-      className="relative px-6 md:px-12 lg:px-20 py-32 overflow-hidden"
-      style={{
-        background: 'linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(240 10% 10%) 50%, hsl(var(--foreground)) 100%)',
-      }}
+      className="relative px-6 md:px-12 lg:px-20 py-24 overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(240 10% 10%) 50%, hsl(var(--foreground)) 100%)' }}
     >
-      {/* Subtle glow effect */}
-      <div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-20 blur-[120px] pointer-events-none"
-        style={{ background: 'hsl(var(--primary))' }}
-      />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-20 blur-[100px] pointer-events-none" style={{ background: 'hsl(var(--primary))' }} />
       
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
+        initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
         className="relative max-w-3xl z-10"
       >
-        <h2 className="text-[clamp(2rem,6vw,4rem)] font-medium leading-tight mb-4 text-background">
-          Ready to execute your
-          <br />
+        <h2 className="text-[clamp(1.8rem,5vw,3.5rem)] font-medium leading-tight mb-4 text-background">
+          Ready to execute your<br />
           <span className="text-primary">Korea Strategy?</span>
         </h2>
         
-        <p className="text-background/60 text-lg mb-10 max-w-xl">
-          Join 30+ projects that have successfully launched in the Korean market with our data-driven GTM framework.
+        <p className="text-background/60 text-lg mb-8 max-w-xl">
+          Join 30+ projects that have successfully launched in the Korean market.
         </p>
         
         <div className="flex flex-wrap gap-4">
           <Link
             to="/research"
-            className="group inline-flex items-center gap-3 px-8 py-4 border border-background/30 text-background font-medium text-sm tracking-wide hover:border-primary hover:bg-primary/10 transition-all duration-300"
+            className="group inline-flex items-center gap-3 px-6 py-3 border border-background/30 text-background text-sm hover:border-primary hover:bg-primary/10 transition-all"
           >
-            Get the Market Report
+            Get Market Report
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link
             to="/contact"
-            className="group inline-flex items-center gap-3 px-8 py-4 bg-primary text-primary-foreground font-medium text-sm tracking-wide hover:bg-primary/90 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--primary)/0.4)]"
+            className="group inline-flex items-center gap-3 px-6 py-3 bg-primary text-primary-foreground text-sm hover:bg-primary/90 transition-all"
           >
-            Schedule a Strategy Call
+            Schedule Strategy Call
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
@@ -1625,12 +698,12 @@ const GTMService = () => {
       <Navbar />
       <main className="bg-background">
         <HeroSection />
-        <MarketIntelligenceSection />
+        <WhyKoreaSection />
+        <WhyIumLabsSection />
         <FrameworkSection />
-        <ResultsDashboardSection />
-        <StrategyInActionSection />
-        <TestimonialsSection />
-        <ClientLogosMarquee />
+        <ResultsSection />
+        <CaseStudiesSection />
+        <SocialProofSection />
         <CTASection />
       </main>
       <Footer />
