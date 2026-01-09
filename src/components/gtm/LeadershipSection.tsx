@@ -175,7 +175,7 @@ const LeadershipSection = () => {
                     <img 
                       src={member.photo} 
                       alt={member.role}
-                      className="w-full h-full object-cover object-top scale-110 grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
+                      className="w-full h-full object-cover object-[center_20%] scale-110 grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
                     />
                   </div>
 
