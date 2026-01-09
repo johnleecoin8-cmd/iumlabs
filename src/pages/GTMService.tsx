@@ -455,10 +455,10 @@ const KoreaMapVisualization = ({ isVisible }: { isVisible: boolean }) => {
   const [activePoint, setActivePoint] = useState<number | null>(null);
   
   const dataPoints = [
-    { id: 0, x: 65, y: 25, city: 'Seoul', value: '45%', label: 'Trading Volume', delay: 0.2 },
-    { id: 1, x: 75, y: 45, city: 'Busan', value: '18%', label: 'Trading Volume', delay: 0.4 },
-    { id: 2, x: 45, y: 35, city: 'Daegu', value: '12%', label: 'Trading Volume', delay: 0.6 },
-    { id: 3, x: 55, y: 50, city: 'Gwangju', value: '8%', label: 'Trading Volume', delay: 0.8 },
+    { id: 0, x: 65, y: 25, city: 'Seoul', value: '#1', label: 'Trading Hub', delay: 0.2 },
+    { id: 1, x: 75, y: 45, city: 'Busan', value: '#2', label: 'Tech Center', delay: 0.4 },
+    { id: 2, x: 45, y: 35, city: 'Incheon', value: '#3', label: 'Finance Hub', delay: 0.6 },
+    { id: 3, x: 55, y: 50, city: 'Daegu', value: '#4', label: 'Growing Market', delay: 0.8 },
   ];
 
   return (
@@ -632,11 +632,13 @@ const MarketIntelligenceSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
+  // Fiat Trading Volume Data (CEX 기준 - 2024-2025)
   const volumeData = [
-    { label: 'United States', percentage: 100, value: '45%', isHighlight: false },
-    { label: 'Japan', percentage: 62, value: '28%', isHighlight: false },
-    { label: 'South Korea', percentage: 40, value: '18%', isHighlight: true },
-    { label: 'Others', percentage: 20, value: '9%', isHighlight: false },
+    { label: 'USD (United States)', percentage: 100, value: '#1', isHighlight: false },
+    { label: 'KRW (South Korea)', percentage: 85, value: '#2', isHighlight: true },
+    { label: 'EUR (Europe)', percentage: 35, value: '#3', isHighlight: false },
+    { label: 'TRY (Turkey)', percentage: 25, value: '#4', isHighlight: false },
+    { label: 'JPY (Japan)', percentage: 18, value: '#5', isHighlight: false },
   ];
 
   return (
@@ -662,8 +664,8 @@ const MarketIntelligenceSection = () => {
           {/* Middle: Data Visualization */}
           <div className="space-y-8">
             <div>
-              <p className="text-xs tracking-widest text-primary font-medium mb-4">
-                GLOBAL TRADING VOLUME SHARE
+            <p className="text-xs tracking-widest text-primary font-medium mb-4">
+                GLOBAL FIAT TRADING VOLUME (CEX)
               </p>
               <div className="space-y-4">
                 {volumeData.map((item, i) => (
@@ -682,40 +684,52 @@ const MarketIntelligenceSection = () => {
             
             {/* Key Stats */}
             <div className="grid grid-cols-2 gap-4 pt-4">
-              <div className="p-4 border border-border bg-background">
-                <p className="text-2xl md:text-3xl font-medium text-foreground">18%</p>
-                <p className="text-xs text-muted-foreground mt-1">of Global Volume</p>
+              <div className="p-4 border border-primary/50 bg-primary/5">
+                <p className="text-2xl md:text-3xl font-bold text-primary">30%+</p>
+                <p className="text-xs text-muted-foreground mt-1">Global Altcoin Volume</p>
               </div>
               <div className="p-4 border border-border bg-background">
-                <p className="text-2xl md:text-3xl font-medium text-foreground">5.2x</p>
-                <p className="text-xs text-muted-foreground mt-1">Higher Engagement</p>
+                <p className="text-2xl md:text-3xl font-medium text-foreground">0.6%</p>
+                <p className="text-xs text-muted-foreground mt-1">World Population</p>
               </div>
             </div>
+            
+            {/* Insight callout */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.6 }}
+              className="p-4 bg-primary/10 border-l-2 border-primary"
+            >
+              <p className="text-sm text-foreground leading-relaxed">
+                <span className="font-semibold">The Density Effect:</span> 0.6% of world population generates 30%+ of global altcoin trading.
+              </p>
+            </motion.div>
           </div>
 
           {/* Right: Insights */}
           <div className="space-y-6">
             <div className="space-y-2">
-              <p className="text-xs tracking-widest text-primary font-medium">CULTURE</p>
-              <p className="text-xl font-medium text-foreground">High-Risk, High-Reward</p>
+              <p className="text-xs tracking-widest text-primary font-medium">FIAT POWERHOUSE</p>
+              <p className="text-xl font-medium text-foreground">World's #2 Fiat Market</p>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Korean traders move fast and commit hard. When they believe in a project, they go all in.
+                KRW consistently ranks as #2 most traded fiat in crypto, often challenging USD. Surpassing EUR and JPY.
               </p>
             </div>
             
             <div className="space-y-2">
-              <p className="text-xs tracking-widest text-primary font-medium">BARRIER</p>
-              <p className="text-xl font-medium text-foreground">Unique Ecosystem</p>
+              <p className="text-xs tracking-widest text-primary font-medium">RETAIL DOMINANCE</p>
+              <p className="text-xl font-medium text-foreground">Global #1 Retail Activity</p>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Naver, Kakao, VASP regulations, and cultural nuances. Global strategies fail here without localization.
+                Korea leads in retail investor participation. When they believe in a project, they go all in.
               </p>
             </div>
 
             <div className="space-y-2">
-              <p className="text-xs tracking-widest text-primary font-medium">OPPORTUNITY</p>
-              <p className="text-xl font-medium text-foreground">First-Mover Advantage</p>
+              <p className="text-xs tracking-widest text-primary font-medium">LIQUIDITY ACCESS</p>
+              <p className="text-xl font-medium text-foreground">Most Liquid Fiat Pair</p>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Most global projects underestimate Korea. Those who get it right dominate.
+                Launch in Korea = plug into world's most liquid fiat pair after USD. Direct access to real buying power.
               </p>
             </div>
           </div>
@@ -728,10 +742,10 @@ const MarketIntelligenceSection = () => {
           className="border-l-2 border-primary pl-6"
         >
           <p className="text-lg md:text-xl text-foreground italic">
-            "Global projects succeed in the West, but they explode in Korea."
+            "When you launch in Korea, you're plugging into the world's most liquid fiat pair after the Dollar."
           </p>
           <footer className="mt-2 text-sm text-muted-foreground">
-            — You need a local algorithm.
+            — Real buying power, not just hype.
           </footer>
         </motion.blockquote>
       </motion.div>
