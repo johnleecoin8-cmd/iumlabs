@@ -171,11 +171,11 @@ const LeadershipSection = () => {
               >
                 <div className="relative p-8 bg-gradient-to-br from-white/[0.06] to-white/[0.02] rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-500 h-full">
                   {/* Photo */}
-                  <div className="w-16 h-16 rounded-xl overflow-hidden mb-6 border border-white/10">
+                  <div className="w-24 h-24 rounded-2xl overflow-hidden mb-6 border border-white/10">
                     <img 
                       src={member.photo} 
                       alt={member.role}
-                      className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
+                      className="w-full h-full object-cover object-top scale-110 grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
                     />
                   </div>
 
