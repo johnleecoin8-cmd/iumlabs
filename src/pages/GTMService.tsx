@@ -4,7 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import PerformanceSection from '@/components/gtm/PerformanceSection';
-import LeadershipSection from '@/components/gtm/LeadershipSection';
+import AuthoritySection from '@/components/gtm/AuthoritySection';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy, Cpu, Database, Activity, LineChart, Target, Sparkles } from 'lucide-react';
@@ -433,34 +433,7 @@ const HeroSection = () => {
       }} transition={{
         delay: 1.4
       }} className="mt-12 pt-8 border-t border-border/30">
-          <div className="grid grid-cols-3 gap-6 md:gap-12">
-            {[{
-            label: 'KR Volume',
-            before: '$0',
-            after: '$120M+'
-          }, {
-            label: 'Mindshare',
-            before: '#50+',
-            after: '#1~3'
-          }, {
-            label: 'Community',
-            before: '0',
-            after: '50K+'
-          }].map(item => <div key={item.label} className="text-center">
-                <p className="text-[10px] text-muted-foreground tracking-widest uppercase mb-2">
-                  {item.label}
-                </p>
-                <div className="flex items-center justify-center gap-2">
-                  <span className="text-muted-foreground/40 text-sm">
-                    {item.before}
-                  </span>
-                  <span className="text-muted-foreground/30">→</span>
-                  <span className="text-primary text-base md:text-lg font-medium">
-                    {item.after}
-                  </span>
-                </div>
-              </div>)}
-          </div>
+          
         </motion.div>
 
         {/* Scroll indicator */}
@@ -2116,7 +2089,11 @@ const clientLogos = [{
   logo: zkpassLogo
 }];
 const ClientLogosMarquee = () => {
-  return null;
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, {
+    once: true
+  });
+  return;
 };
 
 // ============================================
@@ -2177,7 +2154,7 @@ const GTMService = () => {
         <MarketIntelligenceSection />
         <FrameworkSection />
         <PerformanceSection />
-        <LeadershipSection />
+        <AuthoritySection />
         <StrategyInActionSection />
         <ClientLogosMarquee />
         <CTASection />
