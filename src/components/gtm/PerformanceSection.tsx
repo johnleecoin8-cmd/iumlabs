@@ -164,7 +164,7 @@ const VideoFeaturedCard = ({
         onMouseLeave={handleMouseLeave}
         className={`
           group relative overflow-hidden rounded-xl
-          aspect-[16/9]
+          aspect-[4/3]
           border ${colors.border}
           transition-all duration-500
           ${isHovered ? colors.glow : ''}
