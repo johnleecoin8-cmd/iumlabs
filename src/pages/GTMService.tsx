@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Skull, Lock, Zap, Users, Megaphone, TrendingUp, Calendar, ExternalLink } from 'lucide-react';
+import { ArrowRight, Skull, Lock, Zap, ExternalLink } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
 
 // Hero Component
@@ -31,7 +31,6 @@ import kucoinNew from '@/assets/campaigns/kucoin-new.jpg';
 
 import peaqLogo from '@/assets/logos/peaq.svg';
 import polygonLogo from '@/assets/logos/polygon.svg';
-import ondoLogo from '@/assets/logos/ondo.svg';
 
 // Project backgrounds
 import storyBg from '@/assets/projects/story-bg.jpg';
@@ -50,10 +49,9 @@ import bybitLogo from '@/assets/logos/bybit.png';
 import bnbLogo from '@/assets/logos/bnb.svg';
 import saharaLogo from '@/assets/logos/sahara-ai.png';
 import kucoinLogo from '@/assets/logos/kucoin.svg';
-import openledgerLogo from '@/assets/logos/thirdweb.png';
 
 // ============================================
-// SECTION 2: REALITY CHECK - MADUP STYLE
+// SECTION 2: REALITY CHECK - PROBLEM
 // ============================================
 const RealityCheckSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -147,7 +145,7 @@ const RealityCheckSection = () => {
 };
 
 // ============================================
-// SECTION 3: SOLUTION - SMC STYLE WITH CIRCLE MASK
+// SECTION 3: SOLUTION - BRIDGE (with integrated marquee)
 // ============================================
 const SolutionSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -159,286 +157,141 @@ const SolutionSection = () => {
   
   const circleY = useTransform(scrollYProgress, [0, 1], [50, -50]);
   const circleScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1, 0.9]);
+  const services = "GTM STRATEGY · COMMUNITY BUILDING · KOL NETWORK · PR COVERAGE · EVENT MARKETING · BRAND AWARENESS · ";
 
   return (
-    <section ref={ref} className="relative min-h-[70vh] bg-white flex flex-col items-center justify-center overflow-hidden py-20">
-      {/* Main Title with Circular Image Mask - SMC Style */}
-      <motion.div
-        initial={{ opacity: 0, y: 60 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
-        className="relative text-center px-4"
-      >
-        {/* First Line */}
-        <h2 className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-          BRIDGING
-        </h2>
-        
-        {/* Second Line with Circle Image */}
-        <div className="relative flex items-center justify-center gap-2 md:gap-4">
-          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-            GL
-          </span>
-          
-          {/* Circular Image Mask - SMC Style */}
-          <motion.div 
-            style={{ y: circleY, scale: circleScale }}
-            className="relative w-[clamp(4rem,15vw,12rem)] h-[clamp(4rem,15vw,12rem)] rounded-full overflow-hidden flex-shrink-0"
-          >
-            <img 
-              src={storyOriginSummit}
-              alt="Korea Event"
-              className="w-full h-full object-cover"
-            />
-            {/* Subtle overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
-          </motion.div>
-          
-          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-            BAL
-          </span>
-        </div>
-
-        {/* Third Line */}
-        <div className="relative flex items-center justify-center gap-2 md:gap-4">
-          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black leading-[0.85] tracking-tighter text-primary">
-            WEB3
-          </span>
-          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-            TO
-          </span>
-        </div>
-
-        {/* Fourth Line with Second Circle */}
-        <div className="relative flex items-center justify-center gap-2 md:gap-4">
-          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-            K
-          </span>
-          
-          {/* Second Circular Image */}
-          <motion.div 
-            style={{ y: useTransform(scrollYProgress, [0, 1], [-30, 30]), scale: circleScale }}
-            className="relative w-[clamp(4rem,15vw,12rem)] h-[clamp(4rem,15vw,12rem)] rounded-full overflow-hidden flex-shrink-0"
-          >
-            <img 
-              src={peaqSummit}
-              alt="Korea Summit"
-              className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-transparent" />
-          </motion.div>
-          
-          <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
-            REA
-          </span>
-        </div>
-      </motion.div>
-
-      {/* Tagline */}
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.4 }}
-        className="text-black/50 text-sm md:text-base tracking-widest mt-12 max-w-xl text-center px-6"
-      >
-        이음(Ium)은 "잇다"에서 유래한 이름으로, 글로벌 Web3 프로젝트와 한국 시장을 연결하는 다리 역할을 합니다.
-      </motion.p>
-
-      {/* Stats Row - SMC Style Numbers */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ delay: 0.6 }}
-        className="flex flex-wrap justify-center gap-12 md:gap-20 mt-12 px-6"
-      >
-        {[
-          { value: "5", suffix: "YEARS", sub: "In Korea Market" },
-          { value: "30", suffix: "+", sub: "Projects Launched" },
-          { value: "$50M", suffix: "+", sub: "Volume Generated" },
-        ].map((stat, i) => (
-          <motion.div
-            key={stat.sub}
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 0.7 + i * 0.1 }}
-            className="text-center"
-          >
-            <span className="text-4xl md:text-6xl font-black text-black">
-              {stat.value}
-              <span className="text-primary">{stat.suffix}</span>
-            </span>
-            <p className="text-black/40 text-[10px] md:text-xs tracking-[0.2em] mt-2 uppercase">
-              ({stat.sub})
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
-    </section>
-  );
-};
-
-// ============================================
-// HASHTAG SECTION - SPACE MONSTER STYLE
-// ============================================
-const HashtagSection = () => {
-  const hashtags = ['#KoreaMarketEntry', '#CommunityGrowth', '#KOLMarketing', '#Web3GTM', '#DataDriven'];
-  
-  return (
-    <section className="bg-black py-12 md:py-16">
-      <div className="flex flex-wrap justify-center gap-4 md:gap-8 px-6">
-        {hashtags.map((tag) => (
-          <motion.span 
-            key={tag}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            whileHover={{ scale: 1.05, color: 'hsl(var(--primary))' }}
-            className="text-xl md:text-3xl lg:text-4xl font-black text-primary/40 cursor-default transition-colors"
-          >
-            {tag}
-          </motion.span>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-// ============================================
-// VALUES MARQUEE - SPACE MONSTER ITALIC STYLE
-// ============================================
-const ValuesMarquee = () => {
-  const values = "data-driven · community-first · performance-based · Korea-focused · local-expertise · ";
-  
-  return (
-    <section className="bg-black py-8 md:py-12 overflow-hidden">
-      {/* Multiple rows with alternating directions */}
-      {[...Array(5)].map((_, row) => (
-        <div 
-          key={row}
-          className={`flex whitespace-nowrap ${row % 2 === 0 ? 'animate-scroll-left-values' : 'animate-scroll-right-values'}`}
+    <section ref={ref} className="relative bg-white flex flex-col items-center justify-center overflow-hidden">
+      {/* Main Content */}
+      <div className="min-h-[70vh] flex flex-col items-center justify-center py-20">
+        {/* Main Title with Circular Image Mask */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8 }}
+          className="relative text-center px-4"
         >
+          <h2 className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+            BRIDGING
+          </h2>
+          
+          <div className="relative flex items-center justify-center gap-2 md:gap-4">
+            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+              GL
+            </span>
+            
+            <motion.div 
+              style={{ y: circleY, scale: circleScale }}
+              className="relative w-[clamp(4rem,15vw,12rem)] h-[clamp(4rem,15vw,12rem)] rounded-full overflow-hidden flex-shrink-0"
+            >
+              <img 
+                src={storyOriginSummit}
+                alt="Korea Event"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent" />
+            </motion.div>
+            
+            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+              BAL
+            </span>
+          </div>
+
+          <div className="relative flex items-center justify-center gap-2 md:gap-4">
+            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black leading-[0.85] tracking-tighter text-primary">
+              WEB3
+            </span>
+            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+              TO
+            </span>
+          </div>
+
+          <div className="relative flex items-center justify-center gap-2 md:gap-4">
+            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+              K
+            </span>
+            
+            <motion.div 
+              style={{ y: useTransform(scrollYProgress, [0, 1], [-30, 30]), scale: circleScale }}
+              className="relative w-[clamp(4rem,15vw,12rem)] h-[clamp(4rem,15vw,12rem)] rounded-full overflow-hidden flex-shrink-0"
+            >
+              <img 
+                src={peaqSummit}
+                alt="Korea Summit"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-transparent" />
+            </motion.div>
+            
+            <span className="text-[clamp(2.5rem,12vw,10rem)] font-black text-black leading-[0.85] tracking-tighter">
+              REA
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Tagline */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.4 }}
+          className="text-black/50 text-sm md:text-base tracking-widest mt-12 max-w-xl text-center px-6"
+        >
+          이음(Ium)은 "잇다"에서 유래한 이름으로, 글로벌 Web3 프로젝트와 한국 시장을 연결하는 다리 역할을 합니다.
+        </motion.p>
+
+        {/* Stats Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.6 }}
+          className="flex flex-wrap justify-center gap-12 md:gap-20 mt-12 px-6"
+        >
+          {[
+            { value: "5", suffix: "YEARS", sub: "In Korea Market" },
+            { value: "30", suffix: "+", sub: "Projects Launched" },
+            { value: "$50M", suffix: "+", sub: "Volume Generated" },
+          ].map((stat, i) => (
+            <motion.div
+              key={stat.sub}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.7 + i * 0.1 }}
+              className="text-center"
+            >
+              <span className="text-4xl md:text-6xl font-black text-black">
+                {stat.value}
+                <span className="text-primary">{stat.suffix}</span>
+              </span>
+              <p className="text-black/40 text-[10px] md:text-xs tracking-[0.2em] mt-2 uppercase">
+                ({stat.sub})
+              </p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Integrated Service Marquee at bottom */}
+      <div className="w-full bg-black py-6 md:py-8 overflow-hidden border-y border-white/5">
+        <div className="flex whitespace-nowrap animate-scroll-left-fast mb-1">
           {[...Array(4)].map((_, i) => (
             <span 
-              key={i}
-              className="text-[clamp(2rem,5vw,4rem)] font-bold italic text-transparent tracking-tight mx-4"
-              style={{ 
-                WebkitTextStroke: row % 2 === 0 
-                  ? '1px rgba(255,107,0,0.25)' 
-                  : '1px rgba(255,255,255,0.15)' 
-              }}
+              key={`row1-${i}`}
+              className="text-[clamp(1.2rem,3vw,2.5rem)] font-black text-transparent tracking-tight mx-2"
+              style={{ WebkitTextStroke: '1px rgba(255,107,0,0.5)' }}
             >
-              {values}
+              {services}
             </span>
           ))}
         </div>
-      ))}
-    </section>
-  );
-};
-
-// ============================================
-// SERVICE MARQUEE - SPACE MONSTER STYLE (OUTLINE TEXT)
-// ============================================
-const ServiceMarquee = () => {
-  const services = "GTM STRATEGY · COMMUNITY BUILDING · KOL NETWORK · PR COVERAGE · EVENT MARKETING · BRAND AWARENESS · ";
-  
-  return (
-    <section className="relative bg-black py-6 md:py-8 overflow-hidden border-y border-white/5">
-      {/* First Row - Left to Right */}
-      <div className="flex whitespace-nowrap animate-scroll-left-fast mb-1">
-        {[...Array(4)].map((_, i) => (
-          <span 
-            key={`row1-${i}`}
-            className="text-[clamp(1.2rem,3vw,2.5rem)] font-black text-transparent tracking-tight mx-2"
-            style={{ WebkitTextStroke: '1px rgba(255,107,0,0.5)' }}
-          >
-            {services}
-          </span>
-        ))}
-      </div>
-      
-      {/* Second Row - Right to Left */}
-      <div className="flex whitespace-nowrap animate-scroll-right-fast">
-        {[...Array(4)].map((_, i) => (
-          <span 
-            key={`row2-${i}`}
-            className="text-[clamp(1.2rem,3vw,2.5rem)] font-black text-transparent tracking-tight mx-2"
-            style={{ WebkitTextStroke: '1px rgba(255,255,255,0.25)' }}
-          >
-            {services}
-          </span>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-// ============================================
-// INFINITE ROLLING GALLERY - SMC STYLE
-// ============================================
-const RollingGallerySection = () => {
-  const galleryImages = [
-    storyOriginSummit,
-    peaqSummit,
-    bnbEvent,
-    mantraParty,
-    kucoinCampaign,
-    openledgerEvent,
-    seoulMetroBillboard,
-    bybitEvent,
-  ];
-
-  const galleryImagesReversed = [
-    bybitEvent,
-    seoulMetroBillboard,
-    openledgerEvent,
-    kucoinCampaign,
-    mantraParty,
-    bnbEvent,
-    peaqSummit,
-    storyOriginSummit,
-  ];
-
-  return (
-    <section className="relative bg-black py-8 overflow-hidden">
-      {/* First Row - Left to Right */}
-      <div className="flex animate-scroll-left mb-2">
-        {[...galleryImages, ...galleryImages].map((img, i) => (
-          <div 
-            key={`row1-${i}`}
-            className="flex-shrink-0 w-[280px] md:w-[380px] h-[180px] md:h-[260px] mx-1 overflow-hidden"
-          >
-            <img 
-              src={img} 
-              alt="" 
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-            />
-          </div>
-        ))}
-      </div>
-      
-      {/* Second Row - Right to Left */}
-      <div className="flex animate-scroll-right">
-        {[...galleryImagesReversed, ...galleryImagesReversed].map((img, i) => (
-          <div 
-            key={`row2-${i}`}
-            className="flex-shrink-0 w-[280px] md:w-[380px] h-[180px] md:h-[260px] mx-1 overflow-hidden"
-          >
-            <img 
-              src={img} 
-              alt="" 
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* Center Text Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="bg-black/80 backdrop-blur-sm px-6 md:px-8 py-3 md:py-4">
-          <span className="text-white/60 text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.5em]">
-            WE KEEP DIVING TOWARDS POSSIBILITIES
-          </span>
+        <div className="flex whitespace-nowrap animate-scroll-right-fast">
+          {[...Array(4)].map((_, i) => (
+            <span 
+              key={`row2-${i}`}
+              className="text-[clamp(1.2rem,3vw,2.5rem)] font-black text-transparent tracking-tight mx-2"
+              style={{ WebkitTextStroke: '1px rgba(255,255,255,0.25)' }}
+            >
+              {services}
+            </span>
+          ))}
         </div>
       </div>
     </section>
@@ -446,11 +299,18 @@ const RollingGallerySection = () => {
 };
 
 // ============================================
-// ACHIEVEMENTS LIST - SPACE MONSTER AWARD WINS STYLE
+// SECTION 4: PROOF - INTEGRATED EVIDENCE SECTION
 // ============================================
-const AchievementsListSection = () => {
+const ProofSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
+
+  const galleryImages = [
+    storyOriginSummit, peaqSummit, bnbEvent, mantraParty,
+    kucoinCampaign, openledgerEvent, seoulMetroBillboard, bybitEvent,
+  ];
+
+  const galleryImagesReversed = [...galleryImages].reverse();
 
   const achievements = [
     { year: "2024", logo: storyLogo, title: "Story Protocol", desc: "Korea Launch GTM", result: "+340% Volume" },
@@ -463,110 +323,6 @@ const AchievementsListSection = () => {
     { year: "2024", logo: polygonLogo, title: "Polygon", desc: "Korea Developer Ecosystem", result: "50+ Builders" },
   ];
 
-  return (
-    <section ref={ref} className="relative bg-black py-16 overflow-hidden">
-      {/* Section Title */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        className="text-center mb-8 px-4"
-      >
-        <span className="text-white/20 text-[10px] tracking-[0.5em] block mb-4">TRACK RECORD</span>
-        <h2 className="text-[clamp(2rem,6vw,4rem)] font-black text-white leading-none tracking-tighter">
-          ACHIEVEMENTS
-        </h2>
-      </motion.div>
-
-      {/* Achievement List */}
-      <div className="max-w-5xl mx-auto px-4 md:px-6">
-        {achievements.map((item, i) => (
-          <motion.div
-            key={item.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1 + i * 0.05 }}
-            className="group border-t border-white/10 hover:border-white/20 transition-colors"
-          >
-            <div className="flex items-center py-5 md:py-6 px-2 md:px-4">
-              {/* Year */}
-              <span className="text-white/20 text-xs md:text-sm font-mono w-12 md:w-16 flex-shrink-0 hidden md:block">
-                {item.year}
-              </span>
-              
-              {/* Logo */}
-              <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 flex items-center justify-center mr-3 md:mr-6">
-                <img 
-                  src={item.logo} 
-                  alt={item.title}
-                  className="max-w-full max-h-full object-contain brightness-0 invert opacity-40 group-hover:opacity-80 transition-opacity"
-                />
-              </div>
-              
-              {/* Title & Description */}
-              <div className="flex-1 min-w-0">
-                <span className="text-white/90 font-bold text-sm md:text-base tracking-wide block truncate">
-                  {item.title}
-                </span>
-                <span className="text-white/40 text-xs md:text-sm hidden md:block">
-                  {item.desc}
-                </span>
-              </div>
-              
-              {/* Result */}
-              <span className="text-emerald-400/80 font-bold text-sm md:text-base tracking-wide ml-4 flex-shrink-0 group-hover:text-emerald-400 transition-colors">
-                {item.result}
-              </span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-// ============================================
-// LARGE SERVICE MARQUEE - SPACE MONSTER STYLE (MASSIVE)
-// ============================================
-const LargeServiceMarquee = () => {
-  const services = "GTM Strategy · Community · KOL Network · PR Coverage · Events · Branding · ";
-  
-  return (
-    <section className="relative bg-black py-6 md:py-10 overflow-hidden border-y border-white/10">
-      {/* First Row - Left */}
-      <div className="flex whitespace-nowrap animate-scroll-left-large">
-        {[...Array(4)].map((_, i) => (
-          <span 
-            key={`large1-${i}`}
-            className="text-[clamp(4rem,15vw,12rem)] font-black text-white tracking-tighter mx-6"
-          >
-            {services}
-          </span>
-        ))}
-      </div>
-      
-      {/* Second Row - Right (Outline) */}
-      <div className="flex whitespace-nowrap animate-scroll-right-large mt-2">
-        {[...Array(4)].map((_, i) => (
-          <span 
-            key={`large2-${i}`}
-            className="text-[clamp(4rem,15vw,12rem)] font-black text-transparent tracking-tighter mx-6"
-            style={{ WebkitTextStroke: '2px rgba(255,255,255,0.3)' }}
-          >
-            {services}
-          </span>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-// ============================================
-// SECTION 4: EVIDENCE - MADUP STYLE NUMBERS
-// ============================================
-const EvidenceSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-20%" });
-
   const metrics = [
     { value: 340, suffix: "%", label: "VOLUME UPLIFT" },
     { value: 2.5, suffix: "M+", label: "ORGANIC REACH" },
@@ -575,34 +331,130 @@ const EvidenceSection = () => {
   ];
 
   return (
-    <section ref={ref} className="relative py-16 bg-black flex flex-col items-center justify-center overflow-hidden">
-      {/* Section Label */}
-      <motion.span
-        initial={{ opacity: 0 }}
-        animate={isInView ? { opacity: 1 } : {}}
-        className="text-white/20 text-[10px] tracking-[0.5em] mb-8"
-      >
-        NUMBERS DON'T LIE
-      </motion.span>
+    <section ref={ref} className="relative bg-black overflow-hidden">
+      {/* 1. Rolling Gallery with Overlay */}
+      <div className="relative py-8">
+        <div className="flex animate-scroll-left mb-2">
+          {[...galleryImages, ...galleryImages].map((img, i) => (
+            <div 
+              key={`row1-${i}`}
+              className="flex-shrink-0 w-[280px] md:w-[380px] h-[180px] md:h-[260px] mx-1 overflow-hidden"
+            >
+              <img 
+                src={img} 
+                alt="" 
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              />
+            </div>
+          ))}
+        </div>
+        
+        <div className="flex animate-scroll-right">
+          {[...galleryImagesReversed, ...galleryImagesReversed].map((img, i) => (
+            <div 
+              key={`row2-${i}`}
+              className="flex-shrink-0 w-[280px] md:w-[380px] h-[180px] md:h-[260px] mx-1 overflow-hidden"
+            >
+              <img 
+                src={img} 
+                alt="" 
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+              />
+            </div>
+          ))}
+        </div>
 
-      {/* Big Numbers Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 px-6 max-w-5xl mx-auto">
-        {metrics.map((metric, i) => (
-          <MetricItem 
-            key={metric.label}
-            {...metric}
-            isInView={isInView}
-            delay={i * 0.15}
-          />
-        ))}
+        {/* Center Text Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div className="bg-black/80 backdrop-blur-sm px-6 md:px-8 py-3 md:py-4">
+            <span className="text-white/60 text-[10px] md:text-xs tracking-[0.3em] md:tracking-[0.5em]">
+              WE KEEP DIVING TOWARDS POSSIBILITIES
+            </span>
+          </div>
+        </div>
       </div>
 
-      {/* Testimonial */}
+      {/* 2. Big Numbers */}
+      <div className="py-16">
+        <motion.span
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          className="text-white/20 text-[10px] tracking-[0.5em] mb-8 block text-center"
+        >
+          NUMBERS DON'T LIE
+        </motion.span>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 px-6 max-w-5xl mx-auto">
+          {metrics.map((metric, i) => (
+            <MetricItem 
+              key={metric.label}
+              {...metric}
+              isInView={isInView}
+              delay={i * 0.15}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* 3. Achievement List */}
+      <div className="py-16">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="text-center mb-8 px-4"
+        >
+          <span className="text-white/20 text-[10px] tracking-[0.5em] block mb-4">TRACK RECORD</span>
+          <h2 className="text-[clamp(2rem,6vw,4rem)] font-black text-white leading-none tracking-tighter">
+            ACHIEVEMENTS
+          </h2>
+        </motion.div>
+
+        <div className="max-w-5xl mx-auto px-4 md:px-6">
+          {achievements.map((item, i) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.1 + i * 0.05 }}
+              className="group border-t border-white/10 hover:border-white/20 transition-colors"
+            >
+              <div className="flex items-center py-5 md:py-6 px-2 md:px-4">
+                <span className="text-white/20 text-xs md:text-sm font-mono w-12 md:w-16 flex-shrink-0 hidden md:block">
+                  {item.year}
+                </span>
+                
+                <div className="w-8 h-8 md:w-10 md:h-10 flex-shrink-0 flex items-center justify-center mr-3 md:mr-6">
+                  <img 
+                    src={item.logo} 
+                    alt={item.title}
+                    className="max-w-full max-h-full object-contain brightness-0 invert opacity-40 group-hover:opacity-80 transition-opacity"
+                  />
+                </div>
+                
+                <div className="flex-1 min-w-0">
+                  <span className="text-white/90 font-bold text-sm md:text-base tracking-wide block truncate">
+                    {item.title}
+                  </span>
+                  <span className="text-white/40 text-xs md:text-sm hidden md:block">
+                    {item.desc}
+                  </span>
+                </div>
+                
+                <span className="text-emerald-400/80 font-bold text-sm md:text-base tracking-wide ml-4 flex-shrink-0 group-hover:text-emerald-400 transition-colors">
+                  {item.result}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* 4. Testimonial */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.8 }}
-        className="max-w-2xl mx-auto mt-12 px-6 text-center"
+        className="max-w-2xl mx-auto py-16 px-6 text-center"
       >
         <img 
           src={peaqLogo} 
@@ -643,7 +495,7 @@ const MetricItem = ({ value, label, suffix = "", isInView, delay = 0 }: {
 };
 
 // ============================================
-// SECTION 5: STRATEGY - MADUP STYLE PROCESS
+// SECTION 5: STRATEGY - PROCESS
 // ============================================
 const StrategySection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -702,87 +554,7 @@ const StrategySection = () => {
 };
 
 // ============================================
-// SECTION 6: PORTFOLIO - MADUP STYLE GRID
-// ============================================
-const PortfolioSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-
-  const services = [
-    { icon: Users, title: "COMMUNITY", sub: "24/7 Moderation" },
-    { icon: Megaphone, title: "PR & MEDIA", sub: "Tier-1 Coverage" },
-    { icon: TrendingUp, title: "KOL NETWORK", sub: "Performance-based" },
-    { icon: Calendar, title: "OFFLINE EVENTS", sub: "Summits & Dinners" },
-  ];
-
-  const gallery = [
-    { src: seoulMetroBillboard, label: "OUTDOOR" },
-    { src: storyOriginSummit, label: "EVENTS" },
-    { src: peaqSummit, label: "EVENTS" },
-    { src: polygonConnect, label: "EVENTS" },
-    { src: bnbEvent, label: "EVENTS" },
-    { src: openledgerEvent, label: "VIP" },
-  ];
-
-  return (
-    <section ref={ref} className="relative bg-black py-16 overflow-hidden">
-      {/* Section Title */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        className="text-center mb-10 px-4"
-      >
-        <span className="text-white/20 text-[10px] tracking-[0.5em] block mb-4">CAPABILITIES</span>
-        <h2 className="text-[clamp(2rem,6vw,4rem)] font-black text-transparent leading-none tracking-tighter"
-          style={{ WebkitTextStroke: '1.5px rgba(255,255,255,0.6)' }}>
-          REAL IMPACT
-        </h2>
-      </motion.div>
-
-      {/* Services */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-px max-w-5xl mx-auto px-6 mb-10">
-        {services.map((service, i) => (
-          <motion.div
-            key={service.title}
-            initial={{ opacity: 0, y: 20 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2 + i * 0.1 }}
-            className="bg-white/[0.02] border border-white/5 p-6 text-center hover:bg-white/[0.04] transition-colors group"
-          >
-            <service.icon className="w-8 h-8 text-white/30 mx-auto mb-4 group-hover:text-white/60 transition-colors" strokeWidth={1} />
-            <h4 className="text-white/80 font-bold text-sm tracking-wider">{service.title}</h4>
-            <p className="text-white/30 text-xs mt-1">{service.sub}</p>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Gallery Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-1 max-w-6xl mx-auto px-6">
-        {gallery.map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ delay: 0.4 + i * 0.1 }}
-            className="relative aspect-[4/3] overflow-hidden group"
-          >
-            <img
-              src={item.src}
-              alt=""
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
-            />
-            <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-              <span className="text-white text-xs tracking-[0.3em] font-medium">{item.label}</span>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-    </section>
-  );
-};
-
-// ============================================
-// SELECTED WORK SECTION - MADUP STYLE EXPANDABLE PANELS
+// SECTION 6: SELECTED WORK - PORTFOLIO
 // ============================================
 const SelectedWorkSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -924,14 +696,12 @@ const SelectedWorkSection = () => {
             onMouseEnter={() => handleMouseEnter(i)}
             onMouseLeave={handleMouseLeave}
           >
-            {/* Background Image */}
             <img
               src={project.bg}
               alt={project.name}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700"
             />
 
-            {/* Video (plays on hover) */}
             {project.video && (
               <video
                 src={project.video}
@@ -945,14 +715,12 @@ const SelectedWorkSection = () => {
               />
             )}
 
-            {/* Gradient Overlay */}
             <div className={`absolute inset-0 transition-all duration-500 ${
               hoveredIndex === i 
                 ? 'bg-gradient-to-t from-black via-black/40 to-transparent' 
                 : 'bg-black/70'
             }`} />
 
-            {/* Vertical Title (collapsed state) */}
             <AnimatePresence>
               {hoveredIndex !== i && (
                 <motion.div
@@ -968,7 +736,6 @@ const SelectedWorkSection = () => {
               )}
             </AnimatePresence>
 
-            {/* Expanded Content */}
             <AnimatePresence>
               {hoveredIndex === i && (
                 <motion.div
@@ -978,14 +745,11 @@ const SelectedWorkSection = () => {
                   transition={{ delay: 0.1, duration: 0.3 }}
                   className="absolute inset-0 flex"
                 >
-                  {/* Left: Info */}
                   <div className="flex-1 flex flex-col justify-end p-8">
-                    {/* Category Tag */}
                     <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase mb-3">
                       {project.category}
                     </span>
 
-                    {/* Logo */}
                     <div className="mb-4">
                       {project.logo ? (
                         <img
@@ -1000,7 +764,6 @@ const SelectedWorkSection = () => {
                       )}
                     </div>
 
-                    {/* Result Metric */}
                     <div className="mb-6">
                       <span className="text-3xl md:text-4xl font-black bg-gradient-to-r from-emerald-400 to-green-300 bg-clip-text text-transparent">
                         {project.result}
@@ -1010,7 +773,6 @@ const SelectedWorkSection = () => {
                       </span>
                     </div>
 
-                    {/* View Project Button */}
                     <Link
                       to={`/projects/${project.slug}`}
                       className="inline-flex items-center gap-2 text-white/80 hover:text-white text-xs tracking-widest transition-colors group/link"
@@ -1020,7 +782,6 @@ const SelectedWorkSection = () => {
                     </Link>
                   </div>
 
-                  {/* Right: Gallery Preview */}
                   {project.gallery && project.gallery.length > 0 && (
                     <motion.div 
                       initial={{ opacity: 0, x: 20 }}
@@ -1052,7 +813,6 @@ const SelectedWorkSection = () => {
               )}
             </AnimatePresence>
 
-            {/* Panel Border */}
             <div className="absolute inset-0 border-r border-white/5 pointer-events-none" />
           </motion.div>
         ))}
@@ -1078,7 +838,6 @@ const SelectedWorkSection = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
               
-              {/* Content */}
               <div className="absolute inset-0 flex flex-col justify-end p-4">
                 <span className="text-white/40 text-[8px] tracking-[0.2em] uppercase mb-1">
                   {project.category}
@@ -1126,7 +885,7 @@ const SelectedWorkSection = () => {
 };
 
 // ============================================
-// SECTION 7: FOOTER CTA - MADUP STYLE
+// SECTION 7: FOOTER CTA
 // ============================================
 const FooterCTASection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -1134,7 +893,6 @@ const FooterCTASection = () => {
 
   return (
     <section ref={ref} className="relative min-h-[50vh] bg-black flex flex-col items-center justify-center overflow-hidden py-16">
-      {/* Giant CTA Text */}
       <motion.div
         initial={{ opacity: 0, y: 60 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -1156,7 +914,6 @@ const FooterCTASection = () => {
         </div>
       </motion.div>
 
-      {/* CTA Button */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -1185,7 +942,7 @@ const FooterCTASection = () => {
 };
 
 // ============================================
-// MAIN
+// MAIN - 7 STEP STORY ARC
 // ============================================
 const GTMService = () => {
   usePageMeta(
@@ -1204,46 +961,25 @@ const GTMService = () => {
       />
       <Navbar />
       <main className="bg-black">
-        {/* Section 1: Hero */}
+        {/* 1. HOOK */}
         <EnhancedHero />
         
-        {/* Section 2: Reality Check */}
+        {/* 2. PROBLEM */}
         <RealityCheckSection />
         
-        {/* Section 3: Solution - SMC Style White */}
+        {/* 3. BRIDGE (with integrated marquee) */}
         <SolutionSection />
 
-        {/* NEW: Hashtag Section - Space Monster Style */}
-        <HashtagSection />
-
-        {/* NEW: Values Marquee - Space Monster Italic Style */}
-        <ValuesMarquee />
-
-        {/* Service Marquee - Space Monster Style */}
-        <ServiceMarquee />
-
-        {/* Rolling Gallery - SMC Style */}
-        <RollingGallerySection />
-
-        {/* NEW: Achievements List - Space Monster Award Wins Style */}
-        <AchievementsListSection />
+        {/* 4. PROOF (gallery + numbers + achievements + testimonial) */}
+        <ProofSection />
         
-        {/* Section 4: Evidence */}
-        <EvidenceSection />
-
-        {/* NEW: Large Service Marquee - Space Monster Style */}
-        <LargeServiceMarquee />
-        
-        {/* Section 5: Strategy */}
+        {/* 5. PROCESS */}
         <StrategySection />
-        
-        {/* Section 6: Portfolio */}
-        <PortfolioSection />
 
-        {/* Selected Work */}
+        {/* 6. PORTFOLIO */}
         <SelectedWorkSection />
         
-        {/* Section 7: Footer CTA */}
+        {/* 7. CTA */}
         <FooterCTASection />
       </main>
       <Footer />
