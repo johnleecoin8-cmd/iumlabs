@@ -1,17 +1,11 @@
-import { useRef } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Zap, Shield, Globe, TrendingUp } from 'lucide-react';
-import { useState, useEffect } from 'react';
-
-// Seoul Cyberpunk backgrounds
-import seoulGangnamNight from '@/assets/backgrounds/seoul-gangnam-night.jpg';
-import seoulDdpNight from '@/assets/backgrounds/seoul-ddp-night.jpg';
-import seoulTechFuture from '@/assets/backgrounds/seoul-tech-future.jpg';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 
 // Project backgrounds
 import storyBg from '@/assets/projects/story-bg.jpg';
@@ -28,10 +22,8 @@ import polygonBg from '@/assets/projects/polygon-bg.jpg';
 import triaBg from '@/assets/projects/tria-bg.jpg';
 
 // ============================================
-// DATA
+// FEATURED PROJECTS DATA
 // ============================================
-const heroBackgrounds = [seoulGangnamNight, seoulDdpNight, seoulTechFuture];
-
 const featuredProjects = [
   {
     name: 'Story Protocol',
@@ -71,190 +63,44 @@ const moreProjects = [
   { name: 'Tria', image: triaBg, slug: 'tria' },
 ];
 
-const barriers = [
-  { icon: Shield, label: 'VASP Regulations', desc: 'Complex compliance requirements' },
-  { icon: Globe, label: 'Language Walls', desc: 'Korean-only communities' },
-  { icon: Zap, label: 'Isolated Ecosystem', desc: 'Unique platforms & influencers' },
-];
-
 // ============================================
-// HERO: "Korea, The Engine of Crypto"
+// HERO SECTION - Text only, minimal
 // ============================================
 const HeroSection = () => {
-  const [currentBg, setCurrentBg] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBg((prev) => (prev + 1) % heroBackgrounds.length);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <section className="relative min-h-screen flex flex-col justify-center overflow-hidden">
-      {/* Background slideshow */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={currentBg}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.2 }}
-          className="absolute inset-0"
+    <section className="min-h-[80vh] flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-32 pb-20 bg-background">
+      <div className="max-w-5xl">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-muted-foreground text-sm tracking-widest uppercase mb-6"
         >
-          <img
-            src={heroBackgrounds[currentBg]}
-            alt="Seoul"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Content */}
-      <div className="relative z-10 px-6 md:px-12 lg:px-20 pt-32 pb-20">
-        <div className="max-w-5xl">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-primary text-sm tracking-widest uppercase mb-6 font-medium"
-          >
-            Korea GTM Strategy
-          </motion.p>
-          
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-            className="text-[clamp(2.5rem,8vw,5rem)] font-medium leading-[1.05] tracking-tight text-foreground mb-8"
-          >
-            Unlock the World's
-            <br />
-            <span className="text-primary">Most Active Liquidity.</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-xl text-foreground/80 max-w-2xl mb-12"
-          >
-            Korea isn't just a market. It's the ignition key for global hype.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-          >
-            <a
-              href="#why-korea"
-              className="inline-flex items-center gap-3 text-foreground hover:text-primary transition-colors group"
-            >
-              <span className="text-sm tracking-wide">Discover Why</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </a>
-          </motion.div>
-        </div>
-      </div>
-
-      {/* Stats bar */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.7 }}
-        className="relative z-10 border-t border-foreground/10 bg-background/50 backdrop-blur-sm"
-      >
-        <div className="px-6 md:px-12 lg:px-20 py-6 flex flex-wrap gap-8 md:gap-16">
-          <div>
-            <p className="text-3xl md:text-4xl font-medium text-primary">#3</p>
-            <p className="text-xs text-foreground/60 uppercase tracking-wider mt-1">Global Trading Volume</p>
-          </div>
-          <div>
-            <p className="text-3xl md:text-4xl font-medium text-primary">#1</p>
-            <p className="text-xs text-foreground/60 uppercase tracking-wider mt-1">Altcoin Volume</p>
-          </div>
-          <div>
-            <p className="text-3xl md:text-4xl font-medium text-primary">30%+</p>
-            <p className="text-xs text-foreground/60 uppercase tracking-wider mt-1">Kimchi Premium (Peak)</p>
-          </div>
-        </div>
-      </motion.div>
-    </section>
-  );
-};
-
-// ============================================
-// WHY KOREA: "The Challenge"
-// ============================================
-const WhyKoreaSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-
-  return (
-    <section id="why-korea" ref={ref} className="px-6 md:px-12 lg:px-20 py-32 bg-background">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
+          Korea GTM Strategy
+        </motion.p>
+        
+        <motion.h1
           initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="text-[clamp(2.5rem,8vw,5.5rem)] font-medium leading-[1.05] tracking-tight text-foreground"
         >
-          <p className="text-primary text-sm tracking-widest uppercase mb-4">The Challenge</p>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-medium leading-tight text-foreground max-w-4xl">
-            Global projects succeed in the West,
-            <br />
-            <span className="text-foreground/60">but they explode in Korea.</span>
-          </h2>
-          <p className="text-foreground/70 text-xl mt-6 max-w-2xl">
-            The Kimchi Premium isn't just a price difference—it's proof of overwhelming buying power. 
-            Can you afford to miss it?
-          </p>
-        </motion.div>
+          We bridge global Web3 projects
+          <br />
+          <span className="text-muted-foreground">to Korea's most active</span>
+          <br />
+          crypto market.
+        </motion.h1>
 
-        {/* Key insight */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="grid md:grid-cols-2 gap-12 items-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-wrap items-center gap-8 mt-12 text-muted-foreground"
         >
-          <div className="space-y-8">
-            <div className="border-l-2 border-primary pl-6">
-              <p className="text-foreground/60 text-sm uppercase tracking-wider mb-2">Key Insight</p>
-              <p className="text-2xl md:text-3xl font-medium text-foreground">
-                "The Kimchi Premium is Real Power."
-              </p>
-              <p className="text-foreground/70 mt-4">
-                When Korean traders move, the global market follows. 
-                This isn't speculation—it's a pattern proven over 10+ years.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.3 }}
-              className="bg-foreground/5 border border-foreground/10 p-6 rounded-lg"
-            >
-              <TrendingUp className="w-8 h-8 text-primary mb-4" />
-              <p className="text-3xl font-medium text-foreground">$2.8B</p>
-              <p className="text-foreground/60 text-sm mt-1">Daily Trading Volume</p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.4 }}
-              className="bg-foreground/5 border border-foreground/10 p-6 rounded-lg"
-            >
-              <Zap className="w-8 h-8 text-primary mb-4" />
-              <p className="text-3xl font-medium text-foreground">15M+</p>
-              <p className="text-foreground/60 text-sm mt-1">Active Traders</p>
-            </motion.div>
-          </div>
+          <span className="text-sm">30+ Projects</span>
+          <span className="text-sm">$50M+ Volume</span>
+          <span className="text-sm">Since 2024</span>
         </motion.div>
       </div>
     </section>
@@ -262,99 +108,21 @@ const WhyKoreaSection = () => {
 };
 
 // ============================================
-// OUR SOLUTION: "We Tame the Beast"
-// ============================================
-const SolutionSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10%" });
-
-  return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-32 bg-foreground text-background">
-      <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-20"
-        >
-          <p className="text-primary text-sm tracking-widest uppercase mb-4">Our Solution</p>
-          <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-medium leading-tight max-w-4xl">
-            High Rewards come with
-            <br />
-            <span className="text-background/60">High Barriers.</span>
-          </h2>
-          <p className="text-background/70 text-xl mt-6 max-w-2xl">
-            We are the bridge that turns these barriers into your moat.
-          </p>
-        </motion.div>
-
-        {/* Barriers Grid */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
-          {barriers.map((barrier, i) => (
-            <motion.div
-              key={barrier.label}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 + i * 0.1, duration: 0.6 }}
-              className="border border-background/20 p-8 hover:border-primary/50 transition-colors group"
-            >
-              <barrier.icon className="w-10 h-10 text-primary mb-6" />
-              <h3 className="text-xl font-medium mb-2">{barrier.label}</h3>
-              <p className="text-background/60">{barrier.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Solution statement */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="border-t border-background/20 pt-12"
-        >
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-2xl md:text-3xl font-medium leading-snug">
-                Born in 2024. We match Korea's speed.
-              </p>
-              <p className="text-background/70 mt-4">
-                This fast market needs a fast team. We're native to both worlds—
-                global Web3 standards and Korean market dynamics.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-4">
-              <span className="px-4 py-2 border border-background/30 text-sm">Native Korean Team</span>
-              <span className="px-4 py-2 border border-background/30 text-sm">VASP Compliant</span>
-              <span className="px-4 py-2 border border-background/30 text-sm">24/7 Operations</span>
-              <span className="px-4 py-2 border border-background/30 text-sm">Data-Driven</span>
-            </div>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
-// ============================================
-// TRACK RECORD: Featured Work
+// FEATURED WORK - Droga5 style large cards
 // ============================================
 const FeaturedWorkSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
 
   return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-32 bg-background">
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
-        className="mb-20"
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-20 bg-background">
+      <motion.p
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : {}}
+        className="text-muted-foreground text-sm tracking-widest uppercase mb-16"
       >
-        <p className="text-primary text-sm tracking-widest uppercase mb-4">Track Record</p>
-        <h2 className="text-[clamp(2rem,5vw,3.5rem)] font-medium leading-tight text-foreground">
-          Results speak louder.
-        </h2>
-      </motion.div>
+        Featured Work
+      </motion.p>
 
       <div className="space-y-32">
         {featuredProjects.map((project, i) => (
@@ -375,25 +143,24 @@ const FeaturedWorkSection = () => {
                   alt={project.name}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </div>
 
               {/* Info */}
               <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                 <div className="space-y-2">
-                  <p className="text-primary text-xs tracking-widest uppercase">
+                  <p className="text-muted-foreground text-xs tracking-widest uppercase">
                     {project.category}
                   </p>
-                  <h3 className="text-2xl md:text-3xl font-medium text-foreground">
+                  <h2 className="text-2xl md:text-3xl font-medium text-foreground">
                     {project.name}
-                  </h3>
-                  <p className="text-foreground/70 max-w-xl">
-                    {project.tagline} <span className="text-foreground font-medium">{project.result}</span>
+                  </h2>
+                  <p className="text-muted-foreground max-w-xl">
+                    {project.tagline} {project.result}
                   </p>
                 </div>
                 
-                <span className="inline-flex items-center gap-2 text-sm text-foreground group-hover:text-primary group-hover:gap-3 transition-all">
-                  View Case Study
+                <span className="inline-flex items-center gap-2 text-sm text-foreground group-hover:gap-3 transition-all">
+                  Learn more
                   <ArrowUpRight className="w-4 h-4" />
                 </span>
               </div>
@@ -406,7 +173,7 @@ const FeaturedWorkSection = () => {
 };
 
 // ============================================
-// MORE WORK - Grid
+// MORE WORK - Grid of thumbnails
 // ============================================
 const MoreWorkSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -417,7 +184,7 @@ const MoreWorkSection = () => {
       <motion.p
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="text-foreground/60 text-sm tracking-widest uppercase mb-12"
+        className="text-muted-foreground text-sm tracking-widest uppercase mb-12"
       >
         More Work
       </motion.p>
@@ -457,12 +224,38 @@ const MoreWorkSection = () => {
       >
         <Link
           to="/projects"
-          className="inline-flex items-center gap-2 text-sm text-foreground/60 hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
         >
           View all projects
           <ArrowRight className="w-4 h-4" />
         </Link>
       </motion.div>
+    </section>
+  );
+};
+
+// ============================================
+// RECOGNITION / TAGLINE
+// ============================================
+const RecognitionSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
+
+  return (
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-20 bg-background border-t border-border">
+      <motion.blockquote
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8 }}
+        className="max-w-4xl"
+      >
+        <p className="text-[clamp(1.5rem,4vw,2.5rem)] font-medium leading-snug text-foreground">
+          "Korea's fastest-growing Web3 GTM agency"
+        </p>
+        <footer className="mt-6 text-muted-foreground text-sm">
+          — Trusted by 30+ global projects since 2024
+        </footer>
+      </motion.blockquote>
     </section>
   );
 };
@@ -475,7 +268,7 @@ const CTASection = () => {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-32 bg-primary text-primary-foreground">
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-32 bg-foreground text-background">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -483,11 +276,8 @@ const CTASection = () => {
         className="max-w-3xl"
       >
         <h2 className="text-[clamp(2rem,6vw,4rem)] font-medium leading-tight mb-8">
-          Ready to ignite Korea?
+          Ready to launch in Korea?
         </h2>
-        <p className="text-primary-foreground/80 text-xl mb-12 max-w-xl">
-          Let's discuss how we can turn Korea's barriers into your competitive advantage.
-        </p>
         
         <Link
           to="/contact"
@@ -507,36 +297,24 @@ const CTASection = () => {
 const GTMService = () => {
   usePageMeta(
     "Korea GTM Strategy | Ium Labs",
-    "Unlock the world's most active liquidity. Korea isn't just a market—it's the ignition key for global hype."
+    "We bridge global Web3 projects to Korea's dynamic ecosystem. 30+ projects launched. $50M+ volume generated."
   );
 
   return (
     <>
       <ServiceSchema
         name="Korea GTM Strategy"
-        description="Go-to-market strategy for Web3 projects entering the Korean market. We bridge global projects to Korea's most active crypto ecosystem."
+        description="Go-to-market strategy for Web3 projects entering the Korean market."
         url="/services/gtm"
         provider="Ium Labs"
         areaServed="South Korea"
       />
       <Navbar />
       <main className="bg-background">
-        {/* Intro: Korea, The Engine of Crypto */}
         <HeroSection />
-        
-        {/* Why Korea: The Challenge */}
-        <WhyKoreaSection />
-        
-        {/* Our Solution: We Tame the Beast */}
-        <SolutionSection />
-        
-        {/* Track Record: Evidence */}
         <FeaturedWorkSection />
-        
-        {/* More Work */}
         <MoreWorkSection />
-        
-        {/* CTA */}
+        <RecognitionSection />
         <CTASection />
       </main>
       <Footer />
