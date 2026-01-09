@@ -1,19 +1,19 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Building2, Shield, Newspaper, Target, Radio, BookOpen, Users } from 'lucide-react';
+import { Building2, Shield, Newspaper, TrendingUp, Target, DollarSign } from 'lucide-react';
 
 // Import logos for monochrome display
 import coindeskLogo from '@/assets/logos/coindesk.png';
 import blockmediaLogo from '@/assets/logos/blockmedia-new.png';
 import coinnessLogo from '@/assets/logos/coinness.png';
 
-// DNA Card Data with logos
+// DNA Card Data - Part 1: Our System/Background
 const dnaCards = [
   {
     number: '01',
     title: 'Exchange DNA',
     subtitle: 'Trading & Listing Strategy',
-    logos: ['Upbit', 'Bithumb', 'Coinone'], // Text-based for Korean exchanges
+    logos: ['Upbit', 'Bithumb', 'Coinone'],
     description: 'Led by alumni from Korea\'s Tier-1 exchanges. We possess an internal understanding of liquidity management, MM operations, and the exact listing criteria used by DAXA members.',
     descriptionKo: '한국 1위권 거래소 출신들이 리드합니다. 유동성 관리, MM 운영, 그리고 DAXA 멤버들이 사용하는 정확한 상장 기준에 대한 내부적 이해를 갖추고 있습니다.',
     icon: Building2,
@@ -41,39 +41,39 @@ const dnaCards = [
   }
 ];
 
-// Insider Advantage Data
-const insiderAdvantages = [
+// Squad Members - Part 2: The People Who Execute
+const squadMembers = [
   {
     number: '01',
-    title: 'Listing Playbook',
-    subtitle: 'Precision Engineering',
-    description: 'We don\'t guess. We utilize the exact criteria and timelines for KRW exchange listings to minimize rejection risk.',
-    descriptionKo: '추측하지 않습니다. 상장 거절 리스크를 최소화하기 위해 정확한 KRW 거래소 상장 기준과 타임라인을 활용합니다.',
-    icon: Target
+    title: 'Global Strategy Lead',
+    subtitle: 'Ex-KuCoin Core Team',
+    description: 'Inside knowledge of global CEX listing logic and liquidity operations.',
+    descriptionKo: '글로벌 거래소 핵심 팀 출신, 상장 로직과 유동성 운영 총괄.',
+    icon: Building2
   },
   {
     number: '02',
-    title: 'Regulatory Radar',
-    subtitle: 'Direct Lines',
-    description: 'Direct communication channels with VASP compliance officers and regulatory advisors for real-time risk checks.',
-    descriptionKo: '실시간 리스크 체크를 위해 VASP 컴플라이언스 담당자 및 규제 자문역과의 핫라인을 가동합니다.',
-    icon: Radio
+    title: 'Venture Network Lead',
+    subtitle: 'Ex-Outlier Ventures Inv. Manager',
+    description: 'Direct access to Tier-1 global VC networks and narrative shaping.',
+    descriptionKo: '유럽 최대 Web3 액셀러레이터 출신, 글로벌 VC 네트워크 및 내러티브 설계.',
+    icon: TrendingUp
   },
   {
     number: '03',
-    title: 'Media Gatekeepers',
-    subtitle: 'Editorial Network',
-    description: 'Personal networks with Chief Editors at every major outlet. We ensure your news gets featured, not buried.',
-    descriptionKo: '모든 주요 매체의 편집장들과 개인적 네트워크를 보유. 당신의 뉴스가 묻히지 않고 메인에 걸리도록 합니다.',
-    icon: BookOpen
+    title: 'Korea Market Lead',
+    subtitle: 'Founder of CryptoBridge Korea',
+    description: 'Executed 30+ Korea GTM campaigns with deep local community roots.',
+    descriptionKo: '크립토브릿지 설립자, 30개 이상의 한국 GTM 캠페인 성공적 수행 및 커뮤니티 장악.',
+    icon: Target
   },
   {
     number: '04',
-    title: 'KOL Inner Circle',
-    subtitle: 'Verified Quality',
-    description: 'A private network of 120+ verified influencers who prioritize our projects over generic paid shills.',
-    descriptionKo: '일반적인 유료 광고보다 우리 프로젝트를 우선순위에 두는, 120명 이상의 검증된 인플루언서 프라이빗 네트워크.',
-    icon: Users
+    title: 'Finance & Structuring',
+    subtitle: 'Senior Equity Consultant at Fundshing',
+    description: 'Expertise in financial structuring and token economy optimization.',
+    descriptionKo: '금융 컨설턴트 출신, 토큰 이코노미 구조화 및 자산 운용 최적화.',
+    icon: DollarSign
   }
 ];
 
@@ -143,8 +143,8 @@ const DNACard = ({ data, index }: { data: typeof dnaCards[0]; index: number }) =
   );
 };
 
-// Advantage Card Component
-const AdvantageCard = ({ data, index }: { data: typeof insiderAdvantages[0]; index: number }) => {
+// Squad Card Component
+const SquadCard = ({ data, index }: { data: typeof squadMembers[0]; index: number }) => {
   const Icon = data.icon;
 
   return (
@@ -156,28 +156,30 @@ const AdvantageCard = ({ data, index }: { data: typeof insiderAdvantages[0]; ind
       className="group relative p-6 rounded-lg border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] hover:border-white/20 transition-all duration-300"
     >
       {/* Number Badge */}
-      <div className="absolute top-4 right-4">
-        <span className="text-xs font-mono text-white/20">{data.number}</span>
+      <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 border border-white/10 flex items-center justify-center">
+        <span className="text-xs font-mono text-white/40">{data.number}</span>
       </div>
 
       {/* Icon */}
-      <div className="w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:bg-white/10 transition-colors">
-        <Icon className="w-5 h-5 text-white/50 group-hover:text-white/70 transition-colors" />
+      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-white/10 to-white/5 border border-white/10 flex items-center justify-center mb-4 group-hover:from-white/15 group-hover:to-white/10 transition-all">
+        <Icon className="w-5 h-5 text-white/70" />
       </div>
 
       {/* Title */}
-      <h4 className="text-base font-semibold text-white mb-1">
+      <h4 className="text-lg font-semibold text-white mb-1">
         {data.title}
       </h4>
-      <p className="text-[10px] text-white/30 uppercase tracking-wider mb-3">
+      
+      {/* Subtitle - Background */}
+      <p className="text-sm text-primary/80 font-medium mb-4">
         {data.subtitle}
       </p>
 
       {/* Description */}
-      <p className="text-sm text-white/50 leading-relaxed mb-2">
+      <p className="text-sm text-white/60 leading-relaxed mb-2">
         {data.description}
       </p>
-      <p className="text-xs text-white/25 leading-relaxed">
+      <p className="text-xs text-white/40 leading-relaxed">
         {data.descriptionKo}
       </p>
     </motion.div>
@@ -257,22 +259,31 @@ export const AuthoritySection = () => {
           </div>
         </div>
 
-        {/* Part 2: The Insider Advantage - 2x2 Grid */}
+        {/* Part 2: The Squad - Key Team Members */}
         <div>
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="flex items-center gap-3 mb-8"
+            className="mb-8"
           >
-            <span className="text-xs font-mono text-white/30 uppercase tracking-widest">Part 2</span>
-            <div className="h-px flex-1 bg-white/10" />
-            <span className="text-xs text-white/40">The Insider Advantage — 우리만의 무기</span>
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-xs font-mono text-white/30 uppercase tracking-widest">Part 2</span>
+              <div className="h-px flex-1 bg-white/10" />
+              <span className="text-xs text-white/40">The Squad — 핵심 인력</span>
+            </div>
+            
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
+              "Global Experience, Local Execution."
+            </h3>
+            <p className="text-base text-white/50 max-w-2xl">
+              글로벌 스탠다드와 한국의 실행력을 결합한 팀이 직접 움직입니다.
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {insiderAdvantages.map((item, index) => (
-              <AdvantageCard key={item.title} data={item} index={index} />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {squadMembers.map((item, index) => (
+              <SquadCard key={item.title} data={item} index={index} />
             ))}
           </div>
         </div>
