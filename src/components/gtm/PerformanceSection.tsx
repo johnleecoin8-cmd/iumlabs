@@ -96,13 +96,11 @@ const networkStats = [
 const VideoFeaturedCard = ({
   project,
   index,
-  isVisible,
-  isHero = false
+  isVisible
 }: {
   project: typeof featuredProjects[0];
   index: number;
   isVisible: boolean;
-  isHero?: boolean;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -166,7 +164,7 @@ const VideoFeaturedCard = ({
         onMouseLeave={handleMouseLeave}
         className={`
           group relative overflow-hidden rounded-xl
-          ${isHero ? 'aspect-[21/9] col-span-full' : 'aspect-[16/9]'}
+          aspect-[16/9]
           border ${colors.border}
           transition-all duration-500
           ${isHovered ? colors.glow : ''}
@@ -242,12 +240,12 @@ const VideoFeaturedCard = ({
           <img 
             src={project.logo} 
             alt={project.name}
-            className={`${isHero ? 'h-12' : 'h-8'} w-auto object-contain mb-3 opacity-90 group-hover:opacity-100 transition-opacity`}
+            className="h-8 w-auto object-contain mb-3 opacity-90 group-hover:opacity-100 transition-opacity"
           />
 
           {/* Metric */}
           <div className="flex items-end gap-4 mb-2">
-            <div className={`${isHero ? 'text-5xl md:text-6xl' : 'text-3xl md:text-4xl'} font-bold font-mono ${colors.text}`}
+            <div className={`text-3xl md:text-4xl font-bold font-mono ${colors.text}`}
               style={{ textShadow: `0 0 40px ${project.glowColor}` }}
             >
               {project.metric.prefix || ''}{count}
@@ -533,29 +531,16 @@ export const PerformanceSection = () => {
           </p>
         </motion.div>
 
-        {/* Featured Projects - Hero Layout */}
-        <div className="mb-12">
-          {/* Hero Card (First Project) */}
-          <div className="mb-6">
+        {/* Featured Projects - 3 Column Grid */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12">
+          {featuredProjects.map((project, index) => (
             <VideoFeaturedCard
-              project={featuredProjects[0]}
-              index={0}
+              key={project.slug}
+              project={project}
+              index={index}
               isVisible={isInView}
-              isHero={true}
             />
-          </div>
-
-          {/* Two Column Grid */}
-          <div className="grid md:grid-cols-2 gap-6">
-            {featuredProjects.slice(1).map((project, index) => (
-              <VideoFeaturedCard
-                key={project.slug}
-                project={project}
-                index={index + 1}
-                isVisible={isInView}
-              />
-            ))}
-          </div>
+          ))}
         </div>
 
         {/* More Projects Section */}
