@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import { motion, useInView, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
@@ -2018,144 +2018,176 @@ const TiltCaseCard = ({
     </motion.article>;
 };
 const StrategyInActionSection = () => {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, {
-    once: true,
-    margin: "-10%"
-  });
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-
-  // All case study projects with their data - video takes priority, fallback to image
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  
+  // All case study projects
   const allProjects = [
-    { name: 'MANTRA', category: 'RWA L1', result: '+450% Volume', image: mantraBg, video: '/videos/projects/mantra-hero.mp4', slug: 'mantra' },
-    { name: 'Story Protocol', category: 'IP Protocol', result: '#1 Mindshare', image: storyBg, video: '/videos/projects/story-hero.mp4', slug: 'story-protocol' },
-    { name: 'peaq', category: 'DePIN', result: '85K+ Wallets', image: peaqBg, video: '/videos/projects/peaq-hero.mp4', slug: 'peaq' },
-    { name: 'BNB Chain', category: 'Infrastructure', result: '+340% Volume', image: bnbBg, video: '/videos/projects/bnb-hero.mp4', slug: 'bnb-chain' },
-    { name: 'Bybit', category: 'Exchange', result: 'Top Events', image: bybitBg, video: '/videos/projects/bybit-hero.mp4', slug: 'bybit' },
-    { name: 'KuCoin', category: 'Exchange', result: '50K+ Users', image: kucoinBg, video: '/videos/projects/kucoin-hero.mp4', slug: 'kucoin' },
-    { name: 'Sahara AI', category: 'AI', result: 'KR Launch', image: saharaBg, video: '/videos/projects/sahara-hero.mp4', slug: 'sahara-ai' },
-    { name: 'OpenLedger', category: 'AI / Blockchain', result: 'Community', image: openledgerBg, slug: 'openledger' },
-    { name: 'MegaETH', category: 'Layer 2', result: 'Pre-Launch', image: megaethBg, slug: 'megaeth' },
-    { name: 'Polygon', category: 'Layer 2', result: 'DevRel', image: polygonBg, slug: 'polygon' },
-    { name: 'Tria', category: 'Wallet', result: 'KOL Campaign', image: triaBg, slug: 'tria' },
-    { name: 'Ondo Finance', category: 'RWA', result: 'Institutional', image: ondoBg, slug: 'ondo' },
-    { name: 'SynFutures', category: 'DeFi', result: 'Billboard', image: synfuturesBg, slug: 'synfutures' },
-    { name: 'FOGO', category: 'Gaming', result: 'Festival', image: fogoBg, slug: 'fogo' },
+    { name: 'MANTRA', category: 'RWA L1', result: '+450% Volume', description: 'GTM strategy and community building for the leading RWA Layer 1 blockchain, driving massive trading volume growth.', image: mantraBg, video: '/videos/projects/mantra-hero.mp4', slug: 'mantra' },
+    { name: 'Story Protocol', category: 'IP Protocol', result: '#1 Mindshare', description: 'Achieved top Kaito mindshare ranking through strategic KOL campaigns and community engagement.', image: storyBg, video: '/videos/projects/story-hero.mp4', slug: 'story-protocol' },
+    { name: 'peaq', category: 'DePIN', result: '85K+ Wallets', description: 'Launched DePIN ecosystem in Korea with summit events and influencer partnerships.', image: peaqBg, video: '/videos/projects/peaq-hero.mp4', slug: 'peaq' },
+    { name: 'BNB Chain', category: 'Infrastructure', result: '+340% Volume', description: 'Multi-channel campaign driving significant volume increase across Korean exchanges.', image: bnbBg, video: '/videos/projects/bnb-hero.mp4', slug: 'bnb-chain' },
+    { name: 'Bybit', category: 'Exchange', result: 'Top Events', description: 'Premium offline events and KOL partnerships establishing market presence.', image: bybitBg, video: '/videos/projects/bybit-hero.mp4', slug: 'bybit' },
+    { name: 'KuCoin', category: 'Exchange', result: '50K+ Users', description: 'Comprehensive market entry strategy with community building and PR.', image: kucoinBg, video: '/videos/projects/kucoin-hero.mp4', slug: 'kucoin' },
+    { name: 'Sahara AI', category: 'AI', result: 'KR Launch', description: 'Full Korean market launch including branding, community, and media relations.', image: saharaBg, video: '/videos/projects/sahara-hero.mp4', slug: 'sahara-ai' },
+    { name: 'OpenLedger', category: 'AI / Blockchain', result: 'Community', description: 'AI-powered blockchain community building and ecosystem development.', image: openledgerBg, slug: 'openledger' },
   ];
 
-  const hoveredProjectData = allProjects.find(p => p.slug === hoveredProject);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Calculate active index based on scroll progress
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const newIndex = Math.min(
+      Math.floor(latest * allProjects.length),
+      allProjects.length - 1
+    );
+    setActiveIndex(newIndex);
+  });
+
+  const currentProject = allProjects[activeIndex];
 
   return (
-    <section ref={ref} className="relative px-6 md:px-12 lg:px-20 py-24 bg-background border-t border-border overflow-hidden">
-      {/* Background Image on Hover */}
-      <AnimatePresence>
-        {hoveredProjectData && (
+    <section ref={containerRef} className="relative" style={{ height: `${allProjects.length * 100}vh` }}>
+      {/* Sticky Container */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Background Media */}
+        <AnimatePresence mode="wait">
           <motion.div
-            key={hoveredProject}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.2 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.4 }}
+            key={activeIndex}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="absolute inset-0 z-0"
-            style={{
-              backgroundImage: `url(${hoveredProjectData.image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-              filter: 'blur(40px) saturate(1.2)',
-            }}
-          />
-        )}
-      </AnimatePresence>
-      
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-background/85 z-0" />
+          >
+            {currentProject.video ? (
+              <video
+                key={currentProject.video}
+                src={currentProject.video}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+                poster={currentProject.image}
+              />
+            ) : (
+              <img
+                src={currentProject.image}
+                alt={currentProject.name}
+                className="w-full h-full object-cover"
+              />
+            )}
+          </motion.div>
+        </AnimatePresence>
 
-      <div className="relative z-10 max-w-7xl mx-auto">
-        {/* Header */}
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          className="mb-12 md:mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
-        >
-          <div>
-            <p className="text-primary text-sm tracking-widest uppercase mb-4 font-medium">
-              Case Studies
-            </p>
-            <h2 className="text-3xl md:text-5xl font-medium text-foreground">
-              {allProjects.length}+ Projects Delivered
-            </h2>
-          </div>
-          <Link to="/projects" className="group inline-flex items-center gap-3 text-sm text-muted-foreground hover:text-primary transition-all duration-300">
-            View All
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </motion.div>
+        {/* Dark Gradient Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-transparent to-transparent z-10" />
 
-        {/* Stacked List */}
-        <div className="border-t border-border/30">
-          {allProjects.map((project, i) => (
-            <motion.div
-              key={project.slug}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: i * 0.03, duration: 0.4 }}
-            >
-              <Link
-                to={`/projects/${project.slug}`}
-                onMouseEnter={() => setHoveredProject(project.slug)}
-                onMouseLeave={() => setHoveredProject(null)}
-                className="group block border-b border-border/30 py-5 md:py-6 transition-all duration-300 hover:bg-muted/5 hover:pl-4"
+        {/* Content */}
+        <div className="absolute inset-0 z-20 flex flex-col justify-end pb-16 md:pb-24 lg:pb-32 px-6 md:px-12 lg:px-20">
+          <div className="max-w-7xl mx-auto w-full">
+            {/* Header - Fixed */}
+            <div className="absolute top-8 left-6 md:left-12 lg:left-20 right-6 md:right-12 lg:right-20 flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <span className="text-primary text-sm tracking-widest uppercase font-medium">
+                  Case Studies
+                </span>
+                <span className="text-muted-foreground/60 text-sm">
+                  {String(activeIndex + 1).padStart(2, '0')} / {String(allProjects.length).padStart(2, '0')}
+                </span>
+              </div>
+              <Link 
+                to="/projects" 
+                className="group inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-all duration-300"
               >
-                <div className="flex items-center justify-between gap-4">
-                  {/* Left: Index + Thumbnail + Name */}
-                  <div className="flex items-center gap-4 md:gap-6 lg:gap-8 flex-1 min-w-0">
-                    <span className="text-xs text-muted-foreground/40 font-mono w-6 md:w-8 shrink-0">
-                      {String(i + 1).padStart(2, '0')}
-                    </span>
-                    
-                    {/* Thumbnail - Video or Image */}
-                    <div className="relative w-16 h-10 md:w-24 md:h-14 lg:w-32 lg:h-20 rounded-md overflow-hidden shrink-0 bg-muted/20">
-                      {project.video ? (
-                        <video
-                          src={project.video}
-                          muted
-                          loop
-                          playsInline
-                          autoPlay={hoveredProject === project.slug}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                          poster={project.image}
-                        />
-                      ) : (
-                        <img
-                          src={project.image}
-                          alt={project.name}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                      )}
-                      {/* Overlay gradient */}
-                      <div className="absolute inset-0 bg-gradient-to-r from-background/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
-                    
-                    <h3 className="text-lg md:text-2xl lg:text-3xl font-medium text-foreground group-hover:text-primary transition-colors duration-300 truncate">
-                      {project.name}
-                    </h3>
-                  </div>
-
-                  {/* Right: Category + Result + Arrow */}
-                  <div className="flex items-center gap-3 md:gap-6 lg:gap-8 shrink-0">
-                    <span className="hidden lg:block text-sm text-muted-foreground/60 min-w-[100px]">
-                      {project.category}
-                    </span>
-                    <span className="text-xs md:text-sm text-primary font-medium min-w-[80px] md:min-w-[100px] text-right">
-                      {project.result}
-                    </span>
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 text-muted-foreground/40 group-hover:text-primary group-hover:translate-x-1 transition-all duration-300" />
-                  </div>
-                </div>
+                View All
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
-            </motion.div>
-          ))}
+            </div>
+
+            {/* Project Info */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeIndex}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                className="space-y-6"
+              >
+                <div className="flex items-center gap-4">
+                  <span className="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-medium backdrop-blur-sm">
+                    {currentProject.category}
+                  </span>
+                  <span className="text-primary font-semibold text-sm">
+                    {currentProject.result}
+                  </span>
+                </div>
+
+                <h2 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-bold text-foreground tracking-tight">
+                  {currentProject.name}
+                </h2>
+
+                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
+                  {currentProject.description}
+                </p>
+
+                <Link
+                  to={`/projects/${currentProject.slug}`}
+                  className="group inline-flex items-center gap-3 mt-4 px-6 py-3 bg-primary text-primary-foreground rounded-full hover:bg-primary/90 transition-all duration-300"
+                >
+                  <span className="font-medium">View Case Study</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Progress Dots */}
+            <div className="absolute right-6 md:right-12 lg:right-20 top-1/2 -translate-y-1/2 flex flex-col gap-3">
+              {allProjects.map((project, i) => (
+                <button
+                  key={project.slug}
+                  onClick={() => {
+                    const targetScroll = (i / allProjects.length) * (containerRef.current?.scrollHeight || 0);
+                    window.scrollTo({ top: targetScroll, behavior: 'smooth' });
+                  }}
+                  className="group relative flex items-center gap-3"
+                >
+                  <span className={`hidden md:block text-xs font-medium transition-all duration-300 ${
+                    i === activeIndex ? 'text-primary opacity-100' : 'text-muted-foreground/40 opacity-0 group-hover:opacity-100'
+                  }`}>
+                    {project.name}
+                  </span>
+                  <div className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    i === activeIndex 
+                      ? 'bg-primary scale-150' 
+                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/60'
+                  }`} />
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+          animate={{ opacity: activeIndex === 0 ? 1 : 0 }}
+        >
+          <span className="text-xs text-muted-foreground/60 uppercase tracking-widest">Scroll</span>
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+            className="w-5 h-8 rounded-full border border-muted-foreground/30 flex items-start justify-center p-1"
+          >
+            <div className="w-1 h-2 rounded-full bg-primary" />
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
