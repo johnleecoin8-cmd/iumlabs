@@ -400,243 +400,354 @@ const HeroSection = () => {
 };
 
 // ============================================
-// GIANT 3D NUMBER COMPONENT
+// ANIMATED PROGRESS BAR
 // ============================================
-const Giant3DNumber = ({ isVisible }: { isVisible: boolean }) => {
+const AnimatedProgressBar = ({ 
+  label, 
+  percentage, 
+  value, 
+  delay = 0, 
+  isHighlight = false,
+  isVisible = true 
+}: { 
+  label: string; 
+  percentage: number; 
+  value: string; 
+  delay?: number; 
+  isHighlight?: boolean;
+  isVisible?: boolean;
+}) => {
+  const [width, setWidth] = useState(0);
+  
+  useEffect(() => {
+    if (isVisible) {
+      const timer = setTimeout(() => setWidth(percentage), delay * 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [isVisible, percentage, delay]);
+
   return (
-    <div className="relative flex items-center justify-center py-12 md:py-20">
-      {/* Background glow effects */}
-      <motion.div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none"
-        initial={{ opacity: 0 }}
-        animate={isVisible ? { opacity: 1 } : {}}
-        transition={{ delay: 0.3, duration: 1 }}
-      >
-        {/* Outer glow */}
-        <div 
-          className="absolute w-[400px] h-[400px] md:w-[600px] md:h-[600px] rounded-full"
-          style={{
-            background: 'radial-gradient(circle, hsl(var(--primary) / 0.15) 0%, transparent 60%)',
-            filter: 'blur(60px)',
-          }}
-        />
-        {/* Inner glow */}
-        <motion.div 
-          className="absolute w-[200px] h-[200px] md:w-[300px] md:h-[300px] rounded-full"
-          style={{
-            background: 'radial-gradient(circle, hsl(var(--primary) / 0.3) 0%, transparent 70%)',
-            filter: 'blur(40px)',
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.5, 0.8, 0.5],
-          }}
-          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </motion.div>
-
-      {/* Main number container */}
-      <div className="relative z-10 text-center">
-        {/* "WORLD'S" label */}
-        <motion.p
-          className="text-lg md:text-xl lg:text-2xl tracking-[0.3em] text-muted-foreground font-light mb-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.2, duration: 0.6 }}
-        >
-          WORLD'S
-        </motion.p>
-
-        {/* Giant #2 */}
+    <div className="space-y-2">
+      <div className="flex justify-between items-center">
+        <span className={`text-sm font-medium ${isHighlight ? 'text-primary' : 'text-foreground/80'}`}>
+          {label}
+        </span>
+        <span className={`text-sm font-mono ${isHighlight ? 'text-primary' : 'text-muted-foreground'}`}>
+          {value}
+        </span>
+      </div>
+      <div className="h-2 bg-muted rounded-full overflow-hidden">
         <motion.div
-          className="relative inline-block"
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={isVisible ? { opacity: 1, scale: 1 } : {}}
-          transition={{ delay: 0.4, duration: 0.8, type: "spring", stiffness: 100 }}
-        >
-          {/* Glitch/reflection layers */}
-          <motion.span
-            className="absolute inset-0 text-[clamp(8rem,25vw,20rem)] font-bold text-primary/20 select-none"
-            style={{ 
-              transform: 'translate(-3px, -3px)',
-              filter: 'blur(1px)',
-            }}
-            animate={{
-              x: [0, -2, 2, 0],
-              opacity: [0.2, 0.1, 0.3, 0.2],
-            }}
-            transition={{ duration: 0.4, repeat: Infinity, repeatDelay: 4 }}
-          >
-            #2
-          </motion.span>
-          
-          <motion.span
-            className="absolute inset-0 text-[clamp(8rem,25vw,20rem)] font-bold text-cyan-400/10 select-none"
-            style={{ 
-              transform: 'translate(3px, 3px)',
-              filter: 'blur(1px)',
-            }}
-            animate={{
-              x: [0, 2, -2, 0],
-              opacity: [0.1, 0.05, 0.15, 0.1],
-            }}
-            transition={{ duration: 0.4, repeat: Infinity, repeatDelay: 4, delay: 0.1 }}
-          >
-            #2
-          </motion.span>
-
-          {/* Main number with gradient */}
-          <span 
-            className="relative text-[clamp(8rem,25vw,20rem)] font-bold leading-none"
-            style={{
-              background: 'linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.7) 50%, hsl(var(--primary) / 0.4) 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              textShadow: '0 0 80px hsl(var(--primary) / 0.5)',
-            }}
-          >
-            #2
-          </span>
-
-          {/* Glassmorphism overlay effect */}
-          <motion.div
-            className="absolute inset-0 pointer-events-none"
-            style={{
-              background: 'linear-gradient(135deg, transparent 30%, hsl(var(--primary) / 0.1) 50%, transparent 70%)',
-              borderRadius: '20px',
-            }}
-            animate={{
-              backgroundPosition: ['200% 200%', '-200% -200%'],
-            }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          />
-        </motion.div>
-
-        {/* "LARGEST FIAT TRADING MARKET" label */}
-        <motion.div
-          className="mt-4 md:mt-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isVisible ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
-          <p className="text-xl md:text-2xl lg:text-3xl tracking-[0.2em] text-foreground font-light">
-            LARGEST FIAT
-          </p>
-          <p className="text-xl md:text-2xl lg:text-3xl tracking-[0.2em] text-foreground font-light">
-            TRADING MARKET
-          </p>
-        </motion.div>
+          className={`h-full rounded-full ${isHighlight ? 'bg-primary' : 'bg-foreground/30'}`}
+          initial={{ width: 0 }}
+          animate={{ width: `${width}%` }}
+          transition={{ duration: 1, ease: "easeOut", delay: delay }}
+        />
       </div>
     </div>
   );
 };
 
 // ============================================
-// MARKET INTELLIGENCE - Why Korea? (Pitching Deck Style)
+// KOREA MAP SVG COMPONENT
+// ============================================
+const KoreaMapVisualization = ({ isVisible }: { isVisible: boolean }) => {
+  const [activePoint, setActivePoint] = useState<number | null>(null);
+  
+  const dataPoints = [
+    { id: 0, x: 65, y: 25, city: 'Seoul', value: '#1', label: 'Trading Hub', delay: 0.2 },
+    { id: 1, x: 75, y: 45, city: 'Busan', value: '#2', label: 'Tech Center', delay: 0.4 },
+    { id: 2, x: 45, y: 35, city: 'Incheon', value: '#3', label: 'Finance Hub', delay: 0.6 },
+    { id: 3, x: 55, y: 50, city: 'Daegu', value: '#4', label: 'Growing Market', delay: 0.8 },
+  ];
+
+  return (
+    <div className="relative w-full aspect-[4/5] max-w-md mx-auto">
+      {/* Glow background */}
+      <motion.div
+        className="absolute inset-0 opacity-30"
+        style={{
+          background: 'radial-gradient(ellipse at 60% 40%, hsl(var(--primary) / 0.3) 0%, transparent 60%)',
+        }}
+        animate={{
+          scale: [1, 1.05, 1],
+          opacity: [0.3, 0.4, 0.3],
+        }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Korea Map SVG */}
+      <svg viewBox="0 0 100 100" className="w-full h-full relative z-10">
+        {/* Simplified Korea peninsula shape */}
+        <motion.path
+          d="M55 5 
+             C 70 5, 85 15, 85 30
+             C 85 45, 80 55, 75 65
+             C 70 75, 65 85, 60 90
+             C 55 95, 50 95, 45 90
+             C 40 85, 35 75, 30 65
+             C 25 55, 20 45, 25 35
+             C 30 25, 40 15, 55 5 Z"
+          fill="none"
+          stroke="hsl(var(--primary))"
+          strokeWidth="0.5"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={isVisible ? { pathLength: 1, opacity: 1 } : {}}
+          transition={{ duration: 2, ease: "easeInOut" }}
+        />
+        
+        {/* Gradient fill */}
+        <motion.path
+          d="M55 5 
+             C 70 5, 85 15, 85 30
+             C 85 45, 80 55, 75 65
+             C 70 75, 65 85, 60 90
+             C 55 95, 50 95, 45 90
+             C 40 85, 35 75, 30 65
+             C 25 55, 20 45, 25 35
+             C 30 25, 40 15, 55 5 Z"
+          fill="url(#koreaGradient)"
+          initial={{ opacity: 0 }}
+          animate={isVisible ? { opacity: 0.3 } : {}}
+          transition={{ delay: 1, duration: 1 }}
+        />
+
+        {/* Gradient definition */}
+        <defs>
+          <linearGradient id="koreaGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0.1" />
+          </linearGradient>
+          
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge>
+              <feMergeNode in="coloredBlur"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        </defs>
+
+        {/* Grid lines inside Korea */}
+        {[20, 40, 60, 80].map((y, i) => (
+          <motion.line
+            key={`h-${i}`}
+            x1="25"
+            y1={y}
+            x2="85"
+            y2={y}
+            stroke="hsl(var(--primary) / 0.1)"
+            strokeWidth="0.3"
+            strokeDasharray="2 2"
+            initial={{ opacity: 0 }}
+            animate={isVisible ? { opacity: 1 } : {}}
+            transition={{ delay: 1.5 + i * 0.1 }}
+          />
+        ))}
+
+        {/* Data points */}
+        {dataPoints.map((point) => (
+          <g key={point.id}>
+            {/* Pulse ring */}
+            <motion.circle
+              cx={point.x}
+              cy={point.y}
+              r="4"
+              fill="none"
+              stroke="hsl(var(--primary))"
+              strokeWidth="0.5"
+              initial={{ scale: 0, opacity: 0 }}
+              animate={isVisible ? { 
+                scale: [1, 2, 1],
+                opacity: [0.8, 0, 0.8],
+              } : {}}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                delay: point.delay + 1,
+                ease: "easeOut",
+              }}
+            />
+            
+            {/* Center dot */}
+            <motion.circle
+              cx={point.x}
+              cy={point.y}
+              r="2"
+              fill="hsl(var(--primary))"
+              filter="url(#glow)"
+              initial={{ scale: 0 }}
+              animate={isVisible ? { scale: 1 } : {}}
+              transition={{ delay: point.delay + 1, type: "spring" }}
+              onMouseEnter={() => setActivePoint(point.id)}
+              onMouseLeave={() => setActivePoint(null)}
+              className="cursor-pointer"
+            />
+          </g>
+        ))}
+      </svg>
+
+      {/* Data point tooltips */}
+      {dataPoints.map((point) => (
+        <motion.div
+          key={`tooltip-${point.id}`}
+          className="absolute pointer-events-none"
+          style={{
+            left: `${point.x}%`,
+            top: `${point.y}%`,
+            transform: 'translate(-50%, -150%)',
+          }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={activePoint === point.id || (isVisible && point.id === 0) ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
+          transition={{ duration: 0.2 }}
+        >
+          <div className="bg-background/90 backdrop-blur-sm border border-primary/50 px-3 py-2 text-center">
+            <p className="text-xs font-medium text-primary">{point.city}</p>
+            <p className="text-lg font-bold text-foreground">{point.value}</p>
+            <p className="text-[10px] text-muted-foreground">{point.label}</p>
+          </div>
+        </motion.div>
+      ))}
+
+      {/* Legend */}
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 flex justify-center gap-6"
+        initial={{ opacity: 0, y: 20 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : {}}
+        transition={{ delay: 2 }}
+      >
+        <div className="flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+          <span className="text-xs text-muted-foreground">Trading Hub</span>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+// ============================================
+// MARKET INTELLIGENCE - Why Korea?
 // ============================================
 const MarketIntelligenceSection = () => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-10%" });
-  
-  const stat1 = useCountUp({ end: 30, delay: 1200, isVisible: isInView, duration: 2000 });
-  const stat2 = useCountUp({ end: 0.6, delay: 1400, isVisible: isInView, duration: 2000, decimals: 1 });
+
+  // Fiat Trading Volume Data (CEX 기준 - 2024-2025)
+  const volumeData = [
+    { label: 'USD (United States)', percentage: 100, value: '#1', isHighlight: false },
+    { label: 'KRW (South Korea)', percentage: 85, value: '#2', isHighlight: true },
+    { label: 'EUR (Europe)', percentage: 35, value: '#3', isHighlight: false },
+    { label: 'TRY (Turkey)', percentage: 25, value: '#4', isHighlight: false },
+    { label: 'JPY (Japan)', percentage: 18, value: '#5', isHighlight: false },
+  ];
 
   return (
-    <section ref={ref} className="relative px-6 md:px-12 lg:px-20 py-24 md:py-32 bg-background overflow-hidden">
-      {/* Subtle grid background */}
-      <div 
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `
-            linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
-          `,
-          backgroundSize: '80px 80px',
-        }}
-      />
-
+    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border">
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
-        className="relative max-w-6xl mx-auto"
+        className="max-w-7xl mx-auto"
       >
-        {/* Section label */}
-        <motion.p 
-          className="text-muted-foreground text-sm tracking-widest uppercase mb-8 text-center"
+        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+          01 The Strategic Imperative
+        </p>
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-16">
+          Why Korea?
+        </h2>
+
+        <div className="grid lg:grid-cols-3 gap-12 lg:gap-8 mb-16">
+          {/* Left: Korea Map Visualization */}
+          <div className="lg:col-span-1">
+            <KoreaMapVisualization isVisible={isInView} />
+          </div>
+
+          {/* Middle: Data Visualization */}
+          <div className="space-y-8">
+            <div>
+            <p className="text-xs tracking-widest text-primary font-medium mb-4">
+                GLOBAL FIAT TRADING VOLUME (CEX)
+              </p>
+              <div className="space-y-4">
+                {volumeData.map((item, i) => (
+                  <AnimatedProgressBar
+                    key={item.label}
+                    label={item.label}
+                    percentage={item.percentage}
+                    value={item.value}
+                    delay={i * 0.15}
+                    isHighlight={item.isHighlight}
+                    isVisible={isInView}
+                  />
+                ))}
+              </div>
+            </div>
+            
+            {/* Key Stats */}
+            <div className="grid grid-cols-2 gap-4 pt-4">
+              <div className="p-4 border border-primary/50 bg-primary/5">
+                <p className="text-2xl md:text-3xl font-bold text-primary">30%+</p>
+                <p className="text-xs text-muted-foreground mt-1">Global Altcoin Volume</p>
+              </div>
+              <div className="p-4 border border-border bg-background">
+                <p className="text-2xl md:text-3xl font-medium text-foreground">0.6%</p>
+                <p className="text-xs text-muted-foreground mt-1">World Population</p>
+              </div>
+            </div>
+            
+            {/* Insight callout */}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.6 }}
+              className="p-4 bg-primary/10 border-l-2 border-primary"
+            >
+              <p className="text-sm text-foreground leading-relaxed">
+                <span className="font-semibold">The Density Effect:</span> 0.6% of world population generates 30%+ of global altcoin trading.
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Right: Insights */}
+          <div className="space-y-6">
+            <div className="space-y-2">
+              <p className="text-xs tracking-widest text-primary font-medium">FIAT POWERHOUSE</p>
+              <p className="text-xl font-medium text-foreground">World's #2 Fiat Market</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                KRW consistently ranks as #2 most traded fiat in crypto, often challenging USD. Surpassing EUR and JPY.
+              </p>
+            </div>
+            
+            <div className="space-y-2">
+              <p className="text-xs tracking-widest text-primary font-medium">RETAIL DOMINANCE</p>
+              <p className="text-xl font-medium text-foreground">Global #1 Retail Activity</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Korea leads in retail investor participation. When they believe in a project, they go all in.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-xs tracking-widest text-primary font-medium">LIQUIDITY ACCESS</p>
+              <p className="text-xl font-medium text-foreground">Most Liquid Fiat Pair</p>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                Launch in Korea = plug into world's most liquid fiat pair after USD. Direct access to real buying power.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <motion.blockquote
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
+          transition={{ delay: 0.4 }}
+          className="border-l-2 border-primary pl-6"
         >
-          <span className="inline-flex items-center gap-3">
-            <span className="w-8 h-px bg-primary" />
-            01 The Strategic Imperative
-            <span className="w-8 h-px bg-primary" />
-          </span>
-        </motion.p>
-
-        {/* Giant #2 Display */}
-        <Giant3DNumber isVisible={isInView} />
-
-        {/* Three key stats */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 md:mt-16 max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1, duration: 0.6 }}
-        >
-          {/* Stat 1 */}
-          <motion.div 
-            className="text-center p-6 border border-primary/30 bg-primary/5 backdrop-blur-sm"
-            whileHover={{ scale: 1.02, borderColor: 'hsl(var(--primary))' }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            <p className="text-4xl md:text-5xl font-bold text-primary">{stat1}%+</p>
-            <p className="text-sm text-muted-foreground mt-2 tracking-wide">Global Altcoin Volume</p>
-          </motion.div>
-
-          {/* Stat 2 */}
-          <motion.div 
-            className="text-center p-6 border border-border bg-muted/30 backdrop-blur-sm"
-            whileHover={{ scale: 1.02, borderColor: 'hsl(var(--primary) / 0.5)' }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            <p className="text-4xl md:text-5xl font-medium text-foreground">{stat2}%</p>
-            <p className="text-sm text-muted-foreground mt-2 tracking-wide">World Population</p>
-          </motion.div>
-
-          {/* Stat 3 */}
-          <motion.div 
-            className="text-center p-6 border border-border bg-muted/30 backdrop-blur-sm"
-            whileHover={{ scale: 1.02, borderColor: 'hsl(var(--primary) / 0.5)' }}
-            transition={{ type: "spring", stiffness: 400 }}
-          >
-            <p className="text-4xl md:text-5xl font-medium text-foreground">#1</p>
-            <p className="text-sm text-muted-foreground mt-2 tracking-wide">Retail Activity</p>
-          </motion.div>
-        </motion.div>
-
-        {/* Killer tagline */}
-        <motion.div 
-          className="text-center mt-16 md:mt-20"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1.4, duration: 0.6 }}
-        >
-          <p className="text-lg md:text-xl lg:text-2xl text-foreground leading-relaxed max-w-3xl mx-auto">
-            <span className="text-primary font-medium">0.6%</span> of the world's population.
-            <br />
-            <span className="text-primary font-medium">30%+</span> of global altcoin volume.
+          <p className="text-lg md:text-xl text-foreground italic">
+            "When you launch in Korea, you're plugging into the world's most liquid fiat pair after the Dollar."
           </p>
-          <motion.p 
-            className="text-2xl md:text-3xl lg:text-4xl font-medium text-foreground mt-6"
-            initial={{ opacity: 0 }}
-            animate={isInView ? { opacity: 1 } : {}}
-            transition={{ delay: 1.8, duration: 0.6 }}
-          >
-            That's <span className="text-primary">density</span>. That's <span className="text-primary">Korea</span>.
-          </motion.p>
-        </motion.div>
+          <footer className="mt-2 text-sm text-muted-foreground">
+            — Real buying power, not just hype.
+          </footer>
+        </motion.blockquote>
       </motion.div>
     </section>
   );
