@@ -1207,26 +1207,26 @@ const LLMEngineVisualization = ({
     icon: Zap
   }];
   const outputMetrics = [{
-    label: 'Launch Timing',
-    sublabel: '최적 런칭 시점',
+    label: 'Market Heat Index',
+    sublabel: '최적 진입 타이밍 포착',
     value: liveData.timing,
     color: 'green',
     icon: Target
   }, {
-    label: 'Brand Sentiment',
-    sublabel: '브랜드 호감도 예측',
+    label: 'Sentiment Score',
+    sublabel: '실시간 브랜드 여론 분석',
     value: liveData.channels,
     color: 'primary',
     icon: Users
   }, {
-    label: 'Viral Probability',
-    sublabel: '바이럴 확산 확률',
+    label: 'Buzz Velocity',
+    sublabel: '커뮤니티 확산 속도 측정',
     value: liveData.budget,
     color: 'primary',
     icon: Sparkles
   }, {
-    label: 'Conversion Forecast',
-    sublabel: '유저 전환 예측',
+    label: 'Community Readiness',
+    sublabel: '초기 화력 및 결집도 진단',
     value: liveData.volume,
     color: 'green',
     icon: TrendingUp
@@ -1303,7 +1303,7 @@ const LLMEngineVisualization = ({
             <span className="text-foreground font-medium">"We optimize for Impact."</span> Our proprietary AI synthesizes <span className="text-primary font-medium">social sentiment & on-chain behavior</span> to engineer the perfect market entry.
           </p>
           <p className="text-primary/80 text-xs md:text-sm italic">
-            We optimize for impact. We analyze social sentiment and on-chain behavior to engineer the perfect market entry.
+            "우리는 임팩트를 최적화합니다." 사회적 여론과 온체인 행동 데이터를 분석해 완벽한 진입 전략을 설계합니다.
           </p>
         </div>
 
