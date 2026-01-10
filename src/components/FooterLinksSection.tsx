@@ -30,7 +30,7 @@ const footerLinks = {
     title: "Marketing",
     links: [{
       name: "GTM Strategy",
-      href: "/services/gtm-strategy"
+      href: "/services"
     }, {
       name: "Influencer Marketing",
       href: "/services/influencer"
