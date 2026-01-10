@@ -6,39 +6,39 @@ import { useCountUp } from '@/hooks/useCountUp';
 const rosterMembers = [
   {
     id: '01',
-    role: 'CHIEF EXECUTIVE',
-    title: 'CEO / GTM Director',
+    role: 'GO-TO-MARKET LEAD',
+    title: 'CEO',
     background: 'Ex-KuCoin & Outlier Ventures',
     quote: 'Standardizing Global Excellence.',
-    description: 'Defines the brand hierarchy and market entry strategy that matches Tier-1 global standards.',
-    descriptionKo: '글로벌 탑티어 수준의 브랜드 위계와 시장 진입 전략(GTM)을 총괄 설계합니다.'
+    description: 'Defines the brand hierarchy and market entry strategy that aligns with Tier-1 global standards.',
+    descriptionKo: '글로벌 탑티어 수준의 브랜드 위계와 시장 진입 전략(GTM)을 총괄 설계하여, 프로젝트의 체급을 높입니다.'
   },
   {
     id: '02',
     role: 'STRATEGY LEAD',
-    title: 'Head of Narrative',
-    background: 'Ex-Binance Strategy',
-    quote: 'Crafting the Billion-Dollar Narrative.',
-    description: 'Structuring compelling brand stories that resonate from retail users to institutional partners.',
-    descriptionKo: '리테일 유저부터 기관까지 설득할 수 있는, 강력하고 호소력 짙은 브랜드 내러티브를 만듭니다.'
+    title: 'Head of Strategy',
+    background: 'Ex-Binance Fiat Leads',
+    quote: 'Crafting the Macro-Narrative.',
+    description: 'Structuring compelling brand stories and adoption funnels that resonate from retail users to institutional partners.',
+    descriptionKo: 'Binance 출신의 시각으로, 리테일 유입부터 기관 설득까지 이어지는 거시적인 브랜드 내러티브를 설계합니다.'
   },
   {
     id: '03',
     role: 'OPERATION LEAD',
-    title: 'Head of Experience',
-    background: 'Founder of CryptoBridge',
-    quote: 'Turning Tech into Culture.',
-    description: 'Translating complex Web3 tech into on-ground cultural movements and fandom-driven events.',
-    descriptionKo: '어려운 Web3 기술을 한국 유저들이 열광하는 \'문화\'와 \'오프라인 경험\'으로 번역합니다.'
+    title: 'Head of Community',
+    background: 'Ex-a16z Head of Operation',
+    quote: 'Silicon Valley Standard.',
+    description: 'Translating Web3 tech into cultural movements, powered by global operational rigor.',
+    descriptionKo: '실리콘밸리(a16z) 수준의 오퍼레이션 시스템을 도입하여 \'문화\'와 \'팬덤\'을 구축합니다.'
   },
   {
     id: '04',
     role: 'GROWTH LEAD',
-    title: 'Head of Performance',
-    background: 'Ex-Fundshing Consultant',
-    quote: 'Data-Driven Impact.',
-    description: 'Optimizing marketing ROI through financial-grade data analysis and precision targeting.',
-    descriptionKo: '금융 레벨의 정밀한 데이터 분석을 마케팅에 적용하여, 예산 대비 최고의 효율(ROI)을 뽑아냅니다.'
+    title: 'Head of Research',
+    background: 'Ex-Journalist Korean Media',
+    quote: 'Editorial Intelligence.',
+    description: 'Leveraging deep media insights to craft high-impact content strategies.',
+    descriptionKo: '저널리스트 출신의 통찰력으로 여론을 주도하는 킬러 콘텐츠 전략을 도출합니다.'
   },
 ];
 
