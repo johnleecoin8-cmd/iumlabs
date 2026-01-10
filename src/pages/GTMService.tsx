@@ -434,8 +434,8 @@ const HeroSection = () => {
       ease: "easeInOut"
     }} />
 
-      {/* 2-Column Layout */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center w-full max-w-[1600px] mx-auto">
+      {/* 2-Column Layout - 6:4 ratio */}
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-12 xl:gap-16 items-center w-full max-w-[1600px] mx-auto">
         
         {/* Left Column - Text Content */}
         <div className="relative">
@@ -698,28 +698,28 @@ const HeroSection = () => {
             <div className="absolute bottom-0 left-0 w-12 h-12 md:w-20 md:h-20 border-b border-l border-primary/30" />
           </div>
 
-          {/* Project Selector Bar - 3x2 Grid */}
-          <div className="grid grid-cols-3 mt-3 md:mt-4 border border-border/30">
+          {/* Project Selector Bar - 6x1 Compact */}
+          <div className="flex mt-2 md:mt-3 border border-border/30">
             {showcaseProjects.map((project, index) => (
               <motion.button
                 key={project.slug}
                 onMouseEnter={() => setActiveIndex(index)}
                 onClick={() => setActiveIndex(index)}
-                className={`py-3 md:py-4 px-2 md:px-3 relative transition-all duration-300 border-r border-b border-border/30 last:border-r-0 [&:nth-child(3)]:border-r-0 [&:nth-child(4)]:border-b-0 [&:nth-child(5)]:border-b-0 [&:nth-child(6)]:border-b-0 ${
+                className={`flex-1 py-2 px-1.5 md:px-2 relative transition-all duration-300 border-r border-border/30 last:border-r-0 ${
                   activeIndex === index 
                     ? 'bg-primary/10' 
                     : 'bg-transparent hover:bg-muted/50'
                 }`}
               >
                 {/* Index number */}
-                <span className={`text-[10px] md:text-xs font-mono mb-0.5 md:mb-1 block transition-colors ${
+                <span className={`text-[8px] md:text-[10px] font-mono block transition-colors ${
                   activeIndex === index ? 'text-primary' : 'text-muted-foreground'
                 }`}>
                   0{index + 1}
                 </span>
                 
                 {/* Project name */}
-                <span className={`text-xs md:text-sm font-medium block truncate transition-colors ${
+                <span className={`text-[10px] md:text-xs font-medium block truncate transition-colors ${
                   activeIndex === index ? 'text-foreground' : 'text-muted-foreground'
                 }`}>
                   {project.name}
