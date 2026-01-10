@@ -93,11 +93,12 @@ const ContactFormSection = ({
       <div className="relative z-10 border-t border-border/50">
         {/* Section Header */}
         <div className="bg-card/50 backdrop-blur-sm flex items-center justify-between p-4 md:px-10 md:py-5 border-b border-border/30">
-          <div className="flex items-center gap-4 md:gap-6">
-            <span className="text-[10px] md:text-xs text-primary/60 font-mono tracking-widest w-6">{sectionNumber}</span>
-            <h2 className="text-lg md:text-xl font-medium text-foreground">Let's Build Together</h2>
+          <div className="flex items-center gap-4 md:gap-8">
+            <span className="text-xs md:text-sm text-muted-foreground font-mono tracking-widest">{sectionNumber}</span>
+            <span className="hidden sm:block w-12 md:w-20 h-px bg-border" />
+            <h2 className="text-sm md:text-base font-medium text-muted-foreground tracking-widest uppercase">Contact</h2>
           </div>
-          <span className="text-xs text-muted-foreground tracking-wider hidden sm:block px-4 py-1.5 border border-primary/30 rounded-full bg-primary/5">Ready to Scale</span>
+          <span className="text-xs text-muted-foreground tracking-wider hidden sm:block px-4 py-1.5 border border-border rounded-full">Get Started</span>
         </div>
         
         {/* Two Column Layout */}
