@@ -621,17 +621,17 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Right Column - Interactive Project Showcase */}
+        {/* Right Column - Interactive Project Showcase (Now visible on all screens) */}
         <motion.div 
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="relative hidden lg:block"
+          className="relative"
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
           {/* Media Container */}
-          <div className="relative aspect-[4/3] overflow-hidden border border-border/30">
+          <div className="relative aspect-[4/3] md:aspect-[16/10] lg:aspect-[4/3] overflow-hidden border border-border/30">
             {/* Background Video/Image with Transition */}
             <AnimatePresence mode="wait">
               <motion.div
@@ -667,7 +667,7 @@ const HeroSection = () => {
             </AnimatePresence>
 
             {/* Content overlay */}
-            <div className="absolute inset-0 flex flex-col justify-end p-6">
+            <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-6">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}
@@ -677,49 +677,49 @@ const HeroSection = () => {
                   transition={{ duration: 0.5 }}
                 >
                   {/* Category */}
-                  <span className="text-[10px] text-primary tracking-widest uppercase mb-3 block">
+                  <span className="text-[10px] text-primary tracking-widest uppercase mb-2 md:mb-3 block">
                     {showcaseProjects[activeIndex].category}
                   </span>
                   
                   {/* Project name */}
                   <Link 
                     to={`/projects/${showcaseProjects[activeIndex].slug}`}
-                    className="inline-flex items-center gap-2 text-2xl text-foreground font-medium hover:text-primary transition-colors group"
+                    className="inline-flex items-center gap-2 text-xl md:text-2xl text-foreground font-medium hover:text-primary transition-colors group"
                   >
                     {showcaseProjects[activeIndex].name}
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </motion.div>
               </AnimatePresence>
             </div>
 
             {/* Corner accent */}
-            <div className="absolute top-0 right-0 w-20 h-20 border-t border-r border-primary/30" />
-            <div className="absolute bottom-0 left-0 w-20 h-20 border-b border-l border-primary/30" />
+            <div className="absolute top-0 right-0 w-12 h-12 md:w-20 md:h-20 border-t border-r border-primary/30" />
+            <div className="absolute bottom-0 left-0 w-12 h-12 md:w-20 md:h-20 border-b border-l border-primary/30" />
           </div>
 
-          {/* Project Selector Bar */}
-          <div className="flex mt-4 border border-border/30">
+          {/* Project Selector Bar - 3x2 Grid */}
+          <div className="grid grid-cols-3 mt-3 md:mt-4 border border-border/30">
             {showcaseProjects.map((project, index) => (
               <motion.button
                 key={project.slug}
                 onMouseEnter={() => setActiveIndex(index)}
                 onClick={() => setActiveIndex(index)}
-                className={`flex-1 py-4 px-3 relative transition-all duration-300 ${
+                className={`py-3 md:py-4 px-2 md:px-3 relative transition-all duration-300 border-r border-b border-border/30 last:border-r-0 [&:nth-child(3)]:border-r-0 [&:nth-child(4)]:border-b-0 [&:nth-child(5)]:border-b-0 [&:nth-child(6)]:border-b-0 ${
                   activeIndex === index 
                     ? 'bg-primary/10' 
                     : 'bg-transparent hover:bg-muted/50'
                 }`}
               >
                 {/* Index number */}
-                <span className={`text-xs font-mono mb-1 block transition-colors ${
+                <span className={`text-[10px] md:text-xs font-mono mb-0.5 md:mb-1 block transition-colors ${
                   activeIndex === index ? 'text-primary' : 'text-muted-foreground'
                 }`}>
                   0{index + 1}
                 </span>
                 
                 {/* Project name */}
-                <span className={`text-sm font-medium block truncate transition-colors ${
+                <span className={`text-xs md:text-sm font-medium block truncate transition-colors ${
                   activeIndex === index ? 'text-foreground' : 'text-muted-foreground'
                 }`}>
                   {project.name}
@@ -742,14 +742,14 @@ const HeroSection = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
-            className="mt-4 text-right"
+            className="mt-3 md:mt-4 text-right"
           >
             <Link 
               to="/projects" 
-              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
+              className="inline-flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors group"
             >
               View all projects
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
           </motion.div>
         </motion.div>
