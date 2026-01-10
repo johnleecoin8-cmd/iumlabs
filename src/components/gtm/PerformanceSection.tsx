@@ -611,31 +611,6 @@ export const PerformanceSection = () => {
             </div>
           </div>
         </div>
-
-        {/* Network Stats */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.6 }}
-        >
-          <div className="flex items-center gap-3 mb-6">
-            <span className="text-xs font-mono text-muted-foreground uppercase tracking-widest">
-              Network Statistics
-            </span>
-          </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-            {networkStats.map((stat, index) => (
-              <StatCard
-                key={stat.label}
-                stat={stat}
-                index={index}
-                isVisible={isInView}
-              />
-            ))}
-          </div>
-
-        </motion.div>
       </div>
     </section>
   );
