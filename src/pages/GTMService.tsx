@@ -337,7 +337,7 @@ const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
 
-  // Showcase projects data
+  // Showcase projects data with video support
   const showcaseProjects = [
     { 
       name: 'Polygon', 
@@ -345,6 +345,7 @@ const HeroSection = () => {
       category: 'Infrastructure',
       description: 'Ecosystem Bootstrapping',
       image: polygonBg,
+      video: null, // No video available
       slug: 'polygon'
     },
     { 
@@ -353,6 +354,7 @@ const HeroSection = () => {
       category: 'Exchange',
       description: 'Volume Growth',
       image: bnbBg,
+      video: '/videos/projects/bnb-hero.mp4',
       slug: 'bnb-chain'
     },
     { 
@@ -361,6 +363,7 @@ const HeroSection = () => {
       category: 'IP Platform',
       description: 'Creators Onboarded',
       image: storyBg,
+      video: '/videos/projects/story-hero.mp4',
       slug: 'story-protocol'
     },
     { 
@@ -369,6 +372,7 @@ const HeroSection = () => {
       category: 'Exchange',
       description: 'Traffic Ranking',
       image: bybitBg,
+      video: '/videos/projects/bybit-hero.mp4',
       slug: 'bybit'
     }
   ];
@@ -610,7 +614,7 @@ const HeroSection = () => {
         >
           {/* Media Container */}
           <div className="relative aspect-[4/3] overflow-hidden border border-border/30">
-            {/* Background Image with Transition */}
+            {/* Background Video/Image with Transition */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
@@ -620,11 +624,24 @@ const HeroSection = () => {
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 className="absolute inset-0"
               >
-                <img 
-                  src={showcaseProjects[activeIndex].image} 
-                  alt={showcaseProjects[activeIndex].name}
-                  className="w-full h-full object-cover"
-                />
+                {/* Video if available, otherwise image */}
+                {showcaseProjects[activeIndex].video ? (
+                  <video
+                    key={showcaseProjects[activeIndex].video}
+                    src={showcaseProjects[activeIndex].video}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <img 
+                    src={showcaseProjects[activeIndex].image} 
+                    alt={showcaseProjects[activeIndex].name}
+                    className="w-full h-full object-cover"
+                  />
+                )}
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-background/40 to-transparent" />
