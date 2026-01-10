@@ -150,35 +150,35 @@ const moreProjects = [{
 }];
 const frameworkStages = [{
   number: '01',
-  title: 'DIAGNOSTIC',
-  subtitle: 'Strategy',
-  items: ['Competitor SOV & TVL Analysis', 'Narrative Design for KR Market', 'Tokenomics Advisory for KRW Listing'],
-  quote: '"We don\'t guess. We diagnose the market gap using proprietary data intelligence."',
-  descKr: '경쟁사 분석, 한국 맞춤 내러티브 설계, 원화 상장 기준 토크노믹스 자문',
+  title: 'INTELLIGENCE',
+  subtitle: 'Data-Driven Strategy',
+  items: ['Competitor SOV Benchmarking', 'Narrative Design for Korean Fit', 'Market Gap Analysis'],
+  quote: '"We analyze the market gap using proprietary data intelligence."',
+  descKr: '독점 데이터 인텔리전스로 시장 기회를 분석합니다.',
   icon: Search
 }, {
   number: '02',
-  title: 'SYNCHRONIZE',
-  subtitle: 'Cultural Fit',
-  items: ['Naver Blog & Kakao UX Optimization', '24/7 Community Infrastructure', 'Brand Re-engineering for Korea'],
-  quote: '"Translation is not enough. We rebuild your presence to fit the Hangul ecosystem."',
-  descKr: '네이버/카카오 최적화, 24시간 커뮤니티 운영, 한국형 브랜딩',
+  title: 'LOCALIZATION',
+  subtitle: 'Cultural Connection',
+  items: ['Naver & Kakao Optimization', '24/7 Community Infrastructure', 'Brand Positioning'],
+  quote: '"We rebuild your presence to resonate with the local ecosystem."',
+  descKr: '로컬 생태계와 공명하도록 프레즌스를 재구축합니다.',
   icon: Building
 }, {
   number: '03',
-  title: 'ORCHESTRATE',
-  subtitle: 'Launch',
-  items: ['Tier-1 Media Blitz (BlockMedia, CoinNess)', '100+ Verified KOL Inner Circle', 'Private VCs & Builders Events'],
-  quote: '"Maximum noise in minimum time. We coordinate all channels to fire simultaneously."',
-  descKr: '유력 매체 커버리지, 검증된 KOL 100+ 네트워크, 프라이빗 VC/빌더 이벤트',
+  title: 'ACTIVATION',
+  subtitle: 'Maximum Impact',
+  items: ['Tier-1 Media (BlockMedia, CoinNess)', 'Verified KOL Network', 'Strategic Event Partnerships'],
+  quote: '"We coordinate all channels to fire simultaneously."',
+  descKr: '모든 채널을 동시에 발화시킵니다.',
   icon: Zap
 }, {
   number: '04',
-  title: 'SUSTAIN',
-  subtitle: 'Growth & Retention',
-  items: ['User Acquisition → Wallet Install', 'Exchange Liquidity & MM Support', 'Hackathons & Ecosystem Grants'],
-  quote: '"Turning initial hype into sustainable on-chain metrics."',
-  descKr: '온체인 사용자 전환, 거래소 유동성 지원, 해커톤/그랜트 프로그램',
+  title: 'GROWTH',
+  subtitle: 'Sustainable Metrics',
+  items: ['Wallet Installs & DApp Usage', 'Exchange Liquidity Support', 'Developer Outreach & Grants'],
+  quote: '"Turning initial hype into on-chain results."',
+  descKr: '초기 바이럴을 온체인 성과로 전환합니다.',
   icon: TrendingUp
 }];
 
@@ -402,7 +402,7 @@ const HeroSection = () => {
             delay: 0.2,
             ease: [0.33, 1, 0.68, 1]
           }}>
-              <GlitchText className="text-primary">"The Walled Garden"</GlitchText>
+              <GlitchText className="text-primary">"The Gateway to Korea"</GlitchText>
             </motion.span>
           </span>
           <span className="block overflow-hidden">
@@ -415,7 +415,7 @@ const HeroSection = () => {
             delay: 0.35,
             ease: [0.33, 1, 0.68, 1]
           }}>
-              Cracking the Code of Korea Market.
+              Your Strategic Bridge to the Korean Ecosystem.
             </motion.span>
           </span>
         </motion.h1>
@@ -430,7 +430,7 @@ const HeroSection = () => {
         duration: 0.6,
         delay: 0.5
       }} className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mb-4">
-          Korea is the most attractive yet difficult market to penetrate. We provide the precise key to unlock the 'Walled Garden'.
+          Korea is the most attractive yet difficult market. We are the 'ium' (connector) that bridges your project to success.
         </motion.p>
         
         <motion.p initial={{
@@ -443,7 +443,7 @@ const HeroSection = () => {
         duration: 0.6,
         delay: 0.6
       }} className="text-sm md:text-base text-primary/80 italic max-w-2xl mb-10 md:mb-16">
-          가장 매력적이지만 가장 진입하기 어려운 시장, 한국. 우리는 '닫힌 정원'을 여는 정밀한 키를 제공합니다.
+          가장 매력적이지만 진입하기 어려운 시장, 한국. 우리는 당신의 성공을 잇는(ium) 전략적 교량입니다.
         </motion.p>
 
         {/* Stats with enhanced styling - Real Data */}
