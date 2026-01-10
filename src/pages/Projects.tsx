@@ -590,8 +590,8 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
 
 const Projects = () => {
   usePageMeta(
-    "Case Studies",
-    "View our portfolio of successful Korean Web3 marketing campaigns. 18+ global projects launched in Korea including Polygon, Ondo, and Story Protocol.",
+    "Crypto Marketing Case Studies | ium Labs",
+    "View our portfolio of successful Korean crypto and Web3 marketing campaigns. 18+ global blockchain projects launched in Korea including Polygon, Ondo, and Story Protocol.",
     "/projects"
   );
   const [activeCategory, setActiveCategory] = useState("All");
