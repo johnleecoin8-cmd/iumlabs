@@ -73,20 +73,6 @@ const SelectedWorkShowcase = () => {
       result: "Market Entry",
       media: openledgerHero,
       slug: "openledger"
-    },
-    {
-      name: "Polygon",
-      category: "L2 Scaling",
-      result: "Ecosystem Growth",
-      media: peaqBg,
-      slug: "polygon"
-    },
-    {
-      name: "Tria",
-      category: "Wallet Infra",
-      result: "Korea Launch",
-      media: saharaAiBg,
-      slug: "tria"
     }
   ];
 
