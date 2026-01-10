@@ -280,7 +280,7 @@ const ProjectCard = ({
     <Link to={`/projects/${project.slug}`} className="block flex-shrink-0">
       <div
         className={`
-          group relative p-6 w-[320px] h-[280px]
+          group relative p-4 md:p-6 w-[260px] md:w-[320px] h-[240px] md:h-[280px]
           border ${colors.border} rounded-xl
           bg-background/80 backdrop-blur-sm
           transition-all duration-500
@@ -310,41 +310,41 @@ const ProjectCard = ({
         {/* Content wrapper */}
         <div className="relative z-10">
         {/* Header: Logo + Live Indicator */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mb-3 md:mb-4">
           <img 
             src={project.logo} 
             alt={project.name}
-            className="h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+            className="h-6 md:h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
           />
-          <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${colors.indicator} ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
-            <span className={`text-[10px] font-mono uppercase tracking-wider ${colors.text}`}>
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <div className={`w-1.5 md:w-2 h-1.5 md:h-2 rounded-full ${colors.indicator} ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
+            <span className={`text-[9px] md:text-[10px] font-mono uppercase tracking-wider ${colors.text}`}>
               LIVE
             </span>
           </div>
         </div>
 
         {/* Category Badge */}
-        <div className="flex items-center gap-2 mb-4">
-          <span className={`px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider rounded ${colors.bg} ${colors.text}`}>
+        <div className="flex items-center gap-2 mb-3 md:mb-4">
+          <span className={`px-1.5 md:px-2 py-0.5 text-[9px] md:text-[10px] font-mono uppercase tracking-wider rounded ${colors.bg} ${colors.text}`}>
             {project.category}
           </span>
         </div>
 
         {/* Main Metric */}
-        <div className="mb-4">
-          <div className={`text-4xl font-bold font-mono ${colors.text}`}>
+        <div className="mb-3 md:mb-4">
+          <div className={`text-3xl md:text-4xl font-bold font-mono ${colors.text}`}>
             {project.metric.prefix || ''}{project.metric.value}{project.metric.suffix}
           </div>
-          <div className="text-sm text-muted-foreground font-mono uppercase tracking-wider">
+          <div className="text-xs md:text-sm text-muted-foreground font-mono uppercase tracking-wider">
             {project.metric.label}
           </div>
         </div>
 
         {/* Strategy Label */}
-        <div className="mb-4">
-          <div className="text-xs text-muted-foreground mb-1">STRATEGY</div>
-          <div className="text-sm text-foreground font-medium">
+        <div className="mb-3 md:mb-4">
+          <div className="text-[10px] md:text-xs text-muted-foreground mb-1">STRATEGY</div>
+          <div className="text-xs md:text-sm text-foreground font-medium">
             {project.strategy}
           </div>
         </div>
@@ -568,36 +568,33 @@ export const PerformanceSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-12"
+          className="mb-8 md:mb-12"
         >
-          <div className="flex items-center gap-3 mb-4">
+          <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4">
             <span className="text-primary font-mono text-sm">03</span>
-            <div className="w-12 h-px bg-primary/50" />
+            <div className="w-8 md:w-12 h-px bg-primary/50" />
             <span className="text-muted-foreground font-mono text-xs uppercase tracking-widest">
               Portfolio
             </span>
             <div className="flex items-center gap-2 ml-auto">
               <div className={`w-2 h-2 rounded-full bg-green-500 ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
-              <span className="text-xs font-mono text-green-500">LIVE NETWORK</span>
+              <span className="text-xs font-mono text-green-500">LIVE</span>
             </div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3 md:mb-4">
             The Portfolio
           </h2>
-          <p className="text-muted-foreground max-w-2xl">
+          <p className="text-muted-foreground text-sm md:text-base max-w-2xl">
             Data doesn't lie. Our track record speaks for itself.
-            <span className="text-foreground/60 block text-sm mt-1">
-              데이터는 거짓말하지 않습니다. 우리의 실적이 증명합니다.
-            </span>
           </p>
         </motion.div>
 
         {/* 4-Row Alternating Marquee */}
-        <div className="mb-12 -mx-6 md:-mx-12 lg:-mx-20 space-y-2">
+        <div className="mb-8 md:mb-12 -mx-4 md:-mx-8 lg:-mx-12 space-y-1 md:space-y-2">
           {/* Gradient masks for entire section */}
           <div className="relative">
-            <div className="absolute left-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-24 md:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 lg:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 lg:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
             
             <div className="space-y-2">
               {projectRows.map((rowProjects, index) => (

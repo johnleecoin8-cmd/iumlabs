@@ -360,7 +360,7 @@ const HeroSection = () => {
       }} transition={{
         duration: 0.8,
         delay: 0.1
-      }} className="text-[clamp(2.5rem,8vw,6rem)] font-medium leading-[1.02] tracking-tight text-foreground mb-8">
+      }} className="text-[clamp(2rem,7vw,5rem)] font-medium leading-[1.05] tracking-tight text-foreground mb-6">
           <span className="block overflow-hidden">
             <motion.span className="block" initial={{
             y: '100%'
@@ -410,7 +410,7 @@ const HeroSection = () => {
       }} transition={{
         duration: 0.6,
         delay: 0.5
-      }} className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-16">
+      }} className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mb-10 md:mb-16">
           We engineer market dominance in Korea through data-driven creativity.
         </motion.p>
 
@@ -424,11 +424,11 @@ const HeroSection = () => {
       }} transition={{
         duration: 0.6,
         delay: 0.7
-      }} className="flex flex-wrap items-center gap-8 md:gap-12">
+      }} className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-6 md:gap-10">
           <AnimatedStat value={1} prefix="#" suffix="" label="Trend Setter in Asia" delay={0.8} isVisible={isInView} />
-          <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
+          <div className="hidden sm:block w-px h-12 md:h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
           <AnimatedStat value={95} suffix="%" label="Active Engagement" delay={1.0} isVisible={isInView} />
-          <div className="w-px h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
+          <div className="hidden sm:block w-px h-12 md:h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
           <AnimatedStat value={3} suffix="x" label="Viral Spread Rate" delay={1.2} isVisible={isInView} />
         </motion.div>
 
@@ -767,15 +767,15 @@ const MarketIntelligenceSection = () => {
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
           01 The Strategic Imperative
         </p>
-        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-2">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-foreground mb-2">
           Why Korea?
         </h2>
-        <p className="text-muted-foreground text-lg mb-16">
+        <p className="text-muted-foreground text-base md:text-lg mb-10 md:mb-16">
           Korea moves fast. Users are passionate.
         </p>
 
         {/* Module A: The Market Logic - 3 Column */}
-        <div className="grid md:grid-cols-3 gap-8 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-16">
           {marketLogic.map((item, i) => <motion.div key={item.number} initial={{
           opacity: 0,
           y: 30
@@ -784,17 +784,17 @@ const MarketIntelligenceSection = () => {
           y: 0
         } : {}} transition={{
           delay: i * 0.15
-        }} className="relative p-6 border border-border bg-background hover:border-primary/30 transition-colors group">
-              <span className="absolute -top-3 left-6 px-2 py-0.5 bg-muted text-xs font-mono text-muted-foreground">
+        }} className="relative p-4 md:p-6 border border-border bg-background hover:border-primary/30 transition-colors group">
+              <span className="absolute -top-3 left-4 md:left-6 px-2 py-0.5 bg-muted text-xs font-mono text-muted-foreground">
                 {item.number}
               </span>
               <p className="text-xs tracking-widest text-primary font-medium mb-2 mt-2">
                 {item.subtitle}
               </p>
-              <h3 className="text-xl font-medium text-foreground mb-3">
+              <h3 className="text-lg md:text-xl font-medium text-foreground mb-2 md:mb-3">
                 {item.title}
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                 {item.description}
               </p>
             </motion.div>)}
@@ -1238,7 +1238,7 @@ const LLMEngineVisualization = ({
     y: 0
   } : {}} transition={{
     duration: 0.8
-  }} className="mb-20 p-6 md:p-10 border border-primary/30 bg-gradient-to-b from-primary/5 via-background to-background relative overflow-hidden">
+  }} className="mb-12 md:mb-20 p-4 md:p-6 lg:p-10 border border-primary/30 bg-gradient-to-b from-primary/5 via-background to-background relative overflow-hidden">
       {/* Animated background patterns */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
       backgroundImage: `
@@ -1295,19 +1295,19 @@ const LLMEngineVisualization = ({
             </motion.div>
             <span className="text-xs font-mono text-primary tracking-wider">THE IUM ALGORITHM</span>
           </motion.div>
-          <h3 className="text-2xl md:text-3xl font-medium text-foreground mb-3">
+          <h3 className="text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-3">
             The Intelligence Engine
           </h3>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-sm mb-2">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-xs md:text-sm mb-2">
             <span className="text-foreground font-medium">"We optimize for Impact."</span> Our proprietary AI synthesizes <span className="text-primary font-medium">social sentiment & on-chain behavior</span> to engineer the perfect market entry.
           </p>
-          <p className="text-primary/80 text-sm italic">
+          <p className="text-primary/80 text-xs md:text-sm italic">
             We optimize for impact. We analyze social sentiment and on-chain behavior to engineer the perfect market entry.
           </p>
         </div>
 
         {/* Pipeline stages with active indicator */}
-        <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-12">
+        <div className="flex flex-wrap justify-center gap-2 mb-8 md:mb-12">
           {pipelineStages.map((stage, i) => <motion.div key={stage.label} initial={{
           opacity: 0,
           scale: 0.8
@@ -1349,7 +1349,7 @@ const LLMEngineVisualization = ({
         </div>
 
         {/* Main visualization grid - 5 columns: Sources, Connector, Core, Connector, Output */}
-        <div className="grid lg:grid-cols-[1fr_auto_auto_auto_1fr] gap-4 lg:gap-0 items-center relative">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_auto_auto_1fr] gap-6 lg:gap-0 items-center relative">
 
           {/* Data Sources */}
           <div className="space-y-4 relative z-10">
