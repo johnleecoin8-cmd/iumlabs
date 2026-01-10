@@ -447,6 +447,7 @@ const HeroSection = () => {
         </motion.p>
 
         {/* Stats with enhanced styling - Real Data */}
+        {/* Stats with enhanced styling - Market Power Data */}
         <motion.div initial={{
         opacity: 0,
         y: 20
@@ -457,11 +458,59 @@ const HeroSection = () => {
         duration: 0.6,
         delay: 0.7
       }} className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-6 md:gap-10">
-          <AnimatedStat value={2} prefix="$" suffix="M" label="TVL in 30 Days (Polygon)" delay={0.8} isVisible={isInView} />
+          <div className="text-center group">
+            <motion.p className="text-4xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              opacity: 0,
+              scale: 0.5
+            }} animate={{
+              opacity: 1,
+              scale: 1
+            }} transition={{
+              delay: 0.8,
+              duration: 0.5,
+              type: "spring"
+            }}>
+              #2
+            </motion.p>
+            <p className="text-xs text-muted-foreground mt-2 tracking-wider uppercase">Global Fiat Volume</p>
+            <p className="text-[10px] text-primary/70 mt-1">세계 2위 거래 규모</p>
+          </div>
           <div className="hidden sm:block w-px h-12 md:h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <AnimatedStat value={340} prefix="+" suffix="%" label="Volume Growth (BNB)" delay={1.0} isVisible={isInView} />
+          <div className="text-center group">
+            <motion.p className="text-4xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              opacity: 0,
+              scale: 0.5
+            }} animate={{
+              opacity: 1,
+              scale: 1
+            }} transition={{
+              delay: 1.0,
+              duration: 0.5,
+              type: "spring"
+            }}>
+              4x
+            </motion.p>
+            <p className="text-xs text-muted-foreground mt-2 tracking-wider uppercase">Higher Velocity</p>
+            <p className="text-[10px] text-primary/70 mt-1">4배 높은 자산 회전율</p>
+          </div>
           <div className="hidden sm:block w-px h-12 md:h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <AnimatedStat value={100} suffix="%" label="Localization Success" delay={1.2} isVisible={isInView} />
+          <div className="text-center group">
+            <motion.p className="text-4xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              opacity: 0,
+              scale: 0.5
+            }} animate={{
+              opacity: 1,
+              scale: 1
+            }} transition={{
+              delay: 1.2,
+              duration: 0.5,
+              type: "spring"
+            }}>
+              100%
+            </motion.p>
+            <p className="text-xs text-muted-foreground mt-2 tracking-wider uppercase">Retail Driven</p>
+            <p className="text-[10px] text-primary/70 mt-1">리테일 주도 시장</p>
+          </div>
         </motion.div>
 
         {/* Scroll indicator */}
