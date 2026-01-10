@@ -2497,9 +2497,22 @@ const CTASection = () => {
 // MAIN COMPONENT
 // ============================================
 const GTMService = () => {
-  usePageMeta("Korea Web3 Marketing Services | ium Labs", "Full-stack Korea GTM services for Web3 projects. Strategic market entry, KOL activation, community building, PR, events and more. 30+ projects. $1.5B+ volume facilitated.");
+  usePageMeta({
+    title: "Korea Web3 GTM Strategy & Marketing Services",
+    description: "Full-stack Korea GTM services for Web3 projects. Strategic market entry, KOL activation, community building, PR, events and more. 30+ projects. $1.5B+ volume facilitated.",
+    path: "/services",
+    image: "/og-image-new.png",
+    suffix: "ium Labs"
+  });
   return <>
-      <ServiceSchema name="Korea Web3 Marketing Services" description="Full-stack go-to-market services for Web3 projects entering the Korean market. Data-driven 4-stage framework." url="/services" provider="Ium Labs" areaServed="South Korea" />
+      <ServiceSchema 
+        name="Korea Web3 GTM Strategy & Marketing Services" 
+        description="Full-stack go-to-market services for Web3 projects entering the Korean market. Data-driven 4-stage framework covering intelligence, localization, activation, and growth." 
+        url="/services" 
+        provider="ium Labs" 
+        areaServed="South Korea"
+        serviceType={["Web3 Marketing", "GTM Strategy", "KOL Marketing", "Community Building", "PR & Media"]}
+      />
       <Navbar />
       <main className="bg-background">
         <HeroSection />
