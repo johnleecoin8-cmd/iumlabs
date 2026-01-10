@@ -33,7 +33,7 @@ import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import FloatingContactButton from "@/components/FloatingContactButton";
-import { usePageTitle } from "@/hooks/usePageTitle";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { MessageSquare, FileText, Rocket, TrendingUp, Check, ArrowRight, ArrowDown } from "lucide-react";
 const processPhases = [{
@@ -223,7 +223,13 @@ const ProcessBillboardOverlay = () => {
     </div>;
 };
 const Index = () => {
-  usePageTitle("Korean Web3 GTM & Research Agency");
+  usePageMeta({
+    title: "Korean Web3 GTM & Research Agency",
+    description: "ium Labs is Korea's leading Web3 marketing agency specializing in crypto project launches. GTM strategy, KOL network, influencer marketing, and deep research for global blockchain and crypto projects entering Korea.",
+    path: "/",
+    image: "/og-image-new.png",
+    suffix: "ium Labs"
+  });
   return <div className="min-h-screen bg-surface-base">
       <Navbar />
       
