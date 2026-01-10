@@ -417,7 +417,7 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, [isHovering, showcaseProjects.length]);
 
-  return <section ref={ref} className="relative min-h-[90vh] flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 pt-28 pb-16 bg-background overflow-hidden w-full">
+  return <section ref={ref} className="relative min-h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 py-20 md:py-24 bg-background overflow-hidden w-full">
       {/* Floating graphics */}
       <FloatingGraphics />
       
