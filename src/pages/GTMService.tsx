@@ -7,6 +7,9 @@ import PerformanceSection from '@/components/gtm/PerformanceSection';
 import AuthoritySection from '@/components/gtm/AuthoritySection';
 import MobileCTAButton from '@/components/gtm/MobileCTAButton';
 import ServiceSchema from '@/components/ServiceSchema';
+import ContactFormSection from '@/components/ContactFormSection';
+import CTABannerSection from '@/components/CTABannerSection';
+import FooterLinksSection from '@/components/FooterLinksSection';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy, Cpu, Database, Activity, LineChart, Target, Sparkles } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
@@ -2506,8 +2509,18 @@ const GTMService = () => {
         <PerformanceSection />
         <AuthoritySection />
         <ClientLogosMarquee />
-        <CTASection />
       </main>
+      
+      {/* Contact Section */}
+      <ContactFormSection sectionNumber="05" />
+      
+      {/* CTA Banner */}
+      <CTABannerSection />
+      
+      {/* Footer Links */}
+      <FooterLinksSection />
+      
+      {/* Footer Brand */}
       <Footer />
       <MobileCTAButton />
     </>;
