@@ -2470,11 +2470,8 @@ const CTASection = () => {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
             Ready to Unlock Korea?
           </h2>
-          <p className="text-lg md:text-xl text-muted-foreground mb-3 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
             Stop relying on translation. Start engineering your growth.
-          </p>
-          <p className="text-sm md:text-base text-primary/80 italic mb-10 max-w-xl mx-auto">
-            단순 번역에 의존하지 마십시오. 성장을 엔지니어링하십시오.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
