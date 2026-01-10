@@ -33,55 +33,81 @@ import fogoBg from '@/assets/projects/fogo-bg.jpg';
 // DATA
 // ============================================
 const featuredProjects = [{
-  name: 'Story Protocol',
-  tagline: 'Dominated crypto-social discussions for 3 consecutive weeks.',
-  result: '#1 Share of Voice in Korea.',
-  image: storyBg,
-  slug: 'story-protocol',
-  category: 'IP Infra',
-  strategy: 'Branding & Hype',
+  name: 'Polygon',
+  tagline: 'Ecosystem Bootstrapping',
+  result: '$2M TVL Generated in 30 Days',
+  image: polygonBg,
+  slug: 'polygon',
+  category: 'INFRASTRUCTURE',
+  strategy: 'Strategic DeFi partnerships & Developer Incentives',
+  descEn: 'We executed a developer-focused GTM strategy to boost TVL and dApp deployment.',
+  descKr: '개발자 중심 GTM 전략 수립으로 TVL 및 dApp 배포 확대 달성',
   metrics: [{
-    label: 'Share of Voice',
-    value: 1,
-    prefix: '#'
+    label: 'TVL Generated',
+    value: 2,
+    prefix: '$',
+    suffix: 'M'
   }, {
-    label: 'Consecutive Weeks',
-    value: 3,
-    suffix: ' weeks'
+    label: 'Timeline',
+    value: 30,
+    suffix: ' Days'
   }]
 }, {
-  name: 'peaq Network',
-  tagline: 'Converted community hype into actual on-chain users.',
-  result: '85K+ Active Wallets in Korea.',
-  image: peaqBg,
-  slug: 'peaq',
-  category: 'DePIN',
-  strategy: 'User Acquisition',
+  name: 'BNB Chain',
+  tagline: 'Volume Engineering',
+  result: '+340% Trading Volume Growth',
+  image: bnbBg,
+  slug: 'bnb-chain',
+  category: 'EXCHANGE ECOSYSTEM',
+  strategy: 'Localized trading competitions & community Airdrops',
+  descEn: 'Revitalized the trading ecosystem through community initiatives and exchange partnerships.',
+  descKr: '커뮤니티 이니셔티브와 거래소 파트너십을 통해 거래 생태계 활성화',
   metrics: [{
-    label: 'Active Wallets',
-    value: 85,
-    suffix: 'K+'
+    label: 'Volume Growth',
+    value: 340,
+    prefix: '+',
+    suffix: '%'
   }, {
-    label: 'On-chain Conversion',
-    value: 92,
+    label: 'Community Activation',
+    value: 100,
     suffix: '%'
   }]
 }, {
-  name: 'MANTRA',
-  tagline: 'Engineered sustainable liquidity through strategic KRW pairing.',
-  result: '+450% Volume Growth.',
-  image: mantraBg,
-  slug: 'mantra',
-  category: 'RWA L1',
-  strategy: 'Market Impact',
+  name: 'Story Protocol',
+  tagline: 'Narrative Domination',
+  result: '5K+ Korean Creators Onboarded',
+  image: storyBg,
+  slug: 'story-protocol',
+  category: 'IP & NARRATIVE',
+  strategy: 'Narrative localization & Creator workshops',
+  descEn: 'Positioned a complex IP protocol as the leading trend in the Korean market.',
+  descKr: '복잡한 IP 프로토콜을 한국 시장의 선도적 트렌드로 포지셔닝',
   metrics: [{
-    label: 'Volume Growth',
-    value: 450,
-    suffix: '%',
-    prefix: '+'
+    label: 'Creators Onboarded',
+    value: 5,
+    suffix: 'K+'
   }, {
-    label: 'Sustainable Liquidity',
-    value: 100,
+    label: 'Market Dominance',
+    value: 1,
+    prefix: '#'
+  }]
+}, {
+  name: 'Bybit',
+  tagline: 'Traffic Acceleration',
+  result: '#2 Korean Traffic Ranking',
+  image: bybitBg,
+  slug: 'bybit',
+  category: 'USER ACQUISITION',
+  strategy: 'High-performance SEO & KOL funnel optimization',
+  descEn: 'Secured the #2 spot in Korean exchange traffic through aggressive performance marketing.',
+  descKr: '공격적인 퍼포먼스 마케팅으로 한국 거래소 트래픽 2위 달성',
+  metrics: [{
+    label: 'Traffic Ranking',
+    value: 2,
+    prefix: '#'
+  }, {
+    label: 'SEO Performance',
+    value: 95,
     suffix: '%'
   }]
 }];
@@ -124,31 +150,35 @@ const moreProjects = [{
 }];
 const frameworkStages = [{
   number: '01',
-  title: 'ANALYZE',
-  subtitle: 'Intelligence',
-  items: ['Deep Market Research', 'Competitor Analysis', 'Narrative Localization'],
-  quote: '"We don\'t guess. We analyze."',
+  title: 'DIAGNOSTIC',
+  subtitle: 'Strategy',
+  items: ['Competitor SOV & TVL Analysis', 'Narrative Design for KR Market', 'Tokenomics Advisory for KRW Listing'],
+  quote: '"We don\'t guess. We diagnose the market gap using proprietary data intelligence."',
+  descKr: '경쟁사 분석, 한국 맞춤 내러티브 설계, 원화 상장 기준 토크노믹스 자문',
   icon: Search
 }, {
   number: '02',
-  title: 'BUILD',
-  subtitle: 'Foundation',
-  items: ['Naver SEO Dominance', 'Community Infrastructure', 'Brand Localization'],
-  quote: '"Building the localized infra."',
+  title: 'SYNCHRONIZE',
+  subtitle: 'Cultural Fit',
+  items: ['Naver Blog & Kakao UX Optimization', '24/7 Community Infrastructure', 'Brand Re-engineering for Korea'],
+  quote: '"Translation is not enough. We rebuild your presence to fit the Hangul ecosystem."',
+  descKr: '네이버/카카오 최적화, 24시간 커뮤니티 운영, 한국형 브랜딩',
   icon: Building
 }, {
   number: '03',
-  title: 'IGNITE',
+  title: 'ORCHESTRATE',
   subtitle: 'Launch',
-  items: ['Tier-1 KOL Activation', 'Media Blitz Campaign', 'Viral Marketing'],
-  quote: '"Maximum noise, maximum impact."',
+  items: ['Tier-1 Media Blitz (BlockMedia, CoinNess)', '100+ Verified KOL Inner Circle', 'Private VCs & Builders Events'],
+  quote: '"Maximum noise in minimum time. We coordinate all channels to fire simultaneously."',
+  descKr: '유력 매체 커버리지, 검증된 KOL 100+ 네트워크, 프라이빗 VC/빌더 이벤트',
   icon: Zap
 }, {
   number: '04',
-  title: 'SCALE',
-  subtitle: 'Growth',
-  items: ['Events & Partnerships', 'Liquidity Campaigns', 'Retention Programs'],
-  quote: '"Turning hype into retention."',
+  title: 'SUSTAIN',
+  subtitle: 'Growth & Retention',
+  items: ['User Acquisition → Wallet Install', 'Exchange Liquidity & MM Support', 'Hackathons & Ecosystem Grants'],
+  quote: '"Turning initial hype into sustainable on-chain metrics."',
+  descKr: '온체인 사용자 전환, 거래소 유동성 지원, 해커톤/그랜트 프로그램',
   icon: TrendingUp
 }];
 
@@ -372,11 +402,11 @@ const HeroSection = () => {
             delay: 0.2,
             ease: [0.33, 1, 0.68, 1]
           }}>
-              Engineered for
+              <GlitchText className="text-primary">"The Walled Garden"</GlitchText>
             </motion.span>
           </span>
           <span className="block overflow-hidden">
-            <motion.span className="block" initial={{
+            <motion.span className="block text-foreground/80" initial={{
             y: '100%'
           }} animate={{
             y: 0
@@ -385,19 +415,7 @@ const HeroSection = () => {
             delay: 0.35,
             ease: [0.33, 1, 0.68, 1]
           }}>
-              <GlitchText className="text-primary">Influence.</GlitchText>{' '}
-              <motion.span 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.0, duration: 0.5 }}
-                className="text-foreground/60"
-              >Adoption.</motion.span>{' '}
-              <motion.span 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1.5, duration: 0.5 }}
-                className="text-foreground/40"
-              >Dominance.</motion.span>
+              Cracking the Code of Korea Market.
             </motion.span>
           </span>
         </motion.h1>
@@ -411,11 +429,24 @@ const HeroSection = () => {
       }} transition={{
         duration: 0.6,
         delay: 0.5
-      }} className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mb-10 md:mb-16">
-          We engineer market dominance in Korea through data-driven creativity.
+      }} className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mb-4">
+          Korea is the most attractive yet difficult market to penetrate. We provide the precise key to unlock the 'Walled Garden'.
+        </motion.p>
+        
+        <motion.p initial={{
+        opacity: 0,
+        y: 20
+      }} animate={{
+        opacity: 1,
+        y: 0
+      }} transition={{
+        duration: 0.6,
+        delay: 0.6
+      }} className="text-sm md:text-base text-primary/80 italic max-w-2xl mb-10 md:mb-16">
+          가장 매력적이지만 가장 진입하기 어려운 시장, 한국. 우리는 '닫힌 정원'을 여는 정밀한 키를 제공합니다.
         </motion.p>
 
-        {/* Stats with enhanced styling */}
+        {/* Stats with enhanced styling - Real Data */}
         <motion.div initial={{
         opacity: 0,
         y: 20
@@ -426,24 +457,11 @@ const HeroSection = () => {
         duration: 0.6,
         delay: 0.7
       }} className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-6 md:gap-10">
-          <AnimatedStat value={1} prefix="#" suffix="" label="Trend Setter in Asia" delay={0.8} isVisible={isInView} />
+          <AnimatedStat value={2} prefix="$" suffix="M" label="TVL in 30 Days (Polygon)" delay={0.8} isVisible={isInView} />
           <div className="hidden sm:block w-px h-12 md:h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <AnimatedStat value={95} suffix="%" label="Active Engagement" delay={1.0} isVisible={isInView} />
+          <AnimatedStat value={340} prefix="+" suffix="%" label="Volume Growth (BNB)" delay={1.0} isVisible={isInView} />
           <div className="hidden sm:block w-px h-12 md:h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <AnimatedStat value={3} suffix="x" label="Viral Spread Rate" delay={1.2} isVisible={isInView} />
-        </motion.div>
-
-        {/* Before → After Transformation Bar */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        delay: 1.4
-      }} className="mt-12 pt-8 border-t border-border/30">
-          
+          <AnimatedStat value={100} suffix="%" label="Localization Success" delay={1.2} isVisible={isInView} />
         </motion.div>
 
         {/* Scroll indicator */}
@@ -1864,7 +1882,7 @@ const FrameworkSection = () => {
                 {stage.subtitle}
               </p>
 
-              <ul className="space-y-2 mb-6">
+              <ul className="space-y-2 mb-4">
                 {stage.items.map((item, itemIndex) => <motion.li key={item} className="text-sm text-muted-foreground flex items-center gap-2" initial={false} animate={activeStage === i ? {
               x: 5
             } : {
@@ -1877,7 +1895,11 @@ const FrameworkSection = () => {
                   </motion.li>)}
               </ul>
 
-              <p className="text-xs text-primary/80 italic border-t border-border pt-4">
+              <p className="text-[10px] text-muted-foreground/70 mb-4">
+                {stage.descKr}
+              </p>
+
+              <p className="text-xs text-primary/80 italic border-t border-border pt-4 leading-relaxed">
                 {stage.quote}
               </p>
 
@@ -1981,8 +2003,19 @@ const TiltCaseCard = ({
       }} />
         
         <div className="relative bg-background border border-border group-hover:border-primary/30 transition-colors duration-300 overflow-hidden">
+          {/* Case Study Number Badge */}
+          <div className="absolute top-4 left-4 z-20 px-3 py-1.5 bg-background/90 backdrop-blur-sm border border-border">
+            <span className="text-[10px] font-mono text-muted-foreground">CASE STUDY</span>
+            <span className="text-xs font-mono text-primary ml-2">0{index + 1}</span>
+          </div>
+          
+          {/* Category Badge */}
+          <div className="absolute top-4 right-4 z-20 px-3 py-1.5 bg-primary/90 backdrop-blur-sm">
+            <span className="text-[10px] font-mono text-primary-foreground uppercase tracking-wider">{project.category}</span>
+          </div>
+
           {/* Image with parallax effect */}
-          <div className="relative aspect-[4/3] overflow-hidden">
+          <div className="relative aspect-[16/9] overflow-hidden">
             <motion.img src={project.image} alt={project.name} className="w-full h-full object-cover" animate={{
             scale: isHovered ? 1.1 : 1,
             x: isHovered ? tilt.y * 2 : 0,
@@ -1991,53 +2024,103 @@ const TiltCaseCard = ({
             duration: 0.3
           }} />
             {/* Overlay gradient */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
             
-            {/* Floating badge on hover */}
-            <motion.div className="absolute bottom-4 left-4 px-3 py-1.5 bg-primary text-primary-foreground text-xs font-medium" initial={{
-            opacity: 0,
-            y: 20
-          }} animate={{
-            opacity: isHovered ? 1 : 0,
-            y: isHovered ? 0 : 20
-          }} transition={{
-            duration: 0.3
-          }}>
-              View Case Study →
-            </motion.div>
+            {/* Content on image */}
+            <div className="absolute bottom-0 left-0 right-0 p-6">
+              <h3 className="text-2xl md:text-3xl font-medium text-white mb-2">
+                {project.name}
+              </h3>
+              <p className="text-lg text-white/90 font-medium mb-1">
+                "{project.tagline}"
+              </p>
+              <p className="text-sm text-white/70">
+                {project.descEn}
+              </p>
+            </div>
           </div>
 
-          <div className="p-5 space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="text-xs tracking-widest text-primary uppercase font-medium">
-                {project.category}
-              </span>
-              <span className="w-1 h-1 rounded-full bg-muted-foreground/30" />
-              <span className="text-xs text-muted-foreground">
-                {project.strategy}
-              </span>
+          <div className="p-5 space-y-4">
+            {/* Result Highlight */}
+            <div className="flex items-center gap-3 p-3 bg-primary/10 border border-primary/30">
+              <Trophy className="w-5 h-5 text-primary flex-shrink-0" />
+              <div>
+                <p className="text-xs text-muted-foreground uppercase tracking-wider">Result</p>
+                <p className="text-base font-medium text-primary">{project.result}</p>
+              </div>
             </div>
             
-            <h3 className="text-xl font-medium text-foreground group-hover:text-primary transition-colors duration-300">
-              {project.name}
-            </h3>
-            
-            <p className="text-sm text-muted-foreground line-clamp-2">
-              {project.tagline}
-            </p>
+            {/* Action & KR Description */}
+            <div className="space-y-2">
+              <div className="flex items-start gap-2">
+                <span className="text-xs text-muted-foreground uppercase tracking-wider min-w-[50px]">Action:</span>
+                <span className="text-sm text-foreground">{project.strategy}</span>
+              </div>
+              <p className="text-xs text-muted-foreground/70 italic pl-[62px]">{project.descKr}</p>
+            </div>
             
             {/* Metrics with animation */}
-            <div className="pt-3 mt-3 border-t border-border space-y-1">
-              {project.metrics.map((metric, mi) => <CaseMetricBar key={metric.label} label={metric.label} value={metric.value} suffix={metric.suffix} prefix={metric.prefix} delay={0.3 + mi * 0.1} isVisible={isVisible} />)}
+            <div className="pt-3 mt-3 border-t border-border grid grid-cols-2 gap-3">
+              {project.metrics.map((metric, mi) => (
+                <div key={metric.label} className="text-center p-2 bg-muted/30">
+                  <CaseMetricBar label={metric.label} value={metric.value} suffix={metric.suffix} prefix={metric.prefix} delay={0.3 + mi * 0.1} isVisible={isVisible} />
+                </div>
+              ))}
             </div>
+            
+            {/* View Case Study CTA */}
+            <motion.div 
+              className="flex items-center justify-center gap-2 pt-2 text-sm text-primary group-hover:text-primary/80 transition-colors"
+              animate={{ x: isHovered ? 5 : 0 }}
+            >
+              <span>View Full Case Study</span>
+              <ArrowRight className="w-4 h-4" />
+            </motion.div>
           </div>
         </div>
       </Link>
     </motion.article>;
 };
+
+// ============================================
+// SUCCESS STORIES SECTION - Real Data Case Studies
+// ============================================
+const SuccessStoriesSection = () => {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, {
+    once: true,
+    margin: "-10%"
+  });
+
+  return <section ref={ref} className="px-4 md:px-8 lg:px-12 py-16 md:py-24 bg-muted/30 border-y border-border w-full">
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={isInView ? { opacity: 1 } : {}} 
+      className="w-full"
+    >
+      <div className="mb-12">
+        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+          03 Success Stories
+        </p>
+        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
+          Real Data. Real Results.
+        </h2>
+        <p className="text-muted-foreground max-w-2xl">
+          We don't just promise—we deliver measurable outcomes. Here's proof from our flagship campaigns.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
+        {featuredProjects.map((project, index) => (
+          <TiltCaseCard key={project.slug} project={project} index={index} isVisible={isInView} />
+        ))}
+      </div>
+    </motion.div>
+  </section>;
+};
+
 const StrategyInActionSection = () => {
-  // This section is currently a placeholder - the scroll-based showcase needs re-implementation
-  // The useScroll hook was causing hydration issues
+  // This section is now replaced by SuccessStoriesSection
   return null;
 };
 
@@ -2113,7 +2196,7 @@ const CTASection = () => {
   const isInView = useInView(ref, {
     once: true
   });
-  return <section ref={ref} className="py-16 bg-gradient-to-br from-primary/10 via-background to-background w-full">
+  return <section ref={ref} className="py-20 bg-gradient-to-br from-primary/10 via-background to-background w-full">
       <div className="w-full px-4 md:px-8 lg:px-12 text-center">
         <motion.div initial={{
         opacity: 0,
@@ -2127,21 +2210,24 @@ const CTASection = () => {
       }} transition={{
         duration: 0.6
       }}>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Ready to Launch in Korea?
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            Ready to Unlock Korea?
           </h2>
-          <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto">
-            Don't guess. Launch with data. Let's engineer your market entry together.
+          <p className="text-lg md:text-xl text-muted-foreground mb-3 max-w-2xl mx-auto">
+            Stop relying on translation. Start engineering your growth.
+          </p>
+          <p className="text-sm md:text-base text-primary/80 italic mb-10 max-w-xl mx-auto">
+            단순 번역에 의존하지 마십시오. 성장을 엔지니어링하십시오.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/research">
-              <Button size="lg" variant="outline" className="min-w-[200px]">
-                Get the Market Report
+            <Link to="/contact">
+              <Button size="lg" className="min-w-[220px] text-base">
+                Schedule a Strategy Session
               </Button>
             </Link>
-            <Link to="/contact">
-              <Button size="lg" className="min-w-[200px]">
-                Schedule Strategy Call
+            <Link to="/research">
+              <Button size="lg" variant="outline" className="min-w-[220px] text-base">
+                Get the Market Report
               </Button>
             </Link>
           </div>
@@ -2162,9 +2248,9 @@ const GTMService = () => {
         <HeroSection />
         <MarketIntelligenceSection />
         <FrameworkSection />
+        <SuccessStoriesSection />
         <PerformanceSection />
         <AuthoritySection />
-        <StrategyInActionSection />
         <ClientLogosMarquee />
         <CTASection />
       </main>
