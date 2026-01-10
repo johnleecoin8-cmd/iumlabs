@@ -224,10 +224,10 @@ const ProcessBillboardOverlay = () => {
 };
 const Index = () => {
   usePageMeta({
-    title: "Korean Web3 GTM & Research Agency",
-    description: "ium Labs is Korea's leading Web3 marketing agency specializing in crypto project launches. GTM strategy, KOL network, influencer marketing, and deep research for global blockchain and crypto projects entering Korea.",
+    title: "Korean Web 3 GTM & Research Agency",
+    description: "ium Labs bridges Global Web3 projects to Korea. We specialize in GTM strategy, localized branding, community growth, and on-chain intelligence.",
     path: "/",
-    image: "/og-image-new.png",
+    image: "/og-image.png",
     suffix: "ium Labs"
   });
   return <div className="min-h-screen bg-surface-base">
