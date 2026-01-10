@@ -32,57 +32,56 @@ import fogoBg from '@/assets/projects/fogo-bg.jpg';
 // DATA
 // ============================================
 const featuredProjects = [{
-  name: 'MANTRA',
-  tagline: "Building Korea's largest RWA community.",
-  result: '+450% real volume growth post-KRW entry.',
-  image: mantraBg,
-  slug: 'mantra',
-  category: 'RWA L1',
-  strategy: 'KRW Market Entry',
-  metrics: [{
-    label: 'Real Volume Growth',
-    value: 450,
-    suffix: '%',
-    prefix: '+'
-  }, {
-    label: 'Post-KRW Entry',
-    value: 85,
-    suffix: 'K+ Users'
-  }]
-}, {
   name: 'Story Protocol',
-  tagline: 'Korea launch for the leading IP infrastructure.',
+  tagline: 'Dominated crypto-social discussions for 3 consecutive weeks.',
   result: '#1 Share of Voice in Korea.',
   image: storyBg,
   slug: 'story-protocol',
-  category: 'IP Protocol',
-  strategy: 'Narrative-Led FOMO',
+  category: 'IP Infra',
+  strategy: 'Branding & Hype',
   metrics: [{
     label: 'Share of Voice',
     value: 1,
     prefix: '#'
   }, {
-    label: 'Search Volume Spike',
-    value: 450,
-    prefix: '+',
-    suffix: '%'
+    label: 'Consecutive Weeks',
+    value: 3,
+    suffix: ' weeks'
   }]
 }, {
   name: 'peaq Network',
-  tagline: 'Establishing DePIN leadership in Korea.',
-  result: '85K+ local wallet growth.',
+  tagline: 'Converted community hype into actual on-chain users.',
+  result: '85K+ Active Wallets in Korea.',
   image: peaqBg,
   slug: 'peaq',
   category: 'DePIN',
-  strategy: 'Wallet Acquisition',
+  strategy: 'User Acquisition',
   metrics: [{
-    label: 'Wallet Adoption',
+    label: 'Active Wallets',
     value: 85,
     suffix: 'K+'
   }, {
-    label: 'Market Position',
-    value: 1,
-    prefix: '#'
+    label: 'On-chain Conversion',
+    value: 92,
+    suffix: '%'
+  }]
+}, {
+  name: 'MANTRA',
+  tagline: 'Engineered sustainable liquidity through strategic KRW pairing.',
+  result: '+450% Volume Growth.',
+  image: mantraBg,
+  slug: 'mantra',
+  category: 'RWA L1',
+  strategy: 'Market Impact',
+  metrics: [{
+    label: 'Volume Growth',
+    value: 450,
+    suffix: '%',
+    prefix: '+'
+  }, {
+    label: 'Sustainable Liquidity',
+    value: 100,
+    suffix: '%'
   }]
 }];
 const moreProjects = [{
@@ -749,17 +748,20 @@ const MarketIntelligenceSection = () => {
     number: '01',
     title: 'The Viral Gateway',
     subtitle: '#1 Trend Setter in Asia',
-    description: "Korea isn't just a market; it's a microphone. Trends ignited in Seoul spread to Japan, SEA, and beyond. Winning here means winning Asia's attention economy."
+    description: "Korea isn't just a market; it's a microphone. Trends ignited in Seoul spread to Japan, SEA, and beyond. Winning here means winning Asia's attention economy.",
+    descriptionKr: "한국은 단순한 시장이 아니라 '확성기'입니다. 서울에서 점화된 트렌드는 아시아 전역으로 퍼집니다."
   }, {
     number: '02',
     title: 'Hyper-Active Users',
     subtitle: 'Highest Engagement Rate',
-    description: "Korean users don't just 'hold'; they engage, discuss, and advocate. We tap into the world's most hyper-connected digital society to build a sticky, vocal community foundation."
+    description: "Korean users don't just 'hold'; they engage, discuss, and advocate. We tap into the world's most hyper-connected digital society to build a sticky, vocal community foundation.",
+    descriptionKr: "한국 유저는 단순 홀더가 아닙니다. 세계에서 가장 '초연결된' 유저들을 귀사의 열성적인 옹호자로 만듭니다."
   }, {
     number: '03',
     title: 'Retail Powerhouse',
     subtitle: 'Real User Acquisition',
-    description: "Institutional money follows retail heat. By securing genuine retail 'Mindshare' and actual wallet usage in Korea, we create the organic demand that exchanges and VCs look for."
+    description: "Institutional money follows retail heat. By securing genuine retail 'Mindshare' and actual wallet usage in Korea, we create the organic demand that exchanges and VCs look for.",
+    descriptionKr: "기관 자금은 결국 리테일의 열기를 따라갑니다. 한국에서의 '진성 유저' 확보가 글로벌 확장의 트리거가 됩니다."
   }];
   return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border">
       <motion.div initial={{
@@ -771,10 +773,10 @@ const MarketIntelligenceSection = () => {
           01 The Strategic Imperative
         </p>
         <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-2">
-          Why Korea Wins
+          Why Korea?
         </h2>
         <p className="text-muted-foreground text-lg mb-16">
-          한국은 돈이 많다 → 한국은 트렌드가 빠르고 유저가 열정적이다
+          한국은 트렌드가 빠르고 유저가 열정적이다
         </p>
 
         {/* Module A: The Market Logic - 3 Column */}
@@ -797,8 +799,11 @@ const MarketIntelligenceSection = () => {
               <h3 className="text-xl font-medium text-foreground mb-3">
                 {item.title}
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed mb-3">
                 {item.description}
+              </p>
+              <p className="text-xs text-primary/80 leading-relaxed italic border-t border-border/50 pt-3">
+                {item.descriptionKr}
               </p>
             </motion.div>)}
         </div>
@@ -909,10 +914,10 @@ const MarketIntelligenceSection = () => {
         delay: 0.5
       }} className="border-l-2 border-primary pl-6">
           <p className="text-lg md:text-xl text-foreground italic">
-            "한국은 단순한 시장이 아니라 '확성기'입니다. 서울에서 점화된 트렌드는 아시아 전역으로 퍼집니다."
+            "한국 유저는 단순 홀더가 아닙니다. 세계에서 가장 '초연결된' 유저들을 귀사의 열성적인 옹호자로 만듭니다."
           </p>
           <footer className="mt-2 text-sm text-muted-foreground">
-            — Why Korea Wins
+            — The ium Philosophy
           </footer>
         </motion.blockquote>
       </motion.div>
@@ -1150,25 +1155,11 @@ const LLMEngineVisualization = ({
   }, [isVisible]);
   const dataSources = [{
     id: 0,
-    icon: Database,
-    label: 'Onchain Data',
-    items: ['CEX/DEX Volume', 'Wallet Activity', 'Token Transfers', 'Smart Contracts'],
-    value: liveData.onchain,
-    suffix: ' signals',
-    color: 'from-blue-500/20 to-transparent',
-    borderColor: 'border-blue-500/50',
-    activeBorder: 'border-blue-500',
-    iconBg: 'bg-blue-500/20',
-    iconColor: 'text-blue-500',
-    dotColor: 'bg-blue-500',
-    barColor: 'bg-blue-500/50'
-  }, {
-    id: 1,
     icon: Activity,
-    label: 'Social Signals',
-    items: ['X Mentions', 'Naver Trends', 'Discord Activity', 'Telegram Buzz'],
+    label: 'Social Sentiment',
+    items: ['X Mentions', 'Telegram Buzz', 'Naver Blog', 'DC Inside'],
     value: liveData.social,
-    suffix: ' signals',
+    suffix: '+ signals',
     color: 'from-purple-500/20 to-transparent',
     borderColor: 'border-purple-500/50',
     activeBorder: 'border-purple-500',
@@ -1177,19 +1168,33 @@ const LLMEngineVisualization = ({
     dotColor: 'bg-purple-500',
     barColor: 'bg-purple-500/50'
   }, {
+    id: 1,
+    icon: Database,
+    label: 'On-chain Activity',
+    items: ['Wallet Growth', 'Contract Interaction', 'Token Transfers', 'DeFi Activity'],
+    value: liveData.onchain,
+    suffix: ' wallets',
+    color: 'from-blue-500/20 to-transparent',
+    borderColor: 'border-blue-500/50',
+    activeBorder: 'border-blue-500',
+    iconBg: 'bg-blue-500/20',
+    iconColor: 'text-blue-500',
+    dotColor: 'bg-blue-500',
+    barColor: 'bg-blue-500/50'
+  }, {
     id: 2,
     icon: LineChart,
-    label: 'Market Data',
-    items: ['CEX Order Books', 'Price Action', 'Liquidity Depth', 'Funding Rates'],
+    label: 'Competitor Index',
+    items: ['Share of Voice (SOV)', 'Keyword Dominance', 'Brand Mentions', 'Trend Position'],
     value: liveData.market,
-    suffix: ' data points',
-    color: 'from-red-500/20 to-transparent',
-    borderColor: 'border-red-500/50',
-    activeBorder: 'border-red-500',
-    iconBg: 'bg-red-500/20',
-    iconColor: 'text-red-500',
-    dotColor: 'bg-red-500',
-    barColor: 'bg-red-500/50'
+    suffix: ' keywords',
+    color: 'from-cyan-500/20 to-transparent',
+    borderColor: 'border-cyan-500/50',
+    activeBorder: 'border-cyan-500',
+    iconBg: 'bg-cyan-500/20',
+    iconColor: 'text-cyan-500',
+    dotColor: 'bg-cyan-500',
+    barColor: 'bg-cyan-500/50'
   }];
   const pipelineStages = [{
     label: 'COLLECT',
@@ -1210,25 +1215,25 @@ const LLMEngineVisualization = ({
   }];
   const outputMetrics = [{
     label: 'Launch Timing',
-    sublabel: 'Optimal window confidence',
+    sublabel: '최적 런칭 시점',
     value: liveData.timing,
     color: 'green',
     icon: Target
   }, {
-    label: 'Channel Mix',
-    sublabel: 'Platform optimization',
+    label: 'Brand Sentiment',
+    sublabel: '브랜드 호감도 예측',
     value: liveData.channels,
     color: 'primary',
     icon: Users
   }, {
-    label: 'Budget Efficiency',
-    sublabel: 'ROI prediction',
+    label: 'Viral Probability',
+    sublabel: '바이럴 확산 확률',
     value: liveData.budget,
     color: 'primary',
-    icon: DollarSign
+    icon: Sparkles
   }, {
-    label: 'Volume Projection',
-    sublabel: 'Liquidity depth forecast',
+    label: 'Conversion Forecast',
+    sublabel: '유저 전환 예측',
     value: liveData.volume,
     color: 'green',
     icon: TrendingUp
@@ -1296,13 +1301,16 @@ const LLMEngineVisualization = ({
           }}>
               <Cpu className="w-4 h-4 text-primary" />
             </motion.div>
-            <span className="text-xs font-mono text-primary tracking-wider">POWERED BY IUM AI ENGINE</span>
+            <span className="text-xs font-mono text-primary tracking-wider">THE IUM ALGORITHM</span>
           </motion.div>
           <h3 className="text-2xl md:text-3xl font-medium text-foreground mb-3">
             The Intelligence Engine
           </h3>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-sm">
-            <span className="text-foreground font-medium">"We don't guess. We calculate."</span> Our proprietary AI synthesizes <span className="text-primary font-medium">50+ onchain and social signals</span> in real-time to engineer the perfect market entry.
+          <p className="text-muted-foreground max-w-2xl mx-auto text-sm mb-2">
+            <span className="text-foreground font-medium">"We optimize for Impact."</span> Our proprietary AI synthesizes <span className="text-primary font-medium">social sentiment & on-chain behavior</span> to engineer the perfect market entry.
+          </p>
+          <p className="text-primary/80 text-sm italic">
+            우리는 임팩트를 최적화합니다. 사회적 여론과 온체인 행동 데이터를 분석해 완벽한 진입 전략을 짭니다.
           </p>
         </div>
 

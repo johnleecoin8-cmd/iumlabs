@@ -21,16 +21,17 @@ import openledgerLogo from '@/assets/campaigns/openledger-hero-official.png';
 
 // All Projects Data for 4-row Marquee
 const allProjects = [
-  // Row 1 (→ right)
+  // Row 1 (→ right) - Featured Case Studies
   {
     name: 'Story Protocol',
     slug: 'story-protocol',
     logo: storyLogo,
     bgImage: '/images/projects/story-bg.jpg',
     bgVideo: '/videos/projects/story-hero.mp4',
-    category: 'IP Protocol',
+    category: 'IP Infra',
     strategy: 'Branding & Hype',
     metric: { value: 1, suffix: '', prefix: '#', label: 'Share of Voice' },
+    result: '3주 연속 크립토 소셜 언급량 1위 달성',
     color: 'purple',
     glowColor: 'rgba(168,85,247,0.5)',
     progress: 100
@@ -44,6 +45,7 @@ const allProjects = [
     category: 'DePIN',
     strategy: 'User Acquisition',
     metric: { value: 85, suffix: 'K+', label: 'Active Wallets' },
+    result: '커뮤니티 기대감을 실제 온체인 유저로 전환',
     color: 'cyan',
     glowColor: 'rgba(34,211,238,0.5)',
     progress: 88
@@ -56,7 +58,8 @@ const allProjects = [
     bgVideo: '/videos/projects/mantra-hero.mp4',
     category: 'RWA L1',
     strategy: 'Market Impact',
-    metric: { value: 450, suffix: '%', label: 'Volume Growth' },
+    metric: { value: 450, suffix: '%', prefix: '+', label: 'Volume Growth' },
+    result: '전략적 KRW 페어링으로 지속 가능한 유동성 설계',
     color: 'orange',
     glowColor: 'rgba(251,146,60,0.5)',
     progress: 92
@@ -191,12 +194,12 @@ const projectRows = [
   allProjects.slice(9, 12),  // Row 4: Ondo, Polygon, Tria
 ];
 
-// Network Stats
+// Network Stats - Updated to reflect new messaging
 const networkStats = [
-  { value: 1, suffix: '', prefix: '#', label: 'Trend Setter', sublabel: '트렌드 선도' },
-  { value: 95, suffix: '%', label: 'Engagement', sublabel: '활성 참여율' },
-  { value: 3, suffix: 'x', label: 'Viral Rate', sublabel: '바이럴 확산' },
-  { value: 100, suffix: '%', label: 'Retail-Driven', sublabel: '리테일 중심' },
+  { value: 1, suffix: '', prefix: '#', label: 'Trend Setter', sublabel: '아시아 트렌드 선도' },
+  { value: 95, suffix: '%', label: 'Engagement', sublabel: '최고 참여율' },
+  { value: 3, suffix: 'x', label: 'Viral Rate', sublabel: '바이럴 확산력' },
+  { value: 85, suffix: 'K+', label: 'Real Users', sublabel: '진성 유저 확보' },
 ];
 
 // Project Card for Marquee
