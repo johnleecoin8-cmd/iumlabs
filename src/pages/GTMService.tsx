@@ -418,12 +418,20 @@ const HeroSection = () => {
   }, [isHovering, showcaseProjects.length]);
 
   return <section ref={ref} className="relative min-h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 py-20 md:py-24 bg-background overflow-hidden w-full">
+      {/* Background gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50 pointer-events-none" />
+      
+      {/* Subtle radial glow */}
+      <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-primary/3 rounded-full blur-[100px] pointer-events-none" />
+      
       {/* Floating graphics */}
       <FloatingGraphics />
       
       {/* Mouse follow glow */}
       <motion.div className="absolute w-[500px] h-[500px] rounded-full pointer-events-none" style={{
-      background: 'radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%)',
+      background: 'radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%)',
       left: `calc(${mousePosition.x * 100}% - 250px)`,
       top: `calc(${mousePosition.y * 100}% - 250px)`
     }} animate={{
@@ -468,7 +476,7 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.8,
           delay: 0.1
-        }} className="text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[1.05] tracking-tight text-foreground mb-8">
+        }} className="text-[clamp(2rem,5vw,4rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-6">
             <span className="block overflow-hidden">
               <motion.span className="block" initial={{
               y: '100%'
@@ -506,21 +514,8 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.6,
           delay: 0.5
-        }} className="text-lg md:text-xl text-muted-foreground mb-4">
-            Korea is the most attractive yet difficult market. We are the 'ium' (connector) that bridges your project to success.
-          </motion.p>
-          
-          <motion.p initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6,
-          delay: 0.6
-        }} className="text-sm text-primary/80 italic mb-8">
-            가장 매력적이지만 진입하기 어려운 시장, 한국. 우리는 당신의 성공을 잇는(ium) 전략적 교량입니다.
+        }} className="text-base md:text-lg text-muted-foreground mb-8 max-w-lg">
+            Korea ranks #2 globally in crypto trading volume with 4x faster market velocity. We bridge your project to this high-potential, retail-driven ecosystem.
           </motion.p>
 
           {/* Stats Row */}
@@ -533,9 +528,9 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.6,
           delay: 0.7
-        }} className="flex flex-row items-center gap-6 md:gap-8 mb-8">
+        }} className="flex flex-row items-center gap-6 md:gap-10">
             <div className="text-center group">
-              <motion.p className="text-3xl md:text-4xl lg:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              <motion.p className="text-3xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
                 opacity: 0,
                 scale: 0.5
               }} animate={{
@@ -549,11 +544,10 @@ const HeroSection = () => {
                 #2
               </motion.p>
               <p className="text-[10px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Global Volume</p>
-              <p className="text-[9px] text-primary/70 mt-0.5">세계 2위</p>
             </div>
-            <div className="w-px h-10 md:h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
+            <div className="w-px h-8 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
             <div className="text-center group">
-              <motion.p className="text-3xl md:text-4xl lg:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              <motion.p className="text-3xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
                 opacity: 0,
                 scale: 0.5
               }} animate={{
@@ -567,11 +561,10 @@ const HeroSection = () => {
                 4x
               </motion.p>
               <p className="text-[10px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Velocity</p>
-              <p className="text-[9px] text-primary/70 mt-0.5">4배 회전율</p>
             </div>
-            <div className="w-px h-10 md:h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
+            <div className="w-px h-8 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
             <div className="text-center group">
-              <motion.p className="text-3xl md:text-4xl lg:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              <motion.p className="text-3xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
                 opacity: 0,
                 scale: 0.5
               }} animate={{
@@ -584,8 +577,7 @@ const HeroSection = () => {
               }}>
                 100%
               </motion.p>
-              <p className="text-[10px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Retail</p>
-              <p className="text-[9px] text-primary/70 mt-0.5">리테일 주도</p>
+              <p className="text-[10px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Retail-Driven</p>
             </div>
           </motion.div>
 
