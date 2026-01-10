@@ -337,17 +337,8 @@ const HeroSection = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
 
-  // Showcase projects data with video support
+  // Showcase projects data - only projects with videos
   const showcaseProjects = [
-    { 
-      name: 'Polygon', 
-      result: '$2M TVL', 
-      category: 'Infrastructure',
-      description: 'Ecosystem Bootstrapping',
-      image: polygonBg,
-      video: null, // No video available
-      slug: 'polygon'
-    },
     { 
       name: 'BNB Chain', 
       result: '+340%', 
@@ -374,6 +365,33 @@ const HeroSection = () => {
       image: bybitBg,
       video: '/videos/projects/bybit-hero.mp4',
       slug: 'bybit'
+    },
+    { 
+      name: 'MANTRA', 
+      result: '200K+', 
+      category: 'RWA',
+      description: 'Community Members',
+      image: mantraBg,
+      video: '/videos/projects/mantra-hero.mp4',
+      slug: 'mantra'
+    },
+    { 
+      name: 'peaq', 
+      result: '50+', 
+      category: 'DePIN',
+      description: 'Media Coverage',
+      image: peaqBg,
+      video: '/videos/projects/peaq-hero.mp4',
+      slug: 'peaq'
+    },
+    { 
+      name: 'Sahara AI', 
+      result: '#1', 
+      category: 'AI',
+      description: 'Mindshare Ranking',
+      image: saharaBg,
+      video: '/videos/projects/sahara-hero.mp4',
+      slug: 'sahara-ai'
     }
   ];
 
