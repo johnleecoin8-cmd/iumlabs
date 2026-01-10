@@ -677,32 +677,17 @@ const HeroSection = () => {
                   transition={{ duration: 0.5 }}
                 >
                   {/* Category */}
-                  <span className="text-[10px] text-primary tracking-widest uppercase mb-2 block">
+                  <span className="text-[10px] text-primary tracking-widest uppercase mb-3 block">
                     {showcaseProjects[activeIndex].category}
                   </span>
-                  
-                  {/* Result metric */}
-                  <motion.p 
-                    className="text-5xl md:text-6xl font-medium text-foreground mb-1"
-                    initial={{ scale: 0.9 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.3, delay: 0.1 }}
-                  >
-                    {showcaseProjects[activeIndex].result}
-                  </motion.p>
-                  
-                  {/* Description */}
-                  <p className="text-sm text-muted-foreground mb-3">
-                    {showcaseProjects[activeIndex].description}
-                  </p>
                   
                   {/* Project name */}
                   <Link 
                     to={`/projects/${showcaseProjects[activeIndex].slug}`}
-                    className="inline-flex items-center gap-2 text-foreground font-medium hover:text-primary transition-colors group"
+                    className="inline-flex items-center gap-2 text-2xl text-foreground font-medium hover:text-primary transition-colors group"
                   >
                     {showcaseProjects[activeIndex].name}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </motion.div>
               </AnimatePresence>
