@@ -8,7 +8,7 @@ import Sidebar from "@/components/Sidebar";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { SidebarProvider } from "@/hooks/useSidebarState";
 import Index from "./pages/Index";
-import Services from "./pages/Services";
+
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
@@ -143,8 +143,7 @@ const AppRoutes = () => {
     <PageTransitionWrapper key={location.pathname}>
       <Routes location={location}>
         <Route path="/" element={<Index />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/services/gtm" element={<GTMService />} />
+        <Route path="/services" element={<GTMService />} />
         <Route path="/services/branding" element={<BrandingService />} />
         <Route path="/services/seo-ads" element={<SEOAdsService />} />
         <Route path="/services/offline-event" element={<OfflineEventService />} />

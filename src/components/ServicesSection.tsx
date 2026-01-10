@@ -17,7 +17,7 @@ const services = [
     number: "01",
     title: "GTM Strategy",
     description: "Strategic market entry planning and execution for Web3 projects launching in the Korean market.",
-    link: "/services/gtm",
+    link: "/services",
     icon: Rocket,
     image: gtmImage
   },
