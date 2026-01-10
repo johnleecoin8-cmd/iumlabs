@@ -321,7 +321,7 @@ const GlitchText = ({
 };
 
 // ============================================
-// HERO SECTION - Enhanced with Graphics
+// HERO SECTION - Enhanced with Interactive Showcase
 // ============================================
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -332,6 +332,47 @@ const HeroSection = () => {
     x: 0,
     y: 0
   });
+  
+  // Interactive showcase state
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
+
+  // Showcase projects data
+  const showcaseProjects = [
+    { 
+      name: 'Polygon', 
+      result: '$2M TVL', 
+      category: 'Infrastructure',
+      description: 'Ecosystem Bootstrapping',
+      image: polygonBg,
+      slug: 'polygon'
+    },
+    { 
+      name: 'BNB Chain', 
+      result: '+340%', 
+      category: 'Exchange',
+      description: 'Volume Growth',
+      image: bnbBg,
+      slug: 'bnb-chain'
+    },
+    { 
+      name: 'Story Protocol', 
+      result: '5K+', 
+      category: 'IP Platform',
+      description: 'Creators Onboarded',
+      image: storyBg,
+      slug: 'story-protocol'
+    },
+    { 
+      name: 'Bybit', 
+      result: '#2', 
+      category: 'Exchange',
+      description: 'Traffic Ranking',
+      image: bybitBg,
+      slug: 'bybit'
+    }
+  ];
+
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!ref.current) return;
@@ -344,13 +385,15 @@ const HeroSection = () => {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-  // Featured case data for right column
-  const featuredCases = [
-    { metric: '$2M', label: 'TVL Generated', project: 'Polygon', category: 'Infrastructure', color: 'from-purple-500/20 to-purple-600/10' },
-    { metric: '+340%', label: 'Volume Growth', project: 'BNB Chain', category: 'Exchange', color: 'from-yellow-500/20 to-yellow-600/10' },
-    { metric: '5K+', label: 'Creators Onboarded', project: 'Story Protocol', category: 'IP Protocol', color: 'from-blue-500/20 to-blue-600/10' },
-    { metric: '#2', label: 'Traffic Ranking', project: 'Bybit', category: 'Exchange', color: 'from-orange-500/20 to-orange-600/10' },
-  ];
+
+  // Auto-rotate showcase
+  useEffect(() => {
+    if (isHovering) return;
+    const interval = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % showcaseProjects.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [isHovering, showcaseProjects.length]);
 
   return <section ref={ref} className="relative min-h-[90vh] flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 pt-28 pb-16 bg-background overflow-hidden w-full">
       {/* Floating graphics */}
@@ -556,50 +599,121 @@ const HeroSection = () => {
           </motion.div>
         </div>
 
-        {/* Right Column - Featured Case Cards */}
+        {/* Right Column - Interactive Project Showcase */}
         <motion.div 
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
           className="relative hidden lg:block"
+          onMouseEnter={() => setIsHovering(true)}
+          onMouseLeave={() => setIsHovering(false)}
         >
-          <div className="grid grid-cols-2 gap-4">
-            {featuredCases.map((caseItem, index) => (
+          {/* Media Container */}
+          <div className="relative aspect-[4/3] overflow-hidden border border-border/30">
+            {/* Background Image with Transition */}
+            <AnimatePresence mode="wait">
               <motion.div
-                key={caseItem.project}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                whileHover={{ scale: 1.03, y: -5 }}
-                className={`relative p-5 border border-border/50 bg-gradient-to-br ${caseItem.color} backdrop-blur-sm overflow-hidden group cursor-pointer`}
+                key={activeIndex}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="absolute inset-0"
               >
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                
-                {/* Category badge */}
-                <div className="flex items-center justify-between mb-3">
-                  <span className="text-[10px] text-muted-foreground tracking-wider uppercase">{caseItem.category}</span>
-                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-                </div>
-                
-                {/* Metric */}
-                <motion.p 
-                  className="text-3xl md:text-4xl font-medium text-foreground mb-1"
-                  initial={{ scale: 1 }}
-                  whileHover={{ scale: 1.05 }}
+                <img 
+                  src={showcaseProjects[activeIndex].image} 
+                  alt={showcaseProjects[activeIndex].name}
+                  className="w-full h-full object-cover"
+                />
+                {/* Overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-background/40 to-transparent" />
+              </motion.div>
+            </AnimatePresence>
+
+            {/* Content overlay */}
+            <div className="absolute inset-0 flex flex-col justify-end p-6">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  {caseItem.metric}
-                </motion.p>
-                
-                {/* Label */}
-                <p className="text-xs text-muted-foreground mb-2">{caseItem.label}</p>
+                  {/* Category */}
+                  <span className="text-[10px] text-primary tracking-widest uppercase mb-2 block">
+                    {showcaseProjects[activeIndex].category}
+                  </span>
+                  
+                  {/* Result metric */}
+                  <motion.p 
+                    className="text-5xl md:text-6xl font-medium text-foreground mb-1"
+                    initial={{ scale: 0.9 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.3, delay: 0.1 }}
+                  >
+                    {showcaseProjects[activeIndex].result}
+                  </motion.p>
+                  
+                  {/* Description */}
+                  <p className="text-sm text-muted-foreground mb-3">
+                    {showcaseProjects[activeIndex].description}
+                  </p>
+                  
+                  {/* Project name */}
+                  <Link 
+                    to={`/projects/${showcaseProjects[activeIndex].slug}`}
+                    className="inline-flex items-center gap-2 text-foreground font-medium hover:text-primary transition-colors group"
+                  >
+                    {showcaseProjects[activeIndex].name}
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Corner accent */}
+            <div className="absolute top-0 right-0 w-20 h-20 border-t border-r border-primary/30" />
+            <div className="absolute bottom-0 left-0 w-20 h-20 border-b border-l border-primary/30" />
+          </div>
+
+          {/* Project Selector Bar */}
+          <div className="flex mt-4 border border-border/30">
+            {showcaseProjects.map((project, index) => (
+              <motion.button
+                key={project.slug}
+                onMouseEnter={() => setActiveIndex(index)}
+                onClick={() => setActiveIndex(index)}
+                className={`flex-1 py-4 px-3 relative transition-all duration-300 ${
+                  activeIndex === index 
+                    ? 'bg-primary/10' 
+                    : 'bg-transparent hover:bg-muted/50'
+                }`}
+              >
+                {/* Index number */}
+                <span className={`text-xs font-mono mb-1 block transition-colors ${
+                  activeIndex === index ? 'text-primary' : 'text-muted-foreground'
+                }`}>
+                  0{index + 1}
+                </span>
                 
                 {/* Project name */}
-                <p className="text-sm font-medium text-foreground/90">{caseItem.project}</p>
-                
-                {/* Corner accent */}
-                <div className="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-tl from-primary/10 to-transparent" />
-              </motion.div>
+                <span className={`text-sm font-medium block truncate transition-colors ${
+                  activeIndex === index ? 'text-foreground' : 'text-muted-foreground'
+                }`}>
+                  {project.name}
+                </span>
+
+                {/* Active indicator line */}
+                {activeIndex === index && (
+                  <motion.div 
+                    layoutId="activeIndicator"
+                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                )}
+              </motion.button>
             ))}
           </div>
           
