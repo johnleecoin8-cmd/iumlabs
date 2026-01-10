@@ -31,7 +31,7 @@ const allProjects = [
     category: 'IP Infra',
     strategy: 'Branding & Hype',
     metric: { value: 1, suffix: '', prefix: '#', label: 'Share of Voice' },
-    result: '3주 연속 크립토 소셜 언급량 1위 달성',
+    result: 'Dominated crypto-social discussions for 3 consecutive weeks',
     color: 'purple',
     glowColor: 'rgba(168,85,247,0.5)',
     progress: 100
@@ -45,7 +45,7 @@ const allProjects = [
     category: 'DePIN',
     strategy: 'User Acquisition',
     metric: { value: 85, suffix: 'K+', label: 'Active Wallets' },
-    result: '커뮤니티 기대감을 실제 온체인 유저로 전환',
+    result: 'Converted community hype into actual on-chain users',
     color: 'cyan',
     glowColor: 'rgba(34,211,238,0.5)',
     progress: 88
@@ -59,7 +59,7 @@ const allProjects = [
     category: 'RWA L1',
     strategy: 'Market Impact',
     metric: { value: 450, suffix: '%', prefix: '+', label: 'Volume Growth' },
-    result: '전략적 KRW 페어링으로 지속 가능한 유동성 설계',
+    result: 'Engineered sustainable liquidity through strategic KRW pairing',
     color: 'orange',
     glowColor: 'rgba(251,146,60,0.5)',
     progress: 92
@@ -196,10 +196,10 @@ const projectRows = [
 
 // Network Stats - Updated to reflect new messaging
 const networkStats = [
-  { value: 1, suffix: '', prefix: '#', label: 'Trend Setter', sublabel: '아시아 트렌드 선도' },
-  { value: 95, suffix: '%', label: 'Engagement', sublabel: '최고 참여율' },
-  { value: 3, suffix: 'x', label: 'Viral Rate', sublabel: '바이럴 확산력' },
-  { value: 85, suffix: 'K+', label: 'Real Users', sublabel: '진성 유저 확보' },
+  { value: 1, suffix: '', prefix: '#', label: 'Trend Setter', sublabel: 'Leading Asia trends' },
+  { value: 95, suffix: '%', label: 'Engagement', sublabel: 'Highest engagement rate' },
+  { value: 3, suffix: 'x', label: 'Viral Rate', sublabel: 'Viral amplification' },
+  { value: 85, suffix: 'K+', label: 'Real Users', sublabel: 'Genuine user acquisition' },
 ];
 
 // Project Card for Marquee

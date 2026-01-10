@@ -412,8 +412,6 @@ const HeroSection = () => {
         delay: 0.5
       }} className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-16">
           We engineer market dominance in Korea through data-driven creativity.
-          <br />
-          <span className="text-foreground/80">우리는 데이터 기반의 크리에이티브로 한국 시장 내 지배력을 설계합니다.</span>
         </motion.p>
 
         {/* Stats with enhanced styling */}
@@ -748,20 +746,17 @@ const MarketIntelligenceSection = () => {
     number: '01',
     title: 'The Viral Gateway',
     subtitle: '#1 Trend Setter in Asia',
-    description: "Korea isn't just a market; it's a microphone. Trends ignited in Seoul spread to Japan, SEA, and beyond. Winning here means winning Asia's attention economy.",
-    descriptionKr: "한국은 단순한 시장이 아니라 '확성기'입니다. 서울에서 점화된 트렌드는 아시아 전역으로 퍼집니다."
+    description: "Korea isn't just a market; it's a microphone. Trends ignited in Seoul spread to Japan, SEA, and beyond. Winning here means winning Asia's attention economy."
   }, {
     number: '02',
     title: 'Hyper-Active Users',
     subtitle: 'Highest Engagement Rate',
-    description: "Korean users don't just 'hold'; they engage, discuss, and advocate. We tap into the world's most hyper-connected digital society to build a sticky, vocal community foundation.",
-    descriptionKr: "한국 유저는 단순 홀더가 아닙니다. 세계에서 가장 '초연결된' 유저들을 귀사의 열성적인 옹호자로 만듭니다."
+    description: "Korean users don't just 'hold'; they engage, discuss, and advocate. We tap into the world's most hyper-connected digital society to build a sticky, vocal community foundation."
   }, {
     number: '03',
     title: 'Retail Powerhouse',
     subtitle: 'Real User Acquisition',
-    description: "Institutional money follows retail heat. By securing genuine retail 'Mindshare' and actual wallet usage in Korea, we create the organic demand that exchanges and VCs look for.",
-    descriptionKr: "기관 자금은 결국 리테일의 열기를 따라갑니다. 한국에서의 '진성 유저' 확보가 글로벌 확장의 트리거가 됩니다."
+    description: "Institutional money follows retail heat. By securing genuine retail 'Mindshare' and actual wallet usage in Korea, we create the organic demand that exchanges and VCs look for."
   }];
   return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border">
       <motion.div initial={{
@@ -776,7 +771,7 @@ const MarketIntelligenceSection = () => {
           Why Korea?
         </h2>
         <p className="text-muted-foreground text-lg mb-16">
-          한국은 트렌드가 빠르고 유저가 열정적이다
+          Korea moves fast. Users are passionate.
         </p>
 
         {/* Module A: The Market Logic - 3 Column */}
@@ -799,11 +794,8 @@ const MarketIntelligenceSection = () => {
               <h3 className="text-xl font-medium text-foreground mb-3">
                 {item.title}
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 {item.description}
-              </p>
-              <p className="text-xs text-primary/80 leading-relaxed italic border-t border-border/50 pt-3">
-                {item.descriptionKr}
               </p>
             </motion.div>)}
         </div>
@@ -914,7 +906,7 @@ const MarketIntelligenceSection = () => {
         delay: 0.5
       }} className="border-l-2 border-primary pl-6">
           <p className="text-lg md:text-xl text-foreground italic">
-            "한국 유저는 단순 홀더가 아닙니다. 세계에서 가장 '초연결된' 유저들을 귀사의 열성적인 옹호자로 만듭니다."
+            "Korean users don't just hold; they engage, discuss, and advocate. We turn the world's most hyper-connected users into your passionate champions."
           </p>
           <footer className="mt-2 text-sm text-muted-foreground">
             — The ium Philosophy
@@ -1310,7 +1302,7 @@ const LLMEngineVisualization = ({
             <span className="text-foreground font-medium">"We optimize for Impact."</span> Our proprietary AI synthesizes <span className="text-primary font-medium">social sentiment & on-chain behavior</span> to engineer the perfect market entry.
           </p>
           <p className="text-primary/80 text-sm italic">
-            우리는 임팩트를 최적화합니다. 사회적 여론과 온체인 행동 데이터를 분석해 완벽한 진입 전략을 짭니다.
+            We optimize for impact. We analyze social sentiment and on-chain behavior to engineer the perfect market entry.
           </p>
         </div>
 
