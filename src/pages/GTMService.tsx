@@ -7,7 +7,7 @@ import PerformanceSection from '@/components/gtm/PerformanceSection';
 import AuthoritySection from '@/components/gtm/AuthoritySection';
 import MobileCTAButton from '@/components/gtm/MobileCTAButton';
 import ServiceSchema from '@/components/ServiceSchema';
-import ContactFormSection from '@/components/ContactFormSection';
+import GTMContactFormSection from '@/components/gtm/GTMContactFormSection';
 import CTABannerSection from '@/components/CTABannerSection';
 import FooterLinksSection from '@/components/FooterLinksSection';
 import { Link } from 'react-router-dom';
@@ -2512,7 +2512,7 @@ const GTMService = () => {
       </main>
       
       {/* Contact Section */}
-      <ContactFormSection sectionNumber="05" />
+      <GTMContactFormSection sectionNumber="05" />
       
       {/* CTA Banner */}
       <CTABannerSection />
