@@ -344,7 +344,15 @@ const HeroSection = () => {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-  return <section ref={ref} className="relative min-h-[90vh] flex flex-col justify-center px-4 md:px-8 lg:px-12 pt-28 pb-16 bg-background overflow-hidden w-full">
+  // Featured case data for right column
+  const featuredCases = [
+    { metric: '$2M', label: 'TVL Generated', project: 'Polygon', category: 'Infrastructure', color: 'from-purple-500/20 to-purple-600/10' },
+    { metric: '+340%', label: 'Volume Growth', project: 'BNB Chain', category: 'Exchange', color: 'from-yellow-500/20 to-yellow-600/10' },
+    { metric: '5K+', label: 'Creators Onboarded', project: 'Story Protocol', category: 'IP Protocol', color: 'from-blue-500/20 to-blue-600/10' },
+    { metric: '#2', label: 'Traffic Ranking', project: 'Bybit', category: 'Exchange', color: 'from-orange-500/20 to-orange-600/10' },
+  ];
+
+  return <section ref={ref} className="relative min-h-[90vh] flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 pt-28 pb-16 bg-background overflow-hidden w-full">
       {/* Floating graphics */}
       <FloatingGraphics />
       
@@ -361,182 +369,281 @@ const HeroSection = () => {
       ease: "easeInOut"
     }} />
 
-      <div className="relative max-w-5xl z-10">
-        <motion.p initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.6
-      }} className="text-muted-foreground text-sm tracking-widest uppercase mb-6 flex items-center gap-3">
-          <motion.span className="w-8 h-px bg-primary" initial={{
-          scaleX: 0
+      {/* 2-Column Layout */}
+      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center w-full max-w-[1600px] mx-auto">
+        
+        {/* Left Column - Text Content */}
+        <div className="relative">
+          <motion.p initial={{
+          opacity: 0,
+          y: 20
         }} animate={{
-          scaleX: 1
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6
+        }} className="text-muted-foreground text-sm tracking-widest uppercase mb-6 flex items-center gap-3">
+            <motion.span className="w-8 h-px bg-primary" initial={{
+            scaleX: 0
+          }} animate={{
+            scaleX: 1
+          }} transition={{
+            duration: 0.8,
+            delay: 0.2
+          }} />
+            Korea GTM Strategy
+          </motion.p>
+          
+          <motion.h1 initial={{
+          opacity: 0,
+          y: 40
+        }} animate={{
+          opacity: 1,
+          y: 0
         }} transition={{
           duration: 0.8,
-          delay: 0.2
-        }} />
-          Korea GTM Strategy
-        </motion.p>
-        
-        <motion.h1 initial={{
-        opacity: 0,
-        y: 40
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.8,
-        delay: 0.1
-      }} className="text-[clamp(2rem,7vw,5rem)] font-medium leading-[1.05] tracking-tight text-foreground mb-6">
-          <span className="block overflow-hidden">
-            <motion.span className="block" initial={{
-            y: '100%'
-          }} animate={{
-            y: 0
-          }} transition={{
-            duration: 0.8,
-            delay: 0.2,
-            ease: [0.33, 1, 0.68, 1]
-          }}>
-              <GlitchText className="text-primary">"The Gateway to Korea"</GlitchText>
-            </motion.span>
-          </span>
-          <span className="block overflow-hidden">
-            <motion.span className="block text-foreground/80" initial={{
-            y: '100%'
-          }} animate={{
-            y: 0
-          }} transition={{
-            duration: 0.8,
-            delay: 0.35,
-            ease: [0.33, 1, 0.68, 1]
-          }}>
-              Your Strategic Bridge to the Korean Ecosystem.
-            </motion.span>
-          </span>
-        </motion.h1>
-
-        <motion.p initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.6,
-        delay: 0.5
-      }} className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mb-4">
-          Korea is the most attractive yet difficult market. We are the 'ium' (connector) that bridges your project to success.
-        </motion.p>
-        
-        <motion.p initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.6,
-        delay: 0.6
-      }} className="text-sm md:text-base text-primary/80 italic max-w-2xl mb-10 md:mb-16">
-          가장 매력적이지만 진입하기 어려운 시장, 한국. 우리는 당신의 성공을 잇는(ium) 전략적 교량입니다.
-        </motion.p>
-
-        {/* Stats with enhanced styling - Real Data */}
-        {/* Stats with enhanced styling - Market Power Data */}
-        <motion.div initial={{
-        opacity: 0,
-        y: 20
-      }} animate={{
-        opacity: 1,
-        y: 0
-      }} transition={{
-        duration: 0.6,
-        delay: 0.7
-      }} className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-4 sm:gap-6 md:gap-10">
-          <div className="text-center group">
-            <motion.p className="text-4xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-              opacity: 0,
-              scale: 0.5
+          delay: 0.1
+        }} className="text-[clamp(2rem,5vw,4rem)] font-medium leading-[1.05] tracking-tight text-foreground mb-6">
+            <span className="block overflow-hidden">
+              <motion.span className="block" initial={{
+              y: '100%'
             }} animate={{
-              opacity: 1,
-              scale: 1
+              y: 0
             }} transition={{
-              delay: 0.8,
-              duration: 0.5,
-              type: "spring"
+              duration: 0.8,
+              delay: 0.2,
+              ease: [0.33, 1, 0.68, 1]
             }}>
-              #2
-            </motion.p>
-            <p className="text-xs text-muted-foreground mt-2 tracking-wider uppercase">Global Fiat Volume</p>
-            <p className="text-[10px] text-primary/70 mt-1">세계 2위 거래 규모</p>
-          </div>
-          <div className="hidden sm:block w-px h-12 md:h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <div className="text-center group">
-            <motion.p className="text-4xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-              opacity: 0,
-              scale: 0.5
+                <GlitchText className="text-primary">"The Gateway to Korea"</GlitchText>
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden">
+              <motion.span className="block text-foreground/80" initial={{
+              y: '100%'
             }} animate={{
-              opacity: 1,
-              scale: 1
+              y: 0
             }} transition={{
-              delay: 1.0,
-              duration: 0.5,
-              type: "spring"
+              duration: 0.8,
+              delay: 0.35,
+              ease: [0.33, 1, 0.68, 1]
             }}>
-              4x
-            </motion.p>
-            <p className="text-xs text-muted-foreground mt-2 tracking-wider uppercase">Higher Velocity</p>
-            <p className="text-[10px] text-primary/70 mt-1">4배 높은 자산 회전율</p>
-          </div>
-          <div className="hidden sm:block w-px h-12 md:h-16 bg-gradient-to-b from-transparent via-border to-transparent" />
-          <div className="text-center group">
-            <motion.p className="text-4xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-              opacity: 0,
-              scale: 0.5
-            }} animate={{
-              opacity: 1,
-              scale: 1
-            }} transition={{
-              delay: 1.2,
-              duration: 0.5,
-              type: "spring"
-            }}>
-              100%
-            </motion.p>
-            <p className="text-xs text-muted-foreground mt-2 tracking-wider uppercase">Retail Driven</p>
-            <p className="text-[10px] text-primary/70 mt-1">리테일 주도 시장</p>
-          </div>
-        </motion.div>
+                Your Strategic Bridge to the Korean Ecosystem.
+              </motion.span>
+            </span>
+          </motion.h1>
 
-        {/* Scroll indicator */}
-        <motion.div initial={{
-        opacity: 0
-      }} animate={{
-        opacity: 1
-      }} transition={{
-        delay: 1.5
-      }} className="absolute bottom-8 left-0 flex items-center gap-3">
-          <motion.div className="w-6 h-10 border border-muted-foreground/30 rounded-full flex items-start justify-center p-2" animate={{
-          borderColor: ['hsl(var(--muted-foreground) / 0.3)', 'hsl(var(--primary) / 0.5)', 'hsl(var(--muted-foreground) / 0.3)']
+          <motion.p initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
         }} transition={{
-          duration: 2,
-          repeat: Infinity
-        }}>
-            <motion.div className="w-1 h-2 bg-primary rounded-full" animate={{
-            y: [0, 8, 0]
-          }} transition={{
-            duration: 1.5,
-            repeat: Infinity
-          }} />
+          duration: 0.6,
+          delay: 0.5
+        }} className="text-base md:text-lg text-muted-foreground mb-3">
+            Korea is the most attractive yet difficult market. We are the 'ium' (connector) that bridges your project to success.
+          </motion.p>
+          
+          <motion.p initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 0.6
+        }} className="text-sm text-primary/80 italic mb-8">
+            가장 매력적이지만 진입하기 어려운 시장, 한국. 우리는 당신의 성공을 잇는(ium) 전략적 교량입니다.
+          </motion.p>
+
+          {/* Stats Row */}
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 0.7
+        }} className="flex flex-row items-center gap-6 md:gap-8 mb-8">
+            <div className="text-center group">
+              <motion.p className="text-3xl md:text-4xl lg:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+                opacity: 0,
+                scale: 0.5
+              }} animate={{
+                opacity: 1,
+                scale: 1
+              }} transition={{
+                delay: 0.8,
+                duration: 0.5,
+                type: "spring"
+              }}>
+                #2
+              </motion.p>
+              <p className="text-[10px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Global Volume</p>
+              <p className="text-[9px] text-primary/70 mt-0.5">세계 2위</p>
+            </div>
+            <div className="w-px h-10 md:h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
+            <div className="text-center group">
+              <motion.p className="text-3xl md:text-4xl lg:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+                opacity: 0,
+                scale: 0.5
+              }} animate={{
+                opacity: 1,
+                scale: 1
+              }} transition={{
+                delay: 1.0,
+                duration: 0.5,
+                type: "spring"
+              }}>
+                4x
+              </motion.p>
+              <p className="text-[10px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Velocity</p>
+              <p className="text-[9px] text-primary/70 mt-0.5">4배 회전율</p>
+            </div>
+            <div className="w-px h-10 md:h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
+            <div className="text-center group">
+              <motion.p className="text-3xl md:text-4xl lg:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+                opacity: 0,
+                scale: 0.5
+              }} animate={{
+                opacity: 1,
+                scale: 1
+              }} transition={{
+                delay: 1.2,
+                duration: 0.5,
+                type: "spring"
+              }}>
+                100%
+              </motion.p>
+              <p className="text-[10px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Retail</p>
+              <p className="text-[9px] text-primary/70 mt-0.5">리테일 주도</p>
+            </div>
           </motion.div>
-          <span className="text-xs text-muted-foreground tracking-wider">SCROLL</span>
+
+          {/* CTA Button */}
+          <motion.div initial={{
+          opacity: 0,
+          y: 20
+        }} animate={{
+          opacity: 1,
+          y: 0
+        }} transition={{
+          duration: 0.6,
+          delay: 0.9
+        }}>
+            <Link to="/contact">
+              <motion.button 
+                className="group relative px-6 py-3 bg-primary text-primary-foreground font-medium text-sm tracking-wide rounded-none overflow-hidden"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Schedule Strategy Session
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <motion.div 
+                  className="absolute inset-0 bg-foreground"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: 0 }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.button>
+            </Link>
+          </motion.div>
+        </div>
+
+        {/* Right Column - Featured Case Cards */}
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="relative hidden lg:block"
+        >
+          <div className="grid grid-cols-2 gap-4">
+            {featuredCases.map((caseItem, index) => (
+              <motion.div
+                key={caseItem.project}
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+                whileHover={{ scale: 1.03, y: -5 }}
+                className={`relative p-5 border border-border/50 bg-gradient-to-br ${caseItem.color} backdrop-blur-sm overflow-hidden group cursor-pointer`}
+              >
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                
+                {/* Category badge */}
+                <div className="flex items-center justify-between mb-3">
+                  <span className="text-[10px] text-muted-foreground tracking-wider uppercase">{caseItem.category}</span>
+                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                </div>
+                
+                {/* Metric */}
+                <motion.p 
+                  className="text-3xl md:text-4xl font-medium text-foreground mb-1"
+                  initial={{ scale: 1 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  {caseItem.metric}
+                </motion.p>
+                
+                {/* Label */}
+                <p className="text-xs text-muted-foreground mb-2">{caseItem.label}</p>
+                
+                {/* Project name */}
+                <p className="text-sm font-medium text-foreground/90">{caseItem.project}</p>
+                
+                {/* Corner accent */}
+                <div className="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-tl from-primary/10 to-transparent" />
+              </motion.div>
+            ))}
+          </div>
+          
+          {/* View All Link */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2 }}
+            className="mt-4 text-right"
+          >
+            <Link 
+              to="/projects" 
+              className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
+            >
+              View all projects
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div initial={{
+      opacity: 0
+    }} animate={{
+      opacity: 1
+    }} transition={{
+      delay: 1.5
+    }} className="absolute bottom-8 left-4 md:left-8 lg:left-16 flex items-center gap-3">
+        <motion.div className="w-6 h-10 border border-muted-foreground/30 rounded-full flex items-start justify-center p-2" animate={{
+        borderColor: ['hsl(var(--muted-foreground) / 0.3)', 'hsl(var(--primary) / 0.5)', 'hsl(var(--muted-foreground) / 0.3)']
+      }} transition={{
+        duration: 2,
+        repeat: Infinity
+      }}>
+          <motion.div className="w-1 h-2 bg-primary rounded-full" animate={{
+          y: [0, 8, 0]
+        }} transition={{
+          duration: 1.5,
+          repeat: Infinity
+        }} />
+        </motion.div>
+        <span className="text-xs text-muted-foreground tracking-wider">SCROLL</span>
+      </motion.div>
     </section>;
 };
 
