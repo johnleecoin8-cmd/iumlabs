@@ -468,7 +468,7 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.8,
           delay: 0.1
-        }} className="text-[clamp(2rem,5vw,4rem)] font-medium leading-[1.05] tracking-tight text-foreground mb-6">
+        }} className="text-[clamp(2.5rem,6vw,5rem)] font-medium leading-[1.05] tracking-tight text-foreground mb-8">
             <span className="block overflow-hidden">
               <motion.span className="block" initial={{
               y: '100%'
@@ -506,7 +506,7 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.6,
           delay: 0.5
-        }} className="text-base md:text-lg text-muted-foreground mb-3">
+        }} className="text-lg md:text-xl text-muted-foreground mb-4">
             Korea is the most attractive yet difficult market. We are the 'ium' (connector) that bridges your project to success.
           </motion.p>
           
@@ -589,36 +589,6 @@ const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* CTA Button */}
-          <motion.div initial={{
-          opacity: 0,
-          y: 20
-        }} animate={{
-          opacity: 1,
-          y: 0
-        }} transition={{
-          duration: 0.6,
-          delay: 0.9
-        }}>
-            <Link to="/contact">
-              <motion.button 
-                className="group relative px-6 py-3 bg-primary text-primary-foreground font-medium text-sm tracking-wide rounded-none overflow-hidden"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span className="relative z-10 flex items-center gap-2">
-                  Schedule Strategy Session
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </span>
-                <motion.div 
-                  className="absolute inset-0 bg-foreground"
-                  initial={{ x: '-100%' }}
-                  whileHover={{ x: 0 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
-            </Link>
-          </motion.div>
         </div>
 
         {/* Right Column - Interactive Project Showcase (Now visible on all screens) */}
@@ -755,28 +725,33 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div initial={{
-      opacity: 0
-    }} animate={{
-      opacity: 1
-    }} transition={{
-      delay: 1.5
-    }} className="absolute bottom-8 left-4 md:left-8 lg:left-16 flex items-center gap-3">
-        <motion.div className="w-6 h-10 border border-muted-foreground/30 rounded-full flex items-start justify-center p-2" animate={{
-        borderColor: ['hsl(var(--muted-foreground) / 0.3)', 'hsl(var(--primary) / 0.5)', 'hsl(var(--muted-foreground) / 0.3)']
-      }} transition={{
-        duration: 2,
-        repeat: Infinity
-      }}>
-          <motion.div className="w-1 h-2 bg-primary rounded-full" animate={{
-          y: [0, 8, 0]
-        }} transition={{
-          duration: 1.5,
-          repeat: Infinity
-        }} />
+      {/* Scroll indicator - Enhanced */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5, duration: 0.8 }} 
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+      >
+        <motion.span 
+          className="text-sm text-muted-foreground tracking-[0.3em] uppercase"
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          Scroll
+        </motion.span>
+        <motion.div 
+          className="w-8 h-14 border-2 border-primary/50 rounded-full flex items-start justify-center p-2"
+          animate={{ 
+            borderColor: ['hsl(var(--primary) / 0.3)', 'hsl(var(--primary) / 0.8)', 'hsl(var(--primary) / 0.3)']
+          }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          <motion.div 
+            className="w-1.5 h-3 bg-primary rounded-full"
+            animate={{ y: [0, 16, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+          />
         </motion.div>
-        <span className="text-xs text-muted-foreground tracking-wider">SCROLL</span>
       </motion.div>
     </section>;
 };
