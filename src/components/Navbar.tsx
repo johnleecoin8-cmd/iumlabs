@@ -11,6 +11,7 @@ import { useScrollDirection } from "@/hooks/useScrollDirection";
 
 // Services submenu data (same as Sidebar)
 const servicesSubMenu = [
+  { name: "Go-to-market Strategy", href: "/services" },
   { name: "Branding/Website", href: "/services/branding" },
   { name: "SEO/Paid Ads", href: "/services/seo-ads" },
   { name: "Offline Event", href: "/services/offline-event" },
