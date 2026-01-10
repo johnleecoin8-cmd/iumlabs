@@ -197,8 +197,8 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
 
 const Services = () => {
   usePageMeta(
-    "Web3 Marketing Services",
-    "Full-service Korean Web3 marketing solutions: GTM strategy, KOL campaigns, community building, PR, and more. 18+ projects launched in Korea.",
+    "Crypto & Web3 Marketing Services | ium Labs",
+    "Full-service Korean crypto and Web3 marketing solutions: GTM strategy, KOL campaigns, community building, PR, and market research. 18+ projects launched in Korea.",
     "/services"
   );
   const { createRipple } = useRipple();

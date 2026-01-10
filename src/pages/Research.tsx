@@ -26,8 +26,8 @@ const calculateReadTime = (content: string | null): string => {
 };
 const Research = () => {
   usePageMeta({
-    title: "Web3 Research & Insights",
-    description: "In-depth research and analysis on Korean Web3 market trends, GTM strategies, and investment opportunities.",
+    title: "Crypto Market Research Korea | ium Labs",
+    description: "Data-driven crypto and Web3 research for the Korean market. Ecosystem analysis, market insights, and strategic intelligence for blockchain projects.",
     path: "/research"
   });
   const [searchQuery, setSearchQuery] = useState("");

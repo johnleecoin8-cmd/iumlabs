@@ -2153,7 +2153,7 @@ const CTASection = () => {
 // MAIN COMPONENT
 // ============================================
 const GTMService = () => {
-  usePageMeta("Korea GTM Strategy | Ium Labs", "Engineered for Liquidity. Launch in Korea with the most data-driven GTM framework. 30+ projects. $1.5B+ volume facilitated.");
+  usePageMeta("Korea Crypto GTM Strategy | ium Labs", "Launch your crypto project in Korea with the most data-driven GTM framework. Strategic market entry, KOL activation, and community building for Web3 and crypto success. 30+ projects. $1.5B+ volume facilitated.");
   return <>
       <ServiceSchema name="Korea GTM Strategy" description="Go-to-market strategy for Web3 projects entering the Korean market. Data-driven 4-stage framework." url="/services/gtm" provider="Ium Labs" areaServed="South Korea" />
       <Navbar />
