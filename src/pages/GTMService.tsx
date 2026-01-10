@@ -313,7 +313,7 @@ const HeroSection = () => {
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-  return <section ref={ref} className="relative min-h-[90vh] flex flex-col justify-center px-6 md:px-12 lg:px-20 pt-32 pb-20 bg-background overflow-hidden">
+  return <section ref={ref} className="relative min-h-[90vh] flex flex-col justify-center px-4 md:px-8 lg:px-12 pt-28 pb-16 bg-background overflow-hidden w-full">
       {/* Floating graphics */}
       <FloatingGraphics />
       
@@ -758,12 +758,12 @@ const MarketIntelligenceSection = () => {
     subtitle: 'Real User Acquisition',
     description: "Institutional money follows retail heat. By securing genuine retail 'Mindshare' and actual wallet usage in Korea, we create the organic demand that exchanges and VCs look for."
   }];
-  return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-muted/30 border-y border-border">
+  return <section ref={ref} className="px-4 md:px-8 lg:px-12 py-16 bg-muted/30 border-y border-border w-full">
       <motion.div initial={{
       opacity: 0
     }} animate={isInView ? {
       opacity: 1
-    } : {}} className="max-w-7xl mx-auto">
+    } : {}} className="w-full">
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
           01 The Strategic Imperative
         </p>
@@ -1794,7 +1794,7 @@ const FrameworkSection = () => {
     margin: "-10%"
   });
   const [activeStage, setActiveStage] = useState<number | null>(null);
-  return <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background relative overflow-hidden">
+  return <section ref={ref} className="px-4 md:px-8 lg:px-12 py-16 bg-background relative overflow-hidden w-full">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.02] pointer-events-none">
         <div className="absolute inset-0" style={{
@@ -1807,7 +1807,7 @@ const FrameworkSection = () => {
       opacity: 0
     }} animate={isInView ? {
       opacity: 1
-    } : {}} className="max-w-6xl mx-auto relative z-10">
+    } : {}} className="w-full relative z-10">
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
           02 Process
         </p>
@@ -2112,8 +2112,8 @@ const CTASection = () => {
   const isInView = useInView(ref, {
     once: true
   });
-  return <section ref={ref} className="py-24 bg-gradient-to-br from-primary/10 via-background to-background">
-      <div className="max-w-4xl mx-auto px-6 md:px-12 lg:px-20 text-center">
+  return <section ref={ref} className="py-16 bg-gradient-to-br from-primary/10 via-background to-background w-full">
+      <div className="w-full px-4 md:px-8 lg:px-12 text-center">
         <motion.div initial={{
         opacity: 0,
         y: 30

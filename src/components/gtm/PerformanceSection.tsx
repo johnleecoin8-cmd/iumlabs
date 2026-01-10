@@ -465,7 +465,7 @@ export const PerformanceSection = () => {
   return (
     <section 
       ref={ref}
-      className="relative py-24 px-6 md:px-12 lg:px-20 overflow-hidden"
+      className="relative py-16 px-4 md:px-8 lg:px-12 overflow-hidden w-full"
     >
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
@@ -562,7 +562,7 @@ export const PerformanceSection = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="w-full relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
