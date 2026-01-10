@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
 import PerformanceSection from '@/components/gtm/PerformanceSection';
 import AuthoritySection from '@/components/gtm/AuthoritySection';
+import MobileCTAButton from '@/components/gtm/MobileCTAButton';
 import ServiceSchema from '@/components/ServiceSchema';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Search, Building, Zap, TrendingUp, Users, DollarSign, BarChart3, Trophy, Cpu, Database, Activity, LineChart, Target, Sparkles } from 'lucide-react';
@@ -2168,6 +2169,7 @@ const GTMService = () => {
         <CTASection />
       </main>
       <Footer />
+      <MobileCTAButton />
     </>;
 };
 export default GTMService;
