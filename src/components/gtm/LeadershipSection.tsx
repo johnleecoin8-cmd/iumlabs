@@ -47,16 +47,6 @@ const LeadershipSection = () => {
       description: "Translating complex Web3 tech into sustainable cultural movements and fandom-driven events, powered by a16z-level operational rigor.",
       descriptionKo: "실리콘밸리(a16z) 수준의 오퍼레이션 시스템을 도입하여, 단순 커뮤니티 관리를 넘어선 '문화'와 '팬덤'을 구축합니다.",
       photo: teamCommunityPhoto
-    },
-    {
-      number: "04",
-      title: "GROWTH LEAD",
-      role: "Head of Research",
-      background: "Ex-Journalist Korean Media",
-      quote: "Editorial Intelligence.",
-      description: "Leveraging deep media insights to spot market trends early and craft high-impact content strategies that dominate the news cycle.",
-      descriptionKo: "유력 매체 저널리스트 출신의 통찰력으로 시장 트렌드를 선점하고, 여론을 주도하는 킬러 콘텐츠와 리서치 전략을 도출합니다.",
-      photo: teamResearchPhoto
     }
   ];
 
