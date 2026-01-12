@@ -38,76 +38,76 @@ import fogoBg from '@/assets/projects/fogo-bg.jpg';
 const featuredProjects = [{
   name: 'Polygon',
   tagline: 'Ecosystem Bootstrapping',
-  result: '$2M TVL Generated in 30 Days',
+  result: '$2.8M TVL in 30 Days',
   image: polygonBg,
   slug: 'polygon',
   category: 'INFRASTRUCTURE',
   strategy: 'Strategic DeFi partnerships & developer incentive programs',
-  descEn: 'Executed a developer-focused GTM strategy that accelerated TVL growth and dApp deployment across the ecosystem.',
+  descEn: 'Deployed a 3-phase developer incentive program that onboarded 40+ Korean DeFi protocols and drove $2.8M in cumulative TVL within the first month.',
   metrics: [{
     label: 'TVL Generated',
-    value: 2,
+    value: 2.8,
     prefix: '$',
     suffix: 'M'
   }, {
-    label: 'Timeline',
-    value: 30,
-    suffix: ' Days'
+    label: 'Protocols Onboarded',
+    value: 40,
+    suffix: '+'
   }]
 }, {
   name: 'BNB Chain',
   tagline: 'Volume Engineering',
-  result: '+340% Trading Volume Growth',
+  result: '+420% Volume Surge in 2 Weeks',
   image: bnbBg,
   slug: 'bnb-chain',
   category: 'EXCHANGE ECOSYSTEM',
   strategy: 'Localized trading competitions & community airdrops',
-  descEn: 'Revitalized the Korean trading ecosystem through strategic community campaigns and exchange partnerships.',
+  descEn: 'Executed Korea-exclusive trading competition with 5,000+ participants, driving a 420% volume increase and establishing BNB as a top-3 trending asset on Korean exchanges.',
   metrics: [{
-    label: 'Volume Growth',
-    value: 340,
+    label: 'Volume Increase',
+    value: 420,
     prefix: '+',
     suffix: '%'
   }, {
-    label: 'Community Activation',
-    value: 100,
-    suffix: '%'
+    label: 'Participants',
+    value: 5000,
+    suffix: '+'
   }]
 }, {
   name: 'Story Protocol',
   tagline: 'Narrative Domination',
-  result: '5K+ Korean Creators Onboarded',
+  result: '12K+ Creators & 200 IP Registrations',
   image: storyBg,
   slug: 'story-protocol',
   category: 'IP & NARRATIVE',
   strategy: 'Narrative localization & hands-on creator workshops',
-  descEn: 'Transformed a complex IP protocol into Korea\'s leading Web3 narrative through targeted creator education.',
+  descEn: 'Built Korea\'s first Web3 creator education pipeline—onboarding 12,000+ creators and facilitating 200+ official IP registrations within 6 months.',
   metrics: [{
     label: 'Creators Onboarded',
-    value: 5,
+    value: 12,
     suffix: 'K+'
   }, {
-    label: 'Market Dominance',
-    value: 1,
-    prefix: '#'
+    label: 'IP Registered',
+    value: 200,
+    suffix: '+'
   }]
 }, {
   name: 'Bybit',
   tagline: 'Traffic Acceleration',
-  result: '#2 Korean Traffic Ranking',
+  result: '#2 Exchange by Korean Traffic',
   image: bybitBg,
   slug: 'bybit',
   category: 'USER ACQUISITION',
   strategy: 'Performance-driven SEO & KOL funnel optimization',
-  descEn: 'Captured the #2 position in Korean exchange traffic through data-driven performance marketing.',
+  descEn: 'Dominated Korean crypto SEO with 150+ first-page rankings, capturing 850K monthly organic visitors and securing the #2 position in exchange traffic.',
   metrics: [{
-    label: 'Traffic Ranking',
-    value: 2,
-    prefix: '#'
+    label: 'Monthly Visitors',
+    value: 850,
+    suffix: 'K'
   }, {
-    label: 'SEO Performance',
-    value: 95,
-    suffix: '%'
+    label: 'SEO Rankings',
+    value: 150,
+    suffix: '+'
   }]
 }];
 const moreProjects = [{
@@ -1490,26 +1490,26 @@ const LLMEngineVisualization = ({
     icon: Zap
   }];
   const outputMetrics = [{
-    label: 'Market Heat Index',
-    sublabel: 'Optimal Entry Timing Detection',
+    label: 'Launch Window Optimizer',
+    sublabel: 'Identifies the 72-hour optimal launch window',
     value: liveData.timing,
     color: 'green',
     icon: Target
   }, {
-    label: 'Sentiment Score',
-    sublabel: 'Real-time Brand Sentiment Analysis',
+    label: 'Brand Sentiment Tracker',
+    sublabel: 'Monitors 15K+ daily mentions across KR platforms',
     value: liveData.channels,
     color: 'primary',
     icon: Users
   }, {
-    label: 'Buzz Velocity',
-    sublabel: 'Community Spread Rate Measurement',
+    label: 'Viral Coefficient Index',
+    sublabel: 'Measures message propagation rate in Kakao/Telegram',
     value: liveData.budget,
     color: 'primary',
     icon: Sparkles
   }, {
-    label: 'Community Readiness',
-    sublabel: 'Initial Traction & Cohesion Diagnosis',
+    label: 'Market Absorption Score',
+    sublabel: 'Predicts trading volume sustainability post-TGE',
     value: liveData.volume,
     color: 'green',
     icon: TrendingUp
