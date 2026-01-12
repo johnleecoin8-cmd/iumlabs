@@ -42,8 +42,8 @@ const featuredProjects = [{
   image: polygonBg,
   slug: 'polygon',
   category: 'INFRASTRUCTURE',
-  strategy: 'Strategic DeFi partnerships & Developer Incentives',
-  descEn: 'We executed a developer-focused GTM strategy to boost TVL and dApp deployment.',
+  strategy: 'Strategic DeFi partnerships & developer incentive programs',
+  descEn: 'Executed a developer-focused GTM strategy that accelerated TVL growth and dApp deployment across the ecosystem.',
   metrics: [{
     label: 'TVL Generated',
     value: 2,
@@ -61,8 +61,8 @@ const featuredProjects = [{
   image: bnbBg,
   slug: 'bnb-chain',
   category: 'EXCHANGE ECOSYSTEM',
-  strategy: 'Localized trading competitions & community Airdrops',
-  descEn: 'Revitalized the trading ecosystem through community initiatives and exchange partnerships.',
+  strategy: 'Localized trading competitions & community airdrops',
+  descEn: 'Revitalized the Korean trading ecosystem through strategic community campaigns and exchange partnerships.',
   metrics: [{
     label: 'Volume Growth',
     value: 340,
@@ -80,8 +80,8 @@ const featuredProjects = [{
   image: storyBg,
   slug: 'story-protocol',
   category: 'IP & NARRATIVE',
-  strategy: 'Narrative localization & Creator workshops',
-  descEn: 'Positioned a complex IP protocol as the leading trend in the Korean market.',
+  strategy: 'Narrative localization & hands-on creator workshops',
+  descEn: 'Transformed a complex IP protocol into Korea\'s leading Web3 narrative through targeted creator education.',
   metrics: [{
     label: 'Creators Onboarded',
     value: 5,
@@ -98,8 +98,8 @@ const featuredProjects = [{
   image: bybitBg,
   slug: 'bybit',
   category: 'USER ACQUISITION',
-  strategy: 'High-performance SEO & KOL funnel optimization',
-  descEn: 'Secured the #2 spot in Korean exchange traffic through aggressive performance marketing.',
+  strategy: 'Performance-driven SEO & KOL funnel optimization',
+  descEn: 'Captured the #2 position in Korean exchange traffic through data-driven performance marketing.',
   metrics: [{
     label: 'Traffic Ranking',
     value: 2,
@@ -150,30 +150,30 @@ const moreProjects = [{
 const frameworkStages = [{
   number: '01',
   title: 'INTELLIGENCE',
-  subtitle: 'Data-Driven Strategy',
-  items: ['Competitor SOV Benchmarking', 'Narrative Design for Korean Fit', 'Market Gap Analysis'],
-  quote: '"We analyze the market gap using proprietary data intelligence."',
+  subtitle: 'Data-Driven Foundation',
+  items: ['Competitor Share-of-Voice Analysis', 'Korea-Fit Narrative Design', 'Market Opportunity Mapping'],
+  quote: '"Every strategy begins with deep market intelligence."',
   icon: Search
 }, {
   number: '02',
   title: 'LOCALIZATION',
-  subtitle: 'Cultural Connection',
-  items: ['Naver & Kakao Optimization', '24/7 Community Infrastructure', 'Brand Positioning'],
-  quote: '"We rebuild your presence to resonate with the local ecosystem."',
+  subtitle: 'Cultural Resonance',
+  items: ['Naver & Kakao Ecosystem Integration', '24/7 Community Infrastructure', 'Brand Identity Adaptation'],
+  quote: '"We rebuild your presence to connect authentically with local audiences."',
   icon: Building
 }, {
   number: '03',
   title: 'ACTIVATION',
-  subtitle: 'Maximum Impact',
-  items: ['Tier-1 Media (BlockMedia, CoinNess)', 'Verified KOL Network', 'Strategic Event Partnerships'],
-  quote: '"We coordinate all channels to fire simultaneously."',
+  subtitle: 'Coordinated Launch',
+  items: ['Tier-1 Media Coverage (BlockMedia, CoinNess)', 'Verified KOL Network Deployment', 'Strategic Event Partnerships'],
+  quote: '"All channels fire simultaneously for maximum impact."',
   icon: Zap
 }, {
   number: '04',
   title: 'GROWTH',
-  subtitle: 'Sustainable Metrics',
-  items: ['Wallet Installs & DApp Usage', 'Exchange Liquidity Support', 'Developer Outreach & Grants'],
-  quote: '"Turning initial hype into on-chain results."',
+  subtitle: 'Sustainable Traction',
+  items: ['Wallet Adoption & DApp Engagement', 'Exchange Liquidity Optimization', 'Developer Outreach Programs'],
+  quote: '"We transform initial buzz into lasting on-chain results."',
   icon: TrendingUp
 }];
 
@@ -510,7 +510,7 @@ const HeroSection = () => {
           duration: 0.6,
           delay: 0.5
         }} className="text-sm md:text-lg text-muted-foreground mb-6 md:mb-8 max-w-lg leading-relaxed">
-            Korea ranks #2 globally in crypto trading volume with 4x faster market velocity. We bridge your project to this high-potential, retail-driven ecosystem.
+            The #2 global crypto market by volume. 4x faster trading velocity. A retail-driven ecosystem where projects build their strongest foundations.
           </motion.p>
 
           {/* Stats Row */}
@@ -1016,18 +1016,18 @@ const MarketIntelligenceSection = () => {
   const marketLogic = [{
     number: '01',
     title: 'The Viral Gateway',
-    subtitle: '#1 Trend Setter in Asia',
-    description: "Korea isn't just a market; it's a microphone. Trends ignited in Seoul spread to Japan, SEA, and beyond. Winning here means winning Asia's attention economy."
+    subtitle: 'Asia\'s #1 Trend Setter',
+    description: "Korea isn't just a market—it's an amplifier. Trends that ignite in Seoul spread rapidly across Japan, Southeast Asia, and beyond. Success here means capturing Asia's attention economy."
   }, {
     number: '02',
-    title: 'Hyper-Active Users',
-    subtitle: 'Highest Engagement Rate',
-    description: "Korean users don't just 'hold'; they engage, discuss, and advocate. We tap into the world's most hyper-connected digital society to build a sticky, vocal community foundation."
+    title: 'Hyper-Engaged Users',
+    subtitle: 'Highest Engagement Globally',
+    description: "Korean users don't just hold—they research, debate, and champion projects they believe in. We help you tap into the world's most digitally connected community."
   }, {
     number: '03',
     title: 'Retail Powerhouse',
-    subtitle: 'Real User Acquisition',
-    description: "Institutional money follows retail heat. By securing genuine retail 'Mindshare' and actual wallet usage in Korea, we create the organic demand that exchanges and VCs look for."
+    subtitle: 'Organic Demand Engine',
+    description: "Institutional capital follows retail conviction. By capturing genuine mindshare and real wallet activity in Korea, we build the organic momentum that attracts exchanges and investors."
   }];
   return <section ref={ref} className="px-4 md:px-8 lg:px-12 py-12 md:py-16 bg-muted/30 border-y border-border w-full">
       <motion.div initial={{
@@ -1042,7 +1042,7 @@ const MarketIntelligenceSection = () => {
           Why Korea?
         </h2>
         <p className="text-muted-foreground text-sm md:text-lg mb-8 md:mb-16">
-          Korea moves fast. Users are passionate.
+          The world's most dynamic crypto market demands a specialized approach.
         </p>
 
         {/* Module A: The Market Logic - 3 Column */}
@@ -1177,7 +1177,7 @@ const MarketIntelligenceSection = () => {
         delay: 0.5
       }} className="border-l-2 border-primary pl-4 md:pl-6">
           <p className="text-base md:text-xl text-foreground italic leading-relaxed">
-            "Korean users don't just hold; they engage, discuss, and advocate. We turn the world's most hyper-connected users into your passionate champions."
+            "Korean users are the most engaged crypto community in the world. We transform that energy into your project's strongest foundation."
           </p>
           <footer className="mt-2 text-xs md:text-sm text-muted-foreground">
             — The ium Philosophy
@@ -1564,13 +1564,13 @@ const LLMEngineVisualization = ({
           }}>
               <Cpu className="w-3 h-3 md:w-4 md:h-4 text-primary" />
             </motion.div>
-            <span className="text-[10px] md:text-xs font-mono text-primary tracking-wider">THE IUM ALGORITHM</span>
+            <span className="text-[10px] md:text-xs font-mono text-primary tracking-wider">INTELLIGENCE ENGINE</span>
           </motion.div>
           <h3 className="text-lg md:text-2xl lg:text-3xl font-medium text-foreground mb-2 md:mb-3">
-            The Intelligence Engine
+            Data-Driven Decision Making
           </h3>
           <p className="text-muted-foreground max-w-2xl mx-auto text-xs md:text-sm">
-            <span className="text-foreground font-medium">"We optimize for Impact."</span> Our proprietary AI synthesizes <span className="text-primary font-medium">social sentiment & on-chain behavior</span> to engineer the perfect market entry.
+            Our proprietary intelligence system analyzes <span className="text-primary font-medium">social sentiment and on-chain behavior</span> in real-time to identify optimal market entry strategies.
           </p>
         </div>
 
@@ -2077,13 +2077,13 @@ const FrameworkSection = () => {
       opacity: 1
     } : {}} className="w-full relative z-10">
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-          02 Process
+          02 Our Process
         </p>
         <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-6">
-          The ium Algorithm
+          The ium Framework
         </h2>
         <p className="text-muted-foreground max-w-xl mb-12">
-          Our proven 4-stage framework has helped 30+ projects successfully launch in Korea.
+          A battle-tested 4-stage methodology that has successfully launched 30+ projects into the Korean market.
         </p>
 
         {/* LLM Engine Visualization */}
@@ -2344,13 +2344,13 @@ const SuccessStoriesSection = () => {
     >
       <div className="mb-12">
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-          03 Success Stories
+          03 Case Studies
         </p>
         <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-4">
-          Real Data. Real Results.
+          Proven Results
         </h2>
         <p className="text-muted-foreground max-w-2xl">
-          We don't just promise—we deliver measurable outcomes. Here's proof from our flagship campaigns.
+          Measurable outcomes from our flagship campaigns. Every metric backed by real on-chain data.
         </p>
       </div>
 
