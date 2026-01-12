@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 interface Project {
@@ -18,101 +18,118 @@ interface SocialGraphProps {
   activeProjectId: string | null;
 }
 
-// Category color mapping with gradients
-const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
-  'Layer 1': { bg: 'rgba(59, 130, 246, 0.15)', text: '#3B82F6', border: 'rgba(59, 130, 246, 0.3)' },
-  'Layer 2': { bg: 'rgba(16, 185, 129, 0.15)', text: '#10B981', border: 'rgba(16, 185, 129, 0.3)' },
-  'DeFi': { bg: 'rgba(139, 92, 246, 0.15)', text: '#8B5CF6', border: 'rgba(139, 92, 246, 0.3)' },
-  'AI': { bg: 'rgba(236, 72, 153, 0.15)', text: '#EC4899', border: 'rgba(236, 72, 153, 0.3)' },
-  'Gaming': { bg: 'rgba(245, 158, 11, 0.15)', text: '#F59E0B', border: 'rgba(245, 158, 11, 0.3)' },
-  'Infrastructure': { bg: 'rgba(6, 182, 212, 0.15)', text: '#06B6D4', border: 'rgba(6, 182, 212, 0.3)' },
-  'Exchange': { bg: 'rgba(239, 68, 68, 0.15)', text: '#EF4444', border: 'rgba(239, 68, 68, 0.3)' },
-  'default': { bg: 'rgba(107, 114, 128, 0.15)', text: '#6B7280', border: 'rgba(107, 114, 128, 0.3)' },
+// Category color mapping
+const categoryColors: Record<string, { bg: string; text: string; glow: string }> = {
+  'Layer 1': { bg: 'rgba(59, 130, 246, 0.2)', text: '#3B82F6', glow: '0 0 20px rgba(59, 130, 246, 0.4)' },
+  'Layer 2': { bg: 'rgba(16, 185, 129, 0.2)', text: '#10B981', glow: '0 0 20px rgba(16, 185, 129, 0.4)' },
+  'DeFi': { bg: 'rgba(139, 92, 246, 0.2)', text: '#8B5CF6', glow: '0 0 20px rgba(139, 92, 246, 0.4)' },
+  'AI': { bg: 'rgba(236, 72, 153, 0.2)', text: '#EC4899', glow: '0 0 20px rgba(236, 72, 153, 0.4)' },
+  'Gaming': { bg: 'rgba(245, 158, 11, 0.2)', text: '#F59E0B', glow: '0 0 20px rgba(245, 158, 11, 0.4)' },
+  'Infrastructure': { bg: 'rgba(6, 182, 212, 0.2)', text: '#06B6D4', glow: '0 0 20px rgba(6, 182, 212, 0.4)' },
+  'Exchange': { bg: 'rgba(239, 68, 68, 0.2)', text: '#EF4444', glow: '0 0 20px rgba(239, 68, 68, 0.4)' },
+  'default': { bg: 'rgba(107, 114, 128, 0.2)', text: '#6B7280', glow: '0 0 20px rgba(107, 114, 128, 0.4)' },
 };
 
-// Treemap layout algorithm
-const calculateTreemap = (
-  items: { value: number; id: string }[],
-  width: number,
-  height: number,
-  x: number = 0,
-  y: number = 0
-): { id: string; x: number; y: number; width: number; height: number }[] => {
-  if (items.length === 0) return [];
-  if (items.length === 1) {
-    return [{ id: items[0].id, x, y, width, height }];
-  }
-
-  const total = items.reduce((sum, item) => sum + item.value, 0);
+// Bubble packing algorithm
+const packBubbles = (
+  bubbles: { id: string; radius: number }[],
+  containerWidth: number,
+  containerHeight: number
+) => {
+  const centerX = containerWidth / 2;
+  const centerY = containerHeight / 2;
   
-  // Split items into two groups with roughly equal total values
-  let leftSum = 0;
-  let splitIndex = 0;
-  for (let i = 0; i < items.length; i++) {
-    if (leftSum + items[i].value <= total / 2) {
-      leftSum += items[i].value;
-      splitIndex = i + 1;
-    } else {
-      break;
+  const positions: { id: string; x: number; y: number; radius: number }[] = [];
+  
+  // Sort by radius (largest first)
+  const sorted = [...bubbles].sort((a, b) => b.radius - a.radius);
+  
+  sorted.forEach((bubble, index) => {
+    if (index === 0) {
+      // First bubble goes to center
+      positions.push({ ...bubble, x: centerX, y: centerY });
+      return;
     }
-  }
+    
+    // Try to find a position that doesn't overlap
+    let bestPosition = { x: centerX, y: centerY };
+    let minDistance = Infinity;
+    
+    // Try multiple angles around placed bubbles
+    for (let attempts = 0; attempts < 100; attempts++) {
+      const angle = (attempts / 100) * Math.PI * 2;
+      const distance = 30 + attempts * 2;
+      
+      const testX = centerX + Math.cos(angle) * distance;
+      const testY = centerY + Math.sin(angle) * distance;
+      
+      // Check for overlaps
+      let hasOverlap = false;
+      for (const placed of positions) {
+        const dx = testX - placed.x;
+        const dy = testY - placed.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const minDist = bubble.radius + placed.radius + 4;
+        
+        if (dist < minDist) {
+          hasOverlap = true;
+          break;
+        }
+      }
+      
+      if (!hasOverlap) {
+        const distFromCenter = Math.sqrt(
+          Math.pow(testX - centerX, 2) + Math.pow(testY - centerY, 2)
+        );
+        if (distFromCenter < minDistance) {
+          minDistance = distFromCenter;
+          bestPosition = { x: testX, y: testY };
+        }
+      }
+    }
+    
+    positions.push({ ...bubble, ...bestPosition });
+  });
   
-  if (splitIndex === 0) splitIndex = 1;
-  if (splitIndex === items.length) splitIndex = items.length - 1;
-  
-  const leftItems = items.slice(0, splitIndex);
-  const rightItems = items.slice(splitIndex);
-  const leftTotal = leftItems.reduce((sum, item) => sum + item.value, 0);
-  const rightTotal = rightItems.reduce((sum, item) => sum + item.value, 0);
-  
-  const isHorizontalSplit = width >= height;
-  
-  if (isHorizontalSplit) {
-    const leftWidth = (leftTotal / total) * width;
-    return [
-      ...calculateTreemap(leftItems, leftWidth, height, x, y),
-      ...calculateTreemap(rightItems, width - leftWidth, height, x + leftWidth, y),
-    ];
-  } else {
-    const topHeight = (leftTotal / total) * height;
-    return [
-      ...calculateTreemap(leftItems, width, topHeight, x, y),
-      ...calculateTreemap(rightItems, width, height - topHeight, x, y + topHeight),
-    ];
-  }
+  return positions;
 };
 
 const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphProps) => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [containerSize, setContainerSize] = useState({ width: 400, height: 350 });
 
-  // Calculate treemap layout
-  const treemapData = useMemo(() => {
+  // Calculate bubble positions
+  const bubbles = useMemo(() => {
     const topProjects = projects.slice(0, 15);
-    const containerWidth = 100;
-    const containerHeight = 100;
-    const padding = 0.5;
+    const maxScore = Math.max(...topProjects.map(p => p.mindshare_score), 1);
+    const minRadius = 25;
+    const maxRadius = 55;
 
-    const items = topProjects.map(p => ({
-      value: Math.max(p.mindshare_score, 10),
-      id: p.id,
-    }));
+    const bubbleData = topProjects.map(project => {
+      const normalizedScore = project.mindshare_score / maxScore;
+      const radius = minRadius + normalizedScore * (maxRadius - minRadius);
+      
+      return {
+        id: project.id,
+        radius,
+      };
+    });
 
-    const layout = calculateTreemap(items, containerWidth, containerHeight);
+    const positions = packBubbles(bubbleData, containerSize.width, containerSize.height);
 
-    return topProjects.map((project, index) => {
-      const rect = layout.find(l => l.id === project.id);
+    return topProjects.map(project => {
+      const pos = positions.find(p => p.id === project.id);
       const colors = categoryColors[project.category] || categoryColors.default;
       
       return {
         ...project,
-        x: (rect?.x || 0) + padding,
-        y: (rect?.y || 0) + padding,
-        width: Math.max((rect?.width || 10) - padding * 2, 5),
-        height: Math.max((rect?.height || 10) - padding * 2, 5),
+        x: pos?.x || containerSize.width / 2,
+        y: pos?.y || containerSize.height / 2,
+        radius: pos?.radius || 30,
         colors,
       };
     });
-  }, [projects]);
+  }, [projects, containerSize]);
 
   const handleMouseEnter = (projectId: string) => {
     setHoveredId(projectId);
@@ -128,25 +145,24 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
     return hoveredId === projectId || activeProjectId === projectId;
   };
 
-  // Calculate percentage change
   const getChange = (project: Project) => {
     if (project.previous_score === 0) return 0;
     return ((project.mindshare_score - project.previous_score) / project.previous_score) * 100;
   };
 
   return (
-    <div className="relative w-full h-full min-h-[450px] p-4">
+    <div className="relative w-full h-full min-h-[450px] p-4 flex flex-col">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <h3 className="text-sm font-medium text-white">Mindshare Distribution</h3>
-          <p className="text-xs text-white/40 mt-0.5">Top 15 projects by mindshare</p>
+          <h3 className="text-sm font-medium text-white">Mindshare Bubbles</h3>
+          <p className="text-xs text-white/40 mt-0.5">Size = Mindshare Score</p>
         </div>
         <div className="flex items-center gap-3">
           {['Layer 1', 'DeFi', 'AI'].map(cat => (
             <div key={cat} className="flex items-center gap-1.5">
               <div 
-                className="w-2 h-2 rounded-sm" 
+                className="w-2 h-2 rounded-full" 
                 style={{ backgroundColor: categoryColors[cat]?.text || '#666' }}
               />
               <span className="text-[10px] text-white/40">{cat}</span>
@@ -155,101 +171,146 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
         </div>
       </div>
 
-      {/* Treemap Container */}
-      <div className="relative w-full aspect-[4/3] rounded-xl overflow-hidden bg-white/[0.02] border border-white/[0.05]">
+      {/* Bubble Chart Container */}
+      <div 
+        className="relative flex-1 rounded-xl overflow-hidden bg-white/[0.02] border border-white/[0.05]"
+        style={{ minHeight: 350 }}
+      >
+        {/* Animated background gradient */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-gradient-radial from-primary/20 via-transparent to-transparent blur-3xl" />
+        </div>
+
+        {/* Bubbles */}
         <svg 
-          viewBox="0 0 100 100" 
+          viewBox={`0 0 ${containerSize.width} ${containerSize.height}`}
           className="w-full h-full"
-          preserveAspectRatio="none"
+          preserveAspectRatio="xMidYMid meet"
         >
-          {treemapData.map((node, index) => {
-            const highlighted = isHighlighted(node.id);
-            const change = getChange(node);
-            const showLabel = node.width > 12 && node.height > 10;
-            const showScore = node.width > 15 && node.height > 12;
+          <defs>
+            {bubbles.map(bubble => (
+              <radialGradient key={`grad-${bubble.id}`} id={`bubble-grad-${bubble.id}`} cx="30%" cy="30%">
+                <stop offset="0%" stopColor={bubble.colors.text} stopOpacity="0.4" />
+                <stop offset="100%" stopColor={bubble.colors.text} stopOpacity="0.1" />
+              </radialGradient>
+            ))}
+            <filter id="bubble-glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {bubbles.map((bubble, index) => {
+            const highlighted = isHighlighted(bubble.id);
+            const change = getChange(bubble);
             
             return (
               <motion.g
-                key={node.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: index * 0.03 }}
-                onMouseEnter={() => handleMouseEnter(node.id)}
+                key={bubble.id}
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ 
+                  scale: 1, 
+                  opacity: 1,
+                }}
+                transition={{ 
+                  type: 'spring',
+                  stiffness: 200,
+                  damping: 20,
+                  delay: index * 0.05 
+                }}
+                style={{ transformOrigin: `${bubble.x}px ${bubble.y}px` }}
+                onMouseEnter={() => handleMouseEnter(bubble.id)}
                 onMouseLeave={handleMouseLeave}
                 className="cursor-pointer"
               >
-                {/* Background rect */}
-                <motion.rect
-                  x={node.x}
-                  y={node.y}
-                  width={node.width}
-                  height={node.height}
-                  rx={0.8}
-                  fill={node.colors.bg}
-                  stroke={highlighted ? node.colors.text : node.colors.border}
-                  strokeWidth={highlighted ? 0.3 : 0.1}
-                  initial={{ scale: 0.9 }}
-                  animate={{ 
-                    scale: highlighted ? 0.98 : 1,
-                    fill: highlighted ? node.colors.bg.replace('0.15', '0.25') : node.colors.bg
+                {/* Outer glow ring */}
+                {highlighted && (
+                  <motion.circle
+                    cx={bubble.x}
+                    cy={bubble.y}
+                    r={bubble.radius + 4}
+                    fill="none"
+                    stroke={bubble.colors.text}
+                    strokeWidth={2}
+                    strokeOpacity={0.5}
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1.1, opacity: [0.5, 0.2, 0.5] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  />
+                )}
+
+                {/* Main bubble */}
+                <motion.circle
+                  cx={bubble.x}
+                  cy={bubble.y}
+                  r={bubble.radius}
+                  fill={`url(#bubble-grad-${bubble.id})`}
+                  stroke={bubble.colors.text}
+                  strokeWidth={highlighted ? 2 : 1}
+                  strokeOpacity={highlighted ? 0.8 : 0.3}
+                  filter={highlighted ? 'url(#bubble-glow)' : undefined}
+                  animate={{
+                    r: highlighted ? bubble.radius * 1.08 : bubble.radius,
                   }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                 />
-                
-                {/* Rank badge for top 3 */}
-                {node.rank <= 3 && (
+
+                {/* Rank badge */}
+                {bubble.rank <= 3 && (
                   <g>
                     <circle
-                      cx={node.x + 2.5}
-                      cy={node.y + 2.5}
-                      r={2}
-                      fill={node.rank === 1 ? '#FFD700' : node.rank === 2 ? '#C0C0C0' : '#CD7F32'}
+                      cx={bubble.x - bubble.radius * 0.6}
+                      cy={bubble.y - bubble.radius * 0.6}
+                      r={10}
+                      fill={bubble.rank === 1 ? '#FFD700' : bubble.rank === 2 ? '#C0C0C0' : '#CD7F32'}
                     />
                     <text
-                      x={node.x + 2.5}
-                      y={node.y + 2.5}
+                      x={bubble.x - bubble.radius * 0.6}
+                      y={bubble.y - bubble.radius * 0.6}
                       textAnchor="middle"
                       dominantBaseline="central"
                       fill="#000"
-                      fontSize="1.5"
+                      fontSize="10"
                       fontWeight="bold"
                     >
-                      {node.rank}
+                      {bubble.rank}
                     </text>
                   </g>
                 )}
-                
+
                 {/* Project name */}
-                {showLabel && (
-                  <text
-                    x={node.x + node.width / 2}
-                    y={node.y + node.height / 2 - (showScore ? 1.5 : 0)}
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fill="#fff"
-                    fontSize={Math.min(node.width / 8, 3)}
-                    fontWeight="600"
-                    className="pointer-events-none"
-                  >
-                    {node.name.length > 10 ? node.name.slice(0, 8) + '..' : node.name}
-                  </text>
-                )}
-                
+                <text
+                  x={bubble.x}
+                  y={bubble.y - 4}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fill="#fff"
+                  fontSize={Math.max(bubble.radius / 4, 9)}
+                  fontWeight="600"
+                  className="pointer-events-none"
+                >
+                  {bubble.name.length > 8 ? bubble.name.slice(0, 7) + '..' : bubble.name}
+                </text>
+
                 {/* Score */}
-                {showScore && (
-                  <text
-                    x={node.x + node.width / 2}
-                    y={node.y + node.height / 2 + 2.5}
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                    fill={node.colors.text}
-                    fontSize={Math.min(node.width / 10, 2)}
-                    fontWeight="500"
-                    className="pointer-events-none"
-                  >
-                    {node.mindshare_score.toLocaleString()}
-                  </text>
-                )}
+                <text
+                  x={bubble.x}
+                  y={bubble.y + 10}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fill={bubble.colors.text}
+                  fontSize={Math.max(bubble.radius / 5, 8)}
+                  fontWeight="500"
+                  className="pointer-events-none"
+                >
+                  {bubble.mindshare_score >= 1000 
+                    ? (bubble.mindshare_score / 1000).toFixed(1) + 'K'
+                    : bubble.mindshare_score
+                  }
+                </text>
               </motion.g>
             );
           })}
@@ -260,10 +321,10 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
           <motion.div
             initial={{ opacity: 0, y: 5 }}
             animate={{ opacity: 1, y: 0 }}
-            className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-black/80 backdrop-blur-sm border border-white/10"
+            className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-black/90 backdrop-blur-sm border border-white/10"
           >
             {(() => {
-              const project = treemapData.find(p => p.id === hoveredId);
+              const project = bubbles.find(p => p.id === hoveredId);
               if (!project) return null;
               const change = getChange(project);
               
@@ -271,20 +332,24 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div 
-                      className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold"
-                      style={{ backgroundColor: project.colors.bg, color: project.colors.text }}
+                      className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2"
+                      style={{ 
+                        backgroundColor: project.colors.bg, 
+                        color: project.colors.text,
+                        borderColor: project.colors.text 
+                      }}
                     >
                       #{project.rank}
                     </div>
                     <div>
-                      <p className="text-white font-medium text-sm">{project.name}</p>
+                      <p className="text-white font-medium">{project.name}</p>
                       <p className="text-white/40 text-xs">{project.category}</p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-white font-semibold">{project.mindshare_score.toLocaleString()}</p>
+                    <p className="text-white font-semibold text-lg">{project.mindshare_score.toLocaleString()}</p>
                     <p className={`text-xs font-medium ${change >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                      {change >= 0 ? '+' : ''}{change.toFixed(1)}%
+                      {change >= 0 ? '▲' : '▼'} {Math.abs(change).toFixed(1)}%
                     </p>
                   </div>
                 </div>
