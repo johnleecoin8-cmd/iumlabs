@@ -149,31 +149,31 @@ const moreProjects = [{
 }];
 const frameworkStages = [{
   number: '01',
-  title: 'INTELLIGENCE',
-  subtitle: 'Data-Driven Foundation',
-  items: ['Competitor Share-of-Voice Analysis', 'Korea-Fit Narrative Design', 'Market Opportunity Mapping'],
+  title: 'ANALYZE',
+  subtitle: 'Intelligence',
+  items: ['Competitor Share-of-Voice (SOV) Analysis', 'On-chain Behavior & Wallet Profiling', 'Market Opportunity & Gap Mapping'],
   quote: '"Every strategy begins with deep market intelligence."',
   icon: Search
 }, {
   number: '02',
-  title: 'LOCALIZATION',
-  subtitle: 'Cultural Resonance',
-  items: ['Naver & Kakao Ecosystem Integration', '24/7 Community Infrastructure', 'Brand Identity Adaptation'],
-  quote: '"We rebuild your presence to connect authentically with local audiences."',
+  title: 'BUILD',
+  subtitle: 'Foundation',
+  items: ['Korea-Fit Narrative & Identity Design', 'Local Ecosystem Integration (Naver/Kakao)', '24/7 Community Infrastructure Setup'],
+  quote: '"We rebuild your presence to connect authentically."',
   icon: Building
 }, {
   number: '03',
-  title: 'ACTIVATION',
-  subtitle: 'Coordinated Launch',
-  items: ['Tier-1 Media Coverage (BlockMedia, CoinNess)', 'Verified KOL Network Deployment', 'Strategic Event Partnerships'],
+  title: 'IGNITE',
+  subtitle: 'Launch',
+  items: ['Tier-1 Media Coverage (BlockMedia, CoinNess)', 'Verified KOL & Alpha Community Deployment', 'Coordinated Viral Marketing Campaigns'],
   quote: '"All channels fire simultaneously for maximum impact."',
   icon: Zap
 }, {
   number: '04',
-  title: 'GROWTH',
-  subtitle: 'Sustainable Traction',
-  items: ['Wallet Adoption & DApp Engagement', 'Exchange Liquidity Optimization', 'Developer Outreach Programs'],
-  quote: '"We transform initial buzz into lasting on-chain results."',
+  title: 'SCALE',
+  subtitle: 'Growth',
+  items: ['Exchange Liquidity & Tokenomics Support', 'Strategic Partnerships & Offline Activations', 'User Retention & DApp Engagement Programs'],
+  quote: '"Turning initial hype into sustainable retention."',
   icon: TrendingUp
 }];
 
