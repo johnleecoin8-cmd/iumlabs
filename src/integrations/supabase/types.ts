@@ -41,6 +41,168 @@ export type Database = {
         }
         Relationships: []
       }
+      influencer_activities: {
+        Row: {
+          activity_type: string
+          created_at: string
+          description: string | null
+          id: string
+          impact_score: number | null
+          influencer_id: string
+        }
+        Insert: {
+          activity_type: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          impact_score?: number | null
+          influencer_id: string
+        }
+        Update: {
+          activity_type?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          impact_score?: number | null
+          influencer_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "influencer_activities_influencer_id_fkey"
+            columns: ["influencer_id"]
+            isOneToOne: false
+            referencedRelation: "influencers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      influencer_posts: {
+        Row: {
+          comments: number | null
+          content: string
+          created_at: string
+          id: string
+          influencer_id: string
+          likes: number | null
+          post_url: string | null
+          sentiment_score: number | null
+          shares: number | null
+        }
+        Insert: {
+          comments?: number | null
+          content: string
+          created_at?: string
+          id?: string
+          influencer_id: string
+          likes?: number | null
+          post_url?: string | null
+          sentiment_score?: number | null
+          shares?: number | null
+        }
+        Update: {
+          comments?: number | null
+          content?: string
+          created_at?: string
+          id?: string
+          influencer_id?: string
+          likes?: number | null
+          post_url?: string | null
+          sentiment_score?: number | null
+          shares?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "influencer_posts_influencer_id_fkey"
+            columns: ["influencer_id"]
+            isOneToOne: false
+            referencedRelation: "influencers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      influencer_score_history: {
+        Row: {
+          id: string
+          influencer_id: string
+          recorded_at: string
+          score: number
+        }
+        Insert: {
+          id?: string
+          influencer_id: string
+          recorded_at?: string
+          score: number
+        }
+        Update: {
+          id?: string
+          influencer_id?: string
+          recorded_at?: string
+          score?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "influencer_score_history_influencer_id_fkey"
+            columns: ["influencer_id"]
+            isOneToOne: false
+            referencedRelation: "influencers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      influencers: {
+        Row: {
+          avatar_url: string | null
+          bio: string | null
+          created_at: string
+          engagement_rate: number | null
+          followers: number | null
+          id: string
+          is_active: boolean | null
+          name: string
+          platform: string
+          profile_url: string | null
+          score: number
+          tier: string
+          tier_color: string
+          trend: number
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          engagement_rate?: number | null
+          followers?: number | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          platform: string
+          profile_url?: string | null
+          score?: number
+          tier?: string
+          tier_color?: string
+          trend?: number
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          bio?: string | null
+          created_at?: string
+          engagement_rate?: number | null
+          followers?: number | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          platform?: string
+          profile_url?: string | null
+          score?: number
+          tier?: string
+          tier_color?: string
+          trend?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
       job_applications: {
         Row: {
           cover_letter: string | null
