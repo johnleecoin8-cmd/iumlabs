@@ -1,8 +1,13 @@
+# Ium Labs Robots.txt
+# https://iumlabs.io
+
 User-agent: Googlebot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Bingbot
 Allow: /
+Crawl-delay: 1
 
 User-agent: Twitterbot
 Allow: /
@@ -10,7 +15,29 @@ Allow: /
 User-agent: facebookexternalhit
 Allow: /
 
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
 User-agent: *
 Allow: /
 
+# Sitemap location
 Sitemap: https://iumlabs.io/sitemap.xml
+
+# Disallow admin and private paths
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /*?*
+
+# Allow important assets
+Allow: /images/
+Allow: /videos/
+Allow: /*.css$
+Allow: /*.js$
