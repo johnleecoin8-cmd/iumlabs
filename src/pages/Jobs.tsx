@@ -157,8 +157,10 @@ const JobsHeroVideo = () => {
 
 const Jobs = () => {
   usePageMeta({
-    title: "Careers | Ium Labs - Join Our Web3 Team",
-    description: "Join Ium Labs and shape the future of Web3 in Korea. We're looking for passionate Researchers and Growth Managers."
+    title: "Careers | Join Our Web3 Team",
+    description: "Join Ium Labs and shape the future of Web3 in Korea. We're looking for passionate Researchers and Growth Managers.",
+    path: "/jobs",
+    image: "/og-image.png"
   });
   const [formData, setFormData] = useState({
     name: "",

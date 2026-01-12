@@ -69,7 +69,12 @@ const ContactHeroVideo = () => {
 };
 
 const Contact = () => {
-  usePageMeta("Contact Us", "Get in touch with ium Labs for Korean Web3 marketing. Free consultation, 24h response. Seoul-based experts helping global projects succeed in Korea.", "/contact");
+  usePageMeta({
+    title: "Contact Us",
+    description: "Get in touch with ium Labs for Korean Web3 marketing. Free consultation, 24h response. Seoul-based experts helping global projects succeed in Korea.",
+    path: "/contact",
+    image: "/og-image.png"
+  });
   const location = useLocation();
   useEffect(() => {
     if (location.hash) {

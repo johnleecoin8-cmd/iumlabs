@@ -164,11 +164,12 @@ const faqItems: FAQItem[] = [
 ];
 
 const OfflineEventService = () => {
-  usePageMeta(
-    "Web3 Events in Korea",
-    "Create unforgettable crypto events in Seoul. Korean Web3 marketing through launch parties, meetups, and conferences with KOL attendance.",
-    "/services/offline-event"
-  );
+  usePageMeta({
+    title: "Web3 Events in Korea",
+    description: "Create unforgettable crypto events in Seoul. Korean Web3 marketing through launch parties, meetups, and conferences with KOL attendance.",
+    path: "/services/offline-event",
+    image: "/og-image.png"
+  });
   
   const [activePhase, setActivePhase] = useState<number | null>(null);
 

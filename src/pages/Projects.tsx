@@ -589,11 +589,12 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
 };
 
 const Projects = () => {
-  usePageMeta(
-    "Crypto Marketing Case Studies | ium Labs",
-    "View our portfolio of successful Korean crypto and Web3 marketing campaigns. 18+ global blockchain projects launched in Korea including Polygon, Ondo, and Story Protocol.",
-    "/projects"
-  );
+  usePageMeta({
+    title: "Crypto Marketing Case Studies",
+    description: "View our portfolio of successful Korean crypto and Web3 marketing campaigns. 18+ global blockchain projects launched in Korea including Polygon, Ondo, and Story Protocol.",
+    path: "/projects",
+    image: "/og-image.png"
+  });
   const [activeCategory, setActiveCategory] = useState("All");
   const [isStatsVisible, setIsStatsVisible] = useState(false);
 
