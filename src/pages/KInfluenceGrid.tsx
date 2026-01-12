@@ -1,8 +1,8 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { Activity, Zap, BarChart3, Crown, Flame } from 'lucide-react';
+import { Activity, Zap, BarChart3, Flame, Radio } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
-import TreemapCard from '@/components/leaderboard/TreemapCard';
+import HypeBar from '@/components/leaderboard/HypeBar';
 import GainersLosersList from '@/components/leaderboard/GainersLosersList';
 
 interface Project {
@@ -287,54 +287,84 @@ const KInfluenceGrid = () => {
             </motion.div>
           </div>
 
-          {/* Right Main - Treemap Grid - 70% */}
+          {/* Right Main - Hype Equalizer - 70% */}
           <div className="lg:w-[70%]">
-            <div className="rounded-xl border border-white/10 bg-white/[0.02] backdrop-blur-sm p-5">
-              {/* Header with Title, Badge, Update Info */}
-              <div className="flex items-center justify-between mb-5">
+            <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.03] to-black/40 backdrop-blur-xl p-6 overflow-hidden relative">
+              {/* Ambient glow effect */}
+              <div className="absolute inset-0 pointer-events-none">
+                <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00E0FF]/10 rounded-full blur-[100px]" />
+                <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-emerald-500/10 rounded-full blur-[80px]" />
+              </div>
+
+              {/* Header */}
+              <div className="relative z-10 flex items-center justify-between mb-8">
                 <div className="flex items-center gap-3">
-                  <h2 className="text-xl font-bold text-white">Project Mindshare</h2>
-                  <span className="px-2.5 py-1 text-xs font-bold bg-[#00E0FF]/20 text-[#00E0FF] rounded-full border border-[#00E0FF]/30">
-                    Top 20
+                  <div className="p-2 rounded-lg bg-[#00E0FF]/10 border border-[#00E0FF]/20">
+                    <Radio className="w-5 h-5 text-[#00E0FF]" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-white">Hype Equalizer</h2>
+                    <p className="text-xs text-white/40">Project Mindshare Visualization</p>
+                  </div>
+                  <span className="ml-2 px-3 py-1 text-xs font-bold bg-[#00E0FF]/20 text-[#00E0FF] rounded-full border border-[#00E0FF]/30">
+                    Top 10
                   </span>
                 </div>
-                <div className="flex items-center gap-4">
-                  <span className="text-xs text-white/40">Data updates every hour</span>
-                  <span className="text-xs text-white/50 hover:text-[#00E0FF] cursor-pointer transition-colors">
-                    See Full Leaderboard →
+                <div className="flex items-center gap-4 text-xs text-white/40">
+                  <span className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#00E0FF] animate-pulse" />
+                    Live Data
                   </span>
+                  <span>Updates hourly</span>
                 </div>
               </div>
 
               {isLoading ? (
-                <div className="flex items-center justify-center py-20">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#00E0FF]"></div>
+                <div className="flex items-center justify-center py-32">
+                  <div className="relative">
+                    <div className="animate-spin rounded-full h-12 w-12 border-2 border-[#00E0FF]/20 border-t-[#00E0FF]"></div>
+                    <div className="absolute inset-0 animate-ping rounded-full border border-[#00E0FF]/30"></div>
+                  </div>
                 </div>
               ) : projectsWithTrend.length === 0 ? (
-                <div className="text-center py-20 text-white/40">
+                <div className="text-center py-32 text-white/40">
                   No projects found
                 </div>
               ) : (
-                <div className="grid grid-cols-4 gap-2 auto-rows-[140px]">
-                  {projectsWithTrend.slice(0, 20).map((project, index) => {
-                    const gridSpan = getGridSpan(project.rank);
-                    const history = scoreHistory[project.id] || [];
-                    
-                    return (
-                      <TreemapCard
-                        key={project.id}
-                        rank={project.rank}
-                        name={project.name}
-                        logo_url={project.logo_url}
-                        mindshare_score={project.mindshare_score}
-                        trend_percent={project.trend_percent}
-                        history={history}
-                        website_url={project.website_url}
-                        gridSpan={gridSpan}
-                        delay={index * 0.03}
-                      />
-                    );
-                  })}
+                <div className="relative z-10">
+                  {/* Equalizer Container */}
+                  <div className="flex items-end justify-center gap-4 md:gap-6 lg:gap-8 pb-4 overflow-x-auto">
+                    {projectsWithTrend.slice(0, 10).map((project, index) => {
+                      const history = scoreHistory[project.id] || [];
+                      
+                      return (
+                        <HypeBar
+                          key={project.id}
+                          rank={project.rank}
+                          name={project.name}
+                          logo_url={project.logo_url}
+                          mindshare_score={project.mindshare_score}
+                          trend_percent={project.trend_percent}
+                          history={history}
+                          website_url={project.website_url}
+                          delay={index * 0.08}
+                        />
+                      );
+                    })}
+                  </div>
+
+                  {/* Base line / Platform */}
+                  <div className="relative mt-2">
+                    <div className="h-1 bg-gradient-to-r from-transparent via-[#00E0FF]/50 to-transparent rounded-full" />
+                    <div className="absolute inset-0 h-1 bg-gradient-to-r from-transparent via-[#00E0FF]/30 to-transparent rounded-full blur-sm" />
+                  </div>
+
+                  {/* Grid lines background */}
+                  <div className="absolute inset-0 pointer-events-none opacity-20">
+                    <div className="absolute bottom-20 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+                    <div className="absolute bottom-40 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                    <div className="absolute bottom-60 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+                  </div>
                 </div>
               )}
             </div>
