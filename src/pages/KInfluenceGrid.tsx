@@ -107,12 +107,12 @@ const KInfluenceGrid = () => {
       .sort((a, b) => a.trend_percent - b.trend_percent);
   }, [projectsWithTrend]);
 
-  // Grid span assignment
-  const getGridSpan = (rank: number): 'xl' | 'lg' | 'md' | 'sm' => {
-    if (rank === 1) return 'xl';
-    if (rank <= 3) return 'lg';
-    if (rank <= 6) return 'md';
-    return 'sm';
+  // Grid span assignment - Bento style (Kaito)
+  const getGridSpan = (rank: number): 'king' | 'tall' | 'standard' | 'compact' => {
+    if (rank === 1) return 'king';       // 2x2 - The King
+    if (rank <= 3) return 'tall';        // 1x2 - Tall rectangles
+    if (rank <= 10) return 'standard';   // 1x1 - Standard squares
+    return 'compact';                    // 1x1 - Compact
   };
 
   const totalTracked = projects.length || 150;
@@ -289,13 +289,21 @@ const KInfluenceGrid = () => {
 
           {/* Right Main - Treemap Grid - 70% */}
           <div className="lg:w-[70%]">
-            <div className="rounded-xl border border-white/10 bg-white/[0.02] backdrop-blur-sm p-4">
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center gap-2">
-                  <Crown className="w-5 h-5 text-amber-400" />
-                  <h2 className="text-lg font-semibold">Top Projects by Mindshare</h2>
+            <div className="rounded-xl border border-white/10 bg-white/[0.02] backdrop-blur-sm p-5">
+              {/* Header with Title, Badge, Update Info */}
+              <div className="flex items-center justify-between mb-5">
+                <div className="flex items-center gap-3">
+                  <h2 className="text-xl font-bold text-white">Project Mindshare</h2>
+                  <span className="px-2.5 py-1 text-xs font-bold bg-[#00E0FF]/20 text-[#00E0FF] rounded-full border border-[#00E0FF]/30">
+                    Top 20
+                  </span>
                 </div>
-                <span className="text-xs text-white/40">Click to visit</span>
+                <div className="flex items-center gap-4">
+                  <span className="text-xs text-white/40">Data updates every hour</span>
+                  <span className="text-xs text-white/50 hover:text-[#00E0FF] cursor-pointer transition-colors">
+                    See Full Leaderboard →
+                  </span>
+                </div>
               </div>
 
               {isLoading ? (
@@ -307,7 +315,7 @@ const KInfluenceGrid = () => {
                   No projects found
                 </div>
               ) : (
-                <div className="grid grid-cols-4 gap-3 auto-rows-[120px]">
+                <div className="grid grid-cols-4 gap-2 auto-rows-[140px]">
                   {projectsWithTrend.slice(0, 20).map((project, index) => {
                     const gridSpan = getGridSpan(project.rank);
                     const history = scoreHistory[project.id] || [];
