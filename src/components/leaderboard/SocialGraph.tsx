@@ -1,5 +1,6 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Crown, TrendingUp, TrendingDown } from 'lucide-react';
 
 interface Project {
   id: string;
@@ -18,118 +19,126 @@ interface SocialGraphProps {
   activeProjectId: string | null;
 }
 
-// Category color mapping
-const categoryColors: Record<string, { bg: string; text: string; glow: string }> = {
-  'Layer 1': { bg: 'rgba(59, 130, 246, 0.2)', text: '#3B82F6', glow: '0 0 20px rgba(59, 130, 246, 0.4)' },
-  'Layer 2': { bg: 'rgba(16, 185, 129, 0.2)', text: '#10B981', glow: '0 0 20px rgba(16, 185, 129, 0.4)' },
-  'DeFi': { bg: 'rgba(139, 92, 246, 0.2)', text: '#8B5CF6', glow: '0 0 20px rgba(139, 92, 246, 0.4)' },
-  'AI': { bg: 'rgba(236, 72, 153, 0.2)', text: '#EC4899', glow: '0 0 20px rgba(236, 72, 153, 0.4)' },
-  'Gaming': { bg: 'rgba(245, 158, 11, 0.2)', text: '#F59E0B', glow: '0 0 20px rgba(245, 158, 11, 0.4)' },
-  'Infrastructure': { bg: 'rgba(6, 182, 212, 0.2)', text: '#06B6D4', glow: '0 0 20px rgba(6, 182, 212, 0.4)' },
-  'Exchange': { bg: 'rgba(239, 68, 68, 0.2)', text: '#EF4444', glow: '0 0 20px rgba(239, 68, 68, 0.4)' },
-  'default': { bg: 'rgba(107, 114, 128, 0.2)', text: '#6B7280', glow: '0 0 20px rgba(107, 114, 128, 0.4)' },
+// Generate fake sparkline data
+const generateSparkline = (isPositive: boolean) => {
+  const points = [];
+  let value = 50;
+  for (let i = 0; i < 20; i++) {
+    const change = (Math.random() - 0.5) * 15;
+    value = Math.max(10, Math.min(90, value + change + (isPositive ? 1 : -1)));
+    points.push(value);
+  }
+  return points;
 };
 
-// Bubble packing algorithm
-const packBubbles = (
-  bubbles: { id: string; radius: number }[],
-  containerWidth: number,
-  containerHeight: number
-) => {
-  const centerX = containerWidth / 2;
-  const centerY = containerHeight / 2;
+// Treemap layout algorithm
+const calculateTreemap = (
+  items: { value: number; id: string }[],
+  width: number,
+  height: number,
+  x: number = 0,
+  y: number = 0
+): { id: string; x: number; y: number; width: number; height: number }[] => {
+  if (items.length === 0) return [];
+  if (items.length === 1) {
+    return [{ id: items[0].id, x, y, width, height }];
+  }
+
+  const total = items.reduce((sum, item) => sum + item.value, 0);
   
-  const positions: { id: string; x: number; y: number; radius: number }[] = [];
-  
-  // Sort by radius (largest first)
-  const sorted = [...bubbles].sort((a, b) => b.radius - a.radius);
-  
-  sorted.forEach((bubble, index) => {
-    if (index === 0) {
-      // First bubble goes to center
-      positions.push({ ...bubble, x: centerX, y: centerY });
-      return;
+  let leftSum = 0;
+  let splitIndex = 0;
+  for (let i = 0; i < items.length; i++) {
+    if (leftSum + items[i].value <= total / 2) {
+      leftSum += items[i].value;
+      splitIndex = i + 1;
+    } else {
+      break;
     }
-    
-    // Try to find a position that doesn't overlap
-    let bestPosition = { x: centerX, y: centerY };
-    let minDistance = Infinity;
-    
-    // Try multiple angles around placed bubbles
-    for (let attempts = 0; attempts < 100; attempts++) {
-      const angle = (attempts / 100) * Math.PI * 2;
-      const distance = 30 + attempts * 2;
-      
-      const testX = centerX + Math.cos(angle) * distance;
-      const testY = centerY + Math.sin(angle) * distance;
-      
-      // Check for overlaps
-      let hasOverlap = false;
-      for (const placed of positions) {
-        const dx = testX - placed.x;
-        const dy = testY - placed.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        const minDist = bubble.radius + placed.radius + 4;
-        
-        if (dist < minDist) {
-          hasOverlap = true;
-          break;
-        }
-      }
-      
-      if (!hasOverlap) {
-        const distFromCenter = Math.sqrt(
-          Math.pow(testX - centerX, 2) + Math.pow(testY - centerY, 2)
-        );
-        if (distFromCenter < minDistance) {
-          minDistance = distFromCenter;
-          bestPosition = { x: testX, y: testY };
-        }
-      }
-    }
-    
-    positions.push({ ...bubble, ...bestPosition });
-  });
+  }
   
-  return positions;
+  if (splitIndex === 0) splitIndex = 1;
+  if (splitIndex === items.length) splitIndex = items.length - 1;
+  
+  const leftItems = items.slice(0, splitIndex);
+  const rightItems = items.slice(splitIndex);
+  const leftTotal = leftItems.reduce((sum, item) => sum + item.value, 0);
+  
+  const isHorizontalSplit = width >= height;
+  
+  if (isHorizontalSplit) {
+    const leftWidth = (leftTotal / total) * width;
+    return [
+      ...calculateTreemap(leftItems, leftWidth, height, x, y),
+      ...calculateTreemap(rightItems, width - leftWidth, height, x + leftWidth, y),
+    ];
+  } else {
+    const topHeight = (leftTotal / total) * height;
+    return [
+      ...calculateTreemap(leftItems, width, topHeight, x, y),
+      ...calculateTreemap(rightItems, width, height - topHeight, x, y + topHeight),
+    ];
+  }
+};
+
+// Sparkline component
+const Sparkline = ({ data, isPositive, width, height }: { data: number[]; isPositive: boolean; width: number; height: number }) => {
+  const points = data.map((value, i) => {
+    const x = (i / (data.length - 1)) * width;
+    const y = height - (value / 100) * height;
+    return `${x},${y}`;
+  }).join(' ');
+
+  return (
+    <svg width={width} height={height} className="absolute bottom-0 left-0 right-0 opacity-40">
+      <polyline
+        points={points}
+        fill="none"
+        stroke={isPositive ? '#10B981' : '#EF4444'}
+        strokeWidth={1.5}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
 };
 
 const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphProps) => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  const [containerSize, setContainerSize] = useState({ width: 400, height: 350 });
 
-  // Calculate bubble positions
-  const bubbles = useMemo(() => {
-    const topProjects = projects.slice(0, 15);
-    const maxScore = Math.max(...topProjects.map(p => p.mindshare_score), 1);
-    const minRadius = 25;
-    const maxRadius = 55;
+  // Calculate treemap layout with sparkline data
+  const treemapData = useMemo(() => {
+    const topProjects = projects.slice(0, 12);
+    const containerWidth = 100;
+    const containerHeight = 100;
+    const gap = 0.5;
 
-    const bubbleData = topProjects.map(project => {
-      const normalizedScore = project.mindshare_score / maxScore;
-      const radius = minRadius + normalizedScore * (maxRadius - minRadius);
-      
-      return {
-        id: project.id,
-        radius,
-      };
-    });
+    const items = topProjects.map(p => ({
+      value: Math.max(p.mindshare_score, 50),
+      id: p.id,
+    }));
 
-    const positions = packBubbles(bubbleData, containerSize.width, containerSize.height);
+    const layout = calculateTreemap(items, containerWidth, containerHeight);
 
-    return topProjects.map(project => {
-      const pos = positions.find(p => p.id === project.id);
-      const colors = categoryColors[project.category] || categoryColors.default;
+    return topProjects.map((project) => {
+      const rect = layout.find(l => l.id === project.id);
+      const change = project.previous_score > 0 
+        ? ((project.mindshare_score - project.previous_score) / project.previous_score) * 100 
+        : 0;
+      const isPositive = change >= 0;
       
       return {
         ...project,
-        x: pos?.x || containerSize.width / 2,
-        y: pos?.y || containerSize.height / 2,
-        radius: pos?.radius || 30,
-        colors,
+        x: (rect?.x || 0) + gap,
+        y: (rect?.y || 0) + gap,
+        width: Math.max((rect?.width || 10) - gap * 2, 8),
+        height: Math.max((rect?.height || 10) - gap * 2, 8),
+        change,
+        isPositive,
+        sparkline: generateSparkline(isPositive),
       };
     });
-  }, [projects, containerSize]);
+  }, [projects]);
 
   const handleMouseEnter = (projectId: string) => {
     setHoveredId(projectId);
@@ -145,242 +154,185 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
     return hoveredId === projectId || activeProjectId === projectId;
   };
 
-  const getChange = (project: Project) => {
-    if (project.previous_score === 0) return 0;
-    return ((project.mindshare_score - project.previous_score) / project.previous_score) * 100;
-  };
-
   return (
-    <div className="relative w-full h-full min-h-[450px] p-4 flex flex-col">
+    <div className="relative w-full h-full min-h-[450px] flex flex-col">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between p-4 border-b border-white/[0.05]">
         <div>
-          <h3 className="text-sm font-medium text-white">Mindshare Bubbles</h3>
-          <p className="text-xs text-white/40 mt-0.5">Size = Mindshare Score</p>
-        </div>
-        <div className="flex items-center gap-3">
-          {['Layer 1', 'DeFi', 'AI'].map(cat => (
-            <div key={cat} className="flex items-center gap-1.5">
-              <div 
-                className="w-2 h-2 rounded-full" 
-                style={{ backgroundColor: categoryColors[cat]?.text || '#666' }}
-              />
-              <span className="text-[10px] text-white/40">{cat}</span>
-            </div>
-          ))}
+          <h3 className="text-base font-semibold text-white">Top 12</h3>
+          <p className="text-xs text-white/40 mt-0.5">Mindshare Distribution</p>
         </div>
       </div>
 
-      {/* Bubble Chart Container */}
-      <div 
-        className="relative flex-1 rounded-xl overflow-hidden bg-white/[0.02] border border-white/[0.05]"
-        style={{ minHeight: 350 }}
-      >
-        {/* Animated background gradient */}
-        <div className="absolute inset-0 opacity-30">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] rounded-full bg-gradient-radial from-primary/20 via-transparent to-transparent blur-3xl" />
-        </div>
-
-        {/* Bubbles */}
-        <svg 
-          viewBox={`0 0 ${containerSize.width} ${containerSize.height}`}
-          className="w-full h-full"
-          preserveAspectRatio="xMidYMid meet"
-        >
-          <defs>
-            {bubbles.map(bubble => (
-              <radialGradient key={`grad-${bubble.id}`} id={`bubble-grad-${bubble.id}`} cx="30%" cy="30%">
-                <stop offset="0%" stopColor={bubble.colors.text} stopOpacity="0.4" />
-                <stop offset="100%" stopColor={bubble.colors.text} stopOpacity="0.1" />
-              </radialGradient>
-            ))}
-            <filter id="bubble-glow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="4" result="blur" />
-              <feMerge>
-                <feMergeNode in="blur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {bubbles.map((bubble, index) => {
-            const highlighted = isHighlighted(bubble.id);
-            const change = getChange(bubble);
+      {/* Treemap Container */}
+      <div className="flex-1 p-2">
+        <div className="relative w-full h-full rounded-lg overflow-hidden bg-[#0d0d0d]">
+          {treemapData.map((node, index) => {
+            const highlighted = isHighlighted(node.id);
+            const isLarge = node.width > 20 && node.height > 15;
+            const isMedium = node.width > 12 || node.height > 12;
+            
+            // Calculate pixel dimensions for sparkline
+            const cellWidth = (node.width / 100) * 400;
+            const cellHeight = (node.height / 100) * 350;
             
             return (
-              <motion.g
-                key={bubble.id}
-                initial={{ scale: 0, opacity: 0 }}
-                animate={{ 
-                  scale: 1, 
-                  opacity: 1,
-                }}
-                transition={{ 
-                  type: 'spring',
-                  stiffness: 200,
-                  damping: 20,
-                  delay: index * 0.05 
-                }}
-                style={{ transformOrigin: `${bubble.x}px ${bubble.y}px` }}
-                onMouseEnter={() => handleMouseEnter(bubble.id)}
+              <motion.div
+                key={node.id}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: index * 0.03, duration: 0.3 }}
+                onMouseEnter={() => handleMouseEnter(node.id)}
                 onMouseLeave={handleMouseLeave}
-                className="cursor-pointer"
+                className={`absolute cursor-pointer overflow-hidden transition-all duration-200 ${
+                  highlighted ? 'z-10 ring-1 ring-white/30' : ''
+                }`}
+                style={{
+                  left: `${node.x}%`,
+                  top: `${node.y}%`,
+                  width: `${node.width}%`,
+                  height: `${node.height}%`,
+                  background: node.isPositive 
+                    ? 'linear-gradient(180deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%)'
+                    : 'linear-gradient(180deg, rgba(127, 29, 29, 0.4) 0%, rgba(127, 29, 29, 0.2) 100%)',
+                  borderRadius: '6px',
+                  border: `1px solid ${node.isPositive ? 'rgba(16, 185, 129, 0.2)' : 'rgba(239, 68, 68, 0.15)'}`,
+                }}
               >
-                {/* Outer glow ring */}
-                {highlighted && (
-                  <motion.circle
-                    cx={bubble.x}
-                    cy={bubble.y}
-                    r={bubble.radius + 4}
-                    fill="none"
-                    stroke={bubble.colors.text}
-                    strokeWidth={2}
-                    strokeOpacity={0.5}
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1.1, opacity: [0.5, 0.2, 0.5] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
+                {/* Sparkline background */}
+                {isMedium && (
+                  <Sparkline 
+                    data={node.sparkline} 
+                    isPositive={node.isPositive}
+                    width={cellWidth}
+                    height={cellHeight}
                   />
                 )}
 
-                {/* Main bubble */}
-                <motion.circle
-                  cx={bubble.x}
-                  cy={bubble.y}
-                  r={bubble.radius}
-                  fill={`url(#bubble-grad-${bubble.id})`}
-                  stroke={bubble.colors.text}
-                  strokeWidth={highlighted ? 2 : 1}
-                  strokeOpacity={highlighted ? 0.8 : 0.3}
-                  filter={highlighted ? 'url(#bubble-glow)' : undefined}
-                  animate={{
-                    r: highlighted ? bubble.radius * 1.08 : bubble.radius,
-                  }}
-                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                />
-
-                {/* Rank badge */}
-                {bubble.rank <= 3 && (
-                  <g>
-                    <circle
-                      cx={bubble.x - bubble.radius * 0.6}
-                      cy={bubble.y - bubble.radius * 0.6}
-                      r={10}
-                      fill={bubble.rank === 1 ? '#FFD700' : bubble.rank === 2 ? '#C0C0C0' : '#CD7F32'}
-                    />
-                    <text
-                      x={bubble.x - bubble.radius * 0.6}
-                      y={bubble.y - bubble.radius * 0.6}
-                      textAnchor="middle"
-                      dominantBaseline="central"
-                      fill="#000"
-                      fontSize="10"
-                      fontWeight="bold"
-                    >
-                      {bubble.rank}
-                    </text>
-                  </g>
-                )}
-
-                {/* Project name */}
-                <text
-                  x={bubble.x}
-                  y={bubble.y - 4}
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fill="#fff"
-                  fontSize={Math.max(bubble.radius / 4, 9)}
-                  fontWeight="600"
-                  className="pointer-events-none"
-                >
-                  {bubble.name.length > 8 ? bubble.name.slice(0, 7) + '..' : bubble.name}
-                </text>
-
-                {/* Score */}
-                <text
-                  x={bubble.x}
-                  y={bubble.y + 10}
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fill={bubble.colors.text}
-                  fontSize={Math.max(bubble.radius / 5, 8)}
-                  fontWeight="500"
-                  className="pointer-events-none"
-                >
-                  {bubble.mindshare_score >= 1000 
-                    ? (bubble.mindshare_score / 1000).toFixed(1) + 'K'
-                    : bubble.mindshare_score
-                  }
-                </text>
-              </motion.g>
-            );
-          })}
-        </svg>
-
-        {/* Hover tooltip */}
-        {hoveredId && (
-          <motion.div
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="absolute bottom-3 left-3 right-3 p-3 rounded-lg bg-black/90 backdrop-blur-sm border border-white/10"
-          >
-            {(() => {
-              const project = bubbles.find(p => p.id === hoveredId);
-              if (!project) return null;
-              const change = getChange(project);
-              
-              return (
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div 
-                      className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2"
-                      style={{ 
-                        backgroundColor: project.colors.bg, 
-                        color: project.colors.text,
-                        borderColor: project.colors.text 
-                      }}
-                    >
-                      #{project.rank}
+                {/* Content */}
+                <div className="relative z-10 p-2 h-full flex flex-col">
+                  {/* Top row - Logo & Crown */}
+                  <div className="flex items-start justify-between">
+                    <div className="flex items-center gap-1.5">
+                      {/* Avatar/Logo placeholder */}
+                      <div className={`rounded-full bg-white/10 flex items-center justify-center text-white/60 font-medium ${
+                        isLarge ? 'w-6 h-6 text-xs' : 'w-4 h-4 text-[8px]'
+                      }`}>
+                        {node.name.charAt(0)}
+                      </div>
+                      {isLarge && (
+                        <span className="text-white font-medium text-sm truncate max-w-[80px]">
+                          {node.name}
+                        </span>
+                      )}
                     </div>
-                    <div>
-                      <p className="text-white font-medium">{project.name}</p>
-                      <p className="text-white/40 text-xs">{project.category}</p>
-                    </div>
+                    {node.rank <= 2 && isLarge && (
+                      <Crown className={`w-4 h-4 ${node.rank === 1 ? 'text-yellow-400' : 'text-gray-400'}`} />
+                    )}
                   </div>
-                  <div className="text-right">
-                    <p className="text-white font-semibold text-lg">{project.mindshare_score.toLocaleString()}</p>
-                    <p className={`text-xs font-medium ${change >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
-                      {change >= 0 ? '▲' : '▼'} {Math.abs(change).toFixed(1)}%
-                    </p>
+
+                  {/* Name for medium cells */}
+                  {!isLarge && isMedium && (
+                    <span className="text-white font-medium text-[10px] mt-1 truncate">
+                      {node.name.length > 8 ? node.name.slice(0, 7) + '..' : node.name}
+                    </span>
+                  )}
+
+                  {/* Spacer */}
+                  <div className="flex-1" />
+
+                  {/* Bottom - Score */}
+                  <div className="mt-auto">
+                    <span className={`font-semibold ${
+                      isLarge ? 'text-lg' : isMedium ? 'text-sm' : 'text-[10px]'
+                    } ${node.isPositive ? 'text-emerald-400' : 'text-white/80'}`}>
+                      {(node.mindshare_score / 100).toFixed(2)}%
+                    </span>
                   </div>
                 </div>
-              );
-            })()}
-          </motion.div>
-        )}
+
+                {/* Hover overlay */}
+                {highlighted && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="absolute inset-0 bg-white/[0.03] pointer-events-none"
+                  />
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Bottom stats */}
-      <div className="mt-4 grid grid-cols-3 gap-3">
-        <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-          <p className="text-xs text-white/40 mb-1">Total Projects</p>
-          <p className="text-lg font-semibold text-white">{projects.length}</p>
-        </div>
-        <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-          <p className="text-xs text-white/40 mb-1">Top Category</p>
-          <p className="text-lg font-semibold text-white">
-            {projects.length > 0 ? projects[0]?.category || 'N/A' : 'N/A'}
-          </p>
-        </div>
-        <div className="p-3 rounded-lg bg-white/[0.02] border border-white/[0.05]">
-          <p className="text-xs text-white/40 mb-1">Avg Score</p>
-          <p className="text-lg font-semibold text-white">
-            {projects.length > 0 
-              ? Math.round(projects.reduce((a, b) => a + b.mindshare_score, 0) / projects.length).toLocaleString()
-              : '0'
-            }
-          </p>
+      {/* Bottom Legend */}
+      <div className="p-4 border-t border-white/[0.05]">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-sm bg-gradient-to-b from-emerald-500/30 to-emerald-500/10 border border-emerald-500/30" />
+              <span className="text-xs text-white/50">Gainer</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <div className="w-3 h-3 rounded-sm bg-gradient-to-b from-red-900/60 to-red-900/30 border border-red-500/20" />
+              <span className="text-xs text-white/50">Loser</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3 text-xs text-white/40">
+            <span>Total: <span className="text-white/60 font-medium">{projects.length}</span></span>
+            <span>|</span>
+            <span>Avg: <span className="text-white/60 font-medium">
+              {projects.length > 0 
+                ? (projects.reduce((a, b) => a + b.mindshare_score, 0) / projects.length / 100).toFixed(2)
+                : '0'
+              }%
+            </span></span>
+          </div>
         </div>
       </div>
+
+      {/* Hover tooltip for small cells */}
+      {hoveredId && (
+        <motion.div
+          initial={{ opacity: 0, y: 5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="absolute top-16 left-4 right-4 p-3 rounded-lg bg-black/95 backdrop-blur-sm border border-white/10 z-20"
+        >
+          {(() => {
+            const project = treemapData.find(p => p.id === hoveredId);
+            if (!project) return null;
+            
+            return (
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div 
+                    className={`w-10 h-10 rounded-lg flex items-center justify-center text-sm font-bold ${
+                      project.isPositive ? 'bg-emerald-500/20 text-emerald-400' : 'bg-red-500/20 text-red-400'
+                    }`}
+                  >
+                    #{project.rank}
+                  </div>
+                  <div>
+                    <p className="text-white font-medium">{project.name}</p>
+                    <p className="text-white/40 text-xs">{project.category}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <p className="text-white font-semibold text-lg">
+                    {(project.mindshare_score / 100).toFixed(2)}%
+                  </p>
+                  <div className={`flex items-center gap-1 text-xs font-medium ${
+                    project.isPositive ? 'text-emerald-400' : 'text-red-400'
+                  }`}>
+                    {project.isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
+                    <span>{project.isPositive ? '+' : ''}{project.change.toFixed(1)}%</span>
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+        </motion.div>
+      )}
     </div>
   );
 };
