@@ -27,6 +27,7 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import Transparency from "./pages/Transparency";
 import Jobs from "./pages/Jobs";
+import KInfluenceGrid from "./pages/KInfluenceGrid";
 import NotFound from "./pages/NotFound";
 // Admin pages
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -161,6 +162,7 @@ const AppRoutes = () => {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/transparency" element={<Transparency />} />
         <Route path="/jobs" element={<Jobs />} />
+        <Route path="/k-influence" element={<KInfluenceGrid />} />
         {/* Hidden Admin Routes */}
         <Route path="/ium-admin" element={<AdminLogin />} />
         <Route path="/ium-admin/dashboard" element={<AdminDashboard />} />
