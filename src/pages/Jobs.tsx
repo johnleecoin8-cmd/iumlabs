@@ -131,10 +131,6 @@ const process = [{
   description: "Video Interview"
 }, {
   step: "03",
-  title: "TASK",
-  description: "Practical Assignment"
-}, {
-  step: "04",
   title: "OFFER",
   description: "Final Offer"
 }];
