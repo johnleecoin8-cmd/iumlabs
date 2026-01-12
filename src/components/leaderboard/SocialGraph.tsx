@@ -108,7 +108,7 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
 
   // Calculate treemap layout with sparkline data
   const treemapData = useMemo(() => {
-    const topProjects = projects.slice(0, 12);
+    const topProjects = projects.slice(0, 20);
     const containerWidth = 100;
     const containerHeight = 100;
     const gap = 0.5;
@@ -159,7 +159,7 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-white/[0.05]">
         <div>
-          <h3 className="text-base font-semibold text-white">Top 12</h3>
+          <h3 className="text-base font-semibold text-white">Top 20</h3>
           <p className="text-xs text-white/40 mt-0.5">Mindshare Distribution</p>
         </div>
       </div>
