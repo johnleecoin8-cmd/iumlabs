@@ -15,7 +15,7 @@ const Transparency = () => {
     { title: "Disclosure Policy", content: "We clearly disclose all partnerships, sponsorships, and affiliate relationships. All promotional content is appropriately labeled in accordance with applicable regulations." },
     { title: "Conflict of Interest", content: "We disclose any potential conflicts of interest that may arise in our business relationships. Our team operates under strict ethical guidelines to ensure client interests are always prioritized." },
     { title: "Reporting", content: "We provide regular, detailed reports to our clients on campaign performance and outcomes. All metrics and results are reported accurately without manipulation." },
-    { title: "Questions", content: "If you have any questions about our transparency practices, please contact us at info@iumlabs.com." },
+    { title: "Questions", content: "If you have any questions about our transparency practices, please contact us at info@iumlabs.io." },
   ];
 
   return (
