@@ -805,32 +805,32 @@ const KoreaMapVisualization = ({
     x: 65,
     y: 25,
     city: 'Seoul',
-    value: '200+',
-    label: 'KOLs',
+    value: '45%',
+    label: 'Trading Volume',
     delay: 0.2
   }, {
     id: 1,
     x: 75,
     y: 45,
     city: 'Busan',
-    value: '50+',
-    label: 'KOLs',
+    value: '18%',
+    label: 'Trading Volume',
     delay: 0.4
   }, {
     id: 2,
     x: 45,
     y: 35,
     city: 'Daegu',
-    value: '35+',
-    label: 'KOLs',
+    value: '12%',
+    label: 'Trading Volume',
     delay: 0.6
   }, {
     id: 3,
     x: 55,
     y: 50,
     city: 'Gwangju',
-    value: '25+',
-    label: 'KOLs',
+    value: '8%',
+    label: 'Trading Volume',
     delay: 0.8
   }];
   return <div className="relative w-full aspect-[4/5] max-w-md mx-auto">
@@ -973,7 +973,7 @@ const KoreaMapVisualization = ({
     }}>
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="text-xs text-muted-foreground">KOL Network</span>
+          <span className="text-xs text-muted-foreground">Trading Hub</span>
         </div>
       </motion.div>
     </div>;
@@ -989,45 +989,45 @@ const MarketIntelligenceSection = () => {
     margin: "-10%"
   });
 
-  // Media Reach Data - Korean Crypto Media Channels
-  const mediaReachData = [{
-    label: 'Blockmedia / CoinDesk Korea',
+  // Fiat Volume Data - The Fiat Impact (Source: Kaiko, Bloomberg)
+  const fiatVolumeData = [{
+    label: 'USD',
     percentage: 100,
-    value: '8M+ Views',
+    value: '$18.5 B',
     isHighlight: false
   }, {
-    label: 'Crypto KakaoTalk Channels',
-    percentage: 85,
-    value: '15M+ Members',
+    label: 'KRW',
+    percentage: 65,
+    value: '$4.2-6.0 B',
     isHighlight: true
   }, {
-    label: 'Crypto YouTube Ecosystem',
-    percentage: 45,
-    value: '5M+ Subscribers',
+    label: 'EUR',
+    percentage: 12,
+    value: '$1.1 B',
     isHighlight: false
   }, {
-    label: 'Naver / Google SEO',
-    percentage: 95,
-    value: '20M+ Monthly',
-    isHighlight: true
+    label: 'JPY',
+    percentage: 4,
+    value: '$0.4 B',
+    isHighlight: false
   }];
 
-  // Market Logic Data - 3 Column (Marketing Agency focused)
+  // Market Logic Data - 3 Column (Enhanced with aggressive narrative)
   const marketLogic = [{
     number: '01',
-    title: 'The Narrative Launchpad',
-    subtitle: 'Global Media Attention',
-    description: "Projects that go viral in Korea capture global Tier-1 media attention. We don't just follow trends—we create narratives that spread from Seoul to Silicon Valley."
+    title: 'The Alpha Origin',
+    subtitle: 'Global Trend Testbed',
+    description: "Korea is the global testbed. Trends validated on Upbit & Bithumb determine the success metrics for Binance and Coinbase listings. We don't just follow trends—we create the 'Kimchi Premium'."
   }, {
     number: '02',
-    title: 'Hyper-Engaged Community',
-    subtitle: 'Brand Advocates, Not Spectators',
-    description: "Korean users aren't passive holders—they're community builders. Active across Discord, Telegram, and KakaoTalk, they become your most passionate brand advocates."
+    title: 'High-Velocity Traders',
+    subtitle: 'Highest Transaction Frequency',
+    description: "Unlike passive Western holders, Korean users are active traders seeking volatility and narrative. 10% of the population trades; 40% of young adults are active crypto investors."
   }, {
     number: '03',
-    title: 'Organic Demand Engine',
-    subtitle: 'Community Drives Awareness',
-    description: "Authentic community passion creates genuine demand. Korean user enthusiasm translates into organic global awareness and sustainable brand growth."
+    title: 'Liquidity Super-Cycle',
+    subtitle: 'Retail Drives Volume',
+    description: "Retail drives the volume, volume attracts the whales. Korean retail FOMO creates enough liquidity depth to sustain price floors even in bear markets."
   }];
   return <section ref={ref} className="px-4 md:px-8 lg:px-12 py-12 md:py-16 bg-muted/30 border-y border-border w-full">
       <motion.div initial={{
@@ -1073,7 +1073,7 @@ const MarketIntelligenceSection = () => {
 
         {/* Module B: Data Visualization - Stack on mobile */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 mb-10 md:mb-16">
-          {/* Chart 1: The Media Reach */}
+          {/* Chart 1: The Fiat Impact */}
           <motion.div initial={{
           opacity: 0,
           x: -20
@@ -1084,17 +1084,17 @@ const MarketIntelligenceSection = () => {
           delay: 0.3
         }} className="p-4 md:p-6 border border-border bg-background">
             <p className="text-[10px] md:text-xs tracking-widest text-primary font-medium mb-4 md:mb-6">
-              THE MEDIA REACH — Korean Crypto Media Channels
+              THE FIAT IMPACT — Average Daily Volume per Fiat Pair
             </p>
             <div className="space-y-3 md:space-y-4 mb-4 md:mb-6">
-              {mediaReachData.map((item, i) => <AnimatedProgressBar key={item.label} label={item.label} percentage={item.percentage} value={item.value} delay={i * 0.15 + 0.3} isHighlight={item.isHighlight} isVisible={isInView} />)}
+              {fiatVolumeData.map((item, i) => <AnimatedProgressBar key={item.label} label={item.label} percentage={item.percentage} value={item.value} delay={i * 0.15 + 0.3} isHighlight={item.isHighlight} isVisible={isInView} />)}
             </div>
             <p className="text-xs md:text-sm text-muted-foreground italic border-t border-border pt-3 md:pt-4">
-              "Korea has the <span className="text-primary font-medium">highest crypto media density</span> in the world." — ium Research
+              "KRW isn't just a challenger. It <span className="text-primary font-medium">surpassed USD volume in Q1 2024</span>." — Kaiko Data
             </p>
           </motion.div>
 
-          {/* Chart 2: Community Engagement Rate */}
+          {/* Chart 2: Velocity Comparison */}
           <motion.div initial={{
           opacity: 0,
           x: 20
@@ -1105,13 +1105,13 @@ const MarketIntelligenceSection = () => {
           delay: 0.4
         }} className="p-4 md:p-6 border border-border bg-background">
             <p className="text-[10px] md:text-xs tracking-widest text-primary font-medium mb-4 md:mb-6">
-              COMMUNITY ENGAGEMENT — Average Engagement Rate
+              VELOCITY COMPARISON — Token Velocity Ratio
             </p>
             <div className="space-y-4 md:space-y-6 mb-4 md:mb-6">
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-xs md:text-sm font-medium text-foreground/80">Global Average</span>
-                  <span className="text-xs md:text-sm font-mono text-muted-foreground">12%</span>
+                  <span className="text-xs md:text-sm font-mono text-muted-foreground">0.15</span>
                 </div>
                 <div className="h-3 md:h-3 bg-muted rounded-full overflow-hidden">
                   <motion.div className="h-full bg-foreground/30 rounded-full" initial={{
@@ -1127,7 +1127,7 @@ const MarketIntelligenceSection = () => {
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
                   <span className="text-xs md:text-sm font-medium text-primary">Korea Market</span>
-                  <span className="text-xs md:text-sm font-mono text-primary">68%</span>
+                  <span className="text-xs md:text-sm font-mono text-primary">0.85</span>
                 </div>
                 <div className="h-3 md:h-3 bg-muted rounded-full overflow-hidden">
                   <motion.div className="h-full bg-primary rounded-full" initial={{
@@ -1142,28 +1142,28 @@ const MarketIntelligenceSection = () => {
               </div>
             </div>
             <p className="text-xs md:text-sm text-muted-foreground italic border-t border-border pt-3 md:pt-4">
-              "Same follower count, <span className="text-primary font-medium">5x higher engagement rate</span> in Korea."
+              "Same market cap, <span className="text-primary font-medium">5.6x more trading velocity</span> in Korea."
             </p>
           </motion.div>
         </div>
 
-        {/* Key Stats - 2x2 on mobile (Marketing Agency focused) */}
+        {/* Key Stats - 2x2 on mobile (Updated with real data) */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-12">
           <div className="p-3 md:p-4 border border-border bg-background text-center">
-            <p className="text-xl md:text-3xl font-medium text-primary">500+</p>
-            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">KOL Network</p>
+            <p className="text-xl md:text-3xl font-medium text-primary">#2</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">Global Fiat Pair</p>
           </div>
           <div className="p-3 md:p-4 border border-border bg-background text-center">
             <p className="text-xl md:text-3xl font-medium text-foreground">6.5M</p>
-            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">Crypto Users</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">Active Investors (12%)</p>
           </div>
           <div className="p-3 md:p-4 border border-border bg-background text-center">
-            <p className="text-xl md:text-3xl font-medium text-primary">15+</p>
-            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">Tier-1 Media Partners</p>
+            <p className="text-xl md:text-3xl font-medium text-primary">80%</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">Altcoin Trading Rate</p>
           </div>
           <div className="p-3 md:p-4 border border-border bg-background text-center">
-            <p className="text-xl md:text-3xl font-medium text-foreground">5x</p>
-            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">Engagement Rate</p>
+            <p className="text-xl md:text-3xl font-medium text-foreground">4x</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">Volume Multiplier</p>
           </div>
         </div>
 
@@ -1175,7 +1175,7 @@ const MarketIntelligenceSection = () => {
           className="text-center p-4 md:p-6 border border-primary/20 bg-primary/5"
         >
           <p className="text-sm md:text-base text-foreground italic">
-            "In the West, they follow. In Korea, they champion. We turn that passion into your project's global community."
+            "In the West, they invest. In Korea, they trade. We turn this velocity into your project's liquidity."
           </p>
           <p className="text-xs text-muted-foreground mt-2">— The ium Philosophy</p>
         </motion.div>
@@ -1188,9 +1188,9 @@ const MarketIntelligenceSection = () => {
         y: 0
       } : {}} transition={{
         delay: 0.5
-      }} className="border-l-2 border-primary pl-4 md:pl-6 mt-6">
+      }} className="border-l-2 border-primary pl-4 md:pl-6">
           <p className="text-base md:text-xl text-foreground italic leading-relaxed">
-            "Korean users don't just engage—they advocate. We transform that energy into organic global reach."
+            "Korean users are the most engaged crypto community in the world. We transform that energy into your project's strongest foundation."
           </p>
           <footer className="mt-2 text-xs md:text-sm text-muted-foreground">
             — The ium Philosophy
