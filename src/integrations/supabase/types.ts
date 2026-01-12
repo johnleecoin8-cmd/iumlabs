@@ -310,6 +310,66 @@ export type Database = {
           },
         ]
       }
+      project_leaderboard: {
+        Row: {
+          category: string
+          created_at: string
+          discord_members: number | null
+          id: string
+          is_active: boolean | null
+          logo_url: string | null
+          mindshare_score: number
+          name: string
+          previous_rank: number
+          previous_score: number
+          rank: number
+          slug: string
+          telegram_members: number | null
+          twitter_mentions: number | null
+          twitter_url: string | null
+          updated_at: string
+          website_url: string | null
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          discord_members?: number | null
+          id?: string
+          is_active?: boolean | null
+          logo_url?: string | null
+          mindshare_score?: number
+          name: string
+          previous_rank?: number
+          previous_score?: number
+          rank?: number
+          slug: string
+          telegram_members?: number | null
+          twitter_mentions?: number | null
+          twitter_url?: string | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          discord_members?: number | null
+          id?: string
+          is_active?: boolean | null
+          logo_url?: string | null
+          mindshare_score?: number
+          name?: string
+          previous_rank?: number
+          previous_score?: number
+          rank?: number
+          slug?: string
+          telegram_members?: number | null
+          twitter_mentions?: number | null
+          twitter_url?: string | null
+          updated_at?: string
+          website_url?: string | null
+        }
+        Relationships: []
+      }
       project_metrics: {
         Row: {
           created_at: string | null
@@ -385,6 +445,38 @@ export type Database = {
             columns: ["project_id"]
             isOneToOne: false
             referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_score_history: {
+        Row: {
+          id: string
+          project_id: string
+          rank: number
+          recorded_at: string
+          score: number
+        }
+        Insert: {
+          id?: string
+          project_id: string
+          rank: number
+          recorded_at?: string
+          score: number
+        }
+        Update: {
+          id?: string
+          project_id?: string
+          rank?: number
+          recorded_at?: string
+          score?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_score_history_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "project_leaderboard"
             referencedColumns: ["id"]
           },
         ]
