@@ -11,6 +11,7 @@ import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import officeImage from "@/assets/office/ium-labs-office.webp";
+import confetti from "canvas-confetti";
 const budgetOptions = ["$15,000 - $25,000", "$25,000 - $50,000", "$50,000 +", "Looking to raise funds"];
 const contactInfo = [{
   icon: Mail,
@@ -123,6 +124,13 @@ const Contact = () => {
           message: formData.message
         }
       }).catch(console.error);
+      // Trigger confetti animation
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+      
       toast({
         title: "Message sent!",
         description: "We'll get back to you within 24 hours."

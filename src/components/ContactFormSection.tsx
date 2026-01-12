@@ -4,6 +4,7 @@ import { Mail, MapPin, Send, ArrowRight, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
+import confetti from "canvas-confetti";
 const budgetOptions = ["$15K - $25K", "$25K - $50K", "$50K +", "Raising funds"];
 interface ContactFormSectionProps {
   sectionNumber?: string;
@@ -51,6 +52,13 @@ const ContactFormSection = ({
           message: formData.message
         }
       }).catch(console.error);
+      // Trigger confetti animation
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+      
       toast({
         title: "Message sent!",
         description: "We'll get back to you within 24 hours."
