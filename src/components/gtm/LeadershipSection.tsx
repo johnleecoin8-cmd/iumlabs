@@ -108,7 +108,9 @@ const LeadershipSection = () => {
                       <img 
                         src={leader.photo} 
                         alt={leader.title}
-                        className="w-full h-full object-cover object-[center_25%] scale-110 grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
+                        className={`w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500 ${
+                          index === 0 ? 'scale-150 object-[center_30%]' : 'scale-110 object-[center_25%]'
+                        }`}
                       />
                     </div>
                     
