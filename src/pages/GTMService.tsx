@@ -420,7 +420,7 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, [isHovering, showcaseProjects.length]);
 
-  return <section ref={ref} className="relative min-h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 py-20 md:py-24 bg-background overflow-hidden w-full">
+  return <section ref={ref} className="relative min-h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 py-16 md:py-24 bg-background overflow-hidden w-full">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50 pointer-events-none" />
@@ -479,7 +479,7 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.8,
           delay: 0.1
-        }} className="text-[clamp(2rem,5vw,4rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-6">
+        }} className="text-[clamp(1.75rem,5vw,4rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-4 md:mb-6">
             <span className="block overflow-hidden">
               <motion.span className="block" initial={{
               y: '100%'
@@ -517,7 +517,7 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.6,
           delay: 0.5
-        }} className="text-base md:text-lg text-muted-foreground mb-8 max-w-lg">
+        }} className="text-sm md:text-lg text-muted-foreground mb-6 md:mb-8 max-w-lg leading-relaxed">
             Korea ranks #2 globally in crypto trading volume with 4x faster market velocity. We bridge your project to this high-potential, retail-driven ecosystem.
           </motion.p>
 
@@ -531,9 +531,9 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.6,
           delay: 0.7
-        }} className="flex flex-row items-center gap-6 md:gap-10">
+        }} className="flex flex-row items-center gap-4 md:gap-10">
             <div className="text-center group">
-              <motion.p className="text-3xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              <motion.p className="text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
                 opacity: 0,
                 scale: 0.5
               }} animate={{
@@ -546,11 +546,11 @@ const HeroSection = () => {
               }}>
                 #2
               </motion.p>
-              <p className="text-[10px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Global Volume</p>
+              <p className="text-[11px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Global Volume</p>
             </div>
-            <div className="w-px h-8 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
+            <div className="w-px h-6 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
             <div className="text-center group">
-              <motion.p className="text-3xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              <motion.p className="text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
                 opacity: 0,
                 scale: 0.5
               }} animate={{
@@ -563,11 +563,11 @@ const HeroSection = () => {
               }}>
                 4x
               </motion.p>
-              <p className="text-[10px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Velocity</p>
+              <p className="text-[11px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Velocity</p>
             </div>
-            <div className="w-px h-8 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
+            <div className="w-px h-6 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
             <div className="text-center group">
-              <motion.p className="text-3xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              <motion.p className="text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
                 opacity: 0,
                 scale: 0.5
               }} animate={{
@@ -580,7 +580,7 @@ const HeroSection = () => {
               }}>
                 100%
               </motion.p>
-              <p className="text-[10px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Retail-Driven</p>
+              <p className="text-[11px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Retail-Driven</p>
             </div>
           </motion.div>
 
@@ -670,21 +670,21 @@ const HeroSection = () => {
                 key={project.slug}
                 onMouseEnter={() => setActiveIndex(index)}
                 onClick={() => setActiveIndex(index)}
-                className={`flex-1 py-2 px-1.5 md:px-2 relative transition-all duration-300 border-r border-border/30 last:border-r-0 ${
+                className={`flex-1 py-2.5 md:py-2 px-1 md:px-2 relative transition-all duration-300 border-r border-border/30 last:border-r-0 min-h-[44px] ${
                   activeIndex === index 
                     ? 'bg-primary/10' 
                     : 'bg-transparent hover:bg-muted/50'
                 }`}
               >
                 {/* Index number */}
-                <span className={`text-[8px] md:text-[10px] font-mono block transition-colors ${
+                <span className={`text-[10px] md:text-[10px] font-mono block transition-colors ${
                   activeIndex === index ? 'text-primary' : 'text-muted-foreground'
                 }`}>
                   0{index + 1}
                 </span>
                 
                 {/* Project name */}
-                <span className={`text-[10px] md:text-xs font-medium block truncate transition-colors ${
+                <span className={`text-[11px] md:text-xs font-medium block truncate transition-colors ${
                   activeIndex === index ? 'text-foreground' : 'text-muted-foreground'
                 }`}>
                   {project.name}
@@ -720,12 +720,12 @@ const HeroSection = () => {
         </motion.div>
       </div>
 
-      {/* Scroll indicator - Enhanced */}
+      {/* Scroll indicator - Hidden on mobile for more space */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 1.5, duration: 0.8 }} 
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3"
+        className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center gap-3"
       >
         <motion.span 
           className="text-sm text-muted-foreground tracking-[0.3em] uppercase"
@@ -1517,7 +1517,7 @@ const LLMEngineVisualization = ({
     y: 0
   } : {}} transition={{
     duration: 0.8
-  }} className="mb-12 md:mb-20 p-4 md:p-6 lg:p-10 border border-primary/30 bg-gradient-to-b from-primary/5 via-background to-background relative overflow-hidden">
+  }} className="mb-8 md:mb-20 p-4 md:p-6 lg:p-10 border border-primary/30 bg-gradient-to-b from-primary/5 via-background to-background relative overflow-hidden">
       {/* Animated background patterns */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
       backgroundImage: `
@@ -1527,9 +1527,9 @@ const LLMEngineVisualization = ({
       backgroundSize: '40px 40px'
     }} />
 
-      {/* Floating particles */}
-      {[...Array(6)].map((_, i) => <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-primary/40" style={{
-      left: `${20 + i * 12}%`,
+      {/* Floating particles - reduced on mobile */}
+      {[...Array(4)].map((_, i) => <motion.div key={i} className="absolute w-1 h-1 rounded-full bg-primary/40 hidden md:block" style={{
+      left: `${20 + i * 15}%`,
       top: `${30 + i % 3 * 20}%`
     }} animate={{
       y: [0, -30, 0],
@@ -1554,9 +1554,9 @@ const LLMEngineVisualization = ({
     }} />
 
       <div className="relative z-10">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <motion.div className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/30 rounded-full mb-4" animate={{
+        {/* Header - Mobile optimized */}
+        <div className="text-center mb-8 md:mb-12">
+          <motion.div className="inline-flex items-center gap-2 px-3 md:px-4 py-1.5 md:py-2 bg-primary/10 border border-primary/30 rounded-full mb-3 md:mb-4" animate={{
           boxShadow: ['0 0 20px hsl(var(--primary) / 0.1)', '0 0 40px hsl(var(--primary) / 0.2)', '0 0 20px hsl(var(--primary) / 0.1)'],
           borderColor: ['hsl(var(--primary) / 0.3)', 'hsl(var(--primary) / 0.6)', 'hsl(var(--primary) / 0.3)']
         }} transition={{
@@ -1570,23 +1570,23 @@ const LLMEngineVisualization = ({
             repeat: Infinity,
             ease: "linear"
           }}>
-              <Cpu className="w-4 h-4 text-primary" />
+              <Cpu className="w-3 h-3 md:w-4 md:h-4 text-primary" />
             </motion.div>
-            <span className="text-xs font-mono text-primary tracking-wider">THE IUM ALGORITHM</span>
+            <span className="text-[10px] md:text-xs font-mono text-primary tracking-wider">THE IUM ALGORITHM</span>
           </motion.div>
-          <h3 className="text-xl md:text-2xl lg:text-3xl font-medium text-foreground mb-3">
+          <h3 className="text-lg md:text-2xl lg:text-3xl font-medium text-foreground mb-2 md:mb-3">
             The Intelligence Engine
           </h3>
           <p className="text-muted-foreground max-w-2xl mx-auto text-xs md:text-sm mb-2">
             <span className="text-foreground font-medium">"We optimize for Impact."</span> Our proprietary AI synthesizes <span className="text-primary font-medium">social sentiment & on-chain behavior</span> to engineer the perfect market entry.
           </p>
-          <p className="text-primary/80 text-xs md:text-sm italic">
+          <p className="text-primary/80 text-[11px] md:text-sm italic px-4">
             "우리는 임팩트를 최적화합니다." 사회적 여론과 온체인 행동 데이터를 분석해 완벽한 진입 전략을 설계합니다.
           </p>
         </div>
 
-        {/* Pipeline stages with active indicator */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8 md:mb-12">
+        {/* Pipeline stages - Horizontal scroll on mobile */}
+        <div className="flex overflow-x-auto pb-4 md:pb-0 md:flex-wrap justify-start md:justify-center gap-2 mb-6 md:mb-12 -mx-4 px-4 md:mx-0 md:px-0 scrollbar-hide">
           {pipelineStages.map((stage, i) => <motion.div key={stage.label} initial={{
           opacity: 0,
           scale: 0.8
@@ -1595,17 +1595,17 @@ const LLMEngineVisualization = ({
           scale: 1
         } : {}} transition={{
           delay: i * 0.1 + 0.3
-        }} className="flex items-center gap-2">
-              <motion.div className={`px-4 py-3 bg-background border transition-all duration-300 ${currentPhase === i ? 'border-primary shadow-[0_0_20px_hsl(var(--primary)/0.3)]' : 'border-border'}`} animate={currentPhase === i ? {
+        }} className="flex items-center gap-2 flex-shrink-0">
+              <motion.div className={`px-3 md:px-4 py-2 md:py-3 bg-background border transition-all duration-300 min-w-[100px] md:min-w-0 ${currentPhase === i ? 'border-primary shadow-[0_0_20px_hsl(var(--primary)/0.3)]' : 'border-border'}`} animate={currentPhase === i ? {
             scale: [1, 1.02, 1]
           } : {}} transition={{
             duration: 0.5
           }}>
                 <div className="flex items-center gap-2 mb-1">
                   <stage.icon className={`w-3 h-3 ${currentPhase === i ? 'text-primary' : 'text-muted-foreground'}`} />
-                  <p className={`text-xs font-mono ${currentPhase === i ? 'text-primary' : 'text-muted-foreground'}`}>{stage.label}</p>
+                  <p className={`text-[10px] md:text-xs font-mono ${currentPhase === i ? 'text-primary' : 'text-muted-foreground'}`}>{stage.label}</p>
                 </div>
-                <p className="text-[10px] text-muted-foreground">{stage.desc}</p>
+                <p className="text-[9px] md:text-[10px] text-muted-foreground">{stage.desc}</p>
                 {currentPhase === i && <motion.div className="h-0.5 bg-primary mt-2 rounded-full" initial={{
               width: 0
             }} animate={{
@@ -1614,7 +1614,7 @@ const LLMEngineVisualization = ({
               duration: 2.5
             }} />}
               </motion.div>
-              {i < pipelineStages.length - 1 && <motion.div animate={{
+              {i < pipelineStages.length - 1 && <motion.div className="hidden md:block" animate={{
             x: [0, 5, 0],
             opacity: currentPhase === i ? [0.8, 1, 0.8] : [0.3, 0.5, 0.3]
           }} transition={{
@@ -1627,12 +1627,12 @@ const LLMEngineVisualization = ({
             </motion.div>)}
         </div>
 
-        {/* Main visualization grid - 5 columns: Sources, Connector, Core, Connector, Output */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto_auto_auto_1fr] gap-6 lg:gap-0 items-center relative">
+        {/* Main visualization grid - Stack on mobile, 5-col on desktop */}
+        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_auto_auto_auto_1fr] gap-6 lg:gap-0 items-center relative">
 
           {/* Data Sources */}
-          <div className="space-y-4 relative z-10">
-            <p className="text-xs tracking-widest text-muted-foreground mb-4 text-center lg:text-left flex items-center gap-2 justify-center lg:justify-start">
+          <div className="space-y-3 md:space-y-4 relative z-10 w-full lg:w-auto">
+            <p className="text-[10px] md:text-xs tracking-widest text-muted-foreground mb-3 md:mb-4 text-center lg:text-left flex items-center gap-2 justify-center lg:justify-start">
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
               LIVE DATA SOURCES
             </p>

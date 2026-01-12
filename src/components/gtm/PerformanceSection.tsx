@@ -280,7 +280,7 @@ const ProjectCard = ({
     <Link to={`/projects/${project.slug}`} className="block flex-shrink-0">
       <div
         className={`
-          group relative p-4 md:p-6 w-[260px] md:w-[320px] h-[240px] md:h-[280px]
+          group relative p-4 md:p-6 w-[280px] md:w-[320px] h-[260px] md:h-[280px]
           border ${colors.border} rounded-xl
           bg-background/80 backdrop-blur-sm
           transition-all duration-500
@@ -314,11 +314,11 @@ const ProjectCard = ({
           <img 
             src={project.logo} 
             alt={project.name}
-            className="h-6 md:h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+            className="h-7 md:h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
           />
-          <div className="flex items-center gap-1.5 md:gap-2">
-            <div className={`w-1.5 md:w-2 h-1.5 md:h-2 rounded-full ${colors.indicator} ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
-            <span className={`text-[9px] md:text-[10px] font-mono uppercase tracking-wider ${colors.text}`}>
+          <div className="flex items-center gap-2">
+            <div className={`w-2 h-2 rounded-full ${colors.indicator} ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
+            <span className={`text-[10px] md:text-[10px] font-mono uppercase tracking-wider ${colors.text}`}>
               LIVE
             </span>
           </div>
@@ -326,7 +326,7 @@ const ProjectCard = ({
 
         {/* Category Badge */}
         <div className="flex items-center gap-2 mb-3 md:mb-4">
-          <span className={`px-1.5 md:px-2 py-0.5 text-[9px] md:text-[10px] font-mono uppercase tracking-wider rounded ${colors.bg} ${colors.text}`}>
+          <span className={`px-2 py-0.5 text-[10px] md:text-[10px] font-mono uppercase tracking-wider rounded ${colors.bg} ${colors.text}`}>
             {project.category}
           </span>
         </div>
@@ -377,7 +377,7 @@ const ProjectCard = ({
 const MarqueeRow = ({ 
   projects, 
   direction,
-  speed = 25
+  speed = 35
 }: { 
   projects: typeof allProjects;
   direction: 'left' | 'right';
@@ -466,15 +466,15 @@ const StatCard = ({
       initial={{ opacity: 0, y: 20 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: 0.8 + index * 0.1 }}
-      className="text-center p-4 border border-border/30 rounded-lg bg-background/50 backdrop-blur-sm"
+      className="text-center p-3 md:p-4 border border-border/30 rounded-lg bg-background/50 backdrop-blur-sm"
     >
-      <div className="text-2xl md:text-3xl font-bold font-mono text-primary">
+      <div className="text-xl md:text-3xl font-bold font-mono text-primary">
         {stat.prefix || ''}{count}
       </div>
-      <div className="text-xs text-muted-foreground font-mono uppercase tracking-wider mt-1">
+      <div className="text-[10px] md:text-xs text-muted-foreground font-mono uppercase tracking-wider mt-1">
         {stat.label}
       </div>
-      <div className="text-[10px] text-muted-foreground/60 mt-0.5">
+      <div className="text-[9px] md:text-[10px] text-muted-foreground/60 mt-0.5">
         {stat.sublabel}
       </div>
     </motion.div>
@@ -619,19 +619,19 @@ export const PerformanceSection = () => {
         </motion.div>
 
         {/* 4-Row Alternating Marquee */}
-        <div className="mb-8 md:mb-12 -mx-4 md:-mx-8 lg:-mx-12 space-y-1 md:space-y-2">
+        <div className="mb-8 md:mb-12 -mx-4 md:-mx-8 lg:-mx-12 space-y-2">
           {/* Gradient masks for entire section */}
           <div className="relative">
-            <div className="absolute left-0 top-0 bottom-0 w-12 md:w-24 lg:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 w-12 md:w-24 lg:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute left-0 top-0 bottom-0 w-8 md:w-24 lg:w-40 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 bottom-0 w-8 md:w-24 lg:w-40 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
             
-            <div className="space-y-2">
+            <div className="space-y-2 md:space-y-2">
               {projectRows.map((rowProjects, index) => (
                 <MarqueeRow
                   key={index}
                   projects={rowProjects}
                   direction={index % 2 === 0 ? 'right' : 'left'}
-                  speed={22 + index * 2}
+                  speed={30 + index * 3}
                 />
               ))}
             </div>

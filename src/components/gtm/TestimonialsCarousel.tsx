@@ -88,24 +88,24 @@ const TestimonialsCarousel = () => {
   const activeTestimonial = testimonials[activeIndex];
 
   return (
-    <section ref={ref} className="px-6 md:px-12 lg:px-20 py-24 bg-background border-t border-border">
+    <section ref={ref} className="px-4 md:px-12 lg:px-20 py-16 md:py-24 bg-background border-t border-border">
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
         className="max-w-5xl mx-auto"
       >
-        <div className="text-center mb-12">
-          <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+        <div className="text-center mb-8 md:mb-12">
+          <p className="text-muted-foreground text-xs md:text-sm tracking-widest uppercase mb-3 md:mb-4">
             What Our Clients Say
           </p>
-          <h2 className="text-3xl md:text-4xl font-medium text-foreground">
+          <h2 className="text-2xl md:text-4xl font-medium text-foreground">
             Trusted by Industry Leaders
           </h2>
         </div>
 
         <div className="relative">
           {/* Main testimonial card */}
-          <div className="relative overflow-hidden min-h-[400px] md:min-h-[320px]">
+          <div className="relative overflow-hidden min-h-[360px] md:min-h-[300px]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeIndex}
@@ -113,11 +113,11 @@ const TestimonialsCarousel = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4 }}
-                className="p-8 md:p-12 border border-border bg-muted/30"
+                className="p-5 md:p-12 border border-border bg-muted/30"
               >
-                <Quote className="w-10 h-10 text-primary/30 mb-6" />
+                <Quote className="w-8 h-8 md:w-10 md:h-10 text-primary/30 mb-4 md:mb-6" />
                 
-                <p className="text-lg md:text-xl text-foreground leading-relaxed mb-8">
+                <p className="text-base md:text-xl text-foreground leading-relaxed mb-6 md:mb-8">
                   "{activeTestimonial.quote}"
                 </p>
 
@@ -152,16 +152,16 @@ const TestimonialsCarousel = () => {
           </div>
 
           {/* Navigation */}
-          <div className="flex items-center justify-between mt-6">
-            <div className="flex gap-2">
+          <div className="flex items-center justify-between mt-5 md:mt-6">
+            <div className="flex gap-2 md:gap-2">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => goToSlide(i)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  className={`h-2 rounded-full transition-all duration-300 min-w-[32px] md:min-w-[8px] ${
                     i === activeIndex 
-                      ? 'bg-primary w-8' 
-                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                      ? 'bg-primary w-8 md:w-8' 
+                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/50 w-8 md:w-2'
                   }`}
                 />
               ))}
@@ -170,13 +170,13 @@ const TestimonialsCarousel = () => {
             <div className="flex gap-2">
               <button
                 onClick={goPrev}
-                className="p-2 border border-border hover:border-primary transition-colors"
+                className="p-3 md:p-2 border border-border hover:border-primary transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
               <button
                 onClick={goNext}
-                className="p-2 border border-border hover:border-primary transition-colors"
+                className="p-3 md:p-2 border border-border hover:border-primary transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
               >
                 <ChevronRight className="w-5 h-5" />
               </button>
