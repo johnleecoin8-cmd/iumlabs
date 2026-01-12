@@ -1,6 +1,7 @@
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { useCountUp } from '@/hooks/useCountUp';
+import { ChevronDown } from 'lucide-react';
 
 // Roster Data - The Team (Creative Agency Style)
 const rosterMembers = [
@@ -86,15 +87,15 @@ const AnimatedMetric = ({ metric, index, isVisible }: {
       whileInView={{ opacity: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      className="bg-black p-6 md:p-8 text-center group hover:bg-white/[0.02] transition-colors"
+      className="bg-black p-4 md:p-8 text-center group hover:bg-white/[0.02] transition-colors"
     >
-      <div className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-2 font-mono tracking-tight">
+      <div className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-1 md:mb-2 font-mono tracking-tight">
         {parsed.prefix}{count}{parsed.suffix}
       </div>
-      <div className="text-xs md:text-sm text-white/60 uppercase tracking-wider mb-1">
+      <div className="text-[10px] md:text-sm text-white/60 uppercase tracking-wider mb-0.5 md:mb-1">
         {metric.label}
       </div>
-      <div className="text-[10px] text-white/30">
+      <div className="text-[9px] md:text-[10px] text-white/30">
         {metric.labelKo}
       </div>
     </motion.div>
@@ -109,7 +110,7 @@ const MetricsRow = ({ isVisible }: { isVisible: boolean }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="grid grid-cols-3 gap-px bg-white/10 rounded-lg overflow-hidden mb-12"
+      className="grid grid-cols-3 gap-px bg-white/10 rounded-lg overflow-hidden mb-8 md:mb-12"
     >
       {metrics.map((metric, index) => (
         <AnimatedMetric key={metric.label} metric={metric} index={index} isVisible={isVisible} />
@@ -118,8 +119,77 @@ const MetricsRow = ({ isVisible }: { isVisible: boolean }) => {
   );
 };
 
-// Roster Row Component - Terminal Style
-const RosterRow = ({ data, index }: { data: typeof rosterMembers[0]; index: number }) => {
+// Mobile Accordion Item Component
+const MobileRosterAccordionItem = ({ data, index, isOpen, onToggle }: { 
+  data: typeof rosterMembers[0]; 
+  index: number;
+  isOpen: boolean;
+  onToggle: () => void;
+}) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      className="border-b border-white/10 last:border-b-0"
+    >
+      <button
+        onClick={onToggle}
+        className={`w-full py-4 px-4 flex items-center justify-between text-left transition-colors min-h-[56px] ${
+          isOpen ? 'bg-white/[0.04]' : 'bg-transparent'
+        }`}
+      >
+        <div className="flex items-center gap-3 flex-1 min-w-0">
+          <span className="font-mono text-xs text-white/30 flex-shrink-0">{data.id}</span>
+          <div className="min-w-0">
+            <span className="font-mono text-[10px] uppercase tracking-widest text-primary/80 block">
+              {data.role}
+            </span>
+            <h4 className="text-sm font-semibold text-white truncate">
+              {data.title}
+            </h4>
+          </div>
+        </div>
+        <motion.div
+          animate={{ rotate: isOpen ? 180 : 0 }}
+          transition={{ duration: 0.2 }}
+          className="flex-shrink-0 ml-2"
+        >
+          <ChevronDown className="w-5 h-5 text-white/40" />
+        </motion.div>
+      </button>
+      
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-4 pt-1 space-y-3 bg-white/[0.02]">
+              <div>
+                <span className="text-[10px] text-white/30 uppercase tracking-wider">Background</span>
+                <p className="text-sm text-white/60 font-medium mt-0.5">{data.background}</p>
+                <p className="text-xs text-primary/70 italic mt-1">"{data.quote}"</p>
+              </div>
+              <div>
+                <span className="text-[10px] text-white/30 uppercase tracking-wider">Description</span>
+                <p className="text-sm text-white/50 leading-relaxed mt-0.5">{data.description}</p>
+                <p className="text-xs text-white/30 mt-1">{data.descriptionKo}</p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
+// Desktop Roster Row Component - Terminal Style
+const DesktopRosterRow = ({ data, index }: { data: typeof rosterMembers[0]; index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -146,30 +216,26 @@ const RosterRow = ({ data, index }: { data: typeof rosterMembers[0]; index: numb
         `}
       />
 
-      <div className="grid grid-cols-12 gap-4 py-6 px-4 md:px-6 items-start md:items-center">
+      <div className="grid grid-cols-12 gap-4 py-6 px-6 items-center">
         {/* Number */}
-        <div className="col-span-1 hidden md:block">
+        <div className="col-span-1">
           <span className="font-mono text-sm text-white/20 group-hover:text-white/40 transition-colors">
             {data.id}
           </span>
         </div>
 
         {/* Category + Role */}
-        <div className="col-span-12 md:col-span-3">
-          <div className="flex items-center gap-2 mb-1 md:mb-0">
-            <span className="md:hidden font-mono text-xs text-white/30">{data.id}</span>
-            <span className="font-mono text-[10px] md:text-xs uppercase tracking-widest text-primary/80 group-hover:text-primary transition-colors">
-              {data.role}
-            </span>
-          </div>
-          <h4 className="text-base md:text-lg font-semibold text-white group-hover:text-white transition-colors mt-1">
+        <div className="col-span-3">
+          <span className="font-mono text-xs uppercase tracking-widest text-primary/80 group-hover:text-primary transition-colors">
+            {data.role}
+          </span>
+          <h4 className="text-lg font-semibold text-white group-hover:text-white transition-colors mt-1">
             {data.title}
           </h4>
         </div>
 
         {/* Background */}
-        <div className="col-span-12 md:col-span-3 mt-2 md:mt-0">
-          <div className="text-[10px] text-white/30 uppercase tracking-wider mb-1 md:hidden">Background</div>
+        <div className="col-span-3">
           <span className="text-sm text-white/50 group-hover:text-white/70 transition-colors font-medium">
             {data.background}
           </span>
@@ -177,8 +243,7 @@ const RosterRow = ({ data, index }: { data: typeof rosterMembers[0]; index: numb
         </div>
 
         {/* Description */}
-        <div className="col-span-12 md:col-span-5 mt-3 md:mt-0">
-          <div className="text-[10px] text-white/30 uppercase tracking-wider mb-1 md:hidden">Description</div>
+        <div className="col-span-5">
           <p className="text-sm text-white/40 group-hover:text-white/60 transition-colors leading-relaxed">
             {data.description}
           </p>
@@ -199,17 +264,17 @@ const BackingSection = () => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: 0.3 }}
-      className="mt-12 pt-8 border-t border-white/5"
+      className="mt-8 md:mt-12 pt-6 md:pt-8 border-t border-white/5"
     >
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
           <div className="text-[10px] font-mono text-white/30 uppercase tracking-widest mb-1">
             Backing Intelligence
           </div>
-          <p className="text-xs text-white/20">Team's collective background</p>
+          <p className="text-[10px] md:text-xs text-white/20">Team's collective background</p>
         </div>
         
-        <div className="flex flex-wrap items-center gap-3 md:gap-4">
+        <div className="flex flex-wrap items-center gap-2 md:gap-4">
           {backingLogos.map((logo, index) => (
             <motion.span
               key={logo}
@@ -217,7 +282,7 @@ const BackingSection = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3, delay: 0.4 + index * 0.05 }}
-              className="px-3 py-1.5 text-[10px] font-mono uppercase tracking-wider text-white/30 border border-white/10 rounded hover:text-white/50 hover:border-white/20 transition-all cursor-default"
+              className="px-2 md:px-3 py-1 md:py-1.5 text-[9px] md:text-[10px] font-mono uppercase tracking-wider text-white/30 border border-white/10 rounded hover:text-white/50 hover:border-white/20 transition-all cursor-default"
             >
               {logo}
             </motion.span>
@@ -231,11 +296,16 @@ const BackingSection = () => {
 export const AuthoritySection = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+  const [openAccordionIndex, setOpenAccordionIndex] = useState<number | null>(0);
+
+  const handleAccordionToggle = (index: number) => {
+    setOpenAccordionIndex(openAccordionIndex === index ? null : index);
+  };
 
   return (
     <section
       ref={sectionRef}
-      className="relative py-24 md:py-32 bg-black overflow-hidden"
+      className="relative py-16 md:py-32 bg-black overflow-hidden"
     >
       {/* Terminal Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
@@ -247,9 +317,9 @@ export const AuthoritySection = () => {
           }}
         />
         
-        {/* Very subtle grid */}
+        {/* Very subtle grid - hidden on mobile for performance */}
         <div 
-          className="absolute inset-0 opacity-[0.02]"
+          className="absolute inset-0 opacity-[0.02] hidden md:block"
           style={{
             backgroundImage: 'linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)',
             backgroundSize: '60px 60px'
@@ -257,33 +327,33 @@ export const AuthoritySection = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-20">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-12 lg:px-20">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-12 md:mb-16"
+          className="mb-8 md:mb-16"
         >
           {/* Section number */}
-          <div className="flex items-center gap-4 mb-8">
-            <span className="text-sm font-mono text-white/40 tracking-wider">04</span>
-            <div className="h-px w-16 bg-white/20" />
-            <span className="text-sm font-medium text-white/40 uppercase tracking-wider">Authority</span>
+          <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
+            <span className="text-xs md:text-sm font-mono text-white/40 tracking-wider">04</span>
+            <div className="h-px w-12 md:w-16 bg-white/20" />
+            <span className="text-xs md:text-sm font-medium text-white/40 uppercase tracking-wider">Authority</span>
           </div>
 
           {/* Title Group */}
           <div className="max-w-4xl">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 leading-tight">
+            <h2 className="text-2xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-4 leading-tight">
               The Creative Engine
             </h2>
-            <p className="text-xl md:text-2xl text-white/70 mb-3 font-light">
+            <p className="text-base md:text-2xl text-white/70 mb-2 md:mb-3 font-light">
               <span className="text-primary font-medium">"Engineered for Growth."</span>
             </p>
-            <p className="text-base md:text-lg text-white/50 mb-2">
+            <p className="text-sm md:text-lg text-white/50 mb-1 md:mb-2">
               We combined global exchange logic with local execution power.
             </p>
-            <p className="text-sm text-white/30">
+            <p className="text-xs md:text-sm text-white/30">
               글로벌 거래소의 로직과 로컬의 실행력을 결합했습니다.
             </p>
           </div>
@@ -297,9 +367,9 @@ export const AuthoritySection = () => {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mb-6"
+          className="mb-4 md:mb-6"
         >
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4 md:mb-6">
             <div className="flex items-center gap-3">
               <span className="text-[10px] font-mono text-white/30 uppercase tracking-widest">The Roster</span>
               <div className="h-px w-8 bg-white/10" />
@@ -315,11 +385,27 @@ export const AuthoritySection = () => {
           </div>
         </motion.div>
 
-        {/* Roster List */}
+        {/* Roster List - Mobile: Accordion, Desktop: Table */}
         <div className="border border-white/10 rounded-lg overflow-hidden bg-black/50 backdrop-blur-sm">
-          {rosterMembers.map((member, index) => (
-            <RosterRow key={member.id} data={member} index={index} />
-          ))}
+          {/* Mobile Accordion */}
+          <div className="md:hidden">
+            {rosterMembers.map((member, index) => (
+              <MobileRosterAccordionItem 
+                key={member.id} 
+                data={member} 
+                index={index}
+                isOpen={openAccordionIndex === index}
+                onToggle={() => handleAccordionToggle(index)}
+              />
+            ))}
+          </div>
+          
+          {/* Desktop Table */}
+          <div className="hidden md:block">
+            {rosterMembers.map((member, index) => (
+              <DesktopRosterRow key={member.id} data={member} index={index} />
+            ))}
+          </div>
         </div>
 
         {/* Section 3: Backing Intelligence */}

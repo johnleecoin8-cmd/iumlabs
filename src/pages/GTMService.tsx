@@ -776,16 +776,16 @@ const AnimatedProgressBar = ({
       return () => clearTimeout(timer);
     }
   }, [isVisible, percentage, delay]);
-  return <div className="space-y-2">
+  return <div className="space-y-2 md:space-y-2">
       <div className="flex justify-between items-center">
-        <span className={`text-sm font-medium ${isHighlight ? 'text-primary' : 'text-foreground/80'}`}>
+        <span className={`text-xs md:text-sm font-medium ${isHighlight ? 'text-primary' : 'text-foreground/80'}`}>
           {label}
         </span>
-        <span className={`text-sm font-mono ${isHighlight ? 'text-primary' : 'text-muted-foreground'}`}>
+        <span className={`text-xs md:text-sm font-mono ${isHighlight ? 'text-primary' : 'text-muted-foreground'}`}>
           {value}
         </span>
       </div>
-      <div className="h-2 bg-muted rounded-full overflow-hidden">
+      <div className="h-3 md:h-2 bg-muted rounded-full overflow-hidden">
         <motion.div className={`h-full rounded-full ${isHighlight ? 'bg-primary' : 'bg-foreground/30'}`} initial={{
         width: 0
       }} animate={{
@@ -1037,24 +1037,24 @@ const MarketIntelligenceSection = () => {
     subtitle: 'Real User Acquisition',
     description: "Institutional money follows retail heat. By securing genuine retail 'Mindshare' and actual wallet usage in Korea, we create the organic demand that exchanges and VCs look for."
   }];
-  return <section ref={ref} className="px-4 md:px-8 lg:px-12 py-16 bg-muted/30 border-y border-border w-full">
+  return <section ref={ref} className="px-4 md:px-8 lg:px-12 py-12 md:py-16 bg-muted/30 border-y border-border w-full">
       <motion.div initial={{
       opacity: 0
     }} animate={isInView ? {
       opacity: 1
     } : {}} className="w-full">
-        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+        <p className="text-muted-foreground text-xs md:text-sm tracking-widest uppercase mb-3 md:mb-4">
           01 The Strategic Imperative
         </p>
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-medium text-foreground mb-2">
+        <h2 className="text-xl md:text-3xl lg:text-4xl font-medium text-foreground mb-2">
           Why Korea?
         </h2>
-        <p className="text-muted-foreground text-base md:text-lg mb-10 md:mb-16">
+        <p className="text-muted-foreground text-sm md:text-lg mb-8 md:mb-16">
           Korea moves fast. Users are passionate.
         </p>
 
         {/* Module A: The Market Logic - 3 Column */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-10 md:mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-8 md:mb-16">
           {marketLogic.map((item, i) => <motion.div key={item.number} initial={{
           opacity: 0,
           y: 30
@@ -1064,23 +1064,23 @@ const MarketIntelligenceSection = () => {
         } : {}} transition={{
           delay: i * 0.15
         }} className="relative p-4 md:p-6 border border-border bg-background hover:border-primary/30 transition-colors group">
-              <span className="absolute -top-3 left-4 md:left-6 px-2 py-0.5 bg-muted text-xs font-mono text-muted-foreground">
+              <span className="absolute -top-3 left-4 md:left-6 px-2 py-0.5 bg-muted text-[10px] md:text-xs font-mono text-muted-foreground">
                 {item.number}
               </span>
-              <p className="text-xs tracking-widest text-primary font-medium mb-2 mt-2">
+              <p className="text-[10px] md:text-xs tracking-widest text-primary font-medium mb-2 mt-2">
                 {item.subtitle}
               </p>
-              <h3 className="text-lg md:text-xl font-medium text-foreground mb-2 md:mb-3">
+              <h3 className="text-base md:text-xl font-medium text-foreground mb-2 md:mb-3">
                 {item.title}
               </h3>
-              <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
+              <p className="text-[11px] md:text-sm text-muted-foreground leading-relaxed">
                 {item.description}
               </p>
             </motion.div>)}
         </div>
 
-        {/* Module B: Data Visualization */}
-        <div className="grid lg:grid-cols-2 gap-12 mb-16">
+        {/* Module B: Data Visualization - Stack on mobile */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-12 mb-10 md:mb-16">
           {/* Chart 1: The Fiat Impact */}
           <motion.div initial={{
           opacity: 0,
@@ -1090,14 +1090,14 @@ const MarketIntelligenceSection = () => {
           x: 0
         } : {}} transition={{
           delay: 0.3
-        }} className="p-6 border border-border bg-background">
-            <p className="text-xs tracking-widest text-primary font-medium mb-6">
+        }} className="p-4 md:p-6 border border-border bg-background">
+            <p className="text-[10px] md:text-xs tracking-widest text-primary font-medium mb-4 md:mb-6">
               THE FIAT IMPACT — Average Daily Volume per Fiat Pair
             </p>
-            <div className="space-y-4 mb-6">
+            <div className="space-y-3 md:space-y-4 mb-4 md:mb-6">
               {fiatVolumeData.map((item, i) => <AnimatedProgressBar key={item.label} label={item.label} percentage={item.percentage} value={item.value} delay={i * 0.15 + 0.3} isHighlight={item.isHighlight} isVisible={isInView} />)}
             </div>
-            <p className="text-sm text-muted-foreground italic border-t border-border pt-4">
+            <p className="text-xs md:text-sm text-muted-foreground italic border-t border-border pt-3 md:pt-4">
               "KRW is the only fiat pair that challenges the USD."
             </p>
           </motion.div>
@@ -1111,17 +1111,17 @@ const MarketIntelligenceSection = () => {
           x: 0
         } : {}} transition={{
           delay: 0.4
-        }} className="p-6 border border-border bg-background">
-            <p className="text-xs tracking-widest text-primary font-medium mb-6">
-              VELOCITY COMPARISON — Token Velocity Ratio (Volume / Market Cap)
+        }} className="p-4 md:p-6 border border-border bg-background">
+            <p className="text-[10px] md:text-xs tracking-widest text-primary font-medium mb-4 md:mb-6">
+              VELOCITY COMPARISON — Token Velocity Ratio
             </p>
-            <div className="space-y-6 mb-6">
+            <div className="space-y-4 md:space-y-6 mb-4 md:mb-6">
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-foreground/80">Global Average</span>
-                  <span className="text-sm font-mono text-muted-foreground">0.15</span>
+                  <span className="text-xs md:text-sm font-medium text-foreground/80">Global Average</span>
+                  <span className="text-xs md:text-sm font-mono text-muted-foreground">0.15</span>
                 </div>
-                <div className="h-3 bg-muted rounded-full overflow-hidden">
+                <div className="h-3 md:h-3 bg-muted rounded-full overflow-hidden">
                   <motion.div className="h-full bg-foreground/30 rounded-full" initial={{
                   width: 0
                 }} animate={isInView ? {
@@ -1134,10 +1134,10 @@ const MarketIntelligenceSection = () => {
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-primary">Korea Market</span>
-                  <span className="text-sm font-mono text-primary">0.68</span>
+                  <span className="text-xs md:text-sm font-medium text-primary">Korea Market</span>
+                  <span className="text-xs md:text-sm font-mono text-primary">0.68</span>
                 </div>
-                <div className="h-3 bg-muted rounded-full overflow-hidden">
+                <div className="h-3 md:h-3 bg-muted rounded-full overflow-hidden">
                   <motion.div className="h-full bg-primary rounded-full" initial={{
                   width: 0
                 }} animate={isInView ? {
@@ -1149,29 +1149,29 @@ const MarketIntelligenceSection = () => {
                 </div>
               </div>
             </div>
-            <p className="text-sm text-muted-foreground italic border-t border-border pt-4">
+            <p className="text-xs md:text-sm text-muted-foreground italic border-t border-border pt-3 md:pt-4">
               "Same Market Cap, <span className="text-primary font-medium">4x More Volume</span> in Korea."
             </p>
           </motion.div>
         </div>
 
-        {/* Key Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-          <div className="p-4 border border-border bg-background text-center">
-            <p className="text-2xl md:text-3xl font-medium text-primary">#1</p>
-            <p className="text-xs text-muted-foreground mt-1">Trend Setter in Asia</p>
+        {/* Key Stats - 2x2 on mobile */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-8 md:mb-12">
+          <div className="p-3 md:p-4 border border-border bg-background text-center">
+            <p className="text-xl md:text-3xl font-medium text-primary">#1</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">Trend Setter in Asia</p>
           </div>
-          <div className="p-4 border border-border bg-background text-center">
-            <p className="text-2xl md:text-3xl font-medium text-foreground">95%</p>
-            <p className="text-xs text-muted-foreground mt-1">Active Engagement</p>
+          <div className="p-3 md:p-4 border border-border bg-background text-center">
+            <p className="text-xl md:text-3xl font-medium text-foreground">95%</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">Active Engagement</p>
           </div>
-          <div className="p-4 border border-border bg-background text-center">
-            <p className="text-2xl md:text-3xl font-medium text-foreground">3x</p>
-            <p className="text-xs text-muted-foreground mt-1">Viral Spread Rate</p>
+          <div className="p-3 md:p-4 border border-border bg-background text-center">
+            <p className="text-xl md:text-3xl font-medium text-foreground">3x</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">Viral Spread Rate</p>
           </div>
-          <div className="p-4 border border-border bg-background text-center">
-            <p className="text-2xl md:text-3xl font-medium text-foreground">100%</p>
-            <p className="text-xs text-muted-foreground mt-1">Retail-Driven</p>
+          <div className="p-3 md:p-4 border border-border bg-background text-center">
+            <p className="text-xl md:text-3xl font-medium text-foreground">100%</p>
+            <p className="text-[10px] md:text-xs text-muted-foreground mt-1">Retail-Driven</p>
           </div>
         </div>
 
@@ -1183,11 +1183,11 @@ const MarketIntelligenceSection = () => {
         y: 0
       } : {}} transition={{
         delay: 0.5
-      }} className="border-l-2 border-primary pl-6">
-          <p className="text-lg md:text-xl text-foreground italic">
+      }} className="border-l-2 border-primary pl-4 md:pl-6">
+          <p className="text-base md:text-xl text-foreground italic leading-relaxed">
             "Korean users don't just hold; they engage, discuss, and advocate. We turn the world's most hyper-connected users into your passionate champions."
           </p>
-          <footer className="mt-2 text-sm text-muted-foreground">
+          <footer className="mt-2 text-xs md:text-sm text-muted-foreground">
             — The ium Philosophy
           </footer>
         </motion.blockquote>
