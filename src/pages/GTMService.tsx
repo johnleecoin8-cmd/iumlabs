@@ -44,7 +44,6 @@ const featuredProjects = [{
   category: 'INFRASTRUCTURE',
   strategy: 'Strategic DeFi partnerships & Developer Incentives',
   descEn: 'We executed a developer-focused GTM strategy to boost TVL and dApp deployment.',
-  descKr: '개발자 중심 GTM 전략 수립으로 TVL 및 dApp 배포 확대 달성',
   metrics: [{
     label: 'TVL Generated',
     value: 2,
@@ -64,7 +63,6 @@ const featuredProjects = [{
   category: 'EXCHANGE ECOSYSTEM',
   strategy: 'Localized trading competitions & community Airdrops',
   descEn: 'Revitalized the trading ecosystem through community initiatives and exchange partnerships.',
-  descKr: '커뮤니티 이니셔티브와 거래소 파트너십을 통해 거래 생태계 활성화',
   metrics: [{
     label: 'Volume Growth',
     value: 340,
@@ -84,7 +82,6 @@ const featuredProjects = [{
   category: 'IP & NARRATIVE',
   strategy: 'Narrative localization & Creator workshops',
   descEn: 'Positioned a complex IP protocol as the leading trend in the Korean market.',
-  descKr: '복잡한 IP 프로토콜을 한국 시장의 선도적 트렌드로 포지셔닝',
   metrics: [{
     label: 'Creators Onboarded',
     value: 5,
@@ -103,7 +100,6 @@ const featuredProjects = [{
   category: 'USER ACQUISITION',
   strategy: 'High-performance SEO & KOL funnel optimization',
   descEn: 'Secured the #2 spot in Korean exchange traffic through aggressive performance marketing.',
-  descKr: '공격적인 퍼포먼스 마케팅으로 한국 거래소 트래픽 2위 달성',
   metrics: [{
     label: 'Traffic Ranking',
     value: 2,
@@ -157,7 +153,6 @@ const frameworkStages = [{
   subtitle: 'Data-Driven Strategy',
   items: ['Competitor SOV Benchmarking', 'Narrative Design for Korean Fit', 'Market Gap Analysis'],
   quote: '"We analyze the market gap using proprietary data intelligence."',
-  descKr: '독점 데이터 인텔리전스로 시장 기회를 분석합니다.',
   icon: Search
 }, {
   number: '02',
@@ -165,7 +160,6 @@ const frameworkStages = [{
   subtitle: 'Cultural Connection',
   items: ['Naver & Kakao Optimization', '24/7 Community Infrastructure', 'Brand Positioning'],
   quote: '"We rebuild your presence to resonate with the local ecosystem."',
-  descKr: '로컬 생태계와 공명하도록 프레즌스를 재구축합니다.',
   icon: Building
 }, {
   number: '03',
@@ -173,7 +167,6 @@ const frameworkStages = [{
   subtitle: 'Maximum Impact',
   items: ['Tier-1 Media (BlockMedia, CoinNess)', 'Verified KOL Network', 'Strategic Event Partnerships'],
   quote: '"We coordinate all channels to fire simultaneously."',
-  descKr: '모든 채널을 동시에 발화시킵니다.',
   icon: Zap
 }, {
   number: '04',
@@ -181,7 +174,6 @@ const frameworkStages = [{
   subtitle: 'Sustainable Metrics',
   items: ['Wallet Installs & DApp Usage', 'Exchange Liquidity Support', 'Developer Outreach & Grants'],
   quote: '"Turning initial hype into on-chain results."',
-  descKr: '초기 바이럴을 온체인 성과로 전환합니다.',
   icon: TrendingUp
 }];
 
@@ -1486,25 +1478,25 @@ const LLMEngineVisualization = ({
   }];
   const outputMetrics = [{
     label: 'Market Heat Index',
-    sublabel: '최적 진입 타이밍 포착',
+    sublabel: 'Optimal Entry Timing Detection',
     value: liveData.timing,
     color: 'green',
     icon: Target
   }, {
     label: 'Sentiment Score',
-    sublabel: '실시간 브랜드 여론 분석',
+    sublabel: 'Real-time Brand Sentiment Analysis',
     value: liveData.channels,
     color: 'primary',
     icon: Users
   }, {
     label: 'Buzz Velocity',
-    sublabel: '커뮤니티 확산 속도 측정',
+    sublabel: 'Community Spread Rate Measurement',
     value: liveData.budget,
     color: 'primary',
     icon: Sparkles
   }, {
     label: 'Community Readiness',
-    sublabel: '초기 화력 및 결집도 진단',
+    sublabel: 'Initial Traction & Cohesion Diagnosis',
     value: liveData.volume,
     color: 'green',
     icon: TrendingUp
@@ -1577,11 +1569,8 @@ const LLMEngineVisualization = ({
           <h3 className="text-lg md:text-2xl lg:text-3xl font-medium text-foreground mb-2 md:mb-3">
             The Intelligence Engine
           </h3>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-xs md:text-sm mb-2">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-xs md:text-sm">
             <span className="text-foreground font-medium">"We optimize for Impact."</span> Our proprietary AI synthesizes <span className="text-primary font-medium">social sentiment & on-chain behavior</span> to engineer the perfect market entry.
-          </p>
-          <p className="text-primary/80 text-[11px] md:text-sm italic px-4">
-            "우리는 임팩트를 최적화합니다." 사회적 여론과 온체인 행동 데이터를 분석해 완벽한 진입 전략을 설계합니다.
           </p>
         </div>
 
@@ -2155,10 +2144,6 @@ const FrameworkSection = () => {
                   </motion.li>)}
               </ul>
 
-              <p className="text-[10px] text-muted-foreground/70 mb-4">
-                {stage.descKr}
-              </p>
-
               <p className="text-xs text-primary/80 italic border-t border-border pt-4 leading-relaxed">
                 {stage.quote}
               </p>
@@ -2310,13 +2295,12 @@ const TiltCaseCard = ({
               </div>
             </div>
             
-            {/* Action & KR Description */}
+            {/* Action */}
             <div className="space-y-2">
               <div className="flex items-start gap-2">
                 <span className="text-xs text-muted-foreground uppercase tracking-wider min-w-[50px]">Action:</span>
                 <span className="text-sm text-foreground">{project.strategy}</span>
               </div>
-              <p className="text-xs text-muted-foreground/70 italic pl-[62px]">{project.descKr}</p>
             </div>
             
             {/* Metrics with animation */}
