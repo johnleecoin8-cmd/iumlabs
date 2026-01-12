@@ -83,7 +83,7 @@ const LeadershipSection = () => {
         </motion.div>
 
         {/* Leaders Grid - 2x2 on Desktop, 1 column on Mobile */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           {leaders.map((leader, index) => (
             <motion.div
               key={index}
