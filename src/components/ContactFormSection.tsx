@@ -188,7 +188,7 @@ const ContactFormSection = ({
                 </div>
                 <div>
                   <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Email *</label>
-                  <input type="email" placeholder="your@email.com" value={formData.email} onChange={e => setFormData({
+                  <input type="text" placeholder="your@email.com" value={formData.email} onChange={e => setFormData({
                   ...formData,
                   email: e.target.value
                 })} required className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
@@ -206,7 +206,7 @@ const ContactFormSection = ({
                 </div>
                 <div>
                   <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Website</label>
-                  <input type="url" placeholder="https://..." value={formData.website} onChange={e => setFormData({
+                  <input type="text" placeholder="https://..." value={formData.website} onChange={e => setFormData({
                   ...formData,
                   website: e.target.value
                 })} className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
@@ -236,7 +236,7 @@ const ContactFormSection = ({
               </div>
 
               {/* Submit Button */}
-              <button type="submit" disabled={isSubmitting || completionPercentage < 100} className={`w-full mt-3 sm:mt-4 py-3 sm:py-4 text-sm sm:text-base font-semibold transition-all duration-300 min-h-[48px] active:scale-[0.98] ${completionPercentage === 100 ? 'bg-white text-black hover:bg-white/90' : 'bg-white/15 text-white/50 cursor-not-allowed'}`}>
+              <button type="submit" disabled={isSubmitting || !formData.name || !formData.email} className={`w-full mt-3 sm:mt-4 py-3 sm:py-4 text-sm sm:text-base font-semibold transition-all duration-300 min-h-[48px] active:scale-[0.98] ${formData.name && formData.email ? 'bg-white text-black hover:bg-white/90' : 'bg-white/15 text-white/50 cursor-not-allowed'}`}>
                 {isSubmitting ? 'Sending...' : 'Send Message'}
               </button>
             </form>
