@@ -317,6 +317,7 @@ export type Database = {
           discord_members: number | null
           id: string
           is_active: boolean | null
+          last_data_update: string | null
           logo_url: string | null
           mindshare_score: number
           name: string
@@ -325,6 +326,8 @@ export type Database = {
           rank: number
           slug: string
           telegram_members: number | null
+          telegram_mentions_24h: number | null
+          telegram_sentiment: number | null
           twitter_mentions: number | null
           twitter_url: string | null
           updated_at: string
@@ -336,6 +339,7 @@ export type Database = {
           discord_members?: number | null
           id?: string
           is_active?: boolean | null
+          last_data_update?: string | null
           logo_url?: string | null
           mindshare_score?: number
           name: string
@@ -344,6 +348,8 @@ export type Database = {
           rank?: number
           slug: string
           telegram_members?: number | null
+          telegram_mentions_24h?: number | null
+          telegram_sentiment?: number | null
           twitter_mentions?: number | null
           twitter_url?: string | null
           updated_at?: string
@@ -355,6 +361,7 @@ export type Database = {
           discord_members?: number | null
           id?: string
           is_active?: boolean | null
+          last_data_update?: string | null
           logo_url?: string | null
           mindshare_score?: number
           name?: string
@@ -363,6 +370,8 @@ export type Database = {
           rank?: number
           slug?: string
           telegram_members?: number | null
+          telegram_mentions_24h?: number | null
+          telegram_sentiment?: number | null
           twitter_mentions?: number | null
           twitter_url?: string | null
           updated_at?: string
@@ -639,6 +648,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      calculate_mindshare_score: {
+        Args: { sentiment: number; tg_mentions: number; tw_mentions: number }
+        Returns: number
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -646,6 +659,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      record_daily_project_history: { Args: never; Returns: undefined }
     }
     Enums: {
       app_role: "admin" | "user"
