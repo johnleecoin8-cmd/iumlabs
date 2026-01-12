@@ -104,7 +104,7 @@ const LeadershipSection = () => {
                   {/* Top: Photo + Title */}
                   <div className="flex items-start gap-4 mb-5">
                     {/* Photo */}
-                    <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border border-white/10 flex-shrink-0">
+                    <div className={`rounded-xl overflow-hidden border border-white/10 flex-shrink-0 ${index === 0 ? 'w-24 h-24' : 'w-16 h-16 md:w-20 md:h-20'}`}>
                       <img 
                         src={leader.photo} 
                         alt={leader.title}
