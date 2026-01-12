@@ -13,7 +13,7 @@ const sections = [
   { title: "3. User Responsibilities", content: "Users agree to provide accurate information when using our services and to comply with all applicable laws and regulations in their jurisdiction." },
   { title: "4. Intellectual Property", content: "All content, trademarks, and intellectual property on this website are owned by ium Labs unless otherwise stated." },
   { title: "5. Limitation of Liability", content: "ium Labs shall not be liable for any indirect, incidental, special, or consequential damages arising from the use of our services." },
-  { title: "6. Contact", content: "For questions about these Terms, please contact us at info@iumlabs.com." },
+  { title: "6. Contact", content: "For questions about these Terms, please contact us at info@iumlabs.io." },
 ];
 
 const TermsModal = ({ isOpen, onClose }: TermsModalProps) => {
