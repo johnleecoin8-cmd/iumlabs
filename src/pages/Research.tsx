@@ -26,9 +26,10 @@ const calculateReadTime = (content: string | null): string => {
 };
 const Research = () => {
   usePageMeta({
-    title: "Crypto Market Research Korea | ium Labs",
+    title: "Crypto Market Research Korea",
     description: "Data-driven crypto and Web3 research for the Korean market. Ecosystem analysis, market insights, and strategic intelligence for blockchain projects.",
-    path: "/research"
+    path: "/research",
+    image: "/og-image.png"
   });
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
