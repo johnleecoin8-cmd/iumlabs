@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
   TrendingUp, 
@@ -13,62 +13,28 @@ import {
   Zap,
   BarChart3,
   ArrowUpRight,
-  ArrowDownRight
+  ArrowDownRight,
+  Filter,
+  ArrowUpDown,
+  X
 } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
+import InfluencerDetailModal from '@/components/influencer/InfluencerDetailModal';
 
-// Mock Data
-const leaderboardData = [
-  {
-    rank: 1,
-    name: "Hobbyist (취미생활방)",
-    platform: "telegram",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=hobbyist",
-    score: 98.2,
-    tier: "Alpha",
-    tierColor: "cyan",
-    trend: +2,
-  },
-  {
-    rank: 2,
-    name: "100y",
-    platform: "x",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=100y",
-    score: 95.5,
-    tier: "Builder",
-    tierColor: "purple",
-    trend: +5,
-  },
-  {
-    rank: 3,
-    name: "CoinNess",
-    platform: "app",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=coinness",
-    score: 91.0,
-    tier: "Aggregator",
-    tierColor: "blue",
-    trend: 0,
-  },
-  {
-    rank: 4,
-    name: "WeCrypto (코인같이투자)",
-    platform: "telegram",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=wecrypto",
-    score: 88.4,
-    tier: "VC",
-    tierColor: "green",
-    trend: +1,
-  },
-  {
-    rank: 5,
-    name: "Ki Young Ju",
-    platform: "x",
-    avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=kiyoungju",
-    score: 85.2,
-    tier: "On-chain",
-    tierColor: "orange",
-    trend: -1,
-  },
-];
+interface Influencer {
+  id: string;
+  name: string;
+  platform: string;
+  avatar_url: string;
+  score: number;
+  tier: string;
+  tier_color: string;
+  trend: number;
+  followers: number;
+  engagement_rate: number;
+  bio: string;
+  profile_url: string;
+}
 
 const topNarratives = [
   { tag: "#AI", heat: 94 },
@@ -82,53 +48,120 @@ const fearGreedValue = 72;
 
 const getPlatformIcon = (platform: string) => {
   switch (platform) {
-    case 'telegram':
-      return <MessageCircle className="w-3 h-3" />;
-    case 'x':
-      return <Twitter className="w-3 h-3" />;
-    case 'youtube':
-      return <Youtube className="w-3 h-3" />;
-    case 'app':
-      return <Smartphone className="w-3 h-3" />;
-    default:
-      return null;
+    case 'telegram': return <MessageCircle className="w-3 h-3" />;
+    case 'x': return <Twitter className="w-3 h-3" />;
+    case 'youtube': return <Youtube className="w-3 h-3" />;
+    case 'app': return <Smartphone className="w-3 h-3" />;
+    default: return null;
   }
 };
 
 const getPlatformStyle = (platform: string) => {
   switch (platform) {
-    case 'telegram':
-      return 'bg-[#0088cc]/20 text-[#0088cc] border-[#0088cc]/30';
-    case 'x':
-      return 'bg-white/10 text-white border-white/20';
-    case 'youtube':
-      return 'bg-[#ff0000]/20 text-[#ff4444] border-[#ff0000]/30';
-    case 'app':
-      return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
-    default:
-      return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
+    case 'telegram': return 'bg-[#0088cc]/20 text-[#0088cc] border-[#0088cc]/30';
+    case 'x': return 'bg-white/10 text-white border-white/20';
+    case 'youtube': return 'bg-[#ff0000]/20 text-[#ff4444] border-[#ff0000]/30';
+    case 'app': return 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
+    default: return 'bg-gray-500/20 text-gray-400 border-gray-500/30';
   }
 };
 
 const getTierStyle = (tierColor: string) => {
   switch (tierColor) {
-    case 'cyan':
-      return 'bg-cyan-500/20 text-cyan-400 border-cyan-500/40';
-    case 'purple':
-      return 'bg-purple-500/20 text-purple-400 border-purple-500/40';
-    case 'blue':
-      return 'bg-blue-500/20 text-blue-400 border-blue-500/40';
-    case 'green':
-      return 'bg-green-500/20 text-green-400 border-green-500/40';
-    case 'orange':
-      return 'bg-orange-500/20 text-orange-400 border-orange-500/40';
-    default:
-      return 'bg-gray-500/20 text-gray-400 border-gray-500/40';
+    case 'cyan': return 'bg-cyan-500/20 text-cyan-400 border-cyan-500/40';
+    case 'purple': return 'bg-purple-500/20 text-purple-400 border-purple-500/40';
+    case 'blue': return 'bg-blue-500/20 text-blue-400 border-blue-500/40';
+    case 'green': return 'bg-green-500/20 text-green-400 border-green-500/40';
+    case 'orange': return 'bg-orange-500/20 text-orange-400 border-orange-500/40';
+    default: return 'bg-gray-500/20 text-gray-400 border-gray-500/40';
   }
 };
 
+type SortOption = 'score' | 'trend' | 'followers';
+type PlatformFilter = 'all' | 'telegram' | 'x' | 'youtube' | 'app';
+
 const KInfluenceGrid = () => {
+  const [influencers, setInfluencers] = useState<Influencer[]>([]);
+  const [filteredInfluencers, setFilteredInfluencers] = useState<Influencer[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [hoveredRow, setHoveredRow] = useState<number | null>(null);
+  const [selectedInfluencer, setSelectedInfluencer] = useState<Influencer | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  // Filter & Sort states
+  const [platformFilter, setPlatformFilter] = useState<PlatformFilter>('all');
+  const [sortBy, setSortBy] = useState<SortOption>('score');
+  const [sortAsc, setSortAsc] = useState(false);
+
+  useEffect(() => {
+    fetchInfluencers();
+  }, []);
+
+  useEffect(() => {
+    applyFiltersAndSort();
+  }, [influencers, platformFilter, sortBy, sortAsc]);
+
+  const fetchInfluencers = async () => {
+    setIsLoading(true);
+    const { data, error } = await supabase
+      .from('influencers')
+      .select('*')
+      .eq('is_active', true)
+      .order('score', { ascending: false });
+
+    if (data) {
+      setInfluencers(data);
+    }
+    setIsLoading(false);
+  };
+
+  const applyFiltersAndSort = () => {
+    let result = [...influencers];
+
+    // Apply platform filter
+    if (platformFilter !== 'all') {
+      result = result.filter(i => i.platform === platformFilter);
+    }
+
+    // Apply sorting
+    result.sort((a, b) => {
+      let comparison = 0;
+      switch (sortBy) {
+        case 'score':
+          comparison = Number(b.score) - Number(a.score);
+          break;
+        case 'trend':
+          comparison = b.trend - a.trend;
+          break;
+        case 'followers':
+          comparison = b.followers - a.followers;
+          break;
+      }
+      return sortAsc ? -comparison : comparison;
+    });
+
+    setFilteredInfluencers(result);
+  };
+
+  const handleInfluencerClick = (influencer: Influencer) => {
+    setSelectedInfluencer(influencer);
+    setIsModalOpen(true);
+  };
+
+  const toggleSort = (option: SortOption) => {
+    if (sortBy === option) {
+      setSortAsc(!sortAsc);
+    } else {
+      setSortBy(option);
+      setSortAsc(false);
+    }
+  };
+
+  const totalTracked = influencers.length || 847;
+  const avgScore = influencers.length > 0 
+    ? (influencers.reduce((sum, i) => sum + Number(i.score), 0) / influencers.length).toFixed(1)
+    : '72.4';
+  const activeToday = Math.floor(totalTracked * 0.37);
 
   return (
     <div className="min-h-screen bg-[#050505] text-white font-sans">
@@ -231,15 +264,15 @@ const KInfluenceGrid = () => {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-white/60">Total Tracked</span>
-                  <span className="text-lg font-semibold text-white">847</span>
+                  <span className="text-lg font-semibold text-white">{totalTracked}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-white/60">Avg. Score</span>
-                  <span className="text-lg font-semibold text-[#00E0FF]">72.4</span>
+                  <span className="text-lg font-semibold text-[#00E0FF]">{avgScore}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-white/60">Active Today</span>
-                  <span className="text-lg font-semibold text-green-400">312</span>
+                  <span className="text-lg font-semibold text-green-400">{activeToday}</span>
                 </div>
               </div>
             </motion.div>
@@ -253,13 +286,56 @@ const KInfluenceGrid = () => {
             className="lg:col-span-3"
           >
             <div className="rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl overflow-hidden">
-              {/* Table Header */}
-              <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Users className="w-5 h-5 text-[#00E0FF]" />
-                  <h2 className="text-lg font-semibold">Key Opinion Leaders</h2>
+              {/* Table Header with Filters */}
+              <div className="px-6 py-4 border-b border-white/10">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-5 h-5 text-[#00E0FF]" />
+                    <h2 className="text-lg font-semibold">Key Opinion Leaders</h2>
+                  </div>
+                  
+                  {/* Filters */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    {/* Platform Filter */}
+                    <div className="flex items-center gap-1 bg-white/5 rounded-lg p-1">
+                      <Filter className="w-4 h-4 text-white/40 ml-2" />
+                      {(['all', 'telegram', 'x', 'youtube', 'app'] as PlatformFilter[]).map((platform) => (
+                        <button
+                          key={platform}
+                          onClick={() => setPlatformFilter(platform)}
+                          className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                            platformFilter === platform
+                              ? 'bg-[#00E0FF]/20 text-[#00E0FF]'
+                              : 'text-white/60 hover:text-white hover:bg-white/10'
+                          }`}
+                        >
+                          {platform === 'all' ? 'All' : platform === 'x' ? 'X' : platform.charAt(0).toUpperCase() + platform.slice(1)}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Sort Options */}
+                    <div className="flex items-center gap-1 bg-white/5 rounded-lg p-1">
+                      <ArrowUpDown className="w-4 h-4 text-white/40 ml-2" />
+                      {(['score', 'trend', 'followers'] as SortOption[]).map((option) => (
+                        <button
+                          key={option}
+                          onClick={() => toggleSort(option)}
+                          className={`px-3 py-1.5 rounded-md text-xs font-medium transition-colors flex items-center gap-1 ${
+                            sortBy === option
+                              ? 'bg-[#00E0FF]/20 text-[#00E0FF]'
+                              : 'text-white/60 hover:text-white hover:bg-white/10'
+                          }`}
+                        >
+                          {option.charAt(0).toUpperCase() + option.slice(1)}
+                          {sortBy === option && (
+                            <span className="text-[10px]">{sortAsc ? '↑' : '↓'}</span>
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div className="text-sm text-white/40">Top 5 by ium Score</div>
               </div>
 
               {/* Table */}
@@ -275,110 +351,135 @@ const KInfluenceGrid = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {leaderboardData.map((item, index) => (
-                      <motion.tr
-                        key={item.rank}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: 0.3 + index * 0.1 }}
-                        className={`border-b border-white/5 transition-colors cursor-pointer ${
-                          hoveredRow === index ? 'bg-white/[0.04]' : 'hover:bg-white/[0.02]'
-                        }`}
-                        onMouseEnter={() => setHoveredRow(index)}
-                        onMouseLeave={() => setHoveredRow(null)}
-                      >
-                        {/* Rank */}
-                        <td className="px-6 py-5">
-                          <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm ${
-                            item.rank === 1 ? 'bg-gradient-to-br from-yellow-500/30 to-orange-500/30 text-yellow-400 border border-yellow-500/30' :
-                            item.rank === 2 ? 'bg-gradient-to-br from-gray-400/30 to-gray-500/30 text-gray-300 border border-gray-400/30' :
-                            item.rank === 3 ? 'bg-gradient-to-br from-orange-600/30 to-orange-700/30 text-orange-400 border border-orange-600/30' :
-                            'bg-white/5 text-white/60 border border-white/10'
-                          }`}>
-                            {item.rank}
-                          </div>
+                    {isLoading ? (
+                      <tr>
+                        <td colSpan={5} className="px-6 py-12 text-center text-white/40">
+                          Loading...
                         </td>
+                      </tr>
+                    ) : filteredInfluencers.length === 0 ? (
+                      <tr>
+                        <td colSpan={5} className="px-6 py-12 text-center text-white/40">
+                          No influencers found
+                        </td>
+                      </tr>
+                    ) : (
+                      filteredInfluencers.map((item, index) => (
+                        <motion.tr
+                          key={item.id}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: 0.1 + index * 0.05 }}
+                          className={`border-b border-white/5 transition-colors cursor-pointer ${
+                            hoveredRow === index ? 'bg-white/[0.04]' : 'hover:bg-white/[0.02]'
+                          }`}
+                          onMouseEnter={() => setHoveredRow(index)}
+                          onMouseLeave={() => setHoveredRow(null)}
+                          onClick={() => handleInfluencerClick(item)}
+                        >
+                          {/* Rank */}
+                          <td className="px-6 py-5">
+                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm ${
+                              index === 0 ? 'bg-gradient-to-br from-yellow-500/30 to-orange-500/30 text-yellow-400 border border-yellow-500/30' :
+                              index === 1 ? 'bg-gradient-to-br from-gray-400/30 to-gray-500/30 text-gray-300 border border-gray-400/30' :
+                              index === 2 ? 'bg-gradient-to-br from-orange-600/30 to-orange-700/30 text-orange-400 border border-orange-600/30' :
+                              'bg-white/5 text-white/60 border border-white/10'
+                            }`}>
+                              {index + 1}
+                            </div>
+                          </td>
 
-                        {/* Key Player */}
-                        <td className="px-6 py-5">
-                          <div className="flex items-center gap-3">
-                            <img 
-                              src={item.avatar} 
-                              alt={item.name}
-                              className="w-10 h-10 rounded-full bg-white/10 border border-white/10"
-                            />
-                            <div>
-                              <div className="font-medium text-white">{item.name}</div>
-                              <div className={`inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded text-xs border ${getPlatformStyle(item.platform)}`}>
-                                {getPlatformIcon(item.platform)}
-                                <span className="capitalize">{item.platform === 'x' ? 'X (Twitter)' : item.platform}</span>
+                          {/* Key Player */}
+                          <td className="px-6 py-5">
+                            <div className="flex items-center gap-3">
+                              <img 
+                                src={item.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${item.name}`} 
+                                alt={item.name}
+                                className="w-10 h-10 rounded-full bg-white/10 border border-white/10"
+                              />
+                              <div>
+                                <div className="font-medium text-white">{item.name}</div>
+                                <div className={`inline-flex items-center gap-1 mt-1 px-2 py-0.5 rounded text-xs border ${getPlatformStyle(item.platform)}`}>
+                                  {getPlatformIcon(item.platform)}
+                                  <span className="capitalize">{item.platform === 'x' ? 'X (Twitter)' : item.platform}</span>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </td>
+                          </td>
 
-                        {/* ium Score */}
-                        <td className="px-6 py-5">
-                          <div className="space-y-2">
-                            <div className="text-xl font-bold text-[#00E0FF]">{item.score.toFixed(1)}</div>
-                            <div className="w-24 h-1.5 bg-white/10 rounded-full overflow-hidden">
-                              <motion.div 
-                                initial={{ width: 0 }}
-                                animate={{ width: `${item.score}%` }}
-                                transition={{ delay: 0.5 + index * 0.1, duration: 0.8 }}
-                                className="h-full bg-gradient-to-r from-[#00E0FF] to-[#00E0FF]/60 rounded-full"
-                              />
+                          {/* ium Score */}
+                          <td className="px-6 py-5">
+                            <div className="space-y-2">
+                              <div className="text-xl font-bold text-[#00E0FF]">{Number(item.score).toFixed(1)}</div>
+                              <div className="w-24 h-1.5 bg-white/10 rounded-full overflow-hidden">
+                                <motion.div 
+                                  initial={{ width: 0 }}
+                                  animate={{ width: `${item.score}%` }}
+                                  transition={{ delay: 0.3 + index * 0.05, duration: 0.8 }}
+                                  className="h-full bg-gradient-to-r from-[#00E0FF] to-[#00E0FF]/60 rounded-full"
+                                />
+                              </div>
                             </div>
-                          </div>
-                        </td>
+                          </td>
 
-                        {/* Smart Follower Tier */}
-                        <td className="px-6 py-5">
-                          <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${getTierStyle(item.tierColor)}`}>
-                            {item.tier}
-                          </span>
-                        </td>
+                          {/* Smart Follower Tier */}
+                          <td className="px-6 py-5">
+                            <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-medium border ${getTierStyle(item.tier_color)}`}>
+                              {item.tier}
+                            </span>
+                          </td>
 
-                        {/* 7D Trend */}
-                        <td className="px-6 py-5">
-                          <div className={`inline-flex items-center gap-1 text-sm font-medium ${
-                            item.trend > 0 ? 'text-green-400' : 
-                            item.trend < 0 ? 'text-red-400' : 
-                            'text-white/40'
-                          }`}>
-                            {item.trend > 0 ? (
-                              <>
-                                <ArrowUpRight className="w-4 h-4" />
-                                <span>+{item.trend}</span>
-                              </>
-                            ) : item.trend < 0 ? (
-                              <>
-                                <ArrowDownRight className="w-4 h-4" />
-                                <span>{item.trend}</span>
-                              </>
-                            ) : (
-                              <>
-                                <Minus className="w-4 h-4" />
-                                <span>0</span>
-                              </>
-                            )}
-                          </div>
-                        </td>
-                      </motion.tr>
-                    ))}
+                          {/* 7D Trend */}
+                          <td className="px-6 py-5">
+                            <div className={`inline-flex items-center gap-1 text-sm font-medium ${
+                              item.trend > 0 ? 'text-green-400' : 
+                              item.trend < 0 ? 'text-red-400' : 
+                              'text-white/40'
+                            }`}>
+                              {item.trend > 0 ? (
+                                <>
+                                  <ArrowUpRight className="w-4 h-4" />
+                                  <span>+{item.trend}</span>
+                                </>
+                              ) : item.trend < 0 ? (
+                                <>
+                                  <ArrowDownRight className="w-4 h-4" />
+                                  <span>{item.trend}</span>
+                                </>
+                              ) : (
+                                <>
+                                  <Minus className="w-4 h-4" />
+                                  <span>0</span>
+                                </>
+                              )}
+                            </div>
+                          </td>
+                        </motion.tr>
+                      ))
+                    )}
                   </tbody>
                 </table>
               </div>
 
               {/* Footer */}
               <div className="px-6 py-4 border-t border-white/5 flex items-center justify-between text-sm text-white/40">
-                <span>Showing top 5 of 847 tracked influencers</span>
+                <span>Showing {filteredInfluencers.length} of {totalTracked} tracked influencers</span>
                 <span className="text-[#00E0FF]">Powered by ium Intelligence Engine</span>
               </div>
             </div>
           </motion.div>
         </div>
       </main>
+
+      {/* Influencer Detail Modal */}
+      <InfluencerDetailModal
+        influencer={selectedInfluencer}
+        isOpen={isModalOpen}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedInfluencer(null);
+        }}
+      />
     </div>
   );
 };
