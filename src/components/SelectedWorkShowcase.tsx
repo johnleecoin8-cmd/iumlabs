@@ -16,7 +16,9 @@ import bnbBg from '@/assets/projects/bnb-bg.jpg';
 const SelectedWorkShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
+  const [videoLoaded, setVideoLoaded] = useState<Record<number, boolean>>({});
   const ref = useRef(null);
+  const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const projects = [
@@ -76,6 +78,19 @@ const SelectedWorkShowcase = () => {
     }
   ];
 
+  // Preload all videos on mount
+  useEffect(() => {
+    projects.forEach((project, index) => {
+      if (project.video) {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'video';
+        link.href = project.video;
+        document.head.appendChild(link);
+      }
+    });
+  }, []);
+
   // Auto-rotate when not hovering
   useEffect(() => {
     if (isHovering) return;
@@ -85,8 +100,32 @@ const SelectedWorkShowcase = () => {
     return () => clearInterval(interval);
   }, [isHovering, projects.length]);
 
+  const handleVideoLoad = (index: number) => {
+    setVideoLoaded(prev => ({ ...prev, [index]: true }));
+  };
+
+  const currentProject = projects[activeIndex];
+  const isCurrentVideoLoaded = videoLoaded[activeIndex];
+
   return (
     <section ref={ref} className="relative h-[80vh] md:h-screen bg-black overflow-hidden">
+      {/* Hidden video preloaders for smoother transitions */}
+      <div className="hidden">
+        {projects.map((project, index) => 
+          project.video && (
+            <video
+              key={`preload-${index}`}
+              ref={el => { videoRefs.current[index] = el; }}
+              src={project.video}
+              preload="auto"
+              muted
+              playsInline
+              onCanPlayThrough={() => handleVideoLoad(index)}
+            />
+          )
+        )}
+      </div>
+
       {/* Background Media */}
       <AnimatePresence mode="wait">
         <motion.div
@@ -97,13 +136,33 @@ const SelectedWorkShowcase = () => {
           transition={{ duration: 0.7 }}
           className="absolute inset-0"
         >
-          {projects[activeIndex].video ? (
-            <video autoPlay muted loop playsInline className="w-full h-full object-cover">
-              <source src={projects[activeIndex].video} type="video/mp4" />
+          {/* Always show poster image first for instant feedback */}
+          <img 
+            src={currentProject.media} 
+            alt={currentProject.name} 
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+              currentProject.video && isCurrentVideoLoaded ? 'opacity-0' : 'opacity-100'
+            }`}
+          />
+          
+          {/* Video layer - only show when loaded */}
+          {currentProject.video && (
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              playsInline
+              poster={typeof currentProject.media === 'string' ? currentProject.media : undefined}
+              preload="auto"
+              onCanPlayThrough={() => handleVideoLoad(activeIndex)}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
+                isCurrentVideoLoaded ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <source src={currentProject.video} type="video/mp4" />
             </video>
-          ) : (
-            <img src={projects[activeIndex].media} alt={projects[activeIndex].name} className="w-full h-full object-cover" />
           )}
+          
           <div className="absolute inset-0 bg-black/50" />
         </motion.div>
       </AnimatePresence>
