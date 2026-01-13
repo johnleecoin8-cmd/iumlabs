@@ -41,6 +41,42 @@ export type Database = {
         }
         Relationships: []
       }
+      hype_projects: {
+        Row: {
+          created_at: string | null
+          id: string
+          name: string
+          rank: number
+          score: number
+          sparkline: number[] | null
+          ticker: string
+          trend: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          name: string
+          rank?: number
+          score?: number
+          sparkline?: number[] | null
+          ticker: string
+          trend?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          name?: string
+          rank?: number
+          score?: number
+          sparkline?: number[] | null
+          ticker?: string
+          trend?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       influencer_activities: {
         Row: {
           activity_type: string

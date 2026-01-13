@@ -5,109 +5,73 @@ import {
   TrendingUp, 
   TrendingDown, 
   Minus,
-  ExternalLink,
   ArrowUpDown,
   Search
 } from 'lucide-react';
-import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
-
-interface Project {
-  id: string;
-  name: string;
-  slug: string;
-  rank: number;
-  mindshare_score: number;
-  previous_score: number;
-  previous_rank: number;
-  category: string;
-  logo_url: string | null;
-  twitter_url: string | null;
-  twitter_mentions: number | null;
-  telegram_members: number | null;
-  website_url: string | null;
-}
+import type { HypeProject } from '@/hooks/useHypeProjects';
 
 interface LeaderboardTableProps {
-  projects: Project[];
+  projects: HypeProject[];
   onProjectHover: (projectId: string | null) => void;
   activeProjectId: string | null;
 }
 
-type SortField = 'rank' | 'mindshare_score' | 'change' | 'twitter_mentions' | 'telegram_members';
+type SortField = 'rank' | 'score' | 'ticker';
 type SortDirection = 'asc' | 'desc';
-type Period = '7D' | '30D' | '3M' | '6M' | '12M';
-
-const formatNumber = (num: number | null): string => {
-  if (num === null || num === undefined) return '-';
-  if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
-  if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
-  return num.toString();
-};
 
 const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: LeaderboardTableProps) => {
-  const [period, setPeriod] = useState<Period>('7D');
   const [sortField, setSortField] = useState<SortField>('rank');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Calculate trend percentages
-  const projectsWithTrend = useMemo(() => {
-    return projects.map(p => {
-      const current = Number(p.mindshare_score);
-      const previous = Number(p.previous_score);
-      const changePercent = previous > 0 ? ((current - previous) / previous) * 100 : 0;
-      const rankChange = p.previous_rank - p.rank; // Positive = moved up
-      return { ...p, changePercent, rankChange };
-    });
-  }, [projects]);
-
   // Filter and sort
   const filteredAndSorted = useMemo(() => {
-    let result = [...projectsWithTrend];
+    let result = [...projects];
     
     // Filter by search
     if (searchQuery) {
+      const query = searchQuery.toLowerCase();
       result = result.filter(p => 
-        p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        p.category.toLowerCase().includes(searchQuery.toLowerCase())
+        p.name.toLowerCase().includes(query) ||
+        p.ticker.toLowerCase().includes(query)
       );
     }
     
     // Sort
     result.sort((a, b) => {
-      let aVal: number, bVal: number;
+      let aVal: number | string, bVal: number | string;
       
       switch (sortField) {
         case 'rank':
           aVal = a.rank;
           bVal = b.rank;
           break;
-        case 'mindshare_score':
-          aVal = a.mindshare_score;
-          bVal = b.mindshare_score;
+        case 'score':
+          aVal = Number(a.score);
+          bVal = Number(b.score);
           break;
-        case 'change':
-          aVal = a.changePercent;
-          bVal = b.changePercent;
-          break;
-        case 'twitter_mentions':
-          aVal = a.twitter_mentions || 0;
-          bVal = b.twitter_mentions || 0;
-          break;
-        case 'telegram_members':
-          aVal = a.telegram_members || 0;
-          bVal = b.telegram_members || 0;
+        case 'ticker':
+          aVal = a.ticker;
+          bVal = b.ticker;
           break;
         default:
           return 0;
       }
       
-      return sortDirection === 'asc' ? aVal - bVal : bVal - aVal;
+      if (typeof aVal === 'string' && typeof bVal === 'string') {
+        return sortDirection === 'asc' 
+          ? aVal.localeCompare(bVal) 
+          : bVal.localeCompare(aVal);
+      }
+      
+      return sortDirection === 'asc' 
+        ? (aVal as number) - (bVal as number) 
+        : (bVal as number) - (aVal as number);
     });
     
     return result;
-  }, [projectsWithTrend, searchQuery, sortField, sortDirection]);
+  }, [projects, searchQuery, sortField, sortDirection]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -125,6 +89,57 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
     return '';
   };
 
+  const getTrendIcon = (trend: string) => {
+    switch (trend) {
+      case 'positive':
+        return <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />;
+      case 'negative':
+        return <TrendingDown className="w-3.5 h-3.5 text-rose-400" />;
+      default:
+        return <Minus className="w-3.5 h-3.5 text-white/40" />;
+    }
+  };
+
+  const getTrendColor = (trend: string) => {
+    switch (trend) {
+      case 'positive':
+        return 'text-emerald-400';
+      case 'negative':
+        return 'text-rose-400';
+      default:
+        return 'text-white/40';
+    }
+  };
+
+  // Mini sparkline for table rows
+  const MiniSparkline = ({ data, trend }: { data: number[]; trend: string }) => {
+    if (!data || data.length === 0) return null;
+    
+    const max = Math.max(...data, 1);
+    const min = Math.min(...data, 0);
+    const range = max - min || 1;
+    const normalized = data.map(v => ((v - min) / range) * 20);
+    
+    const points = normalized.map((value, i) => {
+      const x = (i / (normalized.length - 1)) * 60;
+      const y = 20 - value;
+      return `${x},${y}`;
+    }).join(' ');
+
+    return (
+      <svg width={60} height={20} className="opacity-60">
+        <polyline
+          points={points}
+          fill="none"
+          stroke={trend === 'positive' ? '#10B981' : trend === 'negative' ? '#EF4444' : '#6B7280'}
+          strokeWidth={1.5}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  };
+
   const SortableHeader = ({ field, children, className = '' }: { field: SortField; children: React.ReactNode; className?: string }) => (
     <th 
       className={`px-4 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider cursor-pointer hover:text-white/60 transition-colors ${className}`}
@@ -139,26 +154,14 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
 
   return (
     <div className="flex flex-col h-full">
-      {/* Header with period tabs and search */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-4 py-4 border-b border-white/5">
-        <Tabs value={period} onValueChange={(v) => setPeriod(v as Period)}>
-          <TabsList className="bg-white/5 border border-white/10">
-            {['7D', '30D', '3M', '6M', '12M'].map((p) => (
-              <TabsTrigger 
-                key={p} 
-                value={p}
-                className="text-xs data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
-              >
-                {p}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-        </Tabs>
+      {/* Header with search */}
+      <div className="flex items-center justify-between gap-4 px-4 py-4 border-b border-white/5">
+        <h3 className="text-sm font-semibold text-white">Hype Leaderboard</h3>
         
         <div className="relative w-full sm:w-auto">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
           <Input
-            placeholder="Search projects..."
+            placeholder="Search ticker..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-9 w-full sm:w-[200px] bg-white/5 border-white/10 text-sm"
@@ -172,12 +175,10 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
           <thead className="sticky top-0 bg-background/95 backdrop-blur-sm border-b border-white/10">
             <tr>
               <SortableHeader field="rank" className="w-16">Rank</SortableHeader>
-              <th className="px-4 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Project</th>
-              <SortableHeader field="mindshare_score">Score</SortableHeader>
-              <SortableHeader field="change">Δ{period}</SortableHeader>
-              <SortableHeader field="twitter_mentions">Twitter</SortableHeader>
-              <SortableHeader field="telegram_members">Telegram</SortableHeader>
-              <th className="px-4 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider w-12"></th>
+              <SortableHeader field="ticker">Ticker</SortableHeader>
+              <SortableHeader field="score">Hype Score</SortableHeader>
+              <th className="px-4 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Trend</th>
+              <th className="px-4 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">24h Chart</th>
             </tr>
           </thead>
           <tbody>
@@ -209,25 +210,17 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
                     </div>
                   </td>
                   
-                  {/* Project */}
+                  {/* Ticker */}
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      {project.logo_url ? (
-                        <img 
-                          src={project.logo_url} 
-                          alt={project.name}
-                          className="w-8 h-8 rounded-lg object-cover bg-white/10"
-                        />
-                      ) : (
-                        <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                          <span className="text-xs font-bold text-white/40">
-                            {project.name.charAt(0)}
-                          </span>
-                        </div>
-                      )}
+                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+                        <span className="text-xs font-bold text-white/60">
+                          {project.ticker.charAt(0)}
+                        </span>
+                      </div>
                       <div>
                         <p className="font-medium text-sm text-white">{project.name}</p>
-                        <p className="text-xs text-white/40">{project.category}</p>
+                        <p className="text-xs text-white/40">${project.ticker}</p>
                       </div>
                     </div>
                   </td>
@@ -235,57 +228,21 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
                   {/* Score */}
                   <td className="px-4 py-3">
                     <span className="font-bold text-sm tabular-nums text-white">
-                      {project.mindshare_score.toFixed(0)}
+                      {Number(project.score).toLocaleString()}
                     </span>
                   </td>
                   
-                  {/* Change */}
+                  {/* Trend */}
                   <td className="px-4 py-3">
-                    <div className={`flex items-center gap-1 text-sm ${
-                      project.changePercent > 0 ? 'text-emerald-400' : 
-                      project.changePercent < 0 ? 'text-rose-400' : 'text-white/40'
-                    }`}>
-                      {project.changePercent > 0 ? (
-                        <TrendingUp className="w-3.5 h-3.5" />
-                      ) : project.changePercent < 0 ? (
-                        <TrendingDown className="w-3.5 h-3.5" />
-                      ) : (
-                        <Minus className="w-3.5 h-3.5" />
-                      )}
-                      <span className="font-medium tabular-nums">
-                        {project.changePercent > 0 ? '+' : ''}
-                        {project.changePercent.toFixed(1)}%
-                      </span>
+                    <div className={`flex items-center gap-1.5 ${getTrendColor(project.trend)}`}>
+                      {getTrendIcon(project.trend)}
+                      <span className="text-sm font-medium capitalize">{project.trend}</span>
                     </div>
                   </td>
                   
-                  {/* Twitter */}
+                  {/* Sparkline */}
                   <td className="px-4 py-3">
-                    <span className="text-sm text-white/60 tabular-nums">
-                      {formatNumber(project.twitter_mentions)}
-                    </span>
-                  </td>
-                  
-                  {/* Telegram */}
-                  <td className="px-4 py-3">
-                    <span className="text-sm text-white/60 tabular-nums">
-                      {formatNumber(project.telegram_members)}
-                    </span>
-                  </td>
-                  
-                  {/* Link */}
-                  <td className="px-4 py-3">
-                    {project.website_url && (
-                      <a 
-                        href={project.website_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white/30 hover:text-primary transition-colors"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
+                    <MiniSparkline data={project.sparkline} trend={project.trend} />
                   </td>
                 </motion.tr>
               );
@@ -295,7 +252,10 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
         
         {filteredAndSorted.length === 0 && (
           <div className="flex items-center justify-center py-12 text-white/40">
-            No projects found
+            {projects.length === 0 
+              ? 'Waiting for data from Python backend...'
+              : 'No projects found'
+            }
           </div>
         )}
       </div>
@@ -303,7 +263,7 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
       {/* Footer stats */}
       <div className="px-4 py-3 border-t border-white/5 flex items-center justify-between text-xs text-white/40">
         <span>{filteredAndSorted.length} projects</span>
-        <span>Period: {period}</span>
+        <span>Real-time data from Telegram</span>
       </div>
     </div>
   );
