@@ -10,6 +10,7 @@ interface HypeProject {
   name: string;
   ticker: string;
   score: number;
+  mindshare?: number;
   trend?: string;
   sparkline?: number[];
   logo_url?: string;
@@ -83,6 +84,7 @@ Deno.serve(async (req) => {
               name: project.name,
               rank: project.rank || 0,
               score: project.score || 0,
+              mindshare: project.mindshare || 0,
               trend: project.trend || "neutral",
               sparkline: project.sparkline || [],
               logo_url: project.logo_url || null,
