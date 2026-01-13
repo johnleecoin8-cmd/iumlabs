@@ -217,12 +217,25 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
                   {/* Top row - Logo & Crown */}
                   <div className="flex items-start justify-between">
                     <div className="flex items-center gap-1.5">
-                      {/* Avatar/Logo placeholder */}
-                      <div className={`rounded-full bg-white/10 flex items-center justify-center text-white/60 font-medium ${
-                        isLarge ? 'w-6 h-6 text-xs' : 'w-4 h-4 text-[8px]'
-                      }`}>
-                        {node.displayName.charAt(0)}
-                      </div>
+                      {/* Coin Logo from CoinGecko or fallback */}
+                      {node.logo_url ? (
+                        <img 
+                          src={node.logo_url} 
+                          alt={node.displayName}
+                          className={`rounded-full object-cover ${
+                            isLarge ? 'w-6 h-6' : 'w-4 h-4'
+                          }`}
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none';
+                          }}
+                        />
+                      ) : (
+                        <div className={`rounded-full bg-white/10 flex items-center justify-center text-white/60 font-medium ${
+                          isLarge ? 'w-6 h-6 text-xs' : 'w-4 h-4 text-[8px]'
+                        }`}>
+                          {node.displayName.charAt(0)}
+                        </div>
+                      )}
                       {isLarge && (
                         <span className="text-white font-medium text-sm truncate max-w-[80px]">
                           {node.displayName}

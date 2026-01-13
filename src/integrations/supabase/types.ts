@@ -45,6 +45,7 @@ export type Database = {
         Row: {
           created_at: string | null
           id: string
+          logo_url: string | null
           name: string
           rank: number
           score: number
@@ -56,6 +57,7 @@ export type Database = {
         Insert: {
           created_at?: string | null
           id?: string
+          logo_url?: string | null
           name: string
           rank?: number
           score?: number
@@ -67,6 +69,7 @@ export type Database = {
         Update: {
           created_at?: string | null
           id?: string
+          logo_url?: string | null
           name?: string
           rank?: number
           score?: number
@@ -74,6 +77,30 @@ export type Database = {
           ticker?: string
           trend?: string | null
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      hype_score_history: {
+        Row: {
+          id: string
+          rank: number
+          recorded_at: string
+          score: number
+          ticker: string
+        }
+        Insert: {
+          id?: string
+          rank: number
+          recorded_at?: string
+          score: number
+          ticker: string
+        }
+        Update: {
+          id?: string
+          rank?: number
+          recorded_at?: string
+          score?: number
+          ticker?: string
         }
         Relationships: []
       }
@@ -708,6 +735,7 @@ export type Database = {
         Returns: boolean
       }
       record_daily_project_history: { Args: never; Returns: undefined }
+      record_hype_snapshot: { Args: never; Returns: undefined }
     }
     Enums: {
       app_role: "admin" | "user"
