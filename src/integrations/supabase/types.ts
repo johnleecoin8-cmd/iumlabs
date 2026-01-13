@@ -52,6 +52,7 @@ export type Database = {
           score: number
           sparkline: number[] | null
           ticker: string
+          token_status: string | null
           trend: string | null
           updated_at: string | null
         }
@@ -65,6 +66,7 @@ export type Database = {
           score?: number
           sparkline?: number[] | null
           ticker: string
+          token_status?: string | null
           trend?: string | null
           updated_at?: string | null
         }
@@ -78,6 +80,7 @@ export type Database = {
           score?: number
           sparkline?: number[] | null
           ticker?: string
+          token_status?: string | null
           trend?: string | null
           updated_at?: string | null
         }

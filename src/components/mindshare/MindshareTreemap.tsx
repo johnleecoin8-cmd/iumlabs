@@ -12,6 +12,7 @@ export interface MindshareProject {
   sparkline: number[];
   logo_url: string | null;
   rank: number;
+  token_status?: 'tge' | 'pre-tge';
 }
 
 interface MindshareTreemapProps {
