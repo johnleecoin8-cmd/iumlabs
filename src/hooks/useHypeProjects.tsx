@@ -3,6 +3,8 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import type { RealtimePostgresChangesPayload } from '@supabase/supabase-js';
 
+export type TokenStatus = 'tge' | 'pre-tge';
+
 export interface HypeProject {
   id: string;
   rank: number;
@@ -13,6 +15,7 @@ export interface HypeProject {
   trend: string;
   sparkline: number[];
   logo_url: string | null;
+  token_status: TokenStatus;
   updated_at: string;
   created_at: string;
 }

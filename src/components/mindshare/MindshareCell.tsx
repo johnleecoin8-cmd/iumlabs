@@ -7,6 +7,7 @@ interface MindshareCellProps {
   name: string;
   mindshare: number;
   trend: 'up' | 'down' | 'neutral';
+  tokenStatus?: 'tge' | 'pre-tge';
   sparkline?: number[];
   logoUrl?: string | null;
   size: 'large' | 'medium' | 'small' | 'tiny';
@@ -18,6 +19,7 @@ const MindshareCell = ({
   name,
   mindshare,
   trend,
+  tokenStatus = 'tge',
   sparkline = [],
   logoUrl,
   size,

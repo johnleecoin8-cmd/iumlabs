@@ -4,23 +4,23 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import MindshareTreemap, { type MindshareProject } from '@/components/mindshare/MindshareTreemap';
 import PeriodFilter, { type DateRange } from '@/components/mindshare/PeriodFilter';
-import TopRankToggle, { type RankRange } from '@/components/mindshare/TopRankToggle';
+import TokenStatusToggle, { type TokenStatus } from '@/components/mindshare/TokenStatusToggle';
 import { Radio, RefreshCw, TrendingUp, BarChart3, Users } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
 const KInfluenceGrid = () => {
   const [dateRange, setDateRange] = useState<DateRange>('24H');
-  const [rankRange, setRankRange] = useState<RankRange>('top20');
+  const [tokenStatus, setTokenStatus] = useState<TokenStatus>('all');
   const { projects, isLoading, lastUpdate } = useHypeProjects();
 
   // Transform and filter projects for treemap
   const treemapProjects: MindshareProject[] = useMemo(() => {
     if (!projects.length) return [];
 
-    // Filter by rank range
+    // Filter by token status
     const filtered = projects.filter((p) => {
-      if (rankRange === 'top20') return p.rank <= 20;
-      return p.rank > 20 && p.rank <= 50;
+      if (tokenStatus === 'all') return true;
+      return p.token_status === tokenStatus;
     });
 
     // Calculate total score for mindshare percentage if not provided
@@ -42,22 +42,25 @@ const KInfluenceGrid = () => {
       sparkline: project.sparkline || [],
       logo_url: project.logo_url,
       rank: project.rank,
+      token_status: project.token_status,
     }));
-  }, [projects, rankRange]);
+  }, [projects, tokenStatus]);
 
   // Calculate stats
   const stats = useMemo(() => {
-    if (!treemapProjects.length) return { total: 0, topProject: null, avgMindshare: 0 };
+    if (!treemapProjects.length) return { total: 0, topProject: null, tgeCount: 0, preTgeCount: 0 };
     
     const topProject = treemapProjects[0];
-    const avgMindshare = treemapProjects.reduce((sum, p) => sum + p.mindshare, 0) / treemapProjects.length;
+    const tgeCount = projects.filter(p => p.token_status === 'tge').length;
+    const preTgeCount = projects.filter(p => p.token_status === 'pre-tge').length;
     
     return {
       total: projects.length,
       topProject,
-      avgMindshare,
+      tgeCount,
+      preTgeCount,
     };
-  }, [treemapProjects, projects.length]);
+  }, [treemapProjects, projects]);
 
   if (isLoading) {
     return (
@@ -110,18 +113,28 @@ const KInfluenceGrid = () => {
 
               {/* Controls Row */}
               <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-                {/* Left: Rank Toggle */}
-                <TopRankToggle selected={rankRange} onChange={setRankRange} />
+                {/* Left: Token Status Toggle */}
+                <TokenStatusToggle selected={tokenStatus} onChange={setTokenStatus} />
 
                 {/* Center: Quick Stats */}
                 <div className="flex items-center gap-4 sm:gap-6 text-sm order-last sm:order-none">
                   <div className="flex items-center gap-2">
                     <Users className="w-4 h-4 text-white/30" />
-                    <span className="text-white/50">Tracking:</span>
+                    <span className="text-white/50">Total:</span>
                     <span className="font-bold text-white">{stats.total}</span>
                   </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span className="text-white/50">TGE:</span>
+                    <span className="font-bold text-emerald-400">{stats.tgeCount}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+                    <span className="text-white/50">Pre-TGE:</span>
+                    <span className="font-bold text-amber-400">{stats.preTgeCount}</span>
+                  </div>
                   {stats.topProject && (
-                    <div className="hidden sm:flex items-center gap-2">
+                    <div className="hidden lg:flex items-center gap-2">
                       <TrendingUp className="w-4 h-4 text-emerald-400" />
                       <span className="text-white/50">Top:</span>
                       <span className="font-bold text-emerald-400">{stats.topProject.ticker}</span>

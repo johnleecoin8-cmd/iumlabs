@@ -11,6 +11,7 @@ interface HypeProject {
   ticker: string;
   score: number;
   mindshare?: number;
+  token_status?: 'tge' | 'pre-tge';
   trend?: string;
   sparkline?: number[];
   logo_url?: string;
@@ -85,6 +86,7 @@ Deno.serve(async (req) => {
               rank: project.rank || 0,
               score: project.score || 0,
               mindshare: project.mindshare || 0,
+              token_status: project.token_status || "tge",
               trend: project.trend || "neutral",
               sparkline: project.sparkline || [],
               logo_url: project.logo_url || null,
