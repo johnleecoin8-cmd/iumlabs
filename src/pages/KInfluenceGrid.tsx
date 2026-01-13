@@ -1,38 +1,71 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo } from 'react';
 import { useHypeProjects } from '@/hooks/useHypeProjects';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import SocialGraph from '@/components/leaderboard/SocialGraph';
-import LeaderboardTable from '@/components/leaderboard/LeaderboardTable';
-import { Activity, Radio, BarChart3, RefreshCw } from 'lucide-react';
+import MindshareTreemap, { type MindshareProject } from '@/components/mindshare/MindshareTreemap';
+import PeriodFilter, { type DateRange } from '@/components/mindshare/PeriodFilter';
+import TopRankToggle, { type RankRange } from '@/components/mindshare/TopRankToggle';
+import { Radio, RefreshCw, TrendingUp, BarChart3, Users } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 
 const KInfluenceGrid = () => {
-  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
+  const [dateRange, setDateRange] = useState<DateRange>('24H');
+  const [rankRange, setRankRange] = useState<RankRange>('top20');
   const { projects, isLoading, lastUpdate } = useHypeProjects();
 
-  const handleProjectHover = useCallback((projectId: string | null) => {
-    setActiveProjectId(projectId);
-  }, []);
+  // Transform and filter projects for treemap
+  const treemapProjects: MindshareProject[] = useMemo(() => {
+    if (!projects.length) return [];
 
-  // Stats for header
+    // Filter by rank range
+    const filtered = projects.filter((p) => {
+      if (rankRange === 'top20') return p.rank <= 20;
+      return p.rank > 20 && p.rank <= 50;
+    });
+
+    // Calculate total score for mindshare percentage if not provided
+    const totalScore = filtered.reduce((sum, p) => sum + Number(p.score), 0);
+
+    return filtered.map((project) => ({
+      id: project.id,
+      ticker: project.ticker,
+      name: project.name,
+      mindshare: project.mindshare > 0 
+        ? Number(project.mindshare) 
+        : totalScore > 0 
+          ? (Number(project.score) / totalScore) * 100 
+          : 0,
+      score: Number(project.score),
+      trend: (project.trend === 'up' || project.trend === 'down' || project.trend === 'neutral' 
+        ? project.trend 
+        : 'neutral') as 'up' | 'down' | 'neutral',
+      sparkline: project.sparkline || [],
+      logo_url: project.logo_url,
+      rank: project.rank,
+    }));
+  }, [projects, rankRange]);
+
+  // Calculate stats
   const stats = useMemo(() => {
-    if (projects.length === 0) return { total: 0, avgScore: 0, topProject: null };
+    if (!treemapProjects.length) return { total: 0, topProject: null, avgMindshare: 0 };
     
-    const avgScore = projects.reduce((sum, p) => sum + Number(p.score), 0) / projects.length;
-    const topProject = projects[0]; // Already sorted by rank
+    const topProject = treemapProjects[0];
+    const avgMindshare = treemapProjects.reduce((sum, p) => sum + p.mindshare, 0) / treemapProjects.length;
     
     return {
       total: projects.length,
-      avgScore: avgScore.toFixed(0),
-      topProject
+      topProject,
+      avgMindshare,
     };
-  }, [projects]);
+  }, [treemapProjects, projects.length]);
 
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-pulse text-white/40">Loading hype data...</div>
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-16 h-16 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
+          <div className="text-white/40">Loading mindshare data...</div>
+        </div>
       </div>
     );
   }
@@ -43,76 +76,92 @@ const KInfluenceGrid = () => {
       
       <main className="pt-20">
         {/* Header */}
-        <div className="border-b border-white/5">
-          <div className="max-w-[1800px] mx-auto px-6 py-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-4">
-                <div className="p-2 rounded-lg bg-primary/10 border border-primary/20">
-                  <BarChart3 className="w-5 h-5 text-primary" />
+        <div className="border-b border-white/5 bg-gradient-to-b from-white/[0.02] to-transparent">
+          <div className="max-w-[1920px] mx-auto px-4 sm:px-6 py-4 sm:py-6">
+            <div className="flex flex-col gap-4">
+              {/* Top Row: Title + Live Status */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="p-2 sm:p-2.5 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20">
+                    <BarChart3 className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h1 className="text-lg sm:text-2xl font-bold text-white tracking-tight">
+                      Korean Community Mindshare
+                    </h1>
+                    <p className="text-xs sm:text-sm text-white/50">Real-time crypto sentiment from Korean Telegram</p>
+                  </div>
+                  <div className="flex items-center gap-2 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
+                    <Radio className="w-3 h-3 text-emerald-400 animate-pulse" />
+                    <span className="text-xs font-medium text-emerald-400">Live</span>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="text-xl font-bold text-white tracking-tight">
-                    Hype Equalizer
-                  </h1>
-                  <p className="text-sm text-white/50">Real-time Korean crypto sentiment tracking</p>
-                </div>
-                <div className="flex items-center gap-2 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full ml-2">
-                  <Radio className="w-3 h-3 text-emerald-400 animate-pulse" />
-                  <span className="text-xs font-medium text-emerald-400">Live</span>
-                </div>
-              </div>
-              
-              {/* Quick Stats */}
-              <div className="flex items-center gap-6 text-sm">
-                <div className="flex items-center gap-2">
-                  <span className="text-white/40">Tracking:</span>
-                  <span className="font-bold text-white">{stats.total}</span>
-                </div>
-                <div className="hidden sm:flex items-center gap-2">
-                  <span className="text-white/40">Avg Hype:</span>
-                  <span className="font-bold text-white">{stats.avgScore}</span>
-                </div>
+
+                {/* Last Update */}
                 {lastUpdate && (
                   <div className="flex items-center gap-2 text-white/40">
                     <RefreshCw className="w-3.5 h-3.5" />
                     <span className="text-xs">
-                      {formatDistanceToNow(lastUpdate, { addSuffix: true })}
+                      Updated {formatDistanceToNow(lastUpdate, { addSuffix: true })}
                     </span>
                   </div>
                 )}
+              </div>
+
+              {/* Controls Row */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                {/* Left: Rank Toggle */}
+                <TopRankToggle selected={rankRange} onChange={setRankRange} />
+
+                {/* Center: Quick Stats */}
+                <div className="flex items-center gap-4 sm:gap-6 text-sm order-last sm:order-none">
+                  <div className="flex items-center gap-2">
+                    <Users className="w-4 h-4 text-white/30" />
+                    <span className="text-white/50">Tracking:</span>
+                    <span className="font-bold text-white">{stats.total}</span>
+                  </div>
+                  {stats.topProject && (
+                    <div className="hidden sm:flex items-center gap-2">
+                      <TrendingUp className="w-4 h-4 text-emerald-400" />
+                      <span className="text-white/50">Top:</span>
+                      <span className="font-bold text-emerald-400">{stats.topProject.ticker}</span>
+                      <span className="text-white/40">({stats.topProject.mindshare.toFixed(1)}%)</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* Right: Period Filter */}
+                <PeriodFilter selected={dateRange} onChange={setDateRange} />
               </div>
             </div>
           </div>
         </div>
 
-        {/* Main Content: Two-Column Layout */}
-        <div className="max-w-[1800px] mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[calc(100vh-200px)]">
-            
-            {/* Left: Social Graph */}
-            <div className="lg:col-span-5 border-r border-white/5 p-6">
-              <div className="mb-4">
-                <h2 className="text-sm uppercase tracking-widest text-white/30 font-medium">
-                  Hype Distribution
-                </h2>
-                <p className="text-xs text-white/20 mt-1">
-                  Bar height = Hype Score • Color = Trend
-                </p>
-              </div>
-              <SocialGraph
-                projects={projects}
-                onProjectHover={handleProjectHover}
-                activeProjectId={activeProjectId}
-              />
-            </div>
+        {/* Treemap Container */}
+        <div className="max-w-[1920px] mx-auto">
+          <div className="min-h-[calc(100vh-280px)] sm:min-h-[calc(100vh-240px)]">
+            <MindshareTreemap projects={treemapProjects} className="h-full" />
+          </div>
+        </div>
 
-            {/* Right: Leaderboard Table */}
-            <div className="lg:col-span-7 flex flex-col min-h-[600px]">
-              <LeaderboardTable
-                projects={projects}
-                onProjectHover={handleProjectHover}
-                activeProjectId={activeProjectId}
-              />
+        {/* Legend */}
+        <div className="border-t border-white/5 bg-gradient-to-t from-white/[0.02] to-transparent">
+          <div className="max-w-[1920px] mx-auto px-4 sm:px-6 py-3">
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs text-white/40">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-gradient-to-b from-emerald-500/40 to-emerald-500/10 border border-emerald-500/30" />
+                <span>Positive Trend</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-gradient-to-b from-red-500/40 to-red-500/10 border border-red-500/30" />
+                <span>Negative Trend</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-gradient-to-b from-white/20 to-white/5 border border-white/10" />
+                <span>Neutral</span>
+              </div>
+              <span className="hidden sm:inline text-white/20">|</span>
+              <span className="text-white/30">Cell size = Mindshare %</span>
             </div>
           </div>
         </div>

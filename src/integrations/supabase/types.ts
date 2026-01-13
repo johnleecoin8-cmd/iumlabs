@@ -46,6 +46,7 @@ export type Database = {
           created_at: string | null
           id: string
           logo_url: string | null
+          mindshare: number | null
           name: string
           rank: number
           score: number
@@ -58,6 +59,7 @@ export type Database = {
           created_at?: string | null
           id?: string
           logo_url?: string | null
+          mindshare?: number | null
           name: string
           rank?: number
           score?: number
@@ -70,6 +72,7 @@ export type Database = {
           created_at?: string | null
           id?: string
           logo_url?: string | null
+          mindshare?: number | null
           name?: string
           rank?: number
           score?: number
@@ -83,6 +86,7 @@ export type Database = {
       hype_score_history: {
         Row: {
           id: string
+          mindshare: number | null
           rank: number
           recorded_at: string
           score: number
@@ -90,6 +94,7 @@ export type Database = {
         }
         Insert: {
           id?: string
+          mindshare?: number | null
           rank: number
           recorded_at?: string
           score: number
@@ -97,6 +102,7 @@ export type Database = {
         }
         Update: {
           id?: string
+          mindshare?: number | null
           rank?: number
           recorded_at?: string
           score?: number

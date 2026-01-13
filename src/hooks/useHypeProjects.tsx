@@ -9,6 +9,7 @@ export interface HypeProject {
   name: string;
   ticker: string;
   score: number;
+  mindshare: number;
   trend: string;
   sparkline: number[];
   logo_url: string | null;
@@ -19,6 +20,7 @@ export interface HypeProject {
 export interface HypeScoreHistory {
   ticker: string;
   score: number;
+  mindshare: number;
   rank: number;
   recorded_at: string;
 }
