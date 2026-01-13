@@ -11,6 +11,11 @@ interface Project {
   previous_score: number;
   category: string;
   logo_url: string | null;
+  // New fields from Telegram crawler
+  ticker?: string;
+  sparkline?: number[];
+  trend?: string;
+  hype_score?: number;
 }
 
 interface SocialGraphProps {
@@ -19,16 +24,25 @@ interface SocialGraphProps {
   activeProjectId: string | null;
 }
 
-// Generate fake sparkline data
-const generateSparkline = (isPositive: boolean) => {
+// Generate fallback sparkline data when DB data is not available
+const generateFallbackSparkline = (isPositive: boolean) => {
   const points = [];
   let value = 50;
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 24; i++) {
     const change = (Math.random() - 0.5) * 15;
     value = Math.max(10, Math.min(90, value + change + (isPositive ? 1 : -1)));
     points.push(value);
   }
   return points;
+};
+
+// Normalize sparkline data to 0-100 range for visualization
+const normalizeSparkline = (data: number[]): number[] => {
+  if (!data || data.length === 0) return [];
+  const max = Math.max(...data, 1);
+  const min = Math.min(...data, 0);
+  const range = max - min || 1;
+  return data.map(v => ((v - min) / range) * 100);
 };
 
 // Treemap layout algorithm
@@ -125,7 +139,16 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
       const change = project.previous_score > 0 
         ? ((project.mindshare_score - project.previous_score) / project.previous_score) * 100 
         : 0;
-      const isPositive = change >= 0;
+      
+      // Use trend from DB if available, otherwise calculate from change
+      const isPositive = project.trend 
+        ? project.trend === 'positive'
+        : change >= 0;
+      
+      // Use real sparkline from DB if available, otherwise generate fallback
+      const sparklineData = project.sparkline && project.sparkline.length > 0
+        ? normalizeSparkline(project.sparkline)
+        : generateFallbackSparkline(isPositive);
       
       return {
         ...project,
@@ -135,7 +158,8 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
         height: Math.max((rect?.height || 10) - gap * 2, 8),
         change,
         isPositive,
-        sparkline: generateSparkline(isPositive),
+        sparklineData,
+        displayName: project.ticker ? `$${project.ticker}` : project.name,
       };
     });
   }, [projects]);
@@ -202,7 +226,7 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
                 {/* Sparkline background */}
                 {isMedium && (
                   <Sparkline 
-                    data={node.sparkline} 
+                    data={node.sparklineData} 
                     isPositive={node.isPositive}
                     width={cellWidth}
                     height={cellHeight}
@@ -218,11 +242,11 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
                       <div className={`rounded-full bg-white/10 flex items-center justify-center text-white/60 font-medium ${
                         isLarge ? 'w-6 h-6 text-xs' : 'w-4 h-4 text-[8px]'
                       }`}>
-                        {node.name.charAt(0)}
+                        {node.displayName.charAt(0)}
                       </div>
                       {isLarge && (
                         <span className="text-white font-medium text-sm truncate max-w-[80px]">
-                          {node.name}
+                          {node.displayName}
                         </span>
                       )}
                     </div>
@@ -234,7 +258,7 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
                   {/* Name for medium cells */}
                   {!isLarge && isMedium && (
                     <span className="text-white font-medium text-[10px] mt-1 truncate">
-                      {node.name.length > 8 ? node.name.slice(0, 7) + '..' : node.name}
+                      {node.displayName.length > 8 ? node.displayName.slice(0, 7) + '..' : node.displayName}
                     </span>
                   )}
 

@@ -315,6 +315,7 @@ export type Database = {
           category: string
           created_at: string
           discord_members: number | null
+          hype_score: number | null
           id: string
           is_active: boolean | null
           last_data_update: string | null
@@ -325,9 +326,12 @@ export type Database = {
           previous_score: number
           rank: number
           slug: string
+          sparkline: number[] | null
           telegram_members: number | null
           telegram_mentions_24h: number | null
           telegram_sentiment: number | null
+          ticker: string | null
+          trend: string | null
           twitter_mentions: number | null
           twitter_url: string | null
           updated_at: string
@@ -337,6 +341,7 @@ export type Database = {
           category?: string
           created_at?: string
           discord_members?: number | null
+          hype_score?: number | null
           id?: string
           is_active?: boolean | null
           last_data_update?: string | null
@@ -347,9 +352,12 @@ export type Database = {
           previous_score?: number
           rank?: number
           slug: string
+          sparkline?: number[] | null
           telegram_members?: number | null
           telegram_mentions_24h?: number | null
           telegram_sentiment?: number | null
+          ticker?: string | null
+          trend?: string | null
           twitter_mentions?: number | null
           twitter_url?: string | null
           updated_at?: string
@@ -359,6 +367,7 @@ export type Database = {
           category?: string
           created_at?: string
           discord_members?: number | null
+          hype_score?: number | null
           id?: string
           is_active?: boolean | null
           last_data_update?: string | null
@@ -369,9 +378,12 @@ export type Database = {
           previous_score?: number
           rank?: number
           slug?: string
+          sparkline?: number[] | null
           telegram_members?: number | null
           telegram_mentions_24h?: number | null
           telegram_sentiment?: number | null
+          ticker?: string | null
+          trend?: string | null
           twitter_mentions?: number | null
           twitter_url?: string | null
           updated_at?: string
