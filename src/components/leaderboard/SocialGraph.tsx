@@ -1,40 +1,13 @@
 import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Crown, TrendingUp, TrendingDown } from 'lucide-react';
-
-interface Project {
-  id: string;
-  name: string;
-  slug: string;
-  rank: number;
-  mindshare_score: number;
-  previous_score: number;
-  category: string;
-  logo_url: string | null;
-  // New fields from Telegram crawler
-  ticker?: string;
-  sparkline?: number[];
-  trend?: string;
-  hype_score?: number;
-}
+import type { HypeProject } from '@/hooks/useHypeProjects';
 
 interface SocialGraphProps {
-  projects: Project[];
+  projects: HypeProject[];
   onProjectHover: (projectId: string | null) => void;
   activeProjectId: string | null;
 }
-
-// Generate fallback sparkline data when DB data is not available
-const generateFallbackSparkline = (isPositive: boolean) => {
-  const points = [];
-  let value = 50;
-  for (let i = 0; i < 24; i++) {
-    const change = (Math.random() - 0.5) * 15;
-    value = Math.max(10, Math.min(90, value + change + (isPositive ? 1 : -1)));
-    points.push(value);
-  }
-  return points;
-};
 
 // Normalize sparkline data to 0-100 range for visualization
 const normalizeSparkline = (data: number[]): number[] => {
@@ -43,6 +16,18 @@ const normalizeSparkline = (data: number[]): number[] => {
   const min = Math.min(...data, 0);
   const range = max - min || 1;
   return data.map(v => ((v - min) / range) * 100);
+};
+
+// Generate fallback sparkline data when DB data is not available
+const generateFallbackSparkline = (isPositive: boolean): number[] => {
+  const points = [];
+  let value = 50;
+  for (let i = 0; i < 24; i++) {
+    const change = (Math.random() - 0.5) * 15;
+    value = Math.max(10, Math.min(90, value + change + (isPositive ? 1 : -1)));
+    points.push(value);
+  }
+  return points;
 };
 
 // Treemap layout algorithm
@@ -128,7 +113,7 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
     const gap = 0.5;
 
     const items = topProjects.map(p => ({
-      value: Math.max(p.mindshare_score, 50),
+      value: Math.max(Number(p.score), 50),
       id: p.id,
     }));
 
@@ -136,14 +121,9 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
 
     return topProjects.map((project) => {
       const rect = layout.find(l => l.id === project.id);
-      const change = project.previous_score > 0 
-        ? ((project.mindshare_score - project.previous_score) / project.previous_score) * 100 
-        : 0;
       
-      // Use trend from DB if available, otherwise calculate from change
-      const isPositive = project.trend 
-        ? project.trend === 'positive'
-        : change >= 0;
+      // Use trend from DB
+      const isPositive = project.trend === 'positive';
       
       // Use real sparkline from DB if available, otherwise generate fallback
       const sparklineData = project.sparkline && project.sparkline.length > 0
@@ -156,7 +136,6 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
         y: (rect?.y || 0) + gap,
         width: Math.max((rect?.width || 10) - gap * 2, 8),
         height: Math.max((rect?.height || 10) - gap * 2, 8),
-        change,
         isPositive,
         sparklineData,
         displayName: project.ticker ? `$${project.ticker}` : project.name,
@@ -183,8 +162,8 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-white/[0.05]">
         <div>
-          <h3 className="text-base font-semibold text-white">Top 20</h3>
-          <p className="text-xs text-white/40 mt-0.5">Mindshare Distribution</p>
+          <h3 className="text-base font-semibold text-white">Top 20 Hype</h3>
+          <p className="text-xs text-white/40 mt-0.5">Score Distribution</p>
         </div>
       </div>
 
@@ -270,7 +249,7 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
                     <span className={`font-semibold ${
                       isLarge ? 'text-lg' : isMedium ? 'text-sm' : 'text-[10px]'
                     } ${node.isPositive ? 'text-emerald-400' : 'text-white/80'}`}>
-                      {(node.mindshare_score / 100).toFixed(2)}%
+                      {Number(node.score).toLocaleString()}
                     </span>
                   </div>
                 </div>
@@ -295,11 +274,11 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-sm bg-gradient-to-b from-emerald-500/30 to-emerald-500/10 border border-emerald-500/30" />
-              <span className="text-xs text-white/50">Gainer</span>
+              <span className="text-xs text-white/50">Positive</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-sm bg-gradient-to-b from-red-900/60 to-red-900/30 border border-red-500/20" />
-              <span className="text-xs text-white/50">Loser</span>
+              <span className="text-xs text-white/50">Negative</span>
             </div>
           </div>
           <div className="flex items-center gap-3 text-xs text-white/40">
@@ -307,9 +286,9 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
             <span>|</span>
             <span>Avg: <span className="text-white/60 font-medium">
               {projects.length > 0 
-                ? (projects.reduce((a, b) => a + b.mindshare_score, 0) / projects.length / 100).toFixed(2)
+                ? Math.round(projects.reduce((a, b) => a + Number(b.score), 0) / projects.length).toLocaleString()
                 : '0'
-              }%
+              }
             </span></span>
           </div>
         </div>
@@ -337,19 +316,19 @@ const SocialGraph = ({ projects, onProjectHover, activeProjectId }: SocialGraphP
                     #{project.rank}
                   </div>
                   <div>
-                    <p className="text-white font-medium">{project.name}</p>
-                    <p className="text-white/40 text-xs">{project.category}</p>
+                    <p className="text-white font-medium">{project.displayName}</p>
+                    <p className="text-white/40 text-xs">{project.ticker}</p>
                   </div>
                 </div>
                 <div className="text-right">
                   <p className="text-white font-semibold text-lg">
-                    {(project.mindshare_score / 100).toFixed(2)}%
+                    {Number(project.score).toLocaleString()}
                   </p>
                   <div className={`flex items-center gap-1 text-xs font-medium ${
                     project.isPositive ? 'text-emerald-400' : 'text-red-400'
                   }`}>
                     {project.isPositive ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-                    <span>{project.isPositive ? '+' : ''}{project.change.toFixed(1)}%</span>
+                    <span>{project.trend}</span>
                   </div>
                 </div>
               </div>

@@ -1,28 +1,15 @@
 import { useState, useMemo, useCallback } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
+import { useHypeProjects } from '@/hooks/useHypeProjects';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import SocialGraph from '@/components/leaderboard/SocialGraph';
 import LeaderboardTable from '@/components/leaderboard/LeaderboardTable';
-import { Activity, Radio, BarChart3 } from 'lucide-react';
+import { Activity, Radio, BarChart3, RefreshCw } from 'lucide-react';
+import { formatDistanceToNow } from 'date-fns';
 
 const KInfluenceGrid = () => {
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
-
-  const { data: projects = [], isLoading } = useQuery({
-    queryKey: ['project-leaderboard'],
-    queryFn: async () => {
-      const { data, error } = await supabase
-        .from('project_leaderboard')
-        .select('*')
-        .eq('is_active', true)
-        .order('rank', { ascending: true });
-      
-      if (error) throw error;
-      return data || [];
-    },
-  });
+  const { projects, isLoading, lastUpdate } = useHypeProjects();
 
   const handleProjectHover = useCallback((projectId: string | null) => {
     setActiveProjectId(projectId);
@@ -30,32 +17,22 @@ const KInfluenceGrid = () => {
 
   // Stats for header
   const stats = useMemo(() => {
-    if (projects.length === 0) return { total: 0, avgScore: 0, topGainer: null };
+    if (projects.length === 0) return { total: 0, avgScore: 0, topProject: null };
     
-    const avgScore = projects.reduce((sum, p) => sum + Number(p.mindshare_score), 0) / projects.length;
-    
-    const projectsWithChange = projects.map(p => ({
-      ...p,
-      change: p.previous_score > 0 
-        ? ((p.mindshare_score - p.previous_score) / p.previous_score) * 100 
-        : 0
-    }));
-    
-    const topGainer = projectsWithChange.reduce((best, p) => 
-      p.change > (best?.change || -Infinity) ? p : best
-    , projectsWithChange[0]);
+    const avgScore = projects.reduce((sum, p) => sum + Number(p.score), 0) / projects.length;
+    const topProject = projects[0]; // Already sorted by rank
     
     return {
       total: projects.length,
       avgScore: avgScore.toFixed(0),
-      topGainer
+      topProject
     };
   }, [projects]);
 
   if (isLoading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-pulse text-white/40">Loading...</div>
+        <div className="animate-pulse text-white/40">Loading hype data...</div>
       </div>
     );
   }
@@ -75,9 +52,9 @@ const KInfluenceGrid = () => {
                 </div>
                 <div>
                   <h1 className="text-xl font-bold text-white tracking-tight">
-                    K-Influence Leaderboard
+                    Hype Equalizer
                   </h1>
-                  <p className="text-sm text-white/50">Korean crypto project mindshare tracking</p>
+                  <p className="text-sm text-white/50">Real-time Korean crypto sentiment tracking</p>
                 </div>
                 <div className="flex items-center gap-2 px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full ml-2">
                   <Radio className="w-3 h-3 text-emerald-400 animate-pulse" />
@@ -92,13 +69,17 @@ const KInfluenceGrid = () => {
                   <span className="font-bold text-white">{stats.total}</span>
                 </div>
                 <div className="hidden sm:flex items-center gap-2">
-                  <span className="text-white/40">Avg Score:</span>
+                  <span className="text-white/40">Avg Hype:</span>
                   <span className="font-bold text-white">{stats.avgScore}</span>
                 </div>
-                <div className="flex items-center gap-2 text-white/40">
-                  <Activity className="w-3.5 h-3.5" />
-                  <span className="text-xs">Updates hourly</span>
-                </div>
+                {lastUpdate && (
+                  <div className="flex items-center gap-2 text-white/40">
+                    <RefreshCw className="w-3.5 h-3.5" />
+                    <span className="text-xs">
+                      {formatDistanceToNow(lastUpdate, { addSuffix: true })}
+                    </span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -112,10 +93,10 @@ const KInfluenceGrid = () => {
             <div className="lg:col-span-5 border-r border-white/5 p-6">
               <div className="mb-4">
                 <h2 className="text-sm uppercase tracking-widest text-white/30 font-medium">
-                  Project Network
+                  Hype Distribution
                 </h2>
                 <p className="text-xs text-white/20 mt-1">
-                  Node size = Mindshare Score • Color = Category
+                  Bar height = Hype Score • Color = Trend
                 </p>
               </div>
               <SocialGraph
