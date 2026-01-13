@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import type { HypeProject } from '@/hooks/useHypeProjects';
+import { useHypeTrends } from '@/hooks/useHypeProjects';
 
 interface LeaderboardTableProps {
   projects: HypeProject[];
@@ -17,13 +18,16 @@ interface LeaderboardTableProps {
   activeProjectId: string | null;
 }
 
-type SortField = 'rank' | 'score' | 'ticker';
+type SortField = 'rank' | 'score' | 'ticker' | 'change7d' | 'change30d';
 type SortDirection = 'asc' | 'desc';
 
 const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: LeaderboardTableProps) => {
   const [sortField, setSortField] = useState<SortField>('rank');
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
   const [searchQuery, setSearchQuery] = useState('');
+  
+  // Fetch historical trends for 7d/30d columns
+  const { data: trends = {} } = useHypeTrends();
 
   // Filter and sort
   const filteredAndSorted = useMemo(() => {
@@ -55,6 +59,14 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
           aVal = a.ticker;
           bVal = b.ticker;
           break;
+        case 'change7d':
+          aVal = trends[a.ticker]?.change7d || 0;
+          bVal = trends[b.ticker]?.change7d || 0;
+          break;
+        case 'change30d':
+          aVal = trends[a.ticker]?.change30d || 0;
+          bVal = trends[b.ticker]?.change30d || 0;
+          break;
         default:
           return 0;
       }
@@ -71,7 +83,7 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
     });
     
     return result;
-  }, [projects, searchQuery, sortField, sortDirection]);
+  }, [projects, searchQuery, sortField, sortDirection, trends]);
 
   const handleSort = (field: SortField) => {
     if (sortField === field) {
@@ -178,6 +190,8 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
               <SortableHeader field="ticker">Ticker</SortableHeader>
               <SortableHeader field="score">Hype Score</SortableHeader>
               <th className="px-4 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">Trend</th>
+              <SortableHeader field="change7d">7d</SortableHeader>
+              <SortableHeader field="change30d">30d</SortableHeader>
               <th className="px-4 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider">24h Chart</th>
             </tr>
           </thead>
@@ -185,6 +199,9 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
             {filteredAndSorted.map((project, index) => {
               const isActive = activeProjectId === project.id;
               const rankStyle = getRankStyle(project.rank);
+              const projectTrend = trends[project.ticker];
+              const change7d = projectTrend?.change7d || 0;
+              const change30d = projectTrend?.change30d || 0;
               
               return (
                 <motion.tr
@@ -210,14 +227,25 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
                     </div>
                   </td>
                   
-                  {/* Ticker */}
+                  {/* Ticker with logo */}
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                        <span className="text-xs font-bold text-white/60">
-                          {project.ticker.charAt(0)}
-                        </span>
-                      </div>
+                      {project.logo_url ? (
+                        <img 
+                          src={project.logo_url} 
+                          alt={project.ticker}
+                          className="w-8 h-8 rounded-lg object-cover"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).style.display = 'none';
+                          }}
+                        />
+                      ) : (
+                        <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
+                          <span className="text-xs font-bold text-white/60">
+                            {project.ticker.charAt(0)}
+                          </span>
+                        </div>
+                      )}
                       <div>
                         <p className="font-medium text-sm text-white">{project.name}</p>
                         <p className="text-xs text-white/40">${project.ticker}</p>
@@ -238,6 +266,24 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
                       {getTrendIcon(project.trend)}
                       <span className="text-sm font-medium capitalize">{project.trend}</span>
                     </div>
+                  </td>
+                  
+                  {/* 7d Change */}
+                  <td className="px-4 py-3">
+                    <span className={`text-sm font-medium tabular-nums ${
+                      change7d > 0 ? 'text-emerald-400' : change7d < 0 ? 'text-rose-400' : 'text-white/40'
+                    }`}>
+                      {change7d > 0 ? '+' : ''}{change7d.toFixed(1)}%
+                    </span>
+                  </td>
+                  
+                  {/* 30d Change */}
+                  <td className="px-4 py-3">
+                    <span className={`text-sm font-medium tabular-nums ${
+                      change30d > 0 ? 'text-emerald-400' : change30d < 0 ? 'text-rose-400' : 'text-white/40'
+                    }`}>
+                      {change30d > 0 ? '+' : ''}{change30d.toFixed(1)}%
+                    </span>
                   </td>
                   
                   {/* Sparkline */}
