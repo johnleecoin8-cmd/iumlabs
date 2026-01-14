@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { 
   Rocket, 
   Palette, 
@@ -14,7 +14,7 @@ import {
   ChevronDown
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -169,24 +169,77 @@ const ServiceCard = ({
 }) => {
   const Icon = service.icon;
   const videoRef = useRef<HTMLVideoElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isInView, setIsInView] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
   
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-    videoRef.current?.play();
-  };
+  // Lazy load video when card is in viewport
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          // Delay video loading slightly to prioritize visible content
+          setTimeout(() => setShouldLoadVideo(true), 100);
+        }
+      },
+      { 
+        threshold: 0.1,
+        rootMargin: '100px' // Start loading slightly before visible
+      }
+    );
+    
+    if (cardRef.current) {
+      observer.observe(cardRef.current);
+    }
+    
+    return () => observer.disconnect();
+  }, []);
   
-  const handleMouseLeave = () => {
+  // Debounced hover handler to prevent accidental triggers
+  const handleMouseEnter = useCallback(() => {
+    // Clear any existing timeout
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    
+    // Add 80ms debounce to prevent accidental hovers
+    hoverTimeoutRef.current = setTimeout(() => {
+      setIsHovered(true);
+      if (videoRef.current && isVideoLoaded) {
+        videoRef.current.play();
+      }
+    }, 80);
+  }, [isVideoLoaded]);
+  
+  const handleMouseLeave = useCallback(() => {
+    // Clear pending hover
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    
     setIsHovered(false);
     setIsPressed(false);
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
-  };
+  }, []);
+  
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
   
   const triggerHaptic = () => {
     if ('vibrate' in navigator) {
@@ -194,36 +247,68 @@ const ServiceCard = ({
     }
   };
   
-  const handleTouchStart = () => {
+  // Touch handling - require intentional tap, not swipe
+  const touchStartPos = useRef<{ x: number; y: number } | null>(null);
+  
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    touchStartPos.current = { x: touch.clientX, y: touch.clientY };
     setIsPressed(true);
-    setIsHovered(true);
     triggerHaptic();
-    videoRef.current?.play();
+    
+    // Play video on touch
+    if (videoRef.current && isVideoLoaded) {
+      videoRef.current.play();
+    }
   };
   
   const handleTouchEnd = (e: React.TouchEvent) => {
-    e.preventDefault();
     setIsPressed(false);
     
-    // Smooth transition with delay
-    setTimeout(() => {
-      navigate(service.link);
-    }, 150);
+    // Check if it was a tap (not a swipe)
+    if (touchStartPos.current) {
+      const touch = e.changedTouches[0];
+      const deltaX = Math.abs(touch.clientX - touchStartPos.current.x);
+      const deltaY = Math.abs(touch.clientY - touchStartPos.current.y);
+      
+      // Only navigate if movement is less than 10px (tap, not swipe)
+      if (deltaX < 10 && deltaY < 10) {
+        e.preventDefault();
+        navigate(service.link);
+      }
+    }
+    
+    touchStartPos.current = null;
+    
+    // Reset video
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+  
+  const handleTouchCancel = () => {
+    setIsPressed(false);
+    touchStartPos.current = null;
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
   };
   
   const handleClick = (e: React.MouseEvent) => {
-    // Allow normal navigation on desktop
+    // For desktop, navigate on click
     if (!('ontouchstart' in window)) {
-      return;
+      navigate(service.link);
     }
     e.preventDefault();
   };
   
   return (
     <motion.div
+      ref={cardRef}
       initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 20 }}
       transition={{ 
         duration: 0.4, 
         delay: index * 0.05,
@@ -231,11 +316,10 @@ const ServiceCard = ({
       }}
       className="relative"
     >
-      <Link
-        to={service.link}
+      <div
         onClick={handleClick}
         className={cn(
-          "group relative flex flex-col overflow-hidden",
+          "group relative flex flex-col overflow-hidden cursor-pointer",
           isFullWidth ? "aspect-[16/10] md:aspect-[16/9]" : "aspect-[3/4] md:aspect-[4/5]",
           "transition-all duration-200",
           "border-r border-b border-white/10",
@@ -245,6 +329,7 @@ const ServiceCard = ({
         onMouseLeave={handleMouseLeave}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchCancel}
       >
         {/* Loading skeleton */}
         {!isVideoLoaded && (
@@ -253,23 +338,24 @@ const ServiceCard = ({
           </div>
         )}
         
-        {/* Video background - poster for mobile */}
-        <video
-          ref={videoRef}
-          muted
-          loop
-          playsInline
-          autoPlay
-          preload="auto"
-          poster="/images/hero-poster.jpg"
-          onLoadedData={() => setIsVideoLoaded(true)}
-          className={cn(
-            "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
-            isVideoLoaded ? "opacity-100" : "opacity-0"
-          )}
-        >
-          <source src={service.video} type="video/mp4" />
-        </video>
+        {/* Video background - lazy loaded */}
+        {shouldLoadVideo && (
+          <video
+            ref={videoRef}
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/images/hero-poster.jpg"
+            onLoadedData={() => setIsVideoLoaded(true)}
+            className={cn(
+              "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+              isVideoLoaded ? "opacity-100" : "opacity-0"
+            )}
+          >
+            <source src={service.video} type="video/mp4" />
+          </video>
+        )}
         
         {/* Dark overlays - ium labs style */}
         <div className={cn(
@@ -322,12 +408,15 @@ const ServiceCard = ({
         )}>
           <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4 text-white/60" strokeWidth={1.5} />
         </div>
-      </Link>
+      </div>
     </motion.div>
   );
 };
 
 const MobileServicesPage = () => {
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
+  
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -337,14 +426,29 @@ const MobileServicesPage = () => {
           <div className="relative min-h-[60vh] md:min-h-[67vh] flex flex-col justify-between overflow-hidden rounded-2xl">
             {/* Background Layer - Video */}
             <div className="absolute inset-0 overflow-hidden">
+              {/* Poster fallback */}
+              <img
+                src="/images/hero-poster.jpg"
+                alt=""
+                className={cn(
+                  "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+                  heroVideoLoaded ? "opacity-0" : "opacity-100"
+                )}
+                style={{ filter: "brightness(0.35)" }}
+              />
               <video
+                ref={heroVideoRef}
                 autoPlay
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload="metadata"
                 poster="/images/hero-poster.jpg"
-                className="absolute inset-0 w-full h-full object-cover"
+                onLoadedData={() => setHeroVideoLoaded(true)}
+                className={cn(
+                  "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+                  heroVideoLoaded ? "opacity-100" : "opacity-0"
+                )}
                 style={{ filter: "brightness(0.35)" }}
               >
                 <source src="/videos/services-hero.mp4" type="video/mp4" />
