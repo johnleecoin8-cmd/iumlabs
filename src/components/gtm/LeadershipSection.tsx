@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronRight, Linkedin } from "lucide-react";
+import { Send } from "lucide-react";
 import jamesNft from "@/assets/team/james-nft.png";
 import davidNft from "@/assets/team/david-nft.png";
 import julianNft from "@/assets/team/julian-nft.png";
@@ -13,6 +13,7 @@ interface LeaderCard {
   description: string;
   descriptionKo: string;
   photo: string;
+  telegram: string;
 }
 
 const LeadershipSection = () => {
@@ -25,7 +26,8 @@ const LeadershipSection = () => {
       quote: "Standardizing Global Excellence.",
       description: "Defines the brand hierarchy and market entry strategy that aligns with Tier-1 global standards.",
       descriptionKo: "글로벌 탑티어 수준의 브랜드 위계와 시장 진입 전략(GTM)을 총괄 설계하여, 프로젝트의 체급을 높입니다.",
-      photo: jamesNft
+      photo: jamesNft,
+      telegram: "hnes2"
     },
     {
       number: "02",
@@ -35,7 +37,8 @@ const LeadershipSection = () => {
       quote: "Crafting the Macro-Narrative.",
       description: "Structuring compelling brand stories and adoption funnels that resonate from retail users to institutional partners.",
       descriptionKo: "Binance 출신의 시각으로, 리테일 유입부터 기관 설득까지 이어지는 거시적인 브랜드 내러티브를 설계합니다.",
-      photo: davidNft
+      photo: davidNft,
+      telegram: "krkrjnjn"
     },
     {
       number: "03",
@@ -45,7 +48,8 @@ const LeadershipSection = () => {
       quote: "Silicon Valley Standard Culture.",
       description: "Translating complex Web3 tech into sustainable cultural movements and fandom-driven events, powered by a16z-level operational rigor.",
       descriptionKo: "실리콘밸리(a16z) 수준의 오퍼레이션 시스템을 도입하여, 단순 커뮤니티 관리를 넘어선 '문화'와 '팬덤'을 구축합니다.",
-      photo: julianNft
+      photo: julianNft,
+      telegram: "iumlabsjulian"
     }
   ];
 
@@ -97,6 +101,17 @@ const LeadershipSection = () => {
                 <div className="absolute top-5 right-5 md:top-6 md:right-6 text-white/[0.06] text-6xl md:text-7xl font-bold leading-none">
                   {leader.number}
                 </div>
+
+                {/* Telegram Link - Top Right */}
+                <a
+                  href={`https://t.me/${leader.telegram}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute top-5 right-5 md:top-6 md:right-6 z-20 flex items-center gap-2 px-3 py-1.5 bg-[#0088cc]/20 hover:bg-[#0088cc]/40 border border-[#0088cc]/30 hover:border-[#0088cc]/60 rounded-full transition-all duration-300 group/tg"
+                >
+                  <Send className="w-3.5 h-3.5 text-[#0088cc]" />
+                  <span className="text-[#0088cc] text-xs font-medium">@{leader.telegram}</span>
+                </a>
 
                 {/* Content */}
                 <div className="relative z-10 flex flex-col h-full">
