@@ -104,8 +104,8 @@ const MindshareCell = ({
         }}
       />
 
-      {/* Sparkline Background - Kaito style: larger, centered, more visible */}
-      {sparkline.length >= 2 && (size === 'large' || size === 'medium') && (
+      {/* Sparkline Background - Kaito style: on ALL cells */}
+      {sparkline.length >= 2 && (
         <svg 
           className="absolute inset-0 w-full h-full"
           viewBox="0 0 100 100" 
@@ -122,12 +122,12 @@ const MindshareCell = ({
             d={`${sparklinePath} L 100,100 L 0,100 Z`}
             fill={`url(#sparkGrad-${ticker})`}
           />
-          {/* Main sparkline stroke - thicker for visibility */}
+          {/* Main sparkline stroke - size-responsive thickness */}
           <path
             d={sparklinePath}
             fill="none"
             stroke={colors.sparkline}
-            strokeWidth={size === 'large' ? '2.5' : '2'}
+            strokeWidth={size === 'large' ? '2.5' : size === 'medium' ? '2' : '1.5'}
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
