@@ -44,31 +44,31 @@ const MindshareCell = ({
     return `M ${points.split(' ').join(' L ')}`;
   }, [sparkline]);
 
-  // Kaito-style colors based on trend - more vibrant backgrounds
+  // Kaito-style colors based on trend - subtle but visible
   const trendColors = {
     up: {
       bg: 'from-emerald-600/60 via-emerald-700/40 to-emerald-900/30',
-      cellBg: 'rgba(16, 120, 80, 0.85)',
-      sparkline: 'rgba(255, 255, 255, 0.7)',
-      sparklineFill: 'rgba(255, 255, 255, 0.15)',
-      text: 'text-white',
-      icon: 'text-white/70',
+      cellBg: 'rgba(20, 80, 60, 0.65)',
+      sparkline: 'rgba(255, 255, 255, 0.45)',
+      sparklineFill: 'rgba(255, 255, 255, 0.08)',
+      text: 'text-white/90',
+      icon: 'text-white/50',
     },
     down: {
       bg: 'from-rose-600/60 via-rose-700/40 to-rose-900/30',
-      cellBg: 'rgba(180, 60, 70, 0.85)',
-      sparkline: 'rgba(255, 255, 255, 0.7)',
-      sparklineFill: 'rgba(255, 255, 255, 0.15)',
-      text: 'text-white',
-      icon: 'text-white/70',
+      cellBg: 'rgba(120, 50, 55, 0.65)',
+      sparkline: 'rgba(255, 255, 255, 0.45)',
+      sparklineFill: 'rgba(255, 255, 255, 0.08)',
+      text: 'text-white/90',
+      icon: 'text-white/50',
     },
     neutral: {
       bg: 'from-slate-600/40 via-slate-700/30 to-slate-900/20',
-      cellBg: 'rgba(50, 60, 70, 0.85)',
-      sparkline: 'rgba(255, 255, 255, 0.5)',
-      sparklineFill: 'rgba(255, 255, 255, 0.08)',
-      text: 'text-white/80',
-      icon: 'text-white/50',
+      cellBg: 'rgba(40, 45, 55, 0.65)',
+      sparkline: 'rgba(255, 255, 255, 0.35)',
+      sparklineFill: 'rgba(255, 255, 255, 0.05)',
+      text: 'text-white/70',
+      icon: 'text-white/40',
     },
   };
 
