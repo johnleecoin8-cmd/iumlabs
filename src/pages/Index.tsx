@@ -32,7 +32,7 @@ import ContactFormSection from "@/components/ContactFormSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
-import FloatingContactButton from "@/components/FloatingContactButton";
+
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { MessageSquare, FileText, Rocket, TrendingUp, Check, ArrowRight, ArrowDown } from "lucide-react";
@@ -366,7 +366,7 @@ const Index = () => {
       {/* Footer Brand */}
       <Footer />
       
-      <FloatingContactButton />
+      
     </div>;
 };
 export default Index;
