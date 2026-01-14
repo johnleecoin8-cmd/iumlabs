@@ -177,23 +177,31 @@ const KInfluenceGrid = () => {
 
         {/* Footer */}
         <div className="border-t border-white/5">
-          <div className="px-4 sm:px-6 py-4 flex flex-wrap items-center justify-center gap-6 text-xs text-white/30">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-gradient-to-br from-teal-500/30 to-teal-500/5 border border-teal-500/25" />
-              <span>Positive Trend</span>
+          <div className="px-4 sm:px-6 py-4 space-y-3">
+            {/* Trend Legend */}
+            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-white/30">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-gradient-to-br from-teal-500/30 to-teal-500/5 border border-teal-500/25" />
+                <span>Positive Trend</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-gradient-to-br from-rose-500/30 to-rose-500/5 border border-rose-500/25" />
+                <span>Negative Trend</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-gradient-to-br from-white/15 to-white/5 border border-white/10" />
+                <span>Neutral</span>
+              </div>
+              <span className="text-white/15">|</span>
+              <span>Cell size = Mindshare %</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-gradient-to-br from-rose-500/30 to-rose-500/5 border border-rose-500/25" />
-              <span>Negative Trend</span>
+            
+            {/* Methodology */}
+            <div className="flex flex-wrap items-center justify-center gap-2 pt-2 border-t border-white/5 text-xs text-white/25">
+              <span>📊 Mindshare calculated from 1,000+ Korean community channels across X · Telegram · Naver · KakaoTalk</span>
+              <span className="text-white/15">|</span>
+              <span className="text-white/20">Powered by Ium Labs</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded bg-gradient-to-br from-white/15 to-white/5 border border-white/10" />
-              <span>Neutral</span>
-            </div>
-            <span className="text-white/15">|</span>
-            <span>Cell size = Mindshare %</span>
-            <span className="text-white/15">|</span>
-            <span>Powered by Ium Labs</span>
           </div>
         </div>
       </div>
