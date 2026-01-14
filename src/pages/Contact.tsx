@@ -71,8 +71,8 @@ const ContactHeroVideo = () => {
 
 const Contact = () => {
   usePageMeta({
-    title: "Contact Us",
-    description: "Get in touch with ium Labs for Korean Web3 marketing. Free consultation, 24h response. Seoul-based experts helping global projects succeed in Korea.",
+    title: "Contact Us | Korea Web3 & Crypto Marketing",
+    description: "Get in touch with Ium Labs for Korean Web3 and crypto marketing. Free consultation, 24h response. Seoul-based experts helping global blockchain projects succeed in Korea.",
     path: "/contact",
     image: "/og-image.png"
   });

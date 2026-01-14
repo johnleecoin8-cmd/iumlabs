@@ -3,11 +3,11 @@ import Footer from "@/components/Footer";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Transparency = () => {
-  usePageMeta(
-    "Transparency",
-    "Our commitment to transparency in business practices and client relationships. Ium Labs operates with honesty and clear communication.",
-    "/transparency"
-  );
+  usePageMeta({
+    title: "Transparency",
+    description: "Our commitment to transparency in Web3 and crypto marketing. Ium Labs Korea operates with honesty and clear communication.",
+    path: "/transparency"
+  });
 
   const sections = [
     { title: "Our Commitment to Transparency", content: "At Ium Labs, we believe in maintaining the highest standards of transparency in all our business operations and client relationships." },

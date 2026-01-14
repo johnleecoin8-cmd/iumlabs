@@ -3,11 +3,11 @@ import Footer from "@/components/Footer";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Privacy = () => {
-  usePageMeta(
-    "Privacy Policy",
-    "Privacy Policy for Ium Labs. Learn how we collect, use, and protect your personal information.",
-    "/privacy"
-  );
+  usePageMeta({
+    title: "Privacy Policy",
+    description: "Privacy Policy for Ium Labs, Korea's leading Web3 and crypto marketing agency. Learn how we protect your information.",
+    path: "/privacy"
+  });
 
   const sections = [
     { title: "1. Information We Collect", content: "We collect information you provide directly to us, including name, email address, company information, and project details when you contact us or use our services." },
