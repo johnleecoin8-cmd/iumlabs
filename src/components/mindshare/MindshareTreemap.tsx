@@ -131,8 +131,8 @@ const MindshareTreemap = ({ projects, className }: MindshareTreemapProps) => {
       initial="hidden"
       animate="visible"
     >
-      {/* Kaito-style Treemap Grid - fills viewport */}
-      <div className="grid grid-cols-12 gap-1 h-full p-1" style={{ gridTemplateRows: 'repeat(6, 1fr)' }}>
+      {/* Kaito-style Treemap Grid - NO GAPS, fills viewport completely */}
+      <div className="grid grid-cols-12 gap-0 h-full w-full" style={{ gridTemplateRows: 'repeat(6, 1fr)' }}>
         
         {/* #1 - Largest cell (left side, spans 5 cols x 3 rows) */}
         {layout[0] && (
@@ -167,20 +167,22 @@ const MindshareTreemap = ({ projects, className }: MindshareTreemapProps) => {
           </div>
         )}
 
-        {/* Row 4: #6-#9 (4 cells spanning full width) */}
+        {/* #6 - Left side row 4-5 */}
         {layout[5] && (
           <div className="col-span-3 row-span-2">
             {renderCell(layout[5], 5)}
           </div>
         )}
+        
+        {/* #7 - Next to #6 */}
         {layout[6] && (
           <div className="col-span-3 row-span-2">
             {renderCell(layout[6], 6)}
           </div>
         )}
 
-        {/* Right side: #7-#12 in 2x3 grid */}
-        <div className="col-span-6 row-span-2 grid grid-cols-3 grid-rows-2 gap-1">
+        {/* Right side: #8-#13 in 2x3 grid - NO GAPS */}
+        <div className="col-span-6 row-span-2 grid grid-cols-3 grid-rows-2 gap-0">
           {layout.slice(7, 13).map((project, i) => (
             <div key={project.id}>
               {renderCell(project, i + 7)}
@@ -188,16 +190,16 @@ const MindshareTreemap = ({ projects, className }: MindshareTreemapProps) => {
           ))}
         </div>
 
-        {/* Bottom row: #13-#20 (8 smaller cells) */}
+        {/* Bottom row: 12 columns for remaining projects */}
         {layout.slice(13, 20).map((project, i) => (
           <div key={project.id} className="col-span-1 row-span-1">
             {renderCell(project, i + 13)}
           </div>
         ))}
 
-        {/* Fill remaining space if less than 20 projects */}
-        {layout.length < 20 && Array.from({ length: Math.max(0, 7 - (layout.length - 13)) }).map((_, i) => (
-          <div key={`empty-${i}`} className="col-span-1 row-span-1 bg-white/[0.02] rounded-lg" />
+        {/* Fill remaining space with empty cells if less than 20 projects */}
+        {layout.length >= 13 && layout.length < 20 && Array.from({ length: 12 - (layout.length - 13) }).map((_, i) => (
+          <div key={`empty-${i}`} className="col-span-1 row-span-1 bg-black/40 border-[0.5px] border-white/5" />
         ))}
       </div>
     </motion.div>
