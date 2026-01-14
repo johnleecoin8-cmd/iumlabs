@@ -69,66 +69,64 @@ const KInfluenceGrid = () => {
       <div className="fixed inset-0 bg-gradient-to-b from-teal-950/5 via-transparent to-transparent pointer-events-none" />
 
       <div className="relative max-w-[1920px] mx-auto">
-        {/* Header */}
+        {/* Header - Mobile optimized */}
         <div className="border-b border-white/5">
-          <div className="px-4 sm:px-6 py-5 sm:py-6">
-            <div className="flex flex-col gap-5">
+          <div className="px-3 sm:px-6 py-3 sm:py-5">
+            <div className="flex flex-col gap-3 sm:gap-5">
               {/* Title row */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div className="flex items-center gap-4">
+              <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2 sm:gap-4">
                   <div>
-                    <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
+                    <h1 className="text-base sm:text-2xl font-bold text-white tracking-tight">
                       K-Leaderboard
                     </h1>
-                    <p className="mt-0.5 text-sm text-white/40">
+                    <p className="hidden sm:block mt-0.5 text-sm text-white/40">
                       Real-time crypto mindshare from Korean communities
                     </p>
                   </div>
                   
                   {/* Live indicator */}
-                  <div className="flex items-center gap-1.5 px-2 py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
-                    <Radio className="w-3 h-3 text-teal-400 animate-pulse" />
-                    <span className="text-xs font-medium text-teal-400">Live</span>
+                  <div className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
+                    <Radio className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-teal-400 animate-pulse" />
+                    <span className="text-[10px] sm:text-xs font-medium text-teal-400">Live</span>
                   </div>
                 </div>
 
-                {/* Action buttons */}
-                <div className="flex items-center gap-2">
+                {/* Action buttons - Hidden on mobile, show icons only */}
+                <div className="flex items-center gap-1.5 sm:gap-2">
                   <button 
                     className={cn(
-                      'px-4 py-2 text-sm font-medium rounded-lg',
+                      'p-2 sm:px-4 sm:py-2 text-sm font-medium rounded-lg',
                       'bg-white/5 text-white/50 border border-white/10',
                       'hover:bg-white/10 hover:text-white hover:border-white/15',
                       'transition-all duration-200 flex items-center gap-2'
                     )}
                   >
                     <History className="w-4 h-4" />
-                    Historical
+                    <span className="hidden sm:inline">Historical</span>
                   </button>
                   <button 
                     className={cn(
-                      'px-4 py-2 text-sm font-medium rounded-lg',
+                      'p-2 sm:px-4 sm:py-2 text-sm font-medium rounded-lg',
                       'bg-teal-500/10 text-teal-400 border border-teal-500/20',
                       'hover:bg-teal-500/20 hover:border-teal-500/30',
                       'transition-all duration-200 flex items-center gap-2'
                     )}
                   >
                     <Users className="w-4 h-4" />
-                    Creator Leaderboard
-                    <ExternalLink className="w-3 h-3 opacity-60" />
+                    <span className="hidden sm:inline">Creator Leaderboard</span>
+                    <ExternalLink className="hidden sm:block w-3 h-3 opacity-60" />
                   </button>
                 </div>
               </div>
 
-              {/* Controls row */}
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4 pb-1">
+              {/* Controls row - Mobile optimized */}
+              <div className="flex items-center justify-between gap-2 sm:gap-4">
                 {/* Token Status Filter */}
                 <TokenStatusToggle selected={tokenStatus} onChange={setTokenStatus} />
                 
-                <div className="hidden sm:block h-4 w-px bg-white/10" />
-                
-                {/* Stats */}
-                <div className="flex items-center gap-4 text-sm">
+                {/* Stats - Compact on mobile */}
+                <div className="hidden sm:flex items-center gap-4 text-sm">
                   <div className="flex items-center gap-2">
                     <span className="text-white/40">Total:</span>
                     <span className="font-semibold text-white">{stats.total}</span>
@@ -145,10 +143,17 @@ const KInfluenceGrid = () => {
                   </div>
                 </div>
                 
-                <div className="flex-1" />
+                {/* Mobile stats - Compact */}
+                <div className="flex sm:hidden items-center gap-2 text-[10px]">
+                  <span className="text-white/60 font-medium">{stats.total}</span>
+                  <span className="text-white/20">|</span>
+                  <span className="text-teal-400 font-medium">{stats.tgeCount}</span>
+                  <span className="text-white/20">/</span>
+                  <span className="text-cyan-400 font-medium">{stats.preTgeCount}</span>
+                </div>
                 
-                {/* Update frequency */}
-                <span className="text-xs text-white/30">
+                {/* Update frequency - Desktop only */}
+                <span className="hidden sm:block text-xs text-white/30">
                   Update every 1 hour
                 </span>
               </div>
@@ -156,8 +161,8 @@ const KInfluenceGrid = () => {
           </div>
         </div>
 
-        {/* Treemap Container - fills remaining viewport height */}
-        <div className="h-[calc(100vh-180px)]">
+        {/* Treemap Container - Adjusted height for mobile */}
+        <div className="h-[calc(100vh-120px)] sm:h-[calc(100vh-160px)]">
           {isLoading ? (
             <TreemapSkeleton />
           ) : (
@@ -165,8 +170,8 @@ const KInfluenceGrid = () => {
           )}
         </div>
 
-        {/* Footer */}
-        <div className="border-t border-white/5">
+        {/* Footer - Hidden on mobile for more treemap space */}
+        <div className="hidden sm:block border-t border-white/5">
           <div className="px-4 sm:px-6 py-4 space-y-3">
             {/* Trend Legend */}
             <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-white/30">
