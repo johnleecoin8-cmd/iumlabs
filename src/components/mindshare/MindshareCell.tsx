@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import { TrendingUp, TrendingDown, Minus, Crown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface MindshareCellProps {
@@ -11,6 +11,7 @@ interface MindshareCellProps {
   sparkline?: number[];
   logoUrl?: string | null;
   size: 'large' | 'medium' | 'small' | 'tiny';
+  rank?: number;
   onClick?: () => void;
 }
 
@@ -23,6 +24,7 @@ const MindshareCell = ({
   sparkline = [],
   logoUrl,
   size,
+  rank,
   onClick,
 }: MindshareCellProps) => {
   // Generate sparkline path for background
@@ -46,8 +48,6 @@ const MindshareCell = ({
   const trendColors = {
     up: {
       bg: 'from-teal-500/10 via-teal-500/5 to-transparent',
-      border: 'border-teal-500/20 hover:border-teal-500/40',
-      glow: 'hover:shadow-[0_0_40px_rgba(20,184,166,0.12)]',
       sparkline: 'rgba(20, 184, 166, 0.4)',
       sparklineFill: 'rgba(20, 184, 166, 0.08)',
       text: 'text-teal-400',
@@ -55,8 +55,6 @@ const MindshareCell = ({
     },
     down: {
       bg: 'from-rose-500/10 via-rose-500/5 to-transparent',
-      border: 'border-rose-500/20 hover:border-rose-500/40',
-      glow: 'hover:shadow-[0_0_40px_rgba(244,63,94,0.12)]',
       sparkline: 'rgba(244, 63, 94, 0.4)',
       sparklineFill: 'rgba(244, 63, 94, 0.08)',
       text: 'text-rose-400',
@@ -64,8 +62,6 @@ const MindshareCell = ({
     },
     neutral: {
       bg: 'from-white/5 via-white/2 to-transparent',
-      border: 'border-white/10 hover:border-white/20',
-      glow: 'hover:shadow-[0_0_40px_rgba(255,255,255,0.04)]',
       sparkline: 'rgba(255, 255, 255, 0.2)',
       sparklineFill: 'rgba(255, 255, 255, 0.03)',
       text: 'text-white/60',
@@ -77,17 +73,26 @@ const MindshareCell = ({
   const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : Minus;
   const isPreTge = tokenStatus === 'pre-tge';
 
+  // Crown colors for top 3
+  const crownColors: Record<number, string> = {
+    1: '#FFD700', // Gold
+    2: '#C0C0C0', // Silver
+    3: '#CD7F32'  // Bronze
+  };
+
   return (
     <div
       onClick={onClick}
       className={cn(
-        'relative w-full h-full overflow-hidden cursor-pointer',
-        'bg-gradient-to-br backdrop-blur-sm',
-        'border-[0.5px] border-white/10 transition-colors duration-200 ease-out',
-        'hover:border-white/20 hover:bg-white/[0.02]',
+        'relative w-full h-full overflow-hidden cursor-pointer box-border',
+        'bg-gradient-to-br',
+        'border-[0.5px] border-white/[0.08] transition-colors duration-200',
+        'hover:border-white/20 hover:brightness-110',
         colors.bg
       )}
-      style={{ background: 'linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(5,5,5,0.98) 100%)' }}
+      style={{ 
+        background: 'linear-gradient(145deg, rgba(12,12,12,0.97) 0%, rgba(6,6,6,0.99) 100%)'
+      }}
     >
       {/* Sparkline Background */}
       {sparkline.length >= 2 && (size === 'large' || size === 'medium') && (
@@ -127,21 +132,37 @@ const MindshareCell = ({
       {/* Glass overlay */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
 
+      {/* Crown for top 3 */}
+      {rank && rank <= 3 && (
+        <div className="absolute top-1.5 right-1.5 z-20">
+          <Crown 
+            className={cn(
+              size === 'large' ? 'w-5 h-5' : size === 'medium' ? 'w-4 h-4' : 'w-3 h-3'
+            )}
+            style={{ 
+              color: crownColors[rank], 
+              filter: 'drop-shadow(0 0 4px rgba(255,215,0,0.5))' 
+            }}
+            fill={crownColors[rank]}
+          />
+        </div>
+      )}
+
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-between h-full p-3">
+      <div className="relative z-10 flex flex-col justify-between h-full p-2">
         {/* Top section */}
-        <div className="flex items-start justify-between gap-2">
+        <div className="flex items-start justify-between gap-1">
           {/* Logo and ticker */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             {(size === 'large' || size === 'medium') && (
-              <div className="relative">
+              <div className="relative flex-shrink-0">
                 {logoUrl ? (
                   <img
                     src={logoUrl}
                     alt={ticker}
                     className={cn(
                       'rounded-full bg-black/50 ring-1 ring-white/10 object-cover',
-                      size === 'large' ? 'w-10 h-10' : 'w-7 h-7'
+                      size === 'large' ? 'w-8 h-8' : 'w-5 h-5'
                     )}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
@@ -155,35 +176,28 @@ const MindshareCell = ({
                 <div 
                   className={cn(
                     'items-center justify-center rounded-full bg-white/10 ring-1 ring-white/10',
-                    size === 'large' ? 'w-10 h-10' : 'w-7 h-7',
+                    size === 'large' ? 'w-8 h-8' : 'w-5 h-5',
                     logoUrl ? 'hidden' : 'flex'
                   )}
                 >
                   <span className={cn(
                     'font-bold text-white/70',
-                    size === 'large' ? 'text-sm' : 'text-xs'
+                    size === 'large' ? 'text-xs' : 'text-[10px]'
                   )}>
                     {ticker.charAt(0)}
                   </span>
                 </div>
-                {/* Subtle glow behind logo */}
-                <div className={cn(
-                  'absolute inset-0 rounded-full blur-lg -z-10 opacity-30',
-                  trend === 'up' && 'bg-teal-400',
-                  trend === 'down' && 'bg-rose-400',
-                  trend === 'neutral' && 'bg-white/20'
-                )} />
               </div>
             )}
-            <div className="flex flex-col">
+            <div className="flex flex-col min-w-0">
               <span className={cn(
-                'font-semibold text-white tracking-tight',
-                size === 'large' ? 'text-base' : size === 'medium' ? 'text-sm' : 'text-xs'
+                'font-semibold text-white tracking-tight truncate',
+                size === 'large' ? 'text-sm' : size === 'medium' ? 'text-xs' : 'text-[10px]'
               )}>
                 {ticker}
               </span>
               {(size === 'large' || size === 'medium') && name && (
-                <span className="text-[10px] text-white/35 truncate max-w-[80px]">
+                <span className="text-[9px] text-white/35 truncate max-w-[70px]">
                   {name}
                 </span>
               )}
@@ -192,7 +206,7 @@ const MindshareCell = ({
 
           {/* Pre-TGE badge */}
           {isPreTge && (size === 'large' || size === 'medium') && (
-            <span className="px-1.5 py-0.5 text-[9px] font-medium bg-cyan-500/15 text-cyan-400 rounded border border-cyan-500/25">
+            <span className="px-1 py-0.5 text-[8px] font-medium bg-cyan-500/15 text-cyan-400 rounded border border-cyan-500/25 flex-shrink-0">
               PRE
             </span>
           )}
@@ -203,15 +217,15 @@ const MindshareCell = ({
           {/* Mindshare percentage */}
           <span className={cn(
             'font-bold tracking-tight',
-            size === 'large' ? 'text-2xl' : size === 'medium' ? 'text-lg' : size === 'small' ? 'text-sm' : 'text-xs',
+            size === 'large' ? 'text-xl' : size === 'medium' ? 'text-base' : size === 'small' ? 'text-sm' : 'text-[10px]',
             colors.text
           )}>
             {mindshare.toFixed(2)}%
           </span>
 
           {/* Trend icon */}
-          {size === 'large' && (
-            <TrendIcon className={cn('w-4 h-4', colors.icon)} />
+          {(size === 'large' || size === 'medium') && (
+            <TrendIcon className={cn('w-3.5 h-3.5 flex-shrink-0', colors.icon)} />
           )}
         </div>
       </div>
