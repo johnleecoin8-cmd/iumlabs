@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { TrendingUp, TrendingDown, Minus, Crown } from 'lucide-react';
+import { TrendingUp, TrendingDown, Crown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface MindshareCellProps {
@@ -45,7 +45,7 @@ const MindshareCell = ({
     return `M ${points.split(' ').join(' L ')}`;
   }, [sparkline]);
 
-  // Ium Labs Premium color system
+  // Ium Labs Premium color system - only up/down, neutral uses default
   const trendColors = {
     up: {
       cellBg: 'linear-gradient(145deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.25) 50%, rgba(2, 44, 34, 0.4) 100%)',
@@ -65,19 +65,21 @@ const MindshareCell = ({
       accentText: 'text-rose-400',
       percentBg: 'bg-rose-500/10',
     },
-    neutral: {
-      cellBg: 'linear-gradient(145deg, rgba(100, 116, 139, 0.1) 0%, rgba(51, 65, 85, 0.2) 50%, rgba(30, 41, 59, 0.35) 100%)',
-      glowColor: 'rgba(148, 163, 184, 0.08)',
-      borderColor: 'rgba(148, 163, 184, 0.15)',
-      sparkline: 'rgba(148, 163, 184, 0.5)',
-      sparklineFill: 'rgba(148, 163, 184, 0.05)',
-      accentText: 'text-slate-400',
-      percentBg: 'bg-slate-500/10',
-    },
   };
 
-  const colors = trendColors[trend];
-  const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : Minus;
+  // Default style when no trend data or neutral
+  const defaultColors = {
+    cellBg: 'linear-gradient(145deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.5) 50%, rgba(2, 6, 23, 0.6) 100%)',
+    glowColor: 'rgba(100, 116, 139, 0.06)',
+    borderColor: 'rgba(100, 116, 139, 0.15)',
+    sparkline: 'rgba(148, 163, 184, 0.4)',
+    sparklineFill: 'rgba(148, 163, 184, 0.04)',
+    accentText: 'text-slate-400',
+    percentBg: 'bg-slate-500/10',
+  };
+
+  const colors = trend === 'up' || trend === 'down' ? trendColors[trend] : defaultColors;
+  const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : null;
   const isPreTge = tokenStatus === 'pre-tge';
 
   // Crown colors for top 3 with glow effects
@@ -266,8 +268,8 @@ const MindshareCell = ({
             </span>
           </div>
 
-          {/* Trend icon with background - only on large */}
-          {size === 'large' && (
+          {/* Trend icon with background - only on large and when trend exists */}
+          {size === 'large' && TrendIcon && (
             <div className={cn(
               'p-0.5 sm:p-1 rounded transition-colors duration-200',
               colors.percentBg,
