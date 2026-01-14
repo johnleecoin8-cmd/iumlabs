@@ -471,7 +471,7 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.8,
           delay: 0.1
-        }} className="text-[clamp(1.75rem,5vw,4rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-4 md:mb-6">
+        }} className="text-[clamp(1.5rem,4vw,3rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-4 md:mb-6">
             <span className="block overflow-hidden">
               <motion.span className="block" initial={{
               y: '100%'
@@ -486,7 +486,7 @@ const HeroSection = () => {
               </motion.span>
             </span>
             <span className="block overflow-hidden">
-              <motion.span className="block text-foreground/80" initial={{
+              <motion.span className="block text-foreground/80 text-[clamp(1.25rem,3vw,2.25rem)]" initial={{
               y: '100%'
             }} animate={{
               y: 0
