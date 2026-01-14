@@ -20,7 +20,7 @@ const LeadershipSection = () => {
   const leaders: LeaderCard[] = [
     {
       number: "01",
-      title: "GO-TO-MARKET LEAD",
+      title: "James",
       role: "CEO",
       background: "Ex-KuCoin & Outlier Ventures",
       quote: "Standardizing Global Excellence.",
@@ -30,7 +30,7 @@ const LeadershipSection = () => {
     },
     {
       number: "02",
-      title: "STRATEGY LEAD",
+      title: "Kyle",
       role: "Head of Strategy",
       background: "Ex-Binance Fiat Leads",
       quote: "Crafting the Macro-Narrative.",
@@ -40,7 +40,7 @@ const LeadershipSection = () => {
     },
     {
       number: "03",
-      title: "OPERATION LEAD",
+      title: "Julian",
       role: "Head of Community",
       background: "Ex-a16z Head of Operation",
       quote: "Silicon Valley Standard Culture.",
