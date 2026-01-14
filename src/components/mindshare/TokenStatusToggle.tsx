@@ -54,7 +54,7 @@ const TokenStatusToggle = ({ selected, onChange, className }: TokenStatusToggleP
           'w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full transition-colors',
           selected === 'pre-tge' ? 'bg-cyan-400' : 'bg-white/30'
         )} />
-        Pre
+        pre-TGE
       </button>
     </div>
   );
