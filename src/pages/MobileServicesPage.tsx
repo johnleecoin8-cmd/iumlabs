@@ -171,6 +171,7 @@ const ServiceCard = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const navigate = useNavigate();
   
   const handleMouseEnter = () => {
@@ -245,6 +246,13 @@ const ServiceCard = ({
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
+        {/* Loading skeleton */}
+        {!isVideoLoaded && (
+          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/10 animate-pulse">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+          </div>
+        )}
+        
         {/* Video background - poster for mobile */}
         <video
           ref={videoRef}
@@ -254,7 +262,11 @@ const ServiceCard = ({
           autoPlay
           preload="auto"
           poster="/images/hero-poster.jpg"
-          className="absolute inset-0 w-full h-full object-cover"
+          onLoadedData={() => setIsVideoLoaded(true)}
+          className={cn(
+            "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+            isVideoLoaded ? "opacity-100" : "opacity-0"
+          )}
         >
           <source src={service.video} type="video/mp4" />
         </video>
@@ -402,27 +414,51 @@ const MobileServicesPage = () => {
         </div>
       </main>
       
-      {/* GTM - Full Width (1 Column) */}
-      <div className="border-l border-white/10">
-        <ServiceCard 
-          service={services[0]} 
-          index={0} 
-          isFullWidth={true}
-        />
-      </div>
-      
-      {/* Remaining Services - 2 Column Grid */}
-      <div className="border-l border-white/10">
-        <div className="grid grid-cols-2">
-          {services.slice(1).map((service, index) => (
-            <ServiceCard 
-              key={service.link} 
-              service={service} 
-              index={index + 2} 
-            />
-          ))}
+      {/* Section Divider - Featured Service */}
+      <section className="bg-[#0A0A0A] border-t border-white/10">
+        <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-8 md:py-5 border-b border-white/5">
+          <div className="flex items-baseline gap-3 sm:gap-4 md:gap-6">
+            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+            <h2 className="text-sm sm:text-base md:text-lg font-medium text-white">Featured Service</h2>
+          </div>
+          <span className="text-[9px] sm:text-[10px] text-white/40 tracking-wider">GTM Strategy</span>
         </div>
-      </div>
+        
+        {/* GTM - Full Width (1 Column) */}
+        <div className="border-l border-white/10">
+          <ServiceCard 
+            service={services[0]} 
+            index={0} 
+            isFullWidth={true}
+          />
+        </div>
+      </section>
+      
+      {/* Section Divider - All Services */}
+      <section className="bg-[#0A0A0A] border-t border-white/10">
+        <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-8 md:py-5 border-b border-white/5">
+          <div className="flex items-baseline gap-3 sm:gap-4 md:gap-6">
+            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+            <h2 className="text-sm sm:text-base md:text-lg font-medium text-white">All Services</h2>
+          </div>
+          <span className="text-[9px] sm:text-[10px] text-white/40 tracking-wider px-2 py-0.5 border border-white/10 rounded-full">
+            {services.length - 1} Services
+          </span>
+        </div>
+        
+        {/* Remaining Services - 2 Column Grid */}
+        <div className="border-l border-white/10">
+          <div className="grid grid-cols-2">
+            {services.slice(1).map((service, index) => (
+              <ServiceCard 
+                key={service.link} 
+                service={service} 
+                index={index + 1} 
+              />
+            ))}
+          </div>
+        </div>
+      </section>
       
       {/* Footer - Same as other pages */}
       <ContactFormSection />
