@@ -45,31 +45,34 @@ const MindshareCell = ({
     return `M ${points.split(' ').join(' L ')}`;
   }, [sparkline]);
 
-  // Kaito-style colors based on trend - subtle but visible
+  // Ium Labs Premium color system
   const trendColors = {
     up: {
-      bg: 'from-emerald-600/60 via-emerald-700/40 to-emerald-900/30',
-      cellBg: 'rgba(20, 80, 60, 0.65)',
-      sparkline: 'rgba(255, 255, 255, 0.45)',
-      sparklineFill: 'rgba(255, 255, 255, 0.08)',
-      text: 'text-white/90',
-      icon: 'text-white/50',
+      cellBg: 'linear-gradient(145deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.25) 50%, rgba(2, 44, 34, 0.4) 100%)',
+      glowColor: 'rgba(52, 211, 153, 0.12)',
+      borderColor: 'rgba(52, 211, 153, 0.25)',
+      sparkline: 'rgba(52, 211, 153, 0.6)',
+      sparklineFill: 'rgba(52, 211, 153, 0.08)',
+      accentText: 'text-emerald-400',
+      percentBg: 'bg-emerald-500/10',
     },
     down: {
-      bg: 'from-rose-600/60 via-rose-700/40 to-rose-900/30',
-      cellBg: 'rgba(120, 50, 55, 0.65)',
-      sparkline: 'rgba(255, 255, 255, 0.45)',
-      sparklineFill: 'rgba(255, 255, 255, 0.08)',
-      text: 'text-white/90',
-      icon: 'text-white/50',
+      cellBg: 'linear-gradient(145deg, rgba(239, 68, 68, 0.15) 0%, rgba(127, 29, 29, 0.25) 50%, rgba(69, 10, 10, 0.4) 100%)',
+      glowColor: 'rgba(248, 113, 113, 0.12)',
+      borderColor: 'rgba(248, 113, 113, 0.25)',
+      sparkline: 'rgba(248, 113, 113, 0.6)',
+      sparklineFill: 'rgba(248, 113, 113, 0.08)',
+      accentText: 'text-rose-400',
+      percentBg: 'bg-rose-500/10',
     },
     neutral: {
-      bg: 'from-slate-600/40 via-slate-700/30 to-slate-900/20',
-      cellBg: 'rgba(40, 45, 55, 0.65)',
-      sparkline: 'rgba(255, 255, 255, 0.35)',
-      sparklineFill: 'rgba(255, 255, 255, 0.05)',
-      text: 'text-white/70',
-      icon: 'text-white/40',
+      cellBg: 'linear-gradient(145deg, rgba(100, 116, 139, 0.1) 0%, rgba(51, 65, 85, 0.2) 50%, rgba(30, 41, 59, 0.35) 100%)',
+      glowColor: 'rgba(148, 163, 184, 0.08)',
+      borderColor: 'rgba(148, 163, 184, 0.15)',
+      sparkline: 'rgba(148, 163, 184, 0.5)',
+      sparklineFill: 'rgba(148, 163, 184, 0.05)',
+      accentText: 'text-slate-400',
+      percentBg: 'bg-slate-500/10',
     },
   };
 
@@ -77,37 +80,48 @@ const MindshareCell = ({
   const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : Minus;
   const isPreTge = tokenStatus === 'pre-tge';
 
-  // Crown colors for top 3
-  const crownColors: Record<number, string> = {
-    1: '#FFD700', // Gold
-    2: '#C0C0C0', // Silver
-    3: '#CD7F32'  // Bronze
+  // Crown colors for top 3 with glow effects
+  const crownStyles: Record<number, { color: string; glow: string }> = {
+    1: { color: '#FFD700', glow: 'drop-shadow(0 0 8px rgba(255, 215, 0, 0.6))' },
+    2: { color: '#E5E4E2', glow: 'drop-shadow(0 0 6px rgba(229, 228, 226, 0.5))' },
+    3: { color: '#CD7F32', glow: 'drop-shadow(0 0 6px rgba(205, 127, 50, 0.5))' }
   };
 
   return (
     <div
       onClick={onClick}
       className={cn(
-        'relative w-full h-full overflow-hidden cursor-pointer box-border',
-        'border-[0.5px] border-white/[0.12] transition-all duration-200',
-        'hover:border-white/30 hover:brightness-110',
+        'group relative w-full h-full overflow-hidden cursor-pointer box-border',
+        'rounded-lg transition-all duration-300 ease-out',
+        'hover:scale-[1.02] hover:z-10',
       )}
       style={{ 
-        background: colors.cellBg
+        background: colors.cellBg,
+        border: `1px solid ${colors.borderColor}`,
+        boxShadow: `0 4px 24px -4px ${colors.glowColor}, inset 0 1px 0 rgba(255,255,255,0.05)`,
       }}
     >
-      {/* Lighter gradient overlay for depth */}
+      {/* Glass morphism overlay */}
       <div 
-        className="absolute inset-0 pointer-events-none"
+        className="absolute inset-0 pointer-events-none opacity-60 group-hover:opacity-80 transition-opacity duration-300"
         style={{
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%, rgba(0,0,0,0.15) 100%)'
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 40%, rgba(0,0,0,0.1) 100%)',
+          backdropFilter: 'blur(1px)',
         }}
       />
 
-      {/* Sparkline Background - Kaito style: on ALL cells */}
+      {/* Animated glow on hover */}
+      <div 
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{
+          background: `radial-gradient(ellipse at 30% 20%, ${colors.glowColor} 0%, transparent 50%)`,
+        }}
+      />
+
+      {/* Sparkline Background - Refined style */}
       {sparkline.length >= 2 && (
         <svg 
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 w-full h-full opacity-70 group-hover:opacity-90 transition-opacity duration-300"
           viewBox="0 0 100 100" 
           preserveAspectRatio="none"
         >
@@ -122,12 +136,12 @@ const MindshareCell = ({
             d={`${sparklinePath} L 100,100 L 0,100 Z`}
             fill={`url(#sparkGrad-${ticker})`}
           />
-          {/* Main sparkline stroke - size-responsive thickness */}
+          {/* Main sparkline stroke */}
           <path
             d={sparklinePath}
             fill="none"
             stroke={colors.sparkline}
-            strokeWidth={size === 'large' ? '2.5' : size === 'medium' ? '2' : '1.5'}
+            strokeWidth={size === 'large' ? '2' : size === 'medium' ? '1.5' : '1'}
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
@@ -135,31 +149,32 @@ const MindshareCell = ({
         </svg>
       )}
 
-      {/* Subtle vignette overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
+      {/* Subtle bottom gradient for depth */}
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
 
       {/* Crown for top 3 */}
       {rank && rank <= 3 && (
-        <div className="absolute top-1.5 right-1.5 z-20">
+        <div className="absolute top-2 right-2 z-20">
           <Crown 
             className={cn(
+              'transition-transform duration-300 group-hover:scale-110',
               size === 'large' ? 'w-5 h-5' : size === 'medium' ? 'w-4 h-4' : 'w-3 h-3'
             )}
             style={{ 
-              color: crownColors[rank], 
-              filter: 'drop-shadow(0 0 4px rgba(255,215,0,0.5))' 
+              color: crownStyles[rank].color, 
+              filter: crownStyles[rank].glow,
             }}
-            fill={crownColors[rank]}
+            fill={crownStyles[rank].color}
           />
         </div>
       )}
 
       {/* Content */}
-      <div className="relative z-10 flex flex-col justify-between h-full p-2">
+      <div className="relative z-10 flex flex-col justify-between h-full p-2.5">
         {/* Top section */}
-        <div className="flex items-start justify-between gap-1">
+        <div className="flex items-start justify-between gap-1.5">
           {/* Logo and ticker */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             {(size === 'large' || size === 'medium') && (
               <div className="relative flex-shrink-0">
                 {logoUrl ? (
@@ -167,9 +182,13 @@ const MindshareCell = ({
                     src={logoUrl}
                     alt={ticker}
                     className={cn(
-                      'rounded-full bg-black/50 ring-1 ring-white/10 object-cover',
-                      size === 'large' ? 'w-8 h-8' : 'w-5 h-5'
+                      'rounded-full object-cover transition-transform duration-300 group-hover:scale-105',
+                      'ring-2 ring-white/10 group-hover:ring-white/20',
+                      size === 'large' ? 'w-10 h-10' : 'w-6 h-6'
                     )}
+                    style={{
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                    }}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
                       target.style.display = 'none';
@@ -181,14 +200,15 @@ const MindshareCell = ({
                 {/* Fallback avatar with ticker initial */}
                 <div 
                   className={cn(
-                    'items-center justify-center rounded-full bg-white/10 ring-1 ring-white/10',
-                    size === 'large' ? 'w-8 h-8' : 'w-5 h-5',
+                    'items-center justify-center rounded-full ring-2 ring-white/10',
+                    'bg-gradient-to-br from-white/15 to-white/5',
+                    size === 'large' ? 'w-10 h-10' : 'w-6 h-6',
                     logoUrl ? 'hidden' : 'flex'
                   )}
                 >
                   <span className={cn(
-                    'font-bold text-white/70',
-                    size === 'large' ? 'text-xs' : 'text-[10px]'
+                    'font-bold text-white/80',
+                    size === 'large' ? 'text-sm' : 'text-[10px]'
                   )}>
                     {ticker.charAt(0)}
                   </span>
@@ -197,22 +217,28 @@ const MindshareCell = ({
             )}
             <div className="flex flex-col min-w-0">
               <span className={cn(
-                'font-semibold text-white tracking-tight truncate',
-                size === 'large' ? 'text-sm' : size === 'medium' ? 'text-xs' : 'text-[10px]'
+                'font-bold text-white tracking-tight truncate',
+                'font-[\'Space_Grotesk\',sans-serif]',
+                size === 'large' ? 'text-base' : size === 'medium' ? 'text-sm' : 'text-[11px]'
               )}>
                 {ticker}
               </span>
               {(size === 'large' || size === 'medium') && name && (
-                <span className="text-[9px] text-white/35 truncate max-w-[70px]">
+                <span className="text-[10px] text-white/40 truncate max-w-[80px] font-medium">
                   {name}
                 </span>
               )}
             </div>
           </div>
 
-          {/* Pre-TGE badge */}
+          {/* Pre-TGE badge - refined */}
           {isPreTge && (size === 'large' || size === 'medium') && (
-            <span className="px-1 py-0.5 text-[8px] font-medium bg-cyan-500/15 text-cyan-400 rounded border border-cyan-500/25 flex-shrink-0">
+            <span className={cn(
+              'px-1.5 py-0.5 text-[9px] font-semibold rounded-md flex-shrink-0',
+              'bg-gradient-to-r from-cyan-500/20 to-teal-500/20',
+              'text-cyan-300 border border-cyan-400/30',
+              'shadow-[0_0_12px_rgba(34,211,238,0.15)]'
+            )}>
               PRE
             </span>
           )}
@@ -220,18 +246,36 @@ const MindshareCell = ({
 
         {/* Bottom section */}
         <div className="flex items-end justify-between">
-          {/* Mindshare percentage */}
-          <span className={cn(
-            'font-bold tracking-tight',
-            size === 'large' ? 'text-xl' : size === 'medium' ? 'text-base' : size === 'small' ? 'text-sm' : 'text-[10px]',
-            colors.text
-          )}>
-            {mindshare.toFixed(2)}%
-          </span>
+          {/* Mindshare percentage - enhanced */}
+          <div className="flex items-baseline gap-1">
+            <span className={cn(
+              'font-bold tracking-tight text-white',
+              'font-[\'Space_Grotesk\',sans-serif]',
+              size === 'large' ? 'text-2xl' : size === 'medium' ? 'text-lg' : size === 'small' ? 'text-sm' : 'text-[11px]'
+            )}>
+              {mindshare.toFixed(2)}
+            </span>
+            <span className={cn(
+              'font-medium text-white/50',
+              size === 'large' ? 'text-sm' : size === 'medium' ? 'text-xs' : 'text-[9px]'
+            )}>
+              %
+            </span>
+          </div>
 
-          {/* Trend icon */}
+          {/* Trend icon with background */}
           {(size === 'large' || size === 'medium') && (
-            <TrendIcon className={cn('w-3.5 h-3.5 flex-shrink-0', colors.icon)} />
+            <div className={cn(
+              'p-1 rounded-md transition-colors duration-200',
+              colors.percentBg,
+              'group-hover:bg-opacity-20'
+            )}>
+              <TrendIcon className={cn(
+                'transition-transform duration-300 group-hover:scale-110',
+                size === 'large' ? 'w-4 h-4' : 'w-3.5 h-3.5',
+                colors.accentText
+              )} />
+            </div>
           )}
         </div>
       </div>
