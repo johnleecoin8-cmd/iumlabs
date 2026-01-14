@@ -320,7 +320,7 @@ const MobileServicesPage = () => {
       {/* Hero Section - Projects Page Style */}
       <main className="p-0.5 bg-background">
         <div className="rounded-xl overflow-hidden">
-          <div className="relative min-h-[60vh] flex flex-col justify-between overflow-hidden rounded-2xl">
+          <div className="relative min-h-[65vh] flex flex-col justify-between overflow-hidden rounded-2xl">
             {/* Background Layer - Video */}
             <div className="absolute inset-0 overflow-hidden">
               <video
