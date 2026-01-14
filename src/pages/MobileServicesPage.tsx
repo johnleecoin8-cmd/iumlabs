@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Rocket, 
   Palette, 
@@ -105,6 +105,8 @@ const ServiceCard = ({
   const Icon = service.icon;
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
+  const navigate = useNavigate();
   
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -113,16 +115,49 @@ const ServiceCard = ({
   
   const handleMouseLeave = () => {
     setIsHovered(false);
+    setIsPressed(false);
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
   };
   
+  const triggerHaptic = () => {
+    if ('vibrate' in navigator) {
+      navigator.vibrate(10);
+    }
+  };
+  
+  const handleTouchStart = () => {
+    setIsPressed(true);
+    setIsHovered(true);
+    triggerHaptic();
+    videoRef.current?.play();
+  };
+  
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    setIsPressed(false);
+    
+    // Smooth transition with delay
+    setTimeout(() => {
+      navigate(service.link);
+    }, 150);
+  };
+  
+  const handleClick = (e: React.MouseEvent) => {
+    // Allow normal navigation on desktop
+    if (!('ontouchstart' in window)) {
+      return;
+    }
+    e.preventDefault();
+  };
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
       transition={{ 
         duration: 0.4, 
         delay: index * 0.05,
@@ -132,16 +167,18 @@ const ServiceCard = ({
     >
       <Link
         to={service.link}
+        onClick={handleClick}
         className={cn(
           "group relative flex flex-col overflow-hidden",
           isFullWidth ? "aspect-[16/9]" : "aspect-[4/5]",
-          "active:scale-[0.98] transition-transform duration-200",
-          "border-r border-b border-white/10"
+          "transition-all duration-200",
+          "border-r border-b border-white/10",
+          isPressed && "scale-[0.97] brightness-110"
         )}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onTouchStart={handleMouseEnter}
-        onTouchEnd={handleMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
       >
         {/* Video background */}
         <video
