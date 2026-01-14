@@ -26,8 +26,8 @@ const calculateReadTime = (content: string | null): string => {
 };
 const Research = () => {
   usePageMeta({
-    title: "Crypto Market Research Korea",
-    description: "Data-driven crypto and Web3 research for the Korean market. Ecosystem analysis, market insights, and strategic intelligence for blockchain projects.",
+    title: "Web3 & Crypto Market Research | Korea",
+    description: "Data-driven crypto and Web3 research for the Korean market. Ecosystem analysis, market insights, and strategic intelligence for blockchain projects entering Korea.",
     path: "/research",
     image: "/og-image.png"
   });

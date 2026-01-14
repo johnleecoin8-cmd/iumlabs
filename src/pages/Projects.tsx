@@ -590,7 +590,7 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
 
 const Projects = () => {
   usePageMeta({
-    title: "Crypto Marketing Case Studies",
+    title: "Web3 & Crypto Marketing Case Studies | Korea",
     description: "View our portfolio of successful Korean crypto and Web3 marketing campaigns. 18+ global blockchain projects launched in Korea including Polygon, Ondo, and Story Protocol.",
     path: "/projects",
     image: "/og-image.png"

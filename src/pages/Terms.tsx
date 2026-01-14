@@ -3,11 +3,11 @@ import Footer from "@/components/Footer";
 import { usePageMeta } from "@/hooks/usePageMeta";
 
 const Terms = () => {
-  usePageMeta(
-    "Terms of Service",
-    "Terms of Service for Ium Labs Web3 marketing and consulting services. By using our services, you agree to these terms.",
-    "/terms"
-  );
+  usePageMeta({
+    title: "Terms of Service",
+    description: "Terms of Service for Ium Labs Web3 and crypto marketing services in Korea. By using our services, you agree to these terms.",
+    path: "/terms"
+  });
 
   const sections = [
     { title: "1. Agreement to Terms", content: "By accessing and using ium Labs' services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services." },

@@ -6,8 +6,16 @@ import TokenStatusToggle, { type TokenStatus } from '@/components/mindshare/Toke
 import { History, Users, ExternalLink, Radio } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
+import { usePageMeta } from '@/hooks/usePageMeta';
 
 const KInfluenceGrid = () => {
+  usePageMeta({
+    title: "K-Leaderboard | Korean Crypto Mindshare Rankings",
+    description: "Real-time Web3 mindshare rankings from Korean crypto communities. Track trending projects across X, Telegram, Naver, and KakaoTalk. Powered by Ium Labs.",
+    path: "/k-leaderboard",
+    image: "/og-image.png"
+  });
+  
   const [tokenStatus, setTokenStatus] = useState<TokenStatus>('all');
   const { projects, isLoading, lastUpdate } = useHypeProjects();
 

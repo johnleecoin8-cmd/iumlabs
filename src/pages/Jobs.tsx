@@ -157,8 +157,8 @@ const JobsHeroVideo = () => {
 
 const Jobs = () => {
   usePageMeta({
-    title: "Careers | Join Our Web3 Team",
-    description: "Join Ium Labs and shape the future of Web3 in Korea. We're looking for passionate Researchers and Growth Managers.",
+    title: "Careers | Join Korea's Leading Web3 & Crypto Team",
+    description: "Join Ium Labs and shape the future of Web3 and crypto in Korea. We're looking for passionate Researchers and Growth Managers to work with global blockchain projects.",
     path: "/jobs",
     image: "/og-image.png"
   });
