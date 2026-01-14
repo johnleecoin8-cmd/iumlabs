@@ -9,7 +9,6 @@ interface LeaderCard {
   title: string;
   role: string;
   background: string;
-  quote: string;
   description: string;
   descriptionKo: string;
   photo: string;
@@ -23,7 +22,6 @@ const LeadershipSection = () => {
       title: "James",
       role: "CEO",
       background: "Ex-KuCoin & Outlier Ventures",
-      quote: "Standardizing Global Excellence.",
       description: "Defines the brand hierarchy and market entry strategy that aligns with Tier-1 global standards.",
       descriptionKo: "글로벌 탑티어 수준의 브랜드 위계와 시장 진입 전략(GTM)을 총괄 설계하여, 프로젝트의 체급을 높입니다.",
       photo: jamesNft,
@@ -34,7 +32,6 @@ const LeadershipSection = () => {
       title: "David",
       role: "Head of Strategy",
       background: "Ex-Binance Fiat Leads",
-      quote: "Crafting the Macro-Narrative.",
       description: "Structuring compelling brand stories and adoption funnels that resonate from retail users to institutional partners.",
       descriptionKo: "Binance 출신의 시각으로, 리테일 유입부터 기관 설득까지 이어지는 거시적인 브랜드 내러티브를 설계합니다.",
       photo: davidNft,
@@ -45,7 +42,6 @@ const LeadershipSection = () => {
       title: "Julian",
       role: "Head of Community",
       background: "Ex-a16z Head of Operation",
-      quote: "Silicon Valley Standard Culture.",
       description: "Translating complex Web3 tech into sustainable cultural movements and fandom-driven events, powered by a16z-level operational rigor.",
       descriptionKo: "실리콘밸리(a16z) 수준의 오퍼레이션 시스템을 도입하여, 단순 커뮤니티 관리를 넘어선 '문화'와 '팬덤'을 구축합니다.",
       photo: julianNft,
@@ -107,10 +103,10 @@ const LeadershipSection = () => {
                   href={`https://t.me/${leader.telegram}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute top-5 right-5 md:top-6 md:right-6 z-20 flex items-center gap-2 px-3 py-1.5 bg-[#0088cc]/20 hover:bg-[#0088cc]/40 border border-[#0088cc]/30 hover:border-[#0088cc]/60 rounded-full transition-all duration-300 group/tg"
+                  className="absolute top-5 right-5 md:top-6 md:right-6 z-20 flex items-center justify-center w-9 h-9 bg-[#0088cc]/20 hover:bg-[#0088cc]/40 border border-[#0088cc]/30 hover:border-[#0088cc]/60 rounded-full transition-all duration-300"
+                  title={`@${leader.telegram}`}
                 >
-                  <Send className="w-3.5 h-3.5 text-[#0088cc]" />
-                  <span className="text-[#0088cc] text-xs font-medium">@{leader.telegram}</span>
+                  <Send className="w-4 h-4 text-[#0088cc]" />
                 </a>
 
                 {/* Content */}
@@ -142,14 +138,6 @@ const LeadershipSection = () => {
                       {leader.background}
                     </span>
                   </div>
-
-                  {/* Quote */}
-                  <blockquote className="relative mb-4">
-                    <div className="absolute -left-2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary/60 to-transparent" />
-                    <p className="text-base md:text-lg text-white italic leading-relaxed pl-4">
-                      "{leader.quote}"
-                    </p>
-                  </blockquote>
 
                   {/* Description */}
                   <div className="space-y-2 mt-auto">
