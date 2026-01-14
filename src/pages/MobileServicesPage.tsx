@@ -305,7 +305,7 @@ const MobileServicesPage = () => {
             <ServiceCard 
               key={service.link} 
               service={service} 
-              index={index + 1} 
+              index={index + 2} 
             />
           ))}
         </div>
