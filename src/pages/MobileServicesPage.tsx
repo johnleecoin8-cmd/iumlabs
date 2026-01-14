@@ -10,13 +10,15 @@ import {
   Star, 
   MessageCircle, 
   Newspaper,
-  ArrowUpRight
+  ArrowUpRight,
+  ChevronDown
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState, useRef } from "react";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
+import { brand } from "@/config/content";
 
 const services = [
   {
@@ -246,49 +248,108 @@ const ServiceCard = ({
 const MobileServicesPage = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section - minimal ium labs style */}
-      <div className="border-b border-white/10 bg-background">
-        <div className="px-5 pt-16 pb-10">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Minimal badge */}
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-8 h-px bg-white/20" />
-              <span className="text-[10px] font-mono text-white/40 tracking-[0.2em]">
-                SERVICES
-              </span>
+      {/* Hero Section - Projects Page Style */}
+      <main className="p-0.5 bg-background">
+        <div className="rounded-xl overflow-hidden">
+          <div className="relative min-h-[85vh] flex flex-col justify-between overflow-hidden rounded-2xl">
+            {/* Background Layer - Video */}
+            <div className="absolute inset-0 overflow-hidden">
+              <video
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ filter: "brightness(0.35)" }}
+              >
+                <source src="/videos/services-background.mp4" type="video/mp4" />
+              </video>
+              
+              {/* Dark overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
             </div>
-            
-            {/* Title - large typography */}
-            <h1 className="text-3xl font-light text-white leading-[1.1] tracking-tight mb-6">
-              Korea Market
-              <br />
-              <span className="text-white/40">Solutions</span>
-            </h1>
-            
-            {/* Subtitle */}
-            <p className="text-xs text-white/30 leading-relaxed max-w-[240px] font-light">
-              Full-stack Web3 marketing for the Korean ecosystem
-            </p>
-            
-            {/* Stats row */}
-            <div className="flex items-center gap-6 mt-8 pt-6 border-t border-white/5">
-              <div>
-                <span className="text-lg font-light text-white">09</span>
-                <span className="text-[10px] text-white/30 ml-1">services</span>
-              </div>
-              <div className="w-px h-4 bg-white/10" />
-              <div>
-                <span className="text-lg font-light text-white">50+</span>
-                <span className="text-[10px] text-white/30 ml-1">projects</span>
+
+            {/* Main Content - Centered */}
+            <div className="flex-1 flex items-center justify-center relative z-10 px-5">
+              <div className="max-w-7xl mx-auto text-center">
+                {/* Main Headline */}
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6 }}
+                  className="font-sans text-3xl sm:text-4xl font-medium mb-4 mt-8"
+                >
+                  <span className="text-white">Korea Market</span>
+                  <br />
+                  <span className="text-white/60">Solutions</span>
+                </motion.h1>
+
+                {/* Subtext */}
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  className="text-sm text-white/50 max-w-md mx-auto mb-6 font-light leading-relaxed"
+                >
+                  <span className="text-white font-medium">9 specialized services</span> for Web3 projects entering the Korean ecosystem
+                </motion.p>
+
+                {/* CTA Button */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="flex flex-col items-center gap-2"
+                >
+                  <a
+                    href={brand.calendlyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 px-6 py-3 font-medium text-sm rounded-full bg-white text-black hover:bg-white/90 active:scale-[0.98] transition-all"
+                  >
+                    <Calendar className="w-4 h-4" />
+                    <span>Book Consultation</span>
+                  </a>
+                  <p className="text-[10px] text-white/40">
+                    Free consultation • 30 min call
+                  </p>
+                </motion.div>
               </div>
             </div>
-          </motion.div>
+
+            {/* Stats Section */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="relative z-10 py-4"
+            >
+              <div className="px-5">
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <div className="text-lg font-medium text-white">09</div>
+                    <div className="text-[10px] text-white/40">Services</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-medium text-white">50+</div>
+                    <div className="text-[10px] text-white/40">Projects</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-lg font-medium text-white">70+</div>
+                    <div className="text-[10px] text-white/40">KOLs</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Scroll Indicator */}
+            <div className="absolute bottom-6 right-4 z-10 flex items-center gap-2">
+              <span className="text-white/30 text-xs font-medium">scroll</span>
+              <ChevronDown className="w-3 h-3 text-white/30 animate-bounce" />
+            </div>
+          </div>
         </div>
-      </div>
+      </main>
       
       {/* GTM - Full Width (1 Column) */}
       <div className="border-l border-white/10">
