@@ -13,44 +13,53 @@ const brandConfig = {
   office: brand.address
 };
 const footerLinks = {
-  research: {
-    title: "Research",
-    links: [{
-      name: "Proprietary Insights",
-      href: "/research"
-    }, {
-      name: "Market Analytics",
-      href: "/research"
-    }, {
-      name: "Reports",
-      href: "/research"
-    }]
-  },
-  marketing: {
-    title: "Marketing",
+  services: {
+    title: "Services",
     links: [{
       name: "GTM Strategy",
       href: "/services"
     }, {
-      name: "Influencer Marketing",
+      name: "Branding & Website",
+      href: "/services/branding"
+    }, {
+      name: "SEO & Paid Ads",
+      href: "/services/seo-ads"
+    }, {
+      name: "Offline Events",
+      href: "/services/offline-event"
+    }, {
+      name: "Community Management",
+      href: "/services/community"
+    }, {
+      name: "Influencer / KOL",
       href: "/services/influencer"
     }, {
-      name: "Community Growth",
-      href: "/services/community"
+      name: "YAP Network",
+      href: "/services/yap"
+    }, {
+      name: "PR & Media",
+      href: "/services/pr"
     }]
   },
-  about: {
-    title: "About",
+  company: {
+    title: "Company",
     links: [{
-      name: "Our Mission",
-      href: "/#why-choose-us"
+      name: "Projects",
+      href: "/projects"
+    }, {
+      name: "Research",
+      href: "/research"
     }, {
       name: "Careers",
       href: "/jobs"
     }, {
       name: "Contact Us",
       href: "/contact"
-    }, {
+    }]
+  },
+  legal: {
+    title: "Legal",
+    links: [{
       name: "Privacy Policy",
       href: "/privacy"
     }, {
@@ -78,64 +87,19 @@ const FooterLinksSection = () => {
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
 
-  const renderAboutLink = (link: { name: string; href: string }) => {
-    if (link.name === "Contact Us") {
-      return (
-        <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
-          {link.name}
-        </Link>
-      );
-    }
-    if (link.name === "Terms of Service") {
-      return (
-        <button 
-          onClick={() => setTermsOpen(true)} 
-          className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block text-left"
-        >
-          {link.name}
-        </button>
-      );
-    }
-    if (link.name === "Privacy Policy") {
-      return (
-        <button 
-          onClick={() => setPrivacyOpen(true)} 
-          className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block text-left"
-        >
-          {link.name}
-        </button>
-      );
-    }
-    if (link.name === "Our Mission") {
-      return (
-        <button 
-          onClick={() => setMissionOpen(true)} 
-          className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block text-left"
-        >
-          {link.name}
-        </button>
-      );
-    }
-    return (
-      <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
-        {link.name}
-      </Link>
-    );
-  };
-
   return (
     <>
       <section className="bg-background text-foreground border-t border-border w-full">
         <div className="w-full px-6 lg:px-10 py-6 md:py-8">
           {/* Navigation Links Grid - SEO Sitemap Footer */}
           <nav className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 py-8 md:py-10 border-b border-border" aria-label="Footer navigation">
-            {/* Research Column */}
+            {/* Services Column */}
             <div>
               <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-6 font-mono">
-                {footerLinks.research.title}
+                {footerLinks.services.title}
               </h4>
               <ul className="space-y-3">
-                {footerLinks.research.links.map(link => <li key={link.name}>
+                {footerLinks.services.links.map(link => <li key={link.name}>
                     <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
                       {link.name}
                     </Link>
@@ -143,13 +107,13 @@ const FooterLinksSection = () => {
               </ul>
             </div>
 
-            {/* Marketing Column */}
+            {/* Company Column */}
             <div>
               <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-6 font-mono">
-                {footerLinks.marketing.title}
+                {footerLinks.company.title}
               </h4>
               <ul className="space-y-3">
-                {footerLinks.marketing.links.map(link => <li key={link.name}>
+                {footerLinks.company.links.map(link => <li key={link.name}>
                     <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
                       {link.name}
                     </Link>
@@ -157,15 +121,33 @@ const FooterLinksSection = () => {
               </ul>
             </div>
 
-            {/* About Column */}
+            {/* Legal Column */}
             <div>
               <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-6 font-mono">
-                {footerLinks.about.title}
+                {footerLinks.legal.title}
               </h4>
               <ul className="space-y-3">
-                {footerLinks.about.links.map(link => (
+                {footerLinks.legal.links.map(link => (
                   <li key={link.name}>
-                    {renderAboutLink(link)}
+                    {link.name === "Terms of Service" ? (
+                      <button 
+                        onClick={() => setTermsOpen(true)} 
+                        className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block text-left"
+                      >
+                        {link.name}
+                      </button>
+                    ) : link.name === "Privacy Policy" ? (
+                      <button 
+                        onClick={() => setPrivacyOpen(true)} 
+                        className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block text-left"
+                      >
+                        {link.name}
+                      </button>
+                    ) : (
+                      <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
+                        {link.name}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
