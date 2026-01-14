@@ -10,8 +10,7 @@ import {
   Star, 
   MessageCircle, 
   Newspaper,
-  ArrowRight,
-  Play
+  ArrowUpRight
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState, useRef } from "react";
@@ -23,8 +22,6 @@ const services = [
     icon: Rocket,
     link: "/services",
     video: "/videos/gtm-hero.mp4",
-    accentColor: "139, 92, 246", // violet
-    gradient: "from-violet-500/90 to-purple-600/90",
     stats: "50+ Projects"
   },
   {
@@ -33,8 +30,6 @@ const services = [
     icon: Palette,
     link: "/services/branding",
     video: "/videos/branding-hero.mp4",
-    accentColor: "139, 92, 246", // purple
-    gradient: "from-purple-500/90 to-pink-600/90",
     stats: "15+ Brands"
   },
   {
@@ -43,8 +38,6 @@ const services = [
     icon: Search,
     link: "/services/seo-ads",
     video: "/videos/seo-hero.mp4",
-    accentColor: "245, 158, 11", // amber
-    gradient: "from-amber-500/90 to-orange-600/90",
     stats: "1M+ Reach"
   },
   {
@@ -53,8 +46,6 @@ const services = [
     icon: Calendar,
     link: "/services/offline-event",
     video: "/videos/offline-event-hero.mp4",
-    accentColor: "16, 185, 129", // emerald
-    gradient: "from-emerald-500/90 to-teal-600/90",
     stats: "30+ Events"
   },
   {
@@ -63,8 +54,6 @@ const services = [
     icon: Users,
     link: "/services/community",
     video: "/videos/community-hero.mp4",
-    accentColor: "59, 130, 246", // blue
-    gradient: "from-blue-500/90 to-indigo-600/90",
     stats: "500K+ Members"
   },
   {
@@ -73,8 +62,6 @@ const services = [
     icon: FileSearch,
     link: "/services/deep-research",
     video: "/videos/deep-research-hero.mp4",
-    accentColor: "6, 182, 212", // cyan
-    gradient: "from-cyan-500/90 to-sky-600/90",
     stats: "100+ Reports"
   },
   {
@@ -83,8 +70,6 @@ const services = [
     icon: Star,
     link: "/services/influencer",
     video: "/videos/influencer-hero.mp4",
-    accentColor: "245, 158, 11", // amber
-    gradient: "from-yellow-500/90 to-amber-600/90",
     stats: "70+ KOLs"
   },
   {
@@ -93,8 +78,6 @@ const services = [
     icon: MessageCircle,
     link: "/services/yap",
     video: "/videos/yap-hero.mp4",
-    accentColor: "217, 70, 239", // fuchsia
-    gradient: "from-fuchsia-500/90 to-purple-600/90",
     stats: "50+ Yappers"
   },
   {
@@ -103,8 +86,6 @@ const services = [
     icon: Newspaper,
     link: "/services/pr",
     video: "/videos/pr-hero.mp4",
-    accentColor: "100, 116, 139", // slate
-    gradient: "from-slate-500/90 to-zinc-600/90",
     stats: "200+ Articles"
   }
 ];
@@ -142,12 +123,14 @@ const ServiceCard = ({
         delay: index * 0.05,
         ease: "easeOut"
       }}
+      className="relative"
     >
       <Link
         to={service.link}
         className={cn(
-          "group relative flex flex-col overflow-hidden rounded-2xl",
-          "aspect-[4/5] active:scale-[0.97] transition-transform duration-200"
+          "group relative flex flex-col overflow-hidden",
+          "aspect-[4/5] active:scale-[0.98] transition-transform duration-200",
+          "border-r border-b border-white/10"
         )}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -166,70 +149,51 @@ const ServiceCard = ({
           <source src={service.video} type="video/mp4" />
         </video>
         
-        {/* Gradient overlays */}
+        {/* Dark overlays - ium labs style */}
         <div className={cn(
-          "absolute inset-0 bg-gradient-to-t",
-          service.gradient
+          "absolute inset-0 bg-black/50 transition-colors duration-500",
+          isHovered && "bg-black/30"
         )} />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
         
-        {/* Accent glow on hover */}
-        <div 
-          className={cn(
-            "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300",
-            "bg-gradient-to-t from-transparent via-transparent to-transparent"
-          )}
-          style={{
-            boxShadow: isHovered ? `inset 0 0 60px rgba(${service.accentColor}, 0.3)` : 'none'
-          }}
-        />
-        
-        {/* Play indicator */}
-        <div className={cn(
-          "absolute top-3 right-3 w-7 h-7 rounded-full",
-          "bg-white/20 backdrop-blur-sm border border-white/30",
-          "flex items-center justify-center",
-          "opacity-60 group-hover:opacity-100 transition-opacity"
-        )}>
-          <Play className="w-3 h-3 text-white fill-white ml-0.5" />
+        {/* Number indicator */}
+        <div className="absolute top-3 left-3">
+          <span className="text-[10px] text-white/40 font-mono tracking-widest">
+            {String(index + 1).padStart(2, '0')}
+          </span>
         </div>
         
         {/* Content */}
         <div className="relative z-10 mt-auto p-4">
-          {/* Icon badge */}
-          <div 
+          {/* Icon - minimalist style */}
+          <Icon 
             className={cn(
-              "w-9 h-9 rounded-xl flex items-center justify-center mb-3",
-              "backdrop-blur-md border border-white/20"
-            )}
-            style={{ 
-              backgroundColor: `rgba(${service.accentColor}, 0.3)`,
-            }}
-          >
-            <Icon className="w-4 h-4 text-white" strokeWidth={2.5} />
-          </div>
+              "w-6 h-6 text-white/70 mb-3 transition-colors duration-300",
+              isHovered && "text-white"
+            )} 
+            strokeWidth={1.5} 
+          />
           
           {/* Title & description */}
-          <h3 className="font-bold text-white text-base leading-tight mb-0.5">
+          <h3 className="font-medium text-white text-sm leading-tight mb-1">
             {service.title}
           </h3>
-          <p className="text-xs text-white/70 leading-relaxed mb-2">
+          <p className="text-[11px] text-white/50 leading-relaxed">
             {service.description}
           </p>
           
-          {/* Stats pill */}
-          <div className="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/10">
-            <span className="text-[10px] font-medium text-white/90">{service.stats}</span>
-          </div>
+          {/* Stats - simple text */}
+          <span className="text-[10px] text-white/40 font-mono mt-2 block">
+            {service.stats}
+          </span>
         </div>
         
-        {/* Bottom arrow */}
-        <div className="absolute bottom-4 right-4">
-          <ArrowRight className={cn(
-            "w-4 h-4 text-white/50",
-            "group-hover:text-white group-hover:translate-x-0.5",
-            "transition-all duration-200"
-          )} />
+        {/* Arrow indicator */}
+        <div className={cn(
+          "absolute bottom-4 right-4 opacity-0 transition-all duration-300",
+          isHovered && "opacity-100"
+        )}>
+          <ArrowUpRight className="w-4 h-4 text-white/60" strokeWidth={1.5} />
         </div>
       </Link>
     </motion.div>
@@ -239,8 +203,8 @@ const ServiceCard = ({
 const MobileServicesPage = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <div className="relative overflow-hidden">
+      {/* Hero Section - minimal ium labs style */}
+      <div className="relative overflow-hidden border-b border-white/10">
         {/* Background video */}
         <video
           autoPlay
@@ -252,9 +216,9 @@ const MobileServicesPage = () => {
           <source src="/videos/services-background.mp4" type="video/mp4" />
         </video>
         
-        {/* Gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-violet-500/10" />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
         
         {/* Hero content */}
         <div className="relative z-10 px-5 pt-12 pb-8">
@@ -263,29 +227,28 @@ const MobileServicesPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-xs font-medium text-primary mb-4">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              9 Services
+            <span className="inline-flex items-center gap-2 px-3 py-1 text-[10px] font-mono text-white/50 tracking-widest border border-white/20 rounded-full mb-4">
+              SERVICES
+              <span className="w-1 h-1 rounded-full bg-white/40" />
+              09
             </span>
             
-            <h1 className="text-3xl font-bold text-foreground leading-tight mb-2">
+            <h1 className="text-2xl font-medium text-white leading-tight mb-2">
               Korea Market
               <br />
-              <span className="bg-gradient-to-r from-primary via-violet-400 to-purple-400 bg-clip-text text-transparent">
-                Solutions
-              </span>
+              Solutions
             </h1>
             
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px]">
+            <p className="text-xs text-white/50 leading-relaxed max-w-[260px]">
               Full-stack Web3 marketing services tailored for the Korean ecosystem
             </p>
           </motion.div>
         </div>
       </div>
       
-      {/* Services Grid */}
-      <div className="px-4 pb-4 -mt-2">
-        <div className="grid grid-cols-2 gap-3">
+      {/* Services Grid - no gap, border separated */}
+      <div className="border-l border-white/10">
+        <div className="grid grid-cols-2">
           {services.map((service, index) => (
             <ServiceCard 
               key={service.link} 
