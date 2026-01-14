@@ -14,6 +14,9 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useState, useRef } from "react";
+import ContactFormSection from "@/components/ContactFormSection";
+import FooterLinksSection from "@/components/FooterLinksSection";
+import Footer from "@/components/Footer";
 
 const services = [
   {
@@ -92,10 +95,12 @@ const services = [
 
 const ServiceCard = ({ 
   service, 
-  index 
+  index,
+  isFullWidth = false
 }: { 
   service: typeof services[0]; 
   index: number;
+  isFullWidth?: boolean;
 }) => {
   const Icon = service.icon;
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -129,7 +134,8 @@ const ServiceCard = ({
         to={service.link}
         className={cn(
           "group relative flex flex-col overflow-hidden",
-          "aspect-[4/5] active:scale-[0.98] transition-transform duration-200",
+          isFullWidth ? "aspect-[16/9]" : "aspect-[4/5]",
+          "active:scale-[0.98] transition-transform duration-200",
           "border-r border-b border-white/10"
         )}
         onMouseEnter={handleMouseEnter}
@@ -246,21 +252,32 @@ const MobileServicesPage = () => {
         </div>
       </div>
       
-      {/* Services Grid - no gap, border separated */}
+      {/* GTM - Full Width (1 Column) */}
+      <div className="border-l border-white/10">
+        <ServiceCard 
+          service={services[0]} 
+          index={0} 
+          isFullWidth={true}
+        />
+      </div>
+      
+      {/* Remaining Services - 2 Column Grid */}
       <div className="border-l border-white/10">
         <div className="grid grid-cols-2">
-          {services.map((service, index) => (
+          {services.slice(1).map((service, index) => (
             <ServiceCard 
               key={service.link} 
               service={service} 
-              index={index} 
+              index={index + 1} 
             />
           ))}
         </div>
-        
-        {/* Bottom spacing for mobile nav */}
-        <div className="h-8" />
       </div>
+      
+      {/* Footer - Same as other pages */}
+      <ContactFormSection />
+      <FooterLinksSection />
+      <Footer />
     </div>
   );
 };
