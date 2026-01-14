@@ -12,6 +12,7 @@ interface HypeProject {
   score: number;
   mindshare?: number;
   token_status?: 'tge' | 'pre-tge';
+  category?: 'tge' | 'pre_tge'; // From Python crawler (uses underscore)
   trend?: string;
   sparkline?: number[];
   logo_url?: string;
@@ -76,6 +77,16 @@ Deno.serve(async (req) => {
           continue;
         }
 
+        // Map category (from Python) to token_status (DB field)
+        // Python sends: "tge" or "pre_tge" (underscore)
+        // DB expects: "tge" or "pre-tge" (hyphen)
+        let tokenStatus: 'tge' | 'pre-tge' = 'tge';
+        if (project.category === 'pre_tge' || project.token_status === 'pre-tge') {
+          tokenStatus = 'pre-tge';
+        } else if (project.category === 'tge' || project.token_status === 'tge') {
+          tokenStatus = 'tge';
+        }
+
         // Upsert into hype_projects table (ticker as unique key)
         const { error: upsertError } = await supabase
           .from("hype_projects")
@@ -86,7 +97,7 @@ Deno.serve(async (req) => {
               rank: project.rank || 0,
               score: project.score || 0,
               mindshare: project.mindshare || 0,
-              token_status: project.token_status || "tge",
+              token_status: tokenStatus,
               trend: project.trend || "neutral",
               sparkline: project.sparkline || [],
               logo_url: project.logo_url || null,
