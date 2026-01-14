@@ -10,40 +10,50 @@ interface TokenStatusToggleProps {
 
 const TokenStatusToggle = ({ selected, onChange, className }: TokenStatusToggleProps) => {
   return (
-    <div className={cn('flex items-center gap-1 p-1 bg-white/5 rounded-lg', className)}>
+    <div className={cn('flex items-center gap-0.5', className)}>
       <button
         onClick={() => onChange('all')}
         className={cn(
-          'px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200',
+          'px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 flex items-center gap-1.5',
           selected === 'all'
-            ? 'bg-white/10 text-white shadow-sm'
-            : 'text-white/50 hover:text-white hover:bg-white/5'
+            ? 'bg-teal-500/20 text-teal-400 border border-teal-500/30'
+            : 'text-white/40 hover:text-white/70 hover:bg-white/5 border border-transparent'
         )}
       >
+        <span className={cn(
+          'w-1.5 h-1.5 rounded-full transition-colors',
+          selected === 'all' ? 'bg-teal-400' : 'bg-white/30'
+        )} />
         All
       </button>
       <button
         onClick={() => onChange('tge')}
         className={cn(
-          'px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 flex items-center gap-1.5',
+          'px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 flex items-center gap-1.5',
           selected === 'tge'
-            ? 'bg-emerald-500/20 text-emerald-400 shadow-sm border border-emerald-500/30'
-            : 'text-white/50 hover:text-white hover:bg-white/5'
+            ? 'bg-teal-500/20 text-teal-400 border border-teal-500/30'
+            : 'text-white/40 hover:text-white/70 hover:bg-white/5 border border-transparent'
         )}
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+        <span className={cn(
+          'w-1.5 h-1.5 rounded-full transition-colors',
+          selected === 'tge' ? 'bg-teal-400' : 'bg-white/30'
+        )} />
         TGE
       </button>
       <button
         onClick={() => onChange('pre-tge')}
         className={cn(
-          'px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200 flex items-center gap-1.5',
+          'px-3 py-1.5 text-xs font-medium rounded-full transition-all duration-200 flex items-center gap-1.5',
           selected === 'pre-tge'
-            ? 'bg-amber-500/20 text-amber-400 shadow-sm border border-amber-500/30'
-            : 'text-white/50 hover:text-white hover:bg-white/5'
+            ? 'bg-cyan-500/20 text-cyan-400 border border-cyan-500/30'
+            : 'text-white/40 hover:text-white/70 hover:bg-white/5 border border-transparent'
         )}
       >
-        <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+        <span className={cn(
+          'w-1.5 h-1.5 rounded-full transition-colors',
+          selected === 'pre-tge' ? 'bg-cyan-400' : 'bg-white/30'
+        )} />
         Pre-TGE
       </button>
     </div>
