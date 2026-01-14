@@ -81,15 +81,13 @@ const MindshareCell = ({
     <div
       onClick={onClick}
       className={cn(
-        'relative w-full h-full rounded-xl overflow-hidden cursor-pointer',
+        'relative w-full h-full overflow-hidden cursor-pointer',
         'bg-gradient-to-br backdrop-blur-sm',
-        'border transition-all duration-300 ease-out',
-        'hover:scale-[1.02] hover:-translate-y-0.5',
-        colors.bg,
-        colors.border,
-        colors.glow
+        'border-[0.5px] border-white/10 transition-colors duration-200 ease-out',
+        'hover:border-white/20 hover:bg-white/[0.02]',
+        colors.bg
       )}
-      style={{ background: 'linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(5,5,5,0.95) 100%)' }}
+      style={{ background: 'linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(5,5,5,0.98) 100%)' }}
     >
       {/* Sparkline Background */}
       {sparkline.length >= 2 && (size === 'large' || size === 'medium') && (
