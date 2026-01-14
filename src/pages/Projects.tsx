@@ -699,7 +699,7 @@ const Projects = () => {
                   setTimeout(() => setIsStatsVisible(true), 800);
                 }}
               >
-                <source src="/videos/projects-background.mp4" type="video/mp4" />
+                <source src="/videos/projects-hero.mp4" type="video/mp4" />
               </video>
               
               {/* Dark overlay gradient */}
