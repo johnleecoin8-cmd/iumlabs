@@ -13,7 +13,7 @@ const KInfluenceGrid = () => {
   const [tokenStatus, setTokenStatus] = useState<TokenStatus>('all');
   const { projects, isLoading, lastUpdate } = useHypeProjects();
 
-  // Transform and filter projects for treemap
+  // Transform and filter projects for treemap (top 20 only)
   const treemapProjects: MindshareProject[] = useMemo(() => {
     if (!projects.length) return [];
 
@@ -23,10 +23,15 @@ const KInfluenceGrid = () => {
       return p.token_status === tokenStatus;
     });
 
-    // Calculate total score for mindshare percentage if not provided
-    const totalScore = filtered.reduce((sum, p) => sum + Number(p.score), 0);
+    // Sort by rank and take top 20
+    const top20 = filtered
+      .sort((a, b) => a.rank - b.rank)
+      .slice(0, 20);
 
-    return filtered.map((project) => ({
+    // Calculate total score for mindshare percentage if not provided
+    const totalScore = top20.reduce((sum, p) => sum + Number(p.score), 0);
+
+    return top20.map((project) => ({
       id: project.id,
       ticker: project.ticker,
       name: project.name,
