@@ -75,25 +75,17 @@ const KInfluenceGrid = () => {
             <div className="flex flex-col gap-3 sm:gap-5">
               {/* Title row */}
               <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-2 sm:gap-4">
-                  <div>
-                    <h1 className="text-base sm:text-2xl font-bold text-white tracking-tight">
-                      K-Leaderboard
-                    </h1>
-                    <p className="hidden sm:block mt-0.5 text-sm text-white/40">
-                      Real-time crypto mindshare from Korean communities
-                    </p>
-                  </div>
-                  
-                  {/* Live indicator */}
-                  <div className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
-                    <Radio className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-teal-400 animate-pulse" />
-                    <span className="text-[10px] sm:text-xs font-medium text-teal-400">Live</span>
-                  </div>
+                <div>
+                  <h1 className="text-base sm:text-2xl font-bold text-white tracking-tight">
+                    K-Leaderboard
+                  </h1>
+                  <p className="hidden sm:block mt-0.5 text-sm text-white/40">
+                    Real-time crypto mindshare from Korean communities
+                  </p>
                 </div>
 
-                {/* Action buttons - Hidden on mobile, show icons only */}
-                <div className="flex items-center gap-1.5 sm:gap-2">
+                {/* Right side: Action buttons + Live indicator */}
+                <div className="flex items-center gap-1.5 sm:gap-3">
                   <button 
                     className={cn(
                       'p-2 sm:px-4 sm:py-2 text-sm font-medium rounded-lg',
@@ -117,6 +109,12 @@ const KInfluenceGrid = () => {
                     <span className="hidden sm:inline">Creator Leaderboard</span>
                     <ExternalLink className="hidden sm:block w-3 h-3 opacity-60" />
                   </button>
+                  
+                  {/* Live indicator - moved to right end */}
+                  <div className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
+                    <Radio className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-teal-400 animate-pulse" />
+                    <span className="text-[10px] sm:text-xs font-medium text-teal-400">Live</span>
+                  </div>
                 </div>
               </div>
 
