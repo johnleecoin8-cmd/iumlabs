@@ -1,7 +1,8 @@
 import { Link, useLocation } from "react-router-dom";
 import { Home, Briefcase, FolderOpen, BookOpen, Mail } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
 
 const navItems = [
   { icon: Home, label: "Home", path: "/" },
@@ -14,6 +15,26 @@ const navItems = [
 const MobileBottomNav = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Show when scrolling down, hide when scrolling up
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setIsVisible(true);
+      } else if (currentScrollY < lastScrollY) {
+        setIsVisible(false);
+      }
+      
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   // Hide on admin pages
   if (currentPath.startsWith('/ium-admin')) {
@@ -26,7 +47,16 @@ const MobileBottomNav = () => {
   };
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 lg:hidden" style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.nav 
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          exit={{ y: 100 }}
+          transition={{ type: "spring", stiffness: 400, damping: 30 }}
+          className="fixed bottom-0 left-0 right-0 z-50 lg:hidden" 
+          style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+        >
       {/* Glassmorphism background with gradient */}
       <div 
         className="absolute inset-0 bg-gradient-to-t from-background via-background/98 to-background/90 backdrop-blur-2xl border-t border-border/30"
@@ -98,7 +128,9 @@ const MobileBottomNav = () => {
           );
         })}
       </div>
-    </nav>
+        </motion.nav>
+      )}
+    </AnimatePresence>
   );
 };
 
