@@ -1168,17 +1168,6 @@ const MarketIntelligenceSection = () => {
         </div>
 
         {/* Philosophy Quote */}
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8 }}
-          className="text-center p-4 md:p-6 border border-primary/20 bg-primary/5"
-        >
-          <p className="text-sm md:text-base text-foreground italic">
-            "In the West, they invest. In Korea, they trade. We turn this velocity into your project's liquidity."
-          </p>
-          <p className="text-xs text-muted-foreground mt-2">— The ium Philosophy</p>
-        </motion.div>
 
         <motion.blockquote initial={{
         opacity: 0,
