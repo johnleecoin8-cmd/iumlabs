@@ -1,9 +1,8 @@
 import { motion } from "framer-motion";
 import { ChevronRight, Linkedin } from "lucide-react";
-import ceoPhoto from "@/assets/team/ceo-profile.png";
-import teamStrategyPhoto from "@/assets/team/team-strategy.jpeg";
-import teamCommunityPhoto from "@/assets/team/team-community.jpeg";
-import teamResearchPhoto from "@/assets/team/team-growth.jpeg";
+import jamesNft from "@/assets/team/james-nft.png";
+import kyleNft from "@/assets/team/kyle-nft.png";
+import julianNft from "@/assets/team/julian-nft.png";
 
 interface LeaderCard {
   number: string;
@@ -26,7 +25,7 @@ const LeadershipSection = () => {
       quote: "Standardizing Global Excellence.",
       description: "Defines the brand hierarchy and market entry strategy that aligns with Tier-1 global standards.",
       descriptionKo: "글로벌 탑티어 수준의 브랜드 위계와 시장 진입 전략(GTM)을 총괄 설계하여, 프로젝트의 체급을 높입니다.",
-      photo: ceoPhoto
+      photo: jamesNft
     },
     {
       number: "02",
@@ -36,7 +35,7 @@ const LeadershipSection = () => {
       quote: "Crafting the Macro-Narrative.",
       description: "Structuring compelling brand stories and adoption funnels that resonate from retail users to institutional partners.",
       descriptionKo: "Binance 출신의 시각으로, 리테일 유입부터 기관 설득까지 이어지는 거시적인 브랜드 내러티브를 설계합니다.",
-      photo: teamStrategyPhoto
+      photo: kyleNft
     },
     {
       number: "03",
@@ -46,7 +45,7 @@ const LeadershipSection = () => {
       quote: "Silicon Valley Standard Culture.",
       description: "Translating complex Web3 tech into sustainable cultural movements and fandom-driven events, powered by a16z-level operational rigor.",
       descriptionKo: "실리콘밸리(a16z) 수준의 오퍼레이션 시스템을 도입하여, 단순 커뮤니티 관리를 넘어선 '문화'와 '팬덤'을 구축합니다.",
-      photo: teamCommunityPhoto
+      photo: julianNft
     }
   ];
 
@@ -108,9 +107,7 @@ const LeadershipSection = () => {
                       <img 
                         src={leader.photo} 
                         alt={leader.title}
-                        className={`w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500 ${
-                          index === 0 ? 'scale-150 object-[center_30%]' : 'scale-110 object-[center_25%]'
-                        }`}
+                        className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
                       />
                     </div>
                     
