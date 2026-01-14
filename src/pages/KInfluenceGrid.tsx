@@ -49,19 +49,19 @@ const KInfluenceGrid = () => {
     }));
   }, [projects, tokenStatus]);
 
-  // Calculate stats
+  // Calculate stats - based on top 20 only
   const stats = useMemo(() => {
     if (!treemapProjects.length) return { total: 0, tgeCount: 0, preTgeCount: 0 };
     
-    const tgeCount = projects.filter(p => p.token_status === 'tge').length;
-    const preTgeCount = projects.filter(p => p.token_status === 'pre-tge').length;
+    const tgeCount = treemapProjects.filter(p => p.token_status === 'tge').length;
+    const preTgeCount = treemapProjects.filter(p => p.token_status === 'pre-tge').length;
     
     return {
-      total: projects.length,
+      total: treemapProjects.length,
       tgeCount,
       preTgeCount,
     };
-  }, [treemapProjects, projects]);
+  }, [treemapProjects]);
 
   return (
     <div className="min-h-screen bg-[#050505]">
