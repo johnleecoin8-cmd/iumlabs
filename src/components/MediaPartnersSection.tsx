@@ -1,6 +1,5 @@
 // Import media logos
 import coindeskLogo from "@/assets/logos/coindesk.png";
-import blockmediaLogo from "@/assets/logos/blockmedia-new.png";
 import economistLogo from "@/assets/logos/economist.png";
 import cointelegraphLogo from "@/assets/logos/cointelegraph.png";
 import bloomingbitLogo from "@/assets/logos/bloomingbit.png";
@@ -9,7 +8,7 @@ import coinnessLogo from "@/assets/logos/coinness.png";
 const mediaLogos = [
   { name: "Cointelegraph", logo: cointelegraphLogo },
   { name: "CoinDesk", logo: coindeskLogo },
-  { name: "BlockMedia", logo: blockmediaLogo },
+  { name: "Consensys", logo: "https://cdn.prod.website-files.com/5f973c970bea5548ad4287ef/66acfab0bdecc96e8a21dcfe_consensys-logo-white-p-500.png" },
   { name: "TokenPost", logo: "https://miro.medium.com/v2/resize:fill:176:176/1*pCtFs9n-MWMhU133o7trNA.jpeg" },
   { name: "Coinness", logo: coinnessLogo },
   { name: "Bloomingbit", logo: bloomingbitLogo },
