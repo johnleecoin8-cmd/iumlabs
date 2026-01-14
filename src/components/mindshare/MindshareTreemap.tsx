@@ -131,78 +131,75 @@ const MindshareTreemap = ({ projects, className }: MindshareTreemapProps) => {
       initial="hidden"
       animate="visible"
     >
-      {/* Treemap Grid Layout */}
-      <div className="grid grid-cols-12 grid-rows-8 gap-1.5 h-full p-2">
+      {/* Kaito-style Treemap Grid - fills viewport */}
+      <div className="grid grid-cols-12 gap-1 h-full p-1" style={{ gridTemplateRows: 'repeat(6, 1fr)' }}>
         
-        {/* Row 1-3: Large cells (Top 3) */}
-        {grouped.large.slice(0, 1).map((project, i) => (
-          <div key={project.id} className="col-span-4 row-span-3">
-            {renderCell(project, i)}
+        {/* #1 - Largest cell (left side, spans 5 cols x 3 rows) */}
+        {layout[0] && (
+          <div className="col-span-5 row-span-3">
+            {renderCell(layout[0], 0)}
+          </div>
+        )}
+
+        {/* #2 - Second largest (top middle-right, 4 cols x 2 rows) */}
+        {layout[1] && (
+          <div className="col-span-4 row-span-2">
+            {renderCell(layout[1], 1)}
+          </div>
+        )}
+
+        {/* #3 - Third (top right, 3 cols x 2 rows) */}
+        {layout[2] && (
+          <div className="col-span-3 row-span-2">
+            {renderCell(layout[2], 2)}
+          </div>
+        )}
+
+        {/* #4, #5 - Medium cells below #2, #3 */}
+        {layout[3] && (
+          <div className="col-span-4 row-span-1">
+            {renderCell(layout[3], 3)}
+          </div>
+        )}
+        {layout[4] && (
+          <div className="col-span-3 row-span-1">
+            {renderCell(layout[4], 4)}
+          </div>
+        )}
+
+        {/* Row 4: #6-#9 (4 cells spanning full width) */}
+        {layout[5] && (
+          <div className="col-span-3 row-span-2">
+            {renderCell(layout[5], 5)}
+          </div>
+        )}
+        {layout[6] && (
+          <div className="col-span-3 row-span-2">
+            {renderCell(layout[6], 6)}
+          </div>
+        )}
+
+        {/* Right side: #7-#12 in 2x3 grid */}
+        <div className="col-span-6 row-span-2 grid grid-cols-3 grid-rows-2 gap-1">
+          {layout.slice(7, 13).map((project, i) => (
+            <div key={project.id}>
+              {renderCell(project, i + 7)}
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom row: #13-#20 (8 smaller cells) */}
+        {layout.slice(13, 20).map((project, i) => (
+          <div key={project.id} className="col-span-1 row-span-1">
+            {renderCell(project, i + 13)}
           </div>
         ))}
 
-        {grouped.large.slice(1, 2).map((project, i) => (
-          <div key={project.id} className="col-span-3 row-span-3">
-            {renderCell(project, i + 1)}
-          </div>
+        {/* Fill remaining space if less than 20 projects */}
+        {layout.length < 20 && Array.from({ length: Math.max(0, 7 - (layout.length - 13)) }).map((_, i) => (
+          <div key={`empty-${i}`} className="col-span-1 row-span-1 bg-white/[0.02] rounded-lg" />
         ))}
-
-        {/* Medium cells container - top right */}
-        <div className="col-span-5 row-span-3 grid grid-cols-2 grid-rows-2 gap-1.5">
-          {grouped.large.slice(2, 3).concat(grouped.medium.slice(0, 3)).map((project, i) => (
-            <div key={project.id}>
-              {renderCell(project, i + 2)}
-            </div>
-          ))}
-        </div>
-
-        {/* Row 4-5: Medium cells */}
-        <div className="col-span-12 row-span-2 grid grid-cols-6 gap-1.5">
-          {grouped.medium.slice(3, 9).map((project, i) => (
-            <div key={project.id}>
-              {renderCell(project, i + 6)}
-            </div>
-          ))}
-        </div>
-
-        {/* Row 6-8: Small and Tiny cells */}
-        <div className="col-span-12 row-span-3 grid grid-cols-8 gap-1.5">
-          {[...grouped.small, ...grouped.tiny].slice(0, 8).map((project, i) => (
-            <div key={project.id}>
-              {renderCell(project, i + 12)}
-            </div>
-          ))}
-        </div>
       </div>
-
-      {/* Overflow cells (if more than 20) */}
-      {[...grouped.small, ...grouped.tiny].length > 8 && (
-        <div className="grid grid-cols-10 sm:grid-cols-12 gap-1 px-2 pb-2 mt-1">
-          {[...grouped.small, ...grouped.tiny].slice(8).map((project, i) => (
-            <motion.div 
-              key={project.id}
-              variants={itemVariants}
-              className={cn(
-                'aspect-square transition-opacity duration-200',
-                hoveredTicker && hoveredTicker !== project.ticker && 'opacity-40'
-              )}
-              onMouseEnter={() => setHoveredTicker(project.ticker)}
-              onMouseLeave={() => setHoveredTicker(null)}
-            >
-              <MindshareCell
-                ticker={project.ticker}
-                name={project.name}
-                mindshare={project.mindshare}
-                trend={project.trend}
-                tokenStatus={project.token_status}
-                sparkline={project.sparkline}
-                logoUrl={project.logo_url}
-                size={project.size}
-              />
-            </motion.div>
-          ))}
-        </div>
-      )}
     </motion.div>
   );
 };

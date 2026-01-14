@@ -166,8 +166,8 @@ const KInfluenceGrid = () => {
           </div>
         </div>
 
-        {/* Treemap Container */}
-        <div className="min-h-[calc(100vh-180px)]">
+        {/* Treemap Container - fills remaining viewport height */}
+        <div className="h-[calc(100vh-180px)]">
           {isLoading ? (
             <TreemapSkeleton />
           ) : (
