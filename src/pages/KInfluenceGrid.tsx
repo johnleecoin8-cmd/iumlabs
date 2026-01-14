@@ -170,23 +170,9 @@ const KInfluenceGrid = () => {
 
         {/* Footer - Kaito style methodology */}
         <div className="border-t border-white/5">
-          <div className="px-3 sm:px-6 py-3 sm:py-4 space-y-3">
-            {/* Trend Legend - 1h change indicator */}
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-[10px] sm:text-xs text-white/30">
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded bg-gradient-to-br from-teal-500/30 to-teal-500/5 border border-teal-500/25" />
-                <span>1h 상승</span>
-              </div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded bg-gradient-to-br from-rose-500/30 to-rose-500/5 border border-rose-500/25" />
-                <span>1h 하락</span>
-              </div>
-              <span className="text-white/15">|</span>
-              <span>Cell size = Mindshare %</span>
-            </div>
-            
+          <div className="px-3 sm:px-6 py-3 sm:py-4">
             {/* Methodology - Kaito style */}
-            <div className="pt-2 border-t border-white/5">
+            <div>
               <p className="text-[9px] sm:text-[11px] text-white/30 text-center leading-relaxed max-w-3xl mx-auto">
                 K-Mindshare is calculated as the total mindshare from 1,000+ Korean crypto community channels across X, Telegram, Naver, and KakaoTalk. 
                 Community sources are curated from major Korean crypto communities, influencer networks, and trading groups. 
