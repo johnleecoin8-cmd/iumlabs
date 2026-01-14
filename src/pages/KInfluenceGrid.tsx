@@ -170,9 +170,9 @@ const KInfluenceGrid = () => {
           )}
         </div>
 
-        {/* Footer - Compact on mobile */}
+        {/* Footer - Kaito style methodology */}
         <div className="border-t border-white/5">
-          <div className="px-3 sm:px-6 py-2 sm:py-4 space-y-2 sm:space-y-3">
+          <div className="px-3 sm:px-6 py-3 sm:py-4 space-y-3">
             {/* Trend Legend */}
             <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-[10px] sm:text-xs text-white/30">
               <div className="flex items-center gap-1.5 sm:gap-2">
@@ -191,11 +191,17 @@ const KInfluenceGrid = () => {
               <span className="hidden sm:inline">Cell size = Mindshare %</span>
             </div>
             
-            {/* Methodology */}
-            <div className="flex flex-wrap items-center justify-center gap-1 sm:gap-2 pt-2 border-t border-white/5 text-[9px] sm:text-xs text-white/25">
-              <span className="text-center">Mindshare calculated from 1,000+ Korean community channels across X · Telegram · Naver · KakaoTalk</span>
-              <span className="text-white/15">|</span>
-              <span className="text-white/20">Powered by Ium Labs</span>
+            {/* Methodology - Kaito style */}
+            <div className="pt-2 border-t border-white/5">
+              <p className="text-[9px] sm:text-[11px] text-white/30 text-center leading-relaxed max-w-3xl mx-auto">
+                K-Mindshare is calculated as the total mindshare from 1,000+ Korean crypto community channels across X, Telegram, Naver, and KakaoTalk. 
+                Community sources are curated from major Korean crypto communities, influencer networks, and trading groups. 
+                <span className="hidden sm:inline"> If you notice any projects or community channels missing, feel free to contact us.</span>
+                {' '}Data updates every hour.
+              </p>
+              <p className="text-[8px] sm:text-[10px] text-white/20 text-center mt-2">
+                Powered by <span className="text-teal-400/60">Ium Labs</span>
+              </p>
             </div>
           </div>
         </div>
