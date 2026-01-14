@@ -82,25 +82,25 @@ export const hero = {
 export const stats = {
   items: [
     { 
-      value: 200, 
+      value: 19, 
       label: "Projects Launched", 
       suffix: "+",
     },
     { 
-      value: 500, 
-      label: "Funds Raised", 
-      prefix: "$", 
-      suffix: "M+",
-    },
-    { 
-      value: 50, 
-      label: "Exchange Partners", 
+      value: 170, 
+      label: "KOL Network", 
       suffix: "+",
     },
     { 
-      value: 5, 
-      label: "Community Reach", 
-      suffix: "M+",
+      value: 7, 
+      label: "Token Sales", 
+      prefix: "$", 
+      suffix: "M",
+    },
+    { 
+      value: 44, 
+      label: "Events Host", 
+      suffix: "+",
     },
   ],
   partnersLabel: "Trusted Partners",
