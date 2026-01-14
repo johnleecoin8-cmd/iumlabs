@@ -140,15 +140,15 @@ const StatsSection = () => {
       <div className="px-5">
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center">
-            <div className="text-lg font-medium text-white">{count1}</div>
+            <div className="text-2xl font-bold text-white">{count1}</div>
             <div className="text-[10px] text-white/40">Services</div>
           </div>
           <div className="text-center">
-            <div className="text-lg font-medium text-white">+{count2}</div>
+            <div className="text-2xl font-bold text-white">+{count2}</div>
             <div className="text-[10px] text-white/40">Projects</div>
           </div>
           <div className="text-center">
-            <div className="text-lg font-medium text-white">{count3}+</div>
+            <div className="text-2xl font-bold text-white">{count3}+</div>
             <div className="text-[10px] text-white/40">KOLs</div>
           </div>
         </div>
@@ -289,8 +289,13 @@ const ServiceCard = ({
             {service.description}
           </p>
           
-          {/* Stats - simple text */}
-          <span className="text-[10px] text-white/40 font-mono mt-2 block">
+          {/* Stats - with hover highlight effect */}
+          <span className={cn(
+            "text-[10px] font-mono mt-2 block transition-all duration-300",
+            isHovered 
+              ? "text-white text-xs font-semibold" 
+              : "text-white/40"
+          )}>
             {service.stats}
           </span>
         </div>
