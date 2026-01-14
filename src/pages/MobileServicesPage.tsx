@@ -144,18 +144,52 @@ const ServiceCard = ({
 const MobileServicesPage = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <div className="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border/30">
-        <div className="px-4 py-4">
-          <h1 className="text-xl font-bold text-foreground">Services</h1>
-          <p className="text-sm text-muted-foreground mt-0.5">
-            Korea Web3 market solutions
-          </p>
+      {/* Hero Section */}
+      <div className="relative overflow-hidden">
+        {/* Background video */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/videos/services-background.mp4" type="video/mp4" />
+        </video>
+        
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/40 to-background" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-violet-500/10" />
+        
+        {/* Hero content */}
+        <div className="relative z-10 px-5 pt-12 pb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-xs font-medium text-primary mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              9 Services
+            </span>
+            
+            <h1 className="text-3xl font-bold text-foreground leading-tight mb-2">
+              Korea Market
+              <br />
+              <span className="bg-gradient-to-r from-primary via-violet-400 to-purple-400 bg-clip-text text-transparent">
+                Solutions
+              </span>
+            </h1>
+            
+            <p className="text-sm text-muted-foreground leading-relaxed max-w-[280px]">
+              Full-stack Web3 marketing services tailored for the Korean ecosystem
+            </p>
+          </motion.div>
         </div>
       </div>
       
       {/* Services Grid */}
-      <div className="p-4">
+      <div className="px-4 pb-4 -mt-2">
         <div className="grid grid-cols-2 gap-3">
           {services.map((service, index) => (
             <ServiceCard 
