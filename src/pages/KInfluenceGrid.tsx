@@ -7,57 +7,66 @@ import TokenStatusToggle, { type TokenStatus } from '@/components/mindshare/Toke
 import { History, Users, ExternalLink, Radio } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
+
 const KInfluenceGrid = () => {
   const [dateRange, setDateRange] = useState<DateRange>('7D');
   const [tokenStatus, setTokenStatus] = useState<TokenStatus>('all');
-  const {
-    projects,
-    isLoading,
-    lastUpdate
-  } = useHypeProjects();
+  const { projects, isLoading, lastUpdate } = useHypeProjects();
 
-  // Transform and filter projects for treemap
+  // Transform and filter projects for treemap (top 20 only)
   const treemapProjects: MindshareProject[] = useMemo(() => {
     if (!projects.length) return [];
 
     // Filter by token status
-    const filtered = projects.filter(p => {
+    const filtered = projects.filter((p) => {
       if (tokenStatus === 'all') return true;
       return p.token_status === tokenStatus;
     });
 
+    // Sort by rank and take top 20
+    const top20 = filtered
+      .sort((a, b) => a.rank - b.rank)
+      .slice(0, 20);
+
     // Calculate total score for mindshare percentage if not provided
-    const totalScore = filtered.reduce((sum, p) => sum + Number(p.score), 0);
-    return filtered.map(project => ({
+    const totalScore = top20.reduce((sum, p) => sum + Number(p.score), 0);
+
+    return top20.map((project) => ({
       id: project.id,
       ticker: project.ticker,
       name: project.name,
-      mindshare: project.mindshare > 0 ? Number(project.mindshare) : totalScore > 0 ? Number(project.score) / totalScore * 100 : 0,
+      mindshare: project.mindshare > 0 
+        ? Number(project.mindshare) 
+        : totalScore > 0 
+          ? (Number(project.score) / totalScore) * 100 
+          : 0,
       score: Number(project.score),
-      trend: (project.trend === 'up' || project.trend === 'down' || project.trend === 'neutral' ? project.trend : 'neutral') as 'up' | 'down' | 'neutral',
+      trend: (project.trend === 'up' || project.trend === 'down' || project.trend === 'neutral' 
+        ? project.trend 
+        : 'neutral') as 'up' | 'down' | 'neutral',
       sparkline: project.sparkline || [],
       logo_url: project.logo_url,
       rank: project.rank,
-      token_status: project.token_status
+      token_status: project.token_status,
     }));
   }, [projects, tokenStatus]);
 
   // Calculate stats
   const stats = useMemo(() => {
-    if (!treemapProjects.length) return {
-      total: 0,
-      tgeCount: 0,
-      preTgeCount: 0
-    };
+    if (!treemapProjects.length) return { total: 0, tgeCount: 0, preTgeCount: 0 };
+    
     const tgeCount = projects.filter(p => p.token_status === 'tge').length;
     const preTgeCount = projects.filter(p => p.token_status === 'pre-tge').length;
+    
     return {
       total: projects.length,
       tgeCount,
-      preTgeCount
+      preTgeCount,
     };
   }, [treemapProjects, projects]);
-  return <div className="min-h-screen bg-[#050505]">
+
+  return (
+    <div className="min-h-screen bg-[#050505]">
       {/* Subtle gradient overlay */}
       <div className="fixed inset-0 bg-gradient-to-b from-teal-950/5 via-transparent to-transparent pointer-events-none" />
 
@@ -87,11 +96,25 @@ const KInfluenceGrid = () => {
 
                 {/* Action buttons */}
                 <div className="flex items-center gap-2">
-                  <button className={cn('px-4 py-2 text-sm font-medium rounded-lg', 'bg-white/5 text-white/50 border border-white/10', 'hover:bg-white/10 hover:text-white hover:border-white/15', 'transition-all duration-200 flex items-center gap-2')}>
+                  <button 
+                    className={cn(
+                      'px-4 py-2 text-sm font-medium rounded-lg',
+                      'bg-white/5 text-white/50 border border-white/10',
+                      'hover:bg-white/10 hover:text-white hover:border-white/15',
+                      'transition-all duration-200 flex items-center gap-2'
+                    )}
+                  >
                     <History className="w-4 h-4" />
                     Historical
                   </button>
-                  <button className={cn('px-4 py-2 text-sm font-medium rounded-lg', 'bg-teal-500/10 text-teal-400 border border-teal-500/20', 'hover:bg-teal-500/20 hover:border-teal-500/30', 'transition-all duration-200 flex items-center gap-2')}>
+                  <button 
+                    className={cn(
+                      'px-4 py-2 text-sm font-medium rounded-lg',
+                      'bg-teal-500/10 text-teal-400 border border-teal-500/20',
+                      'hover:bg-teal-500/20 hover:border-teal-500/30',
+                      'transition-all duration-200 flex items-center gap-2'
+                    )}
+                  >
                     <Users className="w-4 h-4" />
                     Creator Leaderboard
                     <ExternalLink className="w-3 h-3 opacity-60" />
@@ -130,22 +153,26 @@ const KInfluenceGrid = () => {
                 <PeriodFilter selected={dateRange} onChange={setDateRange} />
                 
                 {/* Last update */}
-                {lastUpdate && <>
-                    
+                {lastUpdate && (
+                  <>
+                    <div className="hidden sm:block h-4 w-px bg-white/10" />
                     <span className="text-xs text-white/30">
-                      Updated {formatDistanceToNow(lastUpdate, {
-                    addSuffix: true
-                  })}
+                      Updated {formatDistanceToNow(lastUpdate, { addSuffix: true })}
                     </span>
-                  </>}
+                  </>
+                )}
               </div>
             </div>
           </div>
         </div>
 
-        {/* Treemap Container */}
-        <div className="min-h-[calc(100vh-180px)]">
-          {isLoading ? <TreemapSkeleton /> : <MindshareTreemap projects={treemapProjects} className="h-full" />}
+        {/* Treemap Container - fills remaining viewport height */}
+        <div className="h-[calc(100vh-180px)]">
+          {isLoading ? (
+            <TreemapSkeleton />
+          ) : (
+            <MindshareTreemap projects={treemapProjects} className="h-full" />
+          )}
         </div>
 
         {/* Footer */}
@@ -170,6 +197,8 @@ const KInfluenceGrid = () => {
           </div>
         </div>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default KInfluenceGrid;
