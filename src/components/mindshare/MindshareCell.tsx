@@ -35,109 +35,167 @@ const MindshareCell = ({
     
     const points = sparkline.map((value, index) => {
       const x = (index / (sparkline.length - 1)) * 100;
-      const y = 100 - ((value - min) / range) * 60; // 60% height for sparkline
+      const y = 100 - ((value - min) / range) * 50;
       return `${x},${y}`;
     }).join(' ');
     
     return `M ${points.split(' ').join(' L ')}`;
   }, [sparkline]);
 
-  const trendColor = trend === 'up' 
-    ? 'from-emerald-500/30 to-emerald-500/5' 
-    : trend === 'down' 
-      ? 'from-red-500/30 to-red-500/5'
-      : 'from-white/10 to-white/5';
+  // Kaito-style colors based on trend
+  const trendColors = {
+    up: {
+      bg: 'from-teal-500/10 via-teal-500/5 to-transparent',
+      border: 'border-teal-500/20 hover:border-teal-500/40',
+      glow: 'hover:shadow-[0_0_40px_rgba(20,184,166,0.12)]',
+      sparkline: 'rgba(20, 184, 166, 0.4)',
+      sparklineFill: 'rgba(20, 184, 166, 0.08)',
+      text: 'text-teal-400',
+      icon: 'text-teal-400',
+    },
+    down: {
+      bg: 'from-rose-500/10 via-rose-500/5 to-transparent',
+      border: 'border-rose-500/20 hover:border-rose-500/40',
+      glow: 'hover:shadow-[0_0_40px_rgba(244,63,94,0.12)]',
+      sparkline: 'rgba(244, 63, 94, 0.4)',
+      sparklineFill: 'rgba(244, 63, 94, 0.08)',
+      text: 'text-rose-400',
+      icon: 'text-rose-400',
+    },
+    neutral: {
+      bg: 'from-white/5 via-white/2 to-transparent',
+      border: 'border-white/10 hover:border-white/20',
+      glow: 'hover:shadow-[0_0_40px_rgba(255,255,255,0.04)]',
+      sparkline: 'rgba(255, 255, 255, 0.2)',
+      sparklineFill: 'rgba(255, 255, 255, 0.03)',
+      text: 'text-white/60',
+      icon: 'text-white/40',
+    },
+  };
 
-  const borderColor = trend === 'up'
-    ? 'border-emerald-500/30 hover:border-emerald-500/50'
-    : trend === 'down'
-      ? 'border-red-500/30 hover:border-red-500/50'
-      : 'border-white/10 hover:border-white/20';
-
-  const sparklineColor = trend === 'up' ? '#10b981' : trend === 'down' ? '#ef4444' : '#6b7280';
+  const colors = trendColors[trend];
+  const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : Minus;
+  const isPreTge = tokenStatus === 'pre-tge';
 
   return (
     <div
       onClick={onClick}
       className={cn(
-        'relative overflow-hidden rounded-lg border cursor-pointer transition-all duration-300',
-        'bg-gradient-to-b hover:scale-[1.02] hover:z-10',
-        trendColor,
-        borderColor,
-        'flex flex-col items-center justify-center p-2 group'
+        'relative w-full h-full rounded-xl overflow-hidden cursor-pointer',
+        'bg-gradient-to-br backdrop-blur-sm',
+        'border transition-all duration-300 ease-out',
+        'hover:scale-[1.02] hover:-translate-y-0.5',
+        colors.bg,
+        colors.border,
+        colors.glow
       )}
+      style={{ background: 'linear-gradient(135deg, rgba(10,10,10,0.9) 0%, rgba(5,5,5,0.95) 100%)' }}
     >
       {/* Sparkline Background */}
-      {sparkline.length >= 2 && (
+      {sparkline.length >= 2 && (size === 'large' || size === 'medium') && (
         <svg 
-          className="absolute inset-0 w-full h-full opacity-20 group-hover:opacity-40 transition-opacity"
+          className="absolute inset-0 w-full h-full opacity-60"
           viewBox="0 0 100 100" 
           preserveAspectRatio="none"
         >
+          <defs>
+            <linearGradient id={`sparkGrad-${ticker}`} x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor={colors.sparklineFill} />
+              <stop offset="100%" stopColor="transparent" />
+            </linearGradient>
+          </defs>
           <path
             d={sparklinePath}
             fill="none"
-            stroke={sparklineColor}
-            strokeWidth="2"
+            stroke={colors.sparkline}
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
           />
           <path
             d={`${sparklinePath} L 100,100 L 0,100 Z`}
-            fill={sparklineColor}
-            opacity="0.1"
+            fill={`url(#sparkGrad-${ticker})`}
           />
         </svg>
       )}
 
+      {/* Gradient overlay */}
+      <div className={cn(
+        'absolute inset-0 bg-gradient-to-br',
+        colors.bg
+      )} />
+
+      {/* Glass overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+
       {/* Content */}
-      <div className="relative z-10 flex flex-col items-center justify-center gap-1 text-center w-full">
-        {/* Logo */}
-        {(size === 'large' || size === 'medium') && logoUrl && (
-          <img
-            src={logoUrl}
-            alt={name}
-            className={cn(
-              'rounded-full bg-white/10 object-cover',
-              size === 'large' ? 'w-10 h-10' : 'w-6 h-6'
+      <div className="relative z-10 flex flex-col justify-between h-full p-3">
+        {/* Top section */}
+        <div className="flex items-start justify-between gap-2">
+          {/* Logo and ticker */}
+          <div className="flex items-center gap-2">
+            {logoUrl && (size === 'large' || size === 'medium') && (
+              <div className="relative">
+                <img
+                  src={logoUrl}
+                  alt={ticker}
+                  className={cn(
+                    'rounded-full bg-black/50 ring-1 ring-white/10 object-cover',
+                    size === 'large' ? 'w-10 h-10' : 'w-7 h-7'
+                  )}
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+                {/* Subtle glow behind logo */}
+                <div className={cn(
+                  'absolute inset-0 rounded-full blur-lg -z-10 opacity-30',
+                  trend === 'up' && 'bg-teal-400',
+                  trend === 'down' && 'bg-rose-400',
+                  trend === 'neutral' && 'bg-white/20'
+                )} />
+              </div>
             )}
-            onError={(e) => {
-              (e.target as HTMLImageElement).style.display = 'none';
-            }}
-          />
-        )}
-
-        {/* Ticker */}
-        <span className={cn(
-          'font-bold text-white tracking-tight',
-          size === 'large' ? 'text-lg' : size === 'medium' ? 'text-sm' : size === 'small' ? 'text-xs' : 'text-[10px]'
-        )}>
-          {ticker}
-        </span>
-
-        {/* Mindshare Percentage */}
-        <span className={cn(
-          'font-medium',
-          trend === 'up' ? 'text-emerald-400' : trend === 'down' ? 'text-red-400' : 'text-white/60',
-          size === 'large' ? 'text-base' : size === 'medium' ? 'text-xs' : 'text-[10px]'
-        )}>
-          {mindshare.toFixed(2)}%
-        </span>
-
-        {/* Trend Icon (only for large cells) */}
-        {size === 'large' && (
-          <div className={cn(
-            'flex items-center gap-1 mt-1',
-            trend === 'up' ? 'text-emerald-400' : trend === 'down' ? 'text-red-400' : 'text-white/40'
-          )}>
-            {trend === 'up' ? (
-              <TrendingUp className="w-3 h-3" />
-            ) : trend === 'down' ? (
-              <TrendingDown className="w-3 h-3" />
-            ) : (
-              <Minus className="w-3 h-3" />
-            )}
+            <div className="flex flex-col">
+              <span className={cn(
+                'font-semibold text-white tracking-tight',
+                size === 'large' ? 'text-base' : size === 'medium' ? 'text-sm' : 'text-xs'
+              )}>
+                {ticker}
+              </span>
+              {(size === 'large' || size === 'medium') && name && (
+                <span className="text-[10px] text-white/35 truncate max-w-[80px]">
+                  {name}
+                </span>
+              )}
+            </div>
           </div>
-        )}
+
+          {/* Pre-TGE badge */}
+          {isPreTge && (size === 'large' || size === 'medium') && (
+            <span className="px-1.5 py-0.5 text-[9px] font-medium bg-cyan-500/15 text-cyan-400 rounded border border-cyan-500/25">
+              PRE
+            </span>
+          )}
+        </div>
+
+        {/* Bottom section */}
+        <div className="flex items-end justify-between">
+          {/* Mindshare percentage */}
+          <span className={cn(
+            'font-bold tracking-tight',
+            size === 'large' ? 'text-2xl' : size === 'medium' ? 'text-lg' : size === 'small' ? 'text-sm' : 'text-xs',
+            colors.text
+          )}>
+            {mindshare.toFixed(2)}%
+          </span>
+
+          {/* Trend icon */}
+          {size === 'large' && (
+            <TrendIcon className={cn('w-4 h-4', colors.icon)} />
+          )}
+        </div>
       </div>
     </div>
   );
