@@ -18,7 +18,7 @@ import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import MediaPartnersSection from "@/components/MediaPartnersSection";
-import LeadershipSection from "@/components/gtm/LeadershipSection";
+
 
 // Import components
 import Logo3D from "@/components/Logo3D";
@@ -373,13 +373,8 @@ const Jobs = () => {
         </div>
       </main>
 
-      {/* Talent Wanted Marquee */}
-      <section className="bg-white overflow-hidden" id="marquee">
-        
-      </section>
-
-      {/* 01. Leadership Section */}
-      <LeadershipSection />
+      {/* Spacer */}
+      <section className="bg-white overflow-hidden" id="marquee" />
 
       {/* 02. Positions Section */}
       <section className="bg-surface-even" id="positions">
