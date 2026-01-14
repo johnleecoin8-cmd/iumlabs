@@ -198,7 +198,7 @@ const KInfluenceGrid = () => {
             
             {/* Methodology */}
             <div className="flex flex-wrap items-center justify-center gap-2 pt-2 border-t border-white/5 text-xs text-white/25">
-              <span>📊 Mindshare calculated from 1,000+ Korean community channels across X · Telegram · Naver · KakaoTalk</span>
+              <span>Mindshare calculated from 1,000+ Korean community channels across X · Telegram · Naver · KakaoTalk</span>
               <span className="text-white/15">|</span>
               <span className="text-white/20">Powered by Ium Labs</span>
             </div>
