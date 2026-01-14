@@ -2,14 +2,12 @@ import { useState, useMemo } from 'react';
 import { useHypeProjects } from '@/hooks/useHypeProjects';
 import MindshareTreemap, { type MindshareProject } from '@/components/mindshare/MindshareTreemap';
 import TreemapSkeleton from '@/components/mindshare/TreemapSkeleton';
-import PeriodFilter, { type DateRange } from '@/components/mindshare/PeriodFilter';
 import TokenStatusToggle, { type TokenStatus } from '@/components/mindshare/TokenStatusToggle';
 import { History, Users, ExternalLink, Radio } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 
 const KInfluenceGrid = () => {
-  const [dateRange, setDateRange] = useState<DateRange>('7D');
   const [tokenStatus, setTokenStatus] = useState<TokenStatus>('all');
   const { projects, isLoading, lastUpdate } = useHypeProjects();
 
@@ -149,17 +147,11 @@ const KInfluenceGrid = () => {
                 
                 <div className="flex-1" />
                 
-                {/* Period Filter */}
-                <PeriodFilter selected={dateRange} onChange={setDateRange} />
-                
                 {/* Last update */}
                 {lastUpdate && (
-                  <>
-                    <div className="hidden sm:block h-4 w-px bg-white/10" />
-                    <span className="text-xs text-white/30">
-                      Updated {formatDistanceToNow(lastUpdate, { addSuffix: true })}
-                    </span>
-                  </>
+                  <span className="text-xs text-white/30">
+                    Updated {formatDistanceToNow(lastUpdate, { addSuffix: true })}
+                  </span>
                 )}
               </div>
             </div>
