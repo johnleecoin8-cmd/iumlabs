@@ -171,22 +171,18 @@ const KInfluenceGrid = () => {
         {/* Footer - Kaito style methodology */}
         <div className="border-t border-white/5">
           <div className="px-3 sm:px-6 py-3 sm:py-4 space-y-3">
-            {/* Trend Legend */}
+            {/* Trend Legend - 1h change indicator */}
             <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-[10px] sm:text-xs text-white/30">
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded bg-gradient-to-br from-teal-500/30 to-teal-500/5 border border-teal-500/25" />
-                <span>Positive</span>
+                <span>1h 상승</span>
               </div>
               <div className="flex items-center gap-1.5 sm:gap-2">
                 <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded bg-gradient-to-br from-rose-500/30 to-rose-500/5 border border-rose-500/25" />
-                <span>Negative</span>
+                <span>1h 하락</span>
               </div>
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded bg-gradient-to-br from-white/15 to-white/5 border border-white/10" />
-                <span>Neutral</span>
-              </div>
-              <span className="hidden sm:inline text-white/15">|</span>
-              <span className="hidden sm:inline">Cell size = Mindshare %</span>
+              <span className="text-white/15">|</span>
+              <span>Cell size = Mindshare %</span>
             </div>
             
             {/* Methodology - Kaito style */}
