@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { ChevronRight, Linkedin } from "lucide-react";
 import jamesNft from "@/assets/team/james-nft.png";
-import kyleNft from "@/assets/team/kyle-nft.png";
+import davidNft from "@/assets/team/david-nft.png";
 import julianNft from "@/assets/team/julian-nft.png";
 
 interface LeaderCard {
@@ -35,7 +35,7 @@ const LeadershipSection = () => {
       quote: "Crafting the Macro-Narrative.",
       description: "Structuring compelling brand stories and adoption funnels that resonate from retail users to institutional partners.",
       descriptionKo: "Binance 출신의 시각으로, 리테일 유입부터 기관 설득까지 이어지는 거시적인 브랜드 내러티브를 설계합니다.",
-      photo: kyleNft
+      photo: davidNft
     },
     {
       number: "03",
