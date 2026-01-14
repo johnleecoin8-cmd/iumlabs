@@ -147,12 +147,10 @@ const KInfluenceGrid = () => {
                 
                 <div className="flex-1" />
                 
-                {/* Last update */}
-                {lastUpdate && (
-                  <span className="text-xs text-white/30">
-                    Updated {formatDistanceToNow(lastUpdate, { addSuffix: true })}
-                  </span>
-                )}
+                {/* Update frequency */}
+                <span className="text-xs text-white/30">
+                  Update every 1 hour
+                </span>
               </div>
             </div>
           </div>
