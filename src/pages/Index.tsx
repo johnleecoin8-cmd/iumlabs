@@ -238,8 +238,8 @@ const Index = () => {
         <HeroSection />
       </main>
       
-      {/* About - 01 (Mobile/Tablet Only) */}
-      <section className="bg-surface-base lg:hidden" id="why-choose-us">
+      {/* About - 01 */}
+      <section className="bg-surface-base" id="why-choose-us">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="bg-[#1A1A1A] flex items-baseline justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
