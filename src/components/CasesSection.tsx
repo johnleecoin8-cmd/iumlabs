@@ -60,9 +60,8 @@ const campaignAssetByFile: Record<string, string> = {
   "openledger-hero.jpg": openledgerHeroOfficial,
   "openledger-hero-new.jpg": openledgerHeroNew,
   "openledger-event.jpg": openledgerEvent,
-  "openledger-hero-official.png": openledgerHeroOfficial,
+  "openledger-hero-official.png": openledgerHeroOfficial
 };
-
 const resolveGallerySrcToAsset = (src?: string | null) => {
   if (!src) return null;
   const file = src.split("/").pop();
@@ -71,22 +70,63 @@ const resolveGallerySrcToAsset = (src?: string | null) => {
 };
 
 // Fallback data for projects without DB entries
-const fallbackImages: Record<string, { logo: string; bgImage: string }> = {
-  'bnb-chain': { logo: bnbLogo, bgImage: bnbCampaign },
-  'story-protocol': { logo: storyLogo, bgImage: storyCampaign },
-  'bybit': { logo: bybitLogo, bgImage: bybitCampaign },
-  'kucoin': { logo: kucoinLogo, bgImage: kucoinCampaign },
-  'polygon': { logo: polygonLogo, bgImage: polygonConnect },
-  'ondo-finance': { logo: ondoLogo, bgImage: ondoCampaign },
-  'sahara-ai': { logo: saharaAiLogo, bgImage: saharaCampaign },
-  'megaeth': { logo: megaethLogo, bgImage: megaethCampaign },
-  'mantra': { logo: mantraLogo, bgImage: mantraCampaign },
-  'zkpass': { logo: zkpassLogo, bgImage: zkpassCampaign },
-  'peaq': { logo: peaqLogo, bgImage: peaqCampaign },
-  'tria': { logo: triaLogo, bgImage: triaCampaign },
-  'openledger': { logo: '', bgImage: openledgerCampaign },
+const fallbackImages: Record<string, {
+  logo: string;
+  bgImage: string;
+}> = {
+  'bnb-chain': {
+    logo: bnbLogo,
+    bgImage: bnbCampaign
+  },
+  'story-protocol': {
+    logo: storyLogo,
+    bgImage: storyCampaign
+  },
+  'bybit': {
+    logo: bybitLogo,
+    bgImage: bybitCampaign
+  },
+  'kucoin': {
+    logo: kucoinLogo,
+    bgImage: kucoinCampaign
+  },
+  'polygon': {
+    logo: polygonLogo,
+    bgImage: polygonConnect
+  },
+  'ondo-finance': {
+    logo: ondoLogo,
+    bgImage: ondoCampaign
+  },
+  'sahara-ai': {
+    logo: saharaAiLogo,
+    bgImage: saharaCampaign
+  },
+  'megaeth': {
+    logo: megaethLogo,
+    bgImage: megaethCampaign
+  },
+  'mantra': {
+    logo: mantraLogo,
+    bgImage: mantraCampaign
+  },
+  'zkpass': {
+    logo: zkpassLogo,
+    bgImage: zkpassCampaign
+  },
+  'peaq': {
+    logo: peaqLogo,
+    bgImage: peaqCampaign
+  },
+  'tria': {
+    logo: triaLogo,
+    bgImage: triaCampaign
+  },
+  'openledger': {
+    logo: '',
+    bgImage: openledgerCampaign
+  }
 };
-
 interface CaseCardProps {
   name: string;
   logo: string;
@@ -99,65 +139,47 @@ interface CaseCardProps {
   index: number;
   totalCount: number;
 }
-
-const CaseCard = ({ name, bgImage, slug, category, result, description, websiteUrl, index, totalCount }: CaseCardProps) => {
+const CaseCard = ({
+  name,
+  bgImage,
+  slug,
+  category,
+  result,
+  description,
+  websiteUrl,
+  index,
+  totalCount
+}: CaseCardProps) => {
   // 3-column grid border logic
   const isRightColumn = index % 3 === 2;
   const rowCount = Math.ceil(totalCount / 3);
   const currentRow = Math.floor(index / 3);
   const isLastRow = currentRow === rowCount - 1;
-
-  const { ref, isVisible } = useScrollAnimation({ 
+  const {
+    ref,
+    isVisible
+  } = useScrollAnimation({
     threshold: 0.1,
     rootMargin: '30px',
-    triggerOnce: true 
+    triggerOnce: true
   });
-
-  return (
-    <div 
-      ref={ref}
-      className={cn(
-        "h-full transition-all duration-500 ease-out will-change-transform",
-        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-      )}
-      style={{ transitionDelay: `${(index % 6) * 50}ms` }}
-    >
-      <div
-        className={cn(
-          "group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full",
-          !isRightColumn && "border-r border-border",
-          !isLastRow && "border-b border-border"
-        )}
-      >
-        <Link
-          to={`/projects/${slug}`}
-          onClick={() => window.scrollTo(0, 0)}
-          className="block active:scale-[0.98] transition-transform duration-150"
-        >
+  return <div ref={ref} className={cn("h-full transition-all duration-500 ease-out will-change-transform", isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6")} style={{
+    transitionDelay: `${index % 6 * 50}ms`
+  }}>
+      <div className={cn("group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full", !isRightColumn && "border-r border-border", !isLastRow && "border-b border-border")}>
+        <Link to={`/projects/${slug}`} onClick={() => window.scrollTo(0, 0)} className="block active:scale-[0.98] transition-transform duration-150">
           {/* Image - Full width on top */}
           <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-3 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
-            <img
-              src={bgImage}
-              alt={name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-            />
+            <img src={bgImage} alt={name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
           </div>
 
           {/* Content */}
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
               <span className="text-muted-foreground text-[9px] sm:text-[10px] uppercase tracking-wider">{category}</span>
-              {websiteUrl && (
-                <a
-                  href={websiteUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={(e) => e.stopPropagation()}
-                  className="flex items-center gap-1 text-[9px] sm:text-[10px] text-muted-foreground hover:text-foreground transition-colors"
-                >
+              {websiteUrl && <a href={websiteUrl} target="_blank" rel="noopener noreferrer" onClick={e => e.stopPropagation()} className="flex items-center gap-1 text-[9px] sm:text-[10px] text-muted-foreground hover:text-foreground transition-colors">
                   <ExternalLink className="w-2.5 h-2.5" />
-                </a>
-              )}
+                </a>}
             </div>
             <h3 className="text-sm sm:text-base font-semibold text-foreground group-hover:text-foreground/80 transition-colors line-clamp-1">
               {name}
@@ -177,17 +199,17 @@ const CaseCard = ({ name, bgImage, slug, category, result, description, websiteU
           </div>
         </Link>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 const CasesSection = () => {
-  const { data: projects } = useQuery({
+  const {
+    data: projects
+  } = useQuery({
     queryKey: ['cases-projects'],
     queryFn: async () => {
-      const { data: projectsData } = await supabase
-        .from('projects')
-        .select(`
+      const {
+        data: projectsData
+      } = await supabase.from('projects').select(`
           id,
           name,
           slug,
@@ -197,33 +219,29 @@ const CasesSection = () => {
           logo_url,
           background_url,
           website_url
-        `)
-        .eq('is_published', true)
-        .order('display_order')
-        .limit(12);
-      
+        `).eq('is_published', true).order('display_order').limit(12);
+
       // Fetch first gallery image for each project
       if (projectsData) {
-        const projectIds = projectsData.map((p) => p.id);
-        
-        const { data: galleryRows } = await supabase
-          .from('project_gallery')
-          .select('project_id, src, display_order')
-          .in('project_id', projectIds)
-          .order('display_order', { ascending: true });
-
+        const projectIds = projectsData.map(p => p.id);
+        const {
+          data: galleryRows
+        } = await supabase.from('project_gallery').select('project_id, src, display_order').in('project_id', projectIds).order('display_order', {
+          ascending: true
+        });
         const firstGalleryByProject = new Map<string, string>();
         for (const row of galleryRows ?? []) {
           if (!firstGalleryByProject.has(row.project_id)) {
             firstGalleryByProject.set(row.project_id, row.src);
           }
         }
-
-        const projectsWithGallery = projectsData.map((project) => {
+        const projectsWithGallery = projectsData.map(project => {
           const gallerySrc = firstGalleryByProject.get(project.id) ?? null;
           const galleryAsset = resolveGallerySrcToAsset(gallerySrc);
-          const fallback = fallbackImages[project.slug] || { logo: '', bgImage: '' };
-
+          const fallback = fallbackImages[project.slug] || {
+            logo: '',
+            bgImage: ''
+          };
           return {
             name: project.name,
             slug: project.slug,
@@ -232,70 +250,33 @@ const CasesSection = () => {
             description: project.description || '',
             logo: project.logo_url || fallback.logo,
             bgImage: galleryAsset || project.background_url || fallback.bgImage || '',
-            websiteUrl: project.website_url || '',
+            websiteUrl: project.website_url || ''
           };
         });
         return projectsWithGallery;
       }
       return [];
-    },
+    }
   });
-
   const cases = projects || [];
   const displayCases = cases.slice(0, 12); // Show only 3x4 = 12 projects on home
 
-  return (
-    <section className="bg-background">
+  return <section className="bg-background">
       {/* Top Info Bar */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-4 md:p-6 border-b border-border">
-        {/* Left: Title + Description */}
-        <div className="flex-1 min-w-0">
-          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-1">
-            Our Cases
-          </h2>
-          <p className="text-muted-foreground text-xs md:text-sm">
-            Real results, not just promises.
-          </p>
-        </div>
-        
-        {/* Center: Stats (horizontal) */}
-        <div className="flex items-center gap-4 md:gap-6">
-          <div className="text-center">
-            <span className="text-lg md:text-xl font-bold text-foreground block">340%</span>
-            <span className="text-[10px] md:text-xs text-muted-foreground">Avg. volume</span>
-          </div>
-          <div className="w-px h-8 bg-border" />
-          <div className="text-center">
-            <span className="text-lg md:text-xl font-bold text-foreground block">50K+</span>
-            <span className="text-[10px] md:text-xs text-muted-foreground">New users</span>
-          </div>
-          <div className="w-px h-8 bg-border" />
-          <div className="text-center">
-            <span className="text-lg md:text-xl font-bold text-foreground block">{cases.length}+</span>
-            <span className="text-[10px] md:text-xs text-muted-foreground">Projects</span>
-          </div>
-        </div>
-      </div>
+      
 
       {/* 3x4 Cases Grid (12 projects max) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {displayCases.map((caseItem, index) => (
-          <CaseCard key={caseItem.slug} {...caseItem} index={index} totalCount={displayCases.length} />
-        ))}
+        {displayCases.map((caseItem, index) => <CaseCard key={caseItem.slug} {...caseItem} index={index} totalCount={displayCases.length} />)}
       </div>
 
       {/* View All Projects Row */}
-      <Link
-        to="/projects"
-        className="group flex items-center justify-center gap-3 p-6 md:p-8 border-t border-border bg-secondary/30 hover:bg-secondary/50 transition-colors"
-      >
+      <Link to="/projects" className="group flex items-center justify-center gap-3 p-6 md:p-8 border-t border-border bg-secondary/30 hover:bg-secondary/50 transition-colors">
         <span className="text-foreground font-medium text-sm md:text-base group-hover:underline underline-offset-4">
           View all {cases.length} projects
         </span>
         <ArrowRight className="w-4 h-4 text-foreground group-hover:translate-x-1 transition-transform" />
       </Link>
-    </section>
-  );
+    </section>;
 };
-
 export default CasesSection;
