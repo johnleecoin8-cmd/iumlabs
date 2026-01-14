@@ -5,6 +5,7 @@ import economistLogo from "@/assets/logos/economist.png";
 import cointelegraphLogo from "@/assets/logos/cointelegraph.png";
 import bloomingbitLogo from "@/assets/logos/bloomingbit.png";
 import coinnessLogo from "@/assets/logos/coinness.png";
+import hankyungLogo from "@/assets/logos/hankyung.png";
 
 const mediaLogos = [
   { name: "Cointelegraph", logo: cointelegraphLogo },
@@ -14,6 +15,7 @@ const mediaLogos = [
   { name: "Coinness", logo: coinnessLogo },
   { name: "Bloomingbit", logo: bloomingbitLogo },
   { name: "The Economist", logo: economistLogo },
+  { name: "한국경제", logo: hankyungLogo },
 ];
 
 const MediaPartnersSection = () => {
