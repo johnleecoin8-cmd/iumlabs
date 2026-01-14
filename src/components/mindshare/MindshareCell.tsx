@@ -44,28 +44,31 @@ const MindshareCell = ({
     return `M ${points.split(' ').join(' L ')}`;
   }, [sparkline]);
 
-  // Kaito-style colors based on trend
+  // Kaito-style colors based on trend - more vibrant backgrounds
   const trendColors = {
     up: {
-      bg: 'from-teal-500/10 via-teal-500/5 to-transparent',
-      sparkline: 'rgba(20, 184, 166, 0.4)',
-      sparklineFill: 'rgba(20, 184, 166, 0.08)',
-      text: 'text-teal-400',
-      icon: 'text-teal-400',
+      bg: 'from-emerald-600/60 via-emerald-700/40 to-emerald-900/30',
+      cellBg: 'rgba(16, 120, 80, 0.85)',
+      sparkline: 'rgba(255, 255, 255, 0.7)',
+      sparklineFill: 'rgba(255, 255, 255, 0.15)',
+      text: 'text-white',
+      icon: 'text-white/70',
     },
     down: {
-      bg: 'from-rose-500/10 via-rose-500/5 to-transparent',
-      sparkline: 'rgba(244, 63, 94, 0.4)',
-      sparklineFill: 'rgba(244, 63, 94, 0.08)',
-      text: 'text-rose-400',
-      icon: 'text-rose-400',
+      bg: 'from-rose-600/60 via-rose-700/40 to-rose-900/30',
+      cellBg: 'rgba(180, 60, 70, 0.85)',
+      sparkline: 'rgba(255, 255, 255, 0.7)',
+      sparklineFill: 'rgba(255, 255, 255, 0.15)',
+      text: 'text-white',
+      icon: 'text-white/70',
     },
     neutral: {
-      bg: 'from-white/5 via-white/2 to-transparent',
-      sparkline: 'rgba(255, 255, 255, 0.2)',
-      sparklineFill: 'rgba(255, 255, 255, 0.03)',
-      text: 'text-white/60',
-      icon: 'text-white/40',
+      bg: 'from-slate-600/40 via-slate-700/30 to-slate-900/20',
+      cellBg: 'rgba(50, 60, 70, 0.85)',
+      sparkline: 'rgba(255, 255, 255, 0.5)',
+      sparklineFill: 'rgba(255, 255, 255, 0.08)',
+      text: 'text-white/80',
+      icon: 'text-white/50',
     },
   };
 
@@ -85,21 +88,28 @@ const MindshareCell = ({
       onClick={onClick}
       className={cn(
         'relative w-full h-full overflow-hidden cursor-pointer box-border',
-        'bg-gradient-to-br',
-        'border-[0.5px] border-white/[0.08] transition-colors duration-200',
-        'hover:border-white/20 hover:brightness-110',
-        colors.bg
+        'border-[0.5px] border-white/[0.12] transition-all duration-200',
+        'hover:border-white/30 hover:brightness-110',
       )}
       style={{ 
-        background: 'linear-gradient(145deg, rgba(12,12,12,0.97) 0%, rgba(6,6,6,0.99) 100%)'
+        background: colors.cellBg
       }}
     >
-      {/* Sparkline Background */}
-      {sparkline.length >= 2 && (size === 'large' || size === 'medium') && (
+      {/* Lighter gradient overlay for depth */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 50%, rgba(0,0,0,0.15) 100%)'
+        }}
+      />
+
+      {/* Sparkline Background - more visible like Kaito */}
+      {sparkline.length >= 2 && (size === 'large' || size === 'medium' || size === 'small') && (
         <svg 
-          className="absolute inset-0 w-full h-full opacity-60"
+          className="absolute inset-0 w-full h-full"
           viewBox="0 0 100 100" 
           preserveAspectRatio="none"
+          style={{ opacity: 0.9 }}
         >
           <defs>
             <linearGradient id={`sparkGrad-${ticker}`} x1="0%" y1="0%" x2="0%" y2="100%">
@@ -107,30 +117,26 @@ const MindshareCell = ({
               <stop offset="100%" stopColor="transparent" />
             </linearGradient>
           </defs>
-          <path
-            d={sparklinePath}
-            fill="none"
-            stroke={colors.sparkline}
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
-          />
+          {/* Fill area under the line */}
           <path
             d={`${sparklinePath} L 100,100 L 0,100 Z`}
             fill={`url(#sparkGrad-${ticker})`}
           />
+          {/* Main sparkline stroke - thicker and more visible */}
+          <path
+            d={sparklinePath}
+            fill="none"
+            stroke={colors.sparkline}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
         </svg>
       )}
 
-      {/* Gradient overlay */}
-      <div className={cn(
-        'absolute inset-0 bg-gradient-to-br',
-        colors.bg
-      )} />
-
-      {/* Glass overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+      {/* Subtle vignette overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
 
       {/* Crown for top 3 */}
       {rank && rank <= 3 && (
