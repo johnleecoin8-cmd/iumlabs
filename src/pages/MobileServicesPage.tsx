@@ -247,44 +247,45 @@ const MobileServicesPage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section - minimal ium labs style */}
-      <div className="relative overflow-hidden border-b border-white/10">
-        {/* Background video */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/videos/services-background.mp4" type="video/mp4" />
-        </video>
-        
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
-        
-        {/* Hero content */}
-        <div className="relative z-10 px-5 pt-12 pb-8">
+      <div className="border-b border-white/10 bg-background">
+        <div className="px-5 pt-16 pb-10">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1 text-[10px] font-mono text-white/50 tracking-widest border border-white/20 rounded-full mb-4">
-              SERVICES
-              <span className="w-1 h-1 rounded-full bg-white/40" />
-              09
-            </span>
+            {/* Minimal badge */}
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-8 h-px bg-white/20" />
+              <span className="text-[10px] font-mono text-white/40 tracking-[0.2em]">
+                SERVICES
+              </span>
+            </div>
             
-            <h1 className="text-2xl font-medium text-white leading-tight mb-2">
+            {/* Title - large typography */}
+            <h1 className="text-3xl font-light text-white leading-[1.1] tracking-tight mb-6">
               Korea Market
               <br />
-              Solutions
+              <span className="text-white/40">Solutions</span>
             </h1>
             
-            <p className="text-xs text-white/50 leading-relaxed max-w-[260px]">
-              Full-stack Web3 marketing services tailored for the Korean ecosystem
+            {/* Subtitle */}
+            <p className="text-xs text-white/30 leading-relaxed max-w-[240px] font-light">
+              Full-stack Web3 marketing for the Korean ecosystem
             </p>
+            
+            {/* Stats row */}
+            <div className="flex items-center gap-6 mt-8 pt-6 border-t border-white/5">
+              <div>
+                <span className="text-lg font-light text-white">09</span>
+                <span className="text-[10px] text-white/30 ml-1">services</span>
+              </div>
+              <div className="w-px h-4 bg-white/10" />
+              <div>
+                <span className="text-lg font-light text-white">50+</span>
+                <span className="text-[10px] text-white/30 ml-1">projects</span>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
