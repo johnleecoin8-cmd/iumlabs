@@ -42,9 +42,24 @@ Deno.serve(async (req) => {
 
     // Validate API key
     const crawlerApiKey = Deno.env.get("CRAWLER_API_KEY");
+    
+    // Debug logging (masked - no secrets exposed)
+    console.log("[DEBUG] CRAWLER_API_KEY exists:", !!crawlerApiKey);
+    console.log("[DEBUG] CRAWLER_API_KEY length:", crawlerApiKey?.length ?? 0);
+    console.log("[DEBUG] body.api_key length:", body.api_key?.length ?? 0);
+    console.log("[DEBUG] Keys match:", crawlerApiKey === body.api_key);
+    
     if (!crawlerApiKey || body.api_key !== crawlerApiKey) {
       return new Response(
-        JSON.stringify({ error: "Unauthorized: Invalid API key" }),
+        JSON.stringify({ 
+          error: "Unauthorized: Invalid API key",
+          debug: {
+            envKeyExists: !!crawlerApiKey,
+            envKeyLength: crawlerApiKey?.length ?? 0,
+            bodyKeyLength: body.api_key?.length ?? 0,
+            keysMatch: crawlerApiKey === body.api_key
+          }
+        }),
         { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
