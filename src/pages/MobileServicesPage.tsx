@@ -22,6 +22,16 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { brand } from "@/config/content";
 
+// Import service poster images from home page
+import gtmImage from "@/assets/services/gtm-ecosystem.png";
+import brandingImage from "@/assets/services/branding-website.png";
+import seoAdsImage from "@/assets/services/seo-ads.jpg";
+import eventsImage from "@/assets/services/events.jpg";
+import communityImage from "@/assets/services/community-management.png";
+import kolImage from "@/assets/services/kol-network.jpg";
+import yapImage from "@/assets/services/yap-network.png";
+import prImage from "@/assets/services/pr-media.jpg";
+
 const services = [
   {
     title: "GTM Strategy",
@@ -29,6 +39,7 @@ const services = [
     icon: Rocket,
     link: "/services",
     video: "/videos/gtm-hero.mp4",
+    poster: gtmImage,
     stats: "50+ Projects"
   },
   {
@@ -37,6 +48,7 @@ const services = [
     icon: Palette,
     link: "/services/branding",
     video: "/videos/branding-hero.mp4",
+    poster: brandingImage,
     stats: "15+ Brands"
   },
   {
@@ -45,6 +57,7 @@ const services = [
     icon: Search,
     link: "/services/seo-ads",
     video: "/videos/seo-hero.mp4",
+    poster: seoAdsImage,
     stats: "1M+ Reach"
   },
   {
@@ -53,6 +66,7 @@ const services = [
     icon: Calendar,
     link: "/services/offline-event",
     video: "/videos/offline-event-hero.mp4",
+    poster: eventsImage,
     stats: "30+ Events"
   },
   {
@@ -61,6 +75,7 @@ const services = [
     icon: Users,
     link: "/services/community",
     video: "/videos/community-hero.mp4",
+    poster: communityImage,
     stats: "500K+ Members"
   },
   {
@@ -69,6 +84,7 @@ const services = [
     icon: FileSearch,
     link: "/services/deep-research",
     video: "/videos/deep-research-hero.mp4",
+    poster: gtmImage,
     stats: "100+ Reports"
   },
   {
@@ -77,6 +93,7 @@ const services = [
     icon: Star,
     link: "/services/influencer",
     video: "/videos/influencer-hero.mp4",
+    poster: kolImage,
     stats: "70+ KOLs"
   },
   {
@@ -85,6 +102,7 @@ const services = [
     icon: MessageCircle,
     link: "/services/yap",
     video: "/videos/yap-hero.mp4",
+    poster: yapImage,
     stats: "50+ Yappers"
   },
   {
@@ -93,6 +111,7 @@ const services = [
     icon: Newspaper,
     link: "/services/pr",
     video: "/videos/pr-hero.mp4",
+    poster: prImage,
     stats: "200+ Articles"
   }
 ];
@@ -331,12 +350,15 @@ const ServiceCard = ({
         onTouchEnd={handleTouchEnd}
         onTouchCancel={handleTouchCancel}
       >
-        {/* Loading skeleton */}
-        {!isVideoLoaded && (
-          <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-white/10 animate-pulse">
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-          </div>
-        )}
+        {/* Poster image - always visible as fallback */}
+        <img 
+          src={service.poster} 
+          alt={service.title}
+          className={cn(
+            "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+            isVideoLoaded ? "opacity-0" : "opacity-100"
+          )}
+        />
         
         {/* Video background - lazy loaded */}
         {shouldLoadVideo && (
@@ -346,7 +368,7 @@ const ServiceCard = ({
             loop
             playsInline
             preload="metadata"
-            poster="/images/hero-poster.jpg"
+            poster={service.poster}
             onLoadedData={() => setIsVideoLoaded(true)}
             className={cn(
               "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
