@@ -169,12 +169,15 @@ const MindshareCell = ({
         </div>
       )}
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col justify-between h-full p-2.5">
+      {/* Content - Mobile optimized padding */}
+      <div className={cn(
+        "relative z-10 flex flex-col justify-between h-full",
+        size === 'large' ? 'p-2.5' : size === 'medium' ? 'p-2' : 'p-1.5'
+      )}>
         {/* Top section */}
-        <div className="flex items-start justify-between gap-1.5">
+        <div className="flex items-start justify-between gap-1">
           {/* Logo and ticker */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             {(size === 'large' || size === 'medium') && (
               <div className="relative flex-shrink-0">
                 {logoUrl ? (
@@ -183,8 +186,8 @@ const MindshareCell = ({
                     alt={ticker}
                     className={cn(
                       'rounded-full object-cover transition-transform duration-300 group-hover:scale-105',
-                      'ring-2 ring-white/10 group-hover:ring-white/20',
-                      size === 'large' ? 'w-10 h-10' : 'w-6 h-6'
+                      'ring-1 sm:ring-2 ring-white/10 group-hover:ring-white/20',
+                      size === 'large' ? 'w-7 h-7 sm:w-10 sm:h-10' : 'w-5 h-5 sm:w-6 sm:h-6'
                     )}
                     style={{
                       boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
@@ -200,15 +203,15 @@ const MindshareCell = ({
                 {/* Fallback avatar with ticker initial */}
                 <div 
                   className={cn(
-                    'items-center justify-center rounded-full ring-2 ring-white/10',
+                    'items-center justify-center rounded-full ring-1 sm:ring-2 ring-white/10',
                     'bg-gradient-to-br from-white/15 to-white/5',
-                    size === 'large' ? 'w-10 h-10' : 'w-6 h-6',
+                    size === 'large' ? 'w-7 h-7 sm:w-10 sm:h-10' : 'w-5 h-5 sm:w-6 sm:h-6',
                     logoUrl ? 'hidden' : 'flex'
                   )}
                 >
                   <span className={cn(
                     'font-bold text-white/80',
-                    size === 'large' ? 'text-sm' : 'text-[10px]'
+                    size === 'large' ? 'text-xs sm:text-sm' : 'text-[8px] sm:text-[10px]'
                   )}>
                     {ticker.charAt(0)}
                   </span>
@@ -219,22 +222,22 @@ const MindshareCell = ({
               <span className={cn(
                 'font-bold text-white tracking-tight truncate',
                 'font-[\'Space_Grotesk\',sans-serif]',
-                size === 'large' ? 'text-base' : size === 'medium' ? 'text-sm' : 'text-[11px]'
+                size === 'large' ? 'text-xs sm:text-base' : size === 'medium' ? 'text-[11px] sm:text-sm' : 'text-[9px] sm:text-[11px]'
               )}>
                 {ticker}
               </span>
-              {(size === 'large' || size === 'medium') && name && (
-                <span className="text-[10px] text-white/40 truncate max-w-[80px] font-medium">
+              {size === 'large' && name && (
+                <span className="text-[8px] sm:text-[10px] text-white/40 truncate max-w-[60px] sm:max-w-[80px] font-medium">
                   {name}
                 </span>
               )}
             </div>
           </div>
 
-          {/* Pre-TGE badge - refined */}
-          {isPreTge && (size === 'large' || size === 'medium') && (
+          {/* Pre-TGE badge - refined, smaller on mobile */}
+          {isPreTge && size === 'large' && (
             <span className={cn(
-              'px-1.5 py-0.5 text-[9px] font-semibold rounded-md flex-shrink-0',
+              'px-1 sm:px-1.5 py-0.5 text-[7px] sm:text-[9px] font-semibold rounded flex-shrink-0',
               'bg-gradient-to-r from-cyan-500/20 to-teal-500/20',
               'text-cyan-300 border border-cyan-400/30',
               'shadow-[0_0_12px_rgba(34,211,238,0.15)]'
@@ -246,33 +249,33 @@ const MindshareCell = ({
 
         {/* Bottom section */}
         <div className="flex items-end justify-between">
-          {/* Mindshare percentage - enhanced */}
-          <div className="flex items-baseline gap-1">
+          {/* Mindshare percentage - enhanced, mobile optimized */}
+          <div className="flex items-baseline gap-0.5">
             <span className={cn(
               'font-bold tracking-tight text-white',
               'font-[\'Space_Grotesk\',sans-serif]',
-              size === 'large' ? 'text-2xl' : size === 'medium' ? 'text-lg' : size === 'small' ? 'text-sm' : 'text-[11px]'
+              size === 'large' ? 'text-lg sm:text-2xl' : size === 'medium' ? 'text-sm sm:text-lg' : size === 'small' ? 'text-xs sm:text-sm' : 'text-[10px] sm:text-[11px]'
             )}>
-              {mindshare.toFixed(2)}
+              {mindshare.toFixed(size === 'tiny' ? 1 : 2)}
             </span>
             <span className={cn(
               'font-medium text-white/50',
-              size === 'large' ? 'text-sm' : size === 'medium' ? 'text-xs' : 'text-[9px]'
+              size === 'large' ? 'text-xs sm:text-sm' : size === 'medium' ? 'text-[10px] sm:text-xs' : 'text-[8px] sm:text-[9px]'
             )}>
               %
             </span>
           </div>
 
-          {/* Trend icon with background */}
-          {(size === 'large' || size === 'medium') && (
+          {/* Trend icon with background - only on large */}
+          {size === 'large' && (
             <div className={cn(
-              'p-1 rounded-md transition-colors duration-200',
+              'p-0.5 sm:p-1 rounded transition-colors duration-200',
               colors.percentBg,
               'group-hover:bg-opacity-20'
             )}>
               <TrendIcon className={cn(
                 'transition-transform duration-300 group-hover:scale-110',
-                size === 'large' ? 'w-4 h-4' : 'w-3.5 h-3.5',
+                'w-3 h-3 sm:w-4 sm:h-4',
                 colors.accentText
               )} />
             </div>
