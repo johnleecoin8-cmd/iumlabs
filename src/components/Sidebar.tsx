@@ -18,7 +18,7 @@ const navIconMap: Record<string, React.ElementType> = {
   'Services': Briefcase,
   'Projects': FolderOpen,
   'Research': BookOpen,
-  'Leaderboard': Crown,
+  'K-Leaderboard': Crown,
   'Career': Users,
   'Contact': Mail
 };
