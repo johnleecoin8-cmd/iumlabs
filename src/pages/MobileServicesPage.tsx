@@ -136,21 +136,21 @@ const StatsSection = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6, delay: 0.4 }}
-      className="relative z-10 py-4"
+      className="relative z-10 py-3 md:py-4"
     >
-      <div className="px-5">
-        <div className="grid grid-cols-3 gap-4">
+      <div className="px-4 md:px-5">
+        <div className="grid grid-cols-3 gap-2 md:gap-4">
           <div className="text-center">
-            <div className="text-2xl font-bold text-white">{count1}</div>
-            <div className="text-[10px] text-white/40">Services</div>
+            <div className="text-xl md:text-2xl font-bold text-white">{count1}</div>
+            <div className="text-[9px] md:text-[10px] text-white/40">Services</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-white">+{count2}</div>
-            <div className="text-[10px] text-white/40">Projects</div>
+            <div className="text-xl md:text-2xl font-bold text-white">+{count2}</div>
+            <div className="text-[9px] md:text-[10px] text-white/40">Projects</div>
           </div>
           <div className="text-center">
-            <div className="text-2xl font-bold text-white">{count3}+</div>
-            <div className="text-[10px] text-white/40">KOLs</div>
+            <div className="text-xl md:text-2xl font-bold text-white">{count3}+</div>
+            <div className="text-[9px] md:text-[10px] text-white/40">KOLs</div>
           </div>
         </div>
       </div>
@@ -235,7 +235,7 @@ const ServiceCard = ({
         onClick={handleClick}
         className={cn(
           "group relative flex flex-col overflow-hidden",
-          isFullWidth ? "aspect-[16/9]" : "aspect-[4/5]",
+          isFullWidth ? "aspect-[16/10] md:aspect-[16/9]" : "aspect-[3/4] md:aspect-[4/5]",
           "transition-all duration-200",
           "border-r border-b border-white/10",
           isPressed && "scale-[0.97] brightness-110"
@@ -245,13 +245,15 @@ const ServiceCard = ({
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
       >
-        {/* Video background */}
+        {/* Video background - poster for mobile */}
         <video
           ref={videoRef}
           muted
           loop
           playsInline
-          preload="metadata"
+          autoPlay
+          preload="auto"
+          poster="/images/hero-poster.jpg"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src={service.video} type="video/mp4" />
@@ -265,36 +267,36 @@ const ServiceCard = ({
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
         
         {/* Number indicator */}
-        <div className="absolute top-3 left-3">
-          <span className="text-[10px] text-white/40 font-mono tracking-widest">
+        <div className="absolute top-2 left-2 md:top-3 md:left-3">
+          <span className="text-[9px] md:text-[10px] text-white/40 font-mono tracking-widest">
             {String(index + 1).padStart(2, '0')}
           </span>
         </div>
         
         {/* Content */}
-        <div className="relative z-10 mt-auto p-4">
+        <div className="relative z-10 mt-auto p-3 md:p-4">
           {/* Icon - minimalist style */}
           <Icon 
             className={cn(
-              "w-6 h-6 text-white/70 mb-3 transition-colors duration-300",
+              "w-5 h-5 md:w-6 md:h-6 text-white/70 mb-2 md:mb-3 transition-colors duration-300",
               isHovered && "text-white"
             )} 
             strokeWidth={1.5} 
           />
           
           {/* Title & description */}
-          <h3 className="font-medium text-white text-sm leading-tight mb-1">
+          <h3 className="font-medium text-white text-xs md:text-sm leading-tight mb-0.5 md:mb-1">
             {service.title}
           </h3>
-          <p className="text-[11px] text-white/50 leading-relaxed">
+          <p className="text-[10px] md:text-[11px] text-white/50 leading-relaxed line-clamp-2">
             {service.description}
           </p>
           
           {/* Stats - with hover highlight effect */}
           <span className={cn(
-            "text-[10px] font-mono mt-2 block transition-all duration-300",
+            "text-[9px] md:text-[10px] font-mono mt-1.5 md:mt-2 block transition-all duration-300",
             isHovered 
-              ? "text-white text-xs font-semibold" 
+              ? "text-white text-[10px] md:text-xs font-semibold" 
               : "text-white/40"
           )}>
             {service.stats}
@@ -303,10 +305,10 @@ const ServiceCard = ({
         
         {/* Arrow indicator */}
         <div className={cn(
-          "absolute bottom-4 right-4 opacity-0 transition-all duration-300",
+          "absolute bottom-3 right-3 md:bottom-4 md:right-4 opacity-0 transition-all duration-300",
           isHovered && "opacity-100"
         )}>
-          <ArrowUpRight className="w-4 h-4 text-white/60" strokeWidth={1.5} />
+          <ArrowUpRight className="w-3.5 h-3.5 md:w-4 md:h-4 text-white/60" strokeWidth={1.5} />
         </div>
       </Link>
     </motion.div>
@@ -318,9 +320,9 @@ const MobileServicesPage = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       {/* Hero Section - Projects Page Style */}
-      <main className="p-0.5 bg-background">
+      <main className="pt-16 md:pt-0 p-0.5 bg-background">
         <div className="rounded-xl overflow-hidden">
-          <div className="relative min-h-[67vh] flex flex-col justify-between overflow-hidden rounded-2xl">
+          <div className="relative min-h-[60vh] md:min-h-[67vh] flex flex-col justify-between overflow-hidden rounded-2xl">
             {/* Background Layer - Video */}
             <div className="absolute inset-0 overflow-hidden">
               <video
@@ -328,6 +330,8 @@ const MobileServicesPage = () => {
                 muted
                 loop
                 playsInline
+                preload="auto"
+                poster="/images/hero-poster.jpg"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ filter: "brightness(0.35)" }}
               >
@@ -346,7 +350,7 @@ const MobileServicesPage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6 }}
-                  className="font-sans text-3xl sm:text-4xl font-medium mb-4 mt-8"
+                  className="font-sans text-2xl sm:text-3xl md:text-4xl font-medium mb-3 md:mb-4 mt-4 md:mt-8"
                 >
                   <span className="text-white">Korea Market</span>
                   <br />
@@ -358,7 +362,7 @@ const MobileServicesPage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.1 }}
-                  className="text-sm text-white/50 max-w-md mx-auto mb-6 font-light leading-relaxed"
+                  className="text-xs sm:text-sm text-white/50 max-w-xs sm:max-w-md mx-auto mb-4 md:mb-6 font-light leading-relaxed px-4"
                 >
                   <span className="text-white font-medium">9 specialized services</span> for Web3 projects entering the Korean ecosystem
                 </motion.p>
@@ -368,18 +372,18 @@ const MobileServicesPage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="flex flex-col items-center gap-2"
+                  className="flex flex-col items-center gap-1.5 md:gap-2"
                 >
                   <a
                     href={brand.calendlyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group inline-flex items-center gap-2 px-6 py-3 font-medium text-sm rounded-full bg-white text-black hover:bg-white/90 active:scale-[0.98] transition-all"
+                    className="group inline-flex items-center gap-2 px-5 py-2.5 md:px-6 md:py-3 font-medium text-xs md:text-sm rounded-full bg-white text-black hover:bg-white/90 active:scale-[0.98] transition-all"
                   >
-                    <Calendar className="w-4 h-4" />
+                    <Calendar className="w-3.5 h-3.5 md:w-4 md:h-4" />
                     <span>Book Consultation</span>
                   </a>
-                  <p className="text-[10px] text-white/40">
+                  <p className="text-[9px] md:text-[10px] text-white/40">
                     Free consultation • 30 min call
                   </p>
                 </motion.div>
