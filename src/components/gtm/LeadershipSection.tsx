@@ -29,7 +29,7 @@ const LeadershipSection = () => {
     },
     {
       number: "02",
-      title: "Kyle",
+      title: "David",
       role: "Head of Strategy",
       background: "Ex-Binance Fiat Leads",
       quote: "Crafting the Macro-Narrative.",
