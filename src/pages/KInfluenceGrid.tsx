@@ -162,7 +162,7 @@ const KInfluenceGrid = () => {
         </div>
 
         {/* Treemap Container - Adjusted height for mobile */}
-        <div className="h-[calc(100vh-120px)] sm:h-[calc(100vh-160px)]">
+        <div className="h-[calc(100vh-180px)] sm:h-[calc(100vh-200px)]">
           {isLoading ? (
             <TreemapSkeleton />
           ) : (
@@ -170,32 +170,37 @@ const KInfluenceGrid = () => {
           )}
         </div>
 
-        {/* Footer - Hidden on mobile for more treemap space */}
-        <div className="hidden sm:block border-t border-white/5">
-          <div className="px-4 sm:px-6 py-4 space-y-3">
+        {/* Footer - Compact on mobile */}
+        <div className="border-t border-white/5">
+          <div className="px-3 sm:px-6 py-2 sm:py-4 space-y-2 sm:space-y-3">
             {/* Trend Legend */}
-            <div className="flex flex-wrap items-center justify-center gap-6 text-xs text-white/30">
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded bg-gradient-to-br from-teal-500/30 to-teal-500/5 border border-teal-500/25" />
-                <span>Positive Trend</span>
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-[10px] sm:text-xs text-white/30">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded bg-gradient-to-br from-teal-500/30 to-teal-500/5 border border-teal-500/25" />
+                <span>Positive</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded bg-gradient-to-br from-rose-500/30 to-rose-500/5 border border-rose-500/25" />
-                <span>Negative Trend</span>
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded bg-gradient-to-br from-rose-500/30 to-rose-500/5 border border-rose-500/25" />
+                <span>Negative</span>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded bg-gradient-to-br from-white/15 to-white/5 border border-white/10" />
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded bg-gradient-to-br from-white/15 to-white/5 border border-white/10" />
                 <span>Neutral</span>
               </div>
-              <span className="text-white/15">|</span>
-              <span>Cell size = Mindshare %</span>
+              <span className="hidden sm:inline text-white/15">|</span>
+              <span className="hidden sm:inline">Cell size = Mindshare %</span>
             </div>
             
-            {/* Methodology */}
-            <div className="flex flex-wrap items-center justify-center gap-2 pt-2 border-t border-white/5 text-xs text-white/25">
+            {/* Methodology - Hidden on mobile */}
+            <div className="hidden sm:flex flex-wrap items-center justify-center gap-2 pt-2 border-t border-white/5 text-xs text-white/25">
               <span>Mindshare calculated from 1,000+ Korean community channels across X · Telegram · Naver · KakaoTalk</span>
               <span className="text-white/15">|</span>
               <span className="text-white/20">Powered by Ium Labs</span>
+            </div>
+            
+            {/* Mobile methodology - Compact */}
+            <div className="flex sm:hidden items-center justify-center text-[9px] text-white/20">
+              <span>Powered by Ium Labs</span>
             </div>
           </div>
         </div>
