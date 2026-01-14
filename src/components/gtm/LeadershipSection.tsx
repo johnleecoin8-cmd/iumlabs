@@ -1,8 +1,8 @@
 import { motion } from "framer-motion";
 import { Send, Linkedin } from "lucide-react";
-import jamesNft from "@/assets/team/james-nft.png";
-import davidNft from "@/assets/team/david-nft.png";
-import julianNft from "@/assets/team/julian-nft.png";
+import jamesNft from "@/assets/team/team-member-1.jpeg";
+import davidNft from "@/assets/team/team-strategy.jpeg";
+import julianNft from "@/assets/team/team-community.jpeg";
 
 interface LeaderCard {
   number: string;
