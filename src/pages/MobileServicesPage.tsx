@@ -262,7 +262,7 @@ const MobileServicesPage = () => {
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ filter: "brightness(0.35)" }}
               >
-                <source src="/videos/services-background.mp4" type="video/mp4" />
+                <source src="/videos/services-hero.mp4" type="video/mp4" />
               </video>
               
               {/* Dark overlay gradient */}
