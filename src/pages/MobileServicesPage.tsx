@@ -14,7 +14,8 @@ import {
   ChevronDown
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useCountUp } from "@/hooks/useCountUp";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
@@ -95,7 +96,68 @@ const services = [
   }
 ];
 
-const ServiceCard = ({ 
+// Stats data
+const statsData = [
+  { value: 8, label: "Services", suffix: "" },
+  { value: 18, label: "Projects", prefix: "+", suffix: "" },
+  { value: 170, label: "KOLs", suffix: "+" },
+];
+
+// Stats Section Component with count-up animation
+const StatsSection = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+    
+    return () => observer.disconnect();
+  }, []);
+  
+  const count1 = useCountUp({ end: statsData[0].value, isVisible, delay: 0, duration: 1500 });
+  const count2 = useCountUp({ end: statsData[1].value, isVisible, delay: 100, duration: 1500 });
+  const count3 = useCountUp({ end: statsData[2].value, isVisible, delay: 200, duration: 1500 });
+  
+  return (
+    <motion.div 
+      ref={ref}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6, delay: 0.4 }}
+      className="relative z-10 py-4"
+    >
+      <div className="px-5">
+        <div className="grid grid-cols-3 gap-4">
+          <div className="text-center">
+            <div className="text-lg font-medium text-white">{count1}</div>
+            <div className="text-[10px] text-white/40">Services</div>
+          </div>
+          <div className="text-center">
+            <div className="text-lg font-medium text-white">+{count2}</div>
+            <div className="text-[10px] text-white/40">Projects</div>
+          </div>
+          <div className="text-center">
+            <div className="text-lg font-medium text-white">{count3}+</div>
+            <div className="text-[10px] text-white/40">KOLs</div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const ServiceCard = ({
   service, 
   index,
   isFullWidth = false
@@ -318,29 +380,7 @@ const MobileServicesPage = () => {
             </div>
 
             {/* Stats Section */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="relative z-10 py-4"
-            >
-              <div className="px-5">
-                <div className="grid grid-cols-3 gap-4">
-                  <div className="text-center">
-                    <div className="text-lg font-medium text-white">09</div>
-                    <div className="text-[10px] text-white/40">Services</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-lg font-medium text-white">50+</div>
-                    <div className="text-[10px] text-white/40">Projects</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-lg font-medium text-white">70+</div>
-                    <div className="text-[10px] text-white/40">KOLs</div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+            <StatsSection />
 
             {/* Scroll Indicator */}
             <div className="absolute bottom-6 right-4 z-10 flex items-center gap-2">
