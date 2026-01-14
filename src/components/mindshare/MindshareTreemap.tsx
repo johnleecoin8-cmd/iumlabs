@@ -132,9 +132,9 @@ const MindshareTreemap = ({ projects, className }: MindshareTreemapProps) => {
       animate="visible"
     >
       {/* Treemap Grid Layout */}
-      <div className="grid grid-cols-12 grid-rows-6 gap-1.5 h-full p-2">
+      <div className="grid grid-cols-12 grid-rows-8 gap-1.5 h-full p-2">
         
-        {/* Large cells (Top 3) - Take most space */}
+        {/* Row 1-3: Large cells (Top 3) */}
         {grouped.large.slice(0, 1).map((project, i) => (
           <div key={project.id} className="col-span-4 row-span-3">
             {renderCell(project, i)}
@@ -147,7 +147,7 @@ const MindshareTreemap = ({ projects, className }: MindshareTreemapProps) => {
           </div>
         ))}
 
-        {/* Medium cells container */}
+        {/* Medium cells container - top right */}
         <div className="col-span-5 row-span-3 grid grid-cols-2 grid-rows-2 gap-1.5">
           {grouped.large.slice(2, 3).concat(grouped.medium.slice(0, 3)).map((project, i) => (
             <div key={project.id}>
@@ -156,20 +156,29 @@ const MindshareTreemap = ({ projects, className }: MindshareTreemapProps) => {
           ))}
         </div>
 
-        {/* Bottom row - Medium and Small cells */}
-        <div className="col-span-12 row-span-3 grid grid-cols-6 gap-1.5">
+        {/* Row 4-5: Medium cells */}
+        <div className="col-span-12 row-span-2 grid grid-cols-6 gap-1.5">
           {grouped.medium.slice(3, 9).map((project, i) => (
             <div key={project.id}>
               {renderCell(project, i + 6)}
             </div>
           ))}
         </div>
+
+        {/* Row 6-8: Small and Tiny cells */}
+        <div className="col-span-12 row-span-3 grid grid-cols-8 gap-1.5">
+          {[...grouped.small, ...grouped.tiny].slice(0, 8).map((project, i) => (
+            <div key={project.id}>
+              {renderCell(project, i + 12)}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Remaining Small/Tiny cells */}
-      {(grouped.small.length > 0 || grouped.tiny.length > 0) && (
-        <div className="grid grid-cols-8 sm:grid-cols-10 lg:grid-cols-12 gap-1 px-2 pb-2 mt-1">
-          {[...grouped.small, ...grouped.tiny].map((project, i) => (
+      {/* Overflow cells (if more than 20) */}
+      {[...grouped.small, ...grouped.tiny].length > 8 && (
+        <div className="grid grid-cols-10 sm:grid-cols-12 gap-1 px-2 pb-2 mt-1">
+          {[...grouped.small, ...grouped.tiny].slice(8).map((project, i) => (
             <motion.div 
               key={project.id}
               variants={itemVariants}
