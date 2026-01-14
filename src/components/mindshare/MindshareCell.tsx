@@ -135,19 +135,39 @@ const MindshareCell = ({
         <div className="flex items-start justify-between gap-2">
           {/* Logo and ticker */}
           <div className="flex items-center gap-2">
-            {logoUrl && (size === 'large' || size === 'medium') && (
+            {(size === 'large' || size === 'medium') && (
               <div className="relative">
-                <img
-                  src={logoUrl}
-                  alt={ticker}
+                {logoUrl ? (
+                  <img
+                    src={logoUrl}
+                    alt={ticker}
+                    className={cn(
+                      'rounded-full bg-black/50 ring-1 ring-white/10 object-cover',
+                      size === 'large' ? 'w-10 h-10' : 'w-7 h-7'
+                    )}
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement;
+                      target.style.display = 'none';
+                      const fallback = target.nextElementSibling as HTMLElement;
+                      if (fallback) fallback.style.display = 'flex';
+                    }}
+                  />
+                ) : null}
+                {/* Fallback avatar with ticker initial */}
+                <div 
                   className={cn(
-                    'rounded-full bg-black/50 ring-1 ring-white/10 object-cover',
-                    size === 'large' ? 'w-10 h-10' : 'w-7 h-7'
+                    'items-center justify-center rounded-full bg-white/10 ring-1 ring-white/10',
+                    size === 'large' ? 'w-10 h-10' : 'w-7 h-7',
+                    logoUrl ? 'hidden' : 'flex'
                   )}
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).style.display = 'none';
-                  }}
-                />
+                >
+                  <span className={cn(
+                    'font-bold text-white/70',
+                    size === 'large' ? 'text-sm' : 'text-xs'
+                  )}>
+                    {ticker.charAt(0)}
+                  </span>
+                </div>
                 {/* Subtle glow behind logo */}
                 <div className={cn(
                   'absolute inset-0 rounded-full blur-lg -z-10 opacity-30',
