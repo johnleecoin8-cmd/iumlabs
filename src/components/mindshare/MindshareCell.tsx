@@ -27,7 +27,7 @@ const MindshareCell = ({
   rank,
   onClick,
 }: MindshareCellProps) => {
-  // Generate sparkline path for background
+  // Generate sparkline path - positioned to fill more of the cell
   const sparklinePath = useMemo(() => {
     if (!sparkline || sparkline.length < 2) return '';
     
@@ -35,9 +35,10 @@ const MindshareCell = ({
     const max = Math.max(...sparkline);
     const range = max - min || 1;
     
+    // Expand the Y range to use 70% of the cell height (from 15% to 85%)
     const points = sparkline.map((value, index) => {
       const x = (index / (sparkline.length - 1)) * 100;
-      const y = 100 - ((value - min) / range) * 50;
+      const y = 85 - ((value - min) / range) * 70; // More vertical range
       return `${x},${y}`;
     }).join(' ');
     
@@ -103,13 +104,12 @@ const MindshareCell = ({
         }}
       />
 
-      {/* Sparkline Background - more visible like Kaito */}
-      {sparkline.length >= 2 && (size === 'large' || size === 'medium' || size === 'small') && (
+      {/* Sparkline Background - Kaito style: larger, centered, more visible */}
+      {sparkline.length >= 2 && (size === 'large' || size === 'medium') && (
         <svg 
           className="absolute inset-0 w-full h-full"
           viewBox="0 0 100 100" 
           preserveAspectRatio="none"
-          style={{ opacity: 0.9 }}
         >
           <defs>
             <linearGradient id={`sparkGrad-${ticker}`} x1="0%" y1="0%" x2="0%" y2="100%">
@@ -122,12 +122,12 @@ const MindshareCell = ({
             d={`${sparklinePath} L 100,100 L 0,100 Z`}
             fill={`url(#sparkGrad-${ticker})`}
           />
-          {/* Main sparkline stroke - thicker and more visible */}
+          {/* Main sparkline stroke - thicker for visibility */}
           <path
             d={sparklinePath}
             fill="none"
             stroke={colors.sparkline}
-            strokeWidth="2"
+            strokeWidth={size === 'large' ? '2.5' : '2'}
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
