@@ -80,10 +80,10 @@ const KInfluenceGrid = () => {
                 <div className="flex items-center gap-4">
                   <div>
                     <h1 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
-                      Korean Community Mindshare
+                      K-Leaderboard
                     </h1>
                     <p className="mt-0.5 text-sm text-white/40">
-                      Real-time crypto sentiment from Korean communities
+                      Real-time crypto mindshare from Korean communities
                     </p>
                   </div>
                   

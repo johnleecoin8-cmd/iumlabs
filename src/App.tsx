@@ -164,7 +164,7 @@ const AppRoutes = () => {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/transparency" element={<Transparency />} />
         <Route path="/jobs" element={<Jobs />} />
-        <Route path="/k-influence" element={<KInfluenceGrid />} />
+        <Route path="/k-leaderboard" element={<KInfluenceGrid />} />
         {/* Hidden Admin Routes */}
         <Route path="/ium-admin" element={<AdminLogin />} />
         <Route path="/ium-admin/dashboard" element={<AdminDashboard />} />

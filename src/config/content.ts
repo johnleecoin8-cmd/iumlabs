@@ -48,7 +48,7 @@ export const navigation = {
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
     { name: "Research", href: "/research" },
-    { name: "K-Leaderboard", href: "/k-influence" },
+    { name: "K-Leaderboard", href: "/k-leaderboard" },
     { name: "Career", href: "/jobs" },
     { name: "Contact", href: "/contact" },
   ],
