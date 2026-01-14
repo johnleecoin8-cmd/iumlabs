@@ -19,6 +19,7 @@ import { useCountUp } from "@/hooks/useCountUp";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
 import { brand } from "@/config/content";
 
 const services = [
@@ -315,6 +316,7 @@ const ServiceCard = ({
 const MobileServicesPage = () => {
   return (
     <div className="min-h-screen bg-background">
+      <Navbar />
       {/* Hero Section - Projects Page Style */}
       <main className="p-0.5 bg-background">
         <div className="rounded-xl overflow-hidden">
