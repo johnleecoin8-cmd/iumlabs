@@ -56,13 +56,13 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
     return () => resizeObserver.disconnect();
   }, []);
 
-  // Calculate treemap layout using d3-hierarchy
+  // Calculate treemap layout using d3-hierarchy - STRICTLY 20 items
   const nodes = useMemo(() => {
     if (dimensions.width === 0 || dimensions.height === 0 || projects.length === 0) {
       return [];
     }
 
-    // Take top 20 projects sorted by mindshare
+    // Take EXACTLY top 20 projects sorted by mindshare
     const top20 = [...projects]
       .sort((a, b) => b.mindshare - a.mindshare)
       .slice(0, 20)
@@ -77,13 +77,13 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
       .sum(d => (d as TreemapDataNode).value || 0)
       .sort((a, b) => (b.value || 0) - (a.value || 0));
 
-    // Create treemap layout - NO GAPS
+    // Create treemap layout with refined padding
     const treemapLayout = treemap<{ children?: TreemapDataNode[] }>()
       .size([dimensions.width, dimensions.height])
-      .paddingInner(0) // Zero padding between cells
-      .paddingOuter(0) // Zero outer padding
+      .paddingInner(3) // Subtle gap between cells
+      .paddingOuter(0)
       .round(true)
-      .tile(treemapSquarify.ratio(1.2)); // Squarify for better aspect ratios
+      .tile(treemapSquarify.ratio(1.1)); // Better aspect ratios
 
     treemapLayout(root);
 
@@ -108,8 +108,8 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
     const containerArea = dimensions.width * dimensions.height;
     const ratio = area / containerArea;
 
-    if (ratio > 0.10) return 'large';
-    if (ratio > 0.04) return 'medium';
+    if (ratio > 0.08) return 'large';
+    if (ratio > 0.035) return 'medium';
     if (ratio > 0.015) return 'small';
     return 'tiny';
   };
@@ -117,7 +117,15 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
   if (projects.length === 0) {
     return (
       <div className={cn('flex items-center justify-center h-full', className)}>
-        <p className="text-white/40">No data available</p>
+        <div className="text-center">
+          <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br from-white/5 to-white/10 flex items-center justify-center">
+            <svg className="w-8 h-8 text-white/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+          <p className="text-white/40 text-sm font-medium">No data available</p>
+          <p className="text-white/20 text-xs mt-1">Check back soon for updates</p>
+        </div>
       </div>
     );
   }
@@ -125,17 +133,42 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
   return (
     <motion.div
       ref={containerRef}
-      className={cn('relative w-full h-full overflow-hidden bg-black', className)}
+      className={cn(
+        'relative w-full h-full overflow-hidden',
+        'bg-gradient-to-br from-[#030303] via-[#050505] to-[#080808]',
+        className
+      )}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.4 }}
+      transition={{ duration: 0.5 }}
     >
+      {/* Subtle grid pattern overlay */}
+      <div 
+        className="absolute inset-0 pointer-events-none opacity-[0.02]"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)
+          `,
+          backgroundSize: '40px 40px',
+        }}
+      />
+
+      {/* Radial gradient accent */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse at 20% 30%, rgba(20, 184, 166, 0.03) 0%, transparent 50%)',
+        }}
+      />
+
+      {/* Treemap cells */}
       {nodes.map((node, index) => {
         const width = node.x1 - node.x0;
         const height = node.y1 - node.y0;
         
         // Skip rendering if cell is too small
-        if (width < 15 || height < 15) return null;
+        if (width < 20 || height < 20) return null;
 
         return (
           <motion.div
@@ -147,12 +180,12 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
               width: width,
               height: height,
             }}
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ 
-              duration: 0.3, 
-              delay: index * 0.015,
-              ease: 'easeOut'
+              duration: 0.4, 
+              delay: index * 0.02,
+              ease: [0.25, 0.1, 0.25, 1] // Custom easing
             }}
           >
             <MindshareCell
@@ -169,6 +202,9 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
           </motion.div>
         );
       })}
+
+      {/* Bottom fade for depth */}
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
     </motion.div>
   );
 };
