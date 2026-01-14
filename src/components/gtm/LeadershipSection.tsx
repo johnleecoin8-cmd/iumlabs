@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Send } from "lucide-react";
+import { Send, Linkedin } from "lucide-react";
 import jamesNft from "@/assets/team/james-nft.png";
 import davidNft from "@/assets/team/david-nft.png";
 import julianNft from "@/assets/team/julian-nft.png";
@@ -13,6 +13,7 @@ interface LeaderCard {
   descriptionKo: string;
   photo: string;
   telegram: string;
+  linkedin?: string;
 }
 
 const LeadershipSection = () => {
@@ -25,7 +26,8 @@ const LeadershipSection = () => {
       description: "Defines the brand hierarchy and market entry strategy that aligns with Tier-1 global standards.",
       descriptionKo: "글로벌 탑티어 수준의 브랜드 위계와 시장 진입 전략(GTM)을 총괄 설계하여, 프로젝트의 체급을 높입니다.",
       photo: jamesNft,
-      telegram: "hnes2"
+      telegram: "hnes2",
+      linkedin: "https://www.linkedin.com/in/james-l-13a998251/",
     },
     {
       number: "02",
@@ -99,15 +101,28 @@ const LeadershipSection = () => {
                 </div>
 
                 {/* Telegram Link - Top Right */}
-                <a
-                  href={`https://t.me/${leader.telegram}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="absolute top-5 right-5 md:top-6 md:right-6 z-20 flex items-center justify-center w-9 h-9 bg-[#0088cc]/20 hover:bg-[#0088cc]/40 border border-[#0088cc]/30 hover:border-[#0088cc]/60 rounded-full transition-all duration-300"
-                  title={`@${leader.telegram}`}
-                >
-                  <Send className="w-4 h-4 text-[#0088cc]" />
-                </a>
+                <div className="absolute top-5 right-5 md:top-6 md:right-6 z-20 flex items-center gap-2">
+                  {leader.linkedin && (
+                    <a
+                      href={leader.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center w-9 h-9 bg-[#0A66C2]/20 hover:bg-[#0A66C2]/40 border border-[#0A66C2]/30 hover:border-[#0A66C2]/60 rounded-full transition-all duration-300"
+                      title="LinkedIn"
+                    >
+                      <Linkedin className="w-4 h-4 text-[#0A66C2]" />
+                    </a>
+                  )}
+                  <a
+                    href={`https://t.me/${leader.telegram}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center w-9 h-9 bg-[#0088cc]/20 hover:bg-[#0088cc]/40 border border-[#0088cc]/30 hover:border-[#0088cc]/60 rounded-full transition-all duration-300"
+                    title={`@${leader.telegram}`}
+                  >
+                    <Send className="w-4 h-4 text-[#0088cc]" />
+                  </a>
+                </div>
 
                 {/* Content */}
                 <div className="relative z-10 flex flex-col h-full">
