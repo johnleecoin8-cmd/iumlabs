@@ -256,14 +256,7 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Selected Work - 01 */}
-      <section className="bg-surface-base" id="selected-work">
-        <div className="border-t border-white/10">
-          <AnimatedSection delay={100}>
-            <SelectedWorkShowcase />
-          </AnimatedSection>
-        </div>
-      </section>
+      {/* Selected Work moved below Cases */}
       
       
       {/* Services - 02 */}
@@ -304,7 +297,7 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Cases - 04 */}
+      {/* Cases - 03 */}
       <section className="bg-surface-base" id="cases">
         <div className="border-t border-white/10">
           <AnimatedSection>
@@ -317,7 +310,16 @@ const Index = () => {
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
-            <CasesSection />
+            <CasesSection maxItems={6} />
+          </AnimatedSection>
+        </div>
+      </section>
+      
+      {/* Selected Work - Right below Cases */}
+      <section className="bg-surface-base" id="selected-work">
+        <div className="border-t border-white/10">
+          <AnimatedSection delay={100}>
+            <SelectedWorkShowcase />
           </AnimatedSection>
         </div>
       </section>
