@@ -113,8 +113,8 @@ const MindshareCell = ({
       onClick={onClick}
       className={cn(
         'group relative w-full h-full overflow-hidden cursor-pointer box-border',
-        'rounded-lg transition-all duration-300 ease-out',
-        'hover:scale-[1.02] hover:z-10',
+        'rounded-xl transition-all duration-200 ease-out',
+        'hover:scale-[1.015] hover:z-20',
       )}
       style={{ 
         background: colors.cellBg,
@@ -173,20 +173,33 @@ const MindshareCell = ({
       {/* Subtle bottom gradient for depth */}
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
 
-      {/* Crown for top 3 */}
-      {rank && rank <= 3 && (
-        <div className="absolute top-2 right-2 z-20">
-          <Crown 
-            className={cn(
-              'transition-transform duration-300 group-hover:scale-110',
-              size === 'large' ? 'w-5 h-5' : size === 'medium' ? 'w-4 h-4' : 'w-3 h-3'
-            )}
-            style={{ 
-              color: crownStyles[rank].color, 
-              filter: crownStyles[rank].glow,
-            }}
-            fill={crownStyles[rank].color}
-          />
+      {/* Rank badge - Kaito style */}
+      {rank && (
+        <div className={cn(
+          "absolute z-20 flex items-center gap-0.5",
+          size === 'large' ? 'top-2 right-2' : size === 'medium' ? 'top-1.5 right-1.5' : 'top-1 right-1'
+        )}>
+          {/* Rank number */}
+          <span className={cn(
+            "font-bold text-white/20",
+            size === 'large' ? 'text-sm' : size === 'medium' ? 'text-xs' : 'text-[9px]'
+          )}>
+            #{rank}
+          </span>
+          {/* Crown for top 3 */}
+          {rank <= 3 && (
+            <Crown 
+              className={cn(
+                'transition-transform duration-200 group-hover:scale-110',
+                size === 'large' ? 'w-4 h-4' : size === 'medium' ? 'w-3.5 h-3.5' : 'w-3 h-3'
+              )}
+              style={{ 
+                color: crownStyles[rank].color, 
+                filter: crownStyles[rank].glow,
+              }}
+              fill={crownStyles[rank].color}
+            />
+          )}
         </div>
       )}
 

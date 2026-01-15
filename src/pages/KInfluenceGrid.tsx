@@ -1,9 +1,10 @@
 import { useState, useMemo, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useHypeProjects } from '@/hooks/useHypeProjects';
 import MindshareTreemap, { type MindshareProject } from '@/components/mindshare/MindshareTreemap';
 import TreemapSkeleton from '@/components/mindshare/TreemapSkeleton';
 import TokenStatusToggle, { type TokenStatus } from '@/components/mindshare/TokenStatusToggle';
-import { History, Users, ExternalLink, Radio, Search, X, MessageCircle, Hash } from 'lucide-react';
+import { Radio, Search, X, MessageCircle, Hash, Clock } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { usePageMeta } from '@/hooks/usePageMeta';
@@ -43,6 +44,7 @@ const KInfluenceGrid = () => {
   const [tokenStatus, setTokenStatus] = useState<TokenStatus>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [hourlyStats, setHourlyStats] = useState(generateHourlyStats);
+  const [period, setPeriod] = useState<'7d' | '30d'>('7d');
   
   const {
     projects,
@@ -128,87 +130,172 @@ const KInfluenceGrid = () => {
       <div className="fixed inset-0 bg-gradient-to-b from-teal-950/5 via-transparent to-transparent pointer-events-none" />
 
       <div className="relative max-w-[1920px] mx-auto">
-        {/* Header - Mobile optimized */}
-        <div className="border-b border-white/5">
-          <div className="px-3 sm:px-6 py-3 sm:py-5">
-            <div className="flex flex-col gap-3 sm:gap-5">
+        {/* Header - Kaito style */}
+        <div className="border-b border-white/[0.06]">
+          <div className="px-3 sm:px-6 py-3 sm:py-4">
+            <div className="flex flex-col gap-3 sm:gap-4">
               {/* Title row */}
               <div className="flex items-center justify-between gap-2">
-                <div>
-                  <h1 className="text-base sm:text-2xl font-bold text-white tracking-tight">
+                <div className="flex items-center gap-3">
+                  <h1 className="text-base sm:text-xl font-bold text-white tracking-tight">
                     K-Leaderboard
                   </h1>
-                  <p className="hidden sm:block mt-0.5 text-sm text-white/40">
-                    Real-time crypto mindshare from Korean communities
-                  </p>
+                  
+                  {/* Period filter - Kaito style */}
+                  <div className="hidden sm:flex items-center p-0.5 bg-white/[0.03] rounded-lg border border-white/[0.06]">
+                    <button
+                      onClick={() => setPeriod('7d')}
+                      className={cn(
+                        "px-2.5 py-1 text-xs font-medium rounded-md transition-all duration-200",
+                        period === '7d' 
+                          ? "bg-teal-500/15 text-teal-400 border border-teal-500/30" 
+                          : "text-white/40 hover:text-white/60 border border-transparent"
+                      )}
+                    >
+                      7D
+                    </button>
+                    <button
+                      onClick={() => setPeriod('30d')}
+                      className={cn(
+                        "px-2.5 py-1 text-xs font-medium rounded-md transition-all duration-200",
+                        period === '30d' 
+                          ? "bg-teal-500/15 text-teal-400 border border-teal-500/30" 
+                          : "text-white/40 hover:text-white/60 border border-transparent"
+                      )}
+                    >
+                      30D
+                    </button>
+                  </div>
                 </div>
 
-                {/* Right side: Search + Action buttons + Live indicator */}
-                <div className="flex items-center gap-1.5 sm:gap-3">
+                {/* Right side: Search + Stats + Live indicator */}
+                <div className="flex items-center gap-2 sm:gap-3">
                   {/* Search input - Kaito style */}
-                  <div className="relative">
-                    
+                  <div className="relative hidden sm:flex items-center">
+                    <Search className="absolute left-2.5 w-3.5 h-3.5 text-white/30" />
+                    <input
+                      type="text"
+                      placeholder="Search projects..."
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      className={cn(
+                        "w-36 lg:w-44 pl-8 pr-7 py-1.5 text-xs",
+                        "bg-white/[0.03] border border-white/[0.08] rounded-lg",
+                        "text-white placeholder-white/25",
+                        "focus:outline-none focus:border-teal-500/40 focus:bg-white/[0.05]",
+                        "transition-all duration-200"
+                      )}
+                    />
+                    {searchQuery && (
+                      <button 
+                        onClick={() => setSearchQuery('')}
+                        className="absolute right-2 p-0.5 hover:bg-white/10 rounded transition-colors"
+                      >
+                        <X className="w-3 h-3 text-white/40 hover:text-white/70" />
+                      </button>
+                    )}
                   </div>
                   
+                  {/* Last updated - Kaito style */}
+                  {lastUpdate && (
+                    <div className="hidden lg:flex items-center gap-1.5 text-xs text-white/30">
+                      <Clock className="w-3 h-3" />
+                      <span>Updated {formatDistanceToNow(lastUpdate, { addSuffix: false })} ago</span>
+                    </div>
+                  )}
                   
+                  {/* Divider */}
+                  <div className="hidden sm:block w-px h-5 bg-white/[0.08]" />
                   
-                  
-                  {/* Live indicator - moved to right end */}
-                  <div className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
-                    <Radio className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-teal-400 animate-pulse" />
+                  {/* Live indicator */}
+                  <div className="flex items-center gap-1 sm:gap-1.5 px-2 py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
+                    <div className="relative">
+                      <Radio className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-teal-400" />
+                      <div className="absolute inset-0 animate-ping">
+                        <Radio className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-teal-400 opacity-40" />
+                      </div>
+                    </div>
                     <span className="text-[10px] sm:text-xs font-medium text-teal-400">Live</span>
                   </div>
                 </div>
               </div>
 
-              {/* Controls row - Mobile optimized */}
+              {/* Controls row */}
               <div className="flex items-center justify-between gap-2 sm:gap-4">
-                {/* Token Status Filter */}
-                <TokenStatusToggle selected={tokenStatus} onChange={setTokenStatus} />
+                {/* Left: Token Status Filter + Mobile Period */}
+                <div className="flex items-center gap-2">
+                  <TokenStatusToggle selected={tokenStatus} onChange={setTokenStatus} />
+                  
+                  {/* Mobile period filter */}
+                  <div className="flex sm:hidden items-center p-0.5 bg-white/[0.03] rounded-md border border-white/[0.06]">
+                    <button
+                      onClick={() => setPeriod('7d')}
+                      className={cn(
+                        "px-2 py-0.5 text-[10px] font-medium rounded transition-all",
+                        period === '7d' ? "bg-teal-500/15 text-teal-400" : "text-white/40"
+                      )}
+                    >
+                      7D
+                    </button>
+                    <button
+                      onClick={() => setPeriod('30d')}
+                      className={cn(
+                        "px-2 py-0.5 text-[10px] font-medium rounded transition-all",
+                        period === '30d' ? "bg-teal-500/15 text-teal-400" : "text-white/40"
+                      )}
+                    >
+                      30D
+                    </button>
+                  </div>
+                </div>
                 
-                {/* Stats with Channels & Mentions - Desktop */}
-                <div className="hidden sm:flex items-center gap-3">
-                  {/* Channels badge */}
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-teal-500/10 to-teal-500/5 border border-teal-500/20 rounded-lg">
-                    <Hash className="w-3.5 h-3.5 text-teal-400" />
-                    <span className="text-sm font-semibold text-teal-400">{hourlyStats.channels.toLocaleString()}</span>
-                    <span className="text-xs text-white/40">Channels</span>
+                {/* Right: Stats - Desktop */}
+                <div className="hidden sm:flex items-center gap-2.5">
+                  {/* Channels badge - Kaito glassmorphism */}
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.02] backdrop-blur-sm border border-white/[0.06] rounded-xl">
+                    <Hash className="w-4 h-4 text-teal-400" />
+                    <div className="flex flex-col -space-y-0.5">
+                      <span className="text-sm font-bold text-white">{hourlyStats.channels.toLocaleString()}</span>
+                      <span className="text-[9px] text-white/35 uppercase tracking-wider">Channels</span>
+                    </div>
                   </div>
                   
                   {/* Mentions badge */}
-                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-cyan-500/10 to-cyan-500/5 border border-cyan-500/20 rounded-lg">
-                    <MessageCircle className="w-3.5 h-3.5 text-cyan-400" />
-                    <span className="text-sm font-semibold text-cyan-400">{hourlyStats.mentions.toLocaleString()}</span>
-                    <span className="text-xs text-white/40">Mentions</span>
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.02] backdrop-blur-sm border border-white/[0.06] rounded-xl">
+                    <MessageCircle className="w-4 h-4 text-cyan-400" />
+                    <div className="flex flex-col -space-y-0.5">
+                      <span className="text-sm font-bold text-white">{hourlyStats.mentions.toLocaleString()}</span>
+                      <span className="text-[9px] text-white/35 uppercase tracking-wider">Mentions</span>
+                    </div>
                   </div>
                   
-                  {/* Divider */}
-                  <div className="w-px h-6 bg-white/10" />
+                  {/* Thin divider */}
+                  <div className="w-px h-8 bg-white/[0.06]" />
                   
-                  {/* Project counts */}
-                  <div className="flex items-center gap-3 text-sm">
+                  {/* Project counts - minimal */}
+                  <div className="flex items-center gap-3">
                     <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
-                      <span className="font-semibold text-teal-400">{stats.tgeCount}</span>
-                      <span className="text-white/40 text-xs">TGE</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-teal-400 shadow-[0_0_6px_rgba(45,212,191,0.5)]" />
+                      <span className="text-sm font-semibold text-white">{stats.tgeCount}</span>
+                      <span className="text-[10px] text-white/35">TGE</span>
                     </div>
                     <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                      <span className="font-semibold text-cyan-400">{stats.preTgeCount}</span>
-                      <span className="text-white/40 text-xs">Pre-TGE</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(34,211,238,0.5)]" />
+                      <span className="text-sm font-semibold text-white">{stats.preTgeCount}</span>
+                      <span className="text-[10px] text-white/35">Pre-TGE</span>
                     </div>
                   </div>
                 </div>
                 
-                {/* Mobile stats - Compact with channels/mentions */}
-                <div className="flex sm:hidden items-center gap-1.5 text-[10px]">
-                  <div className="flex items-center gap-1 px-1.5 py-0.5 bg-teal-500/10 border border-teal-500/20 rounded">
+                {/* Mobile stats */}
+                <div className="flex sm:hidden items-center gap-1.5">
+                  <div className="flex items-center gap-1 px-1.5 py-0.5 bg-white/[0.03] border border-white/[0.06] rounded">
                     <Hash className="w-2.5 h-2.5 text-teal-400" />
-                    <span className="text-teal-400 font-medium">{(hourlyStats.channels / 1000).toFixed(1)}K</span>
+                    <span className="text-[10px] text-white font-medium">{(hourlyStats.channels / 1000).toFixed(1)}K</span>
                   </div>
-                  <div className="flex items-center gap-1 px-1.5 py-0.5 bg-cyan-500/10 border border-cyan-500/20 rounded">
+                  <div className="flex items-center gap-1 px-1.5 py-0.5 bg-white/[0.03] border border-white/[0.06] rounded">
                     <MessageCircle className="w-2.5 h-2.5 text-cyan-400" />
-                    <span className="text-cyan-400 font-medium">{(hourlyStats.mentions / 1000).toFixed(0)}K</span>
+                    <span className="text-[10px] text-white font-medium">{(hourlyStats.mentions / 1000).toFixed(0)}K</span>
                   </div>
                 </div>
               </div>
@@ -216,42 +303,22 @@ const KInfluenceGrid = () => {
           </div>
         </div>
 
-        {/* Treemap Container - Adjusted height for mobile */}
-        <div className="h-[calc(100vh-180px)] sm:h-[calc(100vh-200px)]">
+        {/* Treemap Container */}
+        <div className="h-[calc(100vh-160px)] sm:h-[calc(100vh-180px)]">
           {isLoading ? <TreemapSkeleton /> : <MindshareTreemap projects={treemapProjects} className="h-full" />}
         </div>
 
-        {/* Footer - Kaito style methodology */}
-        <div className="border-t border-white/5">
-          <div className="px-3 sm:px-6 py-3 sm:py-4">
-            {/* Stats badges */}
-            <div className="flex items-center justify-center gap-3 sm:gap-4 mb-3">
-              <div className="flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/5 border border-white/10 rounded-full">
-                <Hash className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-teal-400" />
-                <span className="text-[10px] sm:text-xs text-white/60">
-                  <span className="text-teal-400 font-medium">{hourlyStats.channels.toLocaleString()}</span> Channels
-                </span>
-              </div>
-              <div className="flex items-center gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 bg-white/5 border border-white/10 rounded-full">
-                <MessageCircle className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-teal-400" />
-                <span className="text-[10px] sm:text-xs text-white/60">
-                  <span className="text-teal-400 font-medium">{hourlyStats.mentions.toLocaleString()}</span> Mentions
-                </span>
-              </div>
-            </div>
-            
-            {/* Methodology - Kaito style */}
-            <div>
-              <p className="text-[9px] sm:text-[11px] text-white/30 text-center leading-relaxed max-w-3xl mx-auto">
-                K-Leaderboard is calculated as the total mindshare from {hourlyStats.channels.toLocaleString()}+ Korean crypto community channels across X, Telegram, Naver, and KakaoTalk. 
-                Community sources are curated from major Korean crypto communities, influencer networks, and trading groups. 
-                <span className="hidden sm:inline"> If you notice any projects or community channels missing, feel free to contact us.</span>
-                {' '}Data updates every hour.
-              </p>
-              <p className="text-[8px] sm:text-[10px] text-white/20 text-center mt-2">
-                Powered by <span className="text-teal-400/60">Ium Labs</span>
-              </p>
-            </div>
+        {/* Footer - Minimal Kaito style */}
+        <div className="border-t border-white/[0.04]">
+          <div className="px-4 sm:px-6 py-3">
+            <p className="text-[9px] sm:text-[10px] text-white/25 text-center leading-relaxed max-w-2xl mx-auto">
+              K-Leaderboard tracks mindshare from {hourlyStats.channels.toLocaleString()}+ Korean crypto channels. 
+              Missing a project?{' '}
+              <Link to="/contact" className="text-teal-400/50 hover:text-teal-400 transition-colors">
+                Contact us
+              </Link>
+              . Data updates hourly.
+            </p>
           </div>
         </div>
       </div>
