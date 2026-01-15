@@ -197,6 +197,21 @@ const MindshareCell = ({
   // Don't show "General" - it's meaningless
   const showNarrative = narrative && narrative !== 'General' && (size === 'large' || size === 'medium') && !isTrending;
 
+  // Gold border for top 3 ranks
+  const isTop3 = rank && rank <= 3;
+  const getGoldBorder = () => {
+    if (!isTop3) return colors.borderColor;
+    if (rank === 1) return 'rgba(255, 215, 0, 0.8)'; // Gold
+    if (rank === 2) return 'rgba(192, 192, 192, 0.7)'; // Silver
+    return 'rgba(205, 127, 50, 0.7)'; // Bronze
+  };
+  const getGoldShadow = () => {
+    if (!isTop3) return `0 2px 12px -4px ${colors.glowColor}, inset 0 1px 0 rgba(255,255,255,0.04)`;
+    if (rank === 1) return `0 0 16px rgba(255, 215, 0, 0.35), 0 0 32px rgba(255, 215, 0, 0.15), inset 0 1px 0 rgba(255,255,255,0.15)`;
+    if (rank === 2) return `0 0 12px rgba(192, 192, 192, 0.3), 0 0 24px rgba(192, 192, 192, 0.12), inset 0 1px 0 rgba(255,255,255,0.12)`;
+    return `0 0 10px rgba(205, 127, 50, 0.3), 0 0 20px rgba(205, 127, 50, 0.12), inset 0 1px 0 rgba(255,255,255,0.1)`;
+  };
+
   return (
     <div
       onClick={onClick}
@@ -210,34 +225,14 @@ const MindshareCell = ({
         background: isTrending 
           ? 'linear-gradient(160deg, rgba(5, 150, 105, 0.9) 0%, rgba(4, 120, 87, 0.85) 100%)'
           : colors.cellBg,
-        border: isTrending ? '1px solid rgba(255, 255, 255, 0.2)' : `1px solid ${colors.borderColor}`,
+        border: isTrending 
+          ? '1px solid rgba(255, 255, 255, 0.2)' 
+          : `2px solid ${getGoldBorder()}`,
         boxShadow: isTrending 
           ? `0 4px 20px -6px rgba(20, 184, 166, 0.3), inset 0 1px 0 rgba(255,255,255,0.08)`
-          : `0 2px 12px -4px ${colors.glowColor}, inset 0 1px 0 rgba(255,255,255,0.04)`,
+          : getGoldShadow(),
       }}
     >
-      {/* Crown badge for top 3 ranks - Kaito style */}
-      {rank && rank <= 3 && (size === 'large' || size === 'medium') && (
-        <div className="absolute top-2 right-2 z-20 flex items-center gap-0.5">
-          <span className={cn(
-            'text-base sm:text-lg drop-shadow-lg',
-            rank === 1 && 'text-amber-400',
-            rank === 2 && 'text-slate-300',
-            rank === 3 && 'text-amber-600',
-          )}>
-            👑
-          </span>
-          <span className={cn(
-            'text-[9px] sm:text-[10px] font-bold',
-            rank === 1 && 'text-amber-400',
-            rank === 2 && 'text-slate-300',
-            rank === 3 && 'text-amber-600',
-          )}>
-            #{rank}
-          </span>
-        </div>
-      )}
-
       {/* Enhanced diagonal shine overlay - Kaito style */}
       <div 
         className="absolute inset-0 pointer-events-none opacity-60 group-hover:opacity-80 transition-opacity duration-500"
