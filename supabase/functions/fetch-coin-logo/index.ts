@@ -51,6 +51,34 @@ async function fetchLogoFromCoinGecko(ticker: string): Promise<string | null> {
   }
 }
 
+// Fetch Twitter profile image from twitter_url
+async function fetchLogoFromTwitter(twitterUrl: string | null): Promise<string | null> {
+  if (!twitterUrl) return null;
+  
+  try {
+    // Extract username from Twitter URL
+    const match = twitterUrl.match(/(?:twitter\.com|x\.com)\/([^\/\?]+)/i);
+    if (!match) return null;
+    
+    const username = match[1];
+    
+    // Use unavatar.io as a reliable Twitter avatar proxy (no API key needed)
+    const avatarUrl = `https://unavatar.io/twitter/${username}`;
+    
+    // Verify the image exists
+    const checkRes = await fetch(avatarUrl, { method: 'HEAD' });
+    if (checkRes.ok) {
+      console.log(`Found Twitter avatar for @${username}`);
+      return avatarUrl;
+    }
+    
+    return null;
+  } catch (error) {
+    console.error(`Error fetching Twitter logo:`, error);
+    return null;
+  }
+}
+
 // Delay helper for rate limiting
 const delay = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -72,7 +100,7 @@ serve(async (req) => {
     if (updateAll) {
       const { data: projects, error: fetchError } = await supabase
         .from('hype_projects')
-        .select('ticker')
+        .select('ticker, twitter_url')
         .or('logo_url.is.null,logo_url.eq.');
       
       if (fetchError) {
@@ -83,7 +111,16 @@ serve(async (req) => {
       const errors: string[] = [];
       
       for (const project of projects || []) {
-        const logoUrl = await fetchLogoFromCoinGecko(project.ticker);
+        // Try CoinGecko first
+        let logoUrl = await fetchLogoFromCoinGecko(project.ticker);
+        
+        // Fallback to Twitter if CoinGecko fails
+        if (!logoUrl && project.twitter_url) {
+          logoUrl = await fetchLogoFromTwitter(project.twitter_url);
+          if (logoUrl) {
+            console.log(`Using Twitter fallback for ${project.ticker}`);
+          }
+        }
         
         if (logoUrl) {
           const { error: updateError } = await supabase
@@ -98,10 +135,10 @@ serve(async (req) => {
             console.log(`Updated logo for ${project.ticker}: ${logoUrl}`);
           }
         } else {
-          errors.push(`${project.ticker}: Logo not found on CoinGecko`);
+          errors.push(`${project.ticker}: Logo not found (CoinGecko & Twitter)`);
         }
         
-        // Rate limit: 500ms between requests (CoinGecko free tier ~10-30 req/min)
+        // Rate limit: 500ms between requests
         await delay(500);
       }
       
