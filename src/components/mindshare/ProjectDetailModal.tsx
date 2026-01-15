@@ -69,7 +69,7 @@ const ProjectDetailModal = ({ project, open, onOpenChange }: ProjectDetailModalP
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-[#0a0a0a] border border-white/10 sm:max-w-md p-0 gap-0 overflow-hidden">
+      <DialogContent className="bg-[#0a0a0a] border border-white/10 w-[95vw] sm:max-w-md max-h-[90vh] overflow-y-auto p-0 gap-0 overflow-hidden rounded-2xl">
         {/* Header with gradient */}
         <div 
           className="relative p-5 pb-4"

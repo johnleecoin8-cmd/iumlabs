@@ -1,5 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
-import { Home, Briefcase, FolderOpen, BookOpen, Mail } from "lucide-react";
+import { Home, Briefcase, FolderOpen, BookOpen, Mail, Crown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { useState, useEffect } from "react";
@@ -7,8 +7,8 @@ import { useState, useEffect } from "react";
 const navItems = [
   { icon: Home, label: "Home", path: "/" },
   { icon: Briefcase, label: "Services", path: "/services/all" },
+  { icon: Crown, label: "K-Board", path: "/k-leaderboard" },
   { icon: FolderOpen, label: "Projects", path: "/projects" },
-  { icon: BookOpen, label: "Research", path: "/research" },
   { icon: Mail, label: "Contact", path: "/contact" },
 ];
 
