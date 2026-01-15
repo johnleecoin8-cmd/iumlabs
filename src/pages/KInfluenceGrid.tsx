@@ -4,8 +4,7 @@ import { useHypeProjects } from '@/hooks/useHypeProjects';
 import MindshareTreemap, { type MindshareProject } from '@/components/mindshare/MindshareTreemap';
 import TreemapSkeleton from '@/components/mindshare/TreemapSkeleton';
 import TokenStatusToggle, { type TokenStatus } from '@/components/mindshare/TokenStatusToggle';
-import LeaderboardSidebar from '@/components/mindshare/LeaderboardSidebar';
-import { Radio, Search, X, MessageCircle, Hash, Clock, PanelLeftClose, PanelLeft, Flame } from 'lucide-react';
+import { Radio, Search, X, MessageCircle, Hash, Clock, Flame } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { usePageMeta } from '@/hooks/usePageMeta';
@@ -148,7 +147,6 @@ const KInfluenceGrid = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [hourlyStats, setHourlyStats] = useState(generateHourlyStats);
   const [period, setPeriod] = useState<'7d' | '30d'>('7d');
-  const [sidebarOpen, setSidebarOpen] = useState(true);
   
   const {
     projects,
@@ -253,19 +251,6 @@ const KInfluenceGrid = () => {
     }));
   }, [projects, tokenStatus, searchQuery]);
 
-  // Projects for sidebar (all projects with change data)
-  const sidebarProjects = useMemo(() => {
-    return treemapProjects.map(p => ({
-      id: p.id,
-      ticker: p.ticker,
-      name: p.name,
-      mindshare: p.mindshare,
-      mindshare_change: p.mindshare_change,
-      logo_url: p.logo_url,
-      trend: p.trend,
-    }));
-  }, [treemapProjects]);
-
   // Calculate stats - based on top 20 only
   const stats = useMemo(() => {
     if (!treemapProjects.length) return {
@@ -288,19 +273,6 @@ const KInfluenceGrid = () => {
       <div className="fixed inset-0 bg-gradient-to-b from-teal-950/5 via-transparent to-transparent pointer-events-none" />
 
       <div className="relative flex h-screen max-w-[1920px] mx-auto">
-        {/* Sidebar - Desktop only */}
-        <div className={cn(
-          "hidden lg:flex flex-shrink-0 transition-all duration-300 ease-out",
-          sidebarOpen ? "w-[260px]" : "w-0"
-        )}>
-          {sidebarOpen && (
-            <LeaderboardSidebar 
-              projects={sidebarProjects} 
-              className="w-full"
-            />
-          )}
-        </div>
-
         {/* Main content */}
         <div className="flex-1 flex flex-col min-w-0">
           {/* Header - Kaito style */}
@@ -310,19 +282,6 @@ const KInfluenceGrid = () => {
                 {/* Title row */}
                 <div className="flex items-center justify-between gap-2">
                   <div className="flex items-center gap-2 sm:gap-3">
-                    {/* Sidebar toggle - Desktop only */}
-                    <button
-                      onClick={() => setSidebarOpen(!sidebarOpen)}
-                      className="hidden lg:flex items-center justify-center w-8 h-8 rounded-lg bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] hover:border-white/[0.1] transition-all"
-                      title={sidebarOpen ? "Hide sidebar" : "Show sidebar"}
-                    >
-                      {sidebarOpen ? (
-                        <PanelLeftClose className="w-4 h-4 text-white/50" />
-                      ) : (
-                        <PanelLeft className="w-4 h-4 text-white/50" />
-                      )}
-                    </button>
-                    
                     <h1 className="text-sm sm:text-xl font-bold text-white tracking-tight">
                       K-Leaderboard
                     </h1>
