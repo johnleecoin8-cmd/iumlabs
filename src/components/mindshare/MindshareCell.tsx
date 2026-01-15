@@ -25,13 +25,13 @@ interface MindshareCellProps {
   isTrending?: boolean;
 }
 
-// Narrative color mapping - Kaito style
+// Narrative color mapping - Ium Labs style with teal accents
 const narrativeColors: Record<string, { bg: string; text: string; border: string }> = {
   'AI': { bg: 'bg-violet-500/15', text: 'text-violet-300', border: 'border-violet-400/30' },
   'L2': { bg: 'bg-blue-500/15', text: 'text-blue-300', border: 'border-blue-400/30' },
   'DePIN': { bg: 'bg-orange-500/15', text: 'text-orange-300', border: 'border-orange-400/30' },
   'Meme': { bg: 'bg-pink-500/15', text: 'text-pink-300', border: 'border-pink-400/30' },
-  'DeFi': { bg: 'bg-emerald-500/15', text: 'text-emerald-300', border: 'border-emerald-400/30' },
+  'DeFi': { bg: 'bg-teal-500/15', text: 'text-teal-300', border: 'border-teal-400/30' },
   'Gaming': { bg: 'bg-yellow-500/15', text: 'text-yellow-300', border: 'border-yellow-400/30' },
   'Infra': { bg: 'bg-cyan-500/15', text: 'text-cyan-300', border: 'border-cyan-400/30' },
   'RWA': { bg: 'bg-amber-500/15', text: 'text-amber-300', border: 'border-amber-400/30' },
@@ -54,7 +54,7 @@ const MindshareCell = ({
   onClick,
   isTrending = false,
 }: MindshareCellProps) => {
-  // Generate sparkline path - Kaito style: full cell coverage
+  // Generate sparkline path
   const sparklinePath = useMemo(() => {
     if (!sparkline || sparkline.length < 2) return '';
     
@@ -62,7 +62,6 @@ const MindshareCell = ({
     const max = Math.max(...sparkline);
     const range = max - min || 1;
     
-    // Kaito style: use 80% of cell height (from 10% to 90%) for maximum visibility
     const points = sparkline.map((value, index) => {
       const x = (index / (sparkline.length - 1)) * 100;
       const y = 90 - ((value - min) / range) * 80;
@@ -72,40 +71,40 @@ const MindshareCell = ({
     return `M ${points.split(' ').join(' L ')}`;
   }, [sparkline]);
 
-  // Kaito-inspired color system with enhanced sparkline visibility
+  // Ium Labs color system - teal-focused for up trend
   const trendColors = {
     up: {
-      cellBg: 'linear-gradient(160deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 95, 70, 0.22) 40%, rgba(4, 47, 46, 0.35) 100%)',
-      glowColor: 'rgba(52, 211, 153, 0.15)',
-      borderColor: 'rgba(52, 211, 153, 0.3)',
-      sparkline: 'rgba(52, 211, 153, 0.85)',
-      sparklineGlow: 'rgba(52, 211, 153, 0.4)',
-      sparklineFillTop: 'rgba(52, 211, 153, 0.25)',
-      sparklineFillBottom: 'rgba(52, 211, 153, 0.02)',
-      accentText: 'text-emerald-400',
-      percentBg: 'bg-emerald-500/10',
+      cellBg: 'linear-gradient(160deg, rgba(20, 184, 166, 0.12) 0%, rgba(13, 148, 136, 0.22) 40%, rgba(6, 78, 59, 0.35) 100%)',
+      glowColor: 'rgba(45, 212, 191, 0.15)',
+      borderColor: 'rgba(45, 212, 191, 0.25)',
+      sparkline: 'rgba(45, 212, 191, 0.85)',
+      sparklineGlow: 'rgba(45, 212, 191, 0.4)',
+      sparklineFillTop: 'rgba(45, 212, 191, 0.25)',
+      sparklineFillBottom: 'rgba(45, 212, 191, 0.02)',
+      accentText: 'text-teal-400',
+      percentBg: 'bg-teal-500/10',
     },
     down: {
-      cellBg: 'linear-gradient(160deg, rgba(239, 68, 68, 0.12) 0%, rgba(153, 27, 27, 0.22) 40%, rgba(69, 10, 10, 0.35) 100%)',
-      glowColor: 'rgba(248, 113, 113, 0.15)',
-      borderColor: 'rgba(248, 113, 113, 0.3)',
-      sparkline: 'rgba(248, 113, 113, 0.85)',
-      sparklineGlow: 'rgba(248, 113, 113, 0.4)',
-      sparklineFillTop: 'rgba(248, 113, 113, 0.25)',
+      cellBg: 'linear-gradient(160deg, rgba(239, 68, 68, 0.10) 0%, rgba(153, 27, 27, 0.18) 40%, rgba(69, 10, 10, 0.30) 100%)',
+      glowColor: 'rgba(248, 113, 113, 0.12)',
+      borderColor: 'rgba(248, 113, 113, 0.25)',
+      sparkline: 'rgba(248, 113, 113, 0.8)',
+      sparklineGlow: 'rgba(248, 113, 113, 0.35)',
+      sparklineFillTop: 'rgba(248, 113, 113, 0.20)',
       sparklineFillBottom: 'rgba(248, 113, 113, 0.02)',
       accentText: 'text-rose-400',
       percentBg: 'bg-rose-500/10',
     },
   };
 
-  // Neutral style - subtle but visible
+  // Neutral style - subtle
   const neutralColors = {
-    cellBg: 'linear-gradient(160deg, rgba(100, 116, 139, 0.1) 0%, rgba(51, 65, 85, 0.18) 40%, rgba(30, 41, 59, 0.3) 100%)',
-    glowColor: 'rgba(148, 163, 184, 0.1)',
-    borderColor: 'rgba(148, 163, 184, 0.2)',
-    sparkline: 'rgba(148, 163, 184, 0.7)',
-    sparklineGlow: 'rgba(148, 163, 184, 0.25)',
-    sparklineFillTop: 'rgba(148, 163, 184, 0.15)',
+    cellBg: 'linear-gradient(160deg, rgba(100, 116, 139, 0.08) 0%, rgba(51, 65, 85, 0.15) 40%, rgba(30, 41, 59, 0.25) 100%)',
+    glowColor: 'rgba(148, 163, 184, 0.08)',
+    borderColor: 'rgba(148, 163, 184, 0.15)',
+    sparkline: 'rgba(148, 163, 184, 0.65)',
+    sparklineGlow: 'rgba(148, 163, 184, 0.2)',
+    sparklineFillTop: 'rgba(148, 163, 184, 0.12)',
     sparklineFillBottom: 'rgba(148, 163, 184, 0.01)',
     accentText: 'text-slate-400',
     percentBg: 'bg-slate-500/10',
@@ -115,32 +114,31 @@ const MindshareCell = ({
   const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : null;
   const isPreTge = tokenStatus === 'pre-tge';
 
-
   return (
     <div
       onClick={onClick}
       className={cn(
         'group relative w-full h-full overflow-hidden cursor-pointer box-border',
-        'rounded-xl transition-all duration-200 ease-out',
+        'rounded-lg sm:rounded-xl transition-all duration-200 ease-out',
         'hover:scale-[1.015] hover:z-20',
-        // Trending pulse animation
-        isTrending && 'ring-2 ring-amber-400/40 animate-pulse',
+        // Ium Labs teal-based trending style
+        isTrending && 'ring-1 sm:ring-2 ring-teal-400/50',
       )}
       style={{ 
         background: isTrending 
-          ? 'linear-gradient(160deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.1) 30%, ' + colors.cellBg.replace('linear-gradient(160deg, ', '')
+          ? 'linear-gradient(160deg, rgba(20, 184, 166, 0.18) 0%, rgba(13, 148, 136, 0.12) 30%, ' + colors.cellBg.replace('linear-gradient(160deg, ', '')
           : colors.cellBg,
-        border: isTrending ? '1px solid rgba(251, 191, 36, 0.5)' : `1px solid ${colors.borderColor}`,
+        border: isTrending ? '1px solid rgba(45, 212, 191, 0.4)' : `1px solid ${colors.borderColor}`,
         boxShadow: isTrending 
-          ? `0 4px 32px -4px rgba(251, 191, 36, 0.3), inset 0 1px 0 rgba(255,255,255,0.1)`
-          : `0 4px 24px -4px ${colors.glowColor}, inset 0 1px 0 rgba(255,255,255,0.05)`,
+          ? `0 4px 24px -4px rgba(20, 184, 166, 0.25), inset 0 1px 0 rgba(255,255,255,0.08)`
+          : `0 4px 20px -4px ${colors.glowColor}, inset 0 1px 0 rgba(255,255,255,0.04)`,
       }}
     >
       {/* Glass morphism overlay */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-60 group-hover:opacity-80 transition-opacity duration-300"
+        className="absolute inset-0 pointer-events-none opacity-50 group-hover:opacity-70 transition-opacity duration-300"
         style={{
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.06) 0%, transparent 40%, rgba(0,0,0,0.1) 100%)',
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, transparent 40%, rgba(0,0,0,0.08) 100%)',
           backdropFilter: 'blur(1px)',
         }}
       />
@@ -153,21 +151,19 @@ const MindshareCell = ({
         }}
       />
 
-      {/* Sparkline Background - Kaito style: prominent and full coverage */}
+      {/* Sparkline Background */}
       {sparkline.length >= 2 && (
         <svg 
-          className="absolute inset-0 w-full h-full opacity-90 group-hover:opacity-100 transition-opacity duration-300"
+          className="absolute inset-0 w-full h-full opacity-85 group-hover:opacity-100 transition-opacity duration-300"
           viewBox="0 0 100 100" 
           preserveAspectRatio="none"
         >
           <defs>
-            {/* Enhanced gradient fill */}
             <linearGradient id={`sparkGrad-${ticker}`} x1="0%" y1="0%" x2="0%" y2="100%">
               <stop offset="0%" stopColor={colors.sparklineFillTop} />
               <stop offset="60%" stopColor={colors.sparklineFillBottom} />
               <stop offset="100%" stopColor="transparent" />
             </linearGradient>
-            {/* Glow filter for line */}
             <filter id={`sparkGlow-${ticker}`} x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="2" result="blur" />
               <feMerge>
@@ -176,27 +172,27 @@ const MindshareCell = ({
               </feMerge>
             </filter>
           </defs>
-          {/* Fill area under the line - more prominent */}
+          {/* Fill area */}
           <path
             d={`${sparklinePath} L 100,100 L 0,100 Z`}
             fill={`url(#sparkGrad-${ticker})`}
           />
-          {/* Glow line behind main line */}
+          {/* Glow line */}
           <path
             d={sparklinePath}
             fill="none"
             stroke={colors.sparklineGlow}
-            strokeWidth={size === 'large' ? '6' : size === 'medium' ? '4' : '3'}
+            strokeWidth={size === 'large' ? '5' : size === 'medium' ? '3.5' : '2.5'}
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
           />
-          {/* Main sparkline stroke - thicker and more visible */}
+          {/* Main sparkline */}
           <path
             d={sparklinePath}
             fill="none"
             stroke={colors.sparkline}
-            strokeWidth={size === 'large' ? '2.5' : size === 'medium' ? '2' : '1.5'}
+            strokeWidth={size === 'large' ? '2' : size === 'medium' ? '1.5' : '1'}
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
@@ -205,19 +201,18 @@ const MindshareCell = ({
         </svg>
       )}
 
-      {/* Subtle bottom gradient for depth */}
-      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+      {/* Bottom gradient for depth */}
+      <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/15 via-transparent to-transparent pointer-events-none" />
 
-
-      {/* Content - Mobile optimized padding */}
+      {/* Content - optimized for mobile */}
       <div className={cn(
         "relative z-10 flex flex-col justify-between h-full",
-        size === 'large' ? 'p-2.5' : size === 'medium' ? 'p-2' : 'p-1.5'
+        size === 'large' ? 'p-2 sm:p-3' : size === 'medium' ? 'p-1.5 sm:p-2' : 'p-1 sm:p-1.5'
       )}>
         {/* Top section */}
-        <div className="flex items-start justify-between gap-1">
+        <div className="flex items-start justify-between gap-0.5 sm:gap-1">
           {/* Logo and ticker */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1 sm:gap-1.5 min-w-0 flex-1">
             {(size === 'large' || size === 'medium') && (
               <div className="relative flex-shrink-0">
                 {logoUrl ? (
@@ -226,11 +221,11 @@ const MindshareCell = ({
                     alt={ticker}
                     className={cn(
                       'rounded-full object-cover transition-transform duration-300 group-hover:scale-105',
-                      'ring-1 sm:ring-2 ring-white/10 group-hover:ring-white/20',
-                      size === 'large' ? 'w-7 h-7 sm:w-10 sm:h-10' : 'w-5 h-5 sm:w-6 sm:h-6'
+                      'ring-1 ring-white/10 group-hover:ring-teal-400/30',
+                      size === 'large' ? 'w-6 h-6 sm:w-9 sm:h-9' : 'w-4 h-4 sm:w-6 sm:h-6'
                     )}
                     style={{
-                      boxShadow: '0 2px 8px rgba(0,0,0,0.3)',
+                      boxShadow: '0 2px 6px rgba(0,0,0,0.25)',
                     }}
                     onError={(e) => {
                       const target = e.target as HTMLImageElement;
@@ -240,52 +235,54 @@ const MindshareCell = ({
                     }}
                   />
                 ) : null}
-                {/* Fallback avatar with ticker initial */}
+                {/* Fallback avatar */}
                 <div 
                   className={cn(
-                    'items-center justify-center rounded-full ring-1 sm:ring-2 ring-white/10',
-                    'bg-gradient-to-br from-white/15 to-white/5',
-                    size === 'large' ? 'w-7 h-7 sm:w-10 sm:h-10' : 'w-5 h-5 sm:w-6 sm:h-6',
+                    'items-center justify-center rounded-full ring-1 ring-white/10',
+                    'bg-gradient-to-br from-teal-500/20 to-teal-600/10',
+                    size === 'large' ? 'w-6 h-6 sm:w-9 sm:h-9' : 'w-4 h-4 sm:w-6 sm:h-6',
                     logoUrl ? 'hidden' : 'flex'
                   )}
                 >
                   <span className={cn(
-                    'font-bold text-white/80',
-                    size === 'large' ? 'text-xs sm:text-sm' : 'text-[8px] sm:text-[10px]'
+                    'font-bold text-teal-300/80',
+                    size === 'large' ? 'text-[10px] sm:text-sm' : 'text-[7px] sm:text-[9px]'
                   )}>
                     {ticker.charAt(0)}
                   </span>
                 </div>
               </div>
             )}
+            {/* Ticker - truncate on mobile */}
             <span className={cn(
               'font-bold text-white tracking-tight truncate',
               'font-[\'Space_Grotesk\',sans-serif]',
-              size === 'large' ? 'text-xs sm:text-base' : size === 'medium' ? 'text-[11px] sm:text-sm' : 'text-[9px] sm:text-[11px]'
+              'max-w-[50px] sm:max-w-none',
+              size === 'large' ? 'text-[10px] sm:text-sm' : size === 'medium' ? 'text-[9px] sm:text-xs' : 'text-[8px] sm:text-[10px]'
             )}>
               {ticker}
             </span>
           </div>
 
-          {/* Badges: Trending + Narrative + Pre-TGE */}
-          <div className="flex items-center gap-1 flex-shrink-0">
-            {/* Trending badge - 🔥 */}
+          {/* Badges - optimized for mobile */}
+          <div className="flex items-center gap-0.5 sm:gap-1 flex-shrink-0 overflow-hidden">
+            {/* Trending badge - Ium Labs teal style */}
             {isTrending && (size === 'large' || size === 'medium') && (
               <span className={cn(
-                'px-1 sm:px-1.5 py-0.5 text-[6px] sm:text-[8px] font-semibold rounded',
-                'bg-gradient-to-r from-amber-500/25 to-orange-500/25',
-                'text-amber-300 border border-amber-400/40',
+                'px-1 py-0.5 text-[6px] sm:text-[8px] font-semibold rounded',
+                'bg-gradient-to-r from-teal-500/25 to-emerald-500/25',
+                'text-teal-300 border border-teal-400/40',
                 'flex items-center gap-0.5',
-                'shadow-[0_0_12px_rgba(251,191,36,0.2)]'
+                'shadow-[0_0_10px_rgba(20,184,166,0.2)]'
               )}>
                 <Flame className="w-2 h-2 sm:w-2.5 sm:h-2.5" />
                 <span className="hidden sm:inline">HOT</span>
               </span>
             )}
-            {/* Narrative badge - Kaito style */}
+            {/* Narrative badge */}
             {narrative && (size === 'large' || size === 'medium') && !isTrending && (
               <span className={cn(
-                'px-1 sm:px-1.5 py-0.5 text-[6px] sm:text-[8px] font-semibold rounded',
+                'px-1 py-0.5 text-[6px] sm:text-[7px] font-semibold rounded truncate max-w-[40px] sm:max-w-none',
                 'border',
                 narrativeColors[narrative]?.bg || 'bg-slate-500/15',
                 narrativeColors[narrative]?.text || 'text-slate-300',
@@ -294,13 +291,12 @@ const MindshareCell = ({
                 {narrative}
               </span>
             )}
-            {/* Pre-TGE badge - refined, smaller on mobile */}
+            {/* Pre-TGE badge */}
             {isPreTge && size === 'large' && (
               <span className={cn(
-                'px-1 sm:px-1.5 py-0.5 text-[7px] sm:text-[9px] font-semibold rounded flex-shrink-0',
+                'px-1 py-0.5 text-[6px] sm:text-[8px] font-semibold rounded flex-shrink-0',
                 'bg-gradient-to-r from-cyan-500/20 to-teal-500/20',
                 'text-cyan-300 border border-cyan-400/30',
-                'shadow-[0_0_12px_rgba(34,211,238,0.15)]'
               )}>
                 PRE
               </span>
@@ -308,38 +304,38 @@ const MindshareCell = ({
           </div>
         </div>
 
-        {/* Bottom section */}
+        {/* Bottom section - Mindshare focused */}
         <div className="flex items-end justify-between">
           {/* Mindshare percentage + change */}
-          <div className="flex flex-col gap-0.5">
+          <div className="flex flex-col gap-0">
             <div className="flex items-baseline gap-0.5">
-              {/* Mindshare percentage - MOST PROMINENT (피드백 반영) */}
+              {/* Mindshare percentage - MOST PROMINENT */}
               <span className={cn(
                 'font-extrabold tracking-tighter text-white',
                 'font-[\'Space_Grotesk\',sans-serif]',
-                size === 'large' ? 'text-xl sm:text-3xl' : size === 'medium' ? 'text-base sm:text-xl' : size === 'small' ? 'text-sm sm:text-base' : 'text-[11px] sm:text-xs'
+                size === 'large' ? 'text-lg sm:text-2xl' : size === 'medium' ? 'text-sm sm:text-lg' : size === 'small' ? 'text-xs sm:text-sm' : 'text-[10px] sm:text-xs'
               )}>
                 {mindshare.toFixed(size === 'tiny' ? 1 : 2)}
               </span>
               <span className={cn(
-                'font-medium text-white/40',
-                size === 'large' ? 'text-sm sm:text-base' : size === 'medium' ? 'text-xs sm:text-sm' : 'text-[9px] sm:text-[10px]'
+                'font-medium text-white/35',
+                size === 'large' ? 'text-xs sm:text-sm' : size === 'medium' ? 'text-[10px] sm:text-xs' : 'text-[8px] sm:text-[9px]'
               )}>
                 %
               </span>
             </div>
-            {/* Mindshare change in bps - SECONDARY (피드백 반영: lighter weight, softer color) */}
-            {mindshareChange !== undefined && mindshareChange !== null && (size === 'large' || size === 'medium') && (
+            {/* Mindshare change in bps - only on large cells */}
+            {mindshareChange !== undefined && mindshareChange !== null && size === 'large' && (
               <span className={cn(
-                'text-[8px] sm:text-[10px] font-medium tabular-nums',
-                mindshareChange > 0 ? 'text-emerald-400/70' : mindshareChange < 0 ? 'text-rose-400/70' : 'text-white/30'
+                'text-[7px] sm:text-[9px] font-medium tabular-nums',
+                mindshareChange > 0 ? 'text-teal-400/65' : mindshareChange < 0 ? 'text-rose-400/65' : 'text-white/25'
               )}>
-                {toBps(mindshareChange)} <span className="text-[6px] sm:text-[8px] font-normal opacity-50">bps</span>
+                {toBps(mindshareChange)} <span className="text-[5px] sm:text-[7px] font-normal opacity-40">bps</span>
               </span>
             )}
           </div>
 
-          {/* Trend icon with background - only on large and when trend exists */}
+          {/* Trend icon - only on large cells */}
           {size === 'large' && TrendIcon && (
             <div className={cn(
               'p-0.5 sm:p-1 rounded transition-colors duration-200',
@@ -348,7 +344,7 @@ const MindshareCell = ({
             )}>
               <TrendIcon className={cn(
                 'transition-transform duration-300 group-hover:scale-110',
-                'w-3 h-3 sm:w-4 sm:h-4',
+                'w-2.5 h-2.5 sm:w-3.5 sm:h-3.5',
                 colors.accentText
               )} />
             </div>
