@@ -2103,7 +2103,7 @@ const FrameworkSection = () => {
         }} />
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 relative">
           {frameworkStages.map((stage, i) => <motion.div key={stage.number} initial={{
           opacity: 0,
           y: 40
