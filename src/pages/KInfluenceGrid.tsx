@@ -7,7 +7,6 @@ import { History, Users, ExternalLink, Radio, Search, X } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { usePageMeta } from '@/hooks/usePageMeta';
-
 const KInfluenceGrid = () => {
   usePageMeta({
     title: "K-Leaderboard | Korean Crypto Mindshare Rankings",
@@ -15,76 +14,68 @@ const KInfluenceGrid = () => {
     path: "/k-leaderboard",
     image: "/og-image.png"
   });
-  
   const [tokenStatus, setTokenStatus] = useState<TokenStatus>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const { projects, isLoading, lastUpdate } = useHypeProjects();
+  const {
+    projects,
+    isLoading,
+    lastUpdate
+  } = useHypeProjects();
 
   // Transform and filter projects for treemap (top 20 only)
   const treemapProjects: MindshareProject[] = useMemo(() => {
     if (!projects.length) return [];
 
     // Filter by token status and search query
-    const filtered = projects.filter((p) => {
+    const filtered = projects.filter(p => {
       // Token status filter
       if (tokenStatus !== 'all' && p.token_status !== tokenStatus) return false;
-      
+
       // Search filter
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
-        return p.ticker.toLowerCase().includes(query) || 
-               p.name.toLowerCase().includes(query) ||
-               (p.narrative?.toLowerCase().includes(query) ?? false);
+        return p.ticker.toLowerCase().includes(query) || p.name.toLowerCase().includes(query) || (p.narrative?.toLowerCase().includes(query) ?? false);
       }
       return true;
     });
 
     // Sort by rank and take top 20
-    const top20 = filtered
-      .sort((a, b) => a.rank - b.rank)
-      .slice(0, 20);
+    const top20 = filtered.sort((a, b) => a.rank - b.rank).slice(0, 20);
 
     // Calculate total score for mindshare percentage if not provided
     const totalScore = top20.reduce((sum, p) => sum + Number(p.score), 0);
-
-    return top20.map((project) => ({
+    return top20.map(project => ({
       id: project.id,
       ticker: project.ticker,
       name: project.name,
-      mindshare: project.mindshare > 0 
-        ? Number(project.mindshare) 
-        : totalScore > 0 
-          ? (Number(project.score) / totalScore) * 100 
-          : 0,
+      mindshare: project.mindshare > 0 ? Number(project.mindshare) : totalScore > 0 ? Number(project.score) / totalScore * 100 : 0,
       mindshare_change: project.mindshare_change,
       narrative: project.narrative,
       score: Number(project.score),
-      trend: (project.trend === 'up' || project.trend === 'down' || project.trend === 'neutral' 
-        ? project.trend 
-        : 'neutral') as 'up' | 'down' | 'neutral',
+      trend: (project.trend === 'up' || project.trend === 'down' || project.trend === 'neutral' ? project.trend : 'neutral') as 'up' | 'down' | 'neutral',
       sparkline: project.sparkline || [],
       logo_url: project.logo_url,
       rank: project.rank,
-      token_status: project.token_status,
+      token_status: project.token_status
     }));
   }, [projects, tokenStatus, searchQuery]);
 
   // Calculate stats - based on top 20 only
   const stats = useMemo(() => {
-    if (!treemapProjects.length) return { total: 0, tgeCount: 0, preTgeCount: 0 };
-    
+    if (!treemapProjects.length) return {
+      total: 0,
+      tgeCount: 0,
+      preTgeCount: 0
+    };
     const tgeCount = treemapProjects.filter(p => p.token_status === 'tge').length;
     const preTgeCount = treemapProjects.filter(p => p.token_status === 'pre-tge').length;
-    
     return {
       total: treemapProjects.length,
       tgeCount,
-      preTgeCount,
+      preTgeCount
     };
   }, [treemapProjects]);
-
-  return (
-    <div className="min-h-screen bg-[#050505]">
+  return <div className="min-h-screen bg-[#050505]">
       {/* Subtle gradient overlay */}
       <div className="fixed inset-0 bg-gradient-to-b from-teal-950/5 via-transparent to-transparent pointer-events-none" />
 
@@ -108,58 +99,11 @@ const KInfluenceGrid = () => {
                 <div className="flex items-center gap-1.5 sm:gap-3">
                   {/* Search input - Kaito style */}
                   <div className="relative">
-                    <div className={cn(
-                      'flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg',
-                      'bg-white/5 border border-white/10',
-                      'focus-within:border-teal-500/30 focus-within:bg-white/8',
-                      'transition-all duration-200',
-                      searchQuery ? 'w-36 sm:w-56' : 'w-9 sm:w-44'
-                    )}>
-                      <Search className="w-4 h-4 text-white/40 flex-shrink-0" />
-                      <input
-                        type="text"
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        placeholder="Search projects..."
-                        className={cn(
-                          'bg-transparent text-sm text-white placeholder:text-white/30 outline-none w-full',
-                          searchQuery ? 'block' : 'hidden sm:block'
-                        )}
-                      />
-                      {searchQuery && (
-                        <button 
-                          onClick={() => setSearchQuery('')}
-                          className="p-0.5 hover:bg-white/10 rounded transition-colors"
-                        >
-                          <X className="w-3 h-3 text-white/40" />
-                        </button>
-                      )}
-                    </div>
+                    
                   </div>
                   
-                  <button 
-                    className={cn(
-                      'p-2 sm:px-4 sm:py-2 text-sm font-medium rounded-lg',
-                      'bg-white/5 text-white/50 border border-white/10',
-                      'hover:bg-white/10 hover:text-white hover:border-white/15',
-                      'transition-all duration-200 flex items-center gap-2'
-                    )}
-                  >
-                    <History className="w-4 h-4" />
-                    <span className="hidden sm:inline">Historical</span>
-                  </button>
-                  <button 
-                    className={cn(
-                      'hidden sm:flex p-2 sm:px-4 sm:py-2 text-sm font-medium rounded-lg',
-                      'bg-teal-500/10 text-teal-400 border border-teal-500/20',
-                      'hover:bg-teal-500/20 hover:border-teal-500/30',
-                      'transition-all duration-200 items-center gap-2'
-                    )}
-                  >
-                    <Users className="w-4 h-4" />
-                    <span className="hidden sm:inline">Creator Leaderboard</span>
-                    <ExternalLink className="hidden sm:block w-3 h-3 opacity-60" />
-                  </button>
+                  
+                  
                   
                   {/* Live indicator - moved to right end */}
                   <div className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
@@ -212,11 +156,7 @@ const KInfluenceGrid = () => {
 
         {/* Treemap Container - Adjusted height for mobile */}
         <div className="h-[calc(100vh-180px)] sm:h-[calc(100vh-200px)]">
-          {isLoading ? (
-            <TreemapSkeleton />
-          ) : (
-            <MindshareTreemap projects={treemapProjects} className="h-full" />
-          )}
+          {isLoading ? <TreemapSkeleton /> : <MindshareTreemap projects={treemapProjects} className="h-full" />}
         </div>
 
         {/* Footer - Kaito style methodology */}
@@ -237,8 +177,6 @@ const KInfluenceGrid = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default KInfluenceGrid;
