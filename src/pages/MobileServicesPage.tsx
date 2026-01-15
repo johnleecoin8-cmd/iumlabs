@@ -194,22 +194,20 @@ const ServiceCard = ({
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
-  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const navigate = useNavigate();
   
-  // Lazy load video when card is in viewport
+  // Lazy load video when card is in viewport - no delay
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setIsInView(true);
-          // Delay video loading slightly to prioritize visible content
-          setTimeout(() => setShouldLoadVideo(true), 100);
+          setShouldLoadVideo(true);
         }
       },
       { 
         threshold: 0.1,
-        rootMargin: '100px' // Start loading slightly before visible
+        rootMargin: '200px' // Start loading earlier
       }
     );
     
@@ -220,44 +218,21 @@ const ServiceCard = ({
     return () => observer.disconnect();
   }, []);
   
-  // Debounced hover handler to prevent accidental triggers
+  // Instant hover handler - no delay
   const handleMouseEnter = useCallback(() => {
-    // Clear any existing timeout
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current);
+    setIsHovered(true);
+    if (videoRef.current) {
+      videoRef.current.play();
     }
-    
-    // Add 80ms debounce to prevent accidental hovers
-    hoverTimeoutRef.current = setTimeout(() => {
-      setIsHovered(true);
-      if (videoRef.current && isVideoLoaded) {
-        videoRef.current.play();
-      }
-    }, 80);
-  }, [isVideoLoaded]);
+  }, []);
   
   const handleMouseLeave = useCallback(() => {
-    // Clear pending hover
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current);
-      hoverTimeoutRef.current = null;
-    }
-    
     setIsHovered(false);
     setIsPressed(false);
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
-  }, []);
-  
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (hoverTimeoutRef.current) {
-        clearTimeout(hoverTimeoutRef.current);
-      }
-    };
   }, []);
   
   const triggerHaptic = () => {
@@ -367,7 +342,7 @@ const ServiceCard = ({
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             poster={service.poster}
             onLoadedData={() => setIsVideoLoaded(true)}
             className={cn(
