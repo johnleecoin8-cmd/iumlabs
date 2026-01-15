@@ -1,6 +1,13 @@
 import { useMemo } from 'react';
-import { TrendingUp, TrendingDown } from 'lucide-react';
+import { TrendingUp, TrendingDown, Flame } from 'lucide-react';
 import { cn } from '@/lib/utils';
+
+// Convert percentage to basis points (1% = 100 bps)
+const toBps = (percent: number | null | undefined): string => {
+  if (percent === null || percent === undefined) return '-';
+  const bps = Math.round(percent * 100);
+  return bps > 0 ? `+${bps}` : `${bps}`;
+};
 
 interface MindshareCellProps {
   ticker: string;
@@ -15,6 +22,7 @@ interface MindshareCellProps {
   size: 'large' | 'medium' | 'small' | 'tiny';
   rank?: number;
   onClick?: () => void;
+  isTrending?: boolean;
 }
 
 // Narrative color mapping - Kaito style
@@ -44,6 +52,7 @@ const MindshareCell = ({
   size,
   rank,
   onClick,
+  isTrending = false,
 }: MindshareCellProps) => {
   // Generate sparkline path - Kaito style: full cell coverage
   const sparklinePath = useMemo(() => {
@@ -114,11 +123,17 @@ const MindshareCell = ({
         'group relative w-full h-full overflow-hidden cursor-pointer box-border',
         'rounded-xl transition-all duration-200 ease-out',
         'hover:scale-[1.015] hover:z-20',
+        // Trending pulse animation
+        isTrending && 'ring-2 ring-amber-400/40 animate-pulse',
       )}
       style={{ 
-        background: colors.cellBg,
-        border: `1px solid ${colors.borderColor}`,
-        boxShadow: `0 4px 24px -4px ${colors.glowColor}, inset 0 1px 0 rgba(255,255,255,0.05)`,
+        background: isTrending 
+          ? 'linear-gradient(160deg, rgba(251, 191, 36, 0.15) 0%, rgba(245, 158, 11, 0.1) 30%, ' + colors.cellBg.replace('linear-gradient(160deg, ', '')
+          : colors.cellBg,
+        border: isTrending ? '1px solid rgba(251, 191, 36, 0.5)' : `1px solid ${colors.borderColor}`,
+        boxShadow: isTrending 
+          ? `0 4px 32px -4px rgba(251, 191, 36, 0.3), inset 0 1px 0 rgba(255,255,255,0.1)`
+          : `0 4px 24px -4px ${colors.glowColor}, inset 0 1px 0 rgba(255,255,255,0.05)`,
       }}
     >
       {/* Glass morphism overlay */}
@@ -252,10 +267,23 @@ const MindshareCell = ({
             </span>
           </div>
 
-          {/* Badges: Narrative + Pre-TGE */}
+          {/* Badges: Trending + Narrative + Pre-TGE */}
           <div className="flex items-center gap-1 flex-shrink-0">
+            {/* Trending badge - 🔥 */}
+            {isTrending && (size === 'large' || size === 'medium') && (
+              <span className={cn(
+                'px-1 sm:px-1.5 py-0.5 text-[6px] sm:text-[8px] font-semibold rounded',
+                'bg-gradient-to-r from-amber-500/25 to-orange-500/25',
+                'text-amber-300 border border-amber-400/40',
+                'flex items-center gap-0.5',
+                'shadow-[0_0_12px_rgba(251,191,36,0.2)]'
+              )}>
+                <Flame className="w-2 h-2 sm:w-2.5 sm:h-2.5" />
+                <span className="hidden sm:inline">HOT</span>
+              </span>
+            )}
             {/* Narrative badge - Kaito style */}
-            {narrative && (size === 'large' || size === 'medium') && (
+            {narrative && (size === 'large' || size === 'medium') && !isTrending && (
               <span className={cn(
                 'px-1 sm:px-1.5 py-0.5 text-[6px] sm:text-[8px] font-semibold rounded',
                 'border',
@@ -299,13 +327,13 @@ const MindshareCell = ({
                 %
               </span>
             </div>
-            {/* Mindshare change percentage - Kaito style */}
+            {/* Mindshare change in bps - Kaito style */}
             {mindshareChange !== undefined && mindshareChange !== null && (size === 'large' || size === 'medium') && (
               <span className={cn(
-                'text-[9px] sm:text-[11px] font-medium',
+                'text-[9px] sm:text-[11px] font-bold tabular-nums',
                 mindshareChange > 0 ? 'text-emerald-400' : mindshareChange < 0 ? 'text-rose-400' : 'text-white/40'
               )}>
-                {mindshareChange > 0 ? '+' : ''}{mindshareChange.toFixed(1)}%
+                {toBps(mindshareChange)} <span className="text-[7px] sm:text-[9px] font-normal opacity-60">bps</span>
               </span>
             )}
           </div>

@@ -5,10 +5,58 @@ import MindshareTreemap, { type MindshareProject } from '@/components/mindshare/
 import TreemapSkeleton from '@/components/mindshare/TreemapSkeleton';
 import TokenStatusToggle, { type TokenStatus } from '@/components/mindshare/TokenStatusToggle';
 import LeaderboardSidebar from '@/components/mindshare/LeaderboardSidebar';
-import { Radio, Search, X, MessageCircle, Hash, Clock, PanelLeftClose, PanelLeft } from 'lucide-react';
+import { Radio, Search, X, MessageCircle, Hash, Clock, PanelLeftClose, PanelLeft, Flame } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { usePageMeta } from '@/hooks/usePageMeta';
+
+// Calculate trend from sparkline data (more accurate than static DB values)
+const calculateTrendFromSparkline = (sparkline: number[] | null): 'up' | 'down' | 'neutral' => {
+  if (!sparkline || sparkline.length < 3) return 'neutral';
+  
+  // Compare first third average vs last third average
+  const third = Math.floor(sparkline.length / 3);
+  const firstAvg = sparkline.slice(0, third).reduce((a, b) => a + b, 0) / third;
+  const lastAvg = sparkline.slice(-third).reduce((a, b) => a + b, 0) / third;
+  
+  if (firstAvg === 0) return 'neutral';
+  
+  const changePercent = ((lastAvg - firstAvg) / firstAvg) * 100;
+  
+  if (changePercent > 3) return 'up';
+  if (changePercent < -3) return 'down';
+  return 'neutral';
+};
+
+// Calculate mindshare change from sparkline when not available in DB
+const calculateMindshareChange = (sparkline: number[] | null): number | null => {
+  if (!sparkline || sparkline.length < 2) return null;
+  
+  const first = sparkline[0];
+  const last = sparkline[sparkline.length - 1];
+  
+  if (first === 0) return last > 0 ? 100 : 0;
+  
+  return ((last - first) / first) * 100;
+};
+
+// Check if project is "trending" (rapid increase in mentions)
+const isTrending = (sparkline: number[] | null): boolean => {
+  if (!sparkline || sparkline.length < 4) return false;
+  
+  const recentQuarter = sparkline.slice(-Math.floor(sparkline.length / 4));
+  const previousQuarter = sparkline.slice(-Math.floor(sparkline.length / 2), -Math.floor(sparkline.length / 4));
+  
+  if (previousQuarter.length === 0 || recentQuarter.length === 0) return false;
+  
+  const recentAvg = recentQuarter.reduce((a, b) => a + b, 0) / recentQuarter.length;
+  const previousAvg = previousQuarter.reduce((a, b) => a + b, 0) / previousQuarter.length;
+  
+  if (previousAvg === 0) return recentAvg > 0;
+  
+  // Trending if recent activity is 30%+ higher than previous
+  return ((recentAvg - previousAvg) / previousAvg) > 0.3;
+};
 
 // Generate dynamic stats that change every hour
 const generateHourlyStats = () => {
@@ -98,27 +146,42 @@ const KInfluenceGrid = () => {
 
     // Calculate total score for mindshare percentage if not provided
     const totalScore = top20.reduce((sum, p) => sum + Number(p.score), 0);
-    return top20.map(project => ({
-      id: project.id,
-      ticker: project.ticker,
-      name: project.name,
-      mindshare: project.mindshare > 0 ? Number(project.mindshare) : totalScore > 0 ? Number(project.score) / totalScore * 100 : 0,
-      mindshare_change: project.mindshare_change,
-      narrative: project.narrative,
-      score: Number(project.score),
-      trend: (project.trend === 'up' || project.trend === 'down' || project.trend === 'neutral' ? project.trend : 'neutral') as 'up' | 'down' | 'neutral',
-      sparkline: project.sparkline || [],
-      logo_url: project.logo_url,
-      rank: project.rank,
-      token_status: project.token_status,
-      // Price data
-      price: project.price,
-      market_cap: project.market_cap,
-      change_24h: project.change_24h,
-      // Social links
-      twitter_url: project.twitter_url,
-      website_url: project.website_url,
-    }));
+    return top20.map(project => {
+      const sparkline = project.sparkline || [];
+      
+      // Calculate dynamic trend from sparkline (more accurate than DB value)
+      const calculatedTrend = calculateTrendFromSparkline(sparkline);
+      
+      // Calculate mindshare change if not available
+      const calculatedChange = project.mindshare_change ?? calculateMindshareChange(sparkline);
+      
+      // Check if trending (surge detection)
+      const trending = isTrending(sparkline);
+      
+      return {
+        id: project.id,
+        ticker: project.ticker,
+        name: project.name,
+        mindshare: project.mindshare > 0 ? Number(project.mindshare) : totalScore > 0 ? Number(project.score) / totalScore * 100 : 0,
+        mindshare_change: calculatedChange,
+        narrative: project.narrative,
+        score: Number(project.score),
+        trend: calculatedTrend,
+        sparkline,
+        logo_url: project.logo_url,
+        rank: project.rank,
+        token_status: project.token_status,
+        // Price data
+        price: project.price,
+        market_cap: project.market_cap,
+        change_24h: project.change_24h,
+        // Social links
+        twitter_url: project.twitter_url,
+        website_url: project.website_url,
+        // Trending signal
+        isTrending: trending,
+      };
+    });
   }, [projects, tokenStatus, searchQuery]);
 
   // Projects for sidebar (all projects with change data)
