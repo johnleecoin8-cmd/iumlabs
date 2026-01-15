@@ -131,7 +131,7 @@ const FooterLinksSection = () => {
                 </ul>
               </div>
 
-              {/* Company Column */}
+              {/* Company Column + Legal on mobile */}
               <div>
                 <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 md:mb-6 font-mono">
                   {footerLinks.company.title}
@@ -145,38 +145,38 @@ const FooterLinksSection = () => {
                     </li>
                   ))}
                 </ul>
-                
-                {/* Legal - Mobile only, below Company */}
-                <div className="mt-6 md:hidden">
-                  <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 font-mono">
-                    {footerLinks.legal.title}
-                  </h4>
-                  <ul className="space-y-2">
-                    {footerLinks.legal.links.map(link => (
-                      <li key={link.name}>
-                        {link.name === "Terms of Service" ? (
-                          <button 
-                            onClick={() => setTermsOpen(true)} 
-                            className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left"
-                          >
-                            {link.name}
-                          </button>
-                        ) : link.name === "Privacy Policy" ? (
-                          <button 
-                            onClick={() => setPrivacyOpen(true)} 
-                            className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left"
-                          >
-                            {link.name}
-                          </button>
-                        ) : (
-                          <Link to={link.href} className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block">
-                            {link.name}
-                          </Link>
-                        )}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              </div>
+
+              {/* Legal Column - Mobile only, right side */}
+              <div className="md:hidden">
+                <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 font-mono">
+                  {footerLinks.legal.title}
+                </h4>
+                <ul className="space-y-2">
+                  {footerLinks.legal.links.map(link => (
+                    <li key={link.name}>
+                      {link.name === "Terms of Service" ? (
+                        <button 
+                          onClick={() => setTermsOpen(true)} 
+                          className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left"
+                        >
+                          {link.name}
+                        </button>
+                      ) : link.name === "Privacy Policy" ? (
+                        <button 
+                          onClick={() => setPrivacyOpen(true)} 
+                          className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left"
+                        >
+                          {link.name}
+                        </button>
+                      ) : (
+                        <Link to={link.href} className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block">
+                          {link.name}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {/* Connect Column - Hidden on mobile */}
