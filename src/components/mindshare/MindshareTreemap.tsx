@@ -215,6 +215,8 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
               size={getCellSize(node)}
               rank={node.data.rank}
               isTrending={(node.data as MindshareProject).isTrending}
+              price={node.data.price}
+              change24h={node.data.change_24h}
               onClick={() => {
                 setSelectedProject(node.data);
                 setModalOpen(true);

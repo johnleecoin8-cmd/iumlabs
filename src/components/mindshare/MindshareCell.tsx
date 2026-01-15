@@ -23,6 +23,10 @@ interface MindshareCellProps {
   rank?: number;
   onClick?: () => void;
   isTrending?: boolean;
+  // Price data - optional
+  price?: number | null;
+  change24h?: number | null;
+  topSource?: string | null;
 }
 
 // Narrative color mapping - Ium Labs style with teal accents
@@ -39,6 +43,15 @@ const narrativeColors: Record<string, { bg: string; text: string; border: string
   'CEX': { bg: 'bg-sky-500/15', text: 'text-sky-300', border: 'border-sky-400/30' },
 };
 
+// Format price for display
+const formatPrice = (price: number): string => {
+  if (price >= 1000) return `${(price / 1000).toFixed(1)}K`;
+  if (price >= 1) return price.toFixed(2);
+  if (price >= 0.01) return price.toFixed(3);
+  if (price >= 0.0001) return price.toFixed(5);
+  return price.toExponential(2);
+};
+
 const MindshareCell = ({
   ticker,
   name,
@@ -53,6 +66,9 @@ const MindshareCell = ({
   rank,
   onClick,
   isTrending = false,
+  price,
+  change24h,
+  topSource,
 }: MindshareCellProps) => {
   // Generate sparkline path
   const sparklinePath = useMemo(() => {
@@ -306,7 +322,7 @@ const MindshareCell = ({
 
         {/* Bottom section - Mindshare focused */}
         <div className="flex items-end justify-between">
-          {/* Mindshare percentage + change */}
+          {/* Mindshare percentage + change + price */}
           <div className="flex flex-col gap-0">
             <div className="flex items-baseline gap-0.5">
               {/* Mindshare percentage - MOST PROMINENT */}
@@ -324,13 +340,61 @@ const MindshareCell = ({
                 %
               </span>
             </div>
-            {/* Mindshare change in bps - only on large cells */}
-            {mindshareChange !== undefined && mindshareChange !== null && size === 'large' && (
+            
+            {/* Price display OR bps emphasis based on price availability */}
+            {size === 'large' && (
+              <>
+                {/* Case 1: Price exists - show price + 24h change */}
+                {price && price > 0 ? (
+                  <div className="flex items-center gap-1 mt-0.5">
+                    <span className="text-[8px] sm:text-[10px] font-medium text-white/50">
+                      ${formatPrice(price)}
+                    </span>
+                    {change24h !== null && change24h !== undefined && (
+                      <span className={cn(
+                        'text-[7px] sm:text-[9px] font-medium',
+                        change24h > 0 ? 'text-teal-400/70' : change24h < 0 ? 'text-rose-400/70' : 'text-white/30'
+                      )}>
+                        {change24h > 0 ? '+' : ''}{change24h.toFixed(1)}%
+                      </span>
+                    )}
+                  </div>
+                ) : (
+                  /* Case 2: No price - emphasize bps change */
+                  mindshareChange !== undefined && mindshareChange !== null && (
+                    <div className={cn(
+                      'flex items-center gap-1 mt-0.5 px-1 py-0.5 rounded',
+                      mindshareChange > 0 ? 'bg-teal-500/15' : mindshareChange < 0 ? 'bg-rose-500/15' : 'bg-white/5'
+                    )}>
+                      <span className={cn(
+                        'text-[8px] sm:text-[10px] font-semibold tabular-nums',
+                        mindshareChange > 0 ? 'text-teal-400' : mindshareChange < 0 ? 'text-rose-400' : 'text-white/40'
+                      )}>
+                        {toBps(mindshareChange)} bps
+                      </span>
+                    </div>
+                  )
+                )}
+                
+                {/* Show bps under price if price exists */}
+                {price && price > 0 && mindshareChange !== undefined && mindshareChange !== null && (
+                  <span className={cn(
+                    'text-[6px] sm:text-[8px] font-medium tabular-nums mt-0.5',
+                    mindshareChange > 0 ? 'text-teal-400/50' : mindshareChange < 0 ? 'text-rose-400/50' : 'text-white/20'
+                  )}>
+                    {toBps(mindshareChange)} bps
+                  </span>
+                )}
+              </>
+            )}
+            
+            {/* Medium cells - simplified bps display */}
+            {size === 'medium' && mindshareChange !== undefined && mindshareChange !== null && (
               <span className={cn(
-                'text-[7px] sm:text-[9px] font-medium tabular-nums',
-                mindshareChange > 0 ? 'text-teal-400/65' : mindshareChange < 0 ? 'text-rose-400/65' : 'text-white/25'
+                'text-[6px] sm:text-[8px] font-medium tabular-nums',
+                mindshareChange > 0 ? 'text-teal-400/60' : mindshareChange < 0 ? 'text-rose-400/60' : 'text-white/25'
               )}>
-                {toBps(mindshareChange)} <span className="text-[5px] sm:text-[7px] font-normal opacity-40">bps</span>
+                {toBps(mindshareChange)} bps
               </span>
             )}
           </div>

@@ -27,6 +27,8 @@ export interface HypeProject {
   // Social links
   twitter_url: string | null;
   website_url: string | null;
+  // Top source from crawler
+  top_source?: string | null;
 }
 
 export interface HypeScoreHistory {
