@@ -11,13 +11,20 @@ interface HypeProject {
   ticker: string;
   score: number;
   mindshare?: number;
-  mindshare_change?: number; // Percentage change from previous period
+  mindshare_change?: number;
   token_status?: 'tge' | 'pre-tge';
-  category?: 'tge' | 'pre_tge'; // From Python crawler (uses underscore)
-  narrative?: string; // AI, L2, DePIN, Meme, DeFi, Gaming, etc.
+  category?: 'tge' | 'pre_tge';
+  narrative?: string;
   trend?: string;
   sparkline?: number[];
   logo_url?: string;
+  // Price data from CoinGecko
+  price?: number;
+  market_cap?: number;
+  change_24h?: number;
+  // Social links
+  twitter_url?: string;
+  website_url?: string;
 }
 
 interface RequestBody {
@@ -123,6 +130,13 @@ Deno.serve(async (req) => {
               trend: project.trend || "neutral",
               sparkline: project.sparkline || [],
               logo_url: project.logo_url || null,
+              // Price data from CoinGecko
+              price: project.price ?? null,
+              market_cap: project.market_cap ?? null,
+              change_24h: project.change_24h ?? null,
+              // Social links
+              twitter_url: project.twitter_url || null,
+              website_url: project.website_url || null,
               updated_at: new Date().toISOString(),
             },
             { onConflict: "ticker" }
