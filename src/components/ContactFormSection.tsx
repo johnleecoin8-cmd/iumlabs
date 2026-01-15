@@ -154,23 +154,30 @@ const ContactFormSection = ({
             </a>
 
             {/* Process Guide */}
-            <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-white/5 border border-white/10 rounded-lg">
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-center">
-                <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-xs text-white/70">1</span>
-                  <span className="text-xs sm:text-sm text-white/70">Fill out the form</span>
+            <div className="mt-8 sm:mt-10">
+              <div className="flex items-center justify-between gap-2">
+                {/* Step 1 */}
+                <div className="flex-1 text-center">
+                  <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider mb-1">Step 1</p>
+                  <p className="text-xs sm:text-sm text-white/80 font-medium">Submit Form</p>
                 </div>
-                <ArrowRight className="w-4 h-4 text-white/30 hidden sm:block" />
-                <span className="text-white/30 sm:hidden">↓</span>
-                <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-xs text-white/70">2</span>
-                  <span className="text-xs sm:text-sm text-white/70">Response within 24h</span>
+                
+                {/* Connector */}
+                <div className="flex-shrink-0 w-8 sm:w-12 h-[1px] bg-gradient-to-r from-white/20 to-white/10" />
+                
+                {/* Step 2 */}
+                <div className="flex-1 text-center">
+                  <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider mb-1">Step 2</p>
+                  <p className="text-xs sm:text-sm text-white/80 font-medium">24h Response</p>
                 </div>
-                <ArrowRight className="w-4 h-4 text-white/30 hidden sm:block" />
-                <span className="text-white/30 sm:hidden">↓</span>
-                <div className="flex items-center gap-2">
-                  <span className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-xs text-emerald-400">3</span>
-                  <span className="text-xs sm:text-sm text-emerald-400 font-medium">Free consultation</span>
+                
+                {/* Connector */}
+                <div className="flex-shrink-0 w-8 sm:w-12 h-[1px] bg-gradient-to-r from-white/10 to-emerald-500/30" />
+                
+                {/* Step 3 */}
+                <div className="flex-1 text-center">
+                  <p className="text-[10px] sm:text-xs text-emerald-400/70 uppercase tracking-wider mb-1">Step 3</p>
+                  <p className="text-xs sm:text-sm text-emerald-400 font-medium">Free Consult</p>
                 </div>
               </div>
             </div>
