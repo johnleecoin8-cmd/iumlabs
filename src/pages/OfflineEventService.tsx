@@ -220,6 +220,7 @@ const faqItems: FAQItem[] = [
 
 // Interactive Seoul Map Component
 const SeoulMapVisualization = () => {
+  const [selectedVenue, setSelectedVenue] = useState<typeof seoulVenues[0] | null>(null);
   const [animatingPins, setAnimatingPins] = useState<number[]>([]);
 
   // Animate pins sequentially on load
@@ -232,7 +233,7 @@ const SeoulMapVisualization = () => {
   }, []);
 
   return (
-    <div className="relative h-[200px] rounded-xl border border-white/10 overflow-hidden">
+    <div className="relative h-[320px] rounded-2xl border border-white/10 overflow-hidden">
       {/* Actual Seoul Map Image */}
       <img 
         src={seoulMapImage}
@@ -242,16 +243,23 @@ const SeoulMapVisualization = () => {
       
       {/* Gradient overlays for better pin visibility */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
 
       {/* Map Label */}
-      <div className="absolute top-2 left-2 z-20 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-black/50 backdrop-blur-sm">
-        <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-        <span className="text-[10px] font-medium text-emerald-400">Seoul Event Map</span>
+      <div className="absolute top-3 left-3 z-20 flex items-center gap-2 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm">
+        <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+        <span className="text-xs font-medium text-emerald-400">Seoul Event Map</span>
+      </div>
+
+      {/* Venue Count */}
+      <div className="absolute top-3 right-3 z-20 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm border border-white/10">
+        <span className="text-[10px] text-white/60">{seoulVenues.length} Premium Venues</span>
       </div>
 
       {/* Venue Pins */}
       {seoulVenues.map((venue) => {
         const isAnimated = animatingPins.includes(venue.id);
+        const isSelected = selectedVenue?.id === venue.id;
 
         return (
           <motion.div
@@ -262,45 +270,93 @@ const SeoulMapVisualization = () => {
               opacity: isAnimated ? 1 : 0 
             }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-            className="absolute z-10 -translate-x-1/2 -translate-y-1/2"
+            className="absolute z-10 -translate-x-1/2 -translate-y-1/2 cursor-pointer"
             style={{ left: `${venue.x}%`, top: `${venue.y}%` }}
+            onMouseEnter={() => setSelectedVenue(venue)}
+            onMouseLeave={() => setSelectedVenue(null)}
           >
             {/* Pin */}
-            <div className="relative">
+            <motion.div
+              animate={{ 
+                scale: isSelected ? 1.3 : 1,
+                y: isSelected ? -5 : 0
+              }}
+              className="relative"
+            >
               {/* Ping animation */}
               <motion.div
-                animate={{ scale: [1, 2, 1], opacity: [0.5, 0, 0.5] }}
+                animate={{ scale: [1, 2.5, 1], opacity: [0.6, 0, 0.6] }}
                 transition={{ duration: 2, repeat: Infinity, delay: venue.id * 0.3 }}
-                className="absolute inset-0 w-5 h-5 -translate-x-0.5 -translate-y-0.5 rounded-full"
+                className="absolute inset-0 w-8 h-8 -translate-x-1 -translate-y-1 rounded-full"
                 style={{ backgroundColor: ACCENT_COLOR }}
               />
               
               {/* Pin icon */}
-              <div className="w-4 h-4 rounded-full flex items-center justify-center border border-emerald-300/50 bg-emerald-500/90 shadow-lg">
-                <MapPin className="w-2 h-2 text-white" />
+              <div 
+                className={`w-7 h-7 rounded-full flex items-center justify-center border-2 shadow-lg transition-all ${
+                  isSelected ? 'bg-emerald-500 border-white shadow-emerald-500/50' : 'bg-emerald-500/90 border-emerald-300/50'
+                }`}
+              >
+                <MapPin className="w-3.5 h-3.5 text-white" />
               </div>
               
               {/* District label */}
-              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-0.5 whitespace-nowrap">
-                <span className="text-[8px] font-medium text-white/70 bg-black/50 px-1 py-0.5 rounded backdrop-blur-sm">
-                  {venue.korean}
-                </span>
-              </div>
-            </div>
+              {!isSelected && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 whitespace-nowrap">
+                  <span className="text-[9px] font-medium text-white/80 bg-black/60 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                    {venue.korean}
+                  </span>
+                </div>
+              )}
+            </motion.div>
+
+            {/* Tooltip */}
+            <AnimatePresence>
+              {isSelected && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.9 }}
+                  className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-44 p-3 rounded-xl bg-black/95 border border-emerald-500/40 backdrop-blur-md z-30 shadow-xl"
+                >
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-sm font-semibold text-white">{venue.name}</span>
+                    <span className="text-xs text-emerald-400">{venue.korean}</span>
+                  </div>
+                  <div className="text-[11px] text-emerald-400 mb-1">{venue.type}</div>
+                  <div className="text-[10px] text-white/50 mb-2">Capacity: {venue.capacity}</div>
+                  <div className="pt-2 border-t border-white/10">
+                    <div className="text-[9px] text-white/40 mb-1">Past Events:</div>
+                    <div className="flex flex-wrap gap-1">
+                      {venue.events.map(event => (
+                        <span 
+                          key={event}
+                          className="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400"
+                        >
+                          {event}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Arrow */}
+                  <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-black/95 border-l border-t border-emerald-500/40 rotate-45" />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         );
       })}
 
       {/* Bottom bar with info */}
-      <div className="absolute bottom-0 inset-x-0 p-2 bg-gradient-to-t from-black/80 to-transparent z-20">
-        <div className="flex items-center justify-center gap-4">
-          <div className="flex items-center gap-1">
-            <Globe className="w-3 h-3" style={{ color: ACCENT_COLOR }} />
-            <span className="text-[10px] text-white/60">{seoulVenues.length} Venues</span>
+      <div className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/80 to-transparent z-20">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Globe className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
+            <span className="text-xs text-white/60">Global Teams Welcome</span>
           </div>
-          <div className="flex items-center gap-1">
-            <Users className="w-3 h-3" style={{ color: ACCENT_COLOR }} />
-            <span className="text-[10px] text-white/60">50-500+ Capacity</span>
+          <div className="flex items-center gap-2">
+            <Users className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
+            <span className="text-xs text-white/60">50-500+ Capacity</span>
           </div>
         </div>
       </div>
@@ -316,7 +372,7 @@ const OfflineEventService = () => {
     image: "/og-image.png"
   });
   
-  const [activePhase, setActivePhase] = useState<number | null>(null);
+  
 
   return (
     <ServicePageLayout
@@ -354,21 +410,18 @@ const OfflineEventService = () => {
                 </div>
 
                 {/* Right - Phase Cards */}
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-2">
                   {journeyPhases.map((phase, index) => (
                     <div
                       key={phase.title}
-                      onMouseEnter={() => setActivePhase(index)}
-                      onMouseLeave={() => setActivePhase(null)}
-                      className="relative bg-white/5 border border-white/10 rounded-xl p-4 sm:p-5 cursor-pointer transition-all duration-300 hover:border-white/20 hover:scale-[1.02] hover:-translate-y-1 group overflow-hidden"
+                      className="relative bg-white/5 border border-white/10 rounded-lg p-3 transition-all duration-300 hover:border-white/20 group overflow-hidden"
                       style={{
-                        backgroundColor: activePhase === index ? `${ACCENT_COLOR}10` : undefined,
-                        borderColor: activePhase === index ? `${ACCENT_COLOR}40` : undefined,
+                        borderColor: `${ACCENT_COLOR}20`,
                       }}
                     >
                       {/* Week Badge */}
                       <div 
-                        className="text-xs font-medium px-2 py-1 rounded-full w-fit mb-3"
+                        className="text-[10px] font-medium px-1.5 py-0.5 rounded-full w-fit mb-2"
                         style={{ 
                           backgroundColor: `${ACCENT_COLOR}20`,
                           color: ACCENT_COLOR
@@ -378,52 +431,27 @@ const OfflineEventService = () => {
                       </div>
                       
                       {/* Icon & Title */}
-                      <div className="flex items-center gap-3 mb-3">
+                      <div className="flex items-center gap-2 mb-2">
                         <phase.icon 
-                          className="w-5 h-5" 
+                          className="w-4 h-4" 
                           style={{ color: ACCENT_COLOR }}
                         />
-                        <h4 className="text-white font-semibold">{phase.title}</h4>
+                        <h4 className="text-white text-sm font-medium">{phase.title}</h4>
                       </div>
 
-                      {/* Content - Toggle on Hover */}
-                      {activePhase === index ? (
-                        <div>
-                          <div className="space-y-2">
-                            {phase.activities.map((activity) => (
-                              <div key={activity} className="flex items-center gap-2 text-sm text-white/60">
-                                <div className="w-1 h-1 rounded-full" style={{ backgroundColor: ACCENT_COLOR }} />
-                                <span>{activity}</span>
-                              </div>
-                            ))}
+                      {/* Simple metrics */}
+                      <div className="flex flex-wrap gap-1">
+                        {phase.metrics.map((metric) => (
+                          <div 
+                            key={metric.label} 
+                            className="flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded bg-white/5"
+                          >
+                            <metric.icon className="w-2.5 h-2.5" style={{ color: ACCENT_COLOR }} />
+                            <span className="text-white/50">{metric.label}:</span>
+                            <span style={{ color: ACCENT_COLOR }}>{metric.value}</span>
                           </div>
-                          <div className="mt-3 pt-3 border-t border-white/10">
-                            <p className="text-xs text-white/40 mb-1">Deliverables</p>
-                            <p className="text-sm text-white/80">{phase.deliverables.join(", ")}</p>
-                          </div>
-                        </div>
-                      ) : (
-                        <div>
-                          <div className="text-sm text-white/40 mb-3">
-                            {phase.activities.length} activities • {phase.deliverables.length} deliverables
-                          </div>
-                          {/* Expected Metrics */}
-                          <div className="pt-3 border-t border-white/10">
-                            <p className="text-xs text-white/40 mb-2">Expected Metrics</p>
-                            <div className="space-y-1.5">
-                              {phase.metrics.map((metric) => (
-                                <div key={metric.label} className="flex items-center justify-between">
-                                  <div className="flex items-center gap-2">
-                                    <metric.icon className="w-3.5 h-3.5" style={{ color: ACCENT_COLOR }} />
-                                    <span className="text-xs text-white/60">{metric.label}</span>
-                                  </div>
-                                  <span className="text-xs font-medium" style={{ color: ACCENT_COLOR }}>{metric.value}</span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                      )}
+                        ))}
+                      </div>
                     </div>
                   ))}
                 </div>
