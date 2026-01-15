@@ -1619,7 +1619,7 @@ const LLMEngineVisualization = ({
         </div>
 
         {/* Main visualization grid - Stack on mobile, 5-col on desktop */}
-        <div className="hidden sm:flex flex-col lg:grid lg:grid-cols-[1fr_auto_auto_auto_1fr] gap-6 lg:gap-0 items-center relative">
+        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_auto_auto_auto_1fr] gap-4 lg:gap-0 items-center relative">
 
           {/* Data Sources */}
           <div className="space-y-2 sm:space-y-3 md:space-y-4 relative z-10 w-full lg:w-auto">
