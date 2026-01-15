@@ -2249,9 +2249,9 @@ const TiltCaseCard = ({
       }} />
         
         <div className="relative bg-background border border-border group-hover:border-primary/30 transition-colors duration-300 overflow-hidden">
-          {/* Category Badge */}
-          <div className="absolute top-4 right-4 z-20 px-3 py-1.5 bg-primary/90 backdrop-blur-sm">
-            <span className="text-[10px] font-mono text-primary-foreground uppercase tracking-wider">{project.category}</span>
+          {/* Category Badge - subtle text style */}
+          <div className="absolute top-4 right-4 z-20">
+            <span className="text-[10px] font-mono text-white/60 uppercase tracking-wider">{project.category}</span>
           </div>
 
           {/* Image with parallax effect */}
@@ -2271,36 +2271,21 @@ const TiltCaseCard = ({
               <h3 className="text-2xl md:text-3xl font-medium text-white mb-2">
                 {project.name}
               </h3>
-              <p className="text-lg text-white/90 font-medium">
+              <p className="text-base text-white/80">
                 "{project.tagline}"
               </p>
             </div>
           </div>
 
-          <div className="p-5 space-y-3">
-            {/* Result */}
-            <div className="flex items-center gap-3">
-              <Trophy className="w-4 h-4 text-primary flex-shrink-0" />
-              <p className="text-sm font-medium text-primary">{project.result}</p>
-            </div>
-            
-            {/* Metrics */}
-            <div className="grid grid-cols-2 gap-3">
+          <div className="p-4">
+            {/* Metrics only */}
+            <div className="grid grid-cols-2 gap-2">
               {project.metrics.map((metric, mi) => (
-                <div key={metric.label} className="text-center p-2 bg-muted/30">
+                <div key={metric.label} className="text-center p-2 bg-muted/20 rounded-sm">
                   <CaseMetricBar label={metric.label} value={metric.value} suffix={metric.suffix} prefix={metric.prefix} delay={0.3 + mi * 0.1} isVisible={isVisible} />
                 </div>
               ))}
             </div>
-            
-            {/* CTA */}
-            <motion.div 
-              className="flex items-center justify-center gap-2 pt-1 text-xs text-muted-foreground group-hover:text-primary transition-colors"
-              animate={{ x: isHovered ? 5 : 0 }}
-            >
-              <span>View Case Study</span>
-              <ArrowRight className="w-3 h-3" />
-            </motion.div>
           </div>
         </div>
       </Link>
