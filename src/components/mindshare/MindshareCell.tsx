@@ -2,11 +2,32 @@ import { useMemo } from 'react';
 import { TrendingUp, TrendingDown, Flame } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-// Convert percentage to basis points (1% = 100 bps)
-const toBps = (percent: number | null | undefined): string => {
-  if (percent === null || percent === undefined) return '-';
-  const bps = Math.round(percent * 100);
-  return bps > 0 ? `+${bps}` : `${bps}`;
+// Convert to percentage with clamping (max ±999%)
+const toPercent = (value: number | null | undefined): string => {
+  if (value === null || value === undefined) return '-';
+  // Clamp to ±999%
+  const clamped = Math.max(-999, Math.min(999, value));
+  const formatted = Math.abs(clamped) >= 100 
+    ? Math.round(clamped).toString()
+    : clamped.toFixed(1);
+  return clamped > 0 ? `+${formatted}` : formatted;
+};
+
+// Apply moving average to smooth sparkline data
+const smoothSparkline = (data: number[], windowSize: number = 3): number[] => {
+  if (data.length < windowSize) return data;
+  
+  const result: number[] = [];
+  for (let i = 0; i < data.length; i++) {
+    let sum = 0;
+    let count = 0;
+    for (let j = Math.max(0, i - Math.floor(windowSize / 2)); j <= Math.min(data.length - 1, i + Math.floor(windowSize / 2)); j++) {
+      sum += data[j];
+      count++;
+    }
+    result.push(sum / count);
+  }
+  return result;
 };
 
 interface MindshareCellProps {
@@ -95,44 +116,51 @@ const MindshareCell = ({
   change24h,
   topSource,
 }: MindshareCellProps) => {
-  // Generate smooth sparkline path with bezier curves
-  // Filter out trailing zeros/flatlines to avoid "heart monitor death" visual
+  // Generate smooth sparkline path with bezier curves + moving average
   const { sparklinePath, lastPoint } = useMemo(() => {
     if (!sparkline || sparkline.length < 2) return { sparklinePath: '', lastPoint: null };
     
-    // Remove trailing near-zero or flatline data points
-    let cleanedSparkline = [...sparkline];
-    const threshold = Math.max(...sparkline) * 0.05; // 5% of max as threshold
+    // Step 1: Apply moving average to smooth the "heart monitor" spikes
+    // Use larger window for more data points
+    const windowSize = sparkline.length > 20 ? 5 : sparkline.length > 10 ? 3 : 2;
+    let smoothedData = smoothSparkline(sparkline, windowSize);
     
-    // Remove trailing points that are near-zero or form a flatline
-    while (cleanedSparkline.length > 3) {
-      const lastVal = cleanedSparkline[cleanedSparkline.length - 1];
-      const secondLast = cleanedSparkline[cleanedSparkline.length - 2];
-      const thirdLast = cleanedSparkline[cleanedSparkline.length - 3];
+    // Step 2: Remove trailing near-zero or flatline data points
+    const threshold = Math.max(...smoothedData) * 0.05;
+    
+    while (smoothedData.length > 3) {
+      const lastVal = smoothedData[smoothedData.length - 1];
+      const secondLast = smoothedData[smoothedData.length - 2];
+      const thirdLast = smoothedData[smoothedData.length - 3];
       
-      // If last 3 points are nearly identical (flatline) or near zero, trim
       const isFlatline = Math.abs(lastVal - secondLast) < threshold && Math.abs(secondLast - thirdLast) < threshold;
       const isNearZero = lastVal < threshold;
       
       if (isFlatline || isNearZero) {
-        cleanedSparkline.pop();
+        smoothedData.pop();
       } else {
         break;
       }
     }
     
-    if (cleanedSparkline.length < 2) cleanedSparkline = sparkline.slice(0, Math.max(2, sparkline.length));
+    if (smoothedData.length < 2) smoothedData = smoothSparkline(sparkline, 2).slice(0, Math.max(2, sparkline.length));
     
-    const min = Math.min(...cleanedSparkline);
-    const max = Math.max(...cleanedSparkline);
+    // Step 3: Downsample if too many points (reduces noise further)
+    if (smoothedData.length > 24) {
+      const step = Math.ceil(smoothedData.length / 24);
+      smoothedData = smoothedData.filter((_, i) => i % step === 0 || i === smoothedData.length - 1);
+    }
+    
+    const min = Math.min(...smoothedData);
+    const max = Math.max(...smoothedData);
     const range = max - min || 1;
     
-    // Graph occupies bottom 65% of cell (leaving top 35% for text)
+    // Graph occupies bottom 65% of cell
     const graphTop = 35;
     const graphHeight = 55;
     
-    const points = cleanedSparkline.map((value, index) => ({
-      x: (index / (cleanedSparkline.length - 1)) * 100,
+    const points = smoothedData.map((value, index) => ({
+      x: (index / (smoothedData.length - 1)) * 100,
       y: graphTop + graphHeight - ((value - min) / range) * graphHeight
     }));
     
@@ -142,52 +170,52 @@ const MindshareCell = ({
     return { sparklinePath: path, lastPoint: last };
   }, [sparkline]);
 
-  // Ium Labs color system - Kaito-style solid colors
+  // Ium Labs color system - SOFTER gradients (less aggressive)
   const trendColors = {
     up: {
-      cellBg: 'linear-gradient(160deg, rgba(20, 83, 45, 0.95) 0%, rgba(22, 101, 52, 0.85) 50%, rgba(20, 83, 45, 0.9) 100%)', // Solid green
-      glowColor: 'rgba(34, 197, 94, 0.08)',
-      borderColor: 'rgba(255, 255, 255, 0.12)', // White border for visibility
-      sparkline: 'rgba(134, 239, 172, 0.9)',
-      sparklineGlow: 'rgba(134, 239, 172, 0.12)',
-      sparklineFillTop: 'rgba(134, 239, 172, 0.06)',
-      sparklineFillMid: 'rgba(134, 239, 172, 0.02)',
+      cellBg: 'linear-gradient(160deg, rgba(20, 83, 45, 0.35) 0%, rgba(22, 101, 52, 0.25) 50%, rgba(20, 83, 45, 0.3) 100%)', // Subtle green
+      glowColor: 'rgba(34, 197, 94, 0.05)',
+      borderColor: 'rgba(134, 239, 172, 0.25)',
+      sparkline: 'rgba(134, 239, 172, 0.8)',
+      sparklineGlow: 'rgba(134, 239, 172, 0.08)',
+      sparklineFillTop: 'rgba(134, 239, 172, 0.08)',
+      sparklineFillMid: 'rgba(134, 239, 172, 0.03)',
       sparklineFillBottom: 'rgba(134, 239, 172, 0)',
-      accentText: 'text-green-300',
-      percentBg: 'bg-green-500/15',
+      accentText: 'text-green-400',
+      percentBg: 'bg-green-500/10',
       dotColor: 'rgba(134, 239, 172, 0.9)',
-      dotGlow: 'rgba(134, 239, 172, 0.25)',
+      dotGlow: 'rgba(134, 239, 172, 0.2)',
     },
     down: {
-      cellBg: 'linear-gradient(160deg, rgba(127, 29, 29, 0.95) 0%, rgba(153, 27, 27, 0.85) 50%, rgba(127, 29, 29, 0.9) 100%)', // Solid red/maroon
-      glowColor: 'rgba(248, 113, 113, 0.06)',
-      borderColor: 'rgba(255, 255, 255, 0.12)', // White border for visibility
-      sparkline: 'rgba(252, 165, 165, 0.85)',
-      sparklineGlow: 'rgba(252, 165, 165, 0.10)',
-      sparklineFillTop: 'rgba(252, 165, 165, 0.05)',
-      sparklineFillMid: 'rgba(252, 165, 165, 0.015)',
+      cellBg: 'linear-gradient(160deg, rgba(127, 29, 29, 0.35) 0%, rgba(153, 27, 27, 0.25) 50%, rgba(127, 29, 29, 0.3) 100%)', // Subtle red
+      glowColor: 'rgba(248, 113, 113, 0.04)',
+      borderColor: 'rgba(252, 165, 165, 0.25)',
+      sparkline: 'rgba(252, 165, 165, 0.75)',
+      sparklineGlow: 'rgba(252, 165, 165, 0.06)',
+      sparklineFillTop: 'rgba(252, 165, 165, 0.06)',
+      sparklineFillMid: 'rgba(252, 165, 165, 0.02)',
       sparklineFillBottom: 'rgba(252, 165, 165, 0)',
-      accentText: 'text-red-300',
-      percentBg: 'bg-red-500/15',
+      accentText: 'text-red-400',
+      percentBg: 'bg-red-500/10',
       dotColor: 'rgba(252, 165, 165, 0.9)',
-      dotGlow: 'rgba(252, 165, 165, 0.2)',
+      dotGlow: 'rgba(252, 165, 165, 0.15)',
     },
   };
 
-  // Neutral style - Kaito-style slate/gray solid
+  // Neutral style - Elegant slate
   const neutralColors = {
-    cellBg: 'linear-gradient(160deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.85) 50%, rgba(30, 41, 59, 0.9) 100%)',
-    glowColor: 'rgba(148, 163, 184, 0.04)',
-    borderColor: 'rgba(255, 255, 255, 0.12)', // White border for visibility
-    sparkline: 'rgba(148, 163, 184, 0.65)',
-    sparklineGlow: 'rgba(148, 163, 184, 0.08)',
+    cellBg: 'linear-gradient(160deg, rgba(30, 41, 59, 0.5) 0%, rgba(51, 65, 85, 0.4) 50%, rgba(30, 41, 59, 0.45) 100%)',
+    glowColor: 'rgba(148, 163, 184, 0.03)',
+    borderColor: 'rgba(148, 163, 184, 0.2)',
+    sparkline: 'rgba(148, 163, 184, 0.55)',
+    sparklineGlow: 'rgba(148, 163, 184, 0.05)',
     sparklineFillTop: 'rgba(148, 163, 184, 0.04)',
     sparklineFillMid: 'rgba(148, 163, 184, 0.01)',
     sparklineFillBottom: 'rgba(148, 163, 184, 0)',
     accentText: 'text-slate-400',
-    percentBg: 'bg-slate-500/10',
+    percentBg: 'bg-slate-500/8',
     dotColor: 'rgba(148, 163, 184, 0.7)',
-    dotGlow: 'rgba(148, 163, 184, 0.2)',
+    dotGlow: 'rgba(148, 163, 184, 0.15)',
   };
 
   const colors = trend === 'up' ? trendColors.up : trend === 'down' ? trendColors.down : neutralColors;
@@ -490,14 +518,14 @@ const MindshareCell = ({
                   </span>
                 ) : null}
                 
-                {/* bps change - always show if available */}
+                {/* % change - clamped to ±999% */}
                 {mindshareChange !== undefined && mindshareChange !== null && (
                   <span className={cn(
                     'text-[8px] sm:text-[10px] font-medium',
                     'font-[\'JetBrains_Mono\',monospace] [font-variant-numeric:tabular-nums]',
                     mindshareChange > 0 ? 'text-teal-400/60' : mindshareChange < 0 ? 'text-rose-400/60' : 'text-white/25'
                   )}>
-                    {toBps(mindshareChange)} bps
+                    {toPercent(mindshareChange)}%
                   </span>
                 )}
               </div>
@@ -510,7 +538,7 @@ const MindshareCell = ({
                 'font-[\'JetBrains_Mono\',monospace] [font-variant-numeric:tabular-nums]',
                 mindshareChange > 0 ? 'text-teal-400/50' : mindshareChange < 0 ? 'text-rose-400/50' : 'text-white/20'
               )}>
-                {toBps(mindshareChange)} bps
+                {toPercent(mindshareChange)}%
               </span>
             )}
           </div>
