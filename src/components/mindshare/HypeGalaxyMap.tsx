@@ -249,13 +249,21 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
           </ResponsiveContainer>
         </div>
 
-        {/* 사이드바 범례 (데스크탑) */}
-        <div className="hidden lg:block w-[200px] border-l border-white/[0.06] p-3 overflow-y-auto max-h-[480px]">
-          <p className="text-[10px] text-muted-foreground/50 uppercase tracking-wider mb-3 px-1">
+        {/* 사이드바 범례 (데스크탑) - Custom scrollbar */}
+        <div 
+          className="hidden lg:block w-[200px] border-l border-white/[0.06] p-3 max-h-[480px] overflow-y-auto
+            [&::-webkit-scrollbar]:w-1
+            [&::-webkit-scrollbar-track]:bg-transparent
+            [&::-webkit-scrollbar-thumb]:bg-white/10
+            [&::-webkit-scrollbar-thumb]:rounded-full
+            [&::-webkit-scrollbar-thumb]:hover:bg-white/20
+            hover:[&::-webkit-scrollbar-thumb]:bg-white/15"
+        >
+          <p className="text-[10px] text-muted-foreground/50 uppercase tracking-wider mb-3 px-1 sticky top-0 bg-background/95 backdrop-blur-sm py-1 -mt-1">
             Projects
           </p>
           <div className="space-y-0.5">
-            {sortedByCurrentValue.slice(0, 20).map((project) => {
+            {sortedByCurrentValue.slice(0, 20).map((project, index) => {
               const isSelected = selectedTickers.size === 0 || selectedTickers.has(project.ticker);
               const isHovered = hoveredTicker === project.ticker;
               const currentValue = project.sparkline?.[project.sparkline.length - 1] ?? 0;
@@ -267,28 +275,33 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
                   onMouseEnter={() => setHoveredTicker(project.ticker)}
                   onMouseLeave={() => setHoveredTicker(null)}
                   className={`
-                    w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded-md text-xs
-                    transition-all duration-150
+                    w-full flex items-center justify-between gap-2 px-2 py-2 rounded-lg text-xs
+                    transition-all duration-200
                     ${isSelected ? 'text-foreground' : 'text-muted-foreground/30'}
-                    ${isHovered ? 'bg-white/[0.04]' : 'hover:bg-white/[0.02]'}
+                    ${isHovered ? 'bg-white/[0.06] scale-[1.02]' : 'hover:bg-white/[0.03]'}
                   `}
                 >
-                  <div className="flex items-center gap-2 min-w-0">
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <span className="text-[10px] text-muted-foreground/40 font-mono w-4 text-right">
+                      {index + 1}
+                    </span>
                     <span 
-                      className="w-2 h-2 rounded-sm flex-shrink-0 transition-all duration-150"
+                      className="w-2.5 h-2.5 rounded-full flex-shrink-0 transition-all duration-200"
                       style={{ 
                         backgroundColor: colorMap[project.ticker],
                         opacity: isSelected ? 1 : 0.3,
-                        boxShadow: isHovered ? `0 0 8px ${colorMap[project.ticker]}` : 'none'
+                        boxShadow: isHovered ? `0 0 12px ${colorMap[project.ticker]}` : 'none'
                       }}
                     />
                     <span className="truncate font-medium">{project.ticker}</span>
-                    {project.trend === 'up' && <TrendingUp className="w-3 h-3 text-emerald-500/70 flex-shrink-0" />}
-                    {project.trend === 'down' && <TrendingDown className="w-3 h-3 text-rose-500/70 flex-shrink-0" />}
                   </div>
-                  <span className="font-mono text-[10px] text-muted-foreground/60 flex-shrink-0">
-                    {currentValue.toFixed(1)}
-                  </span>
+                  <div className="flex items-center gap-1.5">
+                    {project.trend === 'up' && <TrendingUp className="w-3 h-3 text-emerald-500 flex-shrink-0" />}
+                    {project.trend === 'down' && <TrendingDown className="w-3 h-3 text-rose-500 flex-shrink-0" />}
+                    <span className="font-mono text-[10px] text-muted-foreground/50 flex-shrink-0">
+                      {currentValue.toFixed(1)}
+                    </span>
+                  </div>
                 </button>
               );
             })}
