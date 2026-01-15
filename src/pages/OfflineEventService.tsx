@@ -6,6 +6,7 @@ import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
+import seoulMapImage from "@/assets/maps/seoul-dark-map.png";
 
 const ACCENT_COLOR = "#10B981";
 
@@ -221,7 +222,6 @@ const faqItems: FAQItem[] = [
 const SeoulMapVisualization = () => {
   const [selectedVenue, setSelectedVenue] = useState<typeof seoulVenues[0] | null>(null);
   const [animatingPins, setAnimatingPins] = useState<number[]>([]);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Animate pins sequentially on load
   useEffect(() => {
@@ -232,118 +232,27 @@ const SeoulMapVisualization = () => {
     });
   }, []);
 
-  // Draw connection lines on canvas
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth * 2;
-      canvas.height = canvas.offsetHeight * 2;
-      ctx.scale(2, 2);
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    let animationFrame: number;
-    let time = 0;
-
-    const draw = () => {
-      time += 0.015;
-      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
-
-      const width = canvas.offsetWidth;
-      const height = canvas.offsetHeight;
-
-      // Draw subtle grid
-      ctx.strokeStyle = 'rgba(16, 185, 129, 0.05)';
-      ctx.lineWidth = 0.5;
-      for (let i = 0; i < width; i += 20) {
-        ctx.beginPath();
-        ctx.moveTo(i, 0);
-        ctx.lineTo(i, height);
-        ctx.stroke();
-      }
-      for (let i = 0; i < height; i += 20) {
-        ctx.beginPath();
-        ctx.moveTo(0, i);
-        ctx.lineTo(width, i);
-        ctx.stroke();
-      }
-
-      // Draw connections between venues
-      seoulVenues.forEach((venue, i) => {
-        const nextVenue = seoulVenues[(i + 1) % seoulVenues.length];
-        const x1 = (venue.x / 100) * width;
-        const y1 = (venue.y / 100) * height;
-        const x2 = (nextVenue.x / 100) * width;
-        const y2 = (nextVenue.y / 100) * height;
-
-        // Draw dashed line
-        ctx.setLineDash([4, 4]);
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.strokeStyle = 'rgba(16, 185, 129, 0.15)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        // Animated pulse along line
-        const pulsePos = (time * 0.5 + i * 0.2) % 1;
-        const pulseX = x1 + (x2 - x1) * pulsePos;
-        const pulseY = y1 + (y2 - y1) * pulsePos;
-
-        ctx.beginPath();
-        ctx.arc(pulseX, pulseY, 2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(16, 185, 129, ${0.6 - pulsePos * 0.4})`;
-        ctx.fill();
-      });
-
-      // Highlight selected venue with glow
-      if (selectedVenue) {
-        const x = (selectedVenue.x / 100) * width;
-        const y = (selectedVenue.y / 100) * height;
-        
-        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 50);
-        gradient.addColorStop(0, 'rgba(16, 185, 129, 0.3)');
-        gradient.addColorStop(1, 'rgba(16, 185, 129, 0)');
-        ctx.fillStyle = gradient;
-        ctx.beginPath();
-        ctx.arc(x, y, 50, 0, Math.PI * 2);
-        ctx.fill();
-      }
-
-      animationFrame = requestAnimationFrame(draw);
-    };
-
-    draw();
-
-    return () => {
-      window.removeEventListener('resize', resize);
-      cancelAnimationFrame(animationFrame);
-    };
-  }, [selectedVenue]);
-
   return (
-    <div className="relative h-[320px] rounded-2xl border border-white/10 bg-gradient-to-br from-white/[0.03] to-transparent overflow-hidden">
-      {/* Canvas for connections */}
-      <canvas 
-        ref={canvasRef}
-        className="absolute inset-0 w-full h-full"
+    <div className="relative h-[320px] rounded-2xl border border-white/10 overflow-hidden">
+      {/* Actual Seoul Map Image */}
+      <img 
+        src={seoulMapImage}
+        alt="Seoul Map"
+        className="absolute inset-0 w-full h-full object-cover opacity-70"
       />
+      
+      {/* Gradient overlays for better pin visibility */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/30" />
 
       {/* Map Label */}
-      <div className="absolute top-3 left-3 z-20 flex items-center gap-2">
+      <div className="absolute top-3 left-3 z-20 flex items-center gap-2 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm">
         <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
         <span className="text-xs font-medium text-emerald-400">Seoul Event Map</span>
       </div>
 
       {/* Venue Count */}
-      <div className="absolute top-3 right-3 z-20 px-2 py-1 rounded-full bg-white/5 border border-white/10">
+      <div className="absolute top-3 right-3 z-20 px-2 py-1 rounded-full bg-black/50 backdrop-blur-sm border border-white/10">
         <span className="text-[10px] text-white/60">{seoulVenues.length} Premium Venues</span>
       </div>
 
@@ -376,7 +285,7 @@ const SeoulMapVisualization = () => {
             >
               {/* Ping animation */}
               <motion.div
-                animate={{ scale: [1, 2, 1], opacity: [0.5, 0, 0.5] }}
+                animate={{ scale: [1, 2.5, 1], opacity: [0.6, 0, 0.6] }}
                 transition={{ duration: 2, repeat: Infinity, delay: venue.id * 0.3 }}
                 className="absolute inset-0 w-8 h-8 -translate-x-1 -translate-y-1 rounded-full"
                 style={{ backgroundColor: ACCENT_COLOR }}
@@ -384,12 +293,21 @@ const SeoulMapVisualization = () => {
               
               {/* Pin icon */}
               <div 
-                className={`w-6 h-6 rounded-full flex items-center justify-center border-2 transition-all ${
-                  isSelected ? 'bg-emerald-500 border-white' : 'bg-emerald-500/80 border-emerald-300/50'
+                className={`w-7 h-7 rounded-full flex items-center justify-center border-2 shadow-lg transition-all ${
+                  isSelected ? 'bg-emerald-500 border-white shadow-emerald-500/50' : 'bg-emerald-500/90 border-emerald-300/50'
                 }`}
               >
-                <MapPin className="w-3 h-3 text-white" />
+                <MapPin className="w-3.5 h-3.5 text-white" />
               </div>
+              
+              {/* District label */}
+              {!isSelected && (
+                <div className="absolute left-1/2 -translate-x-1/2 top-full mt-1 whitespace-nowrap">
+                  <span className="text-[9px] font-medium text-white/80 bg-black/60 px-1.5 py-0.5 rounded backdrop-blur-sm">
+                    {venue.korean}
+                  </span>
+                </div>
+              )}
             </motion.div>
 
             {/* Tooltip */}
@@ -399,13 +317,13 @@ const SeoulMapVisualization = () => {
                   initial={{ opacity: 0, y: 10, scale: 0.9 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
                   exit={{ opacity: 0, y: 10, scale: 0.9 }}
-                  className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-40 p-3 rounded-xl bg-black/95 border border-emerald-500/30 backdrop-blur-sm z-30"
+                  className="absolute left-1/2 -translate-x-1/2 top-full mt-3 w-44 p-3 rounded-xl bg-black/95 border border-emerald-500/40 backdrop-blur-md z-30 shadow-xl"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <span className="text-sm font-semibold text-white">{venue.name}</span>
-                    <span className="text-xs text-white/40">{venue.korean}</span>
+                    <span className="text-xs text-emerald-400">{venue.korean}</span>
                   </div>
-                  <div className="text-[10px] text-emerald-400 mb-1">{venue.type}</div>
+                  <div className="text-[11px] text-emerald-400 mb-1">{venue.type}</div>
                   <div className="text-[10px] text-white/50 mb-2">Capacity: {venue.capacity}</div>
                   <div className="pt-2 border-t border-white/10">
                     <div className="text-[9px] text-white/40 mb-1">Past Events:</div>
@@ -421,7 +339,7 @@ const SeoulMapVisualization = () => {
                     </div>
                   </div>
                   {/* Arrow */}
-                  <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-black/95 border-l border-t border-emerald-500/30 rotate-45" />
+                  <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-black/95 border-l border-t border-emerald-500/40 rotate-45" />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -429,15 +347,17 @@ const SeoulMapVisualization = () => {
         );
       })}
 
-      {/* Seoul silhouette overlay hint */}
-      <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between z-20">
-        <div className="flex items-center gap-2">
-          <Globe className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
-          <span className="text-xs text-white/50">Global Teams Welcome</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <Users className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
-          <span className="text-xs text-white/50">50-500+ Capacity</span>
+      {/* Bottom bar with info */}
+      <div className="absolute bottom-0 inset-x-0 p-3 bg-gradient-to-t from-black/80 to-transparent z-20">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Globe className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
+            <span className="text-xs text-white/60">Global Teams Welcome</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <Users className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
+            <span className="text-xs text-white/60">50-500+ Capacity</span>
+          </div>
         </div>
       </div>
     </div>
