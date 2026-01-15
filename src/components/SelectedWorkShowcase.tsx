@@ -194,6 +194,22 @@ const SelectedWorkShowcase = () => {
               </motion.div>
             ))}
           </div>
+
+          {/* Mobile CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="mt-8 lg:hidden"
+          >
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 text-sm text-white border border-white/30 px-6 py-3 hover:bg-white hover:text-black transition-all duration-300"
+            >
+              <span>View Our Work</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </motion.div>
         </div>
 
         {/* Right - About Content (Desktop) */}
