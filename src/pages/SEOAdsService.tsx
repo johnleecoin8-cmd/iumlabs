@@ -18,15 +18,15 @@ const breadcrumbItems = [
 const journeyPhases = [
   {
     week: "Week 1",
-    title: "Audit & Research",
+    title: "The Audit",
     icon: Search,
     activities: [
-      "Technical SEO audit",
-      "Keyword research & mapping",
-      "Competitor ad analysis",
-      "Platform selection strategy"
+      "Find the gaps in your SEO",
+      "See what your competitors are spending on ads",
+      "Identify quick wins and long-term opportunities",
+      "Map out your keyword battleground"
     ],
-    deliverables: ["SEO Audit Report", "Keyword Strategy"],
+    deliverables: ["SEO Audit Report", "Competitive Analysis"],
     metrics: [
       { icon: Search, label: "Keywords", value: "50-100" },
       { icon: Eye, label: "Competitors", value: "10+" }
@@ -34,15 +34,15 @@ const journeyPhases = [
   },
   {
     week: "Week 2",
-    title: "Foundation Setup",
+    title: "Setting the Stage",
     icon: Target,
     activities: [
-      "On-page SEO optimization",
-      "Ad account setup & structure",
-      "Audience targeting configuration",
-      "Tracking & analytics setup"
+      "Fix the technical stuff on your site",
+      "Set up tracking so every dollar is accounted for",
+      "Configure audience targeting",
+      "Structure ad accounts for scale"
     ],
-    deliverables: ["SEO Implementation", "Ad Account Setup"],
+    deliverables: ["SEO Implementation", "Tracking Setup"],
     metrics: [
       { icon: TrendingUp, label: "SEO Score", value: "+30-50%" },
       { icon: Target, label: "Platforms", value: "3+" }
@@ -50,13 +50,13 @@ const journeyPhases = [
   },
   {
     week: "Week 3",
-    title: "Campaign Launch",
+    title: "Go Live",
     icon: Megaphone,
     activities: [
-      "Ad creative development",
-      "Campaign launch across platforms",
-      "A/B testing initialization",
-      "Bid strategy optimization"
+      "Launch campaigns across Google, X, and YouTube",
+      "Deploy eye-catching creatives",
+      "Initialize A/B testing",
+      "Optimize bid strategies in real-time"
     ],
     deliverables: ["Live Campaigns", "Creative Assets"],
     metrics: [
@@ -66,13 +66,13 @@ const journeyPhases = [
   },
   {
     week: "Week 4",
-    title: "Optimization & Scale",
+    title: "Scale Up",
     icon: TrendingUp,
     activities: [
-      "Performance analysis",
-      "Campaign optimization",
-      "Budget reallocation",
-      "Scaling recommendations"
+      "Analyze all the data",
+      "Double down on what works",
+      "Trim the waste",
+      "Plan for continued growth"
     ],
     deliverables: ["Performance Report", "Growth Plan"],
     metrics: [
@@ -92,10 +92,10 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 150, label: "Avg Traffic Increase", suffix: "%+" },
-  { value: 12, label: "Campaigns Managed", suffix: "+" },
-  { value: 2.5, label: "Avg ROAS", suffix: "x" },
-  { value: 35, label: "Avg CPA Reduction", suffix: "%" },
+  { value: 150, label: "Traffic Growth", suffix: "%+" },
+  { value: 12, label: "Major Campaigns", suffix: "+" },
+  { value: 2.5, label: "Average ROAS", suffix: "x" },
+  { value: 35, label: "Lower CPA", suffix: "%" },
 ];
 
 const processSteps: ProcessStep[] = [
@@ -127,50 +127,43 @@ const processSteps: ProcessStep[] = [
 
 const deliverables: Deliverable[] = [
   {
-    title: "SEO Package",
+    title: "SEO That Works",
     items: [
-      "Technical SEO audit & fixes",
-      "Keyword research & mapping",
-      "On-page optimization",
-      "Content strategy recommendations",
+      "Fixing the Engine: Technical SEO audits to make sure Google loves your site",
+      "Content Strategy: We tell you exactly what to write to rank for the best keywords",
+      "On-Page Polish: Making your existing pages work harder for you",
     ],
   },
   {
-    title: "Paid Advertising",
+    title: "Ads That Convert",
     items: [
-      "Google Ads campaigns",
-      "Twitter/X promoted content",
-      "Display & retargeting ads",
-      "Creative asset development",
+      "Multi-Platform: Expert setups on Google, Twitter/X, and YouTube",
+      "Creative Edge: We design the ads, so you don't have to",
+      "Retargeting: Bringing back the people who visited but didn't convert yet",
     ],
   },
   {
-    title: "Analytics & Reporting",
+    title: "Clear Reporting",
     items: [
-      "Conversion tracking setup",
-      "Weekly performance reports",
-      "ROI analysis dashboard",
-      "Optimization recommendations",
+      "The Dashboard: A simple view of your ROI and key metrics",
+      "Weekly Catch-ups: We tell you what's happening in plain English, no jargon",
+      "Actionable Insights: Not just data, but what to do with it",
     ],
   },
 ];
 
 const faqItems: FAQItem[] = [
   {
-    question: "Which advertising platforms do you work with?",
-    answer: "We manage campaigns across Google Ads (Search, Display, YouTube), Twitter/X Ads, and crypto-native platforms. We recommend the optimal mix based on your target audience and objectives.",
+    question: "Where do you run the ads?",
+    answer: "We focus on the big ones: Google, X (Twitter), Naver, Instagram and YouTube. We also tap into crypto-native networks like Coinzilla or Bitmedia if that's where your audience is hiding.",
   },
   {
-    question: "How long until we see SEO results?",
-    answer: "SEO is a long-term investment. Initial improvements typically appear within 4-8 weeks, with significant ranking improvements over 3-6 months. We provide monthly progress reports with clear metrics.",
+    question: "How soon will we see results?",
+    answer: "Ads start working almost instantly. SEO is more of a 'slow burn' but usually starts showing real momentum within 1 to 3 months.",
   },
   {
-    question: "What's the minimum ad budget you work with?",
-    answer: "We recommend a minimum monthly ad spend of $5,000 to generate meaningful data and results. Our management fees are separate and scale based on campaign complexity.",
-  },
-  {
-    question: "Do you handle crypto-specific advertising restrictions?",
-    answer: "Yes, we're experienced with the unique challenges of crypto advertising. We navigate platform policies, use compliant messaging, and leverage crypto-friendly ad networks when traditional platforms have restrictions.",
+    question: "Do you handle the 'crypto-ban' on ad platforms?",
+    answer: "Yes. We know the rules inside and out. We help you get the right certifications (like Google's crypto cert) to make sure your ads don't get blocked.",
   },
 ];
 
@@ -195,7 +188,7 @@ const SEOAdsService = () => {
       serviceName="SEO & Paid Ads"
       serviceTitle="SEO &"
       serviceSubtitle="Paid Ads"
-      serviceDescription="Drive qualified traffic through search optimization and targeted advertising campaigns across Google, Twitter/X, and crypto-native platforms."
+      serviceDescription="We drive real growth by putting your project in front of the right people. From search engine dominance to high-converting ads on X and Google—we make sure you're seen where it matters."
       serviceIcon={Search}
       serviceTags={serviceTags}
       stats={stats}
@@ -217,7 +210,7 @@ const SEOAdsService = () => {
                 {/* Left - Phase Navigation */}
                 <div className="flex flex-col">
                   <p className="text-white/60 text-sm leading-relaxed mb-6">
-                    From technical audit to scaled campaigns, our 4-week program delivers measurable growth through SEO and paid advertising.
+                    From finding the gaps to scaling what works—our 4-week program gets your growth engine running.
                   </p>
                   
                   {/* Ad Platforms Bar */}
