@@ -145,6 +145,14 @@ const deliverables: Deliverable[] = [
       "Web3 Ready: Easy wallet connections and smooth animations",
     ],
   },
+  {
+    title: "Ongoing Support",
+    items: [
+      "Launch Assist: We're with you through go-live and beyond",
+      "Quick Fixes: Fast turnaround on minor updates",
+      "Growth Ready: Easy to scale as your project evolves",
+    ],
+  },
 ];
 
 const faqItems: FAQItem[] = [
@@ -155,6 +163,10 @@ const faqItems: FAQItem[] = [
   {
     question: "Do you build websites from scratch?",
     answer: "Always. No generic templates here. We build custom sites that are optimized for speed and specifically designed for your project's goals.",
+  },
+  {
+    question: "How long does the whole process take?",
+    answer: "Our standard program runs 4 weeks from kickoff to launch. Need it faster? We can discuss rush options depending on your timeline.",
   },
 ];
 
