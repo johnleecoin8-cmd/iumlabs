@@ -21,13 +21,13 @@ const breadcrumbItems = [
 const journeyPhases = [
   {
     week: "Week 1",
-    title: "Discovery & Research",
+    title: "Deep Dive",
     icon: Eye,
     activities: [
-      "Brand audit & competitor analysis",
-      "Target audience research",
-      "Visual direction exploration",
-      "Technical requirements gathering"
+      "Research your niche & market",
+      "Understand your tech stack",
+      "Capture your unique vibes",
+      "Define project goals"
     ],
     deliverables: ["Brand Discovery Report", "Moodboard"],
     metrics: [
@@ -37,13 +37,13 @@ const journeyPhases = [
   },
   {
     week: "Week 2",
-    title: "Identity Design",
+    title: "Look & Feel",
     icon: Palette,
     activities: [
-      "Logo concept development",
-      "Color palette & typography",
-      "Visual language creation",
-      "Brand guidelines drafting"
+      "Craft your logo & icons",
+      "Define color palette & gradients",
+      "Select custom typography",
+      "Build your unique brand DNA"
     ],
     deliverables: ["Logo Concepts", "Style Guide Draft"],
     metrics: [
@@ -53,13 +53,13 @@ const journeyPhases = [
   },
   {
     week: "Week 3",
-    title: "Website Design",
+    title: "The Build",
     icon: Layout,
     activities: [
-      "Wireframe & UX design",
-      "UI design & prototyping",
-      "Responsive layout design",
-      "Animation & interaction design"
+      "Design responsive layouts",
+      "Create interactive prototypes",
+      "Build conversion-focused pages",
+      "Add smooth animations"
     ],
     deliverables: ["Figma Prototype", "Design System"],
     metrics: [
@@ -69,13 +69,13 @@ const journeyPhases = [
   },
   {
     week: "Week 4",
-    title: "Development & Launch",
+    title: "Blast Off",
     icon: Code,
     activities: [
-      "Frontend development",
-      "Responsive implementation",
-      "Performance optimization",
-      "Launch & handover"
+      "Final polish & refinements",
+      "Tech checks & optimization",
+      "Launch preparation",
+      "Official go-live!"
     ],
     deliverables: ["Live Website", "Brand Assets Package"],
     metrics: [
@@ -95,10 +95,10 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 10, label: "Brands Created", suffix: "+" },
-  { value: 15, label: "Websites Launched", suffix: "+" },
-  { value: 4, label: "Avg Delivery", suffix: " weeks" },
-  { value: 95, label: "Client Satisfaction", suffix: "%" },
+  { value: 10, label: "Brands Built", suffix: "+" },
+  { value: 15, label: "Sites Live", suffix: "+" },
+  { value: 4, label: "Avg. Launch", suffix: " Weeks" },
+  { value: 95, label: "Happy Clients", suffix: "%" },
 ];
 
 const processSteps: ProcessStep[] = [
@@ -132,48 +132,29 @@ const deliverables: Deliverable[] = [
   {
     title: "Brand Identity",
     items: [
-      "Logo (primary, secondary, icon)",
-      "Color palette & gradients",
-      "Typography system",
-      "Brand guidelines PDF",
+      "The Basics: Logo kit (Primary, Secondary, Icons)",
+      "The Vibe: Color palettes, gradients, and custom fonts",
+      "The Rules: A simple Brand Guideline PDF so your team stays on track",
     ],
   },
   {
-    title: "Website Assets",
+    title: "Website & Tech",
     items: [
-      "Responsive web design",
-      "Interactive prototypes",
-      "Design system components",
-      "Animation specifications",
-    ],
-  },
-  {
-    title: "Development",
-    items: [
-      "Custom frontend development",
-      "CMS integration (if needed)",
-      "Performance optimization",
-      "SEO implementation",
+      "Design: Fully responsive and interactive layouts",
+      "Development: Clean code, fast loading, and SEO-ready",
+      "Web3 Ready: Easy wallet connections and smooth animations",
     ],
   },
 ];
 
 const faqItems: FAQItem[] = [
   {
-    question: "What's included in the branding package?",
-    answer: "Our branding package includes logo design (multiple variations), color palette, typography selection, brand guidelines document, and essential visual assets. We can also extend to full visual identity systems.",
+    question: "What's in the branding package?",
+    answer: "Everything you need to look professional: logos, colors, fonts, and a guidebook on how to use them. We can also scale up to full visual systems if you're going big.",
   },
   {
     question: "Do you build websites from scratch?",
-    answer: "Yes, we design and develop custom websites tailored to your brand. We use modern frameworks like React and Next.js to build fast, responsive, and SEO-friendly websites.",
-  },
-  {
-    question: "How long does a complete branding + website project take?",
-    answer: "A complete branding and website project typically takes 4-6 weeks. This includes discovery, design iterations, development, and launch. Timeline can be adjusted based on project scope.",
-  },
-  {
-    question: "Do you provide ongoing maintenance?",
-    answer: "Yes, we offer maintenance packages for website updates, security patches, and performance optimization. We also provide training for content management if your site includes a CMS.",
+    answer: "Always. No generic templates here. We build custom sites that are optimized for speed and specifically designed for your project's goals.",
   },
 ];
 
@@ -213,7 +194,7 @@ const BrandingService = () => {
       serviceName="Branding & Website"
       serviceTitle="Brand"
       serviceSubtitle="& Website"
-      serviceDescription="Distinctive brand identity and high-performance websites for Web3 projects. From logo design to custom development."
+      serviceDescription="We build standout identities and ultra-fast websites for Web3 teams. From your first logo to a fully custom site, we handle the heavy lifting so you can focus on scaling."
       serviceIcon={Palette}
       serviceTags={serviceTags}
       stats={stats}
