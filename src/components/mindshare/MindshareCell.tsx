@@ -142,44 +142,44 @@ const MindshareCell = ({
     return { sparklinePath: path, lastPoint: last };
   }, [sparkline]);
 
-  // Ium Labs color system - refined, subtle, Bloomberg-esque
+  // Ium Labs color system - Kaito-style solid colors
   const trendColors = {
     up: {
-      cellBg: 'linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(13, 148, 136, 0.06) 50%, rgba(6, 78, 59, 0.10) 100%)',
-      glowColor: 'rgba(45, 212, 191, 0.08)',
-      borderColor: 'rgba(45, 212, 191, 0.15)',
-      sparkline: 'rgba(45, 212, 191, 0.85)',
-      sparklineGlow: 'rgba(45, 212, 191, 0.15)', // Reduced from 0.35
-      sparklineFillTop: 'rgba(45, 212, 191, 0.08)', // Max 0.08, very subtle
-      sparklineFillMid: 'rgba(45, 212, 191, 0.02)',
-      sparklineFillBottom: 'rgba(45, 212, 191, 0)',
-      accentText: 'text-teal-400',
-      percentBg: 'bg-teal-500/10',
-      dotColor: 'rgba(45, 212, 191, 0.9)',
-      dotGlow: 'rgba(45, 212, 191, 0.3)',
+      cellBg: 'linear-gradient(160deg, rgba(20, 83, 45, 0.95) 0%, rgba(22, 101, 52, 0.85) 50%, rgba(20, 83, 45, 0.9) 100%)', // Solid green
+      glowColor: 'rgba(34, 197, 94, 0.08)',
+      borderColor: 'rgba(255, 255, 255, 0.12)', // White border for visibility
+      sparkline: 'rgba(134, 239, 172, 0.9)',
+      sparklineGlow: 'rgba(134, 239, 172, 0.12)',
+      sparklineFillTop: 'rgba(134, 239, 172, 0.06)',
+      sparklineFillMid: 'rgba(134, 239, 172, 0.02)',
+      sparklineFillBottom: 'rgba(134, 239, 172, 0)',
+      accentText: 'text-green-300',
+      percentBg: 'bg-green-500/15',
+      dotColor: 'rgba(134, 239, 172, 0.9)',
+      dotGlow: 'rgba(134, 239, 172, 0.25)',
     },
     down: {
-      cellBg: 'linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(239, 68, 68, 0.04) 50%, rgba(127, 29, 29, 0.08) 100%)',
+      cellBg: 'linear-gradient(160deg, rgba(127, 29, 29, 0.95) 0%, rgba(153, 27, 27, 0.85) 50%, rgba(127, 29, 29, 0.9) 100%)', // Solid red/maroon
       glowColor: 'rgba(248, 113, 113, 0.06)',
-      borderColor: 'rgba(248, 113, 113, 0.15)',
-      sparkline: 'rgba(248, 113, 113, 0.75)',
-      sparklineGlow: 'rgba(248, 113, 113, 0.12)', // Reduced from 0.3
-      sparklineFillTop: 'rgba(248, 113, 113, 0.06)', // Max 0.06, very subtle
-      sparklineFillMid: 'rgba(248, 113, 113, 0.015)',
-      sparklineFillBottom: 'rgba(248, 113, 113, 0)',
-      accentText: 'text-rose-400',
-      percentBg: 'bg-rose-500/10',
-      dotColor: 'rgba(248, 113, 113, 0.9)',
-      dotGlow: 'rgba(248, 113, 113, 0.25)',
+      borderColor: 'rgba(255, 255, 255, 0.12)', // White border for visibility
+      sparkline: 'rgba(252, 165, 165, 0.85)',
+      sparklineGlow: 'rgba(252, 165, 165, 0.10)',
+      sparklineFillTop: 'rgba(252, 165, 165, 0.05)',
+      sparklineFillMid: 'rgba(252, 165, 165, 0.015)',
+      sparklineFillBottom: 'rgba(252, 165, 165, 0)',
+      accentText: 'text-red-300',
+      percentBg: 'bg-red-500/15',
+      dotColor: 'rgba(252, 165, 165, 0.9)',
+      dotGlow: 'rgba(252, 165, 165, 0.2)',
     },
   };
 
-  // Neutral style - subtle
+  // Neutral style - Kaito-style slate/gray solid
   const neutralColors = {
-    cellBg: 'linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(51, 65, 85, 0.06) 50%, rgba(30, 41, 59, 0.10) 100%)',
+    cellBg: 'linear-gradient(160deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.85) 50%, rgba(30, 41, 59, 0.9) 100%)',
     glowColor: 'rgba(148, 163, 184, 0.04)',
-    borderColor: 'rgba(148, 163, 184, 0.10)',
-    sparkline: 'rgba(148, 163, 184, 0.55)',
+    borderColor: 'rgba(255, 255, 255, 0.12)', // White border for visibility
+    sparkline: 'rgba(148, 163, 184, 0.65)',
     sparklineGlow: 'rgba(148, 163, 184, 0.08)',
     sparklineFillTop: 'rgba(148, 163, 184, 0.04)',
     sparklineFillMid: 'rgba(148, 163, 184, 0.01)',
@@ -202,25 +202,47 @@ const MindshareCell = ({
       onClick={onClick}
       className={cn(
         'group relative w-full h-full overflow-hidden cursor-pointer box-border',
-        'rounded-xl sm:rounded-2xl transition-all duration-300 ease-out',
-        'hover:scale-[1.02] hover:z-20',
+        'rounded-lg sm:rounded-xl transition-all duration-300 ease-out',
+        'hover:scale-[1.01] hover:z-20',
         isTrending && 'ring-1 sm:ring-2 ring-teal-400/40',
       )}
       style={{ 
         background: isTrending 
-          ? 'linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(20, 184, 166, 0.12) 40%, rgba(13, 148, 136, 0.08) 100%)'
+          ? 'linear-gradient(160deg, rgba(5, 150, 105, 0.9) 0%, rgba(4, 120, 87, 0.85) 100%)'
           : colors.cellBg,
-        border: isTrending ? '1px solid rgba(45, 212, 191, 0.35)' : `1px solid ${colors.borderColor}`,
+        border: isTrending ? '1px solid rgba(255, 255, 255, 0.2)' : `1px solid ${colors.borderColor}`,
         boxShadow: isTrending 
-          ? `0 8px 32px -8px rgba(20, 184, 166, 0.25), inset 0 1px 0 rgba(255,255,255,0.06)`
-          : `0 4px 24px -8px ${colors.glowColor}, inset 0 1px 0 rgba(255,255,255,0.03)`,
+          ? `0 4px 20px -6px rgba(20, 184, 166, 0.3), inset 0 1px 0 rgba(255,255,255,0.08)`
+          : `0 2px 12px -4px ${colors.glowColor}, inset 0 1px 0 rgba(255,255,255,0.04)`,
       }}
     >
-      {/* Subtle glass overlay */}
+      {/* Crown badge for top 3 ranks - Kaito style */}
+      {rank && rank <= 3 && (size === 'large' || size === 'medium') && (
+        <div className="absolute top-2 right-2 z-20 flex items-center gap-0.5">
+          <span className={cn(
+            'text-base sm:text-lg drop-shadow-lg',
+            rank === 1 && 'text-amber-400',
+            rank === 2 && 'text-slate-300',
+            rank === 3 && 'text-amber-600',
+          )}>
+            👑
+          </span>
+          <span className={cn(
+            'text-[9px] sm:text-[10px] font-bold',
+            rank === 1 && 'text-amber-400',
+            rank === 2 && 'text-slate-300',
+            rank === 3 && 'text-amber-600',
+          )}>
+            #{rank}
+          </span>
+        </div>
+      )}
+
+      {/* Enhanced diagonal shine overlay - Kaito style */}
       <div 
-        className="absolute inset-0 pointer-events-none opacity-40 group-hover:opacity-60 transition-opacity duration-500"
+        className="absolute inset-0 pointer-events-none opacity-60 group-hover:opacity-80 transition-opacity duration-500"
         style={{
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%)',
+          background: 'linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.02) 30%, transparent 50%)',
         }}
       />
 
