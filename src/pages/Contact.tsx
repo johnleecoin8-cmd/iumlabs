@@ -285,14 +285,6 @@ const Contact = () => {
                     </p>
                   </div>
                   
-                  <div className="hidden sm:block w-px h-10 bg-white/[0.08]" />
-                  
-                  <div>
-                    <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Phone</p>
-                    <a href="tel:+821039699699" className="text-white text-sm hover:text-white/80 transition-colors">
-                      +82 10-3969-9699
-                    </a>
-                  </div>
                 </div>
 
                 {/* Right - Hours & Action */}

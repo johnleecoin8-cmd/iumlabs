@@ -12,7 +12,6 @@ export const brand = {
   tagline: "Web3 Marketing Agency",
   description: "Korea's leading Web3 marketing agency. We help blockchain projects launch and grow successfully.",
   email: "info@iumlabs.io",
-  phone: "010 3969 9699",
   address: "OFFICE 11B, Gangnam-daero 373, Gangnam, Seoul, South Korea",
   telegram: "@iumlabs",
   telegramLink: "https://t.me/iumlabs",
