@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { TrendingUp, TrendingDown, Crown } from 'lucide-react';
+import { TrendingUp, TrendingDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface MindshareCellProps {
@@ -101,12 +101,6 @@ const MindshareCell = ({
   const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : null;
   const isPreTge = tokenStatus === 'pre-tge';
 
-  // Crown colors for top 3 with glow effects
-  const crownStyles: Record<number, { color: string; glow: string }> = {
-    1: { color: '#FFD700', glow: 'drop-shadow(0 0 8px rgba(255, 215, 0, 0.6))' },
-    2: { color: '#E5E4E2', glow: 'drop-shadow(0 0 6px rgba(229, 228, 226, 0.5))' },
-    3: { color: '#CD7F32', glow: 'drop-shadow(0 0 6px rgba(205, 127, 50, 0.5))' }
-  };
 
   return (
     <div
@@ -173,35 +167,6 @@ const MindshareCell = ({
       {/* Subtle bottom gradient for depth */}
       <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
 
-      {/* Rank badge - Kaito style */}
-      {rank && (
-        <div className={cn(
-          "absolute z-20 flex items-center gap-0.5",
-          size === 'large' ? 'top-2 right-2' : size === 'medium' ? 'top-1.5 right-1.5' : 'top-1 right-1'
-        )}>
-          {/* Rank number */}
-          <span className={cn(
-            "font-bold text-white/20",
-            size === 'large' ? 'text-sm' : size === 'medium' ? 'text-xs' : 'text-[9px]'
-          )}>
-            #{rank}
-          </span>
-          {/* Crown for top 3 */}
-          {rank <= 3 && (
-            <Crown 
-              className={cn(
-                'transition-transform duration-200 group-hover:scale-110',
-                size === 'large' ? 'w-4 h-4' : size === 'medium' ? 'w-3.5 h-3.5' : 'w-3 h-3'
-              )}
-              style={{ 
-                color: crownStyles[rank].color, 
-                filter: crownStyles[rank].glow,
-              }}
-              fill={crownStyles[rank].color}
-            />
-          )}
-        </div>
-      )}
 
       {/* Content - Mobile optimized padding */}
       <div className={cn(
