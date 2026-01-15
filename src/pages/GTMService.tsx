@@ -2249,12 +2249,6 @@ const TiltCaseCard = ({
       }} />
         
         <div className="relative bg-background border border-border group-hover:border-primary/30 transition-colors duration-300 overflow-hidden">
-          {/* Case Study Number Badge */}
-          <div className="absolute top-4 left-4 z-20 px-3 py-1.5 bg-background/90 backdrop-blur-sm border border-border">
-            <span className="text-[10px] font-mono text-muted-foreground">CASE STUDY</span>
-            <span className="text-xs font-mono text-primary ml-2">0{index + 1}</span>
-          </div>
-          
           {/* Category Badge */}
           <div className="absolute top-4 right-4 z-20 px-3 py-1.5 bg-primary/90 backdrop-blur-sm">
             <span className="text-[10px] font-mono text-primary-foreground uppercase tracking-wider">{project.category}</span>
@@ -2277,35 +2271,21 @@ const TiltCaseCard = ({
               <h3 className="text-2xl md:text-3xl font-medium text-white mb-2">
                 {project.name}
               </h3>
-              <p className="text-lg text-white/90 font-medium mb-1">
+              <p className="text-lg text-white/90 font-medium">
                 "{project.tagline}"
-              </p>
-              <p className="text-sm text-white/70">
-                {project.descEn}
               </p>
             </div>
           </div>
 
-          <div className="p-5 space-y-4">
-            {/* Result Highlight */}
-            <div className="flex items-center gap-3 p-3 bg-primary/10 border border-primary/30">
-              <Trophy className="w-5 h-5 text-primary flex-shrink-0" />
-              <div>
-                <p className="text-xs text-muted-foreground uppercase tracking-wider">Result</p>
-                <p className="text-base font-medium text-primary">{project.result}</p>
-              </div>
+          <div className="p-5 space-y-3">
+            {/* Result */}
+            <div className="flex items-center gap-3">
+              <Trophy className="w-4 h-4 text-primary flex-shrink-0" />
+              <p className="text-sm font-medium text-primary">{project.result}</p>
             </div>
             
-            {/* Action */}
-            <div className="space-y-2">
-              <div className="flex items-start gap-2">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider min-w-[50px]">Action:</span>
-                <span className="text-sm text-foreground">{project.strategy}</span>
-              </div>
-            </div>
-            
-            {/* Metrics with animation */}
-            <div className="pt-3 mt-3 border-t border-border grid grid-cols-2 gap-3">
+            {/* Metrics */}
+            <div className="grid grid-cols-2 gap-3">
               {project.metrics.map((metric, mi) => (
                 <div key={metric.label} className="text-center p-2 bg-muted/30">
                   <CaseMetricBar label={metric.label} value={metric.value} suffix={metric.suffix} prefix={metric.prefix} delay={0.3 + mi * 0.1} isVisible={isVisible} />
@@ -2313,13 +2293,13 @@ const TiltCaseCard = ({
               ))}
             </div>
             
-            {/* View Case Study CTA */}
+            {/* CTA */}
             <motion.div 
-              className="flex items-center justify-center gap-2 pt-2 text-sm text-primary group-hover:text-primary/80 transition-colors"
+              className="flex items-center justify-center gap-2 pt-1 text-xs text-muted-foreground group-hover:text-primary transition-colors"
               animate={{ x: isHovered ? 5 : 0 }}
             >
-              <span>View Full Case Study</span>
-              <ArrowRight className="w-4 h-4" />
+              <span>View Case Study</span>
+              <ArrowRight className="w-3 h-3" />
             </motion.div>
           </div>
         </div>
