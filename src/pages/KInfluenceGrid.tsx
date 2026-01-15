@@ -166,37 +166,51 @@ const KInfluenceGrid = () => {
                 {/* Token Status Filter */}
                 <TokenStatusToggle selected={tokenStatus} onChange={setTokenStatus} />
                 
-                {/* Stats - Compact on mobile */}
-                <div className="hidden sm:flex items-center gap-4 text-sm">
-                  <div className="flex items-center gap-2">
-                    <span className="text-white/40">Total:</span>
-                    <span className="font-semibold text-white">{stats.total}</span>
+                {/* Stats with Channels & Mentions - Desktop */}
+                <div className="hidden sm:flex items-center gap-3">
+                  {/* Channels badge */}
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-teal-500/10 to-teal-500/5 border border-teal-500/20 rounded-lg">
+                    <Hash className="w-3.5 h-3.5 text-teal-400" />
+                    <span className="text-sm font-semibold text-teal-400">{hourlyStats.channels.toLocaleString()}</span>
+                    <span className="text-xs text-white/40">Channels</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
-                    <span className="text-white/40">TGE:</span>
-                    <span className="font-semibold text-teal-400">{stats.tgeCount}</span>
+                  
+                  {/* Mentions badge */}
+                  <div className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-cyan-500/10 to-cyan-500/5 border border-cyan-500/20 rounded-lg">
+                    <MessageCircle className="w-3.5 h-3.5 text-cyan-400" />
+                    <span className="text-sm font-semibold text-cyan-400">{hourlyStats.mentions.toLocaleString()}</span>
+                    <span className="text-xs text-white/40">Mentions</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                    <span className="text-white/40">Pre-TGE:</span>
-                    <span className="font-semibold text-cyan-400">{stats.preTgeCount}</span>
+                  
+                  {/* Divider */}
+                  <div className="w-px h-6 bg-white/10" />
+                  
+                  {/* Project counts */}
+                  <div className="flex items-center gap-3 text-sm">
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
+                      <span className="font-semibold text-teal-400">{stats.tgeCount}</span>
+                      <span className="text-white/40 text-xs">TGE</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                      <span className="font-semibold text-cyan-400">{stats.preTgeCount}</span>
+                      <span className="text-white/40 text-xs">Pre-TGE</span>
+                    </div>
                   </div>
                 </div>
                 
-                {/* Mobile stats - Compact */}
-                <div className="flex sm:hidden items-center gap-2 text-[10px]">
-                  <span className="text-white/60 font-medium">{stats.total}</span>
-                  <span className="text-white/20">|</span>
-                  <span className="text-teal-400 font-medium">{stats.tgeCount}</span>
-                  <span className="text-white/20">/</span>
-                  <span className="text-cyan-400 font-medium">{stats.preTgeCount}</span>
+                {/* Mobile stats - Compact with channels/mentions */}
+                <div className="flex sm:hidden items-center gap-1.5 text-[10px]">
+                  <div className="flex items-center gap-1 px-1.5 py-0.5 bg-teal-500/10 border border-teal-500/20 rounded">
+                    <Hash className="w-2.5 h-2.5 text-teal-400" />
+                    <span className="text-teal-400 font-medium">{(hourlyStats.channels / 1000).toFixed(1)}K</span>
+                  </div>
+                  <div className="flex items-center gap-1 px-1.5 py-0.5 bg-cyan-500/10 border border-cyan-500/20 rounded">
+                    <MessageCircle className="w-2.5 h-2.5 text-cyan-400" />
+                    <span className="text-cyan-400 font-medium">{(hourlyStats.mentions / 1000).toFixed(0)}K</span>
+                  </div>
                 </div>
-                
-                {/* Update frequency - Desktop only */}
-                <span className="hidden sm:block text-xs text-white/30">
-                  Update every 1 hour
-                </span>
               </div>
             </div>
           </div>
