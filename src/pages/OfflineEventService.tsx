@@ -410,18 +410,18 @@ const OfflineEventService = () => {
                 </div>
 
                 {/* Right - Phase Cards */}
-                <div className="grid grid-cols-2 gap-2">
-                  {journeyPhases.map((phase, index) => (
+                <div className="grid grid-cols-2 gap-1.5">
+                  {journeyPhases.map((phase) => (
                     <div
                       key={phase.title}
-                      className="relative bg-white/5 border border-white/10 rounded-lg p-3 transition-all duration-300 hover:border-white/20 group overflow-hidden"
+                      className="relative bg-white/5 border border-white/10 rounded-md p-2"
                       style={{
                         borderColor: `${ACCENT_COLOR}20`,
                       }}
                     >
                       {/* Week Badge */}
                       <div 
-                        className="text-[10px] font-medium px-1.5 py-0.5 rounded-full w-fit mb-2"
+                        className="text-[9px] font-medium px-1 py-0.5 rounded-full w-fit mb-1.5"
                         style={{ 
                           backgroundColor: `${ACCENT_COLOR}20`,
                           color: ACCENT_COLOR
@@ -431,12 +431,12 @@ const OfflineEventService = () => {
                       </div>
                       
                       {/* Icon & Title */}
-                      <div className="flex items-center gap-2 mb-2">
+                      <div className="flex items-center gap-1.5 mb-1.5">
                         <phase.icon 
-                          className="w-4 h-4" 
+                          className="w-3.5 h-3.5" 
                           style={{ color: ACCENT_COLOR }}
                         />
-                        <h4 className="text-white text-sm font-medium">{phase.title}</h4>
+                        <h4 className="text-white text-xs font-medium">{phase.title}</h4>
                       </div>
 
                       {/* Simple metrics */}
@@ -444,10 +444,10 @@ const OfflineEventService = () => {
                         {phase.metrics.map((metric) => (
                           <div 
                             key={metric.label} 
-                            className="flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded bg-white/5"
+                            className="flex items-center gap-0.5 text-[9px] px-1 py-0.5 rounded bg-white/5"
                           >
-                            <metric.icon className="w-2.5 h-2.5" style={{ color: ACCENT_COLOR }} />
-                            <span className="text-white/50">{metric.label}:</span>
+                            <metric.icon className="w-2 h-2" style={{ color: ACCENT_COLOR }} />
+                            <span className="text-white/40">{metric.label}:</span>
                             <span style={{ color: ACCENT_COLOR }}>{metric.value}</span>
                           </div>
                         ))}
