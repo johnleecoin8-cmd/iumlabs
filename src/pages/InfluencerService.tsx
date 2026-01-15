@@ -127,6 +127,16 @@ const kolProfiles = [
   { name: "Crypto Rover", handle: "@rovercrc", followers: "480K", expertise: "News" },
 ];
 
+// Extra faded KOLs to show there's more
+const fadedKolProfiles = [
+  { name: "Crypto Rand", handle: "@crypto_rand", followers: "620K", expertise: "Trading" },
+  { name: "Lark Davis", handle: "@TheCryptoLark", followers: "510K", expertise: "Education" },
+  { name: "Jacob Bury", handle: "@JacobCryptoBury", followers: "170K", expertise: "Research" },
+  { name: "Crypto Banter", handle: "@cryptobanter", followers: "680K", expertise: "News" },
+  { name: "DeFi Dad", handle: "@DeFi_Dad", followers: "140K", expertise: "DeFi" },
+  { name: "Crypto Wendy", handle: "@CryptoWendyO", followers: "320K", expertise: "Education" },
+];
+
 const InfluencerService = () => {
   usePageMeta({
     title: "Korea Crypto KOL Marketing & Web3 Influencer Agency",
@@ -201,6 +211,47 @@ const InfluencerService = () => {
                     </div>
                   </a>
                 ))}
+              </div>
+              
+              {/* Faded row to show more KOLs */}
+              <div className="relative mt-4">
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#0F0F0F] z-10 pointer-events-none" />
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 opacity-30">
+                  {fadedKolProfiles.map((kol) => (
+                    <div
+                      key={kol.handle}
+                      className="bg-white/5 border border-white/10 rounded-xl p-4 text-center"
+                    >
+                      <div className="w-16 h-16 mx-auto mb-3 rounded-full overflow-hidden border-2 border-white/20">
+                        <img 
+                          src={`https://unavatar.io/twitter/${kol.handle.replace('@', '')}`}
+                          alt={kol.name}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.src = `https://api.dicebear.com/7.x/notionists/svg?seed=${encodeURIComponent(kol.name)}&backgroundColor=1a1a1a`;
+                          }}
+                        />
+                      </div>
+                      <div className="text-white text-sm font-medium truncate mb-0.5">
+                        {kol.name}
+                      </div>
+                      <div className="text-amber-400 text-xs truncate mb-1">
+                        {kol.handle}
+                      </div>
+                      <div className="text-white/60 text-sm mb-2">
+                        {kol.followers}
+                      </div>
+                      <div className="inline-block px-2.5 py-1 rounded-full text-[10px] font-medium border border-amber-500/30 text-amber-400">
+                        {kol.expertise}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                
+                {/* "And more" text */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20">
+                  <span className="text-white/40 text-sm">+50 more in our network</span>
+                </div>
               </div>
             </div>
           </div>
