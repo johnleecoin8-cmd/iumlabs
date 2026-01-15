@@ -165,7 +165,7 @@ const KInfluenceGrid = () => {
             {/* Methodology - Kaito style */}
             <div>
               <p className="text-[9px] sm:text-[11px] text-white/30 text-center leading-relaxed max-w-3xl mx-auto">
-                K-Mindshare is calculated as the total mindshare from 1,000+ Korean crypto community channels across X, Telegram, Naver, and KakaoTalk. 
+                K-Leaderboard is calculated as the total mindshare from 1,000+ Korean crypto community channels across X, Telegram, Naver, and KakaoTalk. 
                 Community sources are curated from major Korean crypto communities, influencer networks, and trading groups. 
                 <span className="hidden sm:inline"> If you notice any projects or community channels missing, feel free to contact us.</span>
                 {' '}Data updates every hour.
