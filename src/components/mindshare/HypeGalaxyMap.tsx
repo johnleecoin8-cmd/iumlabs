@@ -119,10 +119,20 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
                     <span className="text-muted-foreground/50 font-mono w-4 text-right text-[10px]">
                       {idx + 1}
                     </span>
-                    <span 
-                      className="w-1.5 h-1.5 rounded-full" 
-                      style={{ backgroundColor: p.color }}
-                    />
+                    {project?.logo_url ? (
+                      <img 
+                        src={project.logo_url} 
+                        alt={p.name}
+                        className="w-6 h-6 rounded-full object-cover border border-white/10"
+                      />
+                    ) : (
+                      <span 
+                        className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold"
+                        style={{ backgroundColor: p.color + '20', color: p.color }}
+                      >
+                        {p.name[0]}
+                      </span>
+                    )}
                     <span className="text-foreground/90 font-medium">
                       {p.name}
                     </span>
@@ -166,7 +176,11 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
 
       <div className="flex flex-col lg:flex-row flex-1 min-h-0">
         {/* 차트 영역 */}
-        <div className="flex-1 min-h-[400px] lg:min-h-0 p-4">
+        <div className="flex-1 min-h-[400px] lg:min-h-0 p-4 relative">
+          {/* 그라데이션 배경 */}
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-500/[0.03] via-transparent to-violet-500/[0.03] pointer-events-none rounded-lg" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent pointer-events-none" />
+          
           <ResponsiveContainer width="100%" height="100%">
             <LineChart 
               data={chartData} 
