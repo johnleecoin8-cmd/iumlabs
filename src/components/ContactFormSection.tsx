@@ -153,42 +153,6 @@ const ContactFormSection = ({
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
             </a>
 
-            {/* Process Guide */}
-            <div className="mt-8 sm:mt-10">
-              <div className="mb-3 flex items-center justify-between">
-                <span className="text-[10px] sm:text-label uppercase tracking-wider text-muted-foreground">How it works</span>
-                <span className="text-[10px] sm:text-label uppercase tracking-wider text-muted-foreground">3 steps</span>
-              </div>
-
-              <ol className="flex items-center gap-2 sm:gap-3">
-                <li className="flex items-center gap-2 rounded-full border border-border bg-card/30 px-3 py-2">
-                  <span className="text-[10px] font-mono text-muted-foreground">01</span>
-                  <span className="text-xs sm:text-sm text-foreground">Fill out the form</span>
-                </li>
-
-                <span className="text-muted-foreground/70" aria-hidden>
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-
-                <li className="flex items-center gap-2 rounded-full border border-border bg-card/30 px-3 py-2">
-                  <span className="text-[10px] font-mono text-muted-foreground">02</span>
-                  <span className="text-xs sm:text-sm text-foreground">Response within 24 hours</span>
-                </li>
-
-                <span className="text-muted-foreground/70" aria-hidden>
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-
-                <li className="flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-2">
-                  <Check className="h-4 w-4 text-primary" />
-                  <span className="text-xs sm:text-sm font-medium text-primary">Free consultation</span>
-                </li>
-              </ol>
-            </div>
-
-            {/* LinkedIn */}
-            
-
             {/* Footer Links */}
             
           </div>
