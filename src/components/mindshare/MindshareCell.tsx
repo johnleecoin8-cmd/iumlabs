@@ -96,19 +96,43 @@ const MindshareCell = ({
   topSource,
 }: MindshareCellProps) => {
   // Generate smooth sparkline path with bezier curves
+  // Filter out trailing zeros/flatlines to avoid "heart monitor death" visual
   const { sparklinePath, lastPoint } = useMemo(() => {
     if (!sparkline || sparkline.length < 2) return { sparklinePath: '', lastPoint: null };
     
-    const min = Math.min(...sparkline);
-    const max = Math.max(...sparkline);
+    // Remove trailing near-zero or flatline data points
+    let cleanedSparkline = [...sparkline];
+    const threshold = Math.max(...sparkline) * 0.05; // 5% of max as threshold
+    
+    // Remove trailing points that are near-zero or form a flatline
+    while (cleanedSparkline.length > 3) {
+      const lastVal = cleanedSparkline[cleanedSparkline.length - 1];
+      const secondLast = cleanedSparkline[cleanedSparkline.length - 2];
+      const thirdLast = cleanedSparkline[cleanedSparkline.length - 3];
+      
+      // If last 3 points are nearly identical (flatline) or near zero, trim
+      const isFlatline = Math.abs(lastVal - secondLast) < threshold && Math.abs(secondLast - thirdLast) < threshold;
+      const isNearZero = lastVal < threshold;
+      
+      if (isFlatline || isNearZero) {
+        cleanedSparkline.pop();
+      } else {
+        break;
+      }
+    }
+    
+    if (cleanedSparkline.length < 2) cleanedSparkline = sparkline.slice(0, Math.max(2, sparkline.length));
+    
+    const min = Math.min(...cleanedSparkline);
+    const max = Math.max(...cleanedSparkline);
     const range = max - min || 1;
     
     // Graph occupies bottom 65% of cell (leaving top 35% for text)
     const graphTop = 35;
     const graphHeight = 55;
     
-    const points = sparkline.map((value, index) => ({
-      x: (index / (sparkline.length - 1)) * 100,
+    const points = cleanedSparkline.map((value, index) => ({
+      x: (index / (cleanedSparkline.length - 1)) * 100,
       y: graphTop + graphHeight - ((value - min) / range) * graphHeight
     }));
     
@@ -118,52 +142,52 @@ const MindshareCell = ({
     return { sparklinePath: path, lastPoint: last };
   }, [sparkline]);
 
-  // Ium Labs color system - teal-focused for up trend
+  // Ium Labs color system - refined, subtle, Bloomberg-esque
   const trendColors = {
     up: {
-      cellBg: 'linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(13, 148, 136, 0.08) 50%, rgba(6, 78, 59, 0.15) 100%)',
-      glowColor: 'rgba(45, 212, 191, 0.12)',
-      borderColor: 'rgba(45, 212, 191, 0.18)',
-      sparkline: 'rgba(45, 212, 191, 0.9)',
-      sparklineGlow: 'rgba(45, 212, 191, 0.35)',
-      sparklineFillTop: 'rgba(45, 212, 191, 0.15)',
-      sparklineFillMid: 'rgba(45, 212, 191, 0.05)',
+      cellBg: 'linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(13, 148, 136, 0.06) 50%, rgba(6, 78, 59, 0.10) 100%)',
+      glowColor: 'rgba(45, 212, 191, 0.08)',
+      borderColor: 'rgba(45, 212, 191, 0.15)',
+      sparkline: 'rgba(45, 212, 191, 0.85)',
+      sparklineGlow: 'rgba(45, 212, 191, 0.15)', // Reduced from 0.35
+      sparklineFillTop: 'rgba(45, 212, 191, 0.08)', // Max 0.08, very subtle
+      sparklineFillMid: 'rgba(45, 212, 191, 0.02)',
       sparklineFillBottom: 'rgba(45, 212, 191, 0)',
       accentText: 'text-teal-400',
       percentBg: 'bg-teal-500/10',
-      dotColor: 'rgba(45, 212, 191, 1)',
-      dotGlow: 'rgba(45, 212, 191, 0.6)',
+      dotColor: 'rgba(45, 212, 191, 0.9)',
+      dotGlow: 'rgba(45, 212, 191, 0.3)',
     },
     down: {
-      cellBg: 'linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(239, 68, 68, 0.06) 50%, rgba(127, 29, 29, 0.12) 100%)',
-      glowColor: 'rgba(248, 113, 113, 0.10)',
-      borderColor: 'rgba(248, 113, 113, 0.18)',
-      sparkline: 'rgba(248, 113, 113, 0.85)',
-      sparklineGlow: 'rgba(248, 113, 113, 0.3)',
-      sparklineFillTop: 'rgba(248, 113, 113, 0.12)',
-      sparklineFillMid: 'rgba(248, 113, 113, 0.04)',
+      cellBg: 'linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(239, 68, 68, 0.04) 50%, rgba(127, 29, 29, 0.08) 100%)',
+      glowColor: 'rgba(248, 113, 113, 0.06)',
+      borderColor: 'rgba(248, 113, 113, 0.15)',
+      sparkline: 'rgba(248, 113, 113, 0.75)',
+      sparklineGlow: 'rgba(248, 113, 113, 0.12)', // Reduced from 0.3
+      sparklineFillTop: 'rgba(248, 113, 113, 0.06)', // Max 0.06, very subtle
+      sparklineFillMid: 'rgba(248, 113, 113, 0.015)',
       sparklineFillBottom: 'rgba(248, 113, 113, 0)',
       accentText: 'text-rose-400',
       percentBg: 'bg-rose-500/10',
-      dotColor: 'rgba(248, 113, 113, 1)',
-      dotGlow: 'rgba(248, 113, 113, 0.6)',
+      dotColor: 'rgba(248, 113, 113, 0.9)',
+      dotGlow: 'rgba(248, 113, 113, 0.25)',
     },
   };
 
   // Neutral style - subtle
   const neutralColors = {
-    cellBg: 'linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(51, 65, 85, 0.08) 50%, rgba(30, 41, 59, 0.12) 100%)',
-    glowColor: 'rgba(148, 163, 184, 0.06)',
-    borderColor: 'rgba(148, 163, 184, 0.12)',
-    sparkline: 'rgba(148, 163, 184, 0.6)',
-    sparklineGlow: 'rgba(148, 163, 184, 0.18)',
-    sparklineFillTop: 'rgba(148, 163, 184, 0.08)',
-    sparklineFillMid: 'rgba(148, 163, 184, 0.03)',
+    cellBg: 'linear-gradient(165deg, rgba(15, 23, 42, 0.95) 0%, rgba(51, 65, 85, 0.06) 50%, rgba(30, 41, 59, 0.10) 100%)',
+    glowColor: 'rgba(148, 163, 184, 0.04)',
+    borderColor: 'rgba(148, 163, 184, 0.10)',
+    sparkline: 'rgba(148, 163, 184, 0.55)',
+    sparklineGlow: 'rgba(148, 163, 184, 0.08)',
+    sparklineFillTop: 'rgba(148, 163, 184, 0.04)',
+    sparklineFillMid: 'rgba(148, 163, 184, 0.01)',
     sparklineFillBottom: 'rgba(148, 163, 184, 0)',
     accentText: 'text-slate-400',
     percentBg: 'bg-slate-500/10',
-    dotColor: 'rgba(148, 163, 184, 0.8)',
-    dotGlow: 'rgba(148, 163, 184, 0.4)',
+    dotColor: 'rgba(148, 163, 184, 0.7)',
+    dotGlow: 'rgba(148, 163, 184, 0.2)',
   };
 
   const colors = trend === 'up' ? trendColors.up : trend === 'down' ? trendColors.down : neutralColors;
@@ -223,17 +247,17 @@ const MindshareCell = ({
               <stop offset="80%" stopColor={colors.sparklineFillBottom} />
               <stop offset="100%" stopColor="transparent" />
             </linearGradient>
-            {/* Subtle glow filter */}
-            <filter id={`sparkGlow-${ticker}`} x="-20%" y="-20%" width="140%" height="140%">
-              <feGaussianBlur stdDeviation="1.5" result="blur" />
+            {/* Very subtle glow filter - reduced for elegance */}
+            <filter id={`sparkGlow-${ticker}`} x="-10%" y="-10%" width="120%" height="120%">
+              <feGaussianBlur stdDeviation="0.6" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            {/* Dot glow filter */}
-            <filter id={`dotGlow-${ticker}`} x="-100%" y="-100%" width="300%" height="300%">
-              <feGaussianBlur stdDeviation="2" result="blur" />
+            {/* Dot glow filter - subtle */}
+            <filter id={`dotGlow-${ticker}`} x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="1" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
@@ -247,53 +271,54 @@ const MindshareCell = ({
             fill={`url(#sparkGrad-${ticker})`}
           />
           
-          {/* Outer glow line */}
+          {/* Subtle outer glow line - much thinner */}
           <path
             d={sparklinePath}
             fill="none"
             stroke={colors.sparklineGlow}
-            strokeWidth={size === 'large' ? '4' : size === 'medium' ? '3' : '2'}
+            strokeWidth={size === 'large' ? '2.5' : size === 'medium' ? '2' : '1.5'}
             strokeLinecap="round"
             strokeLinejoin="round"
           />
           
-          {/* Main sparkline - smooth and crisp */}
+          {/* Main sparkline - thin, crisp, elegant (2px target) */}
           <path
             d={sparklinePath}
             fill="none"
             stroke={colors.sparkline}
-            strokeWidth={size === 'large' ? '1.5' : size === 'medium' ? '1.2' : '0.8'}
+            strokeWidth={size === 'large' ? '1' : size === 'medium' ? '0.8' : '0.5'}
             strokeLinecap="round"
             strokeLinejoin="round"
-            filter={size === 'large' || size === 'medium' ? `url(#sparkGlow-${ticker})` : undefined}
+            filter={size === 'large' ? `url(#sparkGlow-${ticker})` : undefined}
           />
           
-          {/* Live dot at the end - "alive" indicator */}
+          {/* Live dot at the end - subtle "alive" indicator */}
           {lastPoint && (size === 'large' || size === 'medium') && (
             <>
-              {/* Outer glow */}
+              {/* Outer glow - subtle */}
               <circle
                 cx={lastPoint.x}
                 cy={lastPoint.y}
-                r={size === 'large' ? '4' : '3'}
+                r={size === 'large' ? '2.5' : '2'}
                 fill={colors.dotGlow}
                 filter={`url(#dotGlow-${ticker})`}
                 className="animate-pulse"
+                style={{ animationDuration: '2.5s' }}
               />
               {/* Inner dot */}
               <circle
                 cx={lastPoint.x}
                 cy={lastPoint.y}
-                r={size === 'large' ? '2' : '1.5'}
+                r={size === 'large' ? '1.2' : '1'}
                 fill={colors.dotColor}
               />
               {/* Bright center */}
               <circle
                 cx={lastPoint.x}
                 cy={lastPoint.y}
-                r={size === 'large' ? '0.8' : '0.6'}
+                r={size === 'large' ? '0.5' : '0.4'}
                 fill="white"
-                opacity="0.9"
+                opacity="0.8"
               />
             </>
           )}
