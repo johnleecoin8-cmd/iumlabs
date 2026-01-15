@@ -2113,40 +2113,40 @@ const FrameworkSection = () => {
         } : {}} transition={{
           delay: i * 0.15 + 0.2,
           duration: 0.6
-        }} onMouseEnter={() => setActiveStage(i)} onMouseLeave={() => setActiveStage(null)} className={`group relative p-6 border bg-background transition-all duration-500 cursor-pointer ${activeStage === i ? 'border-primary shadow-[0_0_40px_-10px_hsl(var(--primary)/0.4)] scale-[1.02]' : 'border-border hover:border-primary/30'}`}>
+        }} onMouseEnter={() => setActiveStage(i)} onMouseLeave={() => setActiveStage(null)} className={`group relative p-3 sm:p-6 border bg-background transition-all duration-500 cursor-pointer ${activeStage === i ? 'border-primary shadow-[0_0_40px_-10px_hsl(var(--primary)/0.4)] scale-[1.02]' : 'border-border hover:border-primary/30'}`}>
               {/* Stage number badge */}
-              <motion.div className={`absolute -top-3 left-6 px-3 py-1 text-xs font-mono transition-colors duration-300 ${activeStage === i ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`} whileHover={{
+              <motion.div className={`absolute -top-2 sm:-top-3 left-2 sm:left-6 px-1.5 sm:px-3 py-0.5 sm:py-1 text-[9px] sm:text-xs font-mono transition-colors duration-300 ${activeStage === i ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}`} whileHover={{
             scale: 1.05
           }}>
                 STAGE {stage.number}
               </motion.div>
 
               {/* Icon with glow */}
-              <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-6 mt-2 transition-all duration-300 ${activeStage === i ? 'bg-primary/20 shadow-[0_0_20px_hsl(var(--primary)/0.3)]' : 'bg-muted'}`}>
-                <stage.icon className={`w-6 h-6 transition-colors duration-300 ${activeStage === i ? 'text-primary' : 'text-muted-foreground'}`} />
+              <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center mb-3 sm:mb-6 mt-2 transition-all duration-300 ${activeStage === i ? 'bg-primary/20 shadow-[0_0_20px_hsl(var(--primary)/0.3)]' : 'bg-muted'}`}>
+                <stage.icon className={`w-4 h-4 sm:w-6 sm:h-6 transition-colors duration-300 ${activeStage === i ? 'text-primary' : 'text-muted-foreground'}`} />
               </div>
               
-              <h3 className="text-2xl font-medium text-foreground mb-1">
+              <h3 className="text-sm sm:text-2xl font-medium text-foreground mb-0.5 sm:mb-1">
                 {stage.title}
               </h3>
-              <p className="text-xs text-primary uppercase tracking-wide mb-4">
+              <p className="text-[9px] sm:text-xs text-primary uppercase tracking-wide mb-2 sm:mb-4">
                 {stage.subtitle}
               </p>
 
-              <ul className="space-y-2 mb-4">
-                {stage.items.map((item, itemIndex) => <motion.li key={item} className="text-sm text-muted-foreground flex items-center gap-2" initial={false} animate={activeStage === i ? {
+              <ul className="space-y-1 sm:space-y-2 mb-2 sm:mb-4">
+                {stage.items.map((item, itemIndex) => <motion.li key={item} className="text-[10px] sm:text-sm text-muted-foreground flex items-start gap-1.5 sm:gap-2 leading-tight sm:leading-normal" initial={false} animate={activeStage === i ? {
               x: 5
             } : {
               x: 0
             }} transition={{
               delay: itemIndex * 0.05
             }}>
-                    <span className={`w-1.5 h-1.5 rounded-full transition-colors duration-300 ${activeStage === i ? 'bg-primary' : 'bg-muted-foreground/30'}`} />
-                    {item}
+                    <span className={`w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full transition-colors duration-300 flex-shrink-0 mt-1 sm:mt-1.5 ${activeStage === i ? 'bg-primary' : 'bg-muted-foreground/30'}`} />
+                    <span className="line-clamp-2 sm:line-clamp-none">{item}</span>
                   </motion.li>)}
               </ul>
 
-              <p className="text-xs text-primary/80 italic border-t border-border pt-4 leading-relaxed">
+              <p className="text-[9px] sm:text-xs text-primary/80 italic border-t border-border pt-2 sm:pt-4 leading-snug sm:leading-relaxed line-clamp-2 sm:line-clamp-none">
                 {stage.quote}
               </p>
 
