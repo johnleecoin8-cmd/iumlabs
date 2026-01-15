@@ -45,7 +45,7 @@ const MindshareCell = ({
   rank,
   onClick,
 }: MindshareCellProps) => {
-  // Generate sparkline path - positioned to fill more of the cell
+  // Generate sparkline path - Kaito style: full cell coverage
   const sparklinePath = useMemo(() => {
     if (!sparkline || sparkline.length < 2) return '';
     
@@ -53,45 +53,51 @@ const MindshareCell = ({
     const max = Math.max(...sparkline);
     const range = max - min || 1;
     
-    // Expand the Y range to use 70% of the cell height (from 15% to 85%)
+    // Kaito style: use 80% of cell height (from 10% to 90%) for maximum visibility
     const points = sparkline.map((value, index) => {
       const x = (index / (sparkline.length - 1)) * 100;
-      const y = 85 - ((value - min) / range) * 70; // More vertical range
+      const y = 90 - ((value - min) / range) * 80;
       return `${x},${y}`;
     }).join(' ');
     
     return `M ${points.split(' ').join(' L ')}`;
   }, [sparkline]);
 
-  // Ium Labs Premium color system - only up/down, neutral uses default
+  // Kaito-inspired color system with enhanced sparkline visibility
   const trendColors = {
     up: {
-      cellBg: 'linear-gradient(145deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.25) 50%, rgba(2, 44, 34, 0.4) 100%)',
-      glowColor: 'rgba(52, 211, 153, 0.12)',
-      borderColor: 'rgba(52, 211, 153, 0.25)',
-      sparkline: 'rgba(52, 211, 153, 0.6)',
-      sparklineFill: 'rgba(52, 211, 153, 0.08)',
+      cellBg: 'linear-gradient(160deg, rgba(16, 185, 129, 0.12) 0%, rgba(6, 95, 70, 0.22) 40%, rgba(4, 47, 46, 0.35) 100%)',
+      glowColor: 'rgba(52, 211, 153, 0.15)',
+      borderColor: 'rgba(52, 211, 153, 0.3)',
+      sparkline: 'rgba(52, 211, 153, 0.85)',
+      sparklineGlow: 'rgba(52, 211, 153, 0.4)',
+      sparklineFillTop: 'rgba(52, 211, 153, 0.25)',
+      sparklineFillBottom: 'rgba(52, 211, 153, 0.02)',
       accentText: 'text-emerald-400',
       percentBg: 'bg-emerald-500/10',
     },
     down: {
-      cellBg: 'linear-gradient(145deg, rgba(239, 68, 68, 0.15) 0%, rgba(127, 29, 29, 0.25) 50%, rgba(69, 10, 10, 0.4) 100%)',
-      glowColor: 'rgba(248, 113, 113, 0.12)',
-      borderColor: 'rgba(248, 113, 113, 0.25)',
-      sparkline: 'rgba(248, 113, 113, 0.6)',
-      sparklineFill: 'rgba(248, 113, 113, 0.08)',
+      cellBg: 'linear-gradient(160deg, rgba(239, 68, 68, 0.12) 0%, rgba(153, 27, 27, 0.22) 40%, rgba(69, 10, 10, 0.35) 100%)',
+      glowColor: 'rgba(248, 113, 113, 0.15)',
+      borderColor: 'rgba(248, 113, 113, 0.3)',
+      sparkline: 'rgba(248, 113, 113, 0.85)',
+      sparklineGlow: 'rgba(248, 113, 113, 0.4)',
+      sparklineFillTop: 'rgba(248, 113, 113, 0.25)',
+      sparklineFillBottom: 'rgba(248, 113, 113, 0.02)',
       accentText: 'text-rose-400',
       percentBg: 'bg-rose-500/10',
     },
   };
 
-  // Neutral style - slate/gray tones for projects without clear trend
+  // Neutral style - subtle but visible
   const neutralColors = {
-    cellBg: 'linear-gradient(145deg, rgba(100, 116, 139, 0.12) 0%, rgba(51, 65, 85, 0.2) 50%, rgba(30, 41, 59, 0.35) 100%)',
-    glowColor: 'rgba(148, 163, 184, 0.08)',
+    cellBg: 'linear-gradient(160deg, rgba(100, 116, 139, 0.1) 0%, rgba(51, 65, 85, 0.18) 40%, rgba(30, 41, 59, 0.3) 100%)',
+    glowColor: 'rgba(148, 163, 184, 0.1)',
     borderColor: 'rgba(148, 163, 184, 0.2)',
-    sparkline: 'rgba(148, 163, 184, 0.5)',
-    sparklineFill: 'rgba(148, 163, 184, 0.06)',
+    sparkline: 'rgba(148, 163, 184, 0.7)',
+    sparklineGlow: 'rgba(148, 163, 184, 0.25)',
+    sparklineFillTop: 'rgba(148, 163, 184, 0.15)',
+    sparklineFillBottom: 'rgba(148, 163, 184, 0.01)',
     accentText: 'text-slate-400',
     percentBg: 'bg-slate-500/10',
   };
@@ -132,33 +138,54 @@ const MindshareCell = ({
         }}
       />
 
-      {/* Sparkline Background - Refined style */}
+      {/* Sparkline Background - Kaito style: prominent and full coverage */}
       {sparkline.length >= 2 && (
         <svg 
-          className="absolute inset-0 w-full h-full opacity-70 group-hover:opacity-90 transition-opacity duration-300"
+          className="absolute inset-0 w-full h-full opacity-90 group-hover:opacity-100 transition-opacity duration-300"
           viewBox="0 0 100 100" 
           preserveAspectRatio="none"
         >
           <defs>
+            {/* Enhanced gradient fill */}
             <linearGradient id={`sparkGrad-${ticker}`} x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor={colors.sparklineFill} />
+              <stop offset="0%" stopColor={colors.sparklineFillTop} />
+              <stop offset="60%" stopColor={colors.sparklineFillBottom} />
               <stop offset="100%" stopColor="transparent" />
             </linearGradient>
+            {/* Glow filter for line */}
+            <filter id={`sparkGlow-${ticker}`} x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
           </defs>
-          {/* Fill area under the line */}
+          {/* Fill area under the line - more prominent */}
           <path
             d={`${sparklinePath} L 100,100 L 0,100 Z`}
             fill={`url(#sparkGrad-${ticker})`}
           />
-          {/* Main sparkline stroke */}
+          {/* Glow line behind main line */}
+          <path
+            d={sparklinePath}
+            fill="none"
+            stroke={colors.sparklineGlow}
+            strokeWidth={size === 'large' ? '6' : size === 'medium' ? '4' : '3'}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+          {/* Main sparkline stroke - thicker and more visible */}
           <path
             d={sparklinePath}
             fill="none"
             stroke={colors.sparkline}
-            strokeWidth={size === 'large' ? '2' : size === 'medium' ? '1.5' : '1'}
+            strokeWidth={size === 'large' ? '2.5' : size === 'medium' ? '2' : '1.5'}
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"
+            filter={size === 'large' ? `url(#sparkGlow-${ticker})` : undefined}
           />
         </svg>
       )}
