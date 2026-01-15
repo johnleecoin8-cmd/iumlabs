@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 const navItems = [
   { icon: Home, label: "Home", path: "/" },
   { icon: Briefcase, label: "Services", path: "/services/all" },
-  { icon: Crown, label: "K-Board", path: "/k-leaderboard" },
+  // { icon: Crown, label: "K-Board", path: "/k-leaderboard" }, // 임시 숨김
   { icon: FolderOpen, label: "Projects", path: "/projects" },
   { icon: Mail, label: "Contact", path: "/contact" },
 ];
