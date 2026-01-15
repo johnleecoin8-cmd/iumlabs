@@ -171,8 +171,8 @@ const featuredYappers = [
 
 const YapService = () => {
   usePageMeta({
-    title: "Crypto Twitter Yap Marketing | Korea Web3",
-    description: "Amplify your Web3 message with 150+ crypto yappers. Korean crypto marketing through organic buzz and mindshare growth on Crypto X.",
+    title: "Crypto Twitter Marketing & Viral Yap Strategy",
+    description: "Amplify your Web3 narrative with our 'Yap' marketing. We leverage organic conversations and viral loops to boost mindshare and social dominance.",
     path: "/services/yap",
     image: "/og-image.png"
   });

@@ -2484,8 +2484,8 @@ const CTASection = () => {
 // ============================================
 const GTMService = () => {
   usePageMeta({
-    title: "Korea Web3 GTM Strategy & Marketing Services",
-    description: "Full-stack Korea GTM services for Web3 projects. Strategic market entry, KOL activation, community building, PR, events and more. 30+ projects. $1.5B+ volume facilitated.",
+    title: "Korea Web3 GTM Strategy & Crypto Marketing Agency",
+    description: "The premier Korea Web3 GTM partner. We provide end-to-end crypto marketing strategy, localized branding, and community growth for global protocols entering Korea.",
     path: "/services",
     image: "/og-image.png",
     suffix: "ium Labs"

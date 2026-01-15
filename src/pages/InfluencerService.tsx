@@ -151,8 +151,8 @@ const kolProfiles = [
 
 const InfluencerService = () => {
   usePageMeta({
-    title: "Korean Crypto KOL Marketing",
-    description: "Access 70+ Korean and global crypto KOLs with 15M+ total reach. Korean Web3 marketing through strategic influencer campaigns.",
+    title: "Korea Crypto KOL Marketing & Web3 Influencer Agency",
+    description: "Access top Korea Crypto KOLs and Web3 influencers. Our data-driven campaign management ensures high-impact marketing for DeFi, GameFi, and L2 projects.",
     path: "/services/influencer",
     image: "/og-image.png"
   });

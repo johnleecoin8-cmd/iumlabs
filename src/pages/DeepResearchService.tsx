@@ -123,8 +123,8 @@ const distributionChannels = [{
 }];
 const DeepResearchService = () => {
   usePageMeta({
-    title: "Korean Crypto Market Research",
-    description: "Data-driven market research for the Korean crypto market. Korean Web3 marketing insights distributed through media and KOL networks.",
+    title: "Korea Web3 Market Research & On-Chain Analysis",
+    description: "Deep dive into the Korean crypto market. We provide institutional-grade on-chain analysis, user behavior reports, and competitive intelligence for GTM.",
     path: "/services/deep-research",
     image: "/og-image.png"
   });

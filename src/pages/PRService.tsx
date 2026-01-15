@@ -119,8 +119,8 @@ const faqItems: FAQItem[] = [
 
 const PRService = () => {
   usePageMeta({
-    title: "Korean Crypto PR & Media",
-    description: "Secure premium coverage across 20+ Korean crypto media outlets including Blockmedia, Coinness, and TokenPost. Korean Web3 marketing through strategic PR.",
+    title: "Korea Web3 PR Agency & Crypto Media Strategy",
+    description: "Secure top-tier coverage in Korea's leading crypto media. We specialize in localized PR, press releases, and strategic narratives for global Web3 projects.",
     path: "/services/pr",
     image: "/og-image.png"
   });

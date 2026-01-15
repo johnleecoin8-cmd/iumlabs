@@ -201,8 +201,8 @@ const portfolioItems = [
 
 const BrandingService = () => {
   usePageMeta({
-    title: "Web3 Branding & Website Design",
-    description: "Distinctive Web3 brand identity and high-performance websites for projects launching in Korea. Korean-localized design and development.",
+    title: "Web3 Branding & Crypto Design Agency Korea",
+    description: "Localized Web3 branding that resonates with Korean investors. We offer crypto-native design, UI/UX, and visual identity services for blockchain projects.",
     path: "/services/branding",
     image: "/og-image.png"
   });

@@ -165,8 +165,8 @@ const faqItems: FAQItem[] = [
 
 const OfflineEventService = () => {
   usePageMeta({
-    title: "Web3 & Crypto Events in Korea",
-    description: "Create unforgettable Web3 and crypto events in Seoul, Korea. Launch parties, meetups, and conferences with KOL attendance for blockchain projects.",
+    title: "Korea Web3 Event Planning & Crypto Side Events",
+    description: "Host unforgettable crypto events in Seoul. Full-service planning for Hackathons, KBW side events, and VIP networking parties for global Web3 leaders.",
     path: "/services/offline-event",
     image: "/og-image.png"
   });
