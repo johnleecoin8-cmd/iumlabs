@@ -313,27 +313,28 @@ const MindshareCell = ({
           {/* Mindshare percentage + change */}
           <div className="flex flex-col gap-0.5">
             <div className="flex items-baseline gap-0.5">
+              {/* Mindshare percentage - MOST PROMINENT (피드백 반영) */}
               <span className={cn(
-                'font-bold tracking-tight text-white',
+                'font-extrabold tracking-tighter text-white',
                 'font-[\'Space_Grotesk\',sans-serif]',
-                size === 'large' ? 'text-lg sm:text-2xl' : size === 'medium' ? 'text-sm sm:text-lg' : size === 'small' ? 'text-xs sm:text-sm' : 'text-[10px] sm:text-[11px]'
+                size === 'large' ? 'text-xl sm:text-3xl' : size === 'medium' ? 'text-base sm:text-xl' : size === 'small' ? 'text-sm sm:text-base' : 'text-[11px] sm:text-xs'
               )}>
                 {mindshare.toFixed(size === 'tiny' ? 1 : 2)}
               </span>
               <span className={cn(
-                'font-medium text-white/50',
-                size === 'large' ? 'text-xs sm:text-sm' : size === 'medium' ? 'text-[10px] sm:text-xs' : 'text-[8px] sm:text-[9px]'
+                'font-medium text-white/40',
+                size === 'large' ? 'text-sm sm:text-base' : size === 'medium' ? 'text-xs sm:text-sm' : 'text-[9px] sm:text-[10px]'
               )}>
                 %
               </span>
             </div>
-            {/* Mindshare change in bps - Kaito style */}
+            {/* Mindshare change in bps - SECONDARY (피드백 반영: lighter weight, softer color) */}
             {mindshareChange !== undefined && mindshareChange !== null && (size === 'large' || size === 'medium') && (
               <span className={cn(
-                'text-[9px] sm:text-[11px] font-bold tabular-nums',
-                mindshareChange > 0 ? 'text-emerald-400' : mindshareChange < 0 ? 'text-rose-400' : 'text-white/40'
+                'text-[8px] sm:text-[10px] font-medium tabular-nums',
+                mindshareChange > 0 ? 'text-emerald-400/70' : mindshareChange < 0 ? 'text-rose-400/70' : 'text-white/30'
               )}>
-                {toBps(mindshareChange)} <span className="text-[7px] sm:text-[9px] font-normal opacity-60">bps</span>
+                {toBps(mindshareChange)} <span className="text-[6px] sm:text-[8px] font-normal opacity-50">bps</span>
               </span>
             )}
           </div>

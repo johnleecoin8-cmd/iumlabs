@@ -10,42 +10,94 @@ import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { usePageMeta } from '@/hooks/usePageMeta';
 
+// Tunable threshold constants - adjust based on market volatility
+const TREND_THRESHOLD = {
+  UP: 3,       // > 3% = Up trend
+  DOWN: -3,    // < -3% = Down trend
+};
+
+const TRENDING_LIMIT = 3; // Only top 3 projects show HOT badge
+
+// Helper function to filter out trailing zeros from sparkline
+const getValidSparklineData = (sparkline: number[] | null): number[] => {
+  if (!sparkline || sparkline.length === 0) return [];
+  
+  // Find the last non-zero index
+  let lastValidIndex = sparkline.length - 1;
+  while (lastValidIndex > 0 && sparkline[lastValidIndex] === 0) {
+    lastValidIndex--;
+  }
+  
+  // Return data up to and including the last non-zero value
+  return sparkline.slice(0, lastValidIndex + 1);
+};
+
 // Calculate trend from sparkline data (more accurate than static DB values)
 const calculateTrendFromSparkline = (sparkline: number[] | null): 'up' | 'down' | 'neutral' => {
-  if (!sparkline || sparkline.length < 3) return 'neutral';
+  const validData = getValidSparklineData(sparkline);
+  if (validData.length < 3) return 'neutral';
   
   // Compare first third average vs last third average
-  const third = Math.floor(sparkline.length / 3);
-  const firstAvg = sparkline.slice(0, third).reduce((a, b) => a + b, 0) / third;
-  const lastAvg = sparkline.slice(-third).reduce((a, b) => a + b, 0) / third;
+  const third = Math.floor(validData.length / 3);
+  const firstAvg = validData.slice(0, third).reduce((a, b) => a + b, 0) / third;
+  const lastAvg = validData.slice(-third).reduce((a, b) => a + b, 0) / third;
   
   if (firstAvg === 0) return 'neutral';
   
   const changePercent = ((lastAvg - firstAvg) / firstAvg) * 100;
   
-  if (changePercent > 3) return 'up';
-  if (changePercent < -3) return 'down';
+  if (changePercent > TREND_THRESHOLD.UP) return 'up';
+  if (changePercent < TREND_THRESHOLD.DOWN) return 'down';
   return 'neutral';
 };
 
 // Calculate mindshare change from sparkline when not available in DB
+// Uses average of first third vs last third for noise reduction (피드백 반영)
 const calculateMindshareChange = (sparkline: number[] | null): number | null => {
-  if (!sparkline || sparkline.length < 2) return null;
+  const validData = getValidSparklineData(sparkline);
+  if (validData.length < 4) return null;
   
-  const first = sparkline[0];
-  const last = sparkline[sparkline.length - 1];
+  // Use first third avg vs last third avg (noise reduction per CEO feedback)
+  const third = Math.max(2, Math.floor(validData.length / 3));
+  const firstSlice = validData.slice(0, third);
+  const lastSlice = validData.slice(-third);
   
-  if (first === 0) return last > 0 ? 100 : 0;
+  const firstAvg = firstSlice.reduce((a, b) => a + b, 0) / firstSlice.length;
+  const lastAvg = lastSlice.reduce((a, b) => a + b, 0) / lastSlice.length;
   
-  return ((last - first) / first) * 100;
+  if (firstAvg === 0) return lastAvg > 0 ? 30 : 0; // Cap at 30% for zero start
+  
+  const change = ((lastAvg - firstAvg) / firstAvg) * 100;
+  
+  // Cap extreme values to ±50% (±5000 bps) for better display
+  return Math.max(-50, Math.min(50, change));
+};
+
+// Calculate trending score for sorting (higher = more trending)
+const getTrendingScore = (sparkline: number[] | null): number => {
+  const validData = getValidSparklineData(sparkline);
+  if (validData.length < 4) return 0;
+  
+  const recentQuarter = validData.slice(-Math.floor(validData.length / 4));
+  const previousQuarter = validData.slice(-Math.floor(validData.length / 2), -Math.floor(validData.length / 4));
+  
+  if (previousQuarter.length === 0 || recentQuarter.length === 0) return 0;
+  
+  const recentAvg = recentQuarter.reduce((a, b) => a + b, 0) / recentQuarter.length;
+  const previousAvg = previousQuarter.reduce((a, b) => a + b, 0) / previousQuarter.length;
+  
+  if (previousAvg === 0) return recentAvg > 0 ? 1 : 0;
+  
+  return (recentAvg - previousAvg) / previousAvg;
 };
 
 // Check if project is "trending" (rapid increase in mentions)
 const isTrending = (sparkline: number[] | null): boolean => {
-  if (!sparkline || sparkline.length < 4) return false;
+  const validData = getValidSparklineData(sparkline);
+  if (validData.length < 4) return false;
   
-  const recentQuarter = sparkline.slice(-Math.floor(sparkline.length / 4));
-  const previousQuarter = sparkline.slice(-Math.floor(sparkline.length / 2), -Math.floor(sparkline.length / 4));
+  const recentQuarter = validData.slice(-Math.floor(validData.length / 4));
+  const previousQuarter = validData.slice(-Math.floor(validData.length / 2), -Math.floor(validData.length / 4));
   
   if (previousQuarter.length === 0 || recentQuarter.length === 0) return false;
   
@@ -146,7 +198,9 @@ const KInfluenceGrid = () => {
 
     // Calculate total score for mindshare percentage if not provided
     const totalScore = top20.reduce((sum, p) => sum + Number(p.score), 0);
-    return top20.map(project => {
+    
+    // First pass: calculate all data including trending scores
+    const projectsWithData = top20.map(project => {
       const sparkline = project.sparkline || [];
       
       // Calculate dynamic trend from sparkline (more accurate than DB value)
@@ -155,8 +209,9 @@ const KInfluenceGrid = () => {
       // Calculate mindshare change if not available
       const calculatedChange = project.mindshare_change ?? calculateMindshareChange(sparkline);
       
-      // Check if trending (surge detection)
-      const trending = isTrending(sparkline);
+      // Calculate trending score for ranking
+      const trendingScore = getTrendingScore(sparkline);
+      const potentiallyTrending = isTrending(sparkline);
       
       return {
         id: project.id,
@@ -178,10 +233,24 @@ const KInfluenceGrid = () => {
         // Social links
         twitter_url: project.twitter_url,
         website_url: project.website_url,
-        // Trending signal
-        isTrending: trending,
+        // Trending data (will be finalized in second pass)
+        trendingScore,
+        potentiallyTrending,
+        isTrending: false, // Placeholder
       };
     });
+    
+    // Second pass: Only top TRENDING_LIMIT projects get HOT badge
+    const sortedByTrending = [...projectsWithData]
+      .filter(p => p.potentiallyTrending)
+      .sort((a, b) => b.trendingScore - a.trendingScore)
+      .slice(0, TRENDING_LIMIT)
+      .map(p => p.ticker);
+    
+    return projectsWithData.map(p => ({
+      ...p,
+      isTrending: sortedByTrending.includes(p.ticker),
+    }));
   }, [projects, tokenStatus, searchQuery]);
 
   // Projects for sidebar (all projects with change data)
