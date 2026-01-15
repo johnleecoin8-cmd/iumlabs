@@ -213,9 +213,9 @@ const SEOAdsService = () => {
           
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                 {/* Left - Phase Navigation */}
-                <div>
+                <div className="flex flex-col">
                   <p className="text-white/60 text-sm leading-relaxed mb-6">
                     From technical audit to scaled campaigns, our 4-week program delivers measurable growth through SEO and paid advertising.
                   </p>
@@ -238,7 +238,7 @@ const SEOAdsService = () => {
                     ))}
                   </div>
                   
-                  <div className="space-y-3">
+                  <div className="space-y-3 flex-1 flex flex-col justify-between">
                     {journeyPhases.map((phase, index) => {
                       const Icon = phase.icon;
                       const isActive = activePhase === index;
@@ -247,7 +247,7 @@ const SEOAdsService = () => {
                         <button
                           key={phase.week}
                           onClick={() => setActivePhase(index)}
-                          className={`w-full text-left p-4 rounded-xl border transition-all duration-300 hover:translate-x-1 active:scale-[0.98] ${
+                          className={`w-full text-left p-4 rounded-xl border transition-all duration-300 hover:translate-x-1 active:scale-[0.98] flex-1 ${
                             isActive 
                               ? 'bg-amber-500/10 border-amber-500/30' 
                               : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
