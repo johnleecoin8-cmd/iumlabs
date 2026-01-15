@@ -81,7 +81,7 @@ const isTrending = (sparkline: number[] | null): boolean => {
   return ((recentAvg - previousAvg) / previousAvg) > 0.3;
 };
 
-type TimeFrame = '24H' | '7D' | '14D' | '30D' | '90D';
+
 
 const KInfluenceGrid = () => {
   usePageMeta({
@@ -93,7 +93,6 @@ const KInfluenceGrid = () => {
   
   const [tokenStatus, setTokenStatus] = useState<TokenStatus>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [timeFrame, setTimeFrame] = useState<TimeFrame>('7D');
   const [viewMode, setViewMode] = useState<ViewMode>('treemap');
   
   const { projects, isLoading, lastUpdate } = useHypeProjects();
@@ -163,7 +162,7 @@ const KInfluenceGrid = () => {
     }));
   }, [projects, tokenStatus, searchQuery]);
 
-  const timeFrames: TimeFrame[] = ['24H', '7D', '14D', '30D', '90D'];
+  
 
   return (
     <div className="min-h-screen bg-[#0a0a0b]">
@@ -233,22 +232,10 @@ const KInfluenceGrid = () => {
 
                 <span className="text-sm font-semibold text-white/80 hidden sm:block">Top 20</span>
 
-                {/* Timeframe buttons - Desktop */}
-                <div className="hidden lg:flex items-center gap-1 bg-white/[0.02] rounded-lg p-1 border border-white/[0.06]">
-                  {timeFrames.map((tf) => (
-                    <button
-                      key={tf}
-                      onClick={() => setTimeFrame(tf)}
-                      className={cn(
-                        "px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200",
-                        timeFrame === tf
-                          ? "bg-teal-500/20 text-teal-400 border border-teal-500/30"
-                          : "text-white/40 hover:text-white/70 border border-transparent"
-                      )}
-                    >
-                      {tf}
-                    </button>
-                  ))}
+                {/* Channel stats */}
+                <div className="hidden md:flex items-center gap-2 text-[10px] text-white/30">
+                  <span className="px-2 py-0.5 bg-white/[0.03] rounded border border-white/[0.06]">4 Channels</span>
+                  <span className="px-2 py-0.5 bg-white/[0.03] rounded border border-white/[0.06]">150K+ Sources</span>
                 </div>
               </div>
 
@@ -285,28 +272,9 @@ const KInfluenceGrid = () => {
               </div>
             </div>
 
-            {/* Mobile: Timeframe + Search row */}
-            <div className="flex lg:hidden flex-col gap-3 pb-4">
-              {/* Timeframe buttons - Mobile */}
-              <div className="flex items-center gap-1 bg-white/[0.02] rounded-lg p-1 border border-white/[0.06] overflow-x-auto no-scrollbar">
-                {timeFrames.map((tf) => (
-                  <button
-                    key={tf}
-                    onClick={() => setTimeFrame(tf)}
-                    className={cn(
-                      "flex-1 min-w-[44px] px-2 py-1.5 text-xs font-medium rounded-md transition-all duration-200",
-                      timeFrame === tf
-                        ? "bg-teal-500/20 text-teal-400 border border-teal-500/30"
-                        : "text-white/40 hover:text-white/70 border border-transparent"
-                    )}
-                  >
-                    {tf}
-                  </button>
-                ))}
-              </div>
-
-              {/* Search - Mobile */}
-              <div className="relative sm:hidden">
+            {/* Mobile: Search row */}
+            <div className="sm:hidden pb-4">
+              <div className="relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
                 <input
                   type="text"
