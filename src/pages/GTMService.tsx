@@ -202,7 +202,7 @@ const AnimatedStat = ({
     duration: 2000
   });
   return <div className="text-center group">
-      <motion.p className="text-4xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+      <motion.p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
       opacity: 0,
       scale: 0.5
     }} animate={{
@@ -215,7 +215,7 @@ const AnimatedStat = ({
     }}>
         {prefix}{count}{suffix}
       </motion.p>
-      <p className="text-xs text-muted-foreground mt-2 tracking-wider uppercase">{label}</p>
+      <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 sm:mt-2 tracking-wider uppercase">{label}</p>
     </div>;
 };
 
@@ -412,7 +412,7 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, [isHovering, showcaseProjects.length]);
 
-  return <section ref={ref} className="relative min-h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 py-16 md:py-24 bg-background overflow-hidden w-full">
+  return <section ref={ref} className="relative min-h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 py-12 md:py-24 bg-background overflow-hidden w-full">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50 pointer-events-none" />
@@ -450,7 +450,7 @@ const HeroSection = () => {
           y: 0
         }} transition={{
           duration: 0.6
-        }} className="text-muted-foreground text-sm tracking-widest uppercase mb-6 flex items-center gap-3">
+        }} className="text-muted-foreground text-[10px] sm:text-sm tracking-widest uppercase mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
             <motion.span className="w-8 h-px bg-primary" initial={{
             scaleX: 0
           }} animate={{
@@ -471,7 +471,7 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.8,
           delay: 0.1
-        }} className="text-[clamp(1.5rem,4vw,3rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-4 md:mb-6">
+        }} className="text-[clamp(1.25rem,4vw,3rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-3 md:mb-6">
             <span className="block overflow-hidden">
               <motion.span className="block" initial={{
               y: '100%'
@@ -486,7 +486,7 @@ const HeroSection = () => {
               </motion.span>
             </span>
             <span className="block overflow-hidden">
-              <motion.span className="block text-foreground/80 text-[clamp(1.25rem,3vw,2.25rem)]" initial={{
+              <motion.span className="block text-foreground/80 text-[clamp(1rem,3vw,2.25rem)]" initial={{
               y: '100%'
             }} animate={{
               y: 0
@@ -509,7 +509,7 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.6,
           delay: 0.5
-        }} className="text-sm md:text-lg text-muted-foreground mb-6 md:mb-8 max-w-lg leading-relaxed">
+        }} className="text-xs sm:text-sm md:text-lg text-muted-foreground mb-4 md:mb-8 max-w-lg leading-relaxed">
             The #2 global crypto market by volume. 4x faster trading velocity. A retail-driven ecosystem where projects build their strongest foundations.
           </motion.p>
 
@@ -523,9 +523,9 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.6,
           delay: 0.7
-        }} className="flex flex-row items-center gap-4 md:gap-10">
+        }} className="flex flex-row items-center gap-3 md:gap-10">
             <div className="text-center group">
-              <motion.p className="text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              <motion.p className="text-xl sm:text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
                 opacity: 0,
                 scale: 0.5
               }} animate={{
@@ -538,11 +538,11 @@ const HeroSection = () => {
               }}>
                 #2
               </motion.p>
-              <p className="text-[11px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Global Volume</p>
+              <p className="text-[9px] sm:text-[11px] md:text-xs text-muted-foreground mt-0.5 sm:mt-1 tracking-wider uppercase">Global Volume</p>
             </div>
             <div className="w-px h-6 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
             <div className="text-center group">
-              <motion.p className="text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              <motion.p className="text-xl sm:text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
                 opacity: 0,
                 scale: 0.5
               }} animate={{
@@ -555,11 +555,11 @@ const HeroSection = () => {
               }}>
                 4x
               </motion.p>
-              <p className="text-[11px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Velocity</p>
+              <p className="text-[9px] sm:text-[11px] md:text-xs text-muted-foreground mt-0.5 sm:mt-1 tracking-wider uppercase">Velocity</p>
             </div>
             <div className="w-px h-6 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
             <div className="text-center group">
-              <motion.p className="text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              <motion.p className="text-xl sm:text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
                 opacity: 0,
                 scale: 0.5
               }} animate={{
@@ -572,7 +572,7 @@ const HeroSection = () => {
               }}>
                 100%
               </motion.p>
-              <p className="text-[11px] md:text-xs text-muted-foreground mt-1 tracking-wider uppercase">Retail-Driven</p>
+              <p className="text-[9px] sm:text-[11px] md:text-xs text-muted-foreground mt-0.5 sm:mt-1 tracking-wider uppercase">Retail-Driven</p>
             </div>
           </motion.div>
 
@@ -1619,11 +1619,11 @@ const LLMEngineVisualization = ({
         </div>
 
         {/* Main visualization grid - Stack on mobile, 5-col on desktop */}
-        <div className="flex flex-col lg:grid lg:grid-cols-[1fr_auto_auto_auto_1fr] gap-6 lg:gap-0 items-center relative">
+        <div className="hidden sm:flex flex-col lg:grid lg:grid-cols-[1fr_auto_auto_auto_1fr] gap-6 lg:gap-0 items-center relative">
 
           {/* Data Sources */}
-          <div className="space-y-3 md:space-y-4 relative z-10 w-full lg:w-auto">
-            <p className="text-[10px] md:text-xs tracking-widest text-muted-foreground mb-3 md:mb-4 text-center lg:text-left flex items-center gap-2 justify-center lg:justify-start">
+          <div className="space-y-2 sm:space-y-3 md:space-y-4 relative z-10 w-full lg:w-auto">
+            <p className="text-[9px] sm:text-[10px] md:text-xs tracking-widest text-muted-foreground mb-2 sm:mb-3 md:mb-4 text-center lg:text-left flex items-center gap-2 justify-center lg:justify-start">
               <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
               LIVE DATA SOURCES
             </p>
@@ -1635,21 +1635,21 @@ const LLMEngineVisualization = ({
             x: 0
           } : {}} transition={{
             delay: i * 0.1 + 0.5
-          }} onMouseEnter={() => setActiveDataSource(source.id)} onMouseLeave={() => setActiveDataSource(null)} className={`relative p-4 border bg-background transition-all duration-300 cursor-pointer overflow-hidden ${activeDataSource === source.id ? `${source.activeBorder} shadow-[0_0_25px_hsl(var(--primary)/0.15)]` : `${source.borderColor} hover:${source.activeBorder}`}`}>
+          }} onMouseEnter={() => setActiveDataSource(source.id)} onMouseLeave={() => setActiveDataSource(null)} className={`relative p-2 sm:p-4 border bg-background transition-all duration-300 cursor-pointer overflow-hidden ${activeDataSource === source.id ? `${source.activeBorder} shadow-[0_0_25px_hsl(var(--primary)/0.15)]` : `${source.borderColor} hover:${source.activeBorder}`}`}>
                 {/* Gradient overlay on hover */}
                 <motion.div className={`absolute inset-0 bg-gradient-to-r ${source.color} opacity-0`} animate={{
               opacity: activeDataSource === source.id ? 0.5 : 0
             }} />
 
                 <div className="relative z-10">
-                  <div className="flex items-center justify-between mb-3">
-                    <div className="flex items-center gap-2">
-                      <div className={`p-1.5 rounded ${source.iconBg}`}>
-                        <source.icon className={`w-4 h-4 transition-colors ${source.iconColor}`} />
+                  <div className="flex items-center justify-between mb-2 sm:mb-3">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <div className={`p-1 sm:p-1.5 rounded ${source.iconBg}`}>
+                        <source.icon className={`w-3 h-3 sm:w-4 sm:h-4 transition-colors ${source.iconColor}`} />
                       </div>
-                      <span className="text-sm font-medium text-foreground">{source.label}</span>
+                      <span className="text-xs sm:text-sm font-medium text-foreground">{source.label}</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
                       <motion.span className={`w-2 h-2 rounded-full ${source.dotColor}`} animate={{
                     opacity: [1, 0.3, 1],
                     scale: [1, 0.8, 1]
@@ -1772,7 +1772,7 @@ const LLMEngineVisualization = ({
 
               {/* Gradient border wrapper */}
               <div className="relative p-[2px] bg-gradient-to-br from-blue-500 via-purple-500 to-red-500">
-                <div className="relative p-8 bg-background">
+                <div className="relative p-4 sm:p-8 bg-background">
                   {/* Pulsing border overlay */}
                   <motion.div className="absolute inset-0 border-2 border-transparent rounded-sm" style={{
                   background: 'linear-gradient(135deg, rgba(59,130,246,0.3), rgba(168,85,247,0.3), rgba(239,68,68,0.3))',
@@ -1814,9 +1814,9 @@ const LLMEngineVisualization = ({
                   delay: 0.6
                 }} />
                 
-                <div className="text-center space-y-4">
+                <div className="text-center space-y-2 sm:space-y-4">
                   {/* Rotating icon with glow */}
-                  <div className="relative w-20 h-20 mx-auto">
+                  <div className="relative w-12 h-12 sm:w-20 sm:h-20 mx-auto">
                     {/* SVG Gradient Definition */}
                     <svg width="0" height="0" className="absolute">
                       <defs>
@@ -1842,24 +1842,24 @@ const LLMEngineVisualization = ({
                       repeat: Infinity,
                       ease: "linear"
                     }} className="relative">
-                      <Sparkles className="w-20 h-20" style={{
+                      <Sparkles className="w-12 h-12 sm:w-20 sm:h-20" style={{
                         stroke: 'url(#iconGradient)'
                       }} />
                     </motion.div>
                   </div>
                   
                   <div>
-                    <p className="text-lg font-medium text-foreground">ium AI Core</p>
-                    <p className="text-xs text-muted-foreground">Quant-driven Intelligence</p>
+                    <p className="text-sm sm:text-lg font-medium text-foreground">ium AI Core</p>
+                    <p className="text-[10px] sm:text-xs text-muted-foreground">Quant-driven Intelligence</p>
                   </div>
 
                   {/* Processing visualization */}
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-[10px] text-muted-foreground font-mono">
+                  <div className="space-y-1.5 sm:space-y-2">
+                    <div className="flex justify-between text-[9px] sm:text-[10px] text-muted-foreground font-mono">
                       <span>ANALYZING</span>
                       <span>{Math.floor(processingProgress)}%</span>
                     </div>
-                    <div className="h-2 bg-muted rounded-full overflow-hidden relative">
+                    <div className="h-1.5 sm:h-2 bg-muted rounded-full overflow-hidden relative">
                       <motion.div className="h-full bg-gradient-to-r from-primary via-primary to-primary/50 rounded-full" style={{
                         width: `${processingProgress}%`
                       }} />
@@ -1871,7 +1871,7 @@ const LLMEngineVisualization = ({
                         repeat: Infinity
                       }} />
                     </div>
-                    <div className="flex justify-center gap-4 text-[9px] text-muted-foreground">
+                    <div className="flex justify-center gap-2 sm:gap-4 text-[8px] sm:text-[9px] text-muted-foreground">
                       <span>50+ signals</span>
                       <span>•</span>
                       <span>Real-time</span>
@@ -1919,8 +1919,8 @@ const LLMEngineVisualization = ({
           </div>
 
           {/* Output Panel - Simplified */}
-          <div className="space-y-4 relative z-10">
-            <p className="text-xs tracking-widest text-muted-foreground mb-4 text-center lg:text-right flex items-center gap-2 justify-center lg:justify-end">
+          <div className="space-y-3 sm:space-y-4 relative z-10">
+            <p className="text-[10px] sm:text-xs tracking-widest text-muted-foreground mb-2 sm:mb-4 text-center lg:text-right flex items-center gap-2 justify-center lg:justify-end">
               STRATEGIC OUTPUT
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
             </p>
@@ -1933,7 +1933,7 @@ const LLMEngineVisualization = ({
             x: 0
           } : {}} transition={{
             delay: 1
-          }} className="p-5 border border-primary/50 bg-background relative overflow-hidden">
+          }} className="p-3 sm:p-5 border border-primary/50 bg-background relative overflow-hidden">
               {/* Background pattern */}
               <div className="absolute inset-0 opacity-[0.02]" style={{
               backgroundImage: 'radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)',
@@ -1941,12 +1941,12 @@ const LLMEngineVisualization = ({
             }} />
 
               <div className="relative z-10">
-                <div className="flex items-center gap-2 mb-5">
-                  <div className="p-1.5 rounded bg-primary/20">
-                    <Target className="w-4 h-4 text-primary" />
+                <div className="flex items-center gap-1.5 sm:gap-2 mb-3 sm:mb-5">
+                  <div className="p-1 sm:p-1.5 rounded bg-primary/20">
+                    <Target className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
                   </div>
-                  <span className="text-sm font-medium text-foreground">Optimized Strategy</span>
-                  <motion.span className="ml-auto text-[10px] px-2 py-0.5 bg-green-500/20 text-green-500 rounded-full" animate={{
+                  <span className="text-xs sm:text-sm font-medium text-foreground">Optimized Strategy</span>
+                  <motion.span className="ml-auto text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-0.5 bg-green-500/20 text-green-500 rounded-full" animate={{
                   opacity: [0.7, 1, 0.7]
                 }} transition={{
                   duration: 2,
@@ -1956,8 +1956,7 @@ const LLMEngineVisualization = ({
                   </motion.span>
                 </div>
 
-                {/* Simplified Metric Cards - 2x2 Grid */}
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   {outputMetrics.map((metric, i) => <motion.div key={metric.label} initial={{
                   opacity: 0,
                   y: 10
@@ -1966,18 +1965,18 @@ const LLMEngineVisualization = ({
                   y: 0
                 } : {}} transition={{
                   delay: 1.2 + i * 0.1
-                }} className="p-3 bg-muted/30 border border-border/50 rounded-sm">
-                      <div className="flex items-center gap-2 mb-2">
-                        <metric.icon className={`w-3.5 h-3.5 ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`} />
-                        <span className="text-[10px] text-muted-foreground uppercase tracking-wide">{metric.label}</span>
+                }} className="p-2 sm:p-3 bg-muted/30 border border-border/50 rounded-sm">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
+                        <metric.icon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`} />
+                        <span className="text-[9px] sm:text-[10px] text-muted-foreground uppercase tracking-wide">{metric.label}</span>
                       </div>
                       
-                      <div className="flex items-end justify-between gap-2 mb-2">
+                      <div className="flex items-end justify-between gap-1 sm:gap-2 mb-1.5 sm:mb-2">
                         <motion.span key={metric.value} initial={{
                       opacity: 0.5
                     }} animate={{
                       opacity: 1
-                    }} className={`text-xl font-mono font-medium ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`}>
+                    }} className={`text-lg sm:text-xl font-mono font-medium ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`}>
                           {metric.value}%
                         </motion.span>
                       </div>
@@ -1993,7 +1992,7 @@ const LLMEngineVisualization = ({
                     }} />
                       </div>
                       
-                      <p className="text-[9px] text-muted-foreground mt-1.5">{metric.sublabel}</p>
+                      <p className="text-[8px] sm:text-[9px] text-muted-foreground mt-1 sm:mt-1.5 line-clamp-1">{metric.sublabel}</p>
                     </motion.div>)}
                 </div>
               </div>
@@ -2064,7 +2063,7 @@ const FrameworkSection = () => {
     margin: "-10%"
   });
   const [activeStage, setActiveStage] = useState<number | null>(null);
-  return <section ref={ref} className="px-4 md:px-8 lg:px-12 py-16 bg-background relative overflow-hidden w-full">
+  return <section ref={ref} className="px-4 md:px-8 lg:px-12 py-8 sm:py-16 bg-background relative overflow-hidden w-full">
       {/* Background decoration */}
       <div className="absolute top-0 right-0 w-1/2 h-full opacity-[0.02] pointer-events-none">
         <div className="absolute inset-0" style={{
@@ -2078,13 +2077,13 @@ const FrameworkSection = () => {
     }} animate={isInView ? {
       opacity: 1
     } : {}} className="w-full relative z-10">
-        <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
+        <p className="text-muted-foreground text-[10px] sm:text-sm tracking-widest uppercase mb-2 sm:mb-4">
           02 Our Process
         </p>
-        <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-6">
+        <h2 className="text-xl sm:text-3xl md:text-4xl font-medium text-foreground mb-3 sm:mb-6">
           The ium Framework
         </h2>
-        <p className="text-muted-foreground max-w-xl mb-12">
+        <p className="text-muted-foreground max-w-xl mb-6 sm:mb-12 text-xs sm:text-base">
           A battle-tested 4-stage methodology that has successfully launched 30+ projects into the Korean market.
         </p>
 
