@@ -43,52 +43,67 @@ export type Database = {
       }
       hype_projects: {
         Row: {
+          change_24h: number | null
           created_at: string | null
           id: string
           logo_url: string | null
+          market_cap: number | null
           mindshare: number | null
           mindshare_change: number | null
           name: string
           narrative: string | null
+          price: number | null
           rank: number
           score: number
           sparkline: number[] | null
           ticker: string
           token_status: string | null
           trend: string | null
+          twitter_url: string | null
           updated_at: string | null
+          website_url: string | null
         }
         Insert: {
+          change_24h?: number | null
           created_at?: string | null
           id?: string
           logo_url?: string | null
+          market_cap?: number | null
           mindshare?: number | null
           mindshare_change?: number | null
           name: string
           narrative?: string | null
+          price?: number | null
           rank?: number
           score?: number
           sparkline?: number[] | null
           ticker: string
           token_status?: string | null
           trend?: string | null
+          twitter_url?: string | null
           updated_at?: string | null
+          website_url?: string | null
         }
         Update: {
+          change_24h?: number | null
           created_at?: string | null
           id?: string
           logo_url?: string | null
+          market_cap?: number | null
           mindshare?: number | null
           mindshare_change?: number | null
           name?: string
           narrative?: string | null
+          price?: number | null
           rank?: number
           score?: number
           sparkline?: number[] | null
           ticker?: string
           token_status?: string | null
           trend?: string | null
+          twitter_url?: string | null
           updated_at?: string | null
+          website_url?: string | null
         }
         Relationships: []
       }
