@@ -32,7 +32,7 @@ const serviceTags: ServiceTag[] = [{
 }];
 const stats: ServiceStat[] = [{
   value: 15,
-  label: "Discord & Telegram Servers",
+  label: "Communities Built",
   suffix: "+"
 }, {
   value: 80,
@@ -40,56 +40,56 @@ const stats: ServiceStat[] = [{
   suffix: "K+"
 }, {
   value: 24,
-  label: "Support Coverage",
+  label: "Active Coverage",
   suffix: "/7"
 }, {
   value: 95,
-  label: "Retention Rate",
+  label: "Member Retention",
   suffix: "%"
 }];
 const processSteps: ProcessStep[] = [{
   number: "01",
   title: "Onboarding",
-  description: "We run a detailed onboarding process to collect information about your project, community goals, and current setup.",
+  description: "We dive into your project to understand your tone, goals, and what makes your community unique.",
   icon: Users
 }, {
   number: "02",
-  title: "Infrastructure Setup",
-  description: "We implement AI automation, gamified engagement systems, and community training modules tailored to your needs.",
+  title: "Infrastructure",
+  description: "We build the 'digital house'—setting up bots, roles, rules, and verification systems.",
   icon: Settings
 }, {
   number: "03",
-  title: "Launch & Activation",
-  description: "We activate all systems, conduct A/B testing to optimize performance, and monitor early community engagement.",
+  title: "Activation",
+  description: "We go live, start the conversation, and monitor the early feedback to fine-tune everything.",
   icon: Sparkles
 }, {
   number: "04",
-  title: "Reporting",
-  description: "We deliver performance reports with top contributors, engagement trends, and actionable recommendations.",
+  title: "Optimization",
+  description: "We refine the strategy based on what your community loves most and keep improving.",
   icon: ChevronRight
 }];
 const deliverables: Deliverable[] = [{
-  title: "Global Platforms",
-  items: ["Discord/Telegram server setup", "Role hierarchy & permissions", "Verification system", "AI chatbot & automation"]
+  title: "Technical Setup",
+  items: ["The Essentials: Full server setup, role permissions, and verification bots", "Smart Tech: AI-powered chatbots and custom automation to handle the basics", "Security: Anti-raid and anti-scam systems to keep your members safe"]
 }, {
-  title: "Korean Platforms",
-  items: ["KakaoTalk open chat management", "Naver Cafe setup & operation", "Korean content creation", "Korean community events"]
+  title: "Daily Operations",
+  items: ["24/7 Moderation: Real-time support in both English and Korean. No more 'When moon?' spam", "Event Planning: AMAs, trivia nights, and gamified quests to keep engagement high", "Local Strategy: Running KakaoTalk campaigns tailored for the Korean 'De-gen' community"]
 }, {
-  title: "Management & Support",
-  items: ["24/7 KR/EN moderation", "Engagement event planning", "Sentiment monitoring", "Weekly performance report"]
+  title: "Insights & Reporting",
+  items: ["Sentiment Tracking: We tell you what your community is actually saying about your project", "Weekly Reports: Simple, data-backed updates on growth, top contributors, and engagement trends"]
 }];
 const faqItems: FAQItem[] = [{
-  question: "Do you support Korean platforms (KakaoTalk, Naver)?",
-  answer: "Yes, we specialize in KakaoTalk open chat and Naver Cafe management. Korean users prefer these platforms over global ones, making them essential for Korean market entry."
+  question: "Do you handle Korean platforms like KakaoTalk?",
+  answer: "Absolutely. Korea is a unique market. We manage KakaoTalk Open Chats and Naver Cafes to make sure you have a real footprint in the local ecosystem."
 }, {
-  question: "Do you also manage Discord and Telegram?",
-  answer: "Absolutely. We provide integrated management for global (Discord, Telegram) and Korean (KakaoTalk, Naver Cafe) platforms with customized strategies for each platform's unique characteristics."
+  question: "What does '24/7 moderation' actually mean?",
+  answer: "It means our team is always on watch. Whether it's a holiday or 3 AM in your timezone, we're there to answer questions, ban scammers, and keep the chat moving."
 }, {
-  question: "What's included in 24/7 moderation?",
-  answer: "Our bilingual moderators cover all time zones with Korean and English support. This includes spam removal, FUD management, user support, and escalation handling."
+  question: "Can you take over an existing community?",
+  answer: "Yes. We can migrate your current members to a better setup or simply step in to professionalize your existing Discord or Telegram."
 }, {
-  question: "Can you migrate an existing community?",
-  answer: "Yes. We carefully migrate communities while maintaining member relationships and engagement. We audit your current setup and create a transition plan."
+  question: "Is it all just bots?",
+  answer: "Nope. We use AI to handle the boring stuff, but real humans (who actually understand Web3) handle the real conversations and community building."
 }];
 
 // Fake chat messages
@@ -194,19 +194,22 @@ const CommunityService = () => {
     }, 2000);
     return () => clearInterval(interval);
   }, [currentMessages.length]);
-  return <ServicePageLayout serviceName="Community Management" serviceTitle="Community" serviceSubtitle="Management" serviceDescription="Build thriving Discord & Telegram communities with AI-powered automation, gamified engagement, and 24/7 moderation." serviceIcon={Users} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} videoSrc="/videos/community-hero.mp4" posterSrc="/images/posters/community-hero.jpg" processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="community">
+  return <ServicePageLayout serviceName="Community Management" serviceTitle="Community" serviceSubtitle="Management" serviceDescription="Build a community that never sleeps. From Discord and Telegram to Korea's local hubs, we use AI-powered automation and 24/7 moderation to keep your members engaged, happy, and hyped." serviceIcon={Users} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} videoSrc="/videos/community-hero.mp4" posterSrc="/images/posters/community-hero.jpg" processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="community">
       {/* Platform Preview Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader title="Platform Management" badge="Discord & Telegram" />
+          <SectionHeader title="Platform Management" badge="Best of Both Worlds" />
           
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
                 {/* Left - Description */}
                 <div className="flex flex-col">
-                  <p className="text-white/60 leading-relaxed mb-6 text-lg">
-                    We manage your presence on Discord and Telegram with AI-powered automation, 24/7 moderation, and gamified engagement systems. Our team handles community setup, member onboarding, event coordination, and sentiment monitoring.
+                  <p className="text-white/60 leading-relaxed mb-4 text-base">
+                    <strong className="text-white">Global Presence (Discord & Telegram)</strong> — We set up your home base with smart automation and custom role hierarchies. Whether it's GMing in the general chat or handling complex governance votes, we keep the vibe right.
+                  </p>
+                  <p className="text-white/60 leading-relaxed mb-6 text-base">
+                    <strong className="text-white">Local Dominance (KakaoTalk & Naver Cafe)</strong> — If you're serious about Korea, you need to be on Kakao. We manage your "Open Chat" rooms and Naver communities with native-level cultural nuance that AI simply can't match.
                   </p>
                   
                   {/* Platform Toggle */}
