@@ -78,18 +78,8 @@ const SelectedWorkShowcase = () => {
     }
   ];
 
-  // Preload all videos on mount
-  useEffect(() => {
-    projects.forEach((project, index) => {
-      if (project.video) {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'video';
-        link.href = project.video;
-        document.head.appendChild(link);
-      }
-    });
-  }, []);
+  // Removed video preloading to improve initial page load speed
+  // Videos will load on-demand when the section comes into view
 
   // Auto-rotate when not hovering
   useEffect(() => {
@@ -109,22 +99,7 @@ const SelectedWorkShowcase = () => {
 
   return (
     <section ref={ref} className="relative h-[80vh] md:h-screen bg-black overflow-hidden">
-      {/* Hidden video preloaders for smoother transitions */}
-      <div className="hidden">
-        {projects.map((project, index) => 
-          project.video && (
-            <video
-              key={`preload-${index}`}
-              ref={el => { videoRefs.current[index] = el; }}
-              src={project.video}
-              preload="auto"
-              muted
-              playsInline
-              onCanPlayThrough={() => handleVideoLoad(index)}
-            />
-          )
-        )}
-      </div>
+      {/* Videos load on-demand for better performance */}
 
       {/* Background Media */}
       <AnimatePresence mode="wait">
@@ -145,7 +120,7 @@ const SelectedWorkShowcase = () => {
             }`}
           />
           
-          {/* Video layer - only show when loaded */}
+          {/* Video layer - lazy loaded */}
           {currentProject.video && (
             <video 
               autoPlay 
@@ -153,7 +128,7 @@ const SelectedWorkShowcase = () => {
               loop 
               playsInline
               poster={typeof currentProject.media === 'string' ? currentProject.media : undefined}
-              preload="auto"
+              preload="none"
               onCanPlayThrough={() => handleVideoLoad(activeIndex)}
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
                 isCurrentVideoLoaded ? 'opacity-100' : 'opacity-0'

@@ -1,12 +1,14 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import Logo3D from "@/components/Logo3D";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
+
+// Lazy load 3D logo to reduce initial bundle
+const Logo3D = lazy(() => import("@/components/Logo3D"));
 
 // Helper function to calculate read time from content
 const calculateReadTime = (content: string | null): string => {
@@ -73,6 +75,13 @@ const InsightArticleItem = ({ article, index, isLast }: { article: InsightArticl
 const InsightsSection = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [shouldLoadLogo, setShouldLoadLogo] = useState(false);
+
+  // Delay 3D logo loading to avoid blocking initial render
+  useEffect(() => {
+    const timer = setTimeout(() => setShouldLoadLogo(true), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // Fetch latest 3 published research posts from DB
   const { data: insights = [] } = useQuery({
@@ -171,7 +180,13 @@ const InsightsSection = () => {
           </form>
 
           <div className="h-24 sm:h-32 w-full hidden sm:block">
-            <Logo3D />
+            {shouldLoadLogo ? (
+              <Suspense fallback={<div className="w-full h-full bg-white/5 rounded-lg animate-pulse" />}>
+                <Logo3D />
+              </Suspense>
+            ) : (
+              <div className="w-full h-full bg-white/5 rounded-lg" />
+            )}
           </div>
 
           <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-border">

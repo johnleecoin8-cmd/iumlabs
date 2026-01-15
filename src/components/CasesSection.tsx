@@ -175,7 +175,7 @@ const CaseCard = ({
         <Link to={`/projects/${slug}`} onClick={() => window.scrollTo(0, 0)} className="block active:scale-[0.98] transition-transform duration-150">
           {/* Image - Full width on top */}
           <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-3 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
-            <img src={bgImage} alt={name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <img src={bgImage} alt={name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
           </div>
 
           {/* Content */}
