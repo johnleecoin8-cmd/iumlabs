@@ -24,9 +24,9 @@ const generateHourlyStats = () => {
   const baseChannels = 1000;
   const baseMentions = 50000;
   
-  // Apply multipliers: channels x1.2-1.5, mentions x5-7
+  // Apply multipliers: channels x1.2-1.5, mentions x3-5
   const channelMultiplier = seededRandom(hourSeed, 1.2, 1.5);
-  const mentionMultiplier = seededRandom(hourSeed + 1, 5, 7);
+  const mentionMultiplier = seededRandom(hourSeed + 1, 3, 5);
   
   return {
     channels: Math.floor(baseChannels * channelMultiplier),
