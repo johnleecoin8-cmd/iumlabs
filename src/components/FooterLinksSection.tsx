@@ -109,9 +109,9 @@ const FooterLinksSection = () => {
                 </ul>
               </div>
 
-              {/* Company Column - with Legal & Contact below on mobile */}
+              {/* Company Column - with Contact below on mobile */}
               <div className="flex flex-col">
-                <div className="mb-6 md:mb-0">
+                <div>
                   <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 md:mb-6 font-mono">
                     {footerLinks.company.title}
                   </h4>
@@ -121,6 +121,69 @@ const FooterLinksSection = () => {
                           {link.name}
                         </Link>
                       </li>)}
+                  </ul>
+                </div>
+                
+                {/* Contact Info - Mobile only, directly below Company */}
+                <div className="mt-6 md:hidden">
+                  <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 font-mono">
+                    Contact
+                  </h4>
+                  <ul className="space-y-3">
+                    <li>
+                      <a href={`mailto:${brandConfig.email}`} className="group flex items-start gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
+                        <Mail className="w-4 h-4 mt-0.5 shrink-0" />
+                        <span className="break-all">{brandConfig.email}</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href={brandConfig.telegram} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
+                        <Send className="w-4 h-4 mt-0.5 shrink-0" />
+                        <span>Telegram</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href={brandConfig.linkedin} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
+                        <ArrowUpRight className="w-4 h-4 mt-0.5 shrink-0" />
+                        <span>LinkedIn</span>
+                      </a>
+                    </li>
+                    <li className="flex items-start gap-2 text-muted-foreground/70 text-xs">
+                      <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                      <span>{brandConfig.office}</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Legal - Mobile only, below Contact */}
+                <div className="mt-6 md:hidden">
+                  <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 font-mono">
+                    {footerLinks.legal.title}
+                  </h4>
+                  <ul className="space-y-2">
+                    {footerLinks.legal.links.map(link => (
+                      <li key={link.name}>
+                        {link.name === "Terms of Service" ? (
+                          <button 
+                            onClick={() => setTermsOpen(true)} 
+                            className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left"
+                          >
+                            {link.name}
+                          </button>
+                        ) : link.name === "Privacy Policy" ? (
+                          <button 
+                            onClick={() => setPrivacyOpen(true)} 
+                            className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left"
+                          >
+                            {link.name}
+                          </button>
+                        ) : (
+                          <Link to={link.href} className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block">
+                            {link.name}
+                          </Link>
+                        )}
+                      </li>
+                    ))}
                   </ul>
                 </div>
               </div>
@@ -183,72 +246,6 @@ const FooterLinksSection = () => {
                   </li>
                   <li className="flex items-start gap-3 text-muted-foreground/70 text-sm">
                     <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                    <span>{brandConfig.office}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Mobile only: Legal + Contact side by side */}
-            <div className="grid grid-cols-2 gap-6 mt-6 md:hidden">
-              {/* Legal Column - Mobile */}
-              <div>
-                <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 font-mono">
-                  {footerLinks.legal.title}
-                </h4>
-                <ul className="space-y-2">
-                  {footerLinks.legal.links.map(link => (
-                    <li key={link.name}>
-                      {link.name === "Terms of Service" ? (
-                        <button 
-                          onClick={() => setTermsOpen(true)} 
-                          className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left"
-                        >
-                          {link.name}
-                        </button>
-                      ) : link.name === "Privacy Policy" ? (
-                        <button 
-                          onClick={() => setPrivacyOpen(true)} 
-                          className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block text-left"
-                        >
-                          {link.name}
-                        </button>
-                      ) : (
-                        <Link to={link.href} className="text-muted-foreground hover:text-foreground transition-all duration-300 text-sm inline-block">
-                          {link.name}
-                        </Link>
-                      )}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Contact Info Column - Mobile */}
-              <div>
-                <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 font-mono">
-                  Contact
-                </h4>
-                <ul className="space-y-3">
-                  <li>
-                    <a href={`mailto:${brandConfig.email}`} className="group flex items-start gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
-                      <Mail className="w-4 h-4 mt-0.5 shrink-0" />
-                      <span className="break-all">{brandConfig.email}</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href={brandConfig.telegram} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
-                      <Send className="w-4 h-4 mt-0.5 shrink-0" />
-                      <span>Telegram</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href={brandConfig.linkedin} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
-                      <ArrowUpRight className="w-4 h-4 mt-0.5 shrink-0" />
-                      <span>LinkedIn</span>
-                    </a>
-                  </li>
-                  <li className="flex items-start gap-2 text-muted-foreground/70 text-xs">
-                    <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0" />
                     <span>{brandConfig.office}</span>
                   </li>
                 </ul>
