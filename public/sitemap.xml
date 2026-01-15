@@ -32,10 +32,10 @@
     <priority>0.85</priority>
   </url>
   
-  <!-- Core Services (GTM 최우선) -->
+  <!-- Core Services -->
   <url>
     <loc>https://iumlabs.io/services/gtm</loc>
-    <lastmod>2026-01-10</lastmod>
+    <lastmod>2026-01-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
