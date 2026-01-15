@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
@@ -23,12 +23,21 @@ const campaignImages = [{
   alt: "Peaq Summit"
 }];
 import ServicesSection from "@/components/ServicesSection";
-import MediaPartnersSection from "@/components/MediaPartnersSection";
-import CasesSection from "@/components/CasesSection";
-import SelectedWorkShowcase from "@/components/SelectedWorkShowcase";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
-import InsightsSection from "@/components/InsightsSection";
 import ContactFormSection from "@/components/ContactFormSection";
+
+// Lazy load heavy components for faster initial page load
+const CasesSection = lazy(() => import("@/components/CasesSection"));
+const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
+const InsightsSection = lazy(() => import("@/components/InsightsSection"));
+const MediaPartnersSection = lazy(() => import("@/components/MediaPartnersSection"));
+
+// Loading fallback for lazy components
+const SectionLoader = () => (
+  <div className="h-64 flex items-center justify-center">
+    <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+  </div>
+);
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
@@ -310,7 +319,9 @@ const Index = () => {
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
-            <CasesSection maxItems={6} />
+            <Suspense fallback={<SectionLoader />}>
+              <CasesSection maxItems={6} />
+            </Suspense>
           </AnimatedSection>
         </div>
       </section>
@@ -319,7 +330,9 @@ const Index = () => {
       <section className="bg-surface-base" id="selected-work">
         <div className="border-t border-white/10">
           <AnimatedSection delay={100}>
-            <SelectedWorkShowcase />
+            <Suspense fallback={<SectionLoader />}>
+              <SelectedWorkShowcase />
+            </Suspense>
           </AnimatedSection>
         </div>
       </section>
@@ -338,7 +351,9 @@ const Index = () => {
             </div>
           </AnimatedSection>
           <AnimatedSection delay={100}>
-            <InsightsSection />
+            <Suspense fallback={<SectionLoader />}>
+              <InsightsSection />
+            </Suspense>
           </AnimatedSection>
         </div>
       </section>
@@ -346,7 +361,9 @@ const Index = () => {
       {/* Media Partners - 번호 없음, 헤더 없이 마키만 */}
       <section className="bg-surface-base" id="media-partners">
         <AnimatedSection direction="none">
-          <MediaPartnersSection />
+          <Suspense fallback={<SectionLoader />}>
+            <MediaPartnersSection />
+          </Suspense>
         </AnimatedSection>
       </section>
       
