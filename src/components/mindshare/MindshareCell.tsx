@@ -85,19 +85,18 @@ const MindshareCell = ({
     },
   };
 
-  // Default style when no trend data or neutral
-  // Default style - green (same as 'up' trend)
-  const defaultColors = {
-    cellBg: 'linear-gradient(145deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.25) 50%, rgba(2, 44, 34, 0.4) 100%)',
-    glowColor: 'rgba(52, 211, 153, 0.12)',
-    borderColor: 'rgba(52, 211, 153, 0.25)',
-    sparkline: 'rgba(52, 211, 153, 0.6)',
-    sparklineFill: 'rgba(52, 211, 153, 0.08)',
-    accentText: 'text-emerald-400',
-    percentBg: 'bg-emerald-500/10',
+  // Neutral style - slate/gray tones for projects without clear trend
+  const neutralColors = {
+    cellBg: 'linear-gradient(145deg, rgba(100, 116, 139, 0.12) 0%, rgba(51, 65, 85, 0.2) 50%, rgba(30, 41, 59, 0.35) 100%)',
+    glowColor: 'rgba(148, 163, 184, 0.08)',
+    borderColor: 'rgba(148, 163, 184, 0.2)',
+    sparkline: 'rgba(148, 163, 184, 0.5)',
+    sparklineFill: 'rgba(148, 163, 184, 0.06)',
+    accentText: 'text-slate-400',
+    percentBg: 'bg-slate-500/10',
   };
 
-  const colors = trend === 'up' || trend === 'down' ? trendColors[trend] : defaultColors;
+  const colors = trend === 'up' ? trendColors.up : trend === 'down' ? trendColors.down : neutralColors;
   const TrendIcon = trend === 'up' ? TrendingUp : trend === 'down' ? TrendingDown : null;
   const isPreTge = tokenStatus === 'pre-tge';
 
