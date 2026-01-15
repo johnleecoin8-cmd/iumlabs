@@ -25,85 +25,79 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 150, label: "Yapper Network", suffix: "+" },
-  { value: 3, label: "Total Reach", suffix: "M+" },
-  { value: 12, label: "Campaigns Delivered", suffix: "+" },
-  { value: 3, label: "Avg Engagement", suffix: "x" },
+  { value: 150, label: "Active Yappers", suffix: "+" },
+  { value: 3, label: "Total Combined Reach", suffix: "M+" },
+  { value: 12, label: "Viral Campaigns Delivered", suffix: "+" },
+  { value: 3, label: "Average Engagement Boost", suffix: "x" },
 ];
 
 const processSteps: ProcessStep[] = [
   {
     number: "01",
-    title: "Strategy & Onboarding",
-    description: "We align on your goals, messaging, timing, and target audiences. Then we define campaign angles and prepare materials.",
+    title: "The Vibe Check",
+    description: "We align on your goals and find the best 'angles' for the current market sentiment.",
     icon: Target,
   },
   {
     number: "02",
-    title: "Campaign Setup",
-    description: "We publish the briefing to our 150+ Yap Circle creators — inviting them to participate based on interest and fit.",
+    title: "The Briefing",
+    description: "We push the campaign to our 150+ Yap Circle members to find the perfect fits.",
     icon: Users,
   },
   {
     number: "03",
-    title: "Activation",
-    description: "Creators begin posting organically across X: threads, quote RTs, memes, and reactions. We amplify high-performing posts.",
+    title: "The Blitz",
+    description: "The 'Yap' begins—organic threads, memes, and interactions flood the timeline.",
     icon: Zap,
   },
   {
     number: "04",
-    title: "Reporting",
-    description: "We deliver a full report on campaign performance: reach, impressions, engagement, and smart follower exposure.",
+    title: "The Recap",
+    description: "A full report on reach, engagement, and who the 'MVPs' of the campaign were.",
     icon: FileText,
   },
 ];
 
 const deliverables: Deliverable[] = [
   {
-    title: "Campaign Materials",
+    title: "The Game Plan",
     items: [
-      "Campaign brief & guidelines",
-      "Key messaging points",
-      "Visual assets & templates",
-      "Hashtag strategy",
+      "The Brief: We craft the angles and 'hooks' that actually work on X",
+      "Asset Kit: Memes, templates, and talking points that don't feel like a corporate press release",
     ],
   },
   {
-    title: "Creator Coordination",
+    title: "Mass Activation",
     items: [
-      "150+ yapper activation",
-      "Content quality review",
-      "Posting schedule management",
-      "Real-time amplification",
+      "Organic Hype: 150+ creators jumping in with threads, quote RTs, and reactions",
+      "Real-time Boost: We monitor the best posts and amplify them to keep the momentum going",
     ],
   },
   {
-    title: "Performance Tracking",
+    title: "The Data",
     items: [
-      "Impression tracking",
-      "Engagement metrics",
-      "Top performer highlights",
-      "Campaign summary report",
+      "Impression Tracking: See exactly how many eyes saw your project",
+      "Smart Metrics: We identify the top-performing yappers and the high-value followers you've reached",
     ],
   },
 ];
 
 const faqItems: FAQItem[] = [
   {
-    question: "What's the difference between Yap and KOL marketing?",
-    answer: "Yap marketing focuses on creating organic buzz through many smaller creators (yappers) rather than relying on a few large influencers. This creates more authentic engagement and wider reach across different communities.",
+    question: "What's the difference between 'Yap' and regular KOL marketing?",
+    answer: "KOL marketing is usually a one-off 'shill.' Yap Strategy is about mindshare. It's dozens of creators talking, joking, and debating about your project at once, making it feel like an organic market trend.",
   },
   {
-    question: "How do you ensure content quality from 150+ creators?",
-    answer: "We provide clear briefs and guidelines, and our team reviews content before amplification. Creators in our 150+ network are vetted for quality and authentic engagement.",
+    question: "Is the content quality controlled?",
+    answer: "Yes. While we encourage organic 'yapping,' we provide clear guidelines to ensure the core message is accurate and on-brand.",
   },
   {
-    question: "How long does a typical Yap campaign run?",
-    answer: "Standard campaigns run 1-2 weeks with concentrated posting periods. We can also run extended campaigns for ongoing mindshare building around key milestones.",
+    question: "How long does the hype last?",
+    answer: "A typical blitz lasts a few days, but the 'echo' on X can last for weeks as more people join the conversation.",
   },
   {
-    question: "Can you target specific crypto niches?",
-    answer: "Yes! Our network includes creators across DeFi, NFT, trading, research, memes, and regional communities. We match your campaign with the most relevant creator segments.",
+    question: "Can we target specific niches?",
+    answer: "Definitely. Whether you're a new L1, a DeFi protocol, or a meme coin, we select the 'yappers' who are already experts in your specific field.",
   },
 ];
 
@@ -241,7 +235,7 @@ const YapService = () => {
       serviceName="Yap Strategy"
       serviceTitle="Yap"
       serviceSubtitle="Strategy"
-      serviceDescription="Amplify your message with 150+ aligned yappers — driving mindshare and organic buzz across Crypto X."
+      serviceDescription="Own the timeline. We mobilize our 'Yap Circle'—a network of 150+ aligned creators—to drive mindshare and spark organic buzz across Crypto X. Don't just announce; start a conversation."
       serviceIcon={Volume2}
       serviceTags={serviceTags}
       stats={stats}
@@ -256,9 +250,15 @@ const YapService = () => {
       {/* Creator Network Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader title="Creator Network" badge="150+ Yappers" />
+          <SectionHeader title="The Yap Circle" badge="150+ Creators Ready" />
+          
+          <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-4">
+            <p className="text-white/60 text-sm max-w-3xl">
+              From heavy hitters like Pentoshi and Murad to niche DeFi researchers and meme-lords, we have the "boots on the ground" to make your project the main character of the day. Our network spans Trading, NFTs, DeFi, and Macro.
+            </p>
+          </div>
 
-          <div className="py-10 md:py-14">
+          <div className="py-8 md:py-12">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               {/* Featured Yappers Carousel */}
               <div className="mb-12">
