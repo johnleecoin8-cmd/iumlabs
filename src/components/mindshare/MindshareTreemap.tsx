@@ -25,6 +25,8 @@ export interface MindshareProject {
   // Social links
   twitter_url?: string | null;
   website_url?: string | null;
+  // Trending signal
+  isTrending?: boolean;
 }
 
 interface MindshareTreemapProps {
@@ -212,6 +214,7 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
               logoUrl={node.data.logo_url}
               size={getCellSize(node)}
               rank={node.data.rank}
+              isTrending={(node.data as MindshareProject).isTrending}
               onClick={() => {
                 setSelectedProject(node.data);
                 setModalOpen(true);
