@@ -209,7 +209,11 @@ const CaseCard = ({
       </div>
     </div>;
 };
-const CasesSection = () => {
+interface CasesSectionProps {
+  maxItems?: number;
+}
+
+const CasesSection = ({ maxItems = 12 }: CasesSectionProps) => {
   const {
     data: projects
   } = useQuery({
@@ -267,7 +271,7 @@ const CasesSection = () => {
     }
   });
   const cases = projects || [];
-  const displayCases = cases.slice(0, 12); // Show only 3x4 = 12 projects on home
+  const displayCases = cases.slice(0, maxItems);
 
   return <section className="bg-background">
       {/* Top Info Bar */}
