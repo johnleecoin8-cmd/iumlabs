@@ -12,6 +12,8 @@ export interface HypeProject {
   ticker: string;
   score: number;
   mindshare: number;
+  mindshare_change: number | null;
+  narrative: string | null;
   trend: string;
   sparkline: number[];
   logo_url: string | null;

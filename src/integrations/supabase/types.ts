@@ -47,7 +47,9 @@ export type Database = {
           id: string
           logo_url: string | null
           mindshare: number | null
+          mindshare_change: number | null
           name: string
+          narrative: string | null
           rank: number
           score: number
           sparkline: number[] | null
@@ -61,7 +63,9 @@ export type Database = {
           id?: string
           logo_url?: string | null
           mindshare?: number | null
+          mindshare_change?: number | null
           name: string
+          narrative?: string | null
           rank?: number
           score?: number
           sparkline?: number[] | null
@@ -75,7 +79,9 @@ export type Database = {
           id?: string
           logo_url?: string | null
           mindshare?: number | null
+          mindshare_change?: number | null
           name?: string
+          narrative?: string | null
           rank?: number
           score?: number
           sparkline?: number[] | null

@@ -3,7 +3,7 @@ import { useHypeProjects } from '@/hooks/useHypeProjects';
 import MindshareTreemap, { type MindshareProject } from '@/components/mindshare/MindshareTreemap';
 import TreemapSkeleton from '@/components/mindshare/TreemapSkeleton';
 import TokenStatusToggle, { type TokenStatus } from '@/components/mindshare/TokenStatusToggle';
-import { History, Users, ExternalLink, Radio } from 'lucide-react';
+import { History, Users, ExternalLink, Radio, Search, X } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
 import { usePageMeta } from '@/hooks/usePageMeta';
@@ -17,16 +17,26 @@ const KInfluenceGrid = () => {
   });
   
   const [tokenStatus, setTokenStatus] = useState<TokenStatus>('all');
+  const [searchQuery, setSearchQuery] = useState('');
   const { projects, isLoading, lastUpdate } = useHypeProjects();
 
   // Transform and filter projects for treemap (top 20 only)
   const treemapProjects: MindshareProject[] = useMemo(() => {
     if (!projects.length) return [];
 
-    // Filter by token status
+    // Filter by token status and search query
     const filtered = projects.filter((p) => {
-      if (tokenStatus === 'all') return true;
-      return p.token_status === tokenStatus;
+      // Token status filter
+      if (tokenStatus !== 'all' && p.token_status !== tokenStatus) return false;
+      
+      // Search filter
+      if (searchQuery) {
+        const query = searchQuery.toLowerCase();
+        return p.ticker.toLowerCase().includes(query) || 
+               p.name.toLowerCase().includes(query) ||
+               (p.narrative?.toLowerCase().includes(query) ?? false);
+      }
+      return true;
     });
 
     // Sort by rank and take top 20
@@ -46,6 +56,8 @@ const KInfluenceGrid = () => {
         : totalScore > 0 
           ? (Number(project.score) / totalScore) * 100 
           : 0,
+      mindshare_change: project.mindshare_change,
+      narrative: project.narrative,
       score: Number(project.score),
       trend: (project.trend === 'up' || project.trend === 'down' || project.trend === 'neutral' 
         ? project.trend 
@@ -55,7 +67,7 @@ const KInfluenceGrid = () => {
       rank: project.rank,
       token_status: project.token_status,
     }));
-  }, [projects, tokenStatus]);
+  }, [projects, tokenStatus, searchQuery]);
 
   // Calculate stats - based on top 20 only
   const stats = useMemo(() => {
@@ -92,8 +104,39 @@ const KInfluenceGrid = () => {
                   </p>
                 </div>
 
-                {/* Right side: Action buttons + Live indicator */}
+                {/* Right side: Search + Action buttons + Live indicator */}
                 <div className="flex items-center gap-1.5 sm:gap-3">
+                  {/* Search input - Kaito style */}
+                  <div className="relative">
+                    <div className={cn(
+                      'flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 rounded-lg',
+                      'bg-white/5 border border-white/10',
+                      'focus-within:border-teal-500/30 focus-within:bg-white/8',
+                      'transition-all duration-200',
+                      searchQuery ? 'w-36 sm:w-56' : 'w-9 sm:w-44'
+                    )}>
+                      <Search className="w-4 h-4 text-white/40 flex-shrink-0" />
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Search projects..."
+                        className={cn(
+                          'bg-transparent text-sm text-white placeholder:text-white/30 outline-none w-full',
+                          searchQuery ? 'block' : 'hidden sm:block'
+                        )}
+                      />
+                      {searchQuery && (
+                        <button 
+                          onClick={() => setSearchQuery('')}
+                          className="p-0.5 hover:bg-white/10 rounded transition-colors"
+                        >
+                          <X className="w-3 h-3 text-white/40" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                  
                   <button 
                     className={cn(
                       'p-2 sm:px-4 sm:py-2 text-sm font-medium rounded-lg',
@@ -107,10 +150,10 @@ const KInfluenceGrid = () => {
                   </button>
                   <button 
                     className={cn(
-                      'p-2 sm:px-4 sm:py-2 text-sm font-medium rounded-lg',
+                      'hidden sm:flex p-2 sm:px-4 sm:py-2 text-sm font-medium rounded-lg',
                       'bg-teal-500/10 text-teal-400 border border-teal-500/20',
                       'hover:bg-teal-500/20 hover:border-teal-500/30',
-                      'transition-all duration-200 flex items-center gap-2'
+                      'transition-all duration-200 items-center gap-2'
                     )}
                   >
                     <Users className="w-4 h-4" />

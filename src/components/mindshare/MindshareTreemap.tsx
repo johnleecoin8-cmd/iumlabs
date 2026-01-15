@@ -9,6 +9,8 @@ export interface MindshareProject {
   ticker: string;
   name: string;
   mindshare: number;
+  mindshare_change?: number | null;
+  narrative?: string | null;
   score: number;
   trend: 'up' | 'down' | 'neutral';
   sparkline: number[];
@@ -192,6 +194,8 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
               ticker={node.data.ticker}
               name={node.data.name}
               mindshare={node.data.mindshare}
+              mindshareChange={node.data.mindshare_change}
+              narrative={node.data.narrative}
               trend={node.data.trend}
               tokenStatus={node.data.token_status}
               sparkline={node.data.sparkline}
