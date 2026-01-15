@@ -158,23 +158,20 @@ const CaseCard = ({
     rootMargin: '30px',
     triggerOnce: true
   });
-  
+
   // Responsive grid border logic
   // Mobile (2 cols): right border on odd indices (0, 2, 4...)
   // Tablet (2 cols): right border on odd indices
   // Desktop (3 cols): right border on indices 0, 1 (not 2)
-  
+
   return <div ref={ref} className={cn("h-full transition-all duration-500 ease-out will-change-transform", isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6")} style={{
     transitionDelay: `${index % 6 * 50}ms`
   }}>
-      <div className={cn(
-        "group block p-2.5 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full border-b border-border",
-        // Mobile & Tablet: 2 columns - right border on left column (even index)
-        index % 2 === 0 && "border-r max-lg:border-r",
-        // Desktop: 3 columns - no right border on last column
-        "lg:border-r",
-        index % 3 === 2 && "lg:border-r-0"
-      )}>
+      <div className={cn("group block p-2.5 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full border-b border-border",
+    // Mobile & Tablet: 2 columns - right border on left column (even index)
+    index % 2 === 0 && "border-r max-lg:border-r",
+    // Desktop: 3 columns - no right border on last column
+    "lg:border-r", index % 3 === 2 && "lg:border-r-0")}>
         <Link to={`/projects/${slug}`} onClick={() => window.scrollTo(0, 0)} className="block active:scale-[0.98] transition-transform duration-150">
           {/* Image - Full width on top */}
           <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-3 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
@@ -212,8 +209,9 @@ const CaseCard = ({
 interface CasesSectionProps {
   maxItems?: number;
 }
-
-const CasesSection = ({ maxItems = 12 }: CasesSectionProps) => {
+const CasesSection = ({
+  maxItems = 12
+}: CasesSectionProps) => {
   const {
     data: projects
   } = useQuery({
@@ -272,7 +270,6 @@ const CasesSection = ({ maxItems = 12 }: CasesSectionProps) => {
   });
   const cases = projects || [];
   const displayCases = cases.slice(0, maxItems);
-
   return <section className="bg-background">
       {/* Top Info Bar */}
       
@@ -283,12 +280,7 @@ const CasesSection = ({ maxItems = 12 }: CasesSectionProps) => {
       </div>
 
       {/* View All Projects Row */}
-      <Link to="/projects" className="group flex items-center justify-center gap-3 p-6 md:p-8 border-t border-border bg-secondary/30 hover:bg-secondary/50 transition-colors">
-        <span className="text-foreground font-medium text-sm md:text-base group-hover:underline underline-offset-4">
-          View all {cases.length} projects
-        </span>
-        <ArrowRight className="w-4 h-4 text-foreground group-hover:translate-x-1 transition-transform" />
-      </Link>
+      
     </section>;
 };
 export default CasesSection;
