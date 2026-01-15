@@ -132,7 +132,7 @@ const KInfluenceGrid = () => {
       preTgeCount
     };
   }, [treemapProjects]);
-  return <div className="min-h-screen bg-[#050505]">
+  return <div className="min-h-screen bg-[#050505] pb-20 lg:pb-0">
       {/* Subtle gradient overlay */}
       <div className="fixed inset-0 bg-gradient-to-b from-teal-950/5 via-transparent to-transparent pointer-events-none" />
 
@@ -140,20 +140,20 @@ const KInfluenceGrid = () => {
         {/* Header - Kaito style */}
         <div className="border-b border-white/[0.06]">
           <div className="px-3 sm:px-6 py-3 sm:py-4">
-            <div className="flex flex-col gap-3 sm:gap-4">
+            <div className="flex flex-col gap-2 sm:gap-4">
               {/* Title row */}
               <div className="flex items-center justify-between gap-2">
-                <div className="flex items-center gap-3">
-                  <h1 className="text-base sm:text-xl font-bold text-white tracking-tight">
+                <div className="flex items-center gap-2 sm:gap-3">
+                  <h1 className="text-sm sm:text-xl font-bold text-white tracking-tight">
                     K-Leaderboard
                   </h1>
                   
-                  {/* Period filter - Kaito style */}
-                  <div className="hidden sm:flex items-center p-0.5 bg-white/[0.03] rounded-lg border border-white/[0.06]">
+                  {/* Period filter - visible on all screens */}
+                  <div className="flex items-center p-0.5 bg-white/[0.03] rounded-md sm:rounded-lg border border-white/[0.06]">
                     <button
                       onClick={() => setPeriod('7d')}
                       className={cn(
-                        "px-2.5 py-1 text-xs font-medium rounded-md transition-all duration-200",
+                        "px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium rounded sm:rounded-md transition-all duration-200",
                         period === '7d' 
                           ? "bg-teal-500/15 text-teal-400 border border-teal-500/30" 
                           : "text-white/40 hover:text-white/60 border border-transparent"
@@ -164,7 +164,7 @@ const KInfluenceGrid = () => {
                     <button
                       onClick={() => setPeriod('30d')}
                       className={cn(
-                        "px-2.5 py-1 text-xs font-medium rounded-md transition-all duration-200",
+                        "px-2 sm:px-2.5 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium rounded sm:rounded-md transition-all duration-200",
                         period === '30d' 
                           ? "bg-teal-500/15 text-teal-400 border border-teal-500/30" 
                           : "text-white/40 hover:text-white/60 border border-transparent"
@@ -175,9 +175,9 @@ const KInfluenceGrid = () => {
                   </div>
                 </div>
 
-                {/* Right side: Search + Stats + Live indicator */}
+                {/* Right side: Live indicator + Desktop search */}
                 <div className="flex items-center gap-2 sm:gap-3">
-                  {/* Search input - Kaito style */}
+                  {/* Search input - Desktop only */}
                   <div className="relative hidden sm:flex items-center">
                     <Search className="absolute left-2.5 w-3.5 h-3.5 text-white/30" />
                     <input
@@ -203,7 +203,7 @@ const KInfluenceGrid = () => {
                     )}
                   </div>
                   
-                  {/* Last updated - Kaito style */}
+                  {/* Last updated - Desktop only */}
                   {lastUpdate && (
                     <div className="hidden lg:flex items-center gap-1.5 text-xs text-white/30">
                       <Clock className="w-3 h-3" />
@@ -211,50 +211,52 @@ const KInfluenceGrid = () => {
                     </div>
                   )}
                   
-                  {/* Divider */}
+                  {/* Divider - Desktop */}
                   <div className="hidden sm:block w-px h-5 bg-white/[0.08]" />
                   
                   {/* Live indicator */}
-                  <div className="flex items-center gap-1 sm:gap-1.5 px-2 py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
+                  <div className="flex items-center gap-1 sm:gap-1.5 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
                     <div className="relative">
-                      <Radio className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-teal-400" />
+                      <Radio className="w-2 h-2 sm:w-3 sm:h-3 text-teal-400" />
                       <div className="absolute inset-0 animate-ping">
-                        <Radio className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-teal-400 opacity-40" />
+                        <Radio className="w-2 h-2 sm:w-3 sm:h-3 text-teal-400 opacity-40" />
                       </div>
                     </div>
-                    <span className="text-[10px] sm:text-xs font-medium text-teal-400">Live</span>
+                    <span className="text-[9px] sm:text-xs font-medium text-teal-400">Live</span>
                   </div>
                 </div>
               </div>
 
+              {/* Mobile search bar - Full width */}
+              <div className="relative flex sm:hidden items-center">
+                <Search className="absolute left-3 w-4 h-4 text-white/30" />
+                <input
+                  type="text"
+                  placeholder="Search projects..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className={cn(
+                    "w-full pl-10 pr-10 py-2.5 text-sm",
+                    "bg-white/[0.03] border border-white/[0.08] rounded-xl",
+                    "text-white placeholder-white/30",
+                    "focus:outline-none focus:border-teal-500/40 focus:bg-white/[0.05]",
+                    "transition-all duration-200"
+                  )}
+                />
+                {searchQuery && (
+                  <button 
+                    onClick={() => setSearchQuery('')}
+                    className="absolute right-3 p-1 hover:bg-white/10 rounded-full transition-colors"
+                  >
+                    <X className="w-4 h-4 text-white/50" />
+                  </button>
+                )}
+              </div>
+
               {/* Controls row */}
               <div className="flex items-center justify-between gap-2 sm:gap-4">
-                {/* Left: Token Status Filter + Mobile Period */}
-                <div className="flex items-center gap-2">
-                  <TokenStatusToggle selected={tokenStatus} onChange={setTokenStatus} />
-                  
-                  {/* Mobile period filter */}
-                  <div className="flex sm:hidden items-center p-0.5 bg-white/[0.03] rounded-md border border-white/[0.06]">
-                    <button
-                      onClick={() => setPeriod('7d')}
-                      className={cn(
-                        "px-2 py-0.5 text-[10px] font-medium rounded transition-all",
-                        period === '7d' ? "bg-teal-500/15 text-teal-400" : "text-white/40"
-                      )}
-                    >
-                      7D
-                    </button>
-                    <button
-                      onClick={() => setPeriod('30d')}
-                      className={cn(
-                        "px-2 py-0.5 text-[10px] font-medium rounded transition-all",
-                        period === '30d' ? "bg-teal-500/15 text-teal-400" : "text-white/40"
-                      )}
-                    >
-                      30D
-                    </button>
-                  </div>
-                </div>
+                {/* Left: Token Status Filter */}
+                <TokenStatusToggle selected={tokenStatus} onChange={setTokenStatus} />
                 
                 {/* Right: Stats - Desktop */}
                 <div className="hidden sm:flex items-center gap-2.5">
@@ -294,7 +296,7 @@ const KInfluenceGrid = () => {
                   </div>
                 </div>
                 
-                {/* Mobile stats */}
+                {/* Mobile stats - Compact */}
                 <div className="flex sm:hidden items-center gap-1.5">
                   <div className="flex items-center gap-1 px-1.5 py-0.5 bg-white/[0.03] border border-white/[0.06] rounded">
                     <Hash className="w-2.5 h-2.5 text-teal-400" />
@@ -304,19 +306,24 @@ const KInfluenceGrid = () => {
                     <MessageCircle className="w-2.5 h-2.5 text-cyan-400" />
                     <span className="text-[10px] text-white font-medium">{(hourlyStats.mentions / 1000).toFixed(0)}K</span>
                   </div>
+                  {/* Project count on mobile */}
+                  <div className="flex items-center gap-1 px-1.5 py-0.5 bg-white/[0.03] border border-white/[0.06] rounded">
+                    <span className="text-[10px] text-white font-medium">{stats.total}</span>
+                    <span className="text-[9px] text-white/40">projects</span>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Treemap Container */}
-        <div className="h-[calc(100vh-160px)] sm:h-[calc(100vh-180px)]">
+        {/* Treemap Container - Adjusted for mobile bottom nav */}
+        <div className="h-[calc(100vh-220px)] sm:h-[calc(100vh-180px)] lg:h-[calc(100vh-180px)]">
           {isLoading ? <TreemapSkeleton /> : <MindshareTreemap projects={treemapProjects} className="h-full" />}
         </div>
 
-        {/* Footer - Minimal Kaito style */}
-        <div className="border-t border-white/[0.04]">
+        {/* Footer - Hidden on mobile to save space */}
+        <div className="hidden sm:block border-t border-white/[0.04]">
           <div className="px-4 sm:px-6 py-3">
             <p className="text-[9px] sm:text-[10px] text-white/25 text-center leading-relaxed max-w-2xl mx-auto">
               K-Leaderboard tracks mindshare from {hourlyStats.channels.toLocaleString()}+ Korean crypto channels. 
