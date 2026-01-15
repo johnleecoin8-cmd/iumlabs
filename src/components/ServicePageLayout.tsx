@@ -149,10 +149,10 @@ const StatItem = ({
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: (delay + 600) / 1000, duration: 0.5 }}
     >
-      <div className="text-lg sm:text-xl md:text-3xl font-bold text-white mb-0.5 sm:mb-1">
+      <div className="text-xl sm:text-xl md:text-3xl font-bold text-white mb-1 sm:mb-1">
         {prefix}{count}{suffix}
       </div>
-      <div className="text-[9px] sm:text-xs text-white/50 font-light">
+      <div className="text-[10px] sm:text-xs text-white/50 font-light leading-tight">
         {label}
       </div>
     </motion.div>
@@ -215,8 +215,8 @@ const ServicePageLayout = ({
       <Navbar />
       
       {/* Hero Section */}
-      <main className="p-0.5 sm:p-1 md:p-2 bg-[#0A0A0A]" id="hero">
-        <div className="relative min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
+      <main className="p-1 sm:p-1 md:p-2 bg-[#0A0A0A]" id="hero">
+        <div className="relative min-h-[100svh] sm:min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl">
           {/* Background Layer - Video with Fallback */}
           <div className="absolute inset-0 overflow-hidden">
             {/* Fallback Image - 즉시 표시 */}
@@ -258,12 +258,12 @@ const ServicePageLayout = ({
           {/* Back Button */}
           <motion.button
             onClick={() => navigate(-1)}
-            className="absolute top-6 left-4 sm:top-8 sm:left-6 md:left-10 z-20 flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white hover:border-white/20 transition-all duration-300 backdrop-blur-sm active:scale-[0.97]"
+            className="absolute top-4 left-3 sm:top-8 sm:left-6 md:left-10 z-20 flex items-center gap-1.5 sm:gap-2 px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white/5 border border-white/10 text-white/70 hover:bg-white/10 hover:text-white hover:border-white/20 transition-all duration-300 backdrop-blur-sm active:scale-[0.97] min-h-[40px] sm:min-h-[44px]"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
           >
-            <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <ArrowLeft className="w-4 h-4 sm:w-4 sm:h-4" />
             <span className="text-xs sm:text-sm font-medium">Back</span>
           </motion.button>
 
@@ -293,22 +293,22 @@ const ServicePageLayout = ({
           })}
 
           {/* Main Content - Centered */}
-          <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 pt-14 sm:pt-8">
+          <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-6 pt-16 sm:pt-8 pb-4">
             <div className="max-w-7xl mx-auto text-center">
               {/* Service Badge */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border mb-4 sm:mb-6"
+                className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full border mb-3 sm:mb-6"
                 style={{ borderColor: `${accentColor}50`, backgroundColor: `${accentColor}10` }}
               >
                 <ServiceIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" style={{ color: accentColor }} />
-                <span className="text-xs sm:text-sm" style={{ color: accentColor }}>{serviceName}</span>
+                <span className="text-[11px] sm:text-sm" style={{ color: accentColor }}>{serviceName}</span>
               </motion.div>
 
               {/* Main Headline */}
               <motion.h1 
-                className="font-sans text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-[-0.02em] mb-4 sm:mb-6"
+                className="font-sans text-[1.75rem] leading-[1.15] sm:text-3xl md:text-5xl lg:text-6xl font-bold tracking-[-0.02em] mb-3 sm:mb-6"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -320,7 +320,7 @@ const ServicePageLayout = ({
 
               {/* Description */}
               <motion.p 
-                className="text-xs sm:text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-5 sm:mb-6 font-light tracking-wide leading-relaxed px-2"
+                className="text-[13px] leading-relaxed sm:text-sm md:text-lg text-white/60 max-w-3xl mx-auto mb-4 sm:mb-6 font-light tracking-wide px-1"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
@@ -335,11 +335,11 @@ const ServicePageLayout = ({
                 transition={{ duration: 0.8, delay: 0.6 }}
               >
                 <CalendlyButton 
-                  className="group relative inline-flex items-center gap-2 sm:gap-3 px-6 py-3 sm:px-8 sm:py-4 font-medium text-xs sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border border-white/30 active:scale-[0.97] min-h-[44px]"
+                  className="group relative inline-flex items-center gap-2 sm:gap-3 px-5 py-3 sm:px-8 sm:py-4 font-medium text-[13px] sm:text-sm rounded-full overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 border border-white/30 active:scale-[0.97] min-h-[46px]"
                   style={{ backgroundColor: accentColor, color: '#fff' }}
                 >
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent" />
-                  <Calendar className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <Calendar className="w-4 h-4 sm:w-4 sm:h-4" />
                   <span>Book a Meeting</span>
                 </CalendlyButton>
               </motion.div>
@@ -347,9 +347,9 @@ const ServicePageLayout = ({
           </div>
 
           {/* Stats Section */}
-          <div className="relative z-10 py-3 sm:py-6">
-            <div className="container mx-auto px-3 sm:px-6">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
+          <div className="relative z-10 py-4 sm:py-6">
+            <div className="container mx-auto px-4 sm:px-6">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                 {stats.map((stat, index) => (
                   <StatItem 
                     key={index}
@@ -366,23 +366,23 @@ const ServicePageLayout = ({
           </div>
 
           {/* Client Logo Marquee */}
-          <div className="relative z-10 border-t border-white/10 py-2.5 sm:py-4 overflow-hidden">
-            <div className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[9px] sm:text-xs z-20">
+          <div className="relative z-10 border-t border-white/10 py-3 sm:py-4 overflow-hidden">
+            <div className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex items-center gap-2 text-white/40 text-[10px] sm:text-xs z-20">
               <span className="number-badge">01</span>
             </div>
 
-            <div className="flex items-center logo-marquee-slow ml-10 sm:ml-16">
+            <div className="flex items-center logo-marquee-slow ml-12 sm:ml-16">
               {[...clientLogos, ...clientLogos].map((client, index) => (
                 <div 
                   key={index} 
-                  className="flex items-center gap-1 sm:gap-2 mx-1 sm:mx-2 px-2 sm:px-4 py-1 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
+                  className="flex items-center gap-1.5 sm:gap-2 mx-1.5 sm:mx-2 px-2.5 sm:px-4 py-1.5 sm:py-2 bg-zinc-900/80 rounded-full border border-white/10 hover:border-white/20 transition-all duration-300"
                 >
                   <img 
                     src={client.logo} 
                     alt={client.name} 
-                    className={`h-3 w-3 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-80'}`}
+                    className={`h-3.5 w-3.5 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-80'}`}
                   />
-                  <span className="text-white/70 text-[9px] sm:text-xs font-medium whitespace-nowrap">
+                  <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">
                     {client.name}
                   </span>
                 </div>
@@ -392,13 +392,13 @@ const ServicePageLayout = ({
 
           {/* Scroll Indicator */}
           <motion.div 
-            className="absolute bottom-16 sm:bottom-24 right-3 sm:right-8 z-10 flex items-center gap-1.5 sm:gap-3"
+            className="absolute bottom-20 sm:bottom-24 right-4 sm:right-8 z-10 flex items-center gap-2 sm:gap-3"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
-            <span className="text-white/40 text-[10px] sm:text-sm font-medium">scroll</span>
-            <ChevronDown className="w-3 h-3 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
+            <span className="text-white/40 text-[11px] sm:text-sm font-medium">scroll</span>
+            <ChevronDown className="w-4 h-4 sm:w-4 sm:h-4 text-white/40 animate-bounce" />
           </motion.div>
         </div>
       </main>
@@ -412,26 +412,26 @@ const ServicePageLayout = ({
           <div className="border-t border-white/10">
             <SectionHeader number={deliverablesSectionNum!} title="What You Get" badge="Deliverables" />
             
-            <div className="py-6 sm:py-8 md:py-12">
-              <div className="container mx-auto px-3 sm:px-4 lg:px-12">
+            <div className="py-5 sm:py-8 md:py-12">
+              <div className="container mx-auto px-4 sm:px-4 lg:px-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
                   {deliverables.map((deliverable) => (
                     <div
                       key={deliverable.title}
-                      className="p-3.5 sm:p-5 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all active:scale-[0.98]"
+                      className="p-4 sm:p-5 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all active:scale-[0.98]"
                     >
-                      <h3 className="text-xs sm:text-sm font-semibold text-white mb-2 sm:mb-2.5 flex items-center gap-2">
+                      <h3 className="text-[13px] sm:text-sm font-semibold text-white mb-2.5 sm:mb-2.5 flex items-center gap-2">
                         <div 
-                          className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                          className="w-2 h-2 rounded-full flex-shrink-0"
                           style={{ backgroundColor: accentColor }}
                         />
                         {deliverable.title}
                       </h3>
-                      <ul className="space-y-1 sm:space-y-1.5">
+                      <ul className="space-y-1.5 sm:space-y-1.5">
                         {deliverable.items.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-1.5 sm:gap-2 text-white/60 text-[11px] sm:text-xs">
+                          <li key={idx} className="flex items-start gap-2 sm:gap-2 text-white/60 text-[12px] sm:text-xs">
                             <Check 
-                              className="w-3 h-3 mt-0.5 flex-shrink-0" 
+                              className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" 
                               style={{ color: accentColor }} 
                             />
                             {item}
@@ -452,7 +452,7 @@ const ServicePageLayout = ({
         <section className="bg-[#0F0F0F]" id="process">
           <div className="border-t border-white/10">
             <SectionHeader number={processSectionNum!} title="Process" badge="How We Work" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 divide-white/10">
               {processSteps.map((step, index) => {
                 const Icon = step.icon;
                 const isLast = index === processSteps.length - 1;
@@ -460,7 +460,7 @@ const ServicePageLayout = ({
                 return (
                   <div
                     key={step.number}
-                    className="group relative p-3.5 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/5 active:scale-[0.98]"
+                    className="group relative p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/5 active:scale-[0.98] sm:border-r sm:border-white/10 sm:last:border-r-0"
                   >
                     {/* Arrow indicator between steps - Desktop */}
                     {!isLast && (
@@ -473,35 +473,24 @@ const ServicePageLayout = ({
                       </div>
                     )}
                     
-                    {/* Arrow indicator between steps - Mobile/Tablet */}
-                    {!isLast && (
-                      <div className="flex lg:hidden absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 z-10">
-                        <ArrowRight 
-                          className="w-5 h-5 sm:w-6 sm:h-6 rotate-90 drop-shadow-lg" 
-                          style={{ color: accentColor }}
-                          strokeWidth={2.5}
-                        />
-                      </div>
-                    )}
-                    
-                    <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                    <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
                       <span 
-                        className="text-[10px] sm:text-xs font-mono tracking-widest"
+                        className="text-[11px] sm:text-xs font-mono tracking-widest"
                         style={{ color: accentColor }}
                       >
                         {step.number}
                       </span>
                       <Icon 
-                        className="w-4 h-4 sm:w-5 sm:h-5 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" 
+                        className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" 
                         strokeWidth={1.5} 
                       />
                     </div>
                     
-                    <h3 className="text-sm sm:text-base font-semibold text-white mb-1.5 sm:mb-2">
+                    <h3 className="text-[15px] sm:text-base font-semibold text-white mb-2 sm:mb-2">
                       {step.title}
                     </h3>
                     
-                    <p className="text-white/50 text-xs sm:text-sm leading-relaxed">
+                    <p className="text-white/50 text-[13px] sm:text-sm leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -518,27 +507,27 @@ const ServicePageLayout = ({
           <div className="border-t border-white/10">
             <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
             
-            <div className="py-6 sm:py-8 md:py-12">
-                <div className="container mx-auto px-3 sm:px-6 lg:px-12 max-w-4xl">
-                <Accordion type="single" collapsible className="space-y-2 sm:space-y-3">
+            <div className="py-5 sm:py-8 md:py-12">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-4xl">
+                <Accordion type="single" collapsible className="space-y-2.5 sm:space-y-3">
                   {faqItems.map((item, index) => (
                     <div
                       key={index}
                     >
                         <AccordionItem 
                         value={`item-${index}`}
-                        className="border border-white/10 rounded-lg sm:rounded-xl bg-white/5 px-3 sm:px-5 overflow-hidden"
+                        className="border border-white/10 rounded-xl sm:rounded-xl bg-white/5 px-4 sm:px-5 overflow-hidden"
                       >
-                        <AccordionTrigger className="text-left text-white hover:no-underline py-3 sm:py-4 text-xs sm:text-sm">
-                          <span className="flex items-center gap-2 sm:gap-3">
+                        <AccordionTrigger className="text-left text-white hover:no-underline py-3.5 sm:py-4 text-[13px] sm:text-sm min-h-[48px]">
+                          <span className="flex items-center gap-2.5 sm:gap-3">
                             <ChevronRight 
-                              className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 transition-transform" 
+                              className="w-4 h-4 sm:w-4 sm:h-4 flex-shrink-0 transition-transform" 
                               style={{ color: accentColor }}
                             />
-                            <span className="line-clamp-2">{item.question}</span>
+                            <span className="line-clamp-2 leading-snug">{item.question}</span>
                           </span>
                         </AccordionTrigger>
-                        <AccordionContent className="text-white/60 text-[11px] sm:text-sm pb-3 sm:pb-4 pl-5 sm:pl-7">
+                        <AccordionContent className="text-white/60 text-[13px] sm:text-sm pb-4 sm:pb-4 pl-6 sm:pl-7 leading-relaxed">
                           {item.answer}
                         </AccordionContent>
                       </AccordionItem>
@@ -556,16 +545,16 @@ const ServicePageLayout = ({
         <div className="border-t border-white/10">
           <SectionHeader number={moreServicesSectionNum} title="More Services" badge="Explore" />
           <div 
-            className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 divide-x divide-white/10"
+            className="grid grid-cols-2 lg:grid-cols-4"
           >
             {otherServices.map((service, index) => (
               <div
                 key={service.slug}
-                className="border-b border-white/10 last:border-b-0 sm:last:border-b sm:[&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+4)]:border-b-0"
+                className="border-b border-r border-white/10 [&:nth-child(2n)]:border-r-0 lg:[&:nth-child(2n)]:border-r lg:[&:nth-child(4n)]:border-r-0 [&:nth-last-child(-n+2)]:border-b-0 lg:[&:nth-last-child(-n+4)]:border-b-0"
               >
                 <Link
                   to={`/services/${service.slug}`}
-                  className="group relative block p-3 sm:p-5 md:p-6 lg:p-8 h-full transition-all duration-500 overflow-hidden active:scale-[0.97]"
+                  className="group relative block p-4 sm:p-5 md:p-6 lg:p-8 h-full transition-all duration-500 overflow-hidden active:scale-[0.97] min-h-[100px] sm:min-h-[120px]"
                 >
                   {/* Hover background gradient */}
                   <div 
@@ -595,7 +584,7 @@ const ServicePageLayout = ({
                     </div>
                     
                     {/* Service title */}
-                    <h3 className="text-white font-medium text-sm sm:text-lg mb-2 sm:mb-3 group-hover:translate-x-1 transition-transform duration-300 line-clamp-1">
+                    <h3 className="text-white font-medium text-[13px] sm:text-lg mb-2 sm:mb-3 group-hover:translate-x-1 transition-transform duration-300 line-clamp-2 leading-snug">
                       {service.title}
                     </h3>
                     
