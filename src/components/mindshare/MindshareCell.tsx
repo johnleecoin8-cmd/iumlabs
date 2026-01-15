@@ -216,20 +216,13 @@ const MindshareCell = ({
                 </div>
               </div>
             )}
-            <div className="flex flex-col min-w-0">
-              <span className={cn(
-                'font-bold text-white tracking-tight truncate',
-                'font-[\'Space_Grotesk\',sans-serif]',
-                size === 'large' ? 'text-xs sm:text-base' : size === 'medium' ? 'text-[11px] sm:text-sm' : 'text-[9px] sm:text-[11px]'
-              )}>
-                {ticker}
-              </span>
-              {size === 'large' && name && (
-                <span className="text-[8px] sm:text-[10px] text-white/40 truncate max-w-[60px] sm:max-w-[80px] font-medium">
-                  {name}
-                </span>
-              )}
-            </div>
+            <span className={cn(
+              'font-bold text-white tracking-tight truncate',
+              'font-[\'Space_Grotesk\',sans-serif]',
+              size === 'large' ? 'text-xs sm:text-base' : size === 'medium' ? 'text-[11px] sm:text-sm' : 'text-[9px] sm:text-[11px]'
+            )}>
+              {ticker}
+            </span>
           </div>
 
           {/* Badges: Narrative + Pre-TGE */}
