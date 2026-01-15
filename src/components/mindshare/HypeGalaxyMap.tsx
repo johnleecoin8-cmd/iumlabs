@@ -9,31 +9,20 @@ import {
   ResponsiveContainer,
   ReferenceLine
 } from 'recharts';
-import { HypeProject } from '@/hooks/useHypeProjects';
-import { TrendingUp, TrendingDown } from 'lucide-react';
+import { TrendingUp, TrendingDown, LineChart as LineChartIcon } from 'lucide-react';
 
-// TradingView 스타일 네온 컬러 팔레트 (20개)
+// Ium Labs 스타일 Curated 색상 팔레트 (10색)
 const COLORS = [
-  '#F7931A', // BTC Orange
-  '#627EEA', // ETH Blue
-  '#00FFA3', // SOL Green
-  '#E84142', // AVAX Red
-  '#2775CA', // ARB Blue
-  '#FF007A', // UNI Pink
-  '#F0B90B', // BNB Yellow
-  '#8247E5', // MATIC Purple
-  '#26A17B', // USDT Teal
-  '#00D395', // AAVE Green
-  '#FF6B6B', // Coral
-  '#4ECDC4', // Turquoise
-  '#45B7D1', // Sky Blue
-  '#96CEB4', // Sage
-  '#FFEAA7', // Cream Yellow
-  '#DDA0DD', // Plum
-  '#98D8C8', // Mint
-  '#F7DC6F', // Soft Yellow
-  '#BB8FCE', // Light Purple
-  '#85C1E9', // Light Blue
+  '#14b8a6', // Teal (메인)
+  '#8b5cf6', // Violet
+  '#f59e0b', // Amber
+  '#22c55e', // Green
+  '#ec4899', // Pink
+  '#3b82f6', // Blue
+  '#ef4444', // Red
+  '#f97316', // Orange
+  '#a855f7', // Purple
+  '#06b6d4', // Cyan
 ];
 
 interface HypeGalaxyMapProps {
@@ -54,15 +43,13 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
   const [hoveredTicker, setHoveredTicker] = useState<string | null>(null);
   const [selectedTickers, setSelectedTickers] = useState<Set<string>>(new Set());
 
-  // 데이터 변환: sparkline 배열을 시계열 데이터로 변환
+  // sparkline 배열을 시계열 데이터로 변환
   const chartData = useMemo(() => {
     if (!projects || projects.length === 0) return [];
     
-    // sparkline 길이 확인
     const maxLength = Math.max(...projects.map(p => p.sparkline?.length || 0));
     if (maxLength === 0) return [];
 
-    // 시간축 생성 (7일 기준)
     const timeLabels = Array.from({ length: maxLength }, (_, i) => {
       const day = new Date();
       day.setDate(day.getDate() - (maxLength - 1 - i));
@@ -73,8 +60,7 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
       const point: Record<string, string | number> = { time };
       projects.forEach(project => {
         const sparkline = project.sparkline || [];
-        const val = sparkline[timeIdx] ?? 0;
-        point[project.ticker] = val;
+        point[project.ticker] = sparkline[timeIdx] ?? 0;
       });
       return point;
     });
@@ -89,7 +75,7 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
     return map;
   }, [projects]);
 
-  // 현재 값 기준 정렬된 프로젝트 (툴팁용)
+  // 현재 값 기준 정렬 (사이드바용)
   const sortedByCurrentValue = useMemo(() => {
     return [...projects].sort((a, b) => {
       const aVal = a.sparkline?.[a.sparkline.length - 1] ?? 0;
@@ -97,52 +83,6 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
       return bVal - aVal;
     });
   }, [projects]);
-
-  // 커스텀 툴팁
-  const CustomTooltip = ({ active, payload, label }: any) => {
-    if (active && payload && payload.length) {
-      const sortedPayload = [...payload].sort((a, b) => (b.value || 0) - (a.value || 0));
-      
-      return (
-        <div className="bg-[#1E222D]/98 border border-slate-700/60 p-4 rounded-lg shadow-2xl backdrop-blur-md min-w-[200px] max-h-[400px] overflow-hidden">
-          <p className="text-slate-400 text-xs mb-3 font-mono border-b border-slate-700/50 pb-2 flex items-center justify-between">
-            <span>{label}</span>
-            <span className="text-slate-500">{sortedPayload.length} projects</span>
-          </p>
-          <div className="space-y-1 max-h-[320px] overflow-y-auto pr-2">
-            {sortedPayload.map((p: any, idx: number) => {
-              const project = projects.find(pr => pr.ticker === p.name);
-              return (
-                <div 
-                  key={p.name} 
-                  className="flex items-center justify-between gap-3 text-xs py-0.5 hover:bg-white/5 px-1 rounded"
-                >
-                  <div className="flex items-center gap-2">
-                    <span className="text-slate-500 font-mono w-4 text-right">
-                      {idx + 1}
-                    </span>
-                    <span 
-                      className="w-2 h-2 rounded-full flex-shrink-0" 
-                      style={{ backgroundColor: p.color }}
-                    />
-                    <span className="text-slate-200 font-medium truncate max-w-[80px]">
-                      {p.name}
-                    </span>
-                    {project?.trend === 'up' && <TrendingUp className="w-3 h-3 text-emerald-400" />}
-                    {project?.trend === 'down' && <TrendingDown className="w-3 h-3 text-rose-400" />}
-                  </div>
-                  <span className="text-white font-mono font-semibold tabular-nums">
-                    {typeof p.value === 'number' ? p.value.toFixed(2) : '-'}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      );
-    }
-    return null;
-  };
 
   // 범례 클릭 핸들러
   const handleLegendClick = (ticker: string) => {
@@ -157,169 +97,245 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
     });
   };
 
-  // 커스텀 범례
-  const CustomLegend = () => (
-    <div className="flex flex-wrap gap-1.5 justify-center px-4">
-      {projects.slice(0, 20).map((project) => {
-        const isSelected = selectedTickers.size === 0 || selectedTickers.has(project.ticker);
-        const isHovered = hoveredTicker === project.ticker;
-        const currentValue = project.sparkline?.[project.sparkline.length - 1] ?? 0;
-        
-        return (
-          <button
-            key={project.ticker}
-            onClick={() => handleLegendClick(project.ticker)}
-            onMouseEnter={() => setHoveredTicker(project.ticker)}
-            onMouseLeave={() => setHoveredTicker(null)}
-            className={`
-              flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium
-              transition-all duration-200 border
-              ${isSelected 
-                ? 'bg-slate-800/80 border-slate-600/50 text-white' 
-                : 'bg-slate-900/50 border-slate-800/30 text-slate-500'
-              }
-              ${isHovered ? 'ring-1 ring-white/40 scale-105 z-10' : ''}
-              hover:bg-slate-700/60
-            `}
-          >
-            <span 
-              className="w-2.5 h-2.5 rounded-sm flex-shrink-0"
-              style={{ 
-                backgroundColor: colorMap[project.ticker],
-                boxShadow: isHovered ? `0 0 8px ${colorMap[project.ticker]}` : 'none'
-              }}
-            />
-            <span className="truncate max-w-[60px]">{project.ticker}</span>
-            <span className="text-slate-500 font-mono text-[10px]">#{project.rank}</span>
-          </button>
-        );
-      })}
-    </div>
-  );
+  // 커스텀 툴팁
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      const sortedPayload = [...payload].sort((a, b) => (b.value || 0) - (a.value || 0));
+      
+      return (
+        <div className="bg-background/95 border border-white/[0.08] p-4 rounded-xl shadow-2xl backdrop-blur-xl min-w-[180px]">
+          <p className="text-muted-foreground text-xs mb-3 font-mono border-b border-white/[0.06] pb-2">
+            {label}
+          </p>
+          <div className="space-y-1.5 max-h-[280px] overflow-y-auto">
+            {sortedPayload.slice(0, 10).map((p: any, idx: number) => {
+              const project = projects.find(pr => pr.ticker === p.name);
+              return (
+                <div 
+                  key={p.name} 
+                  className="flex items-center justify-between gap-3 text-xs"
+                >
+                  <div className="flex items-center gap-2">
+                    <span className="text-muted-foreground/50 font-mono w-4 text-right text-[10px]">
+                      {idx + 1}
+                    </span>
+                    <span 
+                      className="w-1.5 h-1.5 rounded-full" 
+                      style={{ backgroundColor: p.color }}
+                    />
+                    <span className="text-foreground/90 font-medium">
+                      {p.name}
+                    </span>
+                  </div>
+                  <span className="text-foreground font-mono font-semibold">
+                    {typeof p.value === 'number' ? p.value.toFixed(2) : '-'}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      );
+    }
+    return null;
+  };
 
   if (chartData.length === 0) {
     return (
-      <div className="w-full h-[600px] bg-[#131722] rounded-xl border border-slate-800 flex items-center justify-center">
+      <div className="w-full h-[600px] bg-background rounded-xl border border-white/[0.06] flex items-center justify-center">
         <div className="text-center">
-          <p className="text-slate-500 mb-2">No sparkline data available</p>
-          <p className="text-slate-600 text-sm">Historical data will appear here once collected</p>
+          <LineChartIcon className="w-12 h-12 text-primary/30 mx-auto mb-4" />
+          <p className="text-muted-foreground mb-1">No historical data available</p>
+          <p className="text-muted-foreground/50 text-sm">Sparkline data will appear once collected</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full bg-[#131722] rounded-xl border border-slate-800 shadow-xl overflow-hidden">
-      {/* 헤더 - TradingView 스타일 */}
-      <div className="flex justify-between items-center px-4 py-3 border-b border-slate-800/50 bg-[#1E222D]">
+    <div className="w-full bg-background rounded-xl border border-white/[0.06] overflow-hidden">
+      {/* 미니멀 헤더 */}
+      <div className="flex justify-between items-center px-5 py-4 border-b border-white/[0.06]">
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2">
-            <span className="w-1 h-6 bg-teal-500 rounded-full" />
-            <h2 className="text-base font-bold text-white">
-              K-Mindshare Battle
-            </h2>
-          </div>
-          <span className="text-[10px] font-medium text-teal-400 bg-teal-500/10 px-2 py-0.5 rounded-full border border-teal-500/20">
-            7D CHART
+          <h2 className="text-sm font-medium text-foreground tracking-wide">
+            Mindshare Trends
+          </h2>
+          <span className="text-[10px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+            7D
           </span>
         </div>
-        <div className="flex items-center gap-4 text-xs text-slate-500">
-          <span className="hidden sm:inline">Click legend to filter • Hover to highlight</span>
-          <span className="font-mono bg-slate-800/50 px-2 py-0.5 rounded">
-            {Math.min(projects.length, 20)} projects
-          </span>
-        </div>
+        <p className="text-xs text-muted-foreground/60 hidden sm:block">
+          Click to filter · Hover to highlight
+        </p>
       </div>
 
-      {/* 차트 영역 */}
-      <div className="h-[500px] p-4">
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart 
-            data={chartData} 
-            margin={{ top: 10, right: 30, left: 0, bottom: 10 }}
-          >
-            {/* TradingView 스타일 그리드 */}
-            <CartesianGrid 
-              strokeDasharray="1 4" 
-              stroke="#2A2E39" 
-              vertical={false} 
-            />
-            
-            <XAxis 
-              dataKey="time" 
-              stroke="#787B86" 
-              tick={{ fill: '#787B86', fontSize: 11 }} 
-              tickLine={false}
-              axisLine={{ stroke: '#2A2E39' }}
-              interval="preserveStartEnd"
-            />
-            <YAxis 
-              stroke="#787B86" 
-              tick={{ fill: '#787B86', fontSize: 11 }} 
-              tickLine={false}
-              axisLine={false}
-              domain={['auto', 'auto']}
-              width={50}
-              tickFormatter={(val) => val.toFixed(1)}
-            />
-            
-            <Tooltip 
-              content={<CustomTooltip />} 
-              cursor={{ stroke: '#363A45', strokeWidth: 1 }} 
-            />
-            
-            {/* 기준선 */}
-            <ReferenceLine y={0} stroke="#363A45" strokeDasharray="3 3" />
+      <div className="flex flex-col lg:flex-row">
+        {/* 차트 영역 */}
+        <div className="flex-1 h-[480px] p-4">
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart 
+              data={chartData} 
+              margin={{ top: 10, right: 20, left: 0, bottom: 10 }}
+            >
+              <CartesianGrid 
+                strokeDasharray="2 6" 
+                stroke="hsl(var(--border))" 
+                strokeOpacity={0.3}
+                vertical={false} 
+              />
+              
+              <XAxis 
+                dataKey="time" 
+                stroke="hsl(var(--muted-foreground))"
+                tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10, opacity: 0.5 }} 
+                tickLine={false}
+                axisLine={false}
+                interval="preserveStartEnd"
+              />
+              <YAxis 
+                stroke="hsl(var(--muted-foreground))"
+                tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10, opacity: 0.5 }} 
+                tickLine={false}
+                axisLine={false}
+                domain={['auto', 'auto']}
+                width={40}
+                tickFormatter={(val) => val.toFixed(1)}
+              />
+              
+              <Tooltip 
+                content={<CustomTooltip />} 
+                cursor={{ stroke: 'hsl(var(--primary))', strokeWidth: 1, strokeDasharray: '4 4', opacity: 0.5 }} 
+              />
+              
+              <ReferenceLine y={0} stroke="hsl(var(--border))" strokeOpacity={0.3} />
 
-            {/* 20개 라인 생성 */}
-            {projects.slice(0, 20).map((project) => {
-              const isHovered = hoveredTicker === project.ticker;
+              {/* 라인 렌더링 */}
+              {projects.slice(0, 20).map((project) => {
+                const isHovered = hoveredTicker === project.ticker;
+                const isSelected = selectedTickers.size === 0 || selectedTickers.has(project.ticker);
+                const isAnyHovered = hoveredTicker !== null;
+                
+                let opacity = 0.7;
+                let strokeWidth = 1.5;
+                
+                if (selectedTickers.size > 0) {
+                  opacity = isSelected ? 0.85 : 0.05;
+                  strokeWidth = isSelected ? 2 : 1;
+                }
+                
+                if (isAnyHovered) {
+                  opacity = isHovered ? 1 : 0.05;
+                  strokeWidth = isHovered ? 3 : 1;
+                }
+
+                return (
+                  <Line
+                    key={project.ticker}
+                    type="monotone"
+                    dataKey={project.ticker}
+                    stroke={colorMap[project.ticker]}
+                    strokeWidth={strokeWidth}
+                    opacity={opacity}
+                    dot={false}
+                    activeDot={{ 
+                      r: 5, 
+                      strokeWidth: 2,
+                      stroke: 'hsl(var(--background))',
+                      fill: colorMap[project.ticker]
+                    }}
+                    style={{
+                      transition: 'opacity 0.2s ease, stroke-width 0.2s ease',
+                      filter: isHovered ? `drop-shadow(0 0 6px ${colorMap[project.ticker]}80)` : 'none'
+                    }}
+                  />
+                );
+              })}
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* 사이드바 범례 (데스크탑) */}
+        <div className="hidden lg:block w-[200px] border-l border-white/[0.06] p-3 overflow-y-auto max-h-[480px]">
+          <p className="text-[10px] text-muted-foreground/50 uppercase tracking-wider mb-3 px-1">
+            Projects
+          </p>
+          <div className="space-y-0.5">
+            {sortedByCurrentValue.slice(0, 20).map((project) => {
               const isSelected = selectedTickers.size === 0 || selectedTickers.has(project.ticker);
-              const isAnyHovered = hoveredTicker !== null;
+              const isHovered = hoveredTicker === project.ticker;
+              const currentValue = project.sparkline?.[project.sparkline.length - 1] ?? 0;
               
-              // 호버/선택 상태에 따른 스타일
-              let opacity = 0.85;
-              let strokeWidth = 2;
-              
-              if (selectedTickers.size > 0) {
-                opacity = isSelected ? 0.9 : 0.08;
-                strokeWidth = isSelected ? 2.5 : 1;
-              }
-              
-              if (isAnyHovered) {
-                opacity = isHovered ? 1 : (isSelected ? 0.2 : 0.05);
-                strokeWidth = isHovered ? 3.5 : (isSelected ? 1.5 : 1);
-              }
-
               return (
-                <Line
+                <button
                   key={project.ticker}
-                  type="monotone"
-                  dataKey={project.ticker}
-                  stroke={colorMap[project.ticker]}
-                  strokeWidth={strokeWidth}
-                  opacity={opacity}
-                  dot={false}
-                  activeDot={{ 
-                    r: 6, 
-                    strokeWidth: 2,
-                    stroke: '#fff',
-                    fill: colorMap[project.ticker]
-                  }}
-                  style={{
-                    transition: 'opacity 0.3s ease, stroke-width 0.3s ease',
-                    filter: isHovered ? `drop-shadow(0 0 8px ${colorMap[project.ticker]})` : 'none'
-                  }}
-                />
+                  onClick={() => handleLegendClick(project.ticker)}
+                  onMouseEnter={() => setHoveredTicker(project.ticker)}
+                  onMouseLeave={() => setHoveredTicker(null)}
+                  className={`
+                    w-full flex items-center justify-between gap-2 px-2 py-1.5 rounded-md text-xs
+                    transition-all duration-150
+                    ${isSelected ? 'text-foreground' : 'text-muted-foreground/30'}
+                    ${isHovered ? 'bg-white/[0.04]' : 'hover:bg-white/[0.02]'}
+                  `}
+                >
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span 
+                      className="w-2 h-2 rounded-sm flex-shrink-0 transition-all duration-150"
+                      style={{ 
+                        backgroundColor: colorMap[project.ticker],
+                        opacity: isSelected ? 1 : 0.3,
+                        boxShadow: isHovered ? `0 0 8px ${colorMap[project.ticker]}` : 'none'
+                      }}
+                    />
+                    <span className="truncate font-medium">{project.ticker}</span>
+                    {project.trend === 'up' && <TrendingUp className="w-3 h-3 text-emerald-500/70 flex-shrink-0" />}
+                    {project.trend === 'down' && <TrendingDown className="w-3 h-3 text-rose-500/70 flex-shrink-0" />}
+                  </div>
+                  <span className="font-mono text-[10px] text-muted-foreground/60 flex-shrink-0">
+                    {currentValue.toFixed(1)}
+                  </span>
+                </button>
               );
             })}
-          </LineChart>
-        </ResponsiveContainer>
+          </div>
+        </div>
       </div>
 
-      {/* 커스텀 범례 */}
-      <div className="border-t border-slate-800/50 bg-[#1E222D]/50 py-3">
-        <CustomLegend />
+      {/* 하단 범례 (모바일) */}
+      <div className="lg:hidden border-t border-white/[0.06] p-3 overflow-x-auto">
+        <div className="flex gap-2 min-w-max">
+          {projects.slice(0, 20).map((project) => {
+            const isSelected = selectedTickers.size === 0 || selectedTickers.has(project.ticker);
+            const isHovered = hoveredTicker === project.ticker;
+            
+            return (
+              <button
+                key={project.ticker}
+                onClick={() => handleLegendClick(project.ticker)}
+                onMouseEnter={() => setHoveredTicker(project.ticker)}
+                onMouseLeave={() => setHoveredTicker(null)}
+                className={`
+                  flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium
+                  transition-all duration-150 border whitespace-nowrap
+                  ${isSelected 
+                    ? 'bg-white/[0.04] border-white/[0.08] text-foreground' 
+                    : 'bg-transparent border-transparent text-muted-foreground/40'
+                  }
+                  ${isHovered ? 'border-white/[0.15]' : ''}
+                `}
+              >
+                <span 
+                  className="w-1.5 h-1.5 rounded-sm"
+                  style={{ 
+                    backgroundColor: colorMap[project.ticker],
+                    opacity: isSelected ? 1 : 0.4
+                  }}
+                />
+                {project.ticker}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
