@@ -106,7 +106,14 @@ const KInfluenceGrid = () => {
       sparkline: project.sparkline || [],
       logo_url: project.logo_url,
       rank: project.rank,
-      token_status: project.token_status
+      token_status: project.token_status,
+      // Price data
+      price: project.price,
+      market_cap: project.market_cap,
+      change_24h: project.change_24h,
+      // Social links
+      twitter_url: project.twitter_url,
+      website_url: project.website_url,
     }));
   }, [projects, tokenStatus, searchQuery]);
 
