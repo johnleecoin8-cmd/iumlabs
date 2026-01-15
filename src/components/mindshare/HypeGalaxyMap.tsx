@@ -153,9 +153,9 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
   }
 
   return (
-    <div className="w-full bg-background rounded-xl border border-white/[0.06] overflow-hidden">
+    <div className="w-full h-full bg-background rounded-xl border border-white/[0.06] overflow-hidden flex flex-col">
       {/* 미니멀 헤더 */}
-      <div className="flex justify-between items-center px-5 py-4 border-b border-white/[0.06]">
+      <div className="flex justify-between items-center px-5 py-3 border-b border-white/[0.06] flex-shrink-0">
         <h2 className="text-sm font-medium text-foreground tracking-wide">
           Mindshare Trends
         </h2>
@@ -164,9 +164,9 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
         </p>
       </div>
 
-      <div className="flex flex-col lg:flex-row">
+      <div className="flex flex-col lg:flex-row flex-1 min-h-0">
         {/* 차트 영역 */}
-        <div className="flex-1 h-[480px] p-4">
+        <div className="flex-1 min-h-[400px] lg:min-h-0 p-4">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart 
               data={chartData} 
@@ -251,7 +251,7 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
 
         {/* 사이드바 범례 (데스크탑) - Custom scrollbar */}
         <div 
-          className="hidden lg:block w-[200px] border-l border-white/[0.06] p-3 max-h-[480px] overflow-y-auto
+          className="hidden lg:block w-[200px] border-l border-white/[0.06] p-3 overflow-y-auto flex-shrink-0
             [&::-webkit-scrollbar]:w-1
             [&::-webkit-scrollbar-track]:bg-transparent
             [&::-webkit-scrollbar-thumb]:bg-white/10
