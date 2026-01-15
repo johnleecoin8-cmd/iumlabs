@@ -13,32 +13,36 @@ const brandConfig = {
   office: brand.address
 };
 const footerLinks = {
-  services: {
-    title: "Services",
+  marketing: {
+    title: "Marketing",
     links: [{
       name: "GTM Strategy",
       href: "/services"
     }, {
-      name: "Branding & Website",
-      href: "/services/branding"
-    }, {
-      name: "SEO & Paid Ads",
-      href: "/services/seo-ads"
-    }, {
-      name: "Offline Events",
-      href: "/services/offline-event"
-    }, {
-      name: "Community Management",
-      href: "/services/community"
+      name: "PR & Media",
+      href: "/services/pr"
     }, {
       name: "Influencer / KOL",
       href: "/services/influencer"
     }, {
       name: "YAP Network",
       href: "/services/yap"
+    }]
+  },
+  growth: {
+    title: "Growth",
+    links: [{
+      name: "Community Management",
+      href: "/services/community"
     }, {
-      name: "PR & Media",
-      href: "/services/pr"
+      name: "Offline Events",
+      href: "/services/offline-event"
+    }, {
+      name: "Branding & Website",
+      href: "/services/branding"
+    }, {
+      name: "SEO & Paid Ads",
+      href: "/services/seo-ads"
     }]
   },
   company: {
@@ -53,7 +57,7 @@ const footerLinks = {
       name: "Careers",
       href: "/jobs"
     }, {
-      name: "Contact Us",
+      name: "Contact",
       href: "/contact"
     }]
   },
@@ -93,69 +97,56 @@ const FooterLinksSection = () => {
         <div className="w-full px-6 lg:px-10 py-6 md:py-8">
           {/* Navigation Links Grid - SEO Sitemap Footer */}
           <nav className="py-8 md:py-10 border-b border-border" aria-label="Footer navigation">
-            {/* Top row: Services + Company on mobile, all 4 on desktop */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-              {/* Services Column */}
+            {/* Grid: 2 cols mobile, 5 cols desktop */}
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-8">
+              {/* Marketing Column */}
               <div>
                 <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 md:mb-6 font-mono">
-                  {footerLinks.services.title}
+                  {footerLinks.marketing.title}
                 </h4>
                 <ul className="space-y-2 md:space-y-3">
-                  {footerLinks.services.links.map(link => <li key={link.name}>
+                  {footerLinks.marketing.links.map(link => (
+                    <li key={link.name}>
                       <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
                         {link.name}
                       </Link>
-                    </li>)}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
-              {/* Company Column - with Contact below on mobile */}
-              <div className="flex flex-col">
-                <div>
-                  <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 md:mb-6 font-mono">
-                    {footerLinks.company.title}
-                  </h4>
-                  <ul className="space-y-2 md:space-y-3">
-                    {footerLinks.company.links.map(link => <li key={link.name}>
-                        <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
-                          {link.name}
-                        </Link>
-                      </li>)}
-                  </ul>
-                </div>
-                
-                {/* Contact Info - Mobile only, directly below Company */}
-                <div className="mt-6 md:hidden">
-                  <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 font-mono">
-                    Contact
-                  </h4>
-                  <ul className="space-y-3">
-                    <li>
-                      <a href={`mailto:${brandConfig.email}`} className="group flex items-start gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
-                        <Mail className="w-4 h-4 mt-0.5 shrink-0" />
-                        <span className="break-all">{brandConfig.email}</span>
-                      </a>
+              {/* Growth Column */}
+              <div>
+                <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 md:mb-6 font-mono">
+                  {footerLinks.growth.title}
+                </h4>
+                <ul className="space-y-2 md:space-y-3">
+                  {footerLinks.growth.links.map(link => (
+                    <li key={link.name}>
+                      <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
+                        {link.name}
+                      </Link>
                     </li>
-                    <li>
-                      <a href={brandConfig.telegram} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
-                        <Send className="w-4 h-4 mt-0.5 shrink-0" />
-                        <span>Telegram</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href={brandConfig.linkedin} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
-                        <ArrowUpRight className="w-4 h-4 mt-0.5 shrink-0" />
-                        <span>LinkedIn</span>
-                      </a>
-                    </li>
-                    <li className="flex items-start gap-2 text-muted-foreground/70 text-xs">
-                      <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0" />
-                      <span>{brandConfig.office}</span>
-                    </li>
-                  </ul>
-                </div>
+                  ))}
+                </ul>
+              </div>
 
-                {/* Legal - Mobile only, below Contact */}
+              {/* Company Column */}
+              <div>
+                <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 md:mb-6 font-mono">
+                  {footerLinks.company.title}
+                </h4>
+                <ul className="space-y-2 md:space-y-3">
+                  {footerLinks.company.links.map(link => (
+                    <li key={link.name}>
+                      <Link to={link.href} className="text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm inline-block">
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                
+                {/* Legal - Mobile only, below Company */}
                 <div className="mt-6 md:hidden">
                   <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 font-mono">
                     {footerLinks.legal.title}
@@ -188,7 +179,34 @@ const FooterLinksSection = () => {
                 </div>
               </div>
 
-              {/* Legal Column - Hidden on mobile, shown in grid on desktop */}
+              {/* Connect Column - Hidden on mobile */}
+              <div className="hidden md:block">
+                <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-6 font-mono">
+                  Connect
+                </h4>
+                <ul className="space-y-3">
+                  <li>
+                    <a href={`mailto:${brandConfig.email}`} className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm">
+                      <Mail className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                      <span>{brandConfig.email}</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href={brandConfig.telegram} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm">
+                      <Send className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                      <span>Telegram</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href={brandConfig.linkedin} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm">
+                      <ArrowUpRight className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                      <span>LinkedIn</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Legal + Address Column - Hidden on mobile */}
               <div className="hidden md:block">
                 <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-6 font-mono">
                   {footerLinks.legal.title}
@@ -218,37 +236,35 @@ const FooterLinksSection = () => {
                     </li>
                   ))}
                 </ul>
+                <div className="mt-6 flex items-start gap-3 text-muted-foreground/70 text-xs">
+                  <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                  <span>{brandConfig.office}</span>
+                </div>
               </div>
 
-              {/* Contact Info Column - Hidden on mobile, shown in grid on desktop */}
-              <div className="hidden md:block">
-                <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-6 font-mono">
-                  Contact
+              {/* Mobile Connect Row - spans full width */}
+              <div className="col-span-2 md:hidden mt-4 pt-6 border-t border-border">
+                <h4 className="text-xs uppercase tracking-widest text-muted-foreground mb-4 font-mono">
+                  Connect
                 </h4>
-                <ul className="space-y-4">
-                  <li>
-                    <a href={`mailto:${brandConfig.email}`} className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm">
-                      <Mail className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
-                      <span>{brandConfig.email}</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href={brandConfig.telegram} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm">
-                      <Send className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:scale-110" />
-                      <span>Telegram</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href={brandConfig.linkedin} target="_blank" rel="noopener noreferrer" className="group flex items-start gap-3 text-muted-foreground hover:text-foreground hover:translate-x-1 transition-all duration-300 text-sm">
-                      <ArrowUpRight className="w-4 h-4 mt-0.5 shrink-0 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                      <span>LinkedIn</span>
-                    </a>
-                  </li>
-                  <li className="flex items-start gap-3 text-muted-foreground/70 text-sm">
-                    <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-                    <span>{brandConfig.office}</span>
-                  </li>
-                </ul>
+                <div className="flex flex-wrap gap-4">
+                  <a href={`mailto:${brandConfig.email}`} className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
+                    <Mail className="w-4 h-4" />
+                    <span>Email</span>
+                  </a>
+                  <a href={brandConfig.telegram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
+                    <Send className="w-4 h-4" />
+                    <span>Telegram</span>
+                  </a>
+                  <a href={brandConfig.linkedin} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 text-sm">
+                    <ArrowUpRight className="w-4 h-4" />
+                    <span>LinkedIn</span>
+                  </a>
+                </div>
+                <div className="mt-4 flex items-start gap-2 text-muted-foreground/60 text-xs">
+                  <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0" />
+                  <span>{brandConfig.office}</span>
+                </div>
               </div>
             </div>
           </nav>
