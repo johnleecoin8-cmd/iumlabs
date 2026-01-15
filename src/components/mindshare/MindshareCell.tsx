@@ -325,10 +325,10 @@ const MindshareCell = ({
         </svg>
       )}
 
-      {/* Content - better spacing, top 1/3 for text */}
+      {/* Content - better spacing with breathing room from edges */}
       <div className={cn(
         "relative z-10 flex flex-col justify-between h-full",
-        size === 'large' ? 'p-2.5 sm:p-4' : size === 'medium' ? 'p-2 sm:p-2.5' : 'p-1 sm:p-1.5'
+        size === 'large' ? 'p-4 sm:p-5' : size === 'medium' ? 'p-3 sm:p-4' : 'p-2 sm:p-2.5'
       )}>
         {/* Top section - Hero: Ticker + % */}
         <div className="flex items-start justify-between gap-1">
