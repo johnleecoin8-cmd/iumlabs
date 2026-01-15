@@ -23,85 +23,79 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 70, label: "KOL Network", suffix: "+" },
-  { value: 15, label: "Total Reach", suffix: "M+" },
-  { value: 15, label: "Campaigns Delivered", suffix: "+" },
-  { value: 4, label: "Avg Engagement", suffix: "x" },
+  { value: 70, label: "Elite KOL Network", suffix: "+" },
+  { value: 15, label: "Total Combined Reach", suffix: "M+" },
+  { value: 15, label: "Successful Campaigns", suffix: "+" },
+  { value: 4, label: "Average Engagement Rate", suffix: "x" },
 ];
 
 const processSteps: ProcessStep[] = [
   { 
     number: "01", 
     title: "Discovery", 
-    description: "Identify ideal KOL profiles matching your project's narrative and target audience.", 
+    description: "We find the KOLs who speak your language and share your audience.", 
     icon: Target 
   },
   { 
     number: "02", 
     title: "Outreach", 
-    description: "Negotiate terms, align on messaging, and coordinate campaign timelines.", 
+    description: "We handle the negotiations and align everyone on the mission.", 
     icon: Users 
   },
   { 
     number: "03", 
     title: "Activation", 
-    description: "Launch coordinated content across platforms with real-time monitoring.", 
+    description: "Content goes live across X, YouTube, and Telegram with real-time monitoring.", 
     icon: TrendingUp 
   },
   { 
     number: "04", 
     title: "Amplification", 
-    description: "Analyze performance and optimize for maximum reach and engagement.", 
+    description: "We analyze the wins and optimize for maximum lasting impact.", 
     icon: Sparkles 
   },
 ];
 
 const deliverables: Deliverable[] = [
   {
-    title: "KOL Selection",
+    title: "Smart Selection",
     items: [
-      "Curated KOL shortlist",
-      "Audience analysis report",
-      "Engagement rate verification",
-      "Brand fit assessment",
+      "The Shortlist: We don't just send a list; we curate a selection of KOLs who actually fit your project's vibe",
+      "Vibe Check: We verify engagement rates and audience quality to make sure you're not paying for bots",
     ],
   },
   {
-    title: "Campaign Management",
+    title: "Full Management",
     items: [
-      "Messaging & brief creation",
-      "Content approval workflow",
-      "Posting schedule coordination",
-      "Real-time monitoring",
+      "Narrative Shaping: We help craft the messaging so the content feels organic, not like a scripted ad",
+      "Coordination: We handle the outreach, the brief, and the posting schedule so you don't have to manage 20 different DM threads",
     ],
   },
   {
-    title: "Reporting & Analytics",
+    title: "Data & Analytics",
     items: [
-      "Campaign performance report",
-      "ROI analysis",
-      "Audience insights",
-      "Recommendations for scale",
+      "Performance Reports: See exactly how your campaign performed with clear ROI and engagement data",
+      "Scaling Tips: We tell you which creators worked best and how to double down for the next round",
     ],
   },
 ];
 
 const faqItems: FAQItem[] = [
   {
-    question: "Do you have a Korean KOL network?",
-    answer: "Yes, we have a network of 50+ Korean crypto KOLs specializing in DeFi, NFT, trading, and research. We also connect you with bilingual Korean/English KOLs.",
+    question: "Do you have a specialized Korean KOL network?",
+    answer: "Yes. Beyond the global names, we have deep ties with Korea's top crypto YouTubers, Telegram alpha callers, and Naver bloggers who dominate the local scene.",
   },
   {
-    question: "Do you work with Korean YouTubers and bloggers?",
-    answer: "Absolutely. We have an influencer network on Korean local platforms including Naver Blog, YouTube crypto channels, and Tistory. This enables effective content distribution for Korean SEO.",
+    question: "What's the budget for a KOL campaign?",
+    answer: "It varies. We can run anything from a targeted 'micro-KOL' blitz to a massive campaign with top-tier influencers. We'll help you build a plan that fits your goals.",
   },
   {
-    question: "What's the typical KOL campaign budget?",
-    answer: "Budgets vary by KOL tier and campaign scope. Micro-influencer campaigns start from $5K, while multi-KOL launches can range $100K+. We recommend optimal combinations based on your goals.",
+    question: "How do you measure success?",
+    answer: "We look at more than just likes. We track reach, engagement quality, and sentiment to make sure people are actually talking about your project in a positive way.",
   },
   {
-    question: "How do you measure campaign performance?",
-    answer: "We track impressions, engagement rate, follower growth, website traffic, and community signups. For token projects, we also correlate with on-chain metrics like holder growth.",
+    question: "Is the content organic?",
+    answer: "We prioritize authenticity. We work with KOLs who actually like your tech, so their threads and videos feel like a natural part of the conversation.",
   },
 ];
 
@@ -148,9 +142,9 @@ const InfluencerService = () => {
   return (
     <ServicePageLayout
       serviceName="Influencer/KOL"
-      serviceTitle="Access Our"
+      serviceTitle="Influencer &"
       serviceSubtitle="KOL Network"
-      serviceDescription="Access our exclusive network of 70+ crypto KOLs and reach 15M+ engaged followers across X, YouTube, and Telegram."
+      serviceDescription="Get the right eyes on your project. We connect you with our hand-picked network of 70+ elite crypto KOLs, reaching over 15M+ followers across X, YouTube, and Telegram. We don't just 'shill'—we build narratives."
       serviceIcon={Star}
       serviceTags={serviceTags}
       stats={stats}
@@ -165,9 +159,15 @@ const InfluencerService = () => {
       {/* KOL Network Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          <SectionHeader title="KOL Network" badge="Featured Creators" />
+          <SectionHeader title="Featured Creators" badge="Global & Local Legends" />
+          
+          <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-4">
+            <p className="text-white/60 text-sm max-w-3xl">
+              From global giants like Pentoshi, Cobie, and Miles Deutscher to the most influential voices in the Korean market, we provide direct access to the creators who move the needle.
+            </p>
+          </div>
 
-          <div className="py-8 md:py-12">
+          <div className="py-6 md:py-10">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                 {kolProfiles.map((kol) => (
