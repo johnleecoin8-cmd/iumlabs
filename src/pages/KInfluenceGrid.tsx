@@ -243,15 +243,19 @@ const KInfluenceGrid = () => {
                 <span className="text-sm font-semibold text-white/80 hidden sm:block">Top 20</span>
 
                 {/* Channel stats - Dynamic */}
-                <div className="hidden md:flex items-center gap-2 text-[10px] text-white/30">
-                  <span className="px-2 py-0.5 bg-white/[0.03] rounded border border-white/[0.06]">
-                    {stats.channelCount} Channels
-                  </span>
-                  <span className="px-2 py-0.5 bg-white/[0.03] rounded border border-white/[0.06]">
-                    {stats.sourceCount >= 1000 
-                      ? `${Math.floor(stats.sourceCount / 1000)}K+` 
-                      : `${stats.sourceCount}+`} Sources
-                  </span>
+                <div className="hidden md:flex items-center gap-3 text-xs">
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-teal-500/5 rounded-lg border border-teal-500/20">
+                    <div className="w-1.5 h-1.5 rounded-full bg-teal-400" />
+                    <span className="text-teal-400 font-medium">{stats.channelCount} Channels</span>
+                  </div>
+                  <div className="flex items-center gap-2 px-3 py-1.5 bg-violet-500/5 rounded-lg border border-violet-500/20">
+                    <div className="w-1.5 h-1.5 rounded-full bg-violet-400" />
+                    <span className="text-violet-400 font-medium">
+                      {stats.sourceCount >= 1000 
+                        ? `${Math.floor(stats.sourceCount / 1000)}K+` 
+                        : `${stats.sourceCount}+`} Sources
+                    </span>
+                  </div>
                 </div>
               </div>
 
