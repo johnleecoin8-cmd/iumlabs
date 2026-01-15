@@ -188,47 +188,47 @@ const ContactFormSection = ({
               {/* Name & Email Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                 <div>
-                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Name *</label>
+                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Name *</label>
                   <input type="text" placeholder="Your name" value={formData.name} onChange={e => setFormData({
                   ...formData,
                   name: e.target.value
-                })} required className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
+                })} required className="w-full bg-transparent border-b border-white/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/60 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
                 </div>
                 <div>
-                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Email *</label>
-                  <input type="text" placeholder="your@email.com" value={formData.email} onChange={e => setFormData({
+                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Email *</label>
+                  <input type="email" placeholder="your@email.com" value={formData.email} onChange={e => setFormData({
                   ...formData,
                   email: e.target.value
-                })} required className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
+                })} required className="w-full bg-transparent border-b border-white/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/60 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
                 </div>
               </div>
 
               {/* Company & Website Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                 <div>
-                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Company</label>
+                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Company</label>
                   <input type="text" placeholder="Company name" value={formData.company} onChange={e => setFormData({
                   ...formData,
                   company: e.target.value
-                })} className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
+                })} className="w-full bg-transparent border-b border-white/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/60 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
                 </div>
                 <div>
-                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Website</label>
-                  <input type="text" placeholder="https://..." value={formData.website} onChange={e => setFormData({
+                  <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Website</label>
+                  <input type="url" placeholder="https://..." value={formData.website} onChange={e => setFormData({
                   ...formData,
                   website: e.target.value
-                })} className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
+                })} className="w-full bg-transparent border-b border-white/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/60 focus:border-white focus:outline-none transition-colors min-h-[44px]" />
                 </div>
               </div>
 
               {/* Budget */}
               <div>
-                <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-3 sm:mb-4">Budget *</label>
+                <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/70 mb-3 sm:mb-4">Budget *</label>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-3">
-                  {budgetOptions.map(option => <button key={option} type="button" onClick={() => setFormData({
+                {budgetOptions.map(option => <button key={option} type="button" onClick={() => setFormData({
                   ...formData,
                   budget: option
-                })} className={`px-3 sm:px-5 py-2 sm:py-3 text-[11px] sm:text-sm border transition-all min-h-[40px] sm:min-h-[48px] font-medium active:scale-[0.97] ${formData.budget === option ? 'bg-white/15 border-white text-white' : 'bg-transparent border-white/25 text-white/65 hover:border-white/45 hover:text-white active:bg-white/15'}`}>
+                })} className={`px-3 sm:px-5 py-2 sm:py-3 text-[11px] sm:text-sm border transition-all min-h-[40px] sm:min-h-[48px] font-medium active:scale-[0.97] ${formData.budget === option ? 'bg-white/20 border-white text-white' : 'bg-transparent border-white/40 text-white/80 hover:border-white/60 hover:text-white active:bg-white/15'}`}>
                       {option}
                     </button>)}
                 </div>
@@ -236,11 +236,11 @@ const ContactFormSection = ({
 
               {/* Project Details */}
               <div>
-                <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/50 mb-2 sm:mb-3">Project Details *</label>
+                <label className="block text-[10px] sm:text-label uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Project Details *</label>
                 <textarea placeholder="Tell us about your project..." value={formData.message} onChange={e => setFormData({
                 ...formData,
                 message: e.target.value
-              })} rows={3} className="w-full bg-transparent border-b border-white/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/35 focus:border-white focus:outline-none transition-colors resize-none min-h-[80px]" />
+              })} rows={3} className="w-full bg-transparent border-b border-white/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-white placeholder:text-white/60 focus:border-white focus:outline-none transition-colors resize-none min-h-[80px]" />
               </div>
 
               {/* Submit Button */}

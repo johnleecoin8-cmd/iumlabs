@@ -259,14 +259,14 @@ const GTMContactFormSection = ({
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.1 }}
                       >
-                        <label className="block text-[10px] sm:text-label uppercase tracking-wider text-muted-foreground mb-2 sm:mb-3">Name *</label>
+                        <label className="block text-[10px] sm:text-label uppercase tracking-wider text-foreground/70 mb-2 sm:mb-3">Name *</label>
                         <input
                           type="text"
                           placeholder="Your name"
                           value={formData.name}
                           onChange={e => setFormData({ ...formData, name: e.target.value })}
                           required
-                          className="w-full bg-transparent border-b border-primary/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none transition-colors min-h-[44px]"
+                          className="w-full bg-transparent border-b border-primary/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-foreground/60 focus:border-primary focus:outline-none transition-colors min-h-[44px]"
                         />
                       </motion.div>
                       <motion.div
@@ -274,14 +274,14 @@ const GTMContactFormSection = ({
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.15 }}
                       >
-                        <label className="block text-[10px] sm:text-label uppercase tracking-wider text-muted-foreground mb-2 sm:mb-3">Email *</label>
+                        <label className="block text-[10px] sm:text-label uppercase tracking-wider text-foreground/70 mb-2 sm:mb-3">Email *</label>
                         <input
                           type="email"
                           placeholder="your@email.com"
                           value={formData.email}
                           onChange={e => setFormData({ ...formData, email: e.target.value })}
                           required
-                          className="w-full bg-transparent border-b border-primary/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none transition-colors min-h-[44px]"
+                          className="w-full bg-transparent border-b border-primary/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-foreground/60 focus:border-primary focus:outline-none transition-colors min-h-[44px]"
                         />
                       </motion.div>
                     </div>
@@ -293,13 +293,13 @@ const GTMContactFormSection = ({
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
                       >
-                        <label className="block text-[10px] sm:text-label uppercase tracking-wider text-muted-foreground mb-2 sm:mb-3">Company</label>
+                        <label className="block text-[10px] sm:text-label uppercase tracking-wider text-foreground/70 mb-2 sm:mb-3">Company</label>
                         <input
                           type="text"
                           placeholder="Company name"
                           value={formData.company}
                           onChange={e => setFormData({ ...formData, company: e.target.value })}
-                          className="w-full bg-transparent border-b border-primary/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none transition-colors min-h-[44px]"
+                          className="w-full bg-transparent border-b border-primary/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-foreground/60 focus:border-primary focus:outline-none transition-colors min-h-[44px]"
                         />
                       </motion.div>
                       <motion.div
@@ -307,13 +307,13 @@ const GTMContactFormSection = ({
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.25 }}
                       >
-                        <label className="block text-[10px] sm:text-label uppercase tracking-wider text-muted-foreground mb-2 sm:mb-3">Website</label>
+                        <label className="block text-[10px] sm:text-label uppercase tracking-wider text-foreground/70 mb-2 sm:mb-3">Website</label>
                         <input
                           type="url"
                           placeholder="https://..."
                           value={formData.website}
                           onChange={e => setFormData({ ...formData, website: e.target.value })}
-                          className="w-full bg-transparent border-b border-primary/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none transition-colors min-h-[44px]"
+                          className="w-full bg-transparent border-b border-primary/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-foreground/60 focus:border-primary focus:outline-none transition-colors min-h-[44px]"
                         />
                       </motion.div>
                     </div>
@@ -324,7 +324,7 @@ const GTMContactFormSection = ({
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
                     >
-                      <label className="block text-[10px] sm:text-label uppercase tracking-wider text-muted-foreground mb-3 sm:mb-4">Budget *</label>
+                      <label className="block text-[10px] sm:text-label uppercase tracking-wider text-foreground/70 mb-3 sm:mb-4">Budget *</label>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 sm:gap-3">
                         {budgetOptions.map((option, idx) => (
                           <motion.button
@@ -338,8 +338,8 @@ const GTMContactFormSection = ({
                             transition={{ delay: 0.35 + idx * 0.05 }}
                             className={`px-3 sm:px-5 py-2 sm:py-3 text-[11px] sm:text-sm border transition-all min-h-[40px] sm:min-h-[48px] font-medium rounded-sm ${
                               formData.budget === option
-                                ? 'bg-primary/20 border-primary text-foreground'
-                                : 'bg-transparent border-primary/25 text-muted-foreground hover:border-primary/50 hover:text-foreground'
+                                ? 'bg-primary/25 border-primary text-foreground'
+                                : 'bg-transparent border-primary/40 text-foreground/80 hover:border-primary/60 hover:text-foreground'
                             }`}
                           >
                             {option}
@@ -354,13 +354,13 @@ const GTMContactFormSection = ({
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.5 }}
                     >
-                      <label className="block text-[10px] sm:text-label uppercase tracking-wider text-muted-foreground mb-2 sm:mb-3">Project Details *</label>
+                      <label className="block text-[10px] sm:text-label uppercase tracking-wider text-foreground/70 mb-2 sm:mb-3">Project Details *</label>
                       <textarea
                         placeholder="Tell us about your project..."
                         value={formData.message}
                         onChange={e => setFormData({ ...formData, message: e.target.value })}
                         rows={3}
-                        className="w-full bg-transparent border-b border-primary/25 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-muted-foreground/50 focus:border-primary focus:outline-none transition-colors resize-none min-h-[80px]"
+                        className="w-full bg-transparent border-b border-primary/40 pb-2.5 sm:pb-3 text-sm sm:text-base text-foreground placeholder:text-foreground/60 focus:border-primary focus:outline-none transition-colors resize-none min-h-[80px]"
                       />
                     </motion.div>
 
