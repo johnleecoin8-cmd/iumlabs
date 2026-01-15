@@ -11,8 +11,10 @@ interface HypeProject {
   ticker: string;
   score: number;
   mindshare?: number;
+  mindshare_change?: number; // Percentage change from previous period
   token_status?: 'tge' | 'pre-tge';
   category?: 'tge' | 'pre_tge'; // From Python crawler (uses underscore)
+  narrative?: string; // AI, L2, DePIN, Meme, DeFi, Gaming, etc.
   trend?: string;
   sparkline?: number[];
   logo_url?: string;
@@ -115,7 +117,9 @@ Deno.serve(async (req) => {
               rank: project.rank || 0,
               score: project.score || 0,
               mindshare: project.mindshare || 0,
+              mindshare_change: project.mindshare_change ?? null,
               token_status: tokenStatus,
+              narrative: project.narrative || null,
               trend: project.trend || "neutral",
               sparkline: project.sparkline || [],
               logo_url: project.logo_url || null,

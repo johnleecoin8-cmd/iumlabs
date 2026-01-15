@@ -6,6 +6,8 @@ interface MindshareCellProps {
   ticker: string;
   name: string;
   mindshare: number;
+  mindshareChange?: number | null;
+  narrative?: string | null;
   trend: 'up' | 'down' | 'neutral';
   tokenStatus?: 'tge' | 'pre-tge';
   sparkline?: number[];
@@ -15,10 +17,26 @@ interface MindshareCellProps {
   onClick?: () => void;
 }
 
+// Narrative color mapping - Kaito style
+const narrativeColors: Record<string, { bg: string; text: string; border: string }> = {
+  'AI': { bg: 'bg-violet-500/15', text: 'text-violet-300', border: 'border-violet-400/30' },
+  'L2': { bg: 'bg-blue-500/15', text: 'text-blue-300', border: 'border-blue-400/30' },
+  'DePIN': { bg: 'bg-orange-500/15', text: 'text-orange-300', border: 'border-orange-400/30' },
+  'Meme': { bg: 'bg-pink-500/15', text: 'text-pink-300', border: 'border-pink-400/30' },
+  'DeFi': { bg: 'bg-emerald-500/15', text: 'text-emerald-300', border: 'border-emerald-400/30' },
+  'Gaming': { bg: 'bg-yellow-500/15', text: 'text-yellow-300', border: 'border-yellow-400/30' },
+  'Infra': { bg: 'bg-cyan-500/15', text: 'text-cyan-300', border: 'border-cyan-400/30' },
+  'RWA': { bg: 'bg-amber-500/15', text: 'text-amber-300', border: 'border-amber-400/30' },
+  'NFT': { bg: 'bg-fuchsia-500/15', text: 'text-fuchsia-300', border: 'border-fuchsia-400/30' },
+  'CEX': { bg: 'bg-sky-500/15', text: 'text-sky-300', border: 'border-sky-400/30' },
+};
+
 const MindshareCell = ({
   ticker,
   name,
   mindshare,
+  mindshareChange,
+  narrative,
   trend,
   tokenStatus = 'tge',
   sparkline = [],
@@ -237,36 +255,62 @@ const MindshareCell = ({
             </div>
           </div>
 
-          {/* Pre-TGE badge - refined, smaller on mobile */}
-          {isPreTge && size === 'large' && (
-            <span className={cn(
-              'px-1 sm:px-1.5 py-0.5 text-[7px] sm:text-[9px] font-semibold rounded flex-shrink-0',
-              'bg-gradient-to-r from-cyan-500/20 to-teal-500/20',
-              'text-cyan-300 border border-cyan-400/30',
-              'shadow-[0_0_12px_rgba(34,211,238,0.15)]'
-            )}>
-              PRE
-            </span>
-          )}
+          {/* Badges: Narrative + Pre-TGE */}
+          <div className="flex items-center gap-1 flex-shrink-0">
+            {/* Narrative badge - Kaito style */}
+            {narrative && (size === 'large' || size === 'medium') && (
+              <span className={cn(
+                'px-1 sm:px-1.5 py-0.5 text-[6px] sm:text-[8px] font-semibold rounded',
+                'border',
+                narrativeColors[narrative]?.bg || 'bg-slate-500/15',
+                narrativeColors[narrative]?.text || 'text-slate-300',
+                narrativeColors[narrative]?.border || 'border-slate-400/30',
+              )}>
+                {narrative}
+              </span>
+            )}
+            {/* Pre-TGE badge - refined, smaller on mobile */}
+            {isPreTge && size === 'large' && (
+              <span className={cn(
+                'px-1 sm:px-1.5 py-0.5 text-[7px] sm:text-[9px] font-semibold rounded flex-shrink-0',
+                'bg-gradient-to-r from-cyan-500/20 to-teal-500/20',
+                'text-cyan-300 border border-cyan-400/30',
+                'shadow-[0_0_12px_rgba(34,211,238,0.15)]'
+              )}>
+                PRE
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Bottom section */}
         <div className="flex items-end justify-between">
-          {/* Mindshare percentage - enhanced, mobile optimized */}
-          <div className="flex items-baseline gap-0.5">
-            <span className={cn(
-              'font-bold tracking-tight text-white',
-              'font-[\'Space_Grotesk\',sans-serif]',
-              size === 'large' ? 'text-lg sm:text-2xl' : size === 'medium' ? 'text-sm sm:text-lg' : size === 'small' ? 'text-xs sm:text-sm' : 'text-[10px] sm:text-[11px]'
-            )}>
-              {mindshare.toFixed(size === 'tiny' ? 1 : 2)}
-            </span>
-            <span className={cn(
-              'font-medium text-white/50',
-              size === 'large' ? 'text-xs sm:text-sm' : size === 'medium' ? 'text-[10px] sm:text-xs' : 'text-[8px] sm:text-[9px]'
-            )}>
-              %
-            </span>
+          {/* Mindshare percentage + change */}
+          <div className="flex flex-col gap-0.5">
+            <div className="flex items-baseline gap-0.5">
+              <span className={cn(
+                'font-bold tracking-tight text-white',
+                'font-[\'Space_Grotesk\',sans-serif]',
+                size === 'large' ? 'text-lg sm:text-2xl' : size === 'medium' ? 'text-sm sm:text-lg' : size === 'small' ? 'text-xs sm:text-sm' : 'text-[10px] sm:text-[11px]'
+              )}>
+                {mindshare.toFixed(size === 'tiny' ? 1 : 2)}
+              </span>
+              <span className={cn(
+                'font-medium text-white/50',
+                size === 'large' ? 'text-xs sm:text-sm' : size === 'medium' ? 'text-[10px] sm:text-xs' : 'text-[8px] sm:text-[9px]'
+              )}>
+                %
+              </span>
+            </div>
+            {/* Mindshare change percentage - Kaito style */}
+            {mindshareChange !== undefined && mindshareChange !== null && (size === 'large' || size === 'medium') && (
+              <span className={cn(
+                'text-[9px] sm:text-[11px] font-medium',
+                mindshareChange > 0 ? 'text-emerald-400' : mindshareChange < 0 ? 'text-rose-400' : 'text-white/40'
+              )}>
+                {mindshareChange > 0 ? '+' : ''}{mindshareChange.toFixed(1)}%
+              </span>
+            )}
           </div>
 
           {/* Trend icon with background - only on large and when trend exists */}
