@@ -142,7 +142,7 @@ const ContactFormSection = ({
             </a>
 
             {/* Telegram */}
-            <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between mb-4 sm:mb-7 pb-4 sm:pb-7 border-b border-white/15 hover:border-white/25 transition-colors active:scale-[0.98] min-h-[44px]">
+            <a href={brand.telegramLink} target="_blank" rel="noopener noreferrer" className="group flex items-center justify-between pb-4 sm:pb-7 border-b border-white/15 hover:border-white/25 transition-colors active:scale-[0.98] min-h-[44px]">
               <div className="flex items-start gap-3 sm:gap-4">
                 <Send className="w-4 h-4 sm:w-5 sm:h-5 text-white/40 mt-0.5 flex-shrink-0" />
                 <div>
@@ -152,6 +152,28 @@ const ContactFormSection = ({
               </div>
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
             </a>
+
+            {/* Process Guide */}
+            <div className="mt-6 sm:mt-8 p-4 sm:p-6 bg-white/5 border border-white/10 rounded-lg">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-center">
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-xs text-white/70">1</span>
+                  <span className="text-xs sm:text-sm text-white/70">Fill out the form</span>
+                </div>
+                <ArrowRight className="w-4 h-4 text-white/30 hidden sm:block" />
+                <span className="text-white/30 sm:hidden">↓</span>
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-white/10 flex items-center justify-center text-xs text-white/70">2</span>
+                  <span className="text-xs sm:text-sm text-white/70">Response within 24h</span>
+                </div>
+                <ArrowRight className="w-4 h-4 text-white/30 hidden sm:block" />
+                <span className="text-white/30 sm:hidden">↓</span>
+                <div className="flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center text-xs text-emerald-400">3</span>
+                  <span className="text-xs sm:text-sm text-emerald-400 font-medium">Free consultation</span>
+                </div>
+              </div>
+            </div>
 
             {/* LinkedIn */}
             
