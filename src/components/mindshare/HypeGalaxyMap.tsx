@@ -156,14 +156,9 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
     <div className="w-full bg-background rounded-xl border border-white/[0.06] overflow-hidden">
       {/* 미니멀 헤더 */}
       <div className="flex justify-between items-center px-5 py-4 border-b border-white/[0.06]">
-        <div className="flex items-center gap-3">
-          <h2 className="text-sm font-medium text-foreground tracking-wide">
-            Mindshare Trends
-          </h2>
-          <span className="text-[10px] font-mono text-primary bg-primary/10 px-2 py-0.5 rounded-full">
-            7D
-          </span>
-        </div>
+        <h2 className="text-sm font-medium text-foreground tracking-wide">
+          Mindshare Trends
+        </h2>
         <p className="text-xs text-muted-foreground/60 hidden sm:block">
           Click to filter · Hover to highlight
         </p>

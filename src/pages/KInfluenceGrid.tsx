@@ -381,16 +381,13 @@ const KInfluenceGrid = () => {
 
         {/* Footer */}
         <footer className="px-4 sm:px-6 lg:px-8 py-6 border-t border-white/[0.04]">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs sm:text-sm text-white/30 text-center sm:text-left">
+          <div className="max-w-4xl mx-auto text-center space-y-3">
+            <p className="text-xs sm:text-sm text-white/30">
               Tracking mindshare across Korean crypto communities — X, Telegram, Naver, KakaoTalk
             </p>
-            <Link
-              to="/contact"
-              className="text-xs sm:text-sm text-teal-400 hover:text-teal-300 font-medium transition-colors"
-            >
-              Get Listed →
-            </Link>
+            <p className="text-[10px] sm:text-xs text-white/20 leading-relaxed">
+              Korean Community Mindshare is calculated based on total mention frequency and engagement metrics across major Korean crypto communities. Project affiliations and metadata are sourced from official websites and social profiles. Data updates every hour.
+            </p>
           </div>
         </footer>
       </div>
