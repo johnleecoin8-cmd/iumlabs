@@ -150,11 +150,6 @@ const CaseCard = ({
   index,
   totalCount
 }: CaseCardProps) => {
-  // 3-column grid border logic
-  const isRightColumn = index % 3 === 2;
-  const rowCount = Math.ceil(totalCount / 3);
-  const currentRow = Math.floor(index / 3);
-  const isLastRow = currentRow === rowCount - 1;
   const {
     ref,
     isVisible
@@ -163,10 +158,23 @@ const CaseCard = ({
     rootMargin: '30px',
     triggerOnce: true
   });
+  
+  // Responsive grid border logic
+  // Mobile (2 cols): right border on odd indices (0, 2, 4...)
+  // Tablet (2 cols): right border on odd indices
+  // Desktop (3 cols): right border on indices 0, 1 (not 2)
+  
   return <div ref={ref} className={cn("h-full transition-all duration-500 ease-out will-change-transform", isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6")} style={{
     transitionDelay: `${index % 6 * 50}ms`
   }}>
-      <div className={cn("group block p-3 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full", !isRightColumn && "border-r border-border", !isLastRow && "border-b border-border")}>
+      <div className={cn(
+        "group block p-2.5 sm:p-4 md:p-5 transition-all duration-300 hover:bg-secondary/50 h-full border-b border-border",
+        // Mobile & Tablet: 2 columns - right border on left column (even index)
+        index % 2 === 0 && "border-r max-lg:border-r",
+        // Desktop: 3 columns - no right border on last column
+        "lg:border-r",
+        index % 3 === 2 && "lg:border-r-0"
+      )}>
         <Link to={`/projects/${slug}`} onClick={() => window.scrollTo(0, 0)} className="block active:scale-[0.98] transition-transform duration-150">
           {/* Image - Full width on top */}
           <div className="w-full aspect-[16/9] rounded-lg overflow-hidden mb-3 group-hover:shadow-lg group-hover:shadow-foreground/10 transition-all duration-300">
@@ -266,7 +274,7 @@ const CasesSection = () => {
       
 
       {/* 3x4 Cases Grid (12 projects max) */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-2 lg:grid-cols-3">
         {displayCases.map((caseItem, index) => <CaseCard key={caseItem.slug} {...caseItem} index={index} totalCount={displayCases.length} />)}
       </div>
 
