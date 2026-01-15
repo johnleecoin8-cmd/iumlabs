@@ -78,7 +78,6 @@ const isTrending = (sparkline: number[] | null): boolean => {
   return ((recentAvg - previousAvg) / previousAvg) > 0.3;
 };
 
-type RankGroup = 'top20' | 'top21-50';
 type TimeFrame = '24H' | '7D' | '14D' | '30D' | '90D';
 
 const KInfluenceGrid = () => {
@@ -91,7 +90,6 @@ const KInfluenceGrid = () => {
   
   const [tokenStatus, setTokenStatus] = useState<TokenStatus>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [rankGroup, setRankGroup] = useState<RankGroup>('top20');
   const [timeFrame, setTimeFrame] = useState<TimeFrame>('7D');
   
   const { projects, isLoading, lastUpdate } = useHypeProjects();
@@ -112,11 +110,9 @@ const KInfluenceGrid = () => {
       return true;
     });
 
-    // Sort by rank and slice based on rank group
+    // Sort by rank and slice to top 20
     const sorted = filtered.sort((a, b) => a.rank - b.rank);
-    const sliced = rankGroup === 'top20' 
-      ? sorted.slice(0, 20) 
-      : sorted.slice(20, 50);
+    const sliced = sorted.slice(0, 20);
 
     const totalScore = sliced.reduce((sum, p) => sum + Number(p.score), 0);
     
@@ -161,7 +157,7 @@ const KInfluenceGrid = () => {
       ...p,
       isTrending: sortedByTrending.includes(p.ticker),
     }));
-  }, [projects, tokenStatus, searchQuery, rankGroup]);
+  }, [projects, tokenStatus, searchQuery]);
 
   const timeFrames: TimeFrame[] = ['24H', '7D', '14D', '30D', '90D'];
 
@@ -201,33 +197,9 @@ const KInfluenceGrid = () => {
 
             {/* Control row: Tabs + Timeframe + Search + Filter */}
             <div className="flex items-center justify-between gap-3 pb-4">
-              {/* Left: Rank Group Tabs */}
+              {/* Left: Title */}
               <div className="flex items-center gap-4">
-                {/* Rank group tabs - DeSpread style */}
-                <div className="flex items-center bg-white/[0.03] rounded-lg p-1 border border-white/[0.06]">
-                  <button
-                    onClick={() => setRankGroup('top20')}
-                    className={cn(
-                      "px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-md transition-all duration-200",
-                      rankGroup === 'top20'
-                        ? "bg-white text-black shadow-lg"
-                        : "text-white/50 hover:text-white/80"
-                    )}
-                  >
-                    Top 20
-                  </button>
-                  <button
-                    onClick={() => setRankGroup('top21-50')}
-                    className={cn(
-                      "px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-semibold rounded-md transition-all duration-200",
-                      rankGroup === 'top21-50'
-                        ? "bg-white text-black shadow-lg"
-                        : "text-white/50 hover:text-white/80"
-                    )}
-                  >
-                    Top 21-50
-                  </button>
-                </div>
+                <span className="text-sm font-semibold text-white/80">Top 20</span>
 
                 {/* Timeframe buttons - Desktop */}
                 <div className="hidden lg:flex items-center gap-1 bg-white/[0.02] rounded-lg p-1 border border-white/[0.06]">
@@ -345,7 +317,7 @@ const KInfluenceGrid = () => {
               </motion.div>
             ) : treemapProjects.length > 0 ? (
               <motion.div
-                key={`treemap-${rankGroup}`}
+                key="treemap"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
