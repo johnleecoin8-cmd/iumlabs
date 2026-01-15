@@ -68,14 +68,15 @@ const MindshareCell = ({
   };
 
   // Default style when no trend data or neutral
+  // Default style - green (same as 'up' trend)
   const defaultColors = {
-    cellBg: 'linear-gradient(145deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.5) 50%, rgba(2, 6, 23, 0.6) 100%)',
-    glowColor: 'rgba(100, 116, 139, 0.06)',
-    borderColor: 'rgba(100, 116, 139, 0.15)',
-    sparkline: 'rgba(148, 163, 184, 0.4)',
-    sparklineFill: 'rgba(148, 163, 184, 0.04)',
-    accentText: 'text-slate-400',
-    percentBg: 'bg-slate-500/10',
+    cellBg: 'linear-gradient(145deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 78, 59, 0.25) 50%, rgba(2, 44, 34, 0.4) 100%)',
+    glowColor: 'rgba(52, 211, 153, 0.12)',
+    borderColor: 'rgba(52, 211, 153, 0.25)',
+    sparkline: 'rgba(52, 211, 153, 0.6)',
+    sparklineFill: 'rgba(52, 211, 153, 0.08)',
+    accentText: 'text-emerald-400',
+    percentBg: 'bg-emerald-500/10',
   };
 
   const colors = trend === 'up' || trend === 'down' ? trendColors[trend] : defaultColors;
