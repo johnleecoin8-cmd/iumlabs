@@ -2,6 +2,7 @@ import React, { useMemo, useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { treemap, hierarchy, treemapSquarify, HierarchyRectangularNode } from 'd3-hierarchy';
 import MindshareCell from './MindshareCell';
+import ProjectDetailModal from './ProjectDetailModal';
 import { cn } from '@/lib/utils';
 
 export interface MindshareProject {
@@ -17,6 +18,13 @@ export interface MindshareProject {
   logo_url: string | null;
   rank: number;
   token_status?: 'tge' | 'pre-tge';
+  // Price data
+  price?: number | null;
+  market_cap?: number | null;
+  change_24h?: number | null;
+  // Social links
+  twitter_url?: string | null;
+  website_url?: string | null;
 }
 
 interface MindshareTreemapProps {
@@ -39,6 +47,8 @@ interface TreemapNode {
 const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+  const [selectedProject, setSelectedProject] = useState<MindshareProject | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   // Measure container size with ResizeObserver
   useEffect(() => {
@@ -202,6 +212,10 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
               logoUrl={node.data.logo_url}
               size={getCellSize(node)}
               rank={node.data.rank}
+              onClick={() => {
+                setSelectedProject(node.data);
+                setModalOpen(true);
+              }}
             />
           </motion.div>
         );
@@ -209,6 +223,13 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
 
       {/* Bottom fade for depth */}
       <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/20 to-transparent pointer-events-none" />
+      
+      {/* Project Detail Modal */}
+      <ProjectDetailModal 
+        project={selectedProject}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+      />
     </motion.div>
   );
 };

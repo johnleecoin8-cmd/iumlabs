@@ -20,6 +20,13 @@ export interface HypeProject {
   token_status: TokenStatus;
   updated_at: string;
   created_at: string;
+  // Price data from CoinGecko
+  price: number | null;
+  market_cap: number | null;
+  change_24h: number | null;
+  // Social links
+  twitter_url: string | null;
+  website_url: string | null;
 }
 
 export interface HypeScoreHistory {
