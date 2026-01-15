@@ -94,8 +94,8 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
     // Create treemap layout with refined padding
     const treemapLayout = treemap<{ children?: TreemapDataNode[] }>()
       .size([dimensions.width, dimensions.height])
-      .paddingInner(3) // Subtle gap between cells
-      .paddingOuter(0)
+      .paddingInner(5) // Increased gap between cells for Kaito-style separation
+      .paddingOuter(2)
       .round(true)
       .tile(treemapSquarify.ratio(1.1)); // Better aspect ratios
 
