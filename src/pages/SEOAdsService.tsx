@@ -183,8 +183,8 @@ const adPlatforms = [
 
 const SEOAdsService = () => {
   usePageMeta({
-    title: "Korean Crypto SEO & Paid Ads",
-    description: "Drive qualified traffic to your Web3 project in Korea through SEO optimization and targeted ads on Google, Naver, and crypto platforms.",
+    title: "Korea Crypto SEO & Web3 Paid Marketing",
+    description: "Dominate Korean search results with specialized Crypto SEO. We manage Naver & Google ads, organic search strategies, and user acquisition for Web3.",
     path: "/services/seo-ads",
     image: "/og-image.png"
   });
