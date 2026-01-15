@@ -206,8 +206,8 @@ const ServicePageLayout = ({
   const childrenSectionNum = children ? getNextSectionNumber() : null;
   const deliverablesSectionNum = deliverables ? getNextSectionNumber() : null;
   const processSectionNum = processSteps && processSteps.length > 0 ? getNextSectionNumber() : null;
-  const moreServicesSectionNum = getNextSectionNumber();
   const faqSectionNum = faqItems ? getNextSectionNumber() : null;
+  const moreServicesSectionNum = getNextSectionNumber();
   const contactSectionNum = getNextSectionNumber();
 
   return (
@@ -512,8 +512,47 @@ const ServicePageLayout = ({
         </section>
       )}
 
+      {/* FAQ Section */}
+      {faqItems && faqItems.length > 0 && (
+        <section className="bg-[#121212]">
+          <div className="border-t border-white/10">
+            <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
+            
+            <div className="py-6 sm:py-8 md:py-12">
+                <div className="container mx-auto px-3 sm:px-6 lg:px-12 max-w-4xl">
+                <Accordion type="single" collapsible className="space-y-2 sm:space-y-3">
+                  {faqItems.map((item, index) => (
+                    <div
+                      key={index}
+                    >
+                        <AccordionItem 
+                        value={`item-${index}`}
+                        className="border border-white/10 rounded-lg sm:rounded-xl bg-white/5 px-3 sm:px-5 overflow-hidden"
+                      >
+                        <AccordionTrigger className="text-left text-white hover:no-underline py-3 sm:py-4 text-xs sm:text-sm">
+                          <span className="flex items-center gap-2 sm:gap-3">
+                            <ChevronRight 
+                              className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 transition-transform" 
+                              style={{ color: accentColor }}
+                            />
+                            <span className="line-clamp-2">{item.question}</span>
+                          </span>
+                        </AccordionTrigger>
+                        <AccordionContent className="text-white/60 text-[11px] sm:text-sm pb-3 sm:pb-4 pl-5 sm:pl-7">
+                          {item.answer}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </div>
+                  ))}
+                </Accordion>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* More Services Section */}
-      <section className="bg-[#121212]">
+      <section className="bg-[#0F0F0F]">
         <div className="border-t border-white/10">
           <SectionHeader number={moreServicesSectionNum} title="More Services" badge="Explore" />
           <div 
@@ -576,45 +615,6 @@ const ServicePageLayout = ({
           </div>
         </div>
       </section>
-
-      {/* FAQ Section */}
-      {faqItems && faqItems.length > 0 && (
-        <section className="bg-[#0F0F0F]">
-          <div className="border-t border-white/10">
-            <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
-            
-            <div className="py-6 sm:py-8 md:py-12">
-                <div className="container mx-auto px-3 sm:px-6 lg:px-12 max-w-4xl">
-                <Accordion type="single" collapsible className="space-y-2 sm:space-y-3">
-                  {faqItems.map((item, index) => (
-                    <div
-                      key={index}
-                    >
-                        <AccordionItem 
-                        value={`item-${index}`}
-                        className="border border-white/10 rounded-lg sm:rounded-xl bg-white/5 px-3 sm:px-5 overflow-hidden"
-                      >
-                        <AccordionTrigger className="text-left text-white hover:no-underline py-3 sm:py-4 text-xs sm:text-sm">
-                          <span className="flex items-center gap-2 sm:gap-3">
-                            <ChevronRight 
-                              className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 transition-transform" 
-                              style={{ color: accentColor }}
-                            />
-                            <span className="line-clamp-2">{item.question}</span>
-                          </span>
-                        </AccordionTrigger>
-                        <AccordionContent className="text-white/60 text-[11px] sm:text-sm pb-3 sm:pb-4 pl-5 sm:pl-7">
-                          {item.answer}
-                        </AccordionContent>
-                      </AccordionItem>
-                    </div>
-                  ))}
-                </Accordion>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Contact Section */}
       <section className="bg-[#121212]" id="contact">
