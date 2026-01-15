@@ -34,15 +34,15 @@ const serviceTags: ServiceTag[] = [
 
 const stats: ServiceStat[] = [{
   value: 50,
-  label: "Articles Published",
+  label: "Major Articles Published",
   suffix: "+"
 }, {
   value: 20,
-  label: "Media Partners",
+  label: "Elite Media Partners",
   suffix: "+"
 }, {
   value: 5,
-  label: "Total Reach",
+  label: "Total Combined Reach",
   suffix: "M+"
 }, {
   value: 90,
@@ -54,75 +54,72 @@ const processSteps: ProcessStep[] = [
   {
     number: "01",
     title: "Story Development",
-    description: "We craft compelling narratives that resonate with Korean media and audiences, positioning your project for maximum impact.",
+    description: "We find the 'hook' in your project that journalists will actually want to write about.",
     icon: Newspaper,
   },
   {
     number: "02",
     title: "Media Outreach",
-    description: "We leverage our network of 20+ Korean media outlets to secure premium coverage and interviews.",
+    description: "We leverage our personal network to pitch your story to the right editors.",
     icon: Users,
   },
   {
     number: "03",
-    title: "Content Distribution",
-    description: "We coordinate multi-channel distribution across news sites, social media, and community platforms.",
+    title: "Distribution",
+    description: "We coordinate the launch across news sites, socials, and community hubs for maximum noise.",
     icon: Share2,
   },
   {
     number: "04",
     title: "Impact Tracking",
-    description: "We monitor coverage, measure reach, and provide detailed analytics on media performance.",
+    description: "We monitor the reach and provide detailed analytics on how your brand authority grew.",
     icon: BarChart3,
   },
 ];
 
 const deliverables: Deliverable[] = [
   {
-    title: "Korean Media",
+    title: "Korean Market Dominance",
     items: [
-      "Korean press release writing",
-      "Blockmedia/Coinness/TokenPost placement",
-      "Business section in major outlets",
-      "Korean crypto podcast features",
+      "Native Storytelling: We write press releases that actually sound natural to Korean journalists",
+      "Premium Placement: Guaranteed spots in major crypto outlets and business sections of mainstream Korean news",
+      "Podcast Features: Getting your team on air with Korea's most-watched crypto shows",
     ],
   },
   {
-    title: "Global Media",
+    title: "Global Expansion",
     items: [
-      "English press release",
-      "CoinDesk/Cointelegraph distribution",
-      "Global interview coordination",
-      "Op-ed contributions",
+      "English Distribution: High-impact PR for major global platforms like CoinDesk and Cointelegraph",
+      "Interview Coordination: We set the stage for your founders to speak with global crypto reporters",
+      "Thought Leadership: Placing Op-eds that establish your team as industry experts",
     ],
   },
   {
-    title: "Reporting & Analysis",
+    title: "Tracking the Buzz",
     items: [
-      "Coverage tracking dashboard",
-      "KR/EN sentiment analysis",
-      "Competitor benchmarking",
-      "Monthly PR report",
+      "Coverage Dashboard: Watch your articles go live in real-time",
+      "Sentiment Analysis: We tell you exactly how the public is reacting to your news",
+      "Monthly Reports: A full breakdown of reach, impact, and competitor benchmarking",
     ],
   },
 ];
 
 const faqItems: FAQItem[] = [
   {
-    question: "Which Korean media outlets do you work with?",
-    answer: "We have direct partnerships with major Korean crypto media including Blockmedia, Coinness, BloomingBit, and TokenPost. We can also distribute to mainstream business outlets like Chosun Biz and Hankyung.",
+    question: "Which Korean outlets do you actually work with?",
+    answer: "We work with all the big names: Blockmedia, Coinness, TokenPost, and BloomingBit, plus the crypto desks of major daily newspapers like Hankyung.",
   },
   {
-    question: "How long does it take to publish a press release?",
-    answer: "From writing to publication typically takes 3-5 business days. For urgent news or time-sensitive announcements, same-day publication is possible.",
+    question: "How fast can we get a press release out?",
+    answer: "For urgent news, we can often secure placements within 24 to 48 hours, though we prefer a few days of lead time to maximize the quality of coverage.",
   },
   {
-    question: "Do you support crisis communication?",
-    answer: "Yes, we provide 24/7 crisis management support. This includes rapid response messaging, media coordination, and reputation management strategies.",
+    question: "Do you handle interviews?",
+    answer: "Yes. We can arrange and prep you for interviews with both Korean and global crypto journalists to ensure you're on-message and confident.",
   },
   {
-    question: "Can you arrange Korean media interviews?",
-    answer: "Absolutely. We regularly arrange interviews with top Korean crypto journalists and podcasters. We handle all logistics including interpretation support.",
+    question: "Can you help with crisis communication?",
+    answer: "Absolutely. If things get rocky, we help manage the narrative and ensure your side of the story is represented fairly across all major channels.",
   },
 ];
 
@@ -434,7 +431,7 @@ const PRService = () => {
       serviceName="PR & Media Relations" 
       serviceTitle="PR &" 
       serviceSubtitle="Media" 
-      serviceDescription="Secure premium coverage across Korean media outlets with our established network of 20+ publishers and journalists." 
+      serviceDescription="Get featured where it matters. We leverage our direct relationships with over 20+ top-tier publishers and journalists to secure premium coverage for your project in the Korean and global markets." 
       serviceIcon={Newspaper} 
       serviceTags={serviceTags} 
       stats={stats} 
@@ -455,7 +452,13 @@ const PRService = () => {
         />
         
         <div className="border-t border-white/10 relative z-10">
-          <SectionHeader title="Media Network" badge="Live Distribution" />
+          <SectionHeader title="Distribution Network" badge="Global Reach, Local Depth" />
+          
+          <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-4">
+            <p className="text-white/60 text-sm max-w-3xl">
+              We don't just send cold emails. We have direct lines to editors at CoinDesk and Cointelegraph, alongside dominant Korean outlets like Blockmedia, Coinness, and TokenPost.
+            </p>
+          </div>
           
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
