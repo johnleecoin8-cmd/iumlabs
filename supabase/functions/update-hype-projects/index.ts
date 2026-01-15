@@ -40,11 +40,29 @@ Deno.serve(async (req) => {
 
     const body: RequestBody = await req.json();
 
-    // Validate API key
-    const crawlerApiKey = Deno.env.get("CRAWLER_API_KEY");
-    if (!crawlerApiKey || body.api_key !== crawlerApiKey) {
+    // Validate API key (trim whitespace for robustness)
+    const crawlerApiKey = Deno.env.get("CRAWLER_API_KEY")?.trim();
+    const providedKey = body.api_key?.trim();
+    
+    // Also check x-api-key header as fallback
+    const headerKey = req.headers.get("x-api-key")?.trim();
+    const effectiveKey = providedKey || headerKey;
+    
+    if (!crawlerApiKey || effectiveKey !== crawlerApiKey) {
+      // Debug info (safe - doesn't leak full key)
+      const debugInfo = {
+        providedKeyLength: providedKey?.length ?? 0,
+        headerKeyLength: headerKey?.length ?? 0,
+        expectedKeyLength: crawlerApiKey?.length ?? 0,
+        providedKeyPreview: providedKey ? `${providedKey.slice(0, 3)}...${providedKey.slice(-3)}` : "none",
+      };
+      console.log("Auth failed - debug:", JSON.stringify(debugInfo));
+      
       return new Response(
-        JSON.stringify({ error: "Unauthorized: Invalid API key" }),
+        JSON.stringify({ 
+          error: "Unauthorized: Invalid API key",
+          debug: debugInfo
+        }),
         { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
