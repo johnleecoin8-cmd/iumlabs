@@ -155,31 +155,35 @@ const ContactFormSection = ({
 
             {/* Process Guide */}
             <div className="mt-8 sm:mt-10">
-              <div className="flex items-center justify-between gap-2">
-                {/* Step 1 */}
-                <div className="flex-1 text-center">
-                  <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider mb-1">Step 1</p>
-                  <p className="text-xs sm:text-sm text-white/80 font-medium">Submit Form</p>
-                </div>
-                
-                {/* Connector */}
-                <div className="flex-shrink-0 w-8 sm:w-12 h-[1px] bg-gradient-to-r from-white/20 to-white/10" />
-                
-                {/* Step 2 */}
-                <div className="flex-1 text-center">
-                  <p className="text-[10px] sm:text-xs text-white/50 uppercase tracking-wider mb-1">Step 2</p>
-                  <p className="text-xs sm:text-sm text-white/80 font-medium">24h Response</p>
-                </div>
-                
-                {/* Connector */}
-                <div className="flex-shrink-0 w-8 sm:w-12 h-[1px] bg-gradient-to-r from-white/10 to-emerald-500/30" />
-                
-                {/* Step 3 */}
-                <div className="flex-1 text-center">
-                  <p className="text-[10px] sm:text-xs text-emerald-400/70 uppercase tracking-wider mb-1">Step 3</p>
-                  <p className="text-xs sm:text-sm text-emerald-400 font-medium">Free Consult</p>
-                </div>
+              <div className="mb-3 flex items-center justify-between">
+                <span className="text-[10px] sm:text-label uppercase tracking-wider text-muted-foreground">How it works</span>
+                <span className="text-[10px] sm:text-label uppercase tracking-wider text-muted-foreground">3 steps</span>
               </div>
+
+              <ol className="flex items-center gap-2 sm:gap-3">
+                <li className="flex items-center gap-2 rounded-full border border-border bg-card/30 px-3 py-2">
+                  <span className="text-[10px] font-mono text-muted-foreground">01</span>
+                  <span className="text-xs sm:text-sm text-foreground">Fill out the form</span>
+                </li>
+
+                <span className="text-muted-foreground/70" aria-hidden>
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+
+                <li className="flex items-center gap-2 rounded-full border border-border bg-card/30 px-3 py-2">
+                  <span className="text-[10px] font-mono text-muted-foreground">02</span>
+                  <span className="text-xs sm:text-sm text-foreground">Response within 24 hours</span>
+                </li>
+
+                <span className="text-muted-foreground/70" aria-hidden>
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+
+                <li className="flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-2">
+                  <Check className="h-4 w-4 text-primary" />
+                  <span className="text-xs sm:text-sm font-medium text-primary">Free consultation</span>
+                </li>
+              </ol>
             </div>
 
             {/* LinkedIn */}
