@@ -196,13 +196,13 @@ const OfflineEventService = () => {
           
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                 {/* Left - Description */}
-                <div>
+                <div className="flex flex-col">
                   <p className="text-white/60 text-sm leading-relaxed mb-5">
                     From concept to execution, our proven 4-week process ensures every detail is covered. We handle the complexity so you can focus on connecting with Korea's crypto community.
                   </p>
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-3 mt-auto">
                     <div className="flex items-center gap-2 px-3 py-1.5 bg-white/5 rounded-full border border-white/10">
                       <Globe className="w-4 h-4" style={{ color: ACCENT_COLOR }} />
                       <span className="text-sm text-white/70">Global Teams Welcome</span>
