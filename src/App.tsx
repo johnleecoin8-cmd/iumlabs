@@ -147,6 +147,7 @@ const AppRoutes = () => {
         <Route path="/" element={<Index />} />
         <Route path="/services/all" element={<MobileServicesPage />} />
         <Route path="/services" element={<GTMService />} />
+        <Route path="/services/gtm" element={<GTMService />} />
         <Route path="/services/branding" element={<BrandingService />} />
         <Route path="/services/seo-ads" element={<SEOAdsService />} />
         <Route path="/services/offline-event" element={<OfflineEventService />} />
