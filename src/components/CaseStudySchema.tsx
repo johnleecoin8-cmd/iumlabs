@@ -43,7 +43,7 @@ const CaseStudySchema = ({
         "url": "https://iumlabs.io",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://iumlabs.io/favicon.png"
+          "url": "https://iumlabs.io/logo.png"
         }
       },
       ...(category && { "genre": category }),
