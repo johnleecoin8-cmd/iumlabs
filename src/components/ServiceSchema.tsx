@@ -40,7 +40,7 @@ const ServiceSchema = ({
         "url": "https://iumlabs.io",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://iumlabs.io/favicon.png"
+          "url": "https://iumlabs.io/logo.png"
         }
       },
       "areaServed": {
