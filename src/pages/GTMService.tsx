@@ -2041,16 +2041,23 @@ const LLMEngineVisualization = ({
             <p className="text-sm text-muted-foreground">This intelligence powers every stage of our framework</p>
           </div>
           
-          {/* Powered by badge */}
-          <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-muted/20 border border-border/50 rounded-full">
-            <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Supported by</span>
-            <div className="flex items-center gap-1.5">
-              <div className="w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
-                <span className="text-[8px] font-bold text-white">S</span>
+          {/* Powered by badge - refined style */}
+          <motion.div 
+            className="mt-6 inline-flex items-center gap-3 px-5 py-2.5 bg-gradient-to-r from-muted/40 to-muted/20 border border-border/30 rounded-full backdrop-blur-sm"
+            whileHover={{ scale: 1.02, borderColor: 'hsl(var(--primary) / 0.3)' }}
+            transition={{ duration: 0.2 }}
+          >
+            <span className="text-[10px] text-muted-foreground/70 uppercase tracking-widest font-medium">Powered by</span>
+            <div className="w-px h-4 bg-border/50" />
+            <div className="flex items-center gap-2">
+              <div className="relative w-5 h-5 rounded-lg bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                <span className="text-[10px] font-bold text-white">S</span>
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-white/20 to-transparent" />
               </div>
-              <span className="text-xs font-medium text-foreground">Sela Network's growlops</span>
+              <span className="text-sm font-medium bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">Sela Network</span>
+              <span className="text-xs text-muted-foreground">growlops</span>
             </div>
-          </div>
+          </motion.div>
           <motion.div className="mt-4" animate={{
           y: [0, 8, 0]
         }} transition={{
