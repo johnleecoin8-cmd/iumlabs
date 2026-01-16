@@ -259,8 +259,8 @@ export const projectsData: Record<string, ProjectData> = {
     result: "#1 DePIN in Korea",
     glowColor: "#00CED1",
     description: "Peaq aimed to become the leading DePIN (Decentralized Physical Infrastructure Network) platform in Korea, targeting both enterprise partners and developer communities to build real-world machine economy applications.",
-    challenge: "DePIN was an emerging narrative with limited awareness in Korea. Peaq needed to establish thought leadership while building a strong community and demonstrating practical use cases for decentralized physical infrastructure.",
-    whatWeDid: "Organized and hosted successful AMA sessions with Korean crypto communities, driving engagement and education around DePIN technology. Executed targeted PR campaigns with major Korean blockchain media outlets. Conducted in-depth brand positioning research to establish Peaq as the leading DePIN platform in Korea.",
+    challenge: "While DePIN was an emerging narrative globally, the Korean market lacked a dominant leader in the blockchain-robotics sector. Peaq needed to overcome low local awareness and establish itself not just as a participant, but as the market standard.",
+    whatWeDid: "We executed a targeted strategy to position Peaq as the undisputed No. 1 Robotics project in Korea. We shifted the narrative from generic infrastructure to tangible robotics leadership, driving deep research and community engagement to secure market dominance.",
     metrics: [
       { value: "#1", label: "DePIN Position" },
       { value: "200+", label: "Developers" },
