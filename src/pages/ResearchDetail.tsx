@@ -459,18 +459,6 @@ const ResearchDetail = () => {
           </div>
         </div>
 
-        {/* Tags */}
-        <div className="flex flex-wrap items-center gap-2 mt-12 pt-8 border-t border-white/10">
-          <span className="text-white/40 text-sm mr-2">Tags:</span>
-          {post.tags.map((tag) => (
-            <span 
-              key={tag} 
-              className="px-3 py-1 bg-white/5 text-white/60 rounded-full text-sm cursor-pointer transition-colors hover:bg-white/10"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
       </section>
 
       {/* Related Articles */}
