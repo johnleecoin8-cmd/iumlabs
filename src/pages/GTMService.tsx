@@ -1965,10 +1965,10 @@ const LLMEngineVisualization = ({
                   y: 0
                 } : {}} transition={{
                   delay: 1.2 + i * 0.1
-                }} className="p-2 sm:p-3 bg-muted/30 border border-border/50 rounded-sm">
-                      <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
-                        <metric.icon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`} />
-                        <span className="text-[9px] sm:text-[10px] text-muted-foreground uppercase tracking-wide">{metric.label}</span>
+}} className="p-2 sm:p-3 bg-muted/30 border border-border/50 rounded-sm overflow-hidden">
+                      <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 min-w-0">
+                        <metric.icon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0 ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`} />
+                        <span className="text-[9px] sm:text-[10px] text-muted-foreground uppercase tracking-wide truncate">{metric.label}</span>
                       </div>
                       
                       <div className="flex items-end justify-between gap-1 sm:gap-2 mb-1.5 sm:mb-2">
@@ -1992,7 +1992,7 @@ const LLMEngineVisualization = ({
                     }} />
                       </div>
                       
-                      <p className="text-[8px] sm:text-[9px] text-muted-foreground mt-1 sm:mt-1.5 line-clamp-1">{metric.sublabel}</p>
+                      <p className="text-[8px] sm:text-[9px] text-muted-foreground mt-1 sm:mt-1.5 line-clamp-2 break-words">{metric.sublabel}</p>
                     </motion.div>)}
                 </div>
               </div>
