@@ -2018,11 +2018,16 @@ const LLMEngineVisualization = ({
         }}>
             <span className="text-[10px] text-muted-foreground/70 uppercase tracking-widest font-medium">Powered by</span>
             <div className="w-px h-4 bg-border/50" />
-            <div className="flex items-center gap-2">
+            <a 
+              href="https://www.selanetwork.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+            >
               <img src="/logos/sela-network.png" alt="Sela Network" className="w-5 h-5 rounded-full object-cover" />
               <span className="text-sm font-medium bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text text-transparent">Sela Network</span>
               <span className="text-xs text-muted-foreground">growlops</span>
-            </div>
+            </a>
           </motion.div>
           <motion.div className="mt-4" animate={{
           y: [0, 8, 0]
