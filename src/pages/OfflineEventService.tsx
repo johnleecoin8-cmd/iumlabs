@@ -410,45 +410,35 @@ const OfflineEventService = () => {
                 </div>
 
                 {/* Right - Phase Cards */}
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-3">
                   {journeyPhases.map((phase) => (
                     <div
                       key={phase.title}
-                      className="relative bg-white/5 border border-white/10 rounded-lg p-3"
-                      style={{
-                        borderColor: `${ACCENT_COLOR}20`,
-                      }}
+                      className="relative bg-white/[0.03] border border-white/10 rounded-xl p-4 hover:border-emerald-500/30 transition-all duration-300"
                     >
                       {/* Week Badge */}
                       <div 
-                        className="text-[10px] font-medium px-1.5 py-0.5 rounded-full w-fit mb-2"
+                        className="text-xs font-semibold px-2.5 py-1 rounded-full w-fit mb-3"
                         style={{ 
-                          backgroundColor: `${ACCENT_COLOR}20`,
+                          backgroundColor: `${ACCENT_COLOR}15`,
                           color: ACCENT_COLOR
                         }}
                       >
                         {phase.week}
                       </div>
                       
-                      {/* Icon & Title */}
-                      <div className="flex items-center gap-2 mb-2">
-                        <phase.icon 
-                          className="w-4 h-4" 
-                          style={{ color: ACCENT_COLOR }}
-                        />
-                        <h4 className="text-white text-sm font-medium">{phase.title}</h4>
-                      </div>
+                      {/* Title */}
+                      <h4 className="text-white text-base font-semibold mb-4">{phase.title}</h4>
 
-                      {/* Simple metrics */}
-                      <div className="flex flex-wrap gap-1">
+                      {/* Metrics - Stacked Layout */}
+                      <div className="space-y-2">
                         {phase.metrics.map((metric) => (
                           <div 
                             key={metric.label} 
-                            className="flex items-center gap-1 text-[10px] px-1.5 py-0.5 rounded bg-white/5"
+                            className="flex items-center justify-between"
                           >
-                            <metric.icon className="w-2.5 h-2.5" style={{ color: ACCENT_COLOR }} />
-                            <span className="text-white/50">{metric.label}:</span>
-                            <span style={{ color: ACCENT_COLOR }}>{metric.value}</span>
+                            <span className="text-white/50 text-xs">{metric.label}</span>
+                            <span className="text-emerald-400 text-sm font-semibold">{metric.value}</span>
                           </div>
                         ))}
                       </div>
