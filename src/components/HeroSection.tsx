@@ -13,6 +13,7 @@ import bybitLogo from "@/assets/logos/bybit.png";
 import peaqLogo from "@/assets/logos/peaq.svg";
 import storyProtocolLogo from "@/assets/logos/story-protocol.png";
 import selaNetworkLogo from "@/assets/logos/sela-network.png";
+import ai16zLogo from "@/assets/logos/ai16z.png";
 import triaLogo from "@/assets/logos/tria-official.png";
 import mantraLogo from "@/assets/logos/mantra.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
@@ -99,8 +100,8 @@ const clientLogos = [{
   logo: selaNetworkLogo,
   noInvert: true
 }, {
-  name: "a16z",
-  logo: "https://cryptologos.cc/logos/a16z-a16z-logo.png",
+  name: "ai16z",
+  logo: ai16zLogo,
   noInvert: true
 }, {
   name: "Tria",
