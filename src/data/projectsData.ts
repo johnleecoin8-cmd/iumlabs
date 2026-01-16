@@ -263,9 +263,9 @@ export const projectsData: Record<string, ProjectData> = {
     whatWeDid: "We executed a targeted strategy to position Peaq as the undisputed No. 1 Robotics project in Korea. We shifted the narrative from generic infrastructure to tangible robotics leadership, driving deep research and community engagement to secure market dominance.",
     metrics: [
       { value: "#1", label: "Robotics Position" },
-      { value: "3.2M+", label: "Engagements" },
+      { value: "3.2M+", label: "Social Engagements" },
       { value: "4+", label: "AMA" },
-      { value: "11", label: "Media Articles/Interviews" }
+      { value: "11+", label: "Media Articles/Interviews" }
     ],
     strategy: [
       "Launched comprehensive DePIN education campaign",
