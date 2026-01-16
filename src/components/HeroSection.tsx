@@ -12,7 +12,7 @@ import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
 import peaqLogo from "@/assets/logos/peaq.svg";
 import storyProtocolLogo from "@/assets/logos/story-protocol.png";
-import megaethLogo from "@/assets/logos/megaeth.png";
+import selaNetworkLogo from "@/assets/logos/sela-network.png";
 import triaLogo from "@/assets/logos/tria-official.png";
 import mantraLogo from "@/assets/logos/mantra.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai.png";
@@ -95,9 +95,13 @@ const clientLogos = [{
   logo: storyProtocolLogo,
   noInvert: false
 }, {
-  name: "MegaETH",
-  logo: megaethLogo,
-  noInvert: false
+  name: "Sela Network",
+  logo: selaNetworkLogo,
+  noInvert: true
+}, {
+  name: "a16z",
+  logo: "https://cryptologos.cc/logos/a16z-a16z-logo.png",
+  noInvert: true
 }, {
   name: "Tria",
   logo: triaLogo,
