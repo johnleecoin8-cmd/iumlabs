@@ -2040,6 +2040,17 @@ const LLMEngineVisualization = ({
             <Sparkles className="w-4 h-4 text-primary" />
             <p className="text-sm text-muted-foreground">This intelligence powers every stage of our framework</p>
           </div>
+          
+          {/* Powered by badge */}
+          <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-muted/20 border border-border/50 rounded-full">
+            <span className="text-[10px] text-muted-foreground uppercase tracking-wider">Supported by</span>
+            <div className="flex items-center gap-1.5">
+              <div className="w-4 h-4 rounded-full bg-gradient-to-br from-purple-500 to-blue-500 flex items-center justify-center">
+                <span className="text-[8px] font-bold text-white">S</span>
+              </div>
+              <span className="text-xs font-medium text-foreground">Sela Network's growlops</span>
+            </div>
+          </div>
           <motion.div className="mt-4" animate={{
           y: [0, 8, 0]
         }} transition={{
