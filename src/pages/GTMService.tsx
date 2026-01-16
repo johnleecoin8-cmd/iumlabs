@@ -327,69 +327,61 @@ const HeroSection = () => {
     x: 0,
     y: 0
   });
-  
+
   // Interactive showcase state
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
 
   // Showcase projects data - only projects with videos
-  const showcaseProjects = [
-    { 
-      name: 'BNB Chain', 
-      result: '+340%', 
-      category: 'Exchange',
-      description: 'Volume Growth',
-      image: bnbBg,
-      video: '/videos/projects/bnb-hero.mp4',
-      slug: 'bnb-chain'
-    },
-    { 
-      name: 'Story Protocol', 
-      result: '5K+', 
-      category: 'IP Platform',
-      description: 'Creators Onboarded',
-      image: storyBg,
-      video: '/videos/projects/story-hero.mp4',
-      slug: 'story-protocol'
-    },
-    { 
-      name: 'Bybit', 
-      result: '#2', 
-      category: 'Exchange',
-      description: 'Traffic Ranking',
-      image: bybitBg,
-      video: '/videos/projects/bybit-hero.mp4',
-      slug: 'bybit'
-    },
-    { 
-      name: 'MANTRA', 
-      result: '200K+', 
-      category: 'RWA',
-      description: 'Community Members',
-      image: mantraBg,
-      video: '/videos/projects/mantra-hero.mp4',
-      slug: 'mantra'
-    },
-    { 
-      name: 'peaq', 
-      result: '50+', 
-      category: 'DePIN',
-      description: 'Media Coverage',
-      image: peaqBg,
-      video: '/videos/projects/peaq-hero.mp4',
-      slug: 'peaq'
-    },
-    { 
-      name: 'Sahara AI', 
-      result: '#1', 
-      category: 'AI',
-      description: 'Mindshare Ranking',
-      image: saharaBg,
-      video: '/videos/projects/sahara-hero.mp4',
-      slug: 'sahara-ai'
-    }
-  ];
-
+  const showcaseProjects = [{
+    name: 'BNB Chain',
+    result: '+340%',
+    category: 'Exchange',
+    description: 'Volume Growth',
+    image: bnbBg,
+    video: '/videos/projects/bnb-hero.mp4',
+    slug: 'bnb-chain'
+  }, {
+    name: 'Story Protocol',
+    result: '5K+',
+    category: 'IP Platform',
+    description: 'Creators Onboarded',
+    image: storyBg,
+    video: '/videos/projects/story-hero.mp4',
+    slug: 'story-protocol'
+  }, {
+    name: 'Bybit',
+    result: '#2',
+    category: 'Exchange',
+    description: 'Traffic Ranking',
+    image: bybitBg,
+    video: '/videos/projects/bybit-hero.mp4',
+    slug: 'bybit'
+  }, {
+    name: 'MANTRA',
+    result: '200K+',
+    category: 'RWA',
+    description: 'Community Members',
+    image: mantraBg,
+    video: '/videos/projects/mantra-hero.mp4',
+    slug: 'mantra'
+  }, {
+    name: 'peaq',
+    result: '50+',
+    category: 'DePIN',
+    description: 'Media Coverage',
+    image: peaqBg,
+    video: '/videos/projects/peaq-hero.mp4',
+    slug: 'peaq'
+  }, {
+    name: 'Sahara AI',
+    result: '#1',
+    category: 'AI',
+    description: 'Mindshare Ranking',
+    image: saharaBg,
+    video: '/videos/projects/sahara-hero.mp4',
+    slug: 'sahara-ai'
+  }];
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!ref.current) return;
@@ -407,11 +399,10 @@ const HeroSection = () => {
   useEffect(() => {
     if (isHovering) return;
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % showcaseProjects.length);
+      setActiveIndex(prev => (prev + 1) % showcaseProjects.length);
     }, 3000);
     return () => clearInterval(interval);
   }, [isHovering, showcaseProjects.length]);
-
   return <section ref={ref} className="relative min-h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 py-12 md:py-24 bg-background overflow-hidden w-full">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 pointer-events-none" />
@@ -526,16 +517,16 @@ const HeroSection = () => {
         }} className="flex flex-row items-center gap-3 md:gap-10">
             <div className="text-center group">
               <motion.p className="text-xl sm:text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-                opacity: 0,
-                scale: 0.5
-              }} animate={{
-                opacity: 1,
-                scale: 1
-              }} transition={{
-                delay: 0.8,
-                duration: 0.5,
-                type: "spring"
-              }}>
+              opacity: 0,
+              scale: 0.5
+            }} animate={{
+              opacity: 1,
+              scale: 1
+            }} transition={{
+              delay: 0.8,
+              duration: 0.5,
+              type: "spring"
+            }}>
                 #2
               </motion.p>
               <p className="text-[9px] sm:text-[11px] md:text-xs text-muted-foreground mt-0.5 sm:mt-1 tracking-wider uppercase">Global Volume</p>
@@ -543,16 +534,16 @@ const HeroSection = () => {
             <div className="w-px h-6 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
             <div className="text-center group">
               <motion.p className="text-xl sm:text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-                opacity: 0,
-                scale: 0.5
-              }} animate={{
-                opacity: 1,
-                scale: 1
-              }} transition={{
-                delay: 1.0,
-                duration: 0.5,
-                type: "spring"
-              }}>
+              opacity: 0,
+              scale: 0.5
+            }} animate={{
+              opacity: 1,
+              scale: 1
+            }} transition={{
+              delay: 1.0,
+              duration: 0.5,
+              type: "spring"
+            }}>
                 4x
               </motion.p>
               <p className="text-[9px] sm:text-[11px] md:text-xs text-muted-foreground mt-0.5 sm:mt-1 tracking-wider uppercase">Velocity</p>
@@ -560,16 +551,16 @@ const HeroSection = () => {
             <div className="w-px h-6 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
             <div className="text-center group">
               <motion.p className="text-xl sm:text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
-                opacity: 0,
-                scale: 0.5
-              }} animate={{
-                opacity: 1,
-                scale: 1
-              }} transition={{
-                delay: 1.2,
-                duration: 0.5,
-                type: "spring"
-              }}>
+              opacity: 0,
+              scale: 0.5
+            }} animate={{
+              opacity: 1,
+              scale: 1
+            }} transition={{
+              delay: 1.2,
+              duration: 0.5,
+              type: "spring"
+            }}>
                 100%
               </motion.p>
               <p className="text-[9px] sm:text-[11px] md:text-xs text-muted-foreground mt-0.5 sm:mt-1 tracking-wider uppercase">Retail-Driven</p>
@@ -579,44 +570,35 @@ const HeroSection = () => {
         </div>
 
         {/* Right Column - Interactive Project Showcase (Now visible on all screens) */}
-        <motion.div 
-          initial={{ opacity: 0, x: 50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="relative"
-          onMouseEnter={() => setIsHovering(true)}
-          onMouseLeave={() => setIsHovering(false)}
-        >
+        <motion.div initial={{
+        opacity: 0,
+        x: 50
+      }} animate={{
+        opacity: 1,
+        x: 0
+      }} transition={{
+        duration: 0.8,
+        delay: 0.4
+      }} className="relative" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
           {/* Media Container */}
           <div className="relative aspect-[4/3] md:aspect-[16/10] lg:aspect-[4/3] overflow-hidden border border-border/30">
             {/* Background Video/Image with Transition */}
             <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="absolute inset-0"
-              >
+              <motion.div key={activeIndex} initial={{
+              opacity: 0,
+              scale: 1.1
+            }} animate={{
+              opacity: 1,
+              scale: 1
+            }} exit={{
+              opacity: 0,
+              scale: 0.95
+            }} transition={{
+              duration: 0.7,
+              ease: "easeOut"
+            }} className="absolute inset-0">
                 {/* Video if available, otherwise image */}
-                {showcaseProjects[activeIndex].video ? (
-                  <video
-                    key={showcaseProjects[activeIndex].video}
-                    src={showcaseProjects[activeIndex].video}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <img 
-                    src={showcaseProjects[activeIndex].image} 
-                    alt={showcaseProjects[activeIndex].name}
-                    className="w-full h-full object-cover"
-                  />
-                )}
+                {showcaseProjects[activeIndex].video ? <video key={showcaseProjects[activeIndex].video} src={showcaseProjects[activeIndex].video} autoPlay muted loop playsInline className="w-full h-full object-cover" /> : <img src={showcaseProjects[activeIndex].image} alt={showcaseProjects[activeIndex].name} className="w-full h-full object-cover" />}
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-background/40 to-transparent" />
@@ -626,23 +608,25 @@ const HeroSection = () => {
             {/* Content overlay */}
             <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-6">
               <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                >
+                <motion.div key={activeIndex} initial={{
+                opacity: 0,
+                y: 20
+              }} animate={{
+                opacity: 1,
+                y: 0
+              }} exit={{
+                opacity: 0,
+                y: -20
+              }} transition={{
+                duration: 0.5
+              }}>
                   {/* Category */}
                   <span className="text-[10px] text-primary tracking-widest uppercase mb-2 md:mb-3 block">
                     {showcaseProjects[activeIndex].category}
                   </span>
                   
                   {/* Project name */}
-                  <Link 
-                    to={`/projects/${showcaseProjects[activeIndex].slug}`}
-                    className="inline-flex items-center gap-2 text-xl md:text-2xl text-foreground font-medium hover:text-primary transition-colors group"
-                  >
+                  <Link to={`/projects/${showcaseProjects[activeIndex].slug}`} className="inline-flex items-center gap-2 text-xl md:text-2xl text-foreground font-medium hover:text-primary transition-colors group">
                     {showcaseProjects[activeIndex].name}
                     <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
@@ -657,54 +641,35 @@ const HeroSection = () => {
 
           {/* Project Selector Bar - 6x1 Compact */}
           <div className="flex mt-2 md:mt-3 border border-border/30">
-            {showcaseProjects.map((project, index) => (
-              <motion.button
-                key={project.slug}
-                onMouseEnter={() => setActiveIndex(index)}
-                onClick={() => setActiveIndex(index)}
-                className={`flex-1 py-2.5 md:py-2 px-1 md:px-2 relative transition-all duration-300 border-r border-border/30 last:border-r-0 min-h-[44px] ${
-                  activeIndex === index 
-                    ? 'bg-primary/10' 
-                    : 'bg-transparent hover:bg-muted/50'
-                }`}
-              >
+            {showcaseProjects.map((project, index) => <motion.button key={project.slug} onMouseEnter={() => setActiveIndex(index)} onClick={() => setActiveIndex(index)} className={`flex-1 py-2.5 md:py-2 px-1 md:px-2 relative transition-all duration-300 border-r border-border/30 last:border-r-0 min-h-[44px] ${activeIndex === index ? 'bg-primary/10' : 'bg-transparent hover:bg-muted/50'}`}>
                 {/* Index number */}
-                <span className={`text-[10px] md:text-[10px] font-mono block transition-colors ${
-                  activeIndex === index ? 'text-primary' : 'text-muted-foreground'
-                }`}>
+                <span className={`text-[10px] md:text-[10px] font-mono block transition-colors ${activeIndex === index ? 'text-primary' : 'text-muted-foreground'}`}>
                   0{index + 1}
                 </span>
                 
                 {/* Project name */}
-                <span className={`text-[11px] md:text-xs font-medium block truncate transition-colors ${
-                  activeIndex === index ? 'text-foreground' : 'text-muted-foreground'
-                }`}>
+                <span className={`text-[11px] md:text-xs font-medium block truncate transition-colors ${activeIndex === index ? 'text-foreground' : 'text-muted-foreground'}`}>
                   {project.name}
                 </span>
 
                 {/* Active indicator line */}
-                {activeIndex === index && (
-                  <motion.div 
-                    layoutId="activeIndicator"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  />
-                )}
-              </motion.button>
-            ))}
+                {activeIndex === index && <motion.div layoutId="activeIndicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" transition={{
+              type: "spring",
+              stiffness: 500,
+              damping: 30
+            }} />}
+              </motion.button>)}
           </div>
           
           {/* View All Link */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.2 }}
-            className="mt-3 md:mt-4 text-right"
-          >
-            <Link 
-              to="/projects" 
-              className="inline-flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors group"
-            >
+          <motion.div initial={{
+          opacity: 0
+        }} animate={{
+          opacity: 1
+        }} transition={{
+          delay: 1.2
+        }} className="mt-3 md:mt-4 text-right">
+            <Link to="/projects" className="inline-flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors group">
               View all projects
               <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -713,31 +678,37 @@ const HeroSection = () => {
       </div>
 
       {/* Scroll indicator - Hidden on mobile for more space */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5, duration: 0.8 }} 
-        className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center gap-3"
-      >
-        <motion.span 
-          className="text-sm text-muted-foreground tracking-[0.3em] uppercase"
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
+      <motion.div initial={{
+      opacity: 0,
+      y: 20
+    }} animate={{
+      opacity: 1,
+      y: 0
+    }} transition={{
+      delay: 1.5,
+      duration: 0.8
+    }} className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center gap-3">
+        <motion.span className="text-sm text-muted-foreground tracking-[0.3em] uppercase" animate={{
+        opacity: [0.5, 1, 0.5]
+      }} transition={{
+        duration: 2,
+        repeat: Infinity
+      }}>
           Scroll
         </motion.span>
-        <motion.div 
-          className="w-8 h-14 border-2 border-primary/50 rounded-full flex items-start justify-center p-2"
-          animate={{ 
-            borderColor: ['hsl(var(--primary) / 0.3)', 'hsl(var(--primary) / 0.8)', 'hsl(var(--primary) / 0.3)']
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <motion.div 
-            className="w-1.5 h-3 bg-primary rounded-full"
-            animate={{ y: [0, 16, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          />
+        <motion.div className="w-8 h-14 border-2 border-primary/50 rounded-full flex items-start justify-center p-2" animate={{
+        borderColor: ['hsl(var(--primary) / 0.3)', 'hsl(var(--primary) / 0.8)', 'hsl(var(--primary) / 0.3)']
+      }} transition={{
+        duration: 2,
+        repeat: Infinity
+      }}>
+          <motion.div className="w-1.5 h-3 bg-primary rounded-full" animate={{
+          y: [0, 16, 0]
+        }} transition={{
+          duration: 1.5,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }} />
         </motion.div>
       </motion.div>
     </section>;
@@ -1965,7 +1936,7 @@ const LLMEngineVisualization = ({
                   y: 0
                 } : {}} transition={{
                   delay: 1.2 + i * 0.1
-}} className="p-2 sm:p-3 bg-muted/30 border border-border/50 rounded-sm overflow-hidden">
+                }} className="p-2 sm:p-3 bg-muted/30 border border-border/50 rounded-sm overflow-hidden">
                       <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2 min-w-0">
                         <metric.icon className={`w-3 h-3 sm:w-3.5 sm:h-3.5 flex-shrink-0 ${metric.color === 'green' ? 'text-green-500' : metric.color === 'yellow' ? 'text-yellow-500' : 'text-primary'}`} />
                         <span className="text-[9px] sm:text-[10px] text-muted-foreground uppercase tracking-wide truncate">{metric.label}</span>
@@ -2036,17 +2007,15 @@ const LLMEngineVisualization = ({
       } : {}} transition={{
         delay: 2
       }} className="mt-12 text-center">
-          <div className="inline-flex items-center gap-3 px-6 py-3 border border-border bg-muted/30 rounded-full">
-            <Sparkles className="w-4 h-4 text-primary" />
-            <p className="text-sm text-muted-foreground">This intelligence powers every stage of our framework</p>
-          </div>
+          
           
           {/* Powered by badge - refined style */}
-          <motion.div 
-            className="mt-6 inline-flex items-center gap-3 px-5 py-2.5 bg-gradient-to-r from-muted/40 to-muted/20 border border-border/30 rounded-full backdrop-blur-sm"
-            whileHover={{ scale: 1.02, borderColor: 'hsl(var(--primary) / 0.3)' }}
-            transition={{ duration: 0.2 }}
-          >
+          <motion.div className="mt-6 inline-flex items-center gap-3 px-5 py-2.5 bg-gradient-to-r from-muted/40 to-muted/20 border border-border/30 rounded-full backdrop-blur-sm" whileHover={{
+          scale: 1.02,
+          borderColor: 'hsl(var(--primary) / 0.3)'
+        }} transition={{
+          duration: 0.2
+        }}>
             <span className="text-[10px] text-muted-foreground/70 uppercase tracking-widest font-medium">Powered by</span>
             <div className="w-px h-4 bg-border/50" />
             <div className="flex items-center gap-2">
@@ -2298,11 +2267,9 @@ const TiltCaseCard = ({
           <div className="p-4">
             {/* Metrics only */}
             <div className="grid grid-cols-2 gap-2">
-              {project.metrics.map((metric, mi) => (
-                <div key={metric.label} className="text-center p-2 bg-muted/20 rounded-sm">
+              {project.metrics.map((metric, mi) => <div key={metric.label} className="text-center p-2 bg-muted/20 rounded-sm">
                   <CaseMetricBar label={metric.label} value={metric.value} suffix={metric.suffix} prefix={metric.prefix} delay={0.3 + mi * 0.1} isVisible={isVisible} />
-                </div>
-              ))}
+                </div>)}
             </div>
           </div>
         </div>
@@ -2319,13 +2286,12 @@ const SuccessStoriesSection = () => {
     once: true,
     margin: "-10%"
   });
-
   return <section ref={ref} className="px-4 md:px-8 lg:px-12 py-16 md:py-24 bg-muted/30 border-y border-border w-full">
-    <motion.div 
-      initial={{ opacity: 0 }} 
-      animate={isInView ? { opacity: 1 } : {}} 
-      className="w-full"
-    >
+    <motion.div initial={{
+      opacity: 0
+    }} animate={isInView ? {
+      opacity: 1
+    } : {}} className="w-full">
       <div className="mb-12">
         <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
           03 Case Studies
@@ -2339,14 +2305,11 @@ const SuccessStoriesSection = () => {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-        {featuredProjects.map((project, index) => (
-          <TiltCaseCard key={project.slug} project={project} index={index} isVisible={isInView} />
-        ))}
+        {featuredProjects.map((project, index) => <TiltCaseCard key={project.slug} project={project} index={index} isVisible={isInView} />)}
       </div>
     </motion.div>
   </section>;
 };
-
 const StrategyInActionSection = () => {
   // This section is now replaced by SuccessStoriesSection
   return null;
@@ -2473,14 +2436,7 @@ const GTMService = () => {
     suffix: "ium Labs"
   });
   return <>
-      <ServiceSchema 
-        name="Korea Web3 GTM Strategy & Marketing Services" 
-        description="Full-stack go-to-market services for Web3 projects entering the Korean market. Data-driven 4-stage framework covering intelligence, localization, activation, and growth." 
-        url="/services" 
-        provider="ium Labs" 
-        areaServed="South Korea"
-        serviceType={["Web3 Marketing", "GTM Strategy", "KOL Marketing", "Community Building", "PR & Media"]}
-      />
+      <ServiceSchema name="Korea Web3 GTM Strategy & Marketing Services" description="Full-stack go-to-market services for Web3 projects entering the Korean market. Data-driven 4-stage framework covering intelligence, localization, activation, and growth." url="/services" provider="ium Labs" areaServed="South Korea" serviceType={["Web3 Marketing", "GTM Strategy", "KOL Marketing", "Community Building", "PR & Media"]} />
       <Navbar />
       <main className="bg-background">
         <HeroSection />
