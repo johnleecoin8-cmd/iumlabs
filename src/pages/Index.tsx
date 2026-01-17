@@ -71,9 +71,22 @@ const processPhases = [{
   quote: '"Turning hype into retention."'
 }];
 const ProcessBillboardOverlay = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  
+  // Auto-cycle through phases
+  useEffect(() => {
+    if (!isVisible || isPaused) return;
+    
+    const interval = setInterval(() => {
+      setHoveredIndex(prev => (prev === null ? 0 : (prev + 1) % processPhases.length));
+    }, 3000); // 3초마다 다음 단계로
+    
+    return () => clearInterval(interval);
+  }, [isVisible, isPaused]);
+  
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
@@ -125,7 +138,7 @@ const ProcessBillboardOverlay = () => {
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
             transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms, background-color 0.5s ease-out`
-          }} onMouseEnter={() => setHoveredIndex(index)} onMouseLeave={() => setHoveredIndex(null)} onClick={() => setHoveredIndex(hoveredIndex === index ? null : index)}>
+          }} onMouseEnter={() => { setIsPaused(true); setHoveredIndex(index); }} onMouseLeave={() => { setIsPaused(false); }} onClick={() => { setHoveredIndex(index); }}>
                 {/* Step Number - 진행감 있는 색상 */}
                 <span className={`
                   absolute top-2 left-2 sm:top-3 sm:left-3 md:top-4 md:left-4
