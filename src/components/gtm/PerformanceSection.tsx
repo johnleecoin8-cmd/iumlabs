@@ -44,7 +44,7 @@ const allProjects = [
     bgVideo: '/videos/projects/peaq-hero.mp4',
     category: 'DePIN',
     strategy: 'User Acquisition',
-    metric: { value: 85, suffix: 'K+', label: 'Active Wallets' },
+    metric: { value: 25, suffix: 'K+', label: 'Active Wallets' },
     result: 'Converted community hype into actual on-chain users',
     color: 'cyan',
     glowColor: 'rgba(34,211,238,0.5)',
@@ -73,7 +73,7 @@ const allProjects = [
     bgVideo: '/videos/projects/bnb-hero.mp4',
     category: 'L1 Ecosystem',
     strategy: 'Exchange Partnership',
-    metric: { value: 2.1, suffix: 'M', label: 'Impressions' },
+    metric: { value: 850, suffix: 'K', label: 'Impressions' },
     color: 'yellow',
     glowColor: 'rgba(234,179,8,0.5)',
     progress: 95
@@ -86,7 +86,7 @@ const allProjects = [
     bgVideo: '/videos/projects/bybit-hero.mp4',
     category: 'CEX',
     strategy: 'User Acquisition',
-    metric: { value: 180, suffix: 'K+', label: 'New Users' },
+    metric: { value: 45, suffix: 'K+', label: 'New Users' },
     color: 'orange',
     glowColor: 'rgba(251,146,60,0.5)',
     progress: 89
@@ -99,7 +99,7 @@ const allProjects = [
     bgVideo: '/videos/projects/kucoin-hero.mp4',
     category: 'CEX',
     strategy: 'Community Airdrop',
-    metric: { value: 150, suffix: 'K', label: 'New Users' },
+    metric: { value: 35, suffix: 'K', label: 'New Users' },
     color: 'green',
     glowColor: 'rgba(34,197,94,0.5)',
     progress: 91
@@ -113,7 +113,7 @@ const allProjects = [
     bgVideo: '/videos/projects/sahara-hero.mp4',
     category: 'AI Infra',
     strategy: 'Thought Leadership',
-    metric: { value: 500, suffix: 'K+', label: 'Community' },
+    metric: { value: 8, suffix: 'K+', label: 'Community' },
     color: 'blue',
     glowColor: 'rgba(59,130,246,0.5)',
     progress: 87
@@ -126,7 +126,7 @@ const allProjects = [
     bgVideo: undefined,
     category: 'Data Layer',
     strategy: 'Developer Outreach',
-    metric: { value: 45, suffix: 'K', label: 'Downloads' },
+    metric: { value: 12, suffix: 'K', label: 'Downloads' },
     color: 'purple',
     glowColor: 'rgba(168,85,247,0.5)',
     progress: 82
@@ -139,7 +139,7 @@ const allProjects = [
     bgVideo: undefined,
     category: 'L2',
     strategy: 'Hype Building',
-    metric: { value: 150, suffix: 'K+', label: 'MAU' },
+    metric: { value: 38, suffix: 'K+', label: 'MAU' },
     color: 'pink',
     glowColor: 'rgba(236,72,153,0.5)',
     progress: 94
@@ -153,7 +153,7 @@ const allProjects = [
     bgVideo: undefined,
     category: 'L1',
     strategy: 'Community Building',
-    metric: { value: 200, suffix: 'K+', label: 'Community' },
+    metric: { value: 4, suffix: 'K+', label: 'Community' },
     color: 'orange',
     glowColor: 'rgba(251,146,60,0.5)',
     progress: 88
@@ -179,7 +179,7 @@ const allProjects = [
     bgVideo: undefined,
     category: 'Wallet',
     strategy: 'User Acquisition',
-    metric: { value: 120, suffix: 'K', label: 'Signups' },
+    metric: { value: 28, suffix: 'K', label: 'Signups' },
     color: 'cyan',
     glowColor: 'rgba(34,211,238,0.5)',
     progress: 83
