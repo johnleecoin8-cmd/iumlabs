@@ -31,6 +31,7 @@ const CasesSection = lazy(() => import("@/components/CasesSection"));
 const SelectedWorkShowcase = lazy(() => import("@/components/SelectedWorkShowcase"));
 const InsightsSection = lazy(() => import("@/components/InsightsSection"));
 const MediaPartnersSection = lazy(() => import("@/components/MediaPartnersSection"));
+const PerformanceSection = lazy(() => import("@/components/gtm/PerformanceSection"));
 
 // Loading fallback for lazy components
 const SectionLoader = () => (
@@ -319,32 +320,12 @@ const Index = () => {
         </div>
       </section>
       
-      {/* Cases - 03 */}
+      {/* Cases (Portfolio) - 03 */}
       <section className="bg-surface-base" id="cases">
         <div className="border-t border-white/10">
-          <AnimatedSection>
-            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-center gap-4 md:gap-6">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">03</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Our Work</span>
-            </div>
-          </AnimatedSection>
           <AnimatedSection delay={100}>
             <Suspense fallback={<SectionLoader />}>
-              <CasesSection maxItems={6} />
-            </Suspense>
-          </AnimatedSection>
-        </div>
-      </section>
-      
-      {/* Selected Work - Right below Cases */}
-      <section className="bg-surface-base" id="selected-work">
-        <div className="border-t border-white/10">
-          <AnimatedSection delay={100}>
-            <Suspense fallback={<SectionLoader />}>
-              <SelectedWorkShowcase />
+              <PerformanceSection />
             </Suspense>
           </AnimatedSection>
         </div>
