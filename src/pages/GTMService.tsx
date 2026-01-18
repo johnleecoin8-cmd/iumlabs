@@ -2238,10 +2238,7 @@ const TiltCaseCard = ({
       }} />
         
         <div className="relative bg-background border border-border group-hover:border-primary/30 transition-colors duration-300 overflow-hidden">
-          {/* Category Badge - subtle text style */}
-          <div className="absolute top-4 right-4 z-20">
-            <span className="text-[10px] font-mono text-white/60 uppercase tracking-wider">{project.category}</span>
-          </div>
+          {/* Category Badge removed */}
 
           {/* Image with parallax effect */}
           <div className="relative aspect-[16/9] overflow-hidden">
