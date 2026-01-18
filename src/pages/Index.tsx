@@ -82,7 +82,7 @@ const ProcessBillboardOverlay = () => {
     
     const interval = setInterval(() => {
       setHoveredIndex(prev => (prev === null ? 0 : (prev + 1) % processPhases.length));
-    }, 3000); // 3초마다 다음 단계로
+    }, 1000); // 1초마다 다음 단계로
     
     return () => clearInterval(interval);
   }, [isVisible, isPaused]);
