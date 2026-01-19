@@ -603,7 +603,7 @@ export const PerformanceSection = () => {
             <span className="text-primary font-mono text-sm">03</span>
             <div className="w-8 md:w-12 h-px bg-primary/50" />
             <span className="text-muted-foreground font-mono text-xs uppercase tracking-widest">
-              Portfolio
+              Cases
             </span>
             <div className="flex items-center gap-2 ml-auto">
               <div className={`w-2 h-2 rounded-full bg-green-500 ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
@@ -611,7 +611,7 @@ export const PerformanceSection = () => {
             </div>
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3 md:mb-4">
-            The Portfolio
+            Cases
           </h2>
           <p className="text-muted-foreground text-sm md:text-base max-w-2xl">
             Data doesn't lie. Our track record speaks for itself.
@@ -631,7 +631,7 @@ export const PerformanceSection = () => {
                   key={index}
                   projects={rowProjects}
                   direction={index % 2 === 0 ? 'right' : 'left'}
-                  speed={30 + index * 3}
+                  speed={20 + index * 2}
                 />
               ))}
             </div>
