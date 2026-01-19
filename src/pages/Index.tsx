@@ -247,11 +247,11 @@ const ProcessBillboardOverlay = () => {
 };
 const Index = () => {
   usePageMeta({
-    title: "Korea Crypto Marketing & Web3 GTM Agency",
-    description: "ium Labs bridges Global Web3 projects to Korea. We specialize in GTM strategy, localized branding, community growth, and on-chain intelligence.",
+    title: "ium Labs",
+    description: "ium Labs bridges global Web3 projects with Korea through data-driven research and GTM marketing.",
     path: "/",
     image: "/og-image.png",
-    suffix: "ium Labs"
+    suffix: "Korean Web3 GTM & Research Agency"
   });
   return <div className="min-h-screen bg-surface-base">
       <Navbar />
