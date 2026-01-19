@@ -11,7 +11,7 @@ import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
 import peaqLogo from "@/assets/logos/peaq.svg";
-import storyProtocolLogo from "@/assets/logos/story-protocol.png";
+import storyProtocolLogo from "@/assets/logos/story-protocol-new.png";
 import selaNetworkLogo from "@/assets/logos/sela-network.png";
 import ai16zLogo from "@/assets/logos/ai16z.png";
 import triaLogo from "@/assets/logos/tria-official.png";
