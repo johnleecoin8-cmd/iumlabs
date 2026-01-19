@@ -494,7 +494,7 @@ export const PerformanceSection = () => {
   return (
     <section 
       ref={ref}
-      className="relative py-16 px-4 md:px-8 lg:px-12 overflow-hidden w-full"
+      className="relative py-[30px] px-4 md:px-8 lg:px-12 overflow-hidden w-full"
     >
       {/* Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
