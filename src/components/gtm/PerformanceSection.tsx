@@ -592,30 +592,18 @@ export const PerformanceSection = () => {
       </div>
 
       <div className="w-full relative z-10">
-        {/* Section Header */}
+        {/* Section Header - Unified with other sections */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-8 md:mb-12"
+          className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10 -mx-4 md:-mx-8 lg:-mx-12 mb-8 md:mb-12"
         >
-          <div className="flex flex-wrap items-center gap-2 md:gap-3 mb-4">
-            <span className="text-primary font-mono text-sm">03</span>
-            <div className="w-8 md:w-12 h-px bg-primary/50" />
-            <span className="text-muted-foreground font-mono text-xs uppercase tracking-widest">
-              Cases
-            </span>
-            <div className="flex items-center gap-2 ml-auto">
-              <div className={`w-2 h-2 rounded-full bg-green-500 ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
-              <span className="text-xs font-mono text-green-500">LIVE</span>
-            </div>
+          <div className="flex items-center gap-4 md:gap-6">
+            <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">03</span>
+            <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-3 md:mb-4">
-            Cases
-          </h2>
-          <p className="text-muted-foreground text-sm md:text-base max-w-2xl">
-            Data doesn't lie. Our track record speaks for itself.
-          </p>
+          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Portfolio</span>
         </motion.div>
 
         {/* 4-Row Alternating Marquee */}
