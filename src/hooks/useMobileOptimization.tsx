@@ -40,7 +40,8 @@ export const useMobileOptimization = (): MobileOptimizationState => {
       // Determine what to disable
       const shouldDisableHeavyAnimations = isMobile || prefersReducedMotion || isLowPerformance;
       const shouldDisable3D = isMobile || isLowPerformance;
-      const shouldDisableVideo = isMobile && isLowPerformance;
+      // Allow video on mobile unless user prefers reduced motion
+      const shouldDisableVideo = prefersReducedMotion;
 
       setState({
         isMobile,
