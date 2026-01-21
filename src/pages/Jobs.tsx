@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowRight, TrendingUp, Briefcase, GraduationCap, MapPin, DollarSign, Search } from "lucide-react";
+import { ArrowRight, TrendingUp, Briefcase, GraduationCap, MapPin, DollarSign, Search, Linkedin, Twitter } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -22,6 +22,15 @@ import MediaPartnersSection from "@/components/MediaPartnersSection";
 
 // Import components
 import Logo3D from "@/components/Logo3D";
+
+// Import team NFT avatars
+import jamesNft from "@/assets/team/james-nft.png";
+import davidNft from "@/assets/team/david-nft.png";
+import julianNft from "@/assets/team/julian-nft.png";
+import kyleNft from "@/assets/team/kyle-nft.png";
+import nftAvatar1 from "@/assets/team/nft-avatar-1.png";
+import nftAvatar2 from "@/assets/team/nft-avatar-2.png";
+import nftAvatar3 from "@/assets/team/nft-avatar-3.png";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -138,6 +147,80 @@ const process = [{
   title: "OFFER",
   description: "Final Offer"
 }];
+
+// Team members data
+const teamMembers = [
+  {
+    name: "James",
+    role: "Co-Founder & CEO",
+    description: "Ex-Binance Korea BD Lead. 10+ years in blockchain industry. Strategic partnerships and business development expert.",
+    avatar: jamesNft,
+    social: {
+      linkedin: "https://linkedin.com/in/",
+      twitter: "https://twitter.com/",
+    },
+  },
+  {
+    name: "David",
+    role: "Co-Founder & COO",
+    description: "Ex-KuCoin Korea Marketing Lead. Web3 marketing and community growth specialist with 8+ years experience.",
+    avatar: davidNft,
+    social: {
+      linkedin: "https://linkedin.com/in/",
+      twitter: "https://twitter.com/",
+    },
+  },
+  {
+    name: "Julian",
+    role: "Head of Research",
+    description: "Blockchain researcher and analyst. Deep expertise in tokenomics, DeFi protocols, and on-chain data analysis.",
+    avatar: julianNft,
+    social: {
+      linkedin: "https://linkedin.com/in/",
+      twitter: "https://twitter.com/",
+    },
+  },
+  {
+    name: "Kyle",
+    role: "Head of Growth",
+    description: "Growth marketing expert specializing in Korean crypto communities. Built 100K+ member communities.",
+    avatar: kyleNft,
+    social: {
+      linkedin: "https://linkedin.com/in/",
+      twitter: "https://twitter.com/",
+    },
+  },
+  {
+    name: "Mia",
+    role: "KOL Manager",
+    description: "Managing relationships with 180+ Korean crypto influencers. Expert in influencer marketing and campaign optimization.",
+    avatar: nftAvatar1,
+    social: {
+      linkedin: "https://linkedin.com/in/",
+      twitter: "https://twitter.com/",
+    },
+  },
+  {
+    name: "Alex",
+    role: "Community Lead",
+    description: "Discord & Telegram community expert. Specializes in community engagement and ambassador programs.",
+    avatar: nftAvatar2,
+    social: {
+      linkedin: "https://linkedin.com/in/",
+      twitter: "https://twitter.com/",
+    },
+  },
+  {
+    name: "Sophie",
+    role: "PR & Media Manager",
+    description: "Media relations specialist with connections to major Korean crypto outlets. Expert in press coverage and crisis management.",
+    avatar: nftAvatar3,
+    social: {
+      linkedin: "https://linkedin.com/in/",
+      twitter: "https://twitter.com/",
+    },
+  },
+];
 
 // Video component
 const JobsHeroVideo = () => {
@@ -376,8 +459,93 @@ const Jobs = () => {
       {/* Spacer */}
       <section className="bg-white overflow-hidden" id="marquee" />
 
+      {/* 01. Our Team Section */}
+      <section className="bg-surface-even" id="team">
+        <div className="border-t border-white/10">
+          <AnimatedSection>
+            <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
+              <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
+                <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">Our Team</h2>
+              </div>
+              <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">
+                {teamMembers.length} Team Members
+              </span>
+            </div>
+          </AnimatedSection>
+
+          {/* Team Grid */}
+          <div className="container mx-auto px-4 sm:px-6 md:px-10 py-10 sm:py-16 md:py-20">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+              {teamMembers.map((member, idx) => (
+                <AnimatedSection key={idx} delay={idx * 100}>
+                  <motion.div 
+                    whileHover={{ y: -8, scale: 1.02 }}
+                    transition={{ duration: 0.3 }}
+                    className="group relative bg-surface-odd rounded-2xl overflow-hidden border border-white/10 hover:border-white/25 transition-all duration-300"
+                  >
+                    {/* NFT Avatar */}
+                    <div className="relative aspect-square overflow-hidden bg-gradient-to-b from-white/5 to-transparent">
+                      <img 
+                        src={member.avatar} 
+                        alt={member.name}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-surface-odd via-transparent to-transparent" />
+                    </div>
+                    
+                    {/* Content */}
+                    <div className="p-5 sm:p-6">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
+                            {member.name}
+                          </h3>
+                          <p className="text-xs sm:text-sm text-primary font-medium">
+                            {member.role}
+                          </p>
+                        </div>
+                        
+                        {/* Social Links */}
+                        <div className="flex gap-2">
+                          {member.social.linkedin && (
+                            <a 
+                              href={member.social.linkedin} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/15 transition-colors"
+                            >
+                              <Linkedin className="w-4 h-4 text-white/60" />
+                            </a>
+                          )}
+                          {member.social.twitter && (
+                            <a 
+                              href={member.social.twitter} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/15 transition-colors"
+                            >
+                              <Twitter className="w-4 h-4 text-white/60" />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <p className="text-sm text-white/50 leading-relaxed line-clamp-3">
+                        {member.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 02. Positions Section */}
-      <section className="bg-surface-even" id="positions">
+      <section className="bg-surface-odd" id="positions">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
@@ -433,7 +601,7 @@ const Jobs = () => {
 
 
       {/* 03. Process Section */}
-      <section className="bg-surface-odd" id="process">
+      <section className="bg-surface-even" id="process">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
@@ -469,7 +637,7 @@ const Jobs = () => {
       </section>
 
       {/* 04. Apply Section */}
-      <section className="bg-surface-even" id="apply">
+      <section className="bg-surface-odd" id="apply">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
