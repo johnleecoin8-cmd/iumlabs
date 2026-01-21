@@ -318,10 +318,11 @@ const StatItem = ({
   delay: number;
 }) => {
   const count = useCountUp({
-    end: value,
+    end: Math.round(value),
     isVisible,
     delay,
-    duration: 2000
+    duration: 2000,
+    decimals: 0
   });
   return <div className="text-center group cursor-default hover:scale-105 transition-transform">
       <div className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-0.5 sm:mb-1 stat-glow transition-all duration-300 group-hover:text-primary tracking-tight">
