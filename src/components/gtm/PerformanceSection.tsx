@@ -281,7 +281,7 @@ const ProjectCard = ({
     <Link to={`/projects/${project.slug}`} className="block flex-shrink-0">
       <div
         className={`
-          group relative p-4 md:p-6 w-[280px] md:w-[320px] h-[260px] md:h-[280px]
+          group relative p-3 md:p-6 w-[220px] md:w-[320px] h-[200px] md:h-[280px]
           border ${colors.border} rounded-xl
           bg-background/80 backdrop-blur-sm
           transition-all duration-500
@@ -311,41 +311,41 @@ const ProjectCard = ({
         {/* Content wrapper */}
         <div className="relative z-10">
         {/* Header: Logo + Live Indicator */}
-        <div className="flex items-center justify-between mb-3 md:mb-4">
+        <div className="flex items-center justify-between mb-2 md:mb-4">
           <img 
             src={project.logo} 
             alt={project.name}
-            className="h-7 md:h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+            className="h-5 md:h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
           />
-          <div className="flex items-center gap-2">
-            <div className={`w-2 h-2 rounded-full ${colors.indicator} ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
-            <span className={`text-[10px] md:text-[10px] font-mono uppercase tracking-wider ${colors.text}`}>
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <div className={`w-1.5 h-1.5 md:w-2 md:h-2 rounded-full ${colors.indicator} ${isLive ? 'opacity-100' : 'opacity-30'} transition-opacity`} />
+            <span className={`text-[8px] md:text-[10px] font-mono uppercase tracking-wider ${colors.text}`}>
               LIVE
             </span>
           </div>
         </div>
 
         {/* Category Badge */}
-        <div className="flex items-center gap-2 mb-3 md:mb-4">
-          <span className={`px-2 py-0.5 text-[10px] md:text-[10px] font-mono uppercase tracking-wider rounded ${colors.bg} ${colors.text}`}>
+        <div className="flex items-center gap-2 mb-2 md:mb-4">
+          <span className={`px-1.5 md:px-2 py-0.5 text-[8px] md:text-[10px] font-mono uppercase tracking-wider rounded ${colors.bg} ${colors.text}`}>
             {project.category}
           </span>
         </div>
 
         {/* Main Metric */}
-        <div className="mb-3 md:mb-4">
-          <div className={`text-3xl md:text-4xl font-bold font-mono ${colors.text}`}>
+        <div className="mb-2 md:mb-4">
+          <div className={`text-2xl md:text-4xl font-bold font-mono ${colors.text}`}>
             {project.metric.prefix || ''}{project.metric.value}{project.metric.suffix}
           </div>
-          <div className="text-xs md:text-sm text-muted-foreground font-mono uppercase tracking-wider">
+          <div className="text-[10px] md:text-sm text-muted-foreground font-mono uppercase tracking-wider">
             {project.metric.label}
           </div>
         </div>
 
         {/* Strategy Label */}
-        <div className="mb-3 md:mb-4">
-          <div className="text-[10px] md:text-xs text-muted-foreground mb-1">STRATEGY</div>
-          <div className="text-xs md:text-sm text-foreground font-medium">
+        <div className="mb-2 md:mb-4">
+          <div className="text-[8px] md:text-xs text-muted-foreground mb-0.5 md:mb-1">STRATEGY</div>
+          <div className="text-[10px] md:text-sm text-foreground font-medium">
             {project.strategy}
           </div>
         </div>
@@ -385,8 +385,8 @@ const MarqueeRow = ({
   speed?: number;
 }) => {
   const { isMobile } = useMobileOptimization();
-  // Mobile: 2x faster (half the duration)
-  const actualSpeed = isMobile ? speed / 2 : speed;
+  // Mobile: 4x faster (quarter the duration)
+  const actualSpeed = isMobile ? speed / 4 : speed;
   // Duplicate projects 4 times for seamless loop
   const duplicated = [...projects, ...projects, ...projects, ...projects];
   const [isPaused, setIsPaused] = useState(false);
