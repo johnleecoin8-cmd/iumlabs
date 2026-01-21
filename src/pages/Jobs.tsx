@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowRight, TrendingUp, Briefcase, GraduationCap, MapPin, DollarSign, Search, Linkedin } from "lucide-react";
+import { ArrowRight, TrendingUp, Briefcase, GraduationCap, MapPin, DollarSign, Search, Send } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -151,38 +151,47 @@ const process = [{
 const teamMembers = [
   {
     name: "James",
-    role: "Co-Founder & CEO",
+    role: "CEO",
     description: "Ex-Binance Korea BD Lead. 10+ years in blockchain industry. Strategic partnerships and business development expert.",
     avatar: jamesAvatar,
     social: {
-      linkedin: "https://linkedin.com/in/",
+      telegram: "https://t.me/hnes2",
     },
   },
   {
     name: "David",
-    role: "Co-Founder & COO",
+    role: "Head of Strategy",
     description: "Ex-KuCoin Korea Marketing Lead. Web3 marketing and community growth specialist with 8+ years experience.",
     avatar: davidAvatar,
     social: {
-      linkedin: "https://linkedin.com/in/",
+      telegram: "https://t.me/krkrjnjn",
     },
   },
   {
     name: "Julian",
-    role: "Head of Research",
-    description: "Blockchain researcher and analyst. Deep expertise in tokenomics, DeFi protocols, and on-chain data analysis.",
+    role: "KOL Manager",
+    description: "Managing relationships with Korean crypto influencers. Expert in influencer marketing and campaign optimization.",
     avatar: julianAvatar,
     social: {
-      linkedin: "https://linkedin.com/in/",
+      telegram: "https://t.me/iumlabsjulian",
     },
   },
   {
-    name: "Kyle",
-    role: "Head of Growth",
-    description: "Growth marketing expert specializing in Korean crypto communities. Built 100K+ member communities.",
+    name: "Noa",
+    role: "Head of Communication",
+    description: "Communications and PR specialist. Expert in media relations and brand messaging strategy.",
     avatar: kyleAvatar,
     social: {
-      linkedin: "https://linkedin.com/in/",
+      telegram: "https://t.me/noahppp",
+    },
+  },
+  {
+    name: "Alex",
+    role: "Community Operator",
+    description: "Discord & Telegram community expert. Specializes in community engagement and ambassador programs.",
+    avatar: alexAvatar,
+    social: {
+      telegram: "https://t.me/Hilton_lh",
     },
   },
   {
@@ -191,16 +200,7 @@ const teamMembers = [
     description: "Managing relationships with 180+ Korean crypto influencers. Expert in influencer marketing and campaign optimization.",
     avatar: miaAvatar,
     social: {
-      linkedin: "https://linkedin.com/in/",
-    },
-  },
-  {
-    name: "Alex",
-    role: "Community Lead",
-    description: "Discord & Telegram community expert. Specializes in community engagement and ambassador programs.",
-    avatar: alexAvatar,
-    social: {
-      linkedin: "https://linkedin.com/in/",
+      telegram: "https://t.me/iumlabs",
     },
   },
 ];
@@ -492,14 +492,14 @@ const Jobs = () => {
                         
                         {/* Social Links */}
                         <div className="flex gap-2">
-                          {member.social.linkedin && (
+                          {member.social.telegram && (
                             <a 
-                              href={member.social.linkedin} 
+                              href={member.social.telegram} 
                               target="_blank" 
                               rel="noopener noreferrer"
                               className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/15 transition-colors"
                             >
-                              <Linkedin className="w-4 h-4 text-white/60" />
+                              <Send className="w-4 h-4 text-white/60" />
                             </a>
                           )}
                         </div>
