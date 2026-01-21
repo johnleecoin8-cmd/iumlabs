@@ -3,6 +3,7 @@ import { useEffect, useState, MouseEvent } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useRipple } from "@/hooks/useRipple";
 import { brand } from "@/config/content";
+import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -145,6 +146,7 @@ const stats = [{
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const { createRipple } = useRipple();
+  const { isMobile, shouldDisableHeavyAnimations, shouldDisableVideo } = useMobileOptimization();
   
   useEffect(() => {
     // Trigger count-up animation after component mounts
@@ -152,19 +154,28 @@ const HeroSection = () => {
     return () => clearTimeout(timer);
   }, []);
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Video */}
+      {/* Background Layer - Video on desktop, poster on mobile for performance */}
       <div className="absolute inset-0">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/images/hero-poster.jpg"
-          className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
-        </video>
+        {shouldDisableVideo ? (
+          <img
+            src="/images/hero-poster.jpg"
+            alt=""
+            className="absolute inset-0 w-full h-full object-cover"
+            loading="eager"
+          />
+        ) : (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/images/hero-poster.jpg"
+            className="absolute inset-0 w-full h-full object-cover"
+          >
+            <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
+          </video>
+        )}
       </div>
       
       {/* Dark overlay */}
@@ -173,8 +184,8 @@ const HeroSection = () => {
       {/* Bottom gradient for smooth transition */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[hsl(0,0%,4%,0.95)]" />
 
-      {/* Floating Service Tags - Desktop - Enhanced with floating animation */}
-      {serviceTags.map((tag, index) => <div key={index} className={`absolute ${tag.position} hidden lg:block z-10`} style={{
+      {/* Floating Service Tags - Desktop only (disabled animation on mobile for performance) */}
+      {!shouldDisableHeavyAnimations && serviceTags.map((tag, index) => <div key={index} className={`absolute ${tag.position} hidden lg:block z-10`} style={{
           animation: `float-gentle ${3 + (index % 3) * 0.5}s ease-in-out infinite`,
           animationDelay: `${index * 0.3}s`
         }}>
@@ -183,11 +194,8 @@ const HeroSection = () => {
           </span>
         </div>)}
 
-      {/* Floating Service Tags - Mobile - Enhanced visibility */}
-      {mobileServiceTags.map((tag, index) => <div key={`mobile-${index}`} className={`absolute ${tag.position} lg:hidden z-10`} style={{
-          animation: `float-gentle ${3.5 + (index % 2) * 0.5}s ease-in-out infinite`,
-          animationDelay: `${index * 0.4}s`
-        }}>
+      {/* Mobile tags - static (no animation) for performance */}
+      {isMobile && mobileServiceTags.slice(0, 4).map((tag, index) => <div key={`mobile-${index}`} className={`absolute ${tag.position} lg:hidden z-10`}>
           <span className="font-sans px-3 py-1.5 text-[11px] rounded-md bg-black/60 border border-white/25 text-white/90 whitespace-nowrap backdrop-blur-md shadow-lg">
             {tag.label}
           </span>
