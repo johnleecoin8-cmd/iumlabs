@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { ArrowRight, TrendingUp, Briefcase, GraduationCap, MapPin, DollarSign, Search, Linkedin, Twitter } from "lucide-react";
+import { ArrowRight, TrendingUp, Briefcase, GraduationCap, MapPin, DollarSign, Search, Linkedin } from "lucide-react";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
@@ -23,14 +23,13 @@ import MediaPartnersSection from "@/components/MediaPartnersSection";
 // Import components
 import Logo3D from "@/components/Logo3D";
 
-// Import team NFT avatars
-import jamesNft from "@/assets/team/james-nft.png";
-import davidNft from "@/assets/team/david-nft.png";
-import julianNft from "@/assets/team/julian-nft.png";
-import kyleNft from "@/assets/team/kyle-nft.png";
-import nftAvatar1 from "@/assets/team/nft-avatar-1.png";
-import nftAvatar2 from "@/assets/team/nft-avatar-2.png";
-import nftAvatar3 from "@/assets/team/nft-avatar-3.png";
+// Import team avatars
+import jamesAvatar from "@/assets/team/james-avatar.jpeg";
+import davidAvatar from "@/assets/team/david-avatar.png";
+import julianAvatar from "@/assets/team/julian-avatar.png";
+import kyleAvatar from "@/assets/team/kyle-avatar.png";
+import miaAvatar from "@/assets/team/mia-avatar.png";
+import alexAvatar from "@/assets/team/alex-avatar.png";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -154,60 +153,54 @@ const teamMembers = [
     name: "James",
     role: "Co-Founder & CEO",
     description: "Ex-Binance Korea BD Lead. 10+ years in blockchain industry. Strategic partnerships and business development expert.",
-    avatar: jamesNft,
+    avatar: jamesAvatar,
     social: {
       linkedin: "https://linkedin.com/in/",
-      twitter: "https://twitter.com/",
     },
   },
   {
     name: "David",
     role: "Co-Founder & COO",
     description: "Ex-KuCoin Korea Marketing Lead. Web3 marketing and community growth specialist with 8+ years experience.",
-    avatar: davidNft,
+    avatar: davidAvatar,
     social: {
       linkedin: "https://linkedin.com/in/",
-      twitter: "https://twitter.com/",
     },
   },
   {
     name: "Julian",
     role: "Head of Research",
     description: "Blockchain researcher and analyst. Deep expertise in tokenomics, DeFi protocols, and on-chain data analysis.",
-    avatar: julianNft,
+    avatar: julianAvatar,
     social: {
       linkedin: "https://linkedin.com/in/",
-      twitter: "https://twitter.com/",
     },
   },
   {
     name: "Kyle",
     role: "Head of Growth",
     description: "Growth marketing expert specializing in Korean crypto communities. Built 100K+ member communities.",
-    avatar: kyleNft,
+    avatar: kyleAvatar,
     social: {
       linkedin: "https://linkedin.com/in/",
-      twitter: "https://twitter.com/",
     },
   },
   {
     name: "Mia",
     role: "KOL Manager",
     description: "Managing relationships with 180+ Korean crypto influencers. Expert in influencer marketing and campaign optimization.",
-    avatar: nftAvatar1,
+    avatar: miaAvatar,
     social: {
       linkedin: "https://linkedin.com/in/",
-      twitter: "https://twitter.com/",
     },
   },
   {
     name: "Alex",
     role: "Community Lead",
     description: "Discord & Telegram community expert. Specializes in community engagement and ambassador programs.",
-    avatar: nftAvatar2,
+    avatar: alexAvatar,
     social: {
       linkedin: "https://linkedin.com/in/",
-      twitter: "https://twitter.com/",
     },
   },
 ];
@@ -507,16 +500,6 @@ const Jobs = () => {
                               className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/15 transition-colors"
                             >
                               <Linkedin className="w-4 h-4 text-white/60" />
-                            </a>
-                          )}
-                          {member.social.twitter && (
-                            <a 
-                              href={member.social.twitter} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/15 transition-colors"
-                            >
-                              <Twitter className="w-4 h-4 text-white/60" />
                             </a>
                           )}
                         </div>
