@@ -39,17 +39,17 @@ const WhyChooseUsSection = () => {
           >
             {/* Headline */}
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
-              Real results, not just promises.
+              More than an Agency. Your Growth Engine.
             </h2>
             
             {/* Description */}
             <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-6">
-              ium Labs bridges global Web3 projects with Korea's dynamic ecosystem. '이음(ium)' Derived from the Korean word "to connect," we function as your foundational layer for market entry. We transcend standard marketing by leveraging proprietary analytics and data-driven research, providing the actionable insights needed to navigate and succeed in the Korean market.
+              ium Labs connects global Web3 projects to Korea's dynamic ecosystem through data-driven research and actionable insights. Founded by veterans from Binance & KuCoin, we provide the winning formula to navigate the complex Korean market.
             </p>
             
-            {/* Founders Note */}
-            <p className="text-violet-400 text-xs sm:text-sm">
-              Founded by former Binance & KuCoin executives
+            {/* CTA Note */}
+            <p className="text-violet-400 text-xs sm:text-sm font-medium">
+              Don't just enter Korea. Dominate it.
             </p>
           </motion.div>
         </div>
