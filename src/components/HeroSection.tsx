@@ -236,12 +236,12 @@ const HeroSection = () => {
       <div className="flex-1 flex items-center justify-center relative z-10 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography - Mobile optimized */}
-          <h1 className="font-sans text-[1.6rem] sm:text-display-lg md:text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[1.1] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
-            <span className="text-white font-sans text-[1.4rem] sm:text-display-xl leading-tight">Your Strategic Gateway<br />to the Korean Web3 Market</span>
+          <h1 className="font-sans text-[2rem] sm:text-display-lg md:text-[clamp(3rem,6vw,5rem)] font-bold leading-[1.1] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
+            <span className="text-white font-sans text-[1.8rem] sm:text-display-xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] leading-tight">Your Strategic Gateway<br />to the Korean Web3 Market</span>
           </h1>
 
           {/* Subtext - Enhanced readability - Mobile optimized */}
-          <p className="text-sm sm:text-body-base md:text-body-lg text-white/70 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-1 sm:px-2 whitespace-nowrap sm:whitespace-normal">
+          <p className="text-xs sm:text-body-base md:text-body-lg text-white/70 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-4 sm:px-2">
             Unlock Hyper-Local Growth through Korea's Top-Tier KOL & Community Network and Deep Market Research.
           </p>
 
