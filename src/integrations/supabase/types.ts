@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      brand_stats: {
+        Row: {
+          base_value: number
+          created_at: string
+          id: string
+          label: string
+          max_variance: number | null
+          min_variance: number | null
+          prefix: string | null
+          suffix: string | null
+          updated_at: string
+          value: number
+        }
+        Insert: {
+          base_value: number
+          created_at?: string
+          id: string
+          label: string
+          max_variance?: number | null
+          min_variance?: number | null
+          prefix?: string | null
+          suffix?: string | null
+          updated_at?: string
+          value: number
+        }
+        Update: {
+          base_value?: number
+          created_at?: string
+          id?: string
+          label?: string
+          max_variance?: number | null
+          min_variance?: number | null
+          prefix?: string | null
+          suffix?: string | null
+          updated_at?: string
+          value?: number
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           comments: string | null
