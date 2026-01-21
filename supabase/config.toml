@@ -20,3 +20,6 @@ verify_jwt = false
 
 [functions.update-hype-projects]
 verify_jwt = false
+
+[functions.simulate-daily-variance]
+verify_jwt = false
