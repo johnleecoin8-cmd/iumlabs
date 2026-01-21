@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowUpRight } from 'lucide-react';
 import { useCountUp } from '@/hooks/useCountUp';
 import { Progress } from '@/components/ui/progress';
+import { useMobileOptimization } from '@/hooks/useMobileOptimization';
 
 // Project logos
 import mantraLogo from '@/assets/logos/mantra.png';
@@ -383,6 +384,9 @@ const MarqueeRow = ({
   direction: 'left' | 'right';
   speed?: number;
 }) => {
+  const { isMobile } = useMobileOptimization();
+  // Mobile: 2x faster (half the duration)
+  const actualSpeed = isMobile ? speed / 2 : speed;
   // Duplicate projects 4 times for seamless loop
   const duplicated = [...projects, ...projects, ...projects, ...projects];
   const [isPaused, setIsPaused] = useState(false);
@@ -424,7 +428,7 @@ const MarqueeRow = ({
           duration: 0
         } : {
           x: {
-            duration: speed,
+            duration: actualSpeed,
             repeat: Infinity,
             ease: 'linear',
             repeatType: 'loop'
