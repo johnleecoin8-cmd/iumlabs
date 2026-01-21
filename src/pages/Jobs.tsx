@@ -152,7 +152,7 @@ const teamMembers = [
   {
     name: "James",
     role: "CEO",
-    description: "Ex-Binance Korea BD Lead. 10+ years in blockchain industry. Strategic partnerships and business development expert.",
+    description: "Ex-KuCoin Korea Lead, Outlier Ventures Investment Manager",
     avatar: jamesAvatar,
     social: {
       telegram: "https://t.me/hnes2",
@@ -161,7 +161,7 @@ const teamMembers = [
   {
     name: "David",
     role: "Head of Strategy",
-    description: "Ex-KuCoin Korea Marketing Lead. Web3 marketing and community growth specialist with 8+ years experience.",
+    description: "Ex-Binance Fiat Lead, 21 Shares Portfolio Manager",
     avatar: davidAvatar,
     social: {
       telegram: "https://t.me/krkrjnjn",
@@ -170,7 +170,7 @@ const teamMembers = [
   {
     name: "Julian",
     role: "KOL Manager",
-    description: "Managing relationships with Korean crypto influencers. Expert in influencer marketing and campaign optimization.",
+    description: "Ex-Coinone, Upbit Security Operation",
     avatar: julianAvatar,
     social: {
       telegram: "https://t.me/iumlabsjulian",
@@ -179,7 +179,7 @@ const teamMembers = [
   {
     name: "Noa",
     role: "Head of Communication",
-    description: "Communications and PR specialist. Expert in media relations and brand messaging strategy.",
+    description: "Ex-0G Foundation Moderator",
     avatar: kyleAvatar,
     social: {
       telegram: "https://t.me/noahppp",
@@ -188,7 +188,7 @@ const teamMembers = [
   {
     name: "Alex",
     role: "Community Operator",
-    description: "Discord & Telegram community expert. Specializes in community engagement and ambassador programs.",
+    description: "Ex-Ai16z Operation Manager",
     avatar: alexAvatar,
     social: {
       telegram: "https://t.me/Hilton_lh",
