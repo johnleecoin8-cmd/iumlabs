@@ -185,6 +185,57 @@ Deno.serve(async (req) => {
       console.error("Failed to record snapshot:", snapshotError);
     }
 
+    // ==========================================
+    // Update brand_stats with daily variance
+    // ==========================================
+    console.log("Updating brand stats with daily variance...");
+    
+    const { data: brandStats, error: brandStatsError } = await supabase
+      .from("brand_stats")
+      .select("*");
+
+    if (!brandStatsError && brandStats) {
+      for (const stat of brandStats) {
+        try {
+          const baseValue = Number(stat.base_value) || 0;
+          const minVariance = Number(stat.min_variance) || 2;
+          const maxVariance = Number(stat.max_variance) || 5;
+          
+          // Apply variance within the stat's configured range
+          const newValue = addVariance(baseValue, minVariance, maxVariance);
+          
+          // Round appropriately based on the magnitude
+          let roundedValue: number;
+          if (baseValue >= 100) {
+            roundedValue = Math.round(newValue);
+          } else if (baseValue >= 10) {
+            roundedValue = Math.round(newValue * 10) / 10;
+          } else {
+            roundedValue = Math.round(newValue * 100) / 100;
+          }
+
+          const { error: updateBrandError } = await supabase
+            .from("brand_stats")
+            .update({ 
+              value: roundedValue,
+              updated_at: new Date().toISOString()
+            })
+            .eq("id", stat.id);
+
+          if (updateBrandError) {
+            console.error(`Error updating brand stat ${stat.id}:`, updateBrandError.message);
+          } else {
+            console.log(`Brand stat ${stat.id}: ${stat.value} → ${roundedValue}`);
+          }
+        } catch (err) {
+          console.error(`Error processing brand stat ${stat.id}:`, err);
+        }
+      }
+      console.log("Brand stats variance applied successfully");
+    } else if (brandStatsError) {
+      console.error("Failed to fetch brand stats:", brandStatsError.message);
+    }
+
     const successCount = results.filter((r) => r.status === "success").length;
 
     return new Response(

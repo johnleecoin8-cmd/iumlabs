@@ -1,7 +1,8 @@
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useMemo } from 'react';
 import { useCountUp } from '@/hooks/useCountUp';
 import { ChevronDown } from 'lucide-react';
+import { useBrandStatsByIds } from '@/hooks/useBrandStats';
 
 // Roster Data - The Team (Creative Agency Style)
 const rosterMembers = [
@@ -43,11 +44,11 @@ const rosterMembers = [
   },
 ];
 
-// Metrics Data
-const metrics = [
-  { value: '$1.5B+', label: 'Volume Generated', labelKo: '생성된 거래량' },
-  { value: '500K+', label: 'Active Community', labelKo: '활성 커뮤니티' },
-  { value: '#1', label: 'Mindshare Ranking', labelKo: '마인드셰어 랭킹' },
+// Default Metrics Data (fallback)
+const defaultMetrics = [
+  { id: 'volume_generated', value: '$1.5B+', label: 'Volume Generated', labelKo: '생성된 거래량' },
+  { id: 'active_community', value: '500K+', label: 'Active Community', labelKo: '활성 커뮤니티' },
+  { id: 'mindshare_ranking', value: '#1', label: 'Mindshare Ranking', labelKo: '마인드셰어 랭킹' },
 ];
 
 // Backing Intelligence
@@ -68,7 +69,7 @@ const parseMetricValue = (value: string): { numericValue: number; prefix: string
 
 // Animated Metric Component
 const AnimatedMetric = ({ metric, index, isVisible }: { 
-  metric: typeof metrics[0]; 
+  metric: typeof defaultMetrics[0]; 
   index: number;
   isVisible: boolean;
 }) => {
@@ -104,6 +105,25 @@ const AnimatedMetric = ({ metric, index, isVisible }: {
 
 // Metrics Row Component
 const MetricsRow = ({ isVisible }: { isVisible: boolean }) => {
+  // Fetch dynamic brand stats
+  const { statsMap } = useBrandStatsByIds(['volume_generated', 'active_community']);
+  
+  // Create metrics with dynamic values
+  const metrics = useMemo(() => {
+    return defaultMetrics.map(defaultMetric => {
+      const dynamicStat = statsMap[defaultMetric.id];
+      if (dynamicStat) {
+        // Format the value based on prefix/suffix from database
+        const formattedValue = `${dynamicStat.prefix}${dynamicStat.value}${dynamicStat.suffix}`;
+        return {
+          ...defaultMetric,
+          value: formattedValue,
+        };
+      }
+      return defaultMetric;
+    });
+  }, [statsMap]);
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

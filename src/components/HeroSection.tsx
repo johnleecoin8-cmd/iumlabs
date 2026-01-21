@@ -1,9 +1,10 @@
 import { ChevronDown, Send } from "lucide-react";
-import { useEffect, useState, MouseEvent } from "react";
+import { useEffect, useState, MouseEvent, useMemo } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useRipple } from "@/hooks/useRipple";
 import { brand } from "@/config/content";
 import { useMobileOptimization } from "@/hooks/useMobileOptimization";
+import { useBrandStatsByIds } from "@/hooks/useBrandStats";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -125,22 +126,30 @@ const clientLogos = [{
   logo: synfuturesLogo,
   noInvert: true
 }];
-const stats = [{
+// Default stats as fallback
+const defaultStats = [{
+  id: "projects_launched",
   value: 18,
   label: "Projects Launched",
+  prefix: "",
   suffix: "+"
 }, {
-  value: 115,
+  id: "kol_network",
+  value: 180,
   label: "KOL Network",
+  prefix: "",
   suffix: "+"
 }, {
+  id: "token_sales",
   value: 6,
   label: "Token Sales",
   prefix: "$",
   suffix: "M"
 }, {
+  id: "events_hosted",
   value: 42,
   label: "Events Hosted",
+  prefix: "",
   suffix: "+"
 }];
 const HeroSection = () => {
@@ -148,11 +157,33 @@ const HeroSection = () => {
   const { createRipple } = useRipple();
   const { isMobile, shouldDisableHeavyAnimations, shouldDisableVideo } = useMobileOptimization();
   
+  // Fetch dynamic brand stats
+  const { statsMap, isLoading: isLoadingStats } = useBrandStatsByIds([
+    "projects_launched", "kol_network", "token_sales", "events_hosted"
+  ]);
+  
+  // Merge dynamic stats with fallback defaults
+  const stats = useMemo(() => {
+    return defaultStats.map(defaultStat => {
+      const dynamicStat = statsMap[defaultStat.id];
+      if (dynamicStat) {
+        return {
+          ...defaultStat,
+          value: dynamicStat.value,
+          prefix: dynamicStat.prefix || defaultStat.prefix,
+          suffix: dynamicStat.suffix || defaultStat.suffix,
+        };
+      }
+      return defaultStat;
+    });
+  }, [statsMap]);
+  
   useEffect(() => {
     // Trigger count-up animation after component mounts
     const timer = setTimeout(() => setIsVisible(true), 800);
     return () => clearTimeout(timer);
   }, []);
+  
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video on desktop, poster on mobile for performance */}
       <div className="absolute inset-0">
