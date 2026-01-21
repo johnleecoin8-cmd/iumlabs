@@ -36,16 +36,14 @@ const MediaPartnersSection = lazy(() => import("@/components/MediaPartnersSectio
 const PerformanceSection = lazy(() => import("@/components/gtm/PerformanceSection"));
 
 // Loading fallback for lazy components
-const SectionLoader = () => (
-  <div className="h-64 flex items-center justify-center">
+const SectionLoader = () => <div className="h-64 flex items-center justify-center">
     <div className="w-6 h-6 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-  </div>
-);
+  </div>;
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { MessageSquare, FileText, Rocket, TrendingUp, Check, ArrowRight, ArrowDown } from "lucide-react";
+import { MessageSquare, FileText, Rocket, TrendingUp, Check, ArrowRight } from "lucide-react";
 const processPhases = [{
   title: "ANALYZE",
   subtitle: "Intelligence",
@@ -76,19 +74,19 @@ const ProcessBillboardOverlay = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
-  const { shouldDisableHeavyAnimations } = useMobileOptimization();
-  
+  const {
+    shouldDisableHeavyAnimations
+  } = useMobileOptimization();
+
   // Auto-cycle through phases - disabled on mobile for performance
   useEffect(() => {
     if (!isVisible || isPaused || shouldDisableHeavyAnimations) return;
-    
     const interval = setInterval(() => {
-      setHoveredIndex(prev => (prev === null ? 0 : (prev + 1) % processPhases.length));
+      setHoveredIndex(prev => prev === null ? 0 : (prev + 1) % processPhases.length);
     }, 2500); // 2.5초마다 (모바일에서는 완전히 비활성화)
-    
+
     return () => clearInterval(interval);
   }, [isVisible, isPaused, shouldDisableHeavyAnimations]);
-  
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
@@ -140,7 +138,14 @@ const ProcessBillboardOverlay = () => {
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
             transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms, background-color 0.5s ease-out`
-          }} onMouseEnter={() => { setIsPaused(true); setHoveredIndex(index); }} onMouseLeave={() => { setIsPaused(false); }} onClick={() => { setHoveredIndex(index); }}>
+          }} onMouseEnter={() => {
+            setIsPaused(true);
+            setHoveredIndex(index);
+          }} onMouseLeave={() => {
+            setIsPaused(false);
+          }} onClick={() => {
+            setHoveredIndex(index);
+          }}>
                 {/* Step Number - 진행감 있는 색상 */}
                 <span className={`
                   absolute top-2 left-2 sm:top-3 sm:left-3 md:top-4 md:left-4
@@ -160,9 +165,7 @@ const ProcessBillboardOverlay = () => {
                 
                 {/* 연결 화살표 - 2→3 (아래로) */}
                 {index === 1 && <div className="absolute bottom-0 right-1/4 translate-y-1/2 z-20 lg:hidden">
-                    <div className="w-5 h-5 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                      <ArrowDown className="w-3 h-3 text-white/70" />
-                    </div>
+                    
                   </div>}
                 
                 {/* 연결 화살표 - 3→4 (오른쪽) */}
@@ -248,12 +251,7 @@ const ProcessBillboardOverlay = () => {
 };
 const Index = () => {
   return <div className="min-h-screen bg-surface-base">
-      <SEOHead
-        title="ium Labs | Korea Web3 Marketing & GTM Agency"
-        description="ium Labs is the premier Korea Web3 Marketing partner for global projects. We specialize in localized GTM strategy, crypto growth, and community management in South Korea."
-        path="/"
-        keywords={['Korea Web3 Marketing', 'Korean Crypto Marketing', 'Web3 GTM Korea', 'Blockchain Marketing Korea']}
-      />
+      <SEOHead title="ium Labs | Korea Web3 Marketing & GTM Agency" description="ium Labs is the premier Korea Web3 Marketing partner for global projects. We specialize in localized GTM strategy, crypto growth, and community management in South Korea." path="/" keywords={['Korea Web3 Marketing', 'Korean Crypto Marketing', 'Web3 GTM Korea', 'Blockchain Marketing Korea']} />
       <Navbar />
       
       {/* Hero - Full Bleed */}
