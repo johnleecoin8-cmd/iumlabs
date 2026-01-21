@@ -48,6 +48,7 @@ export const navigation = {
     { name: "Projects", href: "/projects" },
     { name: "Research", href: "/research" },
     // { name: "K-Leaderboard", href: "/k-leaderboard" }, // 임시 숨김
+    { name: "Team", href: "/team" },
     { name: "Career", href: "/jobs" },
     { name: "Contact", href: "/contact" },
   ],
