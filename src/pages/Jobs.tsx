@@ -152,7 +152,7 @@ const teamMembers = [
   {
     name: "James",
     role: "CEO",
-    description: "Ex-KuCoin Korea Lead, Outlier Ventures Investment Manager",
+    description: "Ex-KuCoin Korea Lead,\nOutlier Ventures Investment Manager",
     avatar: jamesAvatar,
     social: {
       telegram: "https://t.me/hnes2",
@@ -161,7 +161,7 @@ const teamMembers = [
   {
     name: "David",
     role: "Head of Strategy",
-    description: "Ex-Binance Fiat Lead, 21 Shares Portfolio Manager",
+    description: "Ex-Binance Fiat Lead,\n21 Shares Portfolio Manager",
     avatar: davidAvatar,
     social: {
       telegram: "https://t.me/krkrjnjn",
@@ -505,7 +505,7 @@ const Jobs = () => {
                         </div>
                       </div>
                       
-                      <p className="text-sm text-white/50 leading-relaxed line-clamp-3">
+                      <p className="text-sm text-white/50 leading-relaxed whitespace-pre-line">
                         {member.description}
                       </p>
                     </div>
