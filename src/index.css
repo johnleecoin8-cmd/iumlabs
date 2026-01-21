@@ -1163,3 +1163,57 @@
     display: none;
   }
 }
+
+/* ============================================
+   MOBILE PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+@media (max-width: 1023px) {
+  /* Reduce animation complexity on mobile */
+  .animate-float,
+  .animate-pulse {
+    animation-duration: 6s !important;
+  }
+  
+  /* Simplify marquee on mobile - use transform instead of margin animation */
+  .logo-marquee-slow {
+    animation-duration: 60s !important;
+  }
+  
+  /* Reduce backdrop blur on mobile (expensive on GPU) */
+  .backdrop-blur-md {
+    backdrop-filter: blur(8px) !important;
+  }
+  
+  .backdrop-blur-lg {
+    backdrop-filter: blur(12px) !important;
+  }
+  
+  /* Disable complex box shadows on mobile */
+  .hover\:shadow-\[0_0_24px_rgba\(255\,255\,255\,0\.15\)\]:hover {
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  /* Reduce will-change usage on mobile */
+  .will-change-transform {
+    will-change: auto !important;
+  }
+}
+
+/* Ultra-low power mode for very weak devices */
+@media (max-width: 767px) and (pointer: coarse) {
+  .logo-marquee,
+  .logo-marquee-slow,
+  .logo-marquee-fast {
+    animation-duration: 80s !important;
+  }
+  
+  .animate-float {
+    animation: none !important;
+  }
+  
+  /* Static floating tags on mobile */
+  [style*="float-gentle"] {
+    animation: none !important;
+  }
+}

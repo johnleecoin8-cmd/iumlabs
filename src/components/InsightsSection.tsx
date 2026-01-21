@@ -6,6 +6,7 @@ import { toast } from "sonner";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 import { useQuery } from "@tanstack/react-query";
+import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 
 // Lazy load 3D logo to reduce initial bundle
 const Logo3D = lazy(() => import("@/components/Logo3D"));
@@ -76,12 +77,14 @@ const InsightsSection = () => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [shouldLoadLogo, setShouldLoadLogo] = useState(false);
+  const { shouldDisable3D } = useMobileOptimization();
 
-  // Delay 3D logo loading to avoid blocking initial render
+  // Delay 3D logo loading to avoid blocking initial render - skip entirely on mobile
   useEffect(() => {
-    const timer = setTimeout(() => setShouldLoadLogo(true), 2000);
+    if (shouldDisable3D) return;
+    const timer = setTimeout(() => setShouldLoadLogo(true), 3000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [shouldDisable3D]);
 
   // Fetch latest 3 published research posts from DB
   const { data: insights = [] } = useQuery({
@@ -179,8 +182,9 @@ const InsightsSection = () => {
             </button>
           </form>
 
-          <div className="h-24 sm:h-32 w-full hidden sm:block">
-            {shouldLoadLogo ? (
+          {/* 3D Logo - Only render on desktop for performance */}
+          <div className="h-24 sm:h-32 w-full hidden lg:block">
+            {shouldLoadLogo && !shouldDisable3D ? (
               <Suspense fallback={<div className="w-full h-full bg-white/5 rounded-lg animate-pulse" />}>
                 <Logo3D />
               </Suspense>

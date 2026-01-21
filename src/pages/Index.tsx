@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, lazy, Suspense } from "react";
+import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
@@ -76,17 +77,18 @@ const ProcessBillboardOverlay = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { shouldDisableHeavyAnimations } = useMobileOptimization();
   
-  // Auto-cycle through phases
+  // Auto-cycle through phases - disabled on mobile for performance
   useEffect(() => {
-    if (!isVisible || isPaused) return;
+    if (!isVisible || isPaused || shouldDisableHeavyAnimations) return;
     
     const interval = setInterval(() => {
       setHoveredIndex(prev => (prev === null ? 0 : (prev + 1) % processPhases.length));
-    }, 1000); // 1초마다 다음 단계로
+    }, 2500); // 2.5초마다 (모바일에서는 완전히 비활성화)
     
     return () => clearInterval(interval);
-  }, [isVisible, isPaused]);
+  }, [isVisible, isPaused, shouldDisableHeavyAnimations]);
   
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
