@@ -4,14 +4,17 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     
+    <!-- Primary Meta Tags - Will be overridden by react-helmet-async per page -->
     <title>ium Labs | Korea Web3 Marketing & GTM Agency</title>
     
     <meta name="title" content="ium Labs | Korea Web3 Marketing & GTM Agency">
     <meta name="description" content="ium Labs is the premier Korea Web3 Marketing partner for global projects. We specialize in localized GTM strategy, crypto growth, and community management in South Korea." />
     <meta name="author" content="ium Labs" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     
-    <meta name="keywords" content="Korea Web3 Marketing, Korean Crypto Marketing, Web3 GTM Korea, Blockchain Marketing Korea, Crypto Marketing Agency, 한국 웹3 마케팅, 크립토 마케팅, 블록체인 마케팅, ium Labs" />
+    <meta name="keywords" content="Korea Web3 Marketing, Korean Crypto Marketing, Web3 GTM Korea, Blockchain Marketing Korea, Crypto Marketing Agency, Korean Market Entry, Web3 Research, Blockchain Intelligence, 한국 웹3 마케팅, 크립토 마케팅, 블록체인 마케팅, ium Labs" />
 
+    <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
     <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48x48.png" />
@@ -22,6 +25,7 @@
     <link rel="shortcut icon" type="image/png" href="/logo.png" />
     <link rel="manifest" href="/manifest.json" />
 
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="ium Labs" />
     <meta property="og:url" content="https://iumlabs.io/" />
@@ -35,6 +39,7 @@
     <meta property="og:image:alt" content="ium Labs - Korea Web3 Marketing Agency" />
     <meta property="og:locale" content="en_US" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@iumlabs" />
     <meta name="twitter:creator" content="@iumlabs" />
@@ -43,72 +48,118 @@
     <meta name="twitter:image" content="https://iumlabs.io/images/share-og.jpeg" />
     <meta name="twitter:image:alt" content="ium Labs - Korea Web3 Marketing Agency" />
     
-    <link rel="canonical" href="https://iumlabs.io/" />
-    
+    <!-- Naver Verification -->
     <meta name="naver-site-verification" content="9febbb544483c98b5759e221533f79e46a1eb0fa" />
     
+    <!-- Structured Data: Organization -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@graph": [
+      "@type": "Organization",
+      "@id": "https://iumlabs.io/#organization",
+      "name": "ium Labs",
+      "url": "https://iumlabs.io/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://iumlabs.io/logo.png",
+        "width": 512,
+        "height": 512
+      },
+      "description": "Leading Korea Web3 Marketing & GTM Agency bridging global blockchain projects to the Korean market.",
+      "foundingDate": "2023",
+      "areaServed": {
+        "@type": "Country",
+        "name": "South Korea"
+      },
+      "knowsAbout": [
+        "Korea Web3 Marketing",
+        "Crypto GTM Strategy",
+        "Blockchain Research",
+        "Korea Market Entry",
+        "KOL Marketing",
+        "Community Management",
+        "PR & Media Relations"
+      ],
+      "sameAs": [
+        "https://twitter.com/iumlabs",
+        "https://www.linkedin.com/company/iumlabs",
+        "https://t.me/iumlabs"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "Business Development",
+        "email": "contact@iumlabs.io",
+        "availableLanguage": ["English", "Korean"]
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "373 Gangnam-daero, 10F",
+        "addressLocality": "Seocho-gu",
+        "addressRegion": "Seoul",
+        "addressCountry": "KR"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data: WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": "https://iumlabs.io/#website",
+      "url": "https://iumlabs.io/",
+      "name": "ium Labs",
+      "description": "Korea Web3 Marketing & GTM Agency",
+      "publisher": {
+        "@id": "https://iumlabs.io/#organization"
+      }
+    }
+    </script>
+    
+    <!-- Structured Data: Navigation -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "itemListElement": [
         {
-          "@type": "Organization",
-          "@id": "https://iumlabs.io/#organization",
-          "name": "ium Labs",
-          "url": "https://iumlabs.io/",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://iumlabs.io/logo.png",
-            "width": 512,
-            "height": 512
-          },
-          "description": "Leading Korea Web3 Marketing & GTM Agency bridging global blockchain projects to the Korean market.",
-          "areaServed": {
-            "@type": "Country",
-            "name": "South Korea"
-          },
-          "knowsAbout": [
-            "Korea Web3 Marketing",
-            "Crypto GTM Strategy",
-            "Blockchain Research",
-            "Korea Market Entry",
-            "KOL Marketing"
-          ],
-          "sameAs": [
-            "https://twitter.com/iumlabs",
-            "https://www.linkedin.com/company/iumlabs",
-            "https://t.me/iumlabs"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://iumlabs.io/#website",
-          "url": "https://iumlabs.io/",
-          "name": "ium Labs",
-          "description": "Korea Web3 Marketing & GTM Agency",
-          "publisher": {
-            "@id": "https://iumlabs.io/#organization"
-          }
+          "@type": "SiteNavigationElement",
+          "position": 1,
+          "name": "GTM Services",
+          "url": "https://iumlabs.io/services"
         },
         {
           "@type": "SiteNavigationElement",
-          "@id": "https://iumlabs.io/#navigation",
-          "name": ["GTM Strategy", "Projects", "Research", "Contact", "Career"],
-          "url": [
-            "https://iumlabs.io/services",
-            "https://iumlabs.io/projects",
-            "https://iumlabs.io/research",
-            "https://iumlabs.io/contact",
-            "https://iumlabs.io/jobs"
-          ]
+          "position": 2,
+          "name": "Projects",
+          "url": "https://iumlabs.io/projects"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 3,
+          "name": "Research",
+          "url": "https://iumlabs.io/research"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 4,
+          "name": "Contact",
+          "url": "https://iumlabs.io/contact"
+        },
+        {
+          "@type": "SiteNavigationElement",
+          "position": 5,
+          "name": "Careers",
+          "url": "https://iumlabs.io/jobs"
         }
       ]
     }
     </script>
     
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
 
   <body>

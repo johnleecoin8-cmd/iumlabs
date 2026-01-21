@@ -7,12 +7,12 @@ import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import ResearchHeroSection from "@/components/ResearchHeroSection";
+import SEOHead from "@/components/SEOHead";
 import { Link } from "react-router-dom";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import CalendlyButton from "@/components/CalendlyButton";
-import { usePageMeta } from "@/hooks/usePageMeta";
 import { useQuery } from "@tanstack/react-query";
 const categories = ["All", "Market Research", "Strategy", "DeFi", "Marketing", "Technology", "Industry"];
 
@@ -25,12 +25,6 @@ const calculateReadTime = (content: string | null): string => {
   return `${minutes} min read`;
 };
 const Research = () => {
-  usePageMeta({
-    title: "Web3 & Crypto Market Research | Korea",
-    description: "Data-driven crypto and Web3 research for the Korean market. Ecosystem analysis, market insights, and strategic intelligence for blockchain projects entering Korea.",
-    path: "/research",
-    image: "/og-image.png"
-  });
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [currentPage, setCurrentPage] = useState(1);
@@ -124,6 +118,12 @@ const Research = () => {
     }
   };
   return <div className="min-h-screen bg-[#0A0A0A]">
+      <SEOHead
+        title="Korean Crypto Research & Web3 Insights | ium Labs"
+        description="Data-driven crypto and Web3 research for the Korean market. Ecosystem analysis, market insights, and strategic intelligence for blockchain projects entering Korea."
+        path="/research"
+        keywords={['Korean Crypto Research', 'Web3 Market Analysis', 'Blockchain Insights', 'Korea Market Intelligence']}
+      />
       <Navbar />
       
       {/* Hero Section - Homepage Style */}

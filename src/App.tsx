@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import { HelmetProvider } from "react-helmet-async";
 import Sidebar from "@/components/Sidebar";
 import MobileBottomNav from "@/components/MobileBottomNav";
 import { SidebarProvider } from "@/hooks/useSidebarState";
@@ -184,24 +185,26 @@ const AppRoutes = () => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <SidebarProvider>
-          <ScrollToTop />
-          <div className="flex w-full">
-            <Sidebar />
-            <div className="flex-1 min-w-0 pb-16 lg:pb-0">
-              <AppRoutes />
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <SidebarProvider>
+            <ScrollToTop />
+            <div className="flex w-full">
+              <Sidebar />
+              <div className="flex-1 min-w-0 pb-16 lg:pb-0">
+                <AppRoutes />
+              </div>
+              <MobileBottomNav />
             </div>
-            <MobileBottomNav />
-          </div>
-        </SidebarProvider>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
+          </SidebarProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;

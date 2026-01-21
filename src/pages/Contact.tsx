@@ -4,12 +4,12 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
+import SEOHead from "@/components/SEOHead";
 import { Mail, MapPin, Send, Calendar, ArrowUpRight, ArrowRight, Linkedin, Clock, ExternalLink, Navigation } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import CalendlyButton from "@/components/CalendlyButton";
-import { usePageMeta } from "@/hooks/usePageMeta";
 import officeImage from "@/assets/office/ium-labs-office.webp";
 import confetti from "canvas-confetti";
 const budgetOptions = ["$15,000 - $25,000", "$25,000 - $50,000", "$50,000 +", "Looking to raise funds"];
@@ -70,12 +70,6 @@ const ContactHeroVideo = () => {
 };
 
 const Contact = () => {
-  usePageMeta({
-    title: "Contact Us | Korea Web3 & Crypto Marketing",
-    description: "Get in touch with Ium Labs for Korean Web3 and crypto marketing. Free consultation, 24h response. Seoul-based experts helping global blockchain projects succeed in Korea.",
-    path: "/contact",
-    image: "/og-image.png"
-  });
   const location = useLocation();
   useEffect(() => {
     if (location.hash) {
@@ -154,6 +148,12 @@ const Contact = () => {
     }
   };
   return <div className="min-h-screen bg-[#0A0A0A]">
+      <SEOHead
+        title="Get a Free Consultation | ium Labs Korea"
+        description="Get in touch with ium Labs for Korean Web3 and crypto marketing. Free consultation, 24h response. Seoul-based experts helping global blockchain projects succeed in Korea."
+        path="/contact"
+        keywords={['Web3 Consultation', 'Crypto Marketing Contact', 'Korea Blockchain Agency', 'GTM Strategy']}
+      />
       <Navbar />
       
       {/* Hero Section - Glassmorphism Style */}
