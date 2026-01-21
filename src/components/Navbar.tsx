@@ -114,9 +114,9 @@ const Navbar = () => {
         onClick={() => setIsMenuOpen(false)}
       />
 
-      {/* Top Panel Menu - slides from top */}
+      {/* Top Panel Menu - slides from top, half page */}
       <div
-        className={`fixed top-0 left-0 right-0 max-h-[85vh] sm:max-h-[75vh] lg:max-h-[65vh] z-[101] bg-gradient-to-b from-background via-background to-primary/5 transition-all duration-300 ease-out ${
+        className={`fixed top-0 left-0 right-0 h-[50vh] z-[101] bg-gradient-to-b from-background via-background to-primary/5 transition-all duration-300 ease-out overflow-hidden rounded-b-2xl ${
           isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         }`}
       >
