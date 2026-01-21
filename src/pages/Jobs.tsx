@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { z } from "zod";
-import { usePageMeta } from "@/hooks/usePageMeta";
+import SEOHead from "@/components/SEOHead";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
@@ -156,12 +156,6 @@ const JobsHeroVideo = () => {
 };
 
 const Jobs = () => {
-  usePageMeta({
-    title: "Careers | Join Korea's Leading Web3 & Crypto Team",
-    description: "Join Ium Labs and shape the future of Web3 and crypto in Korea. We're looking for passionate Researchers and Growth Managers to work with global blockchain projects.",
-    path: "/jobs",
-    image: "/og-image.png"
-  });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -222,6 +216,12 @@ const Jobs = () => {
   };
   const talentMarquee = "Talent Wanted ".repeat(20);
   return <div className="min-h-screen bg-surface-base flex flex-col">
+      <SEOHead
+        title="Careers | Join Korea's Leading Web3 & Crypto Team"
+        description="Join ium Labs and shape the future of Web3 in Korea. We're looking for passionate Researchers and Growth Managers to work with global blockchain projects."
+        path="/jobs"
+        keywords={['Web3 Careers Korea', 'Crypto Jobs Seoul', 'Blockchain Marketing Jobs']}
+      />
       <Navbar />
 
       {/* Hero Section with Video Background */}

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, lazy, Suspense } from "react";
 import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
+import SEOHead from "@/components/SEOHead";
 import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
 import storyOriginSummit from "@/assets/campaigns/story-origin-summit.jpg";
 import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
@@ -9,19 +10,19 @@ import synfuturesBillboard from "@/assets/campaigns/synfutures-billboard.jpg";
 import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
 const campaignImages = [{
   src: seoulMetroBillboard,
-  alt: "Seoul Metro Billboard Campaign"
+  alt: "Seoul Metro Billboard Campaign for Web3 project marketing in Korea"
 }, {
   src: storyOriginSummit,
-  alt: "Story Origin Summit"
+  alt: "Story Protocol Origin Summit event organized by ium Labs in Seoul"
 }, {
   src: ondoSeminar,
-  alt: "Ondo Seminar"
+  alt: "Ondo Finance Korean market seminar hosted by ium Labs"
 }, {
   src: synfuturesBillboard,
-  alt: "SynFutures Billboard"
+  alt: "SynFutures Gangnam billboard advertising campaign in Seoul"
 }, {
   src: peaqSummit,
-  alt: "Peaq Summit"
+  alt: "Peaq Network Korean summit and community event"
 }];
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
@@ -43,8 +44,6 @@ const SectionLoader = () => (
 import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
-
-import { usePageMeta } from "@/hooks/usePageMeta";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { MessageSquare, FileText, Rocket, TrendingUp, Check, ArrowRight, ArrowDown } from "lucide-react";
 const processPhases = [{
@@ -248,14 +247,13 @@ const ProcessBillboardOverlay = () => {
     </div>;
 };
 const Index = () => {
-  usePageMeta({
-    title: "ium Labs",
-    description: "ium Labs bridges global Web3 projects with Korea through data-driven research and GTM marketing.",
-    path: "/",
-    image: "/og-image.png",
-    suffix: "Korean Web3 GTM & Research Agency"
-  });
   return <div className="min-h-screen bg-surface-base">
+      <SEOHead
+        title="ium Labs | Korea Web3 Marketing & GTM Agency"
+        description="ium Labs is the premier Korea Web3 Marketing partner for global projects. We specialize in localized GTM strategy, crypto growth, and community management in South Korea."
+        path="/"
+        keywords={['Korea Web3 Marketing', 'Korean Crypto Marketing', 'Web3 GTM Korea', 'Blockchain Marketing Korea']}
+      />
       <Navbar />
       
       {/* Hero - Full Bleed */}

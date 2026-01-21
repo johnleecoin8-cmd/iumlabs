@@ -7,10 +7,10 @@ import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
+import SEOHead from "@/components/SEOHead";
 
 import { ArrowRight, Calendar, ChevronDown, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
-import { usePageMeta } from "@/hooks/usePageMeta";
 import { useCountUp } from "@/hooks/useCountUp";
 import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
@@ -589,12 +589,6 @@ const SelectedWorkSection = ({ projects }: { projects: SelectedWorkProject[] }) 
 };
 
 const Projects = () => {
-  usePageMeta({
-    title: "Web3 & Crypto Marketing Case Studies | Korea",
-    description: "View our portfolio of successful Korean crypto and Web3 marketing campaigns. 18+ global blockchain projects launched in Korea including Polygon, Ondo, and Story Protocol.",
-    path: "/projects",
-    image: "/og-image.png"
-  });
   const [activeCategory, setActiveCategory] = useState("All");
   const [isStatsVisible, setIsStatsVisible] = useState(false);
 
@@ -679,6 +673,12 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEOHead
+        title="Web3 GTM Case Studies | ium Labs Korea Portfolio"
+        description="View our portfolio of 18+ successful Korean crypto and Web3 marketing campaigns. Real results from Polygon, Ondo, Story Protocol, and more blockchain projects launched in Korea."
+        path="/projects"
+        keywords={['Web3 Case Studies', 'Crypto Marketing Portfolio', 'Korean Blockchain Projects', 'GTM Success Stories']}
+      />
       <Navbar />
       
       {/* Hero Section - Homepage Style */}
