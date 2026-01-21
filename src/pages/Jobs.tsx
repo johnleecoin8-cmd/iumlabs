@@ -210,16 +210,6 @@ const teamMembers = [
       twitter: "https://twitter.com/",
     },
   },
-  {
-    name: "Sophie",
-    role: "PR & Media Manager",
-    description: "Media relations specialist with connections to major Korean crypto outlets. Expert in press coverage and crisis management.",
-    avatar: nftAvatar3,
-    social: {
-      linkedin: "https://linkedin.com/in/",
-      twitter: "https://twitter.com/",
-    },
-  },
 ];
 
 // Video component
