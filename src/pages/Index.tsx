@@ -48,26 +48,26 @@ const processPhases = [{
   title: "ANALYZE",
   subtitle: "Intelligence",
   icon: MessageSquare,
-  subPoints: ["Deep Market Research", "Competitor Analysis", "Narrative Localization"],
+  subPoints: ["Deep Market Research", "Competitor Landscape Analysis", "Narrative Localization"],
   quote: '"We don\'t guess. We analyze."'
 }, {
   title: "BUILD",
-  subtitle: "Foundation",
+  subtitle: "Foundation & Community",
   icon: FileText,
-  subPoints: ["Naver SEO Dominance", "Community Infrastructure", "Brand Localization"],
-  quote: '"Building the localized infra."'
+  subPoints: ["KOL & Alpha Group Onboarding", "Community Architecture", "Localized Content Creation"],
+  quote: '"Cultivating the core audience before the noise."'
 }, {
   title: "IGNITE",
-  subtitle: "Launch",
+  subtitle: "Launch & Viral",
   icon: Rocket,
-  subPoints: ["Tier-1 KOL Activation", "Media Blitz Campaign", "Viral Marketing"],
-  quote: '"Maximum noise, maximum impact."'
+  subPoints: ["Viral Marketing & Shilling", "Cross-Community AMAs", "Tier-1 PR & Media Blast"],
+  quote: '"Sparking the flame. Maximum impact, zero friction."'
 }, {
   title: "SCALE",
-  subtitle: "Growth",
+  subtitle: "Growth & Sustainability",
   icon: TrendingUp,
-  subPoints: ["Events & Partnerships", "Liquidity Campaigns", "Retention Programs"],
-  quote: '"Turning hype into retention."'
+  subPoints: ["On-chain Events & Campaigns", "Liquidity Initiatives", "Holder Retention Programs"],
+  quote: '"Turning hype into sustainable retention."'
 }];
 const ProcessBillboardOverlay = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
