@@ -103,7 +103,7 @@ const ProcessBillboardOverlay = () => {
     return () => observer.disconnect();
   }, []);
   return <div ref={sectionRef} className="px-3 sm:px-4 md:px-8 lg:px-10 pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6">
-      <div className="relative w-full h-[340px] sm:h-[320px] md:h-[340px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
+      <div className="relative w-full h-[420px] sm:h-[400px] md:h-[420px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
         {/* Background Image - Fixed Billboard */}
         <img src={seoulMetroBillboard} alt="Seoul Metro Billboard Campaign" className="absolute inset-0 w-full h-full object-cover object-center" />
         
@@ -192,7 +192,7 @@ const ProcessBillboardOverlay = () => {
                 <div className="text-center">
                   {/* Title */}
                   <h4 className={`
-                    text-xs sm:text-sm md:text-base lg:text-lg font-medium
+                    text-[10px] sm:text-xs md:text-sm lg:text-lg font-medium
                     transition-all duration-300
                     ${isHovered ? 'text-white' : 'text-white/80'}
                   `}>
@@ -206,8 +206,8 @@ const ProcessBillboardOverlay = () => {
                     ${isHovered ? 'max-h-[80px] sm:max-h-[100px] opacity-100' : 'max-h-[32px] sm:max-h-[40px] opacity-80'}
                   `}>
                     <p className={`
-                      text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-white/40 uppercase tracking-wide
-                      transition-all duration-500 mb-1
+                      text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-white/40 uppercase tracking-wide
+                      transition-all duration-500 mb-1 line-clamp-2
                       ${isHovered ? 'opacity-100' : 'opacity-70'}
                     `}>
                       {phase.subtitle}
