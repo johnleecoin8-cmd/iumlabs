@@ -149,7 +149,7 @@ const ProcessBillboardOverlay = () => {
                 {/* Step Number - 진행감 있는 색상 */}
                 <span className={`
                   absolute top-2 left-2 sm:top-3 sm:left-3 md:top-4 md:left-4
-                  text-[10px] md:text-xs font-mono tracking-widest
+                  text-xs md:text-sm font-mono tracking-widest
                   transition-all duration-300
                   ${isHovered ? 'text-white' : stepColors[index]}
                 `}>
@@ -192,7 +192,7 @@ const ProcessBillboardOverlay = () => {
                 <div className="text-center">
                   {/* Title */}
                   <h4 className={`
-                    text-[11px] sm:text-xs md:text-sm lg:text-base font-medium
+                    text-xs sm:text-sm md:text-base lg:text-lg font-medium
                     transition-all duration-300
                     ${isHovered ? 'text-white' : 'text-white/80'}
                   `}>
@@ -206,7 +206,7 @@ const ProcessBillboardOverlay = () => {
                     ${isHovered ? 'max-h-[80px] sm:max-h-[100px] opacity-100' : 'max-h-[32px] sm:max-h-[40px] opacity-80'}
                   `}>
                     <p className={`
-                      text-[8px] sm:text-[9px] md:text-[11px] lg:text-xs text-white/40 uppercase tracking-wide
+                      text-[9px] sm:text-[10px] md:text-xs lg:text-sm text-white/40 uppercase tracking-wide
                       transition-all duration-500 mb-1
                       ${isHovered ? 'opacity-100' : 'opacity-70'}
                     `}>
@@ -218,10 +218,10 @@ const ProcessBillboardOverlay = () => {
                       space-y-0.5 transition-all duration-500 delay-100
                       ${isHovered ? 'opacity-100 max-h-[80px]' : 'opacity-0 max-h-0 overflow-hidden'}
                     `}>
-                      {phase.subPoints.map((point, i) => <div key={i} className="flex items-center justify-center gap-1 text-[8px] sm:text-[9px] md:text-[10px] text-white/60">
+                      {phase.subPoints.map((point, i) => <div key={i} className="flex items-center justify-center gap-1 text-[9px] sm:text-[10px] md:text-xs text-white/60">
                           <span className="line-clamp-1">{point}</span>
                         </div>)}
-                      <p className="text-[7px] sm:text-[8px] text-primary/80 italic mt-1">{phase.quote}</p>
+                      <p className="text-[8px] sm:text-[9px] md:text-[10px] text-primary/80 italic mt-1">{phase.quote}</p>
                     </div>
                   </div>
                 </div>
