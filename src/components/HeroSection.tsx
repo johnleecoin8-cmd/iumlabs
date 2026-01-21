@@ -206,12 +206,12 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography - Mobile optimized */}
           <h1 className="font-sans text-[1.75rem] sm:text-display-xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] font-bold leading-[1.1] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
-            <span className="text-white font-sans text-[1.5rem] sm:text-display-hero leading-tight">Korea Web3 Marketing & Crypto GTM Partner</span>
+            <span className="text-white font-sans text-[1.5rem] sm:text-display-hero leading-tight">Your Strategic Gateway to the Korean Web3 Market</span>
           </h1>
 
           {/* Subtext - Enhanced readability - Mobile optimized */}
           <p className="text-sm sm:text-body-base md:text-body-xl text-white/70 max-w-3xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-1 sm:px-2">
-            Bridging Global Web3 to Korea with <span className="text-white font-semibold">Data Intelligence</span>. We act as your <span className="text-white font-semibold">strategic gateway</span>.
+            Unlock Hyper-Local Growth through Korea's <span className="text-white font-semibold">Top-Tier KOL & Community Network</span> and <span className="text-white font-semibold">Deep Market Research</span>.
           </p>
 
           {/* CTA Button - Enhanced - Mobile optimized */}
