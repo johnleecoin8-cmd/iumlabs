@@ -77,8 +77,8 @@ Deno.serve(async (req) => {
 
     for (const project of projects) {
       try {
-        const currentScore = project.score || 0;
-        const currentMindshare = project.mindshare || 0;
+        const currentScore = Number(project.score) || 0;
+        const currentMindshare = Number(project.mindshare) || 0;
         
         // Generate new score with ±3-8% variance
         const newScore = Math.max(0, addVariance(currentScore, 3, 8));
@@ -102,33 +102,42 @@ Deno.serve(async (req) => {
           trend = 'neutral';
         }
         
-        // Generate new sparkline
-        const sparkline = generateSparkline(newScore, trend);
+        // Generate new sparkline as integer array
+        const sparkline = generateSparkline(newScore, trend).map(v => Math.round(v));
         
         // Add price variance if price exists (±1-5%)
-        let newPrice = project.price;
-        let newChange24h = project.change_24h;
-        if (project.price && project.price > 0) {
-          newPrice = addVariance(project.price, 1, 5);
-          newChange24h = ((newPrice - project.price) / project.price) * 100;
+        let newPrice = project.price ? Number(project.price) : null;
+        let newChange24h = project.change_24h ? Number(project.change_24h) : null;
+        if (newPrice && newPrice > 0) {
+          const oldPrice = newPrice;
+          newPrice = addVariance(oldPrice, 1, 5);
+          newChange24h = ((newPrice - oldPrice) / oldPrice) * 100;
         }
 
-        // Update the project
+        // Update the project - use simple numeric values
+        const updateData: Record<string, unknown> = {
+          score: parseFloat(newScore.toFixed(2)),
+          mindshare: parseFloat(newMindshare.toFixed(2)),
+          mindshare_change: parseFloat(mindshareChange.toFixed(2)),
+          trend,
+          sparkline,
+          updated_at: new Date().toISOString(),
+        };
+        
+        if (newPrice !== null) {
+          updateData.price = parseFloat(newPrice.toFixed(6));
+        }
+        if (newChange24h !== null) {
+          updateData.change_24h = parseFloat(newChange24h.toFixed(2));
+        }
+        
         const { error: updateError } = await supabase
           .from("hype_projects")
-          .update({
-            score: Math.round(newScore * 100) / 100,
-            mindshare: Math.round(newMindshare * 100) / 100,
-            mindshare_change: Math.round(mindshareChange * 100) / 100,
-            trend,
-            sparkline,
-            price: newPrice ? Math.round(newPrice * 10000) / 10000 : null,
-            change_24h: newChange24h ? Math.round(newChange24h * 100) / 100 : null,
-            updated_at: new Date().toISOString(),
-          })
+          .update(updateData)
           .eq("id", project.id);
 
         if (updateError) {
+          console.error(`Update error for ${project.ticker}:`, updateError.message);
           results.push({
             ticker: project.ticker,
             status: "error",
