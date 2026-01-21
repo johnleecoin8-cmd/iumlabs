@@ -170,7 +170,7 @@ const teamMembers = [
   {
     name: "Julian",
     role: "KOL Manager",
-    description: "Ex-Coinone, Upbit Security Operation",
+    description: "Ex-Upbit Security Operation Manager",
     avatar: julianAvatar,
     social: {
       telegram: "https://t.me/iumlabsjulian",
@@ -197,7 +197,7 @@ const teamMembers = [
   {
     name: "Mia",
     role: "KOL Manager",
-    description: "Managing relationships with 180+ Korean crypto influencers. Expert in influencer marketing and campaign optimization.",
+    description: "Ex-MEXC Operation Manager",
     avatar: miaAvatar,
     social: {
       telegram: "https://t.me/iumlabs",
