@@ -1,121 +1,58 @@
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
 import aboutImageDefault from '@/assets/campaigns/about-image-default.jpeg';
 import aboutImageHover from '@/assets/campaigns/about-image-hover.jpeg';
 
-const WhyChooseUsSection = () => {
-  const [isHovered, setIsHovered] = useState(false);
+const stats = [
+  { value: "50+", label: "Projects Launched" },
+  { value: "$2B+", label: "Total Value Marketed" },
+  { value: "100+", label: "KOL Partners" },
+];
 
+const WhyChooseUsSection = () => {
   return (
     <section className="bg-background">
-      <div 
-        className="grid grid-cols-1 md:grid-cols-2 md:h-[420px] lg:h-[480px] overflow-hidden"
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
-        {/* Left Panel - Default: Image1, Hover: Text2 */}
-        <div className="md:border-r border-border overflow-hidden h-[280px] sm:h-[320px] md:h-full relative">
-          {/* Image1 - Default State */}
+      <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:grid-cols-[2.5fr_3.5fr] md:max-h-[600px] lg:max-h-[780px] overflow-hidden">
+        {/* Left: Featured Image with Hover Effect */}
+        <div className="md:border-r border-border overflow-hidden h-[380px] sm:h-[450px] md:h-full relative group active:scale-[0.995] transition-transform">
+          <img 
+            src={aboutImageDefault} 
+            alt="ium Labs Team - Default" 
+            className="block w-full h-full object-cover object-center transition-opacity duration-500 group-hover:opacity-0"
+          />
+          <img 
+            src={aboutImageHover} 
+            alt="ium Labs Team - Hover" 
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+          />
+        </div>
+
+        {/* Right: Content */}
+        <div className="flex flex-col justify-center">
           <motion.div 
-            className="absolute inset-0"
-            initial={false}
-            animate={{ 
-              opacity: isHovered ? 0 : 1,
-              scale: isHovered ? 1.05 : 1
-            }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            className="p-6 sm:p-8 md:p-10 lg:p-14 flex flex-col justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true, margin: "-50px" }}
           >
-            <img 
-              src={aboutImageDefault} 
-              alt="ium Labs Team" 
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-          
-          {/* Text2 - Hover State */}
-          <motion.div 
-            className="absolute inset-0 bg-background flex flex-col justify-center px-8 md:px-12 lg:px-16"
-            initial={false}
-            animate={{ 
-              opacity: isHovered ? 1 : 0,
-              x: isHovered ? 0 : -30
-            }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4">
-              Why Choose Us
-            </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6 leading-tight">
-              Korea's #1 Web3<br />GTM Partner
+            {/* Headline */}
+            <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
+              More than an Agency. Your Growth Engine.
             </h2>
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 max-w-md">
-              186+ KOL 네트워크와 40+ 오프라인 이벤트 경험으로 한국 시장 진출의 모든 것을 지원합니다.
+            
+            {/* Description */}
+            <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-6">
+              ium Labs connects global Web3 projects to Korea's dynamic ecosystem through data-driven research and actionable insights. Founded by veterans from Binance & KuCoin, we provide the winning formula to navigate the complex Korean market.
             </p>
-            <Link 
-              to="/projects"
-              className="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all duration-300 font-medium"
-            >
-              Discover Our Network
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            
+            {/* CTA Note */}
+            <p className="text-violet-400 text-sm sm:text-base md:text-lg font-medium">
+              Execute with precision and dominate it.
+            </p>
           </motion.div>
         </div>
-        
-        {/* Right Panel - Default: Text1, Hover: Image2 */}
-        <div className="overflow-hidden h-[280px] sm:h-[320px] md:h-full relative">
-          {/* Text1 - Default State */}
-          <motion.div 
-            className="absolute inset-0 bg-background flex flex-col justify-center px-8 md:px-12 lg:px-16"
-            initial={false}
-            animate={{ 
-              opacity: isHovered ? 0 : 1,
-              x: isHovered ? 30 : 0
-            }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <span className="text-primary text-sm font-medium tracking-wider uppercase mb-4">
-              About Us
-            </span>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6 leading-tight">
-              More than an Agency.<br />Your Growth Engine.
-            </h2>
-            <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 max-w-md">
-              We don't just market—we engineer market presence. Backed by data, driven by results.
-            </p>
-            <span className="text-xs text-muted-foreground/60 italic">
-              Hover to explore →
-            </span>
-          </motion.div>
-          
-          {/* Image2 - Hover State */}
-          <motion.div 
-            className="absolute inset-0"
-            initial={false}
-            animate={{ 
-              opacity: isHovered ? 1 : 0,
-              scale: isHovered ? 1 : 1.05
-            }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
-          >
-            <img 
-              src={aboutImageHover} 
-              alt="ium Labs Network" 
-              className="w-full h-full object-cover"
-            />
-          </motion.div>
-        </div>
-      </div>
-      
-      {/* Mobile: Tap indicator */}
-      <div className="md:hidden text-center py-4 text-xs text-muted-foreground/60">
-        <button 
-          onClick={() => setIsHovered(!isHovered)}
-          className="px-4 py-2 border border-border rounded-full hover:border-primary transition-colors"
-        >
-          {isHovered ? "← Back" : "Tap to explore →"}
-        </button>
       </div>
     </section>
   );
