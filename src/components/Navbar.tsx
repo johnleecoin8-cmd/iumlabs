@@ -106,17 +106,17 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Backdrop Overlay */}
+      {/* Backdrop Overlay - transparent to show original page */}
       <div
-        className={`fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+        className={`fixed inset-0 z-[100] bg-black/30 transition-opacity duration-300 ${
           isMenuOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
         }`}
         onClick={() => setIsMenuOpen(false)}
       />
 
-      {/* Top Panel Menu - slides from top, half page */}
+      {/* Top Panel Menu - slides from top, 60% height */}
       <div
-        className={`fixed top-0 left-0 right-0 h-[50vh] z-[101] bg-gradient-to-b from-background via-background to-primary/5 transition-all duration-300 ease-out overflow-hidden rounded-b-2xl ${
+        className={`fixed top-0 left-0 right-0 h-[60vh] z-[101] bg-background transition-all duration-300 ease-out rounded-b-2xl shadow-2xl ${
           isMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-full opacity-0"
         }`}
       >
@@ -145,8 +145,8 @@ const Navbar = () => {
             </div>
           </div>
 
-          {/* Content - flex-1 to fill remaining space */}
-          <div className="flex-1 container mx-auto px-4 sm:px-6 py-2 sm:py-3 lg:py-6 overflow-y-auto overscroll-contain scrollbar-thin">
+          {/* Content - no scrollbar */}
+          <div className="flex-1 container mx-auto px-4 sm:px-6 py-2 sm:py-3 lg:py-6 overflow-hidden">
             <div className="h-full grid md:grid-cols-2 gap-4 sm:gap-6 lg:gap-12 content-center">
               {/* Navigation Links */}
               <div className="flex flex-col justify-center">
