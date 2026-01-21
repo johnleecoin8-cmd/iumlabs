@@ -170,7 +170,7 @@ const Sidebar = () => {
                     <img src={logoImage} alt="Ium Labs" className="w-8 h-8 object-contain opacity-90 group-hover:opacity-100 transition-all duration-300 group-hover:drop-shadow-[0_0_10px_rgba(255,255,255,0.4)]" />
                     <div className="flex flex-col">
                       <span className="text-sm font-semibold tracking-tight text-white/90 group-hover:text-white transition-colors duration-300">ium Labs</span>
-                      <span className="text-[10px] text-white/40">Web3 Marketing & Research</span>
+                      <span className="text-[10px] text-white/40">Web3 Marketing Partner</span>
                     </div>
                   </motion.div>
                 </Link>
