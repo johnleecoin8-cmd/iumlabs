@@ -237,12 +237,12 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography - Mobile optimized */}
           <h1 className="font-sans text-[1.6rem] sm:text-display-lg md:text-[clamp(2.25rem,5vw,4rem)] font-bold leading-[1.1] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
-            <span className="text-white font-sans text-[1.4rem] sm:text-display-xl leading-tight">Your Strategic Gateway to the Korean Web3 Market</span>
+            <span className="text-white font-sans text-[1.4rem] sm:text-display-xl leading-tight">Your Strategic Gateway<br />to the Korean Web3 Market</span>
           </h1>
 
           {/* Subtext - Enhanced readability - Mobile optimized */}
-          <p className="text-sm sm:text-body-base md:text-body-xl text-white/70 max-w-3xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-1 sm:px-2">
-            Unlock Hyper-Local Growth through Korea's <span className="text-white font-semibold">Top-Tier KOL & Community Network</span> and <span className="text-white font-semibold">Deep Market Research</span>.
+          <p className="text-sm sm:text-body-base md:text-body-lg text-white/70 max-w-4xl mx-auto mb-4 sm:mb-6 md:mb-8 font-normal tracking-wide leading-relaxed px-1 sm:px-2 whitespace-nowrap sm:whitespace-normal">
+            Unlock Hyper-Local Growth through Korea's Top-Tier KOL & Community Network and Deep Market Research.
           </p>
 
           {/* CTA Button - Enhanced - Mobile optimized */}
