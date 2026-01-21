@@ -13,9 +13,9 @@ const stats = [
 const WhyChooseUsSection = () => {
   return (
     <section className="bg-background">
-      <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:grid-cols-[2.5fr_3.5fr] md:max-h-[550px] lg:max-h-[700px] overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-[2fr_3fr] lg:grid-cols-[2.5fr_3.5fr] md:max-h-[600px] lg:max-h-[780px] overflow-hidden">
         {/* Left: Featured Image with Hover Effect */}
-        <div className="md:border-r border-border overflow-hidden h-[320px] sm:h-[400px] md:h-full relative group active:scale-[0.995] transition-transform">
+        <div className="md:border-r border-border overflow-hidden h-[380px] sm:h-[450px] md:h-full relative group active:scale-[0.995] transition-transform">
           <img 
             src={aboutImageDefault} 
             alt="ium Labs Team - Default" 
