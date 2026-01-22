@@ -255,12 +255,12 @@ export const projectsData: Record<string, ProjectData> = {
     bgImage: peaqBg,
     bgVideo: "/videos/projects/peaq-hero.mp4",
     featureImage: peaqFeatureImg,
-    category: "DePIN",
-    result: "#1 DePIN in Korea",
+    category: "Robotics",
+    result: "#1 Robotics in Korea",
     glowColor: "#00CED1",
-    description: "Peaq aimed to become the leading DePIN (Decentralized Physical Infrastructure Network) platform in Korea, targeting both enterprise partners and developer communities to build real-world machine economy applications.",
-    challenge: "While DePIN was an emerging narrative globally, the Korean market lacked a dominant leader in the blockchain-robotics sector. Peaq needed to overcome low local awareness and establish itself not just as a participant, but as the market standard.",
-    whatWeDid: "We executed a targeted strategy to position Peaq as the undisputed No. 1 Robotics project in Korea. We shifted the narrative from generic infrastructure to tangible robotics leadership, driving deep research and community engagement to secure market dominance.",
+    description: "Peaq is the Layer 1 blockchain powering the Machine Economy, enabling autonomous machines, vehicles, and robots to provide real-world goods and services. As the backbone of decentralized robotics infrastructure, Peaq connects physical devices to Web3, unlocking new economic models for the future of automation.",
+    challenge: "Despite global momentum in the Machine Economy narrative, Korean awareness of blockchain-powered robotics remained minimal. The market lacked a clear leader, and Peaq needed to establish dominance—not just participate, but define the category itself in Korea.",
+    whatWeDid: "We executed an aggressive, multi-channel strategy to crown Peaq as Korea's undisputed No. 1 Robotics project. Through strategic AMAs with top Korean crypto communities, targeted PR placements in major tech and crypto media, and comprehensive deep research reports, we shifted the narrative from generic infrastructure to tangible robotics leadership. Our brand positioning work created a distinct identity that resonated with both developers and investors.",
     metrics: [
       { value: "500+", label: "Offline Participants" },
       { value: "200K+", label: "Impressions" },
@@ -268,22 +268,22 @@ export const projectsData: Record<string, ProjectData> = {
       { value: "500+", label: "Content Created" }
     ],
     strategy: [
-      "Launched comprehensive DePIN education campaign",
-      "Partnered with Korean IoT and mobility companies",
-      "Built developer community for DePIN applications",
-      "Created Korean-specific use case demonstrations",
-      "Organized DePIN-focused community events"
+      "Launched Korea's first Machine Economy education campaign",
+      "Partnered with Korean robotics and mobility enterprises",
+      "Built developer community for decentralized robotics applications",
+      "Created Korean-language use case demonstrations and research",
+      "Organized robotics-focused meetups and conference panels"
     ],
     results: [
-      { metric: "Market Position in Korea", value: "#1 DePIN" },
+      { metric: "Market Position in Korea", value: "#1 Robotics" },
       { metric: "Korean Developers", value: "200+" },
       { metric: "Partnership Agreements", value: "10+" },
       { metric: "Community Engagement Rate", value: "35%" }
     ],
-    services: ["AMA", "PR Strategy", "Brand Positioning Deep Research"],
+    services: ["AMA", "PR Strategy", "Brand Positioning", "Deep Research"],
     shortServices: ["AMA", "PR", "Research"],
     gallery: [
-      { src: peaqSummitImg, title: "DePIN Summit", description: "Korea's first DePIN-focused conference at Gangnam" }
+      { src: peaqSummitImg, title: "Robotics Summit", description: "Korea's first Machine Economy conference at Gangnam" }
     ],
     news: []
   },
