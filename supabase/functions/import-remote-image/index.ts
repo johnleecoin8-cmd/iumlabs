@@ -13,6 +13,56 @@ serve(async (req) => {
   }
 
   try {
+    // Verify JWT and admin role
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader?.startsWith('Bearer ')) {
+      return new Response(
+        JSON.stringify({ error: 'Missing authorization' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+    
+    const jwt = authHeader.replace('Bearer ', '');
+    
+    // Create client with user's JWT to verify auth
+    const supabaseAuth = createClient(
+      Deno.env.get('SUPABASE_URL')!,
+      Deno.env.get('SUPABASE_ANON_KEY')!,
+      { global: { headers: { Authorization: authHeader } } }
+    );
+    
+    // Verify user is authenticated using getClaims
+    const { data: claimsData, error: authError } = await supabaseAuth.auth.getClaims(jwt);
+    if (authError || !claimsData?.claims) {
+      console.error('Auth error:', authError);
+      return new Response(
+        JSON.stringify({ error: 'Invalid token' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+    
+    const userId = claimsData.claims.sub;
+    if (!userId) {
+      return new Response(
+        JSON.stringify({ error: 'Invalid user' }),
+        { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+    
+    // Verify admin role using has_role function
+    const { data: isAdmin, error: roleError } = await supabaseAuth.rpc('has_role', {
+      _user_id: userId,
+      _role: 'admin'
+    });
+      
+    if (roleError || !isAdmin) {
+      console.error('Role check error:', roleError);
+      return new Response(
+        JSON.stringify({ error: 'Admin access required' }),
+        { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     const { url } = await req.json();
 
     if (!url || typeof url !== 'string') {
@@ -103,7 +153,7 @@ serve(async (req) => {
     };
     const ext = extMap[contentType.split(';')[0]] || 'jpg';
 
-    // Initialize Supabase client
+    // Initialize Supabase client with service role key for storage upload
     const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
     const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
