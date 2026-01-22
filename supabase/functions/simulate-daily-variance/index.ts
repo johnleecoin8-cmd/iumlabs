@@ -2,7 +2,7 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-api-key",
 };
 
 // Helper function to generate random variance within a percentage range
@@ -47,6 +47,34 @@ Deno.serve(async (req) => {
   }
 
   try {
+    // Validate API key authentication
+    const expectedKey = Deno.env.get("CRAWLER_API_KEY");
+    const headerKey = req.headers.get("x-api-key");
+    
+    // Try to get API key from body if not in header
+    let bodyKey: string | null = null;
+    let requestBody: { api_key?: string } | null = null;
+    
+    const contentType = req.headers.get("content-type") || "";
+    if (contentType.includes("application/json")) {
+      try {
+        requestBody = await req.json();
+        bodyKey = requestBody?.api_key || null;
+      } catch {
+        // Body parsing failed, continue with header key only
+      }
+    }
+    
+    const providedKey = headerKey || bodyKey;
+    
+    if (!expectedKey || providedKey !== expectedKey) {
+      console.error("Unauthorized access attempt to simulate-daily-variance");
+      return new Response(
+        JSON.stringify({ error: "Unauthorized" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     console.log("Starting daily variance simulation...");
 
     // Initialize Supabase client with service role key
