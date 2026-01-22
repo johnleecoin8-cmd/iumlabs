@@ -812,9 +812,9 @@
    MARQUEE ANIMATIONS
    ============================================ */
 
-/* Slow Marquee for logos */
+/* Slow Marquee for logos - Desktop 1.5x faster (40s → ~27s) */
 .logo-marquee-slow {
-  animation: marquee 40s linear infinite;
+  animation: marquee 27s linear infinite;
 }
 
 /* Fast Marquee */
@@ -1175,9 +1175,9 @@
     animation-duration: 6s !important;
   }
   
-  /* Simplify marquee on mobile - use transform instead of margin animation */
+  /* Mobile marquee 2x faster (60s → 30s) */
   .logo-marquee-slow {
-    animation-duration: 60s !important;
+    animation-duration: 30s !important;
   }
   
   /* Reduce backdrop blur on mobile (expensive on GPU) */
@@ -1200,12 +1200,12 @@
   }
 }
 
-/* Ultra-low power mode for very weak devices */
+/* Ultra-low power mode for very weak devices - still 2x faster (80s → 40s) */
 @media (max-width: 767px) and (pointer: coarse) {
   .logo-marquee,
   .logo-marquee-slow,
   .logo-marquee-fast {
-    animation-duration: 80s !important;
+    animation-duration: 40s !important;
   }
   
   .animate-float {
