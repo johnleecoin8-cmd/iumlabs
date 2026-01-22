@@ -191,6 +191,14 @@ const HeroSection = () => {
     setIsVideoReady(false);
     setHasVideoError(false);
   }, [shouldDisableVideo]);
+
+  const tryPlay = (video: HTMLVideoElement) => {
+    // Some browsers (esp. mobile Safari) can be picky; retry a couple times.
+    const attempt = () => video.play().catch(() => {});
+    attempt();
+    setTimeout(attempt, 120);
+    setTimeout(attempt, 350);
+  };
   
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video with mobile optimizations */}
@@ -199,11 +207,11 @@ const HeroSection = () => {
         <img
           src="/images/hero-poster.jpg"
           alt=""
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover z-0"
           loading="eager"
           style={{
             opacity: shouldDisableVideo || hasVideoError || !isVideoReady ? 1 : 0,
-            transition: "opacity 300ms ease",
+            transition: "opacity 180ms ease",
           }}
         />
 
@@ -222,23 +230,30 @@ const HeroSection = () => {
             controls={false}
             aria-hidden="true"
             tabIndex={-1}
-            className="absolute inset-0 w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover z-10"
             style={{
               opacity: isVideoReady ? 1 : 0,
-              transition: "opacity 300ms ease",
+              transition: "opacity 180ms ease",
             }}
             onError={() => {
               setHasVideoError(true);
               setIsVideoReady(false);
             }}
-            onLoadedData={(e) => {
-              // Start playback as soon as data is available (faster than onCanPlayThrough)
+            onLoadedMetadata={(e) => {
+              // metadata arrives early; we can safely fade video in soon after
               const video = e.currentTarget;
               setIsVideoReady(true);
-              video.play().catch(() => {
-                // Autoplay may be blocked on some browsers; keep poster visible in that case
-                setIsVideoReady(false);
-              });
+              tryPlay(video);
+            }}
+            onCanPlay={(e) => {
+              const video = e.currentTarget;
+              setIsVideoReady(true);
+              tryPlay(video);
+            }}
+            onLoadedData={(e) => {
+              const video = e.currentTarget;
+              setIsVideoReady(true);
+              tryPlay(video);
             }}
           >
             <source src="/videos/hero-background.mp4" type="video/mp4" />
