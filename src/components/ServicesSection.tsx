@@ -10,6 +10,7 @@ import communityImage from "@/assets/services/community-management.png";
 import kolImage from "@/assets/services/kol-network.jpg";
 import prImage from "@/assets/services/pr-media.jpg";
 import seoAdsImage from "@/assets/services/seo-ads.jpg";
+import deepResearchImage from "@/assets/services/deep-research.png";
 
 const services = [
   {
@@ -58,7 +59,7 @@ const services = [
     description: "Data-driven market intelligence and on-chain analytics to inform your strategy with actionable insights.",
     link: "/services/deep-research",
     icon: FileSearch,
-    image: null
+    image: deepResearchImage
   },
   {
     number: "07",
