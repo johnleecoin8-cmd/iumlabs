@@ -67,8 +67,7 @@ const allServices = [
   { slug: "social-media", title: "Social Media Marketing", number: "02", icon: AtSign, description: "Content strategy and execution on X to grow visibility and engage with your ecosystem.", color: "#EC4899" },
   { slug: "influencer", title: "Influencer Strategy", number: "03", icon: Mic2, description: "Influencer campaigns powered by top crypto voices aligned with your message and goals.", color: "#F59E0B" },
   { slug: "gtm", title: "GTM Strategy", number: "04", icon: Compass, description: "Positioning, messaging, and audience clarity to launch with direction and narrative focus.", color: "#10B981" },
-  { slug: "yap", title: "Yap Strategy", number: "05", icon: MessageCircle, description: "Targeted campaigns through a 600+ creator network designed to drive awareness.", color: "#22D3EE" },
-  { slug: "pr", title: "PR & Media", number: "06", icon: Newspaper, description: "Narrative development and media placements to get your story published and seen.", color: "#8B5CF6" },
+  { slug: "pr", title: "PR & Media", number: "05", icon: Newspaper, description: "Narrative development and media placements to get your story published and seen.", color: "#8B5CF6" },
 ];
 
 const clientLogos = [

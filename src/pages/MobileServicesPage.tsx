@@ -8,7 +8,6 @@ import {
   Users, 
   FileSearch, 
   Star, 
-  MessageCircle, 
   Newspaper,
   ArrowUpRight,
   ChevronDown
@@ -29,7 +28,6 @@ import seoAdsImage from "@/assets/services/seo-ads.jpg";
 import eventsImage from "@/assets/services/events.jpg";
 import communityImage from "@/assets/services/community-management.png";
 import kolImage from "@/assets/services/kol-network.jpg";
-import yapImage from "@/assets/services/yap-network.png";
 import prImage from "@/assets/services/pr-media.jpg";
 
 const services = [
@@ -95,15 +93,6 @@ const services = [
     video: "/videos/influencer-hero.mp4",
     poster: kolImage,
     stats: "70+ KOLs"
-  },
-  {
-    title: "YAP Network",
-    description: "Creator economy",
-    icon: MessageCircle,
-    link: "/services/yap",
-    video: "/videos/yap-hero.mp4",
-    poster: yapImage,
-    stats: "50+ Yappers"
   },
   {
     title: "PR & Media",
