@@ -52,20 +52,36 @@ const mobileFloatingTags = [{
   position: "top-[12%] right-[3%]"
 }];
 
-// Video component
+// Video component with poster fallback
 const ContactHeroVideo = () => {
   return (
-    <video 
-      autoPlay 
-      muted 
-      loop 
-      playsInline
-      preload="auto"
-      className="absolute inset-0 w-full h-full object-cover"
-      style={{ filter: "brightness(0.35)" }}
-    >
-      <source src="/videos/services-background.mp4#t=0.001" type="video/mp4" />
-    </video>
+    <>
+      {/* Poster image shown while video loads */}
+      <img
+        src="/images/contact-hero-poster.jpg"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ filter: "brightness(0.35)" }}
+      />
+      <video 
+        autoPlay 
+        muted 
+        loop 
+        playsInline
+        webkit-playsinline="true"
+        x5-playsinline="true"
+        x5-video-player-type="h5"
+        preload="auto"
+        poster="/images/contact-hero-poster.jpg"
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ filter: "brightness(0.35)" }}
+        onLoadedData={(e) => {
+          (e.currentTarget as HTMLVideoElement).play().catch(() => {});
+        }}
+      >
+        <source src="/videos/services-background.mp4#t=0.001" type="video/mp4" />
+      </video>
+    </>
   );
 };
 
