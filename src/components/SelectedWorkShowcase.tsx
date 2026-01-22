@@ -17,9 +17,10 @@ const SelectedWorkShowcase = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
   const [videoLoaded, setVideoLoaded] = useState<Record<number, boolean>>({});
+  const [preloadedVideos, setPreloadedVideos] = useState<Set<number>>(new Set());
   const ref = useRef(null);
   const videoRefs = useRef<Record<number, HTMLVideoElement | null>>({});
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "400px" }); // Earlier trigger for preloading
 
   const projects = [
     {
@@ -78,8 +79,31 @@ const SelectedWorkShowcase = () => {
     }
   ];
 
-  // Removed video preloading to improve initial page load speed
-  // Videos will load on-demand when the section comes into view
+  // Preload first video when section comes into view
+  useEffect(() => {
+    if (isInView && projects[0]?.video && !preloadedVideos.has(0)) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'video';
+      link.href = projects[0].video;
+      document.head.appendChild(link);
+      setPreloadedVideos(prev => new Set(prev).add(0));
+    }
+  }, [isInView]);
+
+  // Preload next video when active index changes
+  useEffect(() => {
+    const nextIndex = (activeIndex + 1) % projects.length;
+    const nextProject = projects[nextIndex];
+    if (nextProject?.video && !preloadedVideos.has(nextIndex)) {
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.as = 'video';
+      link.href = nextProject.video;
+      document.head.appendChild(link);
+      setPreloadedVideos(prev => new Set(prev).add(nextIndex));
+    }
+  }, [activeIndex, preloadedVideos]);
 
   // Auto-rotate when not hovering
   useEffect(() => {
@@ -122,16 +146,21 @@ const SelectedWorkShowcase = () => {
             }`}
           />
           
-          {/* Video layer - lazy loaded */}
+          {/* Video layer - preloaded for active project */}
           {currentProject.video && (
             <video 
               autoPlay 
               muted 
               loop 
               playsInline
+              webkit-playsinline="true"
+              x5-playsinline="true"
               poster={typeof currentProject.media === 'string' ? currentProject.media : undefined}
-              preload="none"
-              onCanPlayThrough={() => handleVideoLoad(activeIndex)}
+              preload={activeIndex === 0 || preloadedVideos.has(activeIndex) ? "auto" : "metadata"}
+              onLoadedData={(e) => {
+                handleVideoLoad(activeIndex);
+                e.currentTarget.play().catch(() => {});
+              }}
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
                 isCurrentVideoLoaded ? 'opacity-100' : 'opacity-0'
               }`}

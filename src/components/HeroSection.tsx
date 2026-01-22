@@ -203,11 +203,11 @@ const HeroSection = () => {
             webkit-playsinline="true"
             x5-playsinline="true"
             x5-video-player-type="h5"
-            preload="metadata"
+            preload="auto"
             poster="/images/hero-poster.jpg"
             className="absolute inset-0 w-full h-full object-cover"
-            onCanPlay={(e) => {
-              // Ensure video plays on mobile after it's ready
+            onLoadedData={(e) => {
+              // Start playback as soon as data is available (faster than onCanPlayThrough)
               const video = e.currentTarget;
               video.play().catch(() => {
                 // Silent catch - some browsers block autoplay
