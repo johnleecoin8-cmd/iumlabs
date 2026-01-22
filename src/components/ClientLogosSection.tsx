@@ -97,6 +97,8 @@ const ClientLogosSection = ({
               <img 
                 src={client.logo} 
                 alt={client.name} 
+                loading="lazy"
+                decoding="async"
                 className={`h-5 w-5 object-contain flex-shrink-0 ${
                   client.noInvert ? 'opacity-80' : 'brightness-0 invert opacity-70'
                 } group-hover:opacity-100 transition-opacity`}

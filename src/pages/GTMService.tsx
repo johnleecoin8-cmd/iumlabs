@@ -598,7 +598,7 @@ const HeroSection = () => {
               ease: "easeOut"
             }} className="absolute inset-0">
                 {/* Video if available, otherwise image */}
-                {showcaseProjects[activeIndex].video ? <video key={showcaseProjects[activeIndex].video} src={showcaseProjects[activeIndex].video} autoPlay muted loop playsInline className="w-full h-full object-cover" /> : <img src={showcaseProjects[activeIndex].image} alt={showcaseProjects[activeIndex].name} className="w-full h-full object-cover" />}
+                {showcaseProjects[activeIndex].video ? <video key={showcaseProjects[activeIndex].video} src={showcaseProjects[activeIndex].video} autoPlay muted loop playsInline className="w-full h-full object-cover" /> : <img src={showcaseProjects[activeIndex].image} alt={showcaseProjects[activeIndex].name} loading="lazy" decoding="async" className="w-full h-full object-cover" />}
                 {/* Overlay gradient */}
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
                 <div className="absolute inset-0 bg-gradient-to-r from-background/40 to-transparent" />
@@ -2242,7 +2242,7 @@ const TiltCaseCard = ({
 
           {/* Image with parallax effect */}
           <div className="relative aspect-[16/9] overflow-hidden">
-            <motion.img src={project.image} alt={project.name} className="w-full h-full object-cover" animate={{
+            <motion.img src={project.image} alt={project.name} loading="lazy" decoding="async" className="w-full h-full object-cover" animate={{
             scale: isHovered ? 1.1 : 1,
             x: isHovered ? tilt.y * 2 : 0,
             y: isHovered ? tilt.x * 2 : 0

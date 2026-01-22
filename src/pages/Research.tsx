@@ -155,7 +155,7 @@ const Research = () => {
             <Link to={`/research/${featuredPost.slug}`} className="group block active:scale-[0.99]">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 lg:gap-12 items-center">
                 <div className="aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative hover:scale-[1.02]">
-                  {featuredPost.image ? <img src={featuredPost.image} alt={featuredPost.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /> : <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                  {featuredPost.image ? <img src={featuredPost.image} alt={featuredPost.title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /> : <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
                       <TrendingUp className="w-12 h-12 sm:w-16 sm:h-16 text-primary/40" />
                     </div>}
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500" />
@@ -230,7 +230,7 @@ const Research = () => {
                     <div className="relative hover:-translate-y-1 sm:hover:-translate-y-2 transition-transform duration-300">
                       {/* Image */}
                       <div className="aspect-[16/10] rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden mb-2 sm:mb-3 md:mb-4 border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative">
-                        {post.image ? <img src={post.image} alt={post.title} className="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-400" /> : <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                        {post.image ? <img src={post.image} alt={post.title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-[1.08] transition-transform duration-400" /> : <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
                             <TrendingUp className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-primary/40" />
                           </div>}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-500" />

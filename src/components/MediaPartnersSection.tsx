@@ -46,6 +46,8 @@ const MediaPartnersSection = () => {
               <img
                 src={media.logo}
                 alt={media.name}
+                loading="lazy"
+                decoding="async"
                 className="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 object-contain rounded-full opacity-80"
               />
               <span className="text-white/60 text-xs sm:text-sm md:text-base font-medium whitespace-nowrap">

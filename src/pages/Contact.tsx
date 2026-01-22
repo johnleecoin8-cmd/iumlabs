@@ -236,7 +236,7 @@ const Contact = () => {
             <div className="grid sm:grid-cols-2 gap-0">
               {/* Office Photo */}
               <div className="relative aspect-[4/3] overflow-hidden">
-                <img src={officeImage} alt="Ium Labs Office" className="absolute inset-0 w-full h-full object-cover" />
+                <img src={officeImage} alt="Ium Labs Office" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 <div className="absolute bottom-3 left-3">
                   <span className="px-2.5 py-1 text-[10px] font-medium bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white uppercase tracking-wider">

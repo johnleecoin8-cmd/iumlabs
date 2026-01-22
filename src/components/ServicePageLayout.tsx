@@ -380,6 +380,8 @@ const ServicePageLayout = ({
                   <img 
                     src={client.logo} 
                     alt={client.name} 
+                    loading="lazy"
+                    decoding="async"
                     className={`h-3.5 w-3.5 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-80'}`}
                   />
                   <span className="text-white/70 text-[10px] sm:text-xs font-medium whitespace-nowrap">

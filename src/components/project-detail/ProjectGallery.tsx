@@ -100,6 +100,8 @@ const ProjectGallery = ({ gallery, glowColor, onOpenLightbox }: ProjectGalleryPr
                 <img
                   src={item.src}
                   alt={item.title}
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
                 

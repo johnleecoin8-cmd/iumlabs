@@ -105,7 +105,7 @@ const ProcessBillboardOverlay = () => {
   return <div ref={sectionRef} className="px-3 sm:px-4 md:px-8 lg:px-10 pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6">
       <div className="relative w-full h-[420px] sm:h-[400px] md:h-[420px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
         {/* Background Image - Fixed Billboard */}
-        <img src={seoulMetroBillboard} alt="Seoul Metro Billboard Campaign" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <img src={seoulMetroBillboard} alt="Seoul Metro Billboard Campaign" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-center" />
         
         {/* Dark Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30" />
