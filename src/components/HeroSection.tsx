@@ -185,7 +185,7 @@ const HeroSection = () => {
   }, []);
   
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Video on desktop, poster on mobile for performance */}
+      {/* Background Layer - Video with mobile optimizations */}
       <div className="absolute inset-0">
         {shouldDisableVideo ? (
           <img
@@ -200,11 +200,21 @@ const HeroSection = () => {
             muted
             loop
             playsInline
-            preload="auto"
+            webkit-playsinline="true"
+            x5-playsinline="true"
+            x5-video-player-type="h5"
+            preload="metadata"
             poster="/images/hero-poster.jpg"
             className="absolute inset-0 w-full h-full object-cover"
+            onCanPlay={(e) => {
+              // Ensure video plays on mobile after it's ready
+              const video = e.currentTarget;
+              video.play().catch(() => {
+                // Silent catch - some browsers block autoplay
+              });
+            }}
           >
-            <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
+            <source src="/videos/hero-background.mp4" type="video/mp4" />
           </video>
         )}
       </div>
