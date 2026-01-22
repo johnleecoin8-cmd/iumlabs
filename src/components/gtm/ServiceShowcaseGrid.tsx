@@ -178,7 +178,7 @@ const ServiceCard = ({ service, isActive, onClick }: {
               <div className="flex gap-2 mb-4">
                 {service.gallery.slice(0, 3).map((img) => (
                   <div key={img.title} className="w-20 h-14 rounded-lg overflow-hidden">
-                    <img src={img.src} alt={img.title} className="w-full h-full object-cover" />
+                    <img src={img.src} alt={img.title} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                   </div>
                 ))}
               </div>

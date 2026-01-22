@@ -21,6 +21,8 @@ const FeatureImage = ({ gallery }: FeatureImageProps) => {
         <img 
           src={mainImage.src} 
           alt={mainImage.title || "Project feature image"}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover"
         />
       </motion.div>

@@ -34,6 +34,8 @@ const CaseStudyCard = ({ study, index }: CaseStudyCardProps) => {
         <img 
           src={study.image} 
           alt={study.title}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />

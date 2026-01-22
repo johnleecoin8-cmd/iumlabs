@@ -115,6 +115,8 @@ const SelectedWorkShowcase = () => {
           <img 
             src={currentProject.media} 
             alt={currentProject.name} 
+            loading="lazy"
+            decoding="async"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
               currentProject.video && isCurrentVideoLoaded ? 'opacity-0' : 'opacity-100'
             }`}

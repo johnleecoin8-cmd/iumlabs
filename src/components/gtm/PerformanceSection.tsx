@@ -315,6 +315,8 @@ const ProjectCard = ({
           <img 
             src={project.logo} 
             alt={project.name}
+            loading="lazy"
+            decoding="async"
             className="h-5 md:h-8 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity"
           />
           <div className="flex items-center gap-1.5 md:gap-2">

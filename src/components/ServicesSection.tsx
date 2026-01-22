@@ -116,6 +116,8 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
               <img 
                 src={service.image} 
                 alt="" 
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               {/* Dark overlay */}
