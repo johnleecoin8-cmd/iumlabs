@@ -4,10 +4,10 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 // Import service images
 import gtmImage from "@/assets/services/gtm-ecosystem.png";
-import brandingImage from "@/assets/services/branding-website.png";
+import brandingImage from "@/assets/services/branding-palace.png";
 import eventsImage from "@/assets/services/events.jpg";
 import communityImage from "@/assets/services/community-management.png";
-import kolImage from "@/assets/services/kol-network.jpg";
+import kolImage from "@/assets/services/kol-avatars.png";
 import prImage from "@/assets/services/pr-media.jpg";
 import seoAdsImage from "@/assets/services/seo-ads.jpg";
 import deepResearchImage from "@/assets/services/deep-research.png";
