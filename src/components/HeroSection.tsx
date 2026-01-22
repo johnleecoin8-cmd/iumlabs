@@ -200,7 +200,7 @@ const HeroSection = () => {
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             poster="/images/hero-poster.jpg"
             className="absolute inset-0 w-full h-full object-cover"
           >
