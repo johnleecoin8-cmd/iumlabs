@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
-import { motion, useInView, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, useInView, useScroll, useMotionValueEvent } from 'framer-motion';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { usePageMeta } from '@/hooks/usePageMeta';
@@ -16,21 +16,11 @@ import { useCountUp } from '@/hooks/useCountUp';
 import TestimonialsSection from '@/components/gtm/TestimonialsCarousel';
 import { Button } from '@/components/ui/button';
 
-// Project backgrounds
-import storyBg from '@/assets/projects/story-bg.jpg';
-import mantraBg from '@/assets/projects/mantra-bg.jpg';
-import peaqBg from '@/assets/projects/peaq-bg.jpg';
-import bnbBg from '@/assets/projects/bnb-bg.jpg';
-import saharaBg from '@/assets/projects/sahara-ai-bg.jpg';
-import kucoinBg from '@/assets/projects/kucoin-bg.jpg';
-import bybitBg from '@/assets/projects/bybit-bg.jpg';
-import openledgerBg from '@/assets/campaigns/openledger-hero-official.png';
-import megaethBg from '@/assets/projects/megaeth-bg.jpg';
-import ondoBg from '@/assets/projects/ondo-bg.jpg';
+// Project backgrounds - used in other sections
 import polygonBg from '@/assets/projects/polygon-bg.jpg';
-import triaBg from '@/assets/projects/tria-bg.jpg';
-import synfuturesBg from '@/assets/projects/synfutures-bg.jpg';
-import fogoBg from '@/assets/projects/fogo-bg.jpg';
+import bnbBg from '@/assets/projects/bnb-bg.jpg';
+import storyBg from '@/assets/projects/story-bg.jpg';
+import bybitBg from '@/assets/projects/bybit-bg.jpg';
 
 // ============================================
 // DATA
@@ -110,43 +100,6 @@ const featuredProjects = [{
     suffix: '+'
   }]
 }];
-const moreProjects = [{
-  name: 'BNB Chain',
-  image: bnbBg,
-  slug: 'bnb-chain'
-}, {
-  name: 'Bybit',
-  image: bybitBg,
-  slug: 'bybit'
-}, {
-  name: 'KuCoin',
-  image: kucoinBg,
-  slug: 'kucoin'
-}, {
-  name: 'Sahara AI',
-  image: saharaBg,
-  slug: 'sahara-ai'
-}, {
-  name: 'OpenLedger',
-  image: openledgerBg,
-  slug: 'openledger'
-}, {
-  name: 'MegaETH',
-  image: megaethBg,
-  slug: 'megaeth'
-}, {
-  name: 'Ondo',
-  image: ondoBg,
-  slug: 'ondo'
-}, {
-  name: 'Polygon',
-  image: polygonBg,
-  slug: 'polygon'
-}, {
-  name: 'Tria',
-  image: triaBg,
-  slug: 'tria'
-}];
 const frameworkStages = [{
   number: '01',
   title: 'ANALYZE',
@@ -220,62 +173,6 @@ const AnimatedStat = ({
 };
 
 // ============================================
-// FLOATING 3D GRAPHIC ELEMENTS
-// ============================================
-const FloatingGraphics = () => {
-  return <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {/* Floating orb 1 */}
-      <motion.div className="absolute top-1/4 right-[15%] w-32 h-32 rounded-full opacity-30" style={{
-      background: 'radial-gradient(circle at 30% 30%, hsl(var(--primary)), transparent 70%)',
-      filter: 'blur(40px)'
-    }} animate={{
-      y: [0, -30, 0],
-      x: [0, 15, 0],
-      scale: [1, 1.1, 1]
-    }} transition={{
-      duration: 8,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }} />
-      
-      {/* Floating orb 2 */}
-      <motion.div className="absolute bottom-1/3 right-[25%] w-48 h-48 rounded-full opacity-20" style={{
-      background: 'radial-gradient(circle at 50% 50%, hsl(var(--primary) / 0.5), transparent 60%)',
-      filter: 'blur(60px)'
-    }} animate={{
-      y: [0, 40, 0],
-      x: [0, -20, 0]
-    }} transition={{
-      duration: 10,
-      repeat: Infinity,
-      ease: "easeInOut",
-      delay: 1
-    }} />
-
-      {/* Grid pattern */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-      backgroundImage: `
-            linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
-            linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
-          `,
-      backgroundSize: '60px 60px'
-    }} />
-
-      {/* Animated line */}
-      <motion.div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" initial={{
-      scaleX: 0,
-      opacity: 0
-    }} animate={{
-      scaleX: 1,
-      opacity: 1
-    }} transition={{
-      duration: 1.5,
-      delay: 0.5
-    }} />
-    </div>;
-};
-
-// ============================================
 // GLITCH TEXT EFFECT
 // ============================================
 const GlitchText = ({
@@ -316,94 +213,12 @@ const GlitchText = ({
 };
 
 // ============================================
-// HERO SECTION - Enhanced with Interactive Showcase
+// HERO SECTION - Simplified for Performance
 // ============================================
 const HeroSection = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, {
-    once: true
-  });
-  const [mousePosition, setMousePosition] = useState({
-    x: 0,
-    y: 0
-  });
 
-  // Interactive showcase state
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isHovering, setIsHovering] = useState(false);
-
-  // Showcase projects data - only projects with videos
-  const showcaseProjects = [{
-    name: 'BNB Chain',
-    result: '+340%',
-    category: 'Exchange',
-    description: 'Volume Growth',
-    image: bnbBg,
-    video: '/videos/projects/bnb-hero.mp4',
-    slug: 'bnb-chain'
-  }, {
-    name: 'Story Protocol',
-    result: '5K+',
-    category: 'IP Platform',
-    description: 'Creators Onboarded',
-    image: storyBg,
-    video: '/videos/projects/story-hero.mp4',
-    slug: 'story-protocol'
-  }, {
-    name: 'Bybit',
-    result: '#2',
-    category: 'Exchange',
-    description: 'Traffic Ranking',
-    image: bybitBg,
-    video: '/videos/projects/bybit-hero.mp4',
-    slug: 'bybit'
-  }, {
-    name: 'MANTRA',
-    result: '200K+',
-    category: 'RWA',
-    description: 'Community Members',
-    image: mantraBg,
-    video: '/videos/projects/mantra-hero.mp4',
-    slug: 'mantra'
-  }, {
-    name: 'peaq',
-    result: '50+',
-    category: 'DePIN',
-    description: 'Media Coverage',
-    image: peaqBg,
-    video: '/videos/projects/peaq-hero.mp4',
-    slug: 'peaq'
-  }, {
-    name: 'Sahara AI',
-    result: '#1',
-    category: 'AI',
-    description: 'Mindshare Ranking',
-    image: saharaBg,
-    video: '/videos/projects/sahara-hero.mp4',
-    slug: 'sahara-ai'
-  }];
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      setMousePosition({
-        x: (e.clientX - rect.left) / rect.width,
-        y: (e.clientY - rect.top) / rect.height
-      });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  // Auto-rotate showcase
-  useEffect(() => {
-    if (isHovering) return;
-    const interval = setInterval(() => {
-      setActiveIndex(prev => (prev + 1) % showcaseProjects.length);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [isHovering, showcaseProjects.length]);
-  return <section ref={ref} className="relative min-h-screen flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 py-12 md:py-24 bg-background overflow-hidden w-full">
+  return <section ref={ref} className="relative min-h-[80vh] flex flex-col justify-center px-4 md:px-8 lg:px-16 xl:px-24 py-12 md:py-24 bg-background overflow-hidden w-full">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/3 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50 pointer-events-none" />
@@ -412,28 +227,18 @@ const HeroSection = () => {
       <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-1/4 w-[400px] h-[400px] bg-primary/3 rounded-full blur-[100px] pointer-events-none" />
       
-      {/* Floating graphics */}
-      <FloatingGraphics />
-      
-      {/* Mouse follow glow */}
-      <motion.div className="absolute w-[500px] h-[500px] rounded-full pointer-events-none" style={{
-      background: 'radial-gradient(circle, hsl(var(--primary) / 0.1) 0%, transparent 70%)',
-      left: `calc(${mousePosition.x * 100}% - 250px)`,
-      top: `calc(${mousePosition.y * 100}% - 250px)`
-    }} animate={{
-      scale: [1, 1.1, 1]
-    }} transition={{
-      duration: 4,
-      repeat: Infinity,
-      ease: "easeInOut"
-    }} />
+      {/* Grid pattern */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{
+        backgroundImage: `
+          linear-gradient(hsl(var(--foreground)) 1px, transparent 1px),
+          linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)
+        `,
+        backgroundSize: '60px 60px'
+      }} />
 
-      {/* 2-Column Layout - 6:4 ratio */}
-      <div className="relative z-10 grid grid-cols-1 lg:grid-cols-[1.5fr_1fr] gap-8 lg:gap-12 xl:gap-16 items-center w-full max-w-[1600px] mx-auto">
-        
-        {/* Left Column - Text Content */}
-        <div className="relative">
-          <motion.p initial={{
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-[1200px] mx-auto">
+        <motion.p initial={{
           opacity: 0,
           y: 20
         }} animate={{
@@ -442,7 +247,7 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.6
         }} className="text-muted-foreground text-[10px] sm:text-sm tracking-widest uppercase mb-4 sm:mb-6 flex items-center gap-2 sm:gap-3">
-            <motion.span className="w-8 h-px bg-primary" initial={{
+          <motion.span className="w-8 h-px bg-primary" initial={{
             scaleX: 0
           }} animate={{
             scaleX: 1
@@ -450,10 +255,10 @@ const HeroSection = () => {
             duration: 0.8,
             delay: 0.2
           }} />
-            Korea GTM Strategy
-          </motion.p>
-          
-          <motion.h1 initial={{
+          Korea GTM Strategy
+        </motion.p>
+        
+        <motion.h1 initial={{
           opacity: 0,
           y: 40
         }} animate={{
@@ -462,9 +267,9 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.8,
           delay: 0.1
-        }} className="text-[clamp(1.25rem,4vw,3rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-3 md:mb-6">
-            <span className="block overflow-hidden">
-              <motion.span className="block" initial={{
+        }} className="text-[clamp(1.5rem,5vw,4rem)] font-medium leading-[1.1] tracking-tight text-foreground mb-4 md:mb-8">
+          <span className="block overflow-hidden">
+            <motion.span className="block" initial={{
               y: '100%'
             }} animate={{
               y: 0
@@ -473,11 +278,11 @@ const HeroSection = () => {
               delay: 0.2,
               ease: [0.33, 1, 0.68, 1]
             }}>
-                <GlitchText className="text-primary">"The Gateway to Korea"</GlitchText>
-              </motion.span>
-            </span>
-            <span className="block overflow-hidden">
-              <motion.span className="block text-foreground/80 text-[clamp(1rem,3vw,2.25rem)]" initial={{
+              <GlitchText className="text-primary">"The Gateway to Korea"</GlitchText>
+            </motion.span>
+          </span>
+          <span className="block overflow-hidden">
+            <motion.span className="block text-foreground/80 text-[clamp(1.2rem,4vw,3rem)]" initial={{
               y: '100%'
             }} animate={{
               y: 0
@@ -486,12 +291,12 @@ const HeroSection = () => {
               delay: 0.35,
               ease: [0.33, 1, 0.68, 1]
             }}>
-                Your Strategic Bridge to the Korean Ecosystem.
-              </motion.span>
-            </span>
-          </motion.h1>
+              Your Strategic Bridge to the Korean Ecosystem.
+            </motion.span>
+          </span>
+        </motion.h1>
 
-          <motion.p initial={{
+        <motion.p initial={{
           opacity: 0,
           y: 20
         }} animate={{
@@ -500,12 +305,12 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.6,
           delay: 0.5
-        }} className="text-xs sm:text-sm md:text-lg text-muted-foreground mb-4 md:mb-8 max-w-lg leading-relaxed">
-            The #2 global crypto market by volume. 4x faster trading velocity. A retail-driven ecosystem where projects build their strongest foundations.
-          </motion.p>
+        }} className="text-sm sm:text-base md:text-xl text-muted-foreground mb-8 md:mb-12 max-w-2xl leading-relaxed">
+          The #2 global crypto market by volume. 4x faster trading velocity. A retail-driven ecosystem where projects build their strongest foundations.
+        </motion.p>
 
-          {/* Stats Row */}
-          <motion.div initial={{
+        {/* Stats Row */}
+        <motion.div initial={{
           opacity: 0,
           y: 20
         }} animate={{
@@ -514,9 +319,9 @@ const HeroSection = () => {
         }} transition={{
           duration: 0.6,
           delay: 0.7
-        }} className="flex flex-row items-center gap-3 md:gap-10">
-            <div className="text-center group">
-              <motion.p className="text-xl sm:text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+        }} className="flex flex-row items-center gap-6 md:gap-12 mb-10 md:mb-16">
+          <div className="text-center group">
+            <motion.p className="text-2xl sm:text-3xl md:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
               opacity: 0,
               scale: 0.5
             }} animate={{
@@ -527,13 +332,13 @@ const HeroSection = () => {
               duration: 0.5,
               type: "spring"
             }}>
-                #2
-              </motion.p>
-              <p className="text-[9px] sm:text-[11px] md:text-xs text-muted-foreground mt-0.5 sm:mt-1 tracking-wider uppercase">Global Volume</p>
-            </div>
-            <div className="w-px h-6 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
-            <div className="text-center group">
-              <motion.p className="text-xl sm:text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              #2
+            </motion.p>
+            <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mt-1 sm:mt-2 tracking-wider uppercase">Global Volume</p>
+          </div>
+          <div className="w-px h-8 md:h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
+          <div className="text-center group">
+            <motion.p className="text-2xl sm:text-3xl md:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
               opacity: 0,
               scale: 0.5
             }} animate={{
@@ -544,13 +349,13 @@ const HeroSection = () => {
               duration: 0.5,
               type: "spring"
             }}>
-                4x
-              </motion.p>
-              <p className="text-[9px] sm:text-[11px] md:text-xs text-muted-foreground mt-0.5 sm:mt-1 tracking-wider uppercase">Velocity</p>
-            </div>
-            <div className="w-px h-6 md:h-10 bg-gradient-to-b from-transparent via-border to-transparent" />
-            <div className="text-center group">
-              <motion.p className="text-xl sm:text-2xl md:text-4xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
+              4x
+            </motion.p>
+            <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mt-1 sm:mt-2 tracking-wider uppercase">Velocity</p>
+          </div>
+          <div className="w-px h-8 md:h-12 bg-gradient-to-b from-transparent via-border to-transparent" />
+          <div className="text-center group">
+            <motion.p className="text-2xl sm:text-3xl md:text-5xl font-medium bg-gradient-to-b from-foreground to-foreground/70 bg-clip-text text-transparent" initial={{
               opacity: 0,
               scale: 0.5
             }} animate={{
@@ -561,154 +366,62 @@ const HeroSection = () => {
               duration: 0.5,
               type: "spring"
             }}>
-                100%
-              </motion.p>
-              <p className="text-[9px] sm:text-[11px] md:text-xs text-muted-foreground mt-0.5 sm:mt-1 tracking-wider uppercase">Retail-Driven</p>
-            </div>
-          </motion.div>
+              100%
+            </motion.p>
+            <p className="text-[10px] sm:text-xs md:text-sm text-muted-foreground mt-1 sm:mt-2 tracking-wider uppercase">Retail-Driven</p>
+          </div>
+        </motion.div>
 
-        </div>
-
-        {/* Right Column - Interactive Project Showcase (Now visible on all screens) */}
+        {/* CTA Button */}
         <motion.div initial={{
-        opacity: 0,
-        x: 50
-      }} animate={{
-        opacity: 1,
-        x: 0
-      }} transition={{
-        duration: 0.8,
-        delay: 0.4
-      }} className="relative" onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
-          {/* Media Container */}
-          <div className="relative aspect-[4/3] md:aspect-[16/10] lg:aspect-[4/3] overflow-hidden border border-border/30">
-            {/* Background Video/Image with Transition */}
-            <AnimatePresence mode="wait">
-              <motion.div key={activeIndex} initial={{
-              opacity: 0,
-              scale: 1.1
-            }} animate={{
-              opacity: 1,
-              scale: 1
-            }} exit={{
-              opacity: 0,
-              scale: 0.95
-            }} transition={{
-              duration: 0.7,
-              ease: "easeOut"
-            }} className="absolute inset-0">
-                {/* Video if available, otherwise image */}
-                {showcaseProjects[activeIndex].video ? <video key={showcaseProjects[activeIndex].video} src={showcaseProjects[activeIndex].video} autoPlay muted loop playsInline className="w-full h-full object-cover" /> : <img src={showcaseProjects[activeIndex].image} alt={showcaseProjects[activeIndex].name} loading="lazy" decoding="async" className="w-full h-full object-cover" />}
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
-                <div className="absolute inset-0 bg-gradient-to-r from-background/40 to-transparent" />
-              </motion.div>
-            </AnimatePresence>
-
-            {/* Content overlay */}
-            <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-6">
-              <AnimatePresence mode="wait">
-                <motion.div key={activeIndex} initial={{
-                opacity: 0,
-                y: 20
-              }} animate={{
-                opacity: 1,
-                y: 0
-              }} exit={{
-                opacity: 0,
-                y: -20
-              }} transition={{
-                duration: 0.5
-              }}>
-                  {/* Category */}
-                  <span className="text-[10px] text-primary tracking-widest uppercase mb-2 md:mb-3 block">
-                    {showcaseProjects[activeIndex].category}
-                  </span>
-                  
-                  {/* Project name */}
-                  <Link to={`/projects/${showcaseProjects[activeIndex].slug}`} className="inline-flex items-center gap-2 text-xl md:text-2xl text-foreground font-medium hover:text-primary transition-colors group">
-                    {showcaseProjects[activeIndex].name}
-                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </motion.div>
-              </AnimatePresence>
-            </div>
-
-            {/* Corner accent */}
-            <div className="absolute top-0 right-0 w-12 h-12 md:w-20 md:h-20 border-t border-r border-primary/30" />
-            <div className="absolute bottom-0 left-0 w-12 h-12 md:w-20 md:h-20 border-b border-l border-primary/30" />
-          </div>
-
-          {/* Project Selector Bar - 6x1 Compact */}
-          <div className="flex mt-2 md:mt-3 border border-border/30">
-            {showcaseProjects.map((project, index) => <motion.button key={project.slug} onMouseEnter={() => setActiveIndex(index)} onClick={() => setActiveIndex(index)} className={`flex-1 py-2.5 md:py-2 px-1 md:px-2 relative transition-all duration-300 border-r border-border/30 last:border-r-0 min-h-[44px] ${activeIndex === index ? 'bg-primary/10' : 'bg-transparent hover:bg-muted/50'}`}>
-                {/* Index number */}
-                <span className={`text-[10px] md:text-[10px] font-mono block transition-colors ${activeIndex === index ? 'text-primary' : 'text-muted-foreground'}`}>
-                  0{index + 1}
-                </span>
-                
-                {/* Project name */}
-                <span className={`text-[11px] md:text-xs font-medium block truncate transition-colors ${activeIndex === index ? 'text-foreground' : 'text-muted-foreground'}`}>
-                  {project.name}
-                </span>
-
-                {/* Active indicator line */}
-                {activeIndex === index && <motion.div layoutId="activeIndicator" className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary" transition={{
-              type: "spring",
-              stiffness: 500,
-              damping: 30
-            }} />}
-              </motion.button>)}
-          </div>
-          
-          {/* View All Link */}
-          <motion.div initial={{
-          opacity: 0
+          opacity: 0,
+          y: 20
         }} animate={{
-          opacity: 1
+          opacity: 1,
+          y: 0
         }} transition={{
-          delay: 1.2
-        }} className="mt-3 md:mt-4 text-right">
-            <Link to="/projects" className="inline-flex items-center gap-2 text-xs md:text-sm text-muted-foreground hover:text-primary transition-colors group">
-              View all projects
-              <ArrowRight className="w-3 h-3 md:w-4 md:h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </motion.div>
+          delay: 1.0,
+          duration: 0.6
+        }}>
+          <Link to="/projects" className="inline-flex items-center gap-3 text-sm md:text-base text-muted-foreground hover:text-primary transition-colors group border border-border/50 hover:border-primary/50 px-6 py-3 rounded-sm">
+            View Our Case Studies
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </motion.div>
       </div>
 
-      {/* Scroll indicator - Hidden on mobile for more space */}
+      {/* Scroll indicator */}
       <motion.div initial={{
-      opacity: 0,
-      y: 20
-    }} animate={{
-      opacity: 1,
-      y: 0
-    }} transition={{
-      delay: 1.5,
-      duration: 0.8
-    }} className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center gap-3">
-        <motion.span className="text-sm text-muted-foreground tracking-[0.3em] uppercase" animate={{
-        opacity: [0.5, 1, 0.5]
+        opacity: 0,
+        y: 20
+      }} animate={{
+        opacity: 1,
+        y: 0
       }} transition={{
-        duration: 2,
-        repeat: Infinity
-      }}>
+        delay: 1.5,
+        duration: 0.8
+      }} className="hidden md:flex absolute bottom-12 left-1/2 -translate-x-1/2 flex-col items-center gap-3">
+        <motion.span className="text-sm text-muted-foreground tracking-[0.3em] uppercase" animate={{
+          opacity: [0.5, 1, 0.5]
+        }} transition={{
+          duration: 2,
+          repeat: Infinity
+        }}>
           Scroll
         </motion.span>
         <motion.div className="w-8 h-14 border-2 border-primary/50 rounded-full flex items-start justify-center p-2" animate={{
-        borderColor: ['hsl(var(--primary) / 0.3)', 'hsl(var(--primary) / 0.8)', 'hsl(var(--primary) / 0.3)']
-      }} transition={{
-        duration: 2,
-        repeat: Infinity
-      }}>
-          <motion.div className="w-1.5 h-3 bg-primary rounded-full" animate={{
-          y: [0, 16, 0]
+          borderColor: ['hsl(var(--primary) / 0.3)', 'hsl(var(--primary) / 0.8)', 'hsl(var(--primary) / 0.3)']
         }} transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }} />
+          duration: 2,
+          repeat: Infinity
+        }}>
+          <motion.div className="w-1.5 h-3 bg-primary rounded-full" animate={{
+            y: [0, 16, 0]
+          }} transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }} />
         </motion.div>
       </motion.div>
     </section>;
