@@ -58,7 +58,6 @@ const allServices = [
   { slug: "community", title: "Community Management", color: "#5865F2" },
   { slug: "deep-research", title: "Deep Research", color: "#06B6D4" },
   { slug: "influencer", title: "Influencer/KOL", color: "#F59E0B" },
-  { slug: "yap", title: "Yap Strategy", color: "#22D3EE" },
   { slug: "pr", title: "PR & Media", color: "#8B5CF6" },
 ];
 

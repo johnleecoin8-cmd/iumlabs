@@ -14,7 +14,6 @@ const servicesSubMenu = [
   { name: "Community Management", href: "/services/community" },
   { name: "Deep Research", href: "/services/deep-research" },
   { name: "Influencer/KOL", href: "/services/influencer" },
-  { name: "Yap Service", href: "/services/yap" },
   { name: "PR/Media", href: "/services/pr" },
 ];
 

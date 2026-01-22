@@ -1,4 +1,4 @@
-import { ArrowRight, Compass, Users, Search, Mic2, MessageCircle, Newspaper, Rocket, Target } from "lucide-react";
+import { ArrowRight, Compass, Users, Search, Mic2, Newspaper, Rocket, Target } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
@@ -9,7 +9,6 @@ import eventsImage from "@/assets/services/events.jpg";
 import communityImage from "@/assets/services/community-management.png";
 import kolImage from "@/assets/services/kol-network.jpg";
 import prImage from "@/assets/services/pr-media.jpg";
-import yapImage from "@/assets/services/yap-network.png";
 import seoAdsImage from "@/assets/services/seo-ads.jpg";
 
 const services = [
@@ -63,14 +62,6 @@ const services = [
   },
   {
     number: "07",
-    title: "Yap Strategy",
-    description: "Targeted campaigns through a 600+ creator network designed to drive awareness and traction across Crypto X.",
-    link: "/services/yap",
-    icon: MessageCircle,
-    image: yapImage
-  },
-  {
-    number: "08",
     title: "PR",
     description: "Narrative development and media placements to get your story published and seen in the right places.",
     link: "/services/pr",

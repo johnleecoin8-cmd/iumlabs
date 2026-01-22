@@ -22,7 +22,6 @@ import OfflineEventService from "./pages/OfflineEventService";
 import CommunityService from "./pages/CommunityService";
 import DeepResearchService from "./pages/DeepResearchService";
 import InfluencerService from "./pages/InfluencerService";
-import YapService from "./pages/YapService";
 import PRService from "./pages/PRService";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
@@ -159,7 +158,6 @@ const AppRoutes = () => {
         <Route path="/research-data" element={<DeepResearchService />} />
         <Route path="/services/influencer" element={<InfluencerService />} />
         <Route path="/kol-marketing" element={<InfluencerService />} />
-        <Route path="/services/yap" element={<YapService />} />
         <Route path="/services/pr" element={<PRService />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />

@@ -24,9 +24,6 @@ const footerLinks = {
     }, {
       name: "Influencer / KOL",
       href: "/services/influencer"
-    }, {
-      name: "YAP Network",
-      href: "/services/yap"
     }]
   },
   growth: {
