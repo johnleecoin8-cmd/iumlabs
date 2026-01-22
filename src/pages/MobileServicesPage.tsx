@@ -207,7 +207,7 @@ const ServiceCard = ({
       },
       { 
         threshold: 0.1,
-        rootMargin: '200px' // Start loading earlier
+        rootMargin: '800px' // Start loading much earlier for snappier video transitions
       }
     );
     
@@ -217,12 +217,26 @@ const ServiceCard = ({
     
     return () => observer.disconnect();
   }, []);
+
+  // Proactively kick off network fetch as soon as we decide to mount the <video>
+  useEffect(() => {
+    if (!shouldLoadVideo) return;
+    const v = videoRef.current;
+    if (!v) return;
+    try {
+      v.load();
+    } catch {
+      // no-op
+    }
+  }, [shouldLoadVideo]);
   
   // Instant hover handler - no delay
   const handleMouseEnter = useCallback(() => {
     setIsHovered(true);
     if (videoRef.current) {
-      videoRef.current.play();
+      videoRef.current.play().catch(() => {
+        // autoplay restrictions / buffering - ignore
+      });
     }
   }, []);
   
@@ -249,10 +263,15 @@ const ServiceCard = ({
     touchStartPos.current = { x: touch.clientX, y: touch.clientY };
     setIsPressed(true);
     triggerHaptic();
+
+    // Ensure video element is mounted + fetching immediately
+    setShouldLoadVideo(true);
     
     // Play video on touch
-    if (videoRef.current && isVideoLoaded) {
-      videoRef.current.play();
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {
+        // buffering / policy - ignore
+      });
     }
   };
   
@@ -330,7 +349,7 @@ const ServiceCard = ({
           src={service.poster} 
           alt={service.title}
           className={cn(
-            "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+            "absolute inset-0 w-full h-full object-cover transition-opacity duration-200",
             isVideoLoaded ? "opacity-0" : "opacity-100"
           )}
         />
@@ -344,9 +363,9 @@ const ServiceCard = ({
             playsInline
             preload="auto"
             poster={service.poster}
-            onLoadedData={() => setIsVideoLoaded(true)}
+            onCanPlay={() => setIsVideoLoaded(true)}
             className={cn(
-              "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+              "absolute inset-0 w-full h-full object-cover transition-opacity duration-200",
               isVideoLoaded ? "opacity-100" : "opacity-0"
             )}
           >
@@ -356,7 +375,7 @@ const ServiceCard = ({
         
         {/* Dark overlays - ium labs style */}
         <div className={cn(
-          "absolute inset-0 bg-black/50 transition-colors duration-500",
+          "absolute inset-0 bg-black/50 transition-colors duration-200",
           isHovered && "bg-black/30"
         )} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
@@ -428,7 +447,7 @@ const MobileServicesPage = () => {
                 src="/images/hero-poster.jpg"
                 alt=""
                 className={cn(
-                  "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+                   "absolute inset-0 w-full h-full object-cover transition-opacity duration-200",
                   heroVideoLoaded ? "opacity-0" : "opacity-100"
                 )}
                 style={{ filter: "brightness(0.35)" }}
@@ -439,11 +458,11 @@ const MobileServicesPage = () => {
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                 preload="auto"
                 poster="/images/hero-poster.jpg"
                 onLoadedData={() => setHeroVideoLoaded(true)}
                 className={cn(
-                  "absolute inset-0 w-full h-full object-cover transition-opacity duration-500",
+                   "absolute inset-0 w-full h-full object-cover transition-opacity duration-200",
                   heroVideoLoaded ? "opacity-100" : "opacity-0"
                 )}
                 style={{ filter: "brightness(0.35)" }}
