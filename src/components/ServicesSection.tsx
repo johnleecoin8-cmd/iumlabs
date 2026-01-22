@@ -1,4 +1,4 @@
-import { ArrowRight, Compass, Users, Search, Mic2, Newspaper, Rocket, Target } from "lucide-react";
+import { ArrowRight, Compass, Users, Search, Mic2, Newspaper, Rocket, Target, FileSearch } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
@@ -54,6 +54,14 @@ const services = [
   },
   {
     number: "06",
+    title: "Deep Research",
+    description: "Data-driven market intelligence and on-chain analytics to inform your strategy with actionable insights.",
+    link: "/services/deep-research",
+    icon: FileSearch,
+    image: null
+  },
+  {
+    number: "07",
     title: "Influencer/KOL",
     description: "Influencer campaigns powered by top crypto voices aligned with your message and goals.",
     link: "/services/influencer",
@@ -61,7 +69,7 @@ const services = [
     image: kolImage
   },
   {
-    number: "07",
+    number: "08",
     title: "PR",
     description: "Narrative development and media placements to get your story published and seen in the right places.",
     link: "/services/pr",
