@@ -247,7 +247,7 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography - Mobile optimized */}
           <h1 className="font-sans text-[2rem] sm:text-display-lg md:text-[clamp(3rem,6vw,5rem)] font-bold leading-[1.1] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
-            <span className="text-white font-sans text-[1.8rem] sm:text-display-xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] leading-tight">Your Strategic Gateway<br />to the Korean Web3 Market</span>
+            <span className="text-white font-sans text-[1.8rem] sm:text-display-xl md:text-[clamp(2.5rem,5.5vw,4.5rem)] leading-tight">Your Web3 Eco-system Partner<br />to the Korea Web3 Market</span>
           </h1>
 
           {/* Subtext - Enhanced readability - Mobile optimized */}
