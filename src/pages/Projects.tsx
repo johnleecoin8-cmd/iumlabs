@@ -685,15 +685,30 @@ const Projects = () => {
       <main className="p-0.5 sm:p-1 md:p-2 bg-background" id="hero">
         <div className="rounded-xl sm:rounded-2xl overflow-hidden">
           <div className="relative min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
-            {/* Background Layer - Video */}
+            {/* Background Layer - Video with poster fallback */}
             <div className="absolute inset-0 overflow-hidden">
+              {/* Poster image shown while video loads */}
+              <img
+                src="/images/projects-hero-poster.jpg"
+                alt=""
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ filter: "brightness(0.35)" }}
+              />
               <video
                 autoPlay
                 muted
                 loop
                 playsInline
+                webkit-playsinline="true"
+                x5-playsinline="true"
+                x5-video-player-type="h5"
+                preload="auto"
+                poster="/images/projects-hero-poster.jpg"
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ filter: "brightness(0.35)" }}
+                onLoadedData={(e) => {
+                  e.currentTarget.play().catch(() => {});
+                }}
                 onLoadedMetadata={(e) => {
                   e.currentTarget.currentTime = 0;
                   setTimeout(() => setIsStatsVisible(true), 800);
