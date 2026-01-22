@@ -194,10 +194,11 @@ const portfolioItems = [
 
 const BrandingService = () => {
   usePageMeta({
-    title: "Web3 Branding & Crypto Design Agency Korea",
-    description: "Localized Web3 branding that resonates with Korean investors. We offer crypto-native design, UI/UX, and visual identity services for blockchain projects.",
+    title: "Web3 Branding & Crypto Design Agency Korea | ium Labs",
+    description: "Localized Web3 branding that resonates with Korean investors. Crypto-native design, UI/UX, and visual identity services for blockchain projects.",
     path: "/services/branding",
-    image: "/og-image.png"
+    image: "/og-image.png",
+    keywords: ["Web3 Branding Korea", "Crypto Design Agency", "Blockchain Visual Identity", "Korea Web3 Design"]
   });
   const [activePhase, setActivePhase] = useState(0);
 

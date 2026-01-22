@@ -366,10 +366,11 @@ const SeoulMapVisualization = () => {
 
 const OfflineEventService = () => {
   usePageMeta({
-    title: "Korea Web3 Event Planning & Crypto Side Events",
-    description: "Host unforgettable crypto events in Seoul. Full-service planning for Hackathons, KBW side events, and VIP networking parties for global Web3 leaders.",
+    title: "Korea Web3 Event Planning & Crypto Side Events | ium Labs",
+    description: "Host unforgettable crypto events in Seoul. Full-service planning for KBW side events, hackathons, and VIP networking parties with 2000+ guests served.",
     path: "/services/offline-event",
-    image: "/og-image.png"
+    image: "/og-image.png",
+    keywords: ["Korea Web3 Events", "KBW Side Events", "Seoul Crypto Meetup", "Web3 Conference Korea", "Crypto Networking Seoul"]
   });
   
   

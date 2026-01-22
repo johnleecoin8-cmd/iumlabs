@@ -283,10 +283,10 @@ const Jobs = () => {
   const talentMarquee = "Talent Wanted ".repeat(20);
   return <div className="min-h-screen bg-surface-base flex flex-col">
       <SEOHead
-        title="Careers | Join Korea's Leading Web3 & Crypto Team"
-        description="Join ium Labs and shape the future of Web3 in Korea. We're looking for passionate Researchers and Growth Managers to work with global blockchain projects."
+        title="Web3 Careers Korea | Join ium Labs"
+        description="Join Korea's fastest-growing Web3 marketing agency. We're hiring researchers, growth managers, and crypto-native talent in Seoul."
         path="/jobs"
-        keywords={['Web3 Careers Korea', 'Crypto Jobs Seoul', 'Blockchain Marketing Jobs']}
+        keywords={['Web3 Jobs Korea', 'Crypto Careers Seoul', 'Blockchain Jobs Korea', 'Web3 Researcher', 'Growth Manager Crypto']}
       />
       <Navbar />
 
