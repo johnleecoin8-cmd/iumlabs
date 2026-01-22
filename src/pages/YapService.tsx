@@ -165,10 +165,11 @@ const featuredYappers = [
 
 const YapService = () => {
   usePageMeta({
-    title: "Crypto Twitter Marketing & Viral Yap Strategy",
-    description: "Amplify your Web3 narrative with our 'Yap' marketing. We leverage organic conversations and viral loops to boost mindshare and social dominance.",
+    title: "Korea Crypto Twitter Marketing & Viral Yap Strategy | ium Labs",
+    description: "Dominate CT with organic viral loops. 150+ Korean yappers driving mindshare and social dominance for global Web3 projects.",
     path: "/services/yap",
-    image: "/og-image.png"
+    image: "/og-image.png",
+    keywords: ["Crypto Twitter Korea", "CT Marketing", "Viral Web3 Marketing", "Mindshare Growth", "Yap Marketing Korea"]
   });
   
   const canvasRef = useRef<HTMLCanvasElement>(null);

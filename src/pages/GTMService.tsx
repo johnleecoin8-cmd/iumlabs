@@ -2428,11 +2428,12 @@ const CTASection = () => {
 // ============================================
 const GTMService = () => {
   usePageMeta({
-    title: "Korea Web3 GTM Strategy & Crypto Marketing Agency",
-    description: "The premier Korea Web3 GTM partner. We provide end-to-end crypto marketing strategy, localized branding, and community growth for global protocols entering Korea.",
+    title: "Web3 Community Growth & KOL Marketing in Korea",
+    description: "Maximize your project's visibility with Korea's top crypto influencers and community managers. Specialized in Telegram, KakaoTalk & Twitter engagement.",
     path: "/services",
     image: "/og-image.png",
-    suffix: "ium Labs"
+    suffix: "ium Labs",
+    keywords: ["Community Growth Korea", "KOL Marketing", "User Acquisition Web3", "CEX Listing Support Korea", "Korea GTM Strategy"]
   });
   return <>
       <ServiceSchema name="Korea Web3 GTM Strategy & Marketing Services" description="Full-stack go-to-market services for Web3 projects entering the Korean market. Data-driven 4-stage framework covering intelligence, localization, activation, and growth." url="/services" provider="ium Labs" areaServed="South Korea" serviceType={["Web3 Marketing", "GTM Strategy", "KOL Marketing", "Community Building", "PR & Media"]} />

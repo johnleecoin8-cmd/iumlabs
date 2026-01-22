@@ -176,10 +176,11 @@ const adPlatforms = [
 
 const SEOAdsService = () => {
   usePageMeta({
-    title: "Korea Crypto SEO & Web3 Paid Marketing",
-    description: "Dominate Korean search results with specialized Crypto SEO. We manage Naver & Google ads, organic search strategies, and user acquisition for Web3.",
+    title: "Korea Crypto SEO & Web3 Paid Marketing | ium Labs",
+    description: "Dominate Korean search with specialized Crypto SEO. +150% traffic growth through Naver, Google ads, and user acquisition strategies for Web3.",
     path: "/services/seo-ads",
-    image: "/og-image.png"
+    image: "/og-image.png",
+    keywords: ["Crypto SEO Korea", "Naver Ads Web3", "Google Ads Crypto", "Korea User Acquisition", "Web3 Paid Marketing"]
   });
   const [activePhase, setActivePhase] = useState(0);
 

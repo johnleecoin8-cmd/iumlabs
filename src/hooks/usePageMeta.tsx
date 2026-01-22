@@ -8,6 +8,7 @@ interface PageMetaOptions {
   path?: string;
   image?: string;
   suffix?: string;
+  keywords?: string[];
 }
 
 /**
@@ -26,12 +27,14 @@ export const usePageMeta = (
     let desc: string | undefined;
     let pagePath: string | undefined;
     let titleSuffix: string;
+    let keywords: string[] | undefined;
 
     if (typeof titleOrOptions === 'object') {
       title = titleOrOptions.title;
       desc = titleOrOptions.description;
       pagePath = titleOrOptions.path;
       titleSuffix = titleOrOptions.suffix || "ium Labs";
+      keywords = titleOrOptions.keywords;
     } else {
       title = titleOrOptions;
       desc = description;
@@ -87,7 +90,13 @@ export const usePageMeta = (
       }
     }
 
-    // Fixed share image (Open Graph / Twitter) — always keep the same image when sharing.
+    // Update keywords meta tag
+    if (keywords && keywords.length > 0) {
+      const keywordsMeta = document.querySelector('meta[name="keywords"]');
+      if (keywordsMeta) {
+        keywordsMeta.setAttribute('content', keywords.join(', '));
+      }
+    }
     const shareImageUrl = `https://iumlabs.io${DEFAULT_SHARE_IMAGE_PATH}`;
 
     const ogImageMeta = document.querySelector('meta[property="og:image"]');

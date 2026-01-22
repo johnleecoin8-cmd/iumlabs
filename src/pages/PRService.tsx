@@ -420,10 +420,11 @@ const LiveNewsDistribution = () => {
 
 const PRService = () => {
   usePageMeta({
-    title: "Korea Web3 PR Agency & Crypto Media Strategy",
-    description: "Secure top-tier coverage in Korea's leading crypto media. We specialize in localized PR, press releases, and strategic narratives for global Web3 projects.",
+    title: "Korea Web3 PR Agency & Crypto Media Strategy | ium Labs",
+    description: "Secure top-tier coverage in Blockmedia, Coinness, and Korean crypto media. 50+ articles published with 5M+ combined reach for global Web3 projects.",
     path: "/services/pr",
-    image: "/og-image.png"
+    image: "/og-image.png",
+    keywords: ["Korea Crypto PR", "Web3 Media Relations", "Blockmedia", "Coinness", "Korean Press Release", "Crypto Media Korea"]
   });
 
   return (
