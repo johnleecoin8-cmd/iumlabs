@@ -1,5 +1,5 @@
 import { ChevronDown, Send } from "lucide-react";
-import { useEffect, useState, MouseEvent, useMemo } from "react";
+import { useEffect, useMemo, useState, MouseEvent } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useRipple } from "@/hooks/useRipple";
 import { brand } from "@/config/content";
@@ -154,6 +154,8 @@ const defaultStats = [{
 }];
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [hasVideoError, setHasVideoError] = useState(false);
   const { createRipple } = useRipple();
   const { isMobile, shouldDisableHeavyAnimations, shouldDisableVideo } = useMobileOptimization();
   
@@ -183,18 +185,29 @@ const HeroSection = () => {
     const timer = setTimeout(() => setIsVisible(true), 800);
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    // Reset video state when switching between video/image modes
+    setIsVideoReady(false);
+    setHasVideoError(false);
+  }, [shouldDisableVideo]);
   
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video with mobile optimizations */}
       <div className="absolute inset-0">
-        {shouldDisableVideo ? (
-          <img
-            src="/images/hero-poster.jpg"
-            alt=""
-            className="absolute inset-0 w-full h-full object-cover"
-            loading="eager"
-          />
-        ) : (
+        {/* Always render poster as a safe fallback (mobile autoplay/codec issues can hide video) */}
+        <img
+          src="/images/hero-poster.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+          style={{
+            opacity: shouldDisableVideo || hasVideoError || !isVideoReady ? 1 : 0,
+            transition: "opacity 300ms ease",
+          }}
+        />
+
+        {!shouldDisableVideo && !hasVideoError && (
           <video
             autoPlay
             muted
@@ -205,12 +218,26 @@ const HeroSection = () => {
             x5-video-player-type="h5"
             preload="auto"
             poster="/images/hero-poster.jpg"
+            disablePictureInPicture
+            controls={false}
+            aria-hidden="true"
+            tabIndex={-1}
             className="absolute inset-0 w-full h-full object-cover"
+            style={{
+              opacity: isVideoReady ? 1 : 0,
+              transition: "opacity 300ms ease",
+            }}
+            onError={() => {
+              setHasVideoError(true);
+              setIsVideoReady(false);
+            }}
             onLoadedData={(e) => {
               // Start playback as soon as data is available (faster than onCanPlayThrough)
               const video = e.currentTarget;
+              setIsVideoReady(true);
               video.play().catch(() => {
-                // Silent catch - some browsers block autoplay
+                // Autoplay may be blocked on some browsers; keep poster visible in that case
+                setIsVideoReady(false);
               });
             }}
           >
@@ -247,7 +274,7 @@ const HeroSection = () => {
         <div className="max-w-7xl mx-auto text-center">
           {/* Main Headline - Premium Display Typography - Mobile optimized */}
           <h1 className="font-sans text-[1.4rem] sm:text-[2.5rem] md:text-[clamp(2.5rem,5vw,4rem)] font-bold leading-[1.15] tracking-[-0.02em] mb-3 sm:mb-5 md:mb-6 mt-2 sm:mt-6 md:mt-8">
-            <span className="text-white font-sans leading-tight">Your Web3 Eco-system Partner<br />to the Korea Web3 Market</span>
+            <span className="text-white font-sans leading-tight">Your Web3 Eco-system Partner<br />to the Korea Market</span>
           </h1>
 
           {/* Subtext - Enhanced readability - Mobile optimized */}
