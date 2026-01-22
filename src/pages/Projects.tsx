@@ -113,9 +113,9 @@ interface Project {
 
 const stats = [
   { value: 18, label: "Projects Launched", suffix: "+" },
-  { value: 340, label: "Avg. Volume Increase", suffix: "%" },
-  { value: 6, label: "Token Sales", prefix: "$", suffix: "M+" },
-  { value: 50, label: "New Users Acquired", suffix: "K+" },
+  { value: 130, label: "Avg. Impression", suffix: "K" },
+  { value: 8, label: "Client Valuation", prefix: "$", suffix: "B+" },
+  { value: 2, label: "Avg. Community Users", suffix: "K+" },
 ];
 
 
