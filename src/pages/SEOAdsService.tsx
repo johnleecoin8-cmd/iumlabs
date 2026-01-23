@@ -201,9 +201,16 @@ const SEOAdsService = () => {
       currentSlug="seo-ads"
     >
       {/* 4-Week Program Journey Section */}
-      <section className="scroll-reveal bg-[#0F0F0F]">
+      <section className="scroll-reveal bg-surface-base">
         <div className="border-t border-white/10">
-          <SectionHeader title="4-Week Program" badge="Growth Journey" />
+          {/* Homepage-style Section Header */}
+          <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
+            <div className="flex items-center gap-4 md:gap-6">
+              <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">01</span>
+              <h2 className="text-lg md:text-xl font-medium text-white">4-Week Program</h2>
+            </div>
+            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Growth Journey</span>
+          </div>
           
           <div className="py-10 md:py-14">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
