@@ -290,23 +290,8 @@ const ProjectCard = ({
           overflow-hidden
         `}
       >
-        {/* Background Video or Image - shows on hover */}
-        {project.bgVideo ? (
-          <video
-            className="absolute inset-0 w-full h-full object-cover opacity-0 group-hover:opacity-70 transition-opacity duration-500 scale-105 group-hover:scale-100"
-            src={project.bgVideo}
-            muted
-            loop
-            playsInline
-            autoPlay
-          />
-        ) : (
-          <div 
-            className="absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-70 transition-all duration-500 scale-105 group-hover:scale-100"
-            style={{ backgroundImage: `url(${project.bgImage})` }}
-          />
-        )}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        {/* Subtle hover overlay */}
+        <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         
         {/* Content wrapper */}
         <div className="relative z-10">
