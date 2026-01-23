@@ -24,7 +24,7 @@ const CalendlyButton = ({
   variant = "default", 
   size = "default",
   className = "",
-  calendlyUrl = "https://calendly.com/iumlabs/30min",
+  calendlyUrl = "https://calendly.com/iumlabs-info/30min",
   children,
   style
 }: CalendlyButtonProps) => {
