@@ -15,10 +15,9 @@ import bybitLogo from "@/assets/logos/bybit.png";
 import peaqLogo from "@/assets/logos/peaq.svg";
 import storyProtocolLogo from "@/assets/logos/story-protocol-mono.png";
 import spacecoinLogo from "@/assets/logos/spacecoin-mono.png";
-import ai16zLogo from "@/assets/logos/ai16z.png";
-import triaLogo from "@/assets/logos/tria-official.png";
+import triaLogo from "@/assets/logos/tria-mono.png";
 import mantraLogo from "@/assets/logos/mantra.png";
-import saharaAiLogo from "@/assets/logos/sahara-ai.png";
+import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 
@@ -100,10 +99,6 @@ const clientLogos = [{
 }, {
   name: "Spacecoin",
   logo: spacecoinLogo,
-  noInvert: false
-}, {
-  name: "ai16z",
-  logo: ai16zLogo,
   noInvert: false
 }, {
   name: "Tria",
