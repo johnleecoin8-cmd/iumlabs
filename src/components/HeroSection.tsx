@@ -8,7 +8,7 @@ import { useBrandStatsByIds } from "@/hooks/useBrandStats";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
-import kucoinLogo from "@/assets/logos/kucoin.png";
+import kucoinLogo from "@/assets/logos/kucoin-mono.png";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
@@ -16,7 +16,7 @@ import peaqLogo from "@/assets/logos/peaq.svg";
 import storyProtocolLogo from "@/assets/logos/story-protocol-mono.png";
 import spacecoinLogo from "@/assets/logos/spacecoin-mono.png";
 import triaLogo from "@/assets/logos/tria-mono.png";
-import mantraLogo from "@/assets/logos/mantra.png";
+import mantraLogo from "@/assets/logos/mantra-mono.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
@@ -75,7 +75,7 @@ const clientLogos = [{
 }, {
   name: "KuCoin",
   logo: kucoinLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "Polygon",
   logo: polygonLogo,
@@ -107,7 +107,7 @@ const clientLogos = [{
 }, {
   name: "Mantra",
   logo: mantraLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "Sahara AI",
   logo: saharaAiLogo,
