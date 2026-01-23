@@ -8,13 +8,13 @@ import { useBrandStatsByIds } from "@/hooks/useBrandStats";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
-import kucoinLogo from "@/assets/logos/kucoin.svg";
+import kucoinLogo from "@/assets/logos/kucoin.png";
 import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
 import peaqLogo from "@/assets/logos/peaq.svg";
 import storyProtocolLogo from "@/assets/logos/story-protocol-new.png";
-import selaNetworkLogo from "@/assets/logos/sela-network.png";
+import spacecoinLogo from "@/assets/logos/spacecoin.png";
 import ai16zLogo from "@/assets/logos/ai16z.png";
 import triaLogo from "@/assets/logos/tria-official.png";
 import mantraLogo from "@/assets/logos/mantra.png";
@@ -76,7 +76,7 @@ const clientLogos = [{
 }, {
   name: "KuCoin",
   logo: kucoinLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "Polygon",
   logo: polygonLogo,
@@ -96,10 +96,10 @@ const clientLogos = [{
 }, {
   name: "Story Protocol",
   logo: storyProtocolLogo,
-  noInvert: false
+  noInvert: true
 }, {
-  name: "Sela Network",
-  logo: selaNetworkLogo,
+  name: "Spacecoin",
+  logo: spacecoinLogo,
   noInvert: true
 }, {
   name: "ai16z",
