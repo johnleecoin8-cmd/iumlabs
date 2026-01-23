@@ -13,8 +13,8 @@ import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
 import peaqLogo from "@/assets/logos/peaq.svg";
-import storyProtocolLogo from "@/assets/logos/story-protocol-mono.png";
-import spacecoinLogo from "@/assets/logos/spacecoin-mono.png";
+import storyProtocolLogo from "@/assets/logos/story-protocol.png";
+import spacecoinLogo from "@/assets/logos/spacecoin.png";
 import triaLogo from "@/assets/logos/tria-mono.png";
 import mantraLogo from "@/assets/logos/mantra-mono.png";
 import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
@@ -95,11 +95,11 @@ const clientLogos = [{
 }, {
   name: "Story Protocol",
   logo: storyProtocolLogo,
-  noInvert: true
+  noInvert: false
 }, {
   name: "Spacecoin",
   logo: spacecoinLogo,
-  noInvert: true
+  noInvert: false
 }, {
   name: "Tria",
   logo: triaLogo,
