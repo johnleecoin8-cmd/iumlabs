@@ -24,12 +24,6 @@ import MediaPartnersSection from "@/components/MediaPartnersSection";
 import Logo3D from "@/components/Logo3D";
 
 // Import team avatars
-import jamesAvatar from "@/assets/team/james-avatar.jpeg";
-import davidAvatar from "@/assets/team/david-avatar.png";
-import julianAvatar from "@/assets/team/julian-avatar.png";
-import kyleAvatar from "@/assets/team/kyle-avatar.png";
-import miaAvatar from "@/assets/team/mia-avatar.png";
-import alexAvatar from "@/assets/team/alex-avatar.png";
 
 // Import client logos
 import bnbLogo from "@/assets/logos/bnb.png";
@@ -147,63 +141,6 @@ const process = [{
   description: "Final Offer"
 }];
 
-// Team members data
-const teamMembers = [
-  {
-    name: "James",
-    role: "CEO",
-    description: "Ex-KuCoin Korea Lead,\nOutlier Ventures Investment Manager",
-    avatar: jamesAvatar,
-    social: {
-      telegram: "https://t.me/hnes2",
-    },
-  },
-  {
-    name: "David",
-    role: "Head of Strategy",
-    description: "Ex-Binance Fiat Lead,\n21 Shares Portfolio Manager",
-    avatar: davidAvatar,
-    social: {
-      telegram: "https://t.me/krkrjnjn",
-    },
-  },
-  {
-    name: "Julian",
-    role: "KOL Manager",
-    description: "Ex-Upbit Security Operation Manager",
-    avatar: julianAvatar,
-    social: {
-      telegram: "https://t.me/iumlabsjulian",
-    },
-  },
-  {
-    name: "Noa",
-    role: "Head of Communication",
-    description: "Ex-0G Foundation Moderator",
-    avatar: kyleAvatar,
-    social: {
-      telegram: "https://t.me/noahppp",
-    },
-  },
-  {
-    name: "Alex",
-    role: "Community Operator",
-    description: "Ex-Ai16z Operation Manager",
-    avatar: alexAvatar,
-    social: {
-      telegram: "https://t.me/Hilton_lh",
-    },
-  },
-  {
-    name: "Mia",
-    role: "KOL Manager",
-    description: "Ex-MEXC Operation Manager",
-    avatar: miaAvatar,
-    social: {
-      telegram: "https://t.me/iumlabs",
-    },
-  },
-];
 
 // Video component
 const JobsHeroVideo = () => {
@@ -442,90 +379,13 @@ const Jobs = () => {
       {/* Spacer */}
       <section className="bg-white overflow-hidden" id="marquee" />
 
-      {/* 01. Our Team Section */}
-      <section className="bg-surface-even" id="team">
-        <div className="border-t border-white/10">
-          <AnimatedSection>
-            <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-                <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">Our Team</h2>
-              </div>
-              <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">
-                {teamMembers.length} Team Members
-              </span>
-            </div>
-          </AnimatedSection>
-
-          {/* Team Grid */}
-          <div className="container mx-auto px-4 sm:px-6 md:px-10 py-10 sm:py-16 md:py-20">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-              {teamMembers.map((member, idx) => (
-                <AnimatedSection key={idx} delay={idx * 100}>
-                  <motion.div 
-                    whileHover={{ y: -8, scale: 1.02 }}
-                    transition={{ duration: 0.3 }}
-                    className="group relative bg-surface-odd rounded-2xl overflow-hidden border border-white/10 hover:border-white/25 transition-all duration-300"
-                  >
-                    {/* NFT Avatar */}
-                    <div className="relative aspect-square overflow-hidden bg-gradient-to-b from-white/5 to-transparent">
-                      <img 
-                        src={member.avatar} 
-                        alt={member.name}
-                        loading="lazy"
-                        decoding="async"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      />
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-surface-odd via-transparent to-transparent" />
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="p-5 sm:p-6">
-                      <div className="flex items-start justify-between mb-3">
-                        <div>
-                          <h3 className="text-lg sm:text-xl font-bold text-white mb-1">
-                            {member.name}
-                          </h3>
-                          <p className="text-xs sm:text-sm text-primary font-medium">
-                            {member.role}
-                          </p>
-                        </div>
-                        
-                        {/* Social Links */}
-                        <div className="flex gap-2">
-                          {member.social.telegram && (
-                            <a 
-                              href={member.social.telegram} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 hover:bg-white/15 transition-colors"
-                            >
-                              <Send className="w-4 h-4 text-white/60" />
-                            </a>
-                          )}
-                        </div>
-                      </div>
-                      
-                      <p className="text-sm text-white/50 leading-relaxed whitespace-pre-line">
-                        {member.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                </AnimatedSection>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 02. Positions Section */}
+      {/* 01. Positions Section */}
       <section className="bg-surface-odd" id="positions">
         <div className="border-t border-white/10">
           <AnimatedSection>
             <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-10 md:py-4 border-b border-white/10">
               <div className="flex items-baseline gap-4 sm:gap-6 md:gap-10">
-                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+                <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
                 <h2 className="text-base sm:text-lg md:text-xl font-medium text-white">Find Your Role</h2>
               </div>
               <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">We're Actively Hiring</span>
