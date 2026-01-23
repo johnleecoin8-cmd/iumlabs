@@ -726,7 +726,7 @@ const Projects = () => {
               <div className="max-w-7xl mx-auto text-center">
                 {/* Main Headline */}
                 <h1 className="font-sans text-display-hero mb-4 sm:mb-6 mt-8 sm:mt-12">
-                  <span className="text-white">Our </span>
+                  <span className="text-white">Web3 Project </span>
                   <span className="text-white/90">Case </span>
                   <span className="text-white">Studies</span>
                 </h1>
