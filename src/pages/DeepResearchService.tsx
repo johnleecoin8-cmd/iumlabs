@@ -8,6 +8,7 @@ import ServicePageLayout, { ServiceTag, ServiceStat, ProcessStep, Deliverable, F
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
 import { FileText, BarChart3, TrendingUp, Users, Newspaper, Share2, Search, PenTool, Send, ArrowRight, BookOpen, Mic2, Globe, Activity, Database, Wallet, ArrowUpRight, ArrowDownRight, Terminal } from "lucide-react";
+import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 
 const ACCENT_COLOR = "#06B6D4";
 
@@ -154,6 +155,7 @@ const ResearchDashboard = () => {
   const [onChainData, setOnChainData] = useState(onChainEvents);
   const [chartData, setChartData] = useState<number[]>([]);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { isMobile, shouldDisableHeavyAnimations } = useMobileOptimization();
 
   // Generate fake chart data
   useEffect(() => {
@@ -167,8 +169,11 @@ const ResearchDashboard = () => {
     setChartData(data);
   }, []);
 
-  // Draw animated chart
+  // Draw animated chart - DISABLED on mobile for performance
   useEffect(() => {
+    // Skip canvas animation on mobile to prevent phone shutdown
+    if (isMobile || shouldDisableHeavyAnimations) return;
+
     const canvas = canvasRef.current;
     if (!canvas || chartData.length === 0) return;
 
@@ -184,8 +189,11 @@ const ResearchDashboard = () => {
 
     let animationFrame: number;
     let progress = 0;
+    let isAnimating = true;
 
     const draw = () => {
+      if (!isAnimating) return;
+      
       progress += 0.02;
       if (progress > 1) progress = 1;
 
@@ -231,29 +239,30 @@ const ResearchDashboard = () => {
       ctx.lineWidth = 2;
       ctx.stroke();
 
-      // Draw pulsing dot at end
+      // Draw static dot at end (no pulsing animation)
       if (visiblePoints > 0) {
         const dotX = padding + ((visiblePoints - 1) / (chartData.length - 1)) * (width - 2 * padding);
         const dotY = height - padding - (chartData[visiblePoints - 1] / 100) * (height - 2 * padding);
         
         ctx.beginPath();
-        ctx.arc(dotX, dotY, 4 + Math.sin(Date.now() / 200) * 2, 0, Math.PI * 2);
+        ctx.arc(dotX, dotY, 5, 0, Math.PI * 2);
         ctx.fillStyle = '#06B6D4';
         ctx.fill();
       }
 
+      // FIXED: Only continue animation if progress < 1 (stops infinite loop)
       if (progress < 1) {
-        animationFrame = requestAnimationFrame(draw);
-      } else {
-        // Continue animation for the pulse
         animationFrame = requestAnimationFrame(draw);
       }
     };
 
     draw();
 
-    return () => cancelAnimationFrame(animationFrame);
-  }, [chartData]);
+    return () => {
+      isAnimating = false;
+      cancelAnimationFrame(animationFrame);
+    };
+  }, [chartData, isMobile, shouldDisableHeavyAnimations]);
 
   // Typing effect for insights
   useEffect(() => {
