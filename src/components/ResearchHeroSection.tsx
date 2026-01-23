@@ -106,9 +106,9 @@ const ResearchHeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-white">In-Depth Research &</span>
+            <span className="text-white">Web3 Market Research &</span>
             <br />
-            <span className="text-white">Market Intelligence</span>
+            <span className="text-white">Data-Driven Insights</span>
           </motion.h1>
 
           {/* Subtext */}

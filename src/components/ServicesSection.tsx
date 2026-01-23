@@ -151,7 +151,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0]; index: n
               {service.description}
             </p>
             <div className="flex items-center gap-2 text-white/85 group-hover:text-white transition-colors text-sm font-medium min-h-[44px] sm:min-h-0">
-              <span className="group-hover:underline underline-offset-4">Learn more</span>
+              <span className="group-hover:underline underline-offset-4">Explore {service.title}</span>
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-2 transition-transform duration-300" />
             </div>
           </div>

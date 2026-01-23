@@ -11,14 +11,14 @@ import { useScrollDirection } from "@/hooks/useScrollDirection";
 
 // Services submenu data (same as Sidebar)
 const servicesSubMenu = [
-  { name: "GTM Strategy", href: "/services" },
-  { name: "Branding/Website", href: "/services/branding" },
-  { name: "SEO/Paid Ads", href: "/services/seo-ads" },
-  { name: "Offline Event", href: "/services/offline-event" },
+  { name: "Web3 GTM Strategy", href: "/services" },
+  { name: "Branding & Website", href: "/services/branding" },
+  { name: "SEO & Paid Ads", href: "/services/seo-ads" },
+  { name: "Offline Events Korea", href: "/services/offline-event" },
   { name: "Community Management", href: "/services/community" },
-  { name: "Deep Research", href: "/services/deep-research" },
-  { name: "Influencer/KOL", href: "/services/influencer" },
-  { name: "PR/Media", href: "/services/pr" },
+  { name: "Deep Research & Analytics", href: "/services/deep-research" },
+  { name: "Influencer & KOL Marketing", href: "/services/influencer" },
+  { name: "PR & Media Coverage", href: "/services/pr" },
 ];
 
 const brandConfig = {
@@ -157,7 +157,7 @@ const Navbar = () => {
                 >
                   Menu
                 </span>
-                <nav className="space-y-1 sm:space-y-1.5 md:space-y-2">
+                <nav className="space-y-1 sm:space-y-1.5 md:space-y-2" aria-label="Main navigation">
                   {navLinks.map((link, index) => {
                     // Services with accordion
                     if (link.label === 'Services') {

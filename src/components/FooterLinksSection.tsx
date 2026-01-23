@@ -16,13 +16,13 @@ const footerLinks = {
   marketing: {
     title: "Marketing",
     links: [{
-      name: "GTM Strategy",
+      name: "Web3 GTM Strategy",
       href: "/services"
     }, {
-      name: "PR & Media",
+      name: "PR & Media Coverage",
       href: "/services/pr"
     }, {
-      name: "Influencer / KOL",
+      name: "Influencer & KOL Marketing",
       href: "/services/influencer"
     }]
   },
@@ -32,7 +32,7 @@ const footerLinks = {
       name: "Community Management",
       href: "/services/community"
     }, {
-      name: "Offline Events",
+      name: "Offline Events Korea",
       href: "/services/offline-event"
     }, {
       name: "Branding & Website",
@@ -45,16 +45,16 @@ const footerLinks = {
   company: {
     title: "Company",
     links: [{
-      name: "Projects",
+      name: "Case Studies & Portfolio",
       href: "/projects"
     }, {
-      name: "Research",
+      name: "Market Research & Insights",
       href: "/research"
     }, {
       name: "Careers",
       href: "/jobs"
     }, {
-      name: "Contact",
+      name: "Contact Us",
       href: "/contact"
     }]
   },
