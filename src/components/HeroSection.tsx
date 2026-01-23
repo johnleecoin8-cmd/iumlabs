@@ -13,11 +13,11 @@ import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
 import peaqLogo from "@/assets/logos/peaq.svg";
-import storyProtocolLogo from "@/assets/logos/story-protocol.png";
-import spacecoinLogo from "@/assets/logos/spacecoin.png";
-import triaLogo from "@/assets/logos/tria-official.png";
+import storyProtocolLogo from "@/assets/logos/story-protocol-mono.png";
+import spacecoinLogo from "@/assets/logos/spacecoin-mono.png";
+import triaLogo from "@/assets/logos/tria-mono.png";
 import mantraLogo from "@/assets/logos/mantra.png";
-import saharaAiLogo from "@/assets/logos/sahara-ai.png";
+import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 
@@ -95,31 +95,31 @@ const clientLogos = [{
 }, {
   name: "Story Protocol",
   logo: storyProtocolLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "Spacecoin",
   logo: spacecoinLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "Tria",
   logo: triaLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "Mantra",
   logo: mantraLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "Sahara AI",
   logo: saharaAiLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "FOGO",
   logo: fogoLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "SynFutures",
   logo: synfuturesLogo,
-  noInvert: false
+  noInvert: true
 }];
 // Default stats as fallback
 const defaultStats = [{
