@@ -170,9 +170,9 @@ const ContactFormSection = ({
           <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-primary/[0.03]" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
           
-          <div className="relative px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
+          <div className="relative px-3 sm:px-4 md:px-6 pt-4 sm:pt-5 md:pt-6 pb-2 sm:pb-3 md:pb-4">
             {/* Hero Title */}
-            <div className="text-center mb-4 sm:mb-6">
+            <div className="text-center mb-3 sm:mb-4">
               <motion.h3 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -200,7 +200,7 @@ const ContactFormSection = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 mt-6 sm:mt-8"
+                className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mt-3 sm:mt-4"
               >
                 {trustBadges.map((badge, index) => (
                   <div 
@@ -220,7 +220,7 @@ const ContactFormSection = ({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 max-w-3xl mx-auto mb-8 sm:mb-12"
+              className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 max-w-3xl mx-auto mb-4 sm:mb-6"
             >
               {quickActions.map((action, index) => {
                 if (action.action === "calendly") {
