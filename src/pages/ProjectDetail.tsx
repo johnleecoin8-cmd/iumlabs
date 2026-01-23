@@ -66,10 +66,18 @@ const ProjectDetail = () => {
   // Use DB project if available, otherwise fallback to hardcoded
   const fallbackProject = slug ? projectsData[slug] : null;
   
+  // Check if background_url is a video or image
+  const isVideoBackground = dbProject?.background_url?.endsWith('.mp4') || dbProject?.background_url?.endsWith('.webm');
+  
   // Use fallback (imported) image first, then DB URL (for external URLs only)
   const heroBackgroundImage = fallbackProject?.bgImage 
-    || (dbProject?.background_url?.startsWith('http') ? dbProject.background_url : null)
+    || (!isVideoBackground && dbProject?.background_url ? dbProject.background_url : null)
     || (dbGallery && dbGallery.length > 0 ? dbGallery[0].src : null)
+    || '/images/projects/spacecoin-bg.jpg'; // fallback to static image
+  
+  // Check for video in DB or fallback
+  const heroBackgroundVideo = fallbackProject?.bgVideo 
+    || (isVideoBackground ? dbProject?.background_url : null)
     || '';
   
   const websiteUrl = dbProject?.website_url || '';
@@ -78,7 +86,7 @@ const ProjectDetail = () => {
     name: dbProject.name,
     logo: dbProject.logo_url || fallbackProject?.logo || '',
     bgImage: heroBackgroundImage,
-    bgVideo: fallbackProject?.bgVideo,
+    bgVideo: heroBackgroundVideo,
     featureImage: fallbackProject?.featureImage,
     category: dbProject.category || '',
     result: dbProject.result || '',
