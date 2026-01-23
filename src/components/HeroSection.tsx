@@ -13,11 +13,11 @@ import polygonLogo from "@/assets/logos/polygon.svg";
 import ondoLogo from "@/assets/logos/ondo.svg";
 import bybitLogo from "@/assets/logos/bybit.png";
 import peaqLogo from "@/assets/logos/peaq.svg";
-import storyProtocolLogo from "@/assets/logos/story-protocol-mono.png";
-import spacecoinLogo from "@/assets/logos/spacecoin-mono.png";
-import triaLogo from "@/assets/logos/tria-mono.png";
+import storyProtocolLogo from "@/assets/logos/story-protocol.png";
+import spacecoinLogo from "@/assets/logos/spacecoin.png";
+import triaLogo from "@/assets/logos/tria-official.png";
 import mantraLogo from "@/assets/logos/mantra.png";
-import saharaAiLogo from "@/assets/logos/sahara-ai-mono.png";
+import saharaAiLogo from "@/assets/logos/sahara-ai.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
 
