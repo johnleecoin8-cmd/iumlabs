@@ -445,7 +445,7 @@ const PRService = () => {
       currentSlug="pr"
     >
       {/* Live News Distribution Section */}
-      <section className="scroll-reveal bg-surface-base relative overflow-hidden">
+      <section className="scroll-reveal bg-[#0F0F0F] relative overflow-hidden">
         {/* Background glow effect */}
         <div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-[120px] opacity-20 pointer-events-none"
@@ -453,14 +453,7 @@ const PRService = () => {
         />
         
         <div className="border-t border-white/10 relative z-10">
-          {/* Homepage-style Section Header */}
-          <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-            <div className="flex items-center gap-4 md:gap-6">
-              <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Distribution Network</h2>
-            </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Global Reach, Local Depth</span>
-          </div>
+          <SectionHeader title="Distribution Network" badge="Global Reach, Local Depth" />
           
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-4">
             <p className="text-white/60 text-sm max-w-3xl">

@@ -210,11 +210,11 @@ const ServicePageLayout = ({
   const contactSectionNum = getNextSectionNumber();
 
   return (
-    <div className="min-h-screen bg-surface-base">
+    <div className="min-h-screen bg-[#0A0A0A]">
       <Navbar />
       
       {/* Hero Section */}
-      <main className="p-1 sm:p-1 md:p-2 bg-surface-base" id="hero">
+      <main className="p-1 sm:p-1 md:p-2 bg-[#0A0A0A]" id="hero">
         <div className="relative min-h-[100svh] sm:min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-xl sm:rounded-2xl md:rounded-3xl">
           {/* Background Layer - Video with Fallback */}
           <div className="absolute inset-0 overflow-hidden">
@@ -409,37 +409,30 @@ const ServicePageLayout = ({
 
       {/* Deliverables Section */}
       {deliverables && deliverables.length > 0 && (
-        <section className="bg-surface-base">
+        <section className="bg-[#121212]">
           <div className="border-t border-white/10">
-            {/* Homepage-style Section Header */}
-            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-center gap-4 md:gap-6">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">{deliverablesSectionNum}</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">What You Get</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Deliverables</span>
-            </div>
+            <SectionHeader number={deliverablesSectionNum!} title="What You Get" badge="Deliverables" />
             
-            <div className="py-6 sm:py-10 md:py-14">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="py-5 sm:py-8 md:py-12">
+              <div className="container mx-auto px-4 sm:px-4 lg:px-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
                   {deliverables.map((deliverable) => (
                     <div
                       key={deliverable.title}
-                      className="p-5 sm:p-6 rounded-xl border border-white/10 bg-[#1A1A1A] hover:border-white/20 hover:bg-[#1A1A1A]/80 transition-all duration-300"
+                      className="p-4 sm:p-5 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all active:scale-[0.98]"
                     >
-                      <h3 className="text-sm sm:text-base font-semibold text-white mb-4 flex items-center gap-2.5">
+                      <h3 className="text-[13px] sm:text-sm font-semibold text-white mb-2.5 sm:mb-2.5 flex items-center gap-2">
                         <div 
-                          className="w-2.5 h-2.5 rounded-full flex-shrink-0"
+                          className="w-2 h-2 rounded-full flex-shrink-0"
                           style={{ backgroundColor: accentColor }}
                         />
                         {deliverable.title}
                       </h3>
-                      <ul className="space-y-2.5">
+                      <ul className="space-y-1.5 sm:space-y-1.5">
                         {deliverable.items.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-2.5 text-white/60 text-sm">
+                          <li key={idx} className="flex items-start gap-2 sm:gap-2 text-white/60 text-[12px] sm:text-xs">
                             <Check 
-                              className="w-4 h-4 mt-0.5 flex-shrink-0" 
+                              className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" 
                               style={{ color: accentColor }} 
                             />
                             {item}
@@ -457,17 +450,10 @@ const ServicePageLayout = ({
 
       {/* Process Section - Conditional */}
       {processSteps && processSteps.length > 0 && (
-        <section className="bg-surface-base" id="process">
+        <section className="bg-[#0F0F0F]" id="process">
           <div className="border-t border-white/10">
-            {/* Homepage-style Section Header */}
-            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-center gap-4 md:gap-6">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">{processSectionNum}</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">Process</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">How We Work</span>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+            <SectionHeader number={processSectionNum!} title="Process" badge="How We Work" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 divide-white/10">
               {processSteps.map((step, index) => {
                 const Icon = step.icon;
                 const isLast = index === processSteps.length - 1;
@@ -475,37 +461,37 @@ const ServicePageLayout = ({
                 return (
                   <div
                     key={step.number}
-                    className="group relative p-5 sm:p-6 md:p-8 transition-all duration-300 hover:bg-white/5 border-b sm:border-b-0 sm:border-r border-white/10 last:border-b-0 sm:last:border-r-0"
+                    className="group relative p-4 sm:p-5 md:p-6 transition-all duration-300 hover:bg-white/5 active:scale-[0.98] sm:border-r sm:border-white/10 sm:last:border-r-0"
                   >
                     {/* Arrow indicator between steps - Desktop */}
                     {!isLast && (
                       <div className="hidden lg:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-10">
                         <ArrowRight 
-                          className="w-5 h-5 drop-shadow-lg" 
+                          className="w-6 h-6 drop-shadow-lg" 
                           style={{ color: accentColor }}
-                          strokeWidth={2}
+                          strokeWidth={2.5}
                         />
                       </div>
                     )}
                     
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="flex items-center gap-2.5 sm:gap-3 mb-2.5 sm:mb-3">
                       <span 
-                        className="text-xs font-mono tracking-widest"
+                        className="text-[11px] sm:text-xs font-mono tracking-widest"
                         style={{ color: accentColor }}
                       >
                         {step.number}
                       </span>
                       <Icon 
-                        className="w-5 h-5 text-white/50 group-hover:text-white transition-all duration-300" 
+                        className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-white/40 group-hover:text-white group-hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.3)] transition-all duration-300" 
                         strokeWidth={1.5} 
                       />
                     </div>
                     
-                    <h3 className="text-base sm:text-lg font-semibold text-white mb-2.5">
+                    <h3 className="text-[15px] sm:text-base font-semibold text-white mb-2 sm:mb-2">
                       {step.title}
                     </h3>
                     
-                    <p className="text-white/50 text-sm leading-relaxed">
+                    <p className="text-white/50 text-[13px] sm:text-sm leading-relaxed">
                       {step.description}
                     </p>
                   </div>
@@ -518,39 +504,35 @@ const ServicePageLayout = ({
 
       {/* FAQ Section */}
       {faqItems && faqItems.length > 0 && (
-        <section className="bg-surface-base">
+        <section className="bg-[#121212]">
           <div className="border-t border-white/10">
-            {/* Homepage-style Section Header */}
-            <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-              <div className="flex items-center gap-4 md:gap-6">
-                <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">{faqSectionNum}</span>
-                <h2 className="text-lg md:text-xl font-medium text-white">FAQ</h2>
-              </div>
-              <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Common Questions</span>
-            </div>
+            <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
             
-            <div className="py-8 sm:py-12 md:py-16">
-              <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-4xl">
-                <Accordion type="single" collapsible className="space-y-3 sm:space-y-4">
+            <div className="py-5 sm:py-8 md:py-12">
+                <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-4xl">
+                <Accordion type="single" collapsible className="space-y-2.5 sm:space-y-3">
                   {faqItems.map((item, index) => (
-                    <AccordionItem 
+                    <div
                       key={index}
-                      value={`item-${index}`}
-                      className="border border-white/10 rounded-xl bg-[#1A1A1A] px-5 sm:px-6 overflow-hidden hover:border-white/20 transition-colors"
                     >
-                      <AccordionTrigger className="text-left text-white hover:no-underline py-4 sm:py-5 text-sm sm:text-base min-h-[52px]">
-                        <span className="flex items-center gap-3">
-                          <ChevronRight 
-                            className="w-4 h-4 flex-shrink-0 transition-transform" 
-                            style={{ color: accentColor }}
-                          />
-                          <span className="leading-snug">{item.question}</span>
-                        </span>
-                      </AccordionTrigger>
-                      <AccordionContent className="text-white/60 text-sm pb-5 pl-7 leading-relaxed">
-                        {item.answer}
-                      </AccordionContent>
-                    </AccordionItem>
+                        <AccordionItem 
+                        value={`item-${index}`}
+                        className="border border-white/10 rounded-xl sm:rounded-xl bg-white/5 px-4 sm:px-5 overflow-hidden"
+                      >
+                        <AccordionTrigger className="text-left text-white hover:no-underline py-3.5 sm:py-4 text-[13px] sm:text-sm min-h-[48px]">
+                          <span className="flex items-center gap-2.5 sm:gap-3">
+                            <ChevronRight 
+                              className="w-4 h-4 sm:w-4 sm:h-4 flex-shrink-0 transition-transform" 
+                              style={{ color: accentColor }}
+                            />
+                            <span className="line-clamp-2 leading-snug">{item.question}</span>
+                          </span>
+                        </AccordionTrigger>
+                        <AccordionContent className="text-white/60 text-[13px] sm:text-sm pb-4 sm:pb-4 pl-6 sm:pl-7 leading-relaxed">
+                          {item.answer}
+                        </AccordionContent>
+                      </AccordionItem>
+                    </div>
                   ))}
                 </Accordion>
               </div>
@@ -560,17 +542,12 @@ const ServicePageLayout = ({
       )}
 
       {/* More Services Section */}
-      <section className="bg-surface-base">
+      <section className="bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          {/* Homepage-style Section Header */}
-          <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-            <div className="flex items-center gap-4 md:gap-6">
-              <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">{moreServicesSectionNum}</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">More Services</h2>
-            </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Explore</span>
-          </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4">
+          <SectionHeader number={moreServicesSectionNum} title="More Services" badge="Explore" />
+          <div 
+            className="grid grid-cols-2 lg:grid-cols-4"
+          >
             {otherServices.map((service, index) => (
               <div
                 key={service.slug}
@@ -578,37 +555,47 @@ const ServicePageLayout = ({
               >
                 <Link
                   to={`/services/${service.slug}`}
-                  className="group relative block p-5 sm:p-6 md:p-8 h-full transition-all duration-300 hover:bg-white/5 min-h-[110px] sm:min-h-[130px]"
+                  className="group relative block p-4 sm:p-5 md:p-6 lg:p-8 h-full transition-all duration-500 overflow-hidden active:scale-[0.97] min-h-[100px] sm:min-h-[120px]"
                 >
-                  {/* Subtle hover background */}
+                  {/* Hover background gradient */}
                   <div 
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                     style={{ 
-                      background: `linear-gradient(135deg, ${service.color}10 0%, transparent 50%)` 
+                      background: `linear-gradient(135deg, ${service.color}15 0%, transparent 60%)` 
                     }}
                   />
                   
+                  {/* Glow effect on hover */}
+                  <div 
+                    className="absolute -top-20 -left-20 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
+                    style={{ backgroundColor: service.color }}
+                  />
+                  
                   <div className="relative z-10">
-                    {/* Color indicator */}
-                    <div className="mb-4">
+                    {/* Color indicator with pulse effect */}
+                    <div className="relative mb-3 sm:mb-5">
                       <div 
-                        className="w-2.5 h-2.5 rounded-full"
+                        className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full group-hover:scale-110 transition-all duration-300"
+                        style={{ backgroundColor: service.color }}
+                      />
+                      <div 
+                        className="absolute inset-0 w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full opacity-0 group-hover:opacity-50 group-hover:animate-ping"
                         style={{ backgroundColor: service.color }}
                       />
                     </div>
                     
                     {/* Service title */}
-                    <h3 className="text-white font-medium text-sm sm:text-base mb-3 leading-snug">
+                    <h3 className="text-white font-medium text-[13px] sm:text-lg mb-2 sm:mb-3 group-hover:translate-x-1 transition-transform duration-300 line-clamp-2 leading-snug">
                       {service.title}
                     </h3>
                     
-                    {/* Arrow */}
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-white/40 group-hover:text-white/60 transition-colors uppercase tracking-wider">
+                    {/* Arrow with enhanced animation */}
+                    <div className="flex items-center gap-1.5 sm:gap-2">
+                      <span className="text-[10px] sm:text-xs text-white/40 group-hover:text-white/60 transition-colors duration-300 uppercase tracking-wider">
                         Explore
                       </span>
                       <ArrowRight 
-                        className="w-4 h-4 text-white/30 group-hover:text-white/70 group-hover:translate-x-1 transition-all duration-300" 
+                        className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white/30 group-hover:text-white/80 group-hover:translate-x-2 transition-all duration-300" 
                       />
                     </div>
                   </div>
@@ -620,7 +607,7 @@ const ServicePageLayout = ({
       </section>
 
       {/* Contact Section */}
-      <section className="bg-surface-base" id="contact">
+      <section className="bg-[#121212]" id="contact">
         <ContactFormSection sectionNumber={contactSectionNum} />
       </section>
 

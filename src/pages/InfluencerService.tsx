@@ -254,16 +254,9 @@ const InfluencerService = () => {
       currentSlug="influencer"
     >
       {/* KOL Network Section */}
-      <section className="scroll-reveal bg-surface-base">
+      <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">
-          {/* Homepage-style Section Header */}
-          <div className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10">
-            <div className="flex items-center gap-4 md:gap-6">
-              <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">01</span>
-              <h2 className="text-lg md:text-xl font-medium text-white">Featured Creators</h2>
-            </div>
-            <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Global & Local Legends</span>
-          </div>
+          <SectionHeader title="Featured Creators" badge="Global & Local Legends" />
           
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-4">
             <p className="text-white/60 text-sm max-w-3xl">
