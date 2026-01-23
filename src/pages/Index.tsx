@@ -83,14 +83,12 @@ const ProcessBillboardOverlay = () => {
   useEffect(() => {
     // Skip auto-cycling entirely on mobile to prevent battery drain
     if (!isVisible || isPaused || isMobile || shouldDisableHeavyAnimations) return;
-    
     const interval = setInterval(() => {
       setHoveredIndex(prev => prev === null ? 0 : (prev + 1) % processPhases.length);
     }, 3000); // 3초마다 (데스크톱에서만)
 
     return () => clearInterval(interval);
   }, [isVisible, isPaused, isMobile, shouldDisableHeavyAnimations]);
-
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {
@@ -372,7 +370,7 @@ const Index = () => {
       
       {/* CTA Banner */}
       <AnimatedSection direction="none">
-        <CTABannerSection />
+        
       </AnimatedSection>
       
       {/* Footer Links */}
