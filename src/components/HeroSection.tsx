@@ -95,11 +95,11 @@ const clientLogos = [{
 }, {
   name: "Story Protocol",
   logo: storyProtocolLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "Spacecoin",
   logo: spacecoinLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "Tria",
   logo: triaLogo,
@@ -115,11 +115,11 @@ const clientLogos = [{
 }, {
   name: "FOGO",
   logo: fogoLogo,
-  noInvert: false
+  noInvert: true
 }, {
   name: "SynFutures",
   logo: synfuturesLogo,
-  noInvert: false
+  noInvert: true
 }];
 // Default stats as fallback
 const defaultStats = [{
@@ -325,7 +325,13 @@ const HeroSection = () => {
       <div className="relative z-10 py-3 sm:py-4 overflow-hidden">
         <div className="flex items-center logo-marquee-slow">
           {[...clientLogos, ...clientLogos].map((client, index) => <div key={index} className="flex items-center gap-1 sm:gap-2.5 mx-1 sm:mx-2.5 px-2.5 sm:px-5 py-1 sm:py-2.5 bg-zinc-900/80 rounded-full border border-white/15 hover:border-white/25 transition-all duration-300 flex-shrink-0">
-              <img src={client.logo} alt={client.name} loading="lazy" decoding="async" className={`h-3.5 w-3.5 sm:h-5 sm:w-5 object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`} />
+              <img
+                src={client.logo}
+                alt={client.name}
+                loading="lazy"
+                decoding="async"
+                className={`h-3.5 sm:h-5 w-auto max-w-[92px] sm:max-w-[120px] object-contain flex-shrink-0 ${client.noInvert ? 'opacity-90' : 'brightness-0 invert opacity-85'}`}
+              />
               <span className="text-white/75 text-[9px] sm:text-caption font-medium whitespace-nowrap">
                 {client.name}
               </span>
