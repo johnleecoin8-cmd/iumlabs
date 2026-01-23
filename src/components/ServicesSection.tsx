@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 // Import service images
-import gtmImage from "@/assets/services/gtm-ecosystem.png";
-import brandingImage from "@/assets/services/branding-palace.png";
-import eventsImage from "@/assets/services/events.jpg";
+import gtmImage from "@/assets/services/gtm-strategy.png";
+import websiteImage from "@/assets/services/website-creative.png";
+import eventsImage from "@/assets/services/offline-event.png";
 import communityImage from "@/assets/services/community-management.png";
 import kolImage from "@/assets/services/kol-avatars.png";
 import prImage from "@/assets/services/pr-media.jpg";
@@ -23,11 +23,11 @@ const services = [
   },
   {
     number: "02",
-    title: "Branding/Website",
-    description: "Distinctive brand identity and high-performance websites for Web3 projects. From logo design to custom development.",
+    title: "Website",
+    description: "High-performance websites and creative design for Web3 projects. From landing pages to custom development.",
     link: "/services/branding",
     icon: Compass,
-    image: brandingImage
+    image: websiteImage
   },
   {
     number: "03",
