@@ -170,9 +170,9 @@ const ContactFormSection = ({
           <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-primary/[0.03]" />
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
           
-          <div className="relative px-4 sm:px-6 md:px-10 py-8 sm:py-12 md:py-16">
+          <div className="relative px-3 sm:px-4 md:px-6 py-4 sm:py-6 md:py-8">
             {/* Hero Title */}
-            <div className="text-center mb-8 sm:mb-12">
+            <div className="text-center mb-4 sm:mb-6">
               <motion.h3 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
