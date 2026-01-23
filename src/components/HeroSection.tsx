@@ -107,7 +107,7 @@ const clientLogos = [{
 }, {
   name: "Mantra",
   logo: mantraLogo,
-  noInvert: true
+  noInvert: false
 }, {
   name: "Sahara AI",
   logo: saharaAiLogo,
@@ -115,11 +115,11 @@ const clientLogos = [{
 }, {
   name: "FOGO",
   logo: fogoLogo,
-  noInvert: true
+  noInvert: false
 }, {
   name: "SynFutures",
   logo: synfuturesLogo,
-  noInvert: true
+  noInvert: false
 }];
 // Default stats as fallback
 const defaultStats = [{
