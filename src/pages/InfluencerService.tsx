@@ -5,6 +5,7 @@ import SectionHeader from "@/components/SectionHeader";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
+import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 
 const ACCENT_COLOR = "#F59E0B";
 
@@ -166,6 +167,7 @@ const cryptoKOLs = [
 const InfluencerService = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [featuredIndex, setFeaturedIndex] = useState(0);
+  const { isMobile, shouldDisableHeavyAnimations } = useMobileOptimization();
 
   usePageMeta({
     title: "Korea's Elite KOL Network & Web3 Influencer Marketing | ium Labs",
@@ -175,8 +177,11 @@ const InfluencerService = () => {
     keywords: ["Korean KOL Network", "Crypto Influencer Korea", "Web3 KOL Marketing", "YouTube Crypto Korea", "KOL Marketing Korea"]
   });
 
-  // Sound wave animation
+  // Sound wave animation - DISABLED on mobile for performance
   useEffect(() => {
+    // Skip canvas animation on mobile to prevent phone shutdown
+    if (isMobile || shouldDisableHeavyAnimations) return;
+
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -229,7 +234,7 @@ const InfluencerService = () => {
       window.removeEventListener('resize', resize);
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [isMobile, shouldDisableHeavyAnimations]);
   
   return (
     <ServicePageLayout

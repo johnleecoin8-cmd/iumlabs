@@ -75,18 +75,22 @@ const ProcessBillboardOverlay = () => {
   const [isPaused, setIsPaused] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
   const {
+    isMobile,
     shouldDisableHeavyAnimations
   } = useMobileOptimization();
 
-  // Auto-cycle through phases - disabled on mobile for performance
+  // Auto-cycle through phases - COMPLETELY DISABLED on mobile for performance
   useEffect(() => {
-    if (!isVisible || isPaused || shouldDisableHeavyAnimations) return;
+    // Skip auto-cycling entirely on mobile to prevent battery drain
+    if (!isVisible || isPaused || isMobile || shouldDisableHeavyAnimations) return;
+    
     const interval = setInterval(() => {
       setHoveredIndex(prev => prev === null ? 0 : (prev + 1) % processPhases.length);
-    }, 2500); // 2.5초마다 (모바일에서는 완전히 비활성화)
+    }, 3000); // 3초마다 (데스크톱에서만)
 
     return () => clearInterval(interval);
-  }, [isVisible, isPaused, shouldDisableHeavyAnimations]);
+  }, [isVisible, isPaused, isMobile, shouldDisableHeavyAnimations]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting) {

@@ -1175,39 +1175,46 @@
     animation-duration: 6s !important;
   }
   
-  /* Mobile marquee 2x faster (60s → 30s) */
+  /* Mobile marquee slower (less CPU) */
   .logo-marquee-slow {
-    animation-duration: 30s !important;
+    animation-duration: 45s !important;
   }
   
   /* Reduce backdrop blur on mobile (expensive on GPU) */
   .backdrop-blur-md {
-    backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(4px) !important;
   }
   
   .backdrop-blur-lg {
-    backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(8px) !important;
   }
   
   /* Disable complex box shadows on mobile */
   .hover\:shadow-\[0_0_24px_rgba\(255\,255\,255\,0\.15\)\]:hover {
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.1) !important;
+    box-shadow: none !important;
   }
   
-  /* Reduce will-change usage on mobile */
+  /* Disable will-change on mobile */
   .will-change-transform {
     will-change: auto !important;
   }
+  
+  /* Disable transitions on mobile for better perf */
+  .transition-all {
+    transition-duration: 0.15s !important;
+  }
 }
 
-/* Ultra-low power mode for very weak devices - still 2x faster (80s → 40s) */
+/* Ultra-low power mode for mobile touch devices */
 @media (max-width: 767px) and (pointer: coarse) {
+  /* Significantly slower marquee for low-end devices */
   .logo-marquee,
   .logo-marquee-slow,
   .logo-marquee-fast {
-    animation-duration: 40s !important;
+    animation-duration: 60s !important;
   }
   
+  /* Disable floating animations completely */
   .animate-float {
     animation: none !important;
   }
@@ -1215,5 +1222,21 @@
   /* Static floating tags on mobile */
   [style*="float-gentle"] {
     animation: none !important;
+  }
+  
+  /* Disable backdrop blur completely on low-end */
+  .backdrop-blur-sm,
+  .backdrop-blur-md,
+  .backdrop-blur-lg,
+  .backdrop-blur-xl {
+    backdrop-filter: none !important;
+  }
+  
+  /* Disable all hover transforms */
+  .hover\:scale-105:hover,
+  .hover\:scale-110:hover,
+  .hover\:-translate-y-1:hover,
+  .hover\:-translate-y-2:hover {
+    transform: none !important;
   }
 }
