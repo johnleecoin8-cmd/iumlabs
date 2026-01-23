@@ -365,7 +365,7 @@ const ContactFormSection = ({
                     exit={{ opacity: 0 }}
                   >
                     {/* Step Indicator */}
-                    <div className="mb-6 sm:mb-8">
+                    <div className="mb-4 sm:mb-5">
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-xs sm:text-sm text-white/50">
                           Step {currentStep} of {totalSteps}
@@ -394,15 +394,15 @@ const ContactFormSection = ({
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
                             transition={{ duration: 0.2 }}
-                            className="space-y-5 sm:space-y-6"
+                            className="space-y-3 sm:space-y-4"
                           >
-                            <div className="mb-6">
-                              <h4 className="text-lg sm:text-xl font-semibold text-white mb-1">Tell us about yourself</h4>
-                              <p className="text-sm text-white/50">Basic contact information</p>
+                            <div className="mb-3">
+                              <h4 className="text-base sm:text-lg font-semibold text-white mb-0.5">Tell us about yourself</h4>
+                              <p className="text-xs sm:text-sm text-white/50">Basic contact information</p>
                             </div>
 
                             {/* Name & Email */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                               <div>
                                 <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">Name *</label>
                                 <input
@@ -411,7 +411,7 @@ const ContactFormSection = ({
                                   value={formData.name}
                                   onChange={e => setFormData({ ...formData, name: e.target.value })}
                                   required
-                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm sm:text-base text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[48px]"
+                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
                                 />
                               </div>
                               <div>
@@ -422,13 +422,13 @@ const ContactFormSection = ({
                                   value={formData.email}
                                   onChange={e => setFormData({ ...formData, email: e.target.value })}
                                   required
-                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm sm:text-base text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[48px]"
+                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
                                 />
                               </div>
                             </div>
 
                             {/* Company & Website (Optional) */}
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                               <div>
                                 <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2 sm:mb-3">
                                   Company <span className="text-white/30">(Optional)</span>
@@ -438,7 +438,7 @@ const ContactFormSection = ({
                                   placeholder="Company name"
                                   value={formData.company}
                                   onChange={e => setFormData({ ...formData, company: e.target.value })}
-                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm sm:text-base text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[48px]"
+                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
                                 />
                               </div>
                               <div>
@@ -450,21 +450,21 @@ const ContactFormSection = ({
                                   placeholder="https://..."
                                   value={formData.website}
                                   onChange={e => setFormData({ ...formData, website: e.target.value })}
-                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-sm sm:text-base text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[48px]"
+                                  className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/30 focus:bg-white/10 focus:outline-none transition-all min-h-[44px]"
                                 />
                               </div>
                             </div>
 
                             {/* Budget */}
                             <div>
-                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-3 sm:mb-4">Budget *</label>
-                              <div className="grid grid-cols-2 gap-2 sm:gap-3">
+                              <label className="block text-[10px] sm:text-xs uppercase tracking-wider text-white/70 mb-2">Budget *</label>
+                              <div className="grid grid-cols-2 gap-2">
                                 {budgetOptions.map(option => (
                                   <button
                                     key={option}
                                     type="button"
                                     onClick={() => setFormData({ ...formData, budget: option })}
-                                    className={`px-4 py-3 text-[11px] sm:text-sm rounded-lg border transition-all min-h-[48px] font-medium active:scale-[0.97] ${
+                                    className={`px-3 py-2.5 text-[11px] sm:text-xs rounded-lg border transition-all min-h-[40px] font-medium active:scale-[0.97] ${
                                       formData.budget === option
                                         ? 'bg-white/20 border-white text-white'
                                         : 'bg-white/5 border-white/10 text-white/70 hover:border-white/30 hover:bg-white/10'
@@ -481,7 +481,7 @@ const ContactFormSection = ({
                               type="button"
                               onClick={() => setCurrentStep(2)}
                               disabled={!step1Complete}
-                              className={`w-full flex items-center justify-center gap-2 py-3.5 sm:py-4 text-sm sm:text-base font-semibold rounded-lg transition-all duration-300 min-h-[52px] active:scale-[0.98] ${
+                              className={`w-full flex items-center justify-center gap-2 py-3 text-sm font-semibold rounded-lg transition-all duration-300 min-h-[44px] active:scale-[0.98] ${
                                 step1Complete
                                   ? 'bg-white text-black hover:bg-white/90'
                                   : 'bg-white/10 text-white/40 cursor-not-allowed'
@@ -500,15 +500,15 @@ const ContactFormSection = ({
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: -20 }}
                             transition={{ duration: 0.2 }}
-                            className="space-y-5 sm:space-y-6"
+                            className="space-y-3 sm:space-y-4"
                           >
-                            <div className="mb-6">
-                              <h4 className="text-lg sm:text-xl font-semibold text-white mb-1">Tell us about your project</h4>
-                              <p className="text-sm text-white/50">What are you looking to achieve?</p>
+                            <div className="mb-3">
+                              <h4 className="text-base sm:text-lg font-semibold text-white mb-0.5">Tell us about your project</h4>
+                              <p className="text-xs sm:text-sm text-white/50">What are you looking to achieve?</p>
                             </div>
 
                             {/* Summary Card */}
-                            <div className="bg-white/5 border border-white/10 rounded-lg p-4 mb-6">
+                            <div className="bg-white/5 border border-white/10 rounded-lg p-3 mb-3">
                               <div className="flex items-center justify-between mb-3">
                                 <span className="text-xs text-white/50">Contact Info</span>
                                 <button
