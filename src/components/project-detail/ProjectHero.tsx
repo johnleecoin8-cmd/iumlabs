@@ -65,6 +65,9 @@ const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
           muted 
           playsInline
           preload="auto"
+          webkit-playsinline="true"
+          x5-playsinline="true"
+          x5-video-player-type="h5"
           className="absolute inset-0 w-full h-full object-cover"
         >
           <source src={`${project.bgVideo}#t=0.001`} type="video/mp4" />
