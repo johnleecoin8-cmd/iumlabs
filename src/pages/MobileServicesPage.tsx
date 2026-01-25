@@ -523,41 +523,30 @@ const MobileServicesPage = () => {
         </div>
       </main>
       
-      {/* Section Divider - Featured Service */}
-      <section className="bg-[#0A0A0A] border-t border-white/10">
-        <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-8 md:py-5 border-b border-white/5">
-          <div className="flex items-baseline gap-3 sm:gap-4 md:gap-6">
-            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
-            <h2 className="text-sm sm:text-base md:text-lg font-medium text-white">Featured Service</h2>
-          </div>
-          <span className="text-[9px] sm:text-[10px] text-white/40 tracking-wider">GTM Strategy</span>
-        </div>
-        
-        {/* GTM - Full Width (1 Column) */}
-        <div className="border-l border-white/10">
-          <ServiceCard 
-            service={services[0]} 
-            index={0} 
-            isFullWidth={true}
-          />
-        </div>
-      </section>
-      
       {/* Section Divider - All Services */}
       <section className="bg-[#0A0A0A] border-t border-white/10">
         <div className="flex items-baseline justify-between p-3 sm:p-4 md:px-8 md:py-5 border-b border-white/5">
           <div className="flex items-baseline gap-3 sm:gap-4 md:gap-6">
-            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">02</span>
+            <span className="text-[10px] md:text-xs text-white/30 font-mono tracking-widest">01</span>
             <h2 className="text-sm sm:text-base md:text-lg font-medium text-white">All Services</h2>
           </div>
           <span className="text-[9px] sm:text-[10px] text-white/40 tracking-wider px-2 py-0.5 border border-white/10 rounded-full">
-            {services.length - 1} Services
+            {services.length} Services
           </span>
         </div>
         
-        {/* Remaining Services - 2 Column Grid */}
+        {/* All Services - 2 Column Grid with GTM as 2x */}
         <div className="border-l border-white/10">
           <div className="grid grid-cols-2">
+            {/* GTM - 2x width (col-span-2) */}
+            <div className="col-span-2">
+              <ServiceCard 
+                service={services[0]} 
+                index={0} 
+                isFullWidth={true}
+              />
+            </div>
+            {/* Rest of services - 1x each */}
             {services.slice(1).map((service, index) => (
               <ServiceCard 
                 key={service.link} 
