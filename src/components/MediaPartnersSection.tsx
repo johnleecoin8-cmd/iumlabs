@@ -5,7 +5,7 @@ import economistLogo from "@/assets/logos/economist.png";
 import cointelegraphLogo from "@/assets/logos/cointelegraph.png";
 import bloomingbitLogo from "@/assets/logos/bloomingbit.png";
 import coinnessLogo from "@/assets/logos/coinness.png";
-import hankyungLogo from "@/assets/logos/hankyung.png";
+import hankyungLogo from "@/assets/logos/hankyung-new.png";
 
 const mediaLogos = [
   { name: "Cointelegraph", logo: cointelegraphLogo },
