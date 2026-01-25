@@ -17,6 +17,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { brand } from "@/config/content";
 import confetti from "canvas-confetti";
 import CalendlyButton from "./CalendlyButton";
+import Logo3D from "@/components/Logo3D";
 
 const budgetOptions = ["$15K - $25K", "$25K - $50K", "$50K +", "Raising funds"];
 
@@ -141,8 +142,15 @@ const ContactFormSection = ({
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
           
           <div className="relative px-3 sm:px-4 md:px-6 pt-4 sm:pt-5 md:pt-6 pb-2 sm:pb-3 md:pb-4">
-            {/* Hero Title */}
+            {/* Hero Title with 3D Logo */}
             <div className="text-center mb-3 sm:mb-4">
+              {/* 3D Bridge Logo */}
+              <div className="w-full h-32 sm:h-40 md:h-48 lg:h-56 flex items-center justify-center mb-4">
+                <div className="w-64 h-full sm:w-80 md:w-96 lg:w-[28rem]">
+                  <Logo3D />
+                </div>
+              </div>
+              
               <motion.h3 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
