@@ -3,7 +3,6 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import aboutImageDefault from '@/assets/campaigns/about-image-default.jpeg';
 import aboutImageHover from '@/assets/campaigns/about-image-hover.jpeg';
-import Logo3D from '@/components/Logo3D';
 
 const stats = [
   { value: "50+", label: "Projects Launched" },
@@ -53,13 +52,6 @@ const WhyChooseUsSection = () => {
               Founded by veterans from Binance & KuCoin
             </p>
           </motion.div>
-          
-          {/* 3D Bridge Logo - centered at bottom, no padding */}
-          <div className="w-full h-40 sm:h-48 md:h-56 lg:h-64 flex items-center justify-center">
-            <div className="w-80 h-full sm:w-96 md:w-[28rem] lg:w-[32rem]">
-              <Logo3D />
-            </div>
-          </div>
         </div>
       </div>
     </section>
