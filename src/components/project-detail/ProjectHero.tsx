@@ -39,36 +39,68 @@ const mobileTagPositions = [
 
 const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [hasVideoError, setHasVideoError] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
+  const tryPlay = (video: HTMLVideoElement) => {
+    const attempt = () => video.play().catch(() => {});
+    attempt();
+    setTimeout(attempt, 120);
+    setTimeout(attempt, 350);
+  };
+
   const services = project.services || [];
+
+  // Use bgImage as fallback poster
+  const posterImage = project.bgImage || "/images/hero-poster.jpg";
 
   return (
     <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
-      {/* Background Layer - Image (shown when no video) */}
-      {project.bgImage && !project.bgVideo && (
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${project.bgImage})` }}
-        />
-      )}
+      {/* Fallback poster - always visible as base layer */}
+      <img
+        src={posterImage}
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        loading="eager"
+        style={{
+          opacity: project.bgVideo && isVideoReady && !hasVideoError ? 0 : 1,
+          transition: "opacity 180ms ease",
+        }}
+      />
       
       {/* Background Layer - Video */}
-      {project.bgVideo && (
+      {project.bgVideo && !hasVideoError && (
         <video 
           autoPlay 
           loop 
           muted 
           playsInline
-          preload="auto"
           webkit-playsinline="true"
           x5-playsinline="true"
           x5-video-player-type="h5"
-          className="absolute inset-0 w-full h-full object-cover"
+          preload="auto"
+          poster={posterImage}
+          disablePictureInPicture
+          controls={false}
+          aria-hidden="true"
+          tabIndex={-1}
+          className="absolute inset-0 w-full h-full object-cover z-10"
+          style={{
+            opacity: isVideoReady ? 1 : 0,
+            transition: "opacity 180ms ease",
+          }}
+          onLoadedMetadata={(e) => {
+            setIsVideoReady(true);
+            tryPlay(e.currentTarget);
+          }}
+          onCanPlay={(e) => tryPlay(e.currentTarget)}
+          onLoadedData={() => setIsVideoReady(true)}
+          onError={() => setHasVideoError(true)}
         >
           <source src={`${project.bgVideo}#t=0.001`} type="video/mp4" />
         </video>

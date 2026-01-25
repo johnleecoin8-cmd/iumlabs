@@ -181,6 +181,7 @@ const ServiceCard = ({
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [hasVideoError, setHasVideoError] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const navigate = useNavigate();
@@ -344,15 +345,29 @@ const ServiceCard = ({
         />
         
         {/* Video background - lazy loaded */}
-        {shouldLoadVideo && (
+        {shouldLoadVideo && !hasVideoError && (
           <video
             ref={videoRef}
+            autoPlay
             muted
             loop
             playsInline
+            webkit-playsinline="true"
+            x5-playsinline="true"
+            x5-video-player-type="h5"
             preload="auto"
             poster={service.poster}
-            onCanPlay={() => setIsVideoLoaded(true)}
+            disablePictureInPicture
+            controls={false}
+            aria-hidden="true"
+            tabIndex={-1}
+            onCanPlay={() => {
+              setIsVideoLoaded(true);
+              if (videoRef.current) {
+                videoRef.current.play().catch(() => {});
+              }
+            }}
+            onError={() => setHasVideoError(true)}
             className={cn(
               "absolute inset-0 w-full h-full object-cover transition-opacity duration-200",
               isVideoLoaded ? "opacity-100" : "opacity-0"
@@ -447,8 +462,15 @@ const MobileServicesPage = () => {
                 muted
                 loop
                 playsInline
-                 preload="auto"
+                webkit-playsinline="true"
+                x5-playsinline="true"
+                x5-video-player-type="h5"
+                preload="auto"
                 poster="/images/hero-poster.jpg"
+                disablePictureInPicture
+                controls={false}
+                aria-hidden="true"
+                tabIndex={-1}
                 onLoadedData={() => setHeroVideoLoaded(true)}
                 className={cn(
                    "absolute inset-0 w-full h-full object-cover transition-opacity duration-200",
