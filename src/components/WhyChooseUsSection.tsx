@@ -39,7 +39,7 @@ const WhyChooseUsSection = () => {
             viewport={{ once: true, margin: "-50px" }}
           >
             {/* 3D Bridge Logo */}
-            <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6">
+            <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-6 sm:mb-8">
               <Logo3D />
             </div>
             

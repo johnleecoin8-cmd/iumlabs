@@ -85,7 +85,7 @@ const HologramLogo = () => {
     // Less frequent: 3-6 seconds
     const glitchInterval = setInterval(() => {
       triggerGlitch();
-    }, 3000 + Math.random() * 3000);
+    }, 4000 + Math.random() * 3000);
 
     setTimeout(triggerGlitch, 1500);
 
@@ -291,7 +291,8 @@ const Logo3D = ({ className = "" }: Logo3DProps) => {
       <WebGLErrorBoundary fallback={Fallback}>
         <Suspense fallback={Fallback}>
           <Canvas
-            camera={{ position: [0, 0, 5], fov: 38 }}
+            camera={{ position: [0, 0, 4.5], fov: 35 }}
+            dpr={[1, 1.5]}
             gl={{ 
               antialias: true, 
               alpha: true,
@@ -299,11 +300,14 @@ const Logo3D = ({ className = "" }: Logo3DProps) => {
               powerPreference: "low-power"
             }}
             style={{ background: "transparent" }}
-            onCreated={({ gl }) => {
+            resize={{ scroll: false }}
+            onCreated={({ gl, invalidate }) => {
               gl.domElement.addEventListener('webglcontextlost', (e) => {
                 e.preventDefault();
                 console.warn('WebGL context lost');
               }, false);
+              // Trigger initial render
+              invalidate();
             }}
           >
             <ambientLight intensity={0.3} />
