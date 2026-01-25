@@ -135,24 +135,6 @@ const ContactFormSection = ({
           <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Get Started</span>
         </div>
 
-        {/* Hero Section */}
-        <div className="relative overflow-hidden">
-          {/* Gradient Background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-primary/[0.03]" />
-          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
-          
-          <div className="relative px-3 sm:px-4 md:px-6 pt-4 sm:pt-5 md:pt-6 pb-2 sm:pb-3 md:pb-4">
-            {/* Hero with 3D Logo */}
-            <div className="text-center mb-3 sm:mb-4">
-              {/* 3D Bridge Logo */}
-              <div className="w-full h-32 sm:h-40 md:h-48 lg:h-56 flex items-center justify-center">
-                <div className="w-64 h-full sm:w-80 md:w-96 lg:w-[28rem]">
-                  <Logo3D />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Form Section */}
         <div id="contact-form" className="border-t border-white/10">
@@ -197,7 +179,7 @@ const ContactFormSection = ({
                   href={brand.telegramLink} 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="group flex items-center justify-between"
+                  className="group flex items-center justify-between mb-8 pb-8 border-b border-white/15"
                 >
                   <div className="flex items-start gap-4">
                     <Send className="w-5 h-5 text-white/40 mt-0.5 flex-shrink-0" />
@@ -208,6 +190,13 @@ const ContactFormSection = ({
                   </div>
                   <ArrowRight className="w-5 h-5 text-white/25 group-hover:text-white/65 group-hover:translate-x-1.5 transition-all flex-shrink-0" />
                 </a>
+                
+                {/* 3D Bridge Logo */}
+                <div className="w-full h-40 md:h-48 lg:h-56 flex items-center justify-center mt-4">
+                  <div className="w-full h-full">
+                    <Logo3D />
+                  </div>
+                </div>
               </div>
             </div>
 
