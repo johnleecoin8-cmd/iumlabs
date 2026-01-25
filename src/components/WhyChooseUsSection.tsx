@@ -32,14 +32,14 @@ const WhyChooseUsSection = () => {
         {/* Right: Content */}
         <div className="flex flex-col justify-center">
           <motion.div 
-            className="p-6 sm:p-8 md:p-10 lg:p-14 flex flex-col justify-center"
+            className="p-6 sm:p-8 md:p-10 lg:p-14 flex flex-col justify-center items-center text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true, margin: "-50px" }}
           >
-            {/* 3D Bridge Logo - wider aspect ratio to show full bridge */}
-            <div className="w-32 h-16 sm:w-44 sm:h-20 md:w-52 md:h-24 lg:w-60 lg:h-28 mb-6 sm:mb-8">
+            {/* 3D Bridge Logo - centered, wider aspect ratio to show full bridge */}
+            <div className="w-32 h-16 sm:w-44 sm:h-20 md:w-52 md:h-24 lg:w-60 lg:h-28 mb-6 sm:mb-8 mx-auto">
               <Logo3D />
             </div>
             
