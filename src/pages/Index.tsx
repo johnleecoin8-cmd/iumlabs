@@ -368,8 +368,6 @@ const Index = () => {
         </AnimatedSection>
       </section>
       
-      {/* CTA Banner */}
-      <CTABannerSection />
       
       {/* Footer Links */}
       <FooterLinksSection />
