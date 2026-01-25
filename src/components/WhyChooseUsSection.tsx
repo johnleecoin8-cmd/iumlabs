@@ -50,12 +50,12 @@ const WhyChooseUsSection = () => {
             
             {/* Description */}
             <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-6">
-              ium Labs connects global Web3 projects to Korea's dynamic ecosystem through data-driven research and actionable insights. Founded by veterans from Binance & KuCoin, we provide the winning formula to navigate the complex Korean market.
+              ium Labs connects global Web3 projects to Korea's dynamic ecosystem through data-driven research and actionable insights. We provide the winning formula to navigate the complex Korean market.
             </p>
             
             {/* CTA Note */}
             <p className="text-violet-400 text-sm sm:text-base md:text-lg font-medium">
-              Execute with precision and dominate it.
+              Founded by veterans from Binance & KuCoin
             </p>
           </motion.div>
         </div>
