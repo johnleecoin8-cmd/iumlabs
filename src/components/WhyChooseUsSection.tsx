@@ -37,17 +37,17 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true, margin: "-50px" }}
           >
-            {/* Headline */}
+            {/* Headline - 맨 위로 */}
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
               Data-Driven Market Entry.
             </h2>
             
             {/* Description */}
-            <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-6">
+            <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-10 sm:mb-12">
               In Korean, 'ium' (이음) means 'connection.' But to us, it means integration. Stop relying on intuition. We engineer your entry into the Korean market using proprietary research and quantitative impact analysis. We don't just market; we structure your narrative to flawlessly 'ium' (connect) global protocols with local liquidity.
             </p>
             
-            {/* CTA Note */}
+            {/* CTA Note - 두 칸 더 아래로 (mb-6 → mb-10/12로 위에서 간격 추가) */}
             <p className="text-violet-400 text-sm sm:text-base md:text-lg font-medium">
               Founded by veterans from Binance & KuCoin
             </p>
