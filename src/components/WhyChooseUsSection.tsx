@@ -55,8 +55,8 @@ const WhyChooseUsSection = () => {
           </motion.div>
           
           {/* 3D Bridge Logo - centered at bottom, no padding */}
-          <div className="w-full h-28 sm:h-32 md:h-36 lg:h-44 flex items-center justify-center">
-            <div className="w-64 h-full sm:w-72 md:w-80 lg:w-96">
+          <div className="w-full h-40 sm:h-48 md:h-56 lg:h-64 flex items-center justify-center">
+            <div className="w-80 h-full sm:w-96 md:w-[28rem] lg:w-[32rem]">
               <Logo3D />
             </div>
           </div>
