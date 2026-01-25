@@ -535,23 +535,15 @@ const MobileServicesPage = () => {
           </span>
         </div>
         
-        {/* All Services - 2 Column Grid with GTM as 2x */}
+        {/* All Services - Full Width Grid */}
         <div className="border-l border-white/10">
-          <div className="grid grid-cols-2">
-            {/* GTM - 2x width (col-span-2) */}
-            <div className="col-span-2">
-              <ServiceCard 
-                service={services[0]} 
-                index={0} 
-                isFullWidth={true}
-              />
-            </div>
-            {/* Rest of services - 1x each */}
-            {services.slice(1).map((service, index) => (
+          <div className="grid grid-cols-1">
+            {services.map((service, index) => (
               <ServiceCard 
                 key={service.link} 
                 service={service} 
-                index={index + 1} 
+                index={index} 
+                isFullWidth={true}
               />
             ))}
           </div>
