@@ -1,4 +1,4 @@
-import { Send, Linkedin, Mail, Check } from "lucide-react";
+import { Send, Linkedin, Mail, Check, FileText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { brand } from "@/config/content";
@@ -30,6 +30,13 @@ const connectLinks = [
     external: false,
     copyable: true,
     copyValue: brand.email,
+  },
+  {
+    icon: FileText,
+    label: "Request Deck",
+    href: "mailto:info@iumlabs.io?subject=Request%20for%20Korea%20Market%20Analysis%20Deck",
+    external: false,
+    copyable: false,
   },
 ];
 
