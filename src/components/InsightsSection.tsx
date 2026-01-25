@@ -31,7 +31,7 @@ interface InsightArticle {
   image: string;
 }
 
-const InsightArticleItem = ({ article, index, isLast }: { article: InsightArticle; index: number; isLast: boolean }) => {
+const InsightArticleCard = ({ article, index }: { article: InsightArticle; index: number }) => {
   const { ref, isVisible } = useScrollAnimation({
     threshold: 0.1,
     rootMargin: '30px',
@@ -42,48 +42,41 @@ const InsightArticleItem = ({ article, index, isLast }: { article: InsightArticl
     <div 
       ref={ref} 
       className={cn(
-        "transition-all duration-500 ease-out will-change-transform",
+        "transition-all duration-500 ease-out will-change-transform flex-1 min-w-0",
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
       )} 
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       <Link 
         to={`/research/${article.id}`} 
-        className={`group block p-3 sm:p-5 md:p-6 lg:p-8 transition-colors duration-300 hover:bg-secondary/50 active:bg-secondary/70 active:scale-[0.99] ${!isLast ? "border-b border-border" : ""}`}
+        className="group block h-full"
       >
-        <div className="flex gap-4 sm:gap-6">
-          {/* Article Image */}
-          {article.image && (
-            <div className="flex-shrink-0 w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-lg overflow-hidden bg-secondary">
-              <img 
-                src={article.image} 
-                alt={article.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                loading="lazy"
-              />
-            </div>
+        {/* Card Image - Large on top */}
+        <div className="aspect-[16/10] w-full overflow-hidden rounded-lg bg-secondary mb-3">
+          {article.image ? (
+            <img 
+              src={article.image} 
+              alt={article.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+          ) : (
+            <div className="w-full h-full bg-secondary" />
           )}
-          
-          {/* Article Content */}
-          <div className="flex-1 min-w-0">
-            <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-muted-foreground text-[9px] sm:text-xs mb-1 sm:mb-2">
-              <span className="uppercase tracking-wider">{article.category}</span>
-              <span className="hidden sm:inline">•</span>
-              <span>{article.date}</span>
-              <span className="hidden sm:inline">•</span>
-              <span className="hidden sm:inline">{article.readTime} read</span>
-            </div>
-            <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1 sm:mb-2 group-hover:text-foreground/80 transition-colors line-clamp-2">
-              {article.title}
-            </h3>
-            <p className="text-muted-foreground text-[11px] sm:text-sm leading-relaxed mb-1.5 sm:mb-3 line-clamp-2 hidden sm:block">
-              {article.excerpt}
-            </p>
-            <div className="flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-sm">
-              <span className="group-hover:underline underline-offset-4">Read article</span>
-              <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-            </div>
-          </div>
+        </div>
+        
+        {/* Card Content */}
+        <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-muted-foreground text-[9px] sm:text-xs mb-1 sm:mb-2">
+          <span className="uppercase tracking-wider">{article.category}</span>
+          <span>•</span>
+          <span>{article.date}</span>
+        </div>
+        <h3 className="text-sm sm:text-base font-semibold text-foreground mb-1 group-hover:text-foreground/80 transition-colors line-clamp-2">
+          {article.title}
+        </h3>
+        <div className="flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-xs mt-2">
+          <span className="group-hover:underline underline-offset-4">Read</span>
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
         </div>
       </Link>
     </div>
@@ -143,79 +136,66 @@ const InsightsSection = () => {
   };
 
   return (
-    <section className="bg-background">
-      <div className="flex flex-col md:flex-row">
-        {/* Left: Articles List */}
-        <div className="w-full md:w-2/3 md:border-r border-border">
-          {insights.length === 0 ? (
-            <div className="p-8 text-center text-muted-foreground">
-              <p>No research articles yet. Check back soon!</p>
-            </div>
-          ) : (
-            insights.map((article, index) => (
-              <InsightArticleItem 
-                key={article.id} 
-                article={article} 
-                index={index} 
-                isLast={index === insights.length - 1} 
-              />
-            ))
-          )}
-
-          {/* View All Link + CTA */}
-          <div className="px-3 sm:px-6 md:px-8 py-2.5 sm:py-4 border-t border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <Link to="/research" className="group inline-flex items-center gap-1.5 text-foreground font-medium hover:text-foreground/70 transition-colors text-xs sm:text-sm min-h-[40px] sm:min-h-0">
-              <span className="group-hover:underline underline-offset-4">View all research</span>
-              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
-        </div>
-
-        {/* Right: Newsletter CTA */}
-        <div className="w-full md:w-1/3 p-4 sm:p-5 md:p-6 lg:p-8 flex flex-col justify-center">
-          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-foreground mb-2 sm:mb-4">
+    <section className="bg-background p-4 sm:p-6 md:p-8">
+      {/* Header Row: Title + Subscribe */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
+        {/* Left: Title & Description */}
+        <div className="flex-1">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-1">
             Latest Research
           </h2>
-          <p className="text-muted-foreground leading-relaxed mb-3 sm:mb-5 md:mb-6 text-[11px] sm:text-xs md:text-sm">
+          <p className="text-muted-foreground text-[11px] sm:text-xs md:text-sm">
             Stay ahead with our insights on Korean Web3 market trends and strategies.
           </p>
-
-          <form onSubmit={handleSubscribe} className="mb-3 sm:mb-6">
-            <input 
-              type="email" 
-              value={email} 
-              onChange={e => setEmail(e.target.value)} 
-              placeholder="Enter your email" 
-              className="w-full bg-transparent px-3 py-2.5 sm:py-3 border border-border rounded-lg text-foreground placeholder:text-muted-foreground mb-2 sm:mb-3 focus:outline-none focus:border-foreground transition-colors min-h-[44px] text-xs sm:text-sm" 
-              required 
-            />
-            <button 
-              type="submit" 
-              disabled={isSubmitting} 
-              className="group w-full flex items-center justify-center gap-2 bg-foreground text-background px-4 sm:px-6 py-2.5 sm:py-3 text-[11px] sm:text-sm font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 disabled:opacity-50 disabled:hover:translate-y-0 min-h-[44px]"
-            >
-              {isSubmitting ? "Subscribing..." : "SUBSCRIBE"}
-              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </form>
-
-          {/* 3D Logo - Only render on desktop for performance */}
-          <div className="h-24 sm:h-32 w-full hidden lg:block">
-            {shouldLoadLogo && !shouldDisable3D ? (
-              <Suspense fallback={<div className="w-full h-full bg-white/5 rounded-lg animate-pulse" />}>
-                <Logo3D />
-              </Suspense>
-            ) : (
-              <div className="w-full h-full bg-white/5 rounded-lg" />
-            )}
-          </div>
-
-          <div className="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-border">
-            <p className="text-muted-foreground text-xs sm:text-sm">
-              Join 500+ Web3 founders getting our weekly insights.
-            </p>
-          </div>
         </div>
+
+        {/* Right: Subscribe Form */}
+        <form onSubmit={handleSubscribe} className="flex items-center gap-2 flex-shrink-0">
+          <input 
+            type="email" 
+            value={email} 
+            onChange={e => setEmail(e.target.value)} 
+            placeholder="Enter your email" 
+            className="bg-transparent px-3 py-2 border border-border rounded-lg text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-foreground transition-colors min-h-[40px] text-xs sm:text-sm w-40 sm:w-48" 
+            required 
+          />
+          <button 
+            type="submit" 
+            disabled={isSubmitting} 
+            className="group flex items-center justify-center gap-1.5 bg-foreground text-background px-4 py-2 text-[11px] sm:text-xs font-medium rounded-full hover:bg-foreground/90 active:bg-foreground/80 active:scale-[0.98] transition-all duration-300 disabled:opacity-50 min-h-[40px] whitespace-nowrap"
+          >
+            {isSubmitting ? "..." : "SUBSCRIBE"}
+            <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+          </button>
+        </form>
+      </div>
+
+      {/* Cards Grid - 1 Row */}
+      {insights.length === 0 ? (
+        <div className="p-8 text-center text-muted-foreground">
+          <p>No research articles yet. Check back soon!</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          {insights.map((article, index) => (
+            <InsightArticleCard 
+              key={article.id} 
+              article={article} 
+              index={index} 
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Footer Row */}
+      <div className="flex items-center justify-between mt-6 pt-4 border-t border-border">
+        <p className="text-muted-foreground text-[10px] sm:text-xs">
+          Join 500+ Web3 founders getting our weekly insights.
+        </p>
+        <Link to="/research" className="group inline-flex items-center gap-1.5 text-foreground font-medium hover:text-foreground/70 transition-colors text-[10px] sm:text-xs">
+          <span className="group-hover:underline underline-offset-4">View all</span>
+          <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+        </Link>
       </div>
     </section>
   );
