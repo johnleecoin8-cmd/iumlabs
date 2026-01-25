@@ -8,10 +8,10 @@ const CTABannerSection = () => {
       
       <div className="max-w-4xl mx-auto text-center relative z-10">
         <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight">
-          Ready to Enter Korea?
+          Bridge the Gap.
         </h2>
         <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto mb-10">
-          Partner with Korea's leading Web3 marketing agency. Let's build your presence together.
+          From global vision to local impact — powered by data, delivered by experts.
         </p>
         <CalendlyButton 
           calendlyUrl="https://calendly.com/iumlabs-info/30min"
