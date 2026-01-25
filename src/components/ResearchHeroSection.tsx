@@ -38,30 +38,73 @@ const categoryPills = [
 
 const ResearchHeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [hasVideoError, setHasVideoError] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 800);
     return () => clearTimeout(timer);
   }, []);
 
+  const tryPlay = (video: HTMLVideoElement) => {
+    const attempt = () => video.play().catch(() => {});
+    attempt();
+    setTimeout(attempt, 120);
+    setTimeout(attempt, 350);
+  };
+
   return (
     <div className="relative h-full min-h-[calc(100vh-2rem)] flex flex-col justify-between overflow-hidden rounded-2xl sm:rounded-3xl">
       {/* Background Layer - Video */}
       <div className="absolute inset-0 overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="auto"
-          className="absolute inset-0 w-full h-full object-cover"
-          style={{ filter: "brightness(0.35)" }}
-        >
-          <source src="/videos/research-background.mp4#t=0.001" type="video/mp4" />
-        </video>
+        {/* Fallback poster - always visible until video is ready */}
+        <img
+          src="/images/hero-poster.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover z-0"
+          loading="eager"
+          style={{
+            filter: "brightness(0.35)",
+            opacity: hasVideoError || !isVideoReady ? 1 : 0,
+            transition: "opacity 180ms ease",
+          }}
+        />
+
+        {!hasVideoError && (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            webkit-playsinline="true"
+            x5-playsinline="true"
+            x5-video-player-type="h5"
+            preload="auto"
+            poster="/images/hero-poster.jpg"
+            disablePictureInPicture
+            controls={false}
+            aria-hidden="true"
+            tabIndex={-1}
+            className="absolute inset-0 w-full h-full object-cover z-10"
+            style={{
+              filter: "brightness(0.35)",
+              opacity: isVideoReady ? 1 : 0,
+              transition: "opacity 180ms ease",
+            }}
+            onLoadedMetadata={(e) => {
+              setIsVideoReady(true);
+              tryPlay(e.currentTarget);
+            }}
+            onCanPlay={(e) => tryPlay(e.currentTarget)}
+            onLoadedData={() => setIsVideoReady(true)}
+            onError={() => setHasVideoError(true)}
+          >
+            <source src="/videos/research-background.mp4#t=0.001" type="video/mp4" />
+          </video>
+        )}
         
         {/* Dark overlay gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)] z-20" />
       </div>
 
       {/* Floating Service Tags - Desktop */}

@@ -142,19 +142,64 @@ const process = [{
 }];
 
 
-// Video component
+// Video component with mobile optimization
 const JobsHeroVideo = () => {
+  const [isVideoReady, setIsVideoReady] = useState(false);
+  const [hasVideoError, setHasVideoError] = useState(false);
+
+  const tryPlay = (video: HTMLVideoElement) => {
+    const attempt = () => video.play().catch(() => {});
+    attempt();
+    setTimeout(attempt, 120);
+    setTimeout(attempt, 350);
+  };
+
   return (
-    <video 
-      autoPlay 
-      loop 
-      muted 
-      playsInline
-      preload="auto"
-      className="absolute inset-0 w-full h-full object-cover"
-    >
-      <source src="/videos/jobs-hero.mp4#t=0.001" type="video/mp4" />
-    </video>
+    <>
+      {/* Fallback poster - always visible until video is ready */}
+      <img
+        src="/images/hero-poster.jpg"
+        alt=""
+        className="absolute inset-0 w-full h-full object-cover z-0"
+        loading="eager"
+        style={{
+          opacity: hasVideoError || !isVideoReady ? 1 : 0,
+          transition: "opacity 180ms ease",
+        }}
+      />
+
+      {!hasVideoError && (
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          webkit-playsinline="true"
+          x5-playsinline="true"
+          x5-video-player-type="h5"
+          preload="auto"
+          poster="/images/hero-poster.jpg"
+          disablePictureInPicture
+          controls={false}
+          aria-hidden="true"
+          tabIndex={-1}
+          className="absolute inset-0 w-full h-full object-cover z-10"
+          style={{
+            opacity: isVideoReady ? 1 : 0,
+            transition: "opacity 180ms ease",
+          }}
+          onLoadedMetadata={(e) => {
+            setIsVideoReady(true);
+            tryPlay(e.currentTarget);
+          }}
+          onCanPlay={(e) => tryPlay(e.currentTarget)}
+          onLoadedData={() => setIsVideoReady(true)}
+          onError={() => setHasVideoError(true)}
+        >
+          <source src="/videos/jobs-hero.mp4#t=0.001" type="video/mp4" />
+        </video>
+      )}
+    </>
   );
 };
 
