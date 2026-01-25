@@ -37,7 +37,7 @@ const MobileCTAButton = () => {
                 className="bg-background/95 backdrop-blur-lg border border-primary/30 rounded-2xl p-4 shadow-xl shadow-primary/10"
               >
                 <div className="flex items-center justify-between mb-4">
-                  <span className="text-sm font-medium text-foreground">Ready to launch in Korea?</span>
+                  <span className="text-sm font-medium text-foreground">Bridge the Gap.</span>
                   <button
                     onClick={() => setIsExpanded(false)}
                     className="p-1.5 rounded-full bg-muted hover:bg-muted/80 transition-colors"
@@ -72,7 +72,7 @@ const MobileCTAButton = () => {
                 onClick={() => setIsExpanded(true)}
                 className="w-full flex items-center justify-center gap-2 py-3.5 bg-primary text-primary-foreground rounded-full font-medium text-sm shadow-lg shadow-primary/20 active:scale-[0.98] transition-transform"
               >
-                <span>Launch in Korea</span>
+                <span>Get Started</span>
                 <ArrowRight className="w-4 h-4" />
               </motion.button>
             )}
