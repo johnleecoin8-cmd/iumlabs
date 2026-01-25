@@ -135,33 +135,38 @@ const ProcessBillboardOverlay = () => {
                   ${index === 0 || index === 1 ? 'border-b border-white/10' : ''}
                   lg:border-r lg:border-b-0 lg:last:border-r-0
                   cursor-pointer active:scale-[0.97] transition-transform will-change-transform
-                  ${isHovered ? 'bg-white/10 backdrop-blur-sm' : hasHover ? 'bg-black/20' : 'bg-transparent'}
+                  ${isHovered && !isMobile ? 'bg-white/10' : hasHover && !isMobile ? 'bg-black/20' : 'bg-transparent'}
                 `} style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
             transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms, background-color 0.5s ease-out`
           }} onMouseEnter={() => {
-            setIsPaused(true);
-            setHoveredIndex(index);
+            if (!isMobile) {
+              setIsPaused(true);
+              setHoveredIndex(index);
+            }
           }} onMouseLeave={() => {
-            setIsPaused(false);
+            if (!isMobile) {
+              setIsPaused(false);
+            }
           }} onClick={() => {
-            setHoveredIndex(index);
+            if (!isMobile) {
+              setHoveredIndex(index);
+            }
           }}>
                 {/* Step Number - 진행감 있는 색상 */}
                 <span className={`
-                  absolute top-2 left-2 sm:top-3 sm:left-3 md:top-4 md:left-4
-                  text-xs md:text-sm font-mono tracking-widest
-                  transition-all duration-300
-                  ${isHovered ? 'text-white' : stepColors[index]}
+                  absolute top-1.5 left-1.5 sm:top-3 sm:left-3 md:top-4 md:left-4
+                  text-[10px] sm:text-xs md:text-sm font-mono tracking-widest
+                  ${isMobile ? 'text-white/60' : isHovered ? 'text-white' : stepColors[index]}
                 `}>
                   0{index + 1}
                 </span>
                 
                 {/* 연결 화살표 - 1→2 (오른쪽) */}
                 {index === 0 && <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-20 lg:hidden">
-                    <div className="w-5 h-5 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                      <ArrowRight className="w-3 h-3 text-white/70" />
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-black/60 flex items-center justify-center border border-white/20">
+                      <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white/70" />
                     </div>
                   </div>}
                 
@@ -172,52 +177,42 @@ const ProcessBillboardOverlay = () => {
                 
                 {/* 연결 화살표 - 3→4 (오른쪽) */}
                 {index === 2 && <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-20 lg:hidden">
-                    <div className="w-5 h-5 rounded-full bg-black/60 backdrop-blur-sm flex items-center justify-center border border-white/20">
-                      <ArrowRight className="w-3 h-3 text-white/70" />
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-black/60 flex items-center justify-center border border-white/20">
+                      <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white/70" />
                     </div>
                   </div>}
                 
-                {/* Icon */}
+                {/* Icon - 모바일에서 더 작게 */}
                 <div className={`
-                  w-8 h-8 sm:w-9 sm:h-9 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full flex-shrink-0
+                  w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full flex-shrink-0
                   flex items-center justify-center mb-0.5 sm:mb-1 md:mb-2 lg:mb-3
-                  border transition-all duration-500
-                  ${isHovered ? 'bg-white/20 border-white/40 scale-110' : 'bg-white/5 border-white/20'}
+                  border bg-white/5 border-white/20
+                  ${isHovered && !isMobile ? 'bg-white/20 border-white/40 scale-110 transition-all duration-500' : ''}
                 `}>
                   <Icon className={`
-                    w-3.5 h-3.5 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 transition-all duration-500
-                    ${isHovered ? 'text-white rotate-[360deg]' : 'text-white/60 rotate-0'}
+                    w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-white/60
+                    ${isHovered && !isMobile ? 'text-white' : ''}
                   `} />
                 </div>
                 
                 {/* Content */}
-                <div className="text-center">
-                  {/* Title */}
+                <div className="text-center px-1">
+                  {/* Title - 모바일에서 더 작게 */}
                   <h4 className={`
-                    text-[10px] sm:text-xs md:text-sm lg:text-lg font-medium
-                    transition-all duration-300
-                    ${isHovered ? 'text-white' : 'text-white/80'}
+                    text-[9px] sm:text-xs md:text-sm lg:text-lg font-medium text-white/90
                   `}>
                     {phase.title}
                   </h4>
                   
-                  {/* Description - 모바일에서 간략히, 호버 시 상세 */}
-                  <div className={`
-                    mt-0.5 sm:mt-1 md:mt-2 overflow-hidden
-                    transition-all duration-500 ease-out
-                    ${isHovered ? 'max-h-[80px] sm:max-h-[100px] opacity-100' : 'max-h-[32px] sm:max-h-[40px] opacity-80'}
-                  `}>
-                    <p className={`
-                      text-[8px] sm:text-[9px] md:text-xs lg:text-sm text-white/40 uppercase tracking-wide
-                      transition-all duration-500 mb-1 line-clamp-2
-                      ${isHovered ? 'opacity-100' : 'opacity-70'}
-                    `}>
-                      {phase.subtitle}
-                    </p>
-                    
-                    {/* Sub Points - 호버 시에만 */}
+                  {/* Subtitle - 모바일에서 1줄로 제한 */}
+                  <p className="text-[7px] sm:text-[9px] md:text-xs lg:text-sm text-white/40 uppercase tracking-wide mt-0.5 line-clamp-1">
+                    {phase.subtitle}
+                  </p>
+                  
+                  {/* Sub Points - 데스크톱 호버 시에만 표시 */}
+                  {!isMobile && (
                     <div className={`
-                      space-y-0.5 transition-all duration-500 delay-100
+                      space-y-0.5 mt-1 transition-all duration-500
                       ${isHovered ? 'opacity-100 max-h-[80px]' : 'opacity-0 max-h-0 overflow-hidden'}
                     `}>
                       {phase.subPoints.map((point, i) => <div key={i} className="flex items-center justify-center gap-1 text-[9px] sm:text-[10px] md:text-xs text-white/60">
@@ -225,16 +220,18 @@ const ProcessBillboardOverlay = () => {
                         </div>)}
                       <p className="text-[8px] sm:text-[9px] md:text-[10px] text-primary/80 italic mt-1">{phase.quote}</p>
                     </div>
-                  </div>
+                  )}
                 </div>
                 
-                {/* Bottom Accent Line */}
-                <div className={`
-                  absolute bottom-0 left-1/2 -translate-x-1/2
-                  h-[2px] bg-gradient-to-r from-transparent via-white to-transparent
-                  transition-all duration-500
-                  ${isHovered ? 'w-3/4 opacity-100' : 'w-0 opacity-0'}
-                `} />
+                {/* Bottom Accent Line - 데스크톱만 */}
+                {!isMobile && (
+                  <div className={`
+                    absolute bottom-0 left-1/2 -translate-x-1/2
+                    h-[2px] bg-gradient-to-r from-transparent via-white to-transparent
+                    transition-all duration-500
+                    ${isHovered ? 'w-3/4 opacity-100' : 'w-0 opacity-0'}
+                  `} />
+                )}
               </div>;
         })}
         </div>
