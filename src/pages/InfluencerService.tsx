@@ -251,6 +251,12 @@ const InfluencerService = () => {
       processSteps={processSteps}
       deliverables={deliverables}
       faqItems={faqItems}
+      featuredProjectSlugs={['bybit', 'kucoin', 'megaeth']}
+      campaignImages={[
+        { src: '/images/projects/bybit-bg.jpg', title: 'Bybit KOL Campaign Blitz', project: 'Bybit', result: '45K+ new Korean users through coordinated KOL push' },
+        { src: '/images/projects/kucoin-bg.jpg', title: 'KuCoin Community Airdrop Campaign', project: 'KuCoin', result: '35K+ signups via influencer-driven airdrop' },
+        { src: '/images/projects/megaeth-bg.jpg', title: 'MegaETH Pre-Launch Hype', project: 'MegaETH', result: '3M+ social impressions before mainnet launch' }
+      ]}
       currentSlug="influencer"
     >
       {/* KOL Network Section */}
