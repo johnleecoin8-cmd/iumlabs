@@ -212,41 +212,53 @@ const HeroSection = () => {
 
         {!shouldDisableVideo && !hasVideoError && (
           <video
+            ref={(el) => {
+              if (el) {
+                // Force-set attributes that React may not handle correctly
+                el.setAttribute('webkit-playsinline', '');
+                el.setAttribute('x5-playsinline', '');
+                el.setAttribute('x5-video-player-type', 'h5');
+                el.setAttribute('x5-video-player-fullscreen', 'true');
+                el.removeAttribute('controls');
+                // Try to play immediately
+                el.play().catch(() => {});
+              }
+            }}
             autoPlay
             muted
             loop
             playsInline
-            webkit-playsinline="true"
-            x5-playsinline="true"
-            x5-video-player-type="h5"
             preload="auto"
             poster="/images/hero-poster.jpg"
             disablePictureInPicture
-            controls={false}
             aria-hidden="true"
             tabIndex={-1}
             className="absolute inset-0 w-full h-full object-cover z-10"
             style={{
               opacity: isVideoReady ? 1 : 0,
               transition: "opacity 180ms ease",
+              // Hide native controls on iOS
+              WebkitAppearance: 'none',
             }}
             onError={() => {
               setHasVideoError(true);
               setIsVideoReady(false);
             }}
             onLoadedMetadata={(e) => {
-              // metadata arrives early; we can safely fade video in soon after
               const video = e.currentTarget;
+              video.removeAttribute('controls');
               setIsVideoReady(true);
               tryPlay(video);
             }}
             onCanPlay={(e) => {
               const video = e.currentTarget;
+              video.removeAttribute('controls');
               setIsVideoReady(true);
               tryPlay(video);
             }}
             onLoadedData={(e) => {
               const video = e.currentTarget;
+              video.removeAttribute('controls');
               setIsVideoReady(true);
               tryPlay(video);
             }}
