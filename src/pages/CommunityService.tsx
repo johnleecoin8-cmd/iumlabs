@@ -93,31 +93,6 @@ const faqItems: FAQItem[] = [{
   answer: "Nope. We use AI to handle the boring stuff, but real humans (who actually understand Web3) handle the real conversations and community building."
 }];
 
-// Featured projects for Community service
-const featuredProjectSlugs = ['mantra', 'story-protocol', 'peaq'];
-
-// Campaign images for Community service
-const campaignImages = [
-  {
-    src: '/images/projects/mantra-bg.jpg',
-    title: 'MANTRA Discord Launch Campaign',
-    project: 'MANTRA',
-    result: 'Built 20K+ Discord community from scratch with 95% retention rate'
-  },
-  {
-    src: '/images/projects/story-bg.jpg',
-    title: 'Story Protocol Telegram Growth',
-    project: 'Story Protocol',
-    result: 'Managed 50K+ member Telegram with 24/7 Korean support'
-  },
-  {
-    src: '/images/projects/peaq-bg.jpg',
-    title: 'peaq Korean Community Expansion',
-    project: 'peaq',
-    result: 'Launched dedicated Korean Discord with local moderators'
-  }
-];
-
 // Fake chat messages
 const discordMessages = [{
   user: "Alex_Web3",
@@ -244,7 +219,7 @@ const CommunityService = () => {
     }, 2000);
     return () => clearInterval(interval);
   }, [currentMessages.length]);
-  return <ServicePageLayout serviceName="Community Management" serviceTitle="Community" serviceSubtitle="Management" serviceDescription="Build a community that never sleeps. From Discord and Telegram to Korea's local hubs, we use AI-powered automation and 24/7 moderation to keep your members engaged, happy, and hyped." serviceIcon={Users} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} videoSrc="/videos/community-hero.mp4" posterSrc="/images/posters/community-hero.jpg" processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} featuredProjectSlugs={featuredProjectSlugs} campaignImages={campaignImages} currentSlug="community">
+  return <ServicePageLayout serviceName="Community Management" serviceTitle="Community" serviceSubtitle="Management" serviceDescription="Build a community that never sleeps. From Discord and Telegram to Korea's local hubs, we use AI-powered automation and 24/7 moderation to keep your members engaged, happy, and hyped." serviceIcon={Users} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} videoSrc="/videos/community-hero.mp4" posterSrc="/images/posters/community-hero.jpg" processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="community">
       {/* Platform Preview Section */}
       <section className="scroll-reveal bg-[#0F0F0F]">
         <div className="border-t border-white/10">

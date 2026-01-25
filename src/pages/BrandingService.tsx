@@ -216,12 +216,6 @@ const BrandingService = () => {
       posterSrc="/images/posters/branding-hero.jpg"
       deliverables={deliverables}
       faqItems={faqItems}
-      featuredProjectSlugs={['megaeth', 'fogo', 'tria']}
-      campaignImages={[
-        { src: '/images/projects/megaeth-bg.jpg', title: 'MegaETH Brand Identity Launch', project: 'MegaETH', result: 'Complete rebrand for Korean market entry' },
-        { src: '/images/projects/fogo-bg.jpg', title: 'FOGO Visual Identity System', project: 'FOGO', result: 'End-to-end brand system from logo to website' },
-        { src: '/images/projects/tria-bg.jpg', title: 'Tria Wallet UX Redesign', project: 'Tria', result: 'User-centric redesign driving 28K signups' }
-      ]}
       currentSlug="branding"
     >
       {/* 4-Week Program Journey Section */}

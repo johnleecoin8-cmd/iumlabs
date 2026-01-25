@@ -389,12 +389,6 @@ const OfflineEventService = () => {
       posterSrc="/images/posters/offline-event-hero.jpg"
       deliverables={deliverables}
       faqItems={faqItems}
-      featuredProjectSlugs={['peaq', 'mantra', 'story-protocol']}
-      campaignImages={[
-        { src: '/images/projects/peaq-bg.jpg', title: 'peaq DePIN Summit Seoul', project: 'peaq', result: '200+ attendees at exclusive industry summit' },
-        { src: '/images/projects/mantra-bg.jpg', title: 'MANTRA RWA Networking Night', project: 'MANTRA', result: 'VIP dinner with top Korean institutional players' },
-        { src: '/images/projects/story-bg.jpg', title: 'Story Protocol Origin Summit', project: 'Story Protocol', result: '500+ offline participants at creator workshop' }
-      ]}
       currentSlug="offline-event"
     >
       {/* Event Journey Section */}

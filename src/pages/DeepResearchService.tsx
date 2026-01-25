@@ -607,13 +607,7 @@ const DeepResearchService = () => {
       faqItems={faqItems} 
       accentColor={ACCENT_COLOR} 
       videoSrc="/videos/deep-research-hero.mp4" 
-      posterSrc="/images/posters/deep-research-hero.jpg"
-      featuredProjectSlugs={['sahara-ai', 'openledger', 'spacecoin']}
-      campaignImages={[
-        { src: '/images/projects/sahara-ai-bg.jpg', title: 'AI Infrastructure Market Report', project: 'Sahara AI', result: 'Comprehensive Korean AI x Crypto landscape analysis' },
-        { src: '/images/projects/openledger-hero-official.png', title: 'OpenLedger Technical Deep Dive', project: 'OpenLedger', result: 'Developer-focused research driving 12K downloads' },
-        { src: '/images/projects/spacecoin-bg.jpg', title: 'SpaceCoin Infrastructure Report', project: 'SpaceCoin', result: 'First Korean-language satellite internet research' }
-      ]}
+      posterSrc="/images/posters/deep-research-hero.jpg" 
       currentSlug="deep-research"
     >
       {/* Research Focus Section */}

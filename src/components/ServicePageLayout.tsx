@@ -11,8 +11,6 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import SectionHeader from "@/components/SectionHeader";
 import { useCountUp } from "@/hooks/useCountUp";
-import ServiceFeaturedCases from "@/components/service-detail/ServiceFeaturedCases";
-import ServiceCampaignGallery, { CampaignImage } from "@/components/service-detail/ServiceCampaignGallery";
 import {
   Accordion,
   AccordionContent,
@@ -113,12 +111,6 @@ interface ServicePageLayoutProps {
   // FAQ Section (optional)
   faqItems?: FAQItem[];
   
-  // Featured Cases Section (NEW)
-  featuredProjectSlugs?: string[];
-  
-  // Campaign Gallery Section (NEW)
-  campaignImages?: CampaignImage[];
-  
   // Additional sections (optional)
   children?: ReactNode;
   
@@ -180,8 +172,6 @@ const ServicePageLayout = ({
   processSteps,
   deliverables,
   faqItems,
-  featuredProjectSlugs,
-  campaignImages,
   children,
   currentSlug,
 }: ServicePageLayoutProps) => {
@@ -202,7 +192,7 @@ const ServicePageLayout = ({
   const otherServices = allServices.filter(s => s.slug !== currentSlug);
 
   // Calculate section numbers dynamically
-  // Order: Children (custom sections) -> Featured Cases -> Campaign Gallery -> Deliverables -> Process -> FAQ -> More Services -> Contact
+  // Order: Children (custom sections) -> Deliverables -> Process (if exists) -> More Services -> FAQ -> Contact
   let sectionNumber = 1;
   const getNextSectionNumber = () => {
     const num = sectionNumber.toString().padStart(2, '0');
@@ -213,8 +203,6 @@ const ServicePageLayout = ({
   // Reset section number for each render
   sectionNumber = 1;
   const childrenSectionNum = children ? getNextSectionNumber() : null;
-  const featuredCasesSectionNum = featuredProjectSlugs && featuredProjectSlugs.length > 0 ? getNextSectionNumber() : null;
-  const campaignGallerySectionNum = campaignImages && campaignImages.length > 0 ? getNextSectionNumber() : null;
   const deliverablesSectionNum = deliverables ? getNextSectionNumber() : null;
   const processSectionNum = processSteps && processSteps.length > 0 ? getNextSectionNumber() : null;
   const faqSectionNum = faqItems ? getNextSectionNumber() : null;
@@ -418,24 +406,6 @@ const ServicePageLayout = ({
 
       {/* Additional Content Sections */}
       {children}
-
-      {/* Featured Cases Section - NEW */}
-      {featuredProjectSlugs && featuredProjectSlugs.length > 0 && (
-        <ServiceFeaturedCases
-          projectSlugs={featuredProjectSlugs}
-          sectionNumber={featuredCasesSectionNum!}
-          accentColor={accentColor}
-        />
-      )}
-
-      {/* Campaign Gallery Section - NEW */}
-      {campaignImages && campaignImages.length > 0 && (
-        <ServiceCampaignGallery
-          images={campaignImages}
-          sectionNumber={campaignGallerySectionNum!}
-          accentColor={accentColor}
-        />
-      )}
 
       {/* Deliverables Section */}
       {deliverables && deliverables.length > 0 && (

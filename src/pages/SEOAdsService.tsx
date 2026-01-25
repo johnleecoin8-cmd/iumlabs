@@ -198,12 +198,6 @@ const SEOAdsService = () => {
       posterSrc="/images/posters/seo-hero.jpg"
       deliverables={deliverables}
       faqItems={faqItems}
-      featuredProjectSlugs={['story-protocol', 'peaq', 'sahara-ai']}
-      campaignImages={[
-        { src: '/images/projects/story-bg.jpg', title: 'Story Protocol SEO Domination', project: 'Story Protocol', result: '#1 ranking for key Korean crypto terms' },
-        { src: '/images/projects/peaq-bg.jpg', title: 'peaq Paid Media Campaign', project: 'peaq', result: '4x ROAS on targeted X Ads campaign' },
-        { src: '/images/projects/sahara-ai-bg.jpg', title: 'Sahara AI Search Visibility', project: 'Sahara AI', result: '300% increase in organic Korean traffic' }
-      ]}
       currentSlug="seo-ads"
     >
       {/* 4-Week Program Journey Section */}
