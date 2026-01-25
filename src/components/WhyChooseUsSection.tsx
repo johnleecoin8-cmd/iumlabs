@@ -30,19 +30,14 @@ const WhyChooseUsSection = () => {
         </div>
 
         {/* Right: Content */}
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col">
           <motion.div 
-            className="p-6 sm:p-8 md:p-10 lg:p-14 flex flex-col justify-center items-center text-center"
+            className="p-6 sm:p-8 md:p-10 lg:p-14 flex flex-col justify-center flex-1"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true, margin: "-50px" }}
           >
-            {/* 3D Bridge Logo - centered, wider aspect ratio to show full bridge */}
-            <div className="w-32 h-16 sm:w-44 sm:h-20 md:w-52 md:h-24 lg:w-60 lg:h-28 mb-6 sm:mb-8 mx-auto">
-              <Logo3D />
-            </div>
-            
             {/* Headline */}
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
               More than an Agency. Your Growth Engine.
@@ -58,6 +53,13 @@ const WhyChooseUsSection = () => {
               Founded by veterans from Binance & KuCoin
             </p>
           </motion.div>
+          
+          {/* 3D Bridge Logo - centered at bottom, no padding */}
+          <div className="w-full h-20 sm:h-24 md:h-28 lg:h-32 flex items-center justify-center">
+            <div className="w-48 h-full sm:w-56 md:w-64 lg:w-72">
+              <Logo3D />
+            </div>
+          </div>
         </div>
       </div>
     </section>
