@@ -156,7 +156,7 @@ const ContactFormSection = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-white/60 text-sm sm:text-base md:text-lg max-w-xl mx-auto"
+                className="text-white/60 text-sm sm:text-base md:text-lg max-w-2xl mx-auto whitespace-nowrap"
               >
                 From global vision to local impact — powered by data, delivered by experts.
               </motion.p>
