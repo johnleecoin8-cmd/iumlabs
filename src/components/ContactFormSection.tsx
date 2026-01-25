@@ -142,43 +142,14 @@ const ContactFormSection = ({
           <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
           
           <div className="relative px-3 sm:px-4 md:px-6 pt-4 sm:pt-5 md:pt-6 pb-2 sm:pb-3 md:pb-4">
-            {/* Hero Title with 3D Logo */}
+            {/* Hero with 3D Logo */}
             <div className="text-center mb-3 sm:mb-4">
               {/* 3D Bridge Logo */}
-              <div className="w-full h-32 sm:h-40 md:h-48 lg:h-56 flex items-center justify-center mb-4">
+              <div className="w-full h-32 sm:h-40 md:h-48 lg:h-56 flex items-center justify-center">
                 <div className="w-64 h-full sm:w-80 md:w-96 lg:w-[28rem]">
                   <Logo3D />
                 </div>
               </div>
-              
-              <motion.h3 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 tracking-tight"
-              >
-                Korea is a Black Box.
-              </motion.h3>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="text-white/60 text-sm sm:text-base md:text-lg max-w-2xl mx-auto"
-              >
-                Most global narratives fail here. Request our analysis deck to navigate the asymmetry.
-              </motion.p>
-              <motion.a
-                href="mailto:info@iumlabs.io?subject=Request%20for%20Korea%20Market%20Analysis%20Deck"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-white/90 transition-all"
-              >
-                Request Analysis Deck
-                <ArrowRight className="w-4 h-4" />
-              </motion.a>
             </div>
           </div>
         </div>
