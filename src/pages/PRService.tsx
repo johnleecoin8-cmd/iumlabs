@@ -441,7 +441,13 @@ const PRService = () => {
       posterSrc="/images/posters/pr-hero.jpg" 
       processSteps={processSteps} 
       deliverables={deliverables} 
-      faqItems={faqItems} 
+      faqItems={faqItems}
+      featuredProjectSlugs={['sahara-ai', 'bnb-chain', 'polygon']}
+      campaignImages={[
+        { src: '/images/projects/sahara-ai-bg.jpg', title: 'Sahara AI Korea Launch Coverage', project: 'Sahara AI', result: '15+ major media placements across Korean outlets' },
+        { src: '/images/projects/bnb-bg.jpg', title: 'BNB Chain Ecosystem Press Campaign', project: 'BNB Chain', result: '850K+ impressions through coordinated PR blitz' },
+        { src: '/images/projects/polygon-bg.jpg', title: 'Polygon Connect Seoul Press Event', project: 'Polygon', result: 'Featured in Blockmedia, Coinness, and more' }
+      ]}
       currentSlug="pr"
     >
       {/* Live News Distribution Section */}
