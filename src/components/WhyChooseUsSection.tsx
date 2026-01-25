@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import aboutImageDefault from '@/assets/campaigns/about-image-default.jpeg';
 import aboutImageHover from '@/assets/campaigns/about-image-hover.jpeg';
+import Logo3D from '@/components/Logo3D';
 
 const stats = [
   { value: "50+", label: "Projects Launched" },
@@ -37,6 +38,11 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true, margin: "-50px" }}
           >
+            {/* 3D Bridge Logo */}
+            <div className="w-16 h-16 sm:w-20 sm:h-20 mb-4 sm:mb-6">
+              <Logo3D />
+            </div>
+            
             {/* Headline */}
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
               More than an Agency. Your Growth Engine.
