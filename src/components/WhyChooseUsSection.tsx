@@ -39,12 +39,12 @@ const WhyChooseUsSection = () => {
           >
             {/* Headline */}
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
-              More than an Agency. Your Growth Engine.
+              Data-Driven Market Entry.
             </h2>
             
             {/* Description */}
             <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-6">
-              ium Labs connects global Web3 projects to Korea's dynamic ecosystem through data-driven research and actionable insights. We provide the winning formula to navigate the complex Korean market.
+              In Korean, 'ium' (이음) means 'connection.' But to us, it means integration. Stop relying on intuition. We engineer your entry into the Korean market using proprietary research and quantitative impact analysis. We don't just market; we structure your narrative to flawlessly 'ium' (connect) global protocols with local liquidity.
             </p>
             
             {/* CTA Note */}
