@@ -48,6 +48,7 @@ const ResearchHeroSection = () => {
     shouldDisableVideo,
     videoProps,
     posterProps,
+    ShimmerOverlay,
   } = useVideoPlayer({
     src: '/videos/research-background.mp4',
     poster: '/images/hero-poster.jpg',
@@ -72,6 +73,9 @@ const ResearchHeroSection = () => {
             filter: "brightness(0.35)",
           }}
         />
+
+        {/* Shimmer loading overlay */}
+        <ShimmerOverlay />
 
         {!shouldDisableVideo && !hasVideoError && (
           <video

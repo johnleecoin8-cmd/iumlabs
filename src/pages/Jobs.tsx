@@ -152,6 +152,7 @@ const JobsHeroVideo = () => {
     shouldDisableVideo,
     videoProps,
     posterProps,
+    ShimmerOverlay,
   } = useVideoPlayer({
     src: '/videos/jobs-hero.mp4',
     poster: '/images/hero-poster.jpg',
@@ -163,6 +164,9 @@ const JobsHeroVideo = () => {
     <>
       {/* Fallback poster - always visible until video is ready */}
       <img {...posterProps} />
+
+      {/* Shimmer loading overlay */}
+      <ShimmerOverlay />
 
       {!shouldDisableVideo && !hasVideoError && (
         <video

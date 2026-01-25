@@ -163,6 +163,7 @@ const HeroSection = () => {
     posterProps,
     quality,
     networkInfo,
+    ShimmerOverlay,
   } = useVideoPlayer({
     src: '/videos/hero-background.mp4',
     poster: '/images/hero-poster.jpg',
@@ -202,6 +203,9 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         {/* Always render poster as a safe fallback */}
         <img {...posterProps} />
+
+        {/* Shimmer loading overlay */}
+        <ShimmerOverlay />
 
         {!shouldDisableVideo && !hasVideoError && (
           <video

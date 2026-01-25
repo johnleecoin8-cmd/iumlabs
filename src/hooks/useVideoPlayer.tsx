@@ -40,6 +40,8 @@ interface UseVideoPlayerReturn {
   networkInfo: NetworkInfo | null;
   /** Whether video should be disabled (mobile/reduced-motion) */
   shouldDisableVideo: boolean;
+  /** Whether video is currently loading */
+  isLoading: boolean;
   /** Manual play trigger */
   play: () => void;
   /** Manual pause trigger */
@@ -75,6 +77,8 @@ interface UseVideoPlayerReturn {
     loading: 'eager' | 'lazy';
     style: React.CSSProperties;
   };
+  /** Shimmer overlay component for loading state */
+  ShimmerOverlay: React.FC;
 }
 
 /**
@@ -267,6 +271,52 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     } as React.CSSProperties,
   };
 
+  // Loading state
+  const isLoading = !isVideoReady && !hasVideoError && !shouldDisableVideo;
+
+  // Shimmer overlay component
+  const ShimmerOverlay: React.FC = () => {
+    if (!isLoading) return null;
+    
+    return (
+      <div 
+        className="absolute inset-0 z-20 overflow-hidden pointer-events-none"
+        aria-hidden="true"
+      >
+        {/* Base dark overlay */}
+        <div className="absolute inset-0 bg-background/30" />
+        
+        {/* Shimmer effect */}
+        <div 
+          className="absolute inset-0 -translate-x-full animate-shimmer"
+          style={{
+            background: 'linear-gradient(90deg, transparent 0%, hsl(var(--foreground) / 0.08) 50%, transparent 100%)',
+            animationDuration: '1.5s',
+            animationIterationCount: 'infinite',
+          }}
+        />
+        
+        {/* Loading indicator */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="flex flex-col items-center gap-3">
+            {/* Animated spinner */}
+            <div className="relative w-12 h-12">
+              <div className="absolute inset-0 rounded-full border-2 border-foreground/10" />
+              <div 
+                className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground/40 animate-spin"
+                style={{ animationDuration: '1s' }}
+              />
+            </div>
+            {/* Loading text */}
+            <span className="text-xs text-foreground/40 font-light tracking-widest uppercase">
+              Loading
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return {
     videoRef,
     isVideoReady,
@@ -275,11 +325,13 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     optimizedSrc,
     networkInfo,
     shouldDisableVideo: shouldDisableVideo || prefersReducedMotion,
+    isLoading,
     play,
     pause,
     reset,
     videoProps,
     posterProps,
+    ShimmerOverlay,
   };
 };
 
