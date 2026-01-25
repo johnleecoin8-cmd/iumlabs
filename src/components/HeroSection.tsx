@@ -2,6 +2,7 @@ import { ChevronDown, Send } from "lucide-react";
 import { useEffect, useMemo, useState, MouseEvent } from "react";
 import { useCountUp } from "@/hooks/useCountUp";
 import { useRipple } from "@/hooks/useRipple";
+import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 import { brand } from "@/config/content";
 import { useMobileOptimization } from "@/hooks/useMobileOptimization";
 import { useBrandStatsByIds } from "@/hooks/useBrandStats";
@@ -149,10 +150,25 @@ const defaultStats = [{
 }];
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isVideoReady, setIsVideoReady] = useState(false);
-  const [hasVideoError, setHasVideoError] = useState(false);
   const { createRipple } = useRipple();
-  const { isMobile, shouldDisableHeavyAnimations, shouldDisableVideo } = useMobileOptimization();
+  const { isMobile, shouldDisableHeavyAnimations } = useMobileOptimization();
+  
+  // Use unified video player hook
+  const {
+    videoRef,
+    isVideoReady,
+    hasVideoError,
+    shouldDisableVideo,
+    videoProps,
+    posterProps,
+    quality,
+    networkInfo,
+  } = useVideoPlayer({
+    src: '/videos/hero-background.mp4',
+    poster: '/images/hero-poster.jpg',
+    autoPlay: true,
+    preload: 'auto',
+  });
   
   // Fetch dynamic brand stats
   const { statsMap, isLoading: isLoadingStats } = useBrandStatsByIds([
@@ -180,76 +196,18 @@ const HeroSection = () => {
     const timer = setTimeout(() => setIsVisible(true), 800);
     return () => clearTimeout(timer);
   }, []);
-
-  useEffect(() => {
-    // Reset video state when switching between video/image modes
-    setIsVideoReady(false);
-    setHasVideoError(false);
-  }, [shouldDisableVideo]);
-
-  const tryPlay = (video: HTMLVideoElement) => {
-    // Some browsers (esp. mobile Safari) can be picky; retry a couple times.
-    const attempt = () => video.play().catch(() => {});
-    attempt();
-    setTimeout(attempt, 120);
-    setTimeout(attempt, 350);
-  };
   
   return <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Background Layer - Video with mobile optimizations */}
       <div className="absolute inset-0">
-        {/* Always render poster as a safe fallback (mobile autoplay/codec issues can hide video) */}
-        <img
-          src="/images/hero-poster.jpg"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover z-0"
-          loading="eager"
-          style={{
-            opacity: shouldDisableVideo || hasVideoError || !isVideoReady ? 1 : 0,
-            transition: "opacity 180ms ease",
-          }}
-        />
+        {/* Always render poster as a safe fallback */}
+        <img {...posterProps} />
 
         {!shouldDisableVideo && !hasVideoError && (
           <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            webkit-playsinline="true"
-            x5-playsinline="true"
-            x5-video-player-type="h5"
-            preload="auto"
-            poster="/images/hero-poster.jpg"
-            disablePictureInPicture
-            controls={false}
-            aria-hidden="true"
-            tabIndex={-1}
+            ref={videoRef}
+            {...videoProps}
             className="absolute inset-0 w-full h-full object-cover z-10"
-            style={{
-              opacity: isVideoReady ? 1 : 0,
-              transition: "opacity 180ms ease",
-            }}
-            onError={() => {
-              setHasVideoError(true);
-              setIsVideoReady(false);
-            }}
-            onLoadedMetadata={(e) => {
-              // metadata arrives early; we can safely fade video in soon after
-              const video = e.currentTarget;
-              setIsVideoReady(true);
-              tryPlay(video);
-            }}
-            onCanPlay={(e) => {
-              const video = e.currentTarget;
-              setIsVideoReady(true);
-              tryPlay(video);
-            }}
-            onLoadedData={(e) => {
-              const video = e.currentTarget;
-              setIsVideoReady(true);
-              tryPlay(video);
-            }}
           >
             <source src="/videos/hero-background.mp4" type="video/mp4" />
           </video>
