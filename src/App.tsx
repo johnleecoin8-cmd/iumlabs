@@ -38,6 +38,7 @@ import ProjectForm from "./pages/admin/ProjectForm";
 import AdminResearch from "./pages/admin/AdminResearch";
 import ResearchForm from "./pages/admin/ResearchForm";
 import AdminContacts from "./pages/admin/AdminContacts";
+import AdminJobApplications from "./pages/admin/AdminJobApplications";
 import logo from "@/assets/logo.png";
 
 const queryClient = new QueryClient();
@@ -179,6 +180,7 @@ const AppRoutes = () => {
         <Route path="/ium-admin/research/new" element={<ResearchForm />} />
         <Route path="/ium-admin/research/:id/edit" element={<ResearchForm />} />
         <Route path="/ium-admin/contacts" element={<AdminContacts />} />
+        <Route path="/ium-admin/jobs" element={<AdminJobApplications />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
