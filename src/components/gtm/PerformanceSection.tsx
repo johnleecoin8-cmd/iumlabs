@@ -340,7 +340,7 @@ const ProjectCard = ({
         {/* Progress Bar */}
         <div className="space-y-1">
           <div className="flex items-center justify-between text-[10px] font-mono">
-            <span className="text-muted-foreground">THROUGHPUT</span>
+            <span className="text-muted-foreground">EXECUTION</span>
             <span className={colors.text}>{project.progress}%</span>
           </div>
           <div className="h-1 bg-border/30 rounded-full overflow-hidden">

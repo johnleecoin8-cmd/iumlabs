@@ -60,7 +60,7 @@ const processPhases = [{
   title: "IGNITE",
   subtitle: "Launch & Viral",
   icon: Rocket,
-  subPoints: ["Viral Marketing & Shilling", "Cross-Community AMAs", "Tier-1 PR & Media Blast"],
+  subPoints: ["Viral Marketing & Amplification", "Cross-Community AMAs", "Tier-1 PR & Media Blast"],
   quote: '"Sparking the flame. Maximum impact, zero friction."'
 }, {
   title: "SCALE",

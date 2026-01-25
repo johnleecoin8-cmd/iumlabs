@@ -23,8 +23,8 @@ const services = [
   },
   {
     number: "02",
-    title: "Website",
-    description: "High-performance websites and creative design for Web3 projects. From landing pages to custom development.",
+    title: "Brand Identity & Web",
+    description: "Strategic brand identity and high-performance websites for Web3 projects. From brand systems to custom development.",
     link: "/services/branding",
     icon: Compass,
     image: websiteImage
