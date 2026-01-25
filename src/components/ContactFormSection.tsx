@@ -149,10 +149,7 @@ const ContactFormSection = ({
                 viewport={{ once: true }}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 tracking-tight"
               >
-                Ready to Enter{" "}
-                <span className="bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent">
-                  Korea?
-                </span>
+                Bridge the Gap.
               </motion.h3>
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
@@ -161,7 +158,7 @@ const ContactFormSection = ({
                 transition={{ delay: 0.1 }}
                 className="text-white/60 text-sm sm:text-base md:text-lg max-w-xl mx-auto"
               >
-                Partner with Korea's leading Web3 marketing agency. Let's build your presence together.
+                From global vision to local impact — powered by data, delivered by experts.
               </motion.p>
 
             </div>
