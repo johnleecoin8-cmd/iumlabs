@@ -51,22 +51,39 @@ const InsightArticleItem = ({ article, index, isLast }: { article: InsightArticl
         to={`/research/${article.id}`} 
         className={`group block p-3 sm:p-5 md:p-6 lg:p-8 transition-colors duration-300 hover:bg-secondary/50 active:bg-secondary/70 active:scale-[0.99] ${!isLast ? "border-b border-border" : ""}`}
       >
-        <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-muted-foreground text-[9px] sm:text-xs mb-1 sm:mb-2">
-          <span className="uppercase tracking-wider">{article.category}</span>
-          <span className="hidden sm:inline">•</span>
-          <span>{article.date}</span>
-          <span className="hidden sm:inline">•</span>
-          <span className="hidden sm:inline">{article.readTime} read</span>
-        </div>
-        <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1 sm:mb-2 group-hover:text-foreground/80 transition-colors line-clamp-2">
-          {article.title}
-        </h3>
-        <p className="text-muted-foreground text-[11px] sm:text-sm leading-relaxed mb-1.5 sm:mb-3 line-clamp-2">
-          {article.excerpt}
-        </p>
-        <div className="flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-sm min-h-[36px] sm:min-h-0">
-          <span className="group-hover:underline underline-offset-4">Read article</span>
-          <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+        <div className="flex gap-4 sm:gap-6">
+          {/* Article Image */}
+          {article.image && (
+            <div className="flex-shrink-0 w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-lg overflow-hidden bg-secondary">
+              <img 
+                src={article.image} 
+                alt={article.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
+            </div>
+          )}
+          
+          {/* Article Content */}
+          <div className="flex-1 min-w-0">
+            <div className="flex flex-wrap items-center gap-1 sm:gap-2 text-muted-foreground text-[9px] sm:text-xs mb-1 sm:mb-2">
+              <span className="uppercase tracking-wider">{article.category}</span>
+              <span className="hidden sm:inline">•</span>
+              <span>{article.date}</span>
+              <span className="hidden sm:inline">•</span>
+              <span className="hidden sm:inline">{article.readTime} read</span>
+            </div>
+            <h3 className="text-sm sm:text-lg font-semibold text-foreground mb-1 sm:mb-2 group-hover:text-foreground/80 transition-colors line-clamp-2">
+              {article.title}
+            </h3>
+            <p className="text-muted-foreground text-[11px] sm:text-sm leading-relaxed mb-1.5 sm:mb-3 line-clamp-2 hidden sm:block">
+              {article.excerpt}
+            </p>
+            <div className="flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors text-[10px] sm:text-sm">
+              <span className="group-hover:underline underline-offset-4">Read article</span>
+              <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
+            </div>
+          </div>
         </div>
       </Link>
     </div>
