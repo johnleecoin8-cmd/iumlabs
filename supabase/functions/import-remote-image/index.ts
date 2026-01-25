@@ -134,10 +134,10 @@ serve(async (req) => {
 
     const imageData = await imageResponse.arrayBuffer();
 
-    // Check size (max 5MB)
-    if (imageData.byteLength > 5 * 1024 * 1024) {
+    // Check size (max 10MB)
+    if (imageData.byteLength > 10 * 1024 * 1024) {
       return new Response(
-        JSON.stringify({ error: 'Image is too large (max 5MB)' }),
+        JSON.stringify({ error: 'Image is too large (max 10MB)' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
