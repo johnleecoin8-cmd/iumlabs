@@ -38,8 +38,8 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true, margin: "-50px" }}
           >
-            {/* 3D Bridge Logo */}
-            <div className="w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 lg:w-40 lg:h-40 mb-6 sm:mb-8">
+            {/* 3D Bridge Logo - wider aspect ratio to show full bridge */}
+            <div className="w-32 h-16 sm:w-44 sm:h-20 md:w-52 md:h-24 lg:w-60 lg:h-28 mb-6 sm:mb-8">
               <Logo3D />
             </div>
             

@@ -291,7 +291,7 @@ const Logo3D = ({ className = "" }: Logo3DProps) => {
       <WebGLErrorBoundary fallback={Fallback}>
         <Suspense fallback={Fallback}>
           <Canvas
-            camera={{ position: [0, 0, 4.5], fov: 35 }}
+            camera={{ position: [0, 0, 6], fov: 40 }}
             dpr={[1, 1.5]}
             gl={{ 
               antialias: true, 
