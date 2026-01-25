@@ -278,8 +278,8 @@ export default function ResearchForm() {
       toast.error('Please select an image file');
       return;
     }
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image must be less than 5MB');
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error('Image must be less than 10MB');
       return;
     }
     setImageFile(file);
@@ -723,8 +723,8 @@ export default function ResearchForm() {
       toast.error('Please select an image file');
       return;
     }
-    if (file.size > 5 * 1024 * 1024) {
-      toast.error('Image must be less than 5MB');
+    if (file.size > 10 * 1024 * 1024) {
+      toast.error('Image must be less than 10MB');
       return;
     }
     setAuthorImageFile(file);
@@ -1098,7 +1098,7 @@ export default function ResearchForm() {
                         Or paste from clipboard (Ctrl/Cmd + V)
                       </p>
                       <p className="text-white/30 text-xs mt-2">
-                        PNG, JPG, WEBP up to 5MB
+                        PNG, JPG, WEBP up to 10MB
                       </p>
                     </div>
                   </div>

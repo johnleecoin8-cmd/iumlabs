@@ -117,11 +117,11 @@ serve(async (req) => {
       mimeType = body.mimeType || 'image/png';
     }
     
-    // Check size (max 5MB)
-    if (fileData.byteLength > 5 * 1024 * 1024) {
+    // Check size (max 10MB)
+    if (fileData.byteLength > 10 * 1024 * 1024) {
       console.error('[upload-content-image] File too large:', fileData.byteLength);
       return new Response(
-        JSON.stringify({ error: 'Image is too large (max 5MB)' }),
+        JSON.stringify({ error: 'Image is too large (max 10MB)' }),
         { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
