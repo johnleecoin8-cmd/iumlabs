@@ -1,5 +1,7 @@
 import type { Config } from "tailwindcss";
 
+// Added shimmer animation for video loading states
+
 export default {
   darkMode: ["class"],
   content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
