@@ -149,18 +149,28 @@ const ContactFormSection = ({
                 viewport={{ once: true }}
                 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 tracking-tight"
               >
-                Bridge the Gap.
+                Korea is a Black Box.
               </motion.h3>
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-white/60 text-sm sm:text-base md:text-lg max-w-2xl mx-auto whitespace-nowrap"
+                className="text-white/60 text-sm sm:text-base md:text-lg max-w-2xl mx-auto"
               >
-                From global vision to local impact — powered by data, delivered by experts.
+                Most global narratives fail here. Request our analysis deck to navigate the asymmetry.
               </motion.p>
-
+              <motion.a
+                href="mailto:info@iumlabs.io?subject=Request%20for%20Korea%20Market%20Analysis%20Deck"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 mt-6 px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-white/90 transition-all"
+              >
+                Request Analysis Deck
+                <ArrowRight className="w-4 h-4" />
+              </motion.a>
             </div>
           </div>
         </div>
