@@ -12,7 +12,7 @@ import { useScrollDirection } from "@/hooks/useScrollDirection";
 // Services submenu data (same as Sidebar)
 const servicesSubMenu = [
   { name: "Web3 GTM Strategy", href: "/services" },
-  { name: "Branding & Website", href: "/services/branding" },
+  { name: "Brand Identity & Web", href: "/services/branding" },
   { name: "SEO & Paid Ads", href: "/services/seo-ads" },
   { name: "Offline Events Korea", href: "/services/offline-event" },
   { name: "Community Management", href: "/services/community" },
