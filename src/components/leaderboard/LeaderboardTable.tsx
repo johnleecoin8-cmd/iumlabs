@@ -11,6 +11,7 @@ import {
 import { Input } from '@/components/ui/input';
 import type { HypeProject } from '@/hooks/useHypeProjects';
 import { useHypeTrends } from '@/hooks/useHypeProjects';
+import { ensureSparkline, hashSeed } from '@/lib/sparkline';
 
 interface LeaderboardTableProps {
   projects: HypeProject[];
@@ -124,13 +125,34 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
   };
 
   // Mini sparkline for table rows
-  const MiniSparkline = ({ data, trend }: { data: number[]; trend: string }) => {
-    if (!data || data.length === 0) return null;
+  const MiniSparkline = ({
+    data,
+    trend,
+    base,
+    seed,
+  }: {
+    data: number[] | null | undefined;
+    trend: string;
+    base: number;
+    seed: number;
+  }) => {
+    const mappedTrend = ((): 'up' | 'down' | 'neutral' => {
+      if (trend === 'positive' || trend === 'up') return 'up';
+      if (trend === 'negative' || trend === 'down') return 'down';
+      return 'neutral';
+    })();
+
+    const safeData = ensureSparkline(data, {
+      base,
+      trend: mappedTrend,
+      seed,
+      points: 14,
+    });
     
-    const max = Math.max(...data, 1);
-    const min = Math.min(...data, 0);
+    const max = Math.max(...safeData, 1);
+    const min = Math.min(...safeData, 0);
     const range = max - min || 1;
-    const normalized = data.map(v => ((v - min) / range) * 20);
+    const normalized = safeData.map(v => ((v - min) / range) * 20);
     
     const points = normalized.map((value, i) => {
       const x = (i / (normalized.length - 1)) * 60;
@@ -288,7 +310,12 @@ const LeaderboardTable = ({ projects, onProjectHover, activeProjectId }: Leaderb
                   
                   {/* Sparkline */}
                   <td className="px-4 py-3">
-                    <MiniSparkline data={project.sparkline} trend={project.trend} />
+                    <MiniSparkline
+                      data={project.sparkline}
+                      trend={project.trend}
+                      base={Number(project.score) || 1}
+                      seed={hashSeed(project.ticker)}
+                    />
                   </td>
                 </motion.tr>
               );
