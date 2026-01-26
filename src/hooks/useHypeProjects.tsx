@@ -31,6 +31,8 @@ export interface HypeProject {
   top_source?: string | null;
   // Periods where project was found (7D, 14D, 30D, 90D)
   periods_found?: string[];
+  // Start date when project first appeared
+  start_date?: string | null;
 }
 
 export interface HypeScoreHistory {

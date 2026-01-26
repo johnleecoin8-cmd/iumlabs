@@ -96,6 +96,7 @@ export type Database = {
           rank: number
           score: number
           sparkline: number[] | null
+          start_date: string | null
           ticker: string
           token_status: string | null
           top_source: string | null
@@ -119,6 +120,7 @@ export type Database = {
           rank?: number
           score?: number
           sparkline?: number[] | null
+          start_date?: string | null
           ticker: string
           token_status?: string | null
           top_source?: string | null
@@ -142,6 +144,7 @@ export type Database = {
           rank?: number
           score?: number
           sparkline?: number[] | null
+          start_date?: string | null
           ticker?: string
           token_status?: string | null
           top_source?: string | null

@@ -57,6 +57,7 @@ interface MindshareCellProps {
   change24h?: number | null;
   topSource?: string | null;
   periodsFound?: string[];
+  startDate?: string | null;
 }
 
 // Narrative badges (Softer pastel tones)
@@ -83,20 +84,54 @@ const MindshareCell = ({
   ticker, name, mindshare, mindshareChange, narrative, trend,
   tokenStatus = 'tge', sparkline = [], logoUrl, size, rank,
   onClick, isTrending = false, price, change24h, topSource,
-  periodsFound = [],
+  periodsFound = [], startDate,
 }: MindshareCellProps) => {
   
-  // Project is "new" if it only appears in 1-2 periods
-  const isNewProject = periodsFound.length > 0 && periodsFound.length <= 2;
+  // Project is "new" if it only appears in 1-2 periods OR has a recent start_date
+  const isNewProject = useMemo(() => {
+    if (periodsFound.length > 0 && periodsFound.length <= 2) return true;
+    if (startDate) {
+      const start = new Date(startDate);
+      const now = new Date();
+      const daysSinceStart = Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+      return daysSinceStart <= 14; // New if started within last 14 days
+    }
+    return false;
+  }, [periodsFound, startDate]);
 
+  // Generate sparkline with 0-padding for new projects based on start_date
   const effectiveSparkline = useMemo(() => {
+    const POINTS = 14;
+    
+    // If project has start_date, pad with zeros before that date
+    if (startDate) {
+      const start = new Date(startDate);
+      const now = new Date();
+      const daysSinceStart = Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+      const activePoints = Math.min(POINTS, Math.max(1, daysSinceStart + 1));
+      const zeroPoints = POINTS - activePoints;
+      
+      if (zeroPoints > 0) {
+        // Create zeros for before start_date, then ramp up to current value
+        const zeros = Array(zeroPoints).fill(0);
+        const base = mindshare || 1;
+        const ramp = Array.from({ length: activePoints }, (_, i) => {
+          const t = (i + 1) / activePoints;
+          return Math.round(base * t * 100) / 100;
+        });
+        ramp[activePoints - 1] = base; // Anchor last point
+        return [...zeros, ...ramp];
+      }
+    }
+    
+    // Fallback to existing sparkline or generated one
     return ensureSparkline(sparkline, {
       base: mindshare,
       trend,
       seed: hashSeed(ticker),
-      points: 14,
+      points: POINTS,
     });
-  }, [sparkline, mindshare, trend, ticker]);
+  }, [sparkline, mindshare, trend, ticker, startDate]);
   
   // Refined Sparkline Logic
   const { sparklinePath, fillPath, lastPoint } = useMemo(() => {

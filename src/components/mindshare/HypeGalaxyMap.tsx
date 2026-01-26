@@ -37,6 +37,7 @@ interface HypeGalaxyMapProps {
     sparkline?: number[];
     logo_url?: string | null;
     periods_found?: string[];
+    start_date?: string | null;
   }[];
 }
 
@@ -94,30 +95,44 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
     // 각 프로젝트의 sparkline 보정
     const normalizedProjects = projects.map((project, idx) => {
       const existingSparkline = project.sparkline || [];
+      const POINTS = 14;
 
-      // NEW 프로젝트(1~2 기간에만 등장)는 "0에서 갑자기 등장"하는 그래프가 되도록
-      // 앞 구간을 0으로 채우고, 마지막 3포인트만 상승하도록 구성한다.
+      // start_date 기반으로 0-padding 처리 (Treemap과 동일한 로직)
+      if (project.start_date) {
+        const start = new Date(project.start_date);
+        const now = new Date();
+        const daysSinceStart = Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+        const activePoints = Math.min(POINTS, Math.max(1, daysSinceStart + 1));
+        const zeroPoints = POINTS - activePoints;
+        
+        if (zeroPoints > 0) {
+          const zeros = Array(zeroPoints).fill(0);
+          const base = Math.max(0, Number(project.score) || 0);
+          const ramp = Array.from({ length: activePoints }, (_, i) => {
+            const t = (i + 1) / activePoints;
+            return Math.round(base * t * 100) / 100;
+          });
+          ramp[activePoints - 1] = base;
+          
+          return {
+            ...project,
+            normalizedSparkline: [...zeros, ...ramp],
+          };
+        }
+      }
+
+      // Fallback: periods_found 기반 (start_date가 없는 경우)
       const periodsFound = project.periods_found || [];
       const isNewProject = periodsFound.length > 0 && periodsFound.length <= 2;
       if (isNewProject) {
-        const POINTS = 14;
-        const appearPoints = 3; // 1/24~현재(대략 3일) 표현
+        const appearPoints = 3;
         const zeros = Math.max(0, POINTS - appearPoints);
-
-        const seededRandom = (s: number) => {
-          const x = Math.sin(s) * 10000;
-          return x - Math.floor(x);
-        };
 
         const base = Math.max(0, Number(project.score) || 0);
         const ramp = Array.from({ length: appearPoints }, (_, i) => {
           const t = (i + 1) / appearPoints;
-          const noise = (seededRandom(project.ticker.charCodeAt(0) * 100 + idx * 7 + i * 13) - 0.5) * 0.06 * base;
-          const v = Math.max(0, base * t + noise);
-          return Math.round(v * 100) / 100;
+          return Math.round(base * t * 100) / 100;
         });
-
-        // 마지막 값은 현재 스코어에 고정
         ramp[appearPoints - 1] = base;
 
         return {
