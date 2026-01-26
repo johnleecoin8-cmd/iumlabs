@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { TrendingUp, TrendingDown, Flame, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { ensureSparkline, hashSeed } from '@/lib/sparkline';
 
 // Convert to percentage with clamping (max ±999%)
 const toPercent = (value: number | null | undefined): string => {
@@ -82,13 +83,22 @@ const MindshareCell = ({
   tokenStatus = 'tge', sparkline = [], logoUrl, size, rank,
   onClick, isTrending = false, price, change24h, topSource,
 }: MindshareCellProps) => {
+
+  const effectiveSparkline = useMemo(() => {
+    return ensureSparkline(sparkline, {
+      base: mindshare,
+      trend,
+      seed: hashSeed(ticker),
+      points: 14,
+    });
+  }, [sparkline, mindshare, trend, ticker]);
   
   // Refined Sparkline Logic
   const { sparklinePath, fillPath, lastPoint } = useMemo(() => {
-    if (!sparkline || sparkline.length < 2) return { sparklinePath: '', fillPath: '', lastPoint: null };
+    if (!effectiveSparkline || effectiveSparkline.length < 2) return { sparklinePath: '', fillPath: '', lastPoint: null };
     
     // Trim trailing zeros for cleaner look
-    let data = [...sparkline];
+    let data = [...effectiveSparkline];
     while(data.length > 5 && data[data.length-1] === 0 && data[data.length-2] === 0) {
         data.pop();
     }
@@ -109,7 +119,7 @@ const MindshareCell = ({
     const fill = `${path} L 100,100 L 0,100 Z`;
     
     return { sparklinePath: path, fillPath: fill, lastPoint: points[points.length - 1] };
-  }, [sparkline]);
+  }, [effectiveSparkline]);
 
   // Premium Color Palette (Glassmorphism)
   const theme = {
@@ -162,7 +172,7 @@ const MindshareCell = ({
       )}
     >
       {/* Sparkline Layer */}
-      {sparkline.length >= 2 && sparklinePath && (
+      {effectiveSparkline.length >= 2 && sparklinePath && (
         <svg 
           className="absolute inset-0 w-full h-full pointer-events-none"
           viewBox="0 0 100 100" 
