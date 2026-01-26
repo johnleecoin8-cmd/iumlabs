@@ -319,7 +319,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   // Loading state
   const isLoading = !isVideoReady && !hasVideoError && !shouldDisableVideo;
 
-  // Shimmer overlay component - Enhanced visibility with logo
+  // Shimmer overlay component
   const ShimmerOverlay: React.FC = () => {
     if (!isLoading) return null;
     
@@ -328,69 +328,34 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         className="absolute inset-0 z-20 overflow-hidden pointer-events-none"
         aria-hidden="true"
       >
-        {/* Darker overlay for better contrast */}
-        <div className="absolute inset-0 bg-black/70" />
+        {/* Base dark overlay */}
+        <div className="absolute inset-0 bg-background/30" />
         
-        {/* Shimmer effect - more visible */}
+        {/* Shimmer effect */}
         <div 
           className="absolute inset-0 -translate-x-full animate-shimmer"
           style={{
-            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.12) 50%, transparent 100%)',
-            animationDuration: '1.8s',
+            background: 'linear-gradient(90deg, transparent 0%, hsl(var(--foreground) / 0.08) 50%, transparent 100%)',
+            animationDuration: '1.5s',
             animationIterationCount: 'infinite',
           }}
         />
         
-        {/* Enhanced Loading indicator with logo */}
+        {/* Loading indicator */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-6">
-            {/* Logo with spinner ring */}
-            <div className="relative w-24 h-24 sm:w-28 sm:h-28">
-              {/* Outer glow effect */}
+          <div className="flex flex-col items-center gap-3">
+            {/* Animated spinner */}
+            <div className="relative w-12 h-12">
+              <div className="absolute inset-0 rounded-full border-2 border-foreground/10" />
               <div 
-                className="absolute inset-0 rounded-full"
-                style={{
-                  background: 'radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%)',
-                  transform: 'scale(1.8)',
-                }}
+                className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground/40 animate-spin"
+                style={{ animationDuration: '1s' }}
               />
-              {/* Spinning ring */}
-              <div 
-                className="absolute inset-0 rounded-full border-[3px] border-white/10 animate-spin"
-                style={{ 
-                  animationDuration: '3s',
-                  borderTopColor: 'rgba(255,255,255,0.6)',
-                  borderRightColor: 'rgba(255,255,255,0.3)',
-                }}
-              />
-              {/* Inner circle background */}
-              <div className="absolute inset-2 rounded-full bg-black/50 backdrop-blur-sm" />
-              {/* Logo centered */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <img 
-                  src="/logo.png" 
-                  alt="Ium Labs"
-                  className="w-12 h-12 sm:w-14 sm:h-14 object-contain animate-pulse"
-                  style={{ animationDuration: '2s' }}
-                />
-              </div>
             </div>
             {/* Loading text */}
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-sm sm:text-base text-white/80 font-medium tracking-[0.15em] uppercase">
-                Loading
-              </span>
-              {/* Animated dots */}
-              <div className="flex gap-1.5">
-                {[0, 1, 2].map((i) => (
-                  <div
-                    key={i}
-                    className="w-1.5 h-1.5 rounded-full bg-white/60 animate-bounce"
-                    style={{ animationDelay: `${i * 0.15}s`, animationDuration: '0.6s' }}
-                  />
-                ))}
-              </div>
-            </div>
+            <span className="text-xs text-foreground/40 font-light tracking-widest uppercase">
+              Loading
+            </span>
           </div>
         </div>
       </div>
