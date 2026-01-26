@@ -65,7 +65,7 @@ const ContactHeroVideo = () => {
     posterProps,
     ShimmerOverlay,
   } = useVideoPlayer({
-    src: '/videos/services-background.mp4',
+    src: '/videos/contact-hero.mp4',
     poster: '/images/contact-hero-poster.jpg',
   });
 
@@ -93,7 +93,7 @@ const ContactHeroVideo = () => {
             filter: "brightness(0.35)",
           }}
         >
-          <source src="/videos/services-background.mp4#t=0.001" type="video/mp4" />
+          <source src="/videos/contact-hero.mp4#t=0.001" type="video/mp4" />
         </video>
       )}
     </>
