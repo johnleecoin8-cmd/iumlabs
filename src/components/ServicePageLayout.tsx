@@ -422,35 +422,32 @@ const ServicePageLayout = ({
       {/* Additional Content Sections */}
       {children}
 
-      {/* Deliverables Section */}
+      {/* Deliverables Section - Minimal Agency Style */}
       {deliverables && deliverables.length > 0 && (
-        <section className="bg-[#121212]">
-          <div className="border-t border-white/10">
+        <section className="bg-[#0A0A0A]">
+          <div className="border-t border-white/[0.06]">
             <SectionHeader number={deliverablesSectionNum!} title="What You Get" badge="Deliverables" />
             
-            <div className="py-5 sm:py-8 md:py-12">
-              <div className="container mx-auto px-4 sm:px-4 lg:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+            <div className="py-8 sm:py-12 md:py-16">
+              <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                   {deliverables.map((deliverable) => (
                     <div
                       key={deliverable.title}
-                      className="p-4 sm:p-5 rounded-xl border border-white/10 bg-white/5 hover:border-white/20 transition-all active:scale-[0.98]"
+                      className="p-5 sm:p-6 rounded-2xl border border-white/[0.06] bg-[#0D0D0D] hover:border-white/[0.12] transition-all duration-300"
                     >
-                      <h3 className="text-[13px] sm:text-sm font-semibold text-white mb-2.5 sm:mb-2.5 flex items-center gap-2">
+                      <h3 className="text-sm font-semibold text-white mb-4 flex items-center gap-2.5">
                         <div 
                           className="w-2 h-2 rounded-full flex-shrink-0"
                           style={{ backgroundColor: accentColor }}
                         />
                         {deliverable.title}
                       </h3>
-                      <ul className="space-y-1.5 sm:space-y-1.5">
+                      <ul className="space-y-2.5">
                         {deliverable.items.map((item, idx) => (
-                          <li key={idx} className="flex items-start gap-2 sm:gap-2 text-white/60 text-[12px] sm:text-xs">
-                            <Check 
-                              className="w-3.5 h-3.5 mt-0.5 flex-shrink-0" 
-                              style={{ color: accentColor }} 
-                            />
-                            {item}
+                          <li key={idx} className="flex items-start gap-2.5 text-white/50 text-xs leading-relaxed">
+                            <Check className="w-3.5 h-3.5 mt-0.5 flex-shrink-0 text-violet-400/60" />
+                            <span>{item}</span>
                           </li>
                         ))}
                       </ul>
@@ -517,37 +514,31 @@ const ServicePageLayout = ({
         </section>
       )}
 
-      {/* FAQ Section */}
+      {/* FAQ Section - Minimal Agency Style */}
       {faqItems && faqItems.length > 0 && (
-        <section className="bg-[#121212]">
-          <div className="border-t border-white/10">
+        <section className="bg-[#0A0A0A]">
+          <div className="border-t border-white/[0.06]">
             <SectionHeader number={faqSectionNum!} title="FAQ" badge="Common Questions" />
             
-            <div className="py-5 sm:py-8 md:py-12">
-                <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-4xl">
-                <Accordion type="single" collapsible className="space-y-2.5 sm:space-y-3">
+            <div className="py-8 sm:py-12 md:py-16">
+              <div className="container mx-auto px-4 sm:px-6 lg:px-12 max-w-4xl">
+                <Accordion type="single" collapsible className="space-y-2">
                   {faqItems.map((item, index) => (
-                    <div
+                    <AccordionItem 
                       key={index}
+                      value={`item-${index}`}
+                      className="border border-white/[0.06] rounded-2xl bg-[#0D0D0D] px-5 overflow-hidden data-[state=open]:border-white/[0.12] transition-all duration-300"
                     >
-                        <AccordionItem 
-                        value={`item-${index}`}
-                        className="border border-white/10 rounded-xl sm:rounded-xl bg-white/5 px-4 sm:px-5 overflow-hidden"
-                      >
-                        <AccordionTrigger className="text-left text-white hover:no-underline py-3.5 sm:py-4 text-[13px] sm:text-sm min-h-[48px]">
-                          <span className="flex items-center gap-2.5 sm:gap-3">
-                            <ChevronRight 
-                              className="w-4 h-4 sm:w-4 sm:h-4 flex-shrink-0 transition-transform" 
-                              style={{ color: accentColor }}
-                            />
-                            <span className="line-clamp-2 leading-snug">{item.question}</span>
-                          </span>
-                        </AccordionTrigger>
-                        <AccordionContent className="text-white/60 text-[13px] sm:text-sm pb-4 sm:pb-4 pl-6 sm:pl-7 leading-relaxed">
-                          {item.answer}
-                        </AccordionContent>
-                      </AccordionItem>
-                    </div>
+                      <AccordionTrigger className="text-left text-white hover:no-underline py-4 text-sm">
+                        <span className="flex items-center gap-3">
+                          <ChevronRight className="w-4 h-4 flex-shrink-0 text-violet-400/60" />
+                          <span>{item.question}</span>
+                        </span>
+                      </AccordionTrigger>
+                      <AccordionContent className="text-white/50 text-sm pb-5 pl-7 leading-relaxed">
+                        {item.answer}
+                      </AccordionContent>
+                    </AccordionItem>
                   ))}
                 </Accordion>
               </div>
