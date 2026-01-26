@@ -178,12 +178,20 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     }
   }, [src, quality, qualityVariants])();
 
-  // Retry play logic for mobile browsers
+  // Retry play logic for mobile browsers - more aggressive
   const tryPlay = useCallback((video: HTMLVideoElement) => {
-    const attempt = () => video.play().catch(() => {});
+    const attempt = () => {
+      // Ensure video is muted (required for autoplay)
+      video.muted = true;
+      video.play().catch(() => {});
+    };
+    
+    // Multiple retry attempts with increasing delays
     attempt();
-    setTimeout(attempt, 120);
-    setTimeout(attempt, 350);
+    setTimeout(attempt, 100);
+    setTimeout(attempt, 300);
+    setTimeout(attempt, 600);
+    setTimeout(attempt, 1000);
   }, []);
 
   // Manual controls
@@ -206,17 +214,54 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     }
   }, []);
 
-  // Auto-play on mount if enabled
+  // Auto-play on mount if enabled - with visibility detection
   useEffect(() => {
     if (!autoPlay || shouldDisableVideo || hasVideoError) return;
 
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Play when video element is ready
+    const handleVideoReady = () => {
+      tryPlay(video);
+    };
+
+    // Initial play attempt
     const timer = setTimeout(() => {
-      if (videoRef.current) {
-        tryPlay(videoRef.current);
-      }
+      tryPlay(video);
     }, playDelay);
 
-    return () => clearTimeout(timer);
+    // Also try on user interaction (for strict autoplay policies)
+    const handleUserInteraction = () => {
+      tryPlay(video);
+    };
+
+    // Listen for any user interaction to trigger play
+    document.addEventListener('touchstart', handleUserInteraction, { once: true, passive: true });
+    document.addEventListener('click', handleUserInteraction, { once: true, passive: true });
+    document.addEventListener('scroll', handleUserInteraction, { once: true, passive: true });
+
+    // Intersection observer to play when visible
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            tryPlay(video);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener('touchstart', handleUserInteraction);
+      document.removeEventListener('click', handleUserInteraction);
+      document.removeEventListener('scroll', handleUserInteraction);
+      observer.disconnect();
+    };
   }, [autoPlay, playDelay, shouldDisableVideo, hasVideoError, tryPlay]);
 
   // Reset state when source changes
