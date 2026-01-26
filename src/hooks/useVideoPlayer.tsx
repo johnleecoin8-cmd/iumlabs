@@ -319,7 +319,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   // Loading state
   const isLoading = !isVideoReady && !hasVideoError && !shouldDisableVideo;
 
-  // Shimmer overlay component
+  // Shimmer overlay component - Enhanced visibility
   const ShimmerOverlay: React.FC = () => {
     if (!isLoading) return null;
     
@@ -328,34 +328,63 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
         className="absolute inset-0 z-20 overflow-hidden pointer-events-none"
         aria-hidden="true"
       >
-        {/* Base dark overlay */}
-        <div className="absolute inset-0 bg-background/30" />
+        {/* Darker overlay for better contrast */}
+        <div className="absolute inset-0 bg-black/60" />
         
-        {/* Shimmer effect */}
+        {/* Shimmer effect - more visible */}
         <div 
           className="absolute inset-0 -translate-x-full animate-shimmer"
           style={{
-            background: 'linear-gradient(90deg, transparent 0%, hsl(var(--foreground) / 0.08) 50%, transparent 100%)',
-            animationDuration: '1.5s',
+            background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%)',
+            animationDuration: '1.8s',
             animationIterationCount: 'infinite',
           }}
         />
         
-        {/* Loading indicator */}
+        {/* Enhanced Loading indicator */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="flex flex-col items-center gap-3">
-            {/* Animated spinner */}
-            <div className="relative w-12 h-12">
-              <div className="absolute inset-0 rounded-full border-2 border-foreground/10" />
+          <div className="flex flex-col items-center gap-5">
+            {/* Larger, more prominent spinner with glow effect */}
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20">
+              {/* Outer glow ring */}
               <div 
-                className="absolute inset-0 rounded-full border-2 border-transparent border-t-foreground/40 animate-spin"
-                style={{ animationDuration: '1s' }}
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: 'radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%)',
+                  transform: 'scale(1.5)',
+                }}
               />
+              {/* Background ring */}
+              <div className="absolute inset-0 rounded-full border-[3px] border-white/20" />
+              {/* Spinning arc - primary color */}
+              <div 
+                className="absolute inset-0 rounded-full border-[3px] border-transparent border-t-white/90 border-r-white/40 animate-spin"
+                style={{ animationDuration: '0.8s' }}
+              />
+              {/* Inner dot pulse */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div 
+                  className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-white/80 animate-pulse"
+                  style={{ animationDuration: '1s' }}
+                />
+              </div>
             </div>
-            {/* Loading text */}
-            <span className="text-xs text-foreground/40 font-light tracking-widest uppercase">
-              Loading
-            </span>
+            {/* Loading text - larger and more visible */}
+            <div className="flex flex-col items-center gap-1.5">
+              <span className="text-sm sm:text-base text-white/90 font-medium tracking-[0.2em] uppercase">
+                Loading
+              </span>
+              {/* Animated dots */}
+              <div className="flex gap-1.5">
+                {[0, 1, 2].map((i) => (
+                  <div
+                    key={i}
+                    className="w-1.5 h-1.5 rounded-full bg-white/70 animate-bounce"
+                    style={{ animationDelay: `${i * 0.15}s`, animationDuration: '0.6s' }}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
