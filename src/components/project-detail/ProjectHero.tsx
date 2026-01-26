@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import KeyResultMarquee from "./KeyResultMarquee";
+import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 
 interface ProjectHeroProps {
   project: {
@@ -39,68 +40,47 @@ const mobileTagPositions = [
 
 const ProjectHero = ({ project, websiteUrl }: ProjectHeroProps) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [isVideoReady, setIsVideoReady] = useState(false);
-  const [hasVideoError, setHasVideoError] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
-  const tryPlay = (video: HTMLVideoElement) => {
-    const attempt = () => video.play().catch(() => {});
-    attempt();
-    setTimeout(attempt, 120);
-    setTimeout(attempt, 350);
-  };
-
   const services = project.services || [];
 
   // Use bgImage as fallback poster
   const posterImage = project.bgImage || "/images/hero-poster.jpg";
 
+  const {
+    videoRef,
+    isVideoReady,
+    hasVideoError,
+    shouldDisableVideo,
+    videoProps,
+    posterProps,
+    ShimmerOverlay,
+  } = useVideoPlayer({
+    src: project.bgVideo || '',
+    poster: posterImage,
+  });
+
   return (
     <div className="relative h-full min-h-screen flex flex-col justify-between overflow-hidden">
       {/* Fallback poster - always visible as base layer */}
       <img
-        src={posterImage}
-        alt=""
+        {...posterProps}
         className="absolute inset-0 w-full h-full object-cover z-0"
-        loading="eager"
-        style={{
-          opacity: project.bgVideo && isVideoReady && !hasVideoError ? 0 : 1,
-          transition: "opacity 180ms ease",
-        }}
       />
+
+      {/* Shimmer loading overlay */}
+      <ShimmerOverlay />
       
       {/* Background Layer - Video */}
-      {project.bgVideo && !hasVideoError && (
-        <video 
-          autoPlay 
-          loop 
-          muted 
-          playsInline
-          webkit-playsinline="true"
-          x5-playsinline="true"
-          x5-video-player-type="h5"
-          preload="auto"
-          poster={posterImage}
-          disablePictureInPicture
-          controls={false}
-          aria-hidden="true"
-          tabIndex={-1}
+      {project.bgVideo && !shouldDisableVideo && !hasVideoError && (
+        <video
+          ref={videoRef}
+          {...videoProps}
           className="absolute inset-0 w-full h-full object-cover z-10"
-          style={{
-            opacity: isVideoReady ? 1 : 0,
-            transition: "opacity 180ms ease",
-          }}
-          onLoadedMetadata={(e) => {
-            setIsVideoReady(true);
-            tryPlay(e.currentTarget);
-          }}
-          onCanPlay={(e) => tryPlay(e.currentTarget)}
-          onLoadedData={() => setIsVideoReady(true)}
-          onError={() => setHasVideoError(true)}
         >
           <source src={`${project.bgVideo}#t=0.001`} type="video/mp4" />
         </video>

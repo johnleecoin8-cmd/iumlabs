@@ -52,35 +52,50 @@ const mobileFloatingTags = [{
   position: "top-[12%] right-[3%]"
 }];
 
-// Video component with poster fallback
+import { useVideoPlayer } from "@/hooks/useVideoPlayer";
+
+// Video component with poster fallback using useVideoPlayer hook
 const ContactHeroVideo = () => {
+  const {
+    videoRef,
+    isVideoReady,
+    hasVideoError,
+    shouldDisableVideo,
+    videoProps,
+    posterProps,
+    ShimmerOverlay,
+  } = useVideoPlayer({
+    src: '/videos/services-background.mp4',
+    poster: '/images/contact-hero-poster.jpg',
+  });
+
   return (
     <>
       {/* Poster image shown while video loads */}
       <img
-        src="/images/contact-hero-poster.jpg"
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: "brightness(0.35)" }}
-      />
-      <video 
-        autoPlay 
-        muted 
-        loop 
-        playsInline
-        webkit-playsinline="true"
-        x5-playsinline="true"
-        x5-video-player-type="h5"
-        preload="auto"
-        poster="/images/contact-hero-poster.jpg"
-        className="absolute inset-0 w-full h-full object-cover"
-        style={{ filter: "brightness(0.35)" }}
-        onLoadedData={(e) => {
-          (e.currentTarget as HTMLVideoElement).play().catch(() => {});
+        {...posterProps}
+        style={{ 
+          ...posterProps.style,
+          filter: "brightness(0.35)",
         }}
-      >
-        <source src="/videos/services-background.mp4#t=0.001" type="video/mp4" />
-      </video>
+      />
+
+      {/* Shimmer loading overlay */}
+      <ShimmerOverlay />
+
+      {!shouldDisableVideo && !hasVideoError && (
+        <video
+          ref={videoRef}
+          {...videoProps}
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ 
+            ...videoProps.style,
+            filter: "brightness(0.35)",
+          }}
+        >
+          <source src="/videos/services-background.mp4#t=0.001" type="video/mp4" />
+        </video>
+      )}
     </>
   );
 };
