@@ -1240,3 +1240,31 @@
     transform: none !important;
   }
 }
+
+/* Mobile dark scrollbar */
+@media (max-width: 1023px) {
+  /* Global dark scrollbar for mobile */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(30, 30, 30, 0.8);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(50, 50, 50, 0.9);
+  }
+  
+  /* Firefox dark scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(30, 30, 30, 0.8) rgba(0, 0, 0, 0.2);
+  }
+}
