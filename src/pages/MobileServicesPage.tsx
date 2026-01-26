@@ -18,6 +18,7 @@ import { useCountUp } from "@/hooks/useCountUp";
 import ContactFormSection from "@/components/ContactFormSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
+import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 import Navbar from "@/components/Navbar";
 import { brand } from "@/config/content";
 
@@ -434,8 +435,18 @@ const ServiceCard = ({
 };
 
 const MobileServicesPage = () => {
-  const heroVideoRef = useRef<HTMLVideoElement>(null);
-  const [heroVideoLoaded, setHeroVideoLoaded] = useState(false);
+  const {
+    videoRef: heroVideoRef,
+    isVideoReady: heroVideoLoaded,
+    hasVideoError: heroVideoError,
+    shouldDisableVideo: heroShouldDisable,
+    videoProps: heroVideoProps,
+    posterProps: heroPosterProps,
+    ShimmerOverlay: HeroShimmerOverlay,
+  } = useVideoPlayer({
+    src: '/videos/services-hero.mp4',
+    poster: '/images/hero-poster.jpg',
+  });
   
   return (
     <div className="min-h-screen bg-background">
@@ -448,38 +459,30 @@ const MobileServicesPage = () => {
             <div className="absolute inset-0 overflow-hidden">
               {/* Poster fallback */}
               <img
-                src="/images/hero-poster.jpg"
-                alt=""
-                className={cn(
-                   "absolute inset-0 w-full h-full object-cover transition-opacity duration-200",
-                  heroVideoLoaded ? "opacity-0" : "opacity-100"
-                )}
-                style={{ filter: "brightness(0.35)" }}
+                {...heroPosterProps}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ 
+                  ...heroPosterProps.style,
+                  filter: "brightness(0.35)",
+                }}
               />
-              <video
-                ref={heroVideoRef}
-                autoPlay
-                muted
-                loop
-                playsInline
-                webkit-playsinline="true"
-                x5-playsinline="true"
-                x5-video-player-type="h5"
-                preload="auto"
-                poster="/images/hero-poster.jpg"
-                disablePictureInPicture
-                controls={false}
-                aria-hidden="true"
-                tabIndex={-1}
-                onLoadedData={() => setHeroVideoLoaded(true)}
-                className={cn(
-                   "absolute inset-0 w-full h-full object-cover transition-opacity duration-200",
-                  heroVideoLoaded ? "opacity-100" : "opacity-0"
-                )}
-                style={{ filter: "brightness(0.35)" }}
-              >
-                <source src="/videos/services-hero.mp4" type="video/mp4" />
-              </video>
+
+              {/* Shimmer loading overlay */}
+              <HeroShimmerOverlay />
+
+              {!heroShouldDisable && !heroVideoError && (
+                <video
+                  ref={heroVideoRef}
+                  {...heroVideoProps}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ 
+                    ...heroVideoProps.style,
+                    filter: "brightness(0.35)",
+                  }}
+                >
+                  <source src="/videos/services-hero.mp4" type="video/mp4" />
+                </video>
+              )}
               
               {/* Dark overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />

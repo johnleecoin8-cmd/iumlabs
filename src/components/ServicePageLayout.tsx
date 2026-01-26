@@ -11,6 +11,7 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import CalendlyButton from "@/components/CalendlyButton";
 import SectionHeader from "@/components/SectionHeader";
 import { useCountUp } from "@/hooks/useCountUp";
+import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 import {
   Accordion,
   AccordionContent,
@@ -177,11 +178,23 @@ const ServicePageLayout = ({
 }: ServicePageLayoutProps) => {
   const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
-  const [videoLoaded, setVideoLoaded] = useState(false);
   const isMobile = useIsMobile();
 
   // Generate poster path from video path if not provided
   const defaultPosterSrc = posterSrc || (videoSrc ? videoSrc.replace('/videos/', '/images/posters/').replace('.mp4', '.jpg') : '/images/hero-poster.jpg');
+
+  const {
+    videoRef,
+    isVideoReady: videoLoaded,
+    hasVideoError,
+    shouldDisableVideo,
+    videoProps,
+    posterProps,
+    ShimmerOverlay,
+  } = useVideoPlayer({
+    src: videoSrc,
+    poster: defaultPosterSrc,
+  });
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 800);
@@ -219,30 +232,32 @@ const ServicePageLayout = ({
           {/* Background Layer - Video with Fallback */}
           <div className="absolute inset-0 overflow-hidden">
             {/* Fallback Image - 즉시 표시 */}
-            <div 
-              className="absolute inset-0 bg-cover bg-center"
+            <img
+              {...posterProps}
+              className="absolute inset-0 w-full h-full object-cover"
               style={{ 
-                backgroundImage: `url('${defaultPosterSrc}')`,
+                ...posterProps.style,
                 filter: "brightness(0.35)"
               }}
             />
+
+            {/* Shimmer loading overlay */}
+            <ShimmerOverlay />
             
-            {/* Video - 데스크탑에서만, 로딩 후 fade-in */}
+            {/* Video - 로딩 후 fade-in */}
+            {!shouldDisableVideo && !hasVideoError && (
               <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="metadata"
-                poster={defaultPosterSrc}
-                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
-                  videoLoaded ? 'opacity-100' : 'opacity-0'
-                }`}
-                style={{ filter: "brightness(0.35)" }}
-                onLoadedData={() => setVideoLoaded(true)}
+                ref={videoRef}
+                {...videoProps}
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ 
+                  ...videoProps.style,
+                  filter: "brightness(0.35)"
+                }}
               >
                 <source src={videoSrc} type="video/mp4" />
               </video>
+            )}
             
             {/* Dark overlay gradient - 강도 조절 */}
             <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.5)] via-[hsl(0,0%,4%,0.2)] to-[hsl(0,0%,4%,0.95)]" />

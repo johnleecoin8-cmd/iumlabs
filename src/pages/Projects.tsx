@@ -1,4 +1,4 @@
-import { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -8,6 +8,7 @@ import FooterLinksSection from "@/components/FooterLinksSection";
 import CTABannerSection from "@/components/CTABannerSection";
 import FloatingContactButton from "@/components/FloatingContactButton";
 import SEOHead from "@/components/SEOHead";
+import { useVideoPlayer } from "@/hooks/useVideoPlayer";
 
 import { ArrowRight, Calendar, ChevronDown, ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -592,6 +593,26 @@ const Projects = () => {
   const [activeCategory, setActiveCategory] = useState("All");
   const [isStatsVisible, setIsStatsVisible] = useState(false);
 
+  const {
+    videoRef: heroVideoRef,
+    isVideoReady: heroVideoLoaded,
+    hasVideoError: heroVideoError,
+    shouldDisableVideo: heroShouldDisable,
+    videoProps: heroVideoProps,
+    posterProps: heroPosterProps,
+    ShimmerOverlay: HeroShimmerOverlay,
+  } = useVideoPlayer({
+    src: '/videos/projects-hero.mp4',
+    poster: '/images/projects-hero-poster.jpg',
+  });
+
+  // Trigger stats visibility when video loads
+  useEffect(() => {
+    if (heroVideoLoaded) {
+      setTimeout(() => setIsStatsVisible(true), 300);
+    }
+  }, [heroVideoLoaded]);
+
   // Fetch projects from database + first gallery image (display_order asc)
   const { data: dbProjects } = useQuery({
     queryKey: ["projects"],
@@ -689,33 +710,30 @@ const Projects = () => {
             <div className="absolute inset-0 overflow-hidden">
               {/* Poster image shown while video loads */}
               <img
-                src="/images/projects-hero-poster.jpg"
-                alt=""
+                {...heroPosterProps}
                 className="absolute inset-0 w-full h-full object-cover"
-                style={{ filter: "brightness(0.35)" }}
+                style={{ 
+                  ...heroPosterProps.style,
+                  filter: "brightness(0.35)",
+                }}
               />
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                webkit-playsinline="true"
-                x5-playsinline="true"
-                x5-video-player-type="h5"
-                preload="auto"
-                poster="/images/projects-hero-poster.jpg"
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ filter: "brightness(0.35)" }}
-                onLoadedData={(e) => {
-                  e.currentTarget.play().catch(() => {});
-                }}
-                onLoadedMetadata={(e) => {
-                  e.currentTarget.currentTime = 0;
-                  setTimeout(() => setIsStatsVisible(true), 800);
-                }}
-              >
-                <source src="/videos/projects-hero.mp4" type="video/mp4" />
-              </video>
+
+              {/* Shimmer loading overlay */}
+              <HeroShimmerOverlay />
+
+              {!heroShouldDisable && !heroVideoError && (
+                <video
+                  ref={heroVideoRef}
+                  {...heroVideoProps}
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ 
+                    ...heroVideoProps.style,
+                    filter: "brightness(0.35)",
+                  }}
+                >
+                  <source src="/videos/projects-hero.mp4" type="video/mp4" />
+                </video>
+              )}
               
               {/* Dark overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-b from-[hsl(0,0%,4%,0.3)] via-transparent to-[hsl(0,0%,4%,0.95)]" />
