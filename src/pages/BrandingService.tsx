@@ -95,10 +95,10 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 10, label: "Brands Built", suffix: "+" },
-  { value: 15, label: "Sites Live", suffix: "+" },
-  { value: 4, label: "Avg. Launch", suffix: " Weeks" },
-  { value: 95, label: "Happy Clients", suffix: "%" },
+  { value: 14, label: "Brands Delivered", suffix: "" },
+  { value: 21, label: "Websites Launched", suffix: "" },
+  { value: 3.5, label: "Avg. Project Duration", suffix: " Weeks" },
+  { value: 98, label: "Client Satisfaction", suffix: "%" },
 ];
 
 const processSteps: ProcessStep[] = [

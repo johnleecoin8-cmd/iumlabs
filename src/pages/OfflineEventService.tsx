@@ -139,10 +139,10 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 20, label: "Events Hosted", suffix: "+" },
-  { value: 2000, label: "Total Guests", suffix: "+" },
-  { value: 70, label: "Top KOLs Involved", suffix: "+" },
-  { value: 20, label: "Media Partners", suffix: "+" },
+  { value: 23, label: "Events Produced", suffix: "" },
+  { value: 2847, label: "Total Attendees", suffix: "" },
+  { value: 156, label: "KOLs & VIPs Hosted", suffix: "" },
+  { value: 94, label: "Post-Event Satisfaction", suffix: "%" },
 ];
 
 const processSteps: ProcessStep[] = [

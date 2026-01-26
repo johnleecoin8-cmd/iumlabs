@@ -32,19 +32,19 @@ const serviceTags: ServiceTag[] = [{
   label: "AI Automation"
 }];
 const stats: ServiceStat[] = [{
-  value: 15,
-  label: "Communities Built",
-  suffix: "+"
+  value: 18,
+  label: "Communities Managed",
+  suffix: ""
 }, {
-  value: 80,
-  label: "Members Managed",
+  value: 127,
+  label: "Total Members Engaged",
   suffix: "K+"
 }, {
-  value: 24,
-  label: "Active Coverage",
-  suffix: "/7"
+  value: 6.8,
+  label: "Avg. Daily Active Rate",
+  suffix: "%"
 }, {
-  value: 95,
+  value: 92,
   label: "Member Retention",
   suffix: "%"
 }];

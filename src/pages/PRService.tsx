@@ -33,19 +33,19 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [{
-  value: 50,
-  label: "Major Articles Published",
-  suffix: "+"
+  value: 64,
+  label: "Articles Published",
+  suffix: ""
 }, {
-  value: 20,
-  label: "Elite Media Partners",
-  suffix: "+"
+  value: 18,
+  label: "Media Partners",
+  suffix: ""
 }, {
-  value: 5,
-  label: "Total Combined Reach",
-  suffix: "M+"
+  value: 3.2,
+  label: "Avg. Article Reach",
+  suffix: "M"
 }, {
-  value: 90,
+  value: 87,
   label: "Coverage Success Rate",
   suffix: "%"
 }];
