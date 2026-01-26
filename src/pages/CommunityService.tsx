@@ -221,11 +221,11 @@ const CommunityService = () => {
   }, [currentMessages.length]);
   return <ServicePageLayout serviceName="Community Management" serviceTitle="Community" serviceSubtitle="Management" serviceDescription="Build a community that never sleeps. From Discord and Telegram to Korea's local hubs, we use AI-powered automation and 24/7 moderation to keep your members engaged, happy, and hyped." serviceIcon={Users} serviceTags={serviceTags} stats={stats} accentColor={ACCENT_COLOR} videoSrc="/videos/community-hero.mp4" posterSrc="/images/posters/community-hero.jpg" processSteps={processSteps} deliverables={deliverables} faqItems={faqItems} currentSlug="community">
       {/* Platform Preview Section */}
-      <section className="scroll-reveal bg-[#0F0F0F]">
-        <div className="border-t border-white/10">
+      <section className="bg-[#0A0A0A]">
+        <div className="border-t border-white/[0.06]">
           <SectionHeader title="Platform Management" badge="Best of Both Worlds" />
           
-          <div className="py-10 md:py-14">
+          <div className="py-8 sm:py-12 md:py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-stretch">
                 {/* Left - Description */}

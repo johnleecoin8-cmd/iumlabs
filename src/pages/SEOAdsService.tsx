@@ -201,11 +201,11 @@ const SEOAdsService = () => {
       currentSlug="seo-ads"
     >
       {/* 4-Week Program Journey Section */}
-      <section className="scroll-reveal bg-[#0F0F0F]">
-        <div className="border-t border-white/10">
+      <section className="bg-[#0A0A0A]">
+        <div className="border-t border-white/[0.06]">
           <SectionHeader title="4-Week Program" badge="Growth Journey" />
           
-          <div className="py-10 md:py-14">
+          <div className="py-8 sm:py-12 md:py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                 {/* Left - Phase Navigation */}
@@ -241,10 +241,10 @@ const SEOAdsService = () => {
                         <button
                           key={phase.week}
                           onClick={() => setActivePhase(index)}
-                          className={`w-full text-left p-4 rounded-xl border transition-all duration-300 hover:translate-x-1 active:scale-[0.98] flex-1 ${
+                          className={`w-full text-left p-4 rounded-2xl border transition-all duration-300 flex-1 ${
                             isActive 
-                              ? 'bg-amber-500/10 border-amber-500/30' 
-                              : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
+                              ? 'bg-amber-500/[0.08] border-amber-500/30' 
+                              : 'bg-[#0D0D0D] border-white/[0.06] hover:border-white/[0.12]'
                           }`}
                         >
                           <div className="flex items-center gap-4">
@@ -271,7 +271,7 @@ const SEOAdsService = () => {
                 {/* Right - Phase Details */}
                 <div
                   key={activePhase}
-                  className="bg-white/5 border border-white/10 rounded-2xl p-5 sm:p-6 md:p-8"
+                  className="bg-[#0D0D0D] border border-white/[0.06] rounded-2xl p-5 sm:p-6 md:p-8"
                 >
                   <div className="flex items-center gap-2.5 mb-5">
                     <div className="w-10 h-10 rounded-lg bg-amber-500/20 flex items-center justify-center">

@@ -254,17 +254,17 @@ const InfluencerService = () => {
       currentSlug="influencer"
     >
       {/* KOL Network Section */}
-      <section className="scroll-reveal bg-[#0F0F0F]">
-        <div className="border-t border-white/10">
+      <section className="bg-[#0A0A0A]">
+        <div className="border-t border-white/[0.06]">
           <SectionHeader title="Featured Creators" badge="Global & Local Legends" />
           
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-4">
-            <p className="text-white/60 text-sm max-w-3xl">
+            <p className="text-white/50 text-sm max-w-3xl">
               From global giants like Pentoshi, Cobie, and Miles Deutscher to the most influential voices in the Korean market, we provide direct access to the creators who move the needle.
             </p>
           </div>
 
-          <div className="py-8 md:py-12">
+          <div className="py-8 sm:py-12 md:py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               {/* Featured KOLs Carousel */}
               <div className="mb-12">
@@ -292,7 +292,7 @@ const InfluencerService = () => {
                     href={`https://x.com/${featuredKOLs[featuredIndex].handle.replace('@', '')}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-6 p-6 rounded-2xl border border-white/10 bg-white/5 hover:border-amber-500/50 transition-all block"
+                    className="flex items-center gap-6 p-6 rounded-2xl border border-white/[0.06] bg-[#0D0D0D] hover:border-white/[0.12] transition-all duration-300 block"
                   >
                     <div 
                       className="w-20 h-20 rounded-full overflow-hidden border-2 flex-shrink-0"

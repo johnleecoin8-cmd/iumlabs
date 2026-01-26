@@ -445,23 +445,23 @@ const PRService = () => {
       currentSlug="pr"
     >
       {/* Live News Distribution Section */}
-      <section className="scroll-reveal bg-[#0F0F0F] relative overflow-hidden">
+      <section className="bg-[#0A0A0A] relative overflow-hidden">
         {/* Background glow effect */}
         <div 
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full blur-[120px] opacity-20 pointer-events-none"
           style={{ background: `radial-gradient(circle, ${ACCENT_COLOR} 0%, transparent 70%)` }}
         />
         
-        <div className="border-t border-white/10 relative z-10">
+        <div className="border-t border-white/[0.06] relative z-10">
           <SectionHeader title="Distribution Network" badge="Global Reach, Local Depth" />
           
           <div className="container mx-auto px-4 sm:px-6 lg:px-16 py-4">
-            <p className="text-white/60 text-sm max-w-3xl">
+            <p className="text-white/50 text-sm max-w-3xl">
               We don't just send cold emails. We have direct lines to editors at CoinDesk and Cointelegraph, alongside dominant Korean outlets like Blockmedia, Coinness, and TokenPost.
             </p>
           </div>
           
-          <div className="py-10 md:py-14">
+          <div className="py-8 sm:py-12 md:py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               <div className="max-w-4xl mx-auto">
                 <LiveNewsDistribution />
