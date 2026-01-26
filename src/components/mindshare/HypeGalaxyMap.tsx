@@ -36,6 +36,7 @@ interface HypeGalaxyMapProps {
     rank: number;
     sparkline?: number[];
     logo_url?: string | null;
+    periods_found?: string[];
   }[];
 }
 
@@ -93,6 +94,37 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
     // 각 프로젝트의 sparkline 보정
     const normalizedProjects = projects.map((project, idx) => {
       const existingSparkline = project.sparkline || [];
+
+      // NEW 프로젝트(1~2 기간에만 등장)는 "0에서 갑자기 등장"하는 그래프가 되도록
+      // 앞 구간을 0으로 채우고, 마지막 3포인트만 상승하도록 구성한다.
+      const periodsFound = project.periods_found || [];
+      const isNewProject = periodsFound.length > 0 && periodsFound.length <= 2;
+      if (isNewProject) {
+        const POINTS = 14;
+        const appearPoints = 3; // 1/24~현재(대략 3일) 표현
+        const zeros = Math.max(0, POINTS - appearPoints);
+
+        const seededRandom = (s: number) => {
+          const x = Math.sin(s) * 10000;
+          return x - Math.floor(x);
+        };
+
+        const base = Math.max(0, Number(project.score) || 0);
+        const ramp = Array.from({ length: appearPoints }, (_, i) => {
+          const t = (i + 1) / appearPoints;
+          const noise = (seededRandom(project.ticker.charCodeAt(0) * 100 + idx * 7 + i * 13) - 0.5) * 0.06 * base;
+          const v = Math.max(0, base * t + noise);
+          return Math.round(v * 100) / 100;
+        });
+
+        // 마지막 값은 현재 스코어에 고정
+        ramp[appearPoints - 1] = base;
+
+        return {
+          ...project,
+          normalizedSparkline: [...Array(zeros).fill(0), ...ramp],
+        };
+      }
       
       // sparkline이 충분하지 않으면 자연스러운 데이터 생성
       if (existingSparkline.length < 3) {
