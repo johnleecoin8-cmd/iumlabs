@@ -31,6 +31,14 @@ const getValidSparklineData = (sparkline: number[] | null): number[] => {
   return sparkline.slice(0, lastValidIndex + 1);
 };
 
+const normalizeTrend = (trend: string | null | undefined): 'up' | 'down' | 'neutral' => {
+  if (trend === 'up' || trend === 'down' || trend === 'neutral') return trend;
+  // Back-compat (some older code paths use these labels)
+  if (trend === 'positive') return 'up';
+  if (trend === 'negative') return 'down';
+  return 'neutral';
+};
+
 const calculateTrendFromSparkline = (sparkline: number[] | null): 'up' | 'down' | 'neutral' => {
   const validData = getValidSparklineData(sparkline);
   if (validData.length < 3) return 'neutral';
@@ -121,7 +129,9 @@ const KInfluenceGrid = () => {
     
     const projectsWithData = sliced.map(project => {
       const sparkline = project.sparkline || [];
-      const calculatedTrend = calculateTrendFromSparkline(sparkline);
+      // IMPORTANT: use backend-provided trend as the source of truth.
+      // The sparkline can be interpolated/variant-adjusted, which may bias client-side trend inference.
+      const calculatedTrend = normalizeTrend(project.trend);
       const calculatedChange = project.mindshare_change ?? calculateMindshareChange(sparkline);
       const trendingScore = getTrendingScore(sparkline);
       const potentiallyTrending = isTrending(sparkline);
