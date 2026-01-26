@@ -187,75 +187,75 @@ const KInfluenceGrid = () => {
 
 
   return (
-    <div className="min-h-screen bg-[#0a0a0b]">
-      {/* Background gradient */}
+    <div className="min-h-screen bg-[#0a0a0b] pb-safe">
+      {/* Background gradient - simplified on mobile */}
       <div className="fixed inset-0 bg-gradient-to-br from-teal-950/10 via-transparent to-violet-950/5 pointer-events-none" />
 
       <div className="relative max-w-[1920px] mx-auto">
-        {/* Header Section - Clean DeSpread style */}
-        <header className="sticky top-0 z-40 backdrop-blur-xl bg-[#0a0a0b]/80 border-b border-white/[0.06]">
-          <div className="px-4 sm:px-6 lg:px-8">
-            {/* Top row: Title + Last Updated */}
-            <div className="flex items-center justify-between py-4 sm:py-5">
-              <div className="flex items-center gap-3">
-                <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-white tracking-tight">
-                  Korean Community Mindshare
+        {/* Header Section - Mobile optimized */}
+        <header className="sticky top-0 z-40 backdrop-blur-xl bg-[#0a0a0b]/90 border-b border-white/[0.06]">
+          <div className="px-3 sm:px-6 lg:px-8">
+            {/* Top row: Title + Live indicator */}
+            <div className="flex items-center justify-between py-3 sm:py-5">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <h1 className="text-sm sm:text-xl lg:text-2xl font-bold text-white tracking-tight">
+                  K-Mindshare
                 </h1>
-                {/* Live indicator */}
-                <div className="flex items-center gap-1.5 px-2 py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
+                {/* Live indicator - compact on mobile */}
+                <div className="flex items-center gap-1 px-1.5 sm:px-2 py-0.5 sm:py-1 bg-teal-500/10 border border-teal-500/20 rounded-full">
                   <div className="relative">
-                    <div className="w-1.5 h-1.5 rounded-full bg-teal-400" />
-                    <div className="absolute inset-0 w-1.5 h-1.5 rounded-full bg-teal-400 animate-ping opacity-75" />
+                    <div className="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-teal-400" />
+                    <div className="absolute inset-0 w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-teal-400 animate-ping opacity-75" />
                   </div>
-                  <span className="text-[10px] sm:text-xs font-medium text-teal-400 uppercase tracking-wide">Live</span>
+                  <span className="text-[8px] sm:text-xs font-medium text-teal-400 uppercase tracking-wide">Live</span>
                 </div>
               </div>
               
-              {/* Last updated */}
+              {/* Last updated - hidden on mobile */}
               {lastUpdate && (
                 <div className="hidden sm:flex items-center gap-1.5 text-xs sm:text-sm text-white/40">
                   <Clock className="w-3.5 h-3.5" />
-                  <span>Last updated {formatDistanceToNow(lastUpdate, { addSuffix: false })} ago</span>
+                  <span>Updated {formatDistanceToNow(lastUpdate, { addSuffix: false })} ago</span>
                 </div>
               )}
             </div>
 
-            {/* Control row: Tabs + Timeframe + Search + Filter */}
-            <div className="flex items-center justify-between gap-3 pb-4">
-              {/* Left: View Toggle + Title */}
-              <div className="flex items-center gap-4">
-                {/* View Mode Toggle */}
-                <div className="flex items-center gap-1 bg-white/[0.02] rounded-lg p-1 border border-white/[0.06]">
+            {/* Control row: Mobile-first layout */}
+            <div className="flex items-center justify-between gap-2 sm:gap-3 pb-3 sm:pb-4">
+              {/* Left: View Toggle */}
+              <div className="flex items-center gap-2 sm:gap-4">
+                {/* View Mode Toggle - compact on mobile */}
+                <div className="flex items-center gap-0.5 sm:gap-1 bg-white/[0.02] rounded-lg p-0.5 sm:p-1 border border-white/[0.06]">
                   <button
                     onClick={() => setViewMode('treemap')}
                     className={cn(
-                      "flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200",
+                      "flex items-center gap-1 px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs font-medium rounded-md transition-all duration-200",
                       viewMode === 'treemap'
                         ? "bg-teal-500/20 text-teal-400 border border-teal-500/30"
                         : "text-white/40 hover:text-white/70 border border-transparent"
                     )}
                   >
-                    <LayoutGrid className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Treemap</span>
+                    <LayoutGrid className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
+                    <span className="hidden xs:inline sm:inline">Treemap</span>
                   </button>
                   <button
                     onClick={() => setViewMode('galaxy')}
                     className={cn(
-                      "flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-md transition-all duration-200",
+                      "flex items-center gap-1 px-2 sm:px-3 py-1.5 text-[10px] sm:text-xs font-medium rounded-md transition-all duration-200",
                       viewMode === 'galaxy'
                         ? "bg-violet-500/20 text-violet-400 border border-violet-500/30"
                         : "text-white/40 hover:text-white/70 border border-transparent"
                     )}
                   >
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span className="hidden sm:inline">Galaxy</span>
+                    <Sparkles className="w-3 sm:w-3.5 h-3 sm:h-3.5" />
+                    <span className="hidden xs:inline sm:inline">Galaxy</span>
                   </button>
                 </div>
 
-                <span className="text-sm font-semibold text-white/80 hidden sm:block">Top 20</span>
+                <span className="text-[10px] sm:text-sm font-semibold text-white/60 sm:text-white/80">Top 20</span>
 
-                {/* Channel stats - Dynamic */}
-                <div className="hidden md:flex items-center gap-3 text-xs">
+                {/* Channel stats - Hidden on mobile */}
+                <div className="hidden lg:flex items-center gap-3 text-xs">
                   <div className="flex items-center gap-2 px-3 py-1.5 bg-teal-500/5 rounded-lg border border-teal-500/20">
                     <div className="w-1.5 h-1.5 rounded-full bg-teal-400" />
                     <span className="text-teal-400 font-medium">774 Channels</span>
@@ -268,8 +268,8 @@ const KInfluenceGrid = () => {
               </div>
 
               {/* Right: Search + Token Filter */}
-              <div className="flex items-center gap-3">
-                {/* Search - Desktop */}
+              <div className="flex items-center gap-2 sm:gap-3">
+                {/* Search - Desktop only */}
                 <div className="relative hidden sm:block">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
                   <input
@@ -295,22 +295,22 @@ const KInfluenceGrid = () => {
                   )}
                 </div>
 
-                {/* Token status filter */}
+                {/* Token status filter - always visible */}
                 <TokenStatusToggle selected={tokenStatus} onChange={setTokenStatus} />
               </div>
             </div>
 
             {/* Mobile: Search row */}
-            <div className="sm:hidden pb-4">
+            <div className="sm:hidden pb-3">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/30" />
                 <input
                   type="text"
                   placeholder="Search projects..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className={cn(
-                    "w-full pl-10 pr-10 py-2.5 text-sm",
+                    "w-full pl-9 pr-9 py-2 text-xs",
                     "bg-white/[0.03] border border-white/[0.08] rounded-xl",
                     "text-white placeholder-white/30",
                     "focus:outline-none focus:border-teal-500/40",
@@ -320,9 +320,9 @@ const KInfluenceGrid = () => {
                 {searchQuery && (
                   <button 
                     onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-white/10 rounded-full transition-colors"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 active:scale-95 transition-transform"
                   >
-                    <X className="w-4 h-4 text-white/50" />
+                    <X className="w-3.5 h-3.5 text-white/50" />
                   </button>
                 )}
               </div>
@@ -330,8 +330,8 @@ const KInfluenceGrid = () => {
           </div>
         </header>
 
-        {/* Main Content - Treemap */}
-        <main className="px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
+        {/* Main Content - Mobile height optimized */}
+        <main className="px-2 sm:px-6 lg:px-8 py-2 sm:py-6">
           <AnimatePresence mode="wait">
             {isLoading ? (
               <motion.div
@@ -350,7 +350,7 @@ const KInfluenceGrid = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="h-[calc(100vh-280px)] sm:h-[calc(100vh-240px)] lg:h-[calc(100vh-200px)] min-h-[500px]"
+                className="h-[calc(100vh-180px)] sm:h-[calc(100vh-240px)] lg:h-[calc(100vh-200px)] min-h-[400px] sm:min-h-[500px]"
               >
                 {viewMode === 'treemap' ? (
                   <MindshareTreemap projects={treemapProjects} />
@@ -364,24 +364,24 @@ const KInfluenceGrid = () => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="flex items-center justify-center h-[500px]"
+                className="flex items-center justify-center h-[400px] sm:h-[500px]"
               >
                 <div className="text-center">
-                  <p className="text-white/40 text-lg">No projects found</p>
-                  <p className="text-white/25 text-sm mt-1">Try adjusting your filters</p>
+                  <p className="text-white/40 text-sm sm:text-lg">No projects found</p>
+                  <p className="text-white/25 text-xs sm:text-sm mt-1">Try adjusting your filters</p>
                 </div>
               </motion.div>
             )}
           </AnimatePresence>
         </main>
 
-        {/* Footer */}
-        <footer className="px-4 sm:px-6 lg:px-8 py-6 border-t border-white/[0.04]">
-          <div className="max-w-4xl mx-auto text-center space-y-3">
-            <p className="text-xs sm:text-sm text-white/30">
-              Tracking mindshare across Korean crypto communities — X, Telegram, Naver, KakaoTalk
+        {/* Footer - compact on mobile */}
+        <footer className="px-3 sm:px-6 lg:px-8 py-4 sm:py-6 border-t border-white/[0.04]">
+          <div className="max-w-4xl mx-auto text-center space-y-2 sm:space-y-3">
+            <p className="text-[10px] sm:text-sm text-white/30">
+              Tracking mindshare across Korean crypto communities
             </p>
-            <p className="text-[10px] sm:text-xs text-white/20 leading-relaxed">
+            <p className="text-[9px] sm:text-xs text-white/20 leading-relaxed hidden sm:block">
               Korean Community Mindshare is calculated based on total mention frequency and engagement metrics across major Korean crypto communities. Project affiliations and metadata are sourced from official websites and social profiles. Data updates every hour.
             </p>
           </div>
