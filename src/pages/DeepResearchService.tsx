@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import ServicePageLayout, { ServiceTag, ServiceStat, ProcessStep, Deliverable, FAQItem } from "@/components/ServicePageLayout";
+import SectionHeader from "@/components/SectionHeader";
 import BreadcrumbSchema from "@/components/BreadcrumbSchema";
 import ServiceSchema from "@/components/ServiceSchema";
 import { FileText, BarChart3, TrendingUp, Users, Newspaper, Share2, Search, PenTool, Send, ArrowRight, BookOpen, Mic2, Globe, Activity, Database, Wallet, ArrowUpRight, ArrowDownRight, Terminal } from "lucide-react";
@@ -611,139 +612,139 @@ const DeepResearchService = () => {
       currentSlug="deep-research"
     >
       {/* Research Focus Section */}
-      <section className="py-12 md:py-16 border-t border-white/10">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="text-center mb-8 md:mb-10">
-            <span className="text-xs font-medium tracking-wider uppercase mb-3 block" style={{ color: ACCENT_COLOR }}>
-              Beyond the Surface
-            </span>
-            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
-              Research Focus
-            </h2>
-            <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto">
-              What we analyze to give you the edge in the Korean market.
-            </p>
-          </div>
+      <section className="bg-[#0A0A0A]">
+        <div className="border-t border-white/[0.06]">
+          <SectionHeader title="Research Focus" badge="Beyond the Surface" />
+          
+          <div className="py-8 sm:py-12 md:py-16">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+              <p className="text-white/50 text-sm max-w-2xl mb-8">
+                What we analyze to give you the edge in the Korean market.
+              </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {researchFocusAreas.map((area, index) => {
-              const Icon = area.icon;
-              return (
-                <div 
-                  key={area.title}
-                  className="p-6 rounded-2xl border border-white/10 bg-white/[0.03] hover:border-cyan-500/30 transition-all"
-                >
-                  <div 
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-                    style={{ backgroundColor: `${ACCENT_COLOR}20` }}
-                  >
-                    <Icon className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">{area.title}</h3>
-                  <p className="text-sm text-white/60">{area.description}</p>
-                </div>
-              );
-            })}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {researchFocusAreas.map((area, index) => {
+                  const Icon = area.icon;
+                  return (
+                    <div 
+                      key={area.title}
+                      className="p-5 sm:p-6 rounded-2xl border border-white/[0.06] bg-[#0D0D0D] hover:border-white/[0.12] transition-all duration-300"
+                    >
+                      <div 
+                        className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                        style={{ backgroundColor: `${ACCENT_COLOR}20` }}
+                      >
+                        <Icon className="w-6 h-6" style={{ color: ACCENT_COLOR }} />
+                      </div>
+                      <h3 className="text-base font-semibold text-white mb-2">{area.title}</h3>
+                      <p className="text-sm text-white/50">{area.description}</p>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Interactive Research Dashboard Section */}
-      <section className="py-12 md:py-16 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
-        
-        <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-8 md:mb-10">
-            <span className="text-xs font-medium tracking-wider uppercase mb-3 block" style={{ color: ACCENT_COLOR }}>
-              Live Dashboard
-            </span>
-            <h2 className="text-xl md:text-2xl font-bold text-foreground mb-3">
-              Research That Drives Results
-            </h2>
-            <p className="text-xs sm:text-sm text-muted-foreground max-w-2xl mx-auto">
-              Explore our real-time market intelligence dashboard. From on-chain data to actionable insights, 
-              we deliver the analysis you need to succeed in the Korean market.
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            <ResearchDashboard />
+      <section className="bg-[#0A0A0A]">
+        <div className="border-t border-white/[0.06]">
+          <SectionHeader title="Research Dashboard" badge="Live Intelligence" />
+          
+          <div className="py-8 sm:py-12 md:py-16">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+              <p className="text-white/50 text-sm max-w-2xl mb-8">
+                Explore our real-time market intelligence dashboard. From on-chain data to actionable insights, 
+                we deliver the analysis you need to succeed in the Korean market.
+              </p>
+              
+              <div className="max-w-4xl">
+                <ResearchDashboard />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Distribution Flow Section */}
-      <section className="py-10 md:py-12">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="relative p-4 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border border-white/10 bg-white/[0.03] max-w-4xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 md:gap-8">
-              {/* Research Icon */}
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3" style={{
-                  backgroundColor: `${ACCENT_COLOR}20`
-                }}>
-                  <FileText className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" style={{ color: ACCENT_COLOR }} />
-                </div>
-                <span className="text-sm font-medium text-foreground">Research</span>
-              </div>
+      <section className="bg-[#0A0A0A]">
+        <div className="border-t border-white/[0.06]">
+          <SectionHeader title="Distribution Flow" badge="Multi-Channel" />
+          
+          <div className="py-8 sm:py-12 md:py-16">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+              <div className="relative p-4 sm:p-6 md:p-8 rounded-2xl border border-white/[0.06] bg-[#0D0D0D] max-w-4xl">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 md:gap-8">
+                  {/* Research Icon */}
+                  <div className="flex flex-col items-center">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3" style={{
+                      backgroundColor: `${ACCENT_COLOR}20`
+                    }}>
+                      <FileText className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" style={{ color: ACCENT_COLOR }} />
+                    </div>
+                    <span className="text-sm font-medium text-foreground">Research</span>
+                  </div>
 
-              {/* Arrow */}
-              <div className="hidden md:flex items-center">
-                <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4] to-[#06B6D4]/30" />
-                <Share2 className="w-5 h-5 mx-2" style={{ color: ACCENT_COLOR }} />
-                <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4]/30 to-[#06B6D4]" />
-              </div>
+                  {/* Arrow */}
+                  <div className="hidden md:flex items-center">
+                    <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4] to-[#06B6D4]/30" />
+                    <Share2 className="w-5 h-5 mx-2" style={{ color: ACCENT_COLOR }} />
+                    <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4]/30 to-[#06B6D4]" />
+                  </div>
 
-              {/* Distribution Channels */}
-              <div className="flex-1 max-w-sm w-full">
-                <div className="text-center mb-3 sm:mb-4">
-                  <span className="text-xs text-muted-foreground uppercase tracking-wider">
-                    Distributed Through
-                  </span>
-                </div>
-                <div className="grid grid-cols-3 gap-2 sm:gap-4">
-                  {distributionChannels.map((channel, index) => {
-                    const Icon = channel.icon;
-                    return (
-                      <div 
-                        key={channel.name} 
-                        className={`p-2.5 sm:p-4 rounded-lg sm:rounded-xl border-2 bg-background/50 text-center transition-all flex flex-col items-center gap-1.5 sm:gap-2 ${
-                          activeChannel === index ? 'scale-[1.08]' : ''
-                        }`} 
-                        style={{
-                          borderColor: activeChannel === index ? ACCENT_COLOR : 'rgba(255,255,255,0.1)'
-                        }}
-                      >
-                        <Icon 
-                          className="w-4 h-4 sm:w-5 sm:h-5" 
-                          style={{
-                            color: activeChannel === index ? ACCENT_COLOR : 'rgba(255,255,255,0.5)'
-                          }} 
-                        />
-                        <span className="text-[10px] sm:text-xs font-medium text-foreground">
-                          {channel.name}
-                        </span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
+                  {/* Distribution Channels */}
+                  <div className="flex-1 max-w-sm w-full">
+                    <div className="text-center mb-3 sm:mb-4">
+                      <span className="text-xs text-muted-foreground uppercase tracking-wider">
+                        Distributed Through
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-3 gap-2 sm:gap-4">
+                      {distributionChannels.map((channel, index) => {
+                        const Icon = channel.icon;
+                        return (
+                          <div 
+                            key={channel.name} 
+                            className={`p-2.5 sm:p-4 rounded-xl border-2 bg-[#0D0D0D] text-center transition-all flex flex-col items-center gap-1.5 sm:gap-2 ${
+                              activeChannel === index ? 'scale-[1.05]' : ''
+                            }`} 
+                            style={{
+                              borderColor: activeChannel === index ? ACCENT_COLOR : 'rgba(255,255,255,0.06)'
+                            }}
+                          >
+                            <Icon 
+                              className="w-4 h-4 sm:w-5 sm:h-5" 
+                              style={{
+                                color: activeChannel === index ? ACCENT_COLOR : 'rgba(255,255,255,0.5)'
+                              }} 
+                            />
+                            <span className="text-[10px] sm:text-xs font-medium text-foreground">
+                              {channel.name}
+                            </span>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
 
-              {/* Arrow */}
-              <div className="hidden md:flex items-center">
-                <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4] to-[#06B6D4]/30" />
-                <Newspaper className="w-5 h-5 mx-2" style={{ color: ACCENT_COLOR }} />
-                <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4]/30 to-[#06B6D4]" />
-              </div>
+                  {/* Arrow */}
+                  <div className="hidden md:flex items-center">
+                    <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4] to-[#06B6D4]/30" />
+                    <Newspaper className="w-5 h-5 mx-2" style={{ color: ACCENT_COLOR }} />
+                    <div className="w-16 h-0.5 bg-gradient-to-r from-[#06B6D4]/30 to-[#06B6D4]" />
+                  </div>
 
-              {/* Result */}
-              <div className="flex flex-col items-center">
-                <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3" style={{
-                  backgroundColor: `${ACCENT_COLOR}20`
-                }}>
-                  <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" style={{ color: ACCENT_COLOR }} />
+                  {/* Result */}
+                  <div className="flex flex-col items-center">
+                    <div className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-2 sm:mb-3" style={{
+                      backgroundColor: `${ACCENT_COLOR}20`
+                    }}>
+                      <TrendingUp className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" style={{ color: ACCENT_COLOR }} />
+                    </div>
+                    <span className="text-xs sm:text-sm font-medium text-foreground">Brand Authority</span>
+                  </div>
                 </div>
-                <span className="text-xs sm:text-sm font-medium text-foreground">Brand Authority</span>
               </div>
             </div>
           </div>
@@ -752,40 +753,45 @@ const DeepResearchService = () => {
 
       {/* Latest Research Preview Section */}
       {researchPosts && researchPosts.length > 0 && (
-        <section className="py-10 md:py-12 border-t border-white/10">
-          <div className="container mx-auto px-4 sm:px-6">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold text-white">Latest Research</h3>
-              <Link 
-                to="/research" 
-                className="text-sm text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
-              >
-                View All <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {researchPosts.map(post => (
-                <Link
-                  key={post.id}
-                  to={`/research/${post.slug}`}
-                  className="group p-4 rounded-xl border border-white/10 bg-white/[0.02] hover:border-cyan-500/50 transition-all"
-                >
-                  {post.image && (
-                    <div className="aspect-video rounded-lg overflow-hidden mb-3">
-                      <img 
-                        src={post.image} 
-                        alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                  )}
-                  <div className="text-xs text-cyan-400 mb-1">{post.category}</div>
-                  <h4 className="text-sm font-medium text-white group-hover:text-cyan-400 transition-colors line-clamp-2">
-                    {post.title}
-                  </h4>
-                  <div className="text-xs text-white/40 mt-2">{post.read_time}</div>
-                </Link>
-              ))}
+        <section className="bg-[#0A0A0A]">
+          <div className="border-t border-white/[0.06]">
+            <SectionHeader title="Latest Research" badge="Fresh Insights" />
+            
+            <div className="py-8 sm:py-12 md:py-16">
+              <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+                <div className="flex items-center justify-end mb-6">
+                  <Link 
+                    to="/research" 
+                    className="text-sm text-cyan-400 hover:text-cyan-300 flex items-center gap-1"
+                  >
+                    View All <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {researchPosts.map(post => (
+                    <Link
+                      key={post.id}
+                      to={`/research/${post.slug}`}
+                      className="group p-4 rounded-2xl border border-white/[0.06] bg-[#0D0D0D] hover:border-white/[0.12] transition-all duration-300"
+                    >
+                      {post.image && (
+                        <div className="aspect-video rounded-xl overflow-hidden mb-3">
+                          <img 
+                            src={post.image} 
+                            alt={post.title}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                      )}
+                      <div className="text-xs text-cyan-400 mb-1">{post.category}</div>
+                      <h4 className="text-sm font-medium text-white group-hover:text-cyan-400 transition-colors line-clamp-2">
+                        {post.title}
+                      </h4>
+                      <div className="text-xs text-white/40 mt-2">{post.read_time}</div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>

@@ -392,11 +392,11 @@ const OfflineEventService = () => {
       currentSlug="offline-event"
     >
       {/* Event Journey Section */}
-      <section className="scroll-reveal bg-[#0F0F0F]">
-        <div className="border-t border-white/10">
+      <section className="bg-[#0A0A0A]">
+        <div className="border-t border-white/[0.06]">
           <SectionHeader title="Event Journey" badge="4-Week Program" />
           
-          <div className="py-10 md:py-14">
+          <div className="py-8 sm:py-12 md:py-16">
             <div className="container mx-auto px-4 sm:px-6 lg:px-16">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
                 {/* Left - Seoul Map Visualization */}
@@ -415,7 +415,7 @@ const OfflineEventService = () => {
                   {journeyPhases.map((phase) => (
                     <div
                       key={phase.title}
-                      className="relative bg-white/[0.03] border border-white/10 rounded-xl p-4 hover:border-emerald-500/30 transition-all duration-300"
+                      className="relative bg-[#0D0D0D] border border-white/[0.06] rounded-2xl p-4 hover:border-white/[0.12] transition-all duration-300"
                     >
                       {/* Week Badge */}
                       <div 
