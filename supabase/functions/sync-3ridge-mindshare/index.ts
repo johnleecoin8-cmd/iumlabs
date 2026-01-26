@@ -404,7 +404,7 @@ Deno.serve(async (req) => {
       status: string; 
       adjustedRank: number; 
       trend: string; 
-      periodsFound: number;
+      periodsFound: string[];
       error?: string 
     }[] = [];
     
@@ -420,13 +420,12 @@ Deno.serve(async (req) => {
         // Determine trend based on sparkline history
         const trend = determineTrend(adjustedSparkline);
         
-        // Count how many periods this project appeared in
-        const periodsFound = [
-          project.mindshare_7d, 
-          project.mindshare_14d, 
-          project.mindshare_30d, 
-          project.mindshare_90d
-        ].filter(v => v !== null).length;
+        // Build periods_found array
+        const periodsFoundArray: string[] = [];
+        if (project.mindshare_7d !== null) periodsFoundArray.push('7D');
+        if (project.mindshare_14d !== null) periodsFoundArray.push('14D');
+        if (project.mindshare_30d !== null) periodsFoundArray.push('30D');
+        if (project.mindshare_90d !== null) periodsFoundArray.push('90D');
 
         const { error: upsertError } = await supabase
           .from("hype_projects")
@@ -441,6 +440,7 @@ Deno.serve(async (req) => {
             sparkline: adjustedSparkline,
             trend: trend,
             token_status: "tge",
+            periods_found: periodsFoundArray,
             updated_at: new Date().toISOString(),
           }, { onConflict: "ticker" });
 
@@ -450,7 +450,7 @@ Deno.serve(async (req) => {
             status: "error", 
             adjustedRank: project.adjustedRank,
             trend: trend,
-            periodsFound,
+            periodsFound: periodsFoundArray,
             error: upsertError.message 
           });
         } else {
@@ -459,7 +459,7 @@ Deno.serve(async (req) => {
             status: "success",
             adjustedRank: project.adjustedRank,
             trend: trend,
-            periodsFound,
+            periodsFound: periodsFoundArray,
           });
         }
       } catch (err) {
@@ -468,7 +468,7 @@ Deno.serve(async (req) => {
           status: "error",
           adjustedRank: 0,
           trend: 'neutral',
-          periodsFound: 0,
+          periodsFound: [],
           error: err instanceof Error ? err.message : "Unknown error" 
         });
       }

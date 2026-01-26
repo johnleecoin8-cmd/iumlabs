@@ -56,6 +56,7 @@ interface MindshareCellProps {
   price?: number | null;
   change24h?: number | null;
   topSource?: string | null;
+  periodsFound?: string[];
 }
 
 // Narrative badges (Softer pastel tones)
@@ -82,7 +83,11 @@ const MindshareCell = ({
   ticker, name, mindshare, mindshareChange, narrative, trend,
   tokenStatus = 'tge', sparkline = [], logoUrl, size, rank,
   onClick, isTrending = false, price, change24h, topSource,
+  periodsFound = [],
 }: MindshareCellProps) => {
+  
+  // Project is "new" if it only appears in 1-2 periods
+  const isNewProject = periodsFound.length > 0 && periodsFound.length <= 2;
 
   const effectiveSparkline = useMemo(() => {
     return ensureSparkline(sparkline, {
@@ -249,6 +254,11 @@ const MindshareCell = ({
                 )}>
                   {ticker}
                 </span>
+                {isNewProject && (
+                  <span className="px-1 py-0.5 text-[8px] font-bold rounded bg-gradient-to-r from-fuchsia-500 to-pink-500 text-white animate-pulse">
+                    NEW
+                  </span>
+                )}
                 {isTrending && <Zap className="w-3.5 h-3.5 text-teal-400 fill-teal-400/50" />}
               </div>
               <div className="flex items-center gap-1 mt-0.5">
