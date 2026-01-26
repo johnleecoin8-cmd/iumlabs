@@ -25,10 +25,10 @@ const serviceTags: ServiceTag[] = [
 ];
 
 const stats: ServiceStat[] = [
-  { value: 70, label: "Elite KOL Network", suffix: "+" },
-  { value: 15, label: "Total Combined Reach", suffix: "M+" },
-  { value: 15, label: "Successful Campaigns", suffix: "+" },
-  { value: 4, label: "Average Engagement Rate", suffix: "x" },
+  { value: 83, label: "Verified KOL Network", suffix: "" },
+  { value: 22.5, label: "Total Combined Reach", suffix: "M" },
+  { value: 36, label: "Campaigns Executed", suffix: "" },
+  { value: 4.7, label: "Avg. Engagement Rate", suffix: "%" },
 ];
 
 const processSteps: ProcessStep[] = [
