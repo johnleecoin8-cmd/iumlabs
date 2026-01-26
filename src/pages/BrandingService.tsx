@@ -14,6 +14,7 @@ import brandingWebsite from "@/assets/services/branding-website.png";
 // Portfolio - Bananago
 import bananagoLanding from "@/assets/portfolio/bananago-landing.png";
 import bananagoVideo from "@/assets/portfolio/bananago-video.png";
+import justinSunArticle from "@/assets/portfolio/justin-sun-article.png";
 
 // Campaign gallery images for marquee
 import openledgerEvent from "@/assets/campaigns/openledger-event.jpg";
@@ -147,6 +148,7 @@ const faqItems: FAQItem[] = [
 const galleryImages = [
   { src: bananagoLanding, alt: "Bananago Landing Page", project: "Bananago" },
   { src: bananagoVideo, alt: "Bananago Video Campaign", project: "Bananago" },
+  { src: justinSunArticle, alt: "Justin Sun Article Design", project: "Editorial" },
   { src: brandingPalace, alt: "Korean Palace Brand Concept", project: "Cultural Identity" },
   { src: brandingWebsite, alt: "Website Design Mockup", project: "Web Design" },
   { src: websiteCreative, alt: "Creative Website Layout", project: "UI/UX" },
@@ -278,7 +280,7 @@ const GalleryMarquee = () => {
         className="flex gap-4"
         animate={{ x: ['0%', '-33.33%'] }}
         transition={{
-          duration: 50,
+          duration: 16,
           ease: 'linear',
           repeat: Infinity,
         }}
