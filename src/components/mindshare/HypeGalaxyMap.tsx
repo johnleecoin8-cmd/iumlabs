@@ -263,15 +263,17 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
           </ResponsiveContainer>
         </div>
 
-        {/* 사이드바 범례 (데스크탑) - Custom scrollbar */}
+        {/* 사이드바 범례 (데스크탑) - Premium scrollbar */}
         <div 
-          className="hidden lg:block w-[200px] border-l border-white/[0.06] p-3 overflow-y-auto flex-shrink-0
-            [&::-webkit-scrollbar]:w-1
-            [&::-webkit-scrollbar-track]:bg-transparent
-            [&::-webkit-scrollbar-thumb]:bg-white/10
-            [&::-webkit-scrollbar-thumb]:rounded-full
-            [&::-webkit-scrollbar-thumb]:hover:bg-white/20
-            hover:[&::-webkit-scrollbar-thumb]:bg-white/15"
+          className="hidden lg:block w-[200px] border-l border-white/[0.06] p-3 overflow-y-auto flex-shrink-0 relative
+            [&::-webkit-scrollbar]:w-[6px]
+            [&::-webkit-scrollbar-track]:bg-gradient-to-b [&::-webkit-scrollbar-track]:from-white/[0.02] [&::-webkit-scrollbar-track]:to-white/[0.01] [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:my-2
+            [&::-webkit-scrollbar-thumb]:bg-gradient-to-b [&::-webkit-scrollbar-thumb]:from-teal-500/40 [&::-webkit-scrollbar-thumb]:via-violet-500/30 [&::-webkit-scrollbar-thumb]:to-teal-500/40
+            [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border [&::-webkit-scrollbar-thumb]:border-white/[0.08]
+            [&::-webkit-scrollbar-thumb]:shadow-[0_0_10px_rgba(20,184,166,0.3)]
+            hover:[&::-webkit-scrollbar-thumb]:from-teal-400/60 hover:[&::-webkit-scrollbar-thumb]:via-violet-400/50 hover:[&::-webkit-scrollbar-thumb]:to-teal-400/60
+            hover:[&::-webkit-scrollbar-thumb]:shadow-[0_0_15px_rgba(20,184,166,0.5)]
+            [&::-webkit-scrollbar-thumb]:transition-all"
         >
           <p className="text-[10px] text-muted-foreground/50 uppercase tracking-wider mb-3 px-1 sticky top-0 bg-background/95 backdrop-blur-sm py-1 -mt-1">
             Projects
