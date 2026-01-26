@@ -172,7 +172,13 @@ const HypeGalaxyMap: React.FC<HypeGalaxyMapProps> = ({ projects }) => {
           <p className="text-muted-foreground text-xs mb-3 font-mono border-b border-white/[0.06] pb-2">
             {label}
           </p>
-          <div className="space-y-1.5 max-h-[280px] overflow-y-auto">
+          <div className="space-y-1.5 max-h-[280px] overflow-y-auto
+            [&::-webkit-scrollbar]:w-[5px]
+            [&::-webkit-scrollbar-track]:bg-white/[0.02] [&::-webkit-scrollbar-track]:rounded-full
+            [&::-webkit-scrollbar-thumb]:bg-gradient-to-b [&::-webkit-scrollbar-thumb]:from-teal-500/50 [&::-webkit-scrollbar-thumb]:via-violet-500/40 [&::-webkit-scrollbar-thumb]:to-teal-500/50
+            [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:border [&::-webkit-scrollbar-thumb]:border-white/[0.1]
+            hover:[&::-webkit-scrollbar-thumb]:from-teal-400/70 hover:[&::-webkit-scrollbar-thumb]:via-violet-400/60 hover:[&::-webkit-scrollbar-thumb]:to-teal-400/70
+          ">
             {sortedPayload.slice(0, 10).map((p: any, idx: number) => {
               const project = projects.find(pr => pr.ticker === p.name);
               return (
