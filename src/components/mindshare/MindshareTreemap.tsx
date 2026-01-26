@@ -29,6 +29,8 @@ export interface MindshareProject {
   isTrending?: boolean;
   // Periods where project was found (for NEW badge)
   periods_found?: string[];
+  // Start date when project first appeared
+  start_date?: string | null;
 }
 
 interface MindshareTreemapProps {
@@ -220,6 +222,7 @@ const MindshareTreemap: React.FC<MindshareTreemapProps> = ({ projects, className
               price={node.data.price}
               change24h={node.data.change_24h}
               periodsFound={(node.data as MindshareProject).periods_found}
+              startDate={(node.data as MindshareProject).start_date}
               onClick={() => {
                 setSelectedProject(node.data);
                 setModalOpen(true);

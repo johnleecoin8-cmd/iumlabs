@@ -427,6 +427,35 @@ Deno.serve(async (req) => {
         if (project.mindshare_30d !== null) periodsFoundArray.push('30D');
         if (project.mindshare_90d !== null) periodsFoundArray.push('90D');
 
+        // Calculate start_date based on periods_found
+        // If project only appears in recent periods, set start_date accordingly
+        let startDate: string | null = null;
+        const today = new Date();
+        if (periodsFoundArray.length === 1 && periodsFoundArray[0] === '7D') {
+          // Only in 7D → appeared within last 7 days
+          const d = new Date(today);
+          d.setDate(d.getDate() - 3); // Approximate mid-point
+          startDate = d.toISOString().split('T')[0];
+        } else if (periodsFoundArray.length === 2 && 
+                   periodsFoundArray.includes('7D') && 
+                   periodsFoundArray.includes('14D') &&
+                   !periodsFoundArray.includes('30D')) {
+          // Only in 7D+14D → appeared within last 14 days
+          const d = new Date(today);
+          d.setDate(d.getDate() - 10); // Approximate mid-point
+          startDate = d.toISOString().split('T')[0];
+        }
+        // For projects in 30D or 90D, we assume they've been around longer (null = no special handling)
+
+        // Fetch existing start_date to not overwrite if already set
+        const { data: existingProject } = await supabase
+          .from("hype_projects")
+          .select("start_date")
+          .eq("ticker", project.ticker)
+          .single();
+
+        const finalStartDate = existingProject?.start_date || startDate;
+
         const { error: upsertError } = await supabase
           .from("hype_projects")
           .upsert({
@@ -441,6 +470,7 @@ Deno.serve(async (req) => {
             trend: trend,
             token_status: "tge",
             periods_found: periodsFoundArray,
+            start_date: finalStartDate,
             updated_at: new Date().toISOString(),
           }, { onConflict: "ticker" });
 

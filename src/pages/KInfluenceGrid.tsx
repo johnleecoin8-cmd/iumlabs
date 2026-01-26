@@ -155,6 +155,7 @@ const KInfluenceGrid = () => {
         twitter_url: project.twitter_url,
         website_url: project.website_url,
         periods_found: project.periods_found || [],
+        start_date: project.start_date || null,
         trendingScore,
         potentiallyTrending,
         isTrending: false,
