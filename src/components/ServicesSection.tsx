@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { cn } from "@/lib/utils";
 // Import service images
-import gtmImage from "@/assets/services/gtm-strategy.png";
-import websiteImage from "@/assets/services/website-creative.png";
-import eventsImage from "@/assets/services/offline-event.png";
-import communityImage from "@/assets/services/community-management.png";
-import kolImage from "@/assets/services/kol-avatars.png";
-import prImage from "@/assets/services/pr-media.jpg";
-import seoAdsImage from "@/assets/services/seo-ads.jpg";
+import gtmImage from "@/assets/services/gtm-strategy.webp";
+import websiteImage from "@/assets/services/website-creative.webp";
+import eventsImage from "@/assets/services/offline-event.webp";
+import communityImage from "@/assets/services/community-management.webp";
+import kolImage from "@/assets/services/kol-avatars.webp";
+import prImage from "@/assets/services/pr-media.webp";
+import seoAdsImage from "@/assets/services/seo-ads.webp";
 import deepResearchImage from "@/assets/services/deep-research.png";
 
 const services = [
