@@ -38,21 +38,21 @@ const serviceTags: ServiceTag[] = [{
 }];
 
 const stats: ServiceStat[] = [{
-  value: 25,
-  label: "Expert Reports Published",
-  suffix: "+"
+  value: 47,
+  label: "Research Reports Delivered",
+  suffix: ""
 }, {
-  value: 15,
-  label: "Top-tier Distribution Partners",
-  suffix: "+"
+  value: 12,
+  label: "Media Distribution Partners",
+  suffix: ""
 }, {
-  value: 2,
-  label: "Average Total Reach",
-  suffix: "M+"
-}, {
-  value: 100,
-  label: "Targeted KOL Reach",
+  value: 850,
+  label: "Avg. Report Impressions",
   suffix: "K+"
+}, {
+  value: 3.2,
+  label: "Avg. Engagement Rate",
+  suffix: "%"
 }];
 
 const processSteps: ProcessStep[] = [{
