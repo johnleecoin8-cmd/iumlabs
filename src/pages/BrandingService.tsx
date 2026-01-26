@@ -11,6 +11,10 @@ import ServiceSchema from "@/components/ServiceSchema";
 // Branding service images
 import brandingWebsite from "@/assets/services/branding-website.png";
 
+// Portfolio - Bananago
+import bananagoLanding from "@/assets/portfolio/bananago-landing.png";
+import bananagoVideo from "@/assets/portfolio/bananago-video.png";
+
 // Campaign gallery images for marquee
 import openledgerEvent from "@/assets/campaigns/openledger-event.jpg";
 import megaethLaunch from "@/assets/campaigns/megaeth-launch.jpg";
@@ -141,6 +145,8 @@ const faqItems: FAQItem[] = [
 
 // Gallery images for marquee
 const galleryImages = [
+  { src: bananagoLanding, alt: "Bananago Landing Page", project: "Bananago" },
+  { src: bananagoVideo, alt: "Bananago Video Campaign", project: "Bananago" },
   { src: brandingPalace, alt: "Korean Palace Brand Concept", project: "Cultural Identity" },
   { src: brandingWebsite, alt: "Website Design Mockup", project: "Web Design" },
   { src: websiteCreative, alt: "Creative Website Layout", project: "UI/UX" },
