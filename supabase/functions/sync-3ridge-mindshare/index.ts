@@ -208,45 +208,59 @@ function clampChange(change: number, maxPercent: number = 200): number {
 function aggregatePeriodData(periodDataList: PeriodData[]): AggregatedProject[] {
   const projectMap = new Map<string, AggregatedProject>();
   
-  // First pass: identify which projects exist in 7D (most important)
-  const projects7D = periodDataList.find(p => p.period === '7D')?.projects || [];
-  const tickers7D = new Set(projects7D.map(p => p.ticker));
+  // ============================================
+  // CRITICAL: 7D data is the PRIMARY source for mindshare/change
+  // 14D/30D/90D are ONLY for historical reference and trend analysis
+  // ============================================
+  const period7D = periodDataList.find(p => p.period === '7D');
   
+  if (!period7D) {
+    console.error('7D period data is missing - cannot proceed');
+    return [];
+  }
+  
+  // First: Initialize all projects from 7D data (primary source)
+  for (const project of period7D.projects) {
+    const agg: AggregatedProject = {
+      ticker: project.ticker,
+      name: project.name,
+      logo_url: project.logo_url,
+      // PRIMARY VALUES from 7D only
+      weightedMindshare: project.mindshare,
+      weightedChange: clampChange(project.mindshare_change, 200),
+      dataPoints: 1,
+      // Store period-specific data for reference
+      mindshare_7d: project.mindshare,
+      mindshare_14d: null,
+      mindshare_30d: null,
+      mindshare_90d: null,
+      change_7d: project.mindshare_change,
+      change_14d: null,
+      change_30d: null,
+      change_90d: null,
+    };
+    projectMap.set(project.ticker, agg);
+  }
+  
+  console.log(`Initialized ${projectMap.size} projects from 7D data`);
+  
+  // Second: Add historical reference data from other periods (14D/30D/90D)
+  // This is ONLY for trend analysis, NOT for calculating mindshare/change
   for (const periodData of periodDataList) {
+    if (periodData.period === '7D') continue; // Already processed
+    
     for (const project of periodData.projects) {
-      let agg = projectMap.get(project.ticker);
+      const agg = projectMap.get(project.ticker);
       
       if (!agg) {
-        agg = {
-          ticker: project.ticker,
-          name: project.name,
-          logo_url: project.logo_url,
-          mindshare_7d: null,
-          mindshare_14d: null,
-          mindshare_30d: null,
-          mindshare_90d: null,
-          change_7d: null,
-          change_14d: null,
-          change_30d: null,
-          change_90d: null,
-          weightedMindshare: 0,
-          weightedChange: 0,
-          dataPoints: 0,
-        };
-        projectMap.set(project.ticker, agg);
+        // Project exists in longer periods but NOT in 7D
+        // This means the project has dropped off recently - skip it
+        console.log(`Skipping ${project.ticker}: exists in ${periodData.period} but not in 7D (inactive)`);
+        continue;
       }
       
-      // Update logo if not set
-      if (!agg.logo_url && project.logo_url) {
-        agg.logo_url = project.logo_url;
-      }
-      
-      // Set period-specific values
+      // Store historical reference data
       switch (periodData.period) {
-        case '7D':
-          agg.mindshare_7d = project.mindshare;
-          agg.change_7d = project.mindshare_change;
-          break;
         case '14D':
           agg.mindshare_14d = project.mindshare;
           agg.change_14d = project.mindshare_change;
@@ -260,39 +274,6 @@ function aggregatePeriodData(periodDataList: PeriodData[]): AggregatedProject[] 
           agg.change_90d = project.mindshare_change;
           break;
       }
-      
-      // Accumulate weighted values
-      // Clamp extreme changes before accumulating
-      const clampedChange = clampChange(project.mindshare_change, 200);
-      agg.weightedMindshare += project.mindshare * periodData.weight;
-      agg.weightedChange += clampedChange * periodData.weight;
-      agg.dataPoints += periodData.weight;
-    }
-  }
-  
-  // ============================================
-  // Post-processing: Handle projects that are 7D-only (newly appeared)
-  // These should use 7D data directly without dilution from missing long-term data
-  // ============================================
-  for (const project of projectMap.values()) {
-    const existsIn7D = project.mindshare_7d !== null;
-    const existsIn14D = project.mindshare_14d !== null;
-    const existsIn30D = project.mindshare_30d !== null;
-    const existsIn90D = project.mindshare_90d !== null;
-    
-    // Count periods where project exists
-    const periodCount = [existsIn7D, existsIn14D, existsIn30D, existsIn90D].filter(Boolean).length;
-    
-    if (existsIn7D && periodCount <= 2) {
-      // Project is relatively new (only in recent periods)
-      // Use 7D data as primary source to avoid dilution
-      project.weightedMindshare = project.mindshare_7d!;
-      project.weightedChange = clampChange(project.change_7d!, 200);
-      console.log(`New project detected: ${project.ticker} (exists in ${periodCount} period(s)), using 7D data directly`);
-    } else if (project.dataPoints > 0) {
-      // Normalize weighted values for established projects
-      project.weightedMindshare /= project.dataPoints;
-      project.weightedChange /= project.dataPoints;
     }
   }
   
