@@ -200,8 +200,17 @@ async function scrapePeriod(
   return projects;
 }
 
+// Clamp extreme change values to a reasonable range
+function clampChange(change: number, maxPercent: number = 200): number {
+  return Math.max(-maxPercent, Math.min(maxPercent, change));
+}
+
 function aggregatePeriodData(periodDataList: PeriodData[]): AggregatedProject[] {
   const projectMap = new Map<string, AggregatedProject>();
+  
+  // First pass: identify which projects exist in 7D (most important)
+  const projects7D = periodDataList.find(p => p.period === '7D')?.projects || [];
+  const tickers7D = new Set(projects7D.map(p => p.ticker));
   
   for (const periodData of periodDataList) {
     for (const project of periodData.projects) {
@@ -253,15 +262,35 @@ function aggregatePeriodData(periodDataList: PeriodData[]): AggregatedProject[] 
       }
       
       // Accumulate weighted values
+      // Clamp extreme changes before accumulating
+      const clampedChange = clampChange(project.mindshare_change, 200);
       agg.weightedMindshare += project.mindshare * periodData.weight;
-      agg.weightedChange += project.mindshare_change * periodData.weight;
+      agg.weightedChange += clampedChange * periodData.weight;
       agg.dataPoints += periodData.weight;
     }
   }
   
-  // Normalize weighted values
+  // ============================================
+  // Post-processing: Handle projects that are 7D-only (newly appeared)
+  // These should use 7D data directly without dilution from missing long-term data
+  // ============================================
   for (const project of projectMap.values()) {
-    if (project.dataPoints > 0) {
+    const existsIn7D = project.mindshare_7d !== null;
+    const existsIn14D = project.mindshare_14d !== null;
+    const existsIn30D = project.mindshare_30d !== null;
+    const existsIn90D = project.mindshare_90d !== null;
+    
+    // Count periods where project exists
+    const periodCount = [existsIn7D, existsIn14D, existsIn30D, existsIn90D].filter(Boolean).length;
+    
+    if (existsIn7D && periodCount <= 2) {
+      // Project is relatively new (only in recent periods)
+      // Use 7D data as primary source to avoid dilution
+      project.weightedMindshare = project.mindshare_7d!;
+      project.weightedChange = clampChange(project.change_7d!, 200);
+      console.log(`New project detected: ${project.ticker} (exists in ${periodCount} period(s)), using 7D data directly`);
+    } else if (project.dataPoints > 0) {
+      // Normalize weighted values for established projects
       project.weightedMindshare /= project.dataPoints;
       project.weightedChange /= project.dataPoints;
     }
