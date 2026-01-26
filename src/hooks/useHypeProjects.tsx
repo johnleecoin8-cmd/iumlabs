@@ -29,6 +29,8 @@ export interface HypeProject {
   website_url: string | null;
   // Top source from crawler
   top_source?: string | null;
+  // Periods where project was found (7D, 14D, 30D, 90D)
+  periods_found?: string[];
 }
 
 export interface HypeScoreHistory {

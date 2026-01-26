@@ -91,6 +91,7 @@ export type Database = {
           mindshare_change: number | null
           name: string
           narrative: string | null
+          periods_found: string[] | null
           price: number | null
           rank: number
           score: number
@@ -113,6 +114,7 @@ export type Database = {
           mindshare_change?: number | null
           name: string
           narrative?: string | null
+          periods_found?: string[] | null
           price?: number | null
           rank?: number
           score?: number
@@ -135,6 +137,7 @@ export type Database = {
           mindshare_change?: number | null
           name?: string
           narrative?: string | null
+          periods_found?: string[] | null
           price?: number | null
           rank?: number
           score?: number
