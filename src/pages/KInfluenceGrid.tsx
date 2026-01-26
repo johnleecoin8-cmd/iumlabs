@@ -5,6 +5,7 @@ import MindshareTreemap, { type MindshareProject } from '@/components/mindshare/
 import HypeGalaxyMap from '@/components/mindshare/HypeGalaxyMap';
 import TreemapSkeleton from '@/components/mindshare/TreemapSkeleton';
 import TokenStatusToggle, { type TokenStatus } from '@/components/mindshare/TokenStatusToggle';
+import Navbar from '@/components/Navbar';
 import { Search, X, Clock, LayoutGrid, Sparkles } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { cn } from '@/lib/utils';
@@ -187,11 +188,15 @@ const KInfluenceGrid = () => {
 
 
   return (
-    <div className="min-h-screen bg-[#0a0a0b] pb-safe">
-      {/* Background gradient - simplified on mobile */}
-      <div className="fixed inset-0 bg-gradient-to-br from-teal-950/10 via-transparent to-violet-950/5 pointer-events-none" />
+    <>
+      {/* Mobile Navbar */}
+      <Navbar />
+      
+      <div className="min-h-screen bg-[#0a0a0b] pb-safe pt-14 lg:pt-0">
+        {/* Background gradient */}
+        <div className="fixed inset-0 bg-gradient-to-br from-teal-950/10 via-transparent to-violet-950/5 pointer-events-none" />
 
-      <div className="relative max-w-[1920px] mx-auto">
+        <div className="relative max-w-[1920px] mx-auto">
         {/* Header Section - Mobile optimized */}
         <header className="sticky top-0 z-40 backdrop-blur-xl bg-[#0a0a0b]/90 border-b border-white/[0.06]">
           <div className="px-3 sm:px-6 lg:px-8">
@@ -388,6 +393,7 @@ const KInfluenceGrid = () => {
         </footer>
       </div>
     </div>
+    </>
   );
 };
 
