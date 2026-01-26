@@ -23,3 +23,9 @@ verify_jwt = false
 
 [functions.simulate-daily-variance]
 verify_jwt = false
+
+[functions.sync-3ridge-mindshare]
+verify_jwt = false
+
+[functions.update-price-data]
+verify_jwt = false
