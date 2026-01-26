@@ -460,32 +460,35 @@ const ContactFormSection = ({
           </div>
         </div>
 
-        {/* Mobile Contact Info - Bottom */}
-        <div className="lg:hidden border-t border-white/10 p-4 sm:p-6">
-          <div className="flex flex-wrap gap-4 justify-center">
+        {/* Mobile Contact Info - Bottom - Optimized */}
+        <div className="lg:hidden border-t border-white/10 p-3 sm:p-4">
+          {/* Location & Time - Top row */}
+          <div className="flex items-center justify-center gap-1.5 mb-3 text-[11px] text-white/50">
+            <MapPin className="w-3 h-3 flex-shrink-0" />
+            <span className="truncate">Seoul, Korea</span>
+            <span className="w-px h-3 bg-white/20 mx-1" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse flex-shrink-0" />
+            <span className="font-mono">{getSeoulTime()}</span>
+          </div>
+          
+          {/* Contact buttons - Compact grid */}
+          <div className="grid grid-cols-2 gap-2">
             <a 
               href={`mailto:${brand.email}`}
-              className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-sm text-white/70 hover:bg-white/10 transition-colors min-h-[44px]"
+              className="flex items-center justify-center gap-1.5 px-3 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-[11px] text-white/70 hover:bg-white/[0.08] active:scale-[0.97] transition-all min-h-[42px]"
             >
-              <Mail className="w-4 h-4" />
-              {brand.email}
+              <Mail className="w-3.5 h-3.5 flex-shrink-0" />
+              <span className="truncate">Email</span>
             </a>
             <a 
               href={brand.telegramLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 rounded-full text-sm text-white/70 hover:bg-white/10 transition-colors min-h-[44px]"
+              className="flex items-center justify-center gap-1.5 px-3 py-2.5 bg-white/[0.04] border border-white/10 rounded-xl text-[11px] text-white/70 hover:bg-white/[0.08] active:scale-[0.97] transition-all min-h-[42px]"
             >
-              <Send className="w-4 h-4" />
-              {brand.telegram}
+              <Send className="w-3.5 h-3.5 flex-shrink-0" />
+              <span className="truncate">Telegram</span>
             </a>
-          </div>
-          <div className="flex items-center justify-center gap-2 mt-4 text-xs text-white/40">
-            <MapPin className="w-3.5 h-3.5" />
-            <span>Seoul, South Korea</span>
-            <span className="w-1 h-1 rounded-full bg-white/20" />
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            <span>{getSeoulTime()}</span>
           </div>
         </div>
       </div>
