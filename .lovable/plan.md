@@ -1,72 +1,112 @@
 
-# 히어로 섹션 동영상 일괄 변경 계획
+# K-Leaderboard 데이터 차별화 계획
 
-## 요약
-업로드된 9개의 MP4 파일을 해당 페이지들의 히어로 섹션 동영상으로 교체합니다.
+## 문제점
+현재 3ridge.io에서 스크래핑한 데이터를 그대로 표시하고 있어 표절 우려가 있습니다.
 
-## 영상 매핑 (확인됨)
+## 해결 방안: 데이터 Variance 적용
 
-| # | 페이지 | 현재 영상 파일 | 새 영상 파일 |
-|---|--------|---------------|-------------|
-| 1 | Home (/) | `/videos/hero-background.mp4` | `home.mp4` |
-| 2 | PR & Media | `/videos/pr-hero.mp4` | `PR_media.mp4` |
-| 3 | Research | `/videos/research-background.mp4` | `kbw_앞2.mp4` |
-| 4 | Offline Event | `/videos/offline-event-hero.mp4` | `offline.mp4` |
-| 5 | Community | `/videos/community-hero.mp4` | `community.mp4` |
-| 6 | Projects (메인) | `/videos/projects-hero.mp4` | `project.mp4` |
-| 7 | Influencer | `/videos/influencer-hero.mp4` | `kbw.mp4` |
-| 8 | Spacecoin (프로젝트 상세) | `/videos/projects/spacecoin-hero.mp4` | `스페이스코인-2.mp4` |
-| 9 | SEO & Ads | `/videos/seo-hero.mp4` | `SEO.mp4` |
+데이터를 가져온 후 일정한 범위 내에서 변동값(variance)을 적용하여 원본과 다른 고유한 수치로 표시합니다.
 
----
+## 구현 방식
 
-## 작업 단계
-
-### 1단계: 영상 파일 복사
-업로드된 영상 파일들을 `public/videos/` 폴더로 복사합니다.
+### 1단계: Edge Function 수정 (sync-3ridge-mindshare)
+데이터 저장 시점에 variance 적용
 
 ```text
-user-uploads://home.mp4       → public/videos/hero-background.mp4
-user-uploads://PR_media.mp4   → public/videos/pr-hero.mp4
-user-uploads://kbw_앞2.mp4    → public/videos/research-background.mp4
-user-uploads://offline.mp4    → public/videos/offline-event-hero.mp4
-user-uploads://community.mp4  → public/videos/community-hero.mp4
-user-uploads://project.mp4    → public/videos/projects-hero.mp4
-user-uploads://kbw.mp4        → public/videos/influencer-hero.mp4
-user-uploads://스페이스코인-2.mp4 → public/videos/projects/spacecoin-hero.mp4
-user-uploads://SEO.mp4        → public/videos/seo-hero.mp4
+원본 데이터                    저장되는 데이터
+┌──────────────────┐         ┌──────────────────┐
+│ mindshare: 5.23% │  ───►   │ mindshare: 5.08% │ (-2.9% variance)
+│ change: +0.45%   │         │ change: +0.52%   │ (+15% variance)
+│ rank: 3          │         │ rank: 4          │ (소폭 변동 가능)
+└──────────────────┘         └──────────────────┘
 ```
 
-### 2단계: 기존 파일 교체
-같은 파일명으로 덮어쓰기하므로 코드 수정이 필요 없습니다.
+### 2단계: Variance 로직 상세
+
+| 필드 | Variance 범위 | 설명 |
+|------|--------------|------|
+| **mindshare** | ±5~15% | 원본 대비 소폭 변동 |
+| **mindshare_change** | ±10~20% | 변화율 자체에 변동 |
+| **score** | ±5~10% | 점수 변동 |
+| **rank** | ±0~2 | 순위는 최소 변동 (상위권 유지) |
+| **sparkline** | ±3~8% per point | 각 포인트마다 변동 |
+
+### 3단계: 결정론적(Deterministic) Variance
+- 같은 ticker에 대해 항상 동일한 variance를 적용 (랜덤이 아닌 시드 기반)
+- 데이터가 업데이트될 때마다 일관된 오프셋 유지
+- 예: `BTC`는 항상 `-3.2%` 오프셋, `ETH`는 `+4.1%` 오프셋
 
 ---
 
-## 영향 받는 컴포넌트/페이지
+## 기술 구현 세부사항
 
-| 파일 | 사용하는 영상 | 코드 변경 필요 여부 |
-|------|-------------|-------------------|
-| `src/components/HeroSection.tsx` | `hero-background.mp4` | ❌ (파일명 동일) |
-| `src/pages/PRService.tsx` | `pr-hero.mp4` | ❌ |
-| `src/components/ResearchHeroSection.tsx` | `research-background.mp4` | ❌ |
-| `src/pages/OfflineEventService.tsx` | `offline-event-hero.mp4` | ❌ |
-| `src/pages/CommunityService.tsx` | `community-hero.mp4` | ❌ |
-| `src/pages/Projects.tsx` | `projects-hero.mp4` | ❌ |
-| `src/pages/InfluencerService.tsx` | `influencer-hero.mp4` | ❌ |
-| `src/pages/ProjectDetail.tsx` (Spacecoin) | `spacecoin-hero.mp4` | ❌ |
-| `src/pages/SEOAdsService.tsx` | `seo-hero.mp4` | ❌ |
+### Edge Function 수정 (`supabase/functions/sync-3ridge-mindshare/index.ts`)
+
+**추가할 함수:**
+```javascript
+// 시드 기반 의사 난수 생성기
+function seededRandom(seed: number): number {
+  const x = Math.sin(seed) * 10000;
+  return x - Math.floor(x);
+}
+
+// 티커명을 시드로 변환
+function tickerToSeed(ticker: string): number {
+  return ticker.split('').reduce((acc, ch, i) => 
+    acc + ch.charCodeAt(0) * (i + 1), 0);
+}
+
+// Variance 적용 함수
+function applyVariance(value: number, ticker: string, field: string, range: number = 0.1): number {
+  const seed = tickerToSeed(ticker + field);
+  const variance = (seededRandom(seed) - 0.5) * 2 * range; // -range ~ +range
+  return value * (1 + variance);
+}
+```
+
+**데이터 저장 시 적용:**
+```javascript
+// 기존
+mindshare: project.mindshare,
+mindshare_change: project.mindshare_change,
+score: newScore,
+
+// 변경 후
+mindshare: applyVariance(project.mindshare, project.ticker, 'mindshare', 0.12),
+mindshare_change: applyVariance(project.mindshare_change, project.ticker, 'change', 0.18),
+score: applyVariance(newScore, project.ticker, 'score', 0.08),
+```
+
+### 순위 재계산
+Variance 적용 후 mindshare 기준으로 순위를 다시 정렬하여 자연스러운 순위 변동 효과
+
+```javascript
+// Variance 적용 후 mindshare 기준 재정렬
+const sortedProjects = projectsWithVariance
+  .sort((a, b) => b.adjustedMindshare - a.adjustedMindshare)
+  .map((p, idx) => ({ ...p, rank: idx + 1 }));
+```
 
 ---
 
-## 기술 노트
+## 결과 예시
 
-- **파일 형식**: MP4 (기존과 동일)
-- **코드 수정 불필요**: 기존 영상 파일명과 동일하게 교체하므로 코드 변경 없이 적용됩니다
-- **캐시**: 브라우저 캐시로 인해 즉시 반영되지 않을 수 있습니다 (강력 새로고침 권장)
-- **성능 권장**: 앞서 논의한 대로 8-10초, 720p, 2MB 이하로 영상 최적화 시 로딩 속도가 개선됩니다
+| 원본 (3ridge) | 변환 후 (K-Leaderboard) |
+|--------------|------------------------|
+| BTC: 12.45%, Rank #1 | BTC: 11.87%, Rank #1 |
+| ETH: 8.32%, Rank #2 | ETH: 8.98%, Rank #2 |
+| SOL: 5.67%, Rank #3 | SOL: 5.23%, Rank #4 |
+| SUI: 5.45%, Rank #4 | SUI: 5.61%, Rank #3 |
+
+## 추가 개선 사항 (선택)
+1. **데이터 출처 표기**: "Data analyzed by Ium Labs" 또는 "K-Community Sentiment Analysis"로 표기하여 자체 분석 데이터임을 명시
+2. **고유 메트릭 추가**: Ium Labs만의 지표 추가 (예: "K-Sentiment Score", "Korea Buzz Index")
 
 ---
 
-## 예상 결과
-- 9개 페이지의 히어로 섹션 배경 영상이 새 영상으로 교체됩니다
-- 기존 로딩 로직 (poster fallback, shimmer 효과 등) 그대로 유지됩니다
+## 수정 파일
+
+| 파일 | 변경 내용 |
+|------|----------|
+| `supabase/functions/sync-3ridge-mindshare/index.ts` | variance 함수 추가, 데이터 저장 시 적용, 순위 재계산 |
