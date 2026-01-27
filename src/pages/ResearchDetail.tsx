@@ -40,20 +40,39 @@ const ResearchDetail = () => {
 
   // Fetch related posts from DB
   const { data: dbRelatedPosts } = useQuery({
-    queryKey: ['related-research-posts', dbPost?.category],
+    queryKey: ['related-research-posts', dbPost?.id, dbPost?.category],
     queryFn: async () => {
-      if (!dbPost?.category) return [];
+      if (!dbPost?.id) return [];
+      
+      // First try to get posts from the same category
+      if (dbPost.category) {
+        const { data: categoryPosts, error: categoryError } = await supabase
+          .from('research_posts')
+          .select('*')
+          .eq('category', dbPost.category)
+          .eq('is_published', true)
+          .neq('id', dbPost.id)
+          .order('created_at', { ascending: false })
+          .limit(3);
+        
+        if (!categoryError && categoryPosts && categoryPosts.length > 0) {
+          return categoryPosts;
+        }
+      }
+      
+      // Fallback: get latest posts excluding current one
       const { data, error } = await supabase
         .from('research_posts')
         .select('*')
-        .eq('category', dbPost.category)
         .eq('is_published', true)
         .neq('id', dbPost.id)
+        .order('created_at', { ascending: false })
         .limit(3);
+      
       if (error) throw error;
       return data;
     },
-    enabled: !!dbPost?.category,
+    enabled: !!dbPost?.id,
   });
 
   // Transform DB data to display format
@@ -465,7 +484,7 @@ const ResearchDetail = () => {
           <div className="container mx-auto max-w-7xl px-4">
             <div className="flex items-center justify-between mb-12">
               <h2 className="text-2xl md:text-3xl font-light text-white">
-                Related Articles
+                More Research
               </h2>
               <Link 
                 to="/research" 
