@@ -83,9 +83,9 @@ const ResearchDetail = () => {
     image: dbPost.image || '',
     date: dbPost.date || new Date(dbPost.created_at || '').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
     readTime: dbPost.read_time || calculateReadTime(dbPost.content),
-    category: dbPost.category || 'Research',
-    author: dbPost.author || 'Ium Labs Research',
-    authorRole: dbPost.author_role || 'Research Team',
+    category: dbPost.category || 'Blog',
+    author: dbPost.author || 'Ium Labs',
+    authorRole: dbPost.author_role || 'Ium Labs Team',
     authorImage: (dbPost as any).author_image || '',
     excerpt: dbPost.excerpt || (dbPost.content ? dbPost.content.substring(0, 150) + '...' : ''),
     tags: dbPost.tags || [],
@@ -99,15 +99,15 @@ const ResearchDetail = () => {
     title: p.title,
     image: p.image || '',
     readTime: p.read_time || calculateReadTime(p.content),
-    category: p.category || 'Research',
+    category: p.category || 'Blog',
   }));
 
   // Dynamic page meta for SEO - must be before any conditional returns
   useEffect(() => {
     if (post) {
-      const title = `${post.title} | Ium Labs Research`;
-      const description = post.excerpt || `${post.title} - ${post.category} research by Ium Labs.`;
-      const pageUrl = `https://iumlabs.io/research/${slug}`;
+      const title = `${post.title} | Ium Labs Blog`;
+      const description = post.excerpt || `${post.title} - ${post.category} article by Ium Labs.`;
+      const pageUrl = `https://iumlabs.io/blog/${slug}`;
       const ogImage = post.image.startsWith('http') 
         ? post.image 
         : `https://iumlabs.io${post.image}`;
@@ -128,8 +128,8 @@ const ResearchDetail = () => {
   // Dynamic breadcrumb items - must be before any conditional returns
   const breadcrumbItems = useMemo(() => [
     { name: "Home", url: "https://iumlabs.io" },
-    { name: "Research", url: "https://iumlabs.io/research" },
-    { name: post?.title || '', url: `https://iumlabs.io/research/${slug}` }
+    { name: "Blog", url: "https://iumlabs.io/blog" },
+    { name: post?.title || '', url: `https://iumlabs.io/blog/${slug}` }
   ], [post?.title, slug]);
 
   const handleCopyLink = () => {
@@ -169,8 +169,8 @@ const ResearchDetail = () => {
         <div className="container mx-auto max-w-7xl px-4 py-32 text-center">
           <h1 className="text-4xl font-light text-white mb-4">Article Not Found</h1>
           <p className="text-white/60 mb-8">The article you're looking for doesn't exist.</p>
-          <Link to="/research" className="text-primary hover:underline">
-            ← Back to Research
+          <Link to="/blog" className="text-primary hover:underline">
+            ← Back to Blog
           </Link>
         </div>
         <Footer />
@@ -189,11 +189,11 @@ const ResearchDetail = () => {
           {/* Back Link */}
           <div>
             <Link 
-              to="/research" 
+              to="/blog" 
               className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
-              Back to Research
+              Back to Blog
             </Link>
           </div>
           
@@ -484,10 +484,10 @@ const ResearchDetail = () => {
           <div className="container mx-auto max-w-7xl px-4">
             <div className="flex items-center justify-between mb-12">
               <h2 className="text-2xl md:text-3xl font-light text-white">
-                More Research
+                More Articles
               </h2>
               <Link 
-                to="/research" 
+                to="/blog" 
                 className="text-primary flex items-center gap-2 hover:gap-3 transition-all"
               >
                 View All <ChevronRight className="w-4 h-4" />
@@ -498,7 +498,7 @@ const ResearchDetail = () => {
               {relatedPosts.map((relatedPost) => (
                 <div key={relatedPost.id}>
                   <Link 
-                    to={`/research/${relatedPost.slug}`}
+                    to={`/blog/${relatedPost.slug}`}
                     className="group block"
                   >
                     <motion.div 
@@ -545,12 +545,12 @@ const ResearchDetail = () => {
       <BreadcrumbSchema items={breadcrumbItems} />
       <ArticleSchema
         title={post.title}
-        description={post.excerpt || `${post.title} - ${post.category} research by Ium Labs.`}
+        description={post.excerpt || `${post.title} - ${post.category} article by Ium Labs.`}
         image={post.image}
         author={post.author}
         authorRole={post.authorRole}
         datePublished={post.date}
-        url={`https://iumlabs.io/research/${slug}`}
+        url={`https://iumlabs.io/blog/${slug}`}
         tags={post.tags}
       />
       </div>

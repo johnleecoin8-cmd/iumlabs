@@ -753,8 +753,8 @@ export default function ResearchForm() {
     setIsUploading(true);
     try {
       const fileExt = imageFile.name.split('.').pop() || 'jpg';
-      const slug = formData.slug || 'research';
-      const fileName = `research/${slug}-${Date.now()}.${fileExt}`;
+      const slug = formData.slug || 'blog';
+      const fileName = `blog/${slug}-${Date.now()}.${fileExt}`;
 
       const { error: uploadError } = await supabase.storage
         .from('project-images')
@@ -782,7 +782,7 @@ export default function ResearchForm() {
     try {
       const fileExt = authorImageFile.name.split('.').pop() || 'jpg';
       const slug = formData.slug || 'author';
-      const fileName = `research/authors/${slug}-${Date.now()}.${fileExt}`;
+      const fileName = `blog/authors/${slug}-${Date.now()}.${fileExt}`;
 
       const { error: uploadError } = await supabase.storage
         .from('project-images')
@@ -838,7 +838,7 @@ export default function ResearchForm() {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-research-posts'] });
       toast.success(isEditing ? 'Post updated!' : 'Post created!');
-      navigate('/ium-admin/research');
+      navigate('/ium-admin/blog');
     },
     onError: (error) => {
       toast.error('Failed to save post');
@@ -878,15 +878,15 @@ export default function ResearchForm() {
       <AdminLayout>
         <div className="p-8 max-w-4xl" onPaste={handlePaste}>
           <button
-            onClick={() => navigate('/ium-admin/research')}
+            onClick={() => navigate('/ium-admin/blog')}
             className="flex items-center gap-2 text-white/60 hover:text-white mb-6 transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Research
+            Back to Blog
           </button>
 
           <h1 className="text-3xl font-bold text-white mb-8">
-            {isEditing ? 'Edit Research Post' : 'New Research Post'}
+            {isEditing ? 'Edit Blog Post' : 'New Blog Post'}
           </h1>
 
           <form onSubmit={handleSubmit} className="space-y-6">

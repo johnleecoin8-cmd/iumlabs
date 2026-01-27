@@ -25,7 +25,7 @@ export function AdminLayout({ children }: AdminLayoutProps) {
   const navItems = [
     { path: '/ium-admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/ium-admin/projects', label: 'Projects', icon: FolderKanban },
-    { path: '/ium-admin/research', label: 'Research', icon: FileText },
+    { path: '/ium-admin/blog', label: 'Blog', icon: FileText },
     { path: '/ium-admin/contacts', label: 'Contacts', icon: Mail },
     { path: '/ium-admin/jobs', label: 'Job Applications', icon: Briefcase },
   ];

@@ -8,7 +8,7 @@ const navItems = [
   { icon: Home, label: "Home", path: "/" },
   { icon: Briefcase, label: "Services", path: "/services/all" },
   { icon: FolderOpen, label: "Projects", path: "/projects" },
-  { icon: BookOpen, label: "Research", path: "/research" },
+  { icon: BookOpen, label: "Blog", path: "/blog" },
   { icon: Mail, label: "Contact", path: "/contact" },
 ];
 

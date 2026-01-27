@@ -63,9 +63,9 @@ const Research = () => {
       year: 'numeric'
     }),
     readTime: post.read_time || calculateReadTime(post.content),
-    category: post.category || 'Research',
-    author: post.author || 'Ium Labs Research',
-    authorRole: post.author_role || 'Research Team',
+    category: post.category || 'Blog',
+    author: post.author || 'Ium Labs',
+    authorRole: post.author_role || 'Ium Labs Team',
     excerpt: post.excerpt || (post.content ? post.content.substring(0, 150) + '...' : ''),
     tags: post.tags || [],
     content: post.content || '',
@@ -108,7 +108,7 @@ const Research = () => {
           throw error;
         }
       } else {
-        toast.success("Successfully subscribed to research updates!");
+        toast.success("Successfully subscribed to blog updates!");
         setNewsletterEmail("");
       }
     } catch (error) {
@@ -119,10 +119,10 @@ const Research = () => {
   };
   return <div className="min-h-screen bg-[#0A0A0A]">
       <SEOHead
-        title="Korean Crypto Research & Web3 Market Insights | ium Labs"
-        description="Data-driven crypto and Web3 research for the Korean market. Ecosystem analysis, market insights, and strategic intelligence for blockchain projects."
-        path="/research"
-        keywords={['Web3 Research', 'Crypto Market Analysis', 'Korea Web3 Trends', 'Blockchain Insights', 'RWA Korea', 'DeFi Trends 2026', 'Korean Crypto Regulation', 'DePIN Korea', 'AI Agents Crypto']}
+        title="Korean Crypto Blog & Web3 Market Insights | ium Labs"
+        description="Data-driven crypto and Web3 insights for the Korean market. Ecosystem analysis, market insights, and strategic intelligence for blockchain projects."
+        path="/blog"
+        keywords={['Web3 Blog', 'Crypto Market Analysis', 'Korea Web3 Trends', 'Blockchain Insights', 'RWA Korea', 'DeFi Trends 2026', 'Korean Crypto Regulation', 'DePIN Korea', 'AI Agents Crypto']}
       />
       <Navbar />
       
@@ -146,13 +146,13 @@ const Research = () => {
               </h2>
             </div>
             <span className="text-[10px] sm:text-xs text-white/50 tracking-wider hidden sm:block px-2 sm:px-3 py-1 border border-white/20 rounded-full">
-              Latest Research
+              Latest Blog
             </span>
           </div>
           
           {/* Featured Content */}
           <div className="container mx-auto max-w-7xl px-4 md:px-8 py-8 sm:py-12 md:py-16">
-            <Link to={`/research/${featuredPost.slug}`} className="group block active:scale-[0.99]">
+            <Link to={`/blog/${featuredPost.slug}`} className="group block active:scale-[0.99]">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 lg:gap-12 items-center">
                 <div className="aspect-[16/10] rounded-xl sm:rounded-2xl overflow-hidden border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative hover:scale-[1.02]">
                   {featuredPost.image ? <img src={featuredPost.image} alt={featuredPost.title} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" /> : <div className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
@@ -226,7 +226,7 @@ const Research = () => {
               <p className="text-sm sm:text-base text-white/60">Check back soon for our latest research and insights.</p>
             </div> : <div className="grid grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 md:gap-6">
               {currentPosts.map(post => <div key={post.id}>
-                  <Link to={`/research/${post.slug}`} className="group block active:scale-[0.98]">
+                  <Link to={`/blog/${post.slug}`} className="group block active:scale-[0.98]">
                     <div className="relative hover:-translate-y-1 sm:hover:-translate-y-2 transition-transform duration-300">
                       {/* Image */}
                       <div className="aspect-[16/10] rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden mb-2 sm:mb-3 md:mb-4 border border-white/10 group-hover:border-primary/30 transition-all duration-500 relative">

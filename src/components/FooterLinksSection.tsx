@@ -48,8 +48,8 @@ const footerLinks = {
       name: "Case Studies & Portfolio",
       href: "/projects"
     }, {
-      name: "Market Research & Insights",
-      href: "/research"
+      name: "Blog",
+      href: "/blog"
     }, {
       name: "Careers",
       href: "/jobs"

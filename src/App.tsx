@@ -13,8 +13,8 @@ import Index from "./pages/Index";
 import Projects from "./pages/Projects";
 import ProjectDetail from "./pages/ProjectDetail";
 import Contact from "./pages/Contact";
-import Research from "./pages/Research";
-import ResearchDetail from "./pages/ResearchDetail";
+import Blog from "./pages/Research";
+import BlogDetail from "./pages/ResearchDetail";
 import GTMService from "./pages/GTMService";
 import BrandingService from "./pages/BrandingService";
 import SEOAdsService from "./pages/SEOAdsService";
@@ -35,8 +35,8 @@ import AdminLogin from "./pages/admin/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminProjects from "./pages/admin/AdminProjects";
 import ProjectForm from "./pages/admin/ProjectForm";
-import AdminResearch from "./pages/admin/AdminResearch";
-import ResearchForm from "./pages/admin/ResearchForm";
+import AdminBlog from "./pages/admin/AdminResearch";
+import BlogForm from "./pages/admin/ResearchForm";
 import AdminContacts from "./pages/admin/AdminContacts";
 import AdminJobApplications from "./pages/admin/AdminJobApplications";
 import logo from "@/assets/logo.png";
@@ -163,8 +163,8 @@ const AppRoutes = () => {
         <Route path="/projects" element={<Projects />} />
         <Route path="/projects/:slug" element={<ProjectDetail />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/research" element={<Research />} />
-        <Route path="/research/:slug" element={<ResearchDetail />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:slug" element={<BlogDetail />} />
         <Route path="/terms" element={<Terms />} />
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/transparency" element={<Transparency />} />
@@ -176,9 +176,9 @@ const AppRoutes = () => {
         <Route path="/ium-admin/projects" element={<AdminProjects />} />
         <Route path="/ium-admin/projects/new" element={<ProjectForm />} />
         <Route path="/ium-admin/projects/:id/edit" element={<ProjectForm />} />
-        <Route path="/ium-admin/research" element={<AdminResearch />} />
-        <Route path="/ium-admin/research/new" element={<ResearchForm />} />
-        <Route path="/ium-admin/research/:id/edit" element={<ResearchForm />} />
+        <Route path="/ium-admin/blog" element={<AdminBlog />} />
+        <Route path="/ium-admin/blog/new" element={<BlogForm />} />
+        <Route path="/ium-admin/blog/:id/edit" element={<BlogForm />} />
         <Route path="/ium-admin/contacts" element={<AdminContacts />} />
         <Route path="/ium-admin/jobs" element={<AdminJobApplications />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

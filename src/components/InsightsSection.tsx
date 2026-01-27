@@ -48,7 +48,7 @@ const InsightArticleCard = ({ article, index }: { article: InsightArticle; index
       style={{ transitionDelay: `${index * 100}ms` }}
     >
       <Link 
-        to={`/research/${article.id}`} 
+        to={`/blog/${article.id}`} 
         className="group block h-full"
       >
         {/* Card Image - Large on top */}
@@ -113,7 +113,7 @@ const InsightsSection = () => {
         excerpt: post.excerpt || (post.content ? post.content.substring(0, 120) + '...' : ''),
         date: post.date || new Date(post.created_at || '').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
         readTime: post.read_time || calculateReadTime(post.content),
-        category: post.category || 'Research',
+        category: post.category || 'Blog',
         image: post.image || '',
       }));
     },
@@ -142,7 +142,7 @@ const InsightsSection = () => {
         {/* Left: Title & Description */}
         <div className="flex-1">
           <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-foreground mb-1">
-            Latest Research
+            Latest Blog
           </h2>
           <p className="text-muted-foreground text-[11px] sm:text-xs md:text-sm">
             Stay ahead with our insights on Korean Web3 market trends and strategies.
@@ -173,7 +173,7 @@ const InsightsSection = () => {
       {/* Cards Grid - 1 Row */}
       {insights.length === 0 ? (
         <div className="p-8 text-center text-muted-foreground">
-          <p>No research articles yet. Check back soon!</p>
+          <p>No blog articles yet. Check back soon!</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
@@ -192,7 +192,7 @@ const InsightsSection = () => {
         <p className="text-muted-foreground text-[10px] sm:text-xs">
           Join 500+ Web3 founders getting our weekly insights.
         </p>
-        <Link to="/research" className="group inline-flex items-center gap-1.5 text-foreground font-medium hover:text-foreground/70 transition-colors text-[10px] sm:text-xs">
+        <Link to="/blog" className="group inline-flex items-center gap-1.5 text-foreground font-medium hover:text-foreground/70 transition-colors text-[10px] sm:text-xs">
           <span className="group-hover:underline underline-offset-4">View all</span>
           <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
         </Link>
