@@ -1,30 +1,8 @@
-import { useState, useEffect, useRef, lazy, Suspense } from "react";
-import { useMobileOptimization } from "@/hooks/useMobileOptimization";
+import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
 import SEOHead from "@/components/SEOHead";
 import AnnouncementBar from "@/components/AnnouncementBar";
-import seoulMetroBillboard from "@/assets/campaigns/seoul-metro-billboard.jpeg";
-import storyOriginSummit from "@/assets/campaigns/story-origin-summit.jpg";
-import ondoSeminar from "@/assets/campaigns/ondo-seminar.jpg";
-import synfuturesBillboard from "@/assets/campaigns/synfutures-billboard.jpg";
-import peaqSummit from "@/assets/campaigns/peaq-summit.jpg";
-const campaignImages = [{
-  src: seoulMetroBillboard,
-  alt: "Seoul Metro Billboard Campaign for Web3 project marketing in Korea"
-}, {
-  src: storyOriginSummit,
-  alt: "Story Protocol Origin Summit event organized by ium Labs in Seoul"
-}, {
-  src: ondoSeminar,
-  alt: "Ondo Finance Korean market seminar hosted by ium Labs"
-}, {
-  src: synfuturesBillboard,
-  alt: "SynFutures Gangnam billboard advertising campaign in Seoul"
-}, {
-  src: peaqSummit,
-  alt: "Peaq Network Korean summit and community event"
-}];
 import ServicesSection from "@/components/ServicesSection";
 import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactFormSection from "@/components/ContactFormSection";
@@ -44,182 +22,147 @@ import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { MessageSquare, FileText, Rocket, TrendingUp, Check, ArrowRight } from "lucide-react";
-const processPhases = [{
-  title: "ANALYZE",
-  subtitle: "Intelligence",
-  icon: MessageSquare,
-  subPoints: ["Deep Market Research", "Competitor Landscape Analysis", "Narrative Localization"],
-  quote: '"We don\'t guess. We analyze."'
-}, {
-  title: "BUILD",
-  subtitle: "Foundation & Community",
-  icon: FileText,
-  subPoints: ["KOL & Alpha Group Onboarding", "Community Architecture", "Localized Content Creation"],
-  quote: '"Cultivating the core audience before the noise."'
-}, {
-  title: "IGNITE",
-  subtitle: "Launch & Viral",
-  icon: Rocket,
-  subPoints: ["Viral Marketing & Amplification", "Cross-Community AMAs", "Tier-1 PR & Media Blast"],
-  quote: '"Sparking the flame. Maximum impact, zero friction."'
-}, {
-  title: "SCALE",
-  subtitle: "Growth & Sustainability",
-  icon: TrendingUp,
-  subPoints: ["On-chain Events & Campaigns", "Liquidity Initiatives", "Holder Retention Programs"],
-  quote: '"Turning hype into sustainable retention."'
-}];
-const ProcessBillboardOverlay = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const {
-    isMobile,
-    shouldDisableHeavyAnimations
-  } = useMobileOptimization();
+import { PhoneOutgoing, FileCheck, CreditCard, Rocket, ChevronRight } from "lucide-react";
 
-  // Auto-cycle through phases - COMPLETELY DISABLED on mobile for performance
-  useEffect(() => {
-    // Skip auto-cycling entirely on mobile to prevent battery drain
-    if (!isVisible || isPaused || isMobile || shouldDisableHeavyAnimations) return;
-    const interval = setInterval(() => {
-      setHoveredIndex(prev => prev === null ? 0 : (prev + 1) % processPhases.length);
-    }, 3000); // 3초마다 (데스크톱에서만)
+const processPhases = [
+  {
+    title: "Inquiry / Meeting",
+    icon: PhoneOutgoing,
+    subPoints: ["Project Analysis", "Feasibility Consultation"]
+  },
+  {
+    title: "Proposal / Confirm",
+    icon: FileCheck,
+    subPoints: ["Custom GTM Deck Delivery", "KPI & Scope Confirmation"]
+  },
+  {
+    title: "Payment",
+    icon: CreditCard,
+    subPoints: ["Service Agreement Signing", "Invoice Settlement"]
+  },
+  {
+    title: "Execution",
+    icon: Rocket,
+    subPoints: ["Dedicated TF Deployment", "Campaign Launch"]
+  }
+];
 
-    return () => clearInterval(interval);
-  }, [isVisible, isPaused, isMobile, shouldDisableHeavyAnimations]);
-  useEffect(() => {
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        setIsVisible(true);
-        observer.disconnect();
-      }
-    }, {
-      threshold: 0.2,
-      rootMargin: '50px'
-    });
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-    return () => observer.disconnect();
-  }, []);
-  return <div ref={sectionRef} className="px-3 sm:px-4 md:px-8 lg:px-10 pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6">
-      <div className="relative w-full rounded-lg md:rounded-xl overflow-hidden">
-        {/* Background Image - Fixed Billboard */}
-        <img src={seoulMetroBillboard} alt="Seoul Metro Billboard Campaign" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-center" />
-        
-        {/* Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/70 to-black/50" />
-        
-        {/* Corner Decoration */}
-        <div className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-2 z-10">
-          <span className="text-[10px] md:text-xs text-white/50 font-mono tracking-wider">HOW WE WORK</span>
-        </div>
-        
-        {/* Mobile: Full-width vertical list / Desktop: 4-column grid */}
-        <div className="relative z-10">
-          {/* Desktop Layout - 4-column grid */}
-          <div className="hidden lg:grid lg:grid-cols-4 h-[450px]">
-            {processPhases.map((phase, index) => {
-              const Icon = phase.icon;
-              const isHovered = hoveredIndex === index;
-              const hasHover = hoveredIndex !== null;
+// Arrow connector component
+const ArrowConnector = () => (
+  <div className="hidden lg:flex items-center justify-center text-white/20">
+    <div className="flex items-center gap-0.5">
+      <div className="w-[2px] h-8 bg-white/20" />
+      <div className="w-[2px] h-8 bg-white/20" />
+      <ChevronRight className="w-5 h-5 -ml-1" />
+    </div>
+  </div>
+);
+
+const ProcessSection = () => {
+  return (
+    <div className="px-4 sm:px-6 md:px-10 py-10 md:py-16 bg-[#0A0A0A]">
+      {/* Desktop: 4-column with arrows */}
+      <div className="hidden lg:flex items-stretch justify-center gap-4 max-w-6xl mx-auto">
+        {processPhases.map((phase, index) => {
+          const Icon = phase.icon;
+          return (
+            <div key={index} className="contents">
+              {/* Card */}
+              <div className="flex-1 flex flex-col items-center text-center p-8 rounded-2xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] hover:border-white/10 transition-all duration-300">
+                {/* Icon */}
+                <div className="w-16 h-16 rounded-full border border-white/20 bg-white/5 flex items-center justify-center mb-6">
+                  <Icon className="w-7 h-7 text-white" strokeWidth={1.5} />
+                </div>
+                
+                {/* Title */}
+                <h4 className="text-lg font-medium text-white mb-4">{phase.title}</h4>
+                
+                {/* Sub Points */}
+                <ul className="space-y-2">
+                  {phase.subPoints.map((point, i) => (
+                    <li key={i} className="text-sm text-white/50 flex items-center gap-2">
+                      <span className="w-1 h-1 rounded-full bg-white/30" />
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
               
-              return (
-                <div 
-                  key={index} 
-                  className={`
-                    relative flex flex-col items-center justify-center text-center gap-2 p-6
-                    border-r last:border-r-0 border-white/10
-                    cursor-pointer transition-all duration-500
-                    ${isHovered ? 'bg-white/10' : hasHover ? 'bg-black/20' : 'bg-transparent'}
-                  `}
-                  style={{
-                    opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                    transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms, background-color 0.5s ease-out`
-                  }}
-                  onMouseEnter={() => {
-                    setIsPaused(true);
-                    setHoveredIndex(index);
-                  }}
-                  onMouseLeave={() => setIsPaused(false)}
-                  onClick={() => setHoveredIndex(index)}
-                >
-                  {/* Step Number */}
-                  <span className={`text-sm font-mono tracking-widest mb-2 ${isHovered ? 'text-white/80' : 'text-white/40'} transition-colors`}>
-                    0{index + 1}
-                  </span>
-                  
-                  {/* Icon */}
-                  <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-3 border bg-white/5 border-white/20 ${isHovered ? 'bg-white/20 border-white/40 scale-110' : ''} transition-all duration-500`}>
-                    <Icon className={`w-6 h-6 ${isHovered ? 'text-white' : 'text-white/60'}`} />
-                  </div>
-                  
-                  {/* Title & Subtitle */}
-                  <h4 className="text-lg font-medium text-white">{phase.title}</h4>
-                  <p className="text-sm text-white/40 uppercase tracking-wide">{phase.subtitle}</p>
-                  
-                  {/* Sub Points - visible on hover */}
-                  <div className={`space-y-1 mt-3 transition-all duration-500 ${isHovered ? 'opacity-100 max-h-[100px]' : 'opacity-0 max-h-0 overflow-hidden'}`}>
-                    {phase.subPoints.map((point, i) => (
-                      <div key={i} className="text-xs text-white/60">{point}</div>
-                    ))}
-                  </div>
-                  
-                  {/* Bottom Accent Line */}
-                  <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent transition-all duration-500 ${isHovered ? 'w-3/4 opacity-100' : 'w-0 opacity-0'}`} />
-                </div>
-              );
-            })}
-          </div>
-          
-          {/* Mobile/Tablet: Card style grid with center alignment */}
-          <div className="lg:hidden py-6 px-4 sm:px-6 grid grid-cols-2 gap-3">
-            {processPhases.map((phase, index) => {
-              const Icon = phase.icon;
-              return (
-                <div 
-                  key={index}
-                  className="flex flex-col items-center text-center p-4 rounded-xl bg-black/40 border border-white/10"
-                  style={{
-                    opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                    transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms`
-                  }}
-                >
-                  {/* Number */}
-                  <span className="text-xs font-mono text-white/40 mb-2">0{index + 1}</span>
-                  
-                  {/* Icon */}
-                  <div className="w-10 h-10 rounded-full border border-white/20 bg-white/5 flex items-center justify-center mb-3">
-                    <Icon className="w-4 h-4 text-white/70" />
-                  </div>
-                  
-                  {/* Title & Subtitle */}
-                  <h4 className="text-sm font-medium text-white mb-1">{phase.title}</h4>
-                  <p className="text-[10px] text-white/40 uppercase tracking-wide mb-3">{phase.subtitle}</p>
-                  
-                  {/* Sub Points */}
-                  <div className="space-y-1">
-                    {phase.subPoints.map((point, i) => (
-                      <div key={i} className="text-[10px] text-white/50 leading-relaxed">
-                        {point}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+              {/* Arrow between cards (not after last) */}
+              {index < processPhases.length - 1 && <ArrowConnector />}
+            </div>
+          );
+        })}
       </div>
-    </div>;
+      
+      {/* Tablet: 2x2 grid */}
+      <div className="hidden md:grid lg:hidden grid-cols-2 gap-4 max-w-2xl mx-auto">
+        {processPhases.map((phase, index) => {
+          const Icon = phase.icon;
+          return (
+            <div 
+              key={index} 
+              className="flex flex-col items-center text-center p-6 rounded-xl bg-white/[0.03] border border-white/[0.06]"
+            >
+              {/* Step Number */}
+              <span className="text-xs font-mono text-white/30 mb-3">0{index + 1}</span>
+              
+              {/* Icon */}
+              <div className="w-12 h-12 rounded-full border border-white/20 bg-white/5 flex items-center justify-center mb-4">
+                <Icon className="w-5 h-5 text-white/80" strokeWidth={1.5} />
+              </div>
+              
+              {/* Title */}
+              <h4 className="text-base font-medium text-white mb-3">{phase.title}</h4>
+              
+              {/* Sub Points */}
+              <ul className="space-y-1.5">
+                {phase.subPoints.map((point, i) => (
+                  <li key={i} className="text-xs text-white/50">• {point}</li>
+                ))}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+      
+      {/* Mobile: Single column list */}
+      <div className="md:hidden space-y-3">
+        {processPhases.map((phase, index) => {
+          const Icon = phase.icon;
+          return (
+            <div 
+              key={index} 
+              className="flex items-start gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06]"
+            >
+              {/* Icon */}
+              <div className="w-12 h-12 flex-shrink-0 rounded-full border border-white/20 bg-white/5 flex items-center justify-center">
+                <Icon className="w-5 h-5 text-white/80" strokeWidth={1.5} />
+              </div>
+              
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-[10px] font-mono text-white/30">0{index + 1}</span>
+                  <h4 className="text-sm font-medium text-white">{phase.title}</h4>
+                </div>
+                <ul className="space-y-1">
+                  {phase.subPoints.map((point, i) => (
+                    <li key={i} className="text-xs text-white/50">• {point}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 };
+
 const Index = () => {
-  return <div className="min-h-screen bg-surface-base">
+  return (
+    <div className="min-h-screen bg-surface-base">
       <SEOHead title="ium Labs | Korea Web3 Marketing & GTM Agency" description="ium Labs is the premier Korea Web3 Marketing partner for global projects. We specialize in localized GTM strategy, crypto growth, and community management in South Korea." path="/" keywords={['Korea Web3 Marketing', 'Korean Crypto Marketing', 'Web3 GTM Korea', 'Blockchain Marketing Korea']} />
       <AnnouncementBar />
       <Navbar />
@@ -281,9 +224,9 @@ const Index = () => {
             </div>
           </AnimatedSection>
           
-          {/* Featured Billboard Image with Process Overlay */}
+          {/* Process Cards Section */}
           <AnimatedSection delay={100}>
-            <ProcessBillboardOverlay />
+            <ProcessSection />
           </AnimatedSection>
         </div>
       </section>
@@ -353,6 +296,7 @@ const Index = () => {
       <Footer />
       
       
-    </div>;
+    </div>
+  );
 };
 export default Index;
