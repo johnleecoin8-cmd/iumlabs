@@ -1,155 +1,88 @@
 
-# 비디오 자동재생 및 React Hook 에러 해결 계획
+# 모바일 히어로 비디오 재생버튼 제거 및 즉시 재생 수정
 
-## 문제 요약
-1. **React "Should have a queue" 에러**: `PerformanceSection.tsx`의 `MarqueeRow` 컴포넌트에서 `useMobileOptimization()` 호출 시 발생
-2. **홈 히어로 비디오 재생 안됨**: 위 에러로 인해 React 앱 전체가 불안정해져 비디오 재생 로직이 제대로 실행되지 않음
+## 문제 분석
+
+### 현재 상황
+- `controls: false` 설정이 되어 있지만, 모바일 브라우저(iOS Safari, Android Chrome)에서는 비디오가 로드 중일 때 **네이티브 재생 버튼 오버레이**를 표시함
+- 비디오 요소가 `opacity: 0`이어도 네이티브 플레이 버튼은 보임
+- `isVideoReady` 상태가 `true`가 되기 전에 비디오 요소가 DOM에 있어서 문제 발생
+
+### 근본 원인
+1. **비디오 요소가 너무 일찍 렌더링됨**: `opacity: 0`으로 숨겨도 네이티브 컨트롤은 보임
+2. **CSS로 네이티브 컨트롤을 완전히 숨기지 않음**: `controls: false`만으로는 모든 브라우저에서 동작하지 않음
+3. **`visibility` 속성 미사용**: `opacity`만 사용하면 요소는 여전히 상호작용 가능
 
 ---
 
-## 해결 전략
+## 수정 계획
 
-### 1. `useMobileOptimization` 훅 단순화
+### 1단계: CSS로 네이티브 비디오 컨트롤 완전 숨기기 (index.css)
+- 전역 CSS에서 모든 비디오의 네이티브 컨트롤 숨기기
+- `video::-webkit-media-controls` 등 벤더별 셀렉터 추가
 
-**파일**: `src/hooks/useMobileOptimization.tsx`
+```css
+/* 모바일 네이티브 비디오 컨트롤 완전 숨기기 */
+video::-webkit-media-controls,
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls-play-button,
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls-overlay-play-button,
+video::-webkit-media-controls-enclosure,
+video::-webkit-media-controls-container {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
 
-현재 문제점:
-- `isHydrated` state와 두 개의 분리된 `useEffect`가 복잡성을 유발
-- 각각의 `useEffect`에서 동일한 `checkPerformance` 함수를 별도로 정의
+video::-moz-media-controls {
+  display: none !important;
+}
 
-수정 방향:
-- 단일 `useEffect`로 통합
-- `isHydrated` state 제거 (불필요한 복잡성)
-- 초기 상태를 SSR-safe하게 설정
+video::media-controls {
+  display: none !important;
+}
 
-```text
-변경 전:
-┌─────────────────────────────────────────┐
-│ useState (초기값: 모두 false)            │
-│ useState (isHydrated)                   │
-│ useEffect #1 (hydration)                │
-│ useEffect #2 (resize + motion listener) │
-└─────────────────────────────────────────┘
-
-변경 후:
-┌─────────────────────────────────────────┐
-│ useState (초기값: 모두 false)            │
-│ useEffect #1 (통합된 단일 effect)        │
-│   - 마운트 시 즉시 상태 체크             │
-│   - resize 리스너 등록                   │
-│   - motion preference 리스너 등록        │
-└─────────────────────────────────────────┘
+video {
+  -webkit-appearance: none;
+}
 ```
 
-### 2. 수정 코드
+### 2단계: useVideoPlayer 훅 수정 - visibility 추가
+- `opacity: 0`에서 `visibility: hidden`도 함께 사용
+- 비디오가 준비되지 않았을 때 완전히 숨김
 
 ```typescript
-export const useMobileOptimization = (): MobileOptimizationState => {
-  const [state, setState] = useState<MobileOptimizationState>({
-    isMobile: false,
-    isLowPerformance: false,
-    prefersReducedMotion: false,
-    shouldDisableHeavyAnimations: false,
-    shouldDisable3D: false,
-    shouldDisableVideo: false,
-  });
-
-  useEffect(() => {
-    const checkPerformance = () => {
-      const isMobile = 
-        window.innerWidth < 1024 || 
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0 ||
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      
-      const isLowPerformance = 
-        (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4) ||
-        ((navigator as any).deviceMemory !== undefined && (navigator as any).deviceMemory <= 4) ||
-        /Android/.test(navigator.userAgent) ||
-        /iPhone|iPad|iPod/.test(navigator.userAgent);
-      
-      const shouldDisableHeavyAnimations = isMobile || prefersReducedMotion || isLowPerformance;
-      const shouldDisable3D = isMobile || isLowPerformance;
-      const shouldDisableVideo = prefersReducedMotion;
-
-      setState({
-        isMobile,
-        isLowPerformance,
-        prefersReducedMotion,
-        shouldDisableHeavyAnimations,
-        shouldDisable3D,
-        shouldDisableVideo,
-      });
-    };
-
-    // 마운트 시 즉시 체크
-    checkPerformance();
-
-    // Debounced resize handler
-    let resizeTimeout: ReturnType<typeof setTimeout>;
-    const handleResize = () => {
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(checkPerformance, 500);
-    };
-    
-    window.addEventListener('resize', handleResize, { passive: true });
-    
-    const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    motionQuery.addEventListener('change', checkPerformance);
-    
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      motionQuery.removeEventListener('change', checkPerformance);
-      clearTimeout(resizeTimeout);
-    };
-  }, []); // 빈 dependency array - 마운트 시 한 번만 실행
-
-  return state;
-};
+// videoProps.style 수정
+style: {
+  opacity: isVideoReady ? 1 : 0,
+  visibility: isVideoReady ? 'visible' : 'hidden',
+  transition: 'opacity 180ms ease, visibility 0s linear 0s',
+} as React.CSSProperties,
 ```
 
----
+### 3단계: HeroSection에서 조건부 렌더링 강화
+- `isVideoReady`가 `true`일 때만 비디오 요소를 DOM에 추가하는 대신
+- 더 안전하게 `pointer-events: none` 추가
 
-## 핵심 변경 사항
-
-| 변경 전 | 변경 후 |
-|---------|---------|
-| `isHydrated` state 사용 | 제거 (불필요) |
-| 두 개의 분리된 `useEffect` | 단일 통합 `useEffect` |
-| `[isHydrated]` dependency | `[]` 빈 배열 |
-| `checkPerformance` 함수 2번 정의 | 1번만 정의 |
-
----
-
-## 예상 결과
-
-1. **React "Should have a queue" 에러 해결**: 훅 구조 단순화로 fiber reconciliation 안정화
-2. **홈 히어로 비디오 자동재생 복구**: React 앱이 정상 동작하면서 `useVideoPlayer` 로직 정상 실행
-3. **성능 개선**: 불필요한 state 및 effect 제거로 렌더링 최적화
-
----
-
-## 수정 대상 파일
-
-| 파일 | 변경 유형 | 설명 |
-|------|-----------|------|
-| `src/hooks/useMobileOptimization.tsx` | 수정 | 훅 단순화 - isHydrated 제거, 단일 useEffect |
+### 4단계: 추가 모바일 비디오 속성 강화
+- `controlsList="nodownload nofullscreen noplaybackrate"` 추가
+- `disableRemotePlayback` 추가
 
 ---
 
 ## 기술적 세부사항
 
-### 왜 이 에러가 발생했는가?
+### 수정 파일
+| 파일 | 변경 내용 |
+|------|-----------|
+| `src/index.css` | 네이티브 비디오 컨트롤 숨기는 CSS 추가 |
+| `src/hooks/useVideoPlayer.tsx` | visibility 스타일 추가, 추가 속성 |
+| `src/components/HeroSection.tsx` | pointer-events 및 z-index 조정 |
 
-React의 hook은 컴포넌트 렌더링 시 **동일한 순서**로 호출되어야 합니다. `useMobileOptimization` 훅 내부에서 두 개의 `useEffect`를 사용하고 그 중 하나가 `[isHydrated]` dependency를 가지고 있을 때, **특정 조건에서 hook 호출 타이밍이 불안정**해질 수 있습니다.
-
-특히 `MarqueeRow`처럼 **루프 내에서 여러 번 렌더링되는 컴포넌트**에서 이 훅을 호출하면 React의 fiber reconciliation 과정에서 hook queue 불일치가 발생할 가능성이 높아집니다.
-
-### 해결 원리
-
-단일 `useEffect`와 빈 dependency array(`[]`)를 사용하면:
-1. 마운트 시 정확히 한 번만 실행
-2. Hook 호출 순서가 항상 일정
-3. 루프 내 여러 인스턴스에서도 안정적으로 동작
+### 예상 결과
+- ✅ 모바일에서 재생 버튼이 절대 보이지 않음
+- ✅ 포스터 이미지가 비디오 로드 전까지 표시됨
+- ✅ 비디오가 준비되면 자연스럽게 재생 시작
+- ✅ iOS Safari, Android Chrome 모두 호환
