@@ -105,145 +105,116 @@ const ProcessBillboardOverlay = () => {
     return () => observer.disconnect();
   }, []);
   return <div ref={sectionRef} className="px-3 sm:px-4 md:px-8 lg:px-10 pt-3 sm:pt-4 md:pt-6 pb-3 sm:pb-4 md:pb-6">
-      <div className="relative w-full h-[420px] sm:h-[400px] md:h-[420px] lg:h-[450px] rounded-lg md:rounded-xl overflow-hidden group">
+      <div className="relative w-full rounded-lg md:rounded-xl overflow-hidden">
         {/* Background Image - Fixed Billboard */}
         <img src={seoulMetroBillboard} alt="Seoul Metro Billboard Campaign" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover object-center" />
         
         {/* Dark Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/70 to-black/50" />
         
-        {/* 4-Sector Grid Overlay - 모바일 2x2, 태블릿 2x2, 데스크톱 4열 */}
-        <div className="absolute inset-0 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4">
-          {processPhases.map((phase, index) => {
-          const Icon = phase.icon;
-          const isHovered = hoveredIndex === index;
-          const hasHover = hoveredIndex !== null;
-
-          // 스텝 번호별 그라데이션 색상 (진행감 표현)
-          const stepColors = ['text-white/50',
-          // 01
-          'text-white/60',
-          // 02
-          'text-white/70',
-          // 03
-          'text-white/90' // 04
-          ];
-          return <div key={index} className={`
-                  relative flex flex-col items-center justify-center 
-                  gap-0.5 sm:gap-1 p-2 sm:p-3 md:p-6
-                  ${index === 0 || index === 2 ? 'border-r border-white/10' : ''}
-                  ${index === 0 || index === 1 ? 'border-b border-white/10' : ''}
-                  lg:border-r lg:border-b-0 lg:last:border-r-0
-                  cursor-pointer active:scale-[0.97] transition-transform will-change-transform
-                  ${isHovered && !isMobile ? 'bg-white/10' : hasHover && !isMobile ? 'bg-black/20' : 'bg-transparent'}
-                `} style={{
-            opacity: isVisible ? 1 : 0,
-            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-            transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms, background-color 0.5s ease-out`
-          }} onMouseEnter={() => {
-            if (!isMobile) {
-              setIsPaused(true);
-              setHoveredIndex(index);
-            }
-          }} onMouseLeave={() => {
-            if (!isMobile) {
-              setIsPaused(false);
-            }
-          }} onClick={() => {
-            if (!isMobile) {
-              setHoveredIndex(index);
-            }
-          }}>
-                {/* Step Number - 진행감 있는 색상 */}
-                <span className={`
-                  absolute top-1.5 left-1.5 sm:top-3 sm:left-3 md:top-4 md:left-4
-                  text-[10px] sm:text-xs md:text-sm font-mono tracking-widest
-                  ${isMobile ? 'text-white/60' : isHovered ? 'text-white' : stepColors[index]}
-                `}>
-                  0{index + 1}
-                </span>
-                
-                {/* 연결 화살표 - 1→2 (오른쪽) */}
-                {index === 0 && <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-20 lg:hidden">
-                    <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-black/60 flex items-center justify-center border border-white/20">
-                      <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white/70" />
-                    </div>
-                  </div>}
-                
-                {/* 연결 화살표 - 2→3 (아래로) */}
-                {index === 1 && <div className="absolute bottom-0 right-1/4 translate-y-1/2 z-20 lg:hidden">
-                    
-                  </div>}
-                
-                {/* 연결 화살표 - 3→4 (오른쪽) */}
-                {index === 2 && <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 z-20 lg:hidden">
-                    <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-black/60 flex items-center justify-center border border-white/20">
-                      <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-white/70" />
-                    </div>
-                  </div>}
-                
-                {/* Icon - 모바일에서 더 작게 */}
-                <div className={`
-                  w-7 h-7 sm:w-9 sm:h-9 md:w-12 md:h-12 lg:w-14 lg:h-14 rounded-full flex-shrink-0
-                  flex items-center justify-center mb-0.5 sm:mb-1 md:mb-2 lg:mb-3
-                  border bg-white/5 border-white/20
-                  ${isHovered && !isMobile ? 'bg-white/20 border-white/40 scale-110 transition-all duration-500' : ''}
-                `}>
-                  <Icon className={`
-                    w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-white/60
-                    ${isHovered && !isMobile ? 'text-white' : ''}
-                  `} />
-                </div>
-                
-                {/* Content */}
-                <div className="text-center px-1">
-                  {/* Title - 모바일에서 더 작게 */}
-                  <h4 className={`
-                    text-[9px] sm:text-xs md:text-sm lg:text-lg font-medium text-white/90
-                  `}>
-                    {phase.title}
-                  </h4>
-                  
-                  {/* Subtitle - 모바일에서 1줄로 제한 */}
-                  <p className="text-[7px] sm:text-[9px] md:text-xs lg:text-sm text-white/40 uppercase tracking-wide mt-0.5 line-clamp-1">
-                    {phase.subtitle}
-                  </p>
-                  
-                  {/* Sub Points - 데스크톱 호버 시에만 표시 */}
-                  {!isMobile && (
-                    <div className={`
-                      space-y-0.5 mt-1 transition-all duration-500
-                      ${isHovered ? 'opacity-100 max-h-[80px]' : 'opacity-0 max-h-0 overflow-hidden'}
-                    `}>
-                      {phase.subPoints.map((point, i) => <div key={i} className="flex items-center justify-center gap-1 text-[9px] sm:text-[10px] md:text-xs text-white/60">
-                          <span className="line-clamp-1">{point}</span>
-                        </div>)}
-                      <p className="text-[8px] sm:text-[9px] md:text-[10px] text-primary/80 italic mt-1">{phase.quote}</p>
-                    </div>
-                  )}
-                </div>
-                
-                {/* Bottom Accent Line - 데스크톱만 */}
-                {!isMobile && (
-                  <div className={`
-                    absolute bottom-0 left-1/2 -translate-x-1/2
-                    h-[2px] bg-gradient-to-r from-transparent via-white to-transparent
-                    transition-all duration-500
-                    ${isHovered ? 'w-3/4 opacity-100' : 'w-0 opacity-0'}
-                  `} />
-                )}
-              </div>;
-        })}
-        </div>
-        
-        {/* Corner Decorations */}
-        <div className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-2">
+        {/* Corner Decoration */}
+        <div className="absolute top-3 right-3 md:top-4 md:right-4 flex items-center gap-2 z-10">
           <span className="text-[10px] md:text-xs text-white/50 font-mono tracking-wider">HOW WE WORK</span>
         </div>
         
-        {/* Bottom CTA */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 md:bottom-4">
+        {/* Mobile: Full-width vertical list / Desktop: 4-column grid */}
+        <div className="relative z-10">
+          {/* Desktop Layout - 4-column grid */}
+          <div className="hidden lg:grid lg:grid-cols-4 h-[450px]">
+            {processPhases.map((phase, index) => {
+              const Icon = phase.icon;
+              const isHovered = hoveredIndex === index;
+              const hasHover = hoveredIndex !== null;
+              const stepColors = ['text-white/50', 'text-white/60', 'text-white/70', 'text-white/90'];
+              
+              return (
+                <div 
+                  key={index} 
+                  className={`
+                    relative flex flex-col items-center justify-center gap-1 p-6
+                    border-r last:border-r-0 border-white/10
+                    cursor-pointer transition-all duration-500
+                    ${isHovered ? 'bg-white/10' : hasHover ? 'bg-black/20' : 'bg-transparent'}
+                  `}
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                    transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms, background-color 0.5s ease-out`
+                  }}
+                  onMouseEnter={() => {
+                    setIsPaused(true);
+                    setHoveredIndex(index);
+                  }}
+                  onMouseLeave={() => setIsPaused(false)}
+                  onClick={() => setHoveredIndex(index)}
+                >
+                  <span className={`absolute top-4 left-4 text-sm font-mono tracking-widest ${isHovered ? 'text-white' : stepColors[index]}`}>
+                    0{index + 1}
+                  </span>
+                  
+                  <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-3 border bg-white/5 border-white/20 ${isHovered ? 'bg-white/20 border-white/40 scale-110' : ''} transition-all duration-500`}>
+                    <Icon className={`w-6 h-6 ${isHovered ? 'text-white' : 'text-white/60'}`} />
+                  </div>
+                  
+                  <h4 className="text-lg font-medium text-white/90">{phase.title}</h4>
+                  <p className="text-sm text-white/40 uppercase tracking-wide">{phase.subtitle}</p>
+                  
+                  <div className={`space-y-0.5 mt-2 transition-all duration-500 ${isHovered ? 'opacity-100 max-h-[100px]' : 'opacity-0 max-h-0 overflow-hidden'}`}>
+                    {phase.subPoints.map((point, i) => (
+                      <div key={i} className="text-xs text-white/60 text-center">{point}</div>
+                    ))}
+                    <p className="text-[10px] text-primary/80 italic mt-2">{phase.quote}</p>
+                  </div>
+                  
+                  <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent transition-all duration-500 ${isHovered ? 'w-3/4 opacity-100' : 'w-0 opacity-0'}`} />
+                </div>
+              );
+            })}
+          </div>
           
+          {/* Mobile/Tablet: Full-width vertical list */}
+          <div className="lg:hidden py-6 px-4 sm:px-6 space-y-0">
+            {processPhases.map((phase, index) => {
+              const Icon = phase.icon;
+              return (
+                <div 
+                  key={index}
+                  className="flex items-start gap-4 py-4 border-b border-white/10 last:border-b-0"
+                  style={{
+                    opacity: isVisible ? 1 : 0,
+                    transform: isVisible ? 'translateX(0)' : 'translateX(-20px)',
+                    transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms`
+                  }}
+                >
+                  {/* Number + Icon */}
+                  <div className="flex flex-col items-center flex-shrink-0 w-12">
+                    <span className="text-[10px] font-mono text-white/50 mb-1">0{index + 1}</span>
+                    <div className="w-10 h-10 rounded-full border border-white/20 bg-white/5 flex items-center justify-center">
+                      <Icon className="w-4 h-4 text-white/70" />
+                    </div>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-sm font-medium text-white">{phase.title}</h4>
+                    <p className="text-[10px] text-white/40 uppercase tracking-wide mb-2">{phase.subtitle}</p>
+                    
+                    {/* Sub Points - Always visible on mobile */}
+                    <div className="space-y-1">
+                      {phase.subPoints.map((point, i) => (
+                        <div key={i} className="flex items-center gap-2 text-[11px] text-white/60">
+                          <span className="w-1 h-1 rounded-full bg-white/30 flex-shrink-0" />
+                          <span>{point}</span>
+                        </div>
+                      ))}
+                    </div>
+                    
+                    <p className="text-[10px] text-primary/70 italic mt-2">{phase.quote}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </div>;
