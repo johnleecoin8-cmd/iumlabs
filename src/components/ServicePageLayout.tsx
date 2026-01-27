@@ -239,6 +239,8 @@ const ServicePageLayout = ({
                 ...posterProps.style,
                 filter: "brightness(0.35)"
               }}
+              fetchPriority="high"
+              decoding="async"
             />
 
             {/* Shimmer loading overlay */}
@@ -252,7 +254,8 @@ const ServicePageLayout = ({
                 className="absolute inset-0 w-full h-full object-cover"
                 style={{ 
                   ...videoProps.style,
-                  filter: "brightness(0.35)"
+                  filter: "brightness(0.35)",
+                  WebkitAppearance: 'none',
                 }}
               >
                 <source src={`${videoSrc}#t=0.001`} type="video/mp4" />
