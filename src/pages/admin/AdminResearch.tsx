@@ -34,7 +34,7 @@ export default function AdminResearch() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['admin-research-posts'] });
-      toast.success('Research post deleted');
+      toast.success('Blog post deleted');
     },
     onError: () => {
       toast.error('Failed to delete post');
@@ -67,10 +67,10 @@ export default function AdminResearch() {
         <div className="p-8">
           <div className="flex justify-between items-center mb-8">
             <div>
-              <h1 className="text-3xl font-bold text-white">Research Posts</h1>
-              <p className="text-white/60 mt-1">Manage your research articles and insights</p>
+              <h1 className="text-3xl font-bold text-white">Blog Posts</h1>
+              <p className="text-white/60 mt-1">Manage your blog articles and insights</p>
             </div>
-            <Link to="/ium-admin/research/new">
+            <Link to="/ium-admin/blog/new">
               <Button className="bg-primary hover:bg-primary/90">
                 <Plus className="w-4 h-4 mr-2" />
                 New Post
@@ -126,7 +126,7 @@ export default function AdminResearch() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex justify-end gap-2">
-                          <Link to={`/ium-admin/research/${post.id}/edit`}>
+                          <Link to={`/ium-admin/blog/${post.id}/edit`}>
                             <Button variant="ghost" size="sm" className="text-white/60 hover:text-white">
                               <Edit className="w-4 h-4" />
                             </Button>
@@ -148,8 +148,8 @@ export default function AdminResearch() {
             </div>
           ) : (
             <div className="bg-[#111] rounded-xl border border-white/10 p-12 text-center">
-              <p className="text-white/60 mb-4">No research posts yet</p>
-              <Link to="/ium-admin/research/new">
+              <p className="text-white/60 mb-4">No blog posts yet</p>
+              <Link to="/ium-admin/blog/new">
                 <Button className="bg-primary hover:bg-primary/90">
                   <Plus className="w-4 h-4 mr-2" />
                   Create First Post

@@ -17,7 +17,7 @@ const navIconMap: Record<string, React.ElementType> = {
   'Home': Home,
   'Services': Briefcase,
   'Projects': FolderOpen,
-  'Research': BookOpen,
+  'Blog': BookOpen,
   'K-Leaderboard': Crown,
   'Career': Users,
   'Contact': Mail
@@ -34,7 +34,7 @@ const sectionToNavMap: Record<string, string> = {
   'why-choose-us': 'Home',
   'gallery': 'Projects',
   'media-partners': 'Home',
-  'insights': 'Research',
+  'insights': 'Blog',
   'contact': 'Contact'
 };
 const Sidebar = () => {

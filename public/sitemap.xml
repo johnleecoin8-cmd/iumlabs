@@ -20,7 +20,7 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research</loc>
+    <loc>https://iumlabs.io/blog</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
@@ -200,75 +200,75 @@
     <priority>0.6</priority>
   </url>
   
-  <!-- Research Articles -->
+  <!-- Blog Articles -->
   <url>
-    <loc>https://iumlabs.io/research/ecosystem-growth-2025</loc>
+    <loc>https://iumlabs.io/blog/ecosystem-growth-2025</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research/ai-agents-defi</loc>
+    <loc>https://iumlabs.io/blog/ai-agents-defi</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research/avoid-flopped-tge</loc>
+    <loc>https://iumlabs.io/blog/avoid-flopped-tge</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research/community-growth-ai</loc>
+    <loc>https://iumlabs.io/blog/community-growth-ai</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research/nft-evolution</loc>
+    <loc>https://iumlabs.io/blog/nft-evolution</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research/crypto-marketing-bear</loc>
+    <loc>https://iumlabs.io/blog/crypto-marketing-bear</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research/kol-marketing</loc>
+    <loc>https://iumlabs.io/blog/kol-marketing</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research/kaito-mindshare</loc>
+    <loc>https://iumlabs.io/blog/kaito-mindshare</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research/sui-network-2026</loc>
+    <loc>https://iumlabs.io/blog/sui-network-2026</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research/defai-ai-agents</loc>
+    <loc>https://iumlabs.io/blog/defai-ai-agents</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research/korea-exchange-listing</loc>
+    <loc>https://iumlabs.io/blog/korea-exchange-listing</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://iumlabs.io/research/memecoin-marketing</loc>
+    <loc>https://iumlabs.io/blog/memecoin-marketing</loc>
     <lastmod>2026-01-23</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>

@@ -46,7 +46,7 @@ export const navigation = {
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
     { name: "Projects", href: "/projects" },
-    { name: "Research", href: "/research" },
+    { name: "Blog", href: "/blog" },
     { name: "K-Leaderboard", href: "/k-leaderboard" },
     { name: "Career", href: "/jobs" },
     { name: "Contact", href: "/contact" },
@@ -288,7 +288,7 @@ export const footer = {
   ],
   company: [
     { name: "Case Studies", href: "/projects" },
-    { name: "Research", href: "/research" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ],
   social: ["LinkedIn", "Telegram", "Twitter"],

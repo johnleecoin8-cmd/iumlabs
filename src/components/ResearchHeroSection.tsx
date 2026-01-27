@@ -7,7 +7,7 @@ import { brand } from "@/config/content";
 
 // Desktop tags
 const serviceTags = [
-  { label: "Market Research", position: "top-[15%] left-[5%]" },
+  { label: "Market Insights", position: "top-[15%] left-[5%]" },
   { label: "Industry Analysis", position: "top-[35%] left-[4%]" },
   { label: "Trend Reports", position: "top-[55%] left-[6%]" },
   { label: "Deep Dives", position: "top-[18%] right-[6%]" },
@@ -24,14 +24,14 @@ const mobileServiceTags = [
 ];
 
 const stats = [
-  { value: 50, label: "Research Reports", suffix: "+" },
+  { value: 50, label: "Blog Posts", suffix: "+" },
   { value: 127, label: "Projects Analyzed", suffix: "+" },
   { value: 8, label: "Market Sectors", suffix: "" },
   { value: 34, label: "Expert Contributors", suffix: "+" },
 ];
 
 const categoryPills = [
-  { icon: TrendingUp, label: "Market Research" },
+  { icon: TrendingUp, label: "Market Insights" },
   { icon: FileText, label: "DeFi" },
   { icon: Lightbulb, label: "Strategy" },
   { icon: BookOpen, label: "Analysis" },
@@ -137,9 +137,9 @@ const ResearchHeroSection = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <span className="text-white">Web3 Market Research &</span>
+            <span className="text-white">Web3 Market Insights &</span>
             <br />
-            <span className="text-white">Data-Driven Insights</span>
+            <span className="text-white">Data-Driven Blog</span>
           </motion.h1>
 
           {/* Subtext */}
@@ -184,7 +184,7 @@ const ResearchHeroSection = () => {
             {/* Shine sweep effect */}
             <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-black/10 to-transparent" />
             <BookOpen className="w-4 h-4" />
-            <span>Explore Research</span>
+            <span>Explore Blog</span>
           </motion.button>
         </div>
       </div>
