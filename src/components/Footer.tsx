@@ -1,6 +1,8 @@
 import { brand } from "@/config/content";
 
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+  
   return (
     <footer className="bg-background text-foreground" style={{
       paddingBottom: 'env(safe-area-inset-bottom)'
@@ -12,6 +14,13 @@ const Footer = () => {
             {brand.name.toLowerCase()}
           </span>
         </h2>
+      </div>
+      
+      {/* Copyright */}
+      <div className="border-t border-white/10 py-4 px-4">
+        <p className="text-center text-xs text-white/40">
+          © {currentYear} {brand.name}. All rights reserved.
+        </p>
       </div>
     </footer>
   );
