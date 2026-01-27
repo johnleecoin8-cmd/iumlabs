@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CTASection from "@/components/CTASection";
-import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -520,10 +518,6 @@ const ResearchDetail = () => {
         </section>
       )}
 
-      <CTASection />
-      
-      {/* CTA Banner */}
-      <CTABannerSection />
 
       {/* Footer Links */}
       <FooterLinksSection />
