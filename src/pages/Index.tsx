@@ -125,13 +125,12 @@ const ProcessBillboardOverlay = () => {
               const Icon = phase.icon;
               const isHovered = hoveredIndex === index;
               const hasHover = hoveredIndex !== null;
-              const stepColors = ['text-white/50', 'text-white/60', 'text-white/70', 'text-white/90'];
               
               return (
                 <div 
                   key={index} 
                   className={`
-                    relative flex flex-col items-center justify-center gap-1 p-6
+                    relative flex flex-col items-center justify-center text-center gap-2 p-6
                     border-r last:border-r-0 border-white/10
                     cursor-pointer transition-all duration-500
                     ${isHovered ? 'bg-white/10' : hasHover ? 'bg-black/20' : 'bg-transparent'}
@@ -148,24 +147,28 @@ const ProcessBillboardOverlay = () => {
                   onMouseLeave={() => setIsPaused(false)}
                   onClick={() => setHoveredIndex(index)}
                 >
-                  <span className={`absolute top-4 left-4 text-sm font-mono tracking-widest ${isHovered ? 'text-white' : stepColors[index]}`}>
+                  {/* Step Number */}
+                  <span className={`text-sm font-mono tracking-widest mb-2 ${isHovered ? 'text-white/80' : 'text-white/40'} transition-colors`}>
                     0{index + 1}
                   </span>
                   
+                  {/* Icon */}
                   <div className={`w-14 h-14 rounded-full flex items-center justify-center mb-3 border bg-white/5 border-white/20 ${isHovered ? 'bg-white/20 border-white/40 scale-110' : ''} transition-all duration-500`}>
                     <Icon className={`w-6 h-6 ${isHovered ? 'text-white' : 'text-white/60'}`} />
                   </div>
                   
-                  <h4 className="text-lg font-medium text-white/90">{phase.title}</h4>
+                  {/* Title & Subtitle */}
+                  <h4 className="text-lg font-medium text-white">{phase.title}</h4>
                   <p className="text-sm text-white/40 uppercase tracking-wide">{phase.subtitle}</p>
                   
-                  <div className={`space-y-0.5 mt-2 transition-all duration-500 ${isHovered ? 'opacity-100 max-h-[100px]' : 'opacity-0 max-h-0 overflow-hidden'}`}>
+                  {/* Sub Points - visible on hover */}
+                  <div className={`space-y-1 mt-3 transition-all duration-500 ${isHovered ? 'opacity-100 max-h-[100px]' : 'opacity-0 max-h-0 overflow-hidden'}`}>
                     {phase.subPoints.map((point, i) => (
-                      <div key={i} className="text-xs text-white/60 text-center">{point}</div>
+                      <div key={i} className="text-xs text-white/60">{point}</div>
                     ))}
-                    <p className="text-[10px] text-primary/80 italic mt-2">{phase.quote}</p>
                   </div>
                   
+                  {/* Bottom Accent Line */}
                   <div className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-[2px] bg-gradient-to-r from-transparent via-white to-transparent transition-all duration-500 ${isHovered ? 'w-3/4 opacity-100' : 'w-0 opacity-0'}`} />
                 </div>
               );
@@ -190,25 +193,22 @@ const ProcessBillboardOverlay = () => {
                   <span className="text-[10px] font-mono text-white/40 mb-2">0{index + 1}</span>
                   
                   {/* Icon */}
-                  <div className="w-10 h-10 rounded-full border border-white/20 bg-white/5 flex items-center justify-center mb-2">
+                  <div className="w-10 h-10 rounded-full border border-white/20 bg-white/5 flex items-center justify-center mb-3">
                     <Icon className="w-4 h-4 text-white/70" />
                   </div>
                   
                   {/* Title & Subtitle */}
-                  <h4 className="text-xs font-medium text-white mb-0.5">{phase.title}</h4>
-                  <p className="text-[9px] text-white/40 uppercase tracking-wide mb-2">{phase.subtitle}</p>
+                  <h4 className="text-xs font-medium text-white mb-1">{phase.title}</h4>
+                  <p className="text-[9px] text-white/40 uppercase tracking-wide mb-3">{phase.subtitle}</p>
                   
                   {/* Sub Points */}
-                  <div className="space-y-0.5">
+                  <div className="space-y-1">
                     {phase.subPoints.map((point, i) => (
-                      <div key={i} className="text-[9px] text-white/50 leading-tight">
+                      <div key={i} className="text-[9px] text-white/50 leading-relaxed">
                         {point}
                       </div>
                     ))}
                   </div>
-                  
-                  {/* Quote */}
-                  <p className="text-[8px] text-primary/60 italic mt-2 line-clamp-2">{phase.quote}</p>
                 </div>
               );
             })}
