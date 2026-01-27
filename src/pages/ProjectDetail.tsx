@@ -73,7 +73,7 @@ const ProjectDetail = () => {
   const heroBackgroundImage = fallbackProject?.bgImage 
     || (!isVideoBackground && dbProject?.background_url ? dbProject.background_url : null)
     || (dbGallery && dbGallery.length > 0 ? dbGallery[0].src : null)
-    || '/images/projects/spacecoin-bg.jpg'; // fallback to static image
+    || '/images/projects/spacecoin-bg.png'; // fallback to static image
   
   // Check for video in DB or fallback
   const heroBackgroundVideo = fallbackProject?.bgVideo 

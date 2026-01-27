@@ -46,7 +46,7 @@ import mantraBg from "@/assets/campaigns/mantra-party.jpg";
 import fogoBg from "@/assets/campaigns/fogo-fest.avif";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
-import spacecoinBg from "@/assets/projects/spacecoin-bg.jpg";
+import spacecoinBg from "@/assets/projects/spacecoin-bg.png";
 
 // Additional images for featured projects
 import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
@@ -658,8 +658,12 @@ const Projects = () => {
   // Use DB projects if available, otherwise fallback
   const cases = dbProjects && dbProjects.length > 0
     ? dbProjects.map((p: Project & { first_gallery_src?: string | null }) => {
-        const galleryAsset = resolveGallerySrcToAsset(p.first_gallery_src ?? null);
+        const firstGallerySrc = p.first_gallery_src ?? null;
+        const galleryAsset = resolveGallerySrcToAsset(firstGallerySrc);
         const fallback = fallbackCases.find((f) => f.slug === p.slug);
+
+        const isVideoUrl = (url?: string | null) => !!url && (url.endsWith(".mp4") || url.endsWith(".webm"));
+        const backgroundImageFromDb = !isVideoUrl(p.background_url) ? p.background_url : null;
 
         return {
           name: p.name,
@@ -667,7 +671,8 @@ const Projects = () => {
           description: p.description || "",
           result: p.result || "",
           category: p.category || "",
-          bgImage: galleryAsset || p.background_url || fallback?.bgImage || "",
+          // Prefer bundled assets for known campaign files; otherwise use gallery src; never use video URLs as <img> src.
+          bgImage: galleryAsset || backgroundImageFromDb || firstGallerySrc || fallback?.bgImage || "",
           websiteUrl: p.website_url || "",
           logo: fallback?.logo || null,
         };
