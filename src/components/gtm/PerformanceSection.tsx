@@ -583,19 +583,6 @@ export const PerformanceSection = () => {
       </div>
 
       <div className="w-full relative z-10">
-        {/* Section Header - Unified with other sections */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="bg-[#1A1A1A] flex items-center justify-between p-4 md:px-10 md:py-4 border-b border-white/10 -mx-4 md:-mx-8 lg:-mx-12 mb-8 md:mb-12"
-        >
-          <div className="flex items-center gap-4 md:gap-6">
-            <span className="text-[10px] md:text-xs text-white/40 font-mono tracking-widest w-6">03</span>
-            <h2 className="text-lg md:text-xl font-medium text-white">Cases</h2>
-          </div>
-          <span className="text-xs text-white/50 tracking-wider hidden sm:block px-3 py-1 border border-white/20 rounded-full">Portfolio</span>
-        </motion.div>
 
         {/* 4-Row Alternating Marquee */}
         <div className="mb-8 md:mb-12 -mx-4 md:-mx-8 lg:-mx-12 space-y-2">
