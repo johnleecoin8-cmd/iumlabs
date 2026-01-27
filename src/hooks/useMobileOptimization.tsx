@@ -13,9 +13,11 @@ interface MobileOptimizationState {
  * Hook to detect mobile devices and performance constraints
  * Used to conditionally disable heavy animations, 3D components, and videos
  * AGGRESSIVE detection to prevent phone shutdown from resource overload
+ * 
+ * SIMPLIFIED: Single useEffect with empty dependency array to prevent
+ * React hook queue corruption in loop-rendered components
  */
 export const useMobileOptimization = (): MobileOptimizationState => {
-  // Simple initial state to avoid React queue issues with lazy initializers
   const [state, setState] = useState<MobileOptimizationState>({
     isMobile: false,
     isLowPerformance: false,
@@ -25,35 +27,24 @@ export const useMobileOptimization = (): MobileOptimizationState => {
     shouldDisableVideo: false,
   });
 
-  // Hydration effect - runs once on mount
-  const [isHydrated, setIsHydrated] = useState(false);
-
   useEffect(() => {
-    // Skip if already hydrated
-    if (isHydrated) return;
-
     const checkPerformance = () => {
-      // Check if mobile - more aggressive detection
       const isMobile = 
         window.innerWidth < 1024 || 
         'ontouchstart' in window ||
         navigator.maxTouchPoints > 0 ||
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
       
-      // Check for reduced motion preference
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       
-      // Check for low-end device indicators - more aggressive
       const isLowPerformance = 
         (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4) ||
         ((navigator as any).deviceMemory !== undefined && (navigator as any).deviceMemory <= 4) ||
         /Android/.test(navigator.userAgent) ||
         /iPhone|iPad|iPod/.test(navigator.userAgent);
       
-      // AGGRESSIVE: Disable heavy stuff on ALL mobile devices
       const shouldDisableHeavyAnimations = isMobile || prefersReducedMotion || isLowPerformance;
       const shouldDisable3D = isMobile || isLowPerformance;
-      // Allow video on mobile unless user prefers reduced motion
       const shouldDisableVideo = prefersReducedMotion;
 
       setState({
@@ -64,44 +55,10 @@ export const useMobileOptimization = (): MobileOptimizationState => {
         shouldDisable3D,
         shouldDisableVideo,
       });
-      
-      setIsHydrated(true);
     };
 
-    // Run immediately
+    // Run immediately on mount
     checkPerformance();
-  }, [isHydrated]);
-
-  // Resize and motion preference listener (separate effect)
-  useEffect(() => {
-    const checkPerformance = () => {
-      const isMobile = 
-        window.innerWidth < 1024 || 
-        'ontouchstart' in window ||
-        navigator.maxTouchPoints > 0 ||
-        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-      
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      
-      const isLowPerformance = 
-        (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4) ||
-        ((navigator as any).deviceMemory !== undefined && (navigator as any).deviceMemory <= 4) ||
-        /Android/.test(navigator.userAgent) ||
-        /iPhone|iPad|iPod/.test(navigator.userAgent);
-      
-      const shouldDisableHeavyAnimations = isMobile || prefersReducedMotion || isLowPerformance;
-      const shouldDisable3D = isMobile || isLowPerformance;
-      const shouldDisableVideo = prefersReducedMotion;
-
-      setState({
-        isMobile,
-        isLowPerformance,
-        prefersReducedMotion,
-        shouldDisableHeavyAnimations,
-        shouldDisable3D,
-        shouldDisableVideo,
-      });
-    };
 
     // Debounced resize handler
     let resizeTimeout: ReturnType<typeof setTimeout>;
@@ -121,7 +78,7 @@ export const useMobileOptimization = (): MobileOptimizationState => {
       motionQuery.removeEventListener('change', checkPerformance);
       clearTimeout(resizeTimeout);
     };
-  }, []);
+  }, []); // Empty dependency - runs once on mount
 
   return state;
 };
