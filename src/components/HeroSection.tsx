@@ -202,7 +202,7 @@ const HeroSection = () => {
       {/* Background Layer - Video with mobile optimizations */}
       <div className="absolute inset-0">
         {/* Always render poster as a safe fallback */}
-        <img {...posterProps} />
+        <img {...posterProps} fetchPriority="high" decoding="async" />
 
         {/* Shimmer loading overlay */}
         <ShimmerOverlay />
