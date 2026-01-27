@@ -172,45 +172,43 @@ const ProcessBillboardOverlay = () => {
             })}
           </div>
           
-          {/* Mobile/Tablet: Full-width vertical list */}
-          <div className="lg:hidden py-6 px-4 sm:px-6 space-y-0">
+          {/* Mobile/Tablet: Card style grid with center alignment */}
+          <div className="lg:hidden py-6 px-4 sm:px-6 grid grid-cols-2 gap-3">
             {processPhases.map((phase, index) => {
               const Icon = phase.icon;
               return (
                 <div 
                   key={index}
-                  className="flex items-start gap-4 py-4 border-b border-white/10 last:border-b-0"
+                  className="flex flex-col items-center text-center p-4 rounded-xl bg-black/40 border border-white/10"
                   style={{
                     opacity: isVisible ? 1 : 0,
-                    transform: isVisible ? 'translateX(0)' : 'translateX(-20px)',
+                    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
                     transition: `opacity 0.5s ease-out ${index * 100}ms, transform 0.5s ease-out ${index * 100}ms`
                   }}
                 >
-                  {/* Number + Icon */}
-                  <div className="flex flex-col items-center flex-shrink-0 w-12">
-                    <span className="text-[10px] font-mono text-white/50 mb-1">0{index + 1}</span>
-                    <div className="w-10 h-10 rounded-full border border-white/20 bg-white/5 flex items-center justify-center">
-                      <Icon className="w-4 h-4 text-white/70" />
-                    </div>
+                  {/* Number */}
+                  <span className="text-[10px] font-mono text-white/40 mb-2">0{index + 1}</span>
+                  
+                  {/* Icon */}
+                  <div className="w-10 h-10 rounded-full border border-white/20 bg-white/5 flex items-center justify-center mb-2">
+                    <Icon className="w-4 h-4 text-white/70" />
                   </div>
                   
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <h4 className="text-sm font-medium text-white">{phase.title}</h4>
-                    <p className="text-[10px] text-white/40 uppercase tracking-wide mb-2">{phase.subtitle}</p>
-                    
-                    {/* Sub Points - Always visible on mobile */}
-                    <div className="space-y-1">
-                      {phase.subPoints.map((point, i) => (
-                        <div key={i} className="flex items-center gap-2 text-[11px] text-white/60">
-                          <span className="w-1 h-1 rounded-full bg-white/30 flex-shrink-0" />
-                          <span>{point}</span>
-                        </div>
-                      ))}
-                    </div>
-                    
-                    <p className="text-[10px] text-primary/70 italic mt-2">{phase.quote}</p>
+                  {/* Title & Subtitle */}
+                  <h4 className="text-xs font-medium text-white mb-0.5">{phase.title}</h4>
+                  <p className="text-[9px] text-white/40 uppercase tracking-wide mb-2">{phase.subtitle}</p>
+                  
+                  {/* Sub Points */}
+                  <div className="space-y-0.5">
+                    {phase.subPoints.map((point, i) => (
+                      <div key={i} className="text-[9px] text-white/50 leading-tight">
+                        {point}
+                      </div>
+                    ))}
                   </div>
+                  
+                  {/* Quote */}
+                  <p className="text-[8px] text-primary/60 italic mt-2 line-clamp-2">{phase.quote}</p>
                 </div>
               );
             })}
