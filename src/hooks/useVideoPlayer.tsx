@@ -23,6 +23,12 @@ interface UseVideoPlayerOptions {
     low?: string;   // e.g., 480p version
     high?: string;  // e.g., 1080p version
   };
+  /** Force first frame load with #t=0.001 */
+  forceFirstFrame?: boolean;
+  /** Max retries for network errors (default: 3) */
+  maxRetries?: number;
+  /** Load timeout in ms (default: 8000) */
+  loadTimeout?: number;
 }
 
 interface UseVideoPlayerReturn {
@@ -82,6 +88,16 @@ interface UseVideoPlayerReturn {
 }
 
 /**
+ * Get video source with optional first frame parameter
+ */
+const getVideoSource = (src: string, forceFirstFrame: boolean): string => {
+  if (forceFirstFrame && !src.includes('#t=')) {
+    return `${src}#t=0.001`;
+  }
+  return src;
+};
+
+/**
  * Comprehensive video player hook with mobile optimization and network-aware quality
  * 
  * Features:
@@ -90,6 +106,8 @@ interface UseVideoPlayerReturn {
  * - Data saver mode detection
  * - Fallback poster management
  * - Mobile optimization integration
+ * - First frame forced loading with #t=0.001
+ * - Network error retry with exponential backoff
  */
 export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerReturn => {
   const {
@@ -99,6 +117,9 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     preload = 'auto',
     playDelay = 0,
     qualityVariants,
+    forceFirstFrame = true,
+    maxRetries = 3,
+    loadTimeout = 8000,
   } = options;
 
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -106,6 +127,8 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   const [hasVideoError, setHasVideoError] = useState(false);
   const [networkInfo, setNetworkInfo] = useState<NetworkInfo | null>(null);
   const [quality, setQuality] = useState<'low' | 'high' | 'auto'>('auto');
+  const [retryCount, setRetryCount] = useState(0);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const { isMobile, shouldDisableVideo, prefersReducedMotion } = useMobileOptimization();
 
@@ -164,19 +187,25 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     }
   }, [networkInfo, isMobile]);
 
-  // Get optimized video source based on quality
+  // Get optimized video source based on quality with first frame support
   const optimizedSrc = useCallback(() => {
-    if (!qualityVariants) return src;
-
-    switch (quality) {
-      case 'low':
-        return qualityVariants.low || src;
-      case 'high':
-        return qualityVariants.high || src;
-      default:
-        return src;
+    let baseSrc = src;
+    
+    if (qualityVariants) {
+      switch (quality) {
+        case 'low':
+          baseSrc = qualityVariants.low || src;
+          break;
+        case 'high':
+          baseSrc = qualityVariants.high || src;
+          break;
+        default:
+          baseSrc = src;
+      }
     }
-  }, [src, quality, qualityVariants])();
+
+    return getVideoSource(baseSrc, forceFirstFrame);
+  }, [src, quality, qualityVariants, forceFirstFrame])();
 
   // Retry play logic for mobile browsers - more aggressive
   const tryPlay = useCallback((video: HTMLVideoElement) => {
@@ -193,6 +222,27 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     setTimeout(attempt, 600);
     setTimeout(attempt, 1000);
   }, []);
+
+  // Handle network error with retry
+  const handleError = useCallback(() => {
+    if (retryCount < maxRetries) {
+      const delay = Math.pow(2, retryCount) * 1000; // Exponential backoff: 1s, 2s, 4s
+      console.log(`Video load failed, retrying in ${delay}ms (attempt ${retryCount + 1}/${maxRetries})`);
+      
+      setTimeout(() => {
+        setRetryCount(prev => prev + 1);
+        setHasVideoError(false);
+        
+        // Force reload the video
+        if (videoRef.current) {
+          videoRef.current.load();
+        }
+      }, delay);
+    } else {
+      setHasVideoError(true);
+      console.warn('Video load failed after max retries, falling back to poster');
+    }
+  }, [retryCount, maxRetries]);
 
   // Manual controls
   const play = useCallback(() => {
@@ -214,17 +264,30 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     }
   }, []);
 
+  // Load timeout - fallback to poster if video takes too long
+  useEffect(() => {
+    if (shouldDisableVideo || hasVideoError || isVideoReady) return;
+
+    timeoutRef.current = setTimeout(() => {
+      if (!isVideoReady) {
+        console.warn(`Video load timeout after ${loadTimeout}ms, showing poster`);
+        setIsVideoReady(true); // Allow graceful fallback
+      }
+    }, loadTimeout);
+
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, [shouldDisableVideo, hasVideoError, isVideoReady, loadTimeout]);
+
   // Auto-play on mount if enabled - with visibility detection
   useEffect(() => {
     if (!autoPlay || shouldDisableVideo || hasVideoError) return;
 
     const video = videoRef.current;
     if (!video) return;
-
-    // Play when video element is ready
-    const handleVideoReady = () => {
-      tryPlay(video);
-    };
 
     // Initial play attempt
     const timer = setTimeout(() => {
@@ -268,6 +331,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
   useEffect(() => {
     setIsVideoReady(false);
     setHasVideoError(false);
+    setRetryCount(0);
   }, [optimizedSrc]);
 
   // Video element props
@@ -299,9 +363,7 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     onLoadedData: () => {
       setIsVideoReady(true);
     },
-    onError: () => {
-      setHasVideoError(true);
-    },
+    onError: handleError,
   };
 
   // Poster fallback props
