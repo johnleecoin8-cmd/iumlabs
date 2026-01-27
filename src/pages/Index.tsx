@@ -44,31 +44,31 @@ import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { MessageSquare, FileText, Rocket, TrendingUp, Check, ArrowRight } from "lucide-react";
+import { PhoneOutgoing, FileCheck, CreditCard, Rocket, Check, ArrowRight } from "lucide-react";
 const processPhases = [{
-  title: "ANALYZE",
-  subtitle: "Intelligence",
-  icon: MessageSquare,
-  subPoints: ["Deep Market Research", "Competitor Landscape Analysis", "Narrative Localization"],
-  quote: '"We don\'t guess. We analyze."'
+  title: "Inquiry / Meeting",
+  subtitle: "Discovery",
+  icon: PhoneOutgoing,
+  subPoints: ["Project Analysis", "Feasibility Consultation"],
+  quote: ''
 }, {
-  title: "BUILD",
-  subtitle: "Foundation & Community",
-  icon: FileText,
-  subPoints: ["KOL & Alpha Group Onboarding", "Community Architecture", "Localized Content Creation"],
-  quote: '"Cultivating the core audience before the noise."'
+  title: "Proposal / Confirm",
+  subtitle: "Planning",
+  icon: FileCheck,
+  subPoints: ["Custom GTM Deck Delivery", "KPI & Scope Confirmation"],
+  quote: ''
 }, {
-  title: "IGNITE",
-  subtitle: "Launch & Viral",
+  title: "Payment",
+  subtitle: "Agreement",
+  icon: CreditCard,
+  subPoints: ["Service Agreement Signing", "Invoice Settlement"],
+  quote: ''
+}, {
+  title: "Execution",
+  subtitle: "Launch",
   icon: Rocket,
-  subPoints: ["Viral Marketing & Amplification", "Cross-Community AMAs", "Tier-1 PR & Media Blast"],
-  quote: '"Sparking the flame. Maximum impact, zero friction."'
-}, {
-  title: "SCALE",
-  subtitle: "Growth & Sustainability",
-  icon: TrendingUp,
-  subPoints: ["On-chain Events & Campaigns", "Liquidity Initiatives", "Holder Retention Programs"],
-  quote: '"Turning hype into sustainable retention."'
+  subPoints: ["Dedicated TF Deployment", "Campaign Launch"],
+  quote: ''
 }];
 const ProcessBillboardOverlay = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(0);
