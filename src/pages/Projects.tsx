@@ -31,6 +31,7 @@ import mantraLogo from "@/assets/logos/mantra.png";
 import fogoLogo from "@/assets/logos/fogo.png";
 import zkpassLogo from "@/assets/logos/zkpass.png";
 import synfuturesLogo from "@/assets/logos/synfutures.png";
+import spacecoinLogo from "@/assets/logos/spacecoin.png";
 
 // Import campaign images for backgrounds as fallbacks
 import bnbBg from "@/assets/campaigns/bnb-event.jpg";
@@ -45,6 +46,7 @@ import mantraBg from "@/assets/campaigns/mantra-party.jpg";
 import fogoBg from "@/assets/campaigns/fogo-fest.avif";
 import zkpassBg from "@/assets/campaigns/zkpass-verifiable-nights.jpg";
 import synfuturesBg from "@/assets/campaigns/synfutures-billboard.jpg";
+import spacecoinBg from "@/assets/projects/spacecoin-bg.jpg";
 
 // Additional images for featured projects
 import storyWorkshop from "@/assets/campaigns/story-workshop.jpg";
@@ -98,6 +100,7 @@ const fallbackCases = [
   { name: "FOGO", logo: fogoLogo, bgImage: fogoBg, slug: "fogo", result: "Fogo Fest 2025 Success", category: "Layer 1", description: "Launch event and community activation for FOGO ecosystem in Korean market." },
   { name: "zkPass", logo: zkpassLogo, bgImage: zkpassBg, slug: "zkpass", result: "The Verifiable Nights", category: "Privacy", description: "Privacy-focused Web3 identity solution launch with Korean developer community." },
   { name: "SynFutures", logo: synfuturesLogo, bgImage: synfuturesBg, slug: "synfutures", result: "Gangnam Billboard Promotion", category: "DeFi", description: "High-visibility billboard campaign in Gangnam district for Korean market awareness." },
+  { name: "Spacecoin", logo: spacecoinLogo, bgImage: spacecoinBg, slug: "spacecoin", result: "200K+ Impressions", category: "Infrastructure", description: "Blockchain-based space infrastructure platform launch with Korean community growth campaign." },
 ];
 
 interface Project {
@@ -296,6 +299,7 @@ const logoMap: Record<string, string | null> = {
   "fogo": fogoLogo,
   "zkpass": zkpassLogo,
   "synfutures": synfuturesLogo,
+  "spacecoin": spacecoinLogo,
 };
 
 // Video mapping for projects that have videos
@@ -307,6 +311,7 @@ const videoMap: Record<string, string | null> = {
   "bnb-chain": "/videos/projects/bnb-hero.mp4",
   "sahara-ai": "/videos/projects/sahara-hero.mp4",
   "kucoin": "/videos/projects/kucoin-hero.mp4",
+  "spacecoin": "/videos/projects/spacecoin-hero.mp4",
 };
 
 interface SelectedWorkProject {
