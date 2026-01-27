@@ -343,15 +343,20 @@ export const useVideoPlayer = (options: UseVideoPlayerOptions): UseVideoPlayerRe
     'webkit-playsinline': 'true',
     'x5-playsinline': 'true',
     'x5-video-player-type': 'h5',
+    'x5-video-orientation': 'portraint',
     preload,
     poster,
     disablePictureInPicture: true,
+    disableRemotePlayback: true,
     controls: false,
+    controlsList: 'nodownload nofullscreen noplaybackrate',
     'aria-hidden': true as const,
     tabIndex: -1,
     style: {
       opacity: isVideoReady ? 1 : 0,
-      transition: 'opacity 180ms ease',
+      visibility: isVideoReady ? 'visible' : 'hidden',
+      pointerEvents: isVideoReady ? 'auto' : 'none',
+      transition: 'opacity 180ms ease, visibility 0s linear 0s',
     } as React.CSSProperties,
     onLoadedMetadata: (e: React.SyntheticEvent<HTMLVideoElement>) => {
       setIsVideoReady(true);
