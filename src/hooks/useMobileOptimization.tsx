@@ -15,25 +15,23 @@ interface MobileOptimizationState {
  * AGGRESSIVE detection to prevent phone shutdown from resource overload
  */
 export const useMobileOptimization = (): MobileOptimizationState => {
-  const [state, setState] = useState<MobileOptimizationState>(() => {
-    // Initial state - assume mobile if touch device or small screen
-    const isMobileInitial = typeof window !== 'undefined' && (
-      window.innerWidth < 1024 || 
-      'ontouchstart' in window ||
-      navigator.maxTouchPoints > 0
-    );
-    
-    return {
-      isMobile: isMobileInitial,
-      isLowPerformance: isMobileInitial, // Assume low performance on mobile
-      prefersReducedMotion: false,
-      shouldDisableHeavyAnimations: isMobileInitial,
-      shouldDisable3D: isMobileInitial,
-      shouldDisableVideo: false,
-    };
+  // Simple initial state to avoid React queue issues with lazy initializers
+  const [state, setState] = useState<MobileOptimizationState>({
+    isMobile: false,
+    isLowPerformance: false,
+    prefersReducedMotion: false,
+    shouldDisableHeavyAnimations: false,
+    shouldDisable3D: false,
+    shouldDisableVideo: false,
   });
 
+  // Hydration effect - runs once on mount
+  const [isHydrated, setIsHydrated] = useState(false);
+
   useEffect(() => {
+    // Skip if already hydrated
+    if (isHydrated) return;
+
     const checkPerformance = () => {
       // Check if mobile - more aggressive detection
       const isMobile = 
@@ -66,11 +64,46 @@ export const useMobileOptimization = (): MobileOptimizationState => {
         shouldDisable3D,
         shouldDisableVideo,
       });
+      
+      setIsHydrated(true);
     };
 
+    // Run immediately
     checkPerformance();
-    
-    // Re-check on resize (for responsive testing) - debounced
+  }, [isHydrated]);
+
+  // Resize and motion preference listener (separate effect)
+  useEffect(() => {
+    const checkPerformance = () => {
+      const isMobile = 
+        window.innerWidth < 1024 || 
+        'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      const isLowPerformance = 
+        (navigator.hardwareConcurrency !== undefined && navigator.hardwareConcurrency <= 4) ||
+        ((navigator as any).deviceMemory !== undefined && (navigator as any).deviceMemory <= 4) ||
+        /Android/.test(navigator.userAgent) ||
+        /iPhone|iPad|iPod/.test(navigator.userAgent);
+      
+      const shouldDisableHeavyAnimations = isMobile || prefersReducedMotion || isLowPerformance;
+      const shouldDisable3D = isMobile || isLowPerformance;
+      const shouldDisableVideo = prefersReducedMotion;
+
+      setState({
+        isMobile,
+        isLowPerformance,
+        prefersReducedMotion,
+        shouldDisableHeavyAnimations,
+        shouldDisable3D,
+        shouldDisableVideo,
+      });
+    };
+
+    // Debounced resize handler
     let resizeTimeout: ReturnType<typeof setTimeout>;
     const handleResize = () => {
       clearTimeout(resizeTimeout);
