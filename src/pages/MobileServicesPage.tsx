@@ -445,7 +445,7 @@ const MobileServicesPage = () => {
     ShimmerOverlay: HeroShimmerOverlay,
   } = useVideoPlayer({
     src: '/videos/services-hero.mp4',
-    poster: '/images/hero-poster.jpg',
+    poster: '/images/posters/services-hero.jpg',
   });
   
   return (
