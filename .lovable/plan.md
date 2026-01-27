@@ -1,127 +1,111 @@
 
-# Process 섹션 리디자인 계획
+# Process 섹션 하이브리드 버전 계획
 
 ## 개요
-참조 이미지 스타일로 Process 섹션을 간결하고 깔끔하게 리디자인합니다.
+Ium Labs의 전문 방법론(ANALYZE, BUILD, IGNITE, SCALE)과 클라이언트 관점의 비즈니스 프로세스(Inquiry → Execution)를 조합하여 두 가지 장점을 모두 살린 새로운 버전을 만듭니다.
 
 ---
 
-## 현재 vs 변경 후 비교
+## 조합 컨셉
 
-| 항목 | 현재 | 변경 후 |
-|------|------|---------|
-| 배경 | 서울 지하철 빌보드 이미지 | 단순 어두운 배경 (bg-[#0A0A0A]) |
-| 레이아웃 | 복잡한 hover 상태 | 심플한 4-column 그리드 |
-| 아이콘 | 작은 원형 아이콘 | 크고 선명한 라인 아이콘 |
-| 연결 | 없음 | 화살표 연결자 (||>) |
-| 콘텐츠 | ANALYZE, BUILD, IGNITE, SCALE | Inquiry, Proposal, Payment, Execution |
-
----
-
-## 새로운 디자인 구조
+**핵심 아이디어**: 클라이언트가 경험하는 여정(Inquiry → Execution) 안에 Ium Labs의 전문 방법론이 녹아들어 있음을 보여줌
 
 ```text
-┌─────────────────────────────────────────────────────────────────────────┐
-│                              Process                                     │
-├─────────────┬───┬─────────────┬───┬─────────────┬───┬─────────────────┤
-│   📞        │||>│   📋        │||>│   💳        │||>│   🚀            │
-│  (icon)     │   │  (icon)     │   │  (icon)     │   │  (icon)         │
-│             │   │             │   │             │   │                 │
-│ Inquiry /   │   │ Proposal /  │   │  Payment    │   │  Execution      │
-│ Meeting     │   │ Confirm     │   │             │   │                 │
-│             │   │             │   │             │   │                 │
-│ • Project   │   │ • Custom    │   │ • Service   │   │ • Dedicated TF  │
-│   Analysis  │   │   GTM Deck  │   │   Agreement │   │   Deployment    │
-│ • Feasibility   │   │   Delivery  │   │   Signing   │   │ • Campaign     │
-│   Consultation│   │ • KPI &     │   │ • Invoice   │   │   Launch        │
-│             │   │   Scope     │   │   Settlement│   │                 │
-└─────────────┴───┴─────────────┴───┴─────────────┴───┴─────────────────┘
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  01                    02                    03                    04       │
+│  Inquiry               Strategy              Amplify               Growth   │
+│  Discovery             Planning              Launch                Scale    │
+│                                                                             │
+│  • Deep Market         • Community           • Viral Marketing     • On-chain│
+│    Research              Architecture        • Tier-1 PR Blast       Events │
+│  • Competitor          • KOL Network         • Cross-Community     • Holder │
+│    Analysis              Mapping               AMAs                  Retention│
+│  • Project Fit         • Content             • Media Coverage      • Sustainable│
+│    Assessment            Localization                                 Growth │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 상세 구현 계획
+## 새로운 데이터 구조
 
-### 1. 콘텐츠 데이터 변경
+| 단계 | 타이틀 | 서브타이틀 | 세부 포인트 |
+|------|--------|------------|-------------|
+| 01 | Inquiry | Discovery | Deep Market Research, Competitor Analysis, Project Fit Assessment |
+| 02 | Strategy | Planning | Community Architecture, KOL Network Mapping, Content Localization |
+| 03 | Amplify | Launch | Viral Marketing & Amplification, Tier-1 PR Blast, Cross-Community AMAs |
+| 04 | Growth | Scale | On-chain Events & Campaigns, Holder Retention Programs, Sustainable Growth |
 
-```typescript
-const processPhases = [
-  {
-    title: "Inquiry / Meeting",
-    icon: Phone, // PhoneOutgoing
-    subPoints: ["Project Analysis", "Feasibility Consultation"]
-  },
-  {
-    title: "Proposal / Confirm",
-    icon: FileCheck, // FileText with check
-    subPoints: ["Custom GTM Deck Delivery", "KPI & Scope Confirmation"]
-  },
-  {
-    title: "Payment",
-    icon: CreditCard,
-    subPoints: ["Service Agreement Signing", "Invoice Settlement"]
-  },
-  {
-    title: "Execution",
-    icon: Rocket,
-    subPoints: ["Dedicated TF Deployment", "Campaign Launch"]
-  }
-];
-```
+**특징**:
+- 타이틀: 클라이언트 관점 (Inquiry, Strategy, Amplify, Growth)
+- 서브타이틀: 단계별 성격 (Discovery, Planning, Launch, Scale)
+- 세부 포인트: Ium Labs 전문 방법론 내용 유지
 
-### 2. 새로운 레이아웃 스타일
+---
 
-**디자인 요소:**
-- 배경: 단색 어두운 배경 (bg-[#0A0A0A] 또는 bg-[#111111])
-- 아이콘: 64x64px 크기, 흰색 라인 아이콘
-- 제목: 굵은 폰트, 가운데 정렬
-- 하위 항목: 작은 도트 리스트
-- 화살표: 카드 사이에 `||>` 스타일 연결자 (커스텀 SVG 또는 텍스트)
+## 아이콘 선택
 
-### 3. 반응형 레이아웃
-
-| 화면 크기 | 레이아웃 |
-|-----------|----------|
-| Desktop (lg+) | 4-column 그리드 + 화살표 연결 |
-| Tablet (md) | 2x2 그리드, 화살표 숨김 |
-| Mobile (sm-) | 1-column 세로 리스트, 화살표 숨김 |
+| 단계 | 아이콘 | 의미 |
+|------|--------|------|
+| Inquiry | `Search` | 분석과 발견 |
+| Strategy | `LayoutGrid` | 구조와 계획 |
+| Amplify | `Megaphone` | 증폭과 확산 |
+| Growth | `TrendingUp` | 성장과 유지 |
 
 ---
 
 ## 수정 파일
 
 **`src/pages/Index.tsx`**
-- `processPhases` 데이터 구조 변경
-- `ProcessBillboardOverlay` 컴포넌트를 새로운 심플한 디자인으로 교체
-- 배경 이미지 제거
-- 아이콘 import 변경 (PhoneOutgoing, FileCheck, CreditCard, Rocket)
-- 화살표 연결자 SVG/텍스트 추가
+1. 아이콘 import 변경: `Search`, `LayoutGrid`, `Megaphone`, `TrendingUp`
+2. `processPhases` 배열 업데이트:
+   - 타이틀: Inquiry → Strategy → Amplify → Growth
+   - 서브타이틀: Discovery → Planning → Launch → Scale
+   - 세부 포인트: 기존 방법론 내용 유지 (약간 조정)
+   - quote 필드 제거 (현재 미사용)
 
 ---
 
-## 시각적 세부 사항
+## 상세 코드 변경
 
-### 아이콘 스타일
-- Lucide 아이콘 사용: `PhoneOutgoing`, `FileCheck`, `CreditCard`, `Rocket`
-- 크기: w-12 h-12 또는 w-16 h-16
-- 색상: text-white
-- 스트로크: stroke-width 1.5
-
-### 화살표 연결자
-- 스타일: `||>` (두 개의 세로선 + 화살표)
-- 색상: text-white/30
-- 위치: 데스크톱에서만 표시, 카드 사이 중앙 정렬
-
-### 카드 스타일
-- 배경: 미묘한 그라데이션 또는 반투명 (bg-white/5)
-- 둥근 모서리: rounded-xl
-- 패딩: p-6 또는 p-8
+```typescript
+const processPhases = [
+  {
+    title: "Inquiry",
+    subtitle: "Discovery",
+    icon: Search,
+    subPoints: ["Deep Market Research", "Competitor Analysis", "Project Fit Assessment"],
+    quote: ''
+  },
+  {
+    title: "Strategy", 
+    subtitle: "Planning",
+    icon: LayoutGrid,
+    subPoints: ["Community Architecture", "KOL Network Mapping", "Content Localization"],
+    quote: ''
+  },
+  {
+    title: "Amplify",
+    subtitle: "Launch",
+    icon: Megaphone,
+    subPoints: ["Viral Marketing & Amplification", "Tier-1 PR Blast", "Cross-Community AMAs"],
+    quote: ''
+  },
+  {
+    title: "Growth",
+    subtitle: "Scale",
+    icon: TrendingUp,
+    subPoints: ["On-chain Events & Campaigns", "Holder Retention Programs", "Sustainable Growth"],
+    quote: ''
+  }
+];
+```
 
 ---
 
-## 예상 결과
+## 기대 효과
 
-- 배경 이미지 없이 깔끔하고 집중도 높은 디자인
-- 명확한 프로세스 흐름 시각화 (화살표 연결)
-- 실제 비즈니스 프로세스 반영 (문의 → 제안 → 결제 → 실행)
-- 모바일에서도 깔끔하게 표시
+1. **클라이언트 친화적**: 비즈니스 프로세스 흐름이 직관적
+2. **전문성 유지**: Ium Labs의 Web3 마케팅 방법론 세부 내용 보존
+3. **차별화**: 일반적인 에이전시 프로세스와 다른 전문 용어 사용
+4. **일관성**: 기존 디자인 구조(빌보드 배경, 호버 효과) 그대로 유지
