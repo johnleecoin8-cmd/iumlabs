@@ -1,14 +1,6 @@
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import aboutImageDefault from '@/assets/campaigns/about-image-default.jpeg';
 import aboutImageHover from '@/assets/campaigns/about-image-hover.jpeg';
-
-const stats = [
-  { value: "50+", label: "Projects Launched" },
-  { value: "$2B+", label: "Total Value Marketed" },
-  { value: "100+", label: "KOL Partners" },
-];
 
 const WhyChooseUsSection = () => {
   return (
@@ -37,36 +29,15 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.6, ease: "easeOut" }}
             viewport={{ once: true, margin: "-50px" }}
           >
-            {/* Headline - 맨 위로 */}
+            {/* Headline */}
             <h2 className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-bold text-foreground mb-5 sm:mb-6 tracking-tight leading-tight">
               Data-Driven Market Entry.
             </h2>
             
             {/* Description */}
-            <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-8">
+            <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-10 sm:mb-12">
               In Korean, 'ium' (이음) means 'connection.' But to us, it means integration. Stop relying on intuition. We engineer your entry into the Korean market using proprietary research and quantitative impact analysis. We don't just market; we structure your narrative to flawlessly 'ium' (connect) global protocols with local liquidity.
             </p>
-            
-            {/* Stats Grid */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-8">
-              {stats.map((stat, index) => (
-                <motion.div 
-                  key={index}
-                  className="text-center p-3 sm:p-4 rounded-lg border border-white/10 bg-white/5"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-[10px] sm:text-xs text-foreground/50 uppercase tracking-wider">
-                    {stat.label}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
             
             {/* CTA Note */}
             <p className="text-violet-400 text-sm sm:text-base md:text-lg font-medium">
