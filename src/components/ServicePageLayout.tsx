@@ -255,7 +255,7 @@ const ServicePageLayout = ({
                   filter: "brightness(0.35)"
                 }}
               >
-                <source src={videoSrc} type="video/mp4" />
+                <source src={`${videoSrc}#t=0.001`} type="video/mp4" />
               </video>
             )}
             

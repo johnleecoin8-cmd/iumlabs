@@ -107,21 +107,43 @@ const projects: Project[] = [
 
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const [isTouchDevice] = useState(() => 'ontouchstart' in window || navigator.maxTouchPoints > 0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   const handleMouseEnter = () => {
+    if (isTouchDevice) return; // Skip hover on touch devices
     setIsHovered(true);
     if (videoRef.current) {
+      videoRef.current.muted = true;
       videoRef.current.play().catch(() => {});
     }
   };
 
   const handleMouseLeave = () => {
+    if (isTouchDevice) return;
     setIsHovered(false);
     if (videoRef.current) {
       videoRef.current.pause();
       videoRef.current.currentTime = 0;
     }
+  };
+
+  // Touch handler for mobile - tap to toggle
+  const handleTouchStart = () => {
+    if (!isTouchDevice || !project.video) return;
+    setIsHovered(prev => {
+      const newValue = !prev;
+      if (videoRef.current) {
+        if (newValue) {
+          videoRef.current.muted = true;
+          videoRef.current.play().catch(() => {});
+        } else {
+          videoRef.current.pause();
+          videoRef.current.currentTime = 0;
+        }
+      }
+      return newValue;
+    });
   };
 
   return (
@@ -136,6 +158,7 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
         className="group block relative aspect-[4/3] overflow-hidden rounded-xl border border-white/10 hover:border-primary/40 transition-all duration-500"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        onTouchStart={handleTouchStart}
       >
         {/* Background Image */}
         <img
@@ -144,14 +167,18 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
 
-        {/* Video overlay on hover */}
+        {/* Video overlay on hover with enhanced mobile support */}
         {project.video && (
           <video
             ref={videoRef}
-            src={project.video}
+            src={`${project.video}#t=0.001`}
             muted
             loop
             playsInline
+            webkit-playsinline="true"
+            x5-playsinline="true"
+            x5-video-player-type="h5"
+            preload="metadata"
             className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
               isHovered ? 'opacity-100' : 'opacity-0'
             }`}

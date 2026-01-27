@@ -146,7 +146,7 @@ const SelectedWorkShowcase = () => {
             }`}
           />
           
-          {/* Video layer - preloaded for active project */}
+          {/* Video layer - preloaded for active project with enhanced mobile support */}
           {currentProject.video && (
             <video 
               autoPlay 
@@ -155,17 +155,23 @@ const SelectedWorkShowcase = () => {
               playsInline
               webkit-playsinline="true"
               x5-playsinline="true"
+              x5-video-player-type="h5"
               poster={typeof currentProject.media === 'string' ? currentProject.media : undefined}
               preload={activeIndex === 0 || preloadedVideos.has(activeIndex) ? "auto" : "metadata"}
               onLoadedData={(e) => {
                 handleVideoLoad(activeIndex);
-                e.currentTarget.play().catch(() => {});
+                // Multiple retry attempts for mobile autoplay
+                const video = e.currentTarget;
+                video.muted = true;
+                video.play().catch(() => {});
+                setTimeout(() => video.play().catch(() => {}), 100);
+                setTimeout(() => video.play().catch(() => {}), 300);
               }}
               className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
                 isCurrentVideoLoaded ? 'opacity-100' : 'opacity-0'
               }`}
             >
-              <source src={currentProject.video} type="video/mp4" />
+              <source src={`${currentProject.video}#t=0.001`} type="video/mp4" />
             </video>
           )}
           

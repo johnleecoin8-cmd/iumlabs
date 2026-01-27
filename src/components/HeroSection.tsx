@@ -213,7 +213,7 @@ const HeroSection = () => {
             {...videoProps}
             className="absolute inset-0 w-full h-full object-cover z-10"
           >
-            <source src="/videos/hero-background.mp4" type="video/mp4" />
+            <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
           </video>
         )}
       </div>
