@@ -44,30 +44,30 @@ import CTABannerSection from "@/components/CTABannerSection";
 import FooterLinksSection from "@/components/FooterLinksSection";
 import Footer from "@/components/Footer";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { PhoneOutgoing, FileCheck, CreditCard, Rocket, Check, ArrowRight } from "lucide-react";
+import { Search, LayoutGrid, Megaphone, TrendingUp, Check, ArrowRight } from "lucide-react";
 const processPhases = [{
-  title: "Inquiry / Meeting",
+  title: "Inquiry",
   subtitle: "Discovery",
-  icon: PhoneOutgoing,
-  subPoints: ["Project Analysis", "Feasibility Consultation"],
+  icon: Search,
+  subPoints: ["Deep Market Research", "Competitor Analysis", "Project Fit Assessment"],
   quote: ''
 }, {
-  title: "Proposal / Confirm",
+  title: "Strategy",
   subtitle: "Planning",
-  icon: FileCheck,
-  subPoints: ["Custom GTM Deck Delivery", "KPI & Scope Confirmation"],
+  icon: LayoutGrid,
+  subPoints: ["Community Architecture", "KOL Network Mapping", "Content Localization"],
   quote: ''
 }, {
-  title: "Payment",
-  subtitle: "Agreement",
-  icon: CreditCard,
-  subPoints: ["Service Agreement Signing", "Invoice Settlement"],
-  quote: ''
-}, {
-  title: "Execution",
+  title: "Amplify",
   subtitle: "Launch",
-  icon: Rocket,
-  subPoints: ["Dedicated TF Deployment", "Campaign Launch"],
+  icon: Megaphone,
+  subPoints: ["Viral Marketing & Amplification", "Tier-1 PR Blast", "Cross-Community AMAs"],
+  quote: ''
+}, {
+  title: "Growth",
+  subtitle: "Scale",
+  icon: TrendingUp,
+  subPoints: ["On-chain Events & Campaigns", "Holder Retention Programs", "Sustainable Growth"],
   quote: ''
 }];
 const ProcessBillboardOverlay = () => {
