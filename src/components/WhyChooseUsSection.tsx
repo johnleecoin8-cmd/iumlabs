@@ -43,11 +43,32 @@ const WhyChooseUsSection = () => {
             </h2>
             
             {/* Description */}
-            <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-10 sm:mb-12">
+            <p className="text-foreground/50 leading-relaxed text-sm sm:text-base md:text-base lg:text-lg mb-8">
               In Korean, 'ium' (이음) means 'connection.' But to us, it means integration. Stop relying on intuition. We engineer your entry into the Korean market using proprietary research and quantitative impact analysis. We don't just market; we structure your narrative to flawlessly 'ium' (connect) global protocols with local liquidity.
             </p>
             
-            {/* CTA Note - 두 칸 더 아래로 (mb-6 → mb-10/12로 위에서 간격 추가) */}
+            {/* Stats Grid */}
+            <div className="grid grid-cols-3 gap-3 sm:gap-4 mb-8">
+              {stats.map((stat, index) => (
+                <motion.div 
+                  key={index}
+                  className="text-center p-3 sm:p-4 rounded-lg border border-white/10 bg-white/5"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-1">
+                    {stat.value}
+                  </div>
+                  <div className="text-[10px] sm:text-xs text-foreground/50 uppercase tracking-wider">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+            
+            {/* CTA Note */}
             <p className="text-violet-400 text-sm sm:text-base md:text-lg font-medium">
               Founded by veterans from Binance & KuCoin
             </p>
