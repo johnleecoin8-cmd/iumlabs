@@ -212,6 +212,10 @@ const HeroSection = () => {
             ref={videoRef}
             {...videoProps}
             className="absolute inset-0 w-full h-full object-cover z-10"
+            style={{
+              ...videoProps.style,
+              WebkitAppearance: 'none',
+            }}
           >
             <source src="/videos/hero-background.mp4#t=0.001" type="video/mp4" />
           </video>
